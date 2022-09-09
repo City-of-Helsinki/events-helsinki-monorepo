@@ -47,7 +47,7 @@ yarn-error.log*
 # IDE
 .idea/*
 !.idea/modules.xml
-!.idea/nextjs-monorepo-example.iml
+!.idea/events-helsinki-monorepo.iml
 .project
 .classpath
 *.launch

@@ -32,7 +32,6 @@
 > Howtos for monorepo. New to monorepos ? [check this FAQ](./README.md#monorepo). This example is managed by [Yarn 3.2+](https://dev.to/arcanis/yarn-32-libc-yarn-explain-next-major--o22)
 > / [typescript path aliases](https://www.typescriptlang.org/tsconfig#paths). Not the only way to do.
 
-
 ## Structure
 
 [![Open in Gitpod](https://img.shields.io/badge/Open%20In-Gitpod.io-%231966D2?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/City-of-Helsinki/events-helsinki-monorepo)
@@ -158,7 +157,7 @@ If needed static resources like **images**,... can be shared by using symlinks i
 
 ```json5
 {
-  "name": "nextjs-monorepo-example",
+  "name": "events-helsinki-monorepo",
   // Set the directories where your apps, packages will be placed
   "workspaces": ["apps/*", "packages/*"],
   //...
@@ -371,7 +370,7 @@ Some convenience scripts can be run in any folder of this repo and will call the
 | `yarn g:lint-styles`         | Display css stylelint issues in all workspaces                                                                                       |
 | `yarn g:lint-styles --fix`   | Attempt to run stylelint auto-fix issues in all workspaces                                                                           |
 | `yarn g:test`                | Run unit and e2e tests in all workspaces                                                                                             |
-| `yarn g:test`           | Run unit tests in all workspaces                                                                                                     |
+| `yarn g:test`                | Run unit tests in all workspaces                                                                                                     |
 | `yarn g:test-e2e`            | Run e2e tests in all workspaces                                                                                                      |
 | `yarn g:build`               | Run build in all workspaces                                                                                                          |
 | `yarn g:clean`               | Clean builds in all workspaces                                                                                                       |
@@ -474,7 +473,6 @@ More info [here](https://github.com/microsoft/vscode-eslint#mono-repository-setu
 
 ## 7. Deploy
 
-
 ### Docker
 
 There's a basic example for building a docker image, read the [docker doc](./docs/docker/docker.md).
@@ -494,4 +492,3 @@ To help keeping deps up-to-date, see the `yarn deps:check && yarn deps:update` s
 > When adding a dep through yarn cli (i.e.: yarn add something), it's possible to set the save-exact behaviour automatically
 > by setting `defaultSemverRangePrefix: ""` in [yarnrc.yml](./.yarnrc.yml). But this would make the default for packages/\* as well.
 > Better to handle `yarn add something --exact` on per-case basis.
-

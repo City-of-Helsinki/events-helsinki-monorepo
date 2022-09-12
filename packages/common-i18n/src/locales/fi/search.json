@@ -1,0 +1,49 @@
+{
+  "title": "Löydä harrastus",
+  "ariaLiveLoading": "Haetaan tapahtumia",
+  "ariaLiveSearchReady": "{{count}} hakutulosta",
+  "textFoundEvents": "{{count}} hakutulosta",
+  "buttonClearFilters": "Tyhjennä hakuehdot",
+  "errorLoadMode": "Tapahtumien lataaminen epäonnistui",
+  "buttonLoadMore": "Näytä lisää harrastuksia ({{count}})",
+  "searchNotification": {
+    "noResultsTitle": "Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta",
+    "noResultsText": "Valitsemillasi hakuehdoilla ei löytynyt harrastuksia. Kokeile muuttaa hakuehtoja tai siirry tapahtumien hakuun.",
+    "fewResultsTitle": "Valitsemillasi hakuehdoilla löytyi vain vähän hakutuloksia.",
+    "fewResultsText": "Valitsemillasi hakuehdoilla löytyi vain vähän harrastuksia. Kokeile muuttaa hakuehtoja tai siirry tapahtumien hakuun.",
+    "changeLanguageText": "Kokeile muuttaa hakuehtoja tai etsi suomen kielellä.",
+    "buttons": {
+      "labelSearchOtherEventType": "Siirry hakemaan tapahtumia",
+      "labelSearchInFinnish": "Näytä hakutulokset suomeksi"
+    }
+  },
+  "search": {
+    "buttonSearch": "Hae",
+    "checkboxOnlyChildrenEvents": "Näytä vain lastentapahtumat",
+    "checkboxOnlyEveningEvents": "Näytä vain iltatapahtumat",
+    "checkboxOnlyRemoteEvents": "Näytä vain etätapahtumat",
+    "labelCategory": "Millaista haet?",
+    "labelDateRange": "Mille ajankohdalle etsit?",
+    "labelDistrict": "Mistä etsit?",
+    "labelTargetGroup": "Kenelle etsit?",
+    "selectAllDivisions": "Kaikki alueet",
+    "selectAllPlaces": "Kaikki tapahtumapaikat",
+    "titleDropdownCategory": "Valitse kategoria",
+    "titleDropdownDivision": "Etsi alue",
+    "titleDropdownPlace": "Etsi tapahtumapaikka",
+    "placeholder": "Kirjoita hakusana, esim. ranska tai ruoanlaitto",
+    "labelSearchField": "Mitä etsit?",
+    "checkboxAlsoOngoingCourses": "Näytä myös meneillään olevat",
+    "checkboxIsFree": "Näytä vain maksuttomat",
+    "titleDropdownHobbyType": "Harrastusmuoto",
+    "showOnlyAdultCourses": "Näytä vain aikuisten harrastukset",
+    "ageLimitValues": "Ikä",
+    "ageLimitMin": "Alkaen",
+    "ageLimitMax": "Päättyen",
+    "ageFilter": {
+      "minAge": "Alkaen {{age}} {{yearAbbr}}",
+      "maxAge": "Päättyen {{age}} {{yearAbbr}}",
+      "exactAge": "{{age}}-vuotiaalle"
+    }
+  }
+}

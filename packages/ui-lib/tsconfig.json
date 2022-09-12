@@ -11,8 +11,12 @@
     "noEmit": false,
     "incremental": true,
     "paths": {
-      "@events-helsinki/core-lib/*": ["../../../packages/core-lib/src/*"],
-      "@events-helsinki/core-lib": ["../../../packages/core-lib/src/index"]
+      "@/test-utils": ["../config/jest/test-utils"],
+      "@/*": ["./*"],
+      "@events-helsinki/core-lib": ["../../../packages/core-lib/src/index"],
+      "@events-helsinki/common-i18n": [
+        "../../../packages/common-i18n/src/index"
+      ]
     }
   },
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]

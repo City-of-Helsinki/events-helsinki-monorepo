@@ -1,0 +1,21 @@
+// Vitest Snapshot v1
+
+exports[`matches snapshot 1`] = `
+<div
+  class="_srOnly_3ecf8a test"
+>
+  <div>
+    Test
+  </div>
+</div>
+`;
+
+exports[`matches snapshot 2`] = `
+<span
+  class="_srOnly_3ecf8a"
+>
+  <div>
+    Test
+  </div>
+</span>
+`;

@@ -1,5 +1,4 @@
 // @ts-check
-
 const { defaults: tsjPreset } = require('ts-jest/presets');
 const { pathsToModuleNameMapper } = require('ts-jest');
 
@@ -29,10 +28,11 @@ const config = {
     ...tsjPreset.transform,
   },
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-  testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
+  testMatch: ['<rootDir>/../**/*.{spec,test}.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
     // For @testing-library/react
-    '^@/test-utils$': '<rootDir>/../config/jest/test-utils',
+    '^@/test-utils$': '<rootDir>/config/jest/test-utils',
+    '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
     ...getTsConfigBasePaths(),
   },
   // false by default, overrides in cli, ie: yarn test:unit --collect-coverage=true

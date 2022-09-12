@@ -1,0 +1,17 @@
+// Vitest Snapshot v1
+
+exports[`matches snapshot 1`] = `
+<button
+  aria-pressed="true"
+  class="_toggleButton_9d9d09 _isSelected_9d9d09"
+  type="button"
+>
+  <div
+    class="_innerWrapper_9d9d09"
+  >
+    <span>
+      Test button
+    </span>
+  </div>
+</button>
+`;

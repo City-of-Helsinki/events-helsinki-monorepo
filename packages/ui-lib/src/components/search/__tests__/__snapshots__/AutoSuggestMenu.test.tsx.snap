@@ -1,0 +1,61 @@
+// Vitest Snapshot v1
+
+exports[`AutosuggestMenu matches snapshot 1`] = `
+<div
+  class="_autosuggestMenu_bd6532"
+>
+  <div
+    class="_title_bd6532"
+  >
+    common:autosuggest.menu.title
+    <button
+      aria-label="common:autosuggest.menu.ariaButtonClose"
+      class="_closeButton_bd6532"
+    >
+      <svg
+        aria-hidden="true"
+        class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_s__2WGWe icon_hds-icon--size-s__2Lkik"
+        role="img"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          fill="none"
+          fill-rule="evenodd"
+        >
+          <rect
+            height="24"
+            width="24"
+          />
+          <polygon
+            fill="currentColor"
+            points="18 7.5 13.5 12 18 16.5 16.5 18 12 13.5 7.5 18 6 16.5 10.5 12 6 7.5 7.5 6 12 10.5 16.5 6"
+          />
+        </g>
+      </svg>
+    </button>
+  </div>
+  <ul
+    class="_autosuggestOptions_bd6532"
+    role="listbox"
+  >
+    <li
+      aria-selected="true"
+      class="_autosuggestOption_bd6532 _autosuggestOption--text_bd6532 _autosuggestOption--isFocused_bd6532"
+      role="option"
+      tabindex="-1"
+    >
+      <div
+        class="_text_bd6532"
+      >
+        foo
+      </div>
+    </li>
+  </ul>
+  <div
+    class="_info_bd6532"
+  >
+    common:autosuggest.menu.info
+  </div>
+</div>
+`;

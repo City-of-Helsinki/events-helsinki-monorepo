@@ -16,7 +16,6 @@ const getTsConfigBasePaths = () => {
       })
     : {};
 };
-
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 const config = {
   displayName: `${packageJson.name}:unit`,

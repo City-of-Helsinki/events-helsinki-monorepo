@@ -45,10 +45,10 @@
 └── packages
     ├── api-gateway         (graphql mesh)
     ├── common-i18n         (locales...)
-    ├── core-lib
+    ├── core-lib            (common utils, hooks, vitest)
     ├── db-main-prisma
     ├── eslint-config-bases (to shared eslint configs)
-    └── ui-lib              (emotion, storybook)
+    └── ui-lib              (emotion, storybook, vitest)
 ```
 
 #### Example apps

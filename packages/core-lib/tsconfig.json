@@ -9,7 +9,10 @@
     "jsx": "react-jsx",
     "noEmit": false,
     "incremental": true,
-    "paths": {}
+    "paths": {
+      "@/test-utils": ["../config/jest/test-utils"],
+      "@/*": ["./*"]
+    }
   },
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
 }

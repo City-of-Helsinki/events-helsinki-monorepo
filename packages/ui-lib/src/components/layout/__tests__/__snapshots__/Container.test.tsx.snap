@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`matches snapshot 1`] = `
+<div
+  class="_container_418d9f"
+/>
+`;

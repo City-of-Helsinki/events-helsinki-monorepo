@@ -1,0 +1,11 @@
+// Vitest Snapshot v1
+
+exports[`matches snapshot 1`] = `
+<button
+  class="_keyword_cf236f"
+  role="link"
+  type="button"
+>
+  test keyword
+</button>
+`;

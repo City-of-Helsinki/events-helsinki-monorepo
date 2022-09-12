@@ -18,6 +18,9 @@ module.exports = {
       // For performance enable react-testing-library only on test files
       files: rtlPatterns.files,
       extends: ['plugin:testing-library/react'],
+      rules: {
+        'testing-library/no-node-access': 'off',
+      },
     },
     {
       files: ['**/test-utils.tsx'],

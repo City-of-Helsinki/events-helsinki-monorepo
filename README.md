@@ -45,10 +45,10 @@
 └── packages
     ├── api-gateway         (graphql mesh)
     ├── common-i18n         (locales...)
-    ├── core-lib            (common utils, hooks, vitest)
+    ├── core            (common utils, hooks, vitest)
     ├── db-main-prisma
     ├── eslint-config-bases (to shared eslint configs)
-    └── ui-lib              (emotion, storybook, vitest)
+    └── components              (emotion, storybook, vitest)
 ```
 
 #### Example apps
@@ -61,10 +61,10 @@
 
 #### Example shared packages
 
-- [packages/core-lib](./packages/core-lib): publishable. [README](./packages/core-lib/README.md) | [CHANGELOG](./packages/core-lib/CHANGELOG.md)
+- [packages/core](./packages/core): publishable. [README](./packages/core/README.md) | [CHANGELOG](./packages/core/CHANGELOG.md)
 - [packages/db-main-prisma](./packages/db-main-prisma): used by web-app. [README](./packages/db-main-prisma/README.md) | [CHANGELOG](./packages/db-main-prisma/CHANGELOG.md)
 - [packages/eslint-config-bases](./packages/eslint-config-bases): [README](./packages/eslint-config-bases/README.md) | [CHANGELOG](./packages/eslint-config-bases/CHANGELOG.md)
-- [packages/ui-lib](./packages/ui-lib): publishable. [README](./packages/ui-lib/README.md) | [CHANGELOG](./packages/ui-lib/CHANGELOG.md)
+- [packages/components](./packages/components): publishable. [README](./packages/components/README.md) | [CHANGELOG](./packages/components/CHANGELOG.md)
 - [packages/common-i18n](./packages/common-i18n): [README](./packages/common-i18n/README.md) | [CHANGELOG](./packages/common-i18n/CHANGELOG.md)
 - [packages/api-gateway](./packages/api-gateway): [README](./packages/api-gateway/README.md) | [CHANGELOG](./packages/api-gateway/CHANGELOG.md)
 
@@ -108,7 +108,7 @@ If needed static resources like **images**,... can be shared by using symlinks i
 │       └── vitest.config.ts
 │
 ├── packages
-│   ├── core-lib                 (basic ts libs)
+│   ├── core                 (basic ts libs)
 │   │   ├── src/
 │   │   ├── CHANGELOG.md
 │   │   ├── package.json
@@ -128,7 +128,7 @@ If needed static resources like **images**,... can be shared by using symlinks i
 │   │   ├── package.json
 │   │   └── tsconfig.json
 │   │
-│   └── ui-lib                  (basic design-system in react)
+│   └── components                  (basic design-system in react)
 │       ├── src/
 │       ├── CHANGELOG.md
 │       ├── package.json
@@ -187,7 +187,7 @@ cd packages/magnificent-poney
 
 Initialize a package.json with the name of your package.
 
-> Rather than typing `yarn init`, prefer to take the [./packages/ui-lib/package.json](./packages/ui-lib/package.json)
+> Rather than typing `yarn init`, prefer to take the [./packages/components/package.json](./packages/components/package.json)
 > as a working example and edit its values.
 
 <details>

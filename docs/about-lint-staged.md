@@ -18,7 +18,7 @@ and the [linter docs](./about-linters.md).
 │       ├── .eslintrc.js
 │       └── lint-staged.config.js   (overwrite global lint-staged.config.js, custom eslint)
 ├── packages
-│   └── ui-lib
+│   └── components
 │       ├── .eslintrc.js
 │       └── lint-staged.config.js   (overwrite global lint-staged.config.js, custom eslint)
 │

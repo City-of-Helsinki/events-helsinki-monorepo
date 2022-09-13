@@ -1,6 +1,6 @@
 ---
-"@events-helsinki/core-lib": patch
-"@events-helsinki/ui-lib": patch
+"@events-helsinki/core": patch
+"@events-helsinki/components": patch
 ---
 
-First published version of core-lib and ui-lib from events-helsinki-monorepo
+First published version of core and components from events-helsinki-monorepo

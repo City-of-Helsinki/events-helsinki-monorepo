@@ -1,10 +1,9 @@
 import React from 'react';
-import { vi } from 'vitest';
 import { render } from '@/test-utils';
 import ScrollIntoViewWithFocus from '../ScrollIntoViewWithFocus';
 
 it('should scroll to component when focused', async () => {
-  const scrollIntoViewMock = vi.fn();
+  const scrollIntoViewMock = jest.fn();
   window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
   render(
     <ScrollIntoViewWithFocus isFocused={true}>

@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
+      - proof-of-concept
 
 jobs:
   release:
-    if: github.repository == 'City-of-Helsinki/events-helsinki-monorepo'
     name: Release and changelog
     runs-on: ubuntu-latest
     steps:

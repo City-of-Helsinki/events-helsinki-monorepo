@@ -1,15 +1,15 @@
 import i18n from 'i18next';
 import type { FC, ReactNode } from 'react';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
-import type { I18nNamespace } from '../../src/lib/i18n/I18nNamespace.types';
+import type { I18nNamespace } from '../../src/lib/i18n';
 
 /**
  * Fully wrapped strategy for i18next, you can use stub/mocks as well
  * @link {https://react.i18next.com/misc/testing}
  */
 i18n.use(initReactI18next).init({
-  lng: 'default',
-  fallbackLng: 'default',
+  lng: 'fi',
+  fallbackLng: 'fi',
   ns: ['common'],
   defaultNS: 'common',
   debug: false,
@@ -18,7 +18,7 @@ i18n.use(initReactI18next).init({
   },
   // Let empty so you can test on translation keys rather than translated strings
   resources: {
-    default: { common: {} } as Record<I18nNamespace, Record<string, never>>,
+    fi: { common: {} } as Record<I18nNamespace, Record<string, never>>,
   },
 });
 

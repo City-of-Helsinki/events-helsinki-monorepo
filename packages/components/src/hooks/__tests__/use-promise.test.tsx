@@ -1,6 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import type { FC } from 'react';
-import { vi } from 'vitest';
 import { render, screen } from '@/test-utils';
 import { usePromise } from '../use-promise';
 describe('usePromise', () => {
@@ -9,7 +8,7 @@ describe('usePromise', () => {
       const deps = { slug: 'b' };
       const expected = { value: 'cool' };
       type Deps = typeof deps;
-      const callback = vi.fn();
+      const callback = jest.fn();
       const promiseFn = async (deps: Deps) => {
         callback(deps);
         return expected;
@@ -40,7 +39,7 @@ describe('usePromise', () => {
     });
 
     it('should set error when promise fails', async () => {
-      const callback = vi.fn();
+      const callback = jest.fn();
       const promiseFn = async () => {
         callback();
         throw new Error('cool');
@@ -64,7 +63,7 @@ describe('usePromise', () => {
     });
 
     it('should call the promise when forceReload is called', async () => {
-      const callback = vi.fn();
+      const callback = jest.fn();
       const promiseFn = async () => {
         callback();
       };
@@ -106,7 +105,7 @@ describe('usePromise', () => {
       it('should conditionally call the promise based on deps changes', async () => {
         // Arrange
         const promise = Promise.resolve();
-        const handleLoading = vi.fn(() => promise);
+        const handleLoading = jest.fn(() => promise);
         const loadData = async (deps: Params) => {
           await handleLoading();
           return deps.query;
@@ -138,8 +137,8 @@ describe('usePromise', () => {
       it('should call the promise if changed', async () => {
         // Arrange
         const promise = Promise.resolve();
-        const handleLoading1 = vi.fn(() => promise);
-        const handleLoading2 = vi.fn(() => promise);
+        const handleLoading1 = jest.fn(() => promise);
+        const handleLoading2 = jest.fn(() => promise);
         const loadData1 = async (deps: Params) => {
           await handleLoading1();
           return deps.query;

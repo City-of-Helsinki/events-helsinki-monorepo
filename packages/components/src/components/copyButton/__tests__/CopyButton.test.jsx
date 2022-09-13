@@ -1,11 +1,10 @@
 import React from 'react';
-import { vi } from 'vitest';
 import { act, fireEvent, render, screen } from '@/test-utils';
 import CopyButton from '../CopyButton';
 
 // `copy-to-clipboard` is not jsdom compatible so we are replacing it with a
 // simple function call.
-vi.mock('copy-to-clipboard', () => vi.fn());
+jest.mock('copy-to-clipboard', () => jest.fn());
 
 const testString = 'Test string';
 const testLabel = 'Test label';
@@ -19,7 +18,7 @@ const renderComponent = (props) =>
   render(<CopyButton {...defaultProps} {...props} />);
 
 it('should show success message when copying succeeds that displays for 4 seconds', () => {
-  vi.useFakeTimers();
+  jest.useFakeTimers();
 
   renderComponent();
 
@@ -29,14 +28,14 @@ it('should show success message when copying succeeds that displays for 4 second
 
   // Fast forwards by 4s
   act(() => {
-    vi.advanceTimersByTime(4000);
+    jest.advanceTimersByTime(4000);
   });
 
   expect(screen.queryByText(testMessage)).not.toBeInTheDocument();
 });
 
 it('should add success class for 4s after a successful copy', () => {
-  vi.useFakeTimers();
+  jest.useFakeTimers();
   const testClass = 'class';
   const testSuccessClass = 'success-class';
   renderComponent({
@@ -51,7 +50,7 @@ it('should add success class for 4s after a successful copy', () => {
   );
 
   act(() => {
-    vi.advanceTimersByTime(4000);
+    jest.advanceTimersByTime(4000);
   });
 
   expect(screen.getByLabelText(testLabel)).toHaveClass(testClass);

@@ -7,9 +7,9 @@ exports[`AutosuggestMenu matches snapshot 1`] = `
   <div
     class="_title_bd6532"
   >
-    common:autosuggest.menu.title
+    autosuggest.menu.title
     <button
-      aria-label="common:autosuggest.menu.ariaButtonClose"
+      aria-label="autosuggest.menu.ariaButtonClose"
       class="_closeButton_bd6532"
     >
       <svg
@@ -55,7 +55,7 @@ exports[`AutosuggestMenu matches snapshot 1`] = `
   <div
     class="_info_bd6532"
   >
-    common:autosuggest.menu.info
+    autosuggest.menu.info
   </div>
 </div>
 `;

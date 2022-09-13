@@ -3000,6 +3000,7 @@ __metadata:
     vite-plugin-svgr: "npm:2.2.1"
     vite-tsconfig-paths: "npm:3.5.0"
     vitest: "npm:0.23.1"
+    waait: "npm:1.0.5"
     webpack: "npm:5.74.0"
   peerDependencies:
     "@types/react": ^17.0.44 || ^18.0.0
@@ -30960,6 +30961,13 @@ __metadata:
   dependencies:
     xml-name-validator: "npm:^4.0.0"
   checksum: 5042d7d56be21e7a8ac1f6dc60a559967db5cb2cc59321138571a6425569e3f84c1c02dace1ffc569510ec3f4046d74f5b9ecb783f25e5ff89e558b3677fdb7b
+  languageName: node
+  linkType: hard
+
+"waait@npm:1.0.5":
+  version: 1.0.5
+  resolution: "waait@npm:1.0.5"
+  checksum: 2342b600c552675f1b3a007f3636a46e49c86413706334394459944dfa350cac113807f720add8a832852a13f94ae8aba753d1cfdedcba405ae74bc5713527a6
   languageName: node
   linkType: hard
 

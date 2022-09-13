@@ -1,6 +1,4 @@
-import { axe } from 'jest-axe';
 import React from 'react';
-import { vi } from 'vitest';
 import {
   arrowDownKeyPressHelper,
   arrowUpKeyPressHelper,
@@ -16,7 +14,7 @@ import {
 import type { MultiselectDropdownProps } from '../MultiSelectDropdown';
 import MultiSelectDropdown from '../MultiSelectDropdown';
 
-const onChange = vi.fn();
+const onChange = jest.fn();
 const options = [
   {
     text: 'Squirrel',
@@ -48,19 +46,11 @@ const defaultProps: MultiselectDropdownProps = {
 const renderComponent = (props?: Partial<MultiselectDropdownProps>) =>
   render(<MultiSelectDropdown {...defaultProps} {...props} />);
 
-it('for accessibility violations', async () => {
-  const { container } = renderComponent();
-
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
-
 it('should set focus to input after clicking toggle button', async () => {
   renderComponent();
 
   const toggleButton = screen.getByRole('button', { name: title });
   await userEvent.click(toggleButton);
-
   await waitFor(() => {
     expect(screen.getByPlaceholderText(inputPlaceholder)).toHaveFocus();
   });
@@ -232,7 +222,7 @@ it('should open dropdown when user clicks on toggle button', async () => {
 });
 
 it('should call onChange when clicking checkbox', async () => {
-  const onChange = vi.fn();
+  const onChange = jest.fn();
   renderComponent({ onChange });
 
   const toggleButton = screen.getByRole('button', { name: title });
@@ -246,7 +236,7 @@ it('should call onChange when clicking checkbox', async () => {
 });
 
 it('should uncheck option', async () => {
-  const onChange = vi.fn();
+  const onChange = jest.fn();
   renderComponent({ onChange, value: [options[0].value] });
 
   const toggleButton = screen.getByRole('button', { name: title });
@@ -259,7 +249,7 @@ it('should uncheck option', async () => {
 });
 
 it('should call onChange with empty array when clicking select all checkbox', async () => {
-  const onChange = vi.fn();
+  const onChange = jest.fn();
   renderComponent({
     onChange,
     selectAllText: '',

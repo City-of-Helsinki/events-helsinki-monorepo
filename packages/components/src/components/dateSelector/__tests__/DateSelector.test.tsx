@@ -1,6 +1,5 @@
 import { DATE_TYPES } from '@events-helsinki/core';
 import * as React from 'react';
-import { vi } from 'vitest';
 import {
   arrowDownKeyPressHelper,
   arrowUpKeyPressHelper,
@@ -19,11 +18,11 @@ const defaultProps: DateSelectorProps = {
   endDate: null,
   isCustomDate: false,
   name: 'date',
-  onChangeDateTypes: vi.fn(),
-  onChangeEndDate: vi.fn(),
-  onChangeStartDate: vi.fn(),
+  onChangeDateTypes: jest.fn(),
+  onChangeEndDate: jest.fn(),
+  onChangeStartDate: jest.fn(),
   startDate: null,
-  toggleIsCustomDate: vi.fn(),
+  toggleIsCustomDate: jest.fn(),
 };
 
 const renderComponent = (props?: Partial<DateSelectorProps>) =>
@@ -46,7 +45,7 @@ it('should render selected date types when multiple options are selected', () =>
 });
 
 it('should add date type', async () => {
-  const onChangeDateTypes = vi.fn();
+  const onChangeDateTypes = jest.fn();
   renderComponent({
     dateTypes: [],
     onChangeDateTypes,
@@ -69,7 +68,7 @@ it('should add date type', async () => {
 });
 
 it('should call toggleIsCustomDate function', async () => {
-  const toggleIsCustomDate = vi.fn();
+  const toggleIsCustomDate = jest.fn();
   renderComponent({
     dateTypes: [],
     toggleIsCustomDate,
@@ -91,7 +90,7 @@ it('should call toggleIsCustomDate function', async () => {
 });
 
 it('should remove date type', async () => {
-  const onChangeDateTypes = vi.fn();
+  const onChangeDateTypes = jest.fn();
   renderComponent({
     dateTypes: [DATE_TYPES.TODAY, DATE_TYPES.TOMORROW],
     onChangeDateTypes,

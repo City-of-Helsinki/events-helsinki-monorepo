@@ -1,7 +1,6 @@
 import { DATE_TYPES } from '@events-helsinki/core';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { vi } from 'vitest';
 import {
   arrowDownKeyPressHelper,
   arrowUpKeyPressHelper,
@@ -24,9 +23,9 @@ const dateTypeOptions = [
 const defaultProps = {
   dateTypes: [DATE_TYPES.TODAY, DATE_TYPES.WEEKEND],
   endDate: null,
-  onChangeDateTypes: vi.fn(),
-  onChangeEndDate: vi.fn(),
-  onChangeStartDate: vi.fn(),
+  onChangeDateTypes: jest.fn(),
+  onChangeEndDate: jest.fn(),
+  onChangeStartDate: jest.fn(),
   startDate: null,
 };
 
@@ -54,7 +53,7 @@ it('should have correct date types selected', async () => {
 });
 
 it('should call onChangeDateTypes and unselect option', async () => {
-  const onChangeDateTypes = vi.fn();
+  const onChangeDateTypes = jest.fn();
   renderComponent({ onChangeDateTypes });
   await userEvent.click(
     screen.getByRole('button', { name: dateTypeOptions[0] })
@@ -63,7 +62,7 @@ it('should call onChangeDateTypes and unselect option', async () => {
 });
 
 it('should call onChangeDateTypes and select option', async () => {
-  const onChangeDateTypes = vi.fn();
+  const onChangeDateTypes = jest.fn();
   renderComponent({ onChangeDateTypes, dateTypes: [] });
 
   await userEvent.click(

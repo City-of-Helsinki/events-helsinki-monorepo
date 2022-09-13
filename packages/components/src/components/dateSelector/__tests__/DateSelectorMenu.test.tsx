@@ -1,6 +1,5 @@
 import { DATE_TYPES } from '@events-helsinki/core';
 import * as React from 'react';
-import { vi } from 'vitest';
 import { render } from '@/test-utils';
 import DateSelectorMenu from '../DateSelectorMenu';
 
@@ -18,12 +17,12 @@ it('matches snapshot', () => {
       isCustomDate={false}
       isOpen={true}
       name="date"
-      onChangeDateTypes={vi.fn()}
-      onChangeEndDate={vi.fn()}
-      onChangeStartDate={vi.fn()}
-      onCloseMenu={vi.fn()}
+      onChangeDateTypes={jest.fn()}
+      onChangeEndDate={jest.fn()}
+      onChangeStartDate={jest.fn()}
+      onCloseMenu={jest.fn()}
       startDate={new Date('2019-08-01')}
-      toggleIsCustomDate={vi.fn()}
+      toggleIsCustomDate={jest.fn()}
     />
   );
 

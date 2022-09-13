@@ -1,6 +1,6 @@
-import { test, expect } from '@playwright/test';
 import systemJsonEn from '@events-helsinki/common-i18n/locales/en/system.json';
 import systemJsonFr from '@events-helsinki/common-i18n/locales/fr/system.json';
+import { test, expect } from '@playwright/test';
 
 const pageSlug = 'this-page-does-not-exist';
 

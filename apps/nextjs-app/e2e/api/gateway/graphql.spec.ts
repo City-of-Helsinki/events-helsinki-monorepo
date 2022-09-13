@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
 import { isNonEmptyString, isParsableNumeric } from '@events-helsinki/core-old';
+import { test, expect } from '@playwright/test';
 
 test('should call the mesh for random cats', async ({ request }) => {
   const resp = await request.post('/api/gateway/graphql', {

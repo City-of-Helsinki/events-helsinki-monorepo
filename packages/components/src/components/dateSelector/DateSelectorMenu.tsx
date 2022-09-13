@@ -4,10 +4,10 @@ import { IconAngleLeft, IconAngleRight, IconCalendarPlus } from 'hds-react';
 import type { ChangeEvent, FunctionComponent, MutableRefObject } from 'react';
 import React, { useEffect } from 'react';
 
-import useConfig from '../../hooks/useConfig';
+import useCommonTranslation from '../../hooks/useCommonTranslation'; // the locale you want
 import Checkbox from '../checkbox/Checkbox';
 import DateRangePicker from '../dateRangePicker/DateRangePicker';
-import styles from './dateSelectorMenu.module.scss'; // the locale you want
+import styles from './dateSelectorMenu.module.scss';
 
 export const testIds = {
   menu: 'date-selector-menu',
@@ -46,7 +46,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
   startDate,
   toggleIsCustomDate,
 }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
 
   useEffect(() => {
     const clearDatesRange = () => {
@@ -120,7 +120,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
       >
         <IconCalendarPlus aria-hidden />
         <div className={styles.buttonText}>
-          {t<string>('common:dateSelector.menu.buttonCustom')}
+          {t('common:dateSelector.menu.buttonCustom')}
         </div>
         <IconAngleRight aria-hidden />
       </button>
@@ -135,7 +135,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
       >
         <IconAngleLeft aria-hidden />
         <div className={styles.buttonText}>
-          {t<string>('common:dateSelector.menu.buttonBack')}
+          {t('common:dateSelector.menu.buttonBack')}
         </div>
       </button>
 
@@ -157,7 +157,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
         type="button"
       >
         <div className={styles.buttonText}>
-          {t<string>('common:dateSelector.menu.buttonClose')}
+          {t('common:dateSelector.menu.buttonClose')}
         </div>
       </button>
     </div>

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { IconCalendar } from 'hds-react';
 import React from 'react';
 
-import useConfig from '../../hooks/useConfig';
+import useCommonTranslation from '../../hooks/useCommonTranslation';
 import ToggleButton from '../toggleButton/ToggleButton';
 import styles from './mobileDateSelector.module.scss';
 import MobileDateSelectorMenu from './MobileDateSelectorMenu';
@@ -28,7 +28,7 @@ const MobileDateSelector: React.FC<Props> = ({
   onChangeStartDate,
   startDate,
 }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
   const closeBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const toggleBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const dateSelector = React.useRef<HTMLDivElement | null>(null);

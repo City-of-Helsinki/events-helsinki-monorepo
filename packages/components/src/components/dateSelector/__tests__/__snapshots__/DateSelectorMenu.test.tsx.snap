@@ -1,0 +1,179 @@
+// Vitest Snapshot v1
+
+exports[`matches snapshot 1`] = `
+<div
+  class="_dateSelectorMenu_d328b6"
+  data-testid="date-selector-menu"
+>
+  <div
+    class="_checkboxWrapper_d328b6"
+  >
+    <div
+      class="Checkbox-module_checkbox__3L0GR checkbox_hds-checkbox__9HMCz"
+      style="--background-unselected: var(--color-white); --background-selected: var(--color-coat-of-arms); --background-selected-hover: var(--color-coat-of-arms-dark); --background-hover: var(--color-coat-of-arms-dark); --border-color-selected: var(--color-coat-of-arms-dark); --border-color-selected-focus: var(--color-coat-of-arms-dark); --border-color-selected-hover: var(--color-coat-of-arms-dark); line-height: 24px;"
+    >
+      <input
+        class="Checkbox-module_input__3VZvy checkbox_hds-checkbox__input__1w0pu"
+        defaultvalue="today"
+        id="name_today"
+        name="date"
+        type="checkbox"
+        value="today"
+      />
+      <label
+        class="Checkbox-module_label__L5AN1 checkbox_hds-checkbox__label__3HoD3"
+        for="name_today"
+      >
+        dateSelector.dateTypeToday
+      </label>
+    </div>
+    <div
+      class="Checkbox-module_checkbox__3L0GR checkbox_hds-checkbox__9HMCz"
+      style="--background-unselected: var(--color-white); --background-selected: var(--color-coat-of-arms); --background-selected-hover: var(--color-coat-of-arms-dark); --background-hover: var(--color-coat-of-arms-dark); --border-color-selected: var(--color-coat-of-arms-dark); --border-color-selected-focus: var(--color-coat-of-arms-dark); --border-color-selected-hover: var(--color-coat-of-arms-dark); line-height: 24px;"
+    >
+      <input
+        class="Checkbox-module_input__3VZvy checkbox_hds-checkbox__input__1w0pu"
+        defaultvalue="tomorrow"
+        id="name_tomorrow"
+        name="date"
+        type="checkbox"
+        value="tomorrow"
+      />
+      <label
+        class="Checkbox-module_label__L5AN1 checkbox_hds-checkbox__label__3HoD3"
+        for="name_tomorrow"
+      >
+        dateSelector.dateTypeTomorrow
+      </label>
+    </div>
+    <div
+      class="Checkbox-module_checkbox__3L0GR checkbox_hds-checkbox__9HMCz"
+      style="--background-unselected: var(--color-white); --background-selected: var(--color-coat-of-arms); --background-selected-hover: var(--color-coat-of-arms-dark); --background-hover: var(--color-coat-of-arms-dark); --border-color-selected: var(--color-coat-of-arms-dark); --border-color-selected-focus: var(--color-coat-of-arms-dark); --border-color-selected-hover: var(--color-coat-of-arms-dark); line-height: 24px;"
+    >
+      <input
+        class="Checkbox-module_input__3VZvy checkbox_hds-checkbox__input__1w0pu"
+        defaultvalue="this_week"
+        id="name_this_week"
+        name="date"
+        type="checkbox"
+        value="this_week"
+      />
+      <label
+        class="Checkbox-module_label__L5AN1 checkbox_hds-checkbox__label__3HoD3"
+        for="name_this_week"
+      >
+        dateSelector.dateTypeThisWeek
+      </label>
+    </div>
+    <div
+      class="Checkbox-module_checkbox__3L0GR checkbox_hds-checkbox__9HMCz"
+      style="--background-unselected: var(--color-white); --background-selected: var(--color-coat-of-arms); --background-selected-hover: var(--color-coat-of-arms-dark); --background-hover: var(--color-coat-of-arms-dark); --border-color-selected: var(--color-coat-of-arms-dark); --border-color-selected-focus: var(--color-coat-of-arms-dark); --border-color-selected-hover: var(--color-coat-of-arms-dark); line-height: 24px;"
+    >
+      <input
+        class="Checkbox-module_input__3VZvy checkbox_hds-checkbox__input__1w0pu"
+        defaultvalue="weekend"
+        id="name_weekend"
+        name="date"
+        type="checkbox"
+        value="weekend"
+      />
+      <label
+        class="Checkbox-module_label__L5AN1 checkbox_hds-checkbox__label__3HoD3"
+        for="name_weekend"
+      >
+        dateSelector.dateTypeWeekend
+      </label>
+    </div>
+  </div>
+  <button
+    class="_button_d328b6 _btnSelectDates_d328b6"
+    type="button"
+  >
+    <svg
+      aria-hidden="true"
+      class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_s__2WGWe icon_hds-icon--size-s__2Lkik"
+      role="img"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        fill="none"
+        fill-rule="evenodd"
+      >
+        <path
+          d="M0 0h24v24H0z"
+        />
+        <path
+          d="M20 14v3h3v2h-3v3h-2v-3h-3v-2h3v-3h2zM17 2a1 1 0 011 1v1h4v8h-2v-1H4v8h9v2H2V4h4V3a1 1 0 112 0v1h8V3a1 1 0 011-1zm3 4H4v3h16V6z"
+          fill="currentColor"
+        />
+      </g>
+    </svg>
+    <div
+      class="_buttonText_d328b6"
+    >
+      dateSelector.menu.buttonCustom
+    </div>
+    <svg
+      aria-hidden="true"
+      class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_s__2WGWe icon_hds-icon--size-s__2Lkik"
+      role="img"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        fill="none"
+        fill-rule="evenodd"
+      >
+        <polygon
+          points="0 24 0 0 24 0 24 24"
+        />
+        <polygon
+          fill="currentColor"
+          points="13.5 12 8.5 7 10 5.5 16.5 12 10 18.5 8.5 17"
+        />
+      </g>
+    </svg>
+  </button>
+  <button
+    class="_button_d328b6 _btnBack_d328b6 _hidden_d328b6"
+    type="button"
+  >
+    <svg
+      aria-hidden="true"
+      class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_s__2WGWe icon_hds-icon--size-s__2Lkik"
+      role="img"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        fill="none"
+        fill-rule="evenodd"
+      >
+        <polygon
+          points="24 0 24 24 0 24 0 0"
+        />
+        <polygon
+          fill="currentColor"
+          points="10.5 12 15.5 17 14 18.5 7.5 12 14 5.5 15.5 7"
+        />
+      </g>
+    </svg>
+    <div
+      class="_buttonText_d328b6"
+    >
+      dateSelector.menu.buttonBack
+    </div>
+  </button>
+  <button
+    class="_button_d328b6 _btnClose_d328b6 _hidden_d328b6"
+    type="button"
+  >
+    <div
+      class="_buttonText_d328b6"
+    >
+      dateSelector.menu.buttonClose
+    </div>
+  </button>
+</div>
+`;

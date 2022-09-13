@@ -23,9 +23,13 @@ export const DemoPage: FC = () => {
         <h3>I'm the web-app</h3>
         <Jumbotron />
         <ul>
-          <li>{`Foo says: ${sayHello('World')} from @events-helsinki/core-old`}</li>
+          <li>{`Foo says: ${sayHello(
+            'World'
+          )} from @events-helsinki/core-old`}</li>
           <li>
-            <Message message={'Bar react component from @events-helsinki/ui-lib'} />
+            <Message
+              message={'Bar react component from @events-helsinki/ui-lib'}
+            />
           </li>
           <li>
             <AsyncMessage apiUrl={'/api/hello'} />

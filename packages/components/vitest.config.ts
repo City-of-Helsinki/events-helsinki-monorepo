@@ -41,5 +41,8 @@ export default defineConfig({
       '**/dist/**',
       '**/.{idea,git,cache,output,temp}/**',
     ],
+    deps: {
+      inline: ['react-helsinki-headless-cms'],
+    },
   },
 });

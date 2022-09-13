@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { IconAngleDown, IconAngleUp, IconSearch } from 'hds-react';
 import React from 'react';
 
-import useConfig from '../../hooks/useConfig';
+import useCommonTranslation from '../../hooks/useCommonTranslation';
 import useDropdownKeyboardNavigation from '../../hooks/useDropdownKeyboardNavigation';
 import Checkbox from '../checkbox/Checkbox';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
@@ -50,7 +50,7 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
   title,
   value,
 }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
   const inputPlaceholderText =
     inputPlaceholder || t('common:multiSelectDropdown.inputPlaceholder');
   const [internalInput, setInternalInput] = React.useState('');

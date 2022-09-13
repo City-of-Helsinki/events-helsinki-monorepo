@@ -1,6 +1,6 @@
-import { MethodNotAllowed } from '@tsed/exceptions';
 import { JsonApiResponseFactory } from '@events-helsinki/core-old/api/json-api';
 import { JsonApiErrorFactory } from '@events-helsinki/core-old/api/json-api/json-api-error.factory';
+import { MethodNotAllowed } from '@tsed/exceptions';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import superjson from 'superjson';
 import { prismaClient } from '@/backend/config/container.config';

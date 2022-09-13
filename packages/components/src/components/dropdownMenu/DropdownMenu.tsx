@@ -1,6 +1,5 @@
 import React from 'react';
-
-import useConfig from '../../hooks/useConfig';
+import useCommonTranslation from '../../hooks/useCommonTranslation';
 import styles from './dropdownMenu.module.scss';
 
 interface Props {
@@ -10,14 +9,14 @@ interface Props {
 }
 
 const DropdownMenu: React.FC<Props> = ({ children, isOpen, onClear }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
   if (!isOpen) return null;
 
   return (
     <div className={styles.dropdownMenu}>
       <div className={styles.dropdownMenuWrapper}>{children}</div>
       <button className={styles.btnClear} onClick={onClear} type="button">
-        {t<string>('common:dropdown.menu.buttonClear')}
+        {t('common:dropdown.menu.buttonClear')}
       </button>
     </div>
   );

@@ -2,7 +2,6 @@ import userEvent from '@testing-library/user-event';
 import { utcToZonedTime } from 'date-fns-tz';
 import { advanceTo } from 'jest-date-mock';
 import React from 'react';
-import { vi } from 'vitest';
 import { configure, render, screen } from '@/test-utils';
 import type { DateRangePickerProps } from '../DateRangePicker';
 import DateRangePicker from '../DateRangePicker';
@@ -10,13 +9,13 @@ import DateRangePicker from '../DateRangePicker';
 configure({ defaultHidden: true });
 const defaultProps: DateRangePickerProps = {
   endDate: null,
-  onChangeEndDate: vi.fn(),
-  onChangeStartDate: vi.fn(),
+  onChangeEndDate: jest.fn(),
+  onChangeStartDate: jest.fn(),
   startDate: null,
 };
 
 beforeEach(() => {
-  vi.resetAllMocks();
+  jest.resetAllMocks();
   advanceTo('2020-10-10');
 });
 const renderComponent = (props?: Partial<DateRangePickerProps>) => {
@@ -26,7 +25,7 @@ const renderComponent = (props?: Partial<DateRangePickerProps>) => {
 describe('date range input', () => {
   it('should call onChangeEndDate', async () => {
     const endDate = new Date('2020-10-10');
-    const onChangeEndDate = vi.fn();
+    const onChangeEndDate = jest.fn();
     renderComponent({ endDate, onChangeEndDate });
 
     const endDateInput = await screen.findByRole('textbox', {
@@ -50,7 +49,7 @@ describe('date range input', () => {
 
   it('should call onChangeEndDate with clicking date', async () => {
     const endDate = new Date('2020-10-10');
-    const onChangeEndDate = vi.fn();
+    const onChangeEndDate = jest.fn();
     renderComponent({ endDate, onChangeEndDate });
 
     const endDateInput = await screen.findByRole('textbox', {
@@ -79,7 +78,7 @@ describe('date range input', () => {
 
   it('should call onChangeStartDate', async () => {
     const startDate = new Date('2020-10-10');
-    const onChangeStartDate = vi.fn();
+    const onChangeStartDate = jest.fn();
     renderComponent({ startDate, onChangeStartDate });
 
     const startDateInput = await screen.findByRole('textbox', {
@@ -104,7 +103,7 @@ describe('date range input', () => {
 
   it('should call onChangeStartDate with clicking date', async () => {
     const startDate = new Date('2020-10-10');
-    const onChangeStartDate = vi.fn();
+    const onChangeStartDate = jest.fn();
     renderComponent({ startDate, onChangeStartDate });
 
     const startDateInput = await screen.findByRole('textbox', {

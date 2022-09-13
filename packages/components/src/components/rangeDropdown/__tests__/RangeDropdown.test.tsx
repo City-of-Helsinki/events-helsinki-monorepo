@@ -1,6 +1,4 @@
-import { axe } from 'jest-axe';
 import React from 'react';
-import { vi } from 'vitest';
 import {
   act,
   fireEvent,
@@ -26,7 +24,7 @@ const defaultProps: RangeDropdownProps = {
   maxInputLabel: 'End integer',
   maxInputFixedValue: '80',
   name: 'range',
-  onChange: vi.fn(),
+  onChange: jest.fn(),
   fixedValuesText: 'Set default values',
   showFixedValuesText: true,
   title: title,
@@ -42,13 +40,6 @@ const renderComponent = (props?: Partial<RangeDropdownProps>) => {
       rerender(<RangeDropdown {...defaultProps} {...props} />),
   };
 };
-
-it('for accessibility violations', async () => {
-  const { container } = renderComponent();
-
-  const results = await axe(container);
-  expect(results).toHaveNoViolations();
-});
 
 describe('Escape', () => {
   it('should close range dropdown with escape', async () => {
@@ -152,7 +143,7 @@ it('can be navigated with tab', async () => {
 });
 
 it('should call onChange correctly when setting fixed values with checkbox', async () => {
-  const onChange = vi.fn();
+  const onChange = jest.fn();
   const { rerender } = renderComponent({ onChange });
 
   const toggleButton = screen.getByRole('button', { name: title });
@@ -193,7 +184,7 @@ it('should call onChange correctly when setting fixed values with checkbox', asy
 
 describe('Validation', () => {
   it('should fix min value and max value if initial values are negative', async () => {
-    const onChange = vi.fn();
+    const onChange = jest.fn();
     const { rerender } = renderComponent({ onChange });
 
     const toggleButton = screen.getByRole('button', { name: title });
@@ -229,7 +220,7 @@ describe('Validation', () => {
   });
 
   it('should fix min value and max value if min > max', async () => {
-    const onChange = vi.fn();
+    const onChange = jest.fn();
     const { rerender } = renderComponent({ onChange });
 
     const toggleButton = screen.getByRole('button', { name: title });

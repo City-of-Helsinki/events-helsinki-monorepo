@@ -1,7 +1,6 @@
 import { AUTOSUGGEST_TYPES } from '@events-helsinki/core';
 import * as React from 'react';
 
-import { vi } from 'vitest';
 import { render } from '@/test-utils';
 import AutoSuggestMenu from '../AutoSuggestMenu';
 it('AutosuggestMenu matches snapshot', () => {
@@ -10,8 +9,8 @@ it('AutosuggestMenu matches snapshot', () => {
       focusedOption={0}
       options={[{ text: 'foo', type: AUTOSUGGEST_TYPES.TEXT, value: 'foo' }]}
       isOpen={true}
-      onClose={vi.fn()}
-      onOptionClick={vi.fn()}
+      onClose={jest.fn()}
+      onOptionClick={jest.fn()}
     />
   );
 

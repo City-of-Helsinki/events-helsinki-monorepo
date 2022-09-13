@@ -23,8 +23,8 @@
     "clean": "rimraf --no-glob ./dist ./coverage ./tsconfig.tsbuildinfo",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --cache --cache-location ../../.cache/eslint/core.eslintcache",
     "typecheck": "tsc --project ./tsconfig.json --noEmit",
-    "test": "vitest run",
-    "test-watch": "vitest watch --ui",
+    "test": "TZ=Europe/Helsinki vitest run",
+    "test-watch": "TZ=Europe/Helsinki vitest watch --ui",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --fix"
   },
   "dependencies": {

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { vi } from 'vitest';
 import { fireEvent, render, screen } from '@/test-utils';
 import ShareLinkBase from '../ShareLinkBase';
 const renderComponent = (props) => render(<ShareLinkBase {...props} />);
@@ -42,7 +41,7 @@ it('should launch sharing link in a pop up window with encoded uri components', 
   const queryParameters = {
     url: 'https://helsinki.fi/path/',
   };
-  const spy = vi.spyOn(window, 'open');
+  const spy = jest.spyOn(window, 'open');
   renderComponent({
     linkLabel: testLabel,
     queryParameters,

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { IconCross } from 'hds-react';
 import React from 'react';
 
-import useConfig from '../../hooks/useConfig';
+import useCommonTranslation from '../../hooks/useCommonTranslation';
 import styles from './filterButton.module.scss';
 import type { FilterType } from './types';
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
   const handleRemove = () => {
     onRemove(value, type);
   };
@@ -26,7 +26,7 @@ const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
         type="button"
         className={styles.closeButton}
         onClick={handleRemove}
-        aria-label={t<string>('common:filter.ariaButtonRemove', {
+        aria-label={t('common:filter.ariaButtonRemove', {
           filter: text,
         })}
       >

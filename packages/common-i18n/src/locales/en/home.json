@@ -1,63 +1,9 @@
 {
-  "category": {
-    "culture": "Arts and culture",
-    "dance": "Dance",
-    "food": "Food",
-    "influence": "Participate and influence",
-    "misc": "Other",
-    "movie": "Movies",
-    "museum": "Museums",
-    "music": "Music",
-    "nature": "Nature and outdoor activities",
-    "sport": "Exercise and sports",
-    "theatre": "Theatre",
-    "courses": {
-      "movieAndMedia": "Film and media",
-      "languages": "Languages",
-      "literature": "Literature and literary art",
-      "artsAndCulture": "Arts and culture",
-      "visualArts": "Visual arts",
-      "handicrafts": "Crafts",
-      "sport": "Sport",
-      "music": "Music",
-      "games": "Games",
-      "food": "Food",
-      "dance": "Dance",
-      "theatre": "Theatre"
-    }
+  "page": {
+    "title": "Home | nextjs-app | nextjs-monorepo-example"
   },
-  "hobby": {
-    "clubs": "Clubs",
-    "courses": "Courses",
-    "camps": "Camps",
-    "trips": "Trips",
-    "workshops": "Workshops",
-    "onlineStudies": "Online studies"
-  },
-  "collections": {
-    "title": "See our recommendations"
-  },
-  "notFound": {
-    "text": "For some reason we can't find the landing page you are looking for.",
-    "title": "Oops, you got hit by a 404!"
-  },
-  "search": {
-    "linkAdvancedSearch": "Advanced search",
-    "title": "Find something to do",
-    "labelSearchField": "What are you looking for",
-    "popularCategories": "Popular categories",
-    "placeholder": "Write search word",
-    "showPopularCategories": "Show most popular categories",
-    "hidePopularCategories": "Hide most popular categories"
-  },
-  "eventSearch": {
-    "buttonSearch": "Search",
-    "placeholder": "Enter a keyword, eg rock or yoga",
-    "title": "Search for events"
-  },
-  "courseSearch": {
-    "buttonSearch": "Search",
-    "placeholder": "Enter a keyword, eg. French or cooking",
-    "title": "Search for hobbies"
+  "btn": {
+    "getStarted": "Get started",
+    "liveDemo": "Live demo"
   }
 }

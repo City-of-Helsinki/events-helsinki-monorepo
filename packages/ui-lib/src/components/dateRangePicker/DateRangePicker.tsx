@@ -1,9 +1,9 @@
-/* eslint-disable import/no-duplicates */
 import {
   formatDate,
   isValidDateString,
   parseDate,
 } from '@events-helsinki/core-lib';
+/* eslint-disable import/no-duplicates */
 import isBefore from 'date-fns/isBefore';
 import isValidDate from 'date-fns/isValid';
 import fi from 'date-fns/locale/fi';
@@ -11,10 +11,10 @@ import sv from 'date-fns/locale/sv';
 /* eslint-enable import/no-duplicates */
 
 import { DateInput } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { registerLocale } from 'react-datepicker';
-import useLocale from '@/hooks/useLocale';
+import useCommonTranslation from '../../hooks/useCommonTranslation';
+import useLocale from '../../hooks/useLocale';
 
 import styles from './datePicker.module.scss';
 
@@ -47,9 +47,9 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     endDateIsInvalid: false,
   });
 
-  const { t } = useTranslation('common');
+  const { t } = useCommonTranslation();
   const locale = useLocale();
-  const helperText = t('dateSelector.infoDate');
+  const helperText = t('common:dateSelector.infoDate');
 
   const internalStartDate = parseDate(internalStartDateString);
   const internalEndDate = parseDate(internalEndDateString);
@@ -134,12 +134,12 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         helperText={!errors.startDateIsInvalid ? helperText : undefined}
         minDate={new Date()}
         initialMonth={new Date()}
-        label={t('dateSelector.labelStartDate')}
+        label={t('common:dateSelector.labelStartDate')}
         language={locale}
         onChange={(date) => setInternalStartDateString(date)}
         errorText={
           errors.startDateIsInvalid
-            ? t('dateSelector.errorDateFormat')
+            ? t('common:dateSelector.errorDateFormat')
             : undefined
         }
       />
@@ -156,14 +156,14 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         }
         minDate={new Date()}
         initialMonth={startDate ?? new Date()}
-        label={t('dateSelector.labelEndDate')}
+        label={t('common:dateSelector.labelEndDate')}
         language={locale}
         onChange={(date) => setInternalEndDateString(date)}
         errorText={
           endDateIsBeforeStartDate
-            ? t('dateSelector.errorEndDateBeforeStartDate')
+            ? t('common:dateSelector.errorEndDateBeforeStartDate')
             : errors.endDateIsInvalid
-            ? t('dateSelector.errorDateFormat')
+            ? t('common:dateSelector.errorDateFormat')
             : undefined
         }
       />

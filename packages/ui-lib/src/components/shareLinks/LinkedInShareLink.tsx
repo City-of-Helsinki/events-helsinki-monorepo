@@ -1,14 +1,14 @@
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import LinkedInIcon from '@/icons/svg/linkedin.svg';
+import useCommonTranslation from '../../hooks/useCommonTranslation';
+import LinkedInIcon from '../../icons/svg/linkedin.svg';
 import ShareLinkBase from './ShareLinkBase';
 import type { ShareLinkProps } from './types';
 
 const linkedInShareUrl = 'https://linkedin.com/shareArticle';
 
 const LinkedInShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
-  const { t } = useTranslation();
+  const { t } = useCommonTranslation();
   const queryParameters = { url: sharedLink };
   const linkLabel = t('common:shareLink.shareOnLinkedIn');
 

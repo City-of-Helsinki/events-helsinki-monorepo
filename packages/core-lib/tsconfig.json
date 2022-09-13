@@ -10,8 +10,7 @@
     "noEmit": false,
     "incremental": true,
     "paths": {
-      "@/test-utils": ["../config/jest/test-utils"],
-      "@/*": ["./*"]
+      "@/test-utils": ["../config/jest/test-utils"]
     }
   },
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]

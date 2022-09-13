@@ -1,3 +1,4 @@
+import { isClient } from '@events-helsinki/core-lib';
 import createDOMPurify from 'dompurify';
 import parse, { domToReact } from 'html-react-parser';
 import React, { useMemo } from 'react';
@@ -5,7 +6,7 @@ import React, { useMemo } from 'react';
 import Text from '../text/Text';
 
 function getIsomorphicDOMPurifier() {
-  if (!process.browser) {
+  if (!isClient) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
     const { JSDOM } = require('jsdom');
     const { window } = new JSDOM('');

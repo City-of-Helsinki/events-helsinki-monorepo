@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { IconCalendar } from 'hds-react';
 import React from 'react';
 
-import ToggleButton from '@/components/toggleButton/ToggleButton';
-import useConfig from '@/hooks/useConfig';
+import useConfig from '../../hooks/useConfig';
+import ToggleButton from '../toggleButton/ToggleButton';
 import styles from './mobileDateSelector.module.scss';
 import MobileDateSelectorMenu from './MobileDateSelectorMenu';
 

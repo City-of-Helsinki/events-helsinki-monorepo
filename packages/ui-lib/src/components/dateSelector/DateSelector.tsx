@@ -6,8 +6,8 @@ import {
 import { IconAngleDown, IconAngleUp, IconCalendarClock } from 'hds-react';
 import React from 'react';
 import type { FunctionComponent } from 'react';
-import useConfig from '@/hooks/useConfig';
-import useLocale from '@/hooks/useLocale';
+import useConfig from '../../hooks/useConfig';
+import useLocale from '../../hooks/useLocale';
 import styles from './dateSelector.module.scss';
 import DateSelectorMenu from './DateSelectorMenu';
 

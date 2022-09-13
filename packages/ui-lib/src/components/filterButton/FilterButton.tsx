@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { IconCross } from 'hds-react';
 import React from 'react';
 
-import useConfig from '@/hooks/useConfig';
+import useConfig from '../../hooks/useConfig';
 import styles from './filterButton.module.scss';
 import type { FilterType } from './types';
 

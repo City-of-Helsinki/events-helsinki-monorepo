@@ -4,9 +4,9 @@ import { IconAngleLeft, IconAngleRight, IconCalendarPlus } from 'hds-react';
 import type { ChangeEvent, FunctionComponent, MutableRefObject } from 'react';
 import React, { useEffect } from 'react';
 
-import Checkbox from '@/components/checkbox/Checkbox';
-import DateRangePicker from '@/components/dateRangePicker/DateRangePicker';
-import useConfig from '@/hooks/useConfig';
+import useConfig from '../../hooks/useConfig';
+import Checkbox from '../checkbox/Checkbox';
+import DateRangePicker from '../dateRangePicker/DateRangePicker';
 import styles from './dateSelectorMenu.module.scss'; // the locale you want
 
 export const testIds = {

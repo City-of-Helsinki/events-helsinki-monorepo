@@ -1,4 +1,4 @@
-import type { Language } from '@/types';
+import type { Language } from '../types';
 /* eslint-disable @typescript-eslint/naming-convention */
 export const ROUTES = {
   SEARCH: '/search',

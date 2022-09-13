@@ -9,7 +9,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
-    setupFiles: './config/test/setupVitest.ts',
+    setupFiles: './config/tests/setupVitest.ts',
     passWithNoTests: true,
     cache: {
       dir: '../../.cache/vitest/core-lib',

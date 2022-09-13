@@ -1,3 +1,6 @@
+import type React from 'react';
+import type { AUTOSUGGEST_TYPES } from '../constants';
+
 export type Language = 'en' | 'fi' | 'sv';
 
 export type OptionType = {
@@ -34,4 +37,16 @@ export type Connection<T> = {
 export type Node<T> = {
   cursor: string;
   node: T;
+};
+
+export type AutosuggestMenuOption = {
+  text: string;
+  type: AUTOSUGGEST_TYPES;
+  value: string;
+};
+
+export type Category = {
+  icon?: React.ReactElement;
+  text: string;
+  value: string;
 };

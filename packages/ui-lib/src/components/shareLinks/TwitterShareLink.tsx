@@ -1,14 +1,14 @@
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import TwitterIcon from '@/icons/svg/twitter.svg';
+import useCommonTranslation from '../../hooks/useCommonTranslation';
+import TwitterIcon from '../../icons/svg/twitter.svg';
 import ShareLinkBase from './ShareLinkBase';
 import type { ShareLinkProps } from './types';
 
 const twitterShareUrl = 'https://twitter.com/share';
 
 const TwitterShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
-  const { t } = useTranslation();
+  const { t } = useCommonTranslation();
   const queryParameters = { url: sharedLink };
   const linkLabel = t('common:shareLink.shareOnTwitter');
 

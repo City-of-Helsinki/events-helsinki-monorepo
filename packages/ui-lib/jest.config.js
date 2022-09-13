@@ -30,7 +30,7 @@ const config = {
   testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
     // For @testing-library/react
-    '^@/test-utils$': '<rootDir>/../config/jest/test-utils',
+    '^@/test-utils$': '<rootDir>/../config/tests/test-utils',
     ...getTsConfigBasePaths(),
   },
   // false by default, overrides in cli, ie: yarn test:unit --collect-coverage=true

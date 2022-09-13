@@ -1,14 +1,12 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import type { TFunction } from 'next-i18next';
 import type { NextRouter } from 'next/router';
-import type React from 'react';
-import { createContext } from 'react';
-
-import type { UnionTFunction } from '../types';
+import React from 'react';
 
 export type Config = {
   router?: NextRouter; // TODO: Support the react-router
   apolloClient?: ApolloClient<NormalizedCacheObject>;
-  t: UnionTFunction;
+  t: TFunction;
   /* eslint-disable @typescript-eslint/naming-convention */
   components: {
     A: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => JSX.Element;
@@ -19,6 +17,6 @@ export type Config = {
   /* eslint-enable @typescript-eslint/naming-convention */
 };
 
-const configContext = createContext<Config>({} as Config);
+const configContext = React.createContext<Config>({} as Config);
 
 export default configContext;

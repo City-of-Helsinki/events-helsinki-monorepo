@@ -11,6 +11,7 @@ const {
   concatFilesForPrettier,
   getEslintFixCmd,
 } = require('../../lint-staged.common.js');
+const { concatFilesForStylelint } = require('../../lint-staged.common');
 
 /**
  * @type {Record<string, (filenames: string[]) => string | string[] | Promise<string | string[]>>}
@@ -28,7 +29,15 @@ const rules = {
       files: filenames,
     });
   },
-  '**/*.{json,md,mdx,css,html,yml,yaml,scss}': (filenames) => {
+  '!(*styles)/*.{css,scss}': (filenames) => {
+    return [
+      `yarn stylelint --allow-empty-input --ignore-disables --config ./stylelint.config.js --max-warnings 25 --color ${concatFilesForStylelint(
+        filenames
+      )}`,
+      `prettier --write ${concatFilesForPrettier(filenames)}`,
+    ];
+  },
+  '!(*default)/*.{json,md,mdx,css,html,yml,yaml,scss}': (filenames) => {
     return [`prettier --write ${concatFilesForPrettier(filenames)}`];
   },
 };

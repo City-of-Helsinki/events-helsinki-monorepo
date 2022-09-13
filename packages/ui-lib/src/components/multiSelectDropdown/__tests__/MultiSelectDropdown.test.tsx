@@ -2,7 +2,6 @@ import { axe } from 'jest-axe';
 import React from 'react';
 import { vi } from 'vitest';
 import {
-  actWait,
   arrowDownKeyPressHelper,
   arrowUpKeyPressHelper,
   enterKeyPressHelper,
@@ -177,10 +176,6 @@ describe('ArrowUp, ArrowDown', () => {
 
     const toggleButton = screen.getByRole('button', { name: title });
     await userEvent.click(toggleButton);
-
-    // After async we have selected the last item, press down once more to reset the
-    // selection.
-    await actWait();
 
     // No element should have focus
     options.forEach((option) => {

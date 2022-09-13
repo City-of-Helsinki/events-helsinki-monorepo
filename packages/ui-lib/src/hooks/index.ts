@@ -6,4 +6,5 @@ export { default as useDropdownKeyboardNavigation } from './useDropdownKeyboardN
 export { default as useIsSmallScreen } from './useIsSmallScreen';
 export { default as useResetState } from './useResetState';
 export { default as useTabFocusStyle } from './useTabFocusStyle';
+export { default as useTranslation } from './useCommonTranslation';
 export { default as useWindowSize } from './useWindowSize';

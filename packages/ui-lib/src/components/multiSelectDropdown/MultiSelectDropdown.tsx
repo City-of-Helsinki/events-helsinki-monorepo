@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import { IconAngleDown, IconAngleUp, IconSearch } from 'hds-react';
 import React from 'react';
 
-import Checkbox from '@/components/checkbox/Checkbox';
-import ScrollIntoViewWithFocus from '@/components/scrollIntoViewWithFocus/ScrollIntoViewWithFocus';
-import useConfig from '@/hooks/useConfig';
-import useDropdownKeyboardNavigation from '@/hooks/useDropdownKeyboardNavigation';
+import useConfig from '../../hooks/useConfig';
+import useDropdownKeyboardNavigation from '../../hooks/useDropdownKeyboardNavigation';
+import Checkbox from '../checkbox/Checkbox';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
+import ScrollIntoViewWithFocus from '../scrollIntoViewWithFocus/ScrollIntoViewWithFocus';
 import SearchLabel from '../search/searchLabel/SearchLabel';
 import styles from './multiSelectDropdown.module.scss';
 

@@ -1,6 +1,7 @@
 export { ArrayUtils } from './array-utils';
 export { Asserts } from './asserts';
 export { default as buildQueryFromObject } from './buildQueryFromObject';
+export * from './dateUtils';
 export { default as getURLSearchParamsFromAsPath } from './getURLSearchParamsFromAsPath';
 export { default as isClient } from './isClient';
 export { default as isTestEnv } from './isTestEnv';

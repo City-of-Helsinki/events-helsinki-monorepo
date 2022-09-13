@@ -1,6 +1,6 @@
 import { isClient } from '@events-helsinki/core-lib';
 import React from 'react';
-import useRouterFromConfig from '@/hooks/useRouterFromConfig';
+import useRouterFromConfig from '../../hooks/useRouterFromConfig';
 
 export const resetFocusId = 'reset-focus';
 

@@ -1,4 +1,4 @@
-import type { Breakpoint } from '@events-helsinki/core-lib/types';
+import type { Breakpoint } from '@events-helsinki/core-lib';
 import classNames from 'classnames';
 import capitalize from 'lodash/capitalize';
 import React from 'react';

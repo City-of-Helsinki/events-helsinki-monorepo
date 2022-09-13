@@ -1,6 +1,6 @@
 import NProgress from 'nprogress';
 import { useEffect } from 'react';
-import useRouterFromConfig from '@/hooks/useRouterFromConfig';
+import useRouterFromConfig from '../../hooks/useRouterFromConfig';
 
 type LoggerFunction = (
   message?: string,

@@ -1,9 +1,8 @@
-import { useTranslation } from 'next-i18next';
-
-import type { Language } from '../../types';
+import type { Language } from '@events-helsinki/core-lib';
+import useCommonTranslation from './useCommonTranslation';
 
 const useLocale = (): Language => {
-  const { i18n } = useTranslation();
+  const { i18n } = useCommonTranslation();
   const language = i18n.language;
 
   switch (language) {

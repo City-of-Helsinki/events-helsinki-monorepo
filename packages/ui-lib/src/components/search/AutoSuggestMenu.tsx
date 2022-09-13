@@ -1,10 +1,10 @@
-import type { AutosuggestMenuOption } from '@events-helsinki/core-lib/types';
+import type { AutosuggestMenuOption } from '@events-helsinki/core-lib';
 import classNames from 'classnames';
 import { IconCross } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
+import useCommonTranslation from '../../hooks/useCommonTranslation';
 import styles from './autosuggestMenu.module.scss';
 
 interface Props {
@@ -22,7 +22,7 @@ const AutoSuggestMenu: FunctionComponent<Props> = ({
   onOptionClick,
   options,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useCommonTranslation();
 
   if (!isOpen) return null;
 

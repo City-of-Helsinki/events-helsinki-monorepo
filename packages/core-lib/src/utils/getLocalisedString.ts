@@ -1,5 +1,5 @@
-import type { Language } from '../../types';
 import { supportedLanguages } from '../constants';
+import type { Language } from '../types';
 
 /**
  * Check is the instance that is rendering component client (not SSR)

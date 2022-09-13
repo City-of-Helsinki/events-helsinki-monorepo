@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { vi } from 'vitest';
 import {
-  actWait,
   arrowDownKeyPressHelper,
   arrowUpKeyPressHelper,
   escKeyPressHelper,
@@ -113,8 +112,8 @@ it('should close date selector menu with close button', async () => {
   await waitFor(() => {
     expect(screen.getByTestId(testIds.menu)).toBeInTheDocument();
   });
-  userEvent.click(screen.getByRole('button', { name: /sulje/i }));
-  await actWait();
+  await userEvent.click(screen.getByRole('button', { name: /sulje/i }));
+
   // Check that menu is closed
   expect(screen.queryByTestId(testIds.menu)).not.toBeInTheDocument();
 });

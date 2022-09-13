@@ -3,7 +3,7 @@ import { Koros } from 'hds-react';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
 
-import Text from '@/components/text/Text';
+import Text from '../text/Text';
 import styles from './section.module.scss';
 
 type Props = {

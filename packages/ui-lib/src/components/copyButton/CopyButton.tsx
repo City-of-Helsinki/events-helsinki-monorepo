@@ -1,7 +1,7 @@
-import { useResetState } from '@events-helsinki/core-lib';
 import classNames from 'classnames';
 import copy from 'copy-to-clipboard';
 import React from 'react';
+import useResetState from '../../hooks/useResetState';
 
 const MessageDisplayTime = 4000; // 4s
 

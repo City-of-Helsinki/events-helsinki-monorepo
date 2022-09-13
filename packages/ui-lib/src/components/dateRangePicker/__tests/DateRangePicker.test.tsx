@@ -3,9 +3,9 @@ import { utcToZonedTime } from 'date-fns-tz';
 import { advanceTo } from 'jest-date-mock';
 import React from 'react';
 import { vi } from 'vitest';
-import type { DateRangePickerProps } from '@/components/dateRangePicker/DateRangePicker';
-import DateRangePicker from '@/components/dateRangePicker/DateRangePicker';
 import { configure, render, screen } from '@/test-utils';
+import type { DateRangePickerProps } from '../DateRangePicker';
+import DateRangePicker from '../DateRangePicker';
 
 configure({ defaultHidden: true });
 const defaultProps: DateRangePickerProps = {
@@ -30,7 +30,7 @@ describe('date range input', () => {
     renderComponent({ endDate, onChangeEndDate });
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelEndDate',
+      name: 'common:dateSelector.labelEndDate',
     });
 
     const endDateStr = '12.10.2020';
@@ -39,7 +39,7 @@ describe('date range input', () => {
     await userEvent.type(endDateInput, endDateStr);
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelStartDate',
+      name: 'common:dateSelector.labelStartDate',
     });
     await userEvent.click(startDateInput);
 
@@ -54,7 +54,7 @@ describe('date range input', () => {
     renderComponent({ endDate, onChangeEndDate });
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelEndDate',
+      name: 'common:dateSelector.labelEndDate',
     });
 
     await userEvent.click(endDateInput);
@@ -68,7 +68,7 @@ describe('date range input', () => {
     );
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelStartDate',
+      name: 'common:dateSelector.labelStartDate',
     });
     await userEvent.click(startDateInput);
 
@@ -83,7 +83,7 @@ describe('date range input', () => {
     renderComponent({ startDate, onChangeStartDate });
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelStartDate',
+      name: 'common:dateSelector.labelStartDate',
     });
 
     const startDateStr = '12.10.2020';
@@ -93,7 +93,7 @@ describe('date range input', () => {
     await userEvent.type(startDateInput, startDateStr);
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelEndDate',
+      name: 'common:dateSelector.labelEndDate',
     });
     await userEvent.click(endDateInput);
 
@@ -108,7 +108,7 @@ describe('date range input', () => {
     renderComponent({ startDate, onChangeStartDate });
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelStartDate',
+      name: 'common:dateSelector.labelStartDate',
     });
     await userEvent.click(startDateInput);
 
@@ -122,7 +122,7 @@ describe('date range input', () => {
     );
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelEndDate',
+      name: 'common:dateSelector.labelEndDate',
     });
     await userEvent.click(endDateInput);
 
@@ -135,12 +135,12 @@ describe('date range input', () => {
     renderComponent();
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelStartDate',
+      name: 'common:dateSelector.labelStartDate',
     });
     await userEvent.type(startDateInput, '23.6.2021');
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'dateSelector.labelEndDate',
+      name: 'common:dateSelector.labelEndDate',
     });
     await userEvent.type(endDateInput, '22.6.2021');
 
@@ -157,10 +157,10 @@ describe('date range input', () => {
   /**
    * FIXME: Some reason why the HDS dateinput does not trigger handleStartDateValidation.
    * const startDateInput = screen.getByRole("textbox", {
-   *  name: 'dateSelector.labelStartDate'
+   *  name: 'common:dateSelector.labelStartDate'
    * });
    * const endDateInput = screen.getByRole("textbox", {
-   *  name: 'dateSelector.labelEndDate',
+   *  name: 'common:dateSelector.labelEndDate',
    * });
    * startDateInput.focus();
    * userEvent.clear(startDateInput);
@@ -173,7 +173,7 @@ describe('date range input', () => {
     renderComponent();
 
     const startDateInput = screen.getByRole('textbox', {
-      name: 'dateSelector.labelStartDate',
+      name: 'common:dateSelector.labelStartDate',
     });
 
     // Set invalid date as the input value

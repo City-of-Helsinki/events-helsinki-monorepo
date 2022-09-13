@@ -2,7 +2,6 @@
   "name": "@events-helsinki/core-lib",
   "version": "0.0.1",
   "license": "MIT",
-  "private": false,
   "homepage": "https://github.com/City-of-Helsinki/events-helsinki-monorepo",
   "repository": {
     "type": "git",
@@ -30,7 +29,8 @@
   },
   "dependencies": {
     "@tsed/exceptions": "^6.100.3",
-    "dequal": "^2.0.0"
+    "dequal": "^2.0.0",
+    "ics": "2.40.0"
   },
   "peerDependencies": {
     "react": "^17.0.2 || ^18.0.0",
@@ -55,6 +55,7 @@
     "@types/node": "18.7.15",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
+    "@types/sanitize-html": "2.6.2",
     "@vitejs/plugin-react": "2.1.0",
     "@vitest/coverage-istanbul": "0.23.1",
     "@vitest/ui": "0.23.1",

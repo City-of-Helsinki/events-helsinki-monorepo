@@ -1,5 +1,5 @@
-import { supportedLanguages } from '@/constants';
-import { assertUnreachable } from '@/utils/typescript.utils';
+import { supportedLanguages } from '../constants';
+import { assertUnreachable } from './typescript.utils';
 
 export const mappedPlaces: Record<string, string> = {};
 

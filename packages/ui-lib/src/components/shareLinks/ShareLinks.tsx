@@ -2,9 +2,9 @@ import { isClient } from '@events-helsinki/core-lib';
 import classNames from 'classnames';
 import React from 'react';
 
-import CopyButton from '@/components/copyButton/CopyButton';
-import useConfig from '@/hooks/useConfig';
-import LinkIcon from '@/icons/svg/link.svg';
+import useConfig from '../../hooks/useConfig';
+import LinkIcon from '../../icons/svg/link.svg';
+import CopyButton from '../copyButton/CopyButton';
 import FacebookShareLink from './FacebookShareLink';
 import LinkedInShareLink from './LinkedInShareLink';
 import styles from './shareLinks.module.scss';

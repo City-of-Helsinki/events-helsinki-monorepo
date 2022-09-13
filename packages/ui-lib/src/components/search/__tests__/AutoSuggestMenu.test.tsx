@@ -2,8 +2,8 @@ import { AUTOSUGGEST_TYPES } from '@events-helsinki/core-lib';
 import * as React from 'react';
 
 import { vi } from 'vitest';
-import AutoSuggestMenu from '@/components/search/AutoSuggestMenu';
 import { render } from '@/test-utils';
+import AutoSuggestMenu from '../AutoSuggestMenu';
 it('AutosuggestMenu matches snapshot', () => {
   const { container } = render(
     <AutoSuggestMenu

@@ -1,9 +1,0 @@
-{
-  "linkFrontPage": "Kotisivu",
-  "archiveSearch": {
-    "searchTextPlaceholder": "Hakusana",
-    "searchButtonLabelText": "Hae",
-    "loadMoreButtonLabelText": "Lataa lisää",
-    "noResultsText": "Ei hakutuloksia"
-  }
-}

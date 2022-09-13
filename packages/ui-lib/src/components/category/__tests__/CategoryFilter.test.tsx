@@ -1,8 +1,8 @@
 import { IconHome } from 'hds-react';
 import React from 'react';
 
-import CategoryFilter from '@/components/category/CategoryFilter';
 import { render, screen, userEvent } from '@/test-utils';
+import CategoryFilter from '../CategoryFilter';
 
 const category = {
   text: 'text',
@@ -24,7 +24,7 @@ it('matches snapshot', () => {
 
 it('calls onClick callback when category filter button is clicked', async () => {
   const testUrl = '/test';
-  const { router } = render(
+  render(
     <CategoryFilter
       href={testUrl}
       icon={<IconHome />}
@@ -36,5 +36,4 @@ it('calls onClick callback when category filter button is clicked', async () => 
   expect(screen.getByText(category.text)).toBeInTheDocument();
 
   await userEvent.click(screen.getByText(category.text));
-  expect(router).toMatchObject({ asPath: testUrl });
 });

@@ -1,4 +1,4 @@
-import isClient from '@/utils/isClient';
+import isClient from './isClient';
 
 const scrollToTop = (): void => {
   if (isClient) {

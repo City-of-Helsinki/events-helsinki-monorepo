@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import * as React from 'react';
+import { vi } from 'vitest';
 import { render } from '@/test-utils';
-
 import ToggleButton from '../ToggleButton';
 
 const defaultProps = {

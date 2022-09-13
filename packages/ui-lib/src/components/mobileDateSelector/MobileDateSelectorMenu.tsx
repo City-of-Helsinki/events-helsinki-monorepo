@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import type { FunctionComponent, MutableRefObject } from 'react';
 import React from 'react';
-import useConfig from '@/hooks/useConfig';
+import useConfig from '../../hooks/useConfig';
 
 import DateRangePicker from '../dateRangePicker/DateRangePicker';
 import styles from './mobileDateSelectorMenu.module.scss'; // the locale you want

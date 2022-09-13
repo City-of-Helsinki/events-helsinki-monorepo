@@ -14,8 +14,8 @@ import {
   ModuleItemTypeEnum,
 } from 'react-helsinki-headless-cms';
 
-import type { Language } from '../../../types';
 import { DEFAULT_LANGUAGE } from '../../constants';
+import type { Language } from '../../types';
 
 export const getUriID = (slugs: string[], locale: Language): string => {
   if (!slugs) return '/';
@@ -89,11 +89,14 @@ export function getCmsPageCardProps(
 
 export function collectGeneralCards(
   items: CollectionItemType[],
-  getRoutedInternalHref: RCHCConfig['utils']['getRoutedInternalHref']
+  getRoutedInternalHref: RCHCConfig['utils']['getRoutedInternalHref'],
+  dateFormat: string
 ): CardProps[] {
   return items.reduce((result: CardProps[], item) => {
     if (isArticleType(item)) {
-      result.push(getArticlePageCardProps(item, getRoutedInternalHref));
+      result.push(
+        getArticlePageCardProps(item, getRoutedInternalHref, dateFormat)
+      );
     } else if (isPageType(item)) {
       result.push(getCmsPageCardProps(item, getRoutedInternalHref));
     }
@@ -112,7 +115,12 @@ export function getGeneralCollectionCards(
   collection: GeneralCollectionType,
   getRoutedInternalHref: RCHCConfig['utils']['getRoutedInternalHref'],
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  locale = 'fi'
+  locale = 'fi',
+  dateFormat: string
 ): CardProps[] {
-  return collectGeneralCards(collection.items, getRoutedInternalHref);
+  return collectGeneralCards(
+    collection.items,
+    getRoutedInternalHref,
+    dateFormat
+  );
 }

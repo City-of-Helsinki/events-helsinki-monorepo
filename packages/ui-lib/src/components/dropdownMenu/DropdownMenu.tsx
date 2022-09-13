@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useConfig from '@/hooks/useConfig';
+import useConfig from '../../hooks/useConfig';
 import styles from './dropdownMenu.module.scss';
 
 interface Props {

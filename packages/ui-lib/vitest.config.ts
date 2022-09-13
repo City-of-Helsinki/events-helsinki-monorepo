@@ -26,7 +26,7 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     passWithNoTests: false,
-    setupFiles: './config/vitest/setupVitest.ts',
+    setupFiles: './config/tests/setupVitest.ts',
     cache: {
       dir: '../../.cache/vitest/nextjs-app',
     },

@@ -364,7 +364,7 @@ with resulting semver version and generate CHANGELOGS for you.
 Some convenience scripts can be run in any folder of this repo and will call their counterparts defined in packages and apps.
 
 | Name                         | Description                                                                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --- |
 | `yarn g:changeset`           | Add a changeset to declare a new version                                                                                             |
 | `yarn g:typecheck`           | Run typechecks in all workspaces                                                                                                     |
 | `yarn g:lint`                | Display linter issues in all workspaces                                                                                              |
@@ -384,6 +384,8 @@ Some convenience scripts can be run in any folder of this repo and will call the
 | `yarn check:install`         | Verify if there's no peer-deps missing in packages                                                                                   |
 | `yarn install:playwright`    | Install playwright for e2e                                                                                                           |
 | `yarn dedupe`                | Built-in yarn deduplication of the lock file                                                                                         |
+| `yarn build`                 | Builds application with rollup.                                                                                                      |     |
+| `yarn publish-canary`        | Publishes a canary tagged version of the application. CD is configured to run this script on additions tot he main branch.           |     |
 
 > Why using `:` to prefix scripts names ? It's convenient in yarn 3+, we can call those scripts from any folder in the monorepo.
 > `g:` is a shortcut for `global:`. See the complete list in [root package.json](./package.json).

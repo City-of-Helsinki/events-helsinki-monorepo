@@ -1,4 +1,4 @@
-# @events-helsinki/core-old
+# events-helsinki-core-old
 
 ## 3.14.1
 

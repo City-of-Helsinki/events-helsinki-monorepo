@@ -1,4 +1,4 @@
-import { DATE_TYPES } from '@events-helsinki/core';
+import { DATE_TYPES } from 'events-helsinki-core';
 import * as React from 'react';
 import {
   arrowDownKeyPressHelper,

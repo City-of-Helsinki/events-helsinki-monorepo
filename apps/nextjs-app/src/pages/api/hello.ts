@@ -1,4 +1,4 @@
-import { sayHello } from '@events-helsinki/core-old';
+import { sayHello } from 'events-helsinki-core-old';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handleApiHelloRoute(

@@ -1,4 +1,4 @@
-import { formatDate, DATE_TYPES, translateValue } from '@events-helsinki/core';
+import { formatDate, DATE_TYPES, translateValue } from 'events-helsinki-core';
 import { IconAngleDown, IconAngleUp, IconCalendarClock } from 'hds-react';
 import React from 'react';
 import type { FunctionComponent } from 'react';

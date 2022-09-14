@@ -1,4 +1,4 @@
-import type { Language } from '@events-helsinki/core';
+import type { Language } from 'events-helsinki-core';
 import useCommonTranslation from './useCommonTranslation';
 
 const useLocale = (): Language => {

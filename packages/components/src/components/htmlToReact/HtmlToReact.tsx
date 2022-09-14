@@ -1,5 +1,5 @@
-import { isClient } from '@events-helsinki/core';
 import createDOMPurify from 'dompurify';
+import { isClient } from 'events-helsinki-core';
 import parse, { domToReact } from 'html-react-parser';
 import React, { useMemo } from 'react';
 

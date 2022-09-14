@@ -11,11 +11,11 @@
     "incremental": true,
     "paths": {
       "@/test-utils": ["../config/tests/test-utils"],
-      "@events-helsinki/core": ["../../../packages/core/src/index"],
-      "@events-helsinki/common-i18n": [
+      "events-helsinki-core": ["../../../packages/core/src/index"],
+      "events-helsinki-common-i18n": [
         "../../../packages/common-i18n/src/index"
       ],
-      "@events-helsinki/common-i18n/locales/*": [
+      "events-helsinki-common-i18n/locales/*": [
         "../../../packages/common-i18n/src/locales/*"
       ]
     }

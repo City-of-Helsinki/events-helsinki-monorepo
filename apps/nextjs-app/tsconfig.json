@@ -19,20 +19,20 @@
       "@/pages/*": ["./pages/*"],
       "@/public/*": ["../public/*"],
       "@/themes/*": ["./themes/*"],
-      "@events-helsinki/common-i18n": [
+      "events-helsinki-common-i18n": [
         "../../../packages/common-i18n/src/index"
       ],
-      "@events-helsinki/common-i18n/locales/*": [
+      "events-helsinki-common-i18n/locales/*": [
         "../../../packages/common-i18n/src/locales/*"
       ],
-      "@events-helsinki/ui-lib/*": ["../../../packages/ui-lib/src/*"],
-      "@events-helsinki/ui-lib": ["../../../packages/ui-lib/src/index"],
-      "@events-helsinki/core-old/*": ["../../../packages/core-old/src/*"],
-      "@events-helsinki/core-old": ["../../../packages/core-old/src/index"],
-      "@events-helsinki/api-gateway": [
+      "events-helsinki-ui-lib/*": ["../../../packages/ui-lib/src/*"],
+      "events-helsinki-ui-lib": ["../../../packages/ui-lib/src/index"],
+      "events-helsinki-core-old/*": ["../../../packages/core-old/src/*"],
+      "events-helsinki-core-old": ["../../../packages/core-old/src/index"],
+      "events-helsinki-api-gateway": [
         "../../../packages/api-gateway/src/index"
       ],
-      "@events-helsinki/db-main-prisma": [
+      "events-helsinki-db-main-prisma": [
         "../../../packages/db-main-prisma/src/index"
       ]
     }

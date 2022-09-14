@@ -2884,255 +2884,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@events-helsinki/api-gateway@workspace:^, @events-helsinki/api-gateway@workspace:packages/api-gateway":
-  version: 0.0.0-use.local
-  resolution: "@events-helsinki/api-gateway@workspace:packages/api-gateway"
-  dependencies:
-    "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@graphql-mesh/cli": "npm:0.78.2"
-    "@graphql-mesh/config": "npm:7.1.4"
-    "@graphql-mesh/graphql": "npm:0.31.5"
-    "@graphql-mesh/openapi": "npm:0.33.7"
-    "@graphql-mesh/runtime": "npm:0.44.0"
-    "@types/jest": "npm:29.0.0"
-    "@types/node": "npm:18.7.15"
-    cross-env: "npm:7.0.3"
-    eslint: "npm:8.22.0"
-    graphql: "npm:16.6.0"
-    jest: "npm:29.0.2"
-    npm-run-all: "npm:4.1.5"
-    prettier: "npm:2.7.1"
-    rimraf: "npm:3.0.2"
-    ts-jest: "npm:28.0.8"
-    typescript: "npm:4.8.2"
-  peerDependencies:
-    graphql: ^16.4.0
-  languageName: unknown
-  linkType: soft
-
-"@events-helsinki/common-i18n@workspace:^, @events-helsinki/common-i18n@workspace:packages/common-i18n":
-  version: 0.0.0-use.local
-  resolution: "@events-helsinki/common-i18n@workspace:packages/common-i18n"
-  dependencies:
-    "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@types/jest": "npm:29.0.0"
-    "@types/node": "npm:18.7.15"
-    cross-env: "npm:7.0.3"
-    eslint: "npm:8.22.0"
-    prettier: "npm:2.7.1"
-    rimraf: "npm:3.0.2"
-    typescript: "npm:4.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@events-helsinki/components@workspace:packages/components":
-  version: 0.0.0-use.local
-  resolution: "@events-helsinki/components@workspace:packages/components"
-  dependencies:
-    "@apollo/client": "npm:3.6.9"
-    "@babel/core": "npm:7.19.0"
-    "@events-helsinki/core": "workspace:^"
-    "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@mdx-js/react": "npm:1.6.22"
-    "@storybook/addon-actions": "npm:6.5.10"
-    "@storybook/addon-docs": "npm:6.5.10"
-    "@storybook/addon-essentials": "npm:6.5.10"
-    "@storybook/addon-links": "npm:6.5.10"
-    "@storybook/addon-postcss": "npm:2.0.0"
-    "@storybook/addon-storysource": "npm:6.5.10"
-    "@storybook/builder-webpack5": "npm:6.5.10"
-    "@storybook/manager-webpack5": "npm:6.5.10"
-    "@storybook/react": "npm:6.5.10"
-    "@testing-library/dom": "npm:8.17.1"
-    "@testing-library/jest-dom": "npm:5.16.5"
-    "@testing-library/react": "npm:13.4.0"
-    "@testing-library/react-hooks": "npm:8.0.1"
-    "@testing-library/user-event": "npm:14.4.3"
-    "@types/jest-axe": "npm:3.5.4"
-    "@types/node": "npm:18.7.15"
-    "@types/nprogress": "npm:0.2.0"
-    "@types/react": "npm:18.0.18"
-    "@types/react-datepicker": "npm:4.4.2"
-    "@types/react-dom": "npm:18.0.6"
-    "@vitejs/plugin-react": "npm:2.1.0"
-    "@vitest/coverage-istanbul": "npm:0.23.2"
-    "@vitest/ui": "npm:0.23.2"
-    autoprefixer: "npm:10.4.8"
-    babel-loader: "npm:8.2.5"
-    babel-plugin-macros: "npm:3.1.0"
-    babel-plugin-polyfill-corejs3: "npm:0.5.3"
-    classnames: "npm:2.3.1"
-    copy-to-clipboard: "npm:3.3.2"
-    core-js: "npm:3.25.0"
-    cross-env: "npm:7.0.3"
-    eslint: "npm:8.22.0"
-    happy-dom: "npm:6.0.4"
-    hds-react: "npm:^1.15.0"
-    i18next: "npm:21.9.1"
-    microbundle: "npm:0.15.1"
-    next: "npm:12.3.0"
-    next-i18next: "npm:12.0.1"
-    npm-run-all: "npm:4.1.5"
-    nprogress: "npm:0.2.0"
-    postcss: "npm:8.4.16"
-    postcss-flexbugs-fixes: "npm:5.0.2"
-    prettier: "npm:2.7.1"
-    query-string: "npm:7.1.1"
-    react: "npm:>=17.0.2"
-    react-content-loader: "npm:6.2.0"
-    react-datepicker: "npm:4.8.0"
-    react-dom: "npm:>=17.0.2"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha10"
-    react-i18next: "npm:11.18.6"
-    require-from-string: "npm:2.0.2"
-    rimraf: "npm:3.0.2"
-    rooks: "npm:6.4.3"
-    sanitize-html: "npm:2.7.1"
-    sirv: "npm:2.0.2"
-    sirv-cli: "npm:2.0.2"
-    stylelint: "npm:14.11.0"
-    stylelint-config-prettier: "npm:9.0.3"
-    stylelint-config-standard: "npm:28.0.0"
-    ts-jest: "npm:28.0.8"
-    tsconfig-paths-webpack-plugin: "npm:4.0.0"
-    typescript: "npm:4.8.2"
-    vite: "npm:3.1.0"
-    vite-plugin-svgr: "npm:2.2.1"
-    vite-tsconfig-paths: "npm:3.5.0"
-    vitest: "npm:0.23.1"
-    waait: "npm:1.0.5"
-    webpack: "npm:5.74.0"
-  peerDependencies:
-    "@types/react": ^17.0.44 || ^18.0.0
-    "@types/react-dom": ^17.0.44 || ^18.0.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    "@types/react-dom":
-      optional: true
-  languageName: unknown
-  linkType: soft
-
-"@events-helsinki/core-old@workspace:^, @events-helsinki/core-old@workspace:packages/core-old":
-  version: 0.0.0-use.local
-  resolution: "@events-helsinki/core-old@workspace:packages/core-old"
-  dependencies:
-    "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@testing-library/react": "npm:13.4.0"
-    "@testing-library/react-hooks": "npm:8.0.1"
-    "@tsed/exceptions": "npm:^6.100.3"
-    "@types/jest": "npm:29.0.0"
-    "@types/node": "npm:18.7.15"
-    "@types/react": "npm:18.0.18"
-    "@types/react-dom": "npm:18.0.6"
-    "@vitejs/plugin-react": "npm:2.1.0"
-    "@vitest/coverage-istanbul": "npm:0.23.1"
-    "@vitest/ui": "npm:0.23.1"
-    cross-env: "npm:7.0.3"
-    dequal: "npm:^2.0.0"
-    eslint: "npm:8.22.0"
-    jest: "npm:29.0.2"
-    jest-environment-jsdom: "npm:29.0.2"
-    microbundle: "npm:0.15.1"
-    npm-run-all: "npm:4.1.5"
-    prettier: "npm:2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
-    rimraf: "npm:3.0.2"
-    ts-jest: "npm:28.0.8"
-    typescript: "npm:4.8.2"
-    vite: "npm:3.1.0"
-    vite-tsconfig-paths: "npm:3.5.0"
-    vitest: "npm:0.23.1"
-  peerDependencies:
-    react: ^17.0.2 || ^18.0.0
-    react-dom: ^17.0.2 || ^18.0.0
-  peerDependenciesMeta:
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
-"@events-helsinki/core@workspace:^, @events-helsinki/core@workspace:packages/core":
-  version: 0.0.0-use.local
-  resolution: "@events-helsinki/core@workspace:packages/core"
-  dependencies:
-    "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@testing-library/dom": "npm:8.17.1"
-    "@testing-library/jest-dom": "npm:5.16.5"
-    "@testing-library/react": "npm:13.4.0"
-    "@testing-library/react-hooks": "npm:8.0.1"
-    "@testing-library/user-event": "npm:14.4.3"
-    "@tsed/exceptions": "npm:^6.100.3"
-    "@types/jest": "npm:29.0.0"
-    "@types/node": "npm:18.7.15"
-    "@types/react": "npm:18.0.18"
-    "@types/react-dom": "npm:18.0.6"
-    "@types/sanitize-html": "npm:2.6.2"
-    "@vitejs/plugin-react": "npm:2.1.0"
-    "@vitest/coverage-istanbul": "npm:0.23.1"
-    "@vitest/ui": "npm:0.23.1"
-    cross-env: "npm:7.0.3"
-    dequal: "npm:^2.0.0"
-    eslint: "npm:8.22.0"
-    happy-dom: "npm:6.0.4"
-    ics: "npm:2.40.0"
-    jest: "npm:29.0.2"
-    jest-environment-jsdom: "npm:29.0.2"
-    microbundle: "npm:0.15.1"
-    npm-run-all: "npm:4.1.5"
-    prettier: "npm:2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
-    rimraf: "npm:3.0.2"
-    ts-jest: "npm:28.0.8"
-    typescript: "npm:4.8.2"
-    vite: "npm:3.1.0"
-    vite-tsconfig-paths: "npm:3.5.0"
-    vitest: "npm:0.23.1"
-  peerDependencies:
-    react: ^17.0.2 || ^18.0.0
-    react-dom: ^17.0.2 || ^18.0.0
-  peerDependenciesMeta:
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
-"@events-helsinki/db-main-prisma@workspace:^, @events-helsinki/db-main-prisma@workspace:packages/db-main-prisma":
-  version: 0.0.0-use.local
-  resolution: "@events-helsinki/db-main-prisma@workspace:packages/db-main-prisma"
-  dependencies:
-    "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@prisma/client": "npm:4.3.1"
-    "@soluble/dsn-parser": "npm:1.6.0"
-    "@types/jest": "npm:29.0.0"
-    "@types/node": "npm:18.7.15"
-    camelcase: "npm:7.0.0"
-    cross-env: "npm:7.0.3"
-    dotenv-flow: "npm:3.2.0"
-    dotenv-flow-cli: "npm:1.0.0"
-    eslint: "npm:8.22.0"
-    execa: "npm:5.1.1"
-    is-port-reachable: "npm:3.1.0"
-    jest: "npm:29.0.2"
-    keyword-extractor: "npm:0.0.23"
-    npm-run-all: "npm:4.1.5"
-    picocolors: "npm:1.0.0"
-    prettier: "npm:2.7.1"
-    prisma: "npm:4.3.1"
-    rimraf: "npm:3.0.2"
-    transliteration: "npm:2.3.5"
-    ts-jest: "npm:28.0.8"
-    tsx: "npm:3.9.0"
-    typescript: "npm:4.8.2"
-  languageName: unknown
-  linkType: soft
-
 "@events-helsinki/eslint-config-bases@workspace:^, @events-helsinki/eslint-config-bases@workspace:packages/eslint-config-bases":
   version: 0.0.0-use.local
   resolution: "@events-helsinki/eslint-config-bases@workspace:packages/eslint-config-bases"
@@ -3185,73 +2936,6 @@ __metadata:
     react-dom:
       optional: true
     typescript:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
-"@events-helsinki/ui-lib@workspace:^, @events-helsinki/ui-lib@workspace:packages/ui-lib":
-  version: 0.0.0-use.local
-  resolution: "@events-helsinki/ui-lib@workspace:packages/ui-lib"
-  dependencies:
-    "@babel/core": "npm:7.19.0"
-    "@emotion/babel-preset-css-prop": "npm:11.10.0"
-    "@emotion/react": "npm:^11.9.0"
-    "@emotion/styled": "npm:^11.8.1"
-    "@events-helsinki/core-old": "workspace:^"
-    "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@mdx-js/react": "npm:1.6.22"
-    "@storybook/addon-actions": "npm:6.5.10"
-    "@storybook/addon-docs": "npm:6.5.10"
-    "@storybook/addon-essentials": "npm:6.5.10"
-    "@storybook/addon-links": "npm:6.5.10"
-    "@storybook/addon-postcss": "npm:2.0.0"
-    "@storybook/addon-storysource": "npm:6.5.10"
-    "@storybook/builder-webpack5": "npm:6.5.10"
-    "@storybook/manager-webpack5": "npm:6.5.10"
-    "@storybook/react": "npm:6.5.10"
-    "@tailwindcss/aspect-ratio": "npm:0.4.2"
-    "@tailwindcss/forms": "npm:0.5.3"
-    "@tailwindcss/line-clamp": "npm:0.4.2"
-    "@testing-library/jest-dom": "npm:5.16.5"
-    "@testing-library/react": "npm:13.4.0"
-    "@testing-library/react-hooks": "npm:8.0.1"
-    "@types/jest": "npm:29.0.0"
-    "@types/node": "npm:18.7.15"
-    "@types/react": "npm:18.0.18"
-    "@types/react-dom": "npm:18.0.6"
-    autoprefixer: "npm:10.4.8"
-    babel-loader: "npm:8.2.5"
-    babel-plugin-macros: "npm:3.1.0"
-    babel-plugin-polyfill-corejs3: "npm:0.5.3"
-    core-js: "npm:3.25.0"
-    cross-env: "npm:7.0.3"
-    eslint: "npm:8.22.0"
-    jest: "npm:29.0.2"
-    jest-environment-jsdom: "npm:29.0.2"
-    microbundle: "npm:0.15.1"
-    npm-run-all: "npm:4.1.5"
-    postcss: "npm:8.4.16"
-    postcss-flexbugs-fixes: "npm:5.0.2"
-    prettier: "npm:2.7.1"
-    react: "npm:>=17.0.2"
-    react-dom: "npm:>=17.0.2"
-    require-from-string: "npm:2.0.2"
-    rimraf: "npm:3.0.2"
-    rooks: "npm:6.4.3"
-    sirv: "npm:2.0.2"
-    sirv-cli: "npm:2.0.2"
-    tailwindcss: "npm:3.1.8"
-    ts-jest: "npm:28.0.8"
-    tsconfig-paths-webpack-plugin: "npm:4.0.0"
-    typescript: "npm:4.8.2"
-    webpack: "npm:5.74.0"
-  peerDependencies:
-    "@types/react": ^17.0.44 || ^18.0.0
-    "@types/react-dom": ^17.0.44 || ^18.0.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    "@types/react-dom":
       optional: true
   languageName: unknown
   linkType: soft
@@ -4276,13 +3960,13 @@ __metadata:
   linkType: hard
 
 "@graphql-tools/url-loader@npm:^7.9.7":
-  version: 7.16.1
-  resolution: "@graphql-tools/url-loader@npm:7.16.1"
+  version: 7.16.2
+  resolution: "@graphql-tools/url-loader@npm:7.16.2"
   dependencies:
     "@ardatan/sync-fetch": "npm:0.0.1"
     "@graphql-tools/delegate": "npm:9.0.6"
     "@graphql-tools/utils": "npm:8.12.0"
-    "@graphql-tools/wrap": "npm:9.2.0"
+    "@graphql-tools/wrap": "npm:9.2.1"
     "@types/ws": "npm:^8.0.0"
     "@whatwg-node/fetch": "npm:^0.4.0"
     dset: "npm:^3.1.2"
@@ -4295,7 +3979,7 @@ __metadata:
     ws: "npm:^8.3.0"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 59caf55a1745e2b5e8866b880e44688d3e06c429825a4610787adfe8528c1defae895e1f36e443bc66efcb95f4cd4916f21aadff0618a03c510dc06eeac1e567
+  checksum: e30181417625f0acf3a58d2bfe3f56faeb95c707ee42884d65939672c885bba6d829cc4c5130742ac3b9c5dc0f6a0a85331b23fc1a42d709acdf02719c4b0c39
   languageName: node
   linkType: hard
 
@@ -4347,9 +4031,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/wrap@npm:9.2.0":
-  version: 9.2.0
-  resolution: "@graphql-tools/wrap@npm:9.2.0"
+"@graphql-tools/wrap@npm:9.2.1":
+  version: 9.2.1
+  resolution: "@graphql-tools/wrap@npm:9.2.1"
   dependencies:
     "@graphql-tools/delegate": "npm:9.0.6"
     "@graphql-tools/schema": "npm:9.0.4"
@@ -4358,7 +4042,7 @@ __metadata:
     value-or-promise: "npm:1.0.11"
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-  checksum: 1effc435e326ea4372eb8027f52a373f90f087da21d82f978a0468965f58fa95a1eece993049ab491ee6f1cf21355e768460b559c88e1cc27fa9c65a3bee5c71
+  checksum: 0beceac77b41ac7f8d6b61343c11df4ff5cc575b0ec892d60e4f0322e8821d4731486b307eae6de89b0fe6699fc27f764d5ca520f7acce3e66af58384a0ed0bf
   languageName: node
   linkType: hard
 
@@ -6075,6 +5759,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@remix-run/router@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@remix-run/router@npm:1.0.0"
+  checksum: a43b25809f2cb9bbf19418f0e2f60b167f0ecec86754c9cdefdb82127f1f146462fe262f79d853127d1e2aa66e353acf5cb27476b365a5c4f0f6f18943bf6d77
+  languageName: node
+  linkType: hard
+
 "@remix-run/serve@npm:1.7.0":
   version: 1.7.0
   resolution: "@remix-run/serve@npm:1.7.0"
@@ -7531,15 +7222,15 @@ __metadata:
   linkType: hard
 
 "@storybook/node-logger@npm:^6.1.14":
-  version: 6.5.11
-  resolution: "@storybook/node-logger@npm:6.5.11"
+  version: 6.5.12
+  resolution: "@storybook/node-logger@npm:6.5.12"
   dependencies:
     "@types/npmlog": "npm:^4.1.2"
     chalk: "npm:^4.1.0"
     core-js: "npm:^3.8.2"
     npmlog: "npm:^5.0.1"
     pretty-hrtime: "npm:^1.0.3"
-  checksum: 9e2a1e291f3817f33c7298fa6c2b6268df325701a292dcecb102fb726a539ba58f67866916cf835163cf7ec5246c14fae7235493ea358b71a53e393d52296142
+  checksum: 81a7aef699b8eefc194141e6f60944fc2bba7a3ba18ff5bf37d617421d0606934d31b82adb3e6423379d73bb25b619f1774c572653476fd48b793dd9f268eae6
   languageName: node
   linkType: hard
 
@@ -8502,12 +8193,12 @@ __metadata:
   linkType: hard
 
 "@types/jest@npm:*":
-  version: 29.0.1
-  resolution: "@types/jest@npm:29.0.1"
+  version: 29.0.2
+  resolution: "@types/jest@npm:29.0.2"
   dependencies:
     expect: "npm:^29.0.0"
     pretty-format: "npm:^29.0.0"
-  checksum: aab8a1f537f883103ac0663f7e609e5181878e07cfbe391d5f2a172726a71bdf29d11c0555a16a0218b0f7bb5410e5e3cf3311a5171f62eee1881de63ba88685
+  checksum: dc31d9b41057938b3cf7e74479e5701582a7ee48a270cd8b31080f1f5b00eea88f1f941ac320537e6317ee7b00d8925983002eaab4d1ef1dc24297a2e6eb36bd
   languageName: node
   linkType: hard
 
@@ -8617,9 +8308,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 18.7.17
-  resolution: "@types/node@npm:18.7.17"
-  checksum: 45d5a840f2f249beb12046019ac14bf9157752e05fe495be92e784cd8778f2e8021018163e3771fb2a02ec42efb8abdc54928fea0549c092ec1c13543eb5f48f
+  version: 18.7.18
+  resolution: "@types/node@npm:18.7.18"
+  checksum: 833883d724d9f980c6918f1a52f396cb351bf22e83b787481c992402e702e4a3658bd3ff5b561c878d3d9e253fb315eb6f7eb0db95804222669f18d3b54ea0f2
   languageName: node
   linkType: hard
 
@@ -8645,16 +8336,16 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^14.0.0":
-  version: 14.18.28
-  resolution: "@types/node@npm:14.18.28"
-  checksum: 0ea5f7800e9e9d227e27f10424ba23d4f3da3e8e0467a737a7b248308791dc3bf8573ba93cc9dd989c8d851924edb21a8ca37ed9b8b6c716c5fa7b30c5e11755
+  version: 14.18.29
+  resolution: "@types/node@npm:14.18.29"
+  checksum: 341c43bfb26f16e9876b8694b5ba203a43dd6a72d52d8637a4677ab2167822c40d6fd058c369e7b5bba70a3d27798bf4fb2822c2eb8533455dfd4bd0880ede07
   languageName: node
   linkType: hard
 
 "@types/node@npm:^14.0.10 || ^16.0.0, @types/node@npm:^14.14.20 || ^16.0.0":
-  version: 16.11.58
-  resolution: "@types/node@npm:16.11.58"
-  checksum: e22bdb1ac0995dbde26562385ddcb76cad3c0fe44c2e61c3090eee4cca3bb5d1de117e3ae099eebdfb5b85da7a8ebdb1f33a6c541fa7da9b2ffad34c250912b4
+  version: 16.11.59
+  resolution: "@types/node@npm:16.11.59"
+  checksum: 8ad50b0680ee48e368700e4f8482c4e3f03432d8a2b7802b4a45daf1064e1fc391e343f696b4249713f9cdd1cc20a3474c26bf67f183476112dcefb14e0e1c79
   languageName: node
   linkType: hard
 
@@ -8768,13 +8459,13 @@ __metadata:
   linkType: hard
 
 "@types/react@npm:*":
-  version: 18.0.19
-  resolution: "@types/react@npm:18.0.19"
+  version: 18.0.20
+  resolution: "@types/react@npm:18.0.20"
   dependencies:
     "@types/prop-types": "npm:*"
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 894b7ba6cb777689d83716abec5b8b7dcdc70beedddab2423666b4d8cd99649a9d7b3f7dee8d2fc16e0eb42e1c4ca48a9588ccd24c6e4297a393adac7723124e
+  checksum: fe7d9b466cbfeacf426a2a28c3def31e149f9496aa661315bdc1f406036c37b6a2d3dcbcdc9bbd29ee27dd02be3385174cf71b2a0c27ed38419354e44675f135
   languageName: node
   linkType: hard
 
@@ -10582,11 +10273,11 @@ __metadata:
   linkType: hard
 
 "autoprefixer@npm:^10.1.0, autoprefixer@npm:^10.4.8":
-  version: 10.4.9
-  resolution: "autoprefixer@npm:10.4.9"
+  version: 10.4.10
+  resolution: "autoprefixer@npm:10.4.10"
   dependencies:
     browserslist: "npm:^4.21.3"
-    caniuse-lite: "npm:^1.0.30001394"
+    caniuse-lite: "npm:^1.0.30001399"
     fraction.js: "npm:^4.2.0"
     normalize-range: "npm:^0.1.2"
     picocolors: "npm:^1.0.0"
@@ -10595,7 +10286,7 @@ __metadata:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: 6ea4768a9761fb0defe0852f07d22836791758e4616eb1fa684fe2e700ff11d8d6d18d1dc60005e1373c0b427ec4f57d04a640bbd044e2ca7f794c711569356f
+  checksum: a2538cddfd836610b3037b316c1d8e643af525c7d8908ff0bddecbb88c8c2c3379a3f283d551cbad0ec5dcbc991a9ddb6de8608f57ae159050fae89e7f616c95
   languageName: node
   linkType: hard
 
@@ -11688,7 +11379,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001332, caniuse-lite@npm:^1.0.30001370, caniuse-lite@npm:^1.0.30001373, caniuse-lite@npm:^1.0.30001394":
+"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001332, caniuse-lite@npm:^1.0.30001370, caniuse-lite@npm:^1.0.30001373, caniuse-lite@npm:^1.0.30001399":
   version: 1.0.30001399
   resolution: "caniuse-lite@npm:1.0.30001399"
   checksum: 3bef74244edad4ceb75e4ed59b280185672667743e65306b5e00b42394e2d4beb2493085594553044232c8674ad9198cf9c6aa1956067a74ce0e47477d07ebf4
@@ -13994,6 +13685,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"edit-json-file@npm:1.7.0":
+  version: 1.7.0
+  resolution: "edit-json-file@npm:1.7.0"
+  dependencies:
+    find-value: "npm:^1.0.12"
+    iterate-object: "npm:^1.3.4"
+    r-json: "npm:^1.2.10"
+    set-value: "npm:^4.1.0"
+    w-json: "npm:^1.3.10"
+  checksum: 26721e0de3e600410f59804ded5b0b88bc4f5eae951f59eca369e8d05f4f3c8a629b752d56b86f1d2eb0e4ea11edbc2051287d9cf9754cdf7c8d1048a481f879
+  languageName: node
+  linkType: hard
+
 "ee-first@npm:1.1.1":
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
@@ -14013,9 +13717,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.202":
-  version: 1.4.248
-  resolution: "electron-to-chromium@npm:1.4.248"
-  checksum: a6a6b52e4bcd2cc246745b0fcb35a45913204bc4efff1a3fe9ddb1150f808f6cc42e612e6db48832d1038d42678de7a6f71b69a09d6b1c99d42303912fc07e60
+  version: 1.4.249
+  resolution: "electron-to-chromium@npm:1.4.249"
+  checksum: aaf2ffaf16f8a471326d95d4ca8678e4f90871856cc3aef55346faf74461d5a0b393ad8066a7a7cb1dd660d4441a6e16cb18ad90635147b23f0b7911213f985c
   languageName: node
   linkType: hard
 
@@ -14966,7 +14670,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"escape-string-regexp@npm:^1.0.2, escape-string-regexp@npm:^1.0.5":
+"escape-string-regexp@npm:1.0.5, escape-string-regexp@npm:^1.0.2, escape-string-regexp@npm:^1.0.5":
   version: 1.0.5
   resolution: "escape-string-regexp@npm:1.0.5"
   checksum: 14d2c74a990b4a0ae55f299409693533a620402a6efa02b201d7e2ea60c71a516c36ccfcaf2aa604262eec6c4628bf8b9647e211fb179277cb479bd870c906fa
@@ -15720,6 +15424,257 @@ __metadata:
   languageName: node
   linkType: hard
 
+"events-helsinki-api-gateway@workspace:^, events-helsinki-api-gateway@workspace:packages/api-gateway":
+  version: 0.0.0-use.local
+  resolution: "events-helsinki-api-gateway@workspace:packages/api-gateway"
+  dependencies:
+    "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@graphql-mesh/cli": "npm:0.78.2"
+    "@graphql-mesh/config": "npm:7.1.4"
+    "@graphql-mesh/graphql": "npm:0.31.5"
+    "@graphql-mesh/openapi": "npm:0.33.7"
+    "@graphql-mesh/runtime": "npm:0.44.0"
+    "@types/jest": "npm:29.0.0"
+    "@types/node": "npm:18.7.15"
+    cross-env: "npm:7.0.3"
+    eslint: "npm:8.22.0"
+    graphql: "npm:16.6.0"
+    jest: "npm:29.0.2"
+    npm-run-all: "npm:4.1.5"
+    prettier: "npm:2.7.1"
+    rimraf: "npm:3.0.2"
+    ts-jest: "npm:28.0.8"
+    typescript: "npm:4.8.2"
+  peerDependencies:
+    graphql: ^16.4.0
+  languageName: unknown
+  linkType: soft
+
+"events-helsinki-common-i18n@workspace:^, events-helsinki-common-i18n@workspace:packages/common-i18n":
+  version: 0.0.0-use.local
+  resolution: "events-helsinki-common-i18n@workspace:packages/common-i18n"
+  dependencies:
+    "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@types/jest": "npm:29.0.0"
+    "@types/node": "npm:18.7.15"
+    cross-env: "npm:7.0.3"
+    eslint: "npm:8.22.0"
+    prettier: "npm:2.7.1"
+    rimraf: "npm:3.0.2"
+    typescript: "npm:4.8.2"
+  languageName: unknown
+  linkType: soft
+
+"events-helsinki-components@workspace:packages/components":
+  version: 0.0.0-use.local
+  resolution: "events-helsinki-components@workspace:packages/components"
+  dependencies:
+    "@apollo/client": "npm:3.6.9"
+    "@babel/core": "npm:7.19.0"
+    "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@mdx-js/react": "npm:1.6.22"
+    "@storybook/addon-actions": "npm:6.5.10"
+    "@storybook/addon-docs": "npm:6.5.10"
+    "@storybook/addon-essentials": "npm:6.5.10"
+    "@storybook/addon-links": "npm:6.5.10"
+    "@storybook/addon-postcss": "npm:2.0.0"
+    "@storybook/addon-storysource": "npm:6.5.10"
+    "@storybook/builder-webpack5": "npm:6.5.10"
+    "@storybook/manager-webpack5": "npm:6.5.10"
+    "@storybook/react": "npm:6.5.10"
+    "@testing-library/dom": "npm:8.17.1"
+    "@testing-library/jest-dom": "npm:5.16.5"
+    "@testing-library/react": "npm:13.4.0"
+    "@testing-library/react-hooks": "npm:8.0.1"
+    "@testing-library/user-event": "npm:14.4.3"
+    "@types/jest-axe": "npm:3.5.4"
+    "@types/node": "npm:18.7.15"
+    "@types/nprogress": "npm:0.2.0"
+    "@types/react": "npm:18.0.18"
+    "@types/react-datepicker": "npm:4.4.2"
+    "@types/react-dom": "npm:18.0.6"
+    "@vitejs/plugin-react": "npm:2.1.0"
+    "@vitest/coverage-istanbul": "npm:0.23.2"
+    "@vitest/ui": "npm:0.23.2"
+    autoprefixer: "npm:10.4.8"
+    babel-loader: "npm:8.2.5"
+    babel-plugin-macros: "npm:3.1.0"
+    babel-plugin-polyfill-corejs3: "npm:0.5.3"
+    classnames: "npm:2.3.1"
+    copy-to-clipboard: "npm:3.3.2"
+    core-js: "npm:3.25.0"
+    cross-env: "npm:7.0.3"
+    eslint: "npm:8.22.0"
+    events-helsinki-core: "workspace:^"
+    happy-dom: "npm:6.0.4"
+    hds-react: "npm:^1.15.0"
+    i18next: "npm:21.9.1"
+    microbundle: "npm:0.15.1"
+    next: "npm:12.3.0"
+    next-i18next: "npm:12.0.1"
+    npm-run-all: "npm:4.1.5"
+    nprogress: "npm:0.2.0"
+    postcss: "npm:8.4.16"
+    postcss-flexbugs-fixes: "npm:5.0.2"
+    prettier: "npm:2.7.1"
+    query-string: "npm:7.1.1"
+    react: "npm:>=17.0.2"
+    react-content-loader: "npm:6.2.0"
+    react-datepicker: "npm:4.8.0"
+    react-dom: "npm:>=17.0.2"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha10"
+    react-i18next: "npm:11.18.6"
+    require-from-string: "npm:2.0.2"
+    rimraf: "npm:3.0.2"
+    rooks: "npm:6.4.3"
+    sanitize-html: "npm:2.7.1"
+    sirv: "npm:2.0.2"
+    sirv-cli: "npm:2.0.2"
+    stylelint: "npm:14.11.0"
+    stylelint-config-prettier: "npm:9.0.3"
+    stylelint-config-standard: "npm:28.0.0"
+    ts-jest: "npm:28.0.8"
+    tsconfig-paths-webpack-plugin: "npm:4.0.0"
+    typescript: "npm:4.8.2"
+    vite: "npm:3.1.0"
+    vite-plugin-svgr: "npm:2.2.1"
+    vite-tsconfig-paths: "npm:3.5.0"
+    vitest: "npm:0.23.1"
+    waait: "npm:1.0.5"
+    webpack: "npm:5.74.0"
+  peerDependencies:
+    "@types/react": ^17.0.44 || ^18.0.0
+    "@types/react-dom": ^17.0.44 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"events-helsinki-core-old@workspace:^, events-helsinki-core-old@workspace:packages/core-old":
+  version: 0.0.0-use.local
+  resolution: "events-helsinki-core-old@workspace:packages/core-old"
+  dependencies:
+    "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@testing-library/react": "npm:13.4.0"
+    "@testing-library/react-hooks": "npm:8.0.1"
+    "@tsed/exceptions": "npm:^6.100.3"
+    "@types/jest": "npm:29.0.0"
+    "@types/node": "npm:18.7.15"
+    "@types/react": "npm:18.0.18"
+    "@types/react-dom": "npm:18.0.6"
+    "@vitejs/plugin-react": "npm:2.1.0"
+    "@vitest/coverage-istanbul": "npm:0.23.1"
+    "@vitest/ui": "npm:0.23.1"
+    cross-env: "npm:7.0.3"
+    dequal: "npm:^2.0.0"
+    eslint: "npm:8.22.0"
+    jest: "npm:29.0.2"
+    jest-environment-jsdom: "npm:29.0.2"
+    microbundle: "npm:0.15.1"
+    npm-run-all: "npm:4.1.5"
+    prettier: "npm:2.7.1"
+    react: "npm:18.2.0"
+    react-dom: "npm:18.2.0"
+    rimraf: "npm:3.0.2"
+    ts-jest: "npm:28.0.8"
+    typescript: "npm:4.8.2"
+    vite: "npm:3.1.0"
+    vite-tsconfig-paths: "npm:3.5.0"
+    vitest: "npm:0.23.1"
+  peerDependencies:
+    react: ^17.0.2 || ^18.0.0
+    react-dom: ^17.0.2 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"events-helsinki-core@workspace:^, events-helsinki-core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "events-helsinki-core@workspace:packages/core"
+  dependencies:
+    "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@testing-library/dom": "npm:8.17.1"
+    "@testing-library/jest-dom": "npm:5.16.5"
+    "@testing-library/react": "npm:13.4.0"
+    "@testing-library/react-hooks": "npm:8.0.1"
+    "@testing-library/user-event": "npm:14.4.3"
+    "@tsed/exceptions": "npm:^6.100.3"
+    "@types/jest": "npm:29.0.0"
+    "@types/node": "npm:18.7.15"
+    "@types/react": "npm:18.0.18"
+    "@types/react-dom": "npm:18.0.6"
+    "@types/sanitize-html": "npm:2.6.2"
+    "@vitejs/plugin-react": "npm:2.1.0"
+    "@vitest/coverage-istanbul": "npm:0.23.1"
+    "@vitest/ui": "npm:0.23.1"
+    cross-env: "npm:7.0.3"
+    dequal: "npm:^2.0.0"
+    edit-json-file: "npm:1.7.0"
+    eslint: "npm:8.22.0"
+    git-rev-sync: "npm:3.0.2"
+    happy-dom: "npm:6.0.4"
+    ics: "npm:2.40.0"
+    jest: "npm:29.0.2"
+    jest-environment-jsdom: "npm:29.0.2"
+    microbundle: "npm:0.15.1"
+    npm-run-all: "npm:4.1.5"
+    prettier: "npm:2.7.1"
+    react: "npm:18.2.0"
+    react-dom: "npm:18.2.0"
+    rimraf: "npm:3.0.2"
+    ts-jest: "npm:28.0.8"
+    typescript: "npm:4.8.2"
+    vite: "npm:3.1.0"
+    vite-tsconfig-paths: "npm:3.5.0"
+    vitest: "npm:0.23.1"
+  peerDependencies:
+    react: ^17.0.2 || ^18.0.0
+    react-dom: ^17.0.2 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"events-helsinki-db-main-prisma@workspace:^, events-helsinki-db-main-prisma@workspace:packages/db-main-prisma":
+  version: 0.0.0-use.local
+  resolution: "events-helsinki-db-main-prisma@workspace:packages/db-main-prisma"
+  dependencies:
+    "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@prisma/client": "npm:4.3.1"
+    "@soluble/dsn-parser": "npm:1.6.0"
+    "@types/jest": "npm:29.0.0"
+    "@types/node": "npm:18.7.15"
+    camelcase: "npm:7.0.0"
+    cross-env: "npm:7.0.3"
+    dotenv-flow: "npm:3.2.0"
+    dotenv-flow-cli: "npm:1.0.0"
+    eslint: "npm:8.22.0"
+    execa: "npm:5.1.1"
+    is-port-reachable: "npm:3.1.0"
+    jest: "npm:29.0.2"
+    keyword-extractor: "npm:0.0.23"
+    npm-run-all: "npm:4.1.5"
+    picocolors: "npm:1.0.0"
+    prettier: "npm:2.7.1"
+    prisma: "npm:4.3.1"
+    rimraf: "npm:3.0.2"
+    transliteration: "npm:2.3.5"
+    ts-jest: "npm:28.0.8"
+    tsx: "npm:3.9.0"
+    typescript: "npm:4.8.2"
+  languageName: unknown
+  linkType: soft
+
 "events-helsinki-monorepo@workspace:.":
   version: 0.0.0-use.local
   resolution: "events-helsinki-monorepo@workspace:."
@@ -15745,6 +15700,73 @@ __metadata:
     rimraf: "npm:3.0.2"
     shell-quote: "npm:1.7.3"
     typescript: "npm:4.8.2"
+  languageName: unknown
+  linkType: soft
+
+"events-helsinki-ui-lib@workspace:^, events-helsinki-ui-lib@workspace:packages/ui-lib":
+  version: 0.0.0-use.local
+  resolution: "events-helsinki-ui-lib@workspace:packages/ui-lib"
+  dependencies:
+    "@babel/core": "npm:7.19.0"
+    "@emotion/babel-preset-css-prop": "npm:11.10.0"
+    "@emotion/react": "npm:^11.9.0"
+    "@emotion/styled": "npm:^11.8.1"
+    "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@mdx-js/react": "npm:1.6.22"
+    "@storybook/addon-actions": "npm:6.5.10"
+    "@storybook/addon-docs": "npm:6.5.10"
+    "@storybook/addon-essentials": "npm:6.5.10"
+    "@storybook/addon-links": "npm:6.5.10"
+    "@storybook/addon-postcss": "npm:2.0.0"
+    "@storybook/addon-storysource": "npm:6.5.10"
+    "@storybook/builder-webpack5": "npm:6.5.10"
+    "@storybook/manager-webpack5": "npm:6.5.10"
+    "@storybook/react": "npm:6.5.10"
+    "@tailwindcss/aspect-ratio": "npm:0.4.2"
+    "@tailwindcss/forms": "npm:0.5.3"
+    "@tailwindcss/line-clamp": "npm:0.4.2"
+    "@testing-library/jest-dom": "npm:5.16.5"
+    "@testing-library/react": "npm:13.4.0"
+    "@testing-library/react-hooks": "npm:8.0.1"
+    "@types/jest": "npm:29.0.0"
+    "@types/node": "npm:18.7.15"
+    "@types/react": "npm:18.0.18"
+    "@types/react-dom": "npm:18.0.6"
+    autoprefixer: "npm:10.4.8"
+    babel-loader: "npm:8.2.5"
+    babel-plugin-macros: "npm:3.1.0"
+    babel-plugin-polyfill-corejs3: "npm:0.5.3"
+    core-js: "npm:3.25.0"
+    cross-env: "npm:7.0.3"
+    eslint: "npm:8.22.0"
+    events-helsinki-core-old: "workspace:^"
+    jest: "npm:29.0.2"
+    jest-environment-jsdom: "npm:29.0.2"
+    microbundle: "npm:0.15.1"
+    npm-run-all: "npm:4.1.5"
+    postcss: "npm:8.4.16"
+    postcss-flexbugs-fixes: "npm:5.0.2"
+    prettier: "npm:2.7.1"
+    react: "npm:>=17.0.2"
+    react-dom: "npm:>=17.0.2"
+    require-from-string: "npm:2.0.2"
+    rimraf: "npm:3.0.2"
+    rooks: "npm:6.4.3"
+    sirv: "npm:2.0.2"
+    sirv-cli: "npm:2.0.2"
+    tailwindcss: "npm:3.1.8"
+    ts-jest: "npm:28.0.8"
+    tsconfig-paths-webpack-plugin: "npm:4.0.0"
+    typescript: "npm:4.8.2"
+    webpack: "npm:5.74.0"
+  peerDependencies:
+    "@types/react": ^17.0.44 || ^18.0.0
+    "@types/react-dom": ^17.0.44 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
   languageName: unknown
   linkType: soft
 
@@ -16339,6 +16361,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"find-value@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "find-value@npm:1.0.12"
+  checksum: 8dee24fc1de09c36a8ab72f8e524b829d2456c845aaaa34714a8206eb4436c3a9c0b93bc1a859bbe10f9072204c666888884c97bf5e1b249467e8ca9e04db118
+  languageName: node
+  linkType: hard
+
 "find-yarn-workspace-root2@npm:1.2.16":
   version: 1.2.16
   resolution: "find-yarn-workspace-root2@npm:1.2.16"
@@ -16391,12 +16420,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.14.9":
-  version: 1.15.1
-  resolution: "follow-redirects@npm:1.15.1"
+  version: 1.15.2
+  resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 1f3e06bfb5c5351456e4fdb9197aa09158452d6400a06240a80204708b7a68f1bb47d6e94127112844136f66ad3283f9c92fa3c5c76aa96db8bd44214ea922b8
+  checksum: 930171f8b81bf00e9368df4b17f3b835934762d51192632af53a51a8a608d5510a1ffbc6da5761dce9996cdbd750740490ca844320e5ff11cdaf2329a5a69647
   languageName: node
   linkType: hard
 
@@ -16925,6 +16954,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"git-rev-sync@npm:3.0.2":
+  version: 3.0.2
+  resolution: "git-rev-sync@npm:3.0.2"
+  dependencies:
+    escape-string-regexp: "npm:1.0.5"
+    graceful-fs: "npm:4.1.15"
+    shelljs: "npm:0.8.5"
+  checksum: f2cdf68e3a1bb586cd9306c3dff7598d0de3fb0533c9ae1ecda7247aba4e94ee1c47cefa94a75af458b024f4b7c06356d4dab5467b66bac932c19646fe6536e6
+  languageName: node
+  linkType: hard
+
 "github-from-package@npm:0.0.0":
   version: 0.0.0
   resolution: "github-from-package@npm:0.0.0"
@@ -17027,7 +17067,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^7.1.1, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6, glob@npm:^7.2.0":
+"glob@npm:^7.0.0, glob@npm:^7.1.1, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6, glob@npm:^7.2.0":
   version: 7.2.3
   resolution: "glob@npm:7.2.3"
   dependencies:
@@ -17214,6 +17254,13 @@ __metadata:
     p-cancelable: "npm:^2.0.0"
     responselike: "npm:^2.0.0"
   checksum: eb7d9477285de6ee81ed838dd2369925f2cbb6c2cb883ee25cad1fd2759ba52a1ee1944d83acd13cf0bd24fcc0a2b551665d088db712347d63df88dca31328d0
+  languageName: node
+  linkType: hard
+
+"graceful-fs@npm:4.1.15":
+  version: 4.1.15
+  resolution: "graceful-fs@npm:4.1.15"
+  checksum: 5d21f2e101dfbb132701a0b9f7491a9a65d98d4079b18f1b198df753178233bdefd927c5dc145a57e40b8be2d2fcccf38162ebad0e436a29030a9d13aacac5c8
   languageName: node
   linkType: hard
 
@@ -17763,7 +17810,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"history@npm:^5.2.0, history@npm:^5.3.0":
+"history@npm:^5.3.0":
   version: 5.3.0
   resolution: "history@npm:5.3.0"
   dependencies:
@@ -18404,6 +18451,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"interpret@npm:^1.0.0":
+  version: 1.4.0
+  resolution: "interpret@npm:1.4.0"
+  checksum: fb5b8a704c431c65d708a18b7d60f36ee2a100c30c381dd5aa02fcd0d92ff90f82a11b00a71acd0586d84e6654c7363a56fca85abb03a4e2bc2caefb44de64ef
+  languageName: node
+  linkType: hard
+
 "interpret@npm:^2.2.0":
   version: 2.2.0
   resolution: "interpret@npm:2.2.0"
@@ -18978,6 +19032,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-primitive@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "is-primitive@npm:3.0.1"
+  checksum: e8289241ef9c6a9f25c4a2efec0ade5616b6a90fd9339a392ae87dbe78e9d451e15b297b410d4f60cb5a62328af5661fcf62093ff278b8baa6f4604124709f70
+  languageName: node
+  linkType: hard
+
 "is-reference@npm:^1.2.1":
   version: 1.2.1
   resolution: "is-reference@npm:1.2.1"
@@ -19337,6 +19398,13 @@ __metadata:
   version: 1.0.2
   resolution: "iterate-iterator@npm:1.0.2"
   checksum: 3e586e73cedcdbac9c7d5c2b9b6d961f9b4b7920c8d68468ac2801f41dedfa9c4cc9f81ffef05fbb2ea035ba78aeb871b5a4562345fd9c38046e9617d2dd94d0
+  languageName: node
+  linkType: hard
+
+"iterate-object@npm:^1.3.4":
+  version: 1.3.4
+  resolution: "iterate-object@npm:1.3.4"
+  checksum: 9492d5fc702ec08b305d5a40ce2685cc631522f233d5442bd81a17b21ae4b2475cad9a6a7a6cdf5e77374322f5e9b25f3dc2903a7c4abd1b358e4be30cdd2e5b
   languageName: node
   linkType: hard
 
@@ -22767,11 +22835,6 @@ __metadata:
     "@emotion/react": "npm:11.10.4"
     "@emotion/server": "npm:11.10.0"
     "@emotion/styled": "npm:11.10.4"
-    "@events-helsinki/api-gateway": "workspace:^"
-    "@events-helsinki/common-i18n": "workspace:^"
-    "@events-helsinki/core-old": "workspace:^"
-    "@events-helsinki/db-main-prisma": "workspace:^"
-    "@events-helsinki/ui-lib": "workspace:^"
     "@fontsource/inter": "npm:4.5.12"
     "@graphql-yoga/node": "npm:2.13.13"
     "@headlessui/react": "npm:1.6.6"
@@ -22826,6 +22889,11 @@ __metadata:
     eslint-plugin-regexp: "npm:1.9.0"
     eslint-plugin-sonarjs: "npm:0.15.0"
     eslint-plugin-testing-library: "npm:5.6.1"
+    events-helsinki-api-gateway: "workspace:^"
+    events-helsinki-common-i18n: "workspace:^"
+    events-helsinki-core-old: "workspace:^"
+    events-helsinki-db-main-prisma: "workspace:^"
+    events-helsinki-ui-lib: "workspace:^"
     graphql: "npm:16.6.0"
     happy-dom: "npm:6.0.4"
     i18next: "npm:21.9.1"
@@ -25686,6 +25754,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"r-json@npm:^1.2.10":
+  version: 1.2.10
+  resolution: "r-json@npm:1.2.10"
+  checksum: 2897f5fe1ae8ff6b1ac9d5c77351048cd910b9fad2960b6dc5d7073d2426b6fae3038412109412a3364ea6dc259a261f9b67e9b29258882d695a396dce3afedf
+  languageName: node
+  linkType: hard
+
 "raf@npm:^3.4.1":
   version: 3.4.1
   resolution: "raf@npm:3.4.1"
@@ -26076,26 +26151,25 @@ __metadata:
   linkType: hard
 
 "react-router-dom@npm:^6.2.2":
-  version: 6.3.0
-  resolution: "react-router-dom@npm:6.3.0"
+  version: 6.4.0
+  resolution: "react-router-dom@npm:6.4.0"
   dependencies:
-    history: "npm:^5.2.0"
-    react-router: "npm:6.3.0"
+    react-router: "npm:6.4.0"
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 78051169fdc7642103479e7194f616cd1d316af8474503d5d3ea8125ed1d3ded2776e2653e8184509220349d3713ceca572cce3297266e2b7ab3dd0067db8605
+  checksum: 5d9576c785e93a8f6f7a9890b24795eb00ec54ee8dc2b53822dc0e4108df31bfb937c0e950e02882e159fda15cad047bd3939222abe066843758f9579afbe49b
   languageName: node
   linkType: hard
 
-"react-router@npm:6.3.0":
-  version: 6.3.0
-  resolution: "react-router@npm:6.3.0"
+"react-router@npm:6.4.0":
+  version: 6.4.0
+  resolution: "react-router@npm:6.4.0"
   dependencies:
-    history: "npm:^5.2.0"
+    "@remix-run/router": "npm:1.0.0"
   peerDependencies:
     react: ">=16.8"
-  checksum: e18db7761282cb28dda7a4f81c4df696f0484c7f998dc339b4939cb9bb9e8d968e33b627a9616adfed141b588ca1885be6be602c12ff52e81b4bab4bf3e629f8
+  checksum: 51db516722767adea584b24b967c6744f423f7e0885930fb0d9ce4eb0ae722757e7b19c7d842a084806653e5dcb51f14d7e198db3f450f10eecbf1184a36373c
   languageName: node
   linkType: hard
 
@@ -26333,6 +26407,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rechoir@npm:^0.6.2":
+  version: 0.6.2
+  resolution: "rechoir@npm:0.6.2"
+  dependencies:
+    resolve: "npm:^1.1.6"
+  checksum: 9c739042ee71825d9e72879f89c165e425290bfc1feadb5437716604e33140fdac85970a2dcccbd2932dac6e20f4a277b80c2ecfc4b904a44c49e187fb67293e
+  languageName: node
+  linkType: hard
+
 "recrawl-sync@npm:^2.0.3":
   version: 2.2.2
   resolution: "recrawl-sync@npm:2.2.2"
@@ -26402,11 +26485,11 @@ __metadata:
   linkType: hard
 
 "regenerate-unicode-properties@npm:^10.0.1":
-  version: 10.0.1
-  resolution: "regenerate-unicode-properties@npm:10.0.1"
+  version: 10.1.0
+  resolution: "regenerate-unicode-properties@npm:10.1.0"
   dependencies:
     regenerate: "npm:^1.4.2"
-  checksum: 551c4eb58bcde309e942b2e721271d07c728381456cb86a98c522e73e47a95b91d07bd7d932d38b7444f3e5d348242b005f87217d9ac0c496ebb66d87cefb23e
+  checksum: 8abc8d628a7b4733e69a6e113e79fee348d2cecade5b9a65442167ca17410c1aea5213ac4f5e1b7897013b6bae98238703fda09303acd763a6e5eaf849cc0830
   languageName: node
   linkType: hard
 
@@ -26675,10 +26758,7 @@ __metadata:
     "@emotion/react": "npm:11.10.4"
     "@emotion/server": "npm:11.10.0"
     "@emotion/styled": "npm:11.10.4"
-    "@events-helsinki/common-i18n": "workspace:^"
-    "@events-helsinki/core-old": "workspace:^"
     "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@events-helsinki/ui-lib": "workspace:^"
     "@remix-run/dev": "npm:1.7.0"
     "@remix-run/eslint-config": "npm:1.7.0"
     "@remix-run/node": "npm:1.7.0"
@@ -26696,6 +26776,9 @@ __metadata:
     "@vercel/node": "npm:2.5.13"
     autoprefixer: "npm:10.4.8"
     eslint: "npm:8.22.0"
+    events-helsinki-common-i18n: "workspace:^"
+    events-helsinki-core-old: "workspace:^"
+    events-helsinki-ui-lib: "workspace:^"
     jest: "npm:29.0.2"
     jest-css-modules-transform: "npm:4.4.2"
     jest-environment-jsdom: "npm:29.0.2"
@@ -26881,7 +26964,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.1.7, resolve@npm:^1.10.0, resolve@npm:^1.10.1, resolve@npm:^1.14.2, resolve@npm:^1.17.0, resolve@npm:^1.19.0, resolve@npm:^1.20.0, resolve@npm:^1.22.0, resolve@npm:^1.22.1, resolve@npm:^1.3.2":
+"resolve@npm:^1.1.6, resolve@npm:^1.1.7, resolve@npm:^1.10.0, resolve@npm:^1.10.1, resolve@npm:^1.14.2, resolve@npm:^1.17.0, resolve@npm:^1.19.0, resolve@npm:^1.20.0, resolve@npm:^1.22.0, resolve@npm:^1.22.1, resolve@npm:^1.3.2":
   version: 1.22.1
   resolution: "resolve@npm:1.22.1"
   dependencies:
@@ -26907,7 +26990,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A^1.1.7#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.14.2#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.17.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.19.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.3.2#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A^1.1.6#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.1.7#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.14.2#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.17.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.19.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.3.2#optional!builtin<compat/resolve>":
   version: 1.22.1
   resolution: "resolve@patch:resolve@npm%3A1.22.1#optional!builtin<compat/resolve>::version=1.22.1&hash=07638b"
   dependencies:
@@ -27571,6 +27654,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"set-value@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "set-value@npm:4.1.0"
+  dependencies:
+    is-plain-object: "npm:^2.0.4"
+    is-primitive: "npm:^3.0.1"
+  checksum: 12f637196f6b8c782e003501b071b0ac7727b2dc44259bb61306d9110a89dffd3aa910dd917cdb7964b389650de150174b3ae27872a64a77e91f7c2bfa07a534
+  languageName: node
+  linkType: hard
+
 "setimmediate@npm:^1.0.4, setimmediate@npm:^1.0.5":
   version: 1.0.5
   resolution: "setimmediate@npm:1.0.5"
@@ -27666,6 +27759,19 @@ __metadata:
   version: 1.7.3
   resolution: "shell-quote@npm:1.7.3"
   checksum: 223de5ed640ca7d5e81b65568065e8be615aa3e87fb3d9e52bca1f99f8832a97244440ead5e2154c392d9b44e5a67468693ad0637654947de2868fa53f744af8
+  languageName: node
+  linkType: hard
+
+"shelljs@npm:0.8.5":
+  version: 0.8.5
+  resolution: "shelljs@npm:0.8.5"
+  dependencies:
+    glob: "npm:^7.0.0"
+    interpret: "npm:^1.0.0"
+    rechoir: "npm:^0.6.2"
+  bin:
+    shjs: bin/shjs
+  checksum: ecf61d3b6d544d405cd5fae2f6004b87744f617bc246ff4fd884c457886f9447299b87a3a20da7e8e4270e6bf7051f2eb872b97c6dfd98ec2b9607f8b717f615
   languageName: node
   linkType: hard
 
@@ -30127,9 +30233,9 @@ __metadata:
   linkType: hard
 
 "unicode-property-aliases-ecmascript@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "unicode-property-aliases-ecmascript@npm:2.0.0"
-  checksum: 3e123410a4399a1e45390a0ef546d15e18d2d5c722e478414232291e69b732cf5cca70ba90e9b4a45fc9ce39b6afc776fddff26ec6b1533cc459d1363e1243f7
+  version: 2.1.0
+  resolution: "unicode-property-aliases-ecmascript@npm:2.1.0"
+  checksum: 2a731ceba0a6d8e6b9bc576843f54f4ce5af36c1984a5a6023e012ceaa73f76a06dfc104b12a6b06f06decbd447d88980ec6787b44f708259b190d3594a84b85
   languageName: node
   linkType: hard
 
@@ -30775,16 +30881,16 @@ __metadata:
     "@emotion/babel-plugin": "npm:11.10.2"
     "@emotion/react": "npm:11.10.4"
     "@emotion/styled": "npm:11.10.4"
-    "@events-helsinki/common-i18n": "workspace:^"
-    "@events-helsinki/core-old": "workspace:^"
     "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@events-helsinki/ui-lib": "workspace:^"
     "@types/react": "npm:18.0.18"
     "@types/react-dom": "npm:18.0.6"
     "@vitejs/plugin-react": "npm:2.1.0"
     "@vitest/coverage-istanbul": "npm:0.23.1"
     "@vitest/ui": "npm:0.23.1"
     eslint: "npm:8.22.0"
+    events-helsinki-common-i18n: "workspace:^"
+    events-helsinki-core-old: "workspace:^"
+    events-helsinki-ui-lib: "workspace:^"
     happy-dom: "npm:6.0.4"
     prettier: "npm:2.7.1"
     react: "npm:18.2.0"
@@ -30943,6 +31049,13 @@ __metadata:
   version: 3.1.0
   resolution: "void-elements@npm:3.1.0"
   checksum: b2e095b2355ec1f56efa095c45f406776f1c88c4742471cc530abed7e0337f7b90a082234635d87965e2b262c9123dee9cc18144479e1d6d9a88748959036441
+  languageName: node
+  linkType: hard
+
+"w-json@npm:^1.3.10":
+  version: 1.3.10
+  resolution: "w-json@npm:1.3.10"
+  checksum: 3c3819f527ad32ccea840012155c3cfc4f6142937f22dcff68348b79b5b73b99a1085173a1cec1bbefa7b3eee70f8861a62e7f88165289ae22351485db2319fd
   languageName: node
   linkType: hard
 

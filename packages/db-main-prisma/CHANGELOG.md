@@ -1,1 +1,1 @@
-# @events-helsinki/db-main-prisma
+# events-helsinki-db-main-prisma

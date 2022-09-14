@@ -1,4 +1,4 @@
-import { AUTOSUGGEST_TYPES } from '@events-helsinki/core';
+import { AUTOSUGGEST_TYPES } from 'events-helsinki-core';
 import * as React from 'react';
 
 import { render } from '@/test-utils';

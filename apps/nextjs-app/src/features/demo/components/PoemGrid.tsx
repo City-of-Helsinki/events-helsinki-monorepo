@@ -1,4 +1,4 @@
-import { ArrayUtils } from '@events-helsinki/core-old';
+import { ArrayUtils } from 'events-helsinki-core-old';
 import type { FC } from 'react';
 import type { SearchPoems } from '@/backend/features/poem/SearchPoems';
 import { PoemCard } from './PoemCard';

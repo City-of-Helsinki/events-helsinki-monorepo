@@ -1,4 +1,4 @@
-import type { UnPromisify } from '@events-helsinki/core-old';
+import type { UnPromisify } from 'events-helsinki-core-old';
 import type { SearchPoemsQuery } from './SearchPoemsQuery';
 
 export interface SearchPoemsParams {

@@ -1,6 +1,6 @@
-import type { Category } from '@events-helsinki/core';
 import classNames from 'classnames';
 import type * as CSS from 'csstype';
+import type { Category } from 'events-helsinki-core';
 import { IconAngleRight } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';

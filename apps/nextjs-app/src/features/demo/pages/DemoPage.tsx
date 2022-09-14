@@ -1,5 +1,5 @@
-import { sayHello } from '@events-helsinki/core-old';
-import { AsyncMessage, Message } from '@events-helsinki/ui-lib';
+import { sayHello } from 'events-helsinki-core-old';
+import { AsyncMessage, Message } from 'events-helsinki-ui-lib';
 import { useTranslation } from 'next-i18next';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
@@ -25,10 +25,10 @@ export const DemoPage: FC = () => {
         <ul>
           <li>{`Foo says: ${sayHello(
             'World'
-          )} from @events-helsinki/core-old`}</li>
+          )} from events-helsinki-core-old`}</li>
           <li>
             <Message
-              message={'Bar react component from @events-helsinki/ui-lib'}
+              message={'Bar react component from events-helsinki-ui-lib'}
             />
           </li>
           <li>

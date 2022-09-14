@@ -1,8 +1,8 @@
-import { Asserts } from '@events-helsinki/core-old';
+import { Asserts } from 'events-helsinki-core-old';
 import {
   PrismaManager,
   PrismaClientDbMain,
-} from '@events-helsinki/db-main-prisma';
+} from 'events-helsinki-db-main-prisma';
 
 const isDev = process.env?.NODE_ENV === 'development';
 

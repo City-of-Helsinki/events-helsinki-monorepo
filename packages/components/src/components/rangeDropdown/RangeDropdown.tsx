@@ -1,5 +1,5 @@
-import { skipFalsyType } from '@events-helsinki/core';
 import classNames from 'classnames';
+import { skipFalsyType } from 'events-helsinki-core';
 import { Checkbox, IconAngleDown, IconAngleUp, TextInput } from 'hds-react';
 import React from 'react';
 

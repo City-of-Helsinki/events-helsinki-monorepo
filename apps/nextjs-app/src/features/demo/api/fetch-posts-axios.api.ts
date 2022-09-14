@@ -1,6 +1,6 @@
-import type { JsonApiResponse } from '@events-helsinki/core-old/api/json-api';
-import { isJsonApiSuccessResponse } from '@events-helsinki/core-old/api/json-api';
 import axios from 'axios';
+import type { JsonApiResponse } from 'events-helsinki-core-old/api/json-api';
+import { isJsonApiSuccessResponse } from 'events-helsinki-core-old/api/json-api';
 import type { GetPosts } from '@/backend/api/rest/post-repository.ssr';
 
 export const fetchPostsWithAxios = async (): Promise<GetPosts> => {

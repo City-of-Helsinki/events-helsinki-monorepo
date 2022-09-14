@@ -1,5 +1,5 @@
-import { isClient } from '@events-helsinki/core';
 import classNames from 'classnames';
+import { isClient } from 'events-helsinki-core';
 import React from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation';

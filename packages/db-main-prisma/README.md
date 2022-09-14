@@ -1,4 +1,4 @@
-# @events-helsinki/db-main-prisma
+# events-helsinki-db-main-prisma
 
 <p align="left">
   <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions?query=workflow%3ACI">

@@ -3,7 +3,7 @@ import type { Options as ExecaOptions } from 'execa';
 import {
   PrismaManager,
   PrismaClientDbMain,
-} from '@events-helsinki/db-main-prisma';
+} from 'events-helsinki-db-main-prisma';
 import { getAndCheckDatabaseDsn } from '../e2e-dsn-services.util';
 
 describe('prisma cli commands', () => {

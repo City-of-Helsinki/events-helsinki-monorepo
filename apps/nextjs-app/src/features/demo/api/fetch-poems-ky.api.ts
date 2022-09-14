@@ -1,5 +1,5 @@
-import type { JsonApiResponse } from '@events-helsinki/core-old/api/json-api';
-import { isJsonApiSuccessResponse } from '@events-helsinki/core-old/api/json-api';
+import type { JsonApiResponse } from 'events-helsinki-core-old/api/json-api';
+import { isJsonApiSuccessResponse } from 'events-helsinki-core-old/api/json-api';
 import type { SearchPoems } from '@/backend/features/poem/SearchPoems';
 import { ky } from '@/config/ky';
 

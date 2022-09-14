@@ -1,1 +1,1 @@
-# @events-helsinki/api-gateway
+# events-helsinki-api-gateway

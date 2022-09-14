@@ -1,1 +1,1 @@
-# @events-helsinki/core
+# events-helsinki-core

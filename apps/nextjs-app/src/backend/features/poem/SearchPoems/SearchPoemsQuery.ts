@@ -1,6 +1,6 @@
-import type { UnPromisify } from '@events-helsinki/core-old';
-import type { PrismaClientDbMain } from '@events-helsinki/db-main-prisma';
 import { InternalServerError } from '@tsed/exceptions';
+import type { UnPromisify } from 'events-helsinki-core-old';
+import type { PrismaClientDbMain } from 'events-helsinki-db-main-prisma';
 import type { SearchPoemsParams } from './SearchPoems.types';
 
 type SearchPoems = UnPromisify<ReturnType<SearchPoemsQuery['searchPoems']>>;

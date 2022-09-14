@@ -1,5 +1,5 @@
-import { translateValue } from '@events-helsinki/core';
 import classNames from 'classnames';
+import { translateValue } from 'events-helsinki-core';
 import { IconAngleLeft, IconAngleRight, IconCalendarPlus } from 'hds-react';
 import type { ChangeEvent, FunctionComponent, MutableRefObject } from 'react';
 import React, { useEffect } from 'react';

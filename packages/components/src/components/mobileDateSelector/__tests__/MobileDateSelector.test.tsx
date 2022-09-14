@@ -1,5 +1,5 @@
-import { DATE_TYPES } from '@events-helsinki/core';
 import userEvent from '@testing-library/user-event';
+import { DATE_TYPES } from 'events-helsinki-core';
 import React from 'react';
 import {
   arrowDownKeyPressHelper,

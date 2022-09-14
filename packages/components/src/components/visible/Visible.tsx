@@ -1,5 +1,5 @@
-import type { Breakpoint } from '@events-helsinki/core';
 import classNames from 'classnames';
+import type { Breakpoint } from 'events-helsinki-core';
 import capitalize from 'lodash/capitalize';
 import React from 'react';
 

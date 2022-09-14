@@ -1,4 +1,4 @@
-import { isClient } from '@events-helsinki/core';
+import { isClient } from 'events-helsinki-core';
 import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
 import React from 'react';

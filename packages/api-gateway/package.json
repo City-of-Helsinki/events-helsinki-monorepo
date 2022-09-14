@@ -1,5 +1,5 @@
 {
-  "name": "@events-helsinki/api-gateway",
+  "name": "events-helsinki-api-gateway",
   "version": "1.2.1",
   "license": "MIT",
   "private": true,

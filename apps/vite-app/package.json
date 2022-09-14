@@ -17,9 +17,9 @@
   "dependencies": {
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
-    "@events-helsinki/common-i18n": "workspace:^",
-    "@events-helsinki/core-old": "workspace:^",
-    "@events-helsinki/ui-lib": "workspace:^",
+    "events-helsinki-common-i18n": "workspace:^",
+    "events-helsinki-core-old": "workspace:^",
+    "events-helsinki-ui-lib": "workspace:^",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

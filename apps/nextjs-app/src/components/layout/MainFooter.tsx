@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import GithubIcon from '@events-helsinki/ui-lib/icons/social/github.svg';
+import GithubIcon from 'events-helsinki-ui-lib/icons/social/github.svg';
 import type { FC } from 'react';
 import FooterWaves from '@/public/images/layout/footer-waves.svg';
 

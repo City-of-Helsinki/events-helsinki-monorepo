@@ -1,5 +1,5 @@
-import { DATE_TYPES, translateValue } from '@events-helsinki/core';
 import classNames from 'classnames';
+import { DATE_TYPES, translateValue } from 'events-helsinki-core';
 import { IconCalendar } from 'hds-react';
 import React from 'react';
 

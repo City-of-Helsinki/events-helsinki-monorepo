@@ -1,5 +1,5 @@
 {
-  "name": "@events-helsinki/db-main-prisma",
+  "name": "events-helsinki-db-main-prisma",
   "version": "2.12.1",
   "license": "MIT",
   "private": true,

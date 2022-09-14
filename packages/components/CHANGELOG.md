@@ -1,1 +1,1 @@
-# @events-helsinki/components
+# events-helsinki-components

@@ -1,4 +1,4 @@
-# @events-helsinki/core
+# events-helsinki-core
 
 <p align="left">
   <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions?query=workflow%3ACI">

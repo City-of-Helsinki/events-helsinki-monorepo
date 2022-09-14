@@ -22,16 +22,16 @@
       "@/lib/*": ["./src/lib/*"],
       "@/routes/*": ["./src/routes/*"],
       "@/test-utils": ["./config/jest/test-utils"],
-      "@events-helsinki/common-i18n": [
+      "events-helsinki-common-i18n": [
         "../../../packages/common-i18n/src/index"
       ],
-      "@events-helsinki/common-i18n/locales/*": [
+      "events-helsinki-common-i18n/locales/*": [
         "../../../packages/common-i18n/src/locales/*"
       ],
-      "@events-helsinki/ui-lib/*": ["../../packages/ui-lib/src/*"],
-      "@events-helsinki/ui-lib": ["../../packages/ui-lib/src/index"],
-      "@events-helsinki/core-old/*": ["../../packages/core-old/src/*"],
-      "@events-helsinki/core-old": ["../../packages/core-old/src/index"]
+      "events-helsinki-ui-lib/*": ["../../packages/ui-lib/src/*"],
+      "events-helsinki-ui-lib": ["../../packages/ui-lib/src/index"],
+      "events-helsinki-core-old/*": ["../../packages/core-old/src/*"],
+      "events-helsinki-core-old": ["../../packages/core-old/src/index"]
     }
   },
   "exclude": [

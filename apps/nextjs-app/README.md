@@ -18,7 +18,7 @@ Basic demo nextjs nextjs-app, part of the [nextjs-monorepo-example](https://gith
 ## Quick start
 
 > For rest/api database access be sure to start `docker-compose up main-db`,
-> see detailed instructions (seeding, docker, supabase...) in the [@events-helsinki/db-main-prisma README](https://github.com/belgattitude/nextjs-monorepo-example/blob/main/packages/db-main-prisma/README.md).
+> see detailed instructions (seeding, docker, supabase...) in the [events-helsinki-db-main-prisma README](https://github.com/belgattitude/nextjs-monorepo-example/blob/main/packages/db-main-prisma/README.md).
 
 ```bash
 $ yarn install
@@ -46,9 +46,9 @@ This app relies on packages in the monorepo, see detailed instructions in [READM
 ```json5
 {
   dependencies: {
-    "@events-helsinki/core-old": "workspace:*",
-    "@events-helsinki/db-main-prisma": "workspace:*",
-    "@events-helsinki/ui-lib": "workspace:*",
+    "events-helsinki-core-old": "workspace:*",
+    "events-helsinki-db-main-prisma": "workspace:*",
+    "events-helsinki-ui-lib": "workspace:*",
   },
 }
 ```
@@ -60,14 +60,14 @@ And their counterparts in [tsconfig.json](./tsconfig.json)
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@events-helsinki/ui-lib/*": ["../../../packages/ui-lib/src/*"],
-      "@events-helsinki/ui-lib": ["../../../packages/ui-lib/src/index"],
-      "@events-helsinki/core-old/*": ["../../../packages/core-old/src/*"],
-      "@events-helsinki/core-old": ["../../../packages/core-old/src/index"],
-      "@events-helsinki/db-main-prisma/*": [
+      "events-helsinki-ui-lib/*": ["../../../packages/ui-lib/src/*"],
+      "events-helsinki-ui-lib": ["../../../packages/ui-lib/src/index"],
+      "events-helsinki-core-old/*": ["../../../packages/core-old/src/*"],
+      "events-helsinki-core-old": ["../../../packages/core-old/src/index"],
+      "events-helsinki-db-main-prisma/*": [
         "../../../packages/db-main-prisma/src/*",
       ],
-      "@events-helsinki/db-main-prisma": [
+      "events-helsinki-db-main-prisma": [
         "../../../packages/db-main-prisma/src/index",
       ],
     },

@@ -1,5 +1,5 @@
 {
-  "name": "@events-helsinki/core",
+  "name": "events-helsinki-core",
   "version": "0.0.1",
   "license": "MIT",
   "homepage": "https://github.com/City-of-Helsinki/events-helsinki-monorepo",
@@ -25,7 +25,9 @@
     "typecheck": "tsc --project ./tsconfig.json --noEmit",
     "test": "TZ=Europe/Helsinki vitest run",
     "test-watch": "TZ=Europe/Helsinki vitest watch --ui",
-    "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --fix"
+    "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --fix",
+    "publish-canary": "node ./scripts/publish-canary.js",
+    "publish-stable": "yarn build && node ./scripts/publish-stable.js"
   },
   "dependencies": {
     "@tsed/exceptions": "^6.100.3",
@@ -60,7 +62,9 @@
     "@vitest/coverage-istanbul": "0.23.1",
     "@vitest/ui": "0.23.1",
     "cross-env": "7.0.3",
+    "edit-json-file": "1.7.0",
     "eslint": "8.22.0",
+    "git-rev-sync": "3.0.2",
     "happy-dom": "6.0.4",
     "jest": "29.0.2",
     "jest-environment-jsdom": "29.0.2",

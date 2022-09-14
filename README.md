@@ -197,7 +197,7 @@ Initialize a package.json with the name of your package.
 
 ```json5
 {
-  "name": "@events-helsinki/magnificent-poney",
+  "name": "events-helsinki-magnificent-poney",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -227,7 +227,7 @@ yarn and pnpm.
 
 ```bash
 cd apps/my-app
-yarn add @events-helsinki/magnificent-poney@'workspace:^'
+yarn add events-helsinki-magnificent-poney@'workspace:^'
 ```
 
 Inspiration can be found in [apps/nextjs-app/package.json](./apps/nextjs-app/package.json).
@@ -239,7 +239,7 @@ Inspiration can be found in [apps/nextjs-app/package.json](./apps/nextjs-app/pac
 {
   "name": "my-app",
   "dependencies": {
-    "@events-helsinki/magnificient-poney": "workspace:^",
+    "events-helsinki-magnificient-poney": "workspace:^",
   },
 }
 ```
@@ -264,10 +264,10 @@ Inspiration can be found in [apps/nextjs-app/tsconfig.json](./apps/nextjs-app/ts
       // regular app aliases
       "@/components/*": ["./components/*"],
       // packages aliases, relative to app_directory/baseUrl
-      "@events-helsinki/magnificent-poney/*": [
+      "events-helsinki-magnificent-poney/*": [
         "../../../packages/magnificent-poney/src/*",
       ],
-      "@events-helsinki/magnificent-poney": [
+      "events-helsinki-magnificent-poney": [
         "../../../packages/magnificent-poney/src/index",
       ],
     },
@@ -279,7 +279,7 @@ Inspiration can be found in [apps/nextjs-app/tsconfig.json](./apps/nextjs-app/ts
 >
 > - Don't try to set aliases in the global tsonfig.base.json to keep strict with
 >   graph dependencies.
-> - The **star** in `@events-helsinki/magnificent-poney/*` allows you to import subfolders. If you use
+> - The **star** in `events-helsinki-magnificent-poney/*` allows you to import subfolders. If you use
 >   a barrel file (index.ts), the alias with star can be removed.
 
 </details>
@@ -333,7 +333,7 @@ const nextConfig = {
 
 #### Step 3.4: Using the package
 
-The packages are now linked to your app, just import them like regular packages: `import { poney } from '@events-helsinki/magnificent-poney'`.
+The packages are now linked to your app, just import them like regular packages: `import { poney } from 'events-helsinki-magnificent-poney'`.
 
 ### 4. Publishing
 

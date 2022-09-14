@@ -10,10 +10,10 @@
     "jsxImportSource": "@emotion/react",
     "incremental": true,
     "paths": {
-      "@events-helsinki/ui-lib/*": ["../../../packages/ui-lib/src/*"],
-      "@events-helsinki/ui-lib": ["../../../packages/ui-lib/src/index"],
-      "@events-helsinki/core-old/*": ["../../../packages/core-old/src/*"],
-      "@events-helsinki/core-old": ["../../../packages/core-old/src/index"]
+      "events-helsinki-ui-lib/*": ["../../../packages/ui-lib/src/*"],
+      "events-helsinki-ui-lib": ["../../../packages/ui-lib/src/index"],
+      "events-helsinki-core-old/*": ["../../../packages/core-old/src/*"],
+      "events-helsinki-core-old": ["../../../packages/core-old/src/index"]
     }
   },
   "exclude": ["**/node_modules", "**/.*/", "dist"],

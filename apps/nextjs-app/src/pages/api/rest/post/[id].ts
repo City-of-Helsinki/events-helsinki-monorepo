@@ -1,8 +1,8 @@
-import { Asserts } from '@events-helsinki/core-old';
-import { JsonApiResponseFactory } from '@events-helsinki/core-old/api/json-api';
-import { JsonApiErrorFactory } from '@events-helsinki/core-old/api/json-api/json-api-error.factory';
-import { StringConvert } from '@events-helsinki/core-old/utils/string-convert';
 import { BadRequest, MethodNotAllowed } from '@tsed/exceptions';
+import { Asserts } from 'events-helsinki-core-old';
+import { JsonApiResponseFactory } from 'events-helsinki-core-old/api/json-api';
+import { JsonApiErrorFactory } from 'events-helsinki-core-old/api/json-api/json-api-error.factory';
+import { StringConvert } from 'events-helsinki-core-old/utils/string-convert';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PostRepositorySsr } from '@/backend/api/rest/post-repository.ssr';
 import { prismaClient } from '@/backend/config/container.config';

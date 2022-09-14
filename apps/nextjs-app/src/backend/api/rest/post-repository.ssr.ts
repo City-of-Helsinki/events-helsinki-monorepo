@@ -1,7 +1,7 @@
-import type { UnPromisify } from '@events-helsinki/core-old';
-import { Asserts } from '@events-helsinki/core-old';
-import type { PrismaClientDbMain } from '@events-helsinki/db-main-prisma';
 import { InternalServerError, NotFound } from '@tsed/exceptions';
+import type { UnPromisify } from 'events-helsinki-core-old';
+import { Asserts } from 'events-helsinki-core-old';
+import type { PrismaClientDbMain } from 'events-helsinki-db-main-prisma';
 
 export type GetPosts = UnPromisify<
   ReturnType<typeof PostRepositorySsr['prototype']['getPosts']>

@@ -1,5 +1,5 @@
 // To test out support for emotion-11/styled in storybook
-import { isNonEmptyString } from '@events-helsinki/core-old';
+import { isNonEmptyString } from 'events-helsinki-core-old';
 import type { FC } from 'react';
 import * as S from './BasicCard.styles';
 

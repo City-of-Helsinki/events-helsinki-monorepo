@@ -6,5 +6,5 @@ export * from './utils/typeguards';
 export type { UnPromisify } from './utils/type-utils';
 
 export const sayHello = (name: string): string => {
-  return `I'm the @events-helsinki/ui-lib component telling ${name} !`;
+  return `I'm the events-helsinki-ui-lib component telling ${name} !`;
 };

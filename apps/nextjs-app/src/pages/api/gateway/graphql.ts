@@ -1,5 +1,5 @@
-import { getBuiltMesh } from '@events-helsinki/api-gateway';
 import { createServer } from '@graphql-yoga/node';
+import { getBuiltMesh } from 'events-helsinki-api-gateway';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 async function buildServer() {

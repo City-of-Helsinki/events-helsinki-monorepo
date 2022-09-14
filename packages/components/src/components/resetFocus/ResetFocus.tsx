@@ -1,4 +1,4 @@
-import { isClient } from '@events-helsinki/core';
+import { isClient } from 'events-helsinki-core';
 import React from 'react';
 import useRouterFromConfig from '../../hooks/useRouterFromConfig';
 

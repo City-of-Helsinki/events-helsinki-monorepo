@@ -1,4 +1,4 @@
-import { isClient } from '@events-helsinki/core';
+import { isClient } from 'events-helsinki-core';
 import React from 'react';
 
 const useWindowSize = (): { heigh?: number; width?: number } => {

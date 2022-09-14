@@ -1,11 +1,11 @@
-# @events-helsinki/ui-lib
+# events-helsinki-ui-lib
 
 ## 3.14.3
 
 ### Patch Changes
 
 - Updated dependencies []:
-  - @events-helsinki/core-old@3.14.1
+  - events-helsinki-core-old@3.14.1
 
 ## 3.14.2
 
@@ -14,14 +14,14 @@
 - [#2214](https://github.com/belgattitude/nextjs-monorepo-example/pull/2214) [`62818ba`](https://github.com/belgattitude/nextjs-monorepo-example/commit/62818badff67ce032a209fe9217c319271833ddc) Thanks [@belgattitude](https://github.com/belgattitude)! - Speedup and clean yarn install on CI
 
 - Updated dependencies [[`62818ba`](https://github.com/belgattitude/nextjs-monorepo-example/commit/62818badff67ce032a209fe9217c319271833ddc)]:
-  - @events-helsinki/core-old@3.14.1
+  - events-helsinki-core-old@3.14.1
 
 ## 3.14.1
 
 ### Patch Changes
 
 - Updated dependencies []:
-  - @events-helsinki/core-old@3.14.0
+  - events-helsinki-core-old@3.14.0
 
 ## 3.14.0
 
@@ -34,7 +34,7 @@
 ### Patch Changes
 
 - Updated dependencies []:
-  - @events-helsinki/core-old@3.14.0
+  - events-helsinki-core-old@3.14.0
 
 ## 3.13.0
 
@@ -45,21 +45,21 @@
 ### Patch Changes
 
 - Updated dependencies [[`5ad462a`](https://github.com/belgattitude/nextjs-monorepo-example/commit/5ad462a9a621564366c7a0ef0a77899fc855de85)]:
-  - @events-helsinki/core-old@3.14.0
+  - events-helsinki-core-old@3.14.0
 
 ## 3.12.2
 
 ### Patch Changes
 
 - Updated dependencies []:
-  - @events-helsinki/core-old@3.13.0
+  - events-helsinki-core-old@3.13.0
 
 ## 3.12.1
 
 ### Patch Changes
 
 - Updated dependencies []:
-  - @events-helsinki/core-old@3.13.0
+  - events-helsinki-core-old@3.13.0
 
 ## 3.12.0
 
@@ -70,7 +70,7 @@
 ### Patch Changes
 
 - Updated dependencies [[`9f2c2d0`](https://github.com/belgattitude/nextjs-monorepo-example/commit/9f2c2d049cfb87a3023a38b096f07f998862e3f6)]:
-  - @events-helsinki/core-old@3.13.0
+  - events-helsinki-core-old@3.13.0
 
 ## 3.11.0
 
@@ -81,7 +81,7 @@
 ### Patch Changes
 
 - Updated dependencies [[`ee0a3db`](https://github.com/belgattitude/nextjs-monorepo-example/commit/ee0a3dbd664c33d7149302ae3f776951dbd50492)]:
-  - @events-helsinki/core-old@3.12.0
+  - events-helsinki-core-old@3.12.0
 
 ## 3.10.0
 

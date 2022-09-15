@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./src",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
@@ -10,26 +9,18 @@
     "incremental": true,
     "paths": {
       "@/test-utils": ["../config/tests/test-utils"],
-      "events-helsinki-core": ["../../../packages/core/src/index"],
+      "events-helsinki-core/*": ["../../core/src/*"],
+      "events-helsinki-core": ["../../core/src/index"],
       "events-helsinki-common-i18n": [
-        "../../../packages/common-i18n/src/index"
+        "../../common-i18n/src/index"
       ],
-      "events-helsinki-common-i18n/locales/*": [
-        "../../../packages/common-i18n/src/locales/*"
+      "events-helsinki-common-i18n/*": [
+        "../../common-i18n/src/*"
       ]
     }
   },
   "include": [
-    "**/*.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.mts",
-    "**/*.js",
-    "**/*.cjs",
-    "**/*.mjs",
-    "**/*.jsx",
-    "**/*.json"
+    "src/types.d/*.d.ts",
   ],
   "exclude": ["**/node_modules", "**/.*/", "dist", "build", "**/__tests__/*", "**/tests/*", "config"],
-  "types": ["vitest/globals"]
 }

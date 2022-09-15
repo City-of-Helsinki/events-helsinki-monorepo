@@ -30,8 +30,6 @@
     "publish-stable": "yarn build && node ../../scripts/publish-stable.js"
   },
   "dependencies": {
-    "@tsed/exceptions": "^6.100.3",
-    "dequal": "^2.0.0",
     "ics": "2.40.0"
   },
   "peerDependencies": {

@@ -6,9 +6,9 @@ import type { Language } from '../types';
  */
 
 type LocalizedObject = {
-  en: string;
-  fi: string;
-  sv: string;
+  en?: string | null;
+  fi?: string | null;
+  sv?: string | null;
 };
 
 const getLocalizedString = (

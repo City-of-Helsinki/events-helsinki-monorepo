@@ -16,7 +16,7 @@ i18n.use(initReactI18next).init({
   interpolation: {
     escapeValue: false, // not needed for react!!
   },
-  // Let empty so you can test on translation keys rather than translated strings
+  // todo add translations from json files
   resources: {
     fi: { common: {} } as Record<I18nNamespace, Record<string, never>>,
   },

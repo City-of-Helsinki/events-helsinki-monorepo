@@ -1,4 +1,4 @@
-import getLocalisedString from '../getLocalisedString';
+import getLocalizedString from '../getLocalizedString';
 
 const dummyLocalisedObj = {
   en: 'text en',
@@ -6,11 +6,11 @@ const dummyLocalisedObj = {
   sv: 'text sv',
 };
 
-describe('getLocalisedString function', () => {
-  it('should return localised string', () => {
-    expect(getLocalisedString(dummyLocalisedObj, 'en')).toBe('text en');
-    expect(getLocalisedString(dummyLocalisedObj, 'fi')).toBe('text fi');
-    expect(getLocalisedString(dummyLocalisedObj, 'sv')).toBe('text sv');
+describe('getLocalizedString function', () => {
+  it('should return localised string', () => {
+    expect(getLocalizedString(dummyLocalisedObj, 'en')).toBe('text en');
+    expect(getLocalizedString(dummyLocalisedObj, 'fi')).toBe('text fi');
+    expect(getLocalizedString(dummyLocalisedObj, 'sv')).toBe('text sv');
   });
   /**
    * If logic for selecting the fallback language priority is needed,
@@ -19,10 +19,10 @@ describe('getLocalisedString function', () => {
    */
   it('should return string in first prioritized language when localised string is not found', () => {
     expect(
-      getLocalisedString({ ...dummyLocalisedObj, sv: undefined }, 'sv')
+      getLocalizedString({ ...dummyLocalisedObj, sv: undefined }, 'sv')
     ).toBe('text en');
     expect(
-      getLocalisedString(
+      getLocalizedString(
         { ...dummyLocalisedObj, en: undefined, sv: undefined },
         'sv'
       )

@@ -9,6 +9,7 @@ import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import ScrollIntoViewWithFocus from '../scrollIntoViewWithFocus/ScrollIntoViewWithFocus';
 import SearchLabel from '../search/searchLabel/SearchLabel';
 import styles from './multiSelectDropdown.module.scss';
+import { MultiselectDropdownProps } from './types';
 
 const selectAll = 'SELECT_ALL';
 
@@ -16,23 +17,6 @@ export type Option = {
   text: string;
   value: string;
 };
-
-export interface MultiselectDropdownProps {
-  checkboxName: string;
-  icon: React.ReactElement;
-  inputPlaceholder?: string;
-  inputValue?: string;
-  name: string;
-  onChange: (values: string[]) => void;
-  options: Option[];
-  renderOptionText?: (optionValue: string) => React.ReactChild;
-  selectAllText?: string;
-  setInputValue?: (newVal: string) => void;
-  showSearch?: boolean;
-  showSelectAll?: boolean;
-  title: string;
-  value: string[];
-}
 
 const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
   checkboxName,

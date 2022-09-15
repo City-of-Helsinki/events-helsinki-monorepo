@@ -1,13 +1,13 @@
-@import 'variables';
+@import 'src/styles/variables';
 
 $breakpoints: (
-  xs: $breakpoint-xs,
-  s: $breakpoint-s,
-  m: $breakpoint-m,
-  l: $breakpoint-l,
-  xl: $breakpoint-xl,
+  xs: var(--breakpoint-xs),
+  s: var(--breakpoint-s),
+  m: var(--breakpoint-m),
+  l: var(--breakpoint-l),
+  xl: var(--breakpoint-xl),
   // xxl => 1568px
-  xxl: $breakpoint-xl + $breakpoint-xs,
+  xxl:  var(--breakpoint-xl) +  var(--breakpoint-xs),
 );
 
 @mixin respond-above($breakpoint) {

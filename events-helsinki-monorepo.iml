@@ -14,10 +14,14 @@
       <excludeFolder url="file://$MODULE_DIR$/apps/remix-app/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/apps/nextjs-app/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/apps/vite-app/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/core/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/ui-lib/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/ui-lib/node_modules" />
     </content>
     <content url="file://$MODULE_DIR$/apps/nextjs-app/node_modules" />
     <content url="file://$MODULE_DIR$/apps/remix-app/node_modules" />
     <content url="file://$MODULE_DIR$/apps/vite-app/node_modules" />
+    <content url="file://$MODULE_DIR$/packages/ui-lib/node_modules" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

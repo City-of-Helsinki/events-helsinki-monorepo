@@ -23,7 +23,6 @@ export { default as ResetFocus } from './resetFocus/ResetFocus';
 export { default as ScrollIntoViewWithFocus } from './scrollIntoViewWithFocus/ScrollIntoViewWithFocus';
 export * from './search';
 export { default as Section } from './section/Section';
-export * from './shareLinks';
 export { default as SkeletonLoader } from './skeletonLoader/SkeletonLoader';
 export { default as LoadingSpinner } from './spinner/LoadingSpinner';
 export { default as SrOnly } from './srOnly/SrOnly';

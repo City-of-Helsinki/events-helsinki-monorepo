@@ -4,12 +4,12 @@
 const editJsonFile = require('edit-json-file');
 const currentGitCommit = require('git-rev-sync');
 
-const { execShellCommand, prepareToPublish } = require('./utils');
+const { execShellCommand } = require('./utils');
+const process = require('process');
+const path = require('path');
 
 async function publishCanary() {
-  await prepareToPublish();
-
-  const file = editJsonFile(`./package.json`, {
+  const file = editJsonFile(path.join(process.cwd(), 'package.json'), {
     autosave: true,
   });
   const originalVersion = file.get('version');
@@ -19,7 +19,7 @@ async function publishCanary() {
 
   try {
     const [stdout, stderr] = await execShellCommand(
-      'npm publish --tag canary --color always --registry=https://registry.npmjs.org/'
+      'npm publish --tag canary --color always --registry=https://registry.npmjs.org/ --access=public'
     );
     process.stdout.write(stdout);
     process.stderr.write(stderr);

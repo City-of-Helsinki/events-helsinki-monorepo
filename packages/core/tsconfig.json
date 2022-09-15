@@ -13,5 +13,5 @@
       "@/test-utils": ["../config/jest/test-utils"]
     }
   },
-  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
+  "exclude": ["**/node_modules", "**/.*/", "dist", "build", "**/__tests__*"]
 }

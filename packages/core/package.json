@@ -26,8 +26,8 @@
     "test": "TZ=Europe/Helsinki vitest run",
     "test-watch": "TZ=Europe/Helsinki vitest watch --ui",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --fix",
-    "publish-canary": "node ./scripts/publish-canary.js",
-    "publish-stable": "yarn build && node ./scripts/publish-stable.js"
+    "publish-canary": "node ../../scripts/publish-canary.js",
+    "publish-stable": "yarn build && node ../../scripts/publish-stable.js"
   },
   "dependencies": {
     "@tsed/exceptions": "^6.100.3",

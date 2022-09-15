@@ -1,11 +1,11 @@
-@use 'breakpoints';
-@use 'utils';
-@import 'variables';
+@use 'src/styles/breakpoints';
+@use 'src/styles/utils';
+@import 'src/styles/variables';
 
 .section {
-  --section-padding: #{$spacing-layout-l};
-  --section-background: #{$color-silver-light};
-  --section-row-gap: #{$spacing-layout-m};
+  --section-padding: #{var(--spacing-layout-l)};
+  --section-background: #{var(--color-silver-light)};
+  --section-row-gap: #{var(--spacing-layout-m)};
 
   grid-column: 1 / -1 !important;
   display: inherit;
@@ -22,7 +22,7 @@
   }
 
   &.white {
-    --section-background: #{$color-white};
+    --section-background: #{var(--color-white)};
   }
 
   &.transparent {
@@ -42,12 +42,12 @@
   }
 
   &.tight {
-    --section-row-gap: #{$spacing-layout-s};
+    --section-row-gap: #{var(--spacing-layout-s)};
   }
 
   &:last-child {
     // even out footer koros margin
-    padding-bottom: $spacing-layout-m + 1rem;
+    padding-bottom: var(--spacing-layout-m) + 1rem;
   }
 
   & .koros {

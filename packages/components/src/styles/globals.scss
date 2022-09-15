@@ -11,7 +11,7 @@ main {
   //padding: 0;
   //margin: 0;
   box-sizing: border-box;
-  font-family: $font-family-base;
+  font-family: var(--font-family-base);
 }
 
 .pageLayout {

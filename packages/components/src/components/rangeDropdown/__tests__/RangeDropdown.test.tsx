@@ -136,10 +136,14 @@ it('can be navigated with tab', async () => {
   }) as HTMLInputElement;
 
   userEvent.tab();
-  expect(minValueTextbox).toHaveFocus();
+  await waitFor(() => {
+    expect(minValueTextbox).toHaveFocus();
+  });
 
   userEvent.tab();
-  expect(maxValueTextbox).toHaveFocus();
+  await waitFor(() => {
+    expect(maxValueTextbox).toHaveFocus();
+  });
 });
 
 it('should call onChange correctly when setting fixed values with checkbox', async () => {

@@ -114,7 +114,9 @@ it('should close date selector menu with close button', async () => {
   await userEvent.click(screen.getByRole('button', { name: /sulje/i }));
 
   // Check that menu is closed
-  expect(screen.queryByTestId(testIds.menu)).not.toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.queryByTestId(testIds.menu)).not.toBeInTheDocument();
+  });
 });
 
 describe('when menu has been closed, it should reopen with', () => {

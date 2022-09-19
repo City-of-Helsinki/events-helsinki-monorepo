@@ -1,63 +1,63 @@
-@use 'src/styles/breakpoints';
-@import 'src/styles/variables';
+@use 'breakpoints';
+@import 'variables';
 
 .text {
-  color: var(--color-black-90);
+  color: $color-black-90;
 }
 .text:last-child {
   margin-bottom: 0;
 }
 
 .h1 {
-  margin: 0 0 var(--spacing-s) 0;
+  margin: 0 0 $spacing-s 0;
 
-  font-size: var(--fontsize-heading-l);
-  line-height: var(--lineheight-l);
+  font-size: $fontsize-heading-l;
+  line-height: $lineheight-l;
 
   @include breakpoints.respond-above(s) {
-    font-size: var(--fontsize-heading-xl);
+    font-size: $fontsize-heading-xl;
   }
 }
 
 .h2 {
-  margin: 0 0 var(--spacing-s) 0;
+  margin: 0 0 $spacing-s 0;
 
-  font-size: var(--fontsize-heading-l);
+  font-size: $fontsize-heading-l;
 }
 
 .h3 {
-  margin: 0 0 var(--spacing-s) 0;
+  margin: 0 0 $spacing-s 0;
 
-  font-size: var(--fontsize-heading-m);
+  font-size: $fontsize-heading-m;
   font-weight: 600;
 }
 
 .h4 {
-  margin: 0 0 var(--spacing-s) 0;
+  margin: 0 0 $spacing-s 0;
 
-  font-size: var(--fontsize-heading-s);
+  font-size: $fontsize-heading-s;
 }
 
 .h5 {
-  margin: 0 0 var(--spacing-s) 0;
+  margin: 0 0 $spacing-s 0;
 
-  font-size: var(--fontsize-heading-xs);
+  font-size: $fontsize-heading-xs;
 }
 
 .body-l {
-  margin: 0 0 var(--spacing-m) 0;
+  margin: 0 0 $spacing-m 0;
 
-  font-size: var(--fontsize-body-l);
-  line-height: var(--lineheight-l);
+  font-size: $fontsize-body-l;
+  line-height: $lineheight-l;
   white-space: pre-wrap;
 }
 
 .body {
-  font-size: var(--fontsize-body-m);
+  font-size: $fontsize-body-m;
   white-space: pre-wrap;
 }
 
 .body-xl {
-  font-size: var(--fontsize-body-xl);
+  font-size: $fontsize-body-xl;
   white-space: pre-wrap;
 }

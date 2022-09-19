@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Config } from './configContext';
+import type { Config } from './types';
 import configContext from './configContext';
 import defaultConfig from './defaultConfig';
 

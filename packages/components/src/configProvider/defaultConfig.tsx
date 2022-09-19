@@ -2,7 +2,7 @@ import React from 'react';
 import type { LinkProps } from 'react-helsinki-headless-cms';
 import { Link } from 'react-helsinki-headless-cms';
 
-import type { Config } from './configContext';
+import type { Config } from './types';
 
 const defaultConfig: Config = {
   t: (translationKey: string) => translationKey,

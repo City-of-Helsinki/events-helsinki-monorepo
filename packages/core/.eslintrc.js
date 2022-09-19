@@ -16,7 +16,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: 'tsconfig.json',
   },
-  ignorePatterns: [...getDefaultIgnorePatterns()],
+  ignorePatterns: [...getDefaultIgnorePatterns(), 'config'],
   extends: [
     '@events-helsinki/eslint-config-bases/typescript',
     '@events-helsinki/eslint-config-bases/sonar',

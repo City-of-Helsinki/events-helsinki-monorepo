@@ -9,7 +9,7 @@ import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import ScrollIntoViewWithFocus from '../scrollIntoViewWithFocus/ScrollIntoViewWithFocus';
 import SearchLabel from '../search/searchLabel/SearchLabel';
 import styles from './multiSelectDropdown.module.scss';
-import { MultiselectDropdownProps } from './types';
+import type { MultiselectDropdownProps } from './types';
 
 const selectAll = 'SELECT_ALL';
 

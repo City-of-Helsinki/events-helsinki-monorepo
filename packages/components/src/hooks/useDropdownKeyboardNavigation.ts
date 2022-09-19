@@ -43,10 +43,9 @@ const useDropdownKeyboardNavigation = ({
     const active = document.activeElement;
     const current = container && container.current;
 
-    if (current && active instanceof Node && current.contains(active)) {
-      return true;
-    }
-    return false;
+    return Boolean(
+      current && active instanceof Node && current.contains(active)
+    );
   }, [container]);
 
   const handleKeyDown = React.useCallback(

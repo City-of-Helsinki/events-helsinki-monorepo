@@ -1,5 +1,5 @@
 import React from 'react';
-import { Config } from './types'
+import type { Config } from './types';
 
 const configContext = React.createContext<Config>({} as Config);
 

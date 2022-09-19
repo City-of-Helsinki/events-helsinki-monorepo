@@ -50,12 +50,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   const internalStartDate = parseDate(internalStartDateString);
   const internalEndDate = parseDate(internalEndDateString);
 
-  const endDateIsBeforeStartDate =
+  const endDateIsBeforeStartDate = Boolean(
     isValidDate(internalStartDate) &&
-    isValidDate(internalEndDate) &&
-    isBefore(internalEndDate, internalStartDate)
-      ? true
-      : false;
+      isValidDate(internalEndDate) &&
+      isBefore(internalEndDate, internalStartDate)
+  );
 
   React.useEffect(() => {
     if (!startDate && !endDate) {

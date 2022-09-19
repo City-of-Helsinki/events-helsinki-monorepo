@@ -1,10 +1,9 @@
 import NProgress from 'nprogress';
 import { useEffect } from 'react';
 import useRouterFromConfig from '../../hooks/useRouterFromConfig';
-import { Logger } from './types';
+import type { Logger } from './types';
 
 function TopProgressBar(logger: Logger) {
-
   const router = useRouterFromConfig();
 
   const handleStart = (url: string) => {

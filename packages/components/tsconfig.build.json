@@ -9,5 +9,6 @@
     "jsxFactory": "",
     "jsxFragmentFactory": ""
   },
+  "include": ["src/**/*"],
   "exclude": ["**/*.stories.tsx", "**/*.stories.mdx", ".storybook/**", "dist", "**/__tests__*"]
 }

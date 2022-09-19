@@ -7,6 +7,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "jsx": "react-jsx",
+    "noEmit": false,
     "incremental": true,
     "paths": {
       "@/test-utils": ["../config/tests/test-utils"],
@@ -20,8 +21,5 @@
       ]
     }
   },
-  "include": [
-    "src/types.d/*.d.ts",
-  ],
-  "exclude": ["**/node_modules", "**/.*/", "dist", "build", "**/__tests__/*", "**/tests/*", "config"],
+  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
 }

@@ -9,5 +9,6 @@
     "jsxFactory": "",
     "jsxFragmentFactory": ""
   },
+  "include": ["src/**/*"],
   "exclude": ["dist", "**/__tests__/*"]
 }

@@ -1,5 +1,5 @@
-@use 'breakpoints';
-@import 'variables';
+@use 'src/styles/breakpoints';
+@import 'src/styles/variables';
 
 .box {
   --width: 100%;

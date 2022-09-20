@@ -1,4 +1,4 @@
-@import 'breakpoints';
+@import 'src/styles/breakpoints';
 
 .aboveXs {
   @include respond_below(xs) {

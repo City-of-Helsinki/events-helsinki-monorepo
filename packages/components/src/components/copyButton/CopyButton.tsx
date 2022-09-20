@@ -6,7 +6,7 @@ import useResetState from '../../hooks/useResetState';
 const MessageDisplayTime = 4000; // 4s
 
 type ButtonProps = JSX.IntrinsicElements['button'];
-interface Props extends ButtonProps {
+export interface Props extends ButtonProps {
   string: string;
   successClass?: string;
   successMessage: React.ReactNode;

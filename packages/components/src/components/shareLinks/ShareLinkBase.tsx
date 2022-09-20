@@ -3,7 +3,7 @@ import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
 import React from 'react';
 
-interface Props {
+export interface Props {
   linkLabel: string;
   icon: ReactNode;
   url: string;

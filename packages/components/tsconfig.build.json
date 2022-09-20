@@ -2,13 +2,12 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src",
     "target": "esnext",
     "module": "esnext",
     "jsx": "react-jsx",
     "jsxFactory": "",
     "jsxFragmentFactory": ""
   },
-  "include": ["src/**/*"],
-  "exclude": ["**/*.stories.tsx", "**/*.stories.mdx", ".storybook/**", "dist", "**/__tests__*"]
+  "include": ["src"],
+  "exclude": ["**/*.stories.tsx", "**/*.stories.mdx", ".storybook/**", "dist", "**/__tests__/**"]
 }

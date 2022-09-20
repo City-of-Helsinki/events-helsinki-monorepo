@@ -11,8 +11,8 @@ import {
   fireEvent,
   act,
 } from '@/test-utils';
-import type { MultiselectDropdownProps } from '../MultiSelectDropdown';
 import MultiSelectDropdown from '../MultiSelectDropdown';
+import type { MultiselectDropdownProps } from '../types';
 
 const onChange = jest.fn();
 const options = [

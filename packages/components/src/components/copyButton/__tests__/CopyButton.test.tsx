@@ -1,5 +1,6 @@
 import React from 'react';
 import { act, fireEvent, render, screen } from '@/test-utils';
+import type { Props } from '../CopyButton';
 import CopyButton from '../CopyButton';
 
 // `copy-to-clipboard` is not jsdom compatible so we are replacing it with a
@@ -14,7 +15,7 @@ const defaultProps = {
   string: testString,
   successMessage: testMessage,
 };
-const renderComponent = (props) =>
+const renderComponent = (props?: Partial<Props>) =>
   render(<CopyButton {...defaultProps} {...props} />);
 
 it('should show success message when copying succeeds that displays for 4 seconds', () => {

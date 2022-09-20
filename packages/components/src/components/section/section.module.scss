@@ -1,6 +1,6 @@
-@use 'breakpoints';
-@use 'utils';
-@import 'variables';
+@use 'src/styles/breakpoints';
+@use 'src/styles/utils';
+@import 'src/styles/variables';
 
 .section {
   --section-padding: #{$spacing-layout-l};

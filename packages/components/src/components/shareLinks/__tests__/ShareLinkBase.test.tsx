@@ -1,21 +1,26 @@
 import React from 'react';
 
 import { fireEvent, render, screen } from '@/test-utils';
+
 import ShareLinkBase from '../ShareLinkBase';
-const renderComponent = (props) => render(<ShareLinkBase {...props} />);
+
+const renderComponent = (props: any) => render(<ShareLinkBase {...props} />);
 const testLabel = 'Share Link';
 const testWindowName = 'Window name';
 
-let jestOpen = null;
+let jestOpen: typeof window.open;
 
 beforeAll(() => {
   jestOpen = window.open;
   // eslint-disable-next-line @typescript-eslint/no-empty-function
+  // @ts-ignore
   window.open = () => {};
 });
 
 afterAll(() => {
-  window.open = jestOpen;
+  if (jestOpen) {
+    window.open = jestOpen;
+  }
 });
 
 it('should apply an aria label', () => {

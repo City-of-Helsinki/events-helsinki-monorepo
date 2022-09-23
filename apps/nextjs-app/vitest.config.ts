@@ -5,15 +5,19 @@ import { defineConfig } from 'vitest/config';
 
 const testFiles = ['./src/**/*.test.{js,jsx,ts,tsx}'];
 
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 export default defineConfig({
   plugins: [
+    // @ts-ignore
     react({
       jsxImportSource: '@emotion/react',
       babel: {
         plugins: ['@emotion/babel-plugin'],
       },
     }),
+    // @ts-ignore
     tsconfigPaths(),
+    // @ts-ignore
     svgr({
       // Set it to `true` to export React component as default.
       // Notice that it will override the default behavior of Vite.

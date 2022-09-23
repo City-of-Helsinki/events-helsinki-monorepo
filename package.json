@@ -58,7 +58,8 @@
     "check:install": "yarn dlx @yarnpkg/doctor@3.1.4 .",
     "check:renovate:config": "docker run -v renovate.json5:/usr/src/app/renovate.json5 -it renovate/renovate renovate-config-validator",
     "install:playwright": "playwright install",
-    "postinstall": "is-ci || yarn husky install"
+    "postinstall": "is-ci || yarn husky install",
+    "copy:monorepo": "rm -rf node_modules/events-helsinki-core/*; cp -rf packages/core/dist/* node_modules/events-helsinki-core; rm -rf node_modules/events-helsinki-components/*; cp -rf packages/components/dist/* node_modules/events-helsinki-components"
   },
   "dependencies": {
     "cross-env": "7.0.3"

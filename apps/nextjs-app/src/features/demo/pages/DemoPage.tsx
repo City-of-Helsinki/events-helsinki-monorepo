@@ -1,3 +1,4 @@
+import { Container, Text } from 'events-helsinki-components';
 import { sayHello } from 'events-helsinki-core-old';
 import { AsyncMessage, Message } from 'events-helsinki-ui-lib';
 import { useTranslation } from 'next-i18next';
@@ -5,7 +6,6 @@ import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import type { FC } from 'react';
 import { Banner } from '@/components/Banner';
-import { MainLayout } from '@/components/layout/MainLayout';
 import { DemoMuiBlock, Jumbotron, PoetryBlock } from '../blocks';
 import { demoConfig } from '../demo.config';
 
@@ -18,9 +18,9 @@ export const DemoPage: FC = () => {
         title={t('demo:page.title')}
         description="Web-app nextjs monorepo example, https://github.com/belgattitude/nextjs-monorepo-example"
       />
-      <MainLayout>
+      <Container>
         <Banner />
-        <h3>I'm the web-app</h3>
+        <Text variant="h2">I'm the web-app</Text>
         <Jumbotron />
         <ul>
           <li>{`Foo says: ${sayHello(
@@ -45,7 +45,7 @@ export const DemoPage: FC = () => {
         <DemoMuiBlock />
         <div className={'pt-8'} />
         <PoetryBlock />
-      </MainLayout>
+      </Container>
     </>
   );
 };

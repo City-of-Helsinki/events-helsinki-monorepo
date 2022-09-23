@@ -1,4 +1,3 @@
-export * from './headless-cms';
 export * from './season';
 export { default as buildQueryFromObject } from './buildQueryFromObject';
 export * from './dateUtils';

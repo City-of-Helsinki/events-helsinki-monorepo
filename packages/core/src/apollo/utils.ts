@@ -1,7 +1,7 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { LanguageCodeEnum } from 'react-helsinki-headless-cms/apollo';
 
 import type { Connection, MenuItem } from '../types';
+import { LanguageCodeEnum } from '../types';
 
 export const excludeArgs =
   (excludedArgs: string[]) => (args: Record<string, unknown> | null) =>

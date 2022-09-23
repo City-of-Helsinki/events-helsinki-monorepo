@@ -3,6 +3,18 @@ import type { AUTOSUGGEST_TYPES } from '../constants';
 
 export type Language = 'en' | 'fi' | 'sv';
 
+// TODO: Copy-pasted from react-helsinki-headless-cms.
+// For some reason next build fails when there is dependency to rhhc.
+/** Enum of all available language codes */
+/* eslint-disable @typescript-eslint/naming-convention */
+export enum LanguageCodeEnum {
+  En = 'EN',
+  /** The default locale of the site */
+  Fi = 'FI',
+  Sv = 'SV',
+}
+/* eslint-enable @typescript-eslint/naming-convention */
+
 export type OptionType = {
   label: string;
   value: string;
@@ -50,3 +62,5 @@ export type Category = {
   text: string;
   value: string;
 };
+
+export type PageInfo = { uri: string; slug: string; locale: string };

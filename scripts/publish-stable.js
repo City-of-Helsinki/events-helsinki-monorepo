@@ -3,8 +3,6 @@
 const { execShellCommand, prepareToPublish } = require('./utils');
 
 async function publish() {
-  await prepareToPublish();
-
   try {
     const [stdout, stderr] = await execShellCommand(
       'npm publish --color always --registry=https://registry.npmjs.org/'

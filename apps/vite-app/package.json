@@ -20,8 +20,8 @@
     "events-helsinki-common-i18n": "workspace:^",
     "events-helsinki-core-old": "workspace:^",
     "events-helsinki-ui-lib": "workspace:^",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "18.1.0",
+    "react-dom": "18.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.19.0",

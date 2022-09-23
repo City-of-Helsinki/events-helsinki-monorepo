@@ -2950,8 +2950,8 @@ __metadata:
     eslint-plugin-testing-library: "npm:^5.6.1"
     graphql: "npm:16.6.0"
     prettier: "npm:^2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
+    react: "npm:18.1.0"
+    react-dom: "npm:18.1.0"
     rimraf: "npm:3.0.2"
     typescript: "npm:4.8.2"
   peerDependencies:
@@ -15546,6 +15546,40 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"events-helsinki-components@npm:0.0.3":
+  version: 0.0.3
+  resolution: "events-helsinki-components@npm:0.0.3"
+  dependencies:
+    "@apollo/client": "npm:3.6.9"
+    "@types/react-datepicker": "npm:4.4.2"
+    classnames: "npm:2.3.1"
+    copy-to-clipboard: "npm:3.3.2"
+    events-helsinki-core: "workspace:^"
+    hds-design-tokens: "npm:2.3.0"
+    hds-react: "npm:1.15.0"
+    i18next: "npm:21.9.1"
+    next: "npm:12.2.5"
+    next-i18next: "npm:12.0.1"
+    nprogress: "npm:0.2.0"
+    query-string: "npm:7.1.1"
+    react: "npm:>=17.0.2"
+    react-content-loader: "npm:6.2.0"
+    react-datepicker: "npm:4.8.0"
+    react-dom: "npm:>=17.0.2"
+    react-i18next: "npm:11.18.6"
+    sanitize-html: "npm:2.7.1"
+  peerDependencies:
+    "@types/react": ^17.0.44 || ^18.0.0
+    "@types/react-dom": ^17.0.44 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: d2e73f529396842c842494fc16ab974d7bbeeb12d469387328b6cb0f6b8d6b050846d6b2b28884c1af229f13676b4942d1cd90105820af29e483a1b920e26c11
+  languageName: node
+  linkType: hard
+
 "events-helsinki-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "events-helsinki-components@workspace:packages/components"
@@ -15604,7 +15638,7 @@ __metadata:
     react-content-loader: "npm:6.2.0"
     react-datepicker: "npm:4.8.0"
     react-dom: "npm:>=17.0.2"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha10"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha10-canary-1115cca"
     react-i18next: "npm:11.18.6"
     require-from-string: "npm:2.0.2"
     rimraf: "npm:3.0.2"
@@ -15658,8 +15692,8 @@ __metadata:
     microbundle: "npm:0.15.1"
     npm-run-all: "npm:4.1.5"
     prettier: "npm:2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
+    react: "npm:18.1.0"
+    react-dom: "npm:18.1.0"
     rimraf: "npm:3.0.2"
     ts-jest: "npm:28.0.8"
     typescript: "npm:4.8.2"
@@ -15676,6 +15710,23 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
+
+"events-helsinki-core@npm:0.0.3":
+  version: 0.0.3
+  resolution: "events-helsinki-core@npm:0.0.3"
+  dependencies:
+    ics: "npm:2.40.0"
+  peerDependencies:
+    react: ^17.0.2 || ^18.0.0
+    react-dom: ^17.0.2 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 7fe334b06b394d04dce52a1b3dac44593cac98a5292b0c520dcc256f2463197829eafd0465802aaf3b1bb6f80370ae67a77ab715ea35212eca33501e0e8a7e02
+  languageName: node
+  linkType: hard
 
 "events-helsinki-core@workspace:^, events-helsinki-core@workspace:packages/core":
   version: 0.0.0-use.local
@@ -15706,8 +15757,8 @@ __metadata:
     microbundle: "npm:0.15.1"
     npm-run-all: "npm:4.1.5"
     prettier: "npm:2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
+    react: "npm:18.1.0"
+    react-dom: "npm:18.1.0"
     rimraf: "npm:3.0.2"
     ts-jest: "npm:28.0.8"
     typescript: "npm:4.8.2"
@@ -17842,7 +17893,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-react@npm:^1.15.0":
+"hds-react@npm:1.15.0, hds-react@npm:^1.15.0":
   version: 1.15.0
   resolution: "hds-react@npm:1.15.0"
   dependencies:
@@ -22987,6 +23038,8 @@ __metadata:
     eslint-plugin-testing-library: "npm:5.6.1"
     events-helsinki-api-gateway: "workspace:^"
     events-helsinki-common-i18n: "workspace:^"
+    events-helsinki-components: "npm:0.0.3"
+    events-helsinki-core: "npm:0.0.3"
     events-helsinki-core-old: "workspace:^"
     events-helsinki-db-main-prisma: "workspace:^"
     events-helsinki-ui-lib: "workspace:^"
@@ -23008,8 +23061,8 @@ __metadata:
     postcss-flexbugs-fixes: "npm:5.0.2"
     postcss-preset-env: "npm:7.8.0"
     prettier: "npm:2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
+    react: "npm:18.1.0"
+    react-dom: "npm:18.1.0"
     react-i18next: "npm:11.18.5"
     react-query: "npm:4.0.0-beta.23"
     rimraf: "npm:3.0.2"
@@ -26014,7 +26067,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.2.0, react-dom@npm:>=17.0.2":
+"react-dom@npm:18.1.0":
+  version: 18.1.0
+  resolution: "react-dom@npm:18.1.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+    scheduler: "npm:^0.22.0"
+  peerDependencies:
+    react: ^18.1.0
+  checksum: b8fdbb33e5462064e8a923b58ba529490c25f8680e040acc18b295f200fa2179ba01e1c94779a84c1c2a1d87339057bf716b061e53bd76db25dbd5c5e5d2755e
+  languageName: node
+  linkType: hard
+
+"react-dom@npm:>=17.0.2":
   version: 18.2.0
   resolution: "react-dom@npm:18.2.0"
   dependencies:
@@ -26058,9 +26123,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha10":
-  version: 1.0.0-alpha10
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha10"
+"react-helsinki-headless-cms@npm:1.0.0-alpha10-canary-1115cca":
+  version: 1.0.0-alpha10-canary-1115cca
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha10-canary-1115cca"
   dependencies:
     hds-design-tokens: "npm:^1.11.1"
     html-react-parser: "npm:^1.4.8"
@@ -26074,7 +26139,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: b3eba88d03b1e5b973d90bd1df74a5ac9589b7df530e3b6166701521e70339775b93308d323861e0d358a9430ffc6bdf793158bd761c5ac7cd3ead522c75c986
+  checksum: 4cd3662228675e6c995b3e7656b86d84a73b944ab034143d043750148aa0a73e8e23f01a8bdb9111b67eb84ec03ba4c2f420e1a5253202b878e3f678ee6630e6
   languageName: node
   linkType: hard
 
@@ -26347,7 +26412,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.2.0, react@npm:>=17.0.2":
+"react@npm:18.1.0":
+  version: 18.1.0
+  resolution: "react@npm:18.1.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+  checksum: 2ec5d96c4af7aaf531f92a61167ce433d2095bf041586b8eec4e2474ed7320b3977c762e46a778236de857619709e2547a9c3bb189b2d59faff4cf4968ad142a
+  languageName: node
+  linkType: hard
+
+"react@npm:>=17.0.2":
   version: 18.2.0
   resolution: "react@npm:18.2.0"
   dependencies:
@@ -26891,8 +26965,8 @@ __metadata:
     npm-run-all: "npm:4.1.5"
     postcss: "npm:8.4.16"
     prettier: "npm:2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
+    react: "npm:18.1.0"
+    react-dom: "npm:18.1.0"
     remix: "npm:1.7.0"
     stylelint: "npm:14.11.0"
     stylelint-config-prettier: "npm:9.0.3"
@@ -27547,6 +27621,15 @@ __metadata:
   dependencies:
     xmlchars: "npm:^2.2.0"
   checksum: 9b808a87d0de4d90544e63a482f3a67ca230574283b724fb3b42dfa16202015fbe7594e3534c08538b8a2323d38ec567f6fca0487fe5842514afa88817965764
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.22.0":
+  version: 0.22.0
+  resolution: "scheduler@npm:0.22.0"
+  dependencies:
+    loose-envify: "npm:^1.1.0"
+  checksum: de5e75075cf8de38e0dc0e04f834a4ac67e75481b72cacd56f57aff26bc4e4db46cc8388f646b25a39d32dde97780a13cc63f4e4727d61a496d49c639c8e527c
   languageName: node
   linkType: hard
 
@@ -31008,8 +31091,8 @@ __metadata:
     events-helsinki-ui-lib: "workspace:^"
     happy-dom: "npm:6.0.4"
     prettier: "npm:2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
+    react: "npm:18.1.0"
+    react-dom: "npm:18.1.0"
     rimraf: "npm:3.0.2"
     typescript: "npm:4.8.2"
     vite: "npm:3.1.0"

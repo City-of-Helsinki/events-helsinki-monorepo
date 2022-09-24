@@ -1,7 +1,7 @@
-import { AUTOSUGGEST_TYPES } from 'events-helsinki-core';
 import * as React from 'react';
 
 import { render } from '@/test-utils';
+import { AUTOSUGGEST_TYPES } from '../../../constants';
 import AutoSuggestMenu from '../AutoSuggestMenu';
 it('AutosuggestMenu matches snapshot', () => {
   const { container } = render(

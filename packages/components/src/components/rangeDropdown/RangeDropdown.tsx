@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { skipFalsyType } from 'events-helsinki-core';
 import { Checkbox, IconAngleDown, IconAngleUp, TextInput } from 'hds-react';
 import React from 'react';
 
+import { skipFalsyType } from '../../utils';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import SearchLabel from '../search/searchLabel/SearchLabel';
 import styles from './rangeDropdown.module.scss';

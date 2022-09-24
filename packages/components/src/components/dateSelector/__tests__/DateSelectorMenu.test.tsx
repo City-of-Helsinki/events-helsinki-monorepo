@@ -1,6 +1,6 @@
-import { DATE_TYPES } from 'events-helsinki-core';
 import * as React from 'react';
 import { render } from '@/test-utils';
+import { DATE_TYPES } from '../../../constants';
 import DateSelectorMenu from '../DateSelectorMenu';
 
 it('matches snapshot', () => {

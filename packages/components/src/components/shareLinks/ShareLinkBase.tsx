@@ -1,7 +1,7 @@
-import { isClient } from 'events-helsinki-core';
 import { stringify } from 'query-string';
 import type { ReactNode } from 'react';
 import React from 'react';
+import isClient from '../../utils/isClient';
 
 export interface Props {
   linkLabel: string;

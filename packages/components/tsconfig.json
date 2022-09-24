@@ -11,8 +11,6 @@
     "incremental": true,
     "paths": {
       "@/test-utils": ["../config/tests/test-utils"],
-      "events-helsinki-core/*": ["../../core/src/*"],
-      "events-helsinki-core": ["../../core/src/index"],
       "events-helsinki-common-i18n": [
         "../../common-i18n/src/index"
       ],

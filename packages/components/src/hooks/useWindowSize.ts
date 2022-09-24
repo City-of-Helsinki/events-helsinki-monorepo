@@ -1,5 +1,5 @@
-import { isClient } from 'events-helsinki-core';
 import React from 'react';
+import { isClient } from '../utils';
 
 const useWindowSize = (): { heigh?: number; width?: number } => {
   const getSize = React.useCallback(() => {

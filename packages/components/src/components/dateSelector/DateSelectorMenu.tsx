@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { translateValue } from 'events-helsinki-core';
 import { IconAngleLeft, IconAngleRight, IconCalendarPlus } from 'hds-react';
 import type { ChangeEvent, FunctionComponent, MutableRefObject } from 'react';
 import React, { useEffect } from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation'; // the locale you want
+import { translateValue } from '../../utils';
 import Checkbox from '../checkbox/Checkbox';
 import DateRangePicker from '../dateRangePicker/DateRangePicker';
 import styles from './dateSelectorMenu.module.scss';

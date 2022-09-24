@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import type { AutosuggestMenuOption } from 'events-helsinki-core';
 import { IconCross } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation';
+import type { AutosuggestMenuOption } from '../../types';
 import styles from './autosuggestMenu.module.scss';
 
 interface Props {

@@ -3,13 +3,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDir": "./src",
-    "baseUrl": "../../",
     "target": "esnext",
     "module": "esnext",
     "jsx": "react-jsx",
     "jsxFactory": "",
-    "jsxFragmentFactory": "",
-    "resolveJsonModule": true
+    "jsxFragmentFactory": ""
   },
   "include": ["src/**/*"],
   "exclude": ["**/*.stories.tsx", "**/*.stories.mdx", ".storybook/**", "dist", "**/__tests__/**"]

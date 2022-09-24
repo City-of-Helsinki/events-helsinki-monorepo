@@ -1,9 +1,10 @@
-import { formatDate, DATE_TYPES, translateValue } from 'events-helsinki-core';
 import { IconAngleDown, IconAngleUp, IconCalendarClock } from 'hds-react';
 import React from 'react';
 import type { FunctionComponent } from 'react';
+import { DATE_TYPES } from '../../constants';
 import useCommonTranslation from '../../hooks/useCommonTranslation';
 import useLocale from '../../hooks/useLocale';
+import { formatDate, translateValue } from '../../utils';
 import styles from './dateSelector.module.scss';
 import DateSelectorMenu from './DateSelectorMenu';
 

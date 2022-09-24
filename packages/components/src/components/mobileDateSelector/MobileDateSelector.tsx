@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { DATE_TYPES, translateValue } from 'events-helsinki-core';
 import { IconCalendar } from 'hds-react';
 import React from 'react';
 
+import { DATE_TYPES } from '../../constants';
 import useCommonTranslation from '../../hooks/useCommonTranslation';
+import { translateValue } from '../../utils';
 import ToggleButton from '../toggleButton/ToggleButton';
 import styles from './mobileDateSelector.module.scss';
 import MobileDateSelectorMenu from './MobileDateSelectorMenu';

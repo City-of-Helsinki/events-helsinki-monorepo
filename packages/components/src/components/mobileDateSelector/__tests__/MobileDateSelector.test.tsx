@@ -1,5 +1,4 @@
 import userEvent from '@testing-library/user-event';
-import { DATE_TYPES } from 'events-helsinki-core';
 import React from 'react';
 import {
   arrowDownKeyPressHelper,
@@ -9,6 +8,7 @@ import {
   screen,
   waitFor,
 } from '@/test-utils';
+import { DATE_TYPES } from '../../../constants';
 import MobileDateSelector from '../MobileDateSelector';
 import { testIds } from '../MobileDateSelectorMenu';
 

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import type { Breakpoint } from 'events-helsinki-core';
 import capitalize from 'lodash/capitalize';
 import React from 'react';
 
+import type { Breakpoint } from '../../types';
 import styles from './visible.module.scss';
 
 interface Props {

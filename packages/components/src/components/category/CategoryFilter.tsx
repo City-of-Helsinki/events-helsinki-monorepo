@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import type * as CSS from 'csstype';
-import type { Category } from 'events-helsinki-core';
 import { IconAngleRight } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
+import type { Category } from '../../types';
 import styles from './categoryFilter.module.scss';
 
 interface Props extends Category {

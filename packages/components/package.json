@@ -1,6 +1,6 @@
 {
   "name": "events-helsinki-components",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "homepage": "https://github.com/City-of-Helsinki/events-helsinki-monorepo",
   "repository": {
@@ -38,7 +38,6 @@
     "@types/react-datepicker": "4.4.2",
     "classnames": "2.3.1",
     "copy-to-clipboard": "3.3.2",
-    "events-helsinki-core": "workspace:^",
     "hds-design-tokens": "2.3.0",
     "hds-react": "^1.15.0",
     "i18next": "21.9.1",

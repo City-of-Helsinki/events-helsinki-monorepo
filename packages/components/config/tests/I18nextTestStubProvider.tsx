@@ -1,7 +1,7 @@
+import common from 'events-helsinki-common-i18n/locales/fi/common.json';
 import i18n from 'i18next';
 import type { FC, ReactNode } from 'react';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
-import type { I18nNamespace } from '../../src/lib/i18n';
 
 /**
  * Fully wrapped strategy for i18next, you can use stub/mocks as well
@@ -18,7 +18,7 @@ i18n.use(initReactI18next).init({
   },
   // todo add translations from json files
   resources: {
-    fi: { common: {} } as Record<I18nNamespace, Record<string, never>>,
+    fi: { common },
   },
 });
 

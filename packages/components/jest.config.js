@@ -1,5 +1,4 @@
 // @ts-check
-const { defaults: tsjPreset } = require('ts-jest/presets');
 const { pathsToModuleNameMapper } = require('ts-jest');
 
 const { getJestCachePath } = require('../../cache.config');
@@ -24,13 +23,21 @@ const config = {
   verbose: true,
   rootDir: './src',
   transform: {
-    ...tsjPreset.transform,
+    // if we would use .babelrc, next would not use swc compiler
+    '^.+\\.(js|jsx|ts|tsx)$': [
+      'babel-jest',
+      { configFile: './babel.config.test.json' },
+    ],
   },
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
     // For @testing-library/react
     '^@/test-utils$': '<rootDir>/../config/tests/test-utils',
+    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
+    // Handle image imports
+    // https://jestjs.io/docs/webpack#handling-static-assets
+    '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>.jest/__mocks__/fileMock.js`,
     ...getTsConfigBasePaths(),
   },
   // false by default, overrides in cli, ie: yarn test:unit --collect-coverage=true
@@ -43,6 +50,7 @@ const config = {
       tsconfig: './tsconfig.jest.json',
     },
   },
+  transformIgnorePatterns: ['/node_modules/', '/__mocks__/'],
 };
 
 module.exports = config;

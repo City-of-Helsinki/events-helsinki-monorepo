@@ -1,8 +1,6 @@
-import { vi } from 'vitest';
+import matchers from '@testing-library/jest-dom/matchers';
+import { vi, expect } from 'vitest';
 
-const jestCompatOverride = {
-  fn: vi.fn,
-  spyOn: vi.spyOn,
-};
+expect.extend(matchers);
 
-(global as Record<'jest', unknown>).jest = jestCompatOverride;
+(global as Record<'jest', unknown>).jest = vi;

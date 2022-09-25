@@ -46,7 +46,7 @@ This app relies on packages in the monorepo, see detailed instructions in [READM
 ```json5
 {
   dependencies: {
-    "events-helsinki-core-old": "workspace:*",
+    "events-helsinki-core": "workspace:*",
     "events-helsinki-db-main-prisma": "workspace:*",
     "events-helsinki-ui-lib": "workspace:*",
   },
@@ -62,8 +62,8 @@ And their counterparts in [tsconfig.json](./tsconfig.json)
     "paths": {
       "events-helsinki-ui-lib/*": ["../../../packages/ui-lib/src/*"],
       "events-helsinki-ui-lib": ["../../../packages/ui-lib/src/index"],
-      "events-helsinki-core-old/*": ["../../../packages/core-old/src/*"],
-      "events-helsinki-core-old": ["../../../packages/core-old/src/index"],
+      "events-helsinki-core/*": ["../../../packages/core/src/*"],
+      "events-helsinki-core": ["../../../packages/core/src/index"],
       "events-helsinki-db-main-prisma/*": [
         "../../../packages/db-main-prisma/src/*",
       ],
@@ -125,7 +125,7 @@ The keys autocompletion and typechecks are enabled in [./src/typings/react-i18ne
 │       ├── tsconfig.json    (local paths enabled)
 │       └── tailwind.config.js
 └── packages  (monorepo's packages that this app is using)
-    ├── core-old
+    ├── core
     ├── main-db-prisma
     └── ui-lib
 ```

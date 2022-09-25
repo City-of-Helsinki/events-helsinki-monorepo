@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { sayHello } from 'events-helsinki-core-old';
+import { sayHello } from 'events-helsinki-core';
 import { Message } from 'events-helsinki-ui-lib';
 import { GradientText } from 'events-helsinki-ui-lib/ux/text/GradientText';
 import type { FC } from 'react';
@@ -27,7 +27,7 @@ export const HomePage: FC = () => {
           Hello
         </GradientText>
       </p>
-      <p>{`${sayHello('Hello Remix')} from events-helsinki-core-old`}</p>
+      <p>{`${sayHello('Hello Remix')} from events-helsinki-core`}</p>
       <p>
         <Message message={'React component from events-helsinki-ui-lib'} />
       </p>

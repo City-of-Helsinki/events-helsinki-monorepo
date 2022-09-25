@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { isIsoDateString } from 'events-helsinki-core-old';
+import { isIsoDateString } from 'events-helsinki-core';
 import type { HealthCheckApiPayload } from '@/pages/api/_monitor/healthcheck';
 import packageJson from '../../../package.json';
 

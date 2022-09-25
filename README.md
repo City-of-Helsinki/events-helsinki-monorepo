@@ -47,7 +47,7 @@
     ├── common-i18n         (locales...)
     ├── components          (emotion, storybook, vitest)
     ├── core                (common utils, hooks, vitest)
-    ├── core-old            (common utils, hooks, vitest)
+    ├── core            (common utils, hooks, vitest)
     ├── db-main-prisma
     ├── eslint-config-bases (to shared eslint configs)
     └── ui-lib              (emotion, storybook, vitest)

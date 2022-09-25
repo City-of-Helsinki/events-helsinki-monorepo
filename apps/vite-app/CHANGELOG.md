@@ -6,7 +6,7 @@
 
 - Updated dependencies []:
   - events-helsinki-common-i18n@1.1.1
-  - events-helsinki-core-old@3.14.1
+  - events-helsinki-core@3.14.1
   - events-helsinki-ui-lib@3.14.3
 
 ## 0.6.4
@@ -17,7 +17,7 @@
 
 - Updated dependencies [[`62818ba`](https://github.com/belgattitude/nextjs-monorepo-example/commit/62818badff67ce032a209fe9217c319271833ddc)]:
   - events-helsinki-common-i18n@1.1.1
-  - events-helsinki-core-old@3.14.1
+  - events-helsinki-core@3.14.1
   - events-helsinki-ui-lib@3.14.2
 
 ## 0.6.3
@@ -26,7 +26,7 @@
 
 - Updated dependencies []:
   - events-helsinki-common-i18n@1.1.0
-  - events-helsinki-core-old@3.14.0
+  - events-helsinki-core@3.14.0
   - events-helsinki-ui-lib@3.14.1
 
 ## 0.6.2
@@ -42,7 +42,7 @@
 
 - Updated dependencies []:
   - events-helsinki-common-i18n@1.1.0
-  - events-helsinki-core-old@3.14.0
+  - events-helsinki-core@3.14.0
   - events-helsinki-ui-lib@3.13.1
 
 ## 0.6.0
@@ -55,7 +55,7 @@
 
 - Updated dependencies [[`5ad462a`](https://github.com/belgattitude/nextjs-monorepo-example/commit/5ad462a9a621564366c7a0ef0a77899fc855de85)]:
   - events-helsinki-common-i18n@1.1.0
-  - events-helsinki-core-old@3.14.0
+  - events-helsinki-core@3.14.0
   - events-helsinki-ui-lib@3.13.0
 
 ## 0.5.3
@@ -70,7 +70,7 @@
 ### Patch Changes
 
 - Updated dependencies []:
-  - events-helsinki-core-old@3.13.0
+  - events-helsinki-core@3.13.0
   - events-helsinki-ui-lib@3.12.2
 
 ## 0.5.1
@@ -78,7 +78,7 @@
 ### Patch Changes
 
 - Updated dependencies []:
-  - events-helsinki-core-old@3.13.0
+  - events-helsinki-core@3.13.0
   - events-helsinki-ui-lib@3.12.1
 
 ## 0.5.0
@@ -90,7 +90,7 @@
 ### Patch Changes
 
 - Updated dependencies [[`9f2c2d0`](https://github.com/belgattitude/nextjs-monorepo-example/commit/9f2c2d049cfb87a3023a38b096f07f998862e3f6)]:
-  - events-helsinki-core-old@3.13.0
+  - events-helsinki-core@3.13.0
   - events-helsinki-ui-lib@3.12.0
 
 ## 0.4.1
@@ -98,7 +98,7 @@
 ### Patch Changes
 
 - Updated dependencies [[`ee0a3db`](https://github.com/belgattitude/nextjs-monorepo-example/commit/ee0a3dbd664c33d7149302ae3f776951dbd50492)]:
-  - events-helsinki-core-old@3.12.0
+  - events-helsinki-core@3.12.0
   - events-helsinki-ui-lib@3.11.0
 
 ## 0.4.0
@@ -121,7 +121,7 @@
 ### Patch Changes
 
 - Updated dependencies [[`05291de7`](https://github.com/belgattitude/nextjs-monorepo-example/commit/05291de7deeed720e8b7271d339050116b448177)]:
-  - events-helsinki-core-old@3.11.0
+  - events-helsinki-core@3.11.0
   - events-helsinki-ui-lib@3.9.0
 
 ## 0.2.2
@@ -129,7 +129,7 @@
 ### Patch Changes
 
 - Updated dependencies [[`50e79d76`](https://github.com/belgattitude/nextjs-monorepo-example/commit/50e79d7659a13a0715e864c5b4aff3bf999afcfe)]:
-  - events-helsinki-core-old@3.10.0
+  - events-helsinki-core@3.10.0
 
 ## 0.2.1
 
@@ -147,7 +147,7 @@
 ### Patch Changes
 
 - Updated dependencies [[`5e25fab2`](https://github.com/belgattitude/nextjs-monorepo-example/commit/5e25fab2f0d620e999f536a1fb8e0ef45d56fd64)]:
-  - events-helsinki-core-old@3.9.0
+  - events-helsinki-core@3.9.0
   - events-helsinki-ui-lib@3.8.0
 
 ## 0.1.1

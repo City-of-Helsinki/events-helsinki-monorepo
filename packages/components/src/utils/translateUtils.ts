@@ -1,4 +1,5 @@
-import { camelCase, startCase } from 'lodash';
+import camelCase from 'lodash/camelCase';
+import startCase from 'lodash/startCase';
 
 const toPascalCase = (str: string) =>
   startCase(camelCase(str)).replace(/ /g, '');

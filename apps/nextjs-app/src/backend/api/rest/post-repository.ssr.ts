@@ -1,6 +1,6 @@
 import { InternalServerError, NotFound } from '@tsed/exceptions';
-import type { UnPromisify } from 'events-helsinki-core-old';
-import { Asserts } from 'events-helsinki-core-old';
+import type { UnPromisify } from 'events-helsinki-core';
+import { Asserts } from 'events-helsinki-core';
 import type { PrismaClientDbMain } from 'events-helsinki-db-main-prisma';
 
 export type GetPosts = UnPromisify<

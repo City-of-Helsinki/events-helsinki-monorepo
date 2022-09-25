@@ -1,5 +1,5 @@
 import { Container, Text } from 'events-helsinki-components';
-import { sayHello } from 'events-helsinki-core-old';
+import { sayHello } from 'events-helsinki-core';
 import { AsyncMessage, Message } from 'events-helsinki-ui-lib';
 import { useTranslation } from 'next-i18next';
 import { NextSeo } from 'next-seo';
@@ -23,9 +23,7 @@ export const DemoPage: FC = () => {
         <Text variant="h2">I'm the web-app</Text>
         <Jumbotron />
         <ul>
-          <li>{`Foo says: ${sayHello(
-            'World'
-          )} from events-helsinki-core-old`}</li>
+          <li>{`Foo says: ${sayHello('World')} from events-helsinki-core`}</li>
           <li>
             <Message
               message={'Bar react component from events-helsinki-ui-lib'}

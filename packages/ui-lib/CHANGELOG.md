@@ -5,7 +5,7 @@
 ### Patch Changes
 
 - Updated dependencies []:
-  - events-helsinki-core-old@3.14.1
+  - events-helsinki-core@3.14.1
 
 ## 3.14.2
 
@@ -14,14 +14,14 @@
 - [#2214](https://github.com/belgattitude/nextjs-monorepo-example/pull/2214) [`62818ba`](https://github.com/belgattitude/nextjs-monorepo-example/commit/62818badff67ce032a209fe9217c319271833ddc) Thanks [@belgattitude](https://github.com/belgattitude)! - Speedup and clean yarn install on CI
 
 - Updated dependencies [[`62818ba`](https://github.com/belgattitude/nextjs-monorepo-example/commit/62818badff67ce032a209fe9217c319271833ddc)]:
-  - events-helsinki-core-old@3.14.1
+  - events-helsinki-core@3.14.1
 
 ## 3.14.1
 
 ### Patch Changes
 
 - Updated dependencies []:
-  - events-helsinki-core-old@3.14.0
+  - events-helsinki-core@3.14.0
 
 ## 3.14.0
 
@@ -34,7 +34,7 @@
 ### Patch Changes
 
 - Updated dependencies []:
-  - events-helsinki-core-old@3.14.0
+  - events-helsinki-core@3.14.0
 
 ## 3.13.0
 
@@ -45,21 +45,21 @@
 ### Patch Changes
 
 - Updated dependencies [[`5ad462a`](https://github.com/belgattitude/nextjs-monorepo-example/commit/5ad462a9a621564366c7a0ef0a77899fc855de85)]:
-  - events-helsinki-core-old@3.14.0
+  - events-helsinki-core@3.14.0
 
 ## 3.12.2
 
 ### Patch Changes
 
 - Updated dependencies []:
-  - events-helsinki-core-old@3.13.0
+  - events-helsinki-core@3.13.0
 
 ## 3.12.1
 
 ### Patch Changes
 
 - Updated dependencies []:
-  - events-helsinki-core-old@3.13.0
+  - events-helsinki-core@3.13.0
 
 ## 3.12.0
 
@@ -70,7 +70,7 @@
 ### Patch Changes
 
 - Updated dependencies [[`9f2c2d0`](https://github.com/belgattitude/nextjs-monorepo-example/commit/9f2c2d049cfb87a3023a38b096f07f998862e3f6)]:
-  - events-helsinki-core-old@3.13.0
+  - events-helsinki-core@3.13.0
 
 ## 3.11.0
 
@@ -81,13 +81,13 @@
 ### Patch Changes
 
 - Updated dependencies [[`ee0a3db`](https://github.com/belgattitude/nextjs-monorepo-example/commit/ee0a3dbd664c33d7149302ae3f776951dbd50492)]:
-  - events-helsinki-core-old@3.12.0
+  - events-helsinki-core@3.12.0
 
 ## 3.10.0
 
 ### Minor Changes
 
-- [#1347](https://github.com/belgattitude/nextjs-monorepo-example/pull/1347) [`e269ada4`](https://github.com/belgattitude/nextjs-monorepo-example/commit/e269ada479151a243128612278bc0d5642e6db04) Thanks [@belgattitude](https://github.com/belgattitude)! - Example to use the core-old as dependency
+- [#1347](https://github.com/belgattitude/nextjs-monorepo-example/pull/1347) [`e269ada4`](https://github.com/belgattitude/nextjs-monorepo-example/commit/e269ada479151a243128612278bc0d5642e6db04) Thanks [@belgattitude](https://github.com/belgattitude)! - Example to use the core as dependency
 
 * [#1347](https://github.com/belgattitude/nextjs-monorepo-example/pull/1347) [`82e77f7c`](https://github.com/belgattitude/nextjs-monorepo-example/commit/82e77f7ce8a8fda3db16796685c817cb142114bb) Thanks [@belgattitude](https://github.com/belgattitude)! - Use and enforce workspace:^ protocol rather than workspace:\*
 
@@ -189,4 +189,4 @@
 
 ### Major Changes
 
-- [#39](https://github.com/belgattitude/nextjs-monorepo-example/pull/39) [`9f04b88`](https://github.com/belgattitude/nextjs-monorepo-example/commit/9f04b88d966e804ddc12e79372b3ac14f7330b86) Thanks [@belgattitude](https://github.com/belgattitude)! - Rename packages foo and bar into ui-lib and core-old
+- [#39](https://github.com/belgattitude/nextjs-monorepo-example/pull/39) [`9f04b88`](https://github.com/belgattitude/nextjs-monorepo-example/commit/9f04b88d966e804ddc12e79372b3ac14f7330b86) Thanks [@belgattitude](https://github.com/belgattitude)! - Rename packages foo and bar into ui-lib and core

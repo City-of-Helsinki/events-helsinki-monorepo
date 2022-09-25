@@ -1,5 +1,5 @@
-import type { JsonApiResponse } from 'events-helsinki-core-old/api/json-api';
-import { isJsonApiSuccessResponse } from 'events-helsinki-core-old/api/json-api';
+import type { JsonApiResponse } from 'events-helsinki-core/api/json-api';
+import { isJsonApiSuccessResponse } from 'events-helsinki-core/api/json-api';
 import type { GetPosts } from '@/backend/api/rest/post-repository.ssr';
 import { ky } from '@/config/ky';
 

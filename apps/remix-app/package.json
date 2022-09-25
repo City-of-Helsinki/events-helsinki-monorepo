@@ -43,7 +43,7 @@
     "@remix-run/vercel": "1.7.0",
     "@vercel/node": "2.5.13",
     "events-helsinki-common-i18n": "workspace:^",
-    "events-helsinki-core-old": "workspace:^",
+    "events-helsinki-core": "workspace:^",
     "events-helsinki-ui-lib": "workspace:^",
     "react": "18.1.0",
     "react-dom": "18.1.0",

@@ -1,6 +1,6 @@
 /**
  * Specific eslint rules for this app/package, extends the base rules
- * @see https://github.com/City-of-Helsinki/events-helsinki-monorepo/blob/main/docs/about-linters.md
+ * @see https://github.com/belgattitude/nextjs-monorepo-example/blob/main/docs/about-linters.md
  */
 
 // Workaround for https://github.com/eslint/eslint/issues/3458 (re-export of @rushstack/eslint-patch)
@@ -16,7 +16,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: 'tsconfig.json',
   },
-  ignorePatterns: [...getDefaultIgnorePatterns(), 'config'],
+  ignorePatterns: [...getDefaultIgnorePatterns()],
   extends: [
     '@events-helsinki/eslint-config-bases/typescript',
     '@events-helsinki/eslint-config-bases/sonar',

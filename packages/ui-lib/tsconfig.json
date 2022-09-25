@@ -11,8 +11,8 @@
     "noEmit": false,
     "incremental": true,
     "paths": {
-      "events-helsinki-core-old/*": ["../../../packages/core-old/src/*"],
-      "events-helsinki-core-old": ["../../../packages/core-old/src/index"]
+      "events-helsinki-core/*": ["../../../packages/core/src/*"],
+      "events-helsinki-core": ["../../../packages/core/src/index"]
     }
   },
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]

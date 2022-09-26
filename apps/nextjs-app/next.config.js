@@ -66,7 +66,7 @@ const tmModules = [
         // ie: '@react-google-maps/api'...
         'ky', // does not pass es-2017 checks
         'events-helsinki-components',
-        'events-helsinki-core',
+        // 'events-helsinki-core',
       ]
     : []),
   // ESM only packages are not yet supported by NextJs if you're not
@@ -133,12 +133,18 @@ const secureHeaders = createSecureHeaders({
     : {}),
   referrerPolicy: 'same-origin',
 });
-
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path');
+const componentsStylePath = path.join(__dirname, '../../packages/components/');
 /**
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
   reactStrictMode: true,
+  sassOptions: {
+    includePaths: [componentsStylePath],
+  },
   productionBrowserSourceMaps: !disableSourceMaps,
   i18n,
   optimizeFonts: true,
@@ -324,18 +330,18 @@ if (tmModules.length > 0) {
     tmModules,
     {
       resolveSymlinks: true,
-      debug: false,
+      debug: true,
     }
   );
   config = withNextTranspileModules(config);
 }
 
-if (process.env.ANALYZE === 'true') {
-  // @ts-ignore
-  const withBundleAnalyzer = require('@next/bundle-analyzer')({
-    enabled: true,
-  });
-  config = withBundleAnalyzer(config);
-}
+// if (process.env.ANALYZE === 'true') {
+//   // @ts-ignore
+//   const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//     enabled: true,
+//   });
+//   config = withBundleAnalyzer(config);
+// }
 
 module.exports = config;

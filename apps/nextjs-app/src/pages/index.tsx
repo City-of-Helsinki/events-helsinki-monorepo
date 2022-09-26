@@ -1,11 +1,9 @@
 import { BadRequest } from '@tsed/exceptions';
-import { ROUTES } from 'events-helsinki-core';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { demoConfig } from '@/features/demo/demo.config';
 import { DemoPage } from '@/features/demo/pages';
 
-console.log('ROUTERS', ROUTES);
 type Props = {
   /** Add HomeRoute props here */
 };

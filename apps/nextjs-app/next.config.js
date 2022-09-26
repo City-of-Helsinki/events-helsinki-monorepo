@@ -142,7 +142,6 @@ const nextConfig = {
   productionBrowserSourceMaps: !disableSourceMaps,
   i18n,
   optimizeFonts: true,
-
   httpAgentOptions: {
     // @link https://nextjs.org/blog/next-11-1#builds--data-fetching
     keepAlive: true,

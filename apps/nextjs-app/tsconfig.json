@@ -38,10 +38,14 @@
         "../../../packages/db-main-prisma/src/index"
       ]
     }
+    // "typeRoots": ["./", "./src/types.d"],
+    // "types": ["vitest/globals"]
   },
   "exclude": ["**/node_modules", "**/.*/"],
   "include": [
     "next-env.d.ts",
+    "src/types.d/react-i18next.d.ts",
+    "../../../packages/components/src/types.d/react-i18next.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.mts",
@@ -50,6 +54,5 @@
     "**/*.mjs",
     "**/*.jsx",
     "**/*.json"
-  ],
-  "types": ["vitest/globals"]
+  ]
 }

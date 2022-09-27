@@ -66,7 +66,6 @@ const tmModules = [
         // ie: '@react-google-maps/api'...
         'ky', // does not pass es-2017 checks
         'events-helsinki-components',
-        // 'events-helsinki-core',
       ]
     : []),
   // ESM only packages are not yet supported by NextJs if you're not
@@ -336,12 +335,13 @@ if (tmModules.length > 0) {
   config = withNextTranspileModules(config);
 }
 
-// if (process.env.ANALYZE === 'true') {
-//   // @ts-ignore
-//   const withBundleAnalyzer = require('@next/bundle-analyzer')({
-//     enabled: true,
-//   });
-//   config = withBundleAnalyzer(config);
-// }
+if (process.env.ANALYZE === 'true') {
+  // @ts-ignore
+  const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: true,
+  });
+  // @ts-ignore
+  config = withBundleAnalyzer(config);
+}
 
 module.exports = config;

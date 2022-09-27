@@ -1,4 +1,4 @@
-import type { I18nActiveNamespaces } from '../lib/i18n';
+import type { I18nActiveNamespaces } from '@/lib/i18n';
 
 export type CommonConfig = {
   i18nNamespaces: I18nActiveNamespaces<'common'>;

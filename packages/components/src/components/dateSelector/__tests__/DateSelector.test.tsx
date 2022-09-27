@@ -8,6 +8,7 @@ import {
   userEvent,
   waitFor,
 } from '@/test-utils';
+import { DATE_TYPES } from '../../../../src/constants';
 import type { DateSelectorProps } from '../DateSelector';
 import DateSelector from '../DateSelector';
 import { testIds } from '../DateSelectorMenu';

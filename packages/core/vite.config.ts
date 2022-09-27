@@ -5,7 +5,14 @@ import { defineConfig } from 'vitest/config';
 const testFiles = ['./src/**/*.test.{js,jsx,ts,tsx}'];
 
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  plugins: [
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    react(),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    tsconfigPaths(),
+  ],
   test: {
     globals: true,
     environment: 'happy-dom',

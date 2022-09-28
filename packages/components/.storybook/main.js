@@ -47,12 +47,13 @@ module.exports = {
       },
     },
     {
-      name: '@storybook/addon-postcss',
+      name: 'storybook-addon-sass-postcss',
       options: {
         postcssLoaderOptions: {
           implementation: require('postcss'),
         },
       },
     },
+    "storybook-addon-next-router",
   ],
 };

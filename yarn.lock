@@ -15912,6 +15912,8 @@ __metadata:
     sanitize-html: "npm:2.7.1"
     sirv: "npm:2.0.2"
     sirv-cli: "npm:2.0.2"
+    storybook-addon-next-router: "npm:4.0.0"
+    storybook-addon-sass-postcss: "npm:0.1.3"
     stylelint: "npm:14.11.0"
     stylelint-config-prettier: "npm:9.0.3"
     stylelint-config-standard: "npm:28.0.0"
@@ -28101,6 +28103,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sass-loader@npm:^10.2.0":
+  version: 10.3.1
+  resolution: "sass-loader@npm:10.3.1"
+  dependencies:
+    klona: "npm:^2.0.4"
+    loader-utils: "npm:^2.0.0"
+    neo-async: "npm:^2.6.2"
+    schema-utils: "npm:^3.0.0"
+    semver: "npm:^7.3.2"
+  peerDependencies:
+    fibers: ">= 3.1.0"
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+    sass: ^1.3.0
+    webpack: ^4.36.0 || ^5.0.0
+  peerDependenciesMeta:
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+  checksum: 0208af5413e4f9c3a5d62bca69ba3faf2e3ef2ddca985a28a779d9e533605b91fc62c2d560ab1f9c161dece3fcd4c315931691681d1e26a780f2fc944382accf
+  languageName: node
+  linkType: hard
+
 "sass@npm:1.54.8":
   version: 1.54.8
   resolution: "sass@npm:1.54.8"
@@ -28111,6 +28138,19 @@ __metadata:
   bin:
     sass: sass.js
   checksum: 9d8e1bb17916d630d07498790754dbea64f2cbf8518106d9027ba5992b2c4192417f4981016635bfae23931ede0a70a0349b88dfa7e6ed994da92ea6780e0fb1
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.43.4":
+  version: 1.55.0
+  resolution: "sass@npm:1.55.0"
+  dependencies:
+    chokidar: "npm:>=3.0.0 <4.0.0"
+    immutable: "npm:^4.0.0"
+    source-map-js: "npm:>=0.6.2 <2.0.0"
+  bin:
+    sass: sass.js
+  checksum: e05c3462e4e0ec1b4dd7d6a7107768209ef02f37a9a6e9d15d1473cf9993eb2f8e69ae53cb30fca9bb416a17818d3aab9156b2622b7703e0a0d344b9eaef6128
   languageName: node
   linkType: hard
 
@@ -29035,6 +29075,37 @@ __metadata:
   version: 2.14.2
   resolution: "store2@npm:2.14.2"
   checksum: d62cc5a7310be0c063776a45d5509d53092e20df2ff7fe3cdf34d871a980dc5729f1e210074c193aa734f8121c1b37f246b883988f4af9566f2c602dddbabf00
+  languageName: node
+  linkType: hard
+
+"storybook-addon-next-router@npm:4.0.0":
+  version: 4.0.0
+  resolution: "storybook-addon-next-router@npm:4.0.0"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@storybook/addon-actions": ^6.0.0
+    "@storybook/addons": ^6.0.0
+    "@storybook/client-api": ^6.0.0
+    next: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 1dfeb1cda5f219a5b9cd9f8af1c6d0d59df37dc336d1ac67f51317094d4d60296798994d3c24b778c42a22db598c8afbab724f9f9b055f7c000db8cedded53a2
+  languageName: node
+  linkType: hard
+
+"storybook-addon-sass-postcss@npm:0.1.3":
+  version: 0.1.3
+  resolution: "storybook-addon-sass-postcss@npm:0.1.3"
+  dependencies:
+    "@storybook/node-logger": "npm:^6.1.14"
+    css-loader: "npm:^3.6.0"
+    postcss: "npm:^7.0.35"
+    postcss-loader: "npm:^4.2.0"
+    sass: "npm:^1.43.4"
+    sass-loader: "npm:^10.2.0"
+    style-loader: "npm:^1.3.0"
+  checksum: 65704556298dea74703fd394c53598015bd9d2de8fa004d3429c6391949bb01f2365a51b1ef619551dd8f844957fcd46ca3f66c8f5241145b366bd2977750b1a
   languageName: node
   linkType: hard
 

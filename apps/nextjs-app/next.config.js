@@ -336,7 +336,6 @@ if (tmModules.length > 0) {
 }
 
 if (process.env.ANALYZE === 'true') {
-  // @ts-ignore
   const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: true,
   });

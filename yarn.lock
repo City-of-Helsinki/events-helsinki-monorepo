@@ -12239,7 +12239,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-fetch@npm:^3.1.5":
+"cross-fetch@npm:3.1.5, cross-fetch@npm:^3.1.5":
   version: 3.1.5
   resolution: "cross-fetch@npm:3.1.5"
   dependencies:
@@ -15182,6 +15182,8 @@ __metadata:
     hds-design-tokens: "npm:2.3.0"
     hds-react: "npm:^2.3.0"
     i18next: "npm:21.9.2"
+    i18next-browser-languagedetector: "npm:6.1.5"
+    i18next-http-backend: "npm:1.4.4"
     ics: "npm:^2.40.0"
     identity-obj-proxy: "npm:^3.0.0"
     jest: "npm:29.1.1"
@@ -15219,6 +15221,7 @@ __metadata:
     sirv-cli: "npm:2.0.2"
     storybook-addon-next-router: "npm:4.0.0"
     storybook-addon-sass-postcss: "npm:0.1.3"
+    storybook-react-i18next: "npm:1.1.2"
     stylelint: "npm:14.13.0"
     stylelint-config-prettier: "npm:9.0.3"
     stylelint-config-standard: "npm:28.0.0"
@@ -17845,10 +17848,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"i18next-browser-languagedetector@npm:6.1.5":
+  version: 6.1.5
+  resolution: "i18next-browser-languagedetector@npm:6.1.5"
+  dependencies:
+    "@babel/runtime": "npm:^7.18.9"
+  checksum: d5b5a4ec46434b09ba5bc66c502a4be9df4d881b5fa3a87c8244e4f56d040acd9c79740bf3314a3a6294ee89193359b69f69bfbee47986286c99f7e89fcb8b0f
+  languageName: node
+  linkType: hard
+
 "i18next-fs-backend@npm:^1.1.5":
   version: 1.1.5
   resolution: "i18next-fs-backend@npm:1.1.5"
   checksum: 135836099cbef0b63cddf7c4a91d85bc149beebbd17e0d6c80647e5664411138e26b32d827dcfd254697cf5c0921abec9f5e7972289196c8da6385fd86d03fc0
+  languageName: node
+  linkType: hard
+
+"i18next-http-backend@npm:1.4.4":
+  version: 1.4.4
+  resolution: "i18next-http-backend@npm:1.4.4"
+  dependencies:
+    cross-fetch: "npm:3.1.5"
+  checksum: 8a50e14231f9bdb8740eed66a312600db58963e26b43a183d909215bd06b4f41f163c9ddc7a32ee84ef927b32576c458283aacc9a6400902dfddead4b71e6982
   languageName: node
   linkType: hard
 
@@ -28172,6 +28193,52 @@ __metadata:
     sass-loader: "npm:^10.2.0"
     style-loader: "npm:^1.3.0"
   checksum: 65704556298dea74703fd394c53598015bd9d2de8fa004d3429c6391949bb01f2365a51b1ef619551dd8f844957fcd46ca3f66c8f5241145b366bd2977750b1a
+  languageName: node
+  linkType: hard
+
+"storybook-i18n@npm:^1.1.2":
+  version: 1.1.4
+  resolution: "storybook-i18n@npm:1.1.4"
+  peerDependencies:
+    "@storybook/addons": ">=6.5.0"
+    "@storybook/api": ">=6.5.0"
+    "@storybook/components": ">=6.5.0"
+    "@storybook/core-events": ">=6.5.0"
+    "@storybook/theming": ">=6.5.0"
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 7472ba3d35e3d859dd18522842e7f8ea5a071ea14fcb2652ca05b19621b853e876966b00c9b428953052e3c2a3c3c251d6b7ca1a6556bf068c15d1bfa1fc8c4f
+  languageName: node
+  linkType: hard
+
+"storybook-react-i18next@npm:1.1.2":
+  version: 1.1.2
+  resolution: "storybook-react-i18next@npm:1.1.2"
+  dependencies:
+    storybook-i18n: "npm:^1.1.2"
+  peerDependencies:
+    "@storybook/addons": ">=6.5.0"
+    "@storybook/api": ">=6.5.0"
+    "@storybook/components": ">=6.5.0"
+    "@storybook/core-events": ">=6.5.0"
+    "@storybook/theming": ">=6.5.0"
+    i18next: ">=21.0.0"
+    i18next-browser-languagedetector: ^6.1.4
+    i18next-http-backend: ^1.4.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-i18next: ^11.17.1
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: aed1204b621f1b214b793fb6b40dea86b079f1b91facff9370940f3e858f38928aa5f1b2645d16cb1650ba3c498e4a2d8cfef1e45afb015506bb14be5fd24ea9
   languageName: node
   linkType: hard
 

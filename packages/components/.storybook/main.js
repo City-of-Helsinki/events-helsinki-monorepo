@@ -54,6 +54,7 @@ module.exports = {
         },
       },
     },
-    "storybook-addon-next-router",
+    'storybook-addon-next-router',
+    'storybook-react-i18next',
   ],
 };

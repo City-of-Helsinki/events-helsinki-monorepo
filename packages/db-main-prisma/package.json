@@ -33,30 +33,30 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "4.3.1"
+    "@prisma/client": "4.4.0"
   },
   "devDependencies": {
     "@events-helsinki/eslint-config-bases": "workspace:^",
     "@soluble/dsn-parser": "1.6.0",
-    "@types/jest": "29.0.0",
-    "@types/node": "18.7.15",
+    "@types/jest": "29.1.0",
+    "@types/node": "18.7.23",
     "camelcase": "7.0.0",
     "cross-env": "7.0.3",
     "dotenv-flow": "3.2.0",
     "dotenv-flow-cli": "1.0.0",
-    "eslint": "8.22.0",
+    "eslint": "8.24.0",
     "execa": "5.1.1",
     "is-port-reachable": "3.1.0",
-    "jest": "29.0.2",
+    "jest": "29.1.1",
     "keyword-extractor": "0.0.23",
     "npm-run-all": "4.1.5",
     "picocolors": "1.0.0",
     "prettier": "2.7.1",
-    "prisma": "4.3.1",
+    "prisma": "4.4.0",
     "rimraf": "3.0.2",
     "transliteration": "2.3.5",
-    "ts-jest": "28.0.8",
+    "ts-jest": "29.0.3",
     "tsx": "3.9.0",
-    "typescript": "4.8.2"
+    "typescript": "4.8.4"
   }
 }

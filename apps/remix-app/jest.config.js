@@ -1,6 +1,5 @@
 // @ts-check
-
-const { defaults: tsPreset } = require('ts-jest/presets');
+const { defaults: tsjPreset } = require('ts-jest/presets');
 const { pathsToModuleNameMapper } = require('ts-jest');
 
 const { getJestCachePath } = require('../../cache.config');
@@ -25,8 +24,9 @@ const config = {
   testEnvironment: 'jsdom',
   verbose: true,
   rootDir: './',
+  // @ts-ignore
   transform: {
-    ...tsPreset.transform,
+    ...tsjPreset.transform,
   },
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testMatch: ['<rootDir>/../**/*.{spec,test}.{js,jsx,ts,tsx}'],

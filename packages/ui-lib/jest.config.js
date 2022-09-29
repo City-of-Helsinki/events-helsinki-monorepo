@@ -24,6 +24,7 @@ const config = {
   testEnvironment: 'jsdom',
   verbose: true,
   rootDir: './src',
+  // @ts-ignore
   transform: {
     ...tsjPreset.transform,
   },

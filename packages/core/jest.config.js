@@ -1,5 +1,4 @@
 // @ts-check
-
 const { defaults: tsjPreset } = require('ts-jest/presets');
 const { pathsToModuleNameMapper } = require('ts-jest');
 
@@ -25,6 +24,7 @@ const config = {
   testEnvironment: 'jsdom',
   verbose: true,
   rootDir: './src',
+  // @ts-ignore
   transform: {
     ...tsjPreset.transform,
   },

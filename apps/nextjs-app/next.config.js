@@ -188,23 +188,6 @@ const nextConfig = {
 
   experimental: {
     browsersListForSwc: true,
-    legacyBrowsers: false,
-    images: {
-      allowFutureImage: true,
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'avatars.githubusercontent.com',
-        },
-      ],
-      unoptimized: false,
-    },
-
-    // React 18 server components
-    // @link https://nextjs.org/docs/advanced-features/react-18/server-components
-    serverComponents: false,
-    // @link https://nextjs.org/docs/advanced-features/output-file-tracing#caveats
-    outputFileTracingRoot: undefined, // ,path.join(__dirname, '../../'),
     // Prefer loading of ES Modules over CommonJS
     // @link {https://nextjs.org/blog/next-11-1#es-modules-support|Blog 11.1.0}
     // @link {https://github.com/vercel/next.js/discussions/27876|Discussion}

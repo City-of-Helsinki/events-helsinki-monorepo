@@ -7,17 +7,17 @@ function TopProgressBar(logger: Logger) {
   const router = useRouterFromConfig();
 
   const handleStart = (url: string) => {
-    logger?.debug(`Started navigation to page: ${url}`);
+    logger?.debug && logger.debug(`Started navigation to page: ${url}`);
     NProgress.start();
   };
 
   const handleComplete = (url: string) => {
-    logger?.debug(`Completed navigation to page: ${url}`);
+    logger?.debug && logger.debug(`Completed navigation to page: ${url}`);
     NProgress.done();
   };
 
   const handleError = (error: Error) => {
-    logger?.error(`Failed navigation: ${error}`);
+    logger?.error && logger?.error(`Failed navigation: ${error}`);
     NProgress.done();
   };
 

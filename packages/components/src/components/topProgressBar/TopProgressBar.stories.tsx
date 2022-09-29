@@ -33,9 +33,18 @@ const Template: ComponentStory<typeof TopProgressBar> = (args) => {
   );
 };
 
-export const TopProgressBarDefault = Template.bind({
-  debug: (text: string) =>
-    document.getElementById('container')?.append('debug: ' + text),
-  error: (text: string) =>
-    document.getElementById('container')?.append('error: ' + text),
-});
+export const TopProgressBarDefault = Template.bind({});
+TopProgressBarDefault.args = {
+  debug(message?, ...optionalParameters) {
+    console.debug(message, optionalParameters);
+  },
+  error(message?, ...optionalParameters) {
+    console.error(message, optionalParameters);
+  },
+  info(message?, ...optionalParameters) {
+    console.info(message, optionalParameters);
+  },
+  warn(message?, ...optionalParameters) {
+    console.warn(message, optionalParameters);
+  },
+};

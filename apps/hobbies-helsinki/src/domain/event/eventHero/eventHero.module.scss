@@ -1,0 +1,155 @@
+@import 'breakpoints';
+
+$heroHeight: 30.6875rem;
+$imageMobileHeight: 23.4375rem;
+$logoWidth: 5.5rem;
+
+.heroSection {
+  height: auto;
+  background: var(--hero-background-color, var(--color-copper-light));
+}
+
+.contentContainer {
+  @include respond_below(m) {
+    padding: 0 !important;
+  }
+
+  .contentWrapper {
+    display: grid;
+    grid-template-columns: unset;
+    grid-template-rows: $imageMobileHeight auto;
+    min-height: $heroHeight;
+    position: relative;
+
+    @include respond_above(xl) {
+      min-height: $heroHeight;
+      grid-template-columns: auto 2fr 1fr;
+      grid-template-rows: unset;
+    }
+
+    .backButtonWrapper {
+      padding: var(--spacing-m) var(--spacing-4-xl) var(--spacing-m) 0;
+
+      @include respond_below(xl) {
+        position: absolute;
+        padding: var(--spacing-s) 0 0 var(--spacing-s);
+      }
+
+      button:hover {
+        outline: 2px solid var(--color-coat-of-arms);
+      }
+    }
+
+    .image {
+      height: 100%;
+
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      @include respond_below(s) {
+        margin: 0 (0 - var(--spacing-m));
+      }
+    }
+
+    .additionalInfo {
+      order: 6;
+      margin-top: var(--spacing-s);
+    }
+
+    .leftPanelWrapper {
+      display: flex;
+    }
+
+    .leftPanelEmpty {
+      display: flex;
+      padding: var(--spacing-m) var(--spacing-4-xl) var(--spacing-m) 0;
+      @include respond_above(xl) {
+        padding: 0;
+      }
+      @include respond_below(m) {
+        padding: 0;
+      }
+    }
+
+    .leftPanel {
+      display: flex;
+      @include respond_below(m) {
+        padding: 0 var(--spacing-s);
+      }
+    }
+
+    .textWrapper {
+      padding: var(--spacing-m) 0;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      @include respond_above(m) {
+        padding: var(--spacing-xl);
+        width: unset;
+      }
+
+      .categoryWrapper {
+        order: 1;
+      }
+
+      .date {
+        order: 2;
+        margin-top: 0.5rem;
+        font-size: var(--fontsize-body-l);
+        line-height: 1.625rem;
+        min-height: 1.625rem;
+      }
+
+      .title {
+        order: 3;
+        font-size: var(--fontsize-heading-l);
+        line-height: 2.5rem;
+        font-weight: 600;
+        @include respond_below(m) {
+          font-size: var(--fontsize-heading-m);
+          line-height: var(--lineheight-m);
+        }
+      }
+
+      .description {
+        order: 4;
+        font-size: var(--fontsize-body-l);
+        line-height: 2rem;
+      }
+
+      .location {
+        order: 5;
+      }
+
+      .start {
+        order: 6;
+      }
+
+      .price {
+        order: 7;
+      }
+
+      .buyButtonWrapper {
+        order: 8;
+      }
+
+      .registrationButtonWrapper {
+        order: 9;
+      }
+    }
+
+    .buyButtonWrapper {
+      margin-top: 1rem;
+    }
+
+    .buttonWrapperMobile {
+      margin-top: 1rem;
+
+      @include respond_above(s) {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,368 @@
+import { isPast, isThisWeek, isToday } from 'date-fns';
+import capitalize from 'lodash/capitalize';
+import { TFunction } from 'next-i18next';
+import {
+  EVENT_STATUS,
+  getLocalizedString,
+  getSecureImage,
+  Language,
+} from 'events-helsinki-components';
+
+import {
+  EventFieldsFragment,
+  LocalizedObject,
+  PlaceFieldsFragment,
+} from '../nextApi/graphql/generated/graphql';
+import {
+  EVENT_KEYWORD_BLACK_LIST,
+  EVENT_LOCATIONS,
+  EVENT_SOME_IMAGE,
+} from './constants';
+import { EventFields, KeywordOption } from './types';
+
+export const getEventCardId = (id: string): string => `event-card_${id}`;
+
+export const getLargeEventCardId = (id: string): string =>
+  `large-event-card_${id}`;
+
+/**
+ * Check is event closed
+ * @param event
+ * @return {boolean}
+ */
+export const isEventClosed = (event: EventFieldsFragment): boolean => {
+  return !!event.endTime && isPast(new Date(event.endTime));
+};
+
+/**
+ * Check is event cancelled
+ * @param event
+ * @return {boolean}
+ */
+export const isEventCancelled = (event: EventFieldsFragment): boolean => {
+  return event.eventStatus === EVENT_STATUS.EVENT_CANCELLED;
+};
+
+/**
+ * Check is event free
+ * @param eventData
+ * @return {boolean}
+ */
+export const isEventFree = (event: EventFieldsFragment): boolean => {
+  const offer = event.offers.find((item) => item.isFree);
+
+  return !!offer?.isFree;
+};
+
+/**
+ * Get event id from url
+ */
+export const getEventIdFromUrl = (
+  url: string,
+  type: 'event' = 'event'
+): string | undefined => {
+  return url.match(new RegExp(`/(?:${type}s?)/([^/?]*)`, 'i'))?.[1];
+};
+
+export const getEventIdsFromUrls = (urls: string[]): { eventIds: string[] } => {
+  return {
+    eventIds: urls
+      .map((url) => getEventIdFromUrl(url) as string)
+      .filter(Boolean),
+  };
+};
+
+/*
+ * Format string to price format (add €) if it is a number and is missing currency
+ * For example:
+ * 'random text' -> 'random text'
+ * '2' -> '2 €'
+ * '2.5' -> '2.5 €'
+ * '30/50' -> '30/50 €'
+ * '30-50' -> '30-50 €'
+ */
+export const formatPrice = (price?: string): string => {
+  if (!price) {
+    return '';
+  }
+
+  const priceRegex = /^\d+([/\-.,]\d+)?$/;
+  return price.match(priceRegex) ? `${price} €` : price;
+};
+
+/**
+ * Get event price as a string
+ * @param {object} event
+ * @param {string} locale
+ * @param {string} isFreeText - text to return if case that event is free
+ * @return {string}
+ */
+export const getEventPrice = (
+  event: EventFieldsFragment,
+  locale: Language,
+  isFreeText: string
+): string => {
+  return isEventFree(event)
+    ? isFreeText
+    : event.offers
+        .map((offer) =>
+          // Format text to price if it happens to be number e.g. '2' -> '2 €'
+          formatPrice(
+            getLocalizedString(offer.price || offer.description, locale)
+          )
+        )
+        .filter((e) => e)
+        .sort()
+        .join(', ');
+};
+
+export const getKeywordList = (
+  list: {
+    id?: string | null;
+    name?: LocalizedObject | null;
+  }[] = [],
+  locale: Language
+): KeywordOption[] => {
+  return list
+    .map((listItem) => ({
+      id: listItem.id || '',
+      name: capitalize(listItem.name?.[locale] || '').trim(),
+    }))
+    .filter(
+      (listItem, index, arr) =>
+        !!listItem.id &&
+        !!listItem.name &&
+        !EVENT_KEYWORD_BLACK_LIST.includes(listItem.id) &&
+        arr.findIndex((item) => item.name === listItem.name) === index
+    )
+    .sort((a, b) => (a.name > b.name ? 1 : -1));
+};
+
+/**
+ * Get event image url
+ * @param {object} event
+ * @return {string}
+ */
+export const getEventImageUrl = (event: EventFieldsFragment): string => {
+  const image = event.images[0];
+
+  return getSecureImage(image?.url);
+};
+
+/**
+ * Get event image url for social media
+ * @param {object} event
+ * @return {string}
+ */
+export const getEventSomeImageUrl = (event: EventFieldsFragment): string => {
+  const image = event.images[0];
+  return getSecureImage(image?.url) || EVENT_SOME_IMAGE;
+};
+
+/**
+ * Get event district info as string
+ * @param {object} event
+ * @param {string} locale
+ * @return {string}
+ */
+export const getEventDistrict = (
+  event: EventFieldsFragment,
+  locale: Language
+): string | null => {
+  const location = event.location;
+  const district = location?.divisions?.find((division) =>
+    ['district', 'neighborhood'].includes(division.type)
+  );
+
+  return getLocalizedString(district?.name, locale);
+};
+
+/**
+ * Get event location fields
+ * @param {object} event
+ * @param {string} locale
+ * @return {string}
+ */
+const getEventLocationFields = (
+  event: EventFieldsFragment,
+  locale: Language
+) => {
+  const location = event.location;
+  return {
+    addressLocality: getLocalizedString(location?.addressLocality, locale),
+    coordinates: [...(location?.position?.coordinates || [])].reverse(),
+    district: getEventDistrict(event, locale),
+    location,
+    postalCode: location?.postalCode,
+    streetAddress: getLocalizedString(location?.streetAddress, locale),
+  };
+};
+
+/**
+ * Get palvelukartta compatible id for the location
+ * @param {object} location
+ * @return {string}
+ */
+export const getLocationId = (
+  location?: PlaceFieldsFragment | null
+): string => {
+  return location?.id ? location?.id.split(':').slice(1).join() : '';
+};
+
+/**
+ * Get service map url
+ * @param {object} event
+ * @param {string} locale
+ * @param {boolean} isEmbedded
+ * @return {string}
+ */
+export const getServiceMapUrl = (
+  event: EventFields,
+  locale: Language,
+  isEmbedded?: boolean
+): string => {
+  const location = event.location;
+  const locationId = getLocationId(location);
+  if (location?.id !== EVENT_LOCATIONS.INTERNET) {
+    return `https://palvelukartta.hel.fi/${locale}${
+      isEmbedded ? '/embed' : ''
+    }/unit/${locationId}`;
+  }
+  return '';
+};
+
+/**
+ * Get Google link to show directions to event location
+ * @param {object} event
+ * @param {string} locale
+ * @return {string}
+ */
+export const getGoogleDirectionsLink = (
+  event: EventFieldsFragment,
+  locale: Language
+): string => {
+  const { addressLocality, coordinates, postalCode, streetAddress } =
+    getEventLocationFields(event, locale);
+
+  return `https://www.google.com/maps/dir//${streetAddress},+${postalCode}+${addressLocality}/@${coordinates.join(
+    ','
+  )}`.replace(/\s/g, '+');
+};
+
+/**
+ * Get HSL link to show directions to event location
+ * @param {object} event
+ * @param {string} locale
+ * @return {string}
+ */
+export const getHslDirectionsLink = (
+  event: EventFieldsFragment,
+  locale: Language
+): string => {
+  const { addressLocality, coordinates, streetAddress } =
+    getEventLocationFields(event, locale);
+
+  return `https://reittiopas.hsl.fi/%20/${encodeURIComponent(
+    streetAddress
+  )},%20${encodeURIComponent(addressLocality)}::${coordinates.join(
+    ','
+  )}?locale=${locale}`;
+};
+
+/**
+ * Get offer info url
+ * @param {object} event
+ * @param {string} locale
+ * @return {string}
+ */
+const getOfferInfoUrl = (
+  event: EventFieldsFragment,
+  locale: Language
+): string => {
+  const offer = event.offers.find((item) =>
+    getLocalizedString(item.infoUrl, locale)
+  );
+
+  return getLocalizedString(offer?.infoUrl, locale);
+};
+
+const getRegistrationUrl = (event: EventFieldsFragment) => {
+  return event.externalLinks?.find((externalLink) => {
+    return externalLink.name === 'registration';
+  })?.link;
+};
+
+/**
+ * Get event fields
+ * @param {object} event
+ * @param {string} locale
+ * @return {object}
+ */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const getEventFields = (event: EventFields, locale: Language) => {
+  const eventLocation = event.location;
+  const offerInfoUrl = getOfferInfoUrl(event, locale);
+  const registrationUrl = getRegistrationUrl(event);
+  const startTime = event.startTime;
+  return {
+    description: getLocalizedString(event.description, locale),
+    // district: getEventDistrict(event, locale),
+    email: eventLocation?.email,
+    endTime: event.endTime,
+    id: event.id,
+    name: getLocalizedString(event.name, locale),
+    externalLinks: event.externalLinks,
+    googleDirectionsLink: getGoogleDirectionsLink(event, locale),
+    hslDirectionsLink: getHslDirectionsLink(event, locale),
+    imageUrl: getEventImageUrl(event),
+    infoUrl: getLocalizedString(event.infoUrl, locale),
+    keywords: getKeywordList(event.keywords, locale),
+    languages: event.inLanguage
+      .map((item: EventFields['inLanguage'][number]) =>
+        capitalize(getLocalizedString(item.name, locale))
+      )
+      .filter((e) => e),
+    locationName: getLocalizedString(eventLocation?.name, locale),
+    offerInfoUrl,
+    registrationUrl,
+    provider: getLocalizedString(event.provider, locale),
+    publisher: event.publisher || '',
+    shortDescription: getLocalizedString(event.shortDescription, locale),
+    someImageUrl: getEventSomeImageUrl(event),
+    startTime,
+    telephone: getLocalizedString(eventLocation?.telephone, locale),
+    freeEvent: isEventFree(event),
+    today: startTime ? isToday(new Date(startTime)) : false,
+    thisWeek: startTime ? isThisWeek(new Date(startTime)) : false,
+    showBuyButton: !!offerInfoUrl && !isEventFree(event),
+    audience: getKeywordList(event.audience, locale),
+    audienceMinAge: event.audienceMinAge,
+    audienceMaxAge: event.audienceMaxAge,
+    photographerName: event.images[0]?.photographerName,
+    ...getEventLocationFields(event, locale),
+  };
+};
+
+export const isLocalized = (
+  event: EventFieldsFragment,
+  locale: Language
+): boolean =>
+  Boolean(
+    event.name?.[locale] &&
+      event.shortDescription?.[locale] &&
+      event.description?.[locale]
+  );
+
+export const getAudienceAgeText = (
+  t: TFunction,
+  audienceMinAge?: string | null,
+  audienceMaxAge?: string | null
+): string => {
+  if (!audienceMinAge && !audienceMaxAge) {
+    return '';
+  }
+  const ageLimit = `${audienceMinAge ?? '0'}${
+    audienceMaxAge ? `-${audienceMaxAge}` : '+'
+  }`;
+  return `${ageLimit} -${t('event:info.age')}`;
+};

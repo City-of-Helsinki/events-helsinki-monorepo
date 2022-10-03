@@ -1,0 +1,50 @@
+@import 'breakpoints';
+
+.eventContent {
+  --description-font-size: var(--fontsize-body-l);
+  background-color: var(--color-white);
+  // margin-bottom: var(--spacing-4-xl); // Not needed when similar events are used
+
+  .contentWrapper {
+    display: grid;
+    grid-template-columns: unset;
+    position: relative;
+
+    @include respond_above(m) {
+      display: grid;
+      grid-template-columns: auto 2fr 1fr;
+      grid-template-rows: unset;
+    }
+
+    .leftEmpty {
+      padding: var(--spacing-m) calc(var(--spacing-4-xl) + 40px)
+        var(--spacing-m) 0;
+
+      @include respond_below(m) {
+        position: absolute;
+        padding: 0;
+      }
+    }
+  }
+}
+.descriptionTitle {
+  font-weight: 600;
+  margin: 2.25rem 0 1rem;
+}
+
+.description {
+  line-height: 1.5;
+
+  p {
+    font-size: var(--description-font-size);
+    margin: 1rem 0;
+  }
+
+  a {
+    color: var(--color-black);
+    text-decoration: underline;
+  }
+  a:hover {
+    color: var(--color-coat-of-arms-dark);
+  }
+}

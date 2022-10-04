@@ -16914,49 +16914,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"events-helsinki-components@npm:0.0.7-canary-73d6316":
-  version: 0.0.7-canary-73d6316
-  resolution: "events-helsinki-components@npm:0.0.7-canary-73d6316"
-  dependencies:
-    "@apollo/client": "npm:3.6.9"
-    "@storybook/addons": "npm:6.5.12"
-    "@storybook/client-api": "npm:6.5.12"
-    "@types/react-datepicker": "npm:4.4.2"
-    classnames: "npm:2.3.2"
-    copy-to-clipboard: "npm:3.3.2"
-    date-fns: "npm:2.29.3"
-    date-fns-tz: "npm:1.3.7"
-    graphql: "npm:16.6.0"
-    hds-design-tokens: "npm:2.3.0"
-    hds-react: "npm:^2.3.0"
-    i18next: "npm:21.9.2"
-    i18next-browser-languagedetector: "npm:6.1.5"
-    i18next-http-backend: "npm:1.4.4"
-    ics: "npm:^2.40.0"
-    lodash: "npm:4.17.21"
-    next: "npm:12.3.1"
-    next-i18next: "npm:12.0.1"
-    nprogress: "npm:0.2.0"
-    query-string: "npm:7.1.1"
-    react: "npm:>=17.0.2"
-    react-content-loader: "npm:6.2.0"
-    react-datepicker: "npm:4.8.0"
-    react-dom: "npm:>=17.0.2"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha15"
-    react-i18next: "npm:11.18.6"
-    sanitize-html: "npm:2.7.2"
-  peerDependencies:
-    "@types/react": ^17.0.44 || ^18.0.0
-    "@types/react-dom": ^17.0.44 || ^18.0.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    "@types/react-dom":
-      optional: true
-  checksum: fc351b0ce63cde312de2c5c26aa25753ae9a2c6a9b8b5c062010e3b35a0d1e7617e95c3df0147438b9f6ae4f1c81b663410531c15eb2c42de6fefc5a03a91331
-  languageName: node
-  linkType: hard
-
 "events-helsinki-components@workspace:^, events-helsinki-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "events-helsinki-components@workspace:packages/components"
@@ -19575,6 +19532,7 @@ __metadata:
     babel-jest: "npm:^28.1.0"
     classnames: "npm:^2.3.1"
     copy-to-clipboard: "npm:^3.3.1"
+    cross-env: "npm:7.0.3"
     cross-fetch: "npm:^3.1.5"
     date-fns: "npm:^2.28.0"
     date-fns-tz: "npm:^1.3.4"
@@ -19588,7 +19546,7 @@ __metadata:
     eslint-plugin-prettier: "npm:^4.0.0"
     eslint-plugin-react: "npm:^7.30.0"
     eslint-plugin-react-hooks: "npm:^4.5.0"
-    events-helsinki-components: "npm:0.0.7-canary-73d6316"
+    events-helsinki-components: "workspace:^"
     file-saver: "npm:^2.0.5"
     graphql: "npm:^16.5.0"
     hds-react: "npm:^2.3.0"
@@ -19608,6 +19566,9 @@ __metadata:
     next-transpile-modules: "npm:^9.0.0"
     next-with-apollo: "npm:^5.3.0"
     nprogress: "npm:^0.2.0"
+    postcss: "npm:8.4.17"
+    postcss-flexbugs-fixes: "npm:5.0.2"
+    postcss-preset-env: "npm:7.8.2"
     prettier: "npm:^2.6.2"
     query-string: "npm:^7.1.1"
     react: "npm:^18.2.0"
@@ -28260,6 +28221,17 @@ __metadata:
     picocolors: "npm:^1.0.0"
     source-map-js: "npm:^1.0.2"
   checksum: 474b2c445150bbbf75c67e4a539de41210ddb16d008f2f632820625a880c8c4d7b38361513c0e857e254ac921aac984256fcf1e4cce45a5d9f533b35d1c6bdaa
+  languageName: node
+  linkType: hard
+
+"postcss@npm:8.4.17":
+  version: 8.4.17
+  resolution: "postcss@npm:8.4.17"
+  dependencies:
+    nanoid: "npm:^3.3.4"
+    picocolors: "npm:^1.0.0"
+    source-map-js: "npm:^1.0.2"
+  checksum: ad8962d10de59ce815b230f316356d608ce48deec3d50b36eb74a06c8d0bdff69b862475fc7d58229d067c2ffe1fb5f91f27ae1f5691bd78fd743032c83bc3df
   languageName: node
   linkType: hard
 

@@ -6471,7 +6471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:^7.1.1":
+"@sentry/browser@npm:7.14.1, @sentry/browser@npm:^7.1.1":
   version: 7.14.1
   resolution: "@sentry/browser@npm:7.14.1"
   dependencies:
@@ -6558,6 +6558,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/integrations@npm:7.14.1":
+  version: 7.14.1
+  resolution: "@sentry/integrations@npm:7.14.1"
+  dependencies:
+    "@sentry/types": "npm:7.14.1"
+    "@sentry/utils": "npm:7.14.1"
+    localforage: "npm:^1.8.1"
+    tslib: "npm:^1.9.3"
+  checksum: ca6e4a705af51393a622a12104fdd074d4e917a17455e7c9f44887696e75c70fc7e10b278a0ebecfe180de2f99927fc70daae278fdee2fe167af6439ad252374
+  languageName: node
+  linkType: hard
+
 "@sentry/nextjs@npm:7.14.0":
   version: 7.14.0
   resolution: "@sentry/nextjs@npm:7.14.0"
@@ -6586,6 +6598,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/nextjs@npm:7.14.1":
+  version: 7.14.1
+  resolution: "@sentry/nextjs@npm:7.14.1"
+  dependencies:
+    "@rollup/plugin-sucrase": "npm:4.0.4"
+    "@sentry/core": "npm:7.14.1"
+    "@sentry/hub": "npm:7.14.1"
+    "@sentry/integrations": "npm:7.14.1"
+    "@sentry/node": "npm:7.14.1"
+    "@sentry/react": "npm:7.14.1"
+    "@sentry/tracing": "npm:7.14.1"
+    "@sentry/types": "npm:7.14.1"
+    "@sentry/utils": "npm:7.14.1"
+    "@sentry/webpack-plugin": "npm:1.19.0"
+    chalk: "npm:3.0.0"
+    rollup: "npm:2.78.0"
+    tslib: "npm:^1.9.3"
+  peerDependencies:
+    next: ^10.0.8 || ^11.0 || ^12.0
+    react: 15.x || 16.x || 17.x || 18.x
+    webpack: ">= 4.0.0"
+  peerDependenciesMeta:
+    webpack:
+      optional: true
+  checksum: 875d278d5c5eb61dfd8eb7554be93827b30bca9ea8eb2adfad4301710ab3f8d8278423984c18f76a38b27c71f415eedff3fabd621dbd4275f34e881a6fafee60
+  languageName: node
+  linkType: hard
+
 "@sentry/node@npm:7.14.0":
   version: 7.14.0
   resolution: "@sentry/node@npm:7.14.0"
@@ -6599,6 +6639,22 @@ __metadata:
     lru_map: "npm:^0.3.3"
     tslib: "npm:^1.9.3"
   checksum: fa86e06d9dcb9faa63697355a9cffdaf103f481e8359955d7c55d83364f2298cd835f101c6d5b344a5d482e84b7c00fb84c559dae41021697a51de0a7c86643b
+  languageName: node
+  linkType: hard
+
+"@sentry/node@npm:7.14.1":
+  version: 7.14.1
+  resolution: "@sentry/node@npm:7.14.1"
+  dependencies:
+    "@sentry/core": "npm:7.14.1"
+    "@sentry/hub": "npm:7.14.1"
+    "@sentry/types": "npm:7.14.1"
+    "@sentry/utils": "npm:7.14.1"
+    cookie: "npm:^0.4.1"
+    https-proxy-agent: "npm:^5.0.0"
+    lru_map: "npm:^0.3.3"
+    tslib: "npm:^1.9.3"
+  checksum: 38c11a509cbba44735a8b79a4215c67d776aa4adaa0bb3a942dc993dbbabfbf9d2ad125e5dbd6e8aad09b843342a0ea407ee4b736c438a90338f781b8e54524d
   languageName: node
   linkType: hard
 
@@ -6617,6 +6673,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/react@npm:7.14.1":
+  version: 7.14.1
+  resolution: "@sentry/react@npm:7.14.1"
+  dependencies:
+    "@sentry/browser": "npm:7.14.1"
+    "@sentry/types": "npm:7.14.1"
+    "@sentry/utils": "npm:7.14.1"
+    hoist-non-react-statics: "npm:^3.3.2"
+    tslib: "npm:^1.9.3"
+  peerDependencies:
+    react: 15.x || 16.x || 17.x || 18.x
+  checksum: f4a204f666bb473043272c0c9b84f59db89d826b1186a350a55e02adcf214c3c0dbf040d62dfd73ba173f60c262757ef41ef3d0d86ab02d7c592c026f0f48f8a
+  languageName: node
+  linkType: hard
+
 "@sentry/tracing@npm:7.14.0":
   version: 7.14.0
   resolution: "@sentry/tracing@npm:7.14.0"
@@ -6626,6 +6697,18 @@ __metadata:
     "@sentry/utils": "npm:7.14.0"
     tslib: "npm:^1.9.3"
   checksum: 3e0f80e0a0261aa5c26de0c359c5143a9a29cbc2809856d5487e992b49f4227156f17589dd453c9cbeac181a5a6bdaf68e3189cc8b329bec79b62a20b7b64da4
+  languageName: node
+  linkType: hard
+
+"@sentry/tracing@npm:7.14.1":
+  version: 7.14.1
+  resolution: "@sentry/tracing@npm:7.14.1"
+  dependencies:
+    "@sentry/hub": "npm:7.14.1"
+    "@sentry/types": "npm:7.14.1"
+    "@sentry/utils": "npm:7.14.1"
+    tslib: "npm:^1.9.3"
+  checksum: 3df3ad36fe03ae1de77d15c38f7f67479db425a7b006ef22750a4957242c08f33e291b8f6eb344cf55f47e5d403e7baeb81c14513f25b8ee0f5b7b98fe0dba33
   languageName: node
   linkType: hard
 
@@ -16914,6 +16997,49 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"events-helsinki-components@npm:0.0.7-canary-73d6316":
+  version: 0.0.7-canary-73d6316
+  resolution: "events-helsinki-components@npm:0.0.7-canary-73d6316"
+  dependencies:
+    "@apollo/client": "npm:3.6.9"
+    "@storybook/addons": "npm:6.5.12"
+    "@storybook/client-api": "npm:6.5.12"
+    "@types/react-datepicker": "npm:4.4.2"
+    classnames: "npm:2.3.2"
+    copy-to-clipboard: "npm:3.3.2"
+    date-fns: "npm:2.29.3"
+    date-fns-tz: "npm:1.3.7"
+    graphql: "npm:16.6.0"
+    hds-design-tokens: "npm:2.3.0"
+    hds-react: "npm:^2.3.0"
+    i18next: "npm:21.9.2"
+    i18next-browser-languagedetector: "npm:6.1.5"
+    i18next-http-backend: "npm:1.4.4"
+    ics: "npm:^2.40.0"
+    lodash: "npm:4.17.21"
+    next: "npm:12.3.1"
+    next-i18next: "npm:12.0.1"
+    nprogress: "npm:0.2.0"
+    query-string: "npm:7.1.1"
+    react: "npm:>=17.0.2"
+    react-content-loader: "npm:6.2.0"
+    react-datepicker: "npm:4.8.0"
+    react-dom: "npm:>=17.0.2"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha15"
+    react-i18next: "npm:11.18.6"
+    sanitize-html: "npm:2.7.2"
+  peerDependencies:
+    "@types/react": ^17.0.44 || ^18.0.0
+    "@types/react-dom": ^17.0.44 || ^18.0.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: fc351b0ce63cde312de2c5c26aa25753ae9a2c6a9b8b5c062010e3b35a0d1e7617e95c3df0147438b9f6ae4f1c81b663410531c15eb2c42de6fefc5a03a91331
+  languageName: node
+  linkType: hard
+
 "events-helsinki-components@workspace:^, events-helsinki-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "events-helsinki-components@workspace:packages/components"
@@ -19507,6 +19633,8 @@ __metadata:
     "@graphql-codegen/typescript-react-apollo": "npm:3.2.15"
     "@graphql-codegen/typescript-resolvers": "npm:^2.6.5"
     "@sentry/browser": "npm:^7.1.1"
+    "@sentry/nextjs": "npm:7.14.1"
+    "@sentry/react": "npm:7.14.1"
     "@svgr/webpack": "npm:^6.2.1"
     "@testing-library/dom": "npm:^8.13.0"
     "@testing-library/jest-dom": "npm:^5.16.4"
@@ -19548,7 +19676,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.30.0"
     eslint-plugin-react-hooks: "npm:^4.5.0"
     events-helsinki-common-i18n: "workspace:^"
-    events-helsinki-components: "workspace:^"
+    events-helsinki-components: "npm:0.0.7-canary-73d6316"
     file-saver: "npm:^2.0.5"
     graphql: "npm:^16.5.0"
     hds-react: "npm:^2.3.0"

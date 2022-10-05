@@ -39,24 +39,24 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 'off',
   },
   overrides: [
-    {
-      files: ['src/pages/\\_*.{ts,tsx}'],
-      rules: {
-        'react/display-name': 'off',
-      },
-    },
-    {
-      files: ['src/backend/**/*graphql*schema*.ts'],
-      rules: {
-        '@typescript-eslint/naming-convention': [
-          'error',
-          {
-            // Fine-tune naming convention for graphql resolvers and allow PascalCase
-            selector: ['objectLiteralProperty'],
-            format: ['camelCase', 'PascalCase'],
-          },
-        ],
-      },
-    },
+    // {
+    //   files: ['src/pages/\\_*.{ts,tsx}'],
+    //   rules: {
+    //     'react/display-name': 'off',
+    //   },
+    // },
+    // {
+    //   files: ['src/backend/**/*graphql*schema*.ts'],
+    //   rules: {
+    //     '@typescript-eslint/naming-convention': [
+    //       'error',
+    //       {
+    //         // Fine-tune naming convention for graphql resolvers and allow PascalCase
+    //         selector: ['objectLiteralProperty'],
+    //         format: ['camelCase', 'PascalCase'],
+    //       },
+    //     ],
+    //   },
+    // },
   ],
 };

@@ -59,26 +59,7 @@ if (NEXTJS_SENTRY_DEBUG) {
 
 // Tell webpack to compile those packages
 // @link https://www.npmjs.com/package/next-transpile-modules
-const tmModules = [
-  // for legacy browsers support (only in prod)
-  ...(isProd
-    ? [
-        // ie: '@react-google-maps/api'...
-        'ky', // does not pass es-2017 checks
-        'events-helsinki-components',
-        'react-helsinki-headless-cms',
-      ]
-    : []),
-  // ESM only packages are not yet supported by NextJs if you're not
-  // using experimental experimental esmExternals
-  // @link {https://nextjs.org/blog/next-11-1#es-modules-support|Blog 11.1.0}
-  // @link {https://github.com/vercel/next.js/discussions/27876|Discussion}
-  // @link https://github.com/vercel/next.js/issues/23725
-  // @link https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
-  ...[
-    // ie: newer versions of https://github.com/sindresorhus packages
-  ],
-];
+const tmModules = ['react-helsinki-headless-cms', 'events-helsinki-components'];
 
 // Example of setting up secure headers
 // @link https://github.com/jagaapple/next-secure-headers

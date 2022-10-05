@@ -66,6 +66,7 @@ const tmModules = [
         // ie: '@react-google-maps/api'...
         'ky', // does not pass es-2017 checks
         'events-helsinki-components',
+        'react-helsinki-headless-cms',
       ]
     : []),
   // ESM only packages are not yet supported by NextJs if you're not

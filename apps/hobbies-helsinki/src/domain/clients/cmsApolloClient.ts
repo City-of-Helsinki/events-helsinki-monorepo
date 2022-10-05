@@ -1,11 +1,10 @@
+import type { NormalizedCacheObject } from '@apollo/client';
 import {
   InMemoryCache,
-  NormalizedCacheObject,
   ApolloClient,
   HttpLink,
   ApolloLink,
 } from '@apollo/client';
-import { useMemo } from 'react';
 import fetch from 'cross-fetch';
 import {
   initializeApolloClient,
@@ -13,6 +12,7 @@ import {
   sortMenuItems,
   isClient,
 } from 'events-helsinki-components';
+import { useMemo } from 'react';
 
 import AppConfig from '../../domain/app/AppConfig';
 import { rewriteInternalURLs } from '../../utils/routerUtils';
@@ -58,21 +58,13 @@ export function createCmsApolloClient() {
 }
 
 export default function initializeCmsApollo(initialState = {}) {
-  return initializeApolloClient<
-    NormalizedCacheObject,
-    ApolloClient<NormalizedCacheObject>
-  >({
+  return {
     initialState,
     mutableCachedClient: cmsApolloClient,
     createClient: createCmsApolloClient,
-  });
+  };
 }
 
 export function useCmsApollo(initialState: NormalizedCacheObject) {
-  const store = useMemo(
-    () => initializeCmsApollo(initialState),
-    [initialState]
-  );
-
-  return store;
+  return useMemo(() => initializeCmsApollo(initialState), [initialState]);
 }

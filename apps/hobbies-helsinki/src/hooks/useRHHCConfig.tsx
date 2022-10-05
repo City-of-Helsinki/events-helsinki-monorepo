@@ -1,21 +1,18 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import {
-  Config,
-  defaultConfig as rhhcDefaultConfig,
-} from 'react-helsinki-headless-cms';
+/* eslint-disable @typescript-eslint/naming-convention */
+import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { useLocale } from 'events-helsinki-components';
+import { useTranslation } from 'next-i18next';
+import Head from 'next/head';
+import Link from 'next/link';
+import React from 'react';
+import type { Config } from 'react-helsinki-headless-cms';
+import { defaultConfig as rhhcDefaultConfig } from 'react-helsinki-headless-cms';
 
 import AppConfig from '../domain/app/AppConfig';
-import EventDetails, {
-  EventDetailsProps,
-} from '../domain/event/eventDetails/EventDetails';
-import ArticleDetails, {
-  ArticleDetailsProps,
-} from '../domain/article/articleDetails/ArticleDetails';
+import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
+import ArticleDetails from '../domain/article/articleDetails/ArticleDetails';
+import type { EventDetailsProps } from '../domain/event/eventDetails/EventDetails';
+import EventDetails from '../domain/event/eventDetails/EventDetails';
 
 const APP_DOMAIN = new URL(AppConfig.origin).origin;
 const CMS_API_DOMAIN = new URL(AppConfig.cmsGraphqlEndpoint).origin;
@@ -30,7 +27,7 @@ export default function useRHHCConfig(
   const { t } = useTranslation(['common', 'cms']);
   const locale = useLocale();
 
-  const rhhcConfig = React.useMemo(() => {
+  return React.useMemo(() => {
     const internalHrefOrigins = [
       APP_DOMAIN,
       CMS_API_DOMAIN,
@@ -94,5 +91,4 @@ export default function useRHHCConfig(
       internalHrefOrigins,
     } as Config;
   }, [t, cmsApolloClient, eventsApolloClient, locale]);
-  return rhhcConfig;
 }

@@ -5096,6 +5096,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mapbox/node-pre-gyp@npm:^1.0.0":
+  version: 1.0.10
+  resolution: "@mapbox/node-pre-gyp@npm:1.0.10"
+  dependencies:
+    detect-libc: "npm:^2.0.0"
+    https-proxy-agent: "npm:^5.0.0"
+    make-dir: "npm:^3.1.0"
+    node-fetch: "npm:^2.6.7"
+    nopt: "npm:^5.0.0"
+    npmlog: "npm:^5.0.1"
+    rimraf: "npm:^3.0.2"
+    semver: "npm:^7.3.5"
+    tar: "npm:^6.1.11"
+  bin:
+    node-pre-gyp: bin/node-pre-gyp
+  checksum: e408e430752eed5a1e3603d87ed070d09ba7b1a3fed303da5522b04ce9b06da66a67ef064be350290d788483efc6b7bbf6cbc67a47d04feee4002e52a43bfbaf
+  languageName: node
+  linkType: hard
+
 "@mdn/browser-compat-data@npm:^4.1.16":
   version: 4.2.1
   resolution: "@mdn/browser-compat-data@npm:4.2.1"
@@ -12573,6 +12592,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"canvas@npm:2.10.1":
+  version: 2.10.1
+  resolution: "canvas@npm:2.10.1"
+  dependencies:
+    "@mapbox/node-pre-gyp": "npm:^1.0.0"
+    nan: "npm:^2.15.0"
+    node-gyp: "npm:latest"
+    simple-get: "npm:^3.0.3"
+  checksum: eac07e4751e6c8caefb19cecc03fb80fbba449197156a75ad4b16811306f043c2f6100551b7d753ac920c86a69160d3949e6f18ff4a85cb9c45d799b4c39608d
+  languageName: node
+  linkType: hard
+
 "capital-case@npm:^1.0.4":
   version: 1.0.4
   resolution: "capital-case@npm:1.0.4"
@@ -14420,6 +14451,15 @@ __metadata:
   dependencies:
     mimic-response: "npm:^1.0.0"
   checksum: 6b6423eebde6911f2bcd1898df0c5b240efe820ebb08cd5e38b27f6962e496cea54d22c984efdcfb98f5b15dc1cdc141c1774e4ed6ea4e0cc1741a7de30a59cb
+  languageName: node
+  linkType: hard
+
+"decompress-response@npm:^4.2.0":
+  version: 4.2.1
+  resolution: "decompress-response@npm:4.2.1"
+  dependencies:
+    mimic-response: "npm:^2.0.0"
+  checksum: 8ef520663eef28e2249ea8de998e43dc506c38a2d6082954dd62385ee1c28c680d94821977467bf06191585315021d61e2e0aa4fc8dd7af38f04c01c3e023fec
   languageName: node
   linkType: hard
 
@@ -16996,49 +17036,6 @@ __metadata:
     typescript: "npm:4.8.4"
   languageName: unknown
   linkType: soft
-
-"events-helsinki-components@npm:0.0.7-canary-73d6316":
-  version: 0.0.7-canary-73d6316
-  resolution: "events-helsinki-components@npm:0.0.7-canary-73d6316"
-  dependencies:
-    "@apollo/client": "npm:3.6.9"
-    "@storybook/addons": "npm:6.5.12"
-    "@storybook/client-api": "npm:6.5.12"
-    "@types/react-datepicker": "npm:4.4.2"
-    classnames: "npm:2.3.2"
-    copy-to-clipboard: "npm:3.3.2"
-    date-fns: "npm:2.29.3"
-    date-fns-tz: "npm:1.3.7"
-    graphql: "npm:16.6.0"
-    hds-design-tokens: "npm:2.3.0"
-    hds-react: "npm:^2.3.0"
-    i18next: "npm:21.9.2"
-    i18next-browser-languagedetector: "npm:6.1.5"
-    i18next-http-backend: "npm:1.4.4"
-    ics: "npm:^2.40.0"
-    lodash: "npm:4.17.21"
-    next: "npm:12.3.1"
-    next-i18next: "npm:12.0.1"
-    nprogress: "npm:0.2.0"
-    query-string: "npm:7.1.1"
-    react: "npm:>=17.0.2"
-    react-content-loader: "npm:6.2.0"
-    react-datepicker: "npm:4.8.0"
-    react-dom: "npm:>=17.0.2"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha15"
-    react-i18next: "npm:11.18.6"
-    sanitize-html: "npm:2.7.2"
-  peerDependencies:
-    "@types/react": ^17.0.44 || ^18.0.0
-    "@types/react-dom": ^17.0.44 || ^18.0.0
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    "@types/react-dom":
-      optional: true
-  checksum: fc351b0ce63cde312de2c5c26aa25753ae9a2c6a9b8b5c062010e3b35a0d1e7617e95c3df0147438b9f6ae4f1c81b663410531c15eb2c42de6fefc5a03a91331
-  languageName: node
-  linkType: hard
 
 "events-helsinki-components@workspace:^, events-helsinki-components@workspace:packages/components":
   version: 0.0.0-use.local
@@ -19658,6 +19655,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.26.0"
     babel-eslint: "npm:^10.1.0"
     babel-jest: "npm:^28.1.0"
+    canvas: "npm:2.10.1"
     classnames: "npm:^2.3.1"
     copy-to-clipboard: "npm:^3.3.1"
     cross-env: "npm:7.0.3"
@@ -19676,7 +19674,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.30.0"
     eslint-plugin-react-hooks: "npm:^4.5.0"
     events-helsinki-common-i18n: "workspace:^"
-    events-helsinki-components: "npm:0.0.7-canary-73d6316"
+    events-helsinki-components: "workspace:^"
     file-saver: "npm:^2.0.5"
     graphql: "npm:^16.5.0"
     hds-react: "npm:^2.3.0"
@@ -25145,6 +25143,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mimic-response@npm:^2.0.0":
+  version: 2.1.0
+  resolution: "mimic-response@npm:2.1.0"
+  checksum: 04c653f64fdfa6c11b9470e1a91fc40f518b5fec6931131d548f29eaa602ea59c688fc93ba98fc035c13eaabcebb59b7b38332145329245a49f2435939acf1cd
+  languageName: node
+  linkType: hard
+
 "mimic-response@npm:^3.1.0":
   version: 3.1.0
   resolution: "mimic-response@npm:3.1.0"
@@ -25531,7 +25536,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nan@npm:^2.12.1":
+"nan@npm:^2.12.1, nan@npm:^2.15.0":
   version: 2.16.0
   resolution: "nan@npm:2.16.0"
   dependencies:
@@ -31287,6 +31292,17 @@ __metadata:
   version: 1.0.1
   resolution: "simple-concat@npm:1.0.1"
   checksum: 1a041737314d8b49247072adf25990fa56430c2f71f3c129013fa275e0d725d935c2e2ca33bd10c22f1391047a8a94e01db3c149bda30b8e2480a833c99b9a30
+  languageName: node
+  linkType: hard
+
+"simple-get@npm:^3.0.3":
+  version: 3.1.1
+  resolution: "simple-get@npm:3.1.1"
+  dependencies:
+    decompress-response: "npm:^4.2.0"
+    once: "npm:^1.3.1"
+    simple-concat: "npm:^1.0.0"
+  checksum: b10a96dc326f9eb1cdad3c2c934416883c244a047876742077b1da5499429efb278e7ca10dfda4ad12d0bea6058d240030216e50827f95b40fe955817cbb57ed
   languageName: node
   linkType: hard
 

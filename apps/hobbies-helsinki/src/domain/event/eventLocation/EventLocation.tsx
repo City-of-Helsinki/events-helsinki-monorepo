@@ -1,10 +1,10 @@
+import { useLocale } from 'events-helsinki-components';
 import { IconLocation } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
-import { useLocale } from 'events-helsinki-components';
 
-import { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
+import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
 import { getEventFields, getServiceMapUrl } from '../EventUtils';
 import styles from './eventLocation.module.scss';
 import LocationText from './EventLocationText';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const EventLocation: React.FC<Props> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const locale = useLocale();
   const { googleDirectionsLink, hslDirectionsLink, name } = getEventFields(
     event,
@@ -26,18 +26,18 @@ const EventLocation: React.FC<Props> = ({ event }) => {
       <div className={styles.titleWrapper}>
         <div className={styles.title}>
           <IconLocation aria-hidden />
-          <h2>{t('event:location.title')}</h2>
+          <h2>{t('location.title')}</h2>
         </div>
         <Link
           className={styles.mapLink}
           href={getServiceMapUrl(event, locale, false)}
         >
-          {t('event:location.openMap')}
+          {t('location.openMap')}
         </Link>
       </div>
 
       <iframe
-        title={t('event:location.mapTitle')}
+        title={t('location.mapTitle')}
         className={styles.mapContainer}
         src={getServiceMapUrl(event, locale, true)}
       ></iframe>
@@ -54,10 +54,10 @@ const EventLocation: React.FC<Props> = ({ event }) => {
         className={styles.externalLink}
         href={googleDirectionsLink}
       >
-        {t('event:location.directionsGoogle')}
+        {t('location.directionsGoogle')}
       </SecondaryLink>
       <SecondaryLink className={styles.externalLink} href={hslDirectionsLink}>
-        {t('event:location.directionsHSL')}
+        {t('location.directionsHSL')}
       </SecondaryLink>
     </div>
   );

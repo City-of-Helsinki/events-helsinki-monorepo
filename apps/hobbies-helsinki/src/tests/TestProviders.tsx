@@ -1,33 +1,30 @@
-import React from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-import { I18nextProvider } from 'react-i18next';
+import type { ApolloCache, ApolloClient, InMemoryCache } from '@apollo/client';
+import { useApolloClient } from '@apollo/client';
+import { MockedProvider } from '@apollo/client/testing';
+import type { MockedResponse } from '@apollo/client/testing';
+import type { Config as EventsConfig } from 'events-helsinki-components';
+import { DEFAULT_LANGUAGE } from 'events-helsinki-components';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
-import { NextRouter } from 'next/router';
-import { MockedProvider, MockedResponse } from '@apollo/client/testing';
+import Head from 'next/head';
+import Link from 'next/link';
+import type { NextRouter } from 'next/router';
+import React from 'react';
 import {
-  Config as RHHCConfig,
   ConfigProvider as RHHCConfigProvider,
   defaultConfig as rhhcDefaultConfig,
   getUri,
   ModuleItemTypeEnum,
 } from 'react-helsinki-headless-cms';
-import {
-  ApolloCache,
-  ApolloClient,
-  InMemoryCache,
-  useApolloClient,
-} from '@apollo/client';
-import { DEFAULT_LANGUAGE } from 'events-helsinki-components';
-import { Config as EventsConfig } from 'events-helsinki-components';
+import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
+import { I18nextProvider } from 'react-i18next';
 
-import i18n from './initI18n';
-import eventsDefaultConfig from '../common-events/configProvider/defaultConfig';
-import { createEventsApolloClient } from '../domain/clients/eventsApolloClient';
 import EventsConfigProvider from '../common-events/configProvider/ConfigProvider';
-import { createCmsApolloClient } from '../domain/clients/cmsApolloClient';
-import { getLocalizedCmsItemUrl } from '../utils/routerUtils';
+import eventsDefaultConfig from '../common-events/configProvider/defaultConfig';
 import { ROUTES } from '../constants';
+import { createCmsApolloClient } from '../domain/clients/cmsApolloClient';
+import { createEventsApolloClient } from '../domain/clients/eventsApolloClient';
+import { getLocalizedCmsItemUrl } from '../utils/routerUtils';
+import i18n from './initI18n';
 
 const CMS_API_DOMAIN = 'harrastukset.cms.test.domain.com';
 
@@ -44,7 +41,7 @@ type Props = {
   cache?: ApolloCache<Record<string, unknown>> | InMemoryCache;
 };
 
-function TestProviders({ mocks, children, router, cache }: Props) {
+function TestProviders({ mocks, children, router }: Props) {
   const eventsApolloClient = useApolloClient(createEventsApolloClient());
   return (
     <I18nextProvider i18n={i18n}>
@@ -72,21 +69,19 @@ function getEventsConfig(
     t: i18n.t,
     apolloClient: eventsApolloClient,
     router,
-  } as EventsConfig;
+  } as unknown as EventsConfig;
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 function getRHHCConfig(router: NextRouter) {
   const locale = DEFAULT_LANGUAGE;
 
   const getIsHrefExternal = (href: string) => {
     if (href.startsWith('/')) return false;
-    if (
+    return !!(
       !href?.includes(router.basePath) ||
       (CMS_API_DOMAIN && !href?.includes(CMS_API_DOMAIN))
-    ) {
-      return true;
-    }
-    return false;
+    );
   };
   const internalHrefOrigins = CMS_API_DOMAIN ? [CMS_API_DOMAIN] : [];
   const getRoutedInternalHref: RHHCConfig['utils']['getRoutedInternalHref'] = (
@@ -120,7 +115,7 @@ function getRHHCConfig(router: NextRouter) {
         locale
       );
     }
-    //TODO: test the default case
+    // TODO: test the default case
     return getLocalizedCmsItemUrl(link, {}, locale);
   };
 
@@ -132,8 +127,10 @@ function getRHHCConfig(router: NextRouter) {
     apolloClient: useApolloClient(createCmsApolloClient()),
     components: {
       ...rhhcDefaultConfig.components,
-      Head: (props) => <Head {...props} />,
-      Link: ({ href, ...props }) => <Link href={href || ''} {...props} />,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      Head: (props: any) => <Head {...props} />,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      Link: ({ href, ...props }: any) => <Link href={href || ''} {...props} />,
     },
     copy: {
       breadcrumbNavigationLabel: i18n.t(
@@ -167,7 +164,7 @@ function getRHHCConfig(router: NextRouter) {
       getRoutedInternalHref,
     },
     internalHrefOrigins,
-  } as RHHCConfig;
+  } as unknown as RHHCConfig;
 }
 
 export default TestProviders;

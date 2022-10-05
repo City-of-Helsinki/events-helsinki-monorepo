@@ -1,7 +1,7 @@
+import type { FilterType } from 'events-helsinki-components';
+import { FilterButton } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { FilterType } from 'events-helsinki-components';
-import { FilterButton } from 'events-helsinki-components';
 
 import { useOrganizationDetailsQuery } from '../../../nextApi/graphql/generated/graphql';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PublisherFilter: React.FC<Props> = ({ id, onRemove }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
   const { data, loading } = useOrganizationDetailsQuery({
     variables: { id },
   });
@@ -19,7 +19,7 @@ const PublisherFilter: React.FC<Props> = ({ id, onRemove }) => {
   return loading ? (
     <FilterButton
       onRemove={onRemove}
-      text={t('common:loading')}
+      text={t('loading')}
       type="publisher"
       value={id}
     />

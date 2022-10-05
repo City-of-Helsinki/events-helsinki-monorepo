@@ -17,6 +17,9 @@
     "loadMore": "Lataa lisää",
     "showAll": "Näytä kaikki"
   },
+  "menu": {
+    "menuToggleAriaLabel": "Avaa valikko"
+  },
   "category": {
     "ariaButtonRemove": "Poista kategoria: {{category}}"
   },

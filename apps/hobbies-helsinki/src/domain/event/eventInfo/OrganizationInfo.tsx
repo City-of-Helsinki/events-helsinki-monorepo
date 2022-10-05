@@ -1,28 +1,26 @@
-import { IconFaceSmile, IconLayers } from 'hds-react';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { SecondaryLink } from 'react-helsinki-headless-cms';
 import {
   InfoWithIcon,
   LoadingSpinner,
   useLocale,
 } from 'events-helsinki-components';
+import { IconFaceSmile, IconLayers } from 'hds-react';
+import { useTranslation } from 'next-i18next';
+import React from 'react';
+import { SecondaryLink } from 'react-helsinki-headless-cms';
 
-import styles from './eventInfo.module.scss';
-import {
-  EventFieldsFragment,
-  useOrganizationDetailsQuery,
-} from '../../nextApi/graphql/generated/graphql';
-import { getEventFields } from '../EventUtils';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import { ROUTES } from '../../../constants';
+import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
+import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
+import { useOrganizationDetailsQuery } from '../../nextApi/graphql/generated/graphql';
+import { getEventFields } from '../EventUtils';
+import styles from './eventInfo.module.scss';
 
 interface Props {
   event: EventFieldsFragment;
 }
 
 const OrganizationInfo: React.FC<Props> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const locale = useLocale();
   const { provider, publisher } = getEventFields(event, locale);
   const { data: organizationData, loading } = useOrganizationDetailsQuery({
@@ -35,18 +33,12 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
   return (
     <>
       {provider && (
-        <InfoWithIcon
-          icon={<IconFaceSmile />}
-          title={t('event:info.labelOrganizer')}
-        >
+        <InfoWithIcon icon={<IconFaceSmile />} title={t('info.labelOrganizer')}>
           <div>{provider}</div>
         </InfoWithIcon>
       )}
       {publisher && (
-        <InfoWithIcon
-          icon={<IconLayers />}
-          title={t('event:info.labelPublisher')}
-        >
+        <InfoWithIcon icon={<IconLayers />} title={t('info.labelPublisher')}>
           <LoadingSpinner hasPadding={false} isLoading={loading}>
             {organizationName && (
               <>
@@ -60,7 +52,7 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
                     locale
                   )}?publisher=${publisher}`}
                 >
-                  {t(`event:info.linkSearchByPublisher`)}
+                  {t('info.linkSearchByPublisher')}
                 </SecondaryLink>
               </>
             )}

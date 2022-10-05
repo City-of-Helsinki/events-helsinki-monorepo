@@ -1,4 +1,9 @@
 import {
+  InfoWithIcon,
+  LoadingSpinner,
+  SkeletonLoader,
+} from 'events-helsinki-components';
+import {
   IconAngleDown,
   IconAngleUp,
   IconCalendarPlus,
@@ -6,14 +11,9 @@ import {
 } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import {
-  InfoWithIcon,
-  LoadingSpinner,
-  SkeletonLoader,
-} from 'events-helsinki-components';
 
 import { useSubEvents, useSubEventsQueryVariables } from '../queryUtils';
-import { EventFields, SuperEventResponse } from '../types';
+import type { EventFields, SuperEventResponse } from '../types';
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
 
@@ -22,7 +22,7 @@ export const subEventsListTestId = 'sub-events-list';
 export const superEventTestId = 'super-event';
 
 const SubEvents: React.FC<{ event: EventFields }> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const [isListOpen, setIsListOpen] = React.useState(false);
 
   const { superEventId, variables } = useSubEventsQueryVariables(event);
@@ -75,11 +75,11 @@ const SubEvents: React.FC<{ event: EventFields }> = ({ event }) => {
    */
   const [title, titleIcon] = isMiddleLevelEvent
     ? [
-        t('event:otherTimes.title'),
+        t('otherTimes.title'),
         <IconCalendarPlus key={'icon-calendar´' + Math.random()} aria-hidden />,
       ]
     : [
-        t('event:subEvents.title'),
+        t('subEvents.title'),
         <IconLayers key={'icon-layers' + Math.random()} aria-hidden />,
       ];
 
@@ -99,8 +99,8 @@ const SubEvents: React.FC<{ event: EventFields }> = ({ event }) => {
         {events.length > EVENTS_LIST_LIMIT && (
           <button onClick={toggleList} aria-expanded={isListOpen}>
             {isListOpen
-              ? t('event:relatedEvents.buttonHide')
-              : t('event:relatedEvents.buttonShow')}
+              ? t('relatedEvents.buttonHide')
+              : t('relatedEvents.buttonShow')}
             {isListOpen ? (
               <IconAngleUp aria-hidden />
             ) : (

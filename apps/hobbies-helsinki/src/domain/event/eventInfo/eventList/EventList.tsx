@@ -1,17 +1,16 @@
+import { getDateRangeStr, useLocale } from 'events-helsinki-components';
 import { IconArrowRight } from 'hds-react';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
-import { useRouter } from 'next/router';
-import { getDateRangeStr } from 'events-helsinki-components';
-import { useLocale } from 'events-helsinki-components';
 
-import { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
-import { getEventFields } from '../../EventUtils';
-import { EventFields } from '../../types';
-import styles from './eventList.module.scss';
-import { getLocalizedCmsItemUrl } from '../../../../utils/routerUtils';
 import { ROUTES } from '../../../../constants';
+import { getLocalizedCmsItemUrl } from '../../../../utils/routerUtils';
+import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
+import { getEventFields } from '../../EventUtils';
+import type { EventFields } from '../../types';
+import styles from './eventList.module.scss';
 
 const EventList: React.FC<{
   events: EventFields[];
@@ -19,7 +18,8 @@ const EventList: React.FC<{
   showName?: boolean;
   id: string;
 }> = ({ events, showDate = false, showName = false, id }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
+  const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
@@ -38,7 +38,7 @@ const EventList: React.FC<{
               end: event.endTime,
               includeTime: true,
               locale,
-              timeAbbreviation: t('common:timeAbbreviation'),
+              timeAbbreviation: commonTranslation('timeAbbreviation'),
             })
           : '';
         return (
@@ -49,10 +49,10 @@ const EventList: React.FC<{
               href={getLinkUrl(event)}
               aria-label={
                 showDate
-                  ? t('event:otherTimes.buttonReadMore', {
+                  ? t('otherTimes.buttonReadMore', {
                       date,
                     })
-                  : t('event:relatedEvents.buttonReadMore')
+                  : t('relatedEvents.buttonReadMore')
               }
             >
               <span>{`${showName ? name : ''} ${showDate ? date : ''}`}</span>

@@ -12,6 +12,9 @@
       "title": "Sökförslag"
     }
   },
+  "menu": {
+    "menuToggleAriaLabel": "Öppna menyn"
+  },
   "category": {
     "ariaButtonRemove": "Radera kategori: {{category}}"
   },

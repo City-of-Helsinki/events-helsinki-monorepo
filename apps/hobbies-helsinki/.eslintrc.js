@@ -18,13 +18,13 @@ module.exports = {
   },
   ignorePatterns: [...getDefaultIgnorePatterns(), '.next', '.out'],
   extends: [
+    'next',
+    'prettier',
     '@events-helsinki/eslint-config-bases/typescript',
     '@events-helsinki/eslint-config-bases/sonar',
     '@events-helsinki/eslint-config-bases/regexp',
     '@events-helsinki/eslint-config-bases/jest',
     '@events-helsinki/eslint-config-bases/react',
-    '@events-helsinki/eslint-config-bases/tailwind',
-    '@events-helsinki/eslint-config-bases/rtl',
     '@events-helsinki/eslint-config-bases/graphql-schema',
     // Add specific rules for nextjs
     'plugin:@next/next/core-web-vitals',

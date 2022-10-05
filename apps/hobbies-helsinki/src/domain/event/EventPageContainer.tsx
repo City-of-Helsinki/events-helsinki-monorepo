@@ -1,27 +1,28 @@
-import { useTranslation } from 'next-i18next';
-import React from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { Link } from 'react-helsinki-headless-cms';
-import { useRouter } from 'next/router';
-import { LoadingSpinner } from 'events-helsinki-components';
-import { isClient, addParamsToQueryString } from 'events-helsinki-components';
-import { useLocale } from 'events-helsinki-components';
-
-import ErrorHero from '../error/ErrorHero';
 import {
-  EventDetailsDocument,
-  EventFieldsFragment,
-} from '../nextApi/graphql/generated/graphql';
+  LoadingSpinner,
+  useLocale,
+  isClient,
+  addParamsToQueryString,
+} from 'events-helsinki-components';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { Link } from 'react-helsinki-headless-cms';
+
+import { ROUTES } from '../../constants';
+import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
+import ErrorHero from '../error/ErrorHero';
+import type { EventFieldsFragment } from '../nextApi/graphql/generated/graphql';
+import { EventDetailsDocument } from '../nextApi/graphql/generated/graphql';
 import EventClosedHero from './eventClosedHero/EventClosedHero';
 import EventContent from './eventContent/EventContent';
 import EventHero from './eventHero/EventHero';
+import styles from './eventPage.module.scss';
 import EventPageMeta from './eventPageMeta/EventPageMeta';
 import { getEventIdFromUrl, isEventClosed } from './EventUtils';
 import SimilarEvents from './similarEvents/SimilarEvents';
-import { SuperEventResponse } from './types';
-import styles from './eventPage.module.scss';
-import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
-import { ROUTES } from '../../constants';
+import type { SuperEventResponse } from './types';
 
 export interface EventPageContainerProps {
   loading: boolean;
@@ -34,7 +35,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
   loading,
   showSimilarEvents = true,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const router = useRouter();
   const locale = useLocale();
   const search = addParamsToQueryString(router.asPath, {
@@ -96,10 +97,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
               {isClient && showSimilarEvents && <SimilarEvents event={event} />}
             </>
           ) : (
-            <ErrorHero
-              text={t('event:notFound.text')}
-              title={t('event:notFound.title')}
-            >
+            <ErrorHero text={t('notFound.text')} title={t('notFound.title')}>
               <Link
                 href={`${getLocalizedCmsItemUrl(
                   ROUTES.SEARCH,
@@ -107,7 +105,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                   locale
                 )}${search}`}
               >
-                {t('event:notFound.linkSearchEvents')}
+                {t('notFound.linkSearchEvents')}
               </Link>
             </ErrorHero>
           )}

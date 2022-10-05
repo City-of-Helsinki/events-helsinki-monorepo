@@ -1,26 +1,24 @@
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { scroller } from 'react-scroll';
-import { toast } from 'react-toastify';
-import qs from 'query-string';
-import { useRouter } from 'next/router';
 import {
   LoadingSpinner,
   SrOnly,
   useIsSmallScreen,
 } from 'events-helsinki-components';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import qs from 'query-string';
+import React from 'react';
+import { scroller } from 'react-scroll';
+import { toast } from 'react-toastify';
 
-import {
-  QueryEventListArgs,
-  useEventListQuery,
-} from '../../nextApi/graphql/generated/graphql';
+import EventList from '../../../common-events/components/eventList/EventList';
+import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
+import { getLargeEventCardId } from '../../event/EventUtils';
+import type { QueryEventListArgs } from '../../nextApi/graphql/generated/graphql';
+import { useEventListQuery } from '../../nextApi/graphql/generated/graphql';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
+import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 import { getEventSearchVariables, getNextPage } from './utils';
-import { getLargeEventCardId } from '../../event/EventUtils';
-import EventList from '../../../common-events/components/eventList/EventList';
-import styles from './eventSearchPage.module.scss';
-import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 
 const SearchPage: React.FC<{
   SearchComponent: React.FC<{
@@ -118,7 +116,7 @@ const SearchPage: React.FC<{
 
   return (
     <div>
-      <SrOnly as="h1">{t(pageTitle)}</SrOnly>
+      <SrOnly as="h1">{pageTitle}</SrOnly>
       <SearchComponent
         scrollToResultList={scrollToResultList}
         data-testid="searchContainer"

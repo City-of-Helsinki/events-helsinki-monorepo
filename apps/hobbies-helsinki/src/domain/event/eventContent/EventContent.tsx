@@ -1,16 +1,14 @@
+import { sanitizeHtml, useLocale } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { PageSection } from 'react-helsinki-headless-cms';
-import { ContentContainer } from 'react-helsinki-headless-cms';
-import { sanitizeHtml } from 'events-helsinki-components';
-import { useLocale } from 'events-helsinki-components';
+import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 
 import ShareLinks from '../../../common-events/components/shareLinks/ShareLinks';
 import { EVENT_LOCATIONS } from '../constants';
 import EventInfo from '../eventInfo/EventInfo';
 import EventLocation from '../eventLocation/EventLocation';
 import { getEventFields } from '../EventUtils';
-import { EventFields, SuperEventResponse } from '../types';
+import type { EventFields, SuperEventResponse } from '../types';
 import styles from './eventContent.module.scss';
 
 interface Props {
@@ -19,7 +17,7 @@ interface Props {
 }
 
 const EventContent: React.FC<Props> = ({ event, superEvent }) => {
-  const { t } = useTranslation(['common', 'event', 'eventSearch']);
+  const { t } = useTranslation(['common', 'event']);
   const locale = useLocale();
   const { description, photographerName } = getEventFields(event, locale);
 

@@ -17,6 +17,9 @@
     "loadMore": "Load more",
     "showAll": "Show more"
   },
+  "menu": {
+    "menuToggleAriaLabel": "Open menu"
+  },
   "category": {
     "ariaButtonRemove": "Remove category: {{category}}"
   },

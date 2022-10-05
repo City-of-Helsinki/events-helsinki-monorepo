@@ -1,19 +1,18 @@
-import React, { useRef } from 'react';
-import { GetStaticPropsContext } from 'next';
-import { useEffect } from 'react';
-import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import { ApolloProvider } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { useEventsApolloClientFromConfig } from 'events-helsinki-components';
+import type { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+import React, { useRef, useEffect } from 'react';
+import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 
+import Navigation from '../../common-events/components/navigation/Navigation';
+import { ROUTES } from '../../constants';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
+import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
-import Navigation from '../../common-events/components/navigation/Navigation';
 import SearchPage from '../../domain/search/eventSearch/SearchPage';
-import FooterSection from '../../domain/footer/Footer';
 import { getLocaleOrError } from '../../utils/routerUtils';
-import { ROUTES } from '../../constants';
 
 export default function Search() {
   const router = useRouter();
@@ -43,6 +42,8 @@ export default function Search() {
       className="pageLayout"
       navigation={<Navigation />}
       content={
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         <ApolloProvider client={eventsApolloClient}>
           <SearchPage
             SearchComponent={AdvancedSearch}

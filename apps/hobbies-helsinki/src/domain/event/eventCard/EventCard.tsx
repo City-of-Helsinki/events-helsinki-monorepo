@@ -1,16 +1,18 @@
 import classNames from 'classnames';
-import { IconArrowRight } from 'hds-react';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-import { useRouter } from 'next/router';
 import {
   addParamsToQueryString,
   getDateRangeStr,
+  useLocale,
+  IconButton,
 } from 'events-helsinki-components';
-import { IconButton } from 'events-helsinki-components';
-import { useLocale } from 'events-helsinki-components';
+import { IconArrowRight } from 'hds-react';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 
+import { ROUTES } from '../../../constants';
+import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import LocationText from '../eventLocation/EventLocationText';
 import EventName from '../eventName/EventName';
@@ -20,17 +22,16 @@ import {
   getEventPrice,
   isEventClosed,
 } from '../EventUtils';
-import { EventFields } from '../types';
+import type { EventFields } from '../types';
 import styles from './eventCard.module.scss';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
-import { ROUTES } from '../../../constants';
 
 interface Props {
   event: EventFields;
 }
 
 const EventCard: React.FC<Props> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
+  const { t: commonTranslation } = useTranslation('common');
   const router = useRouter();
   const locale = useLocale();
   const button = React.useRef<HTMLDivElement>(null);
@@ -49,11 +50,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
     locale
   )}${queryString}`;
   const eventClosed = isEventClosed(event);
-  const eventPriceText = getEventPrice(
-    event,
-    locale,
-    t('event:eventCard.isFree')
-  );
+  const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 
   const goToEventPage = () => {
     router.push(eventUrl);
@@ -61,7 +58,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
 
   return (
     <LinkBox
-      aria-label={t('event:eventCard.ariaLabelLink', {
+      aria-label={t('eventCard.ariaLabelLink', {
         name,
       })}
       id={getEventCardId(id)}
@@ -87,7 +84,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
                   locale,
                   includeWeekday: false,
                   includeTime: true,
-                  timeAbbreviation: t('common:timeAbbreviation'),
+                  timeAbbreviation: commonTranslation('timeAbbreviation'),
                 })}
             </div>
             <div className={styles.eventLocation}>
@@ -110,7 +107,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
           <div className={styles.buttonWrapper}>
             <div ref={button}>
               <IconButton
-                ariaLabel={t('event:eventCard.ariaLabelLink', {
+                ariaLabel={t('eventCard.ariaLabelLink', {
                   name,
                 })}
                 icon={<IconArrowRight aria-hidden />}

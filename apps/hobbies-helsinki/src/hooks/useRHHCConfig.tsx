@@ -24,7 +24,8 @@ export default function useRHHCConfig(
   cmsApolloClient: ApolloClient<NormalizedCacheObject>,
   eventsApolloClient: ApolloClient<NormalizedCacheObject>
 ) {
-  const { t } = useTranslation(['common', 'cms']);
+  const { t: commonTranslation } = useTranslation('common');
+  const { t: cmsTranslation } = useTranslation('cms');
   const locale = useLocale();
 
   return React.useMemo(() => {
@@ -41,9 +42,14 @@ export default function useRHHCConfig(
       ...rhhcDefaultConfig,
       components: {
         ...rhhcDefaultConfig.components,
-        Head: (props) => <Head {...props} />,
-        Link: ({ href, ...props }) => <Link href={href || ''} {...props} />,
-        EventCardContent: (props) => (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Head: (props: any) => <Head {...props} />,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Link: ({ href, ...props }: any) => (
+          <Link href={href || ''} {...props} />
+        ),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        EventCardContent: (props: any) => (
           <EventDetails {...(props as EventDetailsProps)} />
         ),
         ArticleCardContent: (props: ArticleDetailsProps) => (
@@ -56,32 +62,40 @@ export default function useRHHCConfig(
         '/static/images/event_placeholder_C.jpg',
         '/static/images/event_placeholder_D.jpg',
       ],
-      siteName: t('appName'),
+      siteName: commonTranslation('appName'),
       currentLanguageCode: locale.toUpperCase(),
       apolloClient: cmsApolloClient,
       eventsApolloClient: eventsApolloClient,
       copy: {
-        breadcrumbNavigationLabel: t(
-          'common:breadcrumb.breadcrumbNavigationLabel'
+        breadcrumbNavigationLabel: commonTranslation(
+          'breadcrumb.breadcrumbNavigationLabel'
         ),
-        breadcrumbListLabel: t('common:breadcrumb.breadcrumbListLabel'),
-        menuToggleAriaLabel: t('common:menu.menuToggleAriaLabel'),
-        skipToContentLabel: t('common:linkSkipToContent'),
-        openInExternalDomainAriaLabel: t('common:srOnly.opensInAnExternalSite'),
-        openInNewTabAriaLabel: t('common:srOnly.opensInANewTab'),
-        closeButtonLabelText: t('common:button.close'),
-        loadMoreButtonLabelText: t('common:button.loadMore'),
-        showAllText: t('common:button.showAll'),
+        breadcrumbListLabel: commonTranslation(
+          'breadcrumb.breadcrumbListLabel'
+        ),
+        menuToggleAriaLabel: commonTranslation('menu.menuToggleAriaLabel'),
+        skipToContentLabel: commonTranslation('linkSkipToContent'),
+        openInExternalDomainAriaLabel: commonTranslation(
+          'srOnly.opensInAnExternalSite'
+        ),
+        openInNewTabAriaLabel: commonTranslation('srOnly.opensInANewTab'),
+        closeButtonLabelText: commonTranslation('button.close'),
+        loadMoreButtonLabelText: commonTranslation('button.loadMore'),
+        showAllText: commonTranslation('button.showAll'),
         archiveSearch: {
-          title: t('cms:archiveSearch.title'),
-          searchTextPlaceholder: t('cms:archiveSearch.searchTextPlaceholder'),
-          searchButtonLabelText: t('cms:archiveSearch.searchButtonLabelText'),
-          loadMoreButtonLabelText: t(
-            'cms:archiveSearch.loadMoreButtonLabelText'
+          title: cmsTranslation('archiveSearch.title'),
+          searchTextPlaceholder: cmsTranslation(
+            'archiveSearch.searchTextPlaceholder'
           ),
-          noResultsTitle: t('cms:archiveSearch.noResultsTitle'),
-          noResultsText: t('cms:archiveSearch.noResultsText'),
-          clearAll: t('cms:archiveSearch.buttonClearFilters'),
+          searchButtonLabelText: cmsTranslation(
+            'archiveSearch.searchButtonLabelText'
+          ),
+          loadMoreButtonLabelText: cmsTranslation(
+            'archiveSearch.loadMoreButtonLabelText'
+          ),
+          noResultsTitle: cmsTranslation('archiveSearch.noResultsTitle'),
+          noResultsText: cmsTranslation('archiveSearch.noResultsText'),
+          clearAll: cmsTranslation('archiveSearch.buttonClearFilters'),
         },
       },
       utils: {
@@ -89,6 +103,12 @@ export default function useRHHCConfig(
         getIsHrefExternal,
       },
       internalHrefOrigins,
-    } as Config;
-  }, [t, cmsApolloClient, eventsApolloClient, locale]);
+    } as unknown as Config;
+  }, [
+    commonTranslation,
+    cmsTranslation,
+    cmsApolloClient,
+    eventsApolloClient,
+    locale,
+  ]);
 }

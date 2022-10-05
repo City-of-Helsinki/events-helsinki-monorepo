@@ -1,22 +1,21 @@
-import React from 'react';
 import 'nprogress/nprogress.css';
 import { ApolloProvider } from '@apollo/client';
-import type { AppProps } from 'next/app';
-import { useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import { LoadingSpinner } from 'hds-react';
-import Error from 'next/error';
 import { appWithTranslation } from 'next-i18next';
-import { ToastContainer } from 'react-toastify';
+import type { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
+import Error from 'next/error';
+import type { NextRouter } from 'next/router';
+import React from 'react';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
-import { NextRouter } from 'next/router';
+import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
-import { useCmsApollo } from '../domain/clients/cmsApolloClient';
-import useRHHCConfig from '../hooks/useRHHCConfig';
 import EventsConfigProvider from '../common-events/configProvider/ConfigProvider';
+import { useCmsApollo } from '../domain/clients/cmsApolloClient';
 import { useEventsApolloClient } from '../domain/clients/eventsApolloClient';
 import useEventsConfig from '../hooks/useEventsConfig';
+import useRHHCConfig from '../hooks/useRHHCConfig';
 
 const TopProgressBar = dynamic(
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -64,7 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // The document object does not exist during server side renders.
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
   //       SEO performance is not impacted.
-  useEffect(() => {
+  React.useEffect(() => {
     setTimeout(() => {
       const body = document?.body;
 
@@ -86,17 +85,13 @@ function MyApp({ Component, pageProps }: AppProps) {
               </Center>
             ) : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            pageProps.error ? (
+            pageProps?.error ? (
               <Error
-                {
-                  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-                  /* @ts-ignore */ ...{}
-                }
+                /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+                /* @ts-ignore */
                 statusCode={pageProps.error.networkError?.statusCode ?? 400}
-                {
-                  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-                  /* @ts-ignore */ ...{}
-                }
+                /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+                /* @ts-ignore */
                 title={pageProps.error.title}
               />
             ) : (

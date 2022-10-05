@@ -12,6 +12,9 @@
       "title": "Search suggestions"
     }
   },
+  "menu": {
+    "menuToggleAriaLabel": "Open menu"
+  },
   "button": {
     "close": "Close",
     "loadMore": "Load more",

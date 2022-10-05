@@ -1,14 +1,14 @@
+import { useLocale } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
 import { useRouter } from 'next/router';
-import { useLocale } from 'events-helsinki-components';
+import React from 'react';
 
 import { getI18nPath } from '../../../utils/routerUtils';
 import styles from './eventClosedHero.module.scss';
 
 const EventClosedHero: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const router = useRouter();
   const locale = useLocale();
 
@@ -18,10 +18,10 @@ const EventClosedHero: React.FC = () => {
 
   return (
     <div className={styles.eventClosedHero}>
-      <h1>{t('event:hero.titleEventClosed')}</h1>
-      <p>{t('event:hero.textEventClosed')}</p>
+      <h1>{t('hero.titleEventClosed')}</h1>
+      <p>{t('hero.textEventClosed')}</p>
       <Button onClick={moveToHomePage} variant="success">
-        {t('event:hero.buttonToHomePage')}
+        {t('hero.buttonToHomePage')}
       </Button>
     </div>
   );

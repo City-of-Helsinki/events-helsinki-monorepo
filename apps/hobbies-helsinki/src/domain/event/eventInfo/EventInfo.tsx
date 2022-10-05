@@ -1,4 +1,14 @@
 import * as Sentry from '@sentry/browser';
+import {
+  getDateArray,
+  getDomain,
+  getDateRangeStr,
+  translateValue,
+  InfoWithIcon,
+  useLocale,
+  useTabFocusStyle,
+  Visible,
+} from 'events-helsinki-components';
 import { saveAs } from 'file-saver';
 import {
   Button,
@@ -10,33 +20,26 @@ import {
   IconLocation,
   IconTicket,
 } from 'hds-react';
-import { createEvent, EventAttributes } from 'ics';
+import type { EventAttributes } from 'ics';
+import { createEvent } from 'ics';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
-import { getDateArray, getDomain } from 'events-helsinki-components';
-import {
-  InfoWithIcon,
-  useLocale,
-  useTabFocusStyle,
-  Visible,
-} from 'events-helsinki-components';
-import { getDateRangeStr, translateValue } from 'events-helsinki-components';
 
+import IconDirections from '../../../assets/icons/IconDirections';
+import { ROUTES } from '../../../constants';
+import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import {
   getAudienceAgeText,
   getEventFields,
   getEventPrice,
   getServiceMapUrl,
 } from '../EventUtils';
-import { EventFields, KeywordOption, SuperEventResponse } from '../types';
+import type { EventFields, KeywordOption, SuperEventResponse } from '../types';
 import styles from './eventInfo.module.scss';
 import { SubEvents, SuperEvent } from './EventsHierarchy';
 import OrganizationInfo from './OrganizationInfo';
 import OtherEventTimes from './OtherEventTimes';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
-import IconDirections from '../../../assets/icons/IconDirections';
-import { ROUTES } from '../../../constants';
 
 interface Props {
   event: EventFields;
@@ -97,7 +100,8 @@ const EventInfo: React.FC<Props> = ({ event, superEvent }) => {
 };
 
 const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
+  const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();
 
   const {
@@ -115,7 +119,7 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
     if (startTime) {
       const domain = getDomain();
       const icsEvent: EventAttributes = {
-        description: t('event:info.textCalendarLinkDescription', {
+        description: t('info.textCalendarLinkDescription', {
           description: shortDescription,
           link: `${domain}${getLocalizedCmsItemUrl(
             ROUTES.COURSES,
@@ -147,7 +151,7 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
   return (
     <InfoWithIcon
       icon={<IconCalendarClock aria-hidden />}
-      title={t('event:info.labelDateAndTime')}
+      title={t('info.labelDateAndTime')}
     >
       {!!startTime && (
         <>
@@ -156,10 +160,10 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
             end: endTime,
             locale,
             includeTime: true,
-            timeAbbreviation: t('common:timeAbbreviation'),
+            timeAbbreviation: commonTranslation('timeAbbreviation'),
           })}
           <button onClick={downloadIcsFile}>
-            {t('event:info.buttonAddToCalendar')}
+            {t('info.buttonAddToCalendar')}
             <IconAngleRight aria-hidden />
           </button>
         </>
@@ -169,7 +173,7 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
 };
 
 const LocationInfo: React.FC<{ event: EventFields }> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const locale = useLocale();
 
   const { addressLocality, district, locationName, streetAddress } =
@@ -180,7 +184,7 @@ const LocationInfo: React.FC<{ event: EventFields }> = ({ event }) => {
   return (
     <InfoWithIcon
       icon={<IconLocation aria-hidden />}
-      title={t('event:info.labelLocation')}
+      title={t('info.labelLocation')}
     >
       <Visible below="s">
         {[locationName, streetAddress, district, addressLocality]
@@ -201,7 +205,7 @@ const LocationInfo: React.FC<{ event: EventFields }> = ({ event }) => {
           variant="arrowRight"
           href={serviceMapUrl}
         >
-          {t('event:info.openMap')}
+          {t('info.openMap')}
         </SecondaryLink>
       )}
     </InfoWithIcon>
@@ -213,10 +217,10 @@ const Audience: React.FC<{
   audienceMinAge?: string | null;
   audienceMaxAge?: string | null;
 }> = ({ audience, audienceMinAge, audienceMaxAge }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
 
   return (
-    <InfoWithIcon icon={<IconGroup />} title={t('event:info.labelAudience')}>
+    <InfoWithIcon icon={<IconGroup />} title={t('info.labelAudience')}>
       {(audienceMinAge || audienceMaxAge) && (
         <div>{getAudienceAgeText(t, audienceMinAge, audienceMaxAge)}</div>
       )}
@@ -228,12 +232,12 @@ const Audience: React.FC<{
 };
 
 const Languages: React.FC<{ languages: string[] }> = ({ languages }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
 
   return (
     <InfoWithIcon
       icon={<IconGlobe aria-hidden />}
-      title={t('event:info.labelLanguages')}
+      title={t('info.labelLanguages')}
     >
       <div>{languages.join(', ')}</div>
     </InfoWithIcon>
@@ -243,7 +247,7 @@ const Languages: React.FC<{ languages: string[] }> = ({ languages }) => {
 const OtherInfo: React.FC<{
   event: EventFields;
 }> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const locale = useLocale();
 
   const { email, externalLinks, infoUrl, telephone, registrationUrl } =
@@ -252,7 +256,7 @@ const OtherInfo: React.FC<{
   return (
     <InfoWithIcon
       icon={<IconInfoCircle aria-hidden />}
-      title={t('event:info.labelOtherInfo')}
+      title={t('info.labelOtherInfo')}
     >
       {[email, telephone]
         .filter((e) => e)
@@ -267,23 +271,28 @@ const OtherInfo: React.FC<{
           href={infoUrl}
           showExternalIcon={false}
         >
-          {t('event:info.linkWebPage')}
+          {t('info.linkWebPage')}
         </SecondaryLink>
       )}
-      {externalLinks.map((externalLink: any, index: number) => {
-        return (
-          !!externalLink.link &&
-          externalLink.link !== registrationUrl && (
-            <SecondaryLink
-              className={styles.link}
-              key={index}
-              href={externalLink.link}
-            >
-              {translateValue('event:info.', externalLink.name as string, t)}
-            </SecondaryLink>
-          )
-        );
-      })}
+      {externalLinks.map(
+        (
+          externalLink: { link?: string | null; name?: string | null },
+          index: number
+        ) => {
+          return (
+            !!externalLink.link &&
+            externalLink.link !== registrationUrl && (
+              <SecondaryLink
+                className={styles.link}
+                key={index}
+                href={externalLink.link}
+              >
+                {translateValue('info.', externalLink.name as string, t)}
+              </SecondaryLink>
+            )
+          );
+        }
+      )}
     </InfoWithIcon>
   );
 };
@@ -291,7 +300,7 @@ const OtherInfo: React.FC<{
 const Directions: React.FC<{
   event: EventFields;
 }> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const locale = useLocale();
 
   const { googleDirectionsLink, hslDirectionsLink } = getEventFields(
@@ -302,26 +311,22 @@ const Directions: React.FC<{
   return (
     <InfoWithIcon
       icon={<IconDirections aria-hidden />}
-      title={t('event:info.labelDirections')}
+      title={t('info.labelDirections')}
     >
       <SecondaryLink className={styles.link} href={googleDirectionsLink}>
-        {t('event:info.directionsGoogle')}
+        {t('info.directionsGoogle')}
       </SecondaryLink>
       <SecondaryLink className={styles.link} href={hslDirectionsLink}>
-        {t('event:info.directionsHSL')}
+        {t('info.directionsHSL')}
       </SecondaryLink>
     </InfoWithIcon>
   );
 };
 
 const PriceInfo: React.FC<{ event: EventFields }> = ({ event }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('event');
   const locale = useLocale();
-  const eventPriceText = getEventPrice(
-    event,
-    locale,
-    t('event:info.offers.isFree')
-  );
+  const eventPriceText = getEventPrice(event, locale, t('info.offers.isFree'));
   const { offerInfoUrl } = getEventFields(event, locale);
   const moveToBuyTicketsPage = () => {
     window.open(offerInfoUrl);
@@ -332,7 +337,7 @@ const PriceInfo: React.FC<{ event: EventFields }> = ({ event }) => {
       <Visible below="s">
         <InfoWithIcon
           icon={<IconTicket aria-hidden />}
-          title={t('event:info.labelPrice')}
+          title={t('info.labelPrice')}
         >
           {eventPriceText || '-'}
         </InfoWithIcon>
@@ -341,12 +346,12 @@ const PriceInfo: React.FC<{ event: EventFields }> = ({ event }) => {
       {offerInfoUrl && (
         <Visible below="s" className={styles.buyButtonWrapper}>
           <Button
-            aria-label={t('event:info.ariaLabelBuyTickets')}
+            aria-label={t('info.ariaLabelBuyTickets')}
             fullWidth={true}
             onClick={moveToBuyTicketsPage}
             variant="success"
           >
-            {t('event:info.buttonBuyTickets')}
+            {t('info.buttonBuyTickets')}
           </Button>
         </Visible>
       )}

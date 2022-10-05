@@ -7,10 +7,10 @@ import {
 } from '@apollo/client';
 import fetch from 'cross-fetch';
 import {
-  initializeApolloClient,
   MutableReference,
   sortMenuItems,
   isClient,
+  initializeApolloClient,
 } from 'events-helsinki-components';
 import { useMemo } from 'react';
 
@@ -57,12 +57,19 @@ export function createCmsApolloClient() {
   });
 }
 
-export default function initializeCmsApollo(initialState = {}) {
-  return {
+export default function initializeCmsApollo(
+  initialState = {}
+): ApolloClient<NormalizedCacheObject> {
+  return initializeApolloClient<
+    NormalizedCacheObject,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    ApolloClient<NormalizedCacheObject>
+  >({
     initialState,
     mutableCachedClient: cmsApolloClient,
     createClient: createCmsApolloClient,
-  };
+  });
 }
 
 export function useCmsApollo(initialState: NormalizedCacheObject) {

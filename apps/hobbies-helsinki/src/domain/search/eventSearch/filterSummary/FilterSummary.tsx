@@ -1,15 +1,21 @@
-import { ParsedUrlQueryInput } from 'querystring';
+import type { ParsedUrlQueryInput } from 'querystring';
 
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import qs, { parse } from 'query-string';
+import type { FilterType } from 'events-helsinki-components';
+import {
+  formatDate,
+  translateValue,
+  FilterButton,
+  useLocale,
+} from 'events-helsinki-components';
 import { IconCrossCircleFill } from 'hds-react';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { FilterType } from 'events-helsinki-components';
-import { formatDate, translateValue } from 'events-helsinki-components';
-import { FilterButton, useLocale } from 'events-helsinki-components';
+import qs, { parse } from 'query-string';
+import React from 'react';
 
 import useDivisionOptions from '../../../../common-events/hooks/useDivisionOptions';
+import { ROUTES } from '../../../../constants';
+import { getI18nPath } from '../../../../utils/routerUtils';
 import {
   getSearchFilters,
   getSearchQuery,
@@ -20,8 +26,6 @@ import DateFilter from './DateFilter';
 import styles from './filterSummary.module.scss';
 import PlaceFilter from './PlaceFilter';
 import PublisherFilter from './PublisherFilter';
-import { getI18nPath } from '../../../../utils/routerUtils';
-import { ROUTES } from '../../../../constants';
 
 export const filterSummaryContainerTestId = 'filter-summary';
 
@@ -30,7 +34,7 @@ interface Props {
 }
 
 const FilterSummary: React.FC<Props> = ({ onClear }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('search');
   const locale = useLocale();
   const router = useRouter();
   const searchParams = new URLSearchParams(qs.stringify(router.query));
@@ -183,7 +187,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         />
       )}
       <button className={styles.clearButton} onClick={onClear} type="button">
-        {t('search:buttonClearFilters')}
+        {t('buttonClearFilters')}
         <IconCrossCircleFill aria-hidden />
       </button>
     </div>

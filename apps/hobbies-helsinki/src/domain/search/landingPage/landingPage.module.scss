@@ -1,6 +1,6 @@
-@use 'breakpoints';
-@use 'utils';
-@import 'variables';
+@use 'src/styles/breakpoints';
+@use 'src/styles/utils';
+@import 'src/styles/variables';
 
 $mainBackground: var(--color-fog-medium-light);
 

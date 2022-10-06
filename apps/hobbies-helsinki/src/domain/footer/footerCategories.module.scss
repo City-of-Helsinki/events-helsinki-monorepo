@@ -1,5 +1,5 @@
-@import 'breakpoints';
-@import 'mixins';
+@import 'src/styles/breakpoints';
+@import 'src/styles/mixins';
 
 .divider {
   background-color: var(--footer-divider-color);

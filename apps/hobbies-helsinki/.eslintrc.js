@@ -18,8 +18,6 @@ module.exports = {
   },
   ignorePatterns: [...getDefaultIgnorePatterns(), '.next', '.out'],
   extends: [
-    'next',
-    'prettier',
     '@events-helsinki/eslint-config-bases/typescript',
     '@events-helsinki/eslint-config-bases/sonar',
     '@events-helsinki/eslint-config-bases/regexp',

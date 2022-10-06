@@ -1,8 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import { useLocale } from 'events-helsinki-components';
+import { CategoryFilter, useLocale } from 'events-helsinki-components';
 
-import CategoryFilter from '../../../common-events/components/category/CategoryFilter';
 import { CategoryOption, Filters } from '../eventSearch/types';
 import { getSearchQuery } from '../eventSearch/utils';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';

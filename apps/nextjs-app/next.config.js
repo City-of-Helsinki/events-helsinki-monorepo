@@ -136,14 +136,17 @@ const secureHeaders = createSecureHeaders({
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const componentsStylePath = path.join(__dirname, '../../packages/components/');
+const componentsStylePath = [
+  path.join(__dirname, '../../packages/components/'),
+  path.join(__dirname, 'src/'),
+];
 /**
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
-    includePaths: [componentsStylePath],
+    includePaths: componentsStylePath,
   },
   productionBrowserSourceMaps: !disableSourceMaps,
   i18n,

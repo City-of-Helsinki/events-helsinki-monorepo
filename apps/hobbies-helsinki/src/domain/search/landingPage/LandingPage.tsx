@@ -4,9 +4,9 @@ import { LandingPageQuery } from 'react-helsinki-headless-cms/apollo';
 import { PageSection } from 'react-helsinki-headless-cms';
 import { ContentContainer } from 'react-helsinki-headless-cms';
 
-import Hero from '../../../common/components/hero/Hero';
 import LandingPageSearch from '../landingPageSearch/LandingPageSearch';
 import styles from './landingPage.module.scss';
+import { Hero } from 'events-helsinki-components/components';
 
 export type LandingPageProps = {
   landingPage?: LandingPageQuery['landingPage'];

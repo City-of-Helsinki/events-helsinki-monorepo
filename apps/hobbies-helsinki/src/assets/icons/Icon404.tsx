@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-import React, { ReactElement } from 'react';
+import type { ReactElement } from 'react';
+import React from 'react';
 
 type Props = { className?: string };
 

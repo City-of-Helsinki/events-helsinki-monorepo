@@ -1,7 +1,7 @@
-import React from 'react';
+import type { CmsLanguage } from 'events-helsinki-components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { CmsLanguage } from 'events-helsinki-components';
+import React from 'react';
 
 type Props = {
   languages: CmsLanguage[];

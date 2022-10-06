@@ -1,7 +1,7 @@
-import React from 'react';
 import { useLocale } from 'events-helsinki-components';
+import React from 'react';
 
-import { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
+import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
 import { getEventFields } from '../EventUtils';
 
 interface Props {

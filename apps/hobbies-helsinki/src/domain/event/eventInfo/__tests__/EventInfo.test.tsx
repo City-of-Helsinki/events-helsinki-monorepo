@@ -1,10 +1,13 @@
-import FileSaver from 'file-saver';
-import React from 'react';
-import mockRouter from 'next-router-mock';
-import { EventFields, SuperEventResponse } from 'events-helsinki-components';
 import { getDateRangeStr } from 'events-helsinki-components';
+import type {
+  EventFields,
+  SuperEventResponse,
+} from 'events-helsinki-components';
+import FileSaver from 'file-saver';
+import mockRouter from 'next-router-mock';
+import React from 'react';
 
-import { EventDetails } from '../../../../domain/nextApi/graphql/generated/graphql';
+import type { EventDetails } from '../../../../domain/nextApi/graphql/generated/graphql';
 import { translations } from '../../../../tests/initI18n';
 import { fakeEvent } from '../../../../tests/mockDataUtils';
 import {
@@ -81,9 +84,9 @@ it('should render event info fields', async () => {
 
   // TODO: fix: ssr name does not exist anymore
 
-  /*itemsByRole.forEach(({ role, name }) => {
+  /* itemsByRole.forEach(({ role, name }) => {
     expect(screen.queryByRole(role, { name })).toBeInTheDocument();
-  });*/
+  }); */
 
   const itemsByText = [
     'Ma 22.6.2020, klo 10.00 – 13.00',
@@ -211,7 +214,7 @@ it('should open ticket buy page', async () => {
   );
 
   await waitFor(() => {
-    expect(global.open).toBeCalled();
+    expect(global.open).toHaveBeenCalled();
   });
 });
 
@@ -229,7 +232,7 @@ it.skip('should create ics file succesfully', async () => {
   );
 
   await waitFor(() => {
-    expect(saveAsSpy).toBeCalled();
+    expect(saveAsSpy).toHaveBeenCalled();
   });
 });
 
@@ -247,7 +250,7 @@ it.skip('should create ics file succesfully when end time is not defined', async
   );
 
   await waitFor(() => {
-    expect(saveAsSpy).toBeCalled();
+    expect(saveAsSpy).toHaveBeenCalled();
   });
 });
 

@@ -1,21 +1,21 @@
+import { LoadingSpinner, useLocale } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import type { CollectionProps } from 'react-helsinki-headless-cms';
 import {
   Card,
   getEventCardProps,
   useConfig,
   Collection,
-  CollectionProps,
   PageSection,
   ContentContainer,
 } from 'react-helsinki-headless-cms';
-import { LoadingSpinner, useLocale } from 'events-helsinki-components';
 
+import { ROUTES } from '../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import { useSimilarEventsQuery } from '../queryUtils';
-import { EventFields } from '../types';
+import type { EventFields } from '../types';
 import styles from './similarEvents.module.scss';
-import { ROUTES } from '../../../constants';
 
 interface Props {
   event: EventFields;

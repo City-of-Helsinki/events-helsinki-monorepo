@@ -11,7 +11,7 @@ describe('i18n router utils', () => {
             id: 'tprek:123',
           },
         })
-      ).toEqual('/venue/tprek:123/map?isOpenNow=true&q=Swimming%20Pool');
+      ).toStrictEqual('/venue/tprek:123/map?isOpenNow=true&q=Swimming%20Pool');
     });
 
     it('should correctly stringify url object with query', () => {
@@ -24,7 +24,7 @@ describe('i18n router utils', () => {
             q: 'Swimming Pool',
           },
         })
-      ).toEqual('/venue/tprek:123/map?isOpenNow=true&q=Swimming%20Pool');
+      ).toStrictEqual('/venue/tprek:123/map?isOpenNow=true&q=Swimming%20Pool');
     });
   });
 
@@ -38,7 +38,7 @@ describe('i18n router utils', () => {
           },
           'fi'
         )
-      ).toEqual('/kurssit/hki:123');
+      ).toStrictEqual('/kurssit/hki:123');
     });
 
     it('should correctly return the localized path for the secondary locale', () => {
@@ -50,7 +50,7 @@ describe('i18n router utils', () => {
           },
           'en'
         )
-      ).toEqual('/en/courses/hki:123');
+      ).toStrictEqual('/en/courses/hki:123');
     });
 
     it('should correctly return the localized path for the wildcard slug', () => {
@@ -62,7 +62,7 @@ describe('i18n router utils', () => {
           },
           'fi'
         )
-      ).toEqual('/artikkelit/some/url');
+      ).toStrictEqual('/artikkelit/some/url');
     });
   });
 });

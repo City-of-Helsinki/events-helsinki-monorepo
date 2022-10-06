@@ -2,7 +2,8 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { screen, act, render } from '../../../../../tests/testUtils';
-import DateFilter, { DateFilterProps } from '../DateFilter';
+import type { DateFilterProps } from '../DateFilter';
+import DateFilter from '../DateFilter';
 
 const props: DateFilterProps = {
   onRemove: jest.fn(),

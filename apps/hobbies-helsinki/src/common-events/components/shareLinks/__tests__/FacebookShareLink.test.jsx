@@ -5,7 +5,7 @@ import FacebookShareLink from '../FacebookShareLink';
 
 const renderComponent = (props) => render(<FacebookShareLink {...props} />);
 
-test('should apply aria label', () => {
+it('should apply aria label', () => {
   const sharedLink = 'https://helsinki.fi/some/';
   const { getByLabelText } = renderComponent({ sharedLink });
 

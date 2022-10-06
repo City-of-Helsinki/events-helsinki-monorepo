@@ -1,19 +1,19 @@
+import type { NormalizedCacheObject } from '@apollo/client';
 import {
   ApolloClient,
   ApolloLink,
   HttpLink,
   InMemoryCache,
-  NormalizedCacheObject,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import * as Sentry from '@sentry/browser';
-import get from 'lodash/get';
-import { useMemo } from 'react';
 import fetch from 'cross-fetch';
 import { isClient } from 'events-helsinki-components';
+import get from 'lodash/get';
+import { useMemo } from 'react';
 
-import AppConfig from '../app/AppConfig';
 import { rewriteInternalURLs } from '../../utils/routerUtils';
+import AppConfig from '../app/AppConfig';
 
 export const createEventsApolloClient = (
   initialState: NormalizedCacheObject = {}
@@ -117,12 +117,7 @@ export const createEventsApolloCache = () => {
 const apolloClient = createEventsApolloClient();
 
 export function useEventsApolloClient(initialState: NormalizedCacheObject) {
-  const store = useMemo(
-    () => createEventsApolloClient(initialState),
-    [initialState]
-  );
-
-  return store;
+  return useMemo(() => createEventsApolloClient(initialState), [initialState]);
 }
 
 export default apolloClient;

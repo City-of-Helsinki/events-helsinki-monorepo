@@ -1,13 +1,8 @@
 import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
-import React from 'react';
 import mockRouter from 'next-router-mock';
+import React from 'react';
 
-import {
-  KeywordListDocument,
-  NeighborhoodListDocument,
-  PlaceListDocument,
-} from '../../../nextApi/graphql/generated/graphql';
 import {
   fakeKeywords,
   fakeNeighborhoods,
@@ -22,6 +17,11 @@ import {
   userEvent,
 } from '../../../../tests/testUtils';
 import { additionalDivisions } from '../../../neighborhood/additionalDivisions';
+import {
+  KeywordListDocument,
+  NeighborhoodListDocument,
+  PlaceListDocument,
+} from '../../../nextApi/graphql/generated/graphql';
 import Search from '../AdvancedSearch';
 
 configure({ defaultHidden: true });
@@ -88,7 +88,7 @@ afterAll(() => {
   clear();
 });
 
-test('for accessibility violations', async () => {
+it('for accessibility violations', async () => {
   const { container } = renderComponent();
 
   await actWait();
@@ -97,7 +97,7 @@ test('for accessibility violations', async () => {
   expect(results).toHaveNoViolations();
 }, 50000); // FIXME: Why does this take so long?
 
-test('should clear all filters and search field', async () => {
+it('should clear all filters and search field', async () => {
   const { router } = renderComponent();
 
   expect(router).toMatchObject({ pathname, query: { text: 'jazz' } });
@@ -115,7 +115,7 @@ test('should clear all filters and search field', async () => {
 });
 
 // TODO: There is a problem with the auto suggest menu options
-test.todo('should change search query after clicking autosuggest menu item');
+it.todo('should change search query after clicking autosuggest menu item');
 // test("should change search query after clicking autosuggest menu item", async () => {
 //   const { router } = renderComponent();
 
@@ -145,7 +145,7 @@ test.todo('should change search query after clicking autosuggest menu item');
 //   });
 // });
 
-test('should change search query after checking is free checkbox', async () => {
+it('should change search query after checking is free checkbox', async () => {
   const { router } = renderComponent();
 
   const isFreeCheckbox = screen.getByRole('checkbox', {
@@ -160,7 +160,7 @@ test('should change search query after checking is free checkbox', async () => {
   });
 });
 
-test('should change search query after selecting today date type and pressing submit button', async () => {
+it('should change search query after selecting today date type and pressing submit button', async () => {
   const { router } = renderComponent();
 
   const chooseDateButton = screen.getByRole('button', {
@@ -180,7 +180,7 @@ test('should change search query after selecting today date type and pressing su
   });
 });
 
-test('should change search query after selecting start date and pressing submit button', async () => {
+it('should change search query after selecting start date and pressing submit button', async () => {
   advanceTo('2020-10-04');
   const { router } = renderComponent();
 
@@ -216,7 +216,7 @@ test('should change search query after selecting start date and pressing submit 
   });
 }, 50000); // FIXME: Why does this take so long to test?
 
-test('should change search query after clicking category menu item', async () => {
+it('should change search query after clicking category menu item', async () => {
   const { router } = renderComponent();
 
   const chooseCategoryButton = screen.getByRole('button', {
@@ -237,7 +237,7 @@ test('should change search query after clicking category menu item', async () =>
     query: { categories: 'movie_and_media', text: 'jazz' },
   });
 
-  //multiple selection
+  // multiple selection
   await act(async () => userEvent.click(chooseCategoryButton));
   userEvent.click(screen.getByRole('checkbox', { name: /pelit/i }));
   await act(async () =>
@@ -255,7 +255,7 @@ test('should change search query after clicking category menu item', async () =>
 });
 
 // TODO: SKipped since there is no divisions input at the moment, but I've heard it should be there
-test.skip('disivions dropdown has additional divisions', async () => {
+it.skip('disivions dropdown has additional divisions', async () => {
   renderComponent();
 
   const chooseCategoryButton = screen.getByRole('button', {

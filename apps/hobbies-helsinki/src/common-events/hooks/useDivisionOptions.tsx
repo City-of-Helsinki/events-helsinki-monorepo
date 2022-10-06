@@ -1,12 +1,9 @@
+import { getLocalizedString, useLocale } from 'events-helsinki-components';
 import sortBy from 'lodash/sortBy';
-import { getLocalizedString } from 'events-helsinki-components';
-import { useLocale } from 'events-helsinki-components';
 
 import { additionalDivisions } from '../../domain/neighborhood/additionalDivisions';
-import {
-  Neighborhood,
-  useNeighborhoodListQuery,
-} from '../../domain/nextApi/graphql/generated/graphql';
+import type { Neighborhood } from '../../domain/nextApi/graphql/generated/graphql';
+import { useNeighborhoodListQuery } from '../../domain/nextApi/graphql/generated/graphql';
 
 export const DIVISION_BLOCKLIST = [
   'kaupunginosa:aluemeri',

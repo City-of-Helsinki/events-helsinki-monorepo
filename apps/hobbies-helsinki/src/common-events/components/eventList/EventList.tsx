@@ -1,13 +1,13 @@
 import classNames from 'classnames';
+import { LoadingSpinner } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { LoadingSpinner } from 'events-helsinki-components';
 
 import BasicEventCard from '../../../domain/event/eventCard/EventCard';
 import LargeEventCard from '../../../domain/event/eventCard/LargeEventCard';
-import { EventFields } from '../../../domain/event/types';
-import { EventFieldsFragment } from '../../../domain/nextApi/graphql/generated/graphql';
+import type { EventFields } from '../../../domain/event/types';
+import type { EventFieldsFragment } from '../../../domain/nextApi/graphql/generated/graphql';
 import styles from './eventList.module.scss';
 
 const eventCardsMap = {

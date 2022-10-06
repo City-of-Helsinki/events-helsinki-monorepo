@@ -1,9 +1,12 @@
-import { ApolloCache, InMemoryCache } from '@apollo/client/cache';
-import { MockedResponse } from '@apollo/client/testing';
-import { act, fireEvent, render, RenderResult } from '@testing-library/react';
-import React, { ReactElement } from 'react';
+import type { ApolloCache, InMemoryCache } from '@apollo/client/cache';
+import type { MockedResponse } from '@apollo/client/testing';
+import type { RenderResult } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
+import type { NextRouter } from 'next/router';
+import Router from 'next/router';
+import type { ReactElement } from 'react';
+import React from 'react';
 import wait from 'waait';
-import Router, { NextRouter } from 'next/router';
 
 import { createEventsApolloCache } from '../domain/clients/eventsApolloClient';
 import TestProviders from './TestProviders';
@@ -47,7 +50,7 @@ const customRender: CustomRender = (
     routes.forEach((route) => Router.push(route));
   }
 
-  //set locales so that the routing tests for default locale worked
+  // set locales so that the routing tests for default locale worked
   Router.locales = ['fi', 'en', 'sv'];
 
   const renderResult = render(ui, {
@@ -65,9 +68,11 @@ const customRender: CustomRender = (
 
 const actWait = (amount?: number): Promise<void> => act(() => wait(amount));
 
+// eslint-disable-next-line import/export
 export { actWait, customRender as render };
 
 // re-export everything
+// eslint-disable-next-line import/export
 export * from '@testing-library/react';
 export { render as defaultRender } from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';

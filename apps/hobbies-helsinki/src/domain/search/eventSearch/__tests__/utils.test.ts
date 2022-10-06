@@ -1,6 +1,6 @@
-import { advanceTo, clear } from 'jest-date-mock';
+import type { Language } from 'events-helsinki-components';
 import { DATE_TYPES } from 'events-helsinki-components';
-import { Language } from 'events-helsinki-components';
+import { advanceTo, clear } from 'jest-date-mock';
 
 import { EVENT_DEFAULT_SEARCH_FILTERS, EVENT_SORT_OPTIONS } from '../constants';
 import { getEventSearchVariables, getNextPage, getSearchQuery } from '../utils';
@@ -143,7 +143,7 @@ describe('getEventSearchVariables function', () => {
   //       params: new URLSearchParams(`?text=Rock`),
   //     });
   //   expect(division).toBeUndefined();
-  //   expect(allOngoingAnd).toEqual(["Rock"]);
+  //   expect(allOngoingAnd).toStrictEqual(["Rock"]);
   //   expect(localOngoingAnd).toBeUndefined();
   // });
 
@@ -157,7 +157,7 @@ describe('getEventSearchVariables function', () => {
   //     });
   //   expect(division).toContain('kaupunginosa:alppiharju');
   //   expect(allOngoingAnd).toBeUndefined();
-  //   expect(localOngoingAnd).toEqual(['Rock']);
+  //   expect(localOngoingAnd).toStrictEqual(['Rock']);
   // });
 
   it('should search localOngoing when a place given', () => {
@@ -169,7 +169,7 @@ describe('getEventSearchVariables function', () => {
       });
     expect(location).toContain(place);
     expect(allOngoingAnd).toBeUndefined();
-    expect(localOngoingAnd).toEqual(['Rock']);
+    expect(localOngoingAnd).toStrictEqual(['Rock']);
   });
 });
 

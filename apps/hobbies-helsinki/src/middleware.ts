@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 import { stringifyUrlObject } from './utils/routerUtils';
 
-//TODO: For some reason middleware cannot read `'events-helsinki-components` package without breaking the build
+// TODO: For some reason middleware cannot read `'events-helsinki-components` package without breaking the build
 // import { DEFAULT_LANGUAGE } from 'events-helsinki-components';
 
 const DEFAULT_LANGUAGE = 'fi';
@@ -11,6 +12,7 @@ const requestType = {
   isStaticFile: (req: NextRequest) => req.nextUrl.pathname.startsWith('/_next'),
   isPagesFolderApi: (req: NextRequest) =>
     req.nextUrl.pathname.includes('/api/'),
+  // eslint-disable-next-line regexp/no-unused-capturing-group
   isPublicFile: (req: NextRequest) => /\.(.*)$/.test(req.nextUrl.pathname),
 };
 

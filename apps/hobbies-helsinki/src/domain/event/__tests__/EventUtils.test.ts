@@ -1,16 +1,16 @@
 import map from 'lodash/map';
 
 import {
-  EventFieldsFragment,
-  PlaceFieldsFragment,
-} from '../../nextApi/graphql/generated/graphql';
-import {
   fakeEvent,
   fakeImage,
   fakeKeyword,
   fakeKeywords,
   fakePlace,
 } from '../../../tests/mockDataUtils';
+import type {
+  EventFieldsFragment,
+  PlaceFieldsFragment,
+} from '../../nextApi/graphql/generated/graphql';
 import {
   formatPrice,
   getEventFields,
@@ -142,7 +142,7 @@ describe('getEventIdsFromUrls function', () => {
         'http://localhost:3000/fi/event/helsinki:sdfhgjrfd2',
         'http://localhost:3000/fi/events/helsinki:zxcvsdfdhg',
       ])
-    ).toEqual({
+    ).toStrictEqual({
       eventIds: [
         'helsinki:sdbdfh5t',
         'helsinki:2346tyhjrfgg',
@@ -168,20 +168,20 @@ describe('formatPrice function', () => {
   // test separators
   ['', '-', ',', '.', '/'].forEach((s) => {
     it(`format correctly with separator: ${s}`, () => {
-      expect(formatPrice(`12${s}12`)).toEqual(`12${s}12 €`);
+      expect(formatPrice(`12${s}12`)).toStrictEqual(`12${s}12 €`);
     });
   });
 
   it('adds € with one or more numbers', () => {
-    expect(formatPrice('2')).toEqual(`2 €`);
-    expect(formatPrice('20')).toEqual(`20 €`);
-    expect(formatPrice('222')).toEqual(`222 €`);
+    expect(formatPrice('2')).toStrictEqual(`2 €`);
+    expect(formatPrice('20')).toStrictEqual(`20 €`);
+    expect(formatPrice('222')).toStrictEqual(`222 €`);
   });
 
   it("doesn't add € when not needed", () => {
-    expect(formatPrice('asd12-12')).toEqual(`asd12-12`);
-    expect(formatPrice('1212 €')).toEqual(`1212 €`);
-    expect(formatPrice('1212€')).toEqual(`1212€`);
-    expect(formatPrice('12s12')).toEqual(`12s12`);
+    expect(formatPrice('asd12-12')).toStrictEqual(`asd12-12`);
+    expect(formatPrice('1212 €')).toStrictEqual(`1212 €`);
+    expect(formatPrice('1212€')).toStrictEqual(`1212€`);
+    expect(formatPrice('12s12')).toStrictEqual(`12s12`);
   });
 });

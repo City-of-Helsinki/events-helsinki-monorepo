@@ -2,14 +2,6 @@ import { addDays } from 'date-fns';
 import { range } from 'lodash';
 
 import {
-  EventFieldsFragment,
-  EventListQueryVariables,
-  EventListResponse,
-  EventTypeId,
-  Meta,
-  OrganizationDetailsDocument,
-} from '../../../nextApi/graphql/generated/graphql';
-import {
   fakeEvent,
   fakeEvents,
   fakeLocalizedObject,
@@ -18,6 +10,16 @@ import {
   fakeTargetGroup,
 } from '../../../../tests/mockDataUtils';
 import { createOtherEventTimesRequestAndResultMocks } from '../../../../tests/mocks/eventListMocks';
+import type {
+  EventFieldsFragment,
+  EventListQueryVariables,
+  EventListResponse,
+  Meta,
+} from '../../../nextApi/graphql/generated/graphql';
+import {
+  EventTypeId,
+  OrganizationDetailsDocument,
+} from '../../../nextApi/graphql/generated/graphql';
 
 export const organizationId = '1';
 export const organizationName = 'Organization name';

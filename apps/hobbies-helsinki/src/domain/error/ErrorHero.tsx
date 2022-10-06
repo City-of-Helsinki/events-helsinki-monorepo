@@ -1,8 +1,7 @@
 import classNames from 'classnames';
+import { Container, isTestEnv } from 'events-helsinki-components';
 import { Koros } from 'hds-react';
 import React from 'react';
-import { Container } from 'events-helsinki-components';
-import { isTestEnv } from 'events-helsinki-components';
 
 import Icon404 from '../../assets/icons/Icon404';
 import styles from './errorHero.module.scss';

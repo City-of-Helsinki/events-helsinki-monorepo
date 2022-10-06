@@ -1,5 +1,6 @@
+import type { Config } from 'events-helsinki-components';
+import { configContext } from 'events-helsinki-components';
 import React from 'react';
-import { configContext, Config } from 'events-helsinki-components';
 
 import defaultConfig from './defaultConfig';
 

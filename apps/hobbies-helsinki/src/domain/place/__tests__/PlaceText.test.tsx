@@ -27,7 +27,7 @@ const mocks = [
   },
 ];
 
-test('matches snapshot', async () => {
+it('matches snapshot', async () => {
   const { container } = render(<PlaceText id={placeId} />, {
     mocks,
   });

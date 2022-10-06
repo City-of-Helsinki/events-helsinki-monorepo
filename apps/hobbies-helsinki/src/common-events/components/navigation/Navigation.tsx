@@ -1,8 +1,9 @@
-import { ArticleType, PageType } from 'react-helsinki-headless-cms';
-import { Navigation as RHHCApolloNavigation } from 'react-helsinki-headless-cms/apollo';
-import { Language } from 'events-helsinki-components';
 import { useLocale, useRouterFromConfig } from 'events-helsinki-components';
+import type { Language } from 'events-helsinki-components';
+import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
+import { Navigation as RHHCApolloNavigation } from 'react-helsinki-headless-cms/apollo';
 
+import { DEFAULT_HEADER_MENU_NAME } from '../../../constants';
 import {
   getI18nPath,
   getLocalizedCmsItemUrl,
@@ -11,7 +12,6 @@ import {
   getSlugFromUri,
   removeContextPathFromUri,
 } from '../../utils/headless-cms/headlessCmsUtils';
-import { DEFAULT_HEADER_MENU_NAME } from '../../../constants';
 
 type NavigationProps = {
   page?: PageType | ArticleType;

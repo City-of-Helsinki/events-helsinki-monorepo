@@ -28,14 +28,14 @@ jest.mock('next-i18next', () => ({
 
 // Mock the ICS create event that fails during the tests
 jest.mock('ics', () => {
-  createEvent: jest.fn();
+  jest.fn();
 });
 
 // Mock the NextJS-router
 jest.mock('next/router', () => require('next-router-mock'));
 jest.mock('next/dist/client/router', () => require('next-router-mock'));
 
-//Mock next/head
+// Mock next/head
 jest.mock('next/head', () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const ReactDOMServer = require('react-dom/server');

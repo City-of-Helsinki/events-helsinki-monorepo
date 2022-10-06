@@ -2,13 +2,6 @@ import i18n from 'i18next';
 // eslint-disable-next-line no-restricted-imports
 import { initReactI18next } from 'react-i18next';
 
-import cms from '../../public/locales/fi/cms.json';
-import common from '../../public/locales/fi/common.json';
-import event from '../../public/locales/fi/event.json';
-import footer from '../../public/locales/fi/footer.json';
-import home from '../../public/locales/fi/home.json';
-import notFound from '../../public/locales/fi/notFound.json';
-import search from '../../public/locales/fi/search.json';
 import cms_en from '../../public/locales/en/cms.json';
 import common_en from '../../public/locales/en/common.json';
 import event_en from '../../public/locales/en/event.json';
@@ -16,6 +9,13 @@ import footer_en from '../../public/locales/en/footer.json';
 import home_en from '../../public/locales/en/home.json';
 import notFound_en from '../../public/locales/en/notFound.json';
 import search_en from '../../public/locales/en/search.json';
+import cms from '../../public/locales/fi/cms.json';
+import common from '../../public/locales/fi/common.json';
+import event from '../../public/locales/fi/event.json';
+import footer from '../../public/locales/fi/footer.json';
+import home from '../../public/locales/fi/home.json';
+import notFound from '../../public/locales/fi/notFound.json';
+import search from '../../public/locales/fi/search.json';
 import cms_sv from '../../public/locales/sv/cms.json';
 import common_sv from '../../public/locales/sv/common.json';
 import event_sv from '../../public/locales/sv/event.json';

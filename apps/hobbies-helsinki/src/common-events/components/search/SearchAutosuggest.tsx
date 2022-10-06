@@ -1,20 +1,19 @@
-import { IconSearch } from 'hds-react';
-import React, { ChangeEvent } from 'react';
+import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import {
   AutoSuggestMenu,
   useLocale,
   useDebounce,
   useDropdownKeyboardNavigation,
-} from 'events-helsinki-components';
-import {
-  AutosuggestMenuOption,
   AUTOSUGGEST_TYPES,
   getLocalizedString,
 } from 'events-helsinki-components';
+import { IconSearch } from 'hds-react';
+import type { ChangeEvent } from 'react';
+import React from 'react';
 
-import styles from './searchAutosuggest.module.scss';
-import { useKeywordListQuery } from '../../../domain/nextApi/graphql/generated/graphql';
 import { AUTOSUGGEST_KEYWORD_BLACK_LIST } from '../../../constants';
+import { useKeywordListQuery } from '../../../domain/nextApi/graphql/generated/graphql';
+import styles from './searchAutosuggest.module.scss';
 
 export interface SearchAutosuggestProps {
   name: string;
@@ -79,6 +78,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
           handleCloseMenu();
           break;
         case 'Enter':
+          // eslint-disable-next-line no-case-declarations
           const selectedItem = autoSuggestItems[focusedIndex];
 
           if (selectedItem) {
@@ -207,6 +207,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
   ]);
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       onClick={handleComponentClick}
       className={styles.searchAutosuggest}

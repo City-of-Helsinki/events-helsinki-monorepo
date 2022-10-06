@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { translations } from '../../../../../tests/initI18n';
+import { fakeOrganization } from '../../../../../tests/mockDataUtils';
 import {
   render,
   waitFor,
@@ -7,10 +9,8 @@ import {
   screen,
   userEvent,
 } from '../../../../../tests/testUtils';
-import PublisherFilter from '../PublisherFilter';
-import { translations } from '../../../../../tests/initI18n';
 import { OrganizationDetailsDocument } from '../../../../nextApi/graphql/generated/graphql';
-import { fakeOrganization } from '../../../../../tests/mockDataUtils';
+import PublisherFilter from '../PublisherFilter';
 
 const id = '1';
 const name = 'Organization name';
@@ -31,7 +31,7 @@ const mocks = [
   },
 ];
 
-test('matches snapshot', async () => {
+it('matches snapshot', async () => {
   const { container } = render(
     <PublisherFilter id={id} onRemove={jest.fn()} />,
     { mocks }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { fakeEvent } from '../../../../tests/mockDataUtils';
 import { render, actWait } from '../../../../tests/testUtils';
-import { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
+import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventPageMeta from '../EventPageMeta';
 
 const eventName = 'Name of event';
@@ -29,7 +29,7 @@ const event = fakeEvent({
 // To combat these conditions, we are manually managing the `head` in setup and
 // teardown.
 
-test('applies expected metadata', async () => {
+it('applies expected metadata', async () => {
   render(<EventPageMeta event={event} />);
 
   await actWait(300);
@@ -41,7 +41,7 @@ test('applies expected metadata', async () => {
   const ogDescription = head?.querySelector('[property="og:description"]');
   const ogImage = head?.querySelector('[property="og:image"]');
 
-  expect(title).toEqual(eventName);
+  expect(title).toStrictEqual(eventName);
   expect(metaDescription).toHaveAttribute('content', eventDescription);
   expect(metaKeywords).toHaveAttribute('content', keyword);
   expect(ogTitle).toHaveAttribute('content', eventName);

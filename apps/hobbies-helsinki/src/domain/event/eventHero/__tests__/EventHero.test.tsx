@@ -2,7 +2,7 @@ import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
 
-import {
+import type {
   EventDetails,
   EventFieldsFragment,
   OfferFieldsFragment,
@@ -16,7 +16,8 @@ import {
   fakeOffer,
 } from '../../../../tests/mockDataUtils';
 import { act, render, screen, userEvent } from '../../../../tests/testUtils';
-import EventHero, { Props as EventHeroProps } from '../EventHero';
+import type { Props as EventHeroProps } from '../EventHero';
+import EventHero from '../EventHero';
 
 const name = 'Event name';
 const startTime = '2020-06-22T07:00:00.000000Z';
@@ -58,7 +59,7 @@ const renderComponent = (props?: Partial<EventHeroProps>) => {
   return render(<EventHero event={getFakeEvent()} {...props} />);
 };
 
-test('should render event name, description and location', () => {
+it('should render event name, description and location', () => {
   renderComponent();
 
   expect(screen.queryByRole('heading', { name })).toBeInTheDocument();
@@ -70,7 +71,7 @@ test('should render event name, description and location', () => {
   ).toBeInTheDocument();
 });
 
-test('should go to event list', async () => {
+it('should go to event list', async () => {
   const { router } = renderComponent();
 
   await act(() =>
@@ -83,7 +84,7 @@ test('should go to event list', async () => {
   expect(router.pathname).toBe('/haku');
 });
 
-test('should render keywords', () => {
+it('should render keywords', () => {
   renderComponent();
 
   keywordNames.forEach((keyword) => {
@@ -91,7 +92,7 @@ test('should render keywords', () => {
   });
 });
 
-test('should render today tag', () => {
+it('should render today tag', () => {
   advanceTo('2020-06-22');
   renderComponent();
 
@@ -107,7 +108,7 @@ test('should render today tag', () => {
   ).not.toBeInTheDocument();
 });
 
-test('should render this week tag', () => {
+it('should render this week tag', () => {
   advanceTo('2020-06-23');
   renderComponent();
 
@@ -123,7 +124,7 @@ test('should render this week tag', () => {
   ).toBeInTheDocument();
 });
 
-test('should hide buy button for free events', () => {
+it('should hide buy button for free events', () => {
   const mockEvent = getFakeEvent({
     offers: [fakeOffer({ isFree: true }) as OfferFieldsFragment],
   });
@@ -136,7 +137,7 @@ test('should hide buy button for free events', () => {
   ).not.toBeInTheDocument();
 });
 
-test('should show buy button', async () => {
+it('should show buy button', async () => {
   global.open = jest.fn();
   const infoUrl = 'https://test.url';
   const mockEvent = getFakeEvent({
@@ -168,7 +169,7 @@ test('should show buy button', async () => {
   expect(global.open).toHaveBeenCalledWith(infoUrl);
 });
 
-test('Register button should be visible and clickable', async () => {
+it('Register button should be visible and clickable', async () => {
   global.open = jest.fn();
   const registrationUrl = 'https://harrastushaku.fi/register/13290';
   const mockEvent = getFakeEvent({
@@ -194,10 +195,10 @@ test('Register button should be visible and clickable', async () => {
     )
   );
 
-  expect(global.open).toBeCalledWith(registrationUrl);
+  expect(global.open).toHaveBeenCalledWith(registrationUrl);
 });
 
-test('should show event dates if super event is defined', () => {
+it('should show event dates if super event is defined', () => {
   const mockEvent = getFakeEvent();
   const mockSuperEvent = getFakeEvent({
     startTime: '2020-06-22T07:00:00.000000Z',

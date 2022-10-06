@@ -1,19 +1,20 @@
-import { useTranslation } from 'next-i18next';
-import React, { FunctionComponent } from 'react';
 import { CategoryFilter, useLocale } from 'events-helsinki-components';
+import { useTranslation } from 'next-i18next';
+import type { FunctionComponent } from 'react';
+import React from 'react';
 
+import { ROUTES } from '../../constants';
 import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
 import {
   CATEGORY_CATALOG,
   COURSE_DEFAULT_SEARCH_FILTERS,
 } from '../search/eventSearch/constants';
-import { CategoryOption, Filters } from '../search/eventSearch/types';
+import type { CategoryOption, Filters } from '../search/eventSearch/types';
 import {
   getEventCategoryOptions,
   getSearchQuery,
 } from '../search/eventSearch/utils';
 import styles from './footerCategories.module.scss';
-import { ROUTES } from '../../constants';
 
 const FooterCategories: FunctionComponent = () => {
   const { t } = useTranslation('footer');

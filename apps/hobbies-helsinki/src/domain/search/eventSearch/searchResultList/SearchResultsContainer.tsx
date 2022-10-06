@@ -1,7 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { ContentContainer } from 'react-helsinki-headless-cms';
-import { PageSection } from 'react-helsinki-headless-cms';
+import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 
 import ResultsInfoContainer from './ResultsInfo';
 import styles from './searchResultList.module.scss';

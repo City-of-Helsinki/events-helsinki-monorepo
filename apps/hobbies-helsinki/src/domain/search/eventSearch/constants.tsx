@@ -1,10 +1,10 @@
 import React from 'react';
 
+import IconArt from '../../../assets/icons/IconArt';
 import IconCraft from '../../../assets/icons/IconCraft';
 import IconDance from '../../../assets/icons/IconDance';
 import IconFood from '../../../assets/icons/IconFood';
 import IconGames from '../../../assets/icons/IconGames';
-import IconArt from '../../../assets/icons/IconLanguages';
 import IconLanguages from '../../../assets/icons/IconLanguages';
 import IconLiterature from '../../../assets/icons/IconLiterature';
 import IconMovies from '../../../assets/icons/IconMovies';
@@ -12,7 +12,11 @@ import IconMusic from '../../../assets/icons/IconMusic';
 import IconSports from '../../../assets/icons/IconSports';
 import IconTheatre from '../../../assets/icons/IconTheatre';
 import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
-import { Filters, SearchCategoryOption, SearchHobbyTypeOption } from './types';
+import type {
+  Filters,
+  SearchCategoryOption,
+  SearchHobbyTypeOption,
+} from './types';
 
 // Page size of the event list
 export const PAGE_SIZE = 10;
@@ -145,22 +149,22 @@ export const CATEGORY_CATALOG = {
 };
 
 export const MOVIES_AND_MEDIA_COURSES_KEYWORDS = [
-  'yso:p1235', //elokuva
-  'kulke:29', //elokuvat
-  'yso:p16327', //media
-  'kulke:205', //mediataide
-  'yso:p9731', //valokuva
-  'kulke:87', //valokuvaus
-  'yso:p1979', //?
+  'yso:p1235', // elokuva
+  'kulke:29', // elokuvat
+  'yso:p16327', // media
+  'kulke:205', // mediataide
+  'yso:p9731', // valokuva
+  'kulke:87', // valokuvaus
+  'yso:p1979', // ?
 ];
 
 export const LANGUAGES_COURSES_KEYWORDS = [
-  'yso:p556', //kielet
-  'yso:p38117', //kieltenopetus
+  'yso:p556', // kielet
+  'yso:p38117', // kieltenopetus
 ];
 
 export const LITERATURE_COURSES_KEYWORDS = [
-  //sanataide, kirjallisuus, sarjakuva
+  // sanataide, kirjallisuus, sarjakuva
   'yso:p8113',
   'yso:p7969',
   'kulke:81',
@@ -283,7 +287,7 @@ export const THEATRE_COURSES_KEYWORDS = [
   'yso:p9058',
 ];
 
-//todo: replace with valid keyword ids
+// todo: replace with valid keyword ids
 export const MAPPED_COURSE_CATEGORIES: Record<string, string[]> = {
   [COURSE_CATEGORIES.MOVIE]: MOVIES_AND_MEDIA_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.LANGUAGES]: LANGUAGES_COURSES_KEYWORDS,
@@ -299,14 +303,14 @@ export const MAPPED_COURSE_CATEGORIES: Record<string, string[]> = {
   [COURSE_CATEGORIES.THEATRE]: THEATRE_COURSES_KEYWORDS,
 };
 
-//course hobby types
+// course hobby types
 export const CLUBS_KEYWORDS = [
   'yso:p7642', // kerhot
   'yso:p7641', // kerhotoiminta
 ];
 
 export const COURSES_KEYWORDS = [
-  //kurssit, vapaa-ajan kurssit
+  // kurssit, vapaa-ajan kurssit
   'yso:p9270',
   'kulke:301',
   'kulke:60',
@@ -314,18 +318,18 @@ export const COURSES_KEYWORDS = [
 ];
 
 export const CAMPS_KEYWORDS = [
-  'yso:p143', //leirit
-  'yso:p21435', //kesäleirit
-  'yso:p22818', //tiedeleirit
+  'yso:p143', // leirit
+  'yso:p21435', // kesäleirit
+  'yso:p22818', // tiedeleirit
 ];
 
 export const TRIPS_KEYWORDS = [
-  'yso:p25261', //retket
-  'yso:p1103', //retkeily
+  'yso:p25261', // retket
+  'yso:p1103', // retkeily
 ];
 
 export const WORKSHOPS_KEYWORDS = [
-  //työpajat
+  // työpajat
   'yso:p19245',
   'kulke:732',
 ];

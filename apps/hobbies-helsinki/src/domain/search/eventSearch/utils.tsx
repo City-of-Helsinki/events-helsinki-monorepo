@@ -1,4 +1,3 @@
-import { TFunction } from 'next-i18next';
 import {
   addDays,
   endOfWeek,
@@ -7,34 +6,38 @@ import {
   startOfWeek,
   subDays,
 } from 'date-fns';
-import isEmpty from 'lodash/isEmpty';
 import {
   buildQueryFromObject,
   DATE_TYPES,
   formatDate,
   getUrlParamAsArray,
-  Language,
 } from 'events-helsinki-components';
-import { FilterType } from 'events-helsinki-components';
+import type { FilterType, Language } from 'events-helsinki-components';
+import isEmpty from 'lodash/isEmpty';
+import type { TFunction } from 'next-i18next';
 
-import {
-  EventTypeId,
+import AppConfig from '../../app/AppConfig';
+import type { EventFields } from '../../event/types';
+import type {
   Meta,
   QueryEventListArgs,
 } from '../../nextApi/graphql/generated/graphql';
-import {
+import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
+import type {
   COURSE_CATEGORIES,
-  EVENT_SEARCH_FILTERS,
   EVENT_SORT_OPTIONS,
+  COURSE_HOBBY_TYPES,
+} from './constants';
+import {
+  EVENT_SEARCH_FILTERS,
   courseCategories,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
   MAPPED_COURSE_CATEGORIES,
-  COURSE_HOBBY_TYPES,
   courseHobbyTypes,
   MAPPED_COURSE_HOBBY_TYPES,
 } from './constants';
-import {
+import type {
   CategoryOption,
   Filters,
   HobbyTypeOption,
@@ -44,8 +47,6 @@ import {
   SearchHobbyType,
   SearchHobbyTypeOption,
 } from './types';
-import AppConfig from '../../app/AppConfig';
-import { EventFields } from '../../event/types';
 
 export const MIN_AGE = 0;
 export const MAX_AGE = 99;

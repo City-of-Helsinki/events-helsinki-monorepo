@@ -1,6 +1,6 @@
-import React from 'react';
-import { FilterType } from 'events-helsinki-components';
 import { FilterButton } from 'events-helsinki-components';
+import type { FilterType } from 'events-helsinki-components';
+import React from 'react';
 
 interface Props {
   onRemove: (value: string, type: FilterType) => void;

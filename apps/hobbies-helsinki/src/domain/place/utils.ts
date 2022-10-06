@@ -1,17 +1,15 @@
 import eventsApolloClient from '../clients/eventsApolloClient';
-import {
+import type {
   Maybe,
-  PlaceDetailsDocument,
   PlaceDetailsQuery,
 } from '../nextApi/graphql/generated/graphql';
+import { PlaceDetailsDocument } from '../nextApi/graphql/generated/graphql';
 
 export const getPlaceDetailsFromCache = (
   id: string
 ): Maybe<PlaceDetailsQuery> => {
-  const data = eventsApolloClient.readQuery<PlaceDetailsQuery>({
+  return eventsApolloClient.readQuery<PlaceDetailsQuery>({
     query: PlaceDetailsDocument,
     variables: { id },
   });
-
-  return data;
 };

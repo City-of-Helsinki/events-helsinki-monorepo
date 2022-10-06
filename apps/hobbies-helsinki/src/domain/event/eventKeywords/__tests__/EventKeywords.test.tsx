@@ -9,7 +9,7 @@ import {
   fakeOffer,
 } from '../../../../tests/mockDataUtils';
 import { act, render, screen, userEvent } from '../../../../tests/testUtils';
-import {
+import type {
   EventFieldsFragment,
   OfferFieldsFragment,
 } from '../../../nextApi/graphql/generated/graphql';
@@ -33,7 +33,7 @@ afterAll(() => {
   clear();
 });
 
-test('should render keywords and handle click', async () => {
+it('should render keywords and handle click', async () => {
   const { router } = render(
     <EventKeywords event={event} showIsFree={true} showKeywords={true} />
   );
@@ -56,7 +56,7 @@ test('should render keywords and handle click', async () => {
   });
 });
 
-test('should not show keywords', () => {
+it('should not show keywords', () => {
   render(
     <EventKeywords event={event} showIsFree={true} showKeywords={false} />
   );
@@ -68,7 +68,7 @@ test('should not show keywords', () => {
   });
 });
 
-test('should render today tag and handle click', async () => {
+it('should render today tag and handle click', async () => {
   advanceTo('2020-06-22');
   const { router } = render(
     <EventKeywords event={event} showIsFree={true} showKeywords={false} />
@@ -87,7 +87,7 @@ test('should render today tag and handle click', async () => {
   });
 });
 
-test('should render this week tag and handle click', async () => {
+it('should render this week tag and handle click', async () => {
   advanceTo('2020-06-23');
   const { router } = render(
     <EventKeywords event={event} showIsFree={true} showKeywords={false} />
@@ -106,7 +106,7 @@ test('should render this week tag and handle click', async () => {
   });
 });
 
-test('should hide buy button for free events', () => {
+it('should hide buy button for free events', () => {
   const mockEvent = {
     ...event,
     offers: [fakeOffer({ isFree: true }) as OfferFieldsFragment],

@@ -1,15 +1,16 @@
-import { UrlObject } from 'url';
-import { ParsedUrlQuery, ParsedUrlQueryInput } from 'querystring';
+import type { ParsedUrlQuery, ParsedUrlQueryInput } from 'querystring';
+import type { UrlObject } from 'url';
 
+import type { NextRouter } from 'next/router';
 import qs from 'query-string';
-import { NextRouter } from 'next/router';
 
-//TODO: For some reason middleware cannot read `'events-helsinki-components` package without breaking the build
+// TODO: For some reason middleware cannot read `'events-helsinki-components` package without breaking the build
 // import { DEFAULT_LANGUAGE, Language, SUPPORT_LANGUAGES } from 'events-helsinki-components';
-import { Language, SUPPORT_LANGUAGES } from '../types';
-import { DEFAULT_LANGUAGE } from '../constants';
 import i18nRoutes from '../../i18nRoutes.config';
+import { DEFAULT_LANGUAGE } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
+import { SUPPORT_LANGUAGES } from '../types';
+import type { Language } from '../types';
 
 // dynamic path: /venues/:id
 // segmented: /venues/[id]
@@ -20,7 +21,7 @@ function transformDynamicPathIntoSegmentedDynamicPath(path: string): string {
     .split('/')
     .map((part) => {
       if (!part.startsWith(':')) return part;
-      //if [...]
+      // if [...]
       const partValue = part.slice(1);
 
       return partValue.endsWith('*')
@@ -101,8 +102,8 @@ export function stringifyUrlObject(url: UrlObject): string {
 
       let dynamicPartName = parseDynamicName(part);
 
-      //check if is wildcard [...slug] etc
-      //TODO: fix the logic, probably won't work with wildcard and search params
+      // check if is wildcard [...slug] etc
+      // TODO: fix the logic, probably won't work with wildcard and search params
       if (dynamicPartName.startsWith('...')) {
         dynamicPartName = dynamicPartName.replace('...', '');
         usedQueryParts.push(dynamicPartName);

@@ -1,14 +1,15 @@
-import React from 'react';
+import type { MultiselectDropdownProps } from 'events-helsinki-components';
 import {
   MultiSelectDropdown,
   useDebounce,
   useLocale,
+  getLocalizedString,
+  isClient,
 } from 'events-helsinki-components';
-import { getLocalizedString, isClient } from 'events-helsinki-components';
-import { MultiselectDropdownProps } from 'events-helsinki-components';
+import React from 'react';
 
-import PlaceText from '../PlaceText';
 import { usePlaceListQuery } from '../../nextApi/graphql/generated/graphql';
+import PlaceText from '../PlaceText';
 
 const DIVISIONS = ['kunta:helsinki'];
 

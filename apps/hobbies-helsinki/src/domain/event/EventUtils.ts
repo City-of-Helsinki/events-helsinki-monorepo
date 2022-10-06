@@ -1,14 +1,14 @@
 import { isPast, isThisWeek, isToday } from 'date-fns';
-import capitalize from 'lodash/capitalize';
-import { TFunction } from 'next-i18next';
+import type { Language } from 'events-helsinki-components';
 import {
   EVENT_STATUS,
   getLocalizedString,
   getSecureImage,
-  Language,
 } from 'events-helsinki-components';
+import capitalize from 'lodash/capitalize';
+import type { TFunction } from 'next-i18next';
 
-import {
+import type {
   EventFieldsFragment,
   LocalizedObject,
   PlaceFieldsFragment,
@@ -18,7 +18,7 @@ import {
   EVENT_LOCATIONS,
   EVENT_SOME_IMAGE,
 } from './constants';
-import { EventFields, KeywordOption } from './types';
+import type { EventFields, KeywordOption } from './types';
 
 export const getEventCardId = (id: string): string => `event-card_${id}`;
 
@@ -86,6 +86,7 @@ export const formatPrice = (price?: string): string => {
     return '';
   }
 
+  // eslint-disable-next-line regexp/no-unused-capturing-group
   const priceRegex = /^\d+([/\-.,]\d+)?$/;
   return price.match(priceRegex) ? `${price} €` : price;
 };

@@ -1,6 +1,7 @@
+import type { Config } from 'events-helsinki-components';
 import React from 'react';
-import { Link, LinkProps } from 'react-helsinki-headless-cms';
-import { Config } from 'events-helsinki-components';
+import type { LinkProps } from 'react-helsinki-headless-cms';
+import { Link } from 'react-helsinki-headless-cms';
 
 const defaultConfig: Config = {
   t: (translationKey) => translationKey,

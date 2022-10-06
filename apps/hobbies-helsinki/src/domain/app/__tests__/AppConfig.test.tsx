@@ -2,6 +2,7 @@ import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
 import AppConfig from '../AppConfig';
 
 let env: any;
+
 beforeAll(() => {
   env = process.env;
 });
@@ -10,33 +11,39 @@ afterAll(() => {
   process.env = env;
 });
 
-test.each([
+it.each([
   {
     field: 'cmsGraphqlEndpoint',
     mockEnvValue: 'https://localhost/cms/graphql',
     envName: 'NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT',
+    expectToEqual: undefined,
   },
   {
     field: 'origin',
     mockEnvValue: 'https://localhost',
     envName: 'NEXT_PUBLIC_APP_ORIGIN',
+    expectToEqual: undefined,
   },
 ])(
   'provides required config $field',
   ({ field, mockEnvValue, envName, expectToEqual }) => {
     // When exists, provides it
     process.env[envName] = mockEnvValue;
-    expect(AppConfig[field]).toEqual(expectToEqual ?? process.env[envName]);
+    // @ts-ignore
+    expect(AppConfig[field]).toStrictEqual(
+      expectToEqual ?? process.env[envName]
+    );
 
     // When it doesn't exists, errors
     delete process.env[envName];
-    expect(() => AppConfig[field]).toThrowError(
+    // @ts-ignore
+    expect(() => AppConfig[field]).toThrow(
       `Environment variable with name ${envName} was not found`
     );
   }
 );
 
-test.each([
+it.each([
   {
     field: 'debug',
     envName: 'NEXT_PUBLIC_DEBUG',
@@ -52,26 +59,31 @@ test.each([
 ])('provides flag config $field', ({ field, envName }) => {
   // When undefined, returns false
   process.env[envName] = undefined;
-  expect(AppConfig[field]).toEqual(false);
+  // @ts-ignore
+  expect(AppConfig[field]).toStrictEqual(false);
 
   // When 0, returns false
   process.env[envName] = '0';
-  expect(AppConfig[field]).toEqual(false);
+  // @ts-ignore
+  expect(AppConfig[field]).toStrictEqual(false);
 
   // When false, returns false
   process.env[envName] = 'false';
-  expect(AppConfig[field]).toEqual(false);
+  // @ts-ignore
+  expect(AppConfig[field]).toStrictEqual(false);
 
   // When 1, returns true
   process.env[envName] = '1';
-  expect(AppConfig[field]).toEqual(true);
+  // @ts-ignore
+  expect(AppConfig[field]).toStrictEqual(true);
 
   // When true, returns true
   process.env[envName] = 'true';
-  expect(AppConfig[field]).toEqual(true);
+  // @ts-ignore
+  expect(AppConfig[field]).toStrictEqual(true);
 });
 
-test.each([
+it.each([
   {
     field: 'defaultRevalidate',
     envName: 'NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS',
@@ -80,24 +92,30 @@ test.each([
 ])('provides number config $field', ({ field, envName, defaultValue }) => {
   // When exists, provides it
   process.env[envName] = '10';
-  expect(AppConfig[field]).toEqual(10);
+  // @ts-ignore
+  expect(AppConfig[field]).toStrictEqual(10);
 
   // When it doesn't exist
   delete process.env[envName];
   if (defaultValue) {
-    expect(AppConfig[field]).toEqual(defaultValue);
+    // @ts-ignore
+    // eslint-disable-next-line jest/no-conditional-expect
+    expect(AppConfig[field]).toStrictEqual(defaultValue);
   } else {
+    // @ts-ignore
+    // eslint-disable-next-line jest/no-conditional-expect
     expect(AppConfig[field]).toBeUndefined();
   }
 
   // When it's of wrong type, it errors
   process.env[envName] = 'Some string';
-  expect(() => AppConfig[field]).toThrowError(
+  // @ts-ignore
+  expect(() => AppConfig[field]).toThrow(
     `${envName} must be a value that can be parsed into a number`
   );
 });
 
-test('provides configuration for Matomo', () => {
+it('provides configuration for Matomo', () => {
   process.env.NEXT_PUBLIC_MATOMO_ENABLED = 'true';
   process.env.NEXT_PUBLIC_MATOMO_SITE_ID = 'abc-123';
 
@@ -112,10 +130,10 @@ test('provides configuration for Matomo', () => {
   `);
 
   process.env.NEXT_PUBLIC_MATOMO_ENABLED = '1';
-  expect(AppConfig.matomoConfiguration?.disabled).toEqual(false);
+  expect(AppConfig.matomoConfiguration?.disabled).toStrictEqual(false);
 });
 
-test('gives access to misc configs', () => {
+it('gives access to misc configs', () => {
   expect(AppConfig.locales).toMatchInlineSnapshot(`
     Array [
       "default",
@@ -124,5 +142,5 @@ test('gives access to misc configs', () => {
       "en",
     ]
   `);
-  expect(AppConfig.supportedEventTypes).toEqual([EventTypeId.Course]);
+  expect(AppConfig.supportedEventTypes).toStrictEqual([EventTypeId.Course]);
 });

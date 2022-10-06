@@ -1,11 +1,11 @@
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
-import React from 'react';
 import mockRouter from 'next-router-mock';
+import React from 'react';
 
+import type { EventFieldsFragment } from '../../../../domain/nextApi/graphql/generated/graphql';
 import { translations } from '../../../../tests/initI18n';
-import { EventFieldsFragment } from '../../../../domain/nextApi/graphql/generated/graphql';
 import { fakeEvent, fakeKeywords } from '../../../../tests/mockDataUtils';
 import { act, render, screen } from '../../../../tests/testUtils';
 import EventCard from '../EventCard';
@@ -36,17 +36,17 @@ const event = fakeEvent({
   },
 }) as EventFieldsFragment;
 
-afterAll(() => {
-  clear();
-});
-
 beforeEach(() => {
   mockRouter.setCurrentUrl('/');
 });
 
+afterAll(() => {
+  clear();
+});
+
 const renderComponent = () => render(<EventCard event={event} />);
 describe('event card', () => {
-  test('for accessibility violations', async () => {
+  it('for accessibility violations', async () => {
     const { container } = renderComponent();
 
     const results = await axe(container);
@@ -54,10 +54,10 @@ describe('event card', () => {
   });
 
   // Skipped, because this is not available after the Link-component is changed from react-router Link.
-  test.skip('should go to event page by clicking event card', async () => {
+  it.skip('should go to event page by clicking event card', async () => {
     advanceTo('2020-10-05');
     const { router } = renderComponent();
-    expect(router.pathname).toEqual('/');
+    expect(router.pathname).toStrictEqual('/');
     await act(() =>
       userEvent.click(
         screen.getByRole('link', {
@@ -68,12 +68,12 @@ describe('event card', () => {
         })
       )
     );
-    expect(router.pathname).toEqual('/kurssit/123');
+    expect(router.pathname).toStrictEqual('/kurssit/123');
   });
 
-  test('should go to event page by clicking button', async () => {
+  it('should go to event page by clicking button', async () => {
     const { router } = renderComponent();
-    expect(router.pathname).toEqual('/');
+    expect(router.pathname).toStrictEqual('/');
     await act(() =>
       userEvent.click(
         screen.getByRole('button', {
@@ -84,6 +84,6 @@ describe('event card', () => {
         })
       )
     );
-    expect(router.pathname).toEqual('/kurssit/123');
+    expect(router.pathname).toStrictEqual('/kurssit/123');
   });
 });

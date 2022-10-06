@@ -1,10 +1,10 @@
-import { MockedResponse } from '@apollo/client/testing';
+import type { MockedResponse } from '@apollo/client/testing';
 
-import {
+import type {
   EventDetails,
-  EventsByIdsDocument,
   EventsByIdsQueryVariables,
 } from '../../domain/nextApi/graphql/generated/graphql';
+import { EventsByIdsDocument } from '../../domain/nextApi/graphql/generated/graphql';
 
 export const getEventsByIdsMock = ({
   variables,

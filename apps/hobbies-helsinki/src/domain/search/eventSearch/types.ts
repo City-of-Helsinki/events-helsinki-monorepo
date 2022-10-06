@@ -1,6 +1,6 @@
-import React from 'react';
+import type React from 'react';
 
-import {
+import type {
   COURSE_CATEGORIES,
   COURSE_HOBBY_TYPES,
   EVENT_SEARCH_FILTERS,

@@ -19,15 +19,15 @@ module.exports = {
   ignorePatterns: [...getDefaultIgnorePatterns(), '.next', '.out'],
   extends: [
     '@events-helsinki/eslint-config-bases/typescript',
-    '@events-helsinki/eslint-config-bases/sonar',
+    // '@events-helsinki/eslint-config-bases/sonar',
     '@events-helsinki/eslint-config-bases/regexp',
     '@events-helsinki/eslint-config-bases/jest',
     '@events-helsinki/eslint-config-bases/react',
     '@events-helsinki/eslint-config-bases/graphql-schema',
     // Add specific rules for nextjs
-    'plugin:@next/next/core-web-vitals',
+    // 'plugin:@next/next/core-web-vitals',
     // Apply prettier and disable incompatible rules
-    '@events-helsinki/eslint-config-bases/prettier',
+    // '@events-helsinki/eslint-config-bases/prettier',
   ],
   rules: {
     // https://github.com/vercel/next.js/discussions/16832
@@ -35,26 +35,29 @@ module.exports = {
     // For the sake of example
     // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md
     'jsx-a11y/anchor-is-valid': 'off',
+    '@typescript-eslint/naming-convention' : 'off',
+    'jest/no-commented-out-tests': 'off',
+    'jest/no-disabled-tests': 'off'
   },
   overrides: [
-    // {
-    //   files: ['src/pages/\\_*.{ts,tsx}'],
-    //   rules: {
-    //     'react/display-name': 'off',
-    //   },
-    // },
-    // {
-    //   files: ['src/backend/**/*graphql*schema*.ts'],
-    //   rules: {
-    //     '@typescript-eslint/naming-convention': [
-    //       'error',
-    //       {
-    //         // Fine-tune naming convention for graphql resolvers and allow PascalCase
-    //         selector: ['objectLiteralProperty'],
-    //         format: ['camelCase', 'PascalCase'],
-    //       },
-    //     ],
-    //   },
-    // },
+    {
+      files: ['src/pages/\\_*.{ts,tsx}'],
+      rules: {
+        'react/display-name': 'off',
+      },
+    },
+    {
+      files: ['src/backend/**/*graphql*schema*.ts'],
+      rules: {
+        '@typescript-eslint/naming-convention': [
+          'warn',
+          {
+            // Fine-tune naming convention for graphql resolvers and allow PascalCase
+            selector: ['objectLiteralProperty'],
+            format: ['camelCase', 'PascalCase'],
+          },
+        ],
+      },
+    },
   ],
 };

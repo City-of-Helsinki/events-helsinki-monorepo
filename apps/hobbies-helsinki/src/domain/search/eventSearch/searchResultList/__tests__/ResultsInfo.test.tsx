@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { Language } from 'events-helsinki-components';
 import { useLocale } from 'events-helsinki-components';
+import type { Language } from 'events-helsinki-components';
+import * as React from 'react';
 
 import {
   act,
@@ -11,13 +11,13 @@ import {
 } from '../../../../../tests/testUtils';
 import ResultsInfo from '../ResultsInfo';
 
-test('events with 0 results matches snapshot for no results', () => {
+it('events with 0 results matches snapshot for no results', () => {
   const { container } = render(<ResultsInfo resultsCount={0} />);
 
   expect(container).toMatchSnapshot();
 });
 
-test('renders no events found text', async () => {
+it('renders no events found text', async () => {
   render(<ResultsInfo resultsCount={0} />);
 
   expect(
@@ -27,7 +27,7 @@ test('renders no events found text', async () => {
   ).toBeInTheDocument();
 });
 
-test.each([1, 4])(
+it.each([1, 4])(
   'renders few events found text when event count is %i',
   async (resultsCount) => {
     render(<ResultsInfo resultsCount={resultsCount} />);

@@ -1,27 +1,29 @@
 import format from 'date-fns/format';
-import {
+import type { Language } from 'events-helsinki-components';
+import type {
   ArticleType,
-  Card,
   Category,
   Categories,
   CollectionItemType,
+  Config as RCHCConfig,
+  PageType,
+  GeneralCollectionType,
+  CardProps,
+} from 'react-helsinki-headless-cms';
+import {
+  Card,
   getCollections,
   Collection,
-  Config as RCHCConfig,
   EventSearchCollection,
   EventSelectionCollection,
   getCollectionUIType,
   isEventSearchCollection,
   isEventSelectionCollection,
-  PageType,
-  GeneralCollectionType,
-  CardProps,
   isPageType,
   isArticleType,
   getArticlePageCardProps as getArticlePageCardPropsBase,
   ModuleItemTypeEnum,
 } from 'react-helsinki-headless-cms';
-import { Language } from 'events-helsinki-components';
 
 import AppConfig from '../../../domain/app/AppConfig';
 import ArticleDetails from '../../../domain/article/articleDetails/ArticleDetails';
@@ -47,7 +49,7 @@ export const removeContextPathFromUri = (uri?: string | null) => {
 };
 
 export const stripLocaleFromUri = (uri: string): string => {
-  return uri.replace(/^\/(en|sv|fi)(?![a-z0-9])/i, '');
+  return uri.replace(/^\/(?:en|sv|fi)(?![a-z\d])/i, '');
 };
 
 export const removeTrailingSlash = (uri: string): string => {

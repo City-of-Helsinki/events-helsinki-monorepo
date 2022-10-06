@@ -1,25 +1,31 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import { NormalizedCacheObject } from '@apollo/client';
-import { GetStaticPropsContext, GetStaticPropsResult, NextPage } from 'next';
-import {
+import type { NormalizedCacheObject } from '@apollo/client';
+import { KorosWrapper } from 'events-helsinki-components';
+import type { Language } from 'events-helsinki-components';
+import type {
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+  NextPage,
+} from 'next';
+import { useTranslation } from 'next-i18next';
+import type {
   Breadcrumb,
   CollectionType,
-  getCollections,
   PageContentProps,
-  PageContent as RHHCPageContent,
-  Page as RHHCPage,
-  useConfig,
   ArticleType,
 } from 'react-helsinki-headless-cms';
 import {
-  ArticleDocument,
+  getCollections,
+  PageContent as RHHCPageContent,
+  Page as RHHCPage,
+  useConfig,
+} from 'react-helsinki-headless-cms';
+import type {
   ArticleQuery,
   ArticleQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-import { useTranslation } from 'next-i18next';
-import { KorosWrapper } from 'events-helsinki-components';
-import { Language } from 'events-helsinki-components';
+import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
 
 import Navigation from '../../common-events/components/navigation/Navigation';
 import ShareLinks from '../../common-events/components/shareLinks/ShareLinks';
@@ -28,12 +34,12 @@ import {
   getSlugFromUri,
   getUriID,
 } from '../../common-events/utils/headless-cms/headlessCmsUtils';
+import { getAllArticles } from '../../common-events/utils/headless-cms/service';
+import AppConfig from '../../domain/app/AppConfig';
 import { createCmsApolloClient } from '../../domain/clients/cmsApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
-import { getAllArticles } from '../../common-events/utils/headless-cms/service';
 import { getLocaleOrError } from '../../utils/routerUtils';
-import AppConfig from '../../domain/app/AppConfig';
 
 const NextCmsArticle: NextPage<{
   article: ArticleType;

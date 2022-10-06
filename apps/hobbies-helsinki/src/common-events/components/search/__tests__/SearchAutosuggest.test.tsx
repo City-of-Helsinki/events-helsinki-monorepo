@@ -14,9 +14,8 @@ import {
   render,
   tabKeyPressHelper,
 } from '../../../../tests/testUtils';
-import SearchAutosuggest, {
-  SearchAutosuggestProps,
-} from '../SearchAutosuggest';
+import type { SearchAutosuggestProps } from '../SearchAutosuggest';
+import SearchAutosuggest from '../SearchAutosuggest';
 
 const searchValue = 'musiikk';
 const placeholder = 'Placeholder text';
@@ -59,7 +58,7 @@ const defaultProps = {
 const renderComponent = (props?: Partial<SearchAutosuggestProps>) =>
   render(<SearchAutosuggest {...defaultProps} {...props} />, { mocks });
 
-test('should close menu with esc key', async () => {
+it('should close menu with esc key', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
@@ -72,7 +71,7 @@ test('should close menu with esc key', async () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
-test('should close menu with tab key', async () => {
+it('should close menu with tab key', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
@@ -85,7 +84,7 @@ test('should close menu with tab key', async () => {
   expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 });
 
-test('should allow navigation with down arrows', async () => {
+it('should allow navigation with down arrows', async () => {
   const { getByPlaceholderText } = renderComponent();
   const searchInput = getByPlaceholderText(placeholder);
 
@@ -106,7 +105,7 @@ test('should allow navigation with down arrows', async () => {
   });
 });
 
-test('should allow navigation with up arrows', async () => {
+it('should allow navigation with up arrows', async () => {
   const { getByPlaceholderText } = renderComponent();
   const searchInput = getByPlaceholderText(placeholder);
 
@@ -131,7 +130,7 @@ test('should allow navigation with up arrows', async () => {
   expect(options[0]).toHaveTextContent(searchValue);
 });
 
-test('first item should be focused when opening menu by down arrow', async () => {
+it('first item should be focused when opening menu by down arrow', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
@@ -149,7 +148,7 @@ test('first item should be focused when opening menu by down arrow', async () =>
   expect(options[0]).toHaveTextContent(searchValue);
 });
 
-test('last item should be focused when opening menu by up arrow', async () => {
+it('last item should be focused when opening menu by up arrow', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
@@ -170,7 +169,7 @@ test('last item should be focused when opening menu by up arrow', async () => {
   expect(options[lastIndex]).toHaveClass('autosuggestOption--isFocused');
 });
 
-test('should call onOptionClick by text is no option is selected', async () => {
+it('should call onOptionClick by text is no option is selected', async () => {
   const onEnter = jest.fn();
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
@@ -179,14 +178,14 @@ test('should call onOptionClick by text is no option is selected', async () => {
 
   enterKeyPressHelper();
 
-  expect(onEnter).toBeCalledWith({
+  expect(onEnter).toHaveBeenCalledWith({
     text: searchValue,
     type: AUTOSUGGEST_TYPES.TEXT,
     value: searchValue,
   });
 });
 
-test('should call onOptionClick by text is first option is selected', async () => {
+it('should call onOptionClick by text is first option is selected', async () => {
   const onEnter = jest.fn();
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
@@ -196,14 +195,14 @@ test('should call onOptionClick by text is first option is selected', async () =
   arrowDownKeyPressHelper();
   enterKeyPressHelper();
 
-  expect(onEnter).toBeCalledWith({
+  expect(onEnter).toHaveBeenCalledWith({
     text: searchValue,
     type: AUTOSUGGEST_TYPES.TEXT,
     value: searchValue,
   });
 });
 
-test('should call onOptionClick with option if keyword is selected', async () => {
+it('should call onOptionClick with option if keyword is selected', async () => {
   const onEnter = jest.fn();
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
@@ -214,7 +213,7 @@ test('should call onOptionClick with option if keyword is selected', async () =>
   arrowDownKeyPressHelper();
   enterKeyPressHelper();
   const keyword = keywords.data[0];
-  expect(onEnter).toBeCalledWith({
+  expect(onEnter).toHaveBeenCalledWith({
     text: keyword.name?.fi,
     type: AUTOSUGGEST_TYPES.KEYWORD,
     value: keyword.id,

@@ -1,11 +1,11 @@
-import React from 'react';
 import classNames from 'classnames';
 import { CategoryFilter, useLocale } from 'events-helsinki-components';
+import React from 'react';
 
-import { CategoryOption, Filters } from '../eventSearch/types';
-import { getSearchQuery } from '../eventSearch/utils';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import { ROUTES } from '../../../constants';
+import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
+import type { CategoryOption, Filters } from '../eventSearch/types';
+import { getSearchQuery } from '../eventSearch/utils';
 
 type SearchShortcutsProps = {
   className: string;

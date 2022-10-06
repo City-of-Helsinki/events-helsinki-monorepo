@@ -2,7 +2,8 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { screen, act, render } from '../../../../../tests/testUtils';
-import AgeFilter, { AgeFilterProps } from '../AgeFilter';
+import type { AgeFilterProps } from '../AgeFilter';
+import AgeFilter from '../AgeFilter';
 
 const props: AgeFilterProps = {
   onRemove: jest.fn(),

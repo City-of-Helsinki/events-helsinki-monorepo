@@ -1,30 +1,36 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
-import { NormalizedCacheObject } from '@apollo/client';
-import { GetStaticPropsContext, GetStaticPropsResult, NextPage } from 'next';
-import {
+import type { NormalizedCacheObject } from '@apollo/client';
+import type { Language } from 'events-helsinki-components';
+import type {
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+  NextPage,
+} from 'next';
+import type {
   Breadcrumb,
-  getCollections,
   CollectionType,
-  PageContent as HCRCPageContent,
-  Page as HCRCPage,
   PageContentProps,
-  useConfig,
   PageType,
 } from 'react-helsinki-headless-cms';
 import {
-  PageDocument,
+  getCollections,
+  PageContent as HCRCPageContent,
+  Page as HCRCPage,
+  useConfig,
+} from 'react-helsinki-headless-cms';
+import type {
   PageQuery,
   PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-import { Language } from 'events-helsinki-components';
+import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 
+import Navigation from '../../common-events/components/navigation/Navigation';
 import {
   getDefaultCollections,
   getSlugFromUri,
   getUriID,
 } from '../../common-events/utils/headless-cms/headlessCmsUtils';
-import Navigation from '../../common-events/components/navigation/Navigation';
 import { getAllPages } from '../../common-events/utils/headless-cms/service';
 import AppConfig from '../../domain/app/AppConfig';
 import { createCmsApolloClient } from '../../domain/clients/cmsApolloClient';

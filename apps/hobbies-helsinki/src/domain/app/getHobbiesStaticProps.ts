@@ -1,20 +1,14 @@
-import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
-import {
-  isApolloError,
-  gql,
-  ApolloClient,
-  NormalizedCacheObject,
-} from '@apollo/client';
-import {
-  getMenuLocationFromLanguage,
-  CmsLanguage,
-} from 'events-helsinki-components';
+import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { isApolloError, gql } from '@apollo/client';
+import type { CmsLanguage } from 'events-helsinki-components';
+import { getMenuLocationFromLanguage } from 'events-helsinki-components';
+import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
-import AppConfig from './AppConfig';
-import { staticGenerationLogger } from '../logger';
+import { getLocaleOrError } from '../../utils/routerUtils';
 import { createCmsApolloClient } from '../clients/cmsApolloClient';
 import { createEventsApolloClient } from '../clients/eventsApolloClient';
-import { getLocaleOrError } from '../../utils/routerUtils';
+import { staticGenerationLogger } from '../logger';
+import AppConfig from './AppConfig';
 
 const GLOBAL_QUERY = gql`
   fragment PageFragment on RootQuery {
@@ -55,7 +49,7 @@ type HobbiesContext = {
 export type HobbiesGlobalPageProps = {
   initialApolloState: NormalizedCacheObject;
   initialEventsApolloState: NormalizedCacheObject;
-} & unknown; //FIXME: Promise<GetStaticPropsResult<P>> of getHobbiesStaticProps
+} & unknown; // FIXME: Promise<GetStaticPropsResult<P>> of getHobbiesStaticProps
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function getHobbiesStaticProps<P = Record<string, any>>(

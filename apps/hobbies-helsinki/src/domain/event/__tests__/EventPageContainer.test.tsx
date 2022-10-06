@@ -20,15 +20,14 @@ import {
   userEvent,
   waitFor,
 } from '../../../tests/testUtils';
+import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
 import {
   EventDetailsDocument,
-  EventFieldsFragment,
   EventListDocument,
 } from '../../nextApi/graphql/generated/graphql';
 import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
-import EventPageContainer, {
-  EventPageContainerProps,
-} from '../EventPageContainer';
+import type { EventPageContainerProps } from '../EventPageContainer';
+import EventPageContainer from '../EventPageContainer';
 
 const id = 'hel:123';
 const name = 'Event title';

@@ -1,18 +1,18 @@
-import { Button, IconSearch } from 'hds-react';
 import classnames from 'classnames';
-import { useTranslation } from 'next-i18next';
-import { SecondaryLink } from 'react-helsinki-headless-cms';
+import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import {
   DateSelector,
   MobileDateSelector,
   useLocale,
 } from 'events-helsinki-components';
-import { AutosuggestMenuOption } from 'events-helsinki-components';
+import { Button, IconSearch } from 'hds-react';
+import { useTranslation } from 'next-i18next';
+import { SecondaryLink } from 'react-helsinki-headless-cms';
 
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
-import styles from './landingPageSearchForm.module.scss';
-import { getI18nPath } from '../../../utils/routerUtils';
 import { ROUTES } from '../../../constants';
+import { getI18nPath } from '../../../utils/routerUtils';
+import styles from './landingPageSearchForm.module.scss';
 
 export type LandingPageSearchFormProps = {
   className?: string;

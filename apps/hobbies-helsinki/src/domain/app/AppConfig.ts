@@ -81,7 +81,7 @@ class AppConfig {
 
     if (matomoEnabled && matomoSiteId) {
       return {
-        disabled: !Boolean(parseEnvValue(matomoEnabled)),
+        disabled: !parseEnvValue(matomoEnabled),
         urlBase: matomoUrlBase as string,
         srcUrl: getMatomoUrlPath('piwik.min.js'),
         trackerUrl: getMatomoUrlPath('tracker.php'),

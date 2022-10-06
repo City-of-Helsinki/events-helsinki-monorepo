@@ -1,7 +1,5 @@
-import {
-  EventFieldsFragment,
-  EventTypeId,
-} from '../nextApi/graphql/generated/graphql';
+import type { EventFieldsFragment } from '../nextApi/graphql/generated/graphql';
+import { EventTypeId } from '../nextApi/graphql/generated/graphql';
 
 export type KeywordOption = {
   id: string;
@@ -17,7 +15,7 @@ export type SuperEventResponse = {
 
 export type EventType = 'event' | 'course';
 
-export const EVENT_TYPE_TO_ID: Record<EventType, EventTypeId> = {
+export const eventTypeToId: Record<EventType, EventTypeId> = {
   event: EventTypeId.General,
   course: EventTypeId.Course,
 };

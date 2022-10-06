@@ -14,7 +14,7 @@ describe('client utils', () => {
         createClient: () => 1,
       });
 
-      expect(mutableCache.reference).toEqual(1);
+      expect(mutableCache.reference).toStrictEqual(1);
     });
   });
 });

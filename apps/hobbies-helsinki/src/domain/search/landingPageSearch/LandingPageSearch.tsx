@@ -1,23 +1,23 @@
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { useRouter } from 'next/router';
-import { AutosuggestMenuOption } from 'events-helsinki-components';
 import { useLocale } from 'events-helsinki-components';
+import type { AutosuggestMenuOption } from 'events-helsinki-components';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
+import React from 'react';
 
+import { ROUTES } from '../../../constants';
+import {
+  getI18nPath,
+  getParsedUrlQueryInput,
+} from '../../../utils/routerUtils';
+import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
 import {
   CATEGORY_CATALOG,
   EVENT_DEFAULT_SEARCH_FILTERS,
 } from '../eventSearch/constants';
 import { getEventCategoryOptions, getSearchQuery } from '../eventSearch/utils';
-import SearchShortcuts from './SearchShortcuts';
-import LandingPageSearchForm from './LandingPageSearchForm';
 import styles from './landingPageSearch.module.scss';
-import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
-import {
-  getI18nPath,
-  getParsedUrlQueryInput,
-} from '../../../utils/routerUtils';
-import { ROUTES } from '../../../constants';
+import LandingPageSearchForm from './LandingPageSearchForm';
+import SearchShortcuts from './SearchShortcuts';
 
 const Search: React.FC = () => {
   const { t } = useTranslation();

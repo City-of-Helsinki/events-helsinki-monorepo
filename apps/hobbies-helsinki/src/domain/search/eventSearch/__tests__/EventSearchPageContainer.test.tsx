@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { MockedResponse } from '@apollo/client/testing';
+import type { MockedResponse } from '@apollo/client/testing';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 import { toast } from 'react-toastify';
@@ -22,8 +22,8 @@ import {
   waitFor,
   screen,
 } from '../../../../tests/testUtils';
+import type { Meta } from '../../../nextApi/graphql/generated/graphql';
 import {
-  Meta,
   NeighborhoodListDocument,
   PlaceListDocument,
 } from '../../../nextApi/graphql/generated/graphql';
@@ -108,12 +108,12 @@ const searchJazzThenClickLoadMoreThrowsErrorMock = [
   createEventListRequestThrowsErrorMocks(),
 ];
 
-afterAll(() => {
-  clear();
-});
-
 afterEach(() => {
   jest.restoreAllMocks();
+});
+
+afterAll(() => {
+  clear();
 });
 
 const pathname = '/haku';
@@ -196,7 +196,7 @@ it('should show toastr message when loading next event page fails', async () => 
     expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
   });
 
-  expect(toast.error).toBeCalledWith(translations.search.errorLoadMode);
+  expect(toast.error).toHaveBeenCalledWith(translations.search.errorLoadMode);
 });
 
 it.todo('should scroll to event defined in react-router location state');

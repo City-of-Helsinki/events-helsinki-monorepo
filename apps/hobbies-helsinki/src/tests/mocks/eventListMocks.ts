@@ -1,14 +1,16 @@
-import { FetchResult, GraphQLRequest } from '@apollo/client';
-import { MockedResponse } from '@apollo/client/testing';
+import type { FetchResult, GraphQLRequest } from '@apollo/client';
+import type { MockedResponse } from '@apollo/client/testing';
 
 import AppConfig from '../../domain/app/AppConfig';
-import { EventType } from '../../domain/event/types';
-import {
-  EventListDocument,
+import type { EventType } from '../../domain/event/types';
+import type {
   EventListQueryVariables,
   EventListResponse,
-  EventTypeId,
   QueryEventListArgs,
+} from '../../domain/nextApi/graphql/generated/graphql';
+import {
+  EventListDocument,
+  EventTypeId,
 } from '../../domain/nextApi/graphql/generated/graphql';
 
 export const baseVariables = {

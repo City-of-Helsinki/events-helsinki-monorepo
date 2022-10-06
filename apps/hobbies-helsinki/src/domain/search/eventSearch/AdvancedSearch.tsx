@@ -1,6 +1,15 @@
-import { ParsedUrlQueryInput } from 'querystring';
+import type { ParsedUrlQueryInput } from 'querystring';
 
 import classNames from 'classnames';
+import {
+  Checkbox,
+  DateSelector,
+  MultiSelectDropdown,
+  RangeDropdown,
+  SearchLabel,
+  useLocale,
+} from 'events-helsinki-components';
+import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import {
   Button,
   IconCake,
@@ -10,22 +19,16 @@ import {
   IconGroup,
 } from 'hds-react';
 import { useTranslation } from 'next-i18next';
-import React, { FormEvent } from 'react';
-import qs, { parse } from 'query-string';
-import { PageSection } from 'react-helsinki-headless-cms';
-import { ContentContainer } from 'react-helsinki-headless-cms';
 import { useRouter } from 'next/router';
-import {
-  Checkbox,
-  DateSelector,
-  MultiSelectDropdown,
-  RangeDropdown,
-  SearchLabel,
-  useLocale,
-} from 'events-helsinki-components';
-import { AutosuggestMenuOption } from 'events-helsinki-components';
+import qs, { parse } from 'query-string';
+import type { FormEvent } from 'react';
+import React from 'react';
+import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 
+import IconRead from '../../../assets/icons/IconRead';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
+import { ROUTES } from '../../../constants';
+import { getI18nPath } from '../../../utils/routerUtils';
 import PlaceSelector from '../../place/placeSelector/PlaceSelector';
 import {
   EVENT_DEFAULT_SEARCH_FILTERS,
@@ -33,6 +36,7 @@ import {
   MAPPED_PLACES,
 } from './constants';
 import FilterSummary from './filterSummary/FilterSummary';
+import styles from './search.module.scss';
 import {
   getCourseHobbyTypeOptions,
   getEventCategoryOptions,
@@ -41,10 +45,6 @@ import {
   MAX_AGE,
   MIN_AGE,
 } from './utils';
-import styles from './search.module.scss';
-import { getI18nPath } from '../../../utils/routerUtils';
-import IconRead from '../../../assets/icons/IconRead';
-import { ROUTES } from '../../../constants';
 
 interface Props {
   scrollToResultList: () => void;

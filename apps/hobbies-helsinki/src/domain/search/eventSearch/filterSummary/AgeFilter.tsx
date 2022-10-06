@@ -1,6 +1,6 @@
-import React from 'react';
-import { FilterType } from 'events-helsinki-components';
 import { FilterButton, useConfig } from 'events-helsinki-components';
+import type { FilterType } from 'events-helsinki-components';
+import React from 'react';
 
 export interface AgeFilterProps {
   value: string;

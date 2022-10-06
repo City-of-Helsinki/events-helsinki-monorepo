@@ -1,26 +1,27 @@
 /* eslint-disable no-console */
-import { MockedResponse } from '@apollo/client/testing';
+import type { MockedResponse } from '@apollo/client/testing';
 import { addDays } from 'date-fns';
+import { getDateRangeStr } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import range from 'lodash/range';
+import type { NextRouter } from 'next/router';
 import React from 'react';
 import { toast } from 'react-toastify';
-import { NextRouter } from 'next/router';
-import { getDateRangeStr } from 'events-helsinki-components';
 
-import {
+import type {
   EventDetails,
   EventFieldsFragment,
   EventListQueryVariables,
   EventListResponse,
-  EventTypeId,
   Meta,
 } from '../../../../domain/nextApi/graphql/generated/graphql';
+import { EventTypeId } from '../../../../domain/nextApi/graphql/generated/graphql';
+import { translations } from '../../../../tests/initI18n';
+import { fakeEvent, fakeEvents } from '../../../../tests/mockDataUtils';
 import {
   createOtherEventTimesRequestAndResultMocks,
   createOtherEventTimesRequestThrowsErrorMocks,
 } from '../../../../tests/mocks/eventListMocks';
-import { fakeEvent, fakeEvents } from '../../../../tests/mockDataUtils';
 import {
   act,
   render,
@@ -29,7 +30,6 @@ import {
   waitFor,
 } from '../../../../tests/testUtils';
 import OtherEventTimes from '../OtherEventTimes';
-import { translations } from '../../../../tests/initI18n';
 
 const startTime = '2020-10-01T16:00:00Z';
 const endTime = '2020-10-01T18:00:00Z';
@@ -126,13 +126,13 @@ const getDateRangeStrProps = (event: EventDetails) => ({
 });
 
 describe('events', () => {
-  test('should render other event times', async () => {
+  it('should render other event times', async () => {
     advanceTo(new Date('2020-08-11'));
     renderComponent();
     await testOtherEventTimes();
   });
 
-  test('should show toastr when loading next event page fails', async () => {
+  it('should show toastr when loading next event page fails', async () => {
     toast.error = jest.fn();
     advanceTo(new Date('2020-08-11'));
     const mocks = [firstLoadMock, secondPageLoadThrowsErrorMock];
@@ -140,7 +140,7 @@ describe('events', () => {
     await testToaster();
   });
 
-  test('should go to event page of other event time', async () => {
+  it('should go to event page of other event time', async () => {
     advanceTo(new Date('2020-08-11'));
     const { router } = renderComponent();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -189,7 +189,9 @@ async function testToaster() {
   userEvent.click(toggleButton);
 
   await waitFor(() => {
-    expect(toast.error).toBeCalledWith(translations.event.info.errorLoadMode);
+    expect(toast.error).toHaveBeenCalledWith(
+      translations.event.info.errorLoadMode
+    );
   });
 }
 

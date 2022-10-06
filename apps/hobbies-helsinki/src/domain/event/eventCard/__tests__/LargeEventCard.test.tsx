@@ -1,9 +1,9 @@
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import React from 'react';
 import mockRouter from 'next-router-mock';
+import React from 'react';
 
-import { EventFieldsFragment } from '../../../../domain/nextApi/graphql/generated/graphql';
+import type { EventFieldsFragment } from '../../../../domain/nextApi/graphql/generated/graphql';
 import { translations } from '../../../../tests/initI18n';
 import { fakeEvent } from '../../../../tests/mockDataUtils';
 import { act, render, screen } from '../../../../tests/testUtils';
@@ -17,7 +17,7 @@ beforeEach(() => {
 });
 
 describe('large event card', () => {
-  test('for accessibility violations', async () => {
+  it('for accessibility violations', async () => {
     const event = fakeEvent() as EventFieldsFragment;
     const { container } = renderComponent(event);
 
@@ -25,7 +25,7 @@ describe('large event card', () => {
     expect(results).toHaveNoViolations();
   });
 
-  test('should show buy button when event has an offer', async () => {
+  it('should show buy button when event has an offer', async () => {
     const infoUrl = 'https://example.domain';
     global.open = jest.fn();
     const event = fakeEvent({
@@ -44,10 +44,10 @@ describe('large event card', () => {
     });
 
     await act(() => userEvent.click(button));
-    expect(global.open).toBeCalledWith(infoUrl);
+    expect(global.open).toHaveBeenCalledWith(infoUrl);
   });
 
-  test('should hide buy button when event is free', () => {
+  it('should hide buy button when event is free', () => {
     const event = fakeEvent({
       offers: [
         {
@@ -67,7 +67,7 @@ describe('large event card', () => {
     ).not.toBeInTheDocument();
   });
 
-  test('should hide buy button when event is closed', () => {
+  it('should hide buy button when event is closed', () => {
     const event = fakeEvent({
       endTime: '2017-01-01',
       offers: [
@@ -89,14 +89,14 @@ describe('large event card', () => {
     ).not.toBeInTheDocument();
   });
 
-  test('should go to event page by click Read more button', async () => {
+  it('should go to event page by click Read more button', async () => {
     const event = fakeEvent({
       id: '123',
     }) as EventFieldsFragment;
 
     const { router } = renderComponent(event);
 
-    expect(router.pathname).toEqual('/');
+    expect(router.pathname).toStrictEqual('/');
 
     await act(() =>
       userEvent.click(
@@ -109,18 +109,18 @@ describe('large event card', () => {
       )
     );
 
-    expect(router.pathname).toEqual('/kurssit/123');
+    expect(router.pathname).toStrictEqual('/kurssit/123');
   });
 
   // Skipped, because this is not available after the Link-component is changed from react-router Link.
-  test.skip('should go to event page by clicking event card', async () => {
+  it.skip('should go to event page by clicking event card', async () => {
     const event = fakeEvent({
       id: '123',
     }) as EventFieldsFragment;
 
     const { router } = renderComponent(event);
 
-    expect(router.pathname).toEqual('/');
+    expect(router.pathname).toStrictEqual('/');
 
     await act(() =>
       userEvent.click(
@@ -133,6 +133,6 @@ describe('large event card', () => {
       )
     );
 
-    expect(router.pathname).toEqual('/kurssit/123');
+    expect(router.pathname).toStrictEqual('/kurssit/123');
   });
 });

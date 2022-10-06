@@ -1,38 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { GetStaticPropsContext } from 'next';
+import { NetworkStatus } from '@apollo/client';
 import {
-  useCategoriesQuery,
-  PageByTemplateDocument,
-  PageByTemplateQuery,
-  PageByTemplateQueryVariables,
-  usePostsQuery,
-} from 'react-helsinki-headless-cms/apollo';
+  getQlLanguage,
+  skipFalsyType,
+  useDebounce,
+} from 'events-helsinki-components';
+import type { GetStaticPropsContext } from 'next';
+import React from 'react';
 import {
   Page as RHHCPage,
   Card,
   LargeCard,
   SearchPageContent,
-  ArticleType,
   useConfig,
-  LanguageCodeFilterEnum,
   TemplateEnum,
+} from 'react-helsinki-headless-cms';
+import type {
+  ArticleType,
+  LanguageCodeFilterEnum,
   PageType,
 } from 'react-helsinki-headless-cms';
-import { NetworkStatus } from '@apollo/client';
-import { getQlLanguage, skipFalsyType } from 'events-helsinki-components';
-import { useDebounce } from 'events-helsinki-components';
+import {
+  useCategoriesQuery,
+  PageByTemplateDocument,
+  usePostsQuery,
+} from 'react-helsinki-headless-cms/apollo';
+import type {
+  PageByTemplateQuery,
+  PageByTemplateQueryVariables,
+} from 'react-helsinki-headless-cms/apollo';
 
-import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import Navigation from '../../common-events/components/navigation/Navigation';
-import FooterSection from '../../domain/footer/Footer';
-import { getLocaleOrError } from '../../utils/routerUtils';
-import { useCmsApollo } from '../../domain/clients/cmsApolloClient';
 import { getArticlePageCardProps } from '../../common-events/utils/headless-cms/headlessCmsUtils';
-import getHobbiesStaticProps, {
-  HobbiesGlobalPageProps,
-} from '../../domain/app/getHobbiesStaticProps';
+import type { HobbiesGlobalPageProps } from '../../domain/app/getHobbiesStaticProps';
+import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
+import { useCmsApollo } from '../../domain/clients/cmsApolloClient';
+import FooterSection from '../../domain/footer/Footer';
+import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
+import { getLocaleOrError } from '../../utils/routerUtils';
 
 const CATEGORIES_AMOUNT = 20;
 const BLOCK_SIZE = 10;
@@ -83,14 +89,12 @@ export default function ArticleArchive({
 
   const fetchMoreArticles = async () => {
     if (hasMoreToLoad) {
-      try {
-        await fetchMore({
-          variables: {
-            first: BLOCK_SIZE,
-            after: pageInfo?.endCursor,
-          },
-        });
-      } catch (e) {}
+      await fetchMore({
+        variables: {
+          first: BLOCK_SIZE,
+          after: pageInfo?.endCursor,
+        },
+      });
     }
   };
 
@@ -110,7 +114,7 @@ export default function ArticleArchive({
           tags={categories}
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           onSearch={(freeSearch, tags) => {
-            //TODO: Instead of doing this through yet another state, could the query just be updated?
+            // TODO: Instead of doing this through yet another state, could the query just be updated?
             setSearchTerm(freeSearch);
             // NOTE: For some reason the CMS needs database ids here instead of ids or slugs.
             setSearchCategories(
@@ -133,7 +137,7 @@ export default function ArticleArchive({
                   item as ArticleType,
                   getRoutedInternalHref
                 )}
-                //todo: fix any type
+                // todo: fix any type
                 customContent={
                   <ArticleDetails
                     keywords={
@@ -161,7 +165,7 @@ export default function ArticleArchive({
 
                   text: '', // A design decision: The text is not wanted in the small cards
                 }}
-                //todo: fix any type
+                // todo: fix any type
                 customContent={
                   <ArticleDetails
                     keywords={

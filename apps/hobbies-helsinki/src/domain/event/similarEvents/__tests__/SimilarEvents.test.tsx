@@ -18,7 +18,7 @@ import {
   userEvent,
   waitFor,
 } from '../../../../tests/testUtils';
-import { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
+import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import SimilarEvents from '../SimilarEvents';
 
 const id = '1';
@@ -74,7 +74,7 @@ const waitForComponentToBeLoaded = async () => {
 };
 
 describe.skip('similar events', () => {
-  test('should render similar event cards', async () => {
+  it('should render similar event cards', async () => {
     advanceTo(new Date('2020-08-11'));
     render(<SimilarEvents event={event as EventFieldsFragment} />, {
       mocks,

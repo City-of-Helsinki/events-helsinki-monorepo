@@ -106,7 +106,7 @@ const defaultProps = {
   value: [],
 };
 
-test('should filter place options', async () => {
+it('should filter place options', async () => {
   render(<PlaceSelector {...defaultProps} />, {
     mocks,
   });
@@ -136,7 +136,7 @@ test('should filter place options', async () => {
   });
 });
 
-test('should render selected value correctly', async () => {
+it('should render selected value correctly', async () => {
   jest.spyOn(apolloClient, 'readQuery').mockReturnValue(placeDetailsResponse);
   render(<PlaceSelector {...defaultProps} value={[placeId]} />, {
     mocks,
@@ -147,7 +147,7 @@ test('should render selected value correctly', async () => {
   });
 });
 
-test('should render selected value correctly when getPlaceDetailsFromCache fails', async () => {
+it('should render selected value correctly when getPlaceDetailsFromCache fails', async () => {
   render(<PlaceSelector {...defaultProps} value={[placeId]} />, {
     mocks,
   });

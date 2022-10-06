@@ -1,4 +1,4 @@
-import { GetStaticPropsContext, NextPage } from 'next';
+import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 
@@ -6,14 +6,14 @@ import Navigation from '../../../common-events/components/navigation/Navigation'
 import AppConfig from '../../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../../domain/app/getHobbiesStaticProps';
 import EventPageContainer from '../../../domain/event/EventPageContainer';
-import { EventFields } from '../../../domain/event/types';
+import type { EventFields } from '../../../domain/event/types';
 import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
-import {
-  EventDetailsDocument,
+import type {
   EventDetailsQuery,
   EventDetailsQueryVariables,
 } from '../../../domain/nextApi/graphql/generated/graphql';
+import { EventDetailsDocument } from '../../../domain/nextApi/graphql/generated/graphql';
 import { getLocaleOrError } from '../../../utils/routerUtils';
 
 const Event: NextPage<{

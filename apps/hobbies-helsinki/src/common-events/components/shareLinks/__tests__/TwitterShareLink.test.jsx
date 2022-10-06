@@ -5,7 +5,7 @@ import TwitterShareLink from '../TwitterShareLink';
 
 const renderComponent = (props) => render(<TwitterShareLink {...props} />);
 
-test('should apply aria label', () => {
+it('should apply aria label', () => {
   const sharedLink = 'https://helsinki.fi/some/';
   const { getByLabelText } = renderComponent({ sharedLink });
 

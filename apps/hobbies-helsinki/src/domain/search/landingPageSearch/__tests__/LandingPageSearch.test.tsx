@@ -1,6 +1,6 @@
 import { advanceTo } from 'jest-date-mock';
-import React from 'react';
 import mockRouter from 'next-router-mock';
+import React from 'react';
 
 import { fakeKeywords } from '../../../../tests/mockDataUtils';
 import {
@@ -43,7 +43,7 @@ describe('Landing page', () => {
     mockRouter.setCurrentUrl('/');
   });
 
-  test('should route to event search page after clicking submit button', async () => {
+  it('should route to event search page after clicking submit button', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     await act(() =>
       userEvent.click(screen.getByRole('button', { name: /hae/i }))
@@ -51,7 +51,7 @@ describe('Landing page', () => {
     expect(router.pathname).toBe(searchPath);
   });
 
-  test('should route to event search page with correct search query after clicking submit button', async () => {
+  it('should route to event search page with correct search query after clicking submit button', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     const searchInput = screen.getByRole('textbox');
     await act(() => userEvent.type(searchInput, searchValue));
@@ -68,7 +68,7 @@ describe('Landing page', () => {
   });
 
   // Search options does not appear in the auto suggest menu
-  test.todo(
+  it.todo(
     'should route to event search page after clicking autosuggest menu item'
   );
   // test("should route to event search page after clicking autosuggest menu item", async () => {
@@ -86,7 +86,7 @@ describe('Landing page', () => {
   //   });
   // });
 
-  test('should route to event search page after clicking category', async () => {
+  it('should route to event search page after clicking category', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     await userEvent.click(screen.getByRole('link', { name: /musiikki/i }));
     expect(router).toMatchObject({
@@ -96,7 +96,7 @@ describe('Landing page', () => {
     });
   });
 
-  test('should route to event search page after selecting today date type and pressing submit button', async () => {
+  it('should route to event search page after selecting today date type and pressing submit button', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     await userEvent.click(
       screen.getByRole('button', { name: /valitse ajankohta/i })
@@ -113,7 +113,7 @@ describe('Landing page', () => {
     });
   });
 
-  test('should route to event search page after selecting start date and pressing submit button', async () => {
+  it('should route to event search page after selecting start date and pressing submit button', async () => {
     advanceTo('2020-10-04');
     const { router } = render(<LandingPageSearch />, { mocks });
     userEvent.click(screen.getByRole('button', { name: /valitse ajankohta/i }));

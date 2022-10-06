@@ -1,5 +1,5 @@
-import { Selector, t } from 'testcafe';
 import { screen } from '@testing-library/testcafe';
+import { t } from 'testcafe';
 import i18n from '../../src/tests/initI18n';
 
 class LandingPage {

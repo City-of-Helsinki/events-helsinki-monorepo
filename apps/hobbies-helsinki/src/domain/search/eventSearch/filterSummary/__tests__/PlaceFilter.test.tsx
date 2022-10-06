@@ -36,7 +36,7 @@ const mocks = [
   },
 ];
 
-test('matches snapshot', async () => {
+it('matches snapshot', async () => {
   const { container } = render(
     <PlaceFilter id={placeId} onRemove={jest.fn()} />,
     { mocks }

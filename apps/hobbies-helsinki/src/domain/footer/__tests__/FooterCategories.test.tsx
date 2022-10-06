@@ -9,13 +9,13 @@ beforeEach(() => {
 });
 
 // TODO: fix test, got broken after Links refactoring
-/*test('component should be accessible', async () => {
+/* test('component should be accessible', async () => {
   const { container } = render(<FooterCategories />);
 
   expect(await axe(container)).toHaveNoViolations();
-});*/
+}); */
 
-test('should route to event search page by clicking category', async () => {
+it('should route to event search page by clicking category', async () => {
   const { router } = render(<FooterCategories />);
 
   await act(() =>
@@ -26,7 +26,7 @@ test('should route to event search page by clicking category', async () => {
 });
 
 //  TODO: It seems that hds Footer does not support logoLanguage yet
-test.todo('should show Swedish logo');
+it.todo('should show Swedish logo');
 // test("should show Swedish logo", async () => {
 //   i18n.changeLanguage("sv");
 //   render(<FooterCategories />);

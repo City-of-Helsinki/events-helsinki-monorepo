@@ -1,30 +1,34 @@
-import React from 'react';
-import { GetStaticPropsContext, NextPage } from 'next';
 import {
-  PageByTemplateQuery,
-  PageByTemplateQueryVariables,
-  PageByTemplateDocument,
-  LandingPageDocument,
-  LandingPageQuery,
-  LandingPageQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
+  useLocale,
+  DEFAULT_LANGUAGE,
+  getQlLanguage,
+} from 'events-helsinki-components';
+import type { GetStaticPropsContext, NextPage } from 'next';
+import React from 'react';
+import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
 import {
   useConfig,
   PageContent as HCRCPageContent,
   Page as HCRCPage,
-  PageType,
-  ArticleType,
   TemplateEnum,
 } from 'react-helsinki-headless-cms';
-import { useLocale } from 'events-helsinki-components';
-import { DEFAULT_LANGUAGE, getQlLanguage } from 'events-helsinki-components';
+import type {
+  PageByTemplateQuery,
+  PageByTemplateQueryVariables,
+  LandingPageQuery,
+  LandingPageQueryVariables,
+} from 'react-helsinki-headless-cms/apollo';
+import {
+  PageByTemplateDocument,
+  LandingPageDocument,
+} from 'react-helsinki-headless-cms/apollo';
 
+import Navigation from '../common-events/components/navigation/Navigation';
+import { getDefaultCollections } from '../common-events/utils/headless-cms/headlessCmsUtils';
 import getHobbiesStaticProps from '../domain/app/getHobbiesStaticProps';
+import FooterSection from '../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
-import Navigation from '../common-events/components/navigation/Navigation';
-import FooterSection from '../domain/footer/Footer';
-import { getDefaultCollections } from '../common-events/utils/headless-cms/headlessCmsUtils';
 import { getLocaleOrError } from '../utils/routerUtils';
 
 const HomePage: NextPage<{

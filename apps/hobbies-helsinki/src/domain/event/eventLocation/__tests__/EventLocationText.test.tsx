@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import * as React from 'react';
 
 import { fakeEvent, fakePlace } from '../../../../tests/mockDataUtils';
-import { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
+import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventLocationText from '../EventLocationText';
 
 const addressLocality = 'Helsinki';
@@ -17,7 +17,7 @@ const event = fakeEvent({
   }),
 }) as EventFieldsFragment;
 
-test('should render event location text', () => {
+it('should render event location text', () => {
   const { container } = render(
     <EventLocationText
       event={event}

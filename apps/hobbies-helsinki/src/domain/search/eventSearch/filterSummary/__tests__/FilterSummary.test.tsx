@@ -1,6 +1,12 @@
 import { axe } from 'jest-axe';
 import React from 'react';
 
+import { translations } from '../../../../../tests/initI18n';
+import {
+  // fakeNeighborhoods,
+  fakeOrganization,
+  fakePlace,
+} from '../../../../../tests/mockDataUtils';
 import {
   act,
   configure,
@@ -9,17 +15,11 @@ import {
   userEvent,
   waitFor,
 } from '../../../../../tests/testUtils';
-import FilterSummary from '../FilterSummary';
-import {
-  // fakeNeighborhoods,
-  fakeOrganization,
-  fakePlace,
-} from '../../../../../tests/mockDataUtils';
 import {
   OrganizationDetailsDocument,
   PlaceDetailsDocument,
 } from '../../../../nextApi/graphql/generated/graphql';
-import { translations } from '../../../../../tests/initI18n';
+import FilterSummary from '../FilterSummary';
 
 configure({ defaultHidden: true });
 
@@ -104,7 +104,7 @@ const urlParams: UrlParams = {
   text: 'jazz',
 };
 
-//type UrlParamKeys = keyof UrlParams;
+// type UrlParamKeys = keyof UrlParams;
 
 const routes = [
   // eslint-disable-next-line max-len
@@ -139,7 +139,7 @@ it('calls onClear callback when clear button is clicked', async () => {
       })
     )
   );
-  expect(onClear).toBeCalledTimes(1);
+  expect(onClear).toHaveBeenCalledTimes(1);
 });
 
 it.todo('routes to correct url after deleting filters');

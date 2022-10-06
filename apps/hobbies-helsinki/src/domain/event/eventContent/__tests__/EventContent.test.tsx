@@ -3,7 +3,7 @@ import React from 'react';
 import { translations } from '../../../../tests/initI18n';
 import { fakeEvent, fakeImage } from '../../../../tests/mockDataUtils';
 import { configure, render, screen } from '../../../../tests/testUtils';
-import { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
+import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventContent from '../EventContent';
 
 configure({ defaultHidden: true });
@@ -76,7 +76,7 @@ it('should render event content fields', () => {
 
   // TODO: fix: ssr name does not exist anymore
   // Both location and event info have directions links so test that both are available
-  /*const itemsAllByRole = [
+  /* const itemsAllByRole = [
     {
       role: 'link',
       name: `${translations.event.location.directionsGoogle} ${translations.common.srOnly.opensInANewTab}`,
@@ -90,7 +90,7 @@ it('should render event content fields', () => {
 
   itemsAllByRole.forEach(({ role, name }) => {
     expect(screen.queryAllByRole(role, { name })).toHaveLength(2);
-  });*/
+  }); */
 });
 
 it('should hide map if internet event', () => {

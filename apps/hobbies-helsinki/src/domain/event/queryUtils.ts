@@ -3,11 +3,11 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import AppConfig from '../app/AppConfig';
-import {
+import type {
   EventListQuery,
   EventListQueryVariables,
-  useEventListQuery,
 } from '../nextApi/graphql/generated/graphql';
+import { useEventListQuery } from '../nextApi/graphql/generated/graphql';
 import {
   EVENT_SEARCH_FILTERS,
   EVENT_SORT_OPTIONS,
@@ -19,7 +19,7 @@ import {
 } from '../search/eventSearch/utils';
 import { SIMILAR_EVENTS_AMOUNT } from './constants';
 import { getEventIdFromUrl } from './EventUtils';
-import { EventFields } from './types';
+import type { EventFields } from './types';
 
 const useSimilarEventsQueryVariables = (event: EventFields) => {
   return React.useMemo(() => {

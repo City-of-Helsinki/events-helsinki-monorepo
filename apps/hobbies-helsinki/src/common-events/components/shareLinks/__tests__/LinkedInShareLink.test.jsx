@@ -5,7 +5,7 @@ import LinkedInShareLink from '../LinkedInShareLink';
 
 const renderComponent = (props) => render(<LinkedInShareLink {...props} />);
 
-test('should apply aria label', () => {
+it('should apply aria label', () => {
   const sharedLink = 'https://helsinki.fi/some/';
   const { getByLabelText } = renderComponent({ sharedLink });
 

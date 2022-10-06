@@ -1,5 +1,6 @@
-import { ArticleType, PageType } from 'react-helsinki-headless-cms';
-import {
+import type { PageInfo } from 'events-helsinki-components';
+import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
+import type {
   // MenuQuery,
   // MenuQueryVariables,
   // MenuDocument,
@@ -8,12 +9,13 @@ import {
   // PageDocument,
   PostsQuery,
   PostsQueryVariables,
-  PostsDocument,
   PagesQuery,
   PagesQueryVariables,
+} from 'react-helsinki-headless-cms/apollo';
+import {
+  PostsDocument,
   PagesDocument,
 } from 'react-helsinki-headless-cms/apollo';
-import { Language, PageInfo } from 'events-helsinki-components';
 
 import { createCmsApolloClient } from '../../../domain/clients/cmsApolloClient';
 

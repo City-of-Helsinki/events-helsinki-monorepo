@@ -16491,6 +16491,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-next@npm:0.0.0":
+  version: 0.0.0
+  resolution: "eslint-plugin-next@npm:0.0.0"
+  checksum: 0dd48c351d8d031cbd1ee7d3b8fa907a4ff1de0749841b1d1ae804ef2ac93afe35d55208d86f31e18569da6d4aaa23080381b942f5b29232006622eb3159b203
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-node@npm:^11.1.0":
   version: 11.1.0
   resolution: "eslint-plugin-node@npm:11.1.0"
@@ -19670,6 +19677,7 @@ __metadata:
     eslint-config-react-app: "npm:^7.0.1"
     eslint-plugin-import: "npm:^2.26.0"
     eslint-plugin-jsx-a11y: "npm:^6.5.1"
+    eslint-plugin-next: "npm:0.0.0"
     eslint-plugin-prettier: "npm:^4.0.0"
     eslint-plugin-react: "npm:^7.30.0"
     eslint-plugin-react-hooks: "npm:^4.5.0"

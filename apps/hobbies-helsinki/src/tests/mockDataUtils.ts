@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { faker } from '@faker-js/faker';
-import merge from 'lodash/merge';
 import { EXTLINK } from 'events-helsinki-components';
+import merge from 'lodash/merge';
 
-import {
+import type {
   AboutPagesResponse,
   AccessibilityPagesResponse,
   Audience,
@@ -13,7 +13,6 @@ import {
   CollectionListResponse,
   EventDetails,
   EventListResponse,
-  EventTypeId,
   ExternalLink,
   Image,
   InLanguage,
@@ -32,6 +31,7 @@ import {
   PlaceListResponse,
   StaticPage,
 } from '../domain/nextApi/graphql/generated/graphql';
+import { EventTypeId } from '../domain/nextApi/graphql/generated/graphql';
 
 export const fakeEvents = (
   count = 1,

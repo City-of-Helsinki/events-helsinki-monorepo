@@ -1,7 +1,8 @@
-import { CategoryFilter, useLocale } from 'events-helsinki-components';
+import { useLocale } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import type { FunctionComponent } from 'react';
 import React from 'react';
+import CategoryFilter from '../../common-events/components/category/CategoryFilter';
 
 import { ROUTES } from '../../constants';
 import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';

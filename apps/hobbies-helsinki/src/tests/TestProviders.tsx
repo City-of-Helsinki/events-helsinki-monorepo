@@ -72,7 +72,6 @@ function getEventsConfig(
   } as unknown as EventsConfig;
 }
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 function getRHHCConfig(router: NextRouter) {
   const locale = DEFAULT_LANGUAGE;
 

@@ -1,7 +1,7 @@
 import { IconHome } from 'hds-react';
 import React from 'react';
 
-import { render, userEvent, screen } from '../../../../config/tests/test-utils';
+import { render, screen, userEvent } from '../../../../tests/testUtils';
 import CategoryFilter from '../CategoryFilter';
 
 const category = {

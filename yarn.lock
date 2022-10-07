@@ -19681,7 +19681,6 @@ __metadata:
     eslint-plugin-prettier: "npm:^4.0.0"
     eslint-plugin-react: "npm:^7.30.0"
     eslint-plugin-react-hooks: "npm:^4.5.0"
-    events-helsinki-common-i18n: "workspace:^"
     events-helsinki-components: "workspace:^"
     file-saver: "npm:^2.0.5"
     graphql: "npm:^16.5.0"

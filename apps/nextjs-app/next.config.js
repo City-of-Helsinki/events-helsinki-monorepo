@@ -243,7 +243,14 @@ const nextConfig = {
     if (!isServer) {
       // Fixes npm packages that depend on `fs` module
       // @link https://github.com/vercel/next.js/issues/36514#issuecomment-1112074589
-      config.resolve.fallback = { ...config.resolve.fallback, fs: false };
+      // @link https://stackoverflow.com/a/63074348/784642
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        child_process: false,
+      };
     }
 
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/tree-shaking/

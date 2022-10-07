@@ -1,6 +1,6 @@
 import { Link, useHeadlessCmsLink } from 'react-helsinki-headless-cms';
-import { Text } from 'events-helsinki-components';
 import HtmlToReact from '../htmlToReact/HtmlToReact';
+import Text from '../text/Text';
 import styles from './hero.module.scss';
 
 type Props = {

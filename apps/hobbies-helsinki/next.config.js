@@ -5,6 +5,7 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 const pc = require('picocolors');
 const packageJson = require('./package.json');
+const i18nRoutes = require('./i18nRoutes.config');
 const { i18n } = require('./next-i18next.config');
 
 // const enableCSP = true;
@@ -121,6 +122,14 @@ const componentsStylePath = path.join(__dirname, '../../packages/components/');
 /**
  * @type {import('next').NextConfig}
  */
+const i18nRewriteRules = Object.entries(i18nRoutes).flatMap(
+  ([destination, sources]) =>
+    sources.map(({ source, locale }) => ({
+      destination,
+      source: `/${locale}${source}`,
+      locale: false,
+    }))
+);
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
@@ -128,6 +137,9 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: !disableSourceMaps,
   i18n,
+  async rewrites() {
+    return i18nRewriteRules;
+  },
   optimizeFonts: true,
   httpAgentOptions: {
     // @link https://nextjs.org/blog/next-11-1#builds--data-fetching
@@ -210,6 +222,7 @@ const nextConfig = {
   },
    */
 
+  // @ts-ignore
   webpack: (config, { webpack, isServer }) => {
     if (!isServer) {
       // Fixes npm packages that depend on `fs` module
@@ -297,6 +310,7 @@ if (tmModules.length > 0) {
       debug: true,
     }
   );
+  // @ts-ignore
   config = withNextTranspileModules(config);
 }
 

@@ -54,42 +54,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/client@npm:^3.6.6":
-  version: 3.7.0
-  resolution: "@apollo/client@npm:3.7.0"
-  dependencies:
-    "@graphql-typed-document-node/core": "npm:^3.1.1"
-    "@wry/context": "npm:^0.7.0"
-    "@wry/equality": "npm:^0.5.0"
-    "@wry/trie": "npm:^0.3.0"
-    graphql-tag: "npm:^2.12.6"
-    hoist-non-react-statics: "npm:^3.3.2"
-    optimism: "npm:^0.16.1"
-    prop-types: "npm:^15.7.2"
-    response-iterator: "npm:^0.2.6"
-    symbol-observable: "npm:^4.0.0"
-    ts-invariant: "npm:^0.10.3"
-    tslib: "npm:^2.3.0"
-    zen-observable-ts: "npm:^1.2.5"
-  peerDependencies:
-    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
-    graphql-ws: ^5.5.5
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    subscriptions-transport-ws: ^0.9.0 || ^0.11.0
-  peerDependenciesMeta:
-    graphql-ws:
-      optional: true
-    react:
-      optional: true
-    react-dom:
-      optional: true
-    subscriptions-transport-ws:
-      optional: true
-  checksum: 6c53cdaa3e9fb5fecb7cc1d79d5b5ff7566db75354e7eb4a4f0e564d5be29324fe669c2b6057397f18097516a994d658f1e820884b0940f612799e374ef975b6
-  languageName: node
-  linkType: hard
-
 "@apollo/protobufjs@npm:1.2.4":
   version: 1.2.4
   resolution: "@apollo/protobufjs@npm:1.2.4"
@@ -10233,15 +10197,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wry/context@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@wry/context@npm:0.7.0"
-  dependencies:
-    tslib: "npm:^2.3.0"
-  checksum: 215c9d0822a7ea74c08d27955a2dd6098f368835a920d88e993c21d0938a4ccea52205fcc793c8fd2f0eee90a48cb9e40a7dea85ff72efa071f47e0f05ab406a
-  languageName: node
-  linkType: hard
-
 "@wry/equality@npm:^0.5.0":
   version: 0.5.3
   resolution: "@wry/equality@npm:0.5.3"
@@ -19642,7 +19597,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "hobbies-helsinki@workspace:apps/hobbies-helsinki"
   dependencies:
-    "@apollo/client": "npm:^3.6.6"
+    "@apollo/client": "npm:3.6.9"
     "@babel/helper-environment-visitor": "npm:^7.18.2"
     "@commitlint/cli": "npm:^17.0.2"
     "@commitlint/config-conventional": "npm:^17.0.2"
@@ -30351,13 +30306,6 @@ __metadata:
   bin:
     resolve: bin/resolve
   checksum: 04c825cca722397520f79c0d7a9160259032af786efcc9d434c728e5e69117a9241da844a9ca3cc430fe63a0c41571c8ac9f193dd3216a3b65a14d7850f8ef5d
-  languageName: node
-  linkType: hard
-
-"response-iterator@npm:^0.2.6":
-  version: 0.2.6
-  resolution: "response-iterator@npm:0.2.6"
-  checksum: 4eda14b5b4a9b52ece22a128fe24cc4fa21a070baa016eb3ef6e0136334b6be2c97e8b9a4d206b296da90b2cd77c27a422ac44d58a69158645027773593fe4f8
   languageName: node
   linkType: hard
 

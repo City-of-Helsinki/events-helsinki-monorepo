@@ -5,8 +5,8 @@ import { getMenuLocationFromLanguage } from 'events-helsinki-components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
 import { getLocaleOrError } from '../../utils/routerUtils';
-import { createCmsApolloClient } from '../clients/cmsApolloClient';
-import { createEventsApolloClient } from '../clients/eventsApolloClient';
+import initializeCmsApolloClient from '../clients/cmsApolloClient';
+import initializeEventsApolloClient from '../clients/eventsApolloClient';
 import { staticGenerationLogger } from '../logger';
 import AppConfig from './AppConfig';
 
@@ -58,8 +58,8 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
     hobbiesContext: HobbiesContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
-  const cmsClient = createCmsApolloClient();
-  const eventsClient = createEventsApolloClient();
+  const cmsClient = initializeCmsApolloClient(); // Fixme use cache
+  const eventsClient = initializeEventsApolloClient(); // Fixme use cache
 
   try {
     await getGlobalCMSData({ client: cmsClient, context });

@@ -36,6 +36,7 @@ export function createCmsApolloClient() {
     fetch,
   });
   return new ApolloClient({
+    connectToDevTools: false,
     ssrMode: isClient,
     link: ApolloLink.from([transformInternalURLs, httpLink]),
     cache: new InMemoryCache({
@@ -57,21 +58,16 @@ export function createCmsApolloClient() {
   });
 }
 
-export default function initializeCmsApollo(
-  initialState = {}
-): ApolloClient<NormalizedCacheObject> {
-  return initializeApolloClient<
-    NormalizedCacheObject,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    ApolloClient<NormalizedCacheObject>
-  >({
+export default function initializeCmsApolloClient(
+  initialState: NormalizedCacheObject = {}
+) {
+  return initializeApolloClient({
     initialState,
     mutableCachedClient: cmsApolloClient,
     createClient: createCmsApolloClient,
   });
 }
 
-export function useCmsApollo(initialState: NormalizedCacheObject) {
-  return useMemo(() => initializeCmsApollo(initialState), [initialState]);
+export function useCmsApollo(initialState: NormalizedCacheObject = {}) {
+  return useMemo(() => initializeCmsApolloClient(initialState), [initialState]);
 }

@@ -7,17 +7,23 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import * as Sentry from '@sentry/browser';
-import fetch from 'cross-fetch';
-import { isClient } from 'events-helsinki-components';
+import {
+  excludeArgs,
+  initializeApolloClient,
+  isClient,
+  MutableReference,
+} from 'events-helsinki-components';
 import get from 'lodash/get';
 import { useMemo } from 'react';
 
 import { rewriteInternalURLs } from '../../utils/routerUtils';
 import AppConfig from '../app/AppConfig';
 
-export const createEventsApolloClient = (
-  initialState: NormalizedCacheObject = {}
-): ApolloClient<NormalizedCacheObject> => {
+const eventsApolloClient = new MutableReference<
+  ApolloClient<NormalizedCacheObject>
+>(createEventsApolloClient());
+
+export function createEventsApolloClient(): ApolloClient<NormalizedCacheObject> {
   // Rewrite the URLs coming from events API to route them internally.
   const transformInternalURLs = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
@@ -29,7 +35,6 @@ export const createEventsApolloClient = (
   });
   const httpLink = new HttpLink({
     uri: AppConfig.eventsGraphqlEndpoint,
-    fetch,
   });
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
@@ -43,24 +48,18 @@ export const createEventsApolloClient = (
     }
   });
 
-  const cache = createEventsApolloCache().restore(initialState || {});
+  const cache = createEventsApolloCache();
 
   return new ApolloClient({
+    connectToDevTools: true,
     ssrMode: !isClient, // Disables forceFetch on the server (so queries are only run once)
     // TODO: Add error link after adding Sentry to the project
     link: ApolloLink.from([transformInternalURLs, errorLink, httpLink]),
     cache,
   });
-};
+}
 
-const excludeArgs =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (excludedArgs: string[]) => (args: Record<string, any> | null) =>
-    args
-      ? Object.keys(args).filter((key: string) => !excludedArgs.includes(key))
-      : false;
-
-export const createEventsApolloCache = () => {
+export function createEventsApolloCache() {
   const cache = new InMemoryCache({
     typePolicies: {
       Query: {
@@ -112,12 +111,23 @@ export const createEventsApolloCache = () => {
     }
   }
   return cache;
-};
-
-const apolloClient = createEventsApolloClient();
-
-export function useEventsApolloClient(initialState: NormalizedCacheObject) {
-  return useMemo(() => createEventsApolloClient(initialState), [initialState]);
 }
 
-export default apolloClient;
+export default function initializeEventsApolloClient(
+  initialState: NormalizedCacheObject = {}
+) {
+  return initializeApolloClient({
+    initialState,
+    mutableCachedClient: eventsApolloClient,
+    createClient: createEventsApolloClient,
+  });
+}
+
+export function useEventsApolloClient(
+  initialState: NormalizedCacheObject = {}
+) {
+  return useMemo(
+    () => initializeEventsApolloClient(initialState),
+    [initialState]
+  );
+}

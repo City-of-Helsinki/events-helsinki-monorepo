@@ -1,3 +1,4 @@
+import type { NormalizedCacheObject } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
 import {
   MatomoProvider,
@@ -5,8 +6,9 @@ import {
 } from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
 import { LoadingSpinner } from 'hds-react';
+import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
-import type { AppProps } from 'next/app';
+import type { AppProps as NextAppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Error from 'next/error';
 import type { NextRouter } from 'next/router';
@@ -51,11 +53,27 @@ function Center({ children }: { children: React.ReactNode }) {
   );
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const cmsApolloClient = useCmsApollo(pageProps.initialApolloState);
-  const eventsApolloClient = useEventsApolloClient(
-    pageProps.initialEventsApolloState
-  );
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type AppProps<P = any> = {
+  pageProps: P;
+} & Omit<NextAppProps<P>, 'pageProps'>;
+
+export type CustomPageProps = {
+  initialApolloState: NormalizedCacheObject;
+  initialEventsApolloState: NormalizedCacheObject;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error: any;
+} & SSRConfig;
+
+function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
+  const {
+    initialApolloState: initialCmsApolloState,
+    initialEventsApolloState,
+    error,
+  } = pageProps;
+  // console.debug({ initialCmsApolloState, initialEventsApolloState });
+  const cmsApolloClient = useCmsApollo(initialCmsApolloState);
+  const eventsApolloClient = useEventsApolloClient(initialEventsApolloState);
   const eventsConfig = useEventsConfig(eventsApolloClient);
   const router = eventsConfig.router as NextRouter;
   const rhhcConfig = useRHHCConfig(cmsApolloClient, eventsApolloClient);
@@ -87,16 +105,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <Center>
                   <LoadingSpinner />
                 </Center>
-              ) : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              pageProps.error ? (
+              ) : error ? (
                 <Error
-                  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-                  /* @ts-ignore */
-                  statusCode={pageProps.error.networkError?.statusCode ?? 400}
-                  /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-                  /* @ts-ignore */
-                  title={pageProps.error.title}
+                  statusCode={error.networkError?.statusCode ?? 400}
+                  title={error.title}
                 />
               ) : (
                 <Component {...pageProps} />

@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { AUTOSUGGEST_TYPES } from 'events-helsinki-components';
 import * as React from 'react';
 import { act } from 'react-dom/test-utils';
 
-import { AUTOSUGGEST_TYPES } from '../../../../constants';
 import { KeywordListDocument } from '../../../../domain/nextApi/graphql/generated/graphql';
 import { fakeKeywords } from '../../../../tests/mockDataUtils';
 import {

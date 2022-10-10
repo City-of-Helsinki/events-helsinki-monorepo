@@ -1,5 +1,6 @@
-import { useLocale } from 'events-helsinki-components';
 import type { Language } from 'events-helsinki-components';
+import { useLocale } from 'events-helsinki-components';
+
 import * as React from 'react';
 
 import {

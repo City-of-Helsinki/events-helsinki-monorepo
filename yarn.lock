@@ -4977,6 +4977,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jonkoops/matomo-tracker-react@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@jonkoops/matomo-tracker-react@npm:0.7.0"
+  dependencies:
+    "@jonkoops/matomo-tracker": "npm:^0.7.0"
+  peerDependencies:
+    react: ">= 16.8.0"
+  checksum: 813d7d4611dc7ae3470ed6eaf5da45a32603c86640b101d5b97af32af26fb6ed66826203c2e507762a820524fc1c62a3f6f13098c53e794ce30d76b84f136f1b
+  languageName: node
+  linkType: hard
+
+"@jonkoops/matomo-tracker@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@jonkoops/matomo-tracker@npm:0.7.0"
+  checksum: 9dbbd2d96be0ea5fdc2fca9504a61a85c4164f150b7a10934994d645a0d8f6cfe02255a9747c46a39ee9e2b6ac8e02f554d8bdd4b0c090f41c91168cc0269eac
+  languageName: node
+  linkType: hard
+
 "@josephg/resolvable@npm:^1.0.0":
   version: 1.0.1
   resolution: "@josephg/resolvable@npm:1.0.1"
@@ -19636,6 +19654,7 @@ __metadata:
     "@graphql-codegen/typescript-operations": "npm:2.4.1"
     "@graphql-codegen/typescript-react-apollo": "npm:3.2.15"
     "@graphql-codegen/typescript-resolvers": "npm:^2.6.5"
+    "@jonkoops/matomo-tracker-react": "npm:^0.7.0"
     "@sentry/browser": "npm:^7.1.1"
     "@sentry/nextjs": "npm:7.14.1"
     "@sentry/react": "npm:7.14.1"

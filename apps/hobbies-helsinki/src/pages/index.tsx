@@ -28,6 +28,7 @@ import { getDefaultCollections } from '../common-events/utils/headless-cms/headl
 import getHobbiesStaticProps from '../domain/app/getHobbiesStaticProps';
 import FooterSection from '../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
+import MatomoWrapper from '../domain/matomoWrapper/MatomoWrapper';
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 import { getLocaleOrError } from '../utils/routerUtils';
 
@@ -42,26 +43,28 @@ const HomePage: NextPage<{
   } = useConfig();
 
   return (
-    <HCRCPage
-      className="pageLayout"
-      navigation={<Navigation />}
-      content={
-        <HCRCPageContent
-          page={page}
-          landingPage={landingPage}
-          PageContentLayoutComponent={LandingPageContentLayout}
-          collections={(page: PageType | ArticleType) =>
-            getDefaultCollections(
-              page,
-              getRoutedInternalHref,
-              currentLanguageCode
-            )
-          }
-          language={getQlLanguage(locale)}
-        />
-      }
-      footer={<FooterSection />}
-    />
+    <MatomoWrapper>
+      <HCRCPage
+        className="pageLayout"
+        navigation={<Navigation />}
+        content={
+          <HCRCPageContent
+            page={page}
+            landingPage={landingPage}
+            PageContentLayoutComponent={LandingPageContentLayout}
+            collections={(page: PageType | ArticleType) =>
+              getDefaultCollections(
+                page,
+                getRoutedInternalHref,
+                currentLanguageCode
+              )
+            }
+            language={getQlLanguage(locale)}
+          />
+        }
+        footer={<FooterSection />}
+      />
+    </MatomoWrapper>
   );
 };
 

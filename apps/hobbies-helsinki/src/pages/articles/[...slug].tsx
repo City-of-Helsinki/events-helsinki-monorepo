@@ -39,6 +39,7 @@ import AppConfig from '../../domain/app/AppConfig';
 import { createCmsApolloClient } from '../../domain/clients/cmsApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
+import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 import { getLocaleOrError } from '../../utils/routerUtils';
 
 const NextCmsArticle: NextPage<{
@@ -54,29 +55,31 @@ const NextCmsArticle: NextPage<{
   const { t } = useTranslation(['common']);
 
   return (
-    <RHHCPage
-      navigation={<Navigation page={article} />}
-      content={
-        <RHHCPageContent
-          page={article as PageContentProps['page']}
-          heroContainer={<KorosWrapper />}
-          breadcrumbs={
-            breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
-          }
-          shareLinks={<ShareLinks title={t('common:share.article')} />}
-          collections={
-            collections
-              ? getDefaultCollections(
-                  article,
-                  getRoutedInternalHref,
-                  currentLanguageCode
-                )
-              : []
-          }
-        />
-      }
-      footer={<FooterSection />}
-    />
+    <MatomoWrapper>
+      <RHHCPage
+        navigation={<Navigation page={article} />}
+        content={
+          <RHHCPageContent
+            page={article as PageContentProps['page']}
+            heroContainer={<KorosWrapper />}
+            breadcrumbs={
+              breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
+            }
+            shareLinks={<ShareLinks title={t('common:share.article')} />}
+            collections={
+              collections
+                ? getDefaultCollections(
+                    article,
+                    getRoutedInternalHref,
+                    currentLanguageCode
+                  )
+                : []
+            }
+          />
+        }
+        footer={<FooterSection />}
+      />
+    </MatomoWrapper>
   );
 };
 

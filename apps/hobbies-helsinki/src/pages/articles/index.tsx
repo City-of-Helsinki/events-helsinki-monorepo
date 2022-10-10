@@ -38,6 +38,7 @@ import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
 import { useCmsApollo } from '../../domain/clients/cmsApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
+import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 import { getLocaleOrError } from '../../utils/routerUtils';
 
 const CATEGORIES_AMOUNT = 20;
@@ -104,87 +105,89 @@ export default function ArticleArchive({
   // Show the first item large when the search has not yet done
   const showFirstItemLarge = searchTerm.length === 0;
   return (
-    <RHHCPage
-      className="pageLayout"
-      navigation={<Navigation page={page} />}
-      content={
-        <SearchPageContent
-          noResults={!isLoading && articles?.length === 0}
-          items={articles}
-          tags={categories}
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          onSearch={(freeSearch, tags) => {
-            // TODO: Instead of doing this through yet another state, could the query just be updated?
-            setSearchTerm(freeSearch);
-            // NOTE: For some reason the CMS needs database ids here instead of ids or slugs.
-            setSearchCategories(
-              tags
-                .filter(skipFalsyType)
-                .map((tag) => tag?.databaseId.toString())
-            );
-          }}
-          onLoadMore={() => {
-            fetchMoreArticles();
-          }}
-          largeFirstItem={showFirstItemLarge}
-          createLargeCard={(item) => {
-            const cardItem = item as ArticleType;
-            const itemCategories = cardItem?.categories;
-            return (
-              <LargeCard
-                key={`lg-card-${item?.id}`}
-                {...getArticlePageCardProps(
-                  item as ArticleType,
-                  getRoutedInternalHref
-                )}
-                // todo: fix any type
-                customContent={
-                  <ArticleDetails
-                    keywords={
-                      itemCategories?.edges
-                        ?.filter((category: any) => category?.node?.name)
-                        .map((category: any) => category?.node?.name || '') ||
-                      []
-                    }
-                  />
-                }
-              />
-            );
-          }}
-          createCard={(item) => {
-            const cardItem = item as ArticleType;
-            const itemCategories = cardItem?.categories;
-            return (
-              <Card
-                key={`sm-card-${item?.id}`}
-                {...{
-                  ...getArticlePageCardProps(
+    <MatomoWrapper>
+      <RHHCPage
+        className="pageLayout"
+        navigation={<Navigation page={page} />}
+        content={
+          <SearchPageContent
+            noResults={!isLoading && articles?.length === 0}
+            items={articles}
+            tags={categories}
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            onSearch={(freeSearch, tags) => {
+              // TODO: Instead of doing this through yet another state, could the query just be updated?
+              setSearchTerm(freeSearch);
+              // NOTE: For some reason the CMS needs database ids here instead of ids or slugs.
+              setSearchCategories(
+                tags
+                  .filter(skipFalsyType)
+                  .map((tag) => tag?.databaseId.toString())
+              );
+            }}
+            onLoadMore={() => {
+              fetchMoreArticles();
+            }}
+            largeFirstItem={showFirstItemLarge}
+            createLargeCard={(item) => {
+              const cardItem = item as ArticleType;
+              const itemCategories = cardItem?.categories;
+              return (
+                <LargeCard
+                  key={`lg-card-${item?.id}`}
+                  {...getArticlePageCardProps(
                     item as ArticleType,
                     getRoutedInternalHref
-                  ),
+                  )}
+                  // todo: fix any type
+                  customContent={
+                    <ArticleDetails
+                      keywords={
+                        itemCategories?.edges
+                          ?.filter((category: any) => category?.node?.name)
+                          .map((category: any) => category?.node?.name || '') ||
+                        []
+                      }
+                    />
+                  }
+                />
+              );
+            }}
+            createCard={(item) => {
+              const cardItem = item as ArticleType;
+              const itemCategories = cardItem?.categories;
+              return (
+                <Card
+                  key={`sm-card-${item?.id}`}
+                  {...{
+                    ...getArticlePageCardProps(
+                      item as ArticleType,
+                      getRoutedInternalHref
+                    ),
 
-                  text: '', // A design decision: The text is not wanted in the small cards
-                }}
-                // todo: fix any type
-                customContent={
-                  <ArticleDetails
-                    keywords={
-                      itemCategories?.edges
-                        ?.filter((category: any) => category?.node?.name)
-                        .map((category: any) => category?.node?.name || '') ||
-                      []
-                    }
-                  />
-                }
-              />
-            );
-          }}
-          hasMore={hasMoreToLoad}
-          isLoading={isLoading || isLoadingMore}
-        />
-      }
-      footer={<FooterSection />}
-    />
+                    text: '', // A design decision: The text is not wanted in the small cards
+                  }}
+                  // todo: fix any type
+                  customContent={
+                    <ArticleDetails
+                      keywords={
+                        itemCategories?.edges
+                          ?.filter((category: any) => category?.node?.name)
+                          .map((category: any) => category?.node?.name || '') ||
+                        []
+                      }
+                    />
+                  }
+                />
+              );
+            }}
+            hasMore={hasMoreToLoad}
+            isLoading={isLoading || isLoadingMore}
+          />
+        }
+        footer={<FooterSection />}
+      />
+    </MatomoWrapper>
   );
 }
 

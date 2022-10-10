@@ -6,7 +6,6 @@ import {
   DateSelector,
   MultiSelectDropdown,
   RangeDropdown,
-  SearchLabel,
   useLocale,
 } from 'events-helsinki-components';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';

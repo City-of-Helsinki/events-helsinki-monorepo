@@ -1,4 +1,4 @@
-import { Language, useLocale, resetFocusId } from 'events-helsinki-components';
+import { useLocale, resetFocusId } from 'events-helsinki-components';
 import { Footer, Link } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import type { FunctionComponent } from 'react';

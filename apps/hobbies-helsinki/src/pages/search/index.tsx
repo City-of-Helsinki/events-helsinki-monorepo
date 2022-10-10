@@ -10,6 +10,7 @@ import { ROUTES } from '../../constants';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
+import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
 import SearchPage from '../../domain/search/eventSearch/SearchPage';
 import { getLocaleOrError } from '../../utils/routerUtils';
@@ -37,22 +38,24 @@ export default function Search() {
   }, [scrollTo]);
 
   return (
-    <HCRCApolloPage
-      uri={ROUTES.SEARCH}
-      className="pageLayout"
-      navigation={<Navigation />}
-      content={
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        <ApolloProvider client={eventsApolloClient}>
-          <SearchPage
-            SearchComponent={AdvancedSearch}
-            pageTitle={'eventSearch.title'}
-          />
-        </ApolloProvider>
-      }
-      footer={<FooterSection />}
-    />
+    <MatomoWrapper>
+      <HCRCApolloPage
+        uri={ROUTES.SEARCH}
+        className="pageLayout"
+        navigation={<Navigation />}
+        content={
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          <ApolloProvider client={eventsApolloClient}>
+            <SearchPage
+              SearchComponent={AdvancedSearch}
+              pageTitle={'eventSearch.title'}
+            />
+          </ApolloProvider>
+        }
+        footer={<FooterSection />}
+      />
+    </MatomoWrapper>
   );
 }
 

@@ -126,12 +126,14 @@ const getDateRangeStrProps = (event: EventDetails) => ({
 });
 
 describe('events', () => {
+  // eslint-disable-next-line jest/expect-expect
   it('should render other event times', async () => {
     advanceTo(new Date('2020-08-11'));
     renderComponent();
     await testOtherEventTimes();
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it('should show toastr when loading next event page fails', async () => {
     toast.error = jest.fn();
     advanceTo(new Date('2020-08-11'));
@@ -140,6 +142,7 @@ describe('events', () => {
     await testToaster();
   });
 
+  // eslint-disable-next-line jest/expect-expect
   it('should go to event page of other event time', async () => {
     advanceTo(new Date('2020-08-11'));
     const { router } = renderComponent();

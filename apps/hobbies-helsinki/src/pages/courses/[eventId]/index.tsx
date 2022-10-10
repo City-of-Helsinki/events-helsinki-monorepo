@@ -9,11 +9,12 @@ import EventPageContainer from '../../../domain/event/EventPageContainer';
 import type { EventFields } from '../../../domain/event/types';
 import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
+import MatomoWrapper from '../../../domain/matomoWrapper/MatomoWrapper';
+import { EventDetailsDocument } from '../../../domain/nextApi/graphql/generated/graphql';
 import type {
   EventDetailsQuery,
   EventDetailsQueryVariables,
 } from '../../../domain/nextApi/graphql/generated/graphql';
-import { EventDetailsDocument } from '../../../domain/nextApi/graphql/generated/graphql';
 import { getLocaleOrError } from '../../../utils/routerUtils';
 
 const Event: NextPage<{
@@ -21,18 +22,20 @@ const Event: NextPage<{
   loading: boolean;
 }> = ({ event, loading }) => {
   return (
-    <RHHCPage
-      className="pageLayout"
-      navigation={<Navigation />}
-      content={
-        <EventPageContainer
-          event={event}
-          loading={loading}
-          showSimilarEvents={AppConfig.showSimilarEvents}
-        />
-      }
-      footer={<FooterSection />}
-    />
+    <MatomoWrapper>
+      <RHHCPage
+        className="pageLayout"
+        navigation={<Navigation />}
+        content={
+          <EventPageContainer
+            event={event}
+            loading={loading}
+            showSimilarEvents={AppConfig.showSimilarEvents}
+          />
+        }
+        footer={<FooterSection />}
+      />
+    </MatomoWrapper>
   );
 };
 export default Event;

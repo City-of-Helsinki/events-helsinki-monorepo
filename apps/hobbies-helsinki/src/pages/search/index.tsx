@@ -14,6 +14,7 @@ import SearchPage from '../../domain/search/eventSearch/SearchPage';
 import FooterSection from '../../domain/footer/Footer';
 import { getLocaleOrError } from '../../utils/routerUtils';
 import { ROUTES } from '../../constants';
+import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 
 export default function Search() {
   const router = useRouter();
@@ -38,6 +39,7 @@ export default function Search() {
   }, [scrollTo]);
 
   return (
+    <MatomoWrapper>
     <HCRCApolloPage
       uri={ROUTES.SEARCH}
       className='pageLayout'
@@ -52,6 +54,7 @@ export default function Search() {
       }
       footer={<FooterSection />}
     />
+    </MatomoWrapper>
   );
 }
 

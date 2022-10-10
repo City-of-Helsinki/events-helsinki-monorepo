@@ -16,8 +16,7 @@ import {
   ArticleType,
   TemplateEnum,
 } from 'react-helsinki-headless-cms';
-import { useLocale } from 'events-helsinki-components';
-import { DEFAULT_LANGUAGE, getQlLanguage } from 'events-helsinki-components';
+import { useLocale, DEFAULT_LANGUAGE, getQlLanguage } from 'events-helsinki-components';
 
 import getHobbiesStaticProps from '../domain/app/getHobbiesStaticProps';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
@@ -26,6 +25,7 @@ import Navigation from '../common-events/components/navigation/Navigation';
 import FooterSection from '../domain/footer/Footer';
 import { getDefaultCollections } from '../common-events/utils/headless-cms/headlessCmsUtils';
 import { getLocaleOrError } from '../utils/routerUtils';
+import MatomoWrapper from '../domain/matomoWrapper/MatomoWrapper';
 
 const HomePage: NextPage<{
   landingPage: LandingPageQuery['landingPage'];
@@ -38,6 +38,7 @@ const HomePage: NextPage<{
   } = useConfig();
 
   return (
+    <MatomoWrapper>
     <HCRCPage
       className="pageLayout"
       navigation={<Navigation />}
@@ -58,6 +59,7 @@ const HomePage: NextPage<{
       }
       footer={<FooterSection />}
     />
+    </MatomoWrapper>
   );
 };
 

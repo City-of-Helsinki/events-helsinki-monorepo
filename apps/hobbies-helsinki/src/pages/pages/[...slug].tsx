@@ -22,7 +22,9 @@ import {
 } from 'events-helsinki-components';
 
 import {
-  getDefaultCollections, getSlugFromUri, getUriID,
+  getDefaultCollections, 
+  getSlugFromUri, 
+  getUriID,
 } from '../../common-events/utils/headless-cms/headlessCmsUtils';
 import Navigation from '../../common-events/components/navigation/Navigation';
 import { getAllPages } from '../../common-events/utils/headless-cms/service';
@@ -31,6 +33,7 @@ import { createCmsApolloClient } from '../../domain/clients/cmsApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import { getLocaleOrError } from '../../utils/routerUtils';
+import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 
 const NextCmsPage: NextPage<{
   page: PageType;
@@ -43,6 +46,7 @@ const NextCmsPage: NextPage<{
   } = useConfig();
 
   return (
+    <MatomoWrapper>
     <HCRCPage
       navigation={<Navigation page={page} />}
       content={
@@ -62,6 +66,7 @@ const NextCmsPage: NextPage<{
       }
       footer={<FooterSection />}
     />
+    </MatomoWrapper>
   );
 };
 

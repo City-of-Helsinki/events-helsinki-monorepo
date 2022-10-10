@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  MatomoProvider,
+  createInstance as createMatomoInstance,
+} from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
 import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
@@ -17,12 +21,17 @@ import useRHHCConfig from '../hooks/useRHHCConfig';
 import EventsConfigProvider from '../common-events/configProvider/ConfigProvider';
 import { useEventsApolloClient } from '../domain/clients/eventsApolloClient';
 import useEventsConfig from '../hooks/useEventsConfig';
+import AppConfig from '../domain/app/AppConfig';
+
+const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
 
 const TopProgressBar = dynamic(
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   () => {
-    return import('events-helsinki-components').then(components => components.TopProgressBar);
+    return import("events-helsinki-components").then(
+      (components) => components.TopProgressBar
+    );
   },
   { ssr: false }
 );
@@ -44,12 +53,8 @@ function Center({ children }: { children: React.ReactNode }) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   const cmsApolloClient = useCmsApollo(pageProps.initialApolloState);
   const eventsApolloClient = useEventsApolloClient(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     pageProps.initialEventsApolloState
   );
   const eventsConfig = useEventsConfig(eventsApolloClient);
@@ -72,32 +77,33 @@ function MyApp({ Component, pageProps }: AppProps) {
     }, 10);
   }, []);
 
-
   return (
     <EventsConfigProvider config={eventsConfig}>
       <RHHCConfigProvider config={rhhcConfig}>
         <TopProgressBar />
         <ApolloProvider client={cmsApolloClient}>
           <ApolloProvider client={eventsApolloClient}>
-            {router.isFallback ? (
-              <Center>
-                <LoadingSpinner />
-              </Center>
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-            ) : pageProps.error ? (
+            <MatomoProvider value={matomoInstance}>
+              {router.isFallback ? (
+                <Center>
+                  <LoadingSpinner />
+                </Center>
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+              ) : pageProps.error ? (
 
-              <Error
-                { /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-                  /* @ts-ignore */ ...{}}
-                statusCode={pageProps.error.networkError?.statusCode ?? 400}
-                { /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-                  /* @ts-ignore */ ...{}}
-                title={pageProps.error.title}
-              />
-            ) : (
-              <Component {...pageProps} />
-            )}
+                <Error
+                  { /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+                    /* @ts-ignore */ ...{}}
+                  statusCode={pageProps.error.networkError?.statusCode ?? 400}
+                  { /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+                    /* @ts-ignore */ ...{}}
+                  title={pageProps.error.title}
+                />
+              ) : (
+                <Component {...pageProps} />
+              )}
+            </MatomoProvider>
           </ApolloProvider>
         </ApolloProvider>
         <ToastContainer />

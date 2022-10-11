@@ -1,3 +1,4 @@
+import translations from 'events-helsinki-common-i18n/locales/fi/common.json';
 import React from 'react';
 import {
   arrowDownKeyPressHelper,
@@ -148,12 +149,9 @@ describe('ArrowUp, ArrowDown', () => {
     renderComponent();
 
     const toggleButton = screen.getByRole('button', { name: title });
-    userEvent.click(toggleButton);
+    await userEvent.click(toggleButton);
+    await userEvent.type(toggleButton, '{arrowdown}{arrowup}');
 
-    arrowDownKeyPressHelper();
-    arrowUpKeyPressHelper();
-
-    // No element should have focus
     options.forEach((option) => {
       expect(
         screen.getByRole('checkbox', { name: option.text }).parentElement
@@ -262,7 +260,7 @@ it('should call onChange with empty array when clicking select all checkbox', as
 
   await userEvent.click(
     screen.getByRole('checkbox', {
-      name: 'common.multiSelectDropdown.selectAll',
+      name: translations.multiSelectDropdown.selectAll,
     })
   );
   expect(onChange).toHaveBeenCalledWith([]);

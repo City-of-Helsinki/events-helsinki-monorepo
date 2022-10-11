@@ -66,6 +66,7 @@ const tmModules = [
         // ie: '@react-google-maps/api'...
         'ky', // does not pass es-2017 checks
         'events-helsinki-components',
+        'react-helsinki-headless-cms',
       ]
     : []),
   // ESM only packages are not yet supported by NextJs if you're not
@@ -135,14 +136,17 @@ const secureHeaders = createSecureHeaders({
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const componentsStylePath = path.join(__dirname, '../../packages/components/');
+const componentsStylePath = [
+  path.join(__dirname, '../../packages/components/'),
+  path.join(__dirname, 'src/'),
+];
 /**
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
-    includePaths: [componentsStylePath],
+    includePaths: componentsStylePath,
   },
   productionBrowserSourceMaps: !disableSourceMaps,
   i18n,
@@ -239,7 +243,14 @@ const nextConfig = {
     if (!isServer) {
       // Fixes npm packages that depend on `fs` module
       // @link https://github.com/vercel/next.js/issues/36514#issuecomment-1112074589
-      config.resolve.fallback = { ...config.resolve.fallback, fs: false };
+      // @link https://stackoverflow.com/a/63074348/784642
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        child_process: false,
+      };
     }
 
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/tree-shaking/

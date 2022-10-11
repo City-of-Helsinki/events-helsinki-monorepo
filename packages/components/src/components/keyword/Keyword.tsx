@@ -6,10 +6,10 @@ import styles from './keyword.module.scss';
 
 interface Props {
   blackOnMobile?: boolean;
-  color?: 'engelLight50' | 'tramLight20' | 'black10';
+  color?: 'engelLight50' | 'tramLight20' | 'black10' | 'transparent';
   hideOnMobile?: boolean;
   keyword: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Keyword: FunctionComponent<Props> = ({
@@ -21,7 +21,7 @@ const Keyword: FunctionComponent<Props> = ({
 }) => {
   const handleClick = (ev: React.MouseEvent) => {
     ev.preventDefault();
-    onClick();
+    onClick && onClick();
   };
 
   return (

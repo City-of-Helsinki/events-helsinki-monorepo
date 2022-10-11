@@ -4,8 +4,8 @@ type LoggerFunction = (
 ) => void;
 
 export type Logger = {
-  debug: LoggerFunction;
-  info: LoggerFunction;
-  warn: LoggerFunction;
-  error: LoggerFunction;
+  debug?: LoggerFunction;
+  info?: LoggerFunction;
+  warn?: LoggerFunction;
+  error?: LoggerFunction;
 };

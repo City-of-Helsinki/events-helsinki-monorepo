@@ -39,7 +39,7 @@ module.exports = {
     '@typescript-eslint/naming-convention' : 'off',
     'jest/no-commented-out-tests': 'off',
     'jest/no-disabled-tests': 'off',
-    "max-len": ["warn", { "code": 120 }],
+    // "max-len": ["warn", { "code": 120 }],
     "no-console": "error",
   },
   overrides: [

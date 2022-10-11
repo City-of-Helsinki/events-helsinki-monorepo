@@ -182,6 +182,7 @@ export const getEventSearchVariables = ({
   sortOrder: EVENT_SORT_OPTIONS;
   superEventType: string[];
   place?: string;
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 }): QueryEventListArgs => {
   const {
     categories,

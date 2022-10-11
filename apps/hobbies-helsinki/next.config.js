@@ -11,7 +11,7 @@ const { i18n } = require('./next-i18next.config');
 // const enableCSP = true;
 const trueEnv = ['true', '1', 'yes'];
 
-const isProd = process.env.NODE_ENV === 'production';
+// const isProd = process.env.NODE_ENV === 'production';
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 
 const NEXTJS_IGNORE_ESLINT = trueEnv.includes(
@@ -43,6 +43,7 @@ const disableSourceMaps = trueEnv.includes(
 );
 
 if (disableSourceMaps) {
+  // eslint-disable-next-line no-console
   console.warn(
     `${pc.yellow(
       'notice'
@@ -51,6 +52,7 @@ if (disableSourceMaps) {
 }
 
 if (NEXTJS_SENTRY_DEBUG) {
+  // eslint-disable-next-line no-console
   console.warn(
     `${pc.yellow(
       'notice'
@@ -299,6 +301,7 @@ if (!NEXTJS_DISABLE_SENTRY) {
 }
 
 if (tmModules.length > 0) {
+  // eslint-disable-next-line no-console
   console.info(
     `${pc.green('notice')}- Will transpile [${tmModules.join(',')}]`
   );

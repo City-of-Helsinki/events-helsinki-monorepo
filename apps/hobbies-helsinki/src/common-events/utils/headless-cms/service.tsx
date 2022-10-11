@@ -85,6 +85,7 @@ export const getAllPages = async (): Promise<PageInfo[]> => {
   );
   return pageInfos;
 
+  // eslint-disable-next-line sonarjs/no-identical-functions
   function addPagesToPageInfosArray(node: PageType) {
     if (node && node.uri && node.slug && node.language?.code) {
       pageInfos.push({
@@ -113,108 +114,3 @@ export const getAllPages = async (): Promise<PageInfo[]> => {
     }
   }
 };
-
-// function addNodesToPageInfosArray(
-//   node: PageType | ArticleType,
-//   pageInfos: PageInfo[]
-// ) {
-//   if (node && node.uri && node.slug && node.language?.code) {
-//     pageInfos.push({
-//       uri: node.uri,
-//       locale: node.language.code.toLowerCase(),
-//       slug: node.slug,
-//     });
-//     node.translations?.forEach((translation) => {
-//       if (translation?.uri && translation.slug && translation.language?.code) {
-//         const {
-//           uri,
-//           slug,
-//           language: { code },
-//         } = translation;
-//         pageInfos.push({
-//           uri,
-//           slug,
-//           locale: code.toLocaleLowerCase(),
-//         });
-//       }
-//     });
-//   }
-// }
-
-/*
-export const getAllMenuPages = async (
-  locale: SUPPORT_LANGUAGES
-): Promise<PageInfo[]> => {
-  const pageInfos: PageInfo[] = [];
-  const cmsClient = createCmsApolloClient();
-  const { data: navigationData } = await cmsClient.query<
-    MenuQuery,
-    MenuQueryVariables
-  >({
-    query: MenuDocument,
-    variables: {
-      id: DEFAULT_HEADER_MENU_NAME[locale ?? 'fi'],
-    },
-  });
-
-  const menuItemPromises = navigationData.menu?.menuItems?.nodes?.map(
-    (menuItem) => getPageChildren(menuItem?.connectedNode?.node as PageType)
-  );
-
-  if (menuItemPromises) {
-    await Promise.all(menuItemPromises);
-  }
-
-  return pageInfos;
-
-  async function getPageChildren(node?: PageType): Promise<unknown> {
-    if (node) addPageToPageInfosArray(node);
-    if (node?.children?.nodes) {
-      return Promise.all(
-        node.children.nodes.map(async (page: PageType) => {
-          if (page?.id) {
-            const { data: childPage } = await cmsClient.query<
-              PageQuery,
-              PageQueryVariables
-            >({
-              query: PageDocument,
-              variables: {
-                id: page.id,
-              },
-            });
-            return getPageChildren(childPage.page as PageType);
-          }
-        })
-      );
-    }
-  }
-
-  function addPageToPageInfosArray(node: PageType) {
-    if (node && node.uri && node.slug && node.language?.code) {
-      pageInfos.push({
-        uri: node.uri,
-        locale: node.language.code.toLowerCase(),
-        slug: node.slug,
-      });
-      node.translations?.forEach((translation: PageType['translation']) => {
-        if (
-          translation?.uri &&
-          translation.slug &&
-          translation.language?.code
-        ) {
-          const {
-            uri,
-            slug,
-            language: { code },
-          } = translation;
-          pageInfos.push({
-            uri,
-            slug,
-            locale: code.toLocaleLowerCase(),
-          });
-        }
-      });
-    }
-  }
-};
-*/

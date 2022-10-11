@@ -250,6 +250,7 @@ const nextConfig = {
         net: false,
         tls: false,
         child_process: false,
+        perf_hooks: false,
       };
     }
 

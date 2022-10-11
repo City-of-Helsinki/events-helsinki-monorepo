@@ -5,14 +5,12 @@ import isClient from '../../utils/isClient';
 import Text from '../text/Text';
 
 function getIsomorphicDOMPurifier() {
-  if (isClient) {
+  if (!isClient) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
     const { JSDOM } = require('jsdom');
     const { window } = new JSDOM('');
-
     return createDOMPurify(window);
   }
-
   return createDOMPurify();
 }
 

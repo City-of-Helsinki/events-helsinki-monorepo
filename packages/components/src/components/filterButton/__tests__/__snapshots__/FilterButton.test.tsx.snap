@@ -2,12 +2,12 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  class="_filter_071082 _publisher_071082"
+  class="filter publisher"
 >
   text
   <button
-    aria-label="filter.ariaButtonRemove"
-    class="_closeButton_071082"
+    aria-label="Poista suodatin: text"
+    class="closeButton"
     type="button"
   >
     <svg

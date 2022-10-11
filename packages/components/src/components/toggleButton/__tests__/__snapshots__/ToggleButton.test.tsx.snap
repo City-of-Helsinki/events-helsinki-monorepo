@@ -3,11 +3,11 @@
 exports[`matches snapshot 1`] = `
 <button
   aria-pressed="true"
-  class="_toggleButton_9d9d09 _isSelected_9d9d09"
+  class="toggleButton isSelected"
   type="button"
 >
   <div
-    class="_innerWrapper_9d9d09"
+    class="innerWrapper"
   >
     <span>
       Test button

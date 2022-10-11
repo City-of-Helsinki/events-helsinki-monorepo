@@ -2,15 +2,15 @@
 
 exports[`AutosuggestMenu matches snapshot 1`] = `
 <div
-  class="_autosuggestMenu_bd6532"
+  class="autosuggestMenu"
 >
   <div
-    class="_title_bd6532"
+    class="title"
   >
-    autosuggest.menu.title
+    Hakuehdotuksia
     <button
-      aria-label="autosuggest.menu.ariaButtonClose"
-      class="_closeButton_bd6532"
+      aria-label="Sulje valikko"
+      class="closeButton"
     >
       <svg
         aria-hidden="true"
@@ -36,26 +36,26 @@ exports[`AutosuggestMenu matches snapshot 1`] = `
     </button>
   </div>
   <ul
-    class="_autosuggestOptions_bd6532"
+    class="autosuggestOptions"
     role="listbox"
   >
     <li
       aria-selected="true"
-      class="_autosuggestOption_bd6532 _autosuggestOption--text_bd6532 _autosuggestOption--isFocused_bd6532"
+      class="autosuggestOption autosuggestOption--text autosuggestOption--isFocused"
       role="option"
       tabindex="-1"
     >
       <div
-        class="_text_bd6532"
+        class="text"
       >
         foo
       </div>
     </li>
   </ul>
   <div
-    class="_info_bd6532"
+    class="info"
   >
-    autosuggest.menu.info
+    Voit myös etsiä kirjoittamallasi hakusanalla
   </div>
 </div>
 `;

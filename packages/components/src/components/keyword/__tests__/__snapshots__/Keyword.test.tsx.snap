@@ -2,7 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <button
-  class="_keyword_cf236f"
+  class="keyword"
   role="link"
   type="button"
 >

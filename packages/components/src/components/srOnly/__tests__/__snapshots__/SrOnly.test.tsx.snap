@@ -2,7 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  class="_srOnly_3ecf8a test"
+  class="srOnly test"
 >
   <div>
     Test
@@ -12,7 +12,7 @@ exports[`matches snapshot 1`] = `
 
 exports[`matches snapshot 2`] = `
 <span
-  class="_srOnly_3ecf8a"
+  class="srOnly"
 >
   <div>
     Test

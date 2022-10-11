@@ -2,11 +2,11 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  class="_spinnerWrapper_718575 _hasPadding_718575"
+  class="spinnerWrapper hasPadding"
   data-testid="loading-spinner"
 >
   <div
-    class="_spinner_718575"
+    class="spinner"
   >
     <div
       class="LoadingSpinner-module_loadingSpinner__2xHT_ LoadingSpinner-module_multicolor__1qbEF"

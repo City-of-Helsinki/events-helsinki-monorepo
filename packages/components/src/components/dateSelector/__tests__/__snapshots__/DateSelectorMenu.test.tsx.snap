@@ -2,11 +2,11 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  class="_dateSelectorMenu_d328b6"
+  class="dateSelectorMenu"
   data-testid="date-selector-menu"
 >
   <div
-    class="_checkboxWrapper_d328b6"
+    class="checkboxWrapper"
   >
     <div
       class="Checkbox-module_checkbox__3L0GR checkbox_hds-checkbox__9HMCz"
@@ -14,7 +14,6 @@ exports[`matches snapshot 1`] = `
     >
       <input
         class="Checkbox-module_input__3VZvy checkbox_hds-checkbox__input__1w0pu"
-        defaultvalue="today"
         id="name_today"
         name="date"
         type="checkbox"
@@ -24,7 +23,7 @@ exports[`matches snapshot 1`] = `
         class="Checkbox-module_label__L5AN1 checkbox_hds-checkbox__label__3HoD3"
         for="name_today"
       >
-        dateSelector.dateTypeToday
+        Tänään
       </label>
     </div>
     <div
@@ -33,7 +32,6 @@ exports[`matches snapshot 1`] = `
     >
       <input
         class="Checkbox-module_input__3VZvy checkbox_hds-checkbox__input__1w0pu"
-        defaultvalue="tomorrow"
         id="name_tomorrow"
         name="date"
         type="checkbox"
@@ -43,7 +41,7 @@ exports[`matches snapshot 1`] = `
         class="Checkbox-module_label__L5AN1 checkbox_hds-checkbox__label__3HoD3"
         for="name_tomorrow"
       >
-        dateSelector.dateTypeTomorrow
+        Huomenna
       </label>
     </div>
     <div
@@ -52,7 +50,6 @@ exports[`matches snapshot 1`] = `
     >
       <input
         class="Checkbox-module_input__3VZvy checkbox_hds-checkbox__input__1w0pu"
-        defaultvalue="this_week"
         id="name_this_week"
         name="date"
         type="checkbox"
@@ -62,7 +59,7 @@ exports[`matches snapshot 1`] = `
         class="Checkbox-module_label__L5AN1 checkbox_hds-checkbox__label__3HoD3"
         for="name_this_week"
       >
-        dateSelector.dateTypeThisWeek
+        Tällä viikolla
       </label>
     </div>
     <div
@@ -71,7 +68,6 @@ exports[`matches snapshot 1`] = `
     >
       <input
         class="Checkbox-module_input__3VZvy checkbox_hds-checkbox__input__1w0pu"
-        defaultvalue="weekend"
         id="name_weekend"
         name="date"
         type="checkbox"
@@ -81,12 +77,12 @@ exports[`matches snapshot 1`] = `
         class="Checkbox-module_label__L5AN1 checkbox_hds-checkbox__label__3HoD3"
         for="name_weekend"
       >
-        dateSelector.dateTypeWeekend
+        Viikonloppuna
       </label>
     </div>
   </div>
   <button
-    class="_button_d328b6 _btnSelectDates_d328b6"
+    class="button btnSelectDates"
     type="button"
   >
     <svg
@@ -110,9 +106,9 @@ exports[`matches snapshot 1`] = `
       </g>
     </svg>
     <div
-      class="_buttonText_d328b6"
+      class="buttonText"
     >
-      dateSelector.menu.buttonCustom
+      Valitse päivät
     </div>
     <svg
       aria-hidden="true"
@@ -136,7 +132,7 @@ exports[`matches snapshot 1`] = `
     </svg>
   </button>
   <button
-    class="_button_d328b6 _btnBack_d328b6 _hidden_d328b6"
+    class="button btnBack hidden"
     type="button"
   >
     <svg
@@ -160,19 +156,19 @@ exports[`matches snapshot 1`] = `
       </g>
     </svg>
     <div
-      class="_buttonText_d328b6"
+      class="buttonText"
     >
-      dateSelector.menu.buttonBack
+      Takaisin
     </div>
   </button>
   <button
-    class="_button_d328b6 _btnClose_d328b6 _hidden_d328b6"
+    class="button btnClose hidden"
     type="button"
   >
     <div
-      class="_buttonText_d328b6"
+      class="buttonText"
     >
-      dateSelector.menu.buttonClose
+      Sulje
     </div>
   </button>
 </div>

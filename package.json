@@ -62,7 +62,8 @@
     "copy:monorepo": "rm -rf node_modules/events-helsinki-core/*; cp -rf packages/core/dist/* node_modules/events-helsinki-core; rm -rf node_modules/events-helsinki-components/*; cp -rf packages/components/dist/* node_modules/events-helsinki-components"
   },
   "dependencies": {
-    "cross-env": "7.0.3"
+    "cross-env": "7.0.3",
+    "react": "18.2.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.6",

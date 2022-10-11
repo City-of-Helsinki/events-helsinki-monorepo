@@ -25,7 +25,7 @@
     "clean": "rimraf --no-glob ./dist ./build ./tsconfig.tsbuildinfo ./node_modules/.cache",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --cache --cache-location ../../.cache/eslint/components.eslintcache",
     "typecheck": "tsc --project ./tsconfig.json --noEmit",
-    "test": "jest --config jest.config.js --passWithNoTests",
+    "test": "cross-env TZ=Europe/Helsinki jest --config jest.config.js --passWithNoTests",
     "test-watch": "vitest watch --ui",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --fix",
     "storybook": "start-storybook -p 6006",

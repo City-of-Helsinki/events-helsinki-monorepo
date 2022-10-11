@@ -21,6 +21,7 @@ class Header {
   }
 
   public async changeLanguage(lang: SUPPORT_LANGUAGES) {
+    // eslint-disable-next-line no-console
     console.log('changeLanguage to ' + lang);
 
     this.setLanguage(lang);
@@ -40,6 +41,7 @@ class Header {
   }
 
   public async verify() {
+    // eslint-disable-next-line no-console
     console.log('Header: verify');
     await t.expect(this.banner.exists).ok();
   }

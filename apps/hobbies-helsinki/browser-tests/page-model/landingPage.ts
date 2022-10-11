@@ -6,6 +6,7 @@ class LandingPage {
   searchText = 'sirkuskoulu';
 
   public async verify() {
+    // eslint-disable-next-line no-console
     console.log('LandingPage: verify');
     const searchPlaceholderText = i18n.t('home:search.placeholder');
 

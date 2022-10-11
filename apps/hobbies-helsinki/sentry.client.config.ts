@@ -21,7 +21,9 @@ sentryInit({
   // that it will also get attached to your source maps
   beforeSend: async (event, hint) => {
     if (process.env.NODE_ENV === 'development') {
+      // eslint-disable-next-line no-console
       console.log('Sentry event', event);
+      // eslint-disable-next-line no-console
       console.log('Sentry hint', hint);
     }
     return event;

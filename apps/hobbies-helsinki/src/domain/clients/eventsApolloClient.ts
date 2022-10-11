@@ -23,7 +23,9 @@ const eventsApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
 >(createEventsApolloClient());
 
-export function createEventsApolloClient(): ApolloClient<NormalizedCacheObject> {
+export function createEventsApolloClient(
+  initialState?: NormalizedCacheObject
+): ApolloClient<NormalizedCacheObject> {
   // Rewrite the URLs coming from events API to route them internally.
   const transformInternalURLs = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
@@ -48,7 +50,7 @@ export function createEventsApolloClient(): ApolloClient<NormalizedCacheObject> 
     }
   });
 
-  const cache = createEventsApolloCache();
+  const cache = createEventsApolloCache(initialState);
 
   return new ApolloClient({
     connectToDevTools: true,
@@ -59,7 +61,7 @@ export function createEventsApolloClient(): ApolloClient<NormalizedCacheObject> 
   });
 }
 
-export function createEventsApolloCache() {
+export function createEventsApolloCache(initialState?: NormalizedCacheObject) {
   const cache = new InMemoryCache({
     typePolicies: {
       Query: {
@@ -103,6 +105,9 @@ export function createEventsApolloCache() {
       },
     },
   });
+
+  cache.restore(initialState || {});
+
   if (typeof window !== 'undefined') {
     const state = get(window, '__APOLLO_STATE__');
     if (state) {
@@ -110,6 +115,7 @@ export function createEventsApolloCache() {
       cache.restore(state.defaultClient);
     }
   }
+
   return cache;
 }
 

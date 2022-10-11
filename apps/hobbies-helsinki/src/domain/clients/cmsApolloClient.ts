@@ -21,7 +21,9 @@ const cmsApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
 >(createCmsApolloClient());
 
-export function createCmsApolloClient() {
+export function createCmsApolloClient(
+  initialState: NormalizedCacheObject = {}
+) {
   // Rewrite the URLs coming from events API to route them internally.
   const transformInternalURLs = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
@@ -35,27 +37,38 @@ export function createCmsApolloClient() {
     uri: AppConfig.cmsGraphqlEndpoint,
     fetch,
   });
+
+  const cache = createCmsApolloCache(initialState);
+
   return new ApolloClient({
     connectToDevTools: false,
     ssrMode: isClient,
     link: ApolloLink.from([transformInternalURLs, httpLink]),
-    cache: new InMemoryCache({
-      typePolicies: {
-        RootQuery: {
-          queryType: true,
-        },
-        MenuItems: {
-          fields: {
-            nodes: {
-              read(nodes) {
-                return sortMenuItems(nodes);
-              },
+    cache,
+  });
+}
+
+export function createCmsApolloCache(initialState?: NormalizedCacheObject) {
+  const cache = new InMemoryCache({
+    typePolicies: {
+      RootQuery: {
+        queryType: true,
+      },
+      MenuItems: {
+        fields: {
+          nodes: {
+            read(nodes) {
+              return sortMenuItems(nodes);
             },
           },
         },
       },
-    }),
+    },
   });
+
+  cache.restore(initialState || {});
+
+  return cache;
 }
 
 export default function initializeCmsApolloClient(

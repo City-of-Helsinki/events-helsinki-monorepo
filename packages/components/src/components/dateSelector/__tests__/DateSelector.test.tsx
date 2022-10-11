@@ -1,3 +1,4 @@
+import translations from 'events-helsinki-common-i18n/locales/fi/common.json';
 import * as React from 'react';
 import {
   arrowDownKeyPressHelper,
@@ -32,7 +33,7 @@ it('should render selected date types when single option is selected', () => {
   renderComponent({ dateTypes: [DATE_TYPES.TODAY] });
 
   expect(
-    screen.getByText('common.dateSelector.dateTypeToday')
+    screen.getByText(translations.dateSelector.dateTypeToday)
   ).toBeInTheDocument();
 });
 
@@ -40,7 +41,7 @@ it('should render selected date types when multiple options are selected', () =>
   renderComponent({ dateTypes: [DATE_TYPES.TOMORROW, DATE_TYPES.TODAY] });
 
   expect(
-    screen.getByText(`common.dateSelector.dateTypeToday + 1`)
+    screen.getByText(`${translations.dateSelector.dateTypeToday} + 1`)
   ).toBeInTheDocument();
 });
 
@@ -52,7 +53,7 @@ it('should add date type', async () => {
   });
 
   const toggleButton = screen.getByRole('button', {
-    name: 'common.dateSelector.title',
+    name: translations.dateSelector.title,
   });
 
   await userEvent.click(toggleButton);
@@ -60,7 +61,7 @@ it('should add date type', async () => {
 
   await userEvent.click(
     screen.getByRole('checkbox', {
-      name: 'common.dateSelector.dateTypeToday',
+      name: translations.dateSelector.dateTypeToday,
     })
   );
 
@@ -75,14 +76,14 @@ it('should call toggleIsCustomDate function', async () => {
   });
 
   const toggleButton = screen.getByRole('button', {
-    name: 'common.dateSelector.title',
+    name: translations.dateSelector.title,
   });
 
   await userEvent.click(toggleButton);
   expect(screen.getByTestId(testIds.menu)).toBeInTheDocument();
 
   const customDatesButton = screen.getByRole('button', {
-    name: 'common.dateSelector.menu.buttonCustom',
+    name: translations.dateSelector.menu.buttonCustom,
   });
   await userEvent.click(customDatesButton);
 
@@ -97,7 +98,7 @@ it('should remove date type', async () => {
   });
 
   const toggleButton = screen.getByRole('button', {
-    name: 'common.dateSelector.title',
+    name: translations.dateSelector.title,
   });
 
   await userEvent.click(toggleButton);
@@ -105,7 +106,7 @@ it('should remove date type', async () => {
 
   await userEvent.click(
     screen.getByRole('checkbox', {
-      name: 'common.dateSelector.dateTypeToday',
+      name: translations.dateSelector.dateTypeToday,
     })
   );
 
@@ -117,7 +118,7 @@ describe('should open menu with', () => {
     renderComponent();
 
     const toggleButton = screen.getByRole('button', {
-      name: 'common.dateSelector.title',
+      name: translations.dateSelector.title,
     });
 
     await userEvent.click(toggleButton);

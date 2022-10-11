@@ -18,8 +18,9 @@ module.exports = {
   },
   ignorePatterns: [...getDefaultIgnorePatterns(), '.next', '.out'],
   extends: [
+    'next',
     '@events-helsinki/eslint-config-bases/typescript',
-    // '@events-helsinki/eslint-config-bases/sonar',
+    '@events-helsinki/eslint-config-bases/sonar',
     '@events-helsinki/eslint-config-bases/regexp',
     '@events-helsinki/eslint-config-bases/jest',
     '@events-helsinki/eslint-config-bases/react',
@@ -37,7 +38,9 @@ module.exports = {
     'jsx-a11y/anchor-is-valid': 'off',
     '@typescript-eslint/naming-convention' : 'off',
     'jest/no-commented-out-tests': 'off',
-    'jest/no-disabled-tests': 'off'
+    'jest/no-disabled-tests': 'off',
+    "max-len": ["warn", { "code": 120 }],
+    "no-console": "error",
   },
   overrides: [
     {

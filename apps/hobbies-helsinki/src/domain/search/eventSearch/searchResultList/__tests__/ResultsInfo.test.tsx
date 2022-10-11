@@ -50,6 +50,7 @@ it.each<[Language, number]>([
 ])(
   'renders language change button under search results when current language is %s and there are %i %s search items',
   async (language, resultsCount) => {
+    // @ts-ignore
     jest.spyOn(useLocale, 'default').mockReturnValue(language);
 
     const { router } = render(<ResultsInfo resultsCount={resultsCount} />);
@@ -68,6 +69,8 @@ it.each<[Language, number]>([
 
 // eslint-disable-next-line max-len
 it('renders does not render language change button under eventss search results when current language is Finnish', () => {
+
+  // @ts-ignore
   jest.spyOn(useLocale, 'default').mockReturnValue('fi');
 
   render(<ResultsInfo resultsCount={0} />);

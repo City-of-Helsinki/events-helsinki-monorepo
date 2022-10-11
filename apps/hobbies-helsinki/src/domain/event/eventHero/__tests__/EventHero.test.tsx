@@ -1,7 +1,7 @@
+import { getDateRangeStr } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
-
 import type {
   EventDetails,
   EventFieldsFragment,

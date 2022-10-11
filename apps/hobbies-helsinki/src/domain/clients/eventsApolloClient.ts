@@ -1,5 +1,6 @@
-import type { NormalizedCacheObject } from '@apollo/client';
+import type { NormalizedCacheObject, StoreObject } from '@apollo/client';
 import {
+  defaultDataIdFromObject,
   ApolloClient,
   ApolloLink,
   HttpLink,
@@ -13,7 +14,6 @@ import {
   isClient,
   MutableReference,
 } from 'events-helsinki-components';
-import get from 'lodash/get';
 import { useMemo } from 'react';
 
 import { rewriteInternalURLs } from '../../utils/routerUtils';
@@ -23,9 +23,7 @@ const eventsApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
 >(createEventsApolloClient());
 
-export function createEventsApolloClient(
-  initialState?: NormalizedCacheObject
-): ApolloClient<NormalizedCacheObject> {
+export function createEventsApolloClient() {
   // Rewrite the URLs coming from events API to route them internally.
   const transformInternalURLs = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
@@ -50,7 +48,7 @@ export function createEventsApolloClient(
     }
   });
 
-  const cache = createEventsApolloCache(initialState);
+  const cache = createEventsApolloCache();
 
   return new ApolloClient({
     connectToDevTools: true,
@@ -61,8 +59,8 @@ export function createEventsApolloClient(
   });
 }
 
-export function createEventsApolloCache(initialState?: NormalizedCacheObject) {
-  const cache = new InMemoryCache({
+export function createEventsApolloCache() {
+  return new InMemoryCache({
     typePolicies: {
       Query: {
         fields: {
@@ -78,12 +76,25 @@ export function createEventsApolloCache(initialState?: NormalizedCacheObject) {
               id: args?.id,
             });
           },
+          keyword(_, { args, toReference }) {
+            return toReference({
+              __typename: 'Keyword',
+              id: args?.id,
+            });
+          },
+          place(_, { args, toReference }) {
+            return toReference({
+              __typename: 'Place',
+              id: args?.id,
+            });
+          },
           eventList: {
             // Only ignore page argument in caching to get fetchMore pagination working correctly
             // Other args are needed to separate different serch queries to separate caches
             // Docs: https://www.apollographql.com/docs/react/pagination/key-args/
             keyArgs: excludeArgs(['page']),
             merge(existing, incoming) {
+              if (!incoming) return existing;
               return {
                 data: [...(existing?.data ?? []), ...incoming.data],
                 meta: incoming.meta,
@@ -93,8 +104,8 @@ export function createEventsApolloCache(initialState?: NormalizedCacheObject) {
           // See eventList keyArgs for explanation why page is filtered.
           eventsByIds: {
             keyArgs: excludeArgs(['page']),
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            merge(existing, incoming, options) {
+            merge(existing, incoming) {
+              if (!incoming) return existing;
               return {
                 data: [...(existing?.data ?? []), ...incoming.data],
                 meta: incoming.meta,
@@ -103,24 +114,25 @@ export function createEventsApolloCache(initialState?: NormalizedCacheObject) {
           },
         },
       },
+      Keyword: {
+        keyFields: (object: Readonly<StoreObject>, { selectionSet }) => {
+          // Hacky way to not store keywords without id to cache (then name is missing also)
+          // This happends when queries are done without include: ['keywords']
+          if (selectionSet) {
+            return object.id ? `Keyword:${object.internalId}` : false;
+          }
+
+          // if selectionSet is not defined, it means that toReference function calls keyfields
+          // then we want to return cache id normally.
+          return defaultDataIdFromObject(object);
+        },
+      },
     },
   });
-
-  cache.restore(initialState || {});
-
-  if (typeof window !== 'undefined') {
-    const state = get(window, '__APOLLO_STATE__');
-    if (state) {
-      // If you have multiple clients, use `state.<client_id>`
-      cache.restore(state.defaultClient);
-    }
-  }
-
-  return cache;
 }
 
 export default function initializeEventsApolloClient(
-  initialState: NormalizedCacheObject = {}
+  initialState: NormalizedCacheObject | null = null
 ) {
   return initializeApolloClient({
     initialState,
@@ -130,7 +142,7 @@ export default function initializeEventsApolloClient(
 }
 
 export function useEventsApolloClient(
-  initialState: NormalizedCacheObject = {}
+  initialState: NormalizedCacheObject | null = null
 ) {
   return useMemo(
     () => initializeEventsApolloClient(initialState),

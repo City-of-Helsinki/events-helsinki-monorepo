@@ -30,4 +30,3 @@ export { default as Text } from './text/Text';
 export { default as ToggleButton } from './toggleButton/ToggleButton';
 export { default as TopProgressBar } from './topProgressBar/TopProgressBar';
 export { default as Visible } from './visible/Visible';
-export { default as HtmlToReact } from './htmlToReact/HtmlToReact';

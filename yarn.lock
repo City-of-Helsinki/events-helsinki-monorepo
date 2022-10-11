@@ -14696,17 +14696,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dom-serializer@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "dom-serializer@npm:2.0.0"
-  dependencies:
-    domelementtype: "npm:^2.3.0"
-    domhandler: "npm:^5.0.2"
-    entities: "npm:^4.2.0"
-  checksum: b929ade46bd5abc898c48fa07964bb6455e1794b410ca523060b3c3159d3afdb0f4f808c09474364fcc8747019854cd12ab0befdd1344158475ff63b2319fdd9
-  languageName: node
-  linkType: hard
-
 "dom-walk@npm:^0.1.0":
   version: 0.1.2
   resolution: "dom-walk@npm:0.1.2"
@@ -14734,7 +14723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domelementtype@npm:^2.0.1, domelementtype@npm:^2.2.0, domelementtype@npm:^2.3.0":
+"domelementtype@npm:^2.0.1, domelementtype@npm:^2.2.0":
   version: 2.3.0
   resolution: "domelementtype@npm:2.3.0"
   checksum: 07afcb90734e39b324e19271effc13389bb27a3957fa68a99b19d0ffdc0338fe669e9170a876f0fc4948bedd28b1f937042ada4948bee54e01a833c37a54dd74
@@ -14759,16 +14748,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domhandler@npm:5.0.3, domhandler@npm:^5.0.1, domhandler@npm:^5.0.2":
-  version: 5.0.3
-  resolution: "domhandler@npm:5.0.3"
-  dependencies:
-    domelementtype: "npm:^2.3.0"
-  checksum: c5242d9dcf9a91ebfb53869f1be972c52d332119d90351cd8cefabf55848021a4329ae5a77cdeab7565e338031c9c163d7a43009527cfa634e1cd0873eb8ae74
-  languageName: node
-  linkType: hard
-
-"dompurify@npm:2.4.0, dompurify@npm:^2.3.5":
+"dompurify@npm:^2.3.5":
   version: 2.4.0
   resolution: "dompurify@npm:2.4.0"
   checksum: bd570792df54db0d8f0864a9ffbf65f299e2ad0929081452e1f58aea3d1be7f6c5d49edc83a023e8dd303101f93046c3cb2c5b946e1e5a40a6f659dfaa893184
@@ -14783,17 +14763,6 @@ __metadata:
     domelementtype: "npm:^2.2.0"
     domhandler: "npm:^4.2.0"
   checksum: 7d3ccd2fa5046b263d6080ae7584f41c2b1e1a9b60b0ed333d6f5a0ba35ccd182fabfe380185bca020e29d9c2cffabde75dec654eda260aaebf63ac1df82ed5c
-  languageName: node
-  linkType: hard
-
-"domutils@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "domutils@npm:3.0.1"
-  dependencies:
-    dom-serializer: "npm:^2.0.0"
-    domelementtype: "npm:^2.3.0"
-    domhandler: "npm:^5.0.1"
-  checksum: 0465c336b65c51dba7e4e8eade6886a1ad055909b1cd094e6808aeeb84bb01e1eaadd9421cbd5921506b3fbaa131350e95d638b7e388ae026eb6188a03254e0f
   languageName: node
   linkType: hard
 
@@ -15170,7 +15139,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"entities@npm:^4.2.0, entities@npm:^4.3.0, entities@npm:^4.4.0":
+"entities@npm:^4.3.0, entities@npm:^4.4.0":
   version: 4.4.0
   resolution: "entities@npm:4.4.0"
   checksum: 80f4887c3e96be47c73e6d7a7a759b001cd070444d92d4df28fb5def41fc51f6fe9e3a4fe25dafacefe292798cf9f35f92f16c85f9de36c658fff414bd8394be
@@ -16916,14 +16885,12 @@ __metadata:
     date-fns: "npm:2.29.3"
     date-fns-tz: "npm:1.3.7"
     dequal: "npm:2.0.3"
-    dompurify: "npm:2.4.0"
     eslint: "npm:8.24.0"
     events-helsinki-common-i18n: "workspace:^"
     graphql: "npm:16.6.0"
     happy-dom: "npm:6.0.4"
     hds-design-tokens: "npm:2.3.0"
     hds-react: "npm:^2.3.0"
-    html-react-parser: "npm:3.0.4"
     i18next: "npm:21.9.2"
     i18next-browser-languagedetector: "npm:6.1.5"
     i18next-http-backend: "npm:1.4.4"
@@ -16933,7 +16900,6 @@ __metadata:
     jest-axe: "npm:^6.0.0"
     jest-date-mock: "npm:^1.0.8"
     jest-environment-jsdom: "npm:^29.1.1"
-    jsdom: "npm:20.0.1"
     lodash: "npm:4.17.21"
     microbundle: "npm:0.15.1"
     next: "npm:12.3.1"
@@ -19612,16 +19578,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-dom-parser@npm:3.1.2":
-  version: 3.1.2
-  resolution: "html-dom-parser@npm:3.1.2"
-  dependencies:
-    domhandler: "npm:5.0.3"
-    htmlparser2: "npm:8.0.1"
-  checksum: ed5ac5fd5399e546dd58455e37b13ba925deeaee4e8d3981be53c63ad2777bfdb9dcae1e2bfa628d1366cfc368cf00974ebe358eda866a32c48551466ebb29ff
-  languageName: node
-  linkType: hard
-
 "html-encoding-sniffer@npm:^3.0.0":
   version: 3.0.0
   resolution: "html-encoding-sniffer@npm:3.0.0"
@@ -19685,20 +19641,6 @@ __metadata:
   dependencies:
     void-elements: "npm:3.1.0"
   checksum: be12274fefe1115703e814a2ce1287fb6262536f3a541a279e4317d95c32fa022b2366357f79011fb693a77b4e216c631dda6b26e0ebf7c7fba77786cffd971c
-  languageName: node
-  linkType: hard
-
-"html-react-parser@npm:3.0.4":
-  version: 3.0.4
-  resolution: "html-react-parser@npm:3.0.4"
-  dependencies:
-    domhandler: "npm:5.0.3"
-    html-dom-parser: "npm:3.1.2"
-    react-property: "npm:2.0.0"
-    style-to-js: "npm:1.1.1"
-  peerDependencies:
-    react: 0.14 || 15 || 16 || 17 || 18
-  checksum: aaf53b43212fe673d652a20f0ed58f79ae5e6a839b80b3ba6a6e7757dc7a8cfc0ffe4d63b2856d0812848c8498417b52c9a72940678978103290a53af99a68a6
   languageName: node
   linkType: hard
 
@@ -19788,18 +19730,6 @@ __metadata:
     domutils: "npm:^2.8.0"
     entities: "npm:^3.0.1"
   checksum: 970f558e1bf5f983eb7dbf4dcc4035382741519403676fc6730ad53380a1146e80117e2a1a66ca6195bc52f01da0ceafd2da091750d480ab25a88e73693075ee
-  languageName: node
-  linkType: hard
-
-"htmlparser2@npm:8.0.1":
-  version: 8.0.1
-  resolution: "htmlparser2@npm:8.0.1"
-  dependencies:
-    domelementtype: "npm:^2.3.0"
-    domhandler: "npm:^5.0.2"
-    domutils: "npm:^3.0.1"
-    entities: "npm:^4.3.0"
-  checksum: a0dac7ff4df0bdf628dc3decd5567dc16e51d402926f879d08e5a38d6bbbdfbb4b8088782b1dbbfdebc14620dfab791e757df47defb016e1ccc3ac455b6fdaa2
   languageName: node
   linkType: hard
 
@@ -22666,45 +22596,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:20.0.1, jsdom@npm:^20.0.0":
-  version: 20.0.1
-  resolution: "jsdom@npm:20.0.1"
-  dependencies:
-    abab: "npm:^2.0.6"
-    acorn: "npm:^8.8.0"
-    acorn-globals: "npm:^7.0.0"
-    cssom: "npm:^0.5.0"
-    cssstyle: "npm:^2.3.0"
-    data-urls: "npm:^3.0.2"
-    decimal.js: "npm:^10.4.1"
-    domexception: "npm:^4.0.0"
-    escodegen: "npm:^2.0.0"
-    form-data: "npm:^4.0.0"
-    html-encoding-sniffer: "npm:^3.0.0"
-    http-proxy-agent: "npm:^5.0.0"
-    https-proxy-agent: "npm:^5.0.1"
-    is-potential-custom-element-name: "npm:^1.0.1"
-    nwsapi: "npm:^2.2.2"
-    parse5: "npm:^7.1.1"
-    saxes: "npm:^6.0.0"
-    symbol-tree: "npm:^3.2.4"
-    tough-cookie: "npm:^4.1.2"
-    w3c-xmlserializer: "npm:^3.0.0"
-    webidl-conversions: "npm:^7.0.0"
-    whatwg-encoding: "npm:^2.0.0"
-    whatwg-mimetype: "npm:^3.0.0"
-    whatwg-url: "npm:^11.0.0"
-    ws: "npm:^8.9.0"
-    xml-name-validator: "npm:^4.0.0"
-  peerDependencies:
-    canvas: ^2.5.0
-  peerDependenciesMeta:
-    canvas:
-      optional: true
-  checksum: 16e3849f854902ab27d513bb08d784a64acef2095246a96538c899fdb060010cbf661b32562f7170e1cbbd59c1bb33ac0a87c79cbee85b8b7c11fb6ad36757fa
-  languageName: node
-  linkType: hard
-
 "jsdom@npm:^19.0.0":
   version: 19.0.0
   resolution: "jsdom@npm:19.0.0"
@@ -22742,6 +22633,45 @@ __metadata:
     canvas:
       optional: true
   checksum: 0eae85a1a724ea5b56dd7ba363f16b4c65e0d94649b7041cddf6ac191aa965107d8c754ed993921d24a9be6f602cf23ba15bfa58db6944863a04aa28412722ae
+  languageName: node
+  linkType: hard
+
+"jsdom@npm:^20.0.0":
+  version: 20.0.1
+  resolution: "jsdom@npm:20.0.1"
+  dependencies:
+    abab: "npm:^2.0.6"
+    acorn: "npm:^8.8.0"
+    acorn-globals: "npm:^7.0.0"
+    cssom: "npm:^0.5.0"
+    cssstyle: "npm:^2.3.0"
+    data-urls: "npm:^3.0.2"
+    decimal.js: "npm:^10.4.1"
+    domexception: "npm:^4.0.0"
+    escodegen: "npm:^2.0.0"
+    form-data: "npm:^4.0.0"
+    html-encoding-sniffer: "npm:^3.0.0"
+    http-proxy-agent: "npm:^5.0.0"
+    https-proxy-agent: "npm:^5.0.1"
+    is-potential-custom-element-name: "npm:^1.0.1"
+    nwsapi: "npm:^2.2.2"
+    parse5: "npm:^7.1.1"
+    saxes: "npm:^6.0.0"
+    symbol-tree: "npm:^3.2.4"
+    tough-cookie: "npm:^4.1.2"
+    w3c-xmlserializer: "npm:^3.0.0"
+    webidl-conversions: "npm:^7.0.0"
+    whatwg-encoding: "npm:^2.0.0"
+    whatwg-mimetype: "npm:^3.0.0"
+    whatwg-url: "npm:^11.0.0"
+    ws: "npm:^8.9.0"
+    xml-name-validator: "npm:^4.0.0"
+  peerDependencies:
+    canvas: ^2.5.0
+  peerDependenciesMeta:
+    canvas:
+      optional: true
+  checksum: 16e3849f854902ab27d513bb08d784a64acef2095246a96538c899fdb060010cbf661b32562f7170e1cbbd59c1bb33ac0a87c79cbee85b8b7c11fb6ad36757fa
   languageName: node
   linkType: hard
 

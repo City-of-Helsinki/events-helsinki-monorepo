@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { utcToZonedTime } from 'date-fns-tz';
+import translations from 'events-helsinki-common-i18n/locales/fi/common.json';
 import { advanceTo } from 'jest-date-mock';
 import React from 'react';
 import { configure, render, screen } from '@/test-utils';
@@ -29,7 +30,7 @@ describe('date range input', () => {
     renderComponent({ endDate, onChangeEndDate });
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelEndDate',
+      name: translations.dateSelector.labelEndDate,
     });
 
     const endDateStr = '12.10.2020';
@@ -38,7 +39,7 @@ describe('date range input', () => {
     await userEvent.type(endDateInput, endDateStr);
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelStartDate',
+      name: translations.dateSelector.labelStartDate,
     });
     await userEvent.click(startDateInput);
 
@@ -53,7 +54,7 @@ describe('date range input', () => {
     renderComponent({ endDate, onChangeEndDate });
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelEndDate',
+      name: translations.dateSelector.labelEndDate,
     });
 
     await userEvent.click(endDateInput);
@@ -67,7 +68,7 @@ describe('date range input', () => {
     );
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelStartDate',
+      name: translations.dateSelector.labelStartDate,
     });
     await userEvent.click(startDateInput);
 
@@ -82,7 +83,7 @@ describe('date range input', () => {
     renderComponent({ startDate, onChangeStartDate });
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelStartDate',
+      name: translations.dateSelector.labelStartDate,
     });
 
     const startDateStr = '12.10.2020';
@@ -92,7 +93,7 @@ describe('date range input', () => {
     await userEvent.type(startDateInput, startDateStr);
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelEndDate',
+      name: translations.dateSelector.labelEndDate,
     });
     await userEvent.click(endDateInput);
 
@@ -107,7 +108,7 @@ describe('date range input', () => {
     renderComponent({ startDate, onChangeStartDate });
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelStartDate',
+      name: translations.dateSelector.labelStartDate,
     });
     await userEvent.click(startDateInput);
 
@@ -121,7 +122,7 @@ describe('date range input', () => {
     );
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelEndDate',
+      name: translations.dateSelector.labelEndDate,
     });
     await userEvent.click(endDateInput);
 
@@ -134,22 +135,24 @@ describe('date range input', () => {
     renderComponent();
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelStartDate',
+      name: translations.dateSelector.labelStartDate,
     });
     await userEvent.type(startDateInput, '23.6.2021');
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: 'common:dateSelector.labelEndDate',
+      name: translations.dateSelector.labelEndDate,
     });
     await userEvent.type(endDateInput, '22.6.2021');
 
-    await screen.findByText(/Alkamispäivän on oltava ennen loppumispäivää/i);
+    await screen.findByText(
+      translations.dateSelector.errorEndDateBeforeStartDate
+    );
 
     userEvent.clear(endDateInput);
     await userEvent.type(endDateInput, '24.6.2021');
 
     expect(
-      screen.queryByText(/Alkamispäivän on oltava ennen loppumispäivää/i)
+      screen.queryByText(translations.dateSelector.errorEndDateBeforeStartDate)
     ).not.toBeInTheDocument();
   });
 
@@ -172,20 +175,20 @@ describe('date range input', () => {
     renderComponent();
 
     const startDateInput = screen.getByRole('textbox', {
-      name: 'common:dateSelector.labelStartDate',
+      name: translations.dateSelector.labelStartDate,
     });
 
     // Set invalid date as the input value
     await userEvent.type(startDateInput, '23..2021');
 
     expect(
-      screen.queryByText(/Päivämäärän on oltava muotoa pp\.kk\.vvvv/i)
+      screen.queryByText(translations.dateSelector.errorDateFormat)
     ).not.toBeInTheDocument();
 
     // should show error when focusing out of the element
     await userEvent.tab();
 
-    await screen.findByText(/Päivämäärän on oltava muotoa pp\.kk\.vvvv/i);
+    await screen.findByText(translations.dateSelector.errorDateFormat);
 
     // Error should disappear
     userEvent.clear(startDateInput);
@@ -193,7 +196,7 @@ describe('date range input', () => {
     // should show the possible error when focusing out of the element
     await userEvent.tab();
     expect(
-      screen.queryByText(/Päivämäärän on oltava muotoa pp\.kk\.vvvv/i)
+      screen.queryByText(translations.dateSelector.errorDateFormat)
     ).not.toBeInTheDocument();
   });
 });

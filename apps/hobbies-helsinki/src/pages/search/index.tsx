@@ -4,6 +4,7 @@ import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
+import { createEventsApolloClient } from 'domain/clients/eventsApolloClient';
 
 import Navigation from '../../common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
@@ -60,11 +61,14 @@ export default function Search() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
+  const eventsApolloClient = createEventsApolloClient();
+
   return getHobbiesStaticProps(context, async () => {
     const locale = getLocaleOrError(context.locale);
 
     return {
       props: {
+        initialEventsApolloState: eventsApolloClient.cache.extract(),
         ...(await serverSideTranslationsWithCommon(locale, [
           'common',
           'home',

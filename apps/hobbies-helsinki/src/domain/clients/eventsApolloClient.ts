@@ -66,7 +66,7 @@ export function createEventsApolloCache() {
         fields: {
           event(_, { args, toReference }) {
             return toReference({
-              __typename: 'Keyword',
+              __typename: 'EventDetails',
               id: args?.id,
             });
           },

@@ -29,7 +29,10 @@ const config = {
       { configFile: './babel.config.test.json' },
     ],
   },
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
+  setupFilesAfterEnv: [
+    '@testing-library/jest-dom/extend-expect',
+    '<rootDir>/../.jest/setupTests.ts',
+  ],
   testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
     // For @testing-library/react
@@ -37,7 +40,7 @@ const config = {
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
     // Handle image imports
     // https://jestjs.io/docs/webpack#handling-static-assets
-    '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>.jest/__mocks__/fileMock.js`,
+    '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/../.jest/__mocks__/fileMock.js`,
     ...getTsConfigBasePaths(),
   },
   // false by default, overrides in cli, ie: yarn test:unit --collect-coverage=true

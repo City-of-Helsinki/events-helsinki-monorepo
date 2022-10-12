@@ -1,5 +1,4 @@
 export { default as buttonStyles } from './button/button.module.scss';
-export { default as CategoryFilter } from './category/CategoryFilter';
 export { default as Checkbox } from './checkbox/Checkbox';
 export { default as CopyButton } from './copyButton/CopyButton';
 export { default as DateRangePicker } from './dateRangePicker/DateRangePicker';

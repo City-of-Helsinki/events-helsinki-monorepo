@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./",
+    "baseUrl": "./src",
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "noEmit": false,
+    "incremental": true,
+    "paths": {
+      "@/test-utils": ["../config/tests/test-utils"],
+      "@/lib/*": ["./lib/*"],
+      "events-helsinki-common-i18n": ["../../common-i18n/src/index"],
+      "events-helsinki-common-i18n/*": ["../../common-i18n/src/*"]
+    }
+  },
+  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
+}

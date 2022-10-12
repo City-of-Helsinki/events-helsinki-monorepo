@@ -1,5 +1,13 @@
 # vite-app
 
+## 0.6.6
+
+### Patch Changes
+
+- Updated dependencies [[`dc83d6a`](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dc83d6a1a104e8a02ff481542adf39cd226e964e)]:
+  - events-helsinki-core@3.14.2
+  - events-helsinki-ui-lib@3.14.4
+
 ## 0.6.5
 
 ### Patch Changes

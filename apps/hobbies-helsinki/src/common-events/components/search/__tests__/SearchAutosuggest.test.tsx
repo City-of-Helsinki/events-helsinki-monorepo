@@ -4,8 +4,6 @@ import { AUTOSUGGEST_TYPES } from 'events-helsinki-components';
 import * as React from 'react';
 import { act } from 'react-dom/test-utils';
 
-import { KeywordListDocument } from '../../../../domain/nextApi/graphql/generated/graphql';
-import { fakeKeywords } from '../../../../tests/mockDataUtils';
 import {
   arrowDownKeyPressHelper,
   arrowUpKeyPressHelper,
@@ -13,7 +11,9 @@ import {
   escKeyPressHelper,
   render,
   tabKeyPressHelper,
-} from '../../../../tests/testUtils';
+} from '@/test-utils';
+import { fakeKeywords } from '@/test-utils/mockDataUtils';
+import { KeywordListDocument } from '../../../../domain/nextApi/graphql/generated/graphql';
 import type { SearchAutosuggestProps } from '../SearchAutosuggest';
 import SearchAutosuggest from '../SearchAutosuggest';
 

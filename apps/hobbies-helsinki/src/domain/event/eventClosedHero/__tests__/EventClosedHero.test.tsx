@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { translations } from '../../../../tests/initI18n';
-import { render, screen, userEvent } from '../../../../tests/testUtils';
+import { render, screen, userEvent } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
 import EventClosedHero from '../EventClosedHero';
 
 it('should render all text fields', () => {

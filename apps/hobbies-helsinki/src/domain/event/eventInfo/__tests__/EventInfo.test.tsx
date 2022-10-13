@@ -3,10 +3,6 @@ import FileSaver from 'file-saver';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
-import type { EventFields, SuperEventResponse } from 'domain/event/types';
-import type { EventDetails } from '../../../../domain/nextApi/graphql/generated/graphql';
-import { translations } from '../../../../tests/initI18n';
-import { fakeEvent } from '../../../../tests/mockDataUtils';
 import {
   act,
   actWait,
@@ -16,7 +12,11 @@ import {
   userEvent,
   waitFor,
   within,
-} from '../../../../tests/testUtils';
+} from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakeEvent } from '@/test-utils/mockDataUtils';
+import type { EventFields, SuperEventResponse } from 'domain/event/types';
+import type { EventDetails } from '../../../../domain/nextApi/graphql/generated/graphql';
 import EventInfo from '../EventInfo';
 import { subEventsListTestId, superEventTestId } from '../EventsHierarchy';
 import {

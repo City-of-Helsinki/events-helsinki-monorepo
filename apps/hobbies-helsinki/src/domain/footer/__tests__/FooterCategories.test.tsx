@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import React from 'react';
 
-import { screen, render, userEvent, act } from '../../../tests/testUtils';
+import { screen, render, userEvent, act } from '@/test-utils';
 import FooterCategories from '../FooterCategories';
 
 beforeEach(() => {

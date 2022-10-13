@@ -8,8 +8,8 @@ import {
   fakeOffer,
   fakeOrganization,
   fakeTargetGroup,
-} from '../../../../tests/mockDataUtils';
-import { createOtherEventTimesRequestAndResultMocks } from '../../../../tests/mocks/eventListMocks';
+} from '@/test-utils/mockDataUtils';
+import { createOtherEventTimesRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
 import type {
   EventFieldsFragment,
   EventListQueryVariables,

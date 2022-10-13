@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { fakePlace } from '../../../tests/mockDataUtils';
-import { render, screen, waitFor } from '../../../tests/testUtils';
+import { render, screen, waitFor } from '@/test-utils';
+import { fakePlace } from '@/test-utils/mockDataUtils';
 import { PlaceDetailsDocument } from '../../nextApi/graphql/generated/graphql';
 import PlaceText from '../PlaceText';
 

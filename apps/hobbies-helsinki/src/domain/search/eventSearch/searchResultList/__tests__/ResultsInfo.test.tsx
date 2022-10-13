@@ -9,7 +9,7 @@ import {
   screen,
   userEvent,
   waitFor,
-} from '../../../../../tests/testUtils';
+} from '@/test-utils';
 import ResultsInfo from '../ResultsInfo';
 
 it('events with 0 results matches snapshot for no results', () => {

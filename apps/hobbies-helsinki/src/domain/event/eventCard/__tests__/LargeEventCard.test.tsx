@@ -3,10 +3,10 @@ import { axe } from 'jest-axe';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
+import { act, render, screen } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakeEvent } from '@/test-utils/mockDataUtils';
 import type { EventFieldsFragment } from '../../../../domain/nextApi/graphql/generated/graphql';
-import { translations } from '../../../../tests/initI18n';
-import { fakeEvent } from '../../../../tests/mockDataUtils';
-import { act, render, screen } from '../../../../tests/testUtils';
 import LargeEventCard from '../LargeEventCard';
 
 const renderComponent = (event: EventFieldsFragment) =>

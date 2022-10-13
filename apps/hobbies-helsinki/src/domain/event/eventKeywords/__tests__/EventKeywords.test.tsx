@@ -2,13 +2,13 @@ import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
 
-import { translations } from '../../../../tests/initI18n';
+import { act, render, screen, userEvent } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvent,
   fakeKeyword,
   fakeOffer,
-} from '../../../../tests/mockDataUtils';
-import { act, render, screen, userEvent } from '../../../../tests/testUtils';
+} from '@/test-utils/mockDataUtils';
 import type {
   EventFieldsFragment,
   OfferFieldsFragment,

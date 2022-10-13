@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { translations } from '../../../../../tests/initI18n';
-import { fakePlace } from '../../../../../tests/mockDataUtils';
 import {
   act,
   render,
   screen,
   userEvent,
   waitFor,
-} from '../../../../../tests/testUtils';
+} from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakePlace } from '@/test-utils/mockDataUtils';
 import { PlaceDetailsDocument } from '../../../../nextApi/graphql/generated/graphql';
 import PlaceFilter from '../PlaceFilter';
 

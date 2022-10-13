@@ -4,10 +4,10 @@ import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
-import type { EventFieldsFragment } from '../../../../domain/nextApi/graphql/generated/graphql';
-import { translations } from '../../../../tests/initI18n';
-import { fakeEvent, fakeKeywords } from '../../../../tests/mockDataUtils';
-import { act, render, screen } from '../../../../tests/testUtils';
+import { act, render, screen } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakeEvent, fakeKeywords } from '@/test-utils/mockDataUtils';
+import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventCard from '../EventCard';
 
 const keywordNames = ['Keyword 1', 'Keyword 2'];

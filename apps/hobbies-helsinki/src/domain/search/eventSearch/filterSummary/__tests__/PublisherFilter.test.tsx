@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-import { translations } from '../../../../../tests/initI18n';
-import { fakeOrganization } from '../../../../../tests/mockDataUtils';
 import {
   render,
   waitFor,
   act,
   screen,
   userEvent,
-} from '../../../../../tests/testUtils';
+} from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakeOrganization } from '@/test-utils/mockDataUtils';
 import { OrganizationDetailsDocument } from '../../../../nextApi/graphql/generated/graphql';
 import PublisherFilter from '../PublisherFilter';
 

@@ -30,8 +30,8 @@ import type {
   Place,
   PlaceListResponse,
   StaticPage,
-} from '../domain/nextApi/graphql/generated/graphql';
-import { EventTypeId } from '../domain/nextApi/graphql/generated/graphql';
+} from '../../src/domain/nextApi/graphql/generated/graphql';
+import { EventTypeId } from '../../src/domain/nextApi/graphql/generated/graphql';
 
 export const fakeEvents = (
   count = 1,
@@ -236,7 +236,7 @@ export const fakeOrganization = (
       id: faker.datatype.uuid(),
       internalId: faker.datatype.uuid(),
       isAffiliated: false,
-      name: faker.company.companyName(),
+      name: faker.company.name(),
       __typename: 'OrganizationDetails',
     },
     overrides
@@ -371,7 +371,7 @@ export const fakeLocalizedCmsKeywords = (
   );
 
 export const fakeCmsKeywords = (count = 1, keywords?: string[]): string[] =>
-  generateNodeArray((i) => keywords?.[i] || faker.company.companyName(), count);
+  generateNodeArray((i) => keywords?.[i] || faker.company.name(), count);
 
 export const fakeLocalizedCmsImage = (
   overrides?: Partial<LocalizedCmsImage>

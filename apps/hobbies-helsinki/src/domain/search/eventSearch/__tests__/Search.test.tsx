@@ -4,18 +4,18 @@ import mockRouter from 'next-router-mock';
 import React from 'react';
 
 import {
-  fakeKeywords,
-  fakeNeighborhoods,
-  fakePlaces,
-} from '../../../../tests/mockDataUtils';
-import {
   act,
   actWait,
   configure,
   render,
   screen,
   userEvent,
-} from '../../../../tests/testUtils';
+} from '@/test-utils';
+import {
+  fakeKeywords,
+  fakeNeighborhoods,
+  fakePlaces,
+} from '@/test-utils/mockDataUtils';
 import { additionalDivisions } from '../../../neighborhood/additionalDivisions';
 import {
   KeywordListDocument,

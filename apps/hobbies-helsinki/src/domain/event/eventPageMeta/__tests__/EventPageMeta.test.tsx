@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { fakeEvent } from '../../../../tests/mockDataUtils';
-import { render, actWait } from '../../../../tests/testUtils';
+import { render, actWait } from '@/test-utils';
+import { fakeEvent } from '@/test-utils/mockDataUtils';
 import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventPageMeta from '../EventPageMeta';
 

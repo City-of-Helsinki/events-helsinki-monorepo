@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/testcafe';
 import { t } from 'testcafe';
-import { initI18n as i18n } from '../../src/tests/initI18n';
+import { initI18n as i18n } from '../../config/jest/initI18n';
 
 class LandingPage {
   searchText = 'sirkuskoulu';

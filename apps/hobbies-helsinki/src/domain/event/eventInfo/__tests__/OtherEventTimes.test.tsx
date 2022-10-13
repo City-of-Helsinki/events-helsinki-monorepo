@@ -8,6 +8,19 @@ import type { NextRouter } from 'next/router';
 import React from 'react';
 import { toast } from 'react-toastify';
 
+import {
+  act,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakeEvent, fakeEvents } from '@/test-utils/mockDataUtils';
+import {
+  createOtherEventTimesRequestAndResultMocks,
+  createOtherEventTimesRequestThrowsErrorMocks,
+} from '@/test-utils/mocks/eventListMocks';
 import type {
   EventDetails,
   EventFieldsFragment,
@@ -16,19 +29,6 @@ import type {
   Meta,
 } from '../../../../domain/nextApi/graphql/generated/graphql';
 import { EventTypeId } from '../../../../domain/nextApi/graphql/generated/graphql';
-import { translations } from '../../../../tests/initI18n';
-import { fakeEvent, fakeEvents } from '../../../../tests/mockDataUtils';
-import {
-  createOtherEventTimesRequestAndResultMocks,
-  createOtherEventTimesRequestThrowsErrorMocks,
-} from '../../../../tests/mocks/eventListMocks';
-import {
-  act,
-  render,
-  screen,
-  userEvent,
-  waitFor,
-} from '../../../../tests/testUtils';
 import OtherEventTimes from '../OtherEventTimes';
 
 const startTime = '2020-10-01T16:00:00Z';

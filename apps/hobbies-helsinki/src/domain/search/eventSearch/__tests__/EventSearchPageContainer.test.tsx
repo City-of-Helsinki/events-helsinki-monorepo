@@ -4,24 +4,24 @@ import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 import { toast } from 'react-toastify';
 
-import { translations } from '../../../../tests/initI18n';
-import {
-  fakeEvents,
-  fakeLocalizedObject,
-  fakeNeighborhoods,
-  fakePlaces,
-} from '../../../../tests/mockDataUtils';
-import {
-  createEventListRequestAndResultMocks,
-  createEventListRequestThrowsErrorMocks,
-} from '../../../../tests/mocks/eventListMocks';
 import {
   act,
   render,
   userEvent,
   waitFor,
   screen,
-} from '../../../../tests/testUtils';
+} from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import {
+  fakeEvents,
+  fakeLocalizedObject,
+  fakeNeighborhoods,
+  fakePlaces,
+} from '@/test-utils/mockDataUtils';
+import {
+  createEventListRequestAndResultMocks,
+  createEventListRequestThrowsErrorMocks,
+} from '@/test-utils/mocks/eventListMocks';
 import type { Meta } from '../../../nextApi/graphql/generated/graphql';
 import {
   NeighborhoodListDocument,

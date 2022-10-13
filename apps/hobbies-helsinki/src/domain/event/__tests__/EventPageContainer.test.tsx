@@ -1,25 +1,25 @@
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 
-import { translations } from '../../../tests/initI18n';
-import {
-  fakeEvent,
-  fakeEvents,
-  fakeKeyword,
-  fakeLocalizedObject,
-  fakeTargetGroup,
-} from '../../../tests/mockDataUtils';
-import {
-  createEventListRequestAndResultMocks,
-  createOtherEventTimesRequestAndResultMocks,
-} from '../../../tests/mocks/eventListMocks';
 import {
   act,
   render,
   screen,
   userEvent,
   waitFor,
-} from '../../../tests/testUtils';
+} from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import {
+  fakeEvent,
+  fakeEvents,
+  fakeKeyword,
+  fakeLocalizedObject,
+  fakeTargetGroup,
+} from '@/test-utils/mockDataUtils';
+import {
+  createEventListRequestAndResultMocks,
+  createOtherEventTimesRequestAndResultMocks,
+} from '@/test-utils/mocks/eventListMocks';
 import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
 import {
   EventDetailsDocument,

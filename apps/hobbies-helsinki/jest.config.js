@@ -1,27 +1,55 @@
-module.exports = {
-  testEnvironment: 'jsdom',
-  testPathIgnorePatterns: [
-    '<rootDir>/.next/',
-    '<rootDir>/node_modules/',
-    '/__mocks__/',
-  ],
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  transform: {
-    // if we would use .babelrc, next would not use swc compiler
-    '^.+\\.(js|jsx|ts|tsx)$': [
-      'babel-jest',
-      { configFile: './babel.config.test.json' },
-    ],
-  },
-  transformIgnorePatterns: [
-    '/node_modules/',
-    '^.+\\.module\\.(css|sass|scss)$',
-  ],
-  moduleNameMapper: {
-    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
-    // Handle image imports
-    // https://jestjs.io/docs/webpack#handling-static-assets
-    '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/.jest/__mocks__/fileMock.js`,
-  },
-  coveragePathIgnorePatterns: ['<rootDir>/src/tests/', '<rootDir>/.jest/'],
+// @ts-check
+const { defaults: tsjPreset } = require('ts-jest/presets');
+const { pathsToModuleNameMapper } = require('ts-jest');
+
+const { getJestCachePath } = require('../../cache.config');
+
+const packageJson = require('./package.json');
+const { compilerOptions: baseTsConfig } = require('./tsconfig.json');
+
+// Take the paths from tsconfig automatically from base tsconfig.json
+// @link https://kulshekhar.github.io/ts-jest/docs/paths-mapping
+const getTsConfigBasePaths = () => {
+  return baseTsConfig.paths
+    ? pathsToModuleNameMapper(baseTsConfig.paths, {
+        prefix: '<rootDir>/',
+      })
+    : {};
 };
+
+
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+const config = {
+  displayName: `${packageJson.name}:unit`,
+  cacheDirectory: getJestCachePath(packageJson.name),
+  testEnvironment: 'jsdom',
+  verbose: true,
+  rootDir: './src',
+  // @ts-ignore
+  transform: {
+    ...tsjPreset.transform,
+  },
+  setupFilesAfterEnv: ['<rootDir>/../.jest/setupTests.ts'],
+  testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
+  moduleNameMapper: {
+    // For @testing-library/react
+    '^@/test-utils$': '<rootDir>/../config/jest/test-utils',
+    '^@/test-utils/(.*)$': '<rootDir>/../config/jest/$1',
+    '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
+    ...getTsConfigBasePaths(),
+  },
+  // false by default, overrides in cli, ie: yarn test:unit --collect-coverage=true
+  collectCoverage: false,
+  coverageDirectory: '<rootDir>/../coverage',
+  collectCoverageFrom: ['<rootDir>/**/*.{ts,tsx,js,jsx}', '!**/*.test.ts'],
+  coveragePathIgnorePatterns: ['<rootDir>/../config/', '<rootDir>/../.jest/'],
+  globals: {
+    'ts-jest': {
+      diagnostics: false,
+      tsconfig: './tsconfig.jest.json',
+    },
+  },
+};
+
+
+module.exports = config;

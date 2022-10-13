@@ -2,7 +2,6 @@ import { advanceTo } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
-import { fakeKeywords } from '../../../../tests/mockDataUtils';
 import {
   act,
   actWait,
@@ -10,7 +9,8 @@ import {
   render,
   screen,
   userEvent,
-} from '../../../../tests/testUtils';
+} from '@/test-utils';
+import { fakeKeywords } from '@/test-utils/mockDataUtils';
 import { KeywordListDocument } from '../../../nextApi/graphql/generated/graphql';
 import LandingPageSearch from '../LandingPageSearch';
 

@@ -1,7 +1,6 @@
 import { IconStar } from 'hds-react';
 import React from 'react';
 
-import { fakePlaces } from '../../../../tests/mockDataUtils';
 import {
   waitFor,
   actWait,
@@ -9,7 +8,8 @@ import {
   screen,
   userEvent,
   act,
-} from '../../../../tests/testUtils';
+} from '@/test-utils';
+import { fakePlaces } from '@/test-utils/mockDataUtils';
 import apolloClient from '../../../clients/eventsApolloClient';
 import {
   PlaceDetailsDocument,

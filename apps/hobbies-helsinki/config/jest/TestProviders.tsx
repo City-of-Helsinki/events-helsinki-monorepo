@@ -18,12 +18,12 @@ import {
 import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
 import { I18nextProvider } from 'react-i18next';
 
-import EventsConfigProvider from '../common-events/configProvider/ConfigProvider';
-import eventsDefaultConfig from '../common-events/configProvider/defaultConfig';
-import { ROUTES } from '../constants';
-import { createCmsApolloClient } from '../domain/clients/cmsApolloClient';
-import { createEventsApolloClient } from '../domain/clients/eventsApolloClient';
-import { getLocalizedCmsItemUrl } from '../utils/routerUtils';
+import EventsConfigProvider from '../../src/common-events/configProvider/ConfigProvider';
+import eventsDefaultConfig from '../../src/common-events/configProvider/defaultConfig';
+import { ROUTES } from '../../src/constants';
+import { createCmsApolloClient } from '../../src/domain/clients/cmsApolloClient';
+import { createEventsApolloClient } from '../../src/domain/clients/eventsApolloClient';
+import { getLocalizedCmsItemUrl } from '../../src/utils/routerUtils';
 import { initI18n as i18n } from './initI18n';
 
 const CMS_API_DOMAIN = 'harrastukset.cms.test.domain.com';

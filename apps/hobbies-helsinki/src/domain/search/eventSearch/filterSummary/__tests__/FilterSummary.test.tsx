@@ -1,12 +1,6 @@
 import { axe } from 'jest-axe';
 import React from 'react';
 
-import { translations } from '../../../../../tests/initI18n';
-import {
-  // fakeNeighborhoods,
-  fakeOrganization,
-  fakePlace,
-} from '../../../../../tests/mockDataUtils';
 import {
   act,
   configure,
@@ -14,7 +8,13 @@ import {
   screen,
   userEvent,
   waitFor,
-} from '../../../../../tests/testUtils';
+} from '@/test-utils';
+import { translations } from '@/test-utils/initI18n'
+import {
+  // fakeNeighborhoods,
+  fakeOrganization,
+  fakePlace,
+} from '@/test-utils/mockDataUtils';
 import {
   OrganizationDetailsDocument,
   PlaceDetailsDocument,

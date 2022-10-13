@@ -8,7 +8,7 @@ import type { ReactElement } from 'react';
 import React from 'react';
 import wait from 'waait';
 
-import { createEventsApolloCache } from '../domain/clients/eventsApolloClient';
+import { createEventsApolloCache } from '../../src/domain/clients/eventsApolloClient';
 import TestProviders from './TestProviders';
 
 type CustomRender = {

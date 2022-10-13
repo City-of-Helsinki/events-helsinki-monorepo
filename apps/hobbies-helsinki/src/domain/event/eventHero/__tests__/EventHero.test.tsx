@@ -2,20 +2,20 @@ import { getDateRangeStr } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
-import type {
-  EventDetails,
-  EventFieldsFragment,
-  OfferFieldsFragment,
-} from '../../../../domain/nextApi/graphql/generated/graphql';
-import { translations } from '../../../../tests/initI18n';
+import { act, render, screen, userEvent } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvent,
   fakeExternalLink,
   fakeKeyword,
   fakeLocalizedObject,
   fakeOffer,
-} from '../../../../tests/mockDataUtils';
-import { act, render, screen, userEvent } from '../../../../tests/testUtils';
+} from '@/test-utils/mockDataUtils';
+import type {
+  EventDetails,
+  EventFieldsFragment,
+  OfferFieldsFragment,
+} from '../../../nextApi/graphql/generated/graphql';
 import type { Props as EventHeroProps } from '../EventHero';
 import EventHero from '../EventHero';
 

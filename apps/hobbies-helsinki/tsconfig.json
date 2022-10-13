@@ -11,14 +11,6 @@
     "paths": {
       "@/test-utils": ["../config/jest/test-utils"],
       "@/test-utils/*": ["../config/jest/*"],
-      "@/config/*": ["./config/*"],
-      "@/lib/*": ["./lib/*"],
-      "@/components/*": ["./components/*"],
-      "@/backend/*": ["./backend/*"],
-      "@/features/*": ["./features/*"],
-      "@/pages/*": ["./pages/*"],
-      "@/public/*": ["../public/*"],
-      "@/themes/*": ["./themes/*"],
       "events-helsinki-common-i18n": [
         "../../../packages/common-i18n/src/index"
       ],

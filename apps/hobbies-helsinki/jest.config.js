@@ -36,6 +36,8 @@ const config = {
     '^@/test-utils$': '<rootDir>/../config/jest/test-utils',
     '^@/test-utils/(.*)$': '<rootDir>/../config/jest/$1',
     '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
+    // https://jestjs.io/docs/webpack#handling-static-assets
+    '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/../.jest/__mocks__/fileMock.js`,
     ...getTsConfigBasePaths(),
   },
   // false by default, overrides in cli, ie: yarn test:unit --collect-coverage=true

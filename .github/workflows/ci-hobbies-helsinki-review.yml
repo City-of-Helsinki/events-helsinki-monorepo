@@ -93,8 +93,8 @@ jobs:
       - name: Build the hobbies-helsinki image
         uses: andersinno/kolga-build-action@v2
         env:
-          DOCKER_BUILD_SOURCE: ./apps/hobbies-helsinki/Dockerfile
-          DOCKER_BUILD_CONTEXT: ./apps/hobbies-helsinki
+          DOCKER_BUILD_SOURCE: ./Dockerfile
+          DOCKER_BUILD_CONTEXT: .
           DOCKER_IMAGE_NAME: hobbies-helsinki-review
           DOCKER_BUILD_ARG_NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT }}

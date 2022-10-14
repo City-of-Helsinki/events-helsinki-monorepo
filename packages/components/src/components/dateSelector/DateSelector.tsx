@@ -107,7 +107,7 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
     setIsMenuOpen(!isMenuOpen);
   };
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     document.addEventListener('click', handleDocumentClick);
     document.addEventListener('keydown', handleDocumentKeyDown);
     document.addEventListener('focusin', handleDocumentFocusin);

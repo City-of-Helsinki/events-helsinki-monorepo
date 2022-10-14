@@ -1,0 +1,69 @@
+version: '3.9'
+services:
+  # Start hobbies in development
+  # docker-compose -f docker-compose.hobbies.yml up develop
+  develop:
+    container_name: hobbies-helsinki-develop
+    profiles:
+      - donotstart
+    stdin_open: true
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: develop
+    volumes:
+      # Share the source code to allow development
+      - .:/app/
+      # Prevent sharing of node_modules between host and container
+      # to avoid ownership and/or platform issues
+      - build_hobbies-helsinki:/app/apps/hobbies-helsinki/.next
+      - nm_hobbies-helsinki:/app/node_modules
+
+  # Convenience production "deps" stage service for debugging
+  # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress=tty deps
+  deps:
+    container_name: hobbies-helsinki-multistage-deps
+    profiles:
+      - donotstart
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps
+
+  # Convenience production "builder" stage service for debugging
+  # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress=tty runner
+  builder:
+    container_name: hobbies-helsinki-multistage-builder
+    profiles:
+      - donotstart
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+
+  # Convenience production "runner" stage service for debugging
+  # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress=tty runner
+  # Run   > docker-compose -f docker-compose.hobbies-helsinki.yml --env-file ./apps/hobbies-helsinki/.env.local up runner
+  runner:
+    container_name: hobbies-helsinki-multistage-runner
+    profiles:
+      - donotstart
+    stdin_open: true
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+
+volumes:
+  build_hobbies-helsinki:
+  nm_hobbies-helsinki:

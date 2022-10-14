@@ -32,19 +32,15 @@ COPY .yarn/ ./.yarn/
 # Files are copied with rsync:
 #
 #   - All package.json present in the host (root, apps/*, packages/*)
-#   - All schema.prisma (cause prisma will generate a schema on postinstall)
 #
 RUN --mount=type=bind,target=/docker-context \
     rsync -amv --delete \
           --exclude='node_modules' \
           --exclude='*/node_modules' \
           --include='package.json' \
-          --include='schema.prisma' \
           --include='*/' --exclude='*' \
           /docker-context/ /workspace-install/;
 
-# @see https://www.prisma.io/docs/reference/api-reference/environment-variables-reference#cli-binary-targets
-ENV PRISMA_CLI_BINARY_TARGETS=linux-musl
 
 #
 # To speed up installations, we override the default yarn cache folder
@@ -128,11 +124,11 @@ COPY --from=builder /app/package.json ./package.json
 
 USER nextjs
 
-EXPOSE ${NEXTJS_APP_PORT:-3000}
+EXPOSE ${NEXTJS_APP_PORT:-80}
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["./node_modules/.bin/next", "start", "apps/hobbies-helsinki/", "-p", "${NEXTJS_APP_PORT:-3000}"]
+CMD ["./node_modules/.bin/next", "start", "apps/hobbies-helsinki/", "-p", "${NEXTJS_APP_PORT:-80}"]
 
 
 ###################################################################
@@ -146,9 +142,9 @@ WORKDIR /app
 
 COPY --from=deps /workspace-install ./
 
-EXPOSE ${NEXTJS_APP_PORT:-3000}
+EXPOSE ${NEXTJS_APP_PORT:-80}
 
 WORKDIR /app/apps/hobbies-helsinki
 
-CMD ["yarn", "dev", "-p", "${NEXTJS_APP_PORT:-3000}"]
+CMD ["yarn", "dev", "-p", "${NEXTJS_APP_PORT:-80}"]
 

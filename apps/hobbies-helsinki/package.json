@@ -40,7 +40,6 @@
     "@svgr/webpack": "6.3.1",
     "@types/jsdom": "20.0.0",
     "@types/lodash": "^4.14.182",
-    "canvas": "2.10.1",
     "chalk": "5.1.0",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.1",

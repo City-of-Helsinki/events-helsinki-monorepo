@@ -105,7 +105,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
             <div>
               <BackgroundImage
                 className={styles.image}
-                id={event.id}
+                id={`event-background-${event.id}`}
                 url={imageUrl}
               />
             </div>
@@ -173,7 +173,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                         iconRight={<IconLinkExternal aria-hidden />}
                         variant="success"
                       >
-                        {t('hero.buttonBuyTickets')}
+                        {t<string>('hero.buttonBuyTickets')}
                       </Button>
                     </Visible>
                   )}
@@ -184,7 +184,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                         aria-label={t('hero.ariaLabelEnrol')}
                         onClick={() => window.open(registrationUrl)}
                       >
-                        {t('hero.buttonEnrol')}
+                        {t<string>('hero.buttonEnrol')}
                       </Button>
                     </Visible>
                   )}

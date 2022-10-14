@@ -63,7 +63,7 @@ jobs:
           DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
           DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_ENABLED: 0
           DOCKER_BUILD_ARG_NEXT_PUBLIC_DEBUG: 1
-
+          DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
   staging:
     runs-on: ubuntu-latest
     needs: build

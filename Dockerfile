@@ -124,11 +124,11 @@ COPY --from=builder /app/package.json ./package.json
 
 USER nextjs
 
-EXPOSE ${NEXTJS_APP_PORT:-80}
+EXPOSE ${APP_PORT:-80}
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["./node_modules/.bin/next", "start", "apps/hobbies-helsinki/", "-p", "${NEXTJS_APP_PORT:-80}"]
+CMD ["./node_modules/.bin/next", "start", "apps/hobbies-helsinki/", "-p", "${APP_PORT:-80}"]
 
 
 ###################################################################
@@ -142,9 +142,9 @@ WORKDIR /app
 
 COPY --from=deps /workspace-install ./
 
-EXPOSE ${NEXTJS_APP_PORT:-80}
+EXPOSE ${APP_PORT:-80}
 
 WORKDIR /app/apps/hobbies-helsinki
 
-CMD ["yarn", "dev", "-p", "${NEXTJS_APP_PORT:-80}"]
+CMD ["yarn", "dev", "-p", "${APP_PORT:-80}"]
 

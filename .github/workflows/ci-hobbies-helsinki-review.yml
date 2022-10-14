@@ -111,6 +111,7 @@ jobs:
           DOCKER_BUILD_ARG_NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE: 0
           DOCKER_BUILD_ARG_SENTRY_AUTH_TOKEN: ${{ secrets.GH_SENTRY_AUTH_TOKEN }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_DEBUG: 1
+          DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
         with:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max

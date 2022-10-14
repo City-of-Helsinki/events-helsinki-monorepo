@@ -12450,7 +12450,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^2.0.0, chalk@npm:^2.1.0, chalk@npm:^2.3.0, chalk@npm:^2.4.0, chalk@npm:^2.4.1":
+"chalk@npm:^2.0.0, chalk@npm:^2.1.0, chalk@npm:^2.3.0, chalk@npm:^2.4.0, chalk@npm:^2.4.1, chalk@npm:^2.4.2":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
   dependencies:
@@ -13541,6 +13541,18 @@ __metadata:
     p-filter: "npm:^2.1.0"
     p-map: "npm:^3.0.0"
   checksum: aabb5ccc2f5c91fe380405ad5863cb43eefda3f95effb7e736b8e825ed43de3546af1843b4a8b0d87b48561719f9ed62445dc90029eced93bd78ce37214ae046
+  languageName: node
+  linkType: hard
+
+"crc-32@npm:1.2.0":
+  version: 1.2.0
+  resolution: "crc-32@npm:1.2.0"
+  dependencies:
+    exit-on-epipe: "npm:~1.0.1"
+    printj: "npm:~1.1.0"
+  bin:
+    crc32: ./bin/crc32.njs
+  checksum: 1521b0c36cd68fec2569efefef8d6c1783740ad744076e51ae98da06afe01d668ab7023275d02057bf020334321d244c9379af66142294d3dc82b19a5e187f66
   languageName: node
   linkType: hard
 
@@ -16904,7 +16916,7 @@ __metadata:
     graphql: "npm:16.6.0"
     happy-dom: "npm:6.0.4"
     hds-design-tokens: "npm:2.3.0"
-    hds-react: "npm:^2.3.0"
+    hds-react: "npm:2.4.0"
     html-react-parser: "npm:3.0.4"
     i18next: "npm:21.9.2"
     i18next-browser-languagedetector: "npm:6.1.5"
@@ -17267,6 +17279,13 @@ __metadata:
   version: 2.2.1
   resolution: "exit-hook@npm:2.2.1"
   checksum: 76579d1c2c73354b57f1ed43dab6c78801cb002ad97cf64fb89bbca676be9ff1cecdd68c2e487ae108ddf273a4e80ce4c7d21c7e9363820c18c1d18fdc626eeb
+  languageName: node
+  linkType: hard
+
+"exit-on-epipe@npm:~1.0.1":
+  version: 1.0.1
+  resolution: "exit-on-epipe@npm:1.0.1"
+  checksum: 2888ccaf3fccbf42c68577b884d05aeaccd3328d63cd0e8dc0bb29ea036b16e7e315f0654d9ab5e83296f0864f17bfb47ce02eca68b46ed7029570ab66d90f0b
   languageName: node
   linkType: hard
 
@@ -18201,6 +18220,15 @@ __metadata:
   version: 1.1.1
   resolution: "function-bind@npm:1.1.1"
   checksum: 8a644b8118679030cb3aeb783b024a9ee358b15c5780bdb49fe5d482f6df54672bda860e19bce87d756a5e165740caaa96f5e8487fa98933c327f631e23a5490
+  languageName: node
+  linkType: hard
+
+"function-double@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "function-double@npm:1.0.4"
+  dependencies:
+    util-arity: "npm:^1.1.0"
+  checksum: 016f6416fa84ef70c4c51321ccca97c0c263be2bc5e5b74f98562bcd1d53efd3b3ab8f681f8e3ea01bab1def4f8cba5d8333a2cead0e84c9ab92dcb3d025868c
   languageName: node
   linkType: hard
 
@@ -19312,10 +19340,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-core@npm:2.3.0":
-  version: 2.3.0
-  resolution: "hds-core@npm:2.3.0"
-  checksum: c89c28a9903653ced938dd057f9ea85bbc13cd6d4ef23debf2834d983c0a1710df084ef7456af9938f6042d957d20abda50eb346a7632358a344171bc10140e3
+"hds-core@npm:2.4.0":
+  version: 2.4.0
+  resolution: "hds-core@npm:2.4.0"
+  checksum: 7fe0188f22dd12c80fd3ff539583f93db1b9c3f347f64d0abcf1627c1bee59509696932f3d5b6365683a7e15b26e6941d8cb98f1cfa64413c738e5915f13fcba
   languageName: node
   linkType: hard
 
@@ -19333,9 +19361,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-react@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "hds-react@npm:2.3.0"
+"hds-react@npm:2.4.0":
+  version: 2.4.0
+  resolution: "hds-react@npm:2.4.0"
   dependencies:
     "@babel/runtime": "npm:7.11.2"
     "@emotion/styled-base": "npm:^11.0.0"
@@ -19344,9 +19372,11 @@ __metadata:
     "@react-aria/visually-hidden": "npm:3.2.0"
     "@types/cookie": "npm:^0.4.1"
     cookie: "npm:^0.4.1"
+    crc-32: "npm:1.2.0"
     date-fns: "npm:2.16.1"
     downshift: "npm:6.0.6"
-    hds-core: "npm:2.3.0"
+    hds-core: "npm:2.4.0"
+    kashe: "npm:1.0.4"
     lodash.get: "npm:^4.4.2"
     lodash.isequal: "npm:4.5.0"
     lodash.isfunction: "npm:3.0.9"
@@ -19356,6 +19386,8 @@ __metadata:
     lodash.pickby: "npm:^4.6.0"
     lodash.uniqueid: "npm:4.0.1"
     lodash.xor: "npm:^4.5.0"
+    memoize-one: "npm:5.2.1"
+    postcss: "npm:7.0.36"
     react-merge-refs: "npm:1.1.0"
     react-popper: "npm:2.2.3"
     react-spring: "npm:9.3.0"
@@ -19365,7 +19397,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17
     react-dom: ^16.8.0 || ^17
-  checksum: 707f481bf32ad53df682b8d51bef45141747d30f149c90a934550cbae4d6325b6f196ee9e8f5e393fe2b5e1e174280c1ccbda8cbaa278c4f6b3094a02c0f8828
+  checksum: ebea950dc7da7ca05b381e6898d9e391ebaaad950b721e717da74a2714b62e0e92337564e65a193331b32ea0a0704c13e43a525826e0f741bc57eee70293bae5
   languageName: node
   linkType: hard
 
@@ -19515,7 +19547,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:^16.5.0"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^2.3.0"
+    hds-react: "npm:2.4.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.1"
     i18next: "npm:21.9.2"
@@ -22991,6 +23023,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"kashe@npm:1.0.4":
+  version: 1.0.4
+  resolution: "kashe@npm:1.0.4"
+  dependencies:
+    function-double: "npm:^1.0.4"
+    reselect: "npm:^4.0.0"
+  checksum: 135cfaefe52dd988290cd2af3f6250e8c1b5b57bba3999a027f57d11bcc9a8b3a53816db42da4f1d1c9deae04ccba3f09178e2c2b4a9a290afd0fa934395e3c2
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^3.0.0":
   version: 3.1.0
   resolution: "keyv@npm:3.1.0"
@@ -24310,6 +24352,13 @@ __metadata:
   dependencies:
     fs-monkey: "npm:^1.0.3"
   checksum: 106ad7da93ca9fcdbf627358b62545bd2ea1d9a6a0cabace639e852b33ade5e92b84509e8592a5c439c38045d208410db403ebca1089178b789964e893e4f235
+  languageName: node
+  linkType: hard
+
+"memoize-one@npm:5.2.1":
+  version: 5.2.1
+  resolution: "memoize-one@npm:5.2.1"
+  checksum: f244677e72d753c0889bb21db4dc9e7adb4fdd748c67c3033c40ed72534ce06dfae006976ddc72c2b1a3649c8dbd725103fdc549565b53242b116448d022d74b
   languageName: node
   linkType: hard
 
@@ -28237,6 +28286,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:7.0.36":
+  version: 7.0.36
+  resolution: "postcss@npm:7.0.36"
+  dependencies:
+    chalk: "npm:^2.4.2"
+    source-map: "npm:^0.6.1"
+    supports-color: "npm:^6.1.0"
+  checksum: fb5ba90240657c0a031d1e9ae88bd2e0ae32251306c401080a6b128e025d15cbbdcce86dc41bd17115c8392d235c08304b4a91ccde36a0fed544c11b5645b3f1
+  languageName: node
+  linkType: hard
+
 "postcss@npm:8.4.14":
   version: 8.4.14
   resolution: "postcss@npm:8.4.14"
@@ -28482,6 +28542,15 @@ __metadata:
   dependencies:
     parse-ms: "npm:^2.1.0"
   checksum: 8964f09fc855bc9c809b4f4e4b9cd7d32374ca2ef71be509685517fa6137047a046a0925fe25f46c4483e1351df0442c23d88d895a1af487910f2a13692fe0ea
+  languageName: node
+  linkType: hard
+
+"printj@npm:~1.1.0":
+  version: 1.1.2
+  resolution: "printj@npm:1.1.2"
+  bin:
+    printj: ./bin/printj.njs
+  checksum: cdc93f9fb51bdedda984effd1a0fbdd2a3a410b9bb0ce218cf80f4df00337321cf28af451ff01f4511c218d402251e0bda80c4cb2031df775717e7c2e2fd0171
   languageName: node
   linkType: hard
 
@@ -32489,6 +32558,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"supports-color@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "supports-color@npm:6.1.0"
+  dependencies:
+    has-flag: "npm:^3.0.0"
+  checksum: 2e225a95147766fd6d707ceceab81b5a0b296421353a5095422050cf3f823afec915965a7343773f1394467f11e31de505debacd1c89258bca05d86fd128696f
+  languageName: node
+  linkType: hard
+
 "supports-color@npm:^7.0.0, supports-color@npm:^7.1.0":
   version: 7.2.0
   resolution: "supports-color@npm:7.2.0"
@@ -34715,6 +34793,13 @@ __metadata:
   version: 3.0.0
   resolution: "utf8@npm:3.0.0"
   checksum: 3ba955f77245946afd2c49e5c562a0457f5713687ad212c9f1d5a44b9411db45a83a656dc500a766f15dd0324bc4c000535a4aaf8b82cbe2ff406549e0a87e23
+  languageName: node
+  linkType: hard
+
+"util-arity@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "util-arity@npm:1.1.0"
+  checksum: 79a4dd4ec0074597d9e126725e4e8ba8c17924c0af376c724d9bcff5e0cb79c731a4ee755de95dc7ec01161e34cd78a12c28c481f76dfedcae71d92d0071e867
   languageName: node
   linkType: hard
 

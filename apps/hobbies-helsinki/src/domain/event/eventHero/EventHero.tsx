@@ -173,7 +173,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                         iconRight={<IconLinkExternal aria-hidden />}
                         variant="success"
                       >
-                        {t<string>('hero.buttonBuyTickets')}
+                        {t('hero.buttonBuyTickets') as string}
                       </Button>
                     </Visible>
                   )}
@@ -184,7 +184,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                         aria-label={t('hero.ariaLabelEnrol')}
                         onClick={() => window.open(registrationUrl)}
                       >
-                        {t<string>('hero.buttonEnrol')}
+                        {t('hero.buttonEnrol') as string}
                       </Button>
                     </Visible>
                   )}

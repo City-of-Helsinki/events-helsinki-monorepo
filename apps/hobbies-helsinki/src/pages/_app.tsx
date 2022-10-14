@@ -17,6 +17,7 @@ import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cm
 import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
+import nextI18nextConfig from '../../next-i18next.config';
 import EventsConfigProvider from '../common-events/configProvider/ConfigProvider';
 import AppConfig from '../domain/app/AppConfig';
 import { useCmsApollo } from '../domain/clients/cmsApolloClient';
@@ -122,4 +123,6 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   );
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(MyApp, {
+  ...nextI18nextConfig,
+});

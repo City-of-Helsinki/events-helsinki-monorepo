@@ -100,7 +100,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
       return {
         props: {
-          ...(await serverSideTranslationsWithCommon(getLocaleOrError(locale), [
+          ...(await serverSideTranslationsWithCommon(locale, [
             'home',
             'search',
             'event',

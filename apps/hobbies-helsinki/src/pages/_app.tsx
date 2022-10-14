@@ -28,12 +28,9 @@ import useRHHCConfig from '../hooks/useRHHCConfig';
 const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
 
 const TopProgressBar = dynamic(
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  () => {
-    return import('events-helsinki-components').then(
-      (components) => components.TopProgressBar
-    );
+  async () => {
+    const components = await import('events-helsinki-components');
+    return components.TopProgressBar;
   },
   { ssr: false }
 );

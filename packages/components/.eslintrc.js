@@ -30,6 +30,7 @@ module.exports = {
   ],
   rules: {
     // optional overrides per project
+    'no-console': 'error',
   },
   overrides: [
     // optional overrides per project file match

@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { IconCalendar } from 'hds-react';
 import React from 'react';
 
+import { useConfig } from 'events-helsinki-components';
 import { DATE_TYPES } from '../../constants';
-import useCommonTranslation from '../../hooks/useCommonTranslation';
 import { translateValue } from '../../utils';
 import ToggleButton from '../toggleButton/ToggleButton';
 import styles from './mobileDateSelector.module.scss';
@@ -29,7 +29,7 @@ const MobileDateSelector: React.FC<Props> = ({
   onChangeStartDate,
   startDate,
 }) => {
-  const { t } = useCommonTranslation();
+  const { t } = useConfig();
   const closeBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const toggleBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const dateSelector = React.useRef<HTMLDivElement | null>(null);

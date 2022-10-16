@@ -8,7 +8,7 @@ import sv from 'date-fns/locale/sv';
 import { DateInput } from 'hds-react';
 import React from 'react';
 import { registerLocale } from 'react-datepicker';
-import useCommonTranslation from '../../hooks/useCommonTranslation';
+import { useConfig } from 'events-helsinki-components';
 import useLocale from '../../hooks/useLocale';
 
 import { formatDate, isValidDateString, parseDate } from '../../utils';
@@ -43,7 +43,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     endDateIsInvalid: false,
   });
 
-  const { t } = useCommonTranslation();
+  const { t } = useConfig();
   const locale = useLocale();
   const helperText = t('common:dateSelector.infoDate');
 

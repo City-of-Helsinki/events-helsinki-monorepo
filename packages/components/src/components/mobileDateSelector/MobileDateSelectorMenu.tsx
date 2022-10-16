@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import type { FunctionComponent, MutableRefObject } from 'react';
 import React from 'react';
 
-import useCommonTranslation from '../../hooks/useCommonTranslation'; // the locale you want
+import { useConfig } from 'events-helsinki-components';
 import DateRangePicker from '../dateRangePicker/DateRangePicker';
 import styles from './mobileDateSelectorMenu.module.scss';
 
@@ -29,7 +29,7 @@ const MobileDateSelectorMenu: FunctionComponent<Props> = ({
   onCloseMenu,
   startDate,
 }) => {
-  const { t } = useCommonTranslation();
+  const { t } = useConfig();
   if (!isOpen) return null;
   return (
     <div data-testid={testIds.menu} className={styles.mobileDateSelectorMenu}>
@@ -47,7 +47,7 @@ const MobileDateSelectorMenu: FunctionComponent<Props> = ({
         onClick={onCloseMenu}
       >
         <div className={styles.buttonText}>
-          {t('common:dateSelector.menu.buttonClose')}
+          {t('common:dateSelector.menu.buttonClose') as string}
         </div>
       </button>
     </div>

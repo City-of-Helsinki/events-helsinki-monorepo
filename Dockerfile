@@ -14,8 +14,13 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
+# Build ARGS
+ARG PROJECT
+ARG APP_PORT
+
 ARG NODE_VERSION=16
 ARG ALPINE_VERSION=3.15
+
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS deps
 RUN apk add --no-cache rsync
@@ -86,20 +91,24 @@ ARG NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE
 ARG SENTRY_AUTH_TOKEN
 ARG NEXT_PUBLIC_DEBUG
 
+# Build ARGS
+ARG PROJECT
+
+
 WORKDIR /app
 
 COPY . .
 COPY --from=deps /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN yarn workspace hobbies-helsinki share-static-hardlink && yarn workspace hobbies-helsinki build
+RUN yarn workspace $PROJECT share-static-hardlink && yarn workspace $PROJECT build
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
 RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
     SKIP_POSTINSTALL=1 \
     YARN_CACHE_FOLDER=/root/.yarn3-cache \
-    yarn workspaces focus hobbies-helsinki --production
+    yarn workspaces focus $PROJECT --production
 
 ###################################################################
 # Stage 3: Extract a minimal image from the build                 #
@@ -107,44 +116,67 @@ RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
 
+# Build ARGS
+ARG PROJECT
+ARG APP_PORT
+
 WORKDIR /app
 
 ENV NODE_ENV production
 
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/apps/hobbies-helsinki/next.config.js \
-                    /app/apps/hobbies-helsinki/next-i18next.config.js \
-                    /app/apps/hobbies-helsinki/package.json \
-                    ./apps/hobbies-helsinki/
-COPY --from=builder /app/apps/hobbies-helsinki/public ./apps/hobbies-helsinki/public
-COPY --from=builder --chown=nextjs:nodejs /app/apps/hobbies-helsinki/.next ./apps/hobbies-helsinki/.next
+COPY --from=builder /app/apps/$PROJECT/next.config.js \
+                    /app/apps/$PROJECT/next-i18next.config.js \
+                    /app/apps/$PROJECT/package.json \
+                    ./apps/$PROJECT/
+COPY --from=builder /app/apps/$PROJECT/public ./apps/$PROJECT/public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/$PROJECT/.next ./apps/$PROJECT/.next
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
+COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/static $PROJECT/.next/static
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
 USER nextjs
 
-EXPOSE ${APP_PORT:-80}
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["./node_modules/.bin/next", "start", "apps/hobbies-helsinki/", "-p", "${APP_PORT:-80}"]
+ENV PORT ${APP_PORT:-3000}
 
+# Expose port
+EXPOSE $PORT
+
+ENV PROD_START "./node_modules/.bin/next start apps/$PROJECT/ -p ${PORT}"
+
+CMD ["sh", "-c", "${PROD_START}"]
 
 ###################################################################
 # Optional: develop locally                                       #
 ###################################################################
 
 FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS develop
+
+# Build ARGS
+ARG PROJECT
+ARG APP_PORT
+
 ENV NODE_ENV=development
 
 WORKDIR /app
 
 COPY --from=deps /workspace-install ./
 
-EXPOSE ${APP_PORT:-80}
+ENV PORT ${APP_PORT:-3000}
 
-WORKDIR /app/apps/hobbies-helsinki
+# Expose port
+EXPOSE $PORT
 
-CMD ["yarn", "dev", "-p", "${APP_PORT:-80}"]
+ENV DEV_START "yarn dev -p ${PORT}"
+
+WORKDIR /app/apps/$PROJECT
+
+CMD ["sh", "-c", "${DEV_START}"]
 

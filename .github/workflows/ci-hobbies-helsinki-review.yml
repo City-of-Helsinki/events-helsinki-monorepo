@@ -112,6 +112,7 @@ jobs:
           DOCKER_BUILD_ARG_SENTRY_AUTH_TOKEN: ${{ secrets.GH_SENTRY_AUTH_TOKEN }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_DEBUG: 1
           DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
+          DOCKER_BUILD_ARG_PROJECT: hobbies-helsinki
         with:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max

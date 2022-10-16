@@ -8,13 +8,16 @@ services:
       - donotstart
     stdin_open: true
     ports:
-      - target: 80
-        published: 80
+      - target: 3000
+        published: 3000
         protocol: tcp
     build:
       context: .
       dockerfile: Dockerfile
       target: develop
+      args:
+        APP_PORT: 3000
+        PROJECT: hobbies-helsinki
     volumes:
       # Share the source code to allow development
       - .:/app/

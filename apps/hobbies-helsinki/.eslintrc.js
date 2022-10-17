@@ -24,11 +24,13 @@ module.exports = {
     '@events-helsinki/eslint-config-bases/regexp',
     '@events-helsinki/eslint-config-bases/jest',
     '@events-helsinki/eslint-config-bases/react',
+    '@events-helsinki/eslint-config-bases/rtl',
+
     '@events-helsinki/eslint-config-bases/graphql-schema',
     // Add specific rules for nextjs
-    // 'plugin:@next/next/core-web-vitals',
+    'plugin:@next/next/core-web-vitals',
     // Apply prettier and disable incompatible rules
-    // '@events-helsinki/eslint-config-bases/prettier',
+    '@events-helsinki/eslint-config-bases/prettier',
   ],
   rules: {
     // https://github.com/vercel/next.js/discussions/16832
@@ -36,11 +38,11 @@ module.exports = {
     // For the sake of example
     // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md
     'jsx-a11y/anchor-is-valid': 'off',
-    '@typescript-eslint/naming-convention' : 'off',
+    '@typescript-eslint/naming-convention': 'off',
     'jest/no-commented-out-tests': 'off',
     'jest/no-disabled-tests': 'off',
     // "max-len": ["warn", { "code": 120 }],
-    "no-console": "error",
+    'no-console': 'error',
   },
   overrides: [
     {

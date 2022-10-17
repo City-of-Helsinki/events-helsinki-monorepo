@@ -33,6 +33,7 @@ const NEXTJS_SENTRY_TRACING = trueEnv.includes(
   process.env?.NEXTJS_SENTRY_TRACING ?? 'false'
 );
 
+
 /**
  * A way to allow CI optimization when the build done there is not used
  * to deliver an image or deploy the files.

@@ -18,12 +18,10 @@
 ARG PROJECT
 ARG APP_PORT
 
-ARG NODE_VERSION=16
-ARG ALPINE_VERSION=3.15
+FROM helsinkitest/node:16-slim AS deps
 
-
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS deps
-RUN apk add --no-cache rsync
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends rsync
 
 WORKDIR /workspace-install
 
@@ -46,6 +44,11 @@ RUN --mount=type=bind,target=/docker-context \
           --include='*/' --exclude='*' \
           /docker-context/ /workspace-install/;
 
+# remove rsync and apt cache
+RUN apt-get remove -y rsync && \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/cache/apt/archives
 
 #
 # To speed up installations, we override the default yarn cache folder
@@ -70,7 +73,7 @@ RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
 # Stage 2: Build the app                                          #
 ###################################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS builder
+FROM helsinkitest/node:16-slim  AS builder
 ENV NODE_ENV=production
 ENV NEXTJS_IGNORE_ESLINT=1
 ENV NEXTJS_IGNORE_TYPECHECK=0
@@ -94,7 +97,6 @@ ARG NEXT_PUBLIC_DEBUG
 # Build ARGS
 ARG PROJECT
 
-
 WORKDIR /app
 
 COPY . .
@@ -114,24 +116,26 @@ RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
+FROM helsinkitest/node:16-slim  AS runner
 
 # Build ARGS
 ARG PROJECT
 ARG APP_PORT
+ARG NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT
 
 WORKDIR /app
 
+ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/apps/$PROJECT/next.config.js \
+                    /app/apps/$PROJECT/i18nRoutes.config.js \
                     /app/apps/$PROJECT/next-i18next.config.js \
                     /app/apps/$PROJECT/package.json \
                     ./apps/$PROJECT/
 COPY --from=builder /app/apps/$PROJECT/public ./apps/$PROJECT/public
-COPY --from=builder --chown=nextjs:nodejs /app/apps/$PROJECT/.next ./apps/$PROJECT/.next
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
@@ -141,11 +145,9 @@ COPY --from=builder /app/package.json ./package.json
 
 USER nextjs
 
-
 ENV NEXT_TELEMETRY_DISABLED 1
 
 ENV PORT ${APP_PORT:-3000}
-
 # Expose port
 EXPOSE $PORT
 
@@ -157,7 +159,7 @@ CMD ["sh", "-c", "${PROD_START}"]
 # Optional: develop locally                                       #
 ###################################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS develop
+FROM helsinkitest/node:16-slim  AS develop
 
 # Build ARGS
 ARG PROJECT

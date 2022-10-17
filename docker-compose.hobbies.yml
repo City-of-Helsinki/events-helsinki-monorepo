@@ -37,7 +37,8 @@ services:
       context: .
       dockerfile: Dockerfile
       target: deps
-
+      args:
+        PROJECT: hobbies-helsinki
   # Convenience production "builder" stage service for debugging
   # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress=tty runner
   builder:
@@ -49,7 +50,10 @@ services:
       context: .
       dockerfile: Dockerfile
       target: builder
-
+      args:
+        PROJECT: hobbies-helsinki
+    env_file:
+      - apps/hobbies-helsinki/.env.local
   # Convenience production "runner" stage service for debugging
   # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress=tty runner
   # Run   > docker-compose -f docker-compose.hobbies-helsinki.yml --env-file ./apps/hobbies-helsinki/.env.local up runner
@@ -66,7 +70,9 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runner
-
+      args:
+        APP_PORT: 3000
+        PROJECT: hobbies-helsinki
 volumes:
   build_hobbies-helsinki:
   nm_hobbies-helsinki:

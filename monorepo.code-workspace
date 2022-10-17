@@ -5,6 +5,10 @@
       "path": "apps/nextjs-app"
     },
     {
+      "name": "hobbies-helsinki",
+      "path": "apps/hobbies-helsinki"
+    },
+    {
       "name": "remix-app",
       "path": "apps/remix-app"
     },
@@ -61,6 +65,7 @@
     "eslint.alwaysShowStatus": true,
     // https://github.com/Microsoft/vscode-eslint#mono-repository-setup
     "eslint.workingDirectories": [
+      "./apps/hobbies-helsinki",
       "./apps/nextjs-app",
       "./apps/remix-app",
       "./apps/vite-app",

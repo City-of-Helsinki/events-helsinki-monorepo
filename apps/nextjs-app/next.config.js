@@ -333,7 +333,7 @@ if (process.env.ANALYZE === 'true') {
   const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: true,
   });
-  // @ts-ignore
+
   config = withBundleAnalyzer(config);
 }
 

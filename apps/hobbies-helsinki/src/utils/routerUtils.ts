@@ -1,5 +1,4 @@
 import type { ParsedUrlQuery, ParsedUrlQueryInput } from 'querystring';
-import type { UrlObject } from 'url';
 
 import type { NextRouter } from 'next/router';
 import qs from 'query-string';
@@ -7,11 +6,12 @@ import qs from 'query-string';
 // TODO: For some reason middleware cannot read `'events-helsinki-components` package without breaking the build
 // import { DEFAULT_LANGUAGE, Language, SUPPORT_LANGUAGES } from 'events-helsinki-components';
 import i18nRoutes from '../../i18nRoutes.config';
-import { i18n } from '../../next.config';
+import { i18n } from '../../next-i18next.config';
 import { DEFAULT_LANGUAGE } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import { SUPPORT_LANGUAGES } from '../types';
 import type { Language } from '../types';
+import stringifyUrlObject from './stringifyUrlObject';
 
 // dynamic path: /venues/:id
 // segmented: /venues/[id]
@@ -61,77 +61,8 @@ export function getI18nPath(route: string, locale: string): string {
   );
 }
 
-const isDynamic = (part: string) => part.startsWith('[') && part.endsWith(']');
-const parseDynamicName = (part: string) => part.slice(1, -1);
-const queryToString = (
-  query: Record<string, unknown> | string | undefined,
-  usedQueryParts: string[]
-) => {
-  if (!query) {
-    return;
-  }
-
-  if (typeof query === 'string') {
-    return query;
-  }
-
-  const queryWithoutUsed = Object.entries(query).reduce((acc, [key, value]) => {
-    if (usedQueryParts.includes(key)) {
-      return acc;
-    }
-
-    return {
-      ...acc,
-      [key]: value,
-    };
-  }, {});
-
-  const queryAsString = qs.stringify(queryWithoutUsed);
-
-  return queryAsString.length > 0 ? `?${queryAsString}` : null;
-};
-
-// FIXME (partially fixed, test with search params): Does not work with article URIs
-export function stringifyUrlObject(url: UrlObject): string {
-  const usedQueryParts: string[] = [];
-  const pathname = url.pathname
-    ?.split('/')
-    .map((part) => {
-      if (!isDynamic(part)) {
-        return part;
-      }
-
-      let dynamicPartName = parseDynamicName(part);
-
-      // check if is wildcard [...slug] etc
-      // TODO: fix the logic, probably won't work with wildcard and search params
-      if (dynamicPartName.startsWith('...')) {
-        dynamicPartName = dynamicPartName.replace('...', '');
-        usedQueryParts.push(dynamicPartName);
-
-        const wildCardParts = (url.query as ParsedUrlQueryInput)?.[
-          dynamicPartName
-        ];
-
-        if (Array.isArray(wildCardParts)) {
-          return wildCardParts.map((part) => part).join('/');
-        }
-      }
-
-      usedQueryParts.push(dynamicPartName);
-      return (url.query as ParsedUrlQueryInput)?.[dynamicPartName] ?? part;
-    })
-    .join('/');
-
-  const search =
-    url.search ??
-    queryToString(url.query as ParsedUrlQueryInput, usedQueryParts) ??
-    '';
-  return `${pathname}${search}`;
-}
-
 export function getLocaleOrError(locale: string | undefined): Language {
-  if (typeof locale !== 'string' || i18n.locales.includes(locale)) {
+  if (typeof locale !== 'string' || !i18n.locales.includes(locale)) {
     throw Error(`Locale ${locale} is not supported`);
   }
 

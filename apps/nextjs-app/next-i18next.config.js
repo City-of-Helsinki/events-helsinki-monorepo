@@ -1,6 +1,6 @@
 const path = require('path');
 
-const defaultLocale = 'en';
+const defaultLocale = 'default';
 const debugI18n = ['true', 1].includes(
   process?.env?.NEXTJS_DEBUG_I18N ?? 'false'
 );
@@ -11,7 +11,7 @@ const debugI18n = ['true', 1].includes(
 module.exports = {
   i18n: {
     defaultLocale,
-    locales: ['en', 'fr'],
+    locales: ['default', 'en', 'fi', 'sv', 'fr'],
   },
   saveMissing: false,
   strictMode: true,

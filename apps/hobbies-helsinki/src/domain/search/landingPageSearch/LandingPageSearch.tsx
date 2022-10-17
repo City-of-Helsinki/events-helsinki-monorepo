@@ -1,6 +1,5 @@
-import { useLocale } from 'events-helsinki-components';
+import { useLocale, useCommonTranslation } from 'events-helsinki-components';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -20,7 +19,7 @@ import LandingPageSearchForm from './LandingPageSearchForm';
 import SearchShortcuts from './SearchShortcuts';
 
 const Search: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useCommonTranslation();
   const locale = useLocale();
   const [dateTypes, setDateTypes] = React.useState<string[]>([]);
   const [start, setStart] = React.useState<Date | null>(null);

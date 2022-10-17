@@ -2,8 +2,8 @@ import {
   LoadingSpinner,
   SrOnly,
   useIsSmallScreen,
+  useSearchTranslation,
 } from 'events-helsinki-components';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
 import React from 'react';
@@ -27,7 +27,7 @@ const SearchPage: React.FC<{
   }>;
   pageTitle: string;
 }> = ({ SearchComponent, pageTitle }) => {
-  const { t } = useTranslation('search');
+  const { t } = useSearchTranslation();
   const router = useRouter();
   const params: { place?: string } = router.query;
 
@@ -75,7 +75,7 @@ const SearchPage: React.FC<{
           },
         });
       } catch (e) {
-        toast.error(t('errorLoadMode'));
+        toast.error(t('search:errorLoadMode'));
       }
     }
     setIsFetchingMore(false);
@@ -130,8 +130,8 @@ const SearchPage: React.FC<{
       >
         <SrOnly aria-live="polite" aria-atomic={true}>
           {isLoadingEvents
-            ? t('ariaLiveLoading')
-            : t('ariaLiveSearchReady', {
+            ? t('search:ariaLiveLoading')
+            : t('search:ariaLiveSearchReady', {
                 count: eventsList?.meta.count,
               })}
         </SrOnly>

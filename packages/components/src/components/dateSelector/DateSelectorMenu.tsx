@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { IconAngleLeft, IconAngleRight, IconCalendarPlus } from 'hds-react';
 import type { ChangeEvent, FunctionComponent, MutableRefObject } from 'react';
 import React, { useEffect } from 'react';
-import { useConfig } from 'events-helsinki-components';
 
+import useCommonTranslation from '../../hooks/useCommonTranslation'; // the locale you want
 import { translateValue } from '../../utils';
 import Checkbox from '../checkbox/Checkbox';
 import DateRangePicker from '../dateRangePicker/DateRangePicker';
@@ -46,7 +46,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
   startDate,
   toggleIsCustomDate,
 }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
 
   useEffect(() => {
     const clearDatesRange = () => {

@@ -4,11 +4,10 @@ import {
   DateSelector,
   MobileDateSelector,
   useLocale,
+  useHomeTranslation,
 } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
-
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
@@ -45,19 +44,19 @@ export default function LandingPageSearchForm({
   handleSubmit,
   handleMenuOptionClick,
 }: LandingPageSearchFormProps) {
-  const { t } = useTranslation('home');
+  const { t } = useHomeTranslation();
   const locale = useLocale();
 
   return (
     <div className={classnames(className, styles.landingPageSearch)}>
-      <h2>{t('search.title')}</h2>
+      <h2>{t('home:search.title')}</h2>
       <div className={styles.searchRow}>
         <div className={styles.autosuggestWrapper}>
           <SearchAutosuggest
             name="search"
             onChangeSearchValue={setAutosuggestInput}
             onOptionClick={handleMenuOptionClick}
-            placeholder={t('search.placeholder')}
+            placeholder={t('home:search.placeholder')}
             searchValue={autosuggestInput}
           />
         </div>
@@ -93,7 +92,7 @@ export default function LandingPageSearchForm({
               iconLeft={<IconSearch />}
               onClick={handleSubmit}
             >
-              {t('eventSearch.buttonSearch')}
+              {t('home:eventSearch.buttonSearch')}
             </Button>
           </div>
         </div>
@@ -104,7 +103,7 @@ export default function LandingPageSearchForm({
           className={styles.link}
           href={getI18nPath(ROUTES.SEARCH, locale)}
         >
-          {t('eventSearch.linkAdvancedSearch')}
+          {t('home:eventSearch.linkAdvancedSearch')}
         </SecondaryLink>
       </div>
     </div>

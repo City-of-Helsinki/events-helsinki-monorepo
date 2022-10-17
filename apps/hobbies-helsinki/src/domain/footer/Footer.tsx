@@ -1,6 +1,7 @@
 import { useLocale, resetFocusId } from 'events-helsinki-components';
+import useCommonTranslation from 'events-helsinki-components/hooks/useCommonTranslation';
+import useFooterTranslation from 'events-helsinki-components/hooks/useFooterTranslation';
 import { Footer, Link } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
@@ -11,8 +12,8 @@ import styles from './footer.module.scss';
 import FooterCategories from './FooterCategories';
 
 const FooterSection: FunctionComponent = () => {
-  const { t } = useTranslation('footer');
-  const { t: tCommon } = useTranslation('common');
+  const { t } = useFooterTranslation();
+  const { t: tCommon } = useCommonTranslation();
   const locale = useLocale();
 
   const { data } = useMenuQuery({
@@ -28,22 +29,22 @@ const FooterSection: FunctionComponent = () => {
   };
 
   return (
-    <Footer title={tCommon('appName')} className={styles.footer}>
+    <Footer title={tCommon('common:appName')} className={styles.footer}>
       <Footer.Navigation>
         <Footer.Item
           as={Link}
-          label={t('searchHobbies')}
+          label={t('footer:searchHobbies')}
           href={getI18nPath(ROUTES.SEARCH, locale)}
         />
       </Footer.Navigation>
       <FooterCategories />
       <Footer.Utilities
-        backToTopLabel={t('backToTop')}
+        backToTopLabel={t('footer:backToTop')}
         onBackToTopClick={handleBackToTop}
       ></Footer.Utilities>
       <Footer.Base
-        copyrightHolder={t('copyright')}
-        copyrightText={t('allRightsReserved')}
+        copyrightHolder={t('footer:copyright')}
+        copyrightText={t('footer:allRightsReserved')}
       >
         {data?.menu?.menuItems?.nodes?.map((navigationItem) => (
           <Footer.Item

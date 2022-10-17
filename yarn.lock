@@ -16722,7 +16722,7 @@ __metadata:
     hds-design-tokens: "npm:2.3.0"
     hds-react: "npm:2.4.0"
     html-react-parser: "npm:3.0.4"
-    i18next: "npm:21.9.2"
+    i18next: "npm:21.10.0"
     i18next-browser-languagedetector: "npm:6.1.5"
     i18next-http-backend: "npm:1.4.4"
     ics: "npm:^2.40.0"

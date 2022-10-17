@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import '@testing-library/jest-dom/extend-expect';
 import { TextEncoder, TextDecoder } from 'util';
-import { initTestI18n } from 'events-helsinki-common-i18n';
+// import { initI18n } from 'events-helsinki-common-i18n';
 
 import { loadEnvConfig } from '@next/env';
 // import { server } from "./tests/mocks/server";

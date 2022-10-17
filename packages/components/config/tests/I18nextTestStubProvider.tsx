@@ -1,26 +1,6 @@
-import common from 'events-helsinki-common-i18n/locales/fi/common.json';
-import i18n from 'i18next';
+import i18n from 'events-helsinki-common-i18n/tests/initI18n';
 import type { FC, ReactNode } from 'react';
-import { initReactI18next, I18nextProvider } from 'react-i18next';
-
-/**
- * Fully wrapped strategy for i18next, you can use stub/mocks as well
- * @link {https://react.i18next.com/misc/testing}
- */
-i18n.use(initReactI18next).init({
-  lng: 'fi',
-  fallbackLng: 'fi',
-  ns: ['common'],
-  defaultNS: 'common',
-  debug: false,
-  interpolation: {
-    escapeValue: false, // not needed for react!!
-  },
-  // todo add translations from json files
-  resources: {
-    fi: { common },
-  },
-});
+import { I18nextProvider } from 'react-i18next';
 
 export const I18nextTestStubProvider: FC<{ children: ReactNode }> = ({
   children,

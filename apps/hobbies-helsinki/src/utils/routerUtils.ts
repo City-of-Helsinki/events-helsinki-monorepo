@@ -7,6 +7,7 @@ import qs from 'query-string';
 // TODO: For some reason middleware cannot read `'events-helsinki-components` package without breaking the build
 // import { DEFAULT_LANGUAGE, Language, SUPPORT_LANGUAGES } from 'events-helsinki-components';
 import i18nRoutes from '../../i18nRoutes.config';
+import { i18n } from '../../next.config';
 import { DEFAULT_LANGUAGE } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import { SUPPORT_LANGUAGES } from '../types';
@@ -130,7 +131,7 @@ export function stringifyUrlObject(url: UrlObject): string {
 }
 
 export function getLocaleOrError(locale: string | undefined): Language {
-  if (typeof locale !== 'string' || !AppConfig.locales.includes(locale)) {
+  if (typeof locale !== 'string' || i18n.locales.includes(locale)) {
     throw Error(`Locale ${locale} is not supported`);
   }
 

@@ -46,10 +46,6 @@ class AppConfig {
     return [EventTypeId.Course];
   }
 
-  static get locales() {
-    return ['default', 'fi', 'sv', 'en'];
-  }
-
   static get dateFormat() {
     return 'dd.MM.yyyy';
   }

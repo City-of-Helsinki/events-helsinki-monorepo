@@ -69,7 +69,6 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
     initialEventsApolloState,
     error,
   } = pageProps;
-  // console.debug({ initialCmsApolloState, initialEventsApolloState });
   const cmsApolloClient = useCmsApollo(initialCmsApolloState);
   const eventsApolloClient = useEventsApolloClient(initialEventsApolloState);
   const eventsConfig = useEventsConfig(eventsApolloClient);

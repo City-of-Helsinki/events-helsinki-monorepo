@@ -1,8 +1,4 @@
-import {
-  useLocale,
-  DEFAULT_LANGUAGE,
-  getQlLanguage,
-} from 'events-helsinki-components';
+import { DEFAULT_LANGUAGE, getQlLanguage } from 'events-helsinki-components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
@@ -35,8 +31,8 @@ import { getLocaleOrError } from '../utils/routerUtils';
 const HomePage: NextPage<{
   landingPage: LandingPageQuery['landingPage'];
   page: PageType;
-}> = ({ landingPage, page }) => {
-  const locale = useLocale();
+  locale: string;
+}> = ({ landingPage, page, locale }) => {
   const {
     currentLanguageCode,
     utils: { getRoutedInternalHref },

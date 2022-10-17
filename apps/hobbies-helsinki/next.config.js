@@ -62,7 +62,7 @@ if (NEXTJS_SENTRY_DEBUG) {
 
 // Tell webpack to compile those packages
 // @link https://www.npmjs.com/package/next-transpile-modules
-const tmModules = ['react-helsinki-headless-cms', 'events-helsinki-components'];
+const tmModules = ['events-helsinki-components'];
 
 // Example of setting up secure headers
 // @link https://github.com/jagaapple/next-secure-headers
@@ -120,7 +120,10 @@ const tmModules = ['react-helsinki-headless-cms', 'events-helsinki-components'];
 /* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const componentsStylePath = path.join(__dirname, '../../packages/components/');
+const componentsStylePath = [
+  path.join(__dirname, '../../packages/components/'),
+  path.join(__dirname, 'src/'),
+];
 /**
  * @type {import('next').NextConfig}
  */
@@ -135,7 +138,7 @@ const i18nRewriteRules = Object.entries(i18nRoutes).flatMap(
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
-    includePaths: [componentsStylePath],
+    includePaths: componentsStylePath,
   },
   productionBrowserSourceMaps: !disableSourceMaps,
   i18n,
@@ -212,18 +215,6 @@ const nextConfig = {
     ];
   },
 
-  /**
-   * @link https://nextjs.org/docs/api-reference/next.config.js/rewrites
-   async rewrites() {
-    return [
-      {
-        source: `/`,
-        destination: '/demo',
-      },
-    ];
-  },
-   */
-
   // @ts-ignore
   webpack: (config, { webpack, isServer }) => {
     if (!isServer) {
@@ -236,7 +227,7 @@ const nextConfig = {
         net: false,
         tls: false,
         child_process: false,
-        perf_hooks: false
+        perf_hooks: false,
       };
     }
 

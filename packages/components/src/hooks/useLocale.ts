@@ -1,9 +1,10 @@
+import { useTranslation } from 'next-i18next';
 import type { Language } from '../types';
-import useCommonTranslation from './useCommonTranslation';
 
 const useLocale = (): Language => {
-  const { i18n } = useCommonTranslation();
-  const language = i18n.language;
+  const {
+    i18n: { language },
+  } = useTranslation();
 
   switch (language) {
     case 'en':

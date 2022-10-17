@@ -12,13 +12,13 @@
       "title": "Search suggestions"
     }
   },
+  "menu": {
+    "menuToggleAriaLabel": "Open menu"
+  },
   "button": {
     "close": "Close",
     "loadMore": "Load more",
     "showAll": "Show more"
-  },
-  "menu": {
-    "menuToggleAriaLabel": "Open menu"
   },
   "category": {
     "ariaButtonRemove": "Remove category: {{category}}"

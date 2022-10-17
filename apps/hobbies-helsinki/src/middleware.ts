@@ -1,7 +1,7 @@
 // import { DEFAULT_LANGUAGE } from 'events-helsinki-components';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import stringifyUrlObject from 'utils/stringifyUrlObject';
+import stringifyUrlObject from './utils/stringifyUrlObject';
 
 // TODO: For some reason middleware cannot read `'events-helsinki-components` package without breaking the build
 const DEFAULT_LANGUAGE = 'fi';

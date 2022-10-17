@@ -1,14 +1,18 @@
-import { initTestI18n, config } from 'events-helsinki-common-i18n';
-import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
+import {
+  initTestI18n,
+  config,
+  translations,
+} from 'events-helsinki-common-i18n';
 import { I18nextProvider, useTranslation } from 'react-i18next';
-import { render, screen } from '@/test-utils';
-import type { Language } from 'types';
+import { render, screen } from '../../../config/tests/test-utils';
+import type { Language } from '../../types';
 import * as useLocale from '../useLocale';
 
 const TestComponent = () => {
   const { t } = useTranslation('common');
   const locale = useLocale.default();
   return (
+    // @ts-ignore
     <I18nextProvider i18n={initTestI18n}>
       <div data-testid="translation">{t('supriseMe') as string}</div>
       <div data-testid="locale">{locale}</div>

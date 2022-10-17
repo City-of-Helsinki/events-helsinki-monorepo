@@ -44,6 +44,8 @@ type Props = {
 function TestProviders({ mocks, children, router }: Props) {
   const eventsApolloClient = useApolloClient(createEventsApolloClient());
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     <I18nextProvider i18n={i18n}>
       <MockedProvider mocks={mocks} addTypename={false}>
         <EventsConfigProvider

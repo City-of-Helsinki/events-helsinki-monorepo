@@ -36,15 +36,19 @@ const Template: ComponentStory<typeof TopProgressBar> = (args) => {
 export const TopProgressBarDefault = Template.bind({});
 TopProgressBarDefault.args = {
   debug(message?, ...optionalParameters) {
+    // eslint-disable-next-line no-console
     console.debug(message, optionalParameters);
   },
   error(message?, ...optionalParameters) {
+    // eslint-disable-next-line no-console
     console.error(message, optionalParameters);
   },
   info(message?, ...optionalParameters) {
+    // eslint-disable-next-line no-console
     console.info(message, optionalParameters);
   },
   warn(message?, ...optionalParameters) {
+    // eslint-disable-next-line no-console
     console.warn(message, optionalParameters);
   },
 };

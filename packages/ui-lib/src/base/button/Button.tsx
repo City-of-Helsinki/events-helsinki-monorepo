@@ -2,7 +2,6 @@
 
 import type { FC } from 'react';
 import React from 'react';
-import { cssButtonStyle } from './Button.styles';
 
 type ButtonProps = {
   /**
@@ -42,7 +41,6 @@ export const Button: FC<ButtonProps> = (props) => {
   const mode = primary ? 'primary' : 'secondary';
   return (
     <button
-      // css={cssButtonStyle}
       type="button"
       className={[size, mode].join(' ')}
       style={{ backgroundColor }}

@@ -89,7 +89,7 @@ export function initializeApolloClient<
   createClient,
 }: InitApolloClientConfig<TCacheShape, Client>) {
   const _apolloClient = mutableCachedClient.reference ?? createClient();
-
+  console.log(_apolloClient.cache.extract());
   // Initial state hydration
   if (initialState) {
     // Get existing cache, loaded during client side data fetching

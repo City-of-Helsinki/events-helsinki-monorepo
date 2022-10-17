@@ -55,8 +55,9 @@ const SearchPage: React.FC<{
     notifyOnNetworkStatusChange: true,
     ssr: false,
     variables: eventFilters,
-    fetchPolicy: 'cache-and-network',
-    nextFetchPolicy: 'cache-first',
+    // one place that is breaking cache (with those settings on each page load from navigating to it, will cause the event results duplicates)
+    // fetchPolicy: 'cache-and-network',
+    // nextFetchPolicy: 'cache-first',
   });
 
   const eventsList = eventsData?.eventList;

@@ -1,7 +1,6 @@
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
-import { createEventsApolloClient } from 'domain/clients/eventsApolloClient';
 
 import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
@@ -50,9 +49,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const eventsApolloClient = createEventsApolloClient();
   return getHobbiesStaticProps(context, async ({ eventsClient }) => {
     const locale = getLocaleOrError(context.locale);
+    // this query, or any query inside the static props which uses the eventsClient,
+    // causing the cache override on page load, main issue!
     const { data: eventData, loading } = await eventsClient.query<
       EventDetailsQuery,
       EventDetailsQueryVariables
@@ -68,7 +68,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
     return {
       props: {
-        initialEventsApolloState: eventsApolloClient.cache.extract(),
         event: event,
         loading: loading,
         ...(await serverSideTranslationsWithCommon(locale, [

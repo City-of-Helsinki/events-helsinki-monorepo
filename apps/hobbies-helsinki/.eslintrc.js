@@ -43,6 +43,7 @@ module.exports = {
     'jest/no-disabled-tests': 'off',
     // "max-len": ["warn", { "code": 120 }],
     'no-console': 'error',
+    'testing-library/no-unnecessary-act': 'warn',
   },
   overrides: [
     {

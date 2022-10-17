@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { IconCalendar } from 'hds-react';
 import React from 'react';
-import { useCommonTranslation } from 'hooks';
 import { DATE_TYPES } from '../../constants';
+import { useCommonTranslation } from '../../hooks';
 import { translateValue } from '../../utils';
 import ToggleButton from '../toggleButton/ToggleButton';
 import styles from './mobileDateSelector.module.scss';

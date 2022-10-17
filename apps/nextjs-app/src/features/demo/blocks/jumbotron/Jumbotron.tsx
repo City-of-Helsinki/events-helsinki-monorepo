@@ -92,14 +92,14 @@ export const Jumbotron: FC = () => {
   return (
     <>
       <div
-        css={css`
-          font-weight: bolder;
-          font-size: 3em;
-          line-height: 1.1em;
-          @media (min-width: 600px) {
-            font-size: 4em;
-          } ;
-        `}
+      // css={css`
+      //   font-weight: bolder;
+      //   font-size: 3em;
+      //   line-height: 1.1em;
+      //   @media (min-width: 600px) {
+      //     font-size: 4em;
+      //   } ;
+      // `}
       >
         One of many possibles
         <br /> made with

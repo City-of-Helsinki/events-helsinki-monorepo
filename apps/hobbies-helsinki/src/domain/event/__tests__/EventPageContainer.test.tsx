@@ -137,14 +137,14 @@ it('should render info and load other events + similar events', async () => {
     expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
   });
 
-  expect(screen.queryByRole('heading', { name })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name })).toBeInTheDocument();
 
-  expect(screen.queryByRole('heading', { name: 'Kuvaus' })).toBeInTheDocument();
-  expect(screen.queryByText(description)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Kuvaus' })).toBeInTheDocument();
+  expect(screen.getByText(description)).toBeInTheDocument();
 
   keywords.slice(0, 2).forEach((keyword) => {
     expect(
-      screen.queryByRole('link', { name: keyword.name })
+      screen.getByRole('link', { name: keyword.name })
     ).toBeInTheDocument();
   }, 10000);
 
@@ -155,6 +155,7 @@ it('should render info and load other events + similar events', async () => {
   );
 
   // click show other times
+  // eslint-disable-next-line testing-library/no-unnecessary-act
   await act(() =>
     userEvent.click(screen.getByRole('button', { name: 'Näytä kaikki' }))
   );
@@ -173,7 +174,7 @@ it('should show error info when event is closed', async () => {
   });
   await waitFor(() => {
     expect(
-      screen.queryByRole('heading', {
+      screen.getByRole('heading', {
         name: translations.event.hero.titleEventClosed,
       })
     ).toBeInTheDocument();
@@ -198,7 +199,7 @@ it("should show error info when event doesn't exist", async () => {
   });
   await waitFor(() => {
     expect(
-      screen.queryByRole('heading', {
+      screen.getByRole('heading', {
         name: translations.event.notFound.title,
       })
     ).toBeInTheDocument();
@@ -213,14 +214,14 @@ describe.skip(`SIMILAR_EVENTS feature flag`, () => {
       expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
     });
     expect(
-      screen.queryByRole('heading', {
+      screen.getByRole('heading', {
         name: translations.event.similarEvents.title,
       })
     ).toBeInTheDocument();
 
     similarEvents.data.forEach(({ name }) => {
       expect(
-        screen.queryByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
+        screen.getByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
           selector: 'a',
         })
       ).toBeInTheDocument();

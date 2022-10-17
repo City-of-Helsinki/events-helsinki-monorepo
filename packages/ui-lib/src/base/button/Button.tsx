@@ -42,7 +42,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const mode = primary ? 'primary' : 'secondary';
   return (
     <button
-      css={cssButtonStyle}
+      // css={cssButtonStyle}
       type="button"
       className={[size, mode].join(' ')}
       style={{ backgroundColor }}

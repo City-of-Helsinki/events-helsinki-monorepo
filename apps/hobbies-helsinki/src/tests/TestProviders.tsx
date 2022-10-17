@@ -24,7 +24,7 @@ import { ROUTES } from '../constants';
 import { createCmsApolloClient } from '../domain/clients/cmsApolloClient';
 import { createEventsApolloClient } from '../domain/clients/eventsApolloClient';
 import { getLocalizedCmsItemUrl } from '../utils/routerUtils';
-import i18n from './initI18n';
+import { initI18n as i18n } from './initI18n';
 
 const CMS_API_DOMAIN = 'harrastukset.cms.test.domain.com';
 

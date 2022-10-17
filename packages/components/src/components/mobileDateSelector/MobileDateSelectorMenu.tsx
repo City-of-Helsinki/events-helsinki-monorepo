@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import type { FunctionComponent, MutableRefObject } from 'react';
 import React from 'react';
-import { useCommonTranslation } from 'hooks';
+import { useCommonTranslation } from '../../hooks';
 import DateRangePicker from '../dateRangePicker/DateRangePicker';
 import styles from './mobileDateSelectorMenu.module.scss';
 

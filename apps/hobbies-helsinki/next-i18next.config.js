@@ -1,7 +1,8 @@
+const { default: AppConfig } = require('domain/app/AppConfig');
 module.exports = {
   i18n: {
     defaultLocale: 'default',
-    locales: ['default', 'fi', 'sv', 'en'],
+    locales: AppConfig.locales,
     // localeDetection: false,
   },
   // react: { useSuspense: false },

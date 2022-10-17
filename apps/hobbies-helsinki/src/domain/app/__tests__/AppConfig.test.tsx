@@ -137,13 +137,5 @@ it('provides configuration for Matomo', () => {
 });
 
 it('gives access to misc configs', () => {
-  expect(AppConfig.locales).toMatchInlineSnapshot(`
-    Array [
-      "default",
-      "fi",
-      "sv",
-      "en",
-    ]
-  `);
   expect(AppConfig.supportedEventTypes).toStrictEqual([EventTypeId.Course]);
 });

@@ -127,14 +127,6 @@ const componentsStylePath = [
 /**
  * @type {import('next').NextConfig}
  */
-const i18nRewriteRules = Object.entries(i18nRoutes).flatMap(
-  ([destination, sources]) =>
-    sources.map(({ source, locale }) => ({
-      destination,
-      source: `/${locale}${source}`,
-      locale: false,
-    }))
-);
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
@@ -143,7 +135,13 @@ const nextConfig = {
   productionBrowserSourceMaps: !disableSourceMaps,
   i18n,
   async rewrites() {
-    return i18nRewriteRules;
+    return Object.entries(i18nRoutes).flatMap(([destination, sources]) =>
+      sources.map(({ source, locale }) => ({
+        destination,
+        source: `/${locale}${source}`,
+        locale: false,
+      }))
+    );
   },
   optimizeFonts: true,
   httpAgentOptions: {
@@ -158,10 +156,6 @@ const nextConfig = {
 
   // @link https://nextjs.org/docs/advanced-features/compiler#minification
   swcMinify: true,
-
-  compiler: {
-    // emotion: true, - by default since 12.2.0
-  },
 
   sentry: {
     hideSourceMaps: true,
@@ -215,7 +209,6 @@ const nextConfig = {
     ];
   },
 
-  // @ts-ignore
   webpack: (config, { webpack, isServer }) => {
     if (!isServer) {
       // Fixes npm packages that depend on `fs` module
@@ -305,7 +298,7 @@ if (tmModules.length > 0) {
       debug: true,
     }
   );
-  // @ts-ignore
+
   config = withNextTranspileModules(config);
 }
 
@@ -313,7 +306,7 @@ if (process.env.ANALYZE === 'true') {
   const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: true,
   });
-  // @ts-ignore
+
   config = withBundleAnalyzer(config);
 }
 

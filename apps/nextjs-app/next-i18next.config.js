@@ -1,6 +1,4 @@
 const path = require('path');
-
-const defaultLocale = 'default';
 const debugI18n = ['true', 1].includes(
   process?.env?.NEXTJS_DEBUG_I18N ?? 'false'
 );
@@ -10,22 +8,16 @@ const debugI18n = ['true', 1].includes(
  */
 module.exports = {
   i18n: {
-    defaultLocale,
-    locales: ['default', 'en', 'fi', 'sv', 'fr'],
+    defaultLocale: 'default',
+    locales: ['default', 'fi', 'sv', 'en', 'fr'],
+    // localeDetection: false,
   },
-  saveMissing: false,
-  strictMode: true,
   serializeConfig: false,
   reloadOnPrerender: process?.env?.NODE_ENV === 'development',
   react: {
     useSuspense: false,
   },
   debug: debugI18n,
-  /*
-  interpolation: {
-    escapeValue: false,
-  },
-  */
   localePath:
     typeof window === 'undefined'
       ? path.resolve('../../packages/common-i18n/src/locales')

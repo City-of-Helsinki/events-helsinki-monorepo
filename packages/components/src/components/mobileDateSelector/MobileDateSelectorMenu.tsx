@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import type { FunctionComponent, MutableRefObject } from 'react';
 import React from 'react';
-
-import { useConfig } from 'events-helsinki-components';
+import { useCommonTranslation } from 'hooks';
 import DateRangePicker from '../dateRangePicker/DateRangePicker';
 import styles from './mobileDateSelectorMenu.module.scss';
 
@@ -29,7 +28,7 @@ const MobileDateSelectorMenu: FunctionComponent<Props> = ({
   onCloseMenu,
   startDate,
 }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
   if (!isOpen) return null;
   return (
     <div data-testid={testIds.menu} className={styles.mobileDateSelectorMenu}>

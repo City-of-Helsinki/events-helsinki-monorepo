@@ -1,7 +1,7 @@
 import { IconAngleDown, IconAngleUp, IconCalendarClock } from 'hds-react';
 import React from 'react';
 import type { FunctionComponent } from 'react';
-import { useConfig } from 'events-helsinki-components';
+import { useCommonTranslation } from 'hooks';
 import { DATE_TYPES } from '../../constants';
 import useLocale from '../../hooks/useLocale';
 import { formatDate, translateValue } from '../../utils';
@@ -38,7 +38,7 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
   startDate,
   toggleIsCustomDate,
 }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
   const locale = useLocale();
   const backBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const customDatesBtnRef = React.useRef<HTMLButtonElement | null>(null);

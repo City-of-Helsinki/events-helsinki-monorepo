@@ -3,7 +3,7 @@ import type { SUPPORT_LANGUAGES } from 'events-helsinki-components';
 import { DEFAULT_LANGUAGE } from 'events-helsinki-components';
 import { Selector, t } from 'testcafe';
 
-import i18n from '../../src/tests/initI18n';
+import { initI18n as i18n } from '../../src/tests/initI18n';
 
 class Header {
   currentLang = DEFAULT_LANGUAGE;

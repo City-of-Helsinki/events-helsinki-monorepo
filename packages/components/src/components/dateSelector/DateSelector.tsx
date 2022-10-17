@@ -1,8 +1,8 @@
 import { IconAngleDown, IconAngleUp, IconCalendarClock } from 'hds-react';
 import React from 'react';
 import type { FunctionComponent } from 'react';
-import { useCommonTranslation } from 'hooks';
 import { DATE_TYPES } from '../../constants';
+import { useCommonTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
 import { formatDate, translateValue } from '../../utils';
 import styles from './dateSelector.module.scss';

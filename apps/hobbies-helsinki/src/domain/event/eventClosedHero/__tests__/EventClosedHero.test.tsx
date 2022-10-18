@@ -22,7 +22,7 @@ it('should render all text fields', () => {
   ).toBeInTheDocument();
 });
 
-it('should go to home page when clicking button', () => {
+it('should go to home page when clicking button', async () => {
   const { router } = render(<EventClosedHero />);
 
   await userEvent.click(

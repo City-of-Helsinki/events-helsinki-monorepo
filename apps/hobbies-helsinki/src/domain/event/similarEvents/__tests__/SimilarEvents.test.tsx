@@ -3,12 +3,7 @@ import { clear } from 'console';
 import { advanceTo } from 'jest-date-mock';
 import * as React from 'react';
 
-import {
-  render,
-  screen,
-  userEvent,
-  waitFor,
-} from '@/test-utils';
+import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvent,
@@ -18,7 +13,6 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
-import { render, screen, waitFor } from '@/test-utils';
 import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import SimilarEvents from '../SimilarEvents';
 

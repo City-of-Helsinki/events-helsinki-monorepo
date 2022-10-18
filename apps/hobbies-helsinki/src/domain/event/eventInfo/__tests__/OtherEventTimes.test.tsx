@@ -8,13 +8,7 @@ import type { NextRouter } from 'next/router';
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import {
-  act,
-  render,
-  screen,
-  userEvent,
-  waitFor,
-} from '@/test-utils';
+import { act, render, screen, userEvent, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeEvents } from '@/test-utils/mockDataUtils';
 import {

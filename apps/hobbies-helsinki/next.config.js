@@ -15,7 +15,7 @@ const trueEnv = ['true', '1', 'yes'];
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 
 // eslint-disable-next-line no-console
-console.log('process.env',process.env);
+console.log('process.env', process.env);
 
 const NEXTJS_IGNORE_ESLINT = trueEnv.includes(
   process.env?.NEXTJS_IGNORE_ESLINT ?? 'false'

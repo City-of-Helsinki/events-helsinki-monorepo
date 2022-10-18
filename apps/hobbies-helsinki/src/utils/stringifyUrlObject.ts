@@ -1,6 +1,6 @@
 import type { ParsedUrlQueryInput } from 'querystring';
 import type { UrlObject } from 'url';
-import qs from 'qs';
+import { stringify } from 'query-string';
 
 const isDynamic = (part: string) => part.startsWith('[') && part.endsWith(']');
 const parseDynamicName = (part: string) => part.slice(1, -1);
@@ -27,7 +27,7 @@ const queryToString = (
     };
   }, {});
 
-  const queryAsString = qs.stringify(queryWithoutUsed);
+  const queryAsString = stringify(queryWithoutUsed);
 
   return queryAsString.length > 0 ? `?${queryAsString}` : null;
 };

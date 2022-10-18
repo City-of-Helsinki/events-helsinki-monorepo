@@ -1,4 +1,4 @@
-import i18n from 'i18next';
+import { initTestI18n as i18n } from 'events-helsinki-common-i18n';
 import React from 'react';
 
 import { screen, render, userEvent } from '@/test-utils';

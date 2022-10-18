@@ -1,6 +1,5 @@
-import { useLocale } from 'events-helsinki-components';
+import { useEventTranslation, useLocale } from 'events-helsinki-components';
 import { IconLocation } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
 
@@ -14,7 +13,7 @@ interface Props {
 }
 
 const EventLocation: React.FC<Props> = ({ event }) => {
-  const { t } = useTranslation('event');
+  const { t } = useEventTranslation();
   const locale = useLocale();
   const { googleDirectionsLink, hslDirectionsLink, name } = getEventFields(
     event,
@@ -26,18 +25,18 @@ const EventLocation: React.FC<Props> = ({ event }) => {
       <div className={styles.titleWrapper}>
         <div className={styles.title}>
           <IconLocation aria-hidden />
-          <h2>{t('location.title')}</h2>
+          <h2>{t('event:location.title')}</h2>
         </div>
         <Link
           className={styles.mapLink}
           href={getServiceMapUrl(event, locale, false)}
         >
-          {t('location.openMap')}
+          {t('event:location.openMap')}
         </Link>
       </div>
 
       <iframe
-        title={t('location.mapTitle')}
+        title={t('event:location.mapTitle')}
         className={styles.mapContainer}
         src={getServiceMapUrl(event, locale, true)}
       ></iframe>
@@ -54,10 +53,10 @@ const EventLocation: React.FC<Props> = ({ event }) => {
         className={styles.externalLink}
         href={googleDirectionsLink}
       >
-        {t('location.directionsGoogle')}
+        {t('event:location.directionsGoogle')}
       </SecondaryLink>
       <SecondaryLink className={styles.externalLink} href={hslDirectionsLink}>
-        {t('location.directionsHSL')}
+        {t('event:location.directionsHSL')}
       </SecondaryLink>
     </div>
   );

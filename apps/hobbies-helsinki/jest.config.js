@@ -34,7 +34,7 @@ const config = {
     // For @testing-library/react
     '^@/test-utils$': '<rootDir>/../config/jest/test-utils',
     '^@/test-utils/(.*)$': '<rootDir>/../config/jest/$1',
-    '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
+    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
     // https://jestjs.io/docs/webpack#handling-static-assets
     '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/../.jest/__mocks__/fileMock.js`,
     ...getTsConfigBasePaths(),

@@ -30,5 +30,5 @@ it('should go to home page when clicking button', async () => {
       name: translations.event.hero.buttonToHomePage,
     })
   );
-  expect(router.pathname).toBe('');
+  expect(router.pathname).toBe('/');
 });

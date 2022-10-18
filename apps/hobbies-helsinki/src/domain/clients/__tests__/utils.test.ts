@@ -6,11 +6,15 @@ import {
 describe('client utils', () => {
   describe('initializeApolloClient', () => {
     it('should mutate references used for caching the client', () => {
-      let mutableCache = new MutableReference();
+      // @ts-ignore
+      const mutableCache = new MutableReference();
 
+      // @ts-ignore
       initializeApolloClient({
         initialState: null,
+        // @ts-ignore
         mutableCachedClient: mutableCache,
+        // @ts-ignore
         createClient: () => 1,
       });
 

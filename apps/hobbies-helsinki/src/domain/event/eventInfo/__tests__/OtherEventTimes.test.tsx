@@ -8,13 +8,14 @@ import type { NextRouter } from 'next/router';
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import { act, render, screen, userEvent, waitFor } from '@/test-utils';
+import { render, screen, userEvent, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeEvents } from '@/test-utils/mockDataUtils';
 import {
   createOtherEventTimesRequestAndResultMocks,
   createOtherEventTimesRequestThrowsErrorMocks,
 } from '@/test-utils/mocks/eventListMocks';
+import { EventTypeId } from '../../../../domain/nextApi/graphql/generated/graphql';
 import type {
   EventDetails,
   EventFieldsFragment,
@@ -22,7 +23,6 @@ import type {
   EventListResponse,
   Meta,
 } from '../../../../domain/nextApi/graphql/generated/graphql';
-import { EventTypeId } from '../../../../domain/nextApi/graphql/generated/graphql';
 import OtherEventTimes from '../OtherEventTimes';
 
 const startTime = '2020-10-01T16:00:00Z';
@@ -163,7 +163,7 @@ async function testOtherEventTimes() {
     name: translations.event.otherTimes.buttonShow,
   });
 
-  await act(() => userEvent.click(toggleButton));
+  await userEvent.click(toggleButton);
 
   otherEventsResponse.data.forEach((event) => {
     const dateStr = getDateRangeStr(getDateRangeStrProps(event));
@@ -198,22 +198,20 @@ async function testNavigation(router: NextRouter, url: string) {
     name: translations.event.otherTimes.buttonShow,
   });
 
-  await act(() => userEvent.click(toggleButton));
+  await userEvent.click(toggleButton);
 
   const event = otherEventsResponse.data[0];
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const dateStr = getDateRangeStr(getDateRangeStrProps(event!));
   expect(screen.getByText(dateStr)).toBeInTheDocument();
 
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('link', {
-        name: translations.event.otherTimes.buttonReadMore.replace(
-          '{{date}}',
-          dateStr
-        ),
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('link', {
+      name: translations.event.otherTimes.buttonReadMore.replace(
+        '{{date}}',
+        dateStr
+      ),
+    })
   );
 
   expect(router.asPath).toBe(`${url}${event?.id}`);

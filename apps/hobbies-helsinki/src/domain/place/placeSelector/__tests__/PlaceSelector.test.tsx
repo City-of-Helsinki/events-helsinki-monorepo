@@ -3,7 +3,7 @@ import React from 'react';
 
 import { waitFor, actWait, render, screen, userEvent } from '@/test-utils';
 import { fakePlaces } from '@/test-utils/mockDataUtils';
-import apolloClient from '../../../clients/eventsApolloClient';
+import { apolloClient } from '../../../clients/eventsApolloClient';
 import {
   PlaceDetailsDocument,
   PlaceListDocument,

@@ -19325,7 +19325,7 @@ __metadata:
     husky: "npm:^8.0.1"
     i18next: "npm:21.9.2"
     ics: "npm:^2.35.0"
-    identity-obj-proxy: "npm:^3.0.0"
+    identity-obj-proxy: "npm:3.0.0"
     jest: "npm:^28.1.0"
     jest-axe: "npm:^6.0.0"
     jest-date-mock: "npm:^1.0.8"
@@ -19869,7 +19869,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"identity-obj-proxy@npm:^3.0.0":
+"identity-obj-proxy@npm:3.0.0, identity-obj-proxy@npm:^3.0.0":
   version: 3.0.0
   resolution: "identity-obj-proxy@npm:3.0.0"
   dependencies:

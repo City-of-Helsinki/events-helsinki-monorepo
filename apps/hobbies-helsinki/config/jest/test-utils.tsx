@@ -66,6 +66,7 @@ const customRender: CustomRender = (
   };
 };
 
+// eslint-disable-next-line testing-library/no-unnecessary-act
 const actWait = (amount?: number): Promise<void> => act(() => wait(amount));
 
 // eslint-disable-next-line import/export

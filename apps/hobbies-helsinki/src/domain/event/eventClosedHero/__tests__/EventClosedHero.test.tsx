@@ -25,7 +25,7 @@ it('should render all text fields', () => {
 it('should go to home page when clicking button', () => {
   const { router } = render(<EventClosedHero />);
 
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', {
       name: translations.event.hero.buttonToHomePage,
     })

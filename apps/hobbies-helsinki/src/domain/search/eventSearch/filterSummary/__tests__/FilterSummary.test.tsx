@@ -1,15 +1,8 @@
 import { axe } from 'jest-axe';
 import React from 'react';
 
-import {
-  act,
-  configure,
-  render,
-  screen,
-  userEvent,
-  waitFor,
-} from '@/test-utils';
-import { translations } from '@/test-utils/initI18n'
+import { configure, render, screen, userEvent, waitFor } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
 import {
   // fakeNeighborhoods,
   fakeOrganization,
@@ -132,12 +125,10 @@ it('calls onClear callback when clear button is clicked', async () => {
   await waitFor(() => {
     expect(screen.getByText(placeName)).toBeInTheDocument();
   });
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('button', {
-        name: translations.search.buttonClearFilters,
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('button', {
+      name: translations.search.buttonClearFilters,
+    })
   );
   expect(onClear).toHaveBeenCalledTimes(1);
 });

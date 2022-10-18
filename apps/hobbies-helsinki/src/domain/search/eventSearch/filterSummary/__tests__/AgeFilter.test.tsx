@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { screen, act, render } from '@/test-utils';
+import { screen, render } from '@/test-utils';
 import type { AgeFilterProps } from '../AgeFilter';
 import AgeFilter from '../AgeFilter';
 
@@ -23,7 +23,7 @@ it('calls onRemove callback when remove button is clicked', async () => {
 
   expect(screen.getByText(`Alkaen ${props.value} v`)).toBeInTheDocument();
 
-  await act(() => userEvent.click(screen.getByRole('button')));
+  await userEvent.click(screen.getByRole('button'));
 
   expect(onClickMock).toHaveBeenCalled();
   expect(onClickMock).toHaveBeenCalledWith(props.value, 'minAge');

@@ -2,7 +2,6 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AUTOSUGGEST_TYPES } from 'events-helsinki-components';
 import * as React from 'react';
-import { act } from 'react-dom/test-utils';
 
 import {
   arrowDownKeyPressHelper,
@@ -62,7 +61,7 @@ it('should close menu with esc key', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   expect(screen.getByRole('listbox')).toBeInTheDocument();
 
@@ -75,7 +74,7 @@ it('should close menu with tab key', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   expect(screen.getByRole('listbox')).toBeInTheDocument();
 
@@ -88,7 +87,7 @@ it('should allow navigation with down arrows', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   const options = screen.getAllByRole('option');
 
@@ -109,7 +108,7 @@ it('should allow navigation with up arrows', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   const options = screen.getAllByRole('option');
 
@@ -134,7 +133,7 @@ it('first item should be focused when opening menu by down arrow', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   escKeyPressHelper();
 
@@ -152,7 +151,7 @@ it('last item should be focused when opening menu by up arrow', async () => {
   renderComponent();
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   escKeyPressHelper();
 
@@ -174,7 +173,7 @@ it('should call onOptionClick by text is no option is selected', async () => {
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   enterKeyPressHelper();
 
@@ -190,7 +189,7 @@ it('should call onOptionClick by text is first option is selected', async () => 
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   arrowDownKeyPressHelper();
   enterKeyPressHelper();
@@ -207,7 +206,7 @@ it('should call onOptionClick with option if keyword is selected', async () => {
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
 
-  await act(() => userEvent.click(searchInput));
+  await userEvent.click(searchInput);
 
   arrowDownKeyPressHelper();
   arrowDownKeyPressHelper();

@@ -2,7 +2,7 @@ import { getDateRangeStr } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
-import { act, render, screen, userEvent } from '@/test-utils';
+import { render, screen, userEvent } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvent,
@@ -72,12 +72,10 @@ it('should render event name, description and location', () => {
 it('should go to event list', async () => {
   const { router } = renderComponent();
 
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('link', {
-        name: translations.event.hero.ariaLabelBackButton,
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('link', {
+      name: translations.event.hero.ariaLabelBackButton,
+    })
   );
   expect(router.pathname).toBe('/haku');
 });
@@ -157,12 +155,10 @@ it('should show buy button', async () => {
     })
   ).not.toBeInTheDocument();
 
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('button', {
-        name: new RegExp(translations.event.hero.buttonBuyTickets, 'i'),
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('button', {
+      name: new RegExp(translations.event.hero.buttonBuyTickets, 'i'),
+    })
   );
   expect(global.open).toHaveBeenCalledWith(infoUrl);
 });
@@ -185,12 +181,10 @@ it('Register button should be visible and clickable', async () => {
     screen.getByText(translations.event.hero.buttonEnrol)
   ).toBeInTheDocument();
 
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('button', {
-        name: translations.event.hero.ariaLabelEnrol,
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('button', {
+      name: translations.event.hero.ariaLabelEnrol,
+    })
   );
 
   expect(global.open).toHaveBeenCalledWith(registrationUrl);

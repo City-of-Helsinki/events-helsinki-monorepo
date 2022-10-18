@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  act,
-  render,
-  screen,
-  userEvent,
-  waitFor,
-} from '@/test-utils';
+import { render, screen, userEvent, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakePlace } from '@/test-utils/mockDataUtils';
 import { PlaceDetailsDocument } from '../../../../nextApi/graphql/generated/graphql';
@@ -54,7 +48,7 @@ it('calls onRemove callback when remove button is clicked', async () => {
 
   await screen.findByText(placeName);
 
-  await act(() => userEvent.click(screen.getByRole('button')));
+  await userEvent.click(screen.getByRole('button'));
 
   expect(onClickMock).toHaveBeenCalled();
   expect(onClickMock).toHaveBeenCalledWith(placeId, 'place');

@@ -3,14 +3,7 @@ import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
-import {
-  act,
-  actWait,
-  configure,
-  render,
-  screen,
-  userEvent,
-} from '@/test-utils';
+import { actWait, configure, render, screen, userEvent } from '@/test-utils';
 import {
   fakeKeywords,
   fakeNeighborhoods,
@@ -106,8 +99,8 @@ it('should clear all filters and search field', async () => {
     'Kirjoita hakusana, esim. ranska tai ruoanlaitto'
   );
 
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /tyhjennä hakuehdot/i }))
+  await userEvent.click(
+    screen.getByRole('button', { name: /tyhjennä hakuehdot/i })
   );
 
   expect(searchInput).toHaveValue('');
@@ -152,7 +145,7 @@ it('should change search query after checking is free checkbox', async () => {
     name: /näytä vain maksuttomat/i,
   });
 
-  await act(async () => userEvent.click(isFreeCheckbox));
+  await userEvent.click(isFreeCheckbox);
 
   expect(router).toMatchObject({
     pathname,
@@ -167,13 +160,9 @@ it('should change search query after selecting today date type and pressing subm
     name: /valitse ajankohta/i,
   });
 
-  await act(async () => userEvent.click(chooseDateButton));
-  await act(async () =>
-    userEvent.click(screen.getByRole('checkbox', { name: /tänään/i }))
-  );
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /hae/i }))
-  );
+  await userEvent.click(chooseDateButton);
+  await userEvent.click(screen.getByRole('checkbox', { name: /tänään/i }));
+  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
     query: { dateTypes: 'today', text: 'jazz' },
@@ -187,29 +176,22 @@ it('should change search query after selecting start date and pressing submit bu
   const chooseDateButton = screen.getByRole('button', {
     name: /valitse ajankohta/i,
   });
-  await act(async () => userEvent.click(chooseDateButton));
-  await act(async () =>
-    userEvent.click(
-      // The reason to use getAllByRole is that there is also mobile date selector with same text,
-      // which is hidden using css
-      screen.getAllByRole('button', { name: /valitse päivät/i })[0]
-    )
+  await userEvent.click(chooseDateButton);
+  await userEvent.click(
+    // The reason to use getAllByRole is that there is also mobile date selector with same text,
+    // which is hidden using css
+    screen.getAllByRole('button', { name: /valitse päivät/i })[0]
   );
-  await act(async () =>
-    userEvent.click(
-      screen.getAllByRole('button', { name: /valitse päivämäärä/i })[0]
-    )
+  await userEvent.click(
+    screen.getAllByRole('button', { name: /valitse päivämäärä/i })[0]
   );
-  await act(async () =>
-    userEvent.click(
-      screen.getByRole('button', {
-        name: /lokakuu 6/i,
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('button', {
+      name: /lokakuu 6/i,
+    })
   );
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /hae/i }))
-  );
+  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
+
   expect(router).toMatchObject({
     pathname,
     query: { start: '2020-10-06', text: 'jazz' },
@@ -223,14 +205,11 @@ it('should change search query after clicking category menu item', async () => {
     name: /valitse kategoria/i,
   });
 
-  await act(async () => userEvent.click(chooseCategoryButton));
-  await act(async () =>
-    userEvent.click(screen.getByRole('checkbox', { name: /elokuva ja media/i }))
+  await userEvent.click(chooseCategoryButton);
+  await userEvent.click(
+    screen.getByRole('checkbox', { name: /elokuva ja media/i })
   );
-  await act(async () =>
-    userEvent.click(screen.getByRole('button', { name: /hae/i }))
-  );
-
+  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
     asPath: `${pathname}?categories=movie_and_media&text=jazz`,
@@ -238,21 +217,16 @@ it('should change search query after clicking category menu item', async () => {
   });
 
   // multiple selection
-  await act(async () => userEvent.click(chooseCategoryButton));
-  userEvent.click(screen.getByRole('checkbox', { name: /pelit/i }));
-  await act(async () =>
-    userEvent.click(screen.getByRole('checkbox', { name: /musiikki/i }))
-  );
-  await act(() =>
-    userEvent.click(screen.getByRole('button', { name: /hae/i }))
-  );
-
+  await userEvent.click(chooseCategoryButton);
+  await userEvent.click(screen.getByRole('checkbox', { name: /pelit/i }));
+  await userEvent.click(screen.getByRole('checkbox', { name: /musiikki/i }));
+  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
     asPath: `${pathname}?categories=movie_and_media%2Cgames%2Cmusic&text=jazz`,
     query: { categories: 'movie_and_media,games,music', text: 'jazz' },
   });
-});
+}, 50_000);
 
 // TODO: SKipped since there is no divisions input at the moment, but I've heard it should be there
 it.skip('disivions dropdown has additional divisions', async () => {
@@ -261,7 +235,7 @@ it.skip('disivions dropdown has additional divisions', async () => {
   const chooseCategoryButton = screen.getByRole('button', {
     name: /etsi alue/i,
   });
-  await act(() => userEvent.click(chooseCategoryButton));
+  await userEvent.click(chooseCategoryButton);
 
   additionalDivisions.forEach((divisionName) => {
     expect(

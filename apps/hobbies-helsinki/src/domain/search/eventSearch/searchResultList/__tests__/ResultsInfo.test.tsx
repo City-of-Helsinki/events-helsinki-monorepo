@@ -3,13 +3,7 @@ import { useLocale } from 'events-helsinki-components';
 
 import * as React from 'react';
 
-import {
-  act,
-  render,
-  screen,
-  userEvent,
-  waitFor,
-} from '@/test-utils';
+import { render, screen, userEvent, waitFor } from '@/test-utils';
 import ResultsInfo from '../ResultsInfo';
 
 it('events with 0 results matches snapshot for no results', () => {
@@ -55,10 +49,8 @@ it.each<[Language, number]>([
 
     const { router } = render(<ResultsInfo resultsCount={resultsCount} />);
 
-    await act(() =>
-      userEvent.click(
-        screen.getByRole('button', { name: 'Näytä hakutulokset suomeksi' })
-      )
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Näytä hakutulokset suomeksi' })
     );
 
     await waitFor(() => {

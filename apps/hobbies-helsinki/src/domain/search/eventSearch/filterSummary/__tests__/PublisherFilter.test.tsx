@@ -1,12 +1,6 @@
 import * as React from 'react';
 
-import {
-  render,
-  waitFor,
-  act,
-  screen,
-  userEvent,
-} from '@/test-utils';
+import { render, waitFor, screen, userEvent } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeOrganization } from '@/test-utils/mockDataUtils';
 import { OrganizationDetailsDocument } from '../../../../nextApi/graphql/generated/graphql';
@@ -47,15 +41,13 @@ it('calls onRemove callback when remove button is clicked', async () => {
 
   await screen.findByText(name);
 
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('button', {
-        name: translations.common.filter.ariaButtonRemove.replace(
-          '{{filter}}',
-          name
-        ),
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('button', {
+      name: translations.common.filter.ariaButtonRemove.replace(
+        '{{filter}}',
+        name
+      ),
+    })
   );
 
   expect(onClickMock).toHaveBeenCalled();

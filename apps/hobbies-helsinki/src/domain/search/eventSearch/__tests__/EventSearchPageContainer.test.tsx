@@ -4,13 +4,7 @@ import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 import { toast } from 'react-toastify';
 
-import {
-  act,
-  render,
-  userEvent,
-  waitFor,
-  screen,
-} from '@/test-utils';
+import { render, userEvent, waitFor, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvents,
@@ -145,15 +139,13 @@ it('all the event cards should be visible and load more button should load more 
     expect(screen.getByText(event.name.fi!)).toBeInTheDocument();
   });
 
-  await act(async () =>
-    userEvent.click(
-      screen.getByRole('button', {
-        name: translations.search.buttonLoadMore.replace(
-          '{{count}}',
-          (eventsResponse.meta.count - eventsResponse.data.length).toString()
-        ),
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('button', {
+      name: translations.search.buttonLoadMore.replace(
+        '{{count}}',
+        (eventsResponse.meta.count - eventsResponse.data.length).toString()
+      ),
+    })
   );
 
   // FIXME: Test load more
@@ -184,12 +176,10 @@ it('should show toastr message when loading next event page fails', async () => 
     ).toBeInTheDocument();
   });
 
-  await act(async () =>
-    userEvent.click(
-      screen.getByRole('button', {
-        name,
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('button', {
+      name,
+    })
   );
 
   await waitFor(() => {

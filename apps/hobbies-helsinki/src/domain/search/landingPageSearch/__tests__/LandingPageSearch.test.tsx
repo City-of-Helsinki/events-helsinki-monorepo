@@ -2,14 +2,7 @@ import { advanceTo } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
-import {
-  act,
-  actWait,
-  configure,
-  render,
-  screen,
-  userEvent,
-} from '@/test-utils';
+import { configure, render, screen, userEvent } from '@/test-utils';
 import { fakeKeywords } from '@/test-utils/mockDataUtils';
 import { KeywordListDocument } from '../../../nextApi/graphql/generated/graphql';
 import LandingPageSearch from '../LandingPageSearch';
@@ -45,21 +38,17 @@ describe('Landing page', () => {
 
   it('should route to event search page after clicking submit button', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
-    await act(() =>
-      userEvent.click(screen.getByRole('button', { name: /hae/i }))
-    );
+    await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router.pathname).toBe(searchPath);
   });
 
   it('should route to event search page with correct search query after clicking submit button', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     const searchInput = screen.getByRole('textbox');
-    await act(() => userEvent.type(searchInput, searchValue));
+    await userEvent.type(searchInput, searchValue);
     // Check that auto-suggest menu is open
     expect(screen.getByText(/hakuehdotuksia/i)).toBeInTheDocument();
-    await act(() =>
-      userEvent.click(screen.getByRole('button', { name: /hae/i }))
-    );
+    await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
       asPath: `${searchPath}?text=${searchValue}`,
       pathname: searchPath,
@@ -101,11 +90,9 @@ describe('Landing page', () => {
     await userEvent.click(
       screen.getByRole('button', { name: /valitse ajankohta/i })
     );
-    await actWait();
     await userEvent.click(screen.getByRole('checkbox', { name: /tänään/i }));
-    await act(() =>
-      userEvent.click(screen.getByRole('button', { name: /hae/i }))
-    );
+    await userEvent.click(screen.getByRole('button', { name: /hae/i }));
+
     expect(router).toMatchObject({
       asPath: `${searchPath}?dateTypes=today`,
       pathname: searchPath,
@@ -116,26 +103,22 @@ describe('Landing page', () => {
   it('should route to event search page after selecting start date and pressing submit button', async () => {
     advanceTo('2020-10-04');
     const { router } = render(<LandingPageSearch />, { mocks });
-    userEvent.click(screen.getByRole('button', { name: /valitse ajankohta/i }));
-    await actWait();
+    await userEvent.click(
+      screen.getByRole('button', { name: /valitse ajankohta/i })
+    );
     await userEvent.click(
       // The reason to use getAllByRole is that there is also mobile date selector with same text,
       // which is hidden using css
       screen.getAllByRole('button', { name: /valitse päivät/i })[0]
     );
-    await actWait();
-    await act(() =>
-      userEvent.type(
-        screen.getByRole('textbox', {
-          name: /alkamispäivä/i,
-        }),
-        '06.10.2020'
-      )
+    await userEvent.type(
+      screen.getByRole('textbox', {
+        name: /alkamispäivä/i,
+      }),
+      '06.10.2020'
     );
     expect(router.pathname).toBe('/'); // TODO: remove
-    await act(() =>
-      userEvent.click(screen.getByRole('button', { name: /hae/i }))
-    );
+    await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
       asPath: `${searchPath}?start=2020-10-06`,
       pathname: searchPath,

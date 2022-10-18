@@ -4,7 +4,7 @@ import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
-import { act, render, screen } from '@/test-utils';
+import { render, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeKeywords } from '@/test-utils/mockDataUtils';
 import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
@@ -58,15 +58,13 @@ describe('event card', () => {
     advanceTo('2020-10-05');
     const { router } = renderComponent();
     expect(router.pathname).toStrictEqual('/');
-    await act(() =>
-      userEvent.click(
-        screen.getByRole('link', {
-          name: translations.event.eventCard.ariaLabelLink.replace(
-            '{{name}}',
-            event.name.fi as string
-          ),
-        })
-      )
+    await userEvent.click(
+      screen.getByRole('link', {
+        name: translations.event.eventCard.ariaLabelLink.replace(
+          '{{name}}',
+          event.name.fi as string
+        ),
+      })
     );
     expect(router.pathname).toStrictEqual('/kurssit/123');
   });
@@ -74,15 +72,13 @@ describe('event card', () => {
   it('should go to event page by clicking button', async () => {
     const { router } = renderComponent();
     expect(router.pathname).toStrictEqual('/');
-    await act(() =>
-      userEvent.click(
-        screen.getByRole('button', {
-          name: translations.event.eventCard.ariaLabelLink.replace(
-            '{{name}}',
-            event.name.fi as string
-          ),
-        })
-      )
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: translations.event.eventCard.ariaLabelLink.replace(
+          '{{name}}',
+          event.name.fi as string
+        ),
+      })
     );
     expect(router.pathname).toStrictEqual('/kurssit/123');
   });

@@ -26,7 +26,13 @@
     "generate:graphql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen -r dotenv/config --config codegen.yml",
     "test:browser": "testcafe \"chrome --window-size='1249,720'\" browser-tests/ --live --dev",
     "test:browser:wsl2win": "testcafe 'path:`/mnt/c/Program Files/Google/Chrome/Application/chrome.exe`' browser-tests/ --live --dev",
-    "test:browser:ci": "testcafe \"chrome:headless --disable-gpu --window-size='1249,720'\" --screenshots path=report takeOnFails=true --video report browser-tests/"
+    "test:browser:ci": "testcafe \"chrome:headless --disable-gpu --window-size='1249,720'\" --screenshots path=report takeOnFails=true --video report browser-tests/",
+    "docker:prune-cache": "docker buildx prune",
+    "docker:install": "docker buildx bake -f docker-compose.hobbies.yml --progress=tty deps",
+    "docker:develop": "cross-env DOCKER_BUILDKIT=1 docker-compose -f ./docker-compose.yml up",
+    "docker:develop:reinstall": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --progress=tty --no-cache --force-rm develop",
+    "docker:build": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --progress=tty runner",
+    "docker:serve": "docker-compose -f docker-compose.yml --env-file .env up runner"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -27,7 +27,7 @@ services:
       - nm_hobbies-helsinki:/app/node_modules
 
   # Convenience production "deps" stage service for debugging
-  # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress=tty deps
+  # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress: tty deps
   deps:
     container_name: hobbies-helsinki-multistage-deps
     profiles:
@@ -39,6 +39,8 @@ services:
       target: deps
       args:
         PROJECT: hobbies-helsinki
+    env_file:
+      - apps/hobbies-helsinki/.env.local
   # Convenience production "builder" stage service for debugging
   # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress=tty runner
   builder:
@@ -51,7 +53,21 @@ services:
       dockerfile: Dockerfile
       target: builder
       args:
+        APP_PORT: 3000
         PROJECT: hobbies-helsinki
+        NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: ${NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT}
+        NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: ${NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT}
+        NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: ${NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT}
+        NEXT_PUBLIC_APP_ORIGIN: ${NEXT_PUBLIC_APP_ORIGIN}
+        NEXT_PUBLIC_MATOMO_SITE_ID: ${NEXT_PUBLIC_MATOMO_SITE_ID}
+        NEXT_PUBLIC_MATOMO_ENABLED: ${NEXT_PUBLIC_MATOMO_ENABLED}
+        NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: ${NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS}
+        NEXT_PUBLIC_SENTRY_ENVIRONMENT: ${NEXT_PUBLIC_SENTRY_ENVIRONMENT}
+        NEXT_PUBLIC_SENTRY_DSN: ${NEXT_PUBLIC_SENTRY_DSN}
+        NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE: ${NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE}
+        SENTRY_AUTH_TOKEN: ${SENTRY_AUTH_TOKEN}
+        NEXT_PUBLIC_DEBUG: ${NEXT_PUBLIC_DEBUG}
+        NEXTJS_DISABLE_SENTRY: 1
     env_file:
       - apps/hobbies-helsinki/.env.local
   # Convenience production "runner" stage service for debugging

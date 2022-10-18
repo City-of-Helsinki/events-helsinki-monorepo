@@ -77,6 +77,7 @@ FROM helsinkitest/node:16-slim  AS builder
 ENV NODE_ENV=production
 ENV NEXTJS_IGNORE_ESLINT=1
 ENV NEXTJS_IGNORE_TYPECHECK=0
+ENV NEXTJS_DISABLE_SENTRY=1
 ARG NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT
 ARG NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT
 ARG NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT
@@ -103,7 +104,7 @@ COPY . .
 COPY --from=deps /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN yarn workspace $PROJECT share-static-hardlink && yarn workspace $PROJECT build
+RUN yarn workspace $PROJECT share-static-hardlink && yarn workspace $NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT build
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
@@ -111,6 +112,8 @@ RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
     SKIP_POSTINSTALL=1 \
     YARN_CACHE_FOLDER=/root/.yarn3-cache \
     yarn workspaces focus $PROJECT --production
+
+CMD ["sh", "-c", "echo ${NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT}"]
 
 ###################################################################
 # Stage 3: Extract a minimal image from the build                 #
@@ -153,8 +156,7 @@ EXPOSE $PORT
 
 ENV PROD_START "./node_modules/.bin/next start apps/$PROJECT/ -p ${PORT}"
 
-CMD ["sh", "-c", "${PROD_START}"]
-
+CMD ["sh", "-c", "echo ${NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT}"]
 ###################################################################
 # Optional: develop locally                                       #
 ###################################################################

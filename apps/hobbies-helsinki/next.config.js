@@ -14,6 +14,9 @@ const trueEnv = ['true', '1', 'yes'];
 // const isProd = process.env.NODE_ENV === 'production';
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 
+// eslint-disable-next-line no-console
+console.log('process.env',process.env);
+
 const NEXTJS_IGNORE_ESLINT = trueEnv.includes(
   process.env?.NEXTJS_IGNORE_ESLINT ?? 'false'
 );
@@ -32,7 +35,6 @@ const NEXTJS_SENTRY_DEBUG = trueEnv.includes(
 const NEXTJS_SENTRY_TRACING = trueEnv.includes(
   process.env?.NEXTJS_SENTRY_TRACING ?? 'false'
 );
-
 
 /**
  * A way to allow CI optimization when the build done there is not used
@@ -165,7 +167,7 @@ const nextConfig = {
     domains: [
       new URL(
         process.env.NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT ??
-          'harrastus.content.api.hel.fi'
+          'https://harrastus.hkih.stage.geniem.io/graphql'
       ).origin,
     ],
   },

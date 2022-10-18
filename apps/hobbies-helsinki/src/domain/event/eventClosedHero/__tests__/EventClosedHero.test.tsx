@@ -8,12 +8,12 @@ it('should render all text fields', () => {
   render(<EventClosedHero />);
 
   expect(
-    screen.queryByRole('heading', {
+    screen.getByRole('heading', {
       name: translations.event.hero.titleEventClosed,
     })
   ).toBeInTheDocument();
   expect(
-    screen.queryByText(translations.event.hero.textEventClosed)
+    screen.getByText(translations.event.hero.textEventClosed)
   ).toBeInTheDocument();
   expect(
     screen.getByRole('button', {

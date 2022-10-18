@@ -54,7 +54,7 @@ it('should render event content fields', () => {
     { role: 'heading', name: translations.event.location.title },
   ];
   itemsByRole.forEach(({ role, name }) => {
-    expect(screen.queryByRole(role, { name })).toBeInTheDocument();
+    expect(screen.getByRole(role, { name })).toBeInTheDocument();
   });
 
   // there is two kartta-links, thus we check that three is at least one match of each
@@ -71,7 +71,7 @@ it('should render event content fields', () => {
   ];
 
   itemsByText.forEach((item) => {
-    expect(screen.queryByText(item)).toBeInTheDocument();
+    expect(screen.getByText(item)).toBeInTheDocument();
   });
 
   // TODO: fix: ssr name does not exist anymore

@@ -7,7 +7,7 @@ const renderComponent = (props) => render(<FacebookShareLink {...props} />);
 
 it('should apply aria label', () => {
   const sharedLink = 'https://helsinki.fi/some/';
-  const { getByLabelText } = renderComponent({ sharedLink });
+  renderComponent({ sharedLink });
 
-  expect(getByLabelText(/Jaa Facebookissa/)).toBeInTheDocument();
+  expect(screen.getByLabelText(/Jaa Facebookissa/)).toBeInTheDocument();
 });

@@ -64,7 +64,7 @@ it('should close menu with esc key', async () => {
 
   await act(() => userEvent.click(searchInput));
 
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
 
   escKeyPressHelper();
 
@@ -77,7 +77,7 @@ it('should close menu with tab key', async () => {
 
   await act(() => userEvent.click(searchInput));
 
-  expect(screen.queryByRole('listbox')).toBeInTheDocument();
+  expect(screen.getByRole('listbox')).toBeInTheDocument();
 
   tabKeyPressHelper();
 
@@ -85,8 +85,8 @@ it('should close menu with tab key', async () => {
 });
 
 it('should allow navigation with down arrows', async () => {
-  const { getByPlaceholderText } = renderComponent();
-  const searchInput = getByPlaceholderText(placeholder);
+  renderComponent();
+  const searchInput = screen.getByPlaceholderText(placeholder);
 
   await act(() => userEvent.click(searchInput));
 
@@ -106,8 +106,8 @@ it('should allow navigation with down arrows', async () => {
 });
 
 it('should allow navigation with up arrows', async () => {
-  const { getByPlaceholderText } = renderComponent();
-  const searchInput = getByPlaceholderText(placeholder);
+  renderComponent();
+  const searchInput = screen.getByPlaceholderText(placeholder);
 
   await act(() => userEvent.click(searchInput));
 

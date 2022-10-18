@@ -62,12 +62,10 @@ const renderComponent = (props?: Partial<EventHeroProps>) => {
 it('should render event name, description and location', () => {
   renderComponent();
 
-  expect(screen.queryByRole('heading', { name })).toBeInTheDocument();
-  expect(screen.queryByText(shortDescription)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name })).toBeInTheDocument();
+  expect(screen.getByText(shortDescription)).toBeInTheDocument();
   expect(
-    screen.queryByText(
-      [locationName, streetAddress, addressLocality].join(', ')
-    )
+    screen.getByText([locationName, streetAddress, addressLocality].join(', '))
   ).toBeInTheDocument();
 });
 
@@ -88,7 +86,7 @@ it('should render keywords', () => {
   renderComponent();
 
   keywordNames.forEach((keyword) => {
-    expect(screen.queryByText(capitalize(keyword))).toBeInTheDocument();
+    expect(screen.getByText(capitalize(keyword))).toBeInTheDocument();
   });
 });
 
@@ -97,7 +95,7 @@ it('should render today tag', () => {
   renderComponent();
 
   expect(
-    screen.queryByRole('link', {
+    screen.getByRole('link', {
       name: translations.event.categories.labelToday,
     })
   ).toBeInTheDocument();
@@ -118,7 +116,7 @@ it('should render this week tag', () => {
     })
   ).not.toBeInTheDocument();
   expect(
-    screen.queryByRole('link', {
+    screen.getByRole('link', {
       name: translations.event.categories.labelThisWeek,
     })
   ).toBeInTheDocument();
@@ -184,7 +182,7 @@ it('Register button should be visible and clickable', async () => {
   render(<EventHero event={mockEvent} />);
 
   expect(
-    screen.queryByText(translations.event.hero.buttonEnrol)
+    screen.getByText(translations.event.hero.buttonEnrol)
   ).toBeInTheDocument();
 
   await act(() =>

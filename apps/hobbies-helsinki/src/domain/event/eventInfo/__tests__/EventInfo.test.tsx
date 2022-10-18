@@ -98,7 +98,7 @@ it('should render event info fields', async () => {
   ];
 
   itemsByText.forEach((item) => {
-    expect(screen.queryByText(item)).toBeInTheDocument();
+    expect(screen.getByText(item)).toBeInTheDocument();
   });
 });
 
@@ -110,7 +110,7 @@ it('should hide the organizer section when the organizer name is not given', asy
   render(<EventInfo event={mockEvent} />, { mocks });
   await actWait();
   expect(
-    screen.queryByRole('heading', {
+    screen.getByRole('heading', {
       name: translations.event.info.labelPublisher,
     })
   ).toBeInTheDocument();
@@ -257,7 +257,7 @@ it('should hide audience age info on single event page', async () => {
   });
 
   await waitFor(() => {
-    expect(screen.queryByText(/5-15 -vuotiaat/i)).toBeInTheDocument();
+    expect(screen.getByText(/5-15 -vuotiaat/i)).toBeInTheDocument();
   });
 });
 
@@ -267,7 +267,7 @@ it('should show formatted audience age info on signle event page if max age is n
   });
 
   await waitFor(() => {
-    expect(screen.queryByText(/5\+ -vuotiaat/i)).toBeInTheDocument();
+    expect(screen.getByText(/5\+ -vuotiaat/i)).toBeInTheDocument();
   });
 });
 
@@ -314,7 +314,7 @@ describe('superEvent', () => {
     );
     await actWait();
     expect(
-      screen.queryByRole('heading', {
+      screen.getByRole('heading', {
         name: translations.event.superEvent.title,
       })
     ).toBeInTheDocument();

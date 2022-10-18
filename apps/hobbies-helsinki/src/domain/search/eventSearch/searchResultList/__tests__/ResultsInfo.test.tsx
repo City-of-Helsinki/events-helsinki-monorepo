@@ -22,7 +22,7 @@ it('renders no events found text', async () => {
   render(<ResultsInfo resultsCount={0} />);
 
   expect(
-    screen.queryByText(
+    screen.getByText(
       'Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta'
     )
   ).toBeInTheDocument();
@@ -69,7 +69,6 @@ it.each<[Language, number]>([
 
 // eslint-disable-next-line max-len
 it('renders does not render language change button under eventss search results when current language is Finnish', () => {
-
   // @ts-ignore
   jest.spyOn(useLocale, 'default').mockReturnValue('fi');
 

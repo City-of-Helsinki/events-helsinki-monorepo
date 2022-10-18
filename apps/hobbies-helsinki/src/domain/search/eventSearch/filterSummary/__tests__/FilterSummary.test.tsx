@@ -117,7 +117,7 @@ it('test for accessibility violations', async () => {
     routes,
   });
   await waitFor(() => {
-    expect(screen.queryByText(placeName)).toBeInTheDocument();
+    expect(screen.getByText(placeName)).toBeInTheDocument();
   });
   const results = await axe(container);
   expect(results).toHaveNoViolations();
@@ -130,7 +130,7 @@ it('calls onClear callback when clear button is clicked', async () => {
     routes,
   });
   await waitFor(() => {
-    expect(screen.queryByText(placeName)).toBeInTheDocument();
+    expect(screen.getByText(placeName)).toBeInTheDocument();
   });
   await act(() =>
     userEvent.click(

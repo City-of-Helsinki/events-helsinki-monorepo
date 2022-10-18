@@ -8,6 +8,7 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import * as Sentry from '@sentry/browser';
+import fetch from 'cross-fetch';
 import {
   excludeArgs,
   initializeApolloClient,
@@ -15,7 +16,6 @@ import {
   MutableReference,
 } from 'events-helsinki-components';
 import { useMemo } from 'react';
-
 import { rewriteInternalURLs } from '../../utils/routerUtils';
 import AppConfig from '../app/AppConfig';
 
@@ -35,6 +35,7 @@ export function createEventsApolloClient() {
   });
   const httpLink = new HttpLink({
     uri: AppConfig.eventsGraphqlEndpoint,
+    fetch,
   });
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {

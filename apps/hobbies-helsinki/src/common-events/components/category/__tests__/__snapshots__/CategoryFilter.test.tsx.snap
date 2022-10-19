@@ -2,7 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  class=""
+  class="categoryFilter"
 >
   <a
     aria-label="text"

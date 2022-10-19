@@ -18,7 +18,6 @@ it('matches snapshot', () => {
       value={category.value}
     />
   );
-
   expect(container.firstChild).toMatchSnapshot();
 });
 

@@ -150,3 +150,5 @@ export function useEventsApolloClient(
     [initialState]
   );
 }
+
+export const apolloClient = createEventsApolloClient();

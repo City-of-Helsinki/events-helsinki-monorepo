@@ -1,4 +1,5 @@
-import { getLocalizedCmsItemUrl, stringifyUrlObject } from '../routerUtils';
+import { getLocalizedCmsItemUrl } from '../routerUtils';
+import stringifyUrlObject from '../stringifyUrlObject';
 
 describe('i18n router utils', () => {
   describe('stringifyUrlObject', () => {

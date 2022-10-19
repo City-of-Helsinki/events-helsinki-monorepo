@@ -1,5 +1,5 @@
-import App from '../pages/index';
-import { screen, render } from './testUtils';
+import { screen, render } from '@/test-utils';
+import App from '../../src/pages/index';
 
 describe('App', () => {
   it.skip('renders without crashing', () => {

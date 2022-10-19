@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { translations } from '../../../../tests/initI18n';
-import { fakeEvent, fakeImage } from '../../../../tests/mockDataUtils';
-import { configure, render, screen } from '../../../../tests/testUtils';
+import { configure, render, screen } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakeEvent, fakeImage } from '@/test-utils/mockDataUtils';
 import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventContent from '../EventContent';
 

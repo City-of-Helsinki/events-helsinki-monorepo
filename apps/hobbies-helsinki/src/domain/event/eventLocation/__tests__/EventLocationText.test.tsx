@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import * as React from 'react';
 
-import { fakeEvent, fakePlace } from '../../../../tests/mockDataUtils';
+import { fakeEvent, fakePlace } from '@/test-utils/mockDataUtils';
 import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventLocationText from '../EventLocationText';
 

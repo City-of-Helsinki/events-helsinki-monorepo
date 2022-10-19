@@ -3,12 +3,7 @@ import FileSaver from 'file-saver';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
-import type { EventFields, SuperEventResponse } from 'domain/event/types';
-import type { EventDetails } from '../../../../domain/nextApi/graphql/generated/graphql';
-import { translations } from '../../../../tests/initI18n';
-import { fakeEvent } from '../../../../tests/mockDataUtils';
 import {
-  act,
   actWait,
   configure,
   render,
@@ -16,7 +11,11 @@ import {
   userEvent,
   waitFor,
   within,
-} from '../../../../tests/testUtils';
+} from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakeEvent } from '@/test-utils/mockDataUtils';
+import type { EventFields, SuperEventResponse } from 'domain/event/types';
+import type { EventDetails } from '../../../../domain/nextApi/graphql/generated/graphql';
 import EventInfo from '../EventInfo';
 import { subEventsListTestId, superEventTestId } from '../EventsHierarchy';
 import {
@@ -204,7 +203,7 @@ it('should open ticket buy page', async () => {
   render(<EventInfo event={event} />, { mocks });
 
   // Event info fields
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', {
       name: translations.event.info.ariaLabelBuyTickets,
     })
@@ -220,12 +219,10 @@ it.skip('should create ics file succesfully', async () => {
   render(<EventInfo event={event} />, { mocks });
 
   // Event info fields
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('button', {
-        name: translations.event.info.buttonAddToCalendar,
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('button', {
+      name: translations.event.info.buttonAddToCalendar,
+    })
   );
 
   await waitFor(() => {
@@ -240,7 +237,7 @@ it.skip('should create ics file succesfully when end time is not defined', async
   });
 
   // Event info fields
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', {
       name: translations.event.info.buttonAddToCalendar,
     })
@@ -319,12 +316,10 @@ describe('superEvent', () => {
       })
     ).toBeInTheDocument();
 
-    await act(() =>
-      userEvent.click(
-        within(screen.getByTestId(superEventTestId)).getByText(
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          superEvent.name.fi!
-        )
+    await userEvent.click(
+      within(screen.getByTestId(superEventTestId)).getByText(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        superEvent.name.fi!
       )
     );
     expect(router.pathname).toBe(`/kurssit/${superEvent.id}`);
@@ -367,10 +362,8 @@ describe('subEvents', () => {
     const subEvent = subEventsResponse.data[0];
     const dateStr = getDateRangeStr(getDateRangeStrProps(subEvent));
 
-    await act(() =>
-      userEvent.click(
-        within(eventsList).getByText(`${subEvent.name.fi} ${dateStr}`)
-      )
+    await userEvent.click(
+      within(eventsList).getByText(`${subEvent.name.fi} ${dateStr}`)
     );
     expect(router.pathname).toBe(`/kurssit/${subEvent.id}`);
   });
@@ -462,7 +455,7 @@ describe('subEvents', () => {
       name: translations.event.relatedEvents.buttonShow,
     });
 
-    await act(() => userEvent.click(toggleButton));
+    await userEvent.click(toggleButton);
 
     await actWait();
 

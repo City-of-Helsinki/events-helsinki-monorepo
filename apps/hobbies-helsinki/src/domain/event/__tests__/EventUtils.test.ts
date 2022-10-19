@@ -6,7 +6,7 @@ import {
   fakeKeyword,
   fakeKeywords,
   fakePlace,
-} from '../../../tests/mockDataUtils';
+} from '@/test-utils/mockDataUtils';
 import type {
   EventFieldsFragment,
   PlaceFieldsFragment,

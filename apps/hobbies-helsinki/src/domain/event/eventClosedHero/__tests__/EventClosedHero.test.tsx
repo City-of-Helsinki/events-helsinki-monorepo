@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { translations } from '../../../../tests/initI18n';
-import { render, screen, userEvent } from '../../../../tests/testUtils';
+import { render, screen, userEvent } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
 import EventClosedHero from '../EventClosedHero';
 
 it('should render all text fields', () => {
@@ -22,13 +22,13 @@ it('should render all text fields', () => {
   ).toBeInTheDocument();
 });
 
-it('should go to home page when clicking button', () => {
+it('should go to home page when clicking button', async () => {
   const { router } = render(<EventClosedHero />);
 
-  userEvent.click(
+  await userEvent.click(
     screen.getByRole('button', {
       name: translations.event.hero.buttonToHomePage,
     })
   );
-  expect(router.pathname).toBe('');
+  expect(router.pathname).toBe('/');
 });

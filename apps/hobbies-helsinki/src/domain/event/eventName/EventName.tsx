@@ -1,5 +1,4 @@
-import { useLocale } from 'events-helsinki-components';
-import { useTranslation } from 'next-i18next';
+import { useEventTranslation, useLocale } from 'events-helsinki-components';
 import React from 'react';
 
 import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
@@ -11,16 +10,15 @@ interface Props {
 }
 
 const EventName: React.FC<Props> = ({ event }) => {
-  const { t } = useTranslation('event');
+  const { t } = useEventTranslation();
   const locale = useLocale();
   const { name } = getEventFields(event, locale);
   const isCancelled = isEventCancelled(event);
-
   return (
     <>
       {isCancelled && (
         <span className={styles.eventCancelled}>
-          {t('eventCancelled')}
+          {t('event:eventCancelled')}
           {': '}
         </span>
       )}

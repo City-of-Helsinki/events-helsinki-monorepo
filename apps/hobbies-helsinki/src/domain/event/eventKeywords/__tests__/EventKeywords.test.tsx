@@ -2,13 +2,9 @@ import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
 
-import { translations } from '../../../../tests/initI18n';
-import {
-  fakeEvent,
-  fakeKeyword,
-  fakeOffer,
-} from '../../../../tests/mockDataUtils';
-import { act, render, screen, userEvent } from '../../../../tests/testUtils';
+import { render, screen, userEvent } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakeEvent, fakeKeyword, fakeOffer } from '@/test-utils/mockDataUtils';
 import type {
   EventFieldsFragment,
   OfferFieldsFragment,
@@ -44,10 +40,8 @@ it('should render keywords and handle click', async () => {
     ).toBeInTheDocument();
   });
 
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('link', { name: new RegExp(keywordNames[0], 'i') })
-    )
+  await userEvent.click(
+    screen.getByRole('link', { name: new RegExp(keywordNames[0], 'i') })
   );
   expect(router).toMatchObject({
     asPath: `/haku?text=${encodeURIComponent(capitalize(keywordNames[0]))}`,
@@ -73,12 +67,10 @@ it('should render today tag and handle click', async () => {
   const { router } = render(
     <EventKeywords event={event} showIsFree={true} showKeywords={false} />
   );
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('link', {
-        name: translations.event.categories.labelToday,
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('link', {
+      name: translations.event.categories.labelToday,
+    })
   );
   expect(router).toMatchObject({
     asPath: '/haku?dateTypes=today',
@@ -92,12 +84,10 @@ it('should render this week tag and handle click', async () => {
   const { router } = render(
     <EventKeywords event={event} showIsFree={true} showKeywords={false} />
   );
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('link', {
-        name: translations.event.categories.labelThisWeek,
-      })
-    )
+  await userEvent.click(
+    screen.getByRole('link', {
+      name: translations.event.categories.labelThisWeek,
+    })
   );
   expect(router).toMatchObject({
     asPath: '/haku?dateTypes=this_week',

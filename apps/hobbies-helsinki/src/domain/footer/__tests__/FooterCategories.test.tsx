@@ -1,7 +1,7 @@
-import i18n from 'i18next';
+import { initTestI18n as i18n } from 'events-helsinki-common-i18n';
 import React from 'react';
 
-import { screen, render, userEvent, act } from '../../../tests/testUtils';
+import { screen, render, userEvent } from '@/test-utils';
 import FooterCategories from '../FooterCategories';
 
 beforeEach(() => {
@@ -18,9 +18,7 @@ beforeEach(() => {
 it('should route to event search page by clicking category', async () => {
   const { router } = render(<FooterCategories />);
 
-  await act(() =>
-    userEvent.click(screen.getByRole('link', { name: /musiikki/i }))
-  );
+  await userEvent.click(screen.getByRole('link', { name: /musiikki/i }));
 
   expect(router.pathname).toMatchSnapshot();
 });

@@ -1,17 +1,17 @@
 import type { FetchResult, GraphQLRequest } from '@apollo/client';
 import type { MockedResponse } from '@apollo/client/testing';
 
-import AppConfig from '../../domain/app/AppConfig';
-import type { EventType } from '../../domain/event/types';
+import AppConfig from '../../../src/domain/app/AppConfig';
+import type { EventType } from '../../../src/domain/event/types';
 import type {
   EventListQueryVariables,
   EventListResponse,
   QueryEventListArgs,
-} from '../../domain/nextApi/graphql/generated/graphql';
+} from '../../../src/domain/nextApi/graphql/generated/graphql';
 import {
   EventListDocument,
   EventTypeId,
-} from '../../domain/nextApi/graphql/generated/graphql';
+} from '../../../src/domain/nextApi/graphql/generated/graphql';
 
 export const baseVariables = {
   audienceMinAgeLt: '',

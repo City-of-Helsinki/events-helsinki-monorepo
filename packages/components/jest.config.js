@@ -37,7 +37,7 @@ const config = {
   moduleNameMapper: {
     // For @testing-library/react
     '^@/test-utils$': '<rootDir>/../config/tests/test-utils',
-    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
+    '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
     // Handle image imports
     // https://jestjs.io/docs/webpack#handling-static-assets
     '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/../.jest/__mocks__/fileMock.js`,

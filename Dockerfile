@@ -14,11 +14,14 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-ARG NODE_VERSION=16
-ARG ALPINE_VERSION=3.15
+# Build ARGS
+ARG PROJECT
+ARG APP_PORT
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS deps
-RUN apk add --no-cache rsync
+FROM helsinkitest/node:16-slim AS deps
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends rsync
 
 WORKDIR /workspace-install
 
@@ -32,19 +35,20 @@ COPY .yarn/ ./.yarn/
 # Files are copied with rsync:
 #
 #   - All package.json present in the host (root, apps/*, packages/*)
-#   - All schema.prisma (cause prisma will generate a schema on postinstall)
 #
 RUN --mount=type=bind,target=/docker-context \
     rsync -amv --delete \
           --exclude='node_modules' \
           --exclude='*/node_modules' \
           --include='package.json' \
-          --include='schema.prisma' \
           --include='*/' --exclude='*' \
           /docker-context/ /workspace-install/;
 
-# @see https://www.prisma.io/docs/reference/api-reference/environment-variables-reference#cli-binary-targets
-ENV PRISMA_CLI_BINARY_TARGETS=linux-musl
+# remove rsync and apt cache
+RUN apt-get remove -y rsync && \
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/cache/apt/archives
 
 #
 # To speed up installations, we override the default yarn cache folder
@@ -69,10 +73,30 @@ RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
 # Stage 2: Build the app                                          #
 ###################################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS builder
+FROM helsinkitest/node:16-slim  AS builder
 ENV NODE_ENV=production
 ENV NEXTJS_IGNORE_ESLINT=1
 ENV NEXTJS_IGNORE_TYPECHECK=0
+ENV NEXTJS_DISABLE_SENTRY=1
+ARG NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT
+ARG NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT
+ARG NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT
+ARG NEXT_PUBLIC_APP_ORIGIN
+ARG NEXT_PUBLIC_MATOMO_URL_BASE
+ARG NEXT_PUBLIC_MATOMO_SITE_ID
+ARG NEXT_PUBLIC_MATOMO_SRC_URL
+ARG NEXT_PUBLIC_MATOMO_TRACKER_URL
+ARG NEXT_PUBLIC_MATOMO_ENABLED
+ARG NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS
+
+ARG NEXT_PUBLIC_SENTRY_ENVIRONMENT
+ARG NEXT_PUBLIC_SENTRY_DSN
+ARG NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE
+ARG SENTRY_AUTH_TOKEN
+ARG NEXT_PUBLIC_DEBUG
+
+# Build ARGS
+ARG PROJECT
 
 WORKDIR /app
 
@@ -80,59 +104,83 @@ COPY . .
 COPY --from=deps /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN yarn workspace nextjs-app share-static-hardlink && yarn workspace nextjs-app build
+RUN yarn workspace $PROJECT share-static-hardlink && yarn workspace $NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT build
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
 RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
     SKIP_POSTINSTALL=1 \
     YARN_CACHE_FOLDER=/root/.yarn3-cache \
-    yarn workspaces focus nextjs-app --production
+    yarn workspaces focus $PROJECT --production
+
+CMD ["sh", "-c", "echo ${NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT}"]
 
 ###################################################################
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
+FROM helsinkitest/node:16-slim  AS runner
+
+# Build ARGS
+ARG PROJECT
+ARG APP_PORT
+ARG NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT
 
 WORKDIR /app
 
+ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/apps/nextjs-app/next.config.js \
-                    /app/apps/nextjs-app/next-i18next.config.js \
-                    /app/apps/nextjs-app/package.json \
-                    ./apps/nextjs-app/
-COPY --from=builder /app/apps/nextjs-app/public ./apps/nextjs-app/public
-COPY --from=builder --chown=nextjs:nodejs /app/apps/nextjs-app/.next ./apps/nextjs-app/.next
+COPY --from=builder /app/apps/$PROJECT/next.config.js \
+                    /app/apps/$PROJECT/i18nRoutes.config.js \
+                    /app/apps/$PROJECT/next-i18next.config.js \
+                    /app/apps/$PROJECT/package.json \
+                    ./apps/$PROJECT/
+COPY --from=builder /app/apps/$PROJECT/public ./apps/$PROJECT/public
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
+COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/static $PROJECT/.next/static
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
 USER nextjs
 
-EXPOSE ${NEXTJS_APP_PORT:-3000}
-
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["./node_modules/.bin/next", "start", "apps/nextjs-app/", "-p", "${NEXTJS_APP_PORT:-3000}"]
+ENV PORT ${APP_PORT:-3000}
+# Expose port
+EXPOSE $PORT
 
+ENV PROD_START "./node_modules/.bin/next start apps/$PROJECT/ -p ${PORT}"
 
+CMD ["sh", "-c", "echo ${NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT}"]
 ###################################################################
 # Optional: develop locally                                       #
 ###################################################################
 
-FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS develop
+FROM helsinkitest/node:16-slim  AS develop
+
+# Build ARGS
+ARG PROJECT
+ARG APP_PORT
+
 ENV NODE_ENV=development
 
 WORKDIR /app
 
 COPY --from=deps /workspace-install ./
 
-EXPOSE ${NEXTJS_APP_PORT:-3000}
+ENV PORT ${APP_PORT:-3000}
 
-WORKDIR /app/apps/nextjs-app
+# Expose port
+EXPOSE $PORT
 
-CMD ["yarn", "dev", "-p", "${NEXTJS_APP_PORT:-3000}"]
+ENV DEV_START "yarn dev -p ${PORT}"
+
+WORKDIR /app/apps/$PROJECT
+
+CMD ["sh", "-c", "${DEV_START}"]
 

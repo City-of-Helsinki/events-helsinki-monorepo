@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, screen } from '../../../../../tests/testUtils';
+import { render, screen } from '@/test-utils';
 import SearchResultsContainer from '../SearchResultsContainer';
 
 it.each<[number, string]>([

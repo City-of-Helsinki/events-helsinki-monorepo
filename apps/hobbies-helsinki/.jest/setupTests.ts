@@ -4,7 +4,7 @@ import { TextEncoder, TextDecoder } from 'util';
 
 import { loadEnvConfig } from '@next/env';
 // import { server } from "./tests/mocks/server";
-import './tests/initI18n';
+import '../config/jest/initI18n';
 import { toHaveNoViolations } from 'jest-axe';
 
 // Raise the default timeout from 5000

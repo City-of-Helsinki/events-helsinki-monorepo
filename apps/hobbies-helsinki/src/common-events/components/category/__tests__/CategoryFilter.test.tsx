@@ -1,7 +1,7 @@
 import { IconHome } from 'hds-react';
 import React from 'react';
 
-import { render, screen, userEvent } from '../../../../tests/testUtils';
+import { render, screen, userEvent } from '@/test-utils';
 import CategoryFilter from '../CategoryFilter';
 
 const category = {
@@ -18,7 +18,6 @@ it('matches snapshot', () => {
       value={category.value}
     />
   );
-
   expect(container.firstChild).toMatchSnapshot();
 });
 

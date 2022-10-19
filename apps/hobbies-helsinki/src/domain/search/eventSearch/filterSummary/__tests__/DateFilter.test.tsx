@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { screen, act, render } from '../../../../../tests/testUtils';
+import { screen, render } from '@/test-utils';
 import type { DateFilterProps } from '../DateFilter';
 import DateFilter from '../DateFilter';
 
@@ -28,7 +28,7 @@ it('calls onRemove callback when remove button is clicked', async () => {
 
   expect(screen.getByText(props.text as string)).toBeInTheDocument();
 
-  await act(() => userEvent.click(screen.getByRole('button')));
+  await userEvent.click(screen.getByRole('button'));
 
   expect(onClickMock).toHaveBeenCalled();
   expect(onClickMock).toHaveBeenCalledWith(props.value, props.type);

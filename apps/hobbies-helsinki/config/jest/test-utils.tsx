@@ -8,7 +8,7 @@ import type { ReactElement } from 'react';
 import React from 'react';
 import wait from 'waait';
 
-import { createEventsApolloCache } from '../domain/clients/eventsApolloClient';
+import { createEventsApolloCache } from '../../src/domain/clients/eventsApolloClient';
 import TestProviders from './TestProviders';
 
 type CustomRender = {
@@ -66,6 +66,7 @@ const customRender: CustomRender = (
   };
 };
 
+// eslint-disable-next-line testing-library/no-unnecessary-act
 const actWait = (amount?: number): Promise<void> => act(() => wait(amount));
 
 // eslint-disable-next-line import/export

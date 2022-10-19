@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { act, render, screen } from '../../../../../tests/testUtils';
+import { render, screen } from '@/test-utils';
 import TextFilter from '../TextFilter';
 
 const props = {
@@ -21,7 +21,7 @@ it('calls onRemove callback when remove button is clicked', async () => {
 
   expect(screen.getByText(`${props.text}`)).toBeInTheDocument();
 
-  await act(() => userEvent.click(screen.getByRole('button')));
+  await userEvent.click(screen.getByRole('button'));
 
   expect(onClickMock).toHaveBeenCalled();
   expect(onClickMock).toHaveBeenCalledWith(props.text, 'text');

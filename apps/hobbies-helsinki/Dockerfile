@@ -5,6 +5,9 @@ FROM helsinkitest/node:14-slim as appbase
 # Use non-root user
 USER appuser
 
+COPY yarn.lock .yarnrc.yml ./
+COPY .yarn/ ./.yarn/
+
 # Yarn
 ENV YARN_VERSION 1.22.4
 RUN yarn policies set-version $YARN_VERSION

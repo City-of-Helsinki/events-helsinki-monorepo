@@ -1,14 +1,8 @@
 import React from 'react';
 
-import { translations } from '../../../../../tests/initI18n';
-import { fakePlace } from '../../../../../tests/mockDataUtils';
-import {
-  act,
-  render,
-  screen,
-  userEvent,
-  waitFor,
-} from '../../../../../tests/testUtils';
+import { render, screen, userEvent, waitFor } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import { fakePlace } from '@/test-utils/mockDataUtils';
 import { PlaceDetailsDocument } from '../../../../nextApi/graphql/generated/graphql';
 import PlaceFilter from '../PlaceFilter';
 
@@ -54,7 +48,7 @@ it('calls onRemove callback when remove button is clicked', async () => {
 
   await screen.findByText(placeName);
 
-  await act(() => userEvent.click(screen.getByRole('button')));
+  await userEvent.click(screen.getByRole('button'));
 
   expect(onClickMock).toHaveBeenCalled();
   expect(onClickMock).toHaveBeenCalledWith(placeId, 'place');

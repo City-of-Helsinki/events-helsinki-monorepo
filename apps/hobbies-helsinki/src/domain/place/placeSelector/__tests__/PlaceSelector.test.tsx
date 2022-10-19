@@ -1,16 +1,9 @@
 import { IconStar } from 'hds-react';
 import React from 'react';
 
-import { fakePlaces } from '../../../../tests/mockDataUtils';
-import {
-  waitFor,
-  actWait,
-  render,
-  screen,
-  userEvent,
-  act,
-} from '../../../../tests/testUtils';
-import apolloClient from '../../../clients/eventsApolloClient';
+import { waitFor, actWait, render, screen, userEvent } from '@/test-utils';
+import { fakePlaces } from '@/test-utils/mockDataUtils';
+import { apolloClient } from '../../../clients/eventsApolloClient';
 import {
   PlaceDetailsDocument,
   PlaceListDocument,
@@ -111,10 +104,8 @@ it('should filter place options', async () => {
     mocks,
   });
   await actWait();
-  await act(() =>
-    userEvent.click(
-      screen.getByRole('button', { name: /etsi tapahtumapaikka/i })
-    )
+  await userEvent.click(
+    screen.getByRole('button', { name: /etsi tapahtumapaikka/i })
   );
 
   await userEvent.type(

@@ -1,25 +1,19 @@
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 
-import { translations } from '../../../tests/initI18n';
+import { render, screen, userEvent, waitFor } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvent,
   fakeEvents,
   fakeKeyword,
   fakeLocalizedObject,
   fakeTargetGroup,
-} from '../../../tests/mockDataUtils';
+} from '@/test-utils/mockDataUtils';
 import {
   createEventListRequestAndResultMocks,
   createOtherEventTimesRequestAndResultMocks,
-} from '../../../tests/mocks/eventListMocks';
-import {
-  act,
-  render,
-  screen,
-  userEvent,
-  waitFor,
-} from '../../../tests/testUtils';
+} from '@/test-utils/mocks/eventListMocks';
 import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
 import {
   EventDetailsDocument,
@@ -156,9 +150,7 @@ it('should render info and load other events + similar events', async () => {
 
   // click show other times
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  await act(() =>
-    userEvent.click(screen.getByRole('button', { name: 'Näytä kaikki' }))
-  );
+  await userEvent.click(screen.getByRole('button', { name: 'Näytä kaikki' }));
 
   expect(screen.getByTestId(otherEventTimesListTestId).children).toHaveLength(
     otherEventTimesCount
@@ -253,7 +245,7 @@ it('should link to events search when clicking tags', async () => {
   const tagLink = await screen.findByRole('link', { name: 'Avouinti' });
 
   // click keyword / tag
-  await act(async () => userEvent.click(tagLink));
+  await userEvent.click(tagLink);
 
   expect(router).toMatchObject({
     pathname: '/haku',

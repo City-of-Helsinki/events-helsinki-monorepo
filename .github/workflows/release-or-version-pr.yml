@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - proof-of-concept
 
 jobs:
   release:

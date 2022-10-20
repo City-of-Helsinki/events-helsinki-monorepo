@@ -1,4 +1,8 @@
-import type { NormalizedCacheObject, StoreObject } from '@apollo/client';
+import type {
+  FieldMergeFunction,
+  NormalizedCacheObject,
+  StoreObject,
+} from '@apollo/client';
 import {
   defaultDataIdFromObject,
   ApolloClient,
@@ -21,7 +25,15 @@ import AppConfig from '../app/AppConfig';
 
 const eventsApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
->(createEventsApolloClient());
+>();
+
+const getPageStylePaginator = (merge: FieldMergeFunction) => ({
+  // Only ignore page argument in caching to get fetchMore pagination working correctly
+  // Other args are needed to separate different serch queries to separate caches
+  // Docs: https://www.apollographql.com/docs/react/pagination/key-args/
+  keyArgs: excludeArgs(['page']),
+  merge,
+});
 
 export function createEventsApolloClient() {
   // Rewrite the URLs coming from events API to route them internally.
@@ -89,30 +101,21 @@ export function createEventsApolloCache() {
               id: args?.id,
             });
           },
-          eventList: {
-            // Only ignore page argument in caching to get fetchMore pagination working correctly
-            // Other args are needed to separate different serch queries to separate caches
-            // Docs: https://www.apollographql.com/docs/react/pagination/key-args/
-            keyArgs: excludeArgs(['page']),
-            merge(existing, incoming) {
-              if (!incoming) return existing;
-              return {
-                data: [...(existing?.data ?? []), ...incoming.data],
-                meta: incoming.meta,
-              };
-            },
-          },
+          eventList: getPageStylePaginator((existing, incoming) => {
+            if (!incoming) return existing;
+            return {
+              data: [...(existing?.data ?? []), ...incoming.data],
+              meta: incoming.meta,
+            };
+          }),
           // See eventList keyArgs for explanation why page is filtered.
-          eventsByIds: {
-            keyArgs: excludeArgs(['page']),
-            merge(existing, incoming) {
-              if (!incoming) return existing;
-              return {
-                data: [...(existing?.data ?? []), ...incoming.data],
-                meta: incoming.meta,
-              };
-            },
-          },
+          eventsByIds: getPageStylePaginator((existing, incoming) => {
+            if (!incoming) return existing;
+            return {
+              data: [...(existing?.data ?? []), ...incoming.data],
+              meta: incoming.meta,
+            };
+          }),
         },
       },
       Keyword: {
@@ -133,9 +136,12 @@ export function createEventsApolloCache() {
 }
 
 export default function initializeEventsApolloClient(
-  initialState: NormalizedCacheObject | null = null
-) {
-  return initializeApolloClient({
+  initialState: NormalizedCacheObject = {}
+): ApolloClient<NormalizedCacheObject> {
+  return initializeApolloClient<
+    NormalizedCacheObject,
+    ApolloClient<NormalizedCacheObject>
+  >({
     initialState,
     mutableCachedClient: eventsApolloClient,
     createClient: createEventsApolloClient,
@@ -143,8 +149,8 @@ export default function initializeEventsApolloClient(
 }
 
 export function useEventsApolloClient(
-  initialState: NormalizedCacheObject | null = null
-) {
+  initialState: NormalizedCacheObject = {}
+): ApolloClient<NormalizedCacheObject> {
   return useMemo(
     () => initializeEventsApolloClient(initialState),
     [initialState]

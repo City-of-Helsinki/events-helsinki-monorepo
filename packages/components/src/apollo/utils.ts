@@ -55,17 +55,17 @@ export function getMenuLocationFromLanguage(language: string) {
 }
 
 export class MutableReference<Ref = unknown> {
-  _value: Ref;
+  _value?: Ref;
 
-  constructor(initialReference: Ref) {
+  constructor(initialReference?: Ref) {
     this._value = initialReference;
   }
 
-  get reference(): Ref {
+  get reference(): Ref | undefined {
     return this._value;
   }
 
-  set reference(ref: Ref) {
+  set reference(ref: Ref | undefined) {
     this._value = ref;
   }
 }

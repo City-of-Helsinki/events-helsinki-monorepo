@@ -52,11 +52,8 @@ const SearchPage: React.FC<{
     fetchMore,
     loading: isLoadingEvents,
   } = useEventListQuery({
-    notifyOnNetworkStatusChange: true,
     ssr: false,
     variables: eventFilters,
-    fetchPolicy: 'cache-and-network',
-    nextFetchPolicy: 'cache-first',
   });
 
   const eventsList = eventsData?.eventList;

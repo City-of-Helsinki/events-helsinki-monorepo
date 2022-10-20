@@ -1,4 +1,3 @@
-import type { NormalizedCacheObject } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
 import {
   MatomoProvider,
@@ -57,20 +56,14 @@ export type AppProps<P = any> = {
 } & Omit<NextAppProps<P>, 'pageProps'>;
 
 export type CustomPageProps = {
-  initialApolloState: NormalizedCacheObject;
-  initialEventsApolloState: NormalizedCacheObject;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any;
 } & SSRConfig;
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const {
-    initialApolloState: initialCmsApolloState,
-    initialEventsApolloState,
-    error,
-  } = pageProps;
-  const cmsApolloClient = useCmsApollo(initialCmsApolloState);
-  const eventsApolloClient = useEventsApolloClient(initialEventsApolloState);
+  const { error } = pageProps;
+  const cmsApolloClient = useCmsApollo();
+  const eventsApolloClient = useEventsApolloClient();
   const eventsConfig = useEventsConfig(eventsApolloClient);
   const router = eventsConfig.router as NextRouter;
   const rhhcConfig = useRHHCConfig(cmsApolloClient, eventsApolloClient);
@@ -96,22 +89,20 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
       <RHHCConfigProvider config={rhhcConfig}>
         <TopProgressBar />
         <ApolloProvider client={cmsApolloClient}>
-          <ApolloProvider client={eventsApolloClient}>
-            <MatomoProvider value={matomoInstance}>
-              {router.isFallback ? (
-                <Center>
-                  <LoadingSpinner />
-                </Center>
-              ) : error ? (
-                <Error
-                  statusCode={error.networkError?.statusCode ?? 400}
-                  title={error.title}
-                />
-              ) : (
-                <Component {...pageProps} />
-              )}
-            </MatomoProvider>
-          </ApolloProvider>
+          <MatomoProvider value={matomoInstance}>
+            {router.isFallback ? (
+              <Center>
+                <LoadingSpinner />
+              </Center>
+            ) : error ? (
+              <Error
+                statusCode={error.networkError?.statusCode ?? 400}
+                title={error.title}
+              />
+            ) : (
+              <Component {...pageProps} />
+            )}
+          </MatomoProvider>
         </ApolloProvider>
         <ToastContainer />
       </RHHCConfigProvider>

@@ -58,8 +58,8 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
     hobbiesContext: HobbiesContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
-  const cmsClient = initializeCmsApolloClient(); // Fixme use cache
-  const eventsClient = initializeEventsApolloClient(); // Fixme use cache
+  const cmsClient = initializeCmsApolloClient();
+  const eventsClient = initializeEventsApolloClient();
 
   try {
     await getGlobalCMSData({ client: cmsClient, context });

@@ -47,20 +47,23 @@ it.each([
   {
     field: 'debug',
     envName: 'NEXT_PUBLIC_DEBUG',
+    defaultValue: false,
   },
   {
     field: 'allowUnauthorizedRequests',
     envName: 'NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS',
+    defaultValue: false,
   },
   {
     field: 'showSimilarEvents',
     envName: 'NEXT_PUBLIC_SHOW_SIMILAR_EVENTS',
+    defaultValue: true,
   },
-])('provides flag config $field', ({ field, envName }) => {
+])('provides flag config $field', ({ field, envName, defaultValue }) => {
   // When undefined, returns false
   process.env[envName] = undefined;
   // @ts-ignore
-  expect(AppConfig[field]).toStrictEqual(false);
+  expect(AppConfig[field]).toStrictEqual(defaultValue);
 
   // When 0, returns false
   process.env[envName] = '0';

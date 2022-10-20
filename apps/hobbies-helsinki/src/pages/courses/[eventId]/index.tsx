@@ -1,8 +1,8 @@
+import { ApolloProvider } from '@apollo/client';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
-import { createEventsApolloClient } from 'domain/clients/eventsApolloClient';
-
+import { useEventsApolloClient } from 'domain/clients/eventsApolloClient';
 import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../../domain/app/getHobbiesStaticProps';
@@ -22,17 +22,20 @@ const Event: NextPage<{
   event: EventFields;
   loading: boolean;
 }> = ({ event, loading }) => {
+  const eventsApolloClient = useEventsApolloClient();
   return (
     <MatomoWrapper>
       <RHHCPage
         className="pageLayout"
         navigation={<Navigation />}
         content={
-          <EventPageContainer
-            event={event}
-            loading={loading}
-            showSimilarEvents={AppConfig.showSimilarEvents}
-          />
+          <ApolloProvider client={eventsApolloClient}>
+            <EventPageContainer
+              event={event}
+              loading={loading}
+              showSimilarEvents={AppConfig.showSimilarEvents}
+            />
+          </ApolloProvider>
         }
         footer={<FooterSection />}
       />
@@ -50,7 +53,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const eventsApolloClient = createEventsApolloClient();
   return getHobbiesStaticProps(context, async ({ eventsClient }) => {
     const locale = getLocaleOrError(context.locale);
     const { data: eventData, loading } = await eventsClient.query<
@@ -68,9 +70,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
     return {
       props: {
-        initialEventsApolloState: eventsApolloClient.cache.extract(),
-        event: event,
-        loading: loading,
+        event,
+        loading,
         ...(await serverSideTranslationsWithCommon(locale, [
           'common',
           'home',

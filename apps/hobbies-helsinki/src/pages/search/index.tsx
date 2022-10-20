@@ -1,10 +1,9 @@
 import { ApolloProvider } from '@apollo/client';
-import { useEventsApolloClientFromConfig } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
-import { createEventsApolloClient } from 'domain/clients/eventsApolloClient';
+import { useEventsApolloClient } from 'domain/clients/eventsApolloClient';
 
 import Navigation from '../../common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
@@ -17,10 +16,11 @@ import SearchPage from '../../domain/search/eventSearch/SearchPage';
 import { getLocaleOrError } from '../../utils/routerUtils';
 
 export default function Search() {
+  const eventsApolloClient = useEventsApolloClient();
+
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
-  const eventsApolloClient = useEventsApolloClientFromConfig();
 
   useEffect(() => {
     const listElement = listRef.current;
@@ -45,8 +45,6 @@ export default function Search() {
         className="pageLayout"
         navigation={<Navigation />}
         content={
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           <ApolloProvider client={eventsApolloClient}>
             <SearchPage
               SearchComponent={AdvancedSearch}
@@ -61,14 +59,10 @@ export default function Search() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const eventsApolloClient = createEventsApolloClient();
-
   return getHobbiesStaticProps(context, async () => {
     const locale = getLocaleOrError(context.locale);
-
     return {
       props: {
-        initialEventsApolloState: eventsApolloClient.cache.extract(),
         ...(await serverSideTranslationsWithCommon(locale, [
           'common',
           'home',

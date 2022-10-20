@@ -19,7 +19,7 @@ import { rewriteInternalURLs } from '../../utils/routerUtils';
 
 const cmsApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
->(createCmsApolloClient());
+>();
 
 export function createCmsApolloClient(
   initialState: NormalizedCacheObject = {}

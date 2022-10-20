@@ -138,6 +138,7 @@ jobs:
         working-directory: apps/hobbies-helsinki
         run: |
           yarn check-size
+        if: ${{ false }} # FIXME: disabled until the sizes are configured
 
       - name: Check ecmascript checks for build files
         working-directory: apps/hobbies-helsinki

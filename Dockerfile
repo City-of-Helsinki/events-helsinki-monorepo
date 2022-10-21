@@ -142,8 +142,8 @@ COPY --from=builder /app/apps/${PROJECT}/next.config.js \
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
 # COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/static $PROJECT/.next/static
-COPY --from=builder /app/apps/nextjs-app/public ./apps/nextjs-app/public
-COPY --from=builder --chown=nextjs:nodejs /app/apps/nextjs-app/.next ./apps/nextjs-app/.next
+COPY --from=builder /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
+COPY --from=builder --chown=nextjs:nodejs /app/${PROJECT}/.next ./${PROJECT}/.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 

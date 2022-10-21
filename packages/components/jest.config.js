@@ -22,6 +22,7 @@ const config = {
   testEnvironment: 'jsdom',
   verbose: true,
   rootDir: './src',
+
   transform: {
     // if we would use .babelrc, next would not use swc compiler
     '^.+\\.(js|jsx|ts|tsx)$': [
@@ -35,10 +36,7 @@ const config = {
   ],
   testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
   moduleNameMapper: {
-    // For @testing-library/react
-    '^@/test-utils$': '<rootDir>/../config/tests/test-utils',
-    '.+\\.(css|styl|less|sass|scss)$': 'jest-css-modules-transform',
-    // Handle image imports
+    '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
     // https://jestjs.io/docs/webpack#handling-static-assets
     '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/../.jest/__mocks__/fileMock.js`,
     ...getTsConfigBasePaths(),

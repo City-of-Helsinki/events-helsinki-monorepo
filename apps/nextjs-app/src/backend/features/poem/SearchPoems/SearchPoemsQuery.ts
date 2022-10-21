@@ -14,11 +14,13 @@ export class SearchPoemsQuery {
 
   private mapToResult = (rows: SearchPoems) => {
     // https://www.prisma.io/docs/support/help-articles/working-with-many-to-many-relations#explicit-relations
-    return rows.map((poem) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return rows.map((poem: any) => {
       const { createdAt, updatedAt, keywords, ...rest } = poem;
       return {
         ...rest,
-        keywords: keywords.map((keyword) => keyword.keyword.name),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        keywords: keywords.map((keyword: any) => keyword.keyword.name),
       };
     });
   };

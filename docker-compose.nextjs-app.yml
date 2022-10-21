@@ -15,6 +15,9 @@ services:
       context: .
       dockerfile: Dockerfile
       target: develop
+      args:
+        APP_PORT: 3000
+        PROJECT: nextjs-app
     volumes:
       # Share the source code to allow development
       - .:/app/
@@ -35,6 +38,8 @@ services:
       context: .
       dockerfile: Dockerfile
       target: deps
+      args:
+        PROJECT: nextjs-app
 
   # Convenience production "builder" stage service for debugging
   # Build > docker buildx bake -f docker-compose.nextjs-app.yml --progress=tty runner
@@ -47,6 +52,9 @@ services:
       context: .
       dockerfile: Dockerfile
       target: builder
+      args:
+        APP_PORT: 3000
+        PROJECT: nextjs-app
 
   # Convenience production "runner" stage service for debugging
   # Build > docker buildx bake -f docker-compose.nextjs-app.yml --progress=tty runner
@@ -64,6 +72,9 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runner
+      args:
+        APP_PORT: 3000
+        PROJECT: nextjs-app
     environment:
       - PRISMA_DATABASE_URL
 

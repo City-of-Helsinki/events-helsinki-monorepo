@@ -43,7 +43,7 @@
     "docker:hobbies:develop": "env-cmd -f ./apps/hobbies-helsinki/.env.local --verbose cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml up develop",
     "docker:hobbies:develop:reinstall": "env-cmd -f ./apps/hobbies-helsinki/.env.local --verbose cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --progress=tty --no-cache --force-rm develop",
     "docker:hobbies:build": "env-cmd -f ./apps/hobbies-helsinki/.env.local --verbose cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --progress=tty runner",
-    "docker:hobbies:serve": "env-cmd -f ./apps/hobbies-helsinki/.env.local --verbose docker-compose -f docker-compose.hobbies.yml up runner",
+    "docker:hobbies:serve": "docker-compose -f docker-compose.hobbies.yml --env-file ./apps/hobbies-helsinki/.env.local up runner",
     "docker:nextjs-app:install": "docker buildx bake -f docker-compose.nextjs-app.yml --progress=tty deps",
     "docker:nextjs-app:develop": "cross-env DOCKER_BUILDKIT=1 docker-compose -f ./docker-compose.yml -f docker-compose.nextjs-app.yml up develop main-db",
     "docker:nextjs-app:develop:reinstall": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.nextjs-app.yml build --progress=tty --no-cache --force-rm develop",

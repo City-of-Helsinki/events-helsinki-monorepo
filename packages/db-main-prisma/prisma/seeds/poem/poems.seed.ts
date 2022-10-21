@@ -277,7 +277,8 @@ const poems = [
   };
 });
 
-export const poemsSeed: Prisma.PoemCreateInput[] = poems.map((poem) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const poemsSeed: Prisma.PoemCreateInput[] = poems.map((poem: any) => {
   const keywords = keywordExtractor.extract(poem.title, {
     language: 'english',
     remove_digits: true,
@@ -287,7 +288,8 @@ export const poemsSeed: Prisma.PoemCreateInput[] = poems.map((poem) => {
   const poemInput: Prisma.PoemCreateInput = {
     ...poem,
     keywords: {
-      create: keywords.map((keyword) => ({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      create: keywords.map((keyword: any) => ({
         keyword: {
           connectOrCreate: {
             create: { name: keyword },

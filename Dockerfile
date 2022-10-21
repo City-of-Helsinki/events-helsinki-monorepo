@@ -41,8 +41,10 @@ RUN --mount=type=bind,target=/docker-context \
     --exclude='node_modules' \
     --exclude='*/node_modules' \
     --include='package.json' \
+    --include='schema.prisma' \ 
     --include='*/' --exclude='*' \
     /docker-context/ /workspace-install/;
+ENV PRISMA_CLI_BINARY_TARGETS=linux-musl
 
 # remove rsync and apt cache
 RUN apt-get remove -y rsync && \
@@ -133,16 +135,16 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/apps/$PROJECT/next.config.js \
-    /app/apps/$PROJECT/i18nRoutes.config.js \
+    # /app/apps/$PROJECT/i18nRoutes.config.js \
     /app/apps/$PROJECT/next-i18next.config.js \
     /app/apps/$PROJECT/package.json \
     ./apps/$PROJECT/
-COPY --from=builder /app/apps/$PROJECT/public ./apps/$PROJECT/public
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
 # COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/static $PROJECT/.next/static
-COPY --from=builder --chown=nextjs:nodejs app/apps/$PROJECT/.next ./apps/$PROJECT/.next
+COPY --from=builder /app/apps/nextjs-app/public ./apps/nextjs-app/public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/nextjs-app/.next ./apps/nextjs-app/.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
@@ -154,7 +156,7 @@ ENV PORT ${APP_PORT:-3000}
 # Expose port
 EXPOSE $PORT
 
-ENV PROD_START "./node_modules/.bin/next start apps/$PROJECT/ -p ${PORT}"
+ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
 
 CMD ["sh", "-c", "echo ${PROD_START}"]
 ###################################################################

@@ -38,11 +38,11 @@ COPY .yarn/ ./.yarn/
 #
 RUN --mount=type=bind,target=/docker-context \
     rsync -amv --delete \
-          --exclude='node_modules' \
-          --exclude='*/node_modules' \
-          --include='package.json' \
-          --include='*/' --exclude='*' \
-          /docker-context/ /workspace-install/;
+    --exclude='node_modules' \
+    --exclude='*/node_modules' \
+    --include='package.json' \
+    --include='*/' --exclude='*' \
+    /docker-context/ /workspace-install/;
 
 # remove rsync and apt cache
 RUN apt-get remove -y rsync && \
@@ -104,16 +104,16 @@ COPY . .
 COPY --from=deps /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN yarn workspace $PROJECT share-static-hardlink && yarn workspace $NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT build
+RUN yarn workspace $PROJECT share-static-hardlink && yarn workspace $PROJECT build
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
-RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
-    SKIP_POSTINSTALL=1 \
-    YARN_CACHE_FOLDER=/root/.yarn3-cache \
-    yarn workspaces focus $PROJECT --production
+# RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
+#     SKIP_POSTINSTALL=1 \
+#     YARN_CACHE_FOLDER=/root/.yarn3-cache \
+#     yarn workspaces focus $PROJECT --production
 
-CMD ["sh", "-c", "echo ${NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT}"]
+CMD ["sh", "-c", "echo ${PROJECT}"]
 
 ###################################################################
 # Stage 3: Extract a minimal image from the build                 #
@@ -124,7 +124,6 @@ FROM helsinkitest/node:16-slim  AS runner
 # Build ARGS
 ARG PROJECT
 ARG APP_PORT
-ARG NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT
 
 WORKDIR /app
 
@@ -134,15 +133,16 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/apps/$PROJECT/next.config.js \
-                    /app/apps/$PROJECT/i18nRoutes.config.js \
-                    /app/apps/$PROJECT/next-i18next.config.js \
-                    /app/apps/$PROJECT/package.json \
-                    ./apps/$PROJECT/
+    /app/apps/$PROJECT/i18nRoutes.config.js \
+    /app/apps/$PROJECT/next-i18next.config.js \
+    /app/apps/$PROJECT/package.json \
+    ./apps/$PROJECT/
 COPY --from=builder /app/apps/$PROJECT/public ./apps/$PROJECT/public
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
-COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/static $PROJECT/.next/static
+# COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
+# COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/static $PROJECT/.next/static
+COPY --from=builder --chown=nextjs:nodejs app/apps/$PROJECT/.next ./apps/$PROJECT/.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
@@ -156,7 +156,7 @@ EXPOSE $PORT
 
 ENV PROD_START "./node_modules/.bin/next start apps/$PROJECT/ -p ${PORT}"
 
-CMD ["sh", "-c", "echo ${NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT}"]
+CMD ["sh", "-c", "echo ${PROD_START}"]
 ###################################################################
 # Optional: develop locally                                       #
 ###################################################################

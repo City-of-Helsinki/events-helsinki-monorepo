@@ -65,13 +65,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const returnParam = extractLatestReturnPath(search, locale);
 
   const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
-    router.push({
-      pathname: returnPath,
-      query: {
-        ...(parse(remainingQueryString ?? '') as ParsedUrlQueryInput),
-        eventId: event.id,
-      },
-    });
+    router.push(`${returnPath}?${remainingQueryString}`);
   };
 
   const goToBuyTicketsPage = () => {

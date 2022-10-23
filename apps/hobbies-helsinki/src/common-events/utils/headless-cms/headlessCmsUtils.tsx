@@ -87,6 +87,8 @@ export function getArticlePageCardProps(
       item?.link ?? item?.uri,
       ModuleItemTypeEnum.Article
     ),
+    withBorder: true,
+    withShadow: false,
   };
 }
 

@@ -16718,7 +16718,7 @@ __metadata:
     react-content-loader: "npm:6.2.0"
     react-datepicker: "npm:4.8.0"
     react-dom: "npm:>=17.0.2"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha15"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha16"
     react-i18next: "npm:11.18.6"
     require-from-string: "npm:2.0.2"
     rimraf: "npm:3.0.2"
@@ -19124,10 +19124,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-design-tokens@npm:^1.11.1":
-  version: 1.15.0
-  resolution: "hds-design-tokens@npm:1.15.0"
-  checksum: 195bc65322cd0a14654b0da854fa261c16d53a67cdab4805e3e411b26d4e02039e070af2818f40e989028c7f4e7b26b9345c4da630c1bd8170aa7446e3003b63
+"hds-design-tokens@npm:^2.3.0":
+  version: 2.4.0
+  resolution: "hds-design-tokens@npm:2.4.0"
+  checksum: da7495e7ce9ca96bb0cf7386a3b75352ba3af6c6b21469907a5001f42c0299fed52a50af0b40c0c8bc5a65c37d8e3692ed1bd98595eef20f02e5bcc8d4051b66
   languageName: node
   linkType: hard
 
@@ -19350,7 +19350,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha15"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha16"
     react-i18next: "npm:11.18.6"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -28886,11 +28886,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha15":
-  version: 1.0.0-alpha15
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha15"
+"react-helsinki-headless-cms@npm:1.0.0-alpha16":
+  version: 1.0.0-alpha16
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha16"
   dependencies:
-    hds-design-tokens: "npm:^1.11.1"
+    hds-design-tokens: "npm:^2.3.0"
     html-react-parser: "npm:^1.4.8"
     isomorphic-dompurify: "npm:^0.18.0"
   peerDependencies:
@@ -28902,7 +28902,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 2cfdae4949807869fa1a7bdceb85500e9cda5a56cc286166f1ed9174e747dcfa047fa56be0fe2c6a3d3c362688b786b9dea899bb6630a928bfc5f9d49254e8bd
+  checksum: a612923cde98eeb65323162710f38fb9b04699011a42d2e20dd2d703f6bb05d63e5ca0755f9e96192a27eb27431bbc362a443ea58f23403a8fc6415e26d7b327
   languageName: node
   linkType: hard
 

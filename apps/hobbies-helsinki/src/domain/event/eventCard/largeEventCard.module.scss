@@ -8,6 +8,7 @@
   color: var(--color-black);
   display: grid;
   height: 100%;
+  border: 1px solid var(--color-black-20);
 
   @include respond_above(s) {
     grid-template-columns: 4fr 5fr;
@@ -42,9 +43,8 @@
 
     .eventName {
       order: 1;
-      font-size: 1.5rem;
+      font-size: var(--fontsize-heading-l);
       line-height: var(--lineheight-m);
-      font-weight: 600;
       margin-bottom: var(--spacing-s);
       color: var(color-black);
       text-decoration: none;
@@ -54,8 +54,8 @@
       display: flex;
       order: 2;
       font-size: var(--fontsize-body-l);
+      line-height: var(--lineheight-m);
       margin-bottom: var(--spacing-s);
-      font-weight: 500;
 
       svg {
         margin-right: var(--spacing-2-xs);
@@ -65,8 +65,8 @@
     .eventLocation {
       display: flex;
       order: 3;
-      font-size: var(--fontsize-body-m);
-      line-height: var(--lineheight-l);
+      font-size: var(--fontsize-body-l);
+      line-height: var(--lineheight-m);
       margin-bottom: var(--spacing-s);
       color: var(color-black-80);
 
@@ -80,8 +80,8 @@
     .eventAudienceAge {
       display: flex;
       order: 4;
-      font-size: var(--fontsize-body-m);
-      line-height: var(--lineheight-l);
+      font-size: var(--fontsize-body-l);
+      line-height: var(--lineheight-m);
       margin-bottom: var(--spacing-s);
       color: var(color-black-80);
       svg {
@@ -91,8 +91,8 @@
 
     .eventPrice {
       order: 5;
-      font-size: var(--fontsize-body-m);
-      line-height: var(--lineheight-l);
+      font-size: var(--fontsize-body-l);
+      line-height: var(--lineheight-m);
       margin-bottom: var(--spacing-s);
       color: var(color-black-80);
     }

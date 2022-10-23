@@ -23,7 +23,10 @@ const ArticleDetails: React.FC<ArticleDetailsProps> = ({ keywords }) => {
           </Tag>
         ))}
       {!!restKeywords.length && (
-        <Tag variant="card">{`+${restKeywords.length}`}</Tag>
+        <Tag
+          variant="card"
+          className={styles.tagCount}
+        >{`+${restKeywords.length}`}</Tag>
       )}
     </div>
   );

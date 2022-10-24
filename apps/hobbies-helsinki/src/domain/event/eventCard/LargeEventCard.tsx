@@ -61,11 +61,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const queryString = addParamsToQueryString(
     router.asPath.split('?')[1] ?? '',
     {
-      returnPath: `/${locale}/${getLocalizedCmsItemUrl(
-        ROUTES.SEARCH,
-        {},
-        locale
-      )}`,
+      returnPath: `${getLocalizedCmsItemUrl(ROUTES.SEARCH, {}, locale)}`,
     }
   );
 

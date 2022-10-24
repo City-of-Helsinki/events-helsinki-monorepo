@@ -174,15 +174,15 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js 
     /app/apps/${PROJECT}/i18nRoutes.config.js \
     /app/apps/${PROJECT}/next-i18next.config.js \
     /app/apps/${PROJECT}/package.json \
-    /app/apps/${PROJECT}/.env \
-    /app/apps/${PROJECT}/.env.local \
     ./apps/${PROJECT}/
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # copy only the necessary files for a production deployment including select files in node_modules.
-COPY --from=builder --chown=appuser:appuser app/apps/${PROJECT}/.next/standalone ./apps/${PROJECT}/
-COPY --from=builder --chown=appuser:appuser app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone ./apps/${PROJECT}/
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
+# FIXME: should not be needed
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/server/pages ./apps/${PROJECT}/pages
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
 
 # COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.env ./apps/${PROJECT}/.env

@@ -187,6 +187,10 @@ COPY --from=builder --chown=appuser:appuser app/apps/${PROJECT}/.next/standalone
 COPY --from=builder --chown=appuser:appuser app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
 
+# COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.env ./apps/${PROJECT}/.env
+# COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.env.local ./apps/${PROJECT}/.env.local
+
+
 # The root level files
 COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
@@ -197,7 +201,8 @@ ENV PORT ${APP_PORT:-3000}
 # Expose port
 EXPOSE $PORT
 
-ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
+# ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
+ENV PROD_START "node ./apps/${PROJECT}/server.js"
 
 CMD ["sh", "-c", "${PROD_START}"]
 ###################################################################

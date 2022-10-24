@@ -174,11 +174,9 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js 
     /app/apps/${PROJECT}/i18nRoutes.config.js \
     /app/apps/${PROJECT}/next-i18next.config.js \
     /app/apps/${PROJECT}/package.json \
+    /app/apps/${PROJECT}/.env \
+    /app/apps/${PROJECT}/.env.local \
     ./apps/${PROJECT}/
-
-# FIXME: Should these deps be installed differently?
-# The packages are copied for a transpile process
-COPY --from=builder --chown=appuser:appuser /app/packages/ ./packages/
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing

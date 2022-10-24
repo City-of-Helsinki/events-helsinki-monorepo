@@ -16718,7 +16718,7 @@ __metadata:
     react-content-loader: "npm:6.2.0"
     react-datepicker: "npm:4.8.0"
     react-dom: "npm:>=17.0.2"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha24"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha25-canary-a93801d"
     react-i18next: "npm:11.18.6"
     require-from-string: "npm:2.0.2"
     rimraf: "npm:3.0.2"
@@ -19350,7 +19350,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha24"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha25-canary-a93801d"
     react-i18next: "npm:11.18.6"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -28886,9 +28886,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha24":
-  version: 1.0.0-alpha24
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha24"
+"react-helsinki-headless-cms@npm:1.0.0-alpha25-canary-a93801d":
+  version: 1.0.0-alpha25-canary-a93801d
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha25-canary-a93801d"
   dependencies:
     hds-design-tokens: "npm:^2.3.0"
     html-react-parser: "npm:^1.4.8"
@@ -28902,7 +28902,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 3d9fb0ca6234d1512c7ecd2f148b716d1c3a382f0a1db6e80caa5398725038ca3368db8551fc610fd68b8d08d55250079bc75c3d73b95d9c5f6201368296c5e2
+  checksum: d6602bba7312b3d8fd87937fb9f14cddb700dd9ca01a7b51111e952de150eabc36c395aa20e3e26a13e7d10c51fe53f66b65bb456f08cbb8916b7953dfe410eb
   languageName: node
   linkType: hard
 

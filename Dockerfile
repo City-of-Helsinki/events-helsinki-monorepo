@@ -169,9 +169,7 @@ WORKDIR /app
 ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
-# Add a new system user: nextjs
-# RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
-
+# Copy the configuration files to the apps/project root
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
     /app/apps/${PROJECT}/i18nRoutes.config.js \
     /app/apps/${PROJECT}/next-i18next.config.js \
@@ -182,17 +180,18 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js 
 # The packages are copied for a transpile process
 COPY --from=builder --chown=appuser:appuser /app/packages/ ./packages/
 
-
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=appuser:appuser app/apps/$PROJECT/.next/standalone ./apps/$PROJECT/
-COPY --from=builder --chown=appuser:appuser app/apps/$PROJECT/.next/static ./apps/$PROJECT/.next/static
+# copy only the necessary files for a production deployment including select files in node_modules.
+COPY --from=builder --chown=appuser:appuser app/apps/${PROJECT}/.next/standalone ./apps/${PROJECT}/
+COPY --from=builder --chown=appuser:appuser app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
+
+# The root level files
 COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
 
 ENV NEXT_TELEMETRY_DISABLED 1
-
 ENV PORT ${APP_PORT:-3000}
 
 # Expose port
@@ -200,7 +199,7 @@ EXPOSE $PORT
 
 ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
 
-CMD ["sh", "-c", "echo ${PROD_START}"]
+CMD ["sh", "-c", "${PROD_START}"]
 ###################################################################
 # Optional: develop locally                                       #
 ###################################################################
@@ -208,7 +207,7 @@ CMD ["sh", "-c", "echo ${PROD_START}"]
 FROM helsinkitest/node:16-slim  AS develop
 
 # Use non-root user
-# USER appuser
+USER appuser
 
 # Build ARGS
 ARG PROJECT

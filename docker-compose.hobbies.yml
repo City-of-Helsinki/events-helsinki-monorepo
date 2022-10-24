@@ -77,8 +77,7 @@ services:
     container_name: hobbies-helsinki-multistage-runner
     profiles:
       - donotstart
-    command: tail -f /dev/null
-    stdin_open: true
+    stdin_open: false
     ports:
       - target: 3000
         published: 3000

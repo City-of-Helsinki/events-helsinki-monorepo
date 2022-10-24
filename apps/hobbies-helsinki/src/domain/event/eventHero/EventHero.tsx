@@ -1,4 +1,3 @@
-import type { ParsedUrlQueryInput } from 'querystring';
 import classNames from 'classnames';
 import {
   Visible,

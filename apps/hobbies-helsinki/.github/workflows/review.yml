@@ -85,6 +85,7 @@ jobs:
           K8S_SECRET_NEXT_PUBLIC_DEBUG: 1
           PROJECT: ${{ env.PROJECT }}
           K8S_SECRET_PROJECT: ${{ env.PROJECT }}
+          K8S_SECRET_NEXT_PUBLIC_PROJECT: ${{ env.PROJECT }}
 
       - name: Create PR comment for Deploy URL
         uses: marocchino/sticky-pull-request-comment@v2

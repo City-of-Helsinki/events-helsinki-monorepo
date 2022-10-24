@@ -54,6 +54,7 @@ env:
   SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
   BASE_DOMAIN: ${{ secrets.BASE_DOMAIN_STAGING }}
   SERVICE_PORT: 3000
+  PROJECT: hobbies-helsinki
   K8S_REQUEST_CPU: 50m
   K8S_REQUEST_RAM: 150Mi
   K8S_LIMIT_CPU: 200m
@@ -113,7 +114,7 @@ jobs:
           DOCKER_BUILD_ARG_SENTRY_AUTH_TOKEN: ${{ secrets.GH_SENTRY_AUTH_TOKEN }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_DEBUG: 1
           DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
-          DOCKER_BUILD_ARG_PROJECT: hobbies-helsinki
+          DOCKER_BUILD_ARG_PROJECT: ${{ env.PROJECT }}
         with:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
@@ -140,6 +141,9 @@ jobs:
           K8S_SECRET_NEXT_PUBLIC_APP_ORIGIN: ${{ env.CUSTOM_ENVIRONMENT_URL }}
           K8S_SECRET_NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
           K8S_SECRET_NEXT_PUBLIC_DEBUG: 1
+          K8S_SECRET_APP_PORT: ${{ env.SERVICE_PORT }}
+          K8S_SECRET_PROJECT: ${{ env.PROJECT }}
+          PROJECT: ${{ env.PROJECT }}
 
       - name: Create PR comment for Deploy URL
         uses: marocchino/sticky-pull-request-comment@v2

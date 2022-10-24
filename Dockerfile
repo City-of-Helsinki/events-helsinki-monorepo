@@ -171,12 +171,15 @@ ENV NODE_ENV production
 
 # Add a new system user: nextjs
 # RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+COPY --from=builder --chown=appuser:appuser ./app/apps ./apps
+# COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
+#     /app/apps/${PROJECT}/i18nRoutes.config.js \
+#     /app/apps/${PROJECT}/next-i18next.config.js \
+#     /app/apps/${PROJECT}/package.json \
+#     ./apps/${PROJECT}/
 
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
-    /app/apps/${PROJECT}/i18nRoutes.config.js \
-    /app/apps/${PROJECT}/next-i18next.config.js \
-    /app/apps/${PROJECT}/package.json \
-    ./apps/${PROJECT}/
+# FIXME: Should these deps be installed differently?
+COPY --from=builder --chown=appuser:appuser /app/packages/ ./packages/
 
 # FIXME: Should these deps be installed differently?
 COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n \

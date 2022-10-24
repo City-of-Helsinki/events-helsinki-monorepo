@@ -14,19 +14,20 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
+FROM helsinkitest/node:16-slim AS deps
+
 # Build ARGS
 ARG PROJECT
 ARG APP_PORT
 
-FROM helsinkitest/node:16-slim AS deps
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends rsync
 
 WORKDIR /workspace-install
 
-COPY yarn.lock .yarnrc.yml ./
-COPY .yarn/ ./.yarn/
+COPY --chown=appuser:appuser yarn.lock .yarnrc.yml ./
+COPY --chown=appuser:appuser .yarn/ ./.yarn/
 
 # Specific to monerepo's as docker COPY command is pretty limited
 # we use buidkit to prepare all files that are necessary for install
@@ -38,11 +39,16 @@ COPY .yarn/ ./.yarn/
 #
 RUN --mount=type=bind,target=/docker-context \
     rsync -amv --delete \
+    --owner=appuser --group=appuser \
     --exclude='node_modules' \
     --exclude='*/node_modules' \
     --include='package.json' \
     --include='*/' --exclude='*' \
     /docker-context/ /workspace-install/;
+
+# Copy all files
+# COPY --chown=appuser:appuser . .
+RUN chown -R appuser:appuser .
 
 # remove rsync and apt cache
 RUN apt-get remove -y rsync && \
@@ -74,10 +80,8 @@ RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
 ###################################################################
 
 FROM helsinkitest/node:16-slim  AS builder
-ENV NODE_ENV=production
-ENV NEXTJS_IGNORE_ESLINT=1
-ENV NEXTJS_IGNORE_TYPECHECK=0
-ENV NEXTJS_DISABLE_SENTRY=1
+# Build ARGS
+ARG PROJECT
 ARG NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT
 ARG NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT
 ARG NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT
@@ -88,30 +92,62 @@ ARG NEXT_PUBLIC_MATOMO_SRC_URL
 ARG NEXT_PUBLIC_MATOMO_TRACKER_URL
 ARG NEXT_PUBLIC_MATOMO_ENABLED
 ARG NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS
-
 ARG NEXT_PUBLIC_SENTRY_ENVIRONMENT
 ARG NEXT_PUBLIC_SENTRY_DSN
 ARG NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE
 ARG SENTRY_AUTH_TOKEN
 ARG NEXT_PUBLIC_DEBUG
 
-# Build ARGS
-ARG PROJECT
+ENV NODE_ENV=production
+ENV NEXTJS_IGNORE_ESLINT=1
+ENV NEXTJS_IGNORE_TYPECHECK=0
+ENV NEXTJS_DISABLE_SENTRY=1
+ENV NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT=https://harrastus.hkih.stage.geniem.io/graphql
+ENV NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
+ENV NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT=https://api.hel.fi/linkedevents/v1/event
+ENV NEXT_PUBLIC_APP_ORIGIN=http://localhost:3000
+ENV NEXT_PUBLIC_IMAGE_PROXY_URL=https://images.weserv.nl/?w=1024&url=
+ENV NEXT_PUBLIC_DEBUG=1
+ENV NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS=10
+ENV SENTRY_AUTH_TOKEN=
+ENV NEXT_PUBLIC_SENTRY_DSN=
+ENV NEXT_PUBLIC_SENTRY_ENVIRONMENT=develop
+ENV NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE=1.0
+ENV NEXT_PUBLIC_CMS_HEADER_MENU_NAME_FI="Hobbies Helsinki Header FI"
+ENV NEXT_PUBLIC_CMS_HEADER_MENU_NAME_EN="Hobbies Helsinki Header EN"
+ENV NEXT_PUBLIC_CMS_HEADER_MENU_NAME_SV="Hobbies Helsinki Header SV"
+ENV NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_FI="Hobbies Helsinki Footer FI"
+ENV NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_EN="Hobbies Helsinki Footer EN"
+ENV NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_SV="Hobbies Helsinki Footer SV"
+ENV NEXT_PUBLIC_CMS_ARTICLES_CONTEXT_PATH=/articles
+ENV NEXT_PUBLIC_CMS_PAGES_CONTEXT_PATH=/pages
+ENV NEXT_PUBLIC_MATOMO_URL_BASE=https://analytics.hel.ninja/
+ENV NEXT_PUBLIC_MATOMO_SITE_ID=68
+ENV NEXT_PUBLIC_MATOMO_SRC_URL=matomo.js
+ENV NEXT_PUBLIC_MATOMO_TRACKER_URL=matomo.php
+ENV NEXT_PUBLIC_MATOMO_ENABLED=0
+ENV NEXTJS_DISABLE_SENTRY=1
+ENV NEXTJS_DEBUG_I18N=1
+ENV NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS=1
+ENV DOCKER_BUILDKIT=1
 
 WORKDIR /app
 
-COPY . .
-COPY --from=deps /workspace-install ./
+COPY --chown=appuser:appuser  . .
+COPY --from=deps --chown=appuser:appuser /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN yarn workspace $PROJECT share-static-hardlink && yarn workspace $PROJECT build
+RUN yarn workspace ${PROJECT} share-static-hardlink && yarn workspace ${PROJECT} build
+
+# Use non-root user
+# USER appuser
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
-# RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
-#     SKIP_POSTINSTALL=1 \
-#     YARN_CACHE_FOLDER=/root/.yarn3-cache \
-#     yarn workspaces focus $PROJECT --production
+RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
+    SKIP_POSTINSTALL=1 \
+    YARN_CACHE_FOLDER=/root/.yarn3-cache \
+    yarn workspaces focus ${PROJECT} --production
 
 CMD ["sh", "-c", "echo ${PROJECT}"]
 
@@ -120,6 +156,9 @@ CMD ["sh", "-c", "echo ${PROJECT}"]
 ###################################################################
 
 FROM helsinkitest/node:16-slim  AS runner
+
+# Use non-root user
+USER appuser
 
 # Build ARGS
 ARG PROJECT
@@ -130,24 +169,31 @@ WORKDIR /app
 ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
-RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+# Add a new system user: nextjs
+# RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/apps/${PROJECT}/next.config.js \
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
     /app/apps/${PROJECT}/i18nRoutes.config.js \
     /app/apps/${PROJECT}/next-i18next.config.js \
     /app/apps/${PROJECT}/package.json \
     ./apps/${PROJECT}/
 
+# FIXME: Should these deps be installed differently?
+COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n \
+    /app/packages/components \
+    ./packages/
+
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
 # COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/static $PROJECT/.next/static
-COPY --from=builder /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
-COPY --from=builder --chown=nextjs:nodejs /app/${PROJECT}/.next ./${PROJECT}/.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-
-USER nextjs
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next ./apps/${PROJECT}/.next
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next ./apps/${PROJECT}/.next
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next ./apps/.next
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next ./.next
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
+COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
@@ -155,8 +201,7 @@ ENV PORT ${APP_PORT:-3000}
 # Expose port
 EXPOSE $PORT
 
-# ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
-ENV PROD_START "yarn start -p ${PORT}"
+ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
 
 CMD ["sh", "-c", "echo ${PROD_START}"]
 ###################################################################
@@ -164,6 +209,9 @@ CMD ["sh", "-c", "echo ${PROD_START}"]
 ###################################################################
 
 FROM helsinkitest/node:16-slim  AS develop
+
+# Use non-root user
+# USER appuser
 
 # Build ARGS
 ARG PROJECT
@@ -173,7 +221,7 @@ ENV NODE_ENV=development
 
 WORKDIR /app
 
-COPY --from=deps /workspace-install ./
+COPY --from=deps --chown=appuser:appuser /workspace-install ./
 
 ENV PORT ${APP_PORT:-3000}
 

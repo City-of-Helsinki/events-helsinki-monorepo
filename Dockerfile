@@ -171,29 +171,22 @@ ENV NODE_ENV production
 
 # Add a new system user: nextjs
 # RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
-COPY --from=builder --chown=appuser:appuser ./app/apps ./apps
-# COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
-#     /app/apps/${PROJECT}/i18nRoutes.config.js \
-#     /app/apps/${PROJECT}/next-i18next.config.js \
-#     /app/apps/${PROJECT}/package.json \
-#     ./apps/${PROJECT}/
+
+COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
+    /app/apps/${PROJECT}/i18nRoutes.config.js \
+    /app/apps/${PROJECT}/next-i18next.config.js \
+    /app/apps/${PROJECT}/package.json \
+    ./apps/${PROJECT}/
 
 # FIXME: Should these deps be installed differently?
+# The packages are copied for a transpile process
 COPY --from=builder --chown=appuser:appuser /app/packages/ ./packages/
 
-# FIXME: Should these deps be installed differently?
-COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n \
-    /app/packages/components \
-    ./packages/
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-# COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/standalone $PROJECT/
-# COPY --from=builder --chown=nextjs:nodejs app/$PROJECT/.next/static $PROJECT/.next/static
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next ./apps/${PROJECT}/.next
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next ./apps/${PROJECT}/.next
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next ./apps/.next
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next ./.next
+COPY --from=builder --chown=appuser:appuser app/apps/$PROJECT/.next/standalone ./apps/$PROJECT/
+COPY --from=builder --chown=appuser:appuser app/apps/$PROJECT/.next/static ./apps/$PROJECT/.next/static
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
 COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
@@ -201,6 +194,7 @@ COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
 ENV NEXT_TELEMETRY_DISABLED 1
 
 ENV PORT ${APP_PORT:-3000}
+
 # Expose port
 EXPOSE $PORT
 

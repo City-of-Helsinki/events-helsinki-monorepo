@@ -75,8 +75,9 @@ services:
   # Run   > docker-compose -f docker-compose.hobbies-helsinki.yml --env-file ./apps/hobbies-helsinki/.env.local up runner
   runner:
     container_name: hobbies-helsinki-multistage-runner
-    # profiles:
-    #   - donotstart
+    profiles:
+      - donotstart
+    command: tail -f /dev/null
     stdin_open: true
     ports:
       - target: 3000

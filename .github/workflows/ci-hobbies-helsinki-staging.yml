@@ -102,7 +102,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable-cache
       - name: Run Acceptance Tests
         run: yarn test:browser:ci
         env:

@@ -1,12 +1,10 @@
 import { screen } from '@testing-library/testcafe';
-import type { SUPPORT_LANGUAGES } from 'events-helsinki-components';
-import { DEFAULT_LANGUAGE } from 'events-helsinki-components';
 import { Selector, t } from 'testcafe';
-
 import { initI18n as i18n } from '../../config/jest/initI18n';
+import { SUPPORT_LANGUAGES } from '../../src/types';
 
 class Header {
-  currentLang = DEFAULT_LANGUAGE;
+  currentLang = SUPPORT_LANGUAGES.FI;
 
   banner = screen.getByRole('banner');
   languageSelectorButton = Selector('#languageSelector-button');

@@ -209,13 +209,15 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js 
     /app/apps/${PROJECT}/package.json \
     ./apps/${PROJECT}/
 
+# Copy common-i18n to share localization files after build
+COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n/src/locales \
+    ./packages/common-i18n/src/locales
+
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # copy only the necessary files for a production deployment including select files in node_modules.
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone ./apps/${PROJECT}/
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
-# FIXME: should not be needed
-# COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/server/pages ./apps/${PROJECT}/pages
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
 
 # COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.env ./apps/${PROJECT}/.env

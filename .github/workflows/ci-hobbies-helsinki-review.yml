@@ -64,6 +64,7 @@ env:
   NEXT_PUBLIC_SENTRY_ENVIRONMENT: 'test'
   NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.GH_SENTRY_DSN }}
   NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE: 0
+  NEXTJS_DISABLE_SENTRY: 1
   SENTRY_AUTH_TOKEN: ${{ secrets.GH_SENTRY_AUTH_TOKEN }}
   NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: https://harrastus.hkih.stage.geniem.io/graphql
   NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
@@ -115,6 +116,7 @@ jobs:
           DOCKER_BUILD_ARG_NEXT_PUBLIC_DEBUG: 1
           DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
           DOCKER_BUILD_ARG_PROJECT: ${{ env.PROJECT }}
+          DOCKER_BUILD_ARG_NEXTJS_DISABLE_SENTRY: ${{env.NEXTJS_DISABLE_SENTRY}}
         with:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max

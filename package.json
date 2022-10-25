@@ -42,7 +42,7 @@
     "docker:hobbies:install": "docker buildx bake -f docker-compose.hobbies.yml --progress=tty deps",
     "docker:hobbies:develop": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml up develop",
     "docker:hobbies:develop:reinstall": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --progress=tty --no-cache --force-rm develop",
-    "docker:hobbies:build": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --progress=tty runner",
+    "docker:hobbies:build": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml --env-file ./apps/hobbies-helsinki/.env.local build --progress=tty runner",
     "docker:hobbies:serve": "docker-compose -f docker-compose.hobbies.yml --env-file ./apps/hobbies-helsinki/.env.local up runner",
     "docker:nextjs-app:install": "docker buildx bake -f docker-compose.nextjs-app.yml --progress=tty deps",
     "docker:nextjs-app:develop": "cross-env DOCKER_BUILDKIT=1 docker-compose -f ./docker-compose.yml -f docker-compose.nextjs-app.yml up develop main-db",

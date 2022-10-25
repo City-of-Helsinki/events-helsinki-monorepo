@@ -111,7 +111,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn add --cached
+        run: yarn install --frozen-lockfile
 
       - name: Run Acceptance Tests
         id: testcafe

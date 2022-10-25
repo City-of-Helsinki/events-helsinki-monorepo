@@ -1,4 +1,3 @@
-import type { ParsedUrlQueryInput } from 'querystring';
 import classNames from 'classnames';
 import {
   Visible,
@@ -19,7 +18,6 @@ import {
 } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { parse } from 'query-string';
 import React from 'react';
 import {
   BackgroundImage,
@@ -65,13 +63,9 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const returnParam = extractLatestReturnPath(search, locale);
 
   const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
-    router.push({
-      pathname: returnPath,
-      query: {
-        ...(parse(remainingQueryString ?? '') as ParsedUrlQueryInput),
-        eventId: event.id,
-      },
-    });
+    router.push(
+      `${returnPath}${remainingQueryString ? `?${remainingQueryString}` : ''}`
+    );
   };
 
   const goToBuyTicketsPage = () => {

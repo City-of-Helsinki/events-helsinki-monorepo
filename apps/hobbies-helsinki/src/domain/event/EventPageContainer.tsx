@@ -39,7 +39,11 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
   const router = useRouter();
   const locale = useLocale();
   const search = addParamsToQueryString(router.asPath, {
-    returnPath: router.pathname,
+    returnPath: `/${locale}/${getLocalizedCmsItemUrl(
+      ROUTES.SEARCH,
+      {},
+      locale
+    )}`,
   });
 
   const [superEvent, setSuperEvent] = React.useState<SuperEventResponse>({

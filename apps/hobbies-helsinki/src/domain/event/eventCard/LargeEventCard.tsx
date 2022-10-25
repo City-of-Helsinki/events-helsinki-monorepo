@@ -58,9 +58,13 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const audienceAge = getAudienceAgeText(t, audienceMinAge, audienceMaxAge);
 
   const eventClosed = isEventClosed(event);
-  const queryString = addParamsToQueryString(router.asPath, {
-    returnPath: router.pathname,
-  });
+  const queryString = addParamsToQueryString(
+    router.asPath.split('?')[1] ?? '',
+    {
+      returnPath: `${getLocalizedCmsItemUrl(ROUTES.SEARCH, {}, locale)}`,
+    }
+  );
+
   const eventUrl = `${getLocalizedCmsItemUrl(
     ROUTES.COURSES,
     { eventId: event.id },

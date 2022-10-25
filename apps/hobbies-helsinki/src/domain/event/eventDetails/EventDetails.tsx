@@ -27,22 +27,34 @@ const EventDetails: React.FC<EventDetailsProps> = (props) => {
       {!!startTime && (
         <div className={styles.infoRow}>
           <div className={styles.withIcon}>
-            <IconCalendarClock aria-hidden />
-            {getDateRangeStr({
-              start: startTime,
-              end: endTime,
-              locale,
-              includeTime: true,
-              timeAbbreviation: t('timeAbbreviation'),
-            })}
+            <div className={styles.icon}>
+              <IconCalendarClock aria-hidden />
+            </div>
+            <div className={styles.text}>
+              {getDateRangeStr({
+                start: startTime,
+                end: endTime,
+                locale,
+                includeTime: true,
+                timeAbbreviation: t('timeAbbreviation'),
+              })}
+            </div>
           </div>
         </div>
       )}
       {location && (
         <div className={styles.infoRow}>
           <div className={styles.withIcon}>
-            <IconLocation aria-hidden />
-            <LocationText event={event} showDistrict={false} showLocationName />
+            <div className={styles.icon}>
+              <IconLocation aria-hidden />
+            </div>
+            <div className={styles.text}>
+              <LocationText
+                event={event}
+                showDistrict={false}
+                showLocationName
+              />
+            </div>
           </div>
         </div>
       )}

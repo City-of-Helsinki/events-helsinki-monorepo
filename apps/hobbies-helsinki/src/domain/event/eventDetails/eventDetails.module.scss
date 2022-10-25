@@ -11,5 +11,10 @@
 
   .withIcon {
     display: flex;
+
+    .text {
+      line-height: var(--lineheight-l);
+      font-size: var(--fontsize-body-l);
+    }
   }
 }

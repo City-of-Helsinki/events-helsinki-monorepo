@@ -203,33 +203,4 @@ EXPOSE $PORT
 ENV PROD_START "node ./apps/${PROJECT}/server.js"
 
 CMD ["sh", "-c", "${PROD_START}"]
-###################################################################
-# Optional: develop locally                                       #
-###################################################################
-
-FROM helsinkitest/node:16-slim  AS develop
-
-# Use non-root user
-USER appuser
-
-# Build ARGS
-ARG PROJECT
-ARG APP_PORT
-
-ENV NODE_ENV=development
-
-WORKDIR /app
-
-COPY --from=deps --chown=appuser:appuser /workspace-install ./
-
-ENV PORT ${APP_PORT:-3000}
-
-# Expose port
-EXPOSE $PORT
-
-ENV DEV_START "yarn dev -p ${PORT}"
-
-WORKDIR /app/apps/$PROJECT
-
-CMD ["sh", "-c", "${DEV_START}"]
 

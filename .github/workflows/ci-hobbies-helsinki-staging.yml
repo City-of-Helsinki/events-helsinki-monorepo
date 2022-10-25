@@ -102,7 +102,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install --immutable-cache
+        run: yarn install --immutable
       - name: Run Acceptance Tests
         run: yarn test:browser:ci
         env:

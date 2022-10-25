@@ -18,7 +18,6 @@ import {
 } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import { parse } from 'query-string';
 import React from 'react';
 import {
   BackgroundImage,

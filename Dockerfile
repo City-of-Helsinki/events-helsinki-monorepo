@@ -215,7 +215,7 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js 
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone ./apps/${PROJECT}/
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
 # FIXME: should not be needed
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/server/pages ./apps/${PROJECT}/pages
+# COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/server/pages ./apps/${PROJECT}/pages
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
 
 # COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.env ./apps/${PROJECT}/.env

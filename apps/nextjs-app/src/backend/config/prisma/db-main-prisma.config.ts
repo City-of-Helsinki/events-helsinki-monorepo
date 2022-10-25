@@ -44,7 +44,8 @@ export const getPrismaClientDbMain: () => PrismaClientDbMain = () => {
       ],
     });
     if (isDev) {
-      prismaClient.$on('query', (e) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      prismaClient.$on('query', (e: any) => {
         console.log('Query: ' + e.query);
         console.log('Duration: ' + e.duration + 'ms');
       });

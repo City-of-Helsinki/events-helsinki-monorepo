@@ -54,6 +54,7 @@ env:
   SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
   BASE_DOMAIN: ${{ secrets.BASE_DOMAIN_STAGING }}
   SERVICE_PORT: 3000
+  PROJECT: hobbies-helsinki
   K8S_REQUEST_CPU: 50m
   K8S_REQUEST_RAM: 150Mi
   K8S_LIMIT_CPU: 200m
@@ -63,6 +64,7 @@ env:
   NEXT_PUBLIC_SENTRY_ENVIRONMENT: 'test'
   NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.GH_SENTRY_DSN }}
   NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE: 0
+  NEXTJS_DISABLE_SENTRY: 1
   SENTRY_AUTH_TOKEN: ${{ secrets.GH_SENTRY_AUTH_TOKEN }}
   NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: https://harrastus.hkih.stage.geniem.io/graphql
   NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
@@ -101,19 +103,20 @@ jobs:
           DOCKER_BUILD_ARG_NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: ${{ env.NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_APP_ORIGIN: ${{ env.CUSTOM_ENVIRONMENT_URL }}
-          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_URL_BASE: '//webanalytics.digiaiiris.com/js/'
-          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_SITE_ID: 939
-          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_SRC_URL: 'piwik.min.js'
-          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
-          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_ENABLED: 0
+          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_URL_BASE: ${{ env.NEXT_PUBLIC_MATOMO_URL_BASE }}
+          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_SITE_ID: ${{ env.NEXT_PUBLIC_MATOMO_SITE_ID }}
+          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_SRC_URL: ${{ env.NEXT_PUBLIC_MATOMO_SRC_URL }}
+          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_TRACKER_URL: ${{ env.NEXT_PUBLIC_MATOMO_TRACKER_URL }}
+          DOCKER_BUILD_ARG_NEXT_PUBLIC_MATOMO_ENABLED: ${{ env.NEXT_PUBLIC_MATOMO_ENABLED }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
           DOCKER_BUILD_ARG_NEXT_PUBLIC_SENTRY_ENVIRONMENT: 'test'
           DOCKER_BUILD_ARG_NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.GH_SENTRY_DSN }}
-          DOCKER_BUILD_ARG_NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE: 0
+          DOCKER_BUILD_ARG_NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE: ${{ env.NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE }}
           DOCKER_BUILD_ARG_SENTRY_AUTH_TOKEN: ${{ secrets.GH_SENTRY_AUTH_TOKEN }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_DEBUG: 1
           DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
-          DOCKER_BUILD_ARG_PROJECT: hobbies-helsinki
+          DOCKER_BUILD_ARG_PROJECT: ${{ env.PROJECT }}
+          DOCKER_BUILD_ARG_NEXTJS_DISABLE_SENTRY: ${{env.NEXTJS_DISABLE_SENTRY}}
         with:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
@@ -140,6 +143,9 @@ jobs:
           K8S_SECRET_NEXT_PUBLIC_APP_ORIGIN: ${{ env.CUSTOM_ENVIRONMENT_URL }}
           K8S_SECRET_NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
           K8S_SECRET_NEXT_PUBLIC_DEBUG: 1
+          K8S_SECRET_APP_PORT: ${{ env.SERVICE_PORT }}
+          K8S_SECRET_PROJECT: ${{ env.PROJECT }}
+          PROJECT: ${{ env.PROJECT }}
 
       - name: Create PR comment for Deploy URL
         uses: marocchino/sticky-pull-request-comment@v2
@@ -153,7 +159,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2.1.2
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Create yarn cache directory path
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -165,7 +171,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn --prefer-offline --frozen-lockfile --check-files
+        run: yarn install --immutable
 
       - name: Run Acceptance Tests
         id: testcafe

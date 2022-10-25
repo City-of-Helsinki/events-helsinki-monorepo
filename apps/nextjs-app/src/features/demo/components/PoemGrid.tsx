@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ArrayUtils } from 'events-helsinki-core';
 import type { FC } from 'react';
 import type { SearchPoems } from '@/backend/features/poem/SearchPoems';
@@ -15,7 +16,7 @@ export const PoemGrid: FC<{ poems: SearchPoems; children?: never }> = (
   let images = waterImages;
   return (
     <div className="flex flex-wrap">
-      {poems.map((poem) => {
+      {poems.map((poem: any) => {
         const randomImg = ArrayUtils.getRandom(images);
         const defaultImg = `/_next/image?url=${encodeURIComponent(
           randomImg
@@ -28,7 +29,7 @@ export const PoemGrid: FC<{ poems: SearchPoems; children?: never }> = (
         const unsplashImg = `https://source.unsplash.com/random/640x480?${(
           poem.keywords ?? []
         )
-          .map((keyword) => encodeURIComponent(keyword))
+          .map((keyword: any) => encodeURIComponent(keyword))
           .join(',')}`;
 
         return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FC } from 'react';
 import type { SearchPoems } from '@/backend/features/poem/SearchPoems';
 
@@ -31,7 +32,7 @@ export const PoemCard: FC<Props> = (props) => {
         <p className="text-base text-gray-700 line-clamp-4">{content}</p>
       </article>
       <div className="px-6 pt-4 pb-2">
-        {keywords.map((keyword) => {
+        {keywords.map((keyword: any) => {
           return (
             <span
               key={keyword}

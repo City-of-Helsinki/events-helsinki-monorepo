@@ -1,5 +1,4 @@
-import { SUPPORT_LANGUAGES } from 'events-helsinki-components';
-
+import { SUPPORT_LANGUAGES } from '../../src/types';
 import Header from '../page-model/header';
 import LandingPage from '../page-model/landingPage';
 import { getEnvUrl } from '../utils/url.utils';

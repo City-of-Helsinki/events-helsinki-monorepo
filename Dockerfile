@@ -1,9 +1,3 @@
-#
-# EXAMPLE OF MULTISTAGE BUILD FOR MONOREPOS
-#
-# @link https://github.com/City-of-Helsinki/events-helsinki-monorepo
-#
-
 ###################################################################
 # Stage 1: Install all workspaces (dev)dependencies               #
 #          and generates node_modules folder(s)                   #
@@ -139,9 +133,6 @@ COPY --from=deps --chown=appuser:appuser /workspace-install ./
 # Optional: if the app depends on global /static shared assets like images, locales...
 RUN yarn workspace ${PROJECT} share-static-hardlink && yarn workspace ${PROJECT} build
 
-# Use non-root user
-# USER appuser
-
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
 RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
@@ -219,10 +210,6 @@ COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n/src/locale
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone ./apps/${PROJECT}/
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
-
-# COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.env ./apps/${PROJECT}/.env
-# COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.env.local ./apps/${PROJECT}/.env.local
-
 
 # The root level files
 COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules

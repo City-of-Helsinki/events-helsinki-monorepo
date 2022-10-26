@@ -24,7 +24,7 @@ those environment variables:
 | `YARN_CACHE_FOLDER=./.next/cache/yarn`             | Store yarn cache in a vercel one for nextjs apps       |
 | `HUSKY=0`                                          | Prevent husky to install hooks                         |
 
-> ie `YARN_CACHE_FOLDER=../../node_modules/.cache/yarn PRISMA_SKIP_POSTINSTALL_GENERATE=true PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 HUSKY=0 yarn install --immutable`
+> ie `YARN_CACHE_FOLDER=../../node_modules/.cache/yarn HUSKY=0 yarn install --immutable`
 
 ### How to from the vercel ui
 

@@ -18,12 +18,11 @@ yarn install --immutable --inline-builds
 **Adventurous users:** it's possible to speed up the install process by playing with
 those environment variables:
 
-| Env                                                | Description                                                    |
-| -------------------------------------------------- | -------------------------------------------------------------- |
-| `YARN_CACHE_FOLDER=../../node_modules/.cache/yarn` | Store yarn cache into a vercel one to speed up install         |
-| `YARN_CACHE_FOLDER=./.next/cache/yarn`             | Store yarn cache in a vercel one for nextjs apps               |
-| `PRISMA_SKIP_POSTINSTALL_GENERATE=true`            | Do not run prisma generate (handled in nextjs-app postinstall) |
-| `HUSKY=0`                                          | Prevent husky to install hooks                                 |
+| Env                                                | Description                                            |
+| -------------------------------------------------- | ------------------------------------------------------ |
+| `YARN_CACHE_FOLDER=../../node_modules/.cache/yarn` | Store yarn cache into a vercel one to speed up install |
+| `YARN_CACHE_FOLDER=./.next/cache/yarn`             | Store yarn cache in a vercel one for nextjs apps       |
+| `HUSKY=0`                                          | Prevent husky to install hooks                         |
 
 > ie `YARN_CACHE_FOLDER=../../node_modules/.cache/yarn PRISMA_SKIP_POSTINSTALL_GENERATE=true PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 HUSKY=0 yarn install --immutable`
 

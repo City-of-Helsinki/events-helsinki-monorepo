@@ -1,14 +1,14 @@
 # @events-helsinki/eslint-config-bases
 
 <p align="left">
-  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions?query=workflow%3ACI">
-    <img alt="build" src="https://img.shields.io/github/workflow/status/City-of-Helsinki/events-helsinki-monorepo/CI-web-app/main?label=CI&logo=github&style=flat-quare&labelColor=000000" />
+  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
+    <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-packages.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
   </a>
 </p>
 
 # About
 
-Example of composable eslint config bases that can be easily shared and fine-tuned by apps and
+Composable eslint config bases that can be easily shared and fine-tuned by apps and
 packages that lives in a [monorepo](https://github.com/City-of-Helsinki/events-helsinki-monorepo).
 
 ## Features

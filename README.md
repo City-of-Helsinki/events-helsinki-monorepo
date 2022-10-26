@@ -382,7 +382,6 @@ Some convenience scripts can be run in any folder of this repo and will call the
 | `yarn deps:check --dep dev`  | Will print what packages can be upgraded globally (see also [.ncurc.yml](https://github.com/sortlist/packages/blob/main/.ncurc.yml)) |
 | `yarn deps:update --dep dev` | Apply possible updates (run `yarn install && yarn dedupe` after)                                                                     |
 | `yarn check:install`         | Verify if there's no peer-deps missing in packages                                                                                   |
-| `yarn install:playwright`    | Install playwright for e2e                                                                                                           |
 | `yarn dedupe`                | Built-in yarn deduplication of the lock file                                                                                         |
 | `yarn build`                 | Builds application with rollup.                                                                                                      |     |
 | `yarn publish-canary`        | Publishes a canary tagged version of the application. CD is configured to run this script on additions tot he main branch.           |     |

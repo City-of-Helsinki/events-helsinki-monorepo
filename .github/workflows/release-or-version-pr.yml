@@ -41,7 +41,6 @@ jobs:
         run: |
           yarn install --immutable --inline-builds
         env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
           HUSKY: 0
 
       # @link https://github.com/changesets/action

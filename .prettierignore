@@ -1,4 +1,6 @@
 .yarn
+graphql.ts 
+graphql.tsx
 **/.next/**
 **/dist/**
 **/build/**

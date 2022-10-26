@@ -11,10 +11,10 @@ and the [linter docs](./about-linters.md).
 ```
 .
 ├── apps
-│   ├── remix-app
+│   ├── hobbies-helsinki
 │   │   ├── .eslintrc.js
 │   │   └── lint-staged.config.js   (overwrite global lint-staged.config.js, custom eslint)
-│   └── nextjs-app
+│   └── events-helsinki
 │       ├── .eslintrc.js
 │       └── lint-staged.config.js   (overwrite global lint-staged.config.js, custom eslint)
 ├── packages

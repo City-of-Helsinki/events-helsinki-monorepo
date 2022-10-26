@@ -410,6 +410,10 @@ export const getSearchQuery = (filters: Filters): string => {
     delete newFilters.dateTypes;
   }
 
+  if (newFilters.text?.length && !newFilters.text[0]) {
+    delete newFilters.text;
+  }
+
   return buildQueryFromObject(newFilters);
 };
 

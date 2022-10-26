@@ -143,9 +143,10 @@ const AdvancedSearch: React.FC<Props> = ({
   const moveToSearchPage = () => {
     const filters = {
       ...searchFilters,
-      ...(autosuggestInput && { text: [autosuggestInput] }),
+      ...{ text: [autosuggestInput] },
     };
     const search = getSearchQuery(filters);
+
     goToSearch(search);
   };
 

@@ -140,5 +140,5 @@ it('provides configuration for Matomo', () => {
 });
 
 it('gives access to misc configs', () => {
-  expect(AppConfig.supportedEventTypes).toStrictEqual([EventTypeId.Course]);
+  expect(AppConfig.supportedEventTypes).toStrictEqual([EventTypeId.General]);
 });

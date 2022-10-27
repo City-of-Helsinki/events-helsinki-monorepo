@@ -175,6 +175,7 @@ jobs:
 
       - name: Run Acceptance Tests
         id: testcafe
+        working-directory: apps/events-helsinki
         run: yarn test:browser:ci
         env:
           BROWSER_TESTS_ENV_URL: ${{ env.CUSTOM_ENVIRONMENT_URL }}

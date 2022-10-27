@@ -44,12 +44,6 @@
     "docker:hobbies:develop:reinstall": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --progress=tty --no-cache --force-rm develop",
     "docker:hobbies:build": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml --env-file ./apps/hobbies-helsinki/.env.local build --progress=tty runner",
     "docker:hobbies:serve": "docker-compose -f docker-compose.hobbies.yml --env-file ./apps/hobbies-helsinki/.env.local up runner",
-    "docker:nextjs-app:install": "docker buildx bake -f docker-compose.nextjs-app.yml --progress=tty deps",
-    "docker:nextjs-app:develop": "cross-env DOCKER_BUILDKIT=1 docker-compose -f ./docker-compose.yml -f docker-compose.nextjs-app.yml up develop main-db",
-    "docker:nextjs-app:develop:reinstall": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.nextjs-app.yml build --progress=tty --no-cache --force-rm develop",
-    "docker:nextjs-app:build": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.nextjs-app.yml build --progress=tty runner",
-    "docker:nextjs-app:serve": "docker-compose -f docker-compose.nextjs-app.yml --env-file ./apps/nextjs-app/.env.local up runner",
-    "docker:up:main-db": "docker-compose up -d main-db",
     "docker:down": "docker-compose down",
     "docker:nuke-all": "npm-run-all --sequential --continue-on-error --print-label \"docker:nuke:*\"",
     "docker:nuke:images": "docker image rm -f $(docker image ls -q)",
@@ -62,7 +56,6 @@
     "deps:update": "yarn dlx npm-check-updates@latest --configFileName ncurc.yml -u --deep --mergeConfig",
     "check:install": "yarn dlx @yarnpkg/doctor@3.1.4 .",
     "check:renovate:config": "docker run -v renovate.json5:/usr/src/app/renovate.json5 -it renovate/renovate renovate-config-validator",
-    "install:playwright": "playwright install",
     "postinstall": "is-ci || yarn husky install"
   },
   "dependencies": {
@@ -74,7 +67,6 @@
     "@commitlint/cli": "17.1.2",
     "@commitlint/config-conventional": "17.1.0",
     "@events-helsinki/eslint-config-bases": "workspace:^",
-    "@playwright/test": "1.26.1",
     "@types/prettier": "2.7.1",
     "@types/shell-quote": "1.7.1",
     "cross-env": "7.0.3",

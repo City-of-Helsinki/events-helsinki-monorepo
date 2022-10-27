@@ -1,1 +1,0 @@
-# events-helsinki-api-gateway

@@ -1,4 +1,5 @@
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push 
+
 # an update to the specified branches or you push specified tags.
 trigger:
   batch: true

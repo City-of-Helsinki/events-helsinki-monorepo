@@ -36,6 +36,10 @@
   }
 
   @include respond-above(m) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond-above(xl) {
     grid-template-columns: repeat(5, 1fr);
   }
 }

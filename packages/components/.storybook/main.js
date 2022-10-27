@@ -22,10 +22,6 @@ module.exports = {
     // @link https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#opt-in-mdx2-support
     previewMdx2: false,
   },
-  babel: (config) => {
-    config.presets.push(require.resolve('@emotion/babel-preset-css-prop'));
-    return config;
-  },
   webpackFinal: async (config) => {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(

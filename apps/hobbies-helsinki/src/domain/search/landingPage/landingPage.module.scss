@@ -10,7 +10,8 @@ $mainBackground: var(--color-fog-medium-light);
   .main {
     overflow: hidden;
     .sectionHero {
-      min-height: 75vh;
+      height: 75vh;
+      max-height: 900px;
     }
 
     .highhighlight {

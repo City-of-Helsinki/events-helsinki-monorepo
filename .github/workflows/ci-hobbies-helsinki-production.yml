@@ -2,7 +2,7 @@ name: Hobbies Helsinki Build & Production
 on:
   push:
     tags:
-      - 'release-*'
+      - 'release-hobbies-*'
 
 # allow only one run at a time
 concurrency: ${{ github.workflow }}

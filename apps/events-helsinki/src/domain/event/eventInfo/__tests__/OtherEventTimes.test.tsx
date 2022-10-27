@@ -31,9 +31,9 @@ const endTime = '2020-10-01T18:00:00Z';
 const superEventId = 'hel:123';
 const superEventInternalId = `https://api.hel.fi/linkedevents/v1/event/${superEventId}`;
 
-const courseEvent = fakeEvent({
+const generalEvent = fakeEvent({
   superEvent: { internalId: superEventInternalId },
-  typeId: EventTypeId.Course,
+  typeId: EventTypeId.General,
 }) as EventFieldsFragment;
 
 const meta: Meta = {
@@ -51,7 +51,7 @@ const otherEventsResponse = {
     range(1, 11).map((i) => ({
       endTime: addDays(new Date(endTime), i).toISOString(),
       startTime: addDays(new Date(startTime), i).toISOString(),
-      typeId: EventTypeId.Course,
+      typeId: EventTypeId.General,
     }))
   ),
   meta,
@@ -104,7 +104,7 @@ afterAll(() => {
 
 const renderComponent = ({
   mocks = defaultMocks,
-  event = courseEvent,
+  event = generalEvent,
 }: {
   mocks?: MockedResponse[];
   event?: EventFieldsFragment;

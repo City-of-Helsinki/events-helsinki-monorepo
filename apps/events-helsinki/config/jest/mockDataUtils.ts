@@ -85,7 +85,7 @@ export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
       remainingAttendeeCapacity: 5,
       audienceMinAge: '5',
       audienceMaxAge: '15',
-      typeId: EventTypeId.Course,
+      typeId: EventTypeId.General,
       __typename: 'EventDetails',
     },
     overrides

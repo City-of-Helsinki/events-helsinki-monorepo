@@ -75,7 +75,7 @@ export type EventListMockArguments = {
 };
 
 export const createEventListRequestAndResultMocks = ({
-  type = 'course',
+  type = 'event',
   variables = {},
   response,
 }: EventListMockArguments): MockedResponse => ({
@@ -84,7 +84,7 @@ export const createEventListRequestAndResultMocks = ({
 });
 
 export const createEventListRequestThrowsErrorMocks = ({
-  type = 'course',
+  type = 'event',
   variables = {},
 }: EventListMockArguments = {}): MockedResponse => ({
   request: createRequest(type, variables),

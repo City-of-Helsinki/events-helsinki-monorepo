@@ -3,6 +3,7 @@ import React from 'react';
 import type { PageContentLayoutProps } from 'react-helsinki-headless-cms';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 import type { LandingPageQuery } from 'react-helsinki-headless-cms/apollo';
+import { MAIN_CONTENT_ID } from '../../../constants';
 
 import LandingPageSearch from '../landingPageSearch/LandingPageSearch';
 import styles from './landingPage.module.scss';
@@ -25,7 +26,7 @@ export function LandingPageContentLayout({
 
   return (
     <div className={styles.layout}>
-      <main className={styles.main}>
+      <main className={styles.main} id={MAIN_CONTENT_ID}>
         <div className={styles.highlight}>
           {landingPage?.translation && (
             <PageSection

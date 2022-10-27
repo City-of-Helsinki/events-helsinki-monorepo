@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
-import { ROUTES } from '../../constants';
+import { MAIN_CONTENT_ID, ROUTES } from '../../constants';
 import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
 import ErrorHero from '../error/ErrorHero';
 import type { EventFieldsFragment } from '../nextApi/graphql/generated/graphql';
@@ -83,7 +83,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
   const eventClosed = !event || isEventClosed(event);
   return (
     <div className={styles.eventPageWrapper}>
-      <main>
+      <main id={MAIN_CONTENT_ID}>
         <LoadingSpinner isLoading={loading}>
           {event ? (
             <>

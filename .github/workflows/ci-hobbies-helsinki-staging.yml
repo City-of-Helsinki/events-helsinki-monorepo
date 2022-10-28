@@ -119,6 +119,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
       - name: Run Acceptance Tests
+        id: testcafe
+        working-directory: apps/hobbies-helsinki
         run: yarn test:browser:ci
         env:
           BROWSER_TESTS_ENV_URL: https://${{ secrets.ENVIRONMENT_URL_STAGING_HARRASTUKSET }}

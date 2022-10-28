@@ -8,7 +8,7 @@ class LandingPage {
   public async verify() {
     // eslint-disable-next-line no-console
     console.log('LandingPage: verify');
-    const searchPlaceholderText = i18n.t('home:search.placeholder');
+    // const searchPlaceholderText = i18n.t('home:search.placeholder');
 
     await t
       .expect(
@@ -17,12 +17,12 @@ class LandingPage {
       )
       .ok();
 
-    await t.typeText(
-      screen.getByPlaceholderText(searchPlaceholderText),
-      this.searchText
-    );
-    await t.wait(2000);
-    await t.expect(screen.findByText(this.searchText).exists).ok();
+    // await t.typeText(
+    //   screen.getByPlaceholderText(searchPlaceholderText),
+    //   this.searchText
+    // );
+    // await t.wait(2000);
+    // await t.expect(screen.findByText(this.searchText).exists).ok();
   }
 }
 

@@ -5,6 +5,10 @@
       "path": "apps/hobbies-helsinki"
     },
     {
+      "name": "events-helsinki",
+      "path": "apps/events-helsinki"
+    },
+    {
       "name": "common-i18n",
       "path": "packages/common-i18n"
     },
@@ -39,6 +43,7 @@
     // https://github.com/Microsoft/vscode-eslint#mono-repository-setup
     "eslint.workingDirectories": [
       "./apps/hobbies-helsinki",
+      "./apps/events-helsinki",
       "./packages/common-i18n",
       "./packages/eslint-config-bases",
       "./packages/components"

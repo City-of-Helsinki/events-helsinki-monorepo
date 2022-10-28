@@ -44,7 +44,7 @@ env:
   NEXT_PUBLIC_MATOMO_SRC_URL: 'piwik.min.js'
   NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
   NEXT_PUBLIC_MATOMO_ENABLED: 0
-  NEXT_PUBLIC_APP_ORIGIN: https://${{ secrets.ENVIRONMENT_URL_STAGING }}
+  NEXT_PUBLIC_APP_ORIGIN: https://${{ secrets.ENVIRONMENT_URL_STAGING_HARRASTUKSET }}
 
 jobs:
   build:
@@ -55,7 +55,7 @@ jobs:
       - name: Build
         uses: andersinno/kolga-build-action@v2
         env:
-          DOCKER_IMAGE_NAME: hobbies-helsinki-staging
+          DOCKER_IMAGE_NAME: ${{ env.PROJECT }}-staging
           DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
           DOCKER_BUILD_ARG_PROJECT: ${{ env.PROJECT }}
           DOCKER_BUILD_ARG_SENTRY_AUTH_TOKEN: ${{ secrets.GH_SENTRY_AUTH_TOKEN }}
@@ -87,9 +87,10 @@ jobs:
         with:
           track: 'staging'
         env:
-          K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE_STAGING }}
-          ENVIRONMENT_URL: https://${{ secrets.ENVIRONMENT_URL_STAGING }}
-          DOCKER_IMAGE_NAME: hobbies-helsinki-staging
+          K8S_NAMESPACE: ${{ secrets.K8S_NAMESPACE_STAGING_HARRASTUKSET }}
+          ENVIRONMENT_URL: https://${{ secrets.ENVIRONMENT_URL_STAGING_HARRASTUKSET }}
+          ENVIRONMENT_SLUG: ${{ env.PROJECT }}
+          DOCKER_IMAGE_NAME: ${{ env.PROJECT }}-staging
           K8S_SECRET_NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT }}
           K8S_SECRET_NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT }}
           K8S_SECRET_NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: ${{ env.NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT }}
@@ -120,7 +121,7 @@ jobs:
       - name: Run Acceptance Tests
         run: yarn test:browser:ci
         env:
-          BROWSER_TESTS_ENV_URL: https://${{ secrets.ENVIRONMENT_URL_STAGING }}
+          BROWSER_TESTS_ENV_URL: https://${{ secrets.ENVIRONMENT_URL_STAGING_HARRASTUKSET }}
       - name: Upload screenshots and videos of failed tests to artifact
         uses: actions/upload-artifact@v2
         with:

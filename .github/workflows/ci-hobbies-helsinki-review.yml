@@ -92,13 +92,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Build the hobbies-helsinki image
+      - name: Build the Hobbies-Helsinki image
         uses: andersinno/kolga-build-action@v2
         env:
           DOCKER_BUILD_SOURCE: ./Dockerfile
           DOCKER_BUILD_CONTEXT: .
           DOCKER_BUILD_TARGET: runner
-          DOCKER_IMAGE_NAME: hobbies-helsinki-review
+          DOCKER_IMAGE_NAME: ${{ env.PROJECT }}-review
           DOCKER_BUILD_ARG_NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT }}
           DOCKER_BUILD_ARG_NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: ${{ env.NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT }}
@@ -136,7 +136,8 @@ jobs:
         uses: andersinno/kolga-deploy-action@v2
         env:
           ENVIRONMENT_URL: ${{ env.CUSTOM_ENVIRONMENT_URL }}
-          DOCKER_IMAGE_NAME: hobbies-helsinki-review
+          ENVIRONMENT_SLUG: ${{ env.PROJECT }}
+          DOCKER_IMAGE_NAME: ${{ env.PROJECT }}-review
           K8S_SECRET_NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT }}
           K8S_SECRET_NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: ${{ env.NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT }}
           K8S_SECRET_NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: ${{ env.NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT }}
@@ -151,9 +152,9 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          header: deployment-url
+          header: ${{ env.PROJECT }}-deployment-url
           message: |
-            **Harrastus-helsinki branch is deployed to: ${{ env.CUSTOM_ENVIRONMENT_URL }}** :rocket::rocket::rocket:
+            **Hobbies-Helsinki branch is deployed to: ${{ env.CUSTOM_ENVIRONMENT_URL }}** :rocket::rocket::rocket:
 
       # browser tests
       - name: Setup Node
@@ -175,6 +176,7 @@ jobs:
 
       - name: Run Acceptance Tests
         id: testcafe
+        working-directory: apps/hobbies-helsinki
         run: yarn test:browser:ci
         env:
           BROWSER_TESTS_ENV_URL: ${{ env.CUSTOM_ENVIRONMENT_URL }}
@@ -188,7 +190,7 @@ jobs:
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          header: testcafe-results
+          header: ${{ env.PROJECT }}-testcafe-results
           message: |
             ## TestCafe result is __${{ steps.testcafe.outcome }}__ for ${{ env.CUSTOM_ENVIRONMENT_URL }}! ${{steps.testcafe.outcome == 'success' && ':laughing::tada::tada::tada:' || ':crying_cat_face::anger::boom::boom:' }}
         if: always() && (steps.testcafe.outcome == 'success' || steps.testcafe.outcome == 'failure')

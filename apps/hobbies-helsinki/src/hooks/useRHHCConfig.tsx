@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { useLocale } from 'events-helsinki-components';
-import { useTranslation } from 'next-i18next';
+import {
+  useLocale,
+  useCommonTranslation,
+  useCmsTranslation,
+} from 'events-helsinki-components';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
@@ -24,8 +27,8 @@ export default function useRHHCConfig(
   cmsApolloClient: ApolloClient<NormalizedCacheObject>,
   eventsApolloClient: ApolloClient<NormalizedCacheObject>
 ) {
-  const { t: commonTranslation } = useTranslation('common');
-  const { t: cmsTranslation } = useTranslation('cms');
+  const { t: commonTranslation } = useCommonTranslation();
+  const { t: cmsTranslation } = useCmsTranslation();
   const locale = useLocale();
 
   return React.useMemo(() => {
@@ -62,40 +65,44 @@ export default function useRHHCConfig(
         '/shared-assets/images/event_placeholder_C.jpg',
         '/shared-assets/images/event_placeholder_D.jpg',
       ],
-      siteName: commonTranslation('appName'),
+      siteName: commonTranslation('hobbiesCommon:appName'),
       currentLanguageCode: locale.toUpperCase(),
       apolloClient: cmsApolloClient,
       eventsApolloClient: eventsApolloClient,
       copy: {
         breadcrumbNavigationLabel: commonTranslation(
-          'breadcrumb.breadcrumbNavigationLabel'
+          'common:breadcrumb.breadcrumbNavigationLabel'
         ),
         breadcrumbListLabel: commonTranslation(
-          'breadcrumb.breadcrumbListLabel'
+          'common:breadcrumb.breadcrumbListLabel'
         ),
-        menuToggleAriaLabel: commonTranslation('menu.menuToggleAriaLabel'),
-        skipToContentLabel: commonTranslation('linkSkipToContent'),
+        menuToggleAriaLabel: commonTranslation(
+          'common:menu.menuToggleAriaLabel'
+        ),
+        skipToContentLabel: commonTranslation('common:linkSkipToContent'),
         openInExternalDomainAriaLabel: commonTranslation(
-          'srOnly.opensInAnExternalSite'
+          'common:srOnly.opensInAnExternalSite'
         ),
-        openInNewTabAriaLabel: commonTranslation('srOnly.opensInANewTab'),
-        closeButtonLabelText: commonTranslation('button.close'),
-        loadMoreButtonLabelText: commonTranslation('button.loadMore'),
-        showAllText: commonTranslation('button.showAll'),
+        openInNewTabAriaLabel: commonTranslation(
+          'common:srOnly.opensInANewTab'
+        ),
+        closeButtonLabelText: commonTranslation('common:button.close'),
+        loadMoreButtonLabelText: commonTranslation('common:button.loadMore'),
+        showAllText: commonTranslation('common:button.showAll'),
         archiveSearch: {
-          title: cmsTranslation('archiveSearch.title'),
+          title: cmsTranslation('cms:archiveSearch.title'),
           searchTextPlaceholder: cmsTranslation(
-            'archiveSearch.searchTextPlaceholder'
+            'cms:archiveSearch.searchTextPlaceholder'
           ),
           searchButtonLabelText: cmsTranslation(
-            'archiveSearch.searchButtonLabelText'
+            'cms:archiveSearch.searchButtonLabelText'
           ),
           loadMoreButtonLabelText: cmsTranslation(
-            'archiveSearch.loadMoreButtonLabelText'
+            'cms:archiveSearch.loadMoreButtonLabelText'
           ),
-          noResultsTitle: cmsTranslation('archiveSearch.noResultsTitle'),
-          noResultsText: cmsTranslation('archiveSearch.noResultsText'),
-          clearAll: cmsTranslation('archiveSearch.buttonClearFilters'),
+          noResultsTitle: cmsTranslation('cms:archiveSearch.noResultsTitle'),
+          noResultsText: cmsTranslation('cms:archiveSearch.noResultsText'),
+          clearAll: cmsTranslation('cms:archiveSearch.buttonClearFilters'),
         },
       },
       utils: {

@@ -1,6 +1,9 @@
-import { useLocale, resetFocusId } from 'events-helsinki-components';
-import useCommonTranslation from 'events-helsinki-components/hooks/useCommonTranslation';
-import useFooterTranslation from 'events-helsinki-components/hooks/useFooterTranslation';
+import {
+  useCommonTranslation,
+  useFooterTranslation,
+  useLocale,
+  resetFocusId,
+} from 'events-helsinki-components';
 import { Footer, Link } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
@@ -29,7 +32,7 @@ const FooterSection: FunctionComponent = () => {
   };
 
   return (
-    <Footer title={tCommon('common:appName')} className={styles.footer}>
+    <Footer title={tCommon('hobbiesCommon:appName')} className={styles.footer}>
       <Footer.Navigation>
         <Footer.Item
           as={Link}

@@ -194,3 +194,4 @@ jobs:
           message: |
             ## TestCafe result is __${{ steps.testcafe.outcome }}__ for ${{ env.CUSTOM_ENVIRONMENT_URL }}! ${{steps.testcafe.outcome == 'success' && ':laughing::tada::tada::tada:' || ':crying_cat_face::anger::boom::boom:' }}
         if: always() && (steps.testcafe.outcome == 'success' || steps.testcafe.outcome == 'failure')
+

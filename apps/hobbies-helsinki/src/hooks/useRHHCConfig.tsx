@@ -10,6 +10,7 @@ import Link from 'next/link';
 import React from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
 import { defaultConfig as rhhcDefaultConfig } from 'react-helsinki-headless-cms';
+import { MAIN_CONTENT_ID } from '../constants';
 
 import AppConfig from '../domain/app/AppConfig';
 import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
@@ -43,6 +44,7 @@ export default function useRHHCConfig(
     };
     return {
       ...rhhcDefaultConfig,
+      mainContentId: MAIN_CONTENT_ID,
       components: {
         ...rhhcDefaultConfig.components,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

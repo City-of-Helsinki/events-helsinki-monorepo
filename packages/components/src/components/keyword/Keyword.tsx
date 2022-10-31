@@ -26,6 +26,7 @@ const Keyword: FunctionComponent<Props> = ({
 
   return (
     <button
+      {...(!onClick && { tabindex: -1 })}
       className={classNames(styles.keyword, color && styles[color], {
         [styles.blackOnMobile]: blackOnMobile,
         [styles.hideOnMobile]: hideOnMobile,

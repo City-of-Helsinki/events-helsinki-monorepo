@@ -59,7 +59,12 @@ const EventDetails: React.FC<EventDetailsProps> = (props) => {
         </div>
       )}
       <div className={styles.infoRow}>
-        <EventKeywords event={event} showIsFree showKeywordsCount />
+        <EventKeywords
+          event={event}
+          showIsFree
+          showKeywordsCount
+          withActions={false}
+        />
       </div>
     </div>
   );

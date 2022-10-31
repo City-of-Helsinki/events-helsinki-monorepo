@@ -6,12 +6,12 @@ exports[`matches snapshot 1`] = `
 >
   <a
     aria-label="text"
-    class="LinkBase-module_link__djxNm LinkBase_hds-link__4Kjdj LinkBase-module_linkM__Hz4Zc LinkBase_hds-link--medium__bHZ5t LinkBase-module_disableVisitedStyles__S6UjE LinkBase_hds-link--disable-visited-styles__cQcea Link-module_link__ysKHd"
+    class="LinkBase-module_link__djxNm i__imported_hds_link_0 LinkBase-module_linkM__Hz4Zc i__imported_hds_link__medium_7 LinkBase-module_disableVisitedStyles__S6UjE i__imported_hds_link__disable_visited_styles_5 Link-module_link__ysKHd"
     href="/test"
   >
     <span
       aria-hidden="true"
-      class="LinkBase-module_iconLeft__Joa9y LinkBase_hds-icon-left__e0wBz"
+      class="LinkBase-module_iconLeft__Joa9y i__imported_hds_icon_left_2"
     >
       <svg
         class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_s__2WGWe icon_hds-icon--size-s__2Lkik"
@@ -36,7 +36,7 @@ exports[`matches snapshot 1`] = `
     text
     <span
       aria-hidden="true"
-      class="LinkBase-module_verticalAlignSmallOrMediumIcon__0SjrX LinkBase_vertical-align-small-or-medium-icon__wxjmq"
+      class="LinkBase-module_verticalAlignSmallOrMediumIcon__0SjrX i__imported_vertical_align_small_or_medium_icon_3"
     >
       <svg
         aria-hidden="true"

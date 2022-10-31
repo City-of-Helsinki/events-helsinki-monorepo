@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 import {
   Keyword,
   useLocale,
@@ -22,6 +23,7 @@ interface Props {
   showIsFree: boolean;
   showKeywords?: boolean;
   showKeywordsCount?: boolean;
+  withActions?: boolean;
 }
 const EventKeywords: React.FC<Props> = ({
   blackOnMobile,
@@ -30,6 +32,7 @@ const EventKeywords: React.FC<Props> = ({
   showIsFree,
   showKeywords = true,
   showKeywordsCount,
+  withActions = true,
 }) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
@@ -78,21 +81,27 @@ const EventKeywords: React.FC<Props> = ({
         <Keyword
           color="engelLight50"
           keyword={t('categories.labelToday')}
-          onClick={handleClick('dateType', DATE_TYPES.TODAY)}
+          onClick={
+            withActions ? handleClick('dateType', DATE_TYPES.TODAY) : undefined
+          }
         />
       )}
       {!today && thisWeek && (
         <Keyword
           color="engelLight50"
           keyword={t('categories.labelThisWeek')}
-          onClick={handleClick('dateType', DATE_TYPES.THIS_WEEK)}
+          onClick={
+            withActions
+              ? handleClick('dateType', DATE_TYPES.THIS_WEEK)
+              : undefined
+          }
         />
       )}
       {showIsFree && freeEvent && (
         <Keyword
           color="tramLight20"
           keyword={t('categories.labelFree')}
-          onClick={handleClick('isFree')}
+          onClick={withActions ? handleClick('isFree') : undefined}
         />
       )}
       {showKeywords &&
@@ -104,7 +113,7 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={first.id}
             keyword={first.name}
-            onClick={handleClick('text', first.name)}
+            onClick={withActions ? handleClick('text', first.name) : undefined}
           />
         )}
       {showKeywords &&
@@ -118,7 +127,7 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={second.id}
             keyword={second.name}
-            onClick={handleClick('text', second.name)}
+            onClick={withActions ? handleClick('text', second.name) : undefined}
           />
         )}
       {!!restKeywords.length &&
@@ -131,7 +140,7 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={tag.id}
             keyword={tag.name}
-            onClick={handleClick('text', tag.name)}
+            onClick={withActions ? handleClick('text', tag.name) : undefined}
           />
         ))}
       {!!restKeywords.length && showKeywords && showKeywordsCount && (

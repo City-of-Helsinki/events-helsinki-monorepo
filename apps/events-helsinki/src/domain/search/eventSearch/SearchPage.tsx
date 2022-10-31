@@ -11,6 +11,7 @@ import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
 import EventList from '../../../common-events/components/eventList/EventList';
+import { MAIN_CONTENT_ID } from '../../../constants';
 import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 import { getLargeEventCardId } from '../../event/EventUtils';
 import type { QueryEventListArgs } from '../../nextApi/graphql/generated/graphql';
@@ -120,40 +121,42 @@ const SearchPage: React.FC<{
         scrollToResultList={scrollToResultList}
         data-testid="searchContainer"
       />
-      <div
-        className={styles.resultList}
-        id="resultList"
-        data-testid="resultList"
-      >
-        <SrOnly aria-live="polite" aria-atomic={true}>
-          {isLoadingEvents
-            ? t('search:ariaLiveLoading')
-            : t('search:ariaLiveSearchReady', {
-                count: eventsList?.meta.count,
-              })}
-        </SrOnly>
-        <LoadingSpinner
-          className={styles.spinner}
-          isLoading={!isFetchingMore && isLoadingEvents}
+      <main id={MAIN_CONTENT_ID}>
+        <div
+          className={styles.resultList}
+          id="resultList"
+          data-testid="resultList"
         >
-          {eventsList && (
-            <SearchResultsContainer
-              eventsCount={eventsList.meta.count}
-              loading={isLoadingEvents}
-              eventList={
-                <EventList
-                  cardSize="large"
-                  events={eventsList.data}
-                  hasNext={!!eventsList.meta.next}
-                  count={eventsList.meta.count}
-                  loading={isLoadingEvents}
-                  onLoadMore={handleLoadMore}
-                />
-              }
-            />
-          )}
-        </LoadingSpinner>
-      </div>
+          <SrOnly aria-live="polite" aria-atomic={true}>
+            {isLoadingEvents
+              ? t('search:ariaLiveLoading')
+              : t('search:ariaLiveSearchReady', {
+                  count: eventsList?.meta.count,
+                })}
+          </SrOnly>
+          <LoadingSpinner
+            className={styles.spinner}
+            isLoading={!isFetchingMore && isLoadingEvents}
+          >
+            {eventsList && (
+              <SearchResultsContainer
+                eventsCount={eventsList.meta.count}
+                loading={isLoadingEvents}
+                eventList={
+                  <EventList
+                    cardSize="large"
+                    events={eventsList.data}
+                    hasNext={!!eventsList.meta.next}
+                    count={eventsList.meta.count}
+                    loading={isLoadingEvents}
+                    onLoadMore={handleLoadMore}
+                  />
+                }
+              />
+            )}
+          </LoadingSpinner>
+        </div>
+      </main>
     </div>
   );
 };

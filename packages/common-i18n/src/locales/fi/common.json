@@ -82,5 +82,7 @@
   },
   "share": {
     "article": "Jaa artikkeli"
-  }
+  },
+  "next": "Seuraavat",
+  "previous": "Edelliset"
 }

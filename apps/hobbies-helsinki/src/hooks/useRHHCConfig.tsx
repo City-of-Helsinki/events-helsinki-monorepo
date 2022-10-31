@@ -72,6 +72,8 @@ export default function useRHHCConfig(
       apolloClient: cmsApolloClient,
       eventsApolloClient: eventsApolloClient,
       copy: {
+        next: commonTranslation('common:next'),
+        previous: commonTranslation('common:previous'),
         breadcrumbNavigationLabel: commonTranslation(
           'common:breadcrumb.breadcrumbNavigationLabel'
         ),

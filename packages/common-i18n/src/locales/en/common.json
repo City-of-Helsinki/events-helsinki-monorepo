@@ -82,5 +82,7 @@
   },
   "share": {
     "article": "Share article"
-  }
+  },
+  "next": "Next",
+  "previous": "Previous"
 }

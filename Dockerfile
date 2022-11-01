@@ -109,7 +109,8 @@ COPY --chown=appuser:appuser  . .
 COPY --from=deps --chown=appuser:appuser /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN yarn workspace ${PROJECT} share-static-hardlink && yarn workspace ${PROJECT} build
+RUN yarn workspace ${PROJECT} share-static-hardlink 
+RUN yarn workspace ${PROJECT} build
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673

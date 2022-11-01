@@ -32,6 +32,7 @@ USER appuser
 WORKDIR /docker-context
 COPY --chown=appuser:appuser . /docker-context
 
+# mount type bind is not supported on current version (4.10.35) of OpenShift build
 # RUN --mount=type=bind,source=./,target=/docker-context \
 RUN rsync -amv --delete \
     --owner=appuser --group=appuser \
@@ -40,11 +41,6 @@ RUN rsync -amv --delete \
     --include='package.json' \
     --include='*/' --exclude='*' \
     /docker-context/ /workspace-install/;
-
-# Copy all files
-WORKDIR /docker-context
-COPY --chown=appuser:appuser . /docker-context
-
 
 RUN chown -R appuser:appuser .
 
@@ -68,9 +64,10 @@ RUN apt-get remove -y rsync && \
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
 
-RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
-    YARN_CACHE_FOLDER=/root/.yarn3-cache \
-    yarn install --immutable --inline-builds
+# mount type cache is not supported on current version (4.10.35) of OpenShift build
+#RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
+#    YARN_CACHE_FOLDER=/root/.yarn3-cache \
+#    yarn install --immutable --inline-builds
 
 
 ###################################################################
@@ -118,10 +115,11 @@ RUN yarn workspace ${PROJECT} share-static-hardlink && yarn workspace ${PROJECT}
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
-RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
-    SKIP_POSTINSTALL=1 \
-    YARN_CACHE_FOLDER=/root/.yarn3-cache \
-    yarn workspaces focus ${PROJECT} --production
+# mount type cache is not supported on current version (4.10.35) of OpenShift build
+#RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
+#    SKIP_POSTINSTALL=1 \
+#    YARN_CACHE_FOLDER=/root/.yarn3-cache \
+#    yarn workspaces focus ${PROJECT} --production
 
 CMD ["sh", "-c", "echo ${PROJECT}"]
 

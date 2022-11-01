@@ -28,8 +28,12 @@ USER appuser
 #
 #   - All package.json present in the host (root, apps/*, packages/*)
 #
-RUN --mount=type=bind,source=./,target=/docker-context \
-    rsync -amv --delete \
+# Copy all files
+WORKDIR /docker-context
+COPY --chown=appuser:appuser . /docker-context
+
+# RUN --mount=type=bind,source=./,target=/docker-context \
+RUN rsync -amv --delete \
     --owner=appuser --group=appuser \
     --exclude='node_modules' \
     --exclude='*/node_modules' \
@@ -38,7 +42,10 @@ RUN --mount=type=bind,source=./,target=/docker-context \
     /docker-context/ /workspace-install/;
 
 # Copy all files
-# COPY --chown=appuser:appuser . .
+WORKDIR /docker-context
+COPY --chown=appuser:appuser . /docker-context
+
+
 RUN chown -R appuser:appuser .
 
 # remove rsync and apt cache

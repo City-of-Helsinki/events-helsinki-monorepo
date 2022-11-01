@@ -26,7 +26,7 @@ COPY --chown=appuser:appuser .yarn/ ./.yarn/
 #
 #   - All package.json present in the host (root, apps/*, packages/*)
 #
-RUN --mount=type=bind,target=/docker-context \
+RUN --mount=type=bind,source=./,target=/docker-context \
     rsync -amv --delete \
     --owner=appuser --group=appuser \
     --exclude='node_modules' \

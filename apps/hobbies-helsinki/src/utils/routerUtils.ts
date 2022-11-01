@@ -7,7 +7,7 @@ import qs from 'query-string';
 // import { DEFAULT_LANGUAGE, Language, SUPPORT_LANGUAGES } from 'events-helsinki-components';
 import i18nRoutes from '../../i18nRoutes.config';
 import { i18n } from '../../next-i18next.config';
-import { DEFAULT_LANGUAGE } from '../constants';
+import { DEFAULT_LANGUAGE, ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import { SUPPORT_LANGUAGES } from '../types';
 import type { Language } from '../types';
@@ -87,10 +87,11 @@ export const removeQueryParamsFromRouter = (
     Object.keys(queryObject).forEach((param) => delete queryObject[param]);
   }
   router.replace(
-    {
-      pathname: router.pathname,
-      query: router.query,
-    },
+    getLocalizedCmsItemUrl(
+      ROUTES.SEARCH,
+      {},
+      (router.locale || router.defaultLocale) as Language
+    ),
     undefined,
     /**
      * Do not refresh the page

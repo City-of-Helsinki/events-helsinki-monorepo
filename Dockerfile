@@ -73,8 +73,6 @@ RUN apt-get remove -y rsync && \
 ###################################################################
 
 FROM helsinkitest/node:16-slim  AS builder
-ARG YARN_CACHE_FOLDER=/root/.yarn3-cache
-
 # Build ARGS
 ARG PROJECT
 ARG NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT

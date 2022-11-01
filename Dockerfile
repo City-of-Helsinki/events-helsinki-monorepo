@@ -66,7 +66,6 @@ RUN apt-get remove -y rsync && \
 #RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
 #    YARN_CACHE_FOLDER=/root/.yarn3-cache \
 #    yarn install --immutable --inline-builds
-RUN yarn install --immutable --inline-builds
 
 
 ###################################################################
@@ -74,6 +73,8 @@ RUN yarn install --immutable --inline-builds
 ###################################################################
 
 FROM helsinkitest/node:16-slim  AS builder
+ARG YARN_CACHE_FOLDER=/root/.yarn3-cache
+
 # Build ARGS
 ARG PROJECT
 ARG NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT
@@ -110,7 +111,9 @@ COPY --chown=appuser:appuser  . .
 COPY --from=deps --chown=appuser:appuser /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-# RUN yarn workspace ${PROJECT} share-static-hardlink
+
+RUN yarn install --immutable --inline-builds
+RUN yarn workspace ${PROJECT} share-static-hardlink
 RUN yarn workspace ${PROJECT} build
 
 # Does not play well with buildkit on CI

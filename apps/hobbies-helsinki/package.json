@@ -15,7 +15,7 @@
     "?share-static-symlink": "echo 'Use this command to link assets... from shared static folder'",
     "share-static-symlink": "rimraf ./public/shared-assets && symlink-dir ../../static/assets ./public/shared-assets",
     "?share-static-hardlink": "echo 'Use this command to link assets... from shared static folder'",
-    "share-static-hardlink": "rimraf ./public/shared-assets && syncdir ../../static/assets ./public/shared-assets --copy",
+    "share-static-hardlink": "rm -fr ./public/shared-assets && syncdir ../../static/assets ./public/shared-assets --copy",
     "check-dist": "es-check -v",
     "check-size": "size-limit --highlight-less",
     "typecheck": "tsc --project ./tsconfig.json --noEmit",

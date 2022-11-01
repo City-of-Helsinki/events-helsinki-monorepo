@@ -17,6 +17,8 @@ WORKDIR /workspace-install
 
 COPY --chown=appuser:appuser yarn.lock .yarnrc.yml ./
 COPY --chown=appuser:appuser .yarn/ ./.yarn/
+# Use non-root user
+USER appuser
 
 # Specific to monerepo's as docker COPY command is pretty limited
 # we use buidkit to prepare all files that are necessary for install

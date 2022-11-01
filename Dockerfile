@@ -66,6 +66,7 @@ RUN apt-get remove -y rsync && \
 #RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
 #    YARN_CACHE_FOLDER=/root/.yarn3-cache \
 #    yarn install --immutable --inline-builds
+RUN yarn install --immutable --inline-builds
 
 
 ###################################################################
@@ -119,6 +120,7 @@ RUN yarn workspace ${PROJECT} build
 #    SKIP_POSTINSTALL=1 \
 #    YARN_CACHE_FOLDER=/root/.yarn3-cache \
 #    yarn workspaces focus ${PROJECT} --production
+RUN yarn workspaces focus ${PROJECT} --production
 
 CMD ["sh", "-c", "echo ${PROJECT}"]
 

@@ -26,8 +26,13 @@ COPY --chown=appuser:appuser .yarn/ ./.yarn/
 #
 #   - All package.json present in the host (root, apps/*, packages/*)
 #
-RUN --mount=type=bind,target=/docker-context \
-    rsync -amv --delete \
+# Copy all files
+WORKDIR /docker-context
+COPY --chown=appuser:appuser . /docker-context
+
+# mount type bind is not supported on current version (4.10.35) of OpenShift build
+# RUN --mount=type=bind,source=./,target=/docker-context \
+RUN rsync -amv --delete \
     --owner=appuser --group=appuser \
     --exclude='node_modules' \
     --exclude='*/node_modules' \
@@ -35,8 +40,6 @@ RUN --mount=type=bind,target=/docker-context \
     --include='*/' --exclude='*' \
     /docker-context/ /workspace-install/;
 
-# Copy all files
-# COPY --chown=appuser:appuser . .
 RUN chown -R appuser:appuser .
 
 # remove rsync and apt cache
@@ -59,9 +62,10 @@ RUN apt-get remove -y rsync && \
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
 
-RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
-    YARN_CACHE_FOLDER=/root/.yarn3-cache \
-    yarn install --immutable --inline-builds
+# mount type cache is not supported on current version (4.10.35) of OpenShift build
+#RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
+#    YARN_CACHE_FOLDER=/root/.yarn3-cache \
+#    yarn install --immutable --inline-builds
 
 
 ###################################################################
@@ -105,14 +109,19 @@ COPY --chown=appuser:appuser  . .
 COPY --from=deps --chown=appuser:appuser /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN yarn workspace ${PROJECT} share-static-hardlink && yarn workspace ${PROJECT} build
+
+RUN yarn install --immutable --inline-builds
+RUN yarn workspace ${PROJECT} share-static-hardlink
+RUN yarn workspace ${PROJECT} build
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
-RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
-    SKIP_POSTINSTALL=1 \
-    YARN_CACHE_FOLDER=/root/.yarn3-cache \
-    yarn workspaces focus ${PROJECT} --production
+# mount type cache is not supported on current version (4.10.35) of OpenShift build
+#RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
+#    SKIP_POSTINSTALL=1 \
+#    YARN_CACHE_FOLDER=/root/.yarn3-cache \
+#    yarn workspaces focus ${PROJECT} --production
+RUN yarn workspaces focus ${PROJECT} --production
 
 CMD ["sh", "-c", "echo ${PROJECT}"]
 

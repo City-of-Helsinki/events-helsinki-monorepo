@@ -37,7 +37,7 @@ const SimilarEvents: React.FC<Props> = ({ event, type = 'carousel' }) => {
   const cards = events.map((event, i) => {
     const cardProps = getEventCardProps(event, locale);
     const url = getLocalizedCmsItemUrl(
-      ROUTES.COURSES,
+      ROUTES.EVENTS,
       { eventId: event.id },
       locale
     );

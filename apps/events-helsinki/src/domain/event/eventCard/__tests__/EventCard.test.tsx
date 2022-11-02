@@ -66,7 +66,7 @@ describe('event card', () => {
         ),
       })
     );
-    expect(router.pathname).toStrictEqual('/kurssit/123');
+    expect(router.pathname).toStrictEqual('/tapahtumat/123');
   });
 
   it('should go to event page by clicking button', async () => {
@@ -80,6 +80,6 @@ describe('event card', () => {
         ),
       })
     );
-    expect(router.pathname).toStrictEqual('/kurssit/123');
+    expect(router.pathname).toStrictEqual('/tapahtumat/123');
   });
 });

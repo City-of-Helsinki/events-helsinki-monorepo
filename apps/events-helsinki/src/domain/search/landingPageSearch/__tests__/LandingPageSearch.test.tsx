@@ -98,7 +98,7 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { dateTypes: 'today' },
     });
-  }, 20000);
+  }, 40000);
 
   it('should route to event search page after selecting start date and pressing submit button', async () => {
     advanceTo('2020-10-04');
@@ -124,5 +124,5 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { start: '2020-10-06' },
     });
-  }, 20000);
+  }, 40000);
 });

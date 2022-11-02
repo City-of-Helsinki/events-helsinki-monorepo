@@ -250,7 +250,7 @@ it.skip('should create ics file succesfully when end time is not defined', async
 
 it('should hide audience age info on single event page', async () => {
   render(<EventInfo event={event} />, {
-    routes: [`/kurssit`],
+    routes: [`/tapahtumat`],
   });
 
   await waitFor(() => {
@@ -260,7 +260,7 @@ it('should hide audience age info on single event page', async () => {
 
 it('should show formatted audience age info on signle event page if max age is not specified', async () => {
   render(<EventInfo event={{ ...event, audienceMaxAge: null }} />, {
-    routes: [`/kurssit`],
+    routes: [`/tapahtumat`],
   });
 
   await waitFor(() => {
@@ -274,7 +274,7 @@ it('should hide audience age info on single event page if min and max ages are n
       event={{ ...event, audienceMinAge: null, audienceMaxAge: null }}
     />,
     {
-      routes: [`/kurssit`],
+      routes: [`/tapahtumat`],
     }
   );
 
@@ -322,7 +322,7 @@ describe('superEvent', () => {
         superEvent.name.fi!
       )
     );
-    expect(router.pathname).toBe(`/kurssit/${superEvent.id}`);
+    expect(router.pathname).toBe(`/tapahtumat/${superEvent.id}`);
   });
 
   it('should should not render super event title when super event is not given', async () => {
@@ -365,7 +365,7 @@ describe('subEvents', () => {
     await userEvent.click(
       within(eventsList).getByText(`${subEvent.name.fi} ${dateStr}`)
     );
-    expect(router.pathname).toBe(`/kurssit/${subEvent.id}`);
+    expect(router.pathname).toBe(`/tapahtumat/${subEvent.id}`);
   });
 
   // eslint-disable-next-line max-len

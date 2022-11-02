@@ -110,7 +110,7 @@ const mocks = [
   }),
 ];
 
-const testPath = `/courses/${id}`;
+const testPath = `/events/${id}`;
 const routes = [testPath];
 
 const renderComponent = (props: EventPageContainerProps) =>

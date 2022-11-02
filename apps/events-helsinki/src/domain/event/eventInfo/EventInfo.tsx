@@ -122,7 +122,7 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
         description: t('info.textCalendarLinkDescription', {
           description: shortDescription,
           link: `${domain}${getLocalizedCmsItemUrl(
-            ROUTES.COURSES,
+            ROUTES.EVENTS,
             { eventId: event.id },
             locale
           )}`,

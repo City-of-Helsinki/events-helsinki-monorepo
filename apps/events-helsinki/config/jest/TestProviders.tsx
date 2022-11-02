@@ -111,7 +111,7 @@ function getRHHCConfig(router: NextRouter) {
     }
     if (type === ModuleItemTypeEnum.Event) {
       return getLocalizedCmsItemUrl(
-        ROUTES.COURSES,
+        ROUTES.EVENTS,
         { eventId: uri.replace(/^\//, '') },
         locale
       );

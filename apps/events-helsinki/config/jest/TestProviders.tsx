@@ -21,12 +21,10 @@ import { I18nextProvider } from 'react-i18next';
 import EventsConfigProvider from '../../src/common-events/configProvider/ConfigProvider';
 import eventsDefaultConfig from '../../src/common-events/configProvider/defaultConfig';
 import { ROUTES } from '../../src/constants';
-import { createCmsApolloClient } from '../../src/domain/clients/cmsApolloClient';
-import { createEventsApolloClient } from '../../src/domain/clients/eventsApolloClient';
 import { getLocalizedCmsItemUrl } from '../../src/utils/routerUtils';
 import { initI18n as i18n } from './initI18n';
 
-const CMS_API_DOMAIN = 'harrastukset.cms.test.domain.com';
+const CMS_API_DOMAIN = 'tapahtumat.cms.test.domain.com';
 
 const mockRouter: Partial<NextRouter> = {
   locale: 'fi',
@@ -42,23 +40,41 @@ type Props = {
 };
 
 function TestProviders({ mocks, children, router }: Props) {
-  const eventsApolloClient = useApolloClient(createEventsApolloClient());
   return (
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     <I18nextProvider i18n={i18n}>
       <MockedProvider mocks={mocks} addTypename={false}>
-        <EventsConfigProvider
-          config={getEventsConfig(router, eventsApolloClient)}
-        >
-          <RHHCConfigProvider config={getRHHCConfig(router)}>
+        <EventsConfigProviderWithMockedApolloClient router={router}>
+          <RHHCConfigProviderWithMockedApolloClient router={router}>
             <RouterContext.Provider value={{ ...router, ...mockRouter }}>
               {children}
             </RouterContext.Provider>
-          </RHHCConfigProvider>
-        </EventsConfigProvider>
+          </RHHCConfigProviderWithMockedApolloClient>
+        </EventsConfigProviderWithMockedApolloClient>
       </MockedProvider>
     </I18nextProvider>
+  );
+}
+
+function RHHCConfigProviderWithMockedApolloClient({ children, router }: Props) {
+  const cmsApolloClient = useApolloClient(); // Use the mock client
+  return (
+    <RHHCConfigProvider config={getRHHCConfig(router, cmsApolloClient)}>
+      {children}
+    </RHHCConfigProvider>
+  );
+}
+
+function EventsConfigProviderWithMockedApolloClient({
+  children,
+  router,
+}: Props) {
+  const eventsApolloClient = useApolloClient(); // Use the mock client
+  return (
+    <EventsConfigProvider config={getEventsConfig(router, eventsApolloClient)}>
+      {children}
+    </EventsConfigProvider>
   );
 }
 
@@ -74,7 +90,7 @@ function getEventsConfig(
   } as unknown as EventsConfig;
 }
 
-function getRHHCConfig(router: NextRouter) {
+function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
   const locale = DEFAULT_LANGUAGE;
 
   const getIsHrefExternal = (href: string) => {
@@ -124,8 +140,7 @@ function getRHHCConfig(router: NextRouter) {
     ...rhhcDefaultConfig,
     siteName: 'appName',
     currentLanguageCode: locale.toUpperCase(),
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    apolloClient: useApolloClient(createCmsApolloClient()),
+    apolloClient,
     components: {
       ...rhhcDefaultConfig.components,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

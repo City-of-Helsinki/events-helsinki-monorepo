@@ -228,6 +228,21 @@ it('should change search query after clicking category menu item', async () => {
   });
 }, 50_000);
 
+it('should change search query with remote events checkbox', async () => {
+  const { router } = renderComponent();
+
+  const remoteEventsCheckbox = screen.getByRole('checkbox', {
+    name: /näytä vain etätapahtumat/i,
+  });
+
+  await userEvent.click(remoteEventsCheckbox);
+
+  expect(router).toMatchObject({
+    pathname,
+    query: { onlyRemoteEvents: 'true', text: 'jazz' },
+  });
+});
+
 // TODO: SKipped since there is no divisions input at the moment, but I've heard it should be there
 it.skip('disivions dropdown has additional divisions', async () => {
   renderComponent();

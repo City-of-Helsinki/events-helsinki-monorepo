@@ -65,7 +65,7 @@ const searchJazzMocks = [
     response: eventsResponse,
   }),
   createEventListRequestAndResultMocks({
-    variables: { allOngoingAnd: ['jazz'] },
+    variables: { internetBased: true, allOngoingAnd: ['jazz'] },
     response: {
       ...fakeEvents(1, [{ name: fakeLocalizedObject(testEventName) }]),
       meta: meta2,
@@ -250,3 +250,31 @@ it.todo('should scroll to result list on mobile screen');
 
 //   expect(scroller.scrollTo).toBeCalled();
 // });
+
+it('should search remote events with remote event checkbox', async () => {
+  advanceTo(new Date(2020, 7, 12));
+  renderComponent();
+
+  await waitFor(() => {
+    expect(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      screen.getByText(eventsResponse.data[0].name.fi!)
+    ).toBeInTheDocument();
+  });
+
+  const remoteEventCheckbox = screen.getByRole('checkbox', {
+    name: /näytä vain etätapahtumat/i,
+  });
+
+  await userEvent.click(remoteEventCheckbox);
+  // remote events search result should be visibe
+  await screen.findByText(testEventName);
+
+  // uncheck and previous search data comes from cache
+  await userEvent.click(remoteEventCheckbox);
+
+  eventsResponse.data.forEach((event) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    expect(screen.getByText(event.name.fi!)).toBeInTheDocument();
+  });
+});

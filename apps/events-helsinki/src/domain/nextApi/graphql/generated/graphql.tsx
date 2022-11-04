@@ -449,7 +449,6 @@ export type QueryEventListArgs = {
   keywordNot?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   keywordOrSet1?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   keywordOrSet2?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  keywordOrSet3?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   language?: InputMaybe<Scalars['String']>;
   localOngoingAnd?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   localOngoingOr?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -1278,9 +1277,6 @@ export type EventListQueryVariables = Exact<{
     Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
   >;
   keywordOrSet2?: InputMaybe<
-    Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
-  >;
-  keywordOrSet3?: InputMaybe<
     Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
   >;
   keywordNot?: InputMaybe<
@@ -2334,7 +2330,6 @@ export const EventListDocument = gql`
     $keywordAnd: [String]
     $keywordOrSet1: [String]
     $keywordOrSet2: [String]
-    $keywordOrSet3: [String]
     $keywordNot: [String]
     $language: String
     $localOngoingAnd: [String]
@@ -2370,7 +2365,6 @@ export const EventListDocument = gql`
       keywordAnd: $keywordAnd
       keywordOrSet1: $keywordOrSet1
       keywordOrSet2: $keywordOrSet2
-      keywordOrSet3: $keywordOrSet3
       keywordNot: $keywordNot
       language: $language
       localOngoingAnd: $localOngoingAnd
@@ -2430,7 +2424,6 @@ export const EventListDocument = gql`
  *      keywordAnd: // value for 'keywordAnd'
  *      keywordOrSet1: // value for 'keywordOrSet1'
  *      keywordOrSet2: // value for 'keywordOrSet2'
- *      keywordOrSet3: // value for 'keywordOrSet3'
  *      keywordNot: // value for 'keywordNot'
  *      language: // value for 'language'
  *      localOngoingAnd: // value for 'localOngoingAnd'

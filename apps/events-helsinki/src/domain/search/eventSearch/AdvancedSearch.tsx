@@ -8,7 +8,7 @@ import {
   useLocale,
 } from 'events-helsinki-components';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
-import { Button, IconSearch, IconLocation, IconGroup } from 'hds-react';
+import { Button, IconSearch, IconLocation } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import qs, { parse } from 'query-string';
@@ -29,7 +29,6 @@ import {
 import FilterSummary from './filterSummary/FilterSummary';
 import styles from './search.module.scss';
 import {
-  getCourseHobbyTypeOptions,
   getEventCategoryOptions,
   getSearchFilters,
   getSearchQuery,
@@ -54,10 +53,6 @@ const AdvancedSearch: React.FC<Props> = ({
   );
 
   const [categoryInput, setCategoryInput] = React.useState('');
-  const [hobbyTypeInput, setHobbyTypeInput] = React.useState('');
-  const [selectedHobbyTypes, setSelectedHobbyTypes] = React.useState<string[]>(
-    []
-  );
   const [minAgeInput, setMinAgeInput] = React.useState('');
   const [maxAgeInput, setMaxAgeInput] = React.useState('');
   // const [divisionInput, setDivisionInput] = React.useState("");
@@ -92,7 +87,6 @@ const AdvancedSearch: React.FC<Props> = ({
 
   const searchFilters = {
     categories: selectedCategories,
-    hobbyTypes: selectedHobbyTypes,
     dateTypes: selectedDateTypes,
     divisions: selectedDivisions,
     end,
@@ -113,7 +107,6 @@ const AdvancedSearch: React.FC<Props> = ({
   // const divisionOptions = useDivisionOptions();
 
   const categories = getEventCategoryOptions(t);
-  const hobbyTypes = getCourseHobbyTypeOptions(t);
 
   const goToSearch = (search: string): void => {
     router.push({
@@ -144,7 +137,6 @@ const AdvancedSearch: React.FC<Props> = ({
   React.useEffect(() => {
     const {
       categories,
-      hobbyTypes,
       dateTypes,
       divisions,
       end: endTime,
@@ -162,7 +154,6 @@ const AdvancedSearch: React.FC<Props> = ({
     }
 
     setSelectedCategories(categories);
-    setSelectedHobbyTypes(hobbyTypes || []);
     setSelectedDivisions(divisions);
     setSelectedPlaces(places);
     setSelectedTexts(text || []);
@@ -228,7 +219,6 @@ const AdvancedSearch: React.FC<Props> = ({
 
   const clearInputValues = () => {
     setCategoryInput('');
-    setHobbyTypeInput('');
     // setDivisionInput("");
     setPlaceInput('');
     setAutosuggestInput('');
@@ -290,20 +280,6 @@ const AdvancedSearch: React.FC<Props> = ({
                     showSearch={false}
                     title={t('search.titleDropdownCategory')}
                     value={selectedCategories}
-                  />
-                </div>
-                <div>
-                  <MultiSelectDropdown
-                    checkboxName="hobbyTypeOptions"
-                    icon={<IconGroup aria-hidden />}
-                    inputValue={hobbyTypeInput}
-                    name="hobbyType"
-                    onChange={setSelectedHobbyTypes}
-                    options={hobbyTypes}
-                    setInputValue={setHobbyTypeInput}
-                    showSearch={false}
-                    title={t('search.titleDropdownHobbyType')}
-                    value={selectedHobbyTypes}
                   />
                 </div>
                 <div className={styles.dateSelectorWrapper}>

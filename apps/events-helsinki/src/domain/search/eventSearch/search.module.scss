@@ -77,7 +77,7 @@ $buttonWidth: 180px;
     }
 
     & > :first-child {
-      @include respond-above(m) {
+      @include respond-above(s) {
         grid-column: 1 / 5;
       }
     }

@@ -254,6 +254,10 @@ const AdvancedSearch: React.FC<Props> = ({
                     searchValue={autosuggestInput}
                   />
                 </div>
+              </div>
+            </div>
+            <div className={styles.rowWrapper}>
+              <div className={styles.row}>
                 <div>
                   <MultiSelectDropdown
                     checkboxName="categoryOptions"
@@ -268,10 +272,6 @@ const AdvancedSearch: React.FC<Props> = ({
                     value={selectedCategories}
                   />
                 </div>
-              </div>
-            </div>
-            <div className={styles.rowWrapper}>
-              <div className={styles.row}>
                 <div>
                   <MultiSelectDropdown
                     checkboxName="hobbyTypeOptions"

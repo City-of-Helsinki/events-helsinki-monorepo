@@ -104,7 +104,6 @@ const mocks = [
     variables: {
       allOngoing: true,
       keywordOrSet2: eventKeywordIds,
-      keywordOrSet3: eventKeywordIds,
     },
     response: similarEvents,
   }),

@@ -23,29 +23,20 @@ import type {
   QueryEventListArgs,
 } from '../../nextApi/graphql/generated/graphql';
 import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
-import type {
-  COURSE_CATEGORIES,
-  EVENT_SORT_OPTIONS,
-  COURSE_HOBBY_TYPES,
-} from './constants';
+import type { COURSE_CATEGORIES, EVENT_SORT_OPTIONS } from './constants';
 import {
   EVENT_SEARCH_FILTERS,
   courseCategories,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
   MAPPED_COURSE_CATEGORIES,
-  courseHobbyTypes,
-  MAPPED_COURSE_HOBBY_TYPES,
 } from './constants';
 import type {
   CategoryOption,
   Filters,
-  HobbyTypeOption,
   MappedFilters,
   SearchCategoryOption,
   SearchCategoryType,
-  SearchHobbyType,
-  SearchHobbyTypeOption,
 } from './types';
 
 export const MIN_AGE = 0;
@@ -69,24 +60,6 @@ export const getCategoryOptions = (
   };
 };
 
-export const sortExtendedHobbyTypeOptions = (
-  a: HobbyTypeOption,
-  b: HobbyTypeOption
-) => (a.text > b.text ? 1 : b.text > a.text ? -1 : 0);
-
-export const getHobbyTypeOptions = (
-  hobbyType: SearchHobbyType,
-  hobbyTypeOption: SearchHobbyTypeOption,
-  t: TFunction
-): HobbyTypeOption => {
-  const { icon, labelKey } = hobbyTypeOption;
-  return {
-    icon,
-    text: t(labelKey),
-    value: hobbyType,
-  };
-};
-
 export const getEventCategoryOptions = (
   t: TFunction,
   categories: COURSE_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.Course].default
@@ -96,16 +69,6 @@ export const getEventCategoryOptions = (
       getCategoryOptions(category, courseCategories[category], t)
     )
     .sort(sortExtendedCategoryOptions);
-
-export const getCourseHobbyTypeOptions = (
-  t: TFunction,
-  hobbytTypes: COURSE_HOBBY_TYPES[] = CATEGORY_CATALOG.hobbyTypes.default
-): HobbyTypeOption[] =>
-  hobbytTypes
-    .map((hobbyType) =>
-      getHobbyTypeOptions(hobbyType, courseHobbyTypes[hobbyType], t)
-    )
-    .sort(sortExtendedHobbyTypeOptions);
 
 /**
  * Get start and end dates to event list filtering
@@ -186,7 +149,6 @@ export const getEventSearchVariables = ({
 }): QueryEventListArgs => {
   const {
     categories,
-    hobbyTypes,
     dateTypes,
     divisions,
     isFree,
@@ -241,10 +203,6 @@ export const getEventSearchVariables = ({
     categories,
     MAPPED_COURSE_CATEGORIES
   );
-  const mappedHobbyTypes = getMappedPropertyValues(
-    hobbyTypes,
-    MAPPED_COURSE_HOBBY_TYPES
-  );
 
   const hasLocation = !isEmpty(divisions) || !isEmpty(places);
 
@@ -271,7 +229,6 @@ export const getEventSearchVariables = ({
     isFree: isFree || undefined,
     internetBased: onlyRemoteEvents || undefined,
     keywordOrSet2: [...(keyword ?? []), ...mappedCategories],
-    keywordOrSet3: [...(keyword ?? []), ...mappedHobbyTypes],
     keywordAnd,
     keywordNot,
     language,
@@ -335,10 +292,6 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     categories: getUrlParamAsArray(
       searchParams,
       EVENT_SEARCH_FILTERS.CATEGORIES
-    ),
-    hobbyTypes: getUrlParamAsArray(
-      searchParams,
-      EVENT_SEARCH_FILTERS.HOBBY_TYPES
     ),
     dateTypes: getUrlParamAsArray(
       searchParams,

@@ -5,6 +5,7 @@ export { default as DateRangePicker } from './dateRangePicker/DateRangePicker';
 export { default as DateSelector } from './dateSelector/DateSelector';
 export { default as DateSelectorMenu } from './dateSelector/DateSelectorMenu';
 export { default as DropdownMenu } from './dropdownMenu/DropdownMenu';
+export { default as EventsCookieConsent } from './eventsCookieConsent/EventsCookieConsent';
 export * from './filterButton';
 export { default as Hero } from './hero/Hero';
 export { default as HeroImage } from './hero/HeroImage';

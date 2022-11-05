@@ -3,7 +3,7 @@ import {
   SrOnly,
   useIsSmallScreen,
   useSearchTranslation,
-  MAIN_CONTENT_ID
+  MAIN_CONTENT_ID,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';

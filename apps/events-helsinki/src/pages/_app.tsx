@@ -4,7 +4,7 @@ import {
   createInstance as createMatomoInstance,
 } from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
-import { ResetFocus } from 'events-helsinki-components';
+import { EventsCookieConsent, ResetFocus } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
@@ -102,7 +102,10 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
                 title={error.title}
               />
             ) : (
-              <Component {...pageProps} />
+              <>
+                <EventsCookieConsent />
+                <Component {...pageProps} />
+              </>
             )}
           </MatomoProvider>
         </ApolloProvider>

@@ -4,7 +4,7 @@ import {
   useLocale,
   isClient,
   addParamsToQueryString,
-  MAIN_CONTENT_ID
+  MAIN_CONTENT_ID,
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';

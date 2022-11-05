@@ -299,7 +299,7 @@ if (tmModules.length > 0) {
     tmModules,
     {
       resolveSymlinks: true,
-      debug: true,
+      // debug: true,
     }
   );
 

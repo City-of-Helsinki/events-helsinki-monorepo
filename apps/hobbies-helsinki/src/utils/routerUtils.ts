@@ -126,7 +126,9 @@ export function rewriteInternalURLs(
   apolloResponseData: Record<string, unknown>
 ): typeof JSON.parse {
   let jsonText = JSON.stringify(apolloResponseData);
+  console.log({apolloResponseData});
   for (const [search, replace] of Object.entries(AppConfig.URLRewriteMapping)) {
+    const orig = jsonText;
     jsonText = jsonText.replace(new RegExp(search, 'g'), replace);
   }
   return JSON.parse(jsonText);

@@ -1,6 +1,5 @@
 import { ROUTES } from '../../constants';
 import { EventTypeId } from '../nextApi/graphql/generated/graphql';
-
 class AppConfig {
   static get cmsGraphqlEndpoint() {
     return getEnvOrError(

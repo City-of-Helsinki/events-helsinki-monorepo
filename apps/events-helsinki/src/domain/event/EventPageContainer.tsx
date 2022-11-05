@@ -4,13 +4,14 @@ import {
   useLocale,
   isClient,
   addParamsToQueryString,
+  MAIN_CONTENT_ID
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
-import { MAIN_CONTENT_ID, ROUTES } from '../../constants';
+import { ROUTES } from '../../constants';
 import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
 import ErrorHero from '../error/ErrorHero';
 import type { EventFieldsFragment } from '../nextApi/graphql/generated/graphql';

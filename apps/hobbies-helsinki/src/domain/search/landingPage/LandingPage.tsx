@@ -1,9 +1,8 @@
-import { Hero } from 'events-helsinki-components/components';
+import { Hero, MAIN_CONTENT_ID } from 'events-helsinki-components';
 import React from 'react';
 import type { PageContentLayoutProps } from 'react-helsinki-headless-cms';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 import type { LandingPageQuery } from 'react-helsinki-headless-cms/apollo';
-import { MAIN_CONTENT_ID } from '../../../constants';
 
 import LandingPageSearch from '../landingPageSearch/LandingPageSearch';
 import styles from './landingPage.module.scss';

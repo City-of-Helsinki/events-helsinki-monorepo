@@ -47,8 +47,6 @@ export enum DATE_PICKER_INPUT_STATE {
 
 export const DEFAULT_SOME_IMAGE = '/images/activities_SoMe-share.jpg';
 
-export const MAIN_CONTENT_ID = 'main-content';
-
 export const FEEDBACK_LINKS = {
   fi: 'https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute',
   en: 'https://www.hel.fi/helsinki/en/administration/participate/feedback',

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
+export const MAIN_CONTENT_ID = 'main-content';
+
 export const EXTLINK = {
   EXTLINK_FACEBOOK: 'extlink_facebook',
   EXTLINK_INSTAGRAM: 'extlink_instagram',

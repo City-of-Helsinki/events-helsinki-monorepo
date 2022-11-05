@@ -51,7 +51,6 @@ export function getI18nPath(route: string, locale: string): string {
   const i18nRewriteRuleForCurrentLocale = i18nRewriteRules.find(
     (rewriteRule) => rewriteRule.locale === locale
   );
-
   if (!i18nRewriteRuleForCurrentLocale) {
     return route;
   }

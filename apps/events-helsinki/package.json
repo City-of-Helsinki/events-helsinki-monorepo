@@ -20,7 +20,7 @@
     "check-size": "size-limit --highlight-less",
     "typecheck": "tsc --project ./tsconfig.json --noEmit",
     "test": "jest",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --cache --cache-location ../../.cache/eslint/nextjs-app.eslintcache",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --cache --cache-location ../../.cache/eslint/events-helsinki.eslintcache",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
     "get-translations": "node ./scripts/get-translations.js",
     "generate:graphql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen -r dotenv/config --config codegen.yml",

@@ -11,6 +11,7 @@ export { default as useRouterFromConfig } from './useRouterFromConfig';
 export { default as useTabFocusStyle } from './useTabFocusStyle';
 export { default as useWindowSize } from './useWindowSize';
 export { default as useCommonTranslation } from './useCommonTranslation';
+export { default as useConsentTranslation } from './useConsentTranslation';
 export { default as useCmsTranslation } from './useCmsTranslation';
 export { default as useHomeTranslation } from './useHomeTranslation';
 export { default as useFooterTranslation } from './useFooterTranslation';

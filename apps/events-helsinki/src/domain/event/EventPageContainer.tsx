@@ -7,7 +7,7 @@ import {
   getEventIdFromUrl,
   isEventClosed,
   EventDetailsDocument,
-  MAIN_CONTENT_ID
+  MAIN_CONTENT_ID,
 } from 'events-helsinki-components';
 import type {
   SuperEventResponse,

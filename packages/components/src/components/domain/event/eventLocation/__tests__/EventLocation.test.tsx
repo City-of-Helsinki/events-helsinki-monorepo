@@ -1,3 +1,4 @@
+import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
 import * as React from 'react';
 
 import { render, screen } from '@/test-utils';

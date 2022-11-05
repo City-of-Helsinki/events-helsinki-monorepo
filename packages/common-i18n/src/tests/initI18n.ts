@@ -6,6 +6,7 @@ import appEvents_en from '../locales/en/appEvents.json';
 import appHobbies_en from '../locales/en/appHobbies.json';
 import cms_en from '../locales/en/cms.json';
 import common_en from '../locales/en/common.json';
+import consent_en from '../locales/en/consent.json';
 import event_en from '../locales/en/event.json';
 import footer_en from '../locales/en/footer.json';
 import home_en from '../locales/en/home.json';
@@ -15,6 +16,7 @@ import appEvents from '../locales/fi/appEvents.json';
 import appHobbies from '../locales/fi/appHobbies.json';
 import cms from '../locales/fi/cms.json';
 import common from '../locales/fi/common.json';
+import consent from '../locales/fi/consent.json';
 import event from '../locales/fi/event.json';
 import footer from '../locales/fi/footer.json';
 import home from '../locales/fi/home.json';
@@ -24,6 +26,7 @@ import appEvents_sv from '../locales/sv/appEvents.json';
 import appHobbies_sv from '../locales/sv/appHobbies.json';
 import cms_sv from '../locales/sv/cms.json';
 import common_sv from '../locales/sv/common.json';
+import consent_sv from '../locales/sv/consent.json';
 import event_sv from '../locales/sv/event.json';
 import footer_sv from '../locales/sv/footer.json';
 import home_sv from '../locales/sv/home.json';
@@ -33,6 +36,7 @@ import search_sv from '../locales/sv/search.json';
 export const translations = {
   cms,
   common,
+  consent,
   event,
   footer,
   home,
@@ -56,6 +60,7 @@ export const config = {
     en: {
       cms: cms_en,
       common: common_en,
+      consent: consent_en,
       event: event_en,
       footer: footer_en,
       home: home_en,
@@ -67,6 +72,7 @@ export const config = {
     sv: {
       cms: cms_sv,
       common: common_sv,
+      consent: consent_sv,
       event: event_sv,
       footer: footer_sv,
       home: home_sv,

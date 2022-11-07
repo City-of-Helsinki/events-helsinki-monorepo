@@ -1,8 +1,7 @@
 .dateInputsContainer {
   button {
-    --selected-date-color: var(--color-black);
+    --selected-date-color: var(--color-primary-black);
     --selected-date-background: var(--color-fog);
-    color: var(--color-black);
   }
   button:hover {
     --background-color: var(--color-fog-light);

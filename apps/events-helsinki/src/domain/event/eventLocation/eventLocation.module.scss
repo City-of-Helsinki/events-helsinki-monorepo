@@ -29,7 +29,6 @@
 .mapLink {
   display: inline-flex;
   align-items: center;
-  color: var(--color-black);
   font-size: var(--fontsize-body-s);
   text-decoration: none;
   margin-bottom: var(--spacing-s);
@@ -40,7 +39,7 @@
 
   svg {
     margin-left: var(--spacing-2-xs);
-    fill: var(--color-black);
+    fill: var(--color-primary-black);
   }
 }
 
@@ -83,8 +82,8 @@
 
 a.externalLink {
   margin: var(--spacing-xs) 0;
-  color: var(--color-success-dark);
+  color: var(--color-secondary-link);
   svg g path {
-    color: var(--color-success-dark);
+    color: var(--color-secondary-link);
   }
 }

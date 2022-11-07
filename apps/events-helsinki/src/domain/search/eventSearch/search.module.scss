@@ -7,8 +7,8 @@ $buttonWidth: 180px;
 }
 
 .searchContainer {
-  color: var(--color-black);
-  background-color: var(--color-copper-light);
+  color: var(--color-primary-black);
+  background-color: var(--color-theme-background);
   padding: 2.375rem 0 1.5rem 0;
   position: relative;
 
@@ -45,6 +45,15 @@ $buttonWidth: 180px;
     @include respond-above(m) {
       grid-column: span 1 / 5;
     }
+    button {
+      span {
+        color: white;
+      }
+    }
+
+    svg * {
+      color: var(--color-white);
+    }
   }
 
   .row {
@@ -76,10 +85,10 @@ $buttonWidth: 180px;
 
   .checkbox {
     margin-top: var(--spacing-xs);
-
     label {
       display: flex;
       align-items: center;
+      color: var(--color-primary-black);
     }
     @include respond-above(s) {
       margin-top: 0;

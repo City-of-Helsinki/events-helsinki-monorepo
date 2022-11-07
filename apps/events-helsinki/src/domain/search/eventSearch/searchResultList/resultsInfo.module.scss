@@ -6,11 +6,11 @@
     svg {
       height: 3rem;
       width: 3rem;
+      fill: var(--color-primary-black);
     }
   }
 
   .bigText {
-    color: var(--color-black-90);
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 2rem;
@@ -21,7 +21,6 @@
   }
 
   .smallText {
-    color: var(--color-black-90);
     font-size: 1rem;
     font-weight: normal;
     text-align: center;

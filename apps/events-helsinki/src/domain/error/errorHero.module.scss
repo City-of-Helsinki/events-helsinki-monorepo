@@ -1,7 +1,7 @@
 @import 'src/styles/breakpoints';
 
 .errorHero {
-  background-color: var(--color-copper-light);
+  background-color: var(--color-theme-background);
   text-align: center;
   align-self: center;
 
@@ -32,9 +32,9 @@
 
   a {
     padding: 1rem 2rem;
-    border: 2px solid var(--color-black);
+    border: 2px solid var(--color-primary-black);
     text-decoration: none;
-    color: var(--color-black);
+    color: var(--color-primary-black);
     font-size: 1rem;
     font-weight: bold;
 
@@ -51,7 +51,7 @@
 }
 
 .koros {
-  fill: var(--color-copper-light);
+  fill: var(--color-theme-background);
   margin-bottom: 10rem;
 
   &.smallMargin {

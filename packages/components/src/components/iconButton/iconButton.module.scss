@@ -2,13 +2,12 @@
   display: flex;
   height: 2.5rem;
   width: 2.5rem;
-  background-color: var(--color-copper-light);
-  border-color: var(--color-copper-light);
+  background-color: var(--color-theme-background);
+  border-color: var(--color-theme-background);
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-black);
 
   svg {
     height: 1.5rem;
@@ -16,7 +15,7 @@
   }
 
   &:focus {
-    outline: 2px solid var(--color-black);
+    outline: 2px solid var(--color-primary-black);
   }
 }
 

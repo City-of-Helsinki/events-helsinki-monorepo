@@ -13,7 +13,7 @@ const styles = {
     width: '100%',
     display: 'flex',
     // flexDirection: 'column',
-    color: 'var(--color-black)',
+    color: 'var(--color-primary-black)',
     // @include respond-above(m) {
     //   display: "grid",
     //   grid-template-columns: "1fr",

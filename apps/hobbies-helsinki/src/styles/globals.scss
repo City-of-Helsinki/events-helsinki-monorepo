@@ -20,7 +20,10 @@ main {
 }
 
 :root {
-  --color-fog-darkened: #457ba7;
+  --color-theme-background: var(--color-theme-background);
+  --color-primary-black: var(--color-black-90);
+  --color-secondary-link: var(--color-coat-of-arms-dark);
+  --color-link-show-all: var(--color-coat-of-arms-dark);
 }
 
 button {

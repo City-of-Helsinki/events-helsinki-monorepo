@@ -21,7 +21,7 @@
     outline: none;
 
     &:focus {
-      border-color: var(--color-black);
+      border-color: var(--color-primary-black);
     }
 
     svg {
@@ -45,14 +45,13 @@
 
     svg {
       margin-right: 1rem;
-      color: var(--color-black);
+      fill: var(--color-primary-black);
     }
   }
 
   .title {
     flex: 1 1 0%;
     text-align: left;
-    color: var(--color-black);
     position: relative;
     overflow: hidden;
 
@@ -63,8 +62,6 @@
       width: 100%;
       border: none;
       outline: none;
-
-      @include placeholder(var(--color-black));
     }
 
     .titleText {
@@ -82,7 +79,7 @@
     svg {
       margin-left: 0.75rem;
       pointer-events: none;
-      color: var(--color-black);
+      color: var(--color-primary-black);
     }
   }
 

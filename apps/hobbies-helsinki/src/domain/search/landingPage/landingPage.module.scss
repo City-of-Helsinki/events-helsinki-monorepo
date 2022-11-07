@@ -2,7 +2,7 @@
 @use 'src/styles/utils';
 @import 'src/styles/variables';
 
-$mainBackground: var(--color-fog-medium-light);
+$mainBackground: var(--color-theme-background);
 
 .layout {
   position: relative;

@@ -1,4 +1,5 @@
 @import 'fonts';
+@import 'variables';
 
 html,
 body,
@@ -12,7 +13,7 @@ main {
   //margin: 0;
   box-sizing: border-box;
   font-family: $font-family-base;
-  --color-primary-black: red;
+  color: var(--color-primary-black);
 }
 
 .pageLayout {
@@ -20,11 +21,28 @@ main {
 }
 
 :root {
-  --color-fog-darkened: #457ba7;
+  --color-theme-background: var(--color-copper-light);
+  --color-primary-black: var(--color-black-90);
+  --color-secondary-link: var(--color-success-dark);
+  --color-link-show-all: var(--color-success-dark);
 }
 
 button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+::placeholder {
+  color: var(--color-primary-black);
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--color-primary-black);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--color-primary-black);
 }

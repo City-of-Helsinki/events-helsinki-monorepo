@@ -4,7 +4,6 @@
   height: auto;
   min-height: 1.5rem;
   background-color: var(--color-summer-medium-light);
-  color: var(--color-black);
   margin: 0.1875rem 0.375rem 0.1875rem 0;
   display: inline-flex;
   padding: var(--spacing-2-xs) var(--spacing-xs);
@@ -21,23 +20,19 @@
 
   &.engelLight50 {
     background-color: var(--color-engel-medium-light);
-    color: var(--color-black);
   }
 
   &.tramLight20 {
     background-color: var(--color-tram-light);
-    color: var(--color-black);
   }
 
   &.black10 {
     background-color: var(--color-black-10);
-    color: var(--color-black);
   }
 
   &.transparent,
   &.transparent:hover {
     background-color: unset;
-    color: var(--color-black);
     cursor: none;
     padding: 0;
   }
@@ -48,7 +43,6 @@
 
     @include respond_above(s) {
       background-color: var(--color-summer-medium-light);
-      color: var(--color-black);
     }
   }
 

@@ -342,57 +342,56 @@ export const MAPPED_COURSE_HOBBY_TYPES: Record<string, string[]> = {
   [COURSE_HOBBY_TYPES.WORKSHOPS]: WORKSHOPS_KEYWORDS,
 };
 
-export const courseCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> =
-  {
-    [EVENT_CATEGORIES.MOVIE]: {
-      icon: <IconMovies />,
-      labelKey: 'home:category.courses.movieAndMedia',
-    },
-    [EVENT_CATEGORIES.ARTS_AND_CULTURE]: {
-      icon: <IconArt />,
-      labelKey: 'home:category.courses.artsAndCulture',
-    },
-    [EVENT_CATEGORIES.SPORT]: {
-      icon: <IconSports />,
-      labelKey: 'home:category.courses.sport',
-    },
-    [EVENT_CATEGORIES.LANGUAGES]: {
-      icon: <IconLanguages />,
-      labelKey: 'home:category.courses.languages',
-    },
-    [EVENT_CATEGORIES.LITERATURE]: {
-      icon: <IconLiterature />,
-      labelKey: 'home:category.courses.literature',
-    },
-    [EVENT_CATEGORIES.VISUAL_ARTS]: {
-      icon: <IconArt />,
-      labelKey: 'home:category.courses.visualArts',
-    },
-    [EVENT_CATEGORIES.HANDICRAFTS]: {
-      icon: <IconCraft />,
-      labelKey: 'home:category.courses.handicrafts',
-    },
-    [EVENT_CATEGORIES.MUSIC]: {
-      icon: <IconMusic />,
-      labelKey: 'home:category.courses.music',
-    },
-    [EVENT_CATEGORIES.GAMES]: {
-      icon: <IconGames />,
-      labelKey: 'home:category.courses.games',
-    },
-    [EVENT_CATEGORIES.FOOD]: {
-      icon: <IconFood />,
-      labelKey: 'home:category.courses.food',
-    },
-    [EVENT_CATEGORIES.DANCE]: {
-      icon: <IconDance />,
-      labelKey: 'home:category.courses.dance',
-    },
-    [EVENT_CATEGORIES.THEATRE]: {
-      icon: <IconTheatre />,
-      labelKey: 'home:category.courses.theatre',
-    },
-  };
+export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
+  [EVENT_CATEGORIES.MOVIE]: {
+    icon: <IconMovies />,
+    labelKey: 'home:category.courses.movieAndMedia',
+  },
+  [EVENT_CATEGORIES.ARTS_AND_CULTURE]: {
+    icon: <IconArt />,
+    labelKey: 'home:category.courses.artsAndCulture',
+  },
+  [EVENT_CATEGORIES.SPORT]: {
+    icon: <IconSports />,
+    labelKey: 'home:category.courses.sport',
+  },
+  [EVENT_CATEGORIES.LANGUAGES]: {
+    icon: <IconLanguages />,
+    labelKey: 'home:category.courses.languages',
+  },
+  [EVENT_CATEGORIES.LITERATURE]: {
+    icon: <IconLiterature />,
+    labelKey: 'home:category.courses.literature',
+  },
+  [EVENT_CATEGORIES.VISUAL_ARTS]: {
+    icon: <IconArt />,
+    labelKey: 'home:category.courses.visualArts',
+  },
+  [EVENT_CATEGORIES.HANDICRAFTS]: {
+    icon: <IconCraft />,
+    labelKey: 'home:category.courses.handicrafts',
+  },
+  [EVENT_CATEGORIES.MUSIC]: {
+    icon: <IconMusic />,
+    labelKey: 'home:category.courses.music',
+  },
+  [EVENT_CATEGORIES.GAMES]: {
+    icon: <IconGames />,
+    labelKey: 'home:category.courses.games',
+  },
+  [EVENT_CATEGORIES.FOOD]: {
+    icon: <IconFood />,
+    labelKey: 'home:category.courses.food',
+  },
+  [EVENT_CATEGORIES.DANCE]: {
+    icon: <IconDance />,
+    labelKey: 'home:category.courses.dance',
+  },
+  [EVENT_CATEGORIES.THEATRE]: {
+    icon: <IconTheatre />,
+    labelKey: 'home:category.courses.theatre',
+  },
+};
 
 // todo: fix icons if/when we need them as category labels and when the icons are defined (not defined in events)
 export const courseHobbyTypes: Record<

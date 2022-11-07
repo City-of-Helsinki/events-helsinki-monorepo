@@ -30,7 +30,7 @@ import type {
 } from './constants';
 import {
   EVENT_SEARCH_FILTERS,
-  courseCategories,
+  eventCategories,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
   MAPPED_EVENT_CATEGORIES,
@@ -93,7 +93,7 @@ export const getEventCategoryOptions = (
 ): CategoryOption[] =>
   categories
     .map((category) =>
-      getCategoryOptions(category, courseCategories[category], t)
+      getCategoryOptions(category, eventCategories[category], t)
     )
     .sort(sortExtendedCategoryOptions);
 

@@ -18,7 +18,7 @@
     color: black;
     text-decoration: none;
     text-align: center;
-
+    color: var(--color-primary-black);
     svg {
       height: 1.25rem;
       width: 1.25rem;
@@ -30,6 +30,17 @@
 
     svg:last-child {
       margin-left: 0.75rem;
+    }
+
+    //does not work with all icon shapes
+
+    //does not work with all icon shapes
+    /* svg path {
+      fill: var(--color-primary-black);
+    }*/
+
+    svg g path {
+      fill: var(--color-primary-black);
     }
 
     span {

@@ -194,7 +194,7 @@ export const getEventSearchVariables = ({
     keywordNot,
     onlyChildrenEvents,
     onlyEveningEvents,
-    // onlyRemoteEvents,
+    onlyRemoteEvents,
     places,
     publisher,
     text,
@@ -269,7 +269,7 @@ export const getEventSearchVariables = ({
     end,
     include,
     isFree: isFree || undefined,
-    // internetBased: onlyRemoteEvents || undefined,
+    internetBased: onlyRemoteEvents || undefined,
     keywordOrSet2: [...(keyword ?? []), ...mappedCategories],
     keywordOrSet3: [...(keyword ?? []), ...mappedHobbyTypes],
     keywordAnd,
@@ -356,8 +356,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     //   searchParams.get(EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS) === 'true',
     // onlyEveningEvents:
     //   searchParams.get(EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS) === 'true',
-    // onlyRemoteEvents:
-    //   searchParams.get(EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS) === 'true',
+    onlyRemoteEvents:
+      searchParams.get(EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS) === 'true',
     places: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.PLACES),
     publisher: searchParams.get(EVENT_SEARCH_FILTERS.PUBLISHER),
     start,

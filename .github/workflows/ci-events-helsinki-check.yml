@@ -127,7 +127,7 @@ jobs:
           # Mock origin
           NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
           NEXT_PUBLIC_MATOMO_URL_BASE: '//webanalytics.digiaiiris.com/js/'
-          NEXT_PUBLIC_MATOMO_SITE_ID: 939
+          NEXT_PUBLIC_MATOMO_SITE_ID: 708
           NEXT_PUBLIC_MATOMO_SRC_URL: 'piwik.min.js'
           NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
           NEXT_PUBLIC_MATOMO_ENABLED: 0

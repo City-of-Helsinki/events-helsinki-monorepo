@@ -70,7 +70,7 @@ env:
   NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
   NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
   NEXT_PUBLIC_MATOMO_URL_BASE: '//webanalytics.digiaiiris.com/js/'
-  NEXT_PUBLIC_MATOMO_SITE_ID: 939
+  NEXT_PUBLIC_MATOMO_SITE_ID: 708
   NEXT_PUBLIC_MATOMO_SRC_URL: 'piwik.min.js'
   NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
   NEXT_PUBLIC_MATOMO_ENABLED: 0

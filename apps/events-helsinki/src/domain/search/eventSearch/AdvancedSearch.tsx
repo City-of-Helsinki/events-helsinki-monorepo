@@ -5,18 +5,10 @@ import {
   Checkbox,
   DateSelector,
   MultiSelectDropdown,
-  RangeDropdown,
   useLocale,
 } from 'events-helsinki-components';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
-import {
-  Button,
-  IconCake,
-  IconArrowRight,
-  IconSearch,
-  IconLocation,
-  IconGroup,
-} from 'hds-react';
+import { Button, IconSearch, IconLocation, IconGroup } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import qs, { parse } from 'query-string';
@@ -41,8 +33,6 @@ import {
   getEventCategoryOptions,
   getSearchFilters,
   getSearchQuery,
-  MAX_AGE,
-  MIN_AGE,
 } from './utils';
 
 interface Props {
@@ -242,11 +232,6 @@ const AdvancedSearch: React.FC<Props> = ({
     scrollToResultList();
   };
 
-  const handleSetAgeValues = (minAge: string, maxAge: string) => {
-    setMinAgeInput(minAge);
-    setMaxAgeInput(maxAge);
-  };
-
   return (
     <PageSection
       korosBottom
@@ -269,6 +254,10 @@ const AdvancedSearch: React.FC<Props> = ({
                     searchValue={autosuggestInput}
                   />
                 </div>
+              </div>
+            </div>
+            <div className={styles.rowWrapper}>
+              <div className={styles.row}>
                 <div>
                   <MultiSelectDropdown
                     checkboxName="categoryOptions"
@@ -283,10 +272,6 @@ const AdvancedSearch: React.FC<Props> = ({
                     value={selectedCategories}
                   />
                 </div>
-              </div>
-            </div>
-            <div className={styles.rowWrapper}>
-              <div className={styles.row}>
                 <div>
                   <MultiSelectDropdown
                     checkboxName="hobbyTypeOptions"
@@ -343,24 +328,6 @@ const AdvancedSearch: React.FC<Props> = ({
                     showSelectAll={true}
                     title={t('search.titleDropdownPlace')}
                     value={selectedPlaces}
-                  />
-                </div>
-                <div>
-                  <RangeDropdown
-                    icon={<IconCake aria-hidden />}
-                    rangeIcon={<IconArrowRight aria-hidden />}
-                    minInputValue={minAgeInput}
-                    minInputLabel={t('search.ageLimitMin')}
-                    minInputStartValue={MIN_AGE.toString()}
-                    minInputFixedValue={'18'}
-                    maxInputValue={maxAgeInput}
-                    maxInputLabel={t('search.ageLimitMax')}
-                    maxInputEndValue={MAX_AGE.toString()}
-                    name="ageLimitValues"
-                    onChange={handleSetAgeValues}
-                    fixedValuesText={t('search.showOnlyAdultCourses')}
-                    title={t('search.ageLimitValues')}
-                    value={[minAgeInput, maxAgeInput]}
                   />
                 </div>
               </div>

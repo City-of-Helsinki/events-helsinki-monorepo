@@ -71,6 +71,9 @@
     "openMap": "Avaa kartta",
     "title": "Sijainti"
   },
+  "locationExtraInfo": {
+    "title": "Paikan lisätiedot"
+  },
   "notFound": {
     "linkSearchEvents": "Hae itsellesi tekemistä",
     "text": "Syystä tai toisesta hakemaasi tapahtumaa ei löydy. Löydä itsellesi tekemistä vaikkapa täältä:",

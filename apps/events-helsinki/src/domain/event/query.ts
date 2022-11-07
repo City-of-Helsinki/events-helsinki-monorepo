@@ -80,6 +80,9 @@ export const QUERY_EVENT_DETAILS = gql`
         ...localizedFields
       }
     }
+    locationExtraInfo {
+      ...localizedFields
+    }
   }
 
   query EventDetails($id: ID!, $include: [String]) {

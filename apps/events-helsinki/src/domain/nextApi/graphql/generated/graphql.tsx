@@ -757,6 +757,12 @@ export type EventFieldsFragment = {
       sv?: string | null;
     } | null;
   }>;
+  locationExtraInfo?: {
+    __typename?: 'LocalizedObject';
+    en?: string | null;
+    fi?: string | null;
+    sv?: string | null;
+  } | null;
 };
 
 export type EventDetailsQueryVariables = Exact<{
@@ -934,6 +940,12 @@ export type EventDetailsQuery = {
         sv?: string | null;
       } | null;
     }>;
+    locationExtraInfo?: {
+      __typename?: 'LocalizedObject';
+      en?: string | null;
+      fi?: string | null;
+      sv?: string | null;
+    } | null;
   };
 };
 
@@ -1484,6 +1496,12 @@ export type EventListQuery = {
           sv?: string | null;
         } | null;
       }>;
+      locationExtraInfo?: {
+        __typename?: 'LocalizedObject';
+        en?: string | null;
+        fi?: string | null;
+        sv?: string | null;
+      } | null;
     }>;
   };
 };
@@ -1673,6 +1691,12 @@ export type EventsByIdsQuery = {
           sv?: string | null;
         } | null;
       }>;
+      locationExtraInfo?: {
+        __typename?: 'LocalizedObject';
+        en?: string | null;
+        fi?: string | null;
+        sv?: string | null;
+      } | null;
     }>;
     meta: {
       __typename?: 'Meta';
@@ -1823,6 +1847,9 @@ export const EventFieldsFragmentDoc = gql`
       name {
         ...localizedFields
       }
+    }
+    locationExtraInfo {
+      ...localizedFields
     }
   }
   ${LocalizedFieldsFragmentDoc}

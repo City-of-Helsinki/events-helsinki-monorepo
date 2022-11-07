@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: center;
     margin: var(--spacing-s) 0;
-    color: var(--color-coat-of-arms-dark);
+    color: var(--color-success-dark);
     outline: none !important;
     font-weight: 600;
     padding: 0;
@@ -44,7 +44,16 @@
   margin-top: var(--spacing-s);
 }
 
-.link {
+a.link {
+  &,
+  &:visited {
+    color: var(--color-success-dark);
+  }
+
+  &:visited svg g path {
+    fill: var(--color-success-dark);
+  }
+
   margin: var(--spacing-xs) 0;
   padding: 0;
 }

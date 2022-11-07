@@ -387,10 +387,10 @@ const AdvancedSearch: React.FC<Props> = ({
                 </div>
                 <div className={styles.buttonWrapper}>
                   <Button
-                    theme="coat"
                     fullWidth={true}
                     iconLeft={<IconSearch aria-hidden />}
                     type="submit"
+                    variant="success"
                   >
                     {t('search.buttonSearch')}
                   </Button>

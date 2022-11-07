@@ -110,7 +110,7 @@
       order: 7;
       display: flex;
       flex-wrap: wrap;
-      margin-top: auto;
+      margin-top: var(--spacing-s);
 
       @include respond_above(s) {
         order: 6;

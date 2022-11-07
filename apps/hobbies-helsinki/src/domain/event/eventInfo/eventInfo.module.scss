@@ -45,6 +45,15 @@
 }
 
 .link {
+  &,
+  &:visited {
+    color: var(--color-coat-of-arms-dark);
+  }
+
+  &:visited svg g path {
+    fill: var(--color-coat-of-arms-dark);
+  }
+
   margin: var(--spacing-xs) 0;
   padding: 0;
 }

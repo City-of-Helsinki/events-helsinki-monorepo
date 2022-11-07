@@ -81,6 +81,10 @@
   height: 20rem;
 }
 
-.externalLink {
+a.externalLink {
   margin: var(--spacing-xs) 0;
+  color: var(--color-success-dark);
+  svg g path {
+    color: var(--color-success-dark);
+  }
 }

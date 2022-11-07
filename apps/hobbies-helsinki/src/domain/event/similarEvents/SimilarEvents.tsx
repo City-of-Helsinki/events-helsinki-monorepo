@@ -46,11 +46,6 @@ const SimilarEvents: React.FC<Props> = ({
       { eventId: event.id },
       locale
     );
-    console.log('url',getLocalizedCmsItemUrl(
-      ROUTES.COURSES,
-      { eventId: event.id },
-      locale
-    ), locale);
     return (
       <Card
         key={cardProps.id}

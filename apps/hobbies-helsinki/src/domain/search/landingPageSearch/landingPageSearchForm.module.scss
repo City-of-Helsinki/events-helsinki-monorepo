@@ -44,6 +44,10 @@
   a:focus-visible {
     outline: 2px solid white;
   }
+
+  svg * {
+    color: var(--color-white);
+  }
 }
 
 .autosuggestWrapper {
@@ -86,4 +90,14 @@
 .buttonWrapper {
   width: 100%;
   margin-bottom: 1.25rem;
+
+  button {
+    span {
+      color: white;
+    }
+  }
+
+  svg * {
+    color: var(--color-white);
+  }
 }

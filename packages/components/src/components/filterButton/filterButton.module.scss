@@ -24,6 +24,10 @@
       margin: 0;
     }
 
+    svg g * {
+      color: var(--color-white);
+    }
+
     &:focus {
       outline: 2px solid var(--color-white);
       outline-offset: 0;

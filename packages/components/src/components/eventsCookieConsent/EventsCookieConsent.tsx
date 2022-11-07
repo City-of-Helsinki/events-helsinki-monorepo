@@ -1,24 +1,31 @@
 import type { ContentSource } from 'hds-react';
 import { CookieModal } from 'hds-react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { MAIN_CONTENT_ID } from '../../constants';
 import { useCommonTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
+import type { Language } from '../../types';
 
 const EventsCookieConsent: React.FC = () => {
   const locale = useLocale();
-  const { i18n } = useCommonTranslation();
-  const onLanguageChange = (newLang: string) => {
-    void i18n.changeLanguage(newLang);
+  const { t } = useCommonTranslation();
+  const [language, setLanguage] = React.useState<Language>(locale);
+  const router = useRouter();
+  const { pathname, asPath, query } = router;
+
+  const onLanguageChange = (newLang: Language) => {
+    setLanguage(newLang);
+ //   void router.push({ pathname, query }, asPath, { locale: newLang });
   };
 
-  const contentSource: ContentSource = {
-    siteName: 'Testisivusto',
-    currentLanguage: locale,
+  const contentSource: ContentSource = React.useMemo(() => ({
+      siteName: t('eventsCommon:appName'),
+    currentLanguage: language,
     requiredCookies: {
       groups: [
         {
-          commonGroup: 'login',
+            commonGroup: 'login',
           cookies: [
             {
               commonCookie: 'tunnistamo',
@@ -255,11 +262,11 @@ const EventsCookieConsent: React.FC = () => {
         // window._paq.push(['forgetConsentGiven']);
       }
       if (hasUserHandledAllConsents) {
-        // cookie consent modal will not be shown
+          // cookie consent modal will not be shown
       }
     },
     focusTargetSelector: MAIN_CONTENT_ID,
-  };
+  }), [t,language]);
 
   return <CookieModal contentSource={contentSource} />;
 };

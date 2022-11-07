@@ -138,6 +138,21 @@ it.todo('should change search query after clicking autosuggest menu item');
 //   });
 // });
 
+it('should change search query after checking only evening events checkbox', async () => {
+  const { router } = renderComponent();
+
+  const onlyEveningEventsCheckbox = screen.getByRole('checkbox', {
+    name: /näytä vain iltatapahtumat/i,
+  });
+
+  await userEvent.click(onlyEveningEventsCheckbox);
+
+  expect(router).toMatchObject({
+    pathname,
+    query: { onlyEveningEvents: 'true', text: 'jazz' },
+  });
+});
+
 it('should change search query after checking is free checkbox', async () => {
   const { router } = renderComponent();
 

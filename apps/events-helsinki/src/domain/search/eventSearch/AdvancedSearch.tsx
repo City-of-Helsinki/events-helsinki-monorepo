@@ -198,6 +198,16 @@ const AdvancedSearch: React.FC<Props> = ({
     scrollToResultList();
   };
 
+  const handleOnlyEveningEventChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const search = getSearchQuery({
+      ...searchFilters,
+      onlyEveningEvents: e.target.checked,
+    });
+    goToSearch(search);
+  };
+
   const handleOnlyRemoteEventChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -360,6 +370,15 @@ const AdvancedSearch: React.FC<Props> = ({
                     id={EVENT_SEARCH_FILTERS.IS_FREE}
                     label={t('search.checkboxIsFree')}
                     onChange={handleIsFreeChange}
+                  />
+                </div>
+                <div>
+                  <Checkbox
+                    className={styles.checkbox}
+                    checked={onlyEveningEvents}
+                    id={EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS}
+                    label={t('search.checkboxOnlyEveningEvents')}
+                    onChange={handleOnlyEveningEventChange}
                   />
                 </div>
                 <div>

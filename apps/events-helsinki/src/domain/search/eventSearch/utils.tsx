@@ -89,7 +89,7 @@ export const getHobbyTypeOptions = (
 
 export const getEventCategoryOptions = (
   t: TFunction,
-  categories: EVENT_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.Course].default
+  categories: EVENT_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.General].default
 ): CategoryOption[] =>
   categories
     .map((category) =>

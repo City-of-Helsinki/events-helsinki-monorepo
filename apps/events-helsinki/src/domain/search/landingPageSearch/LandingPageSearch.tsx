@@ -8,11 +8,7 @@ import {
   getI18nPath,
   getParsedUrlQueryInput,
 } from '../../../utils/routerUtils';
-import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
-import {
-  CATEGORY_CATALOG,
-  EVENT_DEFAULT_SEARCH_FILTERS,
-} from '../eventSearch/constants';
+import { EVENT_DEFAULT_SEARCH_FILTERS } from '../eventSearch/constants';
 import { getEventCategoryOptions, getSearchQuery } from '../eventSearch/utils';
 import styles from './landingPageSearch.module.scss';
 import LandingPageSearchForm from './LandingPageSearchForm';
@@ -66,10 +62,7 @@ const Search: React.FC = () => {
     goToSearchPage(search);
   };
 
-  const categories = getEventCategoryOptions(
-    t,
-    CATEGORY_CATALOG[EventTypeId.Course].landingPage
-  );
+  const categories = getEventCategoryOptions(t);
 
   return (
     <div>

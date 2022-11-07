@@ -127,7 +127,7 @@ function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
     }
     if (type === ModuleItemTypeEnum.Event) {
       return getLocalizedCmsItemUrl(
-        ROUTES.COURSES,
+        ROUTES.EVENTS,
         { eventId: uri.replace(/^\//, '') },
         locale
       );

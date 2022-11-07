@@ -45,7 +45,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
     returnPath: router.pathname,
   });
   const eventUrl = `${getLocalizedCmsItemUrl(
-    ROUTES.COURSES,
+    ROUTES.EVENTS,
     { eventId: event.id },
     locale
   )}${queryString}`;

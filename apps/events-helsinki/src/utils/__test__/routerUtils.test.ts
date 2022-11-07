@@ -33,25 +33,25 @@ describe('i18n router utils', () => {
     it('should correctly return the localized path for the default locale', () => {
       expect(
         getLocalizedCmsItemUrl(
-          '/courses/[eventId]',
+          '/events/[eventId]',
           {
             eventId: 'hki:123',
           },
           'fi'
         )
-      ).toStrictEqual('/kurssit/hki:123');
+      ).toStrictEqual('/tapahtumat/hki:123');
     });
 
     it('should correctly return the localized path for the secondary locale', () => {
       expect(
         getLocalizedCmsItemUrl(
-          '/courses/[eventId]',
+          '/events/[eventId]',
           {
             eventId: 'hki:123',
           },
           'en'
         )
-      ).toStrictEqual('/en/courses/hki:123');
+      ).toStrictEqual('/en/events/hki:123');
     });
 
     it('should correctly return the localized path for the wildcard slug', () => {

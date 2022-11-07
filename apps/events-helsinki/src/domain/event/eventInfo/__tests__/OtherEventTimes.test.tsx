@@ -141,7 +141,7 @@ describe('events', () => {
     advanceTo(new Date('2020-08-11'));
     const { router } = renderComponent();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    await testNavigation(router, '/kurssit/');
+    await testNavigation(router, '/tapahtumat/');
   });
 });
 

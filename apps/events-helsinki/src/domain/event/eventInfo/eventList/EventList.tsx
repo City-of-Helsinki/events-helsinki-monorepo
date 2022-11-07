@@ -25,7 +25,7 @@ const EventList: React.FC<{
   const search = router.asPath.split('?')[1];
 
   const getLinkUrl = (event: EventFieldsFragment) =>
-    getLocalizedCmsItemUrl(ROUTES.COURSES, { eventId: event.id }, locale) +
+    getLocalizedCmsItemUrl(ROUTES.EVENTS, { eventId: event.id }, locale) +
     (search ? `?${search}` : '');
 
   return (

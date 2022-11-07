@@ -70,7 +70,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   );
 
   const eventUrl = `${getLocalizedCmsItemUrl(
-    ROUTES.COURSES,
+    ROUTES.EVENTS,
     { eventId: event.id },
     locale
   )}${queryString}`;

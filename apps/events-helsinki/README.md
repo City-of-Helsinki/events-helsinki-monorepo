@@ -64,7 +64,7 @@ class AppConfig {
   }
   static get URLRewriteMapping() {
     return {
-      [AppConfig.linkedEventsEventEndpoint]: ROUTES.COURSES.replace(
+      [AppConfig.linkedEventsEventEndpoint]: ROUTES.EVENTS.replace(
         "/[eventId]",
         ""
       ),

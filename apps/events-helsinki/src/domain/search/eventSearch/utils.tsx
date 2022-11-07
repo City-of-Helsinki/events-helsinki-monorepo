@@ -24,7 +24,7 @@ import type {
 } from '../../nextApi/graphql/generated/graphql';
 import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
 import type {
-  COURSE_CATEGORIES,
+  EVENT_CATEGORIES,
   EVENT_SORT_OPTIONS,
   COURSE_HOBBY_TYPES,
 } from './constants';
@@ -89,7 +89,7 @@ export const getHobbyTypeOptions = (
 
 export const getEventCategoryOptions = (
   t: TFunction,
-  categories: COURSE_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.Course].default
+  categories: EVENT_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.Course].default
 ): CategoryOption[] =>
   categories
     .map((category) =>

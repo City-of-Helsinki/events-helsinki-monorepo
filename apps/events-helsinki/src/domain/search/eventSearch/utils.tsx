@@ -33,7 +33,7 @@ import {
   courseCategories,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
-  MAPPED_COURSE_CATEGORIES,
+  MAPPED_EVENT_CATEGORIES,
   courseHobbyTypes,
   MAPPED_COURSE_HOBBY_TYPES,
 } from './constants';
@@ -239,7 +239,7 @@ export const getEventSearchVariables = ({
 
   const mappedCategories = getMappedPropertyValues(
     categories,
-    MAPPED_COURSE_CATEGORIES
+    MAPPED_EVENT_CATEGORIES
   );
   const mappedHobbyTypes = getMappedPropertyValues(
     hobbyTypes,
@@ -419,7 +419,7 @@ export const getSearchQuery = (filters: Filters): string => {
 
 /** Get a list of all the keywords that can be mapped as a category */
 export const getAllHobbyCategories = () =>
-  Object.values(MAPPED_COURSE_CATEGORIES).flat();
+  Object.values(MAPPED_EVENT_CATEGORIES).flat();
 
 /** Filter the kewords from the event that can be mapped as categories */
 export const getEventCategories = (event: EventFields) => {

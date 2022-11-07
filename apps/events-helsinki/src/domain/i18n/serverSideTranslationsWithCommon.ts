@@ -19,6 +19,7 @@ export default async function serverSideTranslationsWithCommon(
     [...new Set([...COMMON_TRANSLATIONS, ...namespaces])],
     {
       ...nextI18nextConfig,
-    }
+    },
+    ['fi', 'en', 'sv'] // FIXME: We should not need all the translations, all at once
   );
 }

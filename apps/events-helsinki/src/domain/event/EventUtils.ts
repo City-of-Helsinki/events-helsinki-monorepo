@@ -341,6 +341,7 @@ export const getEventFields = (event: EventFields, locale: Language) => {
     audienceMaxAge: event.audienceMaxAge,
     photographerName: event.images[0]?.photographerName,
     ...getEventLocationFields(event, locale),
+    locationExtraInfo: getLocalizedString(event.locationExtraInfo, locale),
   };
 };
 

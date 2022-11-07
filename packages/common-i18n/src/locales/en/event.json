@@ -72,6 +72,9 @@
     "openMap": "Open the map",
     "title": "Location"
   },
+  "locationExtraInfo": {
+    "title": "Location extra info"
+  },
   "notFound": {
     "linkSearchEvents": "Find hobbies",
     "text": "For some reason we can't find the event you are looking for. Try searching for something else here:",

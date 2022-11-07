@@ -19,7 +19,10 @@ interface Props {
 const EventContent: React.FC<Props> = ({ event, superEvent }) => {
   const { t } = useTranslation(['common', 'event']);
   const locale = useLocale();
-  const { description, photographerName } = getEventFields(event, locale);
+  const { description, photographerName, locationExtraInfo } = getEventFields(
+    event,
+    locale
+  );
 
   const isInternetEvent = event?.location?.id === EVENT_LOCATIONS.INTERNET;
 
@@ -40,6 +43,16 @@ const EventContent: React.FC<Props> = ({ event, superEvent }) => {
                     __html: sanitizeHtml(description),
                   }}
                 />
+                {locationExtraInfo && (
+                  <>
+                    <h2 className={styles.descriptionTitle}>
+                      {t('event:locationExtraInfo.title')}
+                    </h2>
+                    <div className={styles.description}>
+                      <p>{locationExtraInfo}</p>
+                    </div>
+                  </>
+                )}
                 {photographerName && (
                   <p>
                     {t('common:photographerText', {

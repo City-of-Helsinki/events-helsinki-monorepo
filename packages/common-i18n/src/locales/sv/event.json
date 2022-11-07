@@ -71,6 +71,9 @@
     "openMap": "Öppna kartan",
     "title": "Plats"
   },
+  "locationExtraInfo": {
+    "title": "Plats ytterligare info"
+  },
   "notFound": {
     "linkSearchEvents": "Hitta hobbyer",
     "text": "Av en eller annan orsak så hittas inte evenemänget du letade efter. Försök istället att hitta något att göra härifrån:",

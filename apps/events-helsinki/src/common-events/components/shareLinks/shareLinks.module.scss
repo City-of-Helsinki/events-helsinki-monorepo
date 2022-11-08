@@ -26,7 +26,11 @@
     line-height: 1;
 
     &:focus {
-      outline: 2px solid var(--color-black);
+      outline: 2px solid var(--color-primary-black);
+    }
+
+    svg path {
+      fill: var(--color-primary-black);
     }
   }
 }
@@ -36,7 +40,7 @@
 }
 
 .copyButton {
-  fill: var(--color-black);
+  fill: var(--color-primary-black);
 }
 
 .linkCopyButtonSuccess {

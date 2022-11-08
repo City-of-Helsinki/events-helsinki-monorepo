@@ -7,7 +7,6 @@
   .button {
     background: transparent;
     border: none;
-    color: var(--color-black);
     min-height: 3.375rem;
     padding: 0 1rem;
     width: 100%;
@@ -16,7 +15,7 @@
     align-items: center;
 
     &:focus {
-      outline: 2px solid var(--color-black);
+      outline: 2px solid var(--color-primary-black);
       outline-offset: -2px;
     }
   }
@@ -29,13 +28,13 @@
       margin-right: 1rem;
       height: 1.25rem;
       width: 1.25rem;
+      fill: var(--color-primary-black);
     }
   }
 
   .info {
     flex: 1 1 0%;
     text-align: left;
-    color: var(--color-black);
     position: relative;
     height: 1.25rem;
 

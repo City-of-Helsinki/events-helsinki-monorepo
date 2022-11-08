@@ -5,10 +5,10 @@
 
   .iconWrapper {
     width: var(--spacing-xl);
-
     svg {
       height: var(--spacing-m);
       width: var(--spacing-m);
+      fill: var(--color-primary-black);
     }
   }
 

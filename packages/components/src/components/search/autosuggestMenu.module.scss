@@ -29,7 +29,7 @@
         margin: 0;
       }
       &:focus {
-        outline: 2px solid var(--color-black);
+        outline: 2px solid var(--color-primary-black);
         outline-offset: 2px;
       }
     }
@@ -56,7 +56,6 @@
     .text {
       cursor: pointer;
       padding: var(--spacing-s) var(--spacing-m);
-      color: var(--color-black);
     }
   }
 

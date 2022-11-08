@@ -6,7 +6,7 @@
   --width-image: 6.375rem;
 
   background-color: var(--color-white);
-  color: var(--color-black);
+  color: var(--color-primary-black);
   display: grid;
   grid-template-columns: var(--width-image) 1fr;
   height: 100%;
@@ -81,7 +81,7 @@
 
       .eventName {
         order: 3;
-        color: var(--color-black);
+        color: var(--color-primary-black);
         font-size: var(--fontsize-body-l);
         font-weight: 600;
         line-height: var(--lineheight-l);

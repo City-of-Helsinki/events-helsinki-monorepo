@@ -16,14 +16,13 @@
     align-items: center;
     padding: 0;
     margin-left: var(--spacing-s);
-    color: var(--color-black);
     font-size: var(--fontsize-heading-xxs);
     font-weight: 500;
     border: 2px solid transparent;
     text-align: left;
 
     &:focus {
-      outline: 2px solid var(--color-black);
+      outline: 2px solid var(--color-primary-black);
       outline-offset: 0.25rem;
     }
 

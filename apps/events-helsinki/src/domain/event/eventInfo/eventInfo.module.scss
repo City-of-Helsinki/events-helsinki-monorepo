@@ -22,10 +22,13 @@
     justify-content: center;
     align-items: center;
     margin: var(--spacing-s) 0;
-    color: var(--color-coat-of-arms-dark);
+    color: var(--color-secondary-link);
     outline: none !important;
     font-weight: 600;
     padding: 0;
+    svg g * {
+      color: var(--color-secondary-link);
+    }
   }
 
   button:hover {
@@ -34,7 +37,7 @@
 
   .focusVisible {
     &:focus {
-      outline: 2px solid var(--color-black) !important;
+      outline: 2px solid var(--color-primary-black) !important;
       outline-offset: -2px;
     }
   }
@@ -44,7 +47,16 @@
   margin-top: var(--spacing-s);
 }
 
-.link {
+a.link {
+  &,
+  &:visited {
+    color: var(--color-secondary-link);
+  }
+
+  svg g * {
+    color: var(--color-secondary-link);
+  }
+
   margin: var(--spacing-xs) 0;
   padding: 0;
 }

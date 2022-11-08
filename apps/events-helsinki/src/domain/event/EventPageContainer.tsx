@@ -98,7 +98,9 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 </>
               )}
               {/* Hide similar event on SSR to make initial load faster */}
-              {isClient && showSimilarEvents && <SimilarEvents event={event} />}
+              {isClient && showSimilarEvents && !eventClosed && (
+                <SimilarEvents event={event} />
+              )}
             </>
           ) : (
             <ErrorHero text={t('notFound.text')} title={t('notFound.title')}>

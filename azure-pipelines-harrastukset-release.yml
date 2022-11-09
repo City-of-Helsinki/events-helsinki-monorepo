@@ -1,10 +1,13 @@
+#
+# Release pipeline. Run build and deploy for Platta staging and production environments.
+#
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push 
 # an update to the specified branches or you push specified tags.
 trigger:
   batch: true
-  branches:
+  tags:
     include:
-    - main
+      - release-harrastukset-*
   paths:
     exclude:
     - README.md
@@ -42,6 +45,6 @@ extends:
   # Filename in Azure DevOps Repository (note possible -ui or -api)
   # Django example: azure-pipelines-PROJECTNAME-api-release.yml
   # Drupal example: azure-pipelines-drupal-release.yml
-  template: azure-pipelines-ci-harrastukset-ui-devtest.yml@harrastukset-pipelines
+  template: azure-pipelines-harrastukset-release.yml@harrastukset-pipelines
   #parameters:
     #imagetag: ${{ parameters.imagetag }}

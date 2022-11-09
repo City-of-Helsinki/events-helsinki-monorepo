@@ -1,14 +1,14 @@
 import type React from 'react';
 
-import type { COURSE_CATEGORIES, EVENT_SEARCH_FILTERS } from './constants';
+import type { EVENT_CATEGORIES, EVENT_SEARCH_FILTERS } from './constants';
 
 export interface CategoryOption {
   icon: React.ReactElement;
   text: string;
-  value: COURSE_CATEGORIES;
+  value: EVENT_CATEGORIES;
 }
 
-export type SearchCategoryType = COURSE_CATEGORIES;
+export type SearchCategoryType = EVENT_CATEGORIES;
 
 export interface SearchCategoryOption {
   icon: React.ReactElement;

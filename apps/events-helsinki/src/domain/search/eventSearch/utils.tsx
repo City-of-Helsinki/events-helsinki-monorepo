@@ -24,13 +24,13 @@ import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
 
 import AppConfig from '../../app/AppConfig';
-import type { COURSE_CATEGORIES, EVENT_SORT_OPTIONS } from './constants';
+import type { EVENT_CATEGORIES, EVENT_SORT_OPTIONS } from './constants';
 import {
   EVENT_SEARCH_FILTERS,
-  courseCategories,
+  eventCategories,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
-  MAPPED_COURSE_CATEGORIES,
+  MAPPED_EVENT_CATEGORIES,
 } from './constants';
 import type {
   CategoryOption,
@@ -63,11 +63,11 @@ export const getCategoryOptions = (
 
 export const getEventCategoryOptions = (
   t: TFunction,
-  categories: COURSE_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.Course].default
+  categories: EVENT_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.Course].default
 ): CategoryOption[] =>
   categories
     .map((category) =>
-      getCategoryOptions(category, courseCategories[category], t)
+      getCategoryOptions(category, eventCategories[category], t)
     )
     .sort(sortExtendedCategoryOptions);
 
@@ -202,7 +202,7 @@ export const getEventSearchVariables = ({
 
   const mappedCategories = getMappedPropertyValues(
     categories,
-    MAPPED_COURSE_CATEGORIES
+    MAPPED_EVENT_CATEGORIES
   );
 
   const hasLocation = !isEmpty(divisions) || !isEmpty(places);
@@ -373,7 +373,7 @@ export const getSearchQuery = (filters: Filters): string => {
 
 /** Get a list of all the keywords that can be mapped as a category */
 export const getAllHobbyCategories = () =>
-  Object.values(MAPPED_COURSE_CATEGORIES).flat();
+  Object.values(MAPPED_EVENT_CATEGORIES).flat();
 
 /** Filter the kewords from the event that can be mapped as categories */
 export const getEventCategories = (event: EventFields) => {

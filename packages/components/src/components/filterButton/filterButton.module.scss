@@ -38,8 +38,12 @@
 .date,
 .dateType {
   background-color: var(--color-engel-medium-light);
+  color: var(--color-primary-black);
 
   .closeButton {
+    svg g * {
+      color: var(--color-primary-black);
+    }
     &:focus {
       outline: 2px solid var(--color-primary-black);
     }

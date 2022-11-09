@@ -1,10 +1,14 @@
 .dateInputsContainer {
   button {
-    --selected-date-color: var(--color-primary-black);
-    --selected-date-background: var(--color-fog);
+    --selected-date-color: var(
+      --color-input-selected-text,
+      --color-primary-black
+    );
+    --selected-date-background: var(--color-input, --color-fog);
   }
   button:hover {
-    --background-color: var(--color-fog-light);
+    --selected-date-color: var(--color-primary-black);
+    --background-color: var(--color-input-light, --color-fog-light);
   }
 
   & > div:not(:first-child) {

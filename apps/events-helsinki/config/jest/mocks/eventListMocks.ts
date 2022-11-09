@@ -44,14 +44,13 @@ export const getOtherEventsVariables = (
 });
 
 const createRequest = (
-  type: EventType = 'course',
   variablesOverride: EventListQueryVariables = {}
 ): GraphQLRequest => ({
   query: EventListDocument,
   variables: {
     ...eventListBaseVariables,
     ...variablesOverride,
-    eventType: type === 'event' ? [EventTypeId.General] : [EventTypeId.Course],
+    eventType: [EventTypeId.General],
   },
 });
 
@@ -71,19 +70,17 @@ export type EventListMockArguments = {
 };
 
 export const createEventListRequestAndResultMocks = ({
-  type = 'event',
   variables = {},
   response,
 }: EventListMockArguments): MockedResponse => ({
-  request: createRequest(type, variables),
+  request: createRequest(variables),
   result: createResult(response),
 });
 
 export const createEventListRequestThrowsErrorMocks = ({
-  type = 'event',
   variables = {},
 }: EventListMockArguments = {}): MockedResponse => ({
-  request: createRequest(type, variables),
+  request: createRequest(variables),
   error: new Error('not found'),
 });
 

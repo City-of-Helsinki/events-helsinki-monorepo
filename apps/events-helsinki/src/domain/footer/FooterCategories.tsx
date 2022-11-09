@@ -6,10 +6,7 @@ import CategoryFilter from '../../common-events/components/category/CategoryFilt
 
 import { ROUTES } from '../../constants';
 import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
-import {
-  CATEGORY_CATALOG,
-  COURSE_DEFAULT_SEARCH_FILTERS,
-} from '../search/eventSearch/constants';
+import { COURSE_DEFAULT_SEARCH_FILTERS } from '../search/eventSearch/constants';
 import type { CategoryOption, Filters } from '../search/eventSearch/types';
 import {
   getEventCategoryOptions,
@@ -36,10 +33,7 @@ const FooterCategories: FunctionComponent = () => {
     [ROUTES.SEARCH]: COURSE_DEFAULT_SEARCH_FILTERS,
   };
 
-  const categories = getEventCategoryOptions(
-    t,
-    CATEGORY_CATALOG.Course.default
-  );
+  const categories = getEventCategoryOptions(t);
   const footerTitle = t(`footer:titleEventsCategories`);
 
   return (

@@ -221,25 +221,25 @@ it('should change search query after clicking category menu item', async () => {
   });
 
   await userEvent.click(chooseCategoryButton);
-  await userEvent.click(
-    screen.getByRole('checkbox', { name: /elokuva ja media/i })
-  );
+  await userEvent.click(screen.getByRole('checkbox', { name: /elokuva/i }));
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
-    asPath: `${pathname}?categories=movie_and_media&text=jazz`,
-    query: { categories: 'movie_and_media', text: 'jazz' },
+    asPath: `${pathname}?categories=movie&text=jazz`,
+    query: { categories: 'movie', text: 'jazz' },
   });
 
   // multiple selection
   await userEvent.click(chooseCategoryButton);
-  await userEvent.click(screen.getByRole('checkbox', { name: /pelit/i }));
+  await userEvent.click(
+    screen.getByRole('checkbox', { name: /luonto ja ulkoilu/i })
+  );
   await userEvent.click(screen.getByRole('checkbox', { name: /musiikki/i }));
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
-    asPath: `${pathname}?categories=movie_and_media%2Cgames%2Cmusic&text=jazz`,
-    query: { categories: 'movie_and_media,games,music', text: 'jazz' },
+    asPath: `${pathname}?categories=movie%2Cnature%2Cmusic&text=jazz`,
+    query: { categories: 'movie,nature,music', text: 'jazz' },
   });
 }, 50_000);
 

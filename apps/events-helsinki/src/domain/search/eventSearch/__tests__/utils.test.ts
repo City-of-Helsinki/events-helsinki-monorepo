@@ -76,12 +76,6 @@ describe('getEventSearchVariables function', () => {
       'yso:p1657,yso:p742,yso:p5164,yso:p8268,yso:p15882,yso:p15292'
     );
 
-    const { keywordOrSet2: keyword5 } = getEventSearchVariables({
-      ...defaultParams,
-      params: new URLSearchParams(`?categories=${EVENT_CATEGORIES.MISC}`),
-    });
-    expect(keyword5).toContain('yso:p2108');
-
     const { keywordOrSet2: keyword6 } = getEventSearchVariables({
       ...defaultParams,
       params: new URLSearchParams(`?categories=${EVENT_CATEGORIES.MOVIE}`),

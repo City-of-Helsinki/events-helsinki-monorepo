@@ -85,7 +85,6 @@ const Search: React.FC = () => {
         className={styles.categoriesWrapper}
         categories={categories}
         searchFilters={{
-          // TODO: use COURSE_DEFAULT_SEARCH_FILTERS
           ...EVENT_DEFAULT_SEARCH_FILTERS,
           dateTypes,
           end,

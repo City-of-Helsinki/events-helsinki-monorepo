@@ -21,7 +21,6 @@ export enum EVENT_CATEGORIES {
   DANCE = 'dance',
   FOOD = 'food',
   INFLUENCE = 'influence',
-  MISC = 'misc',
   MOVIE = 'movie',
   MUSEUM = 'museum',
   MUSIC = 'music',
@@ -41,19 +40,6 @@ export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
   keywordNot: [],
   places: [],
   publisher: null,
-  start: null,
-  text: [],
-  suitableFor: [],
-};
-
-export const COURSE_DEFAULT_SEARCH_FILTERS = {
-  categories: [],
-  dateTypes: [],
-  divisions: [],
-  end: null,
-  isFree: false,
-  alsoOngoingCourses: false,
-  places: [],
   start: null,
   text: [],
   suitableFor: [],
@@ -147,8 +133,6 @@ export const INFLUENCE_KEYWORDS = [
   'yso:p15292', // Kaupunkipolitiikka
 ];
 
-export const MISC_KEYWORDS = ['yso:p2108'];
-
 export const MOVIE_KEYWORDS = ['yso:p1235'];
 
 export const MUSEUM_KEYWORDS = [
@@ -172,7 +156,6 @@ export const MAPPED_EVENT_CATEGORIES: Record<string, string[]> = {
   [EVENT_CATEGORIES.DANCE]: DANCE_KEYWORDS,
   [EVENT_CATEGORIES.FOOD]: FOOD_KEYWORDS,
   [EVENT_CATEGORIES.INFLUENCE]: INFLUENCE_KEYWORDS,
-  [EVENT_CATEGORIES.MISC]: MISC_KEYWORDS,
   [EVENT_CATEGORIES.MOVIE]: MOVIE_KEYWORDS,
   [EVENT_CATEGORIES.MUSEUM]: MUSEUM_KEYWORDS,
   [EVENT_CATEGORIES.MUSIC]: MUSIC_KEYWORDS,
@@ -180,37 +163,6 @@ export const MAPPED_EVENT_CATEGORIES: Record<string, string[]> = {
   [EVENT_CATEGORIES.SPORT]: SPORT_KEYWORDS,
   [EVENT_CATEGORIES.THEATRE]: THEATRE_KEYWORDS,
 };
-
-// course hobby types
-export const CLUBS_KEYWORDS = [
-  'yso:p7642', // kerhot
-  'yso:p7641', // kerhotoiminta
-];
-
-export const COURSES_KEYWORDS = [
-  // kurssit, vapaa-ajan kurssit
-  'yso:p9270',
-  'kulke:301',
-  'kulke:60',
-  'kulke:625',
-];
-
-export const CAMPS_KEYWORDS = [
-  'yso:p143', // leirit
-  'yso:p21435', // kesäleirit
-  'yso:p22818', // tiedeleirit
-];
-
-export const TRIPS_KEYWORDS = [
-  'yso:p25261', // retket
-  'yso:p1103', // retkeily
-];
-
-export const WORKSHOPS_KEYWORDS = [
-  // työpajat
-  'yso:p19245',
-  'kulke:732',
-];
 
 export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
   [EVENT_CATEGORIES.MOVIE]: {
@@ -252,10 +204,6 @@ export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
   [EVENT_CATEGORIES.FOOD]: {
     icon: <IconFood />,
     labelKey: 'home:category.food',
-  },
-  [EVENT_CATEGORIES.MISC]: {
-    icon: <></>,
-    labelKey: 'home:category.misc',
   },
 };
 

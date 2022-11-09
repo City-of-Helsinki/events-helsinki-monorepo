@@ -25,6 +25,10 @@ main {
   --color-primary-black: var(--color-black-90);
   --color-secondary-link: var(--color-success-dark);
   --color-link-show-all: var(--color-success-dark);
+  --color-input-light: var(--color-success-light);
+  --color-input: var(--color-success);
+  --color-input-dark: var(--color-success-dark);
+  --color-input-selected-text: var(--color-white);
 }
 
 button {

@@ -17,7 +17,7 @@ import type { Filters, SearchCategoryOption } from './types';
 // Page size of the event list
 export const PAGE_SIZE = 10;
 
-export enum COURSE_CATEGORIES {
+export enum EVENT_CATEGORIES {
   MOVIE = 'movie_and_media',
   LANGUAGES = 'languages',
   LITERATURE = 'literature',
@@ -96,28 +96,28 @@ export enum EVENT_SEARCH_FILTERS {
 export const CATEGORY_CATALOG = {
   [EventTypeId.Course]: {
     default: [
-      COURSE_CATEGORIES.MOVIE,
-      COURSE_CATEGORIES.LANGUAGES,
-      COURSE_CATEGORIES.LITERATURE,
-      COURSE_CATEGORIES.ARTS_AND_CULTURE,
-      COURSE_CATEGORIES.VISUAL_ARTS,
-      COURSE_CATEGORIES.HANDICRAFTS,
-      COURSE_CATEGORIES.SPORT,
-      COURSE_CATEGORIES.MUSIC,
-      COURSE_CATEGORIES.GAMES,
-      COURSE_CATEGORIES.FOOD,
-      COURSE_CATEGORIES.DANCE,
-      COURSE_CATEGORIES.THEATRE,
+      EVENT_CATEGORIES.MOVIE,
+      EVENT_CATEGORIES.LANGUAGES,
+      EVENT_CATEGORIES.LITERATURE,
+      EVENT_CATEGORIES.ARTS_AND_CULTURE,
+      EVENT_CATEGORIES.VISUAL_ARTS,
+      EVENT_CATEGORIES.HANDICRAFTS,
+      EVENT_CATEGORIES.SPORT,
+      EVENT_CATEGORIES.MUSIC,
+      EVENT_CATEGORIES.GAMES,
+      EVENT_CATEGORIES.FOOD,
+      EVENT_CATEGORIES.DANCE,
+      EVENT_CATEGORIES.THEATRE,
     ],
     landingPage: [
-      COURSE_CATEGORIES.LITERATURE,
-      COURSE_CATEGORIES.VISUAL_ARTS,
-      COURSE_CATEGORIES.HANDICRAFTS,
-      COURSE_CATEGORIES.SPORT,
-      COURSE_CATEGORIES.MUSIC,
-      COURSE_CATEGORIES.GAMES,
-      COURSE_CATEGORIES.DANCE,
-      COURSE_CATEGORIES.THEATRE,
+      EVENT_CATEGORIES.LITERATURE,
+      EVENT_CATEGORIES.VISUAL_ARTS,
+      EVENT_CATEGORIES.HANDICRAFTS,
+      EVENT_CATEGORIES.SPORT,
+      EVENT_CATEGORIES.MUSIC,
+      EVENT_CATEGORIES.GAMES,
+      EVENT_CATEGORIES.DANCE,
+      EVENT_CATEGORIES.THEATRE,
     ],
   },
 };
@@ -262,19 +262,19 @@ export const THEATRE_COURSES_KEYWORDS = [
 ];
 
 // todo: replace with valid keyword ids
-export const MAPPED_COURSE_CATEGORIES: Record<string, string[]> = {
-  [COURSE_CATEGORIES.MOVIE]: MOVIES_AND_MEDIA_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.LANGUAGES]: LANGUAGES_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.LITERATURE]: LITERATURE_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.ARTS_AND_CULTURE]: ARTS_AND_CULTURE_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.VISUAL_ARTS]: VISUAL_ARTS_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.HANDICRAFTS]: HANDICRAFTS_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.SPORT]: SPORT_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.MUSIC]: MUSIC_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.GAMES]: GAMES_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.FOOD]: FOOD_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.DANCE]: DANCE_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.THEATRE]: THEATRE_COURSES_KEYWORDS,
+export const MAPPED_EVENT_CATEGORIES: Record<string, string[]> = {
+  [EVENT_CATEGORIES.MOVIE]: MOVIES_AND_MEDIA_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.LANGUAGES]: LANGUAGES_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.LITERATURE]: LITERATURE_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.ARTS_AND_CULTURE]: ARTS_AND_CULTURE_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.VISUAL_ARTS]: VISUAL_ARTS_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.HANDICRAFTS]: HANDICRAFTS_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.SPORT]: SPORT_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.MUSIC]: MUSIC_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.GAMES]: GAMES_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.FOOD]: FOOD_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.DANCE]: DANCE_COURSES_KEYWORDS,
+  [EVENT_CATEGORIES.THEATRE]: THEATRE_COURSES_KEYWORDS,
 };
 
 // course hobby types
@@ -308,56 +308,55 @@ export const WORKSHOPS_KEYWORDS = [
   'kulke:732',
 ];
 
-export const courseCategories: Record<COURSE_CATEGORIES, SearchCategoryOption> =
-  {
-    [COURSE_CATEGORIES.MOVIE]: {
-      icon: <IconMovies />,
-      labelKey: 'home:category.courses.movieAndMedia',
-    },
-    [COURSE_CATEGORIES.LANGUAGES]: {
-      icon: <IconLanguages />,
-      labelKey: 'home:category.courses.languages',
-    },
-    [COURSE_CATEGORIES.LITERATURE]: {
-      icon: <IconLiterature />,
-      labelKey: 'home:category.courses.literature',
-    },
-    [COURSE_CATEGORIES.ARTS_AND_CULTURE]: {
-      icon: <IconArt />,
-      labelKey: 'home:category.courses.artsAndCulture',
-    },
-    [COURSE_CATEGORIES.VISUAL_ARTS]: {
-      icon: <IconArt />,
-      labelKey: 'home:category.courses.visualArts',
-    },
-    [COURSE_CATEGORIES.HANDICRAFTS]: {
-      icon: <IconCraft />,
-      labelKey: 'home:category.courses.handicrafts',
-    },
-    [COURSE_CATEGORIES.SPORT]: {
-      icon: <IconSports />,
-      labelKey: 'home:category.courses.sport',
-    },
-    [COURSE_CATEGORIES.MUSIC]: {
-      icon: <IconMusic />,
-      labelKey: 'home:category.courses.music',
-    },
-    [COURSE_CATEGORIES.GAMES]: {
-      icon: <IconGames />,
-      labelKey: 'home:category.courses.games',
-    },
-    [COURSE_CATEGORIES.FOOD]: {
-      icon: <IconFood />,
-      labelKey: 'home:category.courses.food',
-    },
-    [COURSE_CATEGORIES.DANCE]: {
-      icon: <IconDance />,
-      labelKey: 'home:category.courses.dance',
-    },
-    [COURSE_CATEGORIES.THEATRE]: {
-      icon: <IconTheatre />,
-      labelKey: 'home:category.courses.theatre',
-    },
-  };
+export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
+  [EVENT_CATEGORIES.MOVIE]: {
+    icon: <IconMovies />,
+    labelKey: 'home:category.courses.movieAndMedia',
+  },
+  [EVENT_CATEGORIES.LANGUAGES]: {
+    icon: <IconLanguages />,
+    labelKey: 'home:category.courses.languages',
+  },
+  [EVENT_CATEGORIES.LITERATURE]: {
+    icon: <IconLiterature />,
+    labelKey: 'home:category.courses.literature',
+  },
+  [EVENT_CATEGORIES.ARTS_AND_CULTURE]: {
+    icon: <IconArt />,
+    labelKey: 'home:category.courses.artsAndCulture',
+  },
+  [EVENT_CATEGORIES.VISUAL_ARTS]: {
+    icon: <IconArt />,
+    labelKey: 'home:category.courses.visualArts',
+  },
+  [EVENT_CATEGORIES.HANDICRAFTS]: {
+    icon: <IconCraft />,
+    labelKey: 'home:category.courses.handicrafts',
+  },
+  [EVENT_CATEGORIES.SPORT]: {
+    icon: <IconSports />,
+    labelKey: 'home:category.courses.sport',
+  },
+  [EVENT_CATEGORIES.MUSIC]: {
+    icon: <IconMusic />,
+    labelKey: 'home:category.courses.music',
+  },
+  [EVENT_CATEGORIES.GAMES]: {
+    icon: <IconGames />,
+    labelKey: 'home:category.courses.games',
+  },
+  [EVENT_CATEGORIES.FOOD]: {
+    icon: <IconFood />,
+    labelKey: 'home:category.courses.food',
+  },
+  [EVENT_CATEGORIES.DANCE]: {
+    icon: <IconDance />,
+    labelKey: 'home:category.courses.dance',
+  },
+  [EVENT_CATEGORIES.THEATRE]: {
+    icon: <IconTheatre />,
+    labelKey: 'home:category.courses.theatre',
+  },
+};
 
 export const MAPPED_PLACES: Record<string, string> = {};

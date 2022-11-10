@@ -105,7 +105,7 @@ $logoWidth: 5.5rem;
       .title {
         order: 3;
         font-size: var(--fontsize-heading-l);
-        line-height: var(--lineheight-xl);
+        line-height: var(--lineheight-m);
         font-weight: 400;
         @include respond_below(m) {
           font-size: var(--fontsize-heading-m);

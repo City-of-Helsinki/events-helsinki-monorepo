@@ -252,7 +252,7 @@ const AdvancedSearch: React.FC<Props> = ({
       <ContentContainer className={styles.contentContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.searchWrapper}>
-            <h2>{t('title')}</h2>
+            <h2>{t('eventTitle')}</h2>
             <div className={styles.rowWrapper}>
               <div className={classNames(styles.row, styles.autoSuggestRow)}>
                 <div>

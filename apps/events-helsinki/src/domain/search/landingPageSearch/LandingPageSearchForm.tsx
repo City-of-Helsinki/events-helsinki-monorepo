@@ -49,7 +49,7 @@ export default function LandingPageSearchForm({
 
   return (
     <div className={classnames(className, styles.landingPageSearch)}>
-      <h2>{t('home:search.title')}</h2>
+      <h2>{t('home:eventSearch.title')}</h2>
       <div className={styles.searchRow}>
         <div className={styles.autosuggestWrapper}>
           <SearchAutosuggest

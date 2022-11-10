@@ -33,7 +33,8 @@
     }
   },
   "textFoundEvents": "{{count}} search results",
-  "title": "Find hobby",
+  "courseTitle": "Find hobby",
+  "eventTitle": "What are you looking for?",
   "buttonLoadMore": "Show more hobbies ({{count}})",
   "searchNotification": {
     "noResultsTitle": "Sorry, no search results were found for the search criteria you selected.",

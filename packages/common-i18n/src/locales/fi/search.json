@@ -1,5 +1,6 @@
 {
-  "title": "Löydä harrastus",
+  "courseTitle": "Löydä harrastus",
+  "eventTitle": "Mitä etsit?",
   "ariaLiveLoading": "Haetaan tapahtumia",
   "ariaLiveSearchReady": "{{count}} hakutulosta",
   "textFoundEvents": "{{count}} hakutulosta",

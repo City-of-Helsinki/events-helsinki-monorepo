@@ -12,6 +12,7 @@ import {
   getSlugFromUri,
   removeContextPathFromUri,
 } from '../../utils/headless-cms/headlessCmsUtils';
+import styles from './navigation.module.scss';
 
 type NavigationProps = {
   page?: PageType | ArticleType;
@@ -26,6 +27,7 @@ export default function Navigation({ page }: NavigationProps) {
   // TODO: This break the build with: TypeError: Cannot read properties of null (reading 'useState')
   return (
     <RHHCApolloNavigation
+      className={styles.topNavigation}
       menuName={navigationMenuName ?? ''}
       onTitleClick={() => {
         router.push('/');

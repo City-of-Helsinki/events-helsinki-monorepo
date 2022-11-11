@@ -174,6 +174,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                   {registrationUrl && (
                     <Visible className={styles.registrationButtonWrapper}>
                       <Button
+                        variant="success"
                         className={buttonStyles.buttonCoatBlue}
                         aria-label={t('hero.ariaLabelEnrol')}
                         onClick={() => window.open(registrationUrl)}

@@ -9,7 +9,6 @@ import { LoadingSpinner } from 'hds-react';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps as NextAppProps } from 'next/app';
-import dynamic from 'next/dynamic';
 import Error from 'next/error';
 import type { NextRouter } from 'next/router';
 import React from 'react';
@@ -26,14 +25,6 @@ import useEventsConfig from '../hooks/useEventsConfig';
 import useRHHCConfig from '../hooks/useRHHCConfig';
 
 const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
-
-const TopProgressBar = dynamic(
-  async () => {
-    const components = await import('events-helsinki-components');
-    return components.TopProgressBar;
-  },
-  { ssr: false }
-);
 
 function Center({ children }: { children: React.ReactNode }) {
   return (
@@ -88,7 +79,6 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   return (
     <EventsConfigProvider config={eventsConfig}>
       <RHHCConfigProvider config={rhhcConfig}>
-        <TopProgressBar />
         <ResetFocus />
         <ApolloProvider client={cmsApolloClient}>
           <MatomoProvider value={matomoInstance}>

@@ -7,7 +7,7 @@
     margin-bottom: 1.5rem;
 
     @include respond_above(s) {
-      grid-gap: var(--spacing-xl);
+      grid-gap: var(--spacing-s);
       margin-bottom: var(--spacing-xl);
     }
   }

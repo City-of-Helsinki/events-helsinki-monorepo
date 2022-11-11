@@ -6,17 +6,29 @@ body,
 #__next,
 main {
   height: 100%;
+  color: var(--color-primary-black);
 }
 
 * {
   box-sizing: border-box;
   font-family: $font-family-base;
-  color: var(--color-primary-black);
   --menu-item-background-color-highlighted: var(--color-success);
 }
 
 .pageLayout {
   row-gap: 0 !important;
+}
+
+.articlesArchive {
+  button,
+  button:active {
+    background-color: var(--color-success);
+    border: none;
+  }
+  button:hover,
+  button:focus {
+    background-color: var(--color-success-dark);
+  }
 }
 
 :root {

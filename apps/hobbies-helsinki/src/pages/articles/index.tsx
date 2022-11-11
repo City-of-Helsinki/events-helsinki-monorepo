@@ -111,6 +111,7 @@ export default function ArticleArchive({
         navigation={<Navigation page={page} />}
         content={
           <SearchPageContent
+            className="articlesArchive"
             noResults={!isLoading && articles?.length === 0}
             items={articles}
             tags={categories}

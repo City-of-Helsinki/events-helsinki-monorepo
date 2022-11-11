@@ -45,16 +45,6 @@ $buttonWidth: 180px;
     @include respond-above(m) {
       grid-column: span 1 / 5;
     }
-
-    button {
-      span {
-        color: white;
-      }
-    }
-
-    svg * {
-      color: var(--color-white);
-    }
   }
 
   .row {

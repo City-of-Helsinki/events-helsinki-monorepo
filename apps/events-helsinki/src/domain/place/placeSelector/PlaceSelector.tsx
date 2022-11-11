@@ -5,10 +5,10 @@ import {
   useLocale,
   getLocalizedString,
   isClient,
+  usePlaceListQuery,
 } from 'events-helsinki-components';
 import React from 'react';
 
-import { usePlaceListQuery } from '../../nextApi/graphql/generated/graphql';
 import PlaceText from '../PlaceText';
 
 const DIVISIONS = ['kunta:helsinki'];

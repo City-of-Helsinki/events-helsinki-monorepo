@@ -1,5 +1,9 @@
-import { useLocale, useCommonTranslation } from 'events-helsinki-components';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
+import {
+  useLocale,
+  useCommonTranslation,
+  EventTypeId,
+} from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -8,7 +12,6 @@ import {
   getI18nPath,
   getParsedUrlQueryInput,
 } from '../../../utils/routerUtils';
-import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
 import {
   CATEGORY_CATALOG,
   EVENT_DEFAULT_SEARCH_FILTERS,

@@ -1,10 +1,10 @@
+import { KeywordListDocument } from 'events-helsinki-components';
 import { advanceTo } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
 import { configure, render, screen, userEvent } from '@/test-utils';
 import { fakeKeywords } from '@/test-utils/mockDataUtils';
-import { KeywordListDocument } from '../../../nextApi/graphql/generated/graphql';
 import LandingPageSearch from '../LandingPageSearch';
 
 configure({ defaultHidden: true });

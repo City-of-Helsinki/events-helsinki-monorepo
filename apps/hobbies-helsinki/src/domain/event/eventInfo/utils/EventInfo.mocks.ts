@@ -1,4 +1,14 @@
 import { addDays } from 'date-fns';
+import {
+  EventTypeId,
+  OrganizationDetailsDocument,
+} from 'events-helsinki-components';
+import type {
+  EventFieldsFragment,
+  EventListQueryVariables,
+  EventListResponse,
+  Meta,
+} from 'events-helsinki-components';
 import { range } from 'lodash';
 
 import {
@@ -10,16 +20,6 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createOtherEventTimesRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
-import type {
-  EventFieldsFragment,
-  EventListQueryVariables,
-  EventListResponse,
-  Meta,
-} from '../../../nextApi/graphql/generated/graphql';
-import {
-  EventTypeId,
-  OrganizationDetailsDocument,
-} from '../../../nextApi/graphql/generated/graphql';
 
 export const organizationId = '1';
 export const organizationName = 'Organization name';

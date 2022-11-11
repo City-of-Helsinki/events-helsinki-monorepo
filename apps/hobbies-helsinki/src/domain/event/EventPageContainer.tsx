@@ -4,6 +4,13 @@ import {
   useLocale,
   isClient,
   addParamsToQueryString,
+  getEventIdFromUrl,
+  isEventClosed,
+  EventDetailsDocument,
+} from 'events-helsinki-components';
+import type {
+  SuperEventResponse,
+  EventFields,
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -13,20 +20,16 @@ import { Link } from 'react-helsinki-headless-cms';
 import { MAIN_CONTENT_ID, ROUTES } from '../../constants';
 import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
 import ErrorHero from '../error/ErrorHero';
-import type { EventFieldsFragment } from '../nextApi/graphql/generated/graphql';
-import { EventDetailsDocument } from '../nextApi/graphql/generated/graphql';
 import EventClosedHero from './eventClosedHero/EventClosedHero';
 import EventContent from './eventContent/EventContent';
 import EventHero from './eventHero/EventHero';
 import styles from './eventPage.module.scss';
 import EventPageMeta from './eventPageMeta/EventPageMeta';
-import { getEventIdFromUrl, isEventClosed } from './EventUtils';
 import SimilarEvents from './similarEvents/SimilarEvents';
-import type { SuperEventResponse } from './types';
 
 export interface EventPageContainerProps {
   loading: boolean;
-  event?: EventFieldsFragment;
+  event?: EventFields;
   showSimilarEvents?: boolean;
 }
 

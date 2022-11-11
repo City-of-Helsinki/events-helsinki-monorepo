@@ -1,11 +1,14 @@
-import { useLocale, getDateRangeStr } from 'events-helsinki-components';
+import {
+  useLocale,
+  getDateRangeStr,
+  getEventFields,
+  EventLocationText as LocationText,
+} from 'events-helsinki-components';
+import type { EventFieldsFragment } from 'events-helsinki-components';
 import { IconCalendarClock, IconLocation } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
 import EventKeywords from '../eventKeywords/EventKeywords';
-import LocationText from '../eventLocation/EventLocationText';
-import { getEventFields } from '../EventUtils';
 import styles from './eventDetails.module.scss';
 
 export type EventDetailsProps = {

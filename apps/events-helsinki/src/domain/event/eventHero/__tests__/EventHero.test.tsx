@@ -1,4 +1,9 @@
 import { getDateRangeStr } from 'events-helsinki-components';
+import type {
+  EventDetails,
+  EventFieldsFragment,
+  OfferFieldsFragment,
+} from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
@@ -11,11 +16,6 @@ import {
   fakeLocalizedObject,
   fakeOffer,
 } from '@/test-utils/mockDataUtils';
-import type {
-  EventDetails,
-  EventFieldsFragment,
-  OfferFieldsFragment,
-} from '../../../nextApi/graphql/generated/graphql';
 import type { Props as EventHeroProps } from '../EventHero';
 import EventHero from '../EventHero';
 

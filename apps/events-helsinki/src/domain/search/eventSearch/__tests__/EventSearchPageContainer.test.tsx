@@ -1,5 +1,10 @@
 /* eslint-disable no-console */
 import type { MockedResponse } from '@apollo/client/testing';
+import type { Meta } from 'events-helsinki-components';
+import {
+  NeighborhoodListDocument,
+  PlaceListDocument,
+} from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 import { toast } from 'react-toastify';
@@ -16,11 +21,6 @@ import {
   createEventListRequestAndResultMocks,
   createEventListRequestThrowsErrorMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import type { Meta } from '../../../nextApi/graphql/generated/graphql';
-import {
-  NeighborhoodListDocument,
-  PlaceListDocument,
-} from '../../../nextApi/graphql/generated/graphql';
 import EventSearchPageContainer from '../EventSearchPageContainer';
 
 const meta: Meta = {

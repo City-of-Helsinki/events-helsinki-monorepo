@@ -1,16 +1,3 @@
-import map from 'lodash/map';
-
-import {
-  fakeEvent,
-  fakeImage,
-  fakeKeyword,
-  fakeKeywords,
-  fakePlace,
-} from '@/test-utils/mockDataUtils';
-import type {
-  EventFieldsFragment,
-  PlaceFieldsFragment,
-} from '../../nextApi/graphql/generated/graphql';
 import {
   formatPrice,
   getEventFields,
@@ -20,7 +7,20 @@ import {
   getKeywordList,
   getLocationId,
   getServiceMapUrl,
-} from '../EventUtils';
+} from 'events-helsinki-components';
+import type {
+  EventFieldsFragment,
+  PlaceFieldsFragment,
+} from 'events-helsinki-components';
+import map from 'lodash/map';
+
+import {
+  fakeEvent,
+  fakeImage,
+  fakeKeyword,
+  fakeKeywords,
+  fakePlace,
+} from '@/test-utils/mockDataUtils';
 
 describe('getKeywordList function', () => {
   it('should sort and capitalize keywords', () => {

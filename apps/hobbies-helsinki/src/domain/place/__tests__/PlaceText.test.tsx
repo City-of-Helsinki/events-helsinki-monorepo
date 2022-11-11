@@ -1,8 +1,8 @@
+import { PlaceDetailsDocument } from 'events-helsinki-components';
 import * as React from 'react';
 
 import { render, screen, waitFor } from '@/test-utils';
 import { fakePlace } from '@/test-utils/mockDataUtils';
-import { PlaceDetailsDocument } from '../../nextApi/graphql/generated/graphql';
 import PlaceText from '../PlaceText';
 
 const placeId = 'helsinki:123';

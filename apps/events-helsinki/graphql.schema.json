@@ -4168,6 +4168,22 @@
                 "deprecationReason": null
               },
               {
+                "name": "keywordOrSet3",
+                "description": null,
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "language",
                 "description": null,
                 "type": {

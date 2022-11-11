@@ -1,9 +1,6 @@
+import type { Maybe, PlaceDetailsQuery } from 'events-helsinki-components';
+import { PlaceDetailsDocument } from 'events-helsinki-components';
 import { createEventsApolloClient } from '../clients/eventsApolloClient';
-import type {
-  Maybe,
-  PlaceDetailsQuery,
-} from '../nextApi/graphql/generated/graphql';
-import { PlaceDetailsDocument } from '../nextApi/graphql/generated/graphql';
 
 export const getPlaceDetailsFromCache = (
   id: string

@@ -16,7 +16,11 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: 'tsconfig.json',
   },
-  ignorePatterns: [...getDefaultIgnorePatterns(), '/storybook-static'],
+  ignorePatterns: [
+    ...getDefaultIgnorePatterns(),
+    '/storybook-static',
+    '**/generated/*',
+  ],
   extends: [
     '@events-helsinki/eslint-config-bases/typescript',
     '@events-helsinki/eslint-config-bases/regexp',

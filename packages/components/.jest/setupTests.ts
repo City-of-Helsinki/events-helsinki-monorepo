@@ -13,6 +13,10 @@ const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 // Raise the default timeout from 5000
 jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
 
+// Mock the NextJS-router
+jest.mock('next/router', () => require('next-router-mock'));
+jest.mock('next/dist/client/router', () => require('next-router-mock'));
+
 loadEnvConfig(process.cwd());
 
 // Mock the fetch

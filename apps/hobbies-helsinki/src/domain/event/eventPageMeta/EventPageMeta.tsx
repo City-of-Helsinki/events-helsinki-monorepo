@@ -1,9 +1,7 @@
-import { useLocale } from 'events-helsinki-components';
+import { useLocale, getEventFields } from 'events-helsinki-components';
+import type { EventFields } from 'events-helsinki-components';
 import Head from 'next/head';
 import React from 'react';
-
-import { getEventFields } from '../EventUtils';
-import type { EventFields } from '../types';
 
 interface Props {
   event: EventFields;

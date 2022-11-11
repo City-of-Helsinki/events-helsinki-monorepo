@@ -1,10 +1,10 @@
 import type { MockedResponse } from '@apollo/client/testing';
 
+import { EventsByIdsDocument } from 'events-helsinki-components';
 import type {
   EventDetails,
   EventsByIdsQueryVariables,
-} from '../../../src/domain/nextApi/graphql/generated/graphql';
-import { EventsByIdsDocument } from '../../../src/domain/nextApi/graphql/generated/graphql';
+} from 'events-helsinki-components';
 
 export const getEventsByIdsMock = ({
   variables,

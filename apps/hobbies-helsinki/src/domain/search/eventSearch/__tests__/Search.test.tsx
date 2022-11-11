@@ -1,3 +1,9 @@
+import {
+  KeywordListDocument,
+  NeighborhoodListDocument,
+  PlaceListDocument,
+  additionalDivisions,
+} from 'events-helsinki-components';
 import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
@@ -9,12 +15,6 @@ import {
   fakeNeighborhoods,
   fakePlaces,
 } from '@/test-utils/mockDataUtils';
-import { additionalDivisions } from '../../../neighborhood/additionalDivisions';
-import {
-  KeywordListDocument,
-  NeighborhoodListDocument,
-  PlaceListDocument,
-} from '../../../nextApi/graphql/generated/graphql';
 import Search from '../AdvancedSearch';
 
 configure({ defaultHidden: true });

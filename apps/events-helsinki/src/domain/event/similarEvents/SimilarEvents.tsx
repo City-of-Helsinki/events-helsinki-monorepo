@@ -1,4 +1,5 @@
 import { LoadingSpinner, useLocale } from 'events-helsinki-components';
+import type { EventFields } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import type { CollectionProps } from 'react-helsinki-headless-cms';
@@ -14,7 +15,6 @@ import {
 import { ROUTES } from '../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import { useSimilarEventsQuery } from '../queryUtils';
-import type { EventFields } from '../types';
 import styles from './similarEvents.module.scss';
 
 interface Props {

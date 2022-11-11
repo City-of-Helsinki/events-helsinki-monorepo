@@ -1,9 +1,9 @@
+import type { EventFieldsFragment } from 'events-helsinki-components';
 import React from 'react';
 
 import { configure, render, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeImage } from '@/test-utils/mockDataUtils';
-import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventContent from '../EventContent';
 
 configure({ defaultHidden: true });

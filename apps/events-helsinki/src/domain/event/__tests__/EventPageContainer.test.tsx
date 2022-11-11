@@ -1,3 +1,8 @@
+import type { EventFieldsFragment } from 'events-helsinki-components';
+import {
+  EventDetailsDocument,
+  EventListDocument,
+} from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 
@@ -14,14 +19,9 @@ import {
   createEventListRequestAndResultMocks,
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
-import {
-  EventDetailsDocument,
-  EventListDocument,
-} from '../../nextApi/graphql/generated/graphql';
 import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
-import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
+import type { EventPageContainerProps } from '../EventPageContainer';
 
 const id = 'hel:123';
 const name = 'Event title';

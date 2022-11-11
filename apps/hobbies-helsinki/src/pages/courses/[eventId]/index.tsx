@@ -1,4 +1,10 @@
 import { ApolloProvider } from '@apollo/client';
+import { EventDetailsDocument } from 'events-helsinki-components';
+import type {
+  EventFields,
+  EventDetailsQuery,
+  EventDetailsQueryVariables,
+} from 'events-helsinki-components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
@@ -7,15 +13,9 @@ import Navigation from '../../../common-events/components/navigation/Navigation'
 import AppConfig from '../../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../../domain/app/getHobbiesStaticProps';
 import EventPageContainer from '../../../domain/event/EventPageContainer';
-import type { EventFields } from '../../../domain/event/types';
 import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../../domain/matomoWrapper/MatomoWrapper';
-import { EventDetailsDocument } from '../../../domain/nextApi/graphql/generated/graphql';
-import type {
-  EventDetailsQuery,
-  EventDetailsQueryVariables,
-} from '../../../domain/nextApi/graphql/generated/graphql';
 import { getLocaleOrError } from '../../../utils/routerUtils';
 
 const Event: NextPage<{

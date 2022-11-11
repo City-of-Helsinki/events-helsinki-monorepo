@@ -1,15 +1,21 @@
 import classNames from 'classnames';
-import { sanitizeHtml, useLocale } from 'events-helsinki-components';
+import type {
+  EventFields,
+  SuperEventResponse,
+} from 'events-helsinki-components';
+import {
+  sanitizeHtml,
+  useLocale,
+  EventLocation,
+  getEventFields,
+  EVENT_LOCATIONS,
+} from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 
 import ShareLinks from '../../../common-events/components/shareLinks/ShareLinks';
-import { EVENT_LOCATIONS } from '../constants';
 import EventInfo from '../eventInfo/EventInfo';
-import EventLocation from '../eventLocation/EventLocation';
-import { getEventFields } from '../EventUtils';
-import type { EventFields, SuperEventResponse } from '../types';
 import styles from './eventContent.module.scss';
 
 interface Props {

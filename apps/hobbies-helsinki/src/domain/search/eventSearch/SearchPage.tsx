@@ -1,8 +1,11 @@
+import type { QueryEventListArgs } from 'events-helsinki-components';
 import {
   LoadingSpinner,
   SrOnly,
   useIsSmallScreen,
   useSearchTranslation,
+  getLargeEventCardId,
+  useEventListQuery,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
@@ -13,9 +16,6 @@ import { toast } from 'react-toastify';
 import EventList from '../../../common-events/components/eventList/EventList';
 import { MAIN_CONTENT_ID } from '../../../constants';
 import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
-import { getLargeEventCardId } from '../../event/EventUtils';
-import type { QueryEventListArgs } from '../../nextApi/graphql/generated/graphql';
-import { useEventListQuery } from '../../nextApi/graphql/generated/graphql';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';

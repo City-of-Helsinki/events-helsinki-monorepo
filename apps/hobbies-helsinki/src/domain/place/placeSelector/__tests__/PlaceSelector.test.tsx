@@ -1,13 +1,13 @@
+import {
+  PlaceDetailsDocument,
+  PlaceListDocument,
+} from 'events-helsinki-components';
 import { IconStar } from 'hds-react';
 import React from 'react';
 
 import { waitFor, actWait, render, screen, userEvent } from '@/test-utils';
 import { fakePlaces } from '@/test-utils/mockDataUtils';
 import { apolloClient } from '../../../clients/eventsApolloClient';
-import {
-  PlaceDetailsDocument,
-  PlaceListDocument,
-} from '../../../nextApi/graphql/generated/graphql';
 import PlaceSelector from '../PlaceSelector';
 
 const variables = {

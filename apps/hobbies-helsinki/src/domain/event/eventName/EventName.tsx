@@ -1,8 +1,12 @@
-import { useEventTranslation, useLocale } from 'events-helsinki-components';
+import {
+  useEventTranslation,
+  useLocale,
+  getEventFields,
+  isEventCancelled,
+} from 'events-helsinki-components';
+import type { EventFieldsFragment } from 'events-helsinki-components';
 import React from 'react';
 
-import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
-import { getEventFields, isEventCancelled } from '../EventUtils';
 import styles from './eventName.module.scss';
 
 interface Props {

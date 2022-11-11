@@ -1,17 +1,14 @@
 import type { FetchResult, GraphQLRequest } from '@apollo/client';
 import type { MockedResponse } from '@apollo/client/testing';
 
-import AppConfig from '../../../src/domain/app/AppConfig';
-import type { EventType } from '../../../src/domain/event/types';
+import { EventListDocument, EventTypeId } from 'events-helsinki-components';
 import type {
   EventListQueryVariables,
   EventListResponse,
+  EventType,
   QueryEventListArgs,
-} from '../../../src/domain/nextApi/graphql/generated/graphql';
-import {
-  EventListDocument,
-  EventTypeId,
-} from '../../../src/domain/nextApi/graphql/generated/graphql';
+} from 'events-helsinki-components';
+import AppConfig from '../../../src/domain/app/AppConfig';
 
 export const baseVariables = {
   audienceMinAgeLt: '',

@@ -7,6 +7,13 @@ import {
   IconButton,
   InfoWithIcon,
   SkeletonLoader,
+  EventLocationText as LocationText,
+  getEventFields,
+  getEventPrice,
+} from 'events-helsinki-components';
+import type {
+  EventFields,
+  SuperEventResponse,
 } from 'events-helsinki-components';
 import {
   Button,
@@ -26,12 +33,9 @@ import {
 } from 'react-helsinki-headless-cms';
 
 import EventKeywords from '../eventKeywords/EventKeywords';
-import LocationText from '../eventLocation/EventLocationText';
 import EventName from '../eventName/EventName';
 import type { ReturnParams } from '../eventQueryString.util';
 import { extractLatestReturnPath } from '../eventQueryString.util';
-import { getEventFields, getEventPrice } from '../EventUtils';
-import type { EventFields, SuperEventResponse } from '../types';
 import styles from './eventHero.module.scss';
 
 export interface Props {

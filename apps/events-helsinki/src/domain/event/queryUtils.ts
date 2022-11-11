@@ -1,13 +1,18 @@
+import type {
+  EventFields,
+  EventListQuery,
+  EventListQueryVariables,
+} from 'events-helsinki-components';
+import {
+  useEventListQuery,
+  getEventIdFromUrl,
+  SIMILAR_EVENTS_AMOUNT,
+} from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';
 
 import AppConfig from '../app/AppConfig';
-import type {
-  EventListQuery,
-  EventListQueryVariables,
-} from '../nextApi/graphql/generated/graphql';
-import { useEventListQuery } from '../nextApi/graphql/generated/graphql';
 import {
   EVENT_SEARCH_FILTERS,
   EVENT_SORT_OPTIONS,
@@ -17,9 +22,6 @@ import {
   getEventSearchVariables,
   getNextPage,
 } from '../search/eventSearch/utils';
-import { SIMILAR_EVENTS_AMOUNT } from './constants';
-import { getEventIdFromUrl } from './EventUtils';
-import type { EventFields } from './types';
 
 const useSimilarEventsQueryVariables = (event: EventFields) => {
   return React.useMemo(() => {

@@ -148,7 +148,7 @@ const SearchPage: React.FC<{
                     events={eventsList.data}
                     hasNext={!!eventsList.meta.next}
                     count={eventsList.meta.count}
-                    loading={isLoadingEvents}
+                    loading={isFetchingMore}
                     onLoadMore={handleLoadMore}
                   />
                 }

@@ -29,6 +29,8 @@ on:
       - 'tsconfig.base.json'
       - '.prettier*'
       - '.github/workflows/**'
+env:
+  CI: true
 
 jobs:
   test:

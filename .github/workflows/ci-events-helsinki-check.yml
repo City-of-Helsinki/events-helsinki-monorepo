@@ -30,6 +30,9 @@ on:
       - '.prettier*'
       - '.github/workflows/**'
 
+env:
+  CI: true
+
 jobs:
   test:
     runs-on: ubuntu-latest

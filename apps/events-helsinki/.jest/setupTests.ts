@@ -7,8 +7,11 @@ import { loadEnvConfig } from '@next/env';
 import '../config/jest/initI18n';
 import { toHaveNoViolations } from 'jest-axe';
 
+const trueEnv = ['true', '1', 'yes'];
+const isCI = trueEnv.includes(process.env?.CI ?? 'false');
+
 // Raise the default timeout from 5000
-jest.setTimeout(10000);
+jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
 
 loadEnvConfig(process.cwd());
 

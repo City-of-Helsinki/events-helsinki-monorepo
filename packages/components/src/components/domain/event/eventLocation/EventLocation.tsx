@@ -1,4 +1,4 @@
-import { IconLocation } from 'hds-react';
+import { IconLocation, useCookies } from 'hds-react';
 import React from 'react';
 import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
 
@@ -19,6 +19,12 @@ const EventLocation: React.FC<Props> = ({ event }) => {
     event,
     locale
   );
+  const { getAllConsents } = useCookies();
+  const getConsentStatus = (cookieId: string) => {
+    const consents = getAllConsents();
+    return consents[cookieId];
+  };
+  const isServiceMapEnabled = getConsentStatus('servicemap_session');
 
   return (
     <div className={styles.eventLocationContainer}>
@@ -34,13 +40,13 @@ const EventLocation: React.FC<Props> = ({ event }) => {
           {t('event:location.openMap')}
         </Link>
       </div>
-
-      <iframe
-        title={t('event:location.mapTitle')}
-        className={styles.mapContainer}
-        src={getServiceMapUrl(event, locale, true)}
-      ></iframe>
-
+      {isServiceMapEnabled && (
+        <iframe
+          title={t('event:location.mapTitle')}
+          className={styles.mapContainer}
+          src={getServiceMapUrl(event, locale, true)}
+        ></iframe>
+      )}
       <div className={styles.eventName}>{name}</div>
       <div className={styles.location}>
         <LocationText

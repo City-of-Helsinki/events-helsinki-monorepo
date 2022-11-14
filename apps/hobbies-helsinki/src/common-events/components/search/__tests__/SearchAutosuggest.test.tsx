@@ -1,6 +1,9 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { AUTOSUGGEST_TYPES } from 'events-helsinki-components';
+import {
+  AUTOSUGGEST_TYPES,
+  KeywordListDocument,
+} from 'events-helsinki-components';
 import * as React from 'react';
 
 import {
@@ -12,7 +15,6 @@ import {
   tabKeyPressHelper,
 } from '@/test-utils';
 import { fakeKeywords } from '@/test-utils/mockDataUtils';
-import { KeywordListDocument } from '../../../../domain/nextApi/graphql/generated/graphql';
 import type { SearchAutosuggestProps } from '../SearchAutosuggest';
 import SearchAutosuggest from '../SearchAutosuggest';
 

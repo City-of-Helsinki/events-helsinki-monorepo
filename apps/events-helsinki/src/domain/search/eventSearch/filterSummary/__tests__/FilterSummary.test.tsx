@@ -1,3 +1,7 @@
+import {
+  OrganizationDetailsDocument,
+  PlaceDetailsDocument,
+} from 'events-helsinki-components';
 import { axe } from 'jest-axe';
 import React from 'react';
 
@@ -8,10 +12,6 @@ import {
   fakeOrganization,
   fakePlace,
 } from '@/test-utils/mockDataUtils';
-import {
-  OrganizationDetailsDocument,
-  PlaceDetailsDocument,
-} from '../../../../nextApi/graphql/generated/graphql';
 import FilterSummary from '../FilterSummary';
 
 configure({ defaultHidden: true });

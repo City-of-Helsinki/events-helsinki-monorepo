@@ -1,0 +1,12 @@
+overwrite: true
+schema: ${NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT}
+documents: '../../packages/components/src/components/domain/**/query.ts'
+generates:
+  ./src/components/domain/graphql/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'

@@ -6,23 +6,24 @@ import {
   startOfWeek,
   subDays,
 } from 'date-fns';
+import type {
+  EventFields,
+  FilterType,
+  Language,
+  Meta,
+  QueryEventListArgs,
+} from 'events-helsinki-components';
 import {
   buildQueryFromObject,
   DATE_TYPES,
   formatDate,
   getUrlParamAsArray,
+  EventTypeId,
 } from 'events-helsinki-components';
-import type { FilterType, Language } from 'events-helsinki-components';
 import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
 
 import AppConfig from '../../app/AppConfig';
-import type { EventFields } from '../../event/types';
-import type {
-  Meta,
-  QueryEventListArgs,
-} from '../../nextApi/graphql/generated/graphql';
-import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
 import type { COURSE_CATEGORIES, EVENT_SORT_OPTIONS } from './constants';
 import {
   EVENT_SEARCH_FILTERS,

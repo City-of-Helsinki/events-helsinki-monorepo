@@ -1,3 +1,4 @@
+import { EventTypeId } from 'events-helsinki-components';
 import React from 'react';
 
 import IconArt from '../../../assets/icons/IconArt';
@@ -11,7 +12,6 @@ import IconMovies from '../../../assets/icons/IconMovies';
 import IconMusic from '../../../assets/icons/IconMusic';
 import IconSports from '../../../assets/icons/IconSports';
 import IconTheatre from '../../../assets/icons/IconTheatre';
-import { EventTypeId } from '../../nextApi/graphql/generated/graphql';
 import type { Filters, SearchCategoryOption } from './types';
 
 // Page size of the event list

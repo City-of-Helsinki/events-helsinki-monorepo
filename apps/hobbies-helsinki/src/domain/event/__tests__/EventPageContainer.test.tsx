@@ -1,3 +1,8 @@
+import {
+  EventDetailsDocument,
+  EventListDocument,
+} from 'events-helsinki-components';
+import type { EventFields } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 
@@ -14,11 +19,6 @@ import {
   createEventListRequestAndResultMocks,
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
-import {
-  EventDetailsDocument,
-  EventListDocument,
-} from '../../nextApi/graphql/generated/graphql';
 import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
 import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
@@ -54,7 +54,7 @@ const event = fakeEvent({
     __typename: 'InternalIdObject',
     internalId: `https://api.hel.fi/linkedevents/v1/event/${superEventId}/`,
   },
-}) as EventFieldsFragment;
+}) as EventFields;
 
 const eventKeywordIds = event.keywords.map((keyword) => keyword.id) as string[];
 

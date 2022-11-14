@@ -3,11 +3,10 @@ import {
   getLocalizedString,
   FilterButton,
   useLocale,
+  usePlaceDetailsQuery,
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-
-import { usePlaceDetailsQuery } from '../../../nextApi/graphql/generated/graphql';
 
 interface Props {
   id: string;

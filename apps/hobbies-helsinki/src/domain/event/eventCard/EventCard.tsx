@@ -1,9 +1,15 @@
 import classNames from 'classnames';
+import type { EventFields } from 'events-helsinki-components';
 import {
   addParamsToQueryString,
   getDateRangeStr,
   useLocale,
   IconButton,
+  EventLocationText as LocationText,
+  getEventCardId,
+  getEventFields,
+  getEventPrice,
+  isEventClosed,
 } from 'events-helsinki-components';
 import { IconArrowRight } from 'hds-react';
 import { useTranslation } from 'next-i18next';
@@ -14,15 +20,7 @@ import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import EventKeywords from '../eventKeywords/EventKeywords';
-import LocationText from '../eventLocation/EventLocationText';
 import EventName from '../eventName/EventName';
-import {
-  getEventCardId,
-  getEventFields,
-  getEventPrice,
-  isEventClosed,
-} from '../EventUtils';
-import type { EventFields } from '../types';
 import styles from './eventCard.module.scss';
 
 interface Props {

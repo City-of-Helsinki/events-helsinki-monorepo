@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event';
+import type { EventFieldsFragment } from 'events-helsinki-components';
 import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
@@ -7,7 +8,6 @@ import React from 'react';
 import { render, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeKeywords } from '@/test-utils/mockDataUtils';
-import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventCard from '../EventCard';
 
 const keywordNames = ['Keyword 1', 'Keyword 2'];

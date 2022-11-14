@@ -3,6 +3,10 @@ import {
   LoadingSpinner,
   SkeletonLoader,
 } from 'events-helsinki-components';
+import type {
+  EventFields,
+  SuperEventResponse,
+} from 'events-helsinki-components';
 import {
   IconAngleDown,
   IconAngleUp,
@@ -13,7 +17,6 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { useSubEvents, useSubEventsQueryVariables } from '../queryUtils';
-import type { EventFields, SuperEventResponse } from '../types';
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
 

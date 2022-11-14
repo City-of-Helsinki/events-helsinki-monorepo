@@ -1,4 +1,12 @@
-import { getDateRangeStr, useLocale } from 'events-helsinki-components';
+import {
+  getDateRangeStr,
+  useLocale,
+  getEventFields,
+} from 'events-helsinki-components';
+import type {
+  EventFields,
+  EventFieldsFragment,
+} from 'events-helsinki-components';
 import { IconArrowRight } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -7,9 +15,6 @@ import { Link } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../../utils/routerUtils';
-import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
-import { getEventFields } from '../../EventUtils';
-import type { EventFields } from '../../types';
 import styles from './eventList.module.scss';
 
 const EventList: React.FC<{

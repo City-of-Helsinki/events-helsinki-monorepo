@@ -2460,10 +2460,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@faker-js/faker@npm:^7.3.0":
-  version: 7.5.0
-  resolution: "@faker-js/faker@npm:7.5.0"
-  checksum: 32e339207eb7771d3ee389fc44c7ea82bc6ee1270695c728a3226c2289bd259fae05015811328c67d990aa15613eb262bf2e5786d67420b82d9a8ab05f84902e
+"@faker-js/faker@npm:^7.6.0":
+  version: 7.6.0
+  resolution: "@faker-js/faker@npm:7.6.0"
+  checksum: 8dfdb631c3c420d8352d5ff5bc97d97d8d6890c8c74d7385ae9838cb47bef5e56ce611f4052ce414a55320426ffff4135fe927f46417c44b1b3301b7fd93851a
   languageName: node
   linkType: hard
 
@@ -13064,6 +13064,7 @@ __metadata:
     "@apollo/client": "npm:3.6.9"
     "@babel/core": "npm:7.19.3"
     "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@faker-js/faker": "npm:^7.6.0"
     "@mdx-js/react": "npm:1.6.22"
     "@rollup/plugin-babel": "npm:^5.3.1"
     "@rollup/plugin-commonjs": "npm:^22.0.2"
@@ -13221,7 +13222,7 @@ __metadata:
     "@babel/helper-environment-visitor": "npm:^7.18.2"
     "@commitlint/cli": "npm:^17.0.2"
     "@commitlint/config-conventional": "npm:^17.0.2"
-    "@faker-js/faker": "npm:^7.3.0"
+    "@faker-js/faker": "npm:^7.6.0"
     "@ffmpeg-installer/ffmpeg": "npm:^1.1.0"
     "@graphql-codegen/cli": "npm:2.6.2"
     "@graphql-codegen/introspection": "npm:^2.1.1"
@@ -15391,7 +15392,7 @@ __metadata:
     "@babel/helper-environment-visitor": "npm:^7.18.2"
     "@commitlint/cli": "npm:^17.0.2"
     "@commitlint/config-conventional": "npm:^17.0.2"
-    "@faker-js/faker": "npm:^7.3.0"
+    "@faker-js/faker": "npm:^7.6.0"
     "@ffmpeg-installer/ffmpeg": "npm:^1.1.0"
     "@graphql-codegen/cli": "npm:2.6.2"
     "@graphql-codegen/introspection": "npm:^2.1.1"

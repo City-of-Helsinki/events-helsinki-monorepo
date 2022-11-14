@@ -1,7 +1,14 @@
 /* eslint-disable no-console */
 import type { MockedResponse } from '@apollo/client/testing';
 import { addDays } from 'date-fns';
-import { getDateRangeStr } from 'events-helsinki-components';
+import { getDateRangeStr, EventTypeId } from 'events-helsinki-components';
+import type {
+  EventDetails,
+  EventFieldsFragment,
+  EventListQueryVariables,
+  EventListResponse,
+  Meta,
+} from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import range from 'lodash/range';
 import type { NextRouter } from 'next/router';
@@ -15,14 +22,6 @@ import {
   createOtherEventTimesRequestAndResultMocks,
   createOtherEventTimesRequestThrowsErrorMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import { EventTypeId } from '../../../nextApi/graphql/generated/graphql';
-import type {
-  EventDetails,
-  EventFieldsFragment,
-  EventListQueryVariables,
-  EventListResponse,
-  Meta,
-} from '../../../nextApi/graphql/generated/graphql';
 import OtherEventTimes from '../OtherEventTimes';
 
 const startTime = '2020-10-01T16:00:00Z';

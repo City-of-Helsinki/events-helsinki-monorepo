@@ -1,5 +1,5 @@
+import { EventTypeId } from 'events-helsinki-components';
 import { ROUTES } from '../../constants';
-import { EventTypeId } from '../nextApi/graphql/generated/graphql';
 
 class AppConfig {
   static get cmsGraphqlEndpoint() {

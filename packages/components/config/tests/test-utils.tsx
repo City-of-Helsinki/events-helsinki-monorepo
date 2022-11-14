@@ -1,15 +1,26 @@
-/**
- * Automatically add app-providers
- * @see https://testing-library.com/docs/react-testing-library/setup#configuring-jest-with-test-utils
- */
+import type { ApolloCache, InMemoryCache } from '@apollo/client/cache';
+import type { MockedResponse } from '@apollo/client/testing';
+import type { RenderResult } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
+import type { NextRouter } from 'next/router';
+import Router from 'next/router';
+import type { ReactElement } from 'react';
+import React from 'react';
+import wait from 'waait';
+import TestProviders from './app-test-providers';
 
-import { fireEvent, render } from '@testing-library/react';
-import type React from 'react';
-import { AppTestProviders } from './app-test-providers';
+type CustomRender = {
+  (
+    ui: React.ReactElement,
+    options?: {
+      mocks?: MockedResponse[];
+      cache?: ApolloCache<Record<string, unknown>> | InMemoryCache;
+      routes?: string | string[];
+    }
+  ): CustomRenderResult;
+};
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const customRender = (ui: React.ReactElement, options?: any) =>
-  render(ui, { wrapper: AppTestProviders, ...options });
+export type CustomRenderResult = RenderResult & { router: NextRouter };
 
 export const arrowUpKeyPressHelper = (): boolean =>
   fireEvent.keyDown(document, { code: 38, key: 'ArrowUp' });
@@ -26,9 +37,41 @@ export const escKeyPressHelper = (): boolean =>
 export const tabKeyPressHelper = (): boolean =>
   fireEvent.keyDown(document, { code: 9, key: 'Tab' });
 
-// re-export everything
-export { default as userEvent } from '@testing-library/user-event';
-export * from '@testing-library/react';
+const customRender: CustomRender = (
+  ui: ReactElement,
+  { mocks = [], cache, routes = [] } = {}
+) => {
+  if (routes) {
+    if (!Array.isArray(routes)) {
+      routes = [routes];
+    }
+    routes.forEach((route) => Router.push(route));
+  }
 
-// override render method
-export { customRender as render };
+  // set locales so that the routing tests for default locale worked
+  // Router.locales = ['fi', 'en', 'sv'];
+
+  const renderResult = render(ui, {
+    wrapper: ({ children }) => (
+      <TestProviders mocks={mocks} router={Router} cache={cache}>
+        {children}
+      </TestProviders>
+    ),
+  });
+  return {
+    ...renderResult,
+    router: Router,
+  };
+};
+
+// eslint-disable-next-line testing-library/no-unnecessary-act
+const actWait = (amount?: number): Promise<void> => act(() => wait(amount));
+
+// eslint-disable-next-line import/export
+export { actWait, customRender as render };
+
+// re-export everything
+// eslint-disable-next-line import/export
+export * from '@testing-library/react';
+export { render as defaultRender } from '@testing-library/react';
+export { default as userEvent } from '@testing-library/user-event';

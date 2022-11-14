@@ -1,9 +1,17 @@
 import classNames from 'classnames';
+import type { EventFields } from 'events-helsinki-components';
 import {
   addParamsToQueryString,
   getDateRangeStr,
   buttonStyles,
   useLocale,
+  EventLocationText as LocationText,
+  getAudienceAgeText,
+  getEventFields,
+  getEventPrice,
+  getLargeEventCardId,
+  isEventClosed,
+  isEventFree,
 } from 'events-helsinki-components';
 import {
   Button,
@@ -20,17 +28,7 @@ import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import EventKeywords from '../eventKeywords/EventKeywords';
-import LocationText from '../eventLocation/EventLocationText';
 import EventName from '../eventName/EventName';
-import {
-  getAudienceAgeText,
-  getEventFields,
-  getEventPrice,
-  getLargeEventCardId,
-  isEventClosed,
-  isEventFree,
-} from '../EventUtils';
-import type { EventFields } from '../types';
 import styles from './largeEventCard.module.scss';
 
 interface Props {

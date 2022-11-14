@@ -1,6 +1,7 @@
 export * from './season';
 export { default as buildQueryFromObject } from './buildQueryFromObject';
 export * from './dateUtils';
+export * from './eventUtils';
 export { default as getDateArray } from './getDateArray';
 export { default as getDateRangeStr } from './getDateRangeStr';
 export { default as getDomain } from './getDomain';

@@ -1,8 +1,8 @@
+import type { EventFieldsFragment } from 'events-helsinki-components';
 import React from 'react';
 
 import { render, actWait } from '@/test-utils';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
-import type { EventFieldsFragment } from '../../../nextApi/graphql/generated/graphql';
 import EventPageMeta from '../EventPageMeta';
 
 const eventName = 'Name of event';

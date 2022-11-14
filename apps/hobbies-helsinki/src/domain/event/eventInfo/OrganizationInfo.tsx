@@ -2,7 +2,10 @@ import {
   InfoWithIcon,
   LoadingSpinner,
   useLocale,
+  getEventFields,
+  useOrganizationDetailsQuery,
 } from 'events-helsinki-components';
+import type { EventFieldsFragment } from 'events-helsinki-components';
 import { IconFaceSmile, IconLayers } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -10,9 +13,6 @@ import { SecondaryLink } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
-import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
-import { useOrganizationDetailsQuery } from '../../nextApi/graphql/generated/graphql';
-import { getEventFields } from '../EventUtils';
 import styles from './eventInfo.module.scss';
 
 interface Props {

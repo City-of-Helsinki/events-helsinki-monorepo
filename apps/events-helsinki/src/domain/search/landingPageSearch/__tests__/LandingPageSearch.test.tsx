@@ -1,10 +1,10 @@
+import { KeywordListDocument } from 'events-helsinki-components';
 import { advanceTo } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
 import { configure, render, screen, userEvent } from '@/test-utils';
 import { fakeKeywords } from '@/test-utils/mockDataUtils';
-import { KeywordListDocument } from '../../../nextApi/graphql/generated/graphql';
 import LandingPageSearch from '../LandingPageSearch';
 
 configure({ defaultHidden: true });
@@ -98,7 +98,7 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { dateTypes: 'today' },
     });
-  }, 40000);
+  });
 
   it('should route to event search page after selecting start date and pressing submit button', async () => {
     advanceTo('2020-10-04');
@@ -124,5 +124,5 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { start: '2020-10-06' },
     });
-  }, 40000);
+  });
 });

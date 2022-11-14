@@ -1,4 +1,9 @@
 import * as Sentry from '@sentry/browser';
+import type {
+  EventFields,
+  KeywordOption,
+  SuperEventResponse,
+} from 'events-helsinki-components';
 import {
   getDateArray,
   getDomain,
@@ -8,6 +13,10 @@ import {
   useLocale,
   useTabFocusStyle,
   Visible,
+  getAudienceAgeText,
+  getEventFields,
+  getEventPrice,
+  getServiceMapUrl,
 } from 'events-helsinki-components';
 import { saveAs } from 'file-saver';
 import {
@@ -29,13 +38,6 @@ import { SecondaryLink } from 'react-helsinki-headless-cms';
 import IconDirections from '../../../assets/icons/IconDirections';
 import { ROUTES } from '../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
-import {
-  getAudienceAgeText,
-  getEventFields,
-  getEventPrice,
-  getServiceMapUrl,
-} from '../EventUtils';
-import type { EventFields, KeywordOption, SuperEventResponse } from '../types';
 import styles from './eventInfo.module.scss';
 import { SubEvents, SuperEvent } from './EventsHierarchy';
 import OrganizationInfo from './OrganizationInfo';

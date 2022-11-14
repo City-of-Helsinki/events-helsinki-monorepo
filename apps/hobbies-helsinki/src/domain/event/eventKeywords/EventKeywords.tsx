@@ -1,20 +1,20 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 import {
-  Keyword,
+  KeywordTag,
   useLocale,
   DATE_TYPES,
   scrollToTop,
+  getEventFields,
 } from 'events-helsinki-components';
+import type { EventFieldsFragment } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import { ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
-import type { EventFieldsFragment } from '../../nextApi/graphql/generated/graphql';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../../search/eventSearch/constants';
 import { getSearchQuery } from '../../search/eventSearch/utils';
-import { getEventFields } from '../EventUtils';
 
 interface Props {
   blackOnMobile?: boolean;
@@ -78,7 +78,7 @@ const EventKeywords: React.FC<Props> = ({
   return (
     <>
       {today && (
-        <Keyword
+        <KeywordTag
           color="engelLight50"
           keyword={t('categories.labelToday')}
           onClick={
@@ -87,7 +87,7 @@ const EventKeywords: React.FC<Props> = ({
         />
       )}
       {!today && thisWeek && (
-        <Keyword
+        <KeywordTag
           color="engelLight50"
           keyword={t('categories.labelThisWeek')}
           onClick={
@@ -98,7 +98,7 @@ const EventKeywords: React.FC<Props> = ({
         />
       )}
       {showIsFree && freeEvent && (
-        <Keyword
+        <KeywordTag
           color="tramLight20"
           keyword={t('categories.labelFree')}
           onClick={withActions ? handleClick('isFree') : undefined}
@@ -107,7 +107,7 @@ const EventKeywords: React.FC<Props> = ({
       {showKeywords &&
         first &&
         (showKeywordsCount ? customTagsCount < 2 : true) && (
-          <Keyword
+          <KeywordTag
             color="engelLight50"
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
@@ -121,7 +121,7 @@ const EventKeywords: React.FC<Props> = ({
         (showKeywordsCount
           ? customTagsCount + Number(Boolean(first)) < 2
           : true) && (
-          <Keyword
+          <KeywordTag
             color="engelLight50"
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
@@ -134,7 +134,7 @@ const EventKeywords: React.FC<Props> = ({
         showKeywords &&
         !showKeywordsCount &&
         restKeywords.map((tag) => (
-          <Keyword
+          <KeywordTag
             color="engelLight50"
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
@@ -144,7 +144,7 @@ const EventKeywords: React.FC<Props> = ({
           />
         ))}
       {!!restKeywords.length && showKeywords && showKeywordsCount && (
-        <Keyword
+        <KeywordTag
           color="transparent"
           blackOnMobile={blackOnMobile}
           hideOnMobile={hideKeywordsOnMobile}

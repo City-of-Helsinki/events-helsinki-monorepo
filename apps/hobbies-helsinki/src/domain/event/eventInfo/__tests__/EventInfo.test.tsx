@@ -1,4 +1,9 @@
 import { getDateRangeStr } from 'events-helsinki-components';
+import type {
+  EventDetails,
+  EventFields,
+  SuperEventResponse,
+} from 'events-helsinki-components';
 import FileSaver from 'file-saver';
 import mockRouter from 'next-router-mock';
 import React from 'react';
@@ -14,8 +19,6 @@ import {
 } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
-import type { EventFields, SuperEventResponse } from 'domain/event/types';
-import type { EventDetails } from '../../../../domain/nextApi/graphql/generated/graphql';
 import EventInfo from '../EventInfo';
 import { subEventsListTestId, superEventTestId } from '../EventsHierarchy';
 import {

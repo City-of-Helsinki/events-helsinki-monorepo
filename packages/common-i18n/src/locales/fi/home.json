@@ -41,22 +41,12 @@
     "title": "Oho, nyt iski 404!"
   },
   "search": {
+    "linkAdvancedSearch": "Tarkennettu haku",
     "popularCategories": "Suosituimmat kategoriat",
     "placeholder": "Kirjoita hakusana",
     "showPopularCategories": "Näytä suosituimmat kategoriat",
     "hidePopularCategories": "Piilota suosituimmat kategoriat",
     "labelSearchField": "Mitä etsit?",
-    "title": "Löydä harrastuksia"
-  },
-  "eventSearch": {
-    "linkAdvancedSearch": "Tarkennettu haku",
-    "buttonSearch": "Hae",
-    "placeholder": "Kirjoita hakusana, esim. rock tai jooga",
-    "title": "Löydä tapahtumia"
-  },
-  "courseSearch": {
-    "buttonSearch": "Hae",
-    "placeholder": "Kirjoita hakusana, esim. ranska tai ruoanlaitto",
-    "title": "Löydä harrastuksia"
+    "buttonSearch": "Hae"
   }
 }

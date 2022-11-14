@@ -2,6 +2,8 @@ import i18n from 'i18next';
 // eslint-disable-next-line no-restricted-imports
 import { initReactI18next } from 'react-i18next';
 
+import appEvents_en from '../locales/en/appEvents.json';
+import appHobbies_en from '../locales/en/appHobbies.json';
 import cms_en from '../locales/en/cms.json';
 import common_en from '../locales/en/common.json';
 import event_en from '../locales/en/event.json';
@@ -9,6 +11,8 @@ import footer_en from '../locales/en/footer.json';
 import home_en from '../locales/en/home.json';
 import notFound_en from '../locales/en/notFound.json';
 import search_en from '../locales/en/search.json';
+import appEvents from '../locales/fi/appEvents.json';
+import appHobbies from '../locales/fi/appHobbies.json';
 import cms from '../locales/fi/cms.json';
 import common from '../locales/fi/common.json';
 import event from '../locales/fi/event.json';
@@ -16,6 +20,8 @@ import footer from '../locales/fi/footer.json';
 import home from '../locales/fi/home.json';
 import notFound from '../locales/fi/notFound.json';
 import search from '../locales/fi/search.json';
+import appEvents_sv from '../locales/sv/appEvents.json';
+import appHobbies_sv from '../locales/sv/appHobbies.json';
 import cms_sv from '../locales/sv/cms.json';
 import common_sv from '../locales/sv/common.json';
 import event_sv from '../locales/sv/event.json';
@@ -32,6 +38,8 @@ export const translations = {
   home,
   notFound,
   search,
+  appEvents,
+  appHobbies,
 };
 
 export const config = {
@@ -53,6 +61,8 @@ export const config = {
       home: home_en,
       notFound: notFound_en,
       search: search_en,
+      appEvents: appEvents_en,
+      appHobbies: appHobbies_en,
     },
     sv: {
       cms: cms_sv,
@@ -62,6 +72,8 @@ export const config = {
       home: home_sv,
       notFound: notFound_sv,
       search: search_sv,
+      appEvents: appEvents_sv,
+      appHobbies: appHobbies_sv,
     },
   },
 };

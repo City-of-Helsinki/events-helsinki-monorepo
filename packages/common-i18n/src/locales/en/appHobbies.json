@@ -1,0 +1,16 @@
+{
+  "appName": "Hobbies",
+  "footer": {
+    "searchHobbies": "Hobbies",
+    "titleCoursesCategories": "Popular courses categories"
+  },
+  "home": {
+    "courseSearch": {
+      "placeholder": "Enter a keyword, eg. French or cooking",
+      "title": "Search for hobbies"
+    }
+  },
+  "search": {
+    "title": "Find hobbies"
+  }
+}

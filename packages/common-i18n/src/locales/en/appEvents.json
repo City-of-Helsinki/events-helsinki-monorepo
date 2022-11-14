@@ -1,0 +1,16 @@
+{
+  "appName": "Events",
+  "footer": {
+    "searchEvents": "Events calendar",
+    "titleEventsCategories": "Popular events categories"
+  },
+  "home": {
+    "eventSearch": {
+      "placeholder": "Enter a keyword, eg rock or yoga",
+      "title": "What are you looking for?"
+    }
+  },
+  "search": {
+    "title": "Find something to do"
+  }
+}

@@ -42,21 +42,11 @@
   },
   "search": {
     "linkAdvancedSearch": "Advanced search",
-    "title": "Find hobbies",
     "labelSearchField": "What are you looking for",
     "popularCategories": "Popular categories",
     "placeholder": "Write search word",
     "showPopularCategories": "Show most popular categories",
-    "hidePopularCategories": "Hide most popular categories"
-  },
-  "eventSearch": {
-    "buttonSearch": "Search",
-    "placeholder": "Enter a keyword, eg rock or yoga",
-    "title": "Search for events"
-  },
-  "courseSearch": {
-    "buttonSearch": "Search",
-    "placeholder": "Enter a keyword, eg. French or cooking",
-    "title": "Search for hobbies"
+    "hidePopularCategories": "Hide most popular categories",
+    "buttonSearch": "Search"
   }
 }

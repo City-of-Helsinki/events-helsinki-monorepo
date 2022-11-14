@@ -1,5 +1,5 @@
 import {
-  useCommonTranslation,
+  useAppHobbiesTranslation,
   useFooterTranslation,
   useLocale,
   resetFocusId,
@@ -16,7 +16,7 @@ import FooterCategories from './FooterCategories';
 
 const FooterSection: FunctionComponent = () => {
   const { t } = useFooterTranslation();
-  const { t: tCommon } = useCommonTranslation();
+  const { t: tAppHobbies } = useAppHobbiesTranslation();
   const locale = useLocale();
 
   const { data } = useMenuQuery({
@@ -32,11 +32,11 @@ const FooterSection: FunctionComponent = () => {
   };
 
   return (
-    <Footer title={tCommon('hobbiesCommon:appName')} className={styles.footer}>
+    <Footer title={tAppHobbies('appHobbies:appName')} className={styles.footer}>
       <Footer.Navigation>
         <Footer.Item
           as={Link}
-          label={t('footer:searchHobbies')}
+          label={tAppHobbies('appHobbies:footer.searchHobbies')}
           href={getI18nPath(ROUTES.SEARCH, locale)}
         />
       </Footer.Navigation>

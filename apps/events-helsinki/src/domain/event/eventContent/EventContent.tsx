@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { sanitizeHtml, useLocale } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -14,9 +15,14 @@ import styles from './eventContent.module.scss';
 interface Props {
   event: EventFields;
   superEvent?: SuperEventResponse;
+  hasSimilarEvents?: boolean;
 }
 
-const EventContent: React.FC<Props> = ({ event, superEvent }) => {
+const EventContent: React.FC<Props> = ({
+  event,
+  superEvent,
+  hasSimilarEvents,
+}) => {
   const { t } = useTranslation(['common', 'event']);
   const locale = useLocale();
   const { description, photographerName, locationExtraInfo } = getEventFields(
@@ -29,7 +35,12 @@ const EventContent: React.FC<Props> = ({ event, superEvent }) => {
   return (
     <PageSection className={styles.eventContent}>
       <ContentContainer>
-        <div className={styles.contentWrapper}>
+        <div
+          className={classNames(
+            styles.contentWrapper,
+            !hasSimilarEvents && styles.noSimilarEvents
+          )}
+        >
           <div className={styles.leftEmpty} />
           <div>
             {description && (

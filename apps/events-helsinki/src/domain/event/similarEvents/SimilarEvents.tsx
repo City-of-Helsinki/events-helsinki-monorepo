@@ -1,6 +1,6 @@
 import { LoadingSpinner, useLocale } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { CollectionProps } from 'react-helsinki-headless-cms';
 import {
   Card,
@@ -20,13 +20,18 @@ import styles from './similarEvents.module.scss';
 interface Props {
   event: EventFields;
   type?: CollectionProps['type'];
+  onEventsLoaded?: (eventsCount: number) => void;
 }
 
 export const similarEventsContainerTestId = 'similar-events-container';
 export const similarEventsLoadingSpinnerTestId =
   'similar-events-loading-spinner';
 
-const SimilarEvents: React.FC<Props> = ({ event, type = 'carousel' }) => {
+const SimilarEvents: React.FC<Props> = ({
+  event,
+  type = 'carousel',
+  onEventsLoaded,
+}) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
   const { data: events, loading } = useSimilarEventsQuery(event);
@@ -55,6 +60,10 @@ const SimilarEvents: React.FC<Props> = ({ event, type = 'carousel' }) => {
   });
 
   const hasCards = !!cards.length;
+
+  if (hasCards) {
+    onEventsLoaded && onEventsLoaded(cards.length);
+  }
 
   // Show the similar events -section when it's still loading or there are some events to be shown.
   if (loading || hasCards) {

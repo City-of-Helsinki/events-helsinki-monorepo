@@ -16,6 +16,10 @@
       grid-template-rows: unset;
     }
 
+    &.noSimilarEvents {
+      margin-bottom: 120px;
+    }
+
     .leftEmpty {
       padding: var(--spacing-m) calc(var(--spacing-4-xl) + 40px)
         var(--spacing-m) 0;

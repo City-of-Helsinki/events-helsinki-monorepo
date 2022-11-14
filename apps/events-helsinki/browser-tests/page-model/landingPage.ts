@@ -12,7 +12,7 @@ class LandingPage {
 
     await t
       .expect(
-        screen.getByRole('heading', { name: i18n.t('home:search.title') })
+        screen.getByRole('heading', { name: i18n.t('appEvents:search.title') })
           .exists
       )
       .ok();

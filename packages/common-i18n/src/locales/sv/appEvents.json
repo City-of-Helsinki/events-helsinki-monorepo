@@ -1,0 +1,16 @@
+{
+  "appName": "Evenemang",
+  "footer": {
+    "searchEvents": "Evenemangskalender",
+    "titleEventsCategories": "Populära evenemangskategorier"
+  },
+  "home": {
+    "eventSearch": {
+      "placeholder": "Ange ett sökord, t. ex. rock eller yoga",
+      "title": "Vad letar du efter?"
+    }
+  },
+  "search": {
+    "title": "Sök saker att göra"
+  }
+}

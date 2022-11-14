@@ -5,6 +5,7 @@ import {
   MobileDateSelector,
   useLocale,
   useHomeTranslation,
+  useAppHobbiesTranslation,
 } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
@@ -45,11 +46,12 @@ export default function LandingPageSearchForm({
   handleMenuOptionClick,
 }: LandingPageSearchFormProps) {
   const { t } = useHomeTranslation();
+  const { t: tAppHobbies } = useAppHobbiesTranslation();
   const locale = useLocale();
 
   return (
     <div className={classnames(className, styles.landingPageSearch)}>
-      <h2>{t('home:search.title')}</h2>
+      <h2>{tAppHobbies('appHobbies:search.title')}</h2>
       <div className={styles.searchRow}>
         <div className={styles.autosuggestWrapper}>
           <SearchAutosuggest
@@ -92,7 +94,7 @@ export default function LandingPageSearchForm({
               iconLeft={<IconSearch />}
               onClick={handleSubmit}
             >
-              {t('home:eventSearch.buttonSearch')}
+              {t('home:search.buttonSearch')}
             </Button>
           </div>
         </div>
@@ -103,7 +105,7 @@ export default function LandingPageSearchForm({
           className={styles.link}
           href={getI18nPath(ROUTES.SEARCH, locale)}
         >
-          {t('home:eventSearch.linkAdvancedSearch')}
+          {t('home:search.linkAdvancedSearch')}
         </SecondaryLink>
       </div>
     </div>

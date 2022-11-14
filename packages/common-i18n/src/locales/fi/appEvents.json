@@ -1,0 +1,16 @@
+{
+  "appName": "Tapahtumat",
+  "footer": {
+    "searchEvents": "Tapahtumakalenteri",
+    "titleEventsCategories": "Suositut tapahtumien kategoriat"
+  },
+  "home": {
+    "eventSearch": {
+      "placeholder": "Kirjoita hakusana, esim. rock tai jooga",
+      "title": "Mitä etsit?"
+    }
+  },
+  "search": {
+    "title": "Löydä tapahtumia"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "appName": "Hobbyer",
+  "footer": {
+    "searchHobbies": "Hobbyer",
+    "titleCoursesCategories": "Populära hobbykategorier"
+  },
+  "home": {
+    "courseSearch": {
+      "placeholder": "Ange ett sökord, t. ex. rock eller yoga",
+      "title": "Hitta hobbyer"
+    }
+  },
+  "search": {
+    "title": "Hitta hobby"
+  }
+}

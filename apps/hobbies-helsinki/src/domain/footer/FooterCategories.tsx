@@ -1,5 +1,5 @@
 import { useLocale } from 'events-helsinki-components';
-import useFooterTranslation from 'events-helsinki-components/hooks/useFooterTranslation';
+import useAppHobbiesTranslation from 'events-helsinki-components/hooks/useAppHobbiesTranslation';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import CategoryFilter from '../../common-events/components/category/CategoryFilter';
@@ -18,7 +18,7 @@ import {
 import styles from './footerCategories.module.scss';
 
 const FooterCategories: FunctionComponent = () => {
-  const { t } = useFooterTranslation();
+  const { t } = useAppHobbiesTranslation();
   const locale = useLocale();
 
   const getCategoryLink = (category: CategoryOption) => {
@@ -40,7 +40,7 @@ const FooterCategories: FunctionComponent = () => {
     t,
     CATEGORY_CATALOG.Course.default
   );
-  const footerTitle = t(`footer:titleEventsCategories`);
+  const footerTitle = t('appHobbies:footer.titleCoursesCategories');
 
   return (
     <div className={styles.topFooterWrapper}>

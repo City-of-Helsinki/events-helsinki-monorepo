@@ -1,6 +1,6 @@
 import { LoadingSpinner, useLocale } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
-import React, { useEffect } from 'react';
+import React from 'react';
 import type { CollectionProps } from 'react-helsinki-headless-cms';
 import {
   Card,

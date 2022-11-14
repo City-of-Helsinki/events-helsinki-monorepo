@@ -7,7 +7,7 @@ import {
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import { MAIN_CONTENT_ID, ROUTES } from '../../constants';
@@ -51,6 +51,8 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
     status: 'pending',
   });
 
+  const [hasSimilarEvents, setHasSimilarEvents] = useState(false);
+
   const superEventId = getEventIdFromUrl(
     event?.superEvent?.internalId ?? '',
     'event'
@@ -80,6 +82,10 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
     }
   }, [event, superEventId, superEventData, superEventSearch]);
 
+  const handleSimilarEventsLoaded = (eventsCount: number) => {
+    setHasSimilarEvents(eventsCount > 0);
+  };
+
   const eventClosed = !event || isEventClosed(event);
   return (
     <div className={styles.eventPageWrapper}>
@@ -94,12 +100,19 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
               ) : (
                 <>
                   <EventHero event={event} superEvent={superEvent} />
-                  <EventContent event={event} superEvent={superEvent} />
+                  <EventContent
+                    event={event}
+                    superEvent={superEvent}
+                    hasSimilarEvents={hasSimilarEvents}
+                  />
                 </>
               )}
               {/* Hide similar event on SSR to make initial load faster */}
               {isClient && showSimilarEvents && !eventClosed && (
-                <SimilarEvents event={event} />
+                <SimilarEvents
+                  event={event}
+                  onEventsLoaded={handleSimilarEventsLoaded}
+                />
               )}
             </>
           ) : (

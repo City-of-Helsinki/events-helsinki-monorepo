@@ -77,24 +77,17 @@ export enum EVENT_SEARCH_FILTERS {
   SUITABLE = 'suitableFor',
 }
 
-export const CATEGORY_CATALOG = {
+export const CATEGORY_CATALOG: Record<
+  EventTypeId,
+  Record<string, EVENT_CATEGORIES[]>
+> = {
   [EventTypeId.General]: {
-    default: [
-      EVENT_CATEGORIES.MOVIE,
-      EVENT_CATEGORIES.MUSIC,
-      EVENT_CATEGORIES.SPORT,
-      EVENT_CATEGORIES.MUSEUM,
-      EVENT_CATEGORIES.DANCE,
-      EVENT_CATEGORIES.CULTURE,
-      EVENT_CATEGORIES.NATURE,
-      EVENT_CATEGORIES.INFLUENCE,
-      EVENT_CATEGORIES.THEATRE,
-      EVENT_CATEGORIES.FOOD,
-    ],
+    default: Object.values(EVENT_CATEGORIES),
   },
-};
+  [EventTypeId.Course]: {},
+} as const;
 
-export const CULTURE_KEYWORDS = [
+export const CULTURE_KEYWORDS: readonly string[] = [
   'kulke:33', // Teatteri
   'kulke:51', // Sirkus
   'kulke:205', // Elokuva ja media
@@ -118,40 +111,43 @@ export const CULTURE_KEYWORDS = [
   'yso:p9593', // contemporary art
   'yso:p10105', // contemporary dance
   'yso:p16327', // cinema (art forms)
-];
+] as const;
 
-export const DANCE_KEYWORDS = ['yso:p1278'];
+export const DANCE_KEYWORDS: readonly string[] = ['yso:p1278'] as const;
 
-export const FOOD_KEYWORDS = ['yso:p3670'];
+export const FOOD_KEYWORDS: readonly string[] = ['yso:p3670'] as const;
 
-export const INFLUENCE_KEYWORDS = [
+export const INFLUENCE_KEYWORDS: readonly string[] = [
   'yso:p1657', // Vaikuttaminen
   'yso:p742', // Demokratia
   'yso:p5164', // Osallisuus
   'yso:p8268', // Kaavoitus
   'yso:p15882', // Asemakaavoitus
   'yso:p15292', // Kaupunkipolitiikka
-];
+] as const;
 
-export const MOVIE_KEYWORDS = ['yso:p1235'];
+export const MOVIE_KEYWORDS: readonly string[] = ['yso:p1235'] as const;
 
-export const MUSEUM_KEYWORDS = [
+export const MUSEUM_KEYWORDS: readonly string[] = [
   'matko:museo', // Museo
   'yso:p4934', // Museot
-];
+] as const;
 
-export const MUSIC_KEYWORDS = ['yso:p1808'];
+export const MUSIC_KEYWORDS: readonly string[] = ['yso:p1808'] as const;
 
-export const NATURE_KEYWORDS = ['yso:p2771'];
+export const NATURE_KEYWORDS: readonly string[] = ['yso:p2771'] as const;
 
-export const SPORT_KEYWORDS = [
+export const SPORT_KEYWORDS: readonly string[] = [
   'yso:p916', // Liikunta
   'yso:p965', // Urheilu
-];
+] as const;
 
-export const THEATRE_KEYWORDS = ['yso:p2625'];
+export const THEATRE_KEYWORDS: readonly string[] = ['yso:p2625'] as const;
 
-export const MAPPED_EVENT_CATEGORIES: Record<string, string[]> = {
+export const MAPPED_EVENT_CATEGORIES: Record<
+  EVENT_CATEGORIES,
+  readonly string[]
+> = {
   [EVENT_CATEGORIES.CULTURE]: CULTURE_KEYWORDS,
   [EVENT_CATEGORIES.DANCE]: DANCE_KEYWORDS,
   [EVENT_CATEGORIES.FOOD]: FOOD_KEYWORDS,
@@ -162,7 +158,7 @@ export const MAPPED_EVENT_CATEGORIES: Record<string, string[]> = {
   [EVENT_CATEGORIES.NATURE]: NATURE_KEYWORDS,
   [EVENT_CATEGORIES.SPORT]: SPORT_KEYWORDS,
   [EVENT_CATEGORIES.THEATRE]: THEATRE_KEYWORDS,
-};
+} as const;
 
 export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
   [EVENT_CATEGORIES.MOVIE]: {
@@ -205,6 +201,6 @@ export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
     icon: <IconFood />,
     labelKey: 'home:category.food',
   },
-};
+} as const;
 
-export const MAPPED_PLACES: Record<string, string> = {};
+export const MAPPED_PLACES: Record<string, string> = {} as const;

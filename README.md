@@ -28,18 +28,26 @@
 
 ```
 .
+├── proxies
+│   └── events-federation-gateway (Apollo Router and Gateway)
+│
 ├── apps
 │   ├── hobbies-helsinki  (i18n, ssr, api, jest)
-│   └── events-helsinki (to-be-done clone of hobbies-helsinki)
+│   └── events-helsinki   ("clone of hobbies-helsinki")
 └── packages
     ├── common-i18n         (locales...)
     ├── components          (common event components, utils and hooks, storybook, jest)
     └── eslint-config-bases (to shared eslint configs)
 ```
 
+#### Proxies
+
+- [proxies/events-federation-gateway](./proxies/events-federation-gateway): The Apollo Router and Gateway configuration to manage and run subgraphs. [README](./proxies/events-federation-gateway/README.md)
+
 #### Apps
 
 - [apps/hobbies-helsinki](./apps/hobbies-helsinki): SSR, i18n, sass, graphQL, rest... [README](./apps/hobbies-helsinki/README.md) | [DEMO](https://harrastukset.test.kuva.hel.ninja) | [CHANGELOG](./apps/hobbies-helsinki/CHANGELOG.md)
+- [apps/events-helsinki](./apps/events-helsinki): Clone of Hobbies (SSR, i18n, sass, graphQL, rest...) [README](./apps/events-helsinki/README.md) | [DEMO](https://tapahtumat-mono.test.kuva.hel.ninja) | [CHANGELOG](./apps/events-helsinki/CHANGELOG.md)
 
 > Apps should not depend on apps, they can depend on packages
 
@@ -64,6 +72,9 @@ If needed static resources like **images**,... can be shared by using symlinks i
 
 ```
 .
+├── proxies
+│   └── events-federation-gateway (Apollo Router and Gateway)
+│
 ├── apps
 │   └── hobbies-helsinki         (NextJS app with api-routes)
 │       ├── public/

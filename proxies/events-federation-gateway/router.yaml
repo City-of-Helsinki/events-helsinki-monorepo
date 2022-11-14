@@ -1,0 +1,5 @@
+#
+# supergraph: Configuration of the Supergraph server
+#
+supergraph:
+  introspection: true

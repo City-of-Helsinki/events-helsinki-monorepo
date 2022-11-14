@@ -1,0 +1,22 @@
+version: '3'
+services:
+  apollo-router:
+    container_name: apollo-router
+    image: ghcr.io/apollographql/router:v1.3.0
+    environment:
+      - GATEWAY_CMS_ROUTING_URL=${GATEWAY_CMS_ROUTING_URL}
+    volumes:
+      - ./proxies/events-federation-gateway/supergraph.graphql:/dist/schema/supergraph.graphql
+      - ./proxies/events-federation-gateway/router.yaml:/dist/config/router.yaml
+    command:
+      [
+        '--dev',
+        '-c',
+        'config/router.yaml',
+        '-s',
+        'schema/supergraph.graphql',
+        '--log',
+        'info',
+      ]
+    ports:
+      - '4000:4000'

@@ -1,0 +1,1034 @@
+schema @link(url: "https://specs.apollo.dev/link/v1.0") {
+  query: Query
+}
+
+extend schema
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.0"
+    import: ["@key", "@shareable"]
+  )
+
+directive @origin(
+  service: String
+  type: String
+  attr: String
+) repeatable on FIELD_DEFINITION | OBJECT
+
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+  inheritMaxAge: Boolean
+) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+
+directive @link(
+  url: String
+  as: String
+  for: link__Purpose
+  import: [link__Import]
+) repeatable on SCHEMA
+
+directive @key(
+  fields: federation__FieldSet!
+  resolvable: Boolean = true
+) repeatable on OBJECT | INTERFACE
+
+directive @federation__requires(
+  fields: federation__FieldSet!
+) on FIELD_DEFINITION
+
+directive @federation__provides(
+  fields: federation__FieldSet!
+) on FIELD_DEFINITION
+
+directive @federation__external(reason: String) on OBJECT | FIELD_DEFINITION
+
+directive @federation__tag(
+  name: String!
+) repeatable on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
+
+directive @federation__extends on OBJECT | INTERFACE
+
+directive @shareable on OBJECT | FIELD_DEFINITION
+
+directive @federation__inaccessible on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
+
+directive @federation__override(from: String!) on FIELD_DEFINITION
+
+directive @federation__composeDirective(name: String) repeatable on SCHEMA
+
+enum UnifiedSearchResultCategory {
+  POINT_OF_INTEREST
+  EVENT
+  RESERVABLE
+  ENROLLABLE
+  ARTWORK
+  ARTICLE
+  SERVICE
+}
+
+enum UnifiedSearchLanguage {
+  FINNISH
+  SWEDISH
+  ENGLISH
+}
+
+type SearchResultConnection {
+  """
+  Elasticsearch raw results
+  """
+  es_results: [ElasticSearchResult]
+  count: Int
+  max_score: Float
+  pageInfo: SearchResultPageInfo
+  edges: [SearchResultEdge!]! @cacheControl(inheritMaxAge: true)
+}
+
+type SearchResultPageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type SearchResultEdge {
+  cursor: String!
+  node: SearchResultNode! @cacheControl(inheritMaxAge: true)
+}
+
+type SearchResultNode {
+  _score: Float
+  id: ID!
+  venue: Venue @cacheControl(inheritMaxAge: true)
+  event: Event
+  searchCategories: [UnifiedSearchResultCategory!]!
+}
+
+type Suggestion {
+  label: String!
+}
+
+type SearchSuggestionConnection {
+  suggestions: [Suggestion]!
+}
+
+enum SortOrder {
+  ASCENDING
+  DESCENDING
+}
+
+input OrderByDistance {
+  latitude: Float!
+  longitude: Float!
+  order: SortOrder = ASCENDING
+}
+
+input OrderByName {
+  order: SortOrder = ASCENDING
+}
+
+type Query {
+  unifiedSearch(
+    """
+    Free form query string, corresponding to user search input
+    """
+    q: String
+
+    """
+    Optional, filter to match only these ontology words
+    """
+    ontology: String
+
+    """
+    Optional, filter to match only this administrative division. DEPRECATED! use administrativeDivisionIds instead.
+    """
+    administrativeDivisionId: ID
+
+    """
+    Optional, filter to match only these administrative divisions
+    """
+    administrativeDivisionIds: [ID]
+
+    """
+    Optional, filter to match only this ontology tree id. DEPRECATED! use ontologyTreeIds instead.
+    """
+    ontologyTreeId: ID
+
+    """
+    Optional, filter to match only these ontology tree ids
+    """
+    ontologyTreeIds: [ID]
+
+    """
+    Optional, filter to match only these ontology word ids
+    """
+    ontologyWordIds: [ID]
+
+    """
+    Optional search index.
+    """
+    index: String
+
+    """
+    Optional pagination variable, match results after this cursor.
+    """
+    after: String
+
+    """
+    Optional pagination variable, limit the amount of results to N.
+    """
+    first: Int
+
+    """
+    NOTE: Unsupported
+
+    Optional pagination variable, match results before this cursor.
+    """
+    before: String
+
+    """
+    NOTE: Unsupported
+
+    Optional pagination variable, match the N last results.
+    """
+    last: Int
+
+    """
+    Targets the search to fields of specified language
+    """
+    languages: [UnifiedSearchLanguage!]! = [FINNISH, SWEDISH, ENGLISH]
+
+    """
+    Return only venues that are open at the given moment. In addition to ISO 8601 datetimes, accepts values
+    conforming to Elastic Search date math (https://www.elastic.co/guide/en/elasticsearch/reference/7.x/common-options.html#date-math)
+    like "now+3h". When there is a datetime provided without a timezone offset, "Europe/Helsinki" will be assumed
+    as the time zone.
+    """
+    openAt: String
+
+    """
+    Order results by distance to given coordinates. Cannot be used with "orderByName".
+    """
+    orderByDistance: OrderByDistance
+
+    """
+    Order results by venue name in language given as the first value in "languages" argument. Cannot be used with "orderByDistance".
+    """
+    orderByName: OrderByName
+  ): SearchResultConnection
+  unifiedSearchCompletionSuggestions(
+    """
+    Free form query string, corresponding to what the user has typed so far
+    """
+    prefix: String
+
+    """
+    Limits the result set into the specified languages
+    """
+    languages: [UnifiedSearchLanguage!]! = [FINNISH, SWEDISH, ENGLISH]
+
+    """
+    Optional search index.
+    """
+    index: String
+
+    """
+    Optional result size.
+    """
+    size: Int = 5
+  ): SearchSuggestionConnection
+  administrativeDivisions(
+    """
+    Return only Helsinki administrative divisions that make a sensible set to be used as an option list in an UI for example.
+    """
+    helsinkiCommonOnly: Boolean
+  ): [AdministrativeDivision]
+  ontologyTree(rootId: ID, leavesOnly: Boolean): [OntologyTree]
+  ontologyWords(ids: [ID!]): [OntologyWord]
+  _service: _Service!
+}
+
+"""
+Elasticsearch results
+"""
+type ElasticSearchResult {
+  took: Int
+  timed_out: Boolean
+  _shards: Shards
+  hits: Hits
+}
+
+type Shards {
+  total: Int
+  successful: Int
+  skipped: Int
+  failed: Int
+}
+
+type Hits {
+  max_score: Float
+  total: HitTotal
+  hits: [SingleHit]
+}
+
+type HitTotal {
+  value: Int
+  relation: String
+}
+
+type SingleHit {
+  _index: String
+  _type: String
+  _score: Float
+  _id: String
+  _source: RawJSON
+}
+
+type RawJSON {
+  data: String
+}
+
+type PalvelukarttaUnit {
+  """
+  Raw palvelukartta Unit fields
+  """
+  origin: String
+  id: Int
+  org_id: String
+  dept_id: String
+  provider_type: String
+  organizer_type: String
+  organizer_name: String
+  data_source_url: String
+  name_fi: String
+  name_sv: String
+  name_en: String
+  ontologyword_ids: [Int]
+  ontologytree_ids: [Int]
+  desc_fi: String
+  desc_sv: String
+  desc_en: String
+  latitude: Float
+  longitude: Float
+  northing_etrs_gk25: Int
+  easting_etrs_gk25: Int
+  northing_etrs_tm35fin: Int
+  easting_etrs_tm35fin: Int
+  manual_coordinates: Boolean
+  street_address_fi: String
+  street_address_sv: String
+  street_address_en: String
+  address_zip: String
+  address_city_fi: String
+  address_city_sv: String
+  address_city_en: String
+  phone: String
+  call_charge_info_fi: String
+  call_charge_info_sv: String
+  call_charge_info_en: String
+  www_fi: String
+  www_sv: String
+  www_en: String
+  picture_url: String
+  picture_caption_fi: String
+  picture_caption_sv: String
+  picture_caption_en: String
+  extra_searchwords_en: String
+  accessibility_viewpoints: String
+  created_time: String
+  modified_time: String
+  ontologyword_ids_enriched: [Ontologyword]
+}
+
+type Ontologyword {
+  id: Int
+  ontologyword_fi: String
+  ontologyword_sv: String
+  ontologyword_en: String
+  can_add_schoolyear: Boolean
+  can_add_clarification: Boolean
+  extra_searchwords_fi: String
+  unit_ids: [Int]
+}
+
+type LinkedeventsPlace {
+  """
+  Raw Linkedevents Place fields
+  """
+  origin: String
+  id: String
+  data_source: String
+  publisher: String
+  divisions: [LinkedeventsPlaceDivision]
+  created_time: String
+  last_modified_time: String
+  custom_data: String
+  email: String
+  contact_type: String
+  address_region: String
+  postal_code: String
+  post_office_box_num: String
+  address_country: String
+  deleted: Boolean
+  has_upcoming_events: Boolean
+  n_events: Int
+  image: String
+  parent: String
+  replaced_by: String
+  position: LinkedeventsPlacePosition
+  address_locality: LinkedeventsPlaceLocalityString
+  info_url: LinkedeventsPlaceLocalityString
+  description: LinkedeventsPlaceLocalityString
+  telephone: String
+  street_address: LinkedeventsPlaceLocalityString
+  name: LinkedeventsPlaceLocalityString
+  _at_id: String
+  _at_context: String
+  _at_type: String
+}
+
+type LinkedeventsPlaceDivision {
+  type: String
+  ocd_id: String
+  municipality: String
+  name: LinkedeventsPlaceLocalityString
+}
+
+type LinkedeventsPlacePosition {
+  type: String
+  coordinates: [Float]
+}
+
+type LinkedeventsPlaceLocalityString {
+  fi: String
+  sv: String
+  en: String
+}
+
+"""
+A place that forms a unit and can be used for some specific purpose -
+respa unit or resource, service map unit, beta.kultus venue, linked
+events place, Kukkuu venue
+"""
+type Venue {
+  meta: NodeMeta
+  name: LanguageString
+  location: LocationDescription @cacheControl(inheritMaxAge: true)
+  description: LanguageString
+  descriptionResources: DescriptionResources
+  partOf: Venue
+  openingHours: OpeningHours
+  manager: LegalEntity
+  contactDetails: ContactInfo
+  reservationPolicy: VenueReservationPolicy
+  accessibilityProfile: AccessibilityProfile
+  arrivalInstructions: String
+  additionalInfo: String
+  facilities: [VenueFacility!]
+  images: [LocationImage]
+  ontologyWords: [OntologyWord]
+}
+
+"""
+Free-form location, not necessarily at a know venue.
+"""
+type LocationDescription {
+  url: LanguageString
+  geoLocation: GeoJSONFeature @cacheControl(inheritMaxAge: true)
+  address: Address
+  explanation: String
+    @origin(service: "linked", type: "event", attr: "location_extra_info")
+  administrativeDivisions: [AdministrativeDivision]
+  venue: Venue
+}
+
+"""
+TODO: take this from service map / TPREK
+"""
+type AccessibilityProfile {
+  meta: NodeMeta
+  todo: String
+}
+
+"""
+TODO: combine beta.kultus Venue stuff with respa equipment type
+"""
+type VenueFacility {
+  meta: NodeMeta
+  name: String!
+  categories: [KeywordString!]
+}
+
+type OpeningHours {
+  url: String
+  is_open_now_url: String
+  today: [OpeningHoursTimes]
+  data: [OpeningHoursDay]
+}
+
+type LocationImage {
+  url: String
+  caption: LanguageString
+}
+
+type AdministrativeDivision {
+  id: ID
+  type: String
+  municipality: String
+  name: LanguageString
+}
+
+type OntologyWord {
+  id: ID
+  label: LanguageString
+}
+
+type OpeningHoursDay {
+  date: String
+  times: [OpeningHoursTimes]
+}
+
+type OpeningHoursTimes {
+  startTime: String
+  endTime: String
+  endTimeOnNextDay: Boolean
+  resourceState: String
+  fullDay: Boolean
+}
+
+scalar DateTime
+
+type NodeMeta @cacheControl(inheritMaxAge: true) {
+  id: ID!
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""
+TODO: merge all free tags, categories, and keywords
+KEYWORDS ARE GIVEN FROM events-proxy (https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql)
+"""
+type KeywordString {
+  name: String!
+}
+
+"""
+TODO: take from Profile or external source
+"""
+enum UnifiedSearchLanguageEnum {
+  FI
+}
+
+"""
+TODO: convert all String's to LanguageString's if linguistic content
+"""
+type LanguageString @cacheControl(inheritMaxAge: true) {
+  fi: String
+  sv: String
+  en: String
+}
+
+"""
+any kind of description answering the question "when".
+"""
+type TimeDescription {
+  starting: DateTime
+    @origin(service: "linked", type: "event", attr: "start_time")
+  ending: DateTime @origin(service: "linked", type: "event", attr: "end_time")
+  otherTime: TimeDescription
+}
+
+"""
+Resources (media) that provide extra description of a resource,
+facility, event or venue, such as images, videos, info pages, etc.
+"""
+type DescriptionResources {
+  mediaResources: [MediaResource!]!
+    @origin(service: "linked", type: "event", attr: "images")
+    @origin(service: "linked", type: "event", attr: "videos")
+  infoUrls: [String!]!
+    @origin(service: "linked", type: "event", attr: "info_url")
+  externalLinks: [String!]!
+}
+
+"""
+TODO: take this from Linked events Image type.
+"""
+type MediaResource {
+  meta: NodeMeta
+  todo: String
+}
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+"""
+TODO: this comes from respa resource/unit types
+"""
+type VenueReservationPolicy {
+  todo: String
+}
+
+"""
+An organised event - something that happens at a specific time, has a
+specific topic or content, and people can participate.  Examples include
+meetups, concerts, volunteering occasions (or bees), happenings.  This
+corresponds to Linked events/courses event, beta.kultus
+PalvelutarjotinEventNode, Kukkuu event.
+"""
+type Event {
+  meta: NodeMeta
+  name: LanguageString @origin(service: "linked", type: "event", attr: "name")
+  description: LanguageString
+    @origin(service: "linked", type: "event", attr: "description")
+  shortDescription: String
+    @origin(service: "linked", type: "event", attr: "short_description")
+  descriptionResources: DescriptionResources
+  keywords: [KeywordString!]!
+    @origin(service: "linked", type: "event", attr: "keywords")
+  eventDataSource: String
+    @origin(service: "linked", type: "event", attr: "data_source")
+  occurrences: [EventOccurrence!]!
+  pricing: [EventPricing!]
+    @origin(service: "linked", type: "event", attr: "offers")
+  organiser: LegalEntity
+    @origin(service: "linked", type: "event", attr: "provider")
+  publisher: LegalEntity
+    @origin(service: "linked", type: "event", attr: "publisher")
+  published: DateTime
+    @origin(service: "linked", type: "event", attr: "date_published")
+  contactPerson: LegalEntity
+  eventLanguages: [UnifiedSearchLanguageEnum!]!
+    @origin(service: "linked", type: "event", attr: "in_language")
+  subEvents: [Event!]!
+    @origin(service: "linked", type: "event", attr: "sub_events")
+  superEvent: Event
+    @origin(service: "linked", type: "event", attr: "super_event")
+  enrolmentPolicy: EnrolmentPolicy
+  targetAudience: [KeywordString!]
+    @origin(service: "linked", type: "event", attr: "audience")
+}
+
+"""
+TODO: improve (a lot) over Linked events' offer type
+"""
+type EventPricing {
+  meta: NodeMeta
+  todo: String
+}
+
+type EventOccurrence {
+  meta: NodeMeta
+
+  """
+  which event this is an occurrence of
+  """
+  ofEvent: Event
+  happensAt: TimeDescription
+
+  """
+  for information - for example, to guide people who are looking for
+  big or small events, or to give city officials a hint on how much
+  equipment is needed
+  """
+  estimatedAttendeeCount: Int
+  location: LocationDescription
+    @origin(service: "linked", type: "event", attr: "location")
+  status: EventOccurrenceStatus
+    @origin(service: "linked", type: "event", attr: "event_status")
+  enrolments: [Enrolment!]!
+  minimumAttendeeCount: Int
+    @origin(
+      service: "linked"
+      type: "extension_course"
+      attr: "minimum_attendee_capacity"
+    )
+  maximumAttendeeCount: Int
+    @origin(
+      service: "linked"
+      type: "extension_course"
+      attr: "maximum_attendee_capacity"
+    )
+  currentlyAvailableParticipantCount: Int
+    @origin(
+      service: "linked"
+      type: "extension_course"
+      attr: "remaining_attendee_capacity"
+    )
+
+  """
+  for events where equipment is requested from the City of Helsinki
+  """
+  cityEquipmentRequests: [EquipmentRequest!]
+}
+
+enum EventOccurrenceStatus {
+  UNPUBLISHED
+  PUBLISHED
+  CANCELLED
+  RESCHEDULED
+  POSTPONED
+}
+
+"""
+Rules about who can enroll to an event and how
+"""
+type EnrolmentPolicy {
+  meta: NodeMeta
+  type: [EnrolmentPolicyType!]!
+  enrolmentTime: TimeDescription
+    @origin(
+      service: "linked"
+      type: "extension_course"
+      attr: "enrolment_start_time"
+    )
+    @origin(
+      service: "linked"
+      type: "extension_course"
+      attr: "enrolment_end_time"
+    )
+  allowedParticipantCategories: [KeywordString!]!
+  participantMinimumAge: Int!
+    @origin(service: "linked", type: "event", attr: "audience_min_age")
+  participantMaximumAge: Int!
+    @origin(service: "linked", type: "event", attr: "audience_max_age")
+
+  """
+  minimum number of people who can enrol together (at the same time)
+  """
+  minimumEnrolmentCount: Int
+
+  """
+  maximum number of people who can enrol together (at the same time)
+  """
+  maximumEnrolmentCount: Int
+}
+
+enum EnrolmentPolicyType {
+  NO_ENROLMENT_NEEDED
+  GROUPS
+  GROUPS_WITH_SUPERVISORS
+  INDIVIDUALS
+}
+
+"""
+Information about enrolled participant(s) in an event occurrence
+"""
+type Enrolment {
+  meta: NodeMeta
+  event: EventOccurrence
+  enroller: Person
+  participantCount: Int!
+  participants: [Person!]
+  participantCategory: KeywordString
+  overseerCount: Int
+  overseers: [Person!]
+  requestedMethodOfNotification: ContactMedium
+  status: EnrolmentStatus
+  extraInformation: String
+}
+
+enum EnrolmentStatus {
+  REQUESTED
+  QUEUED
+  CONFIRMED
+  CANCELLED
+  DECLINED
+}
+
+"""
+Request for equipment - if someone needs equipment for a purpose such
+as organising a volunteering event (as is the case in park cleaning
+bees), a specification of what is being requested.
+"""
+type EquipmentRequest {
+  meta: NodeMeta
+  requestedEquipment: String!
+  estimatedAmount: Int
+  requestedForEvent: Event
+  deliveryLocation: LocationDescription
+  returnLocation: LocationDescription
+  extraInformation: String!
+}
+
+"""
+TODO: take from Profile
+"""
+type Person {
+  meta: NodeMeta
+  name: String
+  identificationStrength: IdentificationStrength
+  contactDetails: ContactInfo
+  preferredLanguages: [UnifiedSearchLanguageEnum!]
+  preferredMedium: ContactMedium
+}
+
+enum IdentificationStrength {
+  """
+  If this person is just a pseudoperson for contacting
+  """
+  NONIDENTIFIABLE
+
+  """
+  If the identity of this person is not known at all
+  """
+  UNIDENTIFIED
+
+  """
+  If the person has authenticated with at least some method
+  """
+  AUTHENTICATED
+
+  """
+  If the person has done some identifiable action such as payment
+  """
+  INDIRECT
+
+  """
+  If the person has proved their legal identity
+  """
+  LEGALLY_CONNECTED
+}
+
+"""
+TODO: merge beta.kultus organisation, etc
+"""
+type Organisation {
+  meta: NodeMeta
+  contactDetails: ContactInfo
+}
+
+union LegalEntity = Person | Organisation
+
+enum ContactMedium {
+  SMS
+  EMAIL
+  SMS_AND_EMAIL
+  MOBILE_NOTIFICATION
+  ASIOINTI
+}
+
+"""
+Contact details for a person, legal entity, venue or project
+"""
+type ContactInfo
+  @origin(service: "linked", type: "event", attr: "provider_contact_info") {
+  contactUrl: String
+  phoneNumbers: [PhoneNumber!]!
+  emailAddresses: [String!]!
+  postalAddresses: [Address!]!
+}
+
+type PhoneNumber {
+  countryCode: String!
+  restNumber: String!
+}
+
+"""
+TODO: give real structure
+"""
+type Address {
+  postalCode: String
+  streetAddress: LanguageString
+  city: LanguageString
+}
+
+"""
+Coordinate Reference System (CRS) object.
+"""
+type GeoJSONCoordinateReferenceSystem {
+  type: GeoJSONCRSType!
+  properties: GeoJSONCRSProperties!
+}
+
+"""
+A (multidimensional) set of coordinates following x, y, z order.
+"""
+scalar GeoJSONCoordinates
+
+"""
+CRS object properties.
+"""
+union GeoJSONCRSProperties =
+    GeoJSONNamedCRSProperties
+  | GeoJSONLinkedCRSProperties
+
+"""
+Enumeration of all GeoJSON CRS object types.
+"""
+enum GeoJSONCRSType {
+  name
+  link
+}
+
+"""
+An object that links a geometry to properties in order to provide context.
+"""
+type GeoJSONFeature implements GeoJSONInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  geometry: GeoJSONGeometryInterface @cacheControl(inheritMaxAge: true)
+  properties: JSONObject
+  id: String
+}
+
+"""
+A set of multiple features.
+"""
+type GeoJSONFeatureCollection implements GeoJSONInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  features: [GeoJSONFeature!]!
+}
+
+"""
+A set of multiple geometries, possibly of various types.
+"""
+type GeoJSONGeometryCollection implements GeoJSONInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  geometries: [GeoJSONGeometryInterface!]!
+}
+
+interface GeoJSONGeometryInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  coordinates: GeoJSONCoordinates
+}
+
+interface GeoJSONInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+}
+
+"""
+Object describing a single connected sequence of geographical points.
+"""
+type GeoJSONLineString implements GeoJSONInterface & GeoJSONGeometryInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  coordinates: GeoJSONCoordinates
+}
+
+"""
+Properties for link based CRS object.
+"""
+type GeoJSONLinkedCRSProperties {
+  href: String!
+  type: String
+}
+
+"""
+Object describing multiple connected sequences of geographical points.
+"""
+type GeoJSONMultiLineString implements GeoJSONInterface & GeoJSONGeometryInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  coordinates: GeoJSONCoordinates
+}
+
+"""
+Object describing multiple geographical points.
+"""
+type GeoJSONMultiPoint implements GeoJSONInterface & GeoJSONGeometryInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  coordinates: GeoJSONCoordinates
+}
+
+"""
+Object describing multiple shapes formed by sets of geographical points.
+"""
+type GeoJSONMultiPolygon implements GeoJSONInterface & GeoJSONGeometryInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  coordinates: GeoJSONCoordinates
+}
+
+"""
+Properties for name based CRS object.
+"""
+type GeoJSONNamedCRSProperties {
+  name: String!
+}
+
+"""
+Object describing a single geographical point.
+"""
+type GeoJSONPoint implements GeoJSONInterface & GeoJSONGeometryInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  coordinates: GeoJSONCoordinates
+}
+
+"""
+Object describing a single shape formed by a set of geographical points.
+"""
+type GeoJSONPolygon implements GeoJSONInterface & GeoJSONGeometryInterface {
+  type: GeoJSONType!
+  crs: GeoJSONCoordinateReferenceSystem!
+  bbox: [Float]
+  coordinates: GeoJSONCoordinates
+}
+
+"""
+Enumeration of all GeoJSON object types.
+"""
+enum GeoJSONType {
+  Point
+  MultiPoint
+  LineString
+  MultiLineString
+  Polygon
+  MultiPolygon
+  GeometryCollection
+  Feature
+  FeatureCollection
+}
+
+"""
+Arbitrary JSON value
+"""
+scalar JSONObject
+
+type OntologyTree {
+  id: ID
+  parentId: ID
+  name: LanguageString
+  childIds: [ID]
+  ancestorIds: [ID]
+  level: Int
+}
+
+enum link__Purpose {
+  """
+  `SECURITY` features provide metadata necessary to securely resolve fields.
+  """
+  SECURITY
+
+  """
+  `EXECUTION` features provide metadata necessary for operation execution.
+  """
+  EXECUTION
+}
+
+scalar link__Import
+
+scalar federation__FieldSet
+
+scalar _Any
+
+type _Service {
+  sdl: String
+}

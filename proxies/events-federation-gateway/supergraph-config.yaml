@@ -1,10 +1,17 @@
 federation_version: 2
 subgraphs:
   cms:
-    routing_url: 'https://tapahtumat.hkih.stage.geniem.io/graphql'
+    routing_url: https://tapahtumat.hkih.stage.geniem.io/graphql
+    # routing_url: https://harrastus.hkih.stage.geniem.io/graphql
     schema:
-      subgraph_url: 'https://tapahtumat.hkih.stage.geniem.io/graphql'
-  # events:
-  #   routing_url: "https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql"
-  #   schema:
-  #     subgraph_url: "https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql"
+      file: ./schemas/cms.graphql
+  events:
+    routing_url: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
+    schema:
+      file: ./schemas/events.graphql
+      # subgraph_url: http://localhost:4002/proxy/graphql
+  unified-search:
+    routing_url: https://unified-search.test.kuva.hel.ninja/search
+    schema:
+      file: ./schemas/unified-search.graphql
+      # subgraph_url: http://localhost:4001/search

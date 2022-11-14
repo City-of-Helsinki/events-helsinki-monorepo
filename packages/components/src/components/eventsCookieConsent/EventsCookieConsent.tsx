@@ -21,7 +21,7 @@ const EventsCookieConsent: React.FC<Props> = ({ appName }) => {
       setLanguage(newLang as Language);
       i18n.changeLanguage(newLang);
     },
-    [setLanguage]
+    [i18n, setLanguage]
   );
   const contentSource: ContentSource = React.useMemo(
     () => ({

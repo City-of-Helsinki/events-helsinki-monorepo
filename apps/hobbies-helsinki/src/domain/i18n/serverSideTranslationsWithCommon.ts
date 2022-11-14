@@ -3,8 +3,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import nextI18nextConfig from '../../../next-i18next.config';
 
 const COMMON_TRANSLATIONS = [
-  'common',
   'appHobbies',
+  'common',
+  'consent',
   'footer',
   'notFound',
   'home',

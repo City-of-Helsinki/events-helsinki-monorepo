@@ -1,4 +1,4 @@
-import type { Language } from 'events-helsinki-components';
+import type { AppLanguage } from 'events-helsinki-components';
 import { DATE_TYPES } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 
@@ -37,7 +37,7 @@ describe('getSearchQuery function', () => {
 describe('getEventSearchVariables function', () => {
   const defaultParams = {
     include: [],
-    language: 'fi' as Language,
+    language: 'fi' as AppLanguage,
     pageSize: 10,
     sortOrder: EVENT_SORT_OPTIONS.END_TIME,
     superEventType: [],

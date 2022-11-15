@@ -11,7 +11,7 @@ import {
 import type {
   EventFields,
   KeywordOption,
-  Language,
+  AppLanguage,
   LocalizedObject,
   PlaceFieldsFragment,
 } from '../types';
@@ -98,7 +98,7 @@ export const formatPrice = (price?: string): string => {
  */
 export const getEventPrice = (
   event: EventFields,
-  locale: Language,
+  locale: AppLanguage,
   isFreeText: string
 ): string => {
   return isEventFree(event)
@@ -120,7 +120,7 @@ export const getKeywordList = (
     id?: string | null;
     name?: LocalizedObject | null;
   }[] = [],
-  locale: Language
+  locale: AppLanguage
 ): KeywordOption[] => {
   return list
     .map((listItem) => ({
@@ -166,7 +166,7 @@ export const getEventSomeImageUrl = (event: EventFields): string => {
  */
 export const getEventDistrict = (
   event: EventFields,
-  locale: Language
+  locale: AppLanguage
 ): string | null => {
   const location = event.location;
   const district = location?.divisions?.find((division) =>
@@ -182,7 +182,7 @@ export const getEventDistrict = (
  * @param {string} locale
  * @return {string}
  */
-const getEventLocationFields = (event: EventFields, locale: Language) => {
+const getEventLocationFields = (event: EventFields, locale: AppLanguage) => {
   const location = event.location;
   return {
     addressLocality: getLocalizedString(location?.addressLocality, locale),
@@ -214,7 +214,7 @@ export const getLocationId = (
  */
 export const getServiceMapUrl = (
   event: EventFields,
-  locale: Language,
+  locale: AppLanguage,
   isEmbedded?: boolean
 ): string => {
   const location = event.location;
@@ -235,7 +235,7 @@ export const getServiceMapUrl = (
  */
 export const getGoogleDirectionsLink = (
   event: EventFields,
-  locale: Language
+  locale: AppLanguage
 ): string => {
   const { addressLocality, coordinates, postalCode, streetAddress } =
     getEventLocationFields(event, locale);
@@ -253,7 +253,7 @@ export const getGoogleDirectionsLink = (
  */
 export const getHslDirectionsLink = (
   event: EventFields,
-  locale: Language
+  locale: AppLanguage
 ): string => {
   const { addressLocality, coordinates, streetAddress } =
     getEventLocationFields(event, locale);
@@ -271,7 +271,7 @@ export const getHslDirectionsLink = (
  * @param {string} locale
  * @return {string}
  */
-const getOfferInfoUrl = (event: EventFields, locale: Language): string => {
+const getOfferInfoUrl = (event: EventFields, locale: AppLanguage): string => {
   const offer = event.offers.find((item) =>
     getLocalizedString(item.infoUrl, locale)
   );
@@ -292,7 +292,7 @@ const getRegistrationUrl = (event: EventFields) => {
  * @return {object}
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const getEventFields = (event: EventFields, locale: Language) => {
+export const getEventFields = (event: EventFields, locale: AppLanguage) => {
   const eventLocation = event.location;
   const offerInfoUrl = getOfferInfoUrl(event, locale);
   const registrationUrl = getRegistrationUrl(event);
@@ -337,7 +337,7 @@ export const getEventFields = (event: EventFields, locale: Language) => {
   };
 };
 
-export const isLocalized = (event: EventFields, locale: Language): boolean =>
+export const isLocalized = (event: EventFields, locale: AppLanguage): boolean =>
   Boolean(
     event.name?.[locale] &&
       event.shortDescription?.[locale] &&

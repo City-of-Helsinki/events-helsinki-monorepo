@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import type { NormalizedCacheObject } from '@apollo/client';
-import type { Language } from 'events-helsinki-components';
+import type { AppLanguage } from 'events-helsinki-components';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -150,7 +150,7 @@ const getProps = async (context: GetStaticPropsContext) => {
     variables: {
       id: _getURIQueryParameter(
         context.params?.slug as string[],
-        context.locale as Language
+        context.locale as AppLanguage
       ),
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
@@ -176,7 +176,7 @@ const getProps = async (context: GetStaticPropsContext) => {
  * @param locale  locale of the
  * @returns
  */
-function _getURIQueryParameter(slugs: string[], locale: Language) {
+function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
   const uri = getUriID(slugs, locale);
   if (uri.startsWith(AppConfig.cmsPagesContextPath)) {
     return uri;

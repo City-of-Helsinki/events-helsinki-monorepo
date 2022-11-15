@@ -11,7 +11,7 @@ import { staticGenerationLogger } from '../logger';
 import AppConfig from './AppConfig';
 
 const GLOBAL_QUERY = gql`
-  fragment PageFragment on RootQuery {
+  query PageQuery($menuLocation: MenuLocationEnum!) {
     pageLanguages: languages {
       id
       name
@@ -34,9 +34,6 @@ const GLOBAL_QUERY = gql`
         }
       }
     }
-  }
-  query PageQuery($menuLocation: MenuLocationEnum!) {
-    ...PageFragment
     __typename
   }
 `;

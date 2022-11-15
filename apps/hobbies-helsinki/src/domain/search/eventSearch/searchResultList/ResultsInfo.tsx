@@ -1,5 +1,5 @@
 import { useLocale } from 'events-helsinki-components';
-import type { Language } from 'events-helsinki-components';
+import type { AppLanguage } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -18,7 +18,7 @@ const ResultsInfoContainer: React.FC<{
   const isFinnish = locale === 'fi';
 
   const goToFinnishSearch = () => {
-    router.push(getI18nPath(ROUTES.SEARCH, 'fi' as Language));
+    router.push(getI18nPath(ROUTES.SEARCH, 'fi' as AppLanguage));
   };
 
   const ActionButtons = () => (

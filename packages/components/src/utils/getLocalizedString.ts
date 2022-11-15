@@ -1,5 +1,5 @@
 import { supportedLanguages } from '../constants';
-import type { Language } from '../types';
+import type { AppLanguage } from '../types';
 
 /**
  * Check is the instance that is rendering component client (not SSR)
@@ -13,7 +13,7 @@ type LocalizedObject = {
 
 const getLocalizedString = (
   obj: Partial<LocalizedObject> | undefined | null = {},
-  language: Language
+  language: AppLanguage
 ): string => {
   if (obj === null) {
     return '';

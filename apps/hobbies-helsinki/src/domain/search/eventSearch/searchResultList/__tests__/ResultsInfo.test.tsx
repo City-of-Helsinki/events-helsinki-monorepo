@@ -1,4 +1,4 @@
-import type { Language } from 'events-helsinki-components';
+import type { AppLanguage } from 'events-helsinki-components';
 import * as useLocale from 'events-helsinki-components/hooks/useLocale';
 
 import * as React from 'react';
@@ -37,7 +37,7 @@ it.each([1, 4])(
   }
 );
 
-it.each<[Language, number]>([
+it.each<[AppLanguage, number]>([
   ['en', 4],
   ['en', 0],
   ['sv', 0],

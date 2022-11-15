@@ -1,5 +1,5 @@
 import { useLocale, useRouterFromConfig } from 'events-helsinki-components';
-import type { Language } from 'events-helsinki-components';
+import type { AppLanguage } from 'events-helsinki-components';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import { Navigation as RHHCApolloNavigation } from 'react-helsinki-headless-cms/apollo';
 
@@ -52,7 +52,7 @@ export default function Navigation({ page }: NavigationProps) {
                   ) ?? '',
               }
             : router.query,
-          slug as Language
+          slug as AppLanguage
         );
       }}
     />

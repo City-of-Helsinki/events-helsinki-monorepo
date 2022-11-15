@@ -1,5 +1,5 @@
 import format from 'date-fns/format';
-import type { Language } from 'events-helsinki-components';
+import type { AppLanguage } from 'events-helsinki-components';
 import type {
   ArticleType,
   Category,
@@ -29,7 +29,7 @@ import AppConfig from '../../../domain/app/AppConfig';
 import ArticleDetails from '../../../domain/article/articleDetails/ArticleDetails';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getUriID = (slugs: string[], locale: Language): string => {
+export const getUriID = (slugs: string[], locale: AppLanguage): string => {
   if (!slugs) return '/';
   return `/${slugs.join('/')}/`;
 };

@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
-import type { Language } from '../types';
+import type { AppLanguage } from '../types';
 
-const useLocale = (): Language => {
+const useLocale = (): AppLanguage => {
   const {
     i18n: { language },
   } = useTranslation();

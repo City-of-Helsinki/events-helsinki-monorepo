@@ -5,7 +5,7 @@ import {
 } from 'events-helsinki-common-i18n';
 import { useTranslation } from 'react-i18next';
 import { render, screen } from '../../../config/tests/test-utils';
-import type { Language } from '../../types';
+import type { AppLanguage } from '../../types';
 import * as useLocale from '../useLocale';
 
 const TestComponent = () => {
@@ -20,7 +20,7 @@ const TestComponent = () => {
 };
 
 describe('useLocale', () => {
-  const supportedLanguages: Language[] = ['fi', 'en', 'sv'];
+  const supportedLanguages: AppLanguage[] = ['fi', 'en', 'sv'];
   const unsupportedLanguages = ['fr', 'test'];
   const mockUseLocale = jest.spyOn(useLocale, 'default');
 
@@ -41,7 +41,7 @@ describe('useLocale', () => {
 
       render(<TestComponent />);
       expect(initTestI18n.language).toBe(lang);
-      expect(mockUseLocale).toHaveReturnedWith(lang as Language);
+      expect(mockUseLocale).toHaveReturnedWith(lang as AppLanguage);
     }
   );
 
@@ -52,7 +52,7 @@ describe('useLocale', () => {
       await initTestI18n.changeLanguage(lang);
       render(<TestComponent />);
       expect(initTestI18n.language).toBe(lang);
-      expect(mockUseLocale).toHaveReturnedWith('fi' as Language);
+      expect(mockUseLocale).toHaveReturnedWith('fi' as AppLanguage);
       expect(await screen.findByTestId('translation')).toHaveTextContent(
         translations.common.supriseMe
       );

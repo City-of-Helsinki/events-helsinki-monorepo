@@ -1,13 +1,13 @@
 import type React from 'react';
 import type { AUTOSUGGEST_TYPES } from '../constants';
 
-export type Language = 'en' | 'fi' | 'sv';
+export type AppLanguage = 'en' | 'fi' | 'sv';
 
 // TODO: Copy-pasted from react-helsinki-headless-cms.
 // For some reason next build fails when there is dependency to rhhc.
 /** Enum of all available language codes */
 /* eslint-disable @typescript-eslint/naming-convention */
-export enum LanguageCodeEnum {
+export enum AppLanguageCodeEnum {
   En = 'EN',
   /** The default locale of the site */
   Fi = 'FI',
@@ -32,7 +32,7 @@ export type CmsLanguage = {
   locale: string;
 };
 
-export type MenuItem = {
+export type AppMenuItem = {
   id: string;
   order: number;
   path: string;
@@ -43,10 +43,10 @@ export type MenuItem = {
 };
 
 export type Connection<T> = {
-  edges: Node<T>[];
+  edges: AppNode<T>[];
 };
 
-export type Node<T> = {
+export type AppNode<T> = {
   cursor: string;
   node: T;
 };
@@ -57,7 +57,7 @@ export type AutosuggestMenuOption = {
   value: string;
 };
 
-export type Category = {
+export type AppCategory = {
   icon?: React.ReactElement;
   text: string;
   value: string;

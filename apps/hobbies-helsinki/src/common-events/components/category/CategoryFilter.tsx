@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import type * as CSS from 'csstype';
-import type { Category } from 'events-helsinki-components';
+import type { AppCategory } from 'events-helsinki-components';
 import { IconAngleRight } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
@@ -8,7 +8,7 @@ import { Link } from 'react-helsinki-headless-cms';
 
 import styles from './categoryFilter.module.scss';
 
-interface Props extends Category {
+interface Props extends AppCategory {
   className?: string;
   hasHorizontalPadding?: boolean;
   style?: CSS.Properties;

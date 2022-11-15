@@ -9,7 +9,7 @@ import {
 import type {
   EventFields,
   FilterType,
-  Language,
+  AppLanguage,
   Meta,
   QueryEventListArgs,
 } from 'events-helsinki-components';
@@ -140,7 +140,7 @@ export const getEventSearchVariables = ({
   place,
 }: {
   include: string[];
-  language?: Language;
+  language?: AppLanguage;
   pageSize: number;
   params: URLSearchParams;
   sortOrder: EVENT_SORT_OPTIONS;

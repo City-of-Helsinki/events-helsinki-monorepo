@@ -30,9 +30,6 @@
     "./jest": {
       "require": "./src/bases/jest.js"
     },
-    "./playwright": {
-      "require": "./src/bases/playwright.js"
-    },
     "./prettier": {
       "require": "./src/bases/prettier.js"
     },
@@ -51,11 +48,11 @@
     "./storybook": {
       "require": "./src/bases/storybook.js"
     },
-    "./tailwind": {
-      "require": "./src/bases/tailwind.js"
-    },
     "./typescript": {
       "require": "./src/bases/typescript.js"
+    },
+    "./testcafe": {
+      "require": "./src/bases/testcafe.js"
     }
   },
   "scripts": {
@@ -78,14 +75,12 @@
     "eslint-plugin-jest": "^27.0.4",
     "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-playwright": "^0.11.2",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-regexp": "^1.9.0",
     "eslint-plugin-sonarjs": "^0.15.0",
     "eslint-plugin-storybook": "^0.6.4",
-    "eslint-plugin-tailwindcss": "^3.6.2",
     "eslint-plugin-testing-library": "^5.7.0",
     "prettier": "^2.7.1"
   },

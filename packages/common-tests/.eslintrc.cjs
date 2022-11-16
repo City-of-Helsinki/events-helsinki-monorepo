@@ -18,6 +18,7 @@ module.exports = {
     '@events-helsinki/eslint-config-bases/typescript',
     // Apply prettier and disable incompatible rules
     '@events-helsinki/eslint-config-bases/prettier',
+    '@events-helsinki/eslint-config-bases/testcafe',
   ],
   rules: {
     // optional overrides per project

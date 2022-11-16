@@ -24,16 +24,16 @@ class Header {
 
     this.setLanguage(lang);
 
-    const languageSelectorButton_screen = screen.getByRole('button', {
+    const languageSelectorButtonScreen = screen.getByRole('button', {
       name: await this.languageSelectorButton.innerText,
     });
-    const languageSelectorItem_screen = screen.getByRole('link', {
+    const languageSelectorItemScreen = screen.getByRole('link', {
       name: await this.languageSelectorItem.innerText,
     });
 
     await t
-      .click(languageSelectorButton_screen)
-      .click(languageSelectorItem_screen);
+      .click(languageSelectorButtonScreen)
+      .click(languageSelectorItemScreen);
 
     await i18n.changeLanguage(lang);
   }

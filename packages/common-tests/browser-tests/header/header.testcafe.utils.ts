@@ -1,5 +1,4 @@
 import { SUPPORT_LANGUAGES } from '../../../components/src/constants';
-import ConsentModal from '../page-model/consent-modal';
 import Header from '../page-model/header';
 import LandingPage from '../page-model/landingPage';
 import { getEnvUrl } from '../utils';

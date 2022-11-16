@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
-import { initI18n as i18n } from '../../config/jest/initI18n';
-import { SUPPORT_LANGUAGES } from '../../src/types';
+import { initTestI18n as i18n } from '../../../common-i18n/src';
+import { SUPPORT_LANGUAGES } from '../../../components/src/constants';
 
 class Header {
   currentLang = SUPPORT_LANGUAGES.FI;

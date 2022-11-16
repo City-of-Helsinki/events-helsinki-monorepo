@@ -13057,6 +13057,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"events-helsinki-common-tests@workspace:packages/common-tests":
+  version: 0.0.0-use.local
+  resolution: "events-helsinki-common-tests@workspace:packages/common-tests"
+  dependencies:
+    "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@testing-library/testcafe": "npm:^4.4.0"
+    "@types/jest": "npm:29.1.0"
+    "@types/node": "npm:18.7.23"
+    cross-env: "npm:7.0.3"
+    eslint: "npm:8.24.0"
+    i18next: "npm:21.10.0"
+    prettier: "npm:2.7.1"
+    rimraf: "npm:3.0.2"
+    testcafe: "npm:^2.0.0"
+    typescript: "npm:4.8.4"
+  languageName: unknown
+  linkType: soft
+
 "events-helsinki-components@workspace:^, events-helsinki-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "events-helsinki-components@workspace:packages/components"

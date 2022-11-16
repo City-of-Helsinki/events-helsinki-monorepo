@@ -43,24 +43,37 @@ To run the router locally with your configuration and supergraph, run:
 In the `package.json` of the root in the monorepo, there is a script that can be used to launch a dockerized Apollo federation gateway router:
 
 ```javascript
-    "docker:graphql-gateway:hobbies:serve": "cross-env GATEWAY_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql docker-compose -f docker-compose.router.yml up",
-    "docker:graphql-gateway:events:serve": "cross-env GATEWAY_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql docker-compose -f docker-compose.router.yml up",
+  "scripts": {
+    "docker:graphql-router:hobbies:serve": "cross-env ROUTER_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql ROUTER_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql ROUTER_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:events:serve": "cross-env ROUTER_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql ROUTER_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql ROUTER_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
+  }
 ```
 
 To use these, run the following to launch the gateway router:
 
 ```sh
-yarn docker:graphql-gateway:hobbies:serve
+yarn docker:graphql-router:hobbies:serve
 ```
 
 In the `router.yaml` there is a `override_subgraph_url` -configuration that can be used to change the route to another GraphQL-API:
 
 ```yaml
 override_subgraph_url:
-  cms: ${env.GATEWAY_CMS_ROUTING_URL}
+  cms: ${env.ROUTER_CMS_ROUTING_URL}
+  events: ${env.ROUTER_EVENTS_ROUTING_URL}
+  unified-search: ${env.ROUTER_UNIFIED_SEARCH_ROUTING_URL}
 ```
 
-**This can be used to easily change (the routing url of) the Headless CMS API! So, by providing `GATEWAY_CMS_ROUTING_URL` as a environment variable, the same supergraph schema can be used with a different source of data.**
+They are set in the in the `docker-compose.router.yml` like this, with the defaults in the `events` and `unified-search` services, but empty in `cms`:
+
+```yaml
+environment:
+  - ROUTER_CMS_ROUTING_URL=${ROUTER_CMS_ROUTING_URL}
+  - ROUTER_EVENTS_ROUTING_URL=${ROUTER_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
+  - ROUTER_UNIFIED_SEARCH_ROUTING_URL=${ROUTER_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
+```
+
+**This can be used to easily change (the routing url of) the Headless CMS API! So, by providing `ROUTER_CMS_ROUTING_URL` as a environment variable, the same supergraph schema can be used with a different source of data.**
 
 More details about this pattern can be read from the Apollo documentation: [Subgraph routing URLs](https://www.apollographql.com/docs/router/configuration/overview/#subgraph-routing-urls).
 

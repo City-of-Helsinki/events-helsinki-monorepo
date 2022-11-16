@@ -4,7 +4,9 @@ services:
     container_name: apollo-router
     image: ghcr.io/apollographql/router:v1.3.0
     environment:
-      - GATEWAY_CMS_ROUTING_URL=${GATEWAY_CMS_ROUTING_URL}
+      - ROUTER_CMS_ROUTING_URL=${ROUTER_CMS_ROUTING_URL}
+      - ROUTER_EVENTS_ROUTING_URL=${ROUTER_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
+      - ROUTER_UNIFIED_SEARCH_ROUTING_URL=${ROUTER_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
     volumes:
       - ./proxies/events-graphql-router/supergraph.graphql:/dist/schema/supergraph.graphql
       - ./proxies/events-graphql-router/router.yaml:/dist/config/router.yaml

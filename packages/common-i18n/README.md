@@ -15,7 +15,7 @@ One possible way to share locales amongst apps in the monorepo.
 Add the workspace dependency to the consuming app or package.
 
 ```bash
-yarn add events-helsinki-common-locales:"workspace:^"
+yarn add events-helsinki-common-i18n:"workspace:^"
 ```
 
 Add an alias in tsconfig.js to enable fast-refresh.

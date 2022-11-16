@@ -24,6 +24,7 @@
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
     "get-translations": "node ./scripts/get-translations.js",
     "generate:graphql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen -r dotenv/config --config ../../packages/components/codegen.yml",
+    "?test:browser": "echo 'Run browser-tests locally. You need to have production build of the application running locally (yarn build & yarn start)",
     "test:browser": "testcafe \"chrome --window-size='1249,720'\" browser-tests/ --live --dev",
     "test:browser:wsl2win": "testcafe 'path:`/mnt/c/Program Files/Google/Chrome/Application/chrome.exe`' browser-tests/ --live --dev",
     "test:browser:ci": "testcafe \"chrome:headless --disable-gpu --window-size='1249,720'\" --screenshots path=report takeOnFails=true --video report browser-tests/",

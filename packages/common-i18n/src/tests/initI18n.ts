@@ -36,14 +36,14 @@ import search_sv from '../locales/sv/search.json';
 export const translations = {
   cms,
   common,
+  appHobbies,
+  appEvents,
   consent,
   event,
   footer,
   home,
   notFound,
   search,
-  appEvents,
-  appHobbies,
 };
 
 export const config = {
@@ -60,26 +60,26 @@ export const config = {
     en: {
       cms: cms_en,
       common: common_en,
+      appEvents: appEvents_en,
+      appHobbies: appHobbies_en,
       consent: consent_en,
       event: event_en,
       footer: footer_en,
       home: home_en,
       notFound: notFound_en,
       search: search_en,
-      appEvents: appEvents_en,
-      appHobbies: appHobbies_en,
     },
     sv: {
       cms: cms_sv,
       common: common_sv,
+      appEvents: appEvents_sv,
+      appHobbies: appHobbies_sv,
       consent: consent_sv,
       event: event_sv,
       footer: footer_sv,
       home: home_sv,
       notFound: notFound_sv,
       search: search_sv,
-      appEvents: appEvents_sv,
-      appHobbies: appHobbies_sv,
     },
   },
 };

@@ -99,7 +99,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
             ) : (
               <>
                 <Component {...pageProps} />
-                <EventsCookieConsent appName={t('eventsCommon:appName')} />
+                <EventsCookieConsent appName={t('appEvents:appName')} />
               </>
             )}
           </MatomoProvider>

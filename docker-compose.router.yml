@@ -6,8 +6,8 @@ services:
     environment:
       - GATEWAY_CMS_ROUTING_URL=${GATEWAY_CMS_ROUTING_URL}
     volumes:
-      - ./proxies/events-federation-gateway/supergraph.graphql:/dist/schema/supergraph.graphql
-      - ./proxies/events-federation-gateway/router.yaml:/dist/config/router.yaml
+      - ./proxies/events-graphql-router/supergraph.graphql:/dist/schema/supergraph.graphql
+      - ./proxies/events-graphql-router/router.yaml:/dist/config/router.yaml
     command:
       [
         '--dev',

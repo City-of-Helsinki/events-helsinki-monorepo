@@ -29,7 +29,7 @@
 ```
 .
 ├── proxies
-│   └── events-federation-gateway (Apollo Router and Gateway)
+│   └── events-graphql-router (Apollo Router and Gateway)
 │
 ├── apps
 │   ├── hobbies-helsinki  (i18n, ssr, api, jest)
@@ -42,7 +42,7 @@
 
 #### Proxies
 
-- [proxies/events-federation-gateway](./proxies/events-federation-gateway): The Apollo Router and Gateway configuration to manage and run subgraphs. [README](./proxies/events-federation-gateway/README.md)
+- [proxies/events-graphql-router](./proxies/events-graphql-router): The Apollo Router and Gateway configuration to manage and run subgraphs. [README](./proxies/events-graphql-router/README.md)
 
 #### Apps
 
@@ -73,7 +73,7 @@ If needed static resources like **images**,... can be shared by using symlinks i
 ```
 .
 ├── proxies
-│   └── events-federation-gateway (Apollo Router and Gateway)
+│   └── events-graphql-router (Apollo Router and Gateway)
 │
 ├── apps
 │   └── hobbies-helsinki         (NextJS app with api-routes)

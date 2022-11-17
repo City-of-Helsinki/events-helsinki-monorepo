@@ -8,7 +8,7 @@ import type { ReactElement } from 'react';
 import React from 'react';
 import wait from 'waait';
 
-import { createEventsApolloCache } from '../../src/domain/clients/eventsApolloClient';
+import { createApolloCache } from '../../src/domain/clients/gatewayApolloClient';
 import TestProviders from './TestProviders';
 
 type CustomRender = {
@@ -41,7 +41,7 @@ export const tabKeyPressHelper = (): boolean =>
 
 const customRender: CustomRender = (
   ui: ReactElement,
-  { mocks = [], cache = createEventsApolloCache(), routes = [] } = {}
+  { mocks = [], cache = createApolloCache(), routes = [] } = {}
 ) => {
   if (routes) {
     if (!Array.isArray(routes)) {

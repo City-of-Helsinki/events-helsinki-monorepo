@@ -18,12 +18,13 @@ import {
   initializeApolloClient,
   isClient,
   MutableReference,
+  sortMenuItems,
 } from 'events-helsinki-components';
 import { useMemo } from 'react';
 import { rewriteInternalURLs } from '../../utils/routerUtils';
 import AppConfig from '../app/AppConfig';
 
-const eventsApolloClient = new MutableReference<
+const gatewayApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
 >();
 
@@ -35,7 +36,7 @@ const getPageStylePaginator = (merge: FieldMergeFunction) => ({
   merge,
 });
 
-export function createEventsApolloClient() {
+export function createApolloClient() {
   // Rewrite the URLs coming from events API to route them internally.
   const transformInternalURLs = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
@@ -61,7 +62,7 @@ export function createEventsApolloClient() {
     }
   });
 
-  const cache = createEventsApolloCache();
+  const cache = createApolloCache();
 
   return new ApolloClient({
     connectToDevTools: true,
@@ -72,9 +73,21 @@ export function createEventsApolloClient() {
   });
 }
 
-export function createEventsApolloCache() {
+export function createApolloCache() {
   return new InMemoryCache({
     typePolicies: {
+      RootQuery: {
+        queryType: true,
+      },
+      MenuItems: {
+        fields: {
+          nodes: {
+            read(nodes) {
+              return sortMenuItems(nodes);
+            },
+          },
+        },
+      },
       Query: {
         fields: {
           event(_, { args, toReference }) {
@@ -135,7 +148,7 @@ export function createEventsApolloCache() {
   });
 }
 
-export default function initializeEventsApolloClient(
+export default function initializeGatewayApolloClient(
   initialState: NormalizedCacheObject = {}
 ): ApolloClient<NormalizedCacheObject> {
   return initializeApolloClient<
@@ -143,18 +156,18 @@ export default function initializeEventsApolloClient(
     ApolloClient<NormalizedCacheObject>
   >({
     initialState,
-    mutableCachedClient: eventsApolloClient,
-    createClient: createEventsApolloClient,
+    mutableCachedClient: gatewayApolloClient,
+    createClient: createApolloClient,
   });
 }
 
-export function useEventsApolloClient(
+export function useApolloClient(
   initialState: NormalizedCacheObject = {}
 ): ApolloClient<NormalizedCacheObject> {
   return useMemo(
-    () => initializeEventsApolloClient(initialState),
+    () => initializeGatewayApolloClient(initialState),
     [initialState]
   );
 }
 
-export const apolloClient = createEventsApolloClient();
+export const apolloClient = createApolloClient();

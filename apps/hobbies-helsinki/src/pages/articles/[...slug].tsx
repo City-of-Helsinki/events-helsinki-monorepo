@@ -36,7 +36,6 @@ import {
 } from '../../common-events/utils/headless-cms/headlessCmsUtils';
 import { getAllArticles } from '../../common-events/utils/headless-cms/service';
 import AppConfig from '../../domain/app/AppConfig';
-import { createCmsApolloClient } from '../../domain/clients/cmsApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
@@ -115,7 +114,7 @@ export async function getStaticProps(
     const {
       currentArticle: article,
       breadcrumbs,
-      cmsClient,
+      apolloClient,
     } = await getProps(context);
 
     if (!article) {
@@ -128,7 +127,7 @@ export async function getStaticProps(
 
     return {
       props: {
-        initialApolloState: cmsClient.cache.extract(),
+        initialApolloState: apolloClient.cache.extract(),
         ...(await serverSideTranslationsWithCommon(locale, ['cms'])),
         article,
         breadcrumbs,
@@ -151,9 +150,9 @@ export async function getStaticProps(
 }
 
 const getProps = async (context: GetStaticPropsContext) => {
-  const cmsClient = createCmsApolloClient();
+  const apolloClient = createApolloClient();
 
-  const { data: articleData } = await cmsClient.query<
+  const { data: articleData } = await apolloClient.query<
     ArticleQuery,
     ArticleQueryVariables
   >({
@@ -172,7 +171,7 @@ const getProps = async (context: GetStaticPropsContext) => {
   // TODO: Breadcrumbs are unstyled, so left disabled
   const breadcrumbs: Breadcrumb[] = []; // await _getBreadcrumbs(cmsClient, currentArticle);
 
-  return { currentArticle, breadcrumbs, cmsClient };
+  return { currentArticle, breadcrumbs, apolloClient };
 };
 
 /**

@@ -2,6 +2,7 @@ import { useLocale, getEventFields } from 'events-helsinki-components';
 import type { EventFields } from 'events-helsinki-components';
 import Head from 'next/head';
 import React from 'react';
+import { useConfig } from 'react-helsinki-headless-cms';
 
 interface Props {
   event: EventFields;
@@ -9,6 +10,8 @@ interface Props {
 
 const EventPageMeta: React.FC<Props> = ({ event }) => {
   const locale = useLocale();
+
+  const { meta } = useConfig();
 
   const {
     keywords,
@@ -37,6 +40,12 @@ const EventPageMeta: React.FC<Props> = ({ event }) => {
       {Object.entries(openGraphProperties).map(([property, value]) => (
         <meta key={property} property={`og:${property}`} content={value} />
       ))}
+      <link rel="icon" href={meta?.favIconUrl} />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href={meta?.appleTouchIconUrl}
+      />
     </Head>
   );
 };

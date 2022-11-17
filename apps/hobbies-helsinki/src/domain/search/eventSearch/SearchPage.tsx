@@ -1,5 +1,6 @@
 import type { QueryEventListArgs } from 'events-helsinki-components';
 import {
+  BasicMeta,
   LoadingSpinner,
   SrOnly,
   useIsSmallScreen,
@@ -10,6 +11,7 @@ import {
 import { useRouter } from 'next/router';
 import qs from 'query-string';
 import React from 'react';
+import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
@@ -34,6 +36,8 @@ const SearchPage: React.FC<{
 
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
   const isSmallScreen = useIsSmallScreen();
+
+  const { meta } = useConfig();
 
   const eventFilters = React.useMemo(() => {
     const searchParams = new URLSearchParams(qs.stringify(router.query));
@@ -116,6 +120,11 @@ const SearchPage: React.FC<{
 
   return (
     <div>
+      <BasicMeta
+        title={pageTitle}
+        appleTouchIconUrl={meta?.appleTouchIconUrl}
+        favIconUrl={meta?.favIconUrl}
+      />
       <SrOnly as="h1">{pageTitle}</SrOnly>
       <SearchComponent
         scrollToResultList={scrollToResultList}

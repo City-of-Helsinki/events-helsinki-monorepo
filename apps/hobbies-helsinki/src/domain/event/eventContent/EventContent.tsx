@@ -4,7 +4,6 @@ import type {
   SuperEventResponse,
 } from 'events-helsinki-components';
 import {
-  sanitizeHtml,
   useLocale,
   EventLocation,
   getEventFields,
@@ -12,7 +11,12 @@ import {
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
+import {
+  PageSection,
+  ContentContainer,
+  Link,
+  HtmlToReact,
+} from 'react-helsinki-headless-cms';
 
 import ShareLinks from '../../../common-events/components/shareLinks/ShareLinks';
 import EventInfo from '../eventInfo/EventInfo';
@@ -51,12 +55,15 @@ const EventContent: React.FC<Props> = ({
                 <h2 className={styles.descriptionTitle}>
                   {t('event:description.title')}
                 </h2>
-                <div
-                  className={styles.description}
-                  dangerouslySetInnerHTML={{
-                    __html: sanitizeHtml(description),
-                  }}
-                />
+                <div className={styles.description}>
+                  <HtmlToReact
+                    components={{
+                      a: Link,
+                    }}
+                  >
+                    {description}
+                  </HtmlToReact>
+                </div>
                 {photographerName && (
                   <p>
                     {t('common:photographerText', {

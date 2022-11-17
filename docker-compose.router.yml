@@ -1,24 +1,16 @@
 version: '3'
 services:
   apollo-router:
-    container_name: apollo-router
-    image: ghcr.io/apollographql/router:v1.3.0
+    container_name: events-graphl-router
+    build:
+      context: ./proxies/events-graphql-router/
+      dockerfile: Dockerfile
+      target: develop
+
     environment:
       - ROUTER_CMS_ROUTING_URL=${ROUTER_CMS_ROUTING_URL}
       - ROUTER_EVENTS_ROUTING_URL=${ROUTER_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
       - ROUTER_UNIFIED_SEARCH_ROUTING_URL=${ROUTER_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
-    volumes:
-      - ./proxies/events-graphql-router/supergraph.graphql:/dist/schema/supergraph.graphql
-      - ./proxies/events-graphql-router/router.yaml:/dist/config/router.yaml
-    command:
-      [
-        '--dev',
-        '-c',
-        'config/router.yaml',
-        '-s',
-        'schema/supergraph.graphql',
-        '--log',
-        'info',
-      ]
     ports:
       - '4000:4000'
+      - '8088:8088'

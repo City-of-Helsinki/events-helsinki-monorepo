@@ -3,8 +3,7 @@
 #
 supergraph:
   # The socket address and port to listen on
-  # listen: "${env.MY_LISTEN_ADDRESS}"
-  listen: 0.0.0.0:4000
+  listen: ${env.ROUTER_URL:-0.0.0.0:4000}
   introspection: true
 homepage:
   enabled: false
@@ -27,6 +26,7 @@ cors:
   # match_origins:
   # - "https://([a-z0-9]+[.])*api[.]example[.]com" # any host that uses https and ends with .api.example.com
 health-check:
+  listen: ${env.ROUTER_HEALTHCHECK_URL:-0.0.0.0:4000}
   enabled: true
 
 override_subgraph_url:

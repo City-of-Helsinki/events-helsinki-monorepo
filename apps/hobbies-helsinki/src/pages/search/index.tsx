@@ -1,9 +1,7 @@
-import { ApolloProvider } from '@apollo/client';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
-import { useEventsApolloClient } from 'domain/clients/eventsApolloClient';
 
 import Navigation from '../../common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
@@ -16,8 +14,6 @@ import SearchPage from '../../domain/search/eventSearch/SearchPage';
 import { getLocaleOrError } from '../../utils/routerUtils';
 
 export default function Search() {
-  const eventsApolloClient = useEventsApolloClient();
-
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
@@ -45,12 +41,10 @@ export default function Search() {
         className="pageLayout"
         navigation={<Navigation />}
         content={
-          <ApolloProvider client={eventsApolloClient}>
-            <SearchPage
-              SearchComponent={AdvancedSearch}
-              pageTitle={'eventSearch.title'}
-            />
-          </ApolloProvider>
+          <SearchPage
+            SearchComponent={AdvancedSearch}
+            pageTitle={'eventSearch.title'}
+          />
         }
         footer={<FooterSection />}
       />

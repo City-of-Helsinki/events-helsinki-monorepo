@@ -35,7 +35,6 @@ import { getArticlePageCardProps } from '../../common-events/utils/headless-cms/
 import type { EventsGlobalPageProps } from '../../domain/app/getEventsStaticProps';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
-import { useCmsApollo } from '../../domain/clients/cmsApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
@@ -46,13 +45,11 @@ const BLOCK_SIZE = 10;
 const SEARCH_DEBOUNCE_TIME = 500;
 
 export default function ArticleArchive({
-  initialApolloState,
   page,
 }: EventsGlobalPageProps & { page: PageType }) {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, SEARCH_DEBOUNCE_TIME);
-  const cmsClient = useCmsApollo(initialApolloState);
   const {
     currentLanguageCode,
     utils: { getRoutedInternalHref },
@@ -63,7 +60,6 @@ export default function ArticleArchive({
     loading: loadingArticles,
     networkStatus,
   } = usePostsQuery({
-    client: cmsClient,
     notifyOnNetworkStatusChange: true,
     variables: {
       first: BLOCK_SIZE,
@@ -74,7 +70,6 @@ export default function ArticleArchive({
   });
   const { data: categoriesData, loading: loadingCategories } =
     useCategoriesQuery({
-      client: cmsClient,
       variables: {
         first: CATEGORIES_AMOUNT,
         language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
@@ -193,9 +188,9 @@ export default function ArticleArchive({
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getEventsStaticProps(context, async ({ cmsClient }) => {
+  return getEventsStaticProps(context, async ({ apolloClient }) => {
     const locale = getLocaleOrError(context.locale);
-    const { data: pageData } = await cmsClient.query<
+    const { data: pageData } = await apolloClient.query<
       PageByTemplateQuery,
       PageByTemplateQueryVariables
     >({

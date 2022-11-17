@@ -16,16 +16,15 @@ import {
   PostsDocument,
   PagesDocument,
 } from 'react-helsinki-headless-cms/apollo';
-
-import { createCmsApolloClient } from '../../../domain/clients/cmsApolloClient';
+import { createApolloClient } from 'domain/clients/gatewayApolloClient';
 
 export const ARTICLES_AMOUNT_LIMIT = 100;
 export const PAGES_AMOUNT_LIMIT = 100;
 
 export const getAllArticles = async (): Promise<PageInfo[]> => {
   const pageInfos: PageInfo[] = [];
-  const cmsClient = createCmsApolloClient();
-  const { data: articlesData } = await cmsClient.query<
+  const apolloClient = createApolloClient();
+  const { data: articlesData } = await apolloClient.query<
     PostsQuery,
     PostsQueryVariables
   >({
@@ -70,8 +69,8 @@ export const getAllArticles = async (): Promise<PageInfo[]> => {
 
 export const getAllPages = async (): Promise<PageInfo[]> => {
   const pageInfos: PageInfo[] = [];
-  const cmsClient = createCmsApolloClient();
-  const { data: pagesData } = await cmsClient.query<
+  const apolloClient = createApolloClient();
+  const { data: pagesData } = await apolloClient.query<
     PagesQuery,
     PagesQueryVariables
   >({

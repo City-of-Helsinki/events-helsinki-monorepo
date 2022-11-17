@@ -23,8 +23,7 @@ import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
 import EventsConfigProvider from '../common-events/configProvider/ConfigProvider';
 import AppConfig from '../domain/app/AppConfig';
-import { useCmsApollo } from '../domain/clients/cmsApolloClient';
-import { useEventsApolloClient } from '../domain/clients/eventsApolloClient';
+import { useApolloClient } from '../domain/clients/gatewayApolloClient';
 import useEventsConfig from '../hooks/useEventsConfig';
 import useRHHCConfig from '../hooks/useRHHCConfig';
 
@@ -58,11 +57,10 @@ export type CustomPageProps = {
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { error } = pageProps;
-  const cmsApolloClient = useCmsApollo();
-  const eventsApolloClient = useEventsApolloClient();
-  const eventsConfig = useEventsConfig(eventsApolloClient);
+  const apolloClient = useApolloClient();
+  const eventsConfig = useEventsConfig();
   const router = eventsConfig.router as NextRouter;
-  const rhhcConfig = useRHHCConfig(cmsApolloClient, eventsApolloClient);
+  const rhhcConfig = useRHHCConfig();
   const { t } = useCommonTranslation();
 
   // Unset hidden visibility that was applied to hide the first server render
@@ -82,10 +80,10 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   }, []);
 
   return (
-    <EventsConfigProvider config={eventsConfig}>
-      <RHHCConfigProvider config={rhhcConfig}>
-        <ResetFocus />
-        <ApolloProvider client={cmsApolloClient}>
+    <ApolloProvider client={apolloClient}>
+      <EventsConfigProvider config={eventsConfig}>
+        <RHHCConfigProvider config={rhhcConfig}>
+          <ResetFocus />
           <MatomoProvider value={matomoInstance}>
             {router.isFallback ? (
               <Center>
@@ -103,10 +101,10 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
               </>
             )}
           </MatomoProvider>
-        </ApolloProvider>
-        <ToastContainer />
-      </RHHCConfigProvider>
-    </EventsConfigProvider>
+          <ToastContainer />
+        </RHHCConfigProvider>
+      </EventsConfigProvider>
+    </ApolloProvider>
   );
 }
 

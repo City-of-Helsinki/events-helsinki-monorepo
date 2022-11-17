@@ -18,7 +18,7 @@ const EventsCookieConsent: React.FC<Props> = ({ appName }) => {
 
   const onLanguageChange = React.useCallback(
     (newLang: string) => {
-      setLanguage(newLang as Language);
+      setLanguage(newLang as ContentSource['currentLanguage']);
       i18n.changeLanguage(newLang);
     },
     [i18n, setLanguage]

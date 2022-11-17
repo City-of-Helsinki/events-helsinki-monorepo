@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import {
   useLocale,
   useCommonTranslation,
@@ -11,6 +10,7 @@ import Link from 'next/link';
 import React from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
 import { defaultConfig as rhhcDefaultConfig } from 'react-helsinki-headless-cms';
+import { useApolloClient } from 'domain/clients/gatewayApolloClient';
 
 import AppConfig from '../domain/app/AppConfig';
 import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
@@ -24,10 +24,8 @@ const LINKEDEVENTS_API_EVENT_ENDPOINT = new URL(
   AppConfig.linkedEventsEventEndpoint
 ).href;
 
-export default function useRHHCConfig(
-  cmsApolloClient: ApolloClient<NormalizedCacheObject>,
-  eventsApolloClient: ApolloClient<NormalizedCacheObject>
-) {
+export default function useRHHCConfig() {
+  const apolloClient = useApolloClient();
   const { t: commonTranslation } = useCommonTranslation();
   const { t: cmsTranslation } = useCmsTranslation();
   const locale = useLocale();
@@ -69,8 +67,8 @@ export default function useRHHCConfig(
       ],
       siteName: commonTranslation('appHobbies:appName'),
       currentLanguageCode: locale.toUpperCase(),
-      apolloClient: cmsApolloClient,
-      eventsApolloClient: eventsApolloClient,
+      apolloClient,
+      eventsApolloClient: apolloClient,
       copy: {
         next: commonTranslation('common:next'),
         previous: commonTranslation('common:previous'),
@@ -121,11 +119,5 @@ export default function useRHHCConfig(
       },
       internalHrefOrigins,
     } as unknown as Config;
-  }, [
-    commonTranslation,
-    cmsTranslation,
-    cmsApolloClient,
-    eventsApolloClient,
-    locale,
-  ]);
+  }, [commonTranslation, cmsTranslation, apolloClient, locale]);
 }

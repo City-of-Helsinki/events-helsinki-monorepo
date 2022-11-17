@@ -1,14 +1,14 @@
-import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type { Config } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useApolloClient } from 'domain/clients/gatewayApolloClient';
 
 import eventsDefaultConfig from '../common-events/configProvider/defaultConfig';
 
-export default function useEventsConfig(
-  eventsApolloClient: ApolloClient<NormalizedCacheObject>
-): Config {
+export default function useEventsConfig(): Config {
+  const apolloClient = useApolloClient();
+
   const router = useRouter();
   const { t } = useTranslation('common');
 
@@ -16,8 +16,8 @@ export default function useEventsConfig(
     return {
       ...eventsDefaultConfig,
       t: t,
-      apolloClient: eventsApolloClient,
+      apolloClient,
       router,
     } as unknown as Config;
-  }, [router, eventsApolloClient, t]);
+  }, [router, apolloClient, t]);
 }

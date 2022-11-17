@@ -1,4 +1,3 @@
-import { ApolloProvider } from '@apollo/client';
 import { EventDetailsDocument } from 'events-helsinki-components';
 import type {
   EventFields,
@@ -8,7 +7,6 @@ import type {
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
-import { useEventsApolloClient } from 'domain/clients/eventsApolloClient';
 import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
 import getEventsStaticProps from '../../../domain/app/getEventsStaticProps';
@@ -22,20 +20,17 @@ const Event: NextPage<{
   event: EventFields;
   loading: boolean;
 }> = ({ event, loading }) => {
-  const eventsApolloClient = useEventsApolloClient();
   return (
     <MatomoWrapper>
       <RHHCPage
         className="pageLayout"
         navigation={<Navigation />}
         content={
-          <ApolloProvider client={eventsApolloClient}>
-            <EventPageContainer
-              event={event}
-              loading={loading}
-              showSimilarEvents={AppConfig.showSimilarEvents}
-            />
-          </ApolloProvider>
+          <EventPageContainer
+            event={event}
+            loading={loading}
+            showSimilarEvents={AppConfig.showSimilarEvents}
+          />
         }
         footer={<FooterSection />}
       />
@@ -53,9 +48,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getEventsStaticProps(context, async ({ eventsClient }) => {
+  return getEventsStaticProps(context, async ({ apolloClient }) => {
     const locale = getLocaleOrError(context.locale);
-    const { data: eventData, loading } = await eventsClient.query<
+    const { data: eventData, loading } = await apolloClient.query<
       EventDetailsQuery,
       EventDetailsQueryVariables
     >({

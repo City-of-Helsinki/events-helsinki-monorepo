@@ -5,8 +5,7 @@ import { getMenuLocationFromLanguage } from 'events-helsinki-components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
 import { getLocaleOrError } from '../../utils/routerUtils';
-import initializeCmsApolloClient from '../clients/cmsApolloClient';
-import initializeEventsApolloClient from '../clients/eventsApolloClient';
+import initializeApolloClient from '../clients/gatewayApolloClient';
 import { staticGenerationLogger } from '../logger';
 import AppConfig from './AppConfig';
 
@@ -39,13 +38,11 @@ const GLOBAL_QUERY = gql`
 `;
 
 type HobbiesContext = {
-  cmsClient: ApolloClient<NormalizedCacheObject>;
-  eventsClient: ApolloClient<NormalizedCacheObject>;
+  apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
 export type HobbiesGlobalPageProps = {
   initialApolloState: NormalizedCacheObject;
-  initialEventsApolloState: NormalizedCacheObject;
 } & unknown; // FIXME: Promise<GetStaticPropsResult<P>> of getHobbiesStaticProps
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,17 +52,15 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
     hobbiesContext: HobbiesContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
-  const cmsClient = initializeCmsApolloClient();
-  const eventsClient = initializeEventsApolloClient();
+  const apolloClient = initializeApolloClient();
 
   try {
-    await getGlobalCMSData({ client: cmsClient, context });
-    const result = await tryToGetPageProps({ cmsClient, eventsClient });
+    await getGlobalCMSData({ client: apolloClient, context });
+    const result = await tryToGetPageProps({ apolloClient });
     const props =
       'props' in result
         ? {
-            initialApolloState: cmsClient.cache.extract(),
-            initialEventsApolloState: eventsClient.cache.extract(),
+            initialApolloState: apolloClient.cache.extract(),
             locale: context.locale,
             ...result.props,
           }

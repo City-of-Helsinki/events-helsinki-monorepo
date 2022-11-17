@@ -16,8 +16,6 @@ import type {
   InLanguage,
   Keyword,
   KeywordListResponse,
-  LandingPage,
-  LandingPagesResponse,
   LocalizedCmsImage,
   LocalizedCmsKeywords,
   LocalizedObject,
@@ -263,31 +261,6 @@ export const fakeNeighborhood = (
       id: 'kaupunginosa:aluemeri',
       name: fakeLocalizedObject(),
       __typename: 'Neighborhood',
-    },
-    overrides
-  );
-
-export const fakeLandingPages = (
-  count = 1,
-  landingPages?: Partial<LandingPage>[]
-): LandingPagesResponse => ({
-  data: generateNodeArray((i) => fakeLandingPage(landingPages?.[i]), count),
-  __typename: 'LandingPagesResponse',
-});
-
-export const fakeLandingPage = (
-  overrides?: Partial<LandingPage>
-): LandingPage =>
-  merge(
-    {
-      id: faker.datatype.uuid(),
-      topBanner: fakeBanner(),
-      bottomBanner: fakeBanner(),
-      keywords: fakeLocalizedCmsKeywords(),
-      metaInformation: fakeLocalizedObject(),
-      pageTitle: fakeLocalizedObject(),
-      title: fakeLocalizedObject(),
-      __typename: 'LandingPage',
     },
     overrides
   );

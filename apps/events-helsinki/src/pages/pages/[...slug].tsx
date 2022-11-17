@@ -24,6 +24,7 @@ import type {
   PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
 import { PageDocument } from 'react-helsinki-headless-cms/apollo';
+import { createApolloClient } from 'domain/clients/gatewayApolloClient';
 import Navigation from '../../common-events/components/navigation/Navigation';
 import {
   getDefaultCollections,
@@ -32,7 +33,6 @@ import {
 } from '../../common-events/utils/headless-cms/headlessCmsUtils';
 import { getAllPages } from '../../common-events/utils/headless-cms/service';
 import AppConfig from '../../domain/app/AppConfig';
-import { createCmsApolloClient } from '../../domain/clients/cmsApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
@@ -108,7 +108,7 @@ export async function getStaticProps(
     const {
       currentPage: page,
       breadcrumbs,
-      cmsClient,
+      apolloClient,
     } = await getProps(context);
     if (!page) {
       return {
@@ -120,7 +120,7 @@ export async function getStaticProps(
 
     return {
       props: {
-        initialApolloState: cmsClient.cache.extract(),
+        initialApolloState: apolloClient.cache.extract(),
         ...(await serverSideTranslationsWithCommon(locale, ['cms'])),
         page,
         breadcrumbs,
@@ -141,8 +141,8 @@ export async function getStaticProps(
 }
 
 const getProps = async (context: GetStaticPropsContext) => {
-  const cmsClient = createCmsApolloClient();
-  const { data: pageData } = await cmsClient.query<
+  const apolloClient = createApolloClient();
+  const { data: pageData } = await apolloClient.query<
     PageQuery,
     PageQueryVariables
   >({
@@ -159,11 +159,11 @@ const getProps = async (context: GetStaticPropsContext) => {
   const currentPage = pageData.page;
   // TODO: Breadcrumbs are unstyled, so left disabled
   // const breadcrumbs = _getBreadcrumbs(
-  //   cmsClient,
+  //   apolloClient,
   //   (context.params?.slug ?? []) as string[]
   // );
 
-  return { currentPage, breadcrumbs: [], cmsClient };
+  return { currentPage, breadcrumbs: [], apolloClient };
 };
 
 /**
@@ -188,7 +188,7 @@ function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
 }
 
 // async function _getBreadcrumbs(
-//   cmsClient: ApolloClient<NormalizedCacheObject>,
+//   apolloClient: ApolloClient<NormalizedCacheObject>,
 //   slugs: string[]
 // ) {
 //   // Fetch all parent pages for navigation data.
@@ -198,7 +198,7 @@ function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
 //   const uriSegments = slugsToUriSegments(slugs);
 //   const apolloPageResponses = await Promise.all(
 //     uriSegments.map((uri) => {
-//       return cmsClient.query<PageQuery, PageQueryVariables>({
+//       return apolloClient.query<PageQuery, PageQueryVariables>({
 //         query: PageDocument,
 //         variables: {
 //           id: uri,

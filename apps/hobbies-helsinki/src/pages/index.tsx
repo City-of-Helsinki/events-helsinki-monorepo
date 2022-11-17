@@ -65,10 +65,10 @@ const HomePage: NextPage<{
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getHobbiesStaticProps(context, async ({ cmsClient }) => {
+  return getHobbiesStaticProps(context, async ({ apolloClient }) => {
     try {
       const locale = getLocaleOrError(context.locale);
-      const { data: landingPageData } = await cmsClient.query<
+      const { data: landingPageData } = await apolloClient.query<
         LandingPageQuery,
         LandingPageQueryVariables
       >({
@@ -79,7 +79,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         },
       });
 
-      const { data: pageData } = await cmsClient.query<
+      const { data: pageData } = await apolloClient.query<
         PageByTemplateQuery,
         PageByTemplateQueryVariables
       >({

@@ -1,5 +1,8 @@
-import { Link, useHeadlessCmsLink } from 'react-helsinki-headless-cms';
-import HtmlToReact from '../htmlToReact/HtmlToReact';
+import {
+  Link,
+  useHeadlessCmsLink,
+  HtmlToReact,
+} from 'react-helsinki-headless-cms';
 import Text from '../text/Text';
 import styles from './hero.module.scss';
 

@@ -5,11 +5,13 @@ import {
   useSearchTranslation,
   getLargeEventCardId,
   useEventListQuery,
+  BasicMeta,
 } from 'events-helsinki-components';
 import type { QueryEventListArgs } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
 import React from 'react';
+import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
@@ -47,6 +49,8 @@ const SearchPage: React.FC<{
     });
     return variables;
   }, [router.query, params.place]);
+
+  const { meta } = useConfig();
 
   const {
     data: eventsData,
@@ -116,6 +120,11 @@ const SearchPage: React.FC<{
 
   return (
     <div>
+      <BasicMeta
+        title={pageTitle}
+        appleTouchIconUrl={meta?.appleTouchIconUrl}
+        favIconUrl={meta?.favIconUrl}
+      />
       <SrOnly as="h1">{pageTitle}</SrOnly>
       <SearchComponent
         scrollToResultList={scrollToResultList}

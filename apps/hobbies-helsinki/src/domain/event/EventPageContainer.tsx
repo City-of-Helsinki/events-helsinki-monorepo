@@ -14,7 +14,7 @@ import type {
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import { MAIN_CONTENT_ID, ROUTES } from '../../constants';

@@ -3,6 +3,10 @@
   margin-bottom: var(--spacing-s);
   line-height: 1.5rem;
 
+  a {
+    display: flex;
+  }
+
   .iconWrapper {
     width: var(--spacing-xl);
     svg {

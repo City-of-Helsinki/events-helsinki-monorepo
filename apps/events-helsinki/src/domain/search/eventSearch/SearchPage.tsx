@@ -124,6 +124,8 @@ const SearchPage: React.FC<{
         title={pageTitle}
         appleTouchIconUrl={meta?.appleTouchIconUrl}
         favIconUrl={meta?.favIconUrl}
+        favIconSvgUrl={meta?.favIconSvgUrl}
+        manifestUrl={meta?.manifestUrl}
       />
       <SrOnly as="h1">{pageTitle}</SrOnly>
       <SearchComponent

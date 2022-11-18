@@ -60,7 +60,7 @@
     "react-content-loader": "6.2.0",
     "react-datepicker": "4.8.0",
     "react-dom": ">=17.0.2",
-    "react-helsinki-headless-cms": "1.0.0-alpha49",
+    "react-helsinki-headless-cms": "1.0.0-alpha51",
     "react-i18next": "11.18.6",
     "sanitize-html": "2.7.2"
   },

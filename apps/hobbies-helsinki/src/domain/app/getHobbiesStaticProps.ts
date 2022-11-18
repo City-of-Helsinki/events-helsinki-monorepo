@@ -5,7 +5,7 @@ import { getMenuLocationFromLanguage } from 'events-helsinki-components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
 import { getLocaleOrError } from '../../utils/routerUtils';
-import initializeApolloClient from '../clients/gatewayApolloClient';
+import initializeApolloClient from '../clients/eventsFederationApolloClient';
 import { staticGenerationLogger } from '../logger';
 import AppConfig from './AppConfig';
 

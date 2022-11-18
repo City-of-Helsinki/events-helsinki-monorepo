@@ -7,7 +7,7 @@ import React from 'react';
 
 import { waitFor, actWait, render, screen, userEvent } from '@/test-utils';
 import { fakePlaces } from '@/test-utils/mockDataUtils';
-import { apolloClient } from '../../../clients/gatewayApolloClient';
+import { apolloClient } from '../../../clients/eventsFederationApolloClient';
 import PlaceSelector from '../PlaceSelector';
 
 const variables = {

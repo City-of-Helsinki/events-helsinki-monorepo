@@ -23,7 +23,7 @@ function BasicMeta({
       {description && <meta property="description" content={description} />}
       {favIconUrl && <link rel="icon" href={favIconUrl} />}
       {favIconSvgUrl && (
-        <link rel="icon" href={meta?.favIconSvgUrl} type="image/svg+xml" />
+        <link rel="icon" href={favIconSvgUrl} type="image/svg+xml" />
       )}
       {appleTouchIconUrl && (
         <link rel="apple-touch-icon" sizes="180x180" href={appleTouchIconUrl} />

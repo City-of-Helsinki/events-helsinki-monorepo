@@ -32,8 +32,8 @@ on:
 
 env:
   CI: true
-  NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: https://events-graphql-router-events.kuva.hel.ninja/
-  NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://events-graphql-router-events.kuva.hel.ninja/
+  NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: https://events-graphql-federation-events.kuva.hel.ninja/
+  NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://events-graphql-federation-events.kuva.hel.ninja/
   NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
 
 jobs:

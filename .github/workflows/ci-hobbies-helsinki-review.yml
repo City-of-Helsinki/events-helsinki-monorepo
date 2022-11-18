@@ -66,8 +66,8 @@ env:
   NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE: 0
   NEXTJS_DISABLE_SENTRY: 1
   SENTRY_AUTH_TOKEN: ${{ secrets.GH_SENTRY_AUTH_TOKEN }}
-  NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: https://events-graphql-router-hobbies.kuva.hel.ninja/
-  NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://events-graphql-router-hobbies.kuva.hel.ninja/
+  NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: https://events-graphql-federation-hobbies.kuva.hel.ninja/
+  NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://events-graphql-federation-hobbies.kuva.hel.ninja/
   NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
   NEXT_PUBLIC_MATOMO_URL_BASE: '//webanalytics.digiaiiris.com/js/'
   NEXT_PUBLIC_MATOMO_SITE_ID: 939

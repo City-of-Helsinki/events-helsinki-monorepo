@@ -1,6 +1,6 @@
-# Events federation gateway
+# Events GraphQL Federation
 
-The Events federation gateway is a project for a Apollo federation gateway supergraph (and subgraphs) and router configuration.
+The Events GraphQL Federation is a project for a Apollo federation supergraph (and subgraphs) and the Apollo Router configuration.
 
 **For more detailed documentation, please read the documentation maintained by the Apollo team!**
 
@@ -40,7 +40,7 @@ To run the router locally with your configuration and supergraph, run:
 
 ### Serve dockerized local router
 
-In the `package.json` of the root in the monorepo, there is a script that can be used to launch a dockerized Apollo federation gateway router:
+In the `package.json` of the root in the monorepo, there is a script that can be used to launch a dockerized Apollo federation router:
 
 ```javascript
   "scripts": {
@@ -49,7 +49,7 @@ In the `package.json` of the root in the monorepo, there is a script that can be
   }
 ```
 
-To use these, run the following to launch the gateway router:
+To use these, run the following to launch the router:
 
 ```sh
 yarn docker:graphql-router:hobbies:serve
@@ -113,7 +113,7 @@ To compose a new supergraph, use:
 rover supergraph compose --config ./supergraph-config.yaml
 ```
 
-# Documentation related to the Apollo federation gateway
+# Documentation related to the Apollo federation
 
 ## External articles for basics:
 

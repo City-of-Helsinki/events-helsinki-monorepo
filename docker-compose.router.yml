@@ -1,7 +1,7 @@
 version: '3'
 services:
   apollo-router:
-    container_name: events-graphl-router
+    container_name: events-graphql-router
     build:
       context: ./proxies/events-graphql-router/
       dockerfile: Dockerfile

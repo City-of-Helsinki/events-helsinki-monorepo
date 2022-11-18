@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'proxies/events-graphql-router/subgraphs/**'
+      - 'proxies/events-graphql-federation/subgraphs/**'
       - '!**/README.md'
 
   pull_request:
@@ -14,7 +14,7 @@ on:
       - synchronize
       - reopened
     paths:
-      - 'proxies/events-graphql-router/subgraphs/**'
+      - 'proxies/events-graphql-federation/subgraphs/**'
       - '!**/README.md'
 
 env:
@@ -44,8 +44,8 @@ jobs:
       - name: Build
         uses: andersinno/kolga-build-action@v2
         env:
-          DOCKER_BUILD_SOURCE: ./proxies/events-graphql-router/Dockerfile
-          DOCKER_BUILD_CONTEXT: ./proxies/events-graphql-router
+          DOCKER_BUILD_SOURCE: ./proxies/events-graphql-federation/Dockerfile
+          DOCKER_BUILD_CONTEXT: ./proxies/events-graphql-federation
 
   review:
     strategy:
@@ -96,5 +96,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           header: router-deployment-${{ matrix.service }}
           message: |
-            **Events-Graphql-Router for ${{ matrix.service }} is deployed to: ${{ env.BROWSER_TESTS_LOCAL_ENV_URL }}** :rocket::rocket::rocket:
+            **Events Graphql Federation Router for ${{ matrix.service }} is deployed to: ${{ env.BROWSER_TESTS_LOCAL_ENV_URL }}** :rocket::rocket::rocket:
             _NOTE: the changes to the apps are still reviewed against the staging environment, which does not have the changes yet._

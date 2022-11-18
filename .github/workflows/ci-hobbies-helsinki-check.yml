@@ -31,8 +31,8 @@ on:
       - '.github/workflows/**'
 env:
   CI: true
-  NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: https://events-graphql-router-hobbies.kuva.hel.ninja/
-  NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://events-graphql-router-hobbies.kuva.hel.ninja/
+  NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT: https://events-graphql-federation-hobbies.kuva.hel.ninja/
+  NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT: https://events-graphql-federation-hobbies.kuva.hel.ninja/
   NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
 
 jobs:

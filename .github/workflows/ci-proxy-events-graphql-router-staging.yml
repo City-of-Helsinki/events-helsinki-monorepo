@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'proxies/events-graphql-router/subgraphs/**'
+      - 'proxies/events-graphql-federation/subgraphs/**'
       - '!**/README.md'
 
 env:
@@ -35,8 +35,8 @@ jobs:
       - name: Build
         uses: andersinno/kolga-build-action@v2
         env:
-          DOCKER_BUILD_SOURCE: ./proxies/events-graphql-router/Dockerfile
-          DOCKER_BUILD_CONTEXT: ./proxies/events-graphql-router
+          DOCKER_BUILD_SOURCE: ./proxies/events-graphql-federation/Dockerfile
+          DOCKER_BUILD_CONTEXT: ./proxies/events-graphql-federation
 
   staging:
     strategy:
@@ -64,7 +64,7 @@ jobs:
       - name: Deploy ${{ matrix.service}}
         uses: andersinno/kolga-deploy-action@v2
         env:
-          ENVIRONMENT_URL: https://events-graphql-router-${matrix.service}.${{env.BASE_DOMAIN}}
+          ENVIRONMENT_URL: https://events-graphql-federation-${matrix.service}.${{env.BASE_DOMAIN}}
           ENVIRONMENT_SLUG: router-${{ matrix.service }}
           K8S_SECRET_ROUTER_CMS_ROUTING_URL: ${{ matrix.ROUTER_CMS_ROUTING_URL }}
           K8S_SECRET_ROUTER_EVENTS_ROUTING_URL: ${{ matrix.ROUTER_EVENTS_ROUTING_URL }}

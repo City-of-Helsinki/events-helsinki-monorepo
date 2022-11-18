@@ -4,7 +4,7 @@ The Events federation gateway is a project for a Apollo federation gateway super
 
 **For more detailed documentation, please read the documentation maintained by the Apollo team!**
 
-Apollos' Supergraph-demo repository: https://github.com/apollographql/supergraph-demo/
+Apollo's Supergraph-demo repository: https://github.com/apollographql/supergraph-demo/
 
 ## Local development
 
@@ -97,12 +97,6 @@ To introspect an old monolith graph, use:
 
 ```sh
 rover graph introspect https://tapahtumat.hkih.stage.geniem.io/graphql
-```
-
-or to export the result in a file:
-
-```sh
-rover graph introspect https://tapahtumat.hkih.stage.geniem.io/graphql > my-schema.graphql
 ```
 
 or to export the result in a file:

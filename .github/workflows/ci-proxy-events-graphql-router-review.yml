@@ -54,13 +54,13 @@ jobs:
         service: ['events', 'hobbies']
         include:
           - service: 'events'
-            ROUTER_CMS_ROUTING_URL: https://tapahtumat.hkih.stage.geniem.io/graphql
-            ROUTER_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
-            ROUTER_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
+            FEDERATION_CMS_ROUTING_URL: https://tapahtumat.hkih.stage.geniem.io/graphql
+            FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
+            FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
           - service: 'hobbies'
-            ROUTER_CMS_ROUTING_URL: https://harrastus.hkih.stage.geniem.io/graphql
-            ROUTER_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
-            ROUTER_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
+            FEDERATION_CMS_ROUTING_URL: https://harrastus.hkih.stage.geniem.io/graphql
+            FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
+            FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
 
     runs-on: ubuntu-latest
     needs: build
@@ -75,9 +75,9 @@ jobs:
         env:
           ENVIRONMENT_URL: https://${{env.K8S_NAMESPACE}}-${{ matrix.service }}.${{ env.BASE_DOMAIN }}
           ENVIRONMENT_SLUG: router-${{ matrix.service }}
-          K8S_SECRET_ROUTER_CMS_ROUTING_URL: ${{ matrix.ROUTER_CMS_ROUTING_URL }}
-          K8S_SECRET_ROUTER_EVENTS_ROUTING_URL: ${{ matrix.ROUTER_EVENTS_ROUTING_URL }}
-          K8S_SECRET_ROUTER_UNIFIED_SEARCH_ROUTING_URL: ${{ matrix.ROUTER_UNIFIED_SEARCH_ROUTING_URL }}
+          K8S_SECRET_FEDERATION_CMS_ROUTING_URL: ${{ matrix.FEDERATION_CMS_ROUTING_URL }}
+          K8S_SECRET_FEDERATION_EVENTS_ROUTING_URL: ${{ matrix.FEDERATION_EVENTS_ROUTING_URL }}
+          K8S_SECRET_FEDERATION_UNIFIED_SEARCH_ROUTING_URL: ${{ matrix.FEDERATION_UNIFIED_SEARCH_ROUTING_URL }}
           # K8S_SECRET_ROUTER_HEALTHCHECK_URL: https://${{env.K8S_NAMESPACE}}-${{ matrix.service }}.${{ env.BASE_DOMAIN }}
       - name: Setup kubectl
         run: |

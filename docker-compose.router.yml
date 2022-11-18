@@ -8,9 +8,9 @@ services:
       target: develop
 
     environment:
-      - ROUTER_CMS_ROUTING_URL=${ROUTER_CMS_ROUTING_URL}
-      - ROUTER_EVENTS_ROUTING_URL=${ROUTER_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
-      - ROUTER_UNIFIED_SEARCH_ROUTING_URL=${ROUTER_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
+      - FEDERATION_CMS_ROUTING_URL=${FEDERATION_CMS_ROUTING_URL}
+      - FEDERATION_EVENTS_ROUTING_URL=${FEDERATION_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
+      - FEDERATION_UNIFIED_SEARCH_ROUTING_URL=${FEDERATION_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
     ports:
       - '4000:4000'
       - '8088:8088'

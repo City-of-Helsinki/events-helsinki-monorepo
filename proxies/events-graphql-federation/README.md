@@ -44,8 +44,8 @@ In the `package.json` of the root in the monorepo, there is a script that can be
 
 ```javascript
   "scripts": {
-    "docker:graphql-router:hobbies:serve": "cross-env ROUTER_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql ROUTER_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql ROUTER_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
-    "docker:graphql-router:events:serve": "cross-env ROUTER_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql ROUTER_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql ROUTER_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:hobbies:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:events:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
   }
 ```
 
@@ -59,21 +59,21 @@ In the `router.yaml` there is a `override_subgraph_url` -configuration that can 
 
 ```yaml
 override_subgraph_url:
-  cms: ${env.ROUTER_CMS_ROUTING_URL}
-  events: ${env.ROUTER_EVENTS_ROUTING_URL}
-  unified-search: ${env.ROUTER_UNIFIED_SEARCH_ROUTING_URL}
+  cms: ${env.FEDERATION_CMS_ROUTING_URL}
+  events: ${env.FEDERATION_EVENTS_ROUTING_URL}
+  unified-search: ${env.FEDERATION_UNIFIED_SEARCH_ROUTING_URL}
 ```
 
 They are set in the in the `docker-compose.router.yml` like this, with the defaults in the `events` and `unified-search` services, but empty in `cms`:
 
 ```yaml
 environment:
-  - ROUTER_CMS_ROUTING_URL=${ROUTER_CMS_ROUTING_URL}
-  - ROUTER_EVENTS_ROUTING_URL=${ROUTER_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
-  - ROUTER_UNIFIED_SEARCH_ROUTING_URL=${ROUTER_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
+  - FEDERATION_CMS_ROUTING_URL=${FEDERATION_CMS_ROUTING_URL}
+  - FEDERATION_EVENTS_ROUTING_URL=${FEDERATION_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
+  - FEDERATION_UNIFIED_SEARCH_ROUTING_URL=${FEDERATION_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
 ```
 
-**This can be used to easily change (the routing url of) the Headless CMS API! So, by providing `ROUTER_CMS_ROUTING_URL` as a environment variable, the same supergraph schema can be used with a different source of data.**
+**This can be used to easily change (the routing url of) the Headless CMS API! So, by providing `FEDERATION_CMS_ROUTING_URL` as a environment variable, the same supergraph schema can be used with a different source of data.**
 
 More details about this pattern can be read from the Apollo documentation: [Subgraph routing URLs](https://www.apollographql.com/docs/router/configuration/overview/#subgraph-routing-urls).
 

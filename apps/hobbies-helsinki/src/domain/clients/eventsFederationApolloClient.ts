@@ -24,7 +24,7 @@ import { useMemo } from 'react';
 import { rewriteInternalURLs } from '../../utils/routerUtils';
 import AppConfig from '../app/AppConfig';
 
-const gatewayApolloClient = new MutableReference<
+const eventsFederationApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
 >();
 
@@ -156,7 +156,7 @@ export default function initializeGatewayApolloClient(
     ApolloClient<NormalizedCacheObject>
   >({
     initialState,
-    mutableCachedClient: gatewayApolloClient,
+    mutableCachedClient: eventsFederationApolloClient,
     createClient: createApolloClient,
   });
 }

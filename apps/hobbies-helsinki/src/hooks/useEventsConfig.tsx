@@ -2,7 +2,7 @@ import type { Config } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useApolloClient } from 'domain/clients/gatewayApolloClient';
+import { useApolloClient } from 'domain/clients/eventsFederationApolloClient';
 
 import eventsDefaultConfig from '../common-events/configProvider/defaultConfig';
 

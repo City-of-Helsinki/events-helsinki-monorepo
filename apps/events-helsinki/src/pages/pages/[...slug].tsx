@@ -24,7 +24,7 @@ import type {
   PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
 import { PageDocument } from 'react-helsinki-headless-cms/apollo';
-import { createApolloClient } from 'domain/clients/gatewayApolloClient';
+import { createApolloClient } from 'domain/clients/eventsFederationApolloClient';
 import Navigation from '../../common-events/components/navigation/Navigation';
 import {
   getDefaultCollections,

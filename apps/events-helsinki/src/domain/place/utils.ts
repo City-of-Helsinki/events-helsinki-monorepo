@@ -1,6 +1,6 @@
 import { PlaceDetailsDocument } from 'events-helsinki-components';
 import type { Maybe, PlaceDetailsQuery } from 'events-helsinki-components';
-import { createApolloClient } from '../clients/gatewayApolloClient';
+import { createApolloClient } from '../clients/eventsFederationApolloClient';
 
 export const getPlaceDetailsFromCache = (
   id: string

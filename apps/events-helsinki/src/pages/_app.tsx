@@ -23,7 +23,7 @@ import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
 import EventsConfigProvider from '../common-events/configProvider/ConfigProvider';
 import AppConfig from '../domain/app/AppConfig';
-import { useApolloClient } from '../domain/clients/gatewayApolloClient';
+import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
 import useEventsConfig from '../hooks/useEventsConfig';
 import useRHHCConfig from '../hooks/useRHHCConfig';
 

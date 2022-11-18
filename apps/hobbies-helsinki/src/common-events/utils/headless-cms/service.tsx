@@ -46,7 +46,7 @@ export const getAllArticles = async (): Promise<PageInfo[]> => {
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
-      node.translations?.forEach((translation) => {
+      node.translations?.forEach((translation: PageType['translations']) => {
         if (
           translation?.uri &&
           translation.slug &&
@@ -93,7 +93,7 @@ export const getAllPages = async (): Promise<PageInfo[]> => {
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
-      node.translations?.forEach((translation) => {
+      node.translations?.forEach((translation: PageType['translations']) => {
         if (
           translation?.uri &&
           translation.slug &&

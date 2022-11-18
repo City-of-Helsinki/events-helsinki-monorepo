@@ -116,6 +116,8 @@ export default function useRHHCConfig(
       meta: {
         appleTouchIconUrl: '/shared-assets/images/apple-touch-icon.png',
         favIconUrl: '/shared-assets/images/favicon.ico',
+        favIconSvgUrl: '/shared-assets/images/favicon.svg',
+        manifestUrl: '/shared-assets/images/manifest.webmanifest',
       },
       internalHrefOrigins,
     } as unknown as Config;

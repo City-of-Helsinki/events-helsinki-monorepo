@@ -40,12 +40,10 @@ const EventPageMeta: React.FC<Props> = ({ event }) => {
       {Object.entries(openGraphProperties).map(([property, value]) => (
         <meta key={property} property={`og:${property}`} content={value} />
       ))}
-      <link rel="icon" href={meta?.favIconUrl} />
-      <link
-        rel="apple-touch-icon"
-        sizes="180x180"
-        href={meta?.appleTouchIconUrl}
-      />
+      <link rel="icon" href={meta?.favIconUrl} sizes="any" />
+      <link rel="apple-touch-icon" href={meta?.appleTouchIconUrl} />
+      <link rel="icon" href={meta?.favIconSvgUrl} type="image/svg+xml" />
+      <link rel="manifest" href={meta?.manifestUrl} />
     </Head>
   );
 };

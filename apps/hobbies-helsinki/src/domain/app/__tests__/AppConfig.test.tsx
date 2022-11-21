@@ -13,9 +13,9 @@ afterAll(() => {
 
 it.each([
   {
-    field: 'cmsGraphqlEndpoint',
+    field: 'cmsOrigin',
     mockEnvValue: 'https://localhost/cms/graphql',
-    envName: 'NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT',
+    envName: 'NEXT_PUBLIC_CMS_ORIGIN',
     expectToEqual: undefined,
   },
   {

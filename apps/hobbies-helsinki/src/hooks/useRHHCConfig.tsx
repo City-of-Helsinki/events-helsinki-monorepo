@@ -19,7 +19,7 @@ import type { EventDetailsProps } from '../domain/event/eventDetails/EventDetail
 import EventDetails from '../domain/event/eventDetails/EventDetails';
 
 const APP_DOMAIN = new URL(AppConfig.origin).origin;
-const CMS_API_DOMAIN = new URL(AppConfig.cmsGraphqlEndpoint).origin;
+const CMS_API_DOMAIN = new URL(AppConfig.cmsOrigin).origin;
 const LINKEDEVENTS_API_EVENT_ENDPOINT = new URL(
   AppConfig.linkedEventsEventEndpoint
 ).href;

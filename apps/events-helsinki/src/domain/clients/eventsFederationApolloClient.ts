@@ -46,7 +46,7 @@ export function createApolloClient() {
     });
   });
   const httpLink = new HttpLink({
-    uri: AppConfig.eventsGraphqlEndpoint,
+    uri: AppConfig.federationGraphqlEndpoint,
     fetch,
   });
   const errorLink = onError(({ graphQLErrors, networkError }) => {

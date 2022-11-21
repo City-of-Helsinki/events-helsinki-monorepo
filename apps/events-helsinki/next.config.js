@@ -166,7 +166,7 @@ const nextConfig = {
   images: {
     domains: [
       new URL(
-        process.env.NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT ??
+        process.env.NEXT_PUBLIC_CMS_ORIGIN ??
           'https://tapahtumat.hkih.stage.geniem.io/graphql'
       ).origin,
     ],

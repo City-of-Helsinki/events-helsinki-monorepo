@@ -2,17 +2,17 @@ import { EventTypeId } from 'events-helsinki-components';
 import { ROUTES } from '../../constants';
 
 class AppConfig {
-  static get cmsGraphqlEndpoint() {
+  static get cmsOrigin() {
     return getEnvOrError(
-      process.env.NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT,
-      'NEXT_PUBLIC_CMS_GRAPHQL_ENDPOINT'
+      process.env.NEXT_PUBLIC_CMS_ORIGIN,
+      'NEXT_PUBLIC_CMS_ORIGIN'
     );
   }
 
-  static get eventsGraphqlEndpoint() {
+  static get federationGraphqlEndpoint() {
     return getEnvOrError(
-      process.env.NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT,
-      'NEXT_PUBLIC_EVENTS_GRAPHQL_ENDPOINT'
+      process.env.NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT,
+      'NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT'
     );
   }
 
@@ -28,10 +28,6 @@ class AppConfig {
       process.env.NEXT_PUBLIC_APP_ORIGIN,
       'NEXT_PUBLIC_APP_ORIGIN'
     );
-  }
-
-  static get cmsOrigin() {
-    return new URL(AppConfig.cmsGraphqlEndpoint).origin;
   }
 
   static get cmsArticlesContextPath() {

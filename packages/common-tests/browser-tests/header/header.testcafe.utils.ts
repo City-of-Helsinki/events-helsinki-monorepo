@@ -1,8 +1,8 @@
 import { SUPPORT_LANGUAGES } from '../../../components/src/constants';
 import Header from '../page-model/header';
 import LandingPage from '../page-model/landingPage';
+import type { AppNamespace } from '../types/app-namespace';
 import { getEnvUrl } from '../utils';
-import { AppNamespace } from '../types/app-namespace';
 
 fixture('Landing page header').page(getEnvUrl());
 

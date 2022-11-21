@@ -3,7 +3,7 @@ import { initI18n as i18n } from '../../config/jest/initI18n';
 
 class EventsConsentModal extends ConsentModal {
   protected get appName() {
-    return i18n.t('eventsCommon:appName');
+    return i18n.t('appEvents:appName');
   }
 }
 

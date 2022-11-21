@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/testcafe';
 import { t } from 'testcafe';
 import { initTestI18n as i18n } from '../../../common-i18n/src';
-import { AppNamespace } from '../types/app-namespace';
+import type { AppNamespace } from '../types/app-namespace';
 
 class LandingPage {
   searchText = 'sirkuskoulu';

@@ -1,7 +1,12 @@
+import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
 import * as React from 'react';
 
 import { render, screen } from '@/test-utils';
 import { fakeEvent, fakePlace } from '@/test-utils/mockDataUtils';
+import {
+  acceptRequiredCookieConsentsOnly,
+  acceptServiceMapCookieConsents,
+} from '@/test-utils/mocks/cookieMocks';
 import type { EventFields } from '../../../../../types';
 import EventLocation from '../EventLocation';
 
@@ -44,4 +49,33 @@ it('should render location address', () => {
   expect(
     screen.getByText([streetAddress, addressLocality].join(', '))
   ).toBeInTheDocument();
+});
+
+describe('cookie consents', () => {
+  describe('when disabled', () => {
+    it('should not render service map', () => {
+      render(<EventLocation event={event} />);
+      expect(
+        screen.queryByTitle(translations.event.location.mapTitle)
+      ).not.toBeInTheDocument();
+    });
+  });
+  describe('when only required consents accepted', () => {
+    it('should not render service map', () => {
+      acceptRequiredCookieConsentsOnly();
+      render(<EventLocation event={event} />);
+      expect(
+        screen.queryByTitle(translations.event.location.mapTitle)
+      ).not.toBeInTheDocument();
+    });
+  });
+  describe('when service map consents accepted', () => {
+    it('renders service map', async () => {
+      acceptServiceMapCookieConsents();
+      render(<EventLocation event={event} />);
+      expect(
+        screen.getByTitle(translations.event.location.mapTitle)
+      ).toBeInTheDocument();
+    });
+  });
 });

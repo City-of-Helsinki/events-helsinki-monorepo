@@ -31,6 +31,7 @@ module.exports = {
     'plugin:@next/next/core-web-vitals',
     // Apply prettier and disable incompatible rules
     '@events-helsinki/eslint-config-bases/prettier',
+    '@events-helsinki/eslint-config-bases/testcafe',
   ],
   rules: {
     // https://github.com/vercel/next.js/discussions/16832

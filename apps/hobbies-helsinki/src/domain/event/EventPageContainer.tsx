@@ -7,6 +7,7 @@ import {
   getEventIdFromUrl,
   isEventClosed,
   EventDetailsDocument,
+  MAIN_CONTENT_ID,
 } from 'events-helsinki-components';
 import type {
   SuperEventResponse,
@@ -17,7 +18,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
-import { MAIN_CONTENT_ID, ROUTES } from '../../constants';
+import { ROUTES } from '../../constants';
 import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
 import ErrorHero from '../error/ErrorHero';
 import EventClosedHero from './eventClosedHero/EventClosedHero';

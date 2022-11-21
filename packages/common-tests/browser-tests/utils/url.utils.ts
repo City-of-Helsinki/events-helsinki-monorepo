@@ -1,7 +1,7 @@
-const LOCAL_ENV_URL = 'http://localhost:3000';
+const localEnvUrl = 'http://localhost:3000';
 
 export const getEnvUrl = (path = ''): string => {
-  const baseUrl = process.env.BROWSER_TESTS_ENV_URL ?? LOCAL_ENV_URL;
+  const baseUrl = process.env.BROWSER_TESTS_ENV_URL ?? localEnvUrl;
   return `${baseUrl}${path?.startsWith('/') ? path : `/${path ?? ''}`}`;
 };
 

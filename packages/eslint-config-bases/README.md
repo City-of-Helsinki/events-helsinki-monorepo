@@ -52,6 +52,7 @@ module.exports = {
   ignorePatterns: ["**/node_modules", "**/.cache", "build", ".next"],
   extends: [
     "@events-helsinki/eslint-config-bases/typescript",
+    "@events-helsinki/eslint-config-bases/testcafe",
     "@events-helsinki/eslint-config-bases/sonar",
     "@events-helsinki/eslint-config-bases/regexp",
     "@events-helsinki/eslint-config-bases/react",
@@ -59,7 +60,6 @@ module.exports = {
     "@events-helsinki/eslint-config-bases/rtl",
     "@events-helsinki/eslint-config-bases/graphql-schema",
     "@events-helsinki/eslint-config-bases/storybook",
-    "@events-helsinki/eslint-config-bases/playwright",
 
     // Add specific rules for your framework if needed.
     // ie:
@@ -90,14 +90,13 @@ You can find the bases in [./src/bases](./src/bases).
 | Base                                            | Match convention                  | Scope                                                           |
 | :---------------------------------------------- | :-------------------------------- | :-------------------------------------------------------------- |
 | [typescript](./src/bases/typescript.js)         | _all_                             | Naming conventions, consistent imports, import sorting...       |
-| [sonar](./src/bases/sonar.js)                   | `*.{js,jsx,ts,tsx}`               | Keep levels of code complexity sane. (excl test and stories)    |
+| [sonar](./src/bases/testcafe.js)                | `*.testcafe.ts`                   | Common rules for best practices when writing tests for TestCafe |
 | [regexp](./src/bases/regexp.js)                 | `*.{js,jsx,jsx,tsx}`              | Keep regexp consistent and safer.                               |
 | [react](./src/bases/react.js)                   | `*.{jsx,tsx}`                     | Recommendations for react, react-hooks and jsx projects.        |
 | [jest](./src/bases/jest.js)                     | `**/?(*.)+(test).{js,jsx,ts,tsx}` | Catch inconsistencies or error in jest tests.                   |
 | [rtl](./src/bases/rtl.js)                       | `**/?(*.)+(test).{js,jsx,ts,tsx}` | Potential errors / deprecations in react-testing-library tests. |
 | [graphql-schema](./src/bases/graphql-schema.js) | `*.graphql`                       | Ensure validity of graphql schema files.                        |
 | [storybook](./src/bases/storybook.js)           | `*.stories.{ts,tsx,mdx}`          | Potential errors / deprecations in stories.                     |
-| [playwright](./src/bases/playwright.js)         | `**/e2e/**/*.test.{js,ts}`        | Post configure eslint for prettier compatibility.               |
 | [prettier](./src/bases/prettier.js)             | _all_                             | Post configure eslint for prettier compatibility.               |
 
 > **Notes**:
@@ -168,6 +167,12 @@ Generic typescript project, mostly based on
 | Type/Plugin                                                                                                   | Comment                               |
 | :------------------------------------------------------------------------------------------------------------ | :------------------------------------ |
 | [eslint-plugin-testing-library/recommended](https://github.com/testing-library/eslint-plugin-testing-library) | Ease when using react-testing-library |
+
+### Testcafe
+
+| Type/Plugin                                                                                      | Comment                                                  |
+| :----------------------------------------------------------------------------------------------- | :------------------------------------------------------- |
+| [testcafe-community/recommended](https://www.npmjs.com/package/eslint-plugin-testcafe-community) | Rules for best practices when writing tests for TestCafe |
 
 ### Regexp
 

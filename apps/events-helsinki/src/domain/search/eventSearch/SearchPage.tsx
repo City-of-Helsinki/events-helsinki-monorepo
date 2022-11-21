@@ -6,6 +6,7 @@ import {
   getLargeEventCardId,
   useEventListQuery,
   BasicMeta,
+  MAIN_CONTENT_ID,
 } from 'events-helsinki-components';
 import type { QueryEventListArgs } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
@@ -16,7 +17,6 @@ import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
 import EventList from '../../../common-events/components/eventList/EventList';
-import { MAIN_CONTENT_ID } from '../../../constants';
 import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';

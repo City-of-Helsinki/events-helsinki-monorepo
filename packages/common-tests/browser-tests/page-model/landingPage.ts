@@ -1,19 +1,26 @@
 import { screen } from '@testing-library/testcafe';
 import { t } from 'testcafe';
-import { initI18n as i18n } from '../../config/jest/initI18n';
+import { initTestI18n as i18n } from '../../../common-i18n/src';
+import type { AppNamespace } from '../types/app-namespace';
 
 class LandingPage {
   searchText = 'sirkuskoulu';
+  private appNamespace: 'appHobbies' | 'appEvents';
+
+  constructor(appNamespace: AppNamespace) {
+    this.appNamespace = appNamespace;
+  }
 
   public async verify() {
     // eslint-disable-next-line no-console
     console.log('LandingPage: verify');
-    const searchPlaceholderText = i18n.t('home:search.placeholder');
+    const searchPlaceholderText = i18n.t(`home:search.placeholder`);
 
     await t
       .expect(
-        screen.getByRole('heading', { name: i18n.t('appHobbies:search.title') })
-          .exists
+        screen.getByRole('heading', {
+          name: i18n.t(`${this.appNamespace}:search.title`),
+        }).exists
       )
       .ok();
 

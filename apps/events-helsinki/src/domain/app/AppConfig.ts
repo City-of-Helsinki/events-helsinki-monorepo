@@ -1,6 +1,5 @@
 import { EventTypeId } from 'events-helsinki-components';
 import { ROUTES } from '../../constants';
-
 class AppConfig {
   static get cmsGraphqlEndpoint() {
     return getEnvOrError(

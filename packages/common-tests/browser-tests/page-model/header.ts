@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
-import { initI18n as i18n } from '../../config/jest/initI18n';
-import { SUPPORT_LANGUAGES } from '../../src/types';
+import { initTestI18n as i18n } from '../../../common-i18n/src';
+import { SUPPORT_LANGUAGES } from '../../../components/src/constants';
 
 class Header {
   currentLang = SUPPORT_LANGUAGES.FI;
@@ -24,16 +24,16 @@ class Header {
 
     this.setLanguage(lang);
 
-    const languageSelectorButton_screen = screen.getByRole('button', {
+    const languageSelectorButtonScreen = screen.getByRole('button', {
       name: await this.languageSelectorButton.innerText,
     });
-    const languageSelectorItem_screen = screen.getByRole('link', {
+    const languageSelectorItemScreen = screen.getByRole('link', {
       name: await this.languageSelectorItem.innerText,
     });
 
     await t
-      .click(languageSelectorButton_screen)
-      .click(languageSelectorItem_screen);
+      .click(languageSelectorButtonScreen)
+      .click(languageSelectorItemScreen);
 
     await i18n.changeLanguage(lang);
   }

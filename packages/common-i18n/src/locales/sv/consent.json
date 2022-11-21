@@ -1,0 +1,28 @@
+{
+  "groups": {
+    "servicemap": {
+      "title": "SV Palvelukartta",
+      "text": "SV Pääkaupunkiseudun palvelukartta auttaa käyttäjää etsimään tapahtuman kartalta",
+      "expandAriaLabel": "SV Näytä palvelukarttaan liittyvien evästeiden tiedot",
+      "checkboxAriaDescription": "SV Evästeitä käytetään Pääkaupunkiseudun palvelukartan näyttämiseen"
+    },
+    "cookies": {
+      "matomo": "SV Matomo-tilastointijärjestelmän eväste",
+      "linkedevents": "SV Eväste tapahtumien hakemisen valtuuttamiseen",
+      "i18next": "ENG Eväste sivuston kielivalinnan muistamiseen",
+      "servicemap_analytics": "SV Matomo-tilastointijärjestelmän eväste palvelukartalle.",
+      "servicemap_session": "SV Palvelukartan istunto",
+      "servicemap_ga": "SV google-analytiikan eväste palvelukartalle",
+      "wordpress": "En cookie relaterad till driften av Wordpress innehållshanteringssystemet."
+    },
+    "expiration": {
+      "session": "SV Istunto-eväste tuhotaan, kun käyttäjä poistuu sivulta",
+      "year": "SV 1 vuosi",
+      "hour": "SV 1 tunti",
+      "day": "SV 1 päivä",
+      "years": "SV {{ days }} vuotta",
+      "hours": "SV {{ hours }} tuntia",
+      "days": "SV {{ days }} päivää"
+    }
+  }
+}

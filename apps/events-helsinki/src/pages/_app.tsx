@@ -4,7 +4,11 @@ import {
   createInstance as createMatomoInstance,
 } from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
-import { ResetFocus } from 'events-helsinki-components';
+import {
+  EventsCookieConsent,
+  ResetFocus,
+  useCommonTranslation,
+} from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
@@ -59,6 +63,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const eventsConfig = useEventsConfig(eventsApolloClient);
   const router = eventsConfig.router as NextRouter;
   const rhhcConfig = useRHHCConfig(cmsApolloClient, eventsApolloClient);
+  const { t } = useCommonTranslation();
 
   // Unset hidden visibility that was applied to hide the first server render
   // that does not include styles from HDS. HDS applies styling by injecting
@@ -92,7 +97,10 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
                 title={error.title}
               />
             ) : (
-              <Component {...pageProps} />
+              <>
+                <Component {...pageProps} />
+                <EventsCookieConsent appName={t('appEvents:appName')} />
+              </>
             )}
           </MatomoProvider>
         </ApolloProvider>

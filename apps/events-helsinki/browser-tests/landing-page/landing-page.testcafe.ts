@@ -10,5 +10,5 @@ test('Verify header title', async () => {
   const cookieConsentModal = new EventsConsentModal();
   await cookieConsentModal.isOpened();
   await cookieConsentModal.clickAcceptAllCookies();
-  await changeLanguageAndTrySearch();
+  await changeLanguageAndTrySearch('appEvents');
 });

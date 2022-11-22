@@ -132,6 +132,7 @@ jobs:
           NEXT_PUBLIC_MATOMO_SRC_URL: 'piwik.min.js'
           NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
           NEXT_PUBLIC_MATOMO_ENABLED: 0
+          NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
 
       - name: Check browser bundle size limits
         working-directory: apps/hobbies-helsinki

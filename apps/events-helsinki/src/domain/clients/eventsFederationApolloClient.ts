@@ -1,5 +1,7 @@
+import https from 'https';
 import type {
   FieldMergeFunction,
+  HttpOptions,
   NormalizedCacheObject,
   StoreObject,
 } from '@apollo/client';
@@ -22,10 +24,36 @@ import {
 import { useMemo } from 'react';
 import { rewriteInternalURLs } from '../../utils/routerUtils';
 import AppConfig from '../app/AppConfig';
+import { logger } from '../logger';
 
 const eventsFederationApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
 >();
+
+function getHttpLink(uri: string) {
+  let options: HttpOptions = {
+    uri,
+    fetch,
+  };
+
+  // Our review environment can't provide a valid certificate. Hence we allow
+  // the application to be configured so that unauthorized requests are not
+  // rejected. This allows us to test API changes in the review environment.
+  if (
+    AppConfig.allowUnauthorizedRequests &&
+    new URL(uri).protocol === 'https:'
+  ) {
+    logger.info('Allowing unauthorized requests');
+    options = {
+      ...options,
+      fetchOptions: {
+        agent: new https.Agent({ rejectUnauthorized: false }),
+      },
+    };
+  }
+
+  return new HttpLink(options);
+}
 
 const getPageStylePaginator = (merge: FieldMergeFunction) => ({
   // Only ignore page argument in caching to get fetchMore pagination working correctly
@@ -45,10 +73,7 @@ export function createApolloClient() {
       return response;
     });
   });
-  const httpLink = new HttpLink({
-    uri: AppConfig.federationGraphqlEndpoint,
-    fetch,
-  });
+  const httpLink = getHttpLink(AppConfig.federationGraphqlEndpoint);
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {

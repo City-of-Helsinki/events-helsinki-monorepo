@@ -58,23 +58,23 @@ export const FEEDBACK_LINKS = {
 export const DEFAULT_HEADER_MENU_NAME: Record<Language, string> = {
   fi:
     process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_FI ??
-    'Hobbies Helsinki Header FI',
+    'Sports Helsinki Header FI',
   en:
     process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_EN ??
-    'Hobbies Helsinki Header EN',
+    'Sports Helsinki Header EN',
   sv:
     process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_SV ??
-    'Hobbies Helsinki Header SV',
+    'Sports Helsinki Header SV',
 };
 
 export const DEFAULT_FOOTER_MENU_NAME: Record<Language, string> = {
   fi:
     process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_FI ??
-    'Hobbies Helsinki Footer FI',
+    'Sports Helsinki Footer FI',
   en:
     process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_EN ??
-    'Hobbies Helsinki Footer EN',
+    'Sports Helsinki Footer EN',
   sv:
     process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_SV ??
-    'Hobbies Helsinki Footer SV',
+    'Sports Helsinki Footer SV',
 };

@@ -1,3 +1,4 @@
+import { useAppHobbiesTranslation } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect } from 'react';
@@ -14,6 +15,7 @@ import SearchPage from '../../domain/search/eventSearch/SearchPage';
 import { getLocaleOrError } from '../../utils/routerUtils';
 
 export default function Search() {
+  const { t: tAppHobbies } = useAppHobbiesTranslation();
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
@@ -43,7 +45,7 @@ export default function Search() {
         content={
           <SearchPage
             SearchComponent={AdvancedSearch}
-            pageTitle={'eventSearch.title'}
+            pageTitle={tAppHobbies('appHobbies:search.pageTitle')}
           />
         }
         footer={<FooterSection />}

@@ -5,12 +5,14 @@
     "titleCoursesCategories": "Popular courses categories"
   },
   "home": {
-    "courseSearch": {
-      "placeholder": "Enter a keyword, eg. French or cooking",
-      "title": "What are you looking for?"
+    "search": {
+      "title": "Find hobbies"
     }
   },
   "search": {
-    "title": "Find hobbies"
+    "pageTitle": "Find hobbies",
+    "search": {
+      "placeholder": "Enter a keyword, eg. French or cooking"
+    }
   }
 }

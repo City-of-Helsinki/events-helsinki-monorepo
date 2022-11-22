@@ -51,7 +51,7 @@ export default function LandingPageSearchForm({
 
   return (
     <div className={classnames(className, styles.landingPageSearch)}>
-      <h2>{tAppHobbies('appHobbies:search.title')}</h2>
+      <h2>{tAppHobbies('appHobbies:home.search.title')}</h2>
       <div className={styles.searchRow}>
         <div className={styles.autosuggestWrapper}>
           <SearchAutosuggest

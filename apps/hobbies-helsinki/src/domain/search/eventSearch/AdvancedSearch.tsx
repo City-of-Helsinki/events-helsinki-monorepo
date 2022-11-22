@@ -6,7 +6,6 @@ import {
   DateSelector,
   MultiSelectDropdown,
   RangeDropdown,
-  useAppEventsTranslation,
   useAppHobbiesTranslation,
   useLocale,
 } from 'events-helsinki-components';
@@ -260,7 +259,7 @@ const AdvancedSearch: React.FC<Props> = ({
       <ContentContainer className={styles.contentContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.searchWrapper}>
-            <h2>{tAppHobbies('appHobbies:home.courseSearch.title')}</h2>
+            <h2>{t('search.labelSearchField')}</h2>
             <div className={styles.rowWrapper}>
               <div className={classNames(styles.row, styles.autoSuggestRow)}>
                 <div>
@@ -268,7 +267,9 @@ const AdvancedSearch: React.FC<Props> = ({
                     name="search"
                     onChangeSearchValue={setAutosuggestInput}
                     onOptionClick={handleMenuOptionClick}
-                    placeholder={t('search.placeholder')}
+                    placeholder={tAppHobbies(
+                      'appHobbies:search.search.placeholder'
+                    )}
                     searchValue={autosuggestInput}
                   />
                 </div>

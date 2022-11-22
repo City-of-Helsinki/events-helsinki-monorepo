@@ -5,12 +5,14 @@
     "titleEventsCategories": "Popular events categories"
   },
   "home": {
-    "eventSearch": {
-      "placeholder": "Enter a keyword, eg rock or yoga",
-      "title": "What are you looking for?"
+    "search": {
+      "title": "Find something to do"
     }
   },
   "search": {
-    "title": "Find something to do"
+    "pageTitle": "Find events",
+    "search": {
+      "placeholder": "Enter a keyword, eg rock or yoga"
+    }
   }
 }

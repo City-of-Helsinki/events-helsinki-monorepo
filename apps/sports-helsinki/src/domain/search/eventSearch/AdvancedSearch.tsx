@@ -6,8 +6,7 @@ import {
   DateSelector,
   MultiSelectDropdown,
   RangeDropdown,
-  useAppEventsTranslation,
-  useAppHobbiesTranslation,
+  useAppSportsTranslation,
   useLocale,
 } from 'events-helsinki-components';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
@@ -57,7 +56,7 @@ const AdvancedSearch: React.FC<Props> = ({
   'data-testid': dataTestId,
 }) => {
   const { t } = useTranslation('search');
-  const { t: tAppHobbies } = useAppHobbiesTranslation();
+  const { t: tAppSports } = useAppSportsTranslation();
   const locale = useLocale();
   const router = useRouter();
   const params: { place?: string } = router.query;
@@ -260,7 +259,7 @@ const AdvancedSearch: React.FC<Props> = ({
       <ContentContainer className={styles.contentContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.searchWrapper}>
-            <h2>{tAppHobbies('appHobbies:search.title')}</h2>
+            <h2>{tAppSports('appSports:search.title')}</h2>
             <div className={styles.rowWrapper}>
               <div className={classNames(styles.row, styles.autoSuggestRow)}>
                 <div>

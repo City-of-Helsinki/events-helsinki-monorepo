@@ -3,9 +3,9 @@ import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import {
   DateSelector,
   MobileDateSelector,
+  useAppSportsTranslation,
   useLocale,
   useHomeTranslation,
-  useAppHobbiesTranslation,
 } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
@@ -46,12 +46,12 @@ export default function LandingPageSearchForm({
   handleMenuOptionClick,
 }: LandingPageSearchFormProps) {
   const { t } = useHomeTranslation();
-  const { t: tAppHobbies } = useAppHobbiesTranslation();
+  const { t: tAppSports } = useAppSportsTranslation();
   const locale = useLocale();
 
   return (
     <div className={classnames(className, styles.landingPageSearch)}>
-      <h2>{tAppHobbies('appHobbies:search.title')}</h2>
+      <h2>{tAppSports('appSports:search.title')}</h2>
       <div className={styles.searchRow}>
         <div className={styles.autosuggestWrapper}>
           <SearchAutosuggest

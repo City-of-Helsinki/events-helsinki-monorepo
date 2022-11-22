@@ -1,8 +1,8 @@
 import {
-  useAppHobbiesTranslation,
   useFooterTranslation,
   useLocale,
   resetFocusId,
+  useAppSportsTranslation,
 } from 'events-helsinki-components';
 import { Footer, Link } from 'hds-react';
 import type { FunctionComponent } from 'react';
@@ -16,7 +16,7 @@ import FooterCategories from './FooterCategories';
 
 const FooterSection: FunctionComponent = () => {
   const { t } = useFooterTranslation();
-  const { t: tAppHobbies } = useAppHobbiesTranslation();
+  const { t: tAppSports } = useAppSportsTranslation();
   const locale = useLocale();
 
   const { data } = useMenuQuery({
@@ -32,11 +32,11 @@ const FooterSection: FunctionComponent = () => {
   };
 
   return (
-    <Footer title={tAppHobbies('appHobbies:appName')} className={styles.footer}>
+    <Footer title={tAppSports('appSports:appName')} className={styles.footer}>
       <Footer.Navigation>
         <Footer.Item
           as={Link}
-          label={tAppHobbies('appHobbies:footer.searchHobbies')}
+          label={tAppSports('appSports:footer.searchHobbies')}
           href={getI18nPath(ROUTES.SEARCH, locale)}
         />
       </Footer.Navigation>

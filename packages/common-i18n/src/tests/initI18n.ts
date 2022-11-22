@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next';
 
 import appEvents_en from '../locales/en/appEvents.json';
 import appHobbies_en from '../locales/en/appHobbies.json';
+import appSports_en from '../locales/en/appSports.json';
 import cms_en from '../locales/en/cms.json';
 import common_en from '../locales/en/common.json';
 import consent_en from '../locales/en/consent.json';
@@ -14,6 +15,7 @@ import notFound_en from '../locales/en/notFound.json';
 import search_en from '../locales/en/search.json';
 import appEvents from '../locales/fi/appEvents.json';
 import appHobbies from '../locales/fi/appHobbies.json';
+import appSports from '../locales/fi/appSports.json';
 import cms from '../locales/fi/cms.json';
 import common from '../locales/fi/common.json';
 import consent from '../locales/fi/consent.json';
@@ -24,6 +26,7 @@ import notFound from '../locales/fi/notFound.json';
 import search from '../locales/fi/search.json';
 import appEvents_sv from '../locales/sv/appEvents.json';
 import appHobbies_sv from '../locales/sv/appHobbies.json';
+import appSports_sv from '../locales/sv/appSports.json';
 import cms_sv from '../locales/sv/cms.json';
 import common_sv from '../locales/sv/common.json';
 import consent_sv from '../locales/sv/consent.json';
@@ -37,6 +40,7 @@ export const translations = {
   cms,
   common,
   appHobbies,
+  appSports,
   appEvents,
   consent,
   event,
@@ -62,6 +66,7 @@ export const config = {
       common: common_en,
       appEvents: appEvents_en,
       appHobbies: appHobbies_en,
+      appSports: appSports_en,
       consent: consent_en,
       event: event_en,
       footer: footer_en,
@@ -74,6 +79,7 @@ export const config = {
       common: common_sv,
       appEvents: appEvents_sv,
       appHobbies: appHobbies_sv,
+      appSports: appSports_sv,
       consent: consent_sv,
       event: event_sv,
       footer: footer_sv,

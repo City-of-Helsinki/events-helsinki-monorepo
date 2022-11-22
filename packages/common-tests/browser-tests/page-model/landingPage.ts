@@ -5,7 +5,7 @@ import type { AppNamespace } from '../types/app-namespace';
 
 class LandingPage {
   searchText = 'sirkuskoulu';
-  private appNamespace: 'appHobbies' | 'appEvents';
+  private appNamespace: 'appHobbies' | 'appEvents' | 'appSports';
 
   constructor(appNamespace: AppNamespace) {
     this.appNamespace = appNamespace;

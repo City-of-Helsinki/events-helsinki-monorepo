@@ -1,1 +1,1 @@
-export type AppNamespace = 'appHobbies' | 'appEvents';
+export type AppNamespace = 'appHobbies' | 'appEvents' | 'appSports';

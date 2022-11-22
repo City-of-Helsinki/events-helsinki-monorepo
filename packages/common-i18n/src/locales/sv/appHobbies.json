@@ -5,12 +5,14 @@
     "titleCoursesCategories": "Populära hobbykategorier"
   },
   "home": {
-    "courseSearch": {
-      "placeholder": "Ange ett sökord, t. ex. rock eller yoga",
-      "title": "Vad letar du efter?"
+    "search": {
+      "title": "Hitta hobbyer"
     }
   },
   "search": {
-    "title": "Hitta hobbyer"
+    "pageTitle": "Hitta hobbyer",
+    "search": {
+      "placeholder": "Ange ett sökord, t. ex. rock eller yoga"
+    }
   }
 }

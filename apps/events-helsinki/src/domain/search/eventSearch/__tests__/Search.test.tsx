@@ -96,7 +96,7 @@ it('should clear all filters and search field', async () => {
   expect(router).toMatchObject({ pathname, query: { text: 'jazz' } });
 
   const searchInput = screen.getByPlaceholderText(
-    'Kirjoita hakusana, esim. ranska tai ruoanlaitto'
+    'Kirjoita hakusana, esim. rock tai jooga'
   );
 
   await userEvent.click(

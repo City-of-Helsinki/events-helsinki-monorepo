@@ -5,12 +5,14 @@
     "titleCoursesCategories": "Suositut harrastuskategoriat"
   },
   "home": {
-    "courseSearch": {
-      "placeholder": "Kirjoita hakusana, esim. ranska tai ruoanlaitto",
-      "title": "Mitä etsit?"
+    "search": {
+      "title": "Löydä harrastuksia"
     }
   },
   "search": {
-    "title": "Löydä harrastuksia"
+    "pageTitle": "Löydä harrastuksia",
+    "search": {
+      "placeholder": "Kirjoita hakusana, esim. ranska tai ruoanlaitto"
+    }
   }
 }

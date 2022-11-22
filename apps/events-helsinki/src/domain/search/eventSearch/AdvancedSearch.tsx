@@ -244,7 +244,7 @@ const AdvancedSearch: React.FC<Props> = ({
       <ContentContainer className={styles.contentContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.searchWrapper}>
-            <h2>{tAppEvents('appEvents:home.eventSearch.title')}</h2>
+            <h2>{t('search.labelSearchField')}</h2>
             <div className={styles.rowWrapper}>
               <div className={classNames(styles.row, styles.autoSuggestRow)}>
                 <div>
@@ -252,7 +252,9 @@ const AdvancedSearch: React.FC<Props> = ({
                     name="search"
                     onChangeSearchValue={setAutosuggestInput}
                     onOptionClick={handleMenuOptionClick}
-                    placeholder={t('search.placeholder')}
+                    placeholder={tAppEvents(
+                      'appEvents:search.search.placeholder'
+                    )}
                     searchValue={autosuggestInput}
                   />
                 </div>

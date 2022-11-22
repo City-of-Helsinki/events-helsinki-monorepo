@@ -260,7 +260,7 @@ const AdvancedSearch: React.FC<Props> = ({
       <ContentContainer className={styles.contentContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.searchWrapper}>
-            <h2>{tAppHobbies('appHobbies:search.title')}</h2>
+            <h2>{tAppHobbies('appHobbies:home.courseSearch.title')}</h2>
             <div className={styles.rowWrapper}>
               <div className={classNames(styles.row, styles.autoSuggestRow)}>
                 <div>

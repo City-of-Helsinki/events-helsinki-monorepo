@@ -32,7 +32,7 @@ on:
 
 env:
   CI: true
-  NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.kuva.hel.ninja/
+  NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.test.kuva.hel.ninja/
   NEXT_PUBLIC_CMS_ORIGIN: https://tapahtumat.hkih.stage.geniem.io
   NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
 

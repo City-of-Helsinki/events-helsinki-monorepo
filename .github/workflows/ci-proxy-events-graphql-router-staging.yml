@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'proxies/events-graphql-federation/subgraphs/**'
+      - '.github/workflows/ci-proxy-events-graphql-router-staging.yml'
       - '!**/README.md'
 
 env:
@@ -21,7 +22,7 @@ env:
   K8S_REQUEST_RAM: 150Mi
   K8S_LIMIT_CPU: 200m
   K8S_LIMIT_RAM: 400Mi
-  SERVICE_PORT: 8088
+  SERVICE_PORT: 4000
   K8S_LIVENESS_PATH: /health
   K8S_READINESS_PATH: /health
   REPO_NAME: ${{ github.event.repository.name }}
@@ -64,7 +65,8 @@ jobs:
       - name: Deploy ${{ matrix.service}}
         uses: andersinno/kolga-deploy-action@v2
         env:
-          ENVIRONMENT_URL: https://events-graphql-federation-${matrix.service}.${{env.BASE_DOMAIN}}
+          K8S_NAMESPACE: events-helsinki-monorepo-federation-router-${{matrix.service}}-qa
+          ENVIRONMENT_URL: https://events-graphql-federation-${{matrix.service}}.${{env.BASE_DOMAIN}}
           ENVIRONMENT_SLUG: router-${{ matrix.service }}
           K8S_SECRET_FEDERATION_CMS_ROUTING_URL: ${{ matrix.FEDERATION_CMS_ROUTING_URL }}
           K8S_SECRET_FEDERATION_EVENTS_ROUTING_URL: ${{ matrix.FEDERATION_EVENTS_ROUTING_URL }}

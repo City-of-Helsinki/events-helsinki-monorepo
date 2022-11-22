@@ -1,15 +1,15 @@
-import { useSearchTranslation } from 'events-helsinki-components';
+import { useAppEventsTranslation } from 'events-helsinki-components';
 import React from 'react';
 
 import AdvancedSearch from './AdvancedSearch';
 import SearchPage from './SearchPage';
 
 const EventSearchPageContainer: React.FC = () => {
-  const { t } = useSearchTranslation();
+  const { t: tAppEvents } = useAppEventsTranslation();
   return (
     <SearchPage
       SearchComponent={AdvancedSearch}
-      pageTitle={t('search:title')}
+      pageTitle={tAppEvents('appEvents:search.pageTitle')}
     />
   );
 };

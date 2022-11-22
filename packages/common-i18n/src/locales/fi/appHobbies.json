@@ -7,10 +7,10 @@
   "home": {
     "courseSearch": {
       "placeholder": "Kirjoita hakusana, esim. ranska tai ruoanlaitto",
-      "title": "Löydä harrastuksia"
+      "title": "Mitä etsit?"
     }
   },
   "search": {
-    "title": "Löydä harrastus"
+    "title": "Löydä harrastuksia"
   }
 }

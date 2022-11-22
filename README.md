@@ -12,6 +12,9 @@
   <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
     <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-sports-helsinki-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
   </a>
+  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
+    <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-proxy-events-graphql-router-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
+  </a>
   <a aria-label="Codacy grade" href="https://www.codacy.com/gh/City-of-Helsinki/events-helsinki-monorepo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=City-of-Helsinki/events-helsinki-monorepo&amp;utm_campaign=Badge_Grade">
     <img alt="Codacy grade" src="https://img.shields.io/codacy/grade/dff9c944af284a0fad4e165eb1727467?logo=codacy&style=flat-square&labelColor=000&label=Codacy">
   </a>

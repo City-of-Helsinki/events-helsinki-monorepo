@@ -1,0 +1,47 @@
+import classNames from 'classnames';
+import { Container, isTestEnv } from 'events-helsinki-components';
+import { Koros } from 'hds-react';
+import React from 'react';
+
+import Icon404 from '../../assets/icons/Icon404';
+import styles from './errorHero.module.scss';
+
+interface Props {
+  children: React.ReactNode;
+  smallMargin?: boolean;
+  text: string;
+  title: string;
+}
+
+const NotFound: React.FC<Props> = ({
+  children,
+  smallMargin = false,
+  text,
+  title,
+}) => {
+  return (
+    <>
+      <div className={styles.errorHero}>
+        <Container>
+          <Icon404 className={styles.icon} />
+          <h1>{title}</h1>
+          <p>{text}</p>
+          <div className={styles.linkWrapper}>{children}</div>
+        </Container>
+      </div>
+
+      {!isTestEnv && (
+        /* istanbul ignore next */
+        <Koros
+          className={classNames(styles.koros, {
+            [styles.smallMargin]: smallMargin,
+          })}
+          flipHorizontal={true}
+          type="basic"
+        />
+      )}
+    </>
+  );
+};
+
+export default NotFound;

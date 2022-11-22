@@ -9,6 +9,10 @@
       "path": "apps/events-helsinki"
     },
     {
+      "name": "sports-helsinki",
+      "path": "apps/sports-helsinki"
+    },
+    {
       "name": "common-i18n",
       "path": "packages/common-i18n"
     },
@@ -44,7 +48,9 @@
     "eslint.workingDirectories": [
       "./apps/hobbies-helsinki",
       "./apps/events-helsinki",
+      "./apps/sports-helsinki",
       "./packages/common-i18n",
+      "./packages/common-tests",
       "./packages/eslint-config-bases",
       "./packages/components"
     ]

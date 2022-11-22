@@ -43,13 +43,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        service: ['events', 'hobbies']
+        service: ['events', 'hobbies', 'sports']
         include:
           - service: 'events'
             FEDERATION_CMS_ROUTING_URL: https://tapahtumat.hkih.stage.geniem.io/graphql
             FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
             FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
           - service: 'hobbies'
+            FEDERATION_CMS_ROUTING_URL: https://harrastus.hkih.stage.geniem.io/graphql
+            FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
+            FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
+          - service: 'sports'
             FEDERATION_CMS_ROUTING_URL: https://harrastus.hkih.stage.geniem.io/graphql
             FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
             FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search

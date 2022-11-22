@@ -1,0 +1,33 @@
+@import 'src/styles/breakpoints';
+
+.filterSummary {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+  flex-wrap: wrap;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .clearButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-left: var(--spacing-s);
+    font-size: var(--fontsize-heading-xxs);
+    font-weight: 500;
+    border: 2px solid transparent;
+    text-align: left;
+
+    &:focus {
+      outline: 2px solid var(--color-primary-black);
+      outline-offset: 0.25rem;
+    }
+
+    svg {
+      margin-left: var(--spacing-3-xs);
+    }
+  }
+}

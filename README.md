@@ -6,6 +6,12 @@
   <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
     <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-hobbies-helsinki-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
   </a>
+  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
+    <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-events-helsinki-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
+  </a>
+  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
+    <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-sports-helsinki-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
+  </a>
   <a aria-label="Codacy grade" href="https://www.codacy.com/gh/City-of-Helsinki/events-helsinki-monorepo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=City-of-Helsinki/events-helsinki-monorepo&amp;utm_campaign=Badge_Grade">
     <img alt="Codacy grade" src="https://img.shields.io/codacy/grade/dff9c944af284a0fad4e165eb1727467?logo=codacy&style=flat-square&labelColor=000&label=Codacy">
   </a>
@@ -33,7 +39,8 @@
 │
 ├── apps
 │   ├── hobbies-helsinki  (i18n, ssr, api, jest)
-│   └── events-helsinki   ("clone of hobbies-helsinki")
+│   ├── events-helsinki   ("clone of hobbies-helsinki")
+│   └── sports-helsinki   ("clone of hobbies-helsinki")
 └── packages
     ├── common-i18n         (locales...)
     ├── components          (common event components, utils and hooks, storybook, jest)
@@ -48,6 +55,7 @@
 
 - [apps/hobbies-helsinki](./apps/hobbies-helsinki): SSR, i18n, sass, graphQL, rest... [README](./apps/hobbies-helsinki/README.md) | [DEMO](https://harrastukset.test.kuva.hel.ninja) | [CHANGELOG](./apps/hobbies-helsinki/CHANGELOG.md)
 - [apps/events-helsinki](./apps/events-helsinki): Clone of Hobbies (SSR, i18n, sass, graphQL, rest...) [README](./apps/events-helsinki/README.md) | [DEMO](https://tapahtumat-mono.test.kuva.hel.ninja) | [CHANGELOG](./apps/events-helsinki/CHANGELOG.md)
+- [apps/sports-helsinki](./apps/sports-helsinki): Clone of Hobbies (SSR, i18n, sass, graphQL, rest...) [README](./apps/sports-helsinki/README.md) | [DEMO](https://liikunta-mono.test.kuva.hel.ninja) | [CHANGELOG](./apps/sports-helsinki/CHANGELOG.md)
 
 > Apps should not depend on apps, they can depend on packages
 

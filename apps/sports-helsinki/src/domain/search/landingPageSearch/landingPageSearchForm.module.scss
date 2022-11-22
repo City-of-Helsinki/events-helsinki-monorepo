@@ -1,0 +1,95 @@
+@import 'src/styles/breakpoints';
+
+.searchRow {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  align-items: center;
+  position: relative;
+
+  @include respond-above(m) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1.25rem;
+
+    grid-template-columns: 6fr 6fr;
+  }
+}
+
+.linkRow {
+  display: flex;
+  justify-content: flex-end;
+
+  @include respond-below(m) {
+    justify-content: start;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--fontsize-body-xl);
+    padding: var(--spacing-4-xs) 0;
+    padding-left: var(--spacing-2-xs);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+  a:focus-visible {
+    outline: 2px solid white;
+  }
+}
+
+.autosuggestWrapper {
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.dateAndButtonWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include respond-above(m) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1.25rem;
+    height: fit-content;
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.dateSelectorWrapper {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  @include respond-above(s) {
+    grid-column-start: 2;
+  }
+
+  @include respond-above(m) {
+    grid-column-start: 1;
+  }
+}
+.desktopDateSelector {
+  min-width: 230px;
+  @include respond-below(s) {
+    display: none;
+  }
+}
+
+.buttonWrapper {
+  width: 100%;
+  margin-bottom: 1.25rem;
+
+  button {
+    span {
+      color: white;
+    }
+  }
+}

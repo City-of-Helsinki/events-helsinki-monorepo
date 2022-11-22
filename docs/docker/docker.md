@@ -17,7 +17,7 @@ and build time (taking advantage of buildx cache).
 │   ├── assets
 │   └── locales
 ├── .dockerignore
-├── docker-compose.hobbies.yml  (specific for hobbies-helsinki)
+├── docker-compose.hobbies.yml     (specific for hobbies-helsinki)
 ├── docker-compose.yml             (optional: general services like postgresql...)
 └── Dockerfile                     (multistage build for all the apps)
 ```

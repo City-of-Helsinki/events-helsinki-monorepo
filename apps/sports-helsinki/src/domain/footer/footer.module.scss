@@ -1,0 +1,10 @@
+.footer {
+  overflow: hidden;
+  margin-top: calc(var(--spacing-xl) * -1);
+  position: relative;
+  --footer-background: var(--color-engel-medium-light) !important;
+  a,
+  a:visited {
+    color: var(--color-black-90);
+  }
+}

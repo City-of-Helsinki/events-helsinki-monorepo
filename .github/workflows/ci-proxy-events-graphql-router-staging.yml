@@ -54,7 +54,7 @@ jobs:
             FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
             FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
           - service: 'sports'
-            FEDERATION_CMS_ROUTING_URL: https://harrastus.hkih.stage.geniem.io/graphql
+            FEDERATION_CMS_ROUTING_URL: https://liikunta.hkih.stage.geniem.io/graphql
             FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
             FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
 

@@ -65,7 +65,7 @@ export default function useRHHCConfig() {
         '/shared-assets/images/event_placeholder_C.jpg',
         '/shared-assets/images/event_placeholder_D.jpg',
       ],
-      siteName: commonTranslation('appHobbies:appName'),
+      siteName: commonTranslation('appSports:appName'),
       currentLanguageCode: locale.toUpperCase(),
       apolloClient,
       eventsApolloClient: apolloClient,

@@ -97,7 +97,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
             ) : (
               <>
                 <Component {...pageProps} />
-                <EventsCookieConsent appName={t('appHobbies:appName')} />
+                <EventsCookieConsent appName={t('appSports:appName')} />
               </>
             )}
           </MatomoProvider>

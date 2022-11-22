@@ -10,5 +10,5 @@ test('Verify header title', async () => {
   const cookieConsentModal = new HobbiesConsentModal();
   await cookieConsentModal.isOpened();
   await cookieConsentModal.clickAcceptAllCookies();
-  await changeLanguageAndTrySearch('appHobbies');
+  await changeLanguageAndTrySearch('appSports');
 });

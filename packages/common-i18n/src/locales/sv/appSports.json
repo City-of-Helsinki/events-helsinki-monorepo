@@ -1,0 +1,16 @@
+{
+  "appName": "Idrott och motion Helsingfors",
+  "footer": {
+    "searchHobbies": "Motion",
+    "titleCoursesCategories": "Populära kategorier"
+  },
+  "home": {
+    "courseSearch": {
+      "placeholder": "Ange ett sökord, t. ex. simhall eller yoga",
+      "title": "Hitta motion"
+    }
+  },
+  "search": {
+    "title": "Hitta motion"
+  }
+}

@@ -7,10 +7,10 @@
   "home": {
     "courseSearch": {
       "placeholder": "Ange ett sökord, t. ex. rock eller yoga",
-      "title": "Hitta hobbyer"
+      "title": "Vad letar du efter?"
     }
   },
   "search": {
-    "title": "Hitta hobby"
+    "title": "Hitta hobbyer"
   }
 }

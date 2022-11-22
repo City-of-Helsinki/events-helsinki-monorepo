@@ -31,7 +31,7 @@ on:
       - '.github/workflows/**'
 env:
   CI: true
-  NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.kuva.hel.ninja/
+  NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.kuva.hel.ninja/
   NEXT_PUBLIC_CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
   NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
 

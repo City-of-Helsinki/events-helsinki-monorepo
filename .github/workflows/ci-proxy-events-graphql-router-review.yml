@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'proxies/events-graphql-federation/subgraphs/**'
+      - '.github/workflows/ci-proxy-events-graphql-router-review.yml'
       - '!**/README.md'
 
   pull_request:
@@ -15,6 +16,7 @@ on:
       - reopened
     paths:
       - 'proxies/events-graphql-federation/subgraphs/**'
+      - '.github/workflows/ci-proxy-events-graphql-router-review.yml'
       - '!**/README.md'
 
 env:

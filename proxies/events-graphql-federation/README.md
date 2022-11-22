@@ -6,6 +6,14 @@ The Events GraphQL Federation is a project for a Apollo federation supergraph (a
 
 Apollo's Supergraph-demo repository: https://github.com/apollographql/supergraph-demo/
 
+## Servers
+
+### Staging
+
+- Hobbies-Helsinki: https://events-graphql-federation-hobbies.test.kuva.hel.ninja/
+- Events-Helsinki: https://events-graphql-federation-events.test.kuva.hel.ninja/
+- Sports-Helsinki: https://events-graphql-federation-sports.test.kuva.hel.ninja/
+
 ## Local development
 
 ### Prerequisites
@@ -46,6 +54,7 @@ In the `package.json` of the root in the monorepo, there is a script that can be
   "scripts": {
     "docker:graphql-router:hobbies:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
     "docker:graphql-router:events:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:sports:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://liikunta.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
   }
 ```
 

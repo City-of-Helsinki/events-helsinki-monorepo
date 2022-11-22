@@ -1,0 +1,56 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/utils';
+@import 'src/styles/variables';
+
+$mainBackground: var(--color-theme-background);
+
+.layout {
+  position: relative;
+
+  .main {
+    overflow: hidden;
+    .sectionHero {
+      height: 75vh;
+      max-height: 900px;
+      background-position: 50%;
+    }
+
+    .highhighlight {
+      position: relative;
+    }
+
+    .sectionSearch {
+      .sectionSearchContent {
+        position: relative;
+      }
+    }
+
+    .sectionCollectionsFirst {
+      background-color: $mainBackground;
+    }
+
+    .sectionCollectionsLast {
+      background-color: var(--color-black-5);
+      padding-bottom: 120px;
+    }
+
+    .korosBottomHero {
+      fill: var(--color-white) !important;
+    }
+  }
+}
+
+.korosTopCollectionsFirst,
+.korosBottomCollectionsFirst,
+.korosTopCollectionsLast,
+.korosBottomCollectionsLast {
+  fill: var(--color-white) !important;
+}
+
+.korosBottomCollectionsLast {
+  bottom: -60px !important;
+}
+
+.korosTopCollectionsRest {
+  fill: $mainBackground !important;
+}

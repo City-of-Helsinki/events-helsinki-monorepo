@@ -1,0 +1,35 @@
+@import 'fonts';
+
+html,
+#__next,
+main {
+  height: 100%;
+  color: var(--color-black-90);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: $font-family-base;
+  --menu-item-background-color-highlighted: var(--color-coat-of-arms-dark);
+}
+
+.pageLayout {
+  row-gap: 0 !important;
+}
+
+:root {
+  --color-theme-background: var(--color-fog-medium-light);
+  --color-primary-black: var(--color-black-90);
+  --color-secondary-link: var(--color-coat-of-arms-dark);
+  --color-link-show-all: var(--color-coat-of-arms-dark);
+  --color-input-light: var(--color-fog-light);
+  --color-input: var(--color-fog);
+  --color-input-dark: var(--color-coat-of-arms-dark);
+  --color-input-selected-text: var(--color-black-90);
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

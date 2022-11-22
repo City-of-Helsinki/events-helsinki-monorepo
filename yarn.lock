@@ -9845,13 +9845,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:5.1.0":
-  version: 5.1.0
-  resolution: "chalk@npm:5.1.0"
-  checksum: e5e974b32fcf5674c9a9ed1a6782412a57c7b7dd5737bdf5490e3a44740b6a0b47de04a3afe9c73f7b91c04e009e992361658c7a331893ff20e92de1ff007734
-  languageName: node
-  linkType: hard
-
 "chalk@npm:^1.0.0, chalk@npm:^1.1.3":
   version: 1.1.3
   resolution: "chalk@npm:1.1.3"
@@ -13281,7 +13274,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.26.0"
     babel-eslint: "npm:^10.1.0"
     babel-jest: "npm:^28.1.0"
-    chalk: "npm:5.1.0"
+    chalk: "npm:^4.1.2"
     classnames: "npm:^2.3.1"
     copy-to-clipboard: "npm:^3.3.1"
     cross-env: "npm:7.0.3"
@@ -15452,7 +15445,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^5.26.0"
     babel-eslint: "npm:^10.1.0"
     babel-jest: "npm:^28.1.0"
-    chalk: "npm:5.1.0"
+    chalk: "npm:^4.1.2"
     classnames: "npm:^2.3.1"
     copy-to-clipboard: "npm:^3.3.1"
     cross-env: "npm:7.0.3"

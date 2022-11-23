@@ -39,7 +39,7 @@ const FooterCategories: FunctionComponent = () => {
     t,
     CATEGORY_CATALOG.Course.default
   );
-  const footerTitle = t('appSports:footer.titleCoursesCategories');
+  const footerTitle = t(`appSports:footer.titleSportsCategories`);
 
   return (
     <div className={styles.topFooterWrapper}>

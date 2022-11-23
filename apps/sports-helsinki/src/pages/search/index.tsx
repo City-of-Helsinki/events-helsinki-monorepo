@@ -1,3 +1,4 @@
+import { useAppSportsTranslation } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect } from 'react';
@@ -16,6 +17,7 @@ export default function Search() {
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
+  const { t: tAppSports } = useAppSportsTranslation();
 
   useEffect(() => {
     const listElement = listRef.current;
@@ -42,7 +44,7 @@ export default function Search() {
         content={
           <SearchPage
             SearchComponent={SimpleVenueSearch}
-            pageTitle={'eventSearch.title'}
+            pageTitle={tAppSports('appSports:search.pageTitle')}
           />
         }
         footer={<FooterSection />}

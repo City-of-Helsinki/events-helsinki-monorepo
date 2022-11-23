@@ -1,10 +1,6 @@
 import type { ParsedUrlQueryInput } from 'querystring';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
-import {
-  buildQueryFromObject,
-  useAppSportsTranslation,
-  useLocale,
-} from 'events-helsinki-components';
+import { buildQueryFromObject, useLocale } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -24,7 +20,6 @@ const SimpleVenueSearch: React.FC<{
   'data-testid'?: string;
 }> = ({ scrollToResultList, 'data-testid': dataTestId }) => {
   const { t } = useTranslation('search');
-  const { t: tAppSports } = useAppSportsTranslation();
   const locale = useLocale();
   const router = useRouter();
 
@@ -91,7 +86,7 @@ const SimpleVenueSearch: React.FC<{
       <ContentContainer className={styles.contentContainer}>
         <form onSubmit={handleSubmit}>
           <div className={styles.searchWrapper}>
-            <h2>{tAppSports('appSports:search.title')}</h2>
+            <h2>{t('search.labelSearchField')}</h2>
             <div className={styles.rowWrapper}>
               <div>
                 <SearchAutosuggest

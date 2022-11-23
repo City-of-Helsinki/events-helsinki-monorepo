@@ -36,7 +36,7 @@ const FooterSection: FunctionComponent = () => {
       <Footer.Navigation>
         <Footer.Item
           as={Link}
-          label={tAppSports('appSports:footer.searchHobbies')}
+          label={tAppSports('appSports:footer.searchSports')}
           href={getI18nPath(ROUTES.SEARCH, locale)}
         />
       </Footer.Navigation>

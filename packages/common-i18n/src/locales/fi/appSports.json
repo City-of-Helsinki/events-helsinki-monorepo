@@ -1,16 +1,18 @@
 {
   "appName": "Liikunta",
   "footer": {
-    "searchHobbies": "Liikunta haku",
-    "titleCoursesCategories": "Suositut liikuntakategoriat"
+    "searchSports": "Liikunta haku",
+    "titleSportsCategories": "Suositut liikuntakategoriat"
   },
   "home": {
-    "courseSearch": {
-      "placeholder": "Kirjoita hakusana, esim. ranska tai ruoanlaitto",
+    "search": {
       "title": "Löydä liikuntaa"
     }
   },
   "search": {
-    "title": "Löydä liikuntaa"
+    "pageTitle": "Löydä liikuntaa",
+    "search": {
+      "placeholder": "Kirjoita hakusana, esim. ranska tai ruoanlaitto"
+    }
   }
 }

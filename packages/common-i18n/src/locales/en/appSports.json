@@ -1,16 +1,18 @@
 {
   "appName": "Sports",
   "footer": {
-    "searchHobbies": "Sports",
-    "titleCoursesCategories": "Popular sports categories"
+    "searchSports": "Sports",
+    "titleSportsCategories": "Popular sports categories"
   },
   "home": {
-    "courseSearch": {
-      "placeholder": "Enter a keyword, eg. swimming hall or yoga",
+    "search": {
       "title": "Search for sports"
     }
   },
   "search": {
-    "title": "Find sport"
+    "pageTitle": "Find sport",
+    "search": {
+      "placeholder": "Enter a keyword, eg. swimming hall or yoga"
+    }
   }
 }

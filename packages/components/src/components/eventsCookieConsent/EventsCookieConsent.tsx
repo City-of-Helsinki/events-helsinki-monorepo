@@ -4,13 +4,16 @@ import React from 'react';
 import { MAIN_CONTENT_ID } from '../../constants';
 import { useConsentTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
-import type { Language } from '../../types';
 
 type Props = {
   appName: string;
+  allowLanguageSwitch?: boolean;
 };
 
-const EventsCookieConsent: React.FC<Props> = ({ appName }) => {
+const EventsCookieConsent: React.FC<Props> = ({
+  appName,
+  allowLanguageSwitch = true,
+}) => {
   const locale = useLocale();
   const { t, i18n } = useConsentTranslation();
   const [language, setLanguage] =
@@ -18,10 +21,12 @@ const EventsCookieConsent: React.FC<Props> = ({ appName }) => {
 
   const onLanguageChange = React.useCallback(
     (newLang: string) => {
-      setLanguage(newLang as ContentSource['currentLanguage']);
-      i18n.changeLanguage(newLang);
+      if (allowLanguageSwitch) {
+        setLanguage(newLang as ContentSource['currentLanguage']);
+        i18n.changeLanguage(newLang);
+      }
     },
-    [i18n, setLanguage]
+    [i18n, setLanguage, allowLanguageSwitch]
   );
   const contentSource: ContentSource = React.useMemo(
     () => ({

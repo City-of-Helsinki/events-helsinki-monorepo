@@ -68,6 +68,8 @@ jobs:
       - uses: andersinno/kolga-setup-action@v2
       - name: Deploy ${{ matrix.service}}
         uses: andersinno/kolga-deploy-action@v2
+        with:
+          track: 'staging'
         env:
           K8S_NAMESPACE: events-helsinki-monorepo-federation-router-${{matrix.service}}-qa
           ENVIRONMENT_URL: https://events-graphql-federation-${{matrix.service}}.${{env.BASE_DOMAIN}}

@@ -81,6 +81,7 @@
 }
 
 a.externalLink {
+  display: flex;
   margin: var(--spacing-xs) 0;
   color: var(--color-secondary-link);
   svg g path {

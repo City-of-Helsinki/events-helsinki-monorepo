@@ -10,7 +10,9 @@ $mainBackground: var(--color-theme-background);
   .main {
     overflow: hidden;
     .sectionHero {
-      min-height: 50vh;
+      height: 75vh;
+      max-height: 900px;
+      background-position: 50%;
     }
 
     .highhighlight {

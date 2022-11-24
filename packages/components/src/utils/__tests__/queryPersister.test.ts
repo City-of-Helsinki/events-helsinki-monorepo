@@ -1,4 +1,4 @@
-import { logger } from '../../../domain/logger';
+import { logger } from '../../loggers/logger';
 import queryPersister from '../queryPersister';
 
 describe('queryPersister', () => {
@@ -6,7 +6,7 @@ describe('queryPersister', () => {
   const loggerSpy = jest.spyOn(logger, 'error');
 
   beforeAll(() => {
-    processBrowser = process.browser;
+    processBrowser = false;
   });
 
   afterAll(() => {

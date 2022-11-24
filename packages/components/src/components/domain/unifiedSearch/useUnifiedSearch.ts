@@ -6,11 +6,9 @@ import type { NextRouter } from 'next/router';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useMemo, useRef } from 'react';
-
-import getIsDateValid from '../../../../../../apps/sports-helsinki/src/common/utils/getIsValidDate';
-import type { QueryPersister } from '../../../../../../apps/sports-helsinki/src/common/utils/queryPersister';
-import defaultQueryPersister from '../../../../../../apps/sports-helsinki/src/common/utils/queryPersister';
-import AppConfig from '../../../../../../apps/sports-helsinki/src/domain/app/AppConfig';
+import getIsDateValid from '../../../utils/getIsValidDate';
+import type { QueryPersister } from '../../../utils/queryPersister';
+import defaultQueryPersister from '../../../utils/queryPersister';
 import type { UnifiedSearchParameters } from './types';
 
 type FilterValueType = string | number | boolean | Date;
@@ -152,7 +150,8 @@ type TransitionOptions = {
 export class UnifiedSearch {
   constructor(
     router: NextRouter,
-    queryPersister: QueryPersister = defaultQueryPersister
+    queryPersister: QueryPersister = defaultQueryPersister,
+    isHaukiEnabled = false
   ) {
     this.router = router;
     this.filterConfig = [
@@ -168,7 +167,7 @@ export class UnifiedSearch {
       { type: 'string', key: 'orderDir', filterListBehaviour: 'hidden' },
     ];
 
-    if (AppConfig.isHaukiEnabled) {
+    if (isHaukiEnabled) {
       this.filterConfig.push(
         { type: 'boolean', key: 'isOpenNow' },
         { type: 'date', key: 'openAt' }

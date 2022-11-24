@@ -1,5 +1,5 @@
-import { useSearchListQuery } from '../../../types';
-import type { SearchListQueryVariables } from '../../../types';
+import type { SearchListQueryVariables } from 'events-helsinki-components';
+import { useSearchListQuery } from 'events-helsinki-components';
 import useUnifiedSearchVariables from './useUnifiedSearchVariables';
 
 type HookConfig = {

@@ -1,4 +1,5 @@
-import { logger } from '../../domain/logger';
+import { logger } from '../loggers/logger';
+import isClient from './isClient';
 
 export type AnyObject = Record<string, unknown> | null;
 
@@ -8,7 +9,7 @@ export class QueryPersister {
   persistQuery<T extends AnyObject = AnyObject>(query: T) {
     logger.info(`Trying to persist query`);
 
-    if (process.browser) {
+    if (isClient) {
       try {
         localStorage.setItem(QUERY_KEY, JSON.stringify(query));
       } catch (e) {

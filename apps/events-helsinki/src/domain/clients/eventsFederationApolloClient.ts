@@ -22,9 +22,9 @@ import {
   MutableReference,
 } from 'events-helsinki-components';
 import { useMemo } from 'react';
+import { logger } from '../../logger';
 import { rewriteInternalURLs } from '../../utils/routerUtils';
 import AppConfig from '../app/AppConfig';
-import { logger } from '../logger';
 
 const eventsFederationApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>

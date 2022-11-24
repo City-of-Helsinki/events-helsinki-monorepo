@@ -1,6 +1,6 @@
 overwrite: true
 schema: ${NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT}
-documents: '../../packages/components/src/components/domain/**/query.ts'
+documents: '../../packages/components/src/components/domain/**/*query.ts'
 generates:
   ./src/components/domain/graphql/generated/graphql.ts:
     plugins:

@@ -35,6 +35,7 @@ module.exports = {
   rules: {
     // optional overrides per project
     'no-console': 'error',
+    '@typescript-eslint/naming-convention': 'off',
   },
   overrides: [
     // optional overrides per project file match

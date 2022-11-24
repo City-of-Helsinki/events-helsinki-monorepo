@@ -4,14 +4,8 @@
 #
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push 
 # an update to the specified branches or you push specified tags.
-trigger:
-  batch: true
-  branches:
-    include:
-    - azure_review
-  paths:
-    exclude:
-    - README.md
+# only PR trigger pipeline
+trigger: none
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is 
 # opened with one of the specified target branches, or when updates are made to 
@@ -22,7 +16,27 @@ trigger:
 # of the pull request.
 #
 # Opt out of pull request validation 
-pr: none
+pr:
+  # PR target branch
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - 'apps/hobbies-helsinki/**'
+    - 'packages/**'
+    - 'package.json'
+    - 'yarn.lock'
+    - '.yarnrc.yml'
+    - '*.base.json'
+    - '*.base.js'
+    - '.prettier*.*'
+    - 'azure-pipelines-harrastukset-review.yml'
+    - 'Dockerfile'
+    - '*.Dockerfile'
+    - 'docker-compose.yml'
+    - 'docker-compose.*.yml'
+    - '!**/README.md'
 
 # By default, use self-hosted agents
 pool: Default

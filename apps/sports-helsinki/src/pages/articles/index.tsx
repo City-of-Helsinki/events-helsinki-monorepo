@@ -32,8 +32,8 @@ import type {
 
 import Navigation from '../../common-events/components/navigation/Navigation';
 import { getArticlePageCardProps } from '../../common-events/utils/headless-cms/headlessCmsUtils';
-import type { HobbiesGlobalPageProps } from '../../domain/app/getHobbiesStaticProps';
-import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
+import type { SportsGlobalPageProps } from '../../domain/app/getSportsStaticProps';
+import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
@@ -46,7 +46,7 @@ const SEARCH_DEBOUNCE_TIME = 500;
 
 export default function ArticleArchive({
   page,
-}: HobbiesGlobalPageProps & { page: PageType }) {
+}: SportsGlobalPageProps & { page: PageType }) {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, SEARCH_DEBOUNCE_TIME);
@@ -188,7 +188,7 @@ export default function ArticleArchive({
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getHobbiesStaticProps(context, async ({ apolloClient }) => {
+  return getSportsStaticProps(context, async ({ apolloClient }) => {
     const locale = getLocaleOrError(context.locale);
     const { data: pageData } = await apolloClient.query<
       PageByTemplateQuery,

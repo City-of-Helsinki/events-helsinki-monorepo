@@ -62,7 +62,7 @@ const mocks = [
   },
 ];
 
-const pathname = '/haku';
+const pathname = '/kurssihaku';
 const search = '?text=jazz';
 const testRoute = `${pathname}${search}`;
 const routes = [testRoute];

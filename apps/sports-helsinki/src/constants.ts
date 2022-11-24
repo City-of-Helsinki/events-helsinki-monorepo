@@ -4,6 +4,7 @@ export const DEFAULT_LANGUAGE = 'fi';
 
 export const ROUTES = {
   SEARCH: '/search',
+  COURSESEARCH: '/coursesearch',
   COURSES: '/courses/[eventId]',
   ARTICLE_ARCHIVE: '/article-archive',
   ARTICLES: '/articles/[...slug]',

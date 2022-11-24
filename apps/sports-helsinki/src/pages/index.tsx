@@ -21,7 +21,7 @@ import {
 
 import Navigation from '../common-events/components/navigation/Navigation';
 import { getDefaultCollections } from '../common-events/utils/headless-cms/headlessCmsUtils';
-import getHobbiesStaticProps from '../domain/app/getHobbiesStaticProps';
+import getSportsStaticProps from '../domain/app/getSportsStaticProps';
 import FooterSection from '../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../domain/matomoWrapper/MatomoWrapper';
@@ -65,7 +65,7 @@ const HomePage: NextPage<{
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getHobbiesStaticProps(context, async ({ apolloClient }) => {
+  return getSportsStaticProps(context, async ({ apolloClient }) => {
     try {
       const locale = getLocaleOrError(context.locale);
       const { data: landingPageData } = await apolloClient.query<

@@ -10460,7 +10460,7 @@
           },
           {
             "name": "firstName",
-            "description": "The user's first name.",
+            "description": "\tThe user's first name.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -40151,7 +40151,7 @@
           },
           {
             "name": "mediaItem",
-            "description": "An object of the mediaItem Type.",
+            "description": "An object of the mediaItem Type. ",
             "args": [
               {
                 "name": "asPreview",
@@ -40776,7 +40776,7 @@
           },
           {
             "name": "page",
-            "description": "An object of the page Type.",
+            "description": "An object of the page Type. ",
             "args": [
               {
                 "name": "asPreview",
@@ -41240,7 +41240,7 @@
           },
           {
             "name": "post",
-            "description": "An object of the post Type.",
+            "description": "An object of the post Type. ",
             "args": [
               {
                 "name": "asPreview",
@@ -43101,7 +43101,7 @@
           },
           {
             "name": "firstName",
-            "description": "The user's first name.",
+            "description": "\tThe user's first name.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -57996,7 +57996,7 @@
           },
           {
             "name": "firstName",
-            "description": "The user's first name.",
+            "description": "\tThe user's first name.",
             "type": {
               "kind": "SCALAR",
               "name": "String",

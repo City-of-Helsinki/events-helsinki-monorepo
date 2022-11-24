@@ -26,7 +26,7 @@ describe('queryPersister', () => {
 
     queryPersister.persistQuery(query);
 
-    expect(queryPersister.readPersistedQuery()).toStrinctEqual(query);
+    expect(queryPersister.readPersistedQuery()).toStrictEqual(query);
   });
 
   it('should not persist the query if it is called with process.browser as false', () => {
@@ -43,7 +43,7 @@ describe('queryPersister', () => {
     expect(loggerSpy).toHaveBeenCalledWith(
       'There was a query persist attempt during a non-client render. Queries should only be persisted in browser.'
     );
-    expect(queryPersister.readPersistedQuery()).not.toStrinctEqual(query);
+    expect(queryPersister.readPersistedQuery()).not.toStrictEqual(query);
   });
 
   it('should error with a message if saving a value into the storage fails', () => {

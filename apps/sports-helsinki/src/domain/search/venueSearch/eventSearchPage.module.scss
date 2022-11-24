@@ -1,0 +1,8 @@
+.resultList {
+  /* Search dropdowns go under Notification components without this */
+  z-index: 0;
+
+  .spinner {
+    background-color: var(--color-white);
+  }
+}

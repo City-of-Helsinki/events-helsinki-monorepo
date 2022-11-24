@@ -9,7 +9,7 @@ import React from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
-import getHobbiesStaticProps from '../../../domain/app/getHobbiesStaticProps';
+import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
 import EventPageContainer from '../../../domain/event/EventPageContainer';
 import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
@@ -48,7 +48,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getHobbiesStaticProps(context, async ({ apolloClient }) => {
+  return getSportsStaticProps(context, async ({ apolloClient }) => {
     const locale = getLocaleOrError(context.locale);
     const { data: eventData, loading } = await apolloClient.query<
       EventDetailsQuery,

@@ -3,6 +3,10 @@ const i18nRoutes = {
     { source: '/haku', locale: 'fi' },
     { source: '/sok', locale: 'sv' },
   ],
+  '/coursesearch': [
+    { source: '/kurssihaku', locale: 'fi' },
+    { source: '/kurssok', locale: 'sv' },
+  ],
   '/courses/:eventId': [
     { source: '/kurssit/:eventId', locale: 'fi' },
     { source: '/kurser/:eventId', locale: 'sv' },

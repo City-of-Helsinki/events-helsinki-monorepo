@@ -114,6 +114,10 @@ class AppConfig {
         '/',
     };
   }
+
+  static get isHaukiEnabled() {
+    return false;
+  }
 }
 
 function parseEnvValue(

@@ -129,7 +129,7 @@ const AdvancedSearch: React.FC<Props> = ({
 
   const goToSearch = (search: string): void => {
     router.push({
-      pathname: getI18nPath(ROUTES.SEARCH, locale),
+      pathname: getI18nPath(ROUTES.COURSESEARCH, locale),
       query: parse(search) as ParsedUrlQueryInput,
     });
   };

@@ -124,5 +124,5 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { start: '2020-10-06' },
     });
-  }, 20000);
+  }, 50000);
 });

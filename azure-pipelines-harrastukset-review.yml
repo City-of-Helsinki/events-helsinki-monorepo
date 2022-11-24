@@ -64,4 +64,3 @@ extends:
   template: azure-pipelines-harrastukset-review.yml@harrastukset-pipelines
   #parameters:
     #imagetag: ${{ parameters.imagetag }}
-

@@ -1,28 +1,27 @@
 {
   "groups": {
     "servicemap": {
-      "title": "SV Palvelukartta",
-      "text": "SV Pääkaupunkiseudun palvelukartta auttaa käyttäjää etsimään tapahtuman kartalta",
-      "expandAriaLabel": "SV Näytä palvelukarttaan liittyvien evästeiden tiedot",
-      "checkboxAriaDescription": "SV Evästeitä käytetään Pääkaupunkiseudun palvelukartan näyttämiseen"
-    },
-    "cookies": {
-      "matomo": "SV Matomo-tilastointijärjestelmän eväste",
-      "linkedevents": "SV Eväste tapahtumien hakemisen valtuuttamiseen",
-      "i18next": "ENG Eväste sivuston kielivalinnan muistamiseen",
-      "servicemap_analytics": "SV Matomo-tilastointijärjestelmän eväste palvelukartalle.",
-      "servicemap_session": "SV Palvelukartan istunto",
-      "servicemap_ga": "SV google-analytiikan eväste palvelukartalle",
-      "wordpress": "En cookie relaterad till driften av Wordpress innehållshanteringssystemet."
-    },
-    "expiration": {
-      "session": "SV Istunto-eväste tuhotaan, kun käyttäjä poistuu sivulta",
-      "year": "SV 1 vuosi",
-      "hour": "SV 1 tunti",
-      "day": "SV 1 päivä",
-      "years": "SV {{ days }} vuotta",
-      "hours": "SV {{ hours }} tuntia",
-      "days": "SV {{ days }} päivää"
+      "title": "Servicekarta",
+      "text": "Huvudstadsregionens servicekarta hjälper användaren att hitta evenemang på kartan.",
+      "expandAriaLabel": "Visa information om servicekartans kakor",
+      "checkboxAriaDescription": "Kakor används för att visa huvudstadstadsregionens servicekarta."
     }
+  },
+  "cookies": {
+    "matomo": "Kaka för statistiksystemet Matomo",
+    "linkedevents": "Kaka för att söka evenemang",
+    "i18next": "Kaka som sparar användarens språkval på webbplatsen",
+    "servicemap_analytics": "Kaka för statistiksystemet Matomo på servicekartan",
+    "servicemap_session": "Session på servicekartan",
+    "servicemap_ga": "Kaka för analysverktyget Google Analytics på servicekartan"
+  },
+  "expiration": {
+    "session": "Sessionskakan raderas när användaren lämnar webbsidan",
+    "year": "1 år",
+    "hour": "1 timme",
+    "day": "1 dag",
+    "years": "{{ days }} år",
+    "hours": "{{ hours }} timmar",
+    "days": "{{ days }} dagar"
   }
 }

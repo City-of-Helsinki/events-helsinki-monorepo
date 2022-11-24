@@ -46,7 +46,6 @@ resources:
   # Azure DevOps repository
   - repository: harrastukset-pipelines
     type: git
-    ref: refs/heads/review
     # Azure DevOps project/repository
     name: harrastukset/harrastukset-pipelines
 

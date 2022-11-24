@@ -1,20 +1,21 @@
-import { useLocale } from 'events-helsinki-components';
-import {
-  HELSINKI_OCD_DIVISION_ID,
-  SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID,
-} from '../../../../../../apps/sports-helsinki/src/domain/app/appConstants';
 import type {
   SearchListQueryVariables,
   UnifiedSearchLanguage,
-} from '../../../types';
-
-import type { OrderByType, OrderDirType } from './unifiedSearchConstants';
+} from 'events-helsinki-components';
+import { useLocale, useUnifiedSearch } from 'events-helsinki-components';
+import type {
+  OrderByType,
+  OrderDirType,
+} from 'events-helsinki-components/components/domain/unifiedSearch/unifiedSearchConstants';
 import {
-  orderDirToUnifiedSearchDistanceOrder,
   OrderBy,
   OrderDir,
-} from './unifiedSearchConstants';
-import useUnifiedSearch from './useUnifiedSearch';
+  orderDirToUnifiedSearchDistanceOrder,
+} from 'events-helsinki-components/components/domain/unifiedSearch/unifiedSearchConstants';
+import {
+  HELSINKI_OCD_DIVISION_ID,
+  SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID,
+} from '../app/appConstants';
 
 export type Coordinates = {
   latitude: number;

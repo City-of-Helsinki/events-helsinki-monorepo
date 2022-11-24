@@ -2,8 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import chalk from 'chalk';
-
-import AppConfig from './app/AppConfig';
+import { isClient } from '../utils';
 
 type LoggerFunction = (message?: any, ...optionalParameters: any[]) => void;
 
@@ -54,13 +53,13 @@ function formatMessage(
 // Never log on the client side in production in order to avoid hurting the
 // performance of the user's browser.
 const isNotProductionClient = () =>
-  !(process.browser && process.env.NODE_ENV === 'production');
+  !(isClient && process.env.NODE_ENV === 'production');
 
-function createLogger(namespace: string): Logger {
+function createLogger(namespace: string, debug = false): Logger {
   return {
     debug: (message?: any, ...optionalParameters: any[]) =>
       isNotProductionClient() &&
-      AppConfig.debug &&
+      debug &&
       console.debug(
         formatMessage(namespace, 'debug', message, ...optionalParameters)
       ),

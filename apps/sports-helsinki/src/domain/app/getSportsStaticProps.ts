@@ -3,10 +3,9 @@ import { isApolloError, gql } from '@apollo/client';
 import type { CmsLanguage } from 'events-helsinki-components';
 import { getMenuLocationFromLanguage } from 'events-helsinki-components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
-
+import { staticGenerationLogger } from 'logger';
 import { getLocaleOrError } from '../../utils/routerUtils';
 import initializeApolloClient from '../clients/eventsFederationApolloClient';
-import { staticGenerationLogger } from '../logger';
 import AppConfig from './AppConfig';
 
 const GLOBAL_QUERY = gql`

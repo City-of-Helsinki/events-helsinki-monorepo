@@ -1,28 +1,28 @@
 {
   "groups": {
     "servicemap": {
-      "title": "ENG Palvelukartta",
-      "text": "ENG Pääkaupunkiseudun palvelukartta auttaa käyttäjää etsimään tapahtuman kartalta",
-      "expandAriaLabel": "ENG Näytä palvelukarttaan liittyvien evästeiden tiedot",
-      "checkboxAriaDescription": "ENG Evästeitä käytetään Pääkaupunkiseudun palvelukartan näyttämiseen"
+      "title": "Service Map",
+      "text": "The Service Map of the Helsinki Metropolitan Area helps users in finding an event on the map",
+      "expandAriaLabel": "Show cookie information related to the Service Map",
+      "checkboxAriaDescription": "Cookies are used to display the Service Map of the Helsinki Metropolitan Area"
     }
   },
   "cookies": {
-    "matomo": "ENG Matomo-tilastointijärjestelmän eväste",
-    "linkedevents": "ENG Eväste tapahtumien hakemisen valtuuttamiseen.",
-    "i18next": "ENG Eväste sivuston kielivalinnan muistamiseen.",
-    "servicemap_analytics": "ENG Matomo-tilastointijärjestelmän eväste palvelukartalle.",
-    "servicemap_session": "ENG Palvelukartan istunto.",
-    "servicemap_ga": "ENG google-analytiikan eväste palvelukartalle.",
-    "wordpress": "A cookie related to the operation of the Wordpress content management system."
+    "matomo": "A cookie of the Matomo statistics system",
+    "linkedevents": "A cookie to authorise the retrieval of events",
+    "i18next": "A cookie to remember the website language selection",
+    "servicemap_analytics": "A cookie of the Matomo statistics system for the Service Map.",
+    "servicemap_session": "Service Map session",
+    "servicemap_ga": "A Google analytics cookie for the Service Map",
+    "wordpress": "A cookie for operation of the WordPress-content management system."
   },
   "expiration": {
-    "session": "ENG Istunto-eväste tuhotaan, kun käyttäjä poistuu sivulta",
-    "year": "ENG 1 vuosi",
-    "hour": "ENG 1 tunti",
-    "day": "ENG 1 päivä",
-    "years": "ENG {{ days }} vuotta",
-    "hours": "ENG {{ hours }} tuntia",
-    "days": "ENG {{ days }} päivää"
+    "session": "The session cookie is deleted once the user exits the page",
+    "year": "1 year",
+    "hour": "1 hour",
+    "day": "1 day",
+    "years": "{{ days }} years",
+    "hours": "{{ hours }} hours",
+    "days": "{{ days }} days"
   }
 }

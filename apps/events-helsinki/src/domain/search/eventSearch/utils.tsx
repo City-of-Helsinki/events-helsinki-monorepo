@@ -8,7 +8,6 @@ import {
 } from 'date-fns';
 import type {
   EventFields,
-  FilterType,
   AppLanguage,
   Meta,
   QueryEventListArgs,
@@ -39,9 +38,6 @@ import type {
   SearchCategoryOption,
   SearchCategoryType,
 } from './types';
-
-export const MIN_AGE = 0;
-export const MAX_AGE = 99;
 
 export const sortExtendedCategoryOptions = (
   a: CategoryOption,
@@ -161,9 +157,6 @@ export const getEventSearchVariables = ({
     places,
     publisher,
     text,
-    suitableFor,
-    audienceMinAgeLt,
-    audienceMaxAgeGt,
   } = getSearchFilters(params);
   const pathPlace = place && MAPPED_PLACES[place.toLowerCase()];
 
@@ -240,10 +233,7 @@ export const getEventSearchVariables = ({
     start,
     startsAfter,
     superEventType,
-    suitableFor,
     eventType: AppConfig.supportedEventTypes,
-    audienceMinAgeLt,
-    audienceMaxAgeGt,
   };
 };
 
@@ -316,37 +306,7 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     publisher: searchParams.get(EVENT_SEARCH_FILTERS.PUBLISHER),
     start,
     text: freeText,
-    suitableFor: normalizeSuitableFor(
-      getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.SUITABLE, false)
-    ),
-    audienceMinAgeLt: searchParams.get(EVENT_SEARCH_FILTERS.MIN_AGE) || '',
-    audienceMaxAgeGt: searchParams.get(EVENT_SEARCH_FILTERS.MAX_AGE) || '',
   };
-};
-
-export const normalizeSuitableFor = (values: (number | string)[]): number[] => {
-  if (!values?.length) return [];
-
-  const [minAge, maxAge] = values.map((value) => {
-    const parsed = parseInt(value.toString());
-    return isNaN(parsed) ? null : parsed;
-  });
-
-  // If no range is given, return an empty list.
-  if (minAge == null && maxAge == null) {
-    return [];
-  }
-
-  // Sort should be done last, so the right number is full filled with a default.
-  return [minAge ?? MIN_AGE, maxAge ?? MAX_AGE].sort((a, b) => a - b);
-};
-
-export const getSuitableForFilterValue = (
-  initValue: number[] | undefined,
-  type: FilterType
-) => {
-  if (['minAge', 'maxAge', 'exactAge'].includes(type)) return undefined;
-  return initValue;
 };
 
 export const getSearchQuery = (filters: Filters): string => {

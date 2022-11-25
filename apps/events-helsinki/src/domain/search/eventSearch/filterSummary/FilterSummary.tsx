@@ -16,12 +16,7 @@ import React from 'react';
 import useDivisionOptions from '../../../../common-events/hooks/useDivisionOptions';
 import { ROUTES } from '../../../../constants';
 import { getI18nPath } from '../../../../utils/routerUtils';
-import {
-  getSearchFilters,
-  getSearchQuery,
-  getSuitableForFilterValue,
-} from '../utils';
-import AgeFilter from './AgeFilter';
+import { getSearchFilters, getSearchQuery } from '../utils';
 import DateFilter from './DateFilter';
 import styles from './filterSummary.module.scss';
 import PlaceFilter from './PlaceFilter';
@@ -50,10 +45,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     places,
     publisher,
     start,
-    suitableFor,
     text,
-    audienceMaxAgeGt,
-    audienceMinAgeLt,
   } = getSearchFilters(searchParams);
 
   const dateText =
@@ -89,9 +81,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       publisher: type !== 'publisher' ? publisher : null,
       start: type === 'date' ? null : start,
       text: getFilteredList('text', text),
-      suitableFor: getSuitableForFilterValue(suitableFor, type) ?? [],
-      audienceMinAgeLt: type === 'minAge' ? '' : audienceMinAgeLt,
-      audienceMaxAgeGt: type === 'maxAge' ? '' : audienceMaxAgeGt,
     });
 
     router.push({
@@ -107,10 +96,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!dateTypes.length ||
     !!divisions.length ||
     !!places.length ||
-    !!text?.length ||
-    !!suitableFor?.length ||
-    !!(audienceMinAgeLt || '').length ||
-    !!(audienceMaxAgeGt || '').length;
+    !!text?.length;
 
   if (!hasFilters) return null;
 
@@ -160,20 +146,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           value={dateType}
         />
       ))}
-      {audienceMinAgeLt && (
-        <AgeFilter
-          type="minAge"
-          value={audienceMinAgeLt}
-          onRemove={handleFilterRemove}
-        />
-      )}
-      {audienceMaxAgeGt && (
-        <AgeFilter
-          type="maxAge"
-          value={audienceMaxAgeGt}
-          onRemove={handleFilterRemove}
-        />
-      )}
       <button className={styles.clearButton} onClick={onClear} type="button">
         {t('buttonClearFilters')}
         <IconCrossCircleFill aria-hidden />

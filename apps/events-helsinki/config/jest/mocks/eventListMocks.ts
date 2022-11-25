@@ -11,9 +11,6 @@ import type {
 import AppConfig from '../../../src/domain/app/AppConfig';
 
 export const baseVariables = {
-  audienceMinAgeLt: '',
-  audienceMaxAgeGt: '',
-  suitableFor: [],
   end: '',
   include: ['keywords', 'location'],
   isFree: undefined,

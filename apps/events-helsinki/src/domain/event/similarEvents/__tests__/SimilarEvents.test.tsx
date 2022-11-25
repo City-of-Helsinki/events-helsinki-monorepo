@@ -14,7 +14,10 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
-import SimilarEvents from '../SimilarEvents';
+import SimilarEvents, {
+  similarEventsContainerTestId,
+  similarEventsLoadingSpinnerTestId,
+} from '../SimilarEvents';
 
 const id = '1';
 const name = 'Event title';
@@ -49,8 +52,6 @@ const similarEventQueryVariables = {
   allOngoing: true,
   keywordOrSet2: [''],
   language: undefined,
-  audienceMinAgeLt: event.audienceMinAge, // LT - Really?
-  audienceMaxAgeGt: event.audienceMaxAge, // GT - Really?
 };
 
 const mocks = [

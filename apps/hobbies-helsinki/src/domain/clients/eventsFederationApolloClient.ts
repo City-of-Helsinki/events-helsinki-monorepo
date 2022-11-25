@@ -13,6 +13,7 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
+import { relayStylePagination } from '@apollo/client/utilities';
 import * as Sentry from '@sentry/browser';
 import fetch from 'cross-fetch';
 import {
@@ -22,6 +23,8 @@ import {
   MutableReference,
   sortMenuItems,
 } from 'events-helsinki-components';
+import type { LanguageString } from 'events-helsinki-components';
+import capitalize from 'lodash/capitalize';
 import { useMemo } from 'react';
 import { logger } from '../../logger';
 import { rewriteInternalURLs } from '../../utils/routerUtils';
@@ -114,6 +117,7 @@ export function createApolloCache() {
         },
       },
       Query: {
+        queryType: true, // This type represents the Root Query.
         fields: {
           event(_, { args, toReference }) {
             return toReference({
@@ -154,6 +158,7 @@ export function createApolloCache() {
               meta: incoming.meta,
             };
           }),
+          unifiedSearch: relayStylePagination(excludeArgs(['after'])),
         },
       },
       Keyword: {
@@ -167,6 +172,21 @@ export function createApolloCache() {
           // if selectionSet is not defined, it means that toReference function calls keyfields
           // then we want to return cache id normally.
           return defaultDataIdFromObject(object);
+        },
+      },
+      OntologyWord: {
+        fields: {
+          label: {
+            read(label: LanguageString) {
+              const { fi, en, sv } = label;
+              return {
+                ...label,
+                fi: fi ? capitalize(fi) : '',
+                en: en ? capitalize(en) : '',
+                sv: sv ? capitalize(sv) : '',
+              };
+            },
+          },
         },
       },
     },

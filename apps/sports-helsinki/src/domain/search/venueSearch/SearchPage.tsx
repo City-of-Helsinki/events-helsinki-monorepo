@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
+import { toast } from 'react-toastify';
 
 import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 import AppConfig from '../../app/AppConfig';
@@ -41,21 +42,24 @@ const SearchPage: React.FC<{
     loading: isLoadingVenues,
     fetchMore,
   } = useUnifiedSearchListQuery({
-    variables: { includeHaukiFields: AppConfig.isHaukiEnabled },
+    variables: {
+      includeHaukiFields: AppConfig.isHaukiEnabled,
+    },
   });
-
-  const venuesList: Venue[] =
-    venuesData?.unifiedSearch?.edges.reduce(
-      (venues: Venue[], edge) =>
-        edge.node.venue ? [...venues, edge.node.venue as Venue] : venues,
-      []
-    ) ?? [];
+  const venuesList = React.useMemo(
+    () =>
+      venuesData?.unifiedSearch?.edges.reduce(
+        (venues: Venue[], edge) =>
+          edge.node.venue ? [...venues, edge.node.venue as Venue] : venues,
+        []
+      ) ?? [],
+    [venuesData]
+  );
   const count = (venuesData?.unifiedSearch?.count as number) ?? 0;
   const pageInfo = venuesData?.unifiedSearch?.pageInfo;
-  const afterCursor = pageInfo?.endCursor;
   const hasNext = pageInfo?.hasNextPage ?? false;
-
   const handleLoadMore = async () => {
+    const afterCursor = pageInfo?.endCursor;
     const pagination = {
       first: BLOCK_SIZE,
       after: afterCursor,
@@ -66,11 +70,14 @@ const SearchPage: React.FC<{
       scroll: false,
       shallow: true,
     });
-
-    fetchMore(pagination).then(() => {
-      setIsFetchingMore(false);
-    });
+    try {
+      await fetchMore({ ...pagination });
+    } catch (e) {
+      toast.error(t('search:errorLoadMode'));
+    }
+    setIsFetchingMore(false);
   };
+
   const scrollToResultList = () => {
     if (isSmallScreen) {
       scroller.scrollTo('resultList', {

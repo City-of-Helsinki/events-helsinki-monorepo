@@ -3,7 +3,7 @@ import { useSearchListQuery } from 'events-helsinki-components';
 import useUnifiedSearchVariables from './useUnifiedSearchVariables';
 
 type HookConfig = {
-  variables?: Partial<Omit<SearchListQueryVariables, 'enableHauki'>>;
+  variables?: Partial<SearchListQueryVariables>;
 };
 
 export default function useUnifiedSearchListQuery({
@@ -17,24 +17,13 @@ export default function useUnifiedSearchListQuery({
     },
   });
 
-  const handleFetchMore = (variables: Partial<SearchListQueryVariables>) =>
-    fetchMore({
-      variables,
-      // TODO: This should not be needed since it comes from the client's cache-strategies.
-      updateQuery: (prevResult, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prevResult;
-        return {
-          ...prevResult,
-          unifiedSearch: {
-            ...fetchMoreResult.unifiedSearch,
-            edges: [
-              ...(prevResult.unifiedSearch?.edges ?? []),
-              ...(fetchMoreResult.unifiedSearch?.edges ?? []),
-            ],
-          },
-        };
-      },
+  const handleFetchMore = async (
+    fetchMoreVariables: Partial<SearchListQueryVariables>
+  ) => {
+    await fetchMore({
+      variables: fetchMoreVariables,
     });
+  };
 
   return {
     fetchMore: handleFetchMore,

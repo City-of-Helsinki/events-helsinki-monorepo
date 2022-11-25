@@ -55,8 +55,6 @@ const AdvancedSearch: React.FC<Props> = ({
   );
 
   const [categoryInput, setCategoryInput] = React.useState('');
-  const [minAgeInput, setMinAgeInput] = React.useState('');
-  const [maxAgeInput, setMaxAgeInput] = React.useState('');
   // const [divisionInput, setDivisionInput] = React.useState("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [placeInput, setPlaceInput] = React.useState('');
@@ -102,8 +100,6 @@ const AdvancedSearch: React.FC<Props> = ({
     publisher,
     start,
     text: selectedTexts,
-    audienceMinAgeLt: minAgeInput,
-    audienceMaxAgeGt: maxAgeInput,
   };
 
   // const divisionOptions = useDivisionOptions();
@@ -145,8 +141,6 @@ const AdvancedSearch: React.FC<Props> = ({
       places,
       start: startTime,
       text,
-      audienceMinAgeLt,
-      audienceMaxAgeGt,
     } = getSearchFilters(searchParams);
 
     const pathPlace = params.place && MAPPED_PLACES[params.place.toLowerCase()];
@@ -161,8 +155,6 @@ const AdvancedSearch: React.FC<Props> = ({
     setSelectedTexts(text || []);
     setEnd(endTime);
     setStart(startTime);
-    setMinAgeInput(audienceMinAgeLt || '');
-    setMaxAgeInput(audienceMaxAgeGt || '');
 
     if (endTime || startTime) {
       setIsCustomDate(true);
@@ -224,8 +216,6 @@ const AdvancedSearch: React.FC<Props> = ({
     // setDivisionInput("");
     setPlaceInput('');
     setAutosuggestInput('');
-    setMaxAgeInput('');
-    setMinAgeInput('');
   };
 
   const clearFilters = () => {

@@ -31,8 +31,6 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         .map((category) => category?.id) // collect ids
         .filter((id) => id != null) // remove nulls and undefined ones
         .join(), // make a string
-      [EVENT_SEARCH_FILTERS.MIN_AGE]: event.audienceMinAge ?? '',
-      [EVENT_SEARCH_FILTERS.MAX_AGE]: event.audienceMaxAge ?? '',
     };
 
     return getEventSearchVariables({

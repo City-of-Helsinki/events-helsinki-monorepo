@@ -42,7 +42,6 @@ export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
   publisher: null,
   start: null,
   text: [],
-  suitableFor: [],
 };
 
 export enum EVENT_SORT_OPTIONS {
@@ -72,9 +71,6 @@ export enum EVENT_SEARCH_FILTERS {
   PUBLISHER = 'publisher',
   START = 'start',
   TEXT = 'text',
-  MIN_AGE = 'audienceMinAgeLt',
-  MAX_AGE = 'audienceMaxAgeGt',
-  SUITABLE = 'suitableFor',
 }
 
 export const CATEGORY_CATALOG: Record<

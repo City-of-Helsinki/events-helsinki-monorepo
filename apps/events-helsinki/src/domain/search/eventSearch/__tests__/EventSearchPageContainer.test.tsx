@@ -110,6 +110,12 @@ afterAll(() => {
   clear();
 });
 
+const waitForComponentToBeLoaded = async () => {
+  await waitFor(() => {
+    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+  });
+};
+
 const pathname = '/haku';
 const search = '?text=jazz';
 const testRoute = `${pathname}${search}`;
@@ -160,9 +166,7 @@ it('should show toastr message when loading next event page fails', async () => 
 
   renderComponent(searchJazzThenClickLoadMoreThrowsErrorMock);
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForComponentToBeLoaded();
   const name = translations.search.buttonLoadMore.replace(
     '{{count}}',
     (eventsResponse.meta.count - eventsResponse.data.length).toString()
@@ -182,9 +186,7 @@ it('should show toastr message when loading next event page fails', async () => 
     })
   );
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForComponentToBeLoaded();
 
   expect(toast.error).toHaveBeenCalledWith(translations.search.errorLoadMode);
 });
@@ -254,7 +256,7 @@ it.todo('should scroll to result list on mobile screen');
 it('should search remote events with remote event checkbox', async () => {
   advanceTo(new Date(2020, 7, 12));
   renderComponent();
-
+  await waitForComponentToBeLoaded();
   await waitFor(() => {
     expect(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

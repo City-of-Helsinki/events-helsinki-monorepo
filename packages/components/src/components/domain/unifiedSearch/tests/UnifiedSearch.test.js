@@ -13,7 +13,7 @@ class MockQueryPersister {
 }
 
 function getUnifiedSearch(router) {
-  return new UnifiedSearch(router, new MockQueryPersister());
+  return new UnifiedSearch(router, new MockQueryPersister(), true);
 }
 
 function getAsPath(values) {
@@ -45,12 +45,15 @@ describe('UnifiedSearch', () => {
       }).filters;
 
       expect(filters).toMatchInlineSnapshot(`
-        Object {
+        {
+          "administrativeDivisionIds": [],
           "after": "cursor",
           "first": 10,
           "isOpenNow": true,
+          "ontologyTreeIds": [],
+          "ontologyWordIds": [],
           "openAt": 2020-12-24T10:12:00.000Z,
-          "q": Array [
+          "q": [
             "swimming",
             "aurinkolahti",
           ],
@@ -70,16 +73,16 @@ describe('UnifiedSearch', () => {
       });
 
       expect(unifiedSearch.filterList).toMatchInlineSnapshot(`
-        Array [
-          Object {
+        [
+          {
             "key": "q",
             "value": "A",
           },
-          Object {
+          {
             "key": "q",
             "value": "B",
           },
-          Object {
+          {
             "key": "administrativeDivisionIds",
             "value": "123",
           },
@@ -108,7 +111,7 @@ describe('UnifiedSearch', () => {
             q: ['B'],
           },
         },
-        null,
+        undefined,
         undefined
       );
     });
@@ -126,7 +129,7 @@ describe('UnifiedSearch', () => {
           query: {},
           pathname: '/search',
         },
-        null,
+        undefined,
         undefined
       );
     });
@@ -143,11 +146,11 @@ describe('UnifiedSearch', () => {
       ]);
 
       expect(filterObject).toMatchInlineSnapshot(`
-        Object {
-          "administrativeDivisionIds": Array [
+        {
+          "administrativeDivisionIds": [
             "123",
           ],
-          "q": Array [
+          "q": [
             "A",
             "B",
           ],
@@ -174,22 +177,22 @@ describe('UnifiedSearch', () => {
       });
 
       expect(mockRouter.replace.mock.calls[0]).toMatchInlineSnapshot(`
-        Array [
-          Object {
+        [
+          {
             "pathname": undefined,
-            "query": Object {
-              "administrativeDivisionIds": Array [],
-              "ontologyTreeIds": Array [
+            "query": {
+              "administrativeDivisionIds": [],
+              "ontologyTreeIds": [
                 "404",
               ],
-              "ontologyWordIds": Array [],
-              "q": Array [
+              "ontologyWordIds": [],
+              "q": [
                 "A",
                 "B",
               ],
             },
           },
-          null,
+          undefined,
           undefined,
         ]
       `);
@@ -207,9 +210,9 @@ describe('UnifiedSearch', () => {
       const unifiedSearch = getUnifiedSearch(mockRouter);
 
       expect(unifiedSearch.getQueryWithout('q', 'A')).toMatchInlineSnapshot(`
-        Object {
+        {
           "openAt": "2020-12-24T10:12:00.000Z",
-          "q": Array [
+          "q": [
             "B",
           ],
         }

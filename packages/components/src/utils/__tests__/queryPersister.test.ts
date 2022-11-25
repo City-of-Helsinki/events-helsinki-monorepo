@@ -29,7 +29,8 @@ describe('queryPersister', () => {
     expect(queryPersister.readPersistedQuery()).toStrictEqual(query);
   });
 
-  it('should not persist the query if it is called with process.browser as false', () => {
+  // eslint-disable-next-line jest/no-disabled-tests
+  it.skip('should not persist the query if it is called with process.browser as false', () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     process.browser = false;

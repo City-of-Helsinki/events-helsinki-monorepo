@@ -13,7 +13,8 @@
     "i18next": "Kaka som sparar användarens språkval på webbplatsen",
     "servicemap_analytics": "Kaka för statistiksystemet Matomo på servicekartan",
     "servicemap_session": "Session på servicekartan",
-    "servicemap_ga": "Kaka för analysverktyget Google Analytics på servicekartan"
+    "servicemap_ga": "Kaka för analysverktyget Google Analytics på servicekartan",
+    "wordpress": "Kaka för användning av WordPress-innehållshanteringssystemet."
   },
   "expiration": {
     "session": "Sessionskakan raderas när användaren lämnar webbsidan",

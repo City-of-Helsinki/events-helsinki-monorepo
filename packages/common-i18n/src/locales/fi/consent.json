@@ -13,7 +13,8 @@
     "i18next": "Eväste sivuston kielivalinnan muistamiseen",
     "servicemap_analytics": "Matomo-tilastointijärjestelmän eväste palvelukartalle.",
     "servicemap_session": "Palvelukartan istunto",
-    "servicemap_ga": "Google-analytiikan eväste palvelukartalle"
+    "servicemap_ga": "Google-analytiikan eväste palvelukartalle",
+    "wordpress": "Wordpress-sisällönhallintajärjestelmän toimintaan liittyvä eväste."
   },
   "expiration": {
     "session": "Istunto-eväste tuhotaan, kun käyttäjä poistuu sivulta",

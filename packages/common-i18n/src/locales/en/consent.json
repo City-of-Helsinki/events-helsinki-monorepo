@@ -13,7 +13,8 @@
     "i18next": "A cookie to remember the website language selection",
     "servicemap_analytics": "A cookie of the Matomo statistics system for the Service Map.",
     "servicemap_session": "Service Map session",
-    "servicemap_ga": "A Google analytics cookie for the Service Map"
+    "servicemap_ga": "A Google analytics cookie for the Service Map",
+    "wordpress": "A cookie for operation of the WordPress-content management system."
   },
   "expiration": {
     "session": "The session cookie is deleted once the user exits the page",

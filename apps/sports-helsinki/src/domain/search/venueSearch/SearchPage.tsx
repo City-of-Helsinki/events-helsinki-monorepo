@@ -14,7 +14,7 @@ import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 
-import { removeQueryParamsFromRouter } from 'utils/routerUtils';
+import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 import AppConfig from '../../app/AppConfig';
 import useUnifiedSearchListQuery from '../../unifiedSearch/useUnifiedSearchListQuery';
 import SearchResultsContainer from '../eventSearch/searchResultList/SearchResultsContainer';

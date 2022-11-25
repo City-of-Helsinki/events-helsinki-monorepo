@@ -12,9 +12,10 @@ import qs, { parse } from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
-import SearchAutosuggest from 'common-events/components/search/SearchAutosuggest';
-import { getI18nPath } from 'utils/routerUtils';
+
+import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
+import { getI18nPath } from '../../../utils/routerUtils';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import styles from './search.module.scss';
 

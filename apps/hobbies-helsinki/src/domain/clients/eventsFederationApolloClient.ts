@@ -104,9 +104,6 @@ export function createApolloClient() {
 export function createApolloCache() {
   return new InMemoryCache({
     typePolicies: {
-      RootQuery: {
-        queryType: true,
-      },
       MenuItems: {
         fields: {
           nodes: {

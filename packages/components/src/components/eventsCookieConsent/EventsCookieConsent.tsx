@@ -19,6 +19,9 @@ const EventsCookieConsent: React.FC<Props> = ({
   const [language, setLanguage] =
     React.useState<ContentSource['currentLanguage']>(locale);
 
+  const [showCookieConsentModal, setShowCookieConsentModal] =
+    React.useState(true);
+
   const onLanguageChange = React.useCallback(
     (newLang: string) => {
       if (allowLanguageSwitch) {
@@ -31,6 +34,9 @@ const EventsCookieConsent: React.FC<Props> = ({
   const contentSource: ContentSource = React.useMemo(
     () => ({
       siteName: appName,
+      onAllConsentsGiven: () => {
+        setShowCookieConsentModal(false);
+      },
       currentLanguage: language as string as ContentSource['currentLanguage'],
       requiredCookies: {
         groups: [
@@ -112,6 +118,8 @@ const EventsCookieConsent: React.FC<Props> = ({
     }),
     [t, language, appName, onLanguageChange]
   );
+
+  if (!showCookieConsentModal) return null;
 
   return <CookieModal contentSource={contentSource} />;
 };

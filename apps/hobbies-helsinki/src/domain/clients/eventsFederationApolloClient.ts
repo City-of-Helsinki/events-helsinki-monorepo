@@ -173,7 +173,7 @@ export function createApolloCache() {
   });
 }
 
-export default function initializeGatewayApolloClient(
+export default function initializeFederationApolloClient(
   initialState: NormalizedCacheObject = {}
 ): ApolloClient<NormalizedCacheObject> {
   return initializeApolloClient<
@@ -190,7 +190,7 @@ export function useApolloClient(
   initialState: NormalizedCacheObject = {}
 ): ApolloClient<NormalizedCacheObject> {
   return useMemo(
-    () => initializeGatewayApolloClient(initialState),
+    () => initializeFederationApolloClient(initialState),
     [initialState]
   );
 }

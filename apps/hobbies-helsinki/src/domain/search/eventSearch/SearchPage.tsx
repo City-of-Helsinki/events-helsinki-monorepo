@@ -75,6 +75,20 @@ const SearchPage: React.FC<{
           variables: {
             page,
           },
+          // TODO: This should not be needed since it comes from the client's cache-strategies.
+          updateQuery: (prevResult, { fetchMoreResult }) => {
+            if (!fetchMoreResult) return prevResult;
+            return {
+              ...prevResult,
+              eventList: {
+                ...fetchMoreResult.eventList,
+                data: [
+                  ...prevResult.eventList.data,
+                  ...fetchMoreResult.eventList.data,
+                ],
+              },
+            };
+          },
         });
       } catch (e) {
         toast.error(t('search:errorLoadMode'));

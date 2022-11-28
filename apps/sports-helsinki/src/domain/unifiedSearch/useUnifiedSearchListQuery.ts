@@ -20,6 +20,20 @@ export default function useUnifiedSearchListQuery({
   const handleFetchMore = (variables: Partial<SearchListQueryVariables>) =>
     fetchMore({
       variables,
+      // TODO: This should not be needed since it comes from the client's cache-strategies.
+      updateQuery: (prevResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prevResult;
+        return {
+          ...prevResult,
+          unifiedSearch: {
+            ...fetchMoreResult.unifiedSearch,
+            edges: [
+              ...(prevResult.unifiedSearch?.edges ?? []),
+              ...(fetchMoreResult.unifiedSearch?.edges ?? []),
+            ],
+          },
+        };
+      },
     });
 
   return {

@@ -6,7 +6,7 @@ import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
 import { staticGenerationLogger } from '../../logger';
 import { getLocaleOrError } from '../../utils/routerUtils';
-import initializeApolloClient from '../clients/eventsFederationApolloClient';
+import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
 import AppConfig from './AppConfig';
 
 const GLOBAL_QUERY = gql`
@@ -52,7 +52,7 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
     hobbiesContext: HobbiesContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
-  const apolloClient = initializeApolloClient();
+  const apolloClient = initializeFederationApolloClient();
 
   try {
     await getGlobalCMSData({ client: apolloClient, context });

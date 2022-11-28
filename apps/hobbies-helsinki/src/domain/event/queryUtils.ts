@@ -164,19 +164,6 @@ export const useSubEvents = (
           variables: {
             page,
           },
-          // updateQuery: (prevResult, { fetchMoreResult }) => {
-          //   if (!fetchMoreResult) return prevResult;
-          //   return {
-          //     ...prevResult,
-          //     eventList: {
-          //       ...fetchMoreResult.eventList,
-          //       data: [
-          //         ...prevResult.eventList.data,
-          //         ...fetchMoreResult.eventList.data,
-          //       ],
-          //     },
-          //   };
-          // },
         });
       } catch (e) {
         toast.error(t('info.errorLoadMode'));

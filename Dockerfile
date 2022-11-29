@@ -198,6 +198,11 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/$
 COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
 
+# OpenShift write access to Next cache folder
+USER root
+RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages
+USER appuser
+
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV PORT ${APP_PORT:-3000}
 

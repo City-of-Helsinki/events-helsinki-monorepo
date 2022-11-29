@@ -46,7 +46,7 @@ export default function LandingPageSearchForm({
         </div>
         <div className={styles.buttonWrapper}>
           <Button
-            theme="coat"
+            variant="success"
             fullWidth={true}
             iconLeft={<IconSearch />}
             onClick={handleSubmit}

@@ -15,6 +15,7 @@ import { ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../../search/eventSearch/constants';
 import { getSearchQuery } from '../../search/eventSearch/utils';
+import styles from './eventKeywords.module.scss';
 
 interface Props {
   blackOnMobile?: boolean;
@@ -76,7 +77,7 @@ const EventKeywords: React.FC<Props> = ({
    */
 
   return (
-    <>
+    <div className={styles.keywordsWrapper}>
       {today && (
         <KeywordTag
           color="engelLight50"
@@ -151,7 +152,7 @@ const EventKeywords: React.FC<Props> = ({
           keyword={`+${restKeywords.length + customTagsCount}`}
         />
       )}
-    </>
+    </div>
   );
 };
 

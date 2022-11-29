@@ -5,9 +5,11 @@ abstract class ConsentModal {
   protected abstract get appName(): string;
 
   private get title() {
-    return screen.findByRole('heading', {
-      name: `${this.appName} käyttää evästeitä`,
-    });
+    return screen
+      .findByRole('heading', {
+        name: `${this.appName} käyttää evästeitä`,
+      })
+      .with({ timeout: 3000 });
   }
 
   private get acceptAllCookiesButton() {
@@ -33,10 +35,10 @@ abstract class ConsentModal {
   }
 
   public async isOpened() {
-    await t.expect(this.title.exists).ok();
+    await t.expect(this.title.exists).ok({ timeout: 3000 });
   }
   public async isClosed() {
-    await t.expect(this.title.exists).notOk();
+    await t.expect(this.title.exists).notOk({ timeout: 3000 });
   }
 }
 

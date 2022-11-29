@@ -88,7 +88,7 @@ export const removeQueryParamsFromRouter = (
   }
   router.replace(
     getLocalizedCmsItemUrl(
-      ROUTES.SEARCH,
+      ROUTES.COURSESEARCH,
       {},
       (router.locale || router.defaultLocale) as Language
     ),

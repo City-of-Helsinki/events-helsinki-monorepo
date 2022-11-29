@@ -18,7 +18,8 @@ export const extractLatestReturnPath = (
   const searchParams = new URLSearchParams(queryString);
   const returnPaths = searchParams.getAll('returnPath');
   // latest path is the last item, it can be popped. If empty, defaults to /events
-  const extractedPath = returnPaths.pop() ?? getI18nPath(ROUTES.SEARCH, locale);
+  const extractedPath =
+    returnPaths.pop() ?? getI18nPath(ROUTES.COURSESEARCH, locale);
   // there is no support to delete all but extracted item from same parameter list. This is a workaround to it:
   // 1) delete all first
   searchParams.delete('returnPath');

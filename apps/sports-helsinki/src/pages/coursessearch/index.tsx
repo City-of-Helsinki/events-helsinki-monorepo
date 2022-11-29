@@ -37,7 +37,7 @@ export default function Search() {
   return (
     <MatomoWrapper>
       <HCRCApolloPage
-        uri={ROUTES.SEARCH}
+        uri={ROUTES.COURSESEARCH}
         className="pageLayout"
         navigation={<Navigation />}
         content={

@@ -44,7 +44,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
   const locale = useLocale();
   const search = addParamsToQueryString(router.asPath, {
     returnPath: `/${locale}/${getLocalizedCmsItemUrl(
-      ROUTES.SEARCH,
+      ROUTES.COURSESEARCH,
       {},
       locale
     )}`,
@@ -123,7 +123,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
             <ErrorHero text={t('notFound.text')} title={t('notFound.title')}>
               <Link
                 href={`${getLocalizedCmsItemUrl(
-                  ROUTES.SEARCH,
+                  ROUTES.COURSESEARCH,
                   {},
                   locale
                 )}${search}`}

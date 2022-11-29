@@ -77,7 +77,7 @@ it('should go to event list', async () => {
       name: translations.event.hero.ariaLabelBackButton,
     })
   );
-  expect(router.pathname).toBe('/haku');
+  expect(router.pathname).toBe('/kurssihaku');
 });
 
 it('should render keywords', () => {

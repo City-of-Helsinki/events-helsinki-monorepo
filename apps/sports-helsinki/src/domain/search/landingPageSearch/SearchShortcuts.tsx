@@ -5,13 +5,14 @@ import React from 'react';
 import CategoryFilter from '../../../common-events/components/category/CategoryFilter';
 import { ROUTES } from '../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
-import type { CategoryOption, Filters } from '../eventSearch/types';
+import type { CategoryOption } from '../eventSearch/types';
 import { getSearchQuery } from '../eventSearch/utils';
 
 type SearchShortcutsProps = {
   className: string;
   categories: CategoryOption[];
-  searchFilters: Filters;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  searchFilters: any;
 };
 
 export default function SearchShortcuts({

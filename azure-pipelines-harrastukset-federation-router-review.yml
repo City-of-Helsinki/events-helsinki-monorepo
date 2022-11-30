@@ -22,7 +22,7 @@ pr:
     - main
   paths:
     include:
-    - 'proxies/events-graphql-federation/subgraphs/**'
+    - 'proxies/events-graphql-federation/**'
     - 'azure-pipelines-harrastukset-federation-router-review.yml'
     - '!**/README.md'
 

@@ -77,7 +77,7 @@ export async function getStaticPaths() {
   const pagePageInfos = await getAllPages();
   const paths = pagePageInfos
     .map((pageInfo) => ({
-      params: { slug: getSlugFromUri(pageInfo.slug) },
+      params: { slug: getSlugFromUri(pageInfo.uri) },
       locale: pageInfo.locale,
     }))
     // Remove the pages without a slug

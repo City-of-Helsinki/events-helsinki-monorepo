@@ -99,7 +99,7 @@ const SimpleVenueSearch: React.FC<{
               </div>
               <div className={styles.buttonWrapper}>
                 <Button
-                  theme="coat"
+                  variant="success"
                   fullWidth={true}
                   iconLeft={<IconSearch aria-hidden />}
                   type="submit"

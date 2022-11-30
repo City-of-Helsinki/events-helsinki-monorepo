@@ -15,6 +15,7 @@ import { ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../../search/eventSearch/constants';
 import { getSearchQuery } from '../../search/eventSearch/utils';
+import styles from './eventKeywords.module.scss';
 
 interface Props {
   blackOnMobile?: boolean;
@@ -76,82 +77,92 @@ const EventKeywords: React.FC<Props> = ({
    */
 
   return (
-    <>
-      {today && (
-        <KeywordTag
-          color="engelLight50"
-          keyword={t('categories.labelToday')}
-          onClick={
-            withActions ? handleClick('dateType', DATE_TYPES.TODAY) : undefined
-          }
-        />
-      )}
-      {!today && thisWeek && (
-        <KeywordTag
-          color="engelLight50"
-          keyword={t('categories.labelThisWeek')}
-          onClick={
-            withActions
-              ? handleClick('dateType', DATE_TYPES.THIS_WEEK)
-              : undefined
-          }
-        />
-      )}
-      {showIsFree && freeEvent && (
-        <KeywordTag
-          color="tramLight20"
-          keyword={t('categories.labelFree')}
-          onClick={withActions ? handleClick('isFree') : undefined}
-        />
-      )}
-      {showKeywords &&
-        first &&
-        (showKeywordsCount ? customTagsCount < 2 : true) && (
+    <div className={styles.keywordsWrapper}>
+      <div className={styles.keywordsMain}>
+        {today && (
           <KeywordTag
             color="engelLight50"
-            blackOnMobile={blackOnMobile}
-            hideOnMobile={hideKeywordsOnMobile}
-            key={first.id}
-            keyword={first.name}
-            onClick={withActions ? handleClick('text', first.name) : undefined}
+            keyword={t('categories.labelToday')}
+            onClick={
+              withActions
+                ? handleClick('dateType', DATE_TYPES.TODAY)
+                : undefined
+            }
           />
         )}
-      {showKeywords &&
-        second &&
-        (showKeywordsCount
-          ? customTagsCount + Number(Boolean(first)) < 2
-          : true) && (
+        {!today && thisWeek && (
           <KeywordTag
             color="engelLight50"
-            blackOnMobile={blackOnMobile}
-            hideOnMobile={hideKeywordsOnMobile}
-            key={second.id}
-            keyword={second.name}
-            onClick={withActions ? handleClick('text', second.name) : undefined}
+            keyword={t('categories.labelThisWeek')}
+            onClick={
+              withActions
+                ? handleClick('dateType', DATE_TYPES.THIS_WEEK)
+                : undefined
+            }
           />
         )}
-      {!!restKeywords.length &&
-        showKeywords &&
-        !showKeywordsCount &&
-        restKeywords.map((tag) => (
+        {showIsFree && freeEvent && (
           <KeywordTag
-            color="engelLight50"
+            color="tramLight20"
+            keyword={t('categories.labelFree')}
+            onClick={withActions ? handleClick('isFree') : undefined}
+          />
+        )}
+        {showKeywords &&
+          first &&
+          (showKeywordsCount ? customTagsCount < 2 : true) && (
+            <KeywordTag
+              color="engelLight50"
+              blackOnMobile={blackOnMobile}
+              hideOnMobile={hideKeywordsOnMobile}
+              key={first.id}
+              keyword={first.name}
+              onClick={
+                withActions ? handleClick('text', first.name) : undefined
+              }
+            />
+          )}
+        {showKeywords &&
+          second &&
+          (showKeywordsCount
+            ? customTagsCount + Number(Boolean(first)) < 2
+            : true) && (
+            <KeywordTag
+              color="engelLight50"
+              blackOnMobile={blackOnMobile}
+              hideOnMobile={hideKeywordsOnMobile}
+              key={second.id}
+              keyword={second.name}
+              onClick={
+                withActions ? handleClick('text', second.name) : undefined
+              }
+            />
+          )}
+        {!!restKeywords.length &&
+          showKeywords &&
+          !showKeywordsCount &&
+          restKeywords.map((tag) => (
+            <KeywordTag
+              color="engelLight50"
+              blackOnMobile={blackOnMobile}
+              hideOnMobile={hideKeywordsOnMobile}
+              key={tag.id}
+              keyword={tag.name}
+              onClick={withActions ? handleClick('text', tag.name) : undefined}
+            />
+          ))}
+      </div>
+      <div className={styles.keywordsCount}>
+        {!!restKeywords.length && showKeywords && showKeywordsCount && (
+          <KeywordTag
+            color="transparent"
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
-            key={tag.id}
-            keyword={tag.name}
-            onClick={withActions ? handleClick('text', tag.name) : undefined}
+            keyword={`+${restKeywords.length + customTagsCount}`}
           />
-        ))}
-      {!!restKeywords.length && showKeywords && showKeywordsCount && (
-        <KeywordTag
-          color="transparent"
-          blackOnMobile={blackOnMobile}
-          hideOnMobile={hideKeywordsOnMobile}
-          keyword={`+${restKeywords.length + customTagsCount}`}
-        />
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
 };
 

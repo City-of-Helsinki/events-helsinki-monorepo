@@ -348,7 +348,7 @@ const PriceInfo: React.FC<{ event: EventFields }> = ({ event }) => {
       {offerInfoUrl && (
         <Visible below="s" className={styles.buyButtonWrapper}>
           <Button
-            theme="coat"
+            variant="success"
             aria-label={t('info.ariaLabelBuyTickets')}
             fullWidth={true}
             onClick={moveToBuyTicketsPage}

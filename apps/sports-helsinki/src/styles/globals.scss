@@ -10,22 +10,38 @@ main {
 * {
   box-sizing: border-box;
   font-family: $font-family-base;
-  --menu-item-background-color-highlighted: var(--color-coat-of-arms-dark);
+  --menu-item-background-color-highlighted: var(--color-success);
 }
 
 .pageLayout {
   row-gap: 0 !important;
 }
 
+.articlesArchive {
+  button,
+  button:active {
+    background-color: var(--color-success);
+    border: none;
+  }
+  button:hover,
+  button:focus {
+    background-color: var(--color-success-dark);
+  }
+}
+
 :root {
-  --color-theme-background: var(--color-fog-medium-light);
+  --color-theme-background: var(--color-engel-medium-light);
   --color-primary-black: var(--color-black-90);
-  --color-secondary-link: var(--color-coat-of-arms-dark);
-  --color-link-show-all: var(--color-coat-of-arms-dark);
-  --color-input-light: var(--color-fog-light);
-  --color-input: var(--color-fog);
-  --color-input-dark: var(--color-coat-of-arms-dark);
-  --color-input-selected-text: var(--color-black-90);
+  --color-secondary-link: var(--color-success-dark);
+  --color-input-light: var(--color-success-light);
+  --color-input: var(--color-success);
+  --color-input-dark: var(--color-success-dark);
+  --color-input-selected-text: var(--color-white);
+
+  /*hcrc styles*/
+  --hcrc-color-link-show-all: var(--color-success-dark);
+  --hcrc-color-hero-bg: var(--color-theme-background);
+  --hcrc-color-archive-search-bg: var(--color-theme-background);
 }
 
 button {

@@ -34,10 +34,26 @@ export const getUriID = (slugs: string[], locale: AppLanguage): string => {
   return `/${slugs.join('/')}/`;
 };
 
+export const removeInternalDoublePrefix = (slugs: string[]) => {
+  [
+    AppConfig.cmsArticlesContextPath.replace('/', ''),
+    AppConfig.cmsPagesContextPath.replace('/', ''),
+  ].forEach((internalUriSegment) => {
+    if (slugs[0] === internalUriSegment) {
+      slugs.shift();
+    }
+  });
+  // eslint-disable-next-line no-console
+  console.log('removeInternalDoublePrefix', { slugs });
+  return slugs;
+};
+
 export const getSlugFromUri = (uri?: string | null): string[] | null => {
   const uriWithoutLang = stripLocaleFromUri(uri ?? '');
   if (uriWithoutLang) {
-    return uriWithoutLang.split('/').filter((i) => i);
+    return removeInternalDoublePrefix(
+      uriWithoutLang.split('/').filter((i) => i)
+    );
   }
   return null;
 };

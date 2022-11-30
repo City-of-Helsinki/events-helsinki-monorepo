@@ -17,3 +17,4 @@ export default () => {
   //10 loads per minute
   sleep(6);
 };
+

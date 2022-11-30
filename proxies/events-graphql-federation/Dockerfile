@@ -14,3 +14,4 @@ FROM router as production
 EXPOSE 4000
 EXPOSE 8088
 CMD ["-c", "config/router.yaml", "-s", "schema/supergraph.graphql", "--log", "info"]
+

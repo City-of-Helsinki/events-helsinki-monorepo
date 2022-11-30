@@ -1,3 +1,8 @@
-.keywordsWrapper > button {
-  background-color: rgba(0, 0, 0, 0.1) !important;
+.keywordsWrapper {
+  display: flex;
+  align-items: center;
+
+  .keywordsMain > button {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+  }
 }

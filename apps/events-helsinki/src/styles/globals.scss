@@ -35,11 +35,15 @@ main {
   --color-theme-background: var(--color-copper-light);
   --color-primary-black: var(--color-black-90);
   --color-secondary-link: var(--color-success-dark);
-  --color-link-show-all: var(--color-success-dark);
   --color-input-light: var(--color-success-light);
   --color-input: var(--color-success);
   --color-input-dark: var(--color-success-dark);
   --color-input-selected-text: var(--color-white);
+
+  /*hcrc styles*/
+  --hcrc-color-link-show-all: var(--color-success-dark);
+  --hcrc-color-hero-bg: var(--color-theme-background);
+  --hcrc-color-archive-search-bg: var(--color-theme-background);
 }
 
 button {

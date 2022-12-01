@@ -16,7 +16,7 @@ import {
   PostsDocument,
   PagesDocument,
 } from 'react-helsinki-headless-cms/apollo';
-import { createApolloClient } from 'domain/clients/eventsFederationApolloClient';
+import { createApolloClient } from '../../../domain/clients/eventsFederationApolloClient';
 
 export const ARTICLES_AMOUNT_LIMIT = 100;
 export const PAGES_AMOUNT_LIMIT = 100;

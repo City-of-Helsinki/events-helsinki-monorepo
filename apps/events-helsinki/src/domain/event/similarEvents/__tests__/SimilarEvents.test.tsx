@@ -14,10 +14,7 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
-import SimilarEvents, {
-  similarEventsContainerTestId,
-  similarEventsLoadingSpinnerTestId,
-} from '../SimilarEvents';
+import SimilarEvents from '../SimilarEvents';
 
 const id = '1';
 const name = 'Event title';

@@ -140,7 +140,8 @@ export const getDefaultCollections = (
   getRoutedInternalHref: RCHCConfig['utils']['getRoutedInternalHref'],
   currentLanguageCode: RCHCConfig['currentLanguageCode']
 ) =>
-  getCollections(page?.modules ?? [], true)?.reduce(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getCollections(page?.modules?.filter((m: any) => !!m) ?? [], true)?.reduce(
     (collectionElements: JSX.Element[], collection) => {
       const commonCollectionProps = {
         key: `collection-${Math.random()}`,

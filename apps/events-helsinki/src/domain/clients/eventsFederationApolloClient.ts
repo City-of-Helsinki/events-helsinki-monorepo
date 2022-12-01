@@ -25,7 +25,7 @@ import {
 import type { LanguageString } from 'events-helsinki-components';
 import capitalize from 'lodash/capitalize';
 import { useMemo } from 'react';
-import { logger } from '../../logger';
+import { graphqlClientLogger } from '../../logger';
 import { rewriteInternalURLs } from '../../utils/routerUtils';
 import AppConfig from '../app/AppConfig';
 
@@ -46,7 +46,7 @@ function getHttpLink(uri: string) {
     AppConfig.allowUnauthorizedRequests &&
     new URL(uri).protocol === 'https:'
   ) {
-    logger.info('Allowing unauthorized requests');
+    graphqlClientLogger.info('Allowing unauthorized requests');
     options = {
       ...options,
       fetchOptions: {
@@ -81,10 +81,12 @@ export function createApolloClient() {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {
         const errorMessage = `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`;
+        graphqlClientLogger.error(errorMessage);
         Sentry.captureMessage(errorMessage);
       });
     }
     if (networkError) {
+      graphqlClientLogger.error(networkError);
       Sentry.captureMessage('Network error');
     }
   });

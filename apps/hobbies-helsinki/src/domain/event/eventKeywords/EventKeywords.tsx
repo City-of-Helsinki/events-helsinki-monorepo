@@ -77,9 +77,15 @@ const EventKeywords: React.FC<Props> = ({
 
   return (
     <>
+      {showIsFree && freeEvent && (
+        <KeywordTag
+          featured
+          keyword={t('categories.labelFree')}
+          onClick={withActions ? handleClick('isFree') : undefined}
+        />
+      )}
       {today && (
         <KeywordTag
-          color="engelLight50"
           keyword={t('categories.labelToday')}
           onClick={
             withActions ? handleClick('dateType', DATE_TYPES.TODAY) : undefined
@@ -88,7 +94,6 @@ const EventKeywords: React.FC<Props> = ({
       )}
       {!today && thisWeek && (
         <KeywordTag
-          color="engelLight50"
           keyword={t('categories.labelThisWeek')}
           onClick={
             withActions
@@ -97,18 +102,10 @@ const EventKeywords: React.FC<Props> = ({
           }
         />
       )}
-      {showIsFree && freeEvent && (
-        <KeywordTag
-          color="tramLight20"
-          keyword={t('categories.labelFree')}
-          onClick={withActions ? handleClick('isFree') : undefined}
-        />
-      )}
       {showKeywords &&
         first &&
         (showKeywordsCount ? customTagsCount < 2 : true) && (
           <KeywordTag
-            color="engelLight50"
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
             key={first.id}
@@ -122,7 +119,6 @@ const EventKeywords: React.FC<Props> = ({
           ? customTagsCount + Number(Boolean(first)) < 2
           : true) && (
           <KeywordTag
-            color="engelLight50"
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
             key={second.id}
@@ -135,7 +131,6 @@ const EventKeywords: React.FC<Props> = ({
         !showKeywordsCount &&
         restKeywords.map((tag) => (
           <KeywordTag
-            color="engelLight50"
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
             key={tag.id}
@@ -145,7 +140,7 @@ const EventKeywords: React.FC<Props> = ({
         ))}
       {!!restKeywords.length && showKeywords && showKeywordsCount && (
         <KeywordTag
-          color="transparent"
+          transparent
           blackOnMobile={blackOnMobile}
           hideOnMobile={hideKeywordsOnMobile}
           keyword={`+${restKeywords.length + customTagsCount}`}

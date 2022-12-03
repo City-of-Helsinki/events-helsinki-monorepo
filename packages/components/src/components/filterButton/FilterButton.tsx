@@ -11,10 +11,9 @@ interface Props {
   text: string;
   type: FilterType;
   value: string;
-  id?: string;
 }
 
-const FilterButton: React.FC<Props> = ({ id, onRemove, text, type, value }) => {
+const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
   const { t } = useCommonTranslation();
   const handleRemove = () => {
     onRemove(value, type);
@@ -28,7 +27,6 @@ const FilterButton: React.FC<Props> = ({ id, onRemove, text, type, value }) => {
 
   return (
     <RoundedTag
-      id={id || `tag-${Math.random().toString()}`}
       theme={theme}
       onDelete={handleRemove}
       deleteButtonAriaLabel={t('common:filter.ariaButtonRemove', {

@@ -6,12 +6,7 @@ import styles from './keyword.module.scss';
 
 interface Props {
   blackOnMobile?: boolean;
-  color?:
-    | 'engelLight50'
-    | 'tramLight20'
-    | 'black10'
-    | 'black01'
-    | 'transparent';
+  color?: 'engelLight50' | 'tramLight20' | 'black10' | 'transparent';
   hideOnMobile?: boolean;
   keyword: string;
   onClick?: () => void;

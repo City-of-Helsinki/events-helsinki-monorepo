@@ -1,5 +1,9 @@
 .filter {
-  --tag-background : "var(--color-engel)";
-  --tag-color : "var(--color-black-90)";
-  --tag-focus-outline-color : "var(--color-black-90)";
+  margin-right: var(--spacing-2-xs);
+  margin-bottom: var(--spacing-2-xs);
+  margin-top: var(--spacing-2-xs);
+
+  & > div:hover {
+    background-color: var(--color-black-90);
+  }
 }

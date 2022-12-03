@@ -13133,7 +13133,7 @@ __metadata:
     graphql: "npm:16.6.0"
     happy-dom: "npm:6.0.4"
     hds-design-tokens: "npm:2.3.0"
-    hds-react: "npm:2.4.0"
+    hds-react: "npm:2.8.0"
     html-react-parser: "npm:3.0.4"
     i18next: "npm:21.10.0"
     i18next-browser-languagedetector: "npm:6.1.5"
@@ -13159,7 +13159,7 @@ __metadata:
     react-content-loader: "npm:6.2.0"
     react-datepicker: "npm:4.8.0"
     react-dom: "npm:>=17.0.2"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha54"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha59"
     react-i18next: "npm:11.18.6"
     require-from-string: "npm:2.0.2"
     rimraf: "npm:3.0.2"
@@ -13306,7 +13306,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:^16.5.0"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:2.4.0"
+    hds-react: "npm:2.8.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.1"
     i18next: "npm:21.9.2"
@@ -13335,7 +13335,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha54"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha59"
     react-i18next: "npm:11.18.6"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -15266,10 +15266,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-core@npm:2.4.0":
-  version: 2.4.0
-  resolution: "hds-core@npm:2.4.0"
-  checksum: 7fe0188f22dd12c80fd3ff539583f93db1b9c3f347f64d0abcf1627c1bee59509696932f3d5b6365683a7e15b26e6941d8cb98f1cfa64413c738e5915f13fcba
+"hds-core@npm:2.8.0":
+  version: 2.8.0
+  resolution: "hds-core@npm:2.8.0"
+  checksum: 0ee52cf7b877c5cb664da9b897ed9fdd67f940928f5a72de59afb9cb9b41beab90cc985ec1761a1e3b555806900fea375fd2f89caa97301eaa881220df027d30
   languageName: node
   linkType: hard
 
@@ -15287,9 +15287,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-react@npm:2.4.0":
-  version: 2.4.0
-  resolution: "hds-react@npm:2.4.0"
+"hds-react@npm:2.8.0":
+  version: 2.8.0
+  resolution: "hds-react@npm:2.8.0"
   dependencies:
     "@babel/runtime": "npm:7.11.2"
     "@emotion/styled-base": "npm:^11.0.0"
@@ -15301,7 +15301,7 @@ __metadata:
     crc-32: "npm:1.2.0"
     date-fns: "npm:2.16.1"
     downshift: "npm:6.0.6"
-    hds-core: "npm:2.4.0"
+    hds-core: "npm:2.8.0"
     kashe: "npm:1.0.4"
     lodash.get: "npm:^4.4.2"
     lodash.isequal: "npm:4.5.0"
@@ -15319,11 +15319,10 @@ __metadata:
     react-spring: "npm:9.3.0"
     react-use-measure: "npm:2.0.1"
     react-virtual: "npm:2.2.7"
-    typescript: "npm:4.5.5"
   peerDependencies:
     react: ^16.8.0 || ^17
     react-dom: ^16.8.0 || ^17
-  checksum: ebea950dc7da7ca05b381e6898d9e391ebaaad950b721e717da74a2714b62e0e92337564e65a193331b32ea0a0704c13e43a525826e0f741bc57eee70293bae5
+  checksum: c7407f4aabf82d5245c04637273015a2c797f8e68c2250ed03c7d96187ae8778c4e905ad95c6616399d2acf6acec6b5ff1aaf581d65f43cae684400e476c81a0
   languageName: node
   linkType: hard
 
@@ -15476,7 +15475,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:^16.5.0"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:2.4.0"
+    hds-react: "npm:2.8.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.1"
     i18next: "npm:21.9.2"
@@ -15505,7 +15504,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha54"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha59"
     react-i18next: "npm:11.18.6"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -23544,9 +23543,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha54":
-  version: 1.0.0-alpha54
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha54"
+"react-helsinki-headless-cms@npm:1.0.0-alpha59":
+  version: 1.0.0-alpha59
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha59"
   dependencies:
     hds-design-tokens: "npm:^2.3.0"
     html-react-parser: "npm:^1.4.8"
@@ -23560,7 +23559,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: b1b118213f7f9f01bab2dec3eb76924f3350544d4473d4ab64bd4962cfea701a6e701c73f60e6d1c4b803f4cd0e4fc681eea43ef12b223d256ef5066f1a5a761
+  checksum: 01dd4acae08ae3aef54eb8bce53b04f505ad57f1d804474529a2f4e27c681db72504541a682da537e748f3f32eccb6155026604a6d3a01f1410b53e42254ed54
   languageName: node
   linkType: hard
 
@@ -25814,7 +25813,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:^16.5.0"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:2.4.0"
+    hds-react: "npm:2.8.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.1"
     i18next: "npm:21.9.2"
@@ -25843,7 +25842,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha54"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha59"
     react-i18next: "npm:11.18.6"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -27944,16 +27943,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.5.5":
-  version: 4.5.5
-  resolution: "typescript@npm:4.5.5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: d2d7724f3a75ff831b39b9086cec2cbfeb54279c3c4e75f8dabdb1b3fcb837922fe26d09c1db396c33d0c023f20c50bfe2bc5d46c51537d633cf8e6f3ca4cb5e
-  languageName: node
-  linkType: hard
-
 "typescript@npm:4.7.4":
   version: 4.7.4
   resolution: "typescript@npm:4.7.4"
@@ -27971,16 +27960,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 008c336ed785130b6e13254adbfc4084f5dbbe62851df9bac3eaf62fc29e0a396839c00ce47e0d92db44fa9a08b9f7ba4d31304f2b10cf7d42a0817728e822a1
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A4.5.5#optional!builtin<compat/typescript>":
-  version: 4.5.5
-  resolution: "typescript@patch:typescript@npm%3A4.5.5#optional!builtin<compat/typescript>::version=4.5.5&hash=a1c5e5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 71310a426dc2d8c8bef6d26e707c85c0588463ec9c61637045acc899e9942e50d94eced53d72d264615074476a55173979a76bf002ef5c70606580c82557c4e4
   languageName: node
   linkType: hard
 

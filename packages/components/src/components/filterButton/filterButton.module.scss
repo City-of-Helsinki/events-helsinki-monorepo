@@ -1,68 +1,9 @@
 .filter {
-  height: auto;
-  min-height: var(--spacing-m);
-  background-color: var(--color-black-70);
-  color: var(--color-white);
-  margin: var(--spacing-2-xs) var(--spacing-2-xs) var(--spacing-2-xs) 0;
-  display: inline-flex;
-  padding: var(--spacing-4-xs) var(--spacing-3-xs) var(--spacing-4-xs)
-    var(--spacing-2-xs);
-  align-items: center;
-  font-size: var(--fontsize-body-s);
-  font-weight: 500;
+  margin-right: var(--spacing-2-xs);
+  margin-bottom: var(--spacing-2-xs);
+  margin-top: var(--spacing-2-xs);
 
-  .closeButton {
-    padding: 0;
-    background: transparent;
-    border: none;
-    margin-left: var(--spacing-3-xs);
-    cursor: pointer;
-
-    svg {
-      vertical-align: middle;
-      margin: 0;
-    }
-
-    svg g * {
-      color: var(--color-white);
-    }
-
-    &:focus {
-      outline: 2px solid var(--color-white);
-      outline-offset: 0;
-    }
-  }
-}
-
-.date,
-.dateType {
-  background-color: var(--color-engel-medium-light);
-  color: var(--color-primary-black);
-
-  .closeButton {
-    svg g * {
-      color: var(--color-primary-black);
-    }
-    &:focus {
-      outline: 2px solid var(--color-primary-black);
-    }
-  }
-}
-
-.district,
-.keyword,
-.place,
-.yso {
-  background-color: var(--color-black-70);
-  color: var(--color-white);
-
-  .closeButton {
-    svg {
-      color: var(--color-white);
-    }
-
-    &:focus {
-      outline: 2px solid var(--color-white);
-    }
+  & > div:hover {
+    background-color: var(--color-black-90);
   }
 }

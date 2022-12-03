@@ -2,12 +2,23 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  class="filter minAge"
+  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 Tag-module_tag-rounded-corners__mCq3C tag_hds-tag--rounded-corners__2KR20 filter"
+  id="hds-tag"
 >
-  Alkaen 10 v
+  <span
+    class="Tag-module_label__zCgFr tag_hds-tag__label__I6mc8"
+    id="hds-tag-label"
+  >
+    <span
+      aria-hidden="false"
+    >
+      Alkaen 10 v
+    </span>
+  </span>
   <button
     aria-label="Poista suodatin: Alkaen 10 v"
-    class="closeButton"
+    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz"
+    id="hds-tag-delete-button"
     type="button"
   >
     <svg

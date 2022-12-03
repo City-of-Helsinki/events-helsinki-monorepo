@@ -1,5 +1,5 @@
-import classNames from 'classnames';
-import { IconCross } from 'hds-react';
+import type { TagCustomTheme } from 'hds-react';
+import { RoundedTag } from 'hds-react';
 import React from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation';
@@ -19,20 +19,23 @@ const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
     onRemove(value, type);
   };
 
+  const theme = {
+    '--tag-background': 'var(--color-black-70)',
+    '--tag-color': 'var(--color-white)',
+    '--tag-focus-outline-color': 'var(--color-black-90)',
+  } as TagCustomTheme;
+
   return (
-    <div className={classNames(styles.filter, styles[type])}>
+    <RoundedTag
+      theme={theme}
+      onDelete={handleRemove}
+      deleteButtonAriaLabel={t('common:filter.ariaButtonRemove', {
+        filter: text,
+      })}
+      className={styles.filter}
+    >
       {text}
-      <button
-        type="button"
-        className={styles.closeButton}
-        onClick={handleRemove}
-        aria-label={t('common:filter.ariaButtonRemove', {
-          filter: text,
-        })}
-      >
-        <IconCross size="s" aria-hidden />
-      </button>
-    </div>
+    </RoundedTag>
   );
 };
 

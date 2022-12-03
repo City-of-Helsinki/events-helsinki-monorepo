@@ -47,7 +47,7 @@
     "fast-deep-equal": "3.1.3",
     "graphql": "16.6.0",
     "hds-design-tokens": "2.3.0",
-    "hds-react": "2.4.0",
+    "hds-react": "2.8.0",
     "i18next": "21.10.0",
     "i18next-browser-languagedetector": "6.1.5",
     "i18next-http-backend": "1.4.4",
@@ -62,7 +62,7 @@
     "react-content-loader": "6.2.0",
     "react-datepicker": "4.8.0",
     "react-dom": ">=17.0.2",
-    "react-helsinki-headless-cms": "1.0.0-alpha54",
+    "react-helsinki-headless-cms": "1.0.0-alpha59",
     "react-i18next": "11.18.6",
     "sanitize-html": "2.7.2"
   },

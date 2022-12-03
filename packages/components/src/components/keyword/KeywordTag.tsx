@@ -1,17 +1,13 @@
 import classNames from 'classnames';
 import type { FunctionComponent } from 'react';
-import React from 'react';
+import { TagComponent as Tag } from 'react-helsinki-headless-cms';
 
 import styles from './keyword.module.scss';
 
 interface Props {
   blackOnMobile?: boolean;
-  color?:
-    | 'engelLight50'
-    | 'tramLight20'
-    | 'black10'
-    | 'black01'
-    | 'transparent';
+  featured?: boolean;
+  transparent?: boolean;
   hideOnMobile?: boolean;
   keyword: string;
   onClick?: () => void;
@@ -19,29 +15,23 @@ interface Props {
 
 const KeywordTag: FunctionComponent<Props> = ({
   blackOnMobile,
-  color,
   hideOnMobile,
+  transparent,
   keyword,
-  onClick,
+  ...rest
 }) => {
-  const handleClick = (ev: React.MouseEvent) => {
-    ev.preventDefault();
-    onClick && onClick();
-  };
-
   return (
-    <button
-      {...(!onClick && { tabIndex: -1 })}
-      className={classNames(styles.keyword, color && styles[color], {
-        [styles.blackOnMobile]: blackOnMobile,
-        [styles.hideOnMobile]: hideOnMobile,
-      })}
-      onClick={handleClick}
-      type="button"
-      role="link"
+    <Tag
+      className={classNames(
+        styles.keyword,
+        blackOnMobile && styles.blackOnMobile,
+        hideOnMobile && styles.hideOnMobile,
+        transparent && styles.transparent
+      )}
+      {...rest}
     >
       {keyword}
-    </button>
+    </Tag>
   );
 };
 

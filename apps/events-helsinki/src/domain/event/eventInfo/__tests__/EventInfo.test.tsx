@@ -88,7 +88,7 @@ it('should render event info fields', async () => {
   }); */
 
   const itemsByText = [
-    'Ma 22.6.2020, klo 10.00 – 13.00',
+    'Ma 22.6.2020, klo 10.00–13.00',
     addressLocality,
     locationName,
     streetAddress,

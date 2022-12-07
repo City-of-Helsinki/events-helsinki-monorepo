@@ -20,12 +20,4 @@
       color: var(--color-white);
     }
   }
-
-  &.whiteOnly,
-  &.whiteOnly:hover {
-    background-color: var(--color-white);
-    color: var(--color-black-90);
-    cursor: none;
-    padding: 0;
-  }
 }

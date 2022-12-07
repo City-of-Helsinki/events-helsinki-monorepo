@@ -18,6 +18,7 @@ import { getSearchQuery } from '../../search/eventSearch/utils';
 
 interface Props {
   blackOnMobile?: boolean;
+  whiteOnly?: boolean;
   event: EventFieldsFragment;
   hideKeywordsOnMobile?: boolean;
   showIsFree: boolean;
@@ -27,6 +28,7 @@ interface Props {
 }
 const EventKeywords: React.FC<Props> = ({
   blackOnMobile,
+  whiteOnly,
   event,
   hideKeywordsOnMobile = false,
   showIsFree,
@@ -79,13 +81,15 @@ const EventKeywords: React.FC<Props> = ({
     <>
       {showIsFree && freeEvent && (
         <KeywordTag
-          featured
+          whiteOnly={whiteOnly}
+          featured={!whiteOnly}
           keyword={t('categories.labelFree')}
           onClick={handleClick('isFree')}
         />
       )}
       {today && (
         <KeywordTag
+          whiteOnly={whiteOnly}
           keyword={t('categories.labelToday')}
           onClick={
             withActions ? handleClick('dateType', DATE_TYPES.TODAY) : undefined
@@ -94,6 +98,7 @@ const EventKeywords: React.FC<Props> = ({
       )}
       {!today && thisWeek && (
         <KeywordTag
+          whiteOnly={whiteOnly}
           keyword={t('categories.labelThisWeek')}
           onClick={
             withActions
@@ -106,6 +111,7 @@ const EventKeywords: React.FC<Props> = ({
         first &&
         (showKeywordsCount ? customTagsCount < 2 : true) && (
           <KeywordTag
+            whiteOnly={whiteOnly}
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
             key={first.id}
@@ -119,6 +125,7 @@ const EventKeywords: React.FC<Props> = ({
           ? customTagsCount + Number(Boolean(first)) < 2
           : true) && (
           <KeywordTag
+            whiteOnly={whiteOnly}
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
             key={second.id}
@@ -131,6 +138,7 @@ const EventKeywords: React.FC<Props> = ({
         !showKeywordsCount &&
         restKeywords.map((tag) => (
           <KeywordTag
+            whiteOnly={whiteOnly}
             blackOnMobile={blackOnMobile}
             hideOnMobile={hideKeywordsOnMobile}
             key={tag.id}
@@ -140,6 +148,7 @@ const EventKeywords: React.FC<Props> = ({
         ))}
       {!!restKeywords.length && showKeywords && showKeywordsCount && (
         <KeywordTag
+          whiteOnly={whiteOnly}
           transparent
           blackOnMobile={blackOnMobile}
           hideOnMobile={hideKeywordsOnMobile}

@@ -6,6 +6,7 @@ import styles from './keyword.module.scss';
 
 interface Props {
   blackOnMobile?: boolean;
+  whiteOnly?: boolean;
   featured?: boolean;
   transparent?: boolean;
   hideOnMobile?: boolean;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const KeywordTag: FunctionComponent<Props> = ({
+  whiteOnly,
   blackOnMobile,
   hideOnMobile,
   transparent,
@@ -26,7 +28,8 @@ const KeywordTag: FunctionComponent<Props> = ({
         styles.keyword,
         blackOnMobile && styles.blackOnMobile,
         hideOnMobile && styles.hideOnMobile,
-        transparent && styles.transparent
+        transparent && styles.transparent,
+        whiteOnly && styles.whiteOnly
       )}
       {...rest}
     >

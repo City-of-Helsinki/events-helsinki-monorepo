@@ -61,7 +61,7 @@ const getDateRangeStr = ({
       const startTimeStr = formatDate(startDate, timeFormat, locale);
       const endTimeStr = formatDate(endDate, timeFormat, locale);
       const timeStr = includeTime
-        ? `, ${timeAbbreviationStr}${startTimeStr} – ${endTimeStr}`
+        ? `, ${timeAbbreviationStr}${startTimeStr}–${endTimeStr}`
         : '';
 
       return [weekdayStr, dateStr, timeStr].join('');
@@ -69,17 +69,17 @@ const getDateRangeStr = ({
       const startDateStr = formatDate(startDate, 'd');
       const endDateStr = formatDate(endDate, 'd.M.yyyy');
 
-      return `${startDateStr} – ${endDateStr}`;
+      return `${startDateStr}–${endDateStr}`;
     } else if (isSameYear(startDate, endDate)) {
       const startDateStr = formatDate(startDate, 'd.M');
       const endDateStr = formatDate(endDate, 'd.M.yyyy');
 
-      return `${startDateStr} – ${endDateStr}`;
+      return `${startDateStr}–${endDateStr}`;
     } else {
       const startDateStr = formatDate(startDate, 'd.M.yyyy');
       const endDateStr = formatDate(endDate, 'd.M.yyyy');
 
-      return `${startDateStr} – ${endDateStr}`;
+      return `${startDateStr}–${endDateStr}`;
     }
   }
 };

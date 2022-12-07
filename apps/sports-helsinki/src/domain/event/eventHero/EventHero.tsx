@@ -190,7 +190,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                 </div>
                 {showKeywords && (
                   <div className={styles.categoryWrapper}>
-                    <EventKeywords event={event} showIsFree={true} />
+                    <EventKeywords whiteOnly event={event} showIsFree={true} />
                   </div>
                 )}
               </div>

@@ -66,12 +66,16 @@ class EventSearchPage {
   }
 
   public async doSuccessfulSearch() {
+    // eslint-disable-next-line no-console
+    console.info('EventSearchPage: doSuccessfulSearch');
     await t.typeText(this.autoSuggestInput, this.searchText);
     await t.click(this.searchButton);
     await this.expectSearchResults();
   }
 
   public async doUnsuccessfulSearch() {
+    // eslint-disable-next-line no-console
+    console.info('EventSearchPage: doUnsuccessfulSearch');
     await t.typeText(
       this.autoSuggestInput,
       'thisisatextthatverylikelycannotbefound'
@@ -82,7 +86,7 @@ class EventSearchPage {
 
   public async verify() {
     // eslint-disable-next-line no-console
-    console.log('EventSearchPage: verify');
+    console.info('EventSearchPage: verify');
     await t.expect(this.searchFormHeading.exists).ok();
   }
 }

@@ -1,20 +1,15 @@
 import classNames from 'classnames';
-import { LoadingSpinner } from 'events-helsinki-components';
 import type { Venue } from 'events-helsinki-components';
+import { LoadingSpinner } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Card } from 'react-helsinki-headless-cms';
-import styles from './venueList.module.scss';
 
-const venueCardsMap = {
-  default: Card,
-  large: Card, // TODO: ADD LargeEventCard,
-};
+import LargeEventCard from '../../../domain/event/eventCard/LargeEventCard';
+import styles from './venueList.module.scss';
 
 interface Props {
   buttonCentered?: boolean;
-  cardSize?: 'default' | 'large';
   venues: Venue[];
   count: number;
   loading: boolean;
@@ -24,7 +19,6 @@ interface Props {
 
 const VenueList: React.FC<Props> = ({
   buttonCentered = false,
-  cardSize = 'default',
   venues,
   loading,
   count,
@@ -33,16 +27,22 @@ const VenueList: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('search');
   const venuesLeft = count - venues.length;
-  const VenueCard = venueCardsMap[cardSize];
 
   return (
-    <div className={classNames(styles.venueListWrapper, styles[cardSize])}>
+    <div className={classNames(styles.venueListWrapper)}>
       <div className={styles.venuesWrapper}>
         {venues.map((venue) => (
-          <VenueCard
+          <LargeEventCard
             key={venue?.meta?.id}
+            id={venue?.meta?.id ?? ''}
             title={venue?.name?.fi ?? ''}
-            customContent={venue?.description?.fi}
+            location={venue?.location?.address?.streetAddress?.fi ?? ''}
+            imageUrl={(venue?.images && venue?.images[0]?.url) ?? ''}
+            tags={
+              venue?.ontologyWords
+                ?.map((tag) => tag?.label?.fi ?? '')
+                .filter((t) => t) ?? []
+            }
           />
         ))}
       </div>

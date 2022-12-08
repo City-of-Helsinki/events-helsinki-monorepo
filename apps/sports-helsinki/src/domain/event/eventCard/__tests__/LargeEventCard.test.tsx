@@ -1,6 +1,5 @@
 import userEvent from '@testing-library/user-event';
 import type { EventFieldsFragment } from 'events-helsinki-components';
-import { axe } from 'jest-axe';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
@@ -9,8 +8,10 @@ import { translations } from '@/test-utils/initI18n';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
 import LargeEventCard from '../LargeEventCard';
 
-const renderComponent = (event: EventFieldsFragment) =>
-  render(<LargeEventCard event={event} />);
+const renderComponent = () =>
+  render(
+    <LargeEventCard id="123" title="Event title" location="Event location" />
+  );
 
 beforeEach(() => {
   mockRouter.setCurrentUrl('/');

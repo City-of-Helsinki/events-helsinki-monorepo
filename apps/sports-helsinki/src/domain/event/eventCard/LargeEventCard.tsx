@@ -160,7 +160,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                     fullWidth
                     onClick={goToBuyTicketsPage}
                     size="small"
-                    variant="primary"
+                    variant="success"
                   >
                     {t('eventCard.buttonBuyTickets')}
                   </Button>

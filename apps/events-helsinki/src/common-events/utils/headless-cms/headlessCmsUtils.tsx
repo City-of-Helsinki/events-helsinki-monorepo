@@ -149,8 +149,6 @@ export const getDefaultCollections = (
         description: collection.description,
         type: getCollectionUIType(collection),
         collectionContainerProps: { withDots: true },
-        // TODO: The collection specific URL from the module itself should be used instead of a hard coded value.
-        showAllUrl: '/',
       };
 
       if (isEventSearchCollection(collection)) {
@@ -198,7 +196,11 @@ export const getDefaultCollections = (
           );
         });
         collectionElements.push(
-          <Collection {...commonCollectionProps} cards={cards} />
+          <Collection
+            {...commonCollectionProps}
+            showAllUrl={collection.showAllUrl}
+            cards={cards}
+          />
         );
       }
       return collectionElements;

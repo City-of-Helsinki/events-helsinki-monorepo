@@ -4,22 +4,14 @@ import {
   getEnvUrl,
 } from '../../../../packages/common-tests/browser-tests';
 import { ROUTES } from '../../src/constants';
-import EventsConsentModal from '../page-models/events-consent-modal';
+import allCookiesUser from '../roles/allCookiesUser';
 
 fixture('Search page')
   .page(getEnvUrl(ROUTES.SEARCH))
   .beforeEach(async () => i18n.changeLanguage('default'));
 
-// TODO: Load this from fixture or something
-// so that it does not need to be repeated in every test
-const acceptAllCookies = async () => {
-  const cookieConsentModal = new EventsConsentModal();
-  //   await cookieConsentModal.isOpened();
-  await cookieConsentModal.clickAcceptAllCookies();
-};
-
-test('Verify searching', async () => {
-  await acceptAllCookies();
+test('Verify searching', async (t) => {
+  await t.useRole(allCookiesUser);
   const searchPage = new EventSearchPage('appEvents');
   await searchPage.verify();
   await searchPage.doSuccessfulSearch();

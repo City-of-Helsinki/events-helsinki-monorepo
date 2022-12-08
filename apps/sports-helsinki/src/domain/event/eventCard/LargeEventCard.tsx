@@ -47,15 +47,10 @@ const LargeEventCard: React.FC<Props> = ({
   );
 
   const eventUrl = `${getLocalizedCmsItemUrl(
-    ROUTES.COURSES,
-    { eventId: id },
+    ROUTES.VENUES,
+    { venueId: `tprek:${id}` },
     locale
   )}${queryString}`;
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const goToEventPage = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    router.push(eventUrl);
-  };
 
   return (
     <LinkBox
@@ -68,7 +63,6 @@ const LargeEventCard: React.FC<Props> = ({
       href={eventUrl}
     >
       <div className={styles.eventCard}>
-        {/* INFO WRAPPER. Re-order info wrapper and text wrapper on css */}
         <div className={styles.infoWrapper}>
           <div className={styles.eventName}>{title}</div>
           <div className={styles.eventLocation}>

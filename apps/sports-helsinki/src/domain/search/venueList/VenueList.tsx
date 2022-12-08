@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import type { Venue } from 'events-helsinki-components';
-import { LoadingSpinner } from 'events-helsinki-components';
+import { useLocale, LoadingSpinner } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import getTranslation from 'utils/getTranslation';
 
 import LargeEventCard from '../../../domain/event/eventCard/LargeEventCard';
 import styles from './venueList.module.scss';
@@ -27,6 +28,7 @@ const VenueList: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('search');
   const venuesLeft = count - venues.length;
+  const locale = useLocale();
 
   return (
     <div className={classNames(styles.venueListWrapper)}>
@@ -35,8 +37,11 @@ const VenueList: React.FC<Props> = ({
           <LargeEventCard
             key={venue?.meta?.id}
             id={venue?.meta?.id ?? ''}
-            title={venue?.name?.fi ?? ''}
-            location={venue?.location?.address?.streetAddress?.fi ?? ''}
+            title={getTranslation(locale, venue?.name)}
+            location={getTranslation(
+              locale,
+              venue?.location?.address?.streetAddress
+            )}
             imageUrl={(venue?.images && venue?.images[0]?.url) ?? ''}
             tags={
               venue?.ontologyWords

@@ -56,9 +56,9 @@
 
 #### Apps
 
-- [apps/hobbies-helsinki](./apps/hobbies-helsinki): SSR, i18n, sass, graphQL, rest... [README](./apps/hobbies-helsinki/README.md) | [DEMO](https://harrastukset.test.kuva.hel.ninja) | [CHANGELOG](./apps/hobbies-helsinki/CHANGELOG.md)
-- [apps/events-helsinki](./apps/events-helsinki): Clone of Hobbies (SSR, i18n, sass, graphQL, rest...) [README](./apps/events-helsinki/README.md) | [DEMO](https://tapahtumat-mono.test.kuva.hel.ninja) | [CHANGELOG](./apps/events-helsinki/CHANGELOG.md)
-- [apps/sports-helsinki](./apps/sports-helsinki): Clone of Hobbies (SSR, i18n, sass, graphQL, rest...) [README](./apps/sports-helsinki/README.md) | [DEMO](https://liikunta-mono.test.kuva.hel.ninja) | [CHANGELOG](./apps/sports-helsinki/CHANGELOG.md)
+- [apps/hobbies-helsinki](./apps/hobbies-helsinki): SSR, i18n, sass, graphQL, rest... [README](./apps/hobbies-helsinki/README.md) | [DEMO](https://harrastukset.test.hel.ninja) | [CHANGELOG](./apps/hobbies-helsinki/CHANGELOG.md)
+- [apps/events-helsinki](./apps/events-helsinki): Clone of Hobbies (SSR, i18n, sass, graphQL, rest...) [README](./apps/events-helsinki/README.md) | [DEMO](https://tapahtumat.test.hel.ninja) | [CHANGELOG](./apps/events-helsinki/CHANGELOG.md)
+- [apps/sports-helsinki](./apps/sports-helsinki): Clone of Hobbies (SSR, i18n, sass, graphQL, rest...) [README](./apps/sports-helsinki/README.md) | [DEMO](https://liikunta.test.hel.ninja) | [CHANGELOG](./apps/sports-helsinki/CHANGELOG.md)
 
 > Apps should not depend on apps, they can depend on packages
 
@@ -198,7 +198,13 @@ Configuration lives in the root folder of each apps/packages. See
 ### 5.4 CI
 
 You'll find some example workflows for github action in [.github/workflows](./.github/workflows).
-They will ensure that
+
+Test, build and deploy pipelines located on Azure DevOps
+- [Harrastukset pipelines](https://dev.azure.com/City-of-Helsinki/harrastukset/_build)
+- [Tapahtumat pipelines](https://dev.azure.com/City-of-Helsinki/tapahtumat/_build)
+- [Liikunta pipelines](https://dev.azure.com/City-of-Helsinki/liikunta/_build)
+
+Static tests are run as part of pipelines. They will ensure that
 
 - You don't have package duplicates.
 - You don't have typecheck errors.

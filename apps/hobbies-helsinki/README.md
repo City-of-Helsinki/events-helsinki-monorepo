@@ -1,8 +1,10 @@
 #Hobbies-helsinki
 
-Staging server: https://harrastukset.test.kuva.hel.ninja
+Test server: https://harrastukset.test.hel.ninja
 
-Production server: https://harrastukset.hel.fi (https://harrastukset.prod.kuva.hel.ninja/)
+Staging server: https://harrastukset.stage.hel.ninja
+
+Production server: https://harrastukset.hel.fi
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

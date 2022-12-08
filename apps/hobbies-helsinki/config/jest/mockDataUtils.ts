@@ -59,6 +59,7 @@ export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
       audience: [],
       keywords: [fakeKeyword()],
       location: fakePlace(),
+      locationExtraInfo: null,
       startTime: '2020-07-13T05:51:05.761000Z',
       endTime: null,
       datePublished: null,

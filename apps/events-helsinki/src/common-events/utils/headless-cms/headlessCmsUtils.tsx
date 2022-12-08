@@ -43,8 +43,6 @@ export const removeInternalDoublePrefix = (slugs: string[]) => {
       slugs.shift();
     }
   });
-  // eslint-disable-next-line no-console
-  console.log('removeInternalDoublePrefix', { slugs });
   return slugs;
 };
 

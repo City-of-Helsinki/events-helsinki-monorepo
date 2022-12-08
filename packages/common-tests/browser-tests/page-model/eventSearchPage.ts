@@ -53,31 +53,37 @@ class EventSearchPage {
     return screen.queryByText(notFoundText);
   }
 
-  public async makeSuccessfulSearch() {
-    await t.typeText(this.autoSuggestInput, this.searchText);
-    await t.click(this.searchButton);
+  public async expectSearchResults() {
     t.expect(this.notFoundResult.exists).notOk;
     const results = this.results;
     await t.expect(results.count).gte(1); // At least one result should be found
     await t.expect(results.count).lte(10); // max 10 result per page
   }
 
-  public async makeUnsuccessfulSearch() {
+  public async expectNoSearchResults() {
+    t.expect(this.notFoundResult.exists).ok;
+    await t.expect(this.results.count).eql(0); // no cards returned
+  }
+
+  public async doSuccessfulSearch() {
+    await t.typeText(this.autoSuggestInput, this.searchText);
+    await t.click(this.searchButton);
+    await this.expectSearchResults();
+  }
+
+  public async doUnsuccessfulSearch() {
     await t.typeText(
       this.autoSuggestInput,
       'thisisatextthatverylikelycannotbefound'
     );
     await t.click(this.searchButton);
-    t.expect(this.notFoundResult.exists).ok;
-    await t.expect(this.results.count).eql(0); // no cards returned
+    await this.expectNoSearchResults();
   }
 
   public async verify() {
     // eslint-disable-next-line no-console
     console.log('EventSearchPage: verify');
     await t.expect(this.searchFormHeading.exists).ok();
-    await this.makeSuccessfulSearch();
-    await this.makeUnsuccessfulSearch();
   }
 }
 

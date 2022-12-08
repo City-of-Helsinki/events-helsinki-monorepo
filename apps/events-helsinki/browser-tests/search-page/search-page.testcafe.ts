@@ -22,4 +22,6 @@ test('Verify searching', async () => {
   await acceptAllCookies();
   const searchPage = new EventSearchPage('appEvents');
   await searchPage.verify();
+  await searchPage.doSuccessfulSearch();
+  await searchPage.doUnsuccessfulSearch();
 });

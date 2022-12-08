@@ -45,7 +45,7 @@ const VenueList: React.FC<Props> = ({
             imageUrl={(venue?.images && venue?.images[0]?.url) ?? ''}
             tags={
               venue?.ontologyWords
-                ?.map((tag) => tag?.label?.fi ?? '')
+                ?.map((tag) => getTranslation(locale, tag?.label))
                 .filter((t) => t) ?? []
             }
           />

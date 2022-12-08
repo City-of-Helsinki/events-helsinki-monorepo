@@ -22,15 +22,6 @@
     padding: var(--spacing-s);
     display: flex;
     text-decoration: none;
-
-    .keywordWrapper {
-      display: flex;
-      align-self: flex-end;
-
-      @include respond_above(s) {
-        display: none;
-      }
-    }
   }
 
   .infoWrapper {
@@ -74,26 +65,6 @@
         min-width: var(--spacing-layout-xs);
         min-height: var(--spacing-layout-xs);
       }
-    }
-
-    .eventAudienceAge {
-      display: flex;
-      order: 4;
-      font-size: var(--fontsize-body-l);
-      line-height: var(--lineheight-m);
-      margin-bottom: var(--spacing-s);
-      color: var(color-black-80);
-      svg {
-        margin-right: var(--spacing-2-xs);
-      }
-    }
-
-    .eventPrice {
-      order: 5;
-      font-size: var(--fontsize-body-l);
-      line-height: var(--lineheight-m);
-      margin-bottom: var(--spacing-s);
-      color: var(color-black-80);
     }
 
     .keywordWrapperDesktop {
@@ -145,12 +116,6 @@
           margin-top: var(--spacing-3-xs);
         }
       }
-    }
-  }
-
-  &.eventClosed {
-    .imageWrapper {
-      opacity: 0.5;
     }
   }
 }

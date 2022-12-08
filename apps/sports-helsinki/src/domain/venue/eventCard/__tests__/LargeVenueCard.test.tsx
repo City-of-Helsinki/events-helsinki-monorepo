@@ -6,16 +6,18 @@ import React from 'react';
 import { render, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
-import LargeEventCard from '../LargeEventCard';
+import LargeVenueCard from '../LargeVenueCard';
 
-const renderComponent = (event: EventFieldsFragment) =>
-  render(<LargeEventCard event={event} />);
+const renderComponent = () =>
+  render(
+    <LargeVenueCard id="123" title="Event title" location="Event location" />
+  );
 
 beforeEach(() => {
   mockRouter.setCurrentUrl('/');
 });
 
-describe('large event card', () => {
+describe('large venue card', () => {
   // TODO: when HDS fixes the tag id -> uncomment
   /* it('for accessibility violations', async () => {
     const event = fakeEvent() as EventFieldsFragment;
@@ -26,12 +28,12 @@ describe('large event card', () => {
   }); */
 
   // Skipped, because this is not available after the Link-component is changed from react-router Link.
-  it.skip('should go to event page by clicking event card', async () => {
+  it.skip('should go to venue page by clicking event card', async () => {
     const event = fakeEvent({
       id: '123',
     }) as EventFieldsFragment;
 
-    const { router } = renderComponent(event);
+    const { router } = renderComponent();
 
     expect(router.pathname).toStrictEqual('/');
 

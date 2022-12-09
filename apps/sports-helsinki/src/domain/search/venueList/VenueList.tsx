@@ -38,10 +38,13 @@ const VenueList: React.FC<Props> = ({
             key={venue?.meta?.id}
             id={venue?.meta?.id ?? ''}
             title={getTranslation(locale, venue?.name)}
-            location={getTranslation(
+            location={`${getTranslation(
               locale,
               venue?.location?.address?.streetAddress
-            )}
+            )}, ${venue?.location?.address?.postalCode} ${getTranslation(
+              locale,
+              venue?.location?.address?.city
+            )}`}
             imageUrl={(venue?.images && venue?.images[0]?.url) ?? ''}
             tags={
               venue?.ontologyWords

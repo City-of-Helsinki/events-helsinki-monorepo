@@ -39,14 +39,14 @@ const LargeVenueCard: React.FC<Props> = ({
     router.asPath.split('?')[1] ?? '',
     {
       returnPath: `${getLocalizedCmsItemUrl(
-        ROUTES.COURSESEARCH,
+        ROUTES.SEARCH,
         {},
         locale
-      )}?eventId=${id}`,
+      )}?venueId=${id}`,
     }
   );
 
-  const eventUrl = `${getLocalizedCmsItemUrl(
+  const venueUrl = `${getLocalizedCmsItemUrl(
     ROUTES.VENUES,
     { venueId: `tprek:${id}` },
     locale
@@ -56,11 +56,11 @@ const LargeVenueCard: React.FC<Props> = ({
     <LinkBox
       type="linkBox"
       aria-label={t('eventCard.ariaLabelLink', {
-        title,
+        name: title,
       })}
       id={getLargeEventCardId(id)}
       data-testid={id}
-      href={eventUrl}
+      href={venueUrl}
     >
       <div className={styles.eventCard}>
         <div className={styles.infoWrapper}>

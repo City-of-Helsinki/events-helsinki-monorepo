@@ -11,7 +11,7 @@ services:
       - FEDERATION_CMS_ROUTING_URL=${FEDERATION_CMS_ROUTING_URL}
       - FEDERATION_EVENTS_ROUTING_URL=${FEDERATION_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
       - FEDERATION_UNIFIED_SEARCH_ROUTING_URL=${FEDERATION_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
-      - FEDERATION_VENUES_ROUTING_URL=${FEDERATION_VENUES_ROUTING_URL:-http://host.docker.internal:3000/api/graphql}
+      - FEDERATION_VENUES_ROUTING_URL=${FEDERATION_VENUES_ROUTING_URL:-https://liikunta.hel.fi/api/graphql}
     ports:
       - '4000:4000'
       - '8088:8088'

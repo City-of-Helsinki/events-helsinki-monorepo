@@ -42,10 +42,6 @@ export type AppMenuItem = {
   label: string;
 };
 
-export type Connection<T> = {
-  edges: AppNode<T>[];
-};
-
 export type AppNode<T> = {
   cursor: string;
   node: T;
@@ -64,3 +60,16 @@ export type AppCategory = {
 };
 
 export type PageInfo = { uri: string; slug: string; locale: string };
+
+export type TimeResourceState =
+  | 'open'
+  | 'closed'
+  | 'undefined'
+  | 'self_service'
+  | 'with_key'
+  | 'with_reservation'
+  | 'open_and_reservable'
+  | 'with_key_and_reservation'
+  | 'enter_only'
+  | 'exit_only'
+  | 'weather_permitting';

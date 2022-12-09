@@ -21,10 +21,13 @@ import type {
   Neighborhood,
   NeighborhoodListResponse,
   Offer,
+  Ontology,
   OrganizationDetails,
   Place,
   PlaceListResponse,
+  SearchListQuery,
   StaticPage,
+  Venue,
 } from 'events-helsinki-components';
 import { EXTLINK, EventTypeId } from 'events-helsinki-components';
 import merge from 'lodash/merge';
@@ -414,4 +417,90 @@ const generateNodeArray = <T extends (...args: any) => any>(
   length: number
 ): ReturnType<T>[] => {
   return Array.from({ length }).map((_, i) => fakeFunc(i));
+};
+
+export const fakeOntologies = (
+  count = 1,
+  ontologies?: Partial<Ontology>[]
+): Ontology[] => generateNodeArray((i) => fakeOntology(ontologies?.[i]), count);
+
+export const fakeOntology = (overrides?: Partial<Ontology>): Ontology =>
+  merge(
+    {
+      id: faker.datatype.number(),
+      label: faker.word.noun(),
+      __typename: 'Ontology',
+    },
+    overrides
+  );
+
+export const fakeVenues = (
+  count = 1,
+  venues?: Partial<Venue>[]
+): SearchListQuery => ({
+  unifiedSearch: {
+    __typename: 'SearchResultConnection',
+    count,
+    pageInfo: {
+      __typename: 'SearchResultPageInfo',
+      endCursor: null,
+      hasNextPage: false,
+    },
+    edges: generateNodeArray((i) => {
+      const venue = fakeVenue(venues?.[i]);
+      return {
+        __typename: 'SearchResultEdge',
+        node: {
+          __typename: 'SearchResultNode',
+          venue: {
+            description: venue.description,
+            images: [venue.image],
+            location: {
+              address: {
+                city: venue.addressLocality,
+                postalCode: venue.postalCode,
+                streetAddress: { fi: venue.streetAddress },
+              },
+              geoLocation: {
+                geometry: {
+                  coordinates: venue.position,
+                },
+              },
+            },
+            meta: { id: venue.id },
+            name: { fi: venue.name },
+            ontologyWords: venue.ontologyWords.map((ontology) => ({
+              id: ontology?.id,
+              label: { fi: ontology?.label },
+            })),
+          },
+        },
+      } as NonNullable<
+        NonNullable<SearchListQuery['unifiedSearch']>['edges']
+      >[number];
+    }, count),
+  },
+  __typename: 'Query',
+});
+
+export const fakeVenue = (overrides?: Partial<Venue>): Venue => {
+  const location = fakePlace();
+  const ontologyTree = fakeOntologies(1);
+  const ontologies = fakeOntologies(5);
+  return merge<Venue, typeof overrides>(
+    {
+      id: `hel:${faker.datatype.uuid()}`,
+      name: 'Venue name',
+      description: 'Venue description',
+      image: 'image.png',
+      infoUrl: 'http://venue.infourl.fi',
+      streetAddress: location.streetAddress?.fi,
+      accessibilitySentences: [],
+      connections: [],
+      ontologyTree: ontologyTree,
+      ontologyWords: ontologies,
+      __typename: 'Venue',
+    },
+    overrides
+  );
 };

@@ -1,37 +1,31 @@
-import { EventDetailsDocument } from 'events-helsinki-components';
+import { VenueDocument } from 'events-helsinki-components';
 import type {
-  EventFields,
-  EventDetailsQuery,
-  EventDetailsQueryVariables,
+  Venue,
+  VenueQuery,
+  VenueQueryVariables,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
+import VenuePageContainer from 'domain/venue/VenuePageContainer';
 import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
 import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
-import EventPageContainer from '../../../domain/event/EventPageContainer';
 import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../../domain/matomoWrapper/MatomoWrapper';
 import { getLocaleOrError } from '../../../utils/routerUtils';
 
 const Event: NextPage<{
-  event: EventFields;
+  venue: Venue;
   loading: boolean;
-}> = ({ event, loading }) => {
+}> = ({ venue, loading }) => {
   return (
     <MatomoWrapper>
       <RHHCPage
         className="pageLayout"
         navigation={<Navigation />}
-        content={
-          <EventPageContainer
-            event={event}
-            loading={loading}
-            showSimilarEvents={AppConfig.showSimilarEvents}
-          />
-        }
+        content={<VenuePageContainer venue={venue} loading={loading} />}
         footer={<FooterSection />}
       />
     </MatomoWrapper>
@@ -39,7 +33,6 @@ const Event: NextPage<{
 };
 export default Event;
 
-// export default eventsWithApollo(Event);
 export async function getStaticPaths() {
   return {
     paths: [],
@@ -50,22 +43,27 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async ({ apolloClient }) => {
     const locale = getLocaleOrError(context.locale);
-    const { data: eventData, loading } = await apolloClient.query<
-      EventDetailsQuery,
-      EventDetailsQueryVariables
+    const { data: venueData, loading } = await apolloClient.query<
+      VenueQuery,
+      VenueQueryVariables
     >({
-      query: EventDetailsDocument,
+      query: VenueDocument,
       variables: {
         id: (context.params?.venueId as string) || '',
-        include: ['in_language', 'keywords', 'location', 'audience'],
+        includeHaukiFields: AppConfig.isHaukiEnabled,
+      },
+      context: {
+        headers: {
+          'Accept-Language': locale,
+        },
       },
     });
 
-    const event = eventData?.eventDetails;
+    const venue = venueData?.venue;
 
     return {
       props: {
-        event,
+        venue,
         loading,
         ...(await serverSideTranslationsWithCommon(locale, [
           'common',

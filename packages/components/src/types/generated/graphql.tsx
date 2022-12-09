@@ -35,6 +35,12 @@ export type AccessibilityProfile = {
   todo?: Maybe<Scalars['String']>;
 };
 
+export type AccessibilitySentences = {
+  __typename?: 'AccessibilitySentences';
+  groupName?: Maybe<Scalars['String']>;
+  sentences?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
 /** TODO: give real structure */
 export type Address = {
   __typename?: 'Address';
@@ -1156,6 +1162,14 @@ export enum CommentsConnectionOrderbyEnum {
   /** Order by the user ID. */
   UserId = 'USER_ID'
 }
+
+export type Connection = {
+  __typename?: 'Connection';
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  sectionType?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+};
 
 /** Contact details for a person, legal entity, venue or project */
 export type ContactInfo = {
@@ -3725,7 +3739,7 @@ export type LocationDescription = {
   explanation?: Maybe<Scalars['String']>;
   geoLocation?: Maybe<GeoJsonFeature>;
   url?: Maybe<LanguageString>;
-  venue?: Maybe<Venue>;
+  venue?: Maybe<UnifiedSearchVenue>;
 };
 
 export type LocationImage = {
@@ -4950,6 +4964,12 @@ export type Offer = {
   price?: Maybe<LocalizedObject>;
 };
 
+export type Ontology = {
+  __typename?: 'Ontology';
+  id?: Maybe<Scalars['Int']>;
+  label?: Maybe<Scalars['String']>;
+};
+
 export type OntologyTree = {
   __typename?: 'OntologyTree';
   ancestorIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
@@ -4976,6 +4996,12 @@ export type Ontologyword = {
   ontologyword_fi?: Maybe<Scalars['String']>;
   ontologyword_sv?: Maybe<Scalars['String']>;
   unit_ids?: Maybe<Array<Maybe<Scalars['Int']>>>;
+};
+
+export type OpeningHour = {
+  __typename?: 'OpeningHour';
+  date: Scalars['String'];
+  times: Array<Time>;
 };
 
 export type OpeningHours = {
@@ -5556,6 +5582,12 @@ export enum PluginStatusEnum {
   /** The plugin has an upgrade available. */
   Upgrade = 'UPGRADE'
 }
+
+export type Point = {
+  __typename?: 'Point';
+  coordinates: Array<Scalars['Float']>;
+  type?: Maybe<Scalars['String']>;
+};
 
 /** The post type */
 export type Post = ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable & {
@@ -6740,6 +6772,8 @@ export type Query = {
   userRoles?: Maybe<RootQueryToUserRoleConnection>;
   /** Connection between the RootQuery type and the User type */
   users?: Maybe<RootQueryToUserConnection>;
+  venue: Venue;
+  venuesByIds: Array<Venue>;
   /** Returns the current user */
   viewer?: Maybe<User>;
   /** Fields of the &#039;WritingSettings&#039; settings group */
@@ -7387,6 +7421,18 @@ export type QueryUsersArgs = {
   where?: InputMaybe<RootQueryToUserConnectionWhereArgs>;
 };
 
+
+/** The root entry point into the Graph */
+export type QueryVenueArgs = {
+  id: Scalars['ID'];
+};
+
+
+/** The root entry point into the Graph */
+export type QueryVenuesByIdsArgs = {
+  ids?: InputMaybe<Array<Scalars['ID']>>;
+};
+
 export type RawJson = {
   __typename?: 'RawJSON';
   data?: Maybe<Scalars['String']>;
@@ -7759,6 +7805,20 @@ export type ResetUserPasswordPayload = {
   /** The User object mutation type. */
   user?: Maybe<User>;
 };
+
+export enum ResourceState {
+  Closed = 'closed',
+  EnterOnly = 'enter_only',
+  ExitOnly = 'exit_only',
+  Open = 'open',
+  OpenAndReservable = 'open_and_reservable',
+  SelfService = 'self_service',
+  Undefined = 'undefined',
+  WeatherPermitting = 'weather_permitting',
+  WithKey = 'with_key',
+  WithKeyAndReservation = 'with_key_and_reservation',
+  WithReservation = 'with_reservation'
+}
 
 /** Input for the restoreComment mutation */
 export type RestoreCommentInput = {
@@ -8973,7 +9033,7 @@ export type SearchResultNode = {
   event?: Maybe<Event>;
   id: Scalars['ID'];
   searchCategories: Array<UnifiedSearchResultCategory>;
-  venue?: Maybe<Venue>;
+  venue?: Maybe<UnifiedSearchVenue>;
 };
 
 export type SearchResultPageInfo = {
@@ -9631,6 +9691,18 @@ export type Theme = Node & {
   version?: Maybe<Scalars['String']>;
 };
 
+export type Time = {
+  __typename?: 'Time';
+  description: Scalars['String'];
+  endTime: Scalars['String'];
+  endTimeOnNextDay: Scalars['Boolean'];
+  fullDay: Scalars['Boolean'];
+  name: Scalars['String'];
+  periods: Array<Scalars['Int']>;
+  resourceState: ResourceState;
+  startTime: Scalars['String'];
+};
+
 /** any kind of description answering the question "when". */
 export type TimeDescription = {
   __typename?: 'TimeDescription';
@@ -9659,6 +9731,31 @@ export enum UnifiedSearchResultCategory {
   Reservable = 'RESERVABLE',
   Service = 'SERVICE'
 }
+
+/**
+ * A place that forms a unit and can be used for some specific purpose -
+ * respa unit or resource, service map unit, beta.kultus venue, linked
+ * events place, Kukkuu venue
+ */
+export type UnifiedSearchVenue = {
+  __typename?: 'UnifiedSearchVenue';
+  accessibilityProfile?: Maybe<AccessibilityProfile>;
+  additionalInfo?: Maybe<Scalars['String']>;
+  arrivalInstructions?: Maybe<Scalars['String']>;
+  contactDetails?: Maybe<ContactInfo>;
+  description?: Maybe<LanguageString>;
+  descriptionResources?: Maybe<DescriptionResources>;
+  facilities?: Maybe<Array<VenueFacility>>;
+  images?: Maybe<Array<Maybe<LocationImage>>>;
+  location?: Maybe<LocationDescription>;
+  manager?: Maybe<LegalEntity>;
+  meta?: Maybe<NodeMeta>;
+  name?: Maybe<LanguageString>;
+  ontologyWords?: Maybe<Array<Maybe<OntologyWord>>>;
+  openingHours?: Maybe<OpeningHours>;
+  partOf?: Maybe<UnifiedSearchVenue>;
+  reservationPolicy?: Maybe<VenueReservationPolicy>;
+};
 
 /** Any node that has a URI */
 export type UniformResourceIdentifiable = {
@@ -10770,29 +10867,34 @@ export enum UsersConnectionSearchColumnEnum {
   Url = 'URL'
 }
 
-/**
- * A place that forms a unit and can be used for some specific purpose -
- * respa unit or resource, service map unit, beta.kultus venue, linked
- * events place, Kukkuu venue
- */
 export type Venue = {
   __typename?: 'Venue';
-  accessibilityProfile?: Maybe<AccessibilityProfile>;
-  additionalInfo?: Maybe<Scalars['String']>;
-  arrivalInstructions?: Maybe<Scalars['String']>;
-  contactDetails?: Maybe<ContactInfo>;
-  description?: Maybe<LanguageString>;
-  descriptionResources?: Maybe<DescriptionResources>;
-  facilities?: Maybe<Array<VenueFacility>>;
-  images?: Maybe<Array<Maybe<LocationImage>>>;
-  location?: Maybe<LocationDescription>;
-  manager?: Maybe<LegalEntity>;
-  meta?: Maybe<NodeMeta>;
-  name?: Maybe<LanguageString>;
-  ontologyWords?: Maybe<Array<Maybe<OntologyWord>>>;
-  openingHours?: Maybe<OpeningHours>;
-  partOf?: Maybe<Venue>;
-  reservationPolicy?: Maybe<VenueReservationPolicy>;
+  accessibilitySentences: Array<Maybe<AccessibilitySentences>>;
+  addressLocality?: Maybe<Scalars['String']>;
+  connections: Array<Maybe<Connection>>;
+  dataSource?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  image?: Maybe<Scalars['String']>;
+  infoUrl?: Maybe<Scalars['String']>;
+  /**
+   * This field is currently disabled because the Hauki integration is not enabled
+   * @deprecated Hauki integration is currently disabled so this field can not be accessed
+   */
+  isOpen?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  ontologyTree: Array<Maybe<Ontology>>;
+  ontologyWords: Array<Maybe<Ontology>>;
+  /**
+   * This field is currently disabled because the Hauki integration is not enabled
+   * @deprecated Hauki integration is currently disabled so this field can not be accessed
+   */
+  openingHours?: Maybe<Array<OpeningHour>>;
+  position?: Maybe<Point>;
+  postalCode?: Maybe<Scalars['String']>;
+  streetAddress?: Maybe<Scalars['String']>;
+  telephone?: Maybe<Scalars['String']>;
 };
 
 /** TODO: combine beta.kultus Venue stuff with respa equipment type */
@@ -11002,7 +11104,7 @@ export type SearchListQueryVariables = Exact<{
 }>;
 
 
-export type SearchListQuery = { __typename?: 'Query', unifiedSearch?: { __typename?: 'SearchResultConnection', count?: number | null, pageInfo?: { __typename?: 'SearchResultPageInfo', endCursor?: string | null, hasNextPage: boolean } | null, edges: Array<{ __typename?: 'SearchResultEdge', node: { __typename?: 'SearchResultNode', venue?: { __typename?: 'Venue', meta?: { __typename?: 'NodeMeta', id: string } | null, name?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null, description?: { __typename?: 'LanguageString', fi?: string | null } | null, images?: Array<{ __typename?: 'LocationImage', url?: string | null } | null> | null, openingHours?: { __typename?: 'OpeningHours', today?: Array<{ __typename?: 'OpeningHoursTimes', startTime?: string | null, endTime?: string | null, endTimeOnNextDay?: boolean | null, fullDay?: boolean | null, resourceState?: string | null } | null> | null, data?: Array<{ __typename?: 'OpeningHoursDay', date?: string | null, times?: Array<{ __typename?: 'OpeningHoursTimes', startTime?: string | null, endTime?: string | null, endTimeOnNextDay?: boolean | null, fullDay?: boolean | null, resourceState?: string | null } | null> | null } | null> | null } | null, location?: { __typename?: 'LocationDescription', address?: { __typename?: 'Address', postalCode?: string | null, streetAddress?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null, city?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null } | null, geoLocation?: { __typename?: 'GeoJSONFeature', geometry?: { __typename?: 'GeoJSONLineString', coordinates?: any | null } | { __typename?: 'GeoJSONMultiLineString', coordinates?: any | null } | { __typename?: 'GeoJSONMultiPoint', coordinates?: any | null } | { __typename?: 'GeoJSONMultiPolygon', coordinates?: any | null } | { __typename?: 'GeoJSONPoint', coordinates?: any | null } | { __typename?: 'GeoJSONPolygon', coordinates?: any | null } | null } | null } | null, ontologyWords?: Array<{ __typename?: 'OntologyWord', id?: string | null, label?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null } | null> | null } | null } }> } | null };
+export type SearchListQuery = { __typename?: 'Query', unifiedSearch?: { __typename?: 'SearchResultConnection', count?: number | null, pageInfo?: { __typename?: 'SearchResultPageInfo', endCursor?: string | null, hasNextPage: boolean } | null, edges: Array<{ __typename?: 'SearchResultEdge', node: { __typename?: 'SearchResultNode', venue?: { __typename?: 'UnifiedSearchVenue', meta?: { __typename?: 'NodeMeta', id: string } | null, name?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null, description?: { __typename?: 'LanguageString', fi?: string | null } | null, images?: Array<{ __typename?: 'LocationImage', url?: string | null } | null> | null, openingHours?: { __typename?: 'OpeningHours', today?: Array<{ __typename?: 'OpeningHoursTimes', startTime?: string | null, endTime?: string | null, endTimeOnNextDay?: boolean | null, fullDay?: boolean | null, resourceState?: string | null } | null> | null, data?: Array<{ __typename?: 'OpeningHoursDay', date?: string | null, times?: Array<{ __typename?: 'OpeningHoursTimes', startTime?: string | null, endTime?: string | null, endTimeOnNextDay?: boolean | null, fullDay?: boolean | null, resourceState?: string | null } | null> | null } | null> | null } | null, location?: { __typename?: 'LocationDescription', address?: { __typename?: 'Address', postalCode?: string | null, streetAddress?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null, city?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null } | null, geoLocation?: { __typename?: 'GeoJSONFeature', geometry?: { __typename?: 'GeoJSONLineString', coordinates?: any | null } | { __typename?: 'GeoJSONMultiLineString', coordinates?: any | null } | { __typename?: 'GeoJSONMultiPoint', coordinates?: any | null } | { __typename?: 'GeoJSONMultiPolygon', coordinates?: any | null } | { __typename?: 'GeoJSONPoint', coordinates?: any | null } | { __typename?: 'GeoJSONPolygon', coordinates?: any | null } | null } | null } | null, ontologyWords?: Array<{ __typename?: 'OntologyWord', id?: string | null, label?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null } | null> | null } | null } }> } | null };
 
 export type SearchMapQueryVariables = Exact<{
   q?: InputMaybe<Scalars['String']>;
@@ -11017,7 +11119,17 @@ export type SearchMapQueryVariables = Exact<{
 }>;
 
 
-export type SearchMapQuery = { __typename?: 'Query', unifiedSearch?: { __typename?: 'SearchResultConnection', count?: number | null, edges: Array<{ __typename?: 'SearchResultEdge', node: { __typename?: 'SearchResultNode', venue?: { __typename?: 'Venue', meta?: { __typename?: 'NodeMeta', id: string } | null, name?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null, location?: { __typename?: 'LocationDescription', geoLocation?: { __typename?: 'GeoJSONFeature', geometry?: { __typename?: 'GeoJSONLineString', coordinates?: any | null } | { __typename?: 'GeoJSONMultiLineString', coordinates?: any | null } | { __typename?: 'GeoJSONMultiPoint', coordinates?: any | null } | { __typename?: 'GeoJSONMultiPolygon', coordinates?: any | null } | { __typename?: 'GeoJSONPoint', coordinates?: any | null } | { __typename?: 'GeoJSONPolygon', coordinates?: any | null } | null } | null } | null } | null } }> } | null };
+export type SearchMapQuery = { __typename?: 'Query', unifiedSearch?: { __typename?: 'SearchResultConnection', count?: number | null, edges: Array<{ __typename?: 'SearchResultEdge', node: { __typename?: 'SearchResultNode', venue?: { __typename?: 'UnifiedSearchVenue', meta?: { __typename?: 'NodeMeta', id: string } | null, name?: { __typename?: 'LanguageString', fi?: string | null, sv?: string | null, en?: string | null } | null, location?: { __typename?: 'LocationDescription', geoLocation?: { __typename?: 'GeoJSONFeature', geometry?: { __typename?: 'GeoJSONLineString', coordinates?: any | null } | { __typename?: 'GeoJSONMultiLineString', coordinates?: any | null } | { __typename?: 'GeoJSONMultiPoint', coordinates?: any | null } | { __typename?: 'GeoJSONMultiPolygon', coordinates?: any | null } | { __typename?: 'GeoJSONPoint', coordinates?: any | null } | { __typename?: 'GeoJSONPolygon', coordinates?: any | null } | null } | null } | null } | null } }> } | null };
+
+export type VenueFieldsFragment = { __typename?: 'Venue', addressLocality?: string | null, dataSource?: string | null, description?: string | null, email?: string | null, id: string, isOpen?: boolean | null, image?: string | null, infoUrl?: string | null, name?: string | null, postalCode?: string | null, streetAddress?: string | null, telephone?: string | null, accessibilitySentences: Array<{ __typename?: 'AccessibilitySentences', groupName?: string | null, sentences?: Array<string | null> | null } | null>, openingHours?: Array<{ __typename?: 'OpeningHour', date: string, times: Array<{ __typename?: 'Time', startTime: string, endTime: string, endTimeOnNextDay: boolean, resourceState: ResourceState, fullDay: boolean }> }> | null, position?: { __typename?: 'Point', type?: string | null, coordinates: Array<number> } | null, ontologyWords: Array<{ __typename?: 'Ontology', id?: number | null, label?: string | null } | null>, connections: Array<{ __typename?: 'Connection', sectionType?: string | null, name?: string | null, phone?: string | null, url?: string | null } | null> };
+
+export type VenueQueryVariables = Exact<{
+  id: Scalars['ID'];
+  includeHaukiFields?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+
+export type VenueQuery = { __typename?: 'Query', venue: { __typename?: 'Venue', addressLocality?: string | null, dataSource?: string | null, description?: string | null, email?: string | null, id: string, isOpen?: boolean | null, image?: string | null, infoUrl?: string | null, name?: string | null, postalCode?: string | null, streetAddress?: string | null, telephone?: string | null, accessibilitySentences: Array<{ __typename?: 'AccessibilitySentences', groupName?: string | null, sentences?: Array<string | null> | null } | null>, openingHours?: Array<{ __typename?: 'OpeningHour', date: string, times: Array<{ __typename?: 'Time', startTime: string, endTime: string, endTimeOnNextDay: boolean, resourceState: ResourceState, fullDay: boolean }> }> | null, position?: { __typename?: 'Point', type?: string | null, coordinates: Array<number> } | null, ontologyWords: Array<{ __typename?: 'Ontology', id?: number | null, label?: string | null } | null>, connections: Array<{ __typename?: 'Connection', sectionType?: string | null, name?: string | null, phone?: string | null, url?: string | null } | null> } };
 
 export const LocalizedFieldsFragmentDoc = gql`
     fragment localizedFields on LocalizedObject {
@@ -11171,6 +11283,50 @@ export const OrganizationFieldsFragmentDoc = gql`
     fragment organizationFields on OrganizationDetails {
   id
   name
+}
+    `;
+export const VenueFieldsFragmentDoc = gql`
+    fragment venueFields on Venue {
+  addressLocality
+  dataSource
+  description
+  email
+  id
+  isOpen @include(if: $includeHaukiFields)
+  image
+  infoUrl
+  name
+  accessibilitySentences {
+    groupName
+    sentences
+  }
+  openingHours @include(if: $includeHaukiFields) {
+    date
+    times {
+      startTime
+      endTime
+      endTimeOnNextDay
+      resourceState
+      fullDay
+    }
+  }
+  position {
+    type
+    coordinates
+  }
+  postalCode
+  streetAddress
+  telephone
+  ontologyWords {
+    id
+    label
+  }
+  connections {
+    sectionType
+    name
+    phone
+    url
+  }
 }
     `;
 export const EventDetailsDocument = gql`
@@ -12007,3 +12163,39 @@ export function useSearchMapLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type SearchMapQueryHookResult = ReturnType<typeof useSearchMapQuery>;
 export type SearchMapLazyQueryHookResult = ReturnType<typeof useSearchMapLazyQuery>;
 export type SearchMapQueryResult = Apollo.QueryResult<SearchMapQuery, SearchMapQueryVariables>;
+export const VenueDocument = gql`
+    query Venue($id: ID!, $includeHaukiFields: Boolean = true) {
+  venue(id: $id) {
+    ...venueFields
+  }
+}
+    ${VenueFieldsFragmentDoc}`;
+
+/**
+ * __useVenueQuery__
+ *
+ * To run a query within a React component, call `useVenueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useVenueQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useVenueQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      includeHaukiFields: // value for 'includeHaukiFields'
+ *   },
+ * });
+ */
+export function useVenueQuery(baseOptions: Apollo.QueryHookOptions<VenueQuery, VenueQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<VenueQuery, VenueQueryVariables>(VenueDocument, options);
+      }
+export function useVenueLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<VenueQuery, VenueQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<VenueQuery, VenueQueryVariables>(VenueDocument, options);
+        }
+export type VenueQueryHookResult = ReturnType<typeof useVenueQuery>;
+export type VenueLazyQueryHookResult = ReturnType<typeof useVenueLazyQuery>;
+export type VenueQueryResult = Apollo.QueryResult<VenueQuery, VenueQueryVariables>;

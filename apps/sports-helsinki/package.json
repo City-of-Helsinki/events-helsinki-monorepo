@@ -42,6 +42,7 @@
     "@apollo/client": "3.6.9",
     "@apollo/datasource-rest": "4.3.2",
     "@apollo/server": "4.2.2",
+    "@apollo/subgraph": "2.2.1",
     "@as-integrations/next": "1.2.0",
     "@jonkoops/matomo-tracker-react": "^0.7.0",
     "@sentry/browser": "^7.1.1",

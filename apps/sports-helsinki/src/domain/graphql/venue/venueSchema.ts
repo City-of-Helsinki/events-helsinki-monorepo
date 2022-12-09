@@ -17,6 +17,8 @@ function addHaukiDependentField(content: string, haukiEnabled: boolean) {
 const createVenueSchema = ({
   haukiEnabled = true,
 }: LiikuntaServerConfig = {}) => gql`
+  extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key", "@shareable"])
+
   extend type Query {
     venue(id: ID!): Venue!
     venuesByIds(ids: [ID!]): [Venue!]!

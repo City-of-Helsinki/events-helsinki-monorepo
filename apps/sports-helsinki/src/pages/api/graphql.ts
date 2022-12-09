@@ -6,6 +6,7 @@ import HaukiDataSource from 'domain/graphql/services/HaukiDataSource';
 import AppConfig from '../../domain/app/AppConfig';
 import createApolloServer from '../../domain/graphql/createApolloServer';
 import TprekDataSource from '../../domain/graphql/services/TprekDataSource';
+import type { Context } from '../../domain/nextApi/types';
 
 // TODO: Implement sentry connection
 const apolloServer = createApolloServer({
@@ -37,6 +38,6 @@ export default startServerAndCreateNextHandler(apolloServer, {
       // The translation object will be returned as a string
       // and the language from the context is used to select the right translation.
       language,
-    };
+    } as Context;
   },
 });

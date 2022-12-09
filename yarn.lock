@@ -77,6 +77,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@apollo/federation-internals@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@apollo/federation-internals@npm:2.2.1"
+  dependencies:
+    chalk: "npm:^4.1.0"
+    js-levenshtein: "npm:^1.1.6"
+  peerDependencies:
+    graphql: ^16.5.0
+  checksum: 2ada7b066400233bfd43c4762c589aca0c9b80cc83bc81e3a611758473d016c02a20ada6c07ee7cafcbe85e40777133187f08bde32ff960d72dc272897bf2a35
+  languageName: node
+  linkType: hard
+
 "@apollo/protobufjs@npm:1.2.7":
   version: 1.2.7
   resolution: "@apollo/protobufjs@npm:1.2.7"
@@ -147,6 +159,18 @@ __metadata:
   peerDependencies:
     graphql: ^16.6.0
   checksum: 033fafa986842eaa7c4dd683d2d491603e71c7f61ae7847c1c57bb5afd21cae91c56b85fcb47605a7251b0a7b75f36dae97ffa9e037e5c8c25308b2b1e48a602
+  languageName: node
+  linkType: hard
+
+"@apollo/subgraph@npm:2.2.1":
+  version: 2.2.1
+  resolution: "@apollo/subgraph@npm:2.2.1"
+  dependencies:
+    "@apollo/cache-control-types": "npm:^1.0.2"
+    "@apollo/federation-internals": "npm:^2.2.1"
+  peerDependencies:
+    graphql: ^16.5.0
+  checksum: 43a13a7a61f6e051b7c06d31ca2f8851e6337db50dafadf2fb2fec3c4af61a79b6026ea05a4fe13d39504d2f036aa37c14910b1e655034e626a8291d2eef3fc6
   languageName: node
   linkType: hard
 
@@ -26284,6 +26308,7 @@ __metadata:
     "@apollo/client": "npm:3.6.9"
     "@apollo/datasource-rest": "npm:4.3.2"
     "@apollo/server": "npm:4.2.2"
+    "@apollo/subgraph": "npm:2.2.1"
     "@as-integrations/next": "npm:1.2.0"
     "@babel/core": "npm:7.19.3"
     "@babel/helper-environment-visitor": "npm:^7.18.2"

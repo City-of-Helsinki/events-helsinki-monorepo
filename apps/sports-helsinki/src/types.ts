@@ -5,3 +5,9 @@ export enum SUPPORT_LANGUAGES {
   FI = 'fi',
   SV = 'sv',
 }
+
+export type LocalizedString = {
+  fi?: string | null;
+  sv?: string | null;
+  en?: string | null;
+};

@@ -60,7 +60,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
     router.asPath.split('?')[1] ?? '',
     {
       returnPath: `${getLocalizedCmsItemUrl(
-        ROUTES.COURSESEARCH,
+        ROUTES.SEARCH,
         {},
         locale
       )}?eventId=${event.id}`,

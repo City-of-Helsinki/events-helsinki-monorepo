@@ -6,6 +6,7 @@ export const ROUTES = {
   SEARCH: '/search',
   COURSESEARCH: '/coursesearch',
   COURSES: '/courses/[eventId]',
+  VENUES: '/venues/[venueId]',
   ARTICLE_ARCHIVE: '/article-archive',
   ARTICLES: '/articles/[...slug]',
   PAGES: '/pages/[...slug]',

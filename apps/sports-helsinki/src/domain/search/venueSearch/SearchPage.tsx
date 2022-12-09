@@ -150,7 +150,6 @@ const SearchPage: React.FC<{
                 loading={isLoadingVenues}
                 eventList={
                   <VenueList
-                    cardSize="large"
                     venues={venuesList}
                     hasNext={hasNext}
                     count={count}

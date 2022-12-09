@@ -26,19 +26,3 @@
     }
   }
 }
-
-.default {
-  .eventsWrapper {
-    display: grid;
-    grid-template-columns: 1fr;
-
-    @include respond_above(s) {
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 1.75rem 3rem;
-    }
-
-    @include respond_above(m) {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-  }
-}

@@ -1,20 +1,16 @@
 import classNames from 'classnames';
-import { LoadingSpinner } from 'events-helsinki-components';
 import type { Venue } from 'events-helsinki-components';
+import { useLocale, LoadingSpinner } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { Card } from 'react-helsinki-headless-cms';
-import styles from './venueList.module.scss';
+import LargeVenueCard from 'domain/venue/eventCard/LargeVenueCard';
+import getTranslation from 'utils/getTranslation';
 
-const venueCardsMap = {
-  default: Card,
-  large: Card, // TODO: ADD LargeEventCard,
-};
+import styles from './venueList.module.scss';
 
 interface Props {
   buttonCentered?: boolean;
-  cardSize?: 'default' | 'large';
   venues: Venue[];
   count: number;
   loading: boolean;
@@ -24,7 +20,6 @@ interface Props {
 
 const VenueList: React.FC<Props> = ({
   buttonCentered = false,
-  cardSize = 'default',
   venues,
   loading,
   count,
@@ -33,16 +28,29 @@ const VenueList: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('search');
   const venuesLeft = count - venues.length;
-  const VenueCard = venueCardsMap[cardSize];
+  const locale = useLocale();
 
   return (
-    <div className={classNames(styles.venueListWrapper, styles[cardSize])}>
+    <div className={classNames(styles.venueListWrapper)}>
       <div className={styles.venuesWrapper}>
         {venues.map((venue) => (
-          <VenueCard
+          <LargeVenueCard
             key={venue?.meta?.id}
-            title={venue?.name?.fi ?? ''}
-            customContent={venue?.description?.fi}
+            id={venue?.meta?.id ?? ''}
+            title={getTranslation(locale, venue?.name)}
+            location={`${getTranslation(
+              locale,
+              venue?.location?.address?.streetAddress
+            )}, ${venue?.location?.address?.postalCode} ${getTranslation(
+              locale,
+              venue?.location?.address?.city
+            )}`}
+            imageUrl={(venue?.images && venue?.images[0]?.url) ?? ''}
+            tags={
+              venue?.ontologyWords
+                ?.map((tag) => getTranslation(locale, tag?.label))
+                .filter((t) => t) ?? []
+            }
           />
         ))}
       </div>

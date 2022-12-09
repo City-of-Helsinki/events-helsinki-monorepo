@@ -1,0 +1,35 @@
+import userEvent from '@testing-library/user-event';
+import mockRouter from 'next-router-mock';
+import React from 'react';
+
+import { render, screen } from '@/test-utils';
+import { translations } from '@/test-utils/initI18n';
+import LargeVenueCard from '../LargeVenueCard';
+
+const renderComponent = () =>
+  render(
+    <LargeVenueCard id="123" title="Venue title" location="Venue location" />
+  );
+
+beforeEach(() => {
+  mockRouter.setCurrentUrl('/');
+});
+
+describe('large venue card', () => {
+  it('should go to venue page by clicking venue card', async () => {
+    const { router } = renderComponent();
+
+    expect(router.pathname).toStrictEqual('/');
+
+    await userEvent.click(
+      screen.getByRole('link', {
+        name: translations.event.eventCard.ariaLabelLink.replace(
+          '{{name}}',
+          'Venue title'
+        ),
+      })
+    );
+
+    expect(router.pathname).toStrictEqual('/venues/tprek:123');
+  });
+});

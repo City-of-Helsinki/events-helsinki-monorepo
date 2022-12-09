@@ -6,7 +6,7 @@ import type { Context } from '../../domain/nextApi/types';
 type ResolverFunction<T = unknown> = (
   source: unknown,
   args: unknown,
-  context: Context,
+  context: Context | unknown,
   info: GraphQLResolveInfo
 ) => Promise<T>;
 
@@ -17,7 +17,7 @@ const createQueryResolver =
   async (
     source: unknown,
     args: unknown,
-    context: Context,
+    context: Context | unknown,
     info: GraphQLResolveInfo
   ) => {
     try {

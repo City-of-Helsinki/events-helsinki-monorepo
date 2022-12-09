@@ -16,3 +16,7 @@ subgraphs:
     routing_url: https://unified-search.test.kuva.hel.ninja/search
     schema:
       file: ./subgraphs/unified-search/unified-search.graphql
+  venues:
+    routing_url: http://localhost:3000/api/graphql
+    schema:
+      file: ./subgraphs/venues/venues.graphql

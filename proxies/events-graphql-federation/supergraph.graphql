@@ -37,6 +37,13 @@ type AccessibilityProfile
   todo: String
 }
 
+type AccessibilitySentences
+  @join__type(graph: VENUES)
+{
+  groupName: String
+  sentences: [String]
+}
+
 """TODO: give real structure"""
 type Address
   @join__type(graph: UNIFIED_SEARCH)
@@ -1748,6 +1755,15 @@ input CommentToParentCommentConnectionWhereArgs
 
   """Include comments for a specific user ID."""
   userId: ID
+}
+
+type Connection
+  @join__type(graph: VENUES)
+{
+  sectionType: String
+  name: String
+  phone: String
+  url: String
 }
 
 """Contact details for a person, legal entity, venue or project"""
@@ -4368,6 +4384,7 @@ enum join__Graph {
   CMS @join__graph(name: "cms", url: "https://tapahtumat.hkih.stage.geniem.io/graphql")
   EVENTS @join__graph(name: "events", url: "https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql")
   UNIFIED_SEARCH @join__graph(name: "unified-search", url: "https://unified-search.test.kuva.hel.ninja/search")
+  VENUES @join__graph(name: "venues", url: "http://localhost:3000/api/graphql")
 }
 
 """Arbitrary JSON value"""
@@ -5544,7 +5561,7 @@ type LocationDescription
   address: Address
   explanation: String
   administrativeDivisions: [AdministrativeDivision]
-  venue: Venue
+  venue: UnifiedSearchVenue
 }
 
 type LocationImage
@@ -7117,6 +7134,13 @@ type Offer
   infoUrl: LocalizedObject
 }
 
+type Ontology
+  @join__type(graph: VENUES)
+{
+  id: Int
+  label: String
+}
+
 type OntologyTree
   @join__type(graph: UNIFIED_SEARCH)
 {
@@ -7146,6 +7170,13 @@ type OntologyWord
 {
   id: ID
   label: LanguageString
+}
+
+type OpeningHour
+  @join__type(graph: VENUES)
+{
+  date: String!
+  times: [Time!]!
 }
 
 type OpeningHours
@@ -7992,6 +8023,13 @@ enum PluginStatusEnum
 
   """The plugin has an upgrade available."""
   UPGRADE
+}
+
+type Point
+  @join__type(graph: VENUES)
+{
+  type: String
+  coordinates: [Float!]!
 }
 
 """The post type"""
@@ -9661,6 +9699,7 @@ type Query
   @join__type(graph: CMS)
   @join__type(graph: EVENTS)
   @join__type(graph: UNIFIED_SEARCH)
+  @join__type(graph: VENUES)
 {
   """Entry point to get all settings for the site"""
   allSettings: Settings @join__field(graph: CMS)
@@ -10616,6 +10655,8 @@ type Query
   ): [AdministrativeDivision] @join__field(graph: UNIFIED_SEARCH)
   ontologyTree(rootId: ID, leavesOnly: Boolean): [OntologyTree] @join__field(graph: UNIFIED_SEARCH)
   ontologyWords(ids: [ID!]): [OntologyWord] @join__field(graph: UNIFIED_SEARCH)
+  venue(id: ID!): Venue! @join__field(graph: VENUES)
+  venuesByIds(ids: [ID!]): [Venue!]! @join__field(graph: VENUES)
 }
 
 type RawJSON
@@ -11205,6 +11246,22 @@ type ResetUserPasswordPayload
 
   """The User object mutation type."""
   user: User
+}
+
+enum ResourceState
+  @join__type(graph: VENUES)
+{
+  open
+  closed
+  undefined
+  self_service
+  with_key
+  with_reservation
+  open_and_reservable
+  with_key_and_reservation
+  enter_only
+  exit_only
+  weather_permitting
 }
 
 """Input for the restoreComment mutation"""
@@ -13006,7 +13063,7 @@ type SearchResultNode
 {
   _score: Float
   id: ID!
-  venue: Venue
+  venue: UnifiedSearchVenue
   event: Event
   searchCategories: [UnifiedSearchResultCategory!]!
 }
@@ -14039,6 +14096,19 @@ type Theme implements Node
   version: String
 }
 
+type Time
+  @join__type(graph: VENUES)
+{
+  name: String!
+  description: String!
+  startTime: String!
+  endTime: String!
+  endTimeOnNextDay: Boolean!
+  resourceState: ResourceState!
+  fullDay: Boolean!
+  periods: [Int!]!
+}
+
 """any kind of description answering the question "when"."""
 type TimeDescription
   @join__type(graph: UNIFIED_SEARCH)
@@ -14073,6 +14143,32 @@ enum UnifiedSearchResultCategory
   ARTWORK
   ARTICLE
   SERVICE
+}
+
+"""
+A place that forms a unit and can be used for some specific purpose -
+respa unit or resource, service map unit, beta.kultus venue, linked
+events place, Kukkuu venue
+"""
+type UnifiedSearchVenue
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  meta: NodeMeta
+  name: LanguageString
+  location: LocationDescription
+  description: LanguageString
+  descriptionResources: DescriptionResources
+  partOf: UnifiedSearchVenue
+  openingHours: OpeningHours
+  manager: LegalEntity
+  contactDetails: ContactInfo
+  reservationPolicy: VenueReservationPolicy
+  accessibilityProfile: AccessibilityProfile
+  arrivalInstructions: String
+  additionalInfo: String
+  facilities: [VenueFacility!]
+  images: [LocationImage]
+  ontologyWords: [OntologyWord]
 }
 
 """Any node that has a URI"""
@@ -15821,30 +15917,35 @@ type UserToUserRoleConnectionEdge
   node: UserRole
 }
 
-"""
-A place that forms a unit and can be used for some specific purpose -
-respa unit or resource, service map unit, beta.kultus venue, linked
-events place, Kukkuu venue
-"""
 type Venue
-  @join__type(graph: UNIFIED_SEARCH)
+  @join__type(graph: VENUES)
 {
-  meta: NodeMeta
-  name: LanguageString
-  location: LocationDescription
-  description: LanguageString
-  descriptionResources: DescriptionResources
-  partOf: Venue
-  openingHours: OpeningHours
-  manager: LegalEntity
-  contactDetails: ContactInfo
-  reservationPolicy: VenueReservationPolicy
-  accessibilityProfile: AccessibilityProfile
-  arrivalInstructions: String
-  additionalInfo: String
-  facilities: [VenueFacility!]
-  images: [LocationImage]
-  ontologyWords: [OntologyWord]
+  addressLocality: String
+  dataSource: String
+  description: String
+  email: String
+  id: String!
+  image: String
+  infoUrl: String
+  name: String
+  position: Point
+  postalCode: String
+  streetAddress: String
+  telephone: String
+
+  """
+  This field is currently disabled because the Hauki integration is not enabled
+  """
+  openingHours: [OpeningHour!] @deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")
+
+  """
+  This field is currently disabled because the Hauki integration is not enabled
+  """
+  isOpen: Boolean @deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")
+  ontologyTree: [Ontology]!
+  ontologyWords: [Ontology]!
+  accessibilitySentences: [AccessibilitySentences]!
+  connections: [Connection]!
 }
 
 """TODO: combine beta.kultus Venue stuff with respa equipment type"""

@@ -98,7 +98,7 @@ type SearchResultEdge {
 type SearchResultNode {
   _score: Float
   id: ID!
-  venue: Venue @cacheControl(inheritMaxAge: true)
+  venue: UnifiedSearchVenue @cacheControl(inheritMaxAge: true)
   event: Event
   searchCategories: [UnifiedSearchResultCategory!]!
 }
@@ -409,13 +409,13 @@ A place that forms a unit and can be used for some specific purpose -
 respa unit or resource, service map unit, beta.kultus venue, linked
 events place, Kukkuu venue
 """
-type Venue {
+type UnifiedSearchVenue {
   meta: NodeMeta
   name: LanguageString
   location: LocationDescription @cacheControl(inheritMaxAge: true)
   description: LanguageString
   descriptionResources: DescriptionResources
-  partOf: Venue
+  partOf: UnifiedSearchVenue
   openingHours: OpeningHours
   manager: LegalEntity
   contactDetails: ContactInfo
@@ -438,7 +438,7 @@ type LocationDescription {
   explanation: String
     @origin(service: "linked", type: "event", attr: "location_extra_info")
   administrativeDivisions: [AdministrativeDivision]
-  venue: Venue
+  venue: UnifiedSearchVenue
 }
 
 """

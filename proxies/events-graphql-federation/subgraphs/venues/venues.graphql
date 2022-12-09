@@ -1,100 +1,61 @@
+schema @link(url: "https://specs.apollo.dev/link/v1.0") {
+  query: Query
+}
+
+extend schema
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.0"
+    import: ["@key", "@shareable"]
+  )
+
+directive @link(
+  url: String
+  as: String
+  for: link__Purpose
+  import: [link__Import]
+) repeatable on SCHEMA
+
+directive @key(
+  fields: federation__FieldSet!
+  resolvable: Boolean = true
+) repeatable on OBJECT | INTERFACE
+
+directive @federation__requires(
+  fields: federation__FieldSet!
+) on FIELD_DEFINITION
+
+directive @federation__provides(
+  fields: federation__FieldSet!
+) on FIELD_DEFINITION
+
+directive @federation__external(reason: String) on OBJECT | FIELD_DEFINITION
+
+directive @federation__tag(
+  name: String!
+) repeatable on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
+
+directive @federation__extends on OBJECT | INTERFACE
+
+directive @shareable on OBJECT | FIELD_DEFINITION
+
+directive @federation__inaccessible on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
+
+directive @federation__override(from: String!) on FIELD_DEFINITION
+
 type Query {
-  _empty: String
+  _service: _Service!
+}
+
+extend type Query {
   venue(id: ID!): Venue!
   venuesByIds(ids: [ID!]): [Venue!]!
-  events(where: EventQuery, first: Int, after: String): EventsConnection!
 }
-type PageInfo {
-  hasPreviousPage: Boolean!
-  hasNextPage: Boolean!
-  startCursor: String
-  endCursor: String
-  count: Int!
-}
+
 type Point {
   type: String
   coordinates: [Float!]!
 }
-type Time {
-  name: String!
-  description: String!
-  startTime: String!
-  endTime: String!
-  endTimeOnNextDay: Boolean!
-  resourceState: ResourceState!
-  fullDay: Boolean!
-  periods: [Int!]!
-}
-type OpeningHour {
-  date: String!
-  times: [Time!]!
-}
-type Ontology {
-  id: Int
-  label: String
-}
-type AccessibilitySentences {
-  groupName: String
-  sentences: [String]
-}
-type Connection {
-  sectionType: String
-  name: String
-  phone: String
-  url: String
-}
-type Venue {
-  addressLocality: String
-  dataSource: String
-  description: String
-  email: String
-  id: String!
-  image: String
-  infoUrl: String
-  name: String
-  position: Point
-  postalCode: String
-  streetAddress: String
-  telephone: String
-  " This field is currently disabled because the Hauki integration is not enabled "
-  openingHours: [OpeningHour!] @deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")
-  " This field is currently disabled because the Hauki integration is not enabled "
-  isOpen: Boolean @deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")
-  ontologyTree: [Ontology]!
-  ontologyWords: [Ontology]!
-  accessibilitySentences: [AccessibilitySentences]!
-  connections: [Connection]!
-}
-type EventsConnection {
-  edges: [EventEdge!]!
-  pageInfo: PageInfo
-  totalCount: Int
-}
-type EventEdge {
-  node: Event!
-  cursor: String!
-}
-type Image {
-  id: String!
-  url: String!
-  alt: String
-}
-type Offer {
-  isFree: Boolean!
-  description: String
-  infoUrl: String
-  price: String
-}
-type Event {
-  id: String!
-  name: String!
-  shortDescription: String
-  offers: [Offer!]!
-  startTime: String!
-  endTime: String
-  images: [Image!]!
-  infoUrl: String
-}
+
 enum ResourceState {
   open
   closed
@@ -108,19 +69,93 @@ enum ResourceState {
   exit_only
   weather_permitting
 }
-input EventQuery {
-  ids: [ID!]
-  start: String
-  location: ID
-  sort: String
-  superEventType: String
-  language: String
-  text: String
-  translation: String
-  keywords: [String!]
+
+type Time {
+  name: String!
+  description: String!
+  startTime: String!
+  endTime: String!
+  endTimeOnNextDay: Boolean!
+  resourceState: ResourceState!
+  fullDay: Boolean!
+  periods: [Int!]!
 }
-"Exposes a URL that specifies the behavior of this scalar."
-directive @specifiedBy(
-    "The URL that specifies the behavior of this scalar."
-    url: String!
-  ) on SCALAR
+
+type OpeningHour {
+  date: String!
+  times: [Time!]!
+}
+
+type Ontology {
+  id: Int
+  label: String
+}
+
+type AccessibilitySentences {
+  groupName: String
+  sentences: [String]
+}
+
+type Connection {
+  sectionType: String
+  name: String
+  phone: String
+  url: String
+}
+
+type Venue {
+  addressLocality: String
+  dataSource: String
+  description: String
+  email: String
+  id: String!
+  image: String
+  infoUrl: String
+  name: String
+  position: Point
+  postalCode: String
+  streetAddress: String
+  telephone: String
+
+  """
+  This field is currently disabled because the Hauki integration is not enabled
+  """
+  openingHours: [OpeningHour!]
+    @deprecated(
+      reason: "Hauki integration is currently disabled so this field can not be accessed"
+    )
+
+  """
+  This field is currently disabled because the Hauki integration is not enabled
+  """
+  isOpen: Boolean
+    @deprecated(
+      reason: "Hauki integration is currently disabled so this field can not be accessed"
+    )
+  ontologyTree: [Ontology]!
+  ontologyWords: [Ontology]!
+  accessibilitySentences: [AccessibilitySentences]!
+  connections: [Connection]!
+}
+
+enum link__Purpose {
+  """
+  `SECURITY` features provide metadata necessary to securely resolve fields.
+  """
+  SECURITY
+
+  """
+  `EXECUTION` features provide metadata necessary for operation execution.
+  """
+  EXECUTION
+}
+
+scalar link__Import
+
+scalar federation__FieldSet
+
+scalar _Any
+
+type _Service {
+  sdl: String
+}

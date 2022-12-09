@@ -1,0 +1,126 @@
+type Query {
+  _empty: String
+  venue(id: ID!): Venue!
+  venuesByIds(ids: [ID!]): [Venue!]!
+  events(where: EventQuery, first: Int, after: String): EventsConnection!
+}
+type PageInfo {
+  hasPreviousPage: Boolean!
+  hasNextPage: Boolean!
+  startCursor: String
+  endCursor: String
+  count: Int!
+}
+type Point {
+  type: String
+  coordinates: [Float!]!
+}
+type Time {
+  name: String!
+  description: String!
+  startTime: String!
+  endTime: String!
+  endTimeOnNextDay: Boolean!
+  resourceState: ResourceState!
+  fullDay: Boolean!
+  periods: [Int!]!
+}
+type OpeningHour {
+  date: String!
+  times: [Time!]!
+}
+type Ontology {
+  id: Int
+  label: String
+}
+type AccessibilitySentences {
+  groupName: String
+  sentences: [String]
+}
+type Connection {
+  sectionType: String
+  name: String
+  phone: String
+  url: String
+}
+type Venue {
+  addressLocality: String
+  dataSource: String
+  description: String
+  email: String
+  id: String!
+  image: String
+  infoUrl: String
+  name: String
+  position: Point
+  postalCode: String
+  streetAddress: String
+  telephone: String
+  " This field is currently disabled because the Hauki integration is not enabled "
+  openingHours: [OpeningHour!] @deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")
+  " This field is currently disabled because the Hauki integration is not enabled "
+  isOpen: Boolean @deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")
+  ontologyTree: [Ontology]!
+  ontologyWords: [Ontology]!
+  accessibilitySentences: [AccessibilitySentences]!
+  connections: [Connection]!
+}
+type EventsConnection {
+  edges: [EventEdge!]!
+  pageInfo: PageInfo
+  totalCount: Int
+}
+type EventEdge {
+  node: Event!
+  cursor: String!
+}
+type Image {
+  id: String!
+  url: String!
+  alt: String
+}
+type Offer {
+  isFree: Boolean!
+  description: String
+  infoUrl: String
+  price: String
+}
+type Event {
+  id: String!
+  name: String!
+  shortDescription: String
+  offers: [Offer!]!
+  startTime: String!
+  endTime: String
+  images: [Image!]!
+  infoUrl: String
+}
+enum ResourceState {
+  open
+  closed
+  undefined
+  self_service
+  with_key
+  with_reservation
+  open_and_reservable
+  with_key_and_reservation
+  enter_only
+  exit_only
+  weather_permitting
+}
+input EventQuery {
+  ids: [ID!]
+  start: String
+  location: ID
+  sort: String
+  superEventType: String
+  language: String
+  text: String
+  translation: String
+  keywords: [String!]
+}
+"Exposes a URL that specifies the behavior of this scalar."
+directive @specifiedBy(
+    "The URL that specifies the behavior of this scalar."
+    url: String!
+  ) on SCALAR

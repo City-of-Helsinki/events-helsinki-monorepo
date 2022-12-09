@@ -2,6 +2,7 @@ import type { UrlObject } from 'url';
 
 import type { OperationVariables, QueryResult } from '@apollo/client';
 
+import type { TimeResourceState } from 'events-helsinki-components/types';
 import type { Sources } from '../../domain/app/appConstants';
 import type { PageInfoFragment } from '../../domain/nextApi/pageInfoFragment';
 
@@ -214,19 +215,6 @@ export type VenueDetails<T = TranslationsObject> = {
 };
 
 export type Source = typeof Sources[keyof typeof Sources];
-
-export type TimeResourceState =
-  | 'open'
-  | 'closed'
-  | 'undefined'
-  | 'self_service'
-  | 'with_key'
-  | 'with_reservation'
-  | 'open_and_reservable'
-  | 'with_key_and_reservation'
-  | 'enter_only'
-  | 'exit_only'
-  | 'weather_permitting';
 
 export type Time = {
   name: string;

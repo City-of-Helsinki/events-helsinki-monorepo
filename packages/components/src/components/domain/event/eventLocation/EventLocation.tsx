@@ -26,6 +26,7 @@ const EventLocation: React.FC<Props> = ({ event }) => {
   };
   const isServiceMapEnabled = getConsentStatus('servicemap_session');
 
+  // TODO: Migrate the map of VenueLocation and EventLocation to a common component
   return (
     <div className={styles.eventLocationContainer}>
       <div className={styles.titleWrapper}>

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import type { Venue } from 'events-helsinki-components';
+import type { UnifiedSearchVenue } from 'events-helsinki-components';
 import { useLocale, LoadingSpinner } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
@@ -11,7 +11,7 @@ import styles from './venueList.module.scss';
 
 interface Props {
   buttonCentered?: boolean;
-  venues: Venue[];
+  venues: UnifiedSearchVenue[];
   count: number;
   loading: boolean;
   hasNext: boolean;

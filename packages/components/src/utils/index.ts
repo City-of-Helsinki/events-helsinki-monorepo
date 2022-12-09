@@ -1,4 +1,5 @@
 export * from './season';
+export * from './time';
 export { default as buildQueryFromObject } from './buildQueryFromObject';
 export * from './dateUtils';
 export * from './eventUtils';

@@ -6,12 +6,19 @@ import IconCraft from '../../../assets/icons/IconCraft';
 import IconDance from '../../../assets/icons/IconDance';
 import IconFood from '../../../assets/icons/IconFood';
 import IconGames from '../../../assets/icons/IconGames';
+import IconGym from '../../../assets/icons/IconGym';
+import IconIceSkating from '../../../assets/icons/IconIceSkating';
+import IconIndoorSportsHalls from '../../../assets/icons/IconIndoorSportsHalls';
 import IconLanguages from '../../../assets/icons/IconLanguages';
 import IconLiterature from '../../../assets/icons/IconLiterature';
 import IconMovies from '../../../assets/icons/IconMovies';
 import IconMusic from '../../../assets/icons/IconMusic';
+import IconOutdoorRecreation from '../../../assets/icons/IconOutdoorRecreation';
+import IconSkiing from '../../../assets/icons/IconSkiing';
 import IconSports from '../../../assets/icons/IconSports';
+import IconSwimming from '../../../assets/icons/IconSwimming';
 import IconTheatre from '../../../assets/icons/IconTheatre';
+
 import type {
   Filters,
   SearchCategoryOption,
@@ -43,6 +50,17 @@ export enum COURSE_HOBBY_TYPES {
   TRIPS = 'trips',
   WORKSHOPS = 'workshops',
   ONLINE_STUDIES = 'online_studies',
+}
+
+export enum SPORTS_CATEGORIES {
+  SWIMMING = 'swimming',
+  SKIING = 'skiing',
+  ICE_SKATING = 'ice_skating',
+  GYM = 'gym',
+  NEIGHBOURHOOD_SPORTS_SITES = 'neighbourhood_sports_sites',
+  INDOOR_SPORTS_HALLS = 'indoor_sports_halls',
+  OUTDOOR_RECREATION = 'outdoor_recreation',
+  GUIDED_EXERCISE = 'guided_exercise',
 }
 
 // TODO: Remove these since they should not be needed when the general events are not used at all.
@@ -145,6 +163,28 @@ export const CATEGORY_CATALOG = {
       COURSE_HOBBY_TYPES.WORKSHOPS,
     ],
     landingPage: [COURSE_HOBBY_TYPES.CLUBS, COURSE_HOBBY_TYPES.CAMPS],
+  },
+  sportsCategories: {
+    default: [
+      SPORTS_CATEGORIES.SWIMMING,
+      SPORTS_CATEGORIES.SKIING,
+      SPORTS_CATEGORIES.ICE_SKATING,
+      SPORTS_CATEGORIES.GYM,
+      SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES,
+      SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS,
+      SPORTS_CATEGORIES.OUTDOOR_RECREATION,
+      SPORTS_CATEGORIES.GUIDED_EXERCISE,
+    ],
+    landingPage: [
+      SPORTS_CATEGORIES.SWIMMING,
+      SPORTS_CATEGORIES.SKIING,
+      SPORTS_CATEGORIES.ICE_SKATING,
+      SPORTS_CATEGORIES.GYM,
+      SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES,
+      SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS,
+      SPORTS_CATEGORIES.OUTDOOR_RECREATION,
+      SPORTS_CATEGORIES.GUIDED_EXERCISE,
+    ],
   },
 };
 
@@ -340,6 +380,43 @@ export const MAPPED_COURSE_HOBBY_TYPES: Record<string, string[]> = {
   [COURSE_HOBBY_TYPES.CAMPS]: CAMPS_KEYWORDS,
   [COURSE_HOBBY_TYPES.TRIPS]: TRIPS_KEYWORDS,
   [COURSE_HOBBY_TYPES.WORKSHOPS]: WORKSHOPS_KEYWORDS,
+};
+
+export const sportsCategoryData: Record<string, SearchCategoryOption> = {
+  [SPORTS_CATEGORIES.SWIMMING]: {
+    icon: <IconSwimming />,
+    labelKey: 'appSports:home.sportsCategory.swimming',
+  },
+  [SPORTS_CATEGORIES.SKIING]: {
+    icon: <IconSkiing />,
+    labelKey: 'appSports:home.sportsCategory.skiing',
+  },
+  [SPORTS_CATEGORIES.ICE_SKATING]: {
+    icon: <IconIceSkating />,
+    labelKey: 'appSports:home.sportsCategory.iceSkating',
+  },
+  [SPORTS_CATEGORIES.GYM]: {
+    icon: <IconGym />,
+    labelKey: 'appSports:home.sportsCategory.gym',
+  },
+  [SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES]: {
+    // TODO proper icon missing
+    icon: <IconSports />,
+    labelKey: 'appSports:home.sportsCategory.neighbourhoodSportsSites',
+  },
+  [SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS]: {
+    icon: <IconIndoorSportsHalls />,
+    labelKey: 'appSports:home.sportsCategory.indoorSportsHalls',
+  },
+  [SPORTS_CATEGORIES.OUTDOOR_RECREATION]: {
+    icon: <IconOutdoorRecreation />,
+    labelKey: 'appSports:home.sportsCategory.outdoorRecreation',
+  },
+  [SPORTS_CATEGORIES.GUIDED_EXERCISE]: {
+    // TODO proper icon missing
+    icon: <IconSports />,
+    labelKey: 'appSports:home.sportsCategory.guidedExercise',
+  },
 };
 
 export const courseCategories: Record<COURSE_CATEGORIES, SearchCategoryOption> =

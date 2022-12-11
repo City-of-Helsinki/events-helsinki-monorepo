@@ -35,6 +35,7 @@ interface Props {
 
 const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const { t } = useTranslation('search');
+  const { t: tAppSports } = useTranslation('appSports');
   const locale = useLocale();
   const router = useRouter();
   const searchParams = new URLSearchParams(qs.stringify(router.query));
@@ -126,7 +127,11 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         <FilterButton
           key={category}
           onRemove={handleFilterRemove}
-          text={translateValue('home:category.courses.', category, t)}
+          text={translateValue(
+            'appSports:home.sportsCategory.',
+            category,
+            tAppSports
+          )}
           type="category"
           value={category}
         />

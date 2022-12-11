@@ -7,6 +7,16 @@
   "home": {
     "search": {
       "title": "Löydä liikuntaa"
+    },
+    "sportsCategory": {
+      "swimming": "Uinti",
+      "skiing": "Hiihto",
+      "iceSkating": "Luistelu",
+      "gym": "Kuntosalit",
+      "neighbourhoodSportsSites": "Lähiliikuntapaikat",
+      "indoorSportsHalls": "Sisäliikuntahallit",
+      "outdoorRecreation": "Ulkoilu",
+      "guidedExercise": "Ohjattu liikunta"
     }
   },
   "search": {

@@ -3,14 +3,13 @@ import {
   useUnifiedSearch,
   useLocale,
   useCommonTranslation,
-  EventTypeId,
 } from 'events-helsinki-components';
 import React from 'react';
 
 import { ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
 import { CATEGORY_CATALOG } from '../eventSearch/constants';
-import { getEventCategoryOptions } from '../eventSearch/utils';
+import { getSportsCategoryOptions } from '../eventSearch/utils';
 import styles from './landingPageSearch.module.scss';
 import LandingPageSearchForm from './LandingPageSearchForm';
 import SearchShortcuts from './SearchShortcuts';
@@ -42,9 +41,9 @@ const Search: React.FC = () => {
     );
   };
 
-  const categories = getEventCategoryOptions(
+  const categories = getSportsCategoryOptions(
     t,
-    CATEGORY_CATALOG[EventTypeId.Course].landingPage
+    CATEGORY_CATALOG.sportsCategories.landingPage
   );
 
   return (

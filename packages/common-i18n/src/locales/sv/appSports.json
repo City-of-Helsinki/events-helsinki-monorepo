@@ -7,6 +7,16 @@
   "home": {
     "search": {
       "title": "Hitta motion"
+    },
+    "sportsCategory": {
+      "swimming": "Simning",
+      "skiing": "Skidåkning",
+      "iceSkating": "Skridskoåkning",
+      "gym": "Gym",
+      "neighbourhoodSportsSites": "Näridrottsplatser",
+      "indoorSportsHalls": "Sporthallar",
+      "outdoorRecreation": "Utonhusaktiviteter",
+      "guidedExercise": "Ledd motion"
     }
   },
   "search": {

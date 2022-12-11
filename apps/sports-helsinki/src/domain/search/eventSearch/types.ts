@@ -4,15 +4,16 @@ import type {
   COURSE_CATEGORIES,
   COURSE_HOBBY_TYPES,
   EVENT_SEARCH_FILTERS,
+  SPORTS_CATEGORIES,
 } from './constants';
 
 export interface CategoryOption {
   icon: React.ReactElement;
   text: string;
-  value: COURSE_CATEGORIES;
+  value: COURSE_CATEGORIES | SPORTS_CATEGORIES;
 }
 
-export type SearchCategoryType = COURSE_CATEGORIES;
+export type SearchCategoryType = COURSE_CATEGORIES | SPORTS_CATEGORIES;
 
 export interface SearchCategoryOption {
   icon: React.ReactElement;

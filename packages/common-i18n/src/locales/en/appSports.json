@@ -7,6 +7,16 @@
   "home": {
     "search": {
       "title": "Search for sports"
+    },
+    "sportsCategory": {
+      "swimming": "Swimming",
+      "skiing": "Skiing",
+      "iceSkating": "Ice skating",
+      "gym": "Gym",
+      "neighbourhoodSportsSites": "Neighbourhood sports sites",
+      "indoorSportsHalls": "Indoor sports halls",
+      "outdoorRecreation": "Outdoor recreation",
+      "guidedExercise": "Guided exercise"
     }
   },
   "search": {

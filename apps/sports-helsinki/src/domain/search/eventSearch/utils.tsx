@@ -28,6 +28,7 @@ import type {
   COURSE_CATEGORIES,
   EVENT_SORT_OPTIONS,
   COURSE_HOBBY_TYPES,
+  SPORTS_CATEGORIES,
 } from './constants';
 import {
   EVENT_SEARCH_FILTERS,
@@ -37,6 +38,7 @@ import {
   MAPPED_COURSE_CATEGORIES,
   courseHobbyTypes,
   MAPPED_COURSE_HOBBY_TYPES,
+  sportsCategoryData,
 } from './constants';
 import type {
   CategoryOption,
@@ -107,6 +109,15 @@ export const getCourseHobbyTypeOptions = (
       getHobbyTypeOptions(hobbyType, courseHobbyTypes[hobbyType], t)
     )
     .sort(sortExtendedHobbyTypeOptions);
+
+export const getSportsCategoryOptions = (
+  t: TFunction,
+  sportsCategories: SPORTS_CATEGORIES[] = CATEGORY_CATALOG.sportsCategories
+    .default
+): CategoryOption[] =>
+  sportsCategories.map((sportsCategory) =>
+    getCategoryOptions(sportsCategory, sportsCategoryData[sportsCategory], t)
+  );
 
 /**
  * Get start and end dates to event list filtering

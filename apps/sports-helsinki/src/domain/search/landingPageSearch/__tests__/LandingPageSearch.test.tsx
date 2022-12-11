@@ -57,11 +57,11 @@ describe('Landing page', () => {
 
   it('should route to event search page after clicking category', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
-    await userEvent.click(screen.getByRole('link', { name: /musiikki/i }));
+    await userEvent.click(screen.getByRole('link', { name: /uinti/i }));
     expect(router).toMatchObject({
-      asPath: `${searchPath}?categories=music`,
+      asPath: `${searchPath}?categories=swimming`,
       pathname: searchPath,
-      query: { categories: 'music' },
+      query: { categories: 'swimming' },
     });
   });
 });

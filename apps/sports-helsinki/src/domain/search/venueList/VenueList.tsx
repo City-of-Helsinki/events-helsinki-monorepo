@@ -5,7 +5,7 @@ import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import LargeVenueCard from 'domain/venue/eventCard/LargeVenueCard';
-import getTranslation from 'utils/getTranslation';
+import getTranslation from '../../../utils/getTranslation';
 
 import styles from './venueList.module.scss';
 

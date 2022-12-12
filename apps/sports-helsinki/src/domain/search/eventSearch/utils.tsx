@@ -64,11 +64,12 @@ export const getCategoryOptions = (
   categoryOption: SearchCategoryOption,
   t: TFunction
 ): CategoryOption => {
-  const { icon, labelKey } = categoryOption;
+  const { icon, labelKey, seasons } = categoryOption;
   return {
     icon,
     text: t(labelKey),
     value: category,
+    seasons,
   };
 };
 

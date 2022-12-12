@@ -1,5 +1,6 @@
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import {
+  getCurrentSeason,
   useUnifiedSearch,
   useLocale,
   useCommonTranslation,
@@ -46,6 +47,8 @@ const Search: React.FC = () => {
     CATEGORY_CATALOG.sportsCategories.landingPage
   );
 
+  const currentSeason = getCurrentSeason();
+
   return (
     <div>
       <LandingPageSearchForm
@@ -57,7 +60,11 @@ const Search: React.FC = () => {
       />
       <SearchShortcuts
         className={styles.categoriesWrapper}
-        categories={categories}
+        categories={categories.filter(
+          (category) =>
+            !category.seasons ||
+            category.seasons.some((season) => season === currentSeason)
+        )}
         searchFilters={{}}
       />
     </div>

@@ -1,3 +1,4 @@
+import type { Season } from 'events-helsinki-components';
 import type React from 'react';
 
 import type {
@@ -11,6 +12,7 @@ export interface CategoryOption {
   icon: React.ReactElement;
   text: string;
   value: COURSE_CATEGORIES | SPORTS_CATEGORIES;
+  seasons?: Season[];
 }
 
 export type SearchCategoryType = COURSE_CATEGORIES | SPORTS_CATEGORIES;
@@ -18,6 +20,7 @@ export type SearchCategoryType = COURSE_CATEGORIES | SPORTS_CATEGORIES;
 export interface SearchCategoryOption {
   icon: React.ReactElement;
   labelKey: string;
+  seasons?: Season[];
 }
 
 export type SearchCategoryRecord = Record<

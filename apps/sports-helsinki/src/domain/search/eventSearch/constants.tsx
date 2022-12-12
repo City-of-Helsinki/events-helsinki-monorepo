@@ -1,4 +1,4 @@
-import { EventTypeId } from 'events-helsinki-components';
+import { EventTypeId, Season } from 'events-helsinki-components';
 import React from 'react';
 
 import IconArt from '../../../assets/icons/IconArt';
@@ -382,40 +382,49 @@ export const MAPPED_COURSE_HOBBY_TYPES: Record<string, string[]> = {
   [COURSE_HOBBY_TYPES.WORKSHOPS]: WORKSHOPS_KEYWORDS,
 };
 
+// TODO seasons not final
 export const sportsCategoryData: Record<string, SearchCategoryOption> = {
   [SPORTS_CATEGORIES.SWIMMING]: {
     icon: <IconSwimming />,
     labelKey: 'appSports:home.sportsCategory.swimming',
+    seasons: [Season.Summer, Season.Winter],
   },
   [SPORTS_CATEGORIES.SKIING]: {
     icon: <IconSkiing />,
     labelKey: 'appSports:home.sportsCategory.skiing',
+    seasons: [Season.Winter],
   },
   [SPORTS_CATEGORIES.ICE_SKATING]: {
     icon: <IconIceSkating />,
     labelKey: 'appSports:home.sportsCategory.iceSkating',
+    seasons: [Season.Winter],
   },
   [SPORTS_CATEGORIES.GYM]: {
     icon: <IconGym />,
     labelKey: 'appSports:home.sportsCategory.gym',
+    seasons: [Season.Summer, Season.Winter],
   },
   [SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES]: {
     // TODO proper icon missing
     icon: <IconSports />,
     labelKey: 'appSports:home.sportsCategory.neighbourhoodSportsSites',
+    seasons: [Season.Summer, Season.Winter],
   },
   [SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS]: {
     icon: <IconIndoorSportsHalls />,
     labelKey: 'appSports:home.sportsCategory.indoorSportsHalls',
+    seasons: [Season.Summer, Season.Winter],
   },
   [SPORTS_CATEGORIES.OUTDOOR_RECREATION]: {
     icon: <IconOutdoorRecreation />,
     labelKey: 'appSports:home.sportsCategory.outdoorRecreation',
+    seasons: [Season.Summer, Season.Winter],
   },
   [SPORTS_CATEGORIES.GUIDED_EXERCISE]: {
     // TODO proper icon missing
     icon: <IconSports />,
     labelKey: 'appSports:home.sportsCategory.guidedExercise',
+    seasons: [Season.Summer, Season.Winter],
   },
 };
 

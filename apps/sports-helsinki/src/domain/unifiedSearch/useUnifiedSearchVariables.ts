@@ -109,11 +109,18 @@ export default function useUnifiedSearchVariables(
     language: appToUnifiedSearchLanguageMap[locale] as UnifiedSearchLanguage,
     // Default query; everything
     q: (!q || !q.length ? ['*'] : q).join(' '),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ontologyTreeIds: ontologyTreeIds?.map((treeId: any) => treeId.toString()),
+    ontologyTreeIds: (ontologyTreeIds.length === 0
+      ? [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID]
+      : ontologyTreeIds
+    )
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ?.map((treeId: any) => treeId.toString()),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ontologyWordIds: ontologyWordIds?.map((wordId: any) => wordId.toString()),
-    administrativeDivisionIds,
+    administrativeDivisionIds:
+      administrativeDivisionIds.length === 0
+        ? [HELSINKI_OCD_DIVISION_ID]
+        : administrativeDivisionIds,
     openAt: openAt && isOpenNow ? getOpenAt(openAt, isOpenNow) : null,
     ...getOrderBy(orderBy, orderDir, { position: undefined }),
     after: after ?? defaultPagination.after,

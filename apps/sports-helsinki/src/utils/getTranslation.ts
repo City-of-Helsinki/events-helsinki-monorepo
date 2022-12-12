@@ -1,4 +1,4 @@
-import type { Language, LocalizedString } from 'types';
+import type { Language, LocalizedString } from './../types';
 
 export default function getTranslation(
   locale: Language,

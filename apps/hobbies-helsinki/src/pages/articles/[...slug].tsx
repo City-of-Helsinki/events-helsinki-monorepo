@@ -128,7 +128,7 @@ export async function getStaticProps(
     return {
       props: {
         initialApolloState: apolloClient.cache.extract(),
-        ...(await serverSideTranslationsWithCommon(locale, ['cms'])),
+        ...(await serverSideTranslationsWithCommon(locale, ['cms', 'event'])),
         article,
         breadcrumbs,
         collections: getCollections(article.modules ?? []),

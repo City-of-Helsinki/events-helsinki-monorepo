@@ -33,6 +33,7 @@ import {
   getEventCategoryOptions,
   getSearchFilters,
   getSearchQuery,
+  sortExtendedCategoryOptions,
 } from './utils';
 
 interface Props {
@@ -104,7 +105,9 @@ const AdvancedSearch: React.FC<Props> = ({
 
   // const divisionOptions = useDivisionOptions();
 
-  const categories = getEventCategoryOptions(t);
+  const categories = getEventCategoryOptions(t).sort(
+    sortExtendedCategoryOptions
+  );
 
   const goToSearch = (search: string): void => {
     router.push({

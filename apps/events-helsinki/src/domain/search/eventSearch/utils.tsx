@@ -61,11 +61,9 @@ export const getEventCategoryOptions = (
   t: TFunction,
   categories: EVENT_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.General].default
 ): CategoryOption[] =>
-  categories
-    .map((category) =>
-      getCategoryOptions(category, eventCategories[category], t)
-    )
-    .sort(sortExtendedCategoryOptions);
+  categories.map((category) =>
+    getCategoryOptions(category, eventCategories[category], t)
+  );
 
 /**
  * Get start and end dates to event list filtering

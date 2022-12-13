@@ -73,15 +73,33 @@ export enum EVENT_SEARCH_FILTERS {
   TEXT = 'text',
 }
 
-export const CATEGORY_CATALOG: Record<
-  EventTypeId,
-  Record<string, EVENT_CATEGORIES[]>
-> = {
+export const CATEGORY_CATALOG = {
   [EventTypeId.General]: {
-    default: Object.values(EVENT_CATEGORIES),
+    default: [
+      EVENT_CATEGORIES.MOVIE,
+      EVENT_CATEGORIES.CULTURE,
+      EVENT_CATEGORIES.SPORT,
+      EVENT_CATEGORIES.NATURE,
+      EVENT_CATEGORIES.MUSEUM,
+      EVENT_CATEGORIES.MUSIC,
+      EVENT_CATEGORIES.INFLUENCE,
+      EVENT_CATEGORIES.FOOD,
+      EVENT_CATEGORIES.DANCE,
+      EVENT_CATEGORIES.THEATRE,
+    ],
+    landingPage: [
+      EVENT_CATEGORIES.MOVIE,
+      EVENT_CATEGORIES.CULTURE,
+      EVENT_CATEGORIES.SPORT,
+      EVENT_CATEGORIES.NATURE,
+      EVENT_CATEGORIES.MUSEUM,
+      EVENT_CATEGORIES.MUSIC,
+      EVENT_CATEGORIES.DANCE,
+      EVENT_CATEGORIES.THEATRE,
+    ],
   },
   [EventTypeId.Course]: {},
-} as const;
+};
 
 export const CULTURE_KEYWORDS: readonly string[] = [
   'kulke:33', // Teatteri

@@ -89,10 +89,8 @@ export default function useUnifiedSearchVariables(
   const {
     filters: {
       q,
-      // By default filter by the sports dept. ontology tree id
-      ontologyTreeIds = [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID],
-      // Limit results inside Helsinki when there is no administrative division(s) selected
-      administrativeDivisionIds = [HELSINKI_OCD_DIVISION_ID],
+      ontologyTreeIds,
+      administrativeDivisionIds,
       isOpenNow,
       openAt,
       orderBy = OrderBy.name,
@@ -109,11 +107,20 @@ export default function useUnifiedSearchVariables(
     language: appToUnifiedSearchLanguageMap[locale] as UnifiedSearchLanguage,
     // Default query; everything
     q: (!q || !q.length ? ['*'] : q).join(' '),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ontologyTreeIds: ontologyTreeIds?.map((treeId: any) => treeId.toString()),
+    // By default filter by the sports dept. ontology tree id
+    ontologyTreeIds: (ontologyTreeIds?.length === 0
+      ? [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID]
+      : ontologyTreeIds
+    )
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ?.map((treeId: any) => treeId.toString()),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ontologyWordIds: ontologyWordIds?.map((wordId: any) => wordId.toString()),
-    administrativeDivisionIds,
+    // Limit results inside Helsinki when there is no administrative division(s) selected
+    administrativeDivisionIds:
+      administrativeDivisionIds?.length === 0
+        ? [HELSINKI_OCD_DIVISION_ID]
+        : administrativeDivisionIds,
     openAt: openAt && isOpenNow ? getOpenAt(openAt, isOpenNow) : null,
     ...getOrderBy(orderBy, orderDir, { position: undefined }),
     after: after ?? defaultPagination.after,

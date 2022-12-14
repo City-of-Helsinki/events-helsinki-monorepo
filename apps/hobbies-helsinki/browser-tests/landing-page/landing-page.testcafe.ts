@@ -12,3 +12,4 @@ test('Verify header title', async () => {
   await cookieConsentModal.clickAcceptAllCookies();
   await changeLanguageAndTrySearch('appHobbies');
 });
+

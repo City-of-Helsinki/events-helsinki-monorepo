@@ -1,9 +1,5 @@
 {
   "appName": "Hobbyer",
-  "footer": {
-    "searchHobbies": "Hobbyer",
-    "titleCoursesCategories": "Populära hobbykategorier"
-  },
   "home": {
     "search": {
       "title": "Hitta hobbyer"

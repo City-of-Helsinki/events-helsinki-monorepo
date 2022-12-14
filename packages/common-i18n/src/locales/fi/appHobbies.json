@@ -1,9 +1,5 @@
 {
   "appName": "Harrastukset",
-  "footer": {
-    "searchHobbies": "Harrastukset haku",
-    "titleCoursesCategories": "Suositut harrastuskategoriat"
-  },
   "home": {
     "search": {
       "title": "Löydä harrastuksia"

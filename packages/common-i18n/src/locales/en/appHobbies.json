@@ -1,9 +1,5 @@
 {
   "appName": "Hobbies",
-  "footer": {
-    "searchHobbies": "Hobbies",
-    "titleCoursesCategories": "Popular courses categories"
-  },
   "home": {
     "search": {
       "title": "Find hobbies"

@@ -6,25 +6,25 @@
   }
 }
 
-.aboveSm {
+.aboveS {
   @include respond_below(s) {
     display: none !important;
   }
 }
 
-.aboveMd {
+.aboveM {
   @include respond_below(m) {
     display: none !important;
   }
 }
 
-.aboveLg {
+.aboveL {
   @include respond_below(l) {
     display: none !important;
   }
 }
 
-.aboveXlg {
+.aboveXl {
   @include respond_below(xl) {
     display: none !important;
   }
@@ -36,25 +36,25 @@
   }
 }
 
-.belowSm {
+.belowS {
   @include respond_above(s) {
     display: none !important;
   }
 }
 
-.belowMd {
+.belowM {
   @include respond_above(m) {
     display: none !important;
   }
 }
 
-.belowLg {
+.belowL {
   @include respond_above(l) {
     display: none !important;
   }
 }
 
-.belowXlg {
+.belowXl {
   @include respond_above(xl) {
     display: none !important;
   }

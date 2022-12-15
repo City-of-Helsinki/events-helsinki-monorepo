@@ -64,13 +64,6 @@
     "registration": "Registrering",
     "textCalendarLinkDescription": "{{description}} Läs mer: {{link}}"
   },
-  "location": {
-    "directionsGoogle": "Ruttbeskrivning (Google)",
-    "directionsHSL": "Ruttbeskrivning (HSL)",
-    "mapTitle": "Plats",
-    "openMap": "Öppna kartan",
-    "title": "Plats"
-  },
   "locationExtraInfo": {
     "title": "Plats ytterligare info"
   },

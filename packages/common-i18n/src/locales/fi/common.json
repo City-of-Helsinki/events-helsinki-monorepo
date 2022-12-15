@@ -84,5 +84,15 @@
     "article": "Jaa artikkeli"
   },
   "next": "Seuraavat",
-  "previous": "Edelliset"
+  "previous": "Edelliset",
+  "mapBox": {
+    "title": "Sijainti",
+    "location": {
+      "directionsGoogle": "Reittiohjeet (Google)",
+      "directionsHSL": "Reittiohjeet (HSL)",
+      "mapTitle": "Sijainti",
+      "openMap": "Avaa kartta",
+      "title": "Sijainti"
+    }
+  }
 }

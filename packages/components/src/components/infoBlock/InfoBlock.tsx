@@ -2,6 +2,7 @@ import type { UrlObject } from 'url';
 import classNames from 'classnames';
 import { useAccordion, IconAngleDown, IconArrowRight } from 'hds-react';
 import React from 'react';
+import type { SecondaryLink } from 'react-helsinki-headless-cms';
 import { Link } from 'react-helsinki-headless-cms';
 import EllipsedTextWithToggle from '../ellipsedTextWithToggle/EllipsedTextWithToggle';
 import Text from '../text/Text';
@@ -10,6 +11,8 @@ import styles from './infoBlock.module.scss';
 type InfoBlockContentLinkProps = {
   label: string;
   href: string | UrlObject;
+  iconRight?: JSX.Element | null;
+  Component?: typeof Link | typeof SecondaryLink;
 };
 
 type InfoBlockContentListProps = {
@@ -57,16 +60,21 @@ function getHrefAsString(href: string | UrlObject): string {
   }`;
 }
 
-function InfoBlockLink({ label, href }: InfoBlockContentLinkProps) {
+function InfoBlockLink({
+  label,
+  href,
+  iconRight = <IconArrowRight />,
+  Component = Link,
+}: InfoBlockContentLinkProps) {
   return (
-    <Link
+    <Component
       className={styles.link}
-      iconRight={<IconArrowRight />}
+      iconRight={iconRight}
       href={getHrefAsString(href)}
       aria-label={label}
     >
       <span>{label}</span>
-    </Link>
+    </Component>
   );
 }
 

@@ -84,5 +84,15 @@
     "article": "Share article"
   },
   "next": "Nästa",
-  "previous": "Föregående"
+  "previous": "Föregående",
+  "mapBox": {
+    "title": "Plats",
+    "location": {
+      "directionsGoogle": "Ruttbeskrivning (Google)",
+      "directionsHSL": "Ruttbeskrivning (HSL)",
+      "mapTitle": "Plats",
+      "openMap": "Öppna kartan",
+      "title": "Plats"
+    }
+  }
 }

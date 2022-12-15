@@ -21,7 +21,7 @@ export function getHSLDirection(point?: DirectionPoint | null): string {
   );
 }
 
-export function getHSLDirections(
+export function getHSLDirectionsUrl(
   fromPoint?: DirectionPoint | null,
   toPoint?: DirectionPoint | null
 ) {

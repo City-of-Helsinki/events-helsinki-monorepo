@@ -65,13 +65,6 @@
     "textCalendarLinkDescription": "{{description}} Read more: {{link}}",
     "title": "Loading event..."
   },
-  "location": {
-    "directionsGoogle": "Directions (Google)",
-    "directionsHSL": "Directions (HSL)",
-    "mapTitle": "Location",
-    "openMap": "Open the map",
-    "title": "Location"
-  },
   "locationExtraInfo": {
     "title": "Location extra info"
   },

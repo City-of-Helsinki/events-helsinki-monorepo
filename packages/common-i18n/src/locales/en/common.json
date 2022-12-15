@@ -84,5 +84,15 @@
     "article": "Share article"
   },
   "next": "Next",
-  "previous": "Previous"
+  "previous": "Previous",
+  "mapBox": {
+    "title": "Location",
+    "location": {
+      "directionsGoogle": "Directions (Google)",
+      "directionsHSL": "Directions (HSL)",
+      "mapTitle": "Location",
+      "openMap": "Open the map",
+      "title": "Location"
+    }
+  }
 }

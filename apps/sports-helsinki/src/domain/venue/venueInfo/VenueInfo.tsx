@@ -8,9 +8,10 @@ import {
   IconPhone,
   IconQuestionCircle,
 } from 'hds-react';
+import { SecondaryLink } from 'react-helsinki-headless-cms';
 import {
   getGoogleDirectionsUrl,
-  getHSLDirections,
+  getHSLDirectionsUrl,
   getVenueDirectionPoint,
 } from '../utils/getVenueDirections';
 
@@ -21,8 +22,10 @@ export const HSLInfoLink = ({
 }) => (
   <InfoBlock.Link
     key="hsl"
-    href={getHSLDirections(null, directionPoint)}
-    label={'link.hsl_directions.label'}
+    href={getHSLDirectionsUrl(null, directionPoint)}
+    label={'venue:location.directionsGoogle'}
+    iconRight={null}
+    Component={SecondaryLink}
   />
 );
 
@@ -34,7 +37,9 @@ export const GoogleInfoLink = ({
   <InfoBlock.Link
     key="google"
     href={getGoogleDirectionsUrl(null, directionPoint)}
-    label={'link.google_directions.label'}
+    label={'venue:location.directionsHSL'}
+    iconRight={null}
+    Component={SecondaryLink}
   />
 );
 

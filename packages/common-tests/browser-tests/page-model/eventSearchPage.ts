@@ -80,7 +80,9 @@ class EventSearchPage {
       this.autoSuggestInput,
       'thisisatextthatverylikelycannotbefound'
     );
+    await t.pressKey('tab'); // The menu can be too big, so that it hides the search button, so an unfocus event must be triggered.
     await t.click(this.searchButton);
+    await t.wait(2000);
     await this.expectNoSearchResults();
   }
 

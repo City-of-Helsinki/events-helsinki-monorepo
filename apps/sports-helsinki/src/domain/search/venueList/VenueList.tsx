@@ -4,8 +4,8 @@ import { useLocale, LoadingSpinner } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import LargeVenueCard from 'domain/venue/eventCard/LargeVenueCard';
 import getTranslation from '../../../utils/getTranslation';
+import LargeVenueCard from '../../venue/venueCard/LargeVenueCard';
 
 import styles from './venueList.module.scss';
 

@@ -1,0 +1,28 @@
+{
+  "otherSport": {
+    "title": "Annan likadan motion"
+  },
+  "shareLinks": {
+    "title": "Dela motion"
+  },
+  "description": {
+    "title": "Beskrivning"
+  },
+  "location": {
+    "directionsGoogle": "Rutter (Google)",
+    "directionsHSL": "Rutter (HRT)"
+  },
+  "info": {
+    "labelVenueInformationLinks": "Övriga uppgifter",
+    "labelRoute": "Hitta framme",
+    "labelContactDetails": "Kontaktuppgifter",
+    "labelOpeningHours": "Öppettider",
+    "link": {
+      "website": "Webbsida"
+    }
+  },
+  "hero": {
+    "ariaLabelBackButton": "Tillbaka till motionsplatssidan",
+    "ariaLabelKeywords": "Ämnesord"
+  }
+}

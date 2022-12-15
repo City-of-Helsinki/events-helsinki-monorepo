@@ -92,7 +92,8 @@
       "directionsHSL": "Reittiohjeet (HSL)",
       "mapTitle": "Sijainti",
       "openMap": "Avaa kartta",
-      "title": "Sijainti"
+      "title": "Sijainti",
+      "accessibilitySentences": "Esteettömyystiedot"
     }
   }
 }

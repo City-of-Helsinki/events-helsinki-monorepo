@@ -1,0 +1,28 @@
+{
+  "otherSport": {
+    "title": "Other similar sports"
+  },
+  "shareLinks": {
+    "title": "Share exercise"
+  },
+  "description": {
+    "title": "Description"
+  },
+  "location": {
+    "directionsGoogle": "Directions (Google)",
+    "directionsHSL": "Directions (HSL)"
+  },
+  "info": {
+    "labelVenueInformationLinks": "Other details",
+    "labelRoute": "Get directions",
+    "labelContactDetails": "Contact information",
+    "labelOpeningHours": "Opening hours",
+    "link": {
+      "website": "Webpage"
+    }
+  },
+  "hero": {
+    "ariaLabelBackButton": "Back to the sports location page",
+    "ariaLabelKeywords": "Keywords"
+  }
+}

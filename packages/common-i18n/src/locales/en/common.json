@@ -92,7 +92,8 @@
       "directionsHSL": "Directions (HSL)",
       "mapTitle": "Location",
       "openMap": "Open the map",
-      "title": "Location"
+      "title": "Location",
+      "accessibilitySentences": "Accessibility"
     }
   }
 }

@@ -1,0 +1,28 @@
+{
+  "otherSport": {
+    "title": "Muuta samankaltaista liikuntaa"
+  },
+  "shareLinks": {
+    "title": "Jaa liikunta"
+  },
+  "description": {
+    "title": "Kuvaus"
+  },
+  "location": {
+    "directionsGoogle": "Reittiohjeet (Google)",
+    "directionsHSL": "Reittiohjeet (HSL)"
+  },
+  "info": {
+    "labelVenueInformationLinks": "Muut tiedot",
+    "labelRoute": "Löydä perille",
+    "labelContactDetails": "Yhteystiedot",
+    "labelOpeningHours": "Aukioloaika",
+    "link": {
+      "website": "Verkkosivu"
+    }
+  },
+  "hero": {
+    "ariaLabelBackButton": "Takaisin liikuntapaikkasivulle",
+    "ariaLabelKeywords": "Asiasanat"
+  }
+}

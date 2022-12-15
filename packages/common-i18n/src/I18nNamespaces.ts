@@ -9,6 +9,7 @@ import type footer from './locales/fi/footer.json';
 import type home from './locales/fi/home.json';
 import type notFound from './locales/fi/notFound.json';
 import type search from './locales/fi/search.json';
+import type venue from './locales/fi/venue.json';
 
 export type I18nNamespaces = {
   appHobbies: typeof appHobbies;
@@ -22,4 +23,5 @@ export type I18nNamespaces = {
   home: typeof home;
   notFound: typeof notFound;
   search: typeof search;
+  venue: typeof venue;
 };

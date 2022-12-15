@@ -92,7 +92,8 @@
       "directionsHSL": "Ruttbeskrivning (HSL)",
       "mapTitle": "Plats",
       "openMap": "Öppna kartan",
-      "title": "Plats"
+      "title": "Plats",
+      "accessibilitySentences": "Information om tillgängligheten"
     }
   }
 }

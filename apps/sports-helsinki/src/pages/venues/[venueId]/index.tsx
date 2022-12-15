@@ -7,13 +7,13 @@ import type {
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
-import VenuePageContainer from 'domain/venue/VenuePageContainer';
 import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
 import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
 import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../../domain/matomoWrapper/MatomoWrapper';
+import VenuePageContainer from '../../../domain/venue/VenuePageContainer';
 import { getLocaleOrError } from '../../../utils/routerUtils';
 
 const Event: NextPage<{
@@ -69,7 +69,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           'common',
           'home',
           'search',
-          'event',
+          'venue',
         ])),
       },
     };

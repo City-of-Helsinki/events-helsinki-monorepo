@@ -22,11 +22,12 @@ const VenueLocation = ({ venue }: { venue: Venue }) => {
 
   const directionPoint = getVenueDirectionPoint(venue);
 
+  // TODO: Implement with something else than InfoBlock, so the Infoblock can be removed
   const accessibilitySentencesCollapse = (
     <InfoBlock.Collapse
       className={styles.accessibilitySentences}
       titleClassName={styles.accessibilityTitle}
-      title={'map_box.accessibility_sentences'}
+      title={t('common:mapBox.location.accessibilitySentences')}
       icon={<IconAngleDown aria-hidden="true" className={styles.icon} />}
       items={accessibilitySentences.map((group) => (
         <React.Fragment key={`accessibility-${group?.groupName}`}>

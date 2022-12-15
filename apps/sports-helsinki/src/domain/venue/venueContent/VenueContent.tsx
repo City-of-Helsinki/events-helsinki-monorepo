@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import type { Venue } from 'events-helsinki-components';
-import { Text } from 'events-helsinki-components';
+import { useVenueTranslation, Text } from 'events-helsinki-components';
 import React from 'react';
 import {
   PageSection,
@@ -19,6 +19,7 @@ interface Props {
 }
 
 const VenueContent: React.FC<Props> = ({ venue, hasSimilarEvents }) => {
+  const { t } = useVenueTranslation();
   const { description } = venue;
   const shortDescription = null;
   return (
@@ -33,7 +34,7 @@ const VenueContent: React.FC<Props> = ({ venue, hasSimilarEvents }) => {
           <div className={styles.leftEmpty} />
           <div>
             <h2 className={styles.descriptionTitle}>
-              {'venue:description.title'}
+              {t('venue:description.title')}
             </h2>
             {shortDescription && (
               <Text variant="body-l" className={styles.description}>
@@ -51,7 +52,7 @@ const VenueContent: React.FC<Props> = ({ venue, hasSimilarEvents }) => {
                 </HtmlToReact>
               </div>
             )}
-            <ShareLinks title={'event:shareLinks.title'} />
+            <ShareLinks title={t('venue:shareLinks.title')} />
             <VenueLocation venue={venue} />
           </div>
           <aside>

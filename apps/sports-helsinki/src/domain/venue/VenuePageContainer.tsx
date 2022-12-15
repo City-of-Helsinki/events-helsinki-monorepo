@@ -21,11 +21,13 @@ import styles from './venuePage.module.scss';
 export interface VenuePageContainerProps {
   loading: boolean;
   venue?: Venue;
+  // showSimilarVenues?: boolean;
 }
 
 const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
   venue,
   loading,
+  // showSimilarVenues = true,
 }) => {
   const { t } = useTranslation('event');
   const router = useRouter();
@@ -48,6 +50,13 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
               {/* <EventPageMeta venue={venue} /> */}
               <VenueHero venue={venue} />
               <VenueContent venue={venue} />
+              {/* Hide similar event on SSR to make initial load faster */}
+              {/* {isClient && showSimilarVenues && (
+                <SimilarVenues
+                  event={event}
+                  onEventsLoaded={handleSimilarEventsLoaded}
+                />
+              )} */}
             </>
           ) : (
             <ErrorHero text={t('notFound.text')} title={t('notFound.title')}>

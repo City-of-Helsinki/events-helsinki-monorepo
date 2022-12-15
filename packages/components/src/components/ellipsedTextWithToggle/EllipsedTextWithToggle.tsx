@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useAccordion } from 'hds-react';
 import React from 'react';
+import { useCommonTranslation } from '../../hooks';
 import styles from './ellipsedTextWithToggle.module.scss';
 
 type Props = {
@@ -16,6 +17,7 @@ export default function EllipsedTextWithToggle({
   button: Button = 'button',
   initialVisibleLinesCount = 3,
 }: Props) {
+  const { t } = useCommonTranslation();
   const { isOpen, buttonProps, contentProps } = useAccordion({
     initiallyOpen: false,
   });
@@ -41,7 +43,7 @@ export default function EllipsedTextWithToggle({
             data-open={isOpen.toString()}
             {...buttonProps}
           >
-            {!isOpen ? 'show_long_price' : 'hide_long_price'}
+            {!isOpen ? t('common:button.showAll') : t('common:button.close')}
           </Button>
         </>
       )}

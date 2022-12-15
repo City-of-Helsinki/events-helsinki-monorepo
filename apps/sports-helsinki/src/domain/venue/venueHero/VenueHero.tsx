@@ -5,6 +5,8 @@ import {
   useLocale,
   IconButton,
   EllipsedTextWithToggle,
+  getSecureImage,
+  useVenueTranslation,
 } from 'events-helsinki-components';
 import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
 import { useTranslation } from 'next-i18next';
@@ -21,12 +23,14 @@ import getVenueOpeningTimeDescription from '../utils/getVenueOpeningTimeDescript
 import VenueKeywords from '../venueKeywords/VenueKeywords';
 import styles from './venueHero.module.scss';
 
+const heroPlaceholderImage = '/shared-assets/images/no_image.svg';
+
 export interface Props {
   venue: Venue;
 }
 
 const VenueHero: React.FC<Props> = ({ venue }) => {
-  const { t } = useTranslation('event');
+  const { t } = useVenueTranslation();
   const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();
   const router = useRouter();
@@ -39,7 +43,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     );
   };
 
-  const imageUrl = venue.image;
+  const imageUrl = venue.image ? getSecureImage(venue.image) : '';
   const { streetAddress, addressLocality, connections, openingHours } = venue;
   const openingHoursNow = openingHours
     ? getVenueOpeningTimeDescription(openingHours, locale, commonTranslation)
@@ -78,6 +82,8 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
       : null,
   ].filter((item) => Boolean(item));
 
+  const heroImage = imageUrl || heroPlaceholderImage;
+
   return (
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
@@ -85,19 +91,19 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
           <div className={styles.backButtonWrapper}>
             <IconButton
               role="link"
-              ariaLabel={t('hero.ariaLabelBackButton')}
+              ariaLabel={t('venue:hero.ariaLabelBackButton')}
               backgroundColor="white"
               icon={<IconArrowLeft aria-hidden />}
               onClick={() => goBack(returnParam)}
               size="default"
             />
           </div>
-          {imageUrl && (
+          {heroImage && (
             <div>
               <BackgroundImage
                 className={styles.image}
                 id={`venue-background-${venue.id}`}
-                url={imageUrl}
+                url={heroImage}
               />
             </div>
           )}
@@ -105,7 +111,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
             <div className={styles.leftPanelWrapper}>
               <div className={styles.leftPanelEmpty} />
               <div className={styles.textWrapper}>
-                <div>
+                <div aria-label={t('venue:hero.ariaLabelBackButton')}>
                   <VenueKeywords venue={venue} />
                 </div>
                 <h1 className={styles.title}>{venue.name}</h1>

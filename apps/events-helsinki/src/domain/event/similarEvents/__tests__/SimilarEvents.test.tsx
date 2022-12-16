@@ -14,6 +14,7 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
+import { EVENT_SORT_OPTIONS } from '../../../../domain/search/eventSearch/constants';
 import SimilarEvents from '../SimilarEvents';
 
 const id = '1';
@@ -49,6 +50,7 @@ const similarEventQueryVariables = {
   allOngoing: true,
   keywordOrSet2: [''],
   language: undefined,
+  sort: EVENT_SORT_OPTIONS.END_TIME,
 };
 
 const mocks = [

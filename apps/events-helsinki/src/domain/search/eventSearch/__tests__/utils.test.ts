@@ -43,7 +43,7 @@ describe('getEventSearchVariables function', () => {
     include: [],
     language: 'fi' as AppLanguage,
     pageSize: 10,
-    sortOrder: EVENT_SORT_OPTIONS.END_TIME,
+    sortOrder: EVENT_SORT_OPTIONS.LAST_MODIFIED_TIME_DESC,
     superEventType: [],
   };
   it.each(Object.entries(MAPPED_EVENT_CATEGORIES))(

@@ -2,9 +2,9 @@ import {
   addParamsToQueryString,
   useLocale,
   getLargeEventCardId,
+  useVenueTranslation,
 } from 'events-helsinki-components';
 import { IconArrowRight, IconLocation } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
@@ -31,7 +31,7 @@ const LargeVenueCard: React.FC<Props> = ({
   tags,
   imageUrl,
 }) => {
-  const { t } = useTranslation('event');
+  const { t } = useVenueTranslation();
   const router = useRouter();
   const locale = useLocale();
 
@@ -55,7 +55,7 @@ const LargeVenueCard: React.FC<Props> = ({
   return (
     <LinkBox
       type="linkBox"
-      aria-label={t('eventCard.ariaLabelLink', {
+      aria-label={t('venue:venueCard.ariaLabelLink', {
         name: title,
       })}
       id={getLargeEventCardId(id)}

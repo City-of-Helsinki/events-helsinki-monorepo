@@ -9,6 +9,7 @@ import cms_en from '../locales/en/cms.json';
 import common_en from '../locales/en/common.json';
 import consent_en from '../locales/en/consent.json';
 import event_en from '../locales/en/event.json';
+import venue_en from '../locales/en/venue.json';
 import footer_en from '../locales/en/footer.json';
 import home_en from '../locales/en/home.json';
 import notFound_en from '../locales/en/notFound.json';
@@ -20,6 +21,7 @@ import cms from '../locales/fi/cms.json';
 import common from '../locales/fi/common.json';
 import consent from '../locales/fi/consent.json';
 import event from '../locales/fi/event.json';
+import venue from '../locales/fi/venue.json';
 import footer from '../locales/fi/footer.json';
 import home from '../locales/fi/home.json';
 import notFound from '../locales/fi/notFound.json';
@@ -31,6 +33,7 @@ import cms_sv from '../locales/sv/cms.json';
 import common_sv from '../locales/sv/common.json';
 import consent_sv from '../locales/sv/consent.json';
 import event_sv from '../locales/sv/event.json';
+import venue_sv from '../locales/sv/venue.json';
 import footer_sv from '../locales/sv/footer.json';
 import home_sv from '../locales/sv/home.json';
 import notFound_sv from '../locales/sv/notFound.json';
@@ -44,6 +47,7 @@ export const translations = {
   appEvents,
   consent,
   event,
+  venue,
   footer,
   home,
   notFound,
@@ -69,6 +73,7 @@ export const config = {
       appSports: appSports_en,
       consent: consent_en,
       event: event_en,
+      venue: venue_en,
       footer: footer_en,
       home: home_en,
       notFound: notFound_en,
@@ -82,6 +87,7 @@ export const config = {
       appSports: appSports_sv,
       consent: consent_sv,
       event: event_sv,
+      venue: venue_sv,
       footer: footer_sv,
       home: home_sv,
       notFound: notFound_sv,

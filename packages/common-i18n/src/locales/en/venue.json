@@ -24,5 +24,12 @@
   "hero": {
     "ariaLabelBackButton": "Back to the sports location page",
     "ariaLabelKeywords": "Keywords"
+  },
+  "venueCard": {
+    "ariaLabelLink": "Go to venue: {{name}}",
+    "ariaLabelReadMore": "Read more: {{name}}",
+    "buttonReadMore": "Read more",
+    "dateAndTime": "{{date}}, at {{time}}",
+    "isFree": "Free"
   }
 }

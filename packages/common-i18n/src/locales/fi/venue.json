@@ -24,5 +24,12 @@
   "hero": {
     "ariaLabelBackButton": "Takaisin liikuntapaikkasivulle",
     "ariaLabelKeywords": "Asiasanat"
+  },
+  "venueCard": {
+    "ariaLabelLink": "Siirry liikuntapaikkaan: {{name}}",
+    "ariaLabelReadMore": "Lue lisää: {{name}}",
+    "buttonReadMore": "Lue lisää",
+    "dateAndTime": "{{date}}, klo {{time}}",
+    "isFree": "Maksuton"
   }
 }

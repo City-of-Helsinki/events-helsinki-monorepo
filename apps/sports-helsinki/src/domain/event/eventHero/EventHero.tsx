@@ -31,7 +31,8 @@ import {
   ContentContainer,
   PageSection,
 } from 'react-helsinki-headless-cms';
-
+import type { SearchForwardPath } from '../../../utils/routerUtils';
+import { searchForwardPaths } from '../../../utils/routerUtils';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import type { ReturnParams } from '../eventQueryString.util';
@@ -64,7 +65,11 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   } = getEventFields(event, locale);
   const eventPriceText = getEventPrice(event, locale, t('hero.offers.isFree'));
   const showKeywords = Boolean(today || thisWeek || keywords.length);
-  const returnParam = extractLatestReturnPath(search, locale);
+  const returnParam = extractLatestReturnPath(
+    search,
+    locale,
+    searchForwardPaths.courseSearch as SearchForwardPath
+  );
 
   const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
     router.push(

@@ -76,7 +76,8 @@ export function getLocaleOrError(locale: string | undefined): Language {
  */
 export const removeQueryParamsFromRouter = (
   router: NextRouter,
-  removeList: string[] = []
+  removeList: string[] = [],
+  forwardPath: SearchForwardPath = searchForwardPaths.search as SearchForwardPath
 ) => {
   const queryObject = { ...router.query };
 
@@ -88,7 +89,7 @@ export const removeQueryParamsFromRouter = (
   }
   router.replace(
     getLocalizedCmsItemUrl(
-      ROUTES.COURSESEARCH,
+      forwardPath,
       {},
       (router.locale || router.defaultLocale) as Language
     ),
@@ -131,3 +132,10 @@ export function rewriteInternalURLs(
   }
   return JSON.parse(jsonText);
 }
+
+export const searchForwardPaths = {
+  search: ROUTES.SEARCH,
+  courseSearch: ROUTES.COURSESEARCH,
+};
+
+export type SearchForwardPath = keyof typeof searchForwardPaths;

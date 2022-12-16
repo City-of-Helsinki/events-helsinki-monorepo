@@ -1,5 +1,5 @@
-import { ROUTES } from '../../constants';
-import { getI18nPath } from '../../utils/routerUtils';
+import type { SearchForwardPath } from '../../utils/routerUtils';
+import { getI18nPath, searchForwardPaths } from '../../utils/routerUtils';
 
 export type ReturnParams = {
   returnPath: string;
@@ -13,13 +13,14 @@ export type ReturnParams = {
  */
 export const extractLatestReturnPath = (
   queryString: string,
-  locale: string
+  locale: string,
+  forwardPath: SearchForwardPath = searchForwardPaths.search as SearchForwardPath
 ): ReturnParams => {
   const searchParams = new URLSearchParams(queryString);
   const returnPaths = searchParams.getAll('returnPath');
   // latest path is the last item, it can be popped. If empty, defaults to /events
   const extractedPath =
-    returnPaths.pop() ?? getI18nPath(ROUTES.COURSESEARCH, locale);
+    returnPaths.pop() ?? getI18nPath(searchForwardPaths[forwardPath], locale);
   // there is no support to delete all but extracted item from same parameter list. This is a workaround to it:
   // 1) delete all first
   searchParams.delete('returnPath');

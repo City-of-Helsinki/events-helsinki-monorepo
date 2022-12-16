@@ -17,6 +17,8 @@ import {
   ContentContainer,
   PageSection,
 } from 'react-helsinki-headless-cms';
+import type { SearchForwardPath } from '../../../utils/routerUtils';
+import { searchForwardPaths } from '../../../utils/routerUtils';
 import type { ReturnParams } from '../../event/eventQueryString.util';
 import { extractLatestReturnPath } from '../../event/eventQueryString.util';
 import getVenueOpeningTimeDescription from '../utils/getVenueOpeningTimeDescription';
@@ -35,7 +37,11 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
-  const returnParam = extractLatestReturnPath(search, locale);
+  const returnParam = extractLatestReturnPath(
+    search,
+    locale,
+    searchForwardPaths.search as SearchForwardPath
+  );
 
   const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
     router.push(
@@ -111,7 +117,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
             <div className={styles.leftPanelWrapper}>
               <div className={styles.leftPanelEmpty} />
               <div className={styles.textWrapper}>
-                <div aria-label={t('venue:hero.ariaLabelBackButton')}>
+                <div>
                   <VenueKeywords venue={venue} />
                 </div>
                 <h1 className={styles.title}>{venue.name}</h1>

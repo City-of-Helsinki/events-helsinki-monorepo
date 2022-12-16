@@ -1,7 +1,11 @@
 /* eslint-disable sonarjs/cognitive-complexity */
-
 import type { Venue } from 'events-helsinki-components';
-import { KeywordTag, useLocale, scrollToTop } from 'events-helsinki-components';
+import {
+  KeywordTag,
+  useLocale,
+  scrollToTop,
+  buildQueryFromObject,
+} from 'events-helsinki-components';
 import { capitalize } from 'lodash';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -55,9 +59,9 @@ const VenueKeywords: React.FC<Props> = ({
   const handleClick =
     (type: 'text' | 'isFree', value = '') =>
     () => {
-      const search = {
+      const search = buildQueryFromObject({
         q: type === 'text' ? [value] : [],
-      };
+      });
 
       router.push(`${getI18nPath(ROUTES.SEARCH, locale)}${search}`);
       scrollToTop();

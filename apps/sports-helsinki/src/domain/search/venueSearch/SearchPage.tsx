@@ -1,4 +1,4 @@
-import type { Venue } from 'events-helsinki-components';
+import type { UnifiedSearchVenue } from 'events-helsinki-components';
 import {
   BasicMeta,
   getLargeEventCardId,
@@ -15,7 +15,11 @@ import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
-import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
+import type { SearchForwardPath } from '../../../utils/routerUtils';
+import {
+  removeQueryParamsFromRouter,
+  searchForwardPaths,
+} from '../../../utils/routerUtils';
 import AppConfig from '../../app/AppConfig';
 import useUnifiedSearchListQuery from '../../unifiedSearch/useUnifiedSearchListQuery';
 import SearchResultsContainer from '../eventSearch/searchResultList/SearchResultsContainer';
@@ -49,8 +53,10 @@ const SearchPage: React.FC<{
   const venuesList = React.useMemo(
     () =>
       venuesData?.unifiedSearch?.edges.reduce(
-        (venues: Venue[], edge) =>
-          edge.node.venue ? [...venues, edge.node.venue as Venue] : venues,
+        (venues: UnifiedSearchVenue[], edge) =>
+          edge.node.venue
+            ? [...venues, edge.node.venue as UnifiedSearchVenue]
+            : venues,
         []
       ) ?? [],
     [venuesData]
@@ -101,15 +107,19 @@ const SearchPage: React.FC<{
   React.useEffect(() => {
     if (router.asPath && router.query?.scrollToResults) {
       scrollToResultList();
-    } else if (router.query?.eventId) {
+    } else if (router.query?.venueId) {
       scrollToEventCard(
         getLargeEventCardId(
-          Array.isArray(router.query.eventId)
-            ? router.query.eventId[0]
-            : router.query.eventId
+          Array.isArray(router.query.venueId)
+            ? router.query.venueId[0]
+            : router.query.venueId
         )
       );
-      removeQueryParamsFromRouter(router, ['eventId']);
+      removeQueryParamsFromRouter(
+        router,
+        ['venueId'],
+        searchForwardPaths.search as SearchForwardPath
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

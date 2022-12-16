@@ -17,7 +17,11 @@ import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
 import EventList from '../../../common-events/components/eventList/EventList';
-import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
+import type { SearchForwardPath } from '../../../utils/routerUtils';
+import {
+  removeQueryParamsFromRouter,
+  searchForwardPaths,
+} from '../../../utils/routerUtils';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
@@ -113,7 +117,11 @@ const SearchPage: React.FC<{
             : router.query.eventId
         )
       );
-      removeQueryParamsFromRouter(router, ['eventId']);
+      removeQueryParamsFromRouter(
+        router,
+        ['eventId'],
+        searchForwardPaths.courseSearch as SearchForwardPath
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

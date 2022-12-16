@@ -98,6 +98,8 @@ export function getCmsPageCardProps(
 ): CardProps {
   return {
     ...getArticlePageCardPropsBase(item),
+    withBorder: true,
+    withShadow: false,
     url: getRoutedInternalHref(
       item?.link ?? item?.uri,
       ModuleItemTypeEnum.Page

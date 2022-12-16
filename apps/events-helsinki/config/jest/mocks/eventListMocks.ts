@@ -9,6 +9,7 @@ import type {
   QueryEventListArgs,
 } from 'events-helsinki-components';
 import AppConfig from '../../../src/domain/app/AppConfig';
+import { EVENT_SORT_OPTIONS } from '../../../src/domain/search/eventSearch/constants';
 
 export const baseVariables = {
   end: '',
@@ -70,7 +71,10 @@ export const createEventListRequestAndResultMocks = ({
   variables = {},
   response,
 }: EventListMockArguments): MockedResponse => ({
-  request: createRequest(variables),
+  request: createRequest({
+    sort: EVENT_SORT_OPTIONS.LAST_MODIFIED_TIME_DESC,
+    ...variables,
+  }),
   result: createResult(response),
 });
 

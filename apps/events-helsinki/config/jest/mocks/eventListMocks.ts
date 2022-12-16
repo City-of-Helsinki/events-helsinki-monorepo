@@ -70,7 +70,7 @@ export const createEventListRequestAndResultMocks = ({
   variables = {},
   response,
 }: EventListMockArguments): MockedResponse => ({
-  request: createRequest(variables),
+  request: createRequest({ ...variables, sort: '-last_modified_time' }),
   result: createResult(response),
 });
 

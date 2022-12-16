@@ -51,7 +51,7 @@ it('should render event content fields', () => {
     { role: 'button', name: translations.common.shareLink.shareOnFacebook },
     { role: 'button', name: translations.common.shareLink.shareOnTwitter },
     { role: 'button', name: translations.common.shareLink.shareOnLinkedIn },
-    { role: 'heading', name: translations.event.location.title },
+    { role: 'heading', name: translations.common.mapBox.title },
   ];
   itemsByRole.forEach(({ role, name }) => {
     expect(screen.getByRole(role, { name })).toBeInTheDocument();
@@ -60,7 +60,7 @@ it('should render event content fields', () => {
   // there is two kartta-links, thus we check that three is at least one match of each
   expect(
     screen.queryAllByRole('link', {
-      name: `${translations.event.location.openMap}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
+      name: `${translations.common.mapBox.location.openMap}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     })
   ).not.toHaveLength(0);
 
@@ -74,23 +74,21 @@ it('should render event content fields', () => {
     expect(screen.getByText(item)).toBeInTheDocument();
   });
 
-  // TODO: fix: ssr name does not exist anymore
   // Both location and event info have directions links so test that both are available
-  /* const itemsAllByRole = [
+  const itemsAllByRole = [
     {
       role: 'link',
-      name: `${translations.event.location.directionsGoogle} ${translations.common.srOnly.opensInANewTab}`,
+      name: `${translations.common.mapBox.location.directionsGoogle}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
     {
       role: 'link',
-      name: `${translations.event.location.directionsHSL} ${translations.common.srOnly.opensInANewTab}`,
+      name: `${translations.common.mapBox.location.directionsHSL}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
   ];
 
-
   itemsAllByRole.forEach(({ role, name }) => {
     expect(screen.queryAllByRole(role, { name })).toHaveLength(2);
-  }); */
+  });
 });
 
 it('should hide map if internet event', () => {

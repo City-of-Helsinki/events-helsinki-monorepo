@@ -23,7 +23,7 @@ describe('large venue card', () => {
 
     await userEvent.click(
       screen.getByRole('link', {
-        name: translations.event.eventCard.ariaLabelLink.replace(
+        name: translations.venue.venueCard.ariaLabelLink.replace(
           '{{name}}',
           'Venue title'
         ),

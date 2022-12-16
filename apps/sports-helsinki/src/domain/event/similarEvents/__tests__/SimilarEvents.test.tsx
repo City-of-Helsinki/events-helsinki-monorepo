@@ -85,6 +85,11 @@ describe('similar events', () => {
         })
       ).toBeInTheDocument();
     });
+    await waitFor(() => {
+      expect(
+        screen.queryByText('Page has finished loading')
+      ).not.toBeInTheDocument();
+    });
     expectedSimilarEvents.data.forEach((event) => {
       expect(
         // FIXME: Should the card's area be visible?

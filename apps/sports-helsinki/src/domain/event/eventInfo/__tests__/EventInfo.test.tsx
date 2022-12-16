@@ -67,25 +67,23 @@ it('should render event info fields', async () => {
     { role: 'heading', name: translations.event.info.labelOrganizer },
     {
       role: 'link',
-      name: `${translations.event.info.extlinkFacebook} ${translations.common.srOnly.opensInANewTab}`,
+      name: `${translations.event.info.extlinkFacebook}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
     { role: 'heading', name: translations.event.info.labelDirections },
     {
       role: 'link',
-      name: `${translations.event.location.directionsGoogle} ${translations.common.srOnly.opensInANewTab}`,
+      name: `${translations.common.mapBox.location.directionsGoogle}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
     {
       role: 'link',
-      name: `${translations.event.location.directionsHSL} ${translations.common.srOnly.opensInANewTab}`,
+      name: `${translations.common.mapBox.location.directionsHSL}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
     { role: 'heading', name: translations.event.info.labelPrice },
   ];
 
-  // TODO: fix: ssr name does not exist anymore
-
-  /* itemsByRole.forEach(({ role, name }) => {
-    expect(screen.queryByRole(role, { name })).toBeInTheDocument();
-  }); */
+  itemsByRole.forEach(({ role, name }) => {
+    expect(screen.getByRole(role, { name })).toBeInTheDocument();
+  });
 
   const itemsByText = [
     'Ma 22.6.2020, klo 10.00–13.00',

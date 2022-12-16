@@ -24,5 +24,12 @@
   "hero": {
     "ariaLabelBackButton": "Tillbaka till motionsplatssidan",
     "ariaLabelKeywords": "Ämnesord"
+  },
+  "venueCard": {
+    "ariaLabelLink": "Gå till plats: {{name}}",
+    "ariaLabelReadMore": "Läs mer: {{name}}",
+    "buttonReadMore": "Läs mer",
+    "dateAndTime": "{{date}}, kl. {{time}}",
+    "isFree": "Gratis"
   }
 }

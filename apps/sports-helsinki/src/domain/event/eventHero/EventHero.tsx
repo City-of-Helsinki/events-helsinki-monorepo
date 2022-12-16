@@ -70,7 +70,6 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
     locale,
     searchForwardPaths.courseSearch as SearchForwardPath
   );
-
   const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
     router.push(
       `${returnPath}${remainingQueryString ? `?${remainingQueryString}` : ''}`

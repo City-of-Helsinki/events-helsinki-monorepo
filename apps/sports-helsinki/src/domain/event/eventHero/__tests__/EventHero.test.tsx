@@ -70,8 +70,10 @@ it('should render event name, description and location', () => {
 });
 
 it('should go to event list', async () => {
-  const { router } = renderComponent();
-
+  const event = getFakeEvent();
+  const { router } = render(<EventHero event={} />, {
+    routes: [`/kurssit/${event.id}?returnPath=/kurssihaku`],
+  });
   await userEvent.click(
     screen.getByRole('link', {
       name: translations.event.hero.ariaLabelBackButton,

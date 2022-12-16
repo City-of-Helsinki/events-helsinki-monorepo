@@ -47,8 +47,7 @@ export const isEventCancelled = (event: EventFields): boolean => {
  * @return {boolean}
  */
 export const isEventFree = (event: EventFields): boolean => {
-  const offer = event.offers.find((item) => item.isFree);
-
+  const offer = event.offers?.find((item) => item.isFree);
   return !!offer?.isFree;
 };
 
@@ -103,16 +102,16 @@ export const getEventPrice = (
 ): string => {
   return isEventFree(event)
     ? isFreeText
-    : event.offers
-        .map((offer) =>
+    : event?.offers
+        ?.map((offer) =>
           // Format text to price if it happens to be number e.g. '2' -> '2 €'
           formatPrice(
             getLocalizedString(offer.price || offer.description, locale)
           )
         )
-        .filter((e) => e)
-        .sort()
-        .join(', ');
+        ?.filter((e) => e)
+        ?.sort()
+        ?.join(', ') ?? '';
 };
 
 export const getKeywordList = (
@@ -143,7 +142,7 @@ export const getKeywordList = (
  * @return {string}
  */
 export const getEventImageUrl = (event: EventFields): string => {
-  const image = event.images[0];
+  const image = event.images?.[0];
 
   return getSecureImage(image?.url);
 };
@@ -154,7 +153,7 @@ export const getEventImageUrl = (event: EventFields): string => {
  * @return {string}
  */
 export const getEventSomeImageUrl = (event: EventFields): string => {
-  const image = event.images[0];
+  const image = event.images?.[0];
   return getSecureImage(image?.url) || EVENT_SOME_IMAGE;
 };
 
@@ -272,11 +271,11 @@ export const getHslDirectionsLink = (
  * @return {string}
  */
 const getOfferInfoUrl = (event: EventFields, locale: AppLanguage): string => {
-  const offer = event.offers.find((item) =>
+  const offer = event.offers?.find((item) =>
     getLocalizedString(item.infoUrl, locale)
   );
 
-  return getLocalizedString(offer?.infoUrl, locale);
+  return offer ? getLocalizedString(offer?.infoUrl, locale) : '';
 };
 
 const getRegistrationUrl = (event: EventFields) => {
@@ -311,10 +310,10 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
     infoUrl: getLocalizedString(event.infoUrl, locale),
     keywords: getKeywordList(event.keywords, locale),
     languages: event.inLanguage
-      .map((item: EventFields['inLanguage'][number]) =>
+      ?.map((item: EventFields['inLanguage'][number]) =>
         capitalize(getLocalizedString(item.name, locale))
       )
-      .filter((e) => e),
+      ?.filter((e) => e),
     locationName: getLocalizedString(eventLocation?.name, locale),
     offerInfoUrl,
     registrationUrl,
@@ -331,7 +330,7 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
     audience: getKeywordList(event.audience, locale),
     audienceMinAge: event.audienceMinAge,
     audienceMaxAge: event.audienceMaxAge,
-    photographerName: event.images[0]?.photographerName,
+    photographerName: event.images?.[0]?.photographerName,
     ...getEventLocationFields(event, locale),
     locationExtraInfo: getLocalizedString(event.locationExtraInfo, locale),
   };

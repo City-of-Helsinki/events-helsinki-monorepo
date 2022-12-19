@@ -49,14 +49,17 @@ jobs:
             FEDERATION_CMS_ROUTING_URL: https://tapahtumat.hkih.stage.geniem.io/graphql
             FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
             FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
+            FEDERATION_VENUES_ROUTING_URL: https://liikunta.hel.fi/api/graphql # TODO: Will be a dedicated server in future.
           - service: 'hobbies'
             FEDERATION_CMS_ROUTING_URL: https://harrastus.hkih.stage.geniem.io/graphql
             FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
             FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
+            FEDERATION_VENUES_ROUTING_URL: https://liikunta.hel.fi/api/graphql # TODO: Will be a dedicated server in future.
           - service: 'sports'
             FEDERATION_CMS_ROUTING_URL: https://liikunta.hkih.stage.geniem.io/graphql
             FEDERATION_EVENTS_ROUTING_URL: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
             FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://unified-search.test.kuva.hel.ninja/search
+            FEDERATION_VENUES_ROUTING_URL: https://liikunta.hel.fi/api/graphql # TODO: Will be a dedicated server in future.
 
     runs-on: ubuntu-latest
     needs: build
@@ -77,4 +80,5 @@ jobs:
           K8S_SECRET_FEDERATION_CMS_ROUTING_URL: ${{ matrix.FEDERATION_CMS_ROUTING_URL }}
           K8S_SECRET_FEDERATION_EVENTS_ROUTING_URL: ${{ matrix.FEDERATION_EVENTS_ROUTING_URL }}
           K8S_SECRET_FEDERATION_UNIFIED_SEARCH_ROUTING_URL: ${{ matrix.FEDERATION_UNIFIED_SEARCH_ROUTING_URL }}
+          K8S_SECRET_FEDERATION_VENUES_ROUTING_URL: ${{ matrix.FEDERATION_VENUES_ROUTING_URL }}
           # K8S_SECRET_ROUTER_HEALTHCHECK_URL: https://${{env.K8S_NAMESPACE}}-${{ matrix.service }}.${{ env.BASE_DOMAIN }}

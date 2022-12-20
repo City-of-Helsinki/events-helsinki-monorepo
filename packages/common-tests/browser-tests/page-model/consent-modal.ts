@@ -1,6 +1,9 @@
 import { screen } from '@testing-library/testcafe';
 import { t } from 'testcafe';
 
+// TODO: If the ConsentModal could be used as a generic class,
+// the  implementing classes could be deleted from the apps.
+// More details: https://github.com/City-of-Helsinki/events-helsinki-monorepo/pull/95#discussion_r1050459925
 abstract class ConsentModal {
   protected abstract get appName(): string;
 

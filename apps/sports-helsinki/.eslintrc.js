@@ -45,6 +45,9 @@ module.exports = {
     // "max-len": ["warn", { "code": 120 }],
     'no-console': 'error',
     'testing-library/no-unnecessary-act': 'warn',
+    // FIXME: don't set graphql linters off
+    // '@graphql-eslint/no-unreachable-types': 'off',
+    // '@graphql-eslint/strict-id-in-types': 'off',
   },
   overrides: [
     {

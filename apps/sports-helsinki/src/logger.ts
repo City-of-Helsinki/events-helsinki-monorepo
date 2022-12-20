@@ -7,6 +7,7 @@ export const graphqlClientLogger = createLogger(
   AppConfig.debug
 );
 export const dataSourceLogger = createLogger('dataSource', AppConfig.debug);
+export const dataSourceHaukiLogger = createLogger('ds:Hauki');
 export const dataSourceTprekLogger = createLogger('ds:Tprek', AppConfig.debug);
 export const dataSourceLinkedLogger = createLogger(
   'ds:linked',

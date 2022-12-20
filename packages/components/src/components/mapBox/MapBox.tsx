@@ -58,14 +58,14 @@ function MapBox({
         <Text variant="body-l" className={styles.location}>
           {placeAddress}
         </Text>
+        <SecondaryLink className={styles.externalLink} href={hslDirectionsLink}>
+          {t('common:mapBox.location.directionsHSL')}
+        </SecondaryLink>
         <SecondaryLink
           className={styles.externalLink}
           href={googleDirectionsLink}
         >
           {t('common:mapBox.location.directionsGoogle')}
-        </SecondaryLink>
-        <SecondaryLink className={styles.externalLink} href={hslDirectionsLink}>
-          {t('common:mapBox.location.directionsHSL')}
         </SecondaryLink>
         {accessibilitySentences}
       </div>

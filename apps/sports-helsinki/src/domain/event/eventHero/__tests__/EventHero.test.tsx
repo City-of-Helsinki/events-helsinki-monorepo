@@ -71,7 +71,7 @@ it('should render event name, description and location', () => {
 
 it('should go to event list', async () => {
   const event = getFakeEvent();
-  const { router } = render(<EventHero event={} />, {
+  const { router } = render(<EventHero event={event} />, {
     routes: [`/kurssit/${event.id}?returnPath=/kurssihaku`],
   });
   await userEvent.click(

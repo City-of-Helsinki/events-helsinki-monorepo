@@ -1,6 +1,4 @@
 import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
-import * as React from 'react';
-
 import { render, screen } from '@/test-utils';
 import { fakeEvent, fakePlace } from '@/test-utils/mockDataUtils';
 import {
@@ -56,7 +54,7 @@ describe('cookie consents', () => {
     it('should not render service map', () => {
       render(<EventLocation event={event} />);
       expect(
-        screen.queryByTitle(translations.event.location.mapTitle)
+        screen.queryByTitle(translations.common.mapBox.location.mapTitle)
       ).not.toBeInTheDocument();
     });
   });
@@ -65,7 +63,7 @@ describe('cookie consents', () => {
       acceptRequiredCookieConsentsOnly();
       render(<EventLocation event={event} />);
       expect(
-        screen.queryByTitle(translations.event.location.mapTitle)
+        screen.queryByTitle(translations.common.mapBox.location.mapTitle)
       ).not.toBeInTheDocument();
     });
   });
@@ -74,7 +72,7 @@ describe('cookie consents', () => {
       acceptServiceMapCookieConsents();
       render(<EventLocation event={event} />);
       expect(
-        screen.getByTitle(translations.event.location.mapTitle)
+        screen.getByTitle(translations.common.mapBox.location.mapTitle)
       ).toBeInTheDocument();
     });
   });

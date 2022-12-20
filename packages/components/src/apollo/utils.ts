@@ -1,6 +1,6 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 
-import type { Connection, AppMenuItem } from '../types';
+import type { AppMenuItem } from '../types';
 import { LanguageCodeEnum } from '../types';
 
 export const excludeArgs =
@@ -8,10 +8,6 @@ export const excludeArgs =
     args
       ? Object.keys(args).filter((key: string) => !excludedArgs.includes(key))
       : false;
-
-export function getNodes<T>(connection: Connection<T>): T[] {
-  return connection.edges.map(({ node }) => node);
-}
 
 export function sortMenuItems(menuItemsConnection: { nodes: AppMenuItem[] }) {
   const menuItems = menuItemsConnection.nodes;

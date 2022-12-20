@@ -1,4 +1,5 @@
 import { EventTypeId } from 'events-helsinki-components';
+import { i18n } from '../../../next-i18next.config';
 import { ROUTES } from '../../constants';
 
 class AppConfig {
@@ -21,6 +22,14 @@ class AppConfig {
       process.env.NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT,
       'NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT'
     );
+  }
+
+  static get nextApiGraphqlEndpoint() {
+    return `${this.origin}/api/graphql`;
+  }
+
+  static get locales() {
+    return i18n.locales;
   }
 
   static get origin() {

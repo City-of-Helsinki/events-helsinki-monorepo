@@ -30,6 +30,6 @@ describe('large venue card', () => {
       })
     );
 
-    expect(router.pathname).toStrictEqual('/venues/tprek:123');
+    expect(router.pathname).toStrictEqual('/paikat/tprek:123');
   });
 });

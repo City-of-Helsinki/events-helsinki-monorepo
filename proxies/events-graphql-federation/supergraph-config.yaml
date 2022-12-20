@@ -5,7 +5,8 @@ subgraphs:
     # routing_url: https://tapahtumat.content.api.hel.fi/graphql
     # routing_url: https://harrastus.hkih.stage.geniem.io/graphql
     # routing_url: https://harrastus.content.api.hel.fi/graphql
-
+    # routing_url: https://liikunta.hkih.stage.geniem.io/graphql
+    # routing_url: https://liikunta.content.api.hel.fi/graphql
     schema:
       file: ./subgraphs/cms/cms.graphql
   events:

@@ -9,11 +9,11 @@ import cms_en from '../locales/en/cms.json';
 import common_en from '../locales/en/common.json';
 import consent_en from '../locales/en/consent.json';
 import event_en from '../locales/en/event.json';
-import venue_en from '../locales/en/venue.json';
 import footer_en from '../locales/en/footer.json';
 import home_en from '../locales/en/home.json';
 import notFound_en from '../locales/en/notFound.json';
 import search_en from '../locales/en/search.json';
+import venue_en from '../locales/en/venue.json';
 import appEvents from '../locales/fi/appEvents.json';
 import appHobbies from '../locales/fi/appHobbies.json';
 import appSports from '../locales/fi/appSports.json';
@@ -21,11 +21,11 @@ import cms from '../locales/fi/cms.json';
 import common from '../locales/fi/common.json';
 import consent from '../locales/fi/consent.json';
 import event from '../locales/fi/event.json';
-import venue from '../locales/fi/venue.json';
 import footer from '../locales/fi/footer.json';
 import home from '../locales/fi/home.json';
 import notFound from '../locales/fi/notFound.json';
 import search from '../locales/fi/search.json';
+import venue from '../locales/fi/venue.json';
 import appEvents_sv from '../locales/sv/appEvents.json';
 import appHobbies_sv from '../locales/sv/appHobbies.json';
 import appSports_sv from '../locales/sv/appSports.json';
@@ -33,11 +33,11 @@ import cms_sv from '../locales/sv/cms.json';
 import common_sv from '../locales/sv/common.json';
 import consent_sv from '../locales/sv/consent.json';
 import event_sv from '../locales/sv/event.json';
-import venue_sv from '../locales/sv/venue.json';
 import footer_sv from '../locales/sv/footer.json';
 import home_sv from '../locales/sv/home.json';
 import notFound_sv from '../locales/sv/notFound.json';
 import search_sv from '../locales/sv/search.json';
+import venue_sv from '../locales/sv/venue.json';
 
 export const translations = {
   cms,

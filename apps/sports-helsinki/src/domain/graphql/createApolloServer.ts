@@ -16,20 +16,7 @@ import createVenueSchema from './venue/venueSchema';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-// Note: In the current version of GraphQL, you can’t have an empty type even if
-// you intend to extend it later. So we need to make sure the Query type has at
-// least one field — in this case we can add a fake _empty field. Hopefully in
-// future versions it will be possible to have an empty type to be extended
-// later.
-// https://www.apollographql.com/blog/backend/schema-design/modularizing-your-graphql-schema-code/
-// const initQueryTypeDefs = gql`
-//   type Query {
-//     _empty: String
-//   }
-// `;
-
 const typeDefs = (liikuntaServerConfig?: LiikuntaServerConfig) => [
-  // initQueryTypeDefs,
   // paginationSchema,
   createVenueSchema(liikuntaServerConfig),
   // eventSchema,

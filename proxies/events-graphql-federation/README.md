@@ -6,6 +6,13 @@ The Events GraphQL Federation is a project for a Apollo federation supergraph (a
 
 Apollo's Supergraph-demo repository: https://github.com/apollographql/supergraph-demo/
 
+## Subgraphs
+
+- Cms: A graph of the Headless CMS. **Application specific content**. (WARNING: Does not support subgraphs or Apollo federation 2 directives yet). [README](./subgraphs/cms/README.md).
+- Events: A subgraph of the LinkedEvents Graphql Proxy. **Common for every app**. [README](./subgraphs/events/README.md)
+- Unified-search: A subgraph of the Unified-Search ElasticSearch / OpenSearch service that offers elastic search for Venues. **Common for every app**. [README](./subgraphs/unified-search/README.md)
+- Venues: A subgraph of the Venues and Hauki (Venue's open times) information. **Common for every app**. [README](./subgraphs/venues/README.md)
+
 ## Servers
 
 ### Staging
@@ -52,9 +59,9 @@ In the `package.json` of the root in the monorepo, there is a script that can be
 
 ```javascript
   "scripts": {
-    "docker:graphql-router:hobbies:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
-    "docker:graphql-router:events:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
-    "docker:graphql-router:sports:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://liikunta.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:hobbies:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://liikunta.hel.fi/api/graphql docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:events:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://liikunta.hel.fi/api/graphql docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:sports:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://liikunta.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://liikunta.hel.fi/api/graphql docker-compose -f docker-compose.router.yml up",
   }
 ```
 
@@ -71,6 +78,7 @@ override_subgraph_url:
   cms: ${env.FEDERATION_CMS_ROUTING_URL}
   events: ${env.FEDERATION_EVENTS_ROUTING_URL}
   unified-search: ${env.FEDERATION_UNIFIED_SEARCH_ROUTING_URL}
+  venues: ${env.FEDERATION_VENUES_ROUTING_URL}
 ```
 
 They are set in the in the `docker-compose.router.yml` like this, with the defaults in the `events` and `unified-search` services, but empty in `cms`:
@@ -80,6 +88,7 @@ environment:
   - FEDERATION_CMS_ROUTING_URL=${FEDERATION_CMS_ROUTING_URL}
   - FEDERATION_EVENTS_ROUTING_URL=${FEDERATION_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
   - FEDERATION_UNIFIED_SEARCH_ROUTING_URL=${FEDERATION_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
+  - FEDERATION_VENUES_ROUTING_URL=${FEDERATION_VENUES_ROUTING_URL:-https://liikunta.hel.fi/api/graphql}
 ```
 
 **This can be used to easily change (the routing url of) the Headless CMS API! So, by providing `FEDERATION_CMS_ROUTING_URL` as a environment variable, the same supergraph schema can be used with a different source of data.**

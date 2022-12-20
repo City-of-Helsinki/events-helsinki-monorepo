@@ -11,9 +11,9 @@ sandbox:
   enabled: true
 headers:
   subgraphs:
-    venues: # HEader rules for just the venues subgraph
+    venues: # Header rules for just the venues subgraph
       request:
-        - propagate: # propagate all headers. Note that Accept-Language is the most important
+        - propagate: # propagate all headers. Note that Accept-Language is the most important.
             matching: .*
 cors:
   # Set to true to allow any origin

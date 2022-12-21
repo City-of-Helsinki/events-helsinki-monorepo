@@ -34,3 +34,4 @@ export { default as Visible } from './visible/Visible';
 export { default as EllipsedTextWithToggle } from './ellipsedTextWithToggle/EllipsedTextWithToggle';
 export { default as InfoBlock } from './infoBlock/InfoBlock';
 export { default as MapBox } from './mapBox/MapBox';
+export { default as Document } from './document/Document';

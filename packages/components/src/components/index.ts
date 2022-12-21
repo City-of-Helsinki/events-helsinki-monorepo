@@ -35,3 +35,4 @@ export { default as EllipsedTextWithToggle } from './ellipsedTextWithToggle/Elli
 export { default as InfoBlock } from './infoBlock/InfoBlock';
 export { default as MapBox } from './mapBox/MapBox';
 // export { default as MapView } from './mapView/MapView';
+export { default as Document } from './document/Document';

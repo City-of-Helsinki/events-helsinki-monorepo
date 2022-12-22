@@ -1,5 +1,5 @@
 import get from 'lodash/get';
-
+import { Sources } from '../../../app/appConstants';
 import type {
   Locale,
   Context,
@@ -55,7 +55,10 @@ export const formAccessibilitySentences = (data: any) => {
   return table;
 };
 
-export function getTprekId(source = 'tprek', id: string): string | null {
+export function getTprekId(
+  source: string = Sources.TPREK,
+  id: string
+): string | null {
   if (!source || !id) {
     return null;
   }

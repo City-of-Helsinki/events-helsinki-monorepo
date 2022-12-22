@@ -10,6 +10,7 @@ import React from 'react';
 import {
   BackgroundImage,
   LinkBox,
+  SecondaryLink,
   TagComponent as Tag,
 } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
@@ -22,6 +23,7 @@ interface Props {
   location?: string;
   imageUrl?: string;
   tags?: string[];
+  showMapLink?: boolean;
 }
 
 const LargeVenueCard: React.FC<Props> = ({
@@ -30,11 +32,11 @@ const LargeVenueCard: React.FC<Props> = ({
   location,
   tags,
   imageUrl,
+  showMapLink = false,
 }) => {
   const { t } = useVenueTranslation();
   const router = useRouter();
   const locale = useLocale();
-
   const queryString = addParamsToQueryString(
     router.asPath.split('?')[1] ?? '',
     {
@@ -48,7 +50,7 @@ const LargeVenueCard: React.FC<Props> = ({
 
   const venueUrl = `${getLocalizedCmsItemUrl(
     ROUTES.VENUES,
-    { venueId: `tprek:${id}` },
+    { venueId: id },
     locale
   )}${queryString}`;
 
@@ -68,6 +70,13 @@ const LargeVenueCard: React.FC<Props> = ({
           <div className={styles.eventLocation}>
             <IconLocation aria-hidden />
             {location}
+            {showMapLink && (
+              <div className={styles.mapLink}>
+                <SecondaryLink href={`${ROUTES.MAPSEARCH}?venueId=${id}`}>
+                  {t('venue:venueCard.showResultsOnMapLink')}
+                </SecondaryLink>
+              </div>
+            )}
           </div>
           <div className={styles.keywordWrapperDesktop}>
             {tags && tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}

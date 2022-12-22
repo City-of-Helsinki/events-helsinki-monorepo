@@ -4,6 +4,7 @@ import { useLocale, LoadingSpinner } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import getVenueSourceId from '../../../domain/venue/utils/getVenueSourceId';
 import getTranslation from '../../../utils/getTranslation';
 import LargeVenueCard from '../../venue/venueCard/LargeVenueCard';
 
@@ -35,8 +36,8 @@ const VenueList: React.FC<Props> = ({
       <div className={styles.venuesWrapper}>
         {venues.map((venue) => (
           <LargeVenueCard
-            key={venue?.meta?.id}
-            id={venue?.meta?.id ?? ''}
+            key={getVenueSourceId(venue?.meta?.id ?? '')}
+            id={getVenueSourceId(venue?.meta?.id ?? '') ?? ''}
             title={getTranslation(locale, venue?.name)}
             location={`${getTranslation(
               locale,
@@ -51,6 +52,7 @@ const VenueList: React.FC<Props> = ({
                 ?.map((tag) => getTranslation(locale, tag?.label))
                 .filter((t) => t) ?? []
             }
+            showMapLink
           />
         ))}
       </div>

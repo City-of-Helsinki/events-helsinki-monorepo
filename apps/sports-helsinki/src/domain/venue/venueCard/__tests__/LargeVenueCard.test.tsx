@@ -8,7 +8,11 @@ import LargeVenueCard from '../LargeVenueCard';
 
 const renderComponent = () =>
   render(
-    <LargeVenueCard id="123" title="Venue title" location="Venue location" />
+    <LargeVenueCard
+      id="tprek:123"
+      title="Venue title"
+      location="Venue location"
+    />
   );
 
 beforeEach(() => {

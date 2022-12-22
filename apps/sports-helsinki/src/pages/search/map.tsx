@@ -1,9 +1,13 @@
-import type { MapItem } from 'events-helsinki-components';
-import { getURLSearchParamsFromAsPath } from 'events-helsinki-components';
+import type { MapItem, AppLanguage } from 'events-helsinki-components';
+import {
+  useLocale,
+  getURLSearchParamsFromAsPath,
+} from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import qs from 'query-string';
 import React from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import Navigation from '../../common-events/components/navigation/Navigation';
@@ -17,7 +21,11 @@ import SearchHeader, {
 } from '../../domain/search/searchHeader/SearchHeader';
 import SimpleVenueMapSearch from '../../domain/search/venueSearch/VenueMapSearch';
 import useUnifiedSearchMapQuery from '../../domain/unifiedSearch/useUnifiedSearchMapQuery';
-import { getLocaleOrError } from '../../utils/routerUtils';
+import getVenueSourceId from '../../domain/venue/utils/getVenueSourceId';
+import {
+  getLocaleOrError,
+  getLocalizedCmsItemUrl,
+} from '../../utils/routerUtils';
 
 // https://stackoverflow.com/a/64634759
 const MapView = dynamic(
@@ -35,26 +43,34 @@ const emptyConnection = {
 };
 
 function getSearchResultsAsItems(
-  searchResultConnection: Connection<SearchResult> | null | undefined
+  searchResultConnection: Connection<SearchResult> | null | undefined,
+  locale: AppLanguage,
+  currentPath: string
 ): MapItem[] {
   const searchResults =
     searchResultConnection?.edges?.map((edge) => edge.node) ?? [];
   return (
     searchResults?.reduce((results: MapItem[] = [], searchResult) => {
+      const { venue } = searchResult;
       if (
-        searchResult?.venue &&
-        searchResult?.venue?.meta?.id &&
-        searchResult?.venue?.name &&
-        searchResult?.venue?.location?.geoLocation?.geometry
+        venue?.meta?.id &&
+        venue?.name &&
+        venue?.location?.geoLocation?.geometry
       ) {
+        const href = `${getLocalizedCmsItemUrl(
+          ROUTES.VENUES,
+          {
+            venueId: getVenueSourceId(venue?.meta.id),
+          },
+          locale
+        )}?${qs.stringify({ returnPath: currentPath })}`;
         return [
           ...results,
           {
-            id: `tprek:${searchResult.venue.meta.id}`,
-            title: searchResult.venue.name.fi,
-            href: `/venues/tprek:${searchResult.venue.meta.id}`,
-            location:
-              searchResult.venue.location.geoLocation.geometry.coordinates,
+            id: getVenueSourceId(venue?.meta.id),
+            title: venue?.name.fi,
+            href,
+            location: venue?.location.geoLocation.geometry.coordinates,
           } as MapItem,
         ];
       }
@@ -65,8 +81,8 @@ function getSearchResultsAsItems(
 
 export default function MapSearch() {
   const router = useRouter();
-  const venueId = router.query.venue as string;
-
+  const venueId = router.query.venueId as string;
+  const locale = useLocale();
   const { data } = useUnifiedSearchMapQuery({
     first: 10000,
   });
@@ -74,7 +90,9 @@ export default function MapSearch() {
   const searchResultItems: MapItem[] = getSearchResultsAsItems(
     data?.unifiedSearch
       ? (data?.unifiedSearch as Connection<SearchResult>)
-      : emptyConnection
+      : emptyConnection,
+    locale,
+    router.asPath
   );
 
   const showVenueFocusedMap =
@@ -82,14 +100,6 @@ export default function MapSearch() {
 
   const switchShowMode = () => {
     const searchParams = getURLSearchParamsFromAsPath(router.asPath);
-
-    // if venue was focused on map, we want to drop the query param
-    // when going back to search page
-    const venueParam = searchParams.get('venue');
-    if (venueParam) {
-      searchParams.delete('venue');
-      searchParams.append('scrollTo', `#${venueParam.replace(':', '_')}`);
-    }
 
     router.replace({
       pathname: ROUTES.SEARCH,

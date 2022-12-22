@@ -52,7 +52,7 @@ const VenueList: React.FC<Props> = ({
                 ?.map((tag) => getTranslation(locale, tag?.label))
                 .filter((t) => t) ?? []
             }
-            showMapLink
+            // showMapLink
           />
         ))}
       </div>

@@ -21,7 +21,8 @@
     outline: none;
 
     &:focus {
-      border-color: var(--color-primary-black);
+      outline: 3px solid var(--color-coat-of-arms);
+      outline-offset: 2px;
     }
 
     svg {

@@ -6,6 +6,11 @@
   padding: 0 1rem;
   align-items: center;
   box-sizing: border-box;
+  border: 2px solid var(--color-white);
+  &.focused {
+    outline: 3px solid var(--color-coat-of-arms);
+    outline-offset: 2px;
+  }
 
   .iconWrapper {
     display: flex;

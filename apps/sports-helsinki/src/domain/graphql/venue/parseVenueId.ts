@@ -1,6 +1,7 @@
+import { Sources } from '../../app/appConstants';
 import type { Source } from '../../nextApi/types';
 
-const SUPPORTED_SOURCES: string[] = ['tprek', 'linked'];
+const SUPPORTED_SOURCES: string[] = [Sources.TPREK, Sources.LINKED];
 
 export class IdParseError extends Error {
   constructor(message: string) {

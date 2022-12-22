@@ -1,3 +1,4 @@
+import { Sources } from '../../../app/appConstants';
 import type { VenueDetails } from '../../../nextApi/types';
 import {
   translateVenue,
@@ -93,7 +94,7 @@ export default class VenueTprekIntegration extends VenueResolverIntegration<Tpre
       id:
         getTprekId(data?.sources?.[0]?.source, data?.id?.toString()) ??
         undefined,
-      dataSource: data?.sources?.[0]?.source ?? 'tprek',
+      dataSource: data?.sources?.[0]?.source ?? Sources.TPREK,
       email: data?.email ?? null,
       postalCode: data?.address_zip ?? undefined,
       image: data?.picture_url ?? null,

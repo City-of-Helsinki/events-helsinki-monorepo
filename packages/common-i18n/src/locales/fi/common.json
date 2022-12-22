@@ -95,5 +95,12 @@
       "title": "Sijainti",
       "accessibilitySentences": "Esteettömyystiedot"
     }
+  },
+  "mapSearch": {
+    "closeSearchControls": "Sulje hakuehdot",
+    "showAsList": "Näytä listana",
+    "searchResultsCountLabel": "Hakutulosta",
+    "showSearchParameters": "Näytä haku",
+    "showSearchParametersA11y": "Siirry hakulomakkeelle"
   }
 }

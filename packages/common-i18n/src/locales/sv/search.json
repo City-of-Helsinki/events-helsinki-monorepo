@@ -47,5 +47,8 @@
       "labelSearchOtherEventType": "Sök evenemang",
       "labelSearchInFinnish": "Visa sökresultaten på finska "
     }
-  }
+  },
+  "goToVenue": "Visa sidan",
+  "openStreetMapContributors": "bidragsgivare",
+  "mapAccessibilityStatement": "Karta, För tillfället är kartans uppgifter tillgängliga endast visuellt."
 }

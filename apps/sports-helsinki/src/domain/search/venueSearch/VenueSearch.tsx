@@ -8,17 +8,27 @@ import qs, { parse } from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
-
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
-import { ROUTES } from '../../../constants';
+import { SEARCH_ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import styles from './search.module.scss';
 
-const SimpleVenueSearch: React.FC<{
-  scrollToResultList: () => void;
+export type SearchComponentProps = {
+  scrollToResultList?: () => void;
   'data-testid'?: string;
-}> = ({ scrollToResultList, 'data-testid': dataTestId }) => {
+  korosBottom?: boolean;
+  showTitle?: boolean;
+  searchRoute?: typeof SEARCH_ROUTES[keyof typeof SEARCH_ROUTES]; // TODO: Allow only SEARCH_ROUTE values
+};
+
+const SimpleVenueSearch: React.FC<SearchComponentProps> = ({
+  scrollToResultList,
+  'data-testid': dataTestId,
+  korosBottom = false,
+  showTitle = false,
+  searchRoute = SEARCH_ROUTES.SEARCH,
+}) => {
   const { t } = useTranslation('search');
   const locale = useLocale();
   const router = useRouter();
@@ -34,7 +44,7 @@ const SimpleVenueSearch: React.FC<{
   };
   const goToSearch = (search: string): void => {
     router.push({
-      pathname: getI18nPath(ROUTES.SEARCH, locale),
+      pathname: getI18nPath(searchRoute, locale),
       query: parse(search) as ParsedUrlQueryInput,
     });
   };
@@ -62,7 +72,7 @@ const SimpleVenueSearch: React.FC<{
     }
 
     moveToSearchPage();
-    scrollToResultList();
+    scrollToResultList && scrollToResultList();
   };
 
   // Initialize fields when page is loaded
@@ -74,19 +84,23 @@ const SimpleVenueSearch: React.FC<{
     const value = option.text;
     const search = buildQueryFromObject({ q: value });
     goToSearch(search);
-    scrollToResultList();
+    scrollToResultList && scrollToResultList();
   };
   return (
     <PageSection
-      korosBottom
+      korosBottom={korosBottom}
       korosBottomClassName={styles.searchContainerKoros}
-      className={styles.searchContainer}
+      className={`${styles.searchContainer} ${!korosBottom && styles.noKoros}`}
       data-testid={dataTestId}
     >
-      <ContentContainer className={styles.contentContainer}>
+      <ContentContainer
+        className={`${styles.contentContainer} ${
+          !korosBottom && styles.noKoros
+        }`}
+      >
         <form onSubmit={handleSubmit}>
           <div className={styles.searchWrapper}>
-            <h2>{t('search.labelSearchField')}</h2>
+            {showTitle && <h2>{t('search.labelSearchField')}</h2>}
             <div className={styles.rowWrapper}>
               <div>
                 <SearchAutosuggest

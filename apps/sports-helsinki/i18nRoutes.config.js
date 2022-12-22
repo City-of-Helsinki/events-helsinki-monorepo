@@ -3,6 +3,10 @@ const i18nRoutes = {
     { source: '/haku', locale: 'fi' },
     { source: '/sok', locale: 'sv' },
   ],
+  '/search/map': [
+    { source: '/haku/kartta', locale: 'fi' },
+    { source: '/sok/karta', locale: 'sv' },
+  ],
   '/venues/:venueId': [
     { source: '/paikat/:venueId', locale: 'fi' },
     { source: '/platser/:venueId', locale: 'sv' },

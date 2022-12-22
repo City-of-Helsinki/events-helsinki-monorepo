@@ -44,5 +44,8 @@
       "labelSearchOtherEventType": "Switch to an Events search",
       "labelSearchInFinnish": "Display results in Finnish"
     }
-  }
+  },
+  "goToVenue": "Show page",
+  "openStreetMapContributors": "contributors",
+  "mapAccessibilityStatement": "Map. Currently map information is only accessible visually."
 }

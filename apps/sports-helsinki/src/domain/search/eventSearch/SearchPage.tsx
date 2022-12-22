@@ -15,13 +15,9 @@ import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
-
 import EventList from '../../../common-events/components/eventList/EventList';
-import type { SearchForwardPath } from '../../../utils/routerUtils';
-import {
-  removeQueryParamsFromRouter,
-  searchForwardPaths,
-} from '../../../utils/routerUtils';
+import { SEARCH_ROUTES } from '../../../constants';
+import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
@@ -120,7 +116,7 @@ const SearchPage: React.FC<{
       removeQueryParamsFromRouter(
         router,
         ['eventId'],
-        searchForwardPaths.courseSearch as SearchForwardPath
+        SEARCH_ROUTES.COURSESEARCH
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

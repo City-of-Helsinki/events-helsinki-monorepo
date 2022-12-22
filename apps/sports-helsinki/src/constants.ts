@@ -2,9 +2,15 @@ import type { Language } from './types';
 
 export const DEFAULT_LANGUAGE = 'fi';
 
-export const ROUTES = {
+export const SEARCH_ROUTES = {
   SEARCH: '/search',
+  MAPSEARCH: '/search/map',
   COURSESEARCH: '/coursesearch',
+};
+
+// TODO: Set a typing that tells that it is extending SEARCH_ROUTES
+export const ROUTES = {
+  ...SEARCH_ROUTES,
   COURSES: '/courses/[eventId]',
   VENUES: '/venues/[venueId]',
   ARTICLE_ARCHIVE: '/article-archive',

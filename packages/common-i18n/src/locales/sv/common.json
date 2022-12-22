@@ -95,5 +95,12 @@
       "title": "Plats",
       "accessibilitySentences": "Information om tillgängligheten"
     }
+  },
+  "mapSearch": {
+    "closeSearchControls": "Stäng sökkriterierna",
+    "showAsList": "Visa i en lista",
+    "searchResultsCountLabel": "Sökresultat",
+    "showSearchParameters": "Visa sökningen",
+    "showSearchParametersA11y": "Gå till ansökningsblanketten"
   }
 }

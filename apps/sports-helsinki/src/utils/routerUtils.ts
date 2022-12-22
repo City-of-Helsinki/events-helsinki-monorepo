@@ -7,10 +7,10 @@ import qs from 'query-string';
 // import { DEFAULT_LANGUAGE, Language, SUPPORT_LANGUAGES } from 'events-helsinki-components';
 import i18nRoutes from '../../i18nRoutes.config';
 import { i18n } from '../../next-i18next.config';
-import { DEFAULT_LANGUAGE, ROUTES, SEARCH_ROUTES } from '../constants';
+import { DEFAULT_LANGUAGE, SEARCH_ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import { SUPPORT_LANGUAGES } from '../types';
-import type { Language } from '../types';
+import type { Language, SearchRoute } from '../types';
 import stringifyUrlObject from './stringifyUrlObject';
 
 // dynamic path: /venues/:id
@@ -77,7 +77,7 @@ export function getLocaleOrError(locale: string | undefined): Language {
 export const removeQueryParamsFromRouter = (
   router: NextRouter,
   removeList: string[] = [],
-  forwardPath: typeof SEARCH_ROUTES[keyof typeof SEARCH_ROUTES] = SEARCH_ROUTES.SEARCH // TODO: Allow only SEARCH_ROUTE values
+  forwardPath: SearchRoute = SEARCH_ROUTES.SEARCH // TODO: Allow only SEARCH_ROUTE values
 ) => {
   const queryObject = { ...router.query };
 

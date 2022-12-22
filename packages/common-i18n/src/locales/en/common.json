@@ -99,6 +99,7 @@
   "mapSearch": {
     "closeSearchControls": "Close search criteria",
     "showAsList": "Show in a list",
+    "showOnMap": "Show on map",
     "searchResultsCountLabel": "Search results",
     "showSearchParameters": "Show search",
     "showSearchParametersA11y": "Go to the search form"

@@ -99,6 +99,7 @@
   "mapSearch": {
     "closeSearchControls": "Sulje hakuehdot",
     "showAsList": "Näytä listana",
+    "showOnMap": "Näytä kartalla",
     "searchResultsCountLabel": "Hakutulosta",
     "showSearchParameters": "Näytä haku",
     "showSearchParametersA11y": "Siirry hakulomakkeelle"

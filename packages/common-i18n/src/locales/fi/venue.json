@@ -30,6 +30,7 @@
     "ariaLabelReadMore": "Lue lisää: {{name}}",
     "buttonReadMore": "Lue lisää",
     "dateAndTime": "{{date}}, klo {{time}}",
-    "isFree": "Maksuton"
+    "isFree": "Maksuton",
+    "showResultsOnMapLink": "Näytä kartalla"
   }
 }

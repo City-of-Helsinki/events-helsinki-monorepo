@@ -17,8 +17,7 @@ import {
   ContentContainer,
   PageSection,
 } from 'react-helsinki-headless-cms';
-import type { SearchForwardPath } from '../../../utils/routerUtils';
-import { searchForwardPaths } from '../../../utils/routerUtils';
+import { SEARCH_ROUTES } from '../../../constants';
 import type { ReturnParams } from '../../event/eventQueryString.util';
 import { extractLatestReturnPath } from '../../event/eventQueryString.util';
 import getVenueOpeningTimeDescription from '../utils/getVenueOpeningTimeDescription';
@@ -40,7 +39,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
   const returnParam = extractLatestReturnPath(
     search,
     locale,
-    searchForwardPaths.search as SearchForwardPath
+    SEARCH_ROUTES.SEARCH
   );
 
   const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {

@@ -2,7 +2,10 @@ import type { UrlObject } from 'url';
 
 import type { OperationVariables, QueryResult } from '@apollo/client';
 
-import type { TimeResourceState } from 'events-helsinki-components/types';
+import type {
+  TimeResourceState,
+  UnifiedSearchVenue,
+} from 'events-helsinki-components';
 import type { Sources } from '../../domain/app/appConstants';
 import type { PageInfoFragment } from '../../domain/nextApi/pageInfoFragment';
 
@@ -48,14 +51,6 @@ export type Item = {
   href: string | UrlObject;
   location?: number[];
   image: string;
-};
-
-export type MapItem = {
-  id: string;
-  title: string;
-  pre?: string;
-  href: string;
-  location?: number[];
 };
 
 export type LandingPage = {
@@ -158,7 +153,7 @@ export type Venue = {
 };
 
 export type SearchResult = {
-  venue: Venue;
+  venue: UnifiedSearchVenue;
 };
 
 export type TranslationsObject = {

@@ -31,8 +31,7 @@ import {
   ContentContainer,
   PageSection,
 } from 'react-helsinki-headless-cms';
-import type { SearchForwardPath } from '../../../utils/routerUtils';
-import { searchForwardPaths } from '../../../utils/routerUtils';
+import { SEARCH_ROUTES } from '../../../constants';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import type { ReturnParams } from '../eventQueryString.util';
@@ -68,7 +67,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const returnParam = extractLatestReturnPath(
     search,
     locale,
-    searchForwardPaths.courseSearch as SearchForwardPath
+    SEARCH_ROUTES.COURSESEARCH
   );
   const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
     router.push(

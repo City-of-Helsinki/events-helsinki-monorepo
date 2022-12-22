@@ -44,5 +44,8 @@
       "maxAge": "Päättyen {{age}} {{yearAbbr}}",
       "exactAge": "{{age}}-vuotiaalle"
     }
-  }
+  },
+  "goToVenue": "Näytä sivu",
+  "openStreetMapContributors": "osallistujat",
+  "mapAccessibilityStatement": "Kartta. Tällä hetkellä käytettävissä ovat vain visuaaliset karttatiedot."
 }

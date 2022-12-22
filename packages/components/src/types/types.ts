@@ -73,3 +73,11 @@ export type TimeResourceState =
   | 'enter_only'
   | 'exit_only'
   | 'weather_permitting';
+
+export type MapItem = {
+  id: string;
+  title: string;
+  pre?: string;
+  href: string;
+  location?: number[];
+};

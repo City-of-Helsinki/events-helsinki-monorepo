@@ -1,17 +1,16 @@
 import type {
   SearchListQueryVariables,
   UnifiedSearchLanguage,
-} from 'events-helsinki-components';
-import { useLocale, useUnifiedSearch } from 'events-helsinki-components';
-import type {
   OrderByType,
   OrderDirType,
-} from 'events-helsinki-components/components/domain/unifiedSearch/unifiedSearchConstants';
+} from 'events-helsinki-components';
 import {
+  useLocale,
+  useUnifiedSearch,
   OrderBy,
   OrderDir,
   orderDirToUnifiedSearchDistanceOrder,
-} from 'events-helsinki-components/components/domain/unifiedSearch/unifiedSearchConstants';
+} from 'events-helsinki-components';
 import {
   HELSINKI_OCD_DIVISION_ID,
   SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID,

@@ -14,27 +14,26 @@ import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
-
-import type { SearchForwardPath } from '../../../utils/routerUtils';
-import {
-  removeQueryParamsFromRouter,
-  searchForwardPaths,
-} from '../../../utils/routerUtils';
+import { SEARCH_ROUTES } from '../../../constants';
+import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 import AppConfig from '../../app/AppConfig';
 import useUnifiedSearchListQuery from '../../unifiedSearch/useUnifiedSearchListQuery';
 import SearchResultsContainer from '../eventSearch/searchResultList/SearchResultsContainer';
 import VenueList from '../venueList/VenueList';
 import styles from './eventSearchPage.module.scss';
+import type { SearchComponentProps } from './VenueSearch';
 
 const BLOCK_SIZE = 10;
 
-const SearchPage: React.FC<{
-  SearchComponent: React.FC<{
-    scrollToResultList: () => void;
-    'data-testid'?: string;
-  }>;
+type SearchPageProps = {
+  SearchComponent: React.FC<SearchComponentProps>;
   pageTitle: string;
-}> = ({ SearchComponent, pageTitle }) => {
+};
+
+const SearchPage: React.FC<SearchPageProps> = ({
+  SearchComponent,
+  pageTitle,
+}) => {
   const { t } = useSearchTranslation();
   const router = useRouter();
   const { meta } = useConfig();
@@ -115,11 +114,7 @@ const SearchPage: React.FC<{
             : router.query.venueId
         )
       );
-      removeQueryParamsFromRouter(
-        router,
-        ['venueId'],
-        searchForwardPaths.search as SearchForwardPath
-      );
+      removeQueryParamsFromRouter(router, ['venueId'], SEARCH_ROUTES.SEARCH);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -136,6 +131,8 @@ const SearchPage: React.FC<{
       <SearchComponent
         scrollToResultList={scrollToResultList}
         data-testid="searchContainer"
+        showTitle
+        korosBottom
       />
       <main id={MAIN_CONTENT_ID}>
         <div

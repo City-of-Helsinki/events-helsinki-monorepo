@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import {
   AutoSuggestMenu,
@@ -35,6 +36,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
   const input = React.useRef<HTMLInputElement | null>(null);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const internalInputValue = useDebounce(searchValue, 300);
+  const [isAutosugestFocused, setIsAutosugestFocused] = React.useState(false);
 
   const { data: keywordsData, loading: loadingKeywords } = useKeywordListQuery({
     skip: !internalInputValue,
@@ -187,6 +189,12 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
 
   const handleInputFocus = () => {
     ensureMenuIsOpen();
+    setIsAutosugestFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    ensureMenuIsOpen();
+    setIsAutosugestFocused(false);
   };
 
   React.useEffect(() => {
@@ -210,7 +218,10 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       onClick={handleComponentClick}
-      className={styles.searchAutosuggest}
+      className={classNames(
+        styles.searchAutosuggest,
+        isAutosugestFocused && styles.focused
+      )}
       ref={container}
     >
       <div className={styles.iconWrapper}>
@@ -223,6 +234,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
           name={name}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
           placeholder={placeholder}
           type="text"
           value={searchValue}

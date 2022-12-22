@@ -99,6 +99,7 @@
   "mapSearch": {
     "closeSearchControls": "Stäng sökkriterierna",
     "showAsList": "Visa i en lista",
+    "showOnMap": "Visa på kartan",
     "searchResultsCountLabel": "Sökresultat",
     "showSearchParameters": "Visa sökningen",
     "showSearchParametersA11y": "Gå till ansökningsblanketten"

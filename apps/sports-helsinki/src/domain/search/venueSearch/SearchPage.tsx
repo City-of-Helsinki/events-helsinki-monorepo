@@ -1,5 +1,6 @@
 import type { UnifiedSearchVenue } from 'events-helsinki-components';
 import {
+  getURLSearchParamsFromAsPath,
   BasicMeta,
   getLargeEventCardId,
   LoadingSpinner,
@@ -22,8 +23,10 @@ import SearchResultsContainer from '../eventSearch/searchResultList/SearchResult
 import VenueList from '../venueList/VenueList';
 import styles from './eventSearchPage.module.scss';
 import type { SearchComponentProps } from './VenueSearch';
+import { VenueSearchUtilities } from './VenueSearch';
 
 const BLOCK_SIZE = 10;
+export const searchContainerDataTestId = 'searchContainer';
 
 type SearchPageProps = {
   SearchComponent: React.FC<SearchComponentProps>;
@@ -118,6 +121,16 @@ const SearchPage: React.FC<SearchPageProps> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const switchShowMode = () => {
+    const searchParams = getURLSearchParamsFromAsPath(router.asPath);
+
+    router.replace({
+      pathname: SEARCH_ROUTES.MAPSEARCH,
+      query: searchParams.toString(),
+    });
+  };
+
   return (
     <div>
       <BasicMeta
@@ -130,7 +143,10 @@ const SearchPage: React.FC<SearchPageProps> = ({
       <SrOnly as="h1">{pageTitle}</SrOnly>
       <SearchComponent
         scrollToResultList={scrollToResultList}
-        data-testid="searchContainer"
+        data-testid={searchContainerDataTestId}
+        searchUtilities={
+          <VenueSearchUtilities switchShowMode={switchShowMode} />
+        }
         showTitle
         korosBottom
       />

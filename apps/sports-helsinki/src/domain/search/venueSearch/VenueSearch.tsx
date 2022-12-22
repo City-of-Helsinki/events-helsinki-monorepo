@@ -1,6 +1,10 @@
 import type { ParsedUrlQueryInput } from 'querystring';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
-import { buildQueryFromObject, useLocale } from 'events-helsinki-components';
+import {
+  buildQueryFromObject,
+  useLocale,
+  useCommonTranslation,
+} from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -14,18 +18,24 @@ import { getI18nPath } from '../../../utils/routerUtils';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import styles from './search.module.scss';
 
-export type SearchComponentProps = {
+export type SimpleVenueSearchFormProps = {
   scrollToResultList?: () => void;
-  'data-testid'?: string;
-  korosBottom?: boolean;
   showTitle?: boolean;
   searchRoute?: typeof SEARCH_ROUTES[keyof typeof SEARCH_ROUTES]; // TODO: Allow only SEARCH_ROUTE values
 };
 
-const SimpleVenueSearch: React.FC<SearchComponentProps> = ({
+export type SearchUtilitiesProps = {
+  switchShowMode: () => void;
+};
+
+export type SearchComponentProps = {
+  'data-testid'?: string;
+  korosBottom?: boolean;
+  searchUtilities?: React.ReactNode;
+} & SimpleVenueSearchFormProps;
+
+export const SimpleVenueSearchForm: React.FC<SimpleVenueSearchFormProps> = ({
   scrollToResultList,
-  'data-testid': dataTestId,
-  korosBottom = false,
   showTitle = false,
   searchRoute = SEARCH_ROUTES.SEARCH,
 }) => {
@@ -86,48 +96,81 @@ const SimpleVenueSearch: React.FC<SearchComponentProps> = ({
     goToSearch(search);
     scrollToResultList && scrollToResultList();
   };
+
   return (
-    <PageSection
-      korosBottom={korosBottom}
-      korosBottomClassName={styles.searchContainerKoros}
-      className={`${styles.searchContainer} ${!korosBottom && styles.noKoros}`}
-      data-testid={dataTestId}
-    >
-      <ContentContainer
-        className={`${styles.contentContainer} ${
-          !korosBottom && styles.noKoros
-        }`}
-      >
-        <form onSubmit={handleSubmit}>
-          <div className={styles.searchWrapper}>
-            {showTitle && <h2>{t('search.labelSearchField')}</h2>}
-            <div className={styles.rowWrapper}>
-              <div>
-                <SearchAutosuggest
-                  name="search"
-                  onChangeSearchValue={setAutosuggestInput}
-                  onOptionClick={handleMenuOptionClick}
-                  placeholder={t('search.placeholder')}
-                  searchValue={autosuggestInput}
-                />
-              </div>
-              <div className={styles.buttonWrapper}>
-                <Button
-                  variant="success"
-                  fullWidth={true}
-                  iconLeft={<IconSearch aria-hidden />}
-                  type="submit"
-                >
-                  {t('search.buttonSearch')}
-                </Button>
-              </div>
-            </div>
-            <FilterSummary onClear={clearFilters} />
+    <form onSubmit={handleSubmit}>
+      <div className={styles.searchWrapper}>
+        {showTitle && <h2>{t('search.labelSearchField')}</h2>}
+        <div className={styles.rowWrapper}>
+          <div>
+            <SearchAutosuggest
+              name="search"
+              onChangeSearchValue={setAutosuggestInput}
+              onOptionClick={handleMenuOptionClick}
+              placeholder={t('search.placeholder')}
+              searchValue={autosuggestInput}
+            />
           </div>
-        </form>
-      </ContentContainer>
-    </PageSection>
+          <div className={styles.buttonWrapper}>
+            <Button
+              variant="success"
+              fullWidth={true}
+              iconLeft={<IconSearch aria-hidden />}
+              type="submit"
+            >
+              {t('search.buttonSearch')}
+            </Button>
+          </div>
+        </div>
+        <FilterSummary onClear={clearFilters} />
+      </div>
+    </form>
   );
 };
 
+export const VenueSearchUtilities: React.FC<SearchUtilitiesProps> = ({
+  switchShowMode,
+}) => {
+  const { t } = useCommonTranslation();
+  return (
+    <Button variant="secondary" onClick={switchShowMode}>
+      {t('common:mapSearch.showOnMap')}
+    </Button>
+  );
+};
+
+const SimpleVenueSearch: React.FC<SearchComponentProps> = ({
+  'data-testid': dataTestId,
+  korosBottom = false,
+  searchUtilities = null,
+  ...delegatedSimpleVenueSearchFormProps
+}) => {
+  return (
+    <>
+      <PageSection
+        korosBottom={korosBottom}
+        korosBottomClassName={styles.searchContainerKoros}
+        className={`${styles.searchContainer} ${
+          !korosBottom && styles.noKoros
+        }`}
+        data-testid={dataTestId}
+      >
+        <ContentContainer
+          className={`${styles.contentContainer} ${
+            !korosBottom && styles.noKoros
+          }`}
+        >
+          <SimpleVenueSearchForm {...delegatedSimpleVenueSearchFormProps} />
+        </ContentContainer>
+      </PageSection>
+      {searchUtilities && (
+        <PageSection className={styles.searchUtilities}>
+          <ContentContainer className={styles.contentContainer}>
+            {searchUtilities}
+          </ContentContainer>
+        </PageSection>
+      )}
+    </>
+  );
+};
 export default SimpleVenueSearch;

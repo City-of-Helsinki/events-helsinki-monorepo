@@ -30,6 +30,7 @@
     "ariaLabelReadMore": "Read more: {{name}}",
     "buttonReadMore": "Read more",
     "dateAndTime": "{{date}}, at {{time}}",
-    "isFree": "Free"
+    "isFree": "Free",
+    "showResultsOnMapLink": "Show on map"
   }
 }

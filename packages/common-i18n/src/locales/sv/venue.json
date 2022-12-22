@@ -30,6 +30,7 @@
     "ariaLabelReadMore": "Läs mer: {{name}}",
     "buttonReadMore": "Läs mer",
     "dateAndTime": "{{date}}, kl. {{time}}",
-    "isFree": "Gratis"
+    "isFree": "Gratis",
+    "showResultsOnMapLink": "Visa på kartan"
   }
 }

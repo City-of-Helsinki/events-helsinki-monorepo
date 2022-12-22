@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import Navigation from '../../common-events/components/navigation/Navigation';
-import { ROUTES, SEARCH_ROUTES } from '../../constants';
+import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
@@ -15,7 +15,7 @@ import type { Connection, SearchResult } from '../../domain/nextApi/types';
 import SearchHeader, {
   ShowMode,
 } from '../../domain/search/searchHeader/SearchHeader';
-import SimpleVenueSearch from '../../domain/search/venueSearch/VenueSearch';
+import SimpleVenueMapSearch from '../../domain/search/venueSearch/VenueMapSearch';
 import useUnifiedSearchMapQuery from '../../domain/unifiedSearch/useUnifiedSearchMapQuery';
 import { getLocaleOrError } from '../../utils/routerUtils';
 
@@ -92,7 +92,7 @@ export default function MapSearch() {
     }
 
     router.replace({
-      pathname: '/search',
+      pathname: ROUTES.SEARCH,
       query: searchParams.toString(),
     });
   };
@@ -111,11 +111,8 @@ export default function MapSearch() {
               showMode={ShowMode.MAP}
               count={count}
               switchShowMode={switchShowMode}
-              searchForm={
-                <SimpleVenueSearch searchRoute={SEARCH_ROUTES.MAPSEARCH} />
-              }
+              searchForm={<SimpleVenueMapSearch />}
             />
-
             <MapView
               // Use key to force rerender when mode is changes. Otherwise map position / zoom wouldn't reset
               key={showVenueFocusedMap ? 'focused-venue-map' : 'search-map'}

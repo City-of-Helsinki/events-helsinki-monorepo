@@ -3,12 +3,20 @@ import { IconCross, Button, IconSearch, IconMenuHamburger } from 'hds-react';
 import React, { useRef, useState } from 'react';
 import styles from './searchHeader.module.scss';
 
+/**
+ * @deprecated There should be no need for List-mode,
+ * because its content comes totally from a whole different component.
+ */
 export enum ShowMode {
   MAP = 'map',
   LIST = 'list',
 }
 
 type Props = {
+  /**
+   * @deprecated There should be no need for List-mode,
+   * because its content comes totally from a whole different component.
+   */
   showMode: ShowMode;
   count: number;
   switchShowMode: () => void;

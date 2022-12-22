@@ -1,4 +1,5 @@
 import { SEARCH_ROUTES } from '../../constants';
+import type { SearchRoute } from '../../types';
 import { getI18nPath } from '../../utils/routerUtils';
 
 export type ReturnParams = {
@@ -14,7 +15,7 @@ export type ReturnParams = {
 export const extractLatestReturnPath = (
   queryString: string,
   locale: string,
-  forwardPath: typeof SEARCH_ROUTES[keyof typeof SEARCH_ROUTES] = SEARCH_ROUTES.SEARCH // TODO: Allow only SEARCH_ROUTE values
+  forwardPath: SearchRoute = SEARCH_ROUTES.SEARCH // TODO: Allow only SEARCH_ROUTE values
 ): ReturnParams => {
   const searchParams = new URLSearchParams(queryString);
   const returnPaths = searchParams.getAll('returnPath');

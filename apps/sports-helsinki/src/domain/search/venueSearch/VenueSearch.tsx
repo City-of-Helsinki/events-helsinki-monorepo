@@ -14,6 +14,7 @@ import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { SEARCH_ROUTES } from '../../../constants';
+import type { SearchRoute } from '../../../types';
 import { getI18nPath } from '../../../utils/routerUtils';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import styles from './search.module.scss';
@@ -21,7 +22,7 @@ import styles from './search.module.scss';
 export type SimpleVenueSearchFormProps = {
   scrollToResultList?: () => void;
   showTitle?: boolean;
-  searchRoute?: typeof SEARCH_ROUTES[keyof typeof SEARCH_ROUTES]; // TODO: Allow only SEARCH_ROUTE values
+  searchRoute?: SearchRoute; // TODO: Allow only SEARCH_ROUTE values
 };
 
 export type SearchUtilitiesProps = {

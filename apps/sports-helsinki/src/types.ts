@@ -1,3 +1,5 @@
+import type { SEARCH_ROUTES } from './constants';
+
 export type Language = 'en' | 'fi' | 'sv';
 
 export enum SUPPORT_LANGUAGES {
@@ -11,3 +13,5 @@ export type LocalizedString = {
   sv?: string | null;
   en?: string | null;
 };
+
+export type SearchRoute = typeof SEARCH_ROUTES[keyof typeof SEARCH_ROUTES];

@@ -120,7 +120,7 @@ class AppConfig {
       [`${AppConfig.cmsOrigin}[/fi|/en|/sv]*${AppConfig.cmsArticlesContextPath}`]:
         ROUTES.ARTICLES.replace('/[...slug]', ''),
       [`${AppConfig.cmsOrigin}[/fi|/en|/sv]*${AppConfig.cmsPagesContextPath}`]:
-        '/',
+        ROUTES.PAGES.replace('/[...slug]', ''),
     };
   }
 

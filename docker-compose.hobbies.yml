@@ -39,6 +39,21 @@ services:
       target: deps
       args:
         PROJECT: hobbies-helsinki
+
+  # Convenience production "cache" stage service for debugging
+  # Build > docker buildx bake -f docker-compose.hobbies.yml --progress: tty cache
+  cache:
+    container_name: hobbies-helsinki-multistage-cache
+    # profiles:
+    #   - donotstart
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: cache
+      args:
+        PROJECT: hobbies-helsinki
+
   # Convenience production "builder" stage service for debugging
   # Build > docker buildx bake -f docker-compose.hobbies-helsinki.yml --progress=tty runner
   builder:

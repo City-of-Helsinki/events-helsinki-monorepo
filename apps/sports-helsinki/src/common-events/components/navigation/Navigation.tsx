@@ -1,5 +1,5 @@
 import { useLocale, useRouterFromConfig } from 'events-helsinki-components';
-import type { AppLanguage, Menu } from 'events-helsinki-components';
+import type { AppLanguage, Menu, Language } from 'events-helsinki-components';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import {
   Navigation as RHHCNavigation,
@@ -23,26 +23,29 @@ import styles from './navigation.module.scss';
 type NavigationProps = {
   page?: PageType | ArticleType;
   menu?: Menu;
+  languages?: Language[];
 };
 
-export default function Navigation({ page, menu }: NavigationProps) {
+export default function Navigation({ page, menu, languages }: NavigationProps) {
   const router = useRouterFromConfig();
   const locale = useLocale();
   const navigationMenuName = DEFAULT_HEADER_MENU_NAME[locale];
   const currentPage = router.pathname;
-  const languagesQuery = useLanguagesQuery();
-  const languages = languagesQuery.data?.languages?.filter(isLanguage);
+  const languagesQuery = useLanguagesQuery({ skip: !!languages });
+  const languageOptions =
+    languages ?? languagesQuery.data?.languages?.filter(isLanguage);
   const { data: headerMenuData } = useMenuQuery({
     skip: !!menu,
     variables: {
       id: navigationMenuName,
     },
   });
-  const loadedMenu = headerMenuData?.menu;
+  const headerMenu = menu ?? headerMenuData?.menu;
+
   return (
     <RHHCNavigation
-      languages={languages}
-      menu={menu ?? loadedMenu}
+      languages={languageOptions}
+      menu={headerMenu}
       className={styles.topNavigation}
       onTitleClick={() => {
         router.push('/');

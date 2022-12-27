@@ -1,6 +1,10 @@
-import { DEFAULT_LANGUAGE, getQlLanguage } from 'events-helsinki-components';
+import {
+  DEFAULT_LANGUAGE,
+  getQlLanguage,
+  NavigationContext,
+} from 'events-helsinki-components';
 import type { GetStaticPropsContext, NextPage } from 'next';
-import React from 'react';
+import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
 import {
   useConfig,
@@ -18,7 +22,6 @@ import {
   PageByTemplateDocument,
   LandingPageDocument,
 } from 'react-helsinki-headless-cms/apollo';
-
 import Navigation from '../common-events/components/navigation/Navigation';
 import { getDefaultCollections } from '../common-events/utils/headless-cms/headlessCmsUtils';
 import getSportsStaticProps from '../domain/app/getSportsStaticProps';
@@ -37,12 +40,13 @@ const HomePage: NextPage<{
     currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <HCRCPage
         className="pageLayout"
-        navigation={<Navigation />}
+        navigation={<Navigation menu={headerMenu} languages={languages} />}
         content={
           <HCRCPageContent
             page={page}
@@ -58,7 +62,7 @@ const HomePage: NextPage<{
             language={getQlLanguage(locale)}
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );
@@ -89,11 +93,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           language: getQlLanguage(locale).toLocaleLowerCase(),
         },
       });
-
       const page = pageData.pageByTemplate;
-
       const landingPage = landingPageData.landingPage;
-
       return {
         props: {
           ...(await serverSideTranslationsWithCommon(locale, [
@@ -101,8 +102,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             'search',
             'event',
           ])),
-          landingPage: landingPage,
-          page: page,
+          landingPage,
+          page,
         },
       };
     } catch (e) {

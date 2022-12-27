@@ -1,9 +1,10 @@
 import { useAppSportsTranslation } from 'events-helsinki-components';
+import NavigationContext from 'events-helsinki-components/src/navigationProvider/NavigationContext';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
-import Navigation from '../../common-events/components/navigation/Navigation';
+import Navigation from 'common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import FooterSection from '../../domain/footer/Footer';
@@ -35,19 +36,21 @@ export default function Search() {
     }
   }, [scrollTo]);
 
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+
   return (
     <MatomoWrapper>
       <HCRCApolloPage
         uri={ROUTES.SEARCH}
         className="pageLayout"
-        navigation={<Navigation />}
+        navigation={<Navigation menu={headerMenu} languages={languages} />}
         content={
           <SearchPage
             SearchComponent={SimpleVenueSearch}
             pageTitle={tAppSports('appSports:search.pageTitle')}
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

@@ -1,0 +1,123 @@
+name: Events Graphql Proxy Review & Browser tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'proxies/events-graphql-proxy/**'
+      - 'package.json'
+      - 'yarn.lock'
+      - '.yarnrc.yml'
+      - '*.base.json'
+      - '*.base.js'
+      - '.prettier*.*'
+      - '.github/workflows/ci-events-graphql-proxy-review.yml'
+      - 'Dockerfile'
+      - '*.Dockerfile'
+      - 'docker-compose.yml'
+      - 'docker-compose.*.yml'
+      - '!**/README.md'
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    # Optional:
+    #   Only consider those files/paths to trigger the github action
+    #   to prevent unnecessary builds.
+    paths:
+      - 'proxies/events-graphql-proxy/**'
+      - 'package.json'
+      - 'yarn.lock'
+      - '.yarnrc.yml'
+      - '*.base.json'
+      - '*.base.js'
+      - '.prettier*.*'
+      - '.github/workflows/ci-events-graphql-proxy-review.yml'
+      - 'Dockerfile'
+      - '*.Dockerfile'
+      - 'docker-compose.yml'
+      - 'docker-compose.*.yml'
+      - '!**/README.md'
+
+env:
+  CONTAINER_REGISTRY: ghcr.io
+  CONTAINER_REGISTRY_USER: ${{ secrets.GHCR_CONTAINER_REGISTRY_USER }}
+  CONTAINER_REGISTRY_PASSWORD: ${{ secrets.GHCR_TOKEN }}
+  CONTAINER_REGISTRY_REPO: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
+  PROJECT: events-graphql-proxy
+  KUBECONFIG_RAW: ${{ secrets.KUBECONFIG_RAW }}
+  BUILD_ARTIFACT_FOLDER: 'build_artifacts'
+  SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
+  BASE_DOMAIN: ${{ secrets.BASE_DOMAIN_STAGING }}
+  SERVICE_PORT: 4000
+  K8S_REQUEST_CPU: 50m
+  K8S_REQUEST_RAM: 150Mi
+  K8S_LIMIT_CPU: 200m
+  K8S_LIMIT_RAM: 400Mi
+  CUSTOM_ENVIRONMENT_URL: https://events-graphql-proxy-${{ github.event.pull_request.number }}.${{ secrets.BASE_DOMAIN_STAGING }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v3
+
+      # @see https://github.com/docker/build-push-action/blob/master/docs/advanced/cache.md#local-cache
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Build
+        uses: andersinno/kolga-build-action@v2
+        env:
+          DOCKER_BUILD_SOURCE: ./Dockerfile
+          DOCKER_BUILD_CONTEXT: .
+          DOCKER_BUILD_TARGET: runner
+          DOCKER_IMAGE_NAME: ${{ env.PROJECT }}-review
+          DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
+          DOCKER_BUILD_ARG_PROJECT: ${{ env.PROJECT }}
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_PORT: 4100
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_API_BASE_URL: 'https://api.hel.fi/linkedevents/v1/'
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: 'https://kartta.hel.fi/ws/geoserver/avoindata'
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_DSN: ${{ secrets.GH_SENTRY_DSN }}
+          DOCKER_BUILD_ARG_GRAPHQL_PROXY_SENTRY_ENVIRONMENT: 'development'
+        with:
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+  review:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Review
+
+    # allow only one deployment at a time
+    concurrency: ${{ github.workflow }}-${{ github.head_ref }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: andersinno/kolga-setup-action@v2
+
+      - name: Deploy
+        uses: andersinno/kolga-deploy-action@v2
+        env:
+          ENVIRONMENT_URL: ${{ env.CUSTOM_ENVIRONMENT_URL }}
+          ENVIRONMENT_SLUG: ${{ env.PROJECT }}
+          DOCKER_IMAGE_NAME: ${{ env.PROJECT }}-review
+          K8S_SECRET_APP_PORT: ${{ env.SERVICE_PORT }}
+          K8S_SECRET_PROJECT: ${{ env.PROJECT }}
+          PROJECT: ${{ env.PROJECT }}
+
+      - name: Create PR comment for Deploy URL
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          header: ${{ env.PROJECT }}-deployment-url
+          message: |
+            **Events-graphql-proxy branch is deployed to: ${{ env.CUSTOM_ENVIRONMENT_URL }}** :rocket::rocket::rocket:

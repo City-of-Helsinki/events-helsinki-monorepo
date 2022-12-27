@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-require-imports */
-require('dotenv').config();
+import * as dotenv from 'dotenv';
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
 import { ApolloServer } from 'apollo-server-express';
@@ -23,6 +21,8 @@ import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
 
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
+
+dotenv.config();
 
 Sentry.init({
   dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
@@ -124,7 +124,7 @@ const dataSources = (): DataSources => ({
   await server.start();
   server.applyMiddleware({ app, path: '/proxy/graphql' });
 
-  const port = process.env.GRAPHQL_PROXY_PORT || 4000;
+  const port = process.env.GRAPHQL_PROXY_PORT || 4100;
 
   app.listen({ port }, () => {
     signalReady();

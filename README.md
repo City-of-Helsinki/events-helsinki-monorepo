@@ -38,7 +38,8 @@
 ```
 .
 ├── proxies
-│   └── events-graphql-federation (Apollo Router and Gateway)
+│   ├── events-graphql-federation (Apollo Router and Gateway)
+│   └── events-graphql-proxy   ("clone of events-helsinki-api-proxy")
 │
 ├── apps
 │   ├── hobbies-helsinki  (i18n, ssr, api, jest)
@@ -53,6 +54,7 @@
 #### Proxies
 
 - [proxies/events-graphql-federation](./proxies/events-graphql-federation): The Apollo Router and Gateway configuration to manage and run subgraphs. [README](./proxies/events-graphql-federation/README.md)
+- [proxies/events-graphql-proxy](./proxies/events-graphql-proxy): Clone of events-helsinki-api-proxy. Event Helsinki GraphQL proxy. [README](./proxies/events-graphql-proxy/README.md)
 
 #### Apps
 
@@ -84,20 +86,21 @@ If needed static resources like **images**,... can be shared by using symlinks i
 ```
 .
 ├── proxies
-│   └── events-graphql-federation (Apollo Router and Gateway)
+│   ├── events-graphql-federation   (Apollo Router and Gateway)
+│   └── events-graphql-proxy        (Apollo Server to offer Graphql endpoint for the LinkedEvents -service)
 │
 ├── apps
-│   └── hobbies-helsinki         (NextJS app with api-routes)
+│   └── hobbies-helsinki            (NextJS app with api-routes)
 │       ├── public/
-│       │   ├── shared-assets/   (possible symlink to global assets)
-│       │   └── shared-locales/  (possible symlink to global locales)
+│       │   ├── shared-assets/      (possible symlink to global assets)
+│       │   └── shared-locales/     (possible symlink to global locales)
 │       ├── src/
-│       │   └── pages/api        (api routes)
+│       │   └── pages/api           (api routes)
 │       ├── CHANGELOG.md
 │       ├── next.config.js
 │       ├── next-i18next.config.js
-│       ├── package.json         (define package workspace:package deps)
-│       └── tsconfig.json        (define path to packages)
+│       ├── package.json            (define package workspace:package deps)
+│       └── tsconfig.json           (define path to packages)
 │
 ├── packages
 │   ├── common-i18n
@@ -118,16 +121,16 @@ If needed static resources like **images**,... can be shared by using symlinks i
 │       ├── package.json
 │       └── tsconfig.json
 │
-├── static                       (no code: images, json, locales,...)
+├── static                          (no code: images, json, locales,...)
 │   ├── assets
 │   └── locales
 ├── .yarnrc.yml
 ├── .dockerignore
 ├── docker-compose.nextjs-app.yml   (compose specific for nextjs-app)
-├── docker-compose.yml           (optional: general services like postgresql...)
-├── Dockerfile                   (multistage build suitable for all apps)
-├── package.json                 (the workspace config)
-└── tsconfig.base.json           (base typescript config)
+├── docker-compose.yml              (optional: general services like postgresql...)
+├── Dockerfile                      (multistage build suitable for all apps)
+├── package.json                    (the workspace config)
+└── tsconfig.base.json              (base typescript config)
 ```
 
 </details>
@@ -200,6 +203,7 @@ Configuration lives in the root folder of each apps/packages. See
 You'll find some example workflows for github action in [.github/workflows](./.github/workflows).
 
 Test, build and deploy pipelines located on Azure DevOps
+
 - [Harrastukset pipelines](https://dev.azure.com/City-of-Helsinki/harrastukset/_build)
 - [Tapahtumat pipelines](https://dev.azure.com/City-of-Helsinki/tapahtumat/_build)
 - [Liikunta pipelines](https://dev.azure.com/City-of-Helsinki/liikunta/_build)

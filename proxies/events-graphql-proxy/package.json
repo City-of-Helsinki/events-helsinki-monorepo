@@ -1,20 +1,27 @@
 {
-  "name": "events-helsinki-graphql-proxy",
+  "name": "events-graphql-proxy",
   "description": "Events Helsinki GraphQL proxy.",
   "version": "0.2.10",
   "private": true,
-  "main": "./src/index.ts",
   "scripts": {
-    "build": "NODE_ENV=production webpack --progress --mode production --config config/webpack.config.js",
-    "start": "nodemon",
-    "start:prod": "node build",
-    "test": "jest --watch",
-    "test:coverage": "jest --coverage --watchAll=false",
-    "ci": "CI=true jest --verbose --coverage",
-    "codegen": "gql-gen",
-    "lint": "eslint --ext js,ts,tsx src",
-    "format-code": "eslint --ext js,ts,tsx src --fix",
-    "prepare": "husky install"
+    "clean": "rimraf --no-glob ./tsconfig.tsbuildinfo",
+    "build": "cross-env NODE_ENV=production webpack --progress --mode production --config config/webpack.config.js",
+    "dev": "nodemon",
+    "start": "node build -r dotenv-expand/config",
+    "test": "jest",
+    "prepare": "husky install",
+    "pre-commit": "lint-fix",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --cache --cache-location ../../.cache/eslint/events-graphql-proxy.eslintcache",
+    "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
+    "check-dist": "es-check -v",
+    "typecheck": "tsc --project ./tsconfig.json --noEmit",
+    "generate:graphql": "graphql-codegen",
+    "docker:prune-cache": "docker buildx prune",
+    "docker:install": "docker buildx bake -f docker-compose.proxy.yml --progress=tty deps",
+    "docker:develop": "cross-env DOCKER_BUILDKIT=1 docker-compose -f ./docker-compose.yml up",
+    "docker:develop:reinstall": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --progress=tty --no-cache --force-rm develop",
+    "docker:build": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --progress=tty runner",
+    "docker:serve": "docker-compose -f docker-compose.yml --env-file .env up runner"
   },
   "dependencies": {
     "@apollo/subgraph": "^2.1.4",
@@ -25,7 +32,6 @@
     "apollo-server": "^3.11.1",
     "apollo-server-express": "^3.11.1",
     "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "graphql": "^16.6.0",
     "graphql-depth-limit": "^1.1.0",
@@ -35,6 +41,9 @@
     "typescript": "<4.9.0",
     "uuid": "^8.3.2",
     "winston": "^3.3.3"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.5",
@@ -48,6 +57,8 @@
     "@typescript-eslint/parser": "^5.43.0",
     "apollo-server-testing": "^2.25.3",
     "babel-eslint": "^10.1.0",
+    "cross-env": "7.0.3",
+    "dotenv": "16.0.3",
     "dotenv-expand": "^5.1.0",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.3.0",

@@ -25,6 +25,14 @@
       "path": "packages/components"
     },
     {
+      "name": "events-graphql-federation",
+      "path": "proxies/events-graphql-federation"
+    },
+    {
+      "name": "events-graphql-proxy",
+      "path": "proxies/events-graphql-proxy"
+    },
+    {
       "name": "root",
       "path": "."
     }
@@ -52,7 +60,8 @@
       "./packages/common-i18n",
       "./packages/common-tests",
       "./packages/eslint-config-bases",
-      "./packages/components"
+      "./packages/components",
+      "./proxies/events-graphql-proxy"
     ]
   }
 }

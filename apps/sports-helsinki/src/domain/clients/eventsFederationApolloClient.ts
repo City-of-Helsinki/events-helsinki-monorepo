@@ -106,15 +106,6 @@ export function createApolloClient() {
 export function createApolloCache() {
   return new InMemoryCache({
     typePolicies: {
-      MenuItems: {
-        fields: {
-          nodes: {
-            read(nodes) {
-              return sortMenuItems(nodes);
-            },
-          },
-        },
-      },
       Query: {
         queryType: true, // This type represents the Root Query.
         fields: {
@@ -158,6 +149,15 @@ export function createApolloCache() {
             };
           }),
           unifiedSearch: relayStylePagination(excludeArgs(['after'])),
+        },
+      },
+      MenuItems: {
+        fields: {
+          nodes: {
+            read(nodes) {
+              return sortMenuItems(nodes);
+            },
+          },
         },
       },
       Keyword: {

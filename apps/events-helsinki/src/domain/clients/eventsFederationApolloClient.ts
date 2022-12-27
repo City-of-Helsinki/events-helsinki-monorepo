@@ -21,6 +21,7 @@ import {
   initializeApolloClient,
   isClient,
   MutableReference,
+  sortMenuItems,
 } from 'events-helsinki-components';
 import type { LanguageString } from 'events-helsinki-components';
 import capitalize from 'lodash/capitalize';
@@ -148,6 +149,15 @@ export function createApolloCache() {
             };
           }),
           unifiedSearch: relayStylePagination(excludeArgs(['after'])),
+        },
+      },
+      MenuItems: {
+        fields: {
+          nodes: {
+            read(nodes) {
+              return sortMenuItems(nodes);
+            },
+          },
         },
       },
       Keyword: {

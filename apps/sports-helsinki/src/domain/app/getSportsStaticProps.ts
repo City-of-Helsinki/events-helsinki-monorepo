@@ -3,7 +3,10 @@ import { isApolloError, gql } from '@apollo/client';
 import type { CmsLanguage } from 'events-helsinki-components';
 import { getMenuLocationFromLanguage } from 'events-helsinki-components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
+import { MenuDocument } from 'react-helsinki-headless-cms/apollo';
+import { DEFAULT_HEADER_MENU_NAME } from '../../constants';
 import { staticGenerationLogger } from '../../logger';
+import type { Language } from '../../types';
 import { getLocaleOrError } from '../../utils/routerUtils';
 import initializeApolloClient from '../clients/eventsFederationApolloClient';
 import AppConfig from './AppConfig';
@@ -97,6 +100,7 @@ type GetGlobalCMSDataParams = {
 
 // Get CMS data that's required on every page
 async function getGlobalCMSData({ client, context }: GetGlobalCMSDataParams) {
+  const locale: Language = (context?.locale ?? 'fi') as Language;
   const menuLocation = getMenuLocationFromLanguage(
     getLocaleOrError(context.locale)
   );
@@ -113,6 +117,24 @@ async function getGlobalCMSData({ client, context }: GetGlobalCMSDataParams) {
       ...data,
       // Only use languages that this project supports
       pageLanguages: getSupportedLanguages(data.pageLanguages, context),
+    },
+  });
+
+  const navigationMenuName = DEFAULT_HEADER_MENU_NAME[locale];
+  const { data: headerMenuData } = await client.query({
+    query: MenuDocument,
+    variables: {
+      id: navigationMenuName,
+      // idType: 'URI'
+    },
+  });
+  client.writeQuery({
+    query: MenuDocument,
+    variables: {
+      menuLocation,
+    },
+    data: {
+      ...headerMenuData,
     },
   });
 }

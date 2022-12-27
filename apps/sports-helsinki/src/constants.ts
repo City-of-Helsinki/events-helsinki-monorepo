@@ -1,4 +1,4 @@
-import type { Language } from './types';
+import type { AppLanguage } from 'events-helsinki-components';
 
 export const DEFAULT_LANGUAGE = 'fi';
 
@@ -63,7 +63,7 @@ export const FEEDBACK_LINKS = {
   sv: 'https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback',
 };
 
-export const DEFAULT_HEADER_MENU_NAME: Record<Language, string> = {
+export const DEFAULT_HEADER_MENU_NAME: Record<AppLanguage, string> = {
   fi:
     process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_FI ??
     'Sports Helsinki Header FI',
@@ -75,7 +75,7 @@ export const DEFAULT_HEADER_MENU_NAME: Record<Language, string> = {
     'Sports Helsinki Header SV',
 };
 
-export const DEFAULT_FOOTER_MENU_NAME: Record<Language, string> = {
+export const DEFAULT_FOOTER_MENU_NAME: Record<AppLanguage, string> = {
   fi:
     process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_FI ??
     'Sports Helsinki Footer FI',

@@ -4,7 +4,9 @@ import {
   createInstance as createMatomoInstance,
 } from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
+import type { NavigationProviderProps } from 'events-helsinki-components';
 import {
+  NavigationProvider,
   EventsCookieConsent,
   ResetFocus,
   useCommonTranslation,
@@ -53,10 +55,11 @@ export type AppProps<P = any> = {
 export type CustomPageProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any;
-} & SSRConfig;
+} & NavigationProviderProps &
+  SSRConfig;
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const { error } = pageProps;
+  const { error, headerMenu, footerMenu, languages } = pageProps;
   const apolloClient = useApolloClient();
   const eventsConfig = useEventsConfig();
   const router = eventsConfig.router as NextRouter;
@@ -83,28 +86,34 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
     <ApolloProvider client={apolloClient}>
       <EventsConfigProvider config={eventsConfig}>
         <RHHCConfigProvider config={rhhcConfig}>
-          <ResetFocus />
-          <MatomoProvider value={matomoInstance}>
-            {router.isFallback ? (
-              <Center>
-                <LoadingSpinner />
-              </Center>
-            ) : error ? (
-              <Error
-                statusCode={error.networkError?.statusCode ?? 400}
-                title={error.title}
-              />
-            ) : (
-              <>
-                <Component {...pageProps} />
-                <EventsCookieConsent
-                  allowLanguageSwitch={false}
-                  appName={t('appEvents:appName')}
+          <NavigationProvider
+            headerMenu={headerMenu}
+            footerMenu={footerMenu}
+            languages={languages}
+          >
+            <ResetFocus />
+            <MatomoProvider value={matomoInstance}>
+              {router.isFallback ? (
+                <Center>
+                  <LoadingSpinner />
+                </Center>
+              ) : error ? (
+                <Error
+                  statusCode={error.networkError?.statusCode ?? 400}
+                  title={error.title}
                 />
-              </>
-            )}
-          </MatomoProvider>
-          <ToastContainer />
+              ) : (
+                <>
+                  <Component {...pageProps} />
+                  <EventsCookieConsent
+                    allowLanguageSwitch={false}
+                    appName={t('appEvents:appName')}
+                  />
+                </>
+              )}
+            </MatomoProvider>
+            <ToastContainer />
+          </NavigationProvider>
         </RHHCConfigProvider>
       </EventsConfigProvider>
     </ApolloProvider>

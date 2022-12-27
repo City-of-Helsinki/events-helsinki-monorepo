@@ -124,7 +124,7 @@ const dataSources = (): DataSources => ({
   await server.start();
   server.applyMiddleware({ app, path: '/proxy/graphql' });
 
-  const port = process.env.GRAPHQL_PROXY_PORT || 4000;
+  const port = process.env.GRAPHQL_PROXY_PORT || 4100;
 
   app.listen({ port }, () => {
     signalReady();

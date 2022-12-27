@@ -88,6 +88,14 @@
       "rangeStrategy": "replace"
     },
     {
+      // Will pin dependencies found in proxies/*...
+      "matchPaths": ["proxies/**"],
+      "matchDepTypes": [
+        "dependencies",
+      ],
+      "rangeStrategy": "pin"
+    },
+    {
       // All dev deps
       "matchDepTypes": [
         "devDependencies"

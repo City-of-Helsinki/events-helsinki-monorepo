@@ -38,7 +38,8 @@
 ```
 .
 ├── proxies
-│   └── events-graphql-federation (Apollo Router and Gateway)
+│   ├── events-graphql-federation (Apollo Router and Gateway)
+│   └── events-graphql-proxy   ("clone of events-helsinki-api-proxy")
 │
 ├── apps
 │   ├── hobbies-helsinki  (i18n, ssr, api, jest)
@@ -53,6 +54,7 @@
 #### Proxies
 
 - [proxies/events-graphql-federation](./proxies/events-graphql-federation): The Apollo Router and Gateway configuration to manage and run subgraphs. [README](./proxies/events-graphql-federation/README.md)
+- [proxies/events-graphql-proxy](./proxies/events-graphql-federation): Clone of events-helsinki-api-proxy. Event Helsinki GraphQL proxy. [README](./proxies/events-graphql-proxy/README.md)
 
 #### Apps
 
@@ -84,7 +86,8 @@ If needed static resources like **images**,... can be shared by using symlinks i
 ```
 .
 ├── proxies
-│   └── events-graphql-federation (Apollo Router and Gateway)
+│   ├── events-graphql-federation (Apollo Router and Gateway)
+│   └── events-graphql-proxy   ("clone of events-helsinki-api-proxy")
 │
 ├── apps
 │   └── hobbies-helsinki         (NextJS app with api-routes)
@@ -200,6 +203,7 @@ Configuration lives in the root folder of each apps/packages. See
 You'll find some example workflows for github action in [.github/workflows](./.github/workflows).
 
 Test, build and deploy pipelines located on Azure DevOps
+
 - [Harrastukset pipelines](https://dev.azure.com/City-of-Helsinki/harrastukset/_build)
 - [Tapahtumat pipelines](https://dev.azure.com/City-of-Helsinki/tapahtumat/_build)
 - [Liikunta pipelines](https://dev.azure.com/City-of-Helsinki/liikunta/_build)

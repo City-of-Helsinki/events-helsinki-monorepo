@@ -24,7 +24,6 @@ import type {
   PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
 import { PageDocument } from 'react-helsinki-headless-cms/apollo';
-import { createApolloClient } from 'domain/clients/eventsFederationApolloClient';
 import Navigation from '../../common-events/components/navigation/Navigation';
 import {
   getDefaultCollections,
@@ -33,6 +32,7 @@ import {
 } from '../../common-events/utils/headless-cms/headlessCmsUtils';
 import { getAllPages } from '../../common-events/utils/headless-cms/service';
 import AppConfig from '../../domain/app/AppConfig';
+import { createApolloClient } from '../../domain/clients/eventsFederationApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';

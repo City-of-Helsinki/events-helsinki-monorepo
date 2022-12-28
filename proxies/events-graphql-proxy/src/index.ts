@@ -3,11 +3,12 @@
 require('dotenv').config();
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
+import type { ExpressContext } from 'apollo-server-express';
 import { ApolloServer } from 'apollo-server-express';
+import type { GraphQLRequestContext } from 'apollo-server-plugin-base';
 import cors from 'cors';
 import express from 'express';
 import depthLimit from 'graphql-depth-limit';
-
 import AboutPageAPI from './datasources/aboutPage';
 import AccessibilityPageAPI from './datasources/accessibilityPage';
 import CollectionAPI from './datasources/collection';
@@ -18,7 +19,7 @@ import NeighborhoodAPI from './datasources/neighborhood';
 import OrganizationAPI from './datasources/organization';
 import PlaceAPI from './datasources/place';
 import schema from './schema';
-import { DataSources } from './types';
+import type { DataSources } from './types';
 import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
 
 const OK = 'OK';
@@ -41,13 +42,15 @@ const apolloServerSentryPlugin = {
   // For plugin definition see the docs: https://www.apollographql.com/docs/apollo-server/integrations/plugins/
   async requestDidStart() {
     return {
-      async didEncounterErrors(rc) {
+      async didEncounterErrors(rc: GraphQLRequestContext) {
         Sentry.withScope((scope) => {
           scope.setTags({
             graphql: rc.operation?.operation || 'parse_err',
             graphqlName: rc.operationName || rc.request.operationName,
           });
 
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           rc.errors.forEach((error) => {
             if (error.path || error.name !== 'GraphQLError') {
               scope.setExtras({
@@ -102,7 +105,7 @@ const dataSources = (): DataSources => ({
     serverIsReady = true;
   };
 
-  const checkIsServerReady = (response) => {
+  const checkIsServerReady = (response: ExpressContext['res']) => {
     if (serverIsReady) {
       response.send(OK);
     } else {

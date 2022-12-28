@@ -1,10 +1,17 @@
-import { QueryResolvers } from '../../types';
+import type { QueryResolvers } from '../../types';
+import type {
+  CollectionDetails,
+  CollectionListResponse,
+} from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
-const normalizeCollection = (collection) => {
-  let normalizedCollection = normalizeKeys(collection);
+const normalizeCollection = (collection: CollectionDetails) => {
+  let normalizedCollection = normalizeKeys(collection) as Record<
+    string,
+    unknown
+  >;
   const normalizedKeys = [
     'title',
     'description',
@@ -24,7 +31,7 @@ const normalizeCollection = (collection) => {
   return normalizedCollection;
 };
 
-const collectionQueryBuilder = (draft: boolean) => {
+const collectionQueryBuilder = (draft?: boolean | null) => {
   let query = '';
 
   if (draft != null) {
@@ -34,7 +41,7 @@ const collectionQueryBuilder = (draft: boolean) => {
   return query;
 };
 
-const collectionListQueryBuilder = (visibleOnFrontpage: boolean) => {
+const collectionListQueryBuilder = (visibleOnFrontpage?: boolean | null) => {
   let query = '';
 
   if (visibleOnFrontpage != null) {
@@ -55,7 +62,7 @@ const Query: QueryResolvers = {
       collectionQueryBuilder(draft)
     );
 
-    return normalizeCollection(data);
+    return normalizeCollection(data) as CollectionDetails;
   },
   collectionList: async (_, { visibleOnFrontpage }, { dataSources }) => {
     const data = await dataSources.collectionAPI.getCollectionList(
@@ -63,8 +70,10 @@ const Query: QueryResolvers = {
     );
 
     return {
-      data: data.map((collection) => normalizeCollection(collection)),
-    };
+      data: data.map((collection: CollectionDetails) =>
+        normalizeCollection(collection)
+      ),
+    } as CollectionListResponse;
   },
 };
 

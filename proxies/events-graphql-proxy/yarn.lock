@@ -3541,6 +3541,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/graphql-depth-limit@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@types/graphql-depth-limit@npm:1.1.3"
+  dependencies:
+    graphql: "npm:^14.5.3"
+  checksum: 4bebb1adb9c80e10326e94ec298cc49583c39ca2cb9ea702d45c258876d6759ae7dc3982ff221343318166475288e6f5999b571fe59dcef85f3945f22f9ba2b9
+  languageName: node
+  linkType: hard
+
 "@types/http-assert@npm:*":
   version: 1.5.3
   resolution: "@types/http-assert@npm:1.5.3"
@@ -3750,6 +3759,13 @@ __metadata:
   version: 2.0.1
   resolution: "@types/stack-utils@npm:2.0.1"
   checksum: a961a1d043517a2b6f7fc326fbce12cd3ba4a8dfc87b63ef2aa7cd991f6a8c7bc87942a51a792c3f922e34e3898d9de3139f2f6636a326a7ec4635389b822bd9
+  languageName: node
+  linkType: hard
+
+"@types/uuid@npm:9.0.0":
+  version: 9.0.0
+  resolution: "@types/uuid@npm:9.0.0"
+  checksum: f834b8b23d48e80d79aad515934815b720e5d1646742804af99afad1df406467d4f5089893bca06ef67d41ebb58edfeb583dae47211b8d7eefdb666cf7ae93a7
   languageName: node
   linkType: hard
 
@@ -6833,9 +6849,11 @@ __metadata:
     "@sentry/integrations": "npm:7.28.1"
     "@sentry/node": "npm:7.28.1"
     "@types/express": "npm:4.17.15"
+    "@types/graphql-depth-limit": "npm:1.1.3"
     "@types/jest": "npm:29.2.4"
     "@types/lodash": "npm:4.14.191"
     "@types/node": "npm:18.11.18"
+    "@types/uuid": "npm:9.0.0"
     "@typescript-eslint/eslint-plugin": "npm:5.47.1"
     "@typescript-eslint/parser": "npm:5.47.1"
     apollo-datasource-rest: "npm:0.14.0"
@@ -7564,6 +7582,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graphql@npm:^14.5.3":
+  version: 14.7.0
+  resolution: "graphql@npm:14.7.0"
+  dependencies:
+    iterall: "npm:^1.2.2"
+  checksum: 6b86e22940ee8a6d3445f6ac0671b6cedf7b261137c951666faeac1eb7e047e352fb9797bcca4a6962a432892374766296a6a20f25cbd2170eebb1ff8c470654
+  languageName: node
+  linkType: hard
+
 "has-bigints@npm:^1.0.1, has-bigints@npm:^1.0.2":
   version: 1.0.2
   resolution: "has-bigints@npm:1.0.2"
@@ -8261,7 +8288,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"iterall@npm:^1.1.3, iterall@npm:^1.2.1":
+"iterall@npm:^1.1.3, iterall@npm:^1.2.1, iterall@npm:^1.2.2":
   version: 1.3.0
   resolution: "iterall@npm:1.3.0"
   checksum: 4e49cae82d50a04258b50080aa85b9e590704b420c1aa529a7eb492264b1550e1a06ece4faecae995719b72b511651692a9f38b2950fcdd23320e703c61cc345

@@ -24,21 +24,25 @@ const memoizedNormalizeKey = memoize(normalizeKey);
  *    }
  *  }
  */
-const normalizeKeys = (value) => {
+const normalizeKeys = <T extends Record<string, unknown>>(
+  value: T | T[]
+): T | T[] => {
   if (Array.isArray(value)) {
-    return value.map(normalizeKeys);
+    return value.map(normalizeKeys) as T[];
   }
 
   if (value && typeof value === 'object' && value.constructor === Object) {
-    const obj = {};
+    const obj: Record<string, unknown> = {};
     const keys = Object.keys(value);
     const len = keys.length;
 
     for (let i = 0; i < len; i += 1) {
-      obj[memoizedNormalizeKey(keys[i])] = normalizeKeys(value[keys[i]]);
+      obj[memoizedNormalizeKey(keys[i])] = normalizeKeys(
+        value[keys[i]] as Record<string, unknown>
+      );
     }
 
-    return obj;
+    return obj as T;
   }
 
   return value;

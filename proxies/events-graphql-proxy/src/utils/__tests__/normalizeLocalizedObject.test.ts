@@ -15,7 +15,7 @@ describe('normalizeLocalizedObject function', () => {
         },
         'name'
       )
-    ).toEqual({
+    ).toStrictEqual({
       eventPrice: { isFree: false },
       eventType: ['foo'],
       name: {
@@ -46,7 +46,7 @@ describe('normalizeLocalizedObject function', () => {
         },
         'image'
       )
-    ).toEqual({
+    ).toStrictEqual({
       eventPrice: { isFree: false },
       eventType: ['foo'],
       image: {

@@ -1,9 +1,13 @@
-import { QueryResolvers } from '../../types';
+import type { QueryResolvers } from '../../types';
+import type { StaticPage } from '../../types/types';
 import normalizeKeys from '../../utils/normalizeKeys';
 import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
-const normalizeAccessibilityPage = (accessibilityPage) => {
-  let normalizedAccessibilityPage = normalizeKeys(accessibilityPage);
+const normalizeAccessibilityPage = (accessibilityPage: StaticPage) => {
+  let normalizedAccessibilityPage = normalizeKeys(accessibilityPage) as Record<
+    string,
+    unknown
+  >;
   const normalizedKeys = ['headingSection', 'contentSection', 'keywords'];
 
   normalizedKeys.forEach((item) => {
@@ -13,11 +17,11 @@ const normalizeAccessibilityPage = (accessibilityPage) => {
     );
   });
 
-  return normalizedAccessibilityPage;
+  return normalizedAccessibilityPage as StaticPage;
 };
 
 const Query: QueryResolvers = {
-  accessibilityPages: async (_, {}, { dataSources }) => {
+  accessibilityPages: async (_, __, { dataSources }) => {
     const data = await dataSources.accessibilityPageAPI.getAccessibilityPages();
 
     return {

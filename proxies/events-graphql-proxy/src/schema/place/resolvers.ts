@@ -1,11 +1,11 @@
-import { QueryResolvers } from '../../types';
+import type { QueryResolvers } from '../../types';
+import type { Place, PlaceListResponse } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
-
 const Query: QueryResolvers = {
   placeDetails: async (_, { id }, { dataSources }) => {
     const data = await dataSources.placeAPI.getPlaceDetails(id);
-    return normalizeKeys(data);
+    return normalizeKeys(data) as Place;
   },
   placeList: async (
     _,
@@ -38,7 +38,7 @@ const Query: QueryResolvers = {
         return normalizeKeys(place);
       }),
       meta: data.meta,
-    };
+    } as PlaceListResponse;
   },
 };
 
@@ -52,14 +52,14 @@ const placeListQueryBuilder = ({
   sort,
   text,
 }: {
-  dataSource: string;
-  divisions: string[];
-  hasUpcomingEvents: boolean;
-  page: number;
-  pageSize: number;
-  showAllPlaces: boolean;
-  sort: string;
-  text: string;
+  dataSource?: string | null;
+  divisions?: (string | null)[] | null;
+  hasUpcomingEvents?: boolean | null;
+  page?: number | null;
+  pageSize?: number | null;
+  showAllPlaces?: boolean | null;
+  sort?: string | null;
+  text?: string | null;
 }) => {
   // Get details of all needed fields
   let query = '';

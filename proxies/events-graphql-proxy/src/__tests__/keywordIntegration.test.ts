@@ -74,7 +74,7 @@ it('resolves keywordList correctly', async () => {
 
   if (res.errors) console.log(res.errors);
 
-  expect(res.data.keywordList).toEqual({
+  expect(res.data.keywordList).toStrictEqual({
     data: [
       {
         id: '1',

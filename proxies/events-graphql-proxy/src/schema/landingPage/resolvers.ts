@@ -1,10 +1,14 @@
-import { QueryResolvers } from '../../types';
+import type { QueryResolvers } from '../../types';
+import type { LandingPage } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 import normalizeLocalizedObject from '../../utils/normalizeLocalizedObject';
 
-const normalizeLandingPage = (collection) => {
-  let normalizedLandingPage = normalizeKeys(collection);
+const normalizeLandingPage = (collection: LandingPage) => {
+  let normalizedLandingPage = normalizeKeys(collection) as Record<
+    string,
+    unknown
+  >;
   const normalizedKeys = ['title', 'keywords', 'metaInformation', 'pageTitle'];
 
   normalizedKeys.forEach((item) => {
@@ -13,10 +17,10 @@ const normalizeLandingPage = (collection) => {
       item
     );
   });
-  return normalizedLandingPage;
+  return normalizedLandingPage as LandingPage;
 };
 
-const landingPageQueryBuilder = (draft: boolean) => {
+const landingPageQueryBuilder = (draft?: boolean | null) => {
   let query = '';
 
   if (draft != null) {
@@ -25,7 +29,7 @@ const landingPageQueryBuilder = (draft: boolean) => {
 
   return query;
 };
-const landingPagesQueryBuilder = (visibleOnFrontpage: boolean) => {
+const landingPagesQueryBuilder = (visibleOnFrontpage?: boolean | null) => {
   let query = '';
 
   if (visibleOnFrontpage != null) {
@@ -53,7 +57,9 @@ const Query: QueryResolvers = {
       landingPagesQueryBuilder(visibleOnFrontpage)
     );
 
-    return { data: data.map((item) => normalizeLandingPage(item)) };
+    return {
+      data: data.map((item) => normalizeLandingPage(item) as LandingPage),
+    };
   },
 };
 

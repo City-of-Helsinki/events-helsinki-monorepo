@@ -37,7 +37,7 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
   const apolloClient = initializeFederationApolloClient();
 
   try {
-    const { headerMenu, footerMenu, languages } = await getGlobalCMSData({
+    const globalCmsData = await getGlobalCMSData({
       client: apolloClient,
       context,
     });
@@ -47,9 +47,7 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
         ? {
             initialApolloState: apolloClient.cache.extract(),
             locale: context.locale,
-            headerMenu,
-            footerMenu,
-            languages,
+            ...globalCmsData,
             ...result.props,
           }
         : undefined;

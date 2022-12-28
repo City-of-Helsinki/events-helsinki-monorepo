@@ -2,11 +2,12 @@
 import { NetworkStatus } from '@apollo/client';
 import {
   getQlLanguage,
+  NavigationContext,
   skipFalsyType,
   useDebounce,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Page as RHHCPage,
   Card,
@@ -99,11 +100,16 @@ export default function ArticleArchive({
 
   // Show the first item large when the search has not yet done
   const showFirstItemLarge = searchTerm.length === 0;
+
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+
   return (
     <MatomoWrapper>
       <RHHCPage
         className="pageLayout"
-        navigation={<Navigation page={page} />}
+        navigation={
+          <Navigation page={page} menu={headerMenu} languages={languages} />
+        }
         content={
           <SearchPageContent
             className="articlesArchive"
@@ -181,7 +187,7 @@ export default function ArticleArchive({
             isLoading={isLoading || isLoadingMore}
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

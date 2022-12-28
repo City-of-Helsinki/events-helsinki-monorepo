@@ -1,6 +1,10 @@
-import { DEFAULT_LANGUAGE, getQlLanguage } from 'events-helsinki-components';
+import {
+  DEFAULT_LANGUAGE,
+  getQlLanguage,
+  NavigationContext,
+} from 'events-helsinki-components';
 import type { GetStaticPropsContext, NextPage } from 'next';
-import React from 'react';
+import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
 import {
   useConfig,
@@ -37,12 +41,13 @@ const HomePage: NextPage<{
     currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <HCRCPage
         className="pageLayout"
-        navigation={<Navigation />}
+        navigation={<Navigation menu={headerMenu} languages={languages} />}
         content={
           <HCRCPageContent
             page={page}
@@ -58,7 +63,7 @@ const HomePage: NextPage<{
             language={getQlLanguage(locale)}
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
 import type { NormalizedCacheObject } from '@apollo/client';
-import { KorosWrapper } from 'events-helsinki-components';
+import { KorosWrapper, NavigationContext } from 'events-helsinki-components';
 import type { AppLanguage } from 'events-helsinki-components';
 import type {
   GetStaticPropsContext,
@@ -9,6 +7,7 @@ import type {
   NextPage,
 } from 'next';
 import { useTranslation } from 'next-i18next';
+import { useContext } from 'react';
 import type {
   Breadcrumb,
   CollectionType,
@@ -52,11 +51,14 @@ const NextCmsArticle: NextPage<{
   } = useConfig();
 
   const { t } = useTranslation(['common']);
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <RHHCPage
-        navigation={<Navigation page={article} />}
+        navigation={
+          <Navigation page={article} menu={headerMenu} languages={languages} />
+        }
         content={
           <RHHCPageContent
             page={article as PageContentProps['page']}
@@ -76,7 +78,7 @@ const NextCmsArticle: NextPage<{
             }
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

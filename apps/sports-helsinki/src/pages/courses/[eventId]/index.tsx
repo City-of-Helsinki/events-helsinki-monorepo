@@ -1,11 +1,14 @@
-import { EventDetailsDocument } from 'events-helsinki-components';
+import {
+  EventDetailsDocument,
+  NavigationContext,
+} from 'events-helsinki-components';
 import type {
   EventFields,
   EventDetailsQuery,
   EventDetailsQueryVariables,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext, NextPage } from 'next';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
@@ -20,11 +23,13 @@ const Event: NextPage<{
   event: EventFields;
   loading: boolean;
 }> = ({ event, loading }) => {
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+
   return (
     <MatomoWrapper>
       <RHHCPage
         className="pageLayout"
-        navigation={<Navigation />}
+        navigation={<Navigation menu={headerMenu} languages={languages} />}
         content={
           <EventPageContainer
             event={event}
@@ -32,7 +37,7 @@ const Event: NextPage<{
             showSimilarEvents={AppConfig.showSimilarEvents}
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

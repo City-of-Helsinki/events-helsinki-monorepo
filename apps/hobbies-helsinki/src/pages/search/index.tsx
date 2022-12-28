@@ -1,7 +1,10 @@
-import { useAppHobbiesTranslation } from 'events-helsinki-components';
+import {
+  NavigationContext,
+  useAppHobbiesTranslation,
+} from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 
 import Navigation from '../../common-events/components/navigation/Navigation';
@@ -35,20 +38,21 @@ export default function Search() {
       }
     }
   }, [scrollTo]);
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <HCRCApolloPage
         uri={ROUTES.SEARCH}
         className="pageLayout"
-        navigation={<Navigation />}
+        navigation={<Navigation menu={headerMenu} languages={languages} />}
         content={
           <SearchPage
             SearchComponent={AdvancedSearch}
             pageTitle={tAppHobbies('appHobbies:search.pageTitle')}
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

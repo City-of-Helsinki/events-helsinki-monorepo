@@ -2,13 +2,14 @@ import type { MapItem, AppLanguage } from 'events-helsinki-components';
 import {
   useLocale,
   getURLSearchParamsFromAsPath,
+  NavigationContext,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import Navigation from '../../common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
@@ -109,12 +110,14 @@ export default function MapSearch() {
 
   const count = data?.unifiedSearch?.count ?? 0;
 
+  const { headerMenu, languages } = useContext(NavigationContext);
+
   return (
     <MatomoWrapper>
       <HCRCApolloPage
         uri={ROUTES.MAPSEARCH}
         className="pageLayout"
-        navigation={<Navigation />}
+        navigation={<Navigation menu={headerMenu} languages={languages} />}
         content={
           <>
             <SearchHeader

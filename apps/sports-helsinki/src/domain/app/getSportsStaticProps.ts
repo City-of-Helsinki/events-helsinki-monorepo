@@ -16,7 +16,7 @@ import {
   DEFAULT_HEADER_MENU_NAME,
 } from '../../constants';
 import { staticGenerationLogger } from '../../logger';
-import initializeApolloClient from '../clients/eventsFederationApolloClient';
+import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
 import AppConfig from './AppConfig';
 
 type SportsContext = {
@@ -34,7 +34,7 @@ export default async function getSportsStaticProps<P = Record<string, any>>(
     sportsContext: SportsContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
-  const apolloClient = initializeApolloClient();
+  const apolloClient = initializeFederationApolloClient();
 
   try {
     const { headerMenu, footerMenu, languages } = await getGlobalCMSData({

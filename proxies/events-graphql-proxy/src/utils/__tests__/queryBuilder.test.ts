@@ -8,7 +8,7 @@ describe('queryBuilder function', () => {
       { key: 'division', value: ['division1', 'division2'] },
     ]);
 
-    expect(query).toEqual(
+    expect(query).toStrictEqual(
       '?combined_text=hakusana1,hakusana2&division=division1,division2'
     );
   });
@@ -19,7 +19,7 @@ describe('queryBuilder function', () => {
       { key: 'otherBoolean', value: false },
     ]);
 
-    expect(query).toEqual('?isFree=true&otherBoolean=false');
+    expect(query).toStrictEqual('?isFree=true&otherBoolean=false');
   });
 
   it('returns correct query string with strings', () => {
@@ -28,7 +28,7 @@ describe('queryBuilder function', () => {
       { key: 'start', value: '12-12-12' },
     ]);
 
-    expect(query).toEqual('?sort=name&start=12-12-12');
+    expect(query).toStrictEqual('?sort=name&start=12-12-12');
   });
 
   it('returns correct query string with numbers', () => {
@@ -38,7 +38,7 @@ describe('queryBuilder function', () => {
       { key: 'count', value: 10 },
     ]);
 
-    expect(query).toEqual('?page=0&page_size=1&count=10');
+    expect(query).toStrictEqual('?page=0&page_size=1&count=10');
   });
 
   it('returns correct query from mixed types', () => {
@@ -54,7 +54,7 @@ describe('queryBuilder function', () => {
         { key: 'combined_text', value: ['hakusana1', 'hakusana2'] },
         { key: 'division', value: ['division1', 'division2'] },
       ])
-    ).toEqual(
+    ).toStrictEqual(
       '?page=0&page_size=1&count=10&sort=name&start=12-12-12&isFree=true&otherBoolean=false&combined_text=hakusana1,hakusana2&division=division1,division2'
     );
   });

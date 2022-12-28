@@ -10,7 +10,7 @@ describe('normalizeKeys function', () => {
         },
         event_type: ['foo', 'bar'],
       })
-    ).toEqual({
+    ).toStrictEqual({
       eventPrice: { isFree: false },
       eventType: ['foo', 'bar'],
       internalId: '123',

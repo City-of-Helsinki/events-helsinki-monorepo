@@ -1,4 +1,4 @@
-import { QueryEventListArgs } from '../../types/types';
+import type { QueryEventListArgs } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import queryBuilder from '../../utils/queryBuilder';
 
@@ -52,7 +52,9 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
   ]);
 };
 
-export const buildEventDetailsQuery = (include?: string[]) => {
+export const buildEventDetailsQuery = (
+  include?: Array<string | null> | null
+) => {
   let query = '';
 
   if (include && include.length) {

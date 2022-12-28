@@ -1,5 +1,9 @@
-import { QueryResolvers } from '../../types';
-import { QueryKeywordListArgs } from '../../types/types';
+import type { QueryResolvers } from '../../types';
+import type {
+  KeywordListResponse,
+  Keyword,
+  QueryKeywordListArgs,
+} from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 
@@ -57,7 +61,7 @@ const keywordListQueryBuilder = ({
 const Query: QueryResolvers = {
   keywordDetails: async (_, { id }, { dataSources }) => {
     const data = await dataSources.keywordAPI.getKeywordDetails(id);
-    return normalizeKeys(data);
+    return normalizeKeys(data) as Keyword;
   },
   keywordList: async (_, params, { dataSources }) => {
     const query = keywordListQueryBuilder(params);
@@ -68,7 +72,7 @@ const Query: QueryResolvers = {
         return normalizeKeys(keyword);
       }),
       meta: data.meta,
-    };
+    } as KeywordListResponse;
   },
 };
 

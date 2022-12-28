@@ -15,7 +15,10 @@
  *    }
  * }
  */
-export default <T>(data: T, key: string): T => {
+export default (
+  data: Record<string, unknown>,
+  key: string
+): Record<string, unknown> => {
   const normalizedData = { ...data };
   normalizedData[key] = {
     en: normalizedData[`${key}En`],

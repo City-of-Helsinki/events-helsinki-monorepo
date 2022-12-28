@@ -1,6 +1,6 @@
 import capitalize from 'lodash/capitalize';
-
-import { QueryResolvers } from '../../types';
+import type { QueryResolvers } from '../../types';
+import type { NeighborhoodListResponse } from '../../types/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const normalizeNeighborhood = (features: any[]) => {
@@ -15,8 +15,10 @@ const normalizeNeighborhood = (features: any[]) => {
 };
 
 const Query: QueryResolvers = {
-  neighborhoodList: async (_, {}, { dataSources }) => {
-    const data = await dataSources.neighborhoodAPI.getNeighborhoodList();
+  neighborhoodList: async (_, __, { dataSources }) => {
+    const data =
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (await dataSources.neighborhoodAPI.getNeighborhoodList()) as any;
 
     return {
       data: normalizeNeighborhood(data.features),
@@ -25,7 +27,7 @@ const Query: QueryResolvers = {
         next: null,
         previous: null,
       },
-    };
+    } as NeighborhoodListResponse;
   },
 };
 

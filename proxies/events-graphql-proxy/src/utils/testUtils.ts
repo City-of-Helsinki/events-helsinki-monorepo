@@ -1,9 +1,7 @@
 import { ApolloServer } from 'apollo-server';
-import { ApolloServerExpressConfig } from 'apollo-server-express';
-import {
-  ApolloServerTestClient,
-  createTestClient,
-} from 'apollo-server-testing';
+import type { ApolloServerExpressConfig } from 'apollo-server-express';
+import type { ApolloServerTestClient } from 'apollo-server-testing';
+import { createTestClient } from 'apollo-server-testing';
 
 import schema from '../schema/schema';
 

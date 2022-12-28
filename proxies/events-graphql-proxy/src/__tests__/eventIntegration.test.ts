@@ -4,15 +4,15 @@ import * as Sentry from '@sentry/node';
 import { gql } from 'graphql-tag';
 
 import EventAPI from '../datasources/event';
-import {
+import type {
   EventDetails,
   EventListResponse,
-  EventTypeId,
   QueryEventListArgs,
 } from '../types/types';
+import { EventTypeId } from '../types/types';
 import { getApolloTestServer } from '../utils/testUtils';
 
-let errorSpy;
+let errorSpy: jest.SpyInstance;
 
 const eventId = 'eventId';
 const publisherId = 'publisherId';
@@ -45,7 +45,7 @@ it('resolves eventList correctly', async () => {
 
   if (res.errors) console.log(res.errors);
 
-  expect(res.data.eventList).toEqual(mockData);
+  expect(res.data.eventList).toStrictEqual(mockData);
 });
 
 it('resolves eventDetails correctly', async () => {
@@ -62,7 +62,7 @@ it('resolves eventDetails correctly', async () => {
 
   if (res.errors) console.log(res.errors);
 
-  expect(res.data.eventDetails).toEqual(mockData);
+  expect(res.data.eventDetails).toStrictEqual(mockData);
 });
 
 it('resolves eventsByIds correctly', async () => {
@@ -88,7 +88,7 @@ it('resolves eventsByIds correctly', async () => {
   });
 
   if (res.errors) console.log(res.errors);
-  expect(res.data.eventsByIds).toEqual(mockData);
+  expect(res.data.eventsByIds).toStrictEqual(mockData);
 });
 
 it('handles error correctly in eventsByIds', async () => {
@@ -108,7 +108,7 @@ it('handles error correctly in eventsByIds', async () => {
     variables: { ids: ['id1'] },
   });
 
-  expect(spy.mock.calls).toEqual([[errorMessage]]);
+  expect(spy.mock.calls).toStrictEqual([[errorMessage]]);
 });
 
 describe('sends REST requests correctly', () => {

@@ -3,7 +3,7 @@ import type { ApolloServerExpressConfig } from 'apollo-server-express';
 import type { ApolloServerTestClient } from 'apollo-server-testing';
 import { createTestClient } from 'apollo-server-testing';
 
-import schema from '../schema/schema';
+import schema from '../schema';
 
 export const getApolloTestServer = (
   config?: Partial<ApolloServerExpressConfig>

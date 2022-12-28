@@ -392,17 +392,11 @@ export type PlacePosition = {
 export type Query = {
   __typename?: 'Query';
   _empty?: Maybe<Scalars['String']>;
-  aboutPages: AboutPagesResponse;
-  accessibilityPages: AccessibilityPagesResponse;
-  collectionDetails: CollectionDetails;
-  collectionList: CollectionListResponse;
   eventDetails: EventDetails;
   eventsByIds: EventListResponse;
   eventList: EventListResponse;
   keywordDetails: Keyword;
   keywordList: KeywordListResponse;
-  landingPage: LandingPage;
-  landingPages: LandingPagesResponse;
   neighborhoodList: NeighborhoodListResponse;
   organizationDetails: OrganizationDetails;
   placeDetails: Place;
@@ -675,17 +669,13 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  AboutPagesResponse: ResolverTypeWrapper<AboutPagesResponse>;
-  AccessibilityPagesResponse: ResolverTypeWrapper<AccessibilityPagesResponse>;
   Audience: ResolverTypeWrapper<Audience>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   BannerPage: ResolverTypeWrapper<BannerPage>;
   CmsImage: ResolverTypeWrapper<CmsImage>;
-  CollectionDetails: ResolverTypeWrapper<CollectionDetails>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  CollectionListResponse: ResolverTypeWrapper<CollectionListResponse>;
   Division: ResolverTypeWrapper<Division>;
   EventDetails: ResolverTypeWrapper<EventDetails>;
   EventListResponse: ResolverTypeWrapper<EventListResponse>;
@@ -696,8 +686,6 @@ export type ResolversTypes = {
   InternalIdObject: ResolverTypeWrapper<InternalIdObject>;
   Keyword: ResolverTypeWrapper<Keyword>;
   KeywordListResponse: ResolverTypeWrapper<KeywordListResponse>;
-  LandingPage: ResolverTypeWrapper<LandingPage>;
-  LandingPagesResponse: ResolverTypeWrapper<LandingPagesResponse>;
   LocalizedCmsImage: ResolverTypeWrapper<LocalizedCmsImage>;
   LocalizedCmsKeywords: ResolverTypeWrapper<LocalizedCmsKeywords>;
   LocalizedObject: ResolverTypeWrapper<LocalizedObject>;
@@ -718,17 +706,13 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  AboutPagesResponse: AboutPagesResponse;
-  AccessibilityPagesResponse: AccessibilityPagesResponse;
   Audience: Audience;
   ID: Scalars['ID'];
   String: Scalars['String'];
   BannerPage: BannerPage;
   CmsImage: CmsImage;
-  CollectionDetails: CollectionDetails;
   Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
-  CollectionListResponse: CollectionListResponse;
   Division: Division;
   EventDetails: EventDetails;
   EventListResponse: EventListResponse;
@@ -738,8 +722,6 @@ export type ResolversParentTypes = {
   InternalIdObject: InternalIdObject;
   Keyword: Keyword;
   KeywordListResponse: KeywordListResponse;
-  LandingPage: LandingPage;
-  LandingPagesResponse: LandingPagesResponse;
   LocalizedCmsImage: LocalizedCmsImage;
   LocalizedCmsKeywords: LocalizedCmsKeywords;
   LocalizedObject: LocalizedObject;
@@ -756,22 +738,6 @@ export type ResolversParentTypes = {
   Query: {};
   StaticPage: StaticPage;
   Subscription: {};
-};
-
-export type AboutPagesResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['AboutPagesResponse'] = ResolversParentTypes['AboutPagesResponse']
-> = {
-  data?: Resolver<Array<ResolversTypes['StaticPage']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type AccessibilityPagesResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['AccessibilityPagesResponse'] = ResolversParentTypes['AccessibilityPagesResponse']
-> = {
-  data?: Resolver<Array<ResolversTypes['StaticPage']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type AudienceResolvers<
@@ -875,133 +841,6 @@ export type CmsImageResolvers<
   >;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type CollectionDetailsResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['CollectionDetails'] = ResolversParentTypes['CollectionDetails']
-> = {
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  boxColor?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  contentType?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  curatedEvents?: Resolver<
-    Array<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  curatedEventsTitle?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  depth?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  description?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  draftTitle?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  eventListQuery?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  eventListTitle?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  expireAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  expired?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  firstPublishedAt?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  goLiveAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  hasUnpublishedChanges?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
-    ParentType,
-    ContextType
-  >;
-  heroImage?: Resolver<
-    Maybe<ResolversTypes['CmsImage']>,
-    ParentType,
-    ContextType
-  >;
-  keywords?: Resolver<
-    Maybe<ResolversTypes['LocalizedCmsKeywords']>,
-    ParentType,
-    ContextType
-  >;
-  lastPublishedAt?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  latestRevisionCreatedAt?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  linkText?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  linkUrl?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  live?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  liveRevision?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType
-  >;
-  locked?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  lockedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  lockedBy?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  numchild?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  owner?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  searchDescription?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  seoTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  showInMenus?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
-    ParentType,
-    ContextType
-  >;
-  slug?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  socialMediaDescription?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  title?: Resolver<ResolversTypes['LocalizedObject'], ParentType, ContextType>;
-  urlPath?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type CollectionListResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['CollectionListResponse'] = ResolversParentTypes['CollectionListResponse']
-> = {
-  data?: Resolver<
-    Array<ResolversTypes['CollectionDetails']>,
-    ParentType,
-    ContextType
-  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1380,111 +1219,6 @@ export type KeywordListResponseResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type LandingPageResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['LandingPage'] = ResolversParentTypes['LandingPage']
-> = {
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  topBanner?: Resolver<
-    Maybe<ResolversTypes['BannerPage']>,
-    ParentType,
-    ContextType
-  >;
-  bottomBanner?: Resolver<
-    Maybe<ResolversTypes['BannerPage']>,
-    ParentType,
-    ContextType
-  >;
-  path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  depth?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  numchild?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  draftTitle?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  slug?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  live?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  hasUnpublishedChanges?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
-    ParentType,
-    ContextType
-  >;
-  urlPath?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  seoTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  showInMenus?: Resolver<
-    Maybe<ResolversTypes['Boolean']>,
-    ParentType,
-    ContextType
-  >;
-  searchDescription?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  goLiveAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  expireAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  expired?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  locked?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  lockedAt?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  firstPublishedAt?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  lastPublishedAt?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  latestRevisionCreatedAt?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
-  title?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  keywords?: Resolver<
-    Maybe<ResolversTypes['LocalizedCmsKeywords']>,
-    ParentType,
-    ContextType
-  >;
-  metaInformation?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  pageTitle?: Resolver<
-    Maybe<ResolversTypes['LocalizedObject']>,
-    ParentType,
-    ContextType
-  >;
-  contentType?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  owner?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  lockedBy?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  liveRevision?: Resolver<
-    Maybe<ResolversTypes['Int']>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type LandingPagesResponseResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['LandingPagesResponse'] = ResolversParentTypes['LandingPagesResponse']
-> = {
-  data?: Resolver<
-    Array<ResolversTypes['LandingPage']>,
-    ParentType,
-    ContextType
-  >;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export type LocalizedCmsImageResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['LocalizedCmsImage'] = ResolversParentTypes['LocalizedCmsImage']
@@ -1807,28 +1541,7 @@ export type QueryResolvers<
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  aboutPages?: Resolver<
-    ResolversTypes['AboutPagesResponse'],
-    ParentType,
-    ContextType
-  >;
-  accessibilityPages?: Resolver<
-    ResolversTypes['AccessibilityPagesResponse'],
-    ParentType,
-    ContextType
-  >;
-  collectionDetails?: Resolver<
-    ResolversTypes['CollectionDetails'],
-    ParentType,
-    ContextType,
-    RequireFields<QueryCollectionDetailsArgs, never>
-  >;
-  collectionList?: Resolver<
-    ResolversTypes['CollectionListResponse'],
-    ParentType,
-    ContextType,
-    RequireFields<QueryCollectionListArgs, never>
-  >;
+
   eventDetails?: Resolver<
     ResolversTypes['EventDetails'],
     ParentType,
@@ -1859,18 +1572,7 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryKeywordListArgs, never>
   >;
-  landingPage?: Resolver<
-    ResolversTypes['LandingPage'],
-    ParentType,
-    ContextType,
-    RequireFields<QueryLandingPageArgs, 'id'>
-  >;
-  landingPages?: Resolver<
-    ResolversTypes['LandingPagesResponse'],
-    ParentType,
-    ContextType,
-    RequireFields<QueryLandingPagesArgs, never>
-  >;
+
   neighborhoodList?: Resolver<
     ResolversTypes['NeighborhoodListResponse'],
     ParentType,
@@ -1988,13 +1690,9 @@ export type SubscriptionResolvers<
 };
 
 export type Resolvers<ContextType = any> = {
-  AboutPagesResponse?: AboutPagesResponseResolvers<ContextType>;
-  AccessibilityPagesResponse?: AccessibilityPagesResponseResolvers<ContextType>;
   Audience?: AudienceResolvers<ContextType>;
   BannerPage?: BannerPageResolvers<ContextType>;
   CmsImage?: CmsImageResolvers<ContextType>;
-  CollectionDetails?: CollectionDetailsResolvers<ContextType>;
-  CollectionListResponse?: CollectionListResponseResolvers<ContextType>;
   Division?: DivisionResolvers<ContextType>;
   EventDetails?: EventDetailsResolvers<ContextType>;
   EventListResponse?: EventListResponseResolvers<ContextType>;
@@ -2004,8 +1702,6 @@ export type Resolvers<ContextType = any> = {
   InternalIdObject?: InternalIdObjectResolvers<ContextType>;
   Keyword?: KeywordResolvers<ContextType>;
   KeywordListResponse?: KeywordListResponseResolvers<ContextType>;
-  LandingPage?: LandingPageResolvers<ContextType>;
-  LandingPagesResponse?: LandingPagesResponseResolvers<ContextType>;
   LocalizedCmsImage?: LocalizedCmsImageResolvers<ContextType>;
   LocalizedCmsKeywords?: LocalizedCmsKeywordsResolvers<ContextType>;
   LocalizedObject?: LocalizedObjectResolvers<ContextType>;

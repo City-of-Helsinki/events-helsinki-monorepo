@@ -1,4 +1,4 @@
-schema: src/schema/schema.ts
+schema: src/schema/index.ts
 overwrite: true
 watch:
   - src/schema/**/typeDefs.ts

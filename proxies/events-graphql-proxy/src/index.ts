@@ -9,12 +9,8 @@ import type { GraphQLRequestContext } from 'apollo-server-plugin-base';
 import cors from 'cors';
 import express from 'express';
 import depthLimit from 'graphql-depth-limit';
-import AboutPageAPI from './datasources/aboutPage';
-import AccessibilityPageAPI from './datasources/accessibilityPage';
-import CollectionAPI from './datasources/collection';
 import EventAPI from './datasources/event';
 import KeywordAPI from './datasources/keyword';
-import LandingPageAPI from './datasources/landingPage';
 import NeighborhoodAPI from './datasources/neighborhood';
 import OrganizationAPI from './datasources/organization';
 import PlaceAPI from './datasources/place';
@@ -69,12 +65,8 @@ const apolloServerSentryPlugin = {
 };
 
 const dataSources = (): DataSources => ({
-  aboutPageAPI: new AboutPageAPI(),
-  accessibilityPageAPI: new AccessibilityPageAPI(),
-  collectionAPI: new CollectionAPI(),
   eventAPI: new EventAPI(),
   keywordAPI: new KeywordAPI(),
-  landingPageAPI: new LandingPageAPI(),
   neighborhoodAPI: new NeighborhoodAPI(),
   organizationAPI: new OrganizationAPI(),
   placeAPI: new PlaceAPI(),

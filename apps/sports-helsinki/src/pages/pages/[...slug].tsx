@@ -2,11 +2,13 @@
 
 import type { NormalizedCacheObject } from '@apollo/client';
 import type { AppLanguage } from 'events-helsinki-components';
+import { NavigationContext } from 'events-helsinki-components';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
   NextPage,
 } from 'next';
+import { useContext } from 'react';
 import type {
   Breadcrumb,
   CollectionType,
@@ -47,11 +49,14 @@ const NextCmsPage: NextPage<{
     currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <HCRCPage
-        navigation={<Navigation page={page} />}
+        navigation={
+          <Navigation page={page} menu={headerMenu} languages={languages} />
+        }
         content={
           <HCRCPageContent
             page={page as PageContentProps['page']}
@@ -67,7 +72,7 @@ const NextCmsPage: NextPage<{
             }
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

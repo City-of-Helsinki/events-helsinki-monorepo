@@ -1,3 +1,4 @@
+import type { Menu } from 'events-helsinki-components';
 import {
   useAppHobbiesTranslation,
   useFooterTranslation,
@@ -12,16 +13,25 @@ import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
 import styles from './footer.module.scss';
 
-const FooterSection: FunctionComponent = () => {
+type FooterSectionProps = {
+  menu?: Menu;
+};
+
+const FooterSection: FunctionComponent<FooterSectionProps> = ({
+  menu,
+}: FooterSectionProps) => {
   const { t } = useFooterTranslation();
   const { t: tAppHobbies } = useAppHobbiesTranslation();
   const locale = useLocale();
 
-  const { data } = useMenuQuery({
+  const { data: footerMenuData } = useMenuQuery({
+    skip: !!menu,
     variables: {
       id: DEFAULT_FOOTER_MENU_NAME[locale],
     },
   });
+
+  const footerMenu = menu ?? footerMenuData?.menu;
 
   // override Footer component default behaviour which focuses skip-link
   const handleBackToTop = () => {
@@ -39,7 +49,7 @@ const FooterSection: FunctionComponent = () => {
         copyrightHolder={t('footer:copyright')}
         copyrightText={t('footer:allRightsReserved')}
       >
-        {data?.menu?.menuItems?.nodes?.map((navigationItem) => (
+        {footerMenu?.menuItems?.nodes?.map((navigationItem) => (
           <Footer.Item
             className={styles.footerLink}
             key={navigationItem?.id}

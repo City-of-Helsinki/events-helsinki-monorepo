@@ -1,11 +1,11 @@
-import { VenueDocument } from 'events-helsinki-components';
+import { NavigationContext, VenueDocument } from 'events-helsinki-components';
 import type {
   Venue,
   VenueQuery,
   VenueQueryVariables,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext, NextPage } from 'next';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
@@ -20,13 +20,15 @@ const Event: NextPage<{
   venue: Venue;
   loading: boolean;
 }> = ({ venue, loading }) => {
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+
   return (
     <MatomoWrapper>
       <RHHCPage
         className="pageLayout"
-        navigation={<Navigation />}
+        navigation={<Navigation menu={headerMenu} languages={languages} />}
         content={<VenuePageContainer venue={venue} loading={loading} />}
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

@@ -2,11 +2,13 @@
 
 import type { NormalizedCacheObject } from '@apollo/client';
 import type { AppLanguage } from 'events-helsinki-components';
+import { NavigationContext } from 'events-helsinki-components';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
   NextPage,
 } from 'next';
+import { useContext } from 'react';
 import type {
   Breadcrumb,
   CollectionType,
@@ -24,7 +26,6 @@ import type {
   PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
 import { PageDocument } from 'react-helsinki-headless-cms/apollo';
-import { createApolloClient } from 'domain/clients/eventsFederationApolloClient';
 import Navigation from '../../common-events/components/navigation/Navigation';
 import {
   getDefaultCollections,
@@ -33,6 +34,7 @@ import {
 } from '../../common-events/utils/headless-cms/headlessCmsUtils';
 import { getAllPages } from '../../common-events/utils/headless-cms/service';
 import AppConfig from '../../domain/app/AppConfig';
+import { createApolloClient } from '../../domain/clients/eventsFederationApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
@@ -47,11 +49,14 @@ const NextCmsPage: NextPage<{
     currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
+  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <HCRCPage
-        navigation={<Navigation page={page} />}
+        navigation={
+          <Navigation page={page} menu={headerMenu} languages={languages} />
+        }
         content={
           <HCRCPageContent
             page={page as PageContentProps['page']}
@@ -67,7 +72,7 @@ const NextCmsPage: NextPage<{
             }
           />
         }
-        footer={<FooterSection />}
+        footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>
   );

@@ -4,7 +4,7 @@ import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
-import Navigation from 'common-events/components/navigation/Navigation';
+import Navigation from '../../common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import FooterSection from '../../domain/footer/Footer';

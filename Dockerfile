@@ -69,25 +69,6 @@ RUN apt-get remove -y rsync && \
 
 
 ###################################################################
-# Build cache image                                               #
-# This is used to speedup OpenShift builds                        #
-###################################################################
-# Build cache layer
-FROM helsinkitest/node:16-slim  AS build_cache
-WORKDIR /app
-
-COPY --chown=appuser:appuser  . .
-COPY --from=deps --chown=appuser:appuser /workspace-install ./
-
-# install cache
-RUN yarn install --immutable --inline-builds
-
-# Create cache image
-FROM helsinkitest/node:16-slim  AS cache
-WORKDIR /app/.yarn/cache/
-COPY --from=build_cache --chown=appuser:appuser /app/.yarn/cache/ ./
-
-###################################################################
 # Stage 2: Build the app                                          #
 ###################################################################
 

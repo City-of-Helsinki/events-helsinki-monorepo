@@ -1,5 +1,9 @@
 import useConfig from './useConfig';
 
+/**
+ * @deprecated After the monorepo rework and Apollo-Router changes,
+ * the events configuration holder has not much use.
+ */
 export default function useEventsApolloClientFromConfig() {
   const { apolloClient } = useConfig();
 

@@ -2,6 +2,7 @@
   "linkFrontPage": "Home page",
   "archiveSearch": {
     "title": "News",
+    "description": "News page",
     "searchTextPlaceholder": "Search text",
     "searchButtonLabelText": "Search",
     "loadMoreButtonLabelText": "Load more",

@@ -3,7 +3,10 @@ import { useApolloClient } from '@apollo/client';
 import { MockedProvider } from '@apollo/client/testing';
 import type { MockedResponse } from '@apollo/client/testing';
 import type { Config as EventsConfig } from 'events-helsinki-components';
-import { DEFAULT_LANGUAGE } from 'events-helsinki-components';
+import {
+  DEFAULT_LANGUAGE,
+  NavigationContext,
+} from 'events-helsinki-components';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -47,9 +50,11 @@ function TestProviders({ mocks, children, router }: Props) {
       <MockedProvider mocks={mocks} addTypename={false}>
         <EventsConfigProviderWithMockedApolloClient router={router}>
           <RHHCConfigProviderWithMockedApolloClient router={router}>
-            <RouterContext.Provider value={{ ...router, ...mockRouter }}>
-              {children}
-            </RouterContext.Provider>
+            <NavigationContext.Provider value={{}}>
+              <RouterContext.Provider value={{ ...router, ...mockRouter }}>
+                {children}
+              </RouterContext.Provider>
+            </NavigationContext.Provider>
           </RHHCConfigProviderWithMockedApolloClient>
         </EventsConfigProviderWithMockedApolloClient>
       </MockedProvider>

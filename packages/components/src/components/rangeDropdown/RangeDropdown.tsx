@@ -220,7 +220,14 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
           <SearchLabel htmlFor={name} srOnly={true}>
             {title}
           </SearchLabel>
-          <div className={styles.titleText}>{title}</div>
+          <div
+            className={classNames(
+              styles.titleText,
+              !value.filter(skipFalsyType).length && styles.isEmpty
+            )}
+          >
+            {title}
+          </div>
         </div>
         <div className={styles.arrowWrapper}>
           {isMenuOpen ? (

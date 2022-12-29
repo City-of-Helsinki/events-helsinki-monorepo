@@ -238,7 +238,14 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
           <SearchLabel htmlFor={name} srOnly={true}>
             {title}
           </SearchLabel>
-          <div className={styles.titleText}>{selectedText || title}</div>
+          <div
+            className={classNames(
+              styles.titleText,
+              !selectedText && styles.isEmpty
+            )}
+          >
+            {selectedText || title}
+          </div>
         </div>
         <div className={styles.arrowWrapper}>
           {isMenuOpen ? (

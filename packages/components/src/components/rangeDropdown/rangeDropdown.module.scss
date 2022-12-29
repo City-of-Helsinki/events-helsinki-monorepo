@@ -46,6 +46,7 @@
 
     svg {
       margin-right: 1rem;
+      color: var(--color-primary-black);
       fill: var(--color-primary-black);
     }
   }
@@ -70,6 +71,10 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      color: var(--color-primary-black);
+    }
+    .isEmpty {
+      color: var(--color-black-60);
     }
   }
 

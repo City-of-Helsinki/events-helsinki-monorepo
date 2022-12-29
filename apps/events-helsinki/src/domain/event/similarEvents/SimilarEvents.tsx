@@ -61,9 +61,11 @@ const SimilarEvents: React.FC<Props> = ({
 
   const hasCards = !!cards.length;
 
-  if (hasCards) {
-    onEventsLoaded && onEventsLoaded(cards.length);
-  }
+  React.useEffect(() => {
+    if (hasCards) {
+      onEventsLoaded && onEventsLoaded(cards.length);
+    }
+  }, [onEventsLoaded, cards.length, hasCards]);
 
   // Show the similar events -section when it's still loading or there are some events to be shown.
   if (loading || hasCards) {

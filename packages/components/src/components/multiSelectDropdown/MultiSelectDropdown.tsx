@@ -240,7 +240,8 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
           </SearchLabel>
           <div
             className={classNames(
-              styles.titleText && !selectedText && styles.isEmpty
+              styles.titleText,
+              !selectedText && styles.isEmpty
             )}
           >
             {selectedText || title}

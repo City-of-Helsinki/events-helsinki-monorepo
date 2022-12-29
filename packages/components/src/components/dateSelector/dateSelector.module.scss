@@ -50,6 +50,7 @@
       line-height: 1.25rem;
       right: 0;
       text-overflow: ellipsis;
+      color: var(--color-primary-black);
 
       &.isEmpty {
         color: var(--color-black-60);

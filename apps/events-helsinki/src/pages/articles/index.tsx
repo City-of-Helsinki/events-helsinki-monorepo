@@ -4,6 +4,7 @@ import {
   getQlLanguage,
   NavigationContext,
   skipFalsyType,
+  useCmsTranslation,
   useDebounce,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
@@ -48,6 +49,7 @@ const SEARCH_DEBOUNCE_TIME = 500;
 export default function ArticleArchive({
   page,
 }: EventsGlobalPageProps & { page: PageType }) {
+  const { t } = useCmsTranslation();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, SEARCH_DEBOUNCE_TIME);
@@ -112,6 +114,8 @@ export default function ArticleArchive({
         }
         content={
           <SearchPageContent
+            title={t('cms:archiveSearch.title')}
+            description={t('cms:archiveSearch.description')}
             className="articlesArchive"
             noResults={!isLoading && articles?.length === 0}
             items={articles}

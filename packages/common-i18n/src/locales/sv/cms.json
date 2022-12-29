@@ -2,6 +2,7 @@
   "linkFrontPage": "Hemsidan",
   "archiveSearch": {
     "title": "Aktuellt",
+    "description": "Aktuellt",
     "searchTextPlaceholder": "Söktext",
     "searchButtonLabelText": "Sök",
     "loadMoreButtonLabelText": "Ladda mer",

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { IconAngleDown, IconAngleUp, IconCalendarClock } from 'hds-react';
 import React from 'react';
 import type { FunctionComponent } from 'react';
@@ -167,7 +168,12 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
           <IconCalendarClock aria-hidden />
         </div>
         <div className={styles.info}>
-          <div className={styles.buttonTextWrapper}>
+          <div
+            className={classNames(
+              styles.buttonTextWrapper,
+              !selectedText && styles.isEmpty
+            )}
+          >
             {selectedText || (t('common:dateSelector.title') as string)}
           </div>
         </div>

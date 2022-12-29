@@ -71,6 +71,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .isEmpty {
+      color: var(--color-black-60);
+    }
   }
 
   .arrowWrapper {

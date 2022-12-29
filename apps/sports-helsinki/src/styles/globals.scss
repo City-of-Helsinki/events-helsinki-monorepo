@@ -50,6 +50,20 @@ button {
   cursor: pointer;
 }
 
+::placeholder {
+  color: var(--color-black-60);
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--color-black-60);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--color-black-60);
+}
+
 #cookie-consent-language-selector-button {
   display: none;
 }

@@ -47,6 +47,10 @@
       line-height: 1.25rem;
       right: 0;
       text-overflow: ellipsis;
+
+      &.isEmpty {
+        color: var(--color-black-60);
+      }
     }
   }
 

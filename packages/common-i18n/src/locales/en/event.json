@@ -74,9 +74,15 @@
     "title": "Oops, you got hit by a 404!"
   },
   "otherTimes": {
-    "buttonHide": "Hide",
+    "buttonHide": {
+      "label": "Hide",
+      "ariaLabel": "Hide other times of the event"
+    },
     "buttonReadMore": "Read more; {{date}}",
-    "buttonShow": "Show all",
+    "buttonShow": {
+      "label": "Show all",
+      "ariaLabel": "Show all other times of the event"
+    },
     "title": "Other times of the event"
   },
   "subEvents": {

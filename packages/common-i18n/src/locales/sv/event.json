@@ -73,9 +73,15 @@
     "title": "Oj nej, nu blev det 404!"
   },
   "otherTimes": {
-    "buttonHide": "Dölj",
+    "buttonHide": {
+      "label": "Dölj",
+      "ariaLabel": "Dölj andra evenemangstider"
+    },
     "buttonReadMore": "Läs mer: {{date}}",
-    "buttonShow": "Visa alt",
+    "buttonShow": {
+      "label": "Visa alt",
+      "ariaLabel": "Visa alt andra evenemangstider"
+    },
     "title": "Andra evenemangstider"
   },
   "subEvents": {

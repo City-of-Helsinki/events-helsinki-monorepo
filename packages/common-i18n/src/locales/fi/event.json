@@ -73,9 +73,15 @@
     "title": "Oho, nyt iski 404!"
   },
   "otherTimes": {
-    "buttonHide": "Piilota",
+    "buttonHide": {
+      "label": "Piilota muut ajat",
+      "ariaLabel": "Piilota muut ajat"
+    },
     "buttonReadMore": "Lue lisää: {{date}}",
-    "buttonShow": "Näytä kaikki",
+    "buttonShow": {
+      "label": "Näytä kaikki",
+      "ariaLabel": "Näytä kaikki muut ajat"
+    },
     "title": "Tapahtuman muut ajat"
   },
   "subEvents": {

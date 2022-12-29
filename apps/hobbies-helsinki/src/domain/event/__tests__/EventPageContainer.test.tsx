@@ -149,7 +149,9 @@ it('should render info and load other events + similar events', async () => {
 
   // click show other times
   // eslint-disable-next-line testing-library/no-unnecessary-act
-  await userEvent.click(screen.getByRole('button', { name: 'Näytä kaikki' }));
+  await userEvent.click(
+    screen.getByRole('button', { name: 'Näytä kaikki muut ajat' })
+  );
 
   expect(screen.getByTestId(otherEventTimesListTestId).children).toHaveLength(
     otherEventTimesCount

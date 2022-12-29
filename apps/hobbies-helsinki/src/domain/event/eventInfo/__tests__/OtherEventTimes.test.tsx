@@ -159,7 +159,7 @@ async function testOtherEventTimes() {
   expect(screen.queryByText(fourthDateStr)).not.toBeInTheDocument();
 
   const toggleButton = await screen.findByRole('button', {
-    name: translations.event.otherTimes.buttonShow,
+    name: translations.event.otherTimes.buttonShow.ariaLabel,
   });
 
   await userEvent.click(toggleButton);
@@ -179,7 +179,7 @@ async function testOtherEventTimes() {
 
 async function testToaster() {
   const toggleButton = await screen.findByRole('button', {
-    name: translations.event.otherTimes.buttonShow,
+    name: translations.event.otherTimes.buttonShow.ariaLabel,
   });
 
   userEvent.click(toggleButton);
@@ -194,7 +194,7 @@ async function testToaster() {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function testNavigation(router: NextRouter, url: string) {
   const toggleButton = await screen.findByRole('button', {
-    name: translations.event.otherTimes.buttonShow,
+    name: translations.event.otherTimes.buttonShow.ariaLabel,
   });
 
   await userEvent.click(toggleButton);

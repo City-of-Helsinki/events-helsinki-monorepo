@@ -2,10 +2,10 @@ import {
   InfoWithIcon,
   LoadingSpinner,
   SkeletonLoader,
+  useEventTranslation,
 } from 'events-helsinki-components';
 import type { EventFields } from 'events-helsinki-components';
 import { IconAngleDown, IconAngleUp, IconCalendarPlus } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { useOtherEventTimes } from '../queryUtils';
@@ -17,7 +17,7 @@ const EVENTS_LIST_LIMIT = 3;
 export const otherEventTimesListTestId = 'other-event-times-list';
 
 const OtherEventTimes: React.FC<{ event: EventFields }> = ({ event }) => {
-  const { t } = useTranslation('event');
+  const { t } = useEventTranslation();
   const [isListOpen, setIsListOpen] = React.useState(false);
 
   const { superEventId, loading, events, isFetchingMore } =
@@ -46,7 +46,7 @@ const OtherEventTimes: React.FC<{ event: EventFields }> = ({ event }) => {
     <div className={styles.eventList}>
       <InfoWithIcon
         icon={<IconCalendarPlus aria-hidden />}
-        title={t('otherTimes.title')}
+        title={t('event:otherTimes.title')}
       >
         <EventList
           id={otherEventTimesListTestId}
@@ -54,10 +54,18 @@ const OtherEventTimes: React.FC<{ event: EventFields }> = ({ event }) => {
           showDate
         />
         {events.length > EVENTS_LIST_LIMIT && (
-          <button onClick={toggleList} aria-expanded={isListOpen}>
+          <button
+            onClick={toggleList}
+            aria-expanded={isListOpen}
+            aria-label={
+              isListOpen
+                ? t('event:otherTimes.buttonHide.ariaLabel')
+                : t('event:otherTimes.buttonShow.ariaLabel')
+            }
+          >
             {isListOpen
-              ? t('otherTimes.buttonHide')
-              : t('otherTimes.buttonShow')}
+              ? t('event:otherTimes.buttonHide.label')
+              : t('event:otherTimes.buttonShow.label')}
             {isListOpen ? (
               <IconAngleUp aria-hidden />
             ) : (

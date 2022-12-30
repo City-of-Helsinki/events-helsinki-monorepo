@@ -1,12 +1,12 @@
-import type { RequestOptions } from 'apollo-datasource-rest';
-import { RESTDataSource } from 'apollo-datasource-rest';
+import type { WillSendRequestOptions } from '@apollo/datasource-rest';
+import DataSourceWithContext from './DataSourceWithContext';
 
-class DataSource extends RESTDataSource {
-  public baseURL = process.env.GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL;
+abstract class MapOpenDataDataSource extends DataSourceWithContext {
+  override baseURL = process.env.GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL;
 
-  public willSendRequest(request: RequestOptions) {
-    request.headers.set('Content-Type', 'application/json');
+  public willSendRequest(request: WillSendRequestOptions) {
+    request.headers['Content-Type'] = 'application/json';
   }
 }
 
-export default DataSource;
+export default MapOpenDataDataSource;

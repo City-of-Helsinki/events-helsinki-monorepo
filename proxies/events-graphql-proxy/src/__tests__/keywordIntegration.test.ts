@@ -1,38 +1,46 @@
-/* eslint-disable no-console */
+import assert from 'assert';
+import type { GraphQLRequest, GraphQLResponse } from '@apollo/server';
+import type { DocumentNode } from 'graphql';
 import { gql } from 'graphql-tag';
 
-import KeywordAPI from '../datasources/keyword';
-import { getApolloTestServer } from '../utils/testUtils';
+import ContextValue from '../context/context-value';
+import { createTestApolloServer } from '../utils/testUtils';
+
+let getMock: jest.Mock;
+const executeOperationReturnMockData = (
+  request: Omit<GraphQLRequest, 'query'> & {
+    query?: DocumentNode;
+  },
+  responseMockData: Record<string, unknown> = {}
+): Promise<GraphQLResponse> => {
+  const contextValue = new ContextValue({ token: 'token' });
+  getMock = (contextValue.dataSources.keywordAPI as any).get = jest
+    .fn()
+    .mockResolvedValue(responseMockData);
+  return createTestApolloServer().executeOperation(request, { contextValue });
+};
 
 it('sends REST request correctly with params', async () => {
-  const keywordAPI = new KeywordAPI();
-
   const keywordResponse = {
     data: [],
     meta: {},
   };
 
-  const getMock = jest.fn().mockResolvedValue(keywordResponse);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (keywordAPI as any).get = getMock;
-
-  const { query } = getApolloTestServer({
-    dataSources: () => ({ keywordAPI }),
-  });
-
-  await query({
-    query: GET_KEYWORDS,
-    variables: {
-      dataSource: 'yso',
-      hasUpcomingEvents: true,
-      page: 1,
-      pageSize: 10,
-      showAllKeywords: false,
-      sort: 'asc',
-      text: 'malmi',
+  await executeOperationReturnMockData(
+    {
+      query: GET_KEYWORDS,
+      variables: {
+        dataSource: 'yso',
+        hasUpcomingEvents: true,
+        page: 1,
+        pageSize: 10,
+        showAllKeywords: false,
+        sort: 'asc',
+        text: 'malmi',
+      },
     },
-  });
+    keywordResponse
+  );
 
   expect(getMock).toHaveBeenCalledWith(
     'keyword?data_source=yso&has_upcoming_events=true&page=1&page_size=10&show_all_keywords=false&sort=asc&text=malmi'
@@ -40,8 +48,6 @@ it('sends REST request correctly with params', async () => {
 });
 
 it('resolves keywordList correctly', async () => {
-  const keywordAPI = new KeywordAPI();
-
   const keywordResponse = {
     data: [
       {
@@ -63,18 +69,17 @@ it('resolves keywordList correctly', async () => {
       count: 1,
     },
   };
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (keywordAPI as any).get = jest.fn().mockResolvedValue(keywordResponse);
 
-  const { query } = getApolloTestServer({
-    dataSources: () => ({ keywordAPI }),
-  });
+  const res = await executeOperationReturnMockData(
+    { query: GET_KEYWORDS },
+    keywordResponse
+  );
 
-  const res = await query({ query: GET_KEYWORDS });
+  assert(res.body.kind === 'single');
+  expect(res.body.singleResult.errors).toBeUndefined();
 
-  if (res.errors) console.log(res.errors);
-
-  expect(res.data.keywordList).toStrictEqual({
+  // eslint-disable-next-line jest/prefer-strict-equal
+  expect(res.body.singleResult.data?.keywordList).toEqual({
     data: [
       {
         id: '1',
@@ -98,23 +103,7 @@ it('resolves keywordList correctly', async () => {
 });
 
 it('uses correct path when source is provided', async () => {
-  const keywordAPI = new KeywordAPI();
-
-  const getMock = jest.fn();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (keywordAPI as any).get = getMock;
-
-  const { query } = getApolloTestServer({
-    dataSources: () => ({ keywordAPI }),
-  });
-
-  await query({
-    query: GET_KEYWORDS,
-  });
-
-  expect(getMock).toHaveBeenCalledWith('keyword');
-
-  await query({
+  await executeOperationReturnMockData({
     query: GET_KEYWORDS,
   });
 

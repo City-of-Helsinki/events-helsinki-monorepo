@@ -1,7 +1,7 @@
 import normalizeLocalizedObject from '../normalizeLocalizedObject';
 
 describe('normalizeLocalizedObject function', () => {
-  it('should normalize certain localized object', () => {
+  it('should normalize certain localized object', () => {
     expect(
       normalizeLocalizedObject(
         {

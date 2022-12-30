@@ -1,25 +1,26 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-require-imports */
+// eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
+import schema from './schema';
+
 require('dotenv').config();
+import http from 'http';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
-import type { ExpressContext } from 'apollo-server-express';
-import { ApolloServer } from 'apollo-server-express';
-import type { GraphQLRequestContext } from 'apollo-server-plugin-base';
+import { json } from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import depthLimit from 'graphql-depth-limit';
-import EventAPI from './datasources/event';
-import KeywordAPI from './datasources/keyword';
-import NeighborhoodAPI from './datasources/neighborhood';
-import OrganizationAPI from './datasources/organization';
-import PlaceAPI from './datasources/place';
-import schema from './schema';
-import type { DataSources } from './types';
+import ContextValue from './context/context-value';
+import resolvers from './schema/resolvers';
+import typeDefs from './schema/typeDefs';
 import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
+import sentryLoggingPlugin from './utils/sentryLoggingPlugin';
 
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
+const GRAPHQL_PATH = '/proxy/graphql';
 
 Sentry.init({
   dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
@@ -34,99 +35,67 @@ Sentry.init({
   ],
 });
 
-const apolloServerSentryPlugin = {
-  // For plugin definition see the docs: https://www.apollographql.com/docs/apollo-server/integrations/plugins/
-  async requestDidStart() {
-    return {
-      async didEncounterErrors(rc: GraphQLRequestContext) {
-        Sentry.withScope((scope) => {
-          scope.setTags({
-            graphql: rc.operation?.operation || 'parse_err',
-            graphqlName: rc.operationName || rc.request.operationName,
-          });
+const port = process.env.GRAPHQL_PROXY_PORT || 4100;
 
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          rc.errors.forEach((error) => {
-            if (error.path || error.name !== 'GraphQLError') {
-              scope.setExtras({
-                path: error.path,
-              });
-              Sentry.captureException(error);
-            } else {
-              scope.setExtras({});
-              Sentry.captureMessage(`GraphQLWrongQuery: ${error.message}`);
-            }
-          });
-        });
-      },
-    };
-  },
+let serverIsReady = false;
+
+const signalReady = () => {
+  serverIsReady = true;
 };
 
-const dataSources = (): DataSources => ({
-  eventAPI: new EventAPI(),
-  keywordAPI: new KeywordAPI(),
-  neighborhoodAPI: new NeighborhoodAPI(),
-  organizationAPI: new OrganizationAPI(),
-  placeAPI: new PlaceAPI(),
+const checkIsServerReady = (response: express.Response) => {
+  if (serverIsReady) {
+    response.send(OK);
+  } else {
+    response.status(500).send(SERVER_IS_NOT_READY);
+  }
+};
+
+const app = express();
+const httpServer = http.createServer(app);
+const server = new ApolloServer<ContextValue>({
+  schema,
+  includeStacktraceInErrorResponses:
+    process.env.GRAPHQL_PROXY_DEBUG === 'debug' ||
+    process.env.GRAPHQL_PROXY_ENV !== 'production',
+  plugins: [
+    sentryLoggingPlugin,
+    apolloLoggingPlugin,
+    ApolloServerPluginDrainHttpServer({ httpServer }),
+  ],
+  validationRules: [depthLimit(10)],
 });
 
 (async () => {
-  const server = new ApolloServer({
-    // for some reason typing not working here automatically after package updates
-    context: ({ req }: { req: { headers: { authorization: string } } }) => {
-      const token = req.headers.authorization || '';
-      return { token };
-    },
-    dataSources,
-    debug:
-      process.env.GRAPHQL_PROXY_DEBUG === 'debug' ||
-      process.env.GRAPHQL_PROXY_ENV !== 'production',
-    formatError: (err) => {
-      return err;
-    },
-    plugins: [apolloServerSentryPlugin, apolloLoggingPlugin],
-    schema,
-    validationRules: [depthLimit(10)],
-  });
-
-  let serverIsReady = false;
-
-  const signalReady = () => {
-    serverIsReady = true;
-  };
-
-  const checkIsServerReady = (response: ExpressContext['res']) => {
-    if (serverIsReady) {
-      response.send(OK);
-    } else {
-      response.status(500).send(SERVER_IS_NOT_READY);
-    }
-  };
-
-  const app = express();
-
-  app.use(cors());
-
-  app.get('/healthz', (request, response) => {
-    checkIsServerReady(response);
-  });
-
-  app.get('/readiness', (request, response) => {
-    checkIsServerReady(response);
-  });
   await server.start();
-  server.applyMiddleware({ app, path: '/proxy/graphql' });
 
-  const port = process.env.GRAPHQL_PROXY_PORT || 4100;
+  app.use(
+    GRAPHQL_PATH,
+    cors<cors.CorsRequest>(),
+    json(),
+    expressMiddleware(server, {
+      context: async ({ req }) =>
+        new ContextValue({
+          token: req.headers.authorization || '',
+          cache: server.cache,
+        }),
+    })
+  );
+  app.get(
+    '/healthz',
+    (request: express.Request, response: express.Response) => {
+      checkIsServerReady(response);
+    }
+  );
 
-  app.listen({ port }, () => {
-    signalReady();
-
-    // eslint-disable-next-line no-console
-    console.info(
-      `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
-    );
-  });
+  app.get(
+    '/readiness',
+    (request: express.Request, response: express.Response) => {
+      checkIsServerReady(response);
+    }
+  );
+  await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
+  signalReady();
+  // eslint-disable-next-line no-console
+  console.info(`🚀 Server ready at http://localhost:${port}${GRAPHQL_PATH}`);
 })();

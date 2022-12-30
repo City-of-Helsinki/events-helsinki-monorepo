@@ -1,51 +1,72 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-console */
+import assert from 'assert';
+import type { GraphQLRequest, GraphQLResponse } from '@apollo/server';
 import * as Sentry from '@sentry/node';
+import type { DocumentNode } from 'graphql';
 import { gql } from 'graphql-tag';
-
-import EventAPI from '../datasources/event';
+import ContextValue from '../context/context-value';
 import type {
   EventDetails,
   EventListResponse,
   QueryEventListArgs,
 } from '../types/types';
 import { EventTypeId } from '../types/types';
-import { getApolloTestServer } from '../utils/testUtils';
-
+import { createTestApolloServer } from '../utils/testUtils';
 let errorSpy: jest.SpyInstance;
-
+let getMock: jest.Mock;
 const eventId = 'eventId';
 const publisherId = 'publisherId';
 const eventName = 'tapahtuma';
 
-let eventAPI: EventAPI;
-let apolloTestServer: ReturnType<typeof getApolloTestServer>;
-
 beforeEach(() => {
   errorSpy = jest.spyOn(console, 'error');
-  eventAPI = new EventAPI();
-  apolloTestServer = getApolloTestServer({
-    dataSources: () => ({ eventAPI }),
-  });
 });
 
 afterEach(() => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any,no-console
   (console.error as any).mockRestore();
 });
+
+const executeOperationReturnMockData = (
+  request: Omit<GraphQLRequest, 'query'> & {
+    query?: DocumentNode;
+  },
+  responseMockData: Record<string, unknown> = {}
+): Promise<GraphQLResponse> => {
+  const contextValue = new ContextValue({ token: 'token' });
+  getMock = (contextValue.dataSources.eventAPI as any).get = jest
+    .fn()
+    .mockResolvedValue(responseMockData);
+  return createTestApolloServer().executeOperation(request, { contextValue });
+};
+
+const executeOperationThrowError = (
+  request: Omit<GraphQLRequest, 'query'> & {
+    query?: DocumentNode;
+  },
+  errorMessage: string
+): Promise<GraphQLResponse> => {
+  const contextValue = new ContextValue({ token: 'token' });
+  errorSpy.mockImplementationOnce(() => {});
+  getMock = (contextValue.dataSources.eventAPI as any).get = jest
+    .fn()
+    .mockResolvedValue(Promise.reject(errorMessage));
+  return createTestApolloServer().executeOperation(request, { contextValue });
+};
 
 it('resolves eventList correctly', async () => {
   const mockData = {
     data: [{ id: eventId, name: { fi: eventName } }],
     meta: { count: 1 },
   } as EventListResponse;
-  (eventAPI as any).get = jest.fn().mockResolvedValue(mockData);
 
-  const res = await apolloTestServer.query({ query: EVENTS_QUERY });
+  const res = await executeOperationReturnMockData(
+    { query: EVENTS_QUERY },
+    mockData
+  );
 
-  if (res.errors) console.log(res.errors);
-
-  expect(res.data.eventList).toStrictEqual(mockData);
+  assert(res.body.kind === 'single');
+  expect(res.body.singleResult.errors).toBeUndefined();
+  expect(res.body.singleResult.data).toStrictEqual(mockData);
 });
 
 it('resolves eventDetails correctly', async () => {
@@ -53,16 +74,18 @@ it('resolves eventDetails correctly', async () => {
     id: eventId,
     publisher: publisherId,
   } as EventDetails;
-  (eventAPI as any).get = jest.fn().mockResolvedValue(mockData);
 
-  const res = await apolloTestServer.query({
-    query: EVENT_DETAILS_QUERY,
-    variables: { id: 'id' },
-  });
+  const res = await executeOperationReturnMockData(
+    {
+      query: EVENT_DETAILS_QUERY,
+      variables: { id: 'id' },
+    },
+    mockData
+  );
 
-  if (res.errors) console.log(res.errors);
-
-  expect(res.data.eventDetails).toStrictEqual(mockData);
+  assert(res.body.kind === 'single');
+  expect(res.body.singleResult.errors).toBeUndefined();
+  expect(res.body.singleResult.data).toStrictEqual(mockData);
 });
 
 it('resolves eventsByIds correctly', async () => {
@@ -80,52 +103,46 @@ it('resolves eventsByIds correctly', async () => {
     meta: { count: 2 },
   } as EventListResponse;
 
-  (eventAPI as any).get = jest.fn().mockResolvedValue({ ...mockData });
+  const res = await executeOperationReturnMockData(
+    {
+      query: EVENTS_BY_IDS_QUERY,
+      variables: { ids: ['id1', 'id2'] },
+    },
+    { ...mockData }
+  );
 
-  const res = await apolloTestServer.query({
-    query: EVENTS_BY_IDS_QUERY,
-    variables: { ids: ['id1', 'id2'] },
-  });
-
-  if (res.errors) console.log(res.errors);
-  expect(res.data.eventsByIds).toStrictEqual(mockData);
+  assert(res.body.kind === 'single');
+  expect(res.body.singleResult.errors).toBeUndefined();
+  expect(res.body.singleResult.data).toStrictEqual(mockData);
 });
 
 it('handles error correctly in eventsByIds', async () => {
   const spy = jest.spyOn(Sentry, 'captureException');
   const errorMessage = 'Error message';
 
-  // avoid error message in test logs
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  errorSpy.mockImplementationOnce(() => {});
-
-  (eventAPI as any).get = jest
-    .fn()
-    .mockResolvedValue(Promise.reject(errorMessage));
-
-  await await apolloTestServer.query({
-    query: EVENTS_BY_IDS_QUERY,
-    variables: { ids: ['id1'] },
-  });
+  await executeOperationThrowError(
+    {
+      query: EVENTS_BY_IDS_QUERY,
+      variables: { ids: ['id1'] },
+    },
+    errorMessage
+  );
 
   expect(spy.mock.calls).toStrictEqual([[errorMessage]]);
 });
 
 describe('sends REST requests correctly', () => {
   it('sends General event type by default', async () => {
-    const getMock = jest.fn().mockResolvedValue({});
-    (eventAPI as any).get = getMock;
-
-    await apolloTestServer.query({ query: EVENTS_QUERY, variables: {} });
+    await executeOperationReturnMockData({
+      query: EVENTS_QUERY,
+      variables: {},
+    });
 
     expect(getMock).toHaveBeenCalledWith('event?event_type=General');
   });
 
   it('sends Course event type with event type param', async () => {
-    const getMock = jest.fn().mockResolvedValue({});
-    (eventAPI as any).get = getMock;
-
-    await apolloTestServer.query({
+    await executeOperationReturnMockData({
       query: EVENTS_QUERY,
       variables: {
         eventType: [EventTypeId.Course],
@@ -136,10 +153,7 @@ describe('sends REST requests correctly', () => {
   });
 
   it('sends all params in query string correctly', async () => {
-    const getMock = jest.fn().mockResolvedValue({});
-    (eventAPI as any).get = getMock;
-
-    await apolloTestServer.query({
+    await executeOperationReturnMockData({
       query: EVENTS_QUERY,
       variables: { eventType: [EventTypeId.Course] } as QueryEventListArgs,
     });
@@ -149,10 +163,7 @@ describe('sends REST requests correctly', () => {
 });
 
 it('sends REST request correctly with query params (course)', async () => {
-  const getMock = jest.fn().mockResolvedValue({});
-  (eventAPI as any).get = getMock;
-
-  await apolloTestServer.query({
+  await executeOperationReturnMockData({
     query: EVENTS_QUERY,
     variables: {
       eventType: [EventTypeId.Course],

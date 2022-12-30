@@ -58,4 +58,4 @@ RUN yarn install --production
 EXPOSE $GRAPHQL_PROXY_PORT
 
 # Start graphql proxy server
-CMD yarn start:prod
+CMD yarn start

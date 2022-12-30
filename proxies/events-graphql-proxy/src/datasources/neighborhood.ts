@@ -1,7 +1,7 @@
 import type { NeighborhoodListResponse } from '../types/types';
-import DataSource from './MapOpenDataDataSource';
+import MapOpenDataDataSource from './MapOpenDataDataSource';
 
-class NeighborhoodAPI extends DataSource {
+class NeighborhoodAPI extends MapOpenDataDataSource {
   public async getNeighborhoodList(): Promise<
     NeighborhoodListResponse['data']
   > {

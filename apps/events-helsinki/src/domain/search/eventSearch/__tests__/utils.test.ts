@@ -65,6 +65,14 @@ describe('getEventSearchVariables function', () => {
     expect(keywords).toStrictEqual([]);
   });
 
+  it('should return correct keywordAnd if onlyChildrenEvents is selected', () => {
+    const { keywordAnd } = getEventSearchVariables({
+      ...defaultParams,
+      params: new URLSearchParams('?onlyChildrenEvents=true'),
+    });
+    expect(keywordAnd).toContain('yso:p4354');
+  });
+
   it('should return start=now if start time is in past/today', () => {
     advanceTo('2020-10-06');
     const { start: start1 } = getEventSearchVariables({

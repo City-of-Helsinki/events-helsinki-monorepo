@@ -43,7 +43,7 @@ $buttonWidth: 180px;
 
   .buttonWrapper {
     @include respond-above(m) {
-      grid-column: span 1 / 5;
+      grid-column: span 1 / 4;
     }
   }
 
@@ -56,7 +56,7 @@ $buttonWidth: 180px;
     }
 
     @include respond-above(m) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 

@@ -294,8 +294,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
       searchParams,
       EVENT_SEARCH_FILTERS.KEYWORD_NOT
     ),
-    // onlyChildrenEvents:
-    //   searchParams.get(EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS) === 'true',
+    onlyChildrenEvents:
+      searchParams.get(EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS) === 'true',
     onlyEveningEvents:
       searchParams.get(EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS) === 'true',
     onlyRemoteEvents:

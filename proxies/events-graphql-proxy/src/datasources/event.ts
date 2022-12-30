@@ -1,7 +1,7 @@
 import type { EventDetails, EventListResponse } from '../types/types';
-import DataSource from './LinkedEventsDataSource';
+import LinkedEventsDataSource from './LinkedEventsDataSource';
 
-class EventAPI extends DataSource {
+class EventAPI extends LinkedEventsDataSource {
   public async getEventDetails(
     id: string,
     query: string

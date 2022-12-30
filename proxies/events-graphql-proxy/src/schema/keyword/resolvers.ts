@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { QueryResolvers } from '../../types';
 import type {
   KeywordListResponse,
@@ -59,16 +60,16 @@ const keywordListQueryBuilder = ({
 };
 
 const Query: QueryResolvers = {
-  keywordDetails: async (_, { id }, { dataSources }) => {
+  keywordDetails: async (_: any, { id }: any, { dataSources }: any) => {
     const data = await dataSources.keywordAPI.getKeywordDetails(id);
     return normalizeKeys(data) as Keyword;
   },
-  keywordList: async (_, params, { dataSources }) => {
+  keywordList: async (_: any, params: any, { dataSources }: any) => {
     const query = keywordListQueryBuilder(params);
     const data = await dataSources.keywordAPI.getKeywordList(query);
 
     return {
-      data: data.data.map((keyword) => {
+      data: data.data.map((keyword: any) => {
         return normalizeKeys(keyword);
       }),
       meta: data.meta,

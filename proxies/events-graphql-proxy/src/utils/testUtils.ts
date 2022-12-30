@@ -1,21 +1,14 @@
-import { ApolloServer } from 'apollo-server';
-import type { ApolloServerExpressConfig } from 'apollo-server-express';
-import type { ApolloServerTestClient } from 'apollo-server-testing';
-import { createTestClient } from 'apollo-server-testing';
-
+import { ApolloServer } from '@apollo/server';
+import { ApolloServerPluginInlineTraceDisabled } from '@apollo/server/plugin/disabled';
+import type ContextValue from '../context/context-value';
 import schema from '../schema';
 
-export const getApolloTestServer = (
-  config?: Partial<ApolloServerExpressConfig>
-): ApolloServerTestClient => {
-  return createTestClient(
-    // FIXME: the current createTestClient is not supporting the latest ApolloServer
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    new ApolloServer({
-      schema,
-      context: () => ({ token: '123' }),
-      ...config,
-    })
-  );
+export const createTestApolloServer = (
+  override?: Partial<ConstructorParameters<typeof ApolloServer>>
+): ApolloServer<ContextValue> => {
+  return new ApolloServer<ContextValue>({
+    schema,
+    plugins: [ApolloServerPluginInlineTraceDisabled()],
+    ...override,
+  });
 };

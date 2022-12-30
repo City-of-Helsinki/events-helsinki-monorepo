@@ -1,7 +1,7 @@
 import normalizeKeys from '../normalizeKeys';
 
 describe('normalizeKeys function', () => {
-  it('should normalize entered object', () => {
+  it('should normalize entered object', () => {
     expect(
       normalizeKeys({
         '@id': '123',

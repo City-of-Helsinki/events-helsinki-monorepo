@@ -10,8 +10,7 @@ import type { FunctionComponent } from 'react';
 import React from 'react';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
 
-import { DEFAULT_FOOTER_MENU_NAME, ROUTES } from '../../constants';
-import { getI18nPath } from '../../utils/routerUtils';
+import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
 import styles from './footer.module.scss';
 
 type FooterSectionProps = {
@@ -46,13 +45,6 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
       title={tAppSports('appSports:appName')}
       className={styles.footer}
     >
-      <Footer.Navigation>
-        <Footer.Item
-          as={Link}
-          label={tAppSports('appSports:footer.searchSports')}
-          href={getI18nPath(ROUTES.SEARCH, locale)}
-        />
-      </Footer.Navigation>
       <Footer.Utilities
         backToTopLabel={t('footer:backToTop')}
         onBackToTopClick={handleBackToTop}

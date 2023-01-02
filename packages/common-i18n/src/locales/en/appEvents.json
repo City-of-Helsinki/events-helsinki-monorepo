@@ -1,7 +1,6 @@
 {
   "appName": "Events",
   "footer": {
-    "searchEvents": "Events calendar",
     "titleEventsCategories": "Popular events categories"
   },
   "home": {

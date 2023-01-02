@@ -1,7 +1,6 @@
 {
   "appName": "Tapahtumat",
   "footer": {
-    "searchEvents": "Tapahtumakalenteri",
     "titleEventsCategories": "Suositut tapahtumien kategoriat"
   },
   "home": {

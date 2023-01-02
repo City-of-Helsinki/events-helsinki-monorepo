@@ -1,11 +1,10 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
-import schema from './schema';
-
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 import http from 'http';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { buildSubgraphSchema } from '@apollo/subgraph';
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
 import { json } from 'body-parser';
@@ -54,7 +53,7 @@ const checkIsServerReady = (response: express.Response) => {
 const app = express();
 const httpServer = http.createServer(app);
 const server = new ApolloServer<ContextValue>({
-  schema,
+  schema: buildSubgraphSchema({ typeDefs, resolvers }),
   includeStacktraceInErrorResponses:
     process.env.GRAPHQL_PROXY_DEBUG === 'debug' ||
     process.env.GRAPHQL_PROXY_ENV !== 'production',

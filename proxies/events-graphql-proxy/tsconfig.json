@@ -5,10 +5,12 @@
     "baseUrl": "./src",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
+    "module": "commonjs",
     "jsx": "preserve",
     "incremental": true,
-    "paths": {}
+    "paths": {},
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   },
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
 }

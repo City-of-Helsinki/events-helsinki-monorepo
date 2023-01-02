@@ -3320,6 +3320,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/cors@npm:2.8.13":
+  version: 2.8.13
+  resolution: "@types/cors@npm:2.8.13"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 9c8b1c732295603fcc0e1e8e8f0a332e7ec03d10bb18b9398225e5e2fbf6a2fd64758926204d306ef100a5bdd7b35324bdc34bc57fc49ed9807446930bc678f9
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.3":
   version: 3.7.4
   resolution: "@types/eslint-scope@npm:3.7.4"
@@ -6232,6 +6241,7 @@ __metadata:
     "@sentry/integrations": "npm:7.28.1"
     "@sentry/node": "npm:7.28.1"
     "@types/body-parser": "npm:^1"
+    "@types/cors": "npm:2.8.13"
     "@types/express": "npm:4.17.15"
     "@types/graphql-depth-limit": "npm:1.1.3"
     "@types/jest": "npm:29.2.4"

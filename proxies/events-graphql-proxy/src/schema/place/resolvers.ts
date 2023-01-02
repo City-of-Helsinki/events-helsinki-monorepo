@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { QueryResolvers } from '../../types';
 import type { Place, PlaceListResponse } from '../../types/types';
 import composeQuery from '../../utils/composeQuery';
 import normalizeKeys from '../../utils/normalizeKeys';
 const Query: QueryResolvers = {
-  placeDetails: async (_, { id }, { dataSources }) => {
+  placeDetails: async (_: any, { id }: any, { dataSources }: any) => {
     const data = await dataSources.placeAPI.getPlaceDetails(id);
     return normalizeKeys(data) as Place;
   },
   placeList: async (
-    _,
+    _: any,
     {
       dataSource,
       divisions,
@@ -18,8 +19,8 @@ const Query: QueryResolvers = {
       showAllPlaces,
       sort,
       text,
-    },
-    { dataSources }
+    }: any,
+    { dataSources }: any
   ) => {
     const query = placeListQueryBuilder({
       dataSource,
@@ -34,7 +35,7 @@ const Query: QueryResolvers = {
     const data = await dataSources.placeAPI.getPlaceList(query);
 
     return {
-      data: data.data.map((place) => {
+      data: data.data.map((place: any) => {
         return normalizeKeys(place);
       }),
       meta: data.meta,

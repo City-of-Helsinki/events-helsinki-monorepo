@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import capitalize from 'lodash/capitalize';
 import type { QueryResolvers } from '../../types';
 import type { NeighborhoodListResponse } from '../../types/types';
@@ -15,7 +16,7 @@ const normalizeNeighborhood = (features: any[]) => {
 };
 
 const Query: QueryResolvers = {
-  neighborhoodList: async (_, __, { dataSources }) => {
+  neighborhoodList: async (_: any, __: any, { dataSources }: any) => {
     const data =
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (await dataSources.neighborhoodAPI.getNeighborhoodList()) as any;

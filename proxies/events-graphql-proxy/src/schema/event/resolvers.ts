@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Sentry from '@sentry/node';
 
 import type { DataSources, QueryResolvers } from '../../types';
@@ -21,16 +22,16 @@ const getEventList = async (dataSources: DataSources, query: string) => {
 };
 
 const Query: QueryResolvers = {
-  eventDetails: async (_, { id, include }, { dataSources }) => {
+  eventDetails: async (_: any, { id, include }: any, { dataSources }: any) => {
     const query = buildEventDetailsQuery(include);
     const data = await dataSources.eventAPI.getEventDetails(id ?? '', query);
     return normalizeKeys(data) as EventDetails;
   },
-  eventList: async (_, params, { dataSources }) => {
+  eventList: async (_: any, params: any, { dataSources }: any) => {
     const query = buildEventListQuery(params);
     return getEventList(dataSources, query);
   },
-  eventsByIds: async (_, params, { dataSources }) => {
+  eventsByIds: async (_: any, params: any, { dataSources }: any) => {
     const query = buildEventListQuery(params);
     return getEventList(dataSources, query);
   },

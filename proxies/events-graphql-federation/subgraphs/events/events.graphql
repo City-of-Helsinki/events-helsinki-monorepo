@@ -1,40 +1,25 @@
-schema @link(url: "https://specs.apollo.dev/link/v1.0") {
+schema
+  @link(url: "https://specs.apollo.dev/link/v1.0")
+{
   query: Query
   mutation: Mutation
   subscription: Subscription
 }
 
 extend schema
-  @link(
-    url: "https://specs.apollo.dev/federation/v2.0"
-    import: ["@key", "@shareable"]
-  )
+  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key", "@shareable"])
 
-directive @link(
-  url: String
-  as: String
-  for: link__Purpose
-  import: [link__Import]
-) repeatable on SCHEMA
+directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
-directive @key(
-  fields: federation__FieldSet!
-  resolvable: Boolean = true
-) repeatable on OBJECT | INTERFACE
+directive @key(fields: federation__FieldSet!, resolvable: Boolean = true) repeatable on OBJECT | INTERFACE
 
-directive @federation__requires(
-  fields: federation__FieldSet!
-) on FIELD_DEFINITION
+directive @federation__requires(fields: federation__FieldSet!) on FIELD_DEFINITION
 
-directive @federation__provides(
-  fields: federation__FieldSet!
-) on FIELD_DEFINITION
+directive @federation__provides(fields: federation__FieldSet!) on FIELD_DEFINITION
 
 directive @federation__external(reason: String) on OBJECT | FIELD_DEFINITION
 
-directive @federation__tag(
-  name: String!
-) repeatable on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
+directive @federation__tag(name: String!) repeatable on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
 
 directive @federation__extends on OBJECT | INTERFACE
 
@@ -43,8 +28,6 @@ directive @shareable on OBJECT | FIELD_DEFINITION
 directive @federation__inaccessible on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
 
 directive @federation__override(from: String!) on FIELD_DEFINITION
-
-directive @federation__composeDirective(name: String) repeatable on SCHEMA
 
 type CmsImage {
   photographerCredit: LocalizedObject
@@ -68,7 +51,9 @@ type LocalizedCmsKeywords {
   sv: [String]
 }
 
-type LocalizedObject @shareable {
+type LocalizedObject
+  @shareable
+{
   fi: String
   sv: String
   en: String
@@ -90,96 +75,15 @@ type Query {
 }
 
 extend type Query {
-  aboutPages: AboutPagesResponse!
-}
-
-extend type Query {
-  accessibilityPages: AccessibilityPagesResponse!
-}
-
-extend type Query {
-  collectionDetails(slug: ID, draft: Boolean): CollectionDetails!
-  collectionList(visibleOnFrontpage: Boolean): CollectionListResponse!
-}
-
-extend type Query {
   eventDetails(id: ID, include: [String]): EventDetails!
-  eventsByIds(
-    eventType: [EventTypeId] = [General]
-    ids: [ID!]!
-    include: [String]
-    sort: String
-    pageSize: Int
-    page: Int
-    start: String
-    end: String
-  ): EventListResponse!
-  eventList(
-    eventType: [EventTypeId] = [General]
-    internetBased: Boolean
-    localOngoingAnd: [String]
-    localOngoingOr: [String]
-    localOngoingOrSet1: [String]
-    localOngoingOrSet2: [String]
-    localOngoingOrSet3: [String]
-    internetOngoingAnd: [String]
-    internetOngoingOr: [String]
-    allOngoing: Boolean
-    allOngoingAnd: [String]
-    allOngoingOr: [String]
-    combinedText: [String]
-    division: [String]
-    end: String
-    endsAfter: String
-    endsBefore: String
-    ids: [String]
-    inLanguage: String
-    include: [String]
-    isFree: Boolean
-    keywordAnd: [String]
-    keywordOrSet1: [String]
-    keywordOrSet2: [String]
-    keywordOrSet3: [String]
-    keywordNot: [String]
-    keyword: [String]
-    language: String
-    location: [String]
-    page: Int
-    pageSize: Int
-    publisher: ID
-    sort: String
-    start: String
-    startsAfter: String
-    startsBefore: String
-    superEvent: ID
-    superEventType: [String]
-    text: String
-    translation: String
-    suitableFor: [Int]
-    audienceMinAgeGt: String
-    audienceMinAgeLt: String
-    audienceMaxAgeGt: String
-    audienceMaxAgeLt: String
-  ): EventListResponse!
+  eventsByIds(eventType: [EventTypeId] = [General], ids: [ID!]!, include: [String], sort: String, pageSize: Int, page: Int, start: String, end: String): EventListResponse!
+  eventList(eventType: [EventTypeId] = [General], internetBased: Boolean, localOngoingAnd: [String], localOngoingOr: [String], localOngoingOrSet1: [String], localOngoingOrSet2: [String], localOngoingOrSet3: [String], internetOngoingAnd: [String], internetOngoingOr: [String], allOngoing: Boolean, allOngoingAnd: [String], allOngoingOr: [String], combinedText: [String], division: [String], end: String, endsAfter: String, endsBefore: String, ids: [String], inLanguage: String, include: [String], isFree: Boolean, keywordAnd: [String], keywordOrSet1: [String], keywordOrSet2: [String], keywordOrSet3: [String], keywordNot: [String], keyword: [String], language: String, location: [String], page: Int, pageSize: Int, publisher: ID, sort: String, start: String, startsAfter: String, startsBefore: String, superEvent: ID, superEventType: [String], text: String, translation: String, suitableFor: [Int], audienceMinAgeGt: String, audienceMinAgeLt: String, audienceMaxAgeGt: String, audienceMaxAgeLt: String): EventListResponse!
 }
 
 extend type Query {
   keywordDetails(id: ID!): Keyword!
-  keywordList(
-    dataSource: String
-    hasUpcomingEvents: Boolean
-    page: Int
-    pageSize: Int
-    showAllKeywords: Boolean
-    sort: String
-    text: String
-  ): KeywordListResponse!
+  keywordList(dataSource: String, hasUpcomingEvents: Boolean, page: Int, pageSize: Int, showAllKeywords: Boolean, sort: String, text: String): KeywordListResponse!
 }
-
-#extend type Query {
-#  landingPage(draft: Boolean, id: ID!): LandingPage!
-#  landingPages(visibleOnFrontpage: Boolean): LandingPagesResponse!
-#}
 
 extend type Query {
   neighborhoodList: NeighborhoodListResponse!
@@ -191,16 +95,7 @@ extend type Query {
 
 extend type Query {
   placeDetails(id: ID!): Place!
-  placeList(
-    dataSource: String
-    divisions: [String]
-    hasUpcomingEvents: Boolean
-    page: Int
-    pageSize: Int
-    showAllPlaces: Boolean
-    sort: String
-    text: String
-  ): PlaceListResponse!
+  placeList(dataSource: String, divisions: [String], hasUpcomingEvents: Boolean, page: Int, pageSize: Int, showAllPlaces: Boolean, sort: String, text: String): PlaceListResponse!
 }
 
 type StaticPage {
@@ -255,57 +150,6 @@ type Subscription {
 enum EventTypeId {
   General
   Course
-}
-
-type AboutPagesResponse {
-  data: [StaticPage!]!
-}
-
-type AccessibilityPagesResponse {
-  data: [StaticPage!]!
-}
-
-type CollectionListResponse {
-  data: [CollectionDetails!]!
-}
-
-type CollectionDetails {
-  id: ID!
-  boxColor: String
-  contentType: Int
-  curatedEvents: [String!]!
-  curatedEventsTitle: LocalizedObject
-  depth: Int
-  description: LocalizedObject
-  draftTitle: String
-  eventListQuery: LocalizedObject
-  eventListTitle: LocalizedObject
-  expireAt: String
-  expired: Boolean
-  firstPublishedAt: String
-  goLiveAt: String
-  hasUnpublishedChanges: Boolean
-  heroImage: CmsImage
-  keywords: LocalizedCmsKeywords
-  lastPublishedAt: String
-  latestRevisionCreatedAt: String
-  linkText: LocalizedObject
-  linkUrl: LocalizedObject
-  live: Boolean
-  liveRevision: Int
-  locked: Boolean
-  lockedAt: String
-  lockedBy: Int
-  numchild: Int
-  owner: Int
-  path: String
-  searchDescription: String
-  seoTitle: String
-  showInMenus: Boolean
-  slug: ID!
-  socialMediaDescription: LocalizedObject
-  title: LocalizedObject!
-  urlPath: String
 }
 
 type EventListResponse {
@@ -408,7 +252,9 @@ type KeywordListResponse {
   data: [Keyword!]!
 }
 
-type Keyword @shareable {
+type Keyword
+  @shareable
+{
   id: ID
   altLabels: [String]
   createdTime: String
@@ -425,43 +271,6 @@ type Keyword @shareable {
   internalContext: String
   internalType: String
 }
-
-#type LandingPagesResponse {
-#  data: [LandingPage!]!
-#}
-
-#type LandingPage {
-#  id: ID!
-#  topBanner: BannerPage
-#  bottomBanner: BannerPage
-#  path: String
-#  depth: Int
-#  numchild: Int
-#  draftTitle: String
-#  slug: String
-#  live: Boolean
-#  hasUnpublishedChanges: Boolean
-#  urlPath: String
-#  seoTitle: String
-#  showInMenus: Boolean
-#  searchDescription: String
-#  goLiveAt: String
-#  expireAt: String
-#  expired: Boolean
-#  locked: Boolean
-#  lockedAt: String
-#  firstPublishedAt: String
-#  lastPublishedAt: String
-#  latestRevisionCreatedAt: String
-#  title: LocalizedObject
-#  keywords: LocalizedCmsKeywords
-#  metaInformation: LocalizedObject
-#  pageTitle: LocalizedObject
-#  contentType: Int
-#  owner: Int
-#  lockedBy: Int
-#  liveRevision: Int
-#}
 
 type NeighborhoodListResponse {
   meta: Meta!

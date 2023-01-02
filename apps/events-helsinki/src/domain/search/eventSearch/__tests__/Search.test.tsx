@@ -138,6 +138,21 @@ it.todo('should change search query after clicking autosuggest menu item');
 //   });
 // });
 
+it('should change search query after checking only children events checkbox', async () => {
+  const { router } = renderComponent();
+
+  const onlyChildrenEventsCheckbox = await screen.findByRole('checkbox', {
+    name: /näytä vain lastentapahtumat/i,
+  });
+
+  await userEvent.click(onlyChildrenEventsCheckbox);
+
+  expect(router).toMatchObject({
+    pathname,
+    query: { onlyChildrenEvents: 'true', text: 'jazz' },
+  });
+});
+
 it('should change search query after checking only evening events checkbox', async () => {
   const { router } = renderComponent();
 

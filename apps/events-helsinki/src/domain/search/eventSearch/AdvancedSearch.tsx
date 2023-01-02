@@ -214,6 +214,17 @@ const AdvancedSearch: React.FC<Props> = ({
     goToSearch(search);
   };
 
+  const handleOnlyChildrenEventChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const search = getSearchQuery({
+      ...searchFilters,
+      onlyChildrenEvents: e.target.checked,
+    });
+
+    goToSearch(search);
+  };
+
   const clearInputValues = () => {
     setCategoryInput('');
     // setDivisionInput("");
@@ -327,15 +338,6 @@ const AdvancedSearch: React.FC<Props> = ({
             </div>
             <div className={styles.rowWrapper}>
               <div className={styles.row}>
-                {/* <div>
-                  <Checkbox
-                    className={styles.checkbox}
-                    checked={onlyChildrenEvents}
-                    id={EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS}
-                    label={t("search.checkboxOnlyChildrenEvents")}
-                    onChange={handleOnlyChildrenEventChange}
-                  />
-                </div> */}
                 <div>
                   <Checkbox
                     className={styles.checkbox}
@@ -352,6 +354,19 @@ const AdvancedSearch: React.FC<Props> = ({
                     id={EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS}
                     label={t('search.checkboxOnlyEveningEvents')}
                     onChange={handleOnlyEveningEventChange}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className={styles.rowWrapper}>
+              <div className={styles.row}>
+                <div>
+                  <Checkbox
+                    className={styles.checkbox}
+                    checked={onlyChildrenEvents}
+                    id={EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS}
+                    label={t('search.checkboxOnlyChildrenEvents')}
+                    onChange={handleOnlyChildrenEventChange}
                   />
                 </div>
                 <div>

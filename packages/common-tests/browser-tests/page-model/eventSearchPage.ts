@@ -69,6 +69,7 @@ class EventSearchPage {
     // eslint-disable-next-line no-console
     console.info('EventSearchPage: doSuccessfulSearch');
     await t.typeText(this.autoSuggestInput, this.searchText);
+    await t.pressKey('tab');
     await t.click(this.searchButton);
     await this.expectSearchResults();
   }

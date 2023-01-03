@@ -6,6 +6,10 @@ $buttonWidth: 180px;
   fill: var(--color-white);
 }
 
+.mapView {
+  padding: 0 !important;
+}
+
 .searchContainer {
   color: var(--color-primary-black);
   background-color: var(--color-theme-background);

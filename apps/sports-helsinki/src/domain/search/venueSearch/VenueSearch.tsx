@@ -1,4 +1,5 @@
 import type { ParsedUrlQueryInput } from 'querystring';
+import classNames from 'classnames';
 import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import {
   buildQueryFromObject,
@@ -33,6 +34,7 @@ export type SearchComponentProps = {
   'data-testid'?: string;
   korosBottom?: boolean;
   searchUtilities?: React.ReactNode;
+  className?: string;
 } & SimpleVenueSearchFormProps;
 
 export const SimpleVenueSearchForm: React.FC<SimpleVenueSearchFormProps> = ({
@@ -144,6 +146,7 @@ const SimpleVenueSearch: React.FC<SearchComponentProps> = ({
   'data-testid': dataTestId,
   korosBottom = false,
   searchUtilities = null,
+  className,
   ...delegatedSimpleVenueSearchFormProps
 }) => {
   return (
@@ -151,15 +154,15 @@ const SimpleVenueSearch: React.FC<SearchComponentProps> = ({
       <PageSection
         korosBottom={korosBottom}
         korosBottomClassName={styles.searchContainerKoros}
-        className={`${styles.searchContainer} ${
-          !korosBottom && styles.noKoros
-        }`}
+        className={classNames(styles.searchContainer, className, {
+          [styles.noKoros]: !korosBottom,
+        })}
         data-testid={dataTestId}
       >
         <ContentContainer
-          className={`${styles.contentContainer} ${
-            !korosBottom && styles.noKoros
-          }`}
+          className={classNames(styles.contentContainer, {
+            [styles.noKoros]: !korosBottom,
+          })}
         >
           <SimpleVenueSearchForm {...delegatedSimpleVenueSearchFormProps} />
         </ContentContainer>

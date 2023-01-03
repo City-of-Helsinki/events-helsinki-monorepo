@@ -82,17 +82,18 @@ export const removeQueryParamsFromRouter = (
   const queryObject = { ...router.query };
 
   if (removeList.length > 0) {
-    removeList.forEach((param) => delete router.query[param]);
+    removeList.forEach((param) => delete queryObject[param]);
   } else {
     // Remove all
     Object.keys(queryObject).forEach((param) => delete queryObject[param]);
   }
+  const cleanedUrl = getLocalizedCmsItemUrl(
+    forwardPath,
+    queryObject,
+    (router.locale || router.defaultLocale) as Language
+  );
   router.replace(
-    getLocalizedCmsItemUrl(
-      forwardPath,
-      {},
-      (router.locale || router.defaultLocale) as Language
-    ),
+    cleanedUrl,
     undefined,
     /**
      * Do not refresh the page

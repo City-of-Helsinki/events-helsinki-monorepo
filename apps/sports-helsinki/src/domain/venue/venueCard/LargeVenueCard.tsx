@@ -1,5 +1,4 @@
 import {
-  addParamsToQueryString,
   useLocale,
   getLargeEventCardId,
   useVenueTranslation,
@@ -37,22 +36,19 @@ const LargeVenueCard: React.FC<Props> = ({
   const { t } = useVenueTranslation();
   const router = useRouter();
   const locale = useLocale();
-  const queryString = addParamsToQueryString(
-    router.asPath.split('?')[1] ?? '',
-    {
-      returnPath: `${getLocalizedCmsItemUrl(
-        ROUTES.SEARCH,
-        {},
-        locale
-      )}?venueId=${id}`,
-    }
-  );
 
-  const venueUrl = `${getLocalizedCmsItemUrl(
+  const venueUrl = getLocalizedCmsItemUrl(
     ROUTES.VENUES,
-    { venueId: id },
+    {
+      venueId: id,
+      returnPath: getLocalizedCmsItemUrl(
+        ROUTES.SEARCH,
+        { ...router.query, venueId: id },
+        locale
+      ),
+    },
     locale
-  )}${queryString}`;
+  );
 
   return (
     <LinkBox

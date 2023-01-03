@@ -9,6 +9,7 @@ import {
   useEventListQuery,
   MAIN_CONTENT_ID,
   EventTypeId,
+  useEventListLazyQuery,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
@@ -19,25 +20,33 @@ import { toast } from 'react-toastify';
 import EventList from '../../../common-events/components/eventList/EventList';
 import { SEARCH_ROUTES } from '../../../constants';
 import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
+import type {
+  CombinedSearchProps,
+  SearchResultItemsCount,
+} from '../combinedSearch/CombinedSearch';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 import { getEventSearchVariables, getNextPage } from './utils';
 
 const SearchPage: React.FC<{
-  SearchComponent: React.FC<{
-    scrollToResultList: () => void;
-    'data-testid'?: string;
-  }>;
+  SearchComponent: React.FC<CombinedSearchProps>;
   pageTitle: string;
 }> = ({ SearchComponent, pageTitle }) => {
   const { t } = useSearchTranslation();
   const router = useRouter();
-  const params: { place?: string; eventType?: string } = router.query;
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
   const isSmallScreen = useIsSmallScreen();
-
   const { meta } = useConfig();
+
+  const params: { place?: string; eventType?: string } = router.query;
+  const eventTypes = Object.keys(EventTypeId);
+  const primarySearchEventType = eventTypes.find(
+    (e) => (params.eventType as EventTypeId) === e
+  ) as EventTypeId;
+  const secondarySearchEventType = eventTypes.find(
+    (e) => (params.eventType as EventTypeId) !== e
+  ) as EventTypeId;
 
   const eventFilters = React.useMemo(() => {
     const searchParams = new URLSearchParams(qs.stringify(router.query));
@@ -48,23 +57,50 @@ const SearchPage: React.FC<{
       place: params.place,
       sortOrder: EVENT_SORT_OPTIONS.END_TIME,
       superEventType: ['umbrella', 'none'],
-      eventType:
-        params.eventType && EventTypeId[params.eventType as EventTypeId]
-          ? [EventTypeId[params.eventType as EventTypeId]]
-          : [EventTypeId.Course],
+      eventType: [primarySearchEventType],
     });
     return variables;
-  }, [router.query, params.place, params.eventType]);
+  }, [router.query, params.place, primarySearchEventType]);
 
+  // Query for the primary search / active search tab
   const {
     data: eventsData,
     fetchMore,
     loading: isLoadingEvents,
   } = useEventListQuery({
+    skip: !primarySearchEventType,
     ssr: false,
     variables: eventFilters,
   });
+
+  // Query for the count of the secondary search tab
+  const [getSecondarySearchResults, { data: secondarySearchData }] =
+    useEventListLazyQuery({
+      ssr: false,
+      variables: {
+        ...eventFilters,
+        // Query with the another type
+        eventType: [secondarySearchEventType],
+      },
+    });
+
+  React.useEffect(() => {
+    if (eventsData && !isLoadingEvents) getSecondarySearchResults();
+  }, [eventsData, getSecondarySearchResults, isLoadingEvents]);
+
+  // The primary data that is shown in the list
   const eventsList = eventsData?.eventList;
+
+  // search status is used to give data for search utilities
+  const searchStatus: SearchResultItemsCount = Object.assign(
+    // Initial value is null for each search type
+    { [EventTypeId.Course]: null, [EventTypeId.General]: null, Venue: null },
+    // Set the actual valu for search types
+    {
+      [primarySearchEventType]: eventsData?.eventList.meta.count,
+      [secondarySearchEventType]: secondarySearchData?.eventList.meta.count,
+    }
+  );
 
   const handleLoadMore = async () => {
     const page = eventsData?.eventList.meta
@@ -138,6 +174,7 @@ const SearchPage: React.FC<{
       <SearchComponent
         scrollToResultList={scrollToResultList}
         data-testid="searchContainer"
+        searchStatus={searchStatus}
       />
       <main id={MAIN_CONTENT_ID}>
         <div
@@ -154,7 +191,9 @@ const SearchPage: React.FC<{
           </SrOnly>
           <LoadingSpinner
             className={styles.spinner}
-            isLoading={!isFetchingMore && isLoadingEvents}
+            isLoading={
+              (!isFetchingMore && isLoadingEvents) || !eventsList?.data
+            }
           >
             {eventsList && (
               <SearchResultsContainer

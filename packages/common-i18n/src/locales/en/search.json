@@ -4,6 +4,10 @@
   "buttonClearFilters": "Clear filters",
   "errorLoadMore": "Failed to load events",
   "search": {
+    "searchType": {
+      "courseEventType": "Courses",
+      "generalEventType": "General"
+    },
     "buttonSearch": "Search",
     "checkboxOnlyChildrenEvents": "Show only events for children",
     "checkboxOnlyEveningEvents": "Show only evening events",

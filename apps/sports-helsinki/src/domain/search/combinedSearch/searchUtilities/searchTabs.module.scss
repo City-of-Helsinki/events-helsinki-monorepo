@@ -1,0 +1,35 @@
+.tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--spacing-m);
+
+  & > button {
+    --border-color: var(--color-black-80, transparent);
+    margin: 0 0 0;
+    color: var(--color-black-80);
+  }
+
+  .secondaryButton {
+    --color: var(--color-black-80);
+    --color-hover: var(--color-black-80);
+    --color-focus: var(--color-black-80);
+    --color-hover-focus: var(--color-black-80);
+
+    --border-color: var(--color-black-80);
+    --border-color-hover: var(--color-black-80);
+    --border-color-focus: var(--color-black-80);
+    --border-color-hover-focus: var(--color-black-80);
+
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: var(--color-black-80);
+      color: var(--color-white);
+    }
+  }
+
+  .active {
+    background-color: var(--color-black-80);
+    color: var(--color-white);
+  }
+}

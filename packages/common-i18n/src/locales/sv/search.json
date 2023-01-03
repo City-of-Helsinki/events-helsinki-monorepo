@@ -4,6 +4,10 @@
   "buttonClearFilters": "Töm sökfilter",
   "errorLoadMore": "Det gick inte att ladda evenemangen",
   "search": {
+    "searchType": {
+      "courseEventType": "Hobbyer",
+      "generalEventType": "Evenemangen"
+    },
     "buttonSearch": "Sök",
     "checkboxOnlyChildrenEvents": "Visa endast evenemang för barn",
     "checkboxOnlyEveningEvents": "Visa endast kvällsprogram",

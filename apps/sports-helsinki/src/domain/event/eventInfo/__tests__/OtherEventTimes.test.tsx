@@ -77,7 +77,7 @@ const getEventTimesMocks = ({
   createOtherEventTimesRequestAndResultMocks({
     superEventId,
     response,
-    variables,
+    variables: { ...variables, eventType: [EventTypeId.Course] },
   });
 
 const firstLoadMock = getEventTimesMocks({

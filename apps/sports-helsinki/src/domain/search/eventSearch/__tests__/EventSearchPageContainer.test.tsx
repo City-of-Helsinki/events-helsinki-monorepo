@@ -110,8 +110,8 @@ afterAll(() => {
   clear();
 });
 
-const pathname = '/haku';
-const search = '?text=jazz';
+const pathname = '/kurssihaku';
+const search = '?text=jazz&eventType=Course';
 const testRoute = `${pathname}${search}`;
 const routes = [testRoute];
 

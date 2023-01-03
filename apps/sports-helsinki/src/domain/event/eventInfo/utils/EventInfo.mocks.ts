@@ -125,10 +125,13 @@ export const getSubEventsMocks = ({
 
 export const firstSubEventsLoadMock = getSubEventsMocks({
   response: subEventsResponse,
+  variables: {
+    eventType: [EventTypeId.Course],
+  },
 });
 
 export const secondSubEventsLoadMock = getSubEventsMocks({
-  variables: { page: 2 },
+  variables: { page: 2, eventType: [EventTypeId.Course] },
   response: subEventsLoadMoreResponse,
 });
 

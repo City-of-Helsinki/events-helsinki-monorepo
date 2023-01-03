@@ -48,10 +48,7 @@ const similarEventQueryVariables = {
   pageSize: 100,
   allOngoing: true,
   keywordOrSet2: [''],
-  keywordOrSet3: [''],
   language: undefined,
-  audienceMinAgeLt: event.audienceMinAge, // LT - Really?
-  audienceMaxAgeGt: event.audienceMaxAge, // GT - Really?
 };
 
 const mocks = [

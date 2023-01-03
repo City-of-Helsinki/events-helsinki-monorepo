@@ -16,11 +16,10 @@ describe('getSearchQuery function', () => {
     expect(
       getSearchQuery({
         ...EVENT_DEFAULT_SEARCH_FILTERS,
-        categories: ['category1', 'category2'],
         dateTypes: ['type1', 'type2'],
         text: ['test'],
       })
-    ).toBe('?categories=category1,category2&dateTypes=type1,type2&text=test');
+    ).toBe('?dateTypes=type1,type2&text=test');
 
     expect(
       getSearchQuery({

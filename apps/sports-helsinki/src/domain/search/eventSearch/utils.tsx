@@ -11,7 +11,6 @@ import {
   DATE_TYPES,
   formatDate,
   getUrlParamAsArray,
-  EventTypeId,
 } from 'events-helsinki-components';
 import type {
   FilterType,
@@ -19,36 +18,24 @@ import type {
   Meta,
   QueryEventListArgs,
   EventFields,
+  EventTypeId,
 } from 'events-helsinki-components';
 import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
-
-import AppConfig from '../../app/AppConfig';
-import type {
-  COURSE_CATEGORIES,
-  EVENT_SORT_OPTIONS,
-  COURSE_HOBBY_TYPES,
-  SPORTS_CATEGORIES,
-} from './constants';
+import type { EVENT_SORT_OPTIONS, SPORTS_CATEGORIES } from './constants';
 import {
-  EVENT_SEARCH_FILTERS,
-  courseCategories,
-  MAPPED_PLACES,
   CATEGORY_CATALOG,
+  EVENT_SEARCH_FILTERS,
+  MAPPED_PLACES,
   MAPPED_COURSE_CATEGORIES,
-  courseHobbyTypes,
-  MAPPED_COURSE_HOBBY_TYPES,
   sportsCategoryData,
 } from './constants';
 import type {
   CategoryOption,
   Filters,
-  HobbyTypeOption,
   MappedFilters,
   SearchCategoryOption,
   SearchCategoryType,
-  SearchHobbyType,
-  SearchHobbyTypeOption,
 } from './types';
 
 export const MIN_AGE = 0;
@@ -72,44 +59,6 @@ export const getCategoryOptions = (
     seasons,
   };
 };
-
-export const sortExtendedHobbyTypeOptions = (
-  a: HobbyTypeOption,
-  b: HobbyTypeOption
-) => (a.text > b.text ? 1 : b.text > a.text ? -1 : 0);
-
-export const getHobbyTypeOptions = (
-  hobbyType: SearchHobbyType,
-  hobbyTypeOption: SearchHobbyTypeOption,
-  t: TFunction
-): HobbyTypeOption => {
-  const { icon, labelKey } = hobbyTypeOption;
-  return {
-    icon,
-    text: t(labelKey),
-    value: hobbyType,
-  };
-};
-
-export const getEventCategoryOptions = (
-  t: TFunction,
-  categories: COURSE_CATEGORIES[] = CATEGORY_CATALOG[EventTypeId.Course].default
-): CategoryOption[] =>
-  categories
-    .map((category) =>
-      getCategoryOptions(category, courseCategories[category], t)
-    )
-    .sort(sortExtendedCategoryOptions);
-
-export const getCourseHobbyTypeOptions = (
-  t: TFunction,
-  hobbytTypes: COURSE_HOBBY_TYPES[] = CATEGORY_CATALOG.hobbyTypes.default
-): HobbyTypeOption[] =>
-  hobbytTypes
-    .map((hobbyType) =>
-      getHobbyTypeOptions(hobbyType, courseHobbyTypes[hobbyType], t)
-    )
-    .sort(sortExtendedHobbyTypeOptions);
 
 export const getSportsCategoryOptions = (
   t: TFunction,
@@ -187,6 +136,7 @@ export const getEventSearchVariables = ({
   sortOrder,
   superEventType,
   place,
+  eventType,
 }: {
   include: string[];
   language?: AppLanguage;
@@ -195,32 +145,17 @@ export const getEventSearchVariables = ({
   sortOrder: EVENT_SORT_OPTIONS;
   superEventType: string[];
   place?: string;
+  eventType?: (EventTypeId.Course | EventTypeId.General)[];
   // eslint-disable-next-line sonarjs/cognitive-complexity
 }): QueryEventListArgs => {
-  const {
-    categories,
-    hobbyTypes,
-    dateTypes,
-    divisions,
-    isFree,
-    keyword,
-    keywordNot,
-    onlyChildrenEvents,
-    onlyEveningEvents,
-    // onlyRemoteEvents,
-    places,
-    publisher,
-    text,
-    suitableFor,
-    audienceMinAgeLt,
-    audienceMaxAgeGt,
-  } = getSearchFilters(params);
+  const { keyword, keywordNot, places, publisher, text, dateTypes, isFree } =
+    getSearchFilters(params);
   const pathPlace = place && MAPPED_PLACES[place.toLowerCase()];
 
   if (pathPlace) {
     places.push(pathPlace);
   }
-  const startsAfter = onlyEveningEvents ? '16' : undefined;
+
   let { start, end } = getFilterDates({
     dateTypes,
     endTime: params.get(EVENT_SEARCH_FILTERS.END),
@@ -237,29 +172,7 @@ export const getEventSearchVariables = ({
 
   const keywordAnd: string[] = [];
 
-  if (onlyChildrenEvents) {
-    keywordAnd.push('yso:p4354');
-  }
-
-  const getMappedPropertyValues = (
-    list: string[],
-    map: Record<string, string[]>
-  ) =>
-    list?.reduce<string[]>(
-      (prev, val: string) => prev.concat(map[val] ?? []),
-      []
-    );
-
-  const mappedCategories = getMappedPropertyValues(
-    categories,
-    MAPPED_COURSE_CATEGORIES
-  );
-  const mappedHobbyTypes = getMappedPropertyValues(
-    hobbyTypes,
-    MAPPED_COURSE_HOBBY_TYPES
-  );
-
-  const hasLocation = !isEmpty(divisions) || !isEmpty(places);
+  const hasLocation = !isEmpty(places);
 
   const getSearchParam = () => {
     const hasText = !isEmpty(text);
@@ -274,17 +187,13 @@ export const getEventSearchVariables = ({
       return { allOngoing: true };
     }
   };
-  // const divisionParam = hasLocation && { division: divisions.sort() };
 
   return {
     ...getSearchParam(),
-    // ...divisionParam,
+    isFree: isFree || undefined,
     end,
     include,
-    isFree: isFree || undefined,
-    // internetBased: onlyRemoteEvents || undefined,
-    keywordOrSet2: [...(keyword ?? []), ...mappedCategories],
-    keywordOrSet3: [...(keyword ?? []), ...mappedHobbyTypes],
+    keywordOrSet2: [...(keyword ?? [])],
     keywordAnd,
     keywordNot,
     language,
@@ -293,12 +202,8 @@ export const getEventSearchVariables = ({
     publisher,
     sort: sortOrder,
     start,
-    startsAfter,
     superEventType,
-    suitableFor,
-    eventType: AppConfig.supportedEventTypes,
-    audienceMinAgeLt,
-    audienceMaxAgeGt,
+    eventType,
   };
 };
 
@@ -345,19 +250,10 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
   }
 
   return {
-    categories: getUrlParamAsArray(
-      searchParams,
-      EVENT_SEARCH_FILTERS.CATEGORIES
-    ),
-    hobbyTypes: getUrlParamAsArray(
-      searchParams,
-      EVENT_SEARCH_FILTERS.HOBBY_TYPES
-    ),
     dateTypes: getUrlParamAsArray(
       searchParams,
       EVENT_SEARCH_FILTERS.DATE_TYPES
     ),
-    divisions: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.DIVISIONS),
     end,
     isFree: searchParams.get(EVENT_SEARCH_FILTERS.IS_FREE) === 'true',
     keyword: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.KEYWORD),
@@ -365,21 +261,14 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
       searchParams,
       EVENT_SEARCH_FILTERS.KEYWORD_NOT
     ),
-    // onlyChildrenEvents:
-    //   searchParams.get(EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS) === 'true',
-    // onlyEveningEvents:
-    //   searchParams.get(EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS) === 'true',
-    // onlyRemoteEvents:
-    //   searchParams.get(EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS) === 'true',
     places: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.PLACES),
     publisher: searchParams.get(EVENT_SEARCH_FILTERS.PUBLISHER),
     start,
     text: freeText,
-    suitableFor: normalizeSuitableFor(
-      getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.SUITABLE, false)
+    eventType: getUrlParamAsArray(
+      searchParams,
+      EVENT_SEARCH_FILTERS.EVENT_TYPE
     ),
-    audienceMinAgeLt: searchParams.get(EVENT_SEARCH_FILTERS.MIN_AGE) || '',
-    audienceMaxAgeGt: searchParams.get(EVENT_SEARCH_FILTERS.MAX_AGE) || '',
   };
 };
 
@@ -413,9 +302,6 @@ export const getSearchQuery = (filters: Filters): string => {
     ...filters,
     end: formatDate(filters.end, 'yyyy-MM-dd'),
     isFree: filters.isFree ? true : undefined,
-    onlyChildrenEvents: filters.onlyChildrenEvents ? true : undefined,
-    onlyEveningEvents: filters.onlyEveningEvents ? true : undefined,
-    onlyRemoteEvents: filters.onlyRemoteEvents ? true : undefined,
     start: formatDate(filters.start, 'yyyy-MM-dd'),
   };
 

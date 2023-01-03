@@ -1,6 +1,7 @@
 import {
   EventDetailsDocument,
   EventListDocument,
+  EventTypeId,
 } from 'events-helsinki-components';
 import type { EventFields } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -28,12 +29,11 @@ const name = 'Event title';
 const description = 'Event descirption';
 const startTime = '2020-10-05T07:00:00.000000Z';
 const endTime = '2020-10-05T10:00:00.000000Z';
-
 const audience = ['Aikuiset', 'Lapset'];
 const keywords = [
-  { name: 'Avouinti', id: 'keyword1' },
-  { name: 'Eläimet', id: 'keyword2' },
-  { name: 'Grillaus', id: 'keyword3' },
+  { name: 'Urheilu', id: 'yso:p1963' },
+  { name: 'Liikuntapalvelut', id: 'yso:p9824' },
+  { name: 'Jalkapallo', id: 'yso:p6409' },
 ];
 const superEventId = 'harrastushaku:13433';
 const otherEventTimesCount = 10;
@@ -69,9 +69,10 @@ const otherEventsRequest = {
   query: EventListDocument,
   variables: {
     include: ['in_language', 'keywords', 'location', 'audience'],
-    sort: 'start_time',
+    sort: 'end_time',
     start: 'now',
     superEvent: superEventId,
+    eventType: [EventTypeId.Course],
   },
 };
 const request = {
@@ -98,12 +99,20 @@ const mocks = [
   },
   createOtherEventTimesRequestAndResultMocks({
     superEventId,
+    variables: { eventType: [EventTypeId.Course] },
+    response: fakeEvents(otherEventTimesCount),
+  }),
+  createOtherEventTimesRequestAndResultMocks({
+    superEventId: id,
+    variables: { eventType: [EventTypeId.Course] },
     response: fakeEvents(otherEventTimesCount),
   }),
   createEventListRequestAndResultMocks({
     variables: {
       allOngoing: true,
       keywordOrSet2: eventKeywordIds,
+      eventType: [EventTypeId.Course],
+      pageSize: 100,
     },
     response: similarEvents,
   }),
@@ -148,8 +157,9 @@ it('should render info and load other events + similar events', async () => {
   );
 
   // click show other times
-  // eslint-disable-next-line testing-library/no-unnecessary-act
-  await userEvent.click(screen.getByRole('button', { name: 'Näytä kaikki' }));
+  await userEvent.click(
+    screen.getByRole('button', { name: 'Näytä kaikki muut ajat' })
+  );
 
   expect(screen.getByTestId(otherEventTimesListTestId).children).toHaveLength(
     otherEventTimesCount
@@ -241,13 +251,13 @@ it('should link to events search when clicking tags', async () => {
     expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
   });
 
-  const tagLink = await screen.findByRole('link', { name: 'Avouinti' });
+  const tagLink = await screen.findByRole('link', { name: 'Jalkapallo' });
 
   // click keyword / tag
   await userEvent.click(tagLink);
 
   expect(router).toMatchObject({
     pathname: '/haku',
-    asPath: '/haku?text=Avouinti',
+    asPath: '/haku?text=Jalkapallo',
   });
 });

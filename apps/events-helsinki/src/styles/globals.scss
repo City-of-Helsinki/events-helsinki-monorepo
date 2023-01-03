@@ -22,10 +22,12 @@ main {
 .articlesArchive {
   button,
   button:active {
+    border-color: var(--color-success) !important;
     background-color: var(--color-success);
   }
   button:hover,
   button:focus {
+    border-color: var(--color-success-dark) !important;
     background-color: var(--color-success-dark);
   }
 }

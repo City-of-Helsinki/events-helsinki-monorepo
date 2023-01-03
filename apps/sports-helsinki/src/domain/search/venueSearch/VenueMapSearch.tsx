@@ -1,6 +1,6 @@
 import { SEARCH_ROUTES } from '../../../constants';
+import styles from './search.module.scss';
 import SimpleVenueSearch from './VenueSearch';
-
 export const searchContainerDataTestId = 'mapSearchContainer';
 
 const SimpleVenueMapSearch = () => (
@@ -10,6 +10,7 @@ const SimpleVenueMapSearch = () => (
     searchUtilities={null}
     korosBottom={false}
     showTitle={false}
+    className={styles.mapView}
   />
 );
 

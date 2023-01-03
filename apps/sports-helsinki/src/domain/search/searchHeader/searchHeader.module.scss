@@ -4,7 +4,7 @@
 .searchHeader {
   --background-color: #{$color-engel-medium-light};
   grid-column: 1 / -1 !important;
-
+  position: relative;
   // Give increased z-index to show mobile actions
   z-index: 2;
 

@@ -1,4 +1,4 @@
-import { getDateRangeStr } from 'events-helsinki-components';
+import { EventTypeId, getDateRangeStr } from 'events-helsinki-components';
 import type {
   EventDetails,
   EventFields,
@@ -374,6 +374,7 @@ describe('subEvents', () => {
     const middleAsSuperEventMock = getSubEventsMocks({
       variables: {
         superEvent: event.id,
+        eventType: [EventTypeId.Course],
       },
       response: {
         ...subEventsResponse,
@@ -388,6 +389,7 @@ describe('subEvents', () => {
     const superEventMock = getSubEventsMocks({
       variables: {
         superEvent: 'super:123',
+        eventType: [EventTypeId.Course],
       },
       response: subEventsResponse,
     });

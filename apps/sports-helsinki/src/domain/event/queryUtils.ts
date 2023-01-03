@@ -12,7 +12,6 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import AppConfig from '../app/AppConfig';
 import {
   EVENT_SEARCH_FILTERS,
   EVENT_SORT_OPTIONS,
@@ -31,8 +30,6 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         .map((category) => category?.id) // collect ids
         .filter((id) => id != null) // remove nulls and undefined ones
         .join(), // make a string
-      [EVENT_SEARCH_FILTERS.MIN_AGE]: event.audienceMinAge ?? '',
-      [EVENT_SEARCH_FILTERS.MAX_AGE]: event.audienceMaxAge ?? '',
     };
 
     return getEventSearchVariables({
@@ -42,6 +39,7 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
       params: new URLSearchParams(searchParams),
       sortOrder: EVENT_SORT_OPTIONS.END_TIME,
       superEventType: ['umbrella', 'none'],
+      eventType: event.typeId ? [event.typeId] : undefined,
     });
   }, [event]);
 };
@@ -114,7 +112,7 @@ const useOtherEventTimesVariables = (event: EventFields) => {
       sort: EVENT_SORT_OPTIONS.END_TIME,
       start: 'now',
       superEvent: superEventId,
-      eventType: AppConfig.supportedEventTypes,
+      eventType: event.typeId ? [event.typeId] : undefined,
     }),
     [superEventId]
   );
@@ -130,7 +128,7 @@ export const useSubEventsQueryVariables = (
       sort: EVENT_SORT_OPTIONS.END_TIME,
       start: 'now',
       superEvent: event.id,
-      eventType: AppConfig.supportedEventTypes,
+      eventType: event.typeId ? [event.typeId] : undefined,
       include: ['in_language', 'keywords', 'location', 'audience'],
     }),
     [event.id]

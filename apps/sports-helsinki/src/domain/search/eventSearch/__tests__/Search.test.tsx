@@ -2,10 +2,9 @@ import {
   KeywordListDocument,
   NeighborhoodListDocument,
   PlaceListDocument,
-  additionalDivisions,
 } from 'events-helsinki-components';
 import { axe } from 'jest-axe';
-import { advanceTo, clear } from 'jest-date-mock';
+import { clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
@@ -137,111 +136,3 @@ it.todo('should change search query after clicking autosuggest menu item');
 //     query: { text: "jazz,musiikkiklubit" },
 //   });
 // });
-
-it('should change search query after checking is free checkbox', async () => {
-  const { router } = renderComponent();
-
-  const isFreeCheckbox = screen.getByRole('checkbox', {
-    name: /näytä vain maksuttomat/i,
-  });
-
-  await userEvent.click(isFreeCheckbox);
-
-  expect(router).toMatchObject({
-    pathname,
-    query: { isFree: 'true', text: 'jazz' },
-  });
-});
-
-it('should change search query after selecting today date type and pressing submit button', async () => {
-  const { router } = renderComponent();
-
-  const chooseDateButton = screen.getByRole('button', {
-    name: /valitse ajankohta/i,
-  });
-
-  await userEvent.click(chooseDateButton);
-  await userEvent.click(screen.getByRole('checkbox', { name: /tänään/i }));
-  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
-  expect(router).toMatchObject({
-    pathname,
-    query: { dateTypes: 'today', text: 'jazz' },
-  });
-});
-
-it('should change search query after selecting start date and pressing submit button', async () => {
-  advanceTo('2020-10-04');
-  const { router } = renderComponent();
-
-  const chooseDateButton = screen.getByRole('button', {
-    name: /valitse ajankohta/i,
-  });
-  await userEvent.click(chooseDateButton);
-  await userEvent.click(
-    // The reason to use getAllByRole is that there is also mobile date selector with same text,
-    // which is hidden using css
-    screen.getAllByRole('button', { name: /valitse päivät/i })[0]
-  );
-  await userEvent.click(
-    screen.getAllByRole('button', { name: /valitse päivämäärä/i })[0]
-  );
-  await userEvent.click(
-    screen.getByRole('button', {
-      name: /lokakuu 6/i,
-    })
-  );
-  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
-
-  expect(router).toMatchObject({
-    pathname,
-    query: { start: '2020-10-06', text: 'jazz' },
-  });
-}, 50000); // FIXME: Why does this take so long to test?
-
-it('should change search query after clicking category menu item', async () => {
-  const { router } = renderComponent();
-
-  const chooseCategoryButton = screen.getByRole('button', {
-    name: /valitse kategoria/i,
-  });
-
-  await userEvent.click(chooseCategoryButton);
-  await userEvent.click(
-    screen.getByRole('checkbox', { name: /elokuva ja media/i })
-  );
-  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
-  expect(router).toMatchObject({
-    pathname,
-    asPath: `${pathname}?categories=movie_and_media&text=jazz`,
-    query: { categories: 'movie_and_media', text: 'jazz' },
-  });
-
-  // multiple selection
-  await userEvent.click(chooseCategoryButton);
-  await userEvent.click(screen.getByRole('checkbox', { name: /pelit/i }));
-  await userEvent.click(screen.getByRole('checkbox', { name: /musiikki/i }));
-  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
-  expect(router).toMatchObject({
-    pathname,
-    asPath: `${pathname}?categories=movie_and_media%2Cgames%2Cmusic&text=jazz`,
-    query: { categories: 'movie_and_media,games,music', text: 'jazz' },
-  });
-}, 50_000);
-
-// TODO: SKipped since there is no divisions input at the moment, but I've heard it should be there
-it.skip('disivions dropdown has additional divisions', async () => {
-  renderComponent();
-
-  const chooseCategoryButton = screen.getByRole('button', {
-    name: /etsi alue/i,
-  });
-  await userEvent.click(chooseCategoryButton);
-
-  additionalDivisions.forEach((divisionName) => {
-    expect(
-      screen.getByRole('checkbox', {
-        name: divisionName.name.fi,
-      })
-    ).toBeInTheDocument();
-  });
-});

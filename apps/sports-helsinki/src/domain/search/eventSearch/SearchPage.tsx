@@ -8,6 +8,7 @@ import {
   getLargeEventCardId,
   useEventListQuery,
   MAIN_CONTENT_ID,
+  EventTypeId,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
@@ -32,8 +33,7 @@ const SearchPage: React.FC<{
 }> = ({ SearchComponent, pageTitle }) => {
   const { t } = useSearchTranslation();
   const router = useRouter();
-  const params: { place?: string } = router.query;
-
+  const params: { place?: string; eventType?: string } = router.query;
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
   const isSmallScreen = useIsSmallScreen();
 
@@ -48,9 +48,13 @@ const SearchPage: React.FC<{
       place: params.place,
       sortOrder: EVENT_SORT_OPTIONS.END_TIME,
       superEventType: ['umbrella', 'none'],
+      eventType:
+        params.eventType && EventTypeId[params.eventType as EventTypeId]
+          ? [EventTypeId[params.eventType as EventTypeId]]
+          : [EventTypeId.Course],
     });
     return variables;
-  }, [router.query, params.place]);
+  }, [router.query, params.place, params.eventType]);
 
   const {
     data: eventsData,
@@ -60,7 +64,6 @@ const SearchPage: React.FC<{
     ssr: false,
     variables: eventFilters,
   });
-
   const eventsList = eventsData?.eventList;
 
   const handleLoadMore = async () => {

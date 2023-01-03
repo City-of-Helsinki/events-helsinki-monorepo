@@ -8,12 +8,8 @@ import type {
   QueryEventListArgs,
 } from 'events-helsinki-components';
 import { EventListDocument, EventTypeId } from 'events-helsinki-components';
-import AppConfig from '../../../src/domain/app/AppConfig';
 
 export const baseVariables = {
-  audienceMinAgeLt: '',
-  audienceMaxAgeGt: '',
-  suitableFor: [],
   end: '',
   include: ['keywords', 'location'],
   isFree: undefined,
@@ -24,14 +20,12 @@ export const baseVariables = {
   publisher: null,
   sort: 'end_time',
   start: 'now',
-  startsAfter: undefined,
   superEventType: ['umbrella', 'none'],
 };
 
 export const eventListBaseVariables: QueryEventListArgs = {
   ...baseVariables,
   keywordOrSet2: [],
-  keywordOrSet3: [],
 };
 
 export const getOtherEventsVariables = (
@@ -41,7 +35,6 @@ export const getOtherEventsVariables = (
   sort: 'end_time',
   start: 'now',
   superEvent,
-  eventType: AppConfig.supportedEventTypes,
 });
 
 const createRequest = (

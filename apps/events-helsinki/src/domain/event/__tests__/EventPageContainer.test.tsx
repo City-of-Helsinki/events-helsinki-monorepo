@@ -69,7 +69,7 @@ const otherEventsRequest = {
   query: EventListDocument,
   variables: {
     include: ['in_language', 'keywords', 'location', 'audience'],
-    sort: 'start_time',
+    sort: 'end_time',
     start: 'now',
     superEvent: superEventId,
   },
@@ -98,6 +98,10 @@ const mocks = [
   },
   createOtherEventTimesRequestAndResultMocks({
     superEventId,
+    response: fakeEvents(otherEventTimesCount),
+  }),
+  createOtherEventTimesRequestAndResultMocks({
+    superEventId: id,
     response: fakeEvents(otherEventTimesCount),
   }),
   createEventListRequestAndResultMocks({

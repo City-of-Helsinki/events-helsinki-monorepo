@@ -42,10 +42,8 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     SEARCH_ROUTES.SEARCH
   );
 
-  const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
-    router.push(
-      `${returnPath}${remainingQueryString ? `?${remainingQueryString}` : ''}`
-    );
+  const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
+    router.push(`${returnPath}${remainingQueryString}`);
   };
 
   const imageUrl = venue.image ? getSecureImage(venue.image) : '';

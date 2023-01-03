@@ -68,10 +68,9 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
     locale,
     SEARCH_ROUTES.COURSESEARCH
   );
-  const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
-    router.push(
-      `${returnPath}${remainingQueryString ? `?${remainingQueryString}` : ''}`
-    );
+
+  const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
+    router.push(`${returnPath}${remainingQueryString}`);
   };
 
   const goToBuyTicketsPage = () => {

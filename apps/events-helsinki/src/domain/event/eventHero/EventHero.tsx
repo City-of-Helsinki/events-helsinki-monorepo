@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import {
-  Visible,
   useLocale,
   getDateRangeStr,
   buttonStyles,
@@ -119,7 +118,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                   <div className={styles.description}>{shortDescription}</div>
                 )}
                 <div className={styles.additionalInfo}>
-                  <Visible above="s" className={styles.location}>
+                  <div className={styles.location}>
                     <InfoWithIcon
                       icon={<IconLocation aria-hidden />}
                       title={''}
@@ -130,8 +129,8 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                         showLocationName={true}
                       />
                     </InfoWithIcon>
-                  </Visible>
-                  <Visible above="s" className={styles.start}>
+                  </div>
+                  <div className={styles.start}>
                     {(startTime !== eventStartTime ||
                       endTime !== eventEndTime) && (
                       <InfoWithIcon
@@ -152,19 +151,19 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                         )}
                       </InfoWithIcon>
                     )}
-                  </Visible>
+                  </div>
                   {eventPriceText && (
-                    <Visible above="s" className={styles.price}>
+                    <div className={styles.price}>
                       <InfoWithIcon
                         icon={<IconTicket aria-hidden />}
                         title={''}
                       >
                         {eventPriceText}
                       </InfoWithIcon>
-                    </Visible>
+                    </div>
                   )}
                   {showBuyButton && (
-                    <Visible above="s" className={styles.buyButtonWrapper}>
+                    <div className={styles.buyButtonWrapper}>
                       <Button
                         aria-label={t('hero.ariaLabelBuyTickets')}
                         onClick={goToBuyTicketsPage}
@@ -173,10 +172,10 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                       >
                         {t('hero.buttonBuyTickets') as string}
                       </Button>
-                    </Visible>
+                    </div>
                   )}
                   {registrationUrl && (
-                    <Visible className={styles.registrationButtonWrapper}>
+                    <div className={styles.registrationButtonWrapper}>
                       <Button
                         variant="success"
                         className={buttonStyles.buttonCoatBlue}
@@ -185,7 +184,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                       >
                         {t('hero.buttonEnrol') as string}
                       </Button>
-                    </Visible>
+                    </div>
                   )}
                 </div>
                 {showKeywords && (

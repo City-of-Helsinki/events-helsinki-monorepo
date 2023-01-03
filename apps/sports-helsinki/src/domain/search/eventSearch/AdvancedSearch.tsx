@@ -17,32 +17,38 @@ import FilterSummary from './filterSummary/FilterSummary';
 import styles from './search.module.scss';
 import { getSearchFilters, getSearchQuery } from './utils';
 
-interface Props {
+type AdvancedSearchFormProps = {
   scrollToResultList: () => void;
-  'data-testid'?: string;
-}
+};
 
-const AdvancedSearch: React.FC<Props> = ({
+export type AdvancedSearchProps = {
+  'data-testid'?: string;
+} & AdvancedSearchFormProps;
+
+export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   scrollToResultList,
-  'data-testid': dataTestId,
 }) => {
   const { t } = useTranslation('search');
   const { t: tAppSports } = useAppSportsTranslation();
   const locale = useLocale();
   const router = useRouter();
-  const params: { place?: string; eventType?: string[] } = router.query;
+  const params: { place?: string } = router.query;
   const searchParams = React.useMemo(
     () => new URLSearchParams(qs.stringify(router.query)),
     [router.query]
   );
-  const [selectedEventType, setSelectedEventType] = React.useState<string[]>(
-    []
-  );
-  const [selectedTexts, setSelectedTexts] = React.useState<string[]>([]);
   const [autosuggestInput, setAutosuggestInput] = React.useState('');
   const [selectedPlaces, setSelectedPlaces] = React.useState<string[]>([]);
-  const { start, end, keyword, keywordNot, publisher, dateTypes } =
-    getSearchFilters(searchParams);
+  const {
+    start,
+    end,
+    keyword,
+    keywordNot,
+    publisher,
+    dateTypes,
+    eventType,
+    text,
+  } = getSearchFilters(searchParams);
 
   const searchFilters = {
     dateTypes,
@@ -52,8 +58,8 @@ const AdvancedSearch: React.FC<Props> = ({
     keywordNot,
     places: selectedPlaces,
     publisher,
-    text: selectedTexts,
-    eventType: selectedEventType,
+    text,
+    eventType,
   };
 
   const goToSearch = (search: string): void => {
@@ -75,39 +81,26 @@ const AdvancedSearch: React.FC<Props> = ({
 
   // Initialize fields when page is loaded
   React.useEffect(() => {
-    const { places, text, eventType } = getSearchFilters(searchParams);
+    const { places, text } = getSearchFilters(searchParams);
 
     const placeSearchParam =
       params.place && MAPPED_PLACES[params.place.toLowerCase()];
-    const eventTypeSearchParam = params.eventType;
 
     if (placeSearchParam) {
       places.push(placeSearchParam);
     }
-    if (eventTypeSearchParam) {
-      eventType?.push(...eventTypeSearchParam);
-    }
     setSelectedPlaces(places);
-    setSelectedEventType(eventType);
-    setSelectedTexts(text || []);
     setAutosuggestInput(text?.toString() || '');
   }, [searchParams, params]);
 
   const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
     const value = option.text;
 
-    const { text } = getSearchFilters(searchParams);
-
-    if (value && !text?.includes(value)) {
-      text?.push(value);
-    }
-
     const search = getSearchQuery({
       ...searchFilters,
-      text,
+      text: [value],
     });
 
-    setSelectedTexts(text || []);
     goToSearch(search);
     scrollToResultList();
   };
@@ -117,7 +110,10 @@ const AdvancedSearch: React.FC<Props> = ({
   };
 
   const clearFilters = () => {
-    const search = getSearchQuery(EVENT_DEFAULT_SEARCH_FILTERS);
+    const search = getSearchQuery({
+      ...EVENT_DEFAULT_SEARCH_FILTERS,
+      eventType,
+    });
     goToSearch(search);
     clearInputValues();
   };
@@ -133,6 +129,47 @@ const AdvancedSearch: React.FC<Props> = ({
   };
 
   return (
+    <form onSubmit={handleSubmit}>
+      <div className={styles.searchWrapper}>
+        <h2>{t('search.labelSearchField')}</h2>
+        <div className={styles.rowWrapper}>
+          <div className={classNames(styles.row, styles.autoSuggestRow)}>
+            <div>
+              <SearchAutosuggest
+                name="search"
+                onChangeSearchValue={setAutosuggestInput}
+                onOptionClick={handleMenuOptionClick}
+                placeholder={tAppSports('appSports:search.search.placeholder')}
+                searchValue={autosuggestInput}
+              />
+            </div>
+          </div>
+        </div>
+        <div className={styles.rowWrapper}>
+          <div className={styles.row}>
+            <div className={styles.buttonWrapper}>
+              <Button
+                variant="success"
+                fullWidth={true}
+                iconLeft={<IconSearch aria-hidden />}
+                type="submit"
+              >
+                {t('search.buttonSearch')}
+              </Button>
+            </div>
+          </div>
+        </div>
+        <FilterSummary onClear={clearFilters} />
+      </div>
+    </form>
+  );
+};
+
+const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
+  'data-testid': dataTestId,
+  ...delegatedAdvancedSearchFormProps
+}) => {
+  return (
     <PageSection
       korosBottom
       korosBottomClassName={styles.searchContainerKoros}
@@ -140,41 +177,7 @@ const AdvancedSearch: React.FC<Props> = ({
       data-testid={dataTestId}
     >
       <ContentContainer className={styles.contentContainer}>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.searchWrapper}>
-            <h2>{t('search.labelSearchField')}</h2>
-            <div className={styles.rowWrapper}>
-              <div className={classNames(styles.row, styles.autoSuggestRow)}>
-                <div>
-                  <SearchAutosuggest
-                    name="search"
-                    onChangeSearchValue={setAutosuggestInput}
-                    onOptionClick={handleMenuOptionClick}
-                    placeholder={tAppSports(
-                      'appSports:search.search.placeholder'
-                    )}
-                    searchValue={autosuggestInput}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className={styles.rowWrapper}>
-              <div className={styles.row}>
-                <div className={styles.buttonWrapper}>
-                  <Button
-                    variant="success"
-                    fullWidth={true}
-                    iconLeft={<IconSearch aria-hidden />}
-                    type="submit"
-                  >
-                    {t('search.buttonSearch')}
-                  </Button>
-                </div>
-              </div>
-            </div>
-            <FilterSummary onClear={clearFilters} />
-          </div>
-        </form>
+        <AdvancedSearchForm {...delegatedAdvancedSearchFormProps} />
       </ContentContainer>
     </PageSection>
   );

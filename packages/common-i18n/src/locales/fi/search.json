@@ -17,6 +17,10 @@
     }
   },
   "search": {
+    "searchType": {
+      "courseEventType": "Harrastukset",
+      "generalEventType": "Tapahtumat"
+    },
     "buttonSearch": "Hae",
     "checkboxOnlyChildrenEvents": "Näytä vain lastentapahtumat",
     "checkboxOnlyEveningEvents": "Näytä vain iltatapahtumat",

@@ -138,10 +138,3 @@ it('provides configuration for Matomo', () => {
   process.env.NEXT_PUBLIC_MATOMO_ENABLED = '1';
   expect(AppConfig.matomoConfiguration?.disabled).toStrictEqual(false);
 });
-
-it('gives access to misc configs', () => {
-  expect(AppConfig.supportedEventTypes).toStrictEqual([
-    EventTypeId.General,
-    EventTypeId.Course,
-  ]);
-});

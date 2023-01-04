@@ -47,14 +47,6 @@ class AppConfig {
     return process.env.NEXT_PUBLIC_CMS_PAGES_CONTEXT_PATH ?? '/pages';
   }
 
-  /** @deprecated since the event search has a splitted view
-   * (a selectable filter for the type) for different types,
-   * the supportedEventTypes -method has no use anymore.
-   * */
-  static get supportedEventTypes() {
-    return [EventTypeId.General, EventTypeId.Course];
-  }
-
   static get dateFormat() {
     return 'dd.MM.yyyy';
   }

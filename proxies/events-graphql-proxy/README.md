@@ -40,10 +40,6 @@ Builds the app for production to the `build` folder.
 Runs the graphql proxy in the production mode.
 Open [http://localhost:4000/proxy/graphql](http://localhost:4000/proxy/graphql) to view it in the browser.
 
-### `yarn codegen`
-
-Generate graphql types from schema
-
 ### `yarn lint`
 
 Run eslint to all files on

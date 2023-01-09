@@ -10,6 +10,7 @@ import {
   ResetFocus,
   useCommonTranslation,
   NavigationProvider,
+  GeolocationProvider,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { SSRConfig } from 'next-i18next';
@@ -84,38 +85,40 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <EventsConfigProvider config={eventsConfig}>
-        <RHHCConfigProvider config={rhhcConfig}>
-          <NavigationProvider
-            headerMenu={headerMenu}
-            footerMenu={footerMenu}
-            languages={languages}
-          >
-            <ResetFocus />
-            <MatomoProvider value={matomoInstance}>
-              {router.isFallback ? (
-                <Center>
-                  <LoadingSpinner />
-                </Center>
-              ) : error ? (
-                <Error
-                  statusCode={error.networkError?.statusCode ?? 400}
-                  title={error.title}
-                />
-              ) : (
-                <>
-                  <Component {...pageProps} />
-                  <EventsCookieConsent
-                    allowLanguageSwitch={false}
-                    appName={t('appSports:appName')}
+      <GeolocationProvider>
+        <EventsConfigProvider config={eventsConfig}>
+          <RHHCConfigProvider config={rhhcConfig}>
+            <NavigationProvider
+              headerMenu={headerMenu}
+              footerMenu={footerMenu}
+              languages={languages}
+            >
+              <ResetFocus />
+              <MatomoProvider value={matomoInstance}>
+                {router.isFallback ? (
+                  <Center>
+                    <LoadingSpinner />
+                  </Center>
+                ) : error ? (
+                  <Error
+                    statusCode={error.networkError?.statusCode ?? 400}
+                    title={error.title}
                   />
-                </>
-              )}
-            </MatomoProvider>
-            <ToastContainer />
-          </NavigationProvider>
-        </RHHCConfigProvider>
-      </EventsConfigProvider>
+                ) : (
+                  <>
+                    <Component {...pageProps} />
+                    <EventsCookieConsent
+                      allowLanguageSwitch={false}
+                      appName={t('appSports:appName')}
+                    />
+                  </>
+                )}
+              </MatomoProvider>
+              <ToastContainer />
+            </NavigationProvider>
+          </RHHCConfigProvider>
+        </EventsConfigProvider>
+      </GeolocationProvider>
     </ApolloProvider>
   );
 }

@@ -14,11 +14,6 @@ export enum RANGE_INPUT {
   ALL = 'all',
 }
 
-export type Option = {
-  text: string;
-  value: string;
-};
-
 export interface RangeDropdownProps {
   icon?: React.ReactElement;
   rangeIcon: React.ReactElement;

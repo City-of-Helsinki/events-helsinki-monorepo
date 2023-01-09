@@ -3,6 +3,12 @@
   "ariaLiveSearchReady": "{{count}} sökresultat",
   "buttonClearFilters": "Töm sökfilter",
   "errorLoadMore": "Det gick inte att ladda evenemangen",
+  "orderBy": {
+    "alphabetical": "I alfabetisk ordning",
+    "relevance": "Efter relevans",
+    "distance": "Närmaste först",
+    "label": "Ordning"
+  },
   "search": {
     "searchType": {
       "courseEventType": "Hobbyer",

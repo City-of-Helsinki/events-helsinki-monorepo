@@ -3,6 +3,7 @@ import type {
   UnifiedSearchLanguage,
   OrderByType,
   OrderDirType,
+  Coordinates,
 } from 'events-helsinki-components';
 import {
   useLocale,
@@ -10,16 +11,12 @@ import {
   OrderBy,
   OrderDir,
   orderDirToUnifiedSearchDistanceOrder,
+  useGeolocation,
 } from 'events-helsinki-components';
 import {
   HELSINKI_OCD_DIVISION_ID,
   SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID,
 } from '../app/appConstants';
-
-export type Coordinates = {
-  latitude: number;
-  longitude: number;
-};
 
 function getOpenAt(openAt: Date, isOpenNow: boolean): string | null {
   if (openAt) {
@@ -34,7 +31,7 @@ function getOpenAt(openAt: Date, isOpenNow: boolean): string | null {
 }
 
 type OrderByOptions = {
-  position: Coordinates | undefined;
+  position: Coordinates | null;
 };
 
 function getOrderBy(
@@ -99,7 +96,9 @@ export default function useUnifiedSearchVariables(
       first,
     },
   } = useUnifiedSearch();
-
+  const geolocation = useGeolocation({
+    skip: orderBy !== OrderBy.distance,
+  });
   const locale = useLocale();
 
   return {
@@ -121,7 +120,7 @@ export default function useUnifiedSearchVariables(
         ? [HELSINKI_OCD_DIVISION_ID]
         : administrativeDivisionIds,
     openAt: openAt && isOpenNow ? getOpenAt(openAt, isOpenNow) : null,
-    ...getOrderBy(orderBy, orderDir, { position: undefined }),
+    ...getOrderBy(orderBy, orderDir, { position: geolocation.coordinates }),
     after: after ?? defaultPagination.after,
     first: variables?.first ?? first ?? defaultPagination.first,
   };

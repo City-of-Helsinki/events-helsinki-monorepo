@@ -1,0 +1,7 @@
+{
+  "error.title": "Platsinformation kunde inte användas",
+  "error.description.permissionDenied": "Du har inte gett tillstånd för användning av din platsinformation",
+  "error.description.generic": "Platsinformation finns inte tillgänglig",
+  "a11ymessage.title": "Platser söks",
+  "a11ymessage.description": "Vi försöker använda positionsdata från din webbläsare"
+}

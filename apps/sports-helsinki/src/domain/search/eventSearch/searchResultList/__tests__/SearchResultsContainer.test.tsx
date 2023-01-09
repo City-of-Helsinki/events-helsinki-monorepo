@@ -15,6 +15,7 @@ it.each<[number, string]>([
         eventList={<div />}
         eventsCount={eventsCount}
         loading={false}
+        showOrderBySelect={false}
       />
     );
     expect(screen.getByText(`${eventsCount} hakutulosta`)).toBeInTheDocument();
@@ -28,6 +29,7 @@ it('should not return any results info if more than 5 or more results are found'
       eventList={<div />}
       eventsCount={5}
       loading={false}
+      showOrderBySelect={false}
     />
   );
 

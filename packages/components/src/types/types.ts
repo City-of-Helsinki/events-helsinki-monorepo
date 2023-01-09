@@ -74,6 +74,11 @@ export type TimeResourceState =
   | 'exit_only'
   | 'weather_permitting';
 
+export type Coordinates = {
+  latitude: number;
+  longitude: number;
+};
+
 export type MapItem = {
   id: string;
   title: string;

@@ -209,6 +209,7 @@ const SearchPage: React.FC<{
                     onLoadMore={handleLoadMore}
                   />
                 }
+                showOrderBySelect={false}
               />
             )}
           </LoadingSpinner>

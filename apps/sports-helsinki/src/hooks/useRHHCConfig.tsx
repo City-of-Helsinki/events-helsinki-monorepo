@@ -17,6 +17,8 @@ import type { ArticleDetailsProps } from '../domain/article/articleDetails/Artic
 import ArticleDetails from '../domain/article/articleDetails/ArticleDetails';
 import type { EventDetailsProps } from '../domain/event/eventDetails/EventDetails';
 import EventDetails from '../domain/event/eventDetails/EventDetails';
+import type { VenueDetailsProps } from '../domain/venue/venueDetails/VenueDetails';
+import VenueDetails from '../domain/venue/venueDetails/VenueDetails';
 
 const APP_DOMAIN = new URL(AppConfig.origin).origin;
 const CMS_API_DOMAIN = new URL(AppConfig.cmsOrigin).origin;
@@ -57,6 +59,10 @@ export default function useRHHCConfig() {
         ),
         ArticleCardContent: (props: ArticleDetailsProps) => (
           <ArticleDetails {...props} />
+        ),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        LocationCardContent: (props: any) => (
+          <VenueDetails {...(props as VenueDetailsProps)} />
         ),
       },
       fallbackImageUrls: [

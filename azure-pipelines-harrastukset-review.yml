@@ -46,6 +46,7 @@ resources:
   # Azure DevOps repository
   - repository: harrastukset-pipelines
     type: git
+    ref: refs/heads/build_cache_image
     # Azure DevOps project/repository
     name: harrastukset/harrastukset-pipelines
 

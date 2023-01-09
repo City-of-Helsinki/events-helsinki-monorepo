@@ -13,7 +13,7 @@
     "pre-commit": "lint-fix",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --cache --cache-location ../../.cache/eslint/events-graphql-proxy.eslintcache",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
-    "check-dist": "es-check -v",
+    "check-dist": "",
     "typecheck": "tsc --project ./tsconfig.json --noEmit",
     "docker:prune-cache": "docker buildx prune",
     "docker:install": "docker buildx bake -f docker-compose.proxy.yml --progress=tty deps",

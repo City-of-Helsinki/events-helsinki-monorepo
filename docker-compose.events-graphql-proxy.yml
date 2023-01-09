@@ -1,18 +1,17 @@
-version: '3'
+version: '3.9'
 services:
-  apollo-router:
+  events-graphql-proxy:
     container_name: events-graphql-proxy
     build:
-      context: ./proxies/events-graphql-proxy/
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: proxy.Dockerfile
       target: develop
-
+      args:
+        - PROXY=events-graphql-proxy
     environment:
       - GRAPHQL_PROXY_DEBUG=${GRAPHQL_PROXY_DEBUG}
-      - GRAPHQL_PROXY_PORT=${GRAPHQL_PROXY_PORT}
-      - GRAPHQL_PROXY_ENGINE_API_KEY=${GRAPHQL_PROXY_ENGINE_API_KEY}
       - GRAPHQL_PROXY_API_BASE_URL=${GRAPHQL_PROXY_API_BASE_URL}
       - GRAPHQL_PROXY_SENTRY_DSN=${GRAPHQL_PROXY_SENTRY_DSN}
       - GRAPHQL_PROXY_SENTRY_ENVIRONMENT=${GRAPHQL_PROXY_SENTRY_ENVIRONMENT}
     ports:
-      - '4100:4100'
+      - 4100:4100

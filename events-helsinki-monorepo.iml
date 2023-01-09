@@ -14,6 +14,9 @@
       <excludeFolder url="file://$MODULE_DIR$/apps/events-helsinki/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/apps/sports-helsinki/node_modules" />
       <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/.vscode" />
+      <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/.yarn" />
+      <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/build" />
     </content>
     <content url="file://$MODULE_DIR$/apps/events-helsinki/node_modules" />
     <content url="file://$MODULE_DIR$/apps/hobbies-helsinki/node_modules" />

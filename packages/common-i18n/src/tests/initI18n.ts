@@ -10,6 +10,7 @@ import common_en from '../locales/en/common.json';
 import consent_en from '../locales/en/consent.json';
 import event_en from '../locales/en/event.json';
 import footer_en from '../locales/en/footer.json';
+import geolocationProvider_en from '../locales/en/geolocationProvider.json';
 import home_en from '../locales/en/home.json';
 import notFound_en from '../locales/en/notFound.json';
 import search_en from '../locales/en/search.json';
@@ -22,6 +23,7 @@ import common from '../locales/fi/common.json';
 import consent from '../locales/fi/consent.json';
 import event from '../locales/fi/event.json';
 import footer from '../locales/fi/footer.json';
+import geolocationProvider from '../locales/fi/geolocationProvider.json';
 import home from '../locales/fi/home.json';
 import notFound from '../locales/fi/notFound.json';
 import search from '../locales/fi/search.json';
@@ -34,6 +36,7 @@ import common_sv from '../locales/sv/common.json';
 import consent_sv from '../locales/sv/consent.json';
 import event_sv from '../locales/sv/event.json';
 import footer_sv from '../locales/sv/footer.json';
+import geolocationProvider_sv from '../locales/sv/geolocationProvider.json';
 import home_sv from '../locales/sv/home.json';
 import notFound_sv from '../locales/sv/notFound.json';
 import search_sv from '../locales/sv/search.json';
@@ -49,6 +52,7 @@ export const translations = {
   event,
   venue,
   footer,
+  geolocationProvider,
   home,
   notFound,
   search,
@@ -75,6 +79,7 @@ export const config = {
       event: event_en,
       venue: venue_en,
       footer: footer_en,
+      geolocationProvider: geolocationProvider_en,
       home: home_en,
       notFound: notFound_en,
       search: search_en,
@@ -89,6 +94,7 @@ export const config = {
       event: event_sv,
       venue: venue_sv,
       footer: footer_sv,
+      geolocationProvider: geolocationProvider_sv,
       home: home_sv,
       notFound: notFound_sv,
       search: search_sv,

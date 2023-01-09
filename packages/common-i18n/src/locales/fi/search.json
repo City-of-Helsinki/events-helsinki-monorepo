@@ -16,6 +16,12 @@
       "labelSearchInFinnish": "Näytä hakutulokset suomeksi"
     }
   },
+  "orderBy": {
+    "alphabetical": "Aakkosjärjestyksessä",
+    "relevance": "Osuvuuden mukaan",
+    "distance": "Lähimmät ensin",
+    "label": "Järjestys"
+  },
   "search": {
     "searchType": {
       "courseEventType": "Harrastukset",

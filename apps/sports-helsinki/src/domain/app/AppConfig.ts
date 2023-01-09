@@ -1,4 +1,3 @@
-import { EventTypeId } from 'events-helsinki-components';
 import { i18n } from '../../../next-i18next.config';
 import { ROUTES } from '../../constants';
 

@@ -15,8 +15,8 @@ export enum AppLanguageCodeEnum {
 }
 /* eslint-enable @typescript-eslint/naming-convention */
 
-export type OptionType = {
-  label: string;
+export type Option = {
+  text: string;
   value: string;
 };
 
@@ -73,6 +73,11 @@ export type TimeResourceState =
   | 'enter_only'
   | 'exit_only'
   | 'weather_permitting';
+
+export type Coordinates = {
+  latitude: number;
+  longitude: number;
+};
 
 export type MapItem = {
   id: string;

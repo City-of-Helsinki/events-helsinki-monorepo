@@ -3,6 +3,12 @@
   "ariaLiveSearchReady": "{{count}} search results",
   "buttonClearFilters": "Clear filters",
   "errorLoadMore": "Failed to load events",
+  "orderBy": {
+    "alphabetical": "Alphabetical order",
+    "relevance": "Relevance",
+    "distance": "Proximity",
+    "label": "Order"
+  },
   "search": {
     "searchType": {
       "courseEventType": "Courses",

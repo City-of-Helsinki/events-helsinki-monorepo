@@ -1,4 +1,4 @@
-import type { Option } from './MultiSelectDropdown';
+import type { Option } from '../../types/types';
 
 export interface MultiselectDropdownProps {
   checkboxName: string;

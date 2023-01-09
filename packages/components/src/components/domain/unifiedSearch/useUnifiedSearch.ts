@@ -9,7 +9,11 @@ import { useCallback, useMemo, useRef } from 'react';
 import getIsDateValid from '../../../utils/getIsValidDate';
 import type { QueryPersister } from '../../../utils/queryPersister';
 import defaultQueryPersister from '../../../utils/queryPersister';
-import type { UnifiedSearchParameters } from './types';
+import type {
+  UnifiedSearchParameters,
+  ModifyFilters,
+  TransitionOptions,
+} from './types';
 
 type FilterValueType = string | number | boolean | Date;
 
@@ -139,12 +143,6 @@ type FilterConfig = {
 type SpreadFilter = {
   key: string;
   value: FilterValueType;
-};
-
-type TransitionOptions = {
-  shallow?: boolean;
-  locale?: string | false;
-  scroll?: boolean;
 };
 
 export class UnifiedSearch {
@@ -395,7 +393,7 @@ export default function useUnifiedSearch() {
     [unifiedSearch]
   );
 
-  const modifyFilters = useCallback(
+  const modifyFilters: ModifyFilters = useCallback(
     (...params: Parameters<typeof unifiedSearch.modifyFilters>) =>
       unifiedSearch.modifyFilters(...params),
     [unifiedSearch]

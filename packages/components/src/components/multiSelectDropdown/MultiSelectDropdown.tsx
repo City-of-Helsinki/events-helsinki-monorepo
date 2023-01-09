@@ -4,6 +4,7 @@ import React from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation';
 import useDropdownKeyboardNavigation from '../../hooks/useDropdownKeyboardNavigation';
+import type { Option } from '../../types/types';
 import Checkbox from '../checkbox/Checkbox';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import ScrollIntoViewWithFocus from '../scrollIntoViewWithFocus/ScrollIntoViewWithFocus';
@@ -12,11 +13,6 @@ import styles from './multiSelectDropdown.module.scss';
 import type { MultiselectDropdownProps } from './types';
 
 const selectAll = 'SELECT_ALL';
-
-export type Option = {
-  text: string;
-  value: string;
-};
 
 const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
   checkboxName,

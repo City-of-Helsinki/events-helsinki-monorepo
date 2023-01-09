@@ -241,11 +241,6 @@ export type Address = {
   city: string;
 };
 
-export type Option = {
-  label: string;
-  value: string;
-};
-
 export type ItemQueryResult<
   TData = null,
   TVariables = OperationVariables
@@ -253,9 +248,4 @@ export type ItemQueryResult<
   items: Item[];
   pageInfo?: PageInfoFragment;
   totalCount: number;
-};
-
-export type Coordinates = {
-  latitude: number;
-  longitude: number;
 };

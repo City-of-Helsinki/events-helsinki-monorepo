@@ -21,3 +21,14 @@ export type UnifiedSearchParameters = {
 export type UnifiedSearchVariables = SearchListQueryVariables;
 export type UnifiedSearchOpeningHours = OpeningHours;
 export type UnifiedSearchOpeningHoursTimes = OpeningHoursTimes;
+
+export type TransitionOptions = {
+  shallow?: boolean;
+  locale?: string | false;
+  scroll?: boolean;
+};
+
+export type ModifyFilters = (
+  search: Partial<UnifiedSearchParameters>,
+  transitionOptions?: TransitionOptions
+) => void;

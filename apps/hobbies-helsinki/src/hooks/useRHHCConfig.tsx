@@ -69,6 +69,7 @@ export default function useRHHCConfig() {
       currentLanguageCode: locale.toUpperCase(),
       apolloClient,
       eventsApolloClient: apolloClient,
+      venuesApolloClient: apolloClient,
       copy: {
         next: commonTranslation('common:next'),
         previous: commonTranslation('common:previous'),

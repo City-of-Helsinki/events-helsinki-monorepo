@@ -78,9 +78,35 @@ const EventSearch: React.FC<{ eventType: EventTypeId }> = ({ eventType }) => {
   );
 };
 
-const CombinedSearchPage: React.FC = () => {
+export type CombinedSearchPageProps = { defaultTab: SearchTabId };
+
+const useSearchTabsWithParams = (defaultTab: SearchTabId) => {
+  const router = useRouter();
+  const searchTypeParam =
+    typeof router.query?.searchType === 'string'
+      ? (router.query.searchType as SearchTabId)
+      : undefined;
+  const initTab: SearchTabId = searchTypeParam ?? defaultTab;
+
+  // If the search type param is not given in the URL, set it there.
+  React.useEffect(() => {
+    if (!searchTypeParam) {
+      router.push(
+        { query: { ...router.query, searchType: defaultTab } },
+        undefined,
+        { shallow: true }
+      );
+    }
+  }, [searchTypeParam, router, defaultTab]);
+
+  return { initTab, searchTypeParam };
+};
+
+const CombinedSearchPage: React.FC<CombinedSearchPageProps> = ({
+  defaultTab = 'Venue',
+}) => {
   const { t } = useSearchTranslation();
-  const initTab: SearchTabId = 'Venue';
+  const { initTab } = useSearchTabsWithParams(defaultTab);
   return (
     <SearchTabs initTab={initTab}>
       <SearchTabs.TabList>

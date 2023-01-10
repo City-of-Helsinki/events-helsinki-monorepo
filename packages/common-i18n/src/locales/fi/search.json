@@ -24,6 +24,7 @@
   },
   "search": {
     "searchType": {
+      "venue": "Paikat",
       "courseEventType": "Harrastukset",
       "generalEventType": "Tapahtumat"
     },

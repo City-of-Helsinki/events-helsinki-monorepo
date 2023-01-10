@@ -3,13 +3,13 @@ import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
+import AdvancedSearch from 'domain/search/eventSearch/AdvancedSearch';
 import Navigation from '../../common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
-import CombinedSearch from '../../domain/search/combinedSearch/CombinedSearch';
 import SearchPage from '../../domain/search/eventSearch/SearchPage';
 import { getLocaleOrError } from '../../utils/routerUtils';
 
@@ -61,8 +61,9 @@ export default function Search() {
         navigation={<Navigation menu={headerMenu} languages={languages} />}
         content={
           <SearchPage
-            SearchComponent={CombinedSearch}
+            SearchComponent={AdvancedSearch}
             pageTitle={'eventSearch.title'}
+            eventType={EventTypeId.General}
           />
         }
         footer={<FooterSection menu={footerMenu} />}

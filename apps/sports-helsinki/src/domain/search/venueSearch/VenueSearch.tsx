@@ -136,9 +136,11 @@ export const VenueSearchUtilities: React.FC<SearchUtilitiesProps> = ({
 }) => {
   const { t } = useCommonTranslation();
   return (
-    <Button variant="secondary" onClick={switchShowMode}>
-      {t('common:mapSearch.showOnMap')}
-    </Button>
+    <>
+      <Button variant="secondary" onClick={switchShowMode}>
+        {t('common:mapSearch.showOnMap')}
+      </Button>
+    </>
   );
 };
 

@@ -11,6 +11,7 @@
   },
   "search": {
     "searchType": {
+      "venue": "Platser",
       "courseEventType": "Hobbyer",
       "generalEventType": "Evenemangen"
     },

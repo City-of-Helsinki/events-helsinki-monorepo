@@ -1,4 +1,5 @@
 {
+  "bootstrap-sha": "1acd804496b8984c9a463fea07468d13443f72c4",
   "separate-pull-requests": true,
   "packages": {
     "apps/hobbies-helsinki":{ "release-type": "node" },

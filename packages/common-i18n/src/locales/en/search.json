@@ -5,6 +5,7 @@
   "errorLoadMore": "Failed to load events",
   "search": {
     "searchType": {
+      "venue": "Venues",
       "courseEventType": "Courses",
       "generalEventType": "General"
     },

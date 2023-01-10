@@ -5,6 +5,7 @@
   "errorLoadMore": "Det gick inte att ladda evenemangen",
   "search": {
     "searchType": {
+      "venue": "Platser",
       "courseEventType": "Hobbyer",
       "generalEventType": "Evenemangen"
     },

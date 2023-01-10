@@ -1,19 +1,18 @@
 import React from 'react';
-import type { SearchTab } from './SearchTabs';
-import SearchTabs from './SearchTabs';
+import SearchTabs from '../searchTabs/SearchTabs';
 import styles from './searchUtilities.module.scss';
 
 type SearchUtilitiesProps = {
-  tabs: React.ReactComponentElement<typeof SearchTab>[];
+  tabs: React.ReactComponentElement<typeof SearchTabs.Tab>[];
 };
 
-const SearchUtilities: React.FC<SearchUtilitiesProps> = ({ tabs }) => {
+function SearchUtilities({ tabs }: SearchUtilitiesProps) {
   return (
     <div className={styles.container}>
       <SearchTabs>{tabs}</SearchTabs>
       {/* <div>TODO: Add other utilities like a venues map search switcher</div> */}
     </div>
   );
-};
+}
 
 export default SearchUtilities;

@@ -12,9 +12,11 @@ import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
+import type { SearchForm } from '../combinedSearch/CombinedSearchPage';
 import { EVENT_DEFAULT_SEARCH_FILTERS, MAPPED_PLACES } from './constants';
 import FilterSummary from './filterSummary/FilterSummary';
 import styles from './search.module.scss';
+import type { Filters } from './types';
 import { getSearchFilters, getSearchQuery } from './utils';
 
 type AdvancedSearchFormProps = {
@@ -25,20 +27,24 @@ export type AdvancedSearchProps = {
   'data-testid'?: string;
 } & AdvancedSearchFormProps;
 
-export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
+export const useAdvancedSearchForm = ({
   scrollToResultList,
-}) => {
-  const { t } = useTranslation('search');
-  const { t: tAppSports } = useAppSportsTranslation();
+  autosuggestInput,
+  setAutosuggestInput,
+}: {
+  scrollToResultList: AdvancedSearchFormProps['scrollToResultList'];
+  autosuggestInput: string;
+  setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
+}): SearchForm => {
   const locale = useLocale();
   const router = useRouter();
   const params: { place?: string } = router.query;
+  const [selectedPlaces, setSelectedPlaces] = React.useState<string[]>([]);
   const searchParams = React.useMemo(
     () => new URLSearchParams(qs.stringify(router.query)),
     [router.query]
   );
-  const [autosuggestInput, setAutosuggestInput] = React.useState('');
-  const [selectedPlaces, setSelectedPlaces] = React.useState<string[]>([]);
+
   const {
     start,
     end,
@@ -79,8 +85,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
     goToSearch(search);
   };
 
-  // Initialize fields when page is loaded
-  React.useEffect(() => {
+  const initialFieldsOnPageLoad = React.useCallback(() => {
     const { places, text } = getSearchFilters(searchParams);
 
     const placeSearchParam =
@@ -91,19 +96,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
     }
     setSelectedPlaces(places);
     setAutosuggestInput(text?.toString() || '');
-  }, [searchParams, params]);
-
-  const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
-    const value = option.text;
-
-    const search = getSearchQuery({
-      ...searchFilters,
-      text: [value],
-    });
-
-    goToSearch(search);
-    scrollToResultList();
-  };
+  }, [params.place, searchParams, setAutosuggestInput]);
 
   const clearInputValues = () => {
     setAutosuggestInput('');
@@ -127,6 +120,56 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
     setAutosuggestInput('');
     scrollToResultList();
   };
+
+  return {
+    searchParams,
+    goToSearch,
+    moveToSearchPage,
+    clearInputValues,
+    clearFilters,
+    handleSubmit,
+    initialFieldsOnPageLoad,
+    searchFilters,
+    scrollToResultList,
+  };
+};
+
+export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
+  scrollToResultList,
+}) => {
+  const { t } = useTranslation('search');
+  const { t: tAppSports } = useAppSportsTranslation();
+
+  const [autosuggestInput, setAutosuggestInput] = React.useState('');
+
+  const {
+    handleSubmit,
+    clearFilters,
+    goToSearch,
+    initialFieldsOnPageLoad,
+    searchFilters,
+  } = useAdvancedSearchForm({
+    scrollToResultList,
+    autosuggestInput,
+    setAutosuggestInput,
+  });
+
+  const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
+    const value = option.text;
+
+    const search = getSearchQuery({
+      ...(searchFilters as Filters),
+      text: [value],
+    });
+
+    goToSearch(search);
+    scrollToResultList();
+  };
+
+  // Initialize fields when page is loaded
+  React.useEffect(() => {
+    initialFieldsOnPageLoad();
+  }, [initialFieldsOnPageLoad]);
 
   return (
     <form onSubmit={handleSubmit}>

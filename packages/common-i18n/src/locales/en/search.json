@@ -37,7 +37,7 @@
     }
   },
   "textFoundEvents": "{{count}} search results",
-  "buttonLoadMore": "Show more hobbies ({{count}})",
+  "buttonLoadMore": "Show more ({{count}})",
   "searchNotification": {
     "noResultsTitle": "Sorry, no search results were found for the search criteria you selected.",
     "noResultsText": "No search results were found for the search criteria you selected. Try to change search terms or change to event search.",

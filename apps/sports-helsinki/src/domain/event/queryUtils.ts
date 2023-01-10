@@ -164,7 +164,7 @@ export const useSubEvents = (
           },
         });
       } catch (e) {
-        toast.error(t('info.errorLoadMode'));
+        toast.error(t('info.errorLoadMore'));
       }
       setIsFetchingMore(false);
     },

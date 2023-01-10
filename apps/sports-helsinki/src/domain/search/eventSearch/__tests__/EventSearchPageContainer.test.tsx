@@ -186,7 +186,7 @@ it('should show toastr message when loading next event page fails', async () => 
     expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
   });
 
-  expect(toast.error).toHaveBeenCalledWith(translations.search.errorLoadMode);
+  expect(toast.error).toHaveBeenCalledWith(translations.search.errorLoadMore);
 });
 
 it.todo('should scroll to event defined in react-router location state');

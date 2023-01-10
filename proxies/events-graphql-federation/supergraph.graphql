@@ -1005,7 +1005,7 @@ enum CollectionIdType
 
 union CollectionModulesUnionType
   @join__type(graph: CMS)
- = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel
+ = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected
 
 """Connection between the collection type and the collection type"""
 type CollectionToPreviewConnectionEdge
@@ -1707,6 +1707,263 @@ type Connection
   url: String
 }
 
+"""The contact type"""
+type Contact implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & NodeWithTitle & NodeWithFeaturedImage & NodeWithRevisions
+  @join__implements(graph: CMS, interface: "Node")
+  @join__implements(graph: CMS, interface: "ContentNode")
+  @join__implements(graph: CMS, interface: "UniformResourceIdentifiable")
+  @join__implements(graph: CMS, interface: "DatabaseIdentifier")
+  @join__implements(graph: CMS, interface: "NodeWithTemplate")
+  @join__implements(graph: CMS, interface: "NodeWithTitle")
+  @join__implements(graph: CMS, interface: "NodeWithFeaturedImage")
+  @join__implements(graph: CMS, interface: "NodeWithRevisions")
+  @join__type(graph: CMS)
+{
+  """The id field matches the WP_Post-&gt;ID field."""
+  contactId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
+
+  """Connection between the ContentNode type and the ContentType type"""
+  contentType: ContentNodeToContentTypeConnectionEdge
+
+  """The name of the Content Type the node belongs to"""
+  contentTypeName: String!
+
+  """The unique identifier stored in the database"""
+  databaseId: Int!
+
+  """Post publishing date."""
+  date: String
+
+  """The publishing date set in GMT."""
+  dateGmt: String
+
+  """Description"""
+  description: String
+
+  """The desired slug of the post"""
+  desiredSlug: String
+
+  """
+  If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
+  """
+  editingLockedBy: ContentNodeToEditLockConnectionEdge
+
+  """The RSS enclosure for the object"""
+  enclosure: String
+
+  """Connection between the ContentNode type and the EnqueuedScript type"""
+  enqueuedScripts(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+  ): ContentNodeToEnqueuedScriptConnection
+
+  """
+  Connection between the ContentNode type and the EnqueuedStylesheet type
+  """
+  enqueuedStylesheets(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+  ): ContentNodeToEnqueuedStylesheetConnection
+
+  """
+  Connection between the NodeWithFeaturedImage type and the MediaItem type
+  """
+  featuredImage: NodeWithFeaturedImageToMediaItemConnectionEdge
+
+  """
+  The database identifier for the featured image node assigned to the content node
+  """
+  featuredImageDatabaseId: Int
+
+  """Globally unique ID of the featured image assigned to the node"""
+  featuredImageId: ID
+
+  """First name"""
+  firstName: String
+
+  """
+  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  """
+  guid: String
+
+  """The globally unique identifier of the contact-cpt object."""
+  id: ID!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the object is a node in the preview state"""
+  isPreview: Boolean
+
+  """Whether the object is restricted from the current viewer"""
+  isRestricted: Boolean
+
+  """True if the node is a revision of another node"""
+  isRevision: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
+
+  """Job Title"""
+  jobTitle: String
+
+  """Polylang language"""
+  language: Language
+
+  """The user that most recently edited the node"""
+  lastEditedBy: ContentNodeToEditLastConnectionEdge
+
+  """Last name"""
+  lastName: String
+
+  """The permalink of the post"""
+  link: String
+
+  """
+  The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
+  """
+  modified: String
+
+  """
+  The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
+  """
+  modifiedGmt: String
+
+  """Connection between the contact type and the contact type"""
+  preview: ContactToPreviewConnectionEdge
+
+  """The database id of the preview node"""
+  previewRevisionDatabaseId: Int
+
+  """Whether the object is a node in the preview state"""
+  previewRevisionId: ID
+
+  """
+  If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node.
+  """
+  revisionOf: NodeWithRevisionsToContentNodeConnectionEdge
+
+  """Connection between the contact type and the contact type"""
+  revisions(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """Arguments for filtering the connection"""
+    where: ContactToRevisionConnectionWhereArgs
+  ): ContactToRevisionConnection
+
+  """The SEO Framework data of the contact"""
+  seo: SEO
+
+  """
+  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  """
+  slug: String
+
+  """The current status of the object"""
+  status: String
+
+  """The template assigned to a node of content"""
+  template: ContentTemplate
+
+  """Connection between the contact type and the TermNode type"""
+  terms(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """Arguments for filtering the connection"""
+    where: ContactToTermNodeConnectionWhereArgs
+  ): ContactToTermNodeConnection
+
+  """
+  The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
+  """
+  title(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """Get specific translation version of this object"""
+  translation(language: LanguageCodeEnum!): Contact
+
+  """List all translated versions of this post"""
+  translations: [Contact]
+
+  """The unique resource identifier path"""
+  uri: String
+}
+
+"""The Type of Identifier used to fetch a single resource. Default is ID."""
+enum ContactIdType
+  @join__type(graph: CMS)
+{
+  """Identify a resource by the Database ID."""
+  DATABASE_ID
+
+  """Identify a resource by the (hashed) Global ID."""
+  ID
+
+  """
+  Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
+  """
+  SLUG
+
+  """Identify a resource by the URI."""
+  URI
+}
+
 """Contact details for a person, legal entity, venue or project"""
 type ContactInfo
   @join__type(graph: UNIFIED_SEARCH)
@@ -1725,6 +1982,214 @@ enum ContactMedium
   SMS_AND_EMAIL
   MOBILE_NOTIFICATION
   ASIOINTI
+}
+
+"""Connection between the contact type and the contact type"""
+type ContactToPreviewConnectionEdge
+  @join__type(graph: CMS)
+{
+  """The node of the connection, without the edges"""
+  node: Contact
+}
+
+"""Connection between the contact type and the contact type"""
+type ContactToRevisionConnection
+  @join__type(graph: CMS)
+{
+  """Edges for the contactToRevisionConnection connection"""
+  edges: [ContactToRevisionConnectionEdge]
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Contact]
+
+  """Information about pagination in a connection."""
+  pageInfo: WPPageInfo
+}
+
+"""An edge in a connection"""
+type ContactToRevisionConnectionEdge
+  @join__type(graph: CMS)
+{
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: Contact
+}
+
+"""Arguments for filtering the contactToRevisionConnection connection"""
+input ContactToRevisionConnectionWhereArgs
+  @join__type(graph: CMS)
+{
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """What paramater to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+
+  """Title of the object"""
+  title: String
+}
+
+"""Connection between the contact type and the TermNode type"""
+type ContactToTermNodeConnection
+  @join__type(graph: CMS)
+{
+  """Edges for the ContactToTermNodeConnection connection"""
+  edges: [ContactToTermNodeConnectionEdge]
+
+  """The nodes of the connection, without the edges"""
+  nodes: [TermNode]
+
+  """Information about pagination in a connection."""
+  pageInfo: WPPageInfo
+}
+
+"""An edge in a connection"""
+type ContactToTermNodeConnectionEdge
+  @join__type(graph: CMS)
+{
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: TermNode
+}
+
+"""Arguments for filtering the ContactToTermNodeConnection connection"""
+input ContactToTermNodeConnectionWhereArgs
+  @join__type(graph: CMS)
+{
+  """
+  Unique cache key to be produced when this query is stored in an object cache. Default is 'core'.
+  """
+  cacheDomain: String
+
+  """
+  Term ID to retrieve child terms of. If multiple taxonomies are passed, $child_of is ignored. Default 0.
+  """
+  childOf: Int
+
+  """
+  True to limit results to terms that have no children. This parameter has no effect on non-hierarchical taxonomies. Default false.
+  """
+  childless: Boolean
+
+  """
+  Retrieve terms where the description is LIKE the input value. Default empty.
+  """
+  descriptionLike: String
+
+  """
+  Array of term ids to exclude. If $include is non-empty, $exclude is ignored. Default empty array.
+  """
+  exclude: [ID]
+
+  """
+  Array of term ids to exclude along with all of their descendant terms. If $include is non-empty, $exclude_tree is ignored. Default empty array.
+  """
+  excludeTree: [ID]
+
+  """
+  Whether to hide terms not assigned to any posts. Accepts true or false. Default false
+  """
+  hideEmpty: Boolean
+
+  """
+  Whether to include terms that have non-empty descendants (even if $hide_empty is set to true). Default true.
+  """
+  hierarchical: Boolean
+
+  """Array of term ids to include. Default empty array."""
+  include: [ID]
+
+  """Array of names to return term(s) for. Default empty."""
+  name: [String]
+
+  """Retrieve terms where the name is LIKE the input value. Default empty."""
+  nameLike: String
+
+  """
+  Array of object IDs. Results will be limited to terms associated with these objects.
+  """
+  objectIds: [ID]
+
+  """Direction the connection should be ordered in"""
+  order: OrderEnum
+
+  """Field(s) to order terms by. Defaults to 'name'."""
+  orderby: TermObjectsConnectionOrderbyEnum
+
+  """
+  Whether to pad the quantity of a term's children in the quantity of each term's "count" object variable. Default false.
+  """
+  padCounts: Boolean
+
+  """Parent term ID to retrieve direct-child terms of. Default empty."""
+  parent: Int
+
+  """
+  Search criteria to match terms. Will be SQL-formatted with wildcards before and after. Default empty.
+  """
+  search: String
+
+  """Array of slugs to return term(s) for. Default empty."""
+  slug: [String]
+
+  """The Taxonomy to filter terms by"""
+  taxonomies: [TaxonomyEnum]
+
+  """Array of term taxonomy IDs, to match when querying terms."""
+  termTaxonomId: [ID]
+
+  """Whether to prime meta caches for matched terms. Default true."""
+  updateTermMetaCache: Boolean
 }
 
 """Nodes used to manage content"""
@@ -1952,7 +2417,7 @@ type ContentNodeToEnqueuedStylesheetConnectionEdge
 """A union of Content Node Types that support revisions"""
 union ContentRevisionUnion
   @join__type(graph: CMS)
- = Post | Page | Collection | LandingPage | Release
+ = Post | Page | Collection | Contact | LandingPage | Release | Translation
 
 """The template assigned to a node of content"""
 interface ContentTemplate
@@ -2133,6 +2598,9 @@ enum ContentTypeEnum
   COLLECTION_CPT
 
   """The Type of Content object"""
+  CONTACT_CPT
+
+  """The Type of Content object"""
   LANDING_PAGE_CPT
 
   """The Type of Content object"""
@@ -2143,6 +2611,9 @@ enum ContentTypeEnum
 
   """The Type of Content object"""
   RELEASE_CPT
+
+  """The Type of Content object"""
+  TRANSLATION_CPT
 }
 
 """
@@ -2439,6 +2910,52 @@ type CreateCommentPayload
   Whether the mutation succeeded. If the comment is not approved, the server will not return the comment to a non authenticated user, but a success message can be returned if the create succeeded, and the client can optimistically add the comment to the client cache
   """
   success: Boolean
+}
+
+"""Input for the createContact mutation"""
+input CreateContactInput
+  @join__type(graph: CMS)
+{
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  """
+  date: String
+  language: LanguageCodeEnum
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the createContact mutation"""
+type CreateContactPayload
+  @join__type(graph: CMS)
+{
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  contact: Contact
 }
 
 """Input for the createLandingPage mutation"""
@@ -2793,6 +3310,51 @@ type CreateTagPayload
   tag: Tag
 }
 
+"""Input for the createTranslation mutation"""
+input CreateTranslationInput
+  @join__type(graph: CMS)
+{
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  """
+  date: String
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the createTranslation mutation"""
+type CreateTranslationPayload
+  @join__type(graph: CMS)
+{
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  translation: Translation
+}
+
 """Input for the createUser mutation"""
 input CreateUserInput
   @join__type(graph: CMS)
@@ -2942,20 +3504,22 @@ input DateQueryInput
 scalar DateTime
   @join__type(graph: UNIFIED_SEARCH)
 
-""""""
+"""
+Default images of different post types. Returns url of image of queried post type. Values come from Sivuston Asetukset -&gt; Oletuskuvat.
+"""
 type DefaultImages
   @join__type(graph: CMS)
 {
-  """Attachment ID for article image"""
+  """Attachment URL for article image"""
   article: String
 
-  """Attachment ID for event image"""
+  """Attachment URL for event image"""
   event: String
 
-  """Attachment ID for hero image"""
+  """Attachment URL for hero image"""
   hero: String
 
-  """Attachment ID for page image"""
+  """Attachment URL for page image"""
   page: String
 }
 
@@ -3062,6 +3626,40 @@ type DeleteCommentPayload
   comment: Comment
 
   """The deleted comment ID"""
+  deletedId: ID
+}
+
+"""Input for the deleteContact mutation"""
+input DeleteContactInput
+  @join__type(graph: CMS)
+{
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Whether the object should be force deleted instead of being moved to the trash
+  """
+  forceDelete: Boolean
+
+  """The ID of the contact to delete"""
+  id: ID!
+}
+
+"""The payload for the deleteContact mutation"""
+type DeleteContactPayload
+  @join__type(graph: CMS)
+{
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The object before it was deleted"""
+  contact: Contact
+
+  """The ID of the deleted object"""
   deletedId: ID
 }
 
@@ -3291,6 +3889,40 @@ type DeleteTagPayload
 
   """The deteted term object"""
   tag: Tag
+}
+
+"""Input for the deleteTranslation mutation"""
+input DeleteTranslationInput
+  @join__type(graph: CMS)
+{
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Whether the object should be force deleted instead of being moved to the trash
+  """
+  forceDelete: Boolean
+
+  """The ID of the translation to delete"""
+  id: ID!
+}
+
+"""The payload for the deleteTranslation mutation"""
+type DeleteTranslationPayload
+  @join__type(graph: CMS)
+{
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The ID of the deleted object"""
+  deletedId: ID
+
+  """The object before it was deleted"""
+  translation: Translation
 }
 
 """Input for the deleteUser mutation"""
@@ -3659,7 +4291,11 @@ type EventSearch
   """List of modules"""
   modules: [CollectionModulesUnionType]
 
-  """Show all -link"""
+  """
+  Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
+                  hakutulosten osoite -link and search params of the module, for example:
+                  https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
+  """
   showAllLink: String
 
   """Module title"""
@@ -3688,7 +4324,11 @@ type EventSearchCarousel
   """Events order"""
   orderNewestFirst: Boolean
 
-  """Show all -link"""
+  """
+  Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
+                                      hakutulosten osoite -link and search params of the module, for example:
+                                      https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
+  """
   showAllLink: String
 
   """Module title"""
@@ -5314,6 +5954,20 @@ type LayoutCollection
   collection: Collection
 }
 
+"""Layout: LayoutContact"""
+type LayoutContact
+  @join__type(graph: CMS)
+{
+  """Contacts"""
+  contacts: [Contact]
+
+  """Description"""
+  description: String
+
+  """Title"""
+  title: String
+}
+
 """Layout: LayoutLinkList"""
 type LayoutLinkList
   @join__type(graph: CMS)
@@ -5510,6 +6164,23 @@ type LocationImage
 {
   url: String
   caption: LanguageString
+}
+
+"""Collection Module: LocationsSelected"""
+type LocationsSelected
+  @join__type(graph: CMS)
+{
+  """List of location IDs"""
+  locations: [Int]
+
+  """Module type"""
+  module: String
+
+  """List of modules"""
+  modules: [CollectionModulesUnionType]
+
+  """Module title"""
+  title: String
 }
 
 """File details for a Media Item"""
@@ -6553,6 +7224,12 @@ type Mutation
     input: CreateCommentInput!
   ): CreateCommentPayload @join__field(graph: CMS)
 
+  """The payload for the createContact mutation"""
+  createContact(
+    """Input for the createContact mutation"""
+    input: CreateContactInput!
+  ): CreateContactPayload @join__field(graph: CMS)
+
   """The payload for the createLandingPage mutation"""
   createLandingPage(
     """Input for the createLandingPage mutation"""
@@ -6595,6 +7272,12 @@ type Mutation
     input: CreateTagInput!
   ): CreateTagPayload @join__field(graph: CMS)
 
+  """The payload for the createTranslation mutation"""
+  createTranslation(
+    """Input for the createTranslation mutation"""
+    input: CreateTranslationInput!
+  ): CreateTranslationPayload @join__field(graph: CMS)
+
   """The payload for the createUser mutation"""
   createUser(
     """Input for the createUser mutation"""
@@ -6618,6 +7301,12 @@ type Mutation
     """Input for the deleteComment mutation"""
     input: DeleteCommentInput!
   ): DeleteCommentPayload @join__field(graph: CMS)
+
+  """The payload for the deleteContact mutation"""
+  deleteContact(
+    """Input for the deleteContact mutation"""
+    input: DeleteContactInput!
+  ): DeleteContactPayload @join__field(graph: CMS)
 
   """The payload for the deleteLandingPage mutation"""
   deleteLandingPage(
@@ -6660,6 +7349,12 @@ type Mutation
     """Input for the deleteTag mutation"""
     input: DeleteTagInput!
   ): DeleteTagPayload @join__field(graph: CMS)
+
+  """The payload for the deleteTranslation mutation"""
+  deleteTranslation(
+    """Input for the deleteTranslation mutation"""
+    input: DeleteTranslationInput!
+  ): DeleteTranslationPayload @join__field(graph: CMS)
 
   """The payload for the deleteUser mutation"""
   deleteUser(
@@ -6715,6 +7410,12 @@ type Mutation
     input: UpdateCommentInput!
   ): UpdateCommentPayload @join__field(graph: CMS)
 
+  """The payload for the updateContact mutation"""
+  updateContact(
+    """Input for the updateContact mutation"""
+    input: UpdateContactInput!
+  ): UpdateContactPayload @join__field(graph: CMS)
+
   """The payload for the updateLandingPage mutation"""
   updateLandingPage(
     """Input for the updateLandingPage mutation"""
@@ -6762,6 +7463,12 @@ type Mutation
     """Input for the UpdateTag mutation"""
     input: UpdateTagInput!
   ): UpdateTagPayload @join__field(graph: CMS)
+
+  """The payload for the updateTranslation mutation"""
+  updateTranslation(
+    """Input for the updateTranslation mutation"""
+    input: UpdateTranslationInput!
+  ): UpdateTranslationPayload @join__field(graph: CMS)
 
   """The payload for the updateUser mutation"""
   updateUser(
@@ -7548,7 +8255,7 @@ enum PageIdType
 
 union PageModulesUnionType
   @join__type(graph: CMS)
- = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LayoutCollection | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel
+ = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel
 
 union PageSidebarUnionType
   @join__type(graph: CMS)
@@ -8754,7 +9461,7 @@ enum PostIdType
 
 union PostModulesUnionType
   @join__type(graph: CMS)
- = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LayoutCollection | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel
+ = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel
 
 """The format of post field data."""
 enum PostObjectFieldFormatEnum
@@ -9755,6 +10462,57 @@ type Query
     where: RootQueryToCommentConnectionWhereArgs
   ): RootQueryToCommentConnection @join__field(graph: CMS)
 
+  """An object of the contact Type. Contacts"""
+  contact(
+    """The globally unique identifier of the object."""
+    id: ID!
+
+    """Type of unique identifier to fetch by. Default is Global ID"""
+    idType: ContactIdType
+
+    """Whether to return the node as a preview instance"""
+    asPreview: Boolean
+  ): Contact @join__field(graph: CMS)
+
+  """A contact object"""
+  contactBy(
+    """Get the object by its global ID"""
+    id: ID
+
+    """Get the contact by its database ID"""
+    contactId: Int
+
+    """Get the contact by its uri"""
+    uri: String
+
+    """
+    Get the contact by its slug (only available for non-hierarchical types)
+    """
+    slug: String
+  ): Contact @join__field(graph: CMS) @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
+
+  """Connection between the RootQuery type and the contact type"""
+  contacts(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToContactConnectionWhereArgs
+  ): RootQueryToContactConnection @join__field(graph: CMS)
+
   """A node used to manage content"""
   contentNode(
     """Unique identifier for the content node."""
@@ -10048,7 +10806,7 @@ type Query
     uri: String
   ): Page @join__field(graph: CMS) @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
 
-  """"""
+  """Returns ID of page that uses the given template"""
   pageByTemplate(language: String, template: TemplateEnum): Page @join__field(graph: CMS)
 
   """Connection between the RootQuery type and the page type"""
@@ -10427,6 +11185,57 @@ type Query
 
   """Translate string using pll_translate_string() (Polylang)"""
   translateString(string: String!, language: LanguageCodeEnum!): String @join__field(graph: CMS)
+
+  """An object of the translation Type. Translations"""
+  translation(
+    """The globally unique identifier of the object."""
+    id: ID!
+
+    """Type of unique identifier to fetch by. Default is Global ID"""
+    idType: TranslationIdType
+
+    """Whether to return the node as a preview instance"""
+    asPreview: Boolean
+  ): Translation @join__field(graph: CMS)
+
+  """A translation object"""
+  translationBy(
+    """Get the object by its global ID"""
+    id: ID
+
+    """Get the translation by its database ID"""
+    translationId: Int
+
+    """Get the translation by its uri"""
+    uri: String
+
+    """
+    Get the translation by its slug (only available for non-hierarchical types)
+    """
+    slug: String
+  ): Translation @join__field(graph: CMS) @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
+
+  """Connection between the RootQuery type and the translation type"""
+  translations(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToTranslationConnectionWhereArgs
+  ): RootQueryToTranslationConnection @join__field(graph: CMS)
 
   """Returns a user"""
   user(
@@ -11556,6 +12365,94 @@ input RootQueryToCommentConnectionWhereArgs
 
   """Include comments for a specific user ID."""
   userId: ID
+}
+
+"""Connection between the RootQuery type and the contact type"""
+type RootQueryToContactConnection
+  @join__type(graph: CMS)
+{
+  """Edges for the RootQueryToContactConnection connection"""
+  edges: [RootQueryToContactConnectionEdge]
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Contact]
+
+  """Information about pagination in a connection."""
+  pageInfo: WPPageInfo
+}
+
+"""An edge in a connection"""
+type RootQueryToContactConnectionEdge
+  @join__type(graph: CMS)
+{
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: Contact
+}
+
+"""Arguments for filtering the RootQueryToContactConnection connection"""
+input RootQueryToContactConnectionWhereArgs
+  @join__type(graph: CMS)
+{
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+
+  """Filter by Contacts by language code (Polylang)"""
+  language: LanguageCodeFilterEnum
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """What paramater to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+
+  """Title of the object"""
+  title: String
 }
 
 """Connection between the RootQuery type and the ContentNode type"""
@@ -12857,6 +13754,93 @@ type RootQueryToThemeConnectionEdge
   node: Theme
 }
 
+"""Connection between the RootQuery type and the translation type"""
+type RootQueryToTranslationConnection
+  @join__type(graph: CMS)
+{
+  """Edges for the RootQueryToTranslationConnection connection"""
+  edges: [RootQueryToTranslationConnectionEdge]
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Translation]
+
+  """Information about pagination in a connection."""
+  pageInfo: WPPageInfo
+}
+
+"""An edge in a connection"""
+type RootQueryToTranslationConnectionEdge
+  @join__type(graph: CMS)
+{
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: Translation
+}
+
+"""
+Arguments for filtering the RootQueryToTranslationConnection connection
+"""
+input RootQueryToTranslationConnectionWhereArgs
+  @join__type(graph: CMS)
+{
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """What paramater to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+
+  """Title of the object"""
+  title: String
+}
+
 """Connection between the RootQuery type and the User type"""
 type RootQueryToUserConnection
   @join__type(graph: CMS)
@@ -14055,6 +15039,327 @@ type TimeDescription
   otherTime: TimeDescription
 }
 
+"""The translation type"""
+type Translation implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & NodeWithTitle & NodeWithRevisions
+  @join__implements(graph: CMS, interface: "Node")
+  @join__implements(graph: CMS, interface: "ContentNode")
+  @join__implements(graph: CMS, interface: "UniformResourceIdentifiable")
+  @join__implements(graph: CMS, interface: "DatabaseIdentifier")
+  @join__implements(graph: CMS, interface: "NodeWithTemplate")
+  @join__implements(graph: CMS, interface: "NodeWithTitle")
+  @join__implements(graph: CMS, interface: "NodeWithRevisions")
+  @join__type(graph: CMS)
+{
+  """Connection between the ContentNode type and the ContentType type"""
+  contentType: ContentNodeToContentTypeConnectionEdge
+
+  """The name of the Content Type the node belongs to"""
+  contentTypeName: String!
+
+  """The unique identifier stored in the database"""
+  databaseId: Int!
+
+  """Post publishing date."""
+  date: String
+
+  """The publishing date set in GMT."""
+  dateGmt: String
+
+  """The desired slug of the post"""
+  desiredSlug: String
+
+  """
+  If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
+  """
+  editingLockedBy: ContentNodeToEditLockConnectionEdge
+
+  """The RSS enclosure for the object"""
+  enclosure: String
+
+  """Connection between the ContentNode type and the EnqueuedScript type"""
+  enqueuedScripts(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+  ): ContentNodeToEnqueuedScriptConnection
+
+  """
+  Connection between the ContentNode type and the EnqueuedStylesheet type
+  """
+  enqueuedStylesheets(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+  ): ContentNodeToEnqueuedStylesheetConnection
+
+  """
+  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  """
+  guid: String
+
+  """The globally unique identifier of the translation-cpt object."""
+  id: ID!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the object is a node in the preview state"""
+  isPreview: Boolean
+
+  """Whether the object is restricted from the current viewer"""
+  isRestricted: Boolean
+
+  """True if the node is a revision of another node"""
+  isRevision: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
+
+  """The user that most recently edited the node"""
+  lastEditedBy: ContentNodeToEditLastConnectionEdge
+
+  """The permalink of the post"""
+  link: String
+
+  """
+  The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
+  """
+  modified: String
+
+  """
+  The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
+  """
+  modifiedGmt: String
+
+  """Connection between the translation type and the translation type"""
+  preview: TranslationToPreviewConnectionEdge
+
+  """The database id of the preview node"""
+  previewRevisionDatabaseId: Int
+
+  """Whether the object is a node in the preview state"""
+  previewRevisionId: ID
+
+  """
+  If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node.
+  """
+  revisionOf: NodeWithRevisionsToContentNodeConnectionEdge
+
+  """Connection between the translation type and the translation type"""
+  revisions(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """Arguments for filtering the connection"""
+    where: TranslationToRevisionConnectionWhereArgs
+  ): TranslationToRevisionConnection
+
+  """The SEO Framework data of the translation"""
+  seo: SEO
+
+  """
+  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  """
+  slug: String
+
+  """The current status of the object"""
+  status: String
+
+  """The template assigned to the node"""
+  template: ContentTemplate
+
+  """
+  The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
+  """
+  title(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """The id field matches the WP_Post-&gt;ID field."""
+  translationId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
+
+  """Translations"""
+  translations: [TranslationResponse]
+
+  """The unique resource identifier path"""
+  uri: String
+}
+
+"""The Type of Identifier used to fetch a single resource. Default is ID."""
+enum TranslationIdType
+  @join__type(graph: CMS)
+{
+  """Identify a resource by the Database ID."""
+  DATABASE_ID
+
+  """Identify a resource by the (hashed) Global ID."""
+  ID
+
+  """
+  Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
+  """
+  SLUG
+
+  """Identify a resource by the URI."""
+  URI
+}
+
+"""Translation with language/value pairs"""
+type TranslationItems
+  @join__type(graph: CMS)
+{
+  """Translation string"""
+  en: String
+
+  """Translation string"""
+  fi: String
+
+  """Translation string"""
+  sv: String
+}
+
+"""Translation response contains translation key and translations"""
+type TranslationResponse
+  @join__type(graph: CMS)
+{
+  """Translation key for frontend"""
+  key: String
+
+  """Translations for frontend"""
+  translations: TranslationItems
+}
+
+"""Connection between the translation type and the translation type"""
+type TranslationToPreviewConnectionEdge
+  @join__type(graph: CMS)
+{
+  """The node of the connection, without the edges"""
+  node: Translation
+}
+
+"""Connection between the translation type and the translation type"""
+type TranslationToRevisionConnection
+  @join__type(graph: CMS)
+{
+  """Edges for the translationToRevisionConnection connection"""
+  edges: [TranslationToRevisionConnectionEdge]
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Translation]
+
+  """Information about pagination in a connection."""
+  pageInfo: WPPageInfo
+}
+
+"""An edge in a connection"""
+type TranslationToRevisionConnectionEdge
+  @join__type(graph: CMS)
+{
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: Translation
+}
+
+"""Arguments for filtering the translationToRevisionConnection connection"""
+input TranslationToRevisionConnectionWhereArgs
+  @join__type(graph: CMS)
+{
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """What paramater to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+
+  """Title of the object"""
+  title: String
+}
+
 enum UnifiedSearchLanguage
   @join__type(graph: UNIFIED_SEARCH)
 {
@@ -14276,6 +15581,55 @@ type UpdateCommentPayload
   Whether the mutation succeeded. If the comment is not approved, the server will not return the comment to a non authenticated user, but a success message can be returned if the create succeeded, and the client can optimistically add the comment to the client cache
   """
   success: Boolean
+}
+
+"""Input for the updateContact mutation"""
+input UpdateContactInput
+  @join__type(graph: CMS)
+{
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  """
+  date: String
+
+  """The ID of the contact object"""
+  id: ID!
+  language: LanguageCodeEnum
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the updateContact mutation"""
+type UpdateContactPayload
+  @join__type(graph: CMS)
+{
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  contact: Contact
 }
 
 """Input for the updateLandingPage mutation"""
@@ -14725,6 +16079,54 @@ type UpdateTagPayload
 
   """The created post_tag"""
   tag: Tag
+}
+
+"""Input for the updateTranslation mutation"""
+input UpdateTranslationInput
+  @join__type(graph: CMS)
+{
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  """
+  date: String
+
+  """The ID of the translation object"""
+  id: ID!
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the updateTranslation mutation"""
+type UpdateTranslationPayload
+  @join__type(graph: CMS)
+{
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  translation: Translation
 }
 
 """Input for the updateUser mutation"""

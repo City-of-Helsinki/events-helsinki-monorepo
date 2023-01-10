@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { faker } from '@faker-js/faker';
 import type {
-  AboutPagesResponse,
-  AccessibilityPagesResponse,
   Audience,
   BannerPage,
   CmsImage,
-  CollectionDetails,
-  CollectionListResponse,
   EventDetails,
   EventListResponse,
   ExternalLink,
@@ -284,41 +280,6 @@ export const fakeBanner = (overrides?: Partial<BannerPage>): BannerPage =>
     overrides
   );
 
-export const fakeCollections = (
-  count = 1,
-  collections?: Partial<CollectionDetails>[]
-): CollectionListResponse => ({
-  data: generateNodeArray((i) => fakeCollection(collections?.[i]), count),
-  __typename: 'CollectionListResponse',
-});
-export const fakeCollection = (
-  overrides?: Partial<CollectionDetails>
-): CollectionDetails =>
-  merge(
-    {
-      id: faker.datatype.uuid(),
-      boxColor: fakeLocalizedObject('FOG'),
-      curatedEvents: [],
-      curatedEventsTitle: fakeLocalizedObject(),
-      description: fakeLocalizedObject(),
-      eventListQuery: fakeLocalizedObject(
-        'https://tapahtumat.test.kuva.hel.ninja/fi/events?isFree=true&text=jooga'
-      ),
-      expired: false,
-      eventListTitle: fakeLocalizedObject(),
-      heroImage: fakeCmsImage(),
-      keywords: fakeLocalizedCmsKeywords(),
-      linkText: fakeLocalizedObject(),
-      linkUrl: fakeLocalizedObject(faker.internet.url()),
-      live: true,
-      slug: faker.datatype.uuid(),
-      socialMediaDescription: fakeLocalizedObject(),
-      title: fakeLocalizedObject(),
-      __typename: 'CollectionDetails',
-    },
-    overrides
-  );
-
 export const fakeCmsImage = (overrides?: Partial<CmsImage>): CmsImage =>
   merge(
     {
@@ -357,25 +318,6 @@ export const fakeLocalizedCmsImage = (
     },
     overrides
   );
-
-export const fakeAboutPages = (
-  count = 1,
-  aboutPages?: Partial<StaticPage>[]
-): AboutPagesResponse => ({
-  data: generateNodeArray((i) => fakeStaticPage(aboutPages?.[i]), count),
-  __typename: 'AboutPagesResponse',
-});
-
-export const fakeAccessibilityPages = (
-  count = 1,
-  accessibilityPages?: Partial<StaticPage>[]
-): AccessibilityPagesResponse => ({
-  data: generateNodeArray(
-    (i) => fakeStaticPage(accessibilityPages?.[i]),
-    count
-  ),
-  __typename: 'AccessibilityPagesResponse',
-});
 
 export const fakeStaticPage = (overrides?: Partial<StaticPage>): StaticPage =>
   merge(

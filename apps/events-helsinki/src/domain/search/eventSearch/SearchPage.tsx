@@ -77,7 +77,7 @@ const SearchPage: React.FC<{
           },
         });
       } catch (e) {
-        toast.error(t('search:errorLoadMode'));
+        toast.error(t('search:errorLoadMore'));
       }
     }
     setIsFetchingMore(false);

@@ -3,7 +3,7 @@
   "ariaLiveSearchReady": "{{count}} hakutulosta",
   "textFoundEvents": "{{count}} hakutulosta",
   "buttonClearFilters": "Tyhjennä hakuehdot",
-  "errorLoadMode": "Tapahtumien lataaminen epäonnistui",
+  "errorLoadMore": "Tapahtumien lataaminen epäonnistui",
   "buttonLoadMore": "Näytä lisää harrastuksia ({{count}})",
   "searchNotification": {
     "noResultsTitle": "Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta",

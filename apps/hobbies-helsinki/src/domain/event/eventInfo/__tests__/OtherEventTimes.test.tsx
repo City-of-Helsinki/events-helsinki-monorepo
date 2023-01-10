@@ -186,7 +186,7 @@ async function testToaster() {
 
   await waitFor(() => {
     expect(toast.error).toHaveBeenCalledWith(
-      translations.event.info.errorLoadMode
+      translations.event.info.errorLoadMore
     );
   });
 }

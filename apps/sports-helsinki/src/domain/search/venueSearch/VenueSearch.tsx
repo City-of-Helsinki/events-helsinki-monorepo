@@ -17,6 +17,7 @@ import SearchAutosuggest from '../../../common-events/components/search/SearchAu
 import { SEARCH_ROUTES } from '../../../constants';
 import type { SearchRoute } from '../../../types';
 import { getI18nPath } from '../../../utils/routerUtils';
+import type { SearchForm } from '../combinedSearch/CombinedSearchPage';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import styles from './search.module.scss';
 
@@ -37,30 +38,38 @@ export type SearchComponentProps = {
   className?: string;
 } & SimpleVenueSearchFormProps;
 
-export const SimpleVenueSearchForm: React.FC<SimpleVenueSearchFormProps> = ({
+export const useSimmpleVenueSearchForm = ({
   scrollToResultList,
-  showTitle = false,
-  searchRoute = SEARCH_ROUTES.SEARCH,
-}) => {
-  const { t } = useTranslation('search');
+  searchRoute,
+  autosuggestInput,
+  setAutosuggestInput,
+}: {
+  scrollToResultList: SimpleVenueSearchFormProps['scrollToResultList'];
+  searchRoute: SimpleVenueSearchFormProps['searchRoute'];
+  autosuggestInput: string;
+  setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
+}): SearchForm => {
   const locale = useLocale();
   const router = useRouter();
-
-  const [autosuggestInput, setAutosuggestInput] = React.useState('');
 
   const searchParams = React.useMemo(
     () => new URLSearchParams(qs.stringify(router.query)),
     [router.query]
   );
+
   const searchFilters = {
     q: autosuggestInput,
   };
+
   const goToSearch = (search: string): void => {
-    router.push({
-      pathname: getI18nPath(searchRoute, locale),
-      query: parse(search) as ParsedUrlQueryInput,
-    });
+    if (searchRoute) {
+      router.push({
+        pathname: getI18nPath(searchRoute, locale),
+        query: parse(search) as ParsedUrlQueryInput,
+      });
+    }
   };
+
   const moveToSearchPage = () => {
     const filters = {
       ...searchFilters,
@@ -88,10 +97,37 @@ export const SimpleVenueSearchForm: React.FC<SimpleVenueSearchFormProps> = ({
     scrollToResultList && scrollToResultList();
   };
 
-  // Initialize fields when page is loaded
-  React.useEffect(() => {
+  const initialFieldsOnPageLoad = React.useCallback(() => {
     setAutosuggestInput(searchParams.get('q') ?? '');
-  }, [searchParams]);
+  }, [searchParams, setAutosuggestInput]);
+
+  return {
+    searchParams,
+    goToSearch,
+    moveToSearchPage,
+    clearInputValues,
+    clearFilters,
+    handleSubmit,
+    initialFieldsOnPageLoad,
+    searchFilters,
+    scrollToResultList,
+  };
+};
+
+export const SimpleVenueSearchForm: React.FC<SimpleVenueSearchFormProps> = ({
+  scrollToResultList,
+  showTitle = false,
+  searchRoute = SEARCH_ROUTES.SEARCH,
+}) => {
+  const { t } = useTranslation('search');
+  const [autosuggestInput, setAutosuggestInput] = React.useState('');
+  const { goToSearch, clearFilters, handleSubmit, initialFieldsOnPageLoad } =
+    useSimmpleVenueSearchForm({
+      scrollToResultList,
+      searchRoute,
+      autosuggestInput,
+      setAutosuggestInput,
+    });
 
   const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
     const value = option.text;
@@ -99,6 +135,11 @@ export const SimpleVenueSearchForm: React.FC<SimpleVenueSearchFormProps> = ({
     goToSearch(search);
     scrollToResultList && scrollToResultList();
   };
+
+  // Initialize fields when page is loaded
+  React.useEffect(() => {
+    initialFieldsOnPageLoad();
+  }, [initialFieldsOnPageLoad]);
 
   return (
     <form onSubmit={handleSubmit}>

@@ -7,7 +7,7 @@
     "packages/eslint-config-bases": { "release-type": "node" },
     "packages/components": { "release-type": "node" },
     "packages/common-i18n": { "release-type": "node" },
-    "proxies/events-graphql-federation": { "release-type": "rust" }
+    "proxies/events-graphql-federation": { "release-type": "rust", "package-name": "federation-router" }
   },
   "plugins": ["sentence-case"]
 }

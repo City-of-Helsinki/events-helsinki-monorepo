@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { Button } from 'hds-react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import type { SearchTabId, TabsContextType } from '../tabsContext';
 import { TabsContext, useTabsContext } from '../tabsContext';
@@ -11,9 +12,15 @@ export type TabsPropType = {
 };
 
 export function SearchTab({ id, children }: TabsPropType) {
+  const router = useRouter();
   const { activeTab, setActiveTab } = useTabsContext();
   const isActive = activeTab === id;
-  const onClick = () => setActiveTab(id);
+  const onClick = () => {
+    setActiveTab(id);
+    router.push({ query: { ...router.query, searchType: id } }, undefined, {
+      shallow: true,
+    });
+  };
   return (
     <Button
       variant="secondary"
@@ -55,6 +62,12 @@ type SearchTabsProps = {
 
 function SearchTabs({ initTab, children }: SearchTabsProps) {
   const [activeTab, setActiveTab] = React.useState<SearchTabId>(initTab);
+
+  // Set the initTab as an active tab if it changes
+  React.useEffect(() => {
+    setActiveTab(initTab);
+  }, [initTab]);
+
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
       {children}

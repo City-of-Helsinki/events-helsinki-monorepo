@@ -254,8 +254,3 @@ export type ItemQueryResult<
   pageInfo?: PageInfoFragment;
   totalCount: number;
 };
-
-export type Coordinates = {
-  latitude: number;
-  longitude: number;
-};

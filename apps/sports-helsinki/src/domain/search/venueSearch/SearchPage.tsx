@@ -180,6 +180,7 @@ const SearchPage: React.FC<SearchPageProps> = ({
                     onLoadMore={handleLoadMore}
                   />
                 }
+                showOrderBySelect
               />
             )}
           </LoadingSpinner>

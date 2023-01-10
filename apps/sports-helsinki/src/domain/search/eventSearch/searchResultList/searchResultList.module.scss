@@ -19,11 +19,6 @@
   @include respond_above(s) {
     text-align: left;
   }
-
-  @include respond_above(m) {
-    margin-top: 0;
-    margin-bottom: 2rem;
-  }
 }
 
 .searchResultWrapper {
@@ -40,5 +35,25 @@
         margin-top: 0;
       }
     }
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+
+  @include respond-above(s) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.rowGroup {
+  display: contents;
+  align-items: center;
+
+  & > *:not(:last-child) {
+    margin-right: var(--spacing-m);
   }
 }

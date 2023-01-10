@@ -238,6 +238,18 @@ To ensure decent performance, those features are present in the example actions:
   >    - ".eslintignore"
   > ```
 
+### 5.5 Releases, changelogs and versioning
+
+Packages and apps use automatic semantic versions and are released using [Release Please](https://github.com/googleapis/release-please).
+
+Use conventional commits to ensure that the changelog is generated correctly.
+
+> Release Please is a GitHub Action that automates releases for you. It will create a GitHub release and a GitHub Pull Request with a changelog based on conventional commits.
+
+Note! If the PR is not created, there's propably one of the older Release PR's still in pending state: See if any of the closed PR's are labeled with `autorelease: pending` 
+and change their label to `autorelease: tagged`. Then go and re-run the last merge workflow to trigger the release action.
+
+
 ## 6. Editor support
 
 ### 6.1 VSCode

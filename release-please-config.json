@@ -1,0 +1,14 @@
+{
+  "bootstrap-sha": "1acd804496b8984c9a463fea07468d13443f72c4",
+  "separate-pull-requests": true,
+  "packages": {
+    "apps/hobbies-helsinki":{ "release-type": "node" },
+    "apps/events-helsinki": { "release-type": "node" },
+    "apps/sports-helsinki": { "release-type": "node" },
+    "packages/eslint-config-bases": { "release-type": "node" },
+    "packages/components": { "release-type": "node" },
+    "packages/common-i18n": { "release-type": "node" },
+    "proxies/events-graphql-federation": { "release-type": "rust", "package-name": "federation-router" }
+  },
+  "plugins": ["sentence-case"]
+}

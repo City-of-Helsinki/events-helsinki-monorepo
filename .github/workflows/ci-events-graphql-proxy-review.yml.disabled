@@ -47,7 +47,7 @@ env:
   CONTAINER_REGISTRY_USER: ${{ secrets.GHCR_CONTAINER_REGISTRY_USER }}
   CONTAINER_REGISTRY_PASSWORD: ${{ secrets.GHCR_TOKEN }}
   CONTAINER_REGISTRY_REPO: ghcr.io/city-of-helsinki/${{ github.event.repository.name }}
-  PROJECT: events-graphql-proxy
+  PROXY: events-graphql-proxy
   KUBECONFIG_RAW: ${{ secrets.KUBECONFIG_RAW }}
   BUILD_ARTIFACT_FOLDER: 'build_artifacts'
   SERVICE_ARTIFACT_FOLDER: 'service_artifacts'
@@ -78,12 +78,11 @@ jobs:
       - name: Build
         uses: andersinno/kolga-build-action@v2
         env:
-          DOCKER_BUILD_SOURCE: ./Dockerfile
+          DOCKER_BUILD_SOURCE: ./proxy.Dockerfile
           DOCKER_BUILD_CONTEXT: .
           DOCKER_BUILD_TARGET: runner
-          DOCKER_IMAGE_NAME: ${{ env.PROJECT }}-review
-          DOCKER_BUILD_ARG_APP_PORT: ${{ env.SERVICE_PORT }}
-          DOCKER_BUILD_ARG_PROJECT: ${{ env.PROJECT }}
+          DOCKER_IMAGE_NAME: ${{ env.PROXY }}-review
+          DOCKER_BUILD_ARG_PROXY: ${{ env.PROXY }}
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_PORT: 4100
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_API_BASE_URL: 'https://api.hel.fi/linkedevents/v1/'
           DOCKER_BUILD_ARG_GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: 'https://kartta.hel.fi/ws/geoserver/avoindata'
@@ -108,16 +107,16 @@ jobs:
         uses: andersinno/kolga-deploy-action@v2
         env:
           ENVIRONMENT_URL: ${{ env.CUSTOM_ENVIRONMENT_URL }}
-          ENVIRONMENT_SLUG: ${{ env.PROJECT }}
-          DOCKER_IMAGE_NAME: ${{ env.PROJECT }}-review
+          ENVIRONMENT_SLUG: ${{ env.PROXY }}
+          DOCKER_IMAGE_NAME: ${{ env.PROXY }}-review
           K8S_SECRET_APP_PORT: ${{ env.SERVICE_PORT }}
-          K8S_SECRET_PROJECT: ${{ env.PROJECT }}
-          PROJECT: ${{ env.PROJECT }}
+          K8S_SECRET_PROJECT: ${{ env.PROXY }}
+          PROXY: ${{ env.PROXY }}
 
       - name: Create PR comment for Deploy URL
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          header: ${{ env.PROJECT }}-deployment-url
+          header: ${{ env.PROXY }}-deployment-url
           message: |
             **Events-graphql-proxy branch is deployed to: ${{ env.CUSTOM_ENVIRONMENT_URL }}** :rocket::rocket::rocket:

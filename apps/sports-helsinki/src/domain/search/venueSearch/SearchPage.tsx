@@ -19,6 +19,7 @@ import { SEARCH_ROUTES } from '../../../constants';
 import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 import AppConfig from '../../app/AppConfig';
 import useUnifiedSearchListQuery from '../../unifiedSearch/useUnifiedSearchListQuery';
+import type { ISearchPage } from '../combinedSearch/types';
 import SearchResultsContainer from '../eventSearch/searchResultList/SearchResultsContainer';
 import VenueList from '../venueList/VenueList';
 import styles from './eventSearchPage.module.scss';
@@ -28,15 +29,7 @@ import { VenueSearchUtilities } from './VenueSearch';
 const BLOCK_SIZE = 10;
 export const searchContainerDataTestId = 'searchContainer';
 
-type SearchPageProps = {
-  SearchComponent: React.FC<SearchComponentProps>;
-  pageTitle: string;
-};
-
-const SearchPage: React.FC<SearchPageProps> = ({
-  SearchComponent,
-  pageTitle,
-}) => {
+export function useSearchPage(): ISearchPage {
   const { t } = useSearchTranslation();
   const router = useRouter();
   const { meta } = useConfig();
@@ -52,20 +45,9 @@ const SearchPage: React.FC<SearchPageProps> = ({
       includeHaukiFields: AppConfig.isHaukiEnabled,
     },
   });
-  const venuesList = React.useMemo(
-    () =>
-      venuesData?.unifiedSearch?.edges.reduce(
-        (venues: UnifiedSearchVenue[], edge) =>
-          edge.node.venue
-            ? [...venues, edge.node.venue as UnifiedSearchVenue]
-            : venues,
-        []
-      ) ?? [],
-    [venuesData]
-  );
-  const count = (venuesData?.unifiedSearch?.count as number) ?? 0;
-  const pageInfo = venuesData?.unifiedSearch?.pageInfo;
-  const hasNext = pageInfo?.hasNextPage ?? false;
+  const resultList = venuesData?.unifiedSearch;
+  const pageInfo = resultList?.pageInfo;
+
   const handleLoadMore = async () => {
     const afterCursor = pageInfo?.endCursor;
     const pagination = {
@@ -73,7 +55,6 @@ const SearchPage: React.FC<SearchPageProps> = ({
       after: afterCursor,
     };
     setIsFetchingMore(true);
-
     setFilters(filters, undefined, {
       scroll: false,
       shallow: true,
@@ -86,7 +67,7 @@ const SearchPage: React.FC<SearchPageProps> = ({
     setIsFetchingMore(false);
   };
 
-  const scrollToResultList = () => {
+  const scrollToResultList = React.useCallback(() => {
     if (isSmallScreen) {
       scroller.scrollTo('resultList', {
         delay: 0,
@@ -95,9 +76,9 @@ const SearchPage: React.FC<SearchPageProps> = ({
         smooth: true,
       });
     }
-  };
+  }, [isSmallScreen]);
 
-  const scrollToEventCard = (id: string) => {
+  const scrollToResultCard = (id: string) => {
     scroller.scrollTo(id, {
       delay: 0,
       duration: 300,
@@ -106,11 +87,11 @@ const SearchPage: React.FC<SearchPageProps> = ({
     });
   };
 
-  React.useEffect(() => {
+  const initialPageOnLoad = React.useCallback(() => {
     if (router.asPath && router.query?.scrollToResults) {
       scrollToResultList();
     } else if (router.query?.venueId) {
-      scrollToEventCard(
+      scrollToResultCard(
         getLargeEventCardId(
           Array.isArray(router.query.venueId)
             ? router.query.venueId[0]
@@ -119,6 +100,66 @@ const SearchPage: React.FC<SearchPageProps> = ({
       );
       removeQueryParamsFromRouter(router, ['venueId'], SEARCH_ROUTES.SEARCH);
     }
+  }, [router, scrollToResultList]);
+
+  const venuesList = React.useMemo(
+    () =>
+      resultList?.edges.reduce(
+        (venues: UnifiedSearchVenue[], edge) =>
+          edge.node.venue
+            ? [...venues, edge.node.venue as UnifiedSearchVenue]
+            : venues,
+        []
+      ) ?? [],
+    [resultList]
+  );
+
+  const count = (resultList?.count as number) ?? 0;
+  const hasNext = pageInfo?.hasNextPage ?? false;
+
+  return {
+    searchFilters: filters,
+    meta,
+    isSmallScreen,
+    handleLoadMore,
+    isFetchingMore,
+    isLoading: isLoadingVenues,
+    scrollToResultList,
+    scrollToResultCard,
+    resultList: venuesList,
+    initialPageOnLoad,
+    count,
+    hasNext,
+  };
+}
+
+type SearchPageProps = {
+  SearchComponent: React.FC<SearchComponentProps>;
+  pageTitle: string;
+};
+
+const SearchPage: React.FC<SearchPageProps> = ({
+  SearchComponent,
+  pageTitle,
+}) => {
+  const { t } = useSearchTranslation();
+  const router = useRouter();
+  const {
+    resultList,
+    handleLoadMore,
+    isLoading: isLoadingVenues,
+    isFetchingMore,
+    meta,
+    scrollToResultList,
+    initialPageOnLoad,
+    count,
+    hasNext,
+  } = useSearchPage();
+
+  const venuesList = resultList as UnifiedSearchVenue[];
+
+  React.useEffect(() => {
+    initialPageOnLoad();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

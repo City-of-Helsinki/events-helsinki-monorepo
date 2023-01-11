@@ -15,17 +15,10 @@ import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { SEARCH_ROUTES } from '../../../constants';
-import type { SearchRoute } from '../../../types';
 import { getI18nPath } from '../../../utils/routerUtils';
-import type { SearchForm } from '../combinedSearch/CombinedSearchPage';
+import type { ISearchForm, SearchComponentType } from '../combinedSearch/types';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import styles from './search.module.scss';
-
-export type SimpleVenueSearchFormProps = {
-  scrollToResultList?: () => void;
-  showTitle?: boolean;
-  searchRoute?: SearchRoute; // TODO: Allow only SEARCH_ROUTE values
-};
 
 export type SearchUtilitiesProps = {
   switchShowMode: () => void;
@@ -36,7 +29,7 @@ export type SearchComponentProps = {
   korosBottom?: boolean;
   searchUtilities?: React.ReactNode;
   className?: string;
-} & SimpleVenueSearchFormProps;
+} & SearchComponentType;
 
 export const useSimmpleVenueSearchForm = ({
   scrollToResultList,
@@ -44,11 +37,11 @@ export const useSimmpleVenueSearchForm = ({
   autosuggestInput,
   setAutosuggestInput,
 }: {
-  scrollToResultList: SimpleVenueSearchFormProps['scrollToResultList'];
-  searchRoute: SimpleVenueSearchFormProps['searchRoute'];
+  scrollToResultList: SearchComponentProps['scrollToResultList'];
+  searchRoute: SearchComponentProps['searchRoute'];
   autosuggestInput: string;
   setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
-}): SearchForm => {
+}): ISearchForm => {
   const locale = useLocale();
   const router = useRouter();
 
@@ -114,7 +107,7 @@ export const useSimmpleVenueSearchForm = ({
   };
 };
 
-export const SimpleVenueSearchForm: React.FC<SimpleVenueSearchFormProps> = ({
+export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
   scrollToResultList,
   showTitle = false,
   searchRoute = SEARCH_ROUTES.SEARCH,

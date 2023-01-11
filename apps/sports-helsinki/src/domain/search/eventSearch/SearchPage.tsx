@@ -1,6 +1,7 @@
 import type {
   QueryEventListArgs,
   EventTypeId,
+  EventListQuery,
 } from 'events-helsinki-components';
 import {
   BasicMeta,
@@ -21,25 +22,24 @@ import { toast } from 'react-toastify';
 import EventList from '../../../common-events/components/eventList/EventList';
 import { SEARCH_ROUTES } from '../../../constants';
 import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
+import type { ISearchPage } from '../combinedSearch/types';
 import type { AdvancedSearchProps } from './AdvancedSearch';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 import { getEventSearchVariables, getNextPage } from './utils';
 
-const SearchPage: React.FC<{
-  SearchComponent: React.FC<AdvancedSearchProps>;
-  pageTitle: string;
+export function useSearchPage({
+  eventType,
+}: {
   eventType: EventTypeId;
-}> = ({ SearchComponent, pageTitle, eventType }) => {
+}): ISearchPage {
   const { t } = useSearchTranslation();
   const router = useRouter();
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
   const isSmallScreen = useIsSmallScreen();
   const { meta } = useConfig();
-
   const params: { place?: string; eventType?: string } = router.query;
-
   const eventFilters = React.useMemo(() => {
     const searchParams = new URLSearchParams(qs.stringify(router.query));
     const variables: QueryEventListArgs = getEventSearchVariables({
@@ -64,15 +64,11 @@ const SearchPage: React.FC<{
     variables: eventFilters,
   });
 
-  // The primary data that is shown in the list
-  const eventsList = eventsData?.eventList;
-
   const handleLoadMore = async () => {
     const page = eventsData?.eventList.meta
       ? getNextPage(eventsData.eventList.meta)
       : null;
     setIsFetchingMore(true);
-
     if (page) {
       try {
         await fetchMore({
@@ -86,7 +82,8 @@ const SearchPage: React.FC<{
     }
     setIsFetchingMore(false);
   };
-  const scrollToResultList = () => {
+
+  const scrollToResultList = React.useCallback(() => {
     if (isSmallScreen) {
       scroller.scrollTo('resultList', {
         delay: 0,
@@ -95,9 +92,9 @@ const SearchPage: React.FC<{
         smooth: true,
       });
     }
-  };
+  }, [isSmallScreen]);
 
-  const scrollToEventCard = (id: string) => {
+  const scrollToResultCard = (id: string) => {
     scroller.scrollTo(id, {
       delay: 0,
       duration: 300,
@@ -106,11 +103,11 @@ const SearchPage: React.FC<{
     });
   };
 
-  React.useEffect(() => {
+  const initialPageOnLoad = React.useCallback(() => {
     if (router.asPath && router.query?.scrollToResults) {
       scrollToResultList();
     } else if (router.query?.eventId) {
-      scrollToEventCard(
+      scrollToResultCard(
         getLargeEventCardId(
           Array.isArray(router.query.eventId)
             ? router.query.eventId[0]
@@ -123,6 +120,49 @@ const SearchPage: React.FC<{
         SEARCH_ROUTES.COURSESEARCH
       );
     }
+  }, [router, scrollToResultList]);
+
+  const count = (eventsData?.eventList?.meta.count as number) ?? 0;
+  const hasNext = !!eventsData?.eventList?.meta.next;
+
+  return {
+    searchFilters: eventFilters,
+    meta,
+    isSmallScreen,
+    handleLoadMore,
+    isFetchingMore,
+    isLoading: isLoadingEvents,
+    scrollToResultList,
+    scrollToResultCard,
+    resultList: eventsData?.eventList,
+    initialPageOnLoad,
+    count,
+    hasNext,
+  };
+}
+
+const SearchPage: React.FC<{
+  SearchComponent: React.FC<AdvancedSearchProps>;
+  pageTitle: string;
+  eventType: EventTypeId;
+}> = ({ SearchComponent, pageTitle, eventType }) => {
+  const { t } = useSearchTranslation();
+  const {
+    resultList,
+    handleLoadMore,
+    isLoading: isLoadingEvents,
+    isFetchingMore,
+    meta,
+    scrollToResultList,
+    initialPageOnLoad,
+    count,
+    hasNext,
+  } = useSearchPage({ eventType });
+
+  const eventsList = resultList as EventListQuery['eventList'];
+
+  React.useEffect(() => {
+    initialPageOnLoad();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -167,8 +207,8 @@ const SearchPage: React.FC<{
                   <EventList
                     cardSize="large"
                     events={eventsList.data}
-                    hasNext={!!eventsList.meta.next}
-                    count={eventsList.meta.count}
+                    hasNext={hasNext}
+                    count={count}
                     loading={isFetchingMore}
                     onLoadMore={handleLoadMore}
                   />

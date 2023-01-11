@@ -5,7 +5,8 @@
     "apps/hobbies-helsinki":{ "release-type": "node" },
     "apps/events-helsinki": { "release-type": "node" },
     "apps/sports-helsinki": { "release-type": "node" },
-    "proxies/events-graphql-federation": { "release-type": "rust", "package-name": "federation-router" }
+    "proxies/events-graphql-federation": { "release-type": "rust", "package-name": "federation-router" },
+    "proxies/events-graphql-proxy": { "release-type": "node" }
   },
   "plugins": ["sentence-case"]
 }

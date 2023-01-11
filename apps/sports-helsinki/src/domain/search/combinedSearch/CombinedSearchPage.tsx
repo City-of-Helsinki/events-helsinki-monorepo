@@ -4,7 +4,6 @@ import {
   useAppSportsTranslation,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
-import type { FormEvent } from 'react';
 import React, { useEffect, useRef } from 'react';
 import AdvancedSearch from '../eventSearch/AdvancedSearch';
 import EventSearchPage from '../eventSearch/SearchPage';
@@ -13,22 +12,6 @@ import SimpleVenueSearch from '../venueSearch/VenueSearch';
 import SearchTabs from './searchTabs/SearchTabs';
 import type { SearchTabId } from './tabsContext';
 import { isSearchTabId } from './tabsContext';
-
-/**
- * An interface that helps the search forms
- * to implement similar features.
- * */
-export interface SearchForm {
-  searchParams: URLSearchParams;
-  goToSearch: (search: string) => void;
-  moveToSearchPage: () => void;
-  clearInputValues: () => void;
-  clearFilters: () => void;
-  handleSubmit: (event?: FormEvent) => void;
-  initialFieldsOnPageLoad: () => void;
-  searchFilters: object;
-  scrollToResultList?: () => void;
-}
 
 /**
  * Use an URL parameter to scroll to
@@ -103,7 +86,7 @@ const useSearchTabsWithParams = (defaultTab: SearchTabId) => {
   return { initTab, searchTypeParam };
 };
 
-const CombinedSearchPage: React.FC<CombinedSearchPageProps> = ({
+const Search: React.FC<CombinedSearchPageProps> = ({
   defaultTab = 'Venue',
 }) => {
   const { t } = useSearchTranslation();
@@ -132,6 +115,12 @@ const CombinedSearchPage: React.FC<CombinedSearchPageProps> = ({
       </SearchTabs.Panel>
     </SearchTabs>
   );
+};
+
+const CombinedSearchPage: React.FC<CombinedSearchPageProps> = ({
+  defaultTab = 'Venue',
+}) => {
+  return <Search defaultTab={defaultTab} />;
 };
 
 export default CombinedSearchPage;

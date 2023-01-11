@@ -12,16 +12,14 @@ import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
-import type { SearchForm } from '../combinedSearch/CombinedSearchPage';
+import type { ISearchForm, SearchComponentType } from '../combinedSearch/types';
 import { EVENT_DEFAULT_SEARCH_FILTERS, MAPPED_PLACES } from './constants';
 import FilterSummary from './filterSummary/FilterSummary';
 import styles from './search.module.scss';
 import type { Filters } from './types';
 import { getSearchFilters, getSearchQuery } from './utils';
 
-type AdvancedSearchFormProps = {
-  scrollToResultList: () => void;
-};
+type AdvancedSearchFormProps = SearchComponentType;
 
 export type AdvancedSearchProps = {
   'data-testid'?: string;
@@ -35,7 +33,7 @@ export const useAdvancedSearchForm = ({
   scrollToResultList: AdvancedSearchFormProps['scrollToResultList'];
   autosuggestInput: string;
   setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
-}): SearchForm => {
+}): ISearchForm => {
   const locale = useLocale();
   const router = useRouter();
   const params: { place?: string } = router.query;

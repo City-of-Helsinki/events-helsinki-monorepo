@@ -3,7 +3,7 @@
   "apps/events-helsinki": "0.3.0",
   "apps/sports-helsinki": "0.3.0",
   "packages/eslint-config-bases": "1.5.0",
-  "packages/components": "0.0.7",
+  "packages/components": "0.1.0",
   "packages/common-i18n": "0.0.1",
   "proxies/events-graphql-federation": "1.0.0"
 }

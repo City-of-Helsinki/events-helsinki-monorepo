@@ -134,7 +134,7 @@ export function useSearchPage(): ISearchPage {
 }
 
 type SearchPageProps = {
-  SearchComponent: React.FC<SearchComponentProps>;
+  SearchComponent?: React.FC<SearchComponentProps>;
   pageTitle: string;
 };
 
@@ -182,15 +182,17 @@ const SearchPage: React.FC<SearchPageProps> = ({
         manifestUrl={meta?.manifestUrl}
       />
       <SrOnly as="h1">{pageTitle}</SrOnly>
-      <SearchComponent
-        scrollToResultList={scrollToResultList}
-        data-testid={searchContainerDataTestId}
-        searchUtilities={
-          <VenueSearchUtilities switchShowMode={switchShowMode} />
-        }
-        showTitle
-        korosBottom
-      />
+      {SearchComponent && (
+        <SearchComponent
+          scrollToResultList={scrollToResultList}
+          data-testid={searchContainerDataTestId}
+          searchUtilities={
+            <VenueSearchUtilities switchShowMode={switchShowMode} />
+          }
+          showTitle
+          korosBottom
+        />
+      )}
       <main id={MAIN_CONTENT_ID}>
         <div
           className={styles.resultList}

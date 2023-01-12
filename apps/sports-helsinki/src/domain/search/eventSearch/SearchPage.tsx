@@ -142,7 +142,7 @@ export function useSearchPage({
 }
 
 const SearchPage: React.FC<{
-  SearchComponent: React.FC<AdvancedSearchProps>;
+  SearchComponent?: React.FC<AdvancedSearchProps>;
   pageTitle: string;
   eventType: EventTypeId;
 }> = ({ SearchComponent, pageTitle, eventType }) => {
@@ -176,10 +176,12 @@ const SearchPage: React.FC<{
         manifestUrl={meta?.manifestUrl}
       />
       <SrOnly as="h1">{pageTitle}</SrOnly>
-      <SearchComponent
-        scrollToResultList={scrollToResultList}
-        data-testid="searchContainer"
-      />
+      {SearchComponent && (
+        <SearchComponent
+          scrollToResultList={scrollToResultList}
+          data-testid="searchContainer"
+        />
+      )}
       <main id={MAIN_CONTENT_ID}>
         <div
           className={styles.resultList}

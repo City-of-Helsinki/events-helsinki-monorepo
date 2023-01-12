@@ -1,5 +1,5 @@
 #
-# Test pipeline. Run build and deploy for Platta test environments. 
+# Review pipeline. Run build and deploy for Platta test environments. 
 # Pipeline runs different tests e.g. unittest and browser tests.
 #
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push 

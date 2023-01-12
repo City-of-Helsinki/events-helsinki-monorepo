@@ -32,8 +32,8 @@
     "ageLimitMin": "From",
     "ageLimitMax": "To",
     "ageFilter": {
-      "minAge": "From {{age}} {{yearAbbr}}",
-      "maxAge": "To {{age}} {{yearAbbr}}",
+      "minAge": "{{age}} {{yearAbbr}}",
+      "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "For a {{age}}-year-old"
     }
   },

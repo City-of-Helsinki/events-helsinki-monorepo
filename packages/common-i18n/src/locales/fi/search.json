@@ -45,8 +45,8 @@
     "ageLimitMin": "Alkaen",
     "ageLimitMax": "Päättyen",
     "ageFilter": {
-      "minAge": "Alkaen {{age}} {{yearAbbr}}",
-      "maxAge": "Päättyen {{age}} {{yearAbbr}}",
+      "minAge": "{{age}} {{yearAbbr}}",
+      "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "{{age}}-vuotiaalle"
     }
   },

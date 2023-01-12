@@ -32,8 +32,8 @@
     "ageLimitMin": "Från",
     "ageLimitMax": "Till",
     "ageFilter": {
-      "minAge": "Från {{age}} {{yearAbbr}}",
-      "maxAge": "Till {{age}} {{yearAbbr}}",
+      "minAge": "{{age}} {{yearAbbr}}",
+      "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "För en {{age}}-åring"
     }
   },

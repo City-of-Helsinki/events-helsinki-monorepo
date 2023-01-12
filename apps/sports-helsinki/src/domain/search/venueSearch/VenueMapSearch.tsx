@@ -11,6 +11,7 @@ const SimpleVenueMapSearch = () => (
     korosBottom={false}
     showTitle={false}
     className={styles.mapView}
+    scrollToResultList={() => true}
   />
 );
 

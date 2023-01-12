@@ -13,10 +13,10 @@ import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import {
   Button,
   IconCake,
-  IconArrowRight,
   IconSearch,
   IconLocation,
   IconGroup,
+  IconMinus,
 } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
@@ -352,19 +352,19 @@ const AdvancedSearch: React.FC<Props> = ({
                 <div>
                   <RangeDropdown
                     icon={<IconCake aria-hidden />}
-                    rangeIcon={<IconArrowRight aria-hidden />}
+                    rangeIcon={<IconMinus aria-hidden />}
                     minInputValue={minAgeInput}
-                    minInputLabel={t('search.ageLimitMin')}
                     minInputStartValue={MIN_AGE.toString()}
                     minInputFixedValue={'18'}
                     maxInputValue={maxAgeInput}
-                    maxInputLabel={t('search.ageLimitMax')}
                     maxInputEndValue={MAX_AGE.toString()}
                     name="ageLimitValues"
                     onChange={handleSetAgeValues}
                     fixedValuesText={t('search.showOnlyAdultCourses')}
                     title={t('search.ageLimitValues')}
+                    header={t('search.ageLimitHeader')}
                     value={[minAgeInput, maxAgeInput]}
+                    withPlaceholders={false}
                   />
                 </div>
               </div>

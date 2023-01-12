@@ -28,6 +28,7 @@
     "titleDropdownHobbyType": "Aktivitetsform",
     "showOnlyAdultCourses": "Visa endast vuxenkurser",
     "ageLimitValues": "Ålder",
+    "ageLimitHeader": "Header 123",
     "ageLimitMin": "Från",
     "ageLimitMax": "Till",
     "ageFilter": {

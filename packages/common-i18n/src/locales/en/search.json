@@ -28,6 +28,7 @@
     "titleDropdownHobbyType": "Type of activity",
     "showOnlyAdultCourses": "Show only adult courses",
     "ageLimitValues": "Age",
+    "ageLimitHeader": "Header 123",
     "ageLimitMin": "From",
     "ageLimitMax": "To",
     "ageFilter": {

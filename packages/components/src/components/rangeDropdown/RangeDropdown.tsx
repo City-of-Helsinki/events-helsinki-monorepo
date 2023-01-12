@@ -25,28 +25,30 @@ export interface RangeDropdownProps {
   minInputStartValue?: string;
   minInputValue?: string;
   minInputFixedValue?: string;
-  minInputLabel: string;
+  minInputLabel?: string;
   maxInputEndValue?: string;
   maxInputValue?: string;
-  maxInputLabel: string;
+  maxInputLabel?: string;
   maxInputFixedValue?: string;
   name: string;
   onChange: (minValue: string, maxValue: string) => void;
   fixedValuesText?: string;
   showFixedValuesText?: boolean;
   title: string;
+  header?: string;
   value: string[];
+  withPlaceholders?: boolean;
 }
 
 const RangeDropdown: React.FC<RangeDropdownProps> = ({
   icon,
   rangeIcon,
   minInputValue = '',
-  minInputLabel,
+  minInputLabel = '',
   minInputStartValue = '',
   minInputFixedValue = '',
   maxInputValue = '',
-  maxInputLabel,
+  maxInputLabel = '',
   maxInputEndValue = '',
   maxInputFixedValue = '',
   name,
@@ -54,7 +56,9 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
   fixedValuesText,
   showFixedValuesText,
   title,
+  header = '',
   value,
+  withPlaceholders = true,
 }) => {
   const [internalIsFixedValues, setInternalIsFixedValues] =
     React.useState(false);
@@ -238,11 +242,12 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
         </div>
       </button>
       <DropdownMenu isOpen={isMenuOpen} onClear={handleClear}>
+        {header && <div className={styles.header}>{header}</div>}
         <div className={styles.rangeInputsWrapper}>
           <TextInput
             type="number"
             id={`${name}_0`}
-            placeholder={minInputStartValue}
+            placeholder={withPlaceholders ? minInputStartValue : ''}
             onChange={(e) => handleInputChange(RANGE_INPUT.MIN, e.target.value)}
             onBlur={(e) => handleInputBlur(RANGE_INPUT.MIN, e.target.value)}
             value={minInputValue}
@@ -255,7 +260,7 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
           <TextInput
             type="number"
             id={`${name}_1`}
-            placeholder={maxInputEndValue}
+            placeholder={withPlaceholders ? maxInputEndValue : ''}
             onChange={(e) => handleInputChange(RANGE_INPUT.MAX, e.target.value)}
             onBlur={(e) => handleInputBlur(RANGE_INPUT.MAX, e.target.value)}
             value={maxInputValue}

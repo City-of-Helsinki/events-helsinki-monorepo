@@ -285,8 +285,8 @@ export const getEventSearchVariables = ({
     superEventType,
     suitableFor,
     eventType: AppConfig.supportedEventTypes,
-    audienceMinAgeLt,
-    audienceMaxAgeGt,
+    audienceMinAgeLt: audienceMinAgeLt ? audienceMinAgeLt : audienceMaxAgeGt,
+    audienceMaxAgeGt: audienceMaxAgeGt ? audienceMaxAgeGt : audienceMinAgeLt,
   };
 };
 

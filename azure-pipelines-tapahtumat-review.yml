@@ -7,7 +7,7 @@
 # only PR trigger pipeline
 trigger: none
 
-# Pull request (PR) triggers cause a pipeline to run whenever a pull request is 
+# Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to 
 # such a pull request.
 #

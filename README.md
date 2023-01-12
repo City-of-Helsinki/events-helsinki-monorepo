@@ -272,9 +272,9 @@ _Apps_ and _proxies_ use automatic semantic versions and are released using [Rel
 
 Each time you merge a pull request, the release-please-action will create or update a "Release PR" with the changelog and the version bump related to the changes. To create a new release for an app, this release PR is merged, which creates a new release with release notes and a new tag. This tag will be picked by Azure pipeline and trigger a new deployment to staging. From there, the release needs to be manually released to production.
 
-### Conventional commits
+### Conventional Commits
 
-Use conventional commits to ensure that the changelogs are generated correctly.
+Use [Conventional Commits](https://www.conventionalcommits.org/) to ensure that the changelogs are generated correctly.
 
 ### Configuration
 
@@ -282,12 +282,17 @@ The release-please workflow is located in the [release-please.yml](./.github/wor
 
 The configuration for release-please is located in the [release-please-config.json](./release-please-config.json) file. See vatious options in the [release-please docs](https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md).
 
-The manifest file is located in the [release-please-manifest.json](./.release-please-manifest.json) file. When adding a new app, add it to this file with the current version of the app. After this, release-please will keep track of versions with this while.
+The manifest file is located in the [release-please-manifest.json](./.release-please-manifest.json) file. 
 
+When adding a new app, add it to both the [release-please-config.json](./release-please-config.json) and [release-please-manifest.json](./.release-please-manifest.json) file with the current version of the app. After this, release-please will keep track of versions with [release-please-manifest.json](./.release-please-manifest.json).
 
 ### Troubleshoting release-please
 
-If a new release PR is not created, there's propably one of the older release PR's still in pending state: make sure there's no open release pr already. Also see if any of the closed PR's are labeled with `autorelease: pending` and change their label to `autorelease: tagged`. Then go and re-run the last merge workflow to trigger the release action.
+If you were expecting a new release PR to be created, but nothing happened, there's probably one of the older release PR's in pending state. 
+
+First make sure there's no open release PR already; if there is, the work is now included on this one (this is the normal scenario).
+
+If you do not see any open release PR related to the work, check if any of the closed PR's are labeled with `autorelease: pending` - ie. someone might have closed a release PR manually. Change the closed PR's label to `autorelease: tagged`. Then go and re-run the last merge workflow to trigger the release action - a new release PR should now appear.
 
 There's also a CLI for debugging and manually running releases available for release-please: [release-please-cli](https://github.com/googleapis/release-please/blob/main/docs/cli.md)
 

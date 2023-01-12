@@ -23,6 +23,7 @@ import EventList from '../../../common-events/components/eventList/EventList';
 import { SEARCH_ROUTES } from '../../../constants';
 import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
 import type { ISearchPage } from '../combinedSearch/types';
+import { transformedSearchVariables } from '../combinedSearch/utils';
 import type { AdvancedSearchProps } from './AdvancedSearch';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
@@ -33,18 +34,19 @@ export function useEventSearchFilters(eventType: EventTypeId) {
   const router = useRouter();
   const params: { place?: string; eventType?: string } = router.query;
   return React.useMemo(() => {
-    const searchParams = new URLSearchParams(qs.stringify(router.query));
+    const searchParams = new URLSearchParams(router.asPath.split('?')[1]);
+    const transformedParams = transformedSearchVariables(searchParams);
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: ['keywords', 'location'],
       pageSize: PAGE_SIZE,
-      params: searchParams,
+      params: transformedParams,
       place: params.place,
       sortOrder: EVENT_SORT_OPTIONS.END_TIME,
       superEventType: ['umbrella', 'none'],
       eventType: [eventType],
     });
     return variables;
-  }, [router.query, params.place, eventType]);
+  }, [router.asPath, params.place, eventType]);
 }
 
 export function useSearchPage({
@@ -58,6 +60,7 @@ export function useSearchPage({
   const isSmallScreen = useIsSmallScreen();
   const { meta } = useConfig();
   const eventFilters = useEventSearchFilters(eventType);
+
   // Query for the primary search / active search tab
   const {
     data: eventsData,
@@ -145,11 +148,17 @@ export function useSearchPage({
   };
 }
 
-const SearchPage: React.FC<{
+type SearchPageProps = {
   SearchComponent?: React.FC<AdvancedSearchProps>;
   pageTitle: string;
   eventType: EventTypeId;
-}> = ({ SearchComponent, pageTitle, eventType }) => {
+};
+
+const SearchPage: React.FC<SearchPageProps> = ({
+  SearchComponent,
+  pageTitle,
+  eventType,
+}) => {
   const { t } = useSearchTranslation();
   const {
     resultList,

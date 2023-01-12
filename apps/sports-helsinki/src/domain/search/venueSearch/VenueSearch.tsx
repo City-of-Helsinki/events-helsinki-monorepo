@@ -58,7 +58,10 @@ export const useSimmpleVenueSearchForm = ({
     if (searchRoute) {
       router.push({
         pathname: getI18nPath(searchRoute, locale),
-        query: parse(search) as ParsedUrlQueryInput,
+        query: {
+          ...router.query,
+          ...(parse(search) as ParsedUrlQueryInput),
+        },
       });
     }
   };

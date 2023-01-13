@@ -1,10 +1,15 @@
 import classnames from 'classnames';
+import { EventTypeId } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import type { SearchTabId, TabsContextType } from '../tabsContext';
-import { TabsContext, useTabsContext } from '../tabsContext';
 import styles from './searchTabs.module.scss';
+import type {
+  SearchResultCounts,
+  SearchTabId,
+  TabsContextType,
+} from './tabsContext';
+import { TabsContext, useTabsContext } from './tabsContext';
 
 export type TabsPropType = {
   id: TabsContextType['activeTab'];
@@ -62,6 +67,13 @@ type SearchTabsProps = {
 
 function SearchTabs({ initTab, children }: SearchTabsProps) {
   const [activeTab, setActiveTab] = React.useState<SearchTabId>(initTab);
+  const [resultCounts, setResultCounts] = React.useState<SearchResultCounts>({
+    Venue: null,
+    [EventTypeId.General]: null,
+    [EventTypeId.Course]: null,
+  });
+  const setResultCount = (id: SearchTabId, count: number | null) =>
+    setResultCounts({ ...resultCounts, [id]: count });
 
   // Set the initTab as an active tab if it changes
   React.useEffect(() => {
@@ -69,13 +81,35 @@ function SearchTabs({ initTab, children }: SearchTabsProps) {
   }, [initTab]);
 
   return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+    <TabsContext.Provider
+      value={{ activeTab, setActiveTab, resultCounts, setResultCount }}
+    >
       {children}
     </TabsContext.Provider>
+  );
+}
+
+type SearchTabLabelProps = {
+  id?: TabsContextType['activeTab'];
+  label: string;
+};
+
+function SearchTabLabel({ id, label }: SearchTabLabelProps) {
+  const { resultCounts } = useTabsContext();
+  const storedCount = id ? resultCounts[id] : null;
+  // Todo: Use a small loading spinner instead of ellipsis.
+  const count = storedCount !== null ? storedCount : '...';
+
+  return (
+    <span>
+      {label}
+      {count !== null ? `: ${count}` : ''}
+    </span>
   );
 }
 
 SearchTabs.Tab = SearchTab;
 SearchTabs.TabList = SearchTabList;
 SearchTabs.Panel = SearchTabPanelContent;
+SearchTabs.CountLabel = SearchTabLabel;
 export default SearchTabs;

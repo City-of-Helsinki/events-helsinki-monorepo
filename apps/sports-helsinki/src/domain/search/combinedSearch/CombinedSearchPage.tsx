@@ -102,32 +102,38 @@ export const SearchUtilities: React.FC = () => {
   return (
     <PageSection className={styles.searchUtilities}>
       <ContentContainer className={styles.contentContainer}>
-        <SearchTabs.TabList>
-          <SearchTabs.Tab id="Venue">
-            <SearchTabs.CountLabel
-              id="Venue"
-              label={tSearch('search:search.searchType.venue')}
-            />
-          </SearchTabs.Tab>
-          <SearchTabs.Tab id={EventTypeId.General}>
-            <SearchTabs.CountLabel
-              id={EventTypeId.General}
-              label={tSearch('search:search.searchType.generalEventType')}
-            />
-          </SearchTabs.Tab>
-          <SearchTabs.Tab id={EventTypeId.Course}>
-            <SearchTabs.CountLabel
-              id={EventTypeId.Course}
-              label={tSearch('search:search.searchType.courseEventType')}
-            />
-          </SearchTabs.Tab>
-        </SearchTabs.TabList>
+        <div className={styles.flexEnd}>
+          <SearchTabs.TabList>
+            <SearchTabs.Tab id="Venue">
+              <SearchTabs.CountLabel
+                id="Venue"
+                label={tSearch('search:search.searchType.venue')}
+              />
+            </SearchTabs.Tab>
+            <SearchTabs.Tab id={EventTypeId.General}>
+              <SearchTabs.CountLabel
+                id={EventTypeId.General}
+                label={tSearch('search:search.searchType.generalEventType')}
+              />
+            </SearchTabs.Tab>
+            <SearchTabs.Tab id={EventTypeId.Course}>
+              <SearchTabs.CountLabel
+                id={EventTypeId.Course}
+                label={tSearch('search:search.searchType.courseEventType')}
+              />
+            </SearchTabs.Tab>
+          </SearchTabs.TabList>
 
-        {activeTab === 'Venue' ? (
-          <Button variant="secondary" onClick={switchShowMode}>
-            {tCommon('common:mapSearch.showOnMap')}
-          </Button>
-        ) : null}
+          {activeTab === 'Venue' ? (
+            <Button
+              variant="secondary"
+              onClick={switchShowMode}
+              className={styles.buttonWrapper}
+            >
+              {tCommon('common:mapSearch.showOnMap')}
+            </Button>
+          ) : null}
+        </div>
       </ContentContainer>
     </PageSection>
   );

@@ -20,7 +20,7 @@ const EventClosedHero: React.FC = () => {
     <div className={styles.eventClosedHero}>
       <h1>{t('hero.titleEventClosed')}</h1>
       <p>{t('hero.textEventClosed')}</p>
-      <Button onClick={moveToHomePage} variant="success">
+      <Button onClick={moveToHomePage} theme="coat">
         {t('hero.buttonToHomePage')}
       </Button>
     </div>

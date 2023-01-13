@@ -1,7 +1,7 @@
 import type { OrganizationDetails } from '../types/types';
 import LinkedEventsDataSource from './LinkedEventsDataSource';
 
-class OrganizationAPI extends LinkedEventsDataSource {
+class OrganizationDataSource extends LinkedEventsDataSource {
   public async getOrganizationDetails(
     id: string
   ): Promise<OrganizationDetails> {
@@ -9,4 +9,4 @@ class OrganizationAPI extends LinkedEventsDataSource {
   }
 }
 
-export default OrganizationAPI;
+export default OrganizationDataSource;

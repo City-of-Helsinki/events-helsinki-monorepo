@@ -1,11 +1,14 @@
 import type { WillSendRequestOptions } from '@apollo/datasource-rest';
 import { RESTDataSource } from '@apollo/datasource-rest';
-import type ContextValue from '../context/context-value';
+import type ContextValue from '../context/ContextValue';
 
-abstract class DataSourceWithContext extends RESTDataSource {
-  private readonly contextValue: ContextValue;
+abstract class DataSourceWithContext<
+  DataSources,
+  Context extends ContextValue<DataSources>
+> extends RESTDataSource {
+  private readonly contextValue: Context;
 
-  constructor(contextValue: ContextValue) {
+  public constructor(contextValue: Context) {
     super({ cache: contextValue.cache }); // this should send `cache` through
     this.contextValue = contextValue;
   }

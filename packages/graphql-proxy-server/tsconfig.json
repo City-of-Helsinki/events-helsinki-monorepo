@@ -8,14 +8,9 @@
     "module": "commonjs",
     "jsx": "preserve",
     "incremental": true,
+    "paths": {},
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "paths": {
-      "events-helsinki-graphql-proxy-server": [
-        "../../packages/graphql-proxy-server/src/index"
-      ]
-    }
+    "moduleResolution": "node"
   },
-
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
 }

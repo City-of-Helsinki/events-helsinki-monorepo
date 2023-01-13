@@ -1,6 +1,6 @@
 import type { Place, PlaceListResponse } from '../types/types';
 import LinkedEventsDataSource from './LinkedEventsDataSource';
-class PlaceAPI extends LinkedEventsDataSource {
+class PlaceDataSource extends LinkedEventsDataSource {
   public async getPlaceDetails(id: string): Promise<Place> {
     return this.get(`place/${id}`);
   }
@@ -9,4 +9,4 @@ class PlaceAPI extends LinkedEventsDataSource {
   }
 }
 
-export default PlaceAPI;
+export default PlaceDataSource;

@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  composeQuery,
+  normalizeKeys,
+} from 'events-helsinki-graphql-proxy-server/src';
+import type EventContext from '../../context/EventContext';
 import type { QueryResolvers } from '../../types';
 import type {
   KeywordListResponse,
   Keyword,
   QueryKeywordListArgs,
 } from '../../types/types';
-import composeQuery from '../../utils/composeQuery';
-import normalizeKeys from '../../utils/normalizeKeys';
 
 const keywordListQueryBuilder = ({
   dataSource,
@@ -60,13 +63,13 @@ const keywordListQueryBuilder = ({
 };
 
 const Query: QueryResolvers = {
-  keywordDetails: async (_: any, { id }: any, { dataSources }: any) => {
-    const data = await dataSources.keywordAPI.getKeywordDetails(id);
+  keywordDetails: async (_: any, { id }: any, context: EventContext) => {
+    const data = await context.dataSources.keyword.getKeywordDetails(id);
     return normalizeKeys(data) as Keyword;
   },
-  keywordList: async (_: any, params: any, { dataSources }: any) => {
+  keywordList: async (_: any, params: any, context: EventContext) => {
     const query = keywordListQueryBuilder(params);
-    const data = await dataSources.keywordAPI.getKeywordList(query);
+    const data = await context.dataSources.keyword.getKeywordList(query);
 
     return {
       data: data.data.map((keyword: any) => {

@@ -46,9 +46,10 @@
 │   ├── events-helsinki   ("clone of hobbies-helsinki")
 │   └── sports-helsinki   ("clone of hobbies-helsinki")
 └── packages
-    ├── common-i18n         (locales...)
-    ├── components          (common event components, utils and hooks, storybook, jest)
-    └── eslint-config-bases (to shared eslint configs)
+    ├── common-i18n          (locales...)
+    ├── components           (common event components, utils and hooks, storybook, jest)
+    ├── graphql-proxy-server (common code for graphql api-proxy server)
+    └── eslint-config-bases  (to shared eslint configs)
 ```
 
 #### Proxies
@@ -67,6 +68,7 @@
 #### Shared packages
 
 - [packages/eslint-config-bases](./packages/eslint-config-bases): [README](./packages/eslint-config-bases/README.md) | [CHANGELOG](./packages/eslint-config-bases/CHANGELOG.md)
+- [packages/graphql-proxy-server](./packages/graphql-proxy-server): [README](./packages/graphql-proxy-server/README.md) | [CHANGELOG](./packages/graphql-proxy-server/CHANGELOG.md)
 - [packages/components](./packages/components): publishable. [README](./packages/components/README.md) | [CHANGELOG](./packages/components/CHANGELOG.md)
 - [packages/common-i18n](./packages/common-i18n): [README](./packages/common-i18n/README.md) | [CHANGELOG](./packages/common-i18n/CHANGELOG.md)
 

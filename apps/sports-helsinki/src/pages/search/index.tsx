@@ -1,8 +1,6 @@
-import { useAppSportsTranslation } from 'events-helsinki-components';
 import NavigationContext from 'events-helsinki-components/src/navigationProvider/NavigationContext';
 import type { GetStaticPropsContext } from 'next';
-import { useRouter } from 'next/router';
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import CombinedSearchPage from 'domain/search/combinedSearch/CombinedSearchPage';
 import Navigation from '../../common-events/components/navigation/Navigation';
@@ -22,7 +20,7 @@ export default function Search() {
         uri={ROUTES.SEARCH}
         className="pageLayout"
         navigation={<Navigation menu={headerMenu} languages={languages} />}
-        content={<CombinedSearchPage />}
+        content={<CombinedSearchPage defaultTab="Venue" />}
         footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>

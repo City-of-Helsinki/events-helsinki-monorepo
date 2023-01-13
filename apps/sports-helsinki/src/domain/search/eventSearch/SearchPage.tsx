@@ -29,18 +29,10 @@ import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 import { getEventSearchVariables, getNextPage } from './utils';
 
-export function useSearchPage({
-  eventType,
-}: {
-  eventType: EventTypeId;
-}): ISearchPage {
-  const { t } = useSearchTranslation();
+export function useEventSearchFilters(eventType: EventTypeId) {
   const router = useRouter();
-  const [isFetchingMore, setIsFetchingMore] = React.useState(false);
-  const isSmallScreen = useIsSmallScreen();
-  const { meta } = useConfig();
   const params: { place?: string; eventType?: string } = router.query;
-  const eventFilters = React.useMemo(() => {
+  return React.useMemo(() => {
     const searchParams = new URLSearchParams(qs.stringify(router.query));
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: ['keywords', 'location'],
@@ -53,7 +45,19 @@ export function useSearchPage({
     });
     return variables;
   }, [router.query, params.place, eventType]);
+}
 
+export function useSearchPage({
+  eventType,
+}: {
+  eventType: EventTypeId;
+}): ISearchPage {
+  const { t } = useSearchTranslation();
+  const router = useRouter();
+  const [isFetchingMore, setIsFetchingMore] = React.useState(false);
+  const isSmallScreen = useIsSmallScreen();
+  const { meta } = useConfig();
+  const eventFilters = useEventSearchFilters(eventType);
   // Query for the primary search / active search tab
   const {
     data: eventsData,

@@ -31,57 +31,6 @@ $buttonWidth: 180px;
     }
   }
 
-  .rowWrapper {
-    display: grid;
-    height: fit-content;
-    align-items: center;
-
-    grid-template-columns: 1fr;
-    grid-gap: var(--spacing-m);
-
-    margin-bottom: var(--spacing-xs);
-
-    @include respond-above(s) {
-      grid-template-columns: 1fr;
-      grid-gap: var(--spacing-xs);
-
-      margin-bottom: var(--spacing-xs);
-    }
-  }
-
-  .buttonWrapper {
-    @include respond-above(m) {
-      grid-column: span 1 / 5;
-    }
-  }
-
-  .row {
-    display: grid;
-    grid-gap: var(--spacing-xs);
-
-    @include respond-above(s) {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @include respond-above(m) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-
-  .autoSuggestRow {
-    align-items: flex-end;
-
-    @include respond-above(m) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    & > :first-child {
-      @include respond-above(m) {
-        grid-column: 1 / 4;
-      }
-    }
-  }
-
   .checkbox {
     margin-top: var(--spacing-xs);
     label {
@@ -96,6 +45,57 @@ $buttonWidth: 180px;
 
   .dateSelectorWrapper {
     align-self: flex-end;
+  }
+}
+
+.buttonWrapper {
+  @include respond-above(m) {
+    grid-column: span 1 / 5;
+  }
+}
+
+.row {
+  display: grid;
+  grid-gap: var(--spacing-xs);
+
+  @include respond-above(s) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include respond-above(m) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.autoSuggestRow {
+  align-items: flex-end;
+
+  @include respond-above(m) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  & > :first-child {
+    @include respond-above(m) {
+      grid-column: 1 / 4;
+    }
+  }
+}
+
+.rowWrapper {
+  display: grid;
+  height: fit-content;
+  align-items: center;
+
+  grid-template-columns: 1fr;
+  grid-gap: var(--spacing-m);
+
+  margin-bottom: var(--spacing-xs);
+
+  @include respond-above(s) {
+    grid-template-columns: 1fr;
+    grid-gap: var(--spacing-xs);
+
+    margin-bottom: var(--spacing-xs);
   }
 }
 

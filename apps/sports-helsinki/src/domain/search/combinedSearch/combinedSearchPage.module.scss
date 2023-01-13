@@ -112,4 +112,10 @@ $buttonWidth: 180px;
 .searchUtilities {
   padding: 0 0 1.5rem 0;
   position: relative;
+
+  .flexEnd {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }

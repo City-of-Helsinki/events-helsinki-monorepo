@@ -8,11 +8,11 @@ import {
   EventTypeId,
   EventListDocument,
 } from 'events-helsinki-components';
-import { useRouter } from 'next-router-mock';
+import { useRouter } from 'next/router';
 import React, { useRef, useEffect } from 'react';
 import AppConfig from 'domain/app/AppConfig';
 import useUnifiedSearchVariables from 'domain/unifiedSearch/useUnifiedSearchVariables';
-import { useEventSearchFilters } from '../eventSearch/SearchPage';
+import useEventSearchFilters from '../eventSearch/hooks/useEventSearchFilters';
 import { PARAM_SEARCH_TYPE } from './constants';
 import type { SearchTabId } from './searchTabs/tabsContext';
 import { isSearchTabId, useTabsContext } from './searchTabs/tabsContext';

@@ -1,5 +1,5 @@
+import { useRouter } from 'next/router';
 import React from 'react';
-import useRouterFromConfig from '../../hooks/useRouterFromConfig';
 import isClient from '../../utils/isClient';
 
 export const resetFocusId = 'reset-focus';
@@ -9,7 +9,7 @@ export const resetFocusId = 'reset-focus';
  * <Link> from react-router-dom.
  */
 const ResetFocus = (): React.ReactElement => {
-  const router = useRouterFromConfig();
+  const router = useRouter();
   const pathname = router.pathname;
   const node = React.useRef<HTMLDivElement>(null);
 

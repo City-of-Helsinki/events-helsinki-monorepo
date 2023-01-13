@@ -1,5 +1,6 @@
-import { useLocale, useRouterFromConfig } from 'events-helsinki-components';
+import { useLocale } from 'events-helsinki-components';
 import type { AppLanguage, Menu, Language } from 'events-helsinki-components';
+import { useRouter } from 'next/router';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import {
   Navigation as RHHCNavigation,
@@ -27,7 +28,7 @@ type NavigationProps = {
 };
 
 export default function Navigation({ page, menu, languages }: NavigationProps) {
-  const router = useRouterFromConfig();
+  const router = useRouter();
   const locale = useLocale();
   const navigationMenuName = DEFAULT_HEADER_MENU_NAME[locale];
   const currentPage = router.pathname;

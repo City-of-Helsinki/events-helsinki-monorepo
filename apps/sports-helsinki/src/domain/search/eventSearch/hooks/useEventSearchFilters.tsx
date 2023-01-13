@@ -13,7 +13,10 @@ function useEventSearchFilters(eventType: EventTypeId) {
   const params: { place?: string; eventType?: string } = router.query;
   return React.useMemo(() => {
     const searchParams = new URLSearchParams(router.asPath.split('?')[1]);
+
+    // TODO: Make a better adapter or a new form to handle these transformations.
     const transformedParams = transformedSearchVariables(searchParams);
+
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: ['keywords', 'location'],
       pageSize: PAGE_SIZE,

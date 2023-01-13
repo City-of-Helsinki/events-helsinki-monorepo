@@ -25,6 +25,10 @@ export type AdvancedSearchProps = {
   'data-testid'?: string;
 } & AdvancedSearchFormProps;
 
+/**
+ * @deprecated not in use after the creation of the combined search.
+ * Can be used as an example how to refactor the Hobbies and the Events apps.
+ * */
 export const useAdvancedSearchForm = ({
   scrollToResultList,
   autosuggestInput,
@@ -132,6 +136,10 @@ export const useAdvancedSearchForm = ({
   };
 };
 
+/**
+ * @deprecated not in use after the creation of the combined search.
+ * Can be used as an example how to refactor the Hobbies and the Events apps.
+ * */
 export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   scrollToResultList,
 }) => {
@@ -206,6 +214,10 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   );
 };
 
+/**
+ * @deprecated not in use after the creation of the combined search.
+ * Can be used as an example how to refactor the Hobbies and the Events apps.
+ * */
 const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   'data-testid': dataTestId,
   ...delegatedAdvancedSearchFormProps

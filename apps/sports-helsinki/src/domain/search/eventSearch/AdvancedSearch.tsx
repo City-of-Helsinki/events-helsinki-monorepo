@@ -68,7 +68,7 @@ export const useAdvancedSearchForm = ({
 
   const goToSearch = (search: string): void => {
     router.push({
-      pathname: getI18nPath(ROUTES.COURSESEARCH, locale),
+      pathname: getI18nPath(ROUTES.SEARCH, locale),
       query: parse(search) as ParsedUrlQueryInput,
     });
   };

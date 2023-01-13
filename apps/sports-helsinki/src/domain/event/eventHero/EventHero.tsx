@@ -66,7 +66,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const returnParam = extractLatestReturnPath(
     search,
     locale,
-    SEARCH_ROUTES.COURSESEARCH
+    SEARCH_ROUTES.SEARCH
   );
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {

@@ -16,17 +16,15 @@ import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps as NextAppProps } from 'next/app';
 import Error from 'next/error';
-import type { NextRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
-import EventsConfigProvider from '../common-events/configProvider/ConfigProvider';
 import AppConfig from '../domain/app/AppConfig';
 import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
-import useEventsConfig from '../hooks/useEventsConfig';
 import useRHHCConfig from '../hooks/useRHHCConfig';
 
 const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
@@ -61,8 +59,7 @@ export type CustomPageProps = {
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { error, headerMenu, footerMenu, languages } = pageProps;
   const apolloClient = useApolloClient();
-  const eventsConfig = useEventsConfig();
-  const router = eventsConfig.router as NextRouter;
+  const router = useRouter();
   const rhhcConfig = useRHHCConfig();
   const { t } = useCommonTranslation();
 
@@ -84,38 +81,36 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <EventsConfigProvider config={eventsConfig}>
-        <RHHCConfigProvider config={rhhcConfig}>
-          <NavigationProvider
-            headerMenu={headerMenu}
-            footerMenu={footerMenu}
-            languages={languages}
-          >
-            <ResetFocus />
-            <MatomoProvider value={matomoInstance}>
-              {router.isFallback ? (
-                <Center>
-                  <LoadingSpinner />
-                </Center>
-              ) : error ? (
-                <Error
-                  statusCode={error.networkError?.statusCode ?? 400}
-                  title={error.title}
+      <RHHCConfigProvider config={rhhcConfig}>
+        <NavigationProvider
+          headerMenu={headerMenu}
+          footerMenu={footerMenu}
+          languages={languages}
+        >
+          <ResetFocus />
+          <MatomoProvider value={matomoInstance}>
+            {router.isFallback ? (
+              <Center>
+                <LoadingSpinner />
+              </Center>
+            ) : error ? (
+              <Error
+                statusCode={error.networkError?.statusCode ?? 400}
+                title={error.title}
+              />
+            ) : (
+              <>
+                <Component {...pageProps} />
+                <EventsCookieConsent
+                  allowLanguageSwitch={false}
+                  appName={t('appEvents:appName')}
                 />
-              ) : (
-                <>
-                  <Component {...pageProps} />
-                  <EventsCookieConsent
-                    allowLanguageSwitch={false}
-                    appName={t('appEvents:appName')}
-                  />
-                </>
-              )}
-            </MatomoProvider>
-            <ToastContainer />
-          </NavigationProvider>
-        </RHHCConfigProvider>
-      </EventsConfigProvider>
+              </>
+            )}
+          </MatomoProvider>
+          <ToastContainer />
+        </NavigationProvider>
+      </RHHCConfigProvider>
     </ApolloProvider>
   );
 }

@@ -1,6 +1,8 @@
+import {
+  composeQuery,
+  queryBuilder,
+} from 'events-helsinki-graphql-proxy-server/src';
 import type { QueryEventListArgs } from '../../types/types';
-import composeQuery from '../../utils/composeQuery';
-import queryBuilder from '../../utils/queryBuilder';
 
 export const buildEventListQuery = (params: QueryEventListArgs) => {
   return queryBuilder([

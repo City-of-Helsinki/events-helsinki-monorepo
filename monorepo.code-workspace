@@ -25,6 +25,10 @@
       "path": "packages/components"
     },
     {
+      "name": "graphql-proxy-server",
+      "path": "packages/graphql-proxy-server"
+    },
+    {
       "name": "events-graphql-federation",
       "path": "proxies/events-graphql-federation"
     },

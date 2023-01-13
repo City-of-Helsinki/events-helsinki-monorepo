@@ -1,7 +1,7 @@
 import type { Keyword, KeywordListResponse } from '../types/types';
 import LinkedEventsDataSource from './LinkedEventsDataSource';
 
-class KeywordAPI extends LinkedEventsDataSource {
+class KeywordDataSource extends LinkedEventsDataSource {
   public async getKeywordDetails(id: string): Promise<Keyword> {
     return this.get(`keyword/${id}`);
   }
@@ -11,4 +11,4 @@ class KeywordAPI extends LinkedEventsDataSource {
   }
 }
 
-export default KeywordAPI;
+export default KeywordDataSource;

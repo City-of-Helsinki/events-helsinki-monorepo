@@ -3,7 +3,7 @@ import type { GraphQLRequest, GraphQLResponse } from '@apollo/server';
 import type { DocumentNode } from 'graphql';
 import { gql } from 'graphql-tag';
 
-import ContextValue from '../context/context-value';
+import EventContext from '../context/EventContext';
 import { createTestApolloServer } from '../utils/testUtils';
 
 let getMock: jest.Mock;
@@ -13,8 +13,8 @@ const executeOperationReturnMockData = (
   },
   responseMockData: Record<string, unknown> = {}
 ): Promise<GraphQLResponse> => {
-  const contextValue = new ContextValue({ token: 'token' });
-  getMock = (contextValue.dataSources.keywordAPI as any).get = jest
+  const contextValue = new EventContext({ token: 'token' });
+  getMock = (contextValue.dataSources.keyword as any).get = jest
     .fn()
     .mockResolvedValue(responseMockData);
   return createTestApolloServer().executeOperation(request, { contextValue });

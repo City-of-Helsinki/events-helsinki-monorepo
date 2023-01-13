@@ -136,6 +136,9 @@ WORKDIR /app
 # Copy the configuration files to the proxies/${PROXY} root
 COPY --from=builder --chown=appuser:appuser /app/proxies/${PROXY}/package.json ./proxies/${PROXY}/
 
+# Copy the build files to the proxies/${PROXY} root
+COPY --from=builder --chown=appuser:appuser /app/proxies/${PROXY}/build ./proxies/${PROXY}/build
+
 # The root level files
 COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
 COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json

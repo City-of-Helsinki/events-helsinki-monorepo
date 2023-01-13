@@ -3,7 +3,7 @@ import type { GraphQLRequest, GraphQLResponse } from '@apollo/server';
 import * as Sentry from '@sentry/node';
 import type { DocumentNode } from 'graphql';
 import { gql } from 'graphql-tag';
-import ContextValue from '../context/context-value';
+import EventContext from '../context/EventContext';
 import type {
   EventDetails,
   EventListResponse,
@@ -32,8 +32,8 @@ const executeOperationReturnMockData = (
   },
   responseMockData: Record<string, unknown> = {}
 ): Promise<GraphQLResponse> => {
-  const contextValue = new ContextValue({ token: 'token' });
-  getMock = (contextValue.dataSources.eventAPI as any).get = jest
+  const contextValue = new EventContext({ token: 'token' });
+  getMock = (contextValue.dataSources.event as any).get = jest
     .fn()
     .mockResolvedValue(responseMockData);
   return createTestApolloServer().executeOperation(request, { contextValue });
@@ -45,9 +45,9 @@ const executeOperationThrowError = (
   },
   errorMessage: string
 ): Promise<GraphQLResponse> => {
-  const contextValue = new ContextValue({ token: 'token' });
+  const contextValue = new EventContext({ token: 'token' });
   errorSpy.mockImplementationOnce(() => {});
-  getMock = (contextValue.dataSources.eventAPI as any).get = jest
+  getMock = (contextValue.dataSources.event as any).get = jest
     .fn()
     .mockResolvedValue(Promise.reject(errorMessage));
   return createTestApolloServer().executeOperation(request, { contextValue });

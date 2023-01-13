@@ -1,152 +1,17 @@
-import type {
-  QueryEventListArgs,
-  EventTypeId,
-  EventListQuery,
-} from 'events-helsinki-components';
+import type { EventTypeId, EventListQuery } from 'events-helsinki-components';
 import {
   BasicMeta,
   LoadingSpinner,
   SrOnly,
-  useIsSmallScreen,
   useSearchTranslation,
-  getLargeEventCardId,
-  useEventListQuery,
   MAIN_CONTENT_ID,
 } from 'events-helsinki-components';
-import { useRouter } from 'next/router';
-import qs from 'query-string';
 import React from 'react';
-import { useConfig } from 'react-helsinki-headless-cms';
-import { scroller } from 'react-scroll';
-import { toast } from 'react-toastify';
 import EventList from '../../../common-events/components/eventList/EventList';
-import { SEARCH_ROUTES } from '../../../constants';
-import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
-import type { ISearchPage } from '../combinedSearch/types';
-import { transformedSearchVariables } from '../combinedSearch/utils';
 import type { AdvancedSearchProps } from './AdvancedSearch';
-import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
+import useSearchPage from './hooks/useSearchPage';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
-import { getEventSearchVariables, getNextPage } from './utils';
-
-export function useEventSearchFilters(eventType: EventTypeId) {
-  const router = useRouter();
-  const params: { place?: string; eventType?: string } = router.query;
-  return React.useMemo(() => {
-    const searchParams = new URLSearchParams(router.asPath.split('?')[1]);
-    const transformedParams = transformedSearchVariables(searchParams);
-    const variables: QueryEventListArgs = getEventSearchVariables({
-      include: ['keywords', 'location'],
-      pageSize: PAGE_SIZE,
-      params: transformedParams,
-      place: params.place,
-      sortOrder: EVENT_SORT_OPTIONS.END_TIME,
-      superEventType: ['umbrella', 'none'],
-      eventType: [eventType],
-    });
-    return variables;
-  }, [router.asPath, params.place, eventType]);
-}
-
-export function useSearchPage({
-  eventType,
-}: {
-  eventType: EventTypeId;
-}): ISearchPage {
-  const { t } = useSearchTranslation();
-  const router = useRouter();
-  const [isFetchingMore, setIsFetchingMore] = React.useState(false);
-  const isSmallScreen = useIsSmallScreen();
-  const { meta } = useConfig();
-  const eventFilters = useEventSearchFilters(eventType);
-
-  // Query for the primary search / active search tab
-  const {
-    data: eventsData,
-    fetchMore,
-    loading: isLoadingEvents,
-  } = useEventListQuery({
-    ssr: false,
-    variables: eventFilters,
-  });
-
-  const handleLoadMore = async () => {
-    const page = eventsData?.eventList.meta
-      ? getNextPage(eventsData.eventList.meta)
-      : null;
-    setIsFetchingMore(true);
-    if (page) {
-      try {
-        await fetchMore({
-          variables: {
-            page,
-          },
-        });
-      } catch (e) {
-        toast.error(t('search:errorLoadMore'));
-      }
-    }
-    setIsFetchingMore(false);
-  };
-
-  const scrollToResultList = React.useCallback(() => {
-    if (isSmallScreen) {
-      scroller.scrollTo('resultList', {
-        delay: 0,
-        duration: 1000,
-        offset: -50,
-        smooth: true,
-      });
-    }
-  }, [isSmallScreen]);
-
-  const scrollToResultCard = (id: string) => {
-    scroller.scrollTo(id, {
-      delay: 0,
-      duration: 300,
-      offset: -50,
-      smooth: true,
-    });
-  };
-
-  const initialPageOnLoad = React.useCallback(() => {
-    if (router.asPath && router.query?.scrollToResults) {
-      scrollToResultList();
-    } else if (router.query?.eventId) {
-      scrollToResultCard(
-        getLargeEventCardId(
-          Array.isArray(router.query.eventId)
-            ? router.query.eventId[0]
-            : router.query.eventId
-        )
-      );
-      removeQueryParamsFromRouter(
-        router,
-        ['eventId'],
-        SEARCH_ROUTES.COURSESEARCH
-      );
-    }
-  }, [router, scrollToResultList]);
-
-  const count = (eventsData?.eventList?.meta.count as number) ?? 0;
-  const hasNext = !!eventsData?.eventList?.meta.next;
-
-  return {
-    searchFilters: eventFilters,
-    meta,
-    isSmallScreen,
-    handleLoadMore,
-    isFetchingMore,
-    isLoading: isLoadingEvents,
-    scrollToResultList,
-    scrollToResultCard,
-    resultList: eventsData?.eventList,
-    initialPageOnLoad,
-    count,
-    hasNext,
-  };
-}
 
 type SearchPageProps = {
   SearchComponent?: React.FC<AdvancedSearchProps>;

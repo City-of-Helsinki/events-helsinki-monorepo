@@ -78,7 +78,7 @@ function SearchTabs({ initTab, children }: SearchTabsProps) {
     [EventTypeId.Course]: null,
   });
   const setResultCount = (id: SearchTabId, count: number | null) =>
-    setResultCounts({ ...resultCounts, [id]: count });
+    setResultCounts((prevState) => ({ ...prevState, [id]: count }));
 
   // Set the initTab as an active tab if it changes
   React.useEffect(() => {

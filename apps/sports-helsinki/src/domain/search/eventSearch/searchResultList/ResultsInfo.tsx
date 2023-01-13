@@ -18,7 +18,7 @@ const ResultsInfoContainer: React.FC<{
   const isFinnish = locale === 'fi';
 
   const goToFinnishSearch = () => {
-    router.push(getI18nPath(ROUTES.COURSESEARCH, 'fi' as AppLanguage));
+    router.push(getI18nPath(ROUTES.SEARCH, 'fi' as AppLanguage));
   };
 
   const ActionButtons = () => (

@@ -25,6 +25,7 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
+import { PARAM_SEARCH_TYPE } from 'domain/search/combinedSearch/constants';
 import { ROUTES } from '../../../constants';
 import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
 import EventKeywords from '../eventKeywords/EventKeywords';
@@ -58,8 +59,12 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const eventClosed = isEventClosed(event);
   const queryString = addParamsToQueryString('', {
     returnPath: getLocalizedCmsItemUrl(
-      ROUTES.COURSESEARCH,
-      { ...router.query, eventId: event.id, eventType: event.typeId ?? '' },
+      ROUTES.SEARCH,
+      {
+        ...router.query,
+        eventId: event.id,
+        [PARAM_SEARCH_TYPE]: event.typeId ?? '',
+      },
       locale
     ),
   });

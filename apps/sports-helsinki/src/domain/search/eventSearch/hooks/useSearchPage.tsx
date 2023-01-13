@@ -84,11 +84,7 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): ISearchPage {
             : router.query.eventId
         )
       );
-      removeQueryParamsFromRouter(
-        router,
-        ['eventId'],
-        SEARCH_ROUTES.COURSESEARCH
-      );
+      removeQueryParamsFromRouter(router, ['eventId'], SEARCH_ROUTES.SEARCH);
     }
   }, [router, scrollToResultList]);
 

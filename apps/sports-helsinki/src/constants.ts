@@ -5,7 +5,6 @@ export const DEFAULT_LANGUAGE = 'fi';
 export const SEARCH_ROUTES = {
   SEARCH: '/search',
   MAPSEARCH: '/search/map',
-  COURSESEARCH: '/coursesearch',
 };
 
 // TODO: Set a typing that tells that it is extending SEARCH_ROUTES

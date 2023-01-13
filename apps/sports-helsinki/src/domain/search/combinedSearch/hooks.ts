@@ -13,6 +13,7 @@ import React, { useRef, useEffect } from 'react';
 import AppConfig from 'domain/app/AppConfig';
 import useUnifiedSearchVariables from 'domain/unifiedSearch/useUnifiedSearchVariables';
 import { useEventSearchFilters } from '../eventSearch/SearchPage';
+import { PARAM_SEARCH_TYPE } from './constants';
 import type { SearchTabId } from './searchTabs/tabsContext';
 import { isSearchTabId, useTabsContext } from './searchTabs/tabsContext';
 
@@ -45,7 +46,7 @@ export const useScrollToSearchResultItem = () => {
 export const useSearchTabsWithParams = (defaultTab: SearchTabId) => {
   const router = useRouter();
   const searchParams = new URLSearchParams(router.asPath.split('?')[1]);
-  const searchTypeParam = searchParams.get('searchType');
+  const searchTypeParam = searchParams.get(PARAM_SEARCH_TYPE);
   const initTab = searchTypeParam
     ? (searchTypeParam as SearchTabId)
     : defaultTab;
@@ -54,7 +55,7 @@ export const useSearchTabsWithParams = (defaultTab: SearchTabId) => {
   React.useEffect(() => {
     if (!isSearchTabId(searchTypeParam)) {
       router.push(
-        { query: { ...router.query, searchType: defaultTab } },
+        { query: { ...router.query, [PARAM_SEARCH_TYPE]: defaultTab } },
         undefined,
         { shallow: true }
       );

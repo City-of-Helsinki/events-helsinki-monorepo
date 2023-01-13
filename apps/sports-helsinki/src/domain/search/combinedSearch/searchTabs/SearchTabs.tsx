@@ -3,6 +3,7 @@ import { EventTypeId } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { PARAM_SEARCH_TYPE } from '../constants';
 import styles from './searchTabs.module.scss';
 import type {
   SearchResultCounts,
@@ -22,9 +23,13 @@ export function SearchTab({ id, children }: TabsPropType) {
   const isActive = activeTab === id;
   const onClick = () => {
     setActiveTab(id);
-    router.push({ query: { ...router.query, searchType: id } }, undefined, {
-      shallow: true,
-    });
+    router.push(
+      { query: { ...router.query, [PARAM_SEARCH_TYPE]: id } },
+      undefined,
+      {
+        shallow: true,
+      }
+    );
   };
   return (
     <Button

@@ -1,6 +1,6 @@
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
 
-export type ContextValueArgs<DataSources> = {
+export type ContextConstructorArgs<DataSources> = {
   token: string;
   cache?: KeyValueCache;
 };
@@ -13,7 +13,7 @@ abstract class ContextValue<DataSources> {
 
   protected abstract initializeDataSources(): DataSources;
 
-  public constructor({ token, cache }: ContextValueArgs<DataSources>) {
+  public constructor({ token, cache }: ContextConstructorArgs<DataSources>) {
     this.token = token;
     this.cache = cache;
     this.dataSources = this.initializeDataSources();

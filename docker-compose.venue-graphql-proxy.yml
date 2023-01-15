@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  venue-graphql-proxy:
+    container_name: venue-graphql-proxy
+    build:
+      context: .
+      dockerfile: proxy.Dockerfile
+      target: develop
+      args:
+        - PROXY=venue-graphql-proxy
+        - GRAPHQL_PROXY_PORT=${GRAPHQL_PROXY_PORT}
+    environment:
+      - GRAPHQL_PROXY_DEBUG=${GRAPHQL_PROXY_DEBUG}
+      - GRAPHQL_PROXY_API_BASE_URL=${GRAPHQL_PROXY_API_BASE_URL}
+      - GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL=${GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL}
+      - GRAPHQL_PROXY_SENTRY_DSN=${GRAPHQL_PROXY_SENTRY_DSN}
+      - GRAPHQL_PROXY_SENTRY_ENVIRONMENT=${GRAPHQL_PROXY_SENTRY_ENVIRONMENT}
+      - GRAPHQL_PROXY_PORT=${GRAPHQL_PROXY_PORT}
+    ports:
+      - ${GRAPHQL_PROXY_PORT}:${GRAPHQL_PROXY_PORT}

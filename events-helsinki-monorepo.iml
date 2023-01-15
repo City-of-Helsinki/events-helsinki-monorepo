@@ -18,12 +18,14 @@
       <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/.yarn" />
       <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/build" />
       <excludeFolder url="file://$MODULE_DIR$/packages/graphql-proxy-server/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/proxies/venue-graphql-proxy/node_modules" />
     </content>
     <content url="file://$MODULE_DIR$/apps/events-helsinki/node_modules" />
     <content url="file://$MODULE_DIR$/apps/hobbies-helsinki/node_modules" />
     <content url="file://$MODULE_DIR$/apps/sports-helsinki/node_modules" />
     <content url="file://$MODULE_DIR$/packages/graphql-proxy-server/node_modules" />
     <content url="file://$MODULE_DIR$/proxies/events-graphql-proxy/node_modules" />
+    <content url="file://$MODULE_DIR$/proxies/venue-graphql-proxy/node_modules" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

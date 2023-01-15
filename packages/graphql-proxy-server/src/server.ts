@@ -8,7 +8,7 @@ import express from 'express';
 import type { GraphQLSchema } from 'graphql';
 import depthLimit from 'graphql-depth-limit';
 import type ContextValue from './context/ContextValue';
-import type { ContextValueArgs } from './context/ContextValue';
+import type { ContextConstructorArgs } from './context/ContextValue';
 import apolloLoggingPlugin from './plugins/apolloLoggingPlugin';
 import sentryLoggingPlugin from './plugins/sentryLoggingPlugin';
 import type { ServerConfig } from './server-config/server-config';
@@ -19,9 +19,10 @@ const GRAPHQL_PATH = '/proxy/graphql';
 
 type StartServerArgs<Datasources, Context extends ContextValue<Datasources>> = {
   config: ServerConfig;
-
   schema: GraphQLSchema;
-  contextCallback: (args: ContextValueArgs<Datasources>) => Promise<Context>;
+  contextCallback: (
+    args: ContextConstructorArgs<Datasources>
+  ) => Promise<Context>;
 };
 
 export const startServer = async <

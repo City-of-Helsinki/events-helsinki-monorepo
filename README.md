@@ -39,6 +39,7 @@
 .
 ├── proxies
 │   ├── events-graphql-federation (Apollo Router and Gateway)
+│   ├── venue-graphql-proxy   Venue graphql api proxy server
 │   └── events-graphql-proxy   ("clone of events-helsinki-api-proxy")
 │
 ├── apps
@@ -56,6 +57,7 @@
 
 - [proxies/events-graphql-federation](./proxies/events-graphql-federation): The Apollo Router and Gateway configuration to manage and run subgraphs. [README](./proxies/events-graphql-federation/README.md)
 - [proxies/events-graphql-proxy](./proxies/events-graphql-proxy): Clone of events-helsinki-api-proxy. Event Helsinki GraphQL proxy. [README](./proxies/events-graphql-proxy/README.md)
+- [proxies/venue-graphql-proxy](./venue/events-graphql-proxy): Venue Helsinki GraphQL proxy. [README](./proxies/venue-graphql-proxy/README.md)
 
 #### Apps
 
@@ -89,7 +91,8 @@ If needed static resources like **images**,... can be shared by using symlinks i
 .
 ├── proxies
 │   ├── events-graphql-federation   (Apollo Router and Gateway)
-│   └── events-graphql-proxy        (Apollo Server to offer Graphql endpoint for the LinkedEvents -service)
+│   ├── events-graphql-proxy        (Apollo Server to offer Graphql endpoint for the LinkedEvents -service)
+│   └── venue-graphql-proxy        (Apollo Server to offer Graphql endpoint for the Venue)
 │
 ├── apps
 │   └── hobbies-helsinki            (NextJS app with api-routes)

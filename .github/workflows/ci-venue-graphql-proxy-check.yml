@@ -1,0 +1,104 @@
+name: Venue Graphql Proxy check
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+    # Only consider those paths to trigger the action
+    paths:
+      - 'proxies/venue-graphql-proxy/**'
+      - '.yarnrc.yml'
+      - 'tsconfig.base.json'
+      - '.prettier*'
+      - '.github/workflows/**'
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    # Only consider those paths to trigger the action
+    paths:
+      - 'proxies/venue-graphql-proxy/**'
+      - '.yarnrc.yml'
+      - 'tsconfig.base.json'
+      - '.prettier*'
+      - '.github/workflows/**'
+
+env:
+  NODE_ENV: development
+  GRAPHQL_PROXY_DEBUG: debug
+  GRAPHQL_PROXY_PORT: 4100
+  GRAPHQL_PROXY_API_BASE_URL: https://api.hel.fi
+  GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: https://kartta.hel.fi/ws/geoserver/avoindata
+  GRAPHQL_PROXY_SENTRY_DSN:
+  GRAPHQL_PROXY_SENTRY_ENVIRONMENT: local
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Why not using setup-node 2.2+ cache option (yet) ?
+      # see https://github.com/belgattitude/nextjs-monorepo-example/pull/369
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
+          restore-keys: |
+            yarn-cache-folder-
+
+      - name: Install dependencies
+        run: |
+          yarn install --immutable --inline-builds
+        env:
+          HUSKY: 0
+
+      - name: Typecheck
+        working-directory: proxies/venue-graphql-proxy
+        run: |
+          yarn typecheck
+
+      - name: Linter
+        working-directory: proxies/venue-graphql-proxy
+        run: |
+          yarn lint
+
+      - name: Unit tests
+        working-directory: proxies/venue-graphql-proxy
+        run: |
+          yarn test --coverage
+        env:
+          TZ: Europe/Helsinki
+          NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT: ${{env.NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT}}
+          NEXT_PUBLIC_CMS_ORIGIN: ${{env.NEXT_PUBLIC_CMS_ORIGIN}}
+          # Mock origin
+          NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
+
+      - name: Build web-app
+        working-directory: proxies/venue-graphql-proxy
+        run: |
+          yarn build
+
+      - name: Check ecmascript checks for build files
+        working-directory: proxies/venue-graphql-proxy
+        run: |
+          yarn check-dist
+      - name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v1

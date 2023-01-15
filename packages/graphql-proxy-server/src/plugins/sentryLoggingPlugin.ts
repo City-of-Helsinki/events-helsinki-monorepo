@@ -4,7 +4,7 @@ import * as Sentry from '@sentry/node';
 import type ContextValue from '../context/ContextValue';
 import { getServerConfig } from '../server-config/server-config';
 
-const sentryLoggingPlugin = (): ApolloServerPlugin<ContextValue<unknown>> => {
+const sentryLoggingPlugin = <T>(): ApolloServerPlugin<ContextValue<T>> => {
   const config = getServerConfig();
   Sentry.init({
     dsn: config.sentryDsn,

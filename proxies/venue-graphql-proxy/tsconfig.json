@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "commonjs",
+    "jsx": "preserve",
+    "incremental": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "paths": {
+      "events-helsinki-graphql-proxy-server": [
+        "../../packages/graphql-proxy-server/src/index"
+      ]
+    }
+  },
+
+  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
+}

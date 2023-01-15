@@ -37,6 +37,10 @@
       "path": "proxies/events-graphql-proxy"
     },
     {
+      "name": "venue-graphql-proxy",
+      "path": "proxies/events-graphql-proxy"
+    },
+    {
       "name": "root",
       "path": "."
     }

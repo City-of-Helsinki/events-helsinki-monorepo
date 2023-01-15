@@ -4,8 +4,8 @@ import { X_REQUEST_ID } from '../constants';
 import type ContextValue from '../context/ContextValue';
 import createLogger from '../utils/create-logger';
 
-const apolloLoggingPlugin: () => ApolloServerPlugin<
-  ContextValue<unknown>
+const apolloLoggingPlugin: <T>() => ApolloServerPlugin<
+  ContextValue<T>
 > = () => {
   const logger = createLogger();
   return {

@@ -117,5 +117,15 @@ $buttonWidth: 180px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    @include respond-below(l) {
+      flex-direction: column;
+    }
+
+    @include respond-below(l) {
+      .buttonWrapper {
+        margin-top: var(--spacing-xs);
+      }
+    }
   }
 }

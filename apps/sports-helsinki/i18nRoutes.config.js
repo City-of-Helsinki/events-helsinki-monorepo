@@ -11,10 +11,6 @@ const i18nRoutes = {
     { source: '/paikat/:venueId', locale: 'fi' },
     { source: '/platser/:venueId', locale: 'sv' },
   ],
-  '/coursesearch': [
-    { source: '/kurssihaku', locale: 'fi' },
-    { source: '/kurssok', locale: 'sv' },
-  ],
   '/courses/:eventId': [
     { source: '/kurssit/:eventId', locale: 'fi' },
     { source: '/kurser/:eventId', locale: 'sv' },

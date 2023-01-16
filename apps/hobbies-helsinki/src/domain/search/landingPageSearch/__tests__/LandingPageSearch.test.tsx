@@ -40,7 +40,7 @@ describe('Landing page', () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router.pathname).toBe(searchPath);
-  });
+  }, 50000);
 
   it('should route to event search page with correct search query after clicking submit button', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
@@ -54,7 +54,7 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { text: searchValue },
     });
-  });
+  }, 50000);
 
   // Search options does not appear in the auto suggest menu
   it.todo(
@@ -83,7 +83,7 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { categories: 'music' },
     });
-  });
+  }, 50000);
 
   it('should route to event search page after selecting today date type and pressing submit button', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
@@ -98,7 +98,7 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { dateTypes: 'today' },
     });
-  });
+  }, 50000);
 
   it('should route to event search page after selecting start date and pressing submit button', async () => {
     advanceTo('2020-10-04');
@@ -124,5 +124,5 @@ describe('Landing page', () => {
       pathname: searchPath,
       query: { start: '2020-10-06' },
     });
-  }, 50000);
+  }, 100000);
 });

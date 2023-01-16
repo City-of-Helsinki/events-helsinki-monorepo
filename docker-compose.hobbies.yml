@@ -2,6 +2,7 @@ version: '3.9'
 services:
   # Start hobbies in development
   # docker-compose -f docker-compose.hobbies.yml up develop
+  #
   develop:
     container_name: hobbies-helsinki-develop
     # profiles:

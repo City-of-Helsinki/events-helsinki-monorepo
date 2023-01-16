@@ -2,6 +2,7 @@ version: '3.9'
 services:
   # Start sports in development
   # docker-compose -f docker-compose.sports.yml up develop
+  #
   develop:
     container_name: sports-helsinki-develop
     # profiles:

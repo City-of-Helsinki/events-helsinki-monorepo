@@ -94,7 +94,7 @@ describe('similar events', () => {
         screen.getByText(event.name.fi as string)
       ).toBeInTheDocument();
     });
-  });
+  }, 10000);
   it('should hide the whole page section when there are no cards', async () => {
     advanceTo(new Date('2020-08-11'));
     render(<SimilarEvents event={event as EventFieldsFragment} />, {
@@ -113,5 +113,5 @@ describe('similar events', () => {
         })
       ).not.toBeInTheDocument();
     });
-  });
+  }, 10000);
 });

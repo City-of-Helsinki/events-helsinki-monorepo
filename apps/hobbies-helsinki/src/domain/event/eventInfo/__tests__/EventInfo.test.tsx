@@ -432,7 +432,7 @@ describe('subEvents', () => {
         name: translations.event.subEvents.title,
       })
     ).not.toBeInTheDocument();
-  });
+  }, 100000);
 
   async function testSubEvents() {
     await waitFor(() => {

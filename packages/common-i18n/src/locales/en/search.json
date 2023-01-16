@@ -28,11 +28,12 @@
     "titleDropdownHobbyType": "Type of activity",
     "showOnlyAdultCourses": "Show only adult courses",
     "ageLimitValues": "Age",
+    "ageLimitHeader": "Age of participants in years, for example 8, 12-14 or 60-65",
     "ageLimitMin": "From",
     "ageLimitMax": "To",
     "ageFilter": {
-      "minAge": "From {{age}} {{yearAbbr}}",
-      "maxAge": "To {{age}} {{yearAbbr}}",
+      "minAge": "{{age}} {{yearAbbr}}",
+      "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "For a {{age}}-year-old"
     }
   },

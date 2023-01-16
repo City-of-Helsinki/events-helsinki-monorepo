@@ -41,11 +41,12 @@
     "titleDropdownHobbyType": "Harrastusmuoto",
     "showOnlyAdultCourses": "Näytä vain aikuisten harrastukset",
     "ageLimitValues": "Ikä",
+    "ageLimitHeader": "Osallistujien ikä vuosina, esimerkiksi 8, 12–14 tai 60–65",
     "ageLimitMin": "Alkaen",
     "ageLimitMax": "Päättyen",
     "ageFilter": {
-      "minAge": "Alkaen {{age}} {{yearAbbr}}",
-      "maxAge": "Päättyen {{age}} {{yearAbbr}}",
+      "minAge": "{{age}} {{yearAbbr}}",
+      "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "{{age}}-vuotiaalle"
     }
   },

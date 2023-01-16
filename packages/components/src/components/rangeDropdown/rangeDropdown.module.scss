@@ -89,6 +89,12 @@
     }
   }
 
+  .header {
+    font-size: var(--fontsize-body-l);
+    line-height: var(--spacing-m);
+    padding: var(--spacing-m) var(--spacing-s) 0;
+  }
+
   .rangeInputsWrapper {
     display: flex;
     justify-content: center;
@@ -100,11 +106,11 @@
     }
 
     .rangeArrowWrapper {
-      margin: var(--spacing-s) var(--spacing-s) 0 var(--spacing-s);
+      margin: 0 var(--spacing-3-xs);
     }
 
     input {
-      height: var(--spacing-2-xl);
+      text-align: center;
       width: 100%;
     }
   }

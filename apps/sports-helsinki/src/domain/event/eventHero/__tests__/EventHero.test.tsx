@@ -72,14 +72,14 @@ it('should render event name, description and location', () => {
 it('should go to event list', async () => {
   const event = getFakeEvent();
   const { router } = render(<EventHero event={event} />, {
-    routes: [`/kurssit/${event.id}?returnPath=/kurssihaku`],
+    routes: [`/kurssit/${event.id}?returnPath=/haku`],
   });
   await userEvent.click(
     screen.getByRole('link', {
       name: translations.event.hero.ariaLabelBackButton,
     })
   );
-  expect(router.pathname).toBe('/kurssihaku');
+  expect(router.pathname).toBe('/haku');
 });
 
 it('should render keywords', () => {

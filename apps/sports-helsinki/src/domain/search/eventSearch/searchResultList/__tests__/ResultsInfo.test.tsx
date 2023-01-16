@@ -54,7 +54,7 @@ it.each<[AppLanguage, number]>([
     );
 
     await waitFor(() => {
-      expect(router.pathname).toBe(`/kurssihaku`);
+      expect(router.pathname).toBe(`/haku`);
     });
   }
 );

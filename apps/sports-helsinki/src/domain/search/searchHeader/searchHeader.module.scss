@@ -15,6 +15,16 @@
     height: calc(100vh - 50px);
     background-color: var(--background-color);
 
+    .closeSearchWrapper {
+      padding: $spacing-xs $spacing-s;
+    }
+
+    @include breakpoints.respond-above(s) {
+      .closeSearchWrapper {
+        padding: 0 $spacing-s;
+      }
+    }
+
     @include breakpoints.respond-above(m) {
       height: auto;
       display: grid;

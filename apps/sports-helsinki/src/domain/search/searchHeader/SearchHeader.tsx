@@ -35,16 +35,18 @@ function SearchHeader({ showMode, count, switchShowMode, searchForm }: Props) {
           {!collapsed && (
             <div className={styles.searchMenu}>
               {searchForm}
-              <Button
-                className={styles.closeSearch}
-                variant="secondary"
-                theme="black"
-                iconLeft={<IconCross aria-hidden="true" />}
-                fullWidth
-                onClick={() => setCollapsed(true)}
-              >
-                {t('common:mapSearch.closeSearchControls')}
-              </Button>
+              <div className={styles.closeSearchWrapper}>
+                <Button
+                  className={styles.closeSearch}
+                  variant="secondary"
+                  theme="black"
+                  iconLeft={<IconCross aria-hidden="true" />}
+                  fullWidth
+                  onClick={() => setCollapsed(true)}
+                >
+                  {t('common:mapSearch.closeSearchControls')}
+                </Button>
+              </div>
             </div>
           )}
           {collapsed && (

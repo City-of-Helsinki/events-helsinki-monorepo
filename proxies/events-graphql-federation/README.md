@@ -17,9 +17,9 @@ Apollo's Supergraph-demo repository: https://github.com/apollographql/supergraph
 
 ### Staging
 
-- Hobbies-Helsinki: https://events-graphql-federation-hobbies.test.kuva.hel.ninja/
-- Events-Helsinki: https://events-graphql-federation-events.test.kuva.hel.ninja/
-- Sports-Helsinki: https://events-graphql-federation-sports.test.kuva.hel.ninja/
+- Hobbies-Helsinki: https://events-graphql-federation-hobbies.test.hel.ninja/
+- Events-Helsinki: https://events-graphql-federation-events.test.hel.ninja/
+- Sports-Helsinki: https://events-graphql-federation-sports.test.hel.ninja/
 
 ## Local development
 

@@ -44,8 +44,6 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         sortOrder: EVENT_SORT_OPTIONS.END_TIME,
         superEventType: ['umbrella', 'none'],
       }),
-      [EVENT_SEARCH_FILTERS.MIN_AGE]: '5',
-      [EVENT_SEARCH_FILTERS.MAX_AGE]: '15',
       [EVENT_SEARCH_FILTERS.SUITABLE]: [],
     };
   }, [event]);

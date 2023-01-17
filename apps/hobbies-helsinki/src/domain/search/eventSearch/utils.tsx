@@ -199,7 +199,6 @@ export const getEventSearchVariables = ({
     places,
     publisher,
     text,
-    suitableFor,
     audienceMinAgeLt,
     audienceMaxAgeGt,
   } = getSearchFilters(params);

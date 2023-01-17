@@ -31,18 +31,23 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         .map((category) => category?.id) // collect ids
         .filter((id) => id != null) // remove nulls and undefined ones
         .join(), // make a string
-      [EVENT_SEARCH_FILTERS.MIN_AGE]: event.audienceMinAge ?? '',
-      [EVENT_SEARCH_FILTERS.MAX_AGE]: event.audienceMaxAge ?? '',
+      [EVENT_SEARCH_FILTERS.MIN_AGE]: event.audienceMinAge ?? '5',
+      [EVENT_SEARCH_FILTERS.MAX_AGE]: event.audienceMaxAge ?? '15',
     };
 
-    return getEventSearchVariables({
-      include: ['keywords', 'location'],
-      // eslint-disable-next-line max-len
-      pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
-      params: new URLSearchParams(searchParams),
-      sortOrder: EVENT_SORT_OPTIONS.END_TIME,
-      superEventType: ['umbrella', 'none'],
-    });
+    return {
+      ...getEventSearchVariables({
+        include: ['keywords', 'location'],
+        // eslint-disable-next-line max-len
+        pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
+        params: new URLSearchParams(searchParams),
+        sortOrder: EVENT_SORT_OPTIONS.END_TIME,
+        superEventType: ['umbrella', 'none'],
+      }),
+      [EVENT_SEARCH_FILTERS.MIN_AGE]: '5',
+      [EVENT_SEARCH_FILTERS.MAX_AGE]: '15',
+      [EVENT_SEARCH_FILTERS.SUITABLE]: [],
+    };
   }, [event]);
 };
 

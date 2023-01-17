@@ -17,7 +17,7 @@ import SearchAutosuggest from '../../../common-events/components/search/SearchAu
 import { SEARCH_ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
 import { PARAM_SEARCH_TYPE } from '../combinedSearch/constants';
-import type { ISearchForm, SearchComponentType } from '../combinedSearch/types';
+import type { SearchForm, SearchComponentType } from '../combinedSearch/types';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import styles from './search.module.scss';
 
@@ -42,7 +42,7 @@ export const useSimmpleVenueSearchForm = ({
   searchRoute: SearchComponentProps['searchRoute'];
   autosuggestInput: string;
   setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
-}): ISearchForm => {
+}): SearchForm => {
   const locale = useLocale();
   const router = useRouter();
 
@@ -134,7 +134,8 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
   // Initialize fields when page is loaded
   React.useEffect(() => {
     initialFieldsOnPageLoad();
-  }, [initialFieldsOnPageLoad]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>

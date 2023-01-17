@@ -3,7 +3,7 @@
  * the venues and the events (and the events with 2 different types).
  * 1. The venues search is using Unified-Search and it's parameters.
  * 2. The events search is using Events-graphqql-proxy and it's parameters.
- * 3. There is a one form to control both the queries.
+ * 3. There is a single form to control both the queries.
  *
  * Since a form queries with 1 set of fields from 2 different source
  * and 2 different sets of params, a transformation map is needed.
@@ -13,9 +13,9 @@
 export const TRANSFORM_MAP = new Map<string, string>([['q', 'text']]);
 
 /**
- * Uses {@link TRANSFORM_MAP} to transfer the URL SEarch parameter keys.
- * @param searchParams the current URL search aprameters
- * @returns a URlSearchParams object with transformed keys.
+ * Uses {@link TRANSFORM_MAP} to transfer the URL Search parameter keys.
+ * @param searchParams the current URL search parameters
+ * @returns a URLSearchParams object with transformed keys.
  */
 export function transformedSearchVariables(
   searchParams: URLSearchParams

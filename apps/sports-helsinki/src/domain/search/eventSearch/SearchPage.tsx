@@ -19,7 +19,7 @@ type SearchPageProps = {
   eventType: EventTypeId;
 };
 
-const SearchPage: React.FC<SearchPageProps> = ({
+const EventSearchPage: React.FC<SearchPageProps> = ({
   SearchComponent,
   pageTitle,
   eventType,
@@ -102,4 +102,4 @@ const SearchPage: React.FC<SearchPageProps> = ({
   );
 };
 
-export default SearchPage;
+export default EventSearchPage;

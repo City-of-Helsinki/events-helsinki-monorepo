@@ -12,7 +12,7 @@ import type { SearchRoute } from '../../../types';
  * An interface that helps the search forms
  * to implement similar features.
  * */
-export interface ISearchForm {
+export interface SearchForm {
   searchParams: URLSearchParams;
   searchFilters: object;
   goToSearch: (search: string) => void;
@@ -24,7 +24,7 @@ export interface ISearchForm {
   scrollToResultList?: () => void;
 }
 
-export interface ISearchPage {
+export interface SearchPage {
   resultList?: EventListQuery['eventList'] | UnifiedSearchVenue[];
   searchFilters: QueryEventListArgs | UnifiedSearchParameters;
   meta?: Config['meta'];

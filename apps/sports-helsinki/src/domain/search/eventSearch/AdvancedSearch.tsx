@@ -12,7 +12,7 @@ import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
 import { getI18nPath } from '../../../utils/routerUtils';
-import type { ISearchForm, SearchComponentType } from '../combinedSearch/types';
+import type { SearchForm, SearchComponentType } from '../combinedSearch/types';
 import { EVENT_DEFAULT_SEARCH_FILTERS, MAPPED_PLACES } from './constants';
 import FilterSummary from './filterSummary/FilterSummary';
 import styles from './search.module.scss';
@@ -37,7 +37,7 @@ export const useAdvancedSearchForm = ({
   scrollToResultList: AdvancedSearchFormProps['scrollToResultList'];
   autosuggestInput: string;
   setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
-}): ISearchForm => {
+}): SearchForm => {
   const locale = useLocale();
   const router = useRouter();
   const params: { place?: string } = router.query;
@@ -175,7 +175,8 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   // Initialize fields when page is loaded
   React.useEffect(() => {
     initialFieldsOnPageLoad();
-  }, [initialFieldsOnPageLoad]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>

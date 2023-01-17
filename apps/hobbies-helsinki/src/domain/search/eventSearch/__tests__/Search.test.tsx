@@ -88,7 +88,7 @@ it('for accessibility violations', async () => {
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
-}, 50000); // FIXME: Why does this take so long?
+}); // FIXME: Why does this take so long?
 
 it('should clear all filters and search field', async () => {
   const { router } = renderComponent();
@@ -196,7 +196,7 @@ it('should change search query after selecting start date and pressing submit bu
     pathname,
     query: { start: '2020-10-06', text: 'jazz' },
   });
-}, 50000); // FIXME: Why does this take so long to test?
+}); // FIXME: Why does this take so long to test?
 
 it('should change search query after clicking category menu item', async () => {
   const { router } = renderComponent();

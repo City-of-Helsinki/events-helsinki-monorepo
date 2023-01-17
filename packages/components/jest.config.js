@@ -35,6 +35,7 @@ const config = {
     '<rootDir>/../.jest/setupTests.ts',
   ],
   testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
+  testTimeout: 50000, // ms
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
     // https://jestjs.io/docs/webpack#handling-static-assets

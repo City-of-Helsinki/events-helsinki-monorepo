@@ -153,7 +153,7 @@ it('all the event cards should be visible and load more button should load more 
   //   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   //   expect(await screen.findByText(event.name.fi!)).toBeInTheDocument();
   // });
-}, 10000);
+});
 
 it('should show toastr message when loading next event page fails', async () => {
   toast.error = jest.fn();

@@ -75,7 +75,7 @@ describe('date range input', () => {
     expect(onChangeEndDate).toHaveBeenCalledWith(
       utcToZonedTime(new Date('2020-10-15'), 'UTC')
     );
-  }, 25000);
+  });
 
   it('should call onChangeStartDate', async () => {
     const startDate = new Date('2020-10-10');

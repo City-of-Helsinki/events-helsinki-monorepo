@@ -87,7 +87,7 @@ it('for accessibility violations', async () => {
 
   const results = await axe(container);
   expect(results).toHaveNoViolations();
-}, 50000); // FIXME: Why does this take so long?
+}); // FIXME: Why does this take so long?
 
 it('should clear all filters and search field', async () => {
   const { router } = renderComponent();

@@ -30,6 +30,7 @@ const config = {
   },
   setupFilesAfterEnv: ['<rootDir>/../.jest/setupTests.ts'],
   testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
+  testTimeout: 50000, // ms
   moduleNameMapper: {
     ...getTsConfigBasePaths(),
   },

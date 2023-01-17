@@ -143,7 +143,7 @@ it('should render info and load other events + similar events', async () => {
     expect(
       screen.getByRole('link', { name: keyword.name })
     ).toBeInTheDocument();
-  }, 10000);
+  });
 
   await screen.findByText('Tapahtuman muut ajat');
 
@@ -159,7 +159,7 @@ it('should render info and load other events + similar events', async () => {
   expect(screen.getByTestId(otherEventTimesListTestId).children).toHaveLength(
     otherEventTimesCount
   );
-}, 50000);
+});
 
 it('should show error info when event is closed', async () => {
   advanceTo('2020-10-10');

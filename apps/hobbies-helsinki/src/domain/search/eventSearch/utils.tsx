@@ -285,6 +285,8 @@ export const getEventSearchVariables = ({
     suitableFor: [Number(audienceMinAgeLt), Number(audienceMaxAgeGt)].filter(
       (v) => v
     ),
+    audienceMinAgeLt,
+    audienceMaxAgeGt,
     eventType: AppConfig.supportedEventTypes,
   };
 };

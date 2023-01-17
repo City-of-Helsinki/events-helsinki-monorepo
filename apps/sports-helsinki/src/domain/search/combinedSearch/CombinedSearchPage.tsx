@@ -3,11 +3,7 @@ import {
   useSearchTranslation,
   EventTypeId,
   useAppSportsTranslation,
-  getURLSearchParamsFromAsPath,
-  useCommonTranslation,
 } from 'events-helsinki-components';
-import { Button } from 'hds-react';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
@@ -15,19 +11,15 @@ import EventSearchPage from '../eventSearch/SearchPage';
 import VenueSearchPage from '../venueSearch/SearchPage';
 import { SimpleVenueSearchForm } from '../venueSearch/VenueSearch';
 import styles from './combinedSearchPage.module.scss';
-import {
-  useScrollToSearchResultItem,
-  useSearchTabResultCounts,
-  useSearchTabsWithParams,
-} from './hooks';
+import { useScrollToSearchResultItem, useSearchTabsWithParams } from './hooks';
 import SearchTabs from './searchTabs/SearchTabs';
 import type { SearchTabId } from './searchTabs/tabsContext';
-import { useTabsContext } from './searchTabs/tabsContext';
+import SearchUtilities from './SearchUtilities';
 import type { SearchComponentType } from './types';
 
 export const searchContainerDataTestId = 'combinedSearchContainer';
 
-const VenueSearchPanel: React.FC = () => {
+function VenueSearchPanel() {
   const { t } = useAppSportsTranslation();
   useScrollToSearchResultItem();
   return (
@@ -36,11 +28,9 @@ const VenueSearchPanel: React.FC = () => {
       pageTitle={t('appSports:search.pageTitle')}
     />
   );
-};
+}
 
-const EventSearchPanel: React.FC<{ eventType: EventTypeId }> = ({
-  eventType,
-}) => {
+function EventSearchPanel({ eventType }: { eventType: EventTypeId }) {
   const { t } = useSearchTranslation();
   useScrollToSearchResultItem();
   return (
@@ -50,21 +40,19 @@ const EventSearchPanel: React.FC<{ eventType: EventTypeId }> = ({
       eventType={eventType}
     />
   );
-};
+}
 
-export const SearchForm: React.FC<
-  {
-    'data-testid'?: string;
-    korosBottom?: boolean;
-    searchUtilities?: React.ReactNode;
-    className?: string;
-  } & SearchComponentType
-> = ({
+export function SearchForm({
   'data-testid': dataTestId,
   korosBottom = false,
   className,
   ...delegatedSimpleVenueSearchFormProps
-}) => {
+}: {
+  'data-testid'?: string;
+  korosBottom?: boolean;
+  searchUtilities?: React.ReactNode;
+  className?: string;
+} & SearchComponentType) {
   return (
     <PageSection
       korosBottom={korosBottom}
@@ -83,65 +71,13 @@ export const SearchForm: React.FC<
       </ContentContainer>
     </PageSection>
   );
-};
+}
 
-export const SearchUtilities: React.FC = () => {
-  const { t: tSearch } = useSearchTranslation();
-  const { t: tCommon } = useCommonTranslation();
-  const router = useRouter();
-  const switchShowMode = () => {
-    const searchParams = getURLSearchParamsFromAsPath(router.asPath);
-    router.replace({
-      pathname: SEARCH_ROUTES.MAPSEARCH,
-      query: searchParams.toString(),
-    });
-  };
-  const { activeTab } = useTabsContext();
-  useSearchTabResultCounts();
-
-  return (
-    <PageSection className={styles.searchUtilities}>
-      <ContentContainer className={styles.contentContainer}>
-        <div className={styles.flexEnd}>
-          <SearchTabs.TabList>
-            <SearchTabs.Tab id="Venue">
-              <SearchTabs.CountLabel
-                id="Venue"
-                label={tSearch('search:search.searchType.venue')}
-              />
-            </SearchTabs.Tab>
-            <SearchTabs.Tab id={EventTypeId.General}>
-              <SearchTabs.CountLabel
-                id={EventTypeId.General}
-                label={tSearch('search:search.searchType.generalEventType')}
-              />
-            </SearchTabs.Tab>
-            <SearchTabs.Tab id={EventTypeId.Course}>
-              <SearchTabs.CountLabel
-                id={EventTypeId.Course}
-                label={tSearch('search:search.searchType.courseEventType')}
-              />
-            </SearchTabs.Tab>
-          </SearchTabs.TabList>
-
-          {activeTab === 'Venue' ? (
-            <Button
-              variant="secondary"
-              onClick={switchShowMode}
-              className={styles.buttonWrapper}
-            >
-              {tCommon('common:mapSearch.showOnMap')}
-            </Button>
-          ) : null}
-        </div>
-      </ContentContainer>
-    </PageSection>
-  );
-};
-
-const CombinedSearchPage: React.FC<{ defaultTab: SearchTabId }> = ({
+function CombinedSearchPage({
   defaultTab = 'Venue',
-}) => {
+}: {
+  defaultTab: SearchTabId;
+}) {
   const { initTab } = useSearchTabsWithParams(defaultTab);
 
   return (
@@ -177,6 +113,6 @@ const CombinedSearchPage: React.FC<{ defaultTab: SearchTabId }> = ({
       </SearchTabs>
     </div>
   );
-};
+}
 
 export default CombinedSearchPage;

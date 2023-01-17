@@ -24,7 +24,7 @@ type SearchPageProps = {
   pageTitle: string;
 };
 
-const SearchPage: React.FC<SearchPageProps> = ({
+const VenueSearchPage: React.FC<SearchPageProps> = ({
   SearchComponent,
   pageTitle,
 }) => {
@@ -119,4 +119,4 @@ const SearchPage: React.FC<SearchPageProps> = ({
   );
 };
 
-export default SearchPage;
+export default VenueSearchPage;

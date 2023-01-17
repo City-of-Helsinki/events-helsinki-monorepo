@@ -12,12 +12,12 @@ import type {
 } from './tabsContext';
 import { TabsContext, useTabsContext } from './tabsContext';
 
-export type TabsPropType = {
+type TabsPropType = {
   id: TabsContextType['activeTab'];
   children: React.ReactNode;
 };
 
-export function SearchTab({ id, children }: TabsPropType) {
+function SearchTab({ id, children }: TabsPropType) {
   const router = useRouter();
   const { activeTab, setActiveTab } = useTabsContext();
   const isActive = activeTab === id;
@@ -44,13 +44,13 @@ export function SearchTab({ id, children }: TabsPropType) {
   );
 }
 
-const SearchTabList = ({
+function SearchTabList({
   children,
 }: {
   children: React.ReactComponentElement<typeof SearchTab>[];
-}) => {
+}) {
   return <div className={styles.tabs}>{children}</div>;
-};
+}
 
 type SearchTabContentProps = {
   id: string;
@@ -58,12 +58,12 @@ type SearchTabContentProps = {
   onClick?: () => void;
 };
 
-const SearchTabPanelContent = ({ id, children }: SearchTabContentProps) => {
+function SearchTabPanelContent({ id, children }: SearchTabContentProps) {
   const { activeTab } = useTabsContext();
   return activeTab === id ? (
     <div className={styles.panelContent}>{children}</div>
   ) : null;
-};
+}
 
 type SearchTabsProps = {
   initTab: SearchTabId;

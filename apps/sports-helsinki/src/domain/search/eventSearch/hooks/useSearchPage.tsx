@@ -10,13 +10,13 @@ import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
-import type { ISearchPage } from 'domain/search/combinedSearch/types';
+import type { SearchPage } from 'domain/search/combinedSearch/types';
 import { removeQueryParamsFromRouter } from 'utils/routerUtils';
 import { SEARCH_ROUTES } from '../../../../constants';
 import { getNextPage } from '../utils';
 import useEventSearchFilters from './useEventSearchFilters';
 
-function useSearchPage({ eventType }: { eventType: EventTypeId }): ISearchPage {
+function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
   const { t } = useSearchTranslation();
   const router = useRouter();
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
@@ -53,7 +53,7 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): ISearchPage {
     setIsFetchingMore(false);
   };
 
-  const scrollToResultList = React.useCallback(() => {
+  const scrollToResultList = () => {
     if (isSmallScreen) {
       scroller.scrollTo('resultList', {
         delay: 0,
@@ -62,7 +62,7 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): ISearchPage {
         smooth: true,
       });
     }
-  }, [isSmallScreen]);
+  };
 
   const scrollToResultCard = (id: string) => {
     scroller.scrollTo(id, {
@@ -73,7 +73,7 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): ISearchPage {
     });
   };
 
-  const initialPageOnLoad = React.useCallback(() => {
+  const initialPageOnLoad = () => {
     if (router.asPath && router.query?.scrollToResults) {
       scrollToResultList();
     } else if (router.query?.eventId) {
@@ -86,7 +86,7 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): ISearchPage {
       );
       removeQueryParamsFromRouter(router, ['eventId'], SEARCH_ROUTES.SEARCH);
     }
-  }, [router, scrollToResultList]);
+  };
 
   const count = (eventsData?.eventList?.meta.count as number) ?? 0;
   const hasNext = !!eventsData?.eventList?.meta.next;

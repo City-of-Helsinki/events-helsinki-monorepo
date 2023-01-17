@@ -11,14 +11,14 @@ import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 import AppConfig from 'domain/app/AppConfig';
-import type { ISearchPage } from 'domain/search/combinedSearch/types';
+import type { SearchPage } from 'domain/search/combinedSearch/types';
 import useUnifiedSearchListQuery from 'domain/unifiedSearch/useUnifiedSearchListQuery';
 import { removeQueryParamsFromRouter } from 'utils/routerUtils';
 import { SEARCH_ROUTES } from '../../../../constants';
 
 const BLOCK_SIZE = 10;
 
-function useSearchPage(): ISearchPage {
+function useSearchPage(): SearchPage {
   const { t } = useSearchTranslation();
   const router = useRouter();
   const { meta } = useConfig();
@@ -56,7 +56,7 @@ function useSearchPage(): ISearchPage {
     setIsFetchingMore(false);
   };
 
-  const scrollToResultList = React.useCallback(() => {
+  const scrollToResultList = () => {
     if (isSmallScreen) {
       scroller.scrollTo('resultList', {
         delay: 0,
@@ -65,7 +65,7 @@ function useSearchPage(): ISearchPage {
         smooth: true,
       });
     }
-  }, [isSmallScreen]);
+  };
 
   const scrollToResultCard = (id: string) => {
     scroller.scrollTo(id, {
@@ -76,7 +76,7 @@ function useSearchPage(): ISearchPage {
     });
   };
 
-  const initialPageOnLoad = React.useCallback(() => {
+  const initialPageOnLoad = () => {
     if (router.asPath && router.query?.scrollToResults) {
       scrollToResultList();
     } else if (router.query?.venueId) {
@@ -89,7 +89,7 @@ function useSearchPage(): ISearchPage {
       );
       removeQueryParamsFromRouter(router, ['venueId'], SEARCH_ROUTES.SEARCH);
     }
-  }, [router, scrollToResultList]);
+  };
 
   const venuesList = React.useMemo(
     () =>

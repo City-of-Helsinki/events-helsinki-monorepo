@@ -2,7 +2,6 @@ import type { ApolloCache, ApolloClient, InMemoryCache } from '@apollo/client';
 import { useApolloClient } from '@apollo/client';
 import { MockedProvider } from '@apollo/client/testing';
 import type { MockedResponse } from '@apollo/client/testing';
-import type { Config as EventsConfig } from 'events-helsinki-components';
 import {
   DEFAULT_LANGUAGE,
   NavigationContext,
@@ -21,8 +20,6 @@ import {
 import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
 import { I18nextProvider } from 'react-i18next';
 
-import EventsConfigProvider from '../../src/common-events/configProvider/ConfigProvider';
-import eventsDefaultConfig from '../../src/common-events/configProvider/defaultConfig';
 import { ROUTES } from '../../src/constants';
 import { getLocalizedCmsItemUrl } from '../../src/utils/routerUtils';
 import { initI18n as i18n } from './initI18n';
@@ -48,15 +45,13 @@ function TestProviders({ mocks, children, router }: Props) {
     // @ts-ignore
     <I18nextProvider i18n={i18n}>
       <MockedProvider mocks={mocks} addTypename={false}>
-        <EventsConfigProviderWithMockedApolloClient router={router}>
-          <RHHCConfigProviderWithMockedApolloClient router={router}>
-            <NavigationContext.Provider value={{}}>
-              <RouterContext.Provider value={{ ...router, ...mockRouter }}>
-                {children}
-              </RouterContext.Provider>
-            </NavigationContext.Provider>
-          </RHHCConfigProviderWithMockedApolloClient>
-        </EventsConfigProviderWithMockedApolloClient>
+        <RHHCConfigProviderWithMockedApolloClient router={router}>
+          <NavigationContext.Provider value={{}}>
+            <RouterContext.Provider value={{ ...router, ...mockRouter }}>
+              {children}
+            </RouterContext.Provider>
+          </NavigationContext.Provider>
+        </RHHCConfigProviderWithMockedApolloClient>
       </MockedProvider>
     </I18nextProvider>
   );
@@ -69,30 +64,6 @@ function RHHCConfigProviderWithMockedApolloClient({ children, router }: Props) {
       {children}
     </RHHCConfigProvider>
   );
-}
-
-function EventsConfigProviderWithMockedApolloClient({
-  children,
-  router,
-}: Props) {
-  const eventsApolloClient = useApolloClient(); // Use the mock client
-  return (
-    <EventsConfigProvider config={getEventsConfig(router, eventsApolloClient)}>
-      {children}
-    </EventsConfigProvider>
-  );
-}
-
-function getEventsConfig(
-  router: NextRouter,
-  eventsApolloClient: ApolloClient<object>
-) {
-  return {
-    ...eventsDefaultConfig,
-    t: i18n.t,
-    apolloClient: eventsApolloClient,
-    router,
-  } as unknown as EventsConfig;
 }
 
 function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {

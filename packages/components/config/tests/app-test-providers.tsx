@@ -14,8 +14,7 @@ import {
 } from 'react-helsinki-headless-cms';
 import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
 import { I18nextTestStubProvider } from '@/test-utils/I18nextTestStubProvider';
-import type { Config as EventConfig } from '../../src';
-import { ConfigProvider, DEFAULT_LANGUAGE, defaultConfig } from '../../src';
+import { DEFAULT_LANGUAGE } from '../../src';
 
 const cmsApiDomain = 'tapahtumat.cms.test.domain.com';
 
@@ -36,13 +35,11 @@ function TestProviders({ mocks, children, router }: Props) {
   return (
     <I18nextTestStubProvider>
       <MockedProvider mocks={mocks} addTypename={false}>
-        <EventsConfigProviderWithMockedApolloClient router={router}>
-          <RHHCConfigProviderWithMockedApolloClient router={router}>
-            <RouterContext.Provider value={{ ...router, ...mockRouter }}>
-              {children}
-            </RouterContext.Provider>
-          </RHHCConfigProviderWithMockedApolloClient>
-        </EventsConfigProviderWithMockedApolloClient>
+        <RHHCConfigProviderWithMockedApolloClient router={router}>
+          <RouterContext.Provider value={{ ...router, ...mockRouter }}>
+            {children}
+          </RouterContext.Provider>
+        </RHHCConfigProviderWithMockedApolloClient>
       </MockedProvider>
     </I18nextTestStubProvider>
   );
@@ -55,30 +52,6 @@ function RHHCConfigProviderWithMockedApolloClient({ children, router }: Props) {
       {children}
     </RHHCConfigProvider>
   );
-}
-
-function EventsConfigProviderWithMockedApolloClient({
-  children,
-  router,
-}: Props) {
-  const eventsApolloClient = useApolloClient(); // Use the mock client
-  return (
-    <ConfigProvider config={getEventsConfig(router, eventsApolloClient)}>
-      {children}
-    </ConfigProvider>
-  );
-}
-
-function getEventsConfig(
-  router: NextRouter,
-  eventsApolloClient: ApolloClient<object>
-) {
-  return {
-    ...defaultConfig,
-    t: i18n.t,
-    apolloClient: eventsApolloClient,
-    router,
-  } as unknown as EventConfig;
 }
 
 function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {

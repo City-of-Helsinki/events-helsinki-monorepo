@@ -1,7 +1,7 @@
 import {
   translateValue,
   FilterButton,
-  useConfig,
+  useCommonTranslation,
 } from 'events-helsinki-components';
 import type { FilterType } from 'events-helsinki-components';
 import React from 'react';
@@ -19,7 +19,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
   type,
   value,
 }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
   return (
     <FilterButton
       onRemove={onRemove}

@@ -1,4 +1,8 @@
-import { FilterButton, useConfig } from 'events-helsinki-components';
+import {
+  FilterButton,
+  useCommonTranslation,
+  useSearchTranslation,
+} from 'events-helsinki-components';
 import type { FilterType } from 'events-helsinki-components';
 import React from 'react';
 
@@ -9,12 +13,13 @@ export interface AgeFilterProps {
 }
 
 const AgeFilter: React.FC<AgeFilterProps> = ({ value, type, onRemove }) => {
-  const { t } = useConfig();
+  const { t } = useCommonTranslation();
+  const { t: s } = useSearchTranslation();
 
   return (
     <FilterButton
       onRemove={onRemove}
-      text={t(`search:search.ageFilter.${type}`, {
+      text={s(`search:search.ageFilter.${type}`, {
         age: value,
         yearAbbr: t('common:yearsShort'),
       })}

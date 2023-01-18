@@ -9,3 +9,4 @@ export type { Logger } from './loggers/logger';
 export { Message } from './message';
 export * from './types';
 export * from './utils';
+export * from './navigationProvider';

@@ -1,7 +1,4 @@
-import React from 'react';
-
 import { fireEvent, render, screen } from '@/test-utils';
-
 import ShareLinkBase from '../ShareLinkBase';
 
 const renderComponent = (props: any) => render(<ShareLinkBase {...props} />);

@@ -1,11 +1,11 @@
+import React from 'react';
 import type { ShareLinkProps } from 'events-helsinki-components';
 import {
   useCommonTranslation,
   ShareLinkBase,
 } from 'events-helsinki-components';
-import React from 'react';
 
-import FacebookIcon from '../../../assets/icons/svg/facebook.svg';
+import FacebookIcon from '../../assets/icons/svg/facebook.svg';
 
 const fbShareUrl = 'https://www.facebook.com/sharer/sharer.php';
 

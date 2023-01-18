@@ -1,9 +1,9 @@
-import type { ShareLinkProps } from 'events-helsinki-components';
-import { ShareLinkBase } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import type { ShareLinkProps } from 'events-helsinki-components';
+import { ShareLinkBase } from 'events-helsinki-components';
 
-import TwitterIcon from '../../../assets/icons/svg/twitter.svg';
+import TwitterIcon from '../../assets/icons/svg/twitter.svg';
 
 const twitterShareUrl = 'https://twitter.com/share';
 

@@ -1,6 +1,9 @@
 import classNames from 'classnames';
-import { isClient, CopyButton } from 'events-helsinki-components';
-import { useTranslation } from 'next-i18next';
+import {
+  isClient,
+  CopyButton,
+  useCommonTranslation,
+} from 'events-helsinki-components';
 import React from 'react';
 
 import LinkIcon from '../../../assets/icons/svg/link.svg';
@@ -14,7 +17,7 @@ export interface ShareLinksProps {
 }
 
 const ShareLinks: React.FC<ShareLinksProps> = ({ title }) => {
-  const { t } = useTranslation(['common']);
+  const { t } = useCommonTranslation();
 
   // We are using the client only accessible href. By doing this, we do not need
   // to pass the original request from the server. This same pattern was used in

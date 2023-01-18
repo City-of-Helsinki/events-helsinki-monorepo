@@ -199,7 +199,6 @@ export const getEventSearchVariables = ({
     places,
     publisher,
     text,
-    suitableFor,
     audienceMinAgeLt,
     audienceMaxAgeGt,
   } = getSearchFilters(params);
@@ -286,6 +285,8 @@ export const getEventSearchVariables = ({
     suitableFor: [Number(audienceMinAgeLt), Number(audienceMaxAgeGt)].filter(
       (v) => v
     ),
+    audienceMinAgeLt,
+    audienceMaxAgeGt,
     eventType: AppConfig.supportedEventTypes,
   };
 };

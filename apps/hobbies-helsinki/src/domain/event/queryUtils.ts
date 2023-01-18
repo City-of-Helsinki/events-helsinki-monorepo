@@ -35,14 +35,17 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
       [EVENT_SEARCH_FILTERS.MAX_AGE]: event.audienceMaxAge ?? '',
     };
 
-    return getEventSearchVariables({
-      include: ['keywords', 'location'],
-      // eslint-disable-next-line max-len
-      pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
-      params: new URLSearchParams(searchParams),
-      sortOrder: EVENT_SORT_OPTIONS.END_TIME,
-      superEventType: ['umbrella', 'none'],
-    });
+    return {
+      ...getEventSearchVariables({
+        include: ['keywords', 'location'],
+        // eslint-disable-next-line max-len
+        pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
+        params: new URLSearchParams(searchParams),
+        sortOrder: EVENT_SORT_OPTIONS.END_TIME,
+        superEventType: ['umbrella', 'none'],
+      }),
+      [EVENT_SEARCH_FILTERS.SUITABLE]: [],
+    };
   }, [event]);
 };
 

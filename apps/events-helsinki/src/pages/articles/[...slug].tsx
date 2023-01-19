@@ -1,5 +1,9 @@
 import type { NormalizedCacheObject } from '@apollo/client';
-import { KorosWrapper, NavigationContext } from 'events-helsinki-components';
+import {
+  KorosWrapper,
+  NavigationContext,
+  ShareLinks,
+} from 'events-helsinki-components';
 import type { AppLanguage } from 'events-helsinki-components';
 import type {
   GetStaticPropsContext,
@@ -27,7 +31,6 @@ import type {
 import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
 
 import Navigation from '../../common-events/components/navigation/Navigation';
-import ShareLinks from '../../common-events/components/shareLinks/ShareLinks';
 import {
   getDefaultCollections,
   getSlugFromUri,

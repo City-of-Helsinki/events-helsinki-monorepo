@@ -1,5 +1,4 @@
 import React from 'react';
-import FacebookIcon from '../../assets/icons/svg/facebook.svg';
 import { useCommonTranslation } from '../../hooks';
 import ShareLinkBase from './ShareLinkBase';
 import type { ShareLinkProps } from './types';
@@ -18,7 +17,9 @@ const FacebookShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
       queryParameters={queryParameters}
       windowName={linkLabel}
       linkLabel={linkLabel}
-      icon={<FacebookIcon />}
+      icon={
+        <img alt={linkLabel} src="/shared-assets/images/share/facebook.svg" />
+      }
     />
   );
 };

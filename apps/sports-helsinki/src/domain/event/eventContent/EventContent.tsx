@@ -8,6 +8,7 @@ import {
   EventLocation,
   getEventFields,
   EVENT_LOCATIONS,
+  ShareLinks,
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -18,7 +19,6 @@ import {
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
 
-import ShareLinks from '../../../common-events/components/shareLinks/ShareLinks';
 import EventInfo from '../eventInfo/EventInfo';
 import styles from './eventContent.module.scss';
 

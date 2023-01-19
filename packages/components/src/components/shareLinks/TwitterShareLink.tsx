@@ -1,5 +1,4 @@
 import React from 'react';
-import TwitterIcon from '../../assets/icons/svg/twitter.svg';
 import { useCommonTranslation } from '../../hooks';
 import ShareLinkBase from './ShareLinkBase';
 import type { ShareLinkProps } from './types';
@@ -17,7 +16,9 @@ const TwitterShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
       queryParameters={queryParameters}
       windowName={linkLabel}
       linkLabel={linkLabel}
-      icon={<TwitterIcon />}
+      icon={
+        <img alt={linkLabel} src="/shared-assets/images/share/twitter.svg" />
+      }
     />
   );
 };

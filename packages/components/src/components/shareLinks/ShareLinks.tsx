@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import LinkIcon from '../../assets/icons/svg/link.svg';
 import { useCommonTranslation } from '../../hooks';
 import { isClient } from '../../utils';
 import CopyButton from '../copyButton/CopyButton';
@@ -43,7 +42,10 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ title }) => {
             }
             aria-label={t('common:shareLinks.buttonCopyLink')}
           >
-            <LinkIcon />
+            <img
+              alt={t('common:shareLinks.buttonCopyLink')}
+              src="/shared-assets/images/share/link.svg"
+            />
           </CopyButton>
         </li>
         <li className={styles.shareLinkItem}>

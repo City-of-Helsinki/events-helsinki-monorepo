@@ -13,8 +13,8 @@ import { toast } from 'react-toastify';
 import AppConfig from 'domain/app/AppConfig';
 import type { SearchPage } from 'domain/search/combinedSearch/types';
 import useUnifiedSearchListQuery from 'domain/unifiedSearch/useUnifiedSearchListQuery';
-import { removeQueryParamsFromRouter } from 'utils/routerUtils';
 import { SEARCH_ROUTES } from '../../../../constants';
+import { removeQueryParamsFromRouter } from '../../../../utils/routerUtils';
 
 const BLOCK_SIZE = 10;
 

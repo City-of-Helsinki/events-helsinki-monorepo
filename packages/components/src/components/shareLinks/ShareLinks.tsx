@@ -1,12 +1,10 @@
 import classNames from 'classnames';
 import React from 'react';
-import {
-  isClient,
-  CopyButton,
-  useCommonTranslation,
-} from 'events-helsinki-components';
-
 import LinkIcon from '../../assets/icons/svg/link.svg';
+import { useCommonTranslation } from '../../hooks';
+import { isClient } from '../../utils';
+import CopyButton from '../copyButton/CopyButton';
+
 import FacebookShareLink from './FacebookShareLink';
 import LinkedInShareLink from './LinkedInShareLink';
 import styles from './shareLinks.module.scss';

@@ -1,9 +1,8 @@
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import type { ShareLinkProps } from 'events-helsinki-components';
-import { ShareLinkBase } from 'events-helsinki-components';
-
 import LinkedInIcon from '../../assets/icons/svg/linkedin.svg';
+import ShareLinkBase from './ShareLinkBase';
+import type { ShareLinkProps } from './types';
 
 const linkedInShareUrl = 'https://linkedin.com/shareArticle';
 

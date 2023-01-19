@@ -1,6 +1,6 @@
 import { render, screen } from '@/test-utils';
-import type { ShareLinkProps } from 'events-helsinki-components';
-import FacebookShareLink from 'events-helsinki-components/src/components/shareLinks/FacebookShareLink';
+import FacebookShareLink from '../FacebookShareLink';
+import type { ShareLinkProps } from '../types';
 
 const renderComponent = (props: ShareLinkProps) =>
   render(<FacebookShareLink {...props} />);

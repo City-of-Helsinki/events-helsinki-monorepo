@@ -11,8 +11,8 @@ import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 import type { SearchPage } from 'domain/search/combinedSearch/types';
-import { removeQueryParamsFromRouter } from 'utils/routerUtils';
 import { SEARCH_ROUTES } from '../../../../constants';
+import { removeQueryParamsFromRouter } from '../../../../utils/routerUtils';
 import { getNextPage } from '../utils';
 import useEventSearchFilters from './useEventSearchFilters';
 

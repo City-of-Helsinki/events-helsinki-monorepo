@@ -663,7 +663,7 @@ export enum CollectionIdType {
   Uri = 'URI'
 }
 
-export type CollectionModulesUnionType = EventSearch | EventSearchCarousel | EventSelected | EventSelectedCarousel | LocationsSelected;
+export type CollectionModulesUnionType = EventSearch | EventSearchCarousel | EventSelected | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel;
 
 /** Connection between the collection type and the collection type */
 export type CollectionToPreviewConnectionEdge = {
@@ -4116,6 +4116,19 @@ export type LocationsSelected = {
   title?: Maybe<Scalars['String']>;
 };
 
+/** Collection Module: LocationsSelectedCarousel */
+export type LocationsSelectedCarousel = {
+  __typename?: 'LocationsSelectedCarousel';
+  /** List of location IDs */
+  locations?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  /** Module type */
+  module?: Maybe<Scalars['String']>;
+  /** List of modules */
+  modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
+  /** Module title */
+  title?: Maybe<Scalars['String']>;
+};
+
 /** File details for a Media Item */
 export type MediaDetails = {
   __typename?: 'MediaDetails';
@@ -5698,7 +5711,7 @@ export enum PageIdType {
   Uri = 'URI'
 }
 
-export type PageModulesUnionType = EventSearch | EventSearchCarousel | EventSelected | EventSelectedCarousel | LayoutArticleHighlights | LayoutArticles | LayoutArticlesCarousel | LayoutCollection | LayoutContact | LayoutPages | LayoutPagesCarousel | LocationsSelected;
+export type PageModulesUnionType = EventSearch | EventSearchCarousel | EventSelected | EventSelectedCarousel | LayoutArticleHighlights | LayoutArticles | LayoutArticlesCarousel | LayoutCollection | LayoutContact | LayoutPages | LayoutPagesCarousel | LocationsSelected | LocationsSelectedCarousel;
 
 export type PageSidebarUnionType = LayoutArticles | LayoutLinkList | LayoutPages;
 
@@ -6490,7 +6503,7 @@ export enum PostIdType {
   Uri = 'URI'
 }
 
-export type PostModulesUnionType = EventSearch | EventSearchCarousel | EventSelected | EventSelectedCarousel | LayoutArticleHighlights | LayoutArticles | LayoutArticlesCarousel | LayoutCollection | LayoutContact | LayoutPages | LayoutPagesCarousel | LocationsSelected;
+export type PostModulesUnionType = EventSearch | EventSearchCarousel | EventSelected | EventSelectedCarousel | LayoutArticleHighlights | LayoutArticles | LayoutArticlesCarousel | LayoutCollection | LayoutContact | LayoutPages | LayoutPagesCarousel | LocationsSelected | LocationsSelectedCarousel;
 
 /** The format of post field data. */
 export enum PostObjectFieldFormatEnum {

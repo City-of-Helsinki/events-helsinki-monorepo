@@ -9,6 +9,13 @@ $logoWidth: 5.5rem;
   background: var(--hero-background-color, var(--color-theme-background));
 }
 
+.ellipsedText {
+  button {
+    font-weight: 700;
+    color: var(--color-success);
+  }
+}
+
 .contentContainer {
   @include respond_below(m) {
     padding: 0 !important;

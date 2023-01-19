@@ -1,5 +1,25 @@
-// .accessibilitySentences {
-// }
+.accessibilitySentences {
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--fontsize-body-l);
+    color: var(--color-success);
+    padding: 0;
+    svg {
+      margin-left: var(--spacing-3-xs);
+    }
+  }
+  ul {
+    list-style-type: disc;
+  }
+
+  p {
+    font-weight: 700;
+    margin: 0;
+  }
+}
 
 // .accessibilityTitle {
 // }

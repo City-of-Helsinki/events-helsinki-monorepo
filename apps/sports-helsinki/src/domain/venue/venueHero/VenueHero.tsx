@@ -70,6 +70,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
           icon: <IconTicket aria-hidden="true" />,
           info: (
             <EllipsedTextWithToggle
+              className={styles.ellipsedText}
               lines={connectionPriceSectionsLines}
               initialVisibleLinesCount={4}
             />

@@ -23,9 +23,7 @@ const GRAPHQL_PATH = '/proxy/graphql';
 type StartServerArgs<Datasources, Context extends ContextValue<Datasources>> = {
   config: ServerConfig;
   schema: GraphQLSchema;
-  contextCallback: (
-    args: ContextConstructorArgs<Datasources>
-  ) => Promise<Context>;
+  contextCallback: (args: ContextConstructorArgs) => Promise<Context>;
 };
 
 export const startServer = async <
@@ -82,7 +80,7 @@ export const startServer = async <
           // Some fields are relying on language set in the header.
           // The translation object will be returned as a string
           // and the language from the context is used to select the right translation.
-          language: acceptsLanguage(req, config?.languages ?? []) || undefined,
+          language: acceptsLanguage(req, config?.languages ?? []),
         }),
     })
   );

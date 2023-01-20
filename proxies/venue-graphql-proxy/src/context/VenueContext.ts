@@ -1,13 +1,13 @@
 import { ContextValue } from 'events-helsinki-graphql-proxy-server/src';
 import HaukiDataSource from '../datasources/HaukiDataSource';
-import TprekDataSource from '../datasources/TprekDataSource';
-import type { DataSources } from '../types';
+import ServiceMapDataSource from '../datasources/ServiceMapDataSource';
+import type { VenueDataSources } from '../types/VenueDataSources';
 
-class VenueContext extends ContextValue<DataSources> {
+class VenueContext extends ContextValue<VenueDataSources> {
   protected initializeDataSources() {
     return {
-      hauki: new HaukiDataSource({ cache: this.cache }),
-      tprek: new TprekDataSource({ cache: this.cache }),
+      hauki: new HaukiDataSource(this),
+      serviceMap: new ServiceMapDataSource(this),
     };
   }
 }

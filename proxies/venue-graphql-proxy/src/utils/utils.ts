@@ -1,11 +1,7 @@
 import get from 'lodash/get';
 import { Sources } from '../contants/constants';
-import type {
-  Context,
-  Locale,
-  TranslationsObject,
-  VenueDetails,
-} from '../types';
+import type VenueContext from '../context/VenueContext';
+import type { Locale, TranslationsObject, VenueDetails } from '../types';
 import type { Point } from '../types/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,37 +82,37 @@ function pickLocale(obj: TranslationsObject, locale: Locale) {
 
 export function translateVenue(
   data: Partial<VenueDetails>,
-  { language }: Context
+  context: VenueContext
 ): VenueDetails | VenueDetails<string> {
-  if (!language) {
+  if (!context.language) {
     return data as VenueDetails;
   }
+
+  const locale = context.language as Locale;
 
   return {
     ...data,
     addressLocality: data.addressLocality
-      ? pickLocale(data.addressLocality, language)
+      ? pickLocale(data.addressLocality, locale)
       : undefined,
     description: data.description
-      ? pickLocale(data.description, language)
+      ? pickLocale(data.description, locale)
       : undefined,
-    name: data.name ? pickLocale(data.name, language) : undefined,
+    name: data.name ? pickLocale(data.name, locale) : undefined,
     streetAddress: data.streetAddress
-      ? pickLocale(data.streetAddress, language)
+      ? pickLocale(data.streetAddress, locale)
       : undefined,
-    infoUrl: data.infoUrl ? pickLocale(data.infoUrl, language) : undefined,
-    telephone: data.telephone
-      ? pickLocale(data.telephone, language)
-      : undefined,
+    infoUrl: data.infoUrl ? pickLocale(data.infoUrl, locale) : undefined,
+    telephone: data.telephone ? pickLocale(data.telephone, locale) : undefined,
     accessibilitySentences:
       // If grouped by translations, find the correct one by language
       data.accessibilitySentences && 'fi' in data.accessibilitySentences
-        ? get(data.accessibilitySentences, language, null)
+        ? get(data.accessibilitySentences, locale, null)
         : data?.accessibilitySentences,
     connections: data.connections?.map((connection) => ({
       ...connection,
-      name: pickLocale(connection.name, language),
-      url: connection.url ? pickLocale(connection.url, language) : undefined,
+      name: pickLocale(connection.name, locale),
+      url: connection.url ? pickLocale(connection.url, locale) : undefined,
     })),
   } as VenueDetails<string>;
 }

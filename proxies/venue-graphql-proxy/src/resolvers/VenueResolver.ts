@@ -1,5 +1,6 @@
-import type VenueResolverIntegration from '../integrations/VenueResolverIntegration';
-import type { AnyObject, Context, Source, VenueDetails } from '../types';
+import type VenueContext from '../context/VenueContext';
+import type { AnyObject, Source, VenueDetails } from '../types';
+import type VenueResolverIntegration from './integrations/VenueResolverIntegration';
 
 type Config = {
   integrations: VenueResolverIntegration[];
@@ -15,7 +16,7 @@ export default class VenueResolver {
   async resolveVenue(
     id: string,
     source: Source,
-    context: Context
+    context: VenueContext
   ): Promise<VenueDetails> {
     const data = await this.execute(this.config.integrations, [
       id,
@@ -28,7 +29,7 @@ export default class VenueResolver {
 
   private async execute(
     integrations: VenueResolverIntegration[],
-    [id, source, context]: [string, Source, Context]
+    [id, source, context]: [string, Source, VenueContext]
   ) {
     const dataPromisesWithFormatting = integrations.flatMap((integration) => {
       const dataLocations = integration.getDataSources(id, source, context);
@@ -46,7 +47,7 @@ export default class VenueResolver {
   private async processData(
     data: AnyObject,
     integration: VenueResolverIntegration,
-    context: Context
+    context: VenueContext
   ) {
     const formattedData = integration.format(data, context);
     const enrichments = await integration.enrich(data, context);

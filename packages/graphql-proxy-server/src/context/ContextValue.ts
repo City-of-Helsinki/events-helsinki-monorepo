@@ -1,9 +1,10 @@
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
+import type Locale from '../types/locale';
 
-export type ContextConstructorArgs<DataSources> = {
+export type ContextConstructorArgs = {
   token: string;
   cache?: KeyValueCache;
-  language?: string;
+  language?: Locale;
 };
 abstract class ContextValue<DataSources> {
   public readonly token: string;
@@ -12,17 +13,13 @@ abstract class ContextValue<DataSources> {
   // Some fields are relying on language set in the header.
   // The translation object will be returned as a string
   // and the language from the context is used to select the right translation.
-  public readonly language?: string;
+  public readonly language?: Locale;
 
   public X_REQUEST_ID?: string;
 
   protected abstract initializeDataSources(): DataSources;
 
-  public constructor({
-    token,
-    cache,
-    language,
-  }: ContextConstructorArgs<DataSources>) {
+  public constructor({ token, cache, language }: ContextConstructorArgs) {
     this.token = token;
     this.cache = cache;
     this.dataSources = this.initializeDataSources();

@@ -1,11 +1,12 @@
+import type VenueContext from '../../context/VenueContext';
+import type { TprekUnit } from '../../types';
 import type { VenueData } from '../integrations/VenueResolverIntegration';
-import type { Context, TprekUnit } from '../types';
 import type VenueEnricher from './VenueEnricher';
 
 export default class VenueOntologyEnricher
   implements VenueEnricher<TprekUnit, VenueData>
 {
-  async getEnrichments(data: TprekUnit, context: Context) {
+  async getEnrichments(data: TprekUnit, context: VenueContext) {
     const enrichDataLocations = [];
     const {
       ontologytree_ids: ontologyTreeIds,
@@ -14,7 +15,7 @@ export default class VenueOntologyEnricher
     const { language, dataSources } = context;
     if (ontologyTreeIds && Array.isArray(ontologyTreeIds)) {
       enrichDataLocations.push(
-        dataSources.tprek
+        dataSources.serviceMap
           .getOntologyTree(ontologyTreeIds)
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .then((ontologyTree: any) =>
@@ -38,7 +39,7 @@ export default class VenueOntologyEnricher
 
     if (ontologyWordIds && Array.isArray(ontologyWordIds)) {
       enrichDataLocations.push(
-        dataSources.tprek
+        dataSources.serviceMap
           .getOntologyWords(ontologyWordIds)
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           .then((ontologyWords: any) =>

@@ -1,22 +1,23 @@
 import type { GraphQLResolveInfo } from 'graphql';
 import { GraphQLError } from 'graphql';
-import type { Context } from '../types';
+import type VenueContext from '../context/VenueContext';
+import type { Source } from '../types';
 
 type ResolverFunction<T = unknown> = (
-  source: unknown,
+  source: Source,
   args: unknown,
-  context: Context | unknown,
+  context: VenueContext,
   info: GraphQLResolveInfo
-) => Promise<T>;
+) => Promise<T | null>;
 
 type OnErrorFunction<E = unknown> = (error: E) => void;
 
 const createQueryResolver =
-  (resolver: ResolverFunction, onError?: OnErrorFunction) =>
+  <T>(resolver: ResolverFunction<T>, onError?: OnErrorFunction) =>
   async (
-    source: unknown,
+    source: Source,
     args: unknown,
-    context: Context | unknown,
+    context: VenueContext,
     info: GraphQLResolveInfo
   ) => {
     try {

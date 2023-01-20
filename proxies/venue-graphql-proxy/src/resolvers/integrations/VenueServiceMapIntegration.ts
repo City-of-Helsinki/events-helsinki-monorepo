@@ -1,13 +1,13 @@
-import { Sources } from '../contants/constants';
-import type VenueEnricher from '../enrichers/VenueEnricher';
-import type { TprekUnit, VenueDetails } from '../types';
+import { Sources } from '../../contants/constants';
+import type { TprekUnit, VenueDetails } from '../../types';
 import {
   formAccessibilitySentences,
   formTranslationObject,
   getPointFromLongAndLat,
   getTprekId,
   translateVenue,
-} from '../utils/utils';
+} from '../../utils/utils';
+import type VenueEnricher from '../enrichers/VenueEnricher';
 import type { VenueData } from './VenueResolverIntegration';
 import VenueResolverIntegration from './VenueResolverIntegration';
 
@@ -15,11 +15,11 @@ type Config<I, O> = {
   enrichers: VenueEnricher<I, O>[];
 };
 
-export default class VenueTprekIntegration extends VenueResolverIntegration<TprekUnit> {
+export default class VenueServiceMapIntegration extends VenueResolverIntegration<TprekUnit> {
   constructor(config: Config<TprekUnit, Partial<VenueData>>) {
     super({
       getDataSources: (id: string, _, { dataSources }) => [
-        dataSources.tprek.getUnit(id),
+        dataSources.serviceMap.getUnit(id),
       ],
       enrichers: config.enrichers,
       format: (data, context) => translateVenue(this.formatter(data), context),

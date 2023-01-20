@@ -1,12 +1,25 @@
-import RESTDataSource from '../utils/RESTDataSource';
+import { DataSourceWithContext } from 'events-helsinki-graphql-proxy-server/src';
+import type VenueContext from '../context/VenueContext';
+import type { VenueDataSources } from '../types/VenueDataSources';
 
 type AnyObject = Record<string, unknown>;
 
 /**
  * Docs: https://www.hel.fi/palvelukarttaws/restpages/ver4.html
  */
-export default class TprekDataSource extends RESTDataSource {
-  override baseURL = 'https://www.hel.fi/palvelukarttaws/rest/v4/';
+export default class ServiceMapDataSource extends DataSourceWithContext<
+  VenueDataSources,
+  VenueContext
+> {
+  public constructor(contextValue: VenueContext) {
+    super(contextValue);
+    if (!process.env.GRAPHQL_PROXY_SERVICE_MAP_DATASOURCE) {
+      throw new Error(
+        'Environment variable "GRAPHQL_PROXY_SERVICE_MAP_DATASOURCE" is not set!'
+      );
+    }
+    this.baseURL = process.env.GRAPHQL_PROXY_SERVICE_MAP_DATASOURCE;
+  }
 
   async getOntologyTree(ids: number[]): Promise<AnyObject[] | null> {
     const trees = await this.getOntologyTrees();

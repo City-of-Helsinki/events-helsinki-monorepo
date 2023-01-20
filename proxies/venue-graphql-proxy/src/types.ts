@@ -7,12 +7,6 @@ export type AnyObject = Record<string, unknown>;
 
 export type Locale = 'fi' | 'sv' | 'en';
 
-export type Context = {
-  language?: Locale;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  dataSources?: any;
-};
-
 export type VenueDetails<T = TranslationsObject> = {
   id: string;
   dataSource: string | null;
@@ -118,20 +112,4 @@ export type TranslationsObject = {
   fi?: string;
   en?: string;
   sv?: string;
-};
-
-export type LoggerFunction = (
-  message?: string,
-  ...optionalParameters: unknown[]
-) => void;
-
-export type Logger = {
-  debug: LoggerFunction;
-  info: LoggerFunction;
-  warn: LoggerFunction;
-  error: LoggerFunction;
-};
-
-export type DataSources = {
-  // TODO
 };

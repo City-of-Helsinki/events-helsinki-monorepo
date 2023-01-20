@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import type { GraphQLResolveInfo } from 'graphql';
+import type VenueContext from '../context/VenueContext';
+import type { Source } from '../types';
 import venueQueryResolver from './venueQueryResolver';
 
 // Implementation is a bit ugly here.
@@ -11,11 +14,16 @@ import venueQueryResolver from './venueQueryResolver';
 // I chose this compromise because it's technically simple.
 //
 // Note the lack of pagination support.
-// @ts-ignore
-const venusByIdsResolver = async (_, { ids }, context, __) => {
+const venusByIdsResolver = async (
+  source: Source,
+  params: unknown,
+  context: VenueContext,
+  resolveInfo: GraphQLResolveInfo
+) => {
+  const venueIds = (params as { ids: string[] }).ids;
   return await Promise.all(
-    ids.map((idWithSource: string) =>
-      venueQueryResolver(_, { id: idWithSource }, context, __)
+    venueIds.map((idWithSource: string) =>
+      venueQueryResolver(source, { id: idWithSource }, context, resolveInfo)
     )
   );
 };

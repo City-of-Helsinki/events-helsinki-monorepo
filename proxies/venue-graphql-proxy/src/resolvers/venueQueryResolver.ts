@@ -1,14 +1,14 @@
 import { GraphQLError } from 'graphql';
 import AppConfig from '../config/AppConfig';
 import { Sources } from '../contants/constants';
-import VenueOntologyEnricher from '../enrichers/VenueOntologyEnricher';
-import HaukiIntegration from '../integrations/VenueHaukiIntegration';
-import VenueLinkedIntegration from '../integrations/VenueLinkedIntegration';
-import type VenueResolverIntegration from '../integrations/VenueResolverIntegration';
-import VenueTprekIntegration from '../integrations/VenueTprekIntegration';
-import type { AnyObject, Source } from '../types';
+import type VenueContext from '../context/VenueContext';
+import type { AnyObject, Source, VenueDetails } from '../types';
 import createQueryResolver from '../utils/createQueryResolver';
 import parseVenueId, { IdParseError } from '../utils/parseVenueId';
+import VenueOntologyEnricher from './enrichers/VenueOntologyEnricher';
+import HaukiIntegration from './integrations/VenueHaukiIntegration';
+import type VenueResolverIntegration from './integrations/VenueResolverIntegration';
+import VenueServiceMapIntegration from './integrations/VenueServiceMapIntegration';
 import VenueResolver from './VenueResolver';
 
 const resolvers: Map<Source, (config: AppConfig) => VenueResolver> = new Map();
@@ -17,7 +17,7 @@ resolvers.set(
   () =>
     new VenueResolver({
       integrations: [
-        new VenueTprekIntegration({
+        new VenueServiceMapIntegration({
           enrichers: [new VenueOntologyEnricher()],
         }),
         AppConfig.isHaukiEnabled
@@ -33,9 +33,6 @@ resolvers.set(
   () =>
     new VenueResolver({
       integrations: [
-        new VenueLinkedIntegration({
-          enrichers: [],
-        }),
         AppConfig.isHaukiEnabled
           ? new HaukiIntegration({
               // I'm not sure if we can expect for this to always work
@@ -46,23 +43,17 @@ resolvers.set(
     })
 );
 
-async function resolver(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  _: any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  { id: idWithSource }: any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  { language, dataSources, haukiEnabled }: any
-) {
-  const [source, id] = parseVenueId(idWithSource) ?? [];
+async function resolver(_: unknown, params: unknown, context: VenueContext) {
+  const paramId = (params as { id: string }).id;
+  const [source, id] = parseVenueId(paramId) ?? [];
   const dataResolverFactory = source ? resolvers.get(source) ?? null : null;
   const dataResolver = dataResolverFactory
-    ? dataResolverFactory({ haukiEnabled })
+    ? dataResolverFactory({ haukiEnabled: AppConfig.isHaukiEnabled })
     : null;
 
-  return id && source
-    ? dataResolver?.resolveVenue(id, source, { language, dataSources })
-    : null;
+  return (
+    (id && source && dataResolver?.resolveVenue(id, source, context)) || null
+  );
 }
 
 function onError(e: unknown) {
@@ -71,4 +62,4 @@ function onError(e: unknown) {
   }
 }
 
-export default createQueryResolver(resolver, onError);
+export default createQueryResolver<VenueDetails>(resolver, onError);

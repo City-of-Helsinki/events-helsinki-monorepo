@@ -1,3 +1,5 @@
+import type Locale from '../types/locale';
+
 type SentryConfig = {
   sentryDsn?: string; // process.env.GRAPHQL_PROXY_SENTRY_DSN
   sentryEnvironment?: string; // process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT
@@ -8,7 +10,7 @@ type NodeConfig = {
 };
 
 export type ServerContextConfig = {
-  languages?: string[]; // Some datasources  uses language headers to resolve fields
+  languages?: Locale[]; // Some datasources  uses language headers to resolve fields
 };
 
 export type ServerConfig = SentryConfig &

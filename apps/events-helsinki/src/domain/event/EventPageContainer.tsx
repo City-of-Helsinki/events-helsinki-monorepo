@@ -13,8 +13,8 @@ import type {
   SuperEventResponse,
   EventFieldsFragment,
 } from 'events-helsinki-components';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 

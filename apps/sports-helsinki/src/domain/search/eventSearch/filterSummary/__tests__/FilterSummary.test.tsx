@@ -2,7 +2,6 @@ import {
   OrganizationDetailsDocument,
   PlaceDetailsDocument,
 } from 'events-helsinki-components';
-// import { axe } from 'jest-axe';
 import React from 'react';
 
 import { configure, render, screen, userEvent, waitFor } from '@/test-utils';

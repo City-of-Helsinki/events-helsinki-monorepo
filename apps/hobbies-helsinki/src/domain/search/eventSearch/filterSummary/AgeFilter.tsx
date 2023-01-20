@@ -5,8 +5,6 @@ import {
   useSearchTranslation,
 } from 'events-helsinki-components';
 import React from 'react';
-import ts from 'typescript';
-
 export interface AgeFilterProps {
   value: string;
   type: 'minAge' | 'maxAge';

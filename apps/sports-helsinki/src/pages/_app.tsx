@@ -13,11 +13,11 @@ import {
   GeolocationProvider,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
-import type { SSRConfig } from 'next-i18next';
-import { appWithTranslation } from 'next-i18next';
 import type { AppProps as NextAppProps } from 'next/app';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
+import { appWithTranslation } from 'next-i18next';
+import type { SSRConfig } from 'next-i18next';
 import React from 'react';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import { ToastContainer } from 'react-toastify';

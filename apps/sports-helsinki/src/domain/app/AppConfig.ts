@@ -137,7 +137,7 @@ class AppConfig {
   }
 
   static get isHaukiEnabled() {
-    return false;
+    return true;
   }
 }
 

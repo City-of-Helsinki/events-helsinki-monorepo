@@ -1,7 +1,6 @@
-import type { ShareLinkProps } from 'events-helsinki-components/components';
-import React from 'react';
 import { render, screen } from '@/test-utils';
 import LinkedInShareLink from '../LinkedInShareLink';
+import type { ShareLinkProps } from '../types';
 
 const renderComponent = (props: ShareLinkProps) =>
   render(<LinkedInShareLink {...props} />);

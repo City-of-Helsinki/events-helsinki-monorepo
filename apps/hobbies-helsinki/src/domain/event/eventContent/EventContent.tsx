@@ -4,6 +4,7 @@ import type {
   SuperEventResponse,
 } from 'events-helsinki-components';
 import {
+  ShareLinks,
   useLocale,
   EventLocation,
   getEventFields,
@@ -18,7 +19,6 @@ import {
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
 
-import ShareLinks from '../../../common-events/components/shareLinks/ShareLinks';
 import EventInfo from '../eventInfo/EventInfo';
 import styles from './eventContent.module.scss';
 

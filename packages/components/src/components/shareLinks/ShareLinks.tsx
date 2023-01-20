@@ -1,12 +1,9 @@
 import classNames from 'classnames';
-import {
-  isClient,
-  CopyButton,
-  useCommonTranslation,
-} from 'events-helsinki-components';
 import React from 'react';
+import { useCommonTranslation } from '../../hooks';
+import { isClient } from '../../utils';
+import CopyButton from '../copyButton/CopyButton';
 
-import LinkIcon from '../../../assets/icons/svg/link.svg';
 import FacebookShareLink from './FacebookShareLink';
 import LinkedInShareLink from './LinkedInShareLink';
 import styles from './shareLinks.module.scss';
@@ -18,7 +15,6 @@ export interface ShareLinksProps {
 
 const ShareLinks: React.FC<ShareLinksProps> = ({ title }) => {
   const { t } = useCommonTranslation();
-
   // We are using the client only accessible href. By doing this, we do not need
   // to pass the original request from the server. This same pattern was used in
   // MyHelsinki. Limitation is that sharing buttons will be re-rendered on client
@@ -46,7 +42,10 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ title }) => {
             }
             aria-label={t('common:shareLinks.buttonCopyLink')}
           >
-            <LinkIcon />
+            <img
+              alt={t('common:shareLinks.buttonCopyLink')}
+              src="/shared-assets/images/share/link.svg"
+            />
           </CopyButton>
         </li>
         <li className={styles.shareLinkItem}>

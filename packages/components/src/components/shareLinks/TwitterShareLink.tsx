@@ -1,16 +1,14 @@
-import type { ShareLinkProps } from 'events-helsinki-components';
-import { ShareLinkBase } from 'events-helsinki-components';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
-
-import TwitterIcon from '../../../assets/icons/svg/twitter.svg';
+import { useCommonTranslation } from '../../hooks';
+import ShareLinkBase from './ShareLinkBase';
+import type { ShareLinkProps } from './types';
 
 const twitterShareUrl = 'https://twitter.com/share';
 
 const TwitterShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
-  const { t } = useTranslation('common');
+  const { t } = useCommonTranslation();
   const queryParameters = { url: sharedLink };
-  const linkLabel = t('shareLink.shareOnTwitter');
+  const linkLabel = t('common:shareLink.shareOnTwitter');
 
   return (
     <ShareLinkBase
@@ -18,7 +16,9 @@ const TwitterShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
       queryParameters={queryParameters}
       windowName={linkLabel}
       linkLabel={linkLabel}
-      icon={<TwitterIcon />}
+      icon={
+        <img alt={linkLabel} src="/shared-assets/images/share/twitter.svg" />
+      }
     />
   );
 };

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import {
+  ShareLinks,
   sanitizeHtml,
   useLocale,
   EventLocation,
@@ -14,7 +15,6 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 
-import ShareLinks from '../../../common-events/components/shareLinks/ShareLinks';
 import EventInfo from '../eventInfo/EventInfo';
 import styles from './eventContent.module.scss';
 

@@ -1,6 +1,10 @@
 import classNames from 'classnames';
 import type { Venue } from 'events-helsinki-components';
-import { useVenueTranslation, Text } from 'events-helsinki-components';
+import {
+  useVenueTranslation,
+  Text,
+  ShareLinks,
+} from 'events-helsinki-components';
 import React from 'react';
 import {
   PageSection,
@@ -8,7 +12,6 @@ import {
   Link,
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
-import ShareLinks from '../../../common-events/components/shareLinks/ShareLinks';
 import VenueInfo from '../venueInfo/VenueInfo';
 import VenueLocation from '../venueLocation/VenueLocation';
 import styles from './venueContent.module.scss';

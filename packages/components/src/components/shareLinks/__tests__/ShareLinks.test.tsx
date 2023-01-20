@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { render, screen } from '@/test-utils';
+
 import type { ShareLinksProps } from '../ShareLinks';
 import ShareLinks from '../ShareLinks';
 

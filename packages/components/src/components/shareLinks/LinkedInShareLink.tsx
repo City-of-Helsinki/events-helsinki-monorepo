@@ -1,9 +1,7 @@
-import type { ShareLinkProps } from 'events-helsinki-components';
-import { ShareLinkBase } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-
-import LinkedInIcon from '../../../assets/icons/svg/linkedin.svg';
+import ShareLinkBase from './ShareLinkBase';
+import type { ShareLinkProps } from './types';
 
 const linkedInShareUrl = 'https://linkedin.com/shareArticle';
 
@@ -18,7 +16,9 @@ const LinkedInShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
       queryParameters={queryParameters}
       windowName={linkLabel}
       linkLabel={linkLabel}
-      icon={<LinkedInIcon />}
+      icon={
+        <img alt={linkLabel} src="/shared-assets/images/share/linkedin.svg" />
+      }
     />
   );
 };

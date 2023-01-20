@@ -2,6 +2,7 @@ import http from 'http';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { json } from 'body-parser';
 import cors from 'cors';
 import express from 'express';
@@ -58,6 +59,7 @@ export const startServer = async <
       sentryLoggingPlugin(),
       apolloLoggingPlugin(),
       ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginLandingPageLocalDefault(),
     ],
     validationRules: [depthLimit(10)],
     introspection: serverConfig.introspection,

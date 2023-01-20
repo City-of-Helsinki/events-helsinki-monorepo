@@ -21,6 +21,7 @@ const config: ServerConfig = {
   introspection: trueEnv.includes(
     process.env.GRAPHQL_PROXY_INTROSPECTION ?? 'false'
   ),
+  languages: ['fi', 'en', 'sv'],
 };
 
 (async () => {

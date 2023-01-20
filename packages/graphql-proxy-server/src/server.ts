@@ -14,6 +14,8 @@ import apolloLoggingPlugin from './plugins/apolloLoggingPlugin';
 import sentryLoggingPlugin from './plugins/sentryLoggingPlugin';
 import type { ServerConfig } from './server-config/server-config';
 import { createServerConfig } from './server-config/server-config';
+import acceptsLanguage from './utils/acceptLanguage';
+
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
 const GRAPHQL_PATH = '/proxy/graphql';
@@ -77,6 +79,10 @@ export const startServer = async <
         contextCallback({
           token: req.headers.authorization || '',
           cache: server.cache,
+          // Some fields are relying on language set in the header.
+          // The translation object will be returned as a string
+          // and the language from the context is used to select the right translation.
+          language: acceptsLanguage(req, config?.languages ?? []) || undefined,
         }),
     })
   );

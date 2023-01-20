@@ -7,7 +7,12 @@ type NodeConfig = {
   env?: string;
 };
 
+export type ServerContextConfig = {
+  languages?: string[]; // Some datasources  uses language headers to resolve fields
+};
+
 export type ServerConfig = SentryConfig &
+  ServerContextConfig &
   NodeConfig & {
     debug?: boolean; // process.env.GRAPHQL_PROXY_DEBUG
     serverPort: number; // process.env.GRAPHQL_PROXY_PORT

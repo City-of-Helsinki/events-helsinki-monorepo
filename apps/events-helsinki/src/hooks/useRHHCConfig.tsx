@@ -67,7 +67,7 @@ export default function useRHHCConfig() {
           <ArticleDetails {...props} />
         ),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        LocationCardContent: (props: any) => (
+        VenueCardContent: (props: any) => (
           <VenueDetails {...(props as VenueDetailsProps)} />
         ),
       },

@@ -98,6 +98,12 @@ export type LocationsSelected = {
   title: string;
 };
 
+export type LocationsSelectedCarousel = {
+  module: 'locations_selected_carousel';
+  url: string;
+  title: string;
+};
+
 export type Collection = {
   id: string;
   translation?: {
@@ -105,7 +111,12 @@ export type Collection = {
     description?: string;
     image?: string;
     slug: string;
-    modules: Array<EventSelected | EventSearch | LocationsSelected>;
+    modules: Array<
+      | EventSelected
+      | EventSearch
+      | LocationsSelected
+      | LocationsSelectedCarousel
+    >;
   };
 };
 

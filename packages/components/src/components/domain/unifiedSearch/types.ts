@@ -3,7 +3,10 @@ import type {
   OpeningHoursTimes,
   SearchListQueryVariables,
 } from '../../../types';
-import type { OrderByType, OrderDirType } from './unifiedSearchConstants';
+import type {
+  UnifiedSearchOrderByType,
+  OrderDirType,
+} from './unifiedSearchConstants';
 
 export type UnifiedSearchParameters = {
   q?: string[];
@@ -15,7 +18,7 @@ export type UnifiedSearchParameters = {
   ontology?: string;
   isOpenNow?: boolean;
   openAt?: Date;
-  orderBy?: OrderByType;
+  orderBy?: UnifiedSearchOrderByType;
   orderDir?: OrderDirType;
 };
 export type UnifiedSearchVariables = SearchListQueryVariables;

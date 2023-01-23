@@ -8,18 +8,16 @@ export const OrderDir = {
 
 export type OrderDirType = typeof OrderDir[keyof typeof OrderDir];
 
-export const OrderBy = {
+export const UnifiedSearchOrderBy = {
   relevance: 'relevance',
   distance: 'distance',
   name: 'name',
 } as const;
 
-export type OrderByType = typeof OrderBy[keyof typeof OrderBy];
+export type UnifiedSearchOrderByType =
+  typeof UnifiedSearchOrderBy[keyof typeof UnifiedSearchOrderBy];
 
 export const orderDirToUnifiedSearchDistanceOrder = {
   asc: SortOrder.Ascending,
   desc: SortOrder.Descending,
 } as const;
-
-export type UnifiedSearchOrderBy =
-  typeof orderDirToUnifiedSearchDistanceOrder[keyof typeof orderDirToUnifiedSearchDistanceOrder];

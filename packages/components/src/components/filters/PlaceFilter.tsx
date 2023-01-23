@@ -1,7 +1,8 @@
 import React from 'react';
-import { FilterButton, getLocalizedString } from '../../../dist';
 import { useLocale, useCommonTranslation } from '../../hooks';
 import { usePlaceDetailsQuery } from '../../types';
+import { getLocalizedString } from '../../utils';
+import { FilterButton } from '../filterButton';
 import type { FilterType } from '../filterButton';
 
 interface Props {

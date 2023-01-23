@@ -1,7 +1,6 @@
 import userEvent from '@testing-library/user-event';
-import React from 'react';
-
 import { screen, render } from '@/test-utils';
+
 import type { DateFilterProps } from '../DateFilter';
 import DateFilter from '../DateFilter';
 

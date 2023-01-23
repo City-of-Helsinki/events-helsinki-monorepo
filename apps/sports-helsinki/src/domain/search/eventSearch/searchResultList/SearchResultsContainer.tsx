@@ -1,7 +1,6 @@
 import { useSearchTranslation } from 'events-helsinki-components';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
-import OrderBySelect from './OrderBySelect';
 import ResultsInfoContainer from './ResultsInfo';
 import styles from './searchResultList.module.scss';
 
@@ -9,14 +8,14 @@ interface Props {
   loading: boolean;
   eventsCount: number;
   eventList: React.ReactElement;
-  showOrderBySelect?: boolean;
+  orderBySelectComponent?: React.ReactElement;
 }
 
 const SearchResultsContainer: React.FC<Props> = ({
   loading,
   eventsCount,
   eventList,
-  showOrderBySelect = false,
+  orderBySelectComponent,
 }) => {
   const { t } = useSearchTranslation();
 
@@ -31,7 +30,7 @@ const SearchResultsContainer: React.FC<Props> = ({
                   count: eventsCount,
                 })}
               </h2>
-              {showOrderBySelect && <OrderBySelect />}
+              {orderBySelectComponent !== undefined && orderBySelectComponent}
             </div>
           </div>
         )}

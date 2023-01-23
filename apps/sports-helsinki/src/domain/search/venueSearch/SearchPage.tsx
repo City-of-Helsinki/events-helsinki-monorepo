@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { SEARCH_ROUTES } from '../../../constants';
 import SearchResultsContainer from '../eventSearch/searchResultList/SearchResultsContainer';
+import UnifiedSearchOrderBySelect from '../eventSearch/searchResultList/UnifiedSearchOrderBySelect';
 import VenueList from '../venueList/VenueList';
 import styles from './eventSearchPage.module.scss';
 import useSearchPage from './hooks/useSearchPage';
@@ -109,7 +110,7 @@ const VenueSearchPage: React.FC<SearchPageProps> = ({
                     onLoadMore={handleLoadMore}
                   />
                 }
-                showOrderBySelect
+                orderBySelectComponent={<UnifiedSearchOrderBySelect />}
               />
             )}
           </LoadingSpinner>

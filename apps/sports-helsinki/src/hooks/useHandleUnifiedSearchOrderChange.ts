@@ -1,10 +1,10 @@
 import {
-  OrderBy,
+  UnifiedSearchOrderBy,
   useGeolocation,
   useUnifiedSearch,
 } from 'events-helsinki-components';
 import type {
-  OrderByType,
+  UnifiedSearchOrderByType,
   OrderDirType,
   GeolocationContextType,
   Coordinates,
@@ -12,17 +12,20 @@ import type {
 } from 'events-helsinki-components';
 import { useCallback } from 'react';
 
-const useHandleOrderChange = () => {
+const useHandleUnifiedSearchOrderChange = () => {
   const { modifyFilters } = useUnifiedSearch();
   const geolocation: GeolocationContextType = useGeolocation({ skip: true });
 
   return useCallback(
     async (option: Option) => {
       const transitionOptions = { shallow: true };
-      const [by, dir] = option.value.split('-') as [OrderByType, OrderDirType];
+      const [by, dir] = option.value.split('-') as [
+        UnifiedSearchOrderByType,
+        OrderDirType
+      ];
 
       // If the user wants to order by distance, try and resolve geolocation
-      if (by === OrderBy.distance) {
+      if (by === UnifiedSearchOrderBy.distance) {
         let location: Coordinates | null = geolocation.coordinates;
 
         if (!geolocation.called || !geolocation.coordinates) {
@@ -51,4 +54,4 @@ const useHandleOrderChange = () => {
   );
 };
 
-export default useHandleOrderChange;
+export default useHandleUnifiedSearchOrderChange;

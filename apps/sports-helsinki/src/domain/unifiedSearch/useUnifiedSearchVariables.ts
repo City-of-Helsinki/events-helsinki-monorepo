@@ -1,14 +1,14 @@
 import type {
   SearchListQueryVariables,
   UnifiedSearchLanguage,
-  OrderByType,
+  UnifiedSearchOrderByType,
   OrderDirType,
   Coordinates,
 } from 'events-helsinki-components';
 import {
   useLocale,
   useUnifiedSearch,
-  OrderBy,
+  UnifiedSearchOrderBy,
   OrderDir,
   orderDirToUnifiedSearchDistanceOrder,
   useGeolocation,
@@ -35,13 +35,13 @@ type OrderByOptions = {
 };
 
 function getOrderBy(
-  orderBy: OrderByType,
+  orderBy: UnifiedSearchOrderByType,
   orderDir: OrderDirType,
   options?: OrderByOptions
 ) {
   const usOrderDir = orderDirToUnifiedSearchDistanceOrder[orderDir];
 
-  if (orderBy === OrderBy.distance && options?.position) {
+  if (orderBy === UnifiedSearchOrderBy.distance && options?.position) {
     return {
       orderByDistance: {
         latitude: options?.position.latitude,
@@ -51,7 +51,7 @@ function getOrderBy(
     };
   }
 
-  if (orderBy === OrderBy.name) {
+  if (orderBy === UnifiedSearchOrderBy.name) {
     return {
       orderByName: {
         order: usOrderDir,
@@ -89,7 +89,7 @@ export default function useUnifiedSearchVariables(
       administrativeDivisionIds,
       isOpenNow,
       openAt,
-      orderBy = OrderBy.name,
+      orderBy = UnifiedSearchOrderBy.name,
       orderDir = OrderDir.asc,
       ontologyWordIds,
       after,
@@ -97,7 +97,7 @@ export default function useUnifiedSearchVariables(
     },
   } = useUnifiedSearch();
   const geolocation = useGeolocation({
-    skip: orderBy !== OrderBy.distance,
+    skip: orderBy !== UnifiedSearchOrderBy.distance,
   });
   const locale = useLocale();
 

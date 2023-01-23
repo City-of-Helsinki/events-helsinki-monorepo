@@ -77,20 +77,35 @@ const ContactDetailsInfo = ({
 };
 
 const VenueInformationLinksContainer = ({
-  venue: { infoUrl },
+  venue: { infoUrl, connections },
 }: {
   venue: Venue;
 }) => {
   const { t } = useVenueTranslation();
-  if (infoUrl) {
+
+  const otherInformationLinksContents =
+    connections?.filter((item) => item?.url && item.sectionType === 'LINK') ||
+    [];
+  if (infoUrl || otherInformationLinksContents.length > 0) {
     return (
       <InfoWithIcon
         icon={<IconInfoCircle aria-hidden="true" />}
         title={t('venue:info.labelVenueInformationLinks')}
       >
-        <SecondaryLink className={styles.link} href={infoUrl}>
-          {t('venue:info.link.website')}
-        </SecondaryLink>
+        {infoUrl && (
+          <SecondaryLink className={styles.link} href={infoUrl}>
+            {t('venue:info.link.website')}
+          </SecondaryLink>
+        )}
+        {otherInformationLinksContents.map((connection) => (
+          <SecondaryLink
+            key={connection?.url}
+            className={styles.link}
+            href={connection?.url ?? ''}
+          >
+            {connection?.name}
+          </SecondaryLink>
+        ))}
       </InfoWithIcon>
     );
   }

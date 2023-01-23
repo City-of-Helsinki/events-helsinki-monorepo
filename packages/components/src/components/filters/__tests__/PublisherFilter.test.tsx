@@ -1,7 +1,7 @@
 import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
 import { render, waitFor, screen, userEvent } from '@/test-utils';
 import { fakeOrganization } from '@/test-utils/mockDataUtils';
-import { OrganizationDetailsDocument } from 'events-helsinki-components';
+import { OrganizationDetailsDocument } from '../../../types';
 import PublisherFilter from '../PublisherFilter';
 
 const id = '1';

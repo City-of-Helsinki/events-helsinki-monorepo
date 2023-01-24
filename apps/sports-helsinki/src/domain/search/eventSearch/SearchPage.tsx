@@ -11,6 +11,7 @@ import EventList from '../../../common-events/components/eventList/EventList';
 import type { AdvancedSearchProps } from './AdvancedSearch';
 import styles from './eventSearchPage.module.scss';
 import useSearchPage from './hooks/useSearchPage';
+import EventsOrderBySelect from './searchResultList/EventsOrderBySelect';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 
 type SearchPageProps = {
@@ -93,6 +94,7 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
                     onLoadMore={handleLoadMore}
                   />
                 }
+                orderBySelectComponent={<EventsOrderBySelect />}
               />
             )}
           </LoadingSpinner>

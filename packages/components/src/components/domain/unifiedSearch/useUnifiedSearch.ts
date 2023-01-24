@@ -6,14 +6,11 @@ import type { NextRouter } from 'next/router';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useMemo, useRef } from 'react';
+import type { TransitionOptions } from '../../../types/types';
 import getIsDateValid from '../../../utils/getIsValidDate';
 import type { QueryPersister } from '../../../utils/queryPersister';
 import defaultQueryPersister from '../../../utils/queryPersister';
-import type {
-  UnifiedSearchParameters,
-  ModifyFilters,
-  TransitionOptions,
-} from './types';
+import type { UnifiedSearchParameters, ModifyFilters } from './types';
 
 type FilterValueType = string | number | boolean | Date;
 

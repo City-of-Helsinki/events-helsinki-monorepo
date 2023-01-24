@@ -5,7 +5,11 @@ import type {
 import { useRouter } from 'next/router';
 import React from 'react';
 import { transformedSearchVariables } from '../../combinedSearch/utils';
-import { EVENT_SORT_OPTIONS, PAGE_SIZE } from '../constants';
+import {
+  isEventSortOption,
+  DEFAULT_EVENT_SORT_OPTION,
+  PAGE_SIZE,
+} from '../constants';
 import { getEventSearchVariables } from '../utils';
 
 function useEventSearchFilters(eventType: EventTypeId) {
@@ -16,13 +20,16 @@ function useEventSearchFilters(eventType: EventTypeId) {
 
     // TODO: Make a better adapter or a new form to handle these transformations.
     const transformedParams = transformedSearchVariables(searchParams);
+    const sortParam = searchParams.get('sort');
 
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: ['keywords', 'location'],
       pageSize: PAGE_SIZE,
       params: transformedParams,
       place: params.place,
-      sortOrder: EVENT_SORT_OPTIONS.END_TIME,
+      sortOrder: isEventSortOption(sortParam)
+        ? sortParam
+        : DEFAULT_EVENT_SORT_OPTION,
       superEventType: ['umbrella', 'none'],
       eventType: [eventType],
     });

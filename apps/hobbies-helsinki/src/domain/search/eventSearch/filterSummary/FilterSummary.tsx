@@ -8,8 +8,8 @@ import {
   useLocale,
 } from 'events-helsinki-components';
 import { IconCrossCircleFill } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import qs, { parse } from 'query-string';
 import React from 'react';
 

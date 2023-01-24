@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import capitalize from 'lodash/capitalize';
+import type EventContext from '../../context/EventContext';
 import type { QueryResolvers } from '../../types';
 import type { NeighborhoodListResponse } from '../../types/types';
 
@@ -16,10 +17,9 @@ const normalizeNeighborhood = (features: any[]) => {
 };
 
 const Query: QueryResolvers = {
-  neighborhoodList: async (_: any, __: any, { dataSources }: any) => {
+  neighborhoodList: async (_: any, __: any, context: EventContext) => {
     const data =
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (await dataSources.neighborhoodAPI.getNeighborhoodList()) as any;
+      (await context.dataSources.neighborhood.getNeighborhoodList()) as any;
 
     return {
       data: normalizeNeighborhood(data.features),

@@ -1,0 +1,5 @@
+{
+  "watch": ["src", ".env"],
+  "ignore": ["src/**/*.spec.ts", "src/types/**/*.d.ts"],
+  "exec": "ts-node -r dotenv-expand/config --esm ./src/index.ts"
+}

@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as Sentry from '@sentry/node';
 
-import type { DataSources, QueryResolvers } from '../../types';
+import { normalizeKeys } from 'events-helsinki-graphql-proxy-server/src';
+import type EventContext from '../../context/EventContext';
+import type { EventDataSources, QueryResolvers } from '../../types';
 import type { EventDetails, EventListResponse } from '../../types/types';
-import normalizeKeys from '../../utils/normalizeKeys';
 import { buildEventDetailsQuery, buildEventListQuery } from './utils';
 
-const getEventList = async (dataSources: DataSources, query: string) => {
+const getEventList = async (dataSources: EventDataSources, query: string) => {
   try {
-    const data = await dataSources.eventAPI.getEventList(query);
+    const data = await dataSources.event.getEventList(query);
     return {
       data: data.data.map((event) => {
         return normalizeKeys(event);
@@ -22,18 +23,21 @@ const getEventList = async (dataSources: DataSources, query: string) => {
 };
 
 const Query: QueryResolvers = {
-  eventDetails: async (_: any, { id, include }: any, { dataSources }: any) => {
+  eventDetails: async (_: any, { id, include }: any, context: EventContext) => {
     const query = buildEventDetailsQuery(include);
-    const data = await dataSources.eventAPI.getEventDetails(id ?? '', query);
+    const data = await context.dataSources.event.getEventDetails(
+      id ?? '',
+      query
+    );
     return normalizeKeys(data) as EventDetails;
   },
-  eventList: async (_: any, params: any, { dataSources }: any) => {
+  eventList: async (_: any, params: any, context: EventContext) => {
     const query = buildEventListQuery(params);
-    return getEventList(dataSources, query);
+    return getEventList(context.dataSources, query);
   },
-  eventsByIds: async (_: any, params: any, { dataSources }: any) => {
+  eventsByIds: async (_: any, params: any, context: EventContext) => {
     const query = buildEventListQuery(params);
-    return getEventList(dataSources, query);
+    return getEventList(context.dataSources, query);
   },
 };
 

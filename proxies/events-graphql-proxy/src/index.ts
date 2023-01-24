@@ -1,99 +1,31 @@
-import http from 'http';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
-import { RewriteFrames } from '@sentry/integrations';
-import * as Sentry from '@sentry/node';
-import { json } from 'body-parser';
-import cors from 'cors';
 import * as dotenv from 'dotenv';
-import express from 'express';
-import depthLimit from 'graphql-depth-limit';
-import ContextValue from './context/context-value';
-import schema from './schema';
-import apolloLoggingPlugin from './utils/apolloLoggingPlugin';
-import sentryLoggingPlugin from './utils/sentryLoggingPlugin';
 
-const OK = 'OK';
-const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
-const GRAPHQL_PATH = '/proxy/graphql';
+import type { ServerConfig } from 'events-helsinki-graphql-proxy-server/src';
+import { startServer } from 'events-helsinki-graphql-proxy-server/src';
+import EventContext from './context/EventContext';
+import schema from './schema';
 
 dotenv.config();
 
-Sentry.init({
-  dsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
-  environment: process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT,
-  integrations: [
-    // used for rewriting SourceMaps from js to ts
-    // check that sourcemaps are enabled in tsconfig.js
-    // read the docs https://docs.sentry.io/platforms/node/typescript/
-    new RewriteFrames({
-      root: process.cwd(),
-    }),
-  ],
-});
+const trueEnv = ['true', '1', 'yes'];
 
-const port = process.env.GRAPHQL_PROXY_PORT || 4100;
-
-let serverIsReady = false;
-
-const signalReady = () => {
-  serverIsReady = true;
+const config: ServerConfig = {
+  sentryDsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
+  sentryEnvironment: process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT,
+  debug: trueEnv.includes(process.env.GRAPHQL_PROXY_DEBUG ?? 'false'),
+  serverPort: Number(process.env.GRAPHQL_PROXY_PORT) || 4100,
+  disableWinstonLogging: trueEnv.includes(
+    process.env.GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING ?? 'false'
+  ),
+  introspection: trueEnv.includes(
+    process.env.GRAPHQL_PROXY_INTROSPECTION ?? 'false'
+  ),
 };
-
-const checkIsServerReady = (response: express.Response) => {
-  if (serverIsReady) {
-    response.send(OK);
-  } else {
-    response.status(500).send(SERVER_IS_NOT_READY);
-  }
-};
-
-const app = express();
-const httpServer = http.createServer(app);
-const server = new ApolloServer<ContextValue>({
-  schema,
-  includeStacktraceInErrorResponses:
-    process.env.GRAPHQL_PROXY_DEBUG === 'debug' ||
-    process.env.GRAPHQL_PROXY_ENV !== 'production',
-  plugins: [
-    sentryLoggingPlugin,
-    apolloLoggingPlugin,
-    ApolloServerPluginDrainHttpServer({ httpServer }),
-  ],
-  validationRules: [depthLimit(10)],
-});
 
 (async () => {
-  await server.start();
-
-  app.use(
-    GRAPHQL_PATH,
-    cors<cors.CorsRequest>(),
-    json(),
-    expressMiddleware(server, {
-      context: async ({ req }) =>
-        new ContextValue({
-          token: req.headers.authorization || '',
-          cache: server.cache,
-        }),
-    })
-  );
-  app.get(
-    '/healthz',
-    (request: express.Request, response: express.Response) => {
-      checkIsServerReady(response);
-    }
-  );
-
-  app.get(
-    '/readiness',
-    (request: express.Request, response: express.Response) => {
-      checkIsServerReady(response);
-    }
-  );
-  await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
-  signalReady();
-  // eslint-disable-next-line no-console
-  console.info(`🚀 Server ready at http://localhost:${port}${GRAPHQL_PATH}`);
+  await startServer({
+    config,
+    schema,
+    contextCallback: async (args) => new EventContext(args),
+  });
 })();

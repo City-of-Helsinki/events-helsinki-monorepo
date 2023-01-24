@@ -8,8 +8,8 @@ import type {
   EventFieldsFragment,
 } from 'events-helsinki-components';
 import { IconArrowRight } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 

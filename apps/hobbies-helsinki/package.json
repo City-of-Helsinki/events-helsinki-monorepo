@@ -57,7 +57,7 @@
     "events-helsinki-common-i18n": "workspace:^",
     "events-helsinki-components": "workspace:^",
     "file-saver": "^2.0.5",
-    "graphql": "^16.5.0",
+    "graphql": "16.6.0",
     "hds-react": "2.8.0",
     "i18next": "21.9.2",
     "ics": "^2.35.0",

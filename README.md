@@ -39,6 +39,7 @@
 .
 ├── proxies
 │   ├── events-graphql-federation (Apollo Router and Gateway)
+│   ├── venue-graphql-proxy   Venue graphql api proxy server
 │   └── events-graphql-proxy   ("clone of events-helsinki-api-proxy")
 │
 ├── apps
@@ -46,15 +47,17 @@
 │   ├── events-helsinki   ("clone of hobbies-helsinki")
 │   └── sports-helsinki   ("clone of hobbies-helsinki")
 └── packages
-    ├── common-i18n         (locales...)
-    ├── components          (common event components, utils and hooks, storybook, jest)
-    └── eslint-config-bases (to shared eslint configs)
+    ├── common-i18n          (locales...)
+    ├── components           (common event components, utils and hooks, storybook, jest)
+    ├── graphql-proxy-server (common code for graphql api-proxy server)
+    └── eslint-config-bases  (to shared eslint configs)
 ```
 
 #### Proxies
 
 - [proxies/events-graphql-federation](./proxies/events-graphql-federation): The Apollo Router and Gateway configuration to manage and run subgraphs. [README](./proxies/events-graphql-federation/README.md)
 - [proxies/events-graphql-proxy](./proxies/events-graphql-proxy): Clone of events-helsinki-api-proxy. Event Helsinki GraphQL proxy. [README](./proxies/events-graphql-proxy/README.md)
+- [proxies/venue-graphql-proxy](./venue/events-graphql-proxy): Venue Helsinki GraphQL proxy. [README](./proxies/venue-graphql-proxy/README.md)
 
 #### Apps
 
@@ -67,6 +70,7 @@
 #### Shared packages
 
 - [packages/eslint-config-bases](./packages/eslint-config-bases): [README](./packages/eslint-config-bases/README.md) | [CHANGELOG](./packages/eslint-config-bases/CHANGELOG.md)
+- [packages/graphql-proxy-server](./packages/graphql-proxy-server): [README](./packages/graphql-proxy-server/README.md) | [CHANGELOG](./packages/graphql-proxy-server/CHANGELOG.md)
 - [packages/components](./packages/components): publishable. [README](./packages/components/README.md) | [CHANGELOG](./packages/components/CHANGELOG.md)
 - [packages/common-i18n](./packages/common-i18n): [README](./packages/common-i18n/README.md) | [CHANGELOG](./packages/common-i18n/CHANGELOG.md)
 
@@ -87,7 +91,8 @@ If needed static resources like **images**,... can be shared by using symlinks i
 .
 ├── proxies
 │   ├── events-graphql-federation   (Apollo Router and Gateway)
-│   └── events-graphql-proxy        (Apollo Server to offer Graphql endpoint for the LinkedEvents -service)
+│   ├── events-graphql-proxy        (Apollo Server to offer Graphql endpoint for the LinkedEvents -service)
+│   └── venue-graphql-proxy        (Apollo Server to offer Graphql endpoint for the Venue)
 │
 ├── apps
 │   └── hobbies-helsinki            (NextJS app with api-routes)

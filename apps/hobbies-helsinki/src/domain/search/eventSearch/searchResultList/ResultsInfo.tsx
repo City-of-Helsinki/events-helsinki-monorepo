@@ -1,8 +1,8 @@
 import { useLocale } from 'events-helsinki-components';
 import type { AppLanguage } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { ROUTES } from '../../../../constants';

@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  composeQuery,
+  normalizeKeys,
+} from 'events-helsinki-graphql-proxy-server/src';
+import type EventContext from '../../context/EventContext';
 import type { QueryResolvers } from '../../types';
 import type { Place, PlaceListResponse } from '../../types/types';
-import composeQuery from '../../utils/composeQuery';
-import normalizeKeys from '../../utils/normalizeKeys';
+
 const Query: QueryResolvers = {
-  placeDetails: async (_: any, { id }: any, { dataSources }: any) => {
-    const data = await dataSources.placeAPI.getPlaceDetails(id);
+  placeDetails: async (_: any, { id }: any, context: EventContext) => {
+    const data = await context.dataSources.place.getPlaceDetails(id);
     return normalizeKeys(data) as Place;
   },
   placeList: async (
@@ -20,7 +24,7 @@ const Query: QueryResolvers = {
       sort,
       text,
     }: any,
-    { dataSources }: any
+    context: EventContext
   ) => {
     const query = placeListQueryBuilder({
       dataSource,
@@ -32,7 +36,7 @@ const Query: QueryResolvers = {
       sort,
       text,
     });
-    const data = await dataSources.placeAPI.getPlaceList(query);
+    const data = await context.dataSources.place.getPlaceList(query);
 
     return {
       data: data.data.map((place: any) => {

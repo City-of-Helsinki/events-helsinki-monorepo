@@ -12,8 +12,8 @@ import {
 } from 'events-helsinki-components';
 import type { EventFields } from 'events-helsinki-components';
 import { IconArrowRight } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 

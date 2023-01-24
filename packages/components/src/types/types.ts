@@ -86,3 +86,9 @@ export type MapItem = {
   href: string;
   location?: number[];
 };
+
+export type TransitionOptions = {
+  shallow?: boolean;
+  locale?: string | false;
+  scroll?: boolean;
+};

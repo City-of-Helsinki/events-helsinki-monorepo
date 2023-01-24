@@ -20,6 +20,9 @@
     "alphabetical": "Aakkosjärjestyksessä",
     "relevance": "Osuvuuden mukaan",
     "distance": "Lähimmät ensin",
+    "endTime": "Loppumisaika",
+    "lastModifiedTime": "Muokattu viimeksi",
+    "startTime": "Alkamisaika",
     "label": "Järjestys"
   },
   "search": {

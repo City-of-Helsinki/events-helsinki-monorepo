@@ -18,22 +18,17 @@ import styles from './venueContent.module.scss';
 
 interface Props {
   venue: Venue;
-  hasSimilarEvents?: boolean;
+  className?: string;
 }
 
-const VenueContent: React.FC<Props> = ({ venue, hasSimilarEvents }) => {
+const VenueContent: React.FC<Props> = ({ venue, className }) => {
   const { t } = useVenueTranslation();
   const { description } = venue;
   const shortDescription = null;
   return (
-    <PageSection className={styles.eventContent}>
+    <PageSection className={classNames(styles.eventContent, className)}>
       <ContentContainer>
-        <div
-          className={classNames(
-            styles.contentWrapper,
-            !hasSimilarEvents && styles.noSimilarEvents
-          )}
-        >
+        <div className={styles.contentWrapper}>
           <div className={styles.leftEmpty} />
           <div>
             <h2 className={styles.descriptionTitle}>

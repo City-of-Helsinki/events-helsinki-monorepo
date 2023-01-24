@@ -7,8 +7,8 @@ import {
   buildQueryFromObject,
 } from 'events-helsinki-components';
 import { capitalize } from 'lodash';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import { ROUTES } from '../../../constants';

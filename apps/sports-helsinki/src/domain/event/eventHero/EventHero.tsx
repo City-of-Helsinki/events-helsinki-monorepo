@@ -22,8 +22,8 @@ import {
   IconLocation,
   IconTicket,
 } from 'hds-react';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import React from 'react';
 import {
   BackgroundImage,

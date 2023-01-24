@@ -32,5 +32,8 @@
     "dateAndTime": "{{date}}, at {{time}}",
     "isFree": "Free",
     "showResultsOnMapLink": "Show on map"
+  },
+  "upcomingEvents": {
+    "title": "Events at the venue"
   }
 }

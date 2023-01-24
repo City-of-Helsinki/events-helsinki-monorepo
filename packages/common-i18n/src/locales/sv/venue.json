@@ -32,5 +32,8 @@
     "dateAndTime": "{{date}}, kl. {{time}}",
     "isFree": "Gratis",
     "showResultsOnMapLink": "Visa på kartan"
+  },
+  "upcomingEvents": {
+    "title": "Platsens händelser"
   }
 }

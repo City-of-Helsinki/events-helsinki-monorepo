@@ -207,3 +207,26 @@ export const useOtherEventTimes = (
   );
   return { events: subEvents, loading, isFetchingMore, superEventId };
 };
+
+export type useLocationUpcomingEventsQueryProps = {
+  placeId: string;
+  keywords: string[];
+  pageSize?: number;
+};
+
+export const useLocationUpcomingEventsQuery = ({
+  placeId,
+  keywords,
+  pageSize = 6,
+}: useLocationUpcomingEventsQueryProps) => {
+  const variables = {
+    location: placeId,
+    keywords,
+    include: ['keywords', 'location'],
+    start: 'now',
+    sort: EVENT_SORT_OPTIONS.END_TIME,
+    superEventType: 'none',
+    pageSize,
+  };
+  return useEventListQuery({ variables, ssr: false });
+};

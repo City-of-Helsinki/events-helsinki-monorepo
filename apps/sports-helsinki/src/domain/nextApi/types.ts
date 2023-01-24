@@ -200,7 +200,7 @@ export type VenueDetails<T = TranslationsObject> = {
   }>;
 };
 
-export type Source = (typeof Sources)[keyof typeof Sources];
+export type Source = typeof Sources[keyof typeof Sources];
 
 export type Time = {
   name: string;

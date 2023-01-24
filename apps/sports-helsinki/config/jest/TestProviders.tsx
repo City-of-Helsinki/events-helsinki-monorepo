@@ -117,6 +117,8 @@ function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
     siteName: 'appName',
     currentLanguageCode: locale.toUpperCase(),
     apolloClient,
+    eventsApolloClient: apolloClient,
+    venuesApolloClient: apolloClient,
     components: {
       ...rhhcDefaultConfig.components,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

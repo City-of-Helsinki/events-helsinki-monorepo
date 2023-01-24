@@ -72,6 +72,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           'home',
           'search',
           'venue',
+          'event',
         ])),
       },
     };

@@ -32,5 +32,8 @@
     "dateAndTime": "{{date}}, klo {{time}}",
     "isFree": "Maksuton",
     "showResultsOnMapLink": "Näytä kartalla"
+  },
+  "upcomingEvents": {
+    "title": "Paikan tapahtumia"
   }
 }

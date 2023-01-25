@@ -40,7 +40,7 @@ resources:
     - repository: venue-graphql-proxy-pipelines
       type: git
       # Azure DevOps project/repository
-      name: liikunta/venue-graphql-proxy-pipelines
+      name: liikunta/graphql-proxy-pipelines
 
 extends:
   # Filename in Azure DevOps Repository (note possible -ui or -api)

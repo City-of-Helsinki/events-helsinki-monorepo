@@ -13,6 +13,14 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: 'tsconfig.json',
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: ['src'],
+      },
+    },
+  },
   ignorePatterns: [...getDefaultIgnorePatterns()],
   extends: [
     '@events-helsinki/eslint-config-bases/typescript',

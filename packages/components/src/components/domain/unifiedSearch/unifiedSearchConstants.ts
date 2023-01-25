@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { SortOrder } from '../../../types';
 
 export const OrderDir = {

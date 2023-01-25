@@ -9,14 +9,22 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
-import { defaultConfig as rhhcDefaultConfig } from 'react-helsinki-headless-cms';
-import { useApolloClient } from 'domain/clients/eventsFederationApolloClient';
+import {
+  defaultConfig as rhhcDefaultConfig,
+  ModuleItemTypeEnum,
+} from 'react-helsinki-headless-cms';
+import { ROUTES } from '../constants';
 
 import AppConfig from '../domain/app/AppConfig';
 import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
 import ArticleDetails from '../domain/article/articleDetails/ArticleDetails';
+import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
 import type { EventDetailsProps } from '../domain/event/eventDetails/EventDetails';
 import EventDetails from '../domain/event/eventDetails/EventDetails';
+import getVenueSourceId from '../domain/venue/utils/getVenueSourceId';
+import type { VenueDetailsProps } from '../domain/venue/venueDetails/VenueDetails';
+import VenueDetails from '../domain/venue/venueDetails/VenueDetails';
+import { getLocalizedCmsItemUrl } from '../utils/routerUtils';
 
 const APP_DOMAIN = new URL(AppConfig.origin).origin;
 const CMS_API_DOMAIN = new URL(AppConfig.cmsOrigin).origin;
@@ -58,6 +66,10 @@ export default function useRHHCConfig() {
         ArticleCardContent: (props: ArticleDetailsProps) => (
           <ArticleDetails {...props} />
         ),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        VenueCardContent: (props: any) => (
+          <VenueDetails {...(props as VenueDetailsProps)} />
+        ),
       },
       fallbackImageUrls: [
         '/shared-assets/images/event_placeholder_A.jpg',
@@ -69,6 +81,7 @@ export default function useRHHCConfig() {
       currentLanguageCode: locale.toUpperCase(),
       apolloClient,
       eventsApolloClient: apolloClient,
+      venuesApolloClient: apolloClient,
       copy: {
         next: commonTranslation('common:next'),
         previous: commonTranslation('common:previous'),
@@ -109,6 +122,22 @@ export default function useRHHCConfig() {
       },
       utils: {
         ...rhhcDefaultConfig.utils,
+        getRoutedInternalHref: (
+          link: string,
+          _type: ModuleItemTypeEnum
+        ): string => {
+          if (_type === ModuleItemTypeEnum.Venue) {
+            // quick fix for venue url rewrites
+            return getLocalizedCmsItemUrl(
+              ROUTES.VENUES,
+              {
+                venueId: getVenueSourceId(link),
+              },
+              locale
+            );
+          }
+          return link || '#';
+        },
         getIsHrefExternal,
       },
       meta: {

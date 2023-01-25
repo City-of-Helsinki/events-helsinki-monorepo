@@ -8,6 +8,7 @@ export const ROUTES = {
   ARTICLE_ARCHIVE: '/article-archive',
   ARTICLES: '/articles/[...slug]',
   PAGES: '/pages/[...slug]',
+  VENUES: '/venues/[venueId]',
   LINK: '',
 };
 

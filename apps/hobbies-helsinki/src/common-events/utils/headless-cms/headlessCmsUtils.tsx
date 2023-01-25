@@ -9,6 +9,7 @@ import type {
   PageType,
   GeneralCollectionType,
   CardProps,
+  LanguageCodeEnum,
 } from 'react-helsinki-headless-cms';
 import {
   Card,
@@ -23,6 +24,8 @@ import {
   isArticleType,
   getArticlePageCardProps as getArticlePageCardPropsBase,
   ModuleItemTypeEnum,
+  isLocationsSelectionCollection,
+  LocationsSelectionCollection,
 } from 'react-helsinki-headless-cms';
 
 import AppConfig from '../../../domain/app/AppConfig';
@@ -179,6 +182,14 @@ export const getDefaultCollections = (
           <EventSelectionCollection
             {...commonCollectionProps}
             collection={collection}
+          />
+        );
+      } else if (isLocationsSelectionCollection(collection)) {
+        collectionElements.push(
+          <LocationsSelectionCollection
+            {...commonCollectionProps}
+            collection={collection}
+            locale={page?.language?.locale as LanguageCodeEnum}
           />
         );
       } else {

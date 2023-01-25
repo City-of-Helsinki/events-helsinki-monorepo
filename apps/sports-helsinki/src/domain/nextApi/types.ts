@@ -11,18 +11,6 @@ import type { PageInfoFragment } from '../../domain/nextApi/pageInfoFragment';
 
 export type Locale = 'fi' | 'sv' | 'en';
 
-export type MenuItem = {
-  id: string;
-  order: number;
-  path: string;
-  target: string;
-  title: string;
-  url: string;
-  label: string;
-};
-
-export type NavigationItem = MenuItem;
-
 export type Language = {
   id: string;
   name: string;
@@ -51,14 +39,6 @@ export type Item = {
   href: string | UrlObject;
   location?: number[];
   image: string;
-};
-
-export type LandingPage = {
-  title: string;
-  desktopImage: {
-    uri: string;
-  };
-  link: string;
 };
 
 export type Recommendation = {
@@ -98,6 +78,12 @@ export type LocationsSelected = {
   title: string;
 };
 
+export type LocationsSelectedCarousel = {
+  module: 'locations_selected_carousel';
+  url: string;
+  title: string;
+};
+
 export type Collection = {
   id: string;
   translation?: {
@@ -105,7 +91,12 @@ export type Collection = {
     description?: string;
     image?: string;
     slug: string;
-    modules: Array<EventSelected | EventSearch | LocationsSelected>;
+    modules: Array<
+      | EventSelected
+      | EventSearch
+      | LocationsSelected
+      | LocationsSelectedCarousel
+    >;
   };
 };
 

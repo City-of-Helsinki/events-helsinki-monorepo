@@ -9,6 +9,7 @@ export const ROUTES = {
   ARTICLES: '/articles/[...slug]',
   PAGES: '/pages/[...slug]',
   LINK: '',
+  VENUES: '/venues/[venueId]',
 };
 
 export const AUTOSUGGEST_KEYWORD_BLACK_LIST = [

@@ -14578,6 +14578,7 @@ __metadata:
     "@types/node": "npm:18.7.23"
     cross-env: "npm:7.0.3"
     eslint: "npm:8.24.0"
+    eslint-plugin-import: "npm:2.26.0"
     i18next: "npm:21.10.0"
     prettier: "npm:2.7.1"
     react: "npm:18.2.0"

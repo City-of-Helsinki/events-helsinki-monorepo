@@ -44,7 +44,7 @@ pool: Default
 resources:
   repositories:
     # Azure DevOps repository
-    - repository: venue-graphql-proxy-pipelines
+    - repository: graphql-proxy-pipelines
       type: git
       # Azure DevOps project/repository
       name: liikunta/graphql-proxy-pipelines

@@ -1,7 +1,7 @@
 import { useLocale } from 'events-helsinki-components';
 import { Button } from 'hds-react';
-import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { getI18nPath } from '../../../utils/routerUtils';

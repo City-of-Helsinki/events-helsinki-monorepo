@@ -14,4 +14,4 @@ export type LocalizedString = {
   en?: string | null;
 };
 
-export type SearchRoute = typeof SEARCH_ROUTES[keyof typeof SEARCH_ROUTES];
+export type SearchRoute = (typeof SEARCH_ROUTES)[keyof typeof SEARCH_ROUTES];

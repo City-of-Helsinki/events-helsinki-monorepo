@@ -14,4 +14,8 @@
   & > div:not(:first-child) {
     margin-top: var(--spacing-s);
   }
+
+  svg {
+    color: var(--color-primary-black);
+  }
 }

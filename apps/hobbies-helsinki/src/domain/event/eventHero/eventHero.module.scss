@@ -38,6 +38,10 @@ $logoWidth: 5.5rem;
       button:hover {
         outline: 2px solid var(--color-coat-of-arms);
       }
+
+      svg {
+        color: var(--color-primary-black);
+      }
     }
 
     .image {

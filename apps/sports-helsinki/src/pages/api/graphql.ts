@@ -16,7 +16,7 @@ const apolloServer = createApolloServer({
 function acceptsLanguages(
   req: NextApiRequest,
   languages: string[]
-): typeof languages[number] | false {
+): (typeof languages)[number] | false {
   const accept = accepts(req);
 
   return accept.languages(languages);

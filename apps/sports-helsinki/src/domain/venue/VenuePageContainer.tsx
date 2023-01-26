@@ -54,7 +54,9 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
   // NOTE: for some reason, the venue.id might be something else than TPREK,
   // when the venue is given from the Venue-graphql-proxy,
   // but the LinkedEvents is still using the TPREK as a source.
-  const placeId = getVenueSourceId(venueId.replace(/[^:]*:/, ''));
+  const placeId =
+    // Remove everything from venueId before first colon and the first colon:
+    getVenueSourceId(venueId.replace(/^[^:]*:/, ''));
 
   return (
     <div className={styles.venuePageWrapper}>

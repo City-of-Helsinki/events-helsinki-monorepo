@@ -19,15 +19,15 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
   const handleUnifiedSearchOrderChange = useHandleUnifiedSearchOrderChange();
 
   const defaultOption = {
-    text: t('search:orderBy.alphabetical'),
-    value: `${UnifiedSearchOrderBy.name}-${OrderDir.asc}`,
+    text: t('search:orderBy.relevance'),
+    value: `${UnifiedSearchOrderBy.relevance}-${OrderDir.asc}`,
   };
   const orderByOptions = [
-    defaultOption,
     {
-      text: t('search:orderBy.relevance'),
-      value: `${UnifiedSearchOrderBy.relevance}-${OrderDir.asc}`,
+      text: t('search:orderBy.alphabetical'),
+      value: `${UnifiedSearchOrderBy.name}-${OrderDir.asc}`,
     },
+    defaultOption,
     {
       text: t('search:orderBy.distance'),
       value: `${UnifiedSearchOrderBy.distance}-${OrderDir.asc}`,

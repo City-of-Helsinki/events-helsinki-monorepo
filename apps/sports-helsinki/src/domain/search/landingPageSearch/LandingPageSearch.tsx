@@ -24,8 +24,6 @@ const Search: React.FC = () => {
     setFilters(
       {
         q: [autosuggestInput],
-        // Order by relevance if a search filter is applied
-        // orderBy: autosuggestInput ? UnifiedSearchOrderBy.relevance : undefined,
       },
       getI18nPath(ROUTES.SEARCH, locale)
     );
@@ -35,8 +33,6 @@ const Search: React.FC = () => {
     setFilters(
       {
         q: [option.text],
-        // Order by relevance if a search filter is applied
-        // orderBy: autosuggestInput ? UnifiedSearchOrderBy.relevance : undefined,
       },
       getI18nPath(ROUTES.SEARCH, locale)
     );

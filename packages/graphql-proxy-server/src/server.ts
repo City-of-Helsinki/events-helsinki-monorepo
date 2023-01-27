@@ -84,14 +84,19 @@ export const startServer = async <
         }),
     })
   );
-  app.get(
+
+  const readinessRouter = express.Router();
+
+  app.use('/api', readinessRouter);
+
+  readinessRouter.get(
     '/healthz',
     (request: express.Request, response: express.Response) => {
       checkIsServerReady(response);
     }
   );
 
-  app.get(
+  readinessRouter.get(
     '/readiness',
     (request: express.Request, response: express.Response) => {
       checkIsServerReady(response);

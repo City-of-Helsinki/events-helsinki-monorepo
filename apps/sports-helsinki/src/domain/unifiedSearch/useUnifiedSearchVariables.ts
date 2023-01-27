@@ -89,7 +89,7 @@ export default function useUnifiedSearchVariables(
       administrativeDivisionIds,
       isOpenNow,
       openAt,
-      orderBy = UnifiedSearchOrderBy.name,
+      orderBy = UnifiedSearchOrderBy.relevance,
       orderDir = OrderDir.asc,
       ontologyWordIds,
       after,

@@ -29,6 +29,7 @@ import {
   BackgroundImage,
   ContentContainer,
   PageSection,
+  useConfig,
 } from 'react-helsinki-headless-cms';
 
 import EventKeywords from '../eventKeywords/EventKeywords';
@@ -45,6 +46,7 @@ export interface Props {
 const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
+  const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
@@ -98,15 +100,13 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
               size="default"
             />
           </div>
-          {imageUrl && (
-            <div>
-              <BackgroundImage
-                className={styles.image}
-                id={`event-background-${event.id}`}
-                url={imageUrl}
-              />
-            </div>
-          )}
+          <div>
+            <BackgroundImage
+              className={styles.image}
+              id={`event-background-${event.id}`}
+              url={imageUrl || fallbackImageUrls[0]}
+            />
+          </div>
           <div className={styles.leftPanel}>
             <div className={styles.leftPanelWrapper}>
               <div className={styles.leftPanelEmpty} />

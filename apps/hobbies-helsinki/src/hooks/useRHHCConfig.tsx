@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import type { EventFields } from 'events-helsinki-components';
 import {
+  getDateRangeStr,
   useLocale,
   useCommonTranslation,
   useCmsTranslation,
+  useEventTranslation,
   MAIN_CONTENT_ID,
+  getEnrolmentStatus,
 } from 'events-helsinki-components';
 
 import Head from 'next/head';
@@ -37,6 +41,7 @@ export default function useRHHCConfig() {
   const apolloClient = useApolloClient();
   const { t: commonTranslation } = useCommonTranslation();
   const { t: cmsTranslation } = useCmsTranslation();
+  const { t: eventTranslation } = useEventTranslation();
   const locale = useLocale();
 
   return React.useMemo(() => {
@@ -123,6 +128,29 @@ export default function useRHHCConfig() {
       },
       utils: {
         ...rhhcDefaultConfig.utils,
+        getEventCardProps: (item: EventFields, locale: string) => {
+          const status = getEnrolmentStatus(item);
+          const linkArrowLabel = eventTranslation(
+            `event:enrolmentStatus.${status}`,
+            {
+              date: item.enrolmentStartTime
+                ? getDateRangeStr({
+                    start: item.enrolmentStartTime,
+                    locale,
+                    includeWeekday: false,
+                    includeTime: true,
+                    timeAbbreviation: commonTranslation(
+                      'common:timeAbbreviation'
+                    ),
+                  })
+                : '',
+            }
+          );
+          return {
+            ...rhhcDefaultConfig.utils.getEventCardProps(item, locale),
+            linkArrowLabel,
+          };
+        },
         getRoutedInternalHref: (
           link: string,
           _type: ModuleItemTypeEnum

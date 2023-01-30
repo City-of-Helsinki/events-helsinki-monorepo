@@ -1,6 +1,11 @@
 import { EnrolmentStatusLabel } from '../../../../constants/event-constants';
-import { useEventTranslation } from '../../../../hooks';
+import {
+  useCommonTranslation,
+  useEventTranslation,
+  useLocale,
+} from '../../../../hooks';
 import type { EventFields } from '../../../../types';
+import { getDateRangeStr } from '../../../../utils';
 
 export function getEnrolmentStatus(event: EventFields): EnrolmentStatusLabel {
   const now = new Date();
@@ -25,11 +30,23 @@ export function getEnrolmentStatus(event: EventFields): EnrolmentStatusLabel {
 }
 
 function useEventEnrolmentStatus(event: EventFields) {
-  const { t } = useEventTranslation();
+  const locale = useLocale();
+  const { t: eventTranslation } = useEventTranslation();
+  const { t: commonTranslation } = useCommonTranslation();
   const status = getEnrolmentStatus(event);
   return {
     status,
-    text: t(`event:enrolmentStatus.${status}`),
+    text: eventTranslation(`event:enrolmentStatus.${status}`, {
+      date: event.enrolmentStartTime
+        ? getDateRangeStr({
+            start: event.enrolmentStartTime,
+            locale,
+            includeWeekday: false,
+            includeTime: true,
+            timeAbbreviation: commonTranslation('common:timeAbbreviation'),
+          })
+        : '',
+    }),
   };
 }
 

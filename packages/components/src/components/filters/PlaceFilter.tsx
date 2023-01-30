@@ -1,12 +1,9 @@
-import type { FilterType } from 'events-helsinki-components';
-import {
-  getLocalizedString,
-  FilterButton,
-  useLocale,
-  usePlaceDetailsQuery,
-} from 'events-helsinki-components';
-import { useTranslation } from 'next-i18next';
 import React from 'react';
+import { useLocale, useCommonTranslation } from '../../hooks';
+import { usePlaceDetailsQuery } from '../../types';
+import { getLocalizedString } from '../../utils';
+import { FilterButton } from '../filterButton';
+import type { FilterType } from '../filterButton';
 
 interface Props {
   id: string;
@@ -14,7 +11,7 @@ interface Props {
 }
 
 const PlaceFilter: React.FC<Props> = ({ id, onRemove }) => {
-  const { t } = useTranslation('common');
+  const { t } = useCommonTranslation();
   const locale = useLocale();
   const { data, loading } = usePlaceDetailsQuery({
     variables: { id },
@@ -23,7 +20,7 @@ const PlaceFilter: React.FC<Props> = ({ id, onRemove }) => {
   return loading ? (
     <FilterButton
       onRemove={onRemove}
-      text={t('loading')}
+      text={t('common:loading')}
       type="place"
       value={id}
     />

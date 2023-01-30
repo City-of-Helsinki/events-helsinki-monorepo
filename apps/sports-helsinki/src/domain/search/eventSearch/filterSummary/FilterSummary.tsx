@@ -1,6 +1,10 @@
 import type { ParsedUrlQueryInput } from 'querystring';
 import type { FilterType } from 'events-helsinki-components';
-import { useLocale } from 'events-helsinki-components';
+import {
+  useLocale,
+  PlaceFilter,
+  PublisherFilter,
+} from 'events-helsinki-components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -10,8 +14,6 @@ import { ROUTES } from '../../../../constants';
 import { getI18nPath } from '../../../../utils/routerUtils';
 import { getSearchFilters, getSearchQuery } from '../utils';
 import styles from './filterSummary.module.scss';
-import PlaceFilter from './PlaceFilter';
-import PublisherFilter from './PublisherFilter';
 
 export const filterSummaryContainerTestId = 'filter-summary';
 

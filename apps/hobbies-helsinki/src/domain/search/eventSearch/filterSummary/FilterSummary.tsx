@@ -2,6 +2,10 @@ import type { ParsedUrlQueryInput } from 'querystring';
 
 import type { FilterType } from 'events-helsinki-components';
 import {
+  AgeFilter,
+  DateFilter,
+  PlaceFilter,
+  PublisherFilter,
   formatDate,
   translateValue,
   FilterButton,
@@ -21,11 +25,7 @@ import {
   getSearchQuery,
   getSuitableForFilterValue,
 } from '../utils';
-import AgeFilter from './AgeFilter';
-import DateFilter from './DateFilter';
 import styles from './filterSummary.module.scss';
-import PlaceFilter from './PlaceFilter';
-import PublisherFilter from './PublisherFilter';
 
 export const filterSummaryContainerTestId = 'filter-summary';
 

@@ -1,10 +1,8 @@
-import type { FilterType } from 'events-helsinki-components';
-import {
-  FilterButton,
-  useCommonTranslation,
-  useSearchTranslation,
-} from 'events-helsinki-components';
 import React from 'react';
+import { useCommonTranslation, useSearchTranslation } from '../../hooks';
+import type { FilterType } from '../filterButton';
+import { FilterButton } from '../filterButton';
+
 export interface AgeFilterProps {
   value: string;
   type: 'minAge' | 'maxAge';

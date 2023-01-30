@@ -1,9 +1,8 @@
-import { PlaceDetailsDocument } from 'events-helsinki-components';
+import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
 import React from 'react';
-
 import { render, screen, userEvent, waitFor } from '@/test-utils';
-import { translations } from '@/test-utils/initI18n';
 import { fakePlace } from '@/test-utils/mockDataUtils';
+import { PlaceDetailsDocument } from '../../../types';
 import PlaceFilter from '../PlaceFilter';
 
 const placeId = 'helsinki:123';

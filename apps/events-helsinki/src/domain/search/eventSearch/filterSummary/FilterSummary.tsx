@@ -2,6 +2,9 @@ import type { ParsedUrlQueryInput } from 'querystring';
 
 import type { FilterType } from 'events-helsinki-components';
 import {
+  DateFilter,
+  PlaceFilter,
+  PublisherFilter,
   formatDate,
   translateValue,
   FilterButton,
@@ -17,10 +20,7 @@ import useDivisionOptions from '../../../../common-events/hooks/useDivisionOptio
 import { ROUTES } from '../../../../constants';
 import { getI18nPath } from '../../../../utils/routerUtils';
 import { getSearchFilters, getSearchQuery } from '../utils';
-import DateFilter from './DateFilter';
 import styles from './filterSummary.module.scss';
-import PlaceFilter from './PlaceFilter';
-import PublisherFilter from './PublisherFilter';
 
 export const filterSummaryContainerTestId = 'filter-summary';
 

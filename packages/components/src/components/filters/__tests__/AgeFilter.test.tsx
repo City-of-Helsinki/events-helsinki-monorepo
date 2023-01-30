@@ -1,7 +1,6 @@
 import userEvent from '@testing-library/user-event';
-import React from 'react';
-
 import { screen, render } from '@/test-utils';
+
 import type { AgeFilterProps } from '../AgeFilter';
 import AgeFilter from '../AgeFilter';
 

@@ -27,8 +27,8 @@ import type { LanguageString } from 'events-helsinki-components';
 import capitalize from 'lodash/capitalize';
 import { useMemo } from 'react';
 import { graphqlClientLogger } from '../../logger';
-import { rewriteInternalURLs } from '../../utils/routerUtils';
 import AppConfig from '../app/AppConfig';
+import routerHelper from '../app/routerHelper';
 
 const eventsFederationApolloClient = new MutableReference<
   ApolloClient<NormalizedCacheObject>
@@ -72,7 +72,7 @@ export function createApolloClient() {
   const transformInternalURLs = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
       response.data = response.data
-        ? rewriteInternalURLs(response.data)
+        ? routerHelper.rewriteInternalURLs(response.data)
         : response.data;
       return response;
     });

@@ -18,7 +18,7 @@ import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../../constants';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import styles from './eventCard.module.scss';
@@ -42,7 +42,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
   const queryString = addParamsToQueryString(router.asPath, {
     returnPath: router.pathname,
   });
-  const eventUrl = `${getLocalizedCmsItemUrl(
+  const eventUrl = `${routerHelper.getLocalizedCmsItemUrl(
     ROUTES.COURSES,
     { eventId: event.id },
     locale

@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import { ROUTES } from '../../../../constants';
-import { getI18nPath } from '../../../../utils/routerUtils';
+import routerHelper from '../../../../domain/app/routerHelper';
 import styles from './resultsInfo.module.scss';
 
 const ResultsInfoContainer: React.FC<{
@@ -18,7 +18,7 @@ const ResultsInfoContainer: React.FC<{
   const isFinnish = locale === 'fi';
 
   const goToFinnishSearch = () => {
-    router.push(getI18nPath(ROUTES.SEARCH, 'fi' as AppLanguage));
+    router.push(routerHelper.getI18nPath(ROUTES.SEARCH, 'fi' as AppLanguage));
   };
 
   const ActionButtons = () => (

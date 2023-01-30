@@ -10,9 +10,8 @@ import type { EventFieldsFragment } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-
 import { ROUTES } from '../../../constants';
-import { getI18nPath } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../../search/eventSearch/constants';
 import { getSearchQuery } from '../../search/eventSearch/utils';
 
@@ -54,7 +53,9 @@ const EventKeywords: React.FC<Props> = ({
         text: type === 'text' ? [value] : [],
       });
 
-      router.push(`${getI18nPath(ROUTES.SEARCH, locale)}${search}`);
+      router.push(
+        `${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`
+      );
       scrollToTop();
     };
 

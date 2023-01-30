@@ -19,7 +19,7 @@ import React from 'react';
 
 import useDivisionOptions from '../../../../common-events/hooks/useDivisionOptions';
 import { ROUTES } from '../../../../constants';
-import { getI18nPath } from '../../../../utils/routerUtils';
+import routerHelper from '../../../app/routerHelper';
 import {
   getSearchFilters,
   getSearchQuery,
@@ -97,7 +97,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     });
 
     router.push({
-      pathname: getI18nPath(ROUTES.SEARCH, locale),
+      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
       query: parse(search) as ParsedUrlQueryInput,
     });
   };

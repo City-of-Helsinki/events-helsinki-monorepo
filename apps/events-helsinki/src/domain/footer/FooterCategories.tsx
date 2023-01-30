@@ -5,7 +5,7 @@ import React from 'react';
 import CategoryFilter from '../../common-events/components/category/CategoryFilter';
 
 import { ROUTES } from '../../constants';
-import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
+import routerHelper from '../../domain/app/routerHelper';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../search/eventSearch/constants';
 import type { CategoryOption, Filters } from '../search/eventSearch/types';
 import {
@@ -19,7 +19,7 @@ const FooterCategories: FunctionComponent = () => {
   const locale = useLocale();
 
   const getCategoryLink = (category: CategoryOption) => {
-    return `${getLocalizedCmsItemUrl(
+    return `${routerHelper.getLocalizedCmsItemUrl(
       ROUTES.SEARCH,
       {},
       locale

@@ -1,4 +1,8 @@
-import { NavigationContext, VenueDocument } from 'events-helsinki-components';
+import {
+  NavigationContext,
+  VenueDocument,
+  Navigation,
+} from 'events-helsinki-components';
 import type {
   Venue,
   VenueQuery,
@@ -7,26 +11,25 @@ import type {
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
-import Navigation from '../../../common-events/components/navigation/Navigation';
 import AppConfig from '../../../domain/app/AppConfig';
 import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
+import routerHelper from '../../../domain/app/routerHelper';
 import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../../domain/matomoWrapper/MatomoWrapper';
 import VenuePageContainer from '../../../domain/venue/VenuePageContainer';
-import { getLocaleOrError } from '../../../utils/routerUtils';
 
 const Event: NextPage<{
   venue: Venue;
   loading: boolean;
 }> = ({ venue, loading }) => {
-  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+  const { footerMenu } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <RHHCPage
         className="pageLayout"
-        navigation={<Navigation menu={headerMenu} languages={languages} />}
+        navigation={<Navigation />}
         content={<VenuePageContainer venue={venue} loading={loading} />}
         footer={<FooterSection menu={footerMenu} />}
       />
@@ -44,7 +47,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async ({ apolloClient }) => {
-    const locale = getLocaleOrError(context.locale);
+    const locale = routerHelper.getLocaleOrError(context.locale);
     const { data: venueData, loading } = await apolloClient.query<
       VenueQuery,
       VenueQueryVariables

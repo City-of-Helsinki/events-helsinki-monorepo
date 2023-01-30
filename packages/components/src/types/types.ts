@@ -92,3 +92,9 @@ export type TransitionOptions = {
   locale?: string | false;
   scroll?: boolean;
 };
+
+export type LocalizedString = {
+  fi?: string | null;
+  sv?: string | null;
+  en?: string | null;
+};

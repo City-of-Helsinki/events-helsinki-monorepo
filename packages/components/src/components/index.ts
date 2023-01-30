@@ -43,3 +43,4 @@ export { default as DateFilter } from './filters/DateFilter';
 export { default as PlaceFilter } from './filters/PlaceFilter';
 export { default as PublisherFilter } from './filters/PublisherFilter';
 export { default as TextFilter } from './filters/TextFilter';
+export { default as Navigation } from './navigation/Navigation';

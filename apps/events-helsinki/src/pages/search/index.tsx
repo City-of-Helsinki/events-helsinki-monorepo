@@ -1,21 +1,20 @@
 import {
   NavigationContext,
   useAppEventsTranslation,
+  Navigation,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
-
-import Navigation from '../../common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
+import routerHelper from '../../domain/app/routerHelper';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
 import SearchPage from '../../domain/search/eventSearch/SearchPage';
-import { getLocaleOrError } from '../../utils/routerUtils';
 
 export default function Search() {
   const router = useRouter();
@@ -39,14 +38,14 @@ export default function Search() {
     }
   }, [scrollTo]);
 
-  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+  const { footerMenu } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <HCRCApolloPage
         uri={ROUTES.SEARCH}
         className="pageLayout"
-        navigation={<Navigation menu={headerMenu} languages={languages} />}
+        navigation={<Navigation />}
         content={
           <SearchPage
             SearchComponent={AdvancedSearch}
@@ -61,7 +60,7 @@ export default function Search() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async () => {
-    const locale = getLocaleOrError(context.locale);
+    const locale = routerHelper.getLocaleOrError(context.locale);
     return {
       props: {
         ...(await serverSideTranslationsWithCommon(locale, [

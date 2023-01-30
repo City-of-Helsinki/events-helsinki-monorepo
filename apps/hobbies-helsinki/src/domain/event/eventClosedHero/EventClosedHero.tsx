@@ -3,8 +3,7 @@ import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-
-import { getI18nPath } from '../../../utils/routerUtils';
+import routerHelper from '../../app/routerHelper';
 import styles from './eventClosedHero.module.scss';
 
 const EventClosedHero: React.FC = () => {
@@ -13,7 +12,7 @@ const EventClosedHero: React.FC = () => {
   const locale = useLocale();
 
   const moveToHomePage = () => {
-    router.push(getI18nPath('/', locale));
+    router.push(routerHelper.getI18nPath('/', locale));
   };
 
   return (

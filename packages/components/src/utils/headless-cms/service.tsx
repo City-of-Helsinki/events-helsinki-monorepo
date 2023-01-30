@@ -1,12 +1,6 @@
-import type { PageInfo } from 'events-helsinki-components';
+import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import type {
-  // MenuQuery,
-  // MenuQueryVariables,
-  // MenuDocument,
-  // PageQuery,
-  // PageQueryVariables,
-  // PageDocument,
   PostsQuery,
   PostsQueryVariables,
   PagesQuery,
@@ -16,14 +10,15 @@ import {
   PostsDocument,
   PagesDocument,
 } from 'react-helsinki-headless-cms/apollo';
-import { createApolloClient } from '../../../domain/clients/eventsFederationApolloClient';
+import type { PageInfo } from '../../types';
 
 export const ARTICLES_AMOUNT_LIMIT = 100;
 export const PAGES_AMOUNT_LIMIT = 100;
 
-export const getAllArticles = async (): Promise<PageInfo[]> => {
+export const getAllArticles = async (
+  apolloClient: ApolloClient<NormalizedCacheObject>
+): Promise<PageInfo[]> => {
   const pageInfos: PageInfo[] = [];
-  const apolloClient = createApolloClient();
   const { data: articlesData } = await apolloClient.query<
     PostsQuery,
     PostsQueryVariables
@@ -67,9 +62,10 @@ export const getAllArticles = async (): Promise<PageInfo[]> => {
   }
 };
 
-export const getAllPages = async (): Promise<PageInfo[]> => {
+export const getAllPages = async (
+  apolloClient: ApolloClient<NormalizedCacheObject>
+): Promise<PageInfo[]> => {
   const pageInfos: PageInfo[] = [];
-  const apolloClient = createApolloClient();
   const { data: pagesData } = await apolloClient.query<
     PagesQuery,
     PagesQueryVariables

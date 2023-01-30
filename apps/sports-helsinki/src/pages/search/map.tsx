@@ -2,18 +2,18 @@ import type { MapItem, AppLanguage } from 'events-helsinki-components';
 import {
   useLocale,
   getURLSearchParamsFromAsPath,
-  NavigationContext,
+  Navigation,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
-import Navigation from '../../common-events/components/navigation/Navigation';
 import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
+import routerHelper from '../../domain/app/routerHelper';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 import type { Connection, SearchResult } from '../../domain/nextApi/types';
@@ -23,10 +23,6 @@ import SearchHeader, {
 import SimpleVenueMapSearch from '../../domain/search/venueSearch/VenueMapSearch';
 import useUnifiedSearchMapQuery from '../../domain/unifiedSearch/useUnifiedSearchMapQuery';
 import getVenueSourceId from '../../domain/venue/utils/getVenueSourceId';
-import {
-  getLocaleOrError,
-  getLocalizedCmsItemUrl,
-} from '../../utils/routerUtils';
 
 // https://stackoverflow.com/a/64634759
 const MapView = dynamic(
@@ -58,7 +54,7 @@ function getSearchResultsAsItems(
         venue?.name &&
         venue?.location?.geoLocation?.geometry
       ) {
-        const href = `${getLocalizedCmsItemUrl(
+        const href = `${routerHelper.getLocalizedCmsItemUrl(
           ROUTES.VENUES,
           {
             venueId: getVenueSourceId(venue?.meta.id),
@@ -110,14 +106,12 @@ export default function MapSearch() {
 
   const count = data?.unifiedSearch?.count ?? 0;
 
-  const { headerMenu, languages } = useContext(NavigationContext);
-
   return (
     <MatomoWrapper>
       <HCRCApolloPage
         uri={ROUTES.MAPSEARCH}
         className="pageLayout"
-        navigation={<Navigation menu={headerMenu} languages={languages} />}
+        navigation={<Navigation />}
         content={
           <>
             <SearchHeader
@@ -142,7 +136,7 @@ export default function MapSearch() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async () => {
-    const locale = getLocaleOrError(context.locale);
+    const locale = routerHelper.getLocaleOrError(context.locale);
     return {
       props: {
         ...(await serverSideTranslationsWithCommon(locale, [

@@ -11,7 +11,7 @@ import React from 'react';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
-import { getI18nPath } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 import type { SearchForm, SearchComponentType } from '../combinedSearch/types';
 import { EVENT_DEFAULT_SEARCH_FILTERS, MAPPED_PLACES } from './constants';
 import FilterSummary from './filterSummary/FilterSummary';
@@ -72,7 +72,7 @@ export const useAdvancedSearchForm = ({
 
   const goToSearch = (search: string): void => {
     router.push({
-      pathname: getI18nPath(ROUTES.SEARCH, locale),
+      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
       query: parse(search) as ParsedUrlQueryInput,
     });
   };

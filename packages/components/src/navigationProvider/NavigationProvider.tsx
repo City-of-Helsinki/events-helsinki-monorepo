@@ -2,10 +2,7 @@ import React from 'react';
 import type { NavigationContextProps } from './NavigationContext';
 import NavigationContext from './NavigationContext';
 
-export type NavigationProviderProps = {
-  headerMenu?: NavigationContextProps['headerMenu'];
-  footerMenu?: NavigationContextProps['footerMenu'];
-  languages?: NavigationContextProps['languages'];
+export type NavigationProviderProps = NavigationContextProps & {
   children: React.ReactNode;
 };
 

@@ -2,7 +2,11 @@
 
 import type { NormalizedCacheObject } from '@apollo/client';
 import type { AppLanguage } from 'events-helsinki-components';
-import { NavigationContext } from 'events-helsinki-components';
+import {
+  NavigationContext,
+  getAllPages,
+  Navigation,
+} from 'events-helsinki-components';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -26,19 +30,13 @@ import type {
   PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
 import { PageDocument } from 'react-helsinki-headless-cms/apollo';
-import Navigation from '../../common-events/components/navigation/Navigation';
-import {
-  getDefaultCollections,
-  getSlugFromUri,
-  getUriID,
-} from '../../common-events/utils/headless-cms/headlessCmsUtils';
-import { getAllPages } from '../../common-events/utils/headless-cms/service';
 import AppConfig from '../../domain/app/AppConfig';
-import { createApolloClient } from '../../domain/clients/eventsFederationApolloClient';
+import cmsHelper from '../../domain/app/headlessCmsHelper';
+import routerHelper from '../../domain/app/routerHelper';
+import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
-import { getLocaleOrError } from '../../utils/routerUtils';
 
 const NextCmsPage: NextPage<{
   page: PageType;
@@ -46,28 +44,21 @@ const NextCmsPage: NextPage<{
   collections: CollectionType[];
 }> = ({ page, breadcrumbs, collections }) => {
   const {
-    currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
-  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+  const { footerMenu } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <HCRCPage
-        navigation={
-          <Navigation page={page} menu={headerMenu} languages={languages} />
-        }
+        navigation={<Navigation page={page} />}
         content={
           <HCRCPageContent
             page={page as PageContentProps['page']}
             breadcrumbs={breadcrumbs ?? undefined}
             collections={
               collections
-                ? getDefaultCollections(
-                    page,
-                    getRoutedInternalHref,
-                    currentLanguageCode
-                  )
+                ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
                 : []
             }
           />
@@ -79,10 +70,12 @@ const NextCmsPage: NextPage<{
 };
 
 export async function getStaticPaths() {
-  const pagePageInfos = await getAllPages();
+  // NOTE: It might not be a good thing to use ApolloClient here,
+  // since then the build process depends on external service.
+  const pagePageInfos = await getAllPages(apolloClient);
   const paths = pagePageInfos
     .map((pageInfo) => ({
-      params: { slug: getSlugFromUri(pageInfo.uri) },
+      params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
       locale: pageInfo.locale,
     }))
     // Remove the pages without a slug
@@ -121,7 +114,7 @@ export async function getStaticProps(
         revalidate: true,
       };
     }
-    const locale = getLocaleOrError(context.locale);
+    const locale = routerHelper.getLocaleOrError(context.locale);
 
     return {
       props: {
@@ -146,7 +139,6 @@ export async function getStaticProps(
 }
 
 const getProps = async (context: GetStaticPropsContext) => {
-  const apolloClient = createApolloClient();
   const { data: pageData } = await apolloClient.query<
     PageQuery,
     PageQueryVariables
@@ -182,7 +174,7 @@ const getProps = async (context: GetStaticPropsContext) => {
  * @returns
  */
 function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
-  const uri = getUriID(slugs, locale);
+  const uri = cmsHelper.getUriID(slugs, locale);
   if (uri.startsWith(AppConfig.cmsPagesContextPath)) {
     return uri;
   }

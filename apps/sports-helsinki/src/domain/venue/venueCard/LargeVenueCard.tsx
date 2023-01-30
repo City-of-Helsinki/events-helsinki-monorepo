@@ -13,7 +13,7 @@ import {
   TagComponent as Tag,
 } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 import styles from './largeVenueCard.module.scss';
 
 interface Props {
@@ -37,11 +37,11 @@ const LargeVenueCard: React.FC<Props> = ({
   const router = useRouter();
   const locale = useLocale();
 
-  const venueUrl = getLocalizedCmsItemUrl(
+  const venueUrl = routerHelper.getLocalizedCmsItemUrl(
     ROUTES.VENUES,
     {
       venueId: id,
-      returnPath: getLocalizedCmsItemUrl(
+      returnPath: routerHelper.getLocalizedCmsItemUrl(
         ROUTES.SEARCH,
         { ...router.query, venueId: id },
         locale

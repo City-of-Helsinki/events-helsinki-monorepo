@@ -13,9 +13,9 @@ import {
   defaultConfig as rhhcDefaultConfig,
   ModuleItemTypeEnum,
 } from 'react-helsinki-headless-cms';
-
 import { ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
+import routerHelper from '../domain/app/routerHelper';
 import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
 import ArticleDetails from '../domain/article/articleDetails/ArticleDetails';
 import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
@@ -24,7 +24,6 @@ import EventDetails from '../domain/event/eventDetails/EventDetails';
 import getVenueSourceId from '../domain/venue/utils/getVenueSourceId';
 import type { VenueDetailsProps } from '../domain/venue/venueDetails/VenueDetails';
 import VenueDetails from '../domain/venue/venueDetails/VenueDetails';
-import { getLocalizedCmsItemUrl } from '../utils/routerUtils';
 
 const APP_DOMAIN = new URL(AppConfig.origin).origin;
 const CMS_API_DOMAIN = new URL(AppConfig.cmsOrigin).origin;
@@ -128,7 +127,7 @@ export default function useRHHCConfig() {
         ): string => {
           if (_type === ModuleItemTypeEnum.Venue) {
             // quick fix for venue url rewrites
-            return getLocalizedCmsItemUrl(
+            return routerHelper.getLocalizedCmsItemUrl(
               ROUTES.VENUES,
               {
                 venueId: getVenueSourceId(link),

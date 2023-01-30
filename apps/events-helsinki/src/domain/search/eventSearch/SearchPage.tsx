@@ -7,6 +7,7 @@ import {
   useEventListQuery,
   BasicMeta,
   MAIN_CONTENT_ID,
+  useCmsRoutedAppHelper,
 } from 'events-helsinki-components';
 import type { QueryEventListArgs } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
@@ -17,7 +18,7 @@ import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
 import EventList from '../../../common-events/components/eventList/EventList';
-import { removeQueryParamsFromRouter } from '../../../utils/routerUtils';
+import { ROUTES } from '../../../constants';
 import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
@@ -32,6 +33,7 @@ const SearchPage: React.FC<{
 }> = ({ SearchComponent, pageTitle }) => {
   const { t } = useSearchTranslation();
   const router = useRouter();
+  const routerHelper = useCmsRoutedAppHelper();
   const params: { place?: string } = router.query;
 
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
@@ -113,7 +115,11 @@ const SearchPage: React.FC<{
             : router.query.eventId
         )
       );
-      removeQueryParamsFromRouter(router, ['eventId']);
+      routerHelper.removeQueryParamsFromRouter(
+        router,
+        ['eventId'],
+        ROUTES.SEARCH
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

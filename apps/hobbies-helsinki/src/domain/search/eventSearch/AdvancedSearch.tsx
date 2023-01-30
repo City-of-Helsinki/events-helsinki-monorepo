@@ -28,7 +28,7 @@ import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
 import IconRead from '../../../assets/icons/IconRead';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
-import { getI18nPath } from '../../../utils/routerUtils';
+import routerHelper from '../../app/routerHelper';
 import PlaceSelector from '../../place/placeSelector/PlaceSelector';
 import {
   EVENT_DEFAULT_SEARCH_FILTERS,
@@ -129,7 +129,7 @@ const AdvancedSearch: React.FC<Props> = ({
 
   const goToSearch = (search: string): void => {
     router.push({
-      pathname: getI18nPath(ROUTES.SEARCH, locale),
+      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
       query: parse(search) as ParsedUrlQueryInput,
     });
   };

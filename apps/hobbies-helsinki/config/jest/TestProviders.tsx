@@ -3,6 +3,7 @@ import { useApolloClient } from '@apollo/client';
 import type { MockedResponse } from '@apollo/client/testing';
 import { MockedProvider } from '@apollo/client/testing';
 import {
+  CmsHelperProvider,
   DEFAULT_LANGUAGE,
   NavigationContext,
 } from 'events-helsinki-components';
@@ -21,7 +22,8 @@ import {
 import { I18nextProvider } from 'react-i18next';
 
 import { ROUTES } from '../../src/constants';
-import { getLocalizedCmsItemUrl } from '../../src/utils/routerUtils';
+import cmsHelper from '../../src/domain/app/headlessCmsHelper';
+import routerHelper from '../../src/domain/app/routerHelper';
 import { initI18n as i18n } from './initI18n';
 
 const CMS_API_DOMAIN = 'harrastukset.cms.test.domain.com';
@@ -46,11 +48,13 @@ function TestProviders({ mocks, children, router }: Props) {
     <I18nextProvider i18n={i18n}>
       <MockedProvider mocks={mocks} addTypename={false}>
         <RHHCConfigProviderWithMockedApolloClient router={router}>
-          <NavigationContext.Provider value={{}}>
-            <RouterContext.Provider value={{ ...router, ...mockRouter }}>
-              {children}
-            </RouterContext.Provider>
-          </NavigationContext.Provider>
+          <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+            <NavigationContext.Provider value={{}}>
+              <RouterContext.Provider value={{ ...router, ...mockRouter }}>
+                {children}
+              </RouterContext.Provider>
+            </NavigationContext.Provider>
+          </CmsHelperProvider>
         </RHHCConfigProviderWithMockedApolloClient>
       </MockedProvider>
     </I18nextProvider>
@@ -88,28 +92,28 @@ function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
     const uri = getUri(link, internalHrefOrigins, getIsHrefExternal);
 
     if (type === ModuleItemTypeEnum.Article) {
-      return getLocalizedCmsItemUrl(
+      return routerHelper.getLocalizedCmsItemUrl(
         ROUTES.ARTICLES,
         { slug: uri.replace(/^\//, '') },
         locale
       );
     }
     if (type === ModuleItemTypeEnum.Page) {
-      return getLocalizedCmsItemUrl(
+      return routerHelper.getLocalizedCmsItemUrl(
         ROUTES.PAGES,
         { slug: uri.replace(/^\//, '') },
         locale
       );
     }
     if (type === ModuleItemTypeEnum.Event) {
-      return getLocalizedCmsItemUrl(
+      return routerHelper.getLocalizedCmsItemUrl(
         ROUTES.COURSES,
         { eventId: uri.replace(/^\//, '') },
         locale
       );
     }
     // TODO: test the default case
-    return getLocalizedCmsItemUrl(link, {}, locale);
+    return routerHelper.getLocalizedCmsItemUrl(link, {}, locale);
   };
 
   return {

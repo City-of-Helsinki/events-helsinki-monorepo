@@ -13,7 +13,7 @@ import {
 } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../../constants';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
+import routerHelper from '../../app/routerHelper';
 import { useSimilarEventsQuery } from '../queryUtils';
 import styles from './similarEvents.module.scss';
 
@@ -41,7 +41,7 @@ const SimilarEvents: React.FC<Props> = ({
 
   const cards = events.map((event, i) => {
     const cardProps = getEventCardProps(event, locale);
-    const url = getLocalizedCmsItemUrl(
+    const url = routerHelper.getLocalizedCmsItemUrl(
       ROUTES.COURSES,
       { eventId: event.id },
       locale

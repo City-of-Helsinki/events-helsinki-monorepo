@@ -10,9 +10,9 @@ import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
-import type { SearchPage } from 'domain/search/combinedSearch/types';
 import { SEARCH_ROUTES } from '../../../../constants';
-import { removeQueryParamsFromRouter } from '../../../../utils/routerUtils';
+import routerHelper from '../../../../domain/app/routerHelper';
+import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
 import { getNextPage } from '../utils';
 import useEventSearchFilters from './useEventSearchFilters';
 
@@ -84,7 +84,11 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
             : router.query.eventId
         )
       );
-      removeQueryParamsFromRouter(router, ['eventId'], SEARCH_ROUTES.SEARCH);
+      routerHelper.removeQueryParamsFromRouter(
+        router,
+        ['eventId'],
+        SEARCH_ROUTES.SEARCH
+      );
     }
   };
 

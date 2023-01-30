@@ -6,9 +6,8 @@ import {
   useCommonTranslation,
 } from 'events-helsinki-components';
 import React from 'react';
-
 import { ROUTES } from '../../../constants';
-import { getI18nPath } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 import { CATEGORY_CATALOG } from '../eventSearch/constants';
 import { getSportsCategoryOptions } from '../eventSearch/utils';
 import styles from './landingPageSearch.module.scss';
@@ -25,7 +24,7 @@ const Search: React.FC = () => {
       {
         q: [autosuggestInput],
       },
-      getI18nPath(ROUTES.SEARCH, locale)
+      routerHelper.getI18nPath(ROUTES.SEARCH, locale)
     );
   };
 
@@ -34,7 +33,7 @@ const Search: React.FC = () => {
       {
         q: [option.text],
       },
-      getI18nPath(ROUTES.SEARCH, locale)
+      routerHelper.getI18nPath(ROUTES.SEARCH, locale)
     );
   };
 

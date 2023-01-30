@@ -7,7 +7,7 @@ import {
   useConfig,
 } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../constants';
-import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
+import routerHelper from '../../domain/app/routerHelper';
 
 type useEventCardsProps = {
   events?: EventFields[] | null;
@@ -22,7 +22,7 @@ function useEventCards({ events, returnPath }: useEventCardsProps) {
   return (
     events?.map((event, i) => {
       const cardProps = getEventCardProps(event, locale);
-      const url = getLocalizedCmsItemUrl(
+      const url = routerHelper.getLocalizedCmsItemUrl(
         ROUTES.COURSES,
         { eventId: event.id, returnPath },
         locale

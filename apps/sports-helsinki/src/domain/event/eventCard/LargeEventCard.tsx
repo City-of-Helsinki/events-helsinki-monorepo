@@ -26,7 +26,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 import { PARAM_SEARCH_TYPE } from '../../search/combinedSearch/constants';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
@@ -58,7 +58,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
 
   const eventClosed = isEventClosed(event);
   const queryString = addParamsToQueryString('', {
-    returnPath: getLocalizedCmsItemUrl(
+    returnPath: routerHelper.getLocalizedCmsItemUrl(
       ROUTES.SEARCH,
       {
         ...router.query,
@@ -69,7 +69,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
     ),
   });
 
-  const eventUrl = `${getLocalizedCmsItemUrl(
+  const eventUrl = `${routerHelper.getLocalizedCmsItemUrl(
     ROUTES.COURSES,
     { eventId: event.id },
     locale

@@ -3,6 +3,8 @@ import {
   KorosWrapper,
   NavigationContext,
   ShareLinks,
+  getAllArticles,
+  Navigation,
 } from 'events-helsinki-components';
 import type { AppLanguage } from 'events-helsinki-components';
 import type {
@@ -29,20 +31,13 @@ import type {
   ArticleQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
 import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
-
-import Navigation from '../../common-events/components/navigation/Navigation';
-import {
-  getDefaultCollections,
-  getSlugFromUri,
-  getUriID,
-} from '../../common-events/utils/headless-cms/headlessCmsUtils';
-import { getAllArticles } from '../../common-events/utils/headless-cms/service';
 import AppConfig from '../../domain/app/AppConfig';
-import { createApolloClient } from '../../domain/clients/eventsFederationApolloClient';
+import cmsHelper from '../../domain/app/headlessCmsHelper';
+import routerHelper from '../../domain/app/routerHelper';
+import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
-import { getLocaleOrError } from '../../utils/routerUtils';
 
 const NextCmsArticle: NextPage<{
   article: ArticleType;
@@ -50,19 +45,16 @@ const NextCmsArticle: NextPage<{
   collections: CollectionType[];
 }> = ({ article, breadcrumbs, collections }) => {
   const {
-    currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
 
   const { t } = useTranslation(['common']);
-  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+  const { footerMenu } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <RHHCPage
-        navigation={
-          <Navigation page={article} menu={headerMenu} languages={languages} />
-        }
+        navigation={<Navigation page={article} />}
         content={
           <RHHCPageContent
             page={article as PageContentProps['page']}
@@ -73,10 +65,9 @@ const NextCmsArticle: NextPage<{
             shareLinks={<ShareLinks title={t('common:share.article')} />}
             collections={
               collections
-                ? getDefaultCollections(
+                ? cmsHelper.getDefaultCollections(
                     article,
-                    getRoutedInternalHref,
-                    currentLanguageCode
+                    getRoutedInternalHref
                   )
                 : []
             }
@@ -89,9 +80,11 @@ const NextCmsArticle: NextPage<{
 };
 
 export async function getStaticPaths() {
-  const articlePageInfos = await getAllArticles();
+  // NOTE: It might not be a good thing to use ApolloClient here,
+  // since then the build process depends on external service.
+  const articlePageInfos = await getAllArticles(apolloClient);
   const paths = articlePageInfos.map((pageInfo) => ({
-    params: { slug: getSlugFromUri(pageInfo.uri) },
+    params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
     locale: pageInfo.locale,
   }));
   return {
@@ -129,7 +122,7 @@ export async function getStaticProps(
         revalidate: true,
       };
     }
-    const locale = getLocaleOrError(context.locale);
+    const locale = routerHelper.getLocaleOrError(context.locale);
 
     return {
       props: {
@@ -156,8 +149,6 @@ export async function getStaticProps(
 }
 
 const getProps = async (context: GetStaticPropsContext) => {
-  const apolloClient = createApolloClient();
-
   const { data: articleData } = await apolloClient.query<
     ArticleQuery,
     ArticleQueryVariables
@@ -188,7 +179,7 @@ const getProps = async (context: GetStaticPropsContext) => {
  * @returns
  */
 function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
-  const uri = getUriID(slugs, locale);
+  const uri = cmsHelper.getUriID(slugs, locale);
   if (uri.startsWith(AppConfig.cmsArticlesContextPath)) {
     return uri;
   }

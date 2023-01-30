@@ -14,7 +14,7 @@ import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../../../constants';
-import { getLocalizedCmsItemUrl } from '../../../../utils/routerUtils';
+import routerHelper from '../../../../domain/app/routerHelper';
 import styles from './eventList.module.scss';
 
 const EventList: React.FC<{
@@ -30,8 +30,11 @@ const EventList: React.FC<{
   const search = router.asPath.split('?')[1];
 
   const getLinkUrl = (event: EventFieldsFragment) =>
-    getLocalizedCmsItemUrl(ROUTES.EVENTS, { eventId: event.id }, locale) +
-    (search ? `?${search}` : '');
+    routerHelper.getLocalizedCmsItemUrl(
+      ROUTES.EVENTS,
+      { eventId: event.id },
+      locale
+    ) + (search ? `?${search}` : '');
 
   return (
     <ul className={styles.timeList} data-testid={id}>

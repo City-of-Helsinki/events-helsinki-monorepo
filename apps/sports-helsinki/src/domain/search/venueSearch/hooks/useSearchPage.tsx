@@ -10,11 +10,11 @@ import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
-import AppConfig from 'domain/app/AppConfig';
-import type { SearchPage } from 'domain/search/combinedSearch/types';
-import useUnifiedSearchListQuery from 'domain/unifiedSearch/useUnifiedSearchListQuery';
 import { SEARCH_ROUTES } from '../../../../constants';
-import { removeQueryParamsFromRouter } from '../../../../utils/routerUtils';
+import AppConfig from '../../../../domain/app/AppConfig';
+import routerHelper from '../../../../domain/app/routerHelper';
+import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
+import useUnifiedSearchListQuery from '../../../../domain/unifiedSearch/useUnifiedSearchListQuery';
 
 const BLOCK_SIZE = 10;
 
@@ -87,7 +87,11 @@ function useSearchPage(): SearchPage {
             : router.query.venueId
         )
       );
-      removeQueryParamsFromRouter(router, ['venueId'], SEARCH_ROUTES.SEARCH);
+      routerHelper.removeQueryParamsFromRouter(
+        router,
+        ['venueId'],
+        SEARCH_ROUTES.SEARCH
+      );
     }
   };
 

@@ -2,6 +2,7 @@ import {
   DEFAULT_LANGUAGE,
   getQlLanguage,
   NavigationContext,
+  Navigation,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
@@ -22,15 +23,13 @@ import {
   PageByTemplateDocument,
   LandingPageDocument,
 } from 'react-helsinki-headless-cms/apollo';
-
-import Navigation from '../common-events/components/navigation/Navigation';
-import { getDefaultCollections } from '../common-events/utils/headless-cms/headlessCmsUtils';
 import getEventsStaticProps from '../domain/app/getEventsStaticProps';
+import cmsHelper from '../domain/app/headlessCmsHelper';
+import routerHelper from '../domain/app/routerHelper';
 import FooterSection from '../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../domain/matomoWrapper/MatomoWrapper';
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
-import { getLocaleOrError } from '../utils/routerUtils';
 
 const HomePage: NextPage<{
   landingPage: LandingPageQuery['landingPage'];
@@ -38,27 +37,22 @@ const HomePage: NextPage<{
   locale: string;
 }> = ({ landingPage, page, locale }) => {
   const {
-    currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
-  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+  const { footerMenu } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <HCRCPage
         className="pageLayout"
-        navigation={<Navigation menu={headerMenu} languages={languages} />}
+        navigation={<Navigation />}
         content={
           <HCRCPageContent
             page={page}
             landingPage={landingPage}
             PageContentLayoutComponent={LandingPageContentLayout}
             collections={(page: PageType | ArticleType) =>
-              getDefaultCollections(
-                page,
-                getRoutedInternalHref,
-                currentLanguageCode
-              )
+              cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
             }
             language={getQlLanguage(locale)}
           />
@@ -72,7 +66,7 @@ const HomePage: NextPage<{
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async ({ apolloClient }) => {
     try {
-      const locale = getLocaleOrError(context.locale);
+      const locale = routerHelper.getLocaleOrError(context.locale);
       const { data: landingPageData } = await apolloClient.query<
         LandingPageQuery,
         LandingPageQueryVariables
@@ -120,7 +114,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       return {
         props: {
           ...(await serverSideTranslationsWithCommon(
-            getLocaleOrError(DEFAULT_LANGUAGE),
+            routerHelper.getLocaleOrError(DEFAULT_LANGUAGE),
             ['home', 'search']
           )),
           landingPage: null,

@@ -11,9 +11,8 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
-
 import { ROUTES } from '../../constants';
-import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
+import routerHelper from '../../domain/app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import { SPORT_COURSES_KEYWORDS } from '../search/eventSearch/constants';
 import VenueUpcomingEvents from './upcomingEvents/UpcomingEventsSection';
@@ -21,7 +20,6 @@ import getVenueSourceId from './utils/getVenueSourceId';
 import VenueContent from './venueContent/VenueContent';
 import VenueHero from './venueHero/VenueHero';
 import styles from './venuePage.module.scss';
-// import EventPageMeta from '../event/eventPageMeta/EventPageMeta';
 
 export interface VenuePageContainerProps {
   loading: boolean;
@@ -41,7 +39,7 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
   const router = useRouter();
   const locale = useLocale();
   const search = addParamsToQueryString(router.asPath, {
-    returnPath: `/${locale}/${getLocalizedCmsItemUrl(
+    returnPath: `/${locale}/${routerHelper.getLocalizedCmsItemUrl(
       ROUTES.SEARCH,
       {},
       locale
@@ -94,7 +92,7 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
           ) : (
             <ErrorHero text={t('notFound.text')} title={t('notFound.title')}>
               <Link
-                href={`${getLocalizedCmsItemUrl(
+                href={`${routerHelper.getLocalizedCmsItemUrl(
                   ROUTES.SEARCH,
                   {},
                   locale

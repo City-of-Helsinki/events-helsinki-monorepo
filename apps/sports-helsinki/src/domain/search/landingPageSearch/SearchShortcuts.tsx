@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import { useLocale } from 'events-helsinki-components';
 import React from 'react';
-
 import CategoryFilter from '../../../common-events/components/category/CategoryFilter';
 import { ROUTES } from '../../../constants';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 import type { CategoryOption } from '../eventSearch/types';
 import { getSearchQuery } from '../eventSearch/utils';
 
@@ -23,7 +22,7 @@ export default function SearchShortcuts({
   const locale = useLocale();
 
   const getCategoryLink = (category: CategoryOption) => {
-    return `${getLocalizedCmsItemUrl(
+    return `${routerHelper.getLocalizedCmsItemUrl(
       ROUTES.SEARCH,
       {},
       locale

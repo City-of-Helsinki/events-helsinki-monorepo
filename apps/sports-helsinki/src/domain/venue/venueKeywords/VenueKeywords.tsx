@@ -10,9 +10,8 @@ import { capitalize } from 'lodash';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-
 import { ROUTES } from '../../../constants';
-import { getI18nPath } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 
 interface Props {
   blackOnMobile?: boolean;
@@ -63,7 +62,9 @@ const VenueKeywords: React.FC<Props> = ({
         q: type === 'text' ? [value] : [],
       });
 
-      router.push(`${getI18nPath(ROUTES.SEARCH, locale)}${search}`);
+      router.push(
+        `${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`
+      );
       scrollToTop();
     };
 

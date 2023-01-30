@@ -10,6 +10,7 @@ import {
   EventsCookieConsent,
   ResetFocus,
   useCommonTranslation,
+  CmsHelperProvider,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { AppProps as NextAppProps } from 'next/app';
@@ -20,10 +21,11 @@ import type { SSRConfig } from 'next-i18next';
 import React from 'react';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import { ToastContainer } from 'react-toastify';
-
 import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
 import AppConfig from '../domain/app/AppConfig';
+import cmsHelper from '../domain/app/headlessCmsHelper';
+import routerHelper from '../domain/app/routerHelper';
 import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
 import useRHHCConfig from '../hooks/useRHHCConfig';
 
@@ -82,34 +84,36 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   return (
     <ApolloProvider client={apolloClient}>
       <RHHCConfigProvider config={rhhcConfig}>
-        <NavigationProvider
-          headerMenu={headerMenu}
-          footerMenu={footerMenu}
-          languages={languages}
-        >
-          <ResetFocus />
-          <MatomoProvider value={matomoInstance}>
-            {router.isFallback ? (
-              <Center>
-                <LoadingSpinner />
-              </Center>
-            ) : error ? (
-              <Error
-                statusCode={error.networkError?.statusCode ?? 400}
-                title={error.title}
-              />
-            ) : (
-              <>
-                <Component {...pageProps} />
-                <EventsCookieConsent
-                  allowLanguageSwitch={false}
-                  appName={t('appHobbies:appName')}
+        <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+          <NavigationProvider
+            headerMenu={headerMenu}
+            footerMenu={footerMenu}
+            languages={languages}
+          >
+            <ResetFocus />
+            <MatomoProvider value={matomoInstance}>
+              {router.isFallback ? (
+                <Center>
+                  <LoadingSpinner />
+                </Center>
+              ) : error ? (
+                <Error
+                  statusCode={error.networkError?.statusCode ?? 400}
+                  title={error.title}
                 />
-              </>
-            )}
-          </MatomoProvider>
-          <ToastContainer />
-        </NavigationProvider>
+              ) : (
+                <>
+                  <Component {...pageProps} />
+                  <EventsCookieConsent
+                    allowLanguageSwitch={false}
+                    appName={t('appHobbies:appName')}
+                  />
+                </>
+              )}
+            </MatomoProvider>
+            <ToastContainer />
+          </NavigationProvider>
+        </CmsHelperProvider>
       </RHHCConfigProvider>
     </ApolloProvider>
   );

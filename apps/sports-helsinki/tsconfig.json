@@ -33,7 +33,6 @@
     "**/*.cjs",
     "**/*.mjs",
     "**/*.jsx",
-    "**/*.json",
-    "../../packages/components/src/navigationProvider/NavigationContext.tsx"
+    "**/*.json"
   ]
 }

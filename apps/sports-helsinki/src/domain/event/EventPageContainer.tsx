@@ -19,7 +19,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../constants';
-import { getLocalizedCmsItemUrl } from '../../utils/routerUtils';
+import routerHelper from '../../domain/app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import EventClosedHero from './eventClosedHero/EventClosedHero';
 import EventContent from './eventContent/EventContent';
@@ -43,7 +43,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
   const router = useRouter();
   const locale = useLocale();
   const search = addParamsToQueryString(router.asPath, {
-    returnPath: `/${locale}/${getLocalizedCmsItemUrl(
+    returnPath: `/${locale}/${routerHelper.getLocalizedCmsItemUrl(
       ROUTES.SEARCH,
       {},
       locale
@@ -122,7 +122,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
           ) : (
             <ErrorHero text={t('notFound.text')} title={t('notFound.title')}>
               <Link
-                href={`${getLocalizedCmsItemUrl(
+                href={`${routerHelper.getLocalizedCmsItemUrl(
                   ROUTES.SEARCH,
                   {},
                   locale

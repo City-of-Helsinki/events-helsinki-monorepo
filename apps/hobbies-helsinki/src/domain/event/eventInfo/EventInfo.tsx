@@ -37,7 +37,7 @@ import { SecondaryLink } from 'react-helsinki-headless-cms';
 
 import IconDirections from '../../../assets/icons/IconDirections';
 import { ROUTES } from '../../../constants';
-import { getLocalizedCmsItemUrl } from '../../../utils/routerUtils';
+import routerHelper from '../../app/routerHelper';
 import styles from './eventInfo.module.scss';
 import { SubEvents, SuperEvent } from './EventsHierarchy';
 import OrganizationInfo from './OrganizationInfo';
@@ -123,7 +123,7 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
       const icsEvent: EventAttributes = {
         description: t('info.textCalendarLinkDescription', {
           description: shortDescription,
-          link: `${domain}${getLocalizedCmsItemUrl(
+          link: `${domain}${routerHelper.getLocalizedCmsItemUrl(
             ROUTES.COURSES,
             { eventId: event.id },
             locale

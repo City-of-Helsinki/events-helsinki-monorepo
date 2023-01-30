@@ -6,12 +6,8 @@ import {
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import React from 'react';
-
 import { ROUTES } from '../../../constants';
-import {
-  getI18nPath,
-  getParsedUrlQueryInput,
-} from '../../../utils/routerUtils';
+import routerHelper from '../../app/routerHelper';
 import {
   CATEGORY_CATALOG,
   EVENT_DEFAULT_SEARCH_FILTERS,
@@ -41,8 +37,8 @@ const Search: React.FC = () => {
 
   const goToSearchPage = (search: string) => {
     router.push({
-      pathname: getI18nPath(ROUTES.SEARCH, locale),
-      query: getParsedUrlQueryInput(search),
+      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
+      query: routerHelper.getParsedUrlQueryInput(search),
     });
   };
 

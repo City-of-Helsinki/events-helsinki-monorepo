@@ -6,6 +6,7 @@ import {
   skipFalsyType,
   useCmsTranslation,
   useDebounce,
+  Navigation,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
@@ -31,16 +32,14 @@ import type {
   PageByTemplateQuery,
   PageByTemplateQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-
-import Navigation from '../../common-events/components/navigation/Navigation';
-import { getArticlePageCardProps } from '../../common-events/utils/headless-cms/headlessCmsUtils';
 import type { SportsGlobalPageProps } from '../../domain/app/getSportsStaticProps';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
+import cmsHelper from '../../domain/app/headlessCmsHelper';
+import routerHelper from '../../domain/app/routerHelper';
 import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
 import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
-import { getLocaleOrError } from '../../utils/routerUtils';
 
 const CATEGORIES_AMOUNT = 20;
 const BLOCK_SIZE = 10;
@@ -103,15 +102,13 @@ export default function ArticleArchive({
   // Show the first item large when the search has not yet done
   const showFirstItemLarge = searchTerm.length === 0;
 
-  const { headerMenu, footerMenu, languages } = useContext(NavigationContext);
+  const { footerMenu } = useContext(NavigationContext);
 
   return (
     <MatomoWrapper>
       <RHHCPage
         className="pageLayout"
-        navigation={
-          <Navigation page={page} menu={headerMenu} languages={languages} />
-        }
+        navigation={<Navigation page={page} />}
         content={
           <SearchPageContent
             title={t('cms:archiveSearch.title')}
@@ -141,7 +138,7 @@ export default function ArticleArchive({
               return (
                 <LargeCard
                   key={`lg-card-${item?.id}`}
-                  {...getArticlePageCardProps(
+                  {...cmsHelper.getArticlePageCardProps(
                     item as ArticleType,
                     getRoutedInternalHref
                   )}
@@ -166,7 +163,7 @@ export default function ArticleArchive({
                 <Card
                   key={`sm-card-${item?.id}`}
                   {...{
-                    ...getArticlePageCardProps(
+                    ...cmsHelper.getArticlePageCardProps(
                       item as ArticleType,
                       getRoutedInternalHref
                     ),
@@ -199,7 +196,7 @@ export default function ArticleArchive({
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async ({ apolloClient }) => {
-    const locale = getLocaleOrError(context.locale);
+    const locale = routerHelper.getLocaleOrError(context.locale);
     const { data: pageData } = await apolloClient.query<
       PageByTemplateQuery,
       PageByTemplateQueryVariables

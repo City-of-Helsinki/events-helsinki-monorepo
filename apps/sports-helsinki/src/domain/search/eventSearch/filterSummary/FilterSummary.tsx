@@ -11,7 +11,7 @@ import { useTranslation } from 'next-i18next';
 import qs, { parse } from 'query-string';
 import React from 'react';
 import { ROUTES } from '../../../../constants';
-import { getI18nPath } from '../../../../utils/routerUtils';
+import routerHelper from '../../../../domain/app/routerHelper';
 import { getSearchFilters, getSearchQuery } from '../utils';
 import styles from './filterSummary.module.scss';
 
@@ -55,7 +55,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     });
 
     router.push({
-      pathname: getI18nPath(ROUTES.SEARCH, locale),
+      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
       query: parse(search) as ParsedUrlQueryInput,
     });
   };

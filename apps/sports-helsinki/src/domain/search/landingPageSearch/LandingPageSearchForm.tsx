@@ -9,7 +9,7 @@ import { Button, IconSearch } from 'hds-react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
-import { getI18nPath } from '../../../utils/routerUtils';
+import routerHelper from '../../../domain/app/routerHelper';
 import styles from './landingPageSearchForm.module.scss';
 
 export type LandingPageSearchFormProps = {
@@ -59,7 +59,7 @@ export default function LandingPageSearchForm({
         <SecondaryLink
           variant="arrowRight"
           className={styles.link}
-          href={getI18nPath(ROUTES.SEARCH, locale)}
+          href={routerHelper.getI18nPath(ROUTES.SEARCH, locale)}
         >
           {t('home:search.linkAdvancedSearch')}
         </SecondaryLink>

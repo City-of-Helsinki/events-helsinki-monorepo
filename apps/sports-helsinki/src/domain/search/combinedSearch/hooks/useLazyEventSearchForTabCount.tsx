@@ -2,7 +2,7 @@ import { useLazyQuery } from '@apollo/client';
 import type { EventListQuery, EventTypeId } from 'events-helsinki-components';
 import { EventListDocument } from 'events-helsinki-components';
 import React from 'react';
-import useEventSearchFilters from 'domain/search/eventSearch/hooks/useEventSearchFilters';
+import useEventSearchFilters from '../../../../domain/search/eventSearch/hooks/useEventSearchFilters';
 import { useTabsContext } from '../searchTabs/tabsContext';
 
 function useLazyEventSearchForTabCount({

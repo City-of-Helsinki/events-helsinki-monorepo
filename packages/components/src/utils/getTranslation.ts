@@ -1,8 +1,8 @@
-import type { LanguageString } from '../types';
+import type { AppLanguage, LocalizedString } from './../types';
 
 export default function getTranslation(
-  translation: LanguageString,
-  locale: keyof LanguageString
+  locale: AppLanguage,
+  translation?: LocalizedString | undefined | null
 ) {
-  return translation[locale] ?? translation.fi;
+  return ((translation && translation[locale]) ?? translation?.fi) || '';
 }

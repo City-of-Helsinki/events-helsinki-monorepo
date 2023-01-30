@@ -8,10 +8,5 @@ export enum SUPPORT_LANGUAGES {
   SV = 'sv',
 }
 
-export type LocalizedString = {
-  fi?: string | null;
-  sv?: string | null;
-  en?: string | null;
-};
-
-export type SearchRoute = (typeof SEARCH_ROUTES)[keyof typeof SEARCH_ROUTES];
+// eslint-disable-next-line prettier/prettier
+export type SearchRoute = typeof SEARCH_ROUTES[keyof typeof SEARCH_ROUTES];

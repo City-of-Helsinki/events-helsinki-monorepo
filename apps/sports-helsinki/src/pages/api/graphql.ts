@@ -1,10 +1,10 @@
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import accepts from 'accepts';
 import type { NextApiRequest } from 'next';
-import HaukiDataSource from 'domain/graphql/services/HaukiDataSource';
-// import LinkedDataSource from 'domain/graphql/services/linked/LinkedDataSource';
+// import LinkedDataSource from '../../domain/graphql/services/linked/LinkedDataSource';
 import AppConfig from '../../domain/app/AppConfig';
 import createApolloServer from '../../domain/graphql/createApolloServer';
+import HaukiDataSource from '../../domain/graphql/services/HaukiDataSource';
 import TprekDataSource from '../../domain/graphql/services/TprekDataSource';
 import type { Context } from '../../domain/nextApi/types';
 

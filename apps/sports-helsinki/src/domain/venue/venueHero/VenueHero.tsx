@@ -16,6 +16,7 @@ import {
   BackgroundImage,
   ContentContainer,
   PageSection,
+  useConfig,
 } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
 import type { ReturnParams } from '../../event/eventQueryString.util';
@@ -24,8 +25,6 @@ import getVenueOpeningTimeDescription from '../utils/getVenueOpeningTimeDescript
 import VenueKeywords from '../venueKeywords/VenueKeywords';
 import styles from './venueHero.module.scss';
 
-const heroPlaceholderImage = '/shared-assets/images/no_image.svg';
-
 export interface Props {
   venue: Venue;
 }
@@ -33,6 +32,7 @@ export interface Props {
 const VenueHero: React.FC<Props> = ({ venue }) => {
   const { t } = useVenueTranslation();
   const { t: commonTranslation } = useTranslation('common');
+  const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
@@ -86,8 +86,6 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
       : null,
   ].filter((item) => Boolean(item));
 
-  const heroImage = imageUrl || heroPlaceholderImage;
-
   return (
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
@@ -102,15 +100,13 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
               size="default"
             />
           </div>
-          {heroImage && (
-            <div>
-              <BackgroundImage
-                className={styles.image}
-                id={`venue-background-${venue.id}`}
-                url={heroImage}
-              />
-            </div>
-          )}
+          <div>
+            <BackgroundImage
+              className={styles.image}
+              id={`venue-background-${venue.id}`}
+              url={imageUrl || fallbackImageUrls[0]}
+            />
+          </div>
           <div className={styles.leftPanel}>
             <div className={styles.leftPanelWrapper}>
               <div className={styles.leftPanelEmpty} />

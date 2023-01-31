@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import type { EventFields } from 'events-helsinki-components';
 import {
-  addParamsToQueryString,
   getDateRangeStr,
   useLocale,
   IconButton,
@@ -16,7 +15,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-
+import { PARAM_SEARCH_TYPE } from 'domain/search/combinedSearch/constants';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import EventKeywords from '../eventKeywords/EventKeywords';
@@ -38,15 +37,22 @@ const EventCard: React.FC<Props> = ({ event }) => {
     event,
     locale
   );
-
-  const queryString = addParamsToQueryString(router.asPath, {
-    returnPath: router.pathname,
-  });
-  const eventUrl = `${routerHelper.getLocalizedCmsItemUrl(
+  const eventUrl = routerHelper.getLocalizedCmsItemUrl(
     ROUTES.COURSES,
-    { eventId: event.id },
+    {
+      eventId: event.id,
+      returnPath: routerHelper.getLocalizedCmsItemUrl(
+        ROUTES.SEARCH,
+        {
+          ...router.query,
+          eventId: event.id,
+          [PARAM_SEARCH_TYPE]: event.typeId ?? '',
+        },
+        locale
+      ),
+    },
     locale
-  )}${queryString}`;
+  );
   const eventClosed = isEventClosed(event);
   const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 

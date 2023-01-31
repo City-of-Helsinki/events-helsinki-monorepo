@@ -108,11 +108,14 @@ WORKDIR /app
 COPY --chown=appuser:appuser  . .
 COPY --from=deps --chown=appuser:appuser /workspace-install ./
 
-# Optional: if the app depends on global /static shared assets like images, locales...
-
 RUN yarn install --immutable --inline-builds
 RUN yarn workspace ${PROJECT} share-static-hardlink
 RUN yarn workspace ${PROJECT} build
+
+# Hack to patch the bug in Next.js standalone builds with monorepos:
+# Replace the next.js node_modules with the pre-built standalone version
+RUN rm -rf node_modules/next
+ADD --chown=appuser:appuser ./scripts/next_standalone_modules.tar.gz ./apps/${PROJECT}/.next/standalone/node_modules/
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
@@ -162,10 +165,10 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM helsinkitest/node:16-slim  AS runner
+FROM gcr.io/distroless/nodejs16-debian11 AS runner
 
 # Use non-root user
-USER appuser
+USER nobody
 
 # Build ARGS
 ARG PROJECT
@@ -177,31 +180,30 @@ ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
 # Copy the configuration files to the apps/project root
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
+COPY --from=builder /app/apps/${PROJECT}/next.config.js \
     /app/apps/${PROJECT}/i18nRoutes.config.js \
     /app/apps/${PROJECT}/next-i18next.config.js \
     /app/apps/${PROJECT}/package.json \
     ./apps/${PROJECT}/
 
 # Copy common-i18n to share localization files after build
-COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n/src/locales \
+COPY --from=builder /app/packages/common-i18n/src/locales \
     ./packages/common-i18n/src/locales
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # copy only the necessary files for a production deployment including select files in node_modules.
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone ./apps/${PROJECT}/
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
+COPY --from=builder /app/apps/${PROJECT}/.next/standalone/apps/${PROJECT} ./apps/${PROJECT}/
+COPY --from=builder /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
+COPY --from=builder /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
 
-# The root level files
-COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
-COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
+# Copy the *modified* node_modules from the build stage
+COPY --from=builder /app/apps/${PROJECT}/.next/standalone/node_modules ./apps/${PROJECT}/node_modules
 
 # OpenShift write access to Next cache folder
-USER root
-RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages
-USER appuser
+#USER root
+#RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages
+#USER appuser
 
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV PORT ${APP_PORT:-3000}
@@ -209,7 +211,7 @@ ENV PORT ${APP_PORT:-3000}
 # Expose port
 EXPOSE $PORT
 
-# ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
-ENV PROD_START "node ./apps/${PROJECT}/server.js"
+WORKDIR /app/apps/${PROJECT}
 
-CMD ["sh", "-c", "${PROD_START}"]
+ENV PROD_START "node ./apps/${PROJECT}/server.js"
+CMD ["server.js"]

@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import {
-  addParamsToQueryString,
   getDateRangeStr,
   useLocale,
   IconButton,
@@ -39,14 +38,22 @@ const EventCard: React.FC<Props> = ({ event }) => {
     locale
   );
 
-  const queryString = addParamsToQueryString(router.asPath, {
-    returnPath: router.pathname,
-  });
-  const eventUrl = `${routerHelper.getLocalizedCmsItemUrl(
+  const eventUrl = routerHelper.getLocalizedCmsItemUrl(
     ROUTES.EVENTS,
-    { eventId: event.id },
+    {
+      eventId: event.id,
+      returnPath: routerHelper.getLocalizedCmsItemUrl(
+        ROUTES.SEARCH,
+        {
+          ...router.query,
+          eventId: event.id,
+        },
+        locale
+      ),
+    },
     locale
-  )}${queryString}`;
+  );
+
   const eventClosed = isEventClosed(event);
   const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 

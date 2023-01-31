@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import {
-  addParamsToQueryString,
   getDateRangeStr,
   buttonStyles,
   useLocale,
@@ -56,22 +55,22 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const audienceAge = getAudienceAgeText(t, audienceMinAge, audienceMaxAge);
 
   const eventClosed = isEventClosed(event);
-  const queryString = addParamsToQueryString(
-    router.asPath.split('?')[1] ?? '',
-    {
-      returnPath: `${routerHelper.getLocalizedCmsItemUrl(
-        ROUTES.SEARCH,
-        {},
-        locale
-      )}?eventId=${event.id}`,
-    }
-  );
 
-  const eventUrl = `${routerHelper.getLocalizedCmsItemUrl(
+  const eventUrl = routerHelper.getLocalizedCmsItemUrl(
     ROUTES.EVENTS,
-    { eventId: event.id },
+    {
+      eventId: event.id,
+      returnPath: routerHelper.getLocalizedCmsItemUrl(
+        ROUTES.SEARCH,
+        {
+          ...router.query,
+          eventId: event.id,
+        },
+        locale
+      ),
+    },
     locale
-  )}${queryString}`;
+  );
 
   const showBuyButton = !eventClosed && !!offerInfoUrl && !isEventFree(event);
 

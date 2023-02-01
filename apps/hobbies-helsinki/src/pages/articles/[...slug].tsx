@@ -32,6 +32,7 @@ import type {
 } from 'react-helsinki-headless-cms/apollo';
 import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
+import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
 import routerHelper from '../../domain/app/routerHelper';
 import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
@@ -106,46 +107,52 @@ type ResultProps =
       };
     };
 
-export async function getStaticProps(
-  context: GetStaticPropsContext
-): Promise<GetStaticPropsResult<ResultProps>> {
-  try {
-    const {
-      currentArticle: article,
-      breadcrumbs,
-      apolloClient,
-    } = await getProps(context);
+export async function getStaticProps(context: GetStaticPropsContext) {
+  return getHobbiesStaticProps(
+    context,
+    async (): Promise<GetStaticPropsResult<ResultProps>> => {
+      try {
+        const {
+          currentArticle: article,
+          breadcrumbs,
+          apolloClient,
+        } = await getProps(context);
 
-    if (!article) {
-      return {
-        notFound: true,
-        revalidate: true,
-      };
+        if (!article) {
+          return {
+            notFound: true,
+            revalidate: true,
+          };
+        }
+        const locale = routerHelper.getLocaleOrError(context.locale);
+
+        return {
+          props: {
+            initialApolloState: apolloClient.cache.extract(),
+            ...(await serverSideTranslationsWithCommon(locale, [
+              'cms',
+              'event',
+            ])),
+            article,
+            breadcrumbs,
+            collections: getCollections(article.modules ?? []),
+          },
+          revalidate: 60,
+        };
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Error while generating content page', e);
+        return {
+          props: {
+            error: {
+              statusCode: 400,
+            },
+          },
+          revalidate: 10,
+        };
+      }
     }
-    const locale = routerHelper.getLocaleOrError(context.locale);
-
-    return {
-      props: {
-        initialApolloState: apolloClient.cache.extract(),
-        ...(await serverSideTranslationsWithCommon(locale, ['cms', 'event'])),
-        article,
-        breadcrumbs,
-        collections: getCollections(article.modules ?? []),
-      },
-      revalidate: 60,
-    };
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error('Error while generating content page', e);
-    return {
-      props: {
-        error: {
-          statusCode: 400,
-        },
-      },
-      revalidate: 10,
-    };
-  }
+  );
 }
 
 const getProps = async (context: GetStaticPropsContext) => {

@@ -56,6 +56,7 @@ function SearchUtilities() {
           {activeTab === 'Venue' ? (
             <Button
               variant="secondary"
+              theme="black"
               onClick={switchShowMode}
               className={styles.buttonWrapper}
             >

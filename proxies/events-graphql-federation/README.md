@@ -59,9 +59,9 @@ In the `package.json` of the root in the monorepo, there is a script that can be
 
 ```javascript
   "scripts": {
-    "docker:graphql-router:hobbies:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://liikunta.hel.fi/api/graphql docker-compose -f docker-compose.router.yml up",
-    "docker:graphql-router:events:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://liikunta.hel.fi/api/graphql docker-compose -f docker-compose.router.yml up",
-    "docker:graphql-router:sports:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://liikunta.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://liikunta.hel.fi/api/graphql docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:hobbies:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:events:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:sports:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://liikunta.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://unified-search.test.kuva.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
   }
 ```
 
@@ -86,9 +86,9 @@ They are set in the in the `docker-compose.router.yml` like this, with the defau
 ```yaml
 environment:
   - FEDERATION_CMS_ROUTING_URL=${FEDERATION_CMS_ROUTING_URL}
-  - FEDERATION_EVENTS_ROUTING_URL=${FEDERATION_EVENTS_ROUTING_URL:-https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql}
+  - FEDERATION_EVENTS_ROUTING_URL=${FEDERATION_EVENTS_ROUTING_URL:-https://events-graphql-proxy.test.hel.ninja/proxy/graphql}
   - FEDERATION_UNIFIED_SEARCH_ROUTING_URL=${FEDERATION_UNIFIED_SEARCH_ROUTING_URL:-https://unified-search.test.kuva.hel.ninja/search}
-  - FEDERATION_VENUES_ROUTING_URL=${FEDERATION_VENUES_ROUTING_URL:-https://liikunta.hel.fi/api/graphql}
+  - FEDERATION_VENUES_ROUTING_URL=${FEDERATION_VENUES_ROUTING_URL:-https://venue-graphql-proxy.test.hel.ninja/proxy/graphql}
 ```
 
 **This can be used to easily change (the routing url of) the Headless CMS API! So, by providing `FEDERATION_CMS_ROUTING_URL` as a environment variable, the same supergraph schema can be used with a different source of data.**

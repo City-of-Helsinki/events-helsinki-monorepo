@@ -174,7 +174,7 @@ export const VenueSearchUtilities: React.FC<SearchUtilitiesProps> = ({
   const { t } = useCommonTranslation();
   return (
     <>
-      <Button variant="secondary" onClick={switchShowMode}>
+      <Button variant="secondary" theme="black" onClick={switchShowMode}>
         {t('common:mapSearch.showOnMap')}
       </Button>
     </>

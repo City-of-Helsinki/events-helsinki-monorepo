@@ -4963,9 +4963,9 @@ scalar join__FieldSet
 
 enum join__Graph {
   CMS @join__graph(name: "cms", url: "https://tapahtumat.hkih.stage.geniem.io/graphql")
-  EVENTS @join__graph(name: "events", url: "https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql")
+  EVENTS @join__graph(name: "events", url: "https://events-graphql-proxy.test.hel.ninja/proxy/graphql")
   UNIFIED_SEARCH @join__graph(name: "unified-search", url: "https://unified-search.test.kuva.hel.ninja/search")
-  VENUES @join__graph(name: "venues", url: "http://localhost:3000/api/graphql")
+  VENUES @join__graph(name: "venues", url: "https://venue-graphql-proxy.test.hel.ninja/proxy/graphql")
 }
 
 """Arbitrary JSON value"""

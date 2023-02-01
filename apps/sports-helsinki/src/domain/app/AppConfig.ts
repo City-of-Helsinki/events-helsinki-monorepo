@@ -23,10 +23,6 @@ class AppConfig {
     );
   }
 
-  static get nextApiGraphqlEndpoint() {
-    return `${this.origin}/api/graphql`;
-  }
-
   static get locales() {
     return i18n.locales;
   }

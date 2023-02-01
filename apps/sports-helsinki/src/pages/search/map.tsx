@@ -16,19 +16,17 @@ import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import routerHelper from '../../domain/app/routerHelper';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
-import type { Connection, SearchResult } from '../../domain/nextApi/types';
 import SearchHeader, {
   ShowMode,
 } from '../../domain/search/searchHeader/SearchHeader';
 import SimpleVenueMapSearch from '../../domain/search/venueSearch/VenueMapSearch';
 import useUnifiedSearchMapQuery from '../../domain/unifiedSearch/useUnifiedSearchMapQuery';
 import getVenueSourceId from '../../domain/venue/utils/getVenueSourceId';
+import type { Connection, SearchResult } from '../../types';
 
 // https://stackoverflow.com/a/64634759
 const MapView = dynamic(
-  // eslint-disable-next-line import/no-unresolved
   () => import('events-helsinki-components/components/mapView/MapView'),
-  // import('../../../../../packages/components/src/components/mapView/MapView'),
   {
     loading: () => <LoadingSpinner multicolor />,
     ssr: false,

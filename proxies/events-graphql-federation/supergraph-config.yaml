@@ -10,7 +10,7 @@ subgraphs:
     schema:
       file: ./subgraphs/cms/cms.graphql
   events:
-    routing_url: https://tapahtumat-proxy.test.kuva.hel.ninja/proxy/graphql
+    routing_url: https://events-graphql-proxy.test.hel.ninja/proxy/graphql
     schema:
       file: ./subgraphs/events/events.graphql
   unified-search:
@@ -18,6 +18,6 @@ subgraphs:
     schema:
       file: ./subgraphs/unified-search/unified-search.graphql
   venues:
-    routing_url: http://localhost:3000/api/graphql
+    routing_url: https://venue-graphql-proxy.test.hel.ninja/proxy/graphql
     schema:
       file: ./subgraphs/venues/venues.graphql

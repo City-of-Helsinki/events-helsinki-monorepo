@@ -31,6 +31,7 @@ import type {
 } from 'react-helsinki-headless-cms/apollo';
 import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
+import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
 import routerHelper from '../../domain/app/routerHelper';
 import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
@@ -99,43 +100,46 @@ type ResultProps =
       };
     };
 
-export async function getStaticProps(
-  context: GetStaticPropsContext
-): Promise<GetStaticPropsResult<ResultProps>> {
-  try {
-    const {
-      currentPage: page,
-      breadcrumbs,
-      apolloClient,
-    } = await getProps(context);
-    if (!page) {
-      return {
-        notFound: true,
-        revalidate: true,
-      };
-    }
-    const locale = routerHelper.getLocaleOrError(context.locale);
+export async function getStaticProps(context: GetStaticPropsContext) {
+  return getEventsStaticProps(
+    context,
+    async (): Promise<GetStaticPropsResult<ResultProps>> => {
+      try {
+        const {
+          currentPage: page,
+          breadcrumbs,
+          apolloClient,
+        } = await getProps(context);
+        if (!page) {
+          return {
+            notFound: true,
+            revalidate: true,
+          };
+        }
+        const locale = routerHelper.getLocaleOrError(context.locale);
 
-    return {
-      props: {
-        initialApolloState: apolloClient.cache.extract(),
-        ...(await serverSideTranslationsWithCommon(locale, ['cms'])),
-        page,
-        breadcrumbs,
-        collections: getCollections(page.modules ?? []),
-      },
-      revalidate: 60,
-    };
-  } catch (e) {
-    return {
-      props: {
-        error: {
-          statusCode: 400,
-        },
-      },
-      revalidate: 10,
-    };
-  }
+        return {
+          props: {
+            initialApolloState: apolloClient.cache.extract(),
+            ...(await serverSideTranslationsWithCommon(locale, ['cms'])),
+            page,
+            breadcrumbs,
+            collections: getCollections(page.modules ?? []),
+          },
+          revalidate: 60,
+        };
+      } catch (e) {
+        return {
+          props: {
+            error: {
+              statusCode: 400,
+            },
+          },
+          revalidate: 10,
+        };
+      }
+    }
+  );
 }
 
 const getProps = async (context: GetStaticPropsContext) => {

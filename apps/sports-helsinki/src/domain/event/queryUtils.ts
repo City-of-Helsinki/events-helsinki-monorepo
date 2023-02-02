@@ -42,6 +42,8 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         superEventType: ['umbrella', 'none'],
         eventType: event.typeId ? [event.typeId] : undefined,
       }),
+      // Set to undefined, because keywordOrSet1 contains SPORT_COURSES_KEYWORDS, which shouldn't
+      // be included in similar events query
       keywordOrSet1: undefined,
     };
   }, [event]);

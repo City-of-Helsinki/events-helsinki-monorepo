@@ -35,5 +35,8 @@
   },
   "upcomingEvents": {
     "title": "Events at the venue"
+  },
+  "similarVenues": {
+    "title": "Other similar places"
   }
 }

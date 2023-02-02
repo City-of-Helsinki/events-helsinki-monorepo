@@ -35,5 +35,8 @@
   },
   "upcomingEvents": {
     "title": "Paikan tapahtumia"
+  },
+  "similarVenues": {
+    "title": "Muita samankaltaisia paikkoja"
   }
 }

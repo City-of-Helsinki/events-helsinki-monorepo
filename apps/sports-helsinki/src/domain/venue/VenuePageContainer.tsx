@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import type { Venue } from 'events-helsinki-components';
 import {
-  isClient,
   LoadingSpinner,
   useLocale,
   addParamsToQueryString,
   MAIN_CONTENT_ID,
 } from 'events-helsinki-components';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -15,11 +15,24 @@ import { ROUTES } from '../../constants';
 import routerHelper from '../../domain/app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import { SPORT_COURSES_KEYWORDS } from '../search/eventSearch/constants';
-import VenueUpcomingEvents from './upcomingEvents/UpcomingEventsSection';
 import getVenueSourceId from './utils/getVenueSourceId';
 import VenueContent from './venueContent/VenueContent';
 import VenueHero from './venueHero/VenueHero';
 import styles from './venuePage.module.scss';
+
+const SimilarVenues = dynamic(
+  () => import('./similarVenues/SimilarVenuesSection'),
+  {
+    ssr: false,
+  }
+);
+
+const VenueUpcomingEvents = dynamic(
+  () => import('./upcomingEvents/UpcomingEventsSection'),
+  {
+    ssr: false,
+  }
+);
 
 export interface VenuePageContainerProps {
   loading: boolean;
@@ -32,7 +45,7 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
   venue,
   loading,
   showUpcomingEvents = true,
-  showSimilarVenues = false,
+  showSimilarVenues = true,
 }) => {
   const { id: venueId } = venue;
   const { t } = useTranslation('event');
@@ -46,8 +59,12 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
     )}`,
   });
   const [hasUpcomingEvents, setHasUpcomingEvents] = React.useState(false);
+  const [hasSimilarVenues, setHasSimilarVenues] = React.useState(false);
   const handleSimilarEventsLoaded = (eventsCount: number) => {
     setHasUpcomingEvents(eventsCount > 0);
+  };
+  const handleSimilarVenuesLoaded = (venuesCount: number) => {
+    setHasSimilarVenues(venuesCount > 0);
   };
   // NOTE: for some reason, the venue.id might be something else than TPREK,
   // when the venue is given from the Venue-graphql-proxy,
@@ -70,10 +87,11 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
                 className={classNames({
                   [styles.spaceOnBottom]:
                     (!showUpcomingEvents && !showSimilarVenues) ||
-                    !hasUpcomingEvents,
+                    (!hasUpcomingEvents && !hasSimilarVenues),
                 })}
               />
-              {isClient && showUpcomingEvents && (
+              {/* Hide upcoming events on SSR to make initial load faster */}
+              {showUpcomingEvents && (
                 <VenueUpcomingEvents
                   placeId={placeId}
                   keywords={SPORT_COURSES_KEYWORDS}
@@ -81,13 +99,14 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
                   onEventsLoaded={handleSimilarEventsLoaded}
                 />
               )}
-              {/* Hide similar event on SSR to make initial load faster */}
-              {/* {isClient && showSimilarVenues && (
+              {/* Hide similar venues on SSR to make initial load faster */}
+              {showSimilarVenues && (
                 <SimilarVenues
-                  event={event}
-                  onEventsLoaded={handleSimilarEventsLoaded}
+                  venue={venue}
+                  onVenuesLoaded={handleSimilarVenuesLoaded}
+                  korosTop
                 />
-              )} */}
+              )}
             </>
           ) : (
             <ErrorHero text={t('notFound.text')} title={t('notFound.title')}>

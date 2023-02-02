@@ -11,7 +11,7 @@ export type VenueDetailsProps = {
 };
 
 const VenueDetails: React.FC<VenueDetailsProps> = ({ location }) => {
-  const [first, second, ...restKeywords] = location.ontologyWords;
+  const [first, second, ...restKeywords] = location.ontologyWords ?? [];
   return (
     <div>
       {location.streetAddress && (

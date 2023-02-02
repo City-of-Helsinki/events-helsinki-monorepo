@@ -2,16 +2,19 @@ import {
   SIMILAR_EVENTS_AMOUNT,
   getEventIdFromUrl,
   useEventListQuery,
+  useVenuesByIdsLazyQuery,
 } from 'events-helsinki-components';
 import type {
   EventListQuery,
   EventListQueryVariables,
   EventFields,
+  Venue,
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';
-
+import useUnifiedSearchListQuery from '../../domain/unifiedSearch/useUnifiedSearchListQuery';
+import getVenueSourceId from '../../domain/venue/utils/getVenueSourceId';
 import {
   EVENT_SEARCH_FILTERS,
   EVENT_SORT_OPTIONS,
@@ -234,4 +237,58 @@ export const useLocationUpcomingEventsQuery = ({
     pageSize,
   };
   return useEventListQuery({ variables, ssr: false });
+};
+
+export const useSimilarVenuesQuery = (venue: Venue) => {
+  const ontologyWordIds = venue.ontologyWords.reduce(
+    (ontologies: string[], ontology) => {
+      if (ontology?.id) {
+        ontologies.push(ontology.id.toString());
+      }
+      return ontologies;
+    },
+    []
+  );
+
+  // Search for venue ids from UnifiedSearch with the ontologies.
+  const { data: venuesUnifiedSearchData, loading: unifiedSearchLoading } =
+    useUnifiedSearchListQuery({
+      variables: {
+        ontologyWordIds,
+        first: 4,
+        orderByName: undefined,
+      },
+    });
+
+  // Search for venues from venues-proxy (e.g. TPREK as a datasource) with the venue ids.
+  const [getVenuesByIds, queryProps] = useVenuesByIdsLazyQuery({
+    ssr: false,
+  });
+
+  // Trigger the venues by ids search when the ids are fetched.
+  React.useEffect(() => {
+    if (!unifiedSearchLoading) {
+      const venueIds = venuesUnifiedSearchData?.unifiedSearch?.edges.reduce(
+        (result: string[], edge) => {
+          if (edge.node?.venue?.meta?.id) {
+            result.push(edge.node.venue.meta.id);
+          }
+          return result;
+        },
+        []
+      );
+      if (venueIds?.length) {
+        const venueSourceIds = venueIds.map((venueId) =>
+          getVenueSourceId(venueId)
+        );
+        getVenuesByIds({ variables: { ids: venueSourceIds } });
+      }
+    }
+  }, [
+    getVenuesByIds,
+    unifiedSearchLoading,
+    venuesUnifiedSearchData?.unifiedSearch?.edges,
+  ]);
+
+  return { ...queryProps, loading: unifiedSearchLoading || queryProps.loading };
 };

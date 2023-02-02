@@ -35,5 +35,8 @@
   },
   "upcomingEvents": {
     "title": "Platsens händelser"
+  },
+  "similarVenues": {
+    "title": "Andra liknande platser"
   }
 }

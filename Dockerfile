@@ -201,7 +201,7 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/$
 
 # OpenShift write access to Next cache folder
 USER root
-# RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages
+RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages
 USER appuser
 
 ENV NEXT_TELEMETRY_DISABLED 1

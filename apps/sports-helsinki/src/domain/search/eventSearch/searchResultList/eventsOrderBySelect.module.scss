@@ -1,4 +1,10 @@
+@import 'src/styles/breakpoints';
+
 .eventsOrderBySelect {
   min-width: 15rem;
   margin-bottom: var(--spacing-l);
+  @include respond_below(s) {
+    margin: 0;
+    width: 100%;
+  }
 }

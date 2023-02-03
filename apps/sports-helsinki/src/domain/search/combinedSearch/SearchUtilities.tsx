@@ -6,11 +6,12 @@ import {
 } from 'events-helsinki-components';
 import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
 import styles from './combinedSearchPage.module.scss';
 import { useSearchTabResultCounts } from './hooks';
+import type { TabDataType } from './searchTabs/SearchTabs';
 import SearchTabs from './searchTabs/SearchTabs';
 import { useTabsContext } from './searchTabs/tabsContext';
 
@@ -28,30 +29,36 @@ function SearchUtilities() {
   const { activeTab } = useTabsContext();
   useSearchTabResultCounts();
 
+  const tabsData = useMemo(
+    (): TabDataType[] => [
+      {
+        id: 'Venue',
+        label: tSearch('search:search.searchType.venue'),
+      },
+      {
+        id: EventTypeId.General,
+        label: tSearch('search:search.searchType.generalEventType'),
+      },
+      {
+        id: EventTypeId.Course,
+        label: tSearch('search:search.searchType.courseEventType'),
+      },
+    ],
+    [tSearch]
+  );
+
   return (
     <PageSection className={styles.searchUtilities}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.flexEnd}>
           <SearchTabs.TabList>
-            <SearchTabs.Tab id="Venue">
-              <SearchTabs.CountLabel
-                id="Venue"
-                label={tSearch('search:search.searchType.venue')}
-              />
-            </SearchTabs.Tab>
-            <SearchTabs.Tab id={EventTypeId.General}>
-              <SearchTabs.CountLabel
-                id={EventTypeId.General}
-                label={tSearch('search:search.searchType.generalEventType')}
-              />
-            </SearchTabs.Tab>
-            <SearchTabs.Tab id={EventTypeId.Course}>
-              <SearchTabs.CountLabel
-                id={EventTypeId.Course}
-                label={tSearch('search:search.searchType.courseEventType')}
-              />
-            </SearchTabs.Tab>
+            {tabsData.map((tab) => (
+              <SearchTabs.Tab key={tab.id} id={tab.id}>
+                <SearchTabs.CountLabel id={tab.id} label={tab.label} />
+              </SearchTabs.Tab>
+            ))}
           </SearchTabs.TabList>
+          <SearchTabs.SearchTabListMobile data={tabsData} />
 
           {activeTab === 'Venue' ? (
             <Button

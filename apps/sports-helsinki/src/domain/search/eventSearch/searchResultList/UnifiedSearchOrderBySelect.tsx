@@ -8,6 +8,7 @@ import {
   useGeolocation,
 } from 'events-helsinki-components';
 import type { GeolocationContextType } from 'events-helsinki-components';
+import type { SelectCustomTheme } from 'hds-react';
 import React from 'react';
 import useHandleUnifiedSearchOrderChange from '../../../../hooks/useHandleUnifiedSearchOrderChange';
 import styles from './unifiedSearchOrderBySelect.module.scss';
@@ -43,6 +44,13 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
 
   return (
     <Select
+      theme={
+        {
+          '--menu-item-background': 'var(--color-input-dark)',
+          '--menu-item-background-hover': 'var(--color-input-dark)',
+          '--menu-item-background-selected-hover': 'var(--color-input-dark)',
+        } as SelectCustomTheme
+      }
       label={t('search:orderBy.label')}
       value={selectedOrderByOption ?? defaultOption}
       onChange={handleUnifiedSearchOrderChange}

@@ -1,8 +1,8 @@
 import type { AppLanguage } from 'events-helsinki-components';
-import { DATE_TYPES } from 'events-helsinki-components';
+import { DATE_TYPES, EVENT_SORT_OPTIONS } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 
-import { EVENT_DEFAULT_SEARCH_FILTERS, EVENT_SORT_OPTIONS } from '../constants';
+import { EVENT_DEFAULT_SEARCH_FILTERS } from '../constants';
 import { getEventSearchVariables, getNextPage, getSearchQuery } from '../utils';
 
 afterAll(() => {

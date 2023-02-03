@@ -1,15 +1,18 @@
 import type { FetchResult, GraphQLRequest } from '@apollo/client';
 import type { MockedResponse } from '@apollo/client/testing';
 
-import { EventListDocument, EventTypeId } from 'events-helsinki-components';
 import type {
   EventListQueryVariables,
   EventListResponse,
   EventType,
   QueryEventListArgs,
 } from 'events-helsinki-components';
+import {
+  EventListDocument,
+  EventTypeId,
+  EVENT_SORT_OPTIONS,
+} from 'events-helsinki-components';
 import AppConfig from '../../../src/domain/app/AppConfig';
-import { EVENT_SORT_OPTIONS } from '../../../src/domain/search/eventSearch/constants';
 
 export const baseVariables = {
   end: '',

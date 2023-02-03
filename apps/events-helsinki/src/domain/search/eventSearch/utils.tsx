@@ -11,6 +11,7 @@ import type {
   AppLanguage,
   Meta,
   QueryEventListArgs,
+  EVENT_SORT_OPTIONS,
 } from 'events-helsinki-components';
 import {
   buildQueryFromObject,
@@ -23,7 +24,7 @@ import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
 
 import AppConfig from '../../app/AppConfig';
-import type { EVENT_CATEGORIES, EVENT_SORT_OPTIONS } from './constants';
+import type { EVENT_CATEGORIES } from './constants';
 import {
   EVENT_SEARCH_FILTERS,
   eventCategories,

@@ -1,6 +1,7 @@
 import { clear } from 'console';
 
 import type { EventFieldsFragment } from 'events-helsinki-components';
+import { EVENT_SORT_OPTIONS } from 'events-helsinki-components';
 import { advanceTo } from 'jest-date-mock';
 import * as React from 'react';
 
@@ -14,7 +15,6 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
-import { EVENT_SORT_OPTIONS } from '../../../../domain/search/eventSearch/constants';
 import SimilarEvents from '../SimilarEvents';
 
 const id = '1';

@@ -19,10 +19,11 @@ import type {
   QueryEventListArgs,
   EventFields,
   EventTypeId,
+  EVENT_SORT_OPTIONS,
 } from 'events-helsinki-components';
 import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
-import type { EVENT_SORT_OPTIONS, SPORTS_CATEGORIES } from './constants';
+import type { SPORTS_CATEGORIES } from './constants';
 import {
   SPORT_COURSES_KEYWORDS,
   CATEGORY_CATALOG,

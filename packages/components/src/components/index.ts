@@ -7,6 +7,7 @@ export { default as DateSelectorMenu } from './dateSelector/DateSelectorMenu';
 export * from './domain';
 export { default as DropdownMenu } from './dropdownMenu/DropdownMenu';
 export { default as EventsCookieConsent } from './eventsCookieConsent/EventsCookieConsent';
+export { default as EventsOrderBySelect } from './orderBySelect/EventsOrderBySelect';
 export * from './filterButton';
 export { default as Hero } from './hero/Hero';
 export { default as HeroImage } from './hero/HeroImage';

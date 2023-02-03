@@ -1,6 +1,6 @@
-import type { Option } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
+import type { Option } from '../types/types';
 
 const useSetSortQueryParamToOptionValue = () => {
   const router = useRouter();

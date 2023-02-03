@@ -1,22 +1,20 @@
-import {
-  SIMILAR_EVENTS_AMOUNT,
-  getEventIdFromUrl,
-  useEventListQuery,
-} from 'events-helsinki-components';
 import type {
   EventListQuery,
   EventListQueryVariables,
   EventFields,
+} from 'events-helsinki-components';
+import {
+  SIMILAR_EVENTS_AMOUNT,
+  getEventIdFromUrl,
+  useEventListQuery,
+  EVENT_SORT_OPTIONS,
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';
 
 import AppConfig from '../app/AppConfig';
-import {
-  EVENT_SEARCH_FILTERS,
-  EVENT_SORT_OPTIONS,
-} from '../search/eventSearch/constants';
+import { EVENT_SEARCH_FILTERS } from '../search/eventSearch/constants';
 import {
   getEventCategories,
   getEventSearchVariables,

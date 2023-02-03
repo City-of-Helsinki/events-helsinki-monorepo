@@ -19,3 +19,4 @@ export { default as useVenueTranslation } from './useVenueTranslation';
 export { default as useAppEventsTranslation } from './useAppEventsTranslation';
 export { default as useAppHobbiesTranslation } from './useAppHobbiesTranslation';
 export { default as useAppSportsTranslation } from './useAppSportsTranslation';
+export { default as useCommonCmsConfig } from './useCommonCmsConfig';

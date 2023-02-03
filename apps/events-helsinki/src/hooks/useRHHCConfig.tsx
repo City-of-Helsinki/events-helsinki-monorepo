@@ -3,8 +3,8 @@ import {
   getLinkArrowLabel,
   useLocale,
   useCommonTranslation,
-  useCmsTranslation,
   MAIN_CONTENT_ID,
+  useCommonCmsConfig,
 } from 'events-helsinki-components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -35,9 +35,8 @@ const LINKEDEVENTS_API_EVENT_ENDPOINT = new URL(
 export default function useRHHCConfig() {
   const apolloClient = useApolloClient();
   const { t: commonTranslation } = useCommonTranslation();
-  const { t: cmsTranslation } = useCmsTranslation();
   const locale = useLocale();
-
+  const commonConfig = useCommonCmsConfig();
   return React.useMemo(() => {
     const internalHrefOrigins = [
       APP_DOMAIN,
@@ -50,6 +49,7 @@ export default function useRHHCConfig() {
     };
     return {
       ...rhhcDefaultConfig,
+      ...commonConfig,
       mainContentId: MAIN_CONTENT_ID,
       components: {
         ...rhhcDefaultConfig.components,
@@ -71,55 +71,11 @@ export default function useRHHCConfig() {
           <VenueDetails {...(props as VenueDetailsProps)} />
         ),
       },
-      fallbackImageUrls: [
-        '/shared-assets/images/event_placeholder_A.jpg',
-        '/shared-assets/images/event_placeholder_B.jpg',
-        '/shared-assets/images/event_placeholder_C.jpg',
-        '/shared-assets/images/event_placeholder_D.jpg',
-      ],
       siteName: commonTranslation('appEvents:appName'),
       currentLanguageCode: locale.toUpperCase(),
       apolloClient,
       eventsApolloClient: apolloClient,
       venuesApolloClient: apolloClient,
-      copy: {
-        next: commonTranslation('common:next'),
-        previous: commonTranslation('common:previous'),
-        breadcrumbNavigationLabel: commonTranslation(
-          'common:breadcrumb.breadcrumbNavigationLabel'
-        ),
-        breadcrumbListLabel: commonTranslation(
-          'common:breadcrumb.breadcrumbListLabel'
-        ),
-        menuToggleAriaLabel: commonTranslation(
-          'common:menu.menuToggleAriaLabel'
-        ),
-        skipToContentLabel: commonTranslation('common:linkSkipToContent'),
-        openInExternalDomainAriaLabel: commonTranslation(
-          'common:srOnly.opensInAnExternalSite'
-        ),
-        openInNewTabAriaLabel: commonTranslation(
-          'common:srOnly.opensInANewTab'
-        ),
-        closeButtonLabelText: commonTranslation('common:button.close'),
-        loadMoreButtonLabelText: commonTranslation('common:button.loadMore'),
-        showAllText: commonTranslation('common:button.showAll'),
-        archiveSearch: {
-          title: cmsTranslation('cms:archiveSearch.title'),
-          searchTextPlaceholder: cmsTranslation(
-            'cms:archiveSearch.searchTextPlaceholder'
-          ),
-          searchButtonLabelText: cmsTranslation(
-            'cms:archiveSearch.searchButtonLabelText'
-          ),
-          loadMoreButtonLabelText: cmsTranslation(
-            'cms:archiveSearch.loadMoreButtonLabelText'
-          ),
-          noResultsTitle: cmsTranslation('cms:archiveSearch.noResultsTitle'),
-          noResultsText: cmsTranslation('cms:archiveSearch.noResultsText'),
-          clearAll: cmsTranslation('cms:archiveSearch.buttonClearFilters'),
-        },
-      },
       utils: {
         ...rhhcDefaultConfig.utils,
         getEventCardProps: {
@@ -144,13 +100,7 @@ export default function useRHHCConfig() {
         },
         getIsHrefExternal,
       },
-      meta: {
-        appleTouchIconUrl: '/shared-assets/images/apple-touch-icon.png',
-        favIconUrl: '/shared-assets/images/favicon-32x32.ico',
-        favIconSvgUrl: '/shared-assets/images/favicon.svg',
-        manifestUrl: '/shared-assets/images/manifest.webmanifest',
-      },
       internalHrefOrigins,
     } as unknown as Config;
-  }, [commonTranslation, locale, apolloClient, cmsTranslation]);
+  }, [commonConfig, commonTranslation, locale, apolloClient]);
 }

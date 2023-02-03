@@ -30,6 +30,7 @@ import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
+import AppConfig from '../../app/AppConfig';
 import { PARAM_SEARCH_TYPE } from '../../search/combinedSearch/constants';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
@@ -194,13 +195,15 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                   size="l"
                   aria-hidden="true"
                 />
-                <EventEnrolmentStatus
-                  event={event}
-                  className={classNames(styles.linkArrowLabel, {
-                    [styles.alert]:
-                      eventEnrolmentStatus === EnrolmentStatusLabel.full,
-                  })}
-                />
+                {AppConfig.showEnrolmentStatusInCardDetails && (
+                  <EventEnrolmentStatus
+                    event={event}
+                    className={classNames(styles.linkArrowLabel, {
+                      [styles.alert]:
+                        eventEnrolmentStatus === EnrolmentStatusLabel.full,
+                    })}
+                  />
+                )}
               </div>
             )}
           </div>

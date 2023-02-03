@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import type { EventFieldsFragment } from 'events-helsinki-components';
 import {
   getLinkArrowLabel,
   useLocale,
   useCommonTranslation,
+  useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
 } from 'events-helsinki-components';
-
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
@@ -37,6 +38,7 @@ const LINKEDEVENTS_API_EVENT_ENDPOINT = new URL(
 export default function useRHHCConfig() {
   const apolloClient = useApolloClient();
   const { t: commonTranslation } = useCommonTranslation();
+  const { t: eventTranslation } = useEventTranslation();
   const locale = useLocale();
   const commonConfig = useCommonCmsConfig();
 
@@ -81,10 +83,17 @@ export default function useRHHCConfig() {
       venuesApolloClient: apolloClient,
       utils: {
         ...rhhcDefaultConfig.utils,
-        getEventCardProps: {
-          ...rhhcDefaultConfig.utils.getEventCardProps,
-          getLinkArrowLabel,
-        },
+        getEventCardProps: AppConfig.showEnrolmentStatusInCardDetails
+          ? (item: EventFieldsFragment, locale: string) => ({
+              ...rhhcDefaultConfig.utils.getEventCardProps(item, locale),
+              linkArrowLabel: getLinkArrowLabel({
+                item,
+                locale,
+                eventTranslation,
+                commonTranslation,
+              }),
+            })
+          : rhhcDefaultConfig.utils.getEventCardProps,
         getRoutedInternalHref: (
           link: string,
           _type: ModuleItemTypeEnum
@@ -105,5 +114,5 @@ export default function useRHHCConfig() {
       },
       internalHrefOrigins,
     } as unknown as Config;
-  }, [commonConfig, commonTranslation, locale, apolloClient]);
+  }, [commonConfig, commonTranslation, eventTranslation, locale, apolloClient]);
 }

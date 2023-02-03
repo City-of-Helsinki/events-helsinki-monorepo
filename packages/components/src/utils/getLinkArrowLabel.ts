@@ -1,13 +1,21 @@
+import type { TFunction } from 'next-i18next';
 import { getEnrolmentStatus } from '../components';
-import { useCommonTranslation, useEventTranslation } from '../hooks';
 import type { EventFields } from '../types';
 import getDateRangeStr from './getDateRangeStr';
 
-export default function getLinkArrowLabel(item: EventFields, locale: string) {
-  const { t: commonTranslation } = useCommonTranslation();
-  const { t: eventTranslation } = useEventTranslation();
+export default function getLinkArrowLabel({
+  item,
+  locale,
+  eventTranslation,
+  commonTranslation,
+}: {
+  item: EventFields;
+  locale: string;
+  eventTranslation: TFunction;
+  commonTranslation: TFunction;
+}) {
   const status = getEnrolmentStatus(item);
-  const linkArrowLabel = eventTranslation(`event:enrolmentStatus.${status}`, {
+  return eventTranslation(`event:enrolmentStatus.${status}`, {
     date: item.enrolmentStartTime
       ? getDateRangeStr({
           start: item.enrolmentStartTime,
@@ -18,7 +26,4 @@ export default function getLinkArrowLabel(item: EventFields, locale: string) {
         })
       : '',
   });
-  return {
-    linkArrowLabel,
-  };
 }

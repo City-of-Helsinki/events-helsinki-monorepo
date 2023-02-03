@@ -29,6 +29,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
+import AppConfig from '../../app/AppConfig';
 import routerHelper from '../../app/routerHelper';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
@@ -192,13 +193,15 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                   size="l"
                   aria-hidden="true"
                 />
-                <EventEnrolmentStatus
-                  event={event}
-                  className={classNames(styles.linkArrowLabel, {
-                    [styles.alert]:
-                      eventEnrolmentStatus === EnrolmentStatusLabel.full,
-                  })}
-                />
+                {AppConfig.showEnrolmentStatusInCardDetails && (
+                  <EventEnrolmentStatus
+                    event={event}
+                    className={classNames(styles.linkArrowLabel, {
+                      [styles.alert]:
+                        eventEnrolmentStatus === EnrolmentStatusLabel.full,
+                    })}
+                  />
+                )}
               </div>
             )}
           </div>

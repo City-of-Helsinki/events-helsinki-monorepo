@@ -102,6 +102,18 @@ class AppConfig {
     );
   }
 
+  static get showSimilarVenues() {
+    return Boolean(
+      parseEnvValue(process.env.NEXT_PUBLIC_SHOW_SIMILAR_VENUES, true)
+    );
+  }
+
+  static get showVenuesUpcomingEvents() {
+    return Boolean(
+      parseEnvValue(process.env.NEXT_PUBLIC_SHOW_VENUES_UPCOMING_EVENTS, true)
+    );
+  }
+
   static get URLRewriteMapping() {
     return {
       [AppConfig.linkedEventsEventEndpoint]: ROUTES.COURSES.replace(

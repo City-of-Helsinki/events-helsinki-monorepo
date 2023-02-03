@@ -32,15 +32,20 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         .join(), // make a string
     };
 
-    return getEventSearchVariables({
-      include: ['keywords', 'location'],
-      // eslint-disable-next-line max-len
-      pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
-      params: new URLSearchParams(searchParams),
-      sortOrder: EVENT_SORT_OPTIONS.END_TIME,
-      superEventType: ['umbrella', 'none'],
-      eventType: event.typeId ? [event.typeId] : undefined,
-    });
+    return {
+      ...getEventSearchVariables({
+        include: ['keywords', 'location'],
+        // eslint-disable-next-line max-len
+        pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
+        params: new URLSearchParams(searchParams),
+        sortOrder: EVENT_SORT_OPTIONS.END_TIME,
+        superEventType: ['umbrella', 'none'],
+        eventType: event.typeId ? [event.typeId] : undefined,
+      }),
+      // Set to undefined, because keywordOrSet1 contains SPORT_COURSES_KEYWORDS, which shouldn't
+      // be included in similar events query
+      keywordOrSet1: undefined,
+    };
   }, [event]);
 };
 

@@ -23,9 +23,9 @@ const startTime = '2020-10-05T07:00:00.000000Z';
 const endTime = '2020-10-05T10:00:00.000000Z';
 const audience = ['Aikuiset', 'Lapset'];
 const keywords = [
-  { name: 'Avouinti', id: 'keyword1' },
-  { name: 'Eläimet', id: 'keyword2' },
-  { name: 'Grillaus', id: 'keyword3' },
+  { name: 'Avouinti', id: 'yso:p916' },
+  { name: 'Eläimet', id: 'kulke:710' },
+  { name: 'Grillaus', id: 'yso:p17018' },
 ];
 
 const expectedSimilarEvents = fakeEvents(3);
@@ -47,7 +47,7 @@ const event = fakeEvent({
 const similarEventQueryVariables = {
   pageSize: 100,
   allOngoing: true,
-  keywordOrSet2: [''],
+  keywordOrSet2: keywords.map((k) => k.id),
   language: undefined,
 };
 

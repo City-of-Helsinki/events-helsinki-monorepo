@@ -24,6 +24,7 @@ import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
 import type { EVENT_SORT_OPTIONS, SPORTS_CATEGORIES } from './constants';
 import {
+  SPORT_COURSES_KEYWORDS,
   CATEGORY_CATALOG,
   EVENT_SEARCH_FILTERS,
   MAPPED_PLACES,
@@ -193,6 +194,7 @@ export const getEventSearchVariables = ({
     isFree: isFree || undefined,
     end,
     include,
+    keywordOrSet1: SPORT_COURSES_KEYWORDS, // Limit search to sport keywords only
     keywordOrSet2: [...(keyword ?? [])],
     keywordAnd,
     keywordNot,

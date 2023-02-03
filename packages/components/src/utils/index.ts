@@ -22,3 +22,4 @@ export * from './typescript.utils';
 export * from './headless-cms';
 export { default as stringifyUrlObject } from './stringifyUrlObject';
 export { default as getTranslation } from './getTranslation';
+export { default as getLinkArrowLabel } from './getLinkArrowLabel';

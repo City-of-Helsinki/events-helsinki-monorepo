@@ -123,6 +123,6 @@ WORKDIR /app/.yarn/cache/
 COPY --from=build_cache --chown=appuser:appuser /app/.yarn/cache/ ./
 
 WORKDIR /app
-COPY --from=build_cache --chown=appuser:appuser /app/node_modules/ ./node_modules
-COPY --from=build_cache --chown=appuser:appuser /app/apps/${PROJECT}/node_modules/ ./apps/${PROJECT}/node_modules
+#COPY --from=build_cache --chown=appuser:appuser /app/node_modules/ ./node_modules
+#COPY --from=build_cache --chown=appuser:appuser /app/apps/${PROJECT}/node_modules/ ./apps/${PROJECT}/node_modules
 COPY --from=build_cache --chown=appuser:appuser /app/apps/${PROJECT}/.next/cache ./apps/${PROJECT}/.next/cache

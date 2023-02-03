@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useSearchTranslation } from 'events-helsinki-components';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 
@@ -9,23 +9,32 @@ interface Props {
   loading: boolean;
   eventsCount: number;
   eventList: React.ReactElement;
+  orderBySelectComponent?: React.ReactElement;
 }
 
 const SearchResultsContainer: React.FC<Props> = ({
   loading,
   eventsCount,
   eventList,
+  orderBySelectComponent,
 }) => {
-  const { t } = useTranslation('search');
+  const { t } = useSearchTranslation();
 
   return (
     <PageSection className={styles.searchResultListContainer}>
       <ContentContainer>
-        <h2 className={styles.count}>
-          {t('textFoundEvents', {
-            count: eventsCount,
-          })}
-        </h2>
+        {!loading && (
+          <div className={styles.row}>
+            <div className={styles.rowGroup}>
+              <h2 className={styles.count}>
+                {t('search:textFoundEvents', {
+                  count: eventsCount,
+                })}
+              </h2>
+              {orderBySelectComponent !== undefined && orderBySelectComponent}
+            </div>
+          </div>
+        )}
         {!!eventsCount && eventList}
         {!loading && <ResultsInfoContainer resultsCount={eventsCount} />}
       </ContentContainer>

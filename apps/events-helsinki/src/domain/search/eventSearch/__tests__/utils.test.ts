@@ -1,5 +1,8 @@
 import type { AppLanguage } from 'events-helsinki-components';
-import { DATE_TYPES, EVENT_SORT_OPTIONS } from 'events-helsinki-components';
+import {
+  DATE_TYPES,
+  DEFAULT_EVENT_SORT_OPTION,
+} from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 
 import {
@@ -42,7 +45,7 @@ describe('getEventSearchVariables function', () => {
     include: [],
     language: 'fi' as AppLanguage,
     pageSize: 10,
-    sortOrder: EVENT_SORT_OPTIONS.LAST_MODIFIED_TIME_DESC,
+    sortOrder: DEFAULT_EVENT_SORT_OPTION,
     superEventType: [],
   };
   it.each(Object.entries(MAPPED_EVENT_CATEGORIES))(

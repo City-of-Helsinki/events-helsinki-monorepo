@@ -2,6 +2,7 @@ import type { EventFieldsFragment } from 'events-helsinki-components';
 import {
   EventDetailsDocument,
   EventListDocument,
+  DEFAULT_EVENT_SORT_OPTION,
 } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
@@ -69,7 +70,7 @@ const otherEventsRequest = {
   query: EventListDocument,
   variables: {
     include: ['in_language', 'keywords', 'location', 'audience'],
-    sort: 'end_time',
+    sort: DEFAULT_EVENT_SORT_OPTION,
     start: 'now',
     superEvent: superEventId,
   },

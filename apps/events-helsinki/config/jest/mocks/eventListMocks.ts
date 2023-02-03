@@ -10,7 +10,7 @@ import type {
 import {
   EventListDocument,
   EventTypeId,
-  EVENT_SORT_OPTIONS,
+  DEFAULT_EVENT_SORT_OPTION,
 } from 'events-helsinki-components';
 import AppConfig from '../../../src/domain/app/AppConfig';
 
@@ -23,7 +23,7 @@ export const baseVariables = {
   location: [],
   pageSize: 10,
   publisher: null,
-  sort: 'end_time',
+  sort: DEFAULT_EVENT_SORT_OPTION,
   start: 'now',
   startsAfter: undefined,
   superEventType: ['umbrella', 'none'],
@@ -38,7 +38,7 @@ export const getOtherEventsVariables = (
   superEvent: EventListQueryVariables['superEvent']
 ): EventListQueryVariables => ({
   include: ['in_language', 'keywords', 'location', 'audience'],
-  sort: 'end_time',
+  sort: DEFAULT_EVENT_SORT_OPTION,
   start: 'now',
   superEvent,
   eventType: AppConfig.supportedEventTypes,
@@ -75,7 +75,7 @@ export const createEventListRequestAndResultMocks = ({
   response,
 }: EventListMockArguments): MockedResponse => ({
   request: createRequest({
-    sort: EVENT_SORT_OPTIONS.LAST_MODIFIED_TIME_DESC,
+    sort: DEFAULT_EVENT_SORT_OPTION,
     ...variables,
   }),
   result: createResult(response),

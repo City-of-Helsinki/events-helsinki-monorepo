@@ -9,7 +9,9 @@ import {
   BasicMeta,
   MAIN_CONTENT_ID,
   useCmsRoutedAppHelper,
-  EVENT_SORT_OPTIONS,
+  EventsOrderBySelect,
+  DEFAULT_EVENT_SORT_OPTION,
+  isEventSortOption,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
@@ -42,12 +44,15 @@ const SearchPage: React.FC<{
 
   const eventFilters = React.useMemo(() => {
     const searchParams = new URLSearchParams(qs.stringify(router.query));
+    const sortParam = searchParams.get('sort');
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: ['keywords', 'location'],
       pageSize: PAGE_SIZE,
       params: searchParams,
       place: params.place,
-      sortOrder: EVENT_SORT_OPTIONS.LAST_MODIFIED_TIME_DESC,
+      sortOrder: isEventSortOption(sortParam)
+        ? sortParam
+        : DEFAULT_EVENT_SORT_OPTION,
       superEventType: ['umbrella', 'none'],
     });
     return variables;
@@ -170,6 +175,7 @@ const SearchPage: React.FC<{
                     onLoadMore={handleLoadMore}
                   />
                 }
+                orderBySelectComponent={<EventsOrderBySelect />}
               />
             )}
           </LoadingSpinner>

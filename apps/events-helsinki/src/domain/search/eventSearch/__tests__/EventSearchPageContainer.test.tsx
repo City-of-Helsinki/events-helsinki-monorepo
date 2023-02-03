@@ -2,6 +2,7 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import type { Meta } from 'events-helsinki-components';
 import {
+  DEFAULT_EVENT_SORT_OPTION,
   NeighborhoodListDocument,
   PlaceListDocument,
 } from 'events-helsinki-components';
@@ -27,7 +28,7 @@ const meta: Meta = {
   count: 20,
   next:
     // eslint-disable-next-line max-len
-    'https://api.hel.fi/linkedevents/v1/event/?division=kunta%3Ahelsinki&include=keywords%2Clocation&language=fi&page=2&page_size=10&sort=start_time&start=2020-08-12T17&super_event_type=umbrella%2Cnone&text=jazz',
+    `https://api.hel.fi/linkedevents/v1/event/?division=kunta%3Ahelsinki&include=keywords%2Clocation&language=fi&page=2&page_size=10&sort=${DEFAULT_EVENT_SORT_OPTION}&start=2020-08-12T17&super_event_type=umbrella%2Cnone&text=jazz`,
   previous: null,
   __typename: 'Meta',
 };

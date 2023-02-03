@@ -30,7 +30,14 @@ const Event: NextPage<{
       <RHHCPage
         className="pageLayout"
         navigation={<Navigation />}
-        content={<VenuePageContainer venue={venue} loading={loading} />}
+        content={
+          <VenuePageContainer
+            venue={venue}
+            loading={loading}
+            showSimilarVenues={AppConfig.showSimilarVenues}
+            showUpcomingEvents={AppConfig.showVenuesUpcomingEvents}
+          />
+        }
         footer={<FooterSection menu={footerMenu} />}
       />
     </MatomoWrapper>

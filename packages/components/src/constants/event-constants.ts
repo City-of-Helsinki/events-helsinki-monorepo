@@ -18,6 +18,24 @@ export const EVENT_SOME_IMAGE = '/images/activities_SoMe-share.jpg';
 
 export const EVENT_LOCATIONS = { INTERNET: 'helsinki:internet' };
 
+export enum EVENT_SORT_OPTIONS {
+  DURATION = 'duration',
+  DURATION_DESC = '-duration',
+  END_TIME = 'end_time',
+  END_TIME_DESC = '-end_time',
+  LAST_MODIFIED_TIME = 'last_modified_time',
+  LAST_MODIFIED_TIME_DESC = '-last_modified_time',
+  START_TIME = 'start_time',
+  START_TIME_DESC = '-start_time',
+}
+
+export const isEventSortOption = (
+  value: unknown
+): value is EVENT_SORT_OPTIONS =>
+  Object.values(EVENT_SORT_OPTIONS).includes(value as EVENT_SORT_OPTIONS);
+
+export const DEFAULT_EVENT_SORT_OPTION = EVENT_SORT_OPTIONS.END_TIME;
+
 export enum EnrolmentStatusLabel {
   enrollable = 'enrollable',
   noEnrolmentTimes = 'noEnrolmentTimes',

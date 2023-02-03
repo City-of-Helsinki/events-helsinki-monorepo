@@ -76,17 +76,6 @@ export const COURSE_DEFAULT_SEARCH_FILTERS = {
   suitableFor: [],
 };
 
-export enum EVENT_SORT_OPTIONS {
-  DURATION = 'duration',
-  DURATION_DESC = '-duration',
-  END_TIME = 'end_time',
-  END_TIME_DESC = '-end_time',
-  LAST_MODIFIED_TIME = 'last_modified_time',
-  LAST_MODIFIED_TIME_DESC = '-last_modified_time',
-  START_TIME = 'start_time',
-  START_TIME_DESC = '-start_time',
-}
-
 export enum EVENT_SEARCH_FILTERS {
   CATEGORIES = 'categories',
   HOBBY_TYPES = 'hobbyTypes',

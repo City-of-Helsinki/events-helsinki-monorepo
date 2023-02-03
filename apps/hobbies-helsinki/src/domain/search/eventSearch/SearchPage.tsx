@@ -9,6 +9,7 @@ import {
   getLargeEventCardId,
   useEventListQuery,
   MAIN_CONTENT_ID,
+  EVENT_SORT_OPTIONS,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
@@ -19,7 +20,7 @@ import { toast } from 'react-toastify';
 
 import EventList from '../../../common-events/components/eventList/EventList';
 import { ROUTES } from '../../../constants';
-import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
+import { PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 import { getEventSearchVariables, getNextPage } from './utils';

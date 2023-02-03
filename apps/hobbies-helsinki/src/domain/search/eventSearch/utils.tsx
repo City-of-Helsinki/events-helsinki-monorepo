@@ -19,16 +19,13 @@ import type {
   Meta,
   QueryEventListArgs,
   EventFields,
+  EVENT_SORT_OPTIONS,
 } from 'events-helsinki-components';
 import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
 
 import AppConfig from '../../app/AppConfig';
-import type {
-  COURSE_CATEGORIES,
-  EVENT_SORT_OPTIONS,
-  COURSE_HOBBY_TYPES,
-} from './constants';
+import type { COURSE_CATEGORIES, COURSE_HOBBY_TYPES } from './constants';
 import {
   EVENT_SEARCH_FILTERS,
   courseCategories,

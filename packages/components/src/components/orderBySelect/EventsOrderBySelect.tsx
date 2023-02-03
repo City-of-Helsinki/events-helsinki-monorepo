@@ -1,9 +1,13 @@
-import { Select, useSearchTranslation } from 'events-helsinki-components';
 import type { SelectCustomTheme } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import useSetSortQueryParamToOptionValue from '../../../../hooks/useSetSortQueryParamToOptionValue';
-import { DEFAULT_EVENT_SORT_OPTION, EVENT_SORT_OPTIONS } from '../constants';
+import {
+  DEFAULT_EVENT_SORT_OPTION,
+  EVENT_SORT_OPTIONS,
+} from '../../constants/event-constants';
+import useSearchTranslation from '../../hooks/useSearchTranslation';
+import useSetSortQueryParamToOptionValue from '../../hooks/useSetSortQueryParamToOptionValue';
+import Select from '../select/Select';
 import styles from './eventsOrderBySelect.module.scss';
 
 const EventsOrderBySelect: React.FC = () => {

@@ -1,5 +1,6 @@
 import type { EventTypeId, EventListQuery } from 'events-helsinki-components';
 import {
+  EventsOrderBySelect,
   BasicMeta,
   LoadingSpinner,
   SrOnly,
@@ -11,7 +12,6 @@ import EventList from '../../../common-events/components/eventList/EventList';
 import type { AdvancedSearchProps } from './AdvancedSearch';
 import styles from './eventSearchPage.module.scss';
 import useSearchPage from './hooks/useSearchPage';
-import EventsOrderBySelect from './searchResultList/EventsOrderBySelect';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 
 type SearchPageProps = {

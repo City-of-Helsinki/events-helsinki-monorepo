@@ -2,14 +2,14 @@ import type {
   EventTypeId,
   QueryEventListArgs,
 } from 'events-helsinki-components';
-import { useRouter } from 'next/router';
-import React from 'react';
-import { transformedSearchVariables } from '../../combinedSearch/utils';
 import {
   isEventSortOption,
   DEFAULT_EVENT_SORT_OPTION,
-  PAGE_SIZE,
-} from '../constants';
+} from 'events-helsinki-components';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { transformedSearchVariables } from '../../combinedSearch/utils';
+import { PAGE_SIZE } from '../constants';
 import { getEventSearchVariables } from '../utils';
 
 function useEventSearchFilters(eventType: EventTypeId) {

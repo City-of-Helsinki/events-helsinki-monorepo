@@ -1,4 +1,5 @@
 import {
+  EVENT_SORT_OPTIONS,
   SIMILAR_EVENTS_AMOUNT,
   getEventIdFromUrl,
   useEventListQuery,
@@ -15,10 +16,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import useUnifiedSearchListQuery from '../../domain/unifiedSearch/useUnifiedSearchListQuery';
 import getVenueSourceId from '../../domain/venue/utils/getVenueSourceId';
-import {
-  EVENT_SEARCH_FILTERS,
-  EVENT_SORT_OPTIONS,
-} from '../search/eventSearch/constants';
+import { EVENT_SEARCH_FILTERS } from '../search/eventSearch/constants';
 import {
   getEventCategories,
   getEventSearchVariables,

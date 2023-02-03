@@ -1,3 +1,4 @@
+import type { QueryEventListArgs } from 'events-helsinki-components';
 import {
   LoadingSpinner,
   SrOnly,
@@ -8,8 +9,8 @@ import {
   BasicMeta,
   MAIN_CONTENT_ID,
   useCmsRoutedAppHelper,
+  EVENT_SORT_OPTIONS,
 } from 'events-helsinki-components';
-import type { QueryEventListArgs } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
 import React from 'react';
@@ -19,7 +20,7 @@ import { toast } from 'react-toastify';
 
 import EventList from '../../../common-events/components/eventList/EventList';
 import { ROUTES } from '../../../constants';
-import { EVENT_SORT_OPTIONS, PAGE_SIZE } from './constants';
+import { PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 import { getEventSearchVariables, getNextPage } from './utils';

@@ -44,24 +44,6 @@ export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
 
 export const COURSE_DEFAULT_SEARCH_FILTERS = EVENT_DEFAULT_SEARCH_FILTERS;
 
-export const isEventSortOption = (
-  value: unknown
-): value is EVENT_SORT_OPTIONS =>
-  Object.values(EVENT_SORT_OPTIONS).includes(value as EVENT_SORT_OPTIONS);
-
-export enum EVENT_SORT_OPTIONS {
-  DURATION = 'duration',
-  DURATION_DESC = '-duration',
-  END_TIME = 'end_time',
-  END_TIME_DESC = '-end_time',
-  LAST_MODIFIED_TIME = 'last_modified_time',
-  LAST_MODIFIED_TIME_DESC = '-last_modified_time',
-  START_TIME = 'start_time',
-  START_TIME_DESC = '-start_time',
-}
-
-export const DEFAULT_EVENT_SORT_OPTION = EVENT_SORT_OPTIONS.END_TIME;
-
 export enum EVENT_SEARCH_FILTERS {
   CATEGORIES = 'categories',
   HOBBY_TYPES = 'hobbyTypes',

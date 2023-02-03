@@ -1,4 +1,5 @@
 import { Select, useSearchTranslation } from 'events-helsinki-components';
+import type { SelectCustomTheme } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import useSetSortQueryParamToOptionValue from '../../../../hooks/useSetSortQueryParamToOptionValue';
@@ -34,6 +35,13 @@ const EventsOrderBySelect: React.FC = () => {
 
   return (
     <Select
+      theme={
+        {
+          '--menu-item-background': 'var(--color-input-dark)',
+          '--menu-item-background-hover': 'var(--color-input-dark)',
+          '--menu-item-background-selected-hover': 'var(--color-input-dark)',
+        } as SelectCustomTheme
+      }
       label={t('search:orderBy.label')}
       value={selectedOrderByOption ?? defaultOption}
       onChange={setSortQueryParamToOptionValue}

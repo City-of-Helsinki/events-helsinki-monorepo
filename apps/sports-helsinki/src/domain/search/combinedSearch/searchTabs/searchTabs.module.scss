@@ -1,13 +1,18 @@
 @import 'src/styles/breakpoints';
 
+.tabsMobile {
+  @include respond-above(l) {
+    display: none;
+  }
+}
+
 .tabs {
   display: flex;
   justify-content: flex-start;
   gap: var(--spacing-m);
 
   @include respond-below(l) {
-    flex-direction: column;
-    gap: var(--spacing-xs);
+    display: none;
   }
 
   & > button {

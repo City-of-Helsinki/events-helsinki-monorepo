@@ -1,8 +1,10 @@
 import classnames from 'classnames';
-import { EventTypeId } from 'events-helsinki-components';
+import type { Option } from 'events-helsinki-components';
+import { EventTypeId, Select } from 'events-helsinki-components';
+import type { SelectCustomTheme } from 'hds-react';
 import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { PARAM_SEARCH_TYPE } from '../constants';
 import styles from './searchTabs.module.scss';
 import type {
@@ -11,6 +13,11 @@ import type {
   TabsContextType,
 } from './tabsContext';
 import { TabsContext, useTabsContext } from './tabsContext';
+
+export type TabDataType = {
+  id: SearchTabId;
+  label: string;
+};
 
 type TabsPropType = {
   id: TabsContextType['activeTab'];
@@ -50,6 +57,55 @@ function SearchTabList({
   children: React.ReactComponentElement<typeof SearchTab>[];
 }) {
   return <div className={styles.tabs}>{children}</div>;
+}
+
+type SearchTabListMobileProps = {
+  data: TabDataType[];
+};
+
+function SearchTabListMobile({ data }: SearchTabListMobileProps) {
+  const router = useRouter();
+  const { resultCounts, activeTab, setActiveTab } = useTabsContext();
+
+  const options = useMemo(
+    (): Option[] =>
+      data.map((option: TabDataType) => {
+        return {
+          text: `${option.label}: ${resultCounts[option.id] ?? '...'}`,
+          value: option.id,
+        };
+      }),
+    [data, resultCounts]
+  );
+  const handleSearchTabChange = (option: Option) => {
+    setActiveTab(option.value as SearchTabId);
+    router.push(
+      { query: { ...router.query, [PARAM_SEARCH_TYPE]: option.value } },
+      undefined,
+      {
+        shallow: true,
+      }
+    );
+  };
+
+  return (
+    <div className={styles.tabsMobile}>
+      <Select
+        theme={
+          {
+            '--menu-item-background': 'var(--color-input-dark)',
+            '--menu-item-background-hover': 'var(--color-input-dark)',
+            '--menu-item-background-selected-hover': 'var(--color-input-dark)',
+          } as SelectCustomTheme
+        }
+        label="venues-search-tabs-mobile"
+        value={options.filter((o) => o.value == activeTab)[0] || options[0]}
+        onChange={handleSearchTabChange}
+        options={options}
+        noOutline
+      />
+    </div>
+  );
 }
 
 type SearchTabContentProps = {
@@ -115,6 +171,7 @@ function SearchTabLabel({ id, label }: SearchTabLabelProps) {
 
 SearchTabs.Tab = SearchTab;
 SearchTabs.TabList = SearchTabList;
+SearchTabs.SearchTabListMobile = SearchTabListMobile;
 SearchTabs.Panel = SearchTabPanelContent;
 SearchTabs.CountLabel = SearchTabLabel;
 export default SearchTabs;

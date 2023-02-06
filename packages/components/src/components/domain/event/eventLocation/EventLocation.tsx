@@ -1,8 +1,9 @@
 import React from 'react';
-import { MapBox } from '../../../../components';
-import { useCommonTranslation, useLocale } from '../../../../hooks';
+import MapBox from '../../../../components/mapBox/MapBox';
+import useCommonTranslation from '../../../../hooks/useCommonTranslation';
+import useLocale from '../../../../hooks/useLocale';
 import type { AppLanguage, EventFields } from '../../../../types';
-import { getEventFields, getServiceMapUrl } from '../../../../utils';
+import { getEventFields, getServiceMapUrl } from '../../../../utils/eventUtils';
 
 interface Props {
   event: EventFields;

@@ -102,6 +102,15 @@ class AppConfig {
     );
   }
 
+  static get showEnrolmentStatusInCardDetails() {
+    return Boolean(
+      parseEnvValue(
+        process.env.NEXT_PUBLIC_SHOW_ENROLMENT_STATUS_IN_CARD_DETAILS,
+        false
+      )
+    );
+  }
+
   static get URLRewriteMapping() {
     return {
       [AppConfig.linkedEventsEventEndpoint]: ROUTES.COURSES.replace(

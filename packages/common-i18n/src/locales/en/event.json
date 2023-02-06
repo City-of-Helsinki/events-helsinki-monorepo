@@ -101,5 +101,13 @@
   },
   "similarEvents": {
     "title": "Similar events"
+  },
+  "enrolmentStatus": {
+    "enrollable": "",
+    "noEnrolmentTimes": "",
+    "full": "Full",
+    "enrolmentNotStartedYet": "Enrolment starts on {{date}}",
+    "enrolmentEnded": "Enrolment has ended",
+    "queueable": "Full, queueable"
   }
 }

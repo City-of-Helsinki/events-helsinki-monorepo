@@ -101,5 +101,13 @@
   "similarEvents": {
     "title": "Muita samankaltaisia tapahtumia"
   },
-  "title": "Ladataan tapahtumaa..."
+  "title": "Ladataan tapahtumaa...",
+  "enrolmentStatus": {
+    "enrollable": "",
+    "noEnrolmentTimes": "",
+    "full": "Täynnä",
+    "enrolmentNotStartedYet": "Ilmoittautuminen alkaa {{date}}",
+    "enrolmentEnded": "Ilmoittautuminen on päättynyt",
+    "queueable": "Täynnä, jonotusmahdollisuus"
+  }
 }

@@ -2,6 +2,9 @@
 
 .eventCard {
   --height-image: 14.5rem;
+  --link-arrow-color: black;
+  --link-arrow-label-color: var(--color-black-80);
+  --link-arrow-label-alert-color: #b01038;
 
   text-decoration: none;
   background-color: var(--color-white);
@@ -119,7 +122,8 @@
         justify-content: flex-end;
       }
 
-      .arrowRight {
+      .arrowRight,
+      .linkArrowLabel {
         @include respond_above(s) {
           margin-top: var(--spacing-s);
         }
@@ -127,6 +131,8 @@
 
       div {
         flex: 1 1 0%;
+        display: flex;
+        align-items: center;
 
         &:first-child {
           margin-right: var(--spacing-3-xs);
@@ -142,6 +148,14 @@
 
         button {
           margin-top: var(--spacing-3-xs);
+        }
+
+        .linkArrowLabel {
+          color: var(--link-arrow-label-color);
+
+          &.alert {
+            color: var(--link-arrow-label-alert-color) !important;
+          }
         }
       }
     }

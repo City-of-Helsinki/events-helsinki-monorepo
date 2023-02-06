@@ -11762,6 +11762,9 @@ export type EventFieldsFragment = {
   endTime?: string | null;
   startTime?: string | null;
   publisher?: string | null;
+  enrolmentStartTime?: string | null;
+  enrolmentEndTime?: string | null;
+  remainingAttendeeCapacity?: number | null;
   externalLinks: Array<{
     __typename?: 'ExternalLink';
     name?: string | null;
@@ -11945,6 +11948,9 @@ export type EventDetailsQuery = {
     endTime?: string | null;
     startTime?: string | null;
     publisher?: string | null;
+    enrolmentStartTime?: string | null;
+    enrolmentEndTime?: string | null;
+    remainingAttendeeCapacity?: number | null;
     externalLinks: Array<{
       __typename?: 'ExternalLink';
       name?: string | null;
@@ -12195,6 +12201,9 @@ export type EventListQuery = {
       endTime?: string | null;
       startTime?: string | null;
       publisher?: string | null;
+      enrolmentStartTime?: string | null;
+      enrolmentEndTime?: string | null;
+      remainingAttendeeCapacity?: number | null;
       externalLinks: Array<{
         __typename?: 'ExternalLink';
         name?: string | null;
@@ -12390,6 +12399,9 @@ export type EventsByIdsQuery = {
       endTime?: string | null;
       startTime?: string | null;
       publisher?: string | null;
+      enrolmentStartTime?: string | null;
+      enrolmentEndTime?: string | null;
+      remainingAttendeeCapacity?: number | null;
       externalLinks: Array<{
         __typename?: 'ExternalLink';
         name?: string | null;
@@ -13422,6 +13434,9 @@ export const EventFieldsFragmentDoc = gql`
     locationExtraInfo {
       ...localizedFields
     }
+    enrolmentStartTime
+    enrolmentEndTime
+    remainingAttendeeCapacity
   }
   ${LocalizedFieldsFragmentDoc}
   ${KeywordFieldsFragmentDoc}

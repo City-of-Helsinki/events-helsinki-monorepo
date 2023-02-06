@@ -1,5 +1,6 @@
 import type { Config } from 'react-helsinki-headless-cms';
-import { useCmsTranslation, useCommonTranslation } from '.';
+import useCmsTranslation from './useCmsTranslation';
+import useCommonTranslation from './useCommonTranslation';
 
 const useCommonCmsConfig = (): Partial<Config> => {
   const { t: commonTranslation } = useCommonTranslation();

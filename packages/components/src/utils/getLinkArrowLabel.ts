@@ -1,7 +1,7 @@
 import type { TFunction } from 'next-i18next';
-import { getEnrolmentStatus } from '../components';
-import type { EventFields } from '../types';
+import type { EventFields } from '../types/event-types';
 import getDateRangeStr from './getDateRangeStr';
+import { getEnrolmentStatus } from './getEventEnrolmentStatus';
 
 export default function getLinkArrowLabel({
   item,

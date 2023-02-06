@@ -1,33 +1,11 @@
-import { EnrolmentStatusLabel } from '../../../../constants/event-constants';
 import {
   useCommonTranslation,
   useEventTranslation,
   useLocale,
 } from '../../../../hooks';
 import type { EventFields } from '../../../../types';
-import { getDateRangeStr } from '../../../../utils';
-
-export function getEnrolmentStatus(event: EventFields): EnrolmentStatusLabel {
-  const now = new Date();
-  const { remainingAttendeeCapacity, enrolmentStartTime, enrolmentEndTime } =
-    event;
-
-  // TODO: Add EnrolmentStatusLabel.queueable when we can resolve it
-  if (remainingAttendeeCapacity === 0) {
-    return EnrolmentStatusLabel.full;
-  } else if (enrolmentStartTime && new Date(enrolmentStartTime) > now) {
-    return EnrolmentStatusLabel.enrolmentNotStartedYet;
-  } else if (enrolmentEndTime && new Date(enrolmentEndTime) < now) {
-    return EnrolmentStatusLabel.enrolmentEnded;
-  } else if (
-    enrolmentStartTime &&
-    enrolmentEndTime &&
-    remainingAttendeeCapacity
-  ) {
-    return EnrolmentStatusLabel.enrollable;
-  }
-  return EnrolmentStatusLabel.noEnrolmentTimes;
-}
+import getDateRangeStr from '../../../../utils/getDateRangeStr';
+import { getEnrolmentStatus } from '../../../../utils/getEventEnrolmentStatus';
 
 function useEventEnrolmentStatus(event: EventFields) {
   const locale = useLocale();

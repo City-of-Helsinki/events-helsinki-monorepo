@@ -1,5 +1,2 @@
 export { default as EventEnrolmentStatus } from './EventEnrolmentStatus';
-export {
-  default as useEventEnrolmentStatus,
-  getEnrolmentStatus,
-} from './useEventEnrolmentStatus';
+export { default as useEventEnrolmentStatus } from './useEventEnrolmentStatus';

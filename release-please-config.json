@@ -2,11 +2,15 @@
   "bootstrap-sha": "1acd804496b8984c9a463fea07468d13443f72c4",
   "separate-pull-requests": true,
   "packages": {
-    "apps/hobbies-helsinki":{ "release-type": "node" },
+    "apps/hobbies-helsinki": { "release-type": "node" },
     "apps/events-helsinki": { "release-type": "node" },
     "apps/sports-helsinki": { "release-type": "node" },
-    "proxies/events-graphql-federation": { "release-type": "simple", "package-name": "federation-router" },
-    "proxies/events-graphql-proxy": { "release-type": "node" }
+    "proxies/events-graphql-federation": {
+      "release-type": "simple",
+      "package-name": "federation-router"
+    },
+    "proxies/events-graphql-proxy": { "release-type": "node" },
+    "proxies/venue-graphql-proxy": { "release-type": "node" }
   },
   "plugins": ["sentence-case"]
 }

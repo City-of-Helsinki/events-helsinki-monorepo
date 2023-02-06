@@ -17,3 +17,12 @@ export const EVENT_KEYWORD_BLACK_LIST = [
 export const EVENT_SOME_IMAGE = '/images/activities_SoMe-share.jpg';
 
 export const EVENT_LOCATIONS = { INTERNET: 'helsinki:internet' };
+
+export enum EnrolmentStatusLabel {
+  enrollable = 'enrollable',
+  noEnrolmentTimes = 'noEnrolmentTimes',
+  full = 'full',
+  enrolmentNotStartedYet = 'enrolmentNotStartedYet',
+  enrolmentEnded = 'enrolmentEnded',
+  queueable = 'queueable',
+}

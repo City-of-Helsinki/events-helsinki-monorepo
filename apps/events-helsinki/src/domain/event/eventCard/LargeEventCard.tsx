@@ -1,5 +1,10 @@
 import classNames from 'classnames';
+import type { EventFields } from 'events-helsinki-components';
 import {
+  EnrolmentStatusLabel,
+  EventEnrolmentStatus,
+  useEventEnrolmentStatus,
+  addParamsToQueryString,
   getDateRangeStr,
   buttonStyles,
   useLocale,
@@ -11,7 +16,6 @@ import {
   isEventClosed,
   isEventFree,
 } from 'events-helsinki-components';
-import type { EventFields } from 'events-helsinki-components';
 import {
   Button,
   IconArrowRight,
@@ -84,6 +88,8 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const goToEventPage = (ev: React.MouseEvent<HTMLButtonElement>) => {
     router.push(eventUrl);
   };
+
+  const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
   return (
     <LinkBox
@@ -180,11 +186,20 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                 </div>
               </>
             ) : (
-              <IconArrowRight
-                className={styles.arrowRight}
-                size="l"
-                aria-hidden="true"
-              />
+              <div>
+                <IconArrowRight
+                  className={styles.arrowRight}
+                  size="l"
+                  aria-hidden="true"
+                />
+                <EventEnrolmentStatus
+                  event={event}
+                  className={classNames(styles.linkArrowLabel, {
+                    [styles.alert]:
+                      eventEnrolmentStatus === EnrolmentStatusLabel.full,
+                  })}
+                />
+              </div>
             )}
           </div>
         </div>

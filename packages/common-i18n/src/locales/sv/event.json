@@ -101,5 +101,13 @@
   "similarEvents": {
     "title": "Liknande evenemang"
   },
-  "title": "Laddar evenemang..."
+  "title": "Laddar evenemang...",
+  "enrolmentStatus": {
+    "enrollable": "",
+    "noEnrolmentTimes": "",
+    "full": "Full",
+    "enrolmentNotStartedYet": "Registrering startar den {{date}}",
+    "enrolmentEnded": "Registreringen har avslutats",
+    "queueable": "Full, köbar"
+  }
 }

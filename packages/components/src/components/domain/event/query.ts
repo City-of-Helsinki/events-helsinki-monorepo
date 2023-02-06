@@ -84,6 +84,9 @@ export const QUERY_EVENT_DETAILS = gql`
     locationExtraInfo {
       ...localizedFields
     }
+    enrolmentStartTime
+    enrolmentEndTime
+    remainingAttendeeCapacity
   }
 
   query EventDetails($id: ID!, $include: [String]) {

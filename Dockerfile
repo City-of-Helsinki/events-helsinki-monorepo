@@ -8,7 +8,6 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 ARG BUILDER_FROM_IMAGE=helsinkitest/node:16-slim
-#ARG BUILDER_FROM_IMAGE=events-helsinki-monorepo_cache
 
 FROM helsinkitest/node:16-slim AS deps
 

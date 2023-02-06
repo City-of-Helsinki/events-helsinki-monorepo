@@ -4,7 +4,6 @@ import {
   EnrolmentStatusLabel,
   EventEnrolmentStatus,
   useEventEnrolmentStatus,
-  addParamsToQueryString,
   getDateRangeStr,
   buttonStyles,
   useLocale,

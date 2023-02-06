@@ -3,7 +3,6 @@ import type { EventFields } from 'events-helsinki-components';
 import {
   useEventEnrolmentStatus,
   EventEnrolmentStatus,
-  addParamsToQueryString,
   getDateRangeStr,
   buttonStyles,
   useLocale,

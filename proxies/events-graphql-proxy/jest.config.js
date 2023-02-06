@@ -24,7 +24,19 @@ const config = {
   rootDir: './src',
   // @ts-ignore
   transform: {
-    ...tsjPreset.transform,
+    '.*\\.(tsx?)$': [
+      '@swc/jest',
+      {
+        jsc: {
+          target: 'es2021',
+          transform: {
+            react: {
+              runtime: 'automatic',
+            },
+          },
+        },
+      },
+    ],
   },
   setupFilesAfterEnv: ['<rootDir>/../.jest/setupTests.ts'],
   testMatch: ['<rootDir>/**/*.{spec,test}.{js,jsx,ts,tsx}'],
@@ -36,12 +48,6 @@ const config = {
   coverageDirectory: '<rootDir>/../coverage',
   collectCoverageFrom: ['<rootDir>/**/*.{ts,js}', '!**/*.test.ts'],
   coveragePathIgnorePatterns: ['<rootDir>/../config/', '<rootDir>/../.jest/'],
-  globals: {
-    'ts-jest': {
-      diagnostics: false,
-      tsconfig: './tsconfig.jest.json',
-    },
-  },
 };
 
 module.exports = config;

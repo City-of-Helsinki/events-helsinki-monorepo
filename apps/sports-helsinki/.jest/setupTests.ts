@@ -60,6 +60,13 @@ jest.mock('next/head', () => {
   };
 });
 
+// https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
+jest.mock('events-helsinki-components/hooks/useLocale', () => ({
+  __esModule: true,
+  ...jest.requireActual('events-helsinki-components/hooks/useLocale'),
+}));
+
+
 // Extend except with jest-axe
 expect.extend(toHaveNoViolations);
 
@@ -69,42 +76,11 @@ global.TextEncoder = TextEncoder;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 global.TextDecoder = TextDecoder as any;
 
-// global.IntersectionObserver = class IntersectionObserver {
-//   readonly root: Element | Document | null;
-//   readonly rootMargin: string;
-//   readonly thresholds: ReadonlyArray<number>;
+// To avoid error: TypeError: Cannot redefine property
+// disusssed here: https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-//   constructor() {
-//     // pass
-//   }
+const components = require("events-helsinki-components");
 
-//   disconnect() {
-//     return null;
-//   }
-
-//   observe() {
-//     return null;
-//   }
-
-//   takeRecords() {
-//     return null;
-//   }
-
-//   unobserve() {
-//     return null;
-//   }
-// };
-
-// Mock depended services with msw
-// beforeAll(() => {
-//   // Enable the mocking in tests.
-//   server.listen();
-// });
-// afterEach(() => {
-//   // Reset any runtime handlers tests may use.
-//   server.resetHandlers();
-// });
-// afterAll(() => {
-//   // Clean up once the tests are done.
-//   server.close();
-// });

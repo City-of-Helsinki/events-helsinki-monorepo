@@ -17,6 +17,13 @@ jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
 jest.mock('next/router', () => require('next-router-mock'));
 jest.mock('next/dist/client/router', () => require('next-router-mock'));
 
+// https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
+jest.mock('../src/hooks/useLocale', () => ({
+    __esModule: true,
+    ...jest.requireActual('../src/hooks/useLocale'),
+  }));
+
+
 loadEnvConfig(process.cwd());
 
 // Mock the fetch

@@ -22,12 +22,19 @@ const config = {
   testEnvironment: 'jsdom',
   verbose: true,
   rootDir: './src',
-
   transform: {
-    // if we would use .babelrc, next would not use swc compiler
     '^.+\\.(js|jsx|ts|tsx)$': [
-      'babel-jest',
-      { configFile: './babel.config.test.json' },
+      '@swc/jest',
+      {
+        jsc: {
+          target: 'es2021',
+          transform: {
+            react: {
+              runtime: 'automatic',
+            },
+          },
+        },
+      },
     ],
   },
   setupFilesAfterEnv: [
@@ -45,12 +52,6 @@ const config = {
   collectCoverage: false,
   coverageDirectory: '<rootDir>/../coverage',
   collectCoverageFrom: ['<rootDir>/**/*.{ts,tsx,js,jsx}', '!**/*.test.ts'],
-  globals: {
-    'ts-jest': {
-      diagnostics: true,
-      tsconfig: './tsconfig.jest.json',
-    },
-  },
   transformIgnorePatterns: ['/node_modules/', '/__mocks__/'],
 };
 

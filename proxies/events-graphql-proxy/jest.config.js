@@ -1,5 +1,3 @@
-// @ts-check
-const { defaults: tsjPreset } = require('ts-jest/presets');
 const { pathsToModuleNameMapper } = require('ts-jest');
 
 const { getJestCachePath } = require('../../cache.config');

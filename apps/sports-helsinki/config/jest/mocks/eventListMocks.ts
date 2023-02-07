@@ -44,8 +44,8 @@ const createRequest = (
   query: EventListDocument,
   variables: {
     ...eventListBaseVariables,
-    ...variablesOverride,
     eventType: type === 'event' ? [EventTypeId.General] : [EventTypeId.Course],
+    ...variablesOverride,
   },
 });
 

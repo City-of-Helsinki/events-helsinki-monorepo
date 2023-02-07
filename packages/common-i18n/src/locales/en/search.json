@@ -14,9 +14,9 @@
   },
   "search": {
     "searchType": {
-      "venue": "Venues",
-      "courseEventType": "Courses",
-      "generalEventType": "General"
+      "Venue": "Venues",
+      "Course": "Courses",
+      "General": "General"
     },
     "buttonSearch": "Search",
     "checkboxOnlyChildrenEvents": "Show only events for children",

@@ -27,9 +27,9 @@
   },
   "search": {
     "searchType": {
-      "venue": "Paikat",
-      "courseEventType": "Harrastukset",
-      "generalEventType": "Tapahtumat"
+      "Venue": "Paikat",
+      "Course": "Harrastukset",
+      "General": "Tapahtumat"
     },
     "buttonSearch": "Hae",
     "checkboxOnlyChildrenEvents": "Näytä vain lastentapahtumat",

@@ -14,9 +14,9 @@
   },
   "search": {
     "searchType": {
-      "venue": "Platser",
-      "courseEventType": "Hobbyer",
-      "generalEventType": "Evenemangen"
+      "Venue": "Platser",
+      "Course": "Hobbyer",
+      "General": "Evenemangen"
     },
     "buttonSearch": "Sök",
     "checkboxOnlyChildrenEvents": "Visa endast evenemang för barn",

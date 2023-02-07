@@ -1,11 +1,7 @@
-import type { Season } from 'events-helsinki-components';
+import type { Season, SPORTS_CATEGORIES } from 'events-helsinki-components';
 import type React from 'react';
 
-import type {
-  COURSE_CATEGORIES,
-  EVENT_SEARCH_FILTERS,
-  SPORTS_CATEGORIES,
-} from './constants';
+import type { COURSE_CATEGORIES, EVENT_SEARCH_FILTERS } from './constants';
 
 export interface CategoryOption {
   icon: React.ReactElement;
@@ -20,6 +16,7 @@ export interface SearchCategoryOption {
   icon: React.ReactElement;
   labelKey: string;
   seasons?: Season[];
+  keywords: string[];
 }
 
 export type SearchCategoryRecord = Record<
@@ -29,6 +26,7 @@ export type SearchCategoryRecord = Record<
 
 export interface Filters {
   [EVENT_SEARCH_FILTERS.DATE_TYPES]: string[];
+  [EVENT_SEARCH_FILTERS.SPORTS_CATEGORIES]: string[];
   [EVENT_SEARCH_FILTERS.END]: Date | null;
   [EVENT_SEARCH_FILTERS.IS_FREE]?: boolean;
   [EVENT_SEARCH_FILTERS.KEYWORD]?: string[];

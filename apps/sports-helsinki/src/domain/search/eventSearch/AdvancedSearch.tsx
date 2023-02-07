@@ -54,12 +54,14 @@ export const useAdvancedSearchForm = ({
     keywordNot,
     publisher,
     dateTypes,
+    sportsCategories,
     eventType,
     text,
   } = getSearchFilters(searchParams);
 
   const searchFilters = {
     dateTypes,
+    sportsCategories,
     start,
     end,
     keyword,

@@ -98,3 +98,17 @@ export type LocalizedString = {
   sv?: string | null;
   en?: string | null;
 };
+
+export enum SPORTS_CATEGORIES {
+  SWIMMING = 'swimming',
+  SKIING = 'skiing',
+  ICE_SKATING = 'ice_skating',
+  GYM = 'gym',
+  NEIGHBOURHOOD_SPORTS_SITES = 'neighbourhood_sports_sites',
+  INDOOR_SPORTS_HALLS = 'indoor_sports_halls',
+  OUTDOOR_RECREATION = 'outdoor_recreation',
+  GUIDED_EXERCISE = 'guided_exercise',
+}
+
+export const isSportsCategory = (value: unknown): value is SPORTS_CATEGORIES =>
+  Object.values(SPORTS_CATEGORIES).includes(value as SPORTS_CATEGORIES);

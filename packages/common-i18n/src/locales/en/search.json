@@ -36,6 +36,7 @@
     "checkboxAlsoOngoingCourses": "Show also ongoing courses",
     "checkboxIsFree": "Show only courses that are free",
     "titleDropdownHobbyType": "Type of activity",
+    "titleDropdownSportsCategory": "Type of sport",
     "showOnlyAdultCourses": "Show only adult courses",
     "ageLimitValues": "Age",
     "ageLimitHeader": "Age of participants in years, for example 8, 12-14 or 60-65",

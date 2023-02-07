@@ -5,6 +5,8 @@ import {
   buildQueryFromObject,
   useLocale,
   useCommonTranslation,
+  MultiSelectDropdown,
+  getUrlParamAsArray,
 } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -13,12 +15,18 @@ import qs, { parse } from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
+import IconPersonRunning from '../../../assets/icons/IconPersonRunning';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { SEARCH_ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import { PARAM_SEARCH_TYPE } from '../combinedSearch/constants';
 import type { SearchForm, SearchComponentType } from '../combinedSearch/types';
+import { EVENT_SEARCH_FILTERS } from '../eventSearch/constants';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
+import {
+  getSportsCategoryOptions,
+  sortExtendedCategoryOptions,
+} from '../eventSearch/utils';
 import styles from './search.module.scss';
 
 export type SearchUtilitiesProps = {
@@ -36,12 +44,18 @@ export const useSimmpleVenueSearchForm = ({
   scrollToResultList,
   searchRoute,
   autosuggestInput,
+  selectedSportsCategories,
   setAutosuggestInput,
+  setSelectedSportsCategories,
+  setSportsCategoryInput,
 }: {
   scrollToResultList: SearchComponentProps['scrollToResultList'];
   searchRoute: SearchComponentProps['searchRoute'];
   autosuggestInput: string;
+  selectedSportsCategories: string[];
   setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedSportsCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  setSportsCategoryInput: React.Dispatch<React.SetStateAction<string>>;
 }): SearchForm => {
   const locale = useLocale();
   const router = useRouter();
@@ -53,6 +67,7 @@ export const useSimmpleVenueSearchForm = ({
 
   const searchFilters = {
     q: autosuggestInput,
+    sportsCategories: selectedSportsCategories,
   };
 
   const goToSearch = (search: string): void => {
@@ -75,6 +90,8 @@ export const useSimmpleVenueSearchForm = ({
 
   const clearInputValues = () => {
     setAutosuggestInput('');
+    setSelectedSportsCategories([]);
+    setSportsCategoryInput('');
   };
 
   const clearFilters = () => {
@@ -93,8 +110,13 @@ export const useSimmpleVenueSearchForm = ({
   };
 
   const initialFieldsOnPageLoad = React.useCallback(() => {
+    const sportsCategories = getUrlParamAsArray(
+      searchParams,
+      EVENT_SEARCH_FILTERS.SPORTS_CATEGORIES
+    );
     setAutosuggestInput(searchParams.get('q') ?? '');
-  }, [searchParams, setAutosuggestInput]);
+    setSelectedSportsCategories(sportsCategories);
+  }, [searchParams, setAutosuggestInput, setSelectedSportsCategories]);
 
   return {
     searchParams,
@@ -116,12 +138,22 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
 }) => {
   const { t } = useTranslation('search');
   const [autosuggestInput, setAutosuggestInput] = React.useState('');
+  const [selectedSportsCategories, setSelectedSportsCategories] =
+    React.useState<string[]>([]);
+  const [sportsCategoryInput, setSportsCategoryInput] = React.useState('');
+  const sportsCategories = getSportsCategoryOptions(t).sort(
+    sortExtendedCategoryOptions
+  );
+
   const { goToSearch, clearFilters, handleSubmit, initialFieldsOnPageLoad } =
     useSimmpleVenueSearchForm({
       scrollToResultList,
       searchRoute,
       autosuggestInput,
+      selectedSportsCategories,
       setAutosuggestInput,
+      setSelectedSportsCategories,
+      setSportsCategoryInput,
     });
 
   const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
@@ -131,35 +163,53 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
     scrollToResultList && scrollToResultList();
   };
 
-  // Initialize fields when page is loaded
   React.useEffect(() => {
     initialFieldsOnPageLoad();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [initialFieldsOnPageLoad]);
 
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.searchWrapper}>
         {showTitle && <h2>{t('search.labelSearchField')}</h2>}
         <div className={styles.rowWrapper}>
-          <div>
-            <SearchAutosuggest
-              name="search"
-              onChangeSearchValue={setAutosuggestInput}
-              onOptionClick={handleMenuOptionClick}
-              placeholder={t('search.placeholder')}
-              searchValue={autosuggestInput}
-            />
+          <div className={classNames(styles.row, styles.autoSuggestRow)}>
+            <div>
+              <SearchAutosuggest
+                name="search"
+                onChangeSearchValue={setAutosuggestInput}
+                onOptionClick={handleMenuOptionClick}
+                placeholder={t('search.placeholder')}
+                searchValue={autosuggestInput}
+              />
+            </div>
+            <div>
+              <MultiSelectDropdown
+                checkboxName="sportsCategoryOptions"
+                icon={<IconPersonRunning aria-hidden />}
+                inputValue={sportsCategoryInput}
+                name="sportsCategory"
+                onChange={setSelectedSportsCategories}
+                options={sportsCategories}
+                setInputValue={setSportsCategoryInput}
+                showSearch={false}
+                title={t('search.titleDropdownSportsCategory')}
+                value={selectedSportsCategories}
+              />
+            </div>
           </div>
-          <div className={styles.buttonWrapper}>
-            <Button
-              variant="success"
-              fullWidth={true}
-              iconLeft={<IconSearch aria-hidden />}
-              type="submit"
-            >
-              {t('search.buttonSearch')}
-            </Button>
+          <div className={styles.rowWrapper}>
+            <div className={styles.row}>
+              <div className={styles.buttonWrapper}>
+                <Button
+                  variant="success"
+                  fullWidth={true}
+                  iconLeft={<IconSearch aria-hidden />}
+                  type="submit"
+                >
+                  {t('search.buttonSearch')}
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
         <FilterSummary onClear={clearFilters} />

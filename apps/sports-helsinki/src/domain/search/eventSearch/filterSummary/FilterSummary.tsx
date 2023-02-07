@@ -4,6 +4,8 @@ import {
   useLocale,
   PlaceFilter,
   PublisherFilter,
+  FilterButton,
+  translateValue,
 } from 'events-helsinki-components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -28,6 +30,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const searchParams = new URLSearchParams(qs.stringify(router.query));
   const {
     dateTypes,
+    sportsCategories,
     end,
     keyword,
     keywordNot,
@@ -44,6 +47,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
 
     const search = getSearchQuery({
       dateTypes,
+      sportsCategories: getFilteredList('sportsCategory', sportsCategories),
       eventType,
       end: type === 'date' ? null : end,
       keyword,
@@ -60,7 +64,11 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     });
   };
 
-  const hasFilters = !!publisher || !!places.length || !!text?.length;
+  const hasFilters =
+    !!sportsCategories.length ||
+    !!publisher ||
+    !!places.length ||
+    !!text?.length;
 
   if (!hasFilters) return null;
 
@@ -69,6 +77,19 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       className={styles.filterSummary}
       data-testid={filterSummaryContainerTestId}
     >
+      {sportsCategories.map((sportsCategory) => (
+        <FilterButton
+          key={sportsCategory}
+          onRemove={handleFilterRemove}
+          text={translateValue(
+            'appSports:home.sportsCategory.',
+            sportsCategory,
+            t
+          )}
+          type="sportsCategory"
+          value={sportsCategory}
+        />
+      ))}
       {publisher && (
         <PublisherFilter id={publisher} onRemove={handleFilterRemove} />
       )}

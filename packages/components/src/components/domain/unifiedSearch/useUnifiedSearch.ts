@@ -7,10 +7,12 @@ import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import { useCallback, useMemo, useRef } from 'react';
 import type { TransitionOptions } from '../../../types/types';
+import { isSportsCategory } from '../../../types/types';
 import getIsDateValid from '../../../utils/getIsValidDate';
 import type { QueryPersister } from '../../../utils/queryPersister';
 import defaultQueryPersister from '../../../utils/queryPersister';
 import type { UnifiedSearchParameters, ModifyFilters } from './types';
+import { SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS } from './unifiedSearchConstants';
 
 type FilterValueType = string | number | boolean | Date;
 
@@ -95,20 +97,19 @@ function parseIntoValue(
 }
 
 function filterConfigToEntry(
-  { type, key, storeBehaviour }: FilterConfig,
+  { type, key, storeBehaviour, mappedFromKey, valueMapper }: FilterConfig,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   values: any
 ): [string, FilterValueType | FilterValueType[]] | undefined {
-  const value = values[key];
+  const value = values[mappedFromKey ?? key];
 
   if (storeBehaviour === 'list' || storeBehaviour === 'accumulating') {
     const valueAsArray = makeArray(value);
-
-    return [
-      key,
-      valueAsArray?.map((value) => parseIntoValue(value, type)) ??
-        ([] as FilterValueType[]),
-    ];
+    const parsedValues: FilterValueType[] =
+      (valueMapper ? valueAsArray?.flatMap(valueMapper) : valueAsArray)?.map(
+        (value) => parseIntoValue(value, type)
+      ) ?? ([] as FilterValueType[]);
+    return [key, parsedValues];
   }
 
   if (['string', 'number', 'boolean', 'date'].includes(type)) {
@@ -135,6 +136,8 @@ type FilterConfig = {
   storeBehaviour?: 'list' | 'accumulating';
   key: string;
   filterListBehaviour?: 'hidden';
+  mappedFromKey?: string;
+  valueMapper?: (value: string) => string | string[];
 };
 
 type SpreadFilter = {
@@ -157,6 +160,30 @@ export class UnifiedSearch {
         key: 'administrativeDivisionIds',
       },
       { type: 'string', storeBehaviour: 'list', key: 'ontologyTreeIds' },
+      // sportsCategories and ontologyTreeIds are mutually exclusive query parameters
+      // so only one should be used at a time
+      {
+        type: 'string',
+        storeBehaviour: 'list',
+        key: 'ontologyTreeIds',
+        mappedFromKey: 'sportsCategories',
+        valueMapper: (value: string): string[] =>
+          // Map from comma joined string of sports categories
+          // to comma joined string of ontology tree IDs, e.g.
+          //   "swimming,gym" ->
+          //   ["swimming", "gym"] ->
+          //   [[20,684], [415,611,2219]] ->
+          //   [["20","684"], ["415","611","2219"]] ->
+          //   ["20","684","415","611","2219"]
+          value
+            .split(',')
+            .flatMap((value: string) =>
+              (isSportsCategory(value)
+                ? SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS[value]
+                : []
+              ).map((id) => id.toString())
+            ),
+      },
       { type: 'string', storeBehaviour: 'list', key: 'ontologyWordIds' },
       { type: 'string', key: 'orderBy', filterListBehaviour: 'hidden' },
       { type: 'string', key: 'orderDir', filterListBehaviour: 'hidden' },

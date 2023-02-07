@@ -10,7 +10,10 @@
  * E.g a Q-parameter used by Unified-Search has the same use case
  * as the text-parameter in Events-proxy.
  */
-export const TRANSFORM_MAP = new Map<string, string>([['q', 'text']]);
+export const TRANSFORM_MAP = new Map<string, string>([
+  ['q', 'text'],
+  ['sportsCategories', 'sportsCategories'],
+]);
 
 /**
  * Uses {@link TRANSFORM_MAP} to transfer the URL Search parameter keys.

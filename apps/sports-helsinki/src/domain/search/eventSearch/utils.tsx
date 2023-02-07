@@ -20,10 +20,10 @@ import type {
   EventFields,
   EventTypeId,
   EVENT_SORT_OPTIONS,
+  SPORTS_CATEGORIES,
 } from 'events-helsinki-components';
 import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
-import type { SPORTS_CATEGORIES } from './constants';
 import {
   SPORT_COURSES_KEYWORDS,
   CATEGORY_CATALOG,
@@ -150,8 +150,16 @@ export const getEventSearchVariables = ({
   eventType?: (EventTypeId.Course | EventTypeId.General)[];
   // eslint-disable-next-line sonarjs/cognitive-complexity
 }): QueryEventListArgs => {
-  const { keyword, keywordNot, places, publisher, text, dateTypes, isFree } =
-    getSearchFilters(params);
+  const {
+    keyword,
+    keywordNot,
+    places,
+    publisher,
+    text,
+    dateTypes,
+    sportsCategories,
+    isFree,
+  } = getSearchFilters(params);
   const pathPlace = place && MAPPED_PLACES[place.toLowerCase()];
 
   if (pathPlace) {
@@ -190,13 +198,21 @@ export const getEventSearchVariables = ({
     }
   };
 
+  const sportsKeywords = [
+    ...new Set( // unique keywords
+      sportsCategories.flatMap(
+        (category) => sportsCategoryData?.[category].keywords ?? []
+      )
+    ),
+  ];
+
   return {
     ...getSearchParam(),
     isFree: isFree || undefined,
     end,
     include,
     keywordOrSet1: SPORT_COURSES_KEYWORDS, // Limit search to sport keywords only
-    keywordOrSet2: [...(keyword ?? [])],
+    keywordOrSet2: [...(keyword ?? []), ...sportsKeywords],
     keywordAnd,
     keywordNot,
     language,
@@ -256,6 +272,10 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     dateTypes: getUrlParamAsArray(
       searchParams,
       EVENT_SEARCH_FILTERS.DATE_TYPES
+    ),
+    sportsCategories: getUrlParamAsArray(
+      searchParams,
+      EVENT_SEARCH_FILTERS.SPORTS_CATEGORIES
     ),
     end,
     isFree: searchParams.get(EVENT_SEARCH_FILTERS.IS_FREE) === 'true',

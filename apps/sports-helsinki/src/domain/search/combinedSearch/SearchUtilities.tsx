@@ -33,15 +33,15 @@ function SearchUtilities() {
     (): TabDataType[] => [
       {
         id: 'Venue',
-        label: tSearch('search:search.searchType.venue'),
+        label: tSearch('search:search.searchType.Venue'),
       },
       {
         id: EventTypeId.General,
-        label: tSearch('search:search.searchType.generalEventType'),
+        label: tSearch(`search:search.searchType.${EventTypeId.General}`),
       },
       {
         id: EventTypeId.Course,
-        label: tSearch('search:search.searchType.courseEventType'),
+        label: tSearch(`search:search.searchType.${EventTypeId.Course}`),
       },
     ],
     [tSearch]

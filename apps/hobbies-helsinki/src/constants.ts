@@ -1,5 +1,3 @@
-import type { Language } from './types';
-
 export const DEFAULT_LANGUAGE = 'fi';
 
 export const ROUTES = {
@@ -54,28 +52,4 @@ export const FEEDBACK_LINKS = {
   fi: 'https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute',
   en: 'https://www.hel.fi/helsinki/en/administration/participate/feedback',
   sv: 'https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback',
-};
-
-export const DEFAULT_HEADER_MENU_NAME: Record<Language, string> = {
-  fi:
-    process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_FI ??
-    'Hobbies Helsinki Header FI',
-  en:
-    process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_EN ??
-    'Hobbies Helsinki Header EN',
-  sv:
-    process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_SV ??
-    'Hobbies Helsinki Header SV',
-};
-
-export const DEFAULT_FOOTER_MENU_NAME: Record<Language, string> = {
-  fi:
-    process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_FI ??
-    'Hobbies Helsinki Footer FI',
-  en:
-    process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_EN ??
-    'Hobbies Helsinki Footer EN',
-  sv:
-    process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_SV ??
-    'Hobbies Helsinki Footer SV',
 };

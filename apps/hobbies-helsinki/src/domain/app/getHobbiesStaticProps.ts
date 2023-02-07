@@ -6,15 +6,15 @@ import type {
   Menu,
   Language,
 } from 'events-helsinki-components';
+import {
+  DEFAULT_FOOTER_MENU_NAME,
+  DEFAULT_HEADER_MENU_NAME,
+} from 'events-helsinki-components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import {
   LanguagesDocument,
   MenuDocument,
 } from 'react-helsinki-headless-cms/apollo';
-import {
-  DEFAULT_FOOTER_MENU_NAME,
-  DEFAULT_HEADER_MENU_NAME,
-} from '../../constants';
 import { staticGenerationLogger } from '../../logger';
 import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
 import AppConfig from './AppConfig';

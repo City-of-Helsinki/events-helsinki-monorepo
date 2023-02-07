@@ -4234,7 +4234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jonkoops/matomo-tracker-react@npm:^0.7.0":
+"@jonkoops/matomo-tracker-react@npm:0.7.0, @jonkoops/matomo-tracker-react@npm:^0.7.0":
   version: 0.7.0
   resolution: "@jonkoops/matomo-tracker-react@npm:0.7.0"
   dependencies:
@@ -14772,6 +14772,7 @@ __metadata:
     "@changey/react-leaflet-markercluster": "npm:4.0.0-rc1"
     "@events-helsinki/eslint-config-bases": "workspace:^"
     "@faker-js/faker": "npm:^7.6.0"
+    "@jonkoops/matomo-tracker-react": "npm:0.7.0"
     "@mdx-js/react": "npm:1.6.22"
     "@react-leaflet/core": "npm:2.1.0"
     "@rollup/plugin-babel": "npm:^5.3.1"

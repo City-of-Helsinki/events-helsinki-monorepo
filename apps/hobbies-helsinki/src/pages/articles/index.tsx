@@ -7,7 +7,10 @@ import {
   useCmsTranslation,
   useDebounce,
   Navigation,
+  MatomoWrapper,
+  useCommonTranslation,
 } from 'events-helsinki-components';
+import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
 import {
@@ -37,9 +40,7 @@ import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
 import routerHelper from '../../domain/app/routerHelper';
 import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
-import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
-import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 
 const CATEGORIES_AMOUNT = 20;
 const BLOCK_SIZE = 10;
@@ -49,6 +50,7 @@ export default function ArticleArchive({
   page,
 }: HobbiesGlobalPageProps & { page: PageType }) {
   const { t } = useCmsTranslation();
+  const { t: commonT } = useCommonTranslation();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, SEARCH_DEBOUNCE_TIME);
@@ -188,7 +190,12 @@ export default function ArticleArchive({
             isLoading={isLoading || isLoadingMore}
           />
         }
-        footer={<FooterSection menu={footerMenu} />}
+        footer={
+          <FooterSection
+            menu={footerMenu}
+            appName={commonT('appHobbies:appName')}
+          />
+        }
       />
     </MatomoWrapper>
   );

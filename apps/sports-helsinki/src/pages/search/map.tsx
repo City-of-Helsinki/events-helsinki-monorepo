@@ -3,6 +3,7 @@ import {
   useLocale,
   getURLSearchParamsFromAsPath,
   Navigation,
+  MatomoWrapper,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
@@ -15,7 +16,6 @@ import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import routerHelper from '../../domain/app/routerHelper';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
-import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 import SearchHeader, {
   ShowMode,
 } from '../../domain/search/searchHeader/SearchHeader';

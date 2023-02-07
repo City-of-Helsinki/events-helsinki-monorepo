@@ -3,7 +3,10 @@ import {
   getQlLanguage,
   NavigationContext,
   Navigation,
+  MatomoWrapper,
+  useAppEventsTranslation,
 } from 'events-helsinki-components';
+import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
@@ -26,9 +29,7 @@ import {
 import getEventsStaticProps from '../domain/app/getEventsStaticProps';
 import cmsHelper from '../domain/app/headlessCmsHelper';
 import routerHelper from '../domain/app/routerHelper';
-import FooterSection from '../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
-import MatomoWrapper from '../domain/matomoWrapper/MatomoWrapper';
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 
 const HomePage: NextPage<{
@@ -40,6 +41,7 @@ const HomePage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
+  const { t } = useAppEventsTranslation();
 
   return (
     <MatomoWrapper>
@@ -57,7 +59,9 @@ const HomePage: NextPage<{
             language={getQlLanguage(locale)}
           />
         }
-        footer={<FooterSection menu={footerMenu} />}
+        footer={
+          <FooterSection menu={footerMenu} appName={t('appEvents:appName')} />
+        }
       />
     </MatomoWrapper>
   );

@@ -3,6 +3,8 @@
 .eventCard {
   --height-image: 14.5rem;
 
+  word-break: break-word;
+  min-width: fit-content;
   text-decoration: none;
   background-color: var(--color-white);
   display: grid;
@@ -11,6 +13,7 @@
 
   @include respond_above(s) {
     grid-template-columns: 4fr 5fr;
+    word-break: unset;
   }
 
   .imageWrapper {

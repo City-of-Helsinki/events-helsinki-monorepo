@@ -1,14 +1,12 @@
 import {
   changeLanguageAndTrySearch,
   getEnvUrl,
-} from '../../../../packages/common-tests/browser-tests';
-import HobbiesConsentModal from '../page-models/hobbies-consent-modal';
+  allCookiesUser,
+} from 'events-helsinki-common-tests/browser-tests';
 
 fixture('Landing page header').page(getEnvUrl());
 
-test('Verify header title', async () => {
-  const cookieConsentModal = new HobbiesConsentModal();
-  await cookieConsentModal.isOpened();
-  await cookieConsentModal.clickAcceptAllCookies();
+test('Verify header title', async (t) => {
+  await t.useRole(allCookiesUser);
   await changeLanguageAndTrySearch('appSports');
 });

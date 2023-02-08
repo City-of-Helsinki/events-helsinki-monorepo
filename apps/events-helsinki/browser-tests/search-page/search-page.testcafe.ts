@@ -1,14 +1,14 @@
-import { initTestI18n as i18n } from '../../../../packages/common-i18n/src/';
 import {
+  allCookiesUser,
   EventSearchPage,
   getEnvUrl,
-} from '../../../../packages/common-tests/browser-tests';
+} from 'events-helsinki-common-tests/browser-tests';
+import i18n from '../../../../packages/common-i18n/src/tests/initI18n';
 import { ROUTES } from '../../src/constants';
-import allCookiesUser from '../roles/allCookiesUser';
 
 fixture('Search page')
   .page(getEnvUrl(ROUTES.SEARCH))
-  .beforeEach(async () => i18n.changeLanguage('default'));
+  .beforeEach(async () => await i18n.changeLanguage('default'));
 
 test('Verify searching', async (t) => {
   await t.useRole(allCookiesUser);

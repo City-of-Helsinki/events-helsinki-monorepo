@@ -28,8 +28,9 @@ class LandingPage {
       screen.getByPlaceholderText(searchPlaceholderText),
       this.searchText
     );
-    await t.wait(2000);
-    await t.expect(screen.findByText(this.searchText).exists).ok();
+    await t
+      .expect(screen.findByText(this.searchText).exists)
+      .ok({ timeout: 5000 });
   }
 }
 

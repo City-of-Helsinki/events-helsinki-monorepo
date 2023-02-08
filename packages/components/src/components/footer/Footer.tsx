@@ -1,27 +1,24 @@
-import type { Menu } from 'events-helsinki-components';
-import {
-  useAppHobbiesTranslation,
-  useFooterTranslation,
-  useLocale,
-  resetFocusId,
-} from 'events-helsinki-components';
 import { Footer, Link } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
-
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
+import useFooterTranslation from '../../hooks/useFooterTranslation';
+import useLocale from '../../hooks/useLocale';
+import type { Menu } from '../../types';
+import { resetFocusId } from '../resetFocus/ResetFocus';
 import styles from './footer.module.scss';
 
 type FooterSectionProps = {
+  appName: string;
   menu?: Menu;
 };
 
 const FooterSection: FunctionComponent<FooterSectionProps> = ({
+  appName,
   menu,
 }: FooterSectionProps) => {
   const { t } = useFooterTranslation();
-  const { t: tAppHobbies } = useAppHobbiesTranslation();
   const locale = useLocale();
 
   const { data: footerMenuData } = useMenuQuery({
@@ -40,7 +37,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   };
 
   return (
-    <Footer title={tAppHobbies('appHobbies:appName')} className={styles.footer}>
+    <Footer title={appName} className={styles.footer}>
       <Footer.Utilities
         backToTopLabel={t('footer:backToTop')}
         onBackToTopClick={handleBackToTop}

@@ -6,7 +6,10 @@ import {
   NavigationContext,
   getAllPages,
   Navigation,
+  MatomoWrapper,
+  useCommonTranslation,
 } from 'events-helsinki-components';
+import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -35,9 +38,7 @@ import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
 import routerHelper from '../../domain/app/routerHelper';
 import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
-import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
-import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 
 const NextCmsPage: NextPage<{
   page: PageType;
@@ -48,7 +49,7 @@ const NextCmsPage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
-
+  const { t } = useCommonTranslation();
   return (
     <MatomoWrapper>
       <HCRCPage
@@ -64,7 +65,9 @@ const NextCmsPage: NextPage<{
             }
           />
         }
-        footer={<FooterSection menu={footerMenu} />}
+        footer={
+          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+        }
       />
     </MatomoWrapper>
   );

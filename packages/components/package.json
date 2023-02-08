@@ -37,6 +37,7 @@
   "dependencies": {
     "@apollo/client": "3.6.9",
     "@changey/react-leaflet-markercluster": "4.0.0-rc1",
+    "@jonkoops/matomo-tracker-react": "0.7.0",
     "@react-leaflet/core": "2.1.0",
     "@storybook/addons": "6.5.12",
     "@storybook/client-api": "6.5.12",

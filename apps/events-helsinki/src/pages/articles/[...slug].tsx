@@ -5,14 +5,16 @@ import {
   ShareLinks,
   getAllArticles,
   Navigation,
+  MatomoWrapper,
+  useCommonTranslation,
 } from 'events-helsinki-components';
 import type { AppLanguage } from 'events-helsinki-components';
+import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
   NextPage,
 } from 'next';
-import { useTranslation } from 'next-i18next';
 import { useContext } from 'react';
 import type {
   Breadcrumb,
@@ -36,9 +38,7 @@ import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
 import routerHelper from '../../domain/app/routerHelper';
 import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
-import FooterSection from '../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
-import MatomoWrapper from '../../domain/matomoWrapper/MatomoWrapper';
 
 const NextCmsArticle: NextPage<{
   article: ArticleType;
@@ -49,7 +49,7 @@ const NextCmsArticle: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
 
-  const { t } = useTranslation(['common']);
+  const { t } = useCommonTranslation();
   const { footerMenu } = useContext(NavigationContext);
 
   return (
@@ -74,7 +74,9 @@ const NextCmsArticle: NextPage<{
             }
           />
         }
-        footer={<FooterSection menu={footerMenu} />}
+        footer={
+          <FooterSection menu={footerMenu} appName={t('appEvents:appName')} />
+        }
       />
     </MatomoWrapper>
   );

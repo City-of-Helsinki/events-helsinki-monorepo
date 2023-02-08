@@ -2,21 +2,22 @@ import {
   NavigationContext,
   VenueDocument,
   Navigation,
+  MatomoWrapper,
+  useCommonTranslation,
 } from 'events-helsinki-components';
 import type {
   Venue,
   VenueQuery,
   VenueQueryVariables,
 } from 'events-helsinki-components';
+import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import AppConfig from '../../../domain/app/AppConfig';
 import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
 import routerHelper from '../../../domain/app/routerHelper';
-import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
-import MatomoWrapper from '../../../domain/matomoWrapper/MatomoWrapper';
 import VenuePageContainer from '../../../domain/venue/VenuePageContainer';
 
 const Event: NextPage<{
@@ -24,7 +25,7 @@ const Event: NextPage<{
   loading: boolean;
 }> = ({ venue, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-
+  const { t } = useCommonTranslation();
   return (
     <MatomoWrapper>
       <RHHCPage
@@ -38,7 +39,9 @@ const Event: NextPage<{
             showUpcomingEvents={AppConfig.showVenuesUpcomingEvents}
           />
         }
-        footer={<FooterSection menu={footerMenu} />}
+        footer={
+          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+        }
       />
     </MatomoWrapper>
   );

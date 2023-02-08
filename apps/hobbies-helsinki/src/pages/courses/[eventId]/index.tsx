@@ -2,12 +2,15 @@ import {
   EventDetailsDocument,
   NavigationContext,
   Navigation,
+  MatomoWrapper,
+  useCommonTranslation,
 } from 'events-helsinki-components';
 import type {
   EventFields,
   EventDetailsQuery,
   EventDetailsQueryVariables,
 } from 'events-helsinki-components';
+import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
@@ -15,16 +18,14 @@ import AppConfig from '../../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../../domain/app/getHobbiesStaticProps';
 import routerHelper from '../../../domain/app/routerHelper';
 import EventPageContainer from '../../../domain/event/EventPageContainer';
-import FooterSection from '../../../domain/footer/Footer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
-import MatomoWrapper from '../../../domain/matomoWrapper/MatomoWrapper';
 
 const Event: NextPage<{
   event: EventFields;
   loading: boolean;
 }> = ({ event, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-
+  const { t } = useCommonTranslation();
   return (
     <MatomoWrapper>
       <RHHCPage
@@ -37,7 +38,9 @@ const Event: NextPage<{
             showSimilarEvents={AppConfig.showSimilarEvents}
           />
         }
-        footer={<FooterSection menu={footerMenu} />}
+        footer={
+          <FooterSection menu={footerMenu} appName={t('appHobbies:appName')} />
+        }
       />
     </MatomoWrapper>
   );

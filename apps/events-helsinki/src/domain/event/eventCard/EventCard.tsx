@@ -15,7 +15,7 @@ import { IconArrowRight } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
+import { BackgroundImage } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';

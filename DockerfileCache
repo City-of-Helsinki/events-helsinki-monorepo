@@ -112,7 +112,7 @@ COPY --from=deps --chown=appuser:appuser /workspace-install ./
 # install cache
 RUN yarn install --immutable --inline-builds
 RUN yarn workspace ${PROJECT} share-static-hardlink
-#RUN yarn workspace ${PROJECT} build
+RUN yarn workspace ${PROJECT} build
 
 # Create cache image
 #FROM gcr.io/distroless/static-debian11 AS cache
@@ -123,4 +123,4 @@ WORKDIR /app/.yarn/cache/
 COPY --from=build_cache --chown=appuser:appuser /app/.yarn/cache/ ./
 
 WORKDIR /app
-#COPY --from=build_cache --chown=appuser:appuser /app/apps/${PROJECT}/.next/cache ./apps/${PROJECT}/.next/cache
+COPY --from=build_cache --chown=appuser:appuser /app/apps/${PROJECT}/.next/cache ./apps/${PROJECT}/.next/cache

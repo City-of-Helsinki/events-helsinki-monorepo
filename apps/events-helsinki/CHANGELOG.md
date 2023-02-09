@@ -1,5 +1,37 @@
 # Changelog
 
+## [0.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.4.0...events-helsinki-v0.5.0) (2023-02-09)
+
+
+### Features
+
+* Add feature flag for for enrolment status usage ([10301e0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/10301e022d3e08f796c5168d1396ddd744436de8))
+* **events:** Add end/last modified/start time sorting to events search ([046e792](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/046e792e7627ceb25755d41203bf9fe89b8a00c9))
+* Show the enrolment status in carousel cards ([71cea0a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/71cea0a0c6289793d6b5ac3300164d06768a798e))
+* Show the enrolment status on large event card ([f175ae6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f175ae6e66364405b2b36d0b771c28c28de4689a))
+* Sports locations support ([#141](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/141)) ([f1d0854](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f1d0854d035b0a7f264de177d3398ceb9766cdc6))
+* **sports:** Similar venues section in venue details page ([6af4caf](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6af4cafb0293bef353ca98e2ed0a93e0d029d4ed))
+
+
+### Bug Fixes
+
+* Articles heading styles ([#202](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/202)) ([fd7b6d2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fd7b6d2cfa2fc30841a5f6fb57680b11c37b19df))
+* Card mobile content adjusted ([#208](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/208)) ([299e611](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/299e611b55cca46bbbb6db3d9d7f8222757df601))
+* Carousel spacing headings ([#190](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/190)) ([74cb813](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/74cb813fa339f0f02f23ded397deb1b4ed22ee0d))
+* Different graphql packages problem ([1b5fcbb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1b5fcbb992ee19f6dd6586f8a79ddf604b0621f7))
+* Fallback image hero ([#186](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/186)) ([ae23166](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ae231667d9b7dad8eb013d2124c7df74b4e67861))
+* Fix imports ([2aa376c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2aa376ca6c22160cc2d8951ef613541454404b24))
+* Lint errors from apps ([bc667f4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bc667f484da622c3540d19ba8815a8f8a2ab5b75))
+* Linter issues by removing unnecessary import ([578d8e0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/578d8e0bd2b9fa64e8bb43dc99f47d19df72cb3f))
+* Styles for input components in mobile ([#181](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/181)) ([35c8959](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/35c8959b877fcee02ab87ccdbd939b5845843015))
+* The navigation bar of the CMS pages and articles ([237c3ce](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/237c3ce2a7d2ff7a1319e0bdb6b5e5df2c63de31))
+* The return paths of the the event cards ([558704e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/558704ed85377ee7b3dd7dcc2a10a4c1e3d44ce6))
+
+
+### Performance Improvements
+
+* **liikunta-389:** Try swc/jest ([268dd93](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/268dd93c6296d68be0fb8ccf866654a86b89758c))
+
 ## [0.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.3.0...events-helsinki-v0.4.0) (2023-01-18)
 
 

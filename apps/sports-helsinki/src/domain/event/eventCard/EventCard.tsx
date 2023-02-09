@@ -9,12 +9,13 @@ import {
   getEventFields,
   getEventPrice,
   isEventClosed,
+  LoaderLinkBox,
 } from 'events-helsinki-components';
 import { IconArrowRight } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
+import { BackgroundImage } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import { PARAM_SEARCH_TYPE } from '../../../domain/search/combinedSearch/constants';
@@ -61,7 +62,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
   };
 
   return (
-    <LinkBox
+    <LoaderLinkBox
       aria-label={t('eventCard.ariaLabelLink', {
         name,
       })}
@@ -131,7 +132,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
           </div>
         </BackgroundImage>
       </div>
-    </LinkBox>
+    </LoaderLinkBox>
   );
 };
 

@@ -14,6 +14,7 @@ import {
   isEventClosed,
   isEventFree,
   EnrolmentStatusLabel,
+  LoaderLinkBox,
 } from 'events-helsinki-components';
 import {
   Button,
@@ -92,7 +93,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
   return (
-    <LinkBox
+    <LoaderLinkBox
       type="linkBox"
       aria-label={t('eventCard.ariaLabelLink', {
         name,
@@ -215,7 +216,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
           </div>
         </BackgroundImage>
       </div>
-    </LinkBox>
+    </LoaderLinkBox>
   );
 };
 

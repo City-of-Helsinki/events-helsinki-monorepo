@@ -9,6 +9,7 @@ import {
   getEventFields,
   getEventPrice,
   isEventClosed,
+  LoaderLinkBox,
 } from 'events-helsinki-components';
 import { IconArrowRight } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -60,7 +61,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
   };
 
   return (
-    <LinkBox
+    <LoaderLinkBox
       aria-label={t('eventCard.ariaLabelLink', {
         name,
       })}
@@ -130,7 +131,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
           </div>
         </BackgroundImage>
       </div>
-    </LinkBox>
+    </LoaderLinkBox>
   );
 };
 

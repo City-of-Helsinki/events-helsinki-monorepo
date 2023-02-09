@@ -14,6 +14,7 @@ import {
   getLargeEventCardId,
   isEventClosed,
   isEventFree,
+  LoaderLinkBox,
 } from 'events-helsinki-components';
 import {
   Button,
@@ -26,7 +27,7 @@ import {
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
+import { BackgroundImage } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import AppConfig from '../../app/AppConfig';
@@ -92,7 +93,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
   return (
-    <LinkBox
+    <LoaderLinkBox
       type="linkBox"
       aria-label={t('eventCard.ariaLabelLink', {
         name,
@@ -215,7 +216,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
           </div>
         </BackgroundImage>
       </div>
-    </LinkBox>
+    </LoaderLinkBox>
   );
 };
 

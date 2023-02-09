@@ -1,5 +1,6 @@
 import { LoadingSpinner, useLocale } from 'events-helsinki-components';
 import type { EventFields } from 'events-helsinki-components';
+import { LoadingWrapper } from 'events-helsinki-components/components/loaderLinkBox/LoaderLinkBox';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import type { CollectionProps } from 'react-helsinki-headless-cms';
@@ -47,15 +48,17 @@ const SimilarEvents: React.FC<Props> = ({
       locale
     );
     return (
-      <Card
-        key={cardProps.id}
-        {...cardProps}
-        url={url}
-        direction="fixed-vertical"
-        customContent={
-          EventCardContent && <EventCardContent event={events[i]} />
-        }
-      />
+      <LoadingWrapper key={cardProps.id} {...cardProps}>
+        <Card
+          key={cardProps.id}
+          {...cardProps}
+          url={url}
+          direction="fixed-vertical"
+          customContent={
+            EventCardContent && <EventCardContent event={events[i]} />
+          }
+        />
+      </LoadingWrapper>
     );
   });
 

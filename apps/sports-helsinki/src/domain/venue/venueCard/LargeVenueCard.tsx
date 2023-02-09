@@ -2,13 +2,14 @@ import {
   useLocale,
   getLargeEventCardId,
   useVenueTranslation,
+  LoaderLinkBox,
 } from 'events-helsinki-components';
 import { IconArrowRight, IconLocation } from 'hds-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
   BackgroundImage,
-  LinkBox,
   SecondaryLink,
   TagComponent as Tag,
 } from 'react-helsinki-headless-cms';
@@ -51,7 +52,7 @@ const LargeVenueCard: React.FC<Props> = ({
   );
 
   return (
-    <LinkBox
+    <LoaderLinkBox
       type="linkBox"
       aria-label={t('venue:venueCard.ariaLabelLink', {
         name: title,
@@ -89,9 +90,9 @@ const LargeVenueCard: React.FC<Props> = ({
           className={styles.imageWrapper}
           id={id}
           url={imageUrl || ''}
-        ></BackgroundImage>
+        />
       </div>
-    </LinkBox>
+    </LoaderLinkBox>
   );
 };
 

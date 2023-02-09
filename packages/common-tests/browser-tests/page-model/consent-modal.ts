@@ -46,6 +46,7 @@ class ConsentModal {
   }
 
   public async isOpened() {
+    await t.wait(2000);
     await t.expect(this.componentContainer.exists).ok();
     await t.expect(this.title.exists).ok();
     await t.expect(this.acceptAllCookiesButton.exists).ok();

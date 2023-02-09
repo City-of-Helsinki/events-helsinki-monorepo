@@ -1,1 +1,6 @@
-export { default as allCookiesUser, acceptAllCookies } from './allCookiesUser';
+export {
+  default as allCookiesUser,
+  acceptAllCookies,
+  setConsentAllCookie,
+  cookieConsentName,
+} from './allCookiesUser';

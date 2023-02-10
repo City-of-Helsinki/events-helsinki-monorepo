@@ -54,6 +54,22 @@ services:
         - APP_PORT=3000
         - PROJECT=sports-helsinki
 
+  # Convenience production "cache" stage service for debugging
+  # Build > docker buildx bake -f docker-compose.sports.yml --progress=tty cache
+  # Build > docker compose -f docker-compose.sports.yml build --progress=tty cache
+  cache:
+    container_name: sports-helsinki-multistage-cache
+    # profiles:
+    #   - donotstart
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: DockerfileCache
+      target: cache
+      args:
+        - APP_PORT=3000
+        - PROJECT=sports-helsinki
+
   # Convenience production "runner" stage service for debugging
   # Build > docker buildx bake -f docker-compose.sports-helsinki.yml --progress=tty runner
   # Run   > docker-compose -f docker-compose.sports-helsinki.yml --env-file ./apps/sports-helsinki/.env.local up runner

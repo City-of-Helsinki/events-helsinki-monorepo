@@ -121,7 +121,6 @@ RUN yarn workspace ${PROJECT} build
 #    SKIP_POSTINSTALL=1 \
 #    YARN_CACHE_FOLDER=/root/.yarn3-cache \
 #    yarn workspaces focus ${PROJECT} --production
-#RUN yarn workspaces focus ${PROJECT} --production
 
 CMD ["sh", "-c", "echo ${PROJECT}"]
 
@@ -193,10 +192,6 @@ COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n/src/locale
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone .
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
-
-# The root level files
-#COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
-#COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
 
 # OpenShift write access to Next cache folder
 USER root

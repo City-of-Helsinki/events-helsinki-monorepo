@@ -4,6 +4,7 @@ import {
   getEventIdFromUrl,
   useEventListQuery,
   useVenuesByIdsLazyQuery,
+  useLocale,
 } from 'events-helsinki-components';
 import type {
   EventListQuery,
@@ -238,6 +239,7 @@ export const useLocationUpcomingEventsQuery = ({
 };
 
 export const useSimilarVenuesQuery = (venue: Venue) => {
+  const locale = useLocale();
   const ontologyWordIds = venue.ontologyWords.reduce(
     (ontologies: string[], ontology) => {
       if (ontology?.id) {
@@ -261,6 +263,11 @@ export const useSimilarVenuesQuery = (venue: Venue) => {
   // Search for venues from venues-proxy (e.g. TPREK as a datasource) with the venue ids.
   const [getVenuesByIds, queryProps] = useVenuesByIdsLazyQuery({
     ssr: false,
+    context: {
+      headers: {
+        'Accept-Language': locale,
+      },
+    },
   });
 
   // Trigger the venues by ids search when the ids are fetched.

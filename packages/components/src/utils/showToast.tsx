@@ -24,6 +24,7 @@ function Toast({ closeToast, title, message, type, options }: ToastProps) {
     <Notification
       label={title}
       position="top-right"
+      boxShadow
       dismissible
       closeButtonLabelText={t('common:button.close')}
       type={type}

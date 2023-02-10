@@ -1,9 +1,6 @@
 import Header from '../page-model/header';
 import LandingPage from '../page-model/landingPage';
 import type { AppNamespace } from '../types/app-namespace';
-import { getEnvUrl } from '../utils';
-
-fixture('Landing page header').page(getEnvUrl());
 
 export const changeLanguageAndTrySearch = async (
   appNamespace: AppNamespace
@@ -19,6 +16,5 @@ export const changeLanguageAndTrySearch = async (
 
   await header.changeLanguage('sv');
   await header.verify();
-  // This fails for sv,  search box is not fully visible
-  // await landingPage.verify();
+  await landingPage.verify();
 };

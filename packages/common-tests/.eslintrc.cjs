@@ -3,6 +3,9 @@
  * @see https://github.com/City-of-Helsinki/events-helsinki-monorepo/blob/main/docs/about-linters.md
  */
 
+// Workaround for https://github.com/eslint/eslint/issues/3458 (re-export of @rushstack/eslint-patch)
+require('@events-helsinki/eslint-config-bases/patch/modern-module-resolution');
+
 const {
   getDefaultIgnorePatterns,
 } = require('@events-helsinki/eslint-config-bases/helpers');
@@ -12,6 +15,14 @@ module.exports = {
   parserOptions: {
     tsconfigRootDir: __dirname,
     project: 'tsconfig.json',
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: ['src'],
+      },
+    },
   },
   ignorePatterns: [...getDefaultIgnorePatterns()],
   extends: [

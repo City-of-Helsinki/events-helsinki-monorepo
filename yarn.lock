@@ -14715,7 +14715,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"events-helsinki-common-tests@workspace:packages/common-tests":
+"events-helsinki-common-tests@workspace:^, events-helsinki-common-tests@workspace:packages/common-tests":
   version: 0.0.0-use.local
   resolution: "events-helsinki-common-tests@workspace:packages/common-tests"
   dependencies:
@@ -15059,6 +15059,7 @@ __metadata:
     eslint-plugin-testcafe-community: "npm:2.0.0"
     eslint-plugin-testing-library: "npm:5.7.0"
     events-helsinki-common-i18n: "workspace:^"
+    events-helsinki-common-tests: "workspace:^"
     events-helsinki-components: "workspace:^"
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.6.0"
@@ -17272,6 +17273,7 @@ __metadata:
     eslint-plugin-testcafe-community: "npm:2.0.0"
     eslint-plugin-testing-library: "npm:5.7.0"
     events-helsinki-common-i18n: "workspace:^"
+    events-helsinki-common-tests: "workspace:^"
     events-helsinki-components: "workspace:^"
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.6.0"
@@ -28012,6 +28014,7 @@ __metadata:
     eslint-plugin-testcafe-community: "npm:2.0.0"
     eslint-plugin-testing-library: "npm:5.7.0"
     events-helsinki-common-i18n: "workspace:^"
+    events-helsinki-common-tests: "workspace:^"
     events-helsinki-components: "workspace:^"
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.6.0"

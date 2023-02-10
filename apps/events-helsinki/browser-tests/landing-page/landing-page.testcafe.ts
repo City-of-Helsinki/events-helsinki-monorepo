@@ -1,14 +1,12 @@
 import {
-  getEnvUrl,
   changeLanguageAndTrySearch,
-} from '../../../../packages/common-tests/browser-tests';
-import EventsConsentModal from '../page-models/events-consent-modal';
+  getEnvUrl,
+  allCookiesUser,
+} from 'events-helsinki-common-tests/browser-tests';
 
-fixture('Landing page header').page(getEnvUrl());
+fixture.disablePageCaching('Landing page header');
 
-test('Verify header title', async () => {
-  const cookieConsentModal = new EventsConsentModal();
-  await cookieConsentModal.isOpened();
-  await cookieConsentModal.clickAcceptAllCookies();
+test('Verify header title', async (t) => {
+  await t.useRole(allCookiesUser).navigateTo(getEnvUrl());
   await changeLanguageAndTrySearch('appEvents');
 });

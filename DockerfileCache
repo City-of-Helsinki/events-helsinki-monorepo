@@ -7,7 +7,6 @@
 #   2. depend on .dockerignore, you must at least                 #
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
-ARG BUILDER_FROM_IMAGE=helsinkitest/node:16-slim
 
 FROM helsinkitest/node:16-slim AS deps
 
@@ -70,9 +69,11 @@ RUN apt-get remove -y rsync && \
 
 
 ###################################################################
-# Stage 2: Build the app                                          #
+# Build cache image                                               #
+# This is used to speedup OpenShift builds                        #
 ###################################################################
-FROM ${BUILDER_FROM_IMAGE}  AS builder
+# Build cache layer
+FROM helsinkitest/node:16-slim  AS build_cache
 # Build ARGS
 ARG PROJECT
 ARG NEXT_PUBLIC_CMS_ORIGIN
@@ -108,103 +109,18 @@ WORKDIR /app
 COPY --chown=appuser:appuser  . .
 COPY --from=deps --chown=appuser:appuser /workspace-install ./
 
-# Optional: if the app depends on global /static shared assets like images, locales...
-
+# install cache
 RUN yarn install --immutable --inline-builds
 RUN yarn workspace ${PROJECT} share-static-hardlink
 RUN yarn workspace ${PROJECT} build
 
-# Does not play well with buildkit on CI
-# https://github.com/moby/buildkit/issues/1673
-# mount type cache is not supported on current version (4.10.35) of OpenShift build
-#RUN --mount=type=cache,target=/root/.yarn3-cache,id=yarn3-cache \
-#    SKIP_POSTINSTALL=1 \
-#    YARN_CACHE_FOLDER=/root/.yarn3-cache \
-#    yarn workspaces focus ${PROJECT} --production
-
-CMD ["sh", "-c", "echo ${PROJECT}"]
-
-###################################################################
-# Optional: develop locally                                       #
-# NOTE: "In multi-stage builds,                                   #
-# last stage should be the production build."                     #
-###################################################################
-
-FROM helsinkitest/node:16-slim  AS develop
-
-# Use non-root user
-USER appuser
-
-# Build ARGS
+# Create cache image
+#FROM gcr.io/distroless/static-debian11 AS cache
+FROM helsinkitest/node:16-slim AS cache
 ARG PROJECT
-ARG APP_PORT
 
-ENV NODE_ENV=development
+WORKDIR /app/.yarn/cache/
+COPY --from=build_cache --chown=appuser:appuser /app/.yarn/cache/ ./
 
 WORKDIR /app
-
-COPY --from=deps --chown=appuser:appuser /workspace-install ./
-
-ENV PORT ${APP_PORT:-3000}
-
-# Expose port
-EXPOSE $PORT
-
-ENV DEV_START "yarn dev -p ${PORT}"
-
-WORKDIR /app/apps/$PROJECT
-
-CMD ["sh", "-c", "${DEV_START}"]
-
-
-###################################################################
-# Stage 3: Extract a minimal image from the build                 #
-###################################################################
-
-FROM helsinkitest/node:16-slim  AS runner
-
-# Use non-root user
-USER appuser
-
-# Build ARGS
-ARG PROJECT
-ARG APP_PORT
-
-WORKDIR /app
-
-ENV PATH $PATH:/app/node_modules/.bin
-ENV NODE_ENV production
-
-# Copy the configuration files to the apps/project root
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
-    /app/apps/${PROJECT}/i18nRoutes.config.js \
-    /app/apps/${PROJECT}/next-i18next.config.js \
-    /app/apps/${PROJECT}/package.json \
-    ./apps/${PROJECT}/
-
-# Copy common-i18n to share localization files after build
-COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n/src/locales \
-    ./packages/common-i18n/src/locales
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-# copy only the necessary files for a production deployment including select files in node_modules.
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone .
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
-
-# OpenShift write access to Next cache folder
-USER root
-RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages
-USER appuser
-
-ENV NEXT_TELEMETRY_DISABLED 1
-ENV PORT ${APP_PORT:-3000}
-
-# Expose port
-EXPOSE $PORT
-
-# ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
-ENV PROD_START "node ./apps/${PROJECT}/server.js"
-
-CMD ["sh", "-c", "${PROD_START}"]
+COPY --from=build_cache --chown=appuser:appuser /app/apps/${PROJECT}/.next/cache ./apps/${PROJECT}/.next/cache

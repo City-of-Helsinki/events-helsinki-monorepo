@@ -1,45 +1,65 @@
 import { screen } from '@testing-library/testcafe';
-import { t } from 'testcafe';
+import { Selector, t } from 'testcafe';
 
-// TODO: If the ConsentModal could be used as a generic class,
-// the  implementing classes could be deleted from the apps.
-// More details: https://github.com/City-of-Helsinki/events-helsinki-monorepo/pull/95#discussion_r1050459925
-abstract class ConsentModal {
-  protected abstract get appName(): string;
-
+class ConsentModal {
   private get title() {
-    return screen.findByRole('heading', {
-      name: `${this.appName} käyttää evästeitä`,
+    return screen.getByRole('heading', {
+      name: /\w+ käyttää evästeitä/,
     });
   }
 
   private get acceptAllCookiesButton() {
-    return screen.findByRole('button', {
+    return screen.getByRole('button', {
       name: /hyväksy kaikki evästeet/i,
     });
   }
 
   private get acceptOnlyRequiredCookiesButton() {
-    return screen.findByRole('button', {
-      name: /hyväksy vain pakolliset evästeet/i,
+    return screen.getByRole('button', {
+      name: /hyväksy vain välttämättömät evästeet/i,
     });
+  }
+
+  private get readMoreButton() {
+    return screen.getByRole('button', {
+      name: /lue lisää/i,
+    });
+  }
+
+  private get componentContainer() {
+    return Selector('#cookie-consent-content');
   }
 
   public async clickAcceptAllCookies() {
     await t.click(this.acceptAllCookiesButton);
+    console.log('ConsentModal: acceptAllCookies');
     await this.isClosed();
   }
 
   public async clickAcceptOnlyRequiredCookies() {
     await t.click(this.acceptOnlyRequiredCookiesButton);
+    console.log('ConsentModal: acceptOnlyRequiredCookies');
     await this.isClosed();
   }
 
   public async isOpened() {
+    await t.expect(this.componentContainer.exists).ok();
     await t.expect(this.title.exists).ok();
+    await t.expect(this.acceptAllCookiesButton.exists).ok();
+    await t.expect(this.acceptOnlyRequiredCookiesButton.exists).ok();
+    console.log('ConsentModal: isOpened');
   }
+
+  public async isMinimized() {
+    await t.expect(this.componentContainer.exists).ok();
+    await t.expect(this.title.exists).ok();
+    await t.expect(this.readMoreButton.exists).ok();
+    console.log('ConsentModal: isMinimized');
+  }
+
   public async isClosed() {
-    await t.expect(this.title.exists).notOk();
+    await t.expect(this.componentContainer.exists).notOk();
+    console.log('ConsentModal: isClosed');
   }
 }
 

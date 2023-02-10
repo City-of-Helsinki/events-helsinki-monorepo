@@ -12,6 +12,12 @@
       "@/test-utils": ["../config/jest/test-utils"],
       "@/test-utils/*": ["../config/jest/*"],
       "@/lib/*": ["./lib/*"],
+      "events-helsinki-common-tests": [
+        "../../../packages/common-tests/src/index"
+      ],
+      "events-helsinki-common-tests/browser-tests": [
+        "../../../packages/common-tests/src/browser-tests/*"
+      ],
       "events-helsinki-common-i18n": [
         "../../../packages/common-i18n/src/index"
       ],

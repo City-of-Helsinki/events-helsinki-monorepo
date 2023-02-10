@@ -1,17 +1,17 @@
-import { initTestI18n as i18n } from '../../../../packages/common-i18n/src/';
 import {
-  EventSearchPage,
   getEnvUrl,
-} from '../../../../packages/common-tests/browser-tests';
+  allCookiesUser,
+  EventSearchPage,
+} from 'events-helsinki-common-tests/browser-tests';
+import i18n from '../../../../packages/common-i18n/src/tests/initI18n';
 import { ROUTES } from '../../src/constants';
-import allCookiesUser from '../roles/allCookiesUser';
 
-fixture('Search page')
-  .page(getEnvUrl(ROUTES.SEARCH))
-  .beforeEach(async () => i18n.changeLanguage('default'));
+fixture.disablePageCaching('Search page').beforeEach(async () => {
+  await i18n.changeLanguage('default');
+});
 
 test('Verify searching', async (t) => {
-  await t.useRole(allCookiesUser);
+  await t.useRole(allCookiesUser).navigateTo(getEnvUrl(ROUTES.SEARCH));
   const searchPage = new EventSearchPage('appEvents');
   await searchPage.verify();
   await searchPage.doSuccessfulSearch();

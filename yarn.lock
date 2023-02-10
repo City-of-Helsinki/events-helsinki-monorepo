@@ -2778,6 +2778,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@devexpress/bin-v8-flags-filter@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@devexpress/bin-v8-flags-filter@npm:1.3.0"
+  checksum: d98493d026ec7cccbfe32fe9ea6b2982b92deb736d2560f6daf4c32d5aac8d534adbedd0ae84c817b5c37a45c5e3e4a05de08618c6c5a6e8941884ba26bb73b8
+  languageName: node
+  linkType: hard
+
 "@devexpress/error-stack-parser@npm:^2.0.6":
   version: 2.0.6
   resolution: "@devexpress/error-stack-parser@npm:2.0.6"
@@ -7154,23 +7161,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^7.27.1":
-  version: 7.31.2
-  resolution: "@testing-library/dom@npm:7.31.2"
-  dependencies:
-    "@babel/code-frame": "npm:^7.10.4"
-    "@babel/runtime": "npm:^7.12.5"
-    "@types/aria-query": "npm:^4.2.0"
-    aria-query: "npm:^4.2.2"
-    chalk: "npm:^4.1.0"
-    dom-accessibility-api: "npm:^0.5.6"
-    lz-string: "npm:^1.4.4"
-    pretty-format: "npm:^26.6.2"
-  checksum: 8fbe51e8139952b244c562cbf7803930122516ad715bfb9cb7767949c890a5ba0f9f2e3dc2c9fb7cae441bb88ddeac4c2a04c2053879b180812f53195ad5cc37
-  languageName: node
-  linkType: hard
-
-"@testing-library/dom@npm:^8.13.0, @testing-library/dom@npm:^8.5.0":
+"@testing-library/dom@npm:^8.13.0, @testing-library/dom@npm:^8.19.0, @testing-library/dom@npm:^8.5.0":
   version: 8.20.0
   resolution: "@testing-library/dom@npm:8.20.0"
   dependencies:
@@ -7239,14 +7230,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/testcafe@npm:^4.4.0":
-  version: 4.4.1
-  resolution: "@testing-library/testcafe@npm:4.4.1"
+"@testing-library/testcafe@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@testing-library/testcafe@npm:5.0.0"
   dependencies:
-    "@testing-library/dom": "npm:^7.27.1"
+    "@testing-library/dom": "npm:^8.19.0"
   peerDependencies:
-    testcafe: ">= 1.5.0"
-  checksum: 24d03803849ab34c8792961f4f5274038834035efe8e92b0ff927655d460544982a359a3b8e9f55313828ecb9bcc162a0a218650dcb90973efcdb1b83b34a4ee
+    testcafe: ">=2.0.0"
+  checksum: 4c405304493bbd3b19671cf897584239ebd17dd5994a5a22358fdb9e54371d9b49263bdca06070e95616a5d9780018d377c977c4cfd2a931d827c67cb20d3b87
   languageName: node
   linkType: hard
 
@@ -9300,7 +9291,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-regex@npm:^5.0.0, ansi-regex@npm:^5.0.1":
+"ansi-regex@npm:^5.0.1":
   version: 5.0.1
   resolution: "ansi-regex@npm:5.0.1"
   checksum: 627f94ee7fcc5e03186646ebd11ca2ccd954f3cb48fc6a3f42883db6bbf3df5dfba06d62647b2f72c975349fc072c5c44808b7da26d08a9313a7f304acda2efb
@@ -10094,16 +10085,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-module-resolver@npm:^4.0.0":
-  version: 4.1.0
-  resolution: "babel-plugin-module-resolver@npm:4.1.0"
+"babel-plugin-module-resolver@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "babel-plugin-module-resolver@npm:5.0.0"
   dependencies:
-    find-babel-config: "npm:^1.2.0"
-    glob: "npm:^7.1.6"
+    find-babel-config: "npm:^2.0.0"
+    glob: "npm:^8.0.3"
     pkg-up: "npm:^3.1.0"
-    reselect: "npm:^4.0.0"
-    resolve: "npm:^1.13.1"
-  checksum: cbd694d2f82547da81997f812cd8e42865589fd83a96cbeef673295568e098c6496afeaacb5802ce3e84306fc4c9d5a7569f120ac8263c9ef8badc85d70aa47d
+    reselect: "npm:^4.1.7"
+    resolve: "npm:^1.22.1"
+  checksum: 63eba8ca3dd7c2bfeace786cc725ca60f21c95496961f4cb707ed25cdb33df0d4b524d1a1b2dff27610b438f9515e7f2342d03e01b41e86fce44ff087612290a
   languageName: node
   linkType: hard
 
@@ -10360,13 +10351,6 @@ __metadata:
   version: 5.2.2
   resolution: "big.js@npm:5.2.2"
   checksum: 1c63accd17ba7d86676380280190cf748c6f715b74ddc36a3999d20689f78e59f6f76958fb811d40b57efca8dfaaacdc4508521d06a8a8d1e86194bc0f4b4575
-  languageName: node
-  linkType: hard
-
-"bin-v8-flags-filter@npm:^1.1.2":
-  version: 1.2.0
-  resolution: "bin-v8-flags-filter@npm:1.2.0"
-  checksum: 4456f735c2ac67cd74769f2d262ad16b161d9504ce7066b548d37a89c0de4b3c8084aeb45b4054c37991e4e9b9a0c32354952270a5fdcf1fed237241cd5aafab
   languageName: node
   linkType: hard
 
@@ -14549,15 +14533,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esotope-hammerhead@npm:0.6.2":
-  version: 0.6.2
-  resolution: "esotope-hammerhead@npm:0.6.2"
-  dependencies:
-    "@types/estree": "npm:0.0.46"
-  checksum: b31087875c34250b90a57bcdf7b4e46673800b9254420073e1556af3c275ccb43e2adb74ff4ac6eb3b08fbd90bec25220742d7ce5270f6843b671735e05bc10a
-  languageName: node
-  linkType: hard
-
 "esotope-hammerhead@npm:0.6.3":
   version: 0.6.3
   resolution: "esotope-hammerhead@npm:0.6.3"
@@ -14745,7 +14720,7 @@ __metadata:
   resolution: "events-helsinki-common-tests@workspace:packages/common-tests"
   dependencies:
     "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@testing-library/testcafe": "npm:^4.4.0"
+    "@testing-library/testcafe": "npm:^5.0.0"
     "@types/jest": "npm:29.1.0"
     "@types/node": "npm:18.7.23"
     cross-env: "npm:7.0.3"
@@ -14760,7 +14735,7 @@ __metadata:
     i18next: "npm:21.10.0"
     prettier: "npm:2.7.1"
     rimraf: "npm:3.0.2"
-    testcafe: "npm:^2.0.0"
+    testcafe: "npm:^2.3.1"
     typescript: "npm:4.8.4"
   languageName: unknown
   linkType: soft
@@ -15039,7 +15014,7 @@ __metadata:
     "@testing-library/dom": "npm:^8.13.0"
     "@testing-library/jest-dom": "npm:^5.16.4"
     "@testing-library/react": "npm:^13.2.0"
-    "@testing-library/testcafe": "npm:^4.4.0"
+    "@testing-library/testcafe": "npm:^5.0.0"
     "@testing-library/user-event": "npm:^14.2.0"
     "@types/file-saver": "npm:^2.0.5"
     "@types/jest": "npm:^27.5.1"
@@ -15128,7 +15103,7 @@ __metadata:
     size-limit: "npm:8.1.0"
     symlink-dir: "npm:5.0.1"
     sync-directory: "npm:5.1.7"
-    testcafe: "npm:^2.0.0"
+    testcafe: "npm:^2.3.1"
     ts-jest: "npm:^28.0.3"
     typescript: "npm:4.8.4"
     waait: "npm:^1.0.5"
@@ -15700,13 +15675,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"find-babel-config@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "find-babel-config@npm:1.2.0"
+"find-babel-config@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "find-babel-config@npm:2.0.0"
   dependencies:
-    json5: "npm:^0.5.1"
-    path-exists: "npm:^3.0.0"
-  checksum: 20fbfba54675dda52ae8e29acdc19228598053d28f1dffd3fddc748a9d849c930b9cbdb1576b547fd6d12ca7883f5dba4208d99dfb6fc7c53840ad3b6e2781a8
+    json5: "npm:^2.1.1"
+    path-exists: "npm:^4.0.0"
+  checksum: afc572f19471f8389a821f33ed82f8cb159f6adfdeadfb742214d86f5cc8fb6aef3adffd67a01970df2ff5c7f93118e77ac6a50b4ad6de69ba11b44259b0e214
   languageName: node
   linkType: hard
 
@@ -16473,7 +16448,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^8.0.1":
+"glob@npm:^8.0.1, glob@npm:^8.0.3":
   version: 8.1.0
   resolution: "glob@npm:8.1.0"
   dependencies:
@@ -17252,7 +17227,7 @@ __metadata:
     "@testing-library/dom": "npm:^8.13.0"
     "@testing-library/jest-dom": "npm:^5.16.4"
     "@testing-library/react": "npm:^13.2.0"
-    "@testing-library/testcafe": "npm:^4.4.0"
+    "@testing-library/testcafe": "npm:^5.0.0"
     "@testing-library/user-event": "npm:^14.2.0"
     "@types/file-saver": "npm:^2.0.5"
     "@types/jest": "npm:^27.5.1"
@@ -17341,7 +17316,7 @@ __metadata:
     size-limit: "npm:8.1.0"
     symlink-dir: "npm:5.0.1"
     sync-directory: "npm:5.1.7"
-    testcafe: "npm:^2.0.0"
+    testcafe: "npm:^2.3.1"
     ts-jest: "npm:^28.0.3"
     typescript: "npm:4.8.4"
     waait: "npm:^1.0.5"
@@ -20478,15 +20453,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "json5@npm:0.5.1"
-  bin:
-    json5: lib/cli.js
-  checksum: 72201befd014e40ee453ee05eed9df01e180fc2baca9be06316a0189ef6ae54d72f0504109d8270e5aedebd0570587b3c360c5aa9293a7ec777c4ecbd908adb8
-  languageName: node
-  linkType: hard
-
 "json5@npm:^1.0.1":
   version: 1.0.2
   resolution: "json5@npm:1.0.2"
@@ -20498,7 +20464,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^2.1.0, json5@npm:^2.1.2, json5@npm:^2.1.3, json5@npm:^2.2.0, json5@npm:^2.2.1, json5@npm:^2.2.2":
+"json5@npm:^2.1.1, json5@npm:^2.1.2, json5@npm:^2.1.3, json5@npm:^2.2.0, json5@npm:^2.2.1, json5@npm:^2.2.2":
   version: 2.2.3
   resolution: "json5@npm:2.2.3"
   bin:
@@ -25074,18 +25040,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "pretty-format@npm:26.6.2"
-  dependencies:
-    "@jest/types": "npm:^26.6.2"
-    ansi-regex: "npm:^5.0.0"
-    ansi-styles: "npm:^4.0.0"
-    react-is: "npm:^17.0.1"
-  checksum: 2363cfda6338390c4bd3026c277342ac214bdd18c99d1afd649e7867e8547763198c97265d81b689c3b98dffcadcca315453bbd5ba52d4b15024c8a694c1638d
-  languageName: node
-  linkType: hard
-
 "pretty-format@npm:^27.0.0, pretty-format@npm:^27.0.2, pretty-format@npm:^27.5.1":
   version: 27.5.1
   resolution: "pretty-format@npm:27.5.1"
@@ -26470,7 +26424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"reselect@npm:^4.0.0":
+"reselect@npm:^4.0.0, reselect@npm:^4.1.7":
   version: 4.1.7
   resolution: "reselect@npm:4.1.7"
   checksum: 5b144c6fdf4bf01571788e9b0c9f743446c578a766c25dc1337b4779037249f4b680492603135c95cae8e6a2e6f5a6b339124aef00a759e9e7aca24e6bfdd8b7
@@ -26539,7 +26493,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@npm:^1.1.6, resolve@npm:^1.10.0, resolve@npm:^1.12.0, resolve@npm:^1.13.1, resolve@npm:^1.14.2, resolve@npm:^1.17.0, resolve@npm:^1.19.0, resolve@npm:^1.20.0, resolve@npm:^1.22.0, resolve@npm:^1.22.1, resolve@npm:^1.3.2":
+"resolve@npm:^1.1.6, resolve@npm:^1.10.0, resolve@npm:^1.12.0, resolve@npm:^1.14.2, resolve@npm:^1.17.0, resolve@npm:^1.19.0, resolve@npm:^1.20.0, resolve@npm:^1.22.0, resolve@npm:^1.22.1, resolve@npm:^1.3.2":
   version: 1.22.1
   resolution: "resolve@npm:1.22.1"
   dependencies:
@@ -26565,7 +26519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A^1.1.6#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.12.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.13.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.14.2#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.17.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.19.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.3.2#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A^1.1.6#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.12.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.14.2#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.17.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.19.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.3.2#optional!builtin<compat/resolve>":
   version: 1.22.1
   resolution: "resolve@patch:resolve@npm%3A1.22.1#optional!builtin<compat/resolve>::version=1.22.1&hash=07638b"
   dependencies:
@@ -28010,7 +27964,7 @@ __metadata:
     "@testing-library/dom": "npm:^8.13.0"
     "@testing-library/jest-dom": "npm:^5.16.4"
     "@testing-library/react": "npm:^13.2.0"
-    "@testing-library/testcafe": "npm:^4.4.0"
+    "@testing-library/testcafe": "npm:^5.0.0"
     "@testing-library/user-event": "npm:^14.2.0"
     "@types/accepts": "npm:1.3.5"
     "@types/file-saver": "npm:^2.0.5"
@@ -28104,7 +28058,7 @@ __metadata:
     size-limit: "npm:8.1.0"
     symlink-dir: "npm:5.0.1"
     sync-directory: "npm:5.1.7"
-    testcafe: "npm:^2.0.0"
+    testcafe: "npm:^2.3.1"
     ts-jest: "npm:^28.0.3"
     typescript: "npm:4.8.4"
     waait: "npm:^1.0.5"
@@ -29211,41 +29165,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe-hammerhead@npm:28.2.5":
-  version: 28.2.5
-  resolution: "testcafe-hammerhead@npm:28.2.5"
-  dependencies:
-    acorn-hammerhead: "npm:0.6.1"
-    asar: "npm:^2.0.1"
-    bowser: "npm:1.6.0"
-    crypto-md5: "npm:^1.0.0"
-    css: "npm:2.2.3"
-    debug: "npm:4.3.1"
-    esotope-hammerhead: "npm:0.6.2"
-    http-cache-semantics: "npm:^4.1.0"
-    iconv-lite: "npm:0.5.1"
-    lodash: "npm:^4.17.20"
-    lru-cache: "npm:2.6.3"
-    match-url-wildcard: "npm:0.0.4"
-    merge-stream: "npm:^1.0.1"
-    mime: "npm:~1.4.1"
-    mustache: "npm:^2.1.1"
-    nanoid: "npm:^3.1.12"
-    os-family: "npm:^1.0.0"
-    parse5: "npm:2.2.3"
-    pinkie: "npm:2.0.4"
-    read-file-relative: "npm:^1.2.0"
-    semver: "npm:5.5.0"
-    tough-cookie: "npm:4.0.0"
-    tunnel-agent: "npm:0.6.0"
-    webauth: "npm:^1.1.0"
-  checksum: 6a86ac29a2b431149ca0bd66318380b4518a144e31d669e8a72c4d05157e9b53b494f17807b6c0150eb790c60dd6924f6d7e2b8e72482ee23e6354a1cc4af7f6
-  languageName: node
-  linkType: hard
-
-"testcafe-hammerhead@npm:>=19.4.0":
-  version: 28.2.7
-  resolution: "testcafe-hammerhead@npm:28.2.7"
+"testcafe-hammerhead@npm:28.4.2, testcafe-hammerhead@npm:>=19.4.0":
+  version: 28.4.2
+  resolution: "testcafe-hammerhead@npm:28.4.2"
   dependencies:
     acorn-hammerhead: "npm:0.6.1"
     asar: "npm:^2.0.1"
@@ -29271,7 +29193,7 @@ __metadata:
     tough-cookie: "npm:4.0.0"
     tunnel-agent: "npm:0.6.0"
     webauth: "npm:^1.1.0"
-  checksum: 1efe5c8572c0ec3f046cb2a5bb4beb2c5f6024651eea5da9098abeb6fffb7ddeb16e25b5749ba03ffd18220f8e15f1773fadc98a46fc747c6ba24711a82cd8c6
+  checksum: 6678cfb35568711f50b68dc1b75b081d4b89575b6f4fc5f13af3b17f830e61cff325ec4c72bbba50ea0d4489992255a0a625e2b9aea2a9dd3b267e7ae38aaba3
   languageName: node
   linkType: hard
 
@@ -29357,9 +29279,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"testcafe@npm:^2.0.0":
-  version: 2.2.0
-  resolution: "testcafe@npm:2.2.0"
+"testcafe@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "testcafe@npm:2.3.1"
   dependencies:
     "@babel/core": "npm:^7.12.1"
     "@babel/plugin-proposal-async-generator-functions": "npm:^7.12.1"
@@ -29377,12 +29299,12 @@ __metadata:
     "@babel/preset-flow": "npm:^7.12.1"
     "@babel/preset-react": "npm:^7.12.1"
     "@babel/runtime": "npm:^7.12.5"
+    "@devexpress/bin-v8-flags-filter": "npm:^1.3.0"
     "@miherlosev/esm": "npm:3.2.26"
     "@types/node": "npm:^12.20.10"
     async-exit-hook: "npm:^1.1.2"
-    babel-plugin-module-resolver: "npm:^4.0.0"
+    babel-plugin-module-resolver: "npm:^5.0.0"
     babel-plugin-syntax-trailing-function-commas: "npm:^6.22.0"
-    bin-v8-flags-filter: "npm:^1.1.2"
     bowser: "npm:^2.8.1"
     callsite: "npm:^1.0.0"
     callsite-record: "npm:^4.0.0"
@@ -29415,7 +29337,7 @@ __metadata:
     is-glob: "npm:^2.0.1"
     is-podman: "npm:^1.0.1"
     is-stream: "npm:^2.0.0"
-    json5: "npm:^2.1.0"
+    json5: "npm:^2.2.2"
     lodash: "npm:^4.17.13"
     log-update-async-hook: "npm:^2.0.7"
     make-dir: "npm:^3.0.0"
@@ -29442,7 +29364,7 @@ __metadata:
     source-map-support: "npm:^0.5.16"
     strip-bom: "npm:^2.0.0"
     testcafe-browser-tools: "npm:2.0.23"
-    testcafe-hammerhead: "npm:28.2.5"
+    testcafe-hammerhead: "npm:28.4.2"
     testcafe-legacy-api: "npm:5.1.6"
     testcafe-reporter-dashboard: "npm:^0.2.10"
     testcafe-reporter-json: "npm:^2.1.0"
@@ -29456,9 +29378,10 @@ __metadata:
     tree-kill: "npm:^1.2.2"
     typescript: "npm:4.7.4"
     unquote: "npm:^1.1.1"
+    url-to-options: "npm:^2.0.0"
   bin:
     testcafe: bin/testcafe-with-v8-flag-filter.js
-  checksum: a1f37ac1876cf956345de59cc460f68901da4e5c3ed7256029abf818ecc88e275c3242f27267e95749b3c140e21754172f089ca075ea7792775b223db38b9609
+  checksum: f1c37fab137d3ccca0bf103b171b4657d2d1b3530c3277a8801cdd7cb9f8361430a313c362d7be1c8f2e25e19bc71bd591bf086ec574c19436158083c19f9713
   languageName: node
   linkType: hard
 
@@ -30703,6 +30626,13 @@ __metadata:
     querystringify: "npm:^2.1.1"
     requires-port: "npm:^1.0.0"
   checksum: 66bbd003c46f39998b1c127b26b2ff4e8426e8597bb46ddb758fb3e05f56eaac745c05d40af07e87d72cab5827fbfe88050dec58d3128c82629731f8ceea42c2
+  languageName: node
+  linkType: hard
+
+"url-to-options@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "url-to-options@npm:2.0.0"
+  checksum: dc8679ae4c970d9328cfcac8420a4afabdea97648650638cf34d5d8528be598c248a75d07987b25a95ad52682ada65bbe5ea00241b8ded2022c419a683ea8eea
   languageName: node
   linkType: hard
 

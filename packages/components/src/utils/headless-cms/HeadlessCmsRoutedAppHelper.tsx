@@ -2,7 +2,8 @@ import type { ParsedUrlQuery, ParsedUrlQueryInput } from 'querystring';
 
 import type { NextRouter } from 'next/router';
 import qs from 'query-string';
-import { DEFAULT_LANGUAGE, SUPPORT_LANGUAGES } from '../../constants';
+import { DEFAULT_LANGUAGE } from '../../constants';
+import isAppLanguage from '../../type-guards/is-app-language';
 import type { AppLanguage } from '../../types';
 import stringifyUrlObject from '../../utils/stringifyUrlObject';
 
@@ -13,7 +14,7 @@ type I18nRoute = {
 
 export interface CmsRoutedApp {
   i18nRoutes: Record<string, I18nRoute[]>;
-  locales: string[];
+  locales: readonly AppLanguage[];
   URLRewriteMapping: { [x: string]: string };
 }
 
@@ -47,9 +48,9 @@ export class CmsRoutedAppHelper {
       .join('/');
   }
 
-  getI18nPath(route: string, locale: string): string {
+  getI18nPath(route: string, locale: unknown): string {
     // English is the default language within code so it doesn't need transforming
-    if (locale === SUPPORT_LANGUAGES.EN) {
+    if (!isAppLanguage(locale) || locale === 'en') {
       return route;
     }
 
@@ -76,18 +77,11 @@ export class CmsRoutedAppHelper {
     );
   }
 
-  getLocaleOrError(locale: string | undefined): AppLanguage {
-    if (typeof locale !== 'string' || !this.locales.includes(locale)) {
-      throw Error(`Locale ${locale} is not supported`);
-    }
-
-    return locale as AppLanguage;
-  }
-
   /**
    * If removeList is empty, the function removes all params from url.
    * @param {*} router
    * @param {*} removeList
+   * @param forwardPath
    */
   removeQueryParamsFromRouter(
     router: NextRouter,

@@ -7,9 +7,11 @@ import {
   Navigation,
   MatomoWrapper,
   useCommonTranslation,
+  FooterSection,
+  getLanguageOrDefault,
 } from 'events-helsinki-components';
 import type { AppLanguage } from 'events-helsinki-components';
-import FooterSection from 'events-helsinki-components/components/footer/Footer';
+
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -36,7 +38,6 @@ import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import routerHelper from '../../domain/app/routerHelper';
 import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
@@ -126,12 +127,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             revalidate: true,
           };
         }
-        const locale = routerHelper.getLocaleOrError(context.locale);
+        const language = getLanguageOrDefault(context.locale);
 
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
-            ...(await serverSideTranslationsWithCommon(locale, [
+            ...(await serverSideTranslationsWithCommon(language, [
               'cms',
               'event',
             ])),
@@ -166,7 +167,7 @@ const getProps = async (context: GetStaticPropsContext) => {
     variables: {
       id: _getURIQueryParameter(
         context.params?.slug as string[],
-        context.locale as AppLanguage
+        getLanguageOrDefault(context.locale)
       ),
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },

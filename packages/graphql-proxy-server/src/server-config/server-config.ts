@@ -1,5 +1,4 @@
-import type Locale from '../types/locale';
-
+import type { AppLanguage } from 'events-helsinki-components/src/types/types';
 type SentryConfig = {
   sentryDsn?: string; // process.env.GRAPHQL_PROXY_SENTRY_DSN
   sentryEnvironment?: string; // process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT
@@ -10,7 +9,7 @@ type NodeConfig = {
 };
 
 export type ServerContextConfig = {
-  languages?: Locale[]; // Some datasources  uses language headers to resolve fields
+  languages?: AppLanguage[]; // Some datasources  uses language headers to resolve fields
 };
 
 export type ServerConfig = SentryConfig &

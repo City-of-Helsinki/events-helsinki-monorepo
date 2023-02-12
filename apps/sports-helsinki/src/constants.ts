@@ -1,5 +1,3 @@
-export const DEFAULT_LANGUAGE = 'fi';
-
 export const SEARCH_ROUTES = {
   SEARCH: '/search',
   MAPSEARCH: '/search/map',

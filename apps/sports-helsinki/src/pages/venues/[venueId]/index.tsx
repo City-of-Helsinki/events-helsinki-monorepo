@@ -4,19 +4,19 @@ import {
   Navigation,
   MatomoWrapper,
   useCommonTranslation,
+  FooterSection,
+  getLanguageOrDefault,
 } from 'events-helsinki-components';
 import type {
   Venue,
   VenueQuery,
   VenueQueryVariables,
 } from 'events-helsinki-components';
-import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import AppConfig from '../../../domain/app/AppConfig';
 import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
-import routerHelper from '../../../domain/app/routerHelper';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 import VenuePageContainer from '../../../domain/venue/VenuePageContainer';
 
@@ -57,7 +57,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async ({ apolloClient }) => {
-    const locale = routerHelper.getLocaleOrError(context.locale);
+    const language = getLanguageOrDefault(context.locale);
     const { data: venueData, loading } = await apolloClient.query<
       VenueQuery,
       VenueQueryVariables
@@ -69,7 +69,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       },
       context: {
         headers: {
-          'Accept-Language': locale,
+          'Accept-Language': language,
         },
       },
     });
@@ -80,7 +80,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       props: {
         venue,
         loading,
-        ...(await serverSideTranslationsWithCommon(locale, [
+        ...(await serverSideTranslationsWithCommon(language, [
           'common',
           'home',
           'search',

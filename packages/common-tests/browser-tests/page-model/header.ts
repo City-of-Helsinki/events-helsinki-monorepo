@@ -1,16 +1,18 @@
 import { screen } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
 import { initTestI18n as i18n } from '../../../common-i18n/src';
-import { SUPPORT_LANGUAGES } from '../../../components/src/constants';
+
+import { DEFAULT_LANGUAGE } from '../../../components/src/constants/constants';
+import type { AppLanguage } from '../../../components/src/types/types';
 
 class Header {
-  currentLang = SUPPORT_LANGUAGES.FI;
+  currentLang = DEFAULT_LANGUAGE;
 
   banner = screen.getByRole('banner');
   languageSelectorButton = Selector('#languageSelector-button');
   languageSelectorItem = Selector('a').withAttribute('lang', this.currentLang);
 
-  private setLanguage(lang: SUPPORT_LANGUAGES) {
+  private setLanguage(lang: AppLanguage) {
     this.currentLang = lang;
     this.languageSelectorItem = Selector('a').withAttribute(
       'lang',
@@ -18,7 +20,7 @@ class Header {
     );
   }
 
-  public async changeLanguage(lang: SUPPORT_LANGUAGES) {
+  public async changeLanguage(lang: AppLanguage) {
     // eslint-disable-next-line no-console
     console.log('changeLanguage to ' + lang);
 

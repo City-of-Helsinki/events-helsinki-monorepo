@@ -9,8 +9,9 @@ import {
   Navigation,
   MatomoWrapper,
   useCommonTranslation,
+  FooterSection,
+  getLanguageOrDefault,
 } from 'events-helsinki-components';
-import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
 import {
@@ -38,7 +39,6 @@ import type {
 import type { EventsGlobalPageProps } from '../../domain/app/getEventsStaticProps';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import routerHelper from '../../domain/app/routerHelper';
 import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
@@ -203,7 +203,7 @@ export default function ArticleArchive({
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async ({ apolloClient }) => {
-    const locale = routerHelper.getLocaleOrError(context.locale);
+    const language = getLanguageOrDefault(context.locale);
     const { data: pageData } = await apolloClient.query<
       PageByTemplateQuery,
       PageByTemplateQueryVariables
@@ -211,7 +211,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       query: PageByTemplateDocument,
       variables: {
         template: TemplateEnum.PostsPage,
-        language: getQlLanguage(locale).toLocaleLowerCase(),
+        language: getQlLanguage(language).toLocaleLowerCase(),
       },
     });
 
@@ -219,7 +219,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     return {
       props: {
         page,
-        ...(await serverSideTranslationsWithCommon(locale, [
+        ...(await serverSideTranslationsWithCommon(language, [
           'common',
           'home',
           'cms',

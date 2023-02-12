@@ -7,6 +7,7 @@ export * from './hooks';
 export { default as createLogger } from './loggers/logger';
 export type { Logger } from './loggers/logger';
 export { Message } from './message';
+export * from './type-guards';
 export * from './types';
 export * from './utils';
 export * from './navigationProvider';

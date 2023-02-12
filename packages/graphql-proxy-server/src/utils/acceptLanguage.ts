@@ -1,8 +1,8 @@
 import accepts from 'accepts';
+import isAppLanguage from 'events-helsinki-components/src/type-guards/is-app-language';
+import type { AppLanguage } from 'events-helsinki-components/src/types/types';
 import type express from 'express';
 import type ContextValue from '../context/ContextValue';
-import isLocale from '../type-guards/is-locale';
-import type { Locale } from '../types';
 /**
  * Get an accepted language from the request header.
  * @param req express.Request
@@ -12,10 +12,10 @@ import type { Locale } from '../types';
 function acceptsLanguage<DataSources>(
   req: express.Request,
   languages: ContextValue<DataSources>['language'][]
-): Locale | undefined {
+): AppLanguage | undefined {
   const accept = accepts(req);
-  const language = accept.languages(languages as unknown as string[]);
-  if (language && isLocale(language)) {
+  const language = accept.languages(languages as string[]);
+  if (isAppLanguage(language)) {
     return language;
   }
   return undefined;

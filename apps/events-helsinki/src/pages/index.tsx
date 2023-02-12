@@ -5,8 +5,9 @@ import {
   Navigation,
   MatomoWrapper,
   useAppEventsTranslation,
+  getLanguageOrDefault,
+  FooterSection,
 } from 'events-helsinki-components';
-import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
@@ -28,7 +29,6 @@ import {
 } from 'react-helsinki-headless-cms/apollo';
 import getEventsStaticProps from '../domain/app/getEventsStaticProps';
 import cmsHelper from '../domain/app/headlessCmsHelper';
-import routerHelper from '../domain/app/routerHelper';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 
@@ -70,7 +70,7 @@ const HomePage: NextPage<{
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async ({ apolloClient }) => {
     try {
-      const locale = routerHelper.getLocaleOrError(context.locale);
+      const language = getLanguageOrDefault(context.locale);
       const { data: landingPageData } = await apolloClient.query<
         LandingPageQuery,
         LandingPageQueryVariables
@@ -78,7 +78,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         query: LandingPageDocument,
         variables: {
           id: 'root',
-          languageCode: getQlLanguage(locale),
+          languageCode: getQlLanguage(language),
         },
       });
 
@@ -89,7 +89,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         query: PageByTemplateDocument,
         variables: {
           template: TemplateEnum.FrontPage,
-          language: getQlLanguage(locale).toLocaleLowerCase(),
+          language: getQlLanguage(language).toLocaleLowerCase(),
         },
       });
 
@@ -99,7 +99,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
       return {
         props: {
-          ...(await serverSideTranslationsWithCommon(locale, [
+          ...(await serverSideTranslationsWithCommon(language, [
             'home',
             'search',
             'event',
@@ -117,10 +117,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       );
       return {
         props: {
-          ...(await serverSideTranslationsWithCommon(
-            routerHelper.getLocaleOrError(DEFAULT_LANGUAGE),
-            ['home', 'search']
-          )),
+          ...(await serverSideTranslationsWithCommon(DEFAULT_LANGUAGE, [
+            'home',
+            'search',
+          ])),
           landingPage: null,
           page: null,
         },

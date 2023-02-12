@@ -1,5 +1,3 @@
-export const DEFAULT_LANGUAGE = 'fi';
-
 export const ROUTES = {
   SEARCH: '/search',
   COURSES: '/courses/[eventId]',

@@ -1,5 +1,5 @@
 import type { ContentSource } from 'hds-react';
-import { CookieModal } from 'hds-react';
+import { useCookies, CookieModal } from 'hds-react';
 import React from 'react';
 import { MAIN_CONTENT_ID } from '../../constants';
 import { useConsentTranslation } from '../../hooks';
@@ -18,9 +18,10 @@ const EventsCookieConsent: React.FC<Props> = ({
   const { t, i18n } = useConsentTranslation();
   const [language, setLanguage] =
     React.useState<ContentSource['currentLanguage']>(locale);
-
-  const [showCookieConsentModal, setShowCookieConsentModal] =
-    React.useState(true);
+  const { getAllConsents } = useCookies();
+  const [showCookieConsentModal, setShowCookieConsentModal] = React.useState(
+    !Object.keys(getAllConsents()).length
+  );
 
   const onLanguageChange = React.useCallback(
     (newLang: string) => {

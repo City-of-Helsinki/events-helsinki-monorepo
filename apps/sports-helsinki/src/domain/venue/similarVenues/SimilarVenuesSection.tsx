@@ -40,7 +40,9 @@ const SimilarVenuesSection: React.FC<SimilarVenuesSectionProps> = ({
 }) => {
   const router = useRouter();
   const { t } = useVenueTranslation();
-  const { data: venuesData, loading } = useSimilarVenuesQuery(venue);
+  const { data: venuesData, loading } = useSimilarVenuesQuery({
+    venue,
+  });
   const venues = venuesData?.venuesByIds as Venue[];
   const cards = useVenueCards({ venues, returnPath: router.asPath });
   const hasCards = !!cards.length;

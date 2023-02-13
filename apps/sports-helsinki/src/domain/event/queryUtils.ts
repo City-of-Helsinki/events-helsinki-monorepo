@@ -238,7 +238,13 @@ export const useLocationUpcomingEventsQuery = ({
   return useEventListQuery({ variables, ssr: false });
 };
 
-export const useSimilarVenuesQuery = (venue: Venue) => {
+export const useSimilarVenuesQuery = ({
+  venue,
+  limit = 6,
+}: {
+  venue: Venue;
+  limit?: number;
+}) => {
   const locale = useLocale();
   const ontologyWordIds = venue.ontologyWords.reduce(
     (ontologies: string[], ontology) => {
@@ -255,7 +261,7 @@ export const useSimilarVenuesQuery = (venue: Venue) => {
     useUnifiedSearchListQuery({
       variables: {
         ontologyWordIds,
-        first: 4,
+        first: limit,
         orderByName: undefined,
       },
     });

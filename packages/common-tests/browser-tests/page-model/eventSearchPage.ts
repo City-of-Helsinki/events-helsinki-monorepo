@@ -3,8 +3,13 @@ import { t } from 'testcafe';
 import { initTestI18n as i18n } from '../../../common-i18n/src';
 import type { AppNamespace } from '../types/app-namespace';
 
+type SearchProps = {
+  searchText: string;
+};
+
+const defaultSearchProps: SearchProps = { searchText: 'helsinki' };
+
 class EventSearchPage {
-  searchText = 'helsinki';
   private appNamespace: 'appHobbies' | 'appEvents' | 'appSports';
 
   constructor(appNamespace: AppNamespace) {
@@ -13,14 +18,14 @@ class EventSearchPage {
 
   protected get searchFormHeading() {
     const searchHeadingText = i18n.t(`search:search.labelSearchField`);
-    return screen.getByRole('heading', {
+    return screen.findByRole('heading', {
       name: searchHeadingText,
     });
   }
 
   protected get searchButton() {
     const searchButtonText = i18n.t(`search:search.buttonSearch`);
-    return screen.getByRole('button', {
+    return screen.findByRole('button', {
       name: searchButtonText,
     });
   }
@@ -29,7 +34,7 @@ class EventSearchPage {
     const searchPlaceholderText = i18n.t(
       `${this.appNamespace}:search.search.placeholder`
     );
-    return screen.getByPlaceholderText(searchPlaceholderText);
+    return screen.findByPlaceholderText(searchPlaceholderText);
   }
 
   protected get buttonLoadMore() {
@@ -39,7 +44,7 @@ class EventSearchPage {
     });
   }
 
-  protected get results() {
+  public get results() {
     const cardLinkRoleName = i18n
       .t('event:eventCard.ariaLabelLink')
       .replace('{{name}}', '*.');
@@ -65,10 +70,10 @@ class EventSearchPage {
     await t.expect(this.results.count).eql(0); // no cards returned
   }
 
-  public async doSuccessfulSearch() {
+  public async doSearch({ searchText }: SearchProps = defaultSearchProps) {
     // eslint-disable-next-line no-console
-    console.info('EventSearchPage: doSuccessfulSearch');
-    await t.typeText(this.autoSuggestInput, this.searchText);
+    console.info('EventSearchPage: doSearch');
+    await t.typeText(this.autoSuggestInput, searchText);
     await t.pressKey('tab');
     await t.click(this.searchButton);
     await t.wait(2000);

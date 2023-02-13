@@ -16,7 +16,7 @@ const userAcceptingAllCookies = Role(
   async () => {
     await acceptAllCookies();
   },
-  { preserveUrl: false }
+  { preserveUrl: true }
 );
 
 export default userAcceptingAllCookies;

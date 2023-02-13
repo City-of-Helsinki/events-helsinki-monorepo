@@ -1,28 +1,25 @@
-import { screen } from '@testing-library/testcafe';
+import { within } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
 
 class ConsentModal {
   private get title() {
-    return screen.getByRole('heading', {
+    const { getByRole } = within(this.componentContainer);
+    return getByRole('heading', {
       name: /\w+ käyttää evästeitä/,
     });
   }
 
   private get acceptAllCookiesButton() {
-    return screen.getByRole('button', {
+    const { getByRole } = within(this.componentContainer);
+    return getByRole('button', {
       name: /hyväksy kaikki evästeet/i,
     });
   }
 
   private get acceptOnlyRequiredCookiesButton() {
-    return screen.getByRole('button', {
+    const { getByRole } = within(this.componentContainer);
+    return getByRole('button', {
       name: /hyväksy vain välttämättömät evästeet/i,
-    });
-  }
-
-  private get readMoreButton() {
-    return screen.getByRole('button', {
-      name: /lue lisää/i,
     });
   }
 
@@ -43,18 +40,10 @@ class ConsentModal {
   }
 
   public async isOpened() {
-    await t.expect(this.componentContainer.exists).ok();
+    console.log('ConsentModal: isOpened');
     await t.expect(this.title.exists).ok();
     await t.expect(this.acceptAllCookiesButton.exists).ok();
     await t.expect(this.acceptOnlyRequiredCookiesButton.exists).ok();
-    console.log('ConsentModal: isOpened');
-  }
-
-  public async isMinimized() {
-    await t.expect(this.componentContainer.exists).ok();
-    await t.expect(this.title.exists).ok();
-    await t.expect(this.readMoreButton.exists).ok();
-    console.log('ConsentModal: isMinimized');
   }
 
   public async isClosed() {

@@ -113,7 +113,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
             <div className={styles.leftPanelWrapper}>
               <div className={styles.leftPanelEmpty} />
               <div className={styles.textWrapper}>
-                <h1 className={styles.title}>
+                <h1 className={styles.title} data-testid="event-name">
                   <EventName event={event} />
                 </h1>
                 {shortDescription && (

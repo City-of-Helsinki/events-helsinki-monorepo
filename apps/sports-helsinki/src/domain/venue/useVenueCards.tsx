@@ -7,7 +7,10 @@ import {
   useConfig,
 } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../constants';
+import { Sources } from '../../domain/app/appConstants';
 import routerHelper from '../../domain/app/routerHelper';
+import getVenueIdParts from './utils/getVenueIdParts';
+import getVenueSourceId from './utils/getVenueSourceId';
 
 type useVenueCardsProps = {
   venues?: Venue[] | null;
@@ -22,9 +25,15 @@ function useVenueCards({ venues, returnPath }: useVenueCardsProps) {
   return (
     venues?.map((venue, i) => {
       const cardProps = getLocationCardProps(venue);
+      // NOTE: The venue-graphql-proxy seems to always need a TPREK-id,
+      // so the id's that has any other source, needs to be converted.
+      const venueId = getVenueSourceId(
+        getVenueIdParts(venue.id).id,
+        Sources.TPREK
+      );
       const url = routerHelper.getLocalizedCmsItemUrl(
         ROUTES.VENUES,
-        { venueId: venue.id, returnPath },
+        { venueId, returnPath },
         locale
       );
       return (

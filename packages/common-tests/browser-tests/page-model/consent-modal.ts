@@ -2,6 +2,8 @@ import { within } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
 
 class ConsentModal {
+  consentAllCookieName = 'city-of-helsinki-cookie-consents';
+
   private get title() {
     const { getByRole } = within(this.componentContainer);
     return getByRole('heading', {

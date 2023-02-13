@@ -31,9 +31,8 @@ class LandingPage {
         screen.findByPlaceholderText(searchPlaceholderText),
         this.searchText
       )
-      .wait(2000)
       .expect(screen.findByText(this.searchText).exists)
-      .ok();
+      .ok({ timeout: 5000 });
   }
 }
 

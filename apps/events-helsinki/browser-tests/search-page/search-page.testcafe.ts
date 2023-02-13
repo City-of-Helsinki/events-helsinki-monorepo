@@ -9,19 +9,18 @@ import { ROUTES } from '../../src/constants';
 
 const searchPage = new EventSearchPage('appEvents');
 
-fixture.disablePageCaching('Search page').beforeEach(async () => {
+fixture.disablePageCaching('Search page').beforeEach(async (t) => {
   await i18n.changeLanguage('default');
+  await t.useRole(allCookiesUser).navigateTo(getEnvUrl(ROUTES.SEARCH));
 });
 
-test('Verify searching', async (t) => {
-  await t.useRole(allCookiesUser).navigateTo(getEnvUrl(ROUTES.SEARCH));
+test('Verify searching', async () => {
   await searchPage.verify();
   await searchPage.doSearch();
   await searchPage.doUnsuccessfulSearch();
 });
 
 test('Verify navigation between the search page and event details page', async (t) => {
-  await t.useRole(allCookiesUser).navigateTo(getEnvUrl(ROUTES.SEARCH));
   await searchPage.verify();
   const results = searchPage.results;
   await t.expect(results.count).eql(10);

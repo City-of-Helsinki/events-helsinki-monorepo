@@ -4,9 +4,10 @@ import {
   allCookiesUser,
 } from 'events-helsinki-common-tests/browser-tests';
 
-fixture.disablePageCaching('Landing page header');
-
-test('Verify header title', async (t) => {
+fixture.disablePageCaching('Landing page header').beforeEach(async (t) => {
   await t.useRole(allCookiesUser).navigateTo(getEnvUrl());
+});
+
+test('Verify header title', async () => {
   await changeLanguageAndTrySearch('appHobbies');
 });

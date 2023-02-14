@@ -1,0 +1,11 @@
+{
+  "notFound": {
+    "title": "Whoops, the page you were looking for cannot be found",
+    "description": "The link can be outdated or the page has been deleted."
+  },
+  "unknownError": {
+    "title": "An error was detected!",
+    "description": "Try again later. If the situation recurs, tell us about it via our <link>feedback form</link>"
+  },
+  "moveToHomePageButton": " Go to the front page"
+}

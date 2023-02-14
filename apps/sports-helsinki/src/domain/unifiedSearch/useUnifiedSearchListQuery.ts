@@ -1,7 +1,9 @@
 import type { SearchListQueryVariables } from 'events-helsinki-components';
-import { useSearchListQuery } from 'events-helsinki-components';
+import {
+  useSearchListQuery,
+  useErrorBoundary,
+} from 'events-helsinki-components';
 import useUnifiedSearchVariables from './useUnifiedSearchVariables';
-
 type HookConfig = {
   variables?: Partial<SearchListQueryVariables>;
 };
@@ -9,13 +11,14 @@ type HookConfig = {
 export default function useUnifiedSearchListQuery({
   variables,
 }: HookConfig = {}) {
-  const { fetchMore, ...delegated } = useSearchListQuery({
+  const { fetchMore, error, ...delegated } = useSearchListQuery({
     ssr: false,
     variables: {
       ...useUnifiedSearchVariables(),
       ...variables,
     },
   });
+  useErrorBoundary(error);
 
   const handleFetchMore = async (
     fetchMoreVariables: Partial<SearchListQueryVariables>

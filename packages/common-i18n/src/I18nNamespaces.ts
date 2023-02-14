@@ -4,6 +4,7 @@ import type appSports from './locales/fi/appSports.json';
 import type cms from './locales/fi/cms.json';
 import type common from './locales/fi/common.json';
 import type consent from './locales/fi/consent.json';
+import type errors from './locales/fi/errors.json';
 import type event from './locales/fi/event.json';
 import type footer from './locales/fi/footer.json';
 import type geolocationProvider from './locales/fi/geolocationProvider.json';
@@ -16,6 +17,7 @@ export type I18nNamespaces = {
   appHobbies: typeof appHobbies;
   appEvents: typeof appEvents;
   appSports: typeof appSports;
+  errors: typeof errors;
   event: typeof event;
   cms: typeof cms;
   common: typeof common;

@@ -6,6 +6,7 @@ import {
   getLocalizedString,
   isClient,
   usePlaceListQuery,
+  useErrorBoundary,
 } from 'events-helsinki-components';
 import React from 'react';
 
@@ -31,7 +32,7 @@ const PlaceSelector: React.FC<Props> = ({
   const input = inputValue !== undefined ? inputValue : internalInputValue;
   const searchValue = useDebounce(input, 300);
 
-  const { data: placesData } = usePlaceListQuery({
+  const { data: placesData, error } = usePlaceListQuery({
     skip: !searchValue,
     variables: {
       divisions: DIVISIONS,
@@ -41,6 +42,7 @@ const PlaceSelector: React.FC<Props> = ({
       text: searchValue.toLowerCase(),
     },
   });
+  useErrorBoundary(error);
 
   const placeOptions = React.useMemo(() => {
     return (placesData?.placeList.data || [])

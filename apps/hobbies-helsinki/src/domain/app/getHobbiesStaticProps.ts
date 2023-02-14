@@ -1,11 +1,6 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { isApolloError } from '@apollo/client';
-import type {
-  AppLanguage,
-  CmsLanguage,
-  Menu,
-  Language,
-} from 'events-helsinki-components';
+import type { CmsLanguage, Menu, Language } from 'events-helsinki-components';
 import {
   DEFAULT_FOOTER_MENU_NAME,
   DEFAULT_HEADER_MENU_NAME,
@@ -24,9 +19,9 @@ type HobbiesContext = {
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
-export type HobbiesGlobalPageProps = {
+export type HobbiesGlobalPageProps<P = Record<string, unknown>> = {
   initialApolloState: NormalizedCacheObject;
-} & unknown; // FIXME: Promise<GetStaticPropsResult<P>> of getHobbiesStaticProps
+} & Promise<GetStaticPropsResult<P>>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function getHobbiesStaticProps<P = Record<string, any>>(
@@ -60,15 +55,14 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
       ...result,
       props,
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
+  } catch (e: unknown) {
     // Generic error handling
     staticGenerationLogger.error('Error while generating a page:', e);
-    if (isApolloError(e)) {
+    if (isApolloError(e as Error)) {
       return {
         props: {
           error: {
-            statusCode: 400,
+            statusCode: 500,
           },
         },
         revalidate: 10,
@@ -95,8 +89,8 @@ async function getGlobalCMSData({
   client,
   context,
 }: GetGlobalCMSDataParams): Promise<ReturnedGlobalCMSData> {
-  const locale: AppLanguage = (context?.locale ?? 'fi') as AppLanguage;
-  const headerNavigationMenuName = DEFAULT_HEADER_MENU_NAME[locale];
+  const language = getLanguageOrDefault(context.locale);
+  const headerNavigationMenuName = DEFAULT_HEADER_MENU_NAME[language];
   const { data: headerMenuData } = await client.query({
     query: MenuDocument,
     variables: {
@@ -114,7 +108,7 @@ async function getGlobalCMSData({
     },
   });
 
-  const footerNavigationMenuName = DEFAULT_FOOTER_MENU_NAME[locale];
+  const footerNavigationMenuName = DEFAULT_FOOTER_MENU_NAME[language];
   const { data: footerMenuData } = await client.query({
     query: MenuDocument,
     variables: {

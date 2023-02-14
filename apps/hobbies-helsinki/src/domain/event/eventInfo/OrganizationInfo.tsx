@@ -4,6 +4,7 @@ import {
   useLocale,
   getEventFields,
   useOrganizationDetailsQuery,
+  useErrorBoundary,
 } from 'events-helsinki-components';
 import type { EventFieldsFragment } from 'events-helsinki-components';
 import { IconFaceSmile, IconLayers } from 'hds-react';
@@ -22,11 +23,15 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
   const { provider, publisher } = getEventFields(event, locale);
-  const { data: organizationData, loading } = useOrganizationDetailsQuery({
+  const {
+    data: organizationData,
+    loading,
+    error,
+  } = useOrganizationDetailsQuery({
     ssr: false,
     variables: { id: publisher },
   });
-
+  useErrorBoundary(error);
   const organizationName = organizationData?.organizationDetails.name;
 
   return (

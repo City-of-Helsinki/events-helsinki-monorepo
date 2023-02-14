@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocale, useCommonTranslation } from '../../hooks';
+import { useLocale, useCommonTranslation, useErrorBoundary } from '../../hooks';
 import { usePlaceDetailsQuery } from '../../types';
 import { getLocalizedString } from '../../utils';
 import { FilterButton } from '../filterButton';
@@ -13,10 +13,10 @@ interface Props {
 const PlaceFilter: React.FC<Props> = ({ id, onRemove }) => {
   const { t } = useCommonTranslation();
   const locale = useLocale();
-  const { data, loading } = usePlaceDetailsQuery({
+  const { data, loading, error } = usePlaceDetailsQuery({
     variables: { id },
   });
-
+  useErrorBoundary(error);
   return loading ? (
     <FilterButton
       onRemove={onRemove}

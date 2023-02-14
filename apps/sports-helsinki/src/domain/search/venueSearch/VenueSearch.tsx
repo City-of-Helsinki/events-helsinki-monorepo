@@ -40,7 +40,7 @@ export type SearchComponentProps = {
   className?: string;
 } & SearchComponentType;
 
-export const useSimmpleVenueSearchForm = ({
+export const useSimpleVenueSearchForm = ({
   scrollToResultList,
   searchRoute,
   autosuggestInput,
@@ -109,7 +109,7 @@ export const useSimmpleVenueSearchForm = ({
     scrollToResultList && scrollToResultList();
   };
 
-  const initialFieldsOnPageLoad = React.useCallback(() => {
+  const updateFilters = React.useCallback(() => {
     const sportsCategories = getUrlParamAsArray(
       searchParams,
       EVENT_SEARCH_FILTERS.SPORTS_CATEGORIES
@@ -125,7 +125,7 @@ export const useSimmpleVenueSearchForm = ({
     clearInputValues,
     clearFilters,
     handleSubmit,
-    initialFieldsOnPageLoad,
+    updateFilters,
     searchFilters,
     scrollToResultList,
   };
@@ -145,8 +145,8 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
     sortExtendedCategoryOptions
   );
 
-  const { goToSearch, clearFilters, handleSubmit, initialFieldsOnPageLoad } =
-    useSimmpleVenueSearchForm({
+  const { goToSearch, clearFilters, handleSubmit, updateFilters } =
+    useSimpleVenueSearchForm({
       scrollToResultList,
       searchRoute,
       autosuggestInput,
@@ -164,8 +164,8 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
   };
 
   React.useEffect(() => {
-    initialFieldsOnPageLoad();
-  }, [initialFieldsOnPageLoad]);
+    updateFilters();
+  }, [updateFilters]);
 
   return (
     <form onSubmit={handleSubmit}>

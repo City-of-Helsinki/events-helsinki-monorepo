@@ -188,17 +188,17 @@ export const CATEGORY_CATALOG = {
 };
 
 export const SPORT_COURSES_KEYWORDS = [
-  'yso:p916',
-  'kulke:710',
-  'yso:p17018',
-  'yso:p1963',
-  'yso:p9824',
-  'yso:p965',
-  'yso:p6409',
-  'yso:p8781',
-  'yso:p26619',
-  'yso:p13035',
-  'yso:p2041',
+  'yso:p916', // liikunta / physical training
+  'kulke:710', // liikuntaleiri / sports camp
+  'yso:p17018', // liikuntaleikit / exercise games
+  'yso:p1963', // liikuntatapahtumat / sports events
+  'yso:p9824', // liikuntapalvelut / physical activity services
+  'yso:p965', // urheilu / sports
+  'yso:p6409', // jalkapallo / football
+  'yso:p8781', // koripallo / basketball
+  'yso:p26619', // ulkoliikunta / outdoor sports
+  'yso:p13035', // liikuntaharrastus / physical hobbies
+  'yso:p2041', // urheilu- ja liikuntaseurat / sports clubs
 ];
 
 // todo: replace with valid keyword ids

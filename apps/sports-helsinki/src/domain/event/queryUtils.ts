@@ -2,6 +2,7 @@ import {
   EVENT_SORT_OPTIONS,
   SIMILAR_EVENTS_AMOUNT,
   getEventIdFromUrl,
+  useErrorBoundary,
   useEventListQuery,
   useVenuesByIdsLazyQuery,
   useLocale,
@@ -100,10 +101,15 @@ export const useSimilarEventsQuery = (
   event: EventFields
 ): { loading: boolean; data: EventListQuery['eventList']['data'] } => {
   const eventFilters = useSimilarEventsQueryVariables(event);
-  const { data: eventsData, loading } = useEventListQuery({
+  const {
+    data: eventsData,
+    loading,
+    error,
+  } = useEventListQuery({
     ssr: false,
     variables: eventFilters,
   });
+  useErrorBoundary(error);
   const data = _filterSimilarEvents(event, eventsData?.eventList?.data || []);
   return { data, loading };
 };
@@ -156,11 +162,13 @@ export const useSubEvents = (
     data: subEventsData,
     fetchMore,
     loading,
+    error,
   } = useEventListQuery({
     skip: !superEventId,
     ssr: false,
     variables,
   });
+  useErrorBoundary(error);
   const handleLoadMore = React.useCallback(
     async (page: number) => {
       setIsFetchingMore(true);
@@ -266,9 +274,8 @@ export const useSimilarVenuesQuery = ({
         includeHaukiFields: AppConfig.isHaukiEnabled,
       },
     });
-
   // Search for venues from venues-proxy (e.g. TPREK as a datasource) with the venue ids.
-  const [getVenuesByIds, queryProps] = useVenuesByIdsLazyQuery({
+  const [getVenuesByIds, { error, ...queryProps }] = useVenuesByIdsLazyQuery({
     variables: { includeHaukiFields: AppConfig.isHaukiEnabled },
     ssr: false,
     context: {
@@ -277,7 +284,7 @@ export const useSimilarVenuesQuery = ({
       },
     },
   });
-
+  useErrorBoundary(error);
   // Trigger the venues by ids search when the ids are fetched.
   React.useEffect(() => {
     if (!unifiedSearchLoading) {

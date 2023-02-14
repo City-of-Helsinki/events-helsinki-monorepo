@@ -1,6 +1,9 @@
 import { useLazyQuery } from '@apollo/client';
 import type { SearchListQuery } from 'events-helsinki-components';
-import { SearchListDocument } from 'events-helsinki-components';
+import {
+  SearchListDocument,
+  useErrorBoundary,
+} from 'events-helsinki-components';
 import React from 'react';
 import AppConfig from '../../../../domain/app/AppConfig';
 import useUnifiedSearchVariables from '../../../../domain/unifiedSearch/useUnifiedSearchVariables';
@@ -16,7 +19,7 @@ function useLazyVenueSearchForTabCount() {
     }),
     [venueSearchFilters]
   );
-  const [search, { loading, data, ...delegatedProps }] = useLazyQuery(
+  const [search, { loading, data, error, ...delegatedProps }] = useLazyQuery(
     SearchListDocument,
     {
       variables,
@@ -33,7 +36,7 @@ function useLazyVenueSearchForTabCount() {
       ssr: false,
     }
   );
-
+  useErrorBoundary(error);
   React.useEffect(() => {
     const count =
       !loading && data

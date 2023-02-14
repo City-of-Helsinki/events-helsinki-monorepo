@@ -8,6 +8,7 @@ import appSports_en from '../locales/en/appSports.json';
 import cms_en from '../locales/en/cms.json';
 import common_en from '../locales/en/common.json';
 import consent_en from '../locales/en/consent.json';
+import errors_en from '../locales/en/errors.json';
 import event_en from '../locales/en/event.json';
 import footer_en from '../locales/en/footer.json';
 import geolocationProvider_en from '../locales/en/geolocationProvider.json';
@@ -21,6 +22,7 @@ import appSports from '../locales/fi/appSports.json';
 import cms from '../locales/fi/cms.json';
 import common from '../locales/fi/common.json';
 import consent from '../locales/fi/consent.json';
+import errors from '../locales/fi/errors.json';
 import event from '../locales/fi/event.json';
 import footer from '../locales/fi/footer.json';
 import geolocationProvider from '../locales/fi/geolocationProvider.json';
@@ -34,6 +36,7 @@ import appSports_sv from '../locales/sv/appSports.json';
 import cms_sv from '../locales/sv/cms.json';
 import common_sv from '../locales/sv/common.json';
 import consent_sv from '../locales/sv/consent.json';
+import errors_sv from '../locales/sv/errors.json';
 import event_sv from '../locales/sv/event.json';
 import footer_sv from '../locales/sv/footer.json';
 import geolocationProvider_sv from '../locales/sv/geolocationProvider.json';
@@ -49,6 +52,7 @@ export const translations = {
   appSports,
   appEvents,
   consent,
+  errors,
   event,
   venue,
   footer,
@@ -76,6 +80,7 @@ export const config = {
       appHobbies: appHobbies_en,
       appSports: appSports_en,
       consent: consent_en,
+      errors: errors_en,
       event: event_en,
       venue: venue_en,
       footer: footer_en,
@@ -91,6 +96,7 @@ export const config = {
       appHobbies: appHobbies_sv,
       appSports: appSports_sv,
       consent: consent_sv,
+      errors: errors_sv,
       event: event_sv,
       venue: venue_sv,
       footer: footer_sv,

@@ -12,14 +12,15 @@ import {
   useCommonTranslation,
   NavigationProvider,
   GeolocationProvider,
+  useErrorBoundary,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { AppProps as NextAppProps } from 'next/app';
-import Error from 'next/error';
 import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import React from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import { ToastContainer } from 'react-toastify';
 
@@ -29,6 +30,7 @@ import AppConfig from '../domain/app/AppConfig';
 import cmsHelper from '../domain/app/headlessCmsHelper';
 import routerHelper from '../domain/app/routerHelper';
 import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
+import ErrorFallback from '../domain/error/ErrorFallback';
 import useRHHCConfig from '../hooks/useRHHCConfig';
 
 const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
@@ -62,6 +64,7 @@ export type CustomPageProps = {
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { error, headerMenu, footerMenu, languages } = pageProps;
+  useErrorBoundary(error);
   const apolloClient = useApolloClient();
   const router = useRouter();
   const rhhcConfig = useRHHCConfig();
@@ -93,26 +96,23 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
               footerMenu={footerMenu}
               languages={languages}
             >
-              <ResetFocus />
               <MatomoProvider value={matomoInstance}>
-                {router.isFallback ? (
-                  <Center>
-                    <LoadingSpinner />
-                  </Center>
-                ) : error ? (
-                  <Error
-                    statusCode={error.networkError?.statusCode ?? 400}
-                    title={error.title}
-                  />
-                ) : (
-                  <>
-                    <Component {...pageProps} />
-                    <EventsCookieConsent
-                      allowLanguageSwitch={false}
-                      appName={t('appSports:appName')}
-                    />
-                  </>
-                )}
+                <ErrorBoundary FallbackComponent={ErrorFallback}>
+                  {router.isFallback ? (
+                    <Center>
+                      <LoadingSpinner />
+                    </Center>
+                  ) : (
+                    <>
+                      <ResetFocus />
+                      <Component {...pageProps} />
+                      <EventsCookieConsent
+                        allowLanguageSwitch={false}
+                        appName={t('appSports:appName')}
+                      />
+                    </>
+                  )}
+                </ErrorBoundary>
               </MatomoProvider>
               <ToastContainer />
             </NavigationProvider>

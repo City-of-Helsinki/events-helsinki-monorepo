@@ -4,8 +4,8 @@ import {
   getURLSearchParamsFromAsPath,
   Navigation,
   MatomoWrapper,
+  getLanguageOrDefault,
 } from 'events-helsinki-components';
-import getLanguageOrDefault from 'events-helsinki-components/src/utils/get-language-or-default';
 import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';

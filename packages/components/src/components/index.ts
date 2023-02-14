@@ -37,6 +37,7 @@ export { default as ToggleButton } from './toggleButton/ToggleButton';
 export { default as TopProgressBar } from './topProgressBar/TopProgressBar';
 export { default as Visible } from './visible/Visible';
 export { default as EllipsedTextWithToggle } from './ellipsedTextWithToggle/EllipsedTextWithToggle';
+export * from './errorPages';
 export { default as Footer } from './footer/Footer';
 export { default as InfoBlock } from './infoBlock/InfoBlock';
 export { default as MapBox } from './mapBox/MapBox';

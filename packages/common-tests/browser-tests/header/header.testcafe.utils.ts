@@ -1,4 +1,3 @@
-import { SUPPORT_LANGUAGES } from '../../../components/src/constants';
 import Header from '../page-model/header';
 import LandingPage from '../page-model/landingPage';
 import type { AppNamespace } from '../types/app-namespace';
@@ -14,11 +13,11 @@ export const changeLanguageAndTrySearch = async (
 
   await header.verify();
   await landingPage.verify();
-  await header.changeLanguage(SUPPORT_LANGUAGES.EN);
+  await header.changeLanguage('en');
   await header.verify();
   await landingPage.verify();
 
-  await header.changeLanguage(SUPPORT_LANGUAGES.SV);
+  await header.changeLanguage('sv');
   await header.verify();
   // This fails for sv,  search box is not fully visible
   // await landingPage.verify();

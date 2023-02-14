@@ -1,18 +1,10 @@
 import type React from 'react';
-import type { AUTOSUGGEST_TYPES } from '../constants';
+import type { APP_LANGUAGES } from '../constants';
 
-export type AppLanguage = 'en' | 'fi' | 'sv';
+export type AppLanguage = (typeof APP_LANGUAGES)[number];
 
-// TODO: Copy-pasted from react-helsinki-headless-cms.
-// For some reason next build fails when there is dependency to rhhc.
-/** Enum of all available language codes */
-/* eslint-disable @typescript-eslint/naming-convention */
-export enum AppLanguageCodeEnum {
-  En = 'EN',
-  /** The default locale of the site */
-  Fi = 'FI',
-  Sv = 'SV',
-}
+export type AutosuggestType = 'keyword' | 'text';
+
 /* eslint-enable @typescript-eslint/naming-convention */
 
 export type Option = {
@@ -49,7 +41,7 @@ export type AppNode<T> = {
 
 export type AutosuggestMenuOption = {
   text: string;
-  type: AUTOSUGGEST_TYPES;
+  type: AutosuggestType;
   value: string;
 };
 

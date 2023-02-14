@@ -3,15 +3,15 @@ import {
   useAppEventsTranslation,
   Navigation,
   MatomoWrapper,
+  getLanguageOrDefault,
+  FooterSection,
 } from 'events-helsinki-components';
-import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
-import routerHelper from '../../domain/app/routerHelper';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
 import SearchPage from '../../domain/search/eventSearch/SearchPage';
@@ -65,10 +65,10 @@ export default function Search() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async () => {
-    const locale = routerHelper.getLocaleOrError(context.locale);
+    const language = getLanguageOrDefault(context.locale);
     return {
       props: {
-        ...(await serverSideTranslationsWithCommon(locale, [
+        ...(await serverSideTranslationsWithCommon(language, [
           'common',
           'home',
           'event',

@@ -1,11 +1,13 @@
 import classNames from 'classnames';
-import type { AutosuggestMenuOption } from 'events-helsinki-components';
+import type {
+  AutosuggestMenuOption,
+  AutosuggestType,
+} from 'events-helsinki-components';
 import {
   AutoSuggestMenu,
   useLocale,
   useDebounce,
   useDropdownKeyboardNavigation,
-  AUTOSUGGEST_TYPES,
   getLocalizedString,
   useKeywordListQuery,
 } from 'events-helsinki-components';
@@ -89,7 +91,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
             // Search by text if no option is selected
             handleMenuOptionClick({
               text: searchValue,
-              type: AUTOSUGGEST_TYPES.TEXT,
+              type: 'text',
               value: searchValue,
             });
           }
@@ -106,7 +108,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
     const items: AutosuggestMenuOption[] = [];
     const textItem = {
       text: internalInputValue,
-      type: AUTOSUGGEST_TYPES.TEXT,
+      type: 'text' as AutosuggestType,
       value: internalInputValue,
     };
 
@@ -124,7 +126,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
         })
         .map((keyword) => ({
           text: getLocalizedString(keyword.name, locale),
-          type: AUTOSUGGEST_TYPES.KEYWORD,
+          type: 'keyword' as AutosuggestType,
           value: keyword.id || '',
         })) || [])
     );

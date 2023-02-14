@@ -6,6 +6,7 @@ import { enGB as en, fi } from 'date-fns/locale';
 import sv from 'date-fns/locale/sv';
 import parse from 'date-fns/parse';
 import get from 'lodash/get';
+import type { AppLanguage } from '../types';
 /* eslint-enable import/no-duplicates */
 
 const locales = { en, fi, sv };
@@ -13,7 +14,7 @@ const locales = { en, fi, sv };
 export const formatDate = (
   date: Date | number | null,
   format = 'd.M.yyyy',
-  locale = 'fi'
+  locale: AppLanguage = 'fi'
 ): string => {
   if (!date) {
     return '';

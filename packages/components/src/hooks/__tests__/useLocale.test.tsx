@@ -5,6 +5,7 @@ import {
 } from 'events-helsinki-common-i18n';
 import { useTranslation } from 'react-i18next';
 import { render, screen } from '../../../config/tests/test-utils';
+import { APP_LANGUAGES } from '../../constants';
 import type { AppLanguage } from '../../types';
 import * as useLocale from '../useLocale';
 
@@ -20,7 +21,6 @@ const TestComponent = () => {
 };
 
 describe('useLocale', () => {
-  const supportedLanguages: AppLanguage[] = ['fi', 'en', 'sv'];
   const unsupportedLanguages = ['fr', 'test'];
   const mockUseLocale = jest.spyOn(useLocale, 'default');
 
@@ -32,18 +32,15 @@ describe('useLocale', () => {
     jest.clearAllMocks();
   });
 
-  it.each(supportedLanguages)(
-    'supports the "%s" as a language',
-    async (lang) => {
-      expect(initTestI18n.language).toBe(config.lng);
+  it.each(APP_LANGUAGES)('supports the "%s" as a language', async (lang) => {
+    expect(initTestI18n.language).toBe(config.lng);
 
-      await initTestI18n.changeLanguage(lang);
+    await initTestI18n.changeLanguage(lang);
 
-      render(<TestComponent />);
-      expect(initTestI18n.language).toBe(lang);
-      expect(mockUseLocale).toHaveReturnedWith(lang as AppLanguage);
-    }
-  );
+    render(<TestComponent />);
+    expect(initTestI18n.language).toBe(lang);
+    expect(mockUseLocale).toHaveReturnedWith(lang as AppLanguage);
+  });
 
   it.each(unsupportedLanguages)(
     `returns default language "${config.lng}" for unsupported language "%s"`,

@@ -9,6 +9,7 @@ import type {
 import {
   DEFAULT_FOOTER_MENU_NAME,
   DEFAULT_HEADER_MENU_NAME,
+  getLanguageOrDefault,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import {
@@ -34,6 +35,7 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
     hobbiesContext: HobbiesContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
+  const language = getLanguageOrDefault(context.locale);
   const apolloClient = initializeFederationApolloClient();
 
   try {
@@ -46,7 +48,7 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
       'props' in result
         ? {
             initialApolloState: apolloClient.cache.extract(),
-            locale: context.locale,
+            locale: language,
             ...globalCmsData,
             ...result.props,
           }

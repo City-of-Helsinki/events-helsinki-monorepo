@@ -1,7 +1,9 @@
+import type { AppLanguage } from '../types';
+
 /**
  * Get localised time format
  */
-const getTimeFormat = (lng: string): string => {
+const getTimeFormat = (lng: AppLanguage): string => {
   switch (lng) {
     case 'en':
       return 'h:mm aaaa';

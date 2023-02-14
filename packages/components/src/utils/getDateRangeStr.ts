@@ -8,8 +8,8 @@ import {
 import { utcToZonedTime } from 'date-fns-tz';
 import capitalize from 'lodash/capitalize';
 
-import { SUPPORT_LANGUAGES } from '../constants';
 import { formatDate } from './dateUtils';
+import getLanguageOrDefault from './get-language-or-default';
 import getTimeFormat from './getTimeFormat';
 
 /**
@@ -25,28 +25,29 @@ const getDateRangeStr = ({
 }: {
   start: string;
   end?: string | null;
-  locale: string;
+  locale: unknown;
   includeWeekday?: boolean;
   includeTime?: boolean;
   timeAbbreviation?: string;
   // eslint-disable-next-line sonarjs/cognitive-complexity
 }): string => {
+  const language = getLanguageOrDefault(locale);
   const timeZone = 'Europe/Helsinki';
   const startDate = utcToZonedTime(new Date(start), timeZone);
   const nextDay = utcToZonedTime(addDays(startDate, 1), timeZone);
   nextDay.setHours(5, 0, 0, 0);
-  const weekdayFormat = locale === SUPPORT_LANGUAGES.EN ? 'eee' : 'eeeeee';
+  const weekdayFormat = locale === 'en' ? 'eee' : 'eeeeee';
   const dateFormat = 'd.M.yyyy ';
-  const timeFormat = getTimeFormat(locale);
+  const timeFormat = getTimeFormat(language);
   const weekdayStr = includeWeekday
-    ? `${capitalize(formatDate(startDate, weekdayFormat, locale))} `
+    ? `${capitalize(formatDate(startDate, weekdayFormat, language))} `
     : '';
   const timeAbbreviationStr = timeAbbreviation ? `${timeAbbreviation} ` : '';
 
   if (!end) {
-    const dateStr = formatDate(startDate, dateFormat, locale);
+    const dateStr = formatDate(startDate, dateFormat, language);
     const timeStr = includeTime
-      ? `, ${timeAbbreviationStr}${formatDate(startDate, timeFormat, locale)}`
+      ? `, ${timeAbbreviationStr}${formatDate(startDate, timeFormat, language)}`
       : '';
 
     return [weekdayStr, dateStr, timeStr].join('');
@@ -55,11 +56,11 @@ const getDateRangeStr = ({
 
     if (isSameDay(startDate, endDate) || isBefore(endDate, nextDay)) {
       const weekdayStr = includeWeekday
-        ? `${capitalize(formatDate(startDate, weekdayFormat, locale))} `
+        ? `${capitalize(formatDate(startDate, weekdayFormat, language))} `
         : '';
-      const dateStr = formatDate(startDate, dateFormat, locale);
-      const startTimeStr = formatDate(startDate, timeFormat, locale);
-      const endTimeStr = formatDate(endDate, timeFormat, locale);
+      const dateStr = formatDate(startDate, dateFormat, language);
+      const startTimeStr = formatDate(startDate, timeFormat, language);
+      const endTimeStr = formatDate(endDate, timeFormat, language);
       const timeStr = includeTime
         ? `, ${timeAbbreviationStr}${startTimeStr}–${endTimeStr}`
         : '';

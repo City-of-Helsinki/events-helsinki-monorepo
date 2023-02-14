@@ -4,19 +4,19 @@ import {
   Navigation,
   MatomoWrapper,
   useCommonTranslation,
+  getLanguageOrDefault,
+  FooterSection,
 } from 'events-helsinki-components';
 import type {
   EventFields,
   EventDetailsQuery,
   EventDetailsQueryVariables,
 } from 'events-helsinki-components';
-import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import AppConfig from '../../../domain/app/AppConfig';
 import getEventsStaticProps from '../../../domain/app/getEventsStaticProps';
-import routerHelper from '../../../domain/app/routerHelper';
 import EventPageContainer from '../../../domain/event/EventPageContainer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 
@@ -57,7 +57,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async ({ apolloClient }) => {
-    const locale = routerHelper.getLocaleOrError(context.locale);
+    const language = getLanguageOrDefault(context.locale);
     const { data: eventData, loading } = await apolloClient.query<
       EventDetailsQuery,
       EventDetailsQueryVariables
@@ -75,7 +75,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       props: {
         event,
         loading,
-        ...(await serverSideTranslationsWithCommon(locale, [
+        ...(await serverSideTranslationsWithCommon(language, [
           'common',
           'home',
           'search',

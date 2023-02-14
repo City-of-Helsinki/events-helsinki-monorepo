@@ -1,9 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  AUTOSUGGEST_TYPES,
-  KeywordListDocument,
-} from 'events-helsinki-components';
+import { KeywordListDocument } from 'events-helsinki-components';
 import * as React from 'react';
 
 import {
@@ -181,7 +178,7 @@ it('should call onOptionClick by text is no option is selected', async () => {
 
   expect(onEnter).toHaveBeenCalledWith({
     text: searchValue,
-    type: AUTOSUGGEST_TYPES.TEXT,
+    type: 'text',
     value: searchValue,
   });
 });
@@ -198,7 +195,7 @@ it('should call onOptionClick by text is first option is selected', async () => 
 
   expect(onEnter).toHaveBeenCalledWith({
     text: searchValue,
-    type: AUTOSUGGEST_TYPES.TEXT,
+    type: 'text',
     value: searchValue,
   });
 });
@@ -216,7 +213,7 @@ it('should call onOptionClick with option if keyword is selected', async () => {
   const keyword = keywords.data[0];
   expect(onEnter).toHaveBeenCalledWith({
     text: keyword.name?.fi,
-    type: AUTOSUGGEST_TYPES.KEYWORD,
+    type: 'keyword',
     value: keyword.id,
   });
 });

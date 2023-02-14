@@ -5,6 +5,7 @@ import {
   Navigation,
   MatomoWrapper,
 } from 'events-helsinki-components';
+import getLanguageOrDefault from 'events-helsinki-components/src/utils/get-language-or-default';
 import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
@@ -134,10 +135,10 @@ export default function MapSearch() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async () => {
-    const locale = routerHelper.getLocaleOrError(context.locale);
+    const language = getLanguageOrDefault(context.locale);
     return {
       props: {
-        ...(await serverSideTranslationsWithCommon(locale, [
+        ...(await serverSideTranslationsWithCommon(language, [
           'common',
           'search',
         ])),

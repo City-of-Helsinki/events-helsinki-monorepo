@@ -1,4 +1,4 @@
-import { supportedLanguages } from '../constants';
+import { APP_LANGUAGES } from '../constants';
 import type { AppLanguage } from '../types';
 
 /**
@@ -21,7 +21,7 @@ const getLocalizedString = (
 
   const languages = [
     language,
-    ...supportedLanguages.filter((item) => item !== language),
+    ...APP_LANGUAGES.filter((item) => item !== language),
   ];
   // Find first language which has value
   const locale = languages.find((lng) => obj[lng]);

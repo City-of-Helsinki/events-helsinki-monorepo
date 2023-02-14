@@ -29,6 +29,8 @@
     "cross-env": "7.0.3",
     "eslint": "8.24.0",
     "eslint-config-prettier": "8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "27.0.4",
     "eslint-plugin-jest-formatting": "3.1.0",
     "eslint-plugin-testcafe-community": "2.0.0",

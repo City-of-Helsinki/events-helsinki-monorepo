@@ -7,9 +7,10 @@ import {
   Navigation,
   useCommonTranslation,
   MatomoWrapper,
+  FooterSection,
+  getLanguageOrDefault,
 } from 'events-helsinki-components';
 import type { AppLanguage } from 'events-helsinki-components';
-import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -36,7 +37,6 @@ import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import routerHelper from '../../domain/app/routerHelper';
 import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
@@ -126,12 +126,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             revalidate: true,
           };
         }
-        const locale = routerHelper.getLocaleOrError(context.locale);
+        const language = getLanguageOrDefault(context.locale);
 
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
-            ...(await serverSideTranslationsWithCommon(locale, [
+            ...(await serverSideTranslationsWithCommon(language, [
               'cms',
               'event',
             ])),
@@ -158,16 +158,14 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 const getProps = async (context: GetStaticPropsContext) => {
+  const language = getLanguageOrDefault(context.locale);
   const { data: articleData } = await apolloClient.query<
     ArticleQuery,
     ArticleQueryVariables
   >({
     query: ArticleDocument,
     variables: {
-      id: _getURIQueryParameter(
-        context.params?.slug as string[],
-        context.locale as AppLanguage
-      ),
+      id: _getURIQueryParameter(context.params?.slug as string[], language),
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
   });

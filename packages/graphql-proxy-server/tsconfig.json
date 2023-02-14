@@ -8,7 +8,10 @@
     "module": "commonjs",
     "jsx": "preserve",
     "incremental": true,
-    "paths": {},
+    "paths": {
+      "events-helsinki-components": ["../components/src/index"],
+      "events-helsinki-components/*": ["../components/src/*"]
+    },
     "esModuleInterop": true,
     "moduleResolution": "node"
   },

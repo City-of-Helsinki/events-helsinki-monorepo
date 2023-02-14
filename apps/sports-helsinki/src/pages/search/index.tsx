@@ -3,14 +3,14 @@ import {
   Navigation,
   MatomoWrapper,
   useCommonTranslation,
+  FooterSection,
+  getLanguageOrDefault,
 } from 'events-helsinki-components';
-import FooterSection from 'events-helsinki-components/components/footer/Footer';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
-import routerHelper from '../../domain/app/routerHelper';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import CombinedSearchPage from '../../domain/search/combinedSearch/CombinedSearchPage';
 
@@ -34,10 +34,10 @@ export default function Search() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async () => {
-    const locale = routerHelper.getLocaleOrError(context.locale);
+    const language = getLanguageOrDefault(context.locale);
     return {
       props: {
-        ...(await serverSideTranslationsWithCommon(locale, [
+        ...(await serverSideTranslationsWithCommon(language, [
           'common',
           'home',
           'event',

@@ -1,10 +1,9 @@
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
-import type Locale from '../types/locale';
-
+import type { AppLanguage } from 'events-helsinki-components/src/types/types';
 export type ContextConstructorArgs = {
   token: string;
   cache?: KeyValueCache;
-  language?: Locale;
+  language?: AppLanguage;
 };
 abstract class ContextValue<DataSources> {
   public readonly token: string;
@@ -13,7 +12,7 @@ abstract class ContextValue<DataSources> {
   // Some fields are relying on language set in the header.
   // The translation object will be returned as a string
   // and the language from the context is used to select the right translation.
-  public readonly language?: Locale;
+  public readonly language?: AppLanguage;
 
   public X_REQUEST_ID?: string;
 

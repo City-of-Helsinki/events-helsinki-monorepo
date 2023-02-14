@@ -10,6 +10,7 @@ import {
   DEFAULT_FOOTER_MENU_NAME,
   DEFAULT_HEADER_MENU_NAME,
 } from 'events-helsinki-components';
+import getLanguageOrDefault from 'events-helsinki-components/src/utils/get-language-or-default';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import {
   LanguagesDocument,
@@ -35,7 +36,7 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
   ) => Promise<GetStaticPropsResult<P>>
 ) {
   const apolloClient = initializeFederationApolloClient();
-
+  const language = getLanguageOrDefault(context.locale);
   try {
     const globalCmsData = await getGlobalCMSData({
       client: apolloClient,
@@ -46,7 +47,7 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
       'props' in result
         ? {
             initialApolloState: apolloClient.cache.extract(),
-            locale: context.locale,
+            locale: language,
             ...globalCmsData,
             ...result.props,
           }

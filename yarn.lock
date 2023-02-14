@@ -14720,7 +14720,6 @@ __metadata:
   resolution: "events-helsinki-common-tests@workspace:packages/common-tests"
   dependencies:
     "@events-helsinki/eslint-config-bases": "workspace:^"
-    "@testing-library/react": "npm:^13.2.0"
     "@testing-library/testcafe": "npm:^5.0.0"
     "@types/jest": "npm:29.1.0"
     "@types/node": "npm:18.7.23"
@@ -14735,8 +14734,6 @@ __metadata:
     eslint-plugin-testing-library: "npm:5.7.0"
     i18next: "npm:21.10.0"
     prettier: "npm:2.7.1"
-    react: "npm:18.2.0"
-    react-dom: "npm:18.2.0"
     rimraf: "npm:3.0.2"
     testcafe: "npm:^2.3.1"
     typescript: "npm:4.8.4"
@@ -14840,7 +14837,7 @@ __metadata:
     react-datepicker: "npm:4.8.0"
     react-dom: "npm:>=17.0.2"
     react-error-boundary: "npm:3.1.4"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha115"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha111"
     react-i18next: "npm:11.18.6"
     react-leaflet: "npm:4.2.0"
     react-toastify: "npm:^9.0.3"
@@ -15098,7 +15095,7 @@ __metadata:
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:3.1.4"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha115"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha111"
     react-i18next: "npm:11.18.6"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -17313,7 +17310,7 @@ __metadata:
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:3.1.4"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha115"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha111"
     react-i18next: "npm:11.18.6"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -25650,9 +25647,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha115":
-  version: 1.0.0-alpha115
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha115"
+"react-helsinki-headless-cms@npm:1.0.0-alpha111":
+  version: 1.0.0-alpha111
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha111"
   dependencies:
     hds-design-tokens: "npm:^2.3.0"
     html-react-parser: "npm:^1.4.8"
@@ -25666,7 +25663,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 31c73901dde5ff7ae9f41d1e736d9ac651a0924d46a3f4a3164ddbef8aabd064de2109756c87367231878ea530ea5ed78a14565cacfc1069007438b58a21dcd5
+  checksum: 63fb37406b2becb82318b9ab707d7fe8da56d8a26197e8ebdc3b78350143598317f54b303b20922d498d7b669f881e5fa2f7605db88facb9c5bd06161223f761
   languageName: node
   linkType: hard
 
@@ -28056,7 +28053,7 @@ __metadata:
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:3.1.4"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha115"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha111"
     react-i18next: "npm:11.18.6"
     react-leaflet: "npm:4.2.0"
     react-scroll: "npm:^1.8.7"

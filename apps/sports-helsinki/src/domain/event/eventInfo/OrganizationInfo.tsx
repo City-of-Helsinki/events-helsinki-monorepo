@@ -8,6 +8,7 @@ import {
   translateValue,
   useLocale,
   useOrganizationDetailsQuery,
+  useErrorBoundary,
 } from 'events-helsinki-components';
 import { IconFaceSmile, IconLayers } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -28,10 +29,16 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
   const locale = useLocale();
   const router = useRouter();
   const { provider, publisher } = getEventFields(event, locale);
-  const { data: organizationData, loading } = useOrganizationDetailsQuery({
+  const {
+    data: organizationData,
+    loading,
+    error,
+  } = useOrganizationDetailsQuery({
     ssr: false,
     variables: { id: publisher },
   });
+  useErrorBoundary(error);
+
   const searchParams = React.useMemo(
     () => new URLSearchParams(qs.stringify(router.query)),
     [router.query]

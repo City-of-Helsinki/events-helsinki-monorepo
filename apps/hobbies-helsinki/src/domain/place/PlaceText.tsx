@@ -1,5 +1,6 @@
 import {
   getLocalizedString,
+  useErrorBoundary,
   useLocale,
   usePlaceDetailsQuery,
 } from 'events-helsinki-components';
@@ -11,10 +12,10 @@ interface Props {
 
 const PlaceText: React.FC<Props> = ({ id }) => {
   const locale = useLocale();
-  const { data } = usePlaceDetailsQuery({
+  const { data, error } = usePlaceDetailsQuery({
     variables: { id },
   });
-
+  useErrorBoundary(error);
   return (
     <>{getLocalizedString((data && data.placeDetails.name) || {}, locale)}</>
   );

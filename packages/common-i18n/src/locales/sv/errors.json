@@ -1,0 +1,11 @@
+{
+  "notFound": {
+    "title": "Hoppsan! Sidan du söker finns inte!",
+    "description": "Länken kan vara föråldrad eller sidan har tagits bort."
+  },
+  "unknownError": {
+    "title": "Ett fel upptäcktes på webbplatsen!",
+    "description": "Försök igen om en stund. Om situationen återkommer, berätta om det för oss med <link>responsblanketten</link>"
+  },
+  "moveToHomePageButton": "Gå till startsidan."
+}

@@ -146,7 +146,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             error: {
-              statusCode: 400,
+              statusCode: 500,
             },
           },
           revalidate: 10,

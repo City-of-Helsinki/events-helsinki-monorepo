@@ -14563,6 +14563,7 @@ __metadata:
     react-content-loader: "npm:6.2.0"
     react-datepicker: "npm:4.8.0"
     react-dom: "npm:18.2.0"
+    react-error-boundary: "npm:3.1.4"
     react-helsinki-headless-cms: "npm:1.0.0-alpha120"
     react-i18next: "npm:12.2.0"
     react-leaflet: "npm:4.2.0"
@@ -14817,6 +14818,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
+    react-error-boundary: "npm:3.1.4"
     react-helsinki-headless-cms: "npm:1.0.0-alpha120"
     react-i18next: "npm:12.2.0"
     react-scroll: "npm:^1.8.7"
@@ -17010,6 +17012,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
+    react-error-boundary: "npm:3.1.4"
     react-helsinki-headless-cms: "npm:1.0.0-alpha120"
     react-i18next: "npm:12.2.0"
     react-scroll: "npm:^1.8.7"
@@ -25249,7 +25252,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-error-boundary@npm:^3.1.0":
+"react-error-boundary@npm:3.1.4, react-error-boundary@npm:^3.1.0":
   version: 3.1.4
   resolution: "react-error-boundary@npm:3.1.4"
   dependencies:
@@ -27664,6 +27667,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
+    react-error-boundary: "npm:3.1.4"
     react-helsinki-headless-cms: "npm:1.0.0-alpha120"
     react-i18next: "npm:12.2.0"
     react-leaflet: "npm:4.2.0"

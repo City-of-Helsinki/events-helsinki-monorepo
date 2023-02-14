@@ -20,7 +20,7 @@ export interface SearchForm {
   clearInputValues: () => void;
   clearFilters: () => void;
   handleSubmit: (event?: FormEvent) => void;
-  initialFieldsOnPageLoad: () => void;
+  updateFilters: () => void;
   scrollToResultList?: () => void;
 }
 

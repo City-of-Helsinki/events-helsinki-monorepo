@@ -89,7 +89,7 @@ export const useAdvancedSearchForm = ({
     goToSearch(search);
   };
 
-  const initialFieldsOnPageLoad = React.useCallback(() => {
+  const updateFilters = React.useCallback(() => {
     const { places, text } = getSearchFilters(searchParams);
 
     const placeSearchParam =
@@ -132,7 +132,7 @@ export const useAdvancedSearchForm = ({
     clearInputValues,
     clearFilters,
     handleSubmit,
-    initialFieldsOnPageLoad,
+    updateFilters,
     searchFilters,
     scrollToResultList,
   };
@@ -154,7 +154,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
     handleSubmit,
     clearFilters,
     goToSearch,
-    initialFieldsOnPageLoad,
+    updateFilters,
     searchFilters,
   } = useAdvancedSearchForm({
     scrollToResultList,
@@ -176,7 +176,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
 
   // Initialize fields when page is loaded
   React.useEffect(() => {
-    initialFieldsOnPageLoad();
+    updateFilters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

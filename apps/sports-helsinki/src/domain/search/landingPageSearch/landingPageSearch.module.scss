@@ -37,12 +37,16 @@
   height: fit-content;
   align-items: center;
 
-  @include respond-below(s) {
-    display: none;
+  @include respond-below(m) {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+    grid-gap: 0;
+    padding-bottom: 2rem;
   }
 
   @include respond-above(s) {
-    padding-top: 12rem;
+    padding-top: 7rem;
   }
 
   @include respond-above(m) {

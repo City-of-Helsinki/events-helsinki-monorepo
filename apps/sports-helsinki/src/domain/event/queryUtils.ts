@@ -15,6 +15,7 @@ import type {
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';
+import AppConfig from '../../domain/app/AppConfig';
 import useUnifiedSearchListQuery from '../../domain/unifiedSearch/useUnifiedSearchListQuery';
 import getVenueSourceId from '../../domain/venue/utils/getVenueSourceId';
 import { EVENT_SEARCH_FILTERS } from '../search/eventSearch/constants';
@@ -255,7 +256,6 @@ export const useSimilarVenuesQuery = ({
     },
     []
   );
-
   // Search for venue ids from UnifiedSearch with the ontologies.
   const { data: venuesUnifiedSearchData, loading: unifiedSearchLoading } =
     useUnifiedSearchListQuery({
@@ -263,11 +263,13 @@ export const useSimilarVenuesQuery = ({
         ontologyWordIds,
         first: limit,
         orderByName: undefined,
+        includeHaukiFields: AppConfig.isHaukiEnabled,
       },
     });
 
   // Search for venues from venues-proxy (e.g. TPREK as a datasource) with the venue ids.
   const [getVenuesByIds, queryProps] = useVenuesByIdsLazyQuery({
+    variables: { includeHaukiFields: AppConfig.isHaukiEnabled },
     ssr: false,
     context: {
       headers: {

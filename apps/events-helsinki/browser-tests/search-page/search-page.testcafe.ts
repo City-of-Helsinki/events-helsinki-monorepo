@@ -3,16 +3,20 @@ import {
   allCookiesUser,
   EventSearchPage,
   testNavigationFromSearchToDetailsAndBack,
+  useRoleAndNavigateBack,
 } from 'events-helsinki-common-tests/browser-tests';
 import i18n from '../../../../packages/common-i18n/src/tests/initI18n';
 import { ROUTES } from '../../src/constants';
 
 const searchPage = new EventSearchPage('appEvents');
 
-fixture.disablePageCaching('Search page').beforeEach(async (t) => {
-  await i18n.changeLanguage('default');
-  await t.useRole(allCookiesUser).navigateTo(getEnvUrl(ROUTES.SEARCH));
-});
+fixture
+  .disablePageCaching('Search page')
+  .page(getEnvUrl(`/fi/${ROUTES.SEARCH}`))
+  .beforeEach(async (t) => {
+    await i18n.changeLanguage('default');
+    await useRoleAndNavigateBack(allCookiesUser, t);
+  });
 
 test('Verify searching', async () => {
   await searchPage.verify();

@@ -1,26 +1,23 @@
-import { within } from '@testing-library/testcafe';
+import { screen } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
 
 class ConsentModal {
   consentAllCookieName = 'city-of-helsinki-cookie-consents';
 
   private get title() {
-    const { getByRole } = within(this.componentContainer);
-    return getByRole('heading', {
+    return screen.findByRole('heading', {
       name: /\w+ käyttää evästeitä/,
     });
   }
 
   private get acceptAllCookiesButton() {
-    const { getByRole } = within(this.componentContainer);
-    return getByRole('button', {
+    return screen.findByRole('button', {
       name: /hyväksy kaikki evästeet/i,
     });
   }
 
   private get acceptOnlyRequiredCookiesButton() {
-    const { getByRole } = within(this.componentContainer);
-    return getByRole('button', {
+    return screen.findByRole('button', {
       name: /hyväksy vain välttämättömät evästeet/i,
     });
   }

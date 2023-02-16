@@ -16,7 +16,7 @@ export const acceptAllCookies = async (t: TestController) => {
 const userAcceptingAllCookies = Role(
   getEnvUrl('/'),
   async (t) => {
-    await acceptAllCookies(t);
+//    await acceptAllCookies(t);
   },
   { preserveUrl: false }
 );

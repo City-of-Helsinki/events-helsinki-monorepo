@@ -8,7 +8,6 @@ fixture.disablePageCaching('Landing page header').beforeEach(async (t) => {
   await t.useRole(allCookiesUser).navigateTo(getEnvUrl());
 });
 
-test('Verify header title', async (t) => {
-  await t.useRole(allCookiesUser).navigateTo(getEnvUrl());
+test('Verify header title', async () => {
   await changeLanguageAndTrySearch('appSports');
 });

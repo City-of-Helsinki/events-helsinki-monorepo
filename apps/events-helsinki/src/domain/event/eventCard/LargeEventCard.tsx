@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import type { EventFields } from 'events-helsinki-components';
 import {
+  useClickCapture,
   EnrolmentStatusLabel,
   EventEnrolmentStatus,
   useEventEnrolmentStatus,
@@ -14,11 +15,10 @@ import {
   getLargeEventCardId,
   isEventClosed,
   isEventFree,
-  LoaderLinkBox,
+  ArrowRightWithLoadingIndicator,
 } from 'events-helsinki-components';
 import {
   Button,
-  IconArrowRight,
   IconCake,
   IconCalendarClock,
   IconLinkExternal,
@@ -27,7 +27,7 @@ import {
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { BackgroundImage } from 'react-helsinki-headless-cms';
+import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import AppConfig from '../../app/AppConfig';
@@ -92,131 +92,140 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
 
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
-  return (
-    <LoaderLinkBox
-      type="linkBox"
-      aria-label={t('eventCard.ariaLabelLink', {
-        name,
-      })}
-      id={getLargeEventCardId(id)}
-      data-testid={event.id}
-      href={eventUrl}
-    >
-      <div
-        className={classNames(styles.eventCard, {
-          [styles.eventClosed]: eventClosed,
-        })}
-      >
-        {/* INFO WRAPPER. Re-order info wrapper and text wrapper on css */}
-        <div className={styles.infoWrapper}>
-          <div className={styles.eventName}>
-            <EventName event={event} />
-          </div>
+  const { clickCaptureRef, clicked } = useClickCapture(1000);
 
-          <div className={styles.eventLocation}>
-            <IconLocation aria-hidden />
-            <LocationText
-              event={event}
-              showDistrict={false}
-              showLocationName={true}
-            />
-          </div>
-          <div className={styles.eventDateAndTime}>
-            {!!startTime && (
-              <>
-                <IconCalendarClock aria-hidden />
-                {getDateRangeStr({
-                  start: startTime,
-                  end: endTime,
-                  locale,
-                  includeTime: true,
-                  timeAbbreviation: commonTranslation('timeAbbreviation'),
-                })}
-              </>
-            )}
-          </div>
-          {audienceAge && (
-            <div className={styles.eventAudienceAge}>
-              <IconCake aria-hidden />
-              {audienceAge}
+  return (
+    <div ref={clickCaptureRef}>
+      <LinkBox
+        type="linkBox"
+        aria-label={t('eventCard.ariaLabelLink', {
+          name,
+        })}
+        id={getLargeEventCardId(id)}
+        data-testid={event.id}
+        href={eventUrl}
+      >
+        <div
+          className={classNames(styles.eventCard, {
+            [styles.eventClosed]: eventClosed,
+          })}
+        >
+          {/* INFO WRAPPER. Re-order info wrapper and text wrapper on css */}
+          <div className={styles.infoWrapper}>
+            <div className={styles.eventName}>
+              <EventName event={event} />
             </div>
-          )}
-          <div className={styles.eventPrice}>
-            {getEventPrice(event, locale, t('eventCard.isFree'))}
-          </div>
-          <div className={styles.keywordWrapperDesktop}>
-            <EventKeywords
-              event={event}
-              hideKeywordsOnMobile={true}
-              showIsFree={true}
-            />
-          </div>
-          <div
-            className={classNames(
-              styles.buttonWrapper,
-              showBuyButton ? styles.rightAlign : ''
-            )}
-          >
-            {showBuyButton ? (
-              <>
-                <div>
-                  <Button
-                    aria-label={t('eventCard.ariaLabelBuyTickets')}
-                    iconRight={<IconLinkExternal aria-hidden />}
-                    fullWidth
-                    onClick={goToBuyTicketsPage}
-                    size="small"
-                    variant="success"
-                  >
-                    {t('eventCard.buttonBuyTickets')}
-                  </Button>
-                </div>
-                <div ref={button}>
-                  <Button
-                    aria-label={t('eventCard.ariaLabelReadMore', {
-                      name,
-                    })}
-                    className={buttonStyles.buttonGray}
-                    fullWidth
-                    onClick={goToEventPage}
-                    size="small"
-                    type="button"
-                  >
-                    {t('eventCard.buttonReadMore')}
-                  </Button>
-                </div>
-              </>
-            ) : (
-              <div>
-                <IconArrowRight
-                  className={styles.arrowRight}
-                  size="l"
-                  aria-hidden="true"
-                />
-                {AppConfig.showEnrolmentStatusInCardDetails && (
-                  <EventEnrolmentStatus
-                    event={event}
-                    className={classNames(styles.linkArrowLabel, {
-                      [styles.alert]:
-                        eventEnrolmentStatus === EnrolmentStatusLabel.full,
-                    })}
-                  />
-                )}
+
+            <div className={styles.eventLocation}>
+              <IconLocation aria-hidden />
+              <LocationText
+                event={event}
+                showDistrict={false}
+                showLocationName={true}
+              />
+            </div>
+            <div className={styles.eventDateAndTime}>
+              {!!startTime && (
+                <>
+                  <IconCalendarClock aria-hidden />
+                  {getDateRangeStr({
+                    start: startTime,
+                    end: endTime,
+                    locale,
+                    includeTime: true,
+                    timeAbbreviation: commonTranslation('timeAbbreviation'),
+                  })}
+                </>
+              )}
+            </div>
+            {audienceAge && (
+              <div className={styles.eventAudienceAge}>
+                <IconCake aria-hidden />
+                {audienceAge}
               </div>
             )}
+            <div className={styles.eventPrice}>
+              {getEventPrice(event, locale, t('eventCard.isFree'))}
+            </div>
+            <div className={styles.keywordWrapperDesktop}>
+              <EventKeywords
+                event={event}
+                hideKeywordsOnMobile={true}
+                showIsFree={true}
+              />
+            </div>
+            <div
+              className={classNames(
+                styles.buttonWrapper,
+                showBuyButton ? styles.rightAlign : ''
+              )}
+            >
+              {showBuyButton ? (
+                <>
+                  <div>
+                    <Button
+                      aria-label={t('eventCard.ariaLabelBuyTickets')}
+                      iconRight={<IconLinkExternal aria-hidden />}
+                      fullWidth
+                      onClick={goToBuyTicketsPage}
+                      size="small"
+                      variant="success"
+                    >
+                      {t('eventCard.buttonBuyTickets')}
+                    </Button>
+                  </div>
+                  <div ref={button}>
+                    <Button
+                      aria-label={t('eventCard.ariaLabelReadMore', {
+                        name,
+                      })}
+                      className={buttonStyles.buttonGray}
+                      fullWidth
+                      onClick={goToEventPage}
+                      size="small"
+                      type="button"
+                    >
+                      {t('eventCard.buttonReadMore')}
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <ArrowRightWithLoadingIndicator
+                    className={styles.arrowRight}
+                    size="l"
+                    aria-hidden="true"
+                    loading={clicked}
+                  />
+                  {AppConfig.showEnrolmentStatusInCardDetails && (
+                    <EventEnrolmentStatus
+                      event={event}
+                      className={classNames(styles.linkArrowLabel, {
+                        [styles.alert]:
+                          eventEnrolmentStatus === EnrolmentStatusLabel.full,
+                      })}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
           </div>
+          <BackgroundImage
+            className={styles.imageWrapper}
+            id={id}
+            url={imageUrl}
+          >
+            <div className={styles.keywordWrapper}>
+              <EventKeywords
+                event={event}
+                hideKeywordsOnMobile={true}
+                showIsFree={true}
+              />
+            </div>
+          </BackgroundImage>
         </div>
-        <BackgroundImage className={styles.imageWrapper} id={id} url={imageUrl}>
-          <div className={styles.keywordWrapper}>
-            <EventKeywords
-              event={event}
-              hideKeywordsOnMobile={true}
-              showIsFree={true}
-            />
-          </div>
-        </BackgroundImage>
-      </div>
-    </LoaderLinkBox>
+      </LinkBox>
+    </div>
   );
 };
 

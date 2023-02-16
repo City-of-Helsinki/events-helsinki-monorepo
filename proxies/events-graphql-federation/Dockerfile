@@ -1,4 +1,4 @@
-FROM ghcr.io/apollographql/router:v1.3.0 AS router
+FROM ghcr.io/apollographql/router:v1.10.3 AS router
 
 COPY ./supergraph.graphql /dist/schema/supergraph.graphql
 COPY ./router.yaml /dist/config/router.yaml
@@ -6,7 +6,7 @@ COPY ./router.yaml /dist/config/router.yaml
 # ===================================
 FROM router as develop
 # ===================================
-CMD ["--dev", "-c", "config/router.yaml", "-s", "schema/supergraph.graphql", "--log", "info"]
+CMD ["--dev", "-c", "config/router.yaml", "-s", "schema/supergraph.graphql", "--log", "debug"]
 
 # ===================================
 FROM router as production

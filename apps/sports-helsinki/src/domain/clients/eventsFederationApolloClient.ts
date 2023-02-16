@@ -13,9 +13,11 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
+import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries';
 import { relayStylePagination } from '@apollo/client/utilities';
 import * as Sentry from '@sentry/browser';
 import fetch from 'cross-fetch';
+import { sha256 } from 'crypto-hash';
 import type { LanguageString } from 'events-helsinki-components';
 import {
   excludeArgs,
@@ -77,6 +79,10 @@ export function createApolloClient() {
       return response;
     });
   });
+  const persistedQueryLink = createPersistedQueryLink({
+    sha256,
+    useGETForHashedQueries: true,
+  });
   const httpLink = getHttpLink(AppConfig.federationGraphqlEndpoint);
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
@@ -98,7 +104,12 @@ export function createApolloClient() {
     connectToDevTools: true,
     ssrMode: !isClient, // Disables forceFetch on the server (so queries are only run once)
     // TODO: Add error link after adding Sentry to the project
-    link: ApolloLink.from([transformInternalURLs, errorLink, httpLink]),
+    link: ApolloLink.from([
+      transformInternalURLs,
+      errorLink,
+      persistedQueryLink,
+      httpLink,
+    ]),
     cache,
   });
 }

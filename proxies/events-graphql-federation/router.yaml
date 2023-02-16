@@ -5,6 +5,14 @@ supergraph:
   # The socket address and port to listen on
   listen: ${env.ROUTER_URL:-0.0.0.0:4000}
   introspection: true
+  apq:
+    experimental_cache:
+      in_memory:
+        limit: ${env.ROUTER_APQ_MEMORY_LIMIT:-512}
+  query_planning:
+    experimental_cache:
+      in_memory:
+        limit: ${env.ROUTER_QUERY_PLANNING_MEMORY_LIMIT:-512}
 homepage:
   enabled: false
 sandbox:

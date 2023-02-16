@@ -4,7 +4,7 @@ import {
   allCookiesUser,
 } from 'events-helsinki-common-tests/browser-tests';
 
-fixture.disablePageCaching('Landing page header').beforeEach(async (t) => {
+fixture('Landing page header').beforeEach(async (t) => {
   await t.useRole(allCookiesUser).navigateTo(getEnvUrl());
 });
 

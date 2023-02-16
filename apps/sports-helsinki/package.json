@@ -27,7 +27,7 @@
     "?test:browser": "echo 'Run browser-tests locally. You need to have production build of the application running locally (yarn build & yarn start)",
     "test:browser": "testcafe \"chrome --window-size='1249,720'\" browser-tests/ --live --dev",
     "test:browser:wsl2win": "testcafe 'path:`/mnt/c/Program Files/Google/Chrome/Application/chrome.exe`' browser-tests/ --live --dev",
-    "test:browser:ci": "testcafe \"chrome:headless --disable-gpu --window-size='1249,720'\" --disable-page-caching  --screenshots path=report takeOnFails=true --video report browser-tests/",
+    "test:browser:ci": "testcafe \"chrome:headless --disable-gpu --window-size='1249,720'\" --screenshots path=report takeOnFails=true --video report browser-tests/",
     "docker:prune-cache": "docker buildx prune",
     "docker:install": "docker buildx bake -f docker-compose.hobbies.yml --progress=tty deps",
     "docker:develop": "cross-env DOCKER_BUILDKIT=1 docker-compose -f ./docker-compose.yml up",

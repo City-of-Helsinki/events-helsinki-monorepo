@@ -18,7 +18,6 @@ export const venueListBaseVariables: SearchListQueryVariables = {
   openAt: null,
   after: '',
   first: 4,
-  orderByName: undefined,
 };
 
 const createRequest = (

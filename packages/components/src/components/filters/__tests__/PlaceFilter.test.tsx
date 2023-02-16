@@ -61,18 +61,9 @@ it("should return null if place doesn't exist", async () => {
     },
   ];
 
-  const { container } = render(
-    <PlaceFilter id={placeId} onRemove={jest.fn()} />,
-    {
-      mocks,
-    }
-  );
-
-  await waitFor(() => {
-    expect(
-      screen.queryByText(translations.common.loading)
-    ).not.toBeInTheDocument();
+  render(<PlaceFilter id={placeId} onRemove={jest.fn()} />, {
+    mocks,
   });
 
-  expect(container.innerHTML).toBe('');
+  await screen.findByText(/not found/i);
 });

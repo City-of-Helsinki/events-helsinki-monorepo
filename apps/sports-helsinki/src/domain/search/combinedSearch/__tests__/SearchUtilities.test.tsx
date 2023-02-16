@@ -1,7 +1,16 @@
 import { translations } from 'events-helsinki-common-i18n';
+import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
 import { EventTypeId } from 'events-helsinki-components/types';
 import * as React from 'react';
 import { render, screen, userEvent } from '@/test-utils';
+import {
+  fakeEvents,
+  fakeVenues,
+  fakeVenuesSearchList,
+} from '@/test-utils/mockDataUtils';
+import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
+import { createVenueListRequestAndResultMocks } from '@/test-utils/mocks/venueListMocks';
+import { SPORT_COURSES_KEYWORDS } from '../../eventSearch/constants';
 import SearchTabs from '../searchTabs/SearchTabs';
 import type { SearchTabId, TabsContextType } from '../searchTabs/tabsContext';
 import { TabsContext } from '../searchTabs/tabsContext';
@@ -28,12 +37,58 @@ const getTabsContextValue = ({
   setResultCount: jest.fn(),
 });
 
+const expectedSimilarVenues = fakeVenues(3);
+const expectedSimilarVenuesSearchList = fakeVenuesSearchList(
+  3,
+  expectedSimilarVenues
+);
+
+const mocks = [
+  createVenueListRequestAndResultMocks({
+    variables: {
+      ontologyTreeIds: ['551'],
+      ontologyWordIds: [],
+      administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
+      first: 10,
+    },
+    response: expectedSimilarVenuesSearchList,
+  }),
+  createEventListRequestAndResultMocks({
+    variables: {
+      allOngoing: true,
+      keywordOrSet1: SPORT_COURSES_KEYWORDS,
+      language: undefined,
+      eventType: ['Venue' as EventTypeId],
+    },
+    response: fakeEvents(5),
+  }),
+  createEventListRequestAndResultMocks({
+    variables: {
+      allOngoing: true,
+      keywordOrSet1: SPORT_COURSES_KEYWORDS,
+      language: undefined,
+      eventType: [EventTypeId.Course],
+    },
+    response: fakeEvents(5),
+  }),
+  createEventListRequestAndResultMocks({
+    variables: {
+      allOngoing: true,
+      keywordOrSet1: SPORT_COURSES_KEYWORDS,
+      language: undefined,
+      eventType: [EventTypeId.General],
+    },
+    response: fakeEvents(5),
+  }),
+];
+
 describe('SearchTabs search utilities', () => {
   const renderSearchTabs = () =>
     render(
       <SearchTabs initTab="Venue">
         <SearchUtilities />
-      </SearchTabs>
+      </SearchTabs>,
+      { mocks }
     );
 
   it.each<SearchType>(['Venue', EventTypeId.Course, EventTypeId.General])(
@@ -61,7 +116,8 @@ describe('SearchTabs search utilities', () => {
       render(
         <TabsContext.Provider value={context}>
           <SearchUtilities />
-        </TabsContext.Provider>
+        </TabsContext.Provider>,
+        { mocks }
       );
       expect(
         screen.getByRole('button', {
@@ -81,8 +137,12 @@ describe('SearchTabs search utilities', () => {
       const { router } = render(
         <TabsContext.Provider value={context}>
           <SearchUtilities />
-        </TabsContext.Provider>
+        </TabsContext.Provider>,
+        {
+          mocks,
+        }
       );
+      await waitForLoadingCompleted();
       await userEvent.click(
         screen.getByRole('button', {
           name: new RegExp(tabLabel, 'i'),

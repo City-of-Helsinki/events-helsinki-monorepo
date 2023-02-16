@@ -3,22 +3,10 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/apps/events-helsinki/.next" />
       <excludeFolder url="file://$MODULE_DIR$/.cache" />
-      <excludeFolder url="file://$MODULE_DIR$/.yarn" />
-      <excludeFolder url="file://$MODULE_DIR$/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/components/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/eslint-config-bases/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/components/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/components/build" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/hobbies-helsinki/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/events-helsinki/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/apps/sports-helsinki/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/.vscode" />
-      <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/.yarn" />
-      <excludeFolder url="file://$MODULE_DIR$/proxies/events-graphql-proxy/build" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/graphql-proxy-server/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/proxies/venue-graphql-proxy/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/hobbies-helsinki/.next" />
+      <excludeFolder url="file://$MODULE_DIR$/apps/sports-helsinki/.next" />
     </content>
     <content url="file://$MODULE_DIR$/apps/events-helsinki/node_modules" />
     <content url="file://$MODULE_DIR$/apps/hobbies-helsinki/node_modules" />

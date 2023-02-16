@@ -68,7 +68,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         include: ['in_language', 'keywords', 'location', 'audience'],
       },
     });
-
+    if (!eventData) {
+      return {
+        notFound: true,
+        revalidate: true,
+      };
+    }
     const event = eventData?.eventDetails;
 
     return {

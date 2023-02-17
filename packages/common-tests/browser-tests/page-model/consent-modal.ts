@@ -33,15 +33,15 @@ class ConsentModal {
     await t.click(this.acceptAllCookiesButton);
     console.log('ConsentModal: acceptAllCookies');
 
-    const cookies = await t.getCookies('city-of-helsinki-cookie-consents');
-    console.log('clickAcceptAllCookies');
-    console.log(cookies);
-    if (cookies.length == 0) {
-      //      await t.wait(5000);
-      const cookies2 = await t.getCookies('city-of-helsinki-cookie-consents');
-      console.log('clickAcceptAllCookies2');
-      console.log(cookies2);
-    }
+    // const cookies = await t.getCookies('city-of-helsinki-cookie-consents');
+    // console.log('clickAcceptAllCookies');
+    // console.log(cookies);
+    // if (cookies.length == 0) {
+    //   await t.wait(5000);
+    //   const cookies2 = await t.getCookies('city-of-helsinki-cookie-consents');
+    //   console.log('clickAcceptAllCookies2');
+    //   console.log(cookies2);
+    // }
     await this.isClosed();
   }
 

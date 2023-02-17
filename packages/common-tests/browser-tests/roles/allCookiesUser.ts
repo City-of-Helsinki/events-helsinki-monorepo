@@ -10,9 +10,9 @@ export const acceptAllCookies = async (t: TestController) => {
   const cookieConsentModal = new ConsentModal();
   await cookieConsentModal.isOpened();
   await cookieConsentModal.clickAcceptAllCookies();
-  const cookies = await t.getCookies('city-of-helsinki-cookie-consents');
-  console.log('acceptAllCookies');
-  console.log(cookies);
+  // const cookies = await t.getCookies('city-of-helsinki-cookie-consents');
+  // console.log('acceptAllCookies');
+  // console.log(cookies);
   //  await t.wait(1000);
 };
 

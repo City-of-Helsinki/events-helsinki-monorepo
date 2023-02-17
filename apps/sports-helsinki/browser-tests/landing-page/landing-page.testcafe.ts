@@ -7,11 +7,11 @@ import {
 fixture.disablePageCaching('Landing page header').beforeEach(async (t) => {
   await t.useRole(allCookiesUser);
 
-  console.log('check cookie');
+  // console.log('check cookie');
 
-  const cookies = await t.getCookies('city-of-helsinki-cookie-consents');
-  console.log('cookie');
-  console.log(cookies);
+  // const cookies = await t.getCookies('city-of-helsinki-cookie-consents');
+  // console.log('cookie');
+  // console.log(cookies);
   await t.navigateTo(getEnvUrl());
 
 });

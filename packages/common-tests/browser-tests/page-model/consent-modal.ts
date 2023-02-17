@@ -37,7 +37,7 @@ class ConsentModal {
     // console.log('clickAcceptAllCookies');
     // console.log(cookies);
     // if (cookies.length == 0) {
-    //   await t.wait(5000);
+    await t.wait(5000);
     //   const cookies2 = await t.getCookies('city-of-helsinki-cookie-consents');
     //   console.log('clickAcceptAllCookies2');
     //   console.log(cookies2);

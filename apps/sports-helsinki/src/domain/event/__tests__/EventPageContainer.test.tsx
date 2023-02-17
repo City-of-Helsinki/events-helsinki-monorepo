@@ -1,7 +1,9 @@
+import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
 import {
   EventDetailsDocument,
   EventListDocument,
   EventTypeId,
+  OrganizationDetailsDocument,
 } from 'events-helsinki-components';
 import type { EventFields } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -21,6 +23,7 @@ import {
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
 import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
+import { organizationResponse } from '../eventInfo/utils/EventInfo.mocks';
 import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
 
@@ -35,7 +38,7 @@ const keywords = [
   { name: 'Liikuntapalvelut', id: 'yso:p9824' },
   { name: 'Jalkapallo', id: 'yso:p6409' },
 ];
-const superEventId = 'harrastushaku:13433';
+const superEventId = 'hel:123';
 const otherEventTimesCount = 10;
 
 const event = fakeEvent({
@@ -61,7 +64,7 @@ const eventKeywordIds = event.keywords.map((keyword) => keyword.id) as string[];
 const eventRequest = {
   query: EventDetailsDocument,
   variables: {
-    id,
+    id: superEventId,
     include: ['in_language', 'keywords', 'location', 'audience'],
   },
 };
@@ -116,6 +119,24 @@ const mocks = [
     },
     response: similarEvents,
   }),
+  {
+    request: {
+      query: OrganizationDetailsDocument,
+      variables: {
+        id: 'provider:123',
+      },
+    },
+    result: organizationResponse,
+  },
+  {
+    request: {
+      query: OrganizationDetailsDocument,
+      variables: {
+        id: 'provider:123',
+      },
+    },
+    result: organizationResponse,
+  },
 ];
 
 const testPath = `/courses/${id}`;
@@ -135,9 +156,7 @@ it('should render info and load other events + similar events', async () => {
   advanceTo('2020-10-01');
   renderComponent({ event: event, loading: false });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
 
   expect(screen.getByRole('heading', { name })).toBeInTheDocument();
 
@@ -170,9 +189,7 @@ it('should show error info when event is closed', async () => {
   advanceTo('2020-10-10');
   renderComponent({ event: event, loading: false });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
   await waitFor(() => {
     expect(
       screen.getByRole('heading', {
@@ -195,9 +212,7 @@ it("should show error info when event doesn't exist", async () => {
     routes,
   });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
   await waitFor(() => {
     expect(
       screen.getByRole('heading', {
@@ -247,10 +262,7 @@ it('should link to events search when clicking tags', async () => {
   advanceTo('2020-10-01');
   const { router } = renderComponent({ event: event, loading: false });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
-
+  await waitForLoadingCompleted();
   const tagLink = await screen.findByRole('link', { name: 'Jalkapallo' });
 
   // click keyword / tag

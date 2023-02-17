@@ -33,19 +33,24 @@
 
     &:active,
     &:focus {
-      background-color: var(--color-black-80);
-      color: var(--color-white);
+      background-color: var(--color-white);
+      color: var(--color-black-80);
     }
 
-    &:hover {
+    &:hover,
+    &:not(:disabled):focus:hover {
       background-color: var(--color-black-5);
       color: var(--color-black-80);
     }
   }
 
   .active,
-  .active:hover {
+  .active:hover,
+  .active:active,
+  .active:focus,
+  .active:not(:disabled):focus:hover {
     background-color: var(--color-black-80);
     color: var(--color-white);
+    cursor: default;
   }
 }

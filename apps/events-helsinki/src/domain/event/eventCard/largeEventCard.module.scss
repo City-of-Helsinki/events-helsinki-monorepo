@@ -142,7 +142,7 @@
         }
 
         &:last-child {
-          margin-left: var(--spacing-3-xs);
+          padding-left: var(--spacing-3-xs);
         }
 
         @include respond_above(s) {

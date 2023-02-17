@@ -1,4 +1,8 @@
-import { LoadingSpinner, useLocale } from 'events-helsinki-components';
+import {
+  LoadingSpinner,
+  useClickCapture,
+  useLocale,
+} from 'events-helsinki-components';
 import type { EventFields } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -38,6 +42,7 @@ const SimilarEvents: React.FC<Props> = ({
   const {
     components: { EventCardContent },
   } = useConfig();
+  const { clickCaptureRef, clicked } = useClickCapture(1000);
 
   const cards = events.map((event, i) => {
     const cardProps = getEventCardProps(event, locale);
@@ -46,6 +51,7 @@ const SimilarEvents: React.FC<Props> = ({
       { eventId: event.id },
       locale
     );
+
     return (
       <Card
         key={cardProps.id}

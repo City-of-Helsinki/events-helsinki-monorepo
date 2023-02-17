@@ -18,6 +18,7 @@ export { default as KeywordTag } from './keyword/KeywordTag';
 export { default as KorosWrapper } from './korosWrapper/KorosWrapper';
 export { default as Container } from './layout/Container';
 export { default as List } from './list/List';
+export { default as ArrowRightWithLoadingIndicator } from './arrowRightWithLoadingIndicator/ArrowRightWithLoadingIndicator';
 export * from './mobileDateSelector';
 export * from './multiSelectDropdown';
 export { default as RangeDropdown } from './rangeDropdown/RangeDropdown';

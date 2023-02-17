@@ -2,8 +2,10 @@ import {
   useLocale,
   getLargeEventCardId,
   useVenueTranslation,
+  ArrowRightWithLoadingIndicator,
+  useClickCapture,
 } from 'events-helsinki-components';
-import { IconArrowRight, IconLocation } from 'hds-react';
+import { IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
@@ -50,48 +52,53 @@ const LargeVenueCard: React.FC<Props> = ({
     locale
   );
 
+  const { clickCaptureRef, clicked } = useClickCapture(1000);
+
   return (
-    <LinkBox
-      type="linkBox"
-      aria-label={t('venue:venueCard.ariaLabelLink', {
-        name: title,
-      })}
-      id={getLargeEventCardId(id)}
-      data-testid={id}
-      href={venueUrl}
-    >
-      <div className={styles.eventCard}>
-        <div className={styles.infoWrapper}>
-          <div className={styles.eventName}>{title}</div>
-          <div className={styles.eventLocation}>
-            <IconLocation aria-hidden />
-            {location}
-            {showMapLink && (
-              <div className={styles.mapLink}>
-                <SecondaryLink href={`${ROUTES.MAPSEARCH}?venueId=${id}`}>
-                  {t('venue:venueCard.showResultsOnMapLink')}
-                </SecondaryLink>
-              </div>
-            )}
+    <div ref={clickCaptureRef}>
+      <LinkBox
+        type="linkBox"
+        aria-label={t('venue:venueCard.ariaLabelLink', {
+          name: title,
+        })}
+        id={getLargeEventCardId(id)}
+        data-testid={id}
+        href={venueUrl}
+      >
+        <div className={styles.eventCard}>
+          <div className={styles.infoWrapper}>
+            <div className={styles.eventName}>{title}</div>
+            <div className={styles.eventLocation}>
+              <IconLocation aria-hidden />
+              {location}
+              {showMapLink && (
+                <div className={styles.mapLink}>
+                  <SecondaryLink href={`${ROUTES.MAPSEARCH}?venueId=${id}`}>
+                    {t('venue:venueCard.showResultsOnMapLink')}
+                  </SecondaryLink>
+                </div>
+              )}
+            </div>
+            <div className={styles.keywordWrapperDesktop}>
+              {tags && tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+            </div>
+            <div className={styles.buttonWrapper}>
+              <ArrowRightWithLoadingIndicator
+                loading={clicked}
+                className={styles.arrowRight}
+                size="l"
+                aria-hidden="true"
+              />
+            </div>
           </div>
-          <div className={styles.keywordWrapperDesktop}>
-            {tags && tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-          </div>
-          <div className={styles.buttonWrapper}>
-            <IconArrowRight
-              className={styles.arrowRight}
-              size="l"
-              aria-hidden="true"
-            />
-          </div>
+          <BackgroundImage
+            className={styles.imageWrapper}
+            id={id}
+            url={imageUrl || ''}
+          />
         </div>
-        <BackgroundImage
-          className={styles.imageWrapper}
-          id={id}
-          url={imageUrl || ''}
-        ></BackgroundImage>
-      </div>
-    </LinkBox>
+      </LinkBox>
+    </div>
   );
 };
 

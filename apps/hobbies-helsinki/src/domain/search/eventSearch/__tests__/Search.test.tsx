@@ -19,7 +19,7 @@ import Search from '../AdvancedSearch';
 
 configure({ defaultHidden: true });
 
-const searchValue = 'jaz';
+const searchValue = 'jazz';
 const keywords = fakeKeywords(2, [
   { name: { fi: 'Jazz' } },
   { name: { fi: 'musiikkiklubit' } },

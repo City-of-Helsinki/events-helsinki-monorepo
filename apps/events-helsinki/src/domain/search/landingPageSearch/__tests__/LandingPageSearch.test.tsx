@@ -1,10 +1,13 @@
-import { KeywordListDocument } from 'events-helsinki-components';
+import {
+  KeywordListDocument,
+  NeighborhoodListDocument,
+} from 'events-helsinki-components';
 import { advanceTo } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
 import { configure, render, screen, userEvent } from '@/test-utils';
-import { fakeKeywords } from '@/test-utils/mockDataUtils';
+import { fakeKeywords, fakeNeighborhoods } from '@/test-utils/mockDataUtils';
 import LandingPageSearch from '../LandingPageSearch';
 
 configure({ defaultHidden: true });
@@ -27,6 +30,16 @@ const mocks = [
       },
     },
     result: keywordsResponse,
+  },
+  {
+    request: {
+      query: NeighborhoodListDocument,
+    },
+    result: {
+      data: {
+        neighborhoodList: fakeNeighborhoods(10),
+      },
+    },
   },
 ];
 

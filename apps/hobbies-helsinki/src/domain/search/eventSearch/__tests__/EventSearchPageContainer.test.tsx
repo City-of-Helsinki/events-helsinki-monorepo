@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import type { MockedResponse } from '@apollo/client/testing';
+import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
 import type { Meta } from 'events-helsinki-components';
 import {
   NeighborhoodListDocument,
@@ -160,9 +161,7 @@ it('should show toastr message when loading next event page fails', async () => 
 
   renderComponent(searchJazzThenClickLoadMoreThrowsErrorMock);
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
   const name = translations.search.buttonLoadMore.replace(
     '{{count}}',
     (eventsResponse.meta.count - eventsResponse.data.length).toString()
@@ -182,9 +181,7 @@ it('should show toastr message when loading next event page fails', async () => 
     })
   );
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
 
   expect(toast.error).toHaveBeenCalledWith(translations.search.errorLoadMore);
 });

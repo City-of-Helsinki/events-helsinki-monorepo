@@ -1,4 +1,5 @@
 import {
+  NeighborhoodListDocument,
   OrganizationDetailsDocument,
   PlaceDetailsDocument,
 } from 'events-helsinki-components';
@@ -7,7 +8,7 @@ import React from 'react';
 import { configure, render, screen, userEvent, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
-  // fakeNeighborhoods,
+  fakeNeighborhoods,
   fakeOrganization,
   fakePlace,
 } from '@/test-utils/mockDataUtils';
@@ -15,19 +16,19 @@ import FilterSummary from '../FilterSummary';
 
 configure({ defaultHidden: true });
 
-// const neighborhoodId = "arabia";
-// const neighborhoodName = "Arabia";
-// const neighborhoods = fakeNeighborhoods(10, [
-//   {
-//     id: neighborhoodId,
-//     name: { fi: neighborhoodName },
-//   },
-// ]);
-// const neighborhoodsResponse = {
-//   data: {
-//     neighborhoodList: neighborhoods,
-//   },
-// };
+const neighborhoodId = 'arabia';
+const neighborhoodName = 'Arabia';
+const neighborhoods = fakeNeighborhoods(10, [
+  {
+    id: neighborhoodId,
+    name: { fi: neighborhoodName },
+  },
+]);
+const neighborhoodsResponse = {
+  data: {
+    neighborhoodList: neighborhoods,
+  },
+};
 
 const organizationId = '1';
 const organizationName = 'Organization name';
@@ -48,12 +49,12 @@ const placeResponse = {
 };
 
 const mocks = [
-  // {
-  //   request: {
-  //     query: NeighborhoodListDocument,
-  //   },
-  //   result: neighborhoodsResponse,
-  // },
+  {
+    request: {
+      query: NeighborhoodListDocument,
+    },
+    result: neighborhoodsResponse,
+  },
   {
     request: {
       query: OrganizationDetailsDocument,
@@ -117,7 +118,7 @@ const routes = [
   expect(results).toHaveNoViolations();
 }); */
 
-it('calls onClear callb dack when clear button is clicked', async () => {
+it('calls onClear callback when clear button is clicked', async () => {
   const onClear = jest.fn();
   render(<FilterSummary onClear={onClear} />, {
     mocks,

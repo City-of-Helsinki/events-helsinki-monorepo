@@ -16,7 +16,6 @@ import {
 import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
 import { I18nextTestStubProvider } from '@/test-utils/I18nextTestStubProvider';
 import { DEFAULT_LANGUAGE } from '../../src';
-import UnknownError from '../../src/components/errorPages/UnknownError';
 const cmsApiDomain = 'tapahtumat.cms.test.domain.com';
 
 const mockRouter: Partial<NextRouter> = {

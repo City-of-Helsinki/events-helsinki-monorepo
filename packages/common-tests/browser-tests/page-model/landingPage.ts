@@ -18,19 +18,21 @@ class LandingPage {
 
     await t
       .expect(
-        screen.getByRole('heading', {
+        screen.findByRole('heading', {
           name: i18n.t(`${this.appNamespace}:home.search.title`),
         }).exists
       )
       .ok();
 
-    await t.typeText(
-      screen.getByPlaceholderText(searchPlaceholderText),
-      this.searchText
-    );
+    // NOTE: There is some debounce wait time set to the search
+    // and it also makes an API call.
     await t
+      .typeText(
+        screen.findByPlaceholderText(searchPlaceholderText),
+        this.searchText
+      )
       .expect(screen.findByText(this.searchText).exists)
-      .ok({ timeout: 5000 });
+      .ok({ timeout: 10000 });
   }
 }
 

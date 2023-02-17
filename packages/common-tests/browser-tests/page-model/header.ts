@@ -12,7 +12,7 @@ class Header {
   languageSelectorButton = Selector('#languageSelector-button');
   languageSelectorItem = Selector('a').withAttribute('lang', this.currentLang);
 
-  private setLanguage(lang: AppLanguage) {
+  private async setLanguage(lang: AppLanguage) {
     this.currentLang = lang;
     this.languageSelectorItem = Selector('a').withAttribute(
       'lang',
@@ -24,7 +24,7 @@ class Header {
     // eslint-disable-next-line no-console
     console.log('changeLanguage to ' + lang);
 
-    this.setLanguage(lang);
+    await this.setLanguage(lang);
 
     const languageSelectorButtonScreen = screen.getByRole('button', {
       name: await this.languageSelectorButton.innerText,

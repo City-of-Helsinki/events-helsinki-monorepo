@@ -8,12 +8,16 @@ export const changeLanguageAndTrySearch = async (
   const header = new Header();
   const landingPage = new LandingPage(appNamespace);
 
+  // Finnish
   await header.verify();
   await landingPage.verify();
+
+  // English
   await header.changeLanguage('en');
   await header.verify();
   await landingPage.verify();
 
+  // Swedish
   await header.changeLanguage('sv');
   await header.verify();
   await landingPage.verify();

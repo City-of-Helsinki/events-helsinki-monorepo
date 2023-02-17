@@ -1,5 +1,5 @@
 import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
-import { render, waitFor, screen, userEvent } from '@/test-utils';
+import { render, screen, userEvent } from '@/test-utils';
 import { fakeOrganization } from '@/test-utils/mockDataUtils';
 import { OrganizationDetailsDocument } from '../../../types';
 import PublisherFilter from '../PublisherFilter';
@@ -52,6 +52,7 @@ it('calls onRemove callback when remove button is clicked', async () => {
   expect(onClickMock).toHaveBeenCalledWith(id, 'publisher');
 });
 
+// eslint-disable-next-line jest/expect-expect
 it("should return null if place doesn't exist", async () => {
   const mocks = [
     {

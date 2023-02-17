@@ -142,6 +142,8 @@ export const mocks = [
     },
     result: organizationResponse,
   },
+  firstSubEventsLoadMock,
+  secondSubEventsLoadMock,
 ];
 
 export const mocksWithSubEvents = [

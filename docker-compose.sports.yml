@@ -70,6 +70,21 @@ services:
         - APP_PORT=3000
         - PROJECT=sports-helsinki
 
+  # Build > docker compose -f docker-compose.sports.yml build --progress=tty browsertests
+  browsertests:
+    container_name: sports-helsinki-multistage-browsertests
+    # profiles:
+    #   - donotstart
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: DockerfileCache
+      target: browsertest
+      args:
+        - APP_PORT=3000
+        - PROJECT=sports-helsinki
+        - BROWSER_TESTS_ENV_URL=https://liikunta-pr205.dev.hel.ninja
+
   # Convenience production "runner" stage service for debugging
   # Build > docker buildx bake -f docker-compose.sports-helsinki.yml --progress=tty runner
   # Run   > docker-compose -f docker-compose.sports-helsinki.yml --env-file ./apps/sports-helsinki/.env.local up runner

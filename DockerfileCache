@@ -124,3 +124,28 @@ COPY --from=build_cache --chown=appuser:appuser /app/.yarn/cache/ ./
 
 WORKDIR /app
 COPY --from=build_cache --chown=appuser:appuser /app/apps/${PROJECT}/.next/cache ./apps/${PROJECT}/.next/cache
+
+FROM helsinkitest/node:16-slim AS browsertest
+ARG PROJECT
+
+RUN apt-get update && \
+    apt-get install -y wget
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
+
+WORKDIR /app
+
+COPY --chown=appuser:appuser  . .
+COPY --from=deps --chown=appuser:appuser /workspace-install ./
+
+# install cache
+RUN yarn install --immutable --inline-builds
+
+ARG BROWSER_TESTS_ENV_URL
+ENV BROWSER_TESTS_ENV_URL $BROWSER_TESTS_ENV_URL
+
+WORKDIR /app/apps/${PROJECT}/
+
+#ENTRYPOINT  ["pwd"]
+
+ENTRYPOINT  ["yarn", "test:browser:ci"]

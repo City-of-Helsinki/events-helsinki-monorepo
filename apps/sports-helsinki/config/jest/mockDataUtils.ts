@@ -23,6 +23,7 @@ import type {
   PlaceListResponse,
   SearchListQuery,
   StaticPage,
+  UnifiedSearchVenue,
   Venue,
 } from 'events-helsinki-components';
 import { EXTLINK, EventTypeId } from 'events-helsinki-components';
@@ -377,7 +378,7 @@ export const fakeOntology = (overrides?: Partial<Ontology>): Ontology =>
     overrides
   );
 
-export const fakeVenues = (
+export const fakeVenuesSearchList = (
   count = 1,
   venues?: Partial<Venue>[]
 ): SearchListQuery => ({
@@ -396,27 +397,31 @@ export const fakeVenues = (
         node: {
           __typename: 'SearchResultNode',
           venue: {
-            description: venue.description,
-            images: [venue.image],
+            description: { fi: venue.description },
+            images: [{ url: venue.image }],
             location: {
               address: {
-                city: venue.addressLocality,
-                postalCode: venue.postalCode,
-                streetAddress: { fi: venue.streetAddress },
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                city: fakeLocalizedObject(venue.addressLocality!),
+                postalCode: '00100',
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                streetAddress: fakeLocalizedObject(venue.streetAddress!),
               },
               geoLocation: {
                 geometry: {
-                  coordinates: venue.position,
+                  coordinates: [0.123, 0.123],
                 },
               },
             },
             meta: { id: venue.id },
-            name: { fi: venue.name },
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            name: fakeLocalizedObject(venue.name!),
             ontologyWords: venue.ontologyWords.map((ontology) => ({
               id: ontology?.id,
-              label: { fi: ontology?.label },
+              // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain, @typescript-eslint/no-non-null-assertion
+              label: fakeLocalizedObject(ontology?.label!),
             })),
-          },
+          } as UnifiedSearchVenue,
         },
       } as NonNullable<
         NonNullable<SearchListQuery['unifiedSearch']>['edges']
@@ -426,18 +431,27 @@ export const fakeVenues = (
   __typename: 'Query',
 });
 
+export const fakeVenues = (count = 1, venues?: Partial<Venue>[]): Venue[] => {
+  return generateNodeArray((i) => fakeVenue(venues?.[i]), count);
+};
+
 export const fakeVenue = (overrides?: Partial<Venue>): Venue => {
-  const location = fakePlace();
   const ontologyTree = fakeOntologies(1);
   const ontologies = fakeOntologies(5);
   return merge<Venue, typeof overrides>(
     {
       id: `hel:${faker.datatype.uuid()}`,
-      name: 'Venue name',
-      description: 'Venue description',
-      image: 'image.png',
-      infoUrl: 'http://venue.infourl.fi',
-      streetAddress: location.streetAddress?.fi,
+      name: faker.company.name(),
+      description: faker.lorem.text(),
+      image: faker.image.imageUrl(),
+      infoUrl: faker.internet.url(),
+      addressLocality: faker.address.streetAddress(),
+      streetAddress: faker.address.streetAddress(),
+      postalCode: faker.address.zipCode(),
+      telephone: faker.phone.number(),
+      email: faker.internet.email(),
+      position: null,
+      dataSource: 'tprek',
       accessibilitySentences: [],
       connections: [],
       ontologyTree: ontologyTree,

@@ -10,7 +10,6 @@ import type { EventFields } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 
-import { fakeOrganization } from 'sports-helsinki/config/jest/mockDataUtils';
 import { render, screen, userEvent, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {

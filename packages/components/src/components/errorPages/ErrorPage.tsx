@@ -14,7 +14,7 @@ import styles from './errorPage.module.scss';
 
 export type ErrorPageProps = {
   headerText: string;
-  descriptionText: string;
+  descriptionText: string | React.ReactNode;
   appName: string;
 };
 

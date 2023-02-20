@@ -3,18 +3,6 @@
   <p align="center"><strong>A monorepo for event-search based nextjs applications and common event components</strong></p>
 </div>
 <p align="center">
-  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
-    <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-hobbies-helsinki-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
-  </a>
-  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
-    <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-events-helsinki-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
-  </a>
-  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
-    <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-sports-helsinki-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
-  </a>
-  <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
-    <img alt="build" src="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/ci-proxy-events-graphql-router-staging.yml/badge.svg?label=CI&logo=github&style=flat-quare&labelColor=000000" />
-  </a>
   <a aria-label="Codacy grade" href="https://www.codacy.com/gh/City-of-Helsinki/events-helsinki-monorepo/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=City-of-Helsinki/events-helsinki-monorepo&amp;utm_campaign=Badge_Grade">
     <img alt="Codacy grade" src="https://img.shields.io/codacy/grade/dff9c944af284a0fad4e165eb1727467?logo=codacy&style=flat-square&labelColor=000&label=Codacy">
   </a>
@@ -30,6 +18,20 @@
 </p>
 
 > Howtos for monorepo. New to monorepos ? [check this FAQ](./docs/howto/how-to.md).
+
+## Architecture
+
+The subgraphs of multiple datasources are combined to a one supergraph with an app specific Apollo-Router instance.
+An application (Events, Hobbies, Sports) uses the app specific Apollo-Router so the app gets all the datasources in use with a single Apollo-Client.
+All the applications inside the monorepo are sharing the similar Apollo-Router in means of structure, but since there are app specific Headless CMS instances to share app specific data, each of the applications are connected to a unique environment-app-specific router instances.
+
+```
+┌─────────────┐       ┌───────────────┐       ┌── Headless CMS         (app specific datasource for the dynamic page and articles content)
+│             │       │               │       ├── Unified-Search       (Elasticsearch-service for search results scoring)
+│ Application ├───────┤ Apollo Router ├───────├── Events GraphQL Proxy (A GraphQL-proxy for the LinkedEvents)
+│             │       │               │       └── Venues GraphQL Proxy (A GraphQL-proxy for the Palvelukartta/Servicemap / "TPREK" Toimipaikkarekisteri)
+└─────────────┘       └───────────────┘
+```
 
 ## Structure
 
@@ -55,7 +57,7 @@
 
 #### Proxies
 
-- [proxies/events-graphql-federation](./proxies/events-graphql-federation): The Apollo Router and Gateway configuration to manage and run subgraphs. [README](./proxies/events-graphql-federation/README.md)
+- [proxies/events-graphql-federation](./proxies/events-graphql-federation): The Apollo Router configuration to manage and run subgraphs. [README](./proxies/events-graphql-federation/README.md)
 - [proxies/events-graphql-proxy](./proxies/events-graphql-proxy): Clone of events-helsinki-api-proxy. Event Helsinki GraphQL proxy. [README](./proxies/events-graphql-proxy/README.md)
 - [proxies/venue-graphql-proxy](./venue/events-graphql-proxy): Venue Helsinki GraphQL proxy. [README](./proxies/venue-graphql-proxy/README.md)
 
@@ -73,6 +75,7 @@
 - [packages/graphql-proxy-server](./packages/graphql-proxy-server): [README](./packages/graphql-proxy-server/README.md) | [CHANGELOG](./packages/graphql-proxy-server/CHANGELOG.md)
 - [packages/components](./packages/components): publishable. [README](./packages/components/README.md) | [CHANGELOG](./packages/components/CHANGELOG.md)
 - [packages/common-i18n](./packages/common-i18n): [README](./packages/common-i18n/README.md) | [CHANGELOG](./packages/common-i18n/CHANGELOG.md)
+- [packages/common-tests](./packages/common-tests): [README](./packages/common-tests/README.md) | [CHANGELOG](./packages/common-tests/CHANGELOG.md)
 
 > Apps can depend on packages, packages can depend on each others...
 
@@ -167,7 +170,7 @@ Some convenience scripts can be run in any folder of this repo and will call the
 | `yarn check:install`         | Verify if there's no peer-deps missing in packages                                                                                   |
 | `yarn dedupe`                | Built-in yarn deduplication of the lock file                                                                                         |
 | `yarn build`                 | Builds application with rollup.                                                                                                      |
-| `yarn publish-canary`        | Publishes a canary tagged version of the application. CD is configured to run this script on additions tot he main branch.           |
+| `yarn publish-canary`        | Publishes a canary tagged version of the application. CD is configured to run this script on additions to the main branch.           |
 
 > Why using `:` to prefix scripts names ? It's convenient in yarn 3+, we can call those scripts from any folder in the monorepo.
 > `g:` is a shortcut for `global:`. See the complete list in [root package.json](./package.json).
@@ -268,7 +271,6 @@ More info [here](https://github.com/microsoft/vscode-eslint#mono-repository-setu
 
 Building a docker image, read the [docker doc](./docs/docker/docker.md).
 
-
 ## 8. Releases, changelogs and versioning
 
 _Apps_ and _proxies_ use automatic semantic versions and are released using [Release Please](https://github.com/googleapis/release-please).
@@ -287,13 +289,13 @@ The release-please workflow is located in the [release-please.yml](./.github/wor
 
 The configuration for release-please is located in the [release-please-config.json](./release-please-config.json) file. See vatious options in the [release-please docs](https://github.com/googleapis/release-please/blob/main/docs/manifest-releaser.md).
 
-The manifest file is located in the [release-please-manifest.json](./.release-please-manifest.json) file. 
+The manifest file is located in the [release-please-manifest.json](./.release-please-manifest.json) file.
 
 When adding a new app, add it to both the [release-please-config.json](./release-please-config.json) and [release-please-manifest.json](./.release-please-manifest.json) file with the current version of the app. After this, release-please will keep track of versions with [release-please-manifest.json](./.release-please-manifest.json).
 
 ### Troubleshoting release-please
 
-If you were expecting a new release PR to be created, but nothing happened, there's probably one of the older release PR's in pending state. 
+If you were expecting a new release PR to be created, but nothing happened, there's probably one of the older release PR's in pending state.
 
 First make sure there's no open release PR already; if there is, the work is now included on this one (this is the normal scenario).
 
@@ -304,6 +306,8 @@ There's also a CLI for debugging and manually running releases available for rel
 ## FAQ
 
 ### Monorepo
+
+This monorepo structure is based on the Nextjs Monorepo Example: https://github.com/belgattitude/nextjs-monorepo-example.
 
 #### Exact vs semver dependencies
 

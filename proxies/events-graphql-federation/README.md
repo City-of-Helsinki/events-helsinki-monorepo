@@ -2,6 +2,14 @@
 
 The Events GraphQL Federation is a project for a Apollo federation supergraph (and subgraphs) and the Apollo Router configuration.
 
+```
+┌─────────────┐               ┌───────────────┐             ┌── Headless CMS         (app specific datasource for the dynamic page and articles content)
+│             │  supergraph > │               │ subgraphs > ├── Unified-Search       (Elasticsearch-service for search results scoring)
+│ Application ├───────────────┤ Apollo Router ├─────────────├── Events GraphQL Proxy (A GraphQL-proxy for the LinkedEvents)
+│             │               │               │             └── Venues GraphQL Proxy (A GraphQL-proxy for the Palvelukartta/Servicemap / "TPREK" Toimipaikkarekisteri)
+└─────────────┘               └───────────────┘
+```
+
 **For more detailed documentation, please read the documentation maintained by the Apollo team!**
 
 Apollo's Supergraph-demo repository: https://github.com/apollographql/supergraph-demo/

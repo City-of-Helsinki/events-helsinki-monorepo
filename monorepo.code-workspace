@@ -17,6 +17,10 @@
       "path": "packages/common-i18n"
     },
     {
+      "name": "common-tests",
+      "path": "packages/common-tests"
+    },
+    {
       "name": "eslint-config-bases",
       "path": "packages/eslint-config-bases"
     },

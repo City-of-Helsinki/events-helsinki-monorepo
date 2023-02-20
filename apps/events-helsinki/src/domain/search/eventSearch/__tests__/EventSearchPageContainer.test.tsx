@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
 import type { MockedResponse } from '@apollo/client/testing';
+import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
 import type { Meta } from 'events-helsinki-components';
 import {
   DEFAULT_EVENT_SORT_OPTION,
+  KeywordListDocument,
   NeighborhoodListDocument,
   PlaceListDocument,
 } from 'events-helsinki-components';
@@ -14,6 +16,7 @@ import { render, userEvent, waitFor, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvents,
+  fakeKeywords,
   fakeLocalizedObject,
   fakeNeighborhoods,
   fakePlaces,
@@ -103,6 +106,25 @@ const searchJazzThenClickLoadMoreThrowsErrorMock = [
   createEventListRequestThrowsErrorMocks(),
 ];
 
+const keywords = fakeKeywords(2, [
+  { name: { fi: 'Jazz' } },
+  { name: { fi: 'musiikkiklubit' } },
+]);
+
+const keywordListMocks = [
+  {
+    request: {
+      query: KeywordListDocument,
+      variables: {
+        hasUpcomingEvents: true,
+        pageSize: 5,
+        text: 'jazz',
+      },
+    },
+    result: { data: { keywordList: keywords } },
+  },
+];
+
 afterEach(() => {
   jest.restoreAllMocks();
 });
@@ -110,12 +132,6 @@ afterEach(() => {
 afterAll(() => {
   clear();
 });
-
-const waitForComponentToBeLoaded = async () => {
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
-};
 
 const pathname = '/haku';
 const search = '?text=jazz';
@@ -167,7 +183,7 @@ it('should show toastr message when loading next event page fails', async () => 
 
   renderComponent(searchJazzThenClickLoadMoreThrowsErrorMock);
 
-  await waitForComponentToBeLoaded();
+  await waitForLoadingCompleted();
   const name = translations.search.buttonLoadMore.replace(
     '{{count}}',
     (eventsResponse.meta.count - eventsResponse.data.length).toString()
@@ -187,7 +203,7 @@ it('should show toastr message when loading next event page fails', async () => 
     })
   );
 
-  await waitForComponentToBeLoaded();
+  await waitForLoadingCompleted();
 
   expect(toast.error).toHaveBeenCalledWith(translations.search.errorLoadMore);
 });
@@ -256,8 +272,8 @@ it.todo('should scroll to result list on mobile screen');
 
 it('should search remote events with remote event checkbox', async () => {
   advanceTo(new Date(2020, 7, 12));
-  renderComponent();
-  await waitForComponentToBeLoaded();
+  renderComponent([...searchJazzThenClickLoadMoreMocks, ...keywordListMocks]);
+  await waitForLoadingCompleted();
   await waitFor(() => {
     expect(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

@@ -13,6 +13,7 @@ import {
   fakeEvents,
   fakeKeyword,
   fakeLocalizedObject,
+  fakeOrganization,
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import {

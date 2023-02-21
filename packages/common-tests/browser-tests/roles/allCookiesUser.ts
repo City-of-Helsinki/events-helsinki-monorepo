@@ -28,14 +28,14 @@ const userAcceptingAllCookies = Role(
   getEnvUrl('/'),
   async (t) => {
     await acceptAllCookies(t);
-    const consentCookieName = 'city-of-helsinki-cookie-consents';
+    // const consentCookieName = 'city-of-helsinki-cookie-consents';
 
-    const c1 = await t.getCookies(consentCookieName);
-    const hasCookies = await hasGivenConsent(consentCookieName);
-    const c2 = await t.getCookies(consentCookieName);
-    console.log(c1);
-    console.log({ hasCookies });
-    console.log(c2);
+    // const c1 = await t.getCookies(consentCookieName);
+    // const hasCookies = await hasGivenConsent(consentCookieName);
+    // const c2 = await t.getCookies(consentCookieName);
+    // console.log(c1);
+    // console.log({ hasCookies });
+    // console.log(c2);
   },
   { preserveUrl: false }
 );

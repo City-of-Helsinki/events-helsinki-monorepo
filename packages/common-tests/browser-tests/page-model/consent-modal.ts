@@ -29,20 +29,20 @@ class ConsentModal {
     return Selector('#cookie-consent-content');
   }
 
-  private async waitCookieExists() {
-    let i: number = 0;
-    let cookies = await t.getCookies(this.consentAllCookieName);
-    do {
-      if (cookies.length > 0) {
-        break;
-      }
-      await t.wait(100);
-      i++;
-      cookies = await t.getCookies(this.consentAllCookieName);
-    } while (i < 100);
+  // private async waitCookieExists() {
+  //   let i: number = 0;
+  //   let cookies = await t.getCookies(this.consentAllCookieName);
+  //   do {
+  //     if (cookies.length > 0) {
+  //       break;
+  //     }
+  //     await t.wait(100);
+  //     i++;
+  //     cookies = await t.getCookies(this.consentAllCookieName);
+  //   } while (i < 100);
 
-    console.log('Cookie wait time ' + i / 10 + 's');
-  }
+  //   console.log('Cookie wait time ' + i / 10 + 's');
+  // }
 
   public async clickAcceptAllCookies() {
     await t.click(this.acceptAllCookiesButton);

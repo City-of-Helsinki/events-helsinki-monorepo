@@ -20,6 +20,12 @@ const userAcceptingAllCookies = Role(
   getEnvUrl('/'),
   async (t) => {
     await acceptAllCookies(t);
+
+    const cookies = await t.getCookies('city-of-helsinki-cookie-consents');
+    if (cookies.length == 0) {
+      await t.eval(() => location.reload());
+      await acceptAllCookies(t); 
+    }
   },
   { preserveUrl: false }
 );

@@ -27,7 +27,6 @@ export const acceptAllCookies = async (t: TestController) => {
 const userAcceptingAllCookies = Role(
   getEnvUrl('/'),
   async (t) => {
-    await t.deleteCookies();
     await acceptAllCookies(t);
     const consentCookieName = 'city-of-helsinki-cookie-consents';
 

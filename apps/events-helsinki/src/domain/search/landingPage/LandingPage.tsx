@@ -1,4 +1,4 @@
-import { Hero, MAIN_CONTENT_ID } from 'events-helsinki-components';
+import { Hero } from 'events-helsinki-components';
 import React from 'react';
 import type { PageContentLayoutProps } from 'react-helsinki-headless-cms';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
@@ -25,7 +25,7 @@ export function LandingPageContentLayout({
 
   return (
     <div className={styles.layout}>
-      <main id={MAIN_CONTENT_ID} className={styles.main}>
+      <div className={styles.main}>
         <div className={styles.highlight}>
           {landingPage?.translation && (
             <PageSection
@@ -85,7 +85,7 @@ export function LandingPageContentLayout({
             <ContentContainer>{lastCollection}</ContentContainer>
           </PageSection>
         )}
-      </main>
+      </div>
     </div>
   );
 }

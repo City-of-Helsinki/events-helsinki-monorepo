@@ -58,6 +58,7 @@ const NextCmsArticle: NextPage<{
         navigation={<Navigation page={article} />}
         content={
           <RHHCPageContent
+            className="article-page"
             page={article as PageContentProps['page']}
             heroContainer={<KorosWrapper />}
             breadcrumbs={

@@ -55,6 +55,7 @@ const NextCmsArticle: NextPage<{
   return (
     <MatomoWrapper>
       <RHHCPage
+        className="article-page"
         navigation={<Navigation page={article} />}
         content={
           <RHHCPageContent

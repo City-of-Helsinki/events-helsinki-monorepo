@@ -53,6 +53,7 @@ const NextCmsPage: NextPage<{
   return (
     <MatomoWrapper>
       <HCRCPage
+        className="page"
         navigation={<Navigation page={page} />}
         content={
           <HCRCPageContent

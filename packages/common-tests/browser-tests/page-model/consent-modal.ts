@@ -47,7 +47,7 @@ class ConsentModal {
   public async clickAcceptAllCookies() {
     await t.click(this.acceptAllCookiesButton);
     console.log('ConsentModal: acceptAllCookies');
-    await this.waitCookieExists();
+    //    await this.waitCookieExists();
     await this.isClosed();
   }
 

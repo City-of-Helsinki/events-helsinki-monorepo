@@ -7,6 +7,7 @@ import {
 fixture.disablePageCaching('Landing page header').beforeEach(async (t) => {
   await t.navigateTo(getEnvUrl());
   await t.useRole(allCookiesUser);
+  console.log('fixture done.');
 
   // console.log('check cookie');
 

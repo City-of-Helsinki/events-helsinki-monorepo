@@ -5,7 +5,7 @@
   },
   "unknownError": {
     "title": "Sivustolla havaittiin virhe!",
-    "description": "Koita myöhemmin uudestaan. Jos tilanne toistuu, kerro siitä meille <1>palautelomakkeella</1>",
+    "description": "Koita myöhemmin uudestaan. Jos tilanne toistuu, kerro siitä meille <2>palautelomakkeella</2>",
     "feedbackFormLink": "https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute/anna-palautetta"
   },
   "moveToHomePageButton": "Siirry etusivulle"

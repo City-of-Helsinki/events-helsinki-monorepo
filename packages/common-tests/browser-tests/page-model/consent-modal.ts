@@ -39,7 +39,7 @@ class ConsentModal {
       await t.wait(100);
       i++;
       cookies = await t.getCookies(this.consentAllCookieName);
-    } while (i < 100);
+    } while (i < 300);
 
     console.log('Cookie wait time ' + i / 10 + 's');
   }

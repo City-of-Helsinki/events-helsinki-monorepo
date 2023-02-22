@@ -5,7 +5,6 @@ import {
   useLocale,
   getEventFields,
   useOrganizationDetailsQuery,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import { IconFaceSmile, IconLayers } from 'hds-react';
 import { useTranslation } from 'next-i18next';
@@ -31,7 +30,6 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
     ssr: false,
     variables: { id: publisher },
   });
-  useErrorBoundary(error);
   const organizationName = organizationData?.organizationDetails.name;
 
   return (

@@ -8,7 +8,6 @@ import {
   isEventClosed,
   EventDetailsDocument,
   MAIN_CONTENT_ID,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import type {
   SuperEventResponse,
@@ -72,7 +71,6 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
       },
     }
   );
-  useErrorBoundary(error);
 
   React.useEffect(() => {
     if (superEventId) {

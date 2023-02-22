@@ -1,6 +1,6 @@
 import { useErrorHandler } from 'react-error-boundary';
 
-const useErrorBoundary = (error: unknown) => {
+const useErrorBoundary = (error?: unknown) => {
   // TODO: give options, do special stuff
   return useErrorHandler(error);
 };

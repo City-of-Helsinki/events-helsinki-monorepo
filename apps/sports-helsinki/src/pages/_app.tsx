@@ -1,4 +1,3 @@
-import { ApolloProvider } from '@apollo/client';
 import {
   MatomoProvider,
   createInstance as createMatomoInstance,
@@ -12,7 +11,6 @@ import {
   useCommonTranslation,
   NavigationProvider,
   GeolocationProvider,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { AppProps as NextAppProps } from 'next/app';
@@ -21,17 +19,15 @@ import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
+import ApolloProvider from '../domain/app/ApolloProvider';
 import AppConfig from '../domain/app/AppConfig';
 import cmsHelper from '../domain/app/headlessCmsHelper';
 import routerHelper from '../domain/app/routerHelper';
-import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
 import ErrorFallback from '../domain/error/ErrorFallback';
-import useRHHCConfig from '../hooks/useRHHCConfig';
 
 const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
 
@@ -64,10 +60,7 @@ export type CustomPageProps = {
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { error, headerMenu, footerMenu, languages } = pageProps;
-  useErrorBoundary(error);
-  const apolloClient = useApolloClient();
   const router = useRouter();
-  const rhhcConfig = useRHHCConfig();
   const { t } = useCommonTranslation();
 
   // Unset hidden visibility that was applied to hide the first server render
@@ -87,9 +80,9 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   }, []);
 
   return (
-    <ApolloProvider client={apolloClient}>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
       <GeolocationProvider>
-        <RHHCConfigProvider config={rhhcConfig}>
+        <ApolloProvider serverError={error}>
           <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
             <NavigationProvider
               headerMenu={headerMenu}
@@ -97,29 +90,27 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
               languages={languages}
             >
               <MatomoProvider value={matomoInstance}>
-                <ErrorBoundary FallbackComponent={ErrorFallback}>
-                  {router.isFallback ? (
-                    <Center>
-                      <LoadingSpinner />
-                    </Center>
-                  ) : (
-                    <>
-                      <ResetFocus />
-                      <Component {...pageProps} />
-                      <EventsCookieConsent
-                        allowLanguageSwitch={false}
-                        appName={t('appSports:appName')}
-                      />
-                    </>
-                  )}
-                </ErrorBoundary>
+                {router.isFallback ? (
+                  <Center>
+                    <LoadingSpinner />
+                  </Center>
+                ) : (
+                  <>
+                    <ResetFocus />
+                    <Component {...pageProps} />
+                    <EventsCookieConsent
+                      allowLanguageSwitch={false}
+                      appName={t('appSports:appName')}
+                    />
+                  </>
+                )}
               </MatomoProvider>
               <ToastContainer />
             </NavigationProvider>
           </CmsHelperProvider>
-        </RHHCConfigProvider>
+        </ApolloProvider>
       </GeolocationProvider>
-    </ApolloProvider>
+    </ErrorBoundary>
   );
 }
 

@@ -1,3 +1,3 @@
-import ErrorFallback from '../domain/error/ErrorFallback';
+import { UnknownError } from "events-helsinki-components";
 
-export default ErrorFallback;
+export default UnknownError;

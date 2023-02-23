@@ -64,7 +64,6 @@ export default async function getSportsStaticProps<P = Record<string, unknown>>(
             statusCode: 500,
           },
         },
-        revalidate: 10,
       };
     }
 

@@ -4,14 +4,14 @@ import type {
   HttpOptions,
   NormalizedCacheObject,
   StoreObject,
+  ErrorPolicy,
 } from '@apollo/client';
 import {
   defaultDataIdFromObject,
   ApolloClient,
   ApolloLink,
   HttpLink,
-  InMemoryCache,
-  ErrorPolicy
+  InMemoryCache
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { relayStylePagination } from '@apollo/client/utilities';
@@ -91,13 +91,16 @@ export function createApolloClient(
         graphqlClientLogger.error(errorMessage);
         Sentry.captureMessage(errorMessage);
       });
+      if (handleError && !response?.data) {
+        handleError(graphQLErrors);
+      }
     }
     if (networkError) {
       graphqlClientLogger.error(networkError);
-      Sentry.captureMessage('Network error');
-    }
-    if (handleError && !response?.data) {
-      handleError(new Error("Apollo server data couldn't be retrieved"));
+      Sentry.captureMessage('Graphql Network error');
+      if (handleError && !response?.data) {
+        handleError(new Error('Graphql Network error'));
+      }
     }
   });
 

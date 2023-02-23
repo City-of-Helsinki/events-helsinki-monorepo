@@ -1,14 +1,14 @@
 import { Trans } from 'next-i18next';
 import React from 'react';
-import type useCommonTranslation from '../../hooks/useCommonTranslation';
+import useErrorsTranslation from '../../hooks/useErrorsTranslation';
 import { ErrorPage } from '../index';
 import type { ErrorPageProps } from './ErrorPage';
 
 type Props = {
   appName: ErrorPageProps['appName'];
-  t: ReturnType<typeof useCommonTranslation>['t'];
 };
-const UnknownError: React.FC<Props> = ({ appName, t }) => {
+const UnknownError: React.FC<Props> = ({ appName }) => {
+  const { t } = useErrorsTranslation();
   return (
     <ErrorPage
       headerText={t(`errors:unknownError.title`)}

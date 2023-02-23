@@ -10,7 +10,7 @@ const ErrorFallback: React.FC<FallbackProps> = ({ error }) => {
     console.error('unexpected error', error.message);
     Sentry.captureMessage(error.message);
   }, [error]);
-  return <UnknownError t={t} appName={t(`appSports:appName`)} />;
+  return <UnknownError appName={t(`appSports:appName`)} />;
 };
 
 export default ErrorFallback;

@@ -77,15 +77,12 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   }, []);
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <React.Suspense fallback={<PageLoadingSpinner />}>
-        <GeolocationProvider>
-          <ApolloProvider serverError={error}>
-            <CmsHelperProvider
-              cmsHelper={cmsHelper}
-              routerHelper={routerHelper}
-            >
-              <MatomoProvider value={matomoInstance}>
+    <ApolloProvider serverError={error}>
+      <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <React.Suspense fallback={<PageLoadingSpinner />}>
+            <MatomoProvider value={matomoInstance}>
+              <GeolocationProvider>
                 <NavigationProvider
                   headerMenu={headerMenu}
                   footerMenu={footerMenu}
@@ -99,12 +96,12 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
                   />
                   <ToastContainer />
                 </NavigationProvider>
-              </MatomoProvider>
-            </CmsHelperProvider>
-          </ApolloProvider>
-        </GeolocationProvider>
-      </React.Suspense>
-    </ErrorBoundary>
+              </GeolocationProvider>
+            </MatomoProvider>
+          </React.Suspense>
+        </ErrorBoundary>
+      </CmsHelperProvider>
+    </ApolloProvider>
   );
 }
 

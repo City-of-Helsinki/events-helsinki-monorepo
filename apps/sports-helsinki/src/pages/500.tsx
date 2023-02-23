@@ -11,7 +11,7 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
 
 const FiveHundred: NextPage = () => {
   const { t } = useCommonTranslation();
-  return <UnknownError t={t} appName={t(`appSports:appName`)} />;
+  return <UnknownError appName={t(`appSports:appName`)} />;
 };
 export default FiveHundred;
 

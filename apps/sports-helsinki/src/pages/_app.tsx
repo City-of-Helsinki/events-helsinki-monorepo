@@ -81,35 +81,37 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <GeolocationProvider>
-        <ApolloProvider serverError={error}>
-          <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-            <NavigationProvider
-              headerMenu={headerMenu}
-              footerMenu={footerMenu}
-              languages={languages}
-            >
-              <MatomoProvider value={matomoInstance}>
-                {router.isFallback ? (
-                  <Center>
-                    <LoadingSpinner />
-                  </Center>
-                ) : (
-                  <>
-                    <ResetFocus />
-                    <Component {...pageProps} />
-                    <EventsCookieConsent
-                      allowLanguageSwitch={false}
-                      appName={t('appSports:appName')}
-                    />
-                  </>
-                )}
-              </MatomoProvider>
-              <ToastContainer />
-            </NavigationProvider>
-          </CmsHelperProvider>
-        </ApolloProvider>
-      </GeolocationProvider>
+      <React.Suspense>
+        <GeolocationProvider>
+          <ApolloProvider serverError={error}>
+            <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+              <NavigationProvider
+                headerMenu={headerMenu}
+                footerMenu={footerMenu}
+                languages={languages}
+              >
+                <MatomoProvider value={matomoInstance}>
+                  {router.isFallback ? (
+                    <Center>
+                      <LoadingSpinner />
+                    </Center>
+                  ) : (
+                    <>
+                      <ResetFocus />
+                      <Component {...pageProps} />
+                      <EventsCookieConsent
+                        allowLanguageSwitch={false}
+                        appName={t('appSports:appName')}
+                      />
+                    </>
+                  )}
+                </MatomoProvider>
+                <ToastContainer />
+              </NavigationProvider>
+            </CmsHelperProvider>
+          </ApolloProvider>
+        </GeolocationProvider>
+      </React.Suspense>
     </ErrorBoundary>
   );
 }

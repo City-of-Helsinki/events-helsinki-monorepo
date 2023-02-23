@@ -99,7 +99,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       return {
         props: {
           ...(await serverSideTranslationsWithCommon(language, [
-            'home',
             'search',
             'event',
           ])),
@@ -117,7 +116,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       return {
         props: {
           ...(await serverSideTranslationsWithCommon(DEFAULT_LANGUAGE, [
-            'home',
             'search',
           ])),
           landingPage: null,

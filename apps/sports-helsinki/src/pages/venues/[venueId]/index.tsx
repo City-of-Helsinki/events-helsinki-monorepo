@@ -81,9 +81,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         venue,
         loading,
         ...(await serverSideTranslationsWithCommon(language, [
-          'cms',
-          'common',
-          'home',
           'search',
           'venue',
           'event',

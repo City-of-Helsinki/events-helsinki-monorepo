@@ -4,6 +4,7 @@ import nextI18nextConfig from '../../../next-i18next.config';
 
 const COMMON_TRANSLATIONS = [
   'appSports',
+  'cms',
   'common',
   'consent',
   'footer',

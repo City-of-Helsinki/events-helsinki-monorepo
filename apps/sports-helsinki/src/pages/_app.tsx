@@ -14,7 +14,6 @@ import {
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
 import type { AppProps as NextAppProps } from 'next/app';
-import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import React from 'react';
@@ -31,7 +30,7 @@ import ErrorFallback from '../domain/error/ErrorFallback';
 
 const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
 
-function Center({ children }: { children: React.ReactNode }) {
+function PageLoadingSpinner() {
   return (
     <div
       style={{
@@ -42,7 +41,7 @@ function Center({ children }: { children: React.ReactNode }) {
         justifyContent: 'center',
       }}
     >
-      {children}
+      <LoadingSpinner />
     </div>
   );
 }
@@ -60,9 +59,7 @@ export type CustomPageProps = {
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { error, headerMenu, footerMenu, languages } = pageProps;
-  const router = useRouter();
   const { t } = useCommonTranslation();
-
   // Unset hidden visibility that was applied to hide the first server render
   // that does not include styles from HDS. HDS applies styling by injecting
   // style tags into the head. This requires the existence of a document object.
@@ -81,33 +78,28 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <React.Suspense>
+      <React.Suspense fallback={<PageLoadingSpinner />}>
         <GeolocationProvider>
           <ApolloProvider serverError={error}>
-            <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-              <NavigationProvider
-                headerMenu={headerMenu}
-                footerMenu={footerMenu}
-                languages={languages}
-              >
-                <MatomoProvider value={matomoInstance}>
-                  {router.isFallback ? (
-                    <Center>
-                      <LoadingSpinner />
-                    </Center>
-                  ) : (
-                    <>
-                      <ResetFocus />
-                      <Component {...pageProps} />
-                      <EventsCookieConsent
-                        allowLanguageSwitch={false}
-                        appName={t('appSports:appName')}
-                      />
-                    </>
-                  )}
-                </MatomoProvider>
-                <ToastContainer />
-              </NavigationProvider>
+            <CmsHelperProvider
+              cmsHelper={cmsHelper}
+              routerHelper={routerHelper}
+            >
+              <MatomoProvider value={matomoInstance}>
+                <NavigationProvider
+                  headerMenu={headerMenu}
+                  footerMenu={footerMenu}
+                  languages={languages}
+                >
+                  <ResetFocus />
+                  <Component {...pageProps} />
+                  <EventsCookieConsent
+                    allowLanguageSwitch={false}
+                    appName={t('appSports:appName')}
+                  />
+                  <ToastContainer />
+                </NavigationProvider>
+              </MatomoProvider>
             </CmsHelperProvider>
           </ApolloProvider>
         </GeolocationProvider>

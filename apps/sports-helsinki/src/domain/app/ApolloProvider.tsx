@@ -16,7 +16,7 @@ function ApolloProvider({ children, serverError }: Props) {
   useErrorBoundary(serverError);
   const errorHandler = useErrorBoundary();
   const handleError = React.useCallback((error: unknown) => {
-    console.error('error boundary handler error for apollo', error);
+    console.error('error boundary handler error from apollo link', error);
     errorHandler(error);
   }, []);
   const apolloClient = useApolloClient({ handleError });

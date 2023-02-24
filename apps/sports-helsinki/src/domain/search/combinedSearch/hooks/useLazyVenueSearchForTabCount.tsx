@@ -2,7 +2,6 @@ import { useLazyQuery } from '@apollo/client';
 import type { SearchListQuery } from 'events-helsinki-components';
 import {
   SearchListDocument,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import React from 'react';
 import AppConfig from '../../../../domain/app/AppConfig';
@@ -36,7 +35,6 @@ function useLazyVenueSearchForTabCount() {
       ssr: false,
     }
   );
-  useErrorBoundary(error);
   React.useEffect(() => {
     const count =
       !loading && data

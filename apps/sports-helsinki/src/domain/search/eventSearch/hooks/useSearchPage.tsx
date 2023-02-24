@@ -4,7 +4,6 @@ import {
   useIsSmallScreen,
   useEventListQuery,
   getLargeEventCardId,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -34,7 +33,6 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
     ssr: false,
     variables: eventFilters,
   });
-  useErrorBoundary(error);
 
   const handleLoadMore = async () => {
     const page = eventsData?.eventList.meta

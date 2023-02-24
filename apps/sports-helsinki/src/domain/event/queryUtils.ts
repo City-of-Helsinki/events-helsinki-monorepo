@@ -2,7 +2,6 @@ import {
   EVENT_SORT_OPTIONS,
   SIMILAR_EVENTS_AMOUNT,
   getEventIdFromUrl,
-  useErrorBoundary,
   useEventListQuery,
   useVenuesByIdsLazyQuery,
   useLocale,
@@ -109,7 +108,6 @@ export const useSimilarEventsQuery = (
     ssr: false,
     variables: eventFilters,
   });
-  useErrorBoundary(error);
   const data = _filterSimilarEvents(event, eventsData?.eventList?.data || []);
   return { data, loading };
 };
@@ -168,7 +166,6 @@ export const useSubEvents = (
     ssr: false,
     variables,
   });
-  useErrorBoundary(error);
   const handleLoadMore = React.useCallback(
     async (page: number) => {
       setIsFetchingMore(true);
@@ -284,7 +281,6 @@ export const useSimilarVenuesQuery = ({
       },
     },
   });
-  useErrorBoundary(error);
   // Trigger the venues by ids search when the ids are fetched.
   React.useEffect(() => {
     if (!unifiedSearchLoading) {

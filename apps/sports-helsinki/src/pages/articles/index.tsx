@@ -11,7 +11,6 @@ import {
   MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
@@ -74,7 +73,6 @@ export default function ArticleArchive({
       categories: searchCategories,
     },
   });
-  useErrorBoundary(articlesError);
   const {
     data: categoriesData,
     loading: loadingCategories,
@@ -85,7 +83,6 @@ export default function ArticleArchive({
       language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
     },
   });
-  useErrorBoundary(categoriesError);
   const isLoading =
     (loadingArticles && networkStatus !== NetworkStatus.fetchMore) ||
     loadingCategories;
@@ -223,7 +220,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     if (!pageData) {
       return {
         notFound: true,
-        revalidate: true,
       };
     }
     const page = pageData.pageByTemplate;

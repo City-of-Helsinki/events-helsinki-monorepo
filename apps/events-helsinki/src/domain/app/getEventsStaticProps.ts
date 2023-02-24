@@ -1,11 +1,6 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { isApolloError } from '@apollo/client';
-import type {
-  AppLanguage,
-  CmsLanguage,
-  Menu,
-  Language,
-} from 'events-helsinki-components';
+import type { CmsLanguage, Menu, Language } from 'events-helsinki-components';
 import {
   DEFAULT_FOOTER_MENU_NAME,
   DEFAULT_HEADER_MENU_NAME,
@@ -62,7 +57,7 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     // Generic error handling
-    staticGenerationLogger.error('Error while generating a page:', e);
+    staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
     if (isApolloError(e)) {
       return {
         props: {
@@ -94,8 +89,8 @@ async function getGlobalCMSData({
   client,
   context,
 }: GetGlobalCMSDataParams): Promise<ReturnedGlobalCMSData> {
-  const locale: AppLanguage = (context?.locale ?? 'fi') as AppLanguage;
-  const headerNavigationMenuName = DEFAULT_HEADER_MENU_NAME[locale];
+  const language = getLanguageOrDefault(context.locale);
+  const headerNavigationMenuName = DEFAULT_HEADER_MENU_NAME[language];
   const { data: headerMenuData } = await client.query({
     query: MenuDocument,
     variables: {
@@ -113,7 +108,7 @@ async function getGlobalCMSData({
     },
   });
 
-  const footerNavigationMenuName = DEFAULT_FOOTER_MENU_NAME[locale];
+  const footerNavigationMenuName = DEFAULT_FOOTER_MENU_NAME[language];
   const { data: footerMenuData } = await client.query({
     query: MenuDocument,
     variables: {

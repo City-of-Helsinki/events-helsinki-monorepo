@@ -117,7 +117,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         if (!page) {
           return {
             notFound: true,
-            revalidate: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
@@ -138,8 +137,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             error: {
               statusCode: 500,
             },
-          },
-          revalidate: 10,
+          }
         };
       }
     }

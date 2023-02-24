@@ -4,13 +4,14 @@ import type {
   HttpOptions,
   NormalizedCacheObject,
   StoreObject,
+  ErrorPolicy,
 } from '@apollo/client';
 import {
   defaultDataIdFromObject,
   ApolloClient,
   ApolloLink,
   HttpLink,
-  InMemoryCache,
+  InMemoryCache
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { relayStylePagination } from '@apollo/client/utilities';
@@ -67,7 +68,12 @@ const getPageStylePaginator = (merge: FieldMergeFunction) => ({
   merge,
 });
 
-export function createApolloClient() {
+export function createApolloClient(
+  args: {
+    handleError?: (error: unknown) => void;
+  } = {}
+) {
+  const { handleError } = args;
   // Rewrite the URLs coming from events API to route them internally.
   const transformInternalURLs = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
@@ -78,21 +84,30 @@ export function createApolloClient() {
     });
   });
   const httpLink = getHttpLink(AppConfig.federationGraphqlEndpoint);
-  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
+  const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {
         const errorMessage = `[GraphQL error]: OperationName: ${operation.operationName}, Message: ${message}, Location: ${locations}, Path: ${path}`;
         graphqlClientLogger.error(errorMessage);
         Sentry.captureMessage(errorMessage);
       });
+      if (handleError && !response?.data) {
+        handleError(graphQLErrors);
+      }
     }
     if (networkError) {
       graphqlClientLogger.error(networkError);
-      Sentry.captureMessage('Network error');
+      Sentry.captureMessage('Graphql Network error');
+      if (handleError && !response?.data) {
+        handleError(new Error('Graphql Network error'));
+      }
     }
   });
 
   const cache = createApolloCache();
+
+  // retain partial data even if error occurs for any operation
+  const baseOptions: { errorPolicy: ErrorPolicy } = { errorPolicy: 'all' };
 
   return new ApolloClient({
     connectToDevTools: true,
@@ -100,6 +115,11 @@ export function createApolloClient() {
     // TODO: Add error link after adding Sentry to the project
     link: ApolloLink.from([transformInternalURLs, errorLink, httpLink]),
     cache,
+    defaultOptions: {
+      watchQuery: baseOptions,
+      query: baseOptions,
+      mutate: baseOptions,
+    },
   });
 }
 
@@ -193,25 +213,23 @@ export function createApolloCache() {
 }
 
 export default function initializeFederationApolloClient(
-  initialState: NormalizedCacheObject = {}
+  args: {
+    handleError?: (error: unknown) => void;
+  } = {}
 ): ApolloClient<NormalizedCacheObject> {
   return initializeApolloClient<
     NormalizedCacheObject,
     ApolloClient<NormalizedCacheObject>
   >({
-    initialState,
     mutableCachedClient: eventsFederationApolloClient,
-    createClient: createApolloClient,
+    createClient: () => createApolloClient(args),
   });
 }
 
-export function useApolloClient(
-  initialState: NormalizedCacheObject = {}
-): ApolloClient<NormalizedCacheObject> {
-  return useMemo(
-    () => initializeFederationApolloClient(initialState),
-    [initialState]
-  );
+export function useApolloClient(args: {
+  handleError?: (error: unknown) => void;
+}): ApolloClient<NormalizedCacheObject> {
+  return useMemo(() => initializeFederationApolloClient(args), [args]);
 }
 
 export const apolloClient = createApolloClient();

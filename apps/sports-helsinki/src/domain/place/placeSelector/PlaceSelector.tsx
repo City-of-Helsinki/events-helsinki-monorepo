@@ -6,7 +6,6 @@ import {
   getLocalizedString,
   isClient,
   usePlaceListQuery,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import React from 'react';
 
@@ -41,7 +40,6 @@ const PlaceSelector: React.FC<Props> = ({
       text: searchValue.toLowerCase(),
     },
   });
-  useErrorBoundary(error);
 
   const placeOptions = React.useMemo(() => {
     return (placesData?.placeList.data || [])

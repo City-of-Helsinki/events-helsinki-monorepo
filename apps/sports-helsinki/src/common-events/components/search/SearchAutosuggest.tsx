@@ -10,7 +10,6 @@ import {
   useDropdownKeyboardNavigation,
   getLocalizedString,
   useKeywordListQuery,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import { IconSearch } from 'hds-react';
 import type { ChangeEvent } from 'react';
@@ -53,7 +52,6 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
       text: internalInputValue,
     },
   });
-  useErrorBoundary(error);
 
   const [autoSuggestItems, setAutoSuggestItems] = React.useState<
     AutosuggestMenuOption[]

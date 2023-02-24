@@ -96,7 +96,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       if (!pageData || !landingPageData) {
         return {
           notFound: true,
-          revalidate: true,
         };
       }
       const page = pageData.pageByTemplate;

@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import {
   LoadingSpinner,
   useVenueTranslation,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -46,7 +45,6 @@ const VenueUpcomingEvents: React.FC<VenueUpcomingEventsProps> = ({
     placeId,
     keywords,
   });
-  useErrorBoundary(error);
 
   const cards = useEventCards({
     events: eventsData?.eventList?.data,

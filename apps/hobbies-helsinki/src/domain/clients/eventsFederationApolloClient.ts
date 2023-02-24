@@ -78,10 +78,10 @@ export function createApolloClient() {
     });
   });
   const httpLink = getHttpLink(AppConfig.federationGraphqlEndpoint);
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
+  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {
-        const errorMessage = `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`;
+        const errorMessage = `[GraphQL error]: OperationName: ${operation.operationName}, Message: ${message}, Location: ${locations}, Path: ${path}`;
         graphqlClientLogger.error(errorMessage);
         Sentry.captureMessage(errorMessage);
       });

@@ -22,7 +22,6 @@ const requestType = {
 const prefixDefaultLocale = async (req: NextRequest) => {
   // stringify and map dynamic paths to segmented, ie: /venues/:id => /venues/[id]
   const path = stringifyUrlObject(req.nextUrl);
-
   if (req.nextUrl.locale === 'default') {
     return NextResponse.redirect(
       new URL(`/${DEFAULT_LANGUAGE}${path}`, req.url)

@@ -19,7 +19,7 @@ type DivisionOption = {
 
 const useDivisionOptions = (): DivisionOption[] => {
   const locale = useLocale();
-  const { data: neighborhoodsData, error } = useNeighborhoodListQuery();
+  const { data: neighborhoodsData } = useNeighborhoodListQuery();
   const filteredNeighborhoodList = getFilteredNeighborhoodList(
     neighborhoodsData?.neighborhoodList.data
   );

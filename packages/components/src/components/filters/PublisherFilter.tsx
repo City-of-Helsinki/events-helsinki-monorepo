@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCommonTranslation, useErrorBoundary } from '../../hooks';
+import { useCommonTranslation } from '../../hooks';
 import { useOrganizationDetailsQuery } from '../../types';
 import { FilterButton } from '../filterButton';
 import type { FilterType } from '../filterButton';
@@ -11,10 +11,10 @@ interface Props {
 
 const PublisherFilter: React.FC<Props> = ({ id, onRemove }) => {
   const { t } = useCommonTranslation();
-  const { data, loading, error } = useOrganizationDetailsQuery({
+  const { data, loading } = useOrganizationDetailsQuery({
     variables: { id },
   });
-  useErrorBoundary(error);
+
   return loading ? (
     <FilterButton
       onRemove={onRemove}

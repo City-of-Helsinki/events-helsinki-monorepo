@@ -10,6 +10,7 @@ import {
 import React from 'react';
 
 import PlaceText from '../PlaceText';
+
 const DIVISIONS = ['kunta:helsinki'];
 
 const { getPlaceDetailsFromCache } = isClient
@@ -30,7 +31,7 @@ const PlaceSelector: React.FC<Props> = ({
   const input = inputValue !== undefined ? inputValue : internalInputValue;
   const searchValue = useDebounce(input, 300);
 
-  const { data: placesData, error } = usePlaceListQuery({
+  const { data: placesData } = usePlaceListQuery({
     skip: !searchValue,
     variables: {
       divisions: DIVISIONS,

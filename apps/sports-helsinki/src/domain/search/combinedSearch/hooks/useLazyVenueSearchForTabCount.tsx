@@ -1,8 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import type { SearchListQuery } from 'events-helsinki-components';
-import {
-  SearchListDocument,
-} from 'events-helsinki-components';
+import { SearchListDocument } from 'events-helsinki-components';
 import React from 'react';
 import AppConfig from '../../../../domain/app/AppConfig';
 import useUnifiedSearchVariables from '../../../../domain/unifiedSearch/useUnifiedSearchVariables';

@@ -62,7 +62,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
     'event'
   );
 
-  const [superEventSearch, { data: superEventData, error }] = useLazyQuery(
+  const [superEventSearch, { data: superEventData }] = useLazyQuery(
     EventDetailsDocument,
     {
       variables: {

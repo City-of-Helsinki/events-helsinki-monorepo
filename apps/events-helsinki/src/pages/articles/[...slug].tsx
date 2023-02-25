@@ -56,7 +56,6 @@ const NextCmsArticle: NextPage<{
   return (
     <MatomoWrapper>
       <RHHCPage
-        className="article-page"
         navigation={<Navigation page={article} />}
         content={
           <RHHCPageContent
@@ -133,7 +132,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
-            ...(await serverSideTranslationsWithCommon(language, ['event'])),
+            ...(await serverSideTranslationsWithCommon(language, [
+              'cms',
+              'event',
+            ])),
             article,
             breadcrumbs,
             collections: getCollections(article.modules ?? []),

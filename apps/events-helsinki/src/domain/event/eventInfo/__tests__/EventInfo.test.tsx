@@ -1,4 +1,3 @@
-import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
 import { getDateRangeStr } from 'events-helsinki-components';
 import type {
   EventDetails,
@@ -418,8 +417,6 @@ describe('subEvents', () => {
         mocks: [...mocks, middleAsSuperEventMock, superEventMock],
       }
     );
-
-    await waitForLoadingCompleted();
 
     await waitFor(() => {
       expect(

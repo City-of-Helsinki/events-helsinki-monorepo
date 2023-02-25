@@ -37,15 +37,10 @@ const VenueUpcomingEvents: React.FC<VenueUpcomingEventsProps> = ({
 }) => {
   const router = useRouter();
   const { t } = useVenueTranslation();
-  const {
-    loading,
-    data: eventsData,
-    error,
-  } = useLocationUpcomingEventsQuery({
+  const { loading, data: eventsData } = useLocationUpcomingEventsQuery({
     placeId,
     keywords,
   });
-
   const cards = useEventCards({
     events: eventsData?.eventList?.data,
     returnPath: router.asPath,

@@ -137,7 +137,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             error: {
               statusCode: 500,
             },
-          }
+          },
         };
       }
     }

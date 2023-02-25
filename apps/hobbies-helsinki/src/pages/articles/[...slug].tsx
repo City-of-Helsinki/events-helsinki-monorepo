@@ -58,7 +58,6 @@ const NextCmsArticle: NextPage<{
         navigation={<Navigation page={article} />}
         content={
           <RHHCPageContent
-            className="article-page"
             page={article as PageContentProps['page']}
             heroContainer={<KorosWrapper />}
             breadcrumbs={
@@ -132,7 +131,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
-            ...(await serverSideTranslationsWithCommon(language, ['event'])),
+            ...(await serverSideTranslationsWithCommon(language, [
+              'cms',
+              'event',
+            ])),
             article,
             breadcrumbs,
             collections: getCollections(article.modules ?? []),

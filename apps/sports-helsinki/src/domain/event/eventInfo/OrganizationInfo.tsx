@@ -28,10 +28,7 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
   const locale = useLocale();
   const router = useRouter();
   const { provider, publisher } = getEventFields(event, locale);
-  const {
-    data: organizationData,
-    loading,
-  } = useOrganizationDetailsQuery({
+  const { data: organizationData, loading } = useOrganizationDetailsQuery({
     ssr: false,
     variables: { id: publisher },
   });

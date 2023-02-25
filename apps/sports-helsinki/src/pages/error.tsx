@@ -24,7 +24,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     const language = getLanguageOrDefault(context.locale);
     return {
       props: {
-        ...(await serverSideTranslationsWithCommon(language, ['common'])),
+        ...(await serverSideTranslationsWithCommon(language, [
+          'common',
+          'errors',
+        ])),
       },
     };
   });

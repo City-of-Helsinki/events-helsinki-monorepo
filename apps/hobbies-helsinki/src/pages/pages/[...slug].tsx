@@ -53,7 +53,6 @@ const NextCmsPage: NextPage<{
   return (
     <MatomoWrapper>
       <HCRCPage
-        className="page"
         navigation={<Navigation page={page} />}
         content={
           <HCRCPageContent
@@ -125,7 +124,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
-            ...(await serverSideTranslationsWithCommon(language)),
+            ...(await serverSideTranslationsWithCommon(language, ['cms'])),
             page,
             breadcrumbs,
             collections: getCollections(page.modules ?? []),

@@ -15,6 +15,7 @@ import routerHelper from '../../../../domain/app/routerHelper';
 import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
 import { getNextPage } from '../utils';
 import useEventSearchFilters from './useEventSearchFilters';
+
 function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
   const { t } = useSearchTranslation();
   const router = useRouter();
@@ -28,7 +29,6 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
     data: eventsData,
     fetchMore,
     loading: isLoadingEvents,
-    error,
   } = useEventListQuery({
     ssr: false,
     variables: eventFilters,

@@ -6,7 +6,6 @@ import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cm
 import useRHHCConfig from '../../hooks/useRHHCConfig';
 import { useApolloClient } from '../clients/eventsFederationApolloClient';
 
-
 export type Props = {
   serverError: unknown;
   children: React.ReactNode;
@@ -15,10 +14,12 @@ export type Props = {
 function ApolloProvider({ children, serverError }: Props) {
   useErrorBoundary(serverError);
   const errorHandler = useErrorBoundary();
-  const handleError = React.useCallback((error: unknown) => {
-    console.error('error boundary handler error from apollo link', error);
-    errorHandler(error);
-  }, []);
+  const handleError = React.useCallback(
+    (error: unknown) => {
+      errorHandler(error);
+    },
+    [errorHandler]
+  );
   const apolloClient = useApolloClient({ handleError });
   const rhhcConfig = useRHHCConfig({ apolloClient });
 

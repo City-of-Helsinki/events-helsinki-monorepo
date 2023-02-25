@@ -67,12 +67,7 @@ const getPageStylePaginator = (merge: FieldMergeFunction) => ({
   merge,
 });
 
-export function createApolloClient(
-  args: {
-    handleError?: (error: unknown) => void;
-  } = {}
-) {
-  const { handleError } = args;
+export function createApolloClient() {
   // Rewrite the URLs coming from events API to route them internally.
   const transformInternalURLs = new ApolloLink((operation, forward) => {
     return forward(operation).map((response) => {
@@ -83,7 +78,7 @@ export function createApolloClient(
     });
   });
   const httpLink = getHttpLink(AppConfig.federationGraphqlEndpoint);
-  const errorLink = onError(({ graphQLErrors, networkError, operation, response }) => {
+  const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {
         const errorMessage = `[GraphQL error]: OperationName: ${operation.operationName}, Message: ${message}, Location: ${locations}, Path: ${path}`;
@@ -94,9 +89,6 @@ export function createApolloClient(
     if (networkError) {
       graphqlClientLogger.error(networkError);
       Sentry.captureMessage('Network error');
-    }
-    if (handleError && !response?.data) {
-      handleError(new Error("Apollo server data couldn't be retrieved"));
     }
   });
 
@@ -201,23 +193,25 @@ export function createApolloCache() {
 }
 
 export default function initializeFederationApolloClient(
-  args: {
-    handleError?: (error: unknown) => void;
-  } = {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  initialState: NormalizedCacheObject = {}
 ): ApolloClient<NormalizedCacheObject> {
   return initializeApolloClient<
     NormalizedCacheObject,
     ApolloClient<NormalizedCacheObject>
   >({
     mutableCachedClient: eventsFederationApolloClient,
-    createClient: () => createApolloClient(args),
+    createClient: createApolloClient,
   });
 }
 
-export function useApolloClient(args: {
-  handleError: (error: unknown) => void;
-}): ApolloClient<NormalizedCacheObject> {
-  return useMemo(() => initializeFederationApolloClient(args), [args]);
+export function useApolloClient(
+  initialState: NormalizedCacheObject = {}
+): ApolloClient<NormalizedCacheObject> {
+  return useMemo(
+    () => initializeFederationApolloClient(initialState),
+    [initialState]
+  );
 }
 
 export const apolloClient = createApolloClient();

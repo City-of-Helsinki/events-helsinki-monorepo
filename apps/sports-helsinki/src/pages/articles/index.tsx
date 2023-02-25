@@ -63,7 +63,6 @@ export default function ArticleArchive({
     fetchMore,
     loading: loadingArticles,
     networkStatus,
-    error: articlesError,
   } = usePostsQuery({
     notifyOnNetworkStatusChange: true,
     variables: {
@@ -73,16 +72,14 @@ export default function ArticleArchive({
       categories: searchCategories,
     },
   });
-  const {
-    data: categoriesData,
-    loading: loadingCategories,
-    error: categoriesError,
-  } = useCategoriesQuery({
-    variables: {
-      first: CATEGORIES_AMOUNT,
-      language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
-    },
-  });
+  const { data: categoriesData, loading: loadingCategories } =
+    useCategoriesQuery({
+      variables: {
+        first: CATEGORIES_AMOUNT,
+        language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
+      },
+    });
+
   const isLoading =
     (loadingArticles && networkStatus !== NetworkStatus.fetchMore) ||
     loadingCategories;

@@ -65,12 +65,7 @@ export type CustomPageProps = {
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { error, headerMenu, footerMenu, languages } = pageProps;
   useErrorBoundary(error);
-  const errorHandler = useErrorBoundary();
-  const handleError = React.useCallback(
-    (error: unknown) => errorHandler(error),
-    []
-  );
-  const apolloClient = useApolloClient({ handleError });
+  const apolloClient = useApolloClient();
   const router = useRouter();
   const rhhcConfig = useRHHCConfig();
   const { t } = useCommonTranslation();

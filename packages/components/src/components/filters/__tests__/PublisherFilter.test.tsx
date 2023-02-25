@@ -1,5 +1,5 @@
 import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
-import { render, screen, userEvent } from '@/test-utils';
+import { render, waitFor, screen, userEvent } from '@/test-utils';
 import { fakeOrganization } from '@/test-utils/mockDataUtils';
 import { OrganizationDetailsDocument } from '../../../types';
 import PublisherFilter from '../PublisherFilter';
@@ -61,9 +61,18 @@ it("should return null if place doesn't exist", async () => {
     },
   ];
 
-  render(<PublisherFilter id={id} onRemove={jest.fn()} />, {
-    mocks,
+  const { container } = render(
+    <PublisherFilter id={id} onRemove={jest.fn()} />,
+    {
+      mocks,
+    }
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.queryByText(translations.common.loading)
+    ).not.toBeInTheDocument();
   });
 
-  await screen.findByText(/not found/i);
+  expect(container.innerHTML).toBe('');
 });

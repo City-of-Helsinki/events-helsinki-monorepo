@@ -4,7 +4,6 @@ import nextI18nextConfig from '../../../next-i18next.config';
 
 const COMMON_TRANSLATIONS = [
   'appEvents',
-  'cms',
   'common',
   'consent',
   'errors',

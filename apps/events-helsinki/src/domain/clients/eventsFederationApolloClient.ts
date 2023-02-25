@@ -193,13 +193,13 @@ export function createApolloCache() {
 }
 
 export default function initializeFederationApolloClient(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   initialState: NormalizedCacheObject = {}
 ): ApolloClient<NormalizedCacheObject> {
   return initializeApolloClient<
     NormalizedCacheObject,
     ApolloClient<NormalizedCacheObject>
   >({
-    initialState,
     mutableCachedClient: eventsFederationApolloClient,
     createClient: createApolloClient,
   });

@@ -1,5 +1,6 @@
+import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
 import React from 'react';
-import { render, screen, userEvent } from '@/test-utils';
+import { render, screen, userEvent, waitFor } from '@/test-utils';
 import { fakePlace } from '@/test-utils/mockDataUtils';
 import { PlaceDetailsDocument } from '../../../types';
 import PlaceFilter from '../PlaceFilter';
@@ -52,7 +53,6 @@ it('calls onRemove callback when remove button is clicked', async () => {
   expect(onClickMock).toHaveBeenCalledWith(placeId, 'place');
 });
 
-// eslint-disable-next-line jest/expect-expect
 it("should return null if place doesn't exist", async () => {
   const mocks = [
     {
@@ -61,9 +61,18 @@ it("should return null if place doesn't exist", async () => {
     },
   ];
 
-  render(<PlaceFilter id={placeId} onRemove={jest.fn()} />, {
-    mocks,
+  const { container } = render(
+    <PlaceFilter id={placeId} onRemove={jest.fn()} />,
+    {
+      mocks,
+    }
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.queryByText(translations.common.loading)
+    ).not.toBeInTheDocument();
   });
 
-  await screen.findByText(/not found/i);
+  expect(container.innerHTML).toBe('');
 });

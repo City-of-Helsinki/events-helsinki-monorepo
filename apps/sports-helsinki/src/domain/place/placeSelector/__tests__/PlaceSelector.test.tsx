@@ -7,7 +7,7 @@ import React from 'react';
 
 import { waitFor, actWait, render, screen, userEvent } from '@/test-utils';
 import { fakePlaces } from '@/test-utils/mockDataUtils';
-import { apolloClient } from '../../../clients/eventsFederationApolloClient';
+import { sportsApolloClient } from '../../../clients/sportsApolloClient';
 import PlaceSelector from '../PlaceSelector';
 
 const variables = {
@@ -129,7 +129,9 @@ it('should filter place options', async () => {
 
 it('should render selected value correctly', async () => {
   // @ts-ignore
-  jest.spyOn(apolloClient, 'readQuery').mockReturnValue(placeDetailsResponse);
+  jest
+    .spyOn(sportsApolloClient.client, 'readQuery')
+    .mockReturnValue(placeDetailsResponse);
   render(<PlaceSelector {...defaultProps} value={[placeId]} />, {
     mocks,
   });

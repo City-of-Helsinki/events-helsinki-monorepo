@@ -37,7 +37,7 @@ import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
+import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsArticle: NextPage<{
@@ -85,7 +85,7 @@ const NextCmsArticle: NextPage<{
 export async function getStaticPaths() {
   // NOTE: It might not be a good thing to use ApolloClient here,
   // since then the build process depends on external service.
-  const articlePageInfos = await getAllArticles(apolloClient);
+  const articlePageInfos = await getAllArticles(hobbiesApolloClient);
   const paths = articlePageInfos.map((pageInfo) => ({
     params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
     locale: pageInfo.locale,
@@ -150,7 +150,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
               statusCode: 500,
             },
           },
-          revalidate: 10,
         };
       }
     }
@@ -159,7 +158,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
-  const { data: articleData } = await apolloClient.query<
+  const { data: articleData } = await hobbiesApolloClient.query<
     ArticleQuery,
     ArticleQueryVariables
   >({
@@ -175,7 +174,7 @@ const getProps = async (context: GetStaticPropsContext) => {
   // TODO: Breadcrumbs are unstyled, so left disabled
   const breadcrumbs: Breadcrumb[] = []; // await _getBreadcrumbs(cmsClient, currentArticle);
 
-  return { currentArticle, breadcrumbs, apolloClient };
+  return { currentArticle, breadcrumbs, apolloClient: hobbiesApolloClient };
 };
 
 /**

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type { EventFieldsFragment } from 'events-helsinki-components';
 import {
   getLinkArrowLabel,
@@ -22,21 +23,21 @@ import AppConfig from '../domain/app/AppConfig';
 import routerHelper from '../domain/app/routerHelper';
 import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
 import ArticleDetails from '../domain/article/articleDetails/ArticleDetails';
-import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
 import type { EventDetailsProps } from '../domain/event/eventDetails/EventDetails';
 import EventDetails from '../domain/event/eventDetails/EventDetails';
 import getVenueSourceId from '../domain/venue/utils/getVenueSourceId';
 import type { VenueDetailsProps } from '../domain/venue/venueDetails/VenueDetails';
 import VenueDetails from '../domain/venue/venueDetails/VenueDetails';
-
 const APP_DOMAIN = new URL(AppConfig.origin).origin;
 const CMS_API_DOMAIN = new URL(AppConfig.cmsOrigin).origin;
 const LINKEDEVENTS_API_EVENT_ENDPOINT = new URL(
   AppConfig.linkedEventsEventEndpoint
 ).href;
 
-export default function useRHHCConfig() {
-  const apolloClient = useApolloClient();
+export default function useHobbiesRHHCConfig(args: {
+  apolloClient: ApolloClient<NormalizedCacheObject>;
+}) {
+  const { apolloClient } = args;
   const { t: commonTranslation } = useCommonTranslation();
   const { t: eventTranslation } = useEventTranslation();
   const locale = useLocale();

@@ -65,7 +65,6 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
             statusCode: 500,
           },
         },
-        revalidate: 10,
       };
     }
 

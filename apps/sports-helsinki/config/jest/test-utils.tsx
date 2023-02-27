@@ -8,7 +8,9 @@ import type { ReactElement } from 'react';
 import React from 'react';
 import wait from 'waait';
 
-import initializeSportsApolloClient from '../../src/domain/clients/sportsApolloClient';
+import initializeSportsApolloClient, {
+  sportsApolloClient,
+} from '../../src/domain/clients/sportsApolloClient';
 import TestProviders from './TestProviders';
 
 type CustomRender = {
@@ -39,11 +41,9 @@ export const escKeyPressHelper = (): boolean =>
 export const tabKeyPressHelper = (): boolean =>
   fireEvent.keyDown(document, { code: 9, key: 'Tab' });
 
-const apolloClient = initializeSportsApolloClient();
-
 const customRender: CustomRender = (
   ui: ReactElement,
-  { mocks = [], cache = apolloClient.cache, routes = [] } = {}
+  { mocks = [], cache = sportsApolloClient.cache, routes = [] } = {}
 ) => {
   if (routes) {
     if (!Array.isArray(routes)) {

@@ -1,4 +1,3 @@
-import { ApolloProvider } from '@apollo/client';
 import {
   MatomoProvider,
   createInstance as createMatomoInstance,
@@ -11,44 +10,24 @@ import {
   ResetFocus,
   useCommonTranslation,
   CmsHelperProvider,
-  useErrorBoundary,
+  GeolocationProvider,
 } from 'events-helsinki-components';
-import { LoadingSpinner } from 'hds-react';
 import type { AppProps as NextAppProps } from 'next/app';
-import { useRouter } from 'next/router';
 import { appWithTranslation } from 'next-i18next';
 import type { SSRConfig } from 'next-i18next';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
 import AppConfig from '../domain/app/AppConfig';
 import cmsHelper from '../domain/app/headlessCmsHelper';
+import HobbiesApolloProvider from '../domain/app/HobbiesApolloProvider';
 import routerHelper from '../domain/app/routerHelper';
-import { useApolloClient } from '../domain/clients/eventsFederationApolloClient';
 import ErrorFallback from '../domain/error/ErrorFallback';
-import useRHHCConfig from '../hooks/useRHHCConfig';
 
 const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
-
-function Center({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      {children}
-    </div>
-  );
-}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AppProps<P = any> = {
@@ -63,11 +42,7 @@ export type CustomPageProps = {
   SSRConfig;
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const { error, headerMenu, footerMenu, languages } = pageProps;
-  useErrorBoundary(error);
-  const apolloClient = useApolloClient();
-  const router = useRouter();
-  const rhhcConfig = useRHHCConfig();
+  const { headerMenu, footerMenu, languages } = pageProps;
   const { t } = useCommonTranslation();
 
   // Unset hidden visibility that was applied to hide the first server render
@@ -87,37 +62,29 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   }, []);
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <RHHCConfigProvider config={rhhcConfig}>
-        <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-          <NavigationProvider
-            headerMenu={headerMenu}
-            footerMenu={footerMenu}
-            languages={languages}
-          >
-            <MatomoProvider value={matomoInstance}>
-              <ErrorBoundary FallbackComponent={ErrorFallback}>
-                {router.isFallback ? (
-                  <Center>
-                    <LoadingSpinner />
-                  </Center>
-                ) : (
-                  <>
-                    <ResetFocus />
-                    <Component {...pageProps} />
-                    <EventsCookieConsent
-                      allowLanguageSwitch={false}
-                      appName={t('appSports:appName')}
-                    />
-                  </>
-                )}
-              </ErrorBoundary>
-            </MatomoProvider>
-            <ToastContainer />
-          </NavigationProvider>
-        </CmsHelperProvider>
-      </RHHCConfigProvider>
-    </ApolloProvider>
+    <HobbiesApolloProvider>
+      <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <MatomoProvider value={matomoInstance}>
+            <GeolocationProvider>
+              <NavigationProvider
+                headerMenu={headerMenu}
+                footerMenu={footerMenu}
+                languages={languages}
+              >
+                <ResetFocus />
+                <Component {...pageProps} />
+                <EventsCookieConsent
+                  allowLanguageSwitch={false}
+                  appName={t('appSports:appName')}
+                />
+                <ToastContainer />
+              </NavigationProvider>
+            </GeolocationProvider>
+          </MatomoProvider>
+        </ErrorBoundary>
+      </CmsHelperProvider>
+    </HobbiesApolloProvider>
   );
 }
 

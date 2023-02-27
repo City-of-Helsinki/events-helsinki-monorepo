@@ -34,7 +34,7 @@ const LINKEDEVENTS_API_EVENT_ENDPOINT = new URL(
   AppConfig.linkedEventsEventEndpoint
 ).href;
 
-export default function useRHHCConfig(args: {
+export default function useSportsRHHCConfig(args: {
   apolloClient: ApolloClient<NormalizedCacheObject>;
 }) {
   const { apolloClient } = args;

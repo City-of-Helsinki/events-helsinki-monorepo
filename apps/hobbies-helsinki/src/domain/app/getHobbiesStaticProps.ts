@@ -12,7 +12,7 @@ import {
   MenuDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
-import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
+import { hobbiesApolloClient } from '../clients/hobbiesApolloClient';
 import AppConfig from './AppConfig';
 
 type HobbiesContext = {
@@ -31,18 +31,19 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
   ) => Promise<GetStaticPropsResult<P>>
 ) {
   const language = getLanguageOrDefault(context.locale);
-  const apolloClient = initializeFederationApolloClient();
 
   try {
     const globalCmsData = await getGlobalCMSData({
-      client: apolloClient,
+      client: hobbiesApolloClient,
       context,
     });
-    const result = await tryToGetPageProps({ apolloClient });
+    const result = await tryToGetPageProps({
+      apolloClient: hobbiesApolloClient,
+    });
     const props =
       'props' in result
         ? {
-            initialApolloState: apolloClient.cache.extract(),
+            initialApolloState: hobbiesApolloClient.cache.extract(),
             locale: language,
             ...globalCmsData,
             ...result.props,
@@ -66,7 +67,6 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
             statusCode: 500,
           },
         },
-        revalidate: 10,
       };
     }
 

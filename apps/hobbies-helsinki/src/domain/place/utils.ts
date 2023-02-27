@@ -1,11 +1,11 @@
 import type { Maybe, PlaceDetailsQuery } from 'events-helsinki-components';
 import { PlaceDetailsDocument } from 'events-helsinki-components';
-import { apolloClient } from '../clients/eventsFederationApolloClient';
+import { hobbiesApolloClient } from '../clients/hobbiesApolloClient';
 
 export const getPlaceDetailsFromCache = (
   id: string
 ): Maybe<PlaceDetailsQuery> => {
-  return apolloClient.readQuery<PlaceDetailsQuery>({
+  return hobbiesApolloClient.readQuery<PlaceDetailsQuery>({
     query: PlaceDetailsDocument,
     variables: { id },
   });

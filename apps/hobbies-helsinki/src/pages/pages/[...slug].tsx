@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import type { NormalizedCacheObject } from '@apollo/client';
+import { apolloClient } from 'events-helsinki/src/domain/clients/eventsFederationApolloClient';
 import type { AppLanguage } from 'events-helsinki-components';
 import {
   NavigationContext,
@@ -37,7 +38,7 @@ import Navigation from '../../../../../packages/components/src/components/naviga
 import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
+import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsPage: NextPage<{
@@ -76,7 +77,7 @@ const NextCmsPage: NextPage<{
 export async function getStaticPaths() {
   // NOTE: It might not be a good thing to use ApolloClient here,
   // since then the build process depends on external service.
-  const pagePageInfos = await getAllPages(apolloClient);
+  const pagePageInfos = await getAllPages(hobbiesApolloClient);
   const paths = pagePageInfos
     .map((pageInfo) => ({
       params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
@@ -138,7 +139,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
               statusCode: 500,
             },
           },
-          revalidate: 10,
         };
       }
     }

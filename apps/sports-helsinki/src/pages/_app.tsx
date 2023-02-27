@@ -22,43 +22,23 @@ import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
-import ApolloProvider from '../domain/app/ApolloProvider';
 import AppConfig from '../domain/app/AppConfig';
 import cmsHelper from '../domain/app/headlessCmsHelper';
 import routerHelper from '../domain/app/routerHelper';
+import SportsApolloProvider from '../domain/app/SportsApolloProvider';
 import ErrorFallback from '../domain/error/ErrorFallback';
 
 const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
-
-function PageLoadingSpinner() {
-  return (
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <LoadingSpinner />
-    </div>
-  );
-}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AppProps<P = any> = {
   pageProps: P;
 } & Omit<NextAppProps<P>, 'pageProps'>;
 
-export type CustomPageProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  error: any;
-} & NavigationProviderProps &
-  SSRConfig;
+export type CustomPageProps = NavigationProviderProps & SSRConfig;
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const { error, headerMenu, footerMenu, languages } = pageProps;
+  const { headerMenu, footerMenu, languages } = pageProps;
   const { t } = useCommonTranslation();
   // Unset hidden visibility that was applied to hide the first server render
   // that does not include styles from HDS. HDS applies styling by injecting
@@ -77,31 +57,29 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   }, []);
 
   return (
-    <ApolloProvider serverError={error}>
+    <SportsApolloProvider>
       <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <React.Suspense fallback={<PageLoadingSpinner />}>
-            <MatomoProvider value={matomoInstance}>
-              <GeolocationProvider>
-                <NavigationProvider
-                  headerMenu={headerMenu}
-                  footerMenu={footerMenu}
-                  languages={languages}
-                >
-                  <ResetFocus />
-                  <Component {...pageProps} />
-                  <EventsCookieConsent
-                    allowLanguageSwitch={false}
-                    appName={t('appSports:appName')}
-                  />
-                  <ToastContainer />
-                </NavigationProvider>
-              </GeolocationProvider>
-            </MatomoProvider>
-          </React.Suspense>
+          <MatomoProvider value={matomoInstance}>
+            <GeolocationProvider>
+              <NavigationProvider
+                headerMenu={headerMenu}
+                footerMenu={footerMenu}
+                languages={languages}
+              >
+                <ResetFocus />
+                <Component {...pageProps} />
+                <EventsCookieConsent
+                  allowLanguageSwitch={false}
+                  appName={t('appSports:appName')}
+                />
+                <ToastContainer />
+              </NavigationProvider>
+            </GeolocationProvider>
+          </MatomoProvider>
         </ErrorBoundary>
       </CmsHelperProvider>
-    </ApolloProvider>
+    </SportsApolloProvider>
   );
 }
 

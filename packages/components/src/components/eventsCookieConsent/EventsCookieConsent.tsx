@@ -33,6 +33,7 @@ const EventsCookieConsent: React.FC<Props> = ({
     [i18n, setLanguage, allowLanguageSwitch]
   );
   const contentSource: ContentSource = React.useMemo(
+    // eslint-disable-next-line sonarjs/cognitive-complexity
     () => ({
       siteName: appName,
       onAllConsentsGiven: () => {

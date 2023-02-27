@@ -1,14 +1,14 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
+import {
+  PostsDocument,
+  PagesDocument,
+} from 'react-helsinki-headless-cms/apollo';
 import type {
   PostsQuery,
   PostsQueryVariables,
   PagesQuery,
   PagesQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
-import {
-  PostsDocument,
-  PagesDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import type { PageInfo } from '../../types';
 
@@ -40,6 +40,8 @@ export const getAllArticles = async (
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
+      // TODO: fix any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       node.translations?.forEach((translation: PageType['translations']) => {
         if (
           translation?.uri &&
@@ -88,6 +90,8 @@ export const getAllPages = async (
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
+      // TODO: fix any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       node.translations?.forEach((translation: PageType['translations']) => {
         if (
           translation?.uri &&

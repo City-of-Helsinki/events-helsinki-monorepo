@@ -39,7 +39,7 @@ const EventDetails: React.FC<EventDetailsProps> = (props) => {
                 end: endTime,
                 locale,
                 includeTime: true,
-                timeAbbreviation: t('timeAbbreviation'),
+                timeAbbreviation: t('timeAbbreviation') ?? '',
               })}
             </div>
           </div>

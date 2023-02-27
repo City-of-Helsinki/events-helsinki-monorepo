@@ -43,6 +43,7 @@ export interface Props {
   superEvent?: SuperEventResponse;
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
@@ -146,7 +147,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                             locale,
                             includeTime: true,
                             timeAbbreviation:
-                              commonTranslation('timeAbbreviation'),
+                              commonTranslation('timeAbbreviation') ?? '',
                           })
                         )}
                       </InfoWithIcon>
@@ -165,7 +166,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                   {showBuyButton && (
                     <div className={styles.buyButtonWrapper}>
                       <Button
-                        aria-label={t('hero.ariaLabelBuyTickets')}
+                        aria-label={t('hero.ariaLabelBuyTickets') ?? ''}
                         onClick={goToBuyTicketsPage}
                         iconRight={<IconLinkExternal aria-hidden />}
                         variant="success"
@@ -179,7 +180,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                       <Button
                         theme="coat"
                         className={buttonStyles.buttonCoatBlue}
-                        aria-label={t('hero.ariaLabelEnrol')}
+                        aria-label={t('hero.ariaLabelEnrol') ?? ''}
                         onClick={() => window.open(registrationUrl)}
                       >
                         {t('hero.buttonEnrol') as string}

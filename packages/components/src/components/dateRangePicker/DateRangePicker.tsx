@@ -134,7 +134,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         onChange={(date) => setInternalStartDateString(date)}
         errorText={
           errors.startDateIsInvalid
-            ? t('common:dateSelector.errorDateFormat')
+            ? t('common:dateSelector.errorDateFormat') ?? ''
             : undefined
         }
       />
@@ -156,9 +156,9 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         onChange={(date) => setInternalEndDateString(date)}
         errorText={
           endDateIsBeforeStartDate
-            ? t('common:dateSelector.errorEndDateBeforeStartDate')
+            ? t('common:dateSelector.errorEndDateBeforeStartDate') ?? ''
             : errors.endDateIsInvalid
-            ? t('common:dateSelector.errorDateFormat')
+            ? t('common:dateSelector.errorDateFormat') ?? ''
             : undefined
         }
       />

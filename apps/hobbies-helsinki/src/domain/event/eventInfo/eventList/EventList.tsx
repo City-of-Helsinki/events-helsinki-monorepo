@@ -46,7 +46,7 @@ const EventList: React.FC<{
               end: event.endTime,
               includeTime: true,
               locale,
-              timeAbbreviation: commonTranslation('timeAbbreviation'),
+              timeAbbreviation: commonTranslation('timeAbbreviation') ?? '',
             })
           : '';
         return (
@@ -59,8 +59,8 @@ const EventList: React.FC<{
                 showDate
                   ? t('otherTimes.buttonReadMore', {
                       date,
-                    })
-                  : t('relatedEvents.buttonReadMore')
+                    }) ?? ''
+                  : t('relatedEvents.buttonReadMore') ?? ''
               }
             >
               <span>{`${showName ? name : ''} ${showDate ? date : ''}`}</span>

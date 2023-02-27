@@ -29,9 +29,11 @@ const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
     <RoundedTag
       theme={theme}
       onDelete={handleRemove}
-      deleteButtonAriaLabel={t('common:filter.ariaButtonRemove', {
-        filter: text,
-      })}
+      deleteButtonAriaLabel={
+        t('common:filter.ariaButtonRemove', {
+          filter: text,
+        }) ?? ''
+      }
       className={styles.filter}
     >
       {text}

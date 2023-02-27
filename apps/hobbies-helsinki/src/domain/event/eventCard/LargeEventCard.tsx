@@ -94,9 +94,11 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   return (
     <LinkBox
       type="linkBox"
-      aria-label={t('eventCard.ariaLabelLink', {
-        name,
-      })}
+      aria-label={
+        t('eventCard.ariaLabelLink', {
+          name,
+        }) ?? ''
+      }
       id={getLargeEventCardId(id)}
       data-testid={event.id}
       href={eventUrl}
@@ -129,7 +131,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                   end: endTime,
                   locale,
                   includeTime: true,
-                  timeAbbreviation: commonTranslation('timeAbbreviation'),
+                  timeAbbreviation: commonTranslation('timeAbbreviation') ?? '',
                 })}
               </>
             )}
@@ -160,7 +162,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
               <>
                 <div>
                   <Button
-                    aria-label={t('eventCard.ariaLabelBuyTickets')}
+                    aria-label={t('eventCard.ariaLabelBuyTickets') ?? ''}
                     iconRight={<IconLinkExternal aria-hidden />}
                     fullWidth
                     onClick={goToBuyTicketsPage}
@@ -172,9 +174,11 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                 </div>
                 <div ref={button}>
                   <Button
-                    aria-label={t('eventCard.ariaLabelReadMore', {
-                      name,
-                    })}
+                    aria-label={
+                      t('eventCard.ariaLabelReadMore', {
+                        name,
+                      }) ?? ''
+                    }
                     className={buttonStyles.buttonGray}
                     fullWidth
                     onClick={goToEventPage}

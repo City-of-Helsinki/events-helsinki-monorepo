@@ -31,7 +31,7 @@ const AutoSuggestMenu: FunctionComponent<Props> = ({
       <div className={styles.title}>
         {t('common:autosuggest.menu.title')}
         <button
-          aria-label={t('common:autosuggest.menu.ariaButtonClose')}
+          aria-label={t('common:autosuggest.menu.ariaButtonClose') ?? ''}
           className={styles.closeButton}
           onClick={onClose}
         >

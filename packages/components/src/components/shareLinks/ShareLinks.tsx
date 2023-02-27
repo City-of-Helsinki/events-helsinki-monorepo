@@ -37,13 +37,13 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ title }) => {
             successClass={styles.linkCopyButtonSuccess}
             successMessage={
               <span className={styles.successTooltip}>
-                {t('common:shareLinks.messageLinkCopySuccess')}
+                {t('common:shareLinks.messageLinkCopySuccess') ?? ''}
               </span>
             }
-            aria-label={t('common:shareLinks.buttonCopyLink')}
+            aria-label={t('common:shareLinks.buttonCopyLink') ?? ''}
           >
             <img
-              alt={t('common:shareLinks.buttonCopyLink')}
+              alt={t('common:shareLinks.buttonCopyLink') ?? ''}
               src="/shared-assets/images/share/link.svg"
             />
           </CopyButton>

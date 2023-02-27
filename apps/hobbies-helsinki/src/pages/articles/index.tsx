@@ -113,8 +113,8 @@ export default function ArticleArchive({
         navigation={<Navigation page={page} />}
         content={
           <SearchPageContent
-            title={t('cms:archiveSearch.title')}
-            description={t('cms:archiveSearch.description')}
+            title={t('cms:archiveSearch.title') ?? ''}
+            description={t('cms:archiveSearch.description') ?? ''}
             className="articlesArchive"
             noResults={!isLoading && articles?.length === 0}
             items={articles}

@@ -121,14 +121,15 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
     if (startTime) {
       const domain = getDomain();
       const icsEvent: EventAttributes = {
-        description: t('info.textCalendarLinkDescription', {
-          description: shortDescription,
-          link: `${domain}${routerHelper.getLocalizedCmsItemUrl(
-            ROUTES.COURSES,
-            { eventId: event.id },
-            locale
-          )}`,
-        }),
+        description:
+          t('info.textCalendarLinkDescription', {
+            description: shortDescription,
+            link: `${domain}${routerHelper.getLocalizedCmsItemUrl(
+              ROUTES.COURSES,
+              { eventId: event.id },
+              locale
+            )}`,
+          }) ?? '',
         end: endTime ? getDateArray(endTime) : getDateArray(startTime),
         location: [locationName, streetAddress, district, addressLocality]
           .filter((e) => e)
@@ -153,7 +154,7 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
   return (
     <InfoWithIcon
       icon={<IconCalendarClock aria-hidden />}
-      title={t('info.labelDateAndTime')}
+      title={t('info.labelDateAndTime') ?? ''}
     >
       {!!startTime && (
         <>
@@ -162,7 +163,7 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
             end: endTime,
             locale,
             includeTime: true,
-            timeAbbreviation: commonTranslation('timeAbbreviation'),
+            timeAbbreviation: commonTranslation('timeAbbreviation') ?? '',
           })}
           <button onClick={downloadIcsFile}>
             {t('info.buttonAddToCalendar')}
@@ -186,7 +187,7 @@ const LocationInfo: React.FC<{ event: EventFields }> = ({ event }) => {
   return (
     <InfoWithIcon
       icon={<IconLocation aria-hidden />}
-      title={t('info.labelLocation')}
+      title={t('info.labelLocation') ?? ''}
     >
       <Visible below="s">
         {[locationName, streetAddress, district, addressLocality]
@@ -222,7 +223,7 @@ const Audience: React.FC<{
   const { t } = useTranslation('event');
 
   return (
-    <InfoWithIcon icon={<IconGroup />} title={t('info.labelAudience')}>
+    <InfoWithIcon icon={<IconGroup />} title={t('info.labelAudience') ?? ''}>
       {(audienceMinAge || audienceMaxAge) && (
         <div>{getAudienceAgeText(t, audienceMinAge, audienceMaxAge)}</div>
       )}
@@ -239,7 +240,7 @@ const Languages: React.FC<{ languages: string[] }> = ({ languages }) => {
   return (
     <InfoWithIcon
       icon={<IconGlobe aria-hidden />}
-      title={t('info.labelLanguages')}
+      title={t('info.labelLanguages') ?? ''}
     >
       <div>{languages.join(', ')}</div>
     </InfoWithIcon>
@@ -258,7 +259,7 @@ const OtherInfo: React.FC<{
   return (
     <InfoWithIcon
       icon={<IconInfoCircle aria-hidden />}
-      title={t('info.labelOtherInfo')}
+      title={t('info.labelOtherInfo') ?? ''}
     >
       {[email, telephone]
         .filter((e) => e)
@@ -313,7 +314,7 @@ const Directions: React.FC<{
   return (
     <InfoWithIcon
       icon={<IconDirections aria-hidden />}
-      title={t('info.labelDirections')}
+      title={t('info.labelDirections') ?? ''}
     >
       <SecondaryLink className={styles.link} href={googleDirectionsLink}>
         {t('info.directionsGoogle')}
@@ -339,7 +340,7 @@ const PriceInfo: React.FC<{ event: EventFields }> = ({ event }) => {
       <Visible below="s">
         <InfoWithIcon
           icon={<IconTicket aria-hidden />}
-          title={t('info.labelPrice')}
+          title={t('info.labelPrice') ?? ''}
         >
           {eventPriceText || '-'}
         </InfoWithIcon>
@@ -349,7 +350,7 @@ const PriceInfo: React.FC<{ event: EventFields }> = ({ event }) => {
         <Visible below="s" className={styles.buyButtonWrapper}>
           <Button
             theme="coat"
-            aria-label={t('info.ariaLabelBuyTickets')}
+            aria-label={t('info.ariaLabelBuyTickets') ?? ''}
             fullWidth={true}
             onClick={moveToBuyTicketsPage}
           >

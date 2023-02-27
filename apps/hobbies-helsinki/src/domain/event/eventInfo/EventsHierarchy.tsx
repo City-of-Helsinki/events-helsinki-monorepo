@@ -133,7 +133,7 @@ const SuperEvent: React.FC<{ superEvent: SuperEventResponse | undefined }> = ({
     <div className={styles.eventList}>
       <InfoWithIcon
         icon={<IconLayers aria-hidden />}
-        title={t('superEvent.title')}
+        title={t('superEvent.title') ?? ''}
       >
         <EventList id={superEventTestId} showName events={[superEvent.data]} />
       </InfoWithIcon>

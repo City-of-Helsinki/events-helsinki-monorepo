@@ -159,7 +159,7 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
       <button
         aria-haspopup="true"
         aria-expanded={isMenuOpen}
-        aria-label={t('common:dateSelector.title')}
+        aria-label={t('common:dateSelector.title') ?? ''}
         className={styles.button}
         onClick={toggleMenu}
         type="button"

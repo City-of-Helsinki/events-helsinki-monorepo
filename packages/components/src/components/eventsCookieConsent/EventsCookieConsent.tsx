@@ -32,6 +32,7 @@ const EventsCookieConsent: React.FC<Props> = ({
     [i18n, setLanguage, allowLanguageSwitch]
   );
   const contentSource: ContentSource = React.useMemo(
+    // eslint-disable-next-line sonarjs/cognitive-complexity
     () => ({
       siteName: appName,
       onAllConsentsGiven: () => {
@@ -47,29 +48,29 @@ const EventsCookieConsent: React.FC<Props> = ({
                 id: 'wordpress',
                 name: 'wordpress_*, wp-settings-*',
                 hostName: 'api.hel.fi',
-                description: t('consent:cookies.wordpress'),
-                expiration: t('consent:expiration.session'),
+                description: t('consent:cookies.wordpress') ?? '',
+                expiration: t('consent:expiration.session') ?? '',
               },
               {
                 id: 'linkedevents',
                 name: 'linkedevents-api-prod-csrftoken',
                 hostName: 'api.hel.fi',
-                description: t('consent:cookies.linkedevents'),
-                expiration: t('consent:expiration.year'),
+                description: t('consent:cookies.linkedevents') ?? '',
+                expiration: t('consent:expiration.year') ?? '',
               },
               {
                 id: 'matomo',
                 name: '_pk*',
                 hostName: 'digia.fi',
-                description: t('consent:cookies.matomo'),
-                expiration: t('consent:expiration.days', { days: 393 }),
+                description: t('consent:cookies.matomo') ?? '',
+                expiration: t('consent:expiration.days', { days: 393 }) ?? '',
               },
               {
                 id: 'i18next',
                 name: 'i18next',
                 hostName: 'api.hel.fi',
-                description: t('consent:cookies.i18next'),
-                expiration: t('consent:expiration.session'),
+                description: t('consent:cookies.i18next') ?? '',
+                expiration: t('consent:expiration.session') ?? '',
               },
             ],
           },
@@ -78,33 +79,33 @@ const EventsCookieConsent: React.FC<Props> = ({
       optionalCookies: {
         groups: [
           {
-            title: t('consent:groups.servicemap.title'),
-            text: t('consent:groups.servicemap.text'),
-            expandAriaLabel: t('consent:groups.servicemap.expandAriaLabel'),
-            checkboxAriaDescription: t(
-              'consent:groups.servicemap.checkboxAriaDescription'
-            ),
+            title: t('consent:groups.servicemap.title') ?? '',
+            text: t('consent:groups.servicemap.text') ?? '',
+            expandAriaLabel:
+              t('consent:groups.servicemap.expandAriaLabel') ?? '',
+            checkboxAriaDescription:
+              t('consent:groups.servicemap.checkboxAriaDescription') ?? '',
             cookies: [
               {
                 id: 'servicemap_analytics',
                 name: '_pk.fi*',
                 hostName: 'palvelukartta.hel.fi',
-                description: t('consent:cookies.servicemap_analytics'),
-                expiration: t('consent:expiration.days', { days: 393 }),
+                description: t('consent:cookies.servicemap_analytics') ?? '',
+                expiration: t('consent:expiration.days', { days: 393 }) ?? '',
               },
               {
                 id: 'servicemap_session',
                 name: 'ADRUM',
                 hostName: 'palvelukartta.hel.fi',
-                description: t('consent:cookies.servicemap_session'),
-                expiration: t('consent:expiration.session'),
+                description: t('consent:cookies.servicemap_session') ?? '',
+                expiration: t('consent:expiration.session') ?? '',
               },
               {
                 id: 'servicemap_ga',
                 name: '_ga*',
                 hostName: 'palvelukartta.hel.fi',
-                description: t('consent:cookies.servicemap_ga'),
-                expiration: t('consent:expiration.session'),
+                description: t('consent:cookies.servicemap_ga') ?? '',
+                expiration: t('consent:expiration.session') ?? '',
               },
             ],
           },

@@ -32,12 +32,18 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
   return (
     <>
       {provider && (
-        <InfoWithIcon icon={<IconFaceSmile />} title={t('info.labelOrganizer')}>
+        <InfoWithIcon
+          icon={<IconFaceSmile />}
+          title={t('info.labelOrganizer') ?? ''}
+        >
           <div>{provider}</div>
         </InfoWithIcon>
       )}
       {publisher && (
-        <InfoWithIcon icon={<IconLayers />} title={t('info.labelPublisher')}>
+        <InfoWithIcon
+          icon={<IconLayers />}
+          title={t('info.labelPublisher') ?? ''}
+        >
           <LoadingSpinner hasPadding={false} isLoading={loading}>
             {organizationName && (
               <>

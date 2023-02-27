@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import type { EventFields } from 'events-helsinki-components';
 import {
+  useCommonTranslation,
   getDateRangeStr,
   useLocale,
   IconButton,
@@ -27,7 +28,7 @@ interface Props {
 
 const EventCard: React.FC<Props> = ({ event }) => {
   const { t } = useTranslation('event');
-  const { t: commonTranslation } = useTranslation('common');
+  const { t: commonTranslation } = useCommonTranslation();
   const router = useRouter();
   const locale = useLocale();
   const button = React.useRef<HTMLDivElement>(null);
@@ -61,9 +62,11 @@ const EventCard: React.FC<Props> = ({ event }) => {
 
   return (
     <LinkBox
-      aria-label={t('eventCard.ariaLabelLink', {
-        name,
-      })}
+      aria-label={
+        t('eventCard.ariaLabelLink', {
+          name,
+        }) ?? ''
+      }
       id={getEventCardId(id)}
       data-testid={event.id}
       href={eventUrl}
@@ -87,7 +90,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
                   locale,
                   includeWeekday: false,
                   includeTime: true,
-                  timeAbbreviation: commonTranslation('timeAbbreviation'),
+                  timeAbbreviation: commonTranslation('timeAbbreviation') ?? '',
                 })}
             </div>
             <div className={styles.eventLocation}>

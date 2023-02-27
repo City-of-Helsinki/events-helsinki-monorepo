@@ -40,7 +40,9 @@ export const getAllArticles = async (
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
-      node.translations?.forEach((translation: PageType['translations']) => {
+      // TODO: fix any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      node.translations?.forEach((translation: any) => {
         if (
           translation?.uri &&
           translation.slug &&
@@ -88,7 +90,9 @@ export const getAllPages = async (
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
-      node.translations?.forEach((translation: PageType['translations']) => {
+      // TODO: fix any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      node.translations?.forEach((translation: any) => {
         if (
           translation?.uri &&
           translation.slug &&

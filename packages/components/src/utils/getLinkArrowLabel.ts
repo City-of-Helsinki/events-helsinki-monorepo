@@ -22,7 +22,7 @@ export default function getLinkArrowLabel({
           locale,
           includeWeekday: false,
           includeTime: true,
-          timeAbbreviation: commonTranslation('common:timeAbbreviation'),
+          timeAbbreviation: commonTranslation('common:timeAbbreviation') ?? '',
         })
       : '',
   });

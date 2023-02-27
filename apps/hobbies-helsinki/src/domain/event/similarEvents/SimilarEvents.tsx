@@ -83,7 +83,7 @@ const SimilarEvents: React.FC<Props> = ({
           >
             <Collection
               type={type}
-              title={t('similarEvents.title')}
+              title={t('similarEvents.title') ?? ''}
               cards={cards}
               loading={loading}
             />

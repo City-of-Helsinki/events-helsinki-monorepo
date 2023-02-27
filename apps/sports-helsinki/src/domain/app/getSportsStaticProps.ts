@@ -12,7 +12,7 @@ import {
   MenuDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
-import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
+import initializeSportsApolloClient from '../clients/sportsApolloClient';
 import AppConfig from './AppConfig';
 
 type SportsContext = {
@@ -30,7 +30,7 @@ export default async function getSportsStaticProps<P = Record<string, unknown>>(
   ) => Promise<GetStaticPropsResult<P>>
 ) {
   const language = getLanguageOrDefault(context.locale);
-  const apolloClient = initializeFederationApolloClient();
+  const apolloClient = initializeSportsApolloClient();
 
   try {
     const globalCmsData = await getGlobalCMSData({

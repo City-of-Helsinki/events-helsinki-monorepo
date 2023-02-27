@@ -4,7 +4,7 @@ import { useErrorBoundary } from 'events-helsinki-components';
 import React from 'react';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import useRHHCConfig from '../../hooks/useRHHCConfig';
-import { useApolloClient } from '../clients/eventsFederationApolloClient';
+import { useSportsApolloClient } from '../clients/sportsApolloClient';
 
 export type Props = {
   serverError: unknown;
@@ -20,7 +20,7 @@ function ApolloProvider({ children, serverError }: Props) {
     },
     [errorHandler]
   );
-  const apolloClient = useApolloClient({ handleError });
+  const apolloClient = useSportsApolloClient({ handleError });
   const rhhcConfig = useRHHCConfig({ apolloClient });
 
   return (

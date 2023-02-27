@@ -130,7 +130,7 @@ it('should filter place options', async () => {
 it('should render selected value correctly', async () => {
   // @ts-ignore
   jest
-    .spyOn(sportsApolloClient.client, 'readQuery')
+    .spyOn(sportsApolloClient, 'readQuery')
     .mockReturnValue(placeDetailsResponse);
   render(<PlaceSelector {...defaultProps} value={[placeId]} />, {
     mocks,

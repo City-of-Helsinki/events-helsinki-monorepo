@@ -3,16 +3,14 @@ import 'nprogress/nprogress.css';
 import { useErrorBoundary } from 'events-helsinki-components';
 import React from 'react';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
-import useRHHCConfig from '../../hooks/useRHHCConfig';
-import { useSportsApolloClient } from '../clients/sportsApolloClient';
+import useHobbiesRHHCConfig from '../../hooks/useHobbiesRHHCConfig';
+import { useHobbiesApolloClient } from '../clients/hobbiesApolloClient';
 
 export type Props = {
-  serverError: unknown;
   children: React.ReactNode;
 };
 
-function ApolloProvider({ children, serverError }: Props) {
-  useErrorBoundary(serverError);
+function HobbiesApolloProvider({ children }: Props) {
   const errorHandler = useErrorBoundary();
   const handleError = React.useCallback(
     (error: unknown) => {
@@ -20,8 +18,8 @@ function ApolloProvider({ children, serverError }: Props) {
     },
     [errorHandler]
   );
-  const apolloClient = useSportsApolloClient({ handleError });
-  const rhhcConfig = useRHHCConfig({ apolloClient });
+  const apolloClient = useHobbiesApolloClient({ handleError });
+  const rhhcConfig = useHobbiesRHHCConfig({ apolloClient });
 
   return (
     <BaseApolloProvider client={apolloClient}>
@@ -30,4 +28,4 @@ function ApolloProvider({ children, serverError }: Props) {
   );
 }
 
-export default ApolloProvider;
+export default HobbiesApolloProvider;

@@ -151,7 +151,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
               statusCode: 500,
             },
           },
-          revalidate: 10,
         };
       }
     }

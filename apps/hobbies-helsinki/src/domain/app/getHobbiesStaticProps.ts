@@ -28,7 +28,8 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
   context: GetStaticPropsContext,
   tryToGetPageProps: (
     hobbiesContext: HobbiesContext
-  ) => Promise<GetStaticPropsResult<P>>
+  ) => Promise<GetStaticPropsResult<P>>,
+  handleError = true
 ) {
   const language = getLanguageOrDefault(context.locale);
 
@@ -59,18 +60,19 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
   } catch (e: unknown) {
     // Generic error handling
     staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
-
-    if (isApolloError(e as Error)) {
-      return {
-        props: {
-          error: {
-            statusCode: 500,
+    if (handleError) {
+      if (isApolloError(e as Error)) {
+        return {
+          props: {
+            error: {
+              statusCode: 500,
+            },
           },
-        },
-      };
-    }
+        };
+      }
 
-    throw e;
+      throw e;
+    }
   }
 }
 

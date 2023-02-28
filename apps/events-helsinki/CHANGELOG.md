@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.5.0...events-helsinki-v0.6.0) (2023-02-28)
+
+
+### Features
+
+* Add LoaderLinkBox & LoadingWrapper common components and use them on lists & carousel ([72fb6b3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/72fb6b3ba51fff97eba019422c8b77e35a6abe69))
+* Categories shortcuts for mobile ([#222](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/222)) ([1a4457a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1a4457ad914ba55400c777a1eb2ecba073050195))
+* List styles ([#220](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/220)) ([3efcc77](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3efcc778903c326c16795a974c111f24eda3cb95))
+
+
+### Bug Fixes
+
+* Add heading stylings to the page content ([#229](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/229)) ([4a36639](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4a3663992f306fcc3486a42a21238ca68a615070))
+* Categories outline bug ([#238](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/238)) ([28ac411](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/28ac4116ca6812544f3f72dfc91c3c699ee871ed))
+* Consent cms translations to all pages ([#234](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/234)) ([5ee6b7e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5ee6b7e90aae92a4186916a9a83c95f07308817d))
+* Fix imports ([82ae303](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/82ae303baf2b0cc43325406a5847d54f004d208e))
+* Layout heights imrpovements ([#213](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/213)) ([f26248c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f26248c343c3cce9c82c4b424a8227475aabc1c6))
+* Static page generation issues with language ([a4433c5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a4433c54cfed103b554fc651612f85bb38eed274))
+
 ## [0.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.4.0...events-helsinki-v0.5.0) (2023-02-09)
 
 

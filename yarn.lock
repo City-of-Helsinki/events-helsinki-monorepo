@@ -7599,7 +7599,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/dompurify@npm:^2.4.0":
+"@types/dompurify@npm:^2.3.3":
   version: 2.4.0
   resolution: "@types/dompurify@npm:2.4.0"
   dependencies:
@@ -8207,21 +8207,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.10, @types/react-dom@npm:^18.0.0":
-  version: 18.0.10
-  resolution: "@types/react-dom@npm:18.0.10"
-  dependencies:
-    "@types/react": "npm:*"
-  checksum: 2c191e8dbe394e0690f8e5caacdb5ef710491478a95ceefc97cc8697e6e7e02c6a2fc3562b37791f92a4c08a6a82dd9dc57d42e8f98bce5f7e7110965845c068
-  languageName: node
-  linkType: hard
-
 "@types/react-dom@npm:18.0.6":
   version: 18.0.6
   resolution: "@types/react-dom@npm:18.0.6"
   dependencies:
     "@types/react": "npm:*"
   checksum: aa49049d928c14bb0268bc7acca2ff5101d9191c73fcb748c0d8a546638bc8d2ce86b32ae57260b72ce5fe4bf2c64775208cf528db1e394768ed5755e261890a
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^18.0.0":
+  version: 18.0.10
+  resolution: "@types/react-dom@npm:18.0.10"
+  dependencies:
+    "@types/react": "npm:*"
+  checksum: 2c191e8dbe394e0690f8e5caacdb5ef710491478a95ceefc97cc8697e6e7e02c6a2fc3562b37791f92a4c08a6a82dd9dc57d42e8f98bce5f7e7110965845c068
   languageName: node
   linkType: hard
 
@@ -9252,7 +9252,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"abab@npm:^2.0.6":
+"abab@npm:^2.0.5, abab@npm:^2.0.6":
   version: 2.0.6
   resolution: "abab@npm:2.0.6"
   checksum: 5ab4b2b1443ea1bfe7d71d2be099c03ddef0de4671b46fd11adc7c24bf0b6f62132fefbb2c9bfea05e56b719edad2526a6808c0328d2a952df53ac33a8675dfb
@@ -9273,6 +9273,16 @@ __metadata:
     mime-types: "npm:~2.1.34"
     negotiator: "npm:0.6.3"
   checksum: 4634cf08b9ccf6a7618a006d54b6a29c159c233eb40194e397373308244ebad0436155d0604463d401673d47c1e1f65ea1237d58cbe8ad780d01f20f61ce19f4
+  languageName: node
+  linkType: hard
+
+"acorn-globals@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "acorn-globals@npm:6.0.0"
+  dependencies:
+    acorn: "npm:^7.1.1"
+    acorn-walk: "npm:^7.1.1"
+  checksum: 8696597252e0635c3b8c5e9343c93a261e7e37ba19a56cfaf567879943e94c5e4b9068f8ce42b9518fc8c704f72ab75b002a0e562f30f6474afc93fddfca3233
   languageName: node
   linkType: hard
 
@@ -9313,7 +9323,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn-walk@npm:^7.2.0":
+"acorn-walk@npm:^7.1.1, acorn-walk@npm:^7.2.0":
   version: 7.2.0
   resolution: "acorn-walk@npm:7.2.0"
   checksum: eeb1b1caa68a6505a2c61710f2cc85a89c9d208dd25de2cc6d0a2142968d630760359336ced43f28a0bcb516af217fb997c1e74fc78fc23083b17ef8110b502d
@@ -9336,7 +9346,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^7.4.1":
+"acorn@npm:^7.1.1, acorn@npm:^7.4.1":
   version: 7.4.1
   resolution: "acorn@npm:7.4.1"
   bin:
@@ -10786,6 +10796,13 @@ __metadata:
   version: 1.2.1
   resolution: "browser-assert@npm:1.2.1"
   checksum: b7b733c982c31f666191c8e08a96f3ee7788a6a9b83c54550a6880b422e692c4295257172d5dcae759a58a88e0863f77aee4a4907f4af60c7aeda056c648e111
+  languageName: node
+  linkType: hard
+
+"browser-process-hrtime@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "browser-process-hrtime@npm:1.0.0"
+  checksum: c3c9f96ea06964e198f06edecf6c474bb0ab6279f9b0783cd9bca06b865ae9fc2dcbd30816509c732b40144f5bf7e74d21db8279b457cc2be87e5dcd41c372c7
   languageName: node
   linkType: hard
 
@@ -12938,7 +12955,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"data-urls@npm:^3.0.2":
+"data-urls@npm:^3.0.1, data-urls@npm:^3.0.2":
   version: 3.0.2
   resolution: "data-urls@npm:3.0.2"
   dependencies:
@@ -13077,7 +13094,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decimal.js@npm:^10.4.2":
+"decimal.js@npm:^10.3.1, decimal.js@npm:^10.4.2":
   version: 10.4.3
   resolution: "decimal.js@npm:10.4.3"
   checksum: 0fbf4c97adc9826a2f1cf2ae8be8cc00cca3f2b61643ee19f0dd8ee55f11385ed0111d77c8cd234e151c80da1454b20c8e61f0354e3b90b5bec3a72379359049
@@ -13563,6 +13580,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"domhandler@npm:4.3.1, domhandler@npm:^4.0.0, domhandler@npm:^4.2.0, domhandler@npm:^4.2.2, domhandler@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "domhandler@npm:4.3.1"
+  dependencies:
+    domelementtype: "npm:^2.2.0"
+  checksum: bc5b81fc04a2ebdc9ff971cec46382c00c2dfe488635f0e00b56ee18e78d3da5c0a4388cad802dbb93219e5d39efdba42107214dbea7d9db8325b8c2793cbb5a
+  languageName: node
+  linkType: hard
+
 "domhandler@npm:5.0.3, domhandler@npm:^5.0.1, domhandler@npm:^5.0.2":
   version: 5.0.3
   resolution: "domhandler@npm:5.0.3"
@@ -13572,19 +13598,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domhandler@npm:^4.0.0, domhandler@npm:^4.2.0, domhandler@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "domhandler@npm:4.3.1"
-  dependencies:
-    domelementtype: "npm:^2.2.0"
-  checksum: bc5b81fc04a2ebdc9ff971cec46382c00c2dfe488635f0e00b56ee18e78d3da5c0a4388cad802dbb93219e5d39efdba42107214dbea7d9db8325b8c2793cbb5a
-  languageName: node
-  linkType: hard
-
-"dompurify@npm:2.4.3, dompurify@npm:^2.4.3":
+"dompurify@npm:2.4.3":
   version: 2.4.3
   resolution: "dompurify@npm:2.4.3"
   checksum: cf38bac4c2487e0ba63ed5807e16c4a451571cfd55a9004940b58e9e234307448fc9db483dfd4134c6dd2cf58916fa5f8343c2e517ce44a2ed28c99340f85380
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^2.3.5":
+  version: 2.4.4
+  resolution: "dompurify@npm:2.4.4"
+  checksum: 1b995b4093517f49dedb2f12e00a563dcf4bd11cb3e5f923037bb081ff3af5a89b783d44bf6a0f305170f8e774657e6efa7f171730f466c50e79f2d80d99fc23
   languageName: node
   linkType: hard
 
@@ -13930,6 +13954,13 @@ __metadata:
   version: 2.2.0
   resolution: "entities@npm:2.2.0"
   checksum: eec79bcb8fe0e6e8c5fcd83fe87115535a4a616220db35ddec38aac360f0f19669da3150a87f2bd9fba9829cea0857c806ea216177adc3d099b143db9e89d46f
+  languageName: node
+  linkType: hard
+
+"entities@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "entities@npm:3.0.1"
+  checksum: 8c10fef51039eef30d6047ede847755a83824cd0e04cfeece5a9ac0a107f34dbed1167270f9442ba8d020a01596253279c2b14969669f6dead5f720e70ac3b0b
   languageName: node
   linkType: hard
 
@@ -15109,7 +15140,7 @@ __metadata:
     react-content-loader: "npm:6.2.0"
     react-datepicker: "npm:4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha107"
     react-i18next: "npm:12.2.0"
     react-leaflet: "npm:4.2.0"
     react-toastify: "npm:^9.0.3"
@@ -15366,7 +15397,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha107"
     react-i18next: "npm:11.18.6"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -17526,7 +17557,7 @@ __metadata:
     "@types/nprogress": "npm:^0.2.0"
     "@types/react": "npm:18.0.21"
     "@types/react-datepicker": "npm:^4.4.2"
-    "@types/react-dom": "npm:18.0.10"
+    "@types/react-dom": "npm:18.0.6"
     "@types/react-helmet": "npm:^6.1.5"
     "@types/react-scroll": "npm:^1.8.3"
     "@types/sanitize-html": "npm:^2.6.2"
@@ -17588,11 +17619,11 @@ __metadata:
     postcss-preset-env: "npm:7.8.2"
     prettier: "npm:2.7.1"
     query-string: "npm:^7.1.1"
-    react: "npm:18.2.0"
+    react: "npm:^18.2.0"
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha107"
     react-i18next: "npm:12.2.0"
     react-scroll: "npm:^1.8.7"
     react-toastify: "npm:^9.0.3"
@@ -17633,6 +17664,16 @@ __metadata:
   dependencies:
     lru-cache: "npm:^6.0.0"
   checksum: d47495db8d2a39faef6cd1adbdced4e6a52d41a4aedec757eb2552e93a881236e431e18e72a3b6d7aa7c575995f5b06b91cce5a86886fdccfbd405df28a61882
+  languageName: node
+  linkType: hard
+
+"html-dom-parser@npm:1.2.0":
+  version: 1.2.0
+  resolution: "html-dom-parser@npm:1.2.0"
+  dependencies:
+    domhandler: "npm:4.3.1"
+    htmlparser2: "npm:7.2.0"
+  checksum: 61816e58050836911b0fee715e1b018e0bba35b9ce739f99e66cf85317eb1c5e3b7e22fa99250a776bc5964ffe40334034127ae67e951fbe4b16614412eeb7e9
   languageName: node
   linkType: hard
 
@@ -17726,17 +17767,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-react-parser@npm:^3.0.8":
-  version: 3.0.9
-  resolution: "html-react-parser@npm:3.0.9"
+"html-react-parser@npm:^1.4.8":
+  version: 1.4.14
+  resolution: "html-react-parser@npm:1.4.14"
   dependencies:
-    domhandler: "npm:5.0.3"
-    html-dom-parser: "npm:3.1.3"
+    domhandler: "npm:4.3.1"
+    html-dom-parser: "npm:1.2.0"
     react-property: "npm:2.0.0"
-    style-to-js: "npm:1.1.3"
+    style-to-js: "npm:1.1.1"
   peerDependencies:
     react: 0.14 || 15 || 16 || 17 || 18
-  checksum: 41614c9e7d56a136447be62ba4fca57e0f76838f0a0fb372a8b4590bf51b44b86dc5110333c126a0345336c2d4a462d3581ff942ce249267870318af2822edd0
+  checksum: cd6cc66e9ec00c0e21a59d6facd8bc492ac2dd47f1acfd75aab193c2ffe0c926f760e64673b68fe3e9261c881b3e054725451d36021203656945b0191dc00744
   languageName: node
   linkType: hard
 
@@ -17785,6 +17826,18 @@ __metadata:
   peerDependencies:
     webpack: ^5.20.0
   checksum: db6ef21fecba23a0565d9f62a675f940080e6f1d4053578164b5f1b029273b2bbba117f2d2def1a80fae083720217f4d9222091b44955833f93b904552f230a8
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:7.2.0":
+  version: 7.2.0
+  resolution: "htmlparser2@npm:7.2.0"
+  dependencies:
+    domelementtype: "npm:^2.0.1"
+    domhandler: "npm:^4.2.2"
+    domutils: "npm:^2.8.0"
+    entities: "npm:^3.0.1"
+  checksum: 970f558e1bf5f983eb7dbf4dcc4035382741519403676fc6730ad53380a1146e80117e2a1a66ca6195bc52f01da0ceafd2da091750d480ab25a88e73693075ee
   languageName: node
   linkType: hard
 
@@ -19295,14 +19348,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"isomorphic-dompurify@npm:^0.27.0":
-  version: 0.27.0
-  resolution: "isomorphic-dompurify@npm:0.27.0"
+"isomorphic-dompurify@npm:^0.18.0":
+  version: 0.18.0
+  resolution: "isomorphic-dompurify@npm:0.18.0"
   dependencies:
-    "@types/dompurify": "npm:^2.4.0"
-    dompurify: "npm:^2.4.3"
-    jsdom: "npm:^21.1.0"
-  checksum: 57242ba315ee367e7fbea4b4caf0754ae62048527d5caa23f349d827024429bfcaef243c12ab7fa403e6d2bd0818af069ac2c53c370131864ab9f19d077c565f
+    "@types/dompurify": "npm:^2.3.3"
+    dompurify: "npm:^2.3.5"
+    jsdom: "npm:^19.0.0"
+  checksum: cc0c6bbaa229a45756994a34ba3f87af8aae4a58e9f0e014597a176434d530f7ecb2a563cd0526c0c0f062cfa763e94d4960b773928d71fca63191c469e6840e
   languageName: node
   linkType: hard
 
@@ -20547,7 +20600,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:21.1.0, jsdom@npm:^21.1.0":
+"jsdom@npm:21.1.0":
   version: 21.1.0
   resolution: "jsdom@npm:21.1.0"
   dependencies:
@@ -20583,6 +20636,46 @@ __metadata:
     canvas:
       optional: true
   checksum: aa02e69560fcee20f7af889988dff302c65e43846f38f5892c0982e51209a8ad16514635996fde6df2bda781f7f6b110c6a9480c0d9cbe5084d1eeb407171552
+  languageName: node
+  linkType: hard
+
+"jsdom@npm:^19.0.0":
+  version: 19.0.0
+  resolution: "jsdom@npm:19.0.0"
+  dependencies:
+    abab: "npm:^2.0.5"
+    acorn: "npm:^8.5.0"
+    acorn-globals: "npm:^6.0.0"
+    cssom: "npm:^0.5.0"
+    cssstyle: "npm:^2.3.0"
+    data-urls: "npm:^3.0.1"
+    decimal.js: "npm:^10.3.1"
+    domexception: "npm:^4.0.0"
+    escodegen: "npm:^2.0.0"
+    form-data: "npm:^4.0.0"
+    html-encoding-sniffer: "npm:^3.0.0"
+    http-proxy-agent: "npm:^5.0.0"
+    https-proxy-agent: "npm:^5.0.0"
+    is-potential-custom-element-name: "npm:^1.0.1"
+    nwsapi: "npm:^2.2.0"
+    parse5: "npm:6.0.1"
+    saxes: "npm:^5.0.1"
+    symbol-tree: "npm:^3.2.4"
+    tough-cookie: "npm:^4.0.0"
+    w3c-hr-time: "npm:^1.0.2"
+    w3c-xmlserializer: "npm:^3.0.0"
+    webidl-conversions: "npm:^7.0.0"
+    whatwg-encoding: "npm:^2.0.0"
+    whatwg-mimetype: "npm:^3.0.0"
+    whatwg-url: "npm:^10.0.0"
+    ws: "npm:^8.2.3"
+    xml-name-validator: "npm:^4.0.0"
+  peerDependencies:
+    canvas: ^2.5.0
+  peerDependenciesMeta:
+    canvas:
+      optional: true
+  checksum: 0eae85a1a724ea5b56dd7ba363f16b4c65e0d94649b7041cddf6ac191aa965107d8c754ed993921d24a9be6f602cf23ba15bfa58db6944863a04aa28412722ae
   languageName: node
   linkType: hard
 
@@ -23317,7 +23410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nwsapi@npm:^2.2.2":
+"nwsapi@npm:^2.2.0, nwsapi@npm:^2.2.2":
   version: 2.2.2
   resolution: "nwsapi@npm:2.2.2"
   checksum: f514c3560220d75e2d1199623415440bcee9ab86ffbb08eaccb9cadc40f0b5e13d893b57132f48e1af0e765c255325196fc3f7cc039213bcce6b895d102bbc7f
@@ -23957,17 +24050,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"parse5@npm:6.0.1, parse5@npm:^6.0.0":
+  version: 6.0.1
+  resolution: "parse5@npm:6.0.1"
+  checksum: fc646cd35285973de9322a034872c145bb8c07559bd0fa46e9c133567978622f3fe3977794b6e31089b3b6692284b2a3b8fb3fc547b9b21ef059fd20cac72982
+  languageName: node
+  linkType: hard
+
 "parse5@npm:^1.5.0":
   version: 1.5.1
   resolution: "parse5@npm:1.5.1"
   checksum: f4bd3e385be54ec6b0fd28285feec97d32bff09e4862015dfbb06e8b95c344523f79c4c9ac1894f16d308d94c3926d5a88c7ea18e727042b41188888a9a45106
-  languageName: node
-  linkType: hard
-
-"parse5@npm:^6.0.0":
-  version: 6.0.1
-  resolution: "parse5@npm:6.0.1"
-  checksum: fc646cd35285973de9322a034872c145bb8c07559bd0fa46e9c133567978622f3fe3977794b6e31089b3b6692284b2a3b8fb3fc547b9b21ef059fd20cac72982
   languageName: node
   linkType: hard
 
@@ -26032,83 +26125,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist::locator=events-helsinki%40workspace%3Aapps%2Fevents-helsinki":
-  version: 1.0.0-alpha105
-  resolution: "react-helsinki-headless-cms@file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist#/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist::hash=127181&locator=events-helsinki%40workspace%3Aapps%2Fevents-helsinki"
+"react-helsinki-headless-cms@npm:1.0.0-alpha107":
+  version: 1.0.0-alpha107
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha107"
   dependencies:
     hds-design-tokens: "npm:^2.3.0"
-    html-react-parser: "npm:^3.0.8"
-    isomorphic-dompurify: "npm:^0.27.0"
+    html-react-parser: "npm:^1.4.8"
+    isomorphic-dompurify: "npm:^0.18.0"
   peerDependencies:
-    "@apollo/client": ^3.6.9
+    "@apollo/client": ^3.5.10
     date-fns: ^2.28.0
     hds-react: ">=1.11.1"
-    react: ">=18.2.0"
-    react-dom: ">=18.2.0"
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 9c73421a6a54d1e35524af9c930ae99cc095bb5ff9bacbfc4b2d10dd0de06f94383f7518c7d068e53d618e75986f80ba13303f27908199abcabf0fa47d1c1dca
-  languageName: node
-  linkType: hard
-
-"react-helsinki-headless-cms@file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist::locator=events-helsinki-components%40workspace%3Apackages%2Fcomponents":
-  version: 1.0.0-alpha105
-  resolution: "react-helsinki-headless-cms@file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist#/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist::hash=127181&locator=events-helsinki-components%40workspace%3Apackages%2Fcomponents"
-  dependencies:
-    hds-design-tokens: "npm:^2.3.0"
-    html-react-parser: "npm:^3.0.8"
-    isomorphic-dompurify: "npm:^0.27.0"
-  peerDependencies:
-    "@apollo/client": ^3.6.9
-    date-fns: ^2.28.0
-    hds-react: ">=1.11.1"
-    react: ">=18.2.0"
-    react-dom: ">=18.2.0"
-  peerDependenciesMeta:
-    "@apollo/client":
-      optional: true
-  checksum: 9c73421a6a54d1e35524af9c930ae99cc095bb5ff9bacbfc4b2d10dd0de06f94383f7518c7d068e53d618e75986f80ba13303f27908199abcabf0fa47d1c1dca
-  languageName: node
-  linkType: hard
-
-"react-helsinki-headless-cms@file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist::locator=hobbies-helsinki%40workspace%3Aapps%2Fhobbies-helsinki":
-  version: 1.0.0-alpha105
-  resolution: "react-helsinki-headless-cms@file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist#/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist::hash=127181&locator=hobbies-helsinki%40workspace%3Aapps%2Fhobbies-helsinki"
-  dependencies:
-    hds-design-tokens: "npm:^2.3.0"
-    html-react-parser: "npm:^3.0.8"
-    isomorphic-dompurify: "npm:^0.27.0"
-  peerDependencies:
-    "@apollo/client": ^3.6.9
-    date-fns: ^2.28.0
-    hds-react: ">=1.11.1"
-    react: ">=18.2.0"
-    react-dom: ">=18.2.0"
-  peerDependenciesMeta:
-    "@apollo/client":
-      optional: true
-  checksum: 9c73421a6a54d1e35524af9c930ae99cc095bb5ff9bacbfc4b2d10dd0de06f94383f7518c7d068e53d618e75986f80ba13303f27908199abcabf0fa47d1c1dca
-  languageName: node
-  linkType: hard
-
-"react-helsinki-headless-cms@file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist::locator=sports-helsinki%40workspace%3Aapps%2Fsports-helsinki":
-  version: 1.0.0-alpha105
-  resolution: "react-helsinki-headless-cms@file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist#/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist::hash=127181&locator=sports-helsinki%40workspace%3Aapps%2Fsports-helsinki"
-  dependencies:
-    hds-design-tokens: "npm:^2.3.0"
-    html-react-parser: "npm:^3.0.8"
-    isomorphic-dompurify: "npm:^0.27.0"
-  peerDependencies:
-    "@apollo/client": ^3.6.9
-    date-fns: ^2.28.0
-    hds-react: ">=1.11.1"
-    react: ">=18.2.0"
-    react-dom: ">=18.2.0"
-  peerDependenciesMeta:
-    "@apollo/client":
-      optional: true
-  checksum: 9c73421a6a54d1e35524af9c930ae99cc095bb5ff9bacbfc4b2d10dd0de06f94383f7518c7d068e53d618e75986f80ba13303f27908199abcabf0fa47d1c1dca
+  checksum: 42f689abc13c091cf9dc0e0ad3cf8792d69d18c1433018fab62bd07620f2a0c68f49f6ecd48e573f61ed6e6d262d2488eb4c010102888f04eafc01afb8ccfc20
   languageName: node
   linkType: hard
 
@@ -27570,6 +27603,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"saxes@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "saxes@npm:5.0.1"
+  dependencies:
+    xmlchars: "npm:^2.2.0"
+  checksum: a156e1d2bf30bd225d369f69366d97f5f8f0b3a996074beb911b1399083b0a9149af0a6d807ab4adf868ab3e6c859c100ee8aa151cff1be62cdf8e3675828997
+  languageName: node
+  linkType: hard
+
 "saxes@npm:^6.0.0":
   version: 6.0.0
   resolution: "saxes@npm:6.0.0"
@@ -28541,7 +28583,7 @@ __metadata:
     react-content-loader: "npm:^6.2.0"
     react-datepicker: "npm:^4.8.0"
     react-dom: "npm:18.2.0"
-    react-helsinki-headless-cms: "file:/Users/kristianjokela/Documents/helsinki/react-helsinki-headless-cms/dist"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha107"
     react-i18next: "npm:11.18.6"
     react-leaflet: "npm:4.2.0"
     react-scroll: "npm:^1.8.7"
@@ -29122,6 +29164,15 @@ __metadata:
   version: 0.1.0
   resolution: "style-search@npm:0.1.0"
   checksum: 3a386d124636b515e361f80f47805befea79127206cfd6f1724c573bcb61cb5e7f02ebcd81975f164e0c93ed8ee33030b95ac22b55fc1c073ba19f3890b9983c
+  languageName: node
+  linkType: hard
+
+"style-to-js@npm:1.1.1":
+  version: 1.1.1
+  resolution: "style-to-js@npm:1.1.1"
+  dependencies:
+    style-to-object: "npm:0.3.0"
+  checksum: e5a8858c2be7f7427943b7611b9c4e86303b426b4864c5e2f72b7fcf0730a77ee11974e0083c335be7fba6a1775e5b6afe061985514184e92ac8d482fd29a829
   languageName: node
   linkType: hard
 
@@ -30209,7 +30260,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tough-cookie@npm:^4.1.2":
+"tough-cookie@npm:^4.0.0, tough-cookie@npm:^4.1.2":
   version: 4.1.2
   resolution: "tough-cookie@npm:4.1.2"
   dependencies:
@@ -31469,6 +31520,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"w3c-hr-time@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "w3c-hr-time@npm:1.0.2"
+  dependencies:
+    browser-process-hrtime: "npm:^1.0.0"
+  checksum: c1c1c80ff67e23838496610efb64630760adbf18a522938c458ef7673d762cbcd7400483acc6289d55fc73af3016648b44921e816d00be4e2963c8a37bc426a0
+  languageName: node
+  linkType: hard
+
+"w3c-xmlserializer@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "w3c-xmlserializer@npm:3.0.0"
+  dependencies:
+    xml-name-validator: "npm:^4.0.0"
+  checksum: 5042d7d56be21e7a8ac1f6dc60a559967db5cb2cc59321138571a6425569e3f84c1c02dace1ffc569510ec3f4046d74f5b9ecb783f25e5ff89e558b3677fdb7b
+  languageName: node
+  linkType: hard
+
 "w3c-xmlserializer@npm:^4.0.0":
   version: 4.0.0
   resolution: "w3c-xmlserializer@npm:4.0.0"
@@ -31909,6 +31978,16 @@ __metadata:
   version: 3.0.0
   resolution: "whatwg-mimetype@npm:3.0.0"
   checksum: 33547e612ad03bb53d9d3548ae67cf98720d1c54a00b713d204de678609fcd95c2eff6b95d2f01369b736af9d1219ac0da71e4d67988244dd67afa1729373638
+  languageName: node
+  linkType: hard
+
+"whatwg-url@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "whatwg-url@npm:10.0.0"
+  dependencies:
+    tr46: "npm:^3.0.0"
+    webidl-conversions: "npm:^7.0.0"
+  checksum: 1cda2381590f0033614e24a8ee623496c781f5221ac1dc108a23d4606690003683a34c939eb58595622fddd5845f608024a00c72c75eeaeaef0f57b687ba199e
   languageName: node
   linkType: hard
 

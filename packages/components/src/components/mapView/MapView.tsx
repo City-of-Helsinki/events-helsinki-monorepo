@@ -128,7 +128,7 @@ function MapView({ items = [], center, zoom, focusedItemId }: Props) {
     <div
       aria-hidden={false}
       tabIndex={-1}
-      aria-label={t('search:mapAccessibilityStatement')}
+      aria-label={t<string>('search:mapAccessibilityStatement')}
       className={styles.mapView}
     >
       <MapContainer

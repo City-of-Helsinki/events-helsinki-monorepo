@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.4.0...sports-helsinki-v0.4.1) (2023-03-01)
+
+
+### Bug Fixes
+
+* Add heading stylings to the page content ([#229](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/229)) ([4a36639](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4a3663992f306fcc3486a42a21238ca68a615070))
+* Categories outline bug ([#238](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/238)) ([28ac411](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/28ac4116ca6812544f3f72dfc91c3c699ee871ed))
+* Consent cms translations to all pages ([#234](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/234)) ([5ee6b7e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5ee6b7e90aae92a4186916a9a83c95f07308817d))
+* Static page generation issues with language ([a4433c5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a4433c54cfed103b554fc651612f85bb38eed274))
+
 ## [0.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.3.0...sports-helsinki-v0.4.0) (2023-02-17)
 
 

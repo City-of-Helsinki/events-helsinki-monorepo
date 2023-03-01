@@ -19,3 +19,6 @@ export const eventTypeToId: Record<EventType, EventTypeId> = {
   event: EventTypeId.General,
   course: EventTypeId.Course,
 };
+
+export const isEventTypeId = (value: unknown): value is EventTypeId =>
+  Object.values(EventTypeId).includes(value as EventTypeId);

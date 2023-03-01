@@ -285,14 +285,98 @@ it('should hide audience age info on single event page if min and max ages are n
 });
 
 describe('OrganizationInfo', () => {
-  it('should show event type related providers link text in events info', async () => {
-    render(<EventInfo event={event} />, { mocks });
-    await waitFor(() => {
-      expect(
-        screen.getByText('Katso julkaisijan muut harrastukset')
-      ).toBeInTheDocument();
-    });
-  });
+  it.each([
+    {
+      // Without searchType in route should use event as fallback
+      route: '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest',
+      expectedLinkText: 'Katso julkaisijan muut tapahtumat',
+    },
+    {
+      route:
+        '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest%26searchType%3DGeneral',
+      expectedLinkText: 'Katso julkaisijan muut tapahtumat',
+    },
+    {
+      route:
+        '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest%26searchType%3DCourse',
+      expectedLinkText: 'Katso julkaisijan muut harrastukset',
+    },
+  ])(
+    'should show correct provider link text on event/hobby detail page',
+    async ({ route, expectedLinkText }) => {
+      render(<EventInfo event={event} />, {
+        mocks,
+        routes: [route],
+      });
+      await waitFor(() => {
+        expect(screen.getByText(expectedLinkText)).toBeInTheDocument();
+      });
+    }
+  );
+
+  it.each([
+    {
+      // Without searchType in route should use event as fallback
+      route: '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest',
+      expectedSearchType: EventTypeId.General,
+    },
+    {
+      route:
+        '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest%26searchType%3DGeneral',
+      expectedSearchType: EventTypeId.General,
+    },
+    {
+      route:
+        '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest%26searchType%3DCourse',
+      expectedSearchType: EventTypeId.Course,
+    },
+  ])(
+    'should show correct provider link on event/hobby detail page',
+    async ({ route, expectedSearchType }) => {
+      render(<EventInfo event={event} />, {
+        mocks,
+        routes: [route],
+      });
+      const getPublisherLink = () => {
+        const publisherLinkElement: HTMLElement =
+          screen.getByTestId('publisherLink');
+        return publisherLinkElement instanceof HTMLAnchorElement
+          ? {
+              pathname: publisherLinkElement.pathname,
+              searchParams: new URLSearchParams(publisherLinkElement.search),
+            }
+          : null;
+      };
+      await waitFor(() => {
+        expect(getPublisherLink()?.pathname).toBe('/haku');
+      });
+      await waitFor(() => {
+        expect(
+          getPublisherLink()?.searchParams.getAll('publisher').length
+        ).toBe(1);
+      });
+      await waitFor(() => {
+        expect(
+          getPublisherLink()?.searchParams.getAll('searchType').length
+        ).toBe(1);
+      });
+      await waitFor(() => {
+        expect(getPublisherLink()?.searchParams.get('publisher')).toBe(
+          event.publisher
+        );
+      });
+      await waitFor(() => {
+        expect(getPublisherLink()?.searchParams.get('searchType')).toBe(
+          expectedSearchType
+        );
+      });
+      await waitFor(() => {
+        expect(
+          [...(getPublisherLink()?.searchParams.keys() ?? [])].sort()
+        ).toStrictEqual(['publisher', 'searchType']);
+      });
+    }
+  );
 });
 
 describe('superEvent', () => {

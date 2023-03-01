@@ -51,7 +51,7 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
                     locale
                   )}?publisher=${publisher}`}
                 >
-                  {t('info.linkSearchByPublisher')}
+                  {t('info.linkSearchByPublisher.course')}
                 </SecondaryLink>
               </>
             )}

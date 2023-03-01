@@ -55,7 +55,10 @@
     "labelOtherInfo": "Muut tiedot",
     "labelPrice": "Hinta",
     "labelPublisher": "Julkaisijan tiedot",
-    "linkSearchByPublisher": "Katso julkaisijan muut harrastukset",
+    "linkSearchByPublisher": {
+      "general": "Katso julkaisijan muut tapahtumat",
+      "course": "Katso julkaisijan muut harrastukset"
+    },
     "linkWebPage": "Verkkosivu",
     "offers": {
       "isFree": "Maksuton"

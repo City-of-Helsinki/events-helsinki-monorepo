@@ -12,7 +12,6 @@ import {
   ArrowRightWithLoadingIndicator,
   useClickCapture,
 } from 'events-helsinki-components';
-import { IconArrowRight } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';

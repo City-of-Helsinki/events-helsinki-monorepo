@@ -55,7 +55,10 @@
     "labelOtherInfo": "Övrig information",
     "labelPrice": "Pris",
     "labelPublisher": "Utgivare",
-    "linkSearchByPublisher": "Se utgivarens övriga hobbyer",
+    "linkSearchByPublisher": {
+      "general": "Se utgivarens övriga evenemang",
+      "course": "Se utgivarens övriga hobbyer"
+    },
     "linkWebPage": "Webbsida",
     "offers": {
       "isFree": "Gratis"

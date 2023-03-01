@@ -55,7 +55,10 @@
     "labelOtherInfo": "Other information",
     "labelPrice": "Price",
     "labelPublisher": "Publisher information",
-    "linkSearchByPublisher": "See other hobbies by publisher",
+    "linkSearchByPublisher": {
+      "general": "See other events by publisher",
+      "course": "See other hobbies by publisher"
+    },
     "linkWebPage": "Web page",
     "offers": {
       "isFree": "Free"

@@ -289,7 +289,7 @@ describe('OrganizationInfo', () => {
     render(<EventInfo event={event} />, { mocks });
     await waitFor(() => {
       expect(
-        screen.getByText('Katso julkaisijan muut harrastukset')
+        screen.getByText('Katso julkaisijan muut tapahtumat')
       ).toBeInTheDocument();
     });
   });

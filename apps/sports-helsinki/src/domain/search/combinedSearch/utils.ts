@@ -12,6 +12,7 @@
  */
 export const TRANSFORM_MAP = new Map<string, string>([
   ['q', 'text'],
+  ['publisher', 'publisher'],
   ['sportsCategories', 'sportsCategories'],
 ]);
 

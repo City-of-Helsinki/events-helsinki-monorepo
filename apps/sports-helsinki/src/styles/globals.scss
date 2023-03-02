@@ -73,8 +73,8 @@ button {
 
 .page h1,
 .article-page header > h1 {
-  font-size: var(--fontsize-heading-xl);
+  font-size: var(--fontsize-heading-xl) !important;
   @include respond_below(s) {
-    font-size: var(--fontsize-heading-xl-mobile);
+    font-size: var(--fontsize-heading-xl-mobile) !important;
   }
 }

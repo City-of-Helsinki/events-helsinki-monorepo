@@ -8,7 +8,6 @@ import {
   isEventClosed,
   EventDetailsDocument,
   MAIN_CONTENT_ID,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import type {
   SuperEventResponse,
@@ -63,7 +62,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
 
   const [hasSimilarEvents, setHasSimilarEvents] = useState(false);
 
-  const [superEventSearch, { data: superEventData, error }] = useLazyQuery(
+  const [superEventSearch, { data: superEventData }] = useLazyQuery(
     EventDetailsDocument,
     {
       variables: {
@@ -72,7 +71,6 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
       },
     }
   );
-  useErrorBoundary(error);
   React.useEffect(() => {
     if (superEventId) {
       superEventSearch();

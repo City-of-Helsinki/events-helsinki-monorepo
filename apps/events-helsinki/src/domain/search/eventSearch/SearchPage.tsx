@@ -12,7 +12,6 @@ import {
   EventsOrderBySelect,
   DEFAULT_EVENT_SORT_OPTION,
   isEventSortOption,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
@@ -65,12 +64,10 @@ const SearchPage: React.FC<{
     data: eventsData,
     fetchMore,
     loading: isLoadingEvents,
-    error,
   } = useEventListQuery({
     ssr: false,
     variables: eventFilters,
   });
-  useErrorBoundary(error);
   const eventsList = eventsData?.eventList;
 
   const handleLoadMore = async () => {

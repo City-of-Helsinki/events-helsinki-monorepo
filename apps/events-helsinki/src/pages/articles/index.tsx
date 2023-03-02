@@ -11,7 +11,6 @@ import {
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
@@ -64,7 +63,6 @@ export default function ArticleArchive({
     fetchMore,
     loading: loadingArticles,
     networkStatus,
-    error: articlesError,
   } = usePostsQuery({
     notifyOnNetworkStatusChange: true,
     variables: {
@@ -74,18 +72,13 @@ export default function ArticleArchive({
       categories: searchCategories,
     },
   });
-  useErrorBoundary(articlesError);
-  const {
-    data: categoriesData,
-    loading: loadingCategories,
-    error: categoriesError,
-  } = useCategoriesQuery({
-    variables: {
-      first: CATEGORIES_AMOUNT,
-      language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
-    },
-  });
-  useErrorBoundary(categoriesError);
+  const { data: categoriesData, loading: loadingCategories } =
+    useCategoriesQuery({
+      variables: {
+        first: CATEGORIES_AMOUNT,
+        language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
+      },
+    });
   const isLoading =
     (loadingArticles && networkStatus !== NetworkStatus.fetchMore) ||
     loadingCategories;

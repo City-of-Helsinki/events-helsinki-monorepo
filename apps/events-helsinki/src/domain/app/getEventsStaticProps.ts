@@ -12,7 +12,7 @@ import {
   MenuDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
-import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
+import initializeEventsApolloClient from '../clients/eventsApolloClient';
 import AppConfig from './AppConfig';
 
 type EventsContext = {
@@ -28,10 +28,11 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
   context: GetStaticPropsContext,
   tryToGetPageProps: (
     eventsContext: EventsContext
-  ) => Promise<GetStaticPropsResult<P>>
+  ) => Promise<GetStaticPropsResult<P>>,
+  handleError = true
 ) {
   const language = getLanguageOrDefault(context.locale);
-  const apolloClient = initializeFederationApolloClient();
+  const apolloClient = initializeEventsApolloClient();
 
   try {
     const globalCmsData = await getGlobalCMSData({
@@ -58,18 +59,21 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
   } catch (e: unknown) {
     // Generic error handling
     staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
-    if (isApolloError(e as Error)) {
-      return {
-        props: {
-          error: {
-            statusCode: 500,
+    if (handleError) {
+      if (isApolloError(e as Error)) {
+        return {
+          props: {
+            error: {
+              statusCode: 500,
+            },
           },
-        },
-      };
+        };
+      }
+      throw e;
     }
-
-    throw e;
   }
+  // to avoid "Did you forget to add a `return`" -error
+  return { props: {} };
 }
 
 type GetGlobalCMSDataParams = {

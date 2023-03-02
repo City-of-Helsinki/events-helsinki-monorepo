@@ -37,7 +37,7 @@ import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
+import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsPage: NextPage<{
@@ -77,7 +77,7 @@ const NextCmsPage: NextPage<{
 export async function getStaticPaths() {
   // NOTE: It might not be a good thing to use ApolloClient here,
   // since then the build process depends on external service.
-  const pagePageInfos = await getAllPages(apolloClient);
+  const pagePageInfos = await getAllPages(eventsApolloClient);
   const paths = pagePageInfos
     .map((pageInfo) => ({
       params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
@@ -148,7 +148,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
-  const { data: pageData } = await apolloClient.query<
+  const { data: pageData } = await eventsApolloClient.query<
     PageQuery,
     PageQueryVariables
   >({
@@ -166,7 +166,7 @@ const getProps = async (context: GetStaticPropsContext) => {
   //   (context.params?.slug ?? []) as string[]
   // );
 
-  return { currentPage, breadcrumbs: [], apolloClient };
+  return { currentPage, breadcrumbs: [], apolloClient: eventsApolloClient };
 };
 
 /**

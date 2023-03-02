@@ -12,7 +12,6 @@ import {
   NavigationProvider,
   GeolocationProvider,
 } from 'events-helsinki-components';
-import { LoadingSpinner } from 'hds-react';
 import type { AppProps as NextAppProps } from 'next/app';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';

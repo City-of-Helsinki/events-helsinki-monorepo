@@ -8,9 +8,7 @@ import type { ReactElement } from 'react';
 import React from 'react';
 import wait from 'waait';
 
-import initializeSportsApolloClient, {
-  sportsApolloClient,
-} from '../../src/domain/clients/sportsApolloClient';
+import { sportsApolloClient } from '../../src/domain/clients/sportsApolloClient';
 import TestProviders from './TestProviders';
 
 type CustomRender = {

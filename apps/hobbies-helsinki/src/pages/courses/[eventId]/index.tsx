@@ -71,7 +71,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     if (!eventData) {
       return {
         notFound: true,
-        revalidate: true,
       };
     }
     const event = eventData?.eventDetails;

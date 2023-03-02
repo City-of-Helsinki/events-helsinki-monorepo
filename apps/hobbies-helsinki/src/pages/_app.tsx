@@ -76,7 +76,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
                 <Component {...pageProps} />
                 <EventsCookieConsent
                   allowLanguageSwitch={false}
-                  appName={t('appSports:appName')}
+                  appName={t('appHobbies:appName')}
                 />
                 <ToastContainer />
               </NavigationProvider>

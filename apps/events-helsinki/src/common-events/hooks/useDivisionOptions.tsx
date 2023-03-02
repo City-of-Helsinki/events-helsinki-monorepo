@@ -3,7 +3,6 @@ import {
   useLocale,
   useNeighborhoodListQuery,
   additionalDivisions,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import type { Neighborhood } from 'events-helsinki-components';
 import sortBy from 'lodash/sortBy';
@@ -20,8 +19,7 @@ type DivisionOption = {
 
 const useDivisionOptions = (): DivisionOption[] => {
   const locale = useLocale();
-  const { data: neighborhoodsData, error } = useNeighborhoodListQuery();
-  useErrorBoundary(error);
+  const { data: neighborhoodsData } = useNeighborhoodListQuery();
   const filteredNeighborhoodList = getFilteredNeighborhoodList(
     neighborhoodsData?.neighborhoodList.data
   );

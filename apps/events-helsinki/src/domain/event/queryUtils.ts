@@ -8,7 +8,6 @@ import {
   getEventIdFromUrl,
   SIMILAR_EVENTS_AMOUNT,
   EVENT_SORT_OPTIONS,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -91,15 +90,10 @@ export const useSimilarEventsQuery = (
   event: EventFields
 ): { loading: boolean; data: EventListQuery['eventList']['data'] } => {
   const eventFilters = useSimilarEventsQueryVariables(event);
-  const {
-    data: eventsData,
-    loading,
-    error,
-  } = useEventListQuery({
+  const { data: eventsData, loading } = useEventListQuery({
     ssr: false,
     variables: eventFilters,
   });
-  useErrorBoundary(error);
   const data = _filterSimilarEvents(event, eventsData?.eventList?.data || []);
   return { data, loading };
 };
@@ -152,13 +146,11 @@ export const useSubEvents = (
     data: subEventsData,
     fetchMore,
     loading,
-    error,
   } = useEventListQuery({
     skip: !superEventId,
     ssr: false,
     variables,
   });
-  useErrorBoundary(error);
   const handleLoadMore = React.useCallback(
     async (page: number) => {
       setIsFetchingMore(true);

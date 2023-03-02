@@ -10,7 +10,6 @@ import {
   useDropdownKeyboardNavigation,
   getLocalizedString,
   useKeywordListQuery,
-  useErrorBoundary,
 } from 'events-helsinki-components';
 import { IconSearch } from 'hds-react';
 import type { ChangeEvent } from 'react';
@@ -41,11 +40,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
   const [isAutosugestFocused, setIsAutosugestFocused] = React.useState(false);
   const internalInputValue = useDebounce(searchValue, 300);
 
-  const {
-    data: keywordsData,
-    loading: loadingKeywords,
-    error,
-  } = useKeywordListQuery({
+  const { data: keywordsData, loading: loadingKeywords } = useKeywordListQuery({
     skip: !internalInputValue,
     variables: {
       hasUpcomingEvents: true,
@@ -53,7 +48,6 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
       text: internalInputValue,
     },
   });
-  useErrorBoundary(error);
 
   const [autoSuggestItems, setAutoSuggestItems] = React.useState<
     AutosuggestMenuOption[]

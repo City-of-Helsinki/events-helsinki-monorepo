@@ -10,6 +10,7 @@ import { capitalize } from 'lodash';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import { PARAM_SEARCH_TYPE } from 'domain/search/combinedSearch/constants';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 
@@ -60,6 +61,7 @@ const VenueKeywords: React.FC<Props> = ({
     () => {
       const search = buildQueryFromObject({
         q: type === 'text' ? [value] : [],
+        [PARAM_SEARCH_TYPE]: 'Venue',
       });
 
       router.push(

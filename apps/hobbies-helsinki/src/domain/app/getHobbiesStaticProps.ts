@@ -12,7 +12,7 @@ import {
   MenuDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
-import { hobbiesApolloClient } from '../clients/hobbiesApolloClient';
+import initializeHobbiesApolloClient from '../clients/hobbiesApolloClient';
 import AppConfig from './AppConfig';
 
 type HobbiesContext = {
@@ -31,20 +31,20 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
   ) => Promise<GetStaticPropsResult<P>>,
   handleError = true
 ) {
-  const language = getLanguageOrDefault(context.locale);
-
   try {
+    const language = getLanguageOrDefault(context.locale);
+    const apolloClient = initializeHobbiesApolloClient();
     const globalCmsData = await getGlobalCMSData({
-      client: hobbiesApolloClient,
+      client: apolloClient,
       context,
     });
     const result = await tryToGetPageProps({
-      apolloClient: hobbiesApolloClient,
+      apolloClient: apolloClient,
     });
     const props =
       'props' in result
         ? {
-            initialApolloState: hobbiesApolloClient.cache.extract(),
+            initialApolloState: apolloClient.cache.extract(),
             locale: language,
             ...globalCmsData,
             ...result.props,
@@ -53,7 +53,7 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
 
     return {
       // Apply revalidate, allow it to be overwritten
-      revalidate: AppConfig.defaultRevalidate,
+      revalidate: handleError ? AppConfig.defaultRevalidate : Infinity,
       ...result,
       props,
     };
@@ -70,10 +70,11 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
           },
         };
       }
-
       throw e;
     }
   }
+  // to avoid "Did you forget to add a `return`" -error
+  return { props: {} };
 }
 
 type GetGlobalCMSDataParams = {

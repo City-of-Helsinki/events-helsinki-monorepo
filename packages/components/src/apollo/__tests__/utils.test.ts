@@ -1,4 +1,4 @@
-import EventsFederationApolloClient from '../EventsFederationApolloClient';
+import { initializeApolloClient, MutableReference } from '../utils';
 
 describe('client utils', () => {
   describe('createInstance', () => {
@@ -6,8 +6,7 @@ describe('client utils', () => {
       // @ts-ignore
       const mutableCache = new MutableReference();
 
-      // @ts-ignore
-      EventsFederationApolloClient.createInstance({
+      initializeApolloClient({
         // @ts-ignore
         mutableCachedClient: mutableCache,
         // @ts-ignore

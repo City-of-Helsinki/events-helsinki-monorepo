@@ -71,6 +71,8 @@ export default async function getSportsStaticProps<P = Record<string, unknown>>(
       throw e;
     }
   }
+  // to avoid "Did you forget to add a `return`" -error
+  return { props: {} };
 }
 
 type GetGlobalCMSDataParams = {

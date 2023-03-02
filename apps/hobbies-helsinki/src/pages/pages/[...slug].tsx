@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import type { NormalizedCacheObject } from '@apollo/client';
-import { apolloClient } from 'events-helsinki/src/domain/clients/eventsFederationApolloClient';
 import type { AppLanguage } from 'events-helsinki-components';
 import {
   NavigationContext,
@@ -117,7 +116,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         if (!page) {
           return {
             notFound: true,
-            revalidate: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
@@ -147,7 +145,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
-  const { data: pageData } = await apolloClient.query<
+  const { data: pageData } = await hobbiesApolloClient.query<
     PageQuery,
     PageQueryVariables
   >({
@@ -165,7 +163,7 @@ const getProps = async (context: GetStaticPropsContext) => {
   //   (context.params?.slug ?? []) as string[]
   // );
 
-  return { currentPage, breadcrumbs: [], apolloClient };
+  return { currentPage, breadcrumbs: [], apolloClient: hobbiesApolloClient };
 };
 
 /**

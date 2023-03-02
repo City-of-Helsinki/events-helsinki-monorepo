@@ -8,7 +8,7 @@ import React from 'react';
 const NextErrorPage = () => {
   const router = useRouter();
   React.useEffect(() => {
-    router.push('/error');
+    router.replace('/error');
   }, [router]);
   return null;
 };

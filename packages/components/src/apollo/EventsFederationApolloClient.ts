@@ -222,7 +222,6 @@ class EventsFederationApolloClient {
   static createInstance(
     config: EventsFederationApolloClientConfig
   ): ApolloClient<NormalizedCacheObject> {
-    const client = new EventsFederationApolloClient(config);
     return initializeApolloClient<
       NormalizedCacheObject,
       ApolloClient<NormalizedCacheObject>
@@ -230,7 +229,7 @@ class EventsFederationApolloClient {
       mutableCachedClient: new MutableReference<
         ApolloClient<NormalizedCacheObject>
       >(),
-      createClient: () => client.client,
+      createClient: () => new EventsFederationApolloClient(config).client,
     });
   }
 }

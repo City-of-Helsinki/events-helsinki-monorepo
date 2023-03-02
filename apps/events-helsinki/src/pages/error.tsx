@@ -6,6 +6,7 @@ import {
 
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
+import getEventsStaticProps from '../domain/app/getEventsStaticProps';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 
 /**
@@ -14,18 +15,24 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
  */
 const Error: NextPage = () => {
   const { t } = useCommonTranslation();
-  return <UnknownError appName={t(`appSports:appName`)} />;
+  return <UnknownError appName={t(`appEvents:appName`)} />;
 };
 export default Error;
 
-export async function getServerSideProps(context: GetStaticPropsContext) {
-  const language = getLanguageOrDefault(context.locale);
-  return {
-    props: {
-      ...(await serverSideTranslationsWithCommon(language, [
-        'common',
-        'errors',
-      ])),
+export async function getStaticProps(context: GetStaticPropsContext) {
+  return getEventsStaticProps(
+    context,
+    async () => {
+      const language = getLanguageOrDefault(context.locale);
+      return {
+        props: {
+          ...(await serverSideTranslationsWithCommon(language, [
+            'common',
+            'errors',
+          ])),
+        },
+      };
     },
-  };
+    false
+  );
 }

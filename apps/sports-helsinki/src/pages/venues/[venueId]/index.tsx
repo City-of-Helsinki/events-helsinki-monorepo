@@ -75,6 +75,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     });
 
     const venue = venueData?.venue;
+    if (!venue) {
+      return {
+        notFound: true,
+      };
+    }
 
     return {
       props: {

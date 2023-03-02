@@ -42,7 +42,7 @@ const SimilarEvents: React.FC<Props> = ({
   const {
     components: { EventCardContent },
   } = useConfig();
-  const { clickCaptureRef, clicked } = useClickCapture(1000);
+  useClickCapture(1000);
 
   const cards = events.map((event, i) => {
     const cardProps = getEventCardProps(event, locale);

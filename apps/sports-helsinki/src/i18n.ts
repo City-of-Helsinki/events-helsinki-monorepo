@@ -1,5 +1,4 @@
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
 
 /*
   i18next has changed the way it handles null values in translations. This file is required
@@ -13,9 +12,5 @@ declare module 'i18next' {
     returnNull: false;
   }
 }
-
-i18n.use(initReactI18next).init({
-  returnNull: false,
-});
 
 export default i18n;

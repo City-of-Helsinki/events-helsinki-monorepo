@@ -209,12 +209,12 @@ async function testNavigation(router: NextRouter, url: string) {
   expect(screen.getByText(dateStr)).toBeInTheDocument();
 
   await userEvent.click(
-    screen.getByRole('link', {
+    screen.getAllByRole('link', {
       name: translations.event.otherTimes.buttonReadMore.replace(
         '{{date}}',
         dateStr
       ),
-    })
+    })[0]
   );
 
   expect(router.asPath).toBe(`${url}${event?.id}`);

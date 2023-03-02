@@ -26,12 +26,12 @@ describe('large venue card', () => {
     expect(router.pathname).toStrictEqual('/');
 
     await userEvent.click(
-      screen.getByRole('link', {
+      screen.getAllByRole('link', {
         name: translations.venue.venueCard.ariaLabelLink.replace(
           '{{name}}',
           'Venue title'
         ),
-      })
+      })[0]
     );
 
     expect(router.pathname).toStrictEqual('/paikat/tprek:123');

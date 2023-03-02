@@ -72,12 +72,10 @@ button {
   display: none;
 }
 
-.page,
-.article-page {
-  header > h1 {
-    font-size: var(--fontsize-heading-xl);
-    @include respond_below(s) {
-      font-size: var(--fontsize-heading-xl-mobile);
-    }
+.page h1,
+.article-page header > h1 {
+  font-size: var(--fontsize-heading-xl);
+  @include respond_below(s) {
+    font-size: var(--fontsize-heading-xl-mobile);
   }
 }

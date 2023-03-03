@@ -1,31 +1,17 @@
-import {
-  MatomoProvider,
-  createInstance as createMatomoInstance,
-} from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
 import type { NavigationProviderProps } from 'events-helsinki-components';
-import {
-  CmsHelperProvider,
-  NavigationProvider,
-  EventsCookieConsent,
-  ResetFocus,
-  useCommonTranslation,
-} from 'events-helsinki-components';
+import { BaseApp, useCommonTranslation } from 'events-helsinki-components';
 import type { AppProps as NextAppProps } from 'next/app';
-import { appWithTranslation } from 'next-i18next';
 import type { SSRConfig } from 'next-i18next';
+import { appWithTranslation } from 'next-i18next';
 import React from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { ToastContainer } from 'react-toastify';
+
 import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
 import AppConfig from '../domain/app/AppConfig';
 import EventsApolloProvider from '../domain/app/EventsApolloProvider';
 import cmsHelper from '../domain/app/headlessCmsHelper';
 import routerHelper from '../domain/app/routerHelper';
-import ErrorFallback from '../domain/error/ErrorFallback';
-
-const matomoInstance = createMatomoInstance(AppConfig.matomoConfiguration);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AppProps<P = any> = {
@@ -35,46 +21,19 @@ export type AppProps<P = any> = {
 export type CustomPageProps = NavigationProviderProps & SSRConfig;
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const { headerMenu, footerMenu, languages } = pageProps;
   const { t } = useCommonTranslation();
-
-  // Unset hidden visibility that was applied to hide the first server render
-  // that does not include styles from HDS. HDS applies styling by injecting
-  // style tags into the head. This requires the existence of a document object.
-  // The document object does not exist during server side renders.
-  // TODO: Remove this hackfix to ensure that pre-rendered pages'
-  //       SEO performance is not impacted.
-  React.useEffect(() => {
-    setTimeout(() => {
-      const body = document?.body;
-
-      if (body) {
-        body.style.visibility = 'unset';
-      }
-    }, 10);
-  }, []);
 
   return (
     <EventsApolloProvider>
-      <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <MatomoProvider value={matomoInstance}>
-            <NavigationProvider
-              headerMenu={headerMenu}
-              footerMenu={footerMenu}
-              languages={languages}
-            >
-              <ResetFocus />
-              <Component {...pageProps} />
-              <EventsCookieConsent
-                allowLanguageSwitch={false}
-                appName={t('appEvents:appName')}
-              />
-              <ToastContainer />
-            </NavigationProvider>
-          </MatomoProvider>
-        </ErrorBoundary>
-      </CmsHelperProvider>
+      <BaseApp
+        appName={t('appEvents:appName')}
+        cmsHelper={cmsHelper}
+        routerHelper={routerHelper}
+        matomoConfiguration={AppConfig.matomoConfiguration}
+        {...pageProps}
+      >
+        <Component {...pageProps} />
+      </BaseApp>
     </EventsApolloProvider>
   );
 }

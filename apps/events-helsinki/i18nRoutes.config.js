@@ -1,4 +1,4 @@
-const i18nRoutes = {
+const i18nRoutesCurrentVersion = {
   '/search': [
     { source: '/haku', locale: 'fi' },
     { source: '/sok', locale: 'sv' },
@@ -28,5 +28,20 @@ const i18nRoutes = {
     { source: '/kunskap', locale: 'sv' },
   ],
 };
+
+const i18nRoutesPreviousVersions = {
+  '/fi': [{ source: '/home', locale: 'fi' }],
+  '/sv': [{ source: '/home', locale: 'sv' }],
+  '/en': [{ source: '/home', locale: 'en' }],
+  '/fi/haku': [{ source: '/events', locale: 'fi' }],
+  '/sv/sok': [{ source: '/events', locale: 'sv' }],
+  '/en/search': [{ source: '/events', locale: 'en' }],
+};
+
+const i18nRoutes = Object.assign(
+  {},
+  i18nRoutesPreviousVersions,
+  i18nRoutesCurrentVersion
+);
 
 module.exports = i18nRoutes;

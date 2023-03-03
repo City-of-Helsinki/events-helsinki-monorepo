@@ -3997,7 +3997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jonkoops/matomo-tracker-react@npm:0.7.0, @jonkoops/matomo-tracker-react@npm:^0.7.0":
+"@jonkoops/matomo-tracker-react@npm:0.7.0":
   version: 0.7.0
   resolution: "@jonkoops/matomo-tracker-react@npm:0.7.0"
   dependencies:
@@ -14739,7 +14739,6 @@ __metadata:
     "@graphql-codegen/typescript-operations": "npm:2.4.1"
     "@graphql-codegen/typescript-react-apollo": "npm:3.2.15"
     "@graphql-codegen/typescript-resolvers": "npm:^2.6.5"
-    "@jonkoops/matomo-tracker-react": "npm:^0.7.0"
     "@next/env": "npm:13.1.6"
     "@sentry/browser": "npm:^7.1.1"
     "@sentry/nextjs": "npm:7.14.1"
@@ -16931,7 +16930,6 @@ __metadata:
     "@graphql-codegen/typescript-operations": "npm:2.4.1"
     "@graphql-codegen/typescript-react-apollo": "npm:3.2.15"
     "@graphql-codegen/typescript-resolvers": "npm:^2.6.5"
-    "@jonkoops/matomo-tracker-react": "npm:^0.7.0"
     "@next/env": "npm:13.1.6"
     "@sentry/browser": "npm:^7.1.1"
     "@sentry/nextjs": "npm:7.14.1"
@@ -25277,26 +25275,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha111":
-  version: 1.0.0-alpha111
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha111"
-  dependencies:
-    hds-design-tokens: "npm:^2.3.0"
-    html-react-parser: "npm:^1.4.8"
-    isomorphic-dompurify: "npm:^0.18.0"
-  peerDependencies:
-    "@apollo/client": ^3.5.10
-    date-fns: ^2.28.0
-    hds-react: ">=1.11.1"
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-  peerDependenciesMeta:
-    "@apollo/client":
-      optional: true
-  checksum: 63fb37406b2becb82318b9ab707d7fe8da56d8a26197e8ebdc3b78350143598317f54b303b20922d498d7b669f881e5fa2f7605db88facb9c5bd06161223f761
-  languageName: node
-  linkType: hard
-
 "react-helsinki-headless-cms@npm:1.0.0-alpha120":
   version: 1.0.0-alpha120
   resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha120"
@@ -27600,8 +27578,6 @@ __metadata:
     "@graphql-codegen/typescript-operations": "npm:2.4.1"
     "@graphql-codegen/typescript-react-apollo": "npm:3.2.15"
     "@graphql-codegen/typescript-resolvers": "npm:^2.6.5"
-    "@jonkoops/matomo-tracker-react": "npm:^0.7.0"
-    "@next/bundle-analyzer": "npm:13.1.6"
     "@next/env": "npm:13.1.6"
     "@sentry/browser": "npm:^7.1.1"
     "@sentry/nextjs": "npm:7.14.1"

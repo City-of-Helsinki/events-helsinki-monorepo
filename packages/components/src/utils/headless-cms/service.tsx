@@ -40,8 +40,6 @@ export const getAllArticles = async (
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
-      // TODO: fix any
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       node.translations?.forEach((translation: PageType['translations']) => {
         if (
           translation?.uri &&
@@ -90,8 +88,6 @@ export const getAllPages = async (
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
-      // TODO: fix any
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       node.translations?.forEach((translation: PageType['translations']) => {
         if (
           translation?.uri &&

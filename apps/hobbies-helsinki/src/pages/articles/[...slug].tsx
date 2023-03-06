@@ -83,8 +83,15 @@ const NextCmsArticle: NextPage<{
 };
 
 export async function getStaticPaths() {
-  // NOTE: It might not be a good thing to use ApolloClient here,
-  // since then the build process depends on external service.
+  // Do not prerender any static pages when in preview environment
+  // (faster builds, but slower initial page load)
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+
   const articlePageInfos = await getAllArticles(hobbiesApolloClient);
   const paths = articlePageInfos.map((pageInfo) => ({
     params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
@@ -92,7 +99,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths,
-    fallback: true, // can also be true or 'blocking'
+    fallback: true,
   };
 }
 

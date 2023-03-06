@@ -1,11 +1,11 @@
 import type { Venue } from 'events-helsinki-components';
 import {
   useCommonTranslation,
-  MapBox,
   InfoBlock,
   Text,
 } from 'events-helsinki-components';
 import { IconAngleDown } from 'hds-react';
+import dynamic from 'next/dynamic';
 import React from 'react';
 import {
   getGoogleDirectionsUrl,
@@ -14,6 +14,13 @@ import {
 } from '../utils/getVenueDirections';
 import getVenueIdParts from '../utils/getVenueIdParts';
 import styles from './venueLocation.module.scss';
+
+const MapBox = dynamic(
+  () => import('events-helsinki-components').then((mod) => mod.MapBox),
+  {
+    ssr: false,
+  }
+);
 
 const VenueLocation = ({ venue }: { venue: Venue }) => {
   const { t } = useCommonTranslation();

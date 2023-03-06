@@ -19,14 +19,6 @@ const i18nRoutes = {
     { source: '/sivut/:slug*', locale: 'fi' },
     { source: '/sidor/:slug*', locale: 'sv' },
   ],
-  '/accessibility': [
-    { source: '/saavutetavuusseloste', locale: 'fi' },
-    { source: '/tillgäntglighetsutlåtande', locale: 'sv' },
-  ],
-  '/about': [
-    { source: '/tietoa', locale: 'fi' },
-    { source: '/kunskap', locale: 'sv' },
-  ],
 };
 
 module.exports = i18nRoutes;

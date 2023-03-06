@@ -41,6 +41,7 @@ resources:
   # Azure DevOps repository
   - repository: harrastukset-pipelines
     type: git
+    ref: refs/heads/optimise_pipelines
     # Azure DevOps project/repository
     name: harrastukset/harrastukset-pipelines
 

@@ -19,14 +19,6 @@ const i18nRoutesCurrentVersion = {
     { source: '/sivut/:slug*', locale: 'fi' },
     { source: '/sidor/:slug*', locale: 'sv' },
   ],
-  '/accessibility': [
-    { source: '/saavutetavuusseloste', locale: 'fi' },
-    { source: '/tillgäntglighetsutlåtande', locale: 'sv' },
-  ],
-  '/about': [
-    { source: '/tietoa', locale: 'fi' },
-    { source: '/kunskap', locale: 'sv' },
-  ],
 };
 
 const i18nRoutesPreviousVersions = {

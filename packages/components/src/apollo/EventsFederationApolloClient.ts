@@ -56,7 +56,13 @@ class EventsFederationApolloClient {
       ({ graphQLErrors, networkError, operation, response }) => {
         if (graphQLErrors) {
           graphQLErrors.forEach(({ message, locations, path }) => {
-            const errorMessage = `[GraphQL error]: OperationName: ${operation.operationName}, Message: ${message}, Location: ${locations}, Path: ${path}`;
+            const errorMessage = `[GraphQL error]: ${JSON.stringify({
+              OperationName: operation.operationName,
+              Message: message,
+              Location: locations,
+              Path: path,
+              // Response: response,
+            })}`;
             graphqlClientLogger.error(errorMessage);
             Sentry.captureMessage(errorMessage);
           });
@@ -65,7 +71,12 @@ class EventsFederationApolloClient {
           }
         }
         if (networkError) {
-          graphqlClientLogger.error(networkError);
+          graphqlClientLogger.error(
+            `[GraphQL networkError]: ${JSON.stringify({
+              Operation: operation.operationName,
+              NetworkError: networkError,
+            })}`
+          );
           Sentry.captureMessage('Graphql Network error');
           if (this.config.handleError && !response?.data) {
             this.config.handleError(new Error('Graphql Network error'));

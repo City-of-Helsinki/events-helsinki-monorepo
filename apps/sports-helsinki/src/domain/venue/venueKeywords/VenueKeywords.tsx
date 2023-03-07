@@ -10,9 +10,9 @@ import { capitalize } from 'lodash';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { PARAM_SEARCH_TYPE } from 'domain/search/combinedSearch/constants';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
+import { PARAM_SEARCH_TYPE } from '../../../domain/search/combinedSearch/constants';
 
 interface Props {
   blackOnMobile?: boolean;

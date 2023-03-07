@@ -33,7 +33,9 @@ it('should render keywords and handle click', async () => {
     screen.getByRole('link', { name: new RegExp(keywordNames[0], 'i') })
   );
   expect(router).toMatchObject({
-    asPath: `/haku?q=${encodeURIComponent(capitalize(keywordNames[0]))}`,
+    asPath: `/haku?q=${encodeURIComponent(
+      capitalize(keywordNames[0])
+    )}&searchType=Venue`,
     pathname: '/haku',
     query: { q: capitalize(keywordNames[0]) },
   });

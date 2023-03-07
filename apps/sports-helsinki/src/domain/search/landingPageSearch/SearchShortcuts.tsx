@@ -28,7 +28,7 @@ export default function SearchShortcuts({
       locale
     )}${getSearchQuery({
       ...searchFilters,
-      categories: [category.value],
+      sportsCategories: [category.value],
     })}`;
   };
 

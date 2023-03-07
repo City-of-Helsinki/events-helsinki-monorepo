@@ -176,11 +176,10 @@ const nextConfig = {
   output: 'standalone',
 
   experimental: {
-    /*    turbotrace: {
+    turbotrace: {
       contextDirectory: path.resolve(__dirname, '../..'),
       logDetail: true,
-    }, */
-    outputFileTracingRoot: path.resolve(__dirname, '../..'),
+    },
     // Prefer loading of ES Modules over CommonJS
     // @link {https://nextjs.org/blog/next-11-1#es-modules-support|Blog 11.1.0}
     // @link {https://github.com/vercel/next.js/discussions/27876|Discussion}

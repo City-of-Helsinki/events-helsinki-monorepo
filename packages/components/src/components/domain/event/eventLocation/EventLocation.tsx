@@ -1,9 +1,14 @@
+import dynamic from 'next/dynamic';
 import React from 'react';
-import MapBox from '../../../../components/mapBox/MapBox';
+
 import useCommonTranslation from '../../../../hooks/useCommonTranslation';
 import useLocale from '../../../../hooks/useLocale';
 import type { AppLanguage, EventFields } from '../../../../types';
 import { getEventFields, getServiceMapUrl } from '../../../../utils/eventUtils';
+
+const MapBox = dynamic(() => import('../../../../components/mapBox/MapBox'), {
+  ssr: false,
+});
 
 interface Props {
   event: EventFields;

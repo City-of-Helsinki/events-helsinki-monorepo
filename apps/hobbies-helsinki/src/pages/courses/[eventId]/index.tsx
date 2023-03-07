@@ -51,7 +51,7 @@ export default Event;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
@@ -80,8 +80,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         event,
         loading,
         ...(await serverSideTranslationsWithCommon(language, [
-          'common',
-          'home',
           'search',
           'event',
         ])),

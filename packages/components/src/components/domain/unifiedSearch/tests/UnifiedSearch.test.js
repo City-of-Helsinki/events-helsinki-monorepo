@@ -112,7 +112,7 @@ describe('UnifiedSearch', () => {
             q: ['B'],
           },
         },
-        undefined,
+        '',
         undefined
       );
     });

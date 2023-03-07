@@ -61,7 +61,7 @@ describe('Landing page', () => {
     expect(router).toMatchObject({
       asPath: `${searchPath}?sportsCategories=swimming`,
       pathname: searchPath,
-      query: { categories: 'swimming' },
+      query: { sportsCategories: 'swimming' },
     });
   });
 });

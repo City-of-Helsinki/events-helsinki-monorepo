@@ -101,18 +101,21 @@ describe('UnifiedSearch', () => {
       };
       const unifiedSearch = getUnifiedSearch(mockRouter);
 
-      unifiedSearch.setFilters({
-        q: ['B'],
-        pathname: '',
-      });
+      unifiedSearch.setFilters(
+        {
+          q: ['B'],
+        },
+        '/'
+      );
 
       expect(mockRouter.replace).toHaveBeenLastCalledWith(
         {
+          pathname: '/',
           query: {
             q: ['B'],
           },
         },
-        '',
+        undefined,
         undefined
       );
     });

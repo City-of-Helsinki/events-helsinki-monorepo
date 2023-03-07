@@ -59,9 +59,9 @@ describe('Landing page', () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     await userEvent.click(screen.getAllByRole('link', { name: /uinti/i })[0]);
     expect(router).toMatchObject({
-      asPath: `${searchPath}?categories=swimming`,
+      asPath: `${searchPath}?sportsCategories=swimming`,
       pathname: searchPath,
-      query: { categories: 'swimming' },
+      query: { sportsCategories: 'swimming' },
     });
   });
 });

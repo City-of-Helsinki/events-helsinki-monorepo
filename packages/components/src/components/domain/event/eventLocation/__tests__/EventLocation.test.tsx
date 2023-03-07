@@ -19,14 +19,12 @@ const event = fakeEvent({
   name: { fi: eventName },
 }) as EventFields;
 
-it('should render 1 mapLink and 2 directionsLink', () => {
+it('should render 1 mapLink and 2 directionsLink', async () => {
   render(<EventLocation event={event} />);
 
-  expect(
-    screen.getByRole('link', {
-      name: /Avaa kartta. Avautuu uudessa välilehdessä. Avautuu toisella sivustolla./i,
-    })
-  ).toBeInTheDocument();
+  await screen.findByRole('link', {
+    name: /Avaa kartta. Avautuu uudessa välilehdessä. Avautuu toisella sivustolla./i,
+  });
   expect(
     screen.getByRole('link', { name: /reittiohjeet \(hsl\)/i })
   ).toBeInTheDocument();

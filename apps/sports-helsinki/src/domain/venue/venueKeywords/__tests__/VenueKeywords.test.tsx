@@ -1,3 +1,4 @@
+import { buildQueryFromObject } from 'events-helsinki-components/utils';
 import { clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
@@ -9,6 +10,7 @@ import VenueKeywords from '../VenueKeywords';
 
 const keywordNames = ['keyword 1', 'keyword 2'];
 const keywords = keywordNames.map((name) => fakeOntology({ label: name }));
+const PARAM_SEARCH_TYPE = 'searchType';
 
 const venue = fakeVenue({
   ontologyWords: keywords,
@@ -23,6 +25,11 @@ it('should render keywords and handle click', async () => {
     <VenueKeywords venue={venue} showIsFree={true} showKeywords={true} />
   );
 
+  const search = buildQueryFromObject({
+    q: capitalize(keywordNames[0]),
+    [PARAM_SEARCH_TYPE]: 'Venue',
+  });
+
   keywordNames.forEach((keyword) => {
     expect(
       screen.getByRole('link', { name: new RegExp(keyword, 'i') })
@@ -33,11 +40,9 @@ it('should render keywords and handle click', async () => {
     screen.getByRole('link', { name: new RegExp(keywordNames[0], 'i') })
   );
   expect(router).toMatchObject({
-    asPath: `/haku?q=${encodeURIComponent(
-      capitalize(keywordNames[0])
-    )}&searchType=Venue`,
+    asPath: `/haku${search}`,
     pathname: '/haku',
-    query: { q: capitalize(keywordNames[0]) },
+    query: { q: capitalize(keywordNames[0]), [PARAM_SEARCH_TYPE]: 'Venue' },
   });
 });
 

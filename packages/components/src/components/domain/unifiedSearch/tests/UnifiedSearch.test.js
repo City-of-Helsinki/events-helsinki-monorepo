@@ -103,6 +103,7 @@ describe('UnifiedSearch', () => {
 
       unifiedSearch.setFilters({
         q: ['B'],
+        pathname: '',
       });
 
       expect(mockRouter.replace).toHaveBeenLastCalledWith(

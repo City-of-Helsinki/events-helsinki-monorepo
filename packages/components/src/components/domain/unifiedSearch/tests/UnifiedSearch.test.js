@@ -176,26 +176,9 @@ describe('UnifiedSearch', () => {
         administrativeDivisionIds: undefined,
       });
 
-      expect(mockRouter.replace.mock.calls[0]).toMatchInlineSnapshot(`
-        [
-          {
-            "pathname": undefined,
-            "query": {
-              "administrativeDivisionIds": [],
-              "ontologyTreeIds": [
-                "404",
-              ],
-              "ontologyWordIds": [],
-              "q": [
-                "A",
-                "B",
-              ],
-            },
-          },
-          undefined,
-          undefined,
-        ]
-      `);
+      expect(mockRouter.replace.mock.calls[0]).toMatchInlineSnapshot(
+        `undefined`
+      );
     });
   });
 

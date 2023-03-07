@@ -116,7 +116,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
                 </div>
                 <h1 className={styles.title}>{venue.name}</h1>
                 <div className={styles.additionalInfo}>
-                  <Visible above="s" className={styles.location}>
+                  <div className={styles.location}>
                     <ul className={styles.headerInfoLines}>
                       {infoLines.map((infoLine) => (
                         <li
@@ -127,7 +127,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
                         </li>
                       ))}
                     </ul>
-                  </Visible>
+                  </div>
                 </div>
               </div>
             </div>

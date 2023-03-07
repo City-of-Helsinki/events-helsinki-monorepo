@@ -32,7 +32,8 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
 }) => {
   const { t } = useCommonTranslation();
   const inputPlaceholderText =
-    inputPlaceholder || t('common:multiSelectDropdown.inputPlaceholder');
+    (inputPlaceholder || t('common:multiSelectDropdown.inputPlaceholder')) ??
+    '';
   const [internalInput, setInternalInput] = React.useState('');
   const input = inputValue !== undefined ? inputValue : internalInput;
 

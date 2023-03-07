@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import type { EventFields } from 'events-helsinki-components';
 import {
+  useCommonTranslation,
   getDateRangeStr,
   useLocale,
   IconButton,
@@ -28,7 +29,7 @@ interface Props {
 
 const EventCard: React.FC<Props> = ({ event }) => {
   const { t } = useTranslation('event');
-  const { t: commonTranslation } = useTranslation('common');
+  const { t: commonTranslation } = useCommonTranslation();
   const router = useRouter();
   const locale = useLocale();
   const button = React.useRef<HTMLDivElement>(null);

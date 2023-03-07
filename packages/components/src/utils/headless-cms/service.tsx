@@ -1,14 +1,14 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
+import {
+  PostsDocument,
+  PagesDocument,
+} from 'react-helsinki-headless-cms/apollo';
 import type {
   PostsQuery,
   PostsQueryVariables,
   PagesQuery,
   PagesQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
-import {
-  PostsDocument,
-  PagesDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import type { PageInfo } from '../../types';
 

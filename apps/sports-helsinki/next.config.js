@@ -176,10 +176,11 @@ const nextConfig = {
   output: 'standalone',
 
   experimental: {
-    // Standalone build monorepo support - include root for file tracing
-    outputFileTracingRoot: path.join(__dirname, '../..'),
-
-    browsersListForSwc: true,
+    /*    turbotrace: {
+      contextDirectory: path.resolve(__dirname, '../..'),
+      logDetail: true,
+    }, */
+    outputFileTracingRoot: path.resolve(__dirname, '../..'),
     // Prefer loading of ES Modules over CommonJS
     // @link {https://nextjs.org/blog/next-11-1#es-modules-support|Blog 11.1.0}
     // @link {https://github.com/vercel/next.js/discussions/27876|Discussion}
@@ -189,6 +190,7 @@ const nextConfig = {
     // @link {https://github.com/vercel/next.js/discussions/26420|Discussion}
     externalDir: true,
     scrollRestoration: true,
+    newNextLinkBehavior: false,
   },
 
   typescript: {
@@ -298,15 +300,7 @@ if (tmModules.length > 0) {
     `${pc.green('notice')}- Will transpile [${tmModules.join(',')}]`
   );
 
-  const withNextTranspileModules = require('next-transpile-modules')(
-    tmModules,
-    {
-      resolveSymlinks: true,
-      debug: true,
-    }
-  );
-
-  config = withNextTranspileModules(config);
+  config.transpilePackages = tmModules;
 }
 
 if (process.env.ANALYZE === 'true') {

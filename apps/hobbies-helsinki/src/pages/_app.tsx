@@ -13,7 +13,6 @@ import {
   CmsHelperProvider,
 } from 'events-helsinki-components';
 import { LoadingSpinner } from 'hds-react';
-import type { AppProps as NextAppProps } from 'next/app';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { appWithTranslation } from 'next-i18next';
@@ -50,7 +49,8 @@ function Center({ children }: { children: React.ReactNode }) {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AppProps<P = any> = {
   pageProps: P;
-} & Omit<NextAppProps<P>, 'pageProps'>;
+  Component: React.ComponentType<P>;
+};
 
 export type CustomPageProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

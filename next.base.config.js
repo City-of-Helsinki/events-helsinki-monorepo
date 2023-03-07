@@ -264,8 +264,7 @@ const nextBaseConfig = ({
           },
         ],
       });
-
-      return { ...config, ...overrideConfig };
+      return config;
     },
     env: {
       APP_NAME: packageJson.name,
@@ -278,7 +277,7 @@ const nextBaseConfig = ({
     },
   };
 
-  let config = nextConfig;
+  let config = { ...nextConfig, ...overrideConfig };
 
   if (!NEXTJS_DISABLE_SENTRY) {
     // @ts-ignore because sentry does not match nextjs current definitions

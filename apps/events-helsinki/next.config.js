@@ -8,16 +8,14 @@ module.exports = nextBaseConfig({
   packageJson,
   i18nRoutes,
   i18n,
-  override: {
-    async redirects() {
-      return Object.entries(redirectRoutes).flatMap(([destination, sources]) =>
-        sources.map(({ source, locale }) => ({
-          destination,
-          source: `/${locale}${source}`,
-          locale: false,
-          permanent: true,
-        }))
-      );
-    },
+  async redirects() {
+    return Object.entries(redirectRoutes).flatMap(([destination, sources]) =>
+      sources.map(({ source, locale }) => ({
+        destination,
+        source: `/${locale}${source}`,
+        locale: false,
+        permanent: true,
+      }))
+    );
   },
 });

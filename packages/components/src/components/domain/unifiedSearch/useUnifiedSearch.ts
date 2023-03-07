@@ -262,15 +262,16 @@ export class UnifiedSearch {
     options?: TransitionOptions
   ) {
     this.queryPersister.persistQuery(search);
-
-    this.router.replace(
-      {
-        pathname,
-        query: this.getQueryObjectFromSearchParameters(search),
-      },
-      undefined,
-      options
-    );
+    if (pathname) {
+      this.router.replace(
+        {
+          pathname,
+          query: this.getQueryObjectFromSearchParameters(search),
+        },
+        undefined,
+        options
+      );
+    }
   }
 
   getQueryObjectFromSearchParameters(

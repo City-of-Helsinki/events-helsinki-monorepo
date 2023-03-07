@@ -101,12 +101,16 @@ describe('UnifiedSearch', () => {
       };
       const unifiedSearch = getUnifiedSearch(mockRouter);
 
-      unifiedSearch.setFilters({
-        q: ['B'],
-      });
+      unifiedSearch.setFilters(
+        {
+          q: ['B'],
+        },
+        '/'
+      );
 
       expect(mockRouter.replace).toHaveBeenLastCalledWith(
         {
+          pathname: '/',
           query: {
             q: ['B'],
           },
@@ -128,6 +132,23 @@ describe('UnifiedSearch', () => {
         {
           query: {},
           pathname: '/search',
+        },
+        undefined,
+        undefined
+      );
+    });
+
+    it('should not be calling router without pathname', () => {
+      const mockRouter = {
+        replace: jest.fn(),
+      };
+      const unifiedSearch = getUnifiedSearch(mockRouter);
+
+      unifiedSearch.setFilters({});
+
+      expect(mockRouter.replace).not.toHaveBeenLastCalledWith(
+        {
+          query: {},
         },
         undefined,
         undefined
@@ -176,26 +197,9 @@ describe('UnifiedSearch', () => {
         administrativeDivisionIds: undefined,
       });
 
-      expect(mockRouter.replace.mock.calls[0]).toMatchInlineSnapshot(`
-        [
-          {
-            "pathname": undefined,
-            "query": {
-              "administrativeDivisionIds": [],
-              "ontologyTreeIds": [
-                "404",
-              ],
-              "ontologyWordIds": [],
-              "q": [
-                "A",
-                "B",
-              ],
-            },
-          },
-          undefined,
-          undefined,
-        ]
-      `);
+      expect(mockRouter.replace.mock.calls[0]).toMatchInlineSnapshot(
+        `undefined`
+      );
     });
   });
 

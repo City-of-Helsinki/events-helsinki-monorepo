@@ -137,6 +137,23 @@ describe('UnifiedSearch', () => {
         undefined
       );
     });
+
+    it('should not be calling router without pathname', () => {
+      const mockRouter = {
+        replace: jest.fn(),
+      };
+      const unifiedSearch = getUnifiedSearch(mockRouter);
+
+      unifiedSearch.setFilters({});
+
+      expect(mockRouter.replace).not.toHaveBeenLastCalledWith(
+        {
+          query: {},
+        },
+        undefined,
+        undefined
+      );
+    });
   });
 
   describe('getSearchParamsFromFilters', () => {

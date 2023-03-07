@@ -185,6 +185,16 @@ They are based on the [npm-check-updates](https://github.com/raineorshine/npm-ch
 > having duplicates in the yarn.lock, you can run `yarn dedupe --check` and `yarn dedupe` to
 > apply deduplication. The duplicate check is enforced in the example github actions.
 
+### Developing on Windowns
+
+Monorepo uses symbolic links and you should check your git configurations when operating on Windows.
+If git config has core.symlinks key set to false when cloning the repository, building an app will result : 'Error: Export encountered errors on following paths:'. Note that `yarn dev` with apps could give the error, but still will get up and running. Also if your `/packages/common-i18n/src/locales` does not have folder `default` and has a file instead, you have a problem.
+
+Set your git configs before cloning the repository.
+Check our git config in console with `git config --list`. You should have either global or system key `core.symlinks` set to true.
+To set global type `git config --global core.symlinks true`. Use `git config --global --list` to check.
+To alter the system configs, run PowerShell as an administrator. Type `git config --system core.symlinks true` and use `git config --system --list` to check.
+
 ## 5. Quality
 
 ### 5.1 Linters

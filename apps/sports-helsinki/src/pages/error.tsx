@@ -20,19 +20,12 @@ const Error: NextPage = () => {
 export default Error;
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getSportsStaticProps(
-    context,
-    async () => {
-      const language = getLanguageOrDefault(context.locale);
-      return {
-        props: {
-          ...(await serverSideTranslationsWithCommon(language, [
-            'common',
-            'errors',
-          ])),
-        },
-      };
-    },
-    false
-  );
+  return getSportsStaticProps(context, async () => {
+    const language = getLanguageOrDefault(context.locale);
+    return {
+      props: {
+        ...(await serverSideTranslationsWithCommon(language)),
+      },
+    };
+  });
 }

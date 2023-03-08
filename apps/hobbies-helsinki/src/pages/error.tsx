@@ -1,7 +1,7 @@
 import {
   getLanguageOrDefault,
   UnknownError,
-  useCommonTranslation,
+  useAppHobbiesTranslation,
 } from 'events-helsinki-components';
 
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -13,8 +13,8 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
  * Let's use this page instead. the `_error_tsx` routes also to this page
  */
 const Error: NextPage = () => {
-  const { t } = useCommonTranslation();
-  return <UnknownError appName={t(`appSports:appName`)} />;
+  const { t } = useAppHobbiesTranslation();
+  return <UnknownError appName={t(`appHobbies:appName`)} />;
 };
 export default Error;
 
@@ -22,10 +22,7 @@ export async function getServerSideProps(context: GetStaticPropsContext) {
   const language = getLanguageOrDefault(context.locale);
   return {
     props: {
-      ...(await serverSideTranslationsWithCommon(language, [
-        'common',
-        'errors',
-      ])),
+      ...(await serverSideTranslationsWithCommon(language)),
     },
   };
 }

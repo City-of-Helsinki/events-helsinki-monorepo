@@ -27,8 +27,7 @@ export default async function getSportsStaticProps<P = Record<string, unknown>>(
   context: GetStaticPropsContext,
   tryToGetPageProps: (
     sportsContext: SportsContext
-  ) => Promise<GetStaticPropsResult<P>>,
-  handleError = true
+  ) => Promise<GetStaticPropsResult<P>>
 ) {
   const language = getLanguageOrDefault(context.locale);
   const apolloClient = initializeSportsApolloClient();
@@ -58,21 +57,19 @@ export default async function getSportsStaticProps<P = Record<string, unknown>>(
   } catch (e: unknown) {
     // Generic error handling
     staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
-    if (handleError) {
-      if (isApolloError(e as Error)) {
-        return {
-          props: {
-            error: {
-              statusCode: 500,
-            },
+
+    if (isApolloError(e as Error)) {
+      return {
+        revalidate: 1,
+        props: {
+          error: {
+            statusCode: 500,
           },
-        };
-      }
-      throw e;
+        },
+      };
     }
+    throw e;
   }
-  // to avoid "Did you forget to add a `return`" -error
-  return { props: {} };
 }
 
 type GetGlobalCMSDataParams = {

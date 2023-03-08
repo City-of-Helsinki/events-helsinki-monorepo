@@ -1,7 +1,6 @@
 import 'nprogress/nprogress.css';
 import type { NavigationProviderProps } from 'events-helsinki-components';
 import { BaseApp, useCommonTranslation } from 'events-helsinki-components';
-import type { AppProps as NextAppProps } from 'next/app';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import React from 'react';

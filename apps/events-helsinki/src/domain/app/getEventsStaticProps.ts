@@ -28,8 +28,7 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
   context: GetStaticPropsContext,
   tryToGetPageProps: (
     eventsContext: EventsContext
-  ) => Promise<GetStaticPropsResult<P>>,
-  handleError = true
+  ) => Promise<GetStaticPropsResult<P>>
 ) {
   const language = getLanguageOrDefault(context.locale);
   const apolloClient = initializeEventsApolloClient();
@@ -59,21 +58,18 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
   } catch (e: unknown) {
     // Generic error handling
     staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
-    if (handleError) {
-      if (isApolloError(e as Error)) {
-        return {
-          props: {
-            error: {
-              statusCode: 500,
-            },
+    if (isApolloError(e as Error)) {
+      return {
+        revalidate: 1,
+        props: {
+          error: {
+            statusCode: 500,
           },
-        };
-      }
-      throw e;
+        },
+      };
     }
+    throw e;
   }
-  // to avoid "Did you forget to add a `return`" -error
-  return { props: {} };
 }
 
 type GetGlobalCMSDataParams = {

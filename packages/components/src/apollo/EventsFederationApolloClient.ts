@@ -14,6 +14,7 @@ import {
   InMemoryCache,
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
+import { RetryLink } from '@apollo/client/link/retry';
 import { relayStylePagination } from '@apollo/client/utilities';
 import * as Sentry from '@sentry/browser';
 import fetch from 'cross-fetch';
@@ -65,11 +66,13 @@ class EventsFederationApolloClient {
             })}`;
             graphqlClientLogger.error(errorMessage);
             Sentry.captureMessage(errorMessage);
+            // Call the custom error handler that should redirect to the Error page
+            if (this.config.handleError && !response?.data) {
+              this.config.handleError(graphQLErrors);
+            }
           });
-          if (this.config.handleError && !response?.data) {
-            this.config.handleError(graphQLErrors);
-          }
         }
+
         if (networkError) {
           graphqlClientLogger.error(
             `[GraphQL networkError]: ${JSON.stringify({
@@ -78,12 +81,22 @@ class EventsFederationApolloClient {
             })}`
           );
           Sentry.captureMessage('Graphql Network error');
+          // Call the custom error handler that should redirect to the Error page
           if (this.config.handleError && !response?.data) {
-            this.config.handleError(new Error('Graphql Network error'));
+            this.config.handleError(networkError);
           }
         }
       }
     );
+
+    // If a retried operation also results in errors,
+    // those errors are not passed to your onError link to prevent an infinite loop of operations.
+    // This means that an onError link can retry a particular operation only once.
+    // https://www.apollographql.com/docs/react/data/error-handling/#retrying-operations
+    // For custom strategies, e.g. skipping some special cases,
+    // see: https://www.apollographql.com/docs/react/api/link/apollo-link-retry/#custom-strategies
+    // NOTE: default is 5 re-attemps!
+    const retryLink = new RetryLink();
 
     // retain partial data even if error occurs for any operation
     const baseOptions: { errorPolicy: ErrorPolicy } = { errorPolicy: 'all' };
@@ -91,8 +104,12 @@ class EventsFederationApolloClient {
     this.client = new ApolloClient({
       connectToDevTools: true,
       ssrMode: !isClient, // Disables forceFetch on the server (so queries are only run once)
-      // TODO: Add error link after adding Sentry to the project
-      link: ApolloLink.from([transformInternalURLs, errorLink, httpLink]),
+      link: ApolloLink.from([
+        transformInternalURLs,
+        errorLink,
+        retryLink,
+        httpLink,
+      ]),
       cache: EventsFederationApolloClient.createApolloCache(),
       defaultOptions: {
         watchQuery: baseOptions,

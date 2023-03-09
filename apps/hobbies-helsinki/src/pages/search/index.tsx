@@ -5,6 +5,7 @@ import {
   MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
+  usePageScrollRestoration,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -21,6 +22,7 @@ export default function Search() {
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
+  usePageScrollRestoration();
 
   useEffect(() => {
     const listElement = listRef.current;

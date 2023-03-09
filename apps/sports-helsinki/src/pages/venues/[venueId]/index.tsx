@@ -6,6 +6,7 @@ import {
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
+  usePageScrollRestoration,
 } from 'events-helsinki-components';
 import type {
   Venue,
@@ -26,6 +27,7 @@ const Event: NextPage<{
 }> = ({ venue, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useCommonTranslation();
+  usePageScrollRestoration();
   return (
     <MatomoWrapper>
       <RHHCPage

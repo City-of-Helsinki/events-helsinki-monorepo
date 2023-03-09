@@ -6,6 +6,7 @@ import {
   getLanguageOrDefault,
   FooterSection,
 } from 'events-helsinki-components';
+import { usePageScrollRestoration } from 'events-helsinki-components/src/hooks';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
@@ -21,6 +22,7 @@ export default function Search() {
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
   const { t: tAppEvents } = useAppEventsTranslation();
+  usePageScrollRestoration();
 
   useEffect(() => {
     const listElement = listRef.current;

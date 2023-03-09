@@ -22,3 +22,4 @@ export { default as useAppHobbiesTranslation } from './useAppHobbiesTranslation'
 export { default as useAppSportsTranslation } from './useAppSportsTranslation';
 export { default as useCommonCmsConfig } from './useCommonCmsConfig';
 export { default as useClickCapture } from './useClickCapture';
+export { default as usePageScrollRestoration } from './usePageScrollRestoration';

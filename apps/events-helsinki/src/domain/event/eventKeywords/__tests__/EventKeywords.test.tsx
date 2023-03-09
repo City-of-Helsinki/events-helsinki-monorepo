@@ -2,6 +2,7 @@ import type {
   EventFieldsFragment,
   OfferFieldsFragment,
 } from 'events-helsinki-components';
+import { buildQueryFromObject } from 'events-helsinki-components/utils';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
@@ -18,6 +19,7 @@ const keywordNames = ['keyword 1', 'keyword 2'];
 const keywords = keywordNames.map((name) =>
   fakeKeyword({ name: { fi: name } })
 );
+const PARAM_SEARCH_TYPE = 'searchType';
 
 const event = fakeEvent({
   keywords,
@@ -34,6 +36,11 @@ it('should render keywords and handle click', async () => {
     <EventKeywords event={event} showIsFree={true} showKeywords={true} />
   );
 
+  const search = buildQueryFromObject({
+    text: capitalize(keywordNames[0]),
+    [PARAM_SEARCH_TYPE]: event.typeId?.toString(),
+  });
+
   keywordNames.forEach((keyword) => {
     expect(
       screen.getByRole('link', { name: new RegExp(keyword, 'i') })
@@ -44,7 +51,7 @@ it('should render keywords and handle click', async () => {
     screen.getByRole('link', { name: new RegExp(keywordNames[0], 'i') })
   );
   expect(router).toMatchObject({
-    asPath: `/haku?text=${encodeURIComponent(capitalize(keywordNames[0]))}`,
+    asPath: `/haku${search}`,
     pathname: '/haku',
     query: { text: capitalize(keywordNames[0]) },
   });
@@ -73,7 +80,7 @@ it('should render today tag and handle click', async () => {
     })
   );
   expect(router).toMatchObject({
-    asPath: '/haku?dateTypes=today',
+    asPath: `/haku?dateTypes=today&${[PARAM_SEARCH_TYPE]}=${event.typeId}`,
     pathname: '/haku',
     query: { dateTypes: 'today' },
   });
@@ -90,7 +97,7 @@ it('should render this week tag and handle click', async () => {
     })
   );
   expect(router).toMatchObject({
-    asPath: '/haku?dateTypes=this_week',
+    asPath: `/haku?dateTypes=this_week&${[PARAM_SEARCH_TYPE]}=${event.typeId}`,
     pathname: '/haku',
     query: { dateTypes: 'this_week' },
   });

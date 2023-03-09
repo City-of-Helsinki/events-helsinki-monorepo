@@ -60,6 +60,7 @@ export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
   start: null,
   text: [],
   suitableFor: [],
+  searchType: null,
 };
 
 export const COURSE_DEFAULT_SEARCH_FILTERS = {
@@ -96,6 +97,7 @@ export enum EVENT_SEARCH_FILTERS {
   MIN_AGE = 'audienceMinAgeLt',
   MAX_AGE = 'audienceMaxAgeGt',
   SUITABLE = 'suitableFor',
+  SEARCHTYPE = 'searchType',
 }
 
 export const CATEGORY_CATALOG = {

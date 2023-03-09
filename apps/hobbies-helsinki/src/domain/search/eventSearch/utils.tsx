@@ -330,6 +330,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     );
   }
 
+  const searchType = searchParams.get(EVENT_SEARCH_FILTERS.SEARCHTYPE);
+
   return {
     categories: getUrlParamAsArray(
       searchParams,
@@ -366,6 +368,7 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     ),
     audienceMinAgeLt: searchParams.get(EVENT_SEARCH_FILTERS.MIN_AGE) || '',
     audienceMaxAgeGt: searchParams.get(EVENT_SEARCH_FILTERS.MAX_AGE) || '',
+    searchType,
   };
 };
 

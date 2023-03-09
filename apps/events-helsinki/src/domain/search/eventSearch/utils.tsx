@@ -278,6 +278,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     );
   }
 
+  const searchType = searchParams.get(EVENT_SEARCH_FILTERS.SEARCHTYPE);
+
   return {
     categories: getUrlParamAsArray(
       searchParams,
@@ -305,6 +307,7 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     publisher: searchParams.get(EVENT_SEARCH_FILTERS.PUBLISHER),
     start,
     text: freeText,
+    searchType,
   };
 };
 
@@ -317,6 +320,7 @@ export const getSearchQuery = (filters: Filters): string => {
     onlyEveningEvents: filters.onlyEveningEvents ? true : undefined,
     onlyRemoteEvents: filters.onlyRemoteEvents ? true : undefined,
     start: formatDate(filters.start, 'yyyy-MM-dd'),
+    searchType: filters.searchType,
   };
 
   if (newFilters.end || newFilters.start) {

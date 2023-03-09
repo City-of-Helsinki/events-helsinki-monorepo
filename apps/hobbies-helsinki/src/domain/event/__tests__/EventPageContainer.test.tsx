@@ -57,6 +57,7 @@ const event = fakeEvent({
 }) as EventFields;
 
 const eventKeywordIds = event.keywords.map((keyword) => keyword.id) as string[];
+const PARAM_SEARCH_TYPE = 'searchType';
 
 const eventRequest = {
   query: EventDetailsDocument,
@@ -253,6 +254,6 @@ it('should link to events search when clicking tags', async () => {
 
   expect(router).toMatchObject({
     pathname: '/haku',
-    asPath: '/haku?text=Avouinti',
+    asPath: `/haku?text=Avouinti&${[PARAM_SEARCH_TYPE]}=${event.typeId}`,
   });
 });

@@ -42,6 +42,7 @@ export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
   publisher: null,
   start: null,
   text: [],
+  searchType: null,
 };
 
 export enum EVENT_SEARCH_FILTERS {
@@ -60,6 +61,7 @@ export enum EVENT_SEARCH_FILTERS {
   PUBLISHER = 'publisher',
   START = 'start',
   TEXT = 'text',
+  SEARCHTYPE = 'searchType',
 }
 
 export const CATEGORY_CATALOG = {

@@ -4,10 +4,12 @@ import nextI18nextConfig from '../../../next-i18next.config';
 
 const COMMON_TRANSLATIONS = [
   'appHobbies',
+  'cms',
   'common',
   'consent',
   'errors',
   'footer',
+  'geolocationProvider',
   'notFound',
   'home',
 ];

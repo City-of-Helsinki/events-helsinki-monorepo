@@ -216,18 +216,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     if (!pageData) {
       return {
         notFound: true,
-        revalidate: true,
       };
     }
     const page = pageData.pageByTemplate;
     return {
       props: {
         page,
-        ...(await serverSideTranslationsWithCommon(language, [
-          'common',
-          'home',
-          'cms',
-        ])),
+        ...(await serverSideTranslationsWithCommon(language)),
       },
     };
   });

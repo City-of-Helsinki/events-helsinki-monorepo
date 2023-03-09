@@ -131,7 +131,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         if (!article) {
           return {
             notFound: true,
-            revalidate: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
@@ -139,10 +138,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
-            ...(await serverSideTranslationsWithCommon(language, [
-              'cms',
-              'event',
-            ])),
+            ...(await serverSideTranslationsWithCommon(language, ['event'])),
             article,
             breadcrumbs,
             collections: getCollections(article.modules ?? []),

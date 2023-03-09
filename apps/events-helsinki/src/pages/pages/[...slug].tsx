@@ -124,7 +124,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         if (!page) {
           return {
             notFound: true,
-            revalidate: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);

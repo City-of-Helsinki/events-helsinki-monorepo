@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { configure, render, screen } from '@/test-utils';
+import { configure, render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeVenue } from '@/test-utils/mockDataUtils';
 import VenueContent from '../VenueContent';
@@ -19,8 +19,14 @@ const venue = fakeVenue({
   connections: [{ sectionType: 'OPENING_HOURS', name: 'opening hours' }],
 });
 
-it('should render event content fields', () => {
+it('should render event content fields', async () => {
   render(<VenueContent venue={venue} />);
+
+  await waitFor(() => {
+    expect(
+      screen.getByRole('heading', { name: translations.common.mapBox.title })
+    ).toBeInTheDocument();
+  });
 
   const itemsByRole = [
     { role: 'heading', name: translations.venue.info.labelContactDetails },
@@ -38,6 +44,7 @@ it('should render event content fields', () => {
     { role: 'button', name: translations.common.shareLink.shareOnLinkedIn },
     { role: 'heading', name: translations.common.mapBox.title },
   ];
+
   itemsByRole.forEach(({ role, name }) => {
     expect(screen.getByRole(role, { name })).toBeInTheDocument();
   });

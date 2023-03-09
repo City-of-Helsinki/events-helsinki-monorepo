@@ -97,8 +97,8 @@ it('should render event info fields', async () => {
     price,
   ];
 
-  itemsByText.forEach((item) => {
-    expect(screen.getByText(item)).toBeInTheDocument();
+  itemsByText.forEach(async (item) => {
+    expect(await screen.findByText(item)).toBeInTheDocument();
   });
 });
 

@@ -182,8 +182,6 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js 
     /app/apps/${PROJECT}/package.json \
     ./apps/${PROJECT}/
 
-COPY --from=builder --chown=appuser:appuser /app/next.base.config.js .
-
 # Copy common-i18n to share localization files after build
 COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n/src/locales \
     ./packages/common-i18n/src/locales
@@ -194,6 +192,7 @@ COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n/src/locale
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone .
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
+COPY --from=builder --chown=appuser:appuser /app/next.base.config.js .
 
 # OpenShift write access to Next cache folder
 USER root

@@ -185,6 +185,61 @@ They are based on the [npm-check-updates](https://github.com/raineorshine/npm-ch
 > having duplicates in the yarn.lock, you can run `yarn dedupe --check` and `yarn dedupe` to
 > apply deduplication. The duplicate check is enforced in the example github actions.
 
+### Symbolic links
+
+Monorepo uses symbolic links to share assets and locales between apps and packages, e.g.:
+
+Shared assets:
+ - apps/events-helsinki/public/shared-assets → static/assets/
+ - apps/hobbies-helsinki/public/shared-assets → static/assets/
+ - apps/sports-helsinki/public/shared-assets → static/assets/
+
+Locales:
+ - packages/common-i18n/src/locales/default → packages/common-i18n/src/locales/fi/
+
+You can find all used symbolic links in the monorepo by running in the monorepo's root:
+
+```bash
+find -L ./ -xtype l -not -path */node_modules/*
+```
+
+or using PowerShell:
+```powershell
+Get-ChildItem ./ -recurse | ?{ $_.PsIsContainer -and $_.FullName -notmatch 'node_modules' } | ?{$_.LinkType} | select FullName,LinkType,Target
+```
+
+#### Supporting symbolic links on Windows
+
+To enable the support for symbolic links on Windows 10 you need to:
+
+ 1. Configure your git to support symbolic links by setting `core.symlinks` to `true`
+    - Git has many [configuration scopes](https://git-scm.com/docs/git-config#SCOPES), we'll consider system, global and local here.
+      - The order of precedence is `system < global < local` i.e. [local overrides global, global overrides system](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)
+    - You can check the current setting by `git config --show-origin --show-scope --get-all core.symlinks`
+    - Set the `core.symlinks` to `true` in global scope to make it affect also new
+      clones of git repositories:
+      ```bash
+      git config --global core.symlinks true
+      ```
+ 2. If using [MSYS](https://www.msys2.org/) e.g. via [Git for Windows](https://gitforwindows.org/)
+    - Set MSYS=[winsymlinks:nativestrict](https://cygwin.com/cygwin-ug-net/using-cygwinenv.html)
+      by adding line `export MSYS=winsymlinks:nativestrict` to the system-wide
+      `bashrc` file normally at `C:\Program Files\Git\etc\bash.bashrc` using
+      administrative privileges
+ 3. Either [enable Developer Mode](https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development)
+    in Windows 10 to [enable creation of symbolic links without administrative privileges](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/)
+    or run the terminal (e.g. Command Prompt or PowerShell) as administrator at least
+    when cloning the repository.
+    - Neither of these are without security risks, so use them with caution, but no
+      other options are known. You can mitigate some of these security risks by not
+      enabling Developer Mode and only running the terminal with administrative
+      privileges when absolutely needing the creation of symbolic links to work, e.g.
+      when cloning a repository that uses symbolic links and whenever new symbolic links
+      are created e.g. by `git pull` containing new symbolic links.
+ 4. (Re)clone the repository in question either with Developer Mode enabled or with
+    administrative privileges to make sure the symbolic links are created correctly.
+ 5. Check that the symbolic links were created correctly (See [Symbolic links](#symbolic-links) above)
+
 ## 5. Quality
 
 ### 5.1 Linters

@@ -5,6 +5,7 @@ import {
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
+  usePageScrollRestoration,
 } from 'events-helsinki-components';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
@@ -17,6 +18,7 @@ import CombinedSearchPage from '../../domain/search/combinedSearch/CombinedSearc
 export default function Search() {
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useCommonTranslation();
+  usePageScrollRestoration();
   return (
     <MatomoWrapper>
       <HCRCApolloPage

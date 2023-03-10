@@ -94,6 +94,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       suitableFor: getSuitableForFilterValue(suitableFor, type) ?? [],
       audienceMinAgeLt: type === 'minAge' ? '' : audienceMinAgeLt,
       audienceMaxAgeGt: type === 'maxAge' ? '' : audienceMaxAgeGt,
+      searchType: null,
     });
 
     router.push({

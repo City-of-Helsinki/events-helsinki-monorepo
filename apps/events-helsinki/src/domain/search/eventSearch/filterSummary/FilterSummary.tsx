@@ -81,6 +81,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       publisher: type !== 'publisher' ? publisher : null,
       start: type === 'date' ? null : start,
       text: getFilteredList('text', text),
+      searchType: null,
     });
 
     router.push({

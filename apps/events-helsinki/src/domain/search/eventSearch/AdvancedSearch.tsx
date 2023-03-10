@@ -101,6 +101,7 @@ const AdvancedSearch: React.FC<Props> = ({
     publisher,
     start,
     text: selectedTexts,
+    searchType: null,
   };
 
   // const divisionOptions = useDivisionOptions();

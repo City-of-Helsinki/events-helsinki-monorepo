@@ -120,6 +120,7 @@ const AdvancedSearch: React.FC<Props> = ({
     text: selectedTexts,
     audienceMinAgeLt: minAgeInput,
     audienceMaxAgeGt: maxAgeInput,
+    searchType: null,
   };
 
   // const divisionOptions = useDivisionOptions();

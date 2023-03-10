@@ -331,6 +331,10 @@ export const getSearchQuery = (filters: Filters): string => {
     delete newFilters.text;
   }
 
+  if (!newFilters.searchType) {
+    delete newFilters.searchType;
+  }
+
   return buildQueryFromObject(newFilters);
 };
 

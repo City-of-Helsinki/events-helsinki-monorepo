@@ -190,12 +190,14 @@ They are based on the [npm-check-updates](https://github.com/raineorshine/npm-ch
 Monorepo uses symbolic links to share assets and locales between apps and packages, e.g.:
 
 Shared assets:
- - apps/events-helsinki/public/shared-assets → static/assets/
- - apps/hobbies-helsinki/public/shared-assets → static/assets/
- - apps/sports-helsinki/public/shared-assets → static/assets/
+
+- apps/events-helsinki/public/shared-assets → static/assets/
+- apps/hobbies-helsinki/public/shared-assets → static/assets/
+- apps/sports-helsinki/public/shared-assets → static/assets/
 
 Locales:
- - packages/common-i18n/src/locales/default → packages/common-i18n/src/locales/fi/
+
+- packages/common-i18n/src/locales/default → packages/common-i18n/src/locales/fi/
 
 You can find all used symbolic links in the monorepo by running in the monorepo's root:
 
@@ -204,6 +206,7 @@ find -L ./ -xtype l -not -path */node_modules/*
 ```
 
 or using PowerShell:
+
 ```powershell
 Get-ChildItem ./ -recurse | ?{ $_.PsIsContainer -and $_.FullName -notmatch 'node_modules' } | ?{$_.LinkType} | select FullName,LinkType,Target
 ```
@@ -212,33 +215,33 @@ Get-ChildItem ./ -recurse | ?{ $_.PsIsContainer -and $_.FullName -notmatch 'node
 
 To enable the support for symbolic links on Windows 10 you need to:
 
- 1. Configure your git to support symbolic links by setting `core.symlinks` to `true`
-    - Git has many [configuration scopes](https://git-scm.com/docs/git-config#SCOPES), we'll consider system, global and local here.
-      - The order of precedence is `system < global < local` i.e. [local overrides global, global overrides system](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)
-    - You can check the current setting by `git config --show-origin --show-scope --get-all core.symlinks`
-    - Set the `core.symlinks` to `true` in global scope to make it affect also new
-      clones of git repositories:
-      ```bash
-      git config --global core.symlinks true
-      ```
- 2. If using [MSYS](https://www.msys2.org/) e.g. via [Git for Windows](https://gitforwindows.org/)
-    - Set MSYS=[winsymlinks:nativestrict](https://cygwin.com/cygwin-ug-net/using-cygwinenv.html)
-      by adding line `export MSYS=winsymlinks:nativestrict` to the system-wide
-      `bashrc` file normally at `C:\Program Files\Git\etc\bash.bashrc` using
-      administrative privileges
- 3. Either [enable Developer Mode](https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development)
-    in Windows 10 to [enable creation of symbolic links without administrative privileges](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/)
-    or run the terminal (e.g. Command Prompt or PowerShell) as administrator at least
-    when cloning the repository.
-    - Neither of these are without security risks, so use them with caution, but no
-      other options are known. You can mitigate some of these security risks by not
-      enabling Developer Mode and only running the terminal with administrative
-      privileges when absolutely needing the creation of symbolic links to work, e.g.
-      when cloning a repository that uses symbolic links and whenever new symbolic links
-      are created e.g. by `git pull` containing new symbolic links.
- 4. (Re)clone the repository in question either with Developer Mode enabled or with
-    administrative privileges to make sure the symbolic links are created correctly.
- 5. Check that the symbolic links were created correctly (See [Symbolic links](#symbolic-links) above)
+1. Configure your git to support symbolic links by setting `core.symlinks` to `true`
+   - Git has many [configuration scopes](https://git-scm.com/docs/git-config#SCOPES), we'll consider system, global and local here.
+     - The order of precedence is `system < global < local` i.e. [local overrides global, global overrides system](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)
+   - You can check the current setting by `git config --show-origin --show-scope --get-all core.symlinks`
+   - Set the `core.symlinks` to `true` in global scope to make it affect also new
+     clones of git repositories:
+     ```bash
+     git config --global core.symlinks true
+     ```
+2. If using [MSYS](https://www.msys2.org/) e.g. via [Git for Windows](https://gitforwindows.org/)
+   - Set MSYS=[winsymlinks:nativestrict](https://cygwin.com/cygwin-ug-net/using-cygwinenv.html)
+     by adding line `export MSYS=winsymlinks:nativestrict` to the system-wide
+     `bashrc` file normally at `C:\Program Files\Git\etc\bash.bashrc` using
+     administrative privileges
+3. Either [enable Developer Mode](https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development)
+   in Windows 10 to [enable creation of symbolic links without administrative privileges](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/)
+   or run the terminal (e.g. Command Prompt or PowerShell) as administrator at least
+   when cloning the repository.
+   - Neither of these are without security risks, so use them with caution, but no
+     other options are known. You can mitigate some of these security risks by not
+     enabling Developer Mode and only running the terminal with administrative
+     privileges when absolutely needing the creation of symbolic links to work, e.g.
+     when cloning a repository that uses symbolic links and whenever new symbolic links
+     are created e.g. by `git pull` containing new symbolic links.
+4. (Re)clone the repository in question either with Developer Mode enabled or with
+   administrative privileges to make sure the symbolic links are created correctly.
+5. Check that the symbolic links were created correctly (See [Symbolic links](#symbolic-links) above)
 
 ## 5. Quality
 
@@ -336,6 +339,8 @@ Each time you merge a "normal" pull request, the release-please-action will crea
 
 To create a new release for an app, this release PR is merged, which creates a new release with release notes and a new tag. This tag will be picked by Azure pipeline and trigger a new deployment to staging. From there, the release needs to be manually released to production.
 
+When merging release PRs, make sure to use the "Rebase and merge" (or "Squash and merge") option, so that Github doesn't create a merge commit. This is important, because the release-please-action does not work correctly with merge commits (there's an open issue you can track: [Chronological commit sorting means that merged PRs can be ignored ](https://github.com/googleapis/release-please/issues/1533)).
+
 See [Release Please Implementation Design](https://github.com/googleapis/release-please/blob/main/docs/design.md) for more details.
 
 And all docs are available here: [release-please docs](https://github.com/googleapis/release-please/tree/main/docs).
@@ -343,6 +348,10 @@ And all docs are available here: [release-please docs](https://github.com/google
 ### Conventional Commits
 
 Use [Conventional Commits](https://www.conventionalcommits.org/) to ensure that the changelogs are generated correctly.
+
+### Releasable units
+
+Release please goes through commits and tries to find "releasable units" using commit messages as guidance - it will then add these units to their respective release PR's and figures out the version number from the types: `fix` for patch, `feat` for minor, `feat!` for major. None of the other types will be included in the changelog. So, you can use for example `chore` or `refactor` to do work that does not need to be included in the changelog and won't bump the version.
 
 ### Configuration
 
@@ -357,13 +366,16 @@ When adding a new app, add it to both the [release-please-config.json](./release
 
 ### Troubleshoting release-please
 
-If you were expecting a new release PR to be created, but nothing happened, there's probably one of the older release PR's in pending state.
+If you were expecting a new release PR to be created or old one to be updated, but nothing happened, there's probably one of the older release PR's in pending state or action didn't run.
 
-First make sure there's no open release PR already; if there is, the work is now included on this one (this is the normal scenario).
-
-If you do not see any open release PR related to the work, check if any of the closed PR's are labeled with `autorelease: pending` - ie. someone might have closed a release PR manually. Change the closed PR's label to `autorelease: tagged`. Then go and re-run the last merge workflow to trigger the release action - a new release PR should now appear.
+1. Check if the release action ran for the last merge to main. If it didn't, re-run the action manually.
+2. Check if there's any open release PR. If there is, the work is now included on this one (this is the normal scenario).
+3. If you do not see any open release PR related to the work, check if any of the closed PR's are labeled with `autorelease: pending` - ie. someone might have closed a release PR manually. Change the closed PR's label to `autorelease: tagged`. Then go and re-run the last merge workflow to trigger the release action - a new release PR should now appear.
+4. Finally check the output of the release action. Sometimes the bot can't parse the commit message and there is a notification about this in the action log. If this happens, it won't include the work in the commit either. You can fix this by changing the commit message to follow the [Conventional Commits](https://www.conventionalcommits.org/) format and rerun the action.
 
 **Important!** If you have closed a release PR manually, you need to change the label of closed release PR to `autorelease: tagged`. Otherwise, the release action will not create a new release PR.
+
+Sometimes there might be a merge conflict in release PR - this should resolve itself on the next push to main. But you can also resolve it manually, by updating the [release-please-manifest.json](./.release-please-manifest.json) file.
 
 There's also a CLI for debugging and manually running releases available for release-please: [release-please-cli](https://github.com/googleapis/release-please/blob/main/docs/cli.md)
 
@@ -384,3 +396,5 @@ To help keeping deps up-to-date, see the `yarn deps:check && yarn deps:update` s
 > When adding a dep through yarn cli (i.e.: yarn add something), it's possible to set the save-exact behaviour automatically
 > by setting `defaultSemverRangePrefix: ""` in [yarnrc.yml](./.yarnrc.yml). But this would make the default for packages/\* as well.
 > Better to handle `yarn add something --exact` on per-case basis.
+
+**Note about updating deps across the monorepo**: when updating a dep, it's important to update it in all the packages that use it, and make sure every dep is updated to the same version. Version differences can cause all kinds of hard-to-debug issues.

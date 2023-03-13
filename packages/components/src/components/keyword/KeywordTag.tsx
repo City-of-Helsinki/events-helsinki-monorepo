@@ -44,7 +44,8 @@ const KeywordTag: FunctionComponent<Props> = ({
         transparent && styles.transparent,
         className
       )}
-      onClick={handleClick}
+      /* Disable keyword onClick for now per LIIKUNTA-411 comment */
+      /* onClick={handleClick} */
       {...rest}
     >
       {keyword}

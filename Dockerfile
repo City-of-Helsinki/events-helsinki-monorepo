@@ -202,7 +202,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 ENV PORT ${APP_PORT:-3000}
 
 # Expose port
-EXPOSE $PORT
+EXPOSE 3210
 
 # ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
 ENV PROD_START "node ./apps/${PROJECT}/server.js"

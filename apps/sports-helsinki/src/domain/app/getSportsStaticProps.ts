@@ -12,26 +12,25 @@ import {
   MenuDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
-import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
+import initializeSportsApolloClient from '../clients/sportsApolloClient';
 import AppConfig from './AppConfig';
 
 type SportsContext = {
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
-export type SportsGlobalPageProps = {
+export type SportsGlobalPageProps<P = Record<string, unknown>> = {
   initialApolloState: NormalizedCacheObject;
-} & unknown; // FIXME: Promise<GetStaticPropsResult<P>> of getHobbiesStaticProps
+} & Promise<GetStaticPropsResult<P>>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function getSportsStaticProps<P = Record<string, any>>(
+export default async function getSportsStaticProps<P = Record<string, unknown>>(
   context: GetStaticPropsContext,
   tryToGetPageProps: (
     sportsContext: SportsContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
   const language = getLanguageOrDefault(context.locale);
-  const apolloClient = initializeFederationApolloClient();
+  const apolloClient = initializeSportsApolloClient();
 
   try {
     const globalCmsData = await getGlobalCMSData({
@@ -55,21 +54,20 @@ export default async function getSportsStaticProps<P = Record<string, any>>(
       ...result,
       props,
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
+  } catch (e: unknown) {
     // Generic error handling
     staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
-    if (isApolloError(e)) {
+
+    if (isApolloError(e as Error)) {
       return {
+        revalidate: 1,
         props: {
           error: {
-            statusCode: 400,
+            statusCode: 500,
           },
         },
-        revalidate: 10,
       };
     }
-
     throw e;
   }
 }

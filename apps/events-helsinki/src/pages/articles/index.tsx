@@ -79,7 +79,6 @@ export default function ArticleArchive({
         language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
       },
     });
-
   const isLoading =
     (loadingArticles && networkStatus !== NetworkStatus.fetchMore) ||
     loadingCategories;
@@ -214,7 +213,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         language: getQlLanguage(language).toLocaleLowerCase(),
       },
     });
-
+    if (!pageData) {
+      return {
+        notFound: true,
+      };
+    }
     const page = pageData.pageByTemplate;
     return {
       props: {

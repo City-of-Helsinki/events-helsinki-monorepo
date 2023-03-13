@@ -32,6 +32,7 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
     ssr: false,
     variables: { id: publisher },
   });
+
   const searchParams = React.useMemo(
     () => new URLSearchParams(qs.stringify(router.query)),
     [router.query]

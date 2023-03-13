@@ -1,0 +1,12 @@
+{
+  "notFound": {
+    "title": "Hups, hakemaasi sivua ei löydy!",
+    "description": "Linkki voi olla vanhentunut, tai sivu on ehditty poistaa."
+  },
+  "unknownError": {
+    "title": "Sivustolla havaittiin virhe!",
+    "description": "Koita myöhemmin uudestaan. Jos tilanne toistuu, kerro siitä meille <2>palautelomakkeella</2>",
+    "feedbackFormLink": "https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute/anna-palautetta"
+  },
+  "moveToHomePageButton": "Siirry etusivulle"
+}

@@ -12,9 +12,6 @@
       "@/test-utils": ["../config/jest/test-utils"],
       "@/test-utils/*": ["../config/jest/*"],
       "@/lib/*": ["./lib/*"],
-      "events-helsinki-common-tests": [
-        "../../../packages/common-tests/src/index"
-      ],
       "events-helsinki-common-tests/browser-tests": [
         "../../../packages/common-tests/src/browser-tests/*"
       ],
@@ -25,7 +22,13 @@
         "../../../packages/common-i18n/src/locales/*"
       ],
       "events-helsinki-components/*": ["../../../packages/components/src/*"],
-      "events-helsinki-components": ["../../../packages/components/src/index"]
+      "events-helsinki-components": ["../../../packages/components/src/index"],
+      "events-helsinki-common-tests/*": [
+        "../../../packages/common-tests/src/*"
+      ],
+      "events-helsinki-common-tests": [
+        "../../../packages/common-tests/src/index"
+      ]
     }
   },
   "exclude": ["**/node_modules", "**/.*/"],

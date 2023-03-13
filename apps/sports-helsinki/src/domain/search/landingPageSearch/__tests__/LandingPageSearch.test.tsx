@@ -57,7 +57,8 @@ describe('Landing page', () => {
 
   it('should route to event search page after clicking category', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
-    await userEvent.click(screen.getAllByRole('link', { name: /uinti/i })[0]);
+    const links = await screen.findAllByRole('link', { name: /uinti/i });
+    await userEvent.click(links[0]);
     expect(router).toMatchObject({
       asPath: `${searchPath}?sportsCategories=swimming`,
       pathname: searchPath,

@@ -1,8 +1,12 @@
+import type { MockedResponse } from '@apollo/client/testing';
+import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
 import type { EventFieldsFragment } from 'events-helsinki-components';
 import {
   EventDetailsDocument,
   EventListDocument,
   DEFAULT_EVENT_SORT_OPTION,
+  OrganizationDetailsDocument,
+  EventTypeId,
 } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
@@ -14,6 +18,7 @@ import {
   fakeEvents,
   fakeKeyword,
   fakeLocalizedObject,
+  fakeOrganization,
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import {
@@ -36,7 +41,7 @@ const keywords = [
   { name: 'Eläimet', id: 'keyword2' },
   { name: 'Grillaus', id: 'keyword3' },
 ];
-const superEventId = 'harrastushaku:13433';
+const superEventId = 'hel:123';
 const otherEventTimesCount = 10;
 
 const event = fakeEvent({
@@ -57,12 +62,10 @@ const event = fakeEvent({
   },
 }) as EventFieldsFragment;
 
-const eventKeywordIds = event.keywords.map((keyword) => keyword.id) as string[];
-
 const eventRequest = {
   query: EventDetailsDocument,
   variables: {
-    id,
+    id: superEventId,
     include: ['in_language', 'keywords', 'location', 'audience'],
   },
 };
@@ -88,6 +91,15 @@ const otherEventsResponse = {
   data: { eventList: fakeEvents(otherEventTimesCount) },
 };
 const similarEvents = fakeEvents(3);
+
+const organizationId = '1';
+const organizationName = 'Organization name';
+const organization = fakeOrganization({
+  id: organizationId,
+  name: organizationName,
+});
+const organizationResponse = { data: { organizationDetails: organization } };
+
 const mocks = [
   {
     request: eventRequest,
@@ -108,18 +120,34 @@ const mocks = [
   createEventListRequestAndResultMocks({
     variables: {
       allOngoing: true,
-      keywordOrSet2: eventKeywordIds,
+      internetBased: undefined,
+      keywordOrSet2: [''],
+      language: undefined,
+      pageSize: 100,
+      eventType: [EventTypeId.General],
     },
     response: similarEvents,
   }),
+  {
+    request: {
+      query: OrganizationDetailsDocument,
+      variables: {
+        id: 'provider:123',
+      },
+    },
+    result: organizationResponse,
+  },
 ];
 
 const testPath = `/events/${id}`;
 const routes = [testPath];
 
-const renderComponent = (props: EventPageContainerProps) =>
+const renderComponent = (
+  props: EventPageContainerProps,
+  overrideMocks?: MockedResponse[]
+) =>
   render(<EventPageContainer {...props} />, {
-    mocks,
+    mocks: overrideMocks ?? mocks,
     routes,
   });
 
@@ -131,9 +159,7 @@ it('should render info and load other events + similar events', async () => {
   advanceTo('2020-10-01');
   renderComponent({ event: event, loading: false });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
 
   expect(screen.getByRole('heading', { name })).toBeInTheDocument();
 
@@ -166,9 +192,7 @@ it('should show error info when event is closed', async () => {
   advanceTo('2020-10-10');
   renderComponent({ event: event, loading: false });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
   await waitFor(() => {
     expect(
       screen.getByRole('heading', {
@@ -191,9 +215,7 @@ it("should show error info when event doesn't exist", async () => {
     routes,
   });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
   await waitFor(() => {
     expect(
       screen.getByRole('heading', {
@@ -241,11 +263,13 @@ describe.skip(`SIMILAR_EVENTS feature flag`, () => {
 
 it('should link to events search when clicking tags', async () => {
   advanceTo('2020-10-01');
-  const { router } = renderComponent({ event: event, loading: false });
-
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+  const { router } = renderComponent({
+    event: event,
+    loading: false,
+    showSimilarEvents: false,
   });
+
+  await waitForLoadingCompleted();
 
   const tagLink = await screen.findByRole('link', { name: 'Avouinti' });
 

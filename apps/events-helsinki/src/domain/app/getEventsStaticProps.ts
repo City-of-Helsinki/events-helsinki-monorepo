@@ -4,24 +4,24 @@ import type { CmsLanguage, Menu, Language } from 'events-helsinki-components';
 import {
   DEFAULT_FOOTER_MENU_NAME,
   DEFAULT_HEADER_MENU_NAME,
+  getLanguageOrDefault,
 } from 'events-helsinki-components';
-import getLanguageOrDefault from 'events-helsinki-components/src/utils/get-language-or-default';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import {
   LanguagesDocument,
   MenuDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
-import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
+import initializeEventsApolloClient from '../clients/eventsApolloClient';
 import AppConfig from './AppConfig';
 
 type EventsContext = {
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
-export type EventsGlobalPageProps = {
+export type EventsGlobalPageProps<P = Record<string, unknown>> = {
   initialApolloState: NormalizedCacheObject;
-} & unknown; // FIXME: Promise<GetStaticPropsResult<P>> of getEventsStaticProps
+} & Promise<GetStaticPropsResult<P>>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function getEventsStaticProps<P = Record<string, any>>(
@@ -30,8 +30,9 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
     eventsContext: EventsContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
-  const apolloClient = initializeFederationApolloClient();
   const language = getLanguageOrDefault(context.locale);
+  const apolloClient = initializeEventsApolloClient();
+
   try {
     const globalCmsData = await getGlobalCMSData({
       client: apolloClient,
@@ -54,21 +55,19 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
       ...result,
       props,
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
+  } catch (e: unknown) {
     // Generic error handling
     staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
-    if (isApolloError(e)) {
+    if (isApolloError(e as Error)) {
       return {
+        revalidate: 1,
         props: {
           error: {
-            statusCode: 400,
+            statusCode: 500,
           },
         },
-        revalidate: 10,
       };
     }
-
     throw e;
   }
 }

@@ -13,6 +13,7 @@ import type {
   SuperEventResponse,
   EventFieldsFragment,
 } from 'events-helsinki-components';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
@@ -26,7 +27,10 @@ import EventContent from './eventContent/EventContent';
 import EventHero from './eventHero/EventHero';
 import styles from './eventPage.module.scss';
 import EventPageMeta from './eventPageMeta/EventPageMeta';
-import SimilarEvents from './similarEvents/SimilarEvents';
+
+const SimilarEvents = dynamic(() => import('./similarEvents/SimilarEvents'), {
+  ssr: false,
+});
 
 export interface EventPageContainerProps {
   loading: boolean;
@@ -71,7 +75,6 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
       },
     }
   );
-
   React.useEffect(() => {
     if (superEventId) {
       superEventSearch();

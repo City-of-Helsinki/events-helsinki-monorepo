@@ -52,6 +52,7 @@ it('calls onRemove callback when remove button is clicked', async () => {
   expect(onClickMock).toHaveBeenCalledWith(id, 'publisher');
 });
 
+// eslint-disable-next-line jest/expect-expect
 it("should return null if place doesn't exist", async () => {
   const mocks = [
     {

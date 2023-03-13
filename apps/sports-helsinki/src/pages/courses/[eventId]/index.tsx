@@ -27,7 +27,6 @@ const Event: NextPage<{
 }> = ({ event, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useCommonTranslation();
-
   return (
     <MatomoWrapper>
       <RHHCPage
@@ -53,7 +52,7 @@ export default Event;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
@@ -70,7 +69,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         include: ['in_language', 'keywords', 'location', 'audience'],
       },
     });
-
+    if (!eventData) {
+      return {
+        notFound: true,
+      };
+    }
     const event = eventData?.eventDetails;
 
     return {

@@ -1,17 +1,12 @@
-import {
-  initializeApolloClient,
-  MutableReference,
-} from 'events-helsinki-components';
+import { initializeApolloClient, MutableReference } from '../utils';
 
 describe('client utils', () => {
-  describe('initializeApolloClient', () => {
+  describe('createInstance', () => {
     it('should mutate references used for caching the client', () => {
       // @ts-ignore
       const mutableCache = new MutableReference();
 
-      // @ts-ignore
       initializeApolloClient({
-        initialState: null,
         // @ts-ignore
         mutableCachedClient: mutableCache,
         // @ts-ignore

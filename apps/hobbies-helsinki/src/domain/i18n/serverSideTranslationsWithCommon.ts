@@ -7,7 +7,9 @@ const COMMON_TRANSLATIONS = [
   'cms',
   'common',
   'consent',
+  'errors',
   'footer',
+  'geolocationProvider',
   'notFound',
   'home',
 ];

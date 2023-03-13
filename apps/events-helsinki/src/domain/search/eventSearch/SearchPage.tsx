@@ -68,7 +68,6 @@ const SearchPage: React.FC<{
     ssr: false,
     variables: eventFilters,
   });
-
   const eventsList = eventsData?.eventList;
 
   const handleLoadMore = async () => {

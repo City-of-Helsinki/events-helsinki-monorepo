@@ -92,7 +92,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           language: getQlLanguage(language).toLocaleLowerCase(),
         },
       });
-
+      if (!pageData || !landingPageData) {
+        return {
+          notFound: true,
+        };
+      }
       const page = pageData.pageByTemplate;
 
       const landingPage = landingPageData.landingPage;
@@ -117,7 +121,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       return {
         props: {
           ...(await serverSideTranslationsWithCommon(DEFAULT_LANGUAGE, [
-            'home',
             'search',
           ])),
           landingPage: null,

@@ -18,21 +18,29 @@ type NavigationProps = {
   languages?: Language[];
 };
 
-export default function Navigation({ page }: NavigationProps) {
+export default function Navigation({
+  page,
+  menu,
+  languages: forcedLanguages, // FIXME: This is here only to skip the Apollo query and so the issues in the Error page
+}: NavigationProps) {
   const { headerMenu, languages } = useContext(NavigationContext);
   const router = useRouter();
   const locale = useLocale();
   const cmsHelper = useCmsHelper();
   const routerHelper = useCmsRoutedAppHelper();
   const currentPage = router.pathname;
-  const languagesQuery = useLanguagesQuery({ skip: !!languages });
+  const languagesQuery = useLanguagesQuery({
+    skip: !!languages || !!forcedLanguages,
+  });
   const languageOptions =
-    languages ?? languagesQuery.data?.languages?.filter(isLanguage);
+    forcedLanguages ??
+    languages ??
+    languagesQuery.data?.languages?.filter(isLanguage);
 
   return (
     <RHHCNavigation
       languages={languageOptions}
-      menu={headerMenu}
+      menu={menu ?? headerMenu}
       className={styles.topNavigation}
       onTitleClick={() => {
         router.push('/');

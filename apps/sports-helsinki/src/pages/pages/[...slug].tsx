@@ -37,7 +37,7 @@ import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
+import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsPage: NextPage<{
@@ -75,9 +75,16 @@ const NextCmsPage: NextPage<{
 };
 
 export async function getStaticPaths() {
-  // NOTE: It might not be a good thing to use ApolloClient here,
-  // since then the build process depends on external service.
-  const pagePageInfos = await getAllPages(apolloClient);
+  // Do not prerender any static pages when in preview environment
+  // (faster builds, but slower initial page load)
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+
+  const pagePageInfos = await getAllPages(sportsApolloClient);
   const paths = pagePageInfos
     .map((pageInfo) => ({
       params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
@@ -87,7 +94,7 @@ export async function getStaticPaths() {
     .filter((entry) => entry.params.slug && entry.params.slug.length);
   return {
     paths,
-    fallback: true, // can also be true or 'blocking'
+    fallback: true,
   };
 }
 
@@ -117,7 +124,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         if (!page) {
           return {
             notFound: true,
-            revalidate: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
@@ -136,10 +142,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             error: {
-              statusCode: 400,
+              statusCode: 500,
             },
           },
-          revalidate: 10,
         };
       }
     }
@@ -148,7 +153,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
-  const { data: pageData } = await apolloClient.query<
+  const { data: pageData } = await sportsApolloClient.query<
     PageQuery,
     PageQueryVariables
   >({
@@ -166,7 +171,7 @@ const getProps = async (context: GetStaticPropsContext) => {
   //   (context.params?.slug ?? []) as string[]
   // );
 
-  return { currentPage, breadcrumbs: [], apolloClient };
+  return { currentPage, breadcrumbs: [], apolloClient: sportsApolloClient };
 };
 
 /**

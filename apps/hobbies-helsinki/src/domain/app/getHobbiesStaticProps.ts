@@ -12,16 +12,16 @@ import {
   MenuDocument,
 } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
-import initializeFederationApolloClient from '../clients/eventsFederationApolloClient';
+import initializeHobbiesApolloClient from '../clients/hobbiesApolloClient';
 import AppConfig from './AppConfig';
 
 type HobbiesContext = {
   apolloClient: ApolloClient<NormalizedCacheObject>;
 };
 
-export type HobbiesGlobalPageProps = {
+export type HobbiesGlobalPageProps<P = Record<string, unknown>> = {
   initialApolloState: NormalizedCacheObject;
-} & unknown; // FIXME: Promise<GetStaticPropsResult<P>> of getHobbiesStaticProps
+} & Promise<GetStaticPropsResult<P>>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function getHobbiesStaticProps<P = Record<string, any>>(
@@ -30,15 +30,16 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
     hobbiesContext: HobbiesContext
   ) => Promise<GetStaticPropsResult<P>>
 ) {
-  const language = getLanguageOrDefault(context.locale);
-  const apolloClient = initializeFederationApolloClient();
-
   try {
+    const language = getLanguageOrDefault(context.locale);
+    const apolloClient = initializeHobbiesApolloClient();
     const globalCmsData = await getGlobalCMSData({
       client: apolloClient,
       context,
     });
-    const result = await tryToGetPageProps({ apolloClient });
+    const result = await tryToGetPageProps({
+      apolloClient: apolloClient,
+    });
     const props =
       'props' in result
         ? {
@@ -55,22 +56,19 @@ export default async function getHobbiesStaticProps<P = Record<string, any>>(
       ...result,
       props,
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (e: any) {
+  } catch (e: unknown) {
     // Generic error handling
     staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
-
-    if (isApolloError(e)) {
+    if (isApolloError(e as Error)) {
       return {
+        revalidate: 1,
         props: {
           error: {
-            statusCode: 400,
+            statusCode: 500,
           },
         },
-        revalidate: 10,
       };
     }
-
     throw e;
   }
 }

@@ -26,7 +26,6 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
     ssr: false,
     variables: { id: publisher },
   });
-
   const organizationName = organizationData?.organizationDetails.name;
 
   return (

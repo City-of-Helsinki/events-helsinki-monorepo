@@ -214,7 +214,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         language: getQlLanguage(language).toLocaleLowerCase(),
       },
     });
-
+    if (!pageData) {
+      return {
+        notFound: true,
+      };
+    }
     const page = pageData.pageByTemplate;
     return {
       props: {

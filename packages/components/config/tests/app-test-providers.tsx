@@ -8,6 +8,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import type { NextRouter } from 'next/router';
 import React from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import {
   ConfigProvider as RHHCConfigProvider,
   defaultConfig as rhhcDefaultConfig,
@@ -15,7 +16,6 @@ import {
 import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
 import { I18nextTestStubProvider } from '@/test-utils/I18nextTestStubProvider';
 import { DEFAULT_LANGUAGE } from '../../src';
-
 const cmsApiDomain = 'tapahtumat.cms.test.domain.com';
 
 const mockRouter: Partial<NextRouter> = {
@@ -30,6 +30,10 @@ type Props = {
   router: NextRouter;
   cache?: ApolloCache<Record<string, unknown>> | InMemoryCache;
 };
+type Error = { message: string };
+function ErrorFallback({ error }: { error: Error }) {
+  return <p>Test error occurred: {error.message}</p>;
+}
 
 function TestProviders({ mocks, children, router }: Props) {
   return (
@@ -37,7 +41,9 @@ function TestProviders({ mocks, children, router }: Props) {
       <MockedProvider mocks={mocks} addTypename={false}>
         <RHHCConfigProviderWithMockedApolloClient router={router}>
           <RouterContext.Provider value={{ ...router, ...mockRouter }}>
-            {children}
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              {children}
+            </ErrorBoundary>
           </RouterContext.Provider>
         </RHHCConfigProviderWithMockedApolloClient>
       </MockedProvider>

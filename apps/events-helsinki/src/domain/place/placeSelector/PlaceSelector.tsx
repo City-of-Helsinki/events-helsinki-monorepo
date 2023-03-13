@@ -41,7 +41,6 @@ const PlaceSelector: React.FC<Props> = ({
       text: searchValue.toLowerCase(),
     },
   });
-
   const placeOptions = React.useMemo(() => {
     return (placesData?.placeList.data || [])
       .map((place) => ({

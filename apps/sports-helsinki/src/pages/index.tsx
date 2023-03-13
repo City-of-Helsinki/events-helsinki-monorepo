@@ -93,6 +93,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           language: getQlLanguage(language).toLocaleLowerCase(),
         },
       });
+      if (!pageData || !landingPageData) {
+        return {
+          notFound: true,
+        };
+      }
       const page = pageData.pageByTemplate;
       const landingPage = landingPageData.landingPage;
       return {

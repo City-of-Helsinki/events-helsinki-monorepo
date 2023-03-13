@@ -16,7 +16,7 @@ function useLazyVenueSearchForTabCount() {
     }),
     [venueSearchFilters]
   );
-  const [search, { loading, data, ...delegatedProps }] = useLazyQuery(
+  const [search, { loading, data, error, ...delegatedProps }] = useLazyQuery(
     SearchListDocument,
     {
       variables,
@@ -33,7 +33,6 @@ function useLazyVenueSearchForTabCount() {
       ssr: false,
     }
   );
-
   React.useEffect(() => {
     const count =
       !loading && data

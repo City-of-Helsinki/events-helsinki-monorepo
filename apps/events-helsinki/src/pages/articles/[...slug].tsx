@@ -38,7 +38,7 @@ import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
+import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsArticle: NextPage<{
@@ -56,7 +56,6 @@ const NextCmsArticle: NextPage<{
   return (
     <MatomoWrapper>
       <RHHCPage
-        className="article-page"
         navigation={<Navigation page={article} />}
         content={
           <RHHCPageContent
@@ -85,16 +84,23 @@ const NextCmsArticle: NextPage<{
 };
 
 export async function getStaticPaths() {
-  // NOTE: It might not be a good thing to use ApolloClient here,
-  // since then the build process depends on external service.
-  const articlePageInfos = await getAllArticles(apolloClient);
+  // Do not prerender any static pages when in preview environment
+  // (faster builds, but slower initial page load)
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+
+  const articlePageInfos = await getAllArticles(eventsApolloClient);
   const paths = articlePageInfos.map((pageInfo) => ({
     params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
     locale: pageInfo.locale,
   }));
   return {
     paths,
-    fallback: true, // can also be true or 'blocking'
+    fallback: true,
   };
 }
 
@@ -125,7 +131,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         if (!article) {
           return {
             notFound: true,
-            revalidate: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
@@ -146,10 +151,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             error: {
-              statusCode: 400,
+              statusCode: 500,
             },
           },
-          revalidate: 10,
         };
       }
     }
@@ -157,7 +161,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 const getProps = async (context: GetStaticPropsContext) => {
-  const { data: articleData } = await apolloClient.query<
+  const { data: articleData } = await eventsApolloClient.query<
     ArticleQuery,
     ArticleQueryVariables
   >({
@@ -176,7 +180,7 @@ const getProps = async (context: GetStaticPropsContext) => {
   // TODO: Breadcrumbs are unstyled, so left disabled
   const breadcrumbs: Breadcrumb[] = []; // await _getBreadcrumbs(apolloClient, currentArticle);
 
-  return { currentArticle, breadcrumbs, apolloClient };
+  return { currentArticle, breadcrumbs, apolloClient: eventsApolloClient };
 };
 
 /**

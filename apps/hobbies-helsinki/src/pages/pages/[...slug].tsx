@@ -37,7 +37,7 @@ import Navigation from '../../../../../packages/components/src/components/naviga
 import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
-import { apolloClient } from '../../domain/clients/eventsFederationApolloClient';
+import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsPage: NextPage<{
@@ -53,7 +53,6 @@ const NextCmsPage: NextPage<{
   return (
     <MatomoWrapper>
       <HCRCPage
-        className="page"
         navigation={<Navigation page={page} />}
         content={
           <HCRCPageContent
@@ -75,9 +74,16 @@ const NextCmsPage: NextPage<{
 };
 
 export async function getStaticPaths() {
-  // NOTE: It might not be a good thing to use ApolloClient here,
-  // since then the build process depends on external service.
-  const pagePageInfos = await getAllPages(apolloClient);
+  // Do not prerender any static pages when in preview environment
+  // (faster builds, but slower initial page load)
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+
+  const pagePageInfos = await getAllPages(hobbiesApolloClient);
   const paths = pagePageInfos
     .map((pageInfo) => ({
       params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
@@ -87,7 +93,7 @@ export async function getStaticPaths() {
     .filter((entry) => entry.params.slug && entry.params.slug.length);
   return {
     paths,
-    fallback: true, // can also be true or 'blocking'
+    fallback: true,
   };
 }
 
@@ -117,7 +123,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         if (!page) {
           return {
             notFound: true,
-            revalidate: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
@@ -125,7 +130,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
-            ...(await serverSideTranslationsWithCommon(language)),
+            ...(await serverSideTranslationsWithCommon(language, ['cms'])),
             page,
             breadcrumbs,
             collections: getCollections(page.modules ?? []),
@@ -136,10 +141,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             error: {
-              statusCode: 400,
+              statusCode: 500,
             },
           },
-          revalidate: 10,
         };
       }
     }
@@ -148,7 +152,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
-  const { data: pageData } = await apolloClient.query<
+  const { data: pageData } = await hobbiesApolloClient.query<
     PageQuery,
     PageQueryVariables
   >({
@@ -166,7 +170,7 @@ const getProps = async (context: GetStaticPropsContext) => {
   //   (context.params?.slug ?? []) as string[]
   // );
 
-  return { currentPage, breadcrumbs: [], apolloClient };
+  return { currentPage, breadcrumbs: [], apolloClient: hobbiesApolloClient };
 };
 
 /**

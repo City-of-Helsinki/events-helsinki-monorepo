@@ -266,7 +266,6 @@ export const useSimilarVenuesQuery = ({
         includeHaukiFields: AppConfig.isHaukiEnabled,
       },
     });
-
   // Search for venues from venues-proxy (e.g. TPREK as a datasource) with the venue ids.
   const [getVenuesByIds, queryProps] = useVenuesByIdsLazyQuery({
     variables: { includeHaukiFields: AppConfig.isHaukiEnabled },

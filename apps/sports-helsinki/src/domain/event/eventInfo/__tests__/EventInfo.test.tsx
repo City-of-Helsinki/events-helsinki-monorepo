@@ -1,3 +1,4 @@
+import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
 import { EventTypeId, getDateRangeStr } from 'events-helsinki-components';
 import type {
   EventDetails,
@@ -97,8 +98,8 @@ it('should render event info fields', async () => {
     price,
   ];
 
-  itemsByText.forEach((item) => {
-    expect(screen.getByText(item)).toBeInTheDocument();
+  itemsByText.forEach(async (item) => {
+    expect(await screen.findByText(item)).toBeInTheDocument();
   });
 });
 
@@ -259,7 +260,7 @@ it('should hide audience age info on single event page', async () => {
   });
 });
 
-it('should show formatted audience age info on signle event page if max age is not specified', async () => {
+it('should show formatted audience age info on single event page if max age is not specified', async () => {
   render(<EventInfo event={{ ...event, audienceMaxAge: null }} />, {
     routes: [`/kurssit`],
   });
@@ -305,7 +306,7 @@ describe('OrganizationInfo', () => {
     'should show correct provider link text on event/hobby detail page',
     async ({ route, expectedLinkText }) => {
       render(<EventInfo event={event} />, {
-        mocks,
+        mocks: mocksWithSubEvents,
         routes: [route],
       });
       await waitFor(() => {
@@ -503,7 +504,7 @@ describe('subEvents', () => {
         mocks: [...mocks, middleAsSuperEventMock, superEventMock],
       }
     );
-
+    await waitForLoadingCompleted();
     await waitFor(() => {
       expect(
         screen.getByRole('heading', {

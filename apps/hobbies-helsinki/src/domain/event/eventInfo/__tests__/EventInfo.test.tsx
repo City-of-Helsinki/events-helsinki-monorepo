@@ -53,7 +53,7 @@ const getDateRangeStrProps = (event: EventDetails) => ({
 });
 
 it('should render event info fields', async () => {
-  render(<EventInfo event={event} />, { mocks });
+  render(<EventInfo event={event} />, { mocks: mocksWithSubEvents });
   await actWait();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -97,8 +97,8 @@ it('should render event info fields', async () => {
     price,
   ];
 
-  itemsByText.forEach((item) => {
-    expect(screen.getByText(item)).toBeInTheDocument();
+  itemsByText.forEach(async (item) => {
+    expect(await screen.findByText(item)).toBeInTheDocument();
   });
 });
 
@@ -107,7 +107,7 @@ it('should hide the organizer section when the organizer name is not given', asy
     ...event,
     provider: null,
   };
-  render(<EventInfo event={mockEvent} />, { mocks });
+  render(<EventInfo event={mockEvent} />, { mocks: mocksWithSubEvents });
   await actWait();
   expect(
     screen.getByRole('heading', {
@@ -201,7 +201,7 @@ it('should hide the map link from location info if location is internet', () => 
 
 it('should open ticket buy page', async () => {
   global.open = jest.fn();
-  render(<EventInfo event={event} />, { mocks });
+  render(<EventInfo event={event} />, { mocks: mocksWithSubEvents });
 
   // Event info fields
   await userEvent.click(
@@ -217,7 +217,7 @@ it('should open ticket buy page', async () => {
 
 it.skip('should create ics file succesfully', async () => {
   const saveAsSpy = jest.spyOn(FileSaver, 'saveAs');
-  render(<EventInfo event={event} />, { mocks });
+  render(<EventInfo event={event} />, { mocks: mocksWithSubEvents });
 
   // Event info fields
   await userEvent.click(
@@ -286,7 +286,7 @@ it('should hide audience age info on single event page if min and max ages are n
 
 describe('OrganizationInfo', () => {
   it('should show event type related providers link text in events info', async () => {
-    render(<EventInfo event={event} />, { mocks });
+    render(<EventInfo event={event} />, { mocks: mocksWithSubEvents });
     await waitFor(() => {
       expect(
         screen.getByText('Katso julkaisijan muut harrastukset')
@@ -328,7 +328,7 @@ describe('superEvent', () => {
 
   it('should should not render super event title when super event is not given', async () => {
     render(<EventInfo event={event} />, {
-      mocks,
+      mocks: mocksWithSubEvents,
     });
     await actWait();
 

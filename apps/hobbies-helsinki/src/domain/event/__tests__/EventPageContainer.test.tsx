@@ -1,6 +1,10 @@
+import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
 import {
   EventDetailsDocument,
   EventListDocument,
+  DEFAULT_EVENT_SORT_OPTION,
+  OrganizationDetailsDocument,
+  EventTypeId,
 } from 'events-helsinki-components';
 import type { EventFields } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -13,6 +17,7 @@ import {
   fakeEvents,
   fakeKeyword,
   fakeLocalizedObject,
+  fakeOrganization,
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import {
@@ -35,7 +40,7 @@ const keywords = [
   { name: 'Eläimet', id: 'keyword2' },
   { name: 'Grillaus', id: 'keyword3' },
 ];
-const superEventId = 'harrastushaku:13433';
+const superEventId = 'hel:123';
 const otherEventTimesCount = 10;
 
 const event = fakeEvent({
@@ -56,12 +61,10 @@ const event = fakeEvent({
   },
 }) as EventFields;
 
-const eventKeywordIds = event.keywords.map((keyword) => keyword.id) as string[];
-
 const eventRequest = {
   query: EventDetailsDocument,
   variables: {
-    id,
+    id: superEventId,
     include: ['in_language', 'keywords', 'location', 'audience'],
   },
 };
@@ -69,7 +72,7 @@ const otherEventsRequest = {
   query: EventListDocument,
   variables: {
     include: ['in_language', 'keywords', 'location', 'audience'],
-    sort: 'end_time',
+    sort: DEFAULT_EVENT_SORT_OPTION,
     start: 'now',
     superEvent: superEventId,
   },
@@ -87,6 +90,15 @@ const otherEventsResponse = {
   data: { eventList: fakeEvents(otherEventTimesCount) },
 };
 const similarEvents = fakeEvents(3);
+
+const organizationId = '1';
+const organizationName = 'Organization name';
+const organization = fakeOrganization({
+  id: organizationId,
+  name: organizationName,
+});
+const organizationResponse = { data: { organizationDetails: organization } };
+
 const mocks = [
   {
     request: eventRequest,
@@ -107,10 +119,26 @@ const mocks = [
   createEventListRequestAndResultMocks({
     variables: {
       allOngoing: true,
-      keywordOrSet2: eventKeywordIds,
+      audienceMinAgeLt: '5',
+      audienceMaxAgeGt: '15',
+      internetBased: undefined,
+      keywordOrSet2: [''],
+      keywordOrSet3: [''],
+      language: undefined,
+      pageSize: 100,
+      eventType: [EventTypeId.General],
     },
     response: similarEvents,
   }),
+  {
+    request: {
+      query: OrganizationDetailsDocument,
+      variables: {
+        id: 'provider:123',
+      },
+    },
+    result: organizationResponse,
+  },
 ];
 
 const testPath = `/courses/${id}`;
@@ -130,9 +158,7 @@ it('should render info and load other events + similar events', async () => {
   advanceTo('2020-10-01');
   renderComponent({ event: event, loading: false });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
 
   expect(screen.getByRole('heading', { name })).toBeInTheDocument();
 
@@ -165,9 +191,7 @@ it('should show error info when event is closed', async () => {
   advanceTo('2020-10-10');
   renderComponent({ event: event, loading: false });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
   await waitFor(() => {
     expect(
       screen.getByRole('heading', {
@@ -190,9 +214,7 @@ it("should show error info when event doesn't exist", async () => {
     routes,
   });
 
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-  });
+  await waitForLoadingCompleted();
   await waitFor(() => {
     expect(
       screen.getByRole('heading', {
@@ -240,11 +262,13 @@ describe.skip(`SIMILAR_EVENTS feature flag`, () => {
 
 it('should link to events search when clicking tags', async () => {
   advanceTo('2020-10-01');
-  const { router } = renderComponent({ event: event, loading: false });
-
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+  const { router } = renderComponent({
+    event: event,
+    loading: false,
+    showSimilarEvents: false,
   });
+
+  await waitForLoadingCompleted();
 
   const tagLink = await screen.findByRole('link', { name: 'Avouinti' });
 

@@ -48,7 +48,6 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
       text: internalInputValue,
     },
   });
-
   const [autoSuggestItems, setAutoSuggestItems] = React.useState<
     AutosuggestMenuOption[]
   >([]);

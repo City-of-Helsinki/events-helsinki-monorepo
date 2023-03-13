@@ -5,6 +5,7 @@
 !src/
 !*yarn*
 !tsconfig.json
+!next.base.config.js
 !next.config.js
 !.babelrc
 !i18nRoutes.config.js

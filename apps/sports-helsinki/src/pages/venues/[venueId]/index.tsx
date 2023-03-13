@@ -53,7 +53,7 @@ export default Event;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
@@ -77,6 +77,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     });
 
     const venue = venueData?.venue;
+    if (!venue) {
+      return {
+        notFound: true,
+      };
+    }
 
     return {
       props: {

@@ -205,6 +205,6 @@ ENV PORT ${APP_PORT:-3000}
 EXPOSE $PORT
 
 # ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
-ENV PROD_START "node ./apps/${PROJECT}/server22.js"
+ENV PROD_START "node ./apps/${PROJECT}/server.js"
 
 CMD ["sh", "-c", "${PROD_START}"]

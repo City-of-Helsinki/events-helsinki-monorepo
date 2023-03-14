@@ -125,7 +125,7 @@ it('provides configuration for Matomo', () => {
   process.env.NEXT_PUBLIC_MATOMO_TRACKER_URL = 'tracker.php';
 
   expect(AppConfig.matomoConfiguration).toMatchInlineSnapshot(`
-    Object {
+    {
       "disabled": false,
       "siteId": NaN,
       "srcUrl": "//webanalytics.digiaiiris.com/js/piwik.min.js",

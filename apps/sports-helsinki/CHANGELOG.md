@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.4.1...sports-helsinki-v0.5.0) (2023-03-14)
+
+
+### Features
+
+* **sports:** Add combined search publisher filtering to hobbies/events ([d9064a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d9064a8c5ff664b48577800ff7b7edd9df5a0463))
+* **sports:** Use right publisher link/label in event/hobby detail page ([e687102](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e6871029f6e704c97b65c4bf619c879585f6ec5e))
+
+
+### Bug Fixes
+
+* Back button scroll to fix ([#259](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/259)) ([9e3eb5e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9e3eb5ef5a2425782563198e111d58922e8a00da))
+* Grid no limit and spacing ([#248](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/248)) ([e791dbd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e791dbdf9c334c24178d7931dc3d8f9a9805dce6))
+* Header fixes for pages ([#244](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/244)) ([276468c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/276468c1c88b951147f94a5a1d56e661afead921))
+* Logo hover effect ([#266](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/266)) ([e541aab](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e541aab570fe81549b424a22d2d313c17d91c565))
+* Show venue info in mobile ([#255](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/255)) ([d92c247](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d92c24716de27ba3e6dee910d5e7a10a983eb7bc))
+* Sports categories shortcuts ([#254](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/254)) ([ced0ef4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ced0ef4ce21305eb2f37e0e654961e1c92cd2ff1))
+
 ## [0.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.4.0...sports-helsinki-v0.4.1) (2023-03-01)
 
 

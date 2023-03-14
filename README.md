@@ -185,6 +185,8 @@ They are based on the [npm-check-updates](https://github.com/raineorshine/npm-ch
 > having duplicates in the yarn.lock, you can run `yarn dedupe --check` and `yarn dedupe` to
 > apply deduplication. The duplicate check is enforced in the example github actions.
 
+While `deps:check` will give you a detailed info about about dep versions across the project, it doesn't automatically pinpoint mismatching versions between apps in the repo. To automatically find and fix mismatches, run `yarn lint:dependency-versions` in the root to make sure all deps in the monorepo are updated to the same version. Check the output, and fix issues by running `lint:dependency-versions --fix`.
+
 ### Symbolic links
 
 Monorepo uses symbolic links to share assets and locales between apps and packages, e.g.:
@@ -396,5 +398,7 @@ To help keeping deps up-to-date, see the `yarn deps:check && yarn deps:update` s
 > When adding a dep through yarn cli (i.e.: yarn add something), it's possible to set the save-exact behaviour automatically
 > by setting `defaultSemverRangePrefix: ""` in [yarnrc.yml](./.yarnrc.yml). But this would make the default for packages/\* as well.
 > Better to handle `yarn add something --exact` on per-case basis.
+
+While `deps:check` will give you a detailed info about about dep versions across the project, it doesn't automatically pinpoint mismatching versions between apps in the repo. To automatically find and fix mismatches, run `yarn lint:dependency-versions` in the root to make sure all deps in the monorepo are updated to the same version. Check the output, and fix issues by running `lint:dependency-versions --fix`.
 
 **Note about updating deps across the monorepo**: when updating a dep, it's important to update it in all the packages that use it, and make sure every dep is updated to the same version. Version differences can cause all kinds of hard-to-debug issues.

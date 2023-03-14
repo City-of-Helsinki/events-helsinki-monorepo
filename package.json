@@ -24,7 +24,7 @@
     "g:lint": "yarn workspaces foreach -ptv run lint --color",
     "g:lint-styles": "yarn workspaces foreach -ptv run lint-styles --color",
     "g:typecheck": "yarn workspaces foreach -ptv run typecheck",
-    "g:lint-staged-files": "lint-staged --allow-empty",
+    "g:lint-staged-files": "lint-staged --allow-empty --debug && yarn lint:dependency-versions",
     "g:lint-fix": "yarn workspaces foreach -ptv run lint-fix",
     "g:check-dist": "yarn workspaces foreach -ptv run check-dist",
     "g:release": "yarn g:build && changeset publish",

@@ -59,13 +59,6 @@ const EventsCookieConsent: React.FC<Props> = ({
                 expiration: t('consent:expiration.year'),
               },
               {
-                id: 'matomo',
-                name: '_pk*',
-                hostName: 'digia.fi',
-                description: t('consent:cookies.matomo'),
-                expiration: t('consent:expiration.days', { days: 393 }),
-              },
-              {
                 id: 'i18next',
                 name: 'i18next',
                 hostName: 'api.hel.fi',
@@ -79,11 +72,11 @@ const EventsCookieConsent: React.FC<Props> = ({
       optionalCookies: {
         groups: [
           {
-            title: t('consent:groups.servicemap.title'),
-            text: t('consent:groups.servicemap.text'),
-            expandAriaLabel: t('consent:groups.servicemap.expandAriaLabel'),
+            title: t('consent:groups.optional.title'),
+            text: t('consent:groups.optional.text'),
+            expandAriaLabel: t('consent:groups.optional.expandAriaLabel'),
             checkboxAriaDescription: t(
-              'consent:groups.servicemap.checkboxAriaDescription'
+              'consent:groups.optional.checkboxAriaDescription'
             ),
             cookies: [
               {
@@ -106,6 +99,13 @@ const EventsCookieConsent: React.FC<Props> = ({
                 hostName: 'palvelukartta.hel.fi',
                 description: t('consent:cookies.servicemap_ga'),
                 expiration: t('consent:expiration.session'),
+              },
+              {
+                id: 'matomo',
+                name: '_pk*',
+                hostName: 'digia.fi',
+                description: t('consent:cookies.matomo'),
+                expiration: t('consent:expiration.days', { days: 393 }),
               },
             ],
           },

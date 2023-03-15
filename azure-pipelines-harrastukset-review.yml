@@ -57,9 +57,12 @@ extends:
   template: azure-pipelines-harrastukset-review.yml@harrastukset-pipelines
   parameters:
     buildArgs:
-      NEXT_PUBLIC_DEBUG: 1
-      NEXTJS_DISABLE_SENTRY: 1
+      - name1: NEXT_PUBLIC_DEBUG
+        value: 1
+      - name2: NEXTJS_DISABLE_SENTRY
+        value: 1
     runtimeEnvVars:
-      - "NEXT_PUBLIC_DEBUG: 1"
-      - "NEXT_PUBLIC_CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io"
-    
+      - name1: NEXT_PUBLIC_DEBUG
+        value: 1
+      - name2: NEXT_PUBLIC_CMS_ORIGIN
+        value: https://harrastus.hkih.stage.geniem.io

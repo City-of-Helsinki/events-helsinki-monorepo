@@ -60,7 +60,7 @@ extends:
       NEXT_PUBLIC_DEBUG: 1
       NEXTJS_DISABLE_SENTRY: '1'
       TESTI: 'testivalue'
-    runtimeEnvVars:
+    configMap:
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
       TESTIENV: 'testienvvalue'

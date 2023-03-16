@@ -61,8 +61,12 @@ extends:
         value: 1
       - name2: NEXTJS_DISABLE_SENTRY
         value: 1
+      - name3: TESTI
+        value: 'testivalue'
     runtimeEnvVars:
       - name1: NEXT_PUBLIC_DEBUG
         value: 1
       - name2: NEXT_PUBLIC_CMS_ORIGIN
         value: https://harrastus.hkih.stage.geniem.io
+      - name3: TESTIENV
+        value: 'testienvvalue'

@@ -28,7 +28,6 @@ const KeywordTag: FunctionComponent<Props> = ({
 }) => {
   const [isSelected, setIsSelected] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleClick = (): void => {
     setIsSelected(true);
     onClick && onClick();
@@ -45,8 +44,7 @@ const KeywordTag: FunctionComponent<Props> = ({
         transparent && styles.transparent,
         className
       )}
-      /* Disable keyword onClick for now per LIIKUNTA-411 comment */
-      /* onClick={handleClick} */
+      onClick={handleClick}
       {...rest}
     >
       {keyword}

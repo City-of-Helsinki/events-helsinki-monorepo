@@ -29,8 +29,7 @@ afterAll(() => {
   clear();
 });
 
-// Skip test because keyword press is disabled
-it.skip('should render keywords and handle click', async () => {
+it('should render keywords and handle click', async () => {
   const { router } = render(
     <EventKeywords event={event} showIsFree={true} showKeywords={true} />
   );
@@ -63,8 +62,7 @@ it('should not show keywords', () => {
   });
 });
 
-// Skip test because keyword press is disabled
-it.skip('should render today tag and handle click', async () => {
+it('should render today tag and handle click', async () => {
   advanceTo('2020-06-22');
   const { router } = render(
     <EventKeywords event={event} showIsFree={true} showKeywords={false} />
@@ -81,8 +79,7 @@ it.skip('should render today tag and handle click', async () => {
   });
 });
 
-// Skip test because keyword press is disabled
-it.skip('should render this week tag and handle click', async () => {
+it('should render this week tag and handle click', async () => {
   advanceTo('2020-06-23');
   const { router } = render(
     <EventKeywords event={event} showIsFree={true} showKeywords={false} />

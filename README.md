@@ -208,13 +208,19 @@ Configuration lives in the root folder of each apps/packages. See
 
 ### 5.4 CI
 
-You'll find some example workflows for github action in [.github/workflows](./.github/workflows).
+CI is running on Platta (Azure DevOps & OpenShift). DevOps has projects for harrastukset, tapahtumat and liikunta.
+Proxies are included to liikunta project.
+
+Each DevOps project has 4 OpenShift environments: development, testing, staging and production.
+Review builds are running on development environment. It is cleaned automatically every Sunday night.
 
 Test, build and deploy pipelines located on Azure DevOps
 
 - [Harrastukset pipelines](https://dev.azure.com/City-of-Helsinki/harrastukset/_build)
 - [Tapahtumat pipelines](https://dev.azure.com/City-of-Helsinki/tapahtumat/_build)
 - [Liikunta pipelines](https://dev.azure.com/City-of-Helsinki/liikunta/_build)
+
+#### Pipeline static testing
 
 Static tests are run as part of pipelines. They will ensure that
 
@@ -227,11 +233,15 @@ Static tests are run as part of pipelines. They will ensure that
 
 Each of those steps can be opted-out.
 
+#### Pipeline triggering
+
+Pipeline trigger files located in the root of this repository. Pipeline trigger files are named 'azure-pipelines-<application>-<pipeline_type>.yml'
+
 To ensure decent performance, those features are present in the example actions:
 
 - **Caching** of packages (node_modules...) - install around 25s
 - **Caching** of nextjs previous build - built around 20s
-- **Triggered when changed** using [actions paths](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onpushpull_requestpaths), ie:
+- **Triggered when changed** using [pipeline paths](https://learn.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#pr-triggers), ie:
 
   > ```
   >  paths:
@@ -245,6 +255,37 @@ To ensure decent performance, those features are present in the example actions:
   >    - ".eslintrc.base.json"
   >    - ".eslintignore"
   > ```
+
+#### Pipeline configuration
+
+Pipeline configurations located in DevOps repositories
+- [harrastukset-pipelines](https://dev.azure.com/City-of-Helsinki/harrastukset/_git/harrastukset-pipelines)
+- [tapahtumat-pipelines](https://dev.azure.com/City-of-Helsinki/tapahtumat/_git/tapahtumat-pipelines)
+- [liikunta-pipelines](https://dev.azure.com/City-of-Helsinki/liikunta/_git/liikunta-pipelines)
+- [graphql-proxy-pipelines](https://dev.azure.com/City-of-Helsinki/liikunta/_git/graphql-proxy-pipelines)
+
+Pipelines variables are defined as parameter on trigger pipeline or as variable template on DevOps pipeline repository
+1. build arguments and config map variables can be set on trigger pipeline as pipeline parameter (example below)
+2. common variable template file (variables/<application>-variables-common.yml)
+3. environment specific variable template file (variables/<application>-variables-<environment>.yml)
+
+Secrets are defined on Azure key vault
+- secrets are imported to pipelines via variable group (Pipelines/Library on DevOps menu)
+  - variable groups are named <environment>-kv
+- secrets have to  add manually to secret configuration
+- > NOTE: required name conversion from keyvault '-' to environment variable '_' needs to be done on pipeline
+
+How to set build arguments and/or config map variables (pod runtime environment variables) on trigger pipeline as key value pairs:
+```
+  template: azure-pipelines-harrastukset-review.yml@harrastukset-pipelines
+  parameters:
+    buildArgs:
+      NEXTJS_DISABLE_SENTRY: 1
+      NEXT_PUBLIC_CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
+    configMap:
+      DEBUG: 1
+      MATOMO_ENABLED: 0
+```
 
 ## 6. Editor support
 

@@ -35,7 +35,7 @@ const HARDCODED_LANGUAGES = [
   {
     __typename: 'Language',
     id: 'TGFuZ3VhZ2U6ZW4=',
-    locale: 'en_US',
+    locale: 'en',
     name: 'English',
     code: 'EN' as LanguageCodeEnum,
     slug: 'en',
@@ -43,7 +43,7 @@ const HARDCODED_LANGUAGES = [
   {
     __typename: 'Language',
     id: 'TGFuZ3VhZ2U6c3Y=',
-    locale: 'sv_SE',
+    locale: 'sv',
     name: 'Svenska',
     code: 'SV' as LanguageCodeEnum,
     slug: 'sv',

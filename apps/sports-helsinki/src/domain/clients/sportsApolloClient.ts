@@ -19,7 +19,9 @@ export default function initializeSportsApolloClient(
 export function useSportsApolloClient(args: {
   handleError?: (error: unknown) => void;
 }): ApolloClient<NormalizedCacheObject> {
-  return React.useMemo(() => initializeSportsApolloClient(args), [args]);
+  // NOTE: Critical: The Apollo cache should never be cleared!
+  // Carefully test the cache after any changes done here.
+  return React.useMemo(() => initializeSportsApolloClient(args), []);
 }
 
 export const sportsApolloClient = initializeSportsApolloClient();

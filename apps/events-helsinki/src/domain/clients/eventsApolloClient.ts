@@ -19,7 +19,9 @@ export default function initializeEventsApolloClient(
 export function useEventsApolloClient(args: {
   handleError?: (error: unknown) => void;
 }): ApolloClient<NormalizedCacheObject> {
-  return React.useMemo(() => initializeEventsApolloClient(args), [args]);
+  // NOTE: Critical: The Apollo cache should never be cleared!
+  // Carefully test the cache after any changes done here.
+  return React.useMemo(() => initializeEventsApolloClient(args), []);
 }
 
 export const eventsApolloClient = initializeEventsApolloClient();

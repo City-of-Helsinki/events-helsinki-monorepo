@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import type { Venue } from 'events-helsinki-components';
 import {
-  Visible,
   useLocale,
   IconButton,
   EllipsedTextWithToggle,

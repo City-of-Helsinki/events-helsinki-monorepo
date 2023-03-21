@@ -5,8 +5,7 @@ import KeywordTag from '../KeywordTag';
 
 const keyword = 'test keyword';
 
-// Skip test because keyword press is disabled
-it.skip('matches snapshot', () => {
+it('matches snapshot', () => {
   const { container } = render(
     <KeywordTag keyword={keyword} onClick={jest.fn()} />
   );
@@ -14,7 +13,7 @@ it.skip('matches snapshot', () => {
   expect(container.firstChild).toMatchSnapshot();
 });
 
-it.skip('calls onClick callback when clicking', async () => {
+it('calls onClick callback when clicking', async () => {
   const onClickMock = jest.fn();
   render(<KeywordTag keyword={keyword} onClick={onClickMock} />);
 

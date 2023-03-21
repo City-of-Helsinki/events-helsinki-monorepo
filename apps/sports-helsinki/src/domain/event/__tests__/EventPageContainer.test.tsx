@@ -258,8 +258,7 @@ describe.skip(`SIMILAR_EVENTS feature flag`, () => {
   });
 });
 
-// Skip test because keyword press is disabled
-it.skip('should link to events search when clicking tags', async () => {
+it('should link to events search when clicking tags', async () => {
   advanceTo('2020-10-01');
   const { router } = renderComponent({ event: event, loading: false });
 

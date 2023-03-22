@@ -90,23 +90,15 @@ async function getGlobalCMSData({
 }: GetGlobalCMSDataParams): Promise<ReturnedGlobalCMSData> {
   const language = getLanguageOrDefault(context.locale);
   const headerNavigationMenuName = DEFAULT_HEADER_MENU_NAME[language];
+  const fetchPolicy = 'network-only'; // Always fetch new, but update the cache.
   const { data: headerMenuData } = await client.query({
     query: MenuDocument,
     variables: {
       id: headerNavigationMenuName,
       // idType: 'URI'
     },
+    fetchPolicy,
   });
-  client.writeQuery({
-    query: MenuDocument,
-    variables: {
-      id: headerNavigationMenuName,
-    },
-    data: {
-      ...headerMenuData,
-    },
-  });
-
   const footerNavigationMenuName = DEFAULT_FOOTER_MENU_NAME[language];
   const { data: footerMenuData } = await client.query({
     query: MenuDocument,
@@ -114,26 +106,12 @@ async function getGlobalCMSData({
       id: footerNavigationMenuName,
       // idType: 'URI'
     },
+    fetchPolicy,
   });
-  client.writeQuery({
-    query: MenuDocument,
-    variables: {
-      id: footerNavigationMenuName,
-    },
-    data: {
-      ...footerMenuData,
-    },
-  });
-
   const { data: languagesData } = await client.query({
     query: LanguagesDocument,
+    fetchPolicy,
   });
-
-  client.writeQuery({
-    query: LanguagesDocument,
-    data: { ...languagesData },
-  });
-
   const languages = getSupportedLanguages(languagesData?.languages, context);
 
   return {

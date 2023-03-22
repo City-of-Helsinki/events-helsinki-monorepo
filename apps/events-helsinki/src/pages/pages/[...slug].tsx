@@ -94,7 +94,7 @@ export async function getStaticPaths() {
     .filter((entry) => entry.params.slug && entry.params.slug.length);
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
@@ -136,7 +136,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             breadcrumbs,
             collections: getCollections(page.modules ?? []),
           },
-          revalidate: 60,
+          revalidate: AppConfig.defaultRevalidate,
         };
       } catch (e) {
         return {
@@ -145,7 +145,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
               statusCode: 400,
             },
           },
-          revalidate: 10,
+          revalidate: 1,
         };
       }
     }
@@ -163,6 +163,7 @@ const getProps = async (context: GetStaticPropsContext) => {
       id: _getURIQueryParameter(context.params?.slug as string[], language),
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
+    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but some reason why it updates only once.fetchPolicy: 'no-cache',
   });
 
   const currentPage = pageData.page;

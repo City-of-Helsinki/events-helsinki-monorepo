@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.5.0...sports-helsinki-v0.5.1) (2023-03-22)
+
+
+### Bug Fixes
+
+* Apollo cache ([afd56fb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/afd56fb858c6ffd9610b647500e4a6ecf2215b80))
+* Disable keyword onclick ([#264](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/264)) ([8f7f1e2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8f7f1e2ce3f90e9aad6fb04af1df9ca82e30bdae))
+* Disable onClick on keywords at sports ([#272](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/272)) ([0912409](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0912409966032d1f101efbe2aadae8c9081488c0))
+* Event selection module is event closed -filters ([824f63b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/824f63b8f98531d930549879fd8f98ef762d681b))
+* The locales of the hard coded list of languages ([81f2be5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/81f2be510b23d9eae87af7008589764935f2e2a2))
+
 ## [0.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.4.1...sports-helsinki-v0.5.0) (2023-03-14)
 
 

@@ -28,10 +28,12 @@ const KeywordTag: FunctionComponent<Props> = ({
 }) => {
   const [isSelected, setIsSelected] = useState(false);
 
-  const handleClick = (): void => {
-    setIsSelected(true);
-    onClick && onClick();
-  };
+  const handleClick = onClick
+    ? () => {
+        setIsSelected(true);
+        onClick();
+      }
+    : undefined;
 
   return (
     <Tag

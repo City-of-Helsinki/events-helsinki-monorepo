@@ -2,6 +2,7 @@
 import {
   KeywordTag,
   useLocale,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   DATE_TYPES,
   scrollToTop,
   getEventFields,
@@ -33,6 +34,7 @@ const EventKeywords: React.FC<Props> = ({
   showIsFree,
   showKeywords = true,
   showKeywordsCount,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   withActions = true,
 }) => {
   const { t } = useTranslation('event');
@@ -43,6 +45,7 @@ const EventKeywords: React.FC<Props> = ({
     locale
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleClick =
     (type: 'dateType' | 'isFree' | 'text', value = '') =>
     () => {
@@ -85,27 +88,30 @@ const EventKeywords: React.FC<Props> = ({
           whiteOnly={whiteOnly}
           featured={!whiteOnly}
           keyword={t('categories.labelFree')}
-          onClick={handleClick('isFree')}
+          /* Disable onClick as per LIIKUNTA-411 comment */
+          /* onClick={handleClick('isFree')} */
         />
       )}
       {today && (
         <KeywordTag
           whiteOnly={whiteOnly}
           keyword={t('categories.labelToday')}
-          onClick={
+          /* Disable onClick as per LIIKUNTA-411 comment */
+          /* onClick={
             withActions ? handleClick('dateType', DATE_TYPES.TODAY) : undefined
-          }
+          } */
         />
       )}
       {!today && thisWeek && (
         <KeywordTag
           whiteOnly={whiteOnly}
           keyword={t('categories.labelThisWeek')}
-          onClick={
+          /* Disable onClick as per LIIKUNTA-411 comment */
+          /* onClick={
             withActions
               ? handleClick('dateType', DATE_TYPES.THIS_WEEK)
               : undefined
-          }
+          } */
         />
       )}
       {showKeywords &&
@@ -117,7 +123,8 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={first.id}
             keyword={first.name}
-            onClick={withActions ? handleClick('text', first.name) : undefined}
+            /* Disable onClick as per LIIKUNTA-411 comment */
+            /* onClick={withActions ? handleClick('text', first.name) : undefined} */
           />
         )}
       {showKeywords &&
@@ -131,7 +138,8 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={second.id}
             keyword={second.name}
-            onClick={withActions ? handleClick('text', second.name) : undefined}
+            /* Disable onClick as per LIIKUNTA-411 comment */
+            /* onClick={withActions ? handleClick('text', second.name) : undefined} */
           />
         )}
       {!!restKeywords.length &&
@@ -144,7 +152,8 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={tag.id}
             keyword={tag.name}
-            onClick={withActions ? handleClick('text', tag.name) : undefined}
+            /* Disable onClick as per LIIKUNTA-411 comment */
+            /* onClick={withActions ? handleClick('text', tag.name) : undefined} */
           />
         ))}
       {!!restKeywords.length && showKeywords && showKeywordsCount && (

@@ -84,7 +84,7 @@ class AppConfig {
 
   static get defaultRevalidate() {
     const envValue = process.env.NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS;
-    const value = envValue ? parseEnvValue(envValue) : 10;
+    const value = envValue ? parseEnvValue(envValue) : 60;
 
     if (typeof value !== 'number') {
       throw Error(

@@ -90,7 +90,7 @@ it.each([
   {
     field: 'defaultRevalidate',
     envName: 'NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS',
-    defaultValue: 10,
+    defaultValue: 60,
   },
 ])('provides number config $field', ({ field, envName, defaultValue }) => {
   // When exists, provides it

@@ -99,7 +99,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
@@ -142,7 +142,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             breadcrumbs,
             collections: getCollections(article.modules ?? []),
           },
-          revalidate: 60,
+          revalidate: AppConfig.defaultRevalidate,
         };
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -153,6 +153,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
               statusCode: 500,
             },
           },
+          revalidate: 1,
         };
       }
     }
@@ -170,6 +171,7 @@ const getProps = async (context: GetStaticPropsContext) => {
       id: _getURIQueryParameter(context.params?.slug as string[], language),
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
+    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but some reason why it updates only once.
   });
 
   const currentArticle = articleData.post;

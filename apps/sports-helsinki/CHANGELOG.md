@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.5.1...sports-helsinki-v0.5.2) (2023-03-23)
+
+
+### Bug Fixes
+
+* The Nextjs ISR to update pages after revalidation time passes ([e3f0980](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e3f098023b0f848e3d84f74e3824041b34db8bad))
+
 ## [0.5.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.5.0...sports-helsinki-v0.5.1) (2023-03-22)
 
 

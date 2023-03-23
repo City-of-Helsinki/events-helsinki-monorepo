@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v1.2.1...hobbies-helsinki-v1.3.0) (2023-03-23)
+
+
+### Features
+
+* **sports:** Use right publisher link/label in event/hobby detail page ([e687102](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e6871029f6e704c97b65c4bf619c879585f6ec5e))
+
+
+### Bug Fixes
+
+* Apollo cache ([afd56fb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/afd56fb858c6ffd9610b647500e4a6ecf2215b80))
+* Back button scroll to fix ([#259](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/259)) ([9e3eb5e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9e3eb5ef5a2425782563198e111d58922e8a00da))
+* Disable keyword onclick ([#264](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/264)) ([8f7f1e2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8f7f1e2ce3f90e9aad6fb04af1df9ca82e30bdae))
+* Event selection module is event closed -filters ([824f63b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/824f63b8f98531d930549879fd8f98ef762d681b))
+* Grid no limit and spacing ([#248](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/248)) ([e791dbd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e791dbdf9c334c24178d7931dc3d8f9a9805dce6))
+* Header fixes for pages ([#244](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/244)) ([276468c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/276468c1c88b951147f94a5a1d56e661afead921))
+* Logo hover effect ([#266](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/266)) ([e541aab](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e541aab570fe81549b424a22d2d313c17d91c565))
+* Remove unused import ([#228](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/228)) ([7e15ddc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7e15ddce9b2c87fa622b4bfc669cca8f119b2aea))
+* The locales of the hard coded list of languages ([81f2be5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/81f2be510b23d9eae87af7008589764935f2e2a2))
+* The Nextjs ISR to update pages after revalidation time passes ([e3f0980](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e3f098023b0f848e3d84f74e3824041b34db8bad))
+
 ## [1.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v1.2.0...hobbies-helsinki-v1.2.1) (2023-02-28)
 
 

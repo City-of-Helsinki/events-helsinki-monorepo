@@ -7,6 +7,7 @@ import {
   useCommonTranslation,
   MultiSelectDropdown,
   getUrlParamAsArray,
+  useAppSportsTranslation,
 } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -137,6 +138,7 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
   searchRoute = SEARCH_ROUTES.SEARCH,
 }) => {
   const { t } = useTranslation('search');
+  const { t: tAppSports } = useAppSportsTranslation();
   const [autosuggestInput, setAutosuggestInput] = React.useState('');
   const [selectedSportsCategories, setSelectedSportsCategories] =
     React.useState<string[]>([]);
@@ -178,7 +180,7 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
                 name="search"
                 onChangeSearchValue={setAutosuggestInput}
                 onOptionClick={handleMenuOptionClick}
-                placeholder={t('search.placeholder')}
+                placeholder={tAppSports('appSports:search.search.placeholder')}
                 searchValue={autosuggestInput}
               />
             </div>

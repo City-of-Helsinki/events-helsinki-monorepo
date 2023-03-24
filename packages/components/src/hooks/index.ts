@@ -16,6 +16,7 @@ export { default as useHomeTranslation } from './useHomeTranslation';
 export { default as useFooterTranslation } from './useFooterTranslation';
 export { default as useNotFoundTranslation } from './useNotFoundTranslation';
 export { default as useSearchTranslation } from './useSearchTranslation';
+export { default as useSetOrderByAndDirQueryParams } from './useSetOrderByAndDirQueryParams';
 export { default as useSetSortQueryParamToOptionValue } from './useSetSortQueryParamToOptionValue';
 export { default as useEventTranslation } from './useEventTranslation';
 export { default as useVenueTranslation } from './useVenueTranslation';

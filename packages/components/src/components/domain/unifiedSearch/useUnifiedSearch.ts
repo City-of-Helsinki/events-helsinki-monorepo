@@ -9,9 +9,7 @@ import { useCallback, useMemo, useRef } from 'react';
 import type { TransitionOptions } from '../../../types/types';
 import { isSportsCategory } from '../../../types/types';
 import getIsDateValid from '../../../utils/getIsValidDate';
-import type { QueryPersister } from '../../../utils/queryPersister';
-import defaultQueryPersister from '../../../utils/queryPersister';
-import type { UnifiedSearchParameters, ModifyFilters } from './types';
+import type { UnifiedSearchParameters } from './types';
 import { SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS } from './unifiedSearchConstants';
 
 type FilterValueType = string | number | boolean | Date;
@@ -119,38 +117,16 @@ function filterConfigToEntry(
   }
 }
 
-function getSafeArrayValue(value?: string | string[]) {
-  if (!value) {
-    return [];
-  }
-
-  if (Array.isArray(value)) {
-    return value;
-  }
-
-  return [value];
-}
-
 type FilterConfig = {
   type: 'string' | 'number' | 'boolean' | 'date';
   storeBehaviour?: 'list' | 'accumulating';
   key: string;
-  filterListBehaviour?: 'hidden';
   mappedFromKey?: string;
   valueMapper?: (value: string) => string | string[];
 };
 
-type SpreadFilter = {
-  key: string;
-  value: FilterValueType;
-};
-
 export class UnifiedSearch {
-  constructor(
-    router: NextRouter,
-    queryPersister: QueryPersister = defaultQueryPersister,
-    isHaukiEnabled = false
-  ) {
+  constructor(router: NextRouter, isHaukiEnabled = false) {
     this.router = router;
     this.filterConfig = [
       { type: 'string', storeBehaviour: 'accumulating', key: 'q' },
@@ -185,8 +161,8 @@ export class UnifiedSearch {
             ),
       },
       { type: 'string', storeBehaviour: 'list', key: 'ontologyWordIds' },
-      { type: 'string', key: 'orderBy', filterListBehaviour: 'hidden' },
-      { type: 'string', key: 'orderDir', filterListBehaviour: 'hidden' },
+      { type: 'string', key: 'orderBy' },
+      { type: 'string', key: 'orderDir' },
     ];
 
     if (isHaukiEnabled) {
@@ -195,8 +171,6 @@ export class UnifiedSearch {
         { type: 'date', key: 'openAt' }
       );
     }
-
-    this.queryPersister = queryPersister;
   }
 
   get filters(): UnifiedSearchParameters {
@@ -220,40 +194,7 @@ export class UnifiedSearch {
   }
 
   get query() {
-    return queryString.parse(this.router.asPath.split(/\?/)[1]);
-  }
-
-  get filterList(): SpreadFilter[] {
-    const filters = this.filterConfig
-      .filter((filterConfig) => filterConfig.filterListBehaviour !== 'hidden')
-      .flatMap((filterConfig) => {
-        const [key, value] = filterConfigToEntry(filterConfig, this.query);
-
-        if (!value) {
-          return null;
-        }
-
-        if (this.getIsArrayKind(filterConfig) && Array.isArray(value)) {
-          return value.map((value: string) => ({
-            key,
-            value,
-          }));
-        }
-
-        return {
-          key,
-          value,
-        };
-      });
-
-    return filters.filter((item) => item?.value) as SpreadFilter[];
-  }
-
-  getIsArrayKind(filterConfig: FilterConfig): boolean {
-    return (
-      filterConfig.storeBehaviour === 'list' ||
-      filterConfig.storeBehaviour === 'accumulating'
-    );
+    return queryString.parse(this.router.asPath?.split(/\?/)[1] ?? '');
   }
 
   setFilters(
@@ -261,17 +202,14 @@ export class UnifiedSearch {
     pathname?: string,
     options?: TransitionOptions
   ) {
-    this.queryPersister.persistQuery(search);
-    if (pathname) {
-      this.router.replace(
-        {
-          pathname,
-          query: this.getQueryObjectFromSearchParameters(search),
-        },
-        undefined,
-        options
-      );
-    }
+    this.router.replace(
+      {
+        pathname,
+        query: this.getQueryObjectFromSearchParameters(search),
+      },
+      undefined,
+      options
+    );
   }
 
   getQueryObjectFromSearchParameters(
@@ -287,128 +225,17 @@ export class UnifiedSearch {
     };
   }
 
-  getSearchParamsFromFilters(filters: SpreadFilter[]): UnifiedSearchParameters {
-    return filters.reduce((acc, { key, value }) => {
-      const config = this.filterConfig.find(
-        (filterConfig) => filterConfig.key === key
-      );
-
-      if (config && this.getIsArrayKind(config)) {
-        // @ts-ignore
-        const nextValue = [...(acc[key] ?? []), value];
-
-        return {
-          ...acc,
-          [key]: nextValue,
-        };
-      }
-
-      return {
-        ...acc,
-        [key]: value,
-      };
-    }, {});
-  }
-
-  modifyFilters(
-    search: Partial<UnifiedSearchParameters>,
-    transitionOptions?: TransitionOptions
-  ) {
-    const nextFilters = this.filterConfig.reduce((acc, filterConfig) => {
-      const { key, storeBehaviour } = filterConfig;
-      const isInSearch = Object.keys(search).includes(key);
-      // @ts-ignore
-      const value = search[key];
-
-      if (value === null) {
-        return acc;
-      }
-
-      const previousValue = this.query[key];
-
-      if (this.getIsArrayKind(filterConfig)) {
-        // @ts-ignore
-        const safePreviousValues = getSafeArrayValue(previousValue);
-
-        if (!isInSearch) {
-          return {
-            ...acc,
-            [key]: safePreviousValues,
-          };
-        }
-
-        const safeValues = Array.isArray(value) ? value : [value];
-
-        let nextValues: string[];
-
-        if (storeBehaviour === 'accumulating') {
-          nextValues = [...safePreviousValues, ...safeValues];
-        } else {
-          nextValues = safeValues;
-        }
-
-        const nextValuesWithoutDuplicates = [
-          ...Array.from(new Set(nextValues)),
-        ];
-
-        return {
-          ...acc,
-          [key]: nextValuesWithoutDuplicates.filter((item) => item),
-        };
-      }
-
-      if (!isInSearch) {
-        return {
-          ...acc,
-          [key]: previousValue,
-        };
-      }
-
-      return {
-        ...acc,
-        [key]: value,
-      };
-    }, {});
-    this.setFilters(
-      dropUndefinedOrNull(nextFilters),
-      undefined,
-      transitionOptions
-    );
-  }
-
-  getQueryWithout(key: string, value: FilterValueType) {
-    const nextFilters = this.filterList.filter((filter) => {
-      const keysDontMatch = filter.key !== key;
-
-      if (value instanceof Date && filter.value instanceof Date) {
-        return keysDontMatch || value.getTime() !== filter.value.getTime();
-      }
-
-      return keysDontMatch || filter.value !== value;
-    });
-
-    return this.getQueryObjectFromSearchParameters(
-      this.getSearchParamsFromFilters(nextFilters)
-    );
-  }
-
   router: NextRouter;
   filterConfig: FilterConfig[];
-  queryPersister: QueryPersister;
 }
 
 export default function useUnifiedSearch() {
   const router = useRouter();
   const unifiedSearch = useMemo(() => new UnifiedSearch(router), [router]);
   const filters = useRef(unifiedSearch.filters);
-  const filterList = useRef(unifiedSearch.filterList);
 
   if (!fastDeepEqual(filters.current, unifiedSearch.filters)) {
     filters.current = unifiedSearch.filters;
-  }
-
-  if (!fastDeepEqual(filterList.current, unifiedSearch.filterList)) {
-    filterList.current = unifiedSearch.filterList;
   }
 
   const setFilters = useCallback(
@@ -418,23 +245,5 @@ export default function useUnifiedSearch() {
     [unifiedSearch]
   );
 
-  const modifyFilters: ModifyFilters = useCallback(
-    (...params: Parameters<typeof unifiedSearch.modifyFilters>) =>
-      unifiedSearch.modifyFilters(...params),
-    [unifiedSearch]
-  );
-
-  const getQueryWithout = useCallback(
-    (...params: Parameters<typeof unifiedSearch.getQueryWithout>) =>
-      unifiedSearch.getQueryWithout(...params),
-    [unifiedSearch]
-  );
-
-  return {
-    filters: filters.current,
-    filterList: filterList.current,
-    setFilters,
-    modifyFilters,
-    getQueryWithout,
-  };
+  return { filters: filters.current, setFilters };
 }

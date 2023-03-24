@@ -24,7 +24,7 @@ function useSearchPage(): SearchPage {
   const { meta } = useConfig();
   const isSmallScreen = useIsSmallScreen();
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
-  const { filters, setFilters } = useUnifiedSearch();
+  const { filters } = useUnifiedSearch();
   const {
     data: venuesData,
     loading: isLoadingVenues,
@@ -44,10 +44,6 @@ function useSearchPage(): SearchPage {
       after: afterCursor,
     };
     setIsFetchingMore(true);
-    setFilters(filters, undefined, {
-      scroll: false,
-      shallow: true,
-    });
     try {
       await fetchMore({ ...pagination });
     } catch (e) {

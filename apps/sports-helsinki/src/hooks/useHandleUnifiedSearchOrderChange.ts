@@ -1,7 +1,7 @@
 import {
   UnifiedSearchOrderBy,
   useGeolocation,
-  useUnifiedSearch,
+  useSetOrderByAndDirQueryParams,
 } from 'events-helsinki-components';
 import type {
   UnifiedSearchOrderByType,
@@ -13,19 +13,18 @@ import type {
 import { useCallback } from 'react';
 
 const useHandleUnifiedSearchOrderChange = () => {
-  const { modifyFilters } = useUnifiedSearch();
+  const setOrderByAndDirQueryParams = useSetOrderByAndDirQueryParams();
   const geolocation: GeolocationContextType = useGeolocation({ skip: true });
 
   return useCallback(
     async (option: Option) => {
-      const transitionOptions = { shallow: true };
-      const [by, dir] = option.value.split('-') as [
+      const [orderBy, orderDir] = option.value.split('-') as [
         UnifiedSearchOrderByType,
         OrderDirType
       ];
 
       // If the user wants to order by distance, try and resolve geolocation
-      if (by === UnifiedSearchOrderBy.distance) {
+      if (orderBy === UnifiedSearchOrderBy.distance) {
         let location: Coordinates | null = geolocation.coordinates;
 
         if (!geolocation.called || !geolocation.coordinates) {
@@ -42,15 +41,9 @@ const useHandleUnifiedSearchOrderChange = () => {
         }
       }
 
-      return modifyFilters(
-        {
-          orderBy: by,
-          orderDir: dir,
-        },
-        transitionOptions
-      );
+      return setOrderByAndDirQueryParams(orderBy, orderDir);
     },
-    [geolocation, modifyFilters]
+    [geolocation, setOrderByAndDirQueryParams]
   );
 };
 

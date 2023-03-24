@@ -2,7 +2,6 @@ import type {
   OpeningHours,
   OpeningHoursTimes,
   SearchListQueryVariables,
-  TransitionOptions,
 } from '../../../types';
 import type {
   UnifiedSearchOrderByType,
@@ -25,8 +24,3 @@ export type UnifiedSearchParameters = {
 export type UnifiedSearchVariables = SearchListQueryVariables;
 export type UnifiedSearchOpeningHours = OpeningHours;
 export type UnifiedSearchOpeningHoursTimes = OpeningHoursTimes;
-
-export type ModifyFilters = (
-  search: Partial<UnifiedSearchParameters>,
-  transitionOptions?: TransitionOptions
-) => void;

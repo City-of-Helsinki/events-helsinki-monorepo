@@ -2,18 +2,8 @@ import queryString from 'query-string';
 
 import { UnifiedSearch } from '../useUnifiedSearch';
 
-class MockQueryPersister {
-  persistQuery() {
-    // pass
-  }
-
-  readPersistedQuery() {
-    // pass
-  }
-}
-
 function getUnifiedSearch(router) {
-  return new UnifiedSearch(router, new MockQueryPersister(), true);
+  return new UnifiedSearch(router, true);
 }
 
 function getAsPath(values) {
@@ -60,34 +50,6 @@ describe('UnifiedSearch', () => {
         }
       `);
       expect(filters.openAt instanceof Date).toStrictEqual(true);
-    });
-  });
-
-  describe('get filterList', () => {
-    it('should return a filter value list', () => {
-      const unifiedSearch = getUnifiedSearch({
-        asPath: getAsPath({
-          q: ['A', 'B'],
-          administrativeDivisionIds: ['123'],
-        }),
-      });
-
-      expect(unifiedSearch.filterList).toMatchInlineSnapshot(`
-        [
-          {
-            "key": "q",
-            "value": "A",
-          },
-          {
-            "key": "q",
-            "value": "B",
-          },
-          {
-            "key": "administrativeDivisionIds",
-            "value": "123",
-          },
-        ]
-      `);
     });
   });
 
@@ -138,7 +100,7 @@ describe('UnifiedSearch', () => {
       );
     });
 
-    it('should not be calling router without pathname', () => {
+    it('should be calling router without pathname', () => {
       const mockRouter = {
         replace: jest.fn(),
       };
@@ -146,81 +108,13 @@ describe('UnifiedSearch', () => {
 
       unifiedSearch.setFilters({});
 
-      expect(mockRouter.replace).not.toHaveBeenLastCalledWith(
+      expect(mockRouter.replace).toHaveBeenLastCalledWith(
         {
           query: {},
         },
         undefined,
         undefined
       );
-    });
-  });
-
-  describe('getSearchParamsFromFilters', () => {
-    it('should merge a list of filters into an object', () => {
-      const unifiedSearch = getUnifiedSearch();
-
-      const filterObject = unifiedSearch.getSearchParamsFromFilters([
-        { key: 'q', value: 'A' },
-        { key: 'q', value: 'B' },
-        { key: 'administrativeDivisionIds', value: '123' },
-      ]);
-
-      expect(filterObject).toMatchInlineSnapshot(`
-        {
-          "administrativeDivisionIds": [
-            "123",
-          ],
-          "q": [
-            "A",
-            "B",
-          ],
-        }
-      `);
-    });
-  });
-
-  describe('modifyFilters', () => {
-    it('should extend currently selected filters', () => {
-      const mockRouter = {
-        asPath: getAsPath({
-          q: ['A'],
-          ontologyTreeIds: [404],
-          administrativeDivisionIds: ['123'],
-        }),
-        replace: jest.fn(),
-      };
-      const unifiedSearch = getUnifiedSearch(mockRouter);
-
-      unifiedSearch.modifyFilters({
-        q: ['B'],
-        administrativeDivisionIds: undefined,
-      });
-
-      expect(mockRouter.replace.mock.calls[0]).toMatchInlineSnapshot(
-        `undefined`
-      );
-    });
-  });
-
-  describe('getQueryWithout', () => {
-    it('should drop the key,string pair that matches the parameters', () => {
-      const mockRouter = {
-        asPath: getAsPath({
-          q: ['A', 'B'],
-          openAt: '2020-12-24T10:12:00.000Z',
-        }),
-      };
-      const unifiedSearch = getUnifiedSearch(mockRouter);
-
-      expect(unifiedSearch.getQueryWithout('q', 'A')).toMatchInlineSnapshot(`
-        {
-          "openAt": "2020-12-24T10:12:00.000Z",
-          "q": [
-            "B",
-          ],
-        }
-      `);
     });
   });
 });

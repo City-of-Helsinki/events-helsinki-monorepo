@@ -33,6 +33,7 @@ function useEventCards({ events, returnPath }: useEventCardsProps) {
           {...cardProps}
           url={url}
           direction="fixed-vertical"
+          imageUrl={cardProps.imageUrl ?? ''}
           customContent={
             EventCardContent && <EventCardContent event={events[i]} />
           }

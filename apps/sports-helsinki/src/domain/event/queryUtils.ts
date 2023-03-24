@@ -293,7 +293,9 @@ export const useSimilarVenuesQuery = ({
         const venueSourceIds = venueIds.map((venueId) =>
           getVenueSourceId(venueId)
         );
-        getVenuesByIds({ variables: { ids: venueSourceIds } });
+        if (venueSourceIds.length) {
+          getVenuesByIds({ variables: { ids: venueSourceIds } });
+        }
       }
     }
   }, [

@@ -42,6 +42,7 @@ function useVenueCards({ venues, returnPath }: useVenueCardsProps) {
           {...cardProps}
           url={url}
           direction="fixed-vertical"
+          imageUrl={cardProps.imageUrl ?? ''}
           customContent={
             VenueCardContent && <VenueCardContent location={venues[i]} />
           }

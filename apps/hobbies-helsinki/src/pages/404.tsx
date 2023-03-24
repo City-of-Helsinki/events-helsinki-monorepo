@@ -10,7 +10,7 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
 
 const FourOhFour: NextPage = () => {
   const { t } = useCommonTranslation();
-  return <NotFound appName={t(`appSports:appName`)} />;
+  return <NotFound appName={t(`appHobbies:appName`)} />;
 };
 export default FourOhFour;
 

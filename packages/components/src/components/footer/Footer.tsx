@@ -1,11 +1,12 @@
 import { Footer, Link } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
+import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
 import useFooterTranslation from '../../hooks/useFooterTranslation';
 import useLocale from '../../hooks/useLocale';
-import type { Menu } from '../../types';
+
 import { resetFocusId } from '../resetFocus/ResetFocus';
 import styles from './footer.module.scss';
 
@@ -46,15 +47,18 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
         copyrightHolder={t('footer:copyright')}
         copyrightText={t('footer:allRightsReserved')}
       >
-        {footerMenu?.menuItems?.nodes?.map((navigationItem) => (
-          <Footer.Item
-            className={styles.footerLink}
-            key={navigationItem?.id}
-            as={Link}
-            href={navigationItem?.path || ''}
-            label={navigationItem?.label}
-          />
-        ))}
+        {footerMenu?.menuItems?.nodes?.map(
+          // FIXME: HCRC-build sometimes fails - this type should not be needed.
+          (navigationItem: Menu['menuItems']['nodes'][number]) => (
+            <Footer.Item
+              className={styles.footerLink}
+              key={navigationItem?.id}
+              as={Link}
+              href={navigationItem?.path || ''}
+              label={navigationItem?.label}
+            />
+          )
+        )}
       </Footer.Base>
     </Footer>
   );

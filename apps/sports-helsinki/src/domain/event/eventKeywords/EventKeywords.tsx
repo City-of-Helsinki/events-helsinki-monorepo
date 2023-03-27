@@ -53,7 +53,7 @@ const EventKeywords: React.FC<Props> = ({
         ...EVENT_DEFAULT_SEARCH_FILTERS,
         dateTypes: type === 'dateType' ? [value] : [],
         isFree: type === 'isFree',
-        text: type === 'text' ? [value] : [],
+        q: type === 'text' ? [value] : [],
       });
 
       router.push(

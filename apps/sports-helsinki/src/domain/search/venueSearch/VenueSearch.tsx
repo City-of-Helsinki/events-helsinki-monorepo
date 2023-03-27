@@ -69,6 +69,9 @@ export const useSimpleVenueSearchForm = ({
   const searchFilters = {
     q: autosuggestInput,
     sportsCategories: selectedSportsCategories,
+    orderBy: searchParams.get('orderBy'),
+    orderDir: searchParams.get('orderDir'),
+    sort: searchParams.get('sort'),
   };
 
   const goToSearch = (search: string): void => {

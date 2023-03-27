@@ -17,9 +17,9 @@ describe('getSearchQuery function', () => {
       getSearchQuery({
         ...EVENT_DEFAULT_SEARCH_FILTERS,
         dateTypes: ['type1', 'type2'],
-        text: ['test'],
+        q: ['test'],
       })
-    ).toBe('?dateTypes=type1,type2&text=test');
+    ).toBe('?dateTypes=type1,type2&q=test');
 
     expect(
       getSearchQuery({
@@ -27,9 +27,9 @@ describe('getSearchQuery function', () => {
         dateTypes: ['type1', 'type2'],
         end: new Date('2019-12-20'),
         start: new Date('2019-11-20'),
-        text: ['test'],
+        q: ['test'],
       })
-    ).toBe('?end=2019-12-20&start=2019-11-20&text=test');
+    ).toBe('?end=2019-12-20&start=2019-11-20&q=test');
   });
 });
 
@@ -164,7 +164,7 @@ describe('getEventSearchVariables function', () => {
     const { allOngoingAnd, localOngoingAnd, location } =
       getEventSearchVariables({
         ...defaultParams,
-        params: new URLSearchParams(`?text=Rock&places=${place}`),
+        params: new URLSearchParams(`?q=Rock&places=${place}`),
       });
     expect(location).toContain(place);
     expect(allOngoingAnd).toBeUndefined();

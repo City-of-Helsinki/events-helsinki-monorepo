@@ -7,11 +7,9 @@
  *
  * Since a form queries with 1 set of fields from 2 different source
  * and 2 different sets of params, a transformation map is needed.
- * E.g a Q-parameter used by Unified-Search has the same use case
- * as the text-parameter in Events-proxy.
  */
 export const TRANSFORM_MAP = new Map<string, string>([
-  ['q', 'text'],
+  ['q', 'q'],
   ['publisher', 'publisher'],
   ['sportsCategories', 'sportsCategories'],
 ]);

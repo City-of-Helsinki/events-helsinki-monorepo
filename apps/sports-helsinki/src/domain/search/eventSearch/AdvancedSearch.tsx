@@ -56,7 +56,7 @@ export const useAdvancedSearchForm = ({
     dateTypes,
     sportsCategories,
     eventType,
-    text,
+    q,
   } = getSearchFilters(searchParams);
 
   const searchFilters = {
@@ -68,7 +68,7 @@ export const useAdvancedSearchForm = ({
     keywordNot,
     places: selectedPlaces,
     publisher,
-    text,
+    q,
     eventType,
   };
 
@@ -82,7 +82,7 @@ export const useAdvancedSearchForm = ({
   const moveToSearchPage = () => {
     const filters = {
       ...searchFilters,
-      ...{ text: [autosuggestInput] },
+      ...{ q: [autosuggestInput] },
     };
     const search = getSearchQuery(filters);
 
@@ -90,7 +90,7 @@ export const useAdvancedSearchForm = ({
   };
 
   const updateFilters = React.useCallback(() => {
-    const { places, text } = getSearchFilters(searchParams);
+    const { places, q } = getSearchFilters(searchParams);
 
     const placeSearchParam =
       params.place && MAPPED_PLACES[params.place.toLowerCase()];
@@ -99,7 +99,7 @@ export const useAdvancedSearchForm = ({
       places.push(placeSearchParam);
     }
     setSelectedPlaces(places);
-    setAutosuggestInput(text?.toString() || '');
+    setAutosuggestInput(q?.toString() || '');
   }, [params.place, searchParams, setAutosuggestInput]);
 
   const clearInputValues = () => {
@@ -167,7 +167,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
 
     const search = getSearchQuery({
       ...(searchFilters as Filters),
-      text: [value],
+      q: [value],
     });
 
     goToSearch(search);

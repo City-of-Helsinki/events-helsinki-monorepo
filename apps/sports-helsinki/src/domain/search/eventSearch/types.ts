@@ -34,8 +34,11 @@ export interface Filters {
   [EVENT_SEARCH_FILTERS.PLACES]: string[];
   [EVENT_SEARCH_FILTERS.PUBLISHER]?: string | null;
   [EVENT_SEARCH_FILTERS.START]: Date | null;
-  [EVENT_SEARCH_FILTERS.TEXT]?: string[];
   [EVENT_SEARCH_FILTERS.EVENT_TYPE]: string[];
+  q?: string[];
+  orderBy?: string | null;
+  orderDir?: string | null;
+  sort?: string | null;
 }
 
 export type MappedFilters = Partial<Omit<Filters, 'start' | 'end'>> & {

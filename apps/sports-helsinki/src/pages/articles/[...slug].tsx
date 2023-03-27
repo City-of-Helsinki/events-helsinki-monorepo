@@ -54,6 +54,10 @@ const NextCmsArticle: NextPage<{
   const { t: appTranslation } = useAppSportsTranslation();
   const { footerMenu } = useContext(NavigationContext);
 
+  // FIXME: Return null to fix SSR rendering for notFound-page.
+  // This is needed only with fallback: true, but should not be needed at all.
+  if (!article) return null;
+
   return (
     <MatomoWrapper>
       <RHHCPage

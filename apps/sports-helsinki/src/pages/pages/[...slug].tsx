@@ -7,7 +7,7 @@ import {
   getAllPages,
   Navigation,
   MatomoWrapper,
-  useCommonTranslation,
+  useAppSportsTranslation,
   FooterSection,
   getLanguageOrDefault,
 } from 'events-helsinki-components';
@@ -49,7 +49,7 @@ const NextCmsPage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t: appTranslation } = useAppSportsTranslation();
   return (
     <MatomoWrapper>
       <HCRCPage
@@ -67,7 +67,10 @@ const NextCmsPage: NextPage<{
           />
         }
         footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+          <FooterSection
+            menu={footerMenu}
+            appName={appTranslation('appSports:appName')}
+          />
         }
       />
     </MatomoWrapper>

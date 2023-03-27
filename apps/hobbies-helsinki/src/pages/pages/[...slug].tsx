@@ -50,6 +50,11 @@ const NextCmsPage: NextPage<{
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
   const { t: appTranslation } = useAppHobbiesTranslation();
+
+  // FIXME: Return null to fix SSR rendering for notFound-page.
+  // This is needed only with fallback: true, but should not be needed at all.
+  if (!page) return null;
+
   return (
     <MatomoWrapper>
       <HCRCPage

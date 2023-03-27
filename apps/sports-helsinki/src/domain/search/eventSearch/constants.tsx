@@ -132,7 +132,7 @@ export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
   places: [],
   publisher: null,
   start: null,
-  text: [],
+  q: [],
   eventType: [],
 };
 
@@ -155,7 +155,6 @@ export enum EVENT_SEARCH_FILTERS {
   PLACES = 'places',
   PUBLISHER = 'publisher',
   START = 'start',
-  TEXT = 'text',
   MIN_AGE = 'audienceMinAgeLt',
   MAX_AGE = 'audienceMaxAgeGt',
   SUITABLE = 'suitableFor',

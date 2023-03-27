@@ -37,7 +37,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     places,
     publisher,
     start,
-    text,
+    q,
     eventType,
   } = getSearchFilters(searchParams);
 
@@ -55,7 +55,10 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       places: getFilteredList('place', places),
       publisher: type !== 'publisher' ? publisher : null,
       start: type === 'date' ? null : start,
-      text: getFilteredList('text', text),
+      q: getFilteredList('text', q),
+      orderBy: searchParams.get('orderBy'),
+      orderDir: searchParams.get('orderDir'),
+      sort: searchParams.get('sort'),
     });
 
     router.push({
@@ -65,10 +68,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   };
 
   const hasFilters =
-    !!sportsCategories.length ||
-    !!publisher ||
-    !!places.length ||
-    !!text?.length;
+    !!sportsCategories.length || !!publisher || !!places.length || !!q?.length;
 
   if (!hasFilters) return null;
 

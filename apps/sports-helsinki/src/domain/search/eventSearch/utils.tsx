@@ -155,7 +155,7 @@ export const getEventSearchVariables = ({
     keywordNot,
     places,
     publisher,
-    text,
+    q,
     dateTypes,
     sportsCategories,
     isFree,
@@ -185,13 +185,13 @@ export const getEventSearchVariables = ({
   const hasLocation = !isEmpty(places);
 
   const getSearchParam = () => {
-    const hasText = !isEmpty(text);
+    const hasText = !isEmpty(q);
     if (hasText && hasLocation) {
       // show helsinki events matching to text
-      return { localOngoingAnd: text };
+      return { localOngoingAnd: q };
     } else if (hasText) {
       // show internet and helsinki events matching to text
-      return { allOngoingAnd: text };
+      return { allOngoingAnd: q };
     } else {
       // show all internet and helsinki events
       return { allOngoing: true };
@@ -262,10 +262,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
   const start = startTime ? new Date(startTime) : null;
 
   const freeText: string[] = [];
-  if (searchParams.get(EVENT_SEARCH_FILTERS.TEXT)) {
-    freeText.push(
-      searchParams.get(EVENT_SEARCH_FILTERS.TEXT)?.toString() || ''
-    );
+  if (searchParams.get('q')) {
+    freeText.push(searchParams.get('q')?.toString() || '');
   }
 
   return {
@@ -287,7 +285,7 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     places: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.PLACES),
     publisher: searchParams.get(EVENT_SEARCH_FILTERS.PUBLISHER),
     start,
-    text: freeText,
+    q: freeText,
     eventType: getUrlParamAsArray(
       searchParams,
       EVENT_SEARCH_FILTERS.EVENT_TYPE
@@ -332,8 +330,8 @@ export const getSearchQuery = (filters: Filters): string => {
     delete newFilters.dateTypes;
   }
 
-  if (newFilters.text?.length && !newFilters.text[0]) {
-    delete newFilters.text;
+  if (newFilters.q?.length && !newFilters.q[0]) {
+    delete newFilters.q;
   }
 
   return buildQueryFromObject(newFilters);

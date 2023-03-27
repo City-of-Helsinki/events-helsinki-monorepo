@@ -215,12 +215,15 @@ export class UnifiedSearch {
   getQueryObjectFromSearchParameters(
     search: UnifiedSearchParameters
   ): ParsedUrlQueryInput {
-    const { openAt, ...delegated } = search;
+    const { openAt, orderBy, orderDir, ...delegated } = search;
 
     return {
       ...delegated,
       ...dropUndefinedOrNull({
         openAt: openAt instanceof Date ? openAt.toJSON() : openAt,
+        orderBy: orderBy ?? this.query.orderBy,
+        orderDir: orderDir ?? this.query.orderDir,
+        sort: this.query.sort,
       }),
     };
   }

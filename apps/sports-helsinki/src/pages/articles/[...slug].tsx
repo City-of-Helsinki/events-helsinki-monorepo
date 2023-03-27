@@ -9,6 +9,7 @@ import {
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
+  useAppSportsTranslation,
 } from 'events-helsinki-components';
 import type { AppLanguage } from 'events-helsinki-components';
 import type {
@@ -49,7 +50,8 @@ const NextCmsArticle: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
 
-  const { t } = useCommonTranslation();
+  const { t: commonTranslation } = useCommonTranslation();
+  const { t: appTranslation } = useAppSportsTranslation();
   const { footerMenu } = useContext(NavigationContext);
 
   return (
@@ -64,7 +66,9 @@ const NextCmsArticle: NextPage<{
             breadcrumbs={
               breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
             }
-            shareLinks={<ShareLinks title={t('common:share.article')} />}
+            shareLinks={
+              <ShareLinks title={commonTranslation('common:share.article')} />
+            }
             collections={
               collections
                 ? cmsHelper.getDefaultCollections(
@@ -76,7 +80,10 @@ const NextCmsArticle: NextPage<{
           />
         }
         footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+          <FooterSection
+            menu={footerMenu}
+            appName={appTranslation('appSports:appName')}
+          />
         }
       />
     </MatomoWrapper>

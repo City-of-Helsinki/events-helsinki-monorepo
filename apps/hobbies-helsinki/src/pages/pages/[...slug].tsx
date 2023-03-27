@@ -42,9 +42,8 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 const NextCmsPage: NextPage<{
   page: PageType;
-  breadcrumbs: Breadcrumb[] | null;
   collections: CollectionType[];
-}> = ({ page, breadcrumbs, collections }) => {
+}> = ({ page, collections }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
@@ -62,7 +61,6 @@ const NextCmsPage: NextPage<{
         content={
           <HCRCPageContent
             page={page as PageContentProps['page']}
-            breadcrumbs={breadcrumbs ?? undefined}
             collections={
               collections
                 ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)

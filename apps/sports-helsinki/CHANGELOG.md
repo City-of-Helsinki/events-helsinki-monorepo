@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.5.2...sports-helsinki-v0.5.3) (2023-03-28)
+
+
+### Bug Fixes
+
+* Change example search terms ([#277](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/277)) ([f5ea5bf](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f5ea5bf848c007c8e10f874364d1d46bf3cfa326))
+* Dynamic pages to return null when document is not found ([4c0754b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4c0754b455fb77fb68fdeb474777a8c348d7fffb))
+* **sports:** Fix venue search order by ([8decbf9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8decbf9f8c6fe55ee8768f01dcbbbbb5df2ca156))
+* **sports:** Use q query parameter only, fix query parameter combining ([4b66e0d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4b66e0d396339caddfdb6b3b13f02ef745850cc9))
+* Undefined image url testing ([9ff4ce5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9ff4ce5f7b18cd2082684e835b61faa237acf06e))
+
 ## [0.5.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.5.1...sports-helsinki-v0.5.2) (2023-03-23)
 
 

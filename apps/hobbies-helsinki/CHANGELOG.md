@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v1.3.0...hobbies-helsinki-v1.3.1) (2023-03-28)
+
+
+### Bug Fixes
+
+* Dynamic pages to return null when document is not found ([4c0754b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4c0754b455fb77fb68fdeb474777a8c348d7fffb))
+* Undefined image url testing ([9ff4ce5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9ff4ce5f7b18cd2082684e835b61faa237acf06e))
+
 ## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v1.2.1...hobbies-helsinki-v1.3.0) (2023-03-23)
 
 

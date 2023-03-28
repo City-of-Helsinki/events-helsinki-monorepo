@@ -1,7 +1,7 @@
 {
   "apps/hobbies-helsinki": "1.3.0",
   "apps/events-helsinki": "0.7.0",
-  "apps/sports-helsinki": "0.5.2",
+  "apps/sports-helsinki": "0.5.3",
   "proxies/events-graphql-federation": "1.2.0",
   "proxies/events-graphql-proxy": "0.3.0",
   "proxies/venue-graphql-proxy": "0.2.0"

@@ -5,7 +5,6 @@ import {
   EventEnrolmentStatus,
   useEventEnrolmentStatus,
   getDateRangeStr,
-  buttonStyles,
   useLocale,
   EventLocationText as LocationText,
   getAudienceAgeText,
@@ -13,17 +12,10 @@ import {
   getEventPrice,
   getLargeEventCardId,
   isEventClosed,
-  isEventFree,
   ArrowRightWithLoadingIndicator,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import {
-  Button,
-  IconCake,
-  IconCalendarClock,
-  IconLinkExternal,
-  IconLocation,
-} from 'hds-react';
+import { IconCake, IconCalendarClock, IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -45,14 +37,12 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const { t: commonTranslation } = useTranslation('common');
   const router = useRouter();
   const locale = useLocale();
-  const button = React.useRef<HTMLDivElement>(null);
 
   const {
     id,
     endTime,
     imageUrl,
     name,
-    offerInfoUrl,
     startTime,
     audienceMinAge,
     audienceMaxAge,
@@ -78,19 +68,6 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
     },
     locale
   );
-
-  const showBuyButton = !eventClosed && !!offerInfoUrl && !isEventFree(event);
-
-  const goToBuyTicketsPage = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // avoids also navigating to details page
-    e.preventDefault();
-    window.open(offerInfoUrl);
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const goToEventPage = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    router.push(eventUrl);
-  };
 
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
@@ -156,60 +133,24 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                 showIsFree={true}
               />
             </div>
-            <div
-              className={classNames(
-                styles.buttonWrapper,
-                showBuyButton ? styles.rightAlign : ''
-              )}
-            >
-              {showBuyButton ? (
-                <>
-                  <div>
-                    <Button
-                      aria-label={t('eventCard.ariaLabelBuyTickets')}
-                      iconRight={<IconLinkExternal aria-hidden />}
-                      fullWidth
-                      onClick={goToBuyTicketsPage}
-                      size="small"
-                      variant="success"
-                    >
-                      {t('eventCard.buttonBuyTickets')}
-                    </Button>
-                  </div>
-                  <div ref={button}>
-                    <Button
-                      aria-label={t('eventCard.ariaLabelReadMore', {
-                        name,
-                      })}
-                      className={buttonStyles.buttonGray}
-                      fullWidth
-                      onClick={goToEventPage}
-                      size="small"
-                      type="button"
-                    >
-                      {t('eventCard.buttonReadMore')}
-                    </Button>
-                  </div>
-                </>
-              ) : (
-                <div>
-                  <ArrowRightWithLoadingIndicator
-                    loading={clicked}
-                    className={styles.arrowRight}
-                    size="l"
-                    aria-hidden="true"
+            <div className={styles.buttonWrapper}>
+              <div>
+                <ArrowRightWithLoadingIndicator
+                  loading={clicked}
+                  className={styles.arrowRight}
+                  size="l"
+                  aria-hidden="true"
+                />
+                {AppConfig.showEnrolmentStatusInCardDetails && (
+                  <EventEnrolmentStatus
+                    event={event}
+                    className={classNames(styles.linkArrowLabel, {
+                      [styles.alert]:
+                        eventEnrolmentStatus === EnrolmentStatusLabel.full,
+                    })}
                   />
-                  {AppConfig.showEnrolmentStatusInCardDetails && (
-                    <EventEnrolmentStatus
-                      event={event}
-                      className={classNames(styles.linkArrowLabel, {
-                        [styles.alert]:
-                          eventEnrolmentStatus === EnrolmentStatusLabel.full,
-                      })}
-                    />
-                  )}
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
           <BackgroundImage

@@ -73,7 +73,6 @@ function buildConfig() {
       'classnames',
       'copy-to-clipboard',
       'date-fns-tz',
-      'events-helsinki-core',
       'hds-design-tokens',
       'hds-react',
       'html-react-parser',

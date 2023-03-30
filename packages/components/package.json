@@ -53,6 +53,7 @@
     "graphql": "16.6.0",
     "hds-design-tokens": "2.3.0",
     "hds-react": "2.8.0",
+    "https": "1.0.0",
     "i18next": "22.4.10",
     "i18next-browser-languagedetector": "7.0.1",
     "i18next-http-backend": "2.1.1",

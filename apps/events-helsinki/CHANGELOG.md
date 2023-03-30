@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.7.0...events-helsinki-v0.7.1) (2023-03-30)
+
+
+### Bug Fixes
+
+* Dynamic pages to return null when document is not found ([4c0754b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4c0754b455fb77fb68fdeb474777a8c348d7fffb))
+* Undefined image url testing ([9ff4ce5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9ff4ce5f7b18cd2082684e835b61faa237acf06e))
+
 ## [0.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.6.0...events-helsinki-v0.7.0) (2023-03-23)
 
 

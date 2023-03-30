@@ -2643,6 +2643,7 @@ __metadata:
     hds-design-tokens: "npm:2.3.0"
     hds-react: "npm:2.8.0"
     html-react-parser: "npm:3.0.8"
+    https: "npm:1.0.0"
     i18next: "npm:22.4.10"
     i18next-browser-languagedetector: "npm:7.0.1"
     i18next-http-backend: "npm:2.1.1"
@@ -16594,6 +16595,13 @@ __metadata:
     agent-base: "npm:6"
     debug: "npm:4"
   checksum: 8e767faec977400c31bca2ef0f5338b843b781b63fd985c00d199adac2d6c8a5ecc6e553588a6821a058198960f167a3c83f014bd64bef9a15b176d992d29dfe
+  languageName: node
+  linkType: hard
+
+"https@npm:1.0.0":
+  version: 1.0.0
+  resolution: "https@npm:1.0.0"
+  checksum: d0ba2691b08330ef0c47412c8ed6c600eda766393917b838bedd962586f65c86151ce9e55d57f8449697b90c9e38f7a83b7a6ef392f04fced7bdb4a7cae429c8
   languageName: node
   linkType: hard
 

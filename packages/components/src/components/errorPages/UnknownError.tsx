@@ -1,7 +1,7 @@
 import { Trans } from 'next-i18next';
 import React from 'react';
 import useErrorsTranslation from '../../hooks/useErrorsTranslation';
-import { ErrorPage } from '../index';
+import ErrorPage from './ErrorPage';
 import type { ErrorPageProps } from './ErrorPage';
 
 type Props = {

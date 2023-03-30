@@ -182,25 +182,3 @@ const nextConfig = {
 #### Step 3.4: Using the package
 
 The packages are now linked to your app, just import them like regular packages: `import { poney } from 'events-helsinki-magnificent-poney'`.
-
-### 4. Publishing
-
-> Optional
-
-If you need to share some packages outside of the monorepo, you can publish them to npm or private repositories.
-An example based on microbundle is present in each package. Versioning and publishing can be done with [atlassian/changeset](https://github.com/atlassian/changesets),
-and it's simple as typing:
-
-```bash
-$ yarn g:changeset
-```
-
-Follow the instructions... and commit the changeset file. A "Version Packages" P/R will appear after CI checks.
-When merging it, a [github action](./.github/workflows/release-or-version-pr.yml) will publish the packages
-with resulting semver version and generate CHANGELOGS for you.
-
-> PS:
->
-> - Even if you don't need to publish, changeset can maintain an automated changelog for your apps. Nice !
-> - To disable automatic publishing of some packages, just set `"private": "true"` in their package.json.
-> - Want to tune the behaviour, see [.changeset/config.json](./.changeset/config.json).

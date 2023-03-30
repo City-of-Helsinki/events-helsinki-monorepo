@@ -1,20 +1,17 @@
 # Changelog
 
-All notable changes to this project will be documented
-in their respective packages and apps. Changelog generation is
-done through [atlassian/changesets](https://github.com/atlassian/changesets).
-
 Apps:
 
-- [nextjs-app/CHANGELOG.md](./apps/nextjs-app/CHANGELOG.md)
-- [remix-app/CHANGELOG.md](./apps/remix-app/CHANGELOG.md)
-- [vite-app/CHANGELOG.md](./apps/vite-app/CHANGELOG.md)
+- [events-helsinki/CHANGELOG.md](./apps/events-helsinki/CHANGELOG.md)
+- [hobbies-helsinki/CHANGELOG.md](./apps/hobbies-helsinki/CHANGELOG.md)
+- [sports-helsinki/CHANGELOG.md](./apps/sports-helsinki/CHANGELOG.md)
+
+Proxies:
+
+- [events-graphql-federation/CHANGELOG.md](./proxies/events-graphql-federation/CHANGELOG.md)
+- [events-graphql-proxy/CHANGELOG.md](./proxies/events-graphql-proxy/CHANGELOG.md)
+- [venue-graphql-proxy/CHANGELOG.md](./proxies/venue-graphql-proxy/CHANGELOG.md)
 
 Packages:
 
-- [api-gateway/CHANGELOG.md](./packages/api-gateway/CHANGELOG.md)
-- [common-i18n/CHANGELOG.md](./packages/common-i18n/CHANGELOG.md)
-- [core/CHANGELOG.md](./packages/core/CHANGELOG.md)
-- [db-main-prisma/CHANGELOG.md](./packages/db-main-prisma/CHANGELOG.md)
 - [components/CHANGELOG.md](./packages/components/CHANGELOG.md)
-- [graphql-mesh/CHANGELOG.md](./packages/graphql-mesh/CHANGELOG.md)

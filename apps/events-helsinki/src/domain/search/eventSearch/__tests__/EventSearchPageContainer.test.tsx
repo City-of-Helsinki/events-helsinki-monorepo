@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 import type { MockedResponse } from '@apollo/client/testing';
-import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
-import type { Meta } from 'events-helsinki-components';
+import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
+import type { Meta } from '@events-helsinki/components';
 import {
   DEFAULT_EVENT_SORT_OPTION,
   KeywordListDocument,
   NeighborhoodListDocument,
   PlaceListDocument,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 import { toast } from 'react-toastify';

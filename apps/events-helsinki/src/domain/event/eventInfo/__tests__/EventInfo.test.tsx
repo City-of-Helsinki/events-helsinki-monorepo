@@ -1,9 +1,9 @@
-import { getDateRangeStr } from 'events-helsinki-components';
+import { getDateRangeStr } from '@events-helsinki/components';
 import type {
   EventDetails,
   EventFields,
   SuperEventResponse,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import FileSaver from 'file-saver';
 import mockRouter from 'next-router-mock';
 import React from 'react';

@@ -3,7 +3,7 @@ import {
   NeighborhoodListDocument,
   PlaceListDocument,
   additionalDivisions,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';

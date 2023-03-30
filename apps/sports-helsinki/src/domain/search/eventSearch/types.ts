@@ -1,4 +1,4 @@
-import type { Season, SPORTS_CATEGORIES } from 'events-helsinki-components';
+import type { Season, SPORTS_CATEGORIES } from '@events-helsinki/components';
 import type React from 'react';
 
 import type { COURSE_CATEGORIES, EVENT_SEARCH_FILTERS } from './constants';

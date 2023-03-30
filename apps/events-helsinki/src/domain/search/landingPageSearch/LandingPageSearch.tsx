@@ -1,9 +1,9 @@
-import type { AutosuggestMenuOption } from 'events-helsinki-components';
+import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import {
   useLocale,
   useCommonTranslation,
   EventTypeId,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { ROUTES } from '../../../constants';

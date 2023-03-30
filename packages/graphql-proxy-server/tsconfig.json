@@ -9,8 +9,8 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "events-helsinki-components": ["../components/src/index"],
-      "events-helsinki-components/*": ["../components/src/*"]
+      "@events-helsinki/components": ["../components/src/index"],
+      "@events-helsinki/components/*": ["../components/src/*"]
     },
     "esModuleInterop": true,
     "moduleResolution": "node"

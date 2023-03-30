@@ -1,5 +1,5 @@
 {
-  "name": "events-helsinki-common-tests",
+  "name": "@events-helsinki/common-tests",
   "version": "0.0.1",
   "license": "MIT",
   "private": true,

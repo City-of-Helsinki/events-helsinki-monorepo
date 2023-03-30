@@ -1,7 +1,6 @@
+import type { ServerConfig } from '@events-helsinki/graphql-proxy-server/src';
+import { startServer } from '@events-helsinki/graphql-proxy-server/src';
 import * as dotenv from 'dotenv';
-
-import type { ServerConfig } from 'events-helsinki-graphql-proxy-server/src';
-import { startServer } from 'events-helsinki-graphql-proxy-server/src';
 import EventContext from './context/EventContext';
 import schema from './schema';
 

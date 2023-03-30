@@ -1,11 +1,11 @@
-import type { MapItem, AppLanguage } from 'events-helsinki-components';
+import type { MapItem, AppLanguage } from '@events-helsinki/components';
 import {
   useLocale,
   getURLSearchParamsFromAsPath,
   Navigation,
   MatomoWrapper,
   getLanguageOrDefault,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
@@ -27,7 +27,7 @@ import type { Connection, SearchResult } from '../../types';
 
 // https://stackoverflow.com/a/64634759
 const MapView = dynamic(
-  () => import('events-helsinki-components/components/mapView/MapView'),
+  () => import('@events-helsinki/components/components/mapView/MapView'),
   {
     loading: () => <LoadingSpinner multicolor />,
     ssr: false,

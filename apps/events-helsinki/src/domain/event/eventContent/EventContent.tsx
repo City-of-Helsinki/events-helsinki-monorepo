@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import {
   ShareLinks,
   sanitizeHtml,
@@ -6,11 +5,12 @@ import {
   EventLocation,
   getEventFields,
   EVENT_LOCATIONS,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   EventFields,
   SuperEventResponse,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';

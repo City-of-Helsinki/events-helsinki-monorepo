@@ -3,7 +3,7 @@ import {
   EventDetailsPage,
   ClosedEventDetailsPage,
   EventSearchPage,
-} from 'events-helsinki-common-tests/browser-tests';
+} from '@events-helsinki/common-tests/browser-tests';
 import { ClientFunction, t } from 'testcafe';
 
 /**

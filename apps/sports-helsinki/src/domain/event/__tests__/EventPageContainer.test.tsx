@@ -1,11 +1,11 @@
-import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
+import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
 import {
   EventDetailsDocument,
   EventListDocument,
   EventTypeId,
   OrganizationDetailsDocument,
-} from 'events-helsinki-components';
-import type { EventFields } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 

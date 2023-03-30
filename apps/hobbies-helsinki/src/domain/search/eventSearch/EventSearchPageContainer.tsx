@@ -1,4 +1,4 @@
-import { useAppHobbiesTranslation } from 'events-helsinki-components';
+import { useAppHobbiesTranslation } from '@events-helsinki/components';
 import React from 'react';
 
 import AdvancedSearch from './AdvancedSearch';

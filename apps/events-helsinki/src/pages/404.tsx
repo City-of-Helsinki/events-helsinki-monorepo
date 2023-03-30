@@ -2,7 +2,7 @@ import {
   getLanguageOrDefault,
   NotFound,
   useAppEventsTranslation,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import getEventsStaticProps from '../domain/app/getEventsStaticProps';

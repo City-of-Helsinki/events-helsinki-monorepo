@@ -1,4 +1,4 @@
-# events-helsinki-common-tests
+# @events-helsinki/common-tests
 
 <p align="left">
   <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">
@@ -15,7 +15,7 @@ One possible way to share common test amongst apps in the monorepo.
 Add the workspace dependency to the consuming app or package.
 
 ```bash
-yarn add events-helsinki-common-tests:"workspace:^"
+yarn add @events-helsinki/common-tests:"workspace:^"
 ```
 
 Add an alias in tsconfig.js to enable fast-refresh.
@@ -24,10 +24,10 @@ Add an alias in tsconfig.js to enable fast-refresh.
 {
   "compilerOptions": {
     "paths": {
-      "events-helsinki-common-tests": [
+      "@events-helsinki/common-tests": [
         "../../../packages/common-tests/src/index",
       ],
-      "events-helsinki-common-tests/browser-tests": [
+      "@events-helsinki/common-tests/browser-tests": [
         "../../../packages/common-tests/browser-tests/index",
       ],
     },

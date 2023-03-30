@@ -1,7 +1,7 @@
 import {
   PlaceDetailsDocument,
   PlaceListDocument,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { IconStar } from 'hds-react';
 import React from 'react';
 

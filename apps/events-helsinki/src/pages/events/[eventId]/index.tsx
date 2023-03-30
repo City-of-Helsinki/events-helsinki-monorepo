@@ -6,12 +6,12 @@ import {
   useCommonTranslation,
   getLanguageOrDefault,
   FooterSection,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   EventFields,
   EventDetailsQuery,
   EventDetailsQueryVariables,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';

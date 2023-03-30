@@ -1,11 +1,11 @@
 /* eslint-disable sonarjs/cognitive-complexity */
-import type { Venue } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
 import {
   KeywordTag,
   useLocale,
   scrollToTop,
   buildQueryFromObject,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { capitalize } from 'lodash';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

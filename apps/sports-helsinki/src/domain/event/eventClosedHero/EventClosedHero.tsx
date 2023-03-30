@@ -1,4 +1,4 @@
-import { useLocale } from 'events-helsinki-components';
+import { useLocale } from '@events-helsinki/components';
 import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

@@ -6,12 +6,12 @@ import type {
   EventListResponse,
   EventType,
   QueryEventListArgs,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import {
   EventListDocument,
   EventTypeId,
   DEFAULT_EVENT_SORT_OPTION,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import AppConfig from '../../../src/domain/app/AppConfig';
 
 export const baseVariables = {

@@ -6,7 +6,7 @@ import {
   CmsHelperProvider,
   DEFAULT_LANGUAGE,
   NavigationContext,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import Head from 'next/head';
 import Link from 'next/link';

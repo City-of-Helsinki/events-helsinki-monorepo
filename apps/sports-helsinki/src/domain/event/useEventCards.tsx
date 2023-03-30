@@ -1,5 +1,5 @@
-import type { EventFields } from 'events-helsinki-components';
-import { useLocale } from 'events-helsinki-components';
+import type { EventFields } from '@events-helsinki/components';
+import { useLocale } from '@events-helsinki/components';
 import React from 'react';
 import {
   Card,

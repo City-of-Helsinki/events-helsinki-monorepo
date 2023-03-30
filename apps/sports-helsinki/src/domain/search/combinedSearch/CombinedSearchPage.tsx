@@ -1,9 +1,9 @@
-import classNames from 'classnames';
 import {
   useSearchTranslation,
   EventTypeId,
   useAppSportsTranslation,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';

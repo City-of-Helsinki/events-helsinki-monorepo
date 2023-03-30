@@ -1,9 +1,9 @@
-import { getDateRangeStr } from 'events-helsinki-components';
+import { getDateRangeStr } from '@events-helsinki/components';
 import type {
   EventDetails,
   EventFieldsFragment,
   OfferFieldsFragment,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';

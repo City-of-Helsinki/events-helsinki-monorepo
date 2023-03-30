@@ -1,4 +1,4 @@
-import { DataSourceWithContext } from 'events-helsinki-graphql-proxy-server/src';
+import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server/src';
 import type EventContext from '../context/EventContext';
 import type { EventDataSources } from '../types';
 

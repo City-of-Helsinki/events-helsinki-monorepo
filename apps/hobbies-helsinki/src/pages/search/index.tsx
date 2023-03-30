@@ -6,7 +6,7 @@ import {
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';

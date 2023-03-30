@@ -1,4 +1,4 @@
-import { EventTypeId } from 'events-helsinki-components';
+import { EventTypeId } from '@events-helsinki/components';
 import { IconSpeechbubbleText } from 'hds-react';
 import React from 'react';
 

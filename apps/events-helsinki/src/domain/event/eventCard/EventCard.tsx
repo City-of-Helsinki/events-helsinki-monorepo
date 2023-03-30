@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import {
   getDateRangeStr,
   useLocale,
@@ -10,8 +9,9 @@ import {
   isEventClosed,
   ArrowRightWithLoadingIndicator,
   useClickCapture,
-} from 'events-helsinki-components';
-import type { EventFields } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';

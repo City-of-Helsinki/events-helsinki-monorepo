@@ -1,4 +1,4 @@
-import type { Venue } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
 import { IconLocation } from 'hds-react';
 import React from 'react';
 

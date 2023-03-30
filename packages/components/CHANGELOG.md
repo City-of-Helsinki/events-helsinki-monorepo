@@ -1,4 +1,4 @@
-# events-helsinki-components
+# @events-helsinki/components
 
 ## 0.0.2
 

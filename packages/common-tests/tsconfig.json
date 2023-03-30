@@ -10,8 +10,8 @@
     "noEmit": false,
     "incremental": true,
     "paths": {
-      "events-helsinki-common-i18n": ["../common-i18n/src/index"],
-      "events-helsinki-common-i18n/*": ["../common-i18n/src/*"]
+      "@events-helsinki/common-i18n": ["../common-i18n/src/index"],
+      "@events-helsinki/common-i18n/*": ["../common-i18n/src/*"]
     }
   },
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]

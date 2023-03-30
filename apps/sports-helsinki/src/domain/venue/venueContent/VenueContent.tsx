@@ -1,10 +1,10 @@
-import classNames from 'classnames';
-import type { Venue } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
 import {
   useVenueTranslation,
   Text,
   ShareLinks,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import React from 'react';
 import {
   PageSection,

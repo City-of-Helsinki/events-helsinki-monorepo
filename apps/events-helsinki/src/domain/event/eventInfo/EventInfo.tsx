@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/browser';
 import {
   getDateArray,
   getDomain,
@@ -12,12 +11,13 @@ import {
   getEventFields,
   getEventPrice,
   getServiceMapUrl,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   EventFields,
   KeywordOption,
   SuperEventResponse,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import * as Sentry from '@sentry/browser';
 import { saveAs } from 'file-saver';
 import {
   Button,

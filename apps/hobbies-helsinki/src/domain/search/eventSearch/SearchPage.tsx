@@ -1,4 +1,4 @@
-import type { QueryEventListArgs } from 'events-helsinki-components';
+import type { QueryEventListArgs } from '@events-helsinki/components';
 import {
   useCmsRoutedAppHelper,
   BasicMeta,
@@ -10,7 +10,7 @@ import {
   useEventListQuery,
   MAIN_CONTENT_ID,
   EVENT_SORT_OPTIONS,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
 import React from 'react';

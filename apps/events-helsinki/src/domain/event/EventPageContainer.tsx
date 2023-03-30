@@ -8,11 +8,11 @@ import {
   isEventClosed,
   EventDetailsDocument,
   MAIN_CONTENT_ID,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   SuperEventResponse,
   EventFieldsFragment,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

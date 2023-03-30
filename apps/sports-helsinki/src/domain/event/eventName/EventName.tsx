@@ -3,8 +3,8 @@ import {
   useLocale,
   getEventFields,
   isEventCancelled,
-} from 'events-helsinki-components';
-import type { EventFieldsFragment } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import React from 'react';
 
 import styles from './eventName.module.scss';

@@ -2,7 +2,7 @@
 import {
   composeQuery,
   normalizeKeys,
-} from 'events-helsinki-graphql-proxy-server/src';
+} from '@events-helsinki/graphql-proxy-server/src';
 import type EventContext from '../../context/EventContext';
 import type { QueryResolvers } from '../../types';
 import type { Place, PlaceListResponse } from '../../types/types';

@@ -1,5 +1,5 @@
+import { Container, isTestEnv } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { Container, isTestEnv } from 'events-helsinki-components';
 import { Koros } from 'hds-react';
 import React from 'react';
 

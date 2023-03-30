@@ -1,4 +1,4 @@
-# events-helsinki-components
+# @events-helsinki/components
 
 <p align="left">
   <a aria-label="Build" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions">

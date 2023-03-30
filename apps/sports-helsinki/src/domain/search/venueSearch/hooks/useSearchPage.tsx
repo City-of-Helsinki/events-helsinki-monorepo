@@ -3,8 +3,8 @@ import {
   useIsSmallScreen,
   useUnifiedSearch,
   getLargeEventCardId,
-} from 'events-helsinki-components';
-import type { UnifiedSearchVenue } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { UnifiedSearchVenue } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';

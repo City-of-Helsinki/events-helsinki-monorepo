@@ -1,11 +1,11 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { isApolloError } from '@apollo/client';
-import type { CmsLanguage, Menu, Language } from 'events-helsinki-components';
+import type { CmsLanguage, Menu, Language } from '@events-helsinki/components';
 import {
   DEFAULT_FOOTER_MENU_NAME,
   DEFAULT_HEADER_MENU_NAME,
   getLanguageOrDefault,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import {
   LanguagesDocument,

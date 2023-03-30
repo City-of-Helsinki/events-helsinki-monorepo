@@ -25,8 +25,8 @@
   "dependencies": {
     "@apollo/datasource-rest": "4.3.2",
     "@apollo/subgraph": "2.2.2",
+    "@events-helsinki/graphql-proxy-server": "workspace:^",
     "@sentry/node": "7.28.1",
-    "events-helsinki-graphql-proxy-server": "workspace:^",
     "graphql": "16.6.0",
     "graphql-tag": "2.12.6",
     "lodash": "4.17.21"

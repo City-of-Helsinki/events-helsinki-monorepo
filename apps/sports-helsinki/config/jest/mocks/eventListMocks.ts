@@ -6,8 +6,8 @@ import type {
   EventListResponse,
   EventType,
   QueryEventListArgs,
-} from 'events-helsinki-components';
-import { EventListDocument, EventTypeId } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import { EventListDocument, EventTypeId } from '@events-helsinki/components';
 
 export const baseVariables = {
   end: '',

@@ -1,4 +1,4 @@
-import { PlaceDetailsDocument } from 'events-helsinki-components';
+import { PlaceDetailsDocument } from '@events-helsinki/components';
 import * as React from 'react';
 
 import { render, screen, waitFor } from '@/test-utils';

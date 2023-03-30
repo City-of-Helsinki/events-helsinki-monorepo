@@ -1,5 +1,5 @@
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import userEvent from '@testing-library/user-event';
-import type { EventFieldsFragment } from 'events-helsinki-components';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';

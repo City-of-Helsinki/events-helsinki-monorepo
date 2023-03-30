@@ -6,8 +6,8 @@ import {
   Select,
   SmallSpinner,
   useGeolocation,
-} from 'events-helsinki-components';
-import type { GeolocationContextType } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { GeolocationContextType } from '@events-helsinki/components';
 import type { SelectCustomTheme } from 'hds-react';
 import React from 'react';
 import useHandleUnifiedSearchOrderChange from '../../../../hooks/useHandleUnifiedSearchOrderChange';

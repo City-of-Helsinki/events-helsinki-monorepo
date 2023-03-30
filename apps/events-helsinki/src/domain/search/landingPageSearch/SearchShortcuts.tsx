@@ -1,5 +1,5 @@
+import { useLocale } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { useLocale } from 'events-helsinki-components';
 import React from 'react';
 import CategoryFilter from '../../../common-events/components/category/CategoryFilter';
 import { ROUTES } from '../../../constants';

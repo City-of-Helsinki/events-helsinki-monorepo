@@ -2,11 +2,11 @@ import {
   getDateRangeStr,
   useLocale,
   getEventFields,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   EventFieldsFragment,
   EventFields,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { IconArrowRight } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

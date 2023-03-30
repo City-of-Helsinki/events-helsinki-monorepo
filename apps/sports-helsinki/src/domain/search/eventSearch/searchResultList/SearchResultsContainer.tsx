@@ -1,4 +1,4 @@
-import { useSearchTranslation } from 'events-helsinki-components';
+import { useSearchTranslation } from '@events-helsinki/components';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import ResultsInfoContainer from './ResultsInfo';

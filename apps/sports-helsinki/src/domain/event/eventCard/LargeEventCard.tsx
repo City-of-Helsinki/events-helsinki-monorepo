@@ -1,5 +1,4 @@
-import classNames from 'classnames';
-import type { EventFields } from 'events-helsinki-components';
+import type { EventFields } from '@events-helsinki/components';
 import {
   useClickCapture,
   EnrolmentStatusLabel,
@@ -16,7 +15,8 @@ import {
   isEventClosed,
   isEventFree,
   ArrowRightWithLoadingIndicator,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import {
   Button,
   IconCake,

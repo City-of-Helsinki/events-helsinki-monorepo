@@ -1,4 +1,4 @@
-import type { EventFieldsFragment } from 'events-helsinki-components';
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
   EventTypeId,
   getEventFields,
@@ -8,7 +8,7 @@ import {
   translateValue,
   useLocale,
   useOrganizationDetailsQuery,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { IconFaceSmile, IconLayers } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

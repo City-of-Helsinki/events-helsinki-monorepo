@@ -1,4 +1,4 @@
-import { EventTypeId } from 'events-helsinki-components';
+import { EventTypeId } from '@events-helsinki/components';
 import AppConfig from '../AppConfig';
 
 let env: any;

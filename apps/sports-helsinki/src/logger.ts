@@ -1,4 +1,4 @@
-import { createLogger } from 'events-helsinki-components';
+import { createLogger } from '@events-helsinki/components';
 import AppConfig from './domain/app/AppConfig';
 
 export const graphqlLogger = createLogger('graphql', AppConfig.debug);

@@ -60,7 +60,7 @@ if (NEXTJS_SENTRY_DEBUG) {
 
 // Tell webpack to compile those packages
 // @link https://www.npmjs.com/package/next-transpile-modules
-const tmModules = ['events-helsinki-components'];
+const tmModules = ['@events-helsinki/components'];
 
 // Example of setting up secure headers
 // @link https://github.com/jagaapple/next-secure-headers

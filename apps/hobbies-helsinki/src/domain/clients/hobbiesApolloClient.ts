@@ -1,5 +1,5 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { EventsFederationApolloClient } from 'events-helsinki-components';
+import { EventsFederationApolloClient } from '@events-helsinki/components';
 import React from 'react';
 import routerHelper from '../../domain/app/routerHelper';
 import AppConfig from '../app/AppConfig';

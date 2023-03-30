@@ -1,5 +1,5 @@
-import type { SearchMapQueryVariables } from 'events-helsinki-components';
-import { useSearchMapQuery } from 'events-helsinki-components';
+import type { SearchMapQueryVariables } from '@events-helsinki/components';
+import { useSearchMapQuery } from '@events-helsinki/components';
 import type { OverridableVariables } from './useUnifiedSearchVariables';
 import useUnifiedSearchVariables from './useUnifiedSearchVariables';
 

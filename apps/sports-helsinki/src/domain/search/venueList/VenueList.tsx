@@ -1,10 +1,10 @@
-import classNames from 'classnames';
-import type { UnifiedSearchVenue } from 'events-helsinki-components';
+import type { UnifiedSearchVenue } from '@events-helsinki/components';
 import {
   getTranslation,
   useLocale,
   LoadingSpinner,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';

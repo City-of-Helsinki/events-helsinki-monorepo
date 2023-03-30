@@ -1,12 +1,12 @@
 import type { ParsedUrlQueryInput } from 'querystring';
-import type { FilterType } from 'events-helsinki-components';
+import type { FilterType } from '@events-helsinki/components';
 import {
   useLocale,
   PlaceFilter,
   PublisherFilter,
   FilterButton,
   translateValue,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

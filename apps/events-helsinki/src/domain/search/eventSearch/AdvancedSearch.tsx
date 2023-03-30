@@ -1,14 +1,14 @@
 import type { ParsedUrlQueryInput } from 'querystring';
 
-import classNames from 'classnames';
 import {
   Checkbox,
   DateSelector,
   MultiSelectDropdown,
   useAppEventsTranslation,
   useLocale,
-} from 'events-helsinki-components';
-import type { AutosuggestMenuOption } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { AutosuggestMenuOption } from '@events-helsinki/components';
+import classNames from 'classnames';
 import { Button, IconSearch, IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

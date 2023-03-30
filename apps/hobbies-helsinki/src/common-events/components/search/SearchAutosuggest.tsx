@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import type {
   AutosuggestMenuOption,
   AutosuggestType,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import {
   AutoSuggestMenu,
   useLocale,
@@ -10,7 +9,8 @@ import {
   useDropdownKeyboardNavigation,
   getLocalizedString,
   useKeywordListQuery,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import { IconSearch } from 'hds-react';
 import type { ChangeEvent } from 'react';
 import React from 'react';

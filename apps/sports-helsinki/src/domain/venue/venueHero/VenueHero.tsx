@@ -1,12 +1,12 @@
-import classNames from 'classnames';
-import type { Venue } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
 import {
   useLocale,
   IconButton,
   EllipsedTextWithToggle,
   getSecureImage,
   useVenueTranslation,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

@@ -1,10 +1,10 @@
-import type { EventTypeId } from 'events-helsinki-components';
+import type { EventTypeId } from '@events-helsinki/components';
 import {
   useSearchTranslation,
   useIsSmallScreen,
   useEventListQuery,
   getLargeEventCardId,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';

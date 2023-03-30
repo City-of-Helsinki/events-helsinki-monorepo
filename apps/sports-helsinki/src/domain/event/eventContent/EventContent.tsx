@@ -1,15 +1,15 @@
-import classNames from 'classnames';
 import type {
   EventFields,
   SuperEventResponse,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import {
   useLocale,
   EventLocation,
   getEventFields,
   EVENT_LOCATIONS,
   ShareLinks,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import {

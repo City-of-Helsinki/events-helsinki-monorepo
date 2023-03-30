@@ -1,4 +1,4 @@
-import { CmsRoutedAppHelper, APP_LANGUAGES } from 'events-helsinki-components';
+import { CmsRoutedAppHelper, APP_LANGUAGES } from '@events-helsinki/components';
 
 import i18nRoutes from '../../../i18nRoutes.config';
 import AppConfig from './AppConfig';

@@ -1,10 +1,10 @@
-import type { Neighborhood } from 'events-helsinki-components';
+import type { Neighborhood } from '@events-helsinki/components';
 import {
   getLocalizedString,
   useLocale,
   useNeighborhoodListQuery,
   additionalDivisions,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import sortBy from 'lodash/sortBy';
 
 export const DIVISION_BLOCKLIST = [

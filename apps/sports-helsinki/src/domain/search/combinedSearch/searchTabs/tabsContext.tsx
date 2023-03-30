@@ -1,4 +1,4 @@
-import { EventTypeId } from 'events-helsinki-components';
+import { EventTypeId } from '@events-helsinki/components';
 import React from 'react';
 export type SearchTabId = 'Venue' | keyof typeof EventTypeId;
 export type SearchResultCounts = {

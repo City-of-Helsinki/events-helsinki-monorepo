@@ -1,4 +1,4 @@
-import { EventTypeId } from 'events-helsinki-components';
+import { EventTypeId } from '@events-helsinki/components';
 import { ROUTES } from '../../constants';
 class AppConfig {
   static get cmsOrigin() {

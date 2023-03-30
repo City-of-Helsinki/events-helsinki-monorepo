@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import type { EventFieldsFragment } from 'events-helsinki-components';
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
   getLinkArrowLabel,
   useLocale,
@@ -8,7 +8,7 @@ import {
   useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';

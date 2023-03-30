@@ -3,7 +3,7 @@ import type {
   QueryEventListArgs,
   UnifiedSearchParameters,
   UnifiedSearchVenue,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { FormEvent } from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
 import type { SearchRoute } from '../../../types';

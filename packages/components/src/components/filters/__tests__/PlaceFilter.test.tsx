@@ -1,4 +1,4 @@
-import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
+import { translations } from '@events-helsinki/common-i18n/tests/initI18n';
 import React from 'react';
 import { render, screen, userEvent, waitFor } from '@/test-utils';
 import { fakePlace } from '@/test-utils/mockDataUtils';

@@ -1,11 +1,11 @@
 import type {
   EventTypeId,
   QueryEventListArgs,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import {
   isEventSortOption,
   DEFAULT_EVENT_SORT_OPTION,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { transformedSearchVariables } from '../../combinedSearch/utils';

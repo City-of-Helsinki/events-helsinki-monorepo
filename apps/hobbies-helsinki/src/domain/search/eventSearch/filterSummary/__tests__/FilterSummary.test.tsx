@@ -2,7 +2,7 @@ import {
   NeighborhoodListDocument,
   OrganizationDetailsDocument,
   PlaceDetailsDocument,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import React from 'react';
 
 import { configure, render, screen, userEvent, waitFor } from '@/test-utils';

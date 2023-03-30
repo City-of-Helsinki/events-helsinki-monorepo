@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { faker } from '@faker-js/faker';
 import type {
   Audience,
   BannerPage,
@@ -21,8 +20,9 @@ import type {
   Place,
   PlaceListResponse,
   StaticPage,
-} from 'events-helsinki-components';
-import { EXTLINK, EventTypeId } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import { EXTLINK, EventTypeId } from '@events-helsinki/components';
+import { faker } from '@faker-js/faker';
 import merge from 'lodash/merge';
 
 export const fakeEvents = (

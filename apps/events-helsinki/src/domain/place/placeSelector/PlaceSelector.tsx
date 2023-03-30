@@ -1,4 +1,4 @@
-import type { MultiselectDropdownProps } from 'events-helsinki-components';
+import type { MultiselectDropdownProps } from '@events-helsinki/components';
 import {
   MultiSelectDropdown,
   useDebounce,
@@ -6,7 +6,7 @@ import {
   getLocalizedString,
   isClient,
   usePlaceListQuery,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import React from 'react';
 
 import PlaceText from '../PlaceText';

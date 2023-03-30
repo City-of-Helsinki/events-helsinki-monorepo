@@ -12,21 +12,21 @@
       "@/test-utils": ["../config/jest/test-utils"],
       "@/test-utils/*": ["../config/jest/*"],
       "@/lib/*": ["./lib/*"],
-      "events-helsinki-common-tests/browser-tests": [
+      "@events-helsinki/common-tests/browser-tests": [
         "../../../packages/common-tests/src/browser-tests/*"
       ],
-      "events-helsinki-common-i18n": [
+      "@events-helsinki/common-i18n": [
         "../../../packages/common-i18n/src/index"
       ],
-      "events-helsinki-common-i18n/locales/*": [
+      "@events-helsinki/common-i18n/locales/*": [
         "../../../packages/common-i18n/src/locales/*"
       ],
-      "events-helsinki-components/*": ["../../../packages/components/src/*"],
-      "events-helsinki-components": ["../../../packages/components/src/index"],
-      "events-helsinki-common-tests/*": [
+      "@events-helsinki/components/*": ["../../../packages/components/src/*"],
+      "@events-helsinki/components": ["../../../packages/components/src/index"],
+      "@events-helsinki/common-tests/*": [
         "../../../packages/common-tests/src/*"
       ],
-      "events-helsinki-common-tests": [
+      "@events-helsinki/common-tests": [
         "../../../packages/common-tests/src/index"
       ]
     }

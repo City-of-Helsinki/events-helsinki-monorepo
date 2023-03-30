@@ -1,4 +1,4 @@
-import type { Venue } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
 import { clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';

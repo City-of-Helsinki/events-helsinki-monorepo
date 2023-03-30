@@ -1,18 +1,10 @@
 import {
-  addDays,
-  endOfWeek,
-  isPast,
-  isToday,
-  startOfWeek,
-  subDays,
-} from 'date-fns';
-import {
   buildQueryFromObject,
   DATE_TYPES,
   formatDate,
   getUrlParamAsArray,
   EventTypeId,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   FilterType,
   AppLanguage,
@@ -20,7 +12,15 @@ import type {
   QueryEventListArgs,
   EventFields,
   EVENT_SORT_OPTIONS,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import {
+  addDays,
+  endOfWeek,
+  isPast,
+  isToday,
+  startOfWeek,
+  subDays,
+} from 'date-fns';
 import isEmpty from 'lodash/isEmpty';
 import type { TFunction } from 'next-i18next';
 

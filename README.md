@@ -151,7 +151,6 @@ Some convenience scripts can be run in any folder of this repo and will call the
 
 | Name                         | Description                                                                                                                          |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `yarn g:changeset`           | Add a changeset to declare a new version                                                                                             |
 | `yarn g:typecheck`           | Run typechecks in all workspaces                                                                                                     |
 | `yarn g:lint`                | Display linter issues in all workspaces                                                                                              |
 | `yarn g:lint --fix`          | Attempt to run linter auto-fix in all workspaces                                                                                     |
@@ -319,23 +318,27 @@ To ensure decent performance, those features are present in the example actions:
 #### Pipeline configuration
 
 Pipeline configurations located in DevOps repositories
+
 - [harrastukset-pipelines](https://dev.azure.com/City-of-Helsinki/harrastukset/_git/harrastukset-pipelines)
 - [tapahtumat-pipelines](https://dev.azure.com/City-of-Helsinki/tapahtumat/_git/tapahtumat-pipelines)
 - [liikunta-pipelines](https://dev.azure.com/City-of-Helsinki/liikunta/_git/liikunta-pipelines)
 - [graphql-proxy-pipelines](https://dev.azure.com/City-of-Helsinki/liikunta/_git/graphql-proxy-pipelines)
 
 Pipelines variables are defined as parameter on trigger pipeline or as variable template on DevOps pipeline repository
+
 1. build arguments and config map variables can be set on trigger pipeline as pipeline parameter (example below)
 2. common variable template file (variables/<application>-variables-common.yml)
 3. environment specific variable template file (variables/<application>-variables-<environment>.yml)
 
 Secrets are defined on Azure key vault
+
 - secrets are imported to pipelines via variable group (Pipelines/Library on DevOps menu)
   - variable groups are named <environment>-kv
-- secrets have to  add manually to secret configuration
-- > NOTE: required name conversion from keyvault '-' to environment variable '_' needs to be done on pipeline
+- secrets have to add manually to secret configuration
+- > NOTE: required name conversion from keyvault '-' to environment variable '\_' needs to be done on pipeline
 
 How to set build arguments and/or config map variables (pod runtime environment variables) on trigger pipeline as key value pairs:
+
 ```
   template: azure-pipelines-harrastukset-review.yml@harrastukset-pipelines
   parameters:

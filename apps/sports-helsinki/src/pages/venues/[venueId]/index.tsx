@@ -7,12 +7,12 @@ import {
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   Venue,
   VenueQuery,
   VenueQueryVariables,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';

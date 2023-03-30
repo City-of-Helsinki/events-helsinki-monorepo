@@ -5,13 +5,13 @@ import {
   useEventListQuery,
   useVenuesByIdsLazyQuery,
   useLocale,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   EventListQuery,
   EventListQueryVariables,
   EventFields,
   Venue,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';

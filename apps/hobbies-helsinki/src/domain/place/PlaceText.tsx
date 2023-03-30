@@ -2,7 +2,7 @@ import {
   getLocalizedString,
   useLocale,
   usePlaceDetailsQuery,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import React from 'react';
 
 interface Props {

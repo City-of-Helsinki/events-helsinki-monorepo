@@ -1,15 +1,15 @@
-import { addDays } from 'date-fns';
 import type {
   EventFieldsFragment,
   EventListQueryVariables,
   EventListResponse,
   Meta,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import {
   DEFAULT_EVENT_SORT_OPTION,
   EventTypeId,
   OrganizationDetailsDocument,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import { addDays } from 'date-fns';
 import { range } from 'lodash';
 
 import {

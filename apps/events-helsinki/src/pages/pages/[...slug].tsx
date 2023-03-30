@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import type { NormalizedCacheObject } from '@apollo/client';
-import type { AppLanguage } from 'events-helsinki-components';
+import type { AppLanguage } from '@events-helsinki/components';
 import {
   Navigation,
   NavigationContext,
@@ -10,7 +10,7 @@ import {
   useAppEventsTranslation,
   getLanguageOrDefault,
   FooterSection,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,

@@ -1,6 +1,5 @@
 import type { ParsedUrlQueryInput } from 'querystring';
 
-import classNames from 'classnames';
 import {
   Checkbox,
   DateSelector,
@@ -8,8 +7,9 @@ import {
   RangeDropdown,
   useAppHobbiesTranslation,
   useLocale,
-} from 'events-helsinki-components';
-import type { AutosuggestMenuOption } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { AutosuggestMenuOption } from '@events-helsinki/components';
+import classNames from 'classnames';
 import {
   Button,
   IconCake,

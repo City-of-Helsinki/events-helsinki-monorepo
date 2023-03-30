@@ -2,7 +2,7 @@ import type {
   DirectionAddress,
   DirectionPoint,
   Venue,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 
 export function renderAddressToString(address: DirectionAddress): string {
   return [address.streetName, address.zip, address.city]

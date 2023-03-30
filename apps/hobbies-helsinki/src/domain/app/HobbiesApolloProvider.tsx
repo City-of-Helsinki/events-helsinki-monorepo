@@ -1,6 +1,6 @@
 import { ApolloProvider as BaseApolloProvider } from '@apollo/client';
 import 'nprogress/nprogress.css';
-import { useErrorBoundary } from 'events-helsinki-components';
+import { useErrorBoundary } from '@events-helsinki/components';
 import React from 'react';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import useHobbiesRHHCConfig from '../../hooks/useHobbiesRHHCConfig';

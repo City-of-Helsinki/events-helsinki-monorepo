@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import {
   useLocale,
   getDateRangeStr,
@@ -9,11 +8,12 @@ import {
   EventLocationText as LocationText,
   getEventFields,
   getEventPrice,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   EventFields,
   SuperEventResponse,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import {
   Button,
   IconArrowLeft,

@@ -1,10 +1,10 @@
-import type { AutosuggestMenuOption } from 'events-helsinki-components';
+import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import {
   getCurrentSeason,
   useUnifiedSearch,
   useLocale,
   useCommonTranslation,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import React from 'react';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';

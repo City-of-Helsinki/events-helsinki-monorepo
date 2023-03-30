@@ -1,4 +1,4 @@
-import { Season, SPORTS_CATEGORIES } from 'events-helsinki-components';
+import { Season, SPORTS_CATEGORIES } from '@events-helsinki/components';
 import React from 'react';
 
 import IconGym from '../../../assets/icons/IconGym';

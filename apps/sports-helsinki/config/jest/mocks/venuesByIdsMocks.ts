@@ -8,8 +8,8 @@ import type { MockedResponse } from '@apollo/client/testing';
 import type {
   VenuesByIdsQuery,
   VenuesByIdsQueryVariables,
-} from 'events-helsinki-components/types';
-import { VenuesByIdsDocument } from 'events-helsinki-components/types';
+} from '@events-helsinki/components/types';
+import { VenuesByIdsDocument } from '@events-helsinki/components/types';
 
 export const venuesByIdsBaseVariables: VenuesByIdsQueryVariables = {
   includeHaukiFields: false,

@@ -1,8 +1,8 @@
-import type { AppLanguage } from 'events-helsinki-components';
+import type { AppLanguage } from '@events-helsinki/components';
 import {
   DATE_TYPES,
   DEFAULT_EVENT_SORT_OPTION,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 
 import {

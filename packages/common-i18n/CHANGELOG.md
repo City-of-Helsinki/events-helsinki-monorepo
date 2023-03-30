@@ -1,1 +1,1 @@
-# events-helsinki-common-i18n
+# @events-helsinki/common-i18n

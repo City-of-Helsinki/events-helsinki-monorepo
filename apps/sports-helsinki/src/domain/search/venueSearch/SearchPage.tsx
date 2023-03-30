@@ -1,4 +1,4 @@
-import type { UnifiedSearchVenue } from 'events-helsinki-components';
+import type { UnifiedSearchVenue } from '@events-helsinki/components';
 import {
   getURLSearchParamsFromAsPath,
   BasicMeta,
@@ -6,7 +6,7 @@ import {
   MAIN_CONTENT_ID,
   SrOnly,
   useSearchTranslation,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { SEARCH_ROUTES } from '../../../constants';

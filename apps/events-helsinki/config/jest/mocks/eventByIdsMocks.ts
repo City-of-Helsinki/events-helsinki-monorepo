@@ -1,10 +1,10 @@
 import type { MockedResponse } from '@apollo/client/testing';
 
-import { EventsByIdsDocument } from 'events-helsinki-components';
+import { EventsByIdsDocument } from '@events-helsinki/components';
 import type {
   EventDetails,
   EventsByIdsQueryVariables,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 
 export const getEventsByIdsMock = ({
   variables,

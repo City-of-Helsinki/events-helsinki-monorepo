@@ -1,7 +1,10 @@
 import type { ParsedUrlQueryInput } from 'querystring';
+import {
+  useAppSportsTranslation,
+  useLocale,
+} from '@events-helsinki/components';
+import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { useAppSportsTranslation, useLocale } from 'events-helsinki-components';
-import type { AutosuggestMenuOption } from 'events-helsinki-components';
 import { Button, IconSearch } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

@@ -1,6 +1,6 @@
+import { KeywordListDocument } from '@events-helsinki/components';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { KeywordListDocument } from 'events-helsinki-components';
 import * as React from 'react';
 
 import {

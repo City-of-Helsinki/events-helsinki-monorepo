@@ -4,7 +4,7 @@ import type {
   UnifiedSearchOrderByType,
   OrderDirType,
   Coordinates,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import {
   useLocale,
   useUnifiedSearch,
@@ -12,7 +12,7 @@ import {
   OrderDir,
   orderDirToUnifiedSearchDistanceOrder,
   useGeolocation,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import {
   HELSINKI_OCD_DIVISION_ID,
   SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID,

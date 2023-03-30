@@ -4,8 +4,8 @@ import {
   useLocale,
   getEventFields,
   useOrganizationDetailsQuery,
-} from 'events-helsinki-components';
-import type { EventFieldsFragment } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import { IconFaceSmile, IconLayers } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';

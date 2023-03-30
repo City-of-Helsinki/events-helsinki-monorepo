@@ -2,7 +2,7 @@ import {
   getLanguageOrDefault,
   NotFound,
   useAppHobbiesTranslation,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
 import getHobbiesStaticProps from '../domain/app/getHobbiesStaticProps';

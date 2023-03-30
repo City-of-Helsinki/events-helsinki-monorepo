@@ -1,1 +1,1 @@
-# events-helsinki-common-tests
+# @events-helsinki/common-tests

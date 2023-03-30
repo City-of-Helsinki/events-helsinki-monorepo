@@ -1,4 +1,4 @@
-import { useCommonTranslation, Text } from 'events-helsinki-components';
+import { useCommonTranslation, Text } from '@events-helsinki/components';
 import { IconCross, Button, IconSearch, IconMenuHamburger } from 'hds-react';
 import React, { useRef, useState } from 'react';
 import styles from './searchHeader.module.scss';

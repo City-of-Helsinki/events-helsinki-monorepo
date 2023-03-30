@@ -3,7 +3,7 @@ import {
   getEnvUrl,
   allCookiesUser,
   useRoleAndNavigateBack,
-} from 'events-helsinki-common-tests/browser-tests';
+} from '@events-helsinki/common-tests/browser-tests';
 
 fixture
   .disablePageCaching('Landing page header')

@@ -1,10 +1,10 @@
-import type { Venue } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
 import {
   InfoWithIcon,
   useVenueTranslation,
   useTabFocusStyle,
   EllipsedTextWithToggle,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { IconClock, IconInfoCircle, IconMap, IconPhone } from 'hds-react';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';

@@ -10,8 +10,8 @@ import {
   FooterSection,
   getLanguageOrDefault,
   useAppSportsTranslation,
-} from 'events-helsinki-components';
-import type { AppLanguage } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { AppLanguage } from '@events-helsinki/components';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,

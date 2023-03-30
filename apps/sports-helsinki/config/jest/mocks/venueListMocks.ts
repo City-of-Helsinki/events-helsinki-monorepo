@@ -4,11 +4,11 @@ import type { MockedResponse } from '@apollo/client/testing';
 import type {
   SearchListQuery,
   SearchListQueryVariables,
-} from 'events-helsinki-components/types';
+} from '@events-helsinki/components/types';
 import {
   UnifiedSearchLanguage,
   SearchListDocument,
-} from 'events-helsinki-components/types';
+} from '@events-helsinki/components/types';
 
 export const venueListBaseVariables: SearchListQueryVariables = {
   language: UnifiedSearchLanguage.Finnish,

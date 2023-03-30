@@ -1,6 +1,6 @@
+import translations from '@events-helsinki/common-i18n/locales/fi/common.json';
 import userEvent from '@testing-library/user-event';
 import { utcToZonedTime } from 'date-fns-tz';
-import translations from 'events-helsinki-common-i18n/locales/fi/common.json';
 import { advanceTo } from 'jest-date-mock';
 import React from 'react';
 import { configure, render, screen } from '@/test-utils';

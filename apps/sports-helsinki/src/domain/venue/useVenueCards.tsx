@@ -1,5 +1,5 @@
-import type { Venue } from 'events-helsinki-components';
-import { useLocale } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
+import { useLocale } from '@events-helsinki/components';
 import React from 'react';
 import {
   Card,

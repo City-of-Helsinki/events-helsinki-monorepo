@@ -5,8 +5,8 @@ import {
   DATE_TYPES,
   scrollToTop,
   getEventFields,
-} from 'events-helsinki-components';
-import type { EventFieldsFragment } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';

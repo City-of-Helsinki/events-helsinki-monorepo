@@ -2,8 +2,8 @@ import {
   LoadingSpinner,
   useClickCapture,
   useLocale,
-} from 'events-helsinki-components';
-import type { EventFields } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import type { CollectionProps } from 'react-helsinki-headless-cms';

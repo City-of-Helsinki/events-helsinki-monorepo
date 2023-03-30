@@ -1,4 +1,4 @@
-import { HeadlessCMSHelper } from 'events-helsinki-components';
+import { HeadlessCMSHelper } from '@events-helsinki/components';
 import ArticleDetails from '../article/articleDetails/ArticleDetails';
 import AppConfig from './AppConfig';
 

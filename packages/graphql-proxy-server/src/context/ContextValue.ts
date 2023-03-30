@@ -1,5 +1,5 @@
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
-import type { AppLanguage } from 'events-helsinki-components/src/types/types';
+import type { AppLanguage } from '@events-helsinki/components/src/types/types';
 export type ContextConstructorArgs = {
   token: string;
   cache?: KeyValueCache;

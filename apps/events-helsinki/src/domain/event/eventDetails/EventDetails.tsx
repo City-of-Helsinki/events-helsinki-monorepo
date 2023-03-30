@@ -3,8 +3,8 @@ import {
   getDateRangeStr,
   getEventFields,
   EventLocationText as LocationText,
-} from 'events-helsinki-components';
-import type { EventFieldsFragment } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import { IconCalendarClock, IconLocation } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';

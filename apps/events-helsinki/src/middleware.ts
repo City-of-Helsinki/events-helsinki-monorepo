@@ -1,9 +1,9 @@
-// import { DEFAULT_LANGUAGE } from 'events-helsinki-components';
-import stringifyUrlObject from 'events-helsinki-components/utils/stringifyUrlObject';
+// import { DEFAULT_LANGUAGE } from '@events-helsinki/components';
+import stringifyUrlObject from '@events-helsinki/components/utils/stringifyUrlObject';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-// TODO: For some reason middleware cannot read `'events-helsinki-components` package without breaking the build
+// TODO: For some reason middleware cannot read `'@events-helsinki/components` package without breaking the build
 const DEFAULT_LANGUAGE = 'fi';
 
 const requestType = {

@@ -1,4 +1,4 @@
-import { EVENT_SORT_OPTIONS } from 'events-helsinki-components/constants';
+import { EVENT_SORT_OPTIONS } from '@events-helsinki/components/constants';
 import * as React from 'react';
 import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';

@@ -1,6 +1,6 @@
+import type { OpeningHour, Time } from '@events-helsinki/components';
+import { ResourceState } from '@events-helsinki/components';
 import startOfDay from 'date-fns/startOfDay';
-import type { OpeningHour, Time } from 'events-helsinki-components';
-import { ResourceState } from 'events-helsinki-components';
 import getVenueOpeningTimeDescription from '../getVenueOpeningTimeDescription';
 
 function buildDateDocument(date: string, times: Partial<Time>[]): OpeningHour {

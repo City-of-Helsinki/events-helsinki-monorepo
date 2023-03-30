@@ -1,6 +1,6 @@
-import { translations } from 'events-helsinki-common-i18n';
-import { waitForLoadingCompleted } from 'events-helsinki-common-tests';
-import { EventTypeId } from 'events-helsinki-components/types';
+import { translations } from '@events-helsinki/common-i18n';
+import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
+import { EventTypeId } from '@events-helsinki/components/types';
 import * as React from 'react';
 import { render, screen, userEvent } from '@/test-utils';
 import {

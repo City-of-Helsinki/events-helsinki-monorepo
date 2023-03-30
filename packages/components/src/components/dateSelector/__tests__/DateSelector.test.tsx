@@ -1,4 +1,4 @@
-import translations from 'events-helsinki-common-i18n/locales/fi/common.json';
+import translations from '@events-helsinki/common-i18n/locales/fi/common.json';
 import * as React from 'react';
 import {
   arrowDownKeyPressHelper,

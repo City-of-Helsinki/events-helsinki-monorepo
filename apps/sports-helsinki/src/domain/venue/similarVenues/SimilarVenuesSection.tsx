@@ -1,9 +1,9 @@
-import classNames from 'classnames';
-import type { Venue } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
 import {
   useVenueTranslation,
   LoadingSpinner,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
 import type { CollectionProps } from 'react-helsinki-headless-cms';

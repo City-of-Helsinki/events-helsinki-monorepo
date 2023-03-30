@@ -1,4 +1,4 @@
-import { translations } from 'events-helsinki-common-i18n/tests/initI18n';
+import { translations } from '@events-helsinki/common-i18n/tests/initI18n';
 import { render, screen } from '@/test-utils';
 import { fakeEvent, fakePlace } from '@/test-utils/mockDataUtils';
 import {

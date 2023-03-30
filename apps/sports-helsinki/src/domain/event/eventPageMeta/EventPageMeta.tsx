@@ -1,5 +1,5 @@
-import { useLocale, getEventFields } from 'events-helsinki-components';
-import type { EventFields } from 'events-helsinki-components';
+import { useLocale, getEventFields } from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import Head from 'next/head';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';

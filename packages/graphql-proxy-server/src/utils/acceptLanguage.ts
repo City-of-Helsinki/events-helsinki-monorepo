@@ -1,6 +1,6 @@
 import accepts from 'accepts';
-import isAppLanguage from 'events-helsinki-components/src/type-guards/is-app-language';
-import type { AppLanguage } from 'events-helsinki-components/src/types/types';
+import isAppLanguage from '@events-helsinki/components/src/type-guards/is-app-language';
+import type { AppLanguage } from '@events-helsinki/components/src/types/types';
 import type express from 'express';
 import type ContextValue from '../context/ContextValue';
 /**

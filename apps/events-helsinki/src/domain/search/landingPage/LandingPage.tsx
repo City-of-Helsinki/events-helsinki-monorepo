@@ -1,4 +1,4 @@
-import { Hero } from 'events-helsinki-components';
+import { Hero } from '@events-helsinki/components';
 import React from 'react';
 import type { PageContentLayoutProps } from 'react-helsinki-headless-cms';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';

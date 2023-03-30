@@ -7,7 +7,7 @@ import {
   useAppSportsTranslation,
   FooterSection,
   getLanguageOrDefault,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';

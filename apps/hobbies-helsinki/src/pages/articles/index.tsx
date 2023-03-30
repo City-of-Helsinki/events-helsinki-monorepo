@@ -11,7 +11,7 @@ import {
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
 import {

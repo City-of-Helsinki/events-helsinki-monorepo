@@ -3,8 +3,8 @@ import {
   LoadingSpinner,
   SkeletonLoader,
   useEventTranslation,
-} from 'events-helsinki-components';
-import type { EventFields } from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import { IconAngleDown, IconAngleUp, IconCalendarPlus } from 'hds-react';
 import React from 'react';
 

@@ -1,1 +1,1 @@
-export { Document as default } from 'events-helsinki-components';
+export { Document as default } from '@events-helsinki/components';

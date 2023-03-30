@@ -1,4 +1,4 @@
-import { ContextValue } from 'events-helsinki-graphql-proxy-server/src';
+import { ContextValue } from '@events-helsinki/graphql-proxy-server/src';
 import HaukiDataSource from '../datasources/HaukiDataSource';
 import ServiceMapDataSource from '../datasources/ServiceMapDataSource';
 import type { VenueDataSources } from '../types/VenueDataSources';

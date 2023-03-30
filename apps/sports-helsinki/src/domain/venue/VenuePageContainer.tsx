@@ -1,11 +1,11 @@
-import classNames from 'classnames';
-import type { Venue } from 'events-helsinki-components';
+import type { Venue } from '@events-helsinki/components';
 import {
   LoadingSpinner,
   useLocale,
   addParamsToQueryString,
   MAIN_CONTENT_ID,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';

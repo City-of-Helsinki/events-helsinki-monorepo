@@ -1,4 +1,4 @@
-import type { EventTypeId, EventListQuery } from 'events-helsinki-components';
+import type { EventTypeId, EventListQuery } from '@events-helsinki/components';
 import {
   EventsOrderBySelect,
   BasicMeta,
@@ -6,7 +6,7 @@ import {
   SrOnly,
   useSearchTranslation,
   MAIN_CONTENT_ID,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import React from 'react';
 import EventList from '../../../common-events/components/eventList/EventList';
 import type { AdvancedSearchProps } from './AdvancedSearch';

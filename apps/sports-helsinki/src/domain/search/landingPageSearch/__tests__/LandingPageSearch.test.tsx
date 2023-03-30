@@ -1,4 +1,4 @@
-import { KeywordListDocument } from 'events-helsinki-components';
+import { KeywordListDocument } from '@events-helsinki/components';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 

@@ -1,5 +1,5 @@
-import type { Maybe, PlaceDetailsQuery } from 'events-helsinki-components';
-import { PlaceDetailsDocument } from 'events-helsinki-components';
+import type { Maybe, PlaceDetailsQuery } from '@events-helsinki/components';
+import { PlaceDetailsDocument } from '@events-helsinki/components';
 import { hobbiesApolloClient } from '../clients/hobbiesApolloClient';
 
 export const getPlaceDetailsFromCache = (

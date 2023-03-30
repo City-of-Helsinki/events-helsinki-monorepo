@@ -1,3 +1,4 @@
+import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server/src';
 import type { Interval } from 'date-fns';
 import {
   startOfWeek,
@@ -9,7 +10,6 @@ import {
 // eslint-disable-next-line import/no-duplicates
 import fi from 'date-fns/locale/fi';
 
-import { DataSourceWithContext } from 'events-helsinki-graphql-proxy-server/src';
 import type VenueContext from '../context/VenueContext';
 import type { OpeningHour } from '../types/types';
 

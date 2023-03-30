@@ -61,11 +61,10 @@ jest.mock('next/head', () => {
 });
 
 // https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
-jest.mock('events-helsinki-components/hooks/useLocale', () => ({
+jest.mock('@events-helsinki/components/hooks/useLocale', () => ({
   __esModule: true,
-  ...jest.requireActual('events-helsinki-components/hooks/useLocale'),
+  ...jest.requireActual('@events-helsinki/components/hooks/useLocale'),
 }));
-
 
 // Extend except with jest-axe
 expect.extend(toHaveNoViolations);
@@ -78,9 +77,8 @@ global.TextDecoder = TextDecoder as any;
 
 // To avoid error: TypeError: Cannot redefine property
 // disusssed here: https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property
-Object.defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 
-const components = require("events-helsinki-components");
-
+const components = require('@events-helsinki/components');

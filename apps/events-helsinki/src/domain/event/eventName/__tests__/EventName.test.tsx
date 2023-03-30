@@ -1,5 +1,5 @@
-import { EVENT_STATUS } from 'events-helsinki-components';
-import type { EventFieldsFragment } from 'events-helsinki-components';
+import { EVENT_STATUS } from '@events-helsinki/components';
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import React from 'react';
 import { render, screen } from '@/test-utils';
 

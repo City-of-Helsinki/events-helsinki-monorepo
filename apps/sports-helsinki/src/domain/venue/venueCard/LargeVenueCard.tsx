@@ -4,7 +4,7 @@ import {
   useVenueTranslation,
   ArrowRightWithLoadingIndicator,
   useClickCapture,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';

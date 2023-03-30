@@ -5,8 +5,8 @@ import {
   MatomoWrapper,
   getLanguageOrDefault,
   FooterSection,
-} from 'events-helsinki-components';
-import { usePageScrollRestoration } from 'events-helsinki-components/src/hooks';
+} from '@events-helsinki/components';
+import { usePageScrollRestoration } from '@events-helsinki/components/src/hooks';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';

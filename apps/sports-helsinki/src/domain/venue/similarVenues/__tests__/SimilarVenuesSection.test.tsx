@@ -1,4 +1,4 @@
-import type { Venue } from 'events-helsinki-components/types';
+import type { Venue } from '@events-helsinki/components/types';
 import * as React from 'react';
 import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';

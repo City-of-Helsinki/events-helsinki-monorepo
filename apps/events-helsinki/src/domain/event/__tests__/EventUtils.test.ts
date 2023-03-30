@@ -7,11 +7,11 @@ import {
   getKeywordList,
   getLocationId,
   getServiceMapUrl,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   EventFieldsFragment,
   PlaceFieldsFragment,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import map from 'lodash/map';
 
 import {

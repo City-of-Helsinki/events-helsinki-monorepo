@@ -3,7 +3,7 @@ import {
   EventTypeId,
   getURLSearchParamsFromAsPath,
   useCommonTranslation,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';

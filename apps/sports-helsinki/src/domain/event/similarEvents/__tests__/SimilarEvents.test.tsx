@@ -1,6 +1,6 @@
 import { clear } from 'console';
 
-import type { EventFieldsFragment } from 'events-helsinki-components';
+import type { EventFieldsFragment } from '@events-helsinki/components';
 import { advanceTo } from 'jest-date-mock';
 import * as React from 'react';
 

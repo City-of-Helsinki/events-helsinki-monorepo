@@ -2,13 +2,13 @@ import type {
   EventFields,
   EventListQuery,
   EventListQueryVariables,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import {
   useEventListQuery,
   getEventIdFromUrl,
   SIMILAR_EVENTS_AMOUNT,
   EVENT_SORT_OPTIONS,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';

@@ -2,14 +2,14 @@ import {
   UnifiedSearchOrderBy,
   useGeolocation,
   useSetOrderByAndDirQueryParams,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import type {
   UnifiedSearchOrderByType,
   OrderDirType,
   GeolocationContextType,
   Coordinates,
   Option,
-} from 'events-helsinki-components';
+} from '@events-helsinki/components';
 import { useCallback } from 'react';
 
 const useHandleUnifiedSearchOrderChange = () => {

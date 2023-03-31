@@ -21,8 +21,8 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
-import routerHelper from '../../../domain/app/routerHelper';
 import AppConfig from '../../app/AppConfig';
+import routerHelper from '../../app/routerHelper';
 import { PARAM_SEARCH_TYPE } from '../../search/combinedSearch/constants';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
@@ -136,10 +136,10 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
             <div className={styles.buttonWrapper}>
               <div>
                 <ArrowRightWithLoadingIndicator
-                  loading={clicked}
                   className={styles.arrowRight}
                   size="l"
                   aria-hidden="true"
+                  loading={clicked}
                 />
                 {AppConfig.showEnrolmentStatusInCardDetails && (
                   <EventEnrolmentStatus

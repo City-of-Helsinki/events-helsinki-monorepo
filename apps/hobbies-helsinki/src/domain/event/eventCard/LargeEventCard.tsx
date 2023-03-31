@@ -1,7 +1,9 @@
 import type { EventFields } from '@events-helsinki/components';
 import {
-  useEventEnrolmentStatus,
+  useClickCapture,
+  EnrolmentStatusLabel,
   EventEnrolmentStatus,
+  useEventEnrolmentStatus,
   getDateRangeStr,
   useLocale,
   EventLocationText as LocationText,
@@ -10,10 +12,8 @@ import {
   getEventPrice,
   getLargeEventCardId,
   isEventClosed,
-  EnrolmentStatusLabel,
   ArrowRightWithLoadingIndicator,
 } from '@events-helsinki/components';
-import useClickCapture from '@events-helsinki/components/hooks/useClickCapture';
 import classNames from 'classnames';
 import { IconCake, IconCalendarClock, IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';

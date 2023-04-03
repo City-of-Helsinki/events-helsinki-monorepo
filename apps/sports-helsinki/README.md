@@ -40,6 +40,116 @@ There are some rules that a content manager must follow while maintaining the CM
 3. **/article-archive (The article archive page)**: [The article archive page](./src/pages/articles/index.tsx) gets the SEO content from the CMS and also makes some hardcoded article search queries there. The page is mostly rendered with the components that the HCRC-lib offers. The uri must be `/article-archive` in every language. It is translated to different languages with the [i18nRoutes.config.json](./i18nRoutes.config.js) configuration file.
 4. **/pages (The root for the dynamic pages)**: All [the dynamic pages](./src/pages/pages/%5B...slug%5D.tsx) must be children of the `/pages` -root-page. This strategy must be followed so that the application can internally handle the dynamic CMS pages. The path is translated to different languages with the [i18nRoutes.config.json](./i18nRoutes.config.js) configuration file.
 
+### Combined search
+
+The search page has 1 form, but that form triggers searches to multiple datasources:
+
+1. The venue search tab makes a query to the Unified-Search.
+2. The events and the course searches makes a query to the LinkedEvents.
+
+This means that:
+
+1. Parameters given as an input to the form should adapt to search from different datasources. 1 input can be called “q“ in another datasource, but “text“ in another.
+2. Not all the parameters are used in every search, because not all the datasources have an equivalent filter.
+
+#### Input: The URL (search) parameters
+
+The URL controls the whole search form, for easy maintain and also for the accessibility reasons:
+
+1. The URL should be updated when new filters are applied (or any of them are removed / cleared). The active filters are always shown in the UI.
+2. When another search tab is clicked, the search URL should not change from the search params.
+
+An example of CombinedSearchAdapterInput type, that could be used as an input for the searches:
+
+```typescript
+// NOTE: this is just an example, not an actual implementation
+type CombinedSearchAdapterInput = {
+  text: string;
+  orderBy: string;
+  sportsCategories: string[];
+  organization: string | null;
+  keywords: string[];
+};
+```
+
+The input URL should also be cleaned for the combined search. A conversion map can handle any needed _backward support_, but also to full fill any possible _mandatory inputs_, that should always exists there. It can also _initialize the search form_. It could convert some params to some others and initialize the form with the transformed keys and values.
+
+E.g. `/search?order_by=field` could be transformed to `/search?orderBy=field&searchType=venue`.
+
+#### Transform: Search specific parameter adapter
+
+The guideline is, that the search specific filter adapter should be something that is easy for developers to maintain and understand.
+
+The problem: The free text filter parameter is called “text“ in the LinkedEvents and “q“ in the Unified-Search. The UI has only 1 search field, which means that the parameter that it fills, needs to adapt to work in different searches.
+
+The adapter should:
+
+1. Pick the relevant URL search params; Exclude the ones that are not supported and pick the ones that could be used as they are or be transformed to a right form, so that they could be used as filters.
+2. Clean the URL (as much as possible).
+
+The output (type `CombinedSearchAdapterOutput`) of the adapter is either `VenueSearchParams` or `EventSearchParams`.
+
+---
+
+An example of VenueSearchParams type, that could be used as an output for the venue search adapter:
+
+```typescript
+// NOTE: this is just an example, not an actual implementation
+type VenueSearchParams = {
+  q: string;
+  ontologyWords: string[];
+  orderBy: string;
+};
+```
+
+if this would be the final active implementation of the type, the [CombinedSearchAdapterInput input type](#input-the-url-search-parameters) would transform to this like this:
+
+1. `text` -> `q`
+2. `sportsCategories` -> `ontologyWords` (the adapter needs to also use the mapped values, not only the keys)
+3. `orderBy` -> `orderBy`
+
+---
+
+An example of EventSearchParams type, that could be used as an output for the event search adapter:
+
+```typescript
+// NOTE: this is just an example, not an actual implementation
+type EventSearchParams = {
+  text: string;
+  keywords: string[];
+  sort: string;
+};
+```
+
+if this would be the final active implementation of the type, the [CombinedSearchAdapterInput input type](#input-the-url-search-parameters) would transform to this like this:
+
+1. `text` -> `text`
+2. `sportsCategories` -> `keywords` (the adapter needs to also use the mapped values, not only the keys)
+3. `orderBy` -> `sort`
+
+---
+
+#### The architecture
+
+The URL acts as an input and a search adapter picks the params that the specific search needs and maps the query params to proper parameter field names. _In this visualization, the URL params are just some examples and may not be synced with the actual implementation._
+
+```
+┌──────────────────────────────┐     ┌────────────────────────────┐    ┌──────────────────────────────┐
+| Input                        ├─────┤ Venue search adapter       ├────┤ Unified-Search               |
+|==============================|     |============================|    |==============================|
+| Given URL                    |     | Converted param            |    | Responds to                  |
+| e.g /search?text=football&   |     | e.g /graphql?q=football    |    | param `q`                    |
+| returnPath=/                 |     └────────────────────────────┘    └──────────────────────────────┘
+|                              |
+| Makes queries to multiple    |
+| datasources                  |     ┌────────────────────────────┐    ┌──────────────────────────────┐
+|                              |─────┤ Event search adapter       |────┤ LinkedEvents                 |
+|                              |     |============================|    |==============================|
+|                              |     | Converted param            |    | Responds to                  |
+|                              |     | e.g /graphql?text=football |    | param `text`                 |
+└──────────────────────────────┘     └────────────────────────────┘    └──────────────────────────────┘
+```
+
 ## Developing locally
 
 Run the development server:

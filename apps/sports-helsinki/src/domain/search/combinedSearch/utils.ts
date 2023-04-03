@@ -1,4 +1,6 @@
 /**
+ * @deprecated Use the adapters instead.
+ *
  * In the combined search form, an user is searching both,
  * the venues and the events (and the events with 2 different types).
  * 1. The venues search is using Unified-Search and it's parameters.
@@ -15,6 +17,8 @@ export const TRANSFORM_MAP = new Map<string, string>([
 ]);
 
 /**
+ * @deprecated Use the adapters instead.
+ *
  * Uses {@link TRANSFORM_MAP} to transfer the URL Search parameter keys.
  * @param searchParams the current URL search parameters
  * @returns a URLSearchParams object with transformed keys.

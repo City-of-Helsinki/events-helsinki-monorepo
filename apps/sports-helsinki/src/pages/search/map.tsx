@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import qs from 'query-string';
 import React from 'react';
+import { PageSection } from 'react-helsinki-headless-cms';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
@@ -104,7 +105,6 @@ export default function MapSearch() {
   };
 
   const count = data?.unifiedSearch?.count ?? 0;
-
   return (
     <MatomoWrapper>
       <HCRCApolloPage
@@ -119,12 +119,14 @@ export default function MapSearch() {
               switchShowMode={switchShowMode}
               searchForm={<SimpleVenueMapSearch />}
             />
-            <MapView
-              // Use key to force rerender when mode is changes. Otherwise map position / zoom wouldn't reset
-              key={showVenueFocusedMap ? 'focused-venue-map' : 'search-map'}
-              items={searchResultItems}
-              focusedItemId={showVenueFocusedMap ? venueId : undefined}
-            />
+            <PageSection>
+              <MapView
+                // Use key to force rerender when mode is changes. Otherwise map position / zoom wouldn't reset
+                key={showVenueFocusedMap ? 'focused-venue-map' : 'search-map'}
+                items={searchResultItems}
+                focusedItemId={showVenueFocusedMap ? venueId : undefined}
+              />
+            </PageSection>
           </>
         }
         footer={null}

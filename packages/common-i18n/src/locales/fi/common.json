@@ -102,6 +102,7 @@
     "showOnMap": "Näytä kartalla",
     "searchResultsCountLabel": "Hakutulosta",
     "showSearchParameters": "Näytä haku",
+    "hideSearchParameters": "Sulje haku",
     "showSearchParametersA11y": "Siirry hakulomakkeelle"
   }
 }

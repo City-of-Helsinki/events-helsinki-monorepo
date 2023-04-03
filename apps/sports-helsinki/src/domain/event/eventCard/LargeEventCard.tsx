@@ -20,10 +20,8 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-import { ROUTES } from '../../../constants';
 import AppConfig from '../../app/AppConfig';
-import routerHelper from '../../app/routerHelper';
-import { PARAM_SEARCH_TYPE } from '../../search/combinedSearch/constants';
+import { getEventUrl } from '../../search/eventSearch/utils';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import styles from './largeEventCard.module.scss';
@@ -52,22 +50,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
 
   const eventClosed = isEventClosed(event);
 
-  const eventUrl = routerHelper.getLocalizedCmsItemUrl(
-    ROUTES.COURSES,
-    {
-      eventId: event.id,
-      returnPath: routerHelper.getLocalizedCmsItemUrl(
-        ROUTES.SEARCH,
-        {
-          ...router.query,
-          eventId: event.id,
-          [PARAM_SEARCH_TYPE]: event.typeId ?? '',
-        },
-        locale
-      ),
-    },
-    locale
-  );
+  const eventUrl = getEventUrl(event, router, locale);
 
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 

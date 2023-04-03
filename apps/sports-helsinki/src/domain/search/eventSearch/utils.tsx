@@ -23,7 +23,11 @@ import {
   subDays,
 } from 'date-fns';
 import isEmpty from 'lodash/isEmpty';
+import type { NextRouter } from 'next/router';
 import type { TFunction } from 'next-i18next';
+import { ROUTES } from '../../../constants';
+import routerHelper from '../../app/routerHelper';
+import { PARAM_SEARCH_TYPE } from '../combinedSearch/constants';
 import {
   SPORT_COURSES_KEYWORDS,
   CATEGORY_CATALOG,
@@ -346,5 +350,28 @@ export const getEventCategories = (event: EventFields) => {
   const allHobbyTypes = getAllHobbyCategories();
   return event.keywords.filter(
     (keyword) => keyword.id && allHobbyTypes.includes(keyword.id)
+  );
+};
+
+export const getEventUrl = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+): string => {
+  return routerHelper.getLocalizedCmsItemUrl(
+    ROUTES.COURSES,
+    {
+      eventId: event.id,
+      returnPath: routerHelper.getLocalizedCmsItemUrl(
+        ROUTES.SEARCH,
+        {
+          ...router.query,
+          eventId: event.id,
+          [PARAM_SEARCH_TYPE]: event.typeId ?? '',
+        },
+        locale
+      ),
+    },
+    locale
   );
 };

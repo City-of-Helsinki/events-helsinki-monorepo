@@ -21,9 +21,12 @@ import {
   subDays,
 } from 'date-fns';
 import isEmpty from 'lodash/isEmpty';
+import type { NextRouter } from 'next/router';
 import type { TFunction } from 'next-i18next';
 
+import { ROUTES } from '../../../constants';
 import AppConfig from '../../app/AppConfig';
+import routerHelper from '../../app/routerHelper';
 import type { EVENT_CATEGORIES } from './constants';
 import {
   EVENT_SEARCH_FILTERS,
@@ -339,5 +342,27 @@ export const getEventCategories = (event: EventFields) => {
   const allHobbyTypes = getAllHobbyCategories();
   return event.keywords.filter(
     (keyword) => keyword.id && allHobbyTypes.includes(keyword.id)
+  );
+};
+
+export const getEventUrl = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+): string => {
+  return routerHelper.getLocalizedCmsItemUrl(
+    ROUTES.EVENTS,
+    {
+      eventId: event.id,
+      returnPath: routerHelper.getLocalizedCmsItemUrl(
+        ROUTES.SEARCH,
+        {
+          ...router.query,
+          eventId: event.id,
+        },
+        locale
+      ),
+    },
+    locale
   );
 };

@@ -10,8 +10,8 @@ on:
   # manual triggered
   workflow_dispatch:
     inputs:
-      prlabel:
-        description: 'PR label, force update for release-please PR's. Do not use spaces!'
+      label:
+        description: 'PR label, force update for release-please PRs. Do not use spaces!'
         required: false
         type: string
 
@@ -27,8 +27,8 @@ jobs:
         run: |
           if [ -n "${{ github.event.release.tag_name }}" ]; then
             LABEL="--label ${{ github.event.release.tag_name }}"
-          elif [ -n "${{ inputs.prlabel }}" ]; then
-            LABEL="--label ${{ inputs.prlabel }}"
+          elif [ -n "${{ inputs.label }}" ]; then
+            LABEL="--label ${{ inputs.label }}"
           fi
           echo $LABEL
 

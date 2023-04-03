@@ -102,6 +102,7 @@
     "showOnMap": "Visa på kartan",
     "searchResultsCountLabel": "Sökresultat",
     "showSearchParameters": "Visa sökningen",
+    "hideSearchParameters": "Stänga sökningen",
     "showSearchParametersA11y": "Gå till ansökningsblanketten"
   }
 }

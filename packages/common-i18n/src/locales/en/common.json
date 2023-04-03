@@ -102,6 +102,7 @@
     "showOnMap": "Show on map",
     "searchResultsCountLabel": "Search results",
     "showSearchParameters": "Show search",
+    "hideSearchParameters": "Hide search",
     "showSearchParametersA11y": "Go to the search form"
   }
 }

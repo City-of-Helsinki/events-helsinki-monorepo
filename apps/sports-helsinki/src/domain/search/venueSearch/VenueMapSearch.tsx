@@ -9,7 +9,7 @@ const SimpleVenueMapSearch = () => (
     searchRoute={SEARCH_ROUTES.MAPSEARCH}
     searchUtilities={null}
     korosBottom={false}
-    showTitle={false}
+    showTitle
     className={styles.mapView}
     scrollToResultList={() => true}
   />

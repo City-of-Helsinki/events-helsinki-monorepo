@@ -15,7 +15,6 @@ import { useTranslation } from 'next-i18next';
 import qs, { parse } from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
-import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import IconPersonRunning from '../../../assets/icons/IconPersonRunning';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { SEARCH_ROUTES } from '../../../constants';
@@ -238,37 +237,9 @@ export const VenueSearchUtilities: React.FC<SearchUtilitiesProps> = ({
 
 const SimpleVenueSearch: React.FC<SearchComponentProps> = ({
   'data-testid': dataTestId,
-  korosBottom = false,
-  searchUtilities = null,
   className,
   ...delegatedSimpleVenueSearchFormProps
 }) => {
-  return (
-    <>
-      <PageSection
-        korosBottom={korosBottom}
-        korosBottomClassName={styles.searchContainerKoros}
-        className={classNames(styles.searchContainer, className, {
-          [styles.noKoros]: !korosBottom,
-        })}
-        data-testid={dataTestId}
-      >
-        <ContentContainer
-          className={classNames(styles.contentContainer, {
-            [styles.noKoros]: !korosBottom,
-          })}
-        >
-          <SimpleVenueSearchForm {...delegatedSimpleVenueSearchFormProps} />
-        </ContentContainer>
-      </PageSection>
-      {searchUtilities && (
-        <PageSection className={styles.searchUtilities}>
-          <ContentContainer className={styles.contentContainer}>
-            {searchUtilities}
-          </ContentContainer>
-        </PageSection>
-      )}
-    </>
-  );
+  return <SimpleVenueSearchForm {...delegatedSimpleVenueSearchFormProps} />;
 };
 export default SimpleVenueSearch;

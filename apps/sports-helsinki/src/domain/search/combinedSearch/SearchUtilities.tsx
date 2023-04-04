@@ -21,7 +21,7 @@ function SearchUtilities() {
   const router = useRouter();
   const switchShowMode = () => {
     const searchParams = getURLSearchParamsFromAsPath(router.asPath);
-    router.replace({
+    router.push({
       pathname: SEARCH_ROUTES.MAPSEARCH,
       query: searchParams.toString(),
     });

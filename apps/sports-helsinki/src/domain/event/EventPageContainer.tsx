@@ -2,7 +2,6 @@ import { useLazyQuery } from '@apollo/client';
 import {
   LoadingSpinner,
   useLocale,
-  isClient,
   addParamsToQueryString,
   getEventIdFromUrl,
   isEventClosed,
@@ -115,7 +114,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 </>
               )}
               {/* Hide similar event on SSR to make initial load faster */}
-              {isClient && showSimilarEvents && !eventClosed && (
+              {showSimilarEvents && !eventClosed && (
                 <SimilarEvents
                   event={event}
                   onEventsLoaded={handleSimilarEventsLoaded}

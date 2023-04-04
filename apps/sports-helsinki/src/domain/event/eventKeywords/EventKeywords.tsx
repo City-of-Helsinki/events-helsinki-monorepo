@@ -2,19 +2,14 @@
 import {
   KeywordTag,
   useLocale,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   DATE_TYPES,
-  scrollToTop,
   getEventFields,
 } from '@events-helsinki/components';
 import type { EventFieldsFragment } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { ROUTES } from '../../../constants';
-import routerHelper from '../../../domain/app/routerHelper';
-import { EVENT_DEFAULT_SEARCH_FILTERS } from '../../search/eventSearch/constants';
-import { getSearchQuery } from '../../search/eventSearch/utils';
+import { getKeywordOnClickHandler } from '../../search/eventSearch/utils';
 
 interface Props {
   blackOnMobile?: boolean;
@@ -34,7 +29,6 @@ const EventKeywords: React.FC<Props> = ({
   showIsFree,
   showKeywords = true,
   showKeywordsCount,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   withActions = true,
 }) => {
   const { t } = useTranslation('event');
@@ -45,22 +39,8 @@ const EventKeywords: React.FC<Props> = ({
     locale
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleClick =
-    (type: 'dateType' | 'isFree' | 'text', value = '') =>
-    () => {
-      const search = getSearchQuery({
-        ...EVENT_DEFAULT_SEARCH_FILTERS,
-        dateTypes: type === 'dateType' ? [value] : [],
-        isFree: type === 'isFree',
-        q: type === 'text' ? [value] : [],
-      });
-
-      router.push(
-        `${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`
-      );
-      scrollToTop();
-    };
+  const handleClick = (type: 'dateType' | 'isFree' | 'text', value = '') =>
+    getKeywordOnClickHandler(router, locale, type, value);
 
   const showComponent =
     today ||
@@ -88,30 +68,27 @@ const EventKeywords: React.FC<Props> = ({
           whiteOnly={whiteOnly}
           featured={!whiteOnly}
           keyword={t('categories.labelFree')}
-          /* Disable onClick as per LIIKUNTA-411 comment */
-          /* onClick={handleClick('isFree')} */
+          onClick={withActions ? handleClick('isFree') : undefined}
         />
       )}
       {today && (
         <KeywordTag
           whiteOnly={whiteOnly}
           keyword={t('categories.labelToday')}
-          /* Disable onClick as per LIIKUNTA-411 comment */
-          /* onClick={
+          onClick={
             withActions ? handleClick('dateType', DATE_TYPES.TODAY) : undefined
-          } */
+          }
         />
       )}
       {!today && thisWeek && (
         <KeywordTag
           whiteOnly={whiteOnly}
           keyword={t('categories.labelThisWeek')}
-          /* Disable onClick as per LIIKUNTA-411 comment */
-          /* onClick={
+          onClick={
             withActions
               ? handleClick('dateType', DATE_TYPES.THIS_WEEK)
               : undefined
-          } */
+          }
         />
       )}
       {showKeywords &&
@@ -123,8 +100,7 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={first.id}
             keyword={first.name}
-            /* Disable onClick as per LIIKUNTA-411 comment */
-            /* onClick={withActions ? handleClick('text', first.name) : undefined} */
+            onClick={withActions ? handleClick('text', first.name) : undefined}
           />
         )}
       {showKeywords &&
@@ -138,8 +114,7 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={second.id}
             keyword={second.name}
-            /* Disable onClick as per LIIKUNTA-411 comment */
-            /* onClick={withActions ? handleClick('text', second.name) : undefined} */
+            onClick={withActions ? handleClick('text', second.name) : undefined}
           />
         )}
       {!!restKeywords.length &&
@@ -152,8 +127,7 @@ const EventKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={tag.id}
             keyword={tag.name}
-            /* Disable onClick as per LIIKUNTA-411 comment */
-            /* onClick={withActions ? handleClick('text', tag.name) : undefined} */
+            onClick={withActions ? handleClick('text', tag.name) : undefined}
           />
         ))}
       {!!restKeywords.length && showKeywords && showKeywordsCount && (

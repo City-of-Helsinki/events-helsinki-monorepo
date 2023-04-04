@@ -3,6 +3,7 @@ import {
   DATE_TYPES,
   formatDate,
   getUrlParamAsArray,
+  scrollToTop,
 } from '@events-helsinki/components';
 import type {
   FilterType,
@@ -29,6 +30,7 @@ import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';
 import { PARAM_SEARCH_TYPE } from '../combinedSearch/constants';
 import {
+  EVENT_DEFAULT_SEARCH_FILTERS,
   SPORT_COURSES_KEYWORDS,
   CATEGORY_CATALOG,
   EVENT_SEARCH_FILTERS,
@@ -375,3 +377,42 @@ export const getEventUrl = (
     locale
   );
 };
+
+export const getEventListLinkUrl = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+) => {
+  const search = router.asPath.split('?')[1];
+  return (
+    routerHelper.getLocalizedCmsItemUrl(
+      ROUTES.COURSES,
+      { eventId: event.id },
+      locale
+    ) + (search ? `?${search}` : '')
+  );
+};
+
+export const getKeywordOnClickHandler =
+  (
+    router: NextRouter,
+    locale: AppLanguage,
+    type: 'dateType' | 'isFree' | 'text',
+    value = ''
+  ) =>
+  () => {
+    const disableOnClick = true; // Disable onClick as per LIIKUNTA-411 comment
+    if (!disableOnClick) {
+      const search = getSearchQuery({
+        ...EVENT_DEFAULT_SEARCH_FILTERS,
+        dateTypes: type === 'dateType' ? [value] : [],
+        isFree: type === 'isFree',
+        q: type === 'text' ? [value] : [],
+      });
+
+      router.push(
+        `${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`
+      );
+      scrollToTop();
+    }
+  };

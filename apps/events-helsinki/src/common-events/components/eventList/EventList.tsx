@@ -1,8 +1,5 @@
 import { LoadingSpinner } from '@events-helsinki/components';
-import type {
-  EventFields,
-  EventFieldsFragment,
-} from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
@@ -20,7 +17,7 @@ const eventCardsMap = {
 interface Props {
   buttonCentered?: boolean;
   cardSize?: 'default' | 'large';
-  events: EventFieldsFragment[];
+  events: EventFields[];
   count: number;
   loading: boolean;
   hasNext: boolean;

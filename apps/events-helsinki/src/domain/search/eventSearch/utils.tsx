@@ -11,6 +11,7 @@ import {
   formatDate,
   getUrlParamAsArray,
   EventTypeId,
+  scrollToTop,
 } from '@events-helsinki/components';
 import {
   addDays,
@@ -34,6 +35,7 @@ import {
   MAPPED_PLACES,
   CATEGORY_CATALOG,
   MAPPED_EVENT_CATEGORIES,
+  EVENT_DEFAULT_SEARCH_FILTERS,
 } from './constants';
 import type {
   CategoryOption,
@@ -366,3 +368,37 @@ export const getEventUrl = (
     locale
   );
 };
+
+export const getEventListLinkUrl = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+) => {
+  const search = router.asPath.split('?')[1];
+  return (
+    routerHelper.getLocalizedCmsItemUrl(
+      ROUTES.EVENTS,
+      { eventId: event.id },
+      locale
+    ) + (search ? `?${search}` : '')
+  );
+};
+
+export const getKeywordOnClickHandler =
+  (
+    router: NextRouter,
+    locale: AppLanguage,
+    type: 'dateType' | 'isFree' | 'text',
+    value = ''
+  ) =>
+  () => {
+    const search = getSearchQuery({
+      ...EVENT_DEFAULT_SEARCH_FILTERS,
+      dateTypes: type === 'dateType' ? [value] : [],
+      isFree: type === 'isFree',
+      text: type === 'text' ? [value] : [],
+    });
+
+    router.push(`${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`);
+    scrollToTop();
+  };

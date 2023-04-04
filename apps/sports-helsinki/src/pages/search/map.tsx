@@ -97,7 +97,7 @@ export default function MapSearch() {
   const switchShowMode = () => {
     const searchParams = getURLSearchParamsFromAsPath(router.asPath);
 
-    router.replace({
+    router.push({
       pathname: ROUTES.SEARCH,
       query: searchParams.toString(),
     });

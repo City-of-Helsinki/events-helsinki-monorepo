@@ -17,8 +17,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-import { ROUTES } from '../../../constants';
-import routerHelper from '../../app/routerHelper';
+import { getEventUrl } from '../../search/eventSearch/utils';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import styles from './eventCard.module.scss';
@@ -39,21 +38,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
     locale
   );
 
-  const eventUrl = routerHelper.getLocalizedCmsItemUrl(
-    ROUTES.COURSES,
-    {
-      eventId: event.id,
-      returnPath: routerHelper.getLocalizedCmsItemUrl(
-        ROUTES.SEARCH,
-        {
-          ...router.query,
-          eventId: event.id,
-        },
-        locale
-      ),
-    },
-    locale
-  );
+  const eventUrl = getEventUrl(event, router, locale);
   const eventClosed = isEventClosed(event);
   const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 

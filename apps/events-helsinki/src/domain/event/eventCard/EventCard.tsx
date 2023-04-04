@@ -1,4 +1,6 @@
+import type { EventFields } from '@events-helsinki/components';
 import {
+  useCommonTranslation,
   getDateRangeStr,
   useLocale,
   IconButton,
@@ -10,15 +12,12 @@ import {
   ArrowRightWithLoadingIndicator,
   useClickCapture,
 } from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-
-import { ROUTES } from '../../../constants';
-import routerHelper from '../../../domain/app/routerHelper';
+import { getEventUrl } from '../../search/eventSearch/utils';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import styles from './eventCard.module.scss';
@@ -29,7 +28,7 @@ interface Props {
 
 const EventCard: React.FC<Props> = ({ event }) => {
   const { t } = useTranslation('event');
-  const { t: commonTranslation } = useTranslation('common');
+  const { t: commonTranslation } = useCommonTranslation();
   const router = useRouter();
   const locale = useLocale();
   const button = React.useRef<HTMLDivElement>(null);
@@ -39,22 +38,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
     locale
   );
 
-  const eventUrl = routerHelper.getLocalizedCmsItemUrl(
-    ROUTES.EVENTS,
-    {
-      eventId: event.id,
-      returnPath: routerHelper.getLocalizedCmsItemUrl(
-        ROUTES.SEARCH,
-        {
-          ...router.query,
-          eventId: event.id,
-        },
-        locale
-      ),
-    },
-    locale
-  );
-
+  const eventUrl = getEventUrl(event, router, locale);
   const eventClosed = isEventClosed(event);
   const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 

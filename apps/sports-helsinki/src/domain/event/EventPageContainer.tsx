@@ -20,7 +20,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../constants';
-import routerHelper from '../../domain/app/routerHelper';
+import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import EventClosedHero from './eventClosedHero/EventClosedHero';
 import EventContent from './eventContent/EventContent';
@@ -75,7 +75,6 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
       },
     }
   );
-
   React.useEffect(() => {
     if (superEventId) {
       superEventSearch();

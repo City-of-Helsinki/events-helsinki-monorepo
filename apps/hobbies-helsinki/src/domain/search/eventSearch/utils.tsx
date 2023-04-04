@@ -4,6 +4,7 @@ import {
   formatDate,
   getUrlParamAsArray,
   EventTypeId,
+  scrollToTop,
 } from '@events-helsinki/components';
 import type {
   FilterType,
@@ -30,6 +31,7 @@ import AppConfig from '../../app/AppConfig';
 import routerHelper from '../../app/routerHelper';
 import type { COURSE_CATEGORIES, COURSE_HOBBY_TYPES } from './constants';
 import {
+  EVENT_DEFAULT_SEARCH_FILTERS,
   EVENT_SEARCH_FILTERS,
   courseCategories,
   MAPPED_PLACES,
@@ -452,3 +454,37 @@ export const getEventUrl = (
     locale
   );
 };
+
+export const getEventListLinkUrl = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+) => {
+  const search = router.asPath.split('?')[1];
+  return (
+    routerHelper.getLocalizedCmsItemUrl(
+      ROUTES.COURSES,
+      { eventId: event.id },
+      locale
+    ) + (search ? `?${search}` : '')
+  );
+};
+
+export const getKeywordOnClickHandler =
+  (
+    router: NextRouter,
+    locale: AppLanguage,
+    type: 'dateType' | 'isFree' | 'text',
+    value = ''
+  ) =>
+  () => {
+    const search = getSearchQuery({
+      ...EVENT_DEFAULT_SEARCH_FILTERS,
+      dateTypes: type === 'dateType' ? [value] : [],
+      isFree: type === 'isFree',
+      text: type === 'text' ? [value] : [],
+    });
+
+    router.push(`${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`);
+    scrollToTop();
+  };

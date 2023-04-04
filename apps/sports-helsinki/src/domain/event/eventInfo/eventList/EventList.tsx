@@ -3,18 +3,13 @@ import {
   useLocale,
   getEventFields,
 } from '@events-helsinki/components';
-import type {
-  EventFieldsFragment,
-  EventFields,
-} from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import { IconArrowRight } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
-
-import { ROUTES } from '../../../../constants';
-import routerHelper from '../../../../domain/app/routerHelper';
+import { getEventListLinkUrl } from '../../../search/eventSearch/utils';
 import styles from './eventList.module.scss';
 
 const EventList: React.FC<{
@@ -27,14 +22,6 @@ const EventList: React.FC<{
   const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();
   const router = useRouter();
-  const search = router.asPath.split('?')[1];
-
-  const getLinkUrl = (event: EventFieldsFragment) =>
-    routerHelper.getLocalizedCmsItemUrl(
-      ROUTES.COURSES,
-      { eventId: event.id },
-      locale
-    ) + (search ? `?${search}` : '');
 
   return (
     <ul className={styles.timeList} data-testid={id}>
@@ -54,7 +41,7 @@ const EventList: React.FC<{
             <Link
               className={styles.link}
               iconRight={<IconArrowRight />}
-              href={getLinkUrl(event)}
+              href={getEventListLinkUrl(event, router, locale)}
               aria-label={
                 showDate
                   ? t('otherTimes.buttonReadMore', {

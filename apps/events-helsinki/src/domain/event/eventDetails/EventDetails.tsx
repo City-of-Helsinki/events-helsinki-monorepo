@@ -1,8 +1,8 @@
 import {
   useLocale,
   getDateRangeStr,
-  getEventFields,
   EventLocationText as LocationText,
+  getEventFields,
 } from '@events-helsinki/components';
 import type { EventFieldsFragment } from '@events-helsinki/components';
 import { IconCalendarClock, IconLocation } from 'hds-react';

@@ -1,3 +1,4 @@
+import type { CommonButtonProps } from 'hds-react';
 import { i18n } from '../../../next-i18next.config';
 import { ROUTES } from '../../constants';
 
@@ -62,6 +63,18 @@ class AppConfig {
 
   static get debug() {
     return Boolean(parseEnvValue(process.env.NEXT_PUBLIC_DEBUG));
+  }
+
+  static get useEventHeroFallbackImage() {
+    return false;
+  }
+
+  static get defaultButtonTheme(): CommonButtonProps['theme'] {
+    return 'default';
+  }
+
+  static get defaultButtonVariant(): CommonButtonProps['variant'] {
+    return 'success';
   }
 
   static get matomoConfiguration() {

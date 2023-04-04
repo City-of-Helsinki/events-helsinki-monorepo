@@ -29,7 +29,10 @@ import {
   BackgroundImage,
   ContentContainer,
   PageSection,
+  useConfig,
 } from 'react-helsinki-headless-cms';
+import AppConfig from '../../app/AppConfig';
+
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import type { ReturnParams } from '../eventQueryString.util';
@@ -41,9 +44,11 @@ export interface Props {
   superEvent?: SuperEventResponse;
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
+  const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
@@ -95,12 +100,12 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
               size="default"
             />
           </div>
-          {imageUrl && (
+          {(AppConfig.useEventHeroFallbackImage || imageUrl) && (
             <div>
               <BackgroundImage
                 className={styles.image}
                 id={`event-background-${event.id}`}
-                url={imageUrl}
+                url={imageUrl || fallbackImageUrls[0]}
               />
             </div>
           )}
@@ -174,7 +179,8 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                   {registrationUrl && (
                     <div className={styles.registrationButtonWrapper}>
                       <Button
-                        variant="success"
+                        theme={AppConfig.defaultButtonTheme}
+                        variant={AppConfig.defaultButtonVariant}
                         className={buttonStyles.buttonCoatBlue}
                         aria-label={t('hero.ariaLabelEnrol')}
                         onClick={() => window.open(registrationUrl)}

@@ -1,4 +1,5 @@
 import { EventTypeId } from '@events-helsinki/components';
+import type { CommonButtonProps } from 'hds-react';
 import { ROUTES } from '../../constants';
 
 class AppConfig {
@@ -62,6 +63,18 @@ class AppConfig {
 
   static get debug() {
     return Boolean(parseEnvValue(process.env.NEXT_PUBLIC_DEBUG));
+  }
+
+  static get useEventHeroFallbackImage() {
+    return true;
+  }
+
+  static get defaultButtonTheme(): CommonButtonProps['theme'] {
+    return 'coat';
+  }
+
+  static get defaultButtonVariant(): CommonButtonProps['variant'] {
+    return 'primary';
   }
 
   static get matomoConfiguration() {

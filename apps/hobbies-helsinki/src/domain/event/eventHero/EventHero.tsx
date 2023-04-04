@@ -31,6 +31,7 @@ import {
   PageSection,
   useConfig,
 } from 'react-helsinki-headless-cms';
+import AppConfig from '../../app/AppConfig';
 
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
@@ -68,10 +69,8 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const showKeywords = Boolean(today || thisWeek || keywords.length);
   const returnParam = extractLatestReturnPath(search, locale);
 
-  const goBack = ({ returnPath, remainingQueryString }: ReturnParams) => {
-    router.push(
-      `${returnPath}${remainingQueryString ? `?${remainingQueryString}` : ''}`
-    );
+  const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
+    router.push(`${returnPath}${remainingQueryString}`);
   };
 
   const goToBuyTicketsPage = () => {
@@ -101,13 +100,15 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
               size="default"
             />
           </div>
-          <div>
-            <BackgroundImage
-              className={styles.image}
-              id={`event-background-${event.id}`}
-              url={imageUrl || fallbackImageUrls[0]}
-            />
-          </div>
+          {(AppConfig.useEventHeroFallbackImage || imageUrl) && (
+            <div>
+              <BackgroundImage
+                className={styles.image}
+                id={`event-background-${event.id}`}
+                url={imageUrl || fallbackImageUrls[0]}
+              />
+            </div>
+          )}
           <div className={styles.leftPanel}>
             <div className={styles.leftPanelWrapper}>
               <div className={styles.leftPanelEmpty} />
@@ -178,7 +179,8 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                   {registrationUrl && (
                     <div className={styles.registrationButtonWrapper}>
                       <Button
-                        theme="coat"
+                        theme={AppConfig.defaultButtonTheme}
+                        variant={AppConfig.defaultButtonVariant}
                         className={buttonStyles.buttonCoatBlue}
                         aria-label={t('hero.ariaLabelEnrol')}
                         onClick={() => window.open(registrationUrl)}

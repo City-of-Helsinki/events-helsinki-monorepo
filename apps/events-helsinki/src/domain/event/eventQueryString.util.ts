@@ -1,5 +1,5 @@
 import { ROUTES } from '../../constants';
-import routerHelper from '../../domain/app/routerHelper';
+import routerHelper from '../app/routerHelper';
 
 export type ReturnParams = {
   returnPath: string;

@@ -11,7 +11,7 @@ import {
 } from '@events-helsinki/components';
 import type {
   SuperEventResponse,
-  EventFieldsFragment,
+  EventFields,
 } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -20,7 +20,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../constants';
-import routerHelper from '../../domain/app/routerHelper';
+import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import EventClosedHero from './eventClosedHero/EventClosedHero';
 import EventContent from './eventContent/EventContent';
@@ -34,7 +34,7 @@ const SimilarEvents = dynamic(() => import('./similarEvents/SimilarEvents'), {
 
 export interface EventPageContainerProps {
   loading: boolean;
-  event?: EventFieldsFragment;
+  event?: EventFields;
   showSimilarEvents?: boolean;
 }
 
@@ -59,12 +59,12 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
     status: 'pending',
   });
 
+  const [hasSimilarEvents, setHasSimilarEvents] = useState(false);
+
   const superEventId = getEventIdFromUrl(
     event?.superEvent?.internalId ?? '',
     'event'
   );
-
-  const [hasSimilarEvents, setHasSimilarEvents] = useState(false);
 
   const [superEventSearch, { data: superEventData }] = useLazyQuery(
     EventDetailsDocument,

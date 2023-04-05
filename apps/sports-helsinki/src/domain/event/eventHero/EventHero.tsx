@@ -100,15 +100,13 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
               size="default"
             />
           </div>
-          {(AppConfig.useEventHeroFallbackImage || imageUrl) && (
-            <div>
-              <BackgroundImage
-                className={styles.image}
-                id={`event-background-${event.id}`}
-                url={imageUrl || fallbackImageUrls[0]}
-              />
-            </div>
-          )}
+          <div>
+            <BackgroundImage
+              className={styles.image}
+              id={`event-background-${event.id}`}
+              url={imageUrl || fallbackImageUrls[0]}
+            />
+          </div>
           <div className={styles.leftPanel}>
             <div className={styles.leftPanelWrapper}>
               <div className={styles.leftPanelEmpty} />

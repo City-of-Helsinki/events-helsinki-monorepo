@@ -65,10 +65,6 @@ class AppConfig {
     return Boolean(parseEnvValue(process.env.NEXT_PUBLIC_DEBUG));
   }
 
-  static get useEventHeroFallbackImage() {
-    return true;
-  }
-
   static get defaultButtonTheme(): CommonButtonProps['theme'] {
     return 'default';
   }

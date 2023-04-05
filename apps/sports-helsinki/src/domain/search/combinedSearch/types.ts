@@ -8,36 +8,20 @@ import type { FormEvent } from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
 import type { SearchRoute } from '../../../types';
 
-/**
- * The EventSearchParams fields.
- * NOTE: not needed when the TS has Exact types (https://github.com/microsoft/TypeScript/issues/12936) or similar.
- * These are needed only until the types properties can be generated as a string list.
- */
-export const eventSearchParamsFields = <const>['text', 'keywords', 'sort'];
-/**
- * A field for EventSearchParams.
- * NOTE: not needed when the TS has Exact types (https://github.com/microsoft/TypeScript/issues/12936) or similar.
- * These are needed only until the types properties can be generated as a string list.
- */
-export type EventSearchParamsField = (typeof eventSearchParamsFields)[number];
+export type CombinedSearchAdapterInput = {
+  text: string;
+  orderBy: string;
+  sportsCategories: string[];
+  organization: string | null;
+  keywords: string[];
+};
+
 export type EventSearchParams = {
   text: string;
   keywords: string[];
   sort: string;
 };
 
-/**
- * The VenueSearchParams fields.
- * NOTE: not needed when the TS has Exact types (https://github.com/microsoft/TypeScript/issues/12936) or similar.
- * These are needed only until the types properties can be generated as a string list.
- */
-export const venueSearchParamsFields = <const>['q', 'ontologyWords', 'orderBy'];
-/**
- * A field for VenueSearchParams.
- * NOTE: not needed when the TS has Exact types (https://github.com/microsoft/TypeScript/issues/12936) or similar.
- * These are needed only until the types properties can be generated as a string list.
- */
-export type VenueSearchParamsField = (typeof venueSearchParamsFields)[number];
 export type VenueSearchParams = {
   q: string;
   ontologyWords: string[];
@@ -51,33 +35,6 @@ export type CombinedSearchAdapter<
 > = {
   getQueryVariables: () => TCombinedSearchAdapterOutput;
 } & TCombinedSearchAdapterOutput;
-
-/**
- * The CombinedSearchAdapterInput fields.
- * NOTE: not needed when the TS has Exact types (https://github.com/microsoft/TypeScript/issues/12936) or similar.
- * These are needed only until the types properties can be generated as a string list.
- */
-export const combinedSearchAdapterInputFields = <const>[
-  'text',
-  'orderBy',
-  'sportsCategories',
-  'organization',
-  'keywords',
-];
-/**
- * A field for CombinedSearchAdapterInput
- * NOTE: not needed when the TS has Exact types (https://github.com/microsoft/TypeScript/issues/12936) or similar.
- * These are needed only until the types properties can be generated as a string list.
- */
-export type CombinedSearchAdapterInputField =
-  (typeof combinedSearchAdapterInputFields)[number];
-export type CombinedSearchAdapterInput = {
-  text: string;
-  orderBy: string;
-  sportsCategories: string[];
-  organization: string | null;
-  keywords: string[];
-};
 
 /**
  * Clean the given input value so that it can be used in the search.

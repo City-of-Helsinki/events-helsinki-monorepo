@@ -17,7 +17,9 @@ class CombinedSearchFormAdapter
   router: Router;
   initialFormParams = initialCombinedSearchFormValues;
   text: string;
-  orderBy: string;
+  venueOrderBy?: string | null;
+  eventOrderBy?: string | null;
+  courseOrderBy?: string | null;
   sportsCategories: string[];
   organization: string | null;
   keywords: string[];
@@ -30,7 +32,21 @@ class CombinedSearchFormAdapter
     }
 
     this.text = input.get('text') ?? input.get('q') ?? '';
-    this.orderBy = input.get('orderBy') ?? input.get('sort') ?? '';
+    this.venueOrderBy =
+      input.get('venueOrderBy') ??
+      input.get('orderBy') ??
+      input.get('sort') ??
+      undefined;
+    this.eventOrderBy =
+      input.get('eventOrderBy') ??
+      input.get('orderBy') ??
+      input.get('sort') ??
+      undefined;
+    this.courseOrderBy =
+      input.get('courseOrderBy') ??
+      input.get('orderBy') ??
+      input.get('sort') ??
+      undefined;
     this.sportsCategories = input.getAll('sportsCategories');
     this.organization = input.get('publisher');
     this.keywords = input.getAll('keywords');
@@ -96,7 +112,15 @@ class CombinedSearchFormAdapter
     return;
   }
 
-  public cleanOrderBy() {
+  public cleanVenueOrderBy() {
+    return;
+  }
+
+  public cleanEventOrderBy() {
+    return;
+  }
+
+  public cleanCourseOrderBy() {
     return;
   }
 
@@ -120,7 +144,9 @@ class CombinedSearchFormAdapter
    * */
   public clean() {
     this.cleanText();
-    this.cleanOrderBy();
+    this.cleanVenueOrderBy();
+    this.cleanEventOrderBy();
+    this.cleanCourseOrderBy();
     this.cleanSportsCategories();
     this.cleanOrganization();
     this.cleanKeywords();

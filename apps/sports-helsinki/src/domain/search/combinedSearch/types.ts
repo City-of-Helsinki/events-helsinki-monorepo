@@ -8,24 +8,67 @@ import type { FormEvent } from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
 import type { SearchRoute } from '../../../types';
 
+/**
+ * Rename properties of a type with a given namespace.
+ * For example, if the namespace is set to `'namespace'`,
+ * a property called `field` in a type `Type`
+ * would become `namespaceField`. Note the capitalized format.
+ * */
+type RenameKeyWithNamespace<Type, Namespace> = {
+  [Property in keyof Type as `${string & Namespace}${Capitalize<
+    string & Property
+  >}`]: Type[Property];
+};
+
+/**
+ * The properties that are cloned once per a search adapter and
+ * they are prefixed with a given search related namespace.
+ * For example the `orderBy` property could be cloned so
+ * that there is a specific orderBy-field for every search adapter:
+ * `venueOrderBy`, `eventOrderBy`, `courseOrderBy`, etc.
+ * */
+export type CombinedSearchAdapterInputPerAdapter = {
+  orderBy?: string | null;
+};
+
+/** Rename properties, e.g `orderBy` becomes `venueOrderBy`, etc. */
+type CombinedSearchAdapterInputForVenues = RenameKeyWithNamespace<
+  CombinedSearchAdapterInputPerAdapter,
+  'venue'
+>;
+
+/** Rename properties, e.g `orderBy` becomes `eventOrderBy`, etc. */
+type CombinedSearchAdapterInputForEvents = RenameKeyWithNamespace<
+  CombinedSearchAdapterInputPerAdapter,
+  'event'
+>;
+
+/** Rename properties, e.g `orderBy` becomes `courseOrderBy`, etc. */
+type CombinedSearchAdapterInputForCourses = RenameKeyWithNamespace<
+  CombinedSearchAdapterInputPerAdapter,
+  'course'
+>;
+
+/** All the input fields used by the combined search form adapter. */
 export type CombinedSearchAdapterInput = {
-  text: string;
-  orderBy: string;
+  text: string | null;
   sportsCategories: string[];
   organization: string | null;
   keywords: string[];
-};
+} & CombinedSearchAdapterInputForVenues &
+  CombinedSearchAdapterInputForEvents &
+  CombinedSearchAdapterInputForCourses;
 
 export type EventSearchParams = {
-  text: string;
+  text: string | null;
   keywords: string[];
-  sort: string;
+  sort?: string | null;
 };
 
 export type VenueSearchParams = {
-  q: string;
+  q: string | null;
   ontologyWords: string[];
-  orderBy: string;
+  orderBy?: string | null;
 };
 
 export type CombinedSearchAdapterOutput = EventSearchParams | VenueSearchParams;

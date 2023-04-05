@@ -1,3 +1,4 @@
+import { EventTypeId } from '@events-helsinki/components/types';
 import type {
   CombinedSearchAdapter,
   CombinedSearchAdapterInput,
@@ -5,14 +6,20 @@ import type {
 } from '../types';
 
 class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
-  text: string;
+  text: string | null;
   keywords: string[];
-  sort: string;
+  sort?: string | null;
 
-  constructor(input: CombinedSearchAdapterInput) {
-    this.text = input.text;
+  constructor(
+    input: CombinedSearchAdapterInput,
+    eventType: EventTypeId = EventTypeId.General
+  ) {
+    this.text = input.text ?? null;
     this.keywords = this.getKeywords(input);
-    this.sort = input.orderBy;
+    this.sort =
+      eventType === EventTypeId.General
+        ? input.eventOrderBy
+        : input.courseOrderBy;
   }
 
   private getKeywords({ keywords }: CombinedSearchAdapterInput) {

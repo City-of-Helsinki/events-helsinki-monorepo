@@ -347,6 +347,21 @@ export const getEventCategories = (event: EventFields) => {
   );
 };
 
+export const getEventSearchReturnPath = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+): string => {
+  return routerHelper.getLocalizedCmsItemUrl(
+    ROUTES.SEARCH,
+    {
+      ...router.query,
+      eventId: event.id,
+    },
+    locale
+  );
+};
+
 export const getEventUrl = (
   event: EventFields,
   router: NextRouter,
@@ -356,15 +371,19 @@ export const getEventUrl = (
     ROUTES.EVENTS,
     {
       eventId: event.id,
-      returnPath: routerHelper.getLocalizedCmsItemUrl(
-        ROUTES.SEARCH,
-        {
-          ...router.query,
-          eventId: event.id,
-        },
-        locale
-      ),
+      returnPath: getEventSearchReturnPath(event, router, locale),
     },
+    locale
+  );
+};
+
+export const getPlainEventUrl = (
+  event: EventFields,
+  locale: AppLanguage
+): string => {
+  return routerHelper.getLocalizedCmsItemUrl(
+    ROUTES.EVENTS,
+    { eventId: event.id },
     locale
   );
 };
@@ -375,13 +394,7 @@ export const getEventListLinkUrl = (
   locale: AppLanguage
 ) => {
   const search = router.asPath.split('?')[1];
-  return (
-    routerHelper.getLocalizedCmsItemUrl(
-      ROUTES.EVENTS,
-      { eventId: event.id },
-      locale
-    ) + (search ? `?${search}` : '')
-  );
+  return getPlainEventUrl(event, locale) + (search ? `?${search}` : '');
 };
 
 export const getKeywordOnClickHandler =

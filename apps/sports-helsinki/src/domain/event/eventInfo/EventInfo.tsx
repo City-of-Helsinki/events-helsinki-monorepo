@@ -35,8 +35,8 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
 import IconDirections from '../../../assets/icons/IconDirections';
-import { ROUTES } from '../../../constants';
-import routerHelper from '../../../domain/app/routerHelper';
+import AppConfig from '../../app/AppConfig';
+import { getPlainEventUrl } from '../../search/eventSearch/utils';
 import styles from './eventInfo.module.scss';
 import { SubEvents, SuperEvent } from './EventsHierarchy';
 import OrganizationInfo from './OrganizationInfo';
@@ -67,11 +67,10 @@ const EventInfo: React.FC<Props> = ({ event, superEvent }) => {
   const showOtherInfo = Boolean(
     email || externalLinks.length || infoUrl || telephone
   );
-
-  /* 
+  /*
   Middle level events are all the events that have super event and subEvents
   Then the so called sibbling events (the events that have the same super event)
-  are not wanted to be seen. 
+  are not wanted to be seen.
   */
   const isMiddleLevelEvent = Boolean(superEvent && event.subEvents?.length);
 
@@ -122,11 +121,7 @@ const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
       const icsEvent: EventAttributes = {
         description: t('info.textCalendarLinkDescription', {
           description: shortDescription,
-          link: `${domain}${routerHelper.getLocalizedCmsItemUrl(
-            ROUTES.COURSES,
-            { eventId: event.id },
-            locale
-          )}`,
+          link: `${domain}${getPlainEventUrl(event, locale)}`,
         }),
         end: endTime ? getDateArray(endTime) : getDateArray(startTime),
         location: [locationName, streetAddress, district, addressLocality]
@@ -347,7 +342,8 @@ const PriceInfo: React.FC<{ event: EventFields }> = ({ event }) => {
       {offerInfoUrl && (
         <Visible below="s" className={styles.buyButtonWrapper}>
           <Button
-            variant="success"
+            theme={AppConfig.defaultButtonTheme}
+            variant={AppConfig.defaultButtonVariant}
             aria-label={t('info.ariaLabelBuyTickets')}
             fullWidth={true}
             onClick={moveToBuyTicketsPage}

@@ -5,13 +5,13 @@ import type {
 } from '../types';
 
 class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
-  q: string;
+  q: string | null;
   ontologyWords: string[];
-  orderBy: string;
+  orderBy?: string | null;
 
   constructor(input: CombinedSearchAdapterInput) {
     this.q = input.text;
-    this.orderBy = input.orderBy;
+    this.orderBy = input.venueOrderBy ?? null;
     this.ontologyWords = this.getOntologyWords(input);
   }
 

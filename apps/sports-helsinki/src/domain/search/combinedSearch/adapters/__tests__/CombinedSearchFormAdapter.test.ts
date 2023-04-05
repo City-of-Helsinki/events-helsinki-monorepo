@@ -9,7 +9,9 @@ import CombinedSearchFormAdapter from '../CombinedSearchFormAdapter';
 
 const outputQuery: CombinedSearchAdapterInput = {
   text: 'test text',
-  orderBy: 'field-asc',
+  venueOrderBy: 'venue-field-asc',
+  eventOrderBy: 'event-field-asc',
+  courseOrderBy: 'course-field-asc',
   sportsCategories: [],
   organization: null,
   keywords: [],
@@ -58,6 +60,19 @@ describe('CombinedSearchFormAdapter', () => {
     it.each([
       // Test the happy path where nothing changes
       [input, inputSearchParams],
+      [
+        new URLSearchParams(
+          qs.stringify({
+            text: 'to be transformed to text',
+            venueOrderBy: 'to-be-order-by',
+          })
+        ),
+        qs.stringify({
+          organization: null,
+          text: 'to be transformed to text',
+          venueOrderBy: 'to-be-order-by',
+        }),
+      ],
       // Test the backward compatibility
       [
         new URLSearchParams(
@@ -71,7 +86,9 @@ describe('CombinedSearchFormAdapter', () => {
           q: 'to be transformed to text',
           sort: 'to-be-order-by',
           text: 'to be transformed to text',
-          orderBy: 'to-be-order-by',
+          venueOrderBy: 'to-be-order-by',
+          eventOrderBy: 'to-be-order-by',
+          courseOrderBy: 'to-be-order-by',
         }),
       ],
     ])(
@@ -92,6 +109,19 @@ describe('CombinedSearchFormAdapter', () => {
     it.each([
       // Test the happy path where nothing changes
       [input, inputSearchParams],
+      [
+        new URLSearchParams(
+          qs.stringify({
+            text: 'to be transformed to text',
+            venueOrderBy: 'to-be-order-by',
+          })
+        ),
+        qs.stringify({
+          organization: null,
+          text: 'to be transformed to text',
+          venueOrderBy: 'to-be-order-by',
+        }),
+      ],
       // Test the backward compatibility
       [
         new URLSearchParams(
@@ -105,7 +135,9 @@ describe('CombinedSearchFormAdapter', () => {
           q: 'to be transformed to text',
           sort: 'to-be-order-by',
           text: 'to be transformed to text',
-          orderBy: 'to-be-order-by',
+          venueOrderBy: 'to-be-order-by',
+          eventOrderBy: 'to-be-order-by',
+          courseOrderBy: 'to-be-order-by',
         }),
       ],
     ])(
@@ -134,7 +166,7 @@ describe('CombinedSearchFormAdapter', () => {
         {
           q: outputQuery.text,
           ontologyWords: outputQuery.keywords,
-          orderBy: outputQuery.orderBy,
+          orderBy: outputQuery.venueOrderBy ?? null,
         },
       ],
       [
@@ -142,7 +174,7 @@ describe('CombinedSearchFormAdapter', () => {
         {
           text: outputQuery.text,
           keywords: outputQuery.keywords,
-          sort: outputQuery.orderBy,
+          sort: outputQuery.eventOrderBy ?? null,
         },
       ],
     ])(

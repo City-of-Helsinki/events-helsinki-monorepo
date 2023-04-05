@@ -1,12 +1,11 @@
 import type { ParsedUrlQuery } from 'querystring';
 import type { Router } from 'next/router';
 import qs from 'query-string';
+import { initialCombinedSearchFormValues } from '../constants';
 import type {
   CombinedSearchAdapterInput,
-  CombinedSearchAdapterInputField,
   InputFieldValueCleaner,
 } from '../types';
-import { combinedSearchAdapterInputFields } from '../types';
 import EventSearchAdapter from './EventSearchAdapter';
 import VenueSearchAdapter from './VenueSearchAdapter';
 
@@ -16,13 +15,7 @@ class CombinedSearchFormAdapter
     InputFieldValueCleaner<CombinedSearchAdapterInput>
 {
   router: Router;
-  initialFormParams: CombinedSearchAdapterInput = {
-    text: '',
-    orderBy: '',
-    sportsCategories: [],
-    organization: null,
-    keywords: [],
-  };
+  initialFormParams = initialCombinedSearchFormValues;
   text: string;
   orderBy: string;
   sportsCategories: string[];
@@ -50,19 +43,15 @@ class CombinedSearchFormAdapter
    * Get a map of form values.
    * */
   public getFormValues(): CombinedSearchAdapterInput {
-    return Object.keys(this).reduce(
+    type CombinedSearchAdapterInputField =
+      keyof typeof initialCombinedSearchFormValues;
+    const formFields = Object.keys(this.initialFormParams);
+    return formFields.reduce(
       (formParams: CombinedSearchAdapterInput, field) => {
-        if (
-          combinedSearchAdapterInputFields.includes(
-            field as CombinedSearchAdapterInputField
-          )
-        ) {
-          return {
-            ...formParams,
-            [field]: this[field as CombinedSearchAdapterInputField],
-          };
-        }
-        return formParams;
+        return {
+          ...formParams,
+          [field]: this[field as CombinedSearchAdapterInputField],
+        };
       },
       { ...this.initialFormParams }
     );

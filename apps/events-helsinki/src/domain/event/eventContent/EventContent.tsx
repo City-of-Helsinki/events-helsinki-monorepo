@@ -1,19 +1,24 @@
+import type {
+  EventFields,
+  SuperEventResponse,
+} from '@events-helsinki/components';
 import {
   ShareLinks,
-  sanitizeHtml,
   useLocale,
   EventLocation,
   getEventFields,
   EVENT_LOCATIONS,
 } from '@events-helsinki/components';
-import type {
-  EventFields,
-  SuperEventResponse,
-} from '@events-helsinki/components';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
+import {
+  PageSection,
+  ContentContainer,
+  Link,
+  HtmlToReact,
+} from 'react-helsinki-headless-cms';
+import AppConfig from '../../../domain/app/AppConfig';
 
 import EventInfo from '../eventInfo/EventInfo';
 import styles from './eventContent.module.scss';
@@ -54,13 +59,16 @@ const EventContent: React.FC<Props> = ({
                 <h2 className={styles.descriptionTitle}>
                   {t('event:description.title')}
                 </h2>
-                <div
-                  className={styles.description}
-                  dangerouslySetInnerHTML={{
-                    __html: sanitizeHtml(description),
-                  }}
-                />
-                {locationExtraInfo && (
+                <div className={styles.description}>
+                  <HtmlToReact
+                    components={{
+                      a: Link,
+                    }}
+                  >
+                    {description}
+                  </HtmlToReact>
+                </div>
+                {AppConfig.showEventLocationExtraInfo && locationExtraInfo && (
                   <>
                     <h2 className={styles.descriptionTitle}>
                       {t('event:locationExtraInfo.title')}

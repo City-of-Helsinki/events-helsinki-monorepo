@@ -15,7 +15,6 @@ export { default as getURLSearchParamsFromAsPath } from './getURLSearchParamsFro
 export { default as isClient } from './isClient';
 export { default as isTestEnv } from './isTestEnv';
 export * from './queryString';
-export { default as sanitizeHtml } from './sanitizeHtml';
 export { default as showToast } from './showToast';
 export { default as scrollToTop } from './scrollToTop';
 export * from './translateUtils';

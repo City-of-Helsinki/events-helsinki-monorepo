@@ -15,7 +15,6 @@ class CombinedSearchFormAdapter
     InputFieldValueCleaner<CombinedSearchAdapterInput>
 {
   router: Router;
-  initialFormParams = initialCombinedSearchFormValues;
   text: string;
   venueOrderBy?: string | null;
   eventOrderBy?: string | null;
@@ -26,6 +25,9 @@ class CombinedSearchFormAdapter
 
   constructor(router: Router, input?: URLSearchParams) {
     this.router = router;
+
+    // Initialize the object with default values
+    Object.assign(this, initialCombinedSearchFormValues);
 
     if (!input) {
       input = new URLSearchParams(qs.stringify(router.query));
@@ -55,13 +57,18 @@ class CombinedSearchFormAdapter
     this.clean();
   }
 
+  /** The combined search form fields. */
+  private getFormFields() {
+    return Object.keys(initialCombinedSearchFormValues);
+  }
+
   /**
    * Get a map of form values.
    * */
   public getFormValues(): CombinedSearchAdapterInput {
     type CombinedSearchAdapterInputField =
       keyof typeof initialCombinedSearchFormValues;
-    const formFields = Object.keys(this.initialFormParams);
+    const formFields = this.getFormFields();
     return formFields.reduce(
       (formParams: CombinedSearchAdapterInput, field) => {
         return {
@@ -69,7 +76,7 @@ class CombinedSearchFormAdapter
           [field]: this[field as CombinedSearchAdapterInputField],
         };
       },
-      { ...this.initialFormParams }
+      { ...initialCombinedSearchFormValues }
     );
   }
 

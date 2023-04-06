@@ -1,3 +1,4 @@
+import { EventTypeId, SortOrder } from '@events-helsinki/components/types';
 import type { Router } from 'next/router';
 import mockRouter from 'next-router-mock';
 import qs from 'query-string';
@@ -165,16 +166,45 @@ describe('CombinedSearchFormAdapter', () => {
         'VenueSearchAdapter',
         {
           q: outputQuery.text,
-          ontologyWords: outputQuery.keywords,
-          orderBy: outputQuery.venueOrderBy ?? null,
+          ontologyWordIds: outputQuery.keywords,
+          orderByName: { order: SortOrder.Descending },
+          administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
+          after: '',
+          first: 10,
+          ontologyTreeIds: ['551'],
+          openAt: '',
         },
       ],
       [
         'EventSearchAdapter',
         {
           text: outputQuery.text,
-          keywords: outputQuery.keywords,
+          keywordAnd: outputQuery.keywords,
           sort: outputQuery.eventOrderBy ?? null,
+          eventType: EventTypeId.General,
+          allOngoingAnd: null,
+          start: 'now',
+          end: '',
+          keywordNot: [],
+          keywordOrSet1: [
+            'yso:p916',
+            'kulke:710',
+            'yso:p17018',
+            'yso:p1963',
+            'yso:p9824',
+            'yso:p965',
+            'yso:p6409',
+            'yso:p8781',
+            'yso:p26619',
+            'yso:p13035',
+            'yso:p2041',
+          ],
+          keywordOrSet2: [],
+          location: [],
+          pageSize: 10,
+          publisher: null,
+          include: ['keywords', 'location'],
+          superEventType: ['umbrella', 'none'],
         },
       ],
     ])(

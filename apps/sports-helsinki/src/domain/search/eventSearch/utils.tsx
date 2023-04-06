@@ -1,19 +1,19 @@
+import type {
+  AppLanguage,
+  EVENT_SORT_OPTIONS,
+  EventFields,
+  FilterType,
+  Meta,
+  QueryEventListArgs,
+  SPORTS_CATEGORIES,
+} from '@events-helsinki/components';
 import {
   buildQueryFromObject,
   DATE_TYPES,
+  EventTypeId,
   formatDate,
   getUrlParamAsArray,
   scrollToTop,
-} from '@events-helsinki/components';
-import type {
-  FilterType,
-  AppLanguage,
-  Meta,
-  QueryEventListArgs,
-  EventFields,
-  EventTypeId,
-  EVENT_SORT_OPTIONS,
-  SPORTS_CATEGORIES,
 } from '@events-helsinki/components';
 import {
   addDays,
@@ -30,12 +30,12 @@ import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';
 import { PARAM_SEARCH_TYPE } from '../combinedSearch/constants';
 import {
-  EVENT_DEFAULT_SEARCH_FILTERS,
-  SPORT_COURSES_KEYWORDS,
   CATEGORY_CATALOG,
+  EVENT_DEFAULT_SEARCH_FILTERS,
   EVENT_SEARCH_FILTERS,
-  MAPPED_PLACES,
   MAPPED_COURSE_CATEGORIES,
+  MAPPED_PLACES,
+  SPORT_COURSES_KEYWORDS,
   sportsCategoryData,
 } from './constants';
 import type {
@@ -393,6 +393,21 @@ export const getPlainEventUrl = (
   return routerHelper.getLocalizedCmsItemUrl(
     ROUTES.COURSES,
     { eventId: event.id },
+    locale
+  );
+};
+
+export const getOrganizationSearchUrl = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+): string => {
+  return routerHelper.getLocalizedCmsItemUrl(
+    ROUTES.SEARCH,
+    {
+      searchType: event.typeId ?? EventTypeId.General,
+      publisher: event.publisher ?? '',
+    },
     locale
   );
 };

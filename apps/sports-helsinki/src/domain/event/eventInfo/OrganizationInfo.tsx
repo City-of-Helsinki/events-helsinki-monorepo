@@ -1,26 +1,22 @@
-import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
-  EventTypeId,
   getEventFields,
-  isEventTypeId,
   InfoWithIcon,
   LoadingSpinner,
   translateValue,
   useLocale,
   useOrganizationDetailsQuery,
 } from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import { IconFaceSmile, IconLayers } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import qs from 'query-string';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
-import { ROUTES } from '../../../constants';
-import routerHelper from '../../../domain/app/routerHelper';
+import { getOrganizationSearchUrl } from '../../search/eventSearch/utils';
 import styles from './eventInfo.module.scss';
 
 interface Props {
-  event: EventFieldsFragment;
+  event: EventFields;
 }
 
 const OrganizationInfo: React.FC<Props> = ({ event }) => {
@@ -32,21 +28,6 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
     ssr: false,
     variables: { id: publisher },
   });
-
-  const searchParams = React.useMemo(
-    () => new URLSearchParams(qs.stringify(router.query)),
-    [router.query]
-  );
-  const returnPath = searchParams.get('returnPath') ?? '';
-  const returnPathSearchParams = new URLSearchParams(returnPath);
-  const returnPathSearchType = returnPathSearchParams.get('searchType') ?? '';
-  const eventTypeId: EventTypeId = isEventTypeId(returnPathSearchType)
-    ? returnPathSearchType
-    : EventTypeId.General; // Fallback value
-  const linkByPublisherLabel = React.useMemo(
-    () => translateValue('info.linkSearchByPublisher.', eventTypeId, t),
-    [eventTypeId, t]
-  );
   const organizationName = organizationData?.organizationDetails.name;
 
   return (
@@ -66,13 +47,13 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
                   data-testid="publisherLink"
                   className={styles.link}
                   variant="arrowRight"
-                  href={`${routerHelper.getLocalizedCmsItemUrl(
-                    ROUTES.SEARCH,
-                    { searchType: eventTypeId, publisher: publisher },
-                    locale
-                  )}`}
+                  href={getOrganizationSearchUrl(event, router, locale)}
                 >
-                  {linkByPublisherLabel}
+                  {translateValue(
+                    'info.linkSearchByPublisher.',
+                    event.typeId as string,
+                    t
+                  )}
                 </SecondaryLink>
               </>
             )}

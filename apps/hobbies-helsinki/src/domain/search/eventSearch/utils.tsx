@@ -474,6 +474,18 @@ export const getPlainEventUrl = (
   );
 };
 
+export const getOrganizationSearchUrl = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+): string => {
+  return routerHelper.getLocalizedCmsItemUrl(
+    ROUTES.SEARCH,
+    { publisher: event.publisher ?? '' },
+    locale
+  );
+};
+
 export const getEventListLinkUrl = (
   event: EventFields,
   router: NextRouter,

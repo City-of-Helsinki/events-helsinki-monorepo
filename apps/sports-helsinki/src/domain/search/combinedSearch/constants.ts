@@ -1,4 +1,12 @@
-import type { CombinedSearchAdapterInput } from './types';
+import { EVENT_SORT_OPTIONS } from '@events-helsinki/components/constants';
+import { EventTypeId } from '@events-helsinki/components/types';
+import { SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID } from '../../app/appConstants';
+import { SPORT_COURSES_KEYWORDS } from '../eventSearch/constants';
+import type {
+  CombinedSearchAdapterInput,
+  EventSearchParams,
+  VenueSearchParams,
+} from './types';
 
 export const PARAM_SEARCH_TYPE = 'searchType';
 export const initialCombinedSearchFormValues: CombinedSearchAdapterInput = {
@@ -9,4 +17,31 @@ export const initialCombinedSearchFormValues: CombinedSearchAdapterInput = {
   sportsCategories: [],
   organization: null,
   keywords: [],
+};
+export const initialVenueSearchAdapterValues: VenueSearchParams = {
+  q: '',
+  ontologyTreeIds: [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()],
+  ontologyWordIds: [],
+  administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
+  openAt: '',
+  after: '',
+  first: 10,
+};
+
+export const initialEventSearchAdapterValues: EventSearchParams = {
+  text: null,
+  allOngoingAnd: null,
+  start: 'now',
+  end: '',
+  include: ['keywords', 'location'],
+  keywordAnd: [],
+  keywordNot: [],
+  keywordOrSet1: SPORT_COURSES_KEYWORDS,
+  keywordOrSet2: [],
+  location: [],
+  sort: EVENT_SORT_OPTIONS.END_TIME,
+  eventType: EventTypeId.General,
+  superEventType: ['umbrella', 'none'],
+  publisher: null,
+  pageSize: 10,
 };

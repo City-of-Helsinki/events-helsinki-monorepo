@@ -1,3 +1,4 @@
+import { SortOrder } from '@events-helsinki/components/types';
 import type { CombinedSearchAdapterInput } from '../../types';
 import VenueSearchAdapter from '../VenueSearchAdapter';
 
@@ -6,7 +7,7 @@ describe('VenueSearchAdapter', () => {
     it('converts the form values input to a desired search variables as an output', () => {
       const input: CombinedSearchAdapterInput = {
         text: 'test text',
-        venueOrderBy: 'field-asc',
+        venueOrderBy: 'name-asc',
         eventOrderBy: null,
         courseOrderBy: null,
         sportsCategories: [],
@@ -16,8 +17,15 @@ describe('VenueSearchAdapter', () => {
       const adapter = new VenueSearchAdapter(input);
       expect(adapter.getQueryVariables()).toStrictEqual({
         q: input.text,
-        orderBy: input.venueOrderBy,
-        ontologyWords: input.keywords,
+        ontologyWordIds: input.keywords,
+        administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
+        after: '',
+        first: 10,
+        ontologyTreeIds: ['551'],
+        openAt: '',
+        orderByName: {
+          order: SortOrder.Descending,
+        },
       });
     });
   });

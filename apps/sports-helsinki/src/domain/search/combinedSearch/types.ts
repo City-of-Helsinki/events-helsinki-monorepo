@@ -1,6 +1,8 @@
 import type {
   EventListQuery,
+  EventListQueryVariables,
   QueryEventListArgs,
+  QueryUnifiedSearchArgs,
   UnifiedSearchParameters,
   UnifiedSearchVenue,
 } from '@events-helsinki/components';
@@ -59,17 +61,41 @@ export type CombinedSearchAdapterInput = {
   CombinedSearchAdapterInputForEvents &
   CombinedSearchAdapterInputForCourses;
 
-export type EventSearchParams = {
-  text: string | null;
-  keywords: string[];
-  sort?: string | null;
-};
+/** The fields that are used by the Event and Course search. */
+export type EventSearchParams = Pick<
+  EventListQueryVariables,
+  | 'text'
+  | 'allOngoingAnd'
+  | 'start'
+  | 'end'
+  | 'include'
+  | 'keyword'
+  | 'keywordAnd'
+  | 'keywordNot'
+  | 'keywordOrSet1'
+  | 'keywordOrSet2'
+  | 'location'
+  | 'sort'
+  | 'eventType'
+  | 'superEventType'
+  | 'publisher'
+  | 'page'
+  | 'pageSize'
+>;
 
-export type VenueSearchParams = {
-  q: string | null;
-  ontologyWords: string[];
-  orderBy?: string | null;
-};
+/** The fields that are used by the Venue search. */
+export type VenueSearchParams = Pick<
+  QueryUnifiedSearchArgs,
+  | 'q'
+  | 'ontologyTreeIds'
+  | 'ontologyWordIds'
+  | 'administrativeDivisionIds'
+  | 'openAt'
+  | 'orderByName'
+  | 'orderByDistance'
+  | 'after'
+  | 'first'
+>;
 
 export type CombinedSearchAdapterOutput = EventSearchParams | VenueSearchParams;
 

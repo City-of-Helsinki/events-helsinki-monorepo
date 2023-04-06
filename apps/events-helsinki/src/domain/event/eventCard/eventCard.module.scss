@@ -8,6 +8,7 @@
   word-break: break-word;
   min-width: fit-content;
   background-color: var(--color-white);
+  color: var(--color-primary-black);
   display: grid;
   grid-template-columns: var(--width-image) 1fr;
   height: 100%;
@@ -83,6 +84,7 @@
 
       .eventName {
         order: 3;
+        color: var(--color-primary-black);
         font-size: var(--fontsize-body-l);
         font-weight: 600;
         line-height: var(--lineheight-l);

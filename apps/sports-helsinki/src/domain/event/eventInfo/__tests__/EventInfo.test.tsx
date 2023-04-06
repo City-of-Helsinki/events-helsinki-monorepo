@@ -288,56 +288,39 @@ it('should hide audience age info on single event page if min and max ages are n
 describe('OrganizationInfo', () => {
   it.each([
     {
-      // Without searchType in route should use event as fallback
-      route: '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest',
+      eventTypeId: EventTypeId.General,
       expectedLinkText: 'Katso julkaisijan muut tapahtumat',
     },
     {
-      route:
-        '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest%26searchType%3DGeneral',
-      expectedLinkText: 'Katso julkaisijan muut tapahtumat',
-    },
-    {
-      route:
-        '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest%26searchType%3DCourse',
       expectedLinkText: 'Katso julkaisijan muut harrastukset',
+      eventTypeId: EventTypeId.Course,
     },
   ])(
     'should show correct provider link text on event/hobby detail page',
-    async ({ route, expectedLinkText }) => {
-      render(<EventInfo event={event} />, {
-        mocks: mocksWithSubEvents,
-        routes: [route],
-      });
+    async ({ eventTypeId, expectedLinkText }) => {
+      render(
+        <EventInfo event={{ ...event, typeId: eventTypeId } as EventFields} />,
+        {
+          mocks: mocksWithSubEvents,
+          routes: ['/fi/kurssit/test'],
+        }
+      );
       await waitFor(() => {
         expect(screen.getByText(expectedLinkText)).toBeInTheDocument();
       });
     }
   );
 
-  it.each([
-    {
-      // Without searchType in route should use event as fallback
-      route: '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest',
-      expectedSearchType: EventTypeId.General,
-    },
-    {
-      route:
-        '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest%26searchType%3DGeneral',
-      expectedSearchType: EventTypeId.General,
-    },
-    {
-      route:
-        '/fi/kurssit/test?returnPath=%2Fhaku%3FeventId%3Dtest%26searchType%3DCourse',
-      expectedSearchType: EventTypeId.Course,
-    },
-  ])(
+  it.each(Object.keys(EventTypeId))(
     'should show correct provider link on event/hobby detail page',
-    async ({ route, expectedSearchType }) => {
-      render(<EventInfo event={event} />, {
-        mocks,
-        routes: [route],
-      });
+    async (eventTypeId) => {
+      render(
+        <EventInfo event={{ ...event, typeId: eventTypeId } as EventFields} />,
+        {
+          mocks,
+          routes: ['/fi/kurssit/test'],
+        }
+      );
       const getPublisherLink = () => {
         const publisherLinkElement: HTMLElement =
           screen.getByTestId('publisherLink');
@@ -368,7 +351,7 @@ describe('OrganizationInfo', () => {
       });
       await waitFor(() => {
         expect(getPublisherLink()?.searchParams.get('searchType')).toBe(
-          expectedSearchType
+          eventTypeId
         );
       });
       await waitFor(() => {

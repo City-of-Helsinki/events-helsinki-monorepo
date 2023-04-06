@@ -18,6 +18,7 @@ import {
   Link,
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
+import AppConfig from '../../../domain/app/AppConfig';
 
 import EventInfo from '../eventInfo/EventInfo';
 import styles from './eventContent.module.scss';
@@ -35,7 +36,10 @@ const EventContent: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation(['common', 'event']);
   const locale = useLocale();
-  const { description, photographerName } = getEventFields(event, locale);
+  const { description, photographerName, locationExtraInfo } = getEventFields(
+    event,
+    locale
+  );
 
   const isInternetEvent = event?.location?.id === EVENT_LOCATIONS.INTERNET;
 
@@ -64,6 +68,16 @@ const EventContent: React.FC<Props> = ({
                     {description}
                   </HtmlToReact>
                 </div>
+                {AppConfig.showEventLocationExtraInfo && locationExtraInfo && (
+                  <>
+                    <h2 className={styles.descriptionTitle}>
+                      {t('event:locationExtraInfo.title')}
+                    </h2>
+                    <div className={styles.description}>
+                      <p>{locationExtraInfo}</p>
+                    </div>
+                  </>
+                )}
                 {photographerName && (
                   <p>
                     {t('common:photographerText', {

@@ -397,6 +397,18 @@ export const getPlainEventUrl = (
   );
 };
 
+export const getCardUrl = (
+  event: EventFields,
+  locale: AppLanguage,
+  returnPath?: string
+): string => {
+  return routerHelper.getLocalizedCmsItemUrl(
+    ROUTES.COURSES,
+    { eventId: event.id, returnPath },
+    locale
+  );
+};
+
 export const getOrganizationSearchUrl = (
   event: EventFields,
   router: NextRouter,

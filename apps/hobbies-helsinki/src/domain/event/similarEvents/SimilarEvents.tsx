@@ -1,24 +1,18 @@
 import {
   LoadingSpinner,
-  useClickCapture,
-  useLocale,
+  useEventTranslation,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
-import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import React from 'react';
 import type { CollectionProps } from 'react-helsinki-headless-cms';
 import {
-  Card,
-  getEventCardProps,
-  useConfig,
   Collection,
   PageSection,
   ContentContainer,
 } from 'react-helsinki-headless-cms';
-
-import { ROUTES } from '../../../constants';
-import routerHelper from '../../app/routerHelper';
 import { useSimilarEventsQuery } from '../queryUtils';
+import useEventCards from '../useEventCards';
 import styles from './similarEvents.module.scss';
 
 interface Props {
@@ -36,35 +30,10 @@ const SimilarEvents: React.FC<Props> = ({
   type = 'carousel',
   onEventsLoaded,
 }) => {
-  const { t } = useTranslation('event');
-  const locale = useLocale();
+  const { t } = useEventTranslation();
+  const router = useRouter();
   const { data: events, loading } = useSimilarEventsQuery(event);
-  const {
-    components: { EventCardContent },
-  } = useConfig();
-  useClickCapture(1000);
-
-  const cards = events.map((event, i) => {
-    const cardProps = getEventCardProps(event, locale);
-    const url = routerHelper.getLocalizedCmsItemUrl(
-      ROUTES.COURSES,
-      { eventId: event.id },
-      locale
-    );
-
-    return (
-      <Card
-        key={cardProps.id}
-        {...cardProps}
-        url={url}
-        direction="fixed-vertical"
-        customContent={
-          EventCardContent && <EventCardContent event={events[i]} />
-        }
-      />
-    );
-  });
-
+  const cards = useEventCards({ events, returnPath: router.asPath });
   const hasCards = !!cards.length;
 
   React.useEffect(() => {
@@ -89,7 +58,7 @@ const SimilarEvents: React.FC<Props> = ({
           >
             <Collection
               type={type}
-              title={t('similarEvents.title')}
+              title={t('event:similarEvents.title')}
               cards={cards}
               loading={loading}
             />

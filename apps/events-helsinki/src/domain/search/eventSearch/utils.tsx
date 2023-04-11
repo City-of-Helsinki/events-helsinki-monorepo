@@ -388,6 +388,13 @@ export const getPlainEventUrl = (
   );
 };
 
+export const getCardUrl = (
+  event: EventFields,
+  locale: AppLanguage,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  returnPath?: string
+): string => getPlainEventUrl(event, locale);
+
 export const getOrganizationSearchUrl = (
   event: EventFields,
   router: NextRouter,

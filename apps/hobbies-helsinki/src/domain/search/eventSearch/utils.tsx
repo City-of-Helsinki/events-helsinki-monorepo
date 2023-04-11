@@ -486,6 +486,13 @@ export const getOrganizationSearchUrl = (
   );
 };
 
+export const getCardUrl = (
+  event: EventFields,
+  locale: AppLanguage,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  returnPath?: string
+): string => getPlainEventUrl(event, locale);
+
 export const getEventListLinkUrl = (
   event: EventFields,
   router: NextRouter,

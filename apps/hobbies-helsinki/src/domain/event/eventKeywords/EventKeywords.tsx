@@ -39,8 +39,10 @@ const EventKeywords: React.FC<Props> = ({
     locale
   );
 
-  const handleClick = (type: 'dateType' | 'isFree' | 'text', value = '') =>
-    getKeywordOnClickHandler(router, locale, type, value);
+  const handleClick = (
+    type: Parameters<typeof getKeywordOnClickHandler>[2],
+    value = ''
+  ) => getKeywordOnClickHandler(router, locale, type, value);
 
   const showComponent =
     today ||

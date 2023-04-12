@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.7.1...events-helsinki-v1.0.0) (2023-04-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* **rce-issue:** rename the packages with a @events-helsinki -scope
+
+### Features
+
+* Remove buttons from large event card in sports, hobbies and events ([461b58d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/461b58de6d01859f2d57c6d733bb1c8fea062a48))
+
+
+### Bug Fixes
+
+* Removing unused breadcrumbs ([af03c1c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/af03c1c7de6e71f134a21a1a80f696f026506510))
+
+
+### Build System
+
+* **rce-issue:** Rename the packages with a [@events-helsinki](https://github.com/events-helsinki) -scope ([668c18c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/668c18ce7cbc28591172c0d0ddb74ffa04681e23))
+
 ## [0.7.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.7.0...events-helsinki-v0.7.1) (2023-03-30)
 
 

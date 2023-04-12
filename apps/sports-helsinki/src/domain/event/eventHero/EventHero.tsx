@@ -44,7 +44,6 @@ export interface Props {
   superEvent?: SuperEventResponse;
 }
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');

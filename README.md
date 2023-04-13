@@ -425,6 +425,14 @@ If you were expecting a new release PR to be created or old one to be updated, b
 
 Sometimes there might be a merge conflict in release PR - this should resolve itself on the next push to main. It is possible run release-please action manually with label, it should recreate the PR's. You can also resolve it manually, by updating the [release-please-manifest.json](./.release-please-manifest.json) file.
 
+#### Fix merge conflicts by running release-please -action manually
+
+1. Open [release-please github action](https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/release-please.yml)
+2. Click **Run workflow**
+3. Check Branch is **main**
+4. Leave label field empty. New label is not needed to fix merge issues
+5. Click **Run workflow** -button
+
 There's also a CLI for debugging and manually running releases available for release-please: [release-please-cli](https://github.com/googleapis/release-please/blob/main/docs/cli.md)
 
 ## FAQ

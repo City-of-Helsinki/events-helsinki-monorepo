@@ -8,6 +8,9 @@
   "description": {
     "title": "Description"
   },
+  "otherInfo": {
+    "title": "Location extra info"
+  },
   "location": {
     "directionsGoogle": "Directions (Google)",
     "directionsHSL": "Directions (HSL)"

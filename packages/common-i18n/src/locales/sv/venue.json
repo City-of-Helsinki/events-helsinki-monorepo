@@ -8,6 +8,9 @@
   "description": {
     "title": "Beskrivning"
   },
+  "otherInfo": {
+    "title": "Plats ytterligare info"
+  },
   "location": {
     "directionsGoogle": "Rutter (Google)",
     "directionsHSL": "Rutter (HRT)"

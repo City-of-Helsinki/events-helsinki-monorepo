@@ -14,6 +14,7 @@ import {
 } from 'react-helsinki-headless-cms';
 import VenueInfo from '../venueInfo/VenueInfo';
 import VenueLocation from '../venueLocation/VenueLocation';
+import VenueOtherInfo from '../venueOtherInfo/VenueOtherInfo';
 import styles from './venueContent.module.scss';
 
 interface Props {
@@ -50,6 +51,7 @@ const VenueContent: React.FC<Props> = ({ venue, className }) => {
                 </HtmlToReact>
               </div>
             )}
+            <VenueOtherInfo venue={venue} />
             <ShareLinks title={t('venue:shareLinks.title')} />
             <VenueLocation venue={venue} />
           </div>

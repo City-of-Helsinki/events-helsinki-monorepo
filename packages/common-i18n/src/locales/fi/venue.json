@@ -6,7 +6,11 @@
     "title": "Jaa liikunta"
   },
   "description": {
-    "title": "Kuvaus"
+    "title": "Kuvaus",
+    "titleOtherInfo": "testing"
+  },
+  "otherInfo": {
+    "title": "Paikan lisätiedot"
   },
   "location": {
     "directionsGoogle": "Reittiohjeet (Google)",

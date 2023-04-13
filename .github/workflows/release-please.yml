@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  # rerun after release creation to fix manifest -file merge issue
-  release:
-    types: [published]
   # manual triggered
   workflow_dispatch:
     inputs:
@@ -34,5 +31,8 @@ jobs:
 
           release-please release-pr --token=${{ secrets.GITHUB_TOKEN }} --repo-url=$GITHUB_REPOSITORY $LABEL
       # create release
+      # rerun release-pr after release creation to fix manifest -file merge issue
       - name: Create github release
-        run: release-please github-release --token=${{ secrets.GITHUB_TOKEN }} --repo-url=$GITHUB_REPOSITORY
+        run: |
+          release-please github-release --token=${{ secrets.GITHUB_TOKEN }} --repo-url=$GITHUB_REPOSITORY
+          release-please release-pr --token=${{ secrets.GITHUB_TOKEN }} --repo-url=$GITHUB_REPOSITORY

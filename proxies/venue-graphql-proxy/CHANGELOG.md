@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v0.2.0...venue-graphql-proxy-v1.0.0) (2023-04-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **rce-issue:** rename the packages with a @events-helsinki -scope
+
+### Build System
+
+* **rce-issue:** Rename the packages with a [@events-helsinki](https://github.com/events-helsinki) -scope ([668c18c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/668c18ce7cbc28591172c0d0ddb74ffa04681e23))
+
 ## [0.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v0.1.0...venue-graphql-proxy-v0.2.0) (2023-02-17)
 
 

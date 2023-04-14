@@ -52,6 +52,10 @@ const useCommonCmsConfig = (): Partial<Config> => {
       favIconSvgUrl: '/shared-assets/images/favicon.svg',
       manifestUrl: '/shared-assets/images/manifest.webmanifest',
     },
+    htmlSanitizer: {
+      allowedUnsafeTags: ['iframe'],
+      trustedOrigins: ['https://www.youtube.com', 'https://player.vimeo.com'],
+    },
   };
 };
 

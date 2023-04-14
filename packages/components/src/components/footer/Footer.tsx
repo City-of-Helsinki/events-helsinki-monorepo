@@ -48,8 +48,8 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
         copyrightText={t('footer:allRightsReserved')}
       >
         {footerMenu?.menuItems?.nodes?.map(
-          // FIXME: HCRC-build sometimes fails - this type should not be needed.
-          (navigationItem: Menu['menuItems']['nodes'][number]) => (
+          // NOTE: HCRC-build sometimes fails - this type should not be needed.
+          (navigationItem) => (
             <Footer.Item
               className={styles.footerLink}
               key={navigationItem?.id}

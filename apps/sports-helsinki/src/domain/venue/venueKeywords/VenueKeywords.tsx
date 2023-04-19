@@ -92,6 +92,7 @@ const VenueKeywords: React.FC<Props> = ({
         <KeywordTag
           whiteOnly={whiteOnly}
           featured={!whiteOnly}
+          isFreeEvent
           keyword={t('categories.labelFree')}
           /* Disable onClick as per LIIKUNTA-411 comment */
           /* onClick={handleClick('isFree')} */

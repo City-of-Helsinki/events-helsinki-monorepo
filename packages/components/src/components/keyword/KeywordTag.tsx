@@ -10,6 +10,8 @@ interface Props {
   whiteOnly?: boolean;
   featured?: boolean;
   transparent?: boolean;
+  isToday?: boolean;
+  isFreeEvent?: boolean;
   hideOnMobile?: boolean;
   keyword: string;
   onClick?: () => void;
@@ -21,6 +23,8 @@ const KeywordTag: FunctionComponent<Props> = ({
   whiteOnly,
   hideOnMobile,
   transparent,
+  isToday,
+  isFreeEvent,
   keyword,
   className,
   onClick,
@@ -44,6 +48,8 @@ const KeywordTag: FunctionComponent<Props> = ({
         blackOnMobile && styles.blackOnMobile,
         hideOnMobile && styles.hideOnMobile,
         transparent && styles.transparent,
+        isToday && styles.isToday,
+        isFreeEvent && styles.isFreeEvent,
         className
       )}
       onClick={handleClick}

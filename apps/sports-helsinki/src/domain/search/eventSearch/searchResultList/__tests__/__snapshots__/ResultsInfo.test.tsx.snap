@@ -34,9 +34,6 @@ exports[`events with 0 results matches snapshot for no results 1`] = `
     >
       Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta
     </div>
-    <div
-      class="actions"
-    />
   </div>
 </div>
 `;

@@ -29,17 +29,6 @@
     margin: auto;
   }
 
-  .actions {
-    display: flex;
-    flex-direction: column;
-    max-width: 25rem;
-    margin: auto;
-
-    button {
-      margin-top: var(--spacing-l);
-    }
-  }
-
   .secondaryButton {
     --color: black;
     --color-hover: black;

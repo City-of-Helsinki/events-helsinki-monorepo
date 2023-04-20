@@ -1,9 +1,6 @@
-import type { AppLanguage } from '@events-helsinki/components';
-import * as useLocale from '@events-helsinki/components/hooks/useLocale';
-
 import * as React from 'react';
 
-import { render, screen, userEvent, waitFor } from '@/test-utils';
+import { render, screen } from '@/test-utils';
 import ResultsInfo from '../ResultsInfo';
 
 it('events with 0 results matches snapshot for no results', () => {
@@ -36,37 +33,3 @@ it.each([1, 4])(
     });
   }
 );
-
-it.each<[AppLanguage, number]>([
-  ['en', 4],
-  ['en', 0],
-  ['sv', 0],
-])(
-  'renders language change button under search results when current language is %s and there are %i %s search items',
-  async (language, resultsCount) => {
-    // @ts-ignore
-    jest.spyOn(useLocale, 'default').mockReturnValue(language);
-
-    const { router } = render(<ResultsInfo resultsCount={resultsCount} />);
-
-    await userEvent.click(
-      screen.getByRole('button', { name: 'Näytä hakutulokset suomeksi' })
-    );
-
-    await waitFor(() => {
-      expect(router.pathname).toBe(`/haku`);
-    });
-  }
-);
-
-// eslint-disable-next-line max-len
-it('renders does not render language change button under eventss search results when current language is Finnish', () => {
-  // @ts-ignore
-  jest.spyOn(useLocale, 'default').mockReturnValue('fi');
-
-  render(<ResultsInfo resultsCount={0} />);
-
-  expect(
-    screen.queryByRole('button', { name: 'Näytä hakutulokset suomeksi' })
-  ).not.toBeInTheDocument();
-});

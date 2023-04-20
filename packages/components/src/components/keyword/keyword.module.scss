@@ -26,6 +26,6 @@
   }
 
   &.isFreeEvent {
-    background-color: #afe4de;
+    background-color: var(--color-keyword-free-event);
   }
 }

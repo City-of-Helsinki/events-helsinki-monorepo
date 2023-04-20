@@ -20,4 +20,12 @@
       color: var(--color-white);
     }
   }
+
+  &.isToday {
+    background-color: var(--color-summer-medium-light);
+  }
+
+  &.isFreeEvent {
+    background-color: var(--color-keyword-free-event);
+  }
 }

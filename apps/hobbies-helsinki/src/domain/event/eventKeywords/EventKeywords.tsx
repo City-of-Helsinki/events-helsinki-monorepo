@@ -69,6 +69,7 @@ const EventKeywords: React.FC<Props> = ({
         <KeywordTag
           whiteOnly={whiteOnly}
           featured={!whiteOnly}
+          isFreeEvent
           keyword={t('categories.labelFree')}
           onClick={withActions ? handleClick('isFree') : undefined}
         />
@@ -76,6 +77,7 @@ const EventKeywords: React.FC<Props> = ({
       {today && (
         <KeywordTag
           whiteOnly={whiteOnly}
+          isToday
           keyword={t('categories.labelToday')}
           onClick={
             withActions ? handleClick('dateType', DATE_TYPES.TODAY) : undefined

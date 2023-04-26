@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.0.0...sports-helsinki-v1.1.0) (2023-04-26)
+
+
+### Features
+
+* Added OTHER_INFO from tprek to venue pages ([#299](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/299)) ([1dc2d49](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1dc2d49ebfbb862abfc94d40ad57f8bc5584b539))
+* Support embedded videos in CMS pages and articles ([4f30207](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4f3020714fcce9441c8a6d09fda4189faf8c5b49))
+
+
+### Bug Fixes
+
+* Change colors of today and free keywords in event details ([#301](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/301)) ([7f26092](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7f26092c7ef0b44195e869afb025f8ac4ea39075))
+* Delete button for show results in finnish ([#302](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/302)) ([46de805](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/46de805ee3c764c822e63b3822f77680e8de2322))
+
 ## [1.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v0.5.3...sports-helsinki-v1.0.0) (2023-04-13)
 
 

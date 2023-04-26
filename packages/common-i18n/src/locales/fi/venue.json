@@ -8,6 +8,9 @@
   "description": {
     "title": "Kuvaus"
   },
+  "otherInfo": {
+    "title": "Paikan lisätiedot"
+  },
   "location": {
     "directionsGoogle": "Reittiohjeet (Google)",
     "directionsHSL": "Reittiohjeet (HSL)"

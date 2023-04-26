@@ -7,10 +7,6 @@
   display: grid;
   grid-template-columns: 1fr;
 
-  @include respond_above(m) {
-    // padding: var(--spacing-xl);
-  }
-
   .contentWrapper {
     & > div {
       margin-bottom: var(--spacing-l);

@@ -25,7 +25,8 @@ const VenueOtherInfo = ({ venue: { connections } }: { venue: Venue }) => {
         ))}
       </div>
     );
-  } else return null;
+  }
+  return null;
 };
 
 export default VenueOtherInfo;

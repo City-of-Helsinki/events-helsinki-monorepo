@@ -15,7 +15,12 @@ import {
   ArrowRightWithLoadingIndicator,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { IconCake, IconCalendarClock, IconLocation } from 'hds-react';
+import {
+  IconCake,
+  IconCalendarClock,
+  IconLocation,
+  IconTicket,
+} from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -107,6 +112,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
               </div>
             )}
             <div className={styles.eventPrice}>
+              <IconTicket aria-hidden />
               {getEventPrice(event, locale, t('eventCard.isFree'))}
             </div>
             <div className={styles.keywordWrapperDesktop}>

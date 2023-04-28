@@ -56,6 +56,15 @@ export const GYM_ONTOLOGY_TREE_IDS = [
   2219, // Seniorikuntosalit / Senior gyms
 ];
 
+// Playgrounds / Leikkipuistot
+export const PLAYGROUNDS_ONTOLOGY_TREE_IDS = [
+  68,  // Leikkipuistot / Playgrounds
+  69,  // Ohjattu leikkipuistotoiminta / Supervised playground activities
+  499,  // Leikkipuistot / Playgrounds
+  500,  // Ohjattu leikkipuistotoiminta / Supervised playground activities
+  981, // Ohjattu leikkipuistotoiminta / Supervised playground activities
+];
+
 // Neighbourhood sports sites / Lähiliikuntapaikat
 export const NEIGHBOURHOOD_SPORTS_SITES_ONTOLOGY_TREE_IDS = [
   646, // Lähiliikunta ja liikuntapuistot / Neighbourhood sports facilities and parks
@@ -86,6 +95,7 @@ export const SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS: Record<
   [SPORTS_CATEGORIES.SKIING]: SKIING_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.ICE_SKATING]: ICE_SKATING_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.GYM]: GYM_ONTOLOGY_TREE_IDS,
+  [SPORTS_CATEGORIES.PLAYGROUNDS]: PLAYGROUNDS_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES]:
     NEIGHBOURHOOD_SPORTS_SITES_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS]:

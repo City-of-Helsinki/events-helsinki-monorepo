@@ -282,7 +282,7 @@ export const sportsCategoryData: Record<string, SearchCategoryOption> = {
     // TODO proper icon missing
     icon: <IconSports />,
     labelKey: 'appSports:home.sportsCategory.guidedExercise',
-    seasons: [Season.Summer, Season.Winter],
+    seasons: [Season.Winter],
     keywords: GUIDED_EXERCISE_KEYWORDS,
   },
 };

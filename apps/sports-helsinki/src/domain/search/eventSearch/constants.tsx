@@ -9,6 +9,7 @@ import IconOutdoorRecreation from '../../../assets/icons/IconOutdoorRecreation';
 import IconSkiing from '../../../assets/icons/IconSkiing';
 import IconSports from '../../../assets/icons/IconSports';
 import IconSwimming from '../../../assets/icons/IconSwimming';
+import IconTennis from '../../../assets/icons/IconTennis';
 import type { Filters, SearchCategoryOption } from './types';
 
 // Page size of the event list
@@ -49,6 +50,11 @@ export const GYM_KEYWORDS = [
 // Playgrounds / Leikkipuistot
 export const PLAYGROUNDS_KEYWORDS = [
   'yso:p8105', // leikkipuistot / playgrounds
+];
+
+// Tennis
+export const TENNIS_KEYWORDS = [
+  'yso:p1928', // tennis
 ];
 
 // Neighbourhood sports sites / Lähiliikuntapaikat
@@ -175,6 +181,7 @@ export const CATEGORY_CATALOG = {
       SPORTS_CATEGORIES.ICE_SKATING,
       SPORTS_CATEGORIES.GYM,
       SPORTS_CATEGORIES.PLAYGROUNDS,
+      SPORTS_CATEGORIES.TENNIS,
       SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES,
       SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS,
       SPORTS_CATEGORIES.OUTDOOR_RECREATION,
@@ -186,6 +193,7 @@ export const CATEGORY_CATALOG = {
       SPORTS_CATEGORIES.ICE_SKATING,
       SPORTS_CATEGORIES.GYM,
       SPORTS_CATEGORIES.PLAYGROUNDS,
+      SPORTS_CATEGORIES.TENNIS,
       SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES,
       SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS,
       SPORTS_CATEGORIES.OUTDOOR_RECREATION,
@@ -244,6 +252,12 @@ export const sportsCategoryData: Record<string, SearchCategoryOption> = {
     labelKey: 'appSports:home.sportsCategory.playgrounds',
     seasons: [Season.Summer, Season.Winter],
     keywords: PLAYGROUNDS_KEYWORDS,
+  },
+  [SPORTS_CATEGORIES.TENNIS]: {
+    icon: <IconTennis />,
+    labelKey: 'appSports:home.sportsCategory.tennis',
+    seasons: [Season.Summer],
+    keywords: TENNIS_KEYWORDS,
   },
   [SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES]: {
     // TODO proper icon missing

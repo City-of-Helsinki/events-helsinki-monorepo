@@ -65,6 +65,12 @@ export const PLAYGROUNDS_ONTOLOGY_TREE_IDS = [
   981, // Ohjattu leikkipuistotoiminta / Supervised playground activities
 ];
 
+// Tennis
+export const TENNIS_ONTOLOGY_TREE_IDS = [
+  623, // Tennishalli / Tennis hall
+  662, // Tenniskenttäalue / Tennis court area
+];
+
 // Neighbourhood sports sites / Lähiliikuntapaikat
 export const NEIGHBOURHOOD_SPORTS_SITES_ONTOLOGY_TREE_IDS = [
   646, // Lähiliikunta ja liikuntapuistot / Neighbourhood sports facilities and parks
@@ -96,6 +102,7 @@ export const SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS: Record<
   [SPORTS_CATEGORIES.ICE_SKATING]: ICE_SKATING_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.GYM]: GYM_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.PLAYGROUNDS]: PLAYGROUNDS_ONTOLOGY_TREE_IDS,
+  [SPORTS_CATEGORIES.TENNIS]: TENNIS_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES]:
     NEIGHBOURHOOD_SPORTS_SITES_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS]:

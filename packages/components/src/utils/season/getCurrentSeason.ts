@@ -8,26 +8,24 @@ import subYears from 'date-fns/subYears';
 /* eslint-enable import/no-duplicates */
 
 import { summerSeason, winterSeason, Season } from './seasonConstants';
-
-type SeasonRule = {
-  start: {
-    day: number;
-    month: number;
-  };
-  end: {
-    day: number;
-    month: number;
-  };
-};
+import type { SeasonRule } from './types';
 
 function getIsWithinRule(date: Date, seasonRule: SeasonRule): boolean {
   const year = date.getFullYear();
 
   const start = startOfDay(
-    new Date(year, seasonRule.start.month, seasonRule.start.day)
+    new Date(
+      year,
+      seasonRule.start.month - 1, // Convert from 1-based to 0-based months
+      seasonRule.start.day
+    )
   );
   const end = endOfDay(
-    new Date(year, seasonRule.end.month, seasonRule.end.day)
+    new Date(
+      year,
+      seasonRule.end.month - 1, // Convert from 1-based to 0-based months
+      seasonRule.end.day
+    )
   );
 
   if (isAfter(start, end)) {

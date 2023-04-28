@@ -5,6 +5,7 @@ import IconGym from '../../../assets/icons/IconGym';
 import IconIceSkating from '../../../assets/icons/IconIceSkating';
 import IconIndoorSportsHalls from '../../../assets/icons/IconIndoorSportsHalls';
 import IconKindergarten from '../../../assets/icons/IconKindergarten';
+import IconOutdoorGyms from '../../../assets/icons/IconOutdoorGyms';
 import IconOutdoorRecreation from '../../../assets/icons/IconOutdoorRecreation';
 import IconSkateboarding from '../../../assets/icons/IconSkateboarding';
 import IconSkiing from '../../../assets/icons/IconSkiing';
@@ -46,6 +47,11 @@ export const ICE_SKATING_KEYWORDS = [
 // Gym / Kuntosalit
 export const GYM_KEYWORDS = [
   'yso:p8504', // kuntosalit / gyms
+];
+
+// Outdoor gyms / Ulkokuntosalit
+export const OUTDOOR_GYMS_KEYWORDS = [
+  'yso:p3413', // kuntoiluvälineet / exercise equipment
 ];
 
 // Playgrounds / Leikkipuistot
@@ -181,6 +187,7 @@ export const CATEGORY_CATALOG = {
       SPORTS_CATEGORIES.SKIING,
       SPORTS_CATEGORIES.ICE_SKATING,
       SPORTS_CATEGORIES.GYM,
+      SPORTS_CATEGORIES.OUTDOOR_GYMS,
       SPORTS_CATEGORIES.PLAYGROUNDS,
       SPORTS_CATEGORIES.TENNIS,
       SPORTS_CATEGORIES.SKATEBOARDING,
@@ -193,6 +200,7 @@ export const CATEGORY_CATALOG = {
       SPORTS_CATEGORIES.SKIING,
       SPORTS_CATEGORIES.ICE_SKATING,
       SPORTS_CATEGORIES.GYM,
+      SPORTS_CATEGORIES.OUTDOOR_GYMS,
       SPORTS_CATEGORIES.PLAYGROUNDS,
       SPORTS_CATEGORIES.TENNIS,
       SPORTS_CATEGORIES.SKATEBOARDING,
@@ -247,6 +255,12 @@ export const sportsCategoryData: Record<string, SearchCategoryOption> = {
     labelKey: 'appSports:home.sportsCategory.gym',
     seasons: [Season.Summer, Season.Winter],
     keywords: GYM_KEYWORDS,
+  },
+  [SPORTS_CATEGORIES.OUTDOOR_GYMS]: {
+    icon: <IconOutdoorGyms />,
+    labelKey: 'appSports:home.sportsCategory.outdoorGyms',
+    seasons: [Season.Summer],
+    keywords: OUTDOOR_GYMS_KEYWORDS,
   },
   [SPORTS_CATEGORIES.PLAYGROUNDS]: {
     icon: <IconKindergarten />,

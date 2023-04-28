@@ -63,11 +63,6 @@ export const SKATEBOARDING_KEYWORDS = [
   'yso:p14113', // rullalautailu / skateboarding
 ];
 
-// Neighbourhood sports sites / Lähiliikuntapaikat
-export const NEIGHBOURHOOD_SPORTS_SITES_KEYWORDS = [
-  'yso:p5871', // liikuntapaikat / sports grounds and physical exercise facilities
-];
-
 // Indoor sports halls / Sisäliikuntahallit
 export const INDOOR_SPORTS_HALLS_KEYWORDS = [
   'yso:p86', // liikuntatilat / sports facilities
@@ -189,7 +184,6 @@ export const CATEGORY_CATALOG = {
       SPORTS_CATEGORIES.PLAYGROUNDS,
       SPORTS_CATEGORIES.TENNIS,
       SPORTS_CATEGORIES.SKATEBOARDING,
-      SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES,
       SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS,
       SPORTS_CATEGORIES.OUTDOOR_RECREATION,
       SPORTS_CATEGORIES.GUIDED_EXERCISE,
@@ -202,7 +196,6 @@ export const CATEGORY_CATALOG = {
       SPORTS_CATEGORIES.PLAYGROUNDS,
       SPORTS_CATEGORIES.TENNIS,
       SPORTS_CATEGORIES.SKATEBOARDING,
-      SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES,
       SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS,
       SPORTS_CATEGORIES.OUTDOOR_RECREATION,
       SPORTS_CATEGORIES.GUIDED_EXERCISE,
@@ -272,13 +265,6 @@ export const sportsCategoryData: Record<string, SearchCategoryOption> = {
     labelKey: 'appSports:home.sportsCategory.skateboarding',
     seasons: [Season.Summer],
     keywords: SKATEBOARDING_KEYWORDS,
-  },
-  [SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES]: {
-    // TODO proper icon missing
-    icon: <IconSports />,
-    labelKey: 'appSports:home.sportsCategory.neighbourhoodSportsSites',
-    seasons: [Season.Summer, Season.Winter],
-    keywords: NEIGHBOURHOOD_SPORTS_SITES_KEYWORDS,
   },
   [SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS]: {
     icon: <IconIndoorSportsHalls />,

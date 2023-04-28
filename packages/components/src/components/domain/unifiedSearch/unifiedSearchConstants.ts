@@ -71,6 +71,13 @@ export const TENNIS_ONTOLOGY_TREE_IDS = [
   662, // Tenniskenttäalue / Tennis court area
 ];
 
+// Skateboarding / Skeittaus
+export const SKATEBOARDING_ONTOLOGY_TREE_IDS = [
+  467, // Skeittaus / Skateboarding
+  620, // Skeittihalli / Skateboarding hall
+  652, // Skeitti/rullaluistelupaikka / Skateboarding/roller-blading rink
+];
+
 // Neighbourhood sports sites / Lähiliikuntapaikat
 export const NEIGHBOURHOOD_SPORTS_SITES_ONTOLOGY_TREE_IDS = [
   646, // Lähiliikunta ja liikuntapuistot / Neighbourhood sports facilities and parks
@@ -103,6 +110,7 @@ export const SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS: Record<
   [SPORTS_CATEGORIES.GYM]: GYM_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.PLAYGROUNDS]: PLAYGROUNDS_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.TENNIS]: TENNIS_ONTOLOGY_TREE_IDS,
+  [SPORTS_CATEGORIES.SKATEBOARDING]: SKATEBOARDING_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES]:
     NEIGHBOURHOOD_SPORTS_SITES_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS]:

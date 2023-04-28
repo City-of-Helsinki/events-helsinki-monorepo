@@ -98,6 +98,7 @@ export enum SPORTS_CATEGORIES {
   GYM = 'gym',
   PLAYGROUNDS = 'playgrounds',
   TENNIS = 'tennis',
+  SKATEBOARDING = 'skateboarding',
   NEIGHBOURHOOD_SPORTS_SITES = 'neighbourhood_sports_sites',
   INDOOR_SPORTS_HALLS = 'indoor_sports_halls',
   OUTDOOR_RECREATION = 'outdoor_recreation',

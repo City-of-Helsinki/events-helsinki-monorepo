@@ -6,6 +6,7 @@ import IconIceSkating from '../../../assets/icons/IconIceSkating';
 import IconIndoorSportsHalls from '../../../assets/icons/IconIndoorSportsHalls';
 import IconKindergarten from '../../../assets/icons/IconKindergarten';
 import IconOutdoorRecreation from '../../../assets/icons/IconOutdoorRecreation';
+import IconSkateboarding from '../../../assets/icons/IconSkateboarding';
 import IconSkiing from '../../../assets/icons/IconSkiing';
 import IconSports from '../../../assets/icons/IconSports';
 import IconSwimming from '../../../assets/icons/IconSwimming';
@@ -55,6 +56,11 @@ export const PLAYGROUNDS_KEYWORDS = [
 // Tennis
 export const TENNIS_KEYWORDS = [
   'yso:p1928', // tennis
+];
+
+// Skateboarding / Skeittaus
+export const SKATEBOARDING_KEYWORDS = [
+  'yso:p14113', // rullalautailu / skateboarding
 ];
 
 // Neighbourhood sports sites / Lähiliikuntapaikat
@@ -182,6 +188,7 @@ export const CATEGORY_CATALOG = {
       SPORTS_CATEGORIES.GYM,
       SPORTS_CATEGORIES.PLAYGROUNDS,
       SPORTS_CATEGORIES.TENNIS,
+      SPORTS_CATEGORIES.SKATEBOARDING,
       SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES,
       SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS,
       SPORTS_CATEGORIES.OUTDOOR_RECREATION,
@@ -194,6 +201,7 @@ export const CATEGORY_CATALOG = {
       SPORTS_CATEGORIES.GYM,
       SPORTS_CATEGORIES.PLAYGROUNDS,
       SPORTS_CATEGORIES.TENNIS,
+      SPORTS_CATEGORIES.SKATEBOARDING,
       SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES,
       SPORTS_CATEGORIES.INDOOR_SPORTS_HALLS,
       SPORTS_CATEGORIES.OUTDOOR_RECREATION,
@@ -258,6 +266,12 @@ export const sportsCategoryData: Record<string, SearchCategoryOption> = {
     labelKey: 'appSports:home.sportsCategory.tennis',
     seasons: [Season.Summer],
     keywords: TENNIS_KEYWORDS,
+  },
+  [SPORTS_CATEGORIES.SKATEBOARDING]: {
+    icon: <IconSkateboarding />,
+    labelKey: 'appSports:home.sportsCategory.skateboarding',
+    seasons: [Season.Summer],
+    keywords: SKATEBOARDING_KEYWORDS,
   },
   [SPORTS_CATEGORIES.NEIGHBOURHOOD_SPORTS_SITES]: {
     // TODO proper icon missing

@@ -61,6 +61,8 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
 
   const { clickCaptureRef, clicked } = useClickCapture(1000);
 
+  const eventPrice = getEventPrice(event, locale, t('eventCard.isFree'));
+
   return (
     <div ref={clickCaptureRef}>
       <LinkBox
@@ -111,10 +113,12 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                 {audienceAge}
               </div>
             )}
-            <div className={styles.eventPrice}>
-              <IconTicket aria-hidden />
-              {getEventPrice(event, locale, t('eventCard.isFree'))}
-            </div>
+            {eventPrice && (
+              <div className={styles.eventPrice}>
+                <IconTicket aria-hidden />
+                {eventPrice}
+              </div>
+            )}
             <div className={styles.keywordWrapperDesktop}>
               <EventKeywords
                 event={event}

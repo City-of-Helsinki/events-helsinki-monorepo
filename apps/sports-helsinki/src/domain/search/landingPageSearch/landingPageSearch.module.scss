@@ -50,8 +50,12 @@
   }
 
   @include respond-above(m) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     padding-top: 4rem;
+  }
+
+  @include respond-above(l) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
   div:nth-child(10) {

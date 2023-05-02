@@ -265,6 +265,8 @@ Configuration lives in the root folder of each apps/packages. See
 
 - [./apps/hobbies-helsinki/jest.config.js](./apps/hobbies-helsinki/jest.config.js).
 
+There are also some K6 performance testing scripts. The K6 package is included in the applications of the [apps](./apps/)-folder. To get more familiar with the K6 library, read the docs from https://k6.io/docs/.
+
 ### 5.4 CI
 
 CI is running on Platta (Azure DevOps & OpenShift). DevOps has projects for harrastukset, tapahtumat and liikunta.

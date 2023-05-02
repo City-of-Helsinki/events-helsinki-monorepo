@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.1.0...sports-helsinki-v1.2.0) (2023-05-02)
+
+
+### Features
+
+* **sports:** Add outdoor gyms sports category (summer only) ([ffab958](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ffab958cdb3d68857a62b8800824fadf9630579e))
+* **sports:** Add playgrounds sports category (summer & winter) ([e7e84df](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e7e84dfdf264d15ddfca33af96e14833f1e7a1aa))
+* **sports:** Add skateboarding sports category (summer only) ([7dddbdd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7dddbdde44caf95d9b5010716fd77e7fc3c6ef0b))
+* **sports:** Add tennis sports category (summer only) ([c10078c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c10078cede118965f547a1d73ed02567d7b7597e))
+
+
+### Bug Fixes
+
+* Long text sidebar layout bug ([#306](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/306)) ([1f5fd5e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1f5fd5e6f53208a9df85c71055967610b49ff21d))
+* **sports:** Remove unneeded neighbourhood sports sites sports category ([6b8aa04](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6b8aa04649f4dbe392dad979443b2a7d71994531))
+* **sports:** Set guided exercise sports category's season to winter only ([ef09541](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ef09541db4026eada38529575dc0d2338dcebecc))
+
 ## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.0.0...sports-helsinki-v1.1.0) (2023-04-26)
 
 

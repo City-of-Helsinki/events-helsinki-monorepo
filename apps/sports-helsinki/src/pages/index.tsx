@@ -81,6 +81,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           id: 'root',
           languageCode: getQlLanguage(language),
         },
+        fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
       });
 
       const { data: pageData } = await apolloClient.query<
@@ -92,6 +93,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           template: TemplateEnum.FrontPage,
           language: getQlLanguage(language).toLocaleLowerCase(),
         },
+        fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
       });
       if (!pageData || !landingPageData) {
         return {

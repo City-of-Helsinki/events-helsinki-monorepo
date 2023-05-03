@@ -1,4 +1,9 @@
-import { useCommonTranslation, Text } from '@events-helsinki/components';
+import {
+  useCommonTranslation,
+  Text,
+  MAIN_CONTENT_ID,
+} from '@events-helsinki/components';
+
 import classNames from 'classnames';
 import {
   Button,
@@ -50,7 +55,11 @@ function SearchHeader({ showMode, count, switchShowMode, searchForm }: Props) {
   return (
     <>
       {showMode === ShowMode.MAP && (
-        <div ref={formWrapper} className={styles.searchHeader}>
+        <div
+          id={MAIN_CONTENT_ID}
+          ref={formWrapper}
+          className={styles.searchHeader}
+        >
           <>
             {collapsed && collapsedComponent()}
             {!collapsed && (

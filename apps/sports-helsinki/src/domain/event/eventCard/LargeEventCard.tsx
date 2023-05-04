@@ -15,7 +15,12 @@ import {
   ArrowRightWithLoadingIndicator,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { IconCake, IconCalendarClock, IconLocation } from 'hds-react';
+import {
+  IconCake,
+  IconCalendarClock,
+  IconLocation,
+  IconTicket,
+} from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -55,6 +60,8 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
   const { clickCaptureRef, clicked } = useClickCapture(1000);
+
+  const eventPrice = getEventPrice(event, locale, t('eventCard.isFree'));
 
   return (
     <div ref={clickCaptureRef}>
@@ -106,9 +113,12 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                 {audienceAge}
               </div>
             )}
-            <div className={styles.eventPrice}>
-              {getEventPrice(event, locale, t('eventCard.isFree'))}
-            </div>
+            {eventPrice && (
+              <div className={styles.eventPrice}>
+                <IconTicket aria-hidden />
+                {eventPrice}
+              </div>
+            )}
             <div className={styles.keywordWrapperDesktop}>
               <EventKeywords
                 event={event}

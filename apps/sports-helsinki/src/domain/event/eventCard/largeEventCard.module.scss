@@ -95,11 +95,15 @@
     }
 
     .eventPrice {
+      display: flex;
       order: 5;
       font-size: var(--fontsize-body-l);
       line-height: var(--lineheight-m);
       margin-bottom: var(--spacing-s);
       color: var(color-black-80);
+      svg {
+        margin-right: var(--spacing-2-xs);
+      }
     }
 
     .keywordWrapperDesktop {

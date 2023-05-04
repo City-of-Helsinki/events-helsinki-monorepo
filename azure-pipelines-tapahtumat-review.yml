@@ -47,7 +47,6 @@ resources:
     - repository: tapahtumat-pipelines
       type: git
       ref: refs/heads/isr_TH-1311
-
       # Azure DevOps project/repository
       name: tapahtumat/tapahtumat-pipelines
 

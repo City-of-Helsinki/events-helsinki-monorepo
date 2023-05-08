@@ -174,7 +174,7 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.searchWrapper}>
-        {showTitle && <h2>{t('search.labelSearchField')}</h2>}
+        {showTitle && <h1>{t('search.labelSearchField')}</h1>}
         <div className={styles.rowWrapper}>
           <div className={classNames(styles.row, styles.autoSuggestRow)}>
             <div>

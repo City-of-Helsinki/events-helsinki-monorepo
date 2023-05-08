@@ -191,6 +191,9 @@ const nextBaseConfig = ({
       externalDir: true,
       scrollRestoration: true,
       newNextLinkBehavior: false,
+      // disable in-memory caching
+      // @link https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#self-hosting-isr
+      isrMemoryCacheSize: 0,
     },
 
     typescript: {

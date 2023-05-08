@@ -193,6 +193,7 @@ COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalon
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
 COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
 COPY --from=builder --chown=appuser:appuser /app/next.base.config.js .
+RUN cp -r /app/apps/${PROJECT}/.next/ /app/.next_orig/
 
 # OpenShift write access to Next cache folder
 USER root
@@ -205,7 +206,12 @@ ENV PORT ${APP_PORT:-3000}
 # Expose port
 EXPOSE $PORT
 
-# ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
-ENV PROD_START "node ./apps/${PROJECT}/server.js"
+USER root
+COPY --chown=appuser:appuser run_node.sh /app/run_node.sh
+RUN chgrp 0 /app/run_node.sh && chmod +x /app/run_node.sh
+USER appuser
 
-CMD ["sh", "-c", "${PROD_START}"]
+# ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
+# ENV PROD_START "node ./apps/${PROJECT}/server.js"
+
+CMD ["sh", "-c", "/app/run_node.sh"]

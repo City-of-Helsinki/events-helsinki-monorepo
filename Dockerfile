@@ -215,3 +215,4 @@ USER appuser
 # ENV PROD_START "node ./apps/${PROJECT}/server.js"
 
 CMD ["sh", "-c", "/app/run_node.sh"]
+

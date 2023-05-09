@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.2.0...sports-helsinki-v1.2.1) (2023-05-09)
+
+
+### Bug Fixes
+
+* Accessibility h2 last fix ([#321](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/321)) ([b689c07](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b689c07af4ea4c66b0b797d44528f298bf0d82da))
+* Accessibility headers h1 fixed ([#314](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/314)) ([7be0f35](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7be0f356324ad51ffca033548770777c33d7c73f))
+* Categories columns resize fix ([#311](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/311)) ([61e437a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/61e437aeefc84ca4e41dbbac85c91cd836888389))
+* Disable Apollo-cache for CMS queries of the frontpage ([95dd31f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/95dd31f499292d6d50c902fd8f0aae04e093b785))
+* Event large card price icon added ([#307](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/307)) ([2c16317](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2c16317b512a875947ef336494aacf1f50ee8c56))
+* Fix hcrc typings ts ([#319](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/319)) ([87120e0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/87120e0ebfe7bda3e20d4c6b89e2defb43c57ae4))
+* Venue map skip to content main id ([#317](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/317)) ([4a472d2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4a472d2be34b34ec71bb07ee599197ebb8348e1d))
+
 ## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.1.0...sports-helsinki-v1.2.0) (2023-05-02)
 
 

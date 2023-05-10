@@ -214,5 +214,7 @@ USER appuser
 # ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
 # ENV PROD_START "node ./apps/${PROJECT}/server.js"
 
+ENV PROJECT ${PROJECT}
+
 CMD ["sh", "-c", "/app/run_node.sh"]
 

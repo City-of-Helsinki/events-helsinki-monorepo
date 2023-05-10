@@ -1,5 +1,6 @@
 
-PROJECT=events-helsinki
+echo "run_node.sh for $PROJECT"
+
 cd /app
 
 if [[ -z "$(ls -A /app/apps/${PROJECT}/.next/)" || -n "$(diff -q /app/apps/${PROJECT}/.next/BUILD_ID /app/.next_orig/BUILD_ID)" ]]; then

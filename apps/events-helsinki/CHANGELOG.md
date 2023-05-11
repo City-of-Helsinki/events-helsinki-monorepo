@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.0.0...events-helsinki-v1.1.0) (2023-05-11)
+
+
+### Features
+
+* Support embedded videos in CMS pages and articles ([4f30207](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4f3020714fcce9441c8a6d09fda4189faf8c5b49))
+
+
+### Bug Fixes
+
+* Accessibility headers h1 fixed ([#314](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/314)) ([7be0f35](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7be0f356324ad51ffca033548770777c33d7c73f))
+* Categories columns resize fix ([#311](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/311)) ([61e437a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/61e437aeefc84ca4e41dbbac85c91cd836888389))
+* Change colors of today and free keywords in event details ([#301](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/301)) ([7f26092](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7f26092c7ef0b44195e869afb025f8ac4ea39075))
+* Delete button for show results in finnish ([#302](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/302)) ([46de805](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/46de805ee3c764c822e63b3822f77680e8de2322))
+* Disable Apollo-cache for CMS queries of the frontpage ([95dd31f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/95dd31f499292d6d50c902fd8f0aae04e093b785))
+* Event large card price icon added ([#307](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/307)) ([2c16317](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2c16317b512a875947ef336494aacf1f50ee8c56))
+* Fix hcrc typings ts ([#319](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/319)) ([87120e0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/87120e0ebfe7bda3e20d4c6b89e2defb43c57ae4))
+
 ## [1.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v0.7.1...events-helsinki-v1.0.0) (2023-04-12)
 
 

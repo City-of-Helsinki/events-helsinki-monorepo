@@ -163,7 +163,7 @@ describe('CombinedSearchFormAdapter', () => {
       ]
     >([
       [
-        'VenueSearchAdapter',
+        'venue',
         {
           q: outputQuery.text,
           ontologyWordIds: outputQuery.keywords,
@@ -176,7 +176,7 @@ describe('CombinedSearchFormAdapter', () => {
         },
       ],
       [
-        'EventSearchAdapter',
+        'event',
         {
           text: outputQuery.text,
           keywordAnd: outputQuery.keywords,
@@ -209,13 +209,13 @@ describe('CombinedSearchFormAdapter', () => {
       ],
     ])(
       'includes the transformed %s query variables',
-      (searchAdapter, searchVariables) => {
+      (searchAdapterType, searchVariables) => {
         const adapter = new CombinedSearchFormAdapter(
           mockRouter as unknown as Router,
           input
         );
         const searchVariablesByAdapter = adapter.getSearchVariables();
-        expect(searchVariablesByAdapter[searchAdapter]).toStrictEqual(
+        expect(searchVariablesByAdapter[searchAdapterType]).toStrictEqual(
           searchVariables
         );
       }

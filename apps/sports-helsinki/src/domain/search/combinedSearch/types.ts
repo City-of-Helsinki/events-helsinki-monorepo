@@ -10,6 +10,8 @@ import type { FormEvent } from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
 import type { SearchRoute } from '../../../types';
 
+export type SearchType = 'venue' | 'event' | 'course';
+
 /**
  * Rename properties of a type with a given namespace.
  * For example, if the namespace is set to `'namespace'`,

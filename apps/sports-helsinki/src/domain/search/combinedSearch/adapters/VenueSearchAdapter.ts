@@ -41,20 +41,6 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   public getQueryVariables() {
     return { ...this };
   }
-
-  // public getQueryVariables() {
-  //   type VenueSearchParamsField = keyof typeof initialVenueSearchAdapterValues;
-  //   const searchFields = Object.keys(initialVenueSearchAdapterValues);
-  //   return searchFields.reduce(
-  //     (searchVariables: VenueSearchParams, field) => {
-  //       return {
-  //         ...searchVariables,
-  //         [field]: this[field as VenueSearchParamsField],
-  //       };
-  //     },
-  //     { ...initialVenueSearchAdapterValues }
-  //   );
-  // }
 }
 
 export default VenueSearchAdapter;

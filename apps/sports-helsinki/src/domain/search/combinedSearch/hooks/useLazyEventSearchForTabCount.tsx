@@ -1,8 +1,8 @@
 import { useLazyQuery } from '@apollo/client';
-import type { EventListQuery, EventTypeId } from '@events-helsinki/components';
-import { EventListDocument } from '@events-helsinki/components';
+import type { EventListQuery } from '@events-helsinki/components';
+import { EventListDocument, EventTypeId } from '@events-helsinki/components';
 import React from 'react';
-import useEventSearchFilters from '../../../../domain/search/eventSearch/hooks/useEventSearchFilters';
+import { useCombinedSearchContext } from '../adapters/CombinedSearchContext';
 import { useTabsContext } from '../searchTabs/tabsContext';
 
 function useLazyEventSearchForTabCount({
@@ -11,11 +11,14 @@ function useLazyEventSearchForTabCount({
   eventType: EventTypeId;
 }) {
   const { setResultCount } = useTabsContext();
-  const variables = useEventSearchFilters(eventType);
+  const { searchVariables } = useCombinedSearchContext();
   const [search, { loading, data, ...delegatedProps }] = useLazyQuery(
     EventListDocument,
     {
-      variables,
+      variables:
+        eventType === EventTypeId.Course
+          ? searchVariables.course
+          : searchVariables.event,
       // FIXME: Set the fetch policy to not trigger cache,
       // or the Apollo client fails to request
       // same query multiple times. Depending on settings,

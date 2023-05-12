@@ -1,4 +1,9 @@
-import type { Season, SPORTS_CATEGORIES } from '@events-helsinki/components';
+import type {
+  AppLanguage,
+  Season,
+  SPORTS_CATEGORIES,
+} from '@events-helsinki/components';
+import { UnifiedSearchLanguage } from '@events-helsinki/components';
 import type React from 'react';
 
 import type { COURSE_CATEGORIES, EVENT_SEARCH_FILTERS } from './constants';
@@ -44,4 +49,13 @@ export interface Filters {
 export type MappedFilters = Partial<Omit<Filters, 'start' | 'end'>> & {
   [EVENT_SEARCH_FILTERS.START]?: string | null;
   [EVENT_SEARCH_FILTERS.END]?: string | null;
+};
+
+export const appToUnifiedSearchLanguageMap: Record<
+  AppLanguage,
+  UnifiedSearchLanguage
+> = {
+  fi: UnifiedSearchLanguage.Finnish,
+  sv: UnifiedSearchLanguage.Swedish,
+  en: UnifiedSearchLanguage.English,
 };

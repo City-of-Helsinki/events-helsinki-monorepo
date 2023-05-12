@@ -1,7 +1,6 @@
 import {
   useSearchTranslation,
   useIsSmallScreen,
-  useUnifiedSearch,
   getLargeEventCardId,
 } from '@events-helsinki/components';
 import type { UnifiedSearchVenue } from '@events-helsinki/components';
@@ -11,7 +10,6 @@ import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 import { SEARCH_ROUTES } from '../../../../constants';
-import AppConfig from '../../../../domain/app/AppConfig';
 import routerHelper from '../../../../domain/app/routerHelper';
 import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
 import useUnifiedSearchListQuery from '../../../../domain/unifiedSearch/useUnifiedSearchListQuery';
@@ -24,16 +22,11 @@ function useSearchPage(): SearchPage {
   const { meta } = useConfig();
   const isSmallScreen = useIsSmallScreen();
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
-  const { filters } = useUnifiedSearch();
   const {
     data: venuesData,
     loading: isLoadingVenues,
     fetchMore,
-  } = useUnifiedSearchListQuery({
-    variables: {
-      includeHaukiFields: AppConfig.isHaukiEnabled,
-    },
-  });
+  } = useUnifiedSearchListQuery();
   const resultList = venuesData?.unifiedSearch;
   const pageInfo = resultList?.pageInfo;
 
@@ -107,7 +100,6 @@ function useSearchPage(): SearchPage {
   const hasNext = pageInfo?.hasNextPage ?? false;
 
   return {
-    searchFilters: filters,
     meta,
     isSmallScreen,
     handleLoadMore,

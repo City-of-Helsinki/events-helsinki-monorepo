@@ -18,7 +18,7 @@ describe('EventSearchAdapter', () => {
         };
         const adapter = new EventSearchAdapter(input, eventType);
         expect(adapter.getQueryVariables()).toStrictEqual({
-          eventType: EventTypeId.General,
+          eventType,
           text: input.text,
           allOngoingAnd: null,
           start: 'now',
@@ -45,9 +45,7 @@ describe('EventSearchAdapter', () => {
           include: ['keywords', 'location'],
           superEventType: ['umbrella', 'none'],
           sort:
-            eventType === EventTypeId.General
-              ? input.eventOrderBy
-              : input.courseOrderBy,
+            eventType === EventTypeId.General ? input.eventOrderBy : 'end_time',
         });
       }
     );

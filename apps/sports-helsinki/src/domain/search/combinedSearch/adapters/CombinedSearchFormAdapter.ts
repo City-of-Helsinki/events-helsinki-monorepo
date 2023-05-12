@@ -1,4 +1,5 @@
 import type { ParsedUrlQuery } from 'querystring';
+import type { AppLanguage } from '@events-helsinki/components/types';
 import { EventTypeId } from '@events-helsinki/components/types';
 import type { NextRouter } from 'next/router';
 import qs from 'query-string';
@@ -31,6 +32,7 @@ class CombinedSearchFormAdapter
     InputFieldValueCleaner<CombinedSearchAdapterInput>
 {
   router: NextRouter;
+  language: string;
   text: string;
   venueOrderBy?: string | null;
   eventOrderBy?: string | null;
@@ -39,7 +41,7 @@ class CombinedSearchFormAdapter
   organization?: string | null;
   keywords: string[];
 
-  constructor(router: NextRouter, input?: URLSearchParams) {
+  constructor(router: NextRouter, locale: string, input?: URLSearchParams) {
     this.router = router;
 
     // Initialize the object with default values
@@ -48,23 +50,23 @@ class CombinedSearchFormAdapter
     if (!input) {
       input = new URLSearchParams(qs.stringify(router.query));
     }
-
+    this.language = locale;
     this.text = input.get('text') ?? input.get('q') ?? '';
     this.venueOrderBy =
       input.get('venueOrderBy') ??
       input.get('orderBy') ??
       input.get('sort') ??
-      undefined;
+      initialCombinedSearchFormValues.venueOrderBy;
     this.eventOrderBy =
       input.get('eventOrderBy') ??
       input.get('orderBy') ??
       input.get('sort') ??
-      undefined;
+      initialCombinedSearchFormValues.eventOrderBy;
     this.courseOrderBy =
       input.get('courseOrderBy') ??
       input.get('orderBy') ??
       input.get('sort') ??
-      undefined;
+      initialCombinedSearchFormValues.courseOrderBy;
     this.sportsCategories = input.getAll('sportsCategories');
     this.organization = input.get('publisher') ?? undefined;
     this.keywords = input.getAll('keywords');
@@ -119,7 +121,8 @@ class CombinedSearchFormAdapter
 
   public getSearchVariables(): SearchVariablesType {
     const venueSearchQueryVariables = new VenueSearchAdapter(
-      this.getFormValues()
+      this.getFormValues(),
+      this.language as AppLanguage
     ).getQueryVariables();
     const eventSearchQueryVariables = new EventSearchAdapter(
       this.getFormValues(),

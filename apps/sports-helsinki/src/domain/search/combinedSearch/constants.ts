@@ -1,5 +1,8 @@
 import { EVENT_SORT_OPTIONS } from '@events-helsinki/components/constants';
-import { EventTypeId } from '@events-helsinki/components/types';
+import {
+  EventTypeId,
+  UnifiedSearchLanguage,
+} from '@events-helsinki/components/types';
 import { SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID } from '../../app/appConstants';
 import { SPORT_COURSES_KEYWORDS } from '../eventSearch/constants';
 import type {
@@ -11,19 +14,21 @@ import type {
 export const PARAM_SEARCH_TYPE = 'searchType';
 export const initialCombinedSearchFormValues: CombinedSearchAdapterInput = {
   text: '',
-  venueOrderBy: null,
-  eventOrderBy: null,
-  courseOrderBy: null,
+  venueOrderBy: undefined,
+  eventOrderBy: undefined,
+  courseOrderBy: undefined,
   sportsCategories: [],
-  organization: null,
+  organization: undefined,
   keywords: [],
 };
 export const initialVenueSearchAdapterValues: VenueSearchParams = {
-  q: '',
+  includeHaukiFields: false,
+  language: UnifiedSearchLanguage.Finnish,
+  q: '*',
   ontologyTreeIds: [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()],
   ontologyWordIds: [],
   administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
-  openAt: '',
+  openAt: null,
   after: '',
   first: 10,
 };

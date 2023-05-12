@@ -1,4 +1,8 @@
-import { EventTypeId, SortOrder } from '@events-helsinki/components/types';
+import {
+  EventTypeId,
+  SortOrder,
+  UnifiedSearchLanguage,
+} from '@events-helsinki/components/types';
 import type { Router } from 'next/router';
 import mockRouter from 'next-router-mock';
 import qs from 'query-string';
@@ -7,6 +11,8 @@ import type {
   CombinedSearchAdapterOutput,
 } from '../../types';
 import CombinedSearchFormAdapter from '../CombinedSearchFormAdapter';
+
+const locale = 'fi';
 
 const outputQuery: CombinedSearchAdapterInput = {
   text: 'test text',
@@ -35,6 +41,7 @@ describe('CombinedSearchFormAdapter', () => {
     it('collects the form values from the URL but does not exclude the extra params', () => {
       const adapter = new CombinedSearchFormAdapter(
         mockRouter as unknown as Router,
+        locale,
         input
       );
       // eslint-disable-next-line jest/prefer-strict-equal
@@ -49,6 +56,7 @@ describe('CombinedSearchFormAdapter', () => {
     it('returns only the form values without any possible extra params given in a URL', () => {
       const adapter = new CombinedSearchFormAdapter(
         mockRouter as unknown as Router,
+        locale,
         input
       );
       // eslint-disable-next-line jest/prefer-strict-equal
@@ -95,6 +103,7 @@ describe('CombinedSearchFormAdapter', () => {
         mockRouter.setCurrentUrl(`/?${searchParams.toString()}`);
         const adapter = new CombinedSearchFormAdapter(
           mockRouter as unknown as Router,
+          locale,
           searchParams
         );
         adapter.routerPush();
@@ -142,6 +151,7 @@ describe('CombinedSearchFormAdapter', () => {
         mockRouter.setCurrentUrl(`/?${searchParams.toString()}`);
         const adapter = new CombinedSearchFormAdapter(
           mockRouter as unknown as Router,
+          locale,
           searchParams
         );
         adapter.routerReplace();
@@ -160,6 +170,8 @@ describe('CombinedSearchFormAdapter', () => {
       [
         'venue',
         {
+          includeHaukiFields: false,
+          language: UnifiedSearchLanguage.Finnish,
           q: outputQuery.text,
           ontologyWordIds: outputQuery.keywords,
           orderByName: { order: SortOrder.Descending },
@@ -167,7 +179,7 @@ describe('CombinedSearchFormAdapter', () => {
           after: '',
           first: 10,
           ontologyTreeIds: ['551'],
-          openAt: '',
+          openAt: null,
         },
       ],
       [
@@ -207,6 +219,7 @@ describe('CombinedSearchFormAdapter', () => {
       (searchAdapterType, searchVariables) => {
         const adapter = new CombinedSearchFormAdapter(
           mockRouter as unknown as Router,
+          locale,
           input
         );
         const searchVariablesByAdapter = adapter.getSearchVariables();

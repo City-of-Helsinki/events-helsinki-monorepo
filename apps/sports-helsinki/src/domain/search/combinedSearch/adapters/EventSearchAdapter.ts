@@ -30,14 +30,15 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     eventType: EventTypeId = EventTypeId.General
   ) {
     // Initialize the object with default values
-    Object.assign(this, initialEventSearchAdapterValues);
+    Object.assign(this, initialEventSearchAdapterValues, { eventType });
 
     this.text = input.text ?? null;
+    // this.allOngoingAnd = [input.text] ?? null;
     this.keywordAnd = this.getKeywords(input);
     this.sort =
-      eventType === EventTypeId.General
+      (eventType === EventTypeId.General
         ? input.eventOrderBy
-        : input.courseOrderBy;
+        : input.courseOrderBy) ?? initialEventSearchAdapterValues.sort;
   }
 
   private getKeywords({ keywords }: CombinedSearchAdapterInput) {

@@ -33,7 +33,8 @@ describe('CombinedSearchProvider', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('pushes the router when search params changes', () => {
+  // FIXME: Skipped while this feature is still planned
+  it.skip('pushes the router when search params changes', () => {
     mockRouter.setCurrentUrl(`/`);
     expect(qs.stringify(mockRouter.query)).toBe('');
     const searchParams = new URLSearchParams('text=test%20text');

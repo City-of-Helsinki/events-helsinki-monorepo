@@ -1,9 +1,7 @@
 import type {
   EventListQuery,
   EventListQueryVariables,
-  QueryEventListArgs,
   QueryUnifiedSearchArgs,
-  UnifiedSearchParameters,
   UnifiedSearchVenue,
 } from '@events-helsinki/components';
 import type { FormEvent } from 'react';
@@ -133,7 +131,6 @@ export interface SearchForm {
 
 export interface SearchPage {
   resultList?: EventListQuery['eventList'] | UnifiedSearchVenue[];
-  searchFilters: QueryEventListArgs | UnifiedSearchParameters;
   meta?: Config['meta'];
   isSmallScreen: boolean;
   isLoading: boolean;

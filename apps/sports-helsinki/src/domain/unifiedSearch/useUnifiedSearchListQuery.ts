@@ -1,19 +1,14 @@
 import type { SearchListQueryVariables } from '@events-helsinki/components';
 import { useSearchListQuery } from '@events-helsinki/components';
-import useUnifiedSearchVariables from './useUnifiedSearchVariables';
+import { useCombinedSearchContext } from '../search/combinedSearch/adapters/CombinedSearchContext';
 
-type HookConfig = {
-  variables?: Partial<SearchListQueryVariables>;
-};
+export default function useUnifiedSearchListQuery() {
+  const { searchVariables } = useCombinedSearchContext();
 
-export default function useUnifiedSearchListQuery({
-  variables,
-}: HookConfig = {}) {
   const { fetchMore, ...delegated } = useSearchListQuery({
     ssr: false,
     variables: {
-      ...useUnifiedSearchVariables(),
-      ...variables,
+      ...searchVariables.venue,
     },
   });
 

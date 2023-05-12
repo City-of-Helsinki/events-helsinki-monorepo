@@ -1,4 +1,5 @@
 import type { URLSearchParams } from 'url';
+import useLocale from '@events-helsinki/components/hooks/useLocale';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -19,9 +20,11 @@ const shouldTheURLBeUpdated = (
 
 function useGetContextValue(searchParams: URLSearchParams) {
   const router = useRouter();
+  const locale = useLocale();
   return React.useMemo(() => {
     const combinedSearchFormAdapter = new CombinedSearchFormAdapter(
       router,
+      locale,
       searchParams
     );
     const formValues = { ...combinedSearchFormAdapter.getFormValues() };
@@ -35,7 +38,7 @@ function useGetContextValue(searchParams: URLSearchParams) {
         searchVariables,
       },
     };
-  }, [router, searchParams]);
+  }, [router, locale, searchParams]);
 }
 
 export function CombinedSearchProvider({
@@ -50,7 +53,9 @@ export function CombinedSearchProvider({
       combinedSearchFormAdapter.router &&
       shouldTheURLBeUpdated(searchParams, combinedSearchFormAdapter)
     ) {
-      combinedSearchFormAdapter.routerPush();
+      // eslint-disable-next-line no-console
+      console.debug('routerPush could have been called');
+      // combinedSearchFormAdapter.routerPush();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

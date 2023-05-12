@@ -2,6 +2,7 @@ import type {
   EventListQuery,
   EventListQueryVariables,
   QueryUnifiedSearchArgs,
+  SearchListQueryVariables,
   UnifiedSearchVenue,
 } from '@events-helsinki/components';
 import type { FormEvent } from 'react';
@@ -85,7 +86,9 @@ export type EventSearchParams = Pick<
 
 /** The fields that are used by the Venue search. */
 export type VenueSearchParams = Pick<
-  QueryUnifiedSearchArgs,
+  SearchListQueryVariables,
+  | 'includeHaukiFields'
+  | 'language'
   | 'q'
   | 'ontologyTreeIds'
   | 'ontologyWordIds'

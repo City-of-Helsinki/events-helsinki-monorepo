@@ -5,7 +5,7 @@ exports[`CombinedSearchProvider reads the context properly 1`] = `
   <p
     data-test-id="formValues"
   >
-    {"text":"test text","sportsCategories":[],"organization":null,"keywords":[]}
+    {"text":"test text","sportsCategories":[],"keywords":[]}
   </p>
   <p
     data-test-id="event-searchVariables"

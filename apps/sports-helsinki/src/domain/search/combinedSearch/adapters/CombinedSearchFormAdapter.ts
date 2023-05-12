@@ -30,7 +30,7 @@ class CombinedSearchFormAdapter
   eventOrderBy?: string | null;
   courseOrderBy?: string | null;
   sportsCategories: string[];
-  organization: string | null;
+  organization?: string | null;
   keywords: string[];
 
   constructor(router: NextRouter, input?: URLSearchParams) {
@@ -60,7 +60,7 @@ class CombinedSearchFormAdapter
       input.get('sort') ??
       undefined;
     this.sportsCategories = input.getAll('sportsCategories');
-    this.organization = input.get('publisher');
+    this.organization = input.get('publisher') ?? undefined;
     this.keywords = input.getAll('keywords');
 
     // Clean the field values for adapters

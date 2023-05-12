@@ -14,7 +14,6 @@ const outputQuery: CombinedSearchAdapterInput = {
   eventOrderBy: 'event-field-asc',
   courseOrderBy: 'course-field-asc',
   sportsCategories: [],
-  organization: null,
   keywords: [],
 };
 const extraParamsInOutputQuery = {
@@ -69,7 +68,6 @@ describe('CombinedSearchFormAdapter', () => {
           })
         ),
         qs.stringify({
-          organization: null,
           text: 'to be transformed to text',
           venueOrderBy: 'to-be-order-by',
         }),
@@ -83,7 +81,6 @@ describe('CombinedSearchFormAdapter', () => {
           })
         ),
         qs.stringify({
-          organization: null,
           q: 'to be transformed to text',
           sort: 'to-be-order-by',
           text: 'to be transformed to text',
@@ -118,7 +115,6 @@ describe('CombinedSearchFormAdapter', () => {
           })
         ),
         qs.stringify({
-          organization: null,
           text: 'to be transformed to text',
           venueOrderBy: 'to-be-order-by',
         }),
@@ -132,7 +128,6 @@ describe('CombinedSearchFormAdapter', () => {
           })
         ),
         qs.stringify({
-          organization: null,
           q: 'to be transformed to text',
           sort: 'to-be-order-by',
           text: 'to be transformed to text',

@@ -57,7 +57,7 @@ type CombinedSearchAdapterInputForCourses = RenameKeyWithNamespace<
 export type CombinedSearchAdapterInput = {
   text: string | null;
   sportsCategories: string[];
-  organization: string | null;
+  organization?: string | null;
   keywords: string[];
 } & CombinedSearchAdapterInputForVenues &
   CombinedSearchAdapterInputForEvents &

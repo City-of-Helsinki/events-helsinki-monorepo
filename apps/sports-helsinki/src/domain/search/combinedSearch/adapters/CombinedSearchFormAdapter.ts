@@ -1,20 +1,30 @@
 import type { ParsedUrlQuery } from 'querystring';
-import type { Router } from 'next/router';
+import { EventTypeId } from '@events-helsinki/components/types';
+import type { NextRouter } from 'next/router';
 import qs from 'query-string';
 import { initialCombinedSearchFormValues } from '../constants';
 import type {
   CombinedSearchAdapterInput,
   InputFieldValueCleaner,
+  SearchType,
 } from '../types';
 import EventSearchAdapter from './EventSearchAdapter';
 import VenueSearchAdapter from './VenueSearchAdapter';
+
+type SearchAdapterType = typeof EventSearchAdapter | typeof VenueSearchAdapter;
+
+export const searchAdapterForType: Record<SearchType, SearchAdapterType> = {
+  event: EventSearchAdapter,
+  course: EventSearchAdapter,
+  venue: VenueSearchAdapter,
+};
 
 class CombinedSearchFormAdapter
   implements
     CombinedSearchAdapterInput,
     InputFieldValueCleaner<CombinedSearchAdapterInput>
 {
-  router: Router;
+  router: NextRouter;
   text: string;
   venueOrderBy?: string | null;
   eventOrderBy?: string | null;
@@ -23,7 +33,7 @@ class CombinedSearchFormAdapter
   organization: string | null;
   keywords: string[];
 
-  constructor(router: Router, input?: URLSearchParams) {
+  constructor(router: NextRouter, input?: URLSearchParams) {
     this.router = router;
 
     // Initialize the object with default values
@@ -101,17 +111,27 @@ class CombinedSearchFormAdapter
     this.router.replace({ query });
   }
 
-  public getSearchVariables() {
-    const venueSearchAdapter = new VenueSearchAdapter(
+  public getSearchVariables(): Record<
+    SearchType,
+    | ReturnType<VenueSearchAdapter['getQueryVariables']>
+    | ReturnType<EventSearchAdapter['getQueryVariables']>
+  > {
+    const venueSearchQueryVariables = new VenueSearchAdapter(
       this.getFormValues()
     ).getQueryVariables();
-    const eventSearchAdapter = new EventSearchAdapter(
-      this.getFormValues()
+    const eventSearchQueryVariables = new EventSearchAdapter(
+      this.getFormValues(),
+      EventTypeId.General
+    ).getQueryVariables();
+    const courseSearchQueryVariables = new EventSearchAdapter(
+      this.getFormValues(),
+      EventTypeId.Course
     ).getQueryVariables();
 
     return {
-      VenueSearchAdapter: venueSearchAdapter,
-      EventSearchAdapter: eventSearchAdapter,
+      venue: venueSearchQueryVariables,
+      event: eventSearchQueryVariables,
+      course: courseSearchQueryVariables,
     };
   }
 

@@ -1,5 +1,5 @@
-import type { EventTypeId } from '@events-helsinki/components';
 import {
+  EventTypeId,
   useSearchTranslation,
   useIsSmallScreen,
   useEventListQuery,
@@ -10,34 +10,28 @@ import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
+import { useCombinedSearchContext } from 'domain/search/combinedSearch/adapters/CombinedSearchContext';
 import { SEARCH_ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
 import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
 import { getNextPage } from '../utils';
-import useEventSearchFilters from './useEventSearchFilters';
 
-function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
+function useEventSearchPageQuery(eventType: EventTypeId) {
+  const { searchVariables } = useCombinedSearchContext();
   const { t } = useSearchTranslation();
-  const router = useRouter();
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
-  const isSmallScreen = useIsSmallScreen();
-  const { meta } = useConfig();
-  const eventFilters = useEventSearchFilters(eventType);
 
   // Query for the primary search / active search tab
-  const {
-    data: eventsData,
-    fetchMore,
-    loading: isLoadingEvents,
-  } = useEventListQuery({
+  const { data, fetchMore, ...query } = useEventListQuery({
     ssr: false,
-    variables: eventFilters,
+    variables:
+      eventType === EventTypeId.Course
+        ? searchVariables.course
+        : searchVariables.event,
   });
 
   const handleLoadMore = async () => {
-    const page = eventsData?.eventList.meta
-      ? getNextPage(eventsData.eventList.meta)
-      : null;
+    const page = data?.eventList.meta ? getNextPage(data.eventList.meta) : null;
     setIsFetchingMore(true);
     if (page) {
       try {
@@ -52,6 +46,27 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
     }
     setIsFetchingMore(false);
   };
+
+  return {
+    data,
+    fetchMore,
+    ...query,
+    isFetchingMore,
+    handleLoadMore,
+  };
+}
+
+function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
+  const router = useRouter();
+
+  const isSmallScreen = useIsSmallScreen();
+  const { meta } = useConfig();
+  const {
+    data: eventsData,
+    loading: isLoadingEvents,
+    isFetchingMore,
+    handleLoadMore,
+  } = useEventSearchPageQuery(eventType);
 
   const scrollToResultList = () => {
     if (isSmallScreen) {
@@ -96,7 +111,6 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
   const hasNext = !!eventsData?.eventList?.meta.next;
 
   return {
-    searchFilters: eventFilters,
     meta,
     isSmallScreen,
     handleLoadMore,

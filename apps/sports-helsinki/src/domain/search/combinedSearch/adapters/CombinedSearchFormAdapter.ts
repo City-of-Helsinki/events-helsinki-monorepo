@@ -13,6 +13,12 @@ import VenueSearchAdapter from './VenueSearchAdapter';
 
 type SearchAdapterType = typeof EventSearchAdapter | typeof VenueSearchAdapter;
 
+type SearchVariablesType = {
+  [K in SearchType]: K extends 'venue'
+    ? ReturnType<VenueSearchAdapter['getQueryVariables']>
+    : ReturnType<EventSearchAdapter['getQueryVariables']>;
+};
+
 export const searchAdapterForType: Record<SearchType, SearchAdapterType> = {
   event: EventSearchAdapter,
   course: EventSearchAdapter,
@@ -111,11 +117,7 @@ class CombinedSearchFormAdapter
     this.router.replace({ query });
   }
 
-  public getSearchVariables(): Record<
-    SearchType,
-    | ReturnType<VenueSearchAdapter['getQueryVariables']>
-    | ReturnType<EventSearchAdapter['getQueryVariables']>
-  > {
+  public getSearchVariables(): SearchVariablesType {
     const venueSearchQueryVariables = new VenueSearchAdapter(
       this.getFormValues()
     ).getQueryVariables();

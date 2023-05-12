@@ -4,12 +4,15 @@ import {
   useAppSportsTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
+import { useSearchParams } from 'next/navigation';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
 import EventSearchPage from '../eventSearch/SearchPage';
 import VenueSearchPage from '../venueSearch/SearchPage';
 import { SimpleVenueSearchForm } from '../venueSearch/VenueSearch';
+import { useCombinedSearchContext } from './adapters/CombinedSearchContext';
+import { CombinedSearchProvider } from './adapters/CombinedSearchProvider';
 import styles from './combinedSearchPage.module.scss';
 import { useScrollToSearchResultItem, useSearchTabsWithParams } from './hooks';
 import SearchTabs from './searchTabs/SearchTabs';
@@ -53,6 +56,9 @@ export function SearchForm({
   searchUtilities?: React.ReactNode;
   className?: string;
 } & SearchComponentType) {
+  const combinedSearchContext = useCombinedSearchContext();
+  // eslint-disable-next-line no-console
+  console.debug('SearchForm', { combinedSearchContext });
   return (
     <PageSection
       korosBottom={korosBottom}
@@ -79,37 +85,39 @@ function CombinedSearchPage({
   defaultTab: SearchTabId;
 }) {
   const { initTab } = useSearchTabsWithParams(defaultTab);
-
+  const searchParams = useSearchParams();
   return (
     <div>
       <SearchTabs initTab={initTab}>
-        {/* The search form */}
-        <SearchForm
-          data-testid={searchContainerDataTestId}
-          searchRoute={SEARCH_ROUTES.SEARCH}
-          searchUtilities={null}
-          korosBottom
-          showTitle
-          scrollToResultList={() => true}
-        />
+        <CombinedSearchProvider searchParams={searchParams}>
+          {/* The search form */}
+          <SearchForm
+            data-testid={searchContainerDataTestId}
+            searchRoute={SEARCH_ROUTES.SEARCH}
+            searchUtilities={null}
+            korosBottom
+            showTitle
+            scrollToResultList={() => true}
+          />
 
-        {/* The search tabs, query sorters, search type switchers, etc. */}
-        <SearchUtilities />
+          {/* The search tabs, query sorters, search type switchers, etc. */}
+          <SearchUtilities />
 
-        {/* The Venue Search results */}
-        <SearchTabs.Panel id="Venue">
-          <VenueSearchPanel />
-        </SearchTabs.Panel>
+          {/* The Venue Search results */}
+          <SearchTabs.Panel id="Venue">
+            <VenueSearchPanel />
+          </SearchTabs.Panel>
 
-        {/* The General Event Search results */}
-        <SearchTabs.Panel id={EventTypeId.General}>
-          <EventSearchPanel eventType={EventTypeId.General} />
-        </SearchTabs.Panel>
+          {/* The General Event Search results */}
+          <SearchTabs.Panel id={EventTypeId.General}>
+            <EventSearchPanel eventType={EventTypeId.General} />
+          </SearchTabs.Panel>
 
-        {/* The Course Search results */}
-        <SearchTabs.Panel id={EventTypeId.Course}>
-          <EventSearchPanel eventType={EventTypeId.Course} />
-        </SearchTabs.Panel>
+          {/* The Course Search results */}
+          <SearchTabs.Panel id={EventTypeId.Course}>
+            <EventSearchPanel eventType={EventTypeId.Course} />
+          </SearchTabs.Panel>
+        </CombinedSearchProvider>
       </SearchTabs>
     </div>
   );

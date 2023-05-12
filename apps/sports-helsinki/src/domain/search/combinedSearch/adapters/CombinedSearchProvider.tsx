@@ -17,7 +17,7 @@ const shouldTheURLBeUpdated = (
   searchParams.toString() !==
   combinedSearchFormAdapter.getURLQuery().toString();
 
-function useContextValue(searchParams: URLSearchParams) {
+function useGetContextValue(searchParams: URLSearchParams) {
   const router = useRouter();
   return React.useMemo(() => {
     const combinedSearchFormAdapter = new CombinedSearchFormAdapter(
@@ -43,11 +43,17 @@ export function CombinedSearchProvider({
   children,
 }: CombinedSearchProviderProps) {
   const { combinedSearchFormAdapter, contextValue } =
-    useContextValue(searchParams);
+    useGetContextValue(searchParams);
 
-  if (shouldTheURLBeUpdated(searchParams, combinedSearchFormAdapter)) {
-    combinedSearchFormAdapter.routerPush();
-  }
+  React.useEffect(() => {
+    if (
+      combinedSearchFormAdapter.router &&
+      shouldTheURLBeUpdated(searchParams, combinedSearchFormAdapter)
+    ) {
+      combinedSearchFormAdapter.routerPush();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <CombinedSearchContext.Provider value={contextValue}>

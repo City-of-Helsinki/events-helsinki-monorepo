@@ -99,6 +99,7 @@ const VenueSearchPage: React.FC<SearchPageProps> = ({
           >
             {venuesList && (
               <SearchResultsContainer
+                itemType="Venue"
                 eventsCount={count}
                 loading={isLoadingVenues}
                 eventList={

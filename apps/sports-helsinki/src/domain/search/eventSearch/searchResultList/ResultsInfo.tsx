@@ -1,3 +1,4 @@
+import type { EventTypeId } from '@events-helsinki/components';
 import { IconSearch } from 'hds-react';
 
 import { useTranslation } from 'next-i18next';
@@ -7,6 +8,7 @@ import styles from './resultsInfo.module.scss';
 
 const ResultsInfoContainer: React.FC<{
   resultsCount: number;
+  itemType?: EventTypeId | 'Venue';
 }> = ({ resultsCount }) => {
   const { t } = useTranslation('search');
 

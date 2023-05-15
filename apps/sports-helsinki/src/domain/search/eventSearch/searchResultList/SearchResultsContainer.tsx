@@ -1,3 +1,4 @@
+import type { EventTypeId } from '@events-helsinki/components';
 import { useSearchTranslation } from '@events-helsinki/components';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
@@ -9,6 +10,7 @@ interface Props {
   eventsCount: number;
   eventList: React.ReactElement;
   orderBySelectComponent?: React.ReactElement;
+  itemType?: EventTypeId | 'Venue';
 }
 
 const SearchResultsContainer: React.FC<Props> = ({
@@ -16,6 +18,7 @@ const SearchResultsContainer: React.FC<Props> = ({
   eventsCount,
   eventList,
   orderBySelectComponent,
+  itemType,
 }) => {
   const { t } = useSearchTranslation();
 
@@ -35,7 +38,12 @@ const SearchResultsContainer: React.FC<Props> = ({
           </div>
         )}
         {!!eventsCount && eventList}
-        {!loading && <ResultsInfoContainer resultsCount={eventsCount} />}
+        {!loading && (
+          <ResultsInfoContainer
+            itemType={itemType}
+            resultsCount={eventsCount}
+          />
+        )}
       </ContentContainer>
     </PageSection>
   );

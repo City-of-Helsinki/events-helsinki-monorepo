@@ -180,7 +180,7 @@ export class HeadlessCMSHelper {
           <EventSearchCollection
             {...commonCollectionProps}
             collection={collection}
-            showAllUrl={collection.showAllCustom}
+            showAllUrl={collection.showAllUrl}
           />
         );
       } else if (isEventSelectionCollection(collection)) {

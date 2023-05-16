@@ -96,7 +96,7 @@ type AccessibilitySentences {
   sentences: [String]
 }
 
-type Connection {
+type VenueConnection {
   sectionType: String
   name: String
   phone: String
@@ -135,7 +135,7 @@ type Venue {
   ontologyTree: [Ontology]!
   ontologyWords: [Ontology]!
   accessibilitySentences: [AccessibilitySentences]!
-  connections: [Connection]!
+  connections: [VenueConnection]!
 }
 
 enum link__Purpose {

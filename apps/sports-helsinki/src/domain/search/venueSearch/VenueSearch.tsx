@@ -1,27 +1,17 @@
-import type { ParsedUrlQueryInput } from 'querystring';
 import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import {
-  buildQueryFromObject,
-  useLocale,
+  useSearchTranslation,
   useCommonTranslation,
   MultiSelectDropdown,
-  getUrlParamAsArray,
   useAppSportsTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Button, IconSearch } from 'hds-react';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import queryString from 'query-string';
-import type { FormEvent } from 'react';
 import React from 'react';
 import IconPersonRunning from '../../../assets/icons/IconPersonRunning';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
-import { SEARCH_ROUTES } from '../../../constants';
-import routerHelper from '../../../domain/app/routerHelper';
-import { PARAM_SEARCH_TYPE } from '../combinedSearch/constants';
-import type { SearchForm, SearchComponentType } from '../combinedSearch/types';
-import { EVENT_SEARCH_FILTERS } from '../eventSearch/constants';
+import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
+import type { SearchComponentType } from '../combinedSearch/types';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import {
   getSportsCategoryOptions,
@@ -40,136 +30,76 @@ export type SearchComponentProps = {
   className?: string;
 } & SearchComponentType;
 
-export const useSimpleVenueSearchForm = ({
-  scrollToResultList,
-  searchRoute,
-  autosuggestInput,
-  selectedSportsCategories,
-  setAutosuggestInput,
-  setSelectedSportsCategories,
-  setSportsCategoryInput,
-}: {
-  scrollToResultList: SearchComponentProps['scrollToResultList'];
-  searchRoute: SearchComponentProps['searchRoute'];
-  autosuggestInput: string;
-  selectedSportsCategories: string[];
-  setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
-  setSelectedSportsCategories: React.Dispatch<React.SetStateAction<string[]>>;
-  setSportsCategoryInput: React.Dispatch<React.SetStateAction<string>>;
-}): SearchForm => {
-  const locale = useLocale();
-  const router = useRouter();
-
-  const searchParams = React.useMemo(
-    () => new URLSearchParams(queryString.stringify(router.query)),
-    [router.query]
+export function useFormValues() {
+  const { t } = useSearchTranslation();
+  const { formValues } = useCombinedSearchContext();
+  const [autosuggestInput, setAutosuggestInput] = React.useState(
+    formValues.text ?? ''
   );
-
-  const searchFilters = {
-    q: autosuggestInput,
-    sportsCategories: selectedSportsCategories,
-    orderBy: searchParams.get('orderBy'),
-    orderDir: searchParams.get('orderDir'),
-    sort: searchParams.get('sort'),
-  };
-
-  const goToSearch = (search: string): void => {
-    if (searchRoute) {
-      router.push({
-        pathname: routerHelper.getI18nPath(searchRoute, locale),
-        query: queryString.parse(search) as ParsedUrlQueryInput,
-      });
-    }
-  };
-
-  const moveToSearchPage = () => {
-    const filters = {
-      [PARAM_SEARCH_TYPE]: router.query[PARAM_SEARCH_TYPE],
-      ...searchFilters,
-    };
-    const search = buildQueryFromObject(filters);
-    goToSearch(search);
-  };
-
-  const clearInputValues = () => {
-    setAutosuggestInput('');
-    setSelectedSportsCategories([]);
-    setSportsCategoryInput('');
-  };
-
-  const clearFilters = () => {
-    const search = '';
-    goToSearch(search);
-    clearInputValues();
-  };
-
-  const handleSubmit = (event?: FormEvent) => {
-    if (event) {
-      event.preventDefault();
-    }
-
-    moveToSearchPage();
-    scrollToResultList && scrollToResultList();
-  };
-
-  const updateFilters = React.useCallback(() => {
-    const sportsCategories = getUrlParamAsArray(
-      searchParams,
-      EVENT_SEARCH_FILTERS.SPORTS_CATEGORIES
-    );
-    setAutosuggestInput(searchParams.get('q') ?? '');
-    setSelectedSportsCategories(sportsCategories);
-  }, [searchParams, setAutosuggestInput, setSelectedSportsCategories]);
-
-  return {
-    searchParams,
-    goToSearch,
-    moveToSearchPage,
-    clearInputValues,
-    clearFilters,
-    handleSubmit,
-    updateFilters,
-    searchFilters,
-    scrollToResultList,
-  };
-};
-
-export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
-  scrollToResultList,
-  showTitle = false,
-  searchRoute = SEARCH_ROUTES.SEARCH,
-}) => {
-  const { t } = useTranslation('search');
-  const { t: tAppSports } = useAppSportsTranslation();
-  const [autosuggestInput, setAutosuggestInput] = React.useState('');
   const [selectedSportsCategories, setSelectedSportsCategories] =
-    React.useState<string[]>([]);
+    React.useState<string[]>(formValues.sportsCategories);
   const [sportsCategoryInput, setSportsCategoryInput] = React.useState('');
   const sportsCategories = getSportsCategoryOptions(t).sort(
     sortExtendedCategoryOptions
   );
 
-  const { goToSearch, clearFilters, handleSubmit, updateFilters } =
-    useSimpleVenueSearchForm({
-      scrollToResultList,
-      searchRoute,
-      autosuggestInput,
-      selectedSportsCategories,
-      setAutosuggestInput,
-      setSelectedSportsCategories,
-      setSportsCategoryInput,
-    });
+  // On page load, initialize the form with values
+  // that are available only after the page has fully loaded
+  React.useEffect(() => {
+    setAutosuggestInput(formValues.text ?? '');
+    setSelectedSportsCategories(formValues.sportsCategories);
+  }, [formValues.sportsCategories, formValues.text]);
 
-  const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
-    const value = option.text;
-    const search = buildQueryFromObject({ q: value });
-    goToSearch(search);
+  return {
+    autosuggestInput,
+    setAutosuggestInput,
+    selectedSportsCategories,
+    setSelectedSportsCategories,
+    sportsCategoryInput,
+    setSportsCategoryInput,
+    sportsCategories,
+  };
+}
+
+export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
+  scrollToResultList,
+  showTitle = false,
+}) => {
+  const { t } = useSearchTranslation();
+  const { t: tAppSports } = useAppSportsTranslation();
+
+  const { resetFormValues, setFormValues, pushRouterToSyncURL } =
+    useCombinedSearchContext();
+
+  const {
+    autosuggestInput,
+    setAutosuggestInput,
+    selectedSportsCategories,
+    setSelectedSportsCategories,
+    sportsCategoryInput,
+    setSportsCategoryInput,
+    sportsCategories,
+  } = useFormValues();
+
+  const handleSubmit = (formEvent?: React.FormEvent) => {
+    // The default submit event must be prevented so the page does not reload
+    formEvent?.preventDefault();
+    // Set the new form values to the context
+    setFormValues({
+      text: autosuggestInput,
+      sportsCategories: selectedSportsCategories,
+    });
+    // Update the browser URL with the form values in the context.
+    pushRouterToSyncURL();
+    // Scroll to result list.
     scrollToResultList && scrollToResultList();
   };
 
-  React.useEffect(() => {
-    updateFilters();
-  }, [updateFilters]);
+  const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
+    const value = option.text;
+    setAutosuggestInput(value);
+    handleSubmit();
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -181,7 +111,7 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
           <div className={classNames(styles.row, styles.autoSuggestRow)}>
             <div>
               <SearchAutosuggest
-                name="search"
+                name="text"
                 onChangeSearchValue={setAutosuggestInput}
                 onOptionClick={handleMenuOptionClick}
                 placeholder={tAppSports('appSports:search.search.placeholder')}
@@ -218,7 +148,7 @@ export const SimpleVenueSearchForm: React.FC<SearchComponentType> = ({
             </div>
           </div>
         </div>
-        <FilterSummary onClear={clearFilters} />
+        <FilterSummary onClear={resetFormValues} />
       </div>
     </form>
   );

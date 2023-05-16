@@ -12,6 +12,9 @@ import type {
 import EventSearchAdapter from './EventSearchAdapter';
 import VenueSearchAdapter from './VenueSearchAdapter';
 
+type CombinedSearchAdapterInputField =
+  keyof typeof initialCombinedSearchFormValues;
+
 type SearchAdapterType = typeof EventSearchAdapter | typeof VenueSearchAdapter;
 
 type SearchVariablesType = {
@@ -77,25 +80,35 @@ class CombinedSearchFormAdapter
 
   /** The combined search form fields. */
   private getFormFields() {
-    return Object.keys(initialCombinedSearchFormValues);
+    return Object.keys(initialCombinedSearchFormValues).map(
+      (k) => k as CombinedSearchAdapterInputField
+    );
   }
 
   /**
    * Get a map of form values.
    * */
   public getFormValues(): CombinedSearchAdapterInput {
-    type CombinedSearchAdapterInputField =
-      keyof typeof initialCombinedSearchFormValues;
     const formFields = this.getFormFields();
     return formFields.reduce(
       (formParams: CombinedSearchAdapterInput, field) => {
+        const value = this[field];
         return {
           ...formParams,
-          [field]: this[field as CombinedSearchAdapterInputField],
+          [field]: value,
         };
       },
       { ...initialCombinedSearchFormValues }
     );
+  }
+
+  public setFormValues(formValues: Partial<CombinedSearchAdapterInput>) {
+    const formFields = this.getFormFields();
+    Object.entries(formValues).forEach(([field, value]) => {
+      if (formFields.includes(field as CombinedSearchAdapterInputField)) {
+        Object.assign(this, { [field]: value });
+      }
+    });
   }
 
   /**
@@ -106,7 +119,11 @@ class CombinedSearchFormAdapter
   public getURLQuery(): ParsedUrlQuery {
     const currentParams = this.router.query;
     const formParams = this.getFormValues();
-    return { ...currentParams, ...formParams } as ParsedUrlQuery;
+    // Remove the undefined properties with JSON-utils.
+    // Also decode the values for URL.
+    return JSON.parse(
+      JSON.stringify({ ...currentParams, ...formParams } as ParsedUrlQuery)
+    );
   }
 
   public routerPush() {

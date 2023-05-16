@@ -48,7 +48,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     return [...new Set([...keywords, ...sportsCategories])];
   }
 
-  public getQueryVariables() {
+  public getQueryVariables(): VenueSearchParams {
     return { ...this };
   }
 }

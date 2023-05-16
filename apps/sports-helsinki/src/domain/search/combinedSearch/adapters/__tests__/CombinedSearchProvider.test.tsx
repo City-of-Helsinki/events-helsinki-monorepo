@@ -1,5 +1,4 @@
 import mockRouter from 'next-router-mock';
-import qs from 'query-string';
 import { render } from '@/test-utils';
 import { useCombinedSearchContext } from '../CombinedSearchContext';
 import { CombinedSearchProvider } from '../CombinedSearchProvider';
@@ -23,26 +22,20 @@ const TestingComponent = () => {
 };
 
 describe('CombinedSearchProvider', () => {
-  it('reads the context properly', () => {
-    const searchParams = new URLSearchParams('text=test%20text');
+  it.each([
+    // text included, searchType excluded
+    'text=test%20text&searchType=Course',
+    // text and sportsCategories included
+    'text=test%20text&sportsCategories=gym&sportsCategories=playgrounds',
+    // organization included
+    'publisher=testorg',
+  ])('reads the context properly', (searchParams) => {
+    mockRouter.setCurrentUrl(`/?${searchParams}`);
     const { container } = render(
-      <CombinedSearchProvider searchParams={searchParams}>
+      <CombinedSearchProvider>
         <TestingComponent />
       </CombinedSearchProvider>
     );
     expect(container).toMatchSnapshot();
-  });
-
-  // FIXME: Skipped while this feature is still planned
-  it.skip('pushes the router when search params changes', () => {
-    mockRouter.setCurrentUrl(`/`);
-    expect(qs.stringify(mockRouter.query)).toBe('');
-    const searchParams = new URLSearchParams('text=test%20text');
-    render(
-      <CombinedSearchProvider searchParams={searchParams}>
-        <TestingComponent />
-      </CombinedSearchProvider>
-    );
-    expect(qs.stringify(mockRouter.query)).toBe('text=test%20text');
   });
 });

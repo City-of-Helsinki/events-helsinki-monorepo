@@ -4,14 +4,12 @@ import {
   useAppSportsTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { useSearchParams } from 'next/navigation';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
 import EventSearchPage from '../eventSearch/SearchPage';
 import VenueSearchPage from '../venueSearch/SearchPage';
 import { SimpleVenueSearchForm } from '../venueSearch/VenueSearch';
-import { useCombinedSearchContext } from './adapters/CombinedSearchContext';
 import { CombinedSearchProvider } from './adapters/CombinedSearchProvider';
 import styles from './combinedSearchPage.module.scss';
 import { useScrollToSearchResultItem, useSearchTabsWithParams } from './hooks';
@@ -56,9 +54,6 @@ export function SearchForm({
   searchUtilities?: React.ReactNode;
   className?: string;
 } & SearchComponentType) {
-  const combinedSearchContext = useCombinedSearchContext();
-  // eslint-disable-next-line no-console
-  console.debug('SearchForm', { combinedSearchContext });
   return (
     <PageSection
       korosBottom={korosBottom}
@@ -85,11 +80,10 @@ function CombinedSearchPage({
   defaultTab: SearchTabId;
 }) {
   const { initTab } = useSearchTabsWithParams(defaultTab);
-  const searchParams = useSearchParams();
   return (
     <div>
       <SearchTabs initTab={initTab}>
-        <CombinedSearchProvider searchParams={searchParams}>
+        <CombinedSearchProvider>
           {/* The search form */}
           <SearchForm
             data-testid={searchContainerDataTestId}

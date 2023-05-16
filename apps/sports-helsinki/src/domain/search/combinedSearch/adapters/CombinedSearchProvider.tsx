@@ -1,65 +1,66 @@
-import type { URLSearchParams } from 'url';
 import useLocale from '@events-helsinki/components/hooks/useLocale';
+import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { initialCombinedSearchFormValues } from '../constants';
+import type { CombinedSearchAdapterInput } from '../types';
+import type { CombinedSearchContextType } from './CombinedSearchContext';
 import { CombinedSearchContext } from './CombinedSearchContext';
 import CombinedSearchFormAdapter from './CombinedSearchFormAdapter';
 
-export type CombinedSearchProviderProps = {
-  searchParams: URLSearchParams;
-  children: React.ReactNode;
+type UseGetContextValueReturnType = {
+  combinedSearchFormAdapter: CombinedSearchFormAdapter;
+  contextValue: CombinedSearchContextType;
 };
 
-const shouldTheURLBeUpdated = (
-  searchParams: URLSearchParams,
-  combinedSearchFormAdapter: CombinedSearchFormAdapter
-) =>
-  searchParams.toString() !==
-  combinedSearchFormAdapter.getURLQuery().toString();
-
-function useGetContextValue(searchParams: URLSearchParams) {
+function useGetContextValue(): UseGetContextValueReturnType {
+  const searchParams = useSearchParams();
   const router = useRouter();
   const locale = useLocale();
-  return React.useMemo(() => {
-    const combinedSearchFormAdapter = new CombinedSearchFormAdapter(
-      router,
-      locale,
-      searchParams
-    );
-    const formValues = { ...combinedSearchFormAdapter.getFormValues() };
-    const searchVariables = {
-      ...combinedSearchFormAdapter.getSearchVariables(),
-    };
-    return {
-      combinedSearchFormAdapter,
-      contextValue: {
-        formValues,
-        searchVariables,
-      },
-    };
-  }, [router, locale, searchParams]);
+
+  const combinedSearchFormAdapter = new CombinedSearchFormAdapter(
+    router,
+    locale,
+    searchParams
+  );
+
+  const getFormValues = () => combinedSearchFormAdapter.getFormValues();
+  const getSearchVariables = () =>
+    combinedSearchFormAdapter.getSearchVariables();
+  const setFormValues = (values: Partial<CombinedSearchAdapterInput>) =>
+    combinedSearchFormAdapter.setFormValues(values);
+  const setFormValue = (
+    field: keyof CombinedSearchAdapterInput,
+    value: CombinedSearchAdapterInput[keyof CombinedSearchAdapterInput]
+  ) =>
+    setFormValues({
+      [field]: value,
+    });
+  const pushRouterToSyncURL = () => {
+    combinedSearchFormAdapter.routerPush();
+  };
+  const resetFormValues = () => setFormValues(initialCombinedSearchFormValues);
+
+  return {
+    combinedSearchFormAdapter,
+    contextValue: {
+      formValues: getFormValues(),
+      searchVariables: getSearchVariables(),
+      setFormValues,
+      setFormValue,
+      resetFormValues,
+      pushRouterToSyncURL,
+    },
+  };
 }
 
 export function CombinedSearchProvider({
-  searchParams,
   children,
-}: CombinedSearchProviderProps) {
-  const { combinedSearchFormAdapter, contextValue } =
-    useGetContextValue(searchParams);
-
-  React.useEffect(() => {
-    if (
-      combinedSearchFormAdapter.router &&
-      shouldTheURLBeUpdated(searchParams, combinedSearchFormAdapter)
-    ) {
-      // eslint-disable-next-line no-console
-      console.debug('routerPush could have been called');
-      // combinedSearchFormAdapter.routerPush();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+}: {
+  children: React.ReactNode;
+}) {
+  const { contextValue } = useGetContextValue();
   return (
     <CombinedSearchContext.Provider value={contextValue}>
       {children}

@@ -1,20 +1,27 @@
 import { EventTypeId } from '@events-helsinki/components/types';
 import React, { createContext } from 'react';
 import {
+  initialCombinedSearchFormValues,
   initialEventSearchAdapterValues,
   initialVenueSearchAdapterValues,
 } from '../constants';
 import type { CombinedSearchAdapterInput } from '../types';
 import type CombinedSearchFormAdapter from './CombinedSearchFormAdapter';
 
-export type CombinedSearch = {
+export type CombinedSearchContextType = {
   formValues: CombinedSearchAdapterInput;
   searchVariables: ReturnType<CombinedSearchFormAdapter['getSearchVariables']>;
+  setFormValues: (values: Partial<CombinedSearchAdapterInput>) => void;
+  setFormValue: (
+    field: keyof CombinedSearchAdapterInput,
+    value: CombinedSearchAdapterInput[keyof CombinedSearchAdapterInput]
+  ) => void;
+  pushRouterToSyncURL: () => void;
+  resetFormValues: () => void;
 };
 
-export const CombinedSearchContext = createContext<CombinedSearch>({
-  formValues: {},
-  //   searchVariables: {}, // TODO: Would an empty be better than initialized?
+export const CombinedSearchContext = createContext<CombinedSearchContextType>({
+  formValues: { ...initialCombinedSearchFormValues },
   searchVariables: {
     venue: initialVenueSearchAdapterValues,
     event: {
@@ -26,7 +33,27 @@ export const CombinedSearchContext = createContext<CombinedSearch>({
       eventType: EventTypeId.Course,
     },
   },
-} as CombinedSearch);
+  setFormValues() {
+    throw new Error(
+      'setFormValues to set multiple values at once, is still unimplemented, when it should be implemented!'
+    );
+  },
+  setFormValue() {
+    throw new Error(
+      'setFormValue for a single field is still unimplemented, when it should be implemented!'
+    );
+  },
+  pushRouterToSyncURL() {
+    throw new Error(
+      'pushRouterToSyncURL is still unimplemented, when it should be implemented!'
+    );
+  },
+  resetFormValues() {
+    throw new Error(
+      'resetFormValues is still unimplemented, when it should be implemented!'
+    );
+  },
+});
 
 export function useCombinedSearchContext() {
   const context = React.useContext(CombinedSearchContext);

@@ -39,6 +39,8 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
       (eventType === EventTypeId.General
         ? input.eventOrderBy
         : input.courseOrderBy) ?? initialEventSearchAdapterValues.sort;
+    this.publisher =
+      input.organization ?? initialEventSearchAdapterValues.publisher;
   }
 
   private getKeywords({ keywords }: CombinedSearchAdapterInput) {

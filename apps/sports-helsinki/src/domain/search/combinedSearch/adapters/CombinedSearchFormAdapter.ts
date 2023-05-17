@@ -80,9 +80,9 @@ class CombinedSearchFormAdapter
 
   /** The combined search form fields. */
   private getFormFields() {
-    return Object.keys(initialCombinedSearchFormValues).map(
-      (k) => k as CombinedSearchAdapterInputField
-    );
+    return Object.keys(
+      initialCombinedSearchFormValues
+    ) as CombinedSearchAdapterInputField[];
   }
 
   /**

@@ -9,12 +9,12 @@ import type { CombinedSearchContextType } from './CombinedSearchContext';
 import { CombinedSearchContext } from './CombinedSearchContext';
 import CombinedSearchFormAdapter from './CombinedSearchFormAdapter';
 
-type UseGetContextValueReturnType = {
+type UseGetCombinedSearchContextReturnType = {
   combinedSearchFormAdapter: CombinedSearchFormAdapter;
   contextValue: CombinedSearchContextType;
 };
 
-function useGetContextValue(): UseGetContextValueReturnType {
+function useGetCombinedSearchContext(): UseGetCombinedSearchContextReturnType {
   const searchParams = useSearchParams();
   const router = useRouter();
   const locale = useLocale();
@@ -37,7 +37,7 @@ function useGetContextValue(): UseGetContextValueReturnType {
     setFormValues({
       [field]: value,
     });
-  const pushRouterToSyncURL = () => {
+  const updateRouteToSearchPage = () => {
     combinedSearchFormAdapter.routerPush();
   };
   const resetFormValues = () => setFormValues(initialCombinedSearchFormValues);
@@ -50,7 +50,7 @@ function useGetContextValue(): UseGetContextValueReturnType {
       setFormValues,
       setFormValue,
       resetFormValues,
-      pushRouterToSyncURL,
+      updateRouteToSearchPage,
     },
   };
 }
@@ -60,7 +60,7 @@ export function CombinedSearchProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const { contextValue } = useGetContextValue();
+  const { contextValue } = useGetCombinedSearchContext();
   return (
     <CombinedSearchContext.Provider value={contextValue}>
       {children}

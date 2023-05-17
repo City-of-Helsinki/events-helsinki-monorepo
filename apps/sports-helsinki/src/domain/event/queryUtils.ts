@@ -259,12 +259,10 @@ export const useSimilarVenuesQuery = ({
   // Search for venue ids from UnifiedSearch with the ontologies.
   const { data: venuesUnifiedSearchData, loading: unifiedSearchLoading } =
     useUnifiedSearchListQuery({
-      variables: {
-        ontologyWordIds,
-        first: limit,
-        orderByName: undefined,
-        includeHaukiFields: AppConfig.isHaukiEnabled,
-      },
+      ontologyWordIds,
+      first: limit,
+      orderByName: undefined,
+      includeHaukiFields: AppConfig.isHaukiEnabled,
     });
   // Search for venues from venues-proxy (e.g. TPREK as a datasource) with the venue ids.
   const [getVenuesByIds, queryProps] = useVenuesByIdsLazyQuery({

@@ -47,8 +47,8 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     return [...new Set([...keywords])];
   }
 
-  public getQueryVariables() {
-    return { ...this } as EventSearchParams;
+  public getQueryVariables(): EventSearchParams {
+    return { ...this };
   }
 }
 

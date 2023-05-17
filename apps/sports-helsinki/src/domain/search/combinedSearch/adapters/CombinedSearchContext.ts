@@ -16,7 +16,7 @@ export type CombinedSearchContextType = {
     field: keyof CombinedSearchAdapterInput,
     value: CombinedSearchAdapterInput[keyof CombinedSearchAdapterInput]
   ) => void;
-  pushRouterToSyncURL: () => void;
+  updateRouteToSearchPage: () => void;
   resetFormValues: () => void;
 };
 
@@ -43,9 +43,9 @@ export const CombinedSearchContext = createContext<CombinedSearchContextType>({
       'setFormValue for a single field is still unimplemented, when it should be implemented!'
     );
   },
-  pushRouterToSyncURL() {
+  updateRouteToSearchPage() {
     throw new Error(
-      'pushRouterToSyncURL is still unimplemented, when it should be implemented!'
+      'updateRouteToSearchPage is still unimplemented, when it should be implemented!'
     );
   },
   resetFormValues() {

@@ -7,9 +7,9 @@ import classNames from 'classnames';
 import React from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
+import { SimpleSearchForm } from '../combinedSearch/SearchForm';
 import EventSearchPage from '../eventSearch/SearchPage';
 import VenueSearchPage from '../venueSearch/SearchPage';
-import { SimpleVenueSearchForm } from '../venueSearch/VenueSearch';
 import { CombinedSearchProvider } from './adapters/CombinedSearchProvider';
 import styles from './combinedSearchPage.module.scss';
 import { useScrollToSearchResultItem, useSearchTabsWithParams } from './hooks';
@@ -68,7 +68,7 @@ export function SearchForm({
           [styles.noKoros]: !korosBottom,
         })}
       >
-        <SimpleVenueSearchForm {...delegatedSimpleVenueSearchFormProps} />
+        <SimpleSearchForm {...delegatedSimpleVenueSearchFormProps} />
       </ContentContainer>
     </PageSection>
   );

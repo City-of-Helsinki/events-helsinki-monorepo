@@ -3,7 +3,6 @@ import {
   SortOrder,
   UnifiedSearchLanguage,
 } from '@events-helsinki/components/types';
-import type { Router } from 'next/router';
 import mockRouter from 'next-router-mock';
 import qs from 'query-string';
 import type {
@@ -39,11 +38,7 @@ beforeEach(() => {
 describe('CombinedSearchFormAdapter', () => {
   describe('getURLQuery', () => {
     it('collects the form values from the URL but does not exclude the extra params', () => {
-      const adapter = new CombinedSearchFormAdapter(
-        mockRouter as unknown as Router,
-        locale,
-        input
-      );
+      const adapter = new CombinedSearchFormAdapter(locale, input);
       // eslint-disable-next-line jest/prefer-strict-equal
       expect(adapter.getURLQuery()).toEqual({
         ...outputQuery,
@@ -54,110 +49,10 @@ describe('CombinedSearchFormAdapter', () => {
 
   describe('getFormValues', () => {
     it('returns only the form values without any possible extra params given in a URL', () => {
-      const adapter = new CombinedSearchFormAdapter(
-        mockRouter as unknown as Router,
-        locale,
-        input
-      );
+      const adapter = new CombinedSearchFormAdapter(locale, input);
       // eslint-disable-next-line jest/prefer-strict-equal
       expect(adapter.getFormValues()).toEqual(outputQuery);
     });
-  });
-
-  describe('routerPush', () => {
-    it.each([
-      // Test the happy path where nothing changes
-      [input, inputSearchParams],
-      [
-        new URLSearchParams(
-          qs.stringify({
-            text: 'to be transformed to text',
-            venueOrderBy: 'to-be-order-by',
-          })
-        ),
-        qs.stringify({
-          text: 'to be transformed to text',
-          venueOrderBy: 'to-be-order-by',
-        }),
-      ],
-      // Test the backward compatibility
-      [
-        new URLSearchParams(
-          qs.stringify({
-            q: 'to be transformed to text',
-            sort: 'to-be-order-by',
-          })
-        ),
-        qs.stringify({
-          q: 'to be transformed to text',
-          sort: 'to-be-order-by',
-          text: 'to be transformed to text',
-          venueOrderBy: 'to-be-order-by',
-          eventOrderBy: 'to-be-order-by',
-          courseOrderBy: 'to-be-order-by',
-        }),
-      ],
-    ])(
-      'pushes the user to a desired url',
-      (searchParams, outputSearchParams) => {
-        mockRouter.setCurrentUrl(`/?${searchParams.toString()}`);
-        const adapter = new CombinedSearchFormAdapter(
-          mockRouter as unknown as Router,
-          locale,
-          searchParams
-        );
-        adapter.routerPush();
-        expect(qs.stringify(mockRouter.query)).toBe(outputSearchParams);
-      }
-    );
-  });
-
-  describe('routerReplace', () => {
-    it.each([
-      // Test the happy path where nothing changes
-      [input, inputSearchParams],
-      [
-        new URLSearchParams(
-          qs.stringify({
-            text: 'to be transformed to text',
-            venueOrderBy: 'to-be-order-by',
-          })
-        ),
-        qs.stringify({
-          text: 'to be transformed to text',
-          venueOrderBy: 'to-be-order-by',
-        }),
-      ],
-      // Test the backward compatibility
-      [
-        new URLSearchParams(
-          qs.stringify({
-            q: 'to be transformed to text',
-            sort: 'to-be-order-by',
-          })
-        ),
-        qs.stringify({
-          q: 'to be transformed to text',
-          sort: 'to-be-order-by',
-          text: 'to be transformed to text',
-          venueOrderBy: 'to-be-order-by',
-          eventOrderBy: 'to-be-order-by',
-          courseOrderBy: 'to-be-order-by',
-        }),
-      ],
-    ])(
-      'replaces the URL to a desired url',
-      (searchParams, outputSearchParams) => {
-        mockRouter.setCurrentUrl(`/?${searchParams.toString()}`);
-        const adapter = new CombinedSearchFormAdapter(
-          mockRouter as unknown as Router,
-          locale,
-          searchParams
-        );
-        adapter.routerReplace();
-        expect(qs.stringify(mockRouter.query)).toBe(outputSearchParams);
-      }
-    );
   });
 
   describe('getSearchVariables', () => {
@@ -217,11 +112,7 @@ describe('CombinedSearchFormAdapter', () => {
     ])(
       'includes the transformed %s query variables',
       (searchAdapterType, searchVariables) => {
-        const adapter = new CombinedSearchFormAdapter(
-          mockRouter as unknown as Router,
-          locale,
-          input
-        );
+        const adapter = new CombinedSearchFormAdapter(locale, input);
         const searchVariablesByAdapter = adapter.getSearchVariables();
         expect(searchVariablesByAdapter[searchAdapterType]).toStrictEqual(
           searchVariables

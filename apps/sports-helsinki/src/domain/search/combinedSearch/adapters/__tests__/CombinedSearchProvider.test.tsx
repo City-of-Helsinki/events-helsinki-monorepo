@@ -1,7 +1,10 @@
+import * as nextNavigation from 'next/navigation';
 import mockRouter from 'next-router-mock';
 import { render } from '@/test-utils';
 import { useCombinedSearchContext } from '../CombinedSearchContext';
 import { CombinedSearchProvider } from '../CombinedSearchProvider';
+
+const useSearchParamsSpy = jest.spyOn(nextNavigation, 'useSearchParams');
 
 const TestingComponent = () => {
   const { formValues, searchVariables } = useCombinedSearchContext();
@@ -31,6 +34,13 @@ describe('CombinedSearchProvider', () => {
     'publisher=testorg',
   ])('reads the context properly', (searchParams) => {
     mockRouter.setCurrentUrl(`/?${searchParams}`);
+    // TODO: Remove the useSearchParamsSpy when mockRouter supports next/navigation.
+    useSearchParamsSpy.mockImplementation(
+      () =>
+        new nextNavigation.ReadonlyURLSearchParams(
+          new URLSearchParams(searchParams)
+        )
+    );
     const { container } = render(
       <CombinedSearchProvider>
         <TestingComponent />

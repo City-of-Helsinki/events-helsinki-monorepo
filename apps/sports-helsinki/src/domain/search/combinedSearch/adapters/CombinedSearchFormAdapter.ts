@@ -1,7 +1,6 @@
 import type { ParsedUrlQuery } from 'querystring';
 import type { AppLanguage } from '@events-helsinki/components/types';
 import { EventTypeId } from '@events-helsinki/components/types';
-import type { NextRouter } from 'next/router';
 import qs from 'query-string';
 import { initialCombinedSearchFormValues } from '../constants';
 import type {
@@ -34,8 +33,7 @@ class CombinedSearchFormAdapter
     CombinedSearchAdapterInput,
     InputFieldValueCleaner<CombinedSearchAdapterInput>
 {
-  router: NextRouter;
-
+  searchParams: URLSearchParams;
   /*
    * List here all the form fields that are available in the combined search form.
    * Note that these properties should have some general level name.
@@ -56,15 +54,12 @@ class CombinedSearchFormAdapter
    * @param locale A locale is the current language and is needed by some of the graphql queries
    * @param input The URL search params that represents here the current page URL and the current state of the search form.
    */
-  constructor(router: NextRouter, locale: string, input?: URLSearchParams) {
-    this.router = router;
+  constructor(locale: string, input: URLSearchParams) {
+    this.searchParams = input;
 
     // Initialize the form with default values
     Object.assign(this, initialCombinedSearchFormValues);
 
-    if (!input) {
-      input = new URLSearchParams(qs.stringify(router.query));
-    }
     this.language = locale;
     this.text = input.get('text') ?? input.get('q') ?? '';
     this.venueOrderBy =
@@ -129,23 +124,13 @@ class CombinedSearchFormAdapter
    * overridden with the transformed params.
    * */
   public getURLQuery(): ParsedUrlQuery {
-    const currentParams = this.router.query;
+    const currentParams = qs.parse(this.searchParams.toString());
     const formParams = this.getFormValues();
     // Remove the undefined properties with JSON-utils.
     // Also decode the values for URL.
     return JSON.parse(
       JSON.stringify({ ...currentParams, ...formParams } as ParsedUrlQuery)
     );
-  }
-
-  public routerPush() {
-    const query = this.getURLQuery();
-    this.router.push({ query });
-  }
-
-  public routerReplace() {
-    const query = this.getURLQuery();
-    this.router.replace({ query });
   }
 
   public getSearchVariables(): SearchVariablesType {

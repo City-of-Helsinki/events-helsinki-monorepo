@@ -1,13 +1,11 @@
-import useLocale from '@events-helsinki/components/hooks/useLocale';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import { initialCombinedSearchFormValues } from '../constants';
+import { useCombinedSearchController } from '../hooks/useCombinedSearchController';
 import type { CombinedSearchAdapterInput } from '../types';
 import type { CombinedSearchContextType } from './CombinedSearchContext';
 import { CombinedSearchContext } from './CombinedSearchContext';
-import CombinedSearchFormAdapter from './CombinedSearchFormAdapter';
+import type CombinedSearchFormAdapter from './CombinedSearchFormAdapter';
 
 type UseGetCombinedSearchContextReturnType = {
   combinedSearchFormAdapter: CombinedSearchFormAdapter;
@@ -15,16 +13,8 @@ type UseGetCombinedSearchContextReturnType = {
 };
 
 function useGetCombinedSearchContext(): UseGetCombinedSearchContextReturnType {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const locale = useLocale();
-
-  const combinedSearchFormAdapter = new CombinedSearchFormAdapter(
-    router,
-    locale,
-    searchParams
-  );
-
+  const { combinedSearchFormAdapter, updateRouteToSearchPage } =
+    useCombinedSearchController();
   const getFormValues = () => combinedSearchFormAdapter.getFormValues();
   const getSearchVariables = () =>
     combinedSearchFormAdapter.getSearchVariables();
@@ -37,9 +27,7 @@ function useGetCombinedSearchContext(): UseGetCombinedSearchContextReturnType {
     setFormValues({
       [field]: value,
     });
-  const updateRouteToSearchPage = () => {
-    combinedSearchFormAdapter.routerPush();
-  };
+
   const resetFormValues = () => setFormValues(initialCombinedSearchFormValues);
 
   return {

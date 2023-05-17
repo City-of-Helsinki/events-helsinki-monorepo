@@ -35,6 +35,12 @@ class CombinedSearchFormAdapter
     InputFieldValueCleaner<CombinedSearchAdapterInput>
 {
   router: NextRouter;
+
+  /*
+   * List here all the form fields that are available in the combined search form.
+   * Note that these properties should have some general level name.
+   * These values can be mapped to event, course and venue queries.
+   */
   language: string;
   text: string;
   venueOrderBy?: string | null;
@@ -44,10 +50,16 @@ class CombinedSearchFormAdapter
   organization?: string | null;
   keywords: string[];
 
+  /**
+   * Map the URL search parameters to the form fields.
+   * @param router NextRouter that can be used to resolve current URL
+   * @param locale A locale is the current language and is needed by some of the graphql queries
+   * @param input The URL search params that represents here the current page URL and the current state of the search form.
+   */
   constructor(router: NextRouter, locale: string, input?: URLSearchParams) {
     this.router = router;
 
-    // Initialize the object with default values
+    // Initialize the form with default values
     Object.assign(this, initialCombinedSearchFormValues);
 
     if (!input) {

@@ -7,6 +7,10 @@ import type {
 } from '../types';
 
 class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
+  /*
+   * List here all the event and course search parameters
+   * that are wanted to be mapped with the combined search.
+   */
   text: EventSearchParams['text'];
   allOngoingAnd: EventSearchParams['allOngoingAnd'];
   start: EventSearchParams['start'];
@@ -25,6 +29,11 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
   page: EventSearchParams['page'];
   pageSize: EventSearchParams['pageSize'];
 
+  /**
+   * Map the combined search form fields to the event search query variables.
+   * @param input The output of the CombinedSearchFormAdapter is here as an input.
+   * @param eventType The courses and general events have their own mappings.
+   */
   constructor(
     input: CombinedSearchAdapterInput,
     eventType: EventTypeId = EventTypeId.General

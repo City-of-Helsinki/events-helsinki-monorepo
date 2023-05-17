@@ -44,6 +44,7 @@ export default async function handler(
 
 // revalidate a page
 // return the uri if revalidation failed
+//
 async function _revalidate(res: NextApiResponse, uri: string) {
   try {
     const _uri = uri.replace(/\/$/, '');

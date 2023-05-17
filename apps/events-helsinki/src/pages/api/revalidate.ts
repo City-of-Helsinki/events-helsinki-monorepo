@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { getAllArticles, getAllPages } from '@events-helsinki/components';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NodeNextRequest } from 'next/dist/server/base-http/node';
 import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import { staticGenerationLogger } from '../../logger';
 
@@ -16,14 +15,14 @@ export default async function handler(
 
   const errors: string[] = [];
   try {
-    // articles
+    // get all articles
     const articlePageInfos = await getAllArticles(eventsApolloClient);
     for (const pageInfo of articlePageInfos) {
       const ret = await _revalidate(res, pageInfo.uri);
       if (ret) errors.push(ret);
     }
 
-    // pages
+    // get all pages
     const pagePageInfos = await getAllPages(eventsApolloClient);
     for (const pageInfo of pagePageInfos) {
       const ret = await _revalidate(res, pageInfo.uri);

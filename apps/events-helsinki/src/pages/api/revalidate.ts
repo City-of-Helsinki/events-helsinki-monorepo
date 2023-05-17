@@ -10,8 +10,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Check for secret to confirm this is a valid request
-  if (req.query.secret !== process.env.MY_SECRET_TOKEN) {
-    //    return res.status(401).json({ message: 'Invalid token' });
+  if (req.query.secret !== process.env.REVALIDATE_TOKEN) {
+    return res.status(401).json({ message: 'Invalid token' });
   }
 
   const errors: string[] = [];
@@ -31,7 +31,7 @@ export default async function handler(
     }
 
     // errors during revalidation
-    if (errors.length > 0)
+    if (errors?.length > 0)
       return res.status(404).json({ revalidated: false, errors });
 
     return res.status(200).json({ revalidated: true });

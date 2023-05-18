@@ -9,13 +9,14 @@ import {
 } from '@events-helsinki/components';
 import React from 'react';
 import EventList from '../../../common-events/components/eventList/EventList';
-import type { AdvancedSearchProps } from './AdvancedSearch';
+
+import type { SearchComponentType } from '../combinedSearch/types';
 import styles from './eventSearchPage.module.scss';
 import useSearchPage from './hooks/useSearchPage';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 
 type SearchPageProps = {
-  SearchComponent?: React.FC<AdvancedSearchProps>;
+  SearchComponent?: React.FC<SearchComponentType>;
   pageTitle: string;
   eventType: EventTypeId;
 };

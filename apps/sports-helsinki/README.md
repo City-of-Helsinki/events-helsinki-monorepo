@@ -54,10 +54,13 @@ This means that:
 
 #### Input: The URL (search) parameters
 
+_The URL is the primary source for input and state._
+
 The URL controls the whole search form, for easy maintain and also for the accessibility reasons:
 
 1. The URL should be updated when new filters are applied (or any of them are removed / cleared). The active filters are always shown in the UI.
 2. When another search tab is clicked, the search URL should not change from the search params.
+3. When a filter is activated, the URL should be updated. When an URL is updated, the form should also ract to that.
 
 An example of CombinedSearchAdapterInput type, that could be used as an input for the searches:
 
@@ -85,7 +88,7 @@ The problem: The free text filter parameter is called “text“ in the LinkedEv
 The adapter should:
 
 1. Pick the relevant URL search params; Exclude the ones that are not supported and pick the ones that could be used as they are or be transformed to a right form, so that they could be used as filters.
-2. Clean the URL (as much as possible).
+2. Clean the URL (as much as possible). The combined search has multiple search types and some parameters should persist even then when the search tab is not active.
 
 The output (type `CombinedSearchAdapterOutput`) of the adapter is either `VenueSearchParams` or `EventSearchParams`.
 
@@ -104,9 +107,9 @@ type VenueSearchParams = {
 
 if this would be the final active implementation of the type, the [CombinedSearchAdapterInput input type](#input-the-url-search-parameters) would transform to this like this:
 
-1. `text` -> `q`
-2. `sportsCategories` -> `ontologyWords` (the adapter needs to also use the mapped values, not only the keys)
-3. `orderBy` -> `orderBy`
+1. `text` -> `q`.
+2. `sportsCategories` -> `ontologyWords` (the adapter needs to also use the mapped values, not only the keys).
+3. `orderBy` -> `orderBy`.
 
 ---
 
@@ -123,9 +126,9 @@ type EventSearchParams = {
 
 if this would be the final active implementation of the type, the [CombinedSearchAdapterInput input type](#input-the-url-search-parameters) would transform to this like this:
 
-1. `text` -> `text`
-2. `sportsCategories` -> `keywords` (the adapter needs to also use the mapped values, not only the keys)
-3. `orderBy` -> `sort`
+1. `text` -> `text`.
+2. `sportsCategories` -> `keywords` (the adapter needs to also use the mapped values, not only the keys).
+3. `courseOrderBy` -> `sort` & `eventOrderBy` -> `sort`.
 
 ---
 
@@ -149,6 +152,55 @@ The URL acts as an input and a search adapter picks the params that the specific
 |                              |     | e.g /graphql?text=football |    | param `text`                 |
 └──────────────────────────────┘     └────────────────────────────┘    └──────────────────────────────┘
 ```
+
+CombinedSearchPage.tsx
+
+```typescript
+<SearchTabs initTab={initTab}>
+  <CombinedSearchProvider>
+    {/* The search form */}
+    <SearchForm
+      data-testid={searchContainerDataTestId}
+      searchRoute={SEARCH_ROUTES.SEARCH}
+      searchUtilities={null}
+      korosBottom
+      showTitle
+      scrollToResultList={() => true}
+    />
+
+    {/* The search tabs, query sorters, search type switchers, etc. */}
+    <SearchUtilities />
+
+    {/* The Venue Search results */}
+    <SearchTabs.Panel id="Venue">
+      <VenueSearchPanel />
+    </SearchTabs.Panel>
+
+    {/* The General Event Search results */}
+    <SearchTabs.Panel id={EventTypeId.General}>
+      <EventSearchPanel eventType={EventTypeId.General} />
+    </SearchTabs.Panel>
+
+    {/* The Course Search results */}
+    <SearchTabs.Panel id={EventTypeId.Course}>
+      <EventSearchPanel eventType={EventTypeId.Course} />
+    </SearchTabs.Panel>
+  </CombinedSearchProvider>
+</SearchTabs>
+```
+
+The `<SearchTabs/>` is there to provide a React-context / state for the tab system. The context of `<SearchTabs/>` tells
+
+1. which tab should be the active one
+2. how many search hits was found when a pre-search for the tab was done.
+
+The `<SearchTabs/>` provider also updates the active `searchType` to the URL.
+
+The `<CombinedSearchProvider/>` is there to have the formValues and the combined search variables stored in a React-context for each searchType. The `<CombinedSearchProvider/>` -component
+
+1. reads the URL and uses the `CombinedSearchFormAdapter` to store the search form values in a context
+2. provides the state mutator functions which can be used to update the form values in the context.
+3. provides the search variables that can be used to query venues, courses and general events. The values are mapped with the `VenueSearchAdapter` and the `EventSearchAdapter` which both uses the `CombinedSearchFormAdapter` (the form values) as their input.
 
 ## Developing locally
 

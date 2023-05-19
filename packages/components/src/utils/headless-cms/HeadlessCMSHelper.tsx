@@ -1,4 +1,5 @@
 import format from 'date-fns/format';
+import parse from 'html-react-parser';
 import React from 'react';
 import type {
   ArticleType,
@@ -180,7 +181,7 @@ export class HeadlessCMSHelper {
           <EventSearchCollection
             {...commonCollectionProps}
             collection={collection}
-            showAllUrl={collection.showAllUrl}
+            showAllUrl={parse(collection.showAllUrl || '').toString()}
           />
         );
       } else if (isEventSelectionCollection(collection)) {

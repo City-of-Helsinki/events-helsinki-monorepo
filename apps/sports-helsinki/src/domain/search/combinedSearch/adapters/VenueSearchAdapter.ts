@@ -55,6 +55,10 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   private getOntologyTreeIds({
     sportsCategories,
   }: CombinedSearchAdapterInput): VenueSearchParams['ontologyWordIds'] {
+    // If there are no selected sport categories, use the default one for sports
+    if (!sportsCategories?.length) {
+      return initialVenueSearchAdapterValues.ontologyTreeIds;
+    }
     const filteredSportsCategories =
       sportsCategories
         .reduce((ids: number[], sportCategory) => {

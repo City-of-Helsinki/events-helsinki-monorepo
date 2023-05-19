@@ -2,24 +2,16 @@ import { useLazyQuery } from '@apollo/client';
 import type { SearchListQuery } from '@events-helsinki/components';
 import { SearchListDocument } from '@events-helsinki/components';
 import React from 'react';
-import AppConfig from '../../../../domain/app/AppConfig';
-import useUnifiedSearchVariables from '../../../../domain/unifiedSearch/useUnifiedSearchVariables';
+import { useCombinedSearchContext } from '../adapters/CombinedSearchContext';
 import { useTabsContext } from '../searchTabs/tabsContext';
 
 function useLazyVenueSearchForTabCount() {
   const { setResultCount } = useTabsContext();
-  const venueSearchFilters = useUnifiedSearchVariables();
-  const variables = React.useMemo(
-    () => ({
-      ...venueSearchFilters,
-      includeHaukiFields: AppConfig.isHaukiEnabled,
-    }),
-    [venueSearchFilters]
-  );
+  const { searchVariables } = useCombinedSearchContext();
   const [search, { loading, data, error, ...delegatedProps }] = useLazyQuery(
     SearchListDocument,
     {
-      variables,
+      variables: searchVariables.venue,
       // FIXME: Set the fetch policy to not trigger cache,
       // or the Apollo client fails to request
       // same query multiple times. Depending on settings,

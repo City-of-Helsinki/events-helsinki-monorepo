@@ -6,7 +6,6 @@ export default function useUnifiedSearchListQuery(
   variables?: Partial<SearchListQueryVariables>
 ) {
   const { searchVariables } = useCombinedSearchContext();
-
   const { fetchMore, ...delegated } = useSearchListQuery({
     ssr: false,
     variables: {

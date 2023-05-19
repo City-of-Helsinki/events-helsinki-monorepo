@@ -42,7 +42,6 @@ const VenueSearchPage: React.FC<SearchPageProps> = ({
     count,
     hasNext,
   } = useSearchPage();
-
   const venuesList = resultList as UnifiedSearchVenue[];
 
   React.useEffect(() => {

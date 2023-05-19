@@ -1,5 +1,7 @@
+import { SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type {
   AppLanguage,
+  SPORTS_CATEGORIES,
   UnifiedSearchLanguage,
 } from '@events-helsinki/components/types';
 import { SortOrder } from '@events-helsinki/components/types';
@@ -41,7 +43,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
       locale
     ] as UnifiedSearchLanguage;
     this.q = input.text || initialVenueSearchAdapterValues.q;
-    this.ontologyWordIds = this.getOntologyWords(input);
+    this.ontologyTreeIds = this.getOntologyTreeIds(input);
     this.orderByName = input.venueOrderBy
       ? SortOrder.Ascending.toLowerCase().includes(input.venueOrderBy)
         ? { order: SortOrder.Ascending }
@@ -50,11 +52,22 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     // TODO: this.orderByDistance = null; // input.venueOrderBy ? (SortOrder.Ascending.toLowerCase().includes(input.venueOrderBy) ? {order: SortOrder.Ascending} : {order: SortOrder.Descending}) : null;
   }
 
-  private getOntologyWords({
-    keywords,
+  private getOntologyTreeIds({
     sportsCategories,
-  }: CombinedSearchAdapterInput) {
-    return [...new Set([...keywords, ...sportsCategories])];
+  }: CombinedSearchAdapterInput): VenueSearchParams['ontologyWordIds'] {
+    const filteredSportsCategories =
+      sportsCategories
+        .reduce((ids: number[], sportCategory) => {
+          const treeIds =
+            SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS[
+              sportCategory as SPORTS_CATEGORIES
+            ];
+          return [...ids, ...(treeIds ?? [])];
+        }, [])
+        .map(String) ?? [];
+
+    // Return a unique list of tree ids
+    return [...new Set([...filteredSportsCategories])];
   }
 
   public getQueryVariables(): VenueSearchParams {

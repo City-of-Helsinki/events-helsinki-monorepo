@@ -68,7 +68,7 @@ const EventContent: React.FC<Props> = ({
                     {description}
                   </HtmlToReact>
                 </div>
-                {AppConfig.showEventLocationExtraInfo && locationExtraInfo && (
+                {locationExtraInfo && (
                   <>
                     <h2 className={styles.descriptionTitle}>
                       {t('event:locationExtraInfo.title')}

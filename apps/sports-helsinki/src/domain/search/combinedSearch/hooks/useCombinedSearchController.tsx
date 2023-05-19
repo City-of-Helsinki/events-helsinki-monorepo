@@ -13,7 +13,7 @@ export function useCombinedSearchController() {
   );
   const updateRouteToSearchPage = () => {
     const query = combinedSearchFormAdapter.getURLQuery();
-    router.push({ query });
+    (async () => await router.push({ query }))();
   };
   return {
     combinedSearchFormAdapter,

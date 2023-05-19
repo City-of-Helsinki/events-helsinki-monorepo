@@ -83,7 +83,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     scrollToResultList && scrollToResultList();
   };
 
-  const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
+  const handleMenuOptionClick = (option: AutosuggestMenuOption) => {
     const value = option.text;
     setAutosuggestInput(value);
     handleSubmit();

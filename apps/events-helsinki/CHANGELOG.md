@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.1.0...events-helsinki-v1.1.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* Incorrect heading sizes article page and page ([#322](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/322)) ([fde55b1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fde55b148a0860d2483e09617bc228be6945fece))
+* Show all link in event search carousel ([#325](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/325)) ([b490a1f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b490a1fe03f882516f63a4bb0e85e8656f98adcc))
+
 ## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.0.0...events-helsinki-v1.1.0) (2023-05-11)
 
 

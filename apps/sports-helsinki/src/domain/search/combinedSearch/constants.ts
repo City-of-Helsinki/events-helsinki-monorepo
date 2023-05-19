@@ -3,7 +3,10 @@ import {
   EventTypeId,
   UnifiedSearchLanguage,
 } from '@events-helsinki/components/types';
-import { SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID } from '../../app/appConstants';
+import {
+  HELSINKI_OCD_DIVISION_ID,
+  SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID,
+} from '../../app/appConstants';
 import { SPORT_COURSES_KEYWORDS } from '../eventSearch/constants';
 import type {
   CombinedSearchAdapterInput,
@@ -27,7 +30,7 @@ export const initialVenueSearchAdapterValues: VenueSearchParams = {
   q: '*',
   ontologyTreeIds: [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()],
   ontologyWordIds: [],
-  administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
+  administrativeDivisionIds: [HELSINKI_OCD_DIVISION_ID],
   openAt: null,
   after: '',
   first: 10,

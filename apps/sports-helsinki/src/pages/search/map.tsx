@@ -18,9 +18,8 @@ import { ROUTES } from '../../constants';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import routerHelper from '../../domain/app/routerHelper';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
-import SearchHeader, {
-  ShowMode,
-} from '../../domain/search/searchHeader/SearchHeader';
+import { CombinedSearchProvider } from '../../domain/search/combinedSearch/adapters/CombinedSearchProvider';
+import SearchHeader from '../../domain/search/searchHeader/SearchHeader';
 import SimpleVenueMapSearch from '../../domain/search/venueSearch/VenueMapSearch';
 import useUnifiedSearchMapQuery from '../../domain/unifiedSearch/useUnifiedSearchMapQuery';
 import getVenueSourceId from '../../domain/venue/utils/getVenueSourceId';
@@ -76,7 +75,7 @@ function getSearchResultsAsItems(
   );
 }
 
-export default function MapSearch() {
+export function MapSearchPageContent() {
   const router = useRouter();
   const venueId = router.query.venueId as string;
   const locale = useLocale();
@@ -106,28 +105,35 @@ export default function MapSearch() {
 
   const count = data?.unifiedSearch?.count ?? 0;
   return (
+    <>
+      <SearchHeader
+        count={count}
+        switchShowMode={switchShowMode}
+        searchForm={<SimpleVenueMapSearch />}
+      />
+      <PageSection>
+        <MapView
+          // Use key to force rerender when mode is changes. Otherwise map position / zoom wouldn't reset
+          key={showVenueFocusedMap ? 'focused-venue-map' : 'search-map'}
+          items={searchResultItems}
+          focusedItemId={showVenueFocusedMap ? venueId : undefined}
+        />
+      </PageSection>
+    </>
+  );
+}
+
+export default function MapSearch() {
+  return (
     <MatomoWrapper>
       <HCRCApolloPage
         uri={ROUTES.MAPSEARCH}
         className="pageLayout"
         navigation={<Navigation />}
         content={
-          <>
-            <SearchHeader
-              showMode={ShowMode.MAP}
-              count={count}
-              switchShowMode={switchShowMode}
-              searchForm={<SimpleVenueMapSearch />}
-            />
-            <PageSection>
-              <MapView
-                // Use key to force rerender when mode is changes. Otherwise map position / zoom wouldn't reset
-                key={showVenueFocusedMap ? 'focused-venue-map' : 'search-map'}
-                items={searchResultItems}
-                focusedItemId={showVenueFocusedMap ? venueId : undefined}
-              />
-            </PageSection>
-          </>
+          <CombinedSearchProvider>
+            <MapSearchPageContent />
+          </CombinedSearchProvider>
         }
         footer={null}
       />

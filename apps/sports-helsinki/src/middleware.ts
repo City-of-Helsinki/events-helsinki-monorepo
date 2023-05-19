@@ -2,6 +2,7 @@
 import stringifyUrlObject from '@events-helsinki/components/utils/stringifyUrlObject';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import redirectRoutes from '../redirectRoutes.config';
 
 // TODO: For some reason middleware cannot read `'@events-helsinki/components` package without breaking the build
 const DEFAULT_LANGUAGE = 'fi';
@@ -22,12 +23,14 @@ const requestType = {
 const prefixDefaultLocale = async (req: NextRequest) => {
   // stringify and map dynamic paths to segmented, ie: /venues/:id => /venues/[id]
   const path = stringifyUrlObject(req.nextUrl);
-  if (req.nextUrl.locale === 'default') {
+  if (Object.keys(redirectRoutes).includes(path)) {
+    // Let redirect routes through without prefixing them with locale
+    return NextResponse.redirect(new URL(path, req.url));
+  } else if (req.nextUrl.locale === 'default') {
     return NextResponse.redirect(
       new URL(`/${DEFAULT_LANGUAGE}${path}`, req.url)
     );
-  }
-  if (!path.includes(req.nextUrl.pathname)) {
+  } else if (!path.includes(req.nextUrl.pathname)) {
     return NextResponse.redirect(
       new URL(`/${req.nextUrl.locale}${path}`, req.url)
     );

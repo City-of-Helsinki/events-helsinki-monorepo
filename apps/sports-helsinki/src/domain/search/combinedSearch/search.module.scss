@@ -6,71 +6,35 @@ $buttonWidth: 180px;
   fill: var(--color-white);
 }
 
+.mapView {
+  padding: 0 !important;
+}
+
+.searchTitle {
+  font-size: var(--fontsize-heading-xl);
+  font-weight: 500;
+  margin-top: 2px;
+  margin-bottom: var(--spacing-xl);
+}
+
 .searchContainer {
   color: var(--color-primary-black);
   background-color: var(--color-theme-background);
   padding: 2.375rem 0 1.5rem 0;
   position: relative;
 
+  .noKoros {
+    margin-bottom: 0 !important;
+  }
+
   .contentContainer {
     margin-bottom: 2.375rem;
 
-    h1 {
+    h2 {
       font-size: var(--fontsize-heading-xl);
       font-weight: 500;
       margin-top: 2px;
       margin-bottom: var(--spacing-xl);
-    }
-  }
-
-  .rowWrapper {
-    display: grid;
-    height: fit-content;
-    align-items: center;
-
-    grid-template-columns: 1fr;
-    grid-gap: var(--spacing-m);
-
-    margin-bottom: var(--spacing-xs);
-
-    @include respond-above(s) {
-      grid-template-columns: 1fr;
-      grid-gap: var(--spacing-xs);
-
-      margin-bottom: var(--spacing-xs);
-    }
-  }
-
-  .buttonWrapper {
-    @include respond-above(m) {
-      grid-column: span 1 / 5;
-    }
-  }
-
-  .row {
-    display: grid;
-    grid-gap: var(--spacing-xs);
-
-    @include respond-above(s) {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @include respond-above(m) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-
-  .autoSuggestRow {
-    align-items: flex-end;
-
-    @include respond-above(m) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    & > :first-child {
-      @include respond-above(m) {
-        grid-column: 1 / 4;
-      }
     }
   }
 
@@ -91,6 +55,57 @@ $buttonWidth: 180px;
   }
 }
 
+.buttonWrapper {
+  @include respond-above(m) {
+    grid-column: span 1 / 5;
+  }
+}
+
+.row {
+  display: grid;
+  grid-gap: var(--spacing-xs);
+
+  @include respond-above(s) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include respond-above(m) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.autoSuggestRow {
+  align-items: flex-end;
+
+  @include respond-above(m) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  & > :first-child {
+    @include respond-above(m) {
+      grid-column: 1 / 4;
+    }
+  }
+}
+
+.rowWrapper {
+  display: grid;
+  height: fit-content;
+  align-items: center;
+
+  grid-template-columns: 1fr;
+  grid-gap: var(--spacing-m);
+
+  margin-bottom: var(--spacing-xs);
+
+  @include respond-above(s) {
+    grid-template-columns: 1fr;
+    grid-gap: var(--spacing-xs);
+
+    margin-bottom: var(--spacing-xs);
+  }
+}
+
 .label {
   font-size: var(--fontsize-body-m);
   font-weight: 500;
@@ -99,4 +114,9 @@ $buttonWidth: 180px;
   @include respond-below(s) {
     display: none;
   }
+}
+
+.searchUtilities {
+  padding: 0 0 var(--spacing-xs) 0;
+  position: relative;
 }

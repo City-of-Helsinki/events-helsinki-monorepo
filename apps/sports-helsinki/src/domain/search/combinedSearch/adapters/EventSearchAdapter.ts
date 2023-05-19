@@ -41,6 +41,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     // Initialize the object with default values
     Object.assign(this, initialEventSearchAdapterValues, { eventType });
 
+    // NOTE: The text-parameter is now used instead of allOngoingAnd, which was used earlier. There should be more results this way.
     this.text = input.text ?? null;
     // this.allOngoingAnd = [input.text] ?? null;
     this.keywordAnd = this.getKeywords(input);

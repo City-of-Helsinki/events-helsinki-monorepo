@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.2.1...sports-helsinki-v1.3.0) (2023-05-22)
+
+
+### Features
+
+* Add events additional info to all apps ([#235](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/235)) ([00e4814](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/00e4814be779c4d8cce22b2ffb6014ea295f31d5))
+
+
+### Bug Fixes
+
+* Show all link in event search carousel ([#325](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/325)) ([b490a1f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b490a1fe03f882516f63a4bb0e85e8656f98adcc))
+
 ## [1.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.2.0...sports-helsinki-v1.2.1) (2023-05-09)
 
 

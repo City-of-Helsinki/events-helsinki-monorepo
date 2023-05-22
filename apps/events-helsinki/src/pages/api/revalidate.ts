@@ -13,34 +13,26 @@ export default async function handler(
     return res.status(401).json({ message: 'Invalid token' });
   }
 
-  const errors: string[] = [];
   const mainPages = ['/en', '/fi', '/sv'];
   try {
     // main pages
     for (const page of mainPages) {
-      const ret = await _revalidate(res, page);
-      if (ret) errors.push(ret);
+      _revalidate(res, page);
     }
 
     // get all articles
     const articlePageInfos = await getAllArticles(eventsApolloClient);
     for (const pageInfo of articlePageInfos) {
-      const ret = await _revalidate(res, pageInfo.uri);
-      if (ret) errors.push(ret);
+      _revalidate(res, pageInfo.uri);
     }
 
     // get all pages
     const pagePageInfos = await getAllPages(eventsApolloClient);
     for (const pageInfo of pagePageInfos) {
-      const ret = await _revalidate(res, pageInfo.uri);
-      if (ret) errors.push(ret);
+      _revalidate(res, pageInfo.uri);
     }
 
-    // errors during revalidation
-    if (errors?.length > 0)
-      return res.status(404).json({ revalidated: false, errors });
-
-    return res.status(200).json({ revalidated: true });
+    return res.status(200).json({ revalidatetrigger: true });
   } catch (err) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page

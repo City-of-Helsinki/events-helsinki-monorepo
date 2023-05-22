@@ -14,7 +14,7 @@ it('renders no events found text', async () => {
 
   expect(
     screen.getByText(
-      'Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta'
+      'Valitsemillasi hakuehdoilla ei löytynyt yhtään tapahtumaa.'
     )
   ).toBeInTheDocument();
 });

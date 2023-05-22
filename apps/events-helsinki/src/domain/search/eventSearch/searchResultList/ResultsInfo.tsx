@@ -11,7 +11,9 @@ const ResultsInfoContainer: React.FC<{
   const { t } = useTranslation('search');
 
   if (resultsCount === 0) {
-    return <ResultsInfo bigText={t(`searchNotification.noResultsTitle`)} />;
+    return (
+      <ResultsInfo bigText={t(`searchNotification.noResultsTitleGeneral`)} />
+    );
   }
 
   if (resultsCount < 5) {

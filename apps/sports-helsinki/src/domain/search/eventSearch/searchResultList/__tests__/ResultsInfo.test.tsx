@@ -1,22 +1,30 @@
+import { EventTypeId } from '@events-helsinki/components';
 import * as React from 'react';
 
 import { render, screen } from '@/test-utils';
 import ResultsInfo from '../ResultsInfo';
 
-it('events with 0 results matches snapshot for no results', () => {
-  const { container } = render(<ResultsInfo resultsCount={0} />);
-
-  expect(container).toMatchSnapshot();
+it.each<['Venue' | EventTypeId | undefined, string]>([
+  ['Venue', 'Valitsemillasi hakuehdoilla ei löytynyt yhtään paikkaa.'],
+  [
+    EventTypeId.General,
+    'Valitsemillasi hakuehdoilla ei löytynyt yhtään tapahtumaa.',
+  ],
+  [
+    EventTypeId.Course,
+    'Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta.',
+  ],
+])('renders no events found text', (itemType, infoText) => {
+  render(<ResultsInfo itemType={itemType} resultsCount={0} />);
+  expect(screen.getByText(infoText)).toBeInTheDocument();
 });
 
-it('renders no events found text', async () => {
-  render(<ResultsInfo resultsCount={0} />);
+it('events with 0 results matches snapshot for no results', () => {
+  const { container } = render(
+    <ResultsInfo itemType="Venue" resultsCount={0} />
+  );
 
-  expect(
-    screen.getByText(
-      'Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta'
-    )
-  ).toBeInTheDocument();
+  expect(container).toMatchSnapshot();
 });
 
 it.each([1, 4])(

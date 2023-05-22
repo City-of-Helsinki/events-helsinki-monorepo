@@ -1,3 +1,4 @@
+import type { EventTypeId } from '@events-helsinki/components';
 import { IconSearch } from 'hds-react';
 
 import { useTranslation } from 'next-i18next';
@@ -7,11 +8,16 @@ import styles from './resultsInfo.module.scss';
 
 const ResultsInfoContainer: React.FC<{
   resultsCount: number;
-}> = ({ resultsCount }) => {
+  itemType?: EventTypeId | 'Venue';
+}> = ({ resultsCount, itemType }) => {
   const { t } = useTranslation('search');
 
   if (resultsCount === 0) {
-    return <ResultsInfo bigText={t(`searchNotification.noResultsTitle`)} />;
+    return (
+      <ResultsInfo
+        bigText={t(`searchNotification.noResultsTitle${itemType || ''}`)}
+      />
+    );
   }
 
   if (resultsCount < 5) {

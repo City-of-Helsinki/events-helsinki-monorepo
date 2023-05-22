@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.1.1...hobbies-helsinki-v2.2.0) (2023-05-22)
+
+
+### Features
+
+* Add events additional info to all apps ([#235](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/235)) ([00e4814](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/00e4814be779c4d8cce22b2ffb6014ea295f31d5))
+
+
+### Bug Fixes
+
+* Incorrect heading sizes article page and page ([#322](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/322)) ([fde55b1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fde55b148a0860d2483e09617bc228be6945fece))
+* Show all link in event search carousel ([#325](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/325)) ([b490a1f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b490a1fe03f882516f63a4bb0e85e8656f98adcc))
+
 ## [2.1.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.1.0...hobbies-helsinki-v2.1.1) (2023-05-11)
 
 

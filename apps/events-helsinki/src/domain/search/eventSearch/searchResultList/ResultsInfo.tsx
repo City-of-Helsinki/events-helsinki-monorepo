@@ -17,11 +17,7 @@ const ResultsInfoContainer: React.FC<{
   }
 
   if (resultsCount < 5) {
-    return (
-      <ResultsInfo
-        bigText={t(`searchNotification.fewResultsTitlenoResultsTitle`)}
-      />
-    );
+    return <ResultsInfo bigText={t(`searchNotification.fewResultsTitle`)} />;
   }
 
   return null;

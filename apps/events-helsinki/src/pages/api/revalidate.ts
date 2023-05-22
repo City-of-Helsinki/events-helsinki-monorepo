@@ -14,7 +14,14 @@ export default async function handler(
   }
 
   const errors: string[] = [];
+  const mainPages = ['/en', '/fi', '/sv'];
   try {
+    // main pages
+    for (const page of mainPages) {
+      const ret = await _revalidate(res, page);
+      if (ret) errors.push(ret);
+    }
+
     // get all articles
     const articlePageInfos = await getAllArticles(eventsApolloClient);
     for (const pageInfo of articlePageInfos) {

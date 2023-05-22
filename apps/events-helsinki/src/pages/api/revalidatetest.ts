@@ -1,15 +1,49 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-// import { getAllArticles, getAllPages } from '@events-helsinki/components';
-import type { NextApiRequest, NextApiResponse } from 'next';
-// import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
-import { staticGenerationLogger } from '../../logger';
+
+import type { NextApiResponse } from 'next';
+
+const CMS_GRAPHQL_ENDPOINT =
+  'https://events-graphql-federation-events.test.hel.ninja/';
 
 export const config = {
   runtime: 'edge', // edge | nodejs
 };
 
+const getNodeUri = (resultSet: any) =>
+  resultSet.edges.map((edge: any) => edge.node.uri);
+
+async function getArticlesAndPages() {
+  const body = {
+    query:
+      'query revalidate($first: Int) {\n  posts(first: $first) {\n    edges {\n      node {\n        uri\n      }\n    }\n  }\n  pages(first: $first) {\n    edges {\n      node {\n        uri\n      }\n    }\n  }\n}',
+    variables: {
+      first: 100,
+    },
+    operationName: 'revalidate',
+  };
+
+  return await fetch(CMS_GRAPHQL_ENDPOINT, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow',
+    body: JSON.stringify(body),
+  })
+    .then((response: Response) => {
+      return response.json();
+    })
+    .then((json: any) => {
+      return {
+        articles: getNodeUri(json.data.posts),
+        pages: getNodeUri(json.data.pages),
+      };
+    });
+}
+
 // https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream#convert_async_iterator_to_stream
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function iteratorToStream(iterator: any) {
   return new ReadableStream({
     async pull(controller) {
@@ -24,71 +58,35 @@ function iteratorToStream(iterator: any) {
   });
 }
 
-function sleep(time: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
-}
-
 const encoder = new TextEncoder();
 
-async function* makeIterator() {
-  yield encoder.encode('<p>One</p>');
-  await sleep(2000);
-  yield encoder.encode('<p>Two</p>');
-  await sleep(2000);
-  yield encoder.encode('<p>Three</p>');
-  await sleep(2000);
-  yield encoder.encode('<p>Four</p>');
+async function* makeIterator(response: NextApiResponse, staticPaths: string[]) {
+  // const errors = [];
+  for (const uri of staticPaths) {
+    await _revalidate(response, uri);
+    // if (ret) errors.push(ret);
+    yield encoder.encode(`<p>${uri}</p>`);
+  }
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const iterator = makeIterator();
+export default async function handler(response: NextApiResponse) {
+  const { articles, pages } = await getArticlesAndPages();
+  const iterator = makeIterator(response, [...articles, ...pages]);
   const stream = iteratorToStream(iterator);
   return new Response(stream);
-
-  // const errors: string[] = [];
-  // try {
-  //   // get all articles
-  //   const articlePageInfos = await getAllArticles(eventsApolloClient);
-  //   for (const pageInfo of articlePageInfos) {
-  //     const ret = await _revalidate(res, pageInfo.uri);
-  //     if (ret) errors.push(ret);
-  //   }
-
-  //   // get all pages
-  //   const pagePageInfos = await getAllPages(eventsApolloClient);
-  //   for (const pageInfo of pagePageInfos) {
-  //     const ret = await _revalidate(res, pageInfo.uri);
-  //     if (ret) errors.push(ret);
-  //   }
-
-  //   // errors during revalidation
-  //   if (errors?.length > 0)
-  //     return res.status(404).json({ revalidated: false, errors });
-
-  //   return res.status(200).json({ revalidated: true });
-  // } catch (err) {
-  //   // If there was an error, Next.js will continue
-  //   // to show the last successfully generated page
-  //   return res.status(500).send('Error revalidating');
-  // }
 }
 
-// // revalidate a page
-// // return the uri if revalidation failed
-// async function _revalidate(res: NextApiResponse, uri: string) {
-//   try {
-//     const _uri = uri.replace(/\/$/, '');
-//     if (_uri.length < 1) return null;
+// revalidate a page
+// return the uri if revalidation failed
+async function _revalidate(response: NextApiResponse, uri: string) {
+  try {
+    const _uri = uri.replace(/\/$/, '');
+    if (_uri.length < 1) return null;
 
-//     await res.revalidate(_uri);
-//   } catch (err) {
-//     staticGenerationLogger.error(`Error while revalidate a page: ${uri}`, err);
-//     return uri;
-//   }
-//   return null;
-// }
+    await response.revalidate(_uri);
+  } catch (err) {
+    // staticGenerationLogger.error(`Error while revalidate a page: ${uri}`, err);
+    return uri;
+  }
+  return null;
+}

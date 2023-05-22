@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.3.0...sports-helsinki-v1.4.0) (2023-05-22)
+
+
+### Features
+
+* **sports:** Add permanent redirects for campaign URLs ([70f19a5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/70f19a5e09ba4f17f2869c249efeecc796466096))
+
 ## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.2.1...sports-helsinki-v1.3.0) (2023-05-22)
 
 

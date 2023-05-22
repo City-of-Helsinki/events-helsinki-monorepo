@@ -1,5 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { getAllArticles, getAllPages } from '@events-helsinki/components';
+import {
+  getAllArticles,
+  getAllPages,
+  APP_LANGUAGES,
+} from '@events-helsinki/components';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import { staticGenerationLogger } from '../../logger';
@@ -13,11 +17,10 @@ export default async function handler(
     return res.status(401).json({ message: 'Invalid token' });
   }
 
-  const mainPages = ['/en', '/fi', '/sv'];
   try {
     // main pages
-    for (const page of mainPages) {
-      _revalidate(res, page);
+    for (const page of APP_LANGUAGES) {
+      _revalidate(res, '/' + page);
     }
 
     // get all articles

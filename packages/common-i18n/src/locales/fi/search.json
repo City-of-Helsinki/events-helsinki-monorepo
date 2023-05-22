@@ -6,13 +6,10 @@
   "errorLoadMore": "Tapahtumien lataaminen epäonnistui",
   "buttonLoadMore": "Näytä lisää ({{count}})",
   "searchNotification": {
-    "noResultsTitle": "Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta",
-    "noResultsTitleVenue": "Ei löytynyt yhtään paikkoja",
-    "noResultsTitleGeneral": "Ei löytynyt yhtään tapahtumia",
-    "noResultsTitleCourse": "Ei löytynyt yhtään harrastuksia",
-    "noResultsText": "Valitsemillasi hakuehdoilla ei löytynyt harrastuksia. Kokeile muuttaa hakuehtoja tai siirry tapahtumien hakuun.",
+    "noResultsTitleVenue": "Valitsemillasi hakuehdoilla ei löytynyt yhtään paikkaa.",
+    "noResultsTitleGeneral": "Valitsemillasi hakuehdoilla ei löytynyt yhtään tapahtumaa.",
+    "noResultsTitleCourse": "Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta.",
     "fewResultsTitle": "Valitsemillasi hakuehdoilla löytyi vain vähän hakutuloksia.",
-    "fewResultsText": "Valitsemillasi hakuehdoilla löytyi vain vähän harrastuksia. Kokeile muuttaa hakuehtoja tai siirry tapahtumien hakuun.",
     "changeLanguageText": "Kokeile muuttaa hakuehtoja tai etsi suomen kielellä.",
     "buttons": {
       "labelSearchOtherEventType": "Siirry hakemaan tapahtumia",

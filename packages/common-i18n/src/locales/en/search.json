@@ -51,13 +51,10 @@
   "textFoundEvents": "{{count}} search results",
   "buttonLoadMore": "Show more ({{count}})",
   "searchNotification": {
-    "noResultsTitle": "Sorry, no search results were found for the search criteria you selected.",
-    "noResultsTitleVenue": "Sorry, no venues were found for the search criteria you selected",
-    "noResultsTitleGeneral": "Sorry, no events were found for the search criteria you selected",
-    "noResultsTitleCourse": "Sorry, no hobbies were found for the search criteria you selected",
-    "noResultsText": "No search results were found for the search criteria you selected. Try to change search terms or change to event search.",
+    "noResultsTitleVenue": "No places were found with the selected search criteria.",
+    "noResultsTitleGeneral": "No events were found for the search criteria you selected.",
+    "noResultsTitleCourse": "No hobbies were found for the search criteria you selected.",
     "fewResultsTitle": "Your search terms returned only a few results.",
-    "fewResultsText": "Your search terms returned only a few results. Try to change search terms or change to event search.",
     "changeLanguageText": "Please change your search terms or display results in Finnish. You could also switch to an Events search.",
     "buttons": {
       "labelSearchOtherEventType": "Switch to an Events search",

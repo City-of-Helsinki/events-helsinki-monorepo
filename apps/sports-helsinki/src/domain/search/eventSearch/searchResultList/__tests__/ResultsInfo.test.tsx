@@ -4,18 +4,18 @@ import { render, screen } from '@/test-utils';
 import ResultsInfo from '../ResultsInfo';
 
 it('events with 0 results matches snapshot for no results', () => {
-  const { container } = render(<ResultsInfo resultsCount={0} />);
+  const { container } = render(
+    <ResultsInfo itemType="Venue" resultsCount={0} />
+  );
 
   expect(container).toMatchSnapshot();
 });
 
 it('renders no events found text', async () => {
-  render(<ResultsInfo resultsCount={0} />);
+  render(<ResultsInfo itemType="Venue" resultsCount={0} />);
 
   expect(
-    screen.getByText(
-      'Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta'
-    )
+    screen.getByText('Valitsemillasi hakuehdoilla ei löytynyt yhtään paikkaa.')
   ).toBeInTheDocument();
 });
 

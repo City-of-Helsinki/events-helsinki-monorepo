@@ -8,6 +8,11 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import { staticGenerationLogger } from '../../logger';
 
+// remove duplicates from array
+function uniqBySetWithArrayFrom<T>(array: T[]): T[] {
+  return Array.from(new Set(array));
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -24,22 +29,20 @@ export default async function handler(
 
   try {
     if (customUri === '') {
-      // main pages
-      for (const page of APP_LANGUAGES) {
-        _revalidate(res, '/' + page);
+      // get all articles and pages
+      const pages = [
+        ...(await getAllArticles(eventsApolloClient)),
+        ...(await getAllPages(eventsApolloClient)),
+      ].map((pageInfo) => {
+        return pageInfo.uri.replace(/\/$/, '');
+      });
+
+      // root pages
+      for (const lng of APP_LANGUAGES) {
+        pages.push('/' + lng);
       }
 
-      // get all articles
-      const articlePageInfos = await getAllArticles(eventsApolloClient);
-      for (const pageInfo of articlePageInfos) {
-        _revalidate(res, pageInfo.uri);
-      }
-
-      // get all pages
-      const pagePageInfos = await getAllPages(eventsApolloClient);
-      for (const pageInfo of pagePageInfos) {
-        _revalidate(res, pageInfo.uri);
-      }
+      _revalidateAll(res, pages);
     } else {
       _revalidate(res, customUri);
     }
@@ -48,6 +51,13 @@ export default async function handler(
     // If there was an error, Next.js will continue
     // to show the last successfully generated page
     return res.status(500).send('Error revalidating');
+  }
+}
+
+// revalidate all pages one by one
+async function _revalidateAll(res: NextApiResponse, pages: string[]) {
+  for (const page of uniqBySetWithArrayFrom(pages)) {
+    await _revalidate(res, page);
   }
 }
 

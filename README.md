@@ -250,10 +250,10 @@ Static pages are not revalidated automatic due issues on production. It can be d
 
 ### 4.1 Trigger revalidate all
 
-Trigger revalidation requires secret token value on POST body.
+Trigger revalidation requires secret token value on POST body. Correct secret token value found from keyvault.
 
 ```bash
-curl -k -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: application/json" -d '{"secret":"secretrevalidationtoken"}'
+curl -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: application/json" -d '{"secret":"secretrevalidationtoken"}'
 ```
 
 ### 4.2 Trigger revalidate for the uri
@@ -261,7 +261,7 @@ curl -k -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Typ
 Optinally it is possible revalidate one selected uri. Uri have to be exactly correct.
 
 ```bash
-curl -k -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: application/json" -d '{"secret": "secretrevalidationtoken", "uri": "/fi"}'
+curl -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: application/json" -d '{"secret": "secretrevalidationtoken", "uri": "/fi"}'
 ```
 
 ## 5. Quality

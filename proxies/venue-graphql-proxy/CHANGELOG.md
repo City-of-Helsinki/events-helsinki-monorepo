@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.0.0...venue-graphql-proxy-v1.0.1) (2023-05-24)
+
+
+### Bug Fixes
+
+* **venue-proxy:** Rename Connection type in venue-subgraph to VenueConnection ([14dbf3f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/14dbf3f7a821e822ad35ff6fab061d8c8570e624))
+
 ## [1.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v0.2.0...venue-graphql-proxy-v1.0.0) (2023-04-13)
 
 

@@ -1,4 +1,4 @@
-import { Hero } from '@events-helsinki/components';
+import { HeroComponent } from '@events-helsinki/components';
 import React from 'react';
 import type { PageContentLayoutProps } from 'react-helsinki-headless-cms';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
@@ -36,7 +36,7 @@ export function LandingPageContentLayout({
             >
               <ContentContainer>
                 {heroLink && heroLink.length > 0 && (
-                  <Hero
+                  <HeroComponent
                     title={title ?? ''}
                     description={description ?? ''}
                     cta={{

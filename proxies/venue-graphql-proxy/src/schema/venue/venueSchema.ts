@@ -66,7 +66,7 @@ const createVenueSchema = (haukiEnabled = true) => gql`
     sentences: [String]
   }
 
-  type Connection {
+  type VenueConnection {
     sectionType: String
     name: String
     phone: String
@@ -91,7 +91,7 @@ const createVenueSchema = (haukiEnabled = true) => gql`
     ontologyTree: [Ontology]!
     ontologyWords: [Ontology]!
     accessibilitySentences: [AccessibilitySentences]!
-    connections: [Connection]!
+    connections: [VenueConnection]!
   }
 `;
 

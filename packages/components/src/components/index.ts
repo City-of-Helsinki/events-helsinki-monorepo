@@ -10,7 +10,7 @@ export { default as EventsCookieConsent } from './eventsCookieConsent/EventsCook
 export { default as EventsOrderBySelect } from './orderBySelect/EventsOrderBySelect';
 export * from './filterButton';
 export { default as FooterSection } from './footer/Footer';
-export { default as Hero } from './hero/Hero';
+export { default as HeroComponent } from './hero/HeroComponent';
 export { default as HeroImage } from './hero/HeroImage';
 export { default as IconButton } from './iconButton/IconButton';
 export { default as InfoWithIcon } from './infoWithIcon/InfoWithIcon';

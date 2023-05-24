@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.2.1...federation-router-v1.2.2) (2023-05-24)
+
+
+### Bug Fixes
+
+* Venue info connections reading ([48e5e7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48e5e7c6f37e22ee5026898310c75cb5806eeb45))
+
 ## [1.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.2.0...federation-router-v1.2.1) (2023-05-16)
 
 

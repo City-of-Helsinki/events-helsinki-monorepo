@@ -102,6 +102,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
       const landingPage = landingPageData.landingPage;
 
+      // eslint-disable-next-line no-console
+      console.debug(
+        'pages/index.tsx',
+        'getStaticProps',
+        'getHobbiesStaticProps',
+        'Revalidating the front page'
+      );
       return {
         props: {
           ...(await serverSideTranslationsWithCommon(language, [

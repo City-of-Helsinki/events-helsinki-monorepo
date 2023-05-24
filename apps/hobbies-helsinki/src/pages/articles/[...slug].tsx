@@ -140,12 +140,20 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         } = await getProps(context);
 
         if (!article) {
+          // eslint-disable-next-line no-console
+          console.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
-
+        // eslint-disable-next-line no-console
+        console.debug(
+          'pages/articles/[..slug].tsx',
+          'getStaticProps',
+          'getHobbiesStaticProps',
+          `Revalidating ${article.uri}.`
+        );
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),

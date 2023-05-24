@@ -128,12 +128,20 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           apolloClient,
         } = await getProps(context);
         if (!page) {
+          // eslint-disable-next-line no-console
+          console.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
-
+        // eslint-disable-next-line no-console
+        console.debug(
+          'pages/pages/[..slug].tsx',
+          'getStaticProps',
+          'getSportsStaticProps',
+          `Revalidating ${page.uri}.`
+        );
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),

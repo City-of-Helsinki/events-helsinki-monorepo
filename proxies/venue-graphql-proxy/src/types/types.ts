@@ -32,8 +32,8 @@ export type AccessibilitySentences = {
   sentences?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
-export type Connection = {
-  __typename?: 'Connection';
+export type VenueConnection = {
+  __typename?: 'VenueConnection';
   name?: Maybe<Scalars['String']>;
   sectionType?: Maybe<Scalars['String']>;
 };
@@ -169,7 +169,7 @@ export type Venue = {
   __typename?: 'Venue';
   accessibilitySentences: Array<Maybe<AccessibilitySentences>>;
   addressLocality?: Maybe<Scalars['String']>;
-  connections: Array<Maybe<Connection>>;
+  connections: Array<Maybe<VenueConnection>>;
   dataSource?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;

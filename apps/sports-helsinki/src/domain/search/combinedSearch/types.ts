@@ -1,7 +1,6 @@
 import type {
   EventListQuery,
   EventListQueryVariables,
-  QueryUnifiedSearchArgs,
   SearchListQueryVariables,
   UnifiedSearchVenue,
 } from '@events-helsinki/components';
@@ -67,6 +66,8 @@ export type EventSearchParams = Pick<
   EventListQueryVariables,
   | 'text'
   | 'allOngoingAnd'
+  | 'allOngoing'
+  | 'localOngoingAnd'
   | 'start'
   | 'end'
   | 'include'

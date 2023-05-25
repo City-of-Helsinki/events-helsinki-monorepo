@@ -1,4 +1,8 @@
 import { EventTypeId } from '@events-helsinki/components/types';
+import {
+  SPORT_COURSES_KEYWORDS,
+  sportsCategoryData,
+} from '../../eventSearch/constants';
 import { initialEventSearchAdapterValues } from '../constants';
 import type {
   CombinedSearchAdapter,
@@ -13,6 +17,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
    */
   text: EventSearchParams['text'];
   allOngoingAnd: EventSearchParams['allOngoingAnd'];
+  allOngoing: EventSearchParams['allOngoing'];
   start: EventSearchParams['start'];
   end: EventSearchParams['end'];
   include: EventSearchParams['include'];
@@ -42,9 +47,14 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     Object.assign(this, initialEventSearchAdapterValues, { eventType });
 
     // NOTE: The text-parameter is now used instead of allOngoingAnd, which was used earlier. There should be more results this way.
-    this.text = input.text ?? null;
-    // this.allOngoingAnd = [input.text] ?? null;
-    this.keywordAnd = this.getKeywords(input);
+    // this.text = input.text ?? null;
+    this.allOngoingAnd = input.text
+      ? [input.text]
+      : initialEventSearchAdapterValues.allOngoingAnd;
+    if (!input.text) this.allOngoing = !input.text; // If there is not free text given, we should still search ongoing events
+    this.keywordAnd = [];
+    this.keywordOrSet1 = SPORT_COURSES_KEYWORDS;
+    this.keywordOrSet2 = this.getSportsKeywords(input);
     this.sort =
       (eventType === EventTypeId.General
         ? input.eventOrderBy
@@ -53,8 +63,14 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
       input.organization ?? initialEventSearchAdapterValues.publisher;
   }
 
-  private getKeywords({ keywords }: CombinedSearchAdapterInput) {
-    return [...new Set([...keywords])];
+  public getSportsKeywords({ sportsCategories }: CombinedSearchAdapterInput) {
+    return [
+      ...new Set( // unique keywords
+        sportsCategories.flatMap(
+          (category) => sportsCategoryData?.[category].keywords ?? []
+        )
+      ),
+    ];
   }
 
   public getQueryVariables(): EventSearchParams {

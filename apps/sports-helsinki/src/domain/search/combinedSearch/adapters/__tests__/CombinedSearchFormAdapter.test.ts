@@ -80,11 +80,10 @@ describe('CombinedSearchFormAdapter', () => {
       [
         'event',
         {
-          text: outputQuery.text,
           keywordAnd: outputQuery.keywords,
           sort: outputQuery.eventOrderBy ?? null,
           eventType: EventTypeId.General,
-          allOngoingAnd: null,
+          allOngoingAnd: [outputQuery.text],
           start: 'now',
           end: '',
           keywordNot: [],

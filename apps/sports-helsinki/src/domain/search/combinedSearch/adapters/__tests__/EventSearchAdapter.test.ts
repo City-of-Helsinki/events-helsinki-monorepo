@@ -19,8 +19,7 @@ describe('EventSearchAdapter', () => {
         const adapter = new EventSearchAdapter(input, eventType);
         expect(adapter.getQueryVariables()).toStrictEqual({
           eventType,
-          text: input.text,
-          allOngoingAnd: null,
+          allOngoingAnd: [input.text],
           start: 'now',
           end: '',
           keywordAnd: input.keywords,

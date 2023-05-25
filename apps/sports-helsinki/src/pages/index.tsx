@@ -8,6 +8,7 @@ import {
   FooterSection,
   getLanguageOrDefault,
 } from '@events-helsinki/components';
+import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
@@ -102,8 +103,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       }
       const page = pageData.pageByTemplate;
       const landingPage = landingPageData.landingPage;
-      // eslint-disable-next-line no-console
-      console.debug(
+      logger.info(
         'pages/index.tsx',
         'getStaticProps',
         'getSportsStaticProps',
@@ -120,8 +120,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         },
       };
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(
+      logger.error(
         'An error occured in the getStaticProps of the Next-js Index-page!',
         'Tried to fetch the front page and the landing page from the Headless CMS, but an error occured!!',
         e

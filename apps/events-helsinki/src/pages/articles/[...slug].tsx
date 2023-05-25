@@ -12,7 +12,7 @@ import {
   useAppEventsTranslation,
 } from '@events-helsinki/components';
 import type { AppLanguage } from '@events-helsinki/components';
-
+import { logger } from '@events-helsinki/components/loggers/logger';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -142,15 +142,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         } = await getProps(context);
 
         if (!article) {
-          // eslint-disable-next-line no-console
-          console.warn(`Not found ${context.params?.slug}`);
+          logger.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
-        // eslint-disable-next-line no-console
-        console.debug(
+        logger.info(
           'pages/articles/[..slug].tsx',
           'getStaticProps',
           'getEventsStaticProps',
@@ -167,8 +165,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           revalidate: AppConfig.defaultRevalidate,
         };
       } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error('Error while generating content page', e);
+        logger.error('Error while generating content page', e);
         return {
           props: {
             error: {

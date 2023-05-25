@@ -72,11 +72,13 @@ const EventsCookieConsent: React.FC<Props> = ({
       optionalCookies: {
         groups: [
           {
-            title: t('consent:groups.optional.title'),
-            text: t('consent:groups.optional.text'),
-            expandAriaLabel: t('consent:groups.optional.expandAriaLabel'),
+            title: t('consent:groups.optionalServiceMap.title'),
+            text: t('consent:groups.optionalServiceMap.text'),
+            expandAriaLabel: t(
+              'consent:groups.optionalServiceMap.expandAriaLabel'
+            ),
             checkboxAriaDescription: t(
-              'consent:groups.optional.checkboxAriaDescription'
+              'consent:groups.optionalServiceMap.checkboxAriaDescription'
             ),
             cookies: [
               {
@@ -100,6 +102,16 @@ const EventsCookieConsent: React.FC<Props> = ({
                 description: t('consent:cookies.servicemap_ga'),
                 expiration: t('consent:expiration.session'),
               },
+            ],
+          },
+          {
+            title: t('consent:groups.optionalMatomo.title'),
+            text: t('consent:groups.optionalMatomo.text'),
+            expandAriaLabel: t('consent:groups.optionalMatomo.expandAriaLabel'),
+            checkboxAriaDescription: t(
+              'consent:groups.optionalMatomo.checkboxAriaDescription'
+            ),
+            cookies: [
               {
                 id: 'matomo',
                 name: '_pk*',

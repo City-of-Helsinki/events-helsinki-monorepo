@@ -1,10 +1,16 @@
 {
   "groups": {
-    "optional": {
-      "title": "Service map and Matomo cookies",
-      "text": "This is Service map and Matomo cookies for the website",
-      "expandAriaLabel": "Show cookie information related to the Service Map and Matomo",
-      "checkboxAriaDescription": "Cookies are used to display the Service Map of the Helsinki Metropolitan Area and Matomo analytics"
+    "optionalServiceMap": {
+      "title": "Servicekarta",
+      "text": "Huvudstadsregionens servicekarta hjälper användaren att hitta evenemang på kartan.",
+      "expandAriaLabel": "Visa information om servicekartans kakor",
+      "checkboxAriaDescription": "Kakor används för att visa huvudstadstadsregionens servicekarta."
+    },
+    "optionalMatomo": {
+      "title": "Servicekarta",
+      "text": "Huvudstadsregionens servicekarta hjälper användaren att hitta evenemang på kartan.",
+      "expandAriaLabel": "Visa information om servicekartans kakor",
+      "checkboxAriaDescription": "Kakor används för att visa huvudstadstadsregionens servicekarta."
     }
   },
   "cookies": {

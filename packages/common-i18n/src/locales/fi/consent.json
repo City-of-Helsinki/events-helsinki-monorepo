@@ -1,10 +1,16 @@
 {
   "groups": {
-    "optional": {
-      "title": "Service map and Matomo cookies",
-      "text": "This is Service map and Matomo cookies for the website",
-      "expandAriaLabel": "Show cookie information related to the Service Map and Matomo",
-      "checkboxAriaDescription": "Cookies are used to display the Service Map of the Helsinki Metropolitan Area and Matomo analytics"
+    "optionalServiceMap": {
+      "title": "Palvelukartta",
+      "text": "Pääkaupunkiseudun palvelukartta auttaa käyttäjää etsimään tapahtuman kartalta",
+      "expandAriaLabel": "Näytä palvelukarttaan liittyvien evästeiden tiedot",
+      "checkboxAriaDescription": "Evästeitä käytetään Pääkaupunkiseudun palvelukartan näyttämiseen"
+    },
+    "optionalMatomo": {
+      "title": "Matomo",
+      "text": "Matomo Analytics-programvaran används för att spåra och utveckla webbplatsen för att möta användarnas behov.",
+      "expandAriaLabel": "Visa information om kakor som är relaterade till Matomo.",
+      "checkboxAriaDescription": "Matomo använder kakor."
     }
   },
   "cookies": {

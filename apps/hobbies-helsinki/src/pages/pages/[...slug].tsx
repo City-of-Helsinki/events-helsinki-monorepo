@@ -10,6 +10,7 @@ import {
   FooterSection,
   getLanguageOrDefault,
 } from '@events-helsinki/components';
+import { logger } from '@events-helsinki/components/loggers/logger';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -128,15 +129,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           apolloClient,
         } = await getProps(context);
         if (!page) {
-          // eslint-disable-next-line no-console
-          console.warn(`Not found ${context.params?.slug}`);
+          logger.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
-        // eslint-disable-next-line no-console
-        console.debug(
+        logger.info(
           'pages/pages/[..slug].tsx',
           'getStaticProps',
           'getHobbiesStaticProps',

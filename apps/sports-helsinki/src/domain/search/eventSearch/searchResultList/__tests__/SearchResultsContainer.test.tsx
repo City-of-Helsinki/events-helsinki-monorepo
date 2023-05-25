@@ -4,7 +4,7 @@ import { render, screen } from '@/test-utils';
 import SearchResultsContainer from '../SearchResultsContainer';
 
 it.each<[number, string]>([
-  [0, 'Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta'],
+  [0, 'Valitsemillasi hakuehdoilla ei löytynyt yhtään paikkaa.'],
   [1, 'Valitsemillasi hakuehdoilla löytyi vain vähän hakutuloksia.'],
   [4, 'Valitsemillasi hakuehdoilla löytyi vain vähän hakutuloksia.'],
 ])(
@@ -12,6 +12,7 @@ it.each<[number, string]>([
   (eventsCount, infoText) => {
     render(
       <SearchResultsContainer
+        itemType="Venue"
         eventList={<div />}
         eventsCount={eventsCount}
         loading={false}

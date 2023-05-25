@@ -10,6 +10,13 @@ $buttonWidth: 180px;
   padding: 0 !important;
 }
 
+.searchTitle {
+  font-size: var(--fontsize-heading-xl);
+  font-weight: 500;
+  margin-top: 2px;
+  margin-bottom: var(--spacing-xl);
+}
+
 .searchContainer {
   color: var(--color-primary-black);
   background-color: var(--color-theme-background);

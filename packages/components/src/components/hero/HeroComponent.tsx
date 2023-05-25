@@ -4,7 +4,7 @@ import {
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
 import Text from '../text/Text';
-import styles from './hero.module.scss';
+import styles from './heroComponent.module.scss';
 
 type Props = {
   title: string;
@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-function Hero({ title, description, cta }: Props) {
+function HeroComponent({ title, description, cta }: Props) {
   const href = useHeadlessCmsLink(cta.href);
   return (
     <div className={styles.box}>
@@ -32,4 +32,4 @@ function Hero({ title, description, cta }: Props) {
   );
 }
 
-export default Hero;
+export default HeroComponent;

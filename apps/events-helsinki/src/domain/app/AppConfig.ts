@@ -111,10 +111,6 @@ class AppConfig {
     return value;
   }
 
-  static get showEventLocationExtraInfo() {
-    return true;
-  }
-
   static get showSimilarEvents() {
     return Boolean(
       parseEnvValue(process.env.NEXT_PUBLIC_SHOW_SIMILAR_EVENTS, true)

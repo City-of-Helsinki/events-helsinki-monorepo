@@ -111,3 +111,23 @@ it('should hide map if internet event', () => {
   );
   expect(screen.queryByText(/sijainti/i)).not.toBeInTheDocument();
 });
+
+it('should show location extra info when available', () => {
+  render(
+    <EventContent
+      event={
+        {
+          ...event,
+          locationExtraInfo: { fi: 'Sisään takaovesta' },
+        } as EventFieldsFragment
+      }
+    />
+  );
+  expect(screen.getByText(/Paikan lisätiedot/i)).toBeInTheDocument();
+  expect(screen.getByText(/Sisään takaovesta/i)).toBeInTheDocument();
+});
+
+it('should not show location extra info title when location extra info not available', () => {
+  render(<EventContent event={event} />);
+  expect(screen.queryByText(/Paikan lisätiedot/i)).not.toBeInTheDocument();
+});

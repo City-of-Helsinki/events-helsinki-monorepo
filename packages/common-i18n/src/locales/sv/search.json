@@ -54,10 +54,10 @@
   "betaResultsNotificationText": "Vi arbetar med att vidareutveckla webbsidan. För tillfället innehåller tjänsten enbart hobbyer för barn och unga.",
   "buttonLoadMore": "Visa fler ({{count}})",
   "searchNotification": {
-    "noResultsTitle": "Tyvärr hittades inga resultat för de sökkriterier du valt.",
-    "noResultsText": "Tyvärr hittades inga resultat för de sökkriterier du valt. Kokeile muuttaa hakuehtoja tai siirry tapahtumien hakuun.",
-    "fewResultsTitle": "Med de sökvillkor du valde hittades bara några få resultat.",
-    "fewResultsText": "Med de sökvillkor du valde hittades bara några få resultat. Kokeile muuttaa hakuehtoja tai siirry tapahtumien hakuun.",
+    "noResultsTitleVenue": "Med de valda sökkriterierna hittades ingen plats.",
+    "noResultsTitleGeneral": "Med de valda sökkriterierna hittades inget evenemang.",
+    "noResultsTitleCourse": "Med de valda sökkriterierna hittades ingen hobby.",
+    "fewResultsTitle": "Med de valda sökkriterierna hittades endast få sökresultat.",
     "changeLanguageText": "Ändra sökvillkoren eller visa resultaten på finska. Du kan också välja att söka bland evenemang. Tillsvidare finns alla svenska hobbyer inte ännu på hemsidan.",
     "buttons": {
       "labelSearchOtherEventType": "Sök evenemang",

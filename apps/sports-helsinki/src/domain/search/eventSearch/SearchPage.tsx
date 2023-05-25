@@ -82,6 +82,7 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
           >
             {eventsList && (
               <SearchResultsContainer
+                itemType={eventType}
                 eventsCount={eventsList.meta.count}
                 loading={isLoadingEvents}
                 eventList={

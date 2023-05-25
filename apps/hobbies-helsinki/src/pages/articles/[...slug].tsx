@@ -61,6 +61,7 @@ const NextCmsArticle: NextPage<{
   return (
     <MatomoWrapper>
       <RHHCPage
+        className="article-page"
         navigation={<Navigation page={article} />}
         content={
           <RHHCPageContent
@@ -139,12 +140,20 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         } = await getProps(context);
 
         if (!article) {
+          // eslint-disable-next-line no-console
+          console.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
-
+        // eslint-disable-next-line no-console
+        console.debug(
+          'pages/articles/[..slug].tsx',
+          'getStaticProps',
+          'getHobbiesStaticProps',
+          `Revalidating ${article.uri}.`
+        );
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
@@ -182,7 +191,7 @@ const getProps = async (context: GetStaticPropsContext) => {
       id: _getURIQueryParameter(context.params?.slug as string[], language),
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
-    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but some reason why it updates only once.
+    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
   });
 
   const currentArticle = articleData.post;

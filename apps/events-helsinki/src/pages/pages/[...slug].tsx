@@ -128,12 +128,20 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           apolloClient,
         } = await getProps(context);
         if (!page) {
+          // eslint-disable-next-line no-console
+          console.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
         const language = getLanguageOrDefault(context.locale);
-
+        // eslint-disable-next-line no-console
+        console.debug(
+          'pages/pages/[..slug].tsx',
+          'getStaticProps',
+          'getEventsStaticProps',
+          `Revalidating ${page.uri}.`
+        );
         return {
           props: {
             initialApolloState: apolloClient.cache.extract(),
@@ -169,7 +177,7 @@ const getProps = async (context: GetStaticPropsContext) => {
       id: _getURIQueryParameter(context.params?.slug as string[], language),
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
-    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but some reason why it updates only once.fetchPolicy: 'no-cache',
+    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
   });
 
   const currentPage = pageData.page;

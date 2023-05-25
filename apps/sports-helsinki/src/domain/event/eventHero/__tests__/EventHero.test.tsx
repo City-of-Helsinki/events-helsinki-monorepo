@@ -47,6 +47,7 @@ const getFakeEvent = (overrides?: Partial<EventDetails>) => {
       streetAddress: { fi: streetAddress },
     },
     externalLinks: [],
+    locationExtraInfo: null,
     ...overrides,
   }) as EventFieldsFragment;
 };

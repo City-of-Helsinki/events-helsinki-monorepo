@@ -18,7 +18,6 @@ import {
   Link,
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
-import AppConfig from '../../../domain/app/AppConfig';
 
 import EventInfo from '../eventInfo/EventInfo';
 import styles from './eventContent.module.scss';
@@ -68,7 +67,7 @@ const EventContent: React.FC<Props> = ({
                     {description}
                   </HtmlToReact>
                 </div>
-                {AppConfig.showEventLocationExtraInfo && locationExtraInfo && (
+                {locationExtraInfo && (
                   <>
                     <h2 className={styles.descriptionTitle}>
                       {t('event:locationExtraInfo.title')}

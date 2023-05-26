@@ -47,9 +47,16 @@ export default async function handler(
         pages.push('/' + lng);
       }
 
-      _revalidateAll(res, pages);
+      _revalidateAll(res, pages).catch((err) => {
+        staticGenerationLogger.error(`Error during _revalidateAll`, err);
+      });
     } else {
-      _revalidate(res, customUri);
+      _revalidate(res, customUri).catch((err) => {
+        staticGenerationLogger.error(
+          `Error during _revalidate ${customUri}`,
+          err
+        );
+      });
     }
     return res.status(200).json({ revalidatetrigger: true });
   } catch (err) {

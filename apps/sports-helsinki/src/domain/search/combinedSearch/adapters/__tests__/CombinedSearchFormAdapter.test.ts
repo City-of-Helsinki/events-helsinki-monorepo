@@ -69,7 +69,6 @@ describe('CombinedSearchFormAdapter', () => {
           language: UnifiedSearchLanguage.Finnish,
           q: outputQuery.text,
           ontologyWordIds: outputQuery.keywords,
-          orderByName: { order: SortOrder.Descending },
           administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
           after: '',
           first: 10,

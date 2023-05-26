@@ -1,6 +1,7 @@
 import { SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type {
   AppLanguage,
+  OrderByDistance,
   SPORTS_CATEGORIES,
   UnifiedSearchLanguage,
 } from '@events-helsinki/components/types';
@@ -44,12 +45,22 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     ] as UnifiedSearchLanguage;
     this.q = input.text || initialVenueSearchAdapterValues.q;
     this.ontologyTreeIds = this.getOntologyTreeIds(input);
-    this.orderByName = input.venueOrderBy
-      ? SortOrder.Ascending.toLowerCase().includes(input.venueOrderBy)
-        ? { order: SortOrder.Ascending }
-        : { order: SortOrder.Descending }
-      : initialVenueSearchAdapterValues.orderByName;
-    // TODO: this.orderByDistance = null; // input.venueOrderBy ? (SortOrder.Ascending.toLowerCase().includes(input.venueOrderBy) ? {order: SortOrder.Ascending} : {order: SortOrder.Descending}) : null;
+    if (input.venueOrderBy?.includes('name')) {
+      this.orderByName = input.venueOrderBy.startsWith('-')
+        ? { order: SortOrder.Descending }
+        : { order: SortOrder.Ascending };
+    } else if (input.venueOrderBy?.includes('distance')) {
+      const [sortField, latitude, longitude] = input.venueOrderBy.split(',');
+      if (latitude && longitude) {
+        this.orderByDistance = {
+          latitude,
+          longitude,
+          order: sortField.startsWith('-')
+            ? SortOrder.Descending
+            : SortOrder.Ascending,
+        } as unknown as OrderByDistance;
+      }
+    }
   }
 
   private getOntologyTreeIds({

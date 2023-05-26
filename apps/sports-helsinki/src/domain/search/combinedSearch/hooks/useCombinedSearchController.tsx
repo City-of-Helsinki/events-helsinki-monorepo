@@ -1,5 +1,6 @@
 import useLocale from '@events-helsinki/components/hooks/useLocale';
 import { useRouter } from 'next/router';
+import type { CombinedSearchContextType } from '../adapters/CombinedSearchContext';
 import CombinedSearchFormAdapter from '../adapters/CombinedSearchFormAdapter';
 
 export function useCombinedSearchController() {
@@ -11,9 +12,11 @@ export function useCombinedSearchController() {
     locale,
     searchParams
   );
-  const updateRouteToSearchPage = () => {
+  const updateRouteToSearchPage = (
+    options: Parameters<CombinedSearchContextType['updateRouteToSearchPage']>[0]
+  ) => {
     const query = combinedSearchFormAdapter.getURLQuery();
-    (async () => await router.push({ query }))();
+    (async () => await router.push({ query }, undefined, options))();
   };
   return {
     combinedSearchFormAdapter,

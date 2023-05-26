@@ -60,7 +60,7 @@ The URL controls the whole search form, for easy maintain and also for the acces
 
 1. The URL should be updated when new filters are applied (or any of them are removed / cleared). The active filters are always shown in the UI.
 2. When another search tab is clicked, the search URL should not change from the search params.
-3. When a filter is activated, the URL should be updated. When an URL is updated, the form should also ract to that.
+3. When a filter is activated, the URL should be updated. When an URL is updated, the form should also react to that.
 
 An example of CombinedSearchAdapterInput type, that could be used as an input for the searches:
 
@@ -75,7 +75,7 @@ type CombinedSearchAdapterInput = {
 };
 ```
 
-The input URL should also be cleaned for the combined search. A conversion map can handle any needed _backward support_, but also to full fill any possible _mandatory inputs_, that should always exists there. It can also _initialize the search form_. It could convert some params to some others and initialize the form with the transformed keys and values.
+The input URL should also be cleaned for the combined search. A conversion map can handle any needed _backward support_, but also to fulfill any possible _mandatory inputs_, that should always exists there. It can also _initialize the search form_. It could convert some params to some others and initialize the form with the transformed keys and values.
 
 E.g. `/search?order_by=field` could be transformed to `/search?orderBy=field&searchType=venue`.
 
@@ -109,7 +109,7 @@ if this would be the final active implementation of the type, the [CombinedSearc
 
 1. `text` -> `q`.
 2. `sportsCategories` -> `ontologyWords` (the adapter needs to also use the mapped values, not only the keys).
-3. `orderBy` -> `orderBy`.
+3. `venueOrderBy` -> `orderBy`.
 
 ---
 
@@ -134,23 +134,23 @@ if this would be the final active implementation of the type, the [CombinedSearc
 
 #### The architecture
 
-The URL acts as an input and a search adapter picks the params that the specific search needs and maps the query params to proper parameter field names. _In this visualization, the URL params are just some examples and may not be synced with the actual implementation._
+When an URL is given as an input, a form search adapter picks the params to initialize a search form. The form values should always be in sync with the URL. The search specific adapters are used to map the form values to the actual search inputs. _In this visualization, the URL params are just some examples and may not be synced with the actual implementation._
 
 ```
-┌──────────────────────────────┐     ┌────────────────────────────┐    ┌──────────────────────────────┐
-| Input                        ├─────┤ Venue search adapter       ├────┤ Unified-Search               |
-|==============================|     |============================|    |==============================|
-| Given URL                    |     | Converted param            |    | Responds to                  |
-| e.g /search?text=football&   |     | e.g /graphql?q=football    |    | param `q`                    |
-| returnPath=/                 |     └────────────────────────────┘    └──────────────────────────────┘
+┌──────────────────────────────┐     ┌────────────────────────────┐    ┌─────────────────┐
+| Form adapter                 ├─────┤ Venue search adapter       ├────┤ Unified-Search  |
+|==============================|     |============================|    |=================|
+| Given URL as an input        |     | Converted param            |    | Responds to     |
+| e.g /search?text=football&   |     | e.g /graphql?q=football    |    | param `q`       |
+| returnPath=/                 |     └────────────────────────────┘    └─────────────────┘
 |                              |
 | Makes queries to multiple    |
-| datasources                  |     ┌────────────────────────────┐    ┌──────────────────────────────┐
-|                              |─────┤ Event search adapter       |────┤ LinkedEvents                 |
-|                              |     |============================|    |==============================|
-|                              |     | Converted param            |    | Responds to                  |
-|                              |     | e.g /graphql?text=football |    | param `text`                 |
-└──────────────────────────────┘     └────────────────────────────┘    └──────────────────────────────┘
+| datasources                  |     ┌────────────────────────────┐    ┌─────────────────┐
+|                              |─────┤ Event search adapter       |────┤ LinkedEvents    |
+|                              |     |============================|    |=================|
+|                              |     | Converted param            |    | Responds to     |
+|                              |     | e.g /graphql?text=football |    | param `text`    |
+└──────────────────────────────┘     └────────────────────────────┘    └─────────────────┘
 ```
 
 CombinedSearchPage.tsx

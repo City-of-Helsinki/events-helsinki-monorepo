@@ -244,6 +244,26 @@ To enable the support for symbolic links on Windows 10 you need to:
    administrative privileges to make sure the symbolic links are created correctly.
 5. Check that the symbolic links were created correctly (See [Symbolic links](#symbolic-links) above)
 
+## 4. Incremental Static Regeneration on-demand revalidation
+
+Static pages are not revalidated automatic due issues on production. It can be done manually via 'api/revalidate'. OpenShift environments have a cronjob to trigger revalidation.
+
+### 4.1 Trigger revalidate all
+
+Trigger revalidation requires secret token value on POST body. Correct secret token value found from keyvault.
+
+```bash
+curl -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: application/json" -d '{"secret":"secretrevalidationtoken"}'
+```
+
+### 4.2 Trigger revalidate for the uri
+
+Optinally it is possible revalidate one selected uri. Uri have to be exactly correct.
+
+```bash
+curl -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: application/json" -d '{"secret": "secretrevalidationtoken", "uri": "/fi"}'
+```
+
 ## 5. Quality
 
 ### 5.1 Linters

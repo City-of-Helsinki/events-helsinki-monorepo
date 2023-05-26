@@ -102,6 +102,12 @@ class AppConfig {
       );
     }
 
+    // no revalidation
+    // https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#on-demand-revalidation
+    if (value < 1) {
+      return false;
+    }
+
     return value;
   }
 

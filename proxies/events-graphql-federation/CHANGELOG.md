@@ -2,10 +2,9 @@
 
 ## [1.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.2.0...federation-router-v1.2.1) (2023-05-16)
 
-
 ### Bug Fixes
 
-* Updated federation schemas ([#326](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/326)) ([f81eb91](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f81eb919bbdf89204c3a50da5fced8089dbc3c74))
+- Updated federation schemas ([#326](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/326)) ([f81eb91](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f81eb919bbdf89204c3a50da5fced8089dbc3c74))
 
 ## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.1.0...federation-router-v1.2.0) (2023-03-01)
 

@@ -1,6 +1,12 @@
 {
   "groups": {
-    "servicemap": {
+    "optionalServiceMap": {
+      "title": "Servicekarta",
+      "text": "Huvudstadsregionens servicekarta hjälper användaren att hitta evenemang på kartan.",
+      "expandAriaLabel": "Visa information om servicekartans kakor",
+      "checkboxAriaDescription": "Kakor används för att visa huvudstadstadsregionens servicekarta."
+    },
+    "optionalMatomo": {
       "title": "Servicekarta",
       "text": "Huvudstadsregionens servicekarta hjälper användaren att hitta evenemang på kartan.",
       "expandAriaLabel": "Visa information om servicekartans kakor",

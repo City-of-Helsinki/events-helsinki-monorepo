@@ -59,13 +59,6 @@ const EventsCookieConsent: React.FC<Props> = ({
                 expiration: t('consent:expiration.year'),
               },
               {
-                id: 'matomo',
-                name: '_pk*',
-                hostName: 'digia.fi',
-                description: t('consent:cookies.matomo'),
-                expiration: t('consent:expiration.days', { days: 393 }),
-              },
-              {
                 id: 'i18next',
                 name: 'i18next',
                 hostName: 'api.hel.fi',
@@ -79,11 +72,13 @@ const EventsCookieConsent: React.FC<Props> = ({
       optionalCookies: {
         groups: [
           {
-            title: t('consent:groups.servicemap.title'),
-            text: t('consent:groups.servicemap.text'),
-            expandAriaLabel: t('consent:groups.servicemap.expandAriaLabel'),
+            title: t('consent:groups.optionalServiceMap.title'),
+            text: t('consent:groups.optionalServiceMap.text'),
+            expandAriaLabel: t(
+              'consent:groups.optionalServiceMap.expandAriaLabel'
+            ),
             checkboxAriaDescription: t(
-              'consent:groups.servicemap.checkboxAriaDescription'
+              'consent:groups.optionalServiceMap.checkboxAriaDescription'
             ),
             cookies: [
               {
@@ -106,6 +101,23 @@ const EventsCookieConsent: React.FC<Props> = ({
                 hostName: 'palvelukartta.hel.fi',
                 description: t('consent:cookies.servicemap_ga'),
                 expiration: t('consent:expiration.session'),
+              },
+            ],
+          },
+          {
+            title: t('consent:groups.optionalMatomo.title'),
+            text: t('consent:groups.optionalMatomo.text'),
+            expandAriaLabel: t('consent:groups.optionalMatomo.expandAriaLabel'),
+            checkboxAriaDescription: t(
+              'consent:groups.optionalMatomo.checkboxAriaDescription'
+            ),
+            cookies: [
+              {
+                id: 'matomo',
+                name: '_pk*',
+                hostName: 'digia.fi',
+                description: t('consent:cookies.matomo'),
+                expiration: t('consent:expiration.days', { days: 393 }),
               },
             ],
           },

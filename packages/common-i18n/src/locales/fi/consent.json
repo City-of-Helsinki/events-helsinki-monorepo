@@ -1,10 +1,16 @@
 {
   "groups": {
-    "servicemap": {
+    "optionalServiceMap": {
       "title": "Palvelukartta",
       "text": "Pääkaupunkiseudun palvelukartta auttaa käyttäjää etsimään tapahtuman kartalta",
       "expandAriaLabel": "Näytä palvelukarttaan liittyvien evästeiden tiedot",
       "checkboxAriaDescription": "Evästeitä käytetään Pääkaupunkiseudun palvelukartan näyttämiseen"
+    },
+    "optionalMatomo": {
+      "title": "Matomo",
+      "text": "Matomo Analytics-programvaran används för att spåra och utveckla webbplatsen för att möta användarnas behov.",
+      "expandAriaLabel": "Visa information om kakor som är relaterade till Matomo.",
+      "checkboxAriaDescription": "Matomo använder kakor."
     }
   },
   "cookies": {

@@ -22,6 +22,7 @@ export const initialCombinedSearchFormValues: CombinedSearchAdapterInput = {
   courseOrderBy: undefined,
   sportsCategories: [],
   organization: undefined,
+  place: undefined,
   keywords: [],
 };
 export const initialVenueSearchAdapterValues: VenueSearchParams = {

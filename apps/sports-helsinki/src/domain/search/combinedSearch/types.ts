@@ -56,6 +56,7 @@ export type CombinedSearchAdapterInput = {
   text: string | null;
   sportsCategories: string[];
   organization?: string | null;
+  place?: string | null;
   keywords: string[];
 } & CombinedSearchAdapterInputForVenues &
   CombinedSearchAdapterInputForEvents &

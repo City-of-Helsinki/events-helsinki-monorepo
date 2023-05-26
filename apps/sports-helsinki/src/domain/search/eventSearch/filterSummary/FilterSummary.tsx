@@ -1,20 +1,18 @@
-import type { ParsedUrlQueryInput } from 'querystring';
-import type { FilterType } from '@events-helsinki/components';
 import {
   useLocale,
-  PlaceFilter,
   PublisherFilter,
   FilterButton,
   translateValue,
+  PlaceFilter,
 } from '@events-helsinki/components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import queryString from 'query-string';
 import React from 'react';
 import { ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
-import { getSearchFilters, getSearchQuery } from '../utils';
+import { useCombinedSearchContext } from '../../../search/combinedSearch/adapters/CombinedSearchContext';
+import type { CombinedSearchAdapterInput } from '../../../search/combinedSearch/types';
 import styles from './filterSummary.module.scss';
 
 export const filterSummaryContainerTestId = 'filter-summary';
@@ -27,48 +25,43 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const { t } = useTranslation('search');
   const locale = useLocale();
   const router = useRouter();
-  const searchParams = new URLSearchParams(queryString.stringify(router.query));
+  const { formValues } = useCombinedSearchContext();
   const {
-    dateTypes,
     sportsCategories,
-    end,
-    keyword,
-    keywordNot,
-    places,
-    publisher,
-    start,
-    q,
-    eventType,
-  } = getSearchFilters(searchParams);
+    organization: publisher,
+    text: q,
+    place,
+  } = formValues;
 
-  const handleFilterRemove = (value: string | number, type: FilterType) => {
-    const getFilteredList = (listType: FilterType, list: string[] = []) =>
-      type === listType ? list.filter((v) => v !== value) : list;
+  const handleFilterRemove = (
+    type: keyof CombinedSearchAdapterInput,
+    value: string | number
+  ) => {
+    const getFilteredValue = (
+      type: keyof CombinedSearchAdapterInput,
+      value: string | number
+    ) => {
+      if (Array.isArray(formValues[type])) {
+        return (formValues[type] as string[])?.filter(
+          (entry) => (entry as string) !== (value as string)
+        );
+      }
+      return undefined;
+    };
 
-    const search = getSearchQuery({
-      dateTypes,
-      sportsCategories: getFilteredList('sportsCategory', sportsCategories),
-      eventType,
-      end: type === 'date' ? null : end,
-      keyword,
-      keywordNot,
-      places: getFilteredList('place', places),
-      publisher: type !== 'publisher' ? publisher : null,
-      start: type === 'date' ? null : start,
-      q: getFilteredList('text', q),
-      orderBy: searchParams.get('orderBy'),
-      orderDir: searchParams.get('orderDir'),
-      sort: searchParams.get('sort'),
-    });
+    const query: CombinedSearchAdapterInput = {
+      ...formValues,
+      [type]: getFilteredValue(type, value),
+    };
 
     router.push({
       pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
-      query: queryString.parse(search) as ParsedUrlQueryInput,
+      query,
     });
   };
 
   const hasFilters =
-    !!sportsCategories.length || !!publisher || !!places.length || !!q?.length;
+    !!sportsCategories.length || !!publisher || !!place || !!q?.length;
 
   if (!hasFilters) return null;
 
@@ -80,7 +73,9 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       {sportsCategories.map((sportsCategory) => (
         <FilterButton
           key={sportsCategory}
-          onRemove={handleFilterRemove}
+          onRemove={() =>
+            handleFilterRemove('sportsCategories', sportsCategory)
+          }
           text={translateValue(
             'appSports:home.sportsCategory.',
             sportsCategory,
@@ -91,11 +86,18 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         />
       ))}
       {publisher && (
-        <PublisherFilter id={publisher} onRemove={handleFilterRemove} />
+        <PublisherFilter
+          id={publisher}
+          onRemove={() => handleFilterRemove('organization', publisher)}
+        />
       )}
-      {places.map((place) => (
-        <PlaceFilter key={place} id={place} onRemove={handleFilterRemove} />
-      ))}
+      {place && (
+        <PlaceFilter
+          key={place}
+          id={place}
+          onRemove={() => handleFilterRemove('place', place)}
+        />
+      )}
 
       <button className={styles.clearButton} onClick={onClear} type="button">
         {t('buttonClearFilters')}

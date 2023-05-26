@@ -1,4 +1,6 @@
 import type { ParsedUrlQuery } from 'querystring';
+import type { UnifiedSearchOrderByType } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
+import { UnifiedSearchOrderBy } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type { AppLanguage } from '@events-helsinki/components/types';
 import { EventTypeId } from '@events-helsinki/components/types';
 import qs from 'query-string';
@@ -167,7 +169,17 @@ class CombinedSearchFormAdapter
   }
 
   public cleanVenueOrderBy() {
-    return;
+    if (
+      this.venueOrderBy &&
+      Object.values(UnifiedSearchOrderBy).includes(
+        this.venueOrderBy as UnifiedSearchOrderByType
+      )
+    ) {
+      const orderDir = this.searchParams.get('orderDir');
+      if (orderDir?.includes('desc')) {
+        this.venueOrderBy = '-' + this.venueOrderBy;
+      }
+    }
   }
 
   public cleanEventOrderBy() {
@@ -190,6 +202,10 @@ class CombinedSearchFormAdapter
     return;
   }
 
+  public cleanPlace() {
+    return;
+  }
+
   /**
    * Clean and format the values
    * so that they can be better handled with the adapters.
@@ -204,6 +220,7 @@ class CombinedSearchFormAdapter
     this.cleanSportsCategories();
     this.cleanOrganization();
     this.cleanKeywords();
+    this.cleanPlace();
   }
 }
 

@@ -28,7 +28,7 @@ describe('VenueSearchAdapter', () => {
         ontologyTreeIds: ['551'],
         openAt: null,
         orderByName: {
-          order: SortOrder.Descending,
+          order: SortOrder.Ascending,
         },
       });
     });

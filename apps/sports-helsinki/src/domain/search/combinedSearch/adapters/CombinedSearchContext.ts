@@ -1,4 +1,5 @@
 import { EventTypeId } from '@events-helsinki/components/types';
+import type { Router } from 'next/router';
 import React, { createContext } from 'react';
 import {
   initialCombinedSearchFormValues,
@@ -16,7 +17,7 @@ export type CombinedSearchContextType = {
     field: keyof CombinedSearchAdapterInput,
     value: CombinedSearchAdapterInput[keyof CombinedSearchAdapterInput]
   ) => void;
-  updateRouteToSearchPage: () => void;
+  updateRouteToSearchPage: (options?: Parameters<Router['push']>[2]) => void;
   resetFormValues: () => void;
 };
 

@@ -1,7 +1,6 @@
 import {
   UnifiedSearchOrderBy,
   useGeolocation,
-  useSetOrderByAndDirQueryParams,
 } from '@events-helsinki/components';
 import type {
   UnifiedSearchOrderByType,
@@ -11,11 +10,11 @@ import type {
   Option,
 } from '@events-helsinki/components';
 import { useCallback } from 'react';
+import { useCombinedSearchContext } from '../domain/search/combinedSearch/adapters/CombinedSearchContext';
 
 const useHandleUnifiedSearchOrderChange = () => {
-  const setOrderByAndDirQueryParams = useSetOrderByAndDirQueryParams();
   const geolocation: GeolocationContextType = useGeolocation({ skip: true });
-
+  const { setFormValues, updateRouteToSearchPage } = useCombinedSearchContext();
   return useCallback(
     async (option: Option) => {
       const [orderBy, orderDir] = option.value.split('-') as [
@@ -41,9 +40,14 @@ const useHandleUnifiedSearchOrderChange = () => {
         }
       }
 
-      return setOrderByAndDirQueryParams(orderBy, orderDir);
+      // Update the combined search form context
+      setFormValues({
+        venueOrderBy: orderDir === 'desc' ? `-${orderBy}` : orderBy,
+      });
+      // Update the URL
+      updateRouteToSearchPage({ shallow: true });
     },
-    [geolocation, setOrderByAndDirQueryParams]
+    [geolocation]
   );
 };
 

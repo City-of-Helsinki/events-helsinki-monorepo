@@ -78,7 +78,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
       sportsCategories: selectedSportsCategories,
     });
     // Update the browser URL with the form values in the context.
-    updateRouteToSearchPage();
+    updateRouteToSearchPage({ shallow: true });
     // Scroll to result list.
     scrollToResultList && scrollToResultList();
   };

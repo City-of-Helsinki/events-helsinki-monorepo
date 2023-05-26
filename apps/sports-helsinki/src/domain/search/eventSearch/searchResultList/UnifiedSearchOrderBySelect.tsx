@@ -2,7 +2,6 @@ import {
   UnifiedSearchOrderBy,
   OrderDir,
   useSearchTranslation,
-  useUnifiedSearch,
   Select,
   SmallSpinner,
   useGeolocation,
@@ -11,11 +10,12 @@ import type { GeolocationContextType } from '@events-helsinki/components';
 import type { SelectCustomTheme } from 'hds-react';
 import React from 'react';
 import useHandleUnifiedSearchOrderChange from '../../../../hooks/useHandleUnifiedSearchOrderChange';
+import { useCombinedSearchContext } from '../../combinedSearch/adapters/CombinedSearchContext';
 import styles from './unifiedSearchOrderBySelect.module.scss';
 
 const UnifiedSearchOrderBySelect: React.FC = () => {
   const { t } = useSearchTranslation();
-  const { filters } = useUnifiedSearch();
+  const { formValues } = useCombinedSearchContext();
   const geolocation: GeolocationContextType = useGeolocation({ skip: true });
   const handleUnifiedSearchOrderChange = useHandleUnifiedSearchOrderChange();
 
@@ -35,8 +35,8 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
     },
   ];
   const selectedOrderByOption = orderByOptions.find((option) => {
-    const selectedOptionValue = `${filters.orderBy ?? ''}-${
-      filters.orderDir ?? OrderDir.asc
+    const selectedOptionValue = `${formValues.venueOrderBy}-${
+      formValues.venueOrderBy?.startsWith('-') ? OrderDir.desc : OrderDir.asc
     }`;
 
     return option.value === selectedOptionValue;

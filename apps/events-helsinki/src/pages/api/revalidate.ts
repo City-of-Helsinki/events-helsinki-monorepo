@@ -19,6 +19,11 @@ export default async function handler(
 ) {
   let customUri = '';
 
+  // only POST allowed
+  if (req.method !== 'POST') {
+    return res.status(405).send('Only POST requests allowed');
+  }
+
   // Check for secret to confirm this is a valid request
   if (req.body.secret !== process.env.REVALIDATE_TOKEN) {
     return res.status(401).json({ message: 'Invalid token' });

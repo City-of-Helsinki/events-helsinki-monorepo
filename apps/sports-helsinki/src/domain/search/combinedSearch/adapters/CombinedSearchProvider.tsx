@@ -28,7 +28,10 @@ function useGetCombinedSearchContext(): UseGetCombinedSearchContextReturnType {
       [field]: value,
     });
 
-  const resetFormValues = () => setFormValues(initialCombinedSearchFormValues);
+  const resetFormValues = () => {
+    setFormValues(initialCombinedSearchFormValues);
+    updateRouteToSearchPage();
+  };
 
   return {
     combinedSearchFormAdapter,

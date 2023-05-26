@@ -15,8 +15,8 @@
   "search": {
     "searchType": {
       "Venue": "Venues",
-      "Course": "Courses",
-      "General": "General"
+      "Course": "Hobbies",
+      "General": "Events"
     },
     "buttonSearch": "Search",
     "checkboxOnlyChildrenEvents": "Show only events for children",

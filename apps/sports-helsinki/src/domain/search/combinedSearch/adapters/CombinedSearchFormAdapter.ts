@@ -46,6 +46,7 @@ class CombinedSearchFormAdapter
   courseOrderBy?: string | null;
   sportsCategories: string[];
   organization?: string | null;
+  place?: string | null;
   keywords: string[];
 
   /**
@@ -78,7 +79,14 @@ class CombinedSearchFormAdapter
       input.get('sort') ??
       initialCombinedSearchFormValues.courseOrderBy;
     this.sportsCategories = input.getAll('sportsCategories');
-    this.organization = input.get('publisher') ?? undefined;
+    this.organization =
+      input.get('organization') ??
+      input.get('publisher') ??
+      initialCombinedSearchFormValues.organization;
+    this.place =
+      input.get('place') ??
+      input.get('places') ??
+      initialCombinedSearchFormValues.place;
     this.keywords = input.getAll('keywords');
 
     // Clean the field values for adapters

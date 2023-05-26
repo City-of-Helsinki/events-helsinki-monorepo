@@ -12,6 +12,7 @@ import {
   fakeOrganization,
   fakePlace,
 } from '@/test-utils/mockDataUtils';
+import { CombinedSearchProvider } from '../../../combinedSearch/adapters/CombinedSearchProvider';
 import FilterSummary from '../FilterSummary';
 
 configure({ defaultHidden: true });
@@ -80,7 +81,7 @@ interface UrlParams {
   dateTypes: string;
   // divisions: string;
   end: string;
-  places: string;
+  place: string;
   publisher: string;
   start: string;
   text: string;
@@ -91,7 +92,7 @@ const urlParams: UrlParams = {
   dateTypes: 'today',
   // divisions: neighborhoodId,
   end: '2020-08-23',
-  places: placeId,
+  place: placeId,
   publisher: organizationId,
   start: '2020-08-20',
   text: 'jazz',
@@ -101,7 +102,7 @@ const urlParams: UrlParams = {
 
 const routes = [
   // eslint-disable-next-line max-len
-  `/haku?categories=${urlParams.categories}&dateTypes=today&end=${urlParams.end}&places=${urlParams.places}&publisher=${urlParams.publisher}&start=${urlParams.start}&text=${urlParams.text}`,
+  `/haku?categories=${urlParams.categories}&dateTypes=today&end=${urlParams.end}&place=${urlParams.place}&publisher=${urlParams.publisher}&start=${urlParams.start}&text=${urlParams.text}`,
 ];
 
 // TODO: when HDS fixes the tag id -> uncomment
@@ -120,10 +121,15 @@ const routes = [
 
 it('calls onClear callback when clear button is clicked', async () => {
   const onClear = jest.fn();
-  render(<FilterSummary onClear={onClear} />, {
-    mocks,
-    routes,
-  });
+  render(
+    <CombinedSearchProvider>
+      <FilterSummary onClear={onClear} />
+    </CombinedSearchProvider>,
+    {
+      mocks,
+      routes,
+    }
+  );
   await waitFor(() => {
     expect(screen.getByText(placeName)).toBeInTheDocument();
   });
@@ -157,7 +163,7 @@ it.todo('routes to correct url after deleting filters');
 //     //   button: `Poista suodatin: ${neighborhoodName}`,
 //     //   params: ["divisions"],
 //     // },
-//     { button: `Poista suodatin: ${placeName}`, params: ["places"] },
+//     { button: `Poista suodatin: ${placeName}`, params: ["place"] },
 //     {
 //       button: `Poista suodatin: ${organizationName}`,
 //       params: ["publisher"],

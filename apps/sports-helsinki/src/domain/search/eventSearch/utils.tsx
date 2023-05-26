@@ -132,10 +132,10 @@ const getFilterDates = ({
 
 /**
  * Get event list request filters from url parameters
+ * @deprecated since the CombinedSearchContext should be used instead.
  * @param {object} filterOptions
  * @return {object}
  */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getEventSearchVariables = ({
   include,
   language,
@@ -246,20 +246,12 @@ export const getNextPage = (meta: Meta): number | null => {
   return page ? Number(page) : null;
 };
 
-// /**
-//  * Get next page number from linkedevents response meta field
-//  * @param meta
-//  * @return {number}
-//  */
-// export const getNextPage = (meta: Meta): number | null => {
-//   if (!meta.next) return null;
-
-//   const urlParts = meta.next.split("?");
-//   const searchParams = new URLSearchParams(decodeURIComponent(urlParts[1]));
-//   const page = searchParams.get(EVENT_SEARCH_FILTERS.PAGE);
-//   return page ? Number(page) : null;
-// };
-
+/**
+ * Get an object of the search variables that can be used with a Apollo-queryhook.
+ * @deprecated since the combined search should use the CombinedSearchContext instead.
+ * @param searchParams
+ * @returns
+ */
 export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
   const endTime = searchParams.get(EVENT_SEARCH_FILTERS.END);
   const end = endTime ? new Date(endTime) : null;

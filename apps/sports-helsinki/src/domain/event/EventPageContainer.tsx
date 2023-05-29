@@ -1,17 +1,12 @@
-import { useLazyQuery } from '@apollo/client';
 import {
   LoadingSpinner,
   useLocale,
   addParamsToQueryString,
-  getEventIdFromUrl,
   isEventClosed,
-  EventDetailsDocument,
   MAIN_CONTENT_ID,
+  useSuperEventLazyLoad,
 } from '@events-helsinki/components';
-import type {
-  SuperEventResponse,
-  EventFields,
-} from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -52,46 +47,11 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
       locale
     )}`,
   });
-
-  const [superEvent, setSuperEvent] = React.useState<SuperEventResponse>({
-    data: null,
-    status: 'pending',
-  });
-
+  const { superEvent } = useSuperEventLazyLoad(event);
   const [hasSimilarEvents, setHasSimilarEvents] = useState(false);
-
-  const superEventId = getEventIdFromUrl(
-    event?.superEvent?.internalId ?? '',
-    'event'
-  );
-
-  const [superEventSearch, { data: superEventData }] = useLazyQuery(
-    EventDetailsDocument,
-    {
-      variables: {
-        id: superEventId,
-        include: ['in_language', 'keywords', 'location', 'audience'],
-      },
-    }
-  );
-  React.useEffect(() => {
-    if (superEventId) {
-      superEventSearch();
-      if (superEventData) {
-        setSuperEvent({
-          data: superEventData.eventDetails,
-          status: 'resolved',
-        });
-      }
-    } else if (event) {
-      setSuperEvent({ data: null, status: 'resolved' });
-    }
-  }, [event, superEventId, superEventData, superEventSearch]);
-
   const handleSimilarEventsLoaded = (eventsCount: number) => {
     setHasSimilarEvents(eventsCount > 0);
   };
-
   const eventClosed = !event || isEventClosed(event);
   return (
     <div className={styles.eventPageWrapper}>

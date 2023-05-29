@@ -1,6 +1,5 @@
 import {
   EventTypeId,
-  SortOrder,
   UnifiedSearchLanguage,
 } from '@events-helsinki/components/types';
 import mockRouter from 'next-router-mock';

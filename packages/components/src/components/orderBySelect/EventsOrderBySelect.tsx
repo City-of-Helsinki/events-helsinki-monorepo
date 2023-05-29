@@ -7,13 +7,17 @@ import {
 } from '../../constants/event-constants';
 import useSearchTranslation from '../../hooks/useSearchTranslation';
 import useSetSortQueryParamToOptionValue from '../../hooks/useSetSortQueryParamToOptionValue';
+import type { Option } from '../../types/types';
 import Select from '../select/Select';
 import styles from './eventsOrderBySelect.module.scss';
 
-const EventsOrderBySelect: React.FC = () => {
+const EventsOrderBySelect: React.FC<{
+  sortParameter?: string;
+  customOnChangeHandler?: (option: Option) => void;
+}> = ({ sortParameter = 'sort', customOnChangeHandler }) => {
   const { t } = useSearchTranslation();
   const router = useRouter();
-  const sort = router.query?.sort ?? DEFAULT_EVENT_SORT_OPTION;
+  const sort = router.query?.[sortParameter] ?? DEFAULT_EVENT_SORT_OPTION;
   const setSortQueryParamToOptionValue = useSetSortQueryParamToOptionValue();
 
   const orderByOptions = [
@@ -48,7 +52,7 @@ const EventsOrderBySelect: React.FC = () => {
       }
       label={t('search:orderBy.label')}
       value={selectedOrderByOption ?? defaultOption}
-      onChange={setSortQueryParamToOptionValue}
+      onChange={customOnChangeHandler ?? setSortQueryParamToOptionValue}
       options={orderByOptions}
       noOutline
       className={styles.eventsOrderBySelect}

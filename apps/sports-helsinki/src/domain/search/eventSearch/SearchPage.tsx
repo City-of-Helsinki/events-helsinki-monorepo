@@ -1,5 +1,6 @@
-import type { EventTypeId, EventListQuery } from '@events-helsinki/components';
+import type { EventListQuery, Option } from '@events-helsinki/components';
 import {
+  EventTypeId,
   EventsOrderBySelect,
   BasicMeta,
   LoadingSpinner,
@@ -10,6 +11,7 @@ import {
 import React from 'react';
 import EventList from '../../../common-events/components/eventList/EventList';
 
+import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
 import type { SearchComponentType } from '../combinedSearch/types';
 import styles from './eventSearchPage.module.scss';
 import useSearchPage from './hooks/useSearchPage';
@@ -39,12 +41,25 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
     hasNext,
   } = useSearchPage({ eventType });
 
+  const { setFormValues, updateRouteToSearchPage } = useCombinedSearchContext();
+
   const eventsList = resultList as EventListQuery['eventList'];
 
   React.useEffect(() => {
     initialPageOnLoad();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const orderByHandler = (option: Option) => {
+    // Update the combined search form context
+    // NOTE: this could also be set independently for both the event search types by checking the eventType
+    setFormValues({
+      eventOrderBy: option.value,
+      courseOrderBy: option.value,
+    });
+    // Update the URL
+    updateRouteToSearchPage({ shallow: true });
+  };
 
   return (
     <div>
@@ -96,7 +111,16 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
                     onLoadMore={handleLoadMore}
                   />
                 }
-                orderBySelectComponent={<EventsOrderBySelect />}
+                orderBySelectComponent={
+                  <EventsOrderBySelect
+                    sortParameter={
+                      eventType === EventTypeId.Course
+                        ? 'courseOrderBy'
+                        : 'eventOrderBy'
+                    }
+                    customOnChangeHandler={orderByHandler}
+                  />
+                }
               />
             )}
           </LoadingSpinner>

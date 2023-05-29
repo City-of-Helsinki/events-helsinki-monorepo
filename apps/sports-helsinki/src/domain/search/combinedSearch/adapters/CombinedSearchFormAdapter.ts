@@ -1,7 +1,10 @@
 import type { ParsedUrlQuery } from 'querystring';
 import type { UnifiedSearchOrderByType } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import { UnifiedSearchOrderBy } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
-import type { AppLanguage } from '@events-helsinki/components/types';
+import type {
+  AppLanguage,
+  Coordinates,
+} from '@events-helsinki/components/types';
 import { EventTypeId } from '@events-helsinki/components/types';
 import qs from 'query-string';
 import { initialCombinedSearchFormValues } from '../constants';
@@ -42,6 +45,7 @@ class CombinedSearchFormAdapter
    * These values can be mapped to event, course and venue queries.
    */
   language: string;
+  geolocation?: Coordinates | null;
   text: string;
   venueOrderBy?: string | null;
   eventOrderBy?: string | null;
@@ -57,13 +61,19 @@ class CombinedSearchFormAdapter
    * @param locale A locale is the current language and is needed by some of the graphql queries
    * @param input The URL search params that represents here the current page URL and the current state of the search form.
    */
-  constructor(locale: string, input: URLSearchParams) {
+  constructor(
+    locale: string,
+    input: URLSearchParams,
+    geolocation?: Coordinates | null
+  ) {
     this.searchParams = input;
 
     // Initialize the form with default values
     Object.assign(this, initialCombinedSearchFormValues);
 
     this.language = locale;
+    this.geolocation = geolocation;
+
     this.text = input.get('text') ?? input.get('q') ?? '';
     this.venueOrderBy =
       input.get('venueOrderBy') ??
@@ -146,7 +156,8 @@ class CombinedSearchFormAdapter
   public getSearchVariables(): SearchVariablesType {
     const venueSearchQueryVariables = new VenueSearchAdapter(
       this.getFormValues(),
-      this.language as AppLanguage
+      this.language as AppLanguage,
+      this.geolocation
     ).getQueryVariables();
     const eventSearchQueryVariables = new EventSearchAdapter(
       this.getFormValues(),

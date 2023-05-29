@@ -1,6 +1,7 @@
 import { SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type {
   AppLanguage,
+  Coordinates,
   OrderByDistance,
   SPORTS_CATEGORIES,
   UnifiedSearchLanguage,
@@ -36,7 +37,11 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
    * @param input The output of the CombinedSearchFormAdapter is here as an input.
    * @param locale The venue search needs a locale as a mandatory variable. This is not included in the combnined search form as a field (for now).
    */
-  constructor(input: CombinedSearchAdapterInput, locale: AppLanguage) {
+  constructor(
+    input: CombinedSearchAdapterInput,
+    locale: AppLanguage,
+    geoLocation?: Coordinates | null
+  ) {
     // Initialize the object with default values
     Object.assign(this, initialVenueSearchAdapterValues);
 
@@ -49,17 +54,14 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
       this.orderByName = input.venueOrderBy.startsWith('-')
         ? { order: SortOrder.Descending }
         : { order: SortOrder.Ascending };
-    } else if (input.venueOrderBy?.includes('distance')) {
-      const [sortField, latitude, longitude] = input.venueOrderBy.split(',');
-      if (latitude && longitude) {
-        this.orderByDistance = {
-          latitude,
-          longitude,
-          order: sortField.startsWith('-')
-            ? SortOrder.Descending
-            : SortOrder.Ascending,
-        } as unknown as OrderByDistance;
-      }
+    } else if (input.venueOrderBy?.includes('distance') && geoLocation) {
+      this.orderByDistance = {
+        latitude: geoLocation?.latitude,
+        longitude: geoLocation?.longitude,
+        order: input.venueOrderBy.startsWith('-')
+          ? SortOrder.Descending
+          : SortOrder.Ascending,
+      } as OrderByDistance;
     }
   }
 

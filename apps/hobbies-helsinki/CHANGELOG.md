@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.2.0...hobbies-helsinki-v2.3.0) (2023-06-02)
+
+
+### Features
+
+* Shared storage and on-demand site generation ([#320](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/320)) ([40ddbe5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/40ddbe50a18ff06d01f3664dae90266a5e6ec24d))
+* Sorting of selected events ([#354](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/354)) ([bade145](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bade1456ddd6476121fb9c832615e58cc2b1ac65))
+* Sports and hobbies revalidate api DEVOPS-537 ([#353](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/353)) ([f65500a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f65500a001b7693a9809c274a4b27d12ddeb9015))
+
+
+### Bug Fixes
+
+* Collection cards localization ([#351](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/351)) ([c74534e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c74534ec3b279c47628535e78079cd14ef350d2e))
+* Event details failed to handle super event  fetching ([c79fcee](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c79fcee7da586653eb6e8dd6a5feebf92062472f))
+* Venue info connections reading ([48e5e7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48e5e7c6f37e22ee5026898310c75cb5806eeb45))
+
 ## [2.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.1.1...hobbies-helsinki-v2.2.0) (2023-05-22)
 
 ### Features

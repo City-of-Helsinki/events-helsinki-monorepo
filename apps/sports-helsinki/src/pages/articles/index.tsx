@@ -223,7 +223,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     return {
       props: {
         page,
-        ...(await serverSideTranslationsWithCommon(language, ['home', 'cms'])),
+        ...(await serverSideTranslationsWithCommon(language, ['event'])),
       },
     };
   });

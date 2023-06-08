@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.2.0...events-helsinki-v1.3.0) (2023-06-08)
+
+
+### Features
+
+* Sorting of selected events ([#354](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/354)) ([bade145](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bade1456ddd6476121fb9c832615e58cc2b1ac65))
+
 ## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.1.1...events-helsinki-v1.2.0) (2023-05-30)
 
 

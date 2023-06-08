@@ -11,19 +11,21 @@ import {
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
 import {
   defaultConfig as rhhcDefaultConfig,
   ModuleItemTypeEnum,
 } from 'react-helsinki-headless-cms';
+import EventDetails from '../../../../packages/components/src/components/event/eventDetails/EventDetails';
+import type { EventDetailsProps } from '../../../../packages/components/src/components/event/eventDetails/EventDetails';
 import { ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import routerHelper from '../domain/app/routerHelper';
 import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
 import ArticleDetails from '../domain/article/articleDetails/ArticleDetails';
-import type { EventDetailsProps } from '../domain/event/eventDetails/EventDetails';
-import EventDetails from '../domain/event/eventDetails/EventDetails';
+import { getKeywordOnClickHandler } from '../domain/search/eventSearch/utils';
 import getVenueSourceId from '../domain/venue/utils/getVenueSourceId';
 import type { VenueDetailsProps } from '../domain/venue/venueDetails/VenueDetails';
 import VenueDetails from '../domain/venue/venueDetails/VenueDetails';
@@ -42,6 +44,8 @@ export default function useEventsRHHCConfig(args: {
   const { t: eventTranslation } = useEventTranslation();
   const locale = useLocale();
   const commonConfig = useCommonCmsConfig();
+  const router = useRouter();
+
   return React.useMemo(() => {
     const internalHrefOrigins = [
       APP_DOMAIN,
@@ -66,7 +70,11 @@ export default function useEventsRHHCConfig(args: {
         ),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         EventCardContent: (props: any) => (
-          <EventDetails {...(props as EventDetailsProps)} />
+          <EventDetails
+            {...(props as EventDetailsProps)}
+            // this is stupid, since this will be given new parametes before callin in event keywords.
+            clickAction={getKeywordOnClickHandler(router, 'fi', 'text', '')}
+          />
         ),
         ArticleCardContent: (props: ArticleDetailsProps) => (
           <ArticleDetails {...props} />

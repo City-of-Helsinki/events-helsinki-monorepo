@@ -1,4 +1,13 @@
-import type { EventFields } from '@events-helsinki/components';
+import classNames from 'classnames';
+import type { NextRouter } from 'next/router';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import React from 'react';
+import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
+// import { getEventUrl } from '../../search/eventSearch/utils';
+
+import type { AppLanguage } from 'types';
+import type { EventFields } from '../../../index';
 import {
   useCommonTranslation,
   getDateRangeStr,
@@ -11,22 +20,27 @@ import {
   isEventClosed,
   ArrowRightWithLoadingIndicator,
   useClickCapture,
-} from '@events-helsinki/components';
-import classNames from 'classnames';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-import { getEventUrl } from '../../search/eventSearch/utils';
+} from '../../../index';
+import type { keyWordOnClickArgs } from '../eventKeywords/EventKeywords';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import styles from './eventCard.module.scss';
 
 interface Props {
   event: EventFields;
+  getEventUrlFunction: (
+    event: EventFields,
+    router: NextRouter,
+    locale: AppLanguage
+  ) => string;
+  clickAction: (args: keyWordOnClickArgs) => void;
 }
 
-const EventCard: React.FC<Props> = ({ event }) => {
+const EventCard: React.FC<Props> = ({
+  event,
+  getEventUrlFunction,
+  clickAction,
+}) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useCommonTranslation();
   const router = useRouter();
@@ -38,7 +52,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
     locale
   );
 
-  const eventUrl = getEventUrl(event, router, locale);
+  const eventUrl = getEventUrlFunction(event, router, locale);
   const eventClosed = isEventClosed(event);
   const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 
@@ -94,6 +108,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
                   event={event}
                   showIsFree={true}
                   showKeywords={false}
+                  clickAction={clickAction}
                 />
               </div>
             </div>
@@ -125,6 +140,7 @@ const EventCard: React.FC<Props> = ({ event }) => {
                 event={event}
                 showIsFree={true}
                 showKeywords={false}
+                clickAction={clickAction}
               />
             </div>
           </BackgroundImage>

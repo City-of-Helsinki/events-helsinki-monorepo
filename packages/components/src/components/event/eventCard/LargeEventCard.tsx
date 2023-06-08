@@ -1,4 +1,17 @@
-import type { EventFields } from '@events-helsinki/components';
+import classNames from 'classnames';
+import {
+  IconCake,
+  IconCalendarClock,
+  IconLocation,
+  IconTicket,
+} from 'hds-react';
+import type { NextRouter } from 'next/router';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import React from 'react';
+import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
+import type { AppLanguage } from 'types';
+import type { EventFields } from '../../../index';
 import {
   useClickCapture,
   EnrolmentStatusLabel,
@@ -13,29 +26,30 @@ import {
   getLargeEventCardId,
   isEventClosed,
   ArrowRightWithLoadingIndicator,
-} from '@events-helsinki/components';
-import classNames from 'classnames';
-import {
-  IconCake,
-  IconCalendarClock,
-  IconLocation,
-  IconTicket,
-} from 'hds-react';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-import AppConfig from '../../app/AppConfig';
-import { getEventUrl } from '../../search/eventSearch/utils';
+} from '../../../index';
+// import { getEventUrl } from '../../search/eventSearch/utils';
+import type { keyWordOnClickArgs } from '../eventKeywords/EventKeywords';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
 import styles from './largeEventCard.module.scss';
 
 interface Props {
   event: EventFields;
+  showEnrolmentStatusInCardDetails: boolean;
+  getEventUrlFunction: (
+    event: EventFields,
+    router: NextRouter,
+    locale: AppLanguage
+  ) => string;
+  clickAction: (args: keyWordOnClickArgs) => void;
 }
 
-const LargeEventCard: React.FC<Props> = ({ event }) => {
+const LargeEventCard: React.FC<Props> = ({
+  event,
+  showEnrolmentStatusInCardDetails,
+  getEventUrlFunction,
+  clickAction,
+}) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const router = useRouter();
@@ -55,7 +69,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
 
   const eventClosed = isEventClosed(event);
 
-  const eventUrl = getEventUrl(event, router, locale);
+  const eventUrl = getEventUrlFunction(event, router, locale);
 
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
@@ -124,6 +138,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                 event={event}
                 hideKeywordsOnMobile={true}
                 showIsFree={true}
+                clickAction={clickAction}
               />
             </div>
             <div className={styles.buttonWrapper}>
@@ -134,7 +149,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                   aria-hidden="true"
                   loading={clicked}
                 />
-                {AppConfig.showEnrolmentStatusInCardDetails && (
+                {showEnrolmentStatusInCardDetails && (
                   <EventEnrolmentStatus
                     event={event}
                     className={classNames(styles.linkArrowLabel, {
@@ -156,6 +171,7 @@ const LargeEventCard: React.FC<Props> = ({ event }) => {
                 event={event}
                 hideKeywordsOnMobile={true}
                 showIsFree={true}
+                clickAction={clickAction}
               />
             </div>
           </BackgroundImage>

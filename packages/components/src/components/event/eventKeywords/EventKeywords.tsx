@@ -1,15 +1,22 @@
 /* eslint-disable sonarjs/cognitive-complexity */
+import type { NextRouter } from 'next/router';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import React from 'react';
+import type { AppLanguage, EventFieldsFragment } from '../../../index';
 import {
   KeywordTag,
   useLocale,
   DATE_TYPES,
   getEventFields,
-} from '@events-helsinki/components';
-import type { EventFieldsFragment } from '@events-helsinki/components';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { getKeywordOnClickHandler } from '../../search/eventSearch/utils';
+} from '../../../index';
+
+export type keyWordOnClickArgs = {
+  router: NextRouter;
+  locale: AppLanguage;
+  type: 'dateType' | 'isFree' | 'text';
+  value: string;
+};
 
 interface Props {
   blackOnMobile?: boolean;
@@ -20,8 +27,9 @@ interface Props {
   showKeywords?: boolean;
   showKeywordsCount?: boolean;
   withActions?: boolean;
-  test?: (jotan: string) => string;
+  clickAction: (args: keyWordOnClickArgs) => void;
 }
+
 const EventKeywords: React.FC<Props> = ({
   blackOnMobile = false,
   whiteOnly = false,
@@ -31,6 +39,7 @@ const EventKeywords: React.FC<Props> = ({
   showKeywords = true,
   showKeywordsCount,
   withActions = true,
+  clickAction,
 }) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
@@ -40,10 +49,27 @@ const EventKeywords: React.FC<Props> = ({
     locale
   );
 
-  const handleClick = (
-    type: Parameters<typeof getKeywordOnClickHandler>[2],
-    value = ''
-  ) => getKeywordOnClickHandler(router, locale, type, value);
+  // tästä tyyppi ja exportataan ylös
+  // exportti tähän
+  // const clickActionFunction = clickAction as (
+  //   router: NextRouter,
+  //   locale: unknown,
+  //   type: unknown,
+  //   value: string
+  // ) => void;
+
+  const handleClick =
+    (type: keyWordOnClickArgs['type'], value = '') =>
+    () => {
+      clickAction({
+        router,
+        locale,
+        type: type,
+        value,
+      } as keyWordOnClickArgs);
+    };
+  // ) => clickActionFunction(router, locale, type, value);
+  // ) => getKeywordOnClickHandler(router, locale, type, value);
 
   const showComponent =
     today ||

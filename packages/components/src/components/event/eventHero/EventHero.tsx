@@ -1,18 +1,3 @@
-import type {
-  EventFields,
-  SuperEventResponse,
-} from '@events-helsinki/components';
-import {
-  getEventHeroButtonText,
-  useLocale,
-  getDateRangeStr,
-  IconButton,
-  InfoWithIcon,
-  SkeletonLoader,
-  EventLocationText as LocationText,
-  getEventFields,
-  getEventPrice,
-} from '@events-helsinki/components';
 import classNames from 'classnames';
 import {
   Button,
@@ -31,19 +16,45 @@ import {
   PageSection,
   useConfig,
 } from 'react-helsinki-headless-cms';
+import type {
+  EventFields,
+  ExtractLatestReturnPathFunction,
+  ExtractLatestReturnPathReturnParams,
+  SuperEventResponse,
+} from '../../../index';
+import {
+  useLocale,
+  getDateRangeStr,
+  buttonStyles,
+  IconButton,
+  InfoWithIcon,
+  SkeletonLoader,
+  EventLocationText as LocationText,
+  getEventFields,
+  getEventPrice,
+  EventKeywords,
+} from '../../../index';
+// import AppConfig from '../../app/AppConfig';
 
-import EventKeywords from '../eventKeywords/EventKeywords';
+// import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
-import type { ReturnParams } from '../eventQueryString.util';
-import { extractLatestReturnPath } from '../eventQueryString.util';
+// import type { ReturnParams } from '../eventQueryString.util';
+// import { extractLatestReturnPath } from '../eventQueryString.util';
 import styles from './eventHero.module.scss';
 
 export interface Props {
   event: EventFields;
   superEvent?: SuperEventResponse;
+  appConfig: unknown;
+  extractLatestReturnPath: ExtractLatestReturnPathFunction;
 }
 
-const EventHero: React.FC<Props> = ({ event, superEvent }) => {
+const EventHero: React.FC<Props> = ({
+  event,
+  superEvent,
+  appConfig,
+  extractLatestReturnPath,
+}) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const { fallbackImageUrls } = useConfig();
@@ -64,12 +75,13 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
     registrationUrl,
   } = getEventFields(event, locale);
   const eventPriceText = getEventPrice(event, locale, t('hero.offers.isFree'));
-  const buttonText = getEventHeroButtonText(event, 'button', t);
-  const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
   const showKeywords = Boolean(today || thisWeek || keywords.length);
   const returnParam = extractLatestReturnPath(search, locale);
 
-  const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
+  const goBack = ({
+    returnPath,
+    remainingQueryString = '',
+  }: ExtractLatestReturnPathReturnParams) => {
     router.push(`${returnPath}${remainingQueryString}`);
   };
 
@@ -162,13 +174,26 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                     <div className={styles.registrationButtonWrapper}>
                       <Button
                         variant="success"
-                        aria-label={buttonAriaLabelText}
+                        aria-label={t('hero.ariaLabelBuyTickets')}
                         onClick={() =>
                           window.open(registrationUrl || offerInfoUrl)
                         }
                         iconRight={<IconLinkExternal aria-hidden />}
                       >
-                        {buttonText}
+                        {t('hero.buttonBuyTickets') as string}
+                      </Button>
+                    </div>
+                  )}
+                  {registrationUrl && (
+                    <div className={styles.registrationButtonWrapper}>
+                      <Button
+                        theme={appConfig.defaultButtonTheme}
+                        variant={appConfig.defaultButtonVariant}
+                        className={buttonStyles.buttonCoatBlue}
+                        aria-label={t('hero.ariaLabelEnrol')}
+                        onClick={() => window.open(registrationUrl)}
+                      >
+                        {t('hero.buttonEnrol') as string}
                       </Button>
                     </div>
                   )}

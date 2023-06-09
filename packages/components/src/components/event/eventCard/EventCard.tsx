@@ -28,12 +28,12 @@ import styles from './eventCard.module.scss';
 
 interface Props {
   event: EventFields;
-  getEventUrlFunction: (
+  getEventUrlFunction?: (
     event: EventFields,
     router: NextRouter,
     locale: AppLanguage
   ) => string;
-  clickAction: (args: keyWordOnClickArgs) => void;
+  clickAction?: (args: keyWordOnClickArgs) => void;
 }
 
 const EventCard: React.FC<Props> = ({
@@ -52,12 +52,16 @@ const EventCard: React.FC<Props> = ({
     locale
   );
 
-  const eventUrl = getEventUrlFunction(event, router, locale);
+  const eventUrl = getEventUrlFunction
+    ? getEventUrlFunction(event, router, locale)
+    : undefined;
   const eventClosed = isEventClosed(event);
   const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 
   const goToEventPage = () => {
-    router.push(eventUrl);
+    if (eventUrl) {
+      router.push(eventUrl);
+    }
   };
 
   const { clickCaptureRef, clicked } = useClickCapture(1000);

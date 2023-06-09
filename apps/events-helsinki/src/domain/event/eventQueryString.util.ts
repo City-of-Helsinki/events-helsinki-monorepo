@@ -1,20 +1,19 @@
+import type {
+  ExtractLatestReturnPathReturnParams,
+  ExtractLatestReturnPathFunction,
+} from '@events-helsinki/components/types';
 import { ROUTES } from '../../constants';
 import routerHelper from '../app/routerHelper';
-
-export type ReturnParams = {
-  returnPath: string;
-  remainingQueryString?: string;
-};
 
 /**
  * Extracts latest return path from queryString. For example on:
  * http://localhost:3000/fi/event/kulke:53397?returnPath=%2Fevents&returnPath=%2Fevent%2Fhelsinki%3Aaf3pnza3zi
  * latest return path is in the last returnPath param on queryString : %2Fevent%2Fhelsinki%3Aaf3pnza3zi
  */
-export const extractLatestReturnPath = (
+export const extractLatestReturnPath: ExtractLatestReturnPathFunction = (
   queryString: string,
   locale: string
-): ReturnParams => {
+): ExtractLatestReturnPathReturnParams => {
   const searchParams = new URLSearchParams(queryString);
   const returnPaths = searchParams.getAll('returnPath');
   // latest path is the last item, it can be popped. If empty, defaults to /events

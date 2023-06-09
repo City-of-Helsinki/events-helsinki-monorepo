@@ -36,12 +36,12 @@ import styles from './largeEventCard.module.scss';
 interface Props {
   event: EventFields;
   showEnrolmentStatusInCardDetails: boolean;
-  getEventUrlFunction: (
+  getEventUrlFunction?: (
     event: EventFields,
     router: NextRouter,
     locale: AppLanguage
-  ) => string;
-  clickAction: (args: keyWordOnClickArgs) => void;
+  ) => string | undefined;
+  clickAction?: (args: keyWordOnClickArgs) => void;
 }
 
 const LargeEventCard: React.FC<Props> = ({
@@ -69,7 +69,9 @@ const LargeEventCard: React.FC<Props> = ({
 
   const eventClosed = isEventClosed(event);
 
-  const eventUrl = getEventUrlFunction(event, router, locale);
+  const eventUrl = getEventUrlFunction
+    ? getEventUrlFunction(event, router, locale)
+    : undefined;
 
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 

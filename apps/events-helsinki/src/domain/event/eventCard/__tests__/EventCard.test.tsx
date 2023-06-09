@@ -1,4 +1,5 @@
 import type { EventFieldsFragment } from '@events-helsinki/components';
+import { EventCard } from '@events-helsinki/components';
 import userEvent from '@testing-library/user-event';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
@@ -7,7 +8,6 @@ import React from 'react';
 import { render, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeKeywords } from '@/test-utils/mockDataUtils';
-import EventCard from '../EventCard';
 
 const keywordNames = ['Keyword 1', 'Keyword 2'];
 const keywords = fakeKeywords(
@@ -43,7 +43,14 @@ afterAll(() => {
   clear();
 });
 
-const renderComponent = () => render(<EventCard event={event} />);
+const renderComponent = () =>
+  render(
+    <EventCard
+      event={event}
+      getEventUrlFunction={undefined}
+      clickAction={undefined}
+    />
+  );
 describe('event card', () => {
   // TODO: when HDS fixes the tag id -> uncomment
   /* it('for accessibility violations', async () => {

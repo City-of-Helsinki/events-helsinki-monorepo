@@ -27,7 +27,7 @@ interface Props {
   showKeywords?: boolean;
   showKeywordsCount?: boolean;
   withActions?: boolean;
-  clickAction: (args: keyWordOnClickArgs) => void;
+  clickAction?: (args: keyWordOnClickArgs) => void;
 }
 
 const EventKeywords: React.FC<Props> = ({
@@ -61,6 +61,10 @@ const EventKeywords: React.FC<Props> = ({
   const handleClick =
     (type: keyWordOnClickArgs['type'], value = '') =>
     () => {
+      // if there is no function provided, skip!
+      if (!clickAction) {
+        return;
+      }
       clickAction({
         router,
         locale,

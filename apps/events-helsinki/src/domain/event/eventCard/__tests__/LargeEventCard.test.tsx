@@ -1,4 +1,5 @@
 import type { EventFieldsFragment } from '@events-helsinki/components';
+import { LargeEventCard } from '@events-helsinki/components';
 import userEvent from '@testing-library/user-event';
 import mockRouter from 'next-router-mock';
 import React from 'react';
@@ -6,7 +7,6 @@ import React from 'react';
 import { render, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
-import LargeEventCard from '../LargeEventCard';
 
 const renderComponent = (event: EventFieldsFragment) =>
   render(<LargeEventCard event={event} />);

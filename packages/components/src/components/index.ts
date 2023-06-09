@@ -55,3 +55,4 @@ export {
   useApolloErrorsReducer,
 } from './apolloErrorNotification/apolloErrorsReducer';
 export type { ToastableErrorActions } from './apolloErrorNotification/apolloErrorsReducer';
+export * from './event';

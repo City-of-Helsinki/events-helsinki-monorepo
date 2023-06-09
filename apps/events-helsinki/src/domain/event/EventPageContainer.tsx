@@ -5,6 +5,7 @@ import {
   isEventClosed,
   MAIN_CONTENT_ID,
   useSuperEventLazyLoad,
+  EventHero,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
@@ -13,14 +14,16 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
+import AppConfig from 'domain/app/AppConfig';
 import { ROUTES } from '../../constants';
 import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import EventClosedHero from './eventClosedHero/EventClosedHero';
 import EventContent from './eventContent/EventContent';
-import EventHero from './eventHero/EventHero';
+// import EventHero from './eventHero/EventHero';
 import styles from './eventPage.module.scss';
 import EventPageMeta from './eventPageMeta/EventPageMeta';
+import { extractLatestReturnPath } from './eventQueryString.util';
 
 const SimilarEvents = dynamic(() => import('./similarEvents/SimilarEvents'), {
   ssr: false,
@@ -65,7 +68,12 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 <EventClosedHero />
               ) : (
                 <>
-                  <EventHero event={event} superEvent={superEvent} />
+                  <EventHero
+                    event={event}
+                    superEvent={superEvent}
+                    appConfig={AppConfig}
+                    extractLatestReturnPath={extractLatestReturnPath}
+                  />
                   <EventContent
                     event={event}
                     superEvent={superEvent}

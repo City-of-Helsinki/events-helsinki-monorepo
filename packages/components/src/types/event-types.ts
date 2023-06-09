@@ -22,3 +22,13 @@ export const eventTypeToId: Record<EventType, EventTypeId> = {
 
 export const isEventTypeId = (value: unknown): value is EventTypeId =>
   Object.values(EventTypeId).includes(value as EventTypeId);
+
+export type ExtractLatestReturnPathReturnParams = {
+  returnPath: string;
+  remainingQueryString?: string;
+};
+
+export type ExtractLatestReturnPathFunction = (
+  queryString: string,
+  locale: string
+) => ExtractLatestReturnPathReturnParams;

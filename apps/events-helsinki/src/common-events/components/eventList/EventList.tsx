@@ -1,13 +1,14 @@
-import { LoadingSpinner } from '@events-helsinki/components';
+import {
+  LoadingSpinner,
+  EventCard,
+  LargeEventCard,
+} from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Button } from 'hds-react';
-import { NextRouter } from 'next/dist/client/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import BasicEventCard from '../../../../../../packages/components/src/components/event/eventCard/EventCard';
-import LargeEventCard from '../../../../../../packages/components/src/components/event/eventCard/LargeEventCard';
 import AppConfig from '../../../domain/app/AppConfig';
 import {
   getEventUrl,
@@ -16,8 +17,8 @@ import {
 import styles from './eventList.module.scss';
 
 const eventCardsMap = {
-  default: BasicEventCard,
-  large: LargeEventCard, // TODO: ADD LargeEventCard,
+  default: EventCard,
+  large: LargeEventCard,
 };
 
 interface Props {

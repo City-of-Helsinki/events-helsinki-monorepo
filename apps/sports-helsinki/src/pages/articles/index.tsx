@@ -65,6 +65,10 @@ export default function ArticleArchive({
     networkStatus,
   } = usePostsQuery({
     notifyOnNetworkStatusChange: true,
+    // does not work without fetchPolicy: 'network-only',
+    fetchPolicy: 'network-only',
+    // not sure if nextFetchPolicy is needed
+    nextFetchPolicy: 'cache-first',
     variables: {
       first: BLOCK_SIZE,
       search: debouncedSearchTerm ?? '',

@@ -203,6 +203,8 @@ class EventsFederationApolloClient {
                 };
               }
             ),
+            // works in combination with fetchPolicy: 'network-only'
+            posts: relayStylePagination(excludeArgs(['after'])),
             unifiedSearch: relayStylePagination(excludeArgs(['after'])),
           },
         },

@@ -1,15 +1,11 @@
-import {
-  getDateRangeStr,
-  useLocale,
-  getEventFields,
-} from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
 import { IconArrowRight } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
-import { getEventListLinkUrl } from '../../../search/eventSearch/utils';
+import { getDateRangeStr, useLocale, getEventFields } from '../../../../index';
+import type { EventFields, GetEventListLinkUrl } from '../../../../index';
+// import { getEventListLinkUrl } from '../../../search/eventSearch/utils';
 import styles from './eventList.module.scss';
 
 const EventList: React.FC<{
@@ -17,7 +13,14 @@ const EventList: React.FC<{
   showDate?: boolean;
   showName?: boolean;
   id: string;
-}> = ({ events, showDate = false, showName = false, id }) => {
+  getEventListLinkUrl: GetEventListLinkUrl;
+}> = ({
+  events,
+  showDate = false,
+  showName = false,
+  id,
+  getEventListLinkUrl,
+}) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();

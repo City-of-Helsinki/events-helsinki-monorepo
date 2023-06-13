@@ -1,13 +1,4 @@
 import {
-  InfoWithIcon,
-  LoadingSpinner,
-  SkeletonLoader,
-} from '@events-helsinki/components';
-import type {
-  EventFields,
-  SuperEventResponse,
-} from '@events-helsinki/components';
-import {
   IconAngleDown,
   IconAngleUp,
   IconCalendarPlus,
@@ -16,15 +7,27 @@ import {
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { useSubEvents, useSubEventsQueryVariables } from '../queryUtils';
+// import type { EventListQueryVariables } from 'react-helsinki-headless-cms/__generated__-445e2838';
+// import { useSubEventsQueryVariables } from '../queryUtils';
+import type { UseSubEvents, UseSubEventsQueryVariables } from 'types';
+import { InfoWithIcon, LoadingSpinner, SkeletonLoader } from '../../../index';
+import type { EventFields, SuperEventResponse } from '../../../index';
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
 
 const EVENTS_LIST_LIMIT = 3;
 export const subEventsListTestId = 'sub-events-list';
 export const superEventTestId = 'super-event';
-
-const SubEvents: React.FC<{ event: EventFields }> = ({ event }) => {
+export interface Props {
+  event: EventFields;
+  useSubEvents: UseSubEvents;
+  useSubEventsQueryVariables: UseSubEventsQueryVariables;
+}
+const SubEvents: React.FC<Props> = ({
+  event,
+  useSubEvents,
+  useSubEventsQueryVariables,
+}) => {
   const { t } = useTranslation('event');
   const [isListOpen, setIsListOpen] = React.useState(false);
 

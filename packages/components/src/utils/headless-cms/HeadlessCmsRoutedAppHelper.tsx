@@ -3,13 +3,14 @@ import type { NextRouter } from 'next/router';
 import queryString from 'query-string';
 import { DEFAULT_LANGUAGE } from '../../constants';
 import isAppLanguage from '../../type-guards/is-app-language';
-import type { AppLanguage } from '../../types';
+import type { AppLanguage, I18nRoute } from '../../types';
 import stringifyUrlObject from '../../utils/stringifyUrlObject';
 
-type I18nRoute = {
-  source: string;
-  locale: AppLanguage | string;
-};
+// moved to types
+// type I18nRoute = {
+//   source: string;
+//   locale: AppLanguage | string;
+// };
 
 export interface CmsRoutedApp {
   i18nRoutes: Record<string, I18nRoute[]>;

@@ -1,23 +1,5 @@
-import type {
-  EventFields,
-  KeywordOption,
-  SuperEventResponse,
-} from '@events-helsinki/components';
-import {
-  getDateArray,
-  getDomain,
-  getDateRangeStr,
-  translateValue,
-  InfoWithIcon,
-  useLocale,
-  useTabFocusStyle,
-  Visible,
-  getAudienceAgeText,
-  getEventFields,
-  getEventPrice,
-  getServiceMapUrl,
-} from '@events-helsinki/components';
 import * as Sentry from '@sentry/browser';
+import { ReactJSXElement } from '@storybook/theming/dist/ts3.9/_modules/@emotion-react-types-jsx-namespace';
 import { saveAs } from 'file-saver';
 import {
   Button,
@@ -32,11 +14,38 @@ import {
 import type { EventAttributes } from 'ics';
 import { createEvent } from 'ics';
 import { useTranslation } from 'next-i18next';
+import type { ElementType } from 'react';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
-import IconDirections from '../../../assets/icons/IconDirections';
-import AppConfig from '../../app/AppConfig';
-import { getPlainEventUrl } from '../../search/eventSearch/utils';
+// import IconDirections from '../../../assets/icons/IconDirections';
+import type {
+  AppLanguage,
+  EventFields,
+  GetOrganizationSearchUrl,
+  KeywordOption,
+  SuperEventResponse,
+  UseSubEvents,
+  UseSubEventsQueryVariables,
+  AppConfig,
+  UseOtherEventTimes,
+  GetEventListLinkUrl,
+} from '../../../index';
+import {
+  getDateArray,
+  getDomain,
+  getDateRangeStr,
+  translateValue,
+  InfoWithIcon,
+  useLocale,
+  useTabFocusStyle,
+  Visible,
+  getAudienceAgeText,
+  getEventFields,
+  getEventPrice,
+  getServiceMapUrl,
+} from '../../../index';
+// import AppConfig from '../../app/AppConfig';
+// import { getPlainEventUrl } from '../../search/eventSearch/utils';
 import styles from './eventInfo.module.scss';
 import { SubEvents, SuperEvent } from './EventsHierarchy';
 import OrganizationInfo from './OrganizationInfo';
@@ -45,9 +54,28 @@ import OtherEventTimes from './OtherEventTimes';
 interface Props {
   event: EventFields;
   superEvent?: SuperEventResponse;
+  appConfig: AppConfig;
+  getPlainEventUrl: (event: EventFields, locale: AppLanguage) => string;
+  iconDirections: ElementType;
+  getOrganizationSearchUrl: GetOrganizationSearchUrl;
+  useSubEvent: UseSubEvents;
+  useSubEventsQueryVariables: UseSubEventsQueryVariables;
+  useOtherEventTimes: UseOtherEventTimes;
+  getEventListLinkUrl: GetEventListLinkUrl;
 }
 
-const EventInfo: React.FC<Props> = ({ event, superEvent }) => {
+const EventInfo: React.FC<Props> = ({
+  event,
+  superEvent,
+  appConfig: AppConfig,
+  iconDirections: IconDirections,
+  getPlainEventUrl,
+  getOrganizationSearchUrl,
+  useSubEvent,
+  useSubEventsQueryVariables,
+  useOtherEventTimes,
+  getEventListLinkUrl,
+}) => {
   const locale = useLocale();
   const eventInfoContainer = React.useRef<HTMLDivElement | null>(null);
   useTabFocusStyle({
@@ -77,10 +105,20 @@ const EventInfo: React.FC<Props> = ({ event, superEvent }) => {
   return (
     <div className={styles.eventInfo} ref={eventInfoContainer}>
       <div className={styles.contentWrapper}>
-        <DateInfo event={event} />
+        <DateInfo event={event} getPlainEventUrl={getPlainEventUrl} />
         <SuperEvent superEvent={superEvent} />
-        <SubEvents event={event} />
-        {!isMiddleLevelEvent && <OtherEventTimes event={event} />}
+        <SubEvents
+          event={event}
+          useSubEvents={useSubEvent}
+          useSubEventsQueryVariables={useSubEventsQueryVariables}
+        />
+        {!isMiddleLevelEvent && (
+          <OtherEventTimes
+            event={event}
+            useOtherEventTimes={useOtherEventTimes}
+            getEventListLinkUrl={getEventListLinkUrl}
+          />
+        )}
         <LocationInfo event={event} />
         {(!!audience.length || !!audienceMinAge || !!audienceMaxAge) && (
           <Audience
@@ -91,15 +129,21 @@ const EventInfo: React.FC<Props> = ({ event, superEvent }) => {
         )}
         {!!languages.length && <Languages languages={languages} />}
         {showOtherInfo && <OtherInfo event={event} />}
-        <Directions event={event} />
-        <OrganizationInfo event={event} />
-        <PriceInfo event={event} />
+        <Directions event={event} iconDirections={IconDirections} />
+        <OrganizationInfo
+          event={event}
+          getOrganizationSearchUrl={getOrganizationSearchUrl}
+        />
+        <PriceInfo event={event} appConfig={AppConfig} />
       </div>
     </div>
   );
 };
 
-const DateInfo: React.FC<{ event: EventFields }> = ({ event }) => {
+const DateInfo: React.FC<{
+  event: EventFields;
+  getPlainEventUrl: (event: EventFields, locale: AppLanguage) => string;
+}> = ({ event, getPlainEventUrl }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();
@@ -295,7 +339,8 @@ const OtherInfo: React.FC<{
 
 const Directions: React.FC<{
   event: EventFields;
-}> = ({ event }) => {
+  iconDirections: React.ElementType;
+}> = ({ event, iconDirections: IconDirections }) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
 
@@ -319,7 +364,10 @@ const Directions: React.FC<{
   );
 };
 
-const PriceInfo: React.FC<{ event: EventFields }> = ({ event }) => {
+const PriceInfo: React.FC<{ event: EventFields; appConfig: AppConfig }> = ({
+  event,
+  appConfig: AppConfig,
+}) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
   const eventPriceText = getEventPrice(event, locale, t('info.offers.isFree'));

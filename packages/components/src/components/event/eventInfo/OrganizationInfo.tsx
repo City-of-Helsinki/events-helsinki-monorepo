@@ -1,3 +1,11 @@
+import { IconFaceSmile, IconLayers } from 'hds-react';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
+import React from 'react';
+import { SecondaryLink } from 'react-helsinki-headless-cms';
+// import { getOrganizationSearchUrl } from '../../search/eventSearch/utils';
+import type { GetOrganizationSearchUrl } from 'types';
+import type { EventFields } from '../../../index';
 import {
   getEventFields,
   InfoWithIcon,
@@ -5,21 +13,18 @@ import {
   translateValue,
   useLocale,
   useOrganizationDetailsQuery,
-} from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
-import { IconFaceSmile, IconLayers } from 'hds-react';
-import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
-import { SecondaryLink } from 'react-helsinki-headless-cms';
-import { getOrganizationSearchUrl } from '../../search/eventSearch/utils';
+} from '../../../index';
 import styles from './eventInfo.module.scss';
 
 interface Props {
   event: EventFields;
+  getOrganizationSearchUrl: GetOrganizationSearchUrl;
 }
 
-const OrganizationInfo: React.FC<Props> = ({ event }) => {
+const OrganizationInfo: React.FC<Props> = ({
+  event,
+  getOrganizationSearchUrl,
+}) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
   const router = useRouter();

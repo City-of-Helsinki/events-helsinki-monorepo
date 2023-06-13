@@ -17,6 +17,7 @@ import {
   useConfig,
 } from 'react-helsinki-headless-cms';
 import type {
+  AppConfig,
   EventFields,
   ExtractLatestReturnPathFunction,
   ExtractLatestReturnPathReturnParams,
@@ -34,18 +35,13 @@ import {
   getEventPrice,
   EventKeywords,
 } from '../../../index';
-// import AppConfig from '../../app/AppConfig';
-
-// import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
-// import type { ReturnParams } from '../eventQueryString.util';
-// import { extractLatestReturnPath } from '../eventQueryString.util';
 import styles from './eventHero.module.scss';
 
 export interface Props {
   event: EventFields;
   superEvent?: SuperEventResponse;
-  appConfig: unknown;
+  appConfig: AppConfig;
   extractLatestReturnPath: ExtractLatestReturnPathFunction;
 }
 

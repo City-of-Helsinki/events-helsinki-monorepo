@@ -1,5 +1,12 @@
+import type { ButtonTheme } from 'hds-react';
+import type { NextRouter } from 'next/router';
 import type React from 'react';
 import type { APP_LANGUAGES } from '../constants';
+import type {
+  EventFields,
+  EventListQueryVariables,
+  EventTypeId,
+} from './index';
 
 export type AppLanguage = (typeof APP_LANGUAGES)[number];
 
@@ -22,6 +29,39 @@ export type CmsLanguage = {
   slug: string;
   code: string;
   locale: string;
+};
+
+export type AppConfig = {
+  cmsOrigin: string;
+  federationGraphqlEndpoint: string;
+  linkedEventsEventEndpoint: string;
+  origin: string;
+  cmsArticlesContextPath: string;
+  cmsPagesContextPath: string;
+  supportedEventTypes: EventTypeId[];
+  dateFormat: string;
+  shortDatetimeFormat: string;
+  datetimeFormat: string;
+  allowUnauthorizedRequests: boolean;
+  debug: boolean;
+  defaultButtonTheme: ButtonTheme | undefined;
+  defaultButtonVariant:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | undefined;
+  matomoConfiguration: {
+    disabled: boolean;
+    urlBase: string;
+    srcUrl: string;
+    trackerUrl: string;
+    siteId: number;
+  };
+  defaultRevalidate: number | false;
+  showSimilarEvents: boolean;
+  showEnrolmentStatusInCardDetails: boolean;
+  URLRewriteMapping: { [x: string]: string };
 };
 
 export type AppMenuItem = {
@@ -49,6 +89,18 @@ export type AppCategory = {
   icon?: React.ReactElement;
   text: string;
   value: string;
+};
+
+export type I18nRoute = {
+  source: string;
+  locale: AppLanguage | string;
+};
+
+export type RouterHelper = {
+  i18nRoutes: Record<string, I18nRoute[]>;
+  locales: AppLanguage;
+  URLRewriteMapping: { [x: string]: string };
+  getI18nPath: (route: string, locale: string) => string;
 };
 
 export type PageInfo = { uri: string; slug: string; locale: string };
@@ -104,6 +156,42 @@ export enum SPORTS_CATEGORIES {
   OUTDOOR_RECREATION = 'outdoor_recreation',
   GUIDED_EXERCISE = 'guided_exercise',
 }
+
+export type UseSubEvents = {
+  (
+    event: EventFields,
+    variables: EventListQueryVariables,
+    superEvent: string | undefined
+  ): {
+    subEvents: EventFields[];
+    isFetchingMore: boolean;
+    loading: boolean;
+  };
+};
+
+export type UseSubEventsQueryVariables = {
+  (event: EventFields): {
+    superEventId: string | undefined;
+    variables: EventListQueryVariables;
+  };
+};
+
+export type GetOrganizationSearchUrl = {
+  (event: EventFields, router: NextRouter, locale: AppLanguage): string;
+};
+
+export type GetEventListLinkUrl = {
+  (event: EventFields, router: NextRouter, locale: AppLanguage): string;
+};
+
+export type UseOtherEventTimes = {
+  (event: EventFields): {
+    events: EventFields[];
+    loading: boolean;
+    isFetchingMore: boolean;
+    superEventId: string | undefined;
+  };
+};
 
 export const isSportsCategory = (value: unknown): value is SPORTS_CATEGORIES =>
   Object.values(SPORTS_CATEGORIES).includes(value as SPORTS_CATEGORIES);

@@ -1,22 +1,34 @@
+import { IconAngleDown, IconAngleUp, IconCalendarPlus } from 'hds-react';
+import React from 'react';
+import type {
+  EventFields,
+  GetEventListLinkUrl,
+  UseOtherEventTimes,
+} from '../../../index';
 import {
   InfoWithIcon,
   LoadingSpinner,
   SkeletonLoader,
   useEventTranslation,
-} from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
-import { IconAngleDown, IconAngleUp, IconCalendarPlus } from 'hds-react';
-import React from 'react';
+} from '../../../index';
 
-import { useOtherEventTimes } from '../queryUtils';
+// import { useOtherEventTimes } from '../queryUtils';
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
 
 const EVENTS_LIST_LIMIT = 3;
 
 export const otherEventTimesListTestId = 'other-event-times-list';
-
-const OtherEventTimes: React.FC<{ event: EventFields }> = ({ event }) => {
+interface OtherEventTimesProps {
+  event: EventFields;
+  useOtherEventTimes: UseOtherEventTimes;
+  getEventListLinkUrl: GetEventListLinkUrl;
+}
+const OtherEventTimes: React.FC<OtherEventTimesProps> = ({
+  event,
+  useOtherEventTimes,
+  getEventListLinkUrl,
+}) => {
   const { t } = useEventTranslation();
   const [isListOpen, setIsListOpen] = React.useState(false);
 
@@ -52,6 +64,7 @@ const OtherEventTimes: React.FC<{ event: EventFields }> = ({ event }) => {
           id={otherEventTimesListTestId}
           events={shownEvents}
           showDate
+          getEventListLinkUrl={getEventListLinkUrl}
         />
         {events.length > EVENTS_LIST_LIMIT && (
           <button

@@ -2,10 +2,6 @@ import type { AskemConfigs } from './types';
 
 class Askem {
   constructor(config: AskemConfigs) {
-    if (!config.apiKey) {
-      throw new Error('Api key is required.');
-    }
-
     this.initialize(config);
   }
 
@@ -14,11 +10,7 @@ class Askem {
     scriptUrl = 'https://cdn.reactandshare.com/plugin/rns.js',
     disabled = false,
   }: AskemConfigs) {
-    if (disabled) {
-      return;
-    }
-
-    if (typeof window === 'undefined') {
+    if (disabled || !apiKey || typeof window === 'undefined') {
       return;
     }
 

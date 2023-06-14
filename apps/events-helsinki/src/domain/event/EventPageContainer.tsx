@@ -8,6 +8,7 @@ import {
   EventHero,
   EventClosedHero,
   EventContent,
+  EventPageMeta,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
@@ -24,23 +25,31 @@ import ErrorHero from '../error/ErrorHero';
 // import EventClosedHero from './eventClosedHero/EventClosedHero';
 // import EventContent from './eventContent/EventContent';
 // import EventHero from './eventHero/EventHero'
+// import EventPageMeta from './eventPageMeta/EventPageMeta';
 import {
   getPlainEventUrl,
   getOrganizationSearchUrl,
   getEventListLinkUrl,
 } from '../search/eventSearch/utils';
 import styles from './eventPage.module.scss';
-import EventPageMeta from './eventPageMeta/EventPageMeta';
 import { extractLatestReturnPath } from './eventQueryString.util';
 import {
   useSubEvents,
   useSubEventsQueryVariables,
   useOtherEventTimes,
+  useSimilarEventsQuery,
 } from './queryUtils';
+import useEventCards from './useEventCards';
 
-const SimilarEvents = dynamic(() => import('./similarEvents/SimilarEvents'), {
-  ssr: false,
-});
+const SimilarEvents = dynamic(
+  () =>
+    import(
+      '@events-helsinki/components/components/event/similarEvents/SimilarEvents'
+    ),
+  {
+    ssr: false,
+  }
+);
 
 export interface EventPageContainerProps {
   loading: boolean;
@@ -112,6 +121,8 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 <SimilarEvents
                   event={event}
                   onEventsLoaded={handleSimilarEventsLoaded}
+                  useSimilarEventsQuery={useSimilarEventsQuery}
+                  useEventCards={useEventCards}
                 />
               )}
             </>

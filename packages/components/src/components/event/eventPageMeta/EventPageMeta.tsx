@@ -1,8 +1,8 @@
-import { useLocale, getEventFields } from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
 import Head from 'next/head';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
+import type { EventFields } from '../../../index';
+import { useLocale, getEventFields } from '../../../index';
 
 interface Props {
   event: EventFields;

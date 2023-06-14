@@ -11,6 +11,8 @@ import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
+import { createAskemInstance } from '../components/askem';
+import AskemProvider from '../components/askem/AskemProvider';
 import ErrorFallback from '../components/errorPages/ErrorFallback';
 import EventsCookieConsent from '../components/eventsCookieConsent/EventsCookieConsent';
 import ResetFocus from '../components/resetFocus/ResetFocus';
@@ -25,6 +27,7 @@ export type Props = {
   routerHelper: CmsRoutedAppHelper;
   appName: string;
   matomoConfiguration: Parameters<typeof createMatomoInstance>[0];
+  askemFeedbackConfiguration: Parameters<typeof createAskemInstance>[0];
 } & NavigationProviderProps &
   SSRConfig;
 
@@ -37,6 +40,7 @@ function BaseApp({
   cmsHelper,
   routerHelper,
   matomoConfiguration,
+  askemFeedbackConfiguration,
 }: Props) {
   // Unset hidden visibility that was applied to hide the first server render
   // that does not include styles from HDS. HDS applies styling by injecting
@@ -60,6 +64,12 @@ function BaseApp({
     [createMatomoInstance]
   );
 
+  const askemFeedbackInstance = React.useMemo(
+    () => createAskemInstance(askemFeedbackConfiguration),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [createAskemInstance]
+  );
+
   const FallbackComponent = ({ error }: { error: Error }) => (
     <ErrorFallback error={error} appName={appName} />
   );
@@ -68,21 +78,23 @@ function BaseApp({
     <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
       <ErrorBoundary FallbackComponent={FallbackComponent}>
         <MatomoProvider value={matomoInstance}>
-          <GeolocationProvider>
-            <NavigationProvider
-              headerMenu={headerMenu}
-              footerMenu={footerMenu}
-              languages={languages}
-            >
-              <ResetFocus />
-              {children}
-              <EventsCookieConsent
-                allowLanguageSwitch={false}
-                appName={appName}
-              />
-              <ToastContainer />
-            </NavigationProvider>
-          </GeolocationProvider>
+          <AskemProvider value={askemFeedbackInstance}>
+            <GeolocationProvider>
+              <NavigationProvider
+                headerMenu={headerMenu}
+                footerMenu={footerMenu}
+                languages={languages}
+              >
+                <ResetFocus />
+                {children}
+                <EventsCookieConsent
+                  allowLanguageSwitch={false}
+                  appName={appName}
+                />
+                <ToastContainer />
+              </NavigationProvider>
+            </GeolocationProvider>
+          </AskemProvider>
         </MatomoProvider>
       </ErrorBoundary>
     </CmsHelperProvider>

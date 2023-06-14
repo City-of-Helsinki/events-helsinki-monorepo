@@ -1,6 +1,10 @@
 import 'nprogress/nprogress.css';
 import type { NavigationProviderProps } from '@events-helsinki/components';
-import { BaseApp, useCommonTranslation } from '@events-helsinki/components';
+import {
+  useLocale,
+  BaseApp,
+  useCommonTranslation,
+} from '@events-helsinki/components';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import React from 'react';
@@ -22,6 +26,7 @@ export type CustomPageProps = NavigationProviderProps & SSRConfig;
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { t } = useCommonTranslation();
+  const locale = useLocale();
 
   return (
     <HobbiesApolloProvider>
@@ -30,6 +35,9 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
         cmsHelper={cmsHelper}
         routerHelper={routerHelper}
         matomoConfiguration={AppConfig.matomoConfiguration}
+        askemFeedbackConfiguration={AppConfig.askemFeedbackConfiguration(
+          locale
+        )}
         {...pageProps}
       >
         <Component {...pageProps} />

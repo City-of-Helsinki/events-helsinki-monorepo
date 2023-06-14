@@ -1,6 +1,5 @@
 import { Footer, Link } from 'hds-react';
 import type { FunctionComponent } from 'react';
-import React from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';

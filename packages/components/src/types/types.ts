@@ -4,6 +4,8 @@ import type React from 'react';
 import type { APP_LANGUAGES } from '../constants';
 import type {
   EventFields,
+  EventFieldsFragment,
+  EventListQuery,
   EventListQueryVariables,
   EventTypeId,
 } from './index';
@@ -191,6 +193,22 @@ export type UseOtherEventTimes = {
     isFetchingMore: boolean;
     superEventId: string | undefined;
   };
+};
+
+export type UseSimilarEventsQuery = {
+  (event: EventFields): {
+    loading: boolean;
+    data: EventListQuery['eventList']['data'];
+  };
+};
+
+export type useEventCardsProps = {
+  events?: EventFields[] | null | undefined;
+  returnPath?: string;
+};
+
+export type UseEventCardsFunction = {
+  ({ events, returnPath }: useEventCardsProps): JSX.Element[];
 };
 
 export const isSportsCategory = (value: unknown): value is SPORTS_CATEGORIES =>

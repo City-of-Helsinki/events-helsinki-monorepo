@@ -8,3 +8,5 @@ export { default as EventInfo } from './eventInfo/EventInfo';
 export { SubEvents, SuperEvent } from './eventInfo/EventsHierarchy';
 export { default as OrganizationInfo } from './eventInfo/OrganizationInfo';
 export { default as OtherEventTimes } from './eventInfo/OtherEventTimes';
+export { default as EventPageMeta } from './eventPageMeta/EventPageMeta';
+export { default as SimilarEvents } from './similarEvents/SimilarEvents';

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.3.0...events-helsinki-v1.3.1) (2023-06-16)
+
+
+### Bug Fixes
+
+* Added missing translation namespaces ([#356](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/356)) ([69d8939](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/69d8939881d1801011ca1833c7d76449d34d5047))
+* Articles load more button cache issues ([#360](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/360)) ([bb7bbd0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bb7bbd03dd936c013d460266f304abf9c41c5e3d))
+
 ## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.2.0...events-helsinki-v1.3.0) (2023-06-08)
 
 

@@ -1,5 +1,5 @@
 import type { ContentSource } from 'hds-react';
-import { useCookies, CookieModal } from 'hds-react';
+import { CookiePage, useCookies, CookieModal } from 'hds-react';
 import React from 'react';
 import { MAIN_CONTENT_ID } from '../../constants';
 import { useConsentTranslation } from '../../hooks';
@@ -8,11 +8,15 @@ import useLocale from '../../hooks/useLocale';
 type Props = {
   appName: string;
   allowLanguageSwitch?: boolean;
+  onConsentGiven?: () => void;
+  isModal?: boolean;
 };
 
 const EventsCookieConsent: React.FC<Props> = ({
   appName,
   allowLanguageSwitch = true,
+  onConsentGiven,
+  isModal = true,
 }) => {
   const locale = useLocale();
   const { t, i18n } = useConsentTranslation();
@@ -37,6 +41,9 @@ const EventsCookieConsent: React.FC<Props> = ({
       siteName: appName,
       onAllConsentsGiven: () => {
         setShowCookieConsentModal(false);
+        if (onConsentGiven) {
+          onConsentGiven();
+        }
       },
       currentLanguage: language as string as ContentSource['currentLanguage'],
       requiredCookies: {
@@ -121,6 +128,37 @@ const EventsCookieConsent: React.FC<Props> = ({
               },
             ],
           },
+          {
+            title: t('consent:groups.optionalAskem.title'),
+            text: t('consent:groups.optionalAskem.text'),
+            expandAriaLabel: t('consent:groups.optionalAskem.expandAriaLabel'),
+            checkboxAriaDescription: t(
+              'consent:groups.optionalAskem.checkboxAriaDescription'
+            ),
+            cookies: [
+              {
+                id: 'askemBid',
+                name: 'rnsbid',
+                hostName: 'reactandshare.com',
+                description: t('consent:cookies.askem'),
+                expiration: '-',
+              },
+              {
+                id: 'askemBidTs',
+                name: 'rnsbid_ts',
+                hostName: 'reactandshare.com',
+                description: t('consent:cookies.askem'),
+                expiration: '-',
+              },
+              {
+                id: 'askemReaction',
+                name: 'rns_reaction_*',
+                hostName: 'reactandshare.com',
+                description: t('consent:cookies.askem'),
+                expiration: '-',
+              },
+            ],
+          },
         ],
       },
       language: {
@@ -129,12 +167,17 @@ const EventsCookieConsent: React.FC<Props> = ({
       },
       focusTargetSelector: MAIN_CONTENT_ID,
     }),
-    [t, language, appName, onLanguageChange]
+    [appName, language, t, onLanguageChange, onConsentGiven]
   );
 
-  if (!showCookieConsentModal) return null;
-
-  return <CookieModal contentSource={contentSource} />;
+  return (
+    <>
+      {isModal && showCookieConsentModal && (
+        <CookieModal contentSource={contentSource} />
+      )}
+      {!isModal && <CookiePage contentSource={contentSource} />}
+    </>
+  );
 };
 
 export default EventsCookieConsent;

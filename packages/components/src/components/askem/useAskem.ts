@@ -12,6 +12,8 @@ const useAskem = () => {
 
   return {
     setRnsConfigValue,
+    disabled: instance?.disabled,
+    consentGiven: instance?.consentGiven,
   };
 };
 

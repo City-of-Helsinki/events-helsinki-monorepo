@@ -1,6 +1,9 @@
 import type { AskemConfigs } from './types';
 
 class Askem {
+  disabled = false;
+  consentGiven = true;
+
   constructor(config: AskemConfigs) {
     this.initialize(config);
   }
@@ -9,10 +12,14 @@ class Askem {
     apiKey,
     scriptUrl = 'https://cdn.reactandshare.com/plugin/rns.js',
     disabled = false,
+    consentGiven,
   }: AskemConfigs) {
     if (disabled || !apiKey || typeof window === 'undefined') {
       return;
     }
+
+    this.disabled = disabled;
+    this.consentGiven = Boolean(consentGiven);
 
     window.rnsData = window.rnsData || {};
     window.rnsData.apiKey;

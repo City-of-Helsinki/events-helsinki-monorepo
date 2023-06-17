@@ -4,12 +4,14 @@ import {
 } from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
 
+import { useCookies } from 'hds-react';
 import type { SSRConfig } from 'next-i18next';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
+import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
 import { createAskemInstance } from '../components/askem';
 import AskemProvider from '../components/askem/AskemProvider';
@@ -48,6 +50,19 @@ function BaseApp({
   // The document object does not exist during server side renders.
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
   //       SEO performance is not impacted.
+
+  const { getAllConsents } = useCookies();
+  const [askemConsentGiven, setAskemConsentGiven] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    const consents = getAllConsents();
+    setAskemConsentGiven(
+      consents['askemBid'] &&
+        consents['askemBidTs'] &&
+        consents['askemReaction']
+    );
+  }, [getAllConsents]);
+
   React.useEffect(() => {
     setTimeout(() => {
       const body = document?.body;
@@ -65,14 +80,27 @@ function BaseApp({
   );
 
   const askemFeedbackInstance = React.useMemo(
-    () => createAskemInstance(askemFeedbackConfiguration),
+    () =>
+      createAskemInstance({
+        ...askemFeedbackConfiguration,
+        consentGiven: askemConsentGiven,
+      }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [createAskemInstance]
+    [createAskemInstance, askemConsentGiven]
   );
 
   const FallbackComponent = ({ error }: { error: Error }) => (
     <ErrorFallback error={error} appName={appName} />
   );
+
+  const handleConsentGiven = useCallback(() => {
+    const consents = getAllConsents();
+    setAskemConsentGiven(
+      consents['askemBid'] &&
+        consents['askemBidTs'] &&
+        consents['askemReaction']
+    );
+  }, [getAllConsents]);
 
   return (
     <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
@@ -88,6 +116,7 @@ function BaseApp({
                 <ResetFocus />
                 {children}
                 <EventsCookieConsent
+                  onConsentGiven={handleConsentGiven}
                   allowLanguageSwitch={false}
                   appName={appName}
                 />

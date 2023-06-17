@@ -4,7 +4,7 @@ import type { AskemInstance } from './types';
 
 export interface AskemProviderProps {
   children?: React.ReactNode;
-  value: AskemInstance;
+  value: AskemInstance | null;
 }
 
 const AskemProvider: React.FC<AskemProviderProps> = function ({

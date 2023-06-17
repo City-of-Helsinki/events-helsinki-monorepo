@@ -7,19 +7,26 @@
       "checkboxAriaDescription": "Kakor används för att visa huvudstadstadsregionens servicekarta."
     },
     "optionalMatomo": {
-      "title": "Servicekarta",
-      "text": "Huvudstadsregionens servicekarta hjälper användaren att hitta evenemang på kartan.",
-      "expandAriaLabel": "Visa information om servicekartans kakor",
-      "checkboxAriaDescription": "Kakor används för att visa huvudstadstadsregionens servicekarta."
+      "title": "Matomo",
+      "text": "Matomo Analytics-programvaran används för att spåra och utveckla webbplatsen för att möta användarnas behov.",
+      "expandAriaLabel": "Visa information om kakor som är relaterade till Matomo.",
+      "checkboxAriaDescription": "Matomo använder kakor."
+    },
+    "optionalAskem": {
+      "title": "Askem",
+      "text": "Askem text EN.",
+      "expandAriaLabel": "Show cookie information related to the Askem.",
+      "checkboxAriaDescription": "Askem uses cookies."
     }
   },
   "cookies": {
-    "matomo": "Kaka för statistiksystemet Matomo",
-    "linkedevents": "Kaka för att söka evenemang",
-    "i18next": "Kaka som sparar användarens språkval på webbplatsen",
-    "servicemap_analytics": "Kaka för statistiksystemet Matomo på servicekartan",
-    "servicemap_session": "Session på servicekartan",
-    "servicemap_ga": "Kaka för analysverktyget Google Analytics på servicekartan",
+    "matomo": "Kaka för statistiksystemet Matomo.",
+    "askem": "En post relaterad till driften av reaktionsknappen Askem.",
+    "linkedevents": "Kaka för att söka evenemang.",
+    "i18next": "Kaka som sparar användarens språkval på webbplatsen.",
+    "servicemap_analytics": "Kaka för statistiksystemet Matomo på servicekartan.",
+    "servicemap_session": "Session på servicekartan.",
+    "servicemap_ga": "Kaka för analysverktyget Google Analytics på servicekartan.",
     "wordpress": "Kaka för användning av WordPress-innehållshanteringssystemet."
   },
   "expiration": {
@@ -30,5 +37,10 @@
     "years": "{{ days }} år",
     "hours": "{{ hours }} timmar",
     "days": "{{ days }} dagar"
+  },
+  "askem": {
+    "cookiesRequiredTitle": "Feedbackknappar kan inte visas",
+    "cookiesRequiredDescription": "För att använda denna funktion måste du acceptera cookies från webbplatsen. Du kan ge feedback på den här sidan genom att aktivera statistikrelaterade cookies.",
+    "cookieSettingsButtonText": "Ändra inställningarna för cookies"
   }
 }

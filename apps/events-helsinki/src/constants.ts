@@ -1,4 +1,5 @@
 export const ROUTES = {
+  FRONT_PAGE: '/',
   SEARCH: '/search',
   EVENTS: '/events/[eventId]',
   ARTICLE_ARCHIVE: '/article-archive',
@@ -6,6 +7,7 @@ export const ROUTES = {
   PAGES: '/pages/[...slug]',
   LINK: '',
   VENUES: '/venues/[venueId]',
+  COOKIE_CONSENT: '/cookie-consent',
 };
 
 export const AUTOSUGGEST_KEYWORD_BLACK_LIST = [

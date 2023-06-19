@@ -106,11 +106,15 @@ const EventInfo: React.FC<Props> = ({
     <div className={styles.eventInfo} ref={eventInfoContainer}>
       <div className={styles.contentWrapper}>
         <DateInfo event={event} getPlainEventUrl={getPlainEventUrl} />
-        <SuperEvent superEvent={superEvent} />
+        <SuperEvent
+          superEvent={superEvent}
+          getEventListLinkUrl={getEventListLinkUrl}
+        />
         <SubEvents
           event={event}
           useSubEvents={useSubEvent}
           useSubEventsQueryVariables={useSubEventsQueryVariables}
+          getEventListLinkUrl={getEventListLinkUrl}
         />
         {!isMiddleLevelEvent && (
           <OtherEventTimes

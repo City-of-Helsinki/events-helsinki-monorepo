@@ -9,7 +9,11 @@ import React from 'react';
 
 // import type { EventListQueryVariables } from 'react-helsinki-headless-cms/__generated__-445e2838';
 // import { useSubEventsQueryVariables } from '../queryUtils';
-import type { UseSubEvents, UseSubEventsQueryVariables } from 'types';
+import type {
+  GetEventListLinkUrl,
+  UseSubEvents,
+  UseSubEventsQueryVariables,
+} from 'types';
 import { InfoWithIcon, LoadingSpinner, SkeletonLoader } from '../../../index';
 import type { EventFields, SuperEventResponse } from '../../../index';
 import EventList from './eventList/EventList';
@@ -22,11 +26,13 @@ export interface Props {
   event: EventFields;
   useSubEvents: UseSubEvents;
   useSubEventsQueryVariables: UseSubEventsQueryVariables;
+  getEventListLinkUrl: GetEventListLinkUrl;
 }
 const SubEvents: React.FC<Props> = ({
   event,
   useSubEvents,
   useSubEventsQueryVariables,
+  getEventListLinkUrl,
 }) => {
   const { t } = useTranslation('event');
   const [isListOpen, setIsListOpen] = React.useState(false);
@@ -93,13 +99,19 @@ const SubEvents: React.FC<Props> = ({
     <div className={styles.eventList}>
       <InfoWithIcon icon={titleIcon} title={title}>
         {isLowestLevelEvent || isMiddleLevelEvent ? (
-          <EventList id={subEventsListTestId} events={shownEvents} showDate />
+          <EventList
+            id={subEventsListTestId}
+            events={shownEvents}
+            showDate
+            getEventListLinkUrl={getEventListLinkUrl}
+          />
         ) : (
           <EventList
             id={subEventsListTestId}
             events={shownEvents}
             showName
             showDate
+            getEventListLinkUrl={getEventListLinkUrl}
           />
         )}
         {events.length > EVENTS_LIST_LIMIT && (
@@ -123,9 +135,10 @@ const SubEvents: React.FC<Props> = ({
   );
 };
 
-const SuperEvent: React.FC<{ superEvent: SuperEventResponse | undefined }> = ({
-  superEvent,
-}) => {
+const SuperEvent: React.FC<{
+  superEvent: SuperEventResponse | undefined;
+  getEventListLinkUrl: GetEventListLinkUrl;
+}> = ({ superEvent, getEventListLinkUrl }) => {
   const { t } = useTranslation('event');
 
   if (!superEvent?.data) return null;
@@ -138,7 +151,12 @@ const SuperEvent: React.FC<{ superEvent: SuperEventResponse | undefined }> = ({
         icon={<IconLayers aria-hidden />}
         title={t('superEvent.title')}
       >
-        <EventList id={superEventTestId} showName events={[superEvent.data]} />
+        <EventList
+          id={superEventTestId}
+          showName
+          events={[superEvent.data]}
+          getEventListLinkUrl={getEventListLinkUrl}
+        />
       </InfoWithIcon>
     </div>
   );

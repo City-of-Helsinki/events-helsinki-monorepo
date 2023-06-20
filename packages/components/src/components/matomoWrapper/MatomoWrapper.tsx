@@ -21,7 +21,6 @@ const MatomoWrapper: React.FC<Props> = ({ children }) => {
     };
 
     // if enabled, should be callled before each trackPage instruction
-
     if (getConsentStatus('matomo')) {
       pushInstruction('requireCookieConsent');
     } else {

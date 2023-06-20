@@ -1,4 +1,5 @@
 import { Footer, Link } from 'hds-react';
+import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
@@ -12,11 +13,22 @@ import styles from './footer.module.scss';
 type FooterSectionProps = {
   appName: string;
   menu?: Menu;
+  hasFeedBack?: boolean;
+  feedbackWithPadding?: boolean;
 };
+
+const AskemFeedbackContainer = dynamic(
+  () => import('../../components/askem/AskemFeedbackContainer'),
+  {
+    ssr: false,
+  }
+);
 
 const FooterSection: FunctionComponent<FooterSectionProps> = ({
   appName,
   menu,
+  hasFeedBack = true,
+  feedbackWithPadding = false,
 }: FooterSectionProps) => {
   const { t } = useFooterTranslation();
   const locale = useLocale();
@@ -37,29 +49,34 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   };
 
   return (
-    <Footer title={appName} className={styles.footer}>
-      <Footer.Utilities
-        backToTopLabel={t('footer:backToTop')}
-        onBackToTopClick={handleBackToTop}
-      ></Footer.Utilities>
-      <Footer.Base
-        copyrightHolder={t('footer:copyright')}
-        copyrightText={t('footer:allRightsReserved')}
-      >
-        {footerMenu?.menuItems?.nodes?.map(
-          // NOTE: HCRC-build sometimes fails - this type should not be needed.
-          (navigationItem: Menu['menuItems']['nodes'][number]) => (
-            <Footer.Item
-              className={styles.footerLink}
-              key={navigationItem?.id}
-              as={Link}
-              href={navigationItem?.path || ''}
-              label={navigationItem?.label}
-            />
-          )
-        )}
-      </Footer.Base>
-    </Footer>
+    <>
+      {hasFeedBack && (
+        <AskemFeedbackContainer withPadding={feedbackWithPadding} />
+      )}
+      <Footer title={appName} className={styles.footer}>
+        <Footer.Utilities
+          backToTopLabel={t('footer:backToTop')}
+          onBackToTopClick={handleBackToTop}
+        ></Footer.Utilities>
+        <Footer.Base
+          copyrightHolder={t('footer:copyright')}
+          copyrightText={t('footer:allRightsReserved')}
+        >
+          {footerMenu?.menuItems?.nodes?.map(
+            // NOTE: HCRC-build sometimes fails - this type should not be needed.
+            (navigationItem: Menu['menuItems']['nodes'][number]) => (
+              <Footer.Item
+                className={styles.footerLink}
+                key={navigationItem?.id}
+                as={Link}
+                href={navigationItem?.path || ''}
+                label={navigationItem?.label}
+              />
+            )
+          )}
+        </Footer.Base>
+      </Footer>
+    </>
   );
 };
 

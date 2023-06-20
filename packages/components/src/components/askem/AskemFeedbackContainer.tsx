@@ -1,22 +1,27 @@
+import classNames from 'classnames';
 import { Button } from 'hds-react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './askem.module.scss';
 import useAskem from './useAskem';
 
 interface AskemFeedbackContainerProps {
-  onSettingsClick?: () => void;
+  consentUrl?: string;
+  withPadding?: boolean;
 }
 
 const AskemFeedbackContainer: React.FC<AskemFeedbackContainerProps> = ({
-  onSettingsClick,
+  consentUrl,
+  withPadding = false,
 }) => {
   const { consentGiven, disabled } = useAskem();
   const { t } = useTranslation();
+  const router = useRouter();
 
   const handleConsentPageRedirect = () => {
-    if (onSettingsClick) {
-      onSettingsClick();
+    if (consentUrl) {
+      router.push(`${consentUrl}?returnPath=${router.asPath}`);
     }
   };
 
@@ -25,24 +30,31 @@ const AskemFeedbackContainer: React.FC<AskemFeedbackContainerProps> = ({
   }
 
   return (
-    <>
-      {!consentGiven && (
-        <div className={styles.rnsCookiesRequired}>
-          <h2>{t('consent:askem.cookiesRequiredTitle')}</h2>
-          <p>{t('consent:askem.cookiesRequiredDescription')}</p>
-          {onSettingsClick && (
-            <Button
-              theme="black"
-              variant="secondary"
-              onClick={handleConsentPageRedirect}
-            >
-              {t('consent:askem.cookieSettingsButtonText')}
-            </Button>
-          )}
-        </div>
-      )}
-      {!disabled && consentGiven && <div className="rns" />}
-    </>
+    <div className={styles.rnsContainer}>
+      <div
+        className={classNames(
+          styles.rnsContainerInner,
+          withPadding ? styles.withPadding : ''
+        )}
+      >
+        {!consentGiven && (
+          <div className={styles.rnsCookiesRequired}>
+            <h2>{t('consent:askem.cookiesRequiredTitle')}</h2>
+            <p>{t('consent:askem.cookiesRequiredDescription')}</p>
+            {consentUrl && (
+              <Button
+                theme="black"
+                variant="secondary"
+                onClick={handleConsentPageRedirect}
+              >
+                {t('consent:askem.cookieSettingsButtonText')}
+              </Button>
+            )}
+          </div>
+        )}
+        {!disabled && consentGiven && <div className="rns" />}
+      </div>
+    </div>
   );
 };
 

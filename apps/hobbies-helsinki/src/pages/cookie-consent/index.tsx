@@ -10,7 +10,7 @@ import {
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
@@ -21,10 +21,20 @@ export default function CookieConsent() {
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useCommonTranslation();
   const router = useRouter();
+  /* 
+  // bug or feature: query is empty in handleRedirect
+  const router = useRouter();
+  const params: { returnPath?: string } = router.query; */
 
-  const handleRedirect = () => {
-    router.push(ROUTES.FRONT_PAGE);
-  };
+  const handleRedirect = useCallback(() => {
+    if (window) {
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const returnPath: string | null = urlSearchParams.get('returnPath');
+      if (returnPath) {
+        router.push(returnPath);
+      }
+    }
+  }, [router]);
 
   usePageScrollRestoration();
 

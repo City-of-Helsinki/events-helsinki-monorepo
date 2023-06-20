@@ -27,7 +27,11 @@ export default function Search() {
         navigation={<Navigation />}
         content={<CombinedSearchPage defaultTab="Venue" />}
         footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+          <FooterSection
+            menu={footerMenu}
+            appName={t('appSports:appName')}
+            feedbackWithPadding
+          />
         }
       />
     </MatomoWrapper>

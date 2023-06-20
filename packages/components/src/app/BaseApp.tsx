@@ -5,6 +5,7 @@ import {
 import 'nprogress/nprogress.css';
 
 import { useCookies } from 'hds-react';
+import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';
 import React, { useCallback, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -44,13 +45,7 @@ function BaseApp({
   matomoConfiguration,
   askemFeedbackConfiguration,
 }: Props) {
-  // Unset hidden visibility that was applied to hide the first server render
-  // that does not include styles from HDS. HDS applies styling by injecting
-  // style tags into the head. This requires the existence of a document object.
-  // The document object does not exist during server side renders.
-  // TODO: Remove this hackfix to ensure that pre-rendered pages'
-  //       SEO performance is not impacted.
-
+  const router = useRouter();
   const { getAllConsents } = useCookies();
   const [askemConsentGiven, setAskemConsentGiven] = useState<boolean>(false);
 
@@ -62,6 +57,13 @@ function BaseApp({
         consents['askemReaction']
     );
   }, [getAllConsents]);
+
+  // Unset hidden visibility that was applied to hide the first server render
+  // that does not include styles from HDS. HDS applies styling by injecting
+  // style tags into the head. This requires the existence of a document object.
+  // The document object does not exist during server side renders.
+  // TODO: Remove this hackfix to ensure that pre-rendered pages'
+  //       SEO performance is not impacted.
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -76,7 +78,7 @@ function BaseApp({
   const matomoInstance = React.useMemo(
     () => createMatomoInstance(matomoConfiguration),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [createMatomoInstance]
+    [createMatomoInstance, router.pathname]
   );
 
   const askemFeedbackInstance = React.useMemo(
@@ -86,7 +88,7 @@ function BaseApp({
         consentGiven: askemConsentGiven,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [createAskemInstance, askemConsentGiven]
+    [createAskemInstance, askemConsentGiven, router.pathname]
   );
 
   const FallbackComponent = ({ error }: { error: Error }) => (

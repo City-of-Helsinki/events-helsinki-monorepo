@@ -183,7 +183,7 @@ const EventsCookieConsent: React.FC<Props> = ({
       },
       focusTargetSelector: MAIN_CONTENT_ID,
     }),
-    [appName, language, t, onLanguageChange, onConsentGiven]
+    [appName, language, t, onLanguageChange, onConsentGiven, handleMatomoUpdate]
   );
 
   return (

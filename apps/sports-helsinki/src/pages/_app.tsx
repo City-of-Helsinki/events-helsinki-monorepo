@@ -6,12 +6,14 @@ import {
   useCommonTranslation,
 } from '@events-helsinki/components';
 import type { AppProps as NextAppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import React from 'react';
 
 import '../styles/globals.scss';
 import nextI18nextConfig from '../../next-i18next.config';
+import { ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import cmsHelper from '../domain/app/headlessCmsHelper';
 import routerHelper from '../domain/app/routerHelper';
@@ -27,6 +29,7 @@ export type CustomPageProps = NavigationProviderProps & SSRConfig;
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { t } = useCommonTranslation();
   const locale = useLocale();
+  const { asPath, pathname } = useRouter();
 
   return (
     <SportsApolloProvider>
@@ -38,6 +41,8 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
         askemFeedbackConfiguration={AppConfig.askemFeedbackConfiguration(
           locale
         )}
+        withConsent={pathname !== ROUTES.COOKIE_CONSENT}
+        asPath={asPath}
         {...pageProps}
       >
         <Component {...pageProps} />

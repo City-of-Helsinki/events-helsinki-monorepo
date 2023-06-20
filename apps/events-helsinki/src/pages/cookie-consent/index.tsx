@@ -54,7 +54,11 @@ export default function CookieConsent() {
           </ConsentPageContent>
         }
         footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+          <FooterSection
+            menu={footerMenu}
+            appName={t('appSports:appName')}
+            hasFeedBack={false}
+          />
         }
       />
     </MatomoWrapper>

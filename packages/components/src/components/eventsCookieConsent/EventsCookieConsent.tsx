@@ -7,15 +7,15 @@ import useLocale from '../../hooks/useLocale';
 
 type Props = {
   appName: string;
-  allowLanguageSwitch?: boolean;
   onConsentGiven?: () => void;
+  allowLanguageSwitch?: boolean;
   isModal?: boolean;
 };
 
 const EventsCookieConsent: React.FC<Props> = ({
   appName,
-  allowLanguageSwitch = true,
   onConsentGiven,
+  allowLanguageSwitch = true,
   isModal = true,
 }) => {
   const locale = useLocale();

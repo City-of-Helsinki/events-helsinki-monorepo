@@ -15,6 +15,7 @@ type FooterSectionProps = {
   menu?: Menu;
   hasFeedBack?: boolean;
   feedbackWithPadding?: boolean;
+  consentUrl?: string;
 };
 
 const AskemFeedbackContainer = dynamic(
@@ -29,8 +30,10 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   menu,
   hasFeedBack = true,
   feedbackWithPadding = false,
+  consentUrl = '/cookie-consent',
 }: FooterSectionProps) => {
   const { t } = useFooterTranslation();
+
   const locale = useLocale();
 
   const { data: footerMenuData } = useMenuQuery({
@@ -51,7 +54,10 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   return (
     <>
       {hasFeedBack && (
-        <AskemFeedbackContainer withPadding={feedbackWithPadding} />
+        <AskemFeedbackContainer
+          withPadding={feedbackWithPadding}
+          consentUrl={consentUrl}
+        />
       )}
       <Footer title={appName} className={styles.footer}>
         <Footer.Utilities

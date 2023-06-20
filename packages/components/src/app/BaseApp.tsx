@@ -5,9 +5,8 @@ import {
 import 'nprogress/nprogress.css';
 
 import { useCookies } from 'hds-react';
-import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
 
@@ -31,6 +30,9 @@ export type Props = {
   appName: string;
   matomoConfiguration: Parameters<typeof createMatomoInstance>[0];
   askemFeedbackConfiguration: Parameters<typeof createAskemInstance>[0];
+  onConsentGiven?: (askemConsentGiven: boolean) => void;
+  asPath: string;
+  withConsent: boolean;
 } & NavigationProviderProps &
   SSRConfig;
 
@@ -44,19 +46,10 @@ function BaseApp({
   routerHelper,
   matomoConfiguration,
   askemFeedbackConfiguration,
+  asPath,
+  withConsent,
 }: Props) {
-  const router = useRouter();
   const { getAllConsents } = useCookies();
-  const [askemConsentGiven, setAskemConsentGiven] = useState<boolean>(false);
-
-  React.useEffect(() => {
-    const consents = getAllConsents();
-    setAskemConsentGiven(
-      consents['askemBid'] &&
-        consents['askemBidTs'] &&
-        consents['askemReaction']
-    );
-  }, [getAllConsents]);
 
   // Unset hidden visibility that was applied to hide the first server render
   // that does not include styles from HDS. HDS applies styling by injecting
@@ -75,26 +68,9 @@ function BaseApp({
     }, 10);
   }, []);
 
-  const matomoInstance = React.useMemo(
-    () => createMatomoInstance(matomoConfiguration),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [createMatomoInstance, router.pathname]
-  );
+  const [askemConsentGiven, setAskemConsentGiven] = useState<boolean>(false);
 
-  const askemFeedbackInstance = React.useMemo(
-    () =>
-      createAskemInstance({
-        ...askemFeedbackConfiguration,
-        consentGiven: askemConsentGiven,
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [createAskemInstance, askemConsentGiven, router.pathname]
-  );
-
-  const FallbackComponent = ({ error }: { error: Error }) => (
-    <ErrorFallback error={error} appName={appName} />
-  );
-
+  // todo: matomo is not updated.
   const handleConsentGiven = useCallback(() => {
     const consents = getAllConsents();
     setAskemConsentGiven(
@@ -103,6 +79,30 @@ function BaseApp({
         consents['askemReaction']
     );
   }, [getAllConsents]);
+
+  useEffect(() => {
+    if (asPath) {
+      handleConsentGiven();
+    }
+  }, [handleConsentGiven, asPath]);
+
+  const askemFeedbackInstance = React.useMemo(
+    () =>
+      createAskemInstance({
+        ...askemFeedbackConfiguration,
+        consentGiven: askemConsentGiven,
+      }),
+    [askemFeedbackConfiguration, askemConsentGiven]
+  );
+
+  const matomoInstance = React.useMemo(
+    () => createMatomoInstance(matomoConfiguration),
+    [matomoConfiguration]
+  );
+
+  const FallbackComponent = ({ error }: { error: Error }) => (
+    <ErrorFallback error={error} appName={appName} />
+  );
 
   return (
     <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
@@ -117,11 +117,13 @@ function BaseApp({
               >
                 <ResetFocus />
                 {children}
-                <EventsCookieConsent
-                  onConsentGiven={handleConsentGiven}
-                  allowLanguageSwitch={false}
-                  appName={appName}
-                />
+                {withConsent && (
+                  <EventsCookieConsent
+                    onConsentGiven={handleConsentGiven}
+                    allowLanguageSwitch={false}
+                    appName={appName}
+                  />
+                )}
                 <ToastContainer />
               </NavigationProvider>
             </GeolocationProvider>

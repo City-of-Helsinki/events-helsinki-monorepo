@@ -15,7 +15,7 @@
     "optionalAskem": {
       "title": "Askem",
       "text": "Askem text FI.",
-      "expandAriaLabel": "Askem expandAriaLabel FI",
+      "expandAriaLabel": "Näytä Askemin liittyvät evästetiedot.",
       "checkboxAriaDescription": "Askem käyttää evästeitä."
     }
   },

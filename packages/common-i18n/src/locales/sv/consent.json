@@ -14,8 +14,8 @@
     },
     "optionalAskem": {
       "title": "Askem",
-      "text": "Askem text EN.",
-      "expandAriaLabel": "Show cookie information related to the Askem.",
+      "text": "Askem text SV.",
+      "expandAriaLabel": "Visa information om kakor som är relaterade till Askem.",
       "checkboxAriaDescription": "Askem uses cookies."
     }
   },

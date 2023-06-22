@@ -57,6 +57,7 @@ export default function Search() {
           <FooterSection
             menu={footerMenu}
             appName={tAppHobbies('appHobbies:appName')}
+            feedbackWithPadding
           />
         }
       />

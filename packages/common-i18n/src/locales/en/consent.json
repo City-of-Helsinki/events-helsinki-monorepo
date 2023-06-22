@@ -11,15 +11,22 @@
       "text": "Matomo Analytics software is being used to follow and improve the website to better attend to user's needs.",
       "expandAriaLabel": "Show cookie information related to the Matomo.",
       "checkboxAriaDescription": "Matomo uses cookies."
+    },
+    "optionalAskem": {
+      "title": "Askem",
+      "text": "Askem enables quick feedback submission on the website.",
+      "expandAriaLabel": "Show cookie information related to the Askem.",
+      "checkboxAriaDescription": "Askem uses cookies."
     }
   },
   "cookies": {
-    "matomo": "A cookie of the Matomo statistics system",
-    "linkedevents": "A cookie to authorise the retrieval of events",
-    "i18next": "A cookie to remember the website language selection",
+    "matomo": "A cookie of the Matomo statistics system.",
+    "askem": "A record related to the operation of the Askem react buttons.",
+    "linkedevents": "A cookie to authorise the retrieval of events.",
+    "i18next": "A cookie to remember the website language selection.",
     "servicemap_analytics": "A cookie of the Matomo statistics system for the Service Map.",
-    "servicemap_session": "Service Map session",
-    "servicemap_ga": "A Google analytics cookie for the Service Map",
+    "servicemap_session": "Service Map session.",
+    "servicemap_ga": "A Google analytics cookie for the Service Map.",
     "wordpress": "A cookie for operation of the WordPress-content management system."
   },
   "expiration": {
@@ -30,5 +37,10 @@
     "years": "{{ days }} years",
     "hours": "{{ hours }} hours",
     "days": "{{ days }} days"
+  },
+  "askem": {
+    "cookiesRequiredTitle": "Feedback buttons cannot be displayed",
+    "cookiesRequiredDescription": "To use this feature, you must accept cookies from the site. You can provide feedback on this page by enabling statistics-related cookies.",
+    "cookieSettingsButtonText": "Change cookie settings"
   }
 }

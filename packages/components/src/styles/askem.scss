@@ -1,0 +1,615 @@
+.rns {
+  --hel-icon--face-smile: url(/shared-assets/images/feedback/face-smile.svg);
+  --hel-icon--face-sad: url(/shared-assets/images/feedback/face-sad.svg);
+  --hel-icon--face-neutral: url(/shared-assets/images/feedback/face-neutral.svg);
+  --hel-icon--arrow-right: url(/shared-assets/images/feedback/arrow-right.svg);
+  --hel-icon--email: url(/shared-assets/images/feedback/envelope.svg);
+
+  --hel-icon--facebook: url(/shared-assets/images/share/facebook.svg);
+  --hel-icon--twitter: url(/shared-assets/images/share/twitter.svg);
+  --hel-icon--whatsapp: url(/shared-assets/images/share/whatsapp.svg);
+  --hel-icon--share: url(/shared-assets/images/share/share.svg);
+
+  max-width: 1296px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--color-black-5);
+}
+
+@media (min-width: 768px) {
+  .rns {
+    max-width: 1328px;
+  }
+}
+
+.rns .rns-plugin {
+  font-family: HelsinkiGrotesk, Arial, sans-serif;
+  margin: 0;
+  padding-bottom: 6rem;
+}
+
+.rns .rns-plugin .rns-reactions .rns-header {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.rns .rns-plugin .rns-reactions .reactions {
+  margin-top: 24px;
+}
+
+@media only screen and (min-width: 681px) {
+  .rns .rns-plugin .rns-reactions .reactions {
+    margin-left: calc(-24px / 2);
+    margin-right: calc(-24px / 2);
+  }
+}
+
+.rns .rns-plugin .rns-reactions .reactions .rns-reaction {
+  flex-grow: 0;
+  margin: 0 calc(24px / 2);
+  max-width: 190px;
+  padding: 0;
+}
+
+@media only screen and (max-width: 680px) {
+  .rns .rns-plugin .rns-reactions .reactions .rns-reaction {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .rns .rns-plugin .rns-reactions .reactions .rns-reaction {
+    margin: 16px 0 0;
+    padding: 0;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .rns .rns-plugin .rns-reactions .reactions .rns-reaction:first-child {
+    margin-top: 0;
+  }
+}
+
+.rns .rns-plugin .rns-reactions .reactions .rns-reaction .rns-reaction-button {
+  border-color: #000;
+  padding: 14px 32px;
+  position: relative;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button::before {
+  --size: 100%;
+  border: 2px solid rgba(0, 0, 0, 0);
+  content: '';
+  height: var(--size);
+  left: 0;
+  position: absolute;
+  width: var(--size);
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button
+  .rns-label {
+  --line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: var(--line-height);
+  align-items: center;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  width: 100%;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button
+  .rns-label::after {
+  background-color: #000;
+  background-size: contain;
+  content: '';
+  display: flex;
+  height: 24px;
+  -webkit-mask-image: var(--hel-icon--face-neutral);
+  mask-image: var(--hel-icon--face-neutral);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 24px 24px;
+  mask-size: 24px 24px;
+  vertical-align: bottom;
+  width: 24px;
+  margin-left: 16px;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button
+  .rns-reaction-count {
+  display: none;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button:focus {
+  background-color: #fff;
+  box-shadow: none;
+  color: #000;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button:focus
+  .rns-label {
+  color: #000;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button:focus::before {
+  --size: calc(100% + calc(24px / 2));
+  border-color: #000;
+  left: calc(-24px / 4);
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button:hover {
+  background-color: #000;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button:hover
+  .rns-label {
+  color: #fff;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button:hover
+  .rns-label::after {
+  background-color: #fff;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction
+  .rns-reaction-button:focus:hover
+  .rns-label {
+  color: #fff;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction.selected
+  .rns-reaction-button {
+  background-color: #000 !important;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction.selected
+  .rns-reaction-button
+  .rns-label {
+  color: #fff;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction.selected
+  .rns-reaction-button
+  .rns-label::after {
+  background-color: #fff;
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction:first-child
+  .rns-label::after {
+  -webkit-mask-image: var(--hel-icon--face-smile);
+  mask-image: var(--hel-icon--face-smile);
+}
+
+.rns
+  .rns-plugin
+  .rns-reactions
+  .reactions
+  .rns-reaction:last-child
+  .rns-label::after {
+  -webkit-mask-image: var(--hel-icon--face-sad);
+  mask-image: var(--hel-icon--face-sad);
+}
+
+.rns .rns-plugin .rns-shares {
+  margin-top: 64px;
+  padding: 0 calc(24px / 4);
+}
+
+.rns .rns-plugin .rns-shares .rns-header {
+  --line-height: 1.2222222222;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: var(--line-height);
+  margin-bottom: 0;
+}
+
+@media (min-width: 992px) {
+  .rns .rns-plugin .rns-shares .rns-header {
+    --line-height: 1.5;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+}
+
+.rns .rns-plugin .rns-shares .rns-shares-list {
+  margin-top: 32px;
+}
+
+@media only screen and (min-width: 681px) {
+  .rns .rns-plugin .rns-shares .rns-shares-list {
+    margin-bottom: 0;
+    margin-left: -8px;
+    margin-right: -8px;
+    margin-top: 32px;
+  }
+}
+
+.rns .rns-plugin .rns-shares .rns-shares-list .rns-share {
+  padding: 0 !important;
+}
+
+.rns .rns-plugin .rns-shares .rns-shares-list .rns-share {
+  margin: 0 8px;
+  width: auto;
+}
+
+@media only screen and (max-width: 680px) {
+  .rns .rns-plugin .rns-shares .rns-shares-list .rns-share {
+    padding: 0 !important;
+  }
+
+  .rns .rns-plugin .rns-shares .rns-shares-list .rns-share {
+    margin: 16px 0 0;
+    width: calc(50% - 16px);
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .rns .rns-plugin .rns-shares .rns-shares-list .rns-share:first-child,
+  .rns .rns-plugin .rns-shares .rns-shares-list .rns-share:nth-child(2) {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .rns .rns-plugin .rns-shares .rns-shares-list .rns-share:nth-child(odd) {
+    margin-right: 4px;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .rns .rns-plugin .rns-shares .rns-shares-list .rns-share:nth-child(even) {
+    margin-left: 4px;
+  }
+}
+
+.rns .rns-plugin .rns-shares .rns-shares-list .rns-share .rns-share-button {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  color: #000;
+  display: flex;
+  justify-content: left;
+  padding: 0;
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button::after {
+  --size: 100%;
+  border: 2px solid rgba(0, 0, 0, 0);
+  content: '';
+  height: var(--size);
+  left: 0;
+  position: absolute;
+  width: var(--size);
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button::before {
+  background-color: #000;
+  background-size: contain;
+  content: '';
+  display: flex;
+  height: 32px;
+  -webkit-mask-image: var(--hel-icon--share);
+  mask-image: var(--hel-icon--share);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 32px 32px;
+  mask-size: 32px 32px;
+  vertical-align: bottom;
+  width: 32px;
+  margin-right: 8px;
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button:focus::after {
+  --size: calc(100% + 8px);
+  border-color: #000;
+  left: calc(-8px / 2);
+  top: calc(-8px / 2);
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button:hover {
+  opacity: 1;
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button:hover::before {
+  background-color: #000;
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button:hover
+  .rns-label {
+  color: #000;
+  text-decoration: underline;
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button
+  .rns-icon {
+  display: none;
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share
+  .rns-share-button
+  .rns-label {
+  --line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: var(--line-height);
+  padding-right: calc(8px / 2);
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share.rns-share-facebook
+  .rns-share-button::before {
+  -webkit-mask-image: var(--hel-icon--facebook);
+  mask-image: var(--hel-icon--facebook);
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share.rns-share-whatsapp
+  .rns-share-button::before {
+  -webkit-mask-image: var(--hel-icon--whatsapp);
+  mask-image: var(--hel-icon--whatsapp);
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share.rns-share-twitter
+  .rns-share-button::before {
+  -webkit-mask-image: var(--hel-icon--twitter);
+  mask-image: var(--hel-icon--twitter);
+}
+
+.rns
+  .rns-plugin
+  .rns-shares
+  .rns-shares-list
+  .rns-share.rns-share-email
+  .rns-share-button::before {
+  -webkit-mask-image: var(--hel-icon--email);
+  mask-image: var(--hel-icon--email);
+}
+
+.rns .rns-plugin .rns-inputs {
+  margin-top: 48px;
+  max-width: 688px;
+  padding: calc(24px / 4);
+}
+
+.rns .rns-plugin .rns-inputs .rns-header {
+  --line-height: 1.2222222222;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: var(--line-height);
+  margin-bottom: 0;
+}
+
+@media (min-width: 992px) {
+  .rns .rns-plugin .rns-inputs .rns-header {
+    --line-height: 1.5;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+}
+
+.rns .rns-plugin .rns-inputs .rns-input-description {
+  --line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: var(--line-height);
+  color: #666;
+  margin: 24px 0 0;
+  opacity: 1;
+}
+
+.rns .rns-plugin .rns-inputs .rns-input-field {
+  --line-height: 1.5555555556;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: var(--line-height);
+  border: 2px solid gray;
+  font-family: HelsinkiGrotesk, Arial, sans-serif;
+  height: 188px;
+  margin-top: 24px;
+  padding: 16px;
+}
+
+.rns .rns-plugin .rns-inputs .rns-form-submit {
+  --line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: var(--line-height);
+  background-color: #000;
+  border: 2px solid #000;
+  color: #fff;
+  display: inline-flex;
+  margin-top: 24px;
+  padding: 16px 24px;
+  position: relative;
+}
+
+.rns .rns-plugin .rns-inputs .rns-form-submit::after {
+  background-color: #fff;
+  background-size: contain;
+  content: '';
+  display: flex;
+  height: 24px;
+  -webkit-mask-image: var(--hel-icon--arrow-right);
+  mask-image: var(--hel-icon--arrow-right);
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 24px 24px;
+  mask-size: 24px 24px;
+  vertical-align: bottom;
+  width: 24px;
+  margin-left: 16px;
+}
+
+.rns .rns-plugin .rns-inputs .rns-form-submit::before {
+  --size: 100%;
+  border: 2px solid rgba(0, 0, 0, 0);
+  content: '';
+  height: var(--size);
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: var(--size);
+}
+
+.rns .rns-plugin .rns-inputs .rns-form-submit:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.rns .rns-plugin .rns-inputs .rns-form-submit:focus::before {
+  --size: calc(100% + calc(24px / 2));
+  border-color: #000;
+  left: calc(-24px / 4);
+  top: calc(-24px / 4);
+}
+
+.rns .rns-plugin .rns-inputs .rns-form-submit:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.rns .rns-plugin .rns-inputs .rns-form-submit:hover::after {
+  background-color: #000;
+}

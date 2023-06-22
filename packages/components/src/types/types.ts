@@ -107,3 +107,23 @@ export enum SPORTS_CATEGORIES {
 
 export const isSportsCategory = (value: unknown): value is SPORTS_CATEGORIES =>
   Object.values(SPORTS_CATEGORIES).includes(value as SPORTS_CATEGORIES);
+
+export type RnsData = {
+  apiKey?: string;
+  title?: string;
+  canonicalUrl?: string;
+  author?: string;
+  date?: string;
+  categories?: string[];
+  commentNumber?: number;
+  postId?: string;
+};
+
+export {};
+
+declare global {
+  interface Window {
+    rnsData: RnsData;
+    resetRns: () => void;
+  }
+}

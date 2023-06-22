@@ -4,13 +4,17 @@ import {
 } from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
 
+import { useCookies } from 'hds-react';
 import type { SSRConfig } from 'next-i18next';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
+import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
+import { createAskemInstance } from '../components/askem';
+import AskemProvider from '../components/askem/AskemProvider';
 import ErrorFallback from '../components/errorPages/ErrorFallback';
 import EventsCookieConsent from '../components/eventsCookieConsent/EventsCookieConsent';
 import ResetFocus from '../components/resetFocus/ResetFocus';
@@ -25,6 +29,10 @@ export type Props = {
   routerHelper: CmsRoutedAppHelper;
   appName: string;
   matomoConfiguration: Parameters<typeof createMatomoInstance>[0];
+  askemFeedbackConfiguration: Parameters<typeof createAskemInstance>[0];
+  onConsentGiven?: (askemConsentGiven: boolean) => void;
+  asPath: string;
+  withConsent: boolean;
 } & NavigationProviderProps &
   SSRConfig;
 
@@ -37,13 +45,19 @@ function BaseApp({
   cmsHelper,
   routerHelper,
   matomoConfiguration,
+  askemFeedbackConfiguration,
+  asPath,
+  withConsent,
 }: Props) {
+  const { getAllConsents } = useCookies();
+
   // Unset hidden visibility that was applied to hide the first server render
   // that does not include styles from HDS. HDS applies styling by injecting
   // style tags into the head. This requires the existence of a document object.
   // The document object does not exist during server side renders.
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
   //       SEO performance is not impacted.
+
   React.useEffect(() => {
     setTimeout(() => {
       const body = document?.body;
@@ -54,10 +68,36 @@ function BaseApp({
     }, 10);
   }, []);
 
+  const [askemConsentGiven, setAskemConsentGiven] = useState<boolean>(false);
+
+  // todo: matomo is not updated.
+  const handleConsentGiven = useCallback(() => {
+    const consents = getAllConsents();
+    setAskemConsentGiven(
+      consents['askemBid'] &&
+        consents['askemBidTs'] &&
+        consents['askemReaction']
+    );
+  }, [getAllConsents]);
+
+  useEffect(() => {
+    if (asPath) {
+      handleConsentGiven();
+    }
+  }, [handleConsentGiven, asPath]);
+
+  const askemFeedbackInstance = React.useMemo(
+    () =>
+      createAskemInstance({
+        ...askemFeedbackConfiguration,
+        consentGiven: askemConsentGiven,
+      }),
+    [askemFeedbackConfiguration, askemConsentGiven]
+  );
+
   const matomoInstance = React.useMemo(
     () => createMatomoInstance(matomoConfiguration),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [createMatomoInstance]
+    [matomoConfiguration]
   );
 
   const FallbackComponent = ({ error }: { error: Error }) => (
@@ -68,21 +108,26 @@ function BaseApp({
     <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
       <ErrorBoundary FallbackComponent={FallbackComponent}>
         <MatomoProvider value={matomoInstance}>
-          <GeolocationProvider>
-            <NavigationProvider
-              headerMenu={headerMenu}
-              footerMenu={footerMenu}
-              languages={languages}
-            >
-              <ResetFocus />
-              {children}
-              <EventsCookieConsent
-                allowLanguageSwitch={false}
-                appName={appName}
-              />
-              <ToastContainer />
-            </NavigationProvider>
-          </GeolocationProvider>
+          <AskemProvider value={askemFeedbackInstance}>
+            <GeolocationProvider>
+              <NavigationProvider
+                headerMenu={headerMenu}
+                footerMenu={footerMenu}
+                languages={languages}
+              >
+                <ResetFocus />
+                {children}
+                {withConsent && (
+                  <EventsCookieConsent
+                    onConsentGiven={handleConsentGiven}
+                    allowLanguageSwitch={false}
+                    appName={appName}
+                  />
+                )}
+                <ToastContainer />
+              </NavigationProvider>
+            </GeolocationProvider>
+          </AskemProvider>
         </MatomoProvider>
       </ErrorBoundary>
     </CmsHelperProvider>

@@ -197,6 +197,7 @@ export default function ArticleArchive({
           <FooterSection
             menu={footerMenu}
             appName={commonT('appHobbies:appName')}
+            feedbackWithPadding
           />
         }
       />

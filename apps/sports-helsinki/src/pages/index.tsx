@@ -62,7 +62,11 @@ const HomePage: NextPage<{
           />
         }
         footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+          <FooterSection
+            menu={footerMenu}
+            appName={t('appSports:appName')}
+            hasFeedBack={false}
+          />
         }
       />
     </MatomoWrapper>

@@ -8,18 +8,25 @@
     },
     "optionalMatomo": {
       "title": "Matomo",
-      "text": "Matomo Analytics-programvaran används för att spåra och utveckla webbplatsen för att möta användarnas behov.",
-      "expandAriaLabel": "Visa information om kakor som är relaterade till Matomo.",
-      "checkboxAriaDescription": "Matomo använder kakor."
+      "text": "Matomo-analytiikkaohjelmistolla seurataan ja kehitetään verkkosivustoa käyttäjien tarpeita vastaavaksi.",
+      "expandAriaLabel": "Näytä Matomoon liittyvät evästetiedot.",
+      "checkboxAriaDescription": "Matomo käyttää evästeitä."
+    },
+    "optionalAskem": {
+      "title": "Askem",
+      "text": "Askem mahdollistaa nopean palautteen jättämisen sivustolla.",
+      "expandAriaLabel": "Näytä Askemin liittyvät evästetiedot.",
+      "checkboxAriaDescription": "Askem käyttää evästeitä."
     }
   },
   "cookies": {
-    "matomo": "Matomo-tilastointijärjestelmän eväste",
-    "linkedevents": "Eväste tapahtumien hakemisen valtuuttamiseen",
-    "i18next": "Eväste sivuston kielivalinnan muistamiseen",
+    "matomo": "Matomo-tilastointijärjestelmän eväste.",
+    "askem": "Askem-reaktionappien toimintaan liittyvä tietue.",
+    "linkedevents": "Eväste tapahtumien hakemisen valtuuttamiseen.",
+    "i18next": "Eväste sivuston kielivalinnan muistamiseen.",
     "servicemap_analytics": "Matomo-tilastointijärjestelmän eväste palvelukartalle.",
-    "servicemap_session": "Palvelukartan istunto",
-    "servicemap_ga": "Google-analytiikan eväste palvelukartalle",
+    "servicemap_session": "Palvelukartan istunto.",
+    "servicemap_ga": "Google-analytiikan eväste palvelukartalle.",
     "wordpress": "Wordpress-sisällönhallintajärjestelmän toimintaan liittyvä eväste."
   },
   "expiration": {
@@ -30,5 +37,10 @@
     "years": "{{ days }} vuotta",
     "hours": "{{ hours }} tuntia",
     "days": "{{ days }} päivää"
+  },
+  "askem": {
+    "cookiesRequiredTitle": "Sivun palautenappeja ei voida näyttää",
+    "cookiesRequiredDescription": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset antamaan palautetta tästä sivusta sallimalla evästeasetuksista tilastointiin liittyvät evästeet.",
+    "cookieSettingsButtonText": "Muokkaa evästeasetuksia"
   }
 }

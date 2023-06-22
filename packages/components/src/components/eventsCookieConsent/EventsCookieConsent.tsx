@@ -1,24 +1,30 @@
+import { useMatomo } from '@jonkoops/matomo-tracker-react';
 import type { ContentSource } from 'hds-react';
-import { useCookies, CookieModal } from 'hds-react';
-import React from 'react';
+import { CookiePage, useCookies, CookieModal } from 'hds-react';
+import React, { useCallback } from 'react';
 import { MAIN_CONTENT_ID } from '../../constants';
 import { useConsentTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
 
 type Props = {
   appName: string;
+  onConsentGiven?: () => void;
   allowLanguageSwitch?: boolean;
+  isModal?: boolean;
 };
 
 const EventsCookieConsent: React.FC<Props> = ({
   appName,
+  onConsentGiven,
   allowLanguageSwitch = true,
+  isModal = true,
 }) => {
   const locale = useLocale();
   const { t, i18n } = useConsentTranslation();
   const [language, setLanguage] =
     React.useState<ContentSource['currentLanguage']>(locale);
   const { getAllConsents } = useCookies();
+  const { pushInstruction } = useMatomo();
   const [showCookieConsentModal, setShowCookieConsentModal] = React.useState(
     !Object.keys(getAllConsents()).length
   );
@@ -32,11 +38,28 @@ const EventsCookieConsent: React.FC<Props> = ({
     },
     [i18n, setLanguage, allowLanguageSwitch]
   );
+
+  const handleMatomoUpdate = useCallback(() => {
+    const getConsentStatus = (cookieId: string) => {
+      const consents = getAllConsents();
+      return consents[cookieId];
+    };
+    if (getConsentStatus('matomo')) {
+      pushInstruction('requireCookieConsent');
+    } else {
+      pushInstruction('setCookieConsentGiven');
+    }
+  }, [getAllConsents, pushInstruction]);
+
   const contentSource: ContentSource = React.useMemo(
     () => ({
       siteName: appName,
       onAllConsentsGiven: () => {
         setShowCookieConsentModal(false);
+        if (onConsentGiven) {
+          handleMatomoUpdate();
+          onConsentGiven();
+        }
       },
       currentLanguage: language as string as ContentSource['currentLanguage'],
       requiredCookies: {
@@ -121,6 +144,37 @@ const EventsCookieConsent: React.FC<Props> = ({
               },
             ],
           },
+          {
+            title: t('consent:groups.optionalAskem.title'),
+            text: t('consent:groups.optionalAskem.text'),
+            expandAriaLabel: t('consent:groups.optionalAskem.expandAriaLabel'),
+            checkboxAriaDescription: t(
+              'consent:groups.optionalAskem.checkboxAriaDescription'
+            ),
+            cookies: [
+              {
+                id: 'askemBid',
+                name: 'rnsbid',
+                hostName: 'reactandshare.com',
+                description: t('consent:cookies.askem'),
+                expiration: '-',
+              },
+              {
+                id: 'askemBidTs',
+                name: 'rnsbid_ts',
+                hostName: 'reactandshare.com',
+                description: t('consent:cookies.askem'),
+                expiration: '-',
+              },
+              {
+                id: 'askemReaction',
+                name: 'rns_reaction_*',
+                hostName: 'reactandshare.com',
+                description: t('consent:cookies.askem'),
+                expiration: '-',
+              },
+            ],
+          },
         ],
       },
       language: {
@@ -129,12 +183,17 @@ const EventsCookieConsent: React.FC<Props> = ({
       },
       focusTargetSelector: MAIN_CONTENT_ID,
     }),
-    [t, language, appName, onLanguageChange]
+    [appName, language, t, onLanguageChange, onConsentGiven, handleMatomoUpdate]
   );
 
-  if (!showCookieConsentModal) return null;
-
-  return <CookieModal contentSource={contentSource} />;
+  return (
+    <>
+      {isModal && showCookieConsentModal && (
+        <CookieModal contentSource={contentSource} />
+      )}
+      {!isModal && <CookiePage contentSource={contentSource} />}
+    </>
+  );
 };
 
 export default EventsCookieConsent;

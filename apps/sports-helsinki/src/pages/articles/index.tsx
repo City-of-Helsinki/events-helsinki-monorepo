@@ -198,6 +198,7 @@ export default function ArticleArchive({
           <FooterSection
             menu={footerMenu}
             appName={commonT('appSports:appName')}
+            feedbackWithPadding
           />
         }
       />

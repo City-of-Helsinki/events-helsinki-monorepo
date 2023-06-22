@@ -6,11 +6,13 @@ export const SEARCH_ROUTES = {
 // TODO: Set a typing that tells that it is extending SEARCH_ROUTES
 export const ROUTES = {
   ...SEARCH_ROUTES,
+  FRONT_PAGE: '/',
   COURSES: '/courses/[eventId]',
   VENUES: '/venues/[venueId]',
   ARTICLE_ARCHIVE: '/article-archive',
   ARTICLES: '/articles/[...slug]',
   PAGES: '/pages/[...slug]',
+  COOKIE_CONSENT: '/cookie-consent',
   LINK: '',
 };
 

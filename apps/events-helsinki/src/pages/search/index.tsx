@@ -58,6 +58,7 @@ export default function Search() {
           <FooterSection
             menu={footerMenu}
             appName={tAppEvents('appEvents:appName')}
+            feedbackWithPadding
           />
         }
       />

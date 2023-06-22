@@ -14,7 +14,7 @@
     },
     "optionalAskem": {
       "title": "Askem",
-      "text": "Askem text SV.",
+      "text": "Askem möjliggör snabb feedback på webbplatsen.",
       "expandAriaLabel": "Visa information om kakor som är relaterade till Askem.",
       "checkboxAriaDescription": "Askem uses cookies."
     }

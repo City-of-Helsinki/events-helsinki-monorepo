@@ -14,7 +14,7 @@
     },
     "optionalAskem": {
       "title": "Askem",
-      "text": "Askem text FI.",
+      "text": "Askem mahdollistaa nopean palautteen jättämisen sivustolla.",
       "expandAriaLabel": "Näytä Askemin liittyvät evästetiedot.",
       "checkboxAriaDescription": "Askem käyttää evästeitä."
     }

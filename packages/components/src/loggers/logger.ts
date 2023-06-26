@@ -46,7 +46,7 @@ function formatMessage(
   return [
     new Date(messageData.timestamp).toLocaleTimeString(),
     `${color(renderedTag)} -`,
-    message,
+    messageData.message,
   ].join(' ');
 }
 

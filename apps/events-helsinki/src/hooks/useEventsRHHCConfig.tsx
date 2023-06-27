@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
+  EventDetails,
   getLinkArrowLabel,
   useLocale,
   useCommonTranslation,
   useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
+} from '@events-helsinki/components';
+import type {
+  EventFieldsFragment,
+  EventDetailsProps,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -18,8 +22,6 @@ import {
   defaultConfig as rhhcDefaultConfig,
   ModuleItemTypeEnum,
 } from 'react-helsinki-headless-cms';
-import EventDetails from '../../../../packages/components/src/components/event/eventDetails/EventDetails';
-import type { EventDetailsProps } from '../../../../packages/components/src/components/event/eventDetails/EventDetails';
 import { ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import routerHelper from '../domain/app/routerHelper';

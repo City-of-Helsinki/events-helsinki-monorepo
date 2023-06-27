@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import type { EventFieldsFragment } from '@events-helsinki/components';
+import type {
+  EventFieldsFragment,
+  EventDetailsProps,
+} from '@events-helsinki/components';
 import {
   getLinkArrowLabel,
   useLocale,
@@ -8,6 +11,7 @@ import {
   useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
+  EventDetails,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -23,8 +27,6 @@ import AppConfig from '../domain/app/AppConfig';
 import routerHelper from '../domain/app/routerHelper';
 import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
 import ArticleDetails from '../domain/article/articleDetails/ArticleDetails';
-import type { EventDetailsProps } from '../domain/event/eventDetails/EventDetails';
-import EventDetails from '../domain/event/eventDetails/EventDetails';
 import getVenueSourceId from '../domain/venue/utils/getVenueSourceId';
 import type { VenueDetailsProps } from '../domain/venue/venueDetails/VenueDetails';
 import VenueDetails from '../domain/venue/venueDetails/VenueDetails';

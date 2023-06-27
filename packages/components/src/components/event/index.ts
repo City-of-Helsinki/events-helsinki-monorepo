@@ -10,3 +10,5 @@ export { default as OrganizationInfo } from './eventInfo/OrganizationInfo';
 export { default as OtherEventTimes } from './eventInfo/OtherEventTimes';
 export { default as EventPageMeta } from './eventPageMeta/EventPageMeta';
 export { default as SimilarEvents } from './similarEvents/SimilarEvents';
+export { default as EventDetails } from './eventDetails/EventDetails';
+export type { EventDetailsProps } from './eventDetails/EventDetails';

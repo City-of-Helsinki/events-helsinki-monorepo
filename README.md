@@ -248,6 +248,8 @@ To enable the support for symbolic links on Windows 10 you need to:
 
 Static pages are not revalidated automatic due issues on production. It can be done manually via 'api/revalidate'. OpenShift environments have a cronjob to trigger revalidation.
 
+The requests are JSON-POST-calls and the secret parameter that needs to be used in it, can be found from the [Azure Portal key vault](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.KeyVault%2Fvaults).
+
 ### 4.1 Trigger revalidate all
 
 Trigger revalidation requires secret token value on POST body. Correct secret token value found from keyvault.

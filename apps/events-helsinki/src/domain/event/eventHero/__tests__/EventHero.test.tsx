@@ -179,12 +179,12 @@ it('Register button should be visible and clickable', async () => {
   render(<EventHero event={mockEvent} />);
 
   expect(
-    screen.getByText(translations.event.hero.buttonEnrol)
+    screen.getByText(translations.event.hero.buttonBuyTickets)
   ).toBeInTheDocument();
 
   await userEvent.click(
     screen.getByRole('button', {
-      name: translations.event.hero.ariaLabelEnrol,
+      name: translations.event.hero.ariaLabelBuyTickets,
     })
   );
 

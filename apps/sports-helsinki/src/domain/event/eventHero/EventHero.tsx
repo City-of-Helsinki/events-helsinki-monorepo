@@ -72,10 +72,6 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
     router.push(`${returnPath}${remainingQueryString}`);
   };
 
-  const goToBuyTicketsPage = () => {
-    window.open(offerInfoUrl);
-  };
-
   const startTime =
     superEvent?.status === 'pending'
       ? ''
@@ -161,26 +157,15 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                       </InfoWithIcon>
                     </div>
                   )}
-                  {showBuyButton && (
-                    <div className={styles.buyButtonWrapper}>
-                      <Button
-                        aria-label={t('hero.ariaLabelBuyTickets')}
-                        onClick={goToBuyTicketsPage}
-                        iconRight={<IconLinkExternal aria-hidden />}
-                        variant="success"
-                      >
-                        {t('hero.buttonBuyTickets') as string}
-                      </Button>
-                    </div>
-                  )}
-                  {registrationUrl && (
+                  {(showBuyButton || registrationUrl) && (
                     <div className={styles.registrationButtonWrapper}>
                       <Button
-                        theme={AppConfig.defaultButtonTheme}
-                        variant={AppConfig.defaultButtonVariant}
-                        className={buttonStyles.buttonCoatBlue}
+                        variant="success"
                         aria-label={t('hero.ariaLabelEnrol')}
-                        onClick={() => window.open(registrationUrl)}
+                        onClick={() =>
+                          window.open(registrationUrl || offerInfoUrl)
+                        }
+                        iconRight={<IconLinkExternal aria-hidden />}
                       >
                         {t('hero.buttonEnrol') as string}
                       </Button>

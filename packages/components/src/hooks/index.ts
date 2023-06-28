@@ -2,7 +2,6 @@ export { usePromise } from './use-promise';
 export { useDeepCompareMemoize } from './use-deep-compare-memoize';
 export { default as useDebounce } from './useDebounce';
 export { default as useDropdownKeyboardNavigation } from './useDropdownKeyboardNavigation';
-export { default as useErrorBoundary } from './useErrorBoundary';
 export { default as useIsSmallScreen } from './useIsSmallScreen';
 export { default as useLocale } from './useLocale';
 export { default as useResetState } from './useResetState';

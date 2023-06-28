@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import React from 'react';
 import DateSelector from './DateSelector';
@@ -6,7 +6,12 @@ import DateSelector from './DateSelector';
 export default {
   title: 'Example/DateSelector',
   component: DateSelector,
-} as ComponentMeta<typeof DateSelector>;
+} as Meta<typeof DateSelector>;
+
+const today = new Date();
+const nextMonth = new Date(today);
+nextMonth.setDate(today.getDate() + 31);
+nextMonth.toLocaleDateString();
 
 const styles = {
   dateAndButtonWrapper: {
@@ -29,7 +34,7 @@ const styles = {
   },
 };
 
-const Template: ComponentStory<typeof DateSelector> = (args) => (
+const Template: StoryFn<typeof DateSelector> = (args) => (
   <div style={styles.dateAndButtonWrapper}>
     <div style={styles.dateSelectorWrapper}>
       <DateSelector {...args} />
@@ -37,35 +42,33 @@ const Template: ComponentStory<typeof DateSelector> = (args) => (
   </div>
 );
 
-export const DateSelectorDefault = Template.bind({});
+export const DateSelectorDefault = {
+  render: Template,
 
-const today = new Date();
-const nextMonth = new Date(today);
-nextMonth.setDate(today.getDate() + 31);
-nextMonth.toLocaleDateString();
+  args: {
+    dateTypes: ['today', 'tomorrow'],
+    startDate: today,
+    endDate: nextMonth,
+    isCustomDate: false,
+    name: 'date',
+  },
 
-DateSelectorDefault.args = {
-  dateTypes: ['today', 'tomorrow'],
-  startDate: today,
-  endDate: nextMonth,
-  isCustomDate: false,
-  name: 'date',
-};
-DateSelectorDefault.argTypes = {
-  isCustomDate: {
-    options: [true, false],
-    control: { type: 'radio' },
-  },
-  onChangeDateTypes: {
-    control: false,
-  },
-  onChangeEndDate: {
-    control: false,
-  },
-  onChangeStartDate: {
-    control: false,
-  },
-  toggleIsCustomDate: {
-    control: false,
+  argTypes: {
+    isCustomDate: {
+      options: [true, false],
+      control: { type: 'radio' },
+    },
+    onChangeDateTypes: {
+      control: false,
+    },
+    onChangeEndDate: {
+      control: false,
+    },
+    onChangeStartDate: {
+      control: false,
+    },
+    toggleIsCustomDate: {
+      control: false,
+    },
   },
 };

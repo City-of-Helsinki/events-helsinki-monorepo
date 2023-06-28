@@ -19,7 +19,6 @@ export const parameters = {
     },
   },
   viewport: {
-    defaultViewport: 'extraSmall',
     viewports: INITIAL_VIEWPORTS,
   },
   nextRouter: {

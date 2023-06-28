@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import React from 'react';
 import DateRangePicker from './DateRangePicker';
@@ -6,12 +6,8 @@ import DateRangePicker from './DateRangePicker';
 export default {
   title: 'Example/DateRangePicker',
   component: DateRangePicker,
-} as ComponentMeta<typeof DateRangePicker>;
+} as Meta<typeof DateRangePicker>;
 
-const Template: ComponentStory<typeof DateRangePicker> = (args) => (
-  <DateRangePicker {...args} />
-);
-
-export const DateRangePickerDefault = Template.bind({});
-
-DateRangePickerDefault.args = {};
+export const DateRangePickerDefault = {
+  args: {},
+};

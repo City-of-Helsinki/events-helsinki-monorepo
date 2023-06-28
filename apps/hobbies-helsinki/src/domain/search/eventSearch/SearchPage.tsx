@@ -12,7 +12,7 @@ import {
   EVENT_SORT_OPTIONS,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
-import qs from 'query-string';
+import queryString from 'query-string';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
@@ -42,7 +42,9 @@ const SearchPage: React.FC<{
   const { meta } = useConfig();
 
   const eventFilters = React.useMemo(() => {
-    const searchParams = new URLSearchParams(qs.stringify(router.query));
+    const searchParams = new URLSearchParams(
+      queryString.stringify(router.query)
+    );
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: ['keywords', 'location'],
       pageSize: PAGE_SIZE,

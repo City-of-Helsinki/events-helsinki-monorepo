@@ -99,7 +99,7 @@ it('should render event info fields', async () => {
   ];
 
   itemsByText.forEach(async (item) => {
-    expect(await screen.findByText(item)).toBeInTheDocument();
+    await screen.findByText(item);
   });
 });
 

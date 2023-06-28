@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import { Button, IconSearch } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import qs, { parse } from 'query-string';
+import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 import IconPersonRunning from '../../../assets/icons/IconPersonRunning';
@@ -61,7 +61,7 @@ export const useSimpleVenueSearchForm = ({
   const router = useRouter();
 
   const searchParams = React.useMemo(
-    () => new URLSearchParams(qs.stringify(router.query)),
+    () => new URLSearchParams(queryString.stringify(router.query)),
     [router.query]
   );
 
@@ -77,7 +77,7 @@ export const useSimpleVenueSearchForm = ({
     if (searchRoute) {
       router.push({
         pathname: routerHelper.getI18nPath(searchRoute, locale),
-        query: parse(search) as ParsedUrlQueryInput,
+        query: queryString.parse(search) as ParsedUrlQueryInput,
       });
     }
   };

@@ -14,7 +14,7 @@ import {
   isEventSortOption,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
-import qs from 'query-string';
+import queryString from 'query-string';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
@@ -43,7 +43,9 @@ const SearchPage: React.FC<{
   const isSmallScreen = useIsSmallScreen();
 
   const eventFilters = React.useMemo(() => {
-    const searchParams = new URLSearchParams(qs.stringify(router.query));
+    const searchParams = new URLSearchParams(
+      queryString.stringify(router.query)
+    );
     const sortParam = searchParams.get('sort');
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: ['keywords', 'location'],

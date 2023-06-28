@@ -1,5 +1,4 @@
 import type { ParsedUrlQueryInput } from 'querystring';
-
 import {
   Checkbox,
   DateSelector,
@@ -12,7 +11,7 @@ import classNames from 'classnames';
 import { Button, IconSearch, IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import qs, { parse } from 'query-string';
+import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
@@ -51,7 +50,7 @@ const AdvancedSearch: React.FC<Props> = ({
   const router = useRouter();
   const params: { place?: string } = router.query;
   const searchParams = React.useMemo(
-    () => new URLSearchParams(qs.stringify(router.query)),
+    () => new URLSearchParams(queryString.stringify(router.query)),
     [router.query]
   );
 
@@ -112,7 +111,7 @@ const AdvancedSearch: React.FC<Props> = ({
   const goToSearch = (search: string): void => {
     router.push({
       pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
-      query: parse(search) as ParsedUrlQueryInput,
+      query: queryString.parse(search) as ParsedUrlQueryInput,
     });
   };
 

@@ -1,4 +1,4 @@
-import type { WillSendRequestOptions } from '@apollo/datasource-rest';
+import type { AugmentedRequest } from '@apollo/datasource-rest';
 import { RESTDataSource } from '@apollo/datasource-rest';
 import type ContextValue from '../context/ContextValue';
 
@@ -13,7 +13,7 @@ abstract class DataSourceWithContext<
     this.contextValue = contextValue;
   }
 
-  override willSendRequest(request: WillSendRequestOptions) {
+  override willSendRequest(_path: string, request: AugmentedRequest) {
     request.headers['authorization'] = this.contextValue.token;
 
     if (this.contextValue.X_REQUEST_ID) {

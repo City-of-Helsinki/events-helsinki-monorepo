@@ -1,7 +1,6 @@
 import type { ParsedUrlQuery, ParsedUrlQueryInput } from 'querystring';
-
 import type { NextRouter } from 'next/router';
-import qs from 'query-string';
+import queryString from 'query-string';
 import { DEFAULT_LANGUAGE } from '../../constants';
 import isAppLanguage from '../../type-guards/is-app-language';
 import type { AppLanguage } from '../../types';
@@ -112,7 +111,7 @@ export class CmsRoutedAppHelper {
   }
 
   getParsedUrlQueryInput(search: string) {
-    return qs.parse(search) as ParsedUrlQueryInput;
+    return queryString.parse(search) as ParsedUrlQueryInput;
   }
 
   getLocalizedCmsItemUrl(

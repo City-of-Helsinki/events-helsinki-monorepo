@@ -80,7 +80,7 @@ describe('similar venues', () => {
       ).toBeInTheDocument();
     });
     expectedSimilarVenues.forEach(async (venue) => {
-      expect(await screen.findByText(venue.name!)).toBeInTheDocument();
+      await screen.findByText(venue.name!);
     });
   });
 

@@ -174,19 +174,6 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                       </Button>
                     </div>
                   )}
-                  {registrationUrl && (
-                    <div className={styles.registrationButtonWrapper}>
-                      <Button
-                        theme={AppConfig.defaultButtonTheme}
-                        variant={AppConfig.defaultButtonVariant}
-                        className={buttonStyles.buttonCoatBlue}
-                        aria-label={t('hero.ariaLabelEnrol')}
-                        onClick={() => window.open(registrationUrl)}
-                      >
-                        {t('hero.buttonEnrol') as string}
-                      </Button>
-                    </div>
-                  )}
                 </div>
                 {showKeywords && (
                   <div className={styles.categoryWrapper}>

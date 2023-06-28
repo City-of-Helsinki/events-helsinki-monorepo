@@ -121,7 +121,9 @@ it('should render this week tag', () => {
   ).toBeInTheDocument();
 });
 
-it('should hide buy button for free events', () => {
+// buy and enrol buttons are combined together, the difference is in the redirect url
+
+it('should hide buy/enrol button for free events', () => {
   const mockEvent = getFakeEvent({
     offers: [fakeOffer({ isFree: true }) as OfferFieldsFragment],
   });
@@ -129,12 +131,12 @@ it('should hide buy button for free events', () => {
 
   expect(
     screen.queryByRole('button', {
-      name: new RegExp(translations.event.hero.buttonBuyTickets, 'i'),
+      name: new RegExp(translations.event.hero.buttonEnrol, 'i'),
     })
   ).not.toBeInTheDocument();
 });
 
-it('should show buy button', async () => {
+it('should show buy/enrol button', async () => {
   global.open = jest.fn();
   const infoUrl = 'https://test.url';
   const mockEvent = getFakeEvent({
@@ -149,16 +151,9 @@ it('should show buy button', async () => {
 
   render(<EventHero event={mockEvent} />);
 
-  // shouldn't be rendred when externalLinks are not present
-  expect(
-    screen.queryByRole('button', {
-      name: new RegExp(translations.event.hero.buttonEnrol, 'i'),
-    })
-  ).not.toBeInTheDocument();
-
   await userEvent.click(
     screen.getByRole('button', {
-      name: new RegExp(translations.event.hero.buttonBuyTickets, 'i'),
+      name: translations.event.hero.ariaLabelEnrol,
     })
   );
   expect(global.open).toHaveBeenCalledWith(infoUrl);

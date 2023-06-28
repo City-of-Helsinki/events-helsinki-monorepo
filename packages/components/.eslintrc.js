@@ -5,11 +5,9 @@
 
 // Workaround for https://github.com/eslint/eslint/issues/3458 (re-export of @rushstack/eslint-patch)
 require('@events-helsinki/eslint-config-bases/patch/modern-module-resolution');
-
 const {
   getDefaultIgnorePatterns,
 } = require('@events-helsinki/eslint-config-bases/helpers');
-
 module.exports = {
   root: true,
   parserOptions: {
@@ -29,8 +27,8 @@ module.exports = {
     '@events-helsinki/eslint-config-bases/rtl',
     '@events-helsinki/eslint-config-bases/storybook',
     '@events-helsinki/eslint-config-bases/react',
-    // Apply prettier and disable incompatible rules
     '@events-helsinki/eslint-config-bases/prettier',
+    'plugin:storybook/recommended',
   ],
   rules: {
     // optional overrides per project

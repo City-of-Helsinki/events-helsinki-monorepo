@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 
 import React from 'react';
 import LoadingSpinner from './LoadingSpinner';
@@ -6,14 +6,16 @@ import LoadingSpinner from './LoadingSpinner';
 export default {
   title: 'Example/LoadingSpinner',
   component: LoadingSpinner,
-} as ComponentMeta<typeof LoadingSpinner>;
+} as Meta<typeof LoadingSpinner>;
 
-const Template: ComponentStory<typeof LoadingSpinner> = (args) => (
+const Template: StoryFn<typeof LoadingSpinner> = (args) => (
   <LoadingSpinner {...args}>All loaded</LoadingSpinner>
 );
 
-export const LoadingSpinnerDefault = Template.bind({});
+export const LoadingSpinnerDefault = {
+  render: Template,
 
-LoadingSpinnerDefault.args = {
-  isLoading: true,
+  args: {
+    isLoading: true,
+  },
 };

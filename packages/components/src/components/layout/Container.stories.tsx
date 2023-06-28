@@ -1,4 +1,4 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import type { StoryFn, Meta } from '@storybook/react';
 import React from 'react';
 
 import Container from './Container';
@@ -11,15 +11,10 @@ export default {
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof Container>;
+} as Meta<typeof Container>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Container> = (args) => (
-  <Container {...args} />
-);
-
-export const WithChildren = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-WithChildren.args = {
-  children: <p>hello!</p>,
+export const WithChildren = {
+  args: {
+    children: <p>hello!</p>,
+  },
 };

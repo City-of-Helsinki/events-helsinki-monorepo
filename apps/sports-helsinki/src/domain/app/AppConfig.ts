@@ -1,3 +1,4 @@
+import { EventTypeId } from '@events-helsinki/components/types';
 import type { CommonButtonProps } from 'hds-react';
 import getConfig from 'next/config';
 import { i18n } from '../../../next-i18next.config';

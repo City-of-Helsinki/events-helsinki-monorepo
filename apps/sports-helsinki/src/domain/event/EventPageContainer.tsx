@@ -5,6 +5,10 @@ import {
   isEventClosed,
   MAIN_CONTENT_ID,
   useSuperEventLazyLoad,
+  EventClosedHero,
+  EventContent,
+  EventHero,
+  EventPageMeta,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
@@ -13,18 +17,35 @@ import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
+import IconDirection from 'assets/icons/IconDirections';
+import AppConfig from 'domain/app/AppConfig';
 import { ROUTES } from '../../constants';
 import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
-import EventClosedHero from './eventClosedHero/EventClosedHero';
-import EventContent from './eventContent/EventContent';
-import EventHero from './eventHero/EventHero';
+import {
+  getPlainEventUrl,
+  getOrganizationSearchUrl,
+  getEventListLinkUrl,
+} from '../search/eventSearch/utils';
 import styles from './eventPage.module.scss';
-import EventPageMeta from './eventPageMeta/EventPageMeta';
 
-const SimilarEvents = dynamic(() => import('./similarEvents/SimilarEvents'), {
-  ssr: false,
-});
+import { extractLatestReturnPath } from './eventQueryString.util';
+import {
+  useSubEvents,
+  useSubEventsQueryVariables,
+  useOtherEventTimes,
+  useSimilarEventsQuery,
+} from './queryUtils';
+import useEventCards from './useEventCards';
+const SimilarEvents = dynamic(
+  () =>
+    import(
+      '@events-helsinki/components/components/event/similarEvents/SimilarEvents'
+    ),
+  {
+    ssr: false,
+  }
+);
 
 export interface EventPageContainerProps {
   loading: boolean;
@@ -62,14 +83,32 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
               {/* Wait for data to be accessible before updating metadata */}
               <EventPageMeta event={event} />
               {eventClosed ? (
-                <EventClosedHero />
+                <EventClosedHero
+                  appConfig={AppConfig}
+                  router={router}
+                  routerHelper={routerHelper}
+                  locale={locale}
+                />
               ) : (
                 <>
-                  <EventHero event={event} superEvent={superEvent} />
+                  <EventHero
+                    event={event}
+                    superEvent={superEvent}
+                    appConfig={AppConfig}
+                    extractLatestReturnPath={extractLatestReturnPath}
+                  />
                   <EventContent
                     event={event}
                     superEvent={superEvent}
                     hasSimilarEvents={hasSimilarEvents}
+                    appConfig={AppConfig}
+                    iconDirections={IconDirection}
+                    getPlainEventUrl={getPlainEventUrl}
+                    getOrganizationSearchUrl={getOrganizationSearchUrl}
+                    useSubEvents={useSubEvents}
+                    useSubEventsQueryVariables={useSubEventsQueryVariables}
+                    useOtherEventTimes={useOtherEventTimes}
+                    getEventListLinkUrl={getEventListLinkUrl}
                   />
                 </>
               )}
@@ -78,6 +117,8 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 <SimilarEvents
                   event={event}
                   onEventsLoaded={handleSimilarEventsLoaded}
+                  useSimilarEventsQuery={useSimilarEventsQuery}
+                  useEventCards={useEventCards}
                 />
               )}
             </>

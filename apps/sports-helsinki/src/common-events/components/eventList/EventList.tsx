@@ -1,16 +1,24 @@
-import { LoadingSpinner } from '@events-helsinki/components';
+import {
+  LoadingSpinner,
+  EventCard,
+  LargeEventCard,
+} from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Button } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import BasicEventCard from '../../../domain/event/eventCard/EventCard';
-import LargeEventCard from '../../../domain/event/eventCard/LargeEventCard';
+import AppConfig from '../../../domain/app/AppConfig';
+import {
+  getEventUrl,
+  getKeywordOnClickHandler,
+} from '../../../domain/search/eventSearch/utils';
+
 import styles from './eventList.module.scss';
 
 const eventCardsMap = {
-  default: BasicEventCard,
+  default: EventCard,
   large: LargeEventCard, // TODO: ADD LargeEventCard,
 };
 
@@ -41,7 +49,15 @@ const EventList: React.FC<Props> = ({
     <div className={classNames(styles.eventListWrapper, styles[cardSize])}>
       <div className={styles.eventsWrapper}>
         {(events as EventFields[]).map((event) => (
-          <EventCard key={event.id} event={event} />
+          <EventCard
+            key={event.id}
+            event={event}
+            getEventUrlFunction={getEventUrl}
+            showEnrolmentStatusInCardDetails={
+              AppConfig.showEnrolmentStatusInCardDetails
+            }
+            clickAction={getKeywordOnClickHandler}
+          />
         ))}
       </div>
       <div

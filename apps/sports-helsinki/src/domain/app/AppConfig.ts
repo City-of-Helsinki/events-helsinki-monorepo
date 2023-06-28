@@ -1,3 +1,4 @@
+import { EventTypeId } from '@events-helsinki/components/types';
 import type { CommonButtonProps } from 'hds-react';
 import { i18n } from '../../../next-i18next.config';
 import { ROUTES } from '../../constants';
@@ -41,6 +42,11 @@ class AppConfig {
 
   static get cmsPagesContextPath() {
     return process.env.NEXT_PUBLIC_CMS_PAGES_CONTEXT_PATH ?? '/pages';
+  }
+
+  static get supportedEventTypes() {
+    // not used by sports app
+    return [EventTypeId.General];
   }
 
   static get dateFormat() {

@@ -5,12 +5,14 @@ import {
   BaseApp,
   useCommonTranslation,
 } from '@events-helsinki/components';
+import { FallbackComponent } from '@events-helsinki/components/app/BaseApp';
 import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';
 import { appWithTranslation } from 'next-i18next';
 import React from 'react';
 
 import '../styles/globals.scss';
+import { ErrorBoundary } from 'react-error-boundary';
 import nextI18nextConfig from '../../next-i18next.config';
 import { ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
@@ -30,24 +32,30 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { t } = useCommonTranslation();
   const locale = useLocale();
   const { asPath, pathname } = useRouter();
-
+  const appName = t('appHobbies:appName');
   return (
-    <HobbiesApolloProvider>
-      <BaseApp
-        appName={t('appHobbies:appName')}
-        cmsHelper={cmsHelper}
-        routerHelper={routerHelper}
-        matomoConfiguration={AppConfig.matomoConfiguration}
-        askemFeedbackConfiguration={AppConfig.askemFeedbackConfiguration(
-          locale
-        )}
-        withConsent={pathname !== ROUTES.COOKIE_CONSENT}
-        asPath={asPath}
-        {...pageProps}
-      >
-        <Component {...pageProps} />
-      </BaseApp>
-    </HobbiesApolloProvider>
+    <ErrorBoundary
+      FallbackComponent={({ error }) => (
+        <FallbackComponent error={error} appName={appName} />
+      )}
+    >
+      <HobbiesApolloProvider>
+        <BaseApp
+          appName={appName}
+          cmsHelper={cmsHelper}
+          routerHelper={routerHelper}
+          matomoConfiguration={AppConfig.matomoConfiguration}
+          askemFeedbackConfiguration={AppConfig.askemFeedbackConfiguration(
+            locale
+          )}
+          withConsent={pathname !== ROUTES.COOKIE_CONSENT}
+          asPath={asPath}
+          {...pageProps}
+        >
+          <Component {...pageProps} />
+        </BaseApp>
+      </HobbiesApolloProvider>
+    </ErrorBoundary>
   );
 }
 

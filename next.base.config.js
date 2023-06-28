@@ -166,9 +166,6 @@ const nextBaseConfig = ({
     // @link https://nextjs.org/docs/advanced-features/compiler#minification
     swcMinify: true,
 
-    sentry: {
-      hideSourceMaps: true,
-    },
     images: {
       domains: [new URL(process.env.NEXT_PUBLIC_CMS_ORIGIN).origin],
     },

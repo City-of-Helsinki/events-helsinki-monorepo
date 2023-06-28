@@ -1,5 +1,4 @@
 import type { ParsedUrlQueryInput } from 'querystring';
-
 import type { FilterType } from '@events-helsinki/components';
 import {
   AgeFilter,
@@ -14,7 +13,7 @@ import {
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import qs, { parse } from 'query-string';
+import queryString from 'query-string';
 import React from 'react';
 
 import useDivisionOptions from '../../../../common-events/hooks/useDivisionOptions';
@@ -37,7 +36,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const { t } = useTranslation('search');
   const locale = useLocale();
   const router = useRouter();
-  const searchParams = new URLSearchParams(qs.stringify(router.query));
+  const searchParams = new URLSearchParams(queryString.stringify(router.query));
   const {
     categories,
     hobbyTypes,
@@ -98,7 +97,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
 
     router.push({
       pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
-      query: parse(search) as ParsedUrlQueryInput,
+      query: queryString.parse(search) as ParsedUrlQueryInput,
     });
   };
 

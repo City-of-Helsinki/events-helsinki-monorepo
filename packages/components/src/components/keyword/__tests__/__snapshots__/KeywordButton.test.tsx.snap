@@ -11,9 +11,7 @@ exports[`matches snapshot 1`] = `
     class="Tag-module_label__zCgFr tag_hds-tag__label__I6mc8"
     id="hds-tag-label"
   >
-    <span
-      aria-hidden="false"
-    >
+    <span>
       test keyword
     </span>
   </span>

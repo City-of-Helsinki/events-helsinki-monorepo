@@ -1,6 +1,5 @@
-import queryString from 'query-string';
-
 import { UnifiedSearch } from '../useUnifiedSearch';
+import queryString from 'query-string';
 
 function getUnifiedSearch(router) {
   return new UnifiedSearch(router, true);

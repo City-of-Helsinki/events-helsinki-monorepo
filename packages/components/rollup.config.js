@@ -94,7 +94,6 @@ function buildConfig() {
       'next',
       'next-i18next',
       'nprogress',
-      'query-string',
       'react',
       'react-content-loader',
       'react-datepicker',

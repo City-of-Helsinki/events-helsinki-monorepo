@@ -60,7 +60,7 @@ it.each([
   },
 ])('provides flag config $field', ({ field, envName, defaultValue }) => {
   // When undefined, returns false
-  process.env[envName] = undefined;
+  delete process.env[envName];
   // @ts-ignore
   expect(AppConfig[field]).toStrictEqual(defaultValue);
 

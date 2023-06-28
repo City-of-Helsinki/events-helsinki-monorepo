@@ -1,6 +1,5 @@
 import { ApolloProvider as BaseApolloProvider } from '@apollo/client';
 import 'nprogress/nprogress.css';
-import { useErrorBoundary } from '@events-helsinki/components';
 import React from 'react';
 import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import useSportsRHHCConfig from '../../hooks/useSportsRHHCConfig';
@@ -11,14 +10,7 @@ export type Props = {
 };
 
 function SportsApolloProvider({ children }: Props) {
-  const errorHandler = useErrorBoundary();
-  const handleError = React.useCallback(
-    (error: unknown) => {
-      errorHandler(error);
-    },
-    [errorHandler]
-  );
-  const apolloClient = useSportsApolloClient({ handleError });
+  const apolloClient = useSportsApolloClient();
   const rhhcConfig = useSportsRHHCConfig({ apolloClient });
 
   return (

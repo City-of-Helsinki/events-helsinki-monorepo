@@ -44,6 +44,7 @@ export interface Props {
   superEvent?: SuperEventResponse;
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 const EventHero: React.FC<Props> = ({ event, superEvent }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
@@ -70,10 +71,6 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
     router.push(`${returnPath}${remainingQueryString}`);
-  };
-
-  const goToBuyTicketsPage = () => {
-    window.open(offerInfoUrl);
   };
 
   const startTime =
@@ -161,15 +158,19 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                       </InfoWithIcon>
                     </div>
                   )}
-                  {showBuyButton && (
-                    <div className={styles.buyButtonWrapper}>
+                  {(showBuyButton || registrationUrl) && (
+                    <div className={styles.registrationButtonWrapper}>
                       <Button
-                        aria-label={t('hero.ariaLabelBuyTickets')}
-                        onClick={goToBuyTicketsPage}
+                        theme={AppConfig.defaultButtonTheme}
+                        variant={AppConfig.defaultButtonVariant}
+                        className={buttonStyles.buttonCoatBlue}
+                        aria-label={t('hero.ariaLabelEnrol')}
+                        onClick={() =>
+                          window.open(registrationUrl || offerInfoUrl)
+                        }
                         iconRight={<IconLinkExternal aria-hidden />}
-                        variant="success"
                       >
-                        {t('hero.buttonBuyTickets') as string}
+                        {t('hero.buttonEnrol') as string}
                       </Button>
                     </div>
                   )}

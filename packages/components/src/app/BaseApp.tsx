@@ -7,7 +7,6 @@ import 'nprogress/nprogress.css';
 import { useCookies } from 'hds-react';
 import type { SSRConfig } from 'next-i18next';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import { ToastContainer } from 'react-toastify';
 
 import '../styles/globals.scss';
@@ -35,6 +34,14 @@ export type Props = {
   withConsent: boolean;
 } & NavigationProviderProps &
   SSRConfig;
+
+export const FallbackComponent = ({
+  error,
+  appName,
+}: {
+  error: Error;
+  appName: Props['appName'];
+}) => <ErrorFallback error={error} appName={appName} />;
 
 function BaseApp({
   children,
@@ -100,36 +107,30 @@ function BaseApp({
     [matomoConfiguration]
   );
 
-  const FallbackComponent = ({ error }: { error: Error }) => (
-    <ErrorFallback error={error} appName={appName} />
-  );
-
   return (
     <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-      <ErrorBoundary FallbackComponent={FallbackComponent}>
-        <MatomoProvider value={matomoInstance}>
-          <AskemProvider value={askemFeedbackInstance}>
-            <GeolocationProvider>
-              <NavigationProvider
-                headerMenu={headerMenu}
-                footerMenu={footerMenu}
-                languages={languages}
-              >
-                <ResetFocus />
-                {children}
-                {withConsent && (
-                  <EventsCookieConsent
-                    onConsentGiven={handleConsentGiven}
-                    allowLanguageSwitch={false}
-                    appName={appName}
-                  />
-                )}
-                <ToastContainer />
-              </NavigationProvider>
-            </GeolocationProvider>
-          </AskemProvider>
-        </MatomoProvider>
-      </ErrorBoundary>
+      <MatomoProvider value={matomoInstance}>
+        <AskemProvider value={askemFeedbackInstance}>
+          <GeolocationProvider>
+            <NavigationProvider
+              headerMenu={headerMenu}
+              footerMenu={footerMenu}
+              languages={languages}
+            >
+              <ResetFocus />
+              {children}
+              {withConsent && (
+                <EventsCookieConsent
+                  onConsentGiven={handleConsentGiven}
+                  allowLanguageSwitch={false}
+                  appName={appName}
+                />
+              )}
+              <ToastContainer />
+            </NavigationProvider>
+          </GeolocationProvider>
+        </AskemProvider>
+      </MatomoProvider>
     </CmsHelperProvider>
   );
 }

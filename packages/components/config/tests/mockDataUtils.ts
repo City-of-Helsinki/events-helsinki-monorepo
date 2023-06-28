@@ -42,8 +42,8 @@ export const fakeEvents = (
 export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
   return merge<EventDetails, typeof overrides>(
     {
-      id: `hel:${faker.datatype.uuid()}`,
-      internalId: faker.datatype.uuid(),
+      id: `hel:${faker.string.uuid()}`,
+      internalId: faker.string.uuid(),
       name: fakeLocalizedObject(),
       publisher: 'provider:123',
       provider: fakeLocalizedObject(),
@@ -96,9 +96,9 @@ export const fakeTargetGroup = (overrides?: Partial<Audience>): Audience => {
   return merge<Audience, typeof overrides>(
     {
       __typename: 'Audience',
-      id: faker.datatype.uuid(),
+      id: faker.string.uuid(),
       internalContext: '',
-      internalId: faker.datatype.uuid(),
+      internalId: faker.string.uuid(),
       name: fakeLocalizedObject(faker.random.word()),
     },
     overrides
@@ -120,13 +120,13 @@ export const fakeExternalLink = (
 export const fakeImage = (overrides?: Partial<Image>): Image =>
   merge(
     {
-      id: faker.datatype.uuid(),
+      id: faker.string.uuid(),
       internalId: 'https://api.hel.fi/linkedevents-test/v1/image/48566/',
       license: 'cc_by',
-      name: faker.random.words(),
+      name: faker.word.words(),
       url: 'https://api.hel.fi/linkedevents-test/media/images/test.png',
       cropping: '59,0,503,444',
-      photographerName: faker.name.firstName(),
+      photographerName: faker.person.firstName(),
       __typename: 'Image',
     },
     overrides
@@ -165,12 +165,12 @@ export const fakePlaces = (
 export const fakePlace = (overrides?: Partial<Place>): Place =>
   merge(
     {
-      id: faker.datatype.uuid(),
+      id: faker.string.uuid(),
       internalId: 'https://api.hel.fi/linkedevents-test/v1/place/tprek:15376/',
       name: fakeLocalizedObject(),
       streetAddress: fakeLocalizedObject(),
       addressLocality: fakeLocalizedObject(),
-      postalCode: faker.address.zipCode(),
+      postalCode: faker.location.zipCode(),
       hasUpcomingEvents: true,
       telephone: fakeLocalizedObject(),
       email: faker.internet.email(),
@@ -199,7 +199,7 @@ export const fakeKeywords = (
 export const fakeKeyword = (overrides?: Partial<Keyword>): Keyword =>
   merge(
     {
-      id: faker.datatype.uuid(),
+      id: faker.string.uuid(),
       dataSource: 'yso',
       hasUpcomingEvents: true,
       name: fakeLocalizedObject(),
@@ -226,8 +226,8 @@ export const fakeOrganization = (
 ): OrganizationDetails =>
   merge(
     {
-      id: faker.datatype.uuid(),
-      internalId: faker.datatype.uuid(),
+      id: faker.string.uuid(),
+      internalId: faker.string.uuid(),
       isAffiliated: false,
       name: faker.company.name(),
       __typename: 'OrganizationDetails',
@@ -283,7 +283,7 @@ export const fakeBanner = (overrides?: Partial<BannerPage>): BannerPage =>
 export const fakeCmsImage = (overrides?: Partial<CmsImage>): CmsImage =>
   merge(
     {
-      photographerCredit: fakeLocalizedObject(faker.name.lastName()),
+      photographerCredit: fakeLocalizedObject(faker.person.lastName()),
       url: faker.internet.url(),
       __typename: 'CmsImage',
     },
@@ -322,7 +322,7 @@ export const fakeLocalizedCmsImage = (
 export const fakeStaticPage = (overrides?: Partial<StaticPage>): StaticPage =>
   merge(
     {
-      id: faker.datatype.uuid(),
+      id: faker.string.uuid(),
       expired: false,
       headingSection: fakeLocalizedObject(),
       contentSection: fakeLocalizedObject(),
@@ -334,7 +334,7 @@ export const fakeStaticPage = (overrides?: Partial<StaticPage>): StaticPage =>
 
 const sentences: string[] = [];
 const uniqueSentences = (): string => {
-  const sentence = faker.random.words();
+  const sentence = faker.word.words();
 
   if (sentences.includes(sentence)) {
     return uniqueSentences();

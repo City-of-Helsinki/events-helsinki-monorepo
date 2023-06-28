@@ -1,8 +1,9 @@
-import { useErrorHandler } from 'react-error-boundary';
+import { useErrorBoundary as useErrorHandler } from 'react-error-boundary';
 
-const useErrorBoundary = (error?: unknown) => {
+const useErrorBoundary = () => {
+  const { showBoundary } = useErrorHandler();
   // TODO: give options, do special stuff
-  return useErrorHandler(error);
+  return (error?: unknown) => showBoundary(error);
 };
 
 export default useErrorBoundary;

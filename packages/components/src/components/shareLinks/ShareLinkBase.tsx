@@ -1,4 +1,4 @@
-import { stringify } from 'query-string';
+import queryString from 'query-string';
 import type { ReactNode } from 'react';
 import React from 'react';
 import isClient from '../../utils/isClient';
@@ -18,7 +18,7 @@ const ShareLinkBase: React.FC<Props> = ({
   queryParameters,
   windowName,
 }) => {
-  const href = url + '?' + stringify(queryParameters);
+  const href = url + '?' + queryString.stringify(queryParameters);
 
   const handleButtonClick = () => {
     if (isClient) {

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { ParsedUrlQueryInput } from 'querystring';
-
 import fastDeepEqual from 'fast-deep-equal/react';
 import type { NextRouter } from 'next/router';
 import { useRouter } from 'next/router';

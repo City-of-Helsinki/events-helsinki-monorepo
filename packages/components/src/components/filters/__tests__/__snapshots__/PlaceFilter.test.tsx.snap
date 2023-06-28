@@ -10,14 +10,14 @@ exports[`matches snapshot 1`] = `
     id="hds-tag-label"
   >
     <span
-      aria-hidden="false"
+      aria-hidden="true"
     >
       Gräsan taitojen talo
     </span>
   </span>
   <button
     aria-label="Poista suodatin: Gräsan taitojen talo"
-    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz"
+    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz tag_hds-tag__delete-button__33Tgz"
     id="hds-tag-delete-button"
     type="button"
   >

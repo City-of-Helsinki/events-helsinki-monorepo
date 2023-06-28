@@ -9,5 +9,5 @@ declare module '@changey/react-leaflet-markercluster' {
 
   export type MarkerClusterGroupProps = MapLayerProps &
     MarkerClusterGroupOptions;
-  export default abstract class MarkerClusterGroup extends Component<MarkerClusterGroupProps> {}
+  export default class MarkerClusterGroup extends Component<MarkerClusterGroupProps> {}
 }

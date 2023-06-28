@@ -10,14 +10,14 @@ exports[`matches snapshot 1`] = `
     id="hds-tag-label"
   >
     <span
-      aria-hidden="false"
+      aria-hidden="true"
     >
       text
     </span>
   </span>
   <button
     aria-label="Poista suodatin: text"
-    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz"
+    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz tag_hds-tag__delete-button__33Tgz"
     id="hds-tag-delete-button"
     type="button"
   >
@@ -56,14 +56,14 @@ exports[`matches snapshot 2`] = `
     id="hds-tag-label"
   >
     <span
-      aria-hidden="false"
+      aria-hidden="true"
     >
       Some filter text
     </span>
   </span>
   <button
     aria-label="Poista suodatin: Some filter text"
-    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz"
+    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz tag_hds-tag__delete-button__33Tgz"
     id="hds-tag-delete-button"
     type="button"
   >

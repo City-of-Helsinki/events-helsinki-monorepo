@@ -10,7 +10,7 @@ import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import qs from 'query-string';
+import queryString from 'query-string';
 import React from 'react';
 import { PageSection } from 'react-helsinki-headless-cms';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
@@ -60,7 +60,7 @@ function getSearchResultsAsItems(
             venueId: getVenueSourceId(venue?.meta.id),
           },
           locale
-        )}?${qs.stringify({ returnPath: currentPath })}`;
+        )}?${queryString.stringify({ returnPath: currentPath })}`;
         return [
           ...results,
           {

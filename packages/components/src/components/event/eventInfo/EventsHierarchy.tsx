@@ -6,9 +6,6 @@ import {
 } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-
-// import type { EventListQueryVariables } from 'react-helsinki-headless-cms/__generated__-445e2838';
-// import { useSubEventsQueryVariables } from '../queryUtils';
 import type {
   GetEventListLinkUrl,
   UseSubEvents,

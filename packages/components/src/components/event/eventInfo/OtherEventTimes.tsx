@@ -11,8 +11,6 @@ import {
   SkeletonLoader,
   useEventTranslation,
 } from '../../../index';
-
-// import { useOtherEventTimes } from '../queryUtils';
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
 

@@ -27,7 +27,6 @@ import {
   isEventClosed,
   ArrowRightWithLoadingIndicator,
 } from '../../../index';
-// import { getEventUrl } from '../../search/eventSearch/utils';
 import type { keyWordOnClickArgs } from '../eventKeywords/EventKeywords';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';

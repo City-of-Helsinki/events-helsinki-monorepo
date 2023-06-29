@@ -1,11 +1,7 @@
-// import { useLocale } from '@events-helsinki/components';
 import { Button } from 'hds-react';
 import type { NextRouter } from 'next/router';
-// import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-// import AppConfig from '../../app/AppConfig';
-// import type routerHelper from '../../app/routerHelper';
 import type { AppLanguage, RouterHelper } from 'types';
 import type { AppConfig } from '../../../index';
 import styles from './eventClosedHero.module.scss';

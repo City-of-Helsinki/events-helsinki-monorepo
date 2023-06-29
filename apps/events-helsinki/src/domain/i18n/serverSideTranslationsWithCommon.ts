@@ -2,7 +2,7 @@ import type { AppLanguage } from '@events-helsinki/components';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import nextI18nextConfig from '../../../next-i18next.config';
 
-const COMMON_TRANSLATIONS = [
+export const COMMON_TRANSLATIONS = [
   'appEvents',
   'cms',
   'common',

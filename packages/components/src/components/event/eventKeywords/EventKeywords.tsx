@@ -49,19 +49,9 @@ const EventKeywords: React.FC<Props> = ({
     locale
   );
 
-  // tästä tyyppi ja exportataan ylös
-  // exportti tähän
-  // const clickActionFunction = clickAction as (
-  //   router: NextRouter,
-  //   locale: unknown,
-  //   type: unknown,
-  //   value: string
-  // ) => void;
-
   const handleClick =
     (type: keyWordOnClickArgs['type'], value = '') =>
     () => {
-      // if there is no function provided, skip!
       if (!clickAction) {
         return;
       }
@@ -72,8 +62,6 @@ const EventKeywords: React.FC<Props> = ({
         value,
       } as keyWordOnClickArgs);
     };
-  // ) => clickActionFunction(router, locale, type, value);
-  // ) => getKeywordOnClickHandler(router, locale, type, value);
 
   const showComponent =
     today ||

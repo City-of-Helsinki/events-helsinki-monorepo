@@ -26,8 +26,6 @@ import AppConfig from '../domain/app/AppConfig';
 import routerHelper from '../domain/app/routerHelper';
 import type { ArticleDetailsProps } from '../domain/article/articleDetails/ArticleDetails';
 import ArticleDetails from '../domain/article/articleDetails/ArticleDetails';
-// import type { EventDetailsProps } from '../domain/event/eventDetails/EventDetails';
-// import EventDetails from '../domain/event/eventDetails/EventDetails';
 import getVenueSourceId from '../domain/venue/utils/getVenueSourceId';
 import type { VenueDetailsProps } from '../domain/venue/venueDetails/VenueDetails';
 import VenueDetails from '../domain/venue/venueDetails/VenueDetails';

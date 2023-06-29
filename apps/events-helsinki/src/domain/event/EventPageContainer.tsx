@@ -22,10 +22,6 @@ import AppConfig from 'domain/app/AppConfig';
 import { ROUTES } from '../../constants';
 import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
-// import EventClosedHero from './eventClosedHero/EventClosedHero';
-// import EventContent from './eventContent/EventContent';
-// import EventHero from './eventHero/EventHero'
-// import EventPageMeta from './eventPageMeta/EventPageMeta';
 import {
   getPlainEventUrl,
   getOrganizationSearchUrl,

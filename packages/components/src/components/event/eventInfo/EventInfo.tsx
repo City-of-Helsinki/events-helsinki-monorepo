@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/browser';
-import { ReactJSXElement } from '@storybook/theming/dist/ts3.9/_modules/@emotion-react-types-jsx-namespace';
 import { saveAs } from 'file-saver';
 import {
   Button,
@@ -17,7 +16,6 @@ import { useTranslation } from 'next-i18next';
 import type { ElementType } from 'react';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
-// import IconDirections from '../../../assets/icons/IconDirections';
 import type {
   AppLanguage,
   EventFields,

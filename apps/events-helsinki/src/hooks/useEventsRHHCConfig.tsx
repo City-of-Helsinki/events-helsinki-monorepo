@@ -74,7 +74,7 @@ export default function useEventsRHHCConfig(args: {
         EventCardContent: (props: any) => (
           <EventDetails
             {...(props as EventDetailsProps)}
-            // this is stupid, since this will be given new parametes before callin in event keywords.
+            // HACK. this is stupid, since this will be given new parametes before callin in event keywords.
             clickAction={getKeywordOnClickHandler(router, 'fi', 'text', '')}
           />
         ),
@@ -124,5 +124,12 @@ export default function useEventsRHHCConfig(args: {
       },
       internalHrefOrigins,
     } as unknown as Config;
-  }, [commonConfig, commonTranslation, eventTranslation, locale, apolloClient]);
+  }, [
+    commonConfig,
+    commonTranslation,
+    eventTranslation,
+    locale,
+    apolloClient,
+    router,
+  ]);
 }

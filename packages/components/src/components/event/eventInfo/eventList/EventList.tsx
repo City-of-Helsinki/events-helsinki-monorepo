@@ -5,7 +5,6 @@ import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 import { getDateRangeStr, useLocale, getEventFields } from '../../../../index';
 import type { EventFields, GetEventListLinkUrl } from '../../../../index';
-// import { getEventListLinkUrl } from '../../../search/eventSearch/utils';
 import styles from './eventList.module.scss';
 
 const EventList: React.FC<{

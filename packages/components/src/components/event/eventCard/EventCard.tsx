@@ -4,8 +4,6 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-// import { getEventUrl } from '../../search/eventSearch/utils';
-
 import type { AppLanguage } from 'types';
 import type { EventFields } from '../../../index';
 import {

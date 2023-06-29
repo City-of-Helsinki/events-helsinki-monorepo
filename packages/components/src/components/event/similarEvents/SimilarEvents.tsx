@@ -13,8 +13,6 @@ import type {
   useEventCardsProps,
 } from '../../../index';
 import { LoadingSpinner, useEventTranslation } from '../../../index';
-// import { useSimilarEventsQuery } from '../queryUtils';
-// import useEventCards from '../useEventCards';
 import styles from './similarEvents.module.scss';
 
 interface Props {

@@ -7,9 +7,9 @@
 #   2. depend on .dockerignore, you must at least                 #
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
-ARG BUILDER_FROM_IMAGE=helsinkitest/node:16-slim
+ARG BUILDER_FROM_IMAGE=helsinkitest/node:20-slim
 
-FROM helsinkitest/node:16-slim AS deps
+FROM helsinkitest/node:20-slim AS deps
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends rsync
@@ -130,7 +130,7 @@ CMD ["sh", "-c", "echo ${PROJECT}"]
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM helsinkitest/node:16-slim  AS develop
+FROM helsinkitest/node:20-slim  AS develop
 
 # Use non-root user
 USER appuser
@@ -161,7 +161,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM helsinkitest/node:16-slim  AS runner
+FROM helsinkitest/node:20-slim  AS runner
 
 # Use non-root user
 USER appuser

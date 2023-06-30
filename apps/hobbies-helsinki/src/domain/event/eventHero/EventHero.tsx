@@ -1,4 +1,9 @@
+import type {
+  EventFields,
+  SuperEventResponse,
+} from '@events-helsinki/components';
 import {
+  getEventHeroButtonText,
   useLocale,
   getDateRangeStr,
   buttonStyles,
@@ -8,10 +13,6 @@ import {
   EventLocationText as LocationText,
   getEventFields,
   getEventPrice,
-} from '@events-helsinki/components';
-import type {
-  EventFields,
-  SuperEventResponse,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import {
@@ -66,6 +67,8 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
     registrationUrl,
   } = getEventFields(event, locale);
   const eventPriceText = getEventPrice(event, locale, t('hero.offers.isFree'));
+  const buttonText = getEventHeroButtonText(event, 'button', t);
+  const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
   const showKeywords = Boolean(today || thisWeek || keywords.length);
   const returnParam = extractLatestReturnPath(search, locale);
 
@@ -164,13 +167,13 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                         theme={AppConfig.defaultButtonTheme}
                         variant={AppConfig.defaultButtonVariant}
                         className={buttonStyles.buttonCoatBlue}
-                        aria-label={t('hero.ariaLabelEnrol')}
+                        aria-label={buttonAriaLabelText}
                         onClick={() =>
                           window.open(registrationUrl || offerInfoUrl)
                         }
                         iconRight={<IconLinkExternal aria-hidden />}
                       >
-                        {t('hero.buttonEnrol') as string}
+                        {buttonText}
                       </Button>
                     </div>
                   )}

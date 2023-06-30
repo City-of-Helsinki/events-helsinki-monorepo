@@ -177,7 +177,7 @@
   .rns-reaction-button:focus::before {
   --size: calc(100% + calc(24px / 2));
   border-color: #000;
-  left: calc(-24px / 4);
+  left: calc(-24px / 4 - 2px);
 }
 
 .rns
@@ -291,6 +291,7 @@
 
 .rns .rns-plugin .rns-shares .rns-shares-list {
   margin-top: 32px;
+  margin-bottom: 4px;
 }
 
 @media only screen and (min-width: 681px) {
@@ -299,6 +300,7 @@
     margin-left: -8px;
     margin-right: -8px;
     margin-top: 32px;
+    margin-bottom: 4px;
   }
 }
 
@@ -408,8 +410,8 @@
   .rns-share-button:focus::after {
   --size: calc(100% + 8px);
   border-color: #000;
-  left: calc(-8px / 2);
-  top: calc(-8px / 2);
+  left: calc(-8px / 2 - 2px);
+  top: calc(-8px / 2 - 2px);
 }
 
 .rns
@@ -561,6 +563,7 @@
   margin-top: 24px;
   padding: 16px 24px;
   position: relative;
+  margin-bottom: 4px;
 }
 
 .rns .rns-plugin .rns-inputs .rns-form-submit::after {
@@ -601,8 +604,8 @@
 .rns .rns-plugin .rns-inputs .rns-form-submit:focus::before {
   --size: calc(100% + calc(24px / 2));
   border-color: #000;
-  left: calc(-24px / 4);
-  top: calc(-24px / 4);
+  left: calc(-24px / 4 - 2px);
+  top: calc(-24px / 4 - 2px);
 }
 
 .rns .rns-plugin .rns-inputs .rns-form-submit:hover {

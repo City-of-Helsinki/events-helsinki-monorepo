@@ -134,6 +134,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         props: {
           ...(await serverSideTranslationsWithCommon(DEFAULT_LANGUAGE, [
             'search',
+            'event',
           ])),
           landingPage: null,
           page: null,

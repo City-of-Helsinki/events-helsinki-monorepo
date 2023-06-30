@@ -1,16 +1,13 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
-import { isApolloError } from '@apollo/client';
-import type { CmsLanguage, Menu, Language } from '@events-helsinki/components';
+import type { Menu, Language } from '@events-helsinki/components';
 import {
   DEFAULT_FOOTER_MENU_NAME,
   DEFAULT_HEADER_MENU_NAME,
+  HARDCODED_LANGUAGES,
   getLanguageOrDefault,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
-import {
-  LanguagesDocument,
-  MenuDocument,
-} from 'react-helsinki-headless-cms/apollo';
+import { MenuDocument } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
 import initializeEventsApolloClient from '../clients/eventsApolloClient';
 import AppConfig from './AppConfig';
@@ -57,17 +54,16 @@ export default async function getEventsStaticProps<P = Record<string, any>>(
     };
   } catch (e: unknown) {
     // Generic error handling
-    staticGenerationLogger.error(`Error while generating a page: ${e}`, e);
-    if (isApolloError(e as Error)) {
-      return {
-        revalidate: 1,
-        props: {
-          error: {
-            statusCode: 500,
-          },
-        },
-      };
-    }
+    staticGenerationLogger.error(
+      `Error while generating a page (with locale "${context.locale}"):`,
+      e
+    );
+
+    // Throw an error, because otherwise the NextJS generates a page that is always somehow broken:
+    // The biggest issue here is with the translations: https://github.com/i18next/next-i18next/issues/1020.
+    // The i18next instance is not ready to process translations when nextjs tries to render the error page.
+    // When an error is thrown, the page regeneration is abandoned on errors,
+    // so the last successful generation will stay in use in action!
     throw e;
   }
 }
@@ -108,29 +104,10 @@ async function getGlobalCMSData({
     },
     fetchPolicy,
   });
-  const { data: languagesData } = await client.query({
-    query: LanguagesDocument,
-    fetchPolicy,
-  });
-  const languages = getSupportedLanguages(languagesData?.languages, context);
 
   return {
     headerMenu: headerMenuData?.menu,
     footerMenu: footerMenuData?.menu,
-    languages,
+    languages: HARDCODED_LANGUAGES,
   };
-}
-
-function getSupportedLanguages(
-  languages: CmsLanguage[],
-  context: GetStaticPropsContext
-): Language[] {
-  // NextJS uses locales as is in the slug. The headless CMS has a locale and
-  // a slug field. The slug field is meant to be used in urls. To be able to do
-  // so, we have to provide the slug field value for NextJS when configuring its
-  // i18n module. That's why we are trying to find the slug field from NextJS
-  // locales.
-  return languages.filter(({ slug }) =>
-    context.locales?.includes(slug)
-  ) as Language[];
 }

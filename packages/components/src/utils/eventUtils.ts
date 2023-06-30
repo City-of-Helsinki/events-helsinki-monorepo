@@ -15,6 +15,7 @@ import type {
   LocalizedObject,
   PlaceFieldsFragment,
 } from '../types';
+import { EventTypeId } from '../types';
 import getLocalizedString from './getLocalizedString';
 import getSecureImage from './getSecureImage';
 
@@ -112,6 +113,18 @@ export const getEventPrice = (
         ?.filter((e) => e)
         ?.sort()
         ?.join(', ') ?? '';
+};
+
+export const getEventHeroButtonText = (
+  event: EventFields,
+  prefix: string,
+  t: TFunction
+): string => {
+  return t(
+    `hero.${prefix}${
+      event.typeId === EventTypeId.Course ? 'Enrol' : 'BuyTickets'
+    }`
+  );
 };
 
 export const getKeywordList = (

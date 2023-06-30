@@ -3,7 +3,6 @@ import type {
   SuperEventResponse,
 } from '@events-helsinki/components';
 import {
-  getEventHeroButtonAriaLabelText,
   getEventHeroButtonText,
   useLocale,
   getDateRangeStr,
@@ -68,8 +67,8 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
     registrationUrl,
   } = getEventFields(event, locale);
   const eventPriceText = getEventPrice(event, locale, t('hero.offers.isFree'));
-  const buttonText = getEventHeroButtonText(event, t);
-  const buttonAriaLabelText = getEventHeroButtonAriaLabelText(event, t);
+  const buttonText = getEventHeroButtonText(event, 'button', t);
+  const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
   const showKeywords = Boolean(today || thisWeek || keywords.length);
   const returnParam = extractLatestReturnPath(search, locale);
 

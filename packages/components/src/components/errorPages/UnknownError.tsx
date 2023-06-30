@@ -3,11 +3,12 @@ import React from 'react';
 import useErrorsTranslation from '../../hooks/useErrorsTranslation';
 import ErrorPage from './ErrorPage';
 import type { ErrorPageProps } from './ErrorPage';
-
+import styles from './errorPage.module.scss';
 type Props = {
   appName: ErrorPageProps['appName'];
+  errorMessage?: string;
 };
-const UnknownError: React.FC<Props> = ({ appName }) => {
+const UnknownError: React.FC<Props> = ({ appName, errorMessage }) => {
   const { t } = useErrorsTranslation();
   return (
     <ErrorPage
@@ -22,10 +23,20 @@ const UnknownError: React.FC<Props> = ({ appName }) => {
           >
             palautelomakkeella
           </a>
+          {errorMessage && <ErrorMessage message={errorMessage} />}
         </Trans>
       }
       appName={appName}
     />
   );
 };
+
+const ErrorMessage: React.FC<{ message: string }> = ({ message }) => {
+  return (
+    <div className={styles.errorMessageInfoBlock}>
+      <code>{message}</code>
+    </div>
+  );
+};
+
 export default UnknownError;

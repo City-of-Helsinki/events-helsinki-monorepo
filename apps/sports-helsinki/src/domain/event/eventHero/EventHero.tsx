@@ -1,13 +1,14 @@
 import {
   useLocale,
   getDateRangeStr,
-  buttonStyles,
   IconButton,
   InfoWithIcon,
   SkeletonLoader,
   EventLocationText as LocationText,
   getEventFields,
   getEventPrice,
+  getEventHeroButtonText,
+  getEventHeroButtonAriaLabelText,
 } from '@events-helsinki/components';
 import type {
   EventFields,
@@ -31,7 +32,6 @@ import {
   PageSection,
   useConfig,
 } from 'react-helsinki-headless-cms';
-import AppConfig from '../../app/AppConfig';
 
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
@@ -65,6 +65,8 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
     registrationUrl,
   } = getEventFields(event, locale);
   const eventPriceText = getEventPrice(event, locale, t('hero.offers.isFree'));
+  const buttonText = getEventHeroButtonText(event, t);
+  const buttonAriaLabelText = getEventHeroButtonAriaLabelText(event, t);
   const showKeywords = Boolean(today || thisWeek || keywords.length);
   const returnParam = extractLatestReturnPath(search, locale);
 
@@ -161,13 +163,13 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                     <div className={styles.registrationButtonWrapper}>
                       <Button
                         variant="success"
-                        aria-label={t('hero.ariaLabelEnrol')}
+                        aria-label={buttonAriaLabelText}
                         onClick={() =>
                           window.open(registrationUrl || offerInfoUrl)
                         }
                         iconRight={<IconLinkExternal aria-hidden />}
                       >
-                        {t('hero.buttonEnrol') as string}
+                        {buttonText}
                       </Button>
                     </div>
                   )}

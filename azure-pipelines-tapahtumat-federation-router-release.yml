@@ -47,5 +47,13 @@ extends:
   # Django example: azure-pipelines-PROJECTNAME-api-release.yml
   # Drupal example: azure-pipelines-drupal-release.yml
   template: azure-pipelines-federation-router-release.yml@tapahtumat-pipelines
-  #parameters:
-    #imagetag: ${{ parameters.imagetag }}
+  parameters:
+    # Application build arguments and config map values as key value pairs.
+    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/federation-router-variables-staging.yml and federation-router-variables-common.yml
+    # The values here will override the values defined in the tapahtumat-pipelines repository
+    # buildArgs: no buildArgs
+    configMap: # pod environment variables
+      FEDERATION_CMS_ROUTING_URL: https://tapahtumat.content.api.hel.fi/graphql
+      FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.api.hel.fi/proxy/graphql
+      FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.hel.fi/search
+      FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.api.hel.fi/proxy/graphql

@@ -46,5 +46,20 @@ extends:
   # Django example: azure-pipelines-PROJECTNAME-api-release.yml
   # Drupal example: azure-pipelines-drupal-release.yml
   template: azure-pipelines-tapahtumat-release.yml@tapahtumat-pipelines
-  #parameters:
-    #imagetag: ${{ parameters.imagetag }}
+  parameters:
+    # Application build arguments and config map values as key value pairs.
+    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/tapahtumat-variables-staging.yml and tapahtumat-variables-common.yml
+    # The values here will override the values defined in the tapahtumat-pipelines repository
+    buildArgs:
+      NEXTJS_DISABLE_SENTRY: 1
+      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
+      NEXT_PUBLIC_CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
+      NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      NEXT_PUBLIC_DEBUG: 0
+      NEXT_PUBLIC_MATOMO_ENABLED: 1
+    configMap: # pod environment variables
+      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
+      NEXT_PUBLIC_CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
+      NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      NEXT_PUBLIC_DEBUG: 0
+      NEXT_PUBLIC_MATOMO_ENABLED: 1

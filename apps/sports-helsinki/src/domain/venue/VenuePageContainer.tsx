@@ -19,6 +19,7 @@ import getVenueSourceId from './utils/getVenueSourceId';
 import VenueContent from './venueContent/VenueContent';
 import VenueHero from './venueHero/VenueHero';
 import styles from './venuePage.module.scss';
+import VenuePageMeta from './venuePageMeta/VenuePageMeta';
 
 const SimilarVenues = dynamic(
   () => import('./similarVenues/SimilarVenuesSection'),
@@ -80,7 +81,7 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
           {venue ? (
             <>
               {/* Wait for data to be accessible before updating metadata */}
-              {/* <EventPageMeta venue={venue} /> */}
+              <VenuePageMeta venue={venue} />
               <VenueHero venue={venue} />
               <VenueContent
                 venue={venue}

@@ -40,7 +40,9 @@ export const getAllArticles = async (
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
-      node.translations?.forEach((translation: PageType['translations']) => {
+      // NOTE: HCRC-build sometimes fails - this type should not be needed.
+      // : PageType['translations']
+      node.translations?.forEach((translation) => {
         if (
           translation?.uri &&
           translation.slug &&
@@ -88,7 +90,9 @@ export const getAllPages = async (
         locale: node.language.code.toLowerCase(),
         slug: node.slug,
       });
-      node.translations?.forEach((translation: PageType['translations']) => {
+      // NOTE: HCRC-build sometimes fails - this type should not be needed.
+      // : PageType['translations']
+      node.translations?.forEach((translation) => {
         if (
           translation?.uri &&
           translation.slug &&

@@ -1,15 +1,27 @@
-import { useRouter } from 'next/router';
+import {
+  getLanguageOrDefault,
+  UnknownError,
+  useCommonTranslation,
+} from '@events-helsinki/components';
+import type { GetStaticPropsContext } from 'next/types';
 import React from 'react';
+import getEventsStaticProps from '../domain/app/getEventsStaticProps';
+import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 
-/**
- * Due to translation problem: https://github.com/i18next/next-i18next/issues/1020
- * let's redirect always to the pages/error.tsx page.
- */
 const NextErrorPage = () => {
-  const router = useRouter();
-  React.useEffect(() => {
-    router.replace('/error');
-  }, [router]);
-  return null;
+  const { t } = useCommonTranslation();
+  return <UnknownError appName={t('appEvents:appName')} />;
 };
+
+export async function getStaticProps(context: GetStaticPropsContext) {
+  return getEventsStaticProps(context, async () => {
+    const language = getLanguageOrDefault(context.locale);
+    return {
+      props: {
+        ...(await serverSideTranslationsWithCommon(language)),
+      },
+    };
+  });
+}
+
 export default NextErrorPage;

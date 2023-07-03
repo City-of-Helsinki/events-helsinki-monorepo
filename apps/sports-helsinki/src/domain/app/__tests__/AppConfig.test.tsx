@@ -14,7 +14,7 @@ it.each([
   {
     field: 'cmsOrigin',
     mockEnvValue: 'https://localhost/cms/graphql',
-    envName: 'NEXT_PUBLIC_CMS_ORIGIN',
+    envName: 'CMS_ORIGIN',
     expectToEqual: undefined,
   },
   {

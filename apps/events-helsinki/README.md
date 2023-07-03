@@ -98,8 +98,8 @@ class AppConfig {
   // ...
   static get linkedEventsEventEndpoint() {
     return getEnvOrError(
-      process.env.NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT,
-      "NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT"
+      publicRuntimeConfig.linkedEvents,
+      'LINKEDEVENTS_EVENT_ENDPOINT'
     );
   }
   static get cmsArticlesContextPath() {

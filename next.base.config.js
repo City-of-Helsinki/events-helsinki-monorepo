@@ -170,7 +170,7 @@ const nextBaseConfig = ({
       hideSourceMaps: true,
     },
     images: {
-      domains: [new URL(process.env.NEXT_PUBLIC_CMS_ORIGIN).origin],
+      domains: [new URL(process.env.CMS_ORIGIN).origin],
     },
     // Standalone build
     // @link https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files-experimental
@@ -195,6 +195,19 @@ const nextBaseConfig = ({
       // @link https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#self-hosting-isr
       isrMemoryCacheSize: 0,
     },
+  
+    // serverRuntimeConfig: {
+    //  // Will only be available on the server side
+    //   cmsOrigin: process.env.CMS_ORIGIN, // Pass through env variables
+    //   linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT, // Pass through env variables
+    // },
+    publicRuntimeConfig: {
+      // Will be available on both server and client
+      cmsOrigin: process.env.CMS_ORIGIN, // Pass through env variables
+      linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT, // Pass through env variables
+    },  
+
+
 
     typescript: {
       /** Do not run TypeScript during production builds (`next build`). */

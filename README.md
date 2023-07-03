@@ -366,10 +366,11 @@ How to set build arguments and/or config map variables (pod runtime environment 
   parameters:
     buildArgs:
       NEXTJS_DISABLE_SENTRY: 1
-      NEXT_PUBLIC_CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
+      CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
     configMap:
       DEBUG: 1
       MATOMO_ENABLED: 0
+      CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
 ```
 
 ## 6. Editor support

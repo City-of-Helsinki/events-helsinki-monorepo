@@ -61,13 +61,13 @@ extends:
     buildArgs:
       NEXTJS_DISABLE_SENTRY: 1
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
-      NEXT_PUBLIC_CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
-      NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0
     configMap: # pod environment variables
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
-      NEXT_PUBLIC_CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
-      NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0

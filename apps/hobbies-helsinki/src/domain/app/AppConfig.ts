@@ -3,6 +3,9 @@ import type { CommonButtonProps } from 'hds-react';
 import getConfig from 'next/config';
 import { ROUTES } from '../../constants';
 
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
 class AppConfig {
   static get cmsOrigin() {
     return getEnvOrError(publicRuntimeConfig.cmsOrigin, 'CMS_ORIGIN');

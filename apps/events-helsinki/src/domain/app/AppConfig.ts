@@ -13,8 +13,8 @@ class AppConfig {
 
   static get federationGraphqlEndpoint() {
     return getEnvOrError(
-      process.env.NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT,
-      'NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT'
+      publicRuntimeConfig.federationRouter,
+      'FEDERATION_ROUTER_ENDPOINT'
     );
   }
 

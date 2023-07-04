@@ -279,8 +279,9 @@ const nextBaseConfig = ({
     },
     publicRuntimeConfig: {
       // Will be available on both server and client
-      cmsOrigin: process.env.CMS_ORIGIN, // Pass through env variables
-      linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT, // Pass through env variables
+      federationRouter: process.env.FEDERATION_ROUTER_ENDPOINT,
+      cmsOrigin: process.env.CMS_ORIGIN,
+      linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT,
     },
   };
 

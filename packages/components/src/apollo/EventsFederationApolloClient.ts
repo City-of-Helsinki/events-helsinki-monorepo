@@ -35,6 +35,7 @@ export type EventsFederationApolloClientConfig = {
   federationGraphqlEndpoint: string;
   allowUnauthorizedRequests?: boolean;
   routerHelper: CmsRoutedAppHelper;
+  handleError?: (error: Error) => void;
 };
 
 class EventsFederationApolloClient {
@@ -52,31 +53,42 @@ class EventsFederationApolloClient {
       });
     });
     const httpLink = this.getHttpLink(config.federationGraphqlEndpoint);
-    const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
-      if (graphQLErrors) {
-        graphQLErrors.forEach(({ message, locations, path }) => {
-          const errorMessage = `[GraphQL error]: ${JSON.stringify({
-            OperationName: operation.operationName,
-            Message: message,
-            Location: locations,
-            Path: path,
-            // Response: response,
-          })}`;
-          graphqlClientLogger.error(errorMessage);
-          Sentry.captureMessage(errorMessage);
-        });
-      }
+    const errorLink = onError(
+      ({ graphQLErrors, networkError, operation, response }) => {
+        if (graphQLErrors) {
+          graphQLErrors.forEach((error) => {
+            const { message, locations, path } = error;
+            const errorMessage = `[GraphQL error]: ${JSON.stringify({
+              OperationName: operation.operationName,
+              Message: message,
+              Location: locations,
+              Path: path,
+              // Response: response,
+            })}`;
+            graphqlClientLogger.error(errorMessage);
+            Sentry.captureMessage(errorMessage);
+            // Call the custom error handler
+            if (this.config.handleError && !response?.data) {
+              this.config.handleError(error);
+            }
+          });
+        }
 
-      if (networkError) {
-        graphqlClientLogger.error(
-          `[GraphQL networkError]: ${JSON.stringify({
-            Operation: operation.operationName,
-            NetworkError: networkError,
-          })}`
-        );
-        Sentry.captureMessage('Graphql Network error');
+        if (networkError) {
+          graphqlClientLogger.error(
+            `[GraphQL networkError]: ${JSON.stringify({
+              Operation: operation.operationName,
+              NetworkError: networkError,
+            })}`
+          );
+          Sentry.captureMessage('Graphql Network error');
+          // Call the custom error handler
+          if (this.config.handleError && !response?.data) {
+            this.config.handleError(networkError);
+          }
+        }
       }
-    });
+    );
 
     // If a retried operation also results in errors,
     // those errors are not passed to your onError link to prevent an infinite loop of operations.

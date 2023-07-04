@@ -49,3 +49,5 @@ export { default as PlaceFilter } from './filters/PlaceFilter';
 export { default as PublisherFilter } from './filters/PublisherFilter';
 export { default as TextFilter } from './filters/TextFilter';
 export { default as Navigation } from './navigation/Navigation';
+export { default as ApolloErrorNotification } from './apolloErrorNotification/ApolloErrorNotification';
+export { default as apolloErrorsReducer } from './apolloErrorNotification/apolloErrorsReducer';

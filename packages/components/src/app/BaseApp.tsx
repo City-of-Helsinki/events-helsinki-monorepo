@@ -5,9 +5,10 @@ import {
 import 'nprogress/nprogress.css';
 
 import { useCookies } from 'hds-react';
+import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 import '../styles/globals.scss';
 import '../styles/askem.scss';
@@ -34,6 +35,15 @@ export type Props = {
   withConsent: boolean;
 } & NavigationProviderProps &
   SSRConfig;
+
+const DynamicToastContainer = dynamic(
+  () =>
+    import('react-toastify').then((mod) => {
+      injectStyle();
+      return mod.ToastContainer;
+    }),
+  { ssr: false }
+);
 
 export const FallbackComponent = ({
   error,
@@ -126,7 +136,7 @@ function BaseApp({
                   appName={appName}
                 />
               )}
-              <ToastContainer />
+              <DynamicToastContainer />
             </NavigationProvider>
           </GeolocationProvider>
         </AskemProvider>

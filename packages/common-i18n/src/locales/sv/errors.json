@@ -10,7 +10,7 @@
   },
   "apolloError": {
     "title": "Anslutningsproblem upptäcktes på webbplatsen!",
-    "description": "Försök igen om en stund. Om situationen återkommer, berätta om det för oss med <2>responsblanketten</2>",
+    "description": "Vissa funktioner på webbplatsen fungerar inte korrekt Försök igen om en stund. Om situationen återkommer, berätta om det för oss med <2>responsblanketten</2>",
     "feedbackFormLink": "https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback/"
   },
   "moveToHomePageButton": "Gå till startsidan."

@@ -9,8 +9,8 @@
     "feedbackFormLink": "https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute/anna-palautetta"
   },
   "apolloError": {
-    "title": "Sivustolla havaittiin yhteysongelmia!",
-    "description": "Koita myöhemmin uudestaan. Jos tilanne toistuu, kerro siitä meille <2>palautelomakkeella</2>",
+    "title": "Sivustolla havaittiin yhteysongelma!",
+    "description": "Osa sivuston toiminnoista ei ole käytettävissä. Koita myöhemmin uudestaan. Jos ongelma toistuu, kerro siitä meille <2>palautelomakkeella</2>",
     "feedbackFormLink": "https://www.hel.fi/helsinki/fi/kaupunki-ja-hallinto/osallistu-ja-vaikuta/palaute/anna-palautetta"
   },
   "moveToHomePageButton": "Siirry etusivulle"

@@ -26,7 +26,8 @@ export default function ApolloErrorNotification({
       closeButtonLabelText={commonTranslation('button.close')}
     >
       <Trans t={t} i18nKey="errors:apolloError.description">
-        Koita myöhemmin uudestaan. Jos tilanne toistuu, kerro siitä meille{' '}
+        Osa sivuston toiminnoista ei ole käytettävissä. Koita myöhemmin
+        uudestaan. Jos ongelma toistuu, kerro siitä meille{' '}
         <a
           href={t(`errors:apolloError.feedbackFormLink`)}
           target="_blank"

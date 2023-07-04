@@ -10,11 +10,11 @@ describe('ApolloErrorNotification', () => {
       name: /notification/i,
     });
     expect(
-      screen.getByText(/sivustolla havaittiin yhteysongelmia!/i)
+      screen.getByText(/sivustolla havaittiin yhteysongelma!/i)
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        /koita myöhemmin uudestaan\. jos tilanne toistuu, kerro siitä meille/i
+        /osa sivuston toiminnoista ei ole käytettävissä\. koita myöhemmin uudestaan\. jos ongelma toistuu, kerro siitä meille/i
       )
     ).toBeInTheDocument();
     expect(

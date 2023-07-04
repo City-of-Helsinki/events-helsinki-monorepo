@@ -195,19 +195,6 @@ const nextBaseConfig = ({
       // @link https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#self-hosting-isr
       isrMemoryCacheSize: 0,
     },
-  
-    // serverRuntimeConfig: {
-    //  // Will only be available on the server side
-    //   cmsOrigin: process.env.CMS_ORIGIN, // Pass through env variables
-    //   linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT, // Pass through env variables
-    // },
-    publicRuntimeConfig: {
-      // Will be available on both server and client
-      cmsOrigin: process.env.CMS_ORIGIN, // Pass through env variables
-      linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT, // Pass through env variables
-    },  
-
-
 
     typescript: {
       /** Do not run TypeScript during production builds (`next build`). */
@@ -289,6 +276,11 @@ const nextBaseConfig = ({
     serverRuntimeConfig: {
       // to bypass https://github.com/zeit/next.js/issues/8251
       PROJECT_ROOT: __dirname,
+    },
+    publicRuntimeConfig: {
+      // Will be available on both server and client
+      cmsOrigin: process.env.CMS_ORIGIN, // Pass through env variables
+      linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT, // Pass through env variables
     },
   };
 

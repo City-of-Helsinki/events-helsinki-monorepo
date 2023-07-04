@@ -1,7 +1,7 @@
 #
 # Release pipeline. Run build and deploy for Platta staging and production environments.
 #
-# Continuous integration (CI) triggers cause a pipeline to run whenever you push 
+# Continuous integration (CI) triggers cause a pipeline to run whenever you push
 # an update to the specified branches or you push specified tags.
 trigger:
   batch: true
@@ -10,17 +10,17 @@ trigger:
       - events-helsinki-*
   paths:
     exclude:
-    - README.md
+      - README.md
 
-# Pull request (PR) triggers cause a pipeline to run whenever a pull request is 
-# opened with one of the specified target branches, or when updates are made to 
+# Pull request (PR) triggers cause a pipeline to run whenever a pull request is
+# opened with one of the specified target branches, or when updates are made to
 # such a pull request.
 #
-# GitHub creates a new ref when a pull request is created. The ref points to a 
-# merge commit, which is the merged code between the source and target branches 
+# GitHub creates a new ref when a pull request is created. The ref points to a
+# merge commit, which is the merged code between the source and target branches
 # of the pull request.
 #
-# Opt out of pull request validation 
+# Opt out of pull request validation
 pr: none
 
 # By default, use self-hosted agents
@@ -35,11 +35,11 @@ pool: Default
 
 resources:
   repositories:
-  # Azure DevOps repository
-  - repository: tapahtumat-pipelines
-    type: git
-    # Azure DevOps project/repository
-    name: tapahtumat/tapahtumat-pipelines
+    # Azure DevOps repository
+    - repository: tapahtumat-pipelines
+      type: git
+      # Azure DevOps project/repository
+      name: tapahtumat/tapahtumat-pipelines
 
 extends:
   # Filename in Azure DevOps Repository (note possible -ui or -api)
@@ -51,15 +51,18 @@ extends:
     # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/tapahtumat-variables-staging.yml and tapahtumat-variables-common.yml
     # The values here will override the values defined in the tapahtumat-pipelines repository
     buildArgs:
-      NEXTJS_DISABLE_SENTRY: 1
-      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
+      FEDERATION_ROUTER_ENDPOINT: https://tapahtumat-router.api.hel.fi/
       CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      NEXTJS_DISABLE_SENTRY: 1
+      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1
     configMap: # pod environment variables
-      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
+      FEDERATION_ROUTER_ENDPOINT: https://tapahtumat-router.api.hel.fi/
       CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-      NEXT_PUBLIC_DEBUG: 0
-      NEXT_PUBLIC_MATOMO_ENABLED: 1
+    configMapStage: # pod environment variables for staging
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.stage.hel.ninja/
+      CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

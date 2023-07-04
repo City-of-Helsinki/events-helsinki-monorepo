@@ -3,8 +3,8 @@ import getConfig from 'next/config';
 import { i18n } from '../../../next-i18next.config';
 import { ROUTES } from '../../constants';
 
-// Only holds serverRuntimeConfig and publicRuntimeConfig
-const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+// Only holds publicRuntimeConfig
+const { publicRuntimeConfig } = getConfig();
 
 class AppConfig {
   static get cmsOrigin() {

@@ -60,6 +60,14 @@ jest.mock('next/head', () => {
   };
 });
 
+// Mock the public runtime config
+jest.mock('next/config', () => () => ({
+  publicRuntimeConfig: {
+    cmsOrigin: 'https://localhost/cms/graphql',
+    linkedEvents: 'linekdevents-url',
+  }
+}))
+
 // Extend except with jest-axe
 expect.extend(toHaveNoViolations);
 

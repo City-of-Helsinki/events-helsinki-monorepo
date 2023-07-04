@@ -26,7 +26,8 @@ jest.mock('next-i18next', () => ({
   // When testing, i18n is set up with providers instead of the version that's
   // optimized for next. That's why we replace the next useTranslation with the
   // default react version.
-  useTranslation: jest.requireActual('react-i18next').useTranslation,
+  __esModule: true,
+  ...jest.requireActual('next-i18next'),
 }));
 
 // Mock the ICS create event that fails during the tests

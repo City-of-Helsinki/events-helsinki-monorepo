@@ -1,12 +1,14 @@
+import { useReducer } from 'react';
+
 type AddError = { type: 'addError'; error: Error };
 type RemoveError = {
   type: 'removeError';
   error: Error;
 };
 type ClearAllErrors = { type: 'clearErrors' };
-type ToastableErrorActions = AddError | RemoveError | ClearAllErrors;
+export type ToastableErrorActions = AddError | RemoveError | ClearAllErrors;
 
-export default function errorsReducer(
+export function apolloErrorsReducer(
   state: Error[],
   action: ToastableErrorActions
 ) {
@@ -27,4 +29,8 @@ export default function errorsReducer(
     default:
       throw new Error('The action type is not supported!');
   }
+}
+
+export function useApolloErrorsReducer(initialState: Error[] = []) {
+  return useReducer(apolloErrorsReducer, initialState);
 }

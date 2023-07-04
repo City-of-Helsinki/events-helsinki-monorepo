@@ -1,4 +1,4 @@
-FROM ghcr.io/apollographql/router:v1.14.0 AS router
+FROM ghcr.io/apollographql/router:v1.22.0 AS router
 
 COPY ./supergraph.graphql /dist/schema/supergraph.graphql
 COPY ./router.yaml /dist/config/router.yaml

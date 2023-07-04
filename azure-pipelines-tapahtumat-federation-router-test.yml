@@ -56,6 +56,6 @@ extends:
     # buildArgs: no buildArgs
     configMap: # pod environment variables
       FEDERATION_CMS_ROUTING_URL: https://tapahtumat.hkih.stage.geniem.io/graphql
+      FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.test.hel.ninja/search
       FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.test.hel.ninja/proxy/graphql
-      FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.stage.hel.ninja/search
       FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.test.hel.ninja/proxy/graphql

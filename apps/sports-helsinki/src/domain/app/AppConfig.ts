@@ -7,10 +7,23 @@ import { ROUTES } from '../../constants';
 const { publicRuntimeConfig } = getConfig();
 
 class AppConfig {
+  /**
+   * The base URL of the CMS.
+   *
+   * Example usage:
+   * The headless CMS adds it's own domain (and possibly also the root path)
+   * to every link that it returns through API. The cmsOrigin-getter is used
+   * in the link manipulation so that we can remove the CMS origin from the link
+   * inside the app.
+   * */
   static get cmsOrigin() {
     return getEnvOrError(publicRuntimeConfig.cmsOrigin, 'CMS_ORIGIN');
   }
 
+  /**
+   * The endpoint for the Apollo federation Router.
+   * Can be used for example to configure the Apollo-client.
+   * */
   static get federationGraphqlEndpoint() {
     return getEnvOrError(
       publicRuntimeConfig.federationRouter,
@@ -18,6 +31,15 @@ class AppConfig {
     );
   }
 
+  /**
+   * The base URL of the LinkedEvents event-API.
+   *
+   * Example usage:
+   * The headless CMS returns the LinkedEvent URLs through the API.
+   * The linkedEventsEventEndpoint-getter is used
+   * in the link manipulation so that we can remove the LinkedEvents origin from the link
+   * inside the app.
+   * */
   static get linkedEventsEventEndpoint() {
     return getEnvOrError(
       publicRuntimeConfig.linkedEvents,
@@ -29,6 +51,10 @@ class AppConfig {
     return i18n.locales;
   }
 
+  /**
+   * The own origin of the app.
+   * Can be used e.g. to configure the Headless CMS React Components -library.
+   * */
   static get origin() {
     return getEnvOrError(
       process.env.NEXT_PUBLIC_APP_ORIGIN,
@@ -36,40 +62,81 @@ class AppConfig {
     );
   }
 
+  /**
+   * The app uses multiple domains from the Headless CMS API.
+   * It serves posts / articles from 1 root and e.g the pages from another.
+   * The CMS needs to be configured so, that the URI of an object it serves
+   * contains the context. For example an URL to an article could contain
+   * a static path `/articles` in it's pathname, so it's easily recognizible as an article URL.
+   * The application can then use a PostQuery to fetch the related information from an external service.
+   */
   static get cmsArticlesContextPath() {
     return process.env.NEXT_PUBLIC_CMS_ARTICLES_CONTEXT_PATH ?? '/articles';
   }
 
+  /**
+   * The app uses multiple domains from the Headless CMS API.
+   * It serves posts / articles from 1 root and e.g the pages from another.
+   * The CMS needs to be configured so, that the URI of an object it serves
+   * contains the context. For example an URL to an page could contain
+   * a static path `/pages` in it's pathname, so it's easily recognizible as a page URL.
+   * The application can then use a PageQuery to fetch the related information from an external service.
+   */
   static get cmsPagesContextPath() {
     return process.env.NEXT_PUBLIC_CMS_PAGES_CONTEXT_PATH ?? '/pages';
   }
 
+  /**
+   * The generally used date format.
+   * Helsinki services are recommended to follow the Finnish date and time locale -
+   * even if the user is using some other language.
+   * Follow these guidelines when presenting date and time in your services.
+   * https://hds.hel.fi/foundation/guidelines/data-formats/
+   */
   static get dateFormat() {
     return 'dd.MM.yyyy';
   }
 
+  /**
+   * The generally used short date time format.
+   * Helsinki services are recommended to follow the Finnish date and time locale -
+   * even if the user is using some other language.
+   * Follow these guidelines when presenting date and time in your services.
+   * https://hds.hel.fi/foundation/guidelines/data-formats/
+   */
   static get shortDatetimeFormat() {
     return 'dd.MM.yyyy HH:mm';
   }
 
+  /**
+   * The generally used long date time format.
+   * Helsinki services are recommended to follow the Finnish date and time locale -
+   * even if the user is using some other language.
+   * Follow these guidelines when presenting date and time in your services.
+   * https://hds.hel.fi/foundation/guidelines/data-formats/
+   */
   static get datetimeFormat() {
     return 'dd.MM.yyyy HH:mm:ss';
   }
 
+  /** Should the application allow HTTP-connections? */
   static get allowUnauthorizedRequests() {
     return Boolean(
       parseEnvValue(process.env.NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS)
     );
   }
 
+  /** A global debug switch for development purposes. */
   static get debug() {
     return Boolean(parseEnvValue(process.env.NEXT_PUBLIC_DEBUG));
   }
 
+  /** A default HDS theme for the buttons. https://hds.hel.fi/foundation/design-tokens/colour. */
   static get defaultButtonTheme(): CommonButtonProps['theme'] {
     return 'default';
   }
 
+  /** A primary variant for the buttons. https://hds.hel.fi/foundation/design-tokens/colour. */
   static get defaultButtonVariant(): CommonButtonProps['variant'] {
     return 'success';
   }
@@ -107,6 +174,10 @@ class AppConfig {
     };
   }
 
+  /**
+   * A default NextJS page revalidation time.
+   * https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#on-demand-revalidation
+   */
   static get defaultRevalidate() {
     const envValue = process.env.NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS;
     const value = envValue ? parseEnvValue(envValue) : 60;
@@ -126,24 +197,28 @@ class AppConfig {
     return value;
   }
 
+  /** A feature flag for the similar events. */
   static get showSimilarEvents() {
     return Boolean(
       parseEnvValue(process.env.NEXT_PUBLIC_SHOW_SIMILAR_EVENTS, true)
     );
   }
 
+  /** A feature flag that can be used to show the enrolment status in the card details. */
   static get showSimilarVenues() {
     return Boolean(
       parseEnvValue(process.env.NEXT_PUBLIC_SHOW_SIMILAR_VENUES, true)
     );
   }
 
+  /** A feature flag for the upcoming venues module in details page. */
   static get showVenuesUpcomingEvents() {
     return Boolean(
       parseEnvValue(process.env.NEXT_PUBLIC_SHOW_VENUES_UPCOMING_EVENTS, true)
     );
   }
 
+  /** A feature flag that can be used to show the enrolment status in the card details. */
   static get showEnrolmentStatusInCardDetails() {
     return Boolean(
       parseEnvValue(
@@ -153,6 +228,11 @@ class AppConfig {
     );
   }
 
+  /**
+   * A map of URL reqriting.
+   * Rewrite the URLs returned by the HEadless CMS
+   * so that they can be routed and used inside the app.
+   * */
   static get URLRewriteMapping() {
     return {
       [AppConfig.linkedEventsEventEndpoint]: ROUTES.COURSES.replace(
@@ -166,6 +246,7 @@ class AppConfig {
     };
   }
 
+  /** A feature flag for Hauki service usage. */
   static get isHaukiEnabled() {
     return false;
   }

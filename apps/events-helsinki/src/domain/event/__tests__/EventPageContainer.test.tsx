@@ -7,6 +7,7 @@ import {
   DEFAULT_EVENT_SORT_OPTION,
   OrganizationDetailsDocument,
   EventTypeId,
+  otherEventTimesListTestId,
 } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
@@ -25,7 +26,7 @@ import {
   createEventListRequestAndResultMocks,
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
+
 import EventPageContainer from '../EventPageContainer';
 import type { EventPageContainerProps } from '../EventPageContainer';
 

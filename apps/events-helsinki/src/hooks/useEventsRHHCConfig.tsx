@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import {
-  EventDetails,
   getLinkArrowLabel,
   useLocale,
   useCommonTranslation,
   useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
+  EventDetailsCard,
 } from '@events-helsinki/components';
 import type {
   EventFieldsFragment,
-  EventDetailsProps,
+  EventDetailsCardProps,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -72,10 +72,10 @@ export default function useEventsRHHCConfig(args: {
         ),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         EventCardContent: (props: any) => (
-          <EventDetails
-            {...(props as EventDetailsProps)}
+          <EventDetailsCard
+            {...(props as EventDetailsCardProps)}
             // HACK. this is stupid, since this will be given new parametes before callin in event keywords.
-            clickAction={getKeywordOnClickHandler(router, 'fi', 'text', '')}
+            clickAction={getKeywordOnClickHandler(router, locale, 'text', '')}
           />
         ),
         ArticleCardContent: (props: ArticleDetailsProps) => (

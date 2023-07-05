@@ -1,5 +1,5 @@
 import type { EventFieldsFragment } from '@events-helsinki/components';
-import { EventCard } from '@events-helsinki/components';
+import { BasicEventCard } from '@events-helsinki/components';
 import userEvent from '@testing-library/user-event';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
@@ -43,14 +43,7 @@ afterAll(() => {
   clear();
 });
 
-const renderComponent = () =>
-  render(
-    <EventCard
-      event={event}
-      getEventUrlFunction={undefined}
-      clickAction={undefined}
-    />
-  );
+const renderComponent = () => render(<BasicEventCard event={event} />);
 describe('event card', () => {
   // TODO: when HDS fixes the tag id -> uncomment
   /* it('for accessibility violations', async () => {

@@ -69,6 +69,10 @@ All the applications inside the monorepo are sharing the similar Apollo-Router i
 
 > Apps should not depend on apps, they can depend on packages
 
+#### Configuration
+
+The application and proxy configuration is done via the AppConfig -file as much as possible, so there would be a single point for all the configuration.
+
 #### Shared packages
 
 - [packages/eslint-config-bases](./packages/eslint-config-bases): [README](./packages/eslint-config-bases/README.md) | [CHANGELOG](./packages/eslint-config-bases/CHANGELOG.md)

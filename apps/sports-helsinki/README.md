@@ -95,7 +95,7 @@ Hobbies uses a lot of the components from the HCRC-lib. For example the article 
 
 There are 2 Apollo-clients in implemented: an Apollo-client for _`Headless CMS` to fetch articles and dynamic pages_ from the CMS and an Apollo-client for _`LinkedEvents` to fetch events_ from the Event-proxy. They both contains URL-fields that are targeted to an external source. Since the content is wanted to be rendered inside the Hobbies app, the URLs needs to be transformed so that they are pointing to an internal path. An Apollo Link is a create place to do the transformation, when the URL context is known. Therefore, the URL should include a hint of the context, e.g a context path like `/articles*` or `/pages*` or a domain e.g `linkedvents.hel.fi`.
 
-The transformation table is in the `AppConfig.ts`:
+The transformation table is in the [AppConfig.ts](./src/domain/app/AppConfig.ts) :
 
 ```typescript
 class AppConfig {
@@ -103,7 +103,7 @@ class AppConfig {
   static get linkedEventsEventEndpoint() {
     return getEnvOrError(
       publicRuntimeConfig.linkedEvents,
-      'LINKEDEVENTS_EVENT_ENDPOINT'
+      "LINKEDEVENTS_EVENT_ENDPOINT"
     );
   }
   static get cmsArticlesContextPath() {
@@ -127,6 +127,10 @@ class AppConfig {
   // ...
 }
 ```
+
+## Application configuration
+
+The application configuration is done via the [AppConfig.ts](./src/domain/app/AppConfig.ts) as much as possible, so there would be a single point to configure it.
 
 ## Contact
 

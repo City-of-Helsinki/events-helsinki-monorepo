@@ -33,8 +33,8 @@ COPY --chown=appuser:appuser . /docker-context
 
 # mount type bind is not supported on current version (4.10.35) of OpenShift build
 # RUN --mount=type=bind,source=./,target=/docker-context \
-RUN rsync -amv --delete \
-    --owner=appuser --group=appuser \
+RUN rsync -amv \
+    --chown=appuser:appuser \
     --exclude='node_modules' \
     --exclude='*/node_modules' \
     --include='package.json' \

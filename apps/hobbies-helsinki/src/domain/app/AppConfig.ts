@@ -1,26 +1,27 @@
 import { EventTypeId } from '@events-helsinki/components';
 import type { CommonButtonProps } from 'hds-react';
+import getConfig from 'next/config';
 import { ROUTES } from '../../constants';
+
+// Only holds publicRuntimeConfig
+const { publicRuntimeConfig } = getConfig();
 
 class AppConfig {
   static get cmsOrigin() {
-    return getEnvOrError(
-      process.env.NEXT_PUBLIC_CMS_ORIGIN,
-      'NEXT_PUBLIC_CMS_ORIGIN'
-    );
+    return getEnvOrError(publicRuntimeConfig.cmsOrigin, 'CMS_ORIGIN');
   }
 
   static get federationGraphqlEndpoint() {
     return getEnvOrError(
-      process.env.NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT,
-      'NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT'
+      publicRuntimeConfig.federationRouter,
+      'FEDERATION_ROUTER_ENDPOINT'
     );
   }
 
   static get linkedEventsEventEndpoint() {
     return getEnvOrError(
-      process.env.NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT,
-      'NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT'
+      publicRuntimeConfig.linkedEvents,
+      'LINKEDEVENTS_EVENT_ENDPOINT'
     );
   }
 

@@ -1,8 +1,8 @@
 #
-# Test pipeline. Run build and deploy for Platta test environments. 
+# Test pipeline. Run build and deploy for Platta test environments.
 # Pipeline runs different tests e.g. unittest and browser tests.
 #
-# Continuous integration (CI) triggers cause a pipeline to run whenever you push 
+# Continuous integration (CI) triggers cause a pipeline to run whenever you push
 # an update to the specified branches or you push specified tags.
 trigger:
   batch: true
@@ -11,17 +11,17 @@ trigger:
       - federation-router-*
   paths:
     exclude:
-    - README.md
+      - README.md
 
-# Pull request (PR) triggers cause a pipeline to run whenever a pull request is 
-# opened with one of the specified target branches, or when updates are made to 
+# Pull request (PR) triggers cause a pipeline to run whenever a pull request is
+# opened with one of the specified target branches, or when updates are made to
 # such a pull request.
 #
-# GitHub creates a new ref when a pull request is created. The ref points to a 
-# merge commit, which is the merged code between the source and target branches 
+# GitHub creates a new ref when a pull request is created. The ref points to a
+# merge commit, which is the merged code between the source and target branches
 # of the pull request.
 #
-# Opt out of pull request validation 
+# Opt out of pull request validation
 pr: none
 
 # By default, use self-hosted agents
@@ -36,11 +36,11 @@ pool: Default
 
 resources:
   repositories:
-  # Azure DevOps repository
-  - repository: harrastukset-pipelines
-    type: git
-    # Azure DevOps project/repository
-    name: harrastukset/harrastukset-pipelines
+    # Azure DevOps repository
+    - repository: harrastukset-pipelines
+      type: git
+      # Azure DevOps project/repository
+      name: harrastukset/harrastukset-pipelines
 
 extends:
   # Filename in Azure DevOps Repository (note possible -ui or -api)
@@ -52,8 +52,13 @@ extends:
     # Does not contain all buildArguments, the rest located in harrastukset-pipelines/federation-router-variables-staging.yml and federation-router-variables-common.yml
     # The values here will override the values defined in the harrastukset-pipelines repository
     # buildArgs: no buildArgs
-    configMap: # pod environment variables
+    configMap: # pod environment variables for production
       FEDERATION_CMS_ROUTING_URL: https://harrastus.content.api.hel.fi/graphql
       FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.api.hel.fi/proxy/graphql
       FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.hel.fi/search
       FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.api.hel.fi/proxy/graphql
+    configMapStage: # pod environment variables for staging
+      FEDERATION_CMS_ROUTING_URL: https://harrastus.content.api.hel.fi/graphql
+      FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.stage.hel.ninja/search
+      FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.stage.hel.ninja/proxy/graphql
+      FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.stage.hel.ninja/proxy/graphql

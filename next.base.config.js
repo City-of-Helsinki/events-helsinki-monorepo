@@ -170,7 +170,7 @@ const nextBaseConfig = ({
       hideSourceMaps: true,
     },
     images: {
-      domains: [new URL(process.env.NEXT_PUBLIC_CMS_ORIGIN).origin],
+      domains: [new URL(process.env.CMS_ORIGIN).origin],
     },
     // Standalone build
     // @link https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files-experimental
@@ -276,6 +276,12 @@ const nextBaseConfig = ({
     serverRuntimeConfig: {
       // to bypass https://github.com/zeit/next.js/issues/8251
       PROJECT_ROOT: __dirname,
+    },
+    publicRuntimeConfig: {
+      // Will be available on both server and client
+      federationRouter: process.env.FEDERATION_ROUTER_ENDPOINT,
+      cmsOrigin: process.env.CMS_ORIGIN,
+      linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT,
     },
   };
 

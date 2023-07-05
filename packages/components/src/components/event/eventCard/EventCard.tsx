@@ -34,7 +34,7 @@ interface Props {
   clickAction?: (args: keyWordOnClickArgs) => void;
 }
 
-const EventCard: React.FC<Props> = ({
+const BasicEventCard: React.FC<Props> = ({
   event,
   getEventUrlFunction,
   clickAction,
@@ -152,4 +152,4 @@ const EventCard: React.FC<Props> = ({
   );
 };
 
-export default EventCard;
+export default BasicEventCard;

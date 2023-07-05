@@ -12,11 +12,14 @@ import EventKeywords from '../eventKeywords/EventKeywords';
 import type { keyWordOnClickArgs } from '../eventKeywords/EventKeywords';
 import styles from './eventDetails.module.scss';
 
-export type EventDetailsProps = {
+export type EventDetailsCardProps = {
   event: EventFieldsFragment;
   clickAction: (args: keyWordOnClickArgs) => void | undefined;
 };
-const EventDetails: React.FC<EventDetailsProps> = ({ event, clickAction }) => {
+const EventDetailsCard: React.FC<EventDetailsCardProps> = ({
+  event,
+  clickAction,
+}) => {
   const { t } = useTranslation('common');
   const locale = useLocale();
 
@@ -75,4 +78,4 @@ const EventDetails: React.FC<EventDetailsProps> = ({ event, clickAction }) => {
   );
 };
 
-export default EventDetails;
+export default EventDetailsCard;

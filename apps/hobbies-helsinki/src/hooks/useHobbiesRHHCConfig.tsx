@@ -2,7 +2,7 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type {
   EventFieldsFragment,
-  EventDetailsProps,
+  EventDetailsCardProps,
 } from '@events-helsinki/components';
 import {
   getLinkArrowLabel,
@@ -11,7 +11,7 @@ import {
   useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
-  EventDetails,
+  EventDetailsCard,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -69,7 +69,7 @@ export default function useHobbiesRHHCConfig(args: {
         ),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         EventCardContent: (props: any) => (
-          <EventDetails {...(props as EventDetailsProps)} />
+          <EventDetailsCard {...(props as EventDetailsCardProps)} />
         ),
         ArticleCardContent: (props: ArticleDetailsProps) => (
           <ArticleDetails {...props} />

@@ -1,12 +1,13 @@
 import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
+import type { EventFields } from '@events-helsinki/components';
 import {
   EventDetailsDocument,
   EventListDocument,
   DEFAULT_EVENT_SORT_OPTION,
   OrganizationDetailsDocument,
   EventTypeId,
+  otherEventTimesListTestId,
 } from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 
@@ -24,7 +25,6 @@ import {
   createEventListRequestAndResultMocks,
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
 import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
 

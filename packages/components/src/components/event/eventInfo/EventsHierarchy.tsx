@@ -6,13 +6,13 @@ import {
 } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
+import { InfoWithIcon, LoadingSpinner, SkeletonLoader } from '../../../index';
+import type { EventFields, SuperEventResponse } from '../../../index';
 import type {
   GetEventListLinkUrl,
   UseSubEvents,
   UseSubEventsQueryVariables,
-} from 'types';
-import { InfoWithIcon, LoadingSpinner, SkeletonLoader } from '../../../index';
-import type { EventFields, SuperEventResponse } from '../../../index';
+} from '../../../types';
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
 

@@ -2,14 +2,14 @@ import { Button } from 'hds-react';
 import type { NextRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import type { AppLanguage, RouterHelper } from 'types';
-import type { AppConfig } from '../../../index';
+import type { AppConfig, CmsRoutedAppHelper } from '../../../index';
+import type { AppLanguage } from '../../../types';
 import styles from './eventClosedHero.module.scss';
 
 export interface EventCloseHeroProps {
   appConfig: AppConfig;
   router: NextRouter;
-  routerHelper: RouterHelper;
+  routerHelper: CmsRoutedAppHelper;
   locale: AppLanguage;
 }
 

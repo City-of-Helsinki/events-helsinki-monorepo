@@ -2,6 +2,7 @@ import type {
   EventFieldsFragment,
   OfferFieldsFragment,
 } from '@events-helsinki/components';
+import { EventKeywords } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
@@ -9,7 +10,6 @@ import * as React from 'react';
 import { render, screen, userEvent } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeKeyword, fakeOffer } from '@/test-utils/mockDataUtils';
-import EventKeywords from '../EventKeywords';
 
 const startTime = '2020-06-22T07:00:00.000000Z';
 const endTime = '2020-06-22T10:00:00.000000Z';

@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
-// import { getOrganizationSearchUrl } from '../../search/eventSearch/utils';
-import type { GetOrganizationSearchUrl } from 'types';
 import type { EventFields } from '../../../index';
 import {
   getEventFields,
@@ -14,6 +12,7 @@ import {
   useLocale,
   useOrganizationDetailsQuery,
 } from '../../../index';
+import type { GetOrganizationSearchUrl } from '../../../types';
 import styles from './eventInfo.module.scss';
 
 interface Props {

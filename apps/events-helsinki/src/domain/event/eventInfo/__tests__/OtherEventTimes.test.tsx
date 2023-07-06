@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
 import type { MockedResponse } from '@apollo/client/testing';
-import {
-  DEFAULT_EVENT_SORT_OPTION,
-  getDateRangeStr,
-  EventTypeId,
-} from '@events-helsinki/components';
 import type {
   EventDetails,
   EventFieldsFragment,
   EventListQueryVariables,
   EventListResponse,
   Meta,
+} from '@events-helsinki/components';
+import {
+  OtherEventTimes,
+  DEFAULT_EVENT_SORT_OPTION,
+  getDateRangeStr,
+  EventTypeId,
 } from '@events-helsinki/components';
 import { addDays } from 'date-fns';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -26,7 +27,6 @@ import {
   createOtherEventTimesRequestAndResultMocks,
   createOtherEventTimesRequestThrowsErrorMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import OtherEventTimes from '../OtherEventTimes';
 
 const startTime = '2020-10-01T16:00:00Z';
 const endTime = '2020-10-01T18:00:00Z';

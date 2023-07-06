@@ -1,8 +1,8 @@
+import { EventClosedHero } from '@events-helsinki/components';
 import React from 'react';
 
 import { render, screen, userEvent } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
-import EventClosedHero from '../EventClosedHero';
 
 it('should render all text fields', () => {
   render(<EventClosedHero />);

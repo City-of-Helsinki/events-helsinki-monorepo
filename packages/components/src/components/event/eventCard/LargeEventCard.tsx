@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
-import type { AppLanguage } from 'types';
 import type { EventFields } from '../../../index';
 import {
   useClickCapture,
@@ -27,6 +26,7 @@ import {
   isEventClosed,
   ArrowRightWithLoadingIndicator,
 } from '../../../index';
+import type { AppLanguage } from '../../../types';
 import type { keyWordOnClickArgs } from '../eventKeywords/EventKeywords';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';

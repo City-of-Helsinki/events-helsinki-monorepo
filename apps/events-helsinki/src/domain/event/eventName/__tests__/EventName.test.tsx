@@ -1,10 +1,9 @@
-import { EVENT_STATUS } from '@events-helsinki/components';
 import type { EventFieldsFragment } from '@events-helsinki/components';
+import { EventName, EVENT_STATUS } from '@events-helsinki/components';
 import React from 'react';
 import { render, screen } from '@/test-utils';
 
 import { fakeEvent } from '@/test-utils/mockDataUtils';
-import EventName from '../EventName';
 
 const eventName = 'Event name fi';
 const event = fakeEvent({ name: { fi: eventName } }) as EventFieldsFragment;

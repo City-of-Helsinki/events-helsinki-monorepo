@@ -38,18 +38,19 @@ import {
 import EventName from '../eventName/EventName';
 import styles from './eventHero.module.scss';
 
-export interface Props {
+export interface EventHeroProps {
   event: EventFields;
   superEvent?: SuperEventResponse;
   appConfig: AppConfig;
   extractLatestReturnPath: ExtractLatestReturnPathFunction;
 }
 
-const EventHero: React.FC<Props> = ({
+const EventHero: React.FC<EventHeroProps> = ({
   event,
   superEvent,
   appConfig,
   extractLatestReturnPath,
+  // eslint-disable-next-line sonarjs/cognitive-complexity
 }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');

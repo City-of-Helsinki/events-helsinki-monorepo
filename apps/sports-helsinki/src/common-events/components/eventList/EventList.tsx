@@ -1,11 +1,13 @@
 import {
   LoadingSpinner,
-  EventCard,
+  BasicEventCard,
   LargeEventCard,
+  useLocale,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Button } from 'hds-react';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
@@ -18,7 +20,7 @@ import {
 import styles from './eventList.module.scss';
 
 const eventCardsMap = {
-  default: EventCard,
+  default: BasicEventCard,
   large: LargeEventCard, // TODO: ADD LargeEventCard,
 };
 
@@ -44,6 +46,8 @@ const EventList: React.FC<Props> = ({
   const { t } = useTranslation('search');
   const eventsLeft = count - events.length;
   const EventCard = eventCardsMap[cardSize];
+  const router = useRouter();
+  const locale = useLocale();
 
   return (
     <div className={classNames(styles.eventListWrapper, styles[cardSize])}>
@@ -56,7 +60,7 @@ const EventList: React.FC<Props> = ({
             showEnrolmentStatusInCardDetails={
               AppConfig.showEnrolmentStatusInCardDetails
             }
-            clickAction={getKeywordOnClickHandler}
+            clickAction={getKeywordOnClickHandler(router, locale, 'text', '')}
           />
         ))}
       </div>

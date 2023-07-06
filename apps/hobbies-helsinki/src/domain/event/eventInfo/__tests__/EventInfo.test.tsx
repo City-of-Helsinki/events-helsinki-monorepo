@@ -1,8 +1,13 @@
-import { getDateRangeStr } from '@events-helsinki/components';
 import type {
   EventDetails,
   EventFields,
   SuperEventResponse,
+} from '@events-helsinki/components';
+import {
+  EventInfo,
+  getDateRangeStr,
+  subEventsListTestId,
+  superEventTestId,
 } from '@events-helsinki/components';
 import FileSaver from 'file-saver';
 import mockRouter from 'next-router-mock';
@@ -19,8 +24,6 @@ import {
 } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
-import EventInfo from '../EventInfo';
-import { subEventsListTestId, superEventTestId } from '../EventsHierarchy';
 import {
   addressLocality,
   email,

@@ -1,10 +1,10 @@
 import type { EventFieldsFragment } from '@events-helsinki/components';
+import { EventContent } from '@events-helsinki/components';
 import React from 'react';
 
 import { configure, render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeImage } from '@/test-utils/mockDataUtils';
-import EventContent from '../EventContent';
 
 configure({ defaultHidden: true });
 

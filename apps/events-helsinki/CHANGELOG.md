@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.3.1...events-helsinki-v1.4.0) (2023-07-06)
+
+
+### Features
+
+* React and share (Askem) component ([#361](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/361)) ([ed076be](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ed076bedf908c4f9c59358f1ae1da2952ee70049))
+
+
+### Bug Fixes
+
+* Improve logic of buy button in hero ([#365](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/365)) ([788545a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/788545a0c1c6614aa3e489544b86ec1cc823e1b4))
+* New implementation hero buttons ([#369](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/369)) ([c5d9ae3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c5d9ae343b76e7d7746cdeb45e21a302420705dc))
+* Page styles and sidebar links ([#371](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/371)) ([4a64fa4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4a64fa4d1e30d76ce4553d9452d770522a8896a1))
+* Pipeline build and runtime parameters ([#370](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/370)) ([df3db91](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/df3db919dcefd2a9a4f2e90b183d70205d2055e1))
+* Unittests mock federation router url ([#375](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/375)) ([eef3be1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/eef3be1aa07f21db1159a420f4c9b212e5831122))
+
 ## [1.3.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.3.0...events-helsinki-v1.3.1) (2023-06-16)
 
 

@@ -88,7 +88,11 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   }
 
   public getQueryVariables(): VenueSearchParams {
-    return { ...this };
+    const queryVariables: VenueSearchParams = { ...this };
+    (Object.keys(queryVariables) as Array<keyof VenueSearchParams>).forEach(
+      (key) => queryVariables[key] === undefined && delete queryVariables[key]
+    );
+    return queryVariables;
   }
 }
 

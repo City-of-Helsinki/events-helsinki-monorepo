@@ -74,7 +74,11 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
   }
 
   public getQueryVariables(): EventSearchParams {
-    return { ...this };
+    const queryVariables: EventSearchParams = { ...this };
+    (Object.keys(queryVariables) as Array<keyof EventSearchParams>).forEach(
+      (key) => queryVariables[key] === undefined && delete queryVariables[key]
+    );
+    return queryVariables;
   }
 }
 

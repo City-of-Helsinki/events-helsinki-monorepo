@@ -371,7 +371,7 @@ export const fakeOntologies = (
 export const fakeOntology = (overrides?: Partial<Ontology>): Ontology =>
   merge(
     {
-      id: faker.datatype.number(),
+      id: faker.number.int(),
       label: faker.word.noun(),
       __typename: 'Ontology',
     },
@@ -443,7 +443,7 @@ export const fakeVenue = (overrides?: Partial<Venue>): Venue => {
       id: `hel:${faker.string.uuid()}`,
       name: faker.company.name(),
       description: faker.lorem.text(),
-      image: faker.image.imageUrl(),
+      image: faker.image.url(),
       infoUrl: faker.internet.url(),
       addressLocality: faker.location.streetAddress(),
       streetAddress: faker.location.streetAddress(),

@@ -12,7 +12,7 @@ const NextErrorPage: NextPage = () => {
   return <UnknownError appName={t(`appHobbies:appName`)} />;
 };
 
-export async function getServerSideProps(context: GetStaticPropsContext) {
+export async function getStaticProps(context: GetStaticPropsContext) {
   const language = getLanguageOrDefault(context.locale);
   return {
     props: {

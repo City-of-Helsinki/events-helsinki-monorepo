@@ -66,9 +66,9 @@ jest.mock('next/config', () => () => ({
   publicRuntimeConfig: {
     federationRouter: 'https://localhost/federationrouter/',
     cmsOrigin: 'https://localhost/cms/graphql',
-    linkedEvents: 'linekdevents-url',
-  }
-}))
+    linkedEvents: 'https://linkedevents-url.fi',
+  },
+}));
 
 // https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
 jest.mock('@events-helsinki/components/hooks/useLocale', () => ({

@@ -4,6 +4,10 @@ import { render } from '@/test-utils';
 import { useCombinedSearchContext } from '../CombinedSearchContext';
 import { CombinedSearchProvider } from '../CombinedSearchProvider';
 
+jest.mock('next/navigation', () => ({
+  __esModule: true,
+  ...jest.requireActual('next/navigation'),
+}));
 const useSearchParamsSpy = jest.spyOn(nextNavigation, 'useSearchParams');
 
 const TestingComponent = () => {

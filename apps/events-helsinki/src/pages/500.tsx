@@ -1,7 +1,7 @@
 import {
   getLanguageOrDefault,
   UnknownError,
-  useCommonTranslation,
+  useAppEventsTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next/types';
 import React from 'react';
@@ -9,7 +9,7 @@ import getEventsStaticProps from '../domain/app/getEventsStaticProps';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextErrorPage = () => {
-  const { t } = useCommonTranslation();
+  const { t } = useAppEventsTranslation();
   return <UnknownError appName={t('appEvents:appName')} />;
 };
 

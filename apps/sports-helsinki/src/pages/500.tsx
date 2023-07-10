@@ -1,7 +1,7 @@
 import {
   getLanguageOrDefault,
   UnknownError,
-  useCommonTranslation,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
@@ -9,7 +9,7 @@ import getSportsStaticProps from '../domain/app/getSportsStaticProps';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextErrorPage: NextPage = () => {
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   return <UnknownError appName={t(`appSports:appName`)} />;
 };
 

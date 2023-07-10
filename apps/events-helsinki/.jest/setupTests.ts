@@ -66,9 +66,9 @@ jest.mock('next/config', () => () => ({
   publicRuntimeConfig: {
     federationRouter: 'https://localhost/federationrouter/',
     cmsOrigin: 'https://localhost/cms/graphql',
-    linkedEvents: 'linekdevents-url',
-  }
-}))
+    linkedEvents: 'https://linkedevents-url.fi',
+  },
+}));
 
 // Extend except with jest-axe
 expect.extend(toHaveNoViolations);

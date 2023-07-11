@@ -5,6 +5,7 @@ import {
   isEventClosed,
   MAIN_CONTENT_ID,
   useSuperEventLazyLoad,
+  EventClosedHero,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
@@ -16,7 +17,7 @@ import { Link } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../constants';
 import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
-import EventClosedHero from './eventClosedHero/EventClosedHero';
+import AppConfig from './../app/AppConfig';
 import EventContent from './eventContent/EventContent';
 import EventHero from './eventHero/EventHero';
 import styles from './eventPage.module.scss';
@@ -53,6 +54,9 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
     setHasSimilarEvents(eventsCount > 0);
   };
   const eventClosed = !event || isEventClosed(event);
+  const moveToHomePage = () => {
+    router.push(routerHelper.getI18nPath('/', locale));
+  };
   return (
     <div className={styles.eventPageWrapper}>
       <main id={MAIN_CONTENT_ID}>
@@ -62,7 +66,11 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
               {/* Wait for data to be accessible before updating metadata */}
               <EventPageMeta event={event} />
               {eventClosed ? (
-                <EventClosedHero />
+                <EventClosedHero
+                  onClick={moveToHomePage}
+                  theme={AppConfig.defaultButtonTheme}
+                  variant={AppConfig.defaultButtonVariant}
+                />
               ) : (
                 <>
                   <EventHero event={event} superEvent={superEvent} />

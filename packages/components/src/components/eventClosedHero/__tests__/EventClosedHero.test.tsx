@@ -5,7 +5,7 @@ import { translations } from '@/test-utils/initI18n';
 import EventClosedHero from '../EventClosedHero';
 
 it('should render all text fields', () => {
-  render(<EventClosedHero />);
+  render(<EventClosedHero onClick={jest.fn()} />);
 
   expect(
     screen.getByRole('heading', {
@@ -23,12 +23,13 @@ it('should render all text fields', () => {
 });
 
 it('should go to home page when clicking button', async () => {
-  const { router } = render(<EventClosedHero />);
+  const onClickMock = jest.fn();
+  render(<EventClosedHero onClick={onClickMock} />);
 
   await userEvent.click(
     screen.getByRole('button', {
       name: translations.event.hero.buttonToHomePage,
     })
   );
-  expect(router.pathname).toBe('/');
+  expect(onClickMock).toHaveBeenCalled();
 });

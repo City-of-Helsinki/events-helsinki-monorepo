@@ -19,19 +19,6 @@ main {
   row-gap: 0 !important;
 }
 
-.articlesArchive {
-  button,
-  button:active {
-    border-color: var(--color-success) !important;
-    background-color: var(--color-success);
-  }
-  button:hover,
-  button:focus {
-    border-color: var(--color-success-dark) !important;
-    background-color: var(--color-success-dark);
-  }
-}
-
 :root {
   --color-theme-background: var(--color-engel-medium-light);
   --color-primary-black: var(--color-black-90);

@@ -2,7 +2,7 @@ import type { AskemConfigs } from './types';
 
 class Askem {
   disabled = false;
-  consentGiven = true;
+  consentGiven = false;
 
   constructor(config: AskemConfigs) {
     this.initialize(config);
@@ -14,12 +14,12 @@ class Askem {
     disabled = false,
     consentGiven,
   }: AskemConfigs) {
+    this.disabled = disabled;
+    this.consentGiven = Boolean(consentGiven);
+
     if (disabled || !apiKey || typeof window === 'undefined') {
       return;
     }
-
-    this.disabled = disabled;
-    this.consentGiven = Boolean(consentGiven);
 
     window.rnsData = window.rnsData || {};
     window.rnsData.apiKey;
@@ -31,12 +31,12 @@ class Askem {
     const scriptElement = doc.createElement('script');
     const scripts = doc.getElementsByTagName('script')[0];
 
-Object.assign(scriptElement, {
-	type: 'text/javascript',
-	async: true,
-	defer: true,
-	src: scriptUrl
-})
+    Object.assign(scriptElement, {
+      type: 'text/javascript',
+      async: true,
+      defer: true,
+      src: scriptUrl,
+    });
 
     if (scripts && scripts.parentNode) {
       scripts.parentNode.insertBefore(scriptElement, scripts);

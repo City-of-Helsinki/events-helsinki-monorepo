@@ -1,13 +1,12 @@
 /* eslint-disable */
-import { SortOrder } from '../../../types/generated/graphql';
-import { SPORTS_CATEGORIES } from '../../../types/types';
+import { SPORTS_CATEGORIES, SortOrder } from '../../../types';
 
 export const OrderDir = {
   asc: 'asc',
   desc: 'desc',
 } as const;
 
-export type OrderDirType = typeof OrderDir[keyof typeof OrderDir];
+export type OrderDirType = (typeof OrderDir)[keyof typeof OrderDir];
 
 export const UnifiedSearchOrderBy = {
   relevance: 'relevance',
@@ -16,7 +15,7 @@ export const UnifiedSearchOrderBy = {
 } as const;
 
 export type UnifiedSearchOrderByType =
-  typeof UnifiedSearchOrderBy[keyof typeof UnifiedSearchOrderBy];
+  (typeof UnifiedSearchOrderBy)[keyof typeof UnifiedSearchOrderBy];
 
 export const orderDirToUnifiedSearchDistanceOrder = {
   asc: SortOrder.Ascending,
@@ -63,10 +62,10 @@ export const OUTDOOR_GYMS_ONTOLOGY_TREE_IDS = [
 
 // Playgrounds / Leikkipuistot
 export const PLAYGROUNDS_ONTOLOGY_TREE_IDS = [
-  68,  // Leikkipuistot / Playgrounds
-  69,  // Ohjattu leikkipuistotoiminta / Supervised playground activities
-  499,  // Leikkipuistot / Playgrounds
-  500,  // Ohjattu leikkipuistotoiminta / Supervised playground activities
+  68, // Leikkipuistot / Playgrounds
+  69, // Ohjattu leikkipuistotoiminta / Supervised playground activities
+  499, // Leikkipuistot / Playgrounds
+  500, // Ohjattu leikkipuistotoiminta / Supervised playground activities
   981, // Ohjattu leikkipuistotoiminta / Supervised playground activities
 ];
 

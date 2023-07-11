@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import '@testing-library/jest-dom/extend-expect';
 import { TextEncoder, TextDecoder } from 'util';
-// import { initI18n } from '@events-helsinki/common-i18n';
-
+import '../config/tests/initI18n';
 import { loadEnvConfig } from '@next/env';
 // import { server } from "./tests/mocks/server";
 import { toHaveNoViolations } from 'jest-axe';
@@ -13,9 +12,13 @@ const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 // Raise the default timeout from 5000
 jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
 
-// Mock the NextJS-router
-jest.mock('next/router', () => require('next-router-mock'));
-jest.mock('next/dist/client/router', () => require('next-router-mock'));
+loadEnvConfig(process.cwd());
+
+// Mock the fetch
+// global.fetch = jest.fn();
+
+// mock scrollTo in order to fix: "Error: Not implemented: window.scrollTo"
+global.scrollTo = jest.fn();
 
 // Mock the translations module
 jest.mock('next-i18next', () => ({
@@ -31,19 +34,15 @@ jest.mock('ics', () => {
   jest.fn();
 });
 
+// Mock the NextJS-router
+jest.mock('next/router', () => require('next-router-mock'));
+jest.mock('next/dist/client/router', () => require('next-router-mock'));
+
 // https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
 jest.mock('../src/hooks/useLocale', () => ({
   __esModule: true,
   ...jest.requireActual('../src/hooks/useLocale'),
 }));
-
-loadEnvConfig(process.cwd());
-
-// Mock the fetch
-// global.fetch = jest.fn();
-
-// mock scrollTo in order to fix: "Error: Not implemented: window.scrollTo"
-global.scrollTo = jest.fn();
 
 // Extend except with jest-axe
 expect.extend(toHaveNoViolations);

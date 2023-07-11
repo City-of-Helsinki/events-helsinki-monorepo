@@ -3,6 +3,7 @@ import type {
   EVENT_SORT_OPTIONS,
   EventFields,
   FilterType,
+  KeywordOnClickHandlerType,
   Meta,
   QueryEventListArgs,
   SPORTS_CATEGORIES,
@@ -425,7 +426,7 @@ export const getEventListLinkUrl = (
   return getPlainEventUrl(event, locale) + (search ? `?${search}` : '');
 };
 
-export const getKeywordOnClickHandler =
+export const getKeywordOnClickHandler: KeywordOnClickHandlerType =
   (
     router: NextRouter,
     locale: AppLanguage,

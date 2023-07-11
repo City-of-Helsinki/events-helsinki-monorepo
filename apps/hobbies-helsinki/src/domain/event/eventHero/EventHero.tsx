@@ -10,9 +10,11 @@ import {
   IconButton,
   InfoWithIcon,
   SkeletonLoader,
-  EventLocationText as LocationText,
   getEventFields,
   getEventPrice,
+  EventLocationText,
+  EventName,
+  EventKeywords,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import {
@@ -34,8 +36,6 @@ import {
 } from 'react-helsinki-headless-cms';
 import AppConfig from '../../app/AppConfig';
 
-import EventKeywords from '../eventKeywords/EventKeywords';
-import EventName from '../eventName/EventName';
 import type { ReturnParams } from '../eventQueryString.util';
 import { extractLatestReturnPath } from '../eventQueryString.util';
 import styles from './eventHero.module.scss';
@@ -122,7 +122,7 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                       icon={<IconLocation aria-hidden />}
                       title={''}
                     >
-                      <LocationText
+                      <EventLocationText
                         event={event}
                         showDistrict={false}
                         showLocationName={true}

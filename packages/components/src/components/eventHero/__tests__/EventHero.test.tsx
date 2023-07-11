@@ -1,9 +1,3 @@
-import { getDateRangeStr } from '@events-helsinki/components';
-import type {
-  EventDetails,
-  EventFieldsFragment,
-  OfferFieldsFragment,
-} from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
@@ -16,9 +10,17 @@ import {
   fakeLocalizedObject,
   fakeOffer,
 } from '@/test-utils/mockDataUtils';
+import {
+  EventTypeId,
+  type EventDetails,
+  type EventFieldsFragment,
+  type OfferFieldsFragment,
+} from '../../../types/generated/graphql';
+import getDateRangeStr from '../../../utils/getDateRangeStr';
+import type { EventHeroProps } from '../EventHero';
 import EventHero from '../EventHero';
-import type { Props as EventHeroProps } from '../EventHero';
 
+const getKeywordOnClickHandlerMock = jest.fn();
 const name = 'Event name';
 const startTime = '2020-06-22T07:00:00.000000Z';
 const endTime = '2020-06-22T10:00:00.000000Z';
@@ -57,7 +59,15 @@ afterAll(() => {
 });
 
 const renderComponent = (props?: Partial<EventHeroProps>) => {
-  return render(<EventHero event={getFakeEvent()} {...props} />);
+  const event = getFakeEvent();
+  return render(
+    <EventHero
+      event={event}
+      getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
+      {...props}
+    />,
+    { routes: [`/tapahtuma/${event.id}?returnPath=/haku`] }
+  );
 };
 
 it('should render event name, description and location', () => {
@@ -127,7 +137,12 @@ it('should hide buy/enrol button for free events', () => {
   const mockEvent = getFakeEvent({
     offers: [fakeOffer({ isFree: true }) as OfferFieldsFragment],
   });
-  render(<EventHero event={mockEvent} />);
+  render(
+    <EventHero
+      event={mockEvent}
+      getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
+    />
+  );
 
   expect(
     screen.queryByRole('button', {
@@ -136,10 +151,14 @@ it('should hide buy/enrol button for free events', () => {
   ).not.toBeInTheDocument();
 });
 
-it('should show buy/enrol button', async () => {
+it.each([
+  [EventTypeId.Course, translations.event.hero.ariaLabelEnrol],
+  [EventTypeId.General, translations.event.hero.ariaLabelBuyTickets],
+])('should show buy/enrol button', async (eventType, buttonAriaLabel) => {
   global.open = jest.fn();
   const infoUrl = 'https://test.url';
   const mockEvent = getFakeEvent({
+    typeId: eventType,
     offers: [
       fakeOffer({
         isFree: false,
@@ -149,42 +168,65 @@ it('should show buy/enrol button', async () => {
     externalLinks: [],
   });
 
-  render(<EventHero event={mockEvent} />);
+  render(
+    <EventHero
+      event={mockEvent}
+      getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
+    />
+  );
 
   await userEvent.click(
     screen.getByRole('button', {
-      name: translations.event.hero.ariaLabelEnrol,
+      name: new RegExp(buttonAriaLabel, 'i'),
     })
   );
   expect(global.open).toHaveBeenCalledWith(infoUrl);
 });
 
-it('Register button should be visible and clickable', async () => {
-  global.open = jest.fn();
-  const registrationUrl = 'https://harrastushaku.fi/register/13290';
-  const mockEvent = getFakeEvent({
-    externalLinks: [
-      fakeExternalLink({
-        link: registrationUrl,
-        name: 'registration',
-      }),
-    ],
-  });
+it.each([
+  [
+    EventTypeId.Course,
+    translations.event.hero.buttonEnrol,
+    translations.event.hero.ariaLabelEnrol,
+  ],
+  [
+    EventTypeId.General,
+    translations.event.hero.buttonBuyTickets,
+    translations.event.hero.ariaLabelBuyTickets,
+  ],
+])(
+  'Register button should be visible and clickable',
+  async (eventType, buttonLabel, buttonAriaLabel) => {
+    global.open = jest.fn();
+    const registrationUrl = 'https://harrastushaku.fi/register/13290';
+    const mockEvent = getFakeEvent({
+      typeId: eventType,
+      externalLinks: [
+        fakeExternalLink({
+          link: registrationUrl,
+          name: 'registration',
+        }),
+      ],
+    });
 
-  render(<EventHero event={mockEvent} />);
+    render(
+      <EventHero
+        event={mockEvent}
+        getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
+      />
+    );
 
-  expect(
-    screen.getByText(translations.event.hero.buttonEnrol)
-  ).toBeInTheDocument();
+    expect(screen.getByText(buttonLabel)).toBeInTheDocument();
 
-  await userEvent.click(
-    screen.getByRole('button', {
-      name: translations.event.hero.ariaLabelEnrol,
-    })
-  );
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: buttonAriaLabel,
+      })
+    );
 
-  expect(global.open).toHaveBeenCalledWith(registrationUrl);
-});
+    expect(global.open).toHaveBeenCalledWith(registrationUrl);
+  }
+);
 
 it('should show event dates if super event is defined', () => {
   const mockEvent = getFakeEvent();
@@ -196,6 +238,7 @@ it('should show event dates if super event is defined', () => {
     <EventHero
       event={mockEvent}
       superEvent={{ data: mockSuperEvent, status: 'resolved' }}
+      getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
     />
   );
 

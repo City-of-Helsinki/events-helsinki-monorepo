@@ -1,21 +1,5 @@
-import {
-  useLocale,
-  getDateRangeStr,
-  IconButton,
-  InfoWithIcon,
-  SkeletonLoader,
-  getEventFields,
-  getEventPrice,
-  getEventHeroButtonText,
-  EventLocationText,
-  EventName,
-  EventKeywords,
-} from '@events-helsinki/components';
-import type {
-  EventFields,
-  SuperEventResponse,
-} from '@events-helsinki/components';
 import classNames from 'classnames';
+import type { CommonButtonProps } from 'hds-react';
 import {
   Button,
   IconArrowLeft,
@@ -34,16 +18,42 @@ import {
   useConfig,
 } from 'react-helsinki-headless-cms';
 
-import type { ReturnParams } from '../eventQueryString.util';
-import { extractLatestReturnPath } from '../eventQueryString.util';
+import type { KeywordOnClickHandlerType } from '../../components';
+import { EventKeywords, buttonStyles } from '../../components';
+import EventLocationText from '../../components/domain/event/eventLocation/EventLocationText';
+import EventName from '../../components/eventName/EventName';
+import IconButton from '../../components/iconButton/IconButton';
+import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';
+import SkeletonLoader from '../../components/skeletonLoader/SkeletonLoader';
+import useLocale from '../../hooks/useLocale';
+import type { EventFields, SuperEventResponse } from '../../types/event-types';
+import { extractLatestReturnPath } from '../../utils/eventQueryString.util';
+import type { ReturnParams } from '../../utils/eventQueryString.util';
+import {
+  getEventFields,
+  getEventHeroButtonText,
+  getEventPrice,
+} from '../../utils/eventUtils';
+import getDateRangeStr from '../../utils/getDateRangeStr';
+
 import styles from './eventHero.module.scss';
 
-export interface Props {
+export type EventHeroProps = {
   event: EventFields;
   superEvent?: SuperEventResponse;
-}
+  getKeywordOnClickHandler: KeywordOnClickHandlerType;
+  theme?: CommonButtonProps['theme'];
+  variant?: CommonButtonProps['variant'];
+};
 
-const EventHero: React.FC<Props> = ({ event, superEvent }) => {
+// eslint-disable-next-line sonarjs/cognitive-complexity
+const EventHero: React.FC<EventHeroProps> = ({
+  event,
+  superEvent,
+  getKeywordOnClickHandler,
+  theme,
+  variant,
+}) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const { fallbackImageUrls } = useConfig();
@@ -161,7 +171,9 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                   {(showBuyButton || registrationUrl) && (
                     <div className={styles.registrationButtonWrapper}>
                       <Button
-                        variant="success"
+                        theme={theme}
+                        variant={variant}
+                        className={buttonStyles.buttonCoatBlue}
                         aria-label={buttonAriaLabelText}
                         onClick={() =>
                           window.open(registrationUrl || offerInfoUrl)
@@ -175,7 +187,12 @@ const EventHero: React.FC<Props> = ({ event, superEvent }) => {
                 </div>
                 {showKeywords && (
                   <div className={styles.categoryWrapper}>
-                    <EventKeywords whiteOnly event={event} showIsFree={true} />
+                    <EventKeywords
+                      whiteOnly
+                      event={event}
+                      showIsFree={true}
+                      getKeywordOnClickHandler={getKeywordOnClickHandler}
+                    />
                   </div>
                 )}
               </div>

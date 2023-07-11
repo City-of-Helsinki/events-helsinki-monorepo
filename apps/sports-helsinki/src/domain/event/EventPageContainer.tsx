@@ -6,6 +6,7 @@ import {
   MAIN_CONTENT_ID,
   useSuperEventLazyLoad,
   EventClosedHero,
+  EventHero,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
@@ -17,9 +18,9 @@ import { Link } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../constants';
 import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
+import { getKeywordOnClickHandler } from '../search/eventSearch/utils';
 import AppConfig from './../app/AppConfig';
 import EventContent from './eventContent/EventContent';
-import EventHero from './eventHero/EventHero';
 import styles from './eventPage.module.scss';
 import EventPageMeta from './eventPageMeta/EventPageMeta';
 
@@ -73,7 +74,13 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 />
               ) : (
                 <>
-                  <EventHero event={event} superEvent={superEvent} />
+                  <EventHero
+                    event={event}
+                    superEvent={superEvent}
+                    theme={AppConfig.defaultButtonTheme}
+                    variant={AppConfig.defaultButtonVariant}
+                    getKeywordOnClickHandler={getKeywordOnClickHandler}
+                  />
                   <EventContent
                     event={event}
                     superEvent={superEvent}

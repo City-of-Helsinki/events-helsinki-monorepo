@@ -3,12 +3,14 @@ import {
   getDateRangeStr,
   EventLocationText as LocationText,
   getEventFields,
+  EventKeywords,
 } from '@events-helsinki/components';
 import type { EventFieldsFragment } from '@events-helsinki/components';
 import { IconCalendarClock, IconLocation } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import EventKeywords from '../eventKeywords/EventKeywords';
+
+import { getKeywordOnClickHandler } from '../../search/eventSearch/utils';
 import styles from './eventDetails.module.scss';
 
 export type EventDetailsProps = {
@@ -67,6 +69,7 @@ const EventDetails: React.FC<EventDetailsProps> = (props) => {
           showIsFree
           showKeywordsCount
           withActions={false}
+          getKeywordOnClickHandler={getKeywordOnClickHandler}
         />
       </div>
     </div>

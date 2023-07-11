@@ -7,15 +7,17 @@ import {
   SrOnly,
   useSearchTranslation,
   MAIN_CONTENT_ID,
+  EventList,
 } from '@events-helsinki/components';
 import React from 'react';
-import EventList from '../../../common-events/components/eventList/EventList';
 
+import AppConfig from '../../app/AppConfig';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
 import type { SearchComponentType } from '../combinedSearch/types';
 import styles from './eventSearchPage.module.scss';
 import useSearchPage from './hooks/useSearchPage';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
+import { getEventUrl, getKeywordOnClickHandler } from './utils';
 
 type SearchPageProps = {
   SearchComponent?: React.FC<SearchComponentType>;
@@ -109,6 +111,13 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
                     count={count}
                     loading={isFetchingMore}
                     onLoadMore={handleLoadMore}
+                    getEventUrl={(event, router, locale) =>
+                      getEventUrl(event, router, locale)
+                    }
+                    showEnrolmentStatusInCardDetails={
+                      AppConfig.showEnrolmentStatusInCardDetails
+                    }
+                    getKeywordOnClickHandler={getKeywordOnClickHandler}
                   />
                 }
                 orderBySelectComponent={

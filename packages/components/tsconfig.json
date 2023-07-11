@@ -28,6 +28,7 @@
     "**/*.cjs",
     "**/*.mjs",
     "**/*.jsx",
-    "**/*.json"
+    "**/*.json",
+    "config/tests/initI18n.ts"
   ]
 }

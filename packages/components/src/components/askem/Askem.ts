@@ -31,12 +31,12 @@ class Askem {
     const scriptElement = doc.createElement('script');
     const scripts = doc.getElementsByTagName('script')[0];
 
-Object.assign(scriptElement, {
-	type: 'text/javascript',
-	async: true,
-	defer: true,
-	src: scriptUrl
-})
+    Object.assign(scriptElement, {
+      type: 'text/javascript',
+      async: true,
+      defer: true,
+      src: scriptUrl,
+    });
 
     if (scripts && scripts.parentNode) {
       scripts.parentNode.insertBefore(scriptElement, scripts);

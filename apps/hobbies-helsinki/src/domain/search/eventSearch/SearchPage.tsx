@@ -10,6 +10,7 @@ import {
   useEventListQuery,
   MAIN_CONTENT_ID,
   EVENT_SORT_OPTIONS,
+  EventList,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
@@ -18,12 +19,12 @@ import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
-import EventList from '../../../common-events/components/eventList/EventList';
 import { ROUTES } from '../../../constants';
+import AppConfig from '../../app/AppConfig';
 import { PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
-import { getEventSearchVariables, getNextPage } from './utils';
+import { getEventSearchVariables, getEventUrl, getNextPage } from './utils';
 
 const SearchPage: React.FC<{
   SearchComponent: React.FC<{
@@ -169,6 +170,12 @@ const SearchPage: React.FC<{
                     count={eventsList.meta.count}
                     loading={isFetchingMore}
                     onLoadMore={handleLoadMore}
+                    getEventUrl={(event, router, locale) =>
+                      getEventUrl(event, router, locale)
+                    }
+                    showEnrolmentStatusInCardDetails={
+                      AppConfig.showEnrolmentStatusInCardDetails
+                    }
                   />
                 }
               />

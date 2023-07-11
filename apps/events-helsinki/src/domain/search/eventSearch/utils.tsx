@@ -4,6 +4,7 @@ import type {
   Meta,
   QueryEventListArgs,
   EVENT_SORT_OPTIONS,
+  KeywordOnClickHandlerType,
 } from '@events-helsinki/components';
 import {
   buildQueryFromObject,
@@ -416,7 +417,7 @@ export const getEventListLinkUrl = (
   return getPlainEventUrl(event, locale) + (search ? `?${search}` : '');
 };
 
-export const getKeywordOnClickHandler =
+export const getKeywordOnClickHandler: KeywordOnClickHandlerType =
   (
     router: NextRouter,
     locale: AppLanguage,

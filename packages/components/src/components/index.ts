@@ -55,3 +55,9 @@ export {
   useApolloErrorsReducer,
 } from './apolloErrorNotification/apolloErrorsReducer';
 export type { ToastableErrorActions } from './apolloErrorNotification/apolloErrorsReducer';
+export type { KeywordOnClickHandlerType } from './eventKeywords/EventKeywords';
+export { default as EventCard } from './eventCard/EventCard';
+export { default as LargeEventCard } from './eventCard/LargeEventCard';
+export { default as EventName } from './eventName/EventName';
+export { default as EventKeywords } from './eventKeywords/EventKeywords';
+export { default as EventList } from './eventList/EventList';

@@ -1,29 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { faker } from '@faker-js/faker';
 import merge from 'lodash/merge';
-import type {
-  Audience,
-  BannerPage,
-  CmsImage,
-  EventDetails,
-  EventListResponse,
-  ExternalLink,
-  Image,
-  InLanguage,
-  Keyword,
-  KeywordListResponse,
-  LocalizedCmsImage,
-  LocalizedCmsKeywords,
-  LocalizedObject,
-  Neighborhood,
-  NeighborhoodListResponse,
-  Offer,
-  OrganizationDetails,
-  Place,
-  PlaceListResponse,
-  StaticPage,
-} from '../../src';
-import { EventTypeId, EXTLINK } from '../../src';
+import { EXTLINK } from '../../src/constants';
+import {
+  EventTypeId,
+  type Audience,
+  type BannerPage,
+  type CmsImage,
+  type EventDetails,
+  type EventListResponse,
+  type ExternalLink,
+  type Image,
+  type InLanguage,
+  type Keyword,
+  type KeywordListResponse,
+  type LocalizedCmsImage,
+  type LocalizedCmsKeywords,
+  type LocalizedObject,
+  type Neighborhood,
+  type NeighborhoodListResponse,
+  type Offer,
+  type OrganizationDetails,
+  type Place,
+  type PlaceListResponse,
+  type StaticPage,
+} from '../../src/types';
 
 export const fakeEvents = (
   count = 1,

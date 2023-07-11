@@ -49,7 +49,7 @@ const customRender: CustomRender = (
   }
 
   // set locales so that the routing tests for default locale worked
-  // Router.locales = ['fi', 'en', 'sv'];
+  Router.locales = ['fi', 'en', 'sv'];
 
   const renderResult = render(ui, {
     wrapper: ({ children }) => (

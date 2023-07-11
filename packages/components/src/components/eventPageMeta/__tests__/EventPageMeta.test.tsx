@@ -1,8 +1,8 @@
-import type { EventFieldsFragment } from '@events-helsinki/components';
 import React from 'react';
 
-import { render, actWait } from '@/test-utils';
+import { render, waitFor } from '@/test-utils';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
+import type { EventFieldsFragment } from '../../../types/generated/graphql';
 import EventPageMeta from '../EventPageMeta';
 
 const eventName = 'Name of event';
@@ -31,9 +31,11 @@ const event = fakeEvent({
 
 it('applies expected metadata', async () => {
   render(<EventPageMeta event={event} />);
-
-  await actWait(300);
   const title = document.title;
+  await waitFor(() => {
+    expect(title).toStrictEqual(eventName);
+  });
+
   const head = document.querySelector('head');
   const metaDescription = head?.querySelector('[name="description"]');
   const metaKeywords = head?.querySelector('[name="keywords"]');
@@ -41,7 +43,6 @@ it('applies expected metadata', async () => {
   const ogDescription = head?.querySelector('[property="og:description"]');
   const ogImage = head?.querySelector('[property="og:image"]');
 
-  expect(title).toStrictEqual(eventName);
   expect(metaDescription).toHaveAttribute('content', eventDescription);
   expect(metaKeywords).toHaveAttribute('content', keyword);
   expect(ogTitle).toHaveAttribute('content', eventName);

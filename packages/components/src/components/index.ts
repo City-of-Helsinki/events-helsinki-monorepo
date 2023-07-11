@@ -63,3 +63,4 @@ export { default as EventKeywords } from './eventKeywords/EventKeywords';
 export { default as EventList } from './eventList/EventList';
 export { default as EventClosedHero } from './eventClosedHero/EventClosedHero';
 export { default as EventHero } from './eventHero/EventHero';
+export { default as EventPageMeta } from './eventPageMeta/EventPageMeta';

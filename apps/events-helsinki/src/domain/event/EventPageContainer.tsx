@@ -7,6 +7,7 @@ import {
   useSuperEventLazyLoad,
   EventClosedHero,
   EventHero,
+  EventPageMeta,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
@@ -22,7 +23,6 @@ import ErrorHero from '../error/ErrorHero';
 import { getKeywordOnClickHandler } from '../search/eventSearch/utils';
 import EventContent from './eventContent/EventContent';
 import styles from './eventPage.module.scss';
-import EventPageMeta from './eventPageMeta/EventPageMeta';
 
 const SimilarEvents = dynamic(() => import('./similarEvents/SimilarEvents'), {
   ssr: false,

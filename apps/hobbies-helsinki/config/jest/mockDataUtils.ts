@@ -99,7 +99,7 @@ export const fakeTargetGroup = (overrides?: Partial<Audience>): Audience => {
       id: faker.string.uuid(),
       internalContext: '',
       internalId: faker.string.uuid(),
-      name: fakeLocalizedObject(faker.random.word()),
+      name: fakeLocalizedObject(faker.word.sample()),
     },
     overrides
   );

@@ -1,14 +1,15 @@
-import { useLocale, getEventFields } from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
 import Head from 'next/head';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
+import useLocale from '../../hooks/useLocale';
+import type { EventFields } from '../../types/event-types';
+import { getEventFields } from '../../utils/eventUtils';
 
-interface Props {
+type EventPageMetaProps = {
   event: EventFields;
-}
+};
 
-const EventPageMeta: React.FC<Props> = ({ event }) => {
+const EventPageMeta: React.FC<EventPageMetaProps> = ({ event }) => {
   const locale = useLocale();
 
   const { meta } = useConfig();

@@ -38,6 +38,28 @@ jest.mock('ics', () => {
 jest.mock('next/router', () => require('next-router-mock'));
 jest.mock('next/dist/client/router', () => require('next-router-mock'));
 
+// Mock next/head
+jest.mock('next/head', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const ReactDOMServer = require('react-dom/server');
+  return {
+    __esModule: true,
+    default: ({
+      children,
+    }: {
+      children: Array<React.ReactElement> | React.ReactElement | null;
+    }) => {
+      if (children) {
+        global.document.head.insertAdjacentHTML(
+          'afterbegin',
+          ReactDOMServer.renderToString(children) || ''
+        );
+      }
+      return null;
+    },
+  };
+});
+
 // https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
 jest.mock('../src/hooks/useLocale', () => ({
   __esModule: true,

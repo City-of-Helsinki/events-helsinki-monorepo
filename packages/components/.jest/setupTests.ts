@@ -17,6 +17,20 @@ jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
 jest.mock('next/router', () => require('next-router-mock'));
 jest.mock('next/dist/client/router', () => require('next-router-mock'));
 
+// Mock the translations module
+jest.mock('next-i18next', () => ({
+  // When testing, i18n is set up with providers instead of the version that's
+  // optimized for next. That's why we replace the next useTranslation with the
+  // default react version.
+  __esModule: true,
+  ...jest.requireActual('next-i18next'),
+}));
+
+// Mock the ICS create event that fails during the tests
+jest.mock('ics', () => {
+  jest.fn();
+});
+
 // https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
 jest.mock('../src/hooks/useLocale', () => ({
   __esModule: true,

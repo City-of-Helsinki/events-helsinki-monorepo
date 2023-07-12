@@ -18,7 +18,6 @@ import {
   useConfig,
 } from 'react-helsinki-headless-cms';
 
-import type { KeywordOnClickHandlerType } from '../../components';
 import { EventKeywords, buttonStyles } from '../../components';
 import EventLocationText from '../../components/domain/event/eventLocation/EventLocationText';
 import EventName from '../../components/eventName/EventName';
@@ -27,6 +26,7 @@ import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';
 import SkeletonLoader from '../../components/skeletonLoader/SkeletonLoader';
 import useLocale from '../../hooks/useLocale';
 import type { EventFields, SuperEventResponse } from '../../types/event-types';
+import type { KeywordOnClickHandlerType } from '../../types/types';
 import { extractLatestReturnPath } from '../../utils/eventQueryString.util';
 import type { ReturnParams } from '../../utils/eventQueryString.util';
 import {

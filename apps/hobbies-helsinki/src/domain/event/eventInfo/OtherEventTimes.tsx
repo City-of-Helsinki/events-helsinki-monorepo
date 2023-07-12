@@ -3,12 +3,12 @@ import {
   LoadingSpinner,
   SkeletonLoader,
   useEventTranslation,
+  useOtherEventTimes,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import { IconAngleDown, IconAngleUp, IconCalendarPlus } from 'hds-react';
 import React from 'react';
 
-import { useOtherEventTimes } from '../queryUtils';
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
 

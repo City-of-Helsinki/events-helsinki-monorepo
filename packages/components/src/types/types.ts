@@ -1,5 +1,7 @@
+import type { NextRouter } from 'next/router';
 import type React from 'react';
 import type { APP_LANGUAGES } from '../constants';
+import type { EventFields } from './event-types';
 
 export type AppLanguage = (typeof APP_LANGUAGES)[number];
 
@@ -118,6 +120,24 @@ export type RnsData = {
   commentNumber?: number;
   postId?: string;
 };
+
+export type KeywordOnClickHandlerType = (
+  router: NextRouter,
+  locale: AppLanguage,
+  type: 'dateType' | 'isFree' | 'text',
+  value?: string
+) => () => void;
+
+export type GetEventUrlType = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+) => string;
+
+export type GetCardUrlType = (
+  event: EventFields,
+  locale: AppLanguage
+) => string;
 
 export {};
 

@@ -1,10 +1,7 @@
+import type { EVENT_SEARCH_FILTERS } from '@events-helsinki/components/constants';
 import type React from 'react';
 
-import type {
-  COURSE_CATEGORIES,
-  COURSE_HOBBY_TYPES,
-  EVENT_SEARCH_FILTERS,
-} from './constants';
+import type { COURSE_CATEGORIES, COURSE_HOBBY_TYPES } from './constants';
 
 export interface CategoryOption {
   icon: React.ReactElement;

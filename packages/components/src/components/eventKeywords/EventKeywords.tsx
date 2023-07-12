@@ -1,21 +1,14 @@
-/* eslint-disable sonarjs/cognitive-complexity */
-
-import type { NextRouter } from 'next/router';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import KeywordTag from '../../components/keyword/KeywordTag';
 import { DATE_TYPES } from '../../constants';
 import { useLocale } from '../../hooks';
-import type { AppLanguage, EventFieldsFragment } from '../../types';
+import type {
+  EventFieldsFragment,
+  KeywordOnClickHandlerType,
+} from '../../types';
 import { getEventFields } from '../../utils';
-
-export type KeywordOnClickHandlerType = (
-  router: NextRouter,
-  locale: AppLanguage,
-  type: 'dateType' | 'isFree' | 'text',
-  value?: string
-) => () => void;
 
 type EventKeywordsProps = {
   blackOnMobile?: boolean;

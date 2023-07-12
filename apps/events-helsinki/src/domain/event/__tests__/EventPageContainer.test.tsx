@@ -1,6 +1,6 @@
 import type { MockedResponse } from '@apollo/client/testing';
 import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
-import type { EventFieldsFragment } from '@events-helsinki/components';
+import type { EventFields } from '@events-helsinki/components';
 import {
   EventDetailsDocument,
   EventListDocument,
@@ -18,7 +18,6 @@ import {
   fakeEvents,
   fakeKeyword,
   fakeLocalizedObject,
-  fakeOrganization,
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import {
@@ -26,6 +25,7 @@ import {
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
 import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
+import { organizationResponse } from '../eventInfo/utils/EventInfo.mocks';
 import EventPageContainer from '../EventPageContainer';
 import type { EventPageContainerProps } from '../EventPageContainer';
 
@@ -60,7 +60,7 @@ const event = fakeEvent({
     __typename: 'InternalIdObject',
     internalId: `https://api.hel.fi/linkedevents/v1/event/${superEventId}/`,
   },
-}) as EventFieldsFragment;
+}) as EventFields;
 
 const eventRequest = {
   query: EventDetailsDocument,
@@ -91,14 +91,6 @@ const otherEventsResponse = {
   data: { eventList: fakeEvents(otherEventTimesCount) },
 };
 const similarEvents = fakeEvents(3);
-
-const organizationId = '1';
-const organizationName = 'Organization name';
-const organization = fakeOrganization({
-  id: organizationId,
-  name: organizationName,
-});
-const organizationResponse = { data: { organizationDetails: organization } };
 
 const mocks = [
   {
@@ -225,7 +217,7 @@ it("should show error info when event doesn't exist", async () => {
   });
 });
 
-describe.skip(`SIMILAR_EVENTS feature flag`, () => {
+describe(`SIMILAR_EVENTS feature flag`, () => {
   it('shows similar events when flag is on', async () => {
     advanceTo('2020-10-01');
     renderComponent({ event: event, loading: false, showSimilarEvents: true });
@@ -238,9 +230,9 @@ describe.skip(`SIMILAR_EVENTS feature flag`, () => {
       })
     ).toBeInTheDocument();
 
-    similarEvents.data.forEach(({ name }) => {
+    similarEvents.data.forEach(async ({ name }) => {
       expect(
-        screen.getByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
+        await screen.findByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
           selector: 'a',
         })
       ).toBeInTheDocument();

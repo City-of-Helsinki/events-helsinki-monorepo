@@ -24,7 +24,12 @@ import AppConfig from '../../app/AppConfig';
 import { PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
-import { getEventSearchVariables, getEventUrl, getNextPage } from './utils';
+import {
+  getEventSearchVariables,
+  getEventUrl,
+  getKeywordOnClickHandler,
+  getNextPage,
+} from './utils';
 
 const SearchPage: React.FC<{
   SearchComponent: React.FC<{
@@ -176,6 +181,7 @@ const SearchPage: React.FC<{
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
+                    getKeywordOnClickHandler={getKeywordOnClickHandler}
                   />
                 }
               />

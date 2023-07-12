@@ -44,3 +44,25 @@ export enum EnrolmentStatusLabel {
   enrolmentEnded = 'enrolmentEnded',
   queueable = 'queueable',
 }
+
+export enum EVENT_SEARCH_FILTERS {
+  CATEGORIES = 'categories',
+  HOBBY_TYPES = 'hobbyTypes',
+  DATE_TYPES = 'dateTypes',
+  DIVISIONS = 'divisions',
+  END = 'end',
+  IS_FREE = 'isFree',
+  KEYWORD = 'keyword',
+  KEYWORD_NOT = 'keywordNot',
+  ONLY_CHILDREN_EVENTS = 'onlyChildrenEvents',
+  ONLY_EVENING_EVENTS = 'onlyEveningEvents',
+  ONLY_REMOTE_EVENTS = 'onlyRemoteEvents',
+  PAGE = 'page',
+  PLACES = 'places',
+  PUBLISHER = 'publisher',
+  START = 'start',
+  TEXT = 'text',
+  MIN_AGE = 'audienceMinAgeLt',
+  MAX_AGE = 'audienceMaxAgeGt',
+  SUITABLE = 'suitableFor',
+}

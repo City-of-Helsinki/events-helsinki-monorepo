@@ -5,6 +5,7 @@ import {
   getUrlParamAsArray,
   EventTypeId,
   scrollToTop,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import type {
   FilterType,
@@ -33,7 +34,6 @@ import routerHelper from '../../app/routerHelper';
 import type { COURSE_CATEGORIES, COURSE_HOBBY_TYPES } from './constants';
 import {
   EVENT_DEFAULT_SEARCH_FILTERS,
-  EVENT_SEARCH_FILTERS,
   courseCategories,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
@@ -429,8 +429,10 @@ export const getAllHobbyCategories = () =>
 /** Filter the kewords from the event that can be mapped as categories */
 export const getEventCategories = (event: EventFields) => {
   const allHobbyTypes = getAllHobbyCategories();
-  return event.keywords.filter(
-    (keyword) => keyword.id && allHobbyTypes.includes(keyword.id)
+  return (
+    event.keywords?.filter(
+      (keyword) => keyword.id && allHobbyTypes.includes(keyword.id)
+    ) ?? []
   );
 };
 

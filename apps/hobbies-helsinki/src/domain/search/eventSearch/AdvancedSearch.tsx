@@ -2,6 +2,7 @@ import type { ParsedUrlQueryInput } from 'querystring';
 import {
   Checkbox,
   DateSelector,
+  EVENT_SEARCH_FILTERS,
   MultiSelectDropdown,
   RangeDropdown,
   useAppHobbiesTranslation,
@@ -29,11 +30,7 @@ import SearchAutosuggest from '../../../common-events/components/search/SearchAu
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';
 import PlaceSelector from '../../place/placeSelector/PlaceSelector';
-import {
-  EVENT_DEFAULT_SEARCH_FILTERS,
-  EVENT_SEARCH_FILTERS,
-  MAPPED_PLACES,
-} from './constants';
+import { EVENT_DEFAULT_SEARCH_FILTERS, MAPPED_PLACES } from './constants';
 import FilterSummary from './filterSummary/FilterSummary';
 import styles from './search.module.scss';
 import {

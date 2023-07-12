@@ -1,9 +1,3 @@
-import {
-  LoadingSpinner,
-  useEventTranslation,
-} from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
-import { useRouter } from 'next/router';
 import React from 'react';
 import type { CollectionProps } from 'react-helsinki-headless-cms';
 import {
@@ -11,29 +5,40 @@ import {
   PageSection,
   ContentContainer,
 } from 'react-helsinki-headless-cms';
+import useEventTranslation from '../../../../hooks/useEventTranslation';
+import type { EventFields } from '../../../../types/event-types';
+import type { QueryEventListArgs } from '../../../../types/generated/graphql';
+import type { GetCardUrlType } from '../../../../types/types';
+import LoadingSpinner from '../../../spinner/LoadingSpinner';
 import { useSimilarEventsQuery } from '../queryUtils';
 import useEventCards from '../useEventCards';
 import styles from './similarEvents.module.scss';
 
-interface Props {
+export type SimilarEventsProps = {
   event: EventFields;
   type?: CollectionProps['type'];
   onEventsLoaded?: (eventsCount: number) => void;
-}
+  getCardUrl: GetCardUrlType;
+  eventFilters: QueryEventListArgs;
+};
 
 export const similarEventsContainerTestId = 'similar-events-container';
 export const similarEventsLoadingSpinnerTestId =
   'similar-events-loading-spinner';
 
-const SimilarEvents: React.FC<Props> = ({
+const SimilarEvents: React.FC<SimilarEventsProps> = ({
   event,
   type = 'carousel',
   onEventsLoaded,
+  getCardUrl,
+  eventFilters,
 }) => {
   const { t } = useEventTranslation();
-  const router = useRouter();
-  const { data: events, loading } = useSimilarEventsQuery(event);
-  const cards = useEventCards({ events, returnPath: router.asPath });
+  const { data: events, loading } = useSimilarEventsQuery(event, eventFilters);
+  const cards = useEventCards({
+    events,
+    getCardUrl,
+  });
   const hasCards = !!cards.length;
 
   React.useEffect(() => {

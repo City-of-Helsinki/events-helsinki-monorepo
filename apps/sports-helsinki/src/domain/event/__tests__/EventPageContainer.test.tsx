@@ -1,3 +1,4 @@
+import type { MockedResponse } from '@apollo/client/testing';
 import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
 import {
   EventDetailsDocument,
@@ -142,9 +143,12 @@ const mocks = [
 const testPath = `/courses/${id}`;
 const routes = [testPath];
 
-const renderComponent = (props: EventPageContainerProps) =>
+const renderComponent = (
+  props: EventPageContainerProps,
+  overrideMocks?: MockedResponse[]
+) =>
   render(<EventPageContainer {...props} />, {
-    mocks,
+    mocks: overrideMocks ?? mocks,
     routes,
   });
 
@@ -222,7 +226,7 @@ it("should show error info when event doesn't exist", async () => {
   });
 });
 
-describe.skip(`SIMILAR_EVENTS feature flag`, () => {
+describe(`SIMILAR_EVENTS feature flag`, () => {
   it('shows similar events when flag is on', async () => {
     advanceTo('2020-10-01');
     renderComponent({ event: event, loading: false, showSimilarEvents: true });
@@ -235,9 +239,9 @@ describe.skip(`SIMILAR_EVENTS feature flag`, () => {
       })
     ).toBeInTheDocument();
 
-    similarEvents.data.forEach(({ name }) => {
+    similarEvents.data.forEach(async ({ name }) => {
       expect(
-        screen.getByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
+        await screen.findByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
           selector: 'a',
         })
       ).toBeInTheDocument();

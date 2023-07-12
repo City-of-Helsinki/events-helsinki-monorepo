@@ -1,5 +1,4 @@
-import type { KeywordOnClickHandlerType } from '../../components/eventKeywords/EventKeywords';
-import type { EventFields } from '../../types';
+import type { EventFields, KeywordOnClickHandlerType } from '../../types';
 
 export type EventCardProps = {
   event: EventFields;

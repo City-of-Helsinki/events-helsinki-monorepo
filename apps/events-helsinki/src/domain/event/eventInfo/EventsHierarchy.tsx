@@ -2,6 +2,8 @@ import {
   InfoWithIcon,
   LoadingSpinner,
   SkeletonLoader,
+  useSubEvents,
+  useSubEventsQueryVariables,
 } from '@events-helsinki/components';
 import type {
   EventFields,
@@ -16,7 +18,8 @@ import {
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { useSubEvents, useSubEventsQueryVariables } from '../queryUtils';
+import AppConfig from '../../app/AppConfig';
+
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
 
@@ -28,7 +31,10 @@ const SubEvents: React.FC<{ event: EventFields }> = ({ event }) => {
   const { t } = useTranslation('event');
   const [isListOpen, setIsListOpen] = React.useState(false);
 
-  const { superEventId, variables } = useSubEventsQueryVariables(event);
+  const { superEventId, variables } = useSubEventsQueryVariables(
+    event,
+    AppConfig.supportedEventTypes
+  );
 
   const {
     subEvents: events,

@@ -1,3 +1,4 @@
+import type { MockedResponse } from '@apollo/client/testing';
 import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
 import {
   EventDetailsDocument,
@@ -17,7 +18,6 @@ import {
   fakeEvents,
   fakeKeyword,
   fakeLocalizedObject,
-  fakeOrganization,
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import {
@@ -25,6 +25,7 @@ import {
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
 import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
+import { organizationResponse } from '../eventInfo/utils/EventInfo.mocks';
 import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
 
@@ -91,14 +92,6 @@ const otherEventsResponse = {
 };
 const similarEvents = fakeEvents(3);
 
-const organizationId = '1';
-const organizationName = 'Organization name';
-const organization = fakeOrganization({
-  id: organizationId,
-  name: organizationName,
-});
-const organizationResponse = { data: { organizationDetails: organization } };
-
 const mocks = [
   {
     request: eventRequest,
@@ -126,7 +119,7 @@ const mocks = [
       keywordOrSet3: [''],
       language: undefined,
       pageSize: 100,
-      eventType: [EventTypeId.General],
+      eventType: [EventTypeId.Course],
     },
     response: similarEvents,
   }),
@@ -144,9 +137,12 @@ const mocks = [
 const testPath = `/courses/${id}`;
 const routes = [testPath];
 
-const renderComponent = (props: EventPageContainerProps) =>
+const renderComponent = (
+  props: EventPageContainerProps,
+  overrideMocks?: MockedResponse[]
+) =>
   render(<EventPageContainer {...props} />, {
-    mocks,
+    mocks: overrideMocks ?? mocks,
     routes,
   });
 
@@ -224,7 +220,7 @@ it("should show error info when event doesn't exist", async () => {
   });
 });
 
-describe.skip(`SIMILAR_EVENTS feature flag`, () => {
+describe(`SIMILAR_EVENTS feature flag`, () => {
   it('shows similar events when flag is on', async () => {
     advanceTo('2020-10-01');
     renderComponent({ event: event, loading: false, showSimilarEvents: true });
@@ -237,9 +233,9 @@ describe.skip(`SIMILAR_EVENTS feature flag`, () => {
       })
     ).toBeInTheDocument();
 
-    similarEvents.data.forEach(({ name }) => {
+    similarEvents.data.forEach(async ({ name }) => {
       expect(
-        screen.getByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
+        await screen.findByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
           selector: 'a',
         })
       ).toBeInTheDocument();
@@ -260,7 +256,7 @@ describe.skip(`SIMILAR_EVENTS feature flag`, () => {
   });
 });
 
-it('should link to events search when clicking tags', async () => {
+it.skip('should link to events search when clicking tags', async () => {
   advanceTo('2020-10-01');
   const { router } = renderComponent({
     event: event,

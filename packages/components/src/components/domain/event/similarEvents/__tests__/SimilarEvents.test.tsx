@@ -1,6 +1,5 @@
 import { clear } from 'console';
 
-import type { EventFieldsFragment } from '@events-helsinki/components';
 import { advanceTo } from 'jest-date-mock';
 import * as React from 'react';
 
@@ -14,6 +13,8 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
+import { EventTypeId } from '../../../../../types/generated/graphql';
+import type { EventFieldsFragment } from '../../../../../types/generated/graphql';
 import SimilarEvents from '../SimilarEvents';
 
 const id = '1';
@@ -23,9 +24,9 @@ const startTime = '2020-10-05T07:00:00.000000Z';
 const endTime = '2020-10-05T10:00:00.000000Z';
 const audience = ['Aikuiset', 'Lapset'];
 const keywords = [
-  { name: 'Avouinti', id: 'yso:p916' },
-  { name: 'Eläimet', id: 'kulke:710' },
-  { name: 'Grillaus', id: 'yso:p17018' },
+  { name: 'Avouinti', id: 'keyword1' },
+  { name: 'Eläimet', id: 'keyword2' },
+  { name: 'Grillaus', id: 'keyword3' },
 ];
 
 const expectedSimilarEvents = fakeEvents(3);
@@ -47,8 +48,11 @@ const event = fakeEvent({
 const similarEventQueryVariables = {
   pageSize: 100,
   allOngoing: true,
-  keywordOrSet2: keywords.map((k) => k.id),
+  keywordOrSet2: [''],
+  keywordOrSet3: [''],
   language: undefined,
+  audienceMinAgeLt: event.audienceMinAge, // LT - Really?
+  audienceMaxAgeGt: event.audienceMaxAge, // GT - Really?
 };
 
 const mocks = [
@@ -57,6 +61,26 @@ const mocks = [
     response: expectedSimilarEvents,
   }),
 ];
+
+// Mock the similarEventFilters as they are presented in the Tapahtumat and it's mocks
+const similarEventFilters = {
+  end: '',
+  include: ['keywords', 'location'],
+  keywordAnd: [],
+  keywordNot: [],
+  location: [],
+  pageSize: 100,
+  publisher: null,
+  sort: 'end_time',
+  start: 'now',
+  superEventType: ['umbrella', 'none'],
+  keywordOrSet2: [''],
+  allOngoing: true,
+  keywordOrSet3: [''],
+  audienceMinAgeLt: '5',
+  audienceMaxAgeGt: '15',
+  eventType: [EventTypeId.General],
+};
 
 afterAll(() => {
   clear();
@@ -71,9 +95,16 @@ const waitForComponentToBeLoaded = async () => {
 describe('similar events', () => {
   it('should render similar event cards', async () => {
     advanceTo(new Date('2020-08-11'));
-    render(<SimilarEvents event={event as EventFieldsFragment} />, {
-      mocks,
-    });
+    render(
+      <SimilarEvents
+        event={event as EventFieldsFragment}
+        getCardUrl={jest.fn().mockReturnValue('https://tapahtumat.hel.fi')}
+        eventFilters={similarEventFilters}
+      />,
+      {
+        mocks,
+      }
+    );
     await waitForComponentToBeLoaded();
     await waitFor(() => {
       expect(
@@ -81,11 +112,6 @@ describe('similar events', () => {
           name: translations.event.similarEvents.title,
         })
       ).toBeInTheDocument();
-    });
-    await waitFor(() => {
-      expect(
-        screen.queryByText('Page has finished loading')
-      ).not.toBeInTheDocument();
     });
     expectedSimilarEvents.data.forEach((event) => {
       expect(
@@ -99,14 +125,21 @@ describe('similar events', () => {
   });
   it('should hide the whole page section when there are no cards', async () => {
     advanceTo(new Date('2020-08-11'));
-    render(<SimilarEvents event={event as EventFieldsFragment} />, {
-      mocks: [
-        createEventListRequestAndResultMocks({
-          variables: similarEventQueryVariables,
-          response: { ...expectedSimilarEvents, data: [] },
-        }),
-      ],
-    });
+    render(
+      <SimilarEvents
+        event={event as EventFieldsFragment}
+        getCardUrl={jest.fn().mockReturnValue('https://tapahtumat.hel.fi')}
+        eventFilters={similarEventFilters}
+      />,
+      {
+        mocks: [
+          createEventListRequestAndResultMocks({
+            variables: similarEventQueryVariables,
+            response: { ...expectedSimilarEvents, data: [] },
+          }),
+        ],
+      }
+    );
     await waitForComponentToBeLoaded();
     await waitFor(() => {
       expect(

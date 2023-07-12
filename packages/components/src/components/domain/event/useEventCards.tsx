@@ -1,19 +1,20 @@
-import type { EventFields } from '@events-helsinki/components';
-import { useClickCapture, useLocale } from '@events-helsinki/components';
 import React from 'react';
 import {
   Card,
   getEventCardProps,
   useConfig,
 } from 'react-helsinki-headless-cms';
-import { getCardUrl } from '../search/eventSearch/utils';
+import type { GetCardUrlType } from 'types/types';
+import useClickCapture from '../../../hooks/useClickCapture';
+import useLocale from '../../../hooks/useLocale';
+import type { EventFields } from '../../../types/event-types';
 
 type useEventCardsProps = {
   events?: EventFields[] | null;
-  returnPath?: string;
+  getCardUrl: GetCardUrlType;
 };
 
-function useEventCards({ events, returnPath }: useEventCardsProps) {
+function useEventCards({ events, getCardUrl }: useEventCardsProps) {
   const locale = useLocale();
   const {
     components: { EventCardContent },
@@ -26,7 +27,7 @@ function useEventCards({ events, returnPath }: useEventCardsProps) {
         <Card
           key={cardProps.id}
           {...cardProps}
-          url={getCardUrl(event, locale, returnPath)}
+          url={getCardUrl(event, locale)}
           direction="fixed-vertical"
           customContent={
             EventCardContent && <EventCardContent event={events[i]} />

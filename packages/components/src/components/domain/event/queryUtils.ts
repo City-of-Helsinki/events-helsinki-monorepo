@@ -1,45 +1,34 @@
-import type {
-  EventFields,
-  EventListQuery,
-  EventListQueryVariables,
-} from '@events-helsinki/components';
-import {
-  useEventListQuery,
-  getEventIdFromUrl,
-  SIMILAR_EVENTS_AMOUNT,
-  EVENT_SORT_OPTIONS,
-} from '@events-helsinki/components';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';
-
-import AppConfig from '../app/AppConfig';
-import { EVENT_SEARCH_FILTERS } from '../search/eventSearch/constants';
 import {
-  getEventCategories,
-  getEventSearchVariables,
-  getNextPage,
-} from '../search/eventSearch/utils';
+  EVENT_SEARCH_FILTERS,
+  EVENT_SORT_OPTIONS,
+  SIMILAR_EVENTS_AMOUNT,
+} from '../../../constants/event-constants';
+import type { EventFields } from '../../../types/event-types';
+import type {
+  EventListQuery,
+  EventListQueryVariables,
+  EventTypeId,
+  Meta,
+  QueryEventListArgs,
+} from '../../../types/generated/graphql';
+import { useEventListQuery } from '../../../types/generated/graphql';
+import { getEventIdFromUrl } from '../../../utils/eventUtils';
 
-const useSimilarEventsQueryVariables = (event: EventFields) => {
-  return React.useMemo(() => {
-    // Filter by search query if exists, if not filter by event keywords
-    const searchParams = {
-      [EVENT_SEARCH_FILTERS.KEYWORD]: getEventCategories(event) // use keyword key to give keyword ids
-        .map((category) => category?.id) // collect ids
-        .filter((id) => id != null) // remove nulls and undefined ones
-        .join(), // make a string
-    };
+/**
+ * Get next page number from linkedevents response meta field
+ * @param meta
+ * @return {number}
+ */
+export const getNextPage = (meta: Meta): number | null => {
+  if (!meta.next) return null;
 
-    return getEventSearchVariables({
-      include: ['keywords', 'location'],
-      // eslint-disable-next-line max-len
-      pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
-      params: new URLSearchParams(searchParams),
-      sortOrder: EVENT_SORT_OPTIONS.END_TIME,
-      superEventType: ['umbrella', 'none'],
-    });
-  }, [event]);
+  const urlParts = meta.next.split('?');
+  const searchParams = new URLSearchParams(decodeURIComponent(urlParts[1]));
+  const page = searchParams.get(EVENT_SEARCH_FILTERS.PAGE);
+  return page ? Number(page) : null;
 };
 
 /**
@@ -87,18 +76,21 @@ const _filterSimilarEvents = (event: EventFields, data: EventFields[]) =>
     .slice(0, SIMILAR_EVENTS_AMOUNT);
 
 export const useSimilarEventsQuery = (
-  event: EventFields
+  event: EventFields,
+  variables: QueryEventListArgs
 ): { loading: boolean; data: EventListQuery['eventList']['data'] } => {
-  const eventFilters = useSimilarEventsQueryVariables(event);
   const { data: eventsData, loading } = useEventListQuery({
     ssr: false,
-    variables: eventFilters,
+    variables,
   });
   const data = _filterSimilarEvents(event, eventsData?.eventList?.data || []);
   return { data, loading };
 };
 
-const useOtherEventTimesVariables = (event: EventFields) => {
+const useOtherEventTimesVariables = (
+  event: EventFields,
+  supportedEventTypes: EventTypeId[] | null
+) => {
   const superEventId = React.useMemo(
     () => getEventIdFromUrl(event.superEvent?.internalId || '', 'event'),
     [event.superEvent]
@@ -110,7 +102,7 @@ const useOtherEventTimesVariables = (event: EventFields) => {
       sort: EVENT_SORT_OPTIONS.END_TIME,
       start: 'now',
       superEvent: superEventId,
-      eventType: AppConfig.supportedEventTypes,
+      eventType: supportedEventTypes,
     }),
     [superEventId]
   );
@@ -119,14 +111,15 @@ const useOtherEventTimesVariables = (event: EventFields) => {
 };
 
 export const useSubEventsQueryVariables = (
-  event: EventFields
+  event: EventFields,
+  supportedEventTypes: EventTypeId[] | null
 ): { superEventId: string | undefined; variables: EventListQueryVariables } => {
   const variables = React.useMemo(
     (): EventListQueryVariables => ({
       sort: EVENT_SORT_OPTIONS.END_TIME,
       start: 'now',
       superEvent: event.id,
-      eventType: AppConfig.supportedEventTypes,
+      eventType: supportedEventTypes,
       include: ['in_language', 'keywords', 'location', 'audience'],
     }),
     [event.id]
@@ -196,7 +189,10 @@ export const useOtherEventTimes = (
   isFetchingMore: boolean;
   superEventId: string | undefined;
 } => {
-  const { variables, superEventId } = useOtherEventTimesVariables(event);
+  const { variables, superEventId } = useOtherEventTimesVariables(
+    event,
+    event.typeId ? [event.typeId] : null
+  );
 
   const { subEvents, isFetchingMore, loading } = useSubEvents(
     event,
@@ -204,4 +200,27 @@ export const useOtherEventTimes = (
     superEventId
   );
   return { events: subEvents, loading, isFetchingMore, superEventId };
+};
+
+export type useLocationUpcomingEventsQueryProps = {
+  placeId: string;
+  keywords: string[];
+  pageSize?: number;
+};
+
+export const useLocationUpcomingEventsQuery = ({
+  placeId,
+  keywords,
+  pageSize = 6,
+}: useLocationUpcomingEventsQueryProps) => {
+  const variables = {
+    location: placeId,
+    keywords,
+    include: ['keywords', 'location'],
+    start: 'now',
+    sort: EVENT_SORT_OPTIONS.END_TIME,
+    superEventType: 'none',
+    pageSize,
+  };
+  return useEventListQuery({ variables, ssr: false });
 };

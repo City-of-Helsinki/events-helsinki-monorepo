@@ -6,6 +6,8 @@ import {
   getSecureImage,
   useVenueTranslation,
 } from '@events-helsinki/components';
+import type { ReturnParams } from '@events-helsinki/components/utils/eventQueryString.util';
+import { extractLatestReturnPath } from '@events-helsinki/components/utils/eventQueryString.util';
 import classNames from 'classnames';
 import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -17,8 +19,7 @@ import {
   PageSection,
   useConfig,
 } from 'react-helsinki-headless-cms';
-import type { ReturnParams } from '../../event/eventQueryString.util';
-import { extractLatestReturnPath } from '../../event/eventQueryString.util';
+
 import getVenueOpeningTimeDescription from '../utils/getVenueOpeningTimeDescription';
 import VenueKeywords from '../venueKeywords/VenueKeywords';
 import styles from './venueHero.module.scss';

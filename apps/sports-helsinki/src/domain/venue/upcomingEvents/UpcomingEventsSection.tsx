@@ -1,6 +1,12 @@
+import type {
+  GetCardUrlType,
+  useLocationUpcomingEventsQueryProps,
+} from '@events-helsinki/components';
 import {
   LoadingSpinner,
   useVenueTranslation,
+  useEventCards,
+  useLocationUpcomingEventsQuery,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -11,9 +17,8 @@ import {
   PageSection,
   ContentContainer,
 } from 'react-helsinki-headless-cms';
-import type { useLocationUpcomingEventsQueryProps } from '../../event/queryUtils';
-import { useLocationUpcomingEventsQuery } from '../../event/queryUtils';
-import useEventCards from '../../event/useEventCards';
+
+import { getCardUrl } from '../../search/eventSearch/utils';
 import styles from './upcomingEvents.module.scss';
 
 type VenueUpcomingEventsProps = useLocationUpcomingEventsQueryProps & {
@@ -43,7 +48,10 @@ const VenueUpcomingEvents: React.FC<VenueUpcomingEventsProps> = ({
   });
   const cards = useEventCards({
     events: eventsData?.eventList?.data,
-    returnPath: router.asPath,
+    getCardUrl: (
+      event: Parameters<GetCardUrlType>[0],
+      locale: Parameters<GetCardUrlType>[1]
+    ) => getCardUrl(event, locale, router.asPath),
   });
   const hasCards = !!cards.length;
 

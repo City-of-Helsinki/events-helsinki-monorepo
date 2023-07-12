@@ -1,16 +1,19 @@
 import classNames from 'classnames';
 import { Button } from 'hds-react';
-import type { NextRouter } from 'next/router';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import EventCard from '../../components/eventCard/EventCard';
 import LargeEventCard from '../../components/eventCard/LargeEventCard';
-import type { KeywordOnClickHandlerType } from '../../components/eventKeywords/EventKeywords';
+
 import LoadingSpinner from '../../components/spinner/LoadingSpinner';
 import { useLocale } from '../../hooks';
-import type { AppLanguage, EventFields } from '../../types';
+import type {
+  EventFields,
+  GetEventUrlType,
+  KeywordOnClickHandlerType,
+} from '../../types';
 import styles from './eventList.module.scss';
 
 const eventCardsMap = {
@@ -27,11 +30,7 @@ type EventListProps = {
   hasNext: boolean;
   showEnrolmentStatusInCardDetails: boolean;
   onLoadMore: () => void;
-  getEventUrl: (
-    event: EventFields,
-    router: NextRouter,
-    locale: AppLanguage
-  ) => string;
+  getEventUrl: GetEventUrlType;
   getKeywordOnClickHandler: KeywordOnClickHandlerType;
 };
 

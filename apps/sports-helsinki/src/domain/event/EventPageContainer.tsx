@@ -19,14 +19,21 @@ import { Link } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../constants';
 import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
-import { getKeywordOnClickHandler } from '../search/eventSearch/utils';
+import {
+  getCardUrl,
+  getKeywordOnClickHandler,
+} from '../search/eventSearch/utils';
 import AppConfig from './../app/AppConfig';
 import EventContent from './eventContent/EventContent';
 import styles from './eventPage.module.scss';
+import useSimilarEventsQueryVariables from './useSimilarEventsQueryVariables';
 
-const SimilarEvents = dynamic(() => import('./similarEvents/SimilarEvents'), {
-  ssr: false,
-});
+const SimilarEvents = dynamic(
+  () => import('@events-helsinki/components').then((mod) => mod.SimilarEvents),
+  {
+    ssr: false,
+  }
+);
 
 export interface EventPageContainerProps {
   loading: boolean;
@@ -58,6 +65,8 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
   const moveToHomePage = () => {
     router.push(routerHelper.getI18nPath('/', locale));
   };
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const similarEventsFilters = useSimilarEventsQueryVariables(event!);
   return (
     <div className={styles.eventPageWrapper}>
       <main id={MAIN_CONTENT_ID}>
@@ -93,6 +102,10 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 <SimilarEvents
                   event={event}
                   onEventsLoaded={handleSimilarEventsLoaded}
+                  getCardUrl={(event, locale) =>
+                    getCardUrl(event, locale, router.asPath)
+                  }
+                  eventFilters={similarEventsFilters ?? {}}
                 />
               )}
             </>

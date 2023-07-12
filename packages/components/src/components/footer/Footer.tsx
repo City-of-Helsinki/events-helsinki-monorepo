@@ -71,7 +71,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
           {footerMenu?.menuItems?.nodes?.map(
             // NOTE: HCRC-build sometimes fails - this type should not be needed.
             // : Menu['menuItems']['nodes'][number]
-            (navigationItem: Menu['menuItems']['nodes'][number]) => (
+            (navigationItem) => (
               <Footer.Item
                 className={styles.footerLink}
                 key={navigationItem?.id}

@@ -9,9 +9,9 @@ import { fakeEvent, fakeKeyword, fakeOffer } from '@/test-utils/mockDataUtils';
 import type {
   AppLanguage,
   EventFieldsFragment,
+  KeywordOnClickHandlerType,
   OfferFieldsFragment,
 } from '../../../types';
-import type { KeywordOnClickHandlerType } from '../EventKeywords';
 import EventKeywords from '../EventKeywords';
 
 const getKeywordOnClickHandler: KeywordOnClickHandlerType =

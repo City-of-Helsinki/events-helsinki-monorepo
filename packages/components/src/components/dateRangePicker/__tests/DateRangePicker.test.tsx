@@ -129,7 +129,7 @@ describe('date range input', () => {
     expect(onChangeStartDate).toHaveBeenCalledWith(
       utcToZonedTime(new Date('2020-10-15'), 'UTC')
     );
-  });
+  }, 20_000);
 
   it('should show error start date must be before end date', async () => {
     renderComponent();

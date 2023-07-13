@@ -55,28 +55,27 @@ const mocks = [
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      allOngoing: true,
+      allOngoingAnd: [],
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,
-      eventType: ['Venue' as EventTypeId],
     },
     response: fakeEvents(5),
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      allOngoing: true,
+      allOngoingAnd: [],
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,
-      eventType: [EventTypeId.Course],
+      eventType: EventTypeId.Course,
     },
     response: fakeEvents(5),
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      allOngoing: true,
+      allOngoingAnd: [],
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,
-      eventType: [EventTypeId.General],
+      eventType: EventTypeId.General,
     },
     response: fakeEvents(5),
   }),

@@ -1,6 +1,5 @@
 import { addDays } from 'date-fns';
 import { range } from 'lodash';
-
 import {
   fakeEvent,
   fakeEvents,
@@ -72,6 +71,7 @@ export const event = fakeEvent({
   audience: targetGroups.map((targetGroup) =>
     fakeTargetGroup({ name: fakeLocalizedObject(targetGroup) })
   ),
+  typeId: EventTypeId.Course,
 }) as EventFieldsFragment;
 
 export const meta: Meta = {

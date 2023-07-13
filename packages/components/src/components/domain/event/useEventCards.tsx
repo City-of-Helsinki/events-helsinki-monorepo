@@ -4,10 +4,10 @@ import {
   getEventCardProps,
   useConfig,
 } from 'react-helsinki-headless-cms';
-import type { GetCardUrlType } from 'types/types';
 import useClickCapture from '../../../hooks/useClickCapture';
 import useLocale from '../../../hooks/useLocale';
 import type { EventFields } from '../../../types/event-types';
+import type { GetCardUrlType } from '../../../types/types';
 
 type useEventCardsProps = {
   events?: EventFields[] | null;

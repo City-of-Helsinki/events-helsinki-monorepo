@@ -5,6 +5,7 @@ import {
   EventListDocument,
   EventTypeId,
   OrganizationDetailsDocument,
+  otherEventTimesListTestId,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -17,14 +18,14 @@ import {
   fakeEvents,
   fakeKeyword,
   fakeLocalizedObject,
+  fakeOrganization,
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import {
   createEventListRequestAndResultMocks,
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import { otherEventTimesListTestId } from '../eventInfo/OtherEventTimes';
-import { organizationResponse } from '../eventInfo/utils/EventInfo.mocks';
+
 import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
 
@@ -92,6 +93,9 @@ const otherEventsResponse = {
   data: { eventList: fakeEvents(otherEventTimesCount) },
 };
 const similarEvents = fakeEvents(3);
+const organization = fakeOrganization();
+const organizationResponse = { data: { organizationDetails: organization } };
+
 const mocks = [
   {
     request: eventRequest,
@@ -120,15 +124,6 @@ const mocks = [
     },
     response: similarEvents,
   }),
-  {
-    request: {
-      query: OrganizationDetailsDocument,
-      variables: {
-        id: 'provider:123',
-      },
-    },
-    result: organizationResponse,
-  },
   {
     request: {
       query: OrganizationDetailsDocument,

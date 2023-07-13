@@ -3,6 +3,7 @@ import {
   Checkbox,
   DateSelector,
   EVENT_SEARCH_FILTERS,
+  IconRead,
   MultiSelectDropdown,
   RangeDropdown,
   useAppHobbiesTranslation,
@@ -24,8 +25,6 @@ import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
-
-import IconRead from '../../../assets/icons/IconRead';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';

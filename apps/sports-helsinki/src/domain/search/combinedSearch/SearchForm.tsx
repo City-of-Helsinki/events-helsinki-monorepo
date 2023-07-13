@@ -3,11 +3,11 @@ import {
   useSearchTranslation,
   MultiSelectDropdown,
   useAppSportsTranslation,
+  IconPersonRunning,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Button, IconSearch } from 'hds-react';
 import React from 'react';
-import IconPersonRunning from '../../../assets/icons/IconPersonRunning';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
 import type { SearchComponentType } from '../combinedSearch/types';

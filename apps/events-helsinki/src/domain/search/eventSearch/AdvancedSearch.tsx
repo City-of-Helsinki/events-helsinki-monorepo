@@ -5,6 +5,7 @@ import {
   MultiSelectDropdown,
   useAppEventsTranslation,
   useLocale,
+  IconRead,
 } from '@events-helsinki/components';
 import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import classNames from 'classnames';
@@ -15,8 +16,6 @@ import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
-
-import IconRead from '../../../assets/icons/IconRead';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';

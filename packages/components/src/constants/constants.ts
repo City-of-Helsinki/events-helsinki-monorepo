@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { AppLanguage, Language, LanguageCodeEnum } from '../types';
+import type { Language, LanguageCodeEnum } from '../types/generated/graphql';
+import type { AppLanguage } from '../types/types';
 
 export const MAIN_CONTENT_ID = 'main-content';
 

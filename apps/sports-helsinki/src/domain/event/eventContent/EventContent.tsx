@@ -8,6 +8,7 @@ import {
   EventLocation,
   getEventFields,
   EVENT_LOCATIONS,
+  EventInfo,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
@@ -19,7 +20,11 @@ import {
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
 
-import EventInfo from '../eventInfo/EventInfo';
+import {
+  getEventListLinkUrl,
+  getOrganizationSearchUrl,
+  getPlainEventUrl,
+} from '../../search/eventSearch/utils';
 import styles from './eventContent.module.scss';
 
 interface Props {
@@ -90,7 +95,13 @@ const EventContent: React.FC<Props> = ({
             {!isInternetEvent && <EventLocation event={event} />}
           </div>
           <div>
-            <EventInfo event={event} superEvent={superEvent} />
+            <EventInfo
+              event={event}
+              superEvent={superEvent}
+              getEventListLinkUrl={getEventListLinkUrl}
+              getOrganizationSearchUrl={getOrganizationSearchUrl}
+              getPlainEventUrl={getPlainEventUrl}
+            />
           </div>
         </div>
       </ContentContainer>

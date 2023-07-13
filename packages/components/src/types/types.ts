@@ -121,6 +121,7 @@ export type RnsData = {
   postId?: string;
 };
 
+
 export type KeywordOnClickHandlerType = (
   router: NextRouter,
   locale: AppLanguage,
@@ -131,6 +132,23 @@ export type KeywordOnClickHandlerType = (
 export type GetEventUrlType = (
   event: EventFields,
   router: NextRouter,
+  locale: AppLanguage
+) => string;
+
+export type GetEventListLinkUrlType = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+) => string;
+
+export type GetOrganizationSearchUrlType = (
+  event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+) => string;
+
+export type GetPlainEventUrlType = (
+  event: EventFields,
   locale: AppLanguage
 ) => string;
 

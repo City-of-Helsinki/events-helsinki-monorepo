@@ -1,9 +1,13 @@
-import type { EventFieldsFragment } from '@events-helsinki/components';
 import React from 'react';
 
 import { configure, render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
-import { fakeEvent, fakeImage } from '@/test-utils/mockDataUtils';
+import {
+  commonAppUrlGetterMocks,
+  fakeEvent,
+  fakeImage,
+} from '@/test-utils/mockDataUtils';
+import type { EventFieldsFragment } from 'types/generated/graphql';
 import EventContent from '../EventContent';
 
 configure({ defaultHidden: true });
@@ -36,7 +40,7 @@ const event = fakeEvent({
 }) as EventFieldsFragment;
 
 it('should render event content fields', async () => {
-  render(<EventContent event={event} />);
+  render(<EventContent event={event} {...commonAppUrlGetterMocks} />);
 
   await waitFor(() => {
     expect(
@@ -107,6 +111,7 @@ it('should hide map if internet event', () => {
           location: { ...event.location, id: 'helsinki:internet' },
         } as EventFieldsFragment
       }
+      {...commonAppUrlGetterMocks}
     />
   );
   expect(screen.queryByText(/sijainti/i)).not.toBeInTheDocument();
@@ -121,6 +126,7 @@ it('should show location extra info when available', () => {
           locationExtraInfo: { fi: 'Sisään takaovesta' },
         } as EventFieldsFragment
       }
+      {...commonAppUrlGetterMocks}
     />
   );
   expect(screen.getByText(/Paikan lisätiedot/i)).toBeInTheDocument();
@@ -128,6 +134,6 @@ it('should show location extra info when available', () => {
 });
 
 it('should not show location extra info title when location extra info not available', () => {
-  render(<EventContent event={event} />);
+  render(<EventContent event={event} {...commonAppUrlGetterMocks} />);
   expect(screen.queryByText(/Paikan lisätiedot/i)).not.toBeInTheDocument();
 });

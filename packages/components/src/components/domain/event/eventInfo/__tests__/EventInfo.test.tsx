@@ -1,8 +1,6 @@
 import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
 import FileSaver from 'file-saver';
-import type { NextRouter } from 'next/router';
 import mockRouter from 'next-router-mock';
-import React from 'react';
 
 import {
   actWait,
@@ -14,14 +12,13 @@ import {
   within,
 } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
-import { fakeEvent } from '@/test-utils/mockDataUtils';
+import { commonAppUrlGetterMocks, fakeEvent } from '@/test-utils/mockDataUtils';
 import type {
   EventFields,
   SuperEventResponse,
 } from '../../../../../types/event-types';
 import type { EventDetails } from '../../../../../types/generated/graphql';
 import { EventTypeId } from '../../../../../types/generated/graphql';
-import type { AppLanguage } from '../../../../../types/types';
 import getDateRangeStr from '../../../../../utils/getDateRangeStr';
 import {
   addressLocality,
@@ -42,26 +39,6 @@ import {
 import EventInfo from '../EventInfo';
 import { subEventsListTestId, superEventTestId } from '../EventsHierarchy';
 
-const eventInfoUrlProps = {
-  getEventListLinkUrl: jest
-    .fn()
-    .mockImplementation(
-      (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
-        `/kurssit/${event.id}?returnPath=/haku`
-    ),
-  getOrganizationSearchUrl: jest
-    .fn()
-    .mockImplementation(
-      (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
-        `/haku?publisher=${event.publisher}&searchType=${event.typeId}`
-    ),
-  getPlainEventUrl: jest
-    .fn()
-    .mockImplementation(
-      (event: EventFields, _locale: AppLanguage) => `/kurssit/${event.id}`
-    ),
-};
-
 beforeEach(() => {
   mockRouter.setCurrentUrl('/');
 });
@@ -77,7 +54,7 @@ const getDateRangeStrProps = (event: EventDetails) => ({
 });
 
 it('should render event info fields', async () => {
-  render(<EventInfo event={event} {...eventInfoUrlProps} />, { mocks });
+  render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, { mocks });
   await actWait();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -131,7 +108,9 @@ it('should hide the organizer section when the organizer name is not given', asy
     ...event,
     provider: null,
   };
-  render(<EventInfo event={mockEvent} {...eventInfoUrlProps} />, { mocks });
+  render(<EventInfo event={mockEvent} {...commonAppUrlGetterMocks} />, {
+    mocks,
+  });
   await actWait();
   expect(
     screen.getByRole('heading', {
@@ -157,7 +136,7 @@ it('should hide other info section', () => {
       telephone: null,
     },
   } as EventFields;
-  render(<EventInfo event={mockEvent} {...eventInfoUrlProps} />, {
+  render(<EventInfo event={mockEvent} {...commonAppUrlGetterMocks} />, {
     mocks,
   });
 
@@ -188,7 +167,7 @@ it('should hide other info section registration url from external links', () => 
       telephone: null,
     },
   } as EventFields;
-  render(<EventInfo event={mockEvent} {...eventInfoUrlProps} />, {
+  render(<EventInfo event={mockEvent} {...commonAppUrlGetterMocks} />, {
     mocks,
   });
 
@@ -212,7 +191,7 @@ it('should hide the map link from location info if location is internet', () => 
       telephone: null,
     },
   } as EventFields;
-  render(<EventInfo event={mockEvent} {...eventInfoUrlProps} />, {
+  render(<EventInfo event={mockEvent} {...commonAppUrlGetterMocks} />, {
     mocks,
   });
 
@@ -225,7 +204,7 @@ it('should hide the map link from location info if location is internet', () => 
 
 it('should open ticket buy page', async () => {
   global.open = jest.fn();
-  render(<EventInfo event={event} {...eventInfoUrlProps} />, { mocks });
+  render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, { mocks });
 
   // Event info fields
   await userEvent.click(
@@ -242,7 +221,7 @@ it('should open ticket buy page', async () => {
 // eslint-disable-next-line jest/no-disabled-tests
 it.skip('should create ics file succesfully', async () => {
   const saveAsSpy = jest.spyOn(FileSaver, 'saveAs');
-  render(<EventInfo event={event} {...eventInfoUrlProps} />, { mocks });
+  render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, { mocks });
 
   // Event info fields
   await userEvent.click(
@@ -260,7 +239,10 @@ it.skip('should create ics file succesfully', async () => {
 it.skip('should create ics file succesfully when end time is not defined', async () => {
   const saveAsSpy = jest.spyOn(FileSaver, 'saveAs');
   render(
-    <EventInfo event={{ ...event, endTime: null }} {...eventInfoUrlProps} />,
+    <EventInfo
+      event={{ ...event, endTime: null }}
+      {...commonAppUrlGetterMocks}
+    />,
     {
       mocks,
     }
@@ -279,7 +261,7 @@ it.skip('should create ics file succesfully when end time is not defined', async
 });
 
 it('should hide audience age info on single event page', async () => {
-  render(<EventInfo event={event} {...eventInfoUrlProps} />, {
+  render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, {
     routes: [`/kurssit`],
   });
 
@@ -292,7 +274,7 @@ it('should show formatted audience age info on single event page if max age is n
   render(
     <EventInfo
       event={{ ...event, audienceMaxAge: null }}
-      {...eventInfoUrlProps}
+      {...commonAppUrlGetterMocks}
     />,
     {
       routes: [`/kurssit`],
@@ -308,7 +290,7 @@ it('should hide audience age info on single event page if min and max ages are n
   render(
     <EventInfo
       event={{ ...event, audienceMinAge: null, audienceMaxAge: null }}
-      {...eventInfoUrlProps}
+      {...commonAppUrlGetterMocks}
     />,
     {
       routes: [`/kurssit`],
@@ -336,7 +318,7 @@ describe('OrganizationInfo', () => {
       render(
         <EventInfo
           event={{ ...event, typeId: eventTypeId } as EventFields}
-          {...eventInfoUrlProps}
+          {...commonAppUrlGetterMocks}
         />,
         {
           mocks: mocksWithSubEvents,
@@ -355,7 +337,7 @@ describe('OrganizationInfo', () => {
       render(
         <EventInfo
           event={{ ...event, typeId: eventTypeId } as EventFields}
-          {...eventInfoUrlProps}
+          {...commonAppUrlGetterMocks}
         />,
         {
           mocks,
@@ -418,7 +400,7 @@ describe('superEvent', () => {
       <EventInfo
         event={event}
         superEvent={superEventResponse}
-        {...eventInfoUrlProps}
+        {...commonAppUrlGetterMocks}
       />,
       {
         mocks: mocksWithSubEvents,
@@ -441,7 +423,7 @@ describe('superEvent', () => {
   });
 
   it('should should not render super event title when super event is not given', async () => {
-    render(<EventInfo event={event} {...eventInfoUrlProps} />, {
+    render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, {
       mocks,
     });
     await actWait();
@@ -456,7 +438,7 @@ describe('superEvent', () => {
 
 describe('subEvents', () => {
   it('should render sub events title and content when sub events are given', async () => {
-    render(<EventInfo event={event} {...eventInfoUrlProps} />, {
+    render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, {
       mocks: mocksWithSubEvents,
     });
     await waitFor(() => {
@@ -471,7 +453,7 @@ describe('subEvents', () => {
 
   it('should navigate to sub events page when it is clicked', async () => {
     const { router } = render(
-      <EventInfo event={event} {...eventInfoUrlProps} />,
+      <EventInfo event={event} {...commonAppUrlGetterMocks} />,
       {
         mocks: mocksWithSubEvents,
       }
@@ -531,7 +513,7 @@ describe('subEvents', () => {
           ],
         })}
         superEvent={superEventResponseMock}
-        {...eventInfoUrlProps}
+        {...commonAppUrlGetterMocks}
       />,
       {
         mocks: [...mocks, middleAsSuperEventMock, superEventMock],

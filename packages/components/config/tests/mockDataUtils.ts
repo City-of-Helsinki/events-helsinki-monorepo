@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { faker } from '@faker-js/faker';
 import merge from 'lodash/merge';
+import type { NextRouter } from 'next/router';
 import { EXTLINK } from '../../src/constants';
-import {
-  EventTypeId,
+import { EventTypeId } from '../../src/types';
+import type {
+  EventFields,
+  AppLanguage,
   type Audience,
   type BannerPage,
   type CmsImage,
@@ -358,4 +361,24 @@ const generateNodeArray = <T extends (...args: any) => any>(
   length: number
 ): ReturnType<T>[] => {
   return Array.from({ length }).map((_, i) => fakeFunc(i));
+};
+
+export const commonAppUrlGetterMocks = {
+  getEventListLinkUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
+        `/kurssit/${event.id}?returnPath=/haku`
+    ),
+  getOrganizationSearchUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
+        `/haku?publisher=${event.publisher}&searchType=${event.typeId}`
+    ),
+  getPlainEventUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _locale: AppLanguage) => `/kurssit/${event.id}`
+    ),
 };

@@ -121,7 +121,6 @@ export type RnsData = {
   postId?: string;
 };
 
-
 export type KeywordOnClickHandlerType = (
   router: NextRouter,
   locale: AppLanguage,

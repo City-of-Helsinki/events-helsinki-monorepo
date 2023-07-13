@@ -1,15 +1,3 @@
-import type {
-  EventFields,
-  SuperEventResponse,
-} from '@events-helsinki/components';
-import {
-  ShareLinks,
-  useLocale,
-  EventLocation,
-  getEventFields,
-  EVENT_LOCATIONS,
-  EventInfo,
-} from '@events-helsinki/components';
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -20,23 +8,39 @@ import {
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
 
-import {
-  getEventListLinkUrl,
-  getOrganizationSearchUrl,
-  getPlainEventUrl,
-} from '../../search/eventSearch/utils';
+import ShareLinks from '../../../../components/shareLinks/ShareLinks';
+import { EVENT_LOCATIONS } from '../../../../constants/event-constants';
+import useLocale from '../../../../hooks/useLocale';
+import type {
+  EventFields,
+  SuperEventResponse,
+} from '../../../../types/event-types';
+import type {
+  GetEventListLinkUrlType,
+  GetOrganizationSearchUrlType,
+  GetPlainEventUrlType,
+} from '../../../../types/types';
+import { getEventFields } from '../../../../utils/eventUtils';
+import EventInfo from '../eventInfo/EventInfo';
+import EventLocation from '../eventLocation/EventLocation';
 import styles from './eventContent.module.scss';
 
 interface Props {
   event: EventFields;
   superEvent?: SuperEventResponse;
   hasSimilarEvents?: boolean;
+  getEventListLinkUrl: GetEventListLinkUrlType;
+  getOrganizationSearchUrl: GetOrganizationSearchUrlType;
+  getPlainEventUrl: GetPlainEventUrlType;
 }
 
 const EventContent: React.FC<Props> = ({
   event,
   superEvent,
   hasSimilarEvents,
+  getEventListLinkUrl,
+  getOrganizationSearchUrl,
+  getPlainEventUrl,
 }) => {
   const { t } = useTranslation(['common', 'event']);
   const locale = useLocale();

@@ -8,6 +8,7 @@ import {
   EventClosedHero,
   EventHero,
   EventPageMeta,
+  EventContent,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
@@ -22,9 +23,12 @@ import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import {
   getCardUrl,
+  getEventListLinkUrl,
   getKeywordOnClickHandler,
+  getOrganizationSearchUrl,
+  getPlainEventUrl,
 } from '../search/eventSearch/utils';
-import EventContent from './eventContent/EventContent';
+
 import styles from './eventPage.module.scss';
 import useSimilarEventsQueryVariables from './useSimilarEventsQueryVariables';
 
@@ -94,6 +98,9 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                     event={event}
                     superEvent={superEvent}
                     hasSimilarEvents={hasSimilarEvents}
+                    getEventListLinkUrl={getEventListLinkUrl}
+                    getOrganizationSearchUrl={getOrganizationSearchUrl}
+                    getPlainEventUrl={getPlainEventUrl}
                   />
                 </>
               )}

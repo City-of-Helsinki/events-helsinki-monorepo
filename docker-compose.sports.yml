@@ -120,7 +120,8 @@ services:
         - NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_SV
         - NEXT_PUBLIC_CMS_ARTICLES_CONTEXT_PATH
         - NEXT_PUBLIC_CMS_PAGES_CONTEXT_PATH
-        - NEXT_PUBLIC_VERSION
+        - NEXT_PUBLIC_RELEASE
+        - NEXT_PUBLIC_COMMITHASH
 volumes:
   build_sports-helsinki:
   nm_sports-helsinki:

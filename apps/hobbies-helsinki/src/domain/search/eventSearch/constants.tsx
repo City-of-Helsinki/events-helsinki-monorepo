@@ -1,17 +1,19 @@
-import { EventTypeId } from '@events-helsinki/components';
+import {
+  EventTypeId,
+  IconArt,
+  IconCraft,
+  IconDance,
+  IconFood,
+  IconGames,
+  IconLanguages,
+  IconLiterature,
+  IconMovies,
+  IconMusic,
+  IconSports,
+  IconTheatre,
+} from '@events-helsinki/components';
 import React from 'react';
 
-import IconArt from '../../../assets/icons/IconArt';
-import IconCraft from '../../../assets/icons/IconCraft';
-import IconDance from '../../../assets/icons/IconDance';
-import IconFood from '../../../assets/icons/IconFood';
-import IconGames from '../../../assets/icons/IconGames';
-import IconLanguages from '../../../assets/icons/IconLanguages';
-import IconLiterature from '../../../assets/icons/IconLiterature';
-import IconMovies from '../../../assets/icons/IconMovies';
-import IconMusic from '../../../assets/icons/IconMusic';
-import IconSports from '../../../assets/icons/IconSports';
-import IconTheatre from '../../../assets/icons/IconTheatre';
 import type {
   Filters,
   SearchCategoryOption,

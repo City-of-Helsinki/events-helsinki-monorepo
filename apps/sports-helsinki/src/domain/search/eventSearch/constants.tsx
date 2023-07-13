@@ -1,17 +1,19 @@
-import { Season, SPORTS_CATEGORIES } from '@events-helsinki/components';
+import {
+  IconTennis,
+  IconGym,
+  IconIceSkating,
+  IconIndoorSportsHalls,
+  IconKindergarten,
+  IconOutdoorGyms,
+  IconOutdoorRecreation,
+  IconSkateboarding,
+  IconSkiing,
+  IconSports,
+  IconSwimming,
+  Season,
+  SPORTS_CATEGORIES,
+} from '@events-helsinki/components';
 import React from 'react';
-
-import IconGym from '../../../assets/icons/IconGym';
-import IconIceSkating from '../../../assets/icons/IconIceSkating';
-import IconIndoorSportsHalls from '../../../assets/icons/IconIndoorSportsHalls';
-import IconKindergarten from '../../../assets/icons/IconKindergarten';
-import IconOutdoorGyms from '../../../assets/icons/IconOutdoorGyms';
-import IconOutdoorRecreation from '../../../assets/icons/IconOutdoorRecreation';
-import IconSkateboarding from '../../../assets/icons/IconSkateboarding';
-import IconSkiing from '../../../assets/icons/IconSkiing';
-import IconSports from '../../../assets/icons/IconSports';
-import IconSwimming from '../../../assets/icons/IconSwimming';
-import IconTennis from '../../../assets/icons/IconTennis';
 import type { Filters, SearchCategoryOption } from './types';
 
 // Page size of the event list

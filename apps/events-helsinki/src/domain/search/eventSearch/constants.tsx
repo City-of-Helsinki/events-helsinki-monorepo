@@ -1,16 +1,17 @@
-import { EventTypeId } from '@events-helsinki/components';
+import {
+  EventTypeId,
+  IconCultureAndArts,
+  IconDance,
+  IconFood,
+  IconMovies,
+  IconMuseum,
+  IconMusic,
+  IconSports,
+  IconTheatre,
+  IconTree,
+} from '@events-helsinki/components';
 import { IconSpeechbubbleText } from 'hds-react';
 import React from 'react';
-
-import IconCultureAndArts from '../../../assets/icons/IconCultureAndArts';
-import IconDance from '../../../assets/icons/IconDance';
-import IconFood from '../../../assets/icons/IconFood';
-import IconMovies from '../../../assets/icons/IconMovies';
-import IconMuseum from '../../../assets/icons/IconMuseum';
-import IconMusic from '../../../assets/icons/IconMusic';
-import IconSports from '../../../assets/icons/IconSports';
-import IconTheatre from '../../../assets/icons/IconTheatre';
-import IconTree from '../../../assets/icons/IconTree';
 import type { Filters, SearchCategoryOption } from './types';
 
 // Page size of the event list

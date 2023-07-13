@@ -13,3 +13,4 @@ export * from './types';
 export * from './utils';
 export * from './navigationProvider';
 export * from './cmsHelperProvider';
+export * from './assets';

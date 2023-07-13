@@ -1,9 +1,7 @@
-import { Container, isTestEnv } from '@events-helsinki/components';
+import { Container, isTestEnv, Icon404 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Koros } from 'hds-react';
 import React from 'react';
-
-import Icon404 from '../../assets/icons/Icon404';
 import styles from './errorHero.module.scss';
 
 interface Props {

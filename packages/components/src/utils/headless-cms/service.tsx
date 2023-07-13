@@ -42,7 +42,7 @@ export const getAllArticles = async (
       });
       // NOTE: HCRC-build sometimes fails - this type should not be needed.
       // : PageType['translations']
-      node.translations?.forEach((translation: PageType['translations']) => {
+      node.translations?.forEach((translation) => {
         if (
           translation?.uri &&
           translation.slug &&
@@ -92,7 +92,7 @@ export const getAllPages = async (
       });
       // NOTE: HCRC-build sometimes fails - this type should not be needed.
       // : PageType['translations']
-      node.translations?.forEach((translation: PageType['translations']) => {
+      node.translations?.forEach((translation) => {
         if (
           translation?.uri &&
           translation.slug &&

@@ -181,7 +181,6 @@ const SearchPage: React.FC<{
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
-                    getKeywordOnClickHandler={getKeywordOnClickHandler}
                   />
                 }
               />

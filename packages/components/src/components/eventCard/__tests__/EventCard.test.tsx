@@ -44,13 +44,7 @@ afterAll(() => {
 });
 
 const renderComponent = () =>
-  render(
-    <EventCard
-      event={event}
-      eventUrl={`/tapahtumat/${event.id}`}
-      getKeywordOnClickHandler={jest.fn()}
-    />
-  );
+  render(<EventCard event={event} eventUrl={`/tapahtumat/${event.id}`} />);
 describe('event card', () => {
   // TODO: when HDS fixes the tag id -> uncomment
   // eslint-disable-next-line jest/no-commented-out-tests

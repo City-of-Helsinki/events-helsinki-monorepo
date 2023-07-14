@@ -6,23 +6,20 @@ import { SecondaryLink } from 'react-helsinki-headless-cms';
 import InfoWithIcon from '../../../../components/infoWithIcon/InfoWithIcon';
 import LoadingSpinner from '../../../../components/spinner/LoadingSpinner';
 import useLocale from '../../../../hooks/useLocale';
+import { useAppRoutingContext } from '../../../../routingUrlProvider';
 import type { EventFields } from '../../../../types/event-types';
 import { useOrganizationDetailsQuery } from '../../../../types/generated/graphql';
-import type { GetOrganizationSearchUrlType } from '../../../../types/types';
 import { getEventFields } from '../../../../utils/eventUtils';
 import { translateValue } from '../../../../utils/translateUtils';
 import styles from './eventInfo.module.scss';
 
 interface Props {
   event: EventFields;
-  getOrganizationSearchUrl: GetOrganizationSearchUrlType;
 }
 
-const OrganizationInfo: React.FC<Props> = ({
-  event,
-  getOrganizationSearchUrl,
-}) => {
+const OrganizationInfo: React.FC<Props> = ({ event }) => {
   const { t } = useTranslation('event');
+  const { getOrganizationSearchUrl } = useAppRoutingContext();
   const locale = useLocale();
   const router = useRouter();
   const { provider, publisher } = getEventFields(event, locale);

@@ -5,7 +5,13 @@ import * as React from 'react';
 
 import { render, screen, userEvent } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
-import { fakeEvent, fakeKeyword, fakeOffer } from '@/test-utils/mockDataUtils';
+import {
+  appRoutingUrlMocks,
+  fakeEvent,
+  fakeKeyword,
+  fakeOffer,
+} from '@/test-utils/mockDataUtils';
+import { AppRoutingProvider } from '../../../routingUrlProvider';
 import type {
   AppLanguage,
   EventFieldsFragment,
@@ -45,12 +51,12 @@ afterAll(() => {
 
 it('should render keywords and handle click', async () => {
   const { router } = render(
-    <EventKeywords
-      event={event}
-      showIsFree={true}
-      showKeywords={true}
+    <AppRoutingProvider
+      {...appRoutingUrlMocks}
       getKeywordOnClickHandler={getKeywordOnClickHandler}
-    />
+    >
+      <EventKeywords event={event} showIsFree={true} showKeywords={true} />
+    </AppRoutingProvider>
   );
 
   keywordNames.forEach((keyword) => {
@@ -71,12 +77,12 @@ it('should render keywords and handle click', async () => {
 
 it('should not show keywords', () => {
   render(
-    <EventKeywords
-      event={event}
-      showIsFree={true}
-      showKeywords={false}
+    <AppRoutingProvider
+      {...appRoutingUrlMocks}
       getKeywordOnClickHandler={getKeywordOnClickHandler}
-    />
+    >
+      <EventKeywords event={event} showIsFree={true} showKeywords={false} />
+    </AppRoutingProvider>
   );
 
   keywordNames.forEach((keyword) => {
@@ -89,12 +95,12 @@ it('should not show keywords', () => {
 it('should render today tag and handle click', async () => {
   advanceTo('2020-06-22');
   const { router } = render(
-    <EventKeywords
-      event={event}
-      showIsFree={true}
-      showKeywords={false}
+    <AppRoutingProvider
+      {...appRoutingUrlMocks}
       getKeywordOnClickHandler={getKeywordOnClickHandler}
-    />
+    >
+      <EventKeywords event={event} showIsFree={true} showKeywords={false} />
+    </AppRoutingProvider>
   );
   await userEvent.click(
     screen.getByRole('link', {
@@ -111,12 +117,12 @@ it('should render today tag and handle click', async () => {
 it('should render this week tag and handle click', async () => {
   advanceTo('2020-06-23');
   const { router } = render(
-    <EventKeywords
-      event={event}
-      showIsFree={true}
-      showKeywords={false}
+    <AppRoutingProvider
+      {...appRoutingUrlMocks}
       getKeywordOnClickHandler={getKeywordOnClickHandler}
-    />
+    >
+      <EventKeywords event={event} showIsFree={true} showKeywords={false} />
+    </AppRoutingProvider>
   );
   await userEvent.click(
     screen.getByRole('link', {
@@ -136,12 +142,12 @@ it('should hide buy button for free events', () => {
     offers: [fakeOffer({ isFree: true }) as OfferFieldsFragment],
   };
   render(
-    <EventKeywords
-      event={mockEvent}
-      showIsFree={true}
-      showKeywords={false}
+    <AppRoutingProvider
+      {...appRoutingUrlMocks}
       getKeywordOnClickHandler={getKeywordOnClickHandler}
-    />
+    >
+      <EventKeywords event={mockEvent} showIsFree={true} showKeywords={false} />
+    </AppRoutingProvider>
   );
 
   expect(

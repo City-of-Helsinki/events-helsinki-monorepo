@@ -2,11 +2,7 @@ import React from 'react';
 
 import { configure, render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
-import {
-  commonAppUrlGetterMocks,
-  fakeEvent,
-  fakeImage,
-} from '@/test-utils/mockDataUtils';
+import { fakeEvent, fakeImage } from '@/test-utils/mockDataUtils';
 import type { EventFieldsFragment } from 'types/generated/graphql';
 import EventContent from '../EventContent';
 
@@ -40,7 +36,7 @@ const event = fakeEvent({
 }) as EventFieldsFragment;
 
 it('should render event content fields', async () => {
-  render(<EventContent event={event} {...commonAppUrlGetterMocks} />);
+  render(<EventContent event={event} />);
 
   await waitFor(() => {
     expect(
@@ -111,7 +107,6 @@ it('should hide map if internet event', () => {
           location: { ...event.location, id: 'helsinki:internet' },
         } as EventFieldsFragment
       }
-      {...commonAppUrlGetterMocks}
     />
   );
   expect(screen.queryByText(/sijainti/i)).not.toBeInTheDocument();
@@ -126,7 +121,6 @@ it('should show location extra info when available', () => {
           locationExtraInfo: { fi: 'Sisään takaovesta' },
         } as EventFieldsFragment
       }
-      {...commonAppUrlGetterMocks}
     />
   );
   expect(screen.getByText(/Paikan lisätiedot/i)).toBeInTheDocument();
@@ -134,6 +128,6 @@ it('should show location extra info when available', () => {
 });
 
 it('should not show location extra info title when location extra info not available', () => {
-  render(<EventContent event={event} {...commonAppUrlGetterMocks} />);
+  render(<EventContent event={event} />);
   expect(screen.queryByText(/Paikan lisätiedot/i)).not.toBeInTheDocument();
 });

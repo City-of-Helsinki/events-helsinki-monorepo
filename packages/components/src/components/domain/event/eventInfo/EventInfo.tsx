@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/browser';
 import { saveAs } from 'file-saver';
-import type { CommonButtonProps } from 'hds-react';
 import {
   Button,
   IconAngleRight,
@@ -22,11 +21,8 @@ import InfoWithIcon from '../../../../components/infoWithIcon/InfoWithIcon';
 import Visible from '../../../../components/visible/Visible';
 import useLocale from '../../../../hooks/useLocale';
 import useTabFocusStyle from '../../../../hooks/useTabFocusStyle';
-import type {
-  GetEventListLinkUrlType,
-  GetOrganizationSearchUrlType,
-  GetPlainEventUrlType,
-} from '../../../../types';
+import { useAppRoutingContext } from '../../../../routingUrlProvider';
+import { useAppThemeContext } from '../../../../themeProvider';
 import type {
   EventFields,
   KeywordOption,
@@ -50,18 +46,9 @@ import OtherEventTimes from './OtherEventTimes';
 export type EventInfoProps = {
   event: EventFields;
   superEvent?: SuperEventResponse;
-  getEventListLinkUrl: GetEventListLinkUrlType;
-  getOrganizationSearchUrl: GetOrganizationSearchUrlType;
-  getPlainEventUrl: GetPlainEventUrlType;
 };
 
-const EventInfo: React.FC<EventInfoProps> = ({
-  event,
-  superEvent,
-  getEventListLinkUrl,
-  getOrganizationSearchUrl,
-  getPlainEventUrl,
-}) => {
+const EventInfo: React.FC<EventInfoProps> = ({ event, superEvent }) => {
   const locale = useLocale();
   const eventInfoContainer = React.useRef<HTMLDivElement | null>(null);
   useTabFocusStyle({
@@ -91,18 +78,10 @@ const EventInfo: React.FC<EventInfoProps> = ({
   return (
     <div className={styles.eventInfo} ref={eventInfoContainer}>
       <div className={styles.contentWrapper}>
-        <DateInfo event={event} getPlainEventUrl={getPlainEventUrl} />
-        <SuperEvent
-          superEvent={superEvent}
-          getEventListLinkUrl={getEventListLinkUrl}
-        />
-        <SubEvents event={event} getEventListLinkUrl={getEventListLinkUrl} />
-        {!isMiddleLevelEvent && (
-          <OtherEventTimes
-            event={event}
-            getEventListLinkUrl={getEventListLinkUrl}
-          />
-        )}
+        <DateInfo event={event} />
+        <SuperEvent superEvent={superEvent} />
+        <SubEvents event={event} />
+        {!isMiddleLevelEvent && <OtherEventTimes event={event} />}
         <LocationInfo event={event} />
         {(!!audience.length || !!audienceMinAge || !!audienceMaxAge) && (
           <Audience
@@ -114,10 +93,7 @@ const EventInfo: React.FC<EventInfoProps> = ({
         {!!languages.length && <Languages languages={languages} />}
         {showOtherInfo && <OtherInfo event={event} />}
         <Directions event={event} />
-        <OrganizationInfo
-          event={event}
-          getOrganizationSearchUrl={getOrganizationSearchUrl}
-        />
+        <OrganizationInfo event={event} />
         <PriceInfo event={event} />
       </div>
     </div>
@@ -126,12 +102,11 @@ const EventInfo: React.FC<EventInfoProps> = ({
 
 const DateInfo: React.FC<{
   event: EventFields;
-  getPlainEventUrl: GetPlainEventUrlType;
-}> = ({ event, getPlainEventUrl }) => {
+}> = ({ event }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();
-
+  const { getPlainEventUrl } = useAppRoutingContext();
   const {
     addressLocality,
     district,
@@ -349,10 +324,10 @@ const Directions: React.FC<{
 
 const PriceInfo: React.FC<{
   event: EventFields;
-  theme?: CommonButtonProps['theme'];
-  variant?: CommonButtonProps['variant'];
-}> = ({ event, theme, variant }) => {
+}> = ({ event }) => {
   const { t } = useTranslation('event');
+  const { defaultButtonTheme: theme, defaultButtonVariant: variant } =
+    useAppThemeContext();
   const locale = useLocale();
   const eventPriceText = getEventPrice(event, locale, t('info.offers.isFree'));
   const { offerInfoUrl } = getEventFields(event, locale);

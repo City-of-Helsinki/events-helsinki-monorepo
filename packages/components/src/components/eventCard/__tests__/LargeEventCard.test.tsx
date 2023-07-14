@@ -9,13 +9,7 @@ import type { EventFieldsFragment } from '../../../types';
 import LargeEventCard from '../LargeEventCard';
 
 const renderComponent = (event: EventFieldsFragment) =>
-  render(
-    <LargeEventCard
-      event={event}
-      eventUrl={`/tapahtumat/${event.id}`}
-      getKeywordOnClickHandler={jest.fn()}
-    />
-  );
+  render(<LargeEventCard event={event} eventUrl={`/tapahtumat/${event.id}`} />);
 
 beforeEach(() => {
   mockRouter.setCurrentUrl('/');

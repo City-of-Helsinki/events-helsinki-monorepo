@@ -6,7 +6,6 @@ import SkeletonLoader from '../../../../components/skeletonLoader/SkeletonLoader
 import LoadingSpinner from '../../../../components/spinner/LoadingSpinner';
 import useEventTranslation from '../../../../hooks/useEventTranslation';
 import type { EventFields } from '../../../../types/event-types';
-import type { GetEventListLinkUrlType } from '../../../../types/types';
 import { useOtherEventTimes } from '../queryUtils';
 import EventList from './eventList/EventList';
 import styles from './eventList/eventList.module.scss';
@@ -17,8 +16,7 @@ export const otherEventTimesListTestId = 'other-event-times-list';
 
 const OtherEventTimes: React.FC<{
   event: EventFields;
-  getEventListLinkUrl: GetEventListLinkUrlType;
-}> = ({ event, getEventListLinkUrl }) => {
+}> = ({ event }) => {
   const { t } = useEventTranslation();
   const [isListOpen, setIsListOpen] = React.useState(false);
 
@@ -54,7 +52,6 @@ const OtherEventTimes: React.FC<{
           id={otherEventTimesListTestId}
           events={shownEvents}
           showDate
-          getEventListLinkUrl={getEventListLinkUrl}
         />
         {events.length > EVENTS_LIST_LIMIT && (
           <button

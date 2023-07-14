@@ -3,30 +3,31 @@ import { faker } from '@faker-js/faker';
 import merge from 'lodash/merge';
 import type { NextRouter } from 'next/router';
 import { EXTLINK } from '../../src/constants';
+import type { AppRoutingContextProps } from '../../src/routingUrlProvider/AppRoutingContext';
 import { EventTypeId } from '../../src/types';
 import type {
   EventFields,
   AppLanguage,
-  type Audience,
-  type BannerPage,
-  type CmsImage,
-  type EventDetails,
-  type EventListResponse,
-  type ExternalLink,
-  type Image,
-  type InLanguage,
-  type Keyword,
-  type KeywordListResponse,
-  type LocalizedCmsImage,
-  type LocalizedCmsKeywords,
-  type LocalizedObject,
-  type Neighborhood,
-  type NeighborhoodListResponse,
-  type Offer,
-  type OrganizationDetails,
-  type Place,
-  type PlaceListResponse,
-  type StaticPage,
+  Audience,
+  BannerPage,
+  CmsImage,
+  EventDetails,
+  EventListResponse,
+  ExternalLink,
+  Image,
+  InLanguage,
+  Keyword,
+  KeywordListResponse,
+  LocalizedCmsImage,
+  LocalizedCmsKeywords,
+  LocalizedObject,
+  Neighborhood,
+  NeighborhoodListResponse,
+  Offer,
+  OrganizationDetails,
+  Place,
+  PlaceListResponse,
+  StaticPage,
 } from '../../src/types';
 
 export const fakeEvents = (
@@ -363,12 +364,12 @@ const generateNodeArray = <T extends (...args: any) => any>(
   return Array.from({ length }).map((_, i) => fakeFunc(i));
 };
 
-export const commonAppUrlGetterMocks = {
+export const appRoutingUrlMocks: AppRoutingContextProps = {
   getEventListLinkUrl: jest
     .fn()
     .mockImplementation(
       (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
-        `/kurssit/${event.id}?returnPath=/haku`
+        `/kurssit/${event.id}`
     ),
   getOrganizationSearchUrl: jest
     .fn()
@@ -380,5 +381,27 @@ export const commonAppUrlGetterMocks = {
     .fn()
     .mockImplementation(
       (event: EventFields, _locale: AppLanguage) => `/kurssit/${event.id}`
+    ),
+  getCardUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _locale: 'fi' | 'en' | 'sv') =>
+        `/kurssit/${event.id}`
+    ),
+  getEventUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _router: NextRouter, _locale: 'fi' | 'en' | 'sv') =>
+        `/kurssit/${event.id}`
+    ),
+  getKeywordOnClickHandler: jest
+    .fn()
+    .mockImplementation(
+      (
+        _router: NextRouter,
+        _locale: 'fi' | 'en' | 'sv',
+        _type: 'text' | 'isFree' | 'dateType',
+        _value?: string | undefined
+      ) => jest.fn()
     ),
 };

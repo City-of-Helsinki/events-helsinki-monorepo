@@ -20,6 +20,14 @@ import AppConfig from '../domain/app/AppConfig';
 import EventsApolloProvider from '../domain/app/EventsApolloProvider';
 import cmsHelper from '../domain/app/headlessCmsHelper';
 import routerHelper from '../domain/app/routerHelper';
+import {
+  getCardUrl,
+  getEventListLinkUrl,
+  getEventUrl,
+  getKeywordOnClickHandler,
+  getOrganizationSearchUrl,
+  getPlainEventUrl,
+} from '../domain/search/eventSearch/utils';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AppProps<P = any> = {
@@ -50,6 +58,14 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
           )}
           withConsent={pathname !== ROUTES.COOKIE_CONSENT}
           asPath={asPath}
+          defaultButtonTheme={AppConfig.defaultButtonTheme}
+          defaultButtonVariant={AppConfig.defaultButtonVariant}
+          getCardUrl={getCardUrl}
+          getEventUrl={getEventUrl}
+          getEventListLinkUrl={getEventListLinkUrl}
+          getOrganizationSearchUrl={getOrganizationSearchUrl}
+          getPlainEventUrl={getPlainEventUrl}
+          getKeywordOnClickHandler={getKeywordOnClickHandler}
           {...pageProps}
         >
           <Component {...pageProps} />

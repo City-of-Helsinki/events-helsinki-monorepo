@@ -94,6 +94,7 @@ $logoWidth: 5.5rem;
 
       @include respond_above(m) {
         padding: var(--spacing-xl);
+        padding-right: 0;
         width: unset;
       }
 

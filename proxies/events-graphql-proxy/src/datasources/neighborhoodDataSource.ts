@@ -6,7 +6,7 @@ class NeighborhoodDataSource extends MapOpenDataDataSource {
     NeighborhoodListResponse['data']
   > {
     return this.get(
-      `/wfs?request=getFeature&typeName=avoindata:Kaupunginosajako&outputFormat=json`
+      `wfs?request=getFeature&typeName=avoindata:Kaupunginosajako&outputFormat=json`
     );
   }
 }

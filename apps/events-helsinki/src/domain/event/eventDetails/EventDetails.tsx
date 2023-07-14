@@ -9,7 +9,6 @@ import type { EventFieldsFragment } from '@events-helsinki/components';
 import { IconCalendarClock, IconLocation } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { getKeywordOnClickHandler } from '../../search/eventSearch/utils';
 import styles from './eventDetails.module.scss';
 
 export type EventDetailsProps = {

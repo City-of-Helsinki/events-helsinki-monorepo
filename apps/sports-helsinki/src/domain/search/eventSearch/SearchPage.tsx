@@ -17,7 +17,7 @@ import type { SearchComponentType } from '../combinedSearch/types';
 import styles from './eventSearchPage.module.scss';
 import useSearchPage from './hooks/useSearchPage';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
-import { getEventUrl, getKeywordOnClickHandler } from './utils';
+import { getEventUrl } from './utils';
 
 type SearchPageProps = {
   SearchComponent?: React.FC<SearchComponentType>;

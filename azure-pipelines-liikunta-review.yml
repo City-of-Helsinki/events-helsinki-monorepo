@@ -46,7 +46,6 @@ resources:
     # Azure DevOps repository
     - repository: liikunta-pipelines
       type: git
-      ref: refs/heads/readiness_version_fix
       # Azure DevOps project/repository
       name: liikunta/liikunta-pipelines
 

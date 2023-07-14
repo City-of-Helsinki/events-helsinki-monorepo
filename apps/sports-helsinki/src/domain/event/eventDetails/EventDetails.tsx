@@ -68,7 +68,6 @@ const EventDetails: React.FC<EventDetailsProps> = (props) => {
           showIsFree
           showKeywordsCount
           withActions={false}
-          getKeywordOnClickHandler={getKeywordOnClickHandler}
         />
       </div>
     </div>

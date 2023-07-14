@@ -22,11 +22,7 @@ import EventName from '../eventName/EventName';
 import styles from './eventCard.module.scss';
 import type { EventCardProps } from './types';
 
-const EventCard: React.FC<EventCardProps> = ({
-  event,
-  eventUrl,
-  getKeywordOnClickHandler,
-}) => {
+const EventCard: React.FC<EventCardProps> = ({ event, eventUrl }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useCommonTranslation();
   const router = useRouter();
@@ -93,7 +89,6 @@ const EventCard: React.FC<EventCardProps> = ({
                   event={event}
                   showIsFree={true}
                   showKeywords={false}
-                  getKeywordOnClickHandler={getKeywordOnClickHandler}
                 />
               </div>
             </div>
@@ -125,7 +120,6 @@ const EventCard: React.FC<EventCardProps> = ({
                 event={event}
                 showIsFree={true}
                 showKeywords={false}
-                getKeywordOnClickHandler={getKeywordOnClickHandler}
               />
             </div>
           </BackgroundImage>

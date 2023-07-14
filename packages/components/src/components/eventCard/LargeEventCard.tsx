@@ -33,7 +33,6 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
   event,
   eventUrl,
   showEnrolmentStatusInCardDetails = false,
-  getKeywordOnClickHandler,
 }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
@@ -120,7 +119,6 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
                 event={event}
                 hideKeywordsOnMobile={true}
                 showIsFree={true}
-                getKeywordOnClickHandler={getKeywordOnClickHandler}
               />
             </div>
             <div className={styles.buttonWrapper}>
@@ -153,7 +151,6 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
                 event={event}
                 hideKeywordsOnMobile={true}
                 showIsFree={true}
-                getKeywordOnClickHandler={getKeywordOnClickHandler}
               />
             </div>
           </BackgroundImage>

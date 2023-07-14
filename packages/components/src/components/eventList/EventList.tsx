@@ -9,11 +9,7 @@ import LargeEventCard from '../../components/eventCard/LargeEventCard';
 
 import LoadingSpinner from '../../components/spinner/LoadingSpinner';
 import { useLocale } from '../../hooks';
-import type {
-  EventFields,
-  GetEventUrlType,
-  KeywordOnClickHandlerType,
-} from '../../types';
+import type { EventFields, GetEventUrlType } from '../../types';
 import styles from './eventList.module.scss';
 
 const eventCardsMap = {
@@ -31,7 +27,6 @@ type EventListProps = {
   showEnrolmentStatusInCardDetails: boolean;
   onLoadMore: () => void;
   getEventUrl: GetEventUrlType;
-  getKeywordOnClickHandler: KeywordOnClickHandlerType;
 };
 
 const EventList: React.FC<EventListProps> = ({
@@ -44,7 +39,6 @@ const EventList: React.FC<EventListProps> = ({
   onLoadMore,
   getEventUrl,
   showEnrolmentStatusInCardDetails = false,
-  getKeywordOnClickHandler,
 }) => {
   const { t } = useTranslation('search');
   const router = useRouter();
@@ -60,7 +54,6 @@ const EventList: React.FC<EventListProps> = ({
         event={event}
         eventUrl={eventUrl}
         showEnrolmentStatusInCardDetails={showEnrolmentStatusInCardDetails}
-        getKeywordOnClickHandler={getKeywordOnClickHandler}
       />
     );
   });

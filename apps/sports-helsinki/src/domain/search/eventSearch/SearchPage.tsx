@@ -117,7 +117,6 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
-                    getKeywordOnClickHandler={getKeywordOnClickHandler}
                   />
                 }
                 orderBySelectComponent={

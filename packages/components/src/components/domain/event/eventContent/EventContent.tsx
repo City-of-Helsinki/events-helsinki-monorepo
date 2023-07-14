@@ -15,11 +15,6 @@ import type {
   EventFields,
   SuperEventResponse,
 } from '../../../../types/event-types';
-import type {
-  GetEventListLinkUrlType,
-  GetOrganizationSearchUrlType,
-  GetPlainEventUrlType,
-} from '../../../../types/types';
 import { getEventFields } from '../../../../utils/eventUtils';
 import EventInfo from '../eventInfo/EventInfo';
 import EventLocation from '../eventLocation/EventLocation';
@@ -29,18 +24,12 @@ interface Props {
   event: EventFields;
   superEvent?: SuperEventResponse;
   hasSimilarEvents?: boolean;
-  getEventListLinkUrl: GetEventListLinkUrlType;
-  getOrganizationSearchUrl: GetOrganizationSearchUrlType;
-  getPlainEventUrl: GetPlainEventUrlType;
 }
 
 const EventContent: React.FC<Props> = ({
   event,
   superEvent,
   hasSimilarEvents,
-  getEventListLinkUrl,
-  getOrganizationSearchUrl,
-  getPlainEventUrl,
 }) => {
   const { t } = useTranslation(['common', 'event']);
   const locale = useLocale();
@@ -99,13 +88,7 @@ const EventContent: React.FC<Props> = ({
             {!isInternetEvent && <EventLocation event={event} />}
           </div>
           <div>
-            <EventInfo
-              event={event}
-              superEvent={superEvent}
-              getEventListLinkUrl={getEventListLinkUrl}
-              getOrganizationSearchUrl={getOrganizationSearchUrl}
-              getPlainEventUrl={getPlainEventUrl}
-            />
+            <EventInfo event={event} superEvent={superEvent} />
           </div>
         </div>
       </ContentContainer>

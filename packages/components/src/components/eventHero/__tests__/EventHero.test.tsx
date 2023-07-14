@@ -20,7 +20,6 @@ import getDateRangeStr from '../../../utils/getDateRangeStr';
 import type { EventHeroProps } from '../EventHero';
 import EventHero from '../EventHero';
 
-const getKeywordOnClickHandlerMock = jest.fn();
 const name = 'Event name';
 const startTime = '2020-06-22T07:00:00.000000Z';
 const endTime = '2020-06-22T10:00:00.000000Z';
@@ -60,14 +59,9 @@ afterAll(() => {
 
 const renderComponent = (props?: Partial<EventHeroProps>) => {
   const event = getFakeEvent();
-  return render(
-    <EventHero
-      event={event}
-      getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
-      {...props}
-    />,
-    { routes: [`/tapahtuma/${event.id}?returnPath=/haku`] }
-  );
+  return render(<EventHero event={event} {...props} />, {
+    routes: [`/tapahtuma/${event.id}?returnPath=/haku`],
+  });
 };
 
 it('should render event name, description and location', () => {
@@ -137,12 +131,7 @@ it('should hide buy/enrol button for free events', () => {
   const mockEvent = getFakeEvent({
     offers: [fakeOffer({ isFree: true }) as OfferFieldsFragment],
   });
-  render(
-    <EventHero
-      event={mockEvent}
-      getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
-    />
-  );
+  render(<EventHero event={mockEvent} />);
 
   expect(
     screen.queryByRole('button', {
@@ -168,12 +157,7 @@ it.each([
     externalLinks: [],
   });
 
-  render(
-    <EventHero
-      event={mockEvent}
-      getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
-    />
-  );
+  render(<EventHero event={mockEvent} />);
 
   await userEvent.click(
     screen.getByRole('button', {
@@ -209,12 +193,7 @@ it.each([
       ],
     });
 
-    render(
-      <EventHero
-        event={mockEvent}
-        getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
-      />
-    );
+    render(<EventHero event={mockEvent} />);
 
     expect(screen.getByText(buttonLabel)).toBeInTheDocument();
 
@@ -238,7 +217,6 @@ it('should show event dates if super event is defined', () => {
     <EventHero
       event={mockEvent}
       superEvent={{ data: mockSuperEvent, status: 'resolved' }}
-      getKeywordOnClickHandler={getKeywordOnClickHandlerMock}
     />
   );
 

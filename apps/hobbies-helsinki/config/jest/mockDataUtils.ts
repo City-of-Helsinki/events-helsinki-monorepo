@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
+  AppLanguage,
   Audience,
   BannerPage,
   CmsImage,
   EventDetails,
+  EventFields,
   EventListResponse,
   ExternalLink,
   Image,
@@ -22,8 +24,10 @@ import type {
   StaticPage,
 } from '@events-helsinki/components';
 import { EXTLINK, EventTypeId } from '@events-helsinki/components';
+import type { AppRoutingContextProps } from '@events-helsinki/components/routingUrlProvider/AppRoutingContext';
 import { faker } from '@faker-js/faker';
 import merge from 'lodash/merge';
+import type { NextRouter } from 'next/router';
 
 export const fakeEvents = (
   count = 1,
@@ -357,4 +361,46 @@ const generateNodeArray = <T extends (...args: any) => any>(
   length: number
 ): ReturnType<T>[] => {
   return Array.from({ length }).map((_, i) => fakeFunc(i));
+};
+
+export const appRoutingUrlMocks: AppRoutingContextProps = {
+  getEventListLinkUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
+        `/kurssit/${event.id}`
+    ),
+  getOrganizationSearchUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
+        `/haku?publisher=${event.publisher}&searchType=${event.typeId}`
+    ),
+  getPlainEventUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _locale: AppLanguage) => `/kurssit/${event.id}`
+    ),
+  getCardUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _locale: 'fi' | 'en' | 'sv') =>
+        `/kurssit/${event.id}`
+    ),
+  getEventUrl: jest
+    .fn()
+    .mockImplementation(
+      (event: EventFields, _router: NextRouter, _locale: 'fi' | 'en' | 'sv') =>
+        `/kurssit/${event.id}`
+    ),
+  getKeywordOnClickHandler: jest
+    .fn()
+    .mockImplementation(
+      (
+        _router: NextRouter,
+        _locale: 'fi' | 'en' | 'sv',
+        _type: 'text' | 'isFree' | 'dateType',
+        _value?: string | undefined
+      ) => jest.fn()
+    ),
 };

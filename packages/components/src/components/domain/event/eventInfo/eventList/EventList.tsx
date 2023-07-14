@@ -5,8 +5,8 @@ import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import useLocale from '../../../../../hooks/useLocale';
+import { useAppRoutingContext } from '../../../../../routingUrlProvider';
 import type { EventFields } from '../../../../../types/event-types';
-import type { GetEventListLinkUrlType } from '../../../../../types/types';
 import { getEventFields } from '../../../../../utils/eventUtils';
 import getDateRangeStr from '../../../../../utils/getDateRangeStr';
 import styles from './eventList.module.scss';
@@ -16,19 +16,12 @@ const EventList: React.FC<{
   showDate?: boolean;
   showName?: boolean;
   id: string;
-  getEventListLinkUrl: GetEventListLinkUrlType;
-}> = ({
-  events,
-  showDate = false,
-  showName = false,
-  id,
-  getEventListLinkUrl,
-}) => {
+}> = ({ events, showDate = false, showName = false, id }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();
   const router = useRouter();
-
+  const { getEventListLinkUrl } = useAppRoutingContext();
   return (
     <ul className={styles.timeList} data-testid={id}>
       {events.map((event) => {

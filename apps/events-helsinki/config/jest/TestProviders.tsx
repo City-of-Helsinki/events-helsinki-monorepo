@@ -3,6 +3,7 @@ import { useApolloClient } from '@apollo/client';
 import type { MockedResponse } from '@apollo/client/testing';
 import { MockedProvider } from '@apollo/client/testing';
 import {
+  AppRoutingProvider,
   CmsHelperProvider,
   DEFAULT_LANGUAGE,
   NavigationContext,
@@ -25,6 +26,7 @@ import { ROUTES } from '../../src/constants';
 import cmsHelper from '../../src/domain/app/headlessCmsHelper';
 import routerHelper from '../../src/domain/app/routerHelper';
 import { initI18n as i18n } from './initI18n';
+import { appRoutingUrlMocks } from './mockDataUtils';
 
 const CMS_API_DOMAIN = 'tapahtumat.cms.test.domain.com';
 
@@ -47,23 +49,26 @@ function ErrorFallback({ error }: { error: Error }) {
 
 function TestProviders({ mocks, children, router }: Props) {
   return (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    <I18nextProvider i18n={i18n}>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <RHHCConfigProviderWithMockedApolloClient router={router}>
-          <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-            <NavigationContext.Provider value={{}}>
-              <RouterContext.Provider value={{ ...router, ...mockRouter }}>
-                <ErrorBoundary FallbackComponent={ErrorFallback}>
-                  {children}
-                </ErrorBoundary>
-              </RouterContext.Provider>
-            </NavigationContext.Provider>
-          </CmsHelperProvider>
-        </RHHCConfigProviderWithMockedApolloClient>
-      </MockedProvider>
-    </I18nextProvider>
+    <AppRoutingProvider {...appRoutingUrlMocks}>
+      <I18nextProvider i18n={i18n}>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <RHHCConfigProviderWithMockedApolloClient router={router}>
+            <CmsHelperProvider
+              cmsHelper={cmsHelper}
+              routerHelper={routerHelper}
+            >
+              <NavigationContext.Provider value={{}}>
+                <RouterContext.Provider value={{ ...router, ...mockRouter }}>
+                  <ErrorBoundary FallbackComponent={ErrorFallback}>
+                    {children}
+                  </ErrorBoundary>
+                </RouterContext.Provider>
+              </NavigationContext.Provider>
+            </CmsHelperProvider>
+          </RHHCConfigProviderWithMockedApolloClient>
+        </MockedProvider>
+      </I18nextProvider>
+    </AppRoutingProvider>
   );
 }
 

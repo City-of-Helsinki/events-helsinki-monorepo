@@ -15,7 +15,8 @@ import {
 } from 'react-helsinki-headless-cms';
 import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
 import { I18nextTestStubProvider } from '@/test-utils/I18nextTestStubProvider';
-import { DEFAULT_LANGUAGE } from '../../src';
+import { AppRoutingProvider, DEFAULT_LANGUAGE } from '../../src';
+import { appRoutingUrlMocks } from './mockDataUtils';
 const cmsApiDomain = 'tapahtumat.cms.test.domain.com';
 
 const mockRouter: Partial<NextRouter> = {
@@ -37,17 +38,19 @@ function ErrorFallback({ error }: { error: Error }) {
 
 function TestProviders({ mocks, children, router }: Props) {
   return (
-    <I18nextTestStubProvider>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <RHHCConfigProviderWithMockedApolloClient router={router}>
-          <RouterContext.Provider value={{ ...router, ...mockRouter }}>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              {children}
-            </ErrorBoundary>
-          </RouterContext.Provider>
-        </RHHCConfigProviderWithMockedApolloClient>
-      </MockedProvider>
-    </I18nextTestStubProvider>
+    <AppRoutingProvider {...appRoutingUrlMocks}>
+      <I18nextTestStubProvider>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <RHHCConfigProviderWithMockedApolloClient router={router}>
+            <RouterContext.Provider value={{ ...router, ...mockRouter }}>
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                {children}
+              </ErrorBoundary>
+            </RouterContext.Provider>
+          </RHHCConfigProviderWithMockedApolloClient>
+        </MockedProvider>
+      </I18nextTestStubProvider>
+    </AppRoutingProvider>
   );
 }
 

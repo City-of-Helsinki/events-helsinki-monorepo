@@ -18,16 +18,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../constants';
-import AppConfig from '../app/AppConfig';
 import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
-import {
-  getCardUrl,
-  getEventListLinkUrl,
-  getKeywordOnClickHandler,
-  getOrganizationSearchUrl,
-  getPlainEventUrl,
-} from '../search/eventSearch/utils';
 
 import styles from './eventPage.module.scss';
 import useSimilarEventsQueryVariables from './useSimilarEventsQueryVariables';
@@ -80,27 +72,14 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
               {/* Wait for data to be accessible before updating metadata */}
               <EventPageMeta event={event} />
               {eventClosed ? (
-                <EventClosedHero
-                  onClick={moveToHomePage}
-                  theme={AppConfig.defaultButtonTheme}
-                  variant={AppConfig.defaultButtonVariant}
-                />
+                <EventClosedHero onClick={moveToHomePage} />
               ) : (
                 <>
-                  <EventHero
-                    event={event}
-                    superEvent={superEvent}
-                    theme={AppConfig.defaultButtonTheme}
-                    variant={AppConfig.defaultButtonVariant}
-                    getKeywordOnClickHandler={getKeywordOnClickHandler}
-                  />
+                  <EventHero event={event} superEvent={superEvent} />
                   <EventContent
                     event={event}
                     superEvent={superEvent}
                     hasSimilarEvents={hasSimilarEvents}
-                    getEventListLinkUrl={getEventListLinkUrl}
-                    getOrganizationSearchUrl={getOrganizationSearchUrl}
-                    getPlainEventUrl={getPlainEventUrl}
                   />
                 </>
               )}
@@ -109,9 +88,6 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 <SimilarEvents
                   event={event}
                   onEventsLoaded={handleSimilarEventsLoaded}
-                  getCardUrl={(event, locale) =>
-                    getCardUrl(event, locale, router.asPath)
-                  }
                   eventFilters={similarEventsFilters ?? {}}
                 />
               )}

@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import type { CommonButtonProps } from 'hds-react';
 import {
   Button,
   IconArrowLeft,
@@ -25,8 +24,8 @@ import IconButton from '../../components/iconButton/IconButton';
 import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';
 import SkeletonLoader from '../../components/skeletonLoader/SkeletonLoader';
 import useLocale from '../../hooks/useLocale';
+import { useAppThemeContext } from '../../themeProvider';
 import type { EventFields, SuperEventResponse } from '../../types/event-types';
-import type { KeywordOnClickHandlerType } from '../../types/types';
 import { extractLatestReturnPath } from '../../utils/eventQueryString.util';
 import type { ReturnParams } from '../../utils/eventQueryString.util';
 import {
@@ -41,25 +40,18 @@ import styles from './eventHero.module.scss';
 export type EventHeroProps = {
   event: EventFields;
   superEvent?: SuperEventResponse;
-  getKeywordOnClickHandler: KeywordOnClickHandlerType;
-  theme?: CommonButtonProps['theme'];
-  variant?: CommonButtonProps['variant'];
 };
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
-const EventHero: React.FC<EventHeroProps> = ({
-  event,
-  superEvent,
-  getKeywordOnClickHandler,
-  theme,
-  variant,
-}) => {
+const EventHero: React.FC<EventHeroProps> = ({ event, superEvent }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
+  const { defaultButtonTheme: theme, defaultButtonVariant: variant } =
+    useAppThemeContext();
 
   const {
     endTime: eventEndTime,
@@ -187,12 +179,7 @@ const EventHero: React.FC<EventHeroProps> = ({
                 </div>
                 {showKeywords && (
                   <div className={styles.categoryWrapper}>
-                    <EventKeywords
-                      whiteOnly
-                      event={event}
-                      showIsFree={true}
-                      getKeywordOnClickHandler={getKeywordOnClickHandler}
-                    />
+                    <EventKeywords whiteOnly event={event} showIsFree={true} />
                   </div>
                 )}
               </div>

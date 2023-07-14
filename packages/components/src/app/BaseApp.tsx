@@ -21,6 +21,12 @@ import ResetFocus from '../components/resetFocus/ResetFocus';
 import { GeolocationProvider } from '../geolocation';
 import { NavigationProvider } from '../navigationProvider';
 import type { NavigationProviderProps } from '../navigationProvider';
+import {
+  AppRoutingProvider,
+  type AppRoutingProviderProps,
+} from '../routingUrlProvider';
+import type { AppThemeProviderProps } from '../themeProvider';
+import { AppThemeProvider } from '../themeProvider';
 import type { CmsRoutedAppHelper, HeadlessCMSHelper } from '../utils';
 
 export type Props = {
@@ -34,6 +40,8 @@ export type Props = {
   asPath: string;
   withConsent: boolean;
 } & NavigationProviderProps &
+  AppRoutingProviderProps &
+  AppThemeProviderProps &
   SSRConfig;
 
 const DynamicToastContainer = dynamic(
@@ -65,6 +73,14 @@ function BaseApp({
   askemFeedbackConfiguration,
   asPath,
   withConsent,
+  defaultButtonTheme,
+  defaultButtonVariant,
+  getCardUrl,
+  getEventUrl,
+  getEventListLinkUrl,
+  getOrganizationSearchUrl,
+  getPlainEventUrl,
+  getKeywordOnClickHandler,
 }: Props) {
   const { getAllConsents } = useCookies();
 
@@ -118,30 +134,44 @@ function BaseApp({
   );
 
   return (
-    <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-      <MatomoProvider value={matomoInstance}>
-        <AskemProvider value={askemFeedbackInstance}>
-          <GeolocationProvider>
-            <NavigationProvider
-              headerMenu={headerMenu}
-              footerMenu={footerMenu}
-              languages={languages}
-            >
-              <ResetFocus />
-              {children}
-              {withConsent && (
-                <EventsCookieConsent
-                  onConsentGiven={handleConsentGiven}
-                  allowLanguageSwitch={false}
-                  appName={appName}
-                />
-              )}
-              <DynamicToastContainer />
-            </NavigationProvider>
-          </GeolocationProvider>
-        </AskemProvider>
-      </MatomoProvider>
-    </CmsHelperProvider>
+    <AppThemeProvider
+      defaultButtonTheme={defaultButtonTheme}
+      defaultButtonVariant={defaultButtonVariant}
+    >
+      <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+        <AppRoutingProvider
+          getCardUrl={getCardUrl}
+          getEventUrl={getEventUrl}
+          getEventListLinkUrl={getEventListLinkUrl}
+          getOrganizationSearchUrl={getOrganizationSearchUrl}
+          getPlainEventUrl={getPlainEventUrl}
+          getKeywordOnClickHandler={getKeywordOnClickHandler}
+        >
+          <MatomoProvider value={matomoInstance}>
+            <AskemProvider value={askemFeedbackInstance}>
+              <GeolocationProvider>
+                <NavigationProvider
+                  headerMenu={headerMenu}
+                  footerMenu={footerMenu}
+                  languages={languages}
+                >
+                  <ResetFocus />
+                  {children}
+                  {withConsent && (
+                    <EventsCookieConsent
+                      onConsentGiven={handleConsentGiven}
+                      allowLanguageSwitch={false}
+                      appName={appName}
+                    />
+                  )}
+                  <DynamicToastContainer />
+                </NavigationProvider>
+              </GeolocationProvider>
+            </AskemProvider>
+          </MatomoProvider>
+        </AppRoutingProvider>
+      </CmsHelperProvider>
+    </AppThemeProvider>
   );
 }
 

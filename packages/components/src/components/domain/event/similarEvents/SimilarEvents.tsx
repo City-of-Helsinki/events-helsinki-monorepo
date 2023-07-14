@@ -6,9 +6,9 @@ import {
   ContentContainer,
 } from 'react-helsinki-headless-cms';
 import useEventTranslation from '../../../../hooks/useEventTranslation';
+import { useAppRoutingContext } from '../../../../routingUrlProvider';
 import type { EventFields } from '../../../../types/event-types';
 import type { QueryEventListArgs } from '../../../../types/generated/graphql';
-import type { GetCardUrlType } from '../../../../types/types';
 import LoadingSpinner from '../../../spinner/LoadingSpinner';
 import { useSimilarEventsQuery } from '../queryUtils';
 import useEventCards from '../useEventCards';
@@ -18,7 +18,6 @@ export type SimilarEventsProps = {
   event: EventFields;
   type?: CollectionProps['type'];
   onEventsLoaded?: (eventsCount: number) => void;
-  getCardUrl: GetCardUrlType;
   eventFilters: QueryEventListArgs;
 };
 
@@ -30,10 +29,10 @@ const SimilarEvents: React.FC<SimilarEventsProps> = ({
   event,
   type = 'carousel',
   onEventsLoaded,
-  getCardUrl,
   eventFilters,
 }) => {
   const { t } = useEventTranslation();
+  const { getCardUrl } = useAppRoutingContext();
   const { data: events, loading } = useSimilarEventsQuery(event, eventFilters);
   const cards = useEventCards({
     events,

@@ -4,6 +4,7 @@ import React from 'react';
 import KeywordTag from '../../components/keyword/KeywordTag';
 import { DATE_TYPES } from '../../constants';
 import { useLocale } from '../../hooks';
+import { useAppRoutingContext } from '../../routingUrlProvider';
 import type {
   EventFieldsFragment,
   KeywordOnClickHandlerType,
@@ -19,7 +20,6 @@ type EventKeywordsProps = {
   showKeywords?: boolean;
   showKeywordsCount?: boolean;
   withActions?: boolean;
-  getKeywordOnClickHandler: KeywordOnClickHandlerType;
 };
 const EventKeywords: React.FC<EventKeywordsProps> = ({
   blackOnMobile = false,
@@ -30,7 +30,6 @@ const EventKeywords: React.FC<EventKeywordsProps> = ({
   showKeywords = true,
   showKeywordsCount,
   withActions = true,
-  getKeywordOnClickHandler,
 }) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
@@ -39,7 +38,7 @@ const EventKeywords: React.FC<EventKeywordsProps> = ({
     event,
     locale
   );
-
+  const { getKeywordOnClickHandler } = useAppRoutingContext();
   const handleClick = (
     type: Parameters<KeywordOnClickHandlerType>[2],
     value = ''

@@ -12,7 +12,7 @@ import {
   within,
 } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
-import { commonAppUrlGetterMocks, fakeEvent } from '@/test-utils/mockDataUtils';
+import { fakeEvent } from '@/test-utils/mockDataUtils';
 import type {
   EventFields,
   SuperEventResponse,
@@ -54,7 +54,7 @@ const getDateRangeStrProps = (event: EventDetails) => ({
 });
 
 it('should render event info fields', async () => {
-  render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, { mocks });
+  render(<EventInfo event={event} />, { mocks });
   await actWait();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -108,7 +108,7 @@ it('should hide the organizer section when the organizer name is not given', asy
     ...event,
     provider: null,
   };
-  render(<EventInfo event={mockEvent} {...commonAppUrlGetterMocks} />, {
+  render(<EventInfo event={mockEvent} />, {
     mocks,
   });
   await actWait();
@@ -136,7 +136,7 @@ it('should hide other info section', () => {
       telephone: null,
     },
   } as EventFields;
-  render(<EventInfo event={mockEvent} {...commonAppUrlGetterMocks} />, {
+  render(<EventInfo event={mockEvent} />, {
     mocks,
   });
 
@@ -167,7 +167,7 @@ it('should hide other info section registration url from external links', () => 
       telephone: null,
     },
   } as EventFields;
-  render(<EventInfo event={mockEvent} {...commonAppUrlGetterMocks} />, {
+  render(<EventInfo event={mockEvent} />, {
     mocks,
   });
 
@@ -191,7 +191,7 @@ it('should hide the map link from location info if location is internet', () => 
       telephone: null,
     },
   } as EventFields;
-  render(<EventInfo event={mockEvent} {...commonAppUrlGetterMocks} />, {
+  render(<EventInfo event={mockEvent} />, {
     mocks,
   });
 
@@ -204,7 +204,7 @@ it('should hide the map link from location info if location is internet', () => 
 
 it('should open ticket buy page', async () => {
   global.open = jest.fn();
-  render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, { mocks });
+  render(<EventInfo event={event} />, { mocks });
 
   // Event info fields
   await userEvent.click(
@@ -221,7 +221,7 @@ it('should open ticket buy page', async () => {
 // eslint-disable-next-line jest/no-disabled-tests
 it.skip('should create ics file succesfully', async () => {
   const saveAsSpy = jest.spyOn(FileSaver, 'saveAs');
-  render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, { mocks });
+  render(<EventInfo event={event} />, { mocks });
 
   // Event info fields
   await userEvent.click(
@@ -238,15 +238,9 @@ it.skip('should create ics file succesfully', async () => {
 // eslint-disable-next-line jest/no-disabled-tests
 it.skip('should create ics file succesfully when end time is not defined', async () => {
   const saveAsSpy = jest.spyOn(FileSaver, 'saveAs');
-  render(
-    <EventInfo
-      event={{ ...event, endTime: null }}
-      {...commonAppUrlGetterMocks}
-    />,
-    {
-      mocks,
-    }
-  );
+  render(<EventInfo event={{ ...event, endTime: null }} />, {
+    mocks,
+  });
 
   // Event info fields
   await userEvent.click(
@@ -261,7 +255,7 @@ it.skip('should create ics file succesfully when end time is not defined', async
 });
 
 it('should hide audience age info on single event page', async () => {
-  render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, {
+  render(<EventInfo event={event} />, {
     routes: [`/kurssit`],
   });
 
@@ -271,15 +265,9 @@ it('should hide audience age info on single event page', async () => {
 });
 
 it('should show formatted audience age info on single event page if max age is not specified', async () => {
-  render(
-    <EventInfo
-      event={{ ...event, audienceMaxAge: null }}
-      {...commonAppUrlGetterMocks}
-    />,
-    {
-      routes: [`/kurssit`],
-    }
-  );
+  render(<EventInfo event={{ ...event, audienceMaxAge: null }} />, {
+    routes: [`/kurssit`],
+  });
 
   await waitFor(() => {
     expect(screen.getByText(/5\+ -vuotiaat/i)).toBeInTheDocument();
@@ -290,7 +278,6 @@ it('should hide audience age info on single event page if min and max ages are n
   render(
     <EventInfo
       event={{ ...event, audienceMinAge: null, audienceMaxAge: null }}
-      {...commonAppUrlGetterMocks}
     />,
     {
       routes: [`/kurssit`],
@@ -316,10 +303,7 @@ describe('OrganizationInfo', () => {
     'should show correct provider link text on event/hobby detail page',
     async ({ eventTypeId, expectedLinkText }) => {
       render(
-        <EventInfo
-          event={{ ...event, typeId: eventTypeId } as EventFields}
-          {...commonAppUrlGetterMocks}
-        />,
+        <EventInfo event={{ ...event, typeId: eventTypeId } as EventFields} />,
         {
           mocks: mocksWithSubEvents,
           routes: ['/fi/kurssit/test'],
@@ -335,10 +319,7 @@ describe('OrganizationInfo', () => {
     'should show correct provider link on event/hobby detail page',
     async (eventTypeId) => {
       render(
-        <EventInfo
-          event={{ ...event, typeId: eventTypeId } as EventFields}
-          {...commonAppUrlGetterMocks}
-        />,
+        <EventInfo event={{ ...event, typeId: eventTypeId } as EventFields} />,
         {
           mocks,
           routes: ['/fi/kurssit/test'],
@@ -397,11 +378,7 @@ describe('superEvent', () => {
       status: 'resolved',
     } as SuperEventResponse;
     const { router } = render(
-      <EventInfo
-        event={event}
-        superEvent={superEventResponse}
-        {...commonAppUrlGetterMocks}
-      />,
+      <EventInfo event={event} superEvent={superEventResponse} />,
       {
         mocks: mocksWithSubEvents,
       }
@@ -423,7 +400,7 @@ describe('superEvent', () => {
   });
 
   it('should should not render super event title when super event is not given', async () => {
-    render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, {
+    render(<EventInfo event={event} />, {
       mocks,
     });
     await actWait();
@@ -438,7 +415,7 @@ describe('superEvent', () => {
 
 describe('subEvents', () => {
   it('should render sub events title and content when sub events are given', async () => {
-    render(<EventInfo event={event} {...commonAppUrlGetterMocks} />, {
+    render(<EventInfo event={event} />, {
       mocks: mocksWithSubEvents,
     });
     await waitFor(() => {
@@ -452,12 +429,9 @@ describe('subEvents', () => {
   });
 
   it('should navigate to sub events page when it is clicked', async () => {
-    const { router } = render(
-      <EventInfo event={event} {...commonAppUrlGetterMocks} />,
-      {
-        mocks: mocksWithSubEvents,
-      }
-    );
+    const { router } = render(<EventInfo event={event} />, {
+      mocks: mocksWithSubEvents,
+    });
     const eventsList = await screen.findByTestId(subEventsListTestId);
     const subEvent = subEventsResponse.data[0];
     const dateStr = getDateRangeStr(getDateRangeStrProps(subEvent));
@@ -513,7 +487,6 @@ describe('subEvents', () => {
           ],
         })}
         superEvent={superEventResponseMock}
-        {...commonAppUrlGetterMocks}
       />,
       {
         mocks: [...mocks, middleAsSuperEventMock, superEventMock],

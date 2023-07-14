@@ -10,7 +10,6 @@ import React from 'react';
 import InfoWithIcon from '../../../../components/infoWithIcon/InfoWithIcon';
 import SkeletonLoader from '../../../../components/skeletonLoader/SkeletonLoader';
 import LoadingSpinner from '../../../../components/spinner/LoadingSpinner';
-import type { GetEventListLinkUrlType } from '../../../../types';
 import type {
   EventFields,
   SuperEventResponse,
@@ -25,8 +24,7 @@ export const superEventTestId = 'super-event';
 
 const SubEvents: React.FC<{
   event: EventFields;
-  getEventListLinkUrl: GetEventListLinkUrlType;
-}> = ({ event, getEventListLinkUrl }) => {
+}> = ({ event }) => {
   const { t } = useTranslation('event');
   const [isListOpen, setIsListOpen] = React.useState(false);
 
@@ -95,19 +93,13 @@ const SubEvents: React.FC<{
     <div className={styles.eventList}>
       <InfoWithIcon icon={titleIcon} title={title}>
         {isLowestLevelEvent || isMiddleLevelEvent ? (
-          <EventList
-            id={subEventsListTestId}
-            events={shownEvents}
-            showDate
-            getEventListLinkUrl={getEventListLinkUrl}
-          />
+          <EventList id={subEventsListTestId} events={shownEvents} showDate />
         ) : (
           <EventList
             id={subEventsListTestId}
             events={shownEvents}
             showName
             showDate
-            getEventListLinkUrl={getEventListLinkUrl}
           />
         )}
         {events.length > EVENTS_LIST_LIMIT && (
@@ -133,8 +125,7 @@ const SubEvents: React.FC<{
 
 const SuperEvent: React.FC<{
   superEvent: SuperEventResponse | undefined;
-  getEventListLinkUrl: GetEventListLinkUrlType;
-}> = ({ superEvent, getEventListLinkUrl }) => {
+}> = ({ superEvent }) => {
   const { t } = useTranslation('event');
 
   if (!superEvent?.data) return null;
@@ -147,12 +138,7 @@ const SuperEvent: React.FC<{
         icon={<IconLayers aria-hidden />}
         title={t('superEvent.title')}
       >
-        <EventList
-          id={superEventTestId}
-          showName
-          events={[superEvent.data]}
-          getEventListLinkUrl={getEventListLinkUrl}
-        />
+        <EventList id={superEventTestId} showName events={[superEvent.data]} />
       </InfoWithIcon>
     </div>
   );

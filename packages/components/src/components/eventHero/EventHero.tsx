@@ -47,7 +47,7 @@ export type EventHeroProps = {
 const EventHero: React.FC<EventHeroProps> = ({
   event,
   superEvent,
-  withActions,
+  withActions = true,
 }) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');

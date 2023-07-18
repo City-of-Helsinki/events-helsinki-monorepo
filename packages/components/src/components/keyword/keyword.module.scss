@@ -28,4 +28,8 @@
   &.isFreeEvent {
     background-color: var(--color-keyword-free-event);
   }
+
+  &.noActions:focus {
+    box-shadow: none;
+  }
 }

@@ -50,6 +50,7 @@ const KeywordTag: FunctionComponent<Props> = ({
         transparent && styles.transparent,
         isToday && styles.isToday,
         isFreeEvent && styles.isFreeEvent,
+        !onClick && styles.noActions,
         className
       )}
       onClick={handleClick}

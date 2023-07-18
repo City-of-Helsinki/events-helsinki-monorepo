@@ -40,10 +40,15 @@ import styles from './eventHero.module.scss';
 export type EventHeroProps = {
   event: EventFields;
   superEvent?: SuperEventResponse;
+  withActions?: boolean;
 };
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
-const EventHero: React.FC<EventHeroProps> = ({ event, superEvent }) => {
+const EventHero: React.FC<EventHeroProps> = ({
+  event,
+  superEvent,
+  withActions,
+}) => {
   const { t } = useTranslation('event');
   const { t: commonTranslation } = useTranslation('common');
   const { fallbackImageUrls } = useConfig();
@@ -179,7 +184,12 @@ const EventHero: React.FC<EventHeroProps> = ({ event, superEvent }) => {
                 </div>
                 {showKeywords && (
                   <div className={styles.categoryWrapper}>
-                    <EventKeywords whiteOnly event={event} showIsFree={true} />
+                    <EventKeywords
+                      whiteOnly
+                      event={event}
+                      showIsFree={true}
+                      withActions={Boolean(withActions)}
+                    />
                   </div>
                 )}
               </div>

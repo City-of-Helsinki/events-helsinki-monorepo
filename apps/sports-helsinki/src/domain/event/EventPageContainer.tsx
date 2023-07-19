@@ -74,7 +74,11 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 <EventClosedHero onClick={moveToHomePage} />
               ) : (
                 <>
-                  <EventHero event={event} superEvent={superEvent} />
+                  <EventHero
+                    event={event}
+                    superEvent={superEvent}
+                    withActions={false}
+                  />
                   <EventContent
                     event={event}
                     superEvent={superEvent}

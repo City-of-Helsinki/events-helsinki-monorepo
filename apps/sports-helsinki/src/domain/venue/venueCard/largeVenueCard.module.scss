@@ -72,11 +72,6 @@
 
     .keywordWrapperDesktop {
       order: 6;
-      //padding: var(--spacing-xs) 0;
-
-      @include respond_below(s) {
-        display: none;
-      }
     }
 
     .buttonWrapper {

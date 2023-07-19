@@ -1,5 +1,8 @@
-import type { Venue } from 'types/generated/graphql';
-import type { DirectionAddress, DirectionPoint } from 'types/venue-types';
+import type {
+  DirectionAddress,
+  DirectionPoint,
+  Venue,
+} from '../../../../types';
 
 export function renderAddressToString(address: DirectionAddress): string {
   return [address.streetName, address.zip, address.city]

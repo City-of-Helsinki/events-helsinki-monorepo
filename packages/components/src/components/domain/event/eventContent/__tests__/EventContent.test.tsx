@@ -3,7 +3,7 @@ import React from 'react';
 import { configure, render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeImage } from '@/test-utils/mockDataUtils';
-import type { EventFieldsFragment } from 'types/generated/graphql';
+import type { EventFieldsFragment } from '../../../../../types';
 import EventContent from '../EventContent';
 
 configure({ defaultHidden: true });

@@ -107,7 +107,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
               <div className={styles.leftPanelEmpty} />
               <div className={styles.textWrapper}>
                 <div>
-                  <VenueKeywords venue={venue} />
+                  <VenueKeywords whiteOnly venue={venue} />
                 </div>
                 <h1 className={styles.title}>{venue.name}</h1>
                 <div className={styles.additionalInfo}>

@@ -22589,6 +22589,7 @@ __metadata:
   checksum: 9a00b241dadc4715c2a985c02e87f62765e61aae48de5247df3ef09af2945fbbc079a218712a97955be39363967ac8e33bfdd01e6f37adefc5bf22bdf678b1bf
   languageName: node
   linkType: hard
+
 "react-helsinki-headless-cms@npm:1.0.0-alpha183":
   version: 1.0.0-alpha183
   resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha183"

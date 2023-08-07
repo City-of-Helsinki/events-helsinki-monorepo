@@ -21,12 +21,34 @@ directive @join__unionMember(graph: join__Graph!, member: String!) repeatable on
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
-"""TODO: take this from service map / TPREK"""
-type AccessibilityProfile
+type Accessibility
   @join__type(graph: UNIFIED_SEARCH)
 {
-  meta: NodeMeta
-  todo: String
+  email: String
+  phone: String
+  www: String
+  viewpoints: [AccessibilityViewpoint]
+  sentences: [AccessibilitySentence]
+  shortcomings: [AccessibilityShortcoming]
+}
+
+enum AccessibilityProfile
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  hearing_aid @join__enumValue(graph: UNIFIED_SEARCH)
+  reduced_mobility @join__enumValue(graph: UNIFIED_SEARCH)
+  rollator @join__enumValue(graph: UNIFIED_SEARCH)
+  stroller @join__enumValue(graph: UNIFIED_SEARCH)
+  visually_impaired @join__enumValue(graph: UNIFIED_SEARCH)
+  wheelchair @join__enumValue(graph: UNIFIED_SEARCH)
+}
+
+type AccessibilitySentence
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  sentenceGroupName: String
+  sentenceGroup: LanguageString
+  sentence: LanguageString
 }
 
 type AccessibilitySentences
@@ -34,6 +56,30 @@ type AccessibilitySentences
 {
   groupName: String
   sentences: [String]
+}
+
+type AccessibilityShortcoming
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  profile: AccessibilityProfile
+  count: Int
+}
+
+type AccessibilityViewpoint
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  id: ID
+  name: LanguageString
+  value: AccessibilityViewpointValue
+  shortages: [LanguageString]
+}
+
+enum AccessibilityViewpointValue
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  unknown @join__enumValue(graph: UNIFIED_SEARCH)
+  red @join__enumValue(graph: UNIFIED_SEARCH)
+  green @join__enumValue(graph: UNIFIED_SEARCH)
 }
 
 """TODO: give real structure"""
@@ -10814,6 +10860,22 @@ interface Previewable
   previewRevisionId: ID
 }
 
+enum ProviderType
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  ASSOCIATION @join__enumValue(graph: UNIFIED_SEARCH)
+  CONTRACT_SCHOOL @join__enumValue(graph: UNIFIED_SEARCH)
+  MUNICIPALITY @join__enumValue(graph: UNIFIED_SEARCH)
+  OTHER_PRODUCTION_METHOD @join__enumValue(graph: UNIFIED_SEARCH)
+  PAYMENT_COMMITMENT @join__enumValue(graph: UNIFIED_SEARCH)
+  PRIVATE_COMPANY @join__enumValue(graph: UNIFIED_SEARCH)
+  PURCHASED_SERVICE @join__enumValue(graph: UNIFIED_SEARCH)
+  SELF_PRODUCED @join__enumValue(graph: UNIFIED_SEARCH)
+  SUPPORTED_OPERATIONS @join__enumValue(graph: UNIFIED_SEARCH)
+  UNKNOWN_PRODUCTION_METHOD @join__enumValue(graph: UNIFIED_SEARCH)
+  VOUCHER_SERVICE @join__enumValue(graph: UNIFIED_SEARCH)
+}
+
 """The root entry point into the Graph"""
 type Query
   @join__type(graph: CMS)
@@ -11807,6 +11869,27 @@ type Query
     """Optional, filter to match only these ontology word ids"""
     ontologyWordIds: [ID]
 
+    """Optional, filter to match any of these provider types"""
+    providerTypes: [ProviderType]
+
+    """Optional, filter to match any of these service owner types"""
+    serviceOwnerTypes: [ServiceOwnerType]
+
+    """Optional, filter to match any of these target groups"""
+    targetGroups: [TargetGroup]
+
+    """
+    Optional, filter to show only venues that have at least one reservable resource.
+    If not given or false, all venues are shown.
+    """
+    mustHaveReservableResource: Boolean
+
+    """
+    Optional, filter to show only venues that have no known shortcomings for any of
+    the given accessibility profiles.
+    """
+    accessibilityProfilesWithoutShortcomings: [AccessibilityProfile]
+
     """Optional search index."""
     index: String
 
@@ -12380,6 +12463,31 @@ type ResetUserPasswordPayload
   user: User
 }
 
+type Resource
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  id: ID
+  name: LanguageString
+  description: LanguageString
+  type: ResourceType
+  userPermissions: ResourceUserPermissions
+  reservable: Boolean
+  reservationInfo: LanguageString
+  genericTerms: LanguageString
+  paymentTerms: LanguageString
+  specificTerms: LanguageString
+  responsibleContactInfo: LanguageString
+  externalReservationUrl: String
+}
+
+enum ResourceMainType
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  item @join__enumValue(graph: UNIFIED_SEARCH)
+  person @join__enumValue(graph: UNIFIED_SEARCH)
+  space @join__enumValue(graph: UNIFIED_SEARCH)
+}
+
 enum ResourceState
   @join__type(graph: VENUES)
 {
@@ -12394,6 +12502,20 @@ enum ResourceState
   enter_only @join__enumValue(graph: VENUES)
   exit_only @join__enumValue(graph: VENUES)
   weather_permitting @join__enumValue(graph: VENUES)
+}
+
+type ResourceType
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  id: ID
+  mainType: ResourceMainType
+  name: LanguageString
+}
+
+type ResourceUserPermissions
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  canMakeReservations: Boolean
 }
 
 """Input for the restoreComment mutation."""
@@ -14620,6 +14742,34 @@ type SeoSettings
   separator: String
 }
 
+type ServiceOwner
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  providerType: ProviderType
+  type: ServiceOwnerType
+  name: LanguageString
+}
+
+enum ServiceOwnerType
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  MUNICIPAL_SERVICE @join__enumValue(graph: UNIFIED_SEARCH)
+  NOT_DISPLAYED @join__enumValue(graph: UNIFIED_SEARCH)
+  PRIVATE_CONTRACT_SCHOOL @join__enumValue(graph: UNIFIED_SEARCH)
+  PRIVATE_SERVICE @join__enumValue(graph: UNIFIED_SEARCH)
+  PURCHASED_SERVICE @join__enumValue(graph: UNIFIED_SEARCH)
+  SERVICE_BY_JOINT_MUNICIPAL_AUTHORITY @join__enumValue(graph: UNIFIED_SEARCH)
+  SERVICE_BY_MUNICIPALLY_OWNED_COMPANY @join__enumValue(graph: UNIFIED_SEARCH)
+  SERVICE_BY_MUNICIPAL_GROUP_ENTITY @join__enumValue(graph: UNIFIED_SEARCH)
+  SERVICE_BY_OTHER_MUNICIPALITY @join__enumValue(graph: UNIFIED_SEARCH)
+  SERVICE_BY_REGIONAL_COOPERATION_ORGANIZATION @join__enumValue(graph: UNIFIED_SEARCH)
+  SERVICE_BY_WELLBEING_AREA @join__enumValue(graph: UNIFIED_SEARCH)
+  STATE_CONTRACT_SCHOOL @join__enumValue(graph: UNIFIED_SEARCH)
+  STATE_SERVICE @join__enumValue(graph: UNIFIED_SEARCH)
+  SUPPORTED_OPERATIONS @join__enumValue(graph: UNIFIED_SEARCH)
+  VOUCHER_SERVICE @join__enumValue(graph: UNIFIED_SEARCH)
+}
+
 """All of the registered settings"""
 type Settings
   @join__type(graph: CMS)
@@ -15197,6 +15347,19 @@ type TagToTaxonomyConnectionEdge implements OneToOneConnection & Edge & Taxonomy
 
   """The node of the connection, without the edges"""
   node: Taxonomy!
+}
+
+enum TargetGroup
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  ASSOCIATIONS @join__enumValue(graph: UNIFIED_SEARCH)
+  CHILDREN_AND_FAMILIES @join__enumValue(graph: UNIFIED_SEARCH)
+  DISABLED @join__enumValue(graph: UNIFIED_SEARCH)
+  ELDERLY_PEOPLE @join__enumValue(graph: UNIFIED_SEARCH)
+  ENTERPRISES @join__enumValue(graph: UNIFIED_SEARCH)
+  IMMIGRANTS @join__enumValue(graph: UNIFIED_SEARCH)
+  INDIVIDUALS @join__enumValue(graph: UNIFIED_SEARCH)
+  YOUTH @join__enumValue(graph: UNIFIED_SEARCH)
 }
 
 """A taxonomy object"""
@@ -16118,13 +16281,16 @@ type UnifiedSearchVenue
   name: LanguageString
   location: LocationDescription
   description: LanguageString
+  serviceOwner: ServiceOwner
+  resources: [Resource!]!
+  targetGroups: [TargetGroup]
   descriptionResources: DescriptionResources
   partOf: UnifiedSearchVenue
   openingHours: OpeningHours
   manager: LegalEntity
   contactDetails: ContactInfo
   reservationPolicy: VenueReservationPolicy
-  accessibilityProfile: AccessibilityProfile
+  accessibility: Accessibility
   arrivalInstructions: String
   additionalInfo: String
   facilities: [VenueFacility!]

@@ -14,7 +14,7 @@ subgraphs:
     schema:
       file: ./subgraphs/events/events.graphql
   unified-search:
-    routing_url: https://unified-search.test.kuva.hel.ninja/search
+    routing_url: https://kuva-unified-search.api.test.hel.ninja/search
     schema:
       file: ./subgraphs/unified-search/unified-search.graphql
   venues:

@@ -5,6 +5,7 @@ export type FilterType =
   | 'category'
   | 'hobbyType'
   | 'sportsCategory'
+  | 'targetGroup'
   | 'date'
   | 'dateType'
   | 'division'

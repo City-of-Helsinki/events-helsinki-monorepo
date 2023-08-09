@@ -13,6 +13,7 @@ export type UnifiedSearchParameters = {
   administrativeDivisionIds?: string[];
   ontologyTreeIds?: number[];
   ontologyWordIds?: number[];
+  targetGroups?: string[];
   after?: string;
   first?: number;
   ontology?: string;

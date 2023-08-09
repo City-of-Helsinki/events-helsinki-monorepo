@@ -17,6 +17,7 @@ const outputQuery: CombinedSearchAdapterInput = {
   eventOrderBy: 'event-field-asc',
   courseOrderBy: 'course-field-asc',
   sportsCategories: [],
+  targetGroups: [],
   keywords: [],
 };
 const extraParamsInOutputQuery = {

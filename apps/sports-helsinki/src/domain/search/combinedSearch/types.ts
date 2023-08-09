@@ -55,6 +55,7 @@ type CombinedSearchAdapterInputForCourses = RenameKeyWithNamespace<
 export type CombinedSearchAdapterInput = {
   text: string | null;
   sportsCategories: string[];
+  targetGroups: string[];
   organization?: string | null;
   place?: string | null;
   keywords: string[];
@@ -77,6 +78,7 @@ export type EventSearchParams = Pick<
   | 'keywordNot'
   | 'keywordOrSet1'
   | 'keywordOrSet2'
+  | 'keywordOrSet3'
   | 'location'
   | 'sort'
   | 'eventType'
@@ -94,6 +96,7 @@ export type VenueSearchParams = Pick<
   | 'q'
   | 'ontologyTreeIds'
   | 'ontologyWordIds'
+  | 'targetGroups'
   | 'administrativeDivisionIds'
   | 'openAt'
   | 'orderByName'

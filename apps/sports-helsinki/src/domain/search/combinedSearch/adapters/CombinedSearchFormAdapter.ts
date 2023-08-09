@@ -51,6 +51,7 @@ class CombinedSearchFormAdapter
   eventOrderBy?: string | null;
   courseOrderBy?: string | null;
   sportsCategories: string[];
+  targetGroups: string[];
   organization?: string | null;
   place?: string | null;
   keywords: string[];
@@ -91,6 +92,7 @@ class CombinedSearchFormAdapter
       input.get('sort') ??
       initialCombinedSearchFormValues.courseOrderBy;
     this.sportsCategories = input.getAll('sportsCategories');
+    this.targetGroups = input.getAll('targetGroups');
     this.organization =
       input.get('organization') ??
       input.get('publisher') ??
@@ -202,6 +204,10 @@ class CombinedSearchFormAdapter
   }
 
   public cleanSportsCategories() {
+    return;
+  }
+
+  public cleanTargetGroups() {
     return;
   }
 

@@ -19,6 +19,14 @@
       "indoorSportsHalls": "Sisäliikuntahallit",
       "outdoorRecreation": "Ulkoilu",
       "guidedExercise": "Ohjattu liikunta"
+    },
+    "targetGroup": {
+      "adaptedGroups": "Soveltavat ryhmät",
+      "adults": "Aikuiset",
+      "childrenAndFamilies": "Lapset ja perheet",
+      "partners": "Kumppanit",
+      "seniors": "Ikääntyneet",
+      "youth": "Nuoret"
     }
   },
   "search": {

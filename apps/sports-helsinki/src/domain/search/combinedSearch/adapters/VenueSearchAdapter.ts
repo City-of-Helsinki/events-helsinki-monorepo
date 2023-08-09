@@ -1,10 +1,15 @@
-import { SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
+import {
+  SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS,
+  TARGET_GROUPS_TO_UNIFIED_SEARCH_TARGET_GROUPS,
+} from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type {
   AppLanguage,
   Coordinates,
   OrderByDistance,
   SPORTS_CATEGORIES,
   UnifiedSearchLanguage,
+  TARGET_GROUPS,
+  TargetGroup as UnifiedSearchTargetGroup,
 } from '@events-helsinki/components/types';
 import { SortOrder } from '@events-helsinki/components/types';
 import { appToUnifiedSearchLanguageMap } from '../../eventSearch/types';
@@ -25,6 +30,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   q: VenueSearchParams['q'];
   ontologyTreeIds: VenueSearchParams['ontologyWordIds'];
   ontologyWordIds: VenueSearchParams['ontologyWordIds'];
+  targetGroups: VenueSearchParams['targetGroups'];
   openAt?: VenueSearchParams['openAt'];
   administrativeDivisionIds?: VenueSearchParams['administrativeDivisionIds'];
   orderByName: VenueSearchParams['orderByName'];
@@ -50,6 +56,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     ] as UnifiedSearchLanguage;
     this.q = input.text || initialVenueSearchAdapterValues.q;
     this.ontologyTreeIds = this.getOntologyTreeIds(input);
+    this.targetGroups = this.getTargetGroups(input);
     if (input.venueOrderBy?.includes('name')) {
       this.orderByName = input.venueOrderBy.startsWith('-')
         ? { order: SortOrder.Descending }
@@ -85,6 +92,29 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
 
     // Return a unique list of tree ids
     return [...new Set([...filteredSportsCategories])];
+  }
+
+  private getTargetGroups({
+    targetGroups,
+  }: CombinedSearchAdapterInput): VenueSearchParams['targetGroups'] {
+    // If there are no selected target groups, use the default one
+    if (!targetGroups?.length) {
+      return initialVenueSearchAdapterValues.targetGroups;
+    }
+    const mappedTargetGroups = targetGroups.reduce(
+      (accumulator: UnifiedSearchTargetGroup[], targetGroup) => {
+        return [
+          ...accumulator,
+          ...TARGET_GROUPS_TO_UNIFIED_SEARCH_TARGET_GROUPS[
+            targetGroup as TARGET_GROUPS
+          ],
+        ];
+      },
+      []
+    );
+
+    // Return a unique list of target groups
+    return [...new Set([...mappedTargetGroups])];
   }
 
   public getQueryVariables(): VenueSearchParams {

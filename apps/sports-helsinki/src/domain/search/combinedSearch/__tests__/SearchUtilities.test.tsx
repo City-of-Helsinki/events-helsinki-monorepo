@@ -48,6 +48,7 @@ const mocks = [
     variables: {
       ontologyTreeIds: ['551'],
       ontologyWordIds: [],
+      targetGroups: [],
       administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
       first: 10,
     },

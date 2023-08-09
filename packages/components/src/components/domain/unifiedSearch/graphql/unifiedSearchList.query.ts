@@ -9,6 +9,7 @@ export const SEARCH_LIST_QUERY = gql`
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
     $ontologyWordIds: [ID!]
+    $targetGroups: [TargetGroup]
     $openAt: String
     $orderByDistance: OrderByDistance
     $orderByName: OrderByName
@@ -23,6 +24,7 @@ export const SEARCH_LIST_QUERY = gql`
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
       ontologyWordIds: $ontologyWordIds
+      targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance
       orderByName: $orderByName
@@ -96,6 +98,7 @@ export const SEARCH_LIST_QUERY = gql`
                 en
               }
             }
+            targetGroups
           }
         }
       }

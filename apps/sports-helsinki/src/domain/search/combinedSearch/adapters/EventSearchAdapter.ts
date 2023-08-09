@@ -2,6 +2,7 @@ import { EventTypeId } from '@events-helsinki/components/types';
 import {
   SPORT_COURSES_KEYWORDS,
   sportsCategoryData,
+  targetGroupData,
 } from '../../eventSearch/constants';
 import { initialEventSearchAdapterValues } from '../constants';
 import type {
@@ -26,6 +27,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
   keywordNot: EventSearchParams['keywordNot'];
   keywordOrSet1: EventSearchParams['keywordOrSet1'];
   keywordOrSet2: EventSearchParams['keywordOrSet2'];
+  keywordOrSet3: EventSearchParams['keywordOrSet3'];
   location: EventSearchParams['location'];
   sort: EventSearchParams['sort'];
   eventType: EventSearchParams['eventType'];
@@ -55,6 +57,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     this.keywordAnd = [];
     this.keywordOrSet1 = SPORT_COURSES_KEYWORDS;
     this.keywordOrSet2 = this.getSportsKeywords(input);
+    this.keywordOrSet3 = this.getTargetGroupKeywords(input);
     this.sort =
       (eventType === EventTypeId.General
         ? input.eventOrderBy
@@ -68,6 +71,16 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
       ...new Set( // unique keywords
         sportsCategories.flatMap(
           (category) => sportsCategoryData?.[category].keywords ?? []
+        )
+      ),
+    ];
+  }
+
+  public getTargetGroupKeywords({ targetGroups }: CombinedSearchAdapterInput) {
+    return [
+      ...new Set( // unique keywords
+        targetGroups.flatMap(
+          (targetGroup) => targetGroupData?.[targetGroup].keywords ?? []
         )
       ),
     ];

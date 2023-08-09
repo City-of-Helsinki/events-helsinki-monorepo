@@ -2,6 +2,7 @@ import type {
   AppLanguage,
   Season,
   SPORTS_CATEGORIES,
+  TARGET_GROUPS,
 } from '@events-helsinki/components';
 import { UnifiedSearchLanguage } from '@events-helsinki/components';
 import type React from 'react';
@@ -11,11 +12,14 @@ import type { COURSE_CATEGORIES, EVENT_SEARCH_FILTERS } from './constants';
 export interface CategoryOption {
   icon: React.ReactElement;
   text: string;
-  value: COURSE_CATEGORIES | SPORTS_CATEGORIES;
+  value: COURSE_CATEGORIES | SPORTS_CATEGORIES | TARGET_GROUPS;
   seasons?: Season[];
 }
 
-export type SearchCategoryType = COURSE_CATEGORIES | SPORTS_CATEGORIES;
+export type SearchCategoryType =
+  | COURSE_CATEGORIES
+  | SPORTS_CATEGORIES
+  | TARGET_GROUPS;
 
 export interface SearchCategoryOption {
   icon: React.ReactElement;

@@ -28,6 +28,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const { formValues } = useCombinedSearchContext();
   const {
     sportsCategories,
+    targetGroups,
     organization: publisher,
     text: q,
     place,
@@ -61,7 +62,11 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   };
 
   const hasFilters =
-    !!sportsCategories.length || !!publisher || !!place || !!q?.length;
+    !!sportsCategories.length ||
+    !!targetGroups.length ||
+    !!publisher ||
+    !!place ||
+    !!q?.length;
 
   if (!hasFilters) return null;
 
@@ -83,6 +88,15 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           )}
           type="sportsCategory"
           value={sportsCategory}
+        />
+      ))}
+      {targetGroups.map((targetGroup) => (
+        <FilterButton
+          key={targetGroup}
+          onRemove={() => handleFilterRemove('targetGroups', targetGroup)}
+          text={translateValue('appSports:home.targetGroup.', targetGroup, t)}
+          type="targetGroup"
+          value={targetGroup}
         />
       ))}
       {publisher && (

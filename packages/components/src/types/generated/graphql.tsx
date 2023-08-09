@@ -13576,6 +13576,9 @@ export type SearchListQueryVariables = Exact<{
   ontologyWordIds?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
   >;
+  targetGroups?: InputMaybe<
+    Array<InputMaybe<TargetGroup>> | InputMaybe<TargetGroup>
+  >;
   openAt?: InputMaybe<Scalars['String']['input']>;
   orderByDistance?: InputMaybe<OrderByDistance>;
   orderByName?: InputMaybe<OrderByName>;
@@ -13598,6 +13601,7 @@ export type SearchListQuery = {
         __typename?: 'SearchResultNode';
         venue?: {
           __typename?: 'UnifiedSearchVenue';
+          targetGroups?: Array<TargetGroup | null> | null;
           meta?: { __typename?: 'NodeMeta'; id: string } | null;
           name?: {
             __typename?: 'LanguageString';
@@ -13698,6 +13702,9 @@ export type SearchMapQueryVariables = Exact<{
   >;
   ontologyTreeIds?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
+  >;
+  targetGroups?: InputMaybe<
+    Array<InputMaybe<TargetGroup>> | InputMaybe<TargetGroup>
   >;
   openAt?: InputMaybe<Scalars['String']['input']>;
   orderByDistance?: InputMaybe<OrderByDistance>;
@@ -15114,6 +15121,7 @@ export const SearchListDocument = gql`
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
     $ontologyWordIds: [ID!]
+    $targetGroups: [TargetGroup]
     $openAt: String
     $orderByDistance: OrderByDistance
     $orderByName: OrderByName
@@ -15128,6 +15136,7 @@ export const SearchListDocument = gql`
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
       ontologyWordIds: $ontologyWordIds
+      targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance
       orderByName: $orderByName
@@ -15201,6 +15210,7 @@ export const SearchListDocument = gql`
                 en
               }
             }
+            targetGroups
           }
         }
       }
@@ -15227,6 +15237,7 @@ export const SearchListDocument = gql`
  *      administrativeDivisionIds: // value for 'administrativeDivisionIds'
  *      ontologyTreeIds: // value for 'ontologyTreeIds'
  *      ontologyWordIds: // value for 'ontologyWordIds'
+ *      targetGroups: // value for 'targetGroups'
  *      openAt: // value for 'openAt'
  *      orderByDistance: // value for 'orderByDistance'
  *      orderByName: // value for 'orderByName'
@@ -15274,6 +15285,7 @@ export const SearchMapDocument = gql`
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
+    $targetGroups: [TargetGroup]
     $openAt: String
     $orderByDistance: OrderByDistance
     $orderByName: OrderByName
@@ -15286,6 +15298,7 @@ export const SearchMapDocument = gql`
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
+      targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance
       orderByName: $orderByName
@@ -15334,6 +15347,7 @@ export const SearchMapDocument = gql`
  *      language: // value for 'language'
  *      administrativeDivisionIds: // value for 'administrativeDivisionIds'
  *      ontologyTreeIds: // value for 'ontologyTreeIds'
+ *      targetGroups: // value for 'targetGroups'
  *      openAt: // value for 'openAt'
  *      orderByDistance: // value for 'orderByDistance'
  *      orderByName: // value for 'orderByName'

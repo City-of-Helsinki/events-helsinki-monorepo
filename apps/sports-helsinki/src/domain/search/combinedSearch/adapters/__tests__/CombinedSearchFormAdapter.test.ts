@@ -18,6 +18,7 @@ const outputQuery: CombinedSearchAdapterInput = {
   eventOrderBy: 'event-field-asc',
   courseOrderBy: 'course-field-asc',
   sportsCategories: [],
+  targetGroups: [],
   keywords: [],
 };
 const extraParamsInOutputQuery = {
@@ -69,6 +70,7 @@ describe('CombinedSearchFormAdapter', () => {
           q: outputQuery.text,
           ontologyWordIds: outputQuery.keywords,
           administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
+          targetGroups: [],
           after: '',
           first: 10,
           ontologyTreeIds: ['551'],
@@ -99,6 +101,7 @@ describe('CombinedSearchFormAdapter', () => {
             'yso:p2041',
           ],
           keywordOrSet2: [],
+          keywordOrSet3: [],
           location: [],
           pageSize: 10,
           publisher: null,

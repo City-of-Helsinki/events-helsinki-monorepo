@@ -7,6 +7,7 @@ import type {
   Meta,
   QueryEventListArgs,
   SPORTS_CATEGORIES,
+  TARGET_GROUPS,
 } from '@events-helsinki/components';
 import {
   buildQueryFromObject,
@@ -38,6 +39,7 @@ import {
   MAPPED_PLACES,
   SPORT_COURSES_KEYWORDS,
   sportsCategoryData,
+  targetGroupData,
 } from './constants';
 import type {
   CategoryOption,
@@ -76,6 +78,14 @@ export const getSportsCategoryOptions = (
 ): CategoryOption[] =>
   sportsCategories.map((sportsCategory) =>
     getCategoryOptions(sportsCategory, sportsCategoryData[sportsCategory], t)
+  );
+
+export const getTargetGroupOptions = (
+  t: TFunction,
+  targetGroups: TARGET_GROUPS[] = CATEGORY_CATALOG.targetGroups.default
+): CategoryOption[] =>
+  targetGroups.map((targetGroup) =>
+    getCategoryOptions(targetGroup, targetGroupData[targetGroup], t)
   );
 
 /**

@@ -56,6 +56,10 @@ $buttonWidth: 180px;
 }
 
 .buttonWrapper {
+  @include respond-above(s) {
+    grid-column: span 2 / 4;
+  }
+
   @include respond-above(m) {
     grid-column: span 1 / 5;
   }
@@ -82,8 +86,8 @@ $buttonWidth: 180px;
   }
 
   & > :first-child {
-    @include respond-above(m) {
-      grid-column: 1 / 4;
+    @include respond-above(s) {
+      grid-column: 1 / 3;
     }
   }
 }

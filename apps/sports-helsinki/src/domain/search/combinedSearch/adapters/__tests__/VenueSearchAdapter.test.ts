@@ -1,4 +1,4 @@
-import { SortOrder } from '@events-helsinki/components/types';
+import { SortOrder, TARGET_GROUPS } from '@events-helsinki/components/types';
 import type { CombinedSearchAdapterInput } from '../../types';
 import VenueSearchAdapter from '../VenueSearchAdapter';
 
@@ -13,6 +13,7 @@ describe('VenueSearchAdapter', () => {
         eventOrderBy: null,
         courseOrderBy: null,
         sportsCategories: [],
+        targetGroups: [TARGET_GROUPS.SENIORS, TARGET_GROUPS.YOUTH],
         organization: null,
         keywords: [],
       };
@@ -23,6 +24,7 @@ describe('VenueSearchAdapter', () => {
         q: input.text,
         ontologyWordIds: input.keywords,
         administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
+        targetGroups: ['ELDERLY_PEOPLE', 'YOUTH'],
         after: '',
         first: 10,
         ontologyTreeIds: ['551'],

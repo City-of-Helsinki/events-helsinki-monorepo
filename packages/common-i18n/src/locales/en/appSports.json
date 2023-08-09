@@ -19,6 +19,14 @@
       "indoorSportsHalls": "Indoor sports halls",
       "outdoorRecreation": "Outdoor recreation",
       "guidedExercise": "Guided exercise"
+    },
+    "targetGroup": {
+      "adaptedGroups": "Adapted groups",
+      "adults": "Adults",
+      "childrenAndFamilies": "Children and families",
+      "partners": "Partners",
+      "seniors": "Seniors",
+      "youth": "Youth"
     }
   },
   "search": {

@@ -6,13 +6,14 @@ import {
   IconPersonRunning,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { Button, IconSearch } from 'hds-react';
+import { Button, IconGroup, IconSearch } from 'hds-react';
 import React from 'react';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
 import type { SearchComponentType } from '../combinedSearch/types';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
 import {
+  getTargetGroupOptions,
   getSportsCategoryOptions,
   sortExtendedCategoryOptions,
 } from '../eventSearch/utils';
@@ -30,13 +31,21 @@ export function useFormValues() {
   const sportsCategories = getSportsCategoryOptions(t).sort(
     sortExtendedCategoryOptions
   );
+  const [selectedTargetGroups, setSelectedTargetGroups] = React.useState<
+    string[]
+  >(formValues.targetGroups);
+  const [targetGroupInput, setTargetGroupInput] = React.useState('');
+  const targetGroups = getTargetGroupOptions(t).sort(
+    sortExtendedCategoryOptions
+  );
 
   // On page load, initialize the form with values
   // that are available only after the page has fully loaded
   React.useEffect(() => {
     setAutosuggestInput(formValues.text ?? '');
     setSelectedSportsCategories(formValues.sportsCategories);
-  }, [formValues.sportsCategories, formValues.text]);
+    setSelectedTargetGroups(formValues.targetGroups);
+  }, [formValues.sportsCategories, formValues.targetGroups, formValues.text]);
 
   return {
     autosuggestInput,
@@ -46,6 +55,11 @@ export function useFormValues() {
     sportsCategoryInput,
     setSportsCategoryInput,
     sportsCategories,
+    selectedTargetGroups,
+    setSelectedTargetGroups,
+    targetGroupInput,
+    setTargetGroupInput,
+    targetGroups,
   };
 }
 
@@ -67,6 +81,11 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     sportsCategoryInput,
     setSportsCategoryInput,
     sportsCategories,
+    selectedTargetGroups,
+    setSelectedTargetGroups,
+    targetGroupInput,
+    setTargetGroupInput,
+    targetGroups,
   } = useFormValues();
 
   const handleSubmit = (formEvent?: React.FormEvent) => {
@@ -76,6 +95,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     setFormValues({
       text: autosuggestInput,
       sportsCategories: selectedSportsCategories,
+      targetGroups: selectedTargetGroups,
     });
     // Update the browser URL with the form values in the context.
     updateRouteToSearchPage({ shallow: true });
@@ -118,6 +138,20 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                 showSearch={false}
                 title={t('search.titleDropdownSportsCategory')}
                 value={selectedSportsCategories}
+              />
+            </div>
+            <div>
+              <MultiSelectDropdown
+                checkboxName="targetGroupOptions"
+                icon={<IconGroup aria-hidden />}
+                inputValue={targetGroupInput}
+                name="targetGroup"
+                onChange={setSelectedTargetGroups}
+                options={targetGroups}
+                setInputValue={setTargetGroupInput}
+                showSearch={false}
+                title={t('search.titleDropdownTargetGroup')}
+                value={selectedTargetGroups}
               />
             </div>
           </div>

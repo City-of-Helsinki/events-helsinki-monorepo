@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { SPORTS_CATEGORIES, SortOrder } from '../../../types';
+import { SPORTS_CATEGORIES, SortOrder, TARGET_GROUPS, TargetGroup as UnifiedSearchTargetGroup } from '../../../types';
 
 export const OrderDir = {
   asc: 'asc',
@@ -116,3 +116,40 @@ export const SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS: Record<
   [SPORTS_CATEGORIES.OUTDOOR_RECREATION]: OUTDOOR_RECREATION_ONTOLOGY_TREE_IDS,
   [SPORTS_CATEGORIES.GUIDED_EXERCISE]: GUIDED_EXERCISE_ONTOLOGY_TREE_IDS,
 };
+
+export const ADAPTED_GROUPS_TARGET_GROUPS: Array<UnifiedSearchTargetGroup> = [
+    UnifiedSearchTargetGroup.Disabled,
+];
+
+export const ADULTS_TARGET_GROUPS: Array<UnifiedSearchTargetGroup> = [
+    UnifiedSearchTargetGroup.Individuals, // FIXME: Not really a good mapping
+];
+
+export const CHILDREN_AND_FAMILIES_TARGET_GROUPS: Array<UnifiedSearchTargetGroup> = [
+    UnifiedSearchTargetGroup.ChildrenAndFamilies,
+];
+
+export const PARTNERS_TARGET_GROUPS: Array<UnifiedSearchTargetGroup> = [
+    UnifiedSearchTargetGroup.Associations,
+    UnifiedSearchTargetGroup.Enterprises,
+];
+
+export const SENIORS_TARGET_GROUPS: Array<UnifiedSearchTargetGroup> = [
+    UnifiedSearchTargetGroup.ElderlyPeople,
+];
+
+export const YOUTH_TARGET_GROUPS: Array<UnifiedSearchTargetGroup> = [
+    UnifiedSearchTargetGroup.Youth,
+];
+
+export const TARGET_GROUPS_TO_UNIFIED_SEARCH_TARGET_GROUPS: Record<
+    TARGET_GROUPS,
+    UnifiedSearchTargetGroup[]
+> = {
+  [TARGET_GROUPS.ADAPTED_GROUPS]: ADAPTED_GROUPS_TARGET_GROUPS,
+  [TARGET_GROUPS.ADULTS]: ADULTS_TARGET_GROUPS,
+  [TARGET_GROUPS.CHILDREN_AND_FAMILIES]: CHILDREN_AND_FAMILIES_TARGET_GROUPS,
+  [TARGET_GROUPS.PARTNERS]: PARTNERS_TARGET_GROUPS,
+  [TARGET_GROUPS.SENIORS]: SENIORS_TARGET_GROUPS,
+  [TARGET_GROUPS.YOUTH]: YOUTH_TARGET_GROUPS,
+}

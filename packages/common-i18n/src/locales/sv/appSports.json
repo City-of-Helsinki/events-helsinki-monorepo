@@ -19,6 +19,14 @@
       "indoorSportsHalls": "Sporthallar",
       "outdoorRecreation": "Utonhusaktiviteter",
       "guidedExercise": "Ledd motion"
+    },
+    "targetGroup": {
+      "adaptedGroups": "Tillämpande grupper",
+      "adults": "Vuxna",
+      "childrenAndFamilies": "Barn och familjer",
+      "partners": "Partners",
+      "seniors": "Äldre",
+      "youth": "Unga"
     }
   },
   "search": {

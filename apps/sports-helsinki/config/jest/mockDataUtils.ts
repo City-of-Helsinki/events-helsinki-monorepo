@@ -412,8 +412,22 @@ export const fakeVenuesSearchList = (
                 streetAddress: fakeLocalizedObject(venue.streetAddress!),
               },
               geoLocation: {
+                crs: {
+                  type: 'name',
+                  properties: {
+                    name: 'urn:ogc:def:crs:OGC:1.3:CRS84',
+                  },
+                },
+                type: 'Point',
                 geometry: {
                   coordinates: [0.123, 0.123],
+                  crs: {
+                    type: 'name',
+                    properties: {
+                      name: 'urn:ogc:def:crs:OGC:1.3:CRS84',
+                    },
+                  },
+                  type: 'Point',
                 },
               },
             },
@@ -425,6 +439,8 @@ export const fakeVenuesSearchList = (
               // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain, @typescript-eslint/no-non-null-assertion
               label: fakeLocalizedObject(ontology?.label!),
             })),
+            targetGroups: [],
+            resources: [],
           } as UnifiedSearchVenue,
         },
       } as NonNullable<

@@ -110,6 +110,15 @@ export enum SPORTS_CATEGORIES {
 export const isSportsCategory = (value: unknown): value is SPORTS_CATEGORIES =>
   Object.values(SPORTS_CATEGORIES).includes(value as SPORTS_CATEGORIES);
 
+export enum TARGET_GROUPS {
+  ADAPTED_GROUPS = 'ADAPTED_GROUPS',
+  ADULTS = 'ADULTS',
+  CHILDREN_AND_FAMILIES = 'CHILDREN_AND_FAMILIES',
+  PARTNERS = 'PARTNERS',
+  SENIORS = 'SENIORS',
+  YOUTH = 'YOUTH',
+}
+
 export type RnsData = {
   apiKey?: string;
   title?: string;

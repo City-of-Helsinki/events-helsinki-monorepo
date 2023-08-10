@@ -98,7 +98,6 @@ describe('similar events', () => {
     render(
       <SimilarEvents
         event={event as EventFieldsFragment}
-        getCardUrl={jest.fn().mockReturnValue('https://tapahtumat.hel.fi')}
         eventFilters={similarEventFilters}
       />,
       {
@@ -128,7 +127,6 @@ describe('similar events', () => {
     render(
       <SimilarEvents
         event={event as EventFieldsFragment}
-        getCardUrl={jest.fn().mockReturnValue('https://tapahtumat.hel.fi')}
         eventFilters={similarEventFilters}
       />,
       {

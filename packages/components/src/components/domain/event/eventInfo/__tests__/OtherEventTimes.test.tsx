@@ -112,20 +112,9 @@ const renderComponent = ({
   mocks?: MockedResponse[];
   event?: EventFieldsFragment;
 } = {}) =>
-  render(
-    <OtherEventTimes
-      event={event}
-      getEventListLinkUrl={jest
-        .fn()
-        .mockImplementation(
-          (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
-            `/kurssit/${event.id}`
-        )}
-    />,
-    {
-      mocks,
-    }
-  );
+  render(<OtherEventTimes event={event} />, {
+    mocks,
+  });
 
 const getDateRangeStrProps = (event: EventDetails) => ({
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

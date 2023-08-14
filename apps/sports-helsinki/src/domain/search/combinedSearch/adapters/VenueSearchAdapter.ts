@@ -11,7 +11,11 @@ import type {
   TARGET_GROUPS,
   TargetGroup as UnifiedSearchTargetGroup,
 } from '@events-helsinki/components/types';
-import { SortOrder } from '@events-helsinki/components/types';
+import {
+  SortOrder,
+  ProviderType,
+  ServiceOwnerType,
+} from '@events-helsinki/components/types';
 import { appToUnifiedSearchLanguageMap } from '../../eventSearch/types';
 import { initialVenueSearchAdapterValues } from '../constants';
 import type {
@@ -30,6 +34,8 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   q: VenueSearchParams['q'];
   ontologyTreeIds: VenueSearchParams['ontologyWordIds'];
   ontologyWordIds: VenueSearchParams['ontologyWordIds'];
+  providerTypes: VenueSearchParams['providerTypes'];
+  serviceOwnerTypes: VenueSearchParams['serviceOwnerTypes'];
   targetGroups: VenueSearchParams['targetGroups'];
   openAt?: VenueSearchParams['openAt'];
   administrativeDivisionIds?: VenueSearchParams['administrativeDivisionIds'];
@@ -57,6 +63,12 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     this.q = input.text || initialVenueSearchAdapterValues.q;
     this.ontologyTreeIds = this.getOntologyTreeIds(input);
     this.targetGroups = this.getTargetGroups(input);
+    this.providerTypes = input.helsinkiOnly
+      ? [ProviderType.SelfProduced]
+      : initialVenueSearchAdapterValues.providerTypes;
+    this.serviceOwnerTypes = input.helsinkiOnly
+      ? [ServiceOwnerType.MunicipalService]
+      : initialVenueSearchAdapterValues.serviceOwnerTypes;
     if (input.venueOrderBy?.includes('name')) {
       this.orderByName = input.venueOrderBy.startsWith('-')
         ? { order: SortOrder.Descending }

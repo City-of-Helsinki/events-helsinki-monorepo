@@ -7695,6 +7695,7 @@ export type QueryEventListArgs = {
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   publisher?: InputMaybe<Scalars['ID']['input']>;
+  publisherAncestor?: InputMaybe<Scalars['ID']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   start?: InputMaybe<Scalars['String']['input']>;
   startsAfter?: InputMaybe<Scalars['String']['input']>;
@@ -12780,6 +12781,7 @@ export type EventListQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   publisher?: InputMaybe<Scalars['ID']['input']>;
+  publisherAncestor?: InputMaybe<Scalars['ID']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   start?: InputMaybe<Scalars['String']['input']>;
   startsAfter?: InputMaybe<Scalars['String']['input']>;
@@ -13576,6 +13578,12 @@ export type SearchListQueryVariables = Exact<{
   ontologyWordIds?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
   >;
+  providerTypes?: InputMaybe<
+    Array<InputMaybe<ProviderType>> | InputMaybe<ProviderType>
+  >;
+  serviceOwnerTypes?: InputMaybe<
+    Array<InputMaybe<ServiceOwnerType>> | InputMaybe<ServiceOwnerType>
+  >;
   targetGroups?: InputMaybe<
     Array<InputMaybe<TargetGroup>> | InputMaybe<TargetGroup>
   >;
@@ -13686,6 +13694,17 @@ export type SearchListQuery = {
               en?: string | null;
             } | null;
           } | null> | null;
+          serviceOwner?: {
+            __typename?: 'ServiceOwner';
+            providerType?: ProviderType | null;
+            type?: ServiceOwnerType | null;
+            name?: {
+              __typename?: 'LanguageString';
+              fi?: string | null;
+              sv?: string | null;
+              en?: string | null;
+            } | null;
+          } | null;
         } | null;
       };
     }>;
@@ -13702,6 +13721,12 @@ export type SearchMapQueryVariables = Exact<{
   >;
   ontologyTreeIds?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
+  >;
+  providerTypes?: InputMaybe<
+    Array<InputMaybe<ProviderType>> | InputMaybe<ProviderType>
+  >;
+  serviceOwnerTypes?: InputMaybe<
+    Array<InputMaybe<ServiceOwnerType>> | InputMaybe<ServiceOwnerType>
   >;
   targetGroups?: InputMaybe<
     Array<InputMaybe<TargetGroup>> | InputMaybe<TargetGroup>
@@ -14212,6 +14237,7 @@ export const EventListDocument = gql`
     $page: Int
     $pageSize: Int
     $publisher: ID
+    $publisherAncestor: ID
     $sort: String
     $start: String
     $startsAfter: String
@@ -14248,6 +14274,7 @@ export const EventListDocument = gql`
       page: $page
       pageSize: $pageSize
       publisher: $publisher
+      publisherAncestor: $publisherAncestor
       sort: $sort
       start: $start
       startsAfter: $startsAfter
@@ -14308,6 +14335,7 @@ export const EventListDocument = gql`
  *      page: // value for 'page'
  *      pageSize: // value for 'pageSize'
  *      publisher: // value for 'publisher'
+ *      publisherAncestor: // value for 'publisherAncestor'
  *      sort: // value for 'sort'
  *      start: // value for 'start'
  *      startsAfter: // value for 'startsAfter'
@@ -15121,6 +15149,8 @@ export const SearchListDocument = gql`
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
     $ontologyWordIds: [ID!]
+    $providerTypes: [ProviderType]
+    $serviceOwnerTypes: [ServiceOwnerType]
     $targetGroups: [TargetGroup]
     $openAt: String
     $orderByDistance: OrderByDistance
@@ -15136,6 +15166,8 @@ export const SearchListDocument = gql`
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
       ontologyWordIds: $ontologyWordIds
+      providerTypes: $providerTypes
+      serviceOwnerTypes: $serviceOwnerTypes
       targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance
@@ -15210,6 +15242,15 @@ export const SearchListDocument = gql`
                 en
               }
             }
+            serviceOwner {
+              name {
+                fi
+                sv
+                en
+              }
+              providerType
+              type
+            }
             targetGroups
           }
         }
@@ -15237,6 +15278,8 @@ export const SearchListDocument = gql`
  *      administrativeDivisionIds: // value for 'administrativeDivisionIds'
  *      ontologyTreeIds: // value for 'ontologyTreeIds'
  *      ontologyWordIds: // value for 'ontologyWordIds'
+ *      providerTypes: // value for 'providerTypes'
+ *      serviceOwnerTypes: // value for 'serviceOwnerTypes'
  *      targetGroups: // value for 'targetGroups'
  *      openAt: // value for 'openAt'
  *      orderByDistance: // value for 'orderByDistance'
@@ -15285,6 +15328,8 @@ export const SearchMapDocument = gql`
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
+    $providerTypes: [ProviderType]
+    $serviceOwnerTypes: [ServiceOwnerType]
     $targetGroups: [TargetGroup]
     $openAt: String
     $orderByDistance: OrderByDistance
@@ -15298,6 +15343,8 @@ export const SearchMapDocument = gql`
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
+      providerTypes: $providerTypes
+      serviceOwnerTypes: $serviceOwnerTypes
       targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance
@@ -15347,6 +15394,8 @@ export const SearchMapDocument = gql`
  *      language: // value for 'language'
  *      administrativeDivisionIds: // value for 'administrativeDivisionIds'
  *      ontologyTreeIds: // value for 'ontologyTreeIds'
+ *      providerTypes: // value for 'providerTypes'
+ *      serviceOwnerTypes: // value for 'serviceOwnerTypes'
  *      targetGroups: // value for 'targetGroups'
  *      openAt: // value for 'openAt'
  *      orderByDistance: // value for 'orderByDistance'

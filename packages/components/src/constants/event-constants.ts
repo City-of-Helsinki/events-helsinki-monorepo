@@ -66,3 +66,7 @@ export enum EVENT_SEARCH_FILTERS {
   MAX_AGE = 'audienceMaxAgeGt',
   SUITABLE = 'suitableFor',
 }
+
+// City of Helsinki's organization ID in Linked Events
+// See https://api.hel.fi/linkedevents/v1/organization/ahjo:00001/
+export const CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID = 'ahjo:00001';

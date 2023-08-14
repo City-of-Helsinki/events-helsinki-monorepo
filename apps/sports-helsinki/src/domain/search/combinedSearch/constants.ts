@@ -22,6 +22,7 @@ export const initialCombinedSearchFormValues: CombinedSearchAdapterInput = {
   courseOrderBy: undefined,
   sportsCategories: [],
   targetGroups: [],
+  helsinkiOnly: undefined,
   organization: undefined,
   place: undefined,
   keywords: [],
@@ -34,6 +35,8 @@ export const initialVenueSearchAdapterValues: VenueSearchParams = {
   ontologyWordIds: [],
   targetGroups: [],
   administrativeDivisionIds: [HELSINKI_OCD_DIVISION_ID],
+  providerTypes: undefined,
+  serviceOwnerTypes: undefined,
   openAt: null,
   after: '',
   first: 10,
@@ -53,5 +56,6 @@ export const initialEventSearchAdapterValues: EventSearchParams = {
   eventType: EventTypeId.General,
   superEventType: ['umbrella', 'none'],
   publisher: null,
+  publisherAncestor: null,
   pageSize: 10,
 };

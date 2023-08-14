@@ -1,5 +1,6 @@
 import {
   useLocale,
+  HelsinkiOnlyFilter,
   PublisherFilter,
   FilterButton,
   translateValue,
@@ -30,6 +31,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     sportsCategories,
     targetGroups,
     organization: publisher,
+    helsinkiOnly,
     text: q,
     place,
   } = formValues;
@@ -64,6 +66,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const hasFilters =
     !!sportsCategories.length ||
     !!targetGroups.length ||
+    !!helsinkiOnly ||
     !!publisher ||
     !!place ||
     !!q?.length;
@@ -103,6 +106,11 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         <PublisherFilter
           id={publisher}
           onRemove={() => handleFilterRemove('organization', publisher)}
+        />
+      )}
+      {helsinkiOnly && (
+        <HelsinkiOnlyFilter
+          onRemove={() => handleFilterRemove('helsinkiOnly', 'true')}
         />
       )}
       {place && (

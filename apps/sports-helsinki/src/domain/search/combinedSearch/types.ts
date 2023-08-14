@@ -57,6 +57,7 @@ export type CombinedSearchAdapterInput = {
   sportsCategories: string[];
   targetGroups: string[];
   organization?: string | null;
+  helsinkiOnly?: boolean | string | null;
   place?: string | null;
   keywords: string[];
 } & CombinedSearchAdapterInputForVenues &
@@ -84,6 +85,7 @@ export type EventSearchParams = Pick<
   | 'eventType'
   | 'superEventType'
   | 'publisher'
+  | 'publisherAncestor'
   | 'page'
   | 'pageSize'
 >;
@@ -96,6 +98,8 @@ export type VenueSearchParams = Pick<
   | 'q'
   | 'ontologyTreeIds'
   | 'ontologyWordIds'
+  | 'providerTypes'
+  | 'serviceOwnerTypes'
   | 'targetGroups'
   | 'administrativeDivisionIds'
   | 'openAt'

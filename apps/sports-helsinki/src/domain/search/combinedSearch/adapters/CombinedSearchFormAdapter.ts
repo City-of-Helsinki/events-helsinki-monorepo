@@ -33,6 +33,10 @@ export const searchAdapterForType: Record<SearchType, SearchAdapterType> = {
   venue: VenueSearchAdapter,
 };
 
+function toBoolean(input?: string | boolean | null): boolean {
+  return ['true', '1', 'yes'].includes(input?.toString().toLowerCase() ?? '');
+}
+
 class CombinedSearchFormAdapter
   implements
     CombinedSearchAdapterInput,
@@ -52,6 +56,7 @@ class CombinedSearchFormAdapter
   courseOrderBy?: string | null;
   sportsCategories: string[];
   targetGroups: string[];
+  helsinkiOnly?: boolean | string | null;
   organization?: string | null;
   place?: string | null;
   keywords: string[];
@@ -93,6 +98,8 @@ class CombinedSearchFormAdapter
       initialCombinedSearchFormValues.courseOrderBy;
     this.sportsCategories = input.getAll('sportsCategories');
     this.targetGroups = input.getAll('targetGroups');
+    this.helsinkiOnly =
+      input.get('helsinkiOnly') ?? initialCombinedSearchFormValues.helsinkiOnly;
     this.organization =
       input.get('organization') ??
       input.get('publisher') ??
@@ -209,6 +216,10 @@ class CombinedSearchFormAdapter
 
   public cleanTargetGroups() {
     return;
+  }
+
+  public cleanHelsinkOnly() {
+    this.helsinkiOnly = toBoolean(this.helsinkiOnly);
   }
 
   public cleanOrganization() {

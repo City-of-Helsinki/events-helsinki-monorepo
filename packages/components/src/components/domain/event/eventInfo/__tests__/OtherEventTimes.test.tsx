@@ -15,7 +15,6 @@ import {
   createOtherEventTimesRequestAndResultMocks,
   createOtherEventTimesRequestThrowsErrorMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import type { EventFields } from '../../../../../types/event-types';
 import type {
   EventDetails,
   EventFieldsFragment,
@@ -24,7 +23,6 @@ import type {
   Meta,
 } from '../../../../../types/generated/graphql';
 import { EventTypeId } from '../../../../../types/generated/graphql';
-import type { AppLanguage } from '../../../../../types/types';
 import getDateRangeStr from '../../../../../utils/getDateRangeStr';
 import OtherEventTimes from '../OtherEventTimes';
 

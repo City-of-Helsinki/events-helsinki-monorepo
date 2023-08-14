@@ -9,6 +9,8 @@ export const SEARCH_LIST_QUERY = gql`
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
     $ontologyWordIds: [ID!]
+    $providerTypes: [ProviderType]
+    $serviceOwnerTypes: [ServiceOwnerType]
     $targetGroups: [TargetGroup]
     $openAt: String
     $orderByDistance: OrderByDistance
@@ -24,6 +26,8 @@ export const SEARCH_LIST_QUERY = gql`
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
       ontologyWordIds: $ontologyWordIds
+      providerTypes: $providerTypes
+      serviceOwnerTypes: $serviceOwnerTypes
       targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance
@@ -97,6 +101,15 @@ export const SEARCH_LIST_QUERY = gql`
                 sv
                 en
               }
+            }
+            serviceOwner {
+              name {
+                fi
+                sv
+                en
+              }
+              providerType
+              type
             }
             targetGroups
           }

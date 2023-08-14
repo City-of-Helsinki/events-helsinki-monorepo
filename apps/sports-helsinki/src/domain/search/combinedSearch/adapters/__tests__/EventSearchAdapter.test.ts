@@ -14,6 +14,7 @@ describe('EventSearchAdapter', () => {
           venueOrderBy: null,
           sportsCategories: [],
           targetGroups: [TARGET_GROUPS.SENIORS, TARGET_GROUPS.YOUTH],
+          helsinkiOnly: true,
           organization: null,
           keywords: [],
         };
@@ -66,6 +67,7 @@ describe('EventSearchAdapter', () => {
           location: [],
           pageSize: 10,
           publisher: null,
+          publisherAncestor: 'ahjo:00001',
           include: ['keywords', 'location'],
           superEventType: ['umbrella', 'none'],
           sort:

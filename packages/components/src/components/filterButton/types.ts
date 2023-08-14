@@ -6,6 +6,7 @@ export type FilterType =
   | 'hobbyType'
   | 'sportsCategory'
   | 'targetGroup'
+  | 'helsinkiOnly'
   | 'date'
   | 'dateType'
   | 'division'

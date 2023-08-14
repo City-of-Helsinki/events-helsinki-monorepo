@@ -8,6 +8,8 @@ export const SEARCH_MAP_QUERY = gql`
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
+    $providerTypes: [ProviderType]
+    $serviceOwnerTypes: [ServiceOwnerType]
     $targetGroups: [TargetGroup]
     $openAt: String
     $orderByDistance: OrderByDistance
@@ -21,6 +23,8 @@ export const SEARCH_MAP_QUERY = gql`
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
+      providerTypes: $providerTypes
+      serviceOwnerTypes: $serviceOwnerTypes
       targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance

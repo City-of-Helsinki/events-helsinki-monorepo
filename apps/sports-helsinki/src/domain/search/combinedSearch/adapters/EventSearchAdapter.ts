@@ -1,3 +1,4 @@
+import { CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID } from '@events-helsinki/components';
 import { EventTypeId } from '@events-helsinki/components/types';
 import {
   SPORT_COURSES_KEYWORDS,
@@ -33,6 +34,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
   eventType: EventSearchParams['eventType'];
   superEventType: EventSearchParams['superEventType'];
   publisher: EventSearchParams['publisher'];
+  publisherAncestor: EventSearchParams['publisherAncestor'];
   page: EventSearchParams['page'];
   pageSize: EventSearchParams['pageSize'];
 
@@ -64,6 +66,9 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
         : input.courseOrderBy) ?? initialEventSearchAdapterValues.sort;
     this.publisher =
       input.organization ?? initialEventSearchAdapterValues.publisher;
+    this.publisherAncestor = input.helsinkiOnly
+      ? CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID
+      : initialEventSearchAdapterValues.publisherAncestor;
   }
 
   public getSportsKeywords({ sportsCategories }: CombinedSearchAdapterInput) {

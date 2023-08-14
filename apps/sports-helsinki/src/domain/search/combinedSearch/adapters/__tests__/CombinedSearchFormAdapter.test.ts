@@ -105,6 +105,7 @@ describe('CombinedSearchFormAdapter', () => {
           location: [],
           pageSize: 10,
           publisher: null,
+          publisherAncestor: null,
           include: ['keywords', 'location'],
           superEventType: ['umbrella', 'none'],
         },

@@ -37,6 +37,7 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'page', value: params.page },
     { key: 'page_size', value: params.pageSize },
     { key: 'publisher', value: params.publisher },
+    { key: 'publisher_ancestor', value: params.publisherAncestor },
     { key: 'sort', value: params.sort },
     { key: 'start', value: params.start },
     { key: 'starts_after', value: params.startsAfter },

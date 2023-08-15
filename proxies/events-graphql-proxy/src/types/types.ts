@@ -459,6 +459,7 @@ export type QueryEventListArgs = {
   page?: Maybe<Scalars['Int']>;
   pageSize?: Maybe<Scalars['Int']>;
   publisher?: Maybe<Scalars['ID']>;
+  publisherAncestor?: Maybe<Scalars['ID']>;
   sort?: Maybe<Scalars['String']>;
   start?: Maybe<Scalars['String']>;
   startsAfter?: Maybe<Scalars['String']>;

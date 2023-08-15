@@ -46,6 +46,7 @@ const typeDefs = gql`
       page: Int
       pageSize: Int
       publisher: ID
+      publisherAncestor: ID
       sort: String
       start: String
       startsAfter: String

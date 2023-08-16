@@ -128,7 +128,7 @@ export type EventDetails = {
   dataSource?: Maybe<Scalars['String']>;
   publisher?: Maybe<Scalars['ID']>;
   subEvents: Array<InternalIdObject>;
-  images: Array<Image>;
+  images: Array<EventImage>;
   inLanguage: Array<InLanguage>;
   audience: Array<Audience>;
   createdTime?: Maybe<Scalars['String']>;
@@ -175,8 +175,8 @@ export type ExternalLink = {
   language?: Maybe<Scalars['String']>;
 };
 
-export type Image = {
-  __typename?: 'Image';
+export type EventImage = {
+  __typename?: 'EventImage';
   id?: Maybe<Scalars['ID']>;
   license?: Maybe<Scalars['String']>;
   createdTime?: Maybe<Scalars['String']>;
@@ -217,7 +217,7 @@ export type Keyword = {
   aggregate?: Maybe<Scalars['Boolean']>;
   deprecated?: Maybe<Scalars['Boolean']>;
   nEvents?: Maybe<Scalars['Int']>;
-  image?: Maybe<Image>;
+  image?: Maybe<EventImage>;
   dataSource?: Maybe<Scalars['String']>;
   publisher?: Maybe<Scalars['ID']>;
   name?: Maybe<LocalizedObject>;
@@ -360,7 +360,7 @@ export type Place = {
   addressCountry?: Maybe<Scalars['String']>;
   deleted?: Maybe<Scalars['Boolean']>;
   nEvents?: Maybe<Scalars['Int']>;
-  image?: Maybe<Image>;
+  image?: Maybe<EventImage>;
   dataSource?: Maybe<Scalars['String']>;
   publisher?: Maybe<Scalars['ID']>;
   parent?: Maybe<Scalars['ID']>;
@@ -682,7 +682,7 @@ export type ResolversTypes = {
   EventListResponse: ResolverTypeWrapper<EventListResponse>;
   EventTypeId: EventTypeId;
   ExternalLink: ResolverTypeWrapper<ExternalLink>;
-  Image: ResolverTypeWrapper<Image>;
+  EventImage: ResolverTypeWrapper<EventImage>;
   InLanguage: ResolverTypeWrapper<InLanguage>;
   InternalIdObject: ResolverTypeWrapper<InternalIdObject>;
   Keyword: ResolverTypeWrapper<Keyword>;
@@ -718,7 +718,7 @@ export type ResolversParentTypes = {
   EventDetails: EventDetails;
   EventListResponse: EventListResponse;
   ExternalLink: ExternalLink;
-  Image: Image;
+  EventImage: EventImage;
   InLanguage: InLanguage;
   InternalIdObject: InternalIdObject;
   Keyword: Keyword;
@@ -907,7 +907,11 @@ export type EventDetailsResolvers<
     ParentType,
     ContextType
   >;
-  images?: Resolver<Array<ResolversTypes['Image']>, ParentType, ContextType>;
+  images?: Resolver<
+    Array<ResolversTypes['EventImage']>,
+    ParentType,
+    ContextType
+  >;
   inLanguage?: Resolver<
     Array<ResolversTypes['InLanguage']>,
     ParentType,
@@ -1056,9 +1060,9 @@ export type ExternalLinkResolvers<
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ImageResolvers<
+export type EventImageResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Image'] = ResolversParentTypes['Image']
+  ParentType extends ResolversParentTypes['EventImage'] = ResolversParentTypes['EventImage']
 > = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   license?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1185,7 +1189,11 @@ export type KeywordResolvers<
     ContextType
   >;
   nEvents?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  image?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType>;
+  image?: Resolver<
+    Maybe<ResolversTypes['EventImage']>,
+    ParentType,
+    ContextType
+  >;
   dataSource?: Resolver<
     Maybe<ResolversTypes['String']>,
     ParentType,
@@ -1453,7 +1461,11 @@ export type PlaceResolvers<
   >;
   deleted?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   nEvents?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  image?: Resolver<Maybe<ResolversTypes['Image']>, ParentType, ContextType>;
+  image?: Resolver<
+    Maybe<ResolversTypes['EventImage']>,
+    ParentType,
+    ContextType
+  >;
   dataSource?: Resolver<
     Maybe<ResolversTypes['String']>,
     ParentType,
@@ -1698,7 +1710,7 @@ export type Resolvers<ContextType = any> = {
   EventDetails?: EventDetailsResolvers<ContextType>;
   EventListResponse?: EventListResponseResolvers<ContextType>;
   ExternalLink?: ExternalLinkResolvers<ContextType>;
-  Image?: ImageResolvers<ContextType>;
+  EventImage?: EventImageResolvers<ContextType>;
   InLanguage?: InLanguageResolvers<ContextType>;
   InternalIdObject?: InternalIdObjectResolvers<ContextType>;
   Keyword?: KeywordResolvers<ContextType>;

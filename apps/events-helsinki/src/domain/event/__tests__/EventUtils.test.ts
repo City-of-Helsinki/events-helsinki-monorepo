@@ -16,7 +16,7 @@ import map from 'lodash/map';
 
 import {
   fakeEvent,
-  fakeImage,
+  fakeEventImage,
   fakeKeyword,
   fakeKeywords,
   fakePlace,
@@ -71,7 +71,7 @@ describe('getEventSomeImageUrl function', () => {
   it('should return default placeholder image if image is not defined', () => {
     const event = fakeEvent({
       id: 'helsinki:221',
-      images: [fakeImage({ url: '' })],
+      images: [fakeEventImage({ url: '' })],
     }) as EventFieldsFragment;
     expect(getEventSomeImageUrl(event)).toBe(
       '/images/activities_SoMe-share.jpg'

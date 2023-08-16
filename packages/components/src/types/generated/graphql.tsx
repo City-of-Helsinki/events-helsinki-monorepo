@@ -2892,7 +2892,7 @@ export type EventDetails = {
   eventStatus?: Maybe<Scalars['String']['output']>;
   externalLinks: Array<ExternalLink>;
   id: Scalars['ID']['output'];
-  images: Array<Image>;
+  images: Array<EventImage>;
   inLanguage: Array<InLanguage>;
   infoUrl?: Maybe<LocalizedObject>;
   internalContext?: Maybe<Scalars['String']['output']>;
@@ -2916,6 +2916,23 @@ export type EventDetails = {
   superEvent?: Maybe<InternalIdObject>;
   superEventType?: Maybe<Scalars['String']['output']>;
   typeId?: Maybe<EventTypeId>;
+};
+
+export type EventImage = {
+  __typename?: 'EventImage';
+  createdTime?: Maybe<Scalars['String']['output']>;
+  cropping?: Maybe<Scalars['String']['output']>;
+  dataSource?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  internalContext?: Maybe<Scalars['String']['output']>;
+  internalId: Scalars['String']['output'];
+  internalType?: Maybe<Scalars['String']['output']>;
+  lastModifiedTime?: Maybe<Scalars['String']['output']>;
+  license?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  photographerName?: Maybe<Scalars['String']['output']>;
+  publisher?: Maybe<Scalars['String']['output']>;
+  url: Scalars['String']['output'];
 };
 
 export type EventListResponse = {
@@ -3059,6 +3076,25 @@ export type ExternalLink = {
   language?: Maybe<Scalars['String']['output']>;
   link?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+};
+
+/** Gallery Image */
+export type GalleryImage = {
+  __typename?: 'GalleryImage';
+  /** Caption of the image */
+  caption?: Maybe<Scalars['String']['output']>;
+  /** Description of the image */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The url of the large image */
+  large?: Maybe<Scalars['String']['output']>;
+  /** The url of the medium image */
+  medium?: Maybe<Scalars['String']['output']>;
+  /** The url of the medium large image */
+  medium_large?: Maybe<Scalars['String']['output']>;
+  /** The url of the thumbnail image */
+  thumbnail?: Maybe<Scalars['String']['output']>;
+  /** Title of the image */
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 /** The general setting type */
@@ -3579,21 +3615,23 @@ export enum IdentificationStrength {
   Unidentified = 'UNIDENTIFIED',
 }
 
+/** Image */
 export type Image = {
   __typename?: 'Image';
-  createdTime?: Maybe<Scalars['String']['output']>;
-  cropping?: Maybe<Scalars['String']['output']>;
-  dataSource?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  internalContext?: Maybe<Scalars['String']['output']>;
-  internalId: Scalars['String']['output'];
-  internalType?: Maybe<Scalars['String']['output']>;
-  lastModifiedTime?: Maybe<Scalars['String']['output']>;
-  license?: Maybe<Scalars['String']['output']>;
-  name: Scalars['String']['output'];
-  photographerName?: Maybe<Scalars['String']['output']>;
-  publisher?: Maybe<Scalars['String']['output']>;
-  url: Scalars['String']['output'];
+  /** Caption of the image */
+  caption?: Maybe<Scalars['String']['output']>;
+  /** Description of the image */
+  description?: Maybe<Scalars['String']['output']>;
+  /** The url of the large image */
+  large?: Maybe<Scalars['String']['output']>;
+  /** The url of the medium image */
+  medium?: Maybe<Scalars['String']['output']>;
+  /** The url of the medium large image */
+  medium_large?: Maybe<Scalars['String']['output']>;
+  /** The url of the thumbnail image */
+  thumbnail?: Maybe<Scalars['String']['output']>;
+  /** Title of the image */
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 export type InLanguage = {
@@ -3620,7 +3658,7 @@ export type Keyword = {
   deprecated?: Maybe<Scalars['Boolean']['output']>;
   hasUpcomingEvents?: Maybe<Scalars['Boolean']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  image?: Maybe<Image>;
+  image?: Maybe<EventImage>;
   internalContext?: Maybe<Scalars['String']['output']>;
   internalId: Scalars['String']['output'];
   internalType?: Maybe<Scalars['String']['output']>;
@@ -4201,6 +4239,23 @@ export type LayoutArticlesCarousel = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
+/** Layout: LayoutCard */
+export type LayoutCard = {
+  __typename?: 'LayoutCard';
+  /** Alignment */
+  alignment?: Maybe<Scalars['String']['output']>;
+  /** Background Color */
+  backgroundColor?: Maybe<Scalars['String']['output']>;
+  /** Description */
+  description?: Maybe<Scalars['String']['output']>;
+  /** Image */
+  image?: Maybe<Image>;
+  /** Link */
+  link?: Maybe<Link>;
+  /** Title */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 /** Layout: LayoutCards */
 export type LayoutCards = {
   __typename?: 'LayoutCards';
@@ -4235,6 +4290,26 @@ export type LayoutContent = {
   content?: Maybe<Scalars['String']['output']>;
   /** Title */
   title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Layout: LayoutImage */
+export type LayoutImage = {
+  __typename?: 'LayoutImage';
+  /** Border */
+  border?: Maybe<Scalars['Boolean']['output']>;
+  /** Image */
+  image?: Maybe<Image>;
+  /** Photographer name (overwrite) */
+  photographer_name?: Maybe<Scalars['String']['output']>;
+  /** Lightbox */
+  show_on_lightbox?: Maybe<Scalars['Boolean']['output']>;
+};
+
+/** Layout: LayoutImageGallery */
+export type LayoutImageGallery = {
+  __typename?: 'LayoutImageGallery';
+  /** Gallery */
+  gallery?: Maybe<Array<Maybe<GalleryImage>>>;
 };
 
 /** Layout: LayoutLinkList */
@@ -4282,6 +4357,32 @@ export type LayoutPagesCarousel = {
   pages?: Maybe<Array<Maybe<Page>>>;
   /** Title */
   title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Layout: LayoutSocialMediaFeed */
+export type LayoutSocialMediaFeed = {
+  __typename?: 'LayoutSocialMediaFeed';
+  /** Anchor */
+  anchor?: Maybe<Scalars['String']['output']>;
+  /** Script */
+  script?: Maybe<Scalars['String']['output']>;
+  /** Title */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Layout: LayoutSteps */
+export type LayoutSteps = {
+  __typename?: 'LayoutSteps';
+  /** Color */
+  color?: Maybe<Scalars['String']['output']>;
+  /** Description */
+  description?: Maybe<Scalars['String']['output']>;
+  /** Steps */
+  steps?: Maybe<Array<Maybe<Step>>>;
+  /** Title */
+  title?: Maybe<Scalars['String']['output']>;
+  /** Type */
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 export type LegalEntity = Organisation | Person;
@@ -5939,12 +6040,17 @@ export type PageModulesUnionType =
   | LayoutArticleHighlights
   | LayoutArticles
   | LayoutArticlesCarousel
+  | LayoutCard
   | LayoutCards
   | LayoutCollection
   | LayoutContact
   | LayoutContent
+  | LayoutImage
+  | LayoutImageGallery
   | LayoutPages
   | LayoutPagesCarousel
+  | LayoutSocialMediaFeed
+  | LayoutSteps
   | LocationsSelected
   | LocationsSelectedCarousel;
 
@@ -6116,7 +6222,7 @@ export type Place = {
   email?: Maybe<Scalars['String']['output']>;
   hasUpcomingEvents?: Maybe<Scalars['Boolean']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  image?: Maybe<Image>;
+  image?: Maybe<EventImage>;
   infoUrl?: Maybe<LocalizedObject>;
   internalContext?: Maybe<Scalars['String']['output']>;
   internalId: Scalars['String']['output'];
@@ -6746,12 +6852,17 @@ export type PostModulesUnionType =
   | LayoutArticleHighlights
   | LayoutArticles
   | LayoutArticlesCarousel
+  | LayoutCard
   | LayoutCards
   | LayoutCollection
   | LayoutContact
   | LayoutContent
+  | LayoutImage
+  | LayoutImageGallery
   | LayoutPages
   | LayoutPagesCarousel
+  | LayoutSocialMediaFeed
+  | LayoutSteps
   | LocationsSelected
   | LocationsSelectedCarousel;
 
@@ -10112,6 +10223,15 @@ export type StaticPage = {
   urlPath?: Maybe<Scalars['String']['output']>;
 };
 
+/** Step field */
+export type Step = {
+  __typename?: 'Step';
+  /** The content of the step */
+  content?: Maybe<Scalars['String']['output']>;
+  /** The title of the step */
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 export type Subscription = {
   __typename?: 'Subscription';
   _empty?: Maybe<Scalars['String']['output']>;
@@ -12241,7 +12361,7 @@ export enum UsersConnectionSearchColumnEnum {
   Login = 'LOGIN',
   /** A URL-friendly name for the user. The default is the user's username. */
   Nicename = 'NICENAME',
-  /** The URL of the users website. */
+  /** The URL of the user's website. */
   Url = 'URL',
 }
 
@@ -12370,7 +12490,7 @@ export type EventFieldsFragment = {
     link?: string | null;
   }>;
   images: Array<{
-    __typename?: 'Image';
+    __typename?: 'EventImage';
     id?: string | null;
     name: string;
     url: string;
@@ -12557,7 +12677,7 @@ export type EventDetailsQuery = {
       link?: string | null;
     }>;
     images: Array<{
-      __typename?: 'Image';
+      __typename?: 'EventImage';
       id?: string | null;
       name: string;
       url: string;
@@ -12824,7 +12944,7 @@ export type EventListQuery = {
         link?: string | null;
       }>;
       images: Array<{
-        __typename?: 'Image';
+        __typename?: 'EventImage';
         id?: string | null;
         name: string;
         url: string;
@@ -13023,7 +13143,7 @@ export type EventsByIdsQuery = {
         link?: string | null;
       }>;
       images: Array<{
-        __typename?: 'Image';
+        __typename?: 'EventImage';
         id?: string | null;
         name: string;
         url: string;

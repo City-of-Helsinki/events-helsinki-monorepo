@@ -8,7 +8,7 @@ import type {
   EventFields,
   EventListResponse,
   ExternalLink,
-  Image,
+  EventImage,
   InLanguage,
   Keyword,
   KeywordListResponse,
@@ -57,7 +57,7 @@ export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
       provider: fakeLocalizedObject(),
       shortDescription: fakeLocalizedObject(),
       description: fakeLocalizedObject(),
-      images: [fakeImage()],
+      images: [fakeEventImage()],
       infoUrl: fakeLocalizedObject(),
       inLanguage: [fakeInLanguage()],
       audience: [],
@@ -125,7 +125,7 @@ export const fakeExternalLink = (
     overrides
   );
 
-export const fakeImage = (overrides?: Partial<Image>): Image =>
+export const fakeEventImage = (overrides?: Partial<EventImage>): EventImage =>
   merge(
     {
       id: faker.string.uuid(),
@@ -135,7 +135,7 @@ export const fakeImage = (overrides?: Partial<Image>): Image =>
       url: 'https://api.hel.fi/linkedevents-test/media/images/test.png',
       cropping: '59,0,503,444',
       photographerName: faker.person.firstName(),
-      __typename: 'Image',
+      __typename: 'EventImage',
     },
     overrides
   );

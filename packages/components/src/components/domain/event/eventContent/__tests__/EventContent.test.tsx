@@ -2,7 +2,7 @@ import React from 'react';
 
 import { configure, render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
-import { fakeEvent, fakeImage } from '@/test-utils/mockDataUtils';
+import { fakeEvent, fakeEventImage } from '@/test-utils/mockDataUtils';
 import type { EventFieldsFragment } from '../../../../../types';
 import EventContent from '../EventContent';
 
@@ -32,7 +32,7 @@ const event = fakeEvent({
     name: { fi: locationName },
     streetAddress: { fi: streetAddress },
   },
-  images: [fakeImage({ photographerName })],
+  images: [fakeEventImage({ photographerName })],
 }) as EventFieldsFragment;
 
 it('should render event content fields', async () => {

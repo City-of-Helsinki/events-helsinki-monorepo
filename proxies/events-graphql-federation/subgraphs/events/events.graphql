@@ -169,7 +169,7 @@ type EventDetails {
   dataSource: String
   publisher: ID
   subEvents: [InternalIdObject!]!
-  images: [Image!]!
+  images: [EventImage!]!
   inLanguage: [InLanguage!]!
   audience: [Audience!]!
   createdTime: String
@@ -231,7 +231,7 @@ type Offer {
   infoUrl: LocalizedObject
 }
 
-type Image {
+type EventImage {
   id: ID
   license: String
   createdTime: String
@@ -263,7 +263,7 @@ type Keyword
   aggregate: Boolean
   deprecated: Boolean
   nEvents: Int
-  image: Image
+  image: EventImage
   dataSource: String
   publisher: ID
   name: LocalizedObject
@@ -321,7 +321,7 @@ type Place {
   addressCountry: String
   deleted: Boolean
   nEvents: Int
-  image: Image
+  image: EventImage
   dataSource: String
   publisher: ID
   parent: ID

@@ -35,7 +35,7 @@ const typeDefs = gql`
     addressCountry: String
     deleted: Boolean
     nEvents: Int
-    image: Image
+    image: EventImage
     dataSource: String
     publisher: ID
     parent: ID

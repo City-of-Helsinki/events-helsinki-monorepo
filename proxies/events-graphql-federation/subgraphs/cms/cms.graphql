@@ -11,77 +11,74 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToCategoryConnectionWhereArgs
   ): RootQueryToCategoryConnection
   "A 0bject"
   category(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: CategoryIdType
   ): Category
   "An object of the collection Type. Collections"
   collection(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
-    idType: CollectionIdType
+    idType: CollectionIdType,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): Collection
   "A collection object"
   collectionBy(
     "Get the object by its global ID"
-    id: ID
+    id: ID,
     "Get the collection by its database ID"
-    collectionId: Int
+    collectionId: Int,
     "Get the collection by its uri"
-    uri: String
+    uri: String,
     "Get the collection by its slug (only available for non-hierarchical types)"
     slug: String
-  ): Collection
-    @deprecated(
-      reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)"
-    )
+  ): Collection @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
   "Connection between the RootQuery type and the collection type"
   collections(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToCollectionConnectionWhereArgs
   ): RootQueryToCollectionConnection
   "Returns a Comment"
   comment(
     "Unique identifier for the comment node."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch a comment by. Default is Global ID"
     idType: CommentNodeIdTypeEnum
   ): Comment
@@ -90,76 +87,73 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToCommentConnectionWhereArgs
   ): RootQueryToCommentConnection
   "An object of the contact Type. Contacts"
   contact(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
-    idType: ContactIdType
+    idType: ContactIdType,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): Contact
   "A contact object"
   contactBy(
     "Get the object by its global ID"
-    id: ID
+    id: ID,
     "Get the contact by its database ID"
-    contactId: Int
+    contactId: Int,
     "Get the contact by its uri"
-    uri: String
+    uri: String,
     "Get the contact by its slug (only available for non-hierarchical types)"
     slug: String
-  ): Contact
-    @deprecated(
-      reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)"
-    )
+  ): Contact @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
   "Connection between the RootQuery type and the contact type"
   contacts(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToContactConnectionWhereArgs
   ): RootQueryToContactConnection
   "A node used to manage content"
   contentNode(
     "Unique identifier for the content node."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch a content node by. Default is Global ID"
-    idType: ContentNodeIdTypeEnum
+    idType: ContentNodeIdTypeEnum,
     """
     The content type the node is used for. Required when idType is set to "name" or "slug"
     """
-    contentType: ContentTypeEnum
+    contentType: ContentTypeEnum,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): ContentNode
@@ -168,26 +162,26 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToContentNodeConnectionWhereArgs
   ): RootQueryToContentNodeConnection
   "Fetch a Content Type node by unique Identifier"
   contentType(
     "Unique Identifier for the Content Type node."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch a content type by. Default is Global ID"
     idType: ContentTypeIdTypeEnum
   ): ContentType
@@ -196,15 +190,15 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -221,44 +215,41 @@ type RootQuery {
   "An object of the landingPage Type. Landing Pages"
   landingPage(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
-    idType: LandingPageIdType
+    idType: LandingPageIdType,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): LandingPage
   "A landingPage object"
   landingPageBy(
     "Get the object by its global ID"
-    id: ID
+    id: ID,
     "Get the landingPage by its database ID"
-    landingPageId: Int
+    landingPageId: Int,
     "Get the landingPage by its uri"
-    uri: String
+    uri: String,
     "Get the landingPage by its slug (only available for non-hierarchical types)"
     slug: String
-  ): LandingPage
-    @deprecated(
-      reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)"
-    )
+  ): LandingPage @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
   "Connection between the RootQuery type and the landingPage type"
   landingPages(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToLandingPageConnectionWhereArgs
   ): RootQueryToLandingPageConnection
@@ -267,58 +258,55 @@ type RootQuery {
   "An object of the mediaItem Type. "
   mediaItem(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
-    idType: MediaItemIdType
+    idType: MediaItemIdType,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): MediaItem
   "A mediaItem object"
   mediaItemBy(
     "Get the object by its global ID"
-    id: ID
+    id: ID,
     "Get the mediaItem by its database ID"
-    mediaItemId: Int
+    mediaItemId: Int,
     "Get the mediaItem by its uri"
-    uri: String
+    uri: String,
     "Get the mediaItem by its slug (only available for non-hierarchical types)"
     slug: String
-  ): MediaItem
-    @deprecated(
-      reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)"
-    )
+  ): MediaItem @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
   "Connection between the RootQuery type and the mediaItem type"
   mediaItems(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToMediaItemConnectionWhereArgs
   ): RootQueryToMediaItemConnection
   "A WordPress navigation menu"
   menu(
     "The globally unique identifier of the menu."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch a menu by. Default is Global ID"
     idType: MenuNodeIdTypeEnum
   ): Menu
   "A WordPress navigation menu item"
   menuItem(
     "The globally unique identifier of the menu item."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch a menu item by. Default is Global ID"
     idType: MenuItemNodeIdTypeEnum
   ): MenuItem
@@ -327,19 +315,19 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToMenuItemConnectionWhereArgs
   ): RootQueryToMenuItemConnection
@@ -348,24 +336,27 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToMenuConnectionWhereArgs
   ): RootQueryToMenuConnection
   "Fetches an object given its ID"
-  node("The unique identifier of the node" id: ID): Node
+  node(
+    "The unique identifier of the node"
+    id: ID
+  ): Node
   "Fetches an object given its Unique Resource Identifier"
   nodeByUri(
     """
@@ -378,24 +369,21 @@ type RootQuery {
   "An object of the page Type. "
   page(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
-    idType: PageIdType
+    idType: PageIdType,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): Page
   "A page object"
   pageBy(
     "Get the object by its global ID"
-    id: ID
+    id: ID,
     "Get the page by its database ID"
-    pageId: Int
+    pageId: Int,
     "Get the page by its uri"
     uri: String
-  ): Page
-    @deprecated(
-      reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)"
-    )
+  ): Page @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
   "Returns ID of page that uses the given template"
   pageByTemplate(language: String, template: TemplateEnum): Page
   "Connection between the RootQuery type and the page type"
@@ -403,72 +391,72 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToPageConnectionWhereArgs
   ): RootQueryToPageConnection
   "A WordPress plugin"
-  plugin("The globally unique identifier of the plugin." id: ID!): Plugin
+  plugin(
+    "The globally unique identifier of the plugin."
+    id: ID!
+  ): Plugin
   "Connection between the RootQuery type and the Plugin type"
   plugins(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToPluginConnectionWhereArgs
   ): RootQueryToPluginConnection
   "An object of the post Type. "
   post(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
-    idType: PostIdType
+    idType: PostIdType,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): Post
   "A post object"
   postBy(
     "Get the object by its global ID"
-    id: ID
+    id: ID,
     "Get the post by its database ID"
-    postId: Int
+    postId: Int,
     "Get the post by its uri"
-    uri: String
+    uri: String,
     "Get the post by its slug (only available for non-hierarchical types)"
     slug: String
-  ): Post
-    @deprecated(
-      reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)"
-    )
+  ): Post @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
   "A 0bject"
   postFormat(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: PostFormatIdType
   ): PostFormat
@@ -477,19 +465,19 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToPostFormatConnectionWhereArgs
   ): RootQueryToPostFormatConnection
@@ -498,19 +486,19 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToPostConnectionWhereArgs
   ): RootQueryToPostConnection
@@ -521,15 +509,15 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -540,15 +528,15 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -557,44 +545,41 @@ type RootQuery {
   "An object of the release Type. Releases"
   release(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
-    idType: ReleaseIdType
+    idType: ReleaseIdType,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): Release
   "A release object"
   releaseBy(
     "Get the object by its global ID"
-    id: ID
+    id: ID,
     "Get the release by its database ID"
-    releaseId: Int
+    releaseId: Int,
     "Get the release by its uri"
-    uri: String
+    uri: String,
     "Get the release by its slug (only available for non-hierarchical types)"
     slug: String
-  ): Release
-    @deprecated(
-      reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)"
-    )
+  ): Release @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
   "Connection between the RootQuery type and the release type"
   releases(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToReleaseConnectionWhereArgs
   ): RootQueryToReleaseConnection
@@ -603,19 +588,19 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToRevisionsConnectionWhereArgs
   ): RootQueryToRevisionsConnection
@@ -626,7 +611,7 @@ type RootQuery {
   "A 0bject"
   tag(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: TagIdType
   ): Tag
@@ -635,19 +620,19 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToTagConnectionWhereArgs
   ): RootQueryToTagConnection
@@ -656,15 +641,15 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -673,16 +658,16 @@ type RootQuery {
   "Fetch a Taxonomy node by unique Identifier"
   taxonomy(
     "Unique Identifier for the Taxonomy node."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch a taxonomy by. Default is Global ID"
     idType: TaxonomyIdTypeEnum
   ): Taxonomy
   "A node in a taxonomy used to group and relate content nodes"
   termNode(
     "Unique identifier for the term node."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch a term node by. Default is Global ID"
-    idType: TermNodeIdTypeEnum
+    idType: TermNodeIdTypeEnum,
     """
     The taxonomy of the tern node. Required when idType is set to "name" or "slug"
     """
@@ -693,38 +678,41 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToTermNodeConnectionWhereArgs
   ): RootQueryToTermNodeConnection
   "A Theme object"
-  theme("The globally unique identifier of the theme." id: ID!): Theme
+  theme(
+    "The globally unique identifier of the theme."
+    id: ID!
+  ): Theme
   "Connection between the RootQuery type and the Theme type"
   themes(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -735,51 +723,48 @@ type RootQuery {
   "An object of the translation Type. Translations"
   translation(
     "The globally unique identifier of the object."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
-    idType: TranslationIdType
+    idType: TranslationIdType,
     "Whether to return the node as a preview instance"
     asPreview: Boolean
   ): Translation
   "A translation object"
   translationBy(
     "Get the object by its global ID"
-    id: ID
+    id: ID,
     "Get the translation by its database ID"
-    translationId: Int
+    translationId: Int,
     "Get the translation by its uri"
-    uri: String
+    uri: String,
     "Get the translation by its slug (only available for non-hierarchical types)"
     slug: String
-  ): Translation
-    @deprecated(
-      reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)"
-    )
+  ): Translation @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
   "Connection between the RootQuery type and the translation type"
   translations(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToTranslationConnectionWhereArgs
   ): RootQueryToTranslationConnection
   "Returns a user"
   user(
     "The globally unique identifier of the user."
-    id: ID!
+    id: ID!,
     "Type of unique identifier to fetch a user by. Default is Global ID"
     idType: UserNodeIdTypeEnum
   ): User
@@ -793,15 +778,15 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -812,19 +797,19 @@ type RootQuery {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: RootQueryToUserConnectionWhereArgs
   ): RootQueryToUserConnection
@@ -884,15 +869,15 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -905,19 +890,19 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: CategoryToCategoryConnectionWhereArgs
   ): CategoryToCategoryConnection
@@ -926,19 +911,19 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: CategoryToContentNodeConnectionWhereArgs
   ): CategoryToContentNodeConnection
@@ -953,15 +938,15 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -972,15 +957,15 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -1011,19 +996,19 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: CategoryToPostConnectionWhereArgs
   ): CategoryToPostConnection
@@ -1178,15 +1163,15 @@ type ContentType implements Node & UniformResourceIdentifiable {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -1197,19 +1182,19 @@ type ContentType implements Node & UniformResourceIdentifiable {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: ContentTypeToContentNodeConnectionWhereArgs
   ): ContentTypeToContentNodeConnection
@@ -1288,15 +1273,15 @@ type Taxonomy implements Node {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -1447,9 +1432,9 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   "Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument."
   avatar(
     "The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels."
-    size: Int = 96
+    size: Int = 96,
     "Whether to always show the default image, never the Gravatar. Default false"
-    forceDefault: Boolean
+    forceDefault: Boolean,
     "The rating level of the avatar."
     rating: AvatarRatingEnum
   ): Avatar
@@ -1462,19 +1447,19 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: UserToCommentConnectionWhereArgs
   ): UserToCommentConnection
@@ -1489,15 +1474,15 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -1508,15 +1493,15 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -1543,19 +1528,19 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: UserToMediaItemConnectionWhereArgs
   ): UserToMediaItemConnection
@@ -1570,19 +1555,19 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: UserToPageConnectionWhereArgs
   ): UserToPageConnection
@@ -1591,19 +1576,19 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: UserToPostConnectionWhereArgs
   ): UserToPostConnection
@@ -1614,19 +1599,19 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: UserToRevisionsConnectionWhereArgs
   ): UserToRevisionsConnection
@@ -1635,15 +1620,15 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -1699,8 +1684,7 @@ type Comment implements Node & DatabaseIdentifier {
   "User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL."
   agent: String
   "The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL."
-  approved: Boolean
-    @deprecated(reason: "Deprecated in favor of the `status` field")
+  approved: Boolean @deprecated(reason: "Deprecated in favor of the `status` field")
   "The author of the comment"
   author: CommentToCommenterConnectionEdge
   "IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL."
@@ -1740,19 +1724,19 @@ type Comment implements Node & DatabaseIdentifier {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: CommentToCommentConnectionWhereArgs
   ): CommentToCommentConnection
@@ -1855,19 +1839,19 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs
   ): HierarchicalContentNodeToContentNodeAncestorsConnection
@@ -1887,19 +1871,19 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs
   ): HierarchicalContentNodeToContentNodeChildrenConnection
@@ -1929,15 +1913,15 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -1948,22 +1932,25 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
     before: String
   ): ContentNodeToEnqueuedStylesheetConnection
   "The filesize in bytes of the resource"
-  fileSize("Size of the MediaItem to return" size: MediaItemSizeEnum): Int
+  fileSize(
+    "Size of the MediaItem to return"
+    size: MediaItemSizeEnum
+  ): Int
   "The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table."
   guid: String
   "The globally unique identifier of the attachment object."
@@ -1985,8 +1972,7 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   "Details about the mediaItem"
   mediaDetails: MediaDetails
   "The id field matches the WP_Post-&gt;ID field."
-  mediaItemId: Int!
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  mediaItemId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
   "Url of the mediaItem"
   mediaItemUrl: String
   "Type of resource"
@@ -2019,7 +2005,10 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   "The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table."
   slug: String
   "Url of the mediaItem"
-  sourceUrl("Size of the MediaItem to return" size: MediaItemSizeEnum): String
+  sourceUrl(
+    "Size of the MediaItem to return"
+    size: MediaItemSizeEnum
+  ): String
   "The srcset attribute specifies the URL of the image to use in different situations. It is a comma separated string of urls and their widths."
   srcSet(
     "Size of the MediaItem to calculate srcSet with"
@@ -2030,7 +2019,10 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   "The template assigned to a node of content"
   template: ContentTemplate
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
   "Get specific translation version of this object"
   translation(language: LanguageCodeEnum!): MediaItem
   "List all translated versions of this post"
@@ -2149,7 +2141,7 @@ type MediaDetails {
   "The available sizes of the mediaItem"
   sizes(
     "The sizes to exclude. Will take precedence over `include`."
-    exclude: [MediaItemSizeEnum]
+    exclude: [MediaItemSizeEnum],
     "The sizes to include. Can be overridden by `exclude`."
     include: [MediaItemSizeEnum]
   ): [MediaSize]
@@ -2258,19 +2250,19 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs
   ): HierarchicalContentNodeToContentNodeAncestorsConnection
@@ -2285,19 +2277,19 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs
   ): HierarchicalContentNodeToContentNodeChildrenConnection
@@ -2327,15 +2319,15 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -2346,15 +2338,15 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -2407,8 +2399,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   "List of modules"
   modules: [PageModulesUnionType]
   "The id field matches the WP_Post-&gt;ID field."
-  pageId: Int!
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  pageId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
   "The parent of the node. The parent object can be of various types"
   parent: HierarchicalContentNodeToParentContentNodeConnectionEdge
   "Database id of the parent node"
@@ -2428,19 +2419,19 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: PageToRevisionConnectionWhereArgs
   ): PageToRevisionConnection
@@ -2457,7 +2448,10 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   "The template assigned to a node of content"
   template: ContentTemplate
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
   "Get specific translation version of this object"
   translation(language: LanguageCodeEnum!): Page
   "List all translated versions of this post"
@@ -2515,6 +2509,7 @@ type EventSearch {
   Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
                   hakutulosten osoite -link and search params of the module, for example:
                   https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
+
   """
   showAllLink: String
   "Show all -link"
@@ -2555,6 +2550,7 @@ type EventSearchCarousel {
   Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
                                       hakutulosten osoite -link and search params of the module, for example:
                                       https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
+
   """
   showAllLink: String
   "Show all -link"
@@ -2615,8 +2611,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   "Background Color"
   backgroundColor: String
   "The id field matches the WP_Post-&gt;ID field."
-  collectionId: Int!
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  collectionId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
   "Connection between the ContentNode type and the ContentType type"
   contentType: ContentNodeToContentTypeConnectionEdge
   "The name of the Content Type the node belongs to"
@@ -2640,15 +2635,15 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -2659,15 +2654,15 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -2716,19 +2711,19 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: CollectionToRevisionConnectionWhereArgs
   ): CollectionToRevisionConnection
@@ -2743,7 +2738,10 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   "The template assigned to the node"
   template: ContentTemplate
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
   "Get specific translation version of this object"
   translation(language: LanguageCodeEnum!): Collection
   "List all translated versions of this post"
@@ -2786,8 +2784,7 @@ type LayoutContact {
 "The contact type"
 type Contact implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithFeaturedImage & NodeWithRevisions {
   "The id field matches the WP_Post-&gt;ID field."
-  contactId: Int!
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  contactId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
   "Connection between the ContentNode type and the ContentType type"
   contentType: ContentNodeToContentTypeConnectionEdge
   "The name of the Content Type the node belongs to"
@@ -2811,15 +2808,15 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -2830,15 +2827,15 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -2893,19 +2890,19 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: ContactToRevisionConnectionWhereArgs
   ): ContactToRevisionConnection
@@ -2918,7 +2915,10 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   "The template assigned to the node"
   template: ContentTemplate
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
   "Get specific translation version of this object"
   translation(language: LanguageCodeEnum!): Contact
   "List all translated versions of this post"
@@ -2981,19 +2981,19 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: PostToCategoryConnectionWhereArgs
   ): PostToCategoryConnection
@@ -3023,15 +3023,15 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -3042,15 +3042,15 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -3101,25 +3101,24 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: PostToPostFormatConnectionWhereArgs
   ): PostToPostFormatConnection
   "The id field matches the WP_Post-&gt;ID field."
-  postId: Int!
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  postId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
   "Connection between the Post type and the post type"
   preview: PostToPreviewConnectionEdge
   "The database id of the preview node"
@@ -3133,19 +3132,19 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: PostToRevisionConnectionWhereArgs
   ): PostToRevisionConnection
@@ -3162,19 +3161,19 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: PostToTagConnectionWhereArgs
   ): PostToTagConnection
@@ -3185,24 +3184,27 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: PostToTermNodeConnectionWhereArgs
   ): PostToTermNodeConnection
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
   "Get specific translation version of this object"
   translation(language: LanguageCodeEnum!): Post
   "List all translated versions of this post"
@@ -3321,6 +3323,100 @@ type Card {
   "Title"
   title: String
 }
+"Layout: LayoutImage"
+type LayoutImage {
+  "Border"
+  border: Boolean
+  "Image"
+  image: Image
+  "Photographer name (overwrite)"
+  photographer_name: String
+  "Lightbox"
+  show_on_lightbox: Boolean
+}
+"Image"
+type Image {
+  "Caption of the image"
+  caption: String
+  "Description of the image"
+  description: String
+  "The url of the large image"
+  large: String
+  "The url of the medium image"
+  medium: String
+  "The url of the medium large image"
+  medium_large: String
+  "The url of the thumbnail image"
+  thumbnail: String
+  "Title of the image"
+  title: String
+}
+"Layout: LayoutCard"
+type LayoutCard {
+  "Alignment"
+  alignment: String
+  "Background Color"
+  backgroundColor: String
+  "Description"
+  description: String
+  "Image"
+  image: Image
+  "Link"
+  link: Link
+  "Title"
+  title: String
+}
+"Layout: LayoutImageGallery"
+type LayoutImageGallery {
+  "Gallery"
+  gallery: [GalleryImage]
+}
+"Gallery Image"
+type GalleryImage {
+  "Caption of the image"
+  caption: String
+  "Description of the image"
+  description: String
+  "The url of the large image"
+  large: String
+  "The url of the medium image"
+  medium: String
+  "The url of the medium large image"
+  medium_large: String
+  "The url of the thumbnail image"
+  thumbnail: String
+  "Title of the image"
+  title: String
+}
+"Layout: LayoutSteps"
+type LayoutSteps {
+  "Color"
+  color: String
+  "Description"
+  description: String
+  "Steps"
+  steps: [Step]
+  "Title"
+  title: String
+  "Type"
+  type: String
+}
+"Step field"
+type Step {
+  "The content of the step"
+  content: String
+  "The title of the step"
+  title: String
+}
+"Layout: LayoutSocialMediaFeed"
+type LayoutSocialMediaFeed {
+  "Anchor"
+  anchor: String
+  "Script"
+  script: String
+  "Title"
+  title: String
+}
 "Connection between the Post type and the postFormat type"
 type PostToPostFormatConnection implements PostFormatConnection & Connection {
   "Edges for the PostToPostFormatConnection connection"
@@ -3337,19 +3433,19 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: PostFormatToContentNodeConnectionWhereArgs
   ): PostFormatToContentNodeConnection
@@ -3364,15 +3460,15 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -3383,15 +3479,15 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -3416,19 +3512,19 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: PostFormatToPostConnectionWhereArgs
   ): PostFormatToPostConnection
@@ -3543,19 +3639,19 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: TagToContentNodeConnectionWhereArgs
   ): TagToContentNodeConnection
@@ -3570,15 +3666,15 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -3589,15 +3685,15 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -3622,19 +3718,19 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: TagToPostConnectionWhereArgs
   ): TagToPostConnection
@@ -3996,19 +4092,19 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: LandingPageToMediaItemConnectionWhereArgs
   ): LandingPageToMediaItemConnection
@@ -4021,15 +4117,15 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -4040,15 +4136,15 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -4059,19 +4155,19 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: LandingPageToFloatImageConnectionWhereArgs
   ): LandingPageToFloatImageConnection
@@ -4092,8 +4188,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   "Whether the node is a Term"
   isTermNode: Boolean!
   "The id field matches the WP_Post-&gt;ID field."
-  landingPageId: Int!
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  landingPageId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
   "Polylang language"
   language: Language
   "The user that most recently edited the node"
@@ -4105,19 +4200,19 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: LandingPageToMobileImageConnectionWhereArgs
   ): LandingPageToMobileImageConnection
@@ -4140,19 +4235,19 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: LandingPageToRevisionConnectionWhereArgs
   ): LandingPageToRevisionConnection
@@ -4165,7 +4260,10 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   "The template assigned to the node"
   template: ContentTemplate
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
   "Get specific translation version of this object"
   translation(language: LanguageCodeEnum!): LandingPage
   "List all translated versions of this post"
@@ -4295,19 +4393,19 @@ type Menu implements Node & DatabaseIdentifier {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: MenuToMenuItemConnectionWhereArgs
   ): MenuToMenuItemConnection
@@ -4332,27 +4430,26 @@ type MenuItem implements Node & DatabaseIdentifier {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: MenuItemToMenuItemConnectionWhereArgs
   ): MenuItemToMenuItemConnection
   "Connection from MenuItem to it&#039;s connected node"
   connectedNode: MenuItemToMenuItemLinkableConnectionEdge
   "The object connected to this menu item."
-  connectedObject: MenuItemObjectUnion
-    @deprecated(reason: "Deprecated in favor of the connectedNode field")
+  connectedObject: MenuItemObjectUnion @deprecated(reason: "Deprecated in favor of the connectedNode field")
   "Class attribute for the menu item link"
   cssClasses: [String]
   "The unique identifier stored in the database"
@@ -4372,8 +4469,7 @@ type MenuItem implements Node & DatabaseIdentifier {
   "The Menu a MenuItem is part of"
   menu: MenuItemToMenuConnectionEdge
   "WP ID of the menu item."
-  menuItemId: Int
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  menuItemId: Int @deprecated(reason: "Deprecated in favor of the databaseId field")
   "Menu item order"
   order: Int
   "The database id of the parent menu item or null if it is the root"
@@ -4633,15 +4729,15 @@ type Release implements Node & ContentNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -4652,15 +4748,15 @@ type Release implements Node & ContentNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -4699,8 +4795,7 @@ type Release implements Node & ContentNode & UniformResourceIdentifiable & Datab
   "Whether the object is a node in the preview state"
   previewRevisionId: ID
   "The id field matches the WP_Post-&gt;ID field."
-  releaseId: Int!
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  releaseId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
   "If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node."
   revisionOf: NodeWithRevisionsToContentNodeConnectionEdge
   "Connection between the Release type and the release type"
@@ -4708,19 +4803,19 @@ type Release implements Node & ContentNode & UniformResourceIdentifiable & Datab
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: ReleaseToRevisionConnectionWhereArgs
   ): ReleaseToRevisionConnection
@@ -4733,7 +4828,10 @@ type Release implements Node & ContentNode & UniformResourceIdentifiable & Datab
   "The template assigned to the node"
   template: ContentTemplate
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
   "Get specific translation version of this object"
   translation(language: LanguageCodeEnum!): Release
   "List all translated versions of this post"
@@ -4920,15 +5018,15 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -4939,15 +5037,15 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -4988,19 +5086,19 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: TranslationToRevisionConnectionWhereArgs
   ): TranslationToRevisionConnection
@@ -5013,10 +5111,12 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
   "The template assigned to the node"
   template: ContentTemplate
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
   "The id field matches the WP_Post-&gt;ID field."
-  translationId: Int!
-    @deprecated(reason: "Deprecated in favor of the databaseId field")
+  translationId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
   "Translations"
   translations: [TranslationResponse]
   "The unique resource identifier path"
@@ -5251,7 +5351,10 @@ type RootMutation {
     input: DeleteUserInput!
   ): DeleteUserPayload
   "Increase the count."
-  increaseCount("The count to increase" count: Int): Int
+  increaseCount(
+    "The count to increase"
+    count: Int
+  ): Int
   "The registerUser mutation"
   registerUser(
     "Input for the registerUser mutation"
@@ -5583,10 +5686,7 @@ type SendPasswordResetEmailPayload {
   "Whether the mutation completed successfully. This does NOT necessarily mean that an email was sent."
   success: Boolean
   "The user that the password reset email was sent to"
-  user: User
-    @deprecated(
-      reason: "This field will be removed in a future version of WPGraphQL"
-    )
+  user: User @deprecated(reason: "This field will be removed in a future version of WPGraphQL")
 }
 "The payload for the updateCategory mutation."
 type UpdateCategoryPayload {
@@ -5701,9 +5801,9 @@ type CommentAuthor implements Node & Commenter & DatabaseIdentifier {
   "Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument."
   avatar(
     "The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels."
-    size: Int = 96
+    size: Int = 96,
     "Whether to always show the default image, never the Gravatar. Default false"
-    forceDefault: Boolean
+    forceDefault: Boolean,
     "The rating level of the avatar."
     rating: AvatarRatingEnum
   ): Avatar
@@ -5759,7 +5859,7 @@ interface CategoryConnectionEdge implements Edge {
   node: Category!
 }
 "Terms are nodes within a Taxonomy, used to group and relate other nodes."
-interface TermNode implements Node & UniformResourceIdentifiable {
+interface TermNode implements Node& UniformResourceIdentifiable {
   "The number of objects connected to the object"
   count: Int
   "Identifies the primary key from the database."
@@ -5771,15 +5871,15 @@ interface TermNode implements Node & UniformResourceIdentifiable {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -5790,15 +5890,15 @@ interface TermNode implements Node & UniformResourceIdentifiable {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -5889,7 +5989,7 @@ interface DatabaseIdentifier {
   databaseId: Int!
 }
 "Term node with hierarchical (parent/child) relationships"
-interface HierarchicalTermNode implements Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier & HierarchicalNode {
+interface HierarchicalTermNode implements Node& TermNode& UniformResourceIdentifiable& DatabaseIdentifier& HierarchicalNode {
   "The number of objects connected to the object"
   count: Int
   "The unique identifier stored in the database"
@@ -5901,15 +6001,15 @@ interface HierarchicalTermNode implements Node & TermNode & UniformResourceIdent
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -5920,15 +6020,15 @@ interface HierarchicalTermNode implements Node & TermNode & UniformResourceIdent
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -5962,7 +6062,7 @@ interface HierarchicalTermNode implements Node & TermNode & UniformResourceIdent
   uri: String
 }
 "Node with hierarchical (parent/child) relationships"
-interface HierarchicalNode implements Node & DatabaseIdentifier {
+interface HierarchicalNode implements Node& DatabaseIdentifier {
   "The unique identifier stored in the database"
   databaseId: Int!
   "The globally unique ID for the object"
@@ -5973,7 +6073,7 @@ interface HierarchicalNode implements Node & DatabaseIdentifier {
   parentId: ID
 }
 "Nodes that can be linked to as Menu Items"
-interface MenuItemLinkable implements Node & UniformResourceIdentifiable & DatabaseIdentifier {
+interface MenuItemLinkable implements Node& UniformResourceIdentifiable& DatabaseIdentifier {
   "The unique identifier stored in the database"
   databaseId: Int!
   "The unique resource identifier path"
@@ -6000,7 +6100,7 @@ interface ContentNodeConnectionEdge implements Edge {
   node: ContentNode!
 }
 "Nodes used to manage content"
-interface ContentNode implements Node & UniformResourceIdentifiable {
+interface ContentNode implements Node& UniformResourceIdentifiable {
   "Connection between the ContentNode type and the ContentType type"
   contentType: ContentNodeToContentTypeConnectionEdge
   "The name of the Content Type the node belongs to"
@@ -6022,15 +6122,15 @@ interface ContentNode implements Node & UniformResourceIdentifiable {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -6041,15 +6141,15 @@ interface ContentNode implements Node & UniformResourceIdentifiable {
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -6131,7 +6231,7 @@ interface UserConnectionEdge implements Edge {
   node: User!
 }
 "The author of a comment"
-interface Commenter implements Node & DatabaseIdentifier {
+interface Commenter implements Node& DatabaseIdentifier {
   "Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument."
   avatar: Avatar
   "Identifies the primary key from the database."
@@ -6199,7 +6299,10 @@ interface NodeWithTitle implements Node {
   "The globally unique ID for the object"
   id: ID!
   "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
-  title("Format of the field output" format: PostObjectFieldFormatEnum): String
+  title(
+    "Format of the field output"
+    format: PostObjectFieldFormatEnum
+  ): String
 }
 "A node that can have an author assigned to it"
 interface NodeWithAuthor implements Node {
@@ -6213,25 +6316,25 @@ interface NodeWithAuthor implements Node {
   id: ID!
 }
 "Content node with hierarchical (parent/child) relationships"
-interface HierarchicalContentNode implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & HierarchicalNode {
+interface HierarchicalContentNode implements Node& ContentNode& UniformResourceIdentifiable& DatabaseIdentifier& HierarchicalNode {
   "Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root)."
   ancestors(
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs
   ): HierarchicalContentNodeToContentNodeAncestorsConnection
@@ -6240,19 +6343,19 @@ interface HierarchicalContentNode implements Node & ContentNode & UniformResourc
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
-    before: String
+    before: String,
     "Arguments for filtering the connection"
     where: HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs
   ): HierarchicalContentNodeToContentNodeChildrenConnection
@@ -6277,15 +6380,15 @@ interface HierarchicalContentNode implements Node & ContentNode & UniformResourc
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -6296,15 +6399,15 @@ interface HierarchicalContentNode implements Node & ContentNode & UniformResourc
     """
     The number of items to return after the referenced "after" cursor
     """
-    first: Int
+    first: Int,
     """
     The number of items to return before the referenced "before" cursor
     """
-    last: Int
+    last: Int,
     """
     Cursor used along with the "first" argument to reference where in the dataset to get data
     """
-    after: String
+    after: String,
     """
     Cursor used along with the "last" argument to reference where in the dataset to get data
     """
@@ -6619,55 +6722,11 @@ interface UserConnection implements Connection {
   "A list of connected User Nodes"
   nodes: [User!]!
 }
-union PageModulesUnionType =
-    EventSearch
-  | EventSelected
-  | EventSearchCarousel
-  | EventSelectedCarousel
-  | LocationsSelected
-  | LocationsSelectedCarousel
-  | LayoutCollection
-  | LayoutContact
-  | LayoutArticles
-  | LayoutArticlesCarousel
-  | LayoutArticleHighlights
-  | LayoutPages
-  | LayoutPagesCarousel
-  | LayoutContent
-  | LayoutCards
-union CollectionModulesUnionType =
-    EventSearch
-  | EventSelected
-  | EventSearchCarousel
-  | EventSelectedCarousel
-  | LocationsSelected
-  | LocationsSelectedCarousel
-union PostModulesUnionType =
-    EventSearch
-  | EventSelected
-  | EventSearchCarousel
-  | EventSelectedCarousel
-  | LocationsSelected
-  | LocationsSelectedCarousel
-  | LayoutCollection
-  | LayoutContact
-  | LayoutArticles
-  | LayoutArticlesCarousel
-  | LayoutArticleHighlights
-  | LayoutPages
-  | LayoutPagesCarousel
-  | LayoutContent
-  | LayoutCards
-union PostSidebarUnionType =
-    LayoutLinkList
-  | LayoutArticles
-  | LayoutPages
-  | LayoutCards
-union PageSidebarUnionType =
-    LayoutLinkList
-  | LayoutArticles
-  | LayoutPages
-  | LayoutCards
+union PageModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards | LayoutSocialMediaFeed | LayoutImage | LayoutCard | LayoutSteps | LayoutImageGallery
+union CollectionModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel
+union PostModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards | LayoutImage | LayoutCard | LayoutImageGallery | LayoutSteps | LayoutSocialMediaFeed
+union PostSidebarUnionType = LayoutLinkList | LayoutArticles | LayoutPages | LayoutCards
+union PageSidebarUnionType = LayoutLinkList | LayoutArticles | LayoutPages | LayoutCards
 "Deprecated in favor of MenuItemLinkeable Interface"
 union MenuItemObjectUnion = Post | Page | Category | Tag
 "Filter item by specific language, default language or list all languages"
@@ -7285,7 +7344,7 @@ enum UsersConnectionSearchColumnEnum {
   LOGIN
   "A URL-friendly name for the user. The default is the user's username."
   NICENAME
-  "The URL of the users website."
+  "The URL of the user's website."
   URL
 }
 "The status of the media item object."
@@ -10557,3 +10616,4 @@ input UpdateUserInput {
   "User's Yahoo IM account."
   yim: String
 }
+

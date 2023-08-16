@@ -4421,7 +4421,7 @@ type EventDetails
   dataSource: String
   publisher: ID
   subEvents: [InternalIdObject!]!
-  images: [Image!]!
+  images: [EventImage!]!
   inLanguage: [InLanguage!]!
   audience: [Audience!]!
   createdTime: String
@@ -4448,6 +4448,24 @@ type EventDetails
   maximumAttendeeCapacity: Int
   minimumAttendeeCapacity: Int
   remainingAttendeeCapacity: Int
+}
+
+type EventImage
+  @join__type(graph: EVENTS)
+{
+  id: ID
+  license: String
+  createdTime: String
+  lastModifiedTime: String
+  name: String!
+  url: String!
+  cropping: String
+  photographerName: String
+  dataSource: String
+  publisher: String
+  internalId: String!
+  internalContext: String
+  internalType: String
 }
 
 type EventListResponse
@@ -4632,6 +4650,32 @@ type ExternalLink
   name: String
   link: String
   language: String
+}
+
+"""Gallery Image"""
+type GalleryImage
+  @join__type(graph: CMS)
+{
+  """Caption of the image"""
+  caption: String
+
+  """Description of the image"""
+  description: String
+
+  """The url of the large image"""
+  large: String
+
+  """The url of the medium image"""
+  medium: String
+
+  """The url of the medium large image"""
+  medium_large: String
+
+  """The url of the thumbnail image"""
+  thumbnail: String
+
+  """Title of the image"""
+  title: String
 }
 
 """The general setting type"""
@@ -5425,22 +5469,30 @@ enum IdentificationStrength
   LEGALLY_CONNECTED @join__enumValue(graph: UNIFIED_SEARCH)
 }
 
+"""Image"""
 type Image
-  @join__type(graph: EVENTS)
+  @join__type(graph: CMS)
 {
-  id: ID
-  license: String
-  createdTime: String
-  lastModifiedTime: String
-  name: String!
-  url: String!
-  cropping: String
-  photographerName: String
-  dataSource: String
-  publisher: String
-  internalId: String!
-  internalContext: String
-  internalType: String
+  """Caption of the image"""
+  caption: String
+
+  """Description of the image"""
+  description: String
+
+  """The url of the large image"""
+  large: String
+
+  """The url of the medium image"""
+  medium: String
+
+  """The url of the medium large image"""
+  medium_large: String
+
+  """The url of the thumbnail image"""
+  thumbnail: String
+
+  """Title of the image"""
+  title: String
 }
 
 type InLanguage
@@ -5484,7 +5536,7 @@ type Keyword
   aggregate: Boolean
   deprecated: Boolean
   nEvents: Int
-  image: Image
+  image: EventImage
   dataSource: String
   publisher: ID
   name: LocalizedObject
@@ -6362,6 +6414,29 @@ type LayoutArticlesCarousel
   title: String
 }
 
+"""Layout: LayoutCard"""
+type LayoutCard
+  @join__type(graph: CMS)
+{
+  """Alignment"""
+  alignment: String
+
+  """Background Color"""
+  backgroundColor: String
+
+  """Description"""
+  description: String
+
+  """Image"""
+  image: Image
+
+  """Link"""
+  link: Link
+
+  """Title"""
+  title: String
+}
+
 """Layout: LayoutCards"""
 type LayoutCards
   @join__type(graph: CMS)
@@ -6404,6 +6479,31 @@ type LayoutContent
 
   """Title"""
   title: String
+}
+
+"""Layout: LayoutImage"""
+type LayoutImage
+  @join__type(graph: CMS)
+{
+  """Border"""
+  border: Boolean
+
+  """Image"""
+  image: Image
+
+  """Photographer name (overwrite)"""
+  photographer_name: String
+
+  """Lightbox"""
+  show_on_lightbox: Boolean
+}
+
+"""Layout: LayoutImageGallery"""
+type LayoutImageGallery
+  @join__type(graph: CMS)
+{
+  """Gallery"""
+  gallery: [GalleryImage]
 }
 
 """Layout: LayoutLinkList"""
@@ -6467,6 +6567,40 @@ type LayoutPagesCarousel
 
   """Title"""
   title: String
+}
+
+"""Layout: LayoutSocialMediaFeed"""
+type LayoutSocialMediaFeed
+  @join__type(graph: CMS)
+{
+  """Anchor"""
+  anchor: String
+
+  """Script"""
+  script: String
+
+  """Title"""
+  title: String
+}
+
+"""Layout: LayoutSteps"""
+type LayoutSteps
+  @join__type(graph: CMS)
+{
+  """Color"""
+  color: String
+
+  """Description"""
+  description: String
+
+  """Steps"""
+  steps: [Step]
+
+  """Title"""
+  title: String
+
+  """Type"""
+  type: String
 }
 
 union LegalEntity
@@ -8696,7 +8830,12 @@ union PageModulesUnionType
   @join__unionMember(graph: CMS, member: "LayoutPagesCarousel")
   @join__unionMember(graph: CMS, member: "LayoutContent")
   @join__unionMember(graph: CMS, member: "LayoutCards")
- = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards
+  @join__unionMember(graph: CMS, member: "LayoutSocialMediaFeed")
+  @join__unionMember(graph: CMS, member: "LayoutImage")
+  @join__unionMember(graph: CMS, member: "LayoutCard")
+  @join__unionMember(graph: CMS, member: "LayoutSteps")
+  @join__unionMember(graph: CMS, member: "LayoutImageGallery")
+ = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards | LayoutSocialMediaFeed | LayoutImage | LayoutCard | LayoutSteps | LayoutImageGallery
 
 union PageSidebarUnionType
   @join__type(graph: CMS)
@@ -8915,7 +9054,7 @@ type Place
   addressCountry: String
   deleted: Boolean
   nEvents: Int
-  image: Image
+  image: EventImage
   dataSource: String
   publisher: ID
   parent: ID
@@ -9919,7 +10058,12 @@ union PostModulesUnionType
   @join__unionMember(graph: CMS, member: "LayoutPagesCarousel")
   @join__unionMember(graph: CMS, member: "LayoutContent")
   @join__unionMember(graph: CMS, member: "LayoutCards")
- = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards
+  @join__unionMember(graph: CMS, member: "LayoutImage")
+  @join__unionMember(graph: CMS, member: "LayoutCard")
+  @join__unionMember(graph: CMS, member: "LayoutImageGallery")
+  @join__unionMember(graph: CMS, member: "LayoutSteps")
+  @join__unionMember(graph: CMS, member: "LayoutSocialMediaFeed")
+ = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards | LayoutImage | LayoutCard | LayoutImageGallery | LayoutSteps | LayoutSocialMediaFeed
 
 """The format of post field data."""
 enum PostObjectFieldFormatEnum
@@ -14893,6 +15037,17 @@ type StaticPage
   liveRevision: Int
 }
 
+"""Step field"""
+type Step
+  @join__type(graph: CMS)
+{
+  """The content of the step"""
+  content: String
+
+  """The title of the step"""
+  title: String
+}
+
 type Subscription
   @join__type(graph: EVENTS)
 {
@@ -17579,7 +17734,7 @@ enum UsersConnectionSearchColumnEnum
   """A URL-friendly name for the user. The default is the user's username."""
   NICENAME @join__enumValue(graph: CMS)
 
-  """The URL of the users website."""
+  """The URL of the user's website."""
   URL @join__enumValue(graph: CMS)
 }
 

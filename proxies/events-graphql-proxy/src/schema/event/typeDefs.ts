@@ -80,7 +80,7 @@ const typeDefs = gql`
     dataSource: String
     publisher: ID
     subEvents: [InternalIdObject!]!
-    images: [Image!]!
+    images: [EventImage!]!
     inLanguage: [InLanguage!]!
     audience: [Audience!]!
     createdTime: String
@@ -149,7 +149,7 @@ const typeDefs = gql`
     infoUrl: LocalizedObject
   }
 
-  type Image {
+  type EventImage {
     id: ID
     license: String
     createdTime: String

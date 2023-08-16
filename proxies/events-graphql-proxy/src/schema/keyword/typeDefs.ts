@@ -28,7 +28,7 @@ export const typeDefs = gql`
     aggregate: Boolean
     deprecated: Boolean
     nEvents: Int
-    image: Image
+    image: EventImage
     dataSource: String
     publisher: ID
     name: LocalizedObject

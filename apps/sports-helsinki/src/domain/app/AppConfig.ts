@@ -212,6 +212,13 @@ class AppConfig {
     );
   }
 
+  /** A feature flag for the target group filter. */
+  static get showTargetGroupFilter() {
+    return Boolean(
+      parseEnvValue(process.env.NEXT_PUBLIC_SHOW_TARGET_GROUP_FILTER, false)
+    );
+  }
+
   /** A feature flag for the upcoming venues module in details page. */
   static get showVenuesUpcomingEvents() {
     return Boolean(

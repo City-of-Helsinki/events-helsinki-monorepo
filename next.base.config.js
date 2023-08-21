@@ -146,7 +146,7 @@ const nextBaseConfig = ({
     async rewrites() {
       return Object.entries(i18nRoutes).flatMap(([destination, sources]) =>
         sources.map(({ source, locale }) => ({
-          destination,
+          destination: `/${locale}${destination}`,
           source: `/${locale}${source}`,
           locale: false,
         }))

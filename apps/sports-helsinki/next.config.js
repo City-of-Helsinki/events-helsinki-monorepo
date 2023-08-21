@@ -14,8 +14,8 @@ module.exports = nextBaseConfig({
         // Not setting `locale: false` here because that didn't work for some reason.
         // When locale is left undefined middleware.ts's prefixDefaultLocale function
         // lets these redirect routes through without prefixing them with locale.
-        source: source,
-        destination: destination,
+        source,
+        destination,
         permanent: true,
       },
     ]);

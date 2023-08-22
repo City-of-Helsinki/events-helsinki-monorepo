@@ -36,6 +36,11 @@ export type EventsFederationApolloClientConfig = {
   allowUnauthorizedRequests?: boolean;
   routerHelper: CmsRoutedAppHelper;
   handleError?: (error: Error) => void;
+  ignoredErrorHandlerStatusCodes?: number[];
+};
+
+type GraphQLErrorsExtensionResponse = {
+  status: number;
 };
 
 class EventsFederationApolloClient {
@@ -57,7 +62,10 @@ class EventsFederationApolloClient {
       ({ graphQLErrors, networkError, operation, response }) => {
         if (graphQLErrors) {
           graphQLErrors.forEach((error) => {
-            const { message, locations, path } = error;
+            const { message, locations, path, extensions } = error;
+            const responseStatusCode = (
+              extensions.response as GraphQLErrorsExtensionResponse
+            )?.status;
             const errorMessage = `[GraphQL error]: ${JSON.stringify({
               OperationName: operation.operationName,
               Message: message,
@@ -68,7 +76,13 @@ class EventsFederationApolloClient {
             graphqlClientLogger.error(errorMessage);
             Sentry.captureMessage(errorMessage);
             // Call the custom error handler
-            if (this.config.handleError && !response?.data) {
+            if (
+              this.config.handleError &&
+              !response?.data &&
+              !this.config.ignoredErrorHandlerStatusCodes?.includes(
+                responseStatusCode
+              )
+            ) {
               this.config.handleError(error);
             }
           });

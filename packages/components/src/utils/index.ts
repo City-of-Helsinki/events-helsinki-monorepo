@@ -6,6 +6,7 @@ export * from './eventUtils';
 export { default as getDateArray } from './getDateArray';
 export { default as getDateRangeStr } from './getDateRangeStr';
 export { default as getDomain } from './getDomain';
+export { default as getEnvOrError } from './getEnvOrError';
 export { default as getLanguageOrDefault } from './get-language-or-default';
 export { default as getLocalizedString } from './getLocalizedString';
 export { default as getSecureImage } from './getSecureImage';

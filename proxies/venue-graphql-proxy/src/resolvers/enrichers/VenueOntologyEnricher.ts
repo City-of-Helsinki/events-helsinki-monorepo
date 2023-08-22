@@ -3,10 +3,15 @@ import type { TprekUnit } from '../../types';
 import type { VenueData } from '../integrations/VenueResolverIntegration';
 import type VenueEnricher from './VenueEnricher';
 
+const EMPTY_ENRICHMENTS = { ontologyTree: [], ontologyWords: [] };
+
 export default class VenueOntologyEnricher
   implements VenueEnricher<TprekUnit, VenueData>
 {
   async getEnrichments(data: TprekUnit, context: VenueContext) {
+    if (data === null) {
+      return EMPTY_ENRICHMENTS;
+    }
     const enrichDataLocations = [];
     const {
       ontologytree_ids: ontologyTreeIds,

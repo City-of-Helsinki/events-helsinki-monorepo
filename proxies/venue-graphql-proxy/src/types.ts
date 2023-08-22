@@ -50,7 +50,7 @@ export type TprekUnitServiceDescriptions = {
 
 // No clear type information was available so all of the fields are marked as
 // optional besides the ID. Some may in fact be required.
-export type TprekUnit = {
+export type TprekUnitWithoutNull = {
   id: number;
   org_id?: string;
   dept_id?: string;
@@ -96,6 +96,8 @@ export type TprekUnit = {
   phone?: string;
   picture_url?: string;
 };
+
+export type TprekUnit = TprekUnitWithoutNull | null;
 
 export type AccessibilitySentences = {
   groupName: string;

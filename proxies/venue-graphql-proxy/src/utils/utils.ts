@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import AppConfig from '../config/AppConfig';
 import { Sources } from '../contants/constants';
 import type VenueContext from '../context/VenueContext';
 import type { Locale, TranslationsObject, VenueDetails } from '../types';
@@ -6,9 +7,8 @@ import type { Point } from '../types/types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formTranslationObject = (obj: any, field: any) => {
-  const translationsLanguages = ['fi', 'en', 'sv'];
-  const [field_fi, field_en, field_sv] = translationsLanguages.map(
-    (language) => `${field}_${language}`
+  const [field_fi, field_en, field_sv] = AppConfig.supportedLocales.map(
+    (locale) => `${field}_${locale}`
   );
   if (!obj[field_fi] && !obj[field_en] && !obj[field_sv]) return null;
 
@@ -21,11 +21,12 @@ export const formTranslationObject = (obj: any, field: any) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const formAccessibilitySentences = (data: any) => {
-  const table = { fi: [], en: [], sv: [] };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const table: { [k: string]: any[] } = Object.fromEntries(
+    AppConfig.supportedLocales.map((locale) => [locale, []])
+  );
 
   Object.keys(table).forEach((language) => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const sentences = table[language];
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -76,34 +77,58 @@ export function getPointFromLongAndLat(
   };
 }
 
+/**
+ * Use 'pickLocale' or use a next fallback locale
+ * from the prioritized list of the fallback locales with it.
+ * */
+export function pickLocaleWithFallback(
+  obj: TranslationsObject,
+  locale: Locale
+) {
+  let translation = pickLocale(obj, locale);
+  if (!translation) {
+    for (const fallbackLng of AppConfig.fallbackLocales) {
+      translation = pickLocale(obj, fallbackLng as Locale);
+      if (translation) return translation;
+    }
+  }
+  return translation || null;
+}
+
 function pickLocale(obj: TranslationsObject, locale: Locale) {
   return get(obj, locale, null);
 }
 
 export function translateVenue(
   data: Partial<VenueDetails>,
-  context: VenueContext
+  context: VenueContext,
+  isUseFallbackLocalesEnabled = true
 ): VenueDetails | VenueDetails<string> {
   if (!context.language) {
     return data as VenueDetails;
   }
 
   const locale = context.language as Locale;
+  const pickLocaleFn = isUseFallbackLocalesEnabled
+    ? pickLocaleWithFallback
+    : pickLocale;
 
   return {
     ...data,
     addressLocality: data.addressLocality
-      ? pickLocale(data.addressLocality, locale)
+      ? pickLocaleFn(data.addressLocality, locale)
       : undefined,
     description: data.description
-      ? pickLocale(data.description, locale)
+      ? pickLocaleFn(data.description, locale)
       : undefined,
-    name: data.name ? pickLocale(data.name, locale) : undefined,
+    name: data.name ? pickLocaleFn(data.name, locale) : undefined,
     streetAddress: data.streetAddress
-      ? pickLocale(data.streetAddress, locale)
+      ? pickLocaleFn(data.streetAddress, locale)
       : undefined,
-    infoUrl: data.infoUrl ? pickLocale(data.infoUrl, locale) : undefined,
-    telephone: data.telephone ? pickLocale(data.telephone, locale) : undefined,
+    infoUrl: data.infoUrl ? pickLocaleFn(data.infoUrl, locale) : undefined,
+    telephone: data.telephone
+      ? pickLocaleFn(data.telephone, locale)
+      : undefined,
     accessibilitySentences:
       // If grouped by translations, find the correct one by language
       data.accessibilitySentences && 'fi' in data.accessibilitySentences
@@ -111,8 +136,8 @@ export function translateVenue(
         : data?.accessibilitySentences,
     connections: data.connections?.map((connection) => ({
       ...connection,
-      name: pickLocale(connection.name, locale),
-      url: connection.url ? pickLocale(connection.url, locale) : undefined,
+      name: pickLocaleFn(connection.name, locale),
+      url: connection.url ? pickLocaleFn(connection.url, locale) : undefined,
     })),
   } as VenueDetails<string>;
 }

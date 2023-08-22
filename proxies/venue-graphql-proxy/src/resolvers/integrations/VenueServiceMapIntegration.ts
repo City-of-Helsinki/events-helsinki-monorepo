@@ -1,3 +1,4 @@
+import AppConfig from '../../config/AppConfig';
 import { Sources } from '../../contants/constants';
 import type { TprekUnit, VenueDetails } from '../../types';
 import {
@@ -22,7 +23,12 @@ export default class VenueServiceMapIntegration extends VenueResolverIntegration
         dataSources.serviceMap.getUnit(id),
       ],
       enrichers: config.enrichers,
-      format: (data, context) => translateVenue(this.formatter(data), context),
+      format: (data, context) =>
+        translateVenue(
+          this.formatter(data),
+          context,
+          AppConfig.isUseFallbackLocalesEnabled
+        ),
     });
   }
 

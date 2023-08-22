@@ -3,6 +3,7 @@ import { EventsFederationApolloClient } from '@events-helsinki/components';
 import React from 'react';
 import routerHelper from '../../domain/app/routerHelper';
 import AppConfig from '../app/AppConfig';
+
 export default function initializeEventsApolloClient(
   config: {
     handleError?: (error: Error) => void;
@@ -13,6 +14,8 @@ export default function initializeEventsApolloClient(
     routerHelper,
     allowUnauthorizedRequests: AppConfig.allowUnauthorizedRequests,
     federationGraphqlEndpoint: AppConfig.federationGraphqlEndpoint,
+    ignoredErrorHandlerStatusCodes:
+      AppConfig.apolloErrorHandlerIgnoredStatusCodes,
   });
 }
 

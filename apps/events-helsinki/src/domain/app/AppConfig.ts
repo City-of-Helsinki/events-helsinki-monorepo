@@ -232,6 +232,16 @@ class AppConfig {
         ROUTES.PAGES.replace('/[...slug]', ''),
     };
   }
+
+  /**
+   * The response status codes that the error handler of
+   * the Apollo federation client should ignore.
+   * */
+  static get apolloErrorHandlerIgnoredStatusCodes() {
+    // Ignore HTTP410 - Not found, which is raised e.g.
+    // when an event has been deleted from the LinkedEvents
+    return [410];
+  }
 }
 
 function parseEnvValue(

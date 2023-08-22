@@ -1,4 +1,4 @@
-import { EventTypeId } from '@events-helsinki/components';
+import { getEnvOrError, EventTypeId } from '@events-helsinki/components';
 import type { CommonButtonProps } from 'hds-react';
 import getConfig from 'next/config';
 import { ROUTES } from '../../constants';
@@ -247,19 +247,6 @@ function parseEnvValue(
   } catch (e) {
     return null;
   }
-}
-
-// Accept both variable and name so that variable can be correctly replaced
-// by build.
-// process.env.VAR => value
-// process.env["VAR"] => no value
-// Name is used to make debugging easier.
-function getEnvOrError(variable?: string, name?: string) {
-  if (!variable) {
-    throw Error(`Environment variable with name ${name} was not found`);
-  }
-
-  return variable;
 }
 
 export default AppConfig;

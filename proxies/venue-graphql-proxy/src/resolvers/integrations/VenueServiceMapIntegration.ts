@@ -16,6 +16,25 @@ type Config<I, O> = {
   enrichers: VenueEnricher<I, O>[];
 };
 
+const EMPTY_VENUE_DETAILS: VenueDetails = {
+  id: '',
+  dataSource: null,
+  email: null,
+  postalCode: '',
+  image: null,
+  addressLocality: null,
+  position: null,
+  description: null,
+  name: null,
+  infoUrl: null,
+  streetAddress: null,
+  telephone: null,
+  ontologyTree: [],
+  ontologyWords: [],
+  accessibilitySentences: {},
+  connections: [],
+};
+
 export default class VenueServiceMapIntegration extends VenueResolverIntegration<TprekUnit> {
   constructor(config: Config<TprekUnit, Partial<VenueData>>) {
     super({
@@ -33,6 +52,9 @@ export default class VenueServiceMapIntegration extends VenueResolverIntegration
   }
 
   formatter(data: TprekUnit): Partial<VenueDetails> {
+    if (data === null) {
+      return EMPTY_VENUE_DETAILS;
+    }
     return {
       id:
         getTprekId(data?.sources?.[0]?.source, data?.id?.toString()) ??

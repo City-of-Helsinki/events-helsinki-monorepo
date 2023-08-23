@@ -35,7 +35,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
-  const returnParam = extractLatestReturnPath(search, locale);
+  const returnParam = extractLatestReturnPath(search, `/${locale}`);
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
     router.push(`${returnPath}${remainingQueryString}`);

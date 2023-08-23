@@ -74,7 +74,7 @@ const EventHero: React.FC<EventHeroProps> = ({
   const buttonText = getEventHeroButtonText(event, 'button', t);
   const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
   const showKeywords = Boolean(today || thisWeek || keywords.length);
-  const returnParam = extractLatestReturnPath(search, locale);
+  const returnParam = extractLatestReturnPath(search, `/${locale}`);
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
     router.push(`${returnPath}${remainingQueryString}`);

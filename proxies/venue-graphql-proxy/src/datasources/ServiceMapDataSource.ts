@@ -43,8 +43,12 @@ export default class ServiceMapDataSource extends DataSourceWithContext<
     return ids.map((id) => words.find((word: any) => id === word.id));
   }
 
+  /**
+   * Get unit from service map.
+   * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_unit
+   * */
   async getUnit(id: string) {
-    return this.get(`unit/${id}`);
+    return this.get(`unit/${id}?newfeatures=yes`);
   }
 
   private async getAllOntologyWords() {

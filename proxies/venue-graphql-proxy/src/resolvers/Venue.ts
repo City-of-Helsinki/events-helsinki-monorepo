@@ -3,11 +3,23 @@ const Venue = {
   addressLocality({ addressLocality }: any) {
     return addressLocality;
   },
+  addressPostalFull({ addressPostalFull }: any) {
+    return addressPostalFull;
+  },
   dataSource({ dataSource }: any) {
     return dataSource;
   },
+  departmentId({ departmentId }: any) {
+    return departmentId;
+  },
   description({ description }: any) {
     return description;
+  },
+  displayedServiceOwner({ displayedServiceOwner }: any) {
+    return displayedServiceOwner;
+  },
+  displayedServiceOwnerType({ displayedServiceOwnerType }: any) {
+    return displayedServiceOwnerType;
   },
   email({ email }: any) {
     return email;
@@ -24,11 +36,20 @@ const Venue = {
   name({ name }: any) {
     return name;
   },
+  organizationId({ organizationId }: any) {
+    return organizationId;
+  },
   position({ position }: any) {
     return position;
   },
   postalCode({ postalCode }: any) {
     return postalCode;
+  },
+  providerType({ providerType }: any) {
+    return providerType;
+  },
+  shortDescription({ shortDescription }: any) {
+    return shortDescription;
   },
   streetAddress({ streetAddress }: any) {
     return streetAddress;

@@ -26965,6 +26965,7 @@ __metadata:
     "@babel/core": "npm:7.22.5"
     "@babel/plugin-syntax-flow": "npm:7.22.5"
     "@babel/plugin-transform-react-jsx": "npm:7.22.5"
+    "@events-helsinki/components": "workspace:^"
     "@events-helsinki/eslint-config-bases": "workspace:^"
     "@events-helsinki/graphql-proxy-server": "workspace:^"
     "@types/jest": "npm:^29.5.2"

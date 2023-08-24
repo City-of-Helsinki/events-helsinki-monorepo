@@ -2,7 +2,7 @@ import { GraphQLError } from 'graphql';
 import AppConfig from '../config/AppConfig';
 import { Sources } from '../contants/constants';
 import type VenueContext from '../context/VenueContext';
-import type { AnyObject, Source, VenueDetails } from '../types';
+import type { AnyObject, Source, TranslatableVenueDetails } from '../types';
 import createQueryResolver from '../utils/createQueryResolver';
 import parseVenueId, { IdParseError } from '../utils/parseVenueId';
 import VenueOntologyEnricher from './enrichers/VenueOntologyEnricher';
@@ -62,4 +62,4 @@ function onError(e: unknown) {
   }
 }
 
-export default createQueryResolver<VenueDetails>(resolver, onError);
+export default createQueryResolver<TranslatableVenueDetails>(resolver, onError);

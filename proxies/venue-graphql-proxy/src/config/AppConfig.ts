@@ -9,13 +9,13 @@ class AppConfig {
     return false;
   }
 
-  static get supportedLocales() {
-    return ['fi', 'en', 'sv'] as Locale[];
+  static get supportedLocales(): Readonly<Array<Locale>> {
+    return ['fi', 'en', 'sv'] as const;
   }
 
   /** A prioritized list of fallback languages. */
-  static get fallbackLocales() {
-    return ['en', 'fi', 'sv'] as Locale[];
+  static get fallbackLocales(): Readonly<Array<Locale>> {
+    return ['en', 'fi', 'sv'] as const;
   }
 
   /**

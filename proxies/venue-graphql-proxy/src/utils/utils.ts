@@ -2,13 +2,54 @@ import get from 'lodash/get';
 import AppConfig from '../config/AppConfig';
 import { Sources } from '../contants/constants';
 import type VenueContext from '../context/VenueContext';
-import type { Locale, TranslationsObject, VenueDetails } from '../types';
+import type {
+  TprekAccessibilitySentence,
+  AccessibilitySentences,
+  Locale,
+  TprekUnit,
+  TprekUnitWithoutNull,
+  TranslatableVenueDetails,
+  TranslationsObject,
+  TranslatedVenueDetails,
+  TprekUnitTranslatableFields,
+  TprekUnitConnection,
+  TprekUnitConnectionTranslatableFields,
+} from '../types';
 import type { Point } from '../types/types';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const formTranslationObject = (obj: any, field: any) => {
+/** Mapping from Locale to its TprekAccessibilitySentence sentence group name */
+const LOCALIZED_SENTENCE_GROUP_NAME: Record<
+  Locale,
+  keyof TprekAccessibilitySentence & `sentence_group_${Locale}`
+> = {
+  fi: 'sentence_group_fi',
+  en: 'sentence_group_en',
+  sv: 'sentence_group_sv',
+};
+
+/** Mapping from Locale to its TprekAccessibilitySentence sentence name */
+const LOCALIZED_SENTENCE_NAME: Record<
+  Locale,
+  keyof TprekAccessibilitySentence & `sentence_${Locale}`
+> = {
+  fi: 'sentence_fi',
+  en: 'sentence_en',
+  sv: 'sentence_sv',
+};
+
+type TranslatableObjectType = TprekUnitWithoutNull | TprekUnitConnection;
+type TranslatableFieldsFor<T extends TranslatableObjectType> =
+  T extends TprekUnitWithoutNull
+    ? TprekUnitTranslatableFields
+    : T extends TprekUnitConnection
+    ? TprekUnitConnectionTranslatableFields
+    : never;
+
+export function formTranslationObject<
+  InputObjectType extends TranslatableObjectType
+>(obj: InputObjectType, field: TranslatableFieldsFor<InputObjectType>) {
   const [field_fi, field_en, field_sv] = AppConfig.supportedLocales.map(
-    (locale) => `${field}_${locale}`
+    (locale) => `${field}_${locale}` as keyof InputObjectType
   );
   if (!obj[field_fi] && !obj[field_en] && !obj[field_sv]) return null;
 
@@ -17,39 +58,46 @@ export const formTranslationObject = (obj: any, field: any) => {
     en: obj[field_en] ?? null,
     sv: obj[field_sv] ?? null,
   } as TranslationsObject;
-};
+}
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const formAccessibilitySentences = (data: any) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const table: { [k: string]: any[] } = Object.fromEntries(
-    AppConfig.supportedLocales.map((locale) => [locale, []])
-  );
+export const formAccessibilitySentences = (
+  data: TprekUnit
+): Record<Locale, Array<AccessibilitySentences>> => {
+  const sentencesForLanguages: Record<Locale, Array<AccessibilitySentences>> = {
+    fi: [],
+    en: [],
+    sv: [],
+  };
 
-  Object.keys(table).forEach((language) => {
-    const sentences = table[language];
+  for (const language of AppConfig.supportedLocales) {
+    const sentences = sentencesForLanguages[language];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data?.accessibility_sentences?.forEach((group: any) => {
-      const key = `sentence_group_${language}`;
-      const groupValue = group[key];
+    data?.accessibility_sentences?.forEach(
+      (accessibilitySentence: TprekAccessibilitySentence) => {
+        const groupName =
+          accessibilitySentence[LOCALIZED_SENTENCE_GROUP_NAME[language]];
 
-      const existing = sentences?.find(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (obj: any) => obj?.groupName === groupValue
-      );
-      if (!existing) {
-        sentences.push({
-          groupName: groupValue,
-          sentences: [group[`sentence_${language}`]],
-        });
-      } else {
-        const index = sentences.indexOf(existing);
-        sentences[index].sentences.push(group[`sentence_${language}`]);
+        const existing = sentences?.find(
+          (obj: AccessibilitySentences) => obj?.groupName === groupName
+        );
+        const sentence =
+          accessibilitySentence[LOCALIZED_SENTENCE_NAME[language]];
+
+        if (sentence && groupName) {
+          if (!existing) {
+            sentences.push({
+              groupName: groupName,
+              sentences: [sentence],
+            });
+          } else {
+            const index = sentences.indexOf(existing);
+            sentences[index].sentences.push(sentence);
+          }
+        }
       }
-    });
-  });
-  return table;
+    );
+  }
+  return sentencesForLanguages;
 };
 
 export function getTprekId(
@@ -100,12 +148,12 @@ function pickLocale(obj: TranslationsObject, locale: Locale) {
 }
 
 export function translateVenue(
-  data: Partial<VenueDetails>,
+  data: Partial<TranslatableVenueDetails>,
   context: VenueContext,
   isUseFallbackLocalesEnabled = true
-): VenueDetails | VenueDetails<string> {
+): TranslatableVenueDetails | TranslatedVenueDetails {
   if (!context.language) {
-    return data as VenueDetails;
+    return data as TranslatableVenueDetails;
   }
 
   const locale = context.language as Locale;
@@ -118,10 +166,19 @@ export function translateVenue(
     addressLocality: data.addressLocality
       ? pickLocaleFn(data.addressLocality, locale)
       : undefined,
+    addressPostalFull: data.addressPostalFull
+      ? pickLocaleFn(data.addressPostalFull, locale)
+      : undefined,
     description: data.description
       ? pickLocaleFn(data.description, locale)
       : undefined,
+    displayedServiceOwner: data.displayedServiceOwner
+      ? pickLocaleFn(data.displayedServiceOwner, locale)
+      : undefined,
     name: data.name ? pickLocaleFn(data.name, locale) : undefined,
+    shortDescription: data.shortDescription
+      ? pickLocaleFn(data.shortDescription, locale)
+      : undefined,
     streetAddress: data.streetAddress
       ? pickLocaleFn(data.streetAddress, locale)
       : undefined,
@@ -139,5 +196,5 @@ export function translateVenue(
       name: pickLocaleFn(connection.name, locale),
       url: connection.url ? pickLocaleFn(connection.url, locale) : undefined,
     })),
-  } as VenueDetails<string>;
+  } as TranslatedVenueDetails;
 }

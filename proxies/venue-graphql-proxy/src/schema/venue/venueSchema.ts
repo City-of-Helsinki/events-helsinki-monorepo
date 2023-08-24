@@ -75,15 +75,22 @@ const createVenueSchema = (haukiEnabled = true) => gql`
 
   type Venue {
     addressLocality: String
+    addressPostalFull: String
     dataSource: String
+    departmentId: ID
     description: String
+    displayedServiceOwner: String
+    displayedServiceOwnerType: String
     email: String
     id: String!
     image: String
     infoUrl: String
     name: String
+    organizationId: ID
     position: Point
     postalCode: String
+    providerType: String
+    shortDescription: String
     streetAddress: String
     telephone: String
     ${addHaukiDependentField('openingHours: [OpeningHour!]', haukiEnabled)}

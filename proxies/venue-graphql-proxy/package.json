@@ -25,6 +25,7 @@
   "dependencies": {
     "@apollo/datasource-rest": "6.0.1",
     "@apollo/subgraph": "2.4.8",
+    "@events-helsinki/components": "workspace:^",
     "@events-helsinki/graphql-proxy-server": "workspace:^",
     "chalk": "4.1.2",
     "date-fns": "^2.30.0",

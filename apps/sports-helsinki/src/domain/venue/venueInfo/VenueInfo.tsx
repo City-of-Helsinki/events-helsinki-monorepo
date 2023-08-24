@@ -17,11 +17,10 @@ import styles from './venueInfo.module.scss';
 
 const OpeningHoursInfo = ({ venue: { connections } }: { venue: Venue }) => {
   const { t } = useVenueTranslation();
+  const sectionTypes = ['OPENING_HOURS', 'OPENING_HOUR_OBJECT'];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const connectionOpeningHoursSectionsContents: any[] = connections
-    ?.filter(
-      (item) => item?.sectionType === 'OPENING_HOURS' || 'OPENING_HOUR_OBJECT'
-    )
+    ?.filter((item) => sectionTypes.includes(item?.sectionType || ''))
     ?.map((item) => item?.name);
   const connectionOpeningHoursSectionsLines =
     connectionOpeningHoursSectionsContents.join('\n\n').split('\n');

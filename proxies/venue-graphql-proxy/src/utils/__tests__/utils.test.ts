@@ -1,6 +1,10 @@
 import AppConfig from '../../config/AppConfig';
 import type VenueContext from '../../context/VenueContext';
-import type { TranslationsObject, Locale, VenueDetails } from '../../types';
+import type {
+  TranslationsObject,
+  Locale,
+  TranslatableVenueDetails,
+} from '../../types';
 import { pickLocaleWithFallback, translateVenue } from '../utils';
 
 const fi = 'tekstiä suomeksi';
@@ -38,7 +42,7 @@ describe('translateVenue', () => {
           en,
           sv,
         },
-      } as Partial<VenueDetails>;
+      } as Partial<TranslatableVenueDetails>;
       const context = { language: locale } as VenueContext;
       const translatedVenue = translateVenue(venueData, context);
       expect(translatedVenue.description).toStrictEqual(
@@ -61,7 +65,7 @@ describe('translateVenue', () => {
           en,
           sv,
         },
-      } as Partial<VenueDetails>;
+      } as Partial<TranslatableVenueDetails>;
       const fallbackLng = locale === 'en' ? 'fi' : 'en';
       const context = { language: locale } as VenueContext;
       delete venueData.description![locale];

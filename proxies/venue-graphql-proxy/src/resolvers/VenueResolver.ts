@@ -1,5 +1,5 @@
 import type VenueContext from '../context/VenueContext';
-import type { AnyObject, Source, VenueDetails } from '../types';
+import type { AnyObject, Source, TranslatableVenueDetails } from '../types';
 import type VenueResolverIntegration from './integrations/VenueResolverIntegration';
 
 type Config = {
@@ -17,14 +17,14 @@ export default class VenueResolver {
     id: string,
     source: Source,
     context: VenueContext
-  ): Promise<VenueDetails> {
+  ): Promise<TranslatableVenueDetails> {
     const data = await this.execute(this.config.integrations, [
       id,
       source,
       context,
     ]);
 
-    return this.merge(data) as VenueDetails;
+    return this.merge(data) as TranslatableVenueDetails;
   }
 
   private async execute(

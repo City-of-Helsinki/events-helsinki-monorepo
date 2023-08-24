@@ -1,3 +1,4 @@
+import type { Subset } from '@events-helsinki/components/src/utils/typescript.utils';
 import type { Sources } from './contants/constants';
 import type { Ontology, Point } from './types/types';
 
@@ -7,24 +8,37 @@ export type AnyObject = Record<string, unknown>;
 
 export type Locale = 'fi' | 'sv' | 'en';
 
-export type VenueDetails<T = TranslationsObject> = {
+type VenueDetailsTextType = string | TranslationsObject; // 1 locale | 3 locales
+type AccessibilitySentencesTypeFor<T extends VenueDetailsTextType> =
+  T extends TranslationsObject
+    ? Record<Locale, Array<AccessibilitySentences>> // 3 locales
+    : T extends string
+    ? Array<AccessibilitySentences> // 1 locale
+    : never;
+
+type VenueDetails<T extends VenueDetailsTextType> = {
   id: string;
+  organizationId: string | null;
+  departmentId: string | null;
+  providerType: string | null;
   dataSource: string | null;
   email: string | null;
-  postalCode: string;
+  postalCode: string | null;
   image: string | null;
   addressLocality: T | null;
+  addressPostalFull: T | null;
   position: Point | null;
   description: T | null;
+  shortDescription: T | null;
+  displayedServiceOwnerType: string | null;
+  displayedServiceOwner: T | null;
   name: T | null;
   infoUrl: T | null;
   streetAddress: T | null;
   telephone: T | null;
   ontologyTree: Ontology[];
   ontologyWords: Ontology[];
-  accessibilitySentences:
-    | AccessibilityTranslationsObject
-    | AccessibilitySentences;
+  accessibilitySentences: AccessibilitySentencesTypeFor<T>;
   connections: Array<{
     sectionType: string;
     name: T;
@@ -32,6 +46,9 @@ export type VenueDetails<T = TranslationsObject> = {
     url: T | null;
   }>;
 };
+
+export type TranslatableVenueDetails = VenueDetails<TranslationsObject>;
+export type TranslatedVenueDetails = VenueDetails<string>;
 
 export type TprekUnitSource = {
   source: string;
@@ -48,6 +65,27 @@ export type TprekUnitServiceDescriptions = {
   available_languages: string[];
 };
 
+export type TprekAccessibilitySentence = {
+  sentence_group_name: string;
+  sentence_group_fi?: string;
+  sentence_group_sv?: string;
+  sentence_group_en?: string;
+  sentence_fi?: string;
+  sentence_sv?: string;
+  sentence_en?: string;
+};
+
+export type TprekUnitConnection = {
+  section_type: string;
+  name_fi: string;
+  name_en: string;
+  name_sv: string;
+  phone: string;
+  www_fi: string;
+  www_en: string;
+  www_sv: string;
+};
+
 // No clear type information was available so all of the fields are marked as
 // optional besides the ID. Some may in fact be required.
 export type TprekUnitWithoutNull = {
@@ -59,6 +97,19 @@ export type TprekUnitWithoutNull = {
   name_fi: string;
   name_sv?: string;
   name_en?: string;
+  desc_fi?: string;
+  desc_sv?: string;
+  desc_en?: string;
+  short_desc_fi?: string;
+  short_desc_sv?: string;
+  short_desc_en?: string;
+  displayed_service_owner_type: string;
+  displayed_service_owner_fi?: string;
+  displayed_service_owner_sv?: string;
+  displayed_service_owner_en?: string;
+  www_fi?: string;
+  www_sv?: string;
+  www_en?: string;
   ontologyword_ids?: number[];
   ontologytree_ids?: number[];
   sources?: TprekUnitSource[];
@@ -76,26 +127,44 @@ export type TprekUnitWithoutNull = {
   address_city_fi?: string;
   address_city_sv?: string;
   address_city_en?: string;
+  address_postal_full_fi?: string;
+  address_postal_full_sv?: string;
+  address_postal_full_en?: string;
   accessibility_viewpoints?: string;
   created_time: string;
   modified_time: string;
-  connections: Array<{
-    section_type: string;
-    name_fi: string;
-    name_en: string;
-    name_sv: string;
-    phone: string;
-    www_fi: string;
-    www_en: string;
-    www_sv: string;
-  }>;
+  connections: TprekUnitConnection[];
   ontologyword_details: TprekUnitOntologywordDetails[];
   service_descriptions: TprekUnitServiceDescriptions[];
-  accessibility_sentences: Array<unknown>;
+  accessibility_sentences: TprekAccessibilitySentence[];
   email?: string;
   phone?: string;
   picture_url?: string;
 };
+
+export type TprekUnitTranslatableFields =
+  | 'address_city'
+  | 'address_postal_full'
+  | 'desc'
+  | 'displayed_service_owner'
+  | 'name'
+  | 'short_desc'
+  | 'street_address'
+  | 'www';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type UnitHasTranslatableFieldsWithLocaleSuffix = Subset<
+  keyof TprekUnitWithoutNull,
+  `${TprekUnitTranslatableFields}_${Locale}`
+>;
+
+export type TprekUnitConnectionTranslatableFields = 'name' | 'www';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type ConnectionHasTranslatableFieldsWithLocaleSuffix = Subset<
+  keyof TprekUnitConnection,
+  `${TprekUnitConnectionTranslatableFields}_${Locale}`
+>;
 
 export type TprekUnit = TprekUnitWithoutNull | null;
 

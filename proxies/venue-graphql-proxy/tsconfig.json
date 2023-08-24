@@ -11,6 +11,8 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "paths": {
+      "@events-helsinki/components": ["../../packages/components/src/index"],
+      "@events-helsinki/components/*": ["../../packages/components/src/*"],
       "@events-helsinki/graphql-proxy-server": [
         "../../packages/graphql-proxy-server/src/index"
       ]

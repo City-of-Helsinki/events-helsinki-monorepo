@@ -1,8 +1,13 @@
 import type VenueContext from '../../context/VenueContext';
-import type { AnyObject, Source, VenueDetails } from '../../types';
+import type {
+  AnyObject,
+  Source,
+  TranslatableVenueDetails,
+  TranslatedVenueDetails,
+} from '../../types';
 import type VenueEnricher from '../enrichers/VenueEnricher';
 
-export type VenueData = VenueDetails | VenueDetails<string>;
+export type VenueData = TranslatableVenueDetails | TranslatedVenueDetails;
 
 type Config<I> = {
   getDataSources?: (

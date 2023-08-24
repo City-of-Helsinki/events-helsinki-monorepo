@@ -1,6 +1,6 @@
 import AppConfig from '../../config/AppConfig';
 import { Sources } from '../../contants/constants';
-import type { TprekUnit, VenueDetails } from '../../types';
+import type { TprekUnit, TranslatableVenueDetails } from '../../types';
 import {
   formAccessibilitySentences,
   formTranslationObject,
@@ -16,22 +16,29 @@ type Config<I, O> = {
   enrichers: VenueEnricher<I, O>[];
 };
 
-const EMPTY_VENUE_DETAILS: VenueDetails = {
+const EMPTY_VENUE_DETAILS: TranslatableVenueDetails = {
   id: '',
+  organizationId: null,
+  departmentId: null,
+  providerType: null,
   dataSource: null,
   email: null,
-  postalCode: '',
+  postalCode: null,
   image: null,
   addressLocality: null,
+  addressPostalFull: null,
   position: null,
   description: null,
+  shortDescription: null,
+  displayedServiceOwner: null,
+  displayedServiceOwnerType: null,
   name: null,
   infoUrl: null,
   streetAddress: null,
   telephone: null,
   ontologyTree: [],
   ontologyWords: [],
-  accessibilitySentences: {},
+  accessibilitySentences: { fi: [], en: [], sv: [] },
   connections: [],
 };
 
@@ -51,26 +58,39 @@ export default class VenueServiceMapIntegration extends VenueResolverIntegration
     });
   }
 
-  formatter(data: TprekUnit): Partial<VenueDetails> {
+  // eslint-disable-next-line sonarjs/cognitive-complexity
+  formatter(data: TprekUnit): Omit<
+    TranslatableVenueDetails,
+    // These fields should be filled by the enrichments later:
+    'ontologyTree' | 'ontologyWords'
+  > {
     if (data === null) {
       return EMPTY_VENUE_DETAILS;
     }
     return {
-      id:
-        getTprekId(data?.sources?.[0]?.source, data?.id?.toString()) ??
-        undefined,
+      id: getTprekId(data?.sources?.[0]?.source, data?.id?.toString()) ?? '',
+      organizationId: data?.org_id ?? null,
+      departmentId: data?.dept_id ?? null,
+      providerType: data?.provider_type ?? null,
       dataSource: data?.sources?.[0]?.source ?? Sources.TPREK,
       email: data?.email ?? null,
-      postalCode: data?.address_zip ?? undefined,
+      postalCode: data?.address_zip ?? null,
       image: data?.picture_url ?? null,
       position:
         data.longitude && data.latitude
           ? getPointFromLongAndLat(data.longitude, data.latitude)
           : null,
       description: formTranslationObject(data, 'desc'),
+      shortDescription: formTranslationObject(data, 'short_desc'),
+      displayedServiceOwner: formTranslationObject(
+        data,
+        'displayed_service_owner'
+      ),
+      displayedServiceOwnerType: data?.displayed_service_owner_type ?? null,
       name: formTranslationObject(data, 'name'),
       streetAddress: formTranslationObject(data, 'street_address'),
       addressLocality: formTranslationObject(data, 'address_city'),
+      addressPostalFull: formTranslationObject(data, 'address_postal_full'),
       infoUrl: formTranslationObject(data, 'www'),
       accessibilitySentences: formAccessibilitySentences(data),
       telephone: {

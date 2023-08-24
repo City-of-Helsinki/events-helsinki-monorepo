@@ -1,8 +1,8 @@
 import { Footer, Link } from 'hds-react';
-import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
+import { AskemFeedbackContainer } from '../../components/askem';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
 import useFooterTranslation from '../../hooks/useFooterTranslation';
 import useLocale from '../../hooks/useLocale';
@@ -17,14 +17,6 @@ type FooterSectionProps = {
   feedbackWithPadding?: boolean;
   consentUrl?: string;
 };
-
-const AskemFeedbackContainer = dynamic(
-  () => import('../../components/askem/AskemFeedbackContainer'),
-  {
-    ssr: false,
-  }
-);
-
 const FooterSection: FunctionComponent<FooterSectionProps> = ({
   appName,
   menu,

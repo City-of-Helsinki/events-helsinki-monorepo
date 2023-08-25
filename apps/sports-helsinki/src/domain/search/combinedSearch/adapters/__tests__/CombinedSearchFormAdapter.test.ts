@@ -8,7 +8,9 @@ import type {
   CombinedSearchAdapterInput,
   CombinedSearchAdapterOutput,
 } from '../../types';
-import CombinedSearchFormAdapter from '../CombinedSearchFormAdapter';
+import CombinedSearchFormAdapter, {
+  cleanFunctionNames,
+} from '../CombinedSearchFormAdapter';
 
 const locale = 'fi';
 
@@ -36,6 +38,52 @@ beforeEach(() => {
 });
 
 describe('CombinedSearchFormAdapter', () => {
+  describe('clean', () => {
+    it('field specific clean functions are found in CombinedSearchFormAdapter', () => {
+      const adapter = new CombinedSearchFormAdapter(locale, input);
+      for (const cleanFunctionName of cleanFunctionNames) {
+        expect(adapter).toHaveProperty(cleanFunctionName);
+        expect(typeof adapter[cleanFunctionName]).toBe('function');
+      }
+    });
+
+    it('field specific clean functions take no parameters', () => {
+      const adapter = new CombinedSearchFormAdapter(locale, input);
+      for (const cleanFunctionName of cleanFunctionNames) {
+        expect(adapter[cleanFunctionName]).toHaveLength(0);
+      }
+    });
+
+    it('field specific clean functions return nothing', () => {
+      const adapter = new CombinedSearchFormAdapter(locale, input);
+      for (const cleanFunctionName of cleanFunctionNames) {
+        expect(adapter[cleanFunctionName]()).toBeUndefined();
+      }
+    });
+
+    it('clean function calls all field specific clean functions', () => {
+      const adapter = new CombinedSearchFormAdapter(locale, input);
+      const cleanFunctionSpies = cleanFunctionNames.map((cleanFunctionName) =>
+        jest.spyOn(adapter, cleanFunctionName)
+      );
+      cleanFunctionSpies.forEach((cleanFunctionSpy) =>
+        expect(cleanFunctionSpy).not.toHaveBeenCalled()
+      );
+      adapter.clean();
+      cleanFunctionSpies.forEach((cleanFunctionSpy) =>
+        expect(cleanFunctionSpy).toHaveBeenCalled()
+      );
+    });
+
+    it('CombinedSearchFormAdapter constructor calls clean function', () => {
+      const adapterPrototype = CombinedSearchFormAdapter.prototype;
+      const cleanFunctionSpy = jest.spyOn(adapterPrototype, 'clean');
+      expect(cleanFunctionSpy).not.toHaveBeenCalled();
+      new CombinedSearchFormAdapter(locale, input);
+      expect(cleanFunctionSpy).toHaveBeenCalled();
+    });
+  });
+
   describe('getURLQuery', () => {
     it('collects the form values from the URL but does not exclude the extra params', () => {
       const adapter = new CombinedSearchFormAdapter(locale, input);

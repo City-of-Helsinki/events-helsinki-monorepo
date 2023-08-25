@@ -6,6 +6,7 @@ import type {
   Coordinates,
 } from '@events-helsinki/components/types';
 import { EventTypeId } from '@events-helsinki/components/types';
+import { upperFirst } from 'lodash';
 import qs from 'query-string';
 import { initialCombinedSearchFormValues } from '../constants';
 import type {
@@ -33,9 +34,21 @@ export const searchAdapterForType: Record<SearchType, SearchAdapterType> = {
   venue: VenueSearchAdapter,
 };
 
-function toBoolean(input?: string | boolean | null): boolean {
-  return ['true', '1', 'yes'].includes(input?.toString().toLowerCase() ?? '');
+function toTrueOrUndefined(input?: string | boolean | null): true | undefined {
+  return (
+    ['true', '1', 'yes'].includes(input?.toString().toLowerCase() ?? '') ||
+    undefined
+  );
 }
+
+type CleanFunctionName = Exclude<
+  keyof InputFieldValueCleaner<CombinedSearchAdapterInput>,
+  'clean'
+>;
+
+export const cleanFunctionNames = Object.keys(
+  initialCombinedSearchFormValues
+).map((fieldName) => `clean${upperFirst(fieldName)}` as CleanFunctionName);
 
 class CombinedSearchFormAdapter
   implements
@@ -218,8 +231,8 @@ class CombinedSearchFormAdapter
     return;
   }
 
-  public cleanHelsinkOnly() {
-    this.helsinkiOnly = toBoolean(this.helsinkiOnly);
+  public cleanHelsinkiOnly() {
+    this.helsinkiOnly = toTrueOrUndefined(this.helsinkiOnly);
   }
 
   public cleanOrganization() {
@@ -241,14 +254,9 @@ class CombinedSearchFormAdapter
    * This method should decode and type them.
    * */
   public clean() {
-    this.cleanText();
-    this.cleanVenueOrderBy();
-    this.cleanEventOrderBy();
-    this.cleanCourseOrderBy();
-    this.cleanSportsCategories();
-    this.cleanOrganization();
-    this.cleanKeywords();
-    this.cleanPlace();
+    for (const cleanFunctionName of cleanFunctionNames) {
+      this[cleanFunctionName]();
+    }
   }
 }
 

@@ -1,4 +1,5 @@
 import type { ParsedUrlQuery } from 'querystring';
+import type { Subset } from '@events-helsinki/components';
 import type { UnifiedSearchOrderByType } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import { UnifiedSearchOrderBy } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type {
@@ -33,9 +34,41 @@ export const searchAdapterForType: Record<SearchType, SearchAdapterType> = {
   venue: VenueSearchAdapter,
 };
 
-function toBoolean(input?: string | boolean | null): boolean {
-  return ['true', '1', 'yes'].includes(input?.toString().toLowerCase() ?? '');
+function toTrueOrUndefined(input?: string | boolean | null): true | undefined {
+  return (
+    ['true', '1', 'yes'].includes(input?.toString().toLowerCase() ?? '') ||
+    undefined
+  );
 }
+
+/**
+ * List of all available cleaning functions, so they can be iterated and called.
+ * @note Type checked later that all the cleaning functions are listed here and
+ *       no other functions are listed.
+ */
+const CLEANING_FUNCTION_NAMES = [
+  'cleanCourseOrderBy',
+  'cleanEventOrderBy',
+  'cleanHelsinkiOnly',
+  'cleanKeywords',
+  'cleanOrganization',
+  'cleanPlace',
+  'cleanSportsCategories',
+  'cleanTargetGroups',
+  'cleanText',
+  'cleanVenueOrderBy',
+] as const;
+type CleanFnNameListed = (typeof CLEANING_FUNCTION_NAMES)[number];
+
+type CleanFnNameAdapterInput = Exclude<
+  keyof InputFieldValueCleaner<CombinedSearchAdapterInput>,
+  'clean'
+>;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type HasAllCleanFnNames = Subset<CleanFnNameListed, CleanFnNameAdapterInput>;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+type NoExtraCleanFnNames = Subset<CleanFnNameAdapterInput, CleanFnNameListed>;
 
 class CombinedSearchFormAdapter
   implements
@@ -218,8 +251,8 @@ class CombinedSearchFormAdapter
     return;
   }
 
-  public cleanHelsinkOnly() {
-    this.helsinkiOnly = toBoolean(this.helsinkiOnly);
+  public cleanHelsinkiOnly() {
+    this.helsinkiOnly = toTrueOrUndefined(this.helsinkiOnly);
   }
 
   public cleanOrganization() {
@@ -241,14 +274,10 @@ class CombinedSearchFormAdapter
    * This method should decode and type them.
    * */
   public clean() {
-    this.cleanText();
-    this.cleanVenueOrderBy();
-    this.cleanEventOrderBy();
-    this.cleanCourseOrderBy();
-    this.cleanSportsCategories();
-    this.cleanOrganization();
-    this.cleanKeywords();
-    this.cleanPlace();
+    // Call all cleaning functions
+    for (const cleanFnName of CLEANING_FUNCTION_NAMES) {
+      this[cleanFnName]();
+    }
   }
 }
 

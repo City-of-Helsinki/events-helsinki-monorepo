@@ -1,10 +1,11 @@
 // import { DEFAULT_LANGUAGE } from '@events-helsinki/components';
-import stringifyUrlObject from '@events-helsinki/components/utils/stringifyUrlObject';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+// import { i18n } from '../next-i18next.config'; The import does not work to fetch locales
 
 // TODO: For some reason middleware cannot read `'@events-helsinki/components` package without breaking the build
 const DEFAULT_LANGUAGE = 'fi';
+const locales = ['fi', 'en', 'sv']; // i18n.locales.join('|');
 
 const requestType = {
   isStaticFile: (req: NextRequest) => req.nextUrl.pathname.startsWith('/_next'),
@@ -14,23 +15,62 @@ const requestType = {
   isPublicFile: (req: NextRequest) => /\.(.*)$/.test(req.nextUrl.pathname),
 };
 
+/** Get the preferred locale, similar to above or using a library */
+function getLocaleFromPathname(pathname: string) {
+  const pattern = `^/?(?<locale>${locales.join('|')})/?`;
+  const match = pathname.match(new RegExp(pattern, 'i'));
+  return match?.groups?.locale;
+}
+
+function getLocale(req: NextRequest) {
+  const { pathname } = new URL(req.url);
+  return getLocaleFromPathname(pathname) ?? DEFAULT_LANGUAGE;
+}
+
+function isPathnameMissingLocale(pathname: string) {
+  return locales.every(
+    (locale) =>
+      !pathname.startsWith(`/${locale}/`) &&
+      pathname !== `/${locale}` &&
+      // The root in default locale does not have a locale set
+      pathname !== '/'
+  );
+}
 /**
  * Enforce prefix for default locale 'fi'
  * https://github.com/vercel/next.js/discussions/18419
  * @param req
  */
 const prefixDefaultLocale = async (req: NextRequest) => {
-  // stringify and map dynamic paths to segmented, ie: /venues/:id => /venues/[id]
-  const path = stringifyUrlObject(req.nextUrl);
+  const url = new URL(req.url);
+  const { pathname, search } = req.nextUrl;
+  const locale = getLocale(req);
+  // Check if there is any supported locale in the pathname
+  const nextUrlPathnameIsMissingLocale = isPathnameMissingLocale(pathname);
+  const requestUrlPathnameIsMissingLocale = isPathnameMissingLocale(
+    url.pathname
+  );
 
+  // The default locale needs to be redirected so that it uses the default language in URL.
   if (req.nextUrl.locale === 'default') {
     return NextResponse.redirect(
-      new URL(`/${DEFAULT_LANGUAGE}${path}`, req.url)
+      new URL(`/${DEFAULT_LANGUAGE}${pathname}${search}`, req.url)
     );
   }
-  if (!path.includes(req.nextUrl.pathname)) {
+
+  // Redirect if there is no locale.
+  // Redirect is not needed for the default language
+  // If the current full request URL pathname is also missing the locale,
+  // set the default language as a locale.
+  if (
+    nextUrlPathnameIsMissingLocale &&
+    requestUrlPathnameIsMissingLocale &&
+    locale !== DEFAULT_LANGUAGE
+  ) {
+    // e.g. incoming request is /haku
+    // The new URL is now /fi/haku
     return NextResponse.redirect(
-      new URL(`/${req.nextUrl.locale}${path}`, req.url)
+      new URL(`/${DEFAULT_LANGUAGE}${pathname}${search}`, req.url)
     );
   }
 };

@@ -34,7 +34,7 @@ import {
   getEventPrice,
 } from '../../utils/eventUtils';
 import getDateRangeStr from '../../utils/getDateRangeStr';
-
+import getLocaleFromPathname from '../../utils/getLocaleFromPathname';
 import styles from './eventHero.module.scss';
 
 export type EventHeroProps = {
@@ -77,7 +77,11 @@ const EventHero: React.FC<EventHeroProps> = ({
   const returnParam = extractLatestReturnPath(search, `/${locale}`);
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
-    router.push(`${returnPath}${remainingQueryString}`);
+    const goBackUrl = `${
+      returnPath.startsWith('/') ? '' : '/'
+    }${returnPath}${remainingQueryString}`;
+    const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
+    router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
   };
 
   const startTime =

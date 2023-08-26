@@ -5,6 +5,7 @@ import {
   EllipsedTextWithToggle,
   getSecureImage,
   useVenueTranslation,
+  getLocaleFromPathname,
 } from '@events-helsinki/components';
 import type { ReturnParams } from '@events-helsinki/components/utils/eventQueryString.util';
 import { extractLatestReturnPath } from '@events-helsinki/components/utils/eventQueryString.util';
@@ -38,7 +39,11 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
   const returnParam = extractLatestReturnPath(search, `/${locale}`);
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
-    router.push(`${returnPath}${remainingQueryString}`);
+    const goBackUrl = `${
+      returnPath.startsWith('/') ? '' : '/'
+    }${returnPath}${remainingQueryString}`;
+    const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
+    router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
   };
 
   const imageUrl = venue.image ? getSecureImage(venue.image) : '';

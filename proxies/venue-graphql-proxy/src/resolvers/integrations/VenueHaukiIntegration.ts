@@ -1,3 +1,7 @@
+import type {
+  IsOpenType,
+  OpeningHoursType,
+} from '../../datasources/HaukiDataSource';
 import type { Source } from '../../types';
 import VenueResolverInstruction from './VenueResolverIntegration';
 
@@ -12,14 +16,12 @@ export default class HaukiIntegration extends VenueResolverInstruction {
         const haukiId = config.getId(id, source);
 
         return [
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          dataSources.hauki.getIsOpen(haukiId).then((result: any) => ({
-            isOpen: result,
-          })),
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          dataSources.hauki.getOpeningHours(haukiId).then((result: any) => ({
-            openingHours: result,
-          })),
+          dataSources.hauki
+            .getIsOpen(haukiId)
+            .then((isOpen: IsOpenType) => ({ isOpen })),
+          dataSources.hauki
+            .getOpeningHours(haukiId)
+            .then((openingHours: OpeningHoursType) => ({ openingHours })),
         ];
       },
     });

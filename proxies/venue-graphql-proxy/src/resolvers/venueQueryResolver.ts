@@ -48,7 +48,7 @@ async function resolver(_: unknown, params: unknown, context: VenueContext) {
   const [source, id] = parseVenueId(paramId) ?? [];
   const dataResolverFactory = source ? resolvers.get(source) ?? null : null;
   const dataResolver = dataResolverFactory
-    ? dataResolverFactory({ haukiEnabled: AppConfig.isHaukiEnabled })
+    ? dataResolverFactory({ isHaukiEnabled: AppConfig.isHaukiEnabled })
     : null;
 
   return (

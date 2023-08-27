@@ -121,3 +121,8 @@ export default class HaukiDataSource extends DataSourceWithContext<
     return data?.is_open ?? null;
   }
 }
+
+export type OpeningHoursType = Awaited<
+  ReturnType<HaukiDataSource['getOpeningHours']>
+>;
+export type IsOpenType = Awaited<ReturnType<HaukiDataSource['getIsOpen']>>;

@@ -1,19 +1,19 @@
 import gql from 'graphql-tag';
 
-function addHaukiDependentField(content: string, haukiEnabled: boolean) {
+function addHaukiDependentField(content: string, isHaukiEnabled: boolean) {
   return `${
-    !haukiEnabled
+    !isHaukiEnabled
       ? `""" This field is currently disabled because the Hauki integration is not enabled """`
       : ''
   }
   ${content} ${
-    !haukiEnabled
+    !isHaukiEnabled
       ? `@deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")`
       : ''
   }`;
 }
 
-const createVenueSchema = (haukiEnabled = true) => gql`
+const createVenueSchema = (isHaukiEnabled = true) => gql`
   extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key", "@shareable"])
 
   extend type Query {
@@ -93,8 +93,8 @@ const createVenueSchema = (haukiEnabled = true) => gql`
     shortDescription: String
     streetAddress: String
     telephone: String
-    ${addHaukiDependentField('openingHours: [OpeningHour!]', haukiEnabled)}
-    ${addHaukiDependentField('isOpen: Boolean', haukiEnabled)}
+    ${addHaukiDependentField('openingHours: [OpeningHour!]', isHaukiEnabled)}
+    ${addHaukiDependentField('isOpen: Boolean', isHaukiEnabled)}
     ontologyTree: [Ontology]!
     ontologyWords: [Ontology]!
     accessibilitySentences: [AccessibilitySentences]!

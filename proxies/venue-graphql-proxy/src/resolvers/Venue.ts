@@ -1,100 +1,63 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const Venue = {
-  addressLocality({ addressLocality }: any) {
-    return addressLocality;
-  },
-  addressPostalFull({ addressPostalFull }: any) {
-    return addressPostalFull;
-  },
-  dataSource({ dataSource }: any) {
-    return dataSource;
-  },
-  departmentId({ departmentId }: any) {
-    return departmentId;
-  },
-  description({ description }: any) {
-    return description;
-  },
-  displayedServiceOwner({ displayedServiceOwner }: any) {
-    return displayedServiceOwner;
-  },
-  displayedServiceOwnerType({ displayedServiceOwnerType }: any) {
-    return displayedServiceOwnerType;
-  },
-  email({ email }: any) {
-    return email;
-  },
-  id({ id }: any) {
-    return id;
-  },
-  image({ image }: any) {
-    return image;
-  },
-  infoUrl({ infoUrl }: any) {
-    return infoUrl;
-  },
-  name({ name }: any) {
-    return name;
-  },
-  organizationId({ organizationId }: any) {
-    return organizationId;
-  },
-  position({ position }: any) {
-    return position;
-  },
-  postalCode({ postalCode }: any) {
-    return postalCode;
-  },
-  providerType({ providerType }: any) {
-    return providerType;
-  },
-  shortDescription({ shortDescription }: any) {
-    return shortDescription;
-  },
-  streetAddress({ streetAddress }: any) {
-    return streetAddress;
-  },
-  telephone({ telephone }: any) {
-    return telephone;
-  },
-  openingHours({ openingHours }: any, _: any, { haukiEnabled }: any) {
-    if (!haukiEnabled) {
-      return null;
-    }
+import type {
+  IsOpenType,
+  OpeningHoursType,
+} from '../datasources/HaukiDataSource';
+import type { TranslatedVenueDetails } from '../types';
 
-    return openingHours;
-  },
-  isOpen({ isOpen }: any, _: any, { haukiEnabled }: any) {
-    if (!haukiEnabled) {
-      return null;
-    }
+// Map each property of T to function of same name whose return type is property's type
+type GettersForProperties<T> = {
+  [Property in keyof T]: (params: {
+    [P in Property]: T[Property];
+  }) => T[Property];
+};
 
-    return isOpen;
-  },
-  ontologyTree({ ontologyTree }: any) {
-    if (!ontologyTree) {
-      return [];
-    }
+type HaukiPropertyGetters = {
+  openingHours(
+    { openingHours }: { openingHours: OpeningHoursType },
+    _: unknown,
+    { isHaukiEnabled }: { isHaukiEnabled: boolean }
+  ): OpeningHoursType | null;
 
-    return ontologyTree;
-  },
-  ontologyWords({ ontologyWords }: any) {
-    if (!ontologyWords) {
-      return [];
-    }
+  isOpen(
+    { isOpen }: { isOpen: IsOpenType },
+    _: unknown,
+    { isHaukiEnabled }: { isHaukiEnabled: boolean }
+  ): IsOpenType | null;
+};
 
-    return ontologyWords;
-  },
-  accessibilitySentences({ accessibilitySentences }: any) {
-    if (!accessibilitySentences) {
-      return [];
-    }
+type VenuePropertyGetters = GettersForProperties<TranslatedVenueDetails> &
+  HaukiPropertyGetters;
 
-    return accessibilitySentences;
-  },
-  connections({ connections }: any) {
-    return connections;
-  },
+const Venue: VenuePropertyGetters = {
+  addressLocality: ({ addressLocality }) => addressLocality,
+  addressPostalFull: ({ addressPostalFull }) => addressPostalFull,
+  dataSource: ({ dataSource }) => dataSource,
+  departmentId: ({ departmentId }) => departmentId,
+  description: ({ description }) => description,
+  displayedServiceOwner: ({ displayedServiceOwner }) => displayedServiceOwner,
+  displayedServiceOwnerType: ({ displayedServiceOwnerType }) =>
+    displayedServiceOwnerType,
+  email: ({ email }) => email,
+  id: ({ id }) => id,
+  image: ({ image }) => image,
+  infoUrl: ({ infoUrl }) => infoUrl,
+  name: ({ name }) => name,
+  organizationId: ({ organizationId }) => organizationId,
+  position: ({ position }) => position,
+  postalCode: ({ postalCode }) => postalCode,
+  providerType: ({ providerType }) => providerType,
+  shortDescription: ({ shortDescription }) => shortDescription,
+  streetAddress: ({ streetAddress }) => streetAddress,
+  telephone: ({ telephone }) => telephone,
+  openingHours: ({ openingHours }, _: unknown, { isHaukiEnabled }) =>
+    !isHaukiEnabled ? null : openingHours,
+  isOpen: ({ isOpen }, _: unknown, { isHaukiEnabled }) =>
+    !isHaukiEnabled ? null : isOpen,
+  ontologyTree: ({ ontologyTree }) => (!ontologyTree ? [] : ontologyTree),
+  ontologyWords: ({ ontologyWords }) => (!ontologyWords ? [] : ontologyWords),
+  accessibilitySentences: ({ accessibilitySentences }) =>
+    !accessibilitySentences ? [] : accessibilitySentences,
+  connections: ({ connections }) => connections,
 };
 
 export default Venue;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useCommonTranslation, useSearchTranslation } from '../../hooks';
-import type { FilterType } from '../filterButton';
+import type { FilterType, AgeFilterType } from '../filterButton';
 import { FilterButton } from '../filterButton';
 
 export interface AgeFilterProps {
   value: string;
-  type: 'minAge' | 'maxAge';
+  type: AgeFilterType;
   onRemove: (value: string, type: FilterType) => void;
 }
 

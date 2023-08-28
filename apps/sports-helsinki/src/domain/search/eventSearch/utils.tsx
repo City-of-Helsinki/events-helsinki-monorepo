@@ -421,7 +421,7 @@ export const getOrganizationSearchUrl = (
     ROUTES.SEARCH,
     {
       searchType: event.typeId ?? EventTypeId.General,
-      publisher: event.publisher ?? '',
+      organization: event.publisher ?? '',
     },
     locale
   );

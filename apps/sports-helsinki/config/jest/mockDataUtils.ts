@@ -493,7 +493,7 @@ export const appRoutingUrlMocks: AppRoutingContextProps = {
     .fn()
     .mockImplementation(
       (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
-        `/haku?publisher=${event.publisher}&searchType=${event.typeId}`
+        `/haku?organization=${event.publisher}&searchType=${event.typeId}`
     ),
   getPlainEventUrl: jest
     .fn()

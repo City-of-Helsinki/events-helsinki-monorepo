@@ -46,6 +46,7 @@ export { default as Document } from './document/Document';
 export { default as AgeFilter } from './filters/AgeFilter';
 export { default as DateFilter } from './filters/DateFilter';
 export { default as HelsinkiOnlyFilter } from './filters/HelsinkiOnlyFilter';
+export { default as OrganizationFilter } from './filters/OrganizationFilter';
 export { default as PlaceFilter } from './filters/PlaceFilter';
 export { default as PublisherFilter } from './filters/PublisherFilter';
 export { default as TextFilter } from './filters/TextFilter';

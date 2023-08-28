@@ -1,7 +1,7 @@
 import {
   useLocale,
   HelsinkiOnlyFilter,
-  PublisherFilter,
+  OrganizationFilter,
   FilterButton,
   translateValue,
   PlaceFilter,
@@ -30,7 +30,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const {
     sportsCategories,
     targetGroups,
-    organization: publisher,
+    organization,
     helsinkiOnly,
     text: q,
     place,
@@ -67,7 +67,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!sportsCategories.length ||
     !!targetGroups.length ||
     !!helsinkiOnly ||
-    !!publisher ||
+    !!organization ||
     !!place ||
     !!q?.length;
 
@@ -89,7 +89,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
             sportsCategory,
             t
           )}
-          type="sportsCategory"
+          type="sportsCategories"
           value={sportsCategory}
         />
       ))}
@@ -98,14 +98,14 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           key={targetGroup}
           onRemove={() => handleFilterRemove('targetGroups', targetGroup)}
           text={translateValue('appSports:home.targetGroup.', targetGroup, t)}
-          type="targetGroup"
+          type="targetGroups"
           value={targetGroup}
         />
       ))}
-      {publisher && (
-        <PublisherFilter
-          id={publisher}
-          onRemove={() => handleFilterRemove('organization', publisher)}
+      {organization && (
+        <OrganizationFilter
+          id={organization}
+          onRemove={() => handleFilterRemove('organization', organization)}
         />
       )}
       {helsinkiOnly && (

@@ -1,19 +1,24 @@
+export type AgeFilterType = 'maxAge' | 'minAge';
+export type DateFilterType = 'date' | 'dateType';
+
 /**
- * @deprecated since the CombinedSearch refactoring it's new types and adapters should be used instead (e.g CombinedSearchAdapterInput).
+ * @deprecated since the CombinedSearch refactoring its new types and adapters should
+ * be used instead (e.g CombinedSearchAdapterInput) i.e. this should be a subset of
+ * keyof CombinedSearchAdapterInput
  */
-export type FilterType =
-  | 'category'
-  | 'hobbyType'
-  | 'sportsCategory'
-  | 'targetGroup'
+type CombinedSearchInputSubset =
   | 'helsinkiOnly'
-  | 'date'
-  | 'dateType'
-  | 'division'
+  | 'organization'
   | 'place'
-  | 'publisher'
-  | 'target'
-  | 'text'
-  | 'minAge'
-  | 'maxAge'
-  | 'exactAge';
+  | 'sportsCategories'
+  | 'targetGroups'
+  | 'text';
+
+export type FilterType =
+  | AgeFilterType
+  | DateFilterType
+  | CombinedSearchInputSubset
+  | 'category' // Used in events-helsinki and hobbies-helsinki
+  | 'division' // Used in events-helsinki and hobbies-helsinki
+  | 'hobbyType' // Used in hobbies-helsinki
+  | 'publisher'; // Used in events-helsinki and hobbies-helsinki

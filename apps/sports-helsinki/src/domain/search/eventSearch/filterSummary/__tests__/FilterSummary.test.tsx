@@ -82,7 +82,7 @@ interface UrlParams {
   // divisions: string;
   end: string;
   place: string;
-  publisher: string;
+  organization: string;
   start: string;
   text: string;
 }
@@ -93,7 +93,7 @@ const urlParams: UrlParams = {
   // divisions: neighborhoodId,
   end: '2020-08-23',
   place: placeId,
-  publisher: organizationId,
+  organization: organizationId,
   start: '2020-08-20',
   text: 'jazz',
 };
@@ -102,7 +102,7 @@ const urlParams: UrlParams = {
 
 const routes = [
   // eslint-disable-next-line max-len
-  `/haku?categories=${urlParams.categories}&dateTypes=today&end=${urlParams.end}&place=${urlParams.place}&publisher=${urlParams.publisher}&start=${urlParams.start}&text=${urlParams.text}`,
+  `/haku?categories=${urlParams.categories}&dateTypes=today&end=${urlParams.end}&place=${urlParams.place}&organization=${urlParams.organization}&start=${urlParams.start}&text=${urlParams.text}`,
 ];
 
 // TODO: when HDS fixes the tag id -> uncomment
@@ -166,7 +166,7 @@ it.todo('routes to correct url after deleting filters');
 //     { button: `Poista suodatin: ${placeName}`, params: ["place"] },
 //     {
 //       button: `Poista suodatin: ${organizationName}`,
-//       params: ["publisher"],
+//       params: ["organization"],
 //     },
 //     { button: "Poista suodatin: jazz", params: ["text"] },
 //   ];

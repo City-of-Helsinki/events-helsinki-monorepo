@@ -35,7 +35,7 @@ describe('CombinedSearchProvider', () => {
     // text and sportsCategories included
     'text=test%20text&sportsCategories=gym&sportsCategories=playgrounds',
     // organization included
-    'publisher=testorg',
+    'organization=testorg',
   ])('reads the context properly', (searchParams) => {
     mockRouter.setCurrentUrl(`/?${searchParams}`);
     // TODO: Remove the useSearchParamsSpy when mockRouter supports next/navigation.

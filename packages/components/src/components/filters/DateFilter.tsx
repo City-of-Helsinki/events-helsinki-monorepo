@@ -2,12 +2,12 @@ import React from 'react';
 import { useCommonTranslation } from '../../hooks';
 import { translateValue } from '../../utils';
 import { FilterButton } from '../filterButton';
-import type { FilterType } from '../filterButton';
+import type { DateFilterType, FilterType } from '../filterButton';
 
 export interface DateFilterProps {
   onRemove: (value: string, type: FilterType) => void;
   text?: string;
-  type: 'date' | 'dateType';
+  type: DateFilterType;
   value: string;
 }
 

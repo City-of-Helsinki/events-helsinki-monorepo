@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.0.1...venue-graphql-proxy-v1.1.0) (2023-08-28)
+
+
+### Features
+
+* **proxy:** Fetch venue details with fallback languages ([89aee5f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/89aee5f992063b4b8ecf0db2cfe8b69febcdad45))
+* Shared storage and on-demand site generation ([#320](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/320)) ([40ddbe5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/40ddbe50a18ff06d01f3664dae90266a5e6ec24d))
+
+
+### Bug Fixes
+
+* Error boundary usage after update ([61c2698](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/61c269895366cc0652bb9c8f97375b234fb93d42))
+* Venue info connections reading ([48e5e7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48e5e7c6f37e22ee5026898310c75cb5806eeb45))
+
 ## [1.0.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.0.0...venue-graphql-proxy-v1.0.1) (2023-05-24)
 
 ### Bug Fixes

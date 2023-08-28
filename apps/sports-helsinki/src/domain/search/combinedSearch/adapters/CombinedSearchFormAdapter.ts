@@ -1,5 +1,4 @@
 import type { ParsedUrlQuery } from 'querystring';
-import type { Subset } from '@events-helsinki/components';
 import type { UnifiedSearchOrderByType } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import { UnifiedSearchOrderBy } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type {
@@ -46,29 +45,11 @@ function toTrueOrUndefined(input?: string | boolean | null): true | undefined {
  * @note Type checked later that all the cleaning functions are listed here and
  *       no other functions are listed.
  */
-const CLEANING_FUNCTION_NAMES = [
-  'cleanCourseOrderBy',
-  'cleanEventOrderBy',
-  'cleanHelsinkiOnly',
-  'cleanKeywords',
-  'cleanOrganization',
-  'cleanPlace',
-  'cleanSportsCategories',
-  'cleanTargetGroups',
-  'cleanText',
-  'cleanVenueOrderBy',
-] as const;
-type CleanFnNameListed = (typeof CLEANING_FUNCTION_NAMES)[number];
 
 type CleanFnNameAdapterInput = Exclude<
   keyof InputFieldValueCleaner<CombinedSearchAdapterInput>,
   'clean'
 >;
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type HasAllCleanFnNames = Subset<CleanFnNameListed, CleanFnNameAdapterInput>;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type NoExtraCleanFnNames = Subset<CleanFnNameAdapterInput, CleanFnNameListed>;
 
 class CombinedSearchFormAdapter
   implements
@@ -275,7 +256,13 @@ class CombinedSearchFormAdapter
    * */
   public clean() {
     // Call all cleaning functions
-    for (const cleanFnName of CLEANING_FUNCTION_NAMES) {
+    const cleanFunctions = Object.keys(initialCombinedSearchFormValues).map(
+      (fieldName) =>
+        `clean${
+          fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
+        }` as CleanFnNameAdapterInput
+    );
+    for (const cleanFnName of cleanFunctions) {
       this[cleanFnName]();
     }
   }

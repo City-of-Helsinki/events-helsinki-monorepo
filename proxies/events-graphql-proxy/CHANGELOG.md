@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.0.0...events-graphql-proxy-v1.1.0) (2023-08-28)
+
+
+### Features
+
+* **events-graphql-federation:** Update events subgraph & supergraph ([78b6397](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/78b639774f5f0913d71c23a688007d480699a006))
+* **events-graphql-proxy:** Add publisherAncestor parameter to eventList ([5672d37](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5672d37cd53a0b6df7b713ac2fbd7906ce14fef4))
+
+
+### Bug Fixes
+
+* Error boundary usage after update ([61c2698](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/61c269895366cc0652bb9c8f97375b234fb93d42))
+* Neighborhood list  get-method should not start with slash ([00e0184](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/00e0184c336de5074ef84f6da130645e8122fee1))
+* Venue info connections reading ([48e5e7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48e5e7c6f37e22ee5026898310c75cb5806eeb45))
+
 ## [1.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v0.3.0...events-graphql-proxy-v1.0.0) (2023-04-12)
 
 

@@ -4,9 +4,6 @@ import getConfig from 'next/config';
 import { i18n } from '../../../next-i18next.config';
 import { ROUTES } from '../../constants';
 
-// Only holds publicRuntimeConfig
-const { publicRuntimeConfig } = getConfig();
-
 class AppConfig {
   /**
    * The base URL of the CMS.
@@ -18,7 +15,7 @@ class AppConfig {
    * inside the app.
    * */
   static get cmsOrigin() {
-    return getEnvOrError(publicRuntimeConfig.cmsOrigin, 'CMS_ORIGIN');
+    return getEnvOrError(process.env.CMS_ORIGIN, 'CMS_ORIGIN');
   }
 
   /**
@@ -27,7 +24,7 @@ class AppConfig {
    * */
   static get federationGraphqlEndpoint() {
     return getEnvOrError(
-      publicRuntimeConfig.federationRouter,
+      process.env.FEDERATION_ROUTER_ENDPOINT,
       'FEDERATION_ROUTER_ENDPOINT'
     );
   }
@@ -43,7 +40,7 @@ class AppConfig {
    * */
   static get linkedEventsEventEndpoint() {
     return getEnvOrError(
-      publicRuntimeConfig.linkedEvents,
+      process.env.LINKEDEVENTS_EVENT_ENDPOINT,
       'LINKEDEVENTS_EVENT_ENDPOINT'
     );
   }

@@ -264,7 +264,7 @@ class AppConfig {
   // ...
   static get linkedEventsEventEndpoint() {
     return getEnvOrError(
-      publicRuntimeConfig.linkedEvents,
+      process.env.LINKEDEVENTS_EVENT_ENDPOINT,
       "LINKEDEVENTS_EVENT_ENDPOINT"
     );
   }

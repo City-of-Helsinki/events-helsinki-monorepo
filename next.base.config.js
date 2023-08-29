@@ -274,12 +274,6 @@ const nextBaseConfig = ({
       // to bypass https://github.com/zeit/next.js/issues/8251
       PROJECT_ROOT: __dirname,
     },
-    publicRuntimeConfig: {
-      // Will be available on both server and client
-      federationRouter: process.env.FEDERATION_ROUTER_ENDPOINT,
-      cmsOrigin: process.env.CMS_ORIGIN,
-      linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT,
-    },
   };
 
   let config = { ...nextConfig, ...overrideConfig };

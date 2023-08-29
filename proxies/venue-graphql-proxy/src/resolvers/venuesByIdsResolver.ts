@@ -21,11 +21,14 @@ const venusByIdsResolver = async (
   resolveInfo: GraphQLResolveInfo
 ) => {
   const venueIds = (params as { ids: string[] }).ids;
-  return await Promise.all(
+  const venues = await Promise.all(
     venueIds.map((idWithSource: string) =>
       venueQueryResolver(source, { id: idWithSource }, context, resolveInfo)
     )
   );
+  // Filter the "empty venues" (look for EMPTY_VENUE_DETAILS),
+  // because any client should never have any need for those.
+  return venues.filter((venue) => venue?.id);
 };
 
 export default venusByIdsResolver;

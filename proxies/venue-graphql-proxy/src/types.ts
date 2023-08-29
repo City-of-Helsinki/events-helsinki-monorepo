@@ -1,4 +1,3 @@
-import type { Subset } from '@events-helsinki/components/src/utils/typescript.utils';
 import type { Sources } from './contants/constants';
 import type { Ontology, Point } from './types/types';
 
@@ -141,30 +140,6 @@ export type TprekUnitWithoutNull = {
   phone?: string;
   picture_url?: string;
 };
-
-export type TprekUnitTranslatableFields =
-  | 'address_city'
-  | 'address_postal_full'
-  | 'desc'
-  | 'displayed_service_owner'
-  | 'name'
-  | 'short_desc'
-  | 'street_address'
-  | 'www';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type UnitHasTranslatableFieldsWithLocaleSuffix = Subset<
-  keyof TprekUnitWithoutNull,
-  `${TprekUnitTranslatableFields}_${Locale}`
->;
-
-export type TprekUnitConnectionTranslatableFields = 'name' | 'www';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type ConnectionHasTranslatableFieldsWithLocaleSuffix = Subset<
-  keyof TprekUnitConnection,
-  `${TprekUnitConnectionTranslatableFields}_${Locale}`
->;
 
 export type TprekUnit = TprekUnitWithoutNull | null;
 

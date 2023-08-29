@@ -1,3 +1,4 @@
+import type { ExtractPrefixesFromLocaleSuffixedNames } from '@events-helsinki/components/src/utils/typescript.utils';
 import get from 'lodash/get';
 import AppConfig from '../config/AppConfig';
 import { Sources } from '../contants/constants';
@@ -11,9 +12,7 @@ import type {
   TranslatableVenueDetails,
   TranslationsObject,
   TranslatedVenueDetails,
-  TprekUnitTranslatableFields,
   TprekUnitConnection,
-  TprekUnitConnectionTranslatableFields,
 } from '../types';
 import type { Point } from '../types/types';
 
@@ -40,9 +39,9 @@ const LOCALIZED_SENTENCE_NAME: Record<
 type TranslatableObjectType = TprekUnitWithoutNull | TprekUnitConnection;
 type TranslatableFieldsFor<T extends TranslatableObjectType> =
   T extends TprekUnitWithoutNull
-    ? TprekUnitTranslatableFields
+    ? ExtractPrefixesFromLocaleSuffixedNames<keyof TprekUnitWithoutNull, Locale>
     : T extends TprekUnitConnection
-    ? TprekUnitConnectionTranslatableFields
+    ? ExtractPrefixesFromLocaleSuffixedNames<keyof TprekUnitConnection, Locale>
     : never;
 
 export function formTranslationObject<

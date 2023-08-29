@@ -47,6 +47,10 @@ describe('CombinedSearchFormAdapter', () => {
       }
     });
 
+    it('field specific clean functions should have unique names', () => {
+      expect(cleanFunctionNames).toHaveLength(new Set(cleanFunctionNames).size);
+    });
+
     it('field specific clean functions take no parameters', () => {
       const adapter = new CombinedSearchFormAdapter(locale, input);
       for (const cleanFunctionName of cleanFunctionNames) {

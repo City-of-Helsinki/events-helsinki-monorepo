@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.7.0...sports-helsinki-v1.7.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* Similar venues for an empty result from the venues proxy ([d081188](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d0811884b985837d9f53c1db456ab15ac482d250))
+* **sports:** Fix CombinedSearchFormAdapter's clean function ([d7853c1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d7853c105650fe832057b162c9f3e771e101766e))
+
 ## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.6.0...sports-helsinki-v1.7.0) (2023-08-24)
 
 

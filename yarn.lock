@@ -136,9 +136,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/server@npm:4.7.5":
-  version: 4.7.5
-  resolution: "@apollo/server@npm:4.7.5"
+"@apollo/server@npm:4.9.3":
+  version: 4.9.3
+  resolution: "@apollo/server@npm:4.9.3"
   dependencies:
     "@apollo/cache-control-types": "npm:^1.0.3"
     "@apollo/server-gateway-interface": "npm:^1.1.1"
@@ -168,7 +168,7 @@ __metadata:
     whatwg-mimetype: "npm:^3.0.0"
   peerDependencies:
     graphql: ^16.6.0
-  checksum: c248245020f302afa7bbef65759a52a05ea1c121fd66791fc600d33e0309ea7d560b9e6ea2a06898c1005eafe0acd998e5c51928706e9bc476e1f721fe60ef98
+  checksum: 4572b5532ceb34e745c60959a92a74351bc570a3ff1cc6e57b43d4716f9b28fa1ab6b74c77a768c2c04471cf2a6c0a5b8139dedfa15bb8750c4023149da0dd3a
   languageName: node
   linkType: hard
 
@@ -3423,7 +3423,7 @@ __metadata:
   resolution: "@events-helsinki/graphql-proxy-server@workspace:packages/graphql-proxy-server"
   dependencies:
     "@apollo/datasource-rest": "npm:6.0.1"
-    "@apollo/server": "npm:4.7.5"
+    "@apollo/server": "npm:4.9.3"
     "@apollo/utils.keyvaluecache": "npm:3.0.0"
     "@babel/core": "npm:7.22.5"
     "@babel/plugin-syntax-flow": "npm:7.22.5"
@@ -13477,7 +13477,7 @@ __metadata:
   resolution: "events-graphql-proxy@workspace:proxies/events-graphql-proxy"
   dependencies:
     "@apollo/datasource-rest": "npm:6.0.1"
-    "@apollo/server": "npm:4.7.5"
+    "@apollo/server": "npm:4.9.3"
     "@apollo/subgraph": "npm:2.4.8"
     "@babel/core": "npm:7.22.5"
     "@babel/plugin-syntax-flow": "npm:7.22.5"
@@ -24548,7 +24548,7 @@ __metadata:
   dependencies:
     "@apollo/client": "npm:3.7.16"
     "@apollo/datasource-rest": "npm:6.0.1"
-    "@apollo/server": "npm:4.7.5"
+    "@apollo/server": "npm:4.9.3"
     "@apollo/subgraph": "npm:2.4.8"
     "@as-integrations/next": "npm:2.0.0"
     "@babel/core": "npm:7.22.5"

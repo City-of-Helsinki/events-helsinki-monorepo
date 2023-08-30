@@ -42,7 +42,7 @@
   "dependencies": {
     "@apollo/client": "3.7.16",
     "@apollo/datasource-rest": "6.0.1",
-    "@apollo/server": "4.7.5",
+    "@apollo/server": "4.9.3",
     "@apollo/subgraph": "2.4.8",
     "@as-integrations/next": "2.0.0",
     "@events-helsinki/common-i18n": "workspace:^",

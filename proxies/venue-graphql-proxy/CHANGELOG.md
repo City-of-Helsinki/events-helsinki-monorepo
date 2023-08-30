@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.1.0...venue-graphql-proxy-v1.2.0) (2023-08-30)
+
+
+### Features
+
+* **venue-graphql-proxy:** Expose more fields from TPREK unit endpoint ([8e4fcec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8e4fcec34492e3efd2d10f1afbb31d6b427ee52d))
+
+
+### Bug Fixes
+
+* **venue-graphql-proxy:** Handle null TPREK unit gracefully ([113c7f0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/113c7f01bc9f65714f71563bd76f1d98ecb5a76f))
+* **venues-proxy:** VenuesByIds should not return empty venues ([6aaaf5b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6aaaf5bb2076cf47ea9d703f2d283a2e26fe7405))
+
 ## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.0.1...venue-graphql-proxy-v1.1.0) (2023-08-28)
 
 

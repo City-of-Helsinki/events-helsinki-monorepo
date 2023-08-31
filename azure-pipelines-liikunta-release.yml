@@ -58,7 +58,7 @@ extends:
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1
-      NEXT_PUBLIC_ASKEM_ENABLED: 0
+      NEXT_PUBLIC_ASKEM_ENABLED: 1
     configMap: # pod environment variables for production
       FEDERATION_ROUTER_ENDPOINT: https://liikunta-router.api.hel.fi/
       CMS_ORIGIN: https://liikunta2.content.api.hel.fi

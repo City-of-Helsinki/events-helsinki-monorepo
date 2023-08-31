@@ -25,7 +25,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Route (pages)
 
-The pages are served with some server side rendering (SSR) mechanism to offer better search engine optimization (SEO) and fast user friendly UI.
+The pages are served with some server side rendering (SSR) mechanism to offer better search engine optimization (SEO) and fast user-friendly UI.
 The pre-rendering process that we mostly use here is SSG - "automatically generated as static HTML + JSON (uses getStaticProps)".
 The server side rendered pages are under the [pages](./src/pages/) -directory. More about NextJS's data fetching in https://nextjs.org/docs/basic-features/data-fetching/overview.
 

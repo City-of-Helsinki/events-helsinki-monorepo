@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.4.0...hobbies-helsinki-v2.5.0) (2023-08-31)
+
+
+### Features
+
+* **error:** Show the Apollo errors in a generic notification window ([9344c29](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9344c292c54d91422bcc5408dff4a6c4e72099de))
+
+
+### Bug Fixes
+
+* App release information to the readiness probe ([#391](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/391)) ([e141119](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e1411193270203e3658ee58b8708c00dab83e442))
+* Article hero image info fix ([#399](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/399)) ([1a28fed](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1a28fed7da427aedab545ecd4de5371c908b213a))
+* Error boundary usage after update ([61c2698](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/61c269895366cc0652bb9c8f97375b234fb93d42))
+* **error:** 500 page translations and build issue in Hobbies app ([684d102](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/684d1024b7e3174e7c5b44709d121c804681bf19))
+* Event keywords import ([c66e03c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c66e03c68cea262a369e31e84cf25cec12f01eae))
+* External link icon size with multiple lines ([#388](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/388)) ([f8f8726](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f8f872638f2aa8952a29cb820a716252f91bc2c0))
+* Go back url from details page when a language has been changed ([eef46c2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/eef46c27b343c9ff9840bce818ebdf9f46d34c93))
+* Hero and article tags ([#396](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/396)) ([ee6f641](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ee6f641a45336ed862c6c725396bf637d9724dd2))
+* Large cards stylings ([#401](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/401)) ([3ec9a41](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3ec9a4153233f2dd849cfc32011012c176c7ca8c))
+* New hcrc typings ([#402](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/402)) ([82a7e4c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/82a7e4c5dc322e2e35c8e73dab468c46e2787d5a))
+* Super event lazy loading when the super event was deleted ([fbd3769](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fbd37693ecf3697e1454f8d997c589e423e6eb1f))
+* Wrong hcrc version missing styles ([#408](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/408)) ([6d47003](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6d4700302f32d474576dc7d1d3a9bbf0c4f7c6ab))
+
 ## [2.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.3.0...hobbies-helsinki-v2.4.0) (2023-07-07)
 
 

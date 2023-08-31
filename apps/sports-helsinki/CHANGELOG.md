@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.7.1...sports-helsinki-v1.8.0) (2023-08-31)
+
+
+### Features
+
+* **askem:** Enable Askem in staging & production, fix typos in READMEs ([10fdb92](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/10fdb92599d0be485dcb8586ae26f761a8e3b125))
+
 ## [1.7.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.7.0...sports-helsinki-v1.7.1) (2023-08-30)
 
 

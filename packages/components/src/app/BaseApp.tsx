@@ -79,6 +79,7 @@ function BaseApp({
   getEventUrl,
   getEventListLinkUrl,
   getOrganizationSearchUrl,
+  getHelsinkiOnlySearchUrl,
   getPlainEventUrl,
   getKeywordOnClickHandler,
 }: Props) {
@@ -144,6 +145,7 @@ function BaseApp({
           getEventUrl={getEventUrl}
           getEventListLinkUrl={getEventListLinkUrl}
           getOrganizationSearchUrl={getOrganizationSearchUrl}
+          getHelsinkiOnlySearchUrl={getHelsinkiOnlySearchUrl}
           getPlainEventUrl={getPlainEventUrl}
           getKeywordOnClickHandler={getKeywordOnClickHandler}
         >

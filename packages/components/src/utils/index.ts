@@ -14,6 +14,7 @@ export { default as getTimeFormat } from './getTimeFormat';
 export { default as getUrlParamAsArray } from './getUrlParamAsArray';
 export { default as getURLSearchParamsFromAsPath } from './getURLSearchParamsFromAsPath';
 export { default as isClient } from './isClient';
+export { default as isVenueHelsinkiCityOwned } from './isVenueHelsinkiCityOwned';
 export { default as isTestEnv } from './isTestEnv';
 export * from './queryString';
 export { default as showToast } from './showToast';

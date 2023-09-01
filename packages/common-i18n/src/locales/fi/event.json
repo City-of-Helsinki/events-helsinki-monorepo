@@ -59,6 +59,10 @@
       "general": "Katso julkaisijan muut tapahtumat",
       "course": "Katso julkaisijan muut harrastukset"
     },
+    "linkSearchByHelsinkiOnly": {
+      "general": "Katso Helsingin muut tapahtumat",
+      "course": "Katso Helsingin muut harrastukset"
+    },
     "linkWebPage": "Verkkosivu",
     "offers": {
       "isFree": "Maksuton"

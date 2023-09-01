@@ -120,6 +120,7 @@ const mocks = [
       keywordOrSet2: [''],
       language: undefined,
       pageSize: 100,
+      publisherAncestor: null,
       eventType: [EventTypeId.General],
     },
     response: similarEvents,

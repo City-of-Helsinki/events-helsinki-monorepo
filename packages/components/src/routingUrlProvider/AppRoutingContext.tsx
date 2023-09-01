@@ -1,11 +1,12 @@
 import type { NextRouter } from 'next/router';
 import React from 'react';
-import type { EventFieldsFragment } from '../types/generated/graphql';
+import type { EventFieldsFragment, Venue } from '../types/generated/graphql';
 import type {
   GetCardUrlType,
   GetEventUrlType,
   GetEventListLinkUrlType,
   GetOrganizationSearchUrlType,
+  GetHelsinkiOnlySearchUrlType,
   GetPlainEventUrlType,
   KeywordOnClickHandlerType,
   AppLanguage,
@@ -16,6 +17,7 @@ export type AppRoutingContextProps = {
   getEventUrl: GetEventUrlType;
   getEventListLinkUrl: GetEventListLinkUrlType;
   getOrganizationSearchUrl: GetOrganizationSearchUrlType;
+  getHelsinkiOnlySearchUrl: GetHelsinkiOnlySearchUrlType;
   getPlainEventUrl: GetPlainEventUrlType;
   getKeywordOnClickHandler: KeywordOnClickHandlerType;
 };
@@ -43,6 +45,13 @@ const defaultRoutingContext: AppRoutingContextProps = {
   },
   getOrganizationSearchUrl: function (
     _event: EventFieldsFragment,
+    _router: NextRouter,
+    _locale: AppLanguage
+  ): string {
+    throw new Error('Function not implemented.');
+  },
+  getHelsinkiOnlySearchUrl: function (
+    _source: EventFieldsFragment | Venue,
     _router: NextRouter,
     _locale: AppLanguage
   ): string {

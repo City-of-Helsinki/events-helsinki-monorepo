@@ -22,6 +22,7 @@ import type {
   Place,
   PlaceListResponse,
   StaticPage,
+  Venue,
 } from '@events-helsinki/components';
 import { EXTLINK, EventTypeId } from '@events-helsinki/components';
 import type { AppRoutingContextProps } from '@events-helsinki/components/routingUrlProvider/AppRoutingContext';
@@ -375,6 +376,17 @@ export const appRoutingUrlMocks: AppRoutingContextProps = {
     .mockImplementation(
       (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
         `/haku?publisher=${event.publisher}&searchType=${event.typeId}`
+    ),
+  getHelsinkiOnlySearchUrl: jest
+    .fn()
+    .mockImplementation(
+      (
+        _source: EventFields | Venue,
+        _router: NextRouter,
+        _locale: AppLanguage
+      ) => {
+        return `/haku?helsinkiOnly=true`;
+      }
     ),
   getPlainEventUrl: jest
     .fn()

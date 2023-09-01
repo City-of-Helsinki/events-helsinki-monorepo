@@ -1,8 +1,9 @@
 import type { UnifiedSearchVenue } from '@events-helsinki/components';
 import {
   getTranslation,
-  useLocale,
+  isVenueHelsinkiCityOwned,
   LoadingSpinner,
+  useLocale,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Button } from 'hds-react';
@@ -50,6 +51,7 @@ const VenueList: React.FC<Props> = ({
               venue?.location?.address?.city
             )}`}
             imageUrl={(venue?.images && venue?.images[0]?.url) ?? ''}
+            isHelsinkiCityOwned={isVenueHelsinkiCityOwned(venue)}
             tags={
               venue?.ontologyWords
                 ?.map((tag) => getTranslation(locale, tag?.label))

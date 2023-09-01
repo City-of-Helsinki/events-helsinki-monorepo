@@ -20,7 +20,9 @@
     "labelRoute": "Hitta framme",
     "labelContactDetails": "Kontaktuppgifter",
     "labelOpeningHours": "Öppettider",
+    "labelResponsibleForVenue": "Ansvarig för platsen",
     "link": {
+      "searchByHelsinkiOnly": "Se Helsinkis övriga platser",
       "website": "Webbsida"
     }
   },

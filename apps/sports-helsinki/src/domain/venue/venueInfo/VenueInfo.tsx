@@ -2,10 +2,22 @@ import type { Venue } from '@events-helsinki/components';
 import {
   InfoWithIcon,
   useVenueTranslation,
+  useCommonTranslation,
   useTabFocusStyle,
   EllipsedTextWithToggle,
+  isVenueHelsinkiCityOwned,
+  useAppRoutingContext,
+  useLocale,
 } from '@events-helsinki/components';
-import { IconClock, IconInfoCircle, IconMap, IconPhone } from 'hds-react';
+import {
+  IconCheckCircleFill,
+  IconClock,
+  IconCompany,
+  IconInfoCircle,
+  IconMap,
+  IconPhone,
+} from 'hds-react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
 import {
@@ -139,6 +151,56 @@ const VenueRouteInfo = ({ venue }: { venue: Venue }) => {
   );
 };
 
+const ServiceOwnerInfo = ({ venue }: { venue: Venue }) => {
+  const { t } = useVenueTranslation();
+  const { t: commonT } = useCommonTranslation();
+  const { getHelsinkiOnlySearchUrl } = useAppRoutingContext();
+  const locale = useLocale();
+  const router = useRouter();
+  const isHelsinkiCityOwned = isVenueHelsinkiCityOwned(venue);
+  const cleanedServiceOwnerName = venue?.displayedServiceOwner
+    ?.replaceAll(
+      // remove unnecessary prefixes
+      /^(?:kunnallinen palvelu|kommunal tjänst|municipal service), /gi,
+      ''
+    )
+    .replaceAll(
+      // remove unnecessary suffixes
+      /, (?:Helsingin kaupunki|Helsingfors stad|City of Helsinki)$/gi,
+      ''
+    );
+
+  return (
+    <InfoWithIcon
+      icon={<IconCompany />}
+      title={t('info.labelResponsibleForVenue')}
+    >
+      <>
+        {isHelsinkiCityOwned && (
+          <div className={styles.helsinkiCityOwnedText}>
+            {commonT('common:cityOfHelsinki')}
+            <IconCheckCircleFill
+              className={styles.helsinkiCityOwnedIcon}
+              aria-hidden
+            />
+          </div>
+        )}
+        <div>{cleanedServiceOwnerName}</div>
+        {isHelsinkiCityOwned && (
+          <SecondaryLink
+            data-testid="helsinkiOnlyLink"
+            className={styles.link}
+            variant="arrowRight"
+            href={getHelsinkiOnlySearchUrl(venue, router, locale)}
+          >
+            {t('info.link.searchByHelsinkiOnly')}
+          </SecondaryLink>
+        )}
+      </>
+    </InfoWithIcon>
+  );
+};
+
 const VenueInfo = ({ venue }: { venue: Venue }) => {
   const venueInfoContainer = React.useRef<HTMLDivElement | null>(null);
   useTabFocusStyle({
@@ -152,6 +214,7 @@ const VenueInfo = ({ venue }: { venue: Venue }) => {
         <ContactDetailsInfo venue={venue} />
         <VenueInformationLinksContainer venue={venue} />
         <VenueRouteInfo venue={venue} />
+        <ServiceOwnerInfo venue={venue} />
       </div>
     </div>
   );

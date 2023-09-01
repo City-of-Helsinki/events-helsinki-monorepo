@@ -43,6 +43,21 @@ export const isEventCancelled = (event: EventFields): boolean => {
 };
 
 /**
+ * Check is event owned by City of Helsinki
+ * @param event
+ * @return {boolean}
+ */
+export const isEventHelsinkiCityOwned = (event: EventFields): boolean => {
+  const publisherPrefix = event?.publisher?.split(':')[0] ?? '';
+  // Prefixes of organization IDs under City of Helsinki root organization 'ahjo:00001',
+  // see https://api.hel.fi/linkedevents/v1/organization/ahjo:00001/
+  //
+  // Kultus subtree of the organization tree starts at 'kultus:0' and is excluded,
+  // see https://api.hel.fi/linkedevents/v1/organization/kultus:0/
+  return ['ahjo', 'helsinki'].includes(publisherPrefix);
+};
+
+/**
  * Check is event free
  * @param eventData
  * @return {boolean}

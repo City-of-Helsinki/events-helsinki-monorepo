@@ -11,6 +11,7 @@ export default function NavigationProvider({
   getEventUrl,
   getEventListLinkUrl,
   getOrganizationSearchUrl,
+  getHelsinkiOnlySearchUrl,
   getPlainEventUrl,
   getKeywordOnClickHandler,
   children,
@@ -20,6 +21,7 @@ export default function NavigationProvider({
     getEventUrl,
     getEventListLinkUrl,
     getOrganizationSearchUrl,
+    getHelsinkiOnlySearchUrl,
     getPlainEventUrl,
     getKeywordOnClickHandler,
   };

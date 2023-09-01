@@ -20,7 +20,9 @@
     "labelRoute": "Get directions",
     "labelContactDetails": "Contact information",
     "labelOpeningHours": "Opening hours",
+    "labelResponsibleForVenue": "Responsible for venue",
     "link": {
+      "searchByHelsinkiOnly": "See Helsinki's other venues",
       "website": "Webpage"
     }
   },

@@ -59,6 +59,10 @@
       "general": "See other events by publisher",
       "course": "See other hobbies by publisher"
     },
+    "linkSearchByHelsinkiOnly": {
+      "general": "See Helsinki's other events",
+      "course": "See Helsinki's other hobbies"
+    },
     "linkWebPage": "Web page",
     "offers": {
       "isFree": "Free"

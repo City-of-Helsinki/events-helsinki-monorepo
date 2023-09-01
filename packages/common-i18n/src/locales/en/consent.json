@@ -38,9 +38,11 @@
     "hours": "{{ hours }} hours",
     "days": "{{ days }} days"
   },
-  "askem": {
-    "cookiesRequiredTitle": "Feedback buttons cannot be displayed",
-    "cookiesRequiredDescription": "To use this feature, you must accept cookies from the site. You can provide feedback on this page by enabling statistics-related cookies.",
+  "cookiesRequired": {
     "cookieSettingsButtonText": "Change cookie settings"
+  },
+  "askem": {
+    "cookiesRequiredDescription": "To use this feature, you must accept cookies from the site. You can provide feedback on this page by enabling statistics-related cookies.",
+    "cookiesRequiredTitle": "Feedback buttons cannot be displayed"
   }
 }

@@ -38,9 +38,11 @@
     "hours": "{{ hours }} tuntia",
     "days": "{{ days }} päivää"
   },
-  "askem": {
-    "cookiesRequiredTitle": "Sivun palautenappeja ei voida näyttää",
-    "cookiesRequiredDescription": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset antamaan palautetta tästä sivusta sallimalla evästeasetuksista tilastointiin liittyvät evästeet.",
+  "cookiesRequired": {
     "cookieSettingsButtonText": "Muokkaa evästeasetuksia"
+  },
+  "askem": {
+    "cookiesRequiredDescription": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset antamaan palautetta tästä sivusta sallimalla evästeasetuksista tilastointiin liittyvät evästeet.",
+    "cookiesRequiredTitle": "Sivun palautenappeja ei voida näyttää"
   }
 }

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import useConsentTranslation from '../../hooks/useConsentTranslation';
+import CookiesRequired from '../cookieConsent/CookiesRequired';
 import styles from './askem.module.scss';
 import useAskem from './useAskem';
 
@@ -16,7 +16,7 @@ const AskemFeedbackContainer: React.FC<AskemFeedbackContainerProps> = ({
   withPadding = false,
 }) => {
   const { consentGiven, disabled } = useAskem();
-  const { t } = useTranslation();
+  const { t } = useConsentTranslation();
   const router = useRouter();
 
   const handleConsentPageRedirect = () => {
@@ -38,19 +38,12 @@ const AskemFeedbackContainer: React.FC<AskemFeedbackContainerProps> = ({
         )}
       >
         {!consentGiven && (
-          <div className={styles.rnsCookiesRequired}>
-            <h2>{t('consent:askem.cookiesRequiredTitle')}</h2>
-            <p>{t('consent:askem.cookiesRequiredDescription')}</p>
-            {consentUrl && (
-              <Button
-                theme="black"
-                variant="secondary"
-                onClick={handleConsentPageRedirect}
-              >
-                {t('consent:askem.cookieSettingsButtonText')}
-              </Button>
-            )}
-          </div>
+          <CookiesRequired
+            className={styles.rnsCookiesRequired}
+            title={t('consent:askem.cookiesRequiredTitle')}
+            description={t('consent:askem.cookiesRequiredDescription')}
+            handleConsent={handleConsentPageRedirect}
+          />
         )}
         {!disabled && consentGiven && <div className="rns" />}
       </div>

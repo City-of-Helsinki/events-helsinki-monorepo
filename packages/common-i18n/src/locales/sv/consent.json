@@ -38,9 +38,11 @@
     "hours": "{{ hours }} timmar",
     "days": "{{ days }} dagar"
   },
-  "askem": {
-    "cookiesRequiredTitle": "Feedbackknappar kan inte visas",
-    "cookiesRequiredDescription": "För att använda denna funktion måste du acceptera cookies från webbplatsen. Du kan ge feedback på den här sidan genom att aktivera statistikrelaterade cookies.",
+  "cookiesRequired": {
     "cookieSettingsButtonText": "Ändra inställningarna för cookies"
+  },
+  "askem": {
+    "cookiesRequiredDescription": "För att använda denna funktion måste du acceptera cookies från webbplatsen. Du kan ge feedback på den här sidan genom att aktivera statistikrelaterade cookies.",
+    "cookiesRequiredTitle": "Feedbackknappar kan inte visas"
   }
 }

@@ -41,7 +41,6 @@ const EventLocation: React.FC<Props> = ({ event }) => {
     locale
   );
 
-  // TODO: Migrate the map of VenueLocation and EventLocation to a common component
   return (
     <MapBox
       title={t('common:mapBox.title')}

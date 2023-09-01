@@ -7,6 +7,7 @@ import {
 import { IconAngleDown } from 'hds-react';
 import dynamic from 'next/dynamic';
 import React from 'react';
+import { ROUTES } from '../../../constants';
 import {
   getGoogleDirectionsUrl,
   getHSLDirectionsUrl,
@@ -73,6 +74,7 @@ const VenueLocation = ({ venue }: { venue: Venue }) => {
       accessibilitySentences={accessibilitySentencesCollapse}
       googleDirectionsLink={getGoogleDirectionsUrl(null, directionPoint)}
       hslDirectionsLink={getHSLDirectionsUrl(null, directionPoint)}
+      consentUrl={ROUTES.COOKIE_CONSENT}
     />
   );
 };

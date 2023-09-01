@@ -1,7 +1,9 @@
 import { IconLocation, useCookies } from 'hds-react';
+import router from 'next/router';
 import React from 'react';
 import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
 import { useCommonTranslation } from '../../hooks';
+import CookiesRequired from '../cookieConsent/CookiesRequired';
 import Text from '../text/Text';
 import styles from './mapBox.module.scss';
 
@@ -14,6 +16,7 @@ type Props = {
   googleDirectionsLink: string;
   hslDirectionsLink: string;
   accessibilitySentences?: JSX.Element;
+  consentUrl?: string;
 };
 
 function MapBox({
@@ -25,6 +28,7 @@ function MapBox({
   googleDirectionsLink,
   hslDirectionsLink,
   accessibilitySentences,
+  consentUrl,
 }: Props) {
   const { t } = useCommonTranslation();
   const { getAllConsents } = useCookies();
@@ -32,7 +36,12 @@ function MapBox({
     const consents = getAllConsents();
     return consents[cookieId];
   };
-  const isServiceMapEnabled = getConsentStatus('servicemap_session');
+  const isConsentGiven = getConsentStatus('servicemap_session');
+  const handleConsentPageRedirect = () => {
+    if (consentUrl) {
+      router.push(`${consentUrl}?returnPath=${router.asPath}`);
+    }
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
@@ -44,7 +53,14 @@ function MapBox({
           {t('common:mapBox.location.openMap')}
         </Link>
       </div>
-      {isServiceMapEnabled && (
+      {!isConsentGiven && (
+        <CookiesRequired
+          title={t('common:mapBox.cookiesRequired.title')}
+          description={t('common:mapBox.cookiesRequired.description')}
+          handleConsent={handleConsentPageRedirect}
+        />
+      )}
+      {isConsentGiven && (
         <iframe
           title={title}
           className={styles.mapContainer}

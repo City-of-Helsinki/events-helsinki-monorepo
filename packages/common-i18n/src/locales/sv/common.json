@@ -87,6 +87,10 @@
   "next": "Nästa",
   "previous": "Föregående",
   "mapBox": {
+    "cookiesRequired": {
+      "title": "Kartan kan inte visas",
+      "description": "För att använda denna funktion måste du acceptera cookies från webbplatsen. Du kan se kartan på den här sidan genom att aktivera valfria kartbundna cookies."
+    },
     "title": "Plats",
     "location": {
       "directionsGoogle": "Ruttbeskrivning (Google)",

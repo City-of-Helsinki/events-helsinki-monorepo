@@ -87,6 +87,10 @@
   "next": "Seuraavat",
   "previous": "Edelliset",
   "mapBox": {
+    "cookiesRequired": {
+      "title": "Karttanäkymää ei voida näyttää",
+      "description": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset tarkastelemaan karttaa tästä sivusta sallimalla evästeasetuksista valinnaiset karttaan liittyvät evästeet."
+    },
     "title": "Sijainti",
     "location": {
       "directionsGoogle": "Reittiohjeet (Google)",

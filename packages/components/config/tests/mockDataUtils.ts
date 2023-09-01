@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { faker } from '@faker-js/faker';
 import merge from 'lodash/merge';
 import type { NextRouter } from 'next/router';
@@ -28,6 +27,7 @@ import type {
   Place,
   PlaceListResponse,
   StaticPage,
+  Venue,
 } from '../../src/types';
 
 export const fakeEvents = (
@@ -71,7 +71,7 @@ export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
           description: fakeLocalizedObject(),
         },
       ],
-      subEvents: [] as any,
+      subEvents: [],
       eventStatus: 'EventScheduled',
       superEvent: null,
       dataSource: 'hel',
@@ -357,6 +357,7 @@ export const fakeLocalizedObject = (text?: string): LocalizedObject => ({
   fi: text || uniqueSentences(),
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const generateNodeArray = <T extends (...args: any) => any>(
   fakeFunc: T,
   length: number
@@ -376,6 +377,19 @@ export const appRoutingUrlMocks: AppRoutingContextProps = {
     .mockImplementation(
       (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
         `/haku?publisher=${event.publisher}&searchType=${event.typeId}`
+    ),
+  getHelsinkiOnlySearchUrl: jest
+    .fn()
+    .mockImplementation(
+      (
+        source: EventFields | Venue,
+        _router: NextRouter,
+        _locale: AppLanguage
+      ) => {
+        return `/haku?helsinkiOnly=true&searchType=${
+          'typeId' in source && source.typeId ? source.typeId : 'Venue'
+        }`;
+      }
     ),
   getPlainEventUrl: jest
     .fn()

@@ -5,7 +5,7 @@ import {
   ArrowRightWithLoadingIndicator,
   useClickCapture,
 } from '@events-helsinki/components';
-import { IconLocation } from 'hds-react';
+import { IconCheckCircleFill, IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
@@ -23,6 +23,7 @@ interface Props {
   title?: string;
   location?: string;
   imageUrl?: string;
+  isHelsinkiCityOwned?: boolean;
   tags?: string[];
   showMapLink?: boolean;
 }
@@ -33,6 +34,7 @@ const LargeVenueCard: React.FC<Props> = ({
   location,
   tags,
   imageUrl,
+  isHelsinkiCityOwned,
   showMapLink = false,
 }) => {
   const { t } = useVenueTranslation();
@@ -67,7 +69,15 @@ const LargeVenueCard: React.FC<Props> = ({
       >
         <div className={styles.eventCard}>
           <div className={styles.infoWrapper}>
-            <div className={styles.eventName}>{title}</div>
+            <div className={styles.eventName}>
+              {title}
+              {isHelsinkiCityOwned && (
+                <IconCheckCircleFill
+                  className={styles.helsinkiCityOwnedIcon}
+                  aria-hidden
+                />
+              )}
+            </div>
             <div className={styles.eventLocation}>
               <IconLocation aria-hidden />
               {location}

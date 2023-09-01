@@ -8,6 +8,7 @@ import type {
   QueryEventListArgs,
   SPORTS_CATEGORIES,
   TARGET_GROUPS,
+  Venue,
 } from '@events-helsinki/components';
 import {
   buildQueryFromObject,
@@ -428,6 +429,30 @@ export const getOrganizationSearchUrl = (
     },
     locale
   );
+};
+
+export const getHelsinkiOnlySearchUrl = (
+  source: EventFields | Venue,
+  router: NextRouter,
+  locale: AppLanguage
+): string => {
+  if (source.__typename == 'Venue') {
+    return routerHelper.getLocalizedCmsItemUrl(
+      ROUTES.SEARCH,
+      { searchType: 'venue', helsinkiOnly: 'true' },
+      locale
+    );
+  } else if (source.__typename == 'EventDetails') {
+    return routerHelper.getLocalizedCmsItemUrl(
+      ROUTES.SEARCH,
+      {
+        searchType: source.typeId ?? EventTypeId.General,
+        helsinkiOnly: 'true',
+      },
+      locale
+    );
+  }
+  throw new Error('Invalid source type for getHelsinkiOnlySearchUrl');
 };
 
 export const getEventListLinkUrl = (

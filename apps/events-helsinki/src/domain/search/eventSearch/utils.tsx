@@ -5,6 +5,7 @@ import type {
   QueryEventListArgs,
   EVENT_SORT_OPTIONS,
   KeywordOnClickHandlerType,
+  Venue,
 } from '@events-helsinki/components';
 import {
   buildQueryFromObject,
@@ -13,6 +14,7 @@ import {
   getUrlParamAsArray,
   EventTypeId,
   scrollToTop,
+  CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID,
 } from '@events-helsinki/components';
 import {
   addDays,
@@ -155,6 +157,7 @@ export const getEventSearchVariables = ({
     categories,
     dateTypes,
     divisions,
+    helsinkiOnly,
     isFree,
     keyword,
     keywordNot,
@@ -186,6 +189,10 @@ export const getEventSearchVariables = ({
   }
 
   const keywordAnd: string[] = [];
+
+  const publisherAncestor = helsinkiOnly
+    ? CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID
+    : null;
 
   if (onlyChildrenEvents) {
     keywordAnd.push('yso:p4354');
@@ -227,6 +234,7 @@ export const getEventSearchVariables = ({
     // ...divisionParam,
     end,
     include,
+    publisherAncestor,
     isFree: isFree || undefined,
     internetBased: onlyRemoteEvents || undefined,
     keywordOrSet2: [...(keyword ?? []), ...mappedCategories],
@@ -298,6 +306,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     ),
     divisions: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.DIVISIONS),
     end,
+    helsinkiOnly:
+      searchParams.get(EVENT_SEARCH_FILTERS.HELSINKI_ONLY) === 'true',
     isFree: searchParams.get(EVENT_SEARCH_FILTERS.IS_FREE) === 'true',
     keyword: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.KEYWORD),
     keywordNot: getUrlParamAsArray(
@@ -322,6 +332,7 @@ export const getSearchQuery = (filters: Filters): string => {
     ...filters,
     end: formatDate(filters.end, 'yyyy-MM-dd'),
     isFree: filters.isFree ? true : undefined,
+    helsinkiOnly: filters.helsinkiOnly ? true : undefined,
     onlyChildrenEvents: filters.onlyChildrenEvents ? true : undefined,
     onlyEveningEvents: filters.onlyEveningEvents ? true : undefined,
     onlyRemoteEvents: filters.onlyRemoteEvents ? true : undefined,
@@ -407,6 +418,18 @@ export const getOrganizationSearchUrl = (
   return routerHelper.getLocalizedCmsItemUrl(
     ROUTES.SEARCH,
     { publisher: event.publisher ?? '' },
+    locale
+  );
+};
+
+export const getHelsinkiOnlySearchUrl = (
+  source: EventFields | Venue,
+  router: NextRouter,
+  locale: AppLanguage
+): string => {
+  return routerHelper.getLocalizedCmsItemUrl(
+    ROUTES.SEARCH,
+    { helsinkiOnly: 'true' },
     locale
   );
 };

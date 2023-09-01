@@ -6,11 +6,18 @@ import {
   getSecureImage,
   useVenueTranslation,
   getLocaleFromPathname,
+  isVenueHelsinkiCityOwned,
 } from '@events-helsinki/components';
 import type { ReturnParams } from '@events-helsinki/components/utils/eventQueryString.util';
 import { extractLatestReturnPath } from '@events-helsinki/components/utils/eventQueryString.util';
 import classNames from 'classnames';
-import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
+import {
+  IconArrowLeft,
+  IconCheckCircleFill,
+  IconClock,
+  IconLocation,
+  IconTicket,
+} from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -46,6 +53,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
   };
 
+  const isHelsinkiCityOwned = isVenueHelsinkiCityOwned(venue);
   const imageUrl = venue.image ? getSecureImage(venue.image) : '';
   const { streetAddress, addressLocality, connections, openingHours } = venue;
   const openingHoursNow = openingHours
@@ -114,7 +122,15 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
                 <div>
                   <VenueKeywords whiteOnly venue={venue} />
                 </div>
-                <h1 className={styles.title}>{venue.name}</h1>
+                <h1 className={styles.title}>
+                  {venue.name}
+                  {isHelsinkiCityOwned && (
+                    <IconCheckCircleFill
+                      className={styles.helsinkiCityOwnedIcon}
+                      aria-hidden
+                    />
+                  )}
+                </h1>
                 <div className={styles.additionalInfo}>
                   <div className={styles.location}>
                     <ul className={styles.headerInfoLines}>

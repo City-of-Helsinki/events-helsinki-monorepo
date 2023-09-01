@@ -50,6 +50,7 @@ export enum EVENT_SEARCH_FILTERS {
   DATE_TYPES = 'dateTypes',
   DIVISIONS = 'divisions',
   END = 'end',
+  HELSINKI_ONLY = 'helsinkiOnly',
   IS_FREE = 'isFree',
   KEYWORD = 'keyword',
   KEYWORD_NOT = 'keywordNot',

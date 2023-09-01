@@ -495,6 +495,19 @@ export const appRoutingUrlMocks: AppRoutingContextProps = {
       (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
         `/haku?organization=${event.publisher}&searchType=${event.typeId}`
     ),
+  getHelsinkiOnlySearchUrl: jest
+    .fn()
+    .mockImplementation(
+      (
+        source: EventFields | Venue,
+        _router: NextRouter,
+        _locale: AppLanguage
+      ) => {
+        return `/haku?helsinkiOnly=true&searchType=${
+          'typeId' in source && source.typeId ? source.typeId : 'Venue'
+        }`;
+      }
+    ),
   getPlainEventUrl: jest
     .fn()
     .mockImplementation(

@@ -8,6 +8,7 @@ import {
   translateValue,
   FilterButton,
   useLocale,
+  HelsinkiOnlyFilter,
 } from '@events-helsinki/components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -37,6 +38,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     dateTypes,
     divisions,
     end,
+    helsinkiOnly,
     isFree,
     keyword,
     keywordNot,
@@ -72,6 +74,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       dateTypes: getFilteredList('dateType', dateTypes),
       divisions: getFilteredList('division', divisions),
       end: type === 'date' ? null : end,
+      helsinkiOnly: type === 'helsinkiOnly' ? undefined : helsinkiOnly,
       isFree,
       keyword,
       keywordNot,
@@ -89,6 +92,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   };
 
   const hasFilters =
+    !!helsinkiOnly ||
     !!publisher ||
     !!categories.length ||
     !!dateText ||
@@ -104,6 +108,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       className={styles.filterSummary}
       data-testid={filterSummaryContainerTestId}
     >
+      {helsinkiOnly && <HelsinkiOnlyFilter onRemove={handleFilterRemove} />}
       {categories.map((category) => (
         <FilterButton
           key={category}

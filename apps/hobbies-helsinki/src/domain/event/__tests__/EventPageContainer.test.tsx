@@ -122,6 +122,7 @@ const mocks = [
       keywordOrSet3: [''],
       language: undefined,
       pageSize: 100,
+      publisherAncestor: null,
       eventType: [EventTypeId.Course],
     },
     response: similarEvents,

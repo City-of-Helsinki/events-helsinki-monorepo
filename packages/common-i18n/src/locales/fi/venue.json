@@ -20,7 +20,9 @@
     "labelRoute": "Löydä perille",
     "labelContactDetails": "Yhteystiedot",
     "labelOpeningHours": "Aukioloaika",
+    "labelResponsibleForVenue": "Paikasta vastaa",
     "link": {
+      "searchByHelsinkiOnly": "Katso Helsingin muut liikuntapaikat",
       "website": "Verkkosivu"
     }
   },

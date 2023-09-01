@@ -26,6 +26,7 @@ import {
   getEventUrl,
   getKeywordOnClickHandler,
   getOrganizationSearchUrl,
+  getHelsinkiOnlySearchUrl,
   getPlainEventUrl,
 } from '../domain/search/eventSearch/utils';
 
@@ -64,6 +65,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
           getEventUrl={getEventUrl}
           getEventListLinkUrl={getEventListLinkUrl}
           getOrganizationSearchUrl={getOrganizationSearchUrl}
+          getHelsinkiOnlySearchUrl={getHelsinkiOnlySearchUrl}
           getPlainEventUrl={getPlainEventUrl}
           getKeywordOnClickHandler={getKeywordOnClickHandler}
           {...pageProps}

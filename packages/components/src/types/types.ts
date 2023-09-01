@@ -2,6 +2,7 @@ import type { NextRouter } from 'next/router';
 import type React from 'react';
 import type { APP_LANGUAGES } from '../constants';
 import type { EventFields } from './event-types';
+import type { Venue } from './generated/graphql';
 
 export type AppLanguage = (typeof APP_LANGUAGES)[number];
 
@@ -151,6 +152,12 @@ export type GetEventListLinkUrlType = (
 
 export type GetOrganizationSearchUrlType = (
   event: EventFields,
+  router: NextRouter,
+  locale: AppLanguage
+) => string;
+
+export type GetHelsinkiOnlySearchUrlType = (
+  source: EventFields | Venue,
   router: NextRouter,
   locale: AppLanguage
 ) => string;

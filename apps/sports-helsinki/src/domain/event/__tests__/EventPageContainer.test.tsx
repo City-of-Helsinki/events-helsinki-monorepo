@@ -120,6 +120,7 @@ const mocks = [
       allOngoing: true,
       keywordOrSet2: eventKeywordIds,
       eventType: [EventTypeId.Course],
+      superEvent: 'none',
       pageSize: 100,
     },
     response: similarEvents,

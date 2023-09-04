@@ -19,7 +19,7 @@ describe('EventSearchAdapter', () => {
           keywords: [],
         };
         const adapter = new EventSearchAdapter(input, eventType);
-        expect(adapter.getQueryVariables()).toStrictEqual({
+        const result = {
           eventType,
           allOngoingAnd: [input.text],
           start: 'now',
@@ -69,10 +69,18 @@ describe('EventSearchAdapter', () => {
           publisher: null,
           publisherAncestor: 'ahjo:00001',
           include: ['keywords', 'location'],
-          superEventType: ['umbrella', 'none'],
+          // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+          superEvent: eventType === EventTypeId.Course ? 'none' : undefined, // Added for courses in LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
           sort:
             eventType === EventTypeId.General ? input.eventOrderBy : 'end_time',
-        });
+        };
+        // Remove undefined keys
+        Object.keys(result).forEach(
+          (key) =>
+            result[key as keyof typeof result] === undefined &&
+            delete result[key as keyof typeof result]
+        );
+        expect(adapter.getQueryVariables()).toStrictEqual(result);
       }
     );
   });

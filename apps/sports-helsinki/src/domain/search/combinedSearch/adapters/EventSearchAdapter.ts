@@ -33,6 +33,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
   sort: EventSearchParams['sort'];
   eventType: EventSearchParams['eventType'];
   superEventType: EventSearchParams['superEventType'];
+  superEvent: EventSearchParams['superEvent'];
   publisher: EventSearchParams['publisher'];
   publisherAncestor: EventSearchParams['publisherAncestor'];
   page: EventSearchParams['page'];
@@ -69,6 +70,18 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     this.publisherAncestor = input.helsinkiOnly
       ? CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID
       : initialEventSearchAdapterValues.publisherAncestor;
+    this.superEvent = this.getSuperEvent(eventType);
+  }
+
+  /**
+   * If the search is for Courses,
+   * the superEvent should be set to 'none' -
+   * LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+   * */
+  public getSuperEvent(eventType: EventTypeId) {
+    if (eventType === EventTypeId.Course) {
+      return 'none';
+    }
   }
 
   public getSportsKeywords({ sportsCategories }: CombinedSearchAdapterInput) {

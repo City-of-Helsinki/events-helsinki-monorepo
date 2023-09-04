@@ -159,7 +159,7 @@ describe('CombinedSearchFormAdapter', () => {
           publisher: null,
           publisherAncestor: null,
           include: ['keywords', 'location'],
-          superEventType: ['umbrella', 'none'],
+          // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
         },
       ],
     ])(

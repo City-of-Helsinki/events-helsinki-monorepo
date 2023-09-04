@@ -177,6 +177,7 @@ export const getEventSearchVariables = ({
   params,
   sortOrder,
   superEventType,
+  superEvent,
   place,
 }: {
   include: string[];
@@ -184,7 +185,8 @@ export const getEventSearchVariables = ({
   pageSize: number;
   params: URLSearchParams;
   sortOrder: EVENT_SORT_OPTIONS;
-  superEventType: string[];
+  superEventType?: string[];
+  superEvent?: string;
   place?: string;
   // eslint-disable-next-line sonarjs/cognitive-complexity
 }): QueryEventListArgs => {
@@ -285,6 +287,7 @@ export const getEventSearchVariables = ({
     start,
     startsAfter,
     superEventType,
+    superEvent,
     suitableFor: [Number(audienceMinAgeLt), Number(audienceMaxAgeGt)].filter(
       (v) => v
     ),

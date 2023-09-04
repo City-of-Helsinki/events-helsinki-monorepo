@@ -54,7 +54,8 @@ export const initialEventSearchAdapterValues: EventSearchParams = {
   location: [],
   sort: EVENT_SORT_OPTIONS.END_TIME,
   eventType: EventTypeId.General,
-  superEventType: ['umbrella', 'none'],
+  superEventType: undefined, // Don't use superEventType when experimenting LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+  superEvent: undefined, // Only the course type search should use this param; LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
   publisher: null,
   publisherAncestor: null,
   pageSize: 10,

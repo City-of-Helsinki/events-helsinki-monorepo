@@ -26,7 +26,7 @@ export const baseVariables = {
   sort: DEFAULT_EVENT_SORT_OPTION,
   start: 'now',
   startsAfter: undefined,
-  superEventType: ['umbrella', 'none'],
+  // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
 };
 
 export const eventListBaseVariables: QueryEventListArgs = {

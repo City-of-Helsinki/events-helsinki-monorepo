@@ -10,17 +10,17 @@ exports[`CombinedSearchProvider reads the context properly 1`] = `
   <p
     data-test-id="event-searchVariables"
   >
-    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"General","superEventType":["umbrella","none"],"publisher":null,"publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"General","publisher":null,"publisherAncestor":null,"pageSize":10}
   </p>
   <p
     data-test-id="course-searchVariables"
   >
-    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEventType":["umbrella","none"],"publisher":null,"publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEvent":"none","publisher":null,"publisherAncestor":null,"pageSize":10}
   </p>
   <p
     data-test-id="venue-searchVariables"
   >
-    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEventType":["umbrella","none"],"publisher":null,"publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEvent":"none","publisher":null,"publisherAncestor":null,"pageSize":10}
   </p>
 </div>
 `;
@@ -35,17 +35,17 @@ exports[`CombinedSearchProvider reads the context properly 2`] = `
   <p
     data-test-id="event-searchVariables"
   >
-    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":["yso:p8504","yso:p8105"],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"General","superEventType":["umbrella","none"],"publisher":null,"publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":["yso:p8504","yso:p8105"],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"General","publisher":null,"publisherAncestor":null,"pageSize":10}
   </p>
   <p
     data-test-id="course-searchVariables"
   >
-    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":["yso:p8504","yso:p8105"],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEventType":["umbrella","none"],"publisher":null,"publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":["yso:p8504","yso:p8105"],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEvent":"none","publisher":null,"publisherAncestor":null,"pageSize":10}
   </p>
   <p
     data-test-id="venue-searchVariables"
   >
-    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":["yso:p8504","yso:p8105"],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEventType":["umbrella","none"],"publisher":null,"publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":["test text"],"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":["yso:p8504","yso:p8105"],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEvent":"none","publisher":null,"publisherAncestor":null,"pageSize":10}
   </p>
 </div>
 `;
@@ -60,17 +60,17 @@ exports[`CombinedSearchProvider reads the context properly 3`] = `
   <p
     data-test-id="event-searchVariables"
   >
-    {"allOngoingAnd":[],"allOngoing":true,"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"General","superEventType":["umbrella","none"],"publisher":"testorg","publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":[],"allOngoing":true,"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"General","publisher":"testorg","publisherAncestor":null,"pageSize":10}
   </p>
   <p
     data-test-id="course-searchVariables"
   >
-    {"allOngoingAnd":[],"allOngoing":true,"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEventType":["umbrella","none"],"publisher":"testorg","publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":[],"allOngoing":true,"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEvent":"none","publisher":"testorg","publisherAncestor":null,"pageSize":10}
   </p>
   <p
     data-test-id="venue-searchVariables"
   >
-    {"allOngoingAnd":[],"allOngoing":true,"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEventType":["umbrella","none"],"publisher":"testorg","publisherAncestor":null,"pageSize":10}
+    {"allOngoingAnd":[],"allOngoing":true,"start":"now","end":"","include":["keywords","location"],"keywordAnd":[],"keywordNot":[],"keywordOrSet1":["yso:p916","kulke:710","yso:p17018","yso:p1963","yso:p9824","yso:p965","yso:p6409","yso:p8781","yso:p26619","yso:p13035","yso:p2041"],"keywordOrSet2":[],"keywordOrSet3":[],"location":[],"sort":"end_time","eventType":"Course","superEvent":"none","publisher":"testorg","publisherAncestor":null,"pageSize":10}
   </p>
 </div>
 `;

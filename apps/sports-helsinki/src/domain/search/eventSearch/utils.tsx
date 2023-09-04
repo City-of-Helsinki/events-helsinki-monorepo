@@ -154,6 +154,7 @@ export const getEventSearchVariables = ({
   params,
   sortOrder,
   superEventType,
+  superEvent,
   place,
   eventType,
 }: {
@@ -162,7 +163,8 @@ export const getEventSearchVariables = ({
   pageSize: number;
   params: URLSearchParams;
   sortOrder: EVENT_SORT_OPTIONS;
-  superEventType: string[];
+  superEventType?: string[];
+  superEvent?: string;
   place?: string;
   eventType?: (EventTypeId.Course | EventTypeId.General)[];
   // eslint-disable-next-line sonarjs/cognitive-complexity
@@ -239,6 +241,7 @@ export const getEventSearchVariables = ({
     sort: sortOrder,
     start,
     superEventType,
+    superEvent,
     eventType,
   };
 };

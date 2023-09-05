@@ -46,6 +46,7 @@ resources:
     # Azure DevOps repository
     - repository: graphql-proxy-pipelines
       type: git
+      ref: refs/heads/review_pipeline
       # Azure DevOps project/repository
       name: liikunta/graphql-proxy-pipelines
 

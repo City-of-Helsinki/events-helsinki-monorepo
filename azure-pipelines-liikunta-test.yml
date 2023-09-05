@@ -54,7 +54,7 @@ extends:
     buildArgs:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.test.hel.ninja/
       CMS_ORIGIN: https://liikunta.hkih.stage.geniem.io
-      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.hel.fi/v1/event
+      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.test.hel.ninja/v1/event
       NEXTJS_DISABLE_SENTRY: 1
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
@@ -63,4 +63,4 @@ extends:
     configMap:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.test.hel.ninja/
       CMS_ORIGIN: https://liikunta.hkih.stage.geniem.io
-      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.hel.fi/v1/event
+      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.test.hel.ninja/v1/event

@@ -5,11 +5,11 @@
     "baseUrl": "./src",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "commonjs",
+    "module": "CommonJS",
     "jsx": "preserve",
     "incremental": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "paths": {
       "@events-helsinki/components": ["../../packages/components/src/index"],
       "@events-helsinki/components/*": ["../../packages/components/src/*"],

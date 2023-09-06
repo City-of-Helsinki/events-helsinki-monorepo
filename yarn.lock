@@ -3325,7 +3325,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:v1.0.0-alpha188"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha188-canary-aa0aa94"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-toastify: "npm:^9.1.3"
@@ -12370,9 +12370,9 @@ __metadata:
   linkType: hard
 
 "dompurify@npm:^2.3.5":
-  version: 2.4.5
-  resolution: "dompurify@npm:2.4.5"
-  checksum: 1e7bf43afb21f8a07407ac3157ab91790005237aa40050ae50d64c3d1a1d69b99c4aa8c63515fd20910010b1ec694f354935766c257057f59de2b0b0ab009e9b
+  version: 2.4.7
+  resolution: "dompurify@npm:2.4.7"
+  checksum: f6dc7443777fd867a1faf5078e26e0448c3aa97dee70fa544b143942a50ebca1b620f3cfde212776578a4d103dd7820a776714202d57bf2ee724b2cc89215a4c
   languageName: node
   linkType: hard
 
@@ -13680,7 +13680,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:v1.0.0-alpha188"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha188-canary-aa0aa94"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -15499,7 +15499,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:v1.0.0-alpha188"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha188-canary-aa0aa94"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -20263,9 +20263,9 @@ __metadata:
   linkType: hard
 
 "nwsapi@npm:^2.2.0, nwsapi@npm:^2.2.2, nwsapi@npm:^2.2.4":
-  version: 2.2.5
-  resolution: "nwsapi@npm:2.2.5"
-  checksum: 018e71975b085a4a71d8de759c1b8d5b8bde7d7d3a5c63ddbe35b1de3da3c2e4eaed6f33678171abe0727fdd85a3c0e8a2daabc18eb81577dcb2f703eaac5a20
+  version: 2.2.7
+  resolution: "nwsapi@npm:2.2.7"
+  checksum: 3625879dcf73515757b854d1d1ae41997a05c4eac0c3f4b301d980d728252f171a9c4d960fe897940ba037f78a23a9138dcda088a78586d52ea7599980c146f6
   languageName: node
   linkType: hard
 
@@ -22590,9 +22590,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:v1.0.0-alpha188":
-  version: 1.0.0-alpha188
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha188"
+"react-helsinki-headless-cms@npm:1.0.0-alpha188-canary-aa0aa94":
+  version: 1.0.0-alpha188-canary-aa0aa94
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha188-canary-aa0aa94"
   dependencies:
     hds-design-tokens: "npm:^2.3.0"
     html-react-parser: "npm:^1.4.8"
@@ -22606,7 +22606,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 6dd9c70884d43466c779c7720476e9adc7b0f24706395fc29fa68ca8a395048c4e9f179ec5f5f5c68a2e4caa74210c221967a58e7493b255383bff9dd39a551b
+  checksum: e3c89018362439752e2cc8b0424161b6b48935f5014599b5a27ec6f9725206c44a5a61937faa47a0d4ae2337695dbc5f357650e3744bf15a8301a53e1ba24639
   languageName: node
   linkType: hard
 
@@ -24655,7 +24655,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:v1.0.0-alpha188"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha188-canary-aa0aa94"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-scroll: "npm:^1.8.9"
@@ -26013,14 +26013,14 @@ __metadata:
   linkType: hard
 
 "tough-cookie@npm:^4.0.0, tough-cookie@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "tough-cookie@npm:4.1.2"
+  version: 4.1.3
+  resolution: "tough-cookie@npm:4.1.3"
   dependencies:
     psl: "npm:^1.1.33"
     punycode: "npm:^2.1.1"
     universalify: "npm:^0.2.0"
     url-parse: "npm:^1.5.3"
-  checksum: c79eeb71f6aa7e97d0e3ab5268e5be72bdd21c71e4e3a9883879c23686363525d85f9a76eec7cc66f2fe24fb9b422c4e72d3c500ddf3320f949b334f0c7b3de3
+  checksum: 87508864be555b8f2bfd59b01197dacac952e8379892054875b1203a276bcecc44bf3cff6f015e6a1782f504c8bf94925d91691c45f7a48f700da3eaea5c8820
   languageName: node
   linkType: hard
 

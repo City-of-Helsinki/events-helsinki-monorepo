@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf --no-glob ./tsconfig.tsbuildinfo",
     "build": "cross-env NODE_ENV=production webpack --progress --mode production --config config/webpack.config.js",
-    "dev": "nodemon",
+    "dev": "nodemon --exec 'ts-node' src/index.ts",
     "start": "node build -r dotenv-expand/config",
     "test": "jest --passWithNoTests",
     "prepare": "husky install",

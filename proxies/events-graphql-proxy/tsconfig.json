@@ -5,17 +5,16 @@
     "baseUrl": "./src",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "commonjs",
+    "module": "CommonJS",
     "jsx": "preserve",
     "incremental": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "paths": {
       "@events-helsinki/graphql-proxy-server": [
         "../../packages/graphql-proxy-server/src/index"
       ]
     }
   },
-
   "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
 }

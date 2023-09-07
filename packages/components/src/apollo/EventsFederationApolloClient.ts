@@ -43,6 +43,14 @@ type GraphQLErrorsExtensionResponse = {
   status: number;
 };
 
+/**
+ * The Events-graphql-proxy offers a way to ignore some custom ignorable graphql errors.
+ * The 'X-Ignored-Error-Code' header is used to list the errors wanted to be ignored.
+ * */
+export const ignoredErrorCodesHeader = {
+  'X-Ignored-Error-Code': 'UNPOPULATED_MANDATORY_DATA',
+};
+
 class EventsFederationApolloClient {
   config: EventsFederationApolloClientConfig;
   client: ApolloClient<NormalizedCacheObject>;
@@ -113,6 +121,8 @@ class EventsFederationApolloClient {
     // NOTE: default is 5 re-attemps!
     const retryLink = new RetryLink();
 
+    const customHeadersMiddleware = this.getCustomHeadersMiddleware();
+
     // retain partial data even if error occurs for any operation
     const baseOptions: { errorPolicy: ErrorPolicy } = { errorPolicy: 'all' };
 
@@ -121,6 +131,7 @@ class EventsFederationApolloClient {
       ssrMode: !isClient, // Disables forceFetch on the server (so queries are only run once)
       link: ApolloLink.from([
         transformInternalURLs,
+        customHeadersMiddleware,
         errorLink,
         retryLink,
         httpLink,
@@ -157,6 +168,23 @@ class EventsFederationApolloClient {
     }
 
     return new HttpLink(options);
+  }
+
+  /**
+   * Add custom headers to the requests.
+   * NOTE: If using router as a proxy to a subgraph,
+   * remember to propage all these headers to the subgraph
+   * */
+  getCustomHeadersMiddleware() {
+    return new ApolloLink((operation, forward) => {
+      operation.setContext(({ headers = {} }) => ({
+        headers: {
+          ...headers,
+          ...ignoredErrorCodesHeader,
+        },
+      }));
+      return forward(operation);
+    });
   }
 
   private static getPageStylePaginator(merge: FieldMergeFunction) {

@@ -15,6 +15,10 @@ headers:
       request:
         - propagate: # propagate all headers. Note that Accept-Language is the most important.
             matching: .*
+    events: # Header rules for just the events subgraph
+      request:
+        - propagate: # propagate all headers. Note that there are some custom X-Headers.
+            matching: .*
 include_subgraph_errors:
   all: true # Propagate errors from all subgraphs
 cors:

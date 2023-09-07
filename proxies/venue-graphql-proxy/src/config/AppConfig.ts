@@ -6,7 +6,7 @@ class AppConfig {
   }
 
   static get isHaukiEnabled() {
-    return false;
+    return true as const;
   }
 
   static get supportedLocales(): Readonly<Array<Locale>> {
@@ -18,13 +18,17 @@ class AppConfig {
     return ['en', 'fi', 'sv'] as const;
   }
 
+  static get defaultLocale(): Locale {
+    return 'fi' as const;
+  }
+
   /**
    * When Venue details are fetched and there are no details populated for the language in the context,
    * should the server serve the details in the most prioritized fallback langauge.
-   * @return boolean  Returns tru if the fallback langauges should be used.
+   * @return boolean  Returns true if the fallback langauges should be used.
    */
   static get isUseFallbackLocalesEnabled() {
-    return true;
+    return true as const;
   }
 }
 

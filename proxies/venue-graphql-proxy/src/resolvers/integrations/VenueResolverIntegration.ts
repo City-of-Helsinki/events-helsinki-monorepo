@@ -1,65 +1,60 @@
 import type VenueContext from '../../context/VenueContext';
-import type {
-  AnyObject,
-  Source,
-  TranslatableVenueDetails,
-  TranslatedVenueDetails,
-} from '../../types';
+import type { Source, TranslatedVenueDetails } from '../../types';
 import type VenueEnricher from '../enrichers/VenueEnricher';
 
-export type VenueData = TranslatableVenueDetails | TranslatedVenueDetails;
-
-type Config<I> = {
-  getDataSources?: (
+type Config<I, O> = {
+  getDataSource: (
     id: string,
     source: Source,
     context: VenueContext
-  ) => Promise<I>[];
-  format?: (data: I, context: VenueContext) => Partial<VenueData>;
-  enrichers?: VenueEnricher<I, Partial<VenueData>>[];
+  ) => Promise<I>;
+  format: (data: I, context: VenueContext) => O;
+  enrichers?: VenueEnricher<I, Partial<TranslatedVenueDetails>>[];
 };
 
-export default class VenueResolverIntegration<I = AnyObject> {
-  config: Config<I> = {};
+export default class VenueResolverIntegration<I, O> {
+  config: Config<I, O>;
 
-  constructor(config: Config<I> = {}) {
+  constructor(config: Config<I, O>) {
     this.config = config;
   }
 
-  getDataSources(
-    id: string,
-    source: Source,
+  getDataSource(id: string, source: Source, context: VenueContext): Promise<I> {
+    return this.config.getDataSource(id, source, context);
+  }
+
+  format(uncleanData: I, context: VenueContext): O {
+    return this.config.format(uncleanData, context);
+  }
+
+  async enrich(
+    data: I,
     context: VenueContext
-  ): Promise<I>[] {
-    if (!this.config.getDataSources) {
-      return [];
-    }
-    return this.config.getDataSources(id, source, context);
-  }
-
-  format(uncleanData: I, context: VenueContext): Partial<VenueData> {
-    if (this.config.format) {
-      return this.config.format(uncleanData, context);
-    }
-
-    return uncleanData as unknown as VenueData;
-  }
-
-  async enrich(data: I, context: VenueContext): Promise<Partial<VenueData>> {
+  ): Promise<Partial<TranslatedVenueDetails>> {
     const enrichers =
-      this.config.enrichers?.map((enricher) =>
+      this.config?.enrichers?.map((enricher) =>
         enricher.getEnrichments(data, context)
       ) ?? [];
     const enrichmentDataArray = await Promise.all(enrichers);
-    const enrichmentData = enrichmentDataArray.reduce(
-      (acc, data) =>
-        ({
-          ...acc,
-          ...data,
-        } as Partial<Partial<VenueData>>),
+    return enrichmentDataArray.reduce(
+      (acc, data) => ({
+        ...acc,
+        ...data,
+      }),
       {}
     );
+  }
 
-    return enrichmentData as VenueData;
+  async processData(data: I, context: VenueContext) {
+    return {
+      ...this.format(data, context),
+      ...(await this.enrich(data, context)),
+    };
+  }
+
+  async execute(id: string, source: Source, context: VenueContext) {
+    return this.getDataSource(id, source, context).then((data) =>
+      this.processData(data, context)
+    );
   }
 }

@@ -1,110 +1,106 @@
 import AppConfig from '../../config/AppConfig';
 import { Sources } from '../../contants/constants';
-import type { TprekUnit, TranslatableVenueDetails } from '../../types';
+import type {
+  TprekUnit,
+  TprekUnitWithoutNull,
+  TranslatableVenueDetails,
+  TranslatedVenueDetails,
+} from '../../types';
+import type { TranslatableFieldsFor } from '../../utils/utils';
 import {
   formAccessibilitySentences,
   formTranslationObject,
   getPointFromLongAndLat,
   getTprekId,
-  translateVenue,
+  translateUnenrichedVenue,
 } from '../../utils/utils';
 import type VenueEnricher from '../enrichers/VenueEnricher';
-import type { VenueData } from './VenueResolverIntegration';
 import VenueResolverIntegration from './VenueResolverIntegration';
 
 type Config<I, O> = {
   enrichers: VenueEnricher<I, O>[];
 };
 
-const EMPTY_VENUE_DETAILS: TranslatableVenueDetails = {
-  id: '',
-  organizationId: null,
-  departmentId: null,
-  providerType: null,
-  dataSource: null,
-  email: null,
-  postalCode: null,
-  image: null,
-  addressLocality: null,
-  addressPostalFull: null,
-  position: null,
-  description: null,
-  shortDescription: null,
-  displayedServiceOwner: null,
-  displayedServiceOwnerType: null,
-  name: null,
-  infoUrl: null,
-  streetAddress: null,
-  telephone: null,
-  ontologyTree: [],
-  ontologyWords: [],
-  accessibilitySentences: { fi: [], en: [], sv: [] },
-  connections: [],
-};
+export type UnenrichedUnitFields =
+  | 'id'
+  | 'organizationId'
+  | 'departmentId'
+  | 'providerType'
+  | 'dataSource'
+  | 'email'
+  | 'postalCode'
+  | 'image'
+  | 'position'
+  | 'description'
+  | 'shortDescription'
+  | 'displayedServiceOwner'
+  | 'displayedServiceOwnerType'
+  | 'name'
+  | 'streetAddress'
+  | 'addressLocality'
+  | 'addressPostalFull'
+  | 'infoUrl'
+  | 'accessibilitySentences'
+  | 'telephone'
+  | 'connections';
 
-export default class VenueServiceMapIntegration extends VenueResolverIntegration<TprekUnit> {
-  constructor(config: Config<TprekUnit, Partial<VenueData>>) {
+export default class VenueServiceMapIntegration extends VenueResolverIntegration<
+  TprekUnit,
+  Pick<TranslatedVenueDetails, UnenrichedUnitFields>
+> {
+  constructor(config: Config<TprekUnit, Partial<TranslatedVenueDetails>>) {
     super({
-      getDataSources: (id: string, _, { dataSources }) => [
+      getDataSource: (id: string, _, { dataSources }) =>
         dataSources.serviceMap.getUnit(id),
-      ],
       enrichers: config.enrichers,
       format: (data, context) =>
-        translateVenue(
-          this.formatter(data),
+        translateUnenrichedVenue(
+          this.makeUnenrichedTranslatableVenueDetails(data),
           context,
           AppConfig.isUseFallbackLocalesEnabled
         ),
     });
   }
 
-  // eslint-disable-next-line sonarjs/cognitive-complexity
-  formatter(data: TprekUnit): Omit<
-    TranslatableVenueDetails,
-    // These fields should be filled by the enrichments later:
-    'ontologyTree' | 'ontologyWords'
-  > {
-    if (data === null) {
-      return EMPTY_VENUE_DETAILS;
-    }
+  makeUnenrichedTranslatableVenueDetails(
+    data: TprekUnit
+  ): Pick<TranslatableVenueDetails, UnenrichedUnitFields> {
+    const dataSource = data?.sources?.[0]?.source ?? Sources.TPREK;
+    const unitFieldTranslationsObject = (
+      field: TranslatableFieldsFor<TprekUnitWithoutNull>
+    ) =>
+      data ? formTranslationObject<TprekUnitWithoutNull>(data, field) : null;
+
     return {
-      id: getTprekId(data?.sources?.[0]?.source, data?.id?.toString()) ?? '',
+      id: getTprekId(dataSource, data?.id?.toString() ?? '') ?? '',
       organizationId: data?.org_id ?? null,
       departmentId: data?.dept_id ?? null,
       providerType: data?.provider_type ?? null,
-      dataSource: data?.sources?.[0]?.source ?? Sources.TPREK,
+      dataSource: dataSource,
       email: data?.email ?? null,
       postalCode: data?.address_zip ?? null,
       image: data?.picture_url ?? null,
-      position:
-        data.longitude && data.latitude
-          ? getPointFromLongAndLat(data.longitude, data.latitude)
-          : null,
-      description: formTranslationObject(data, 'desc'),
-      shortDescription: formTranslationObject(data, 'short_desc'),
-      displayedServiceOwner: formTranslationObject(
-        data,
+      position: getPointFromLongAndLat(data?.longitude, data?.latitude),
+      description: unitFieldTranslationsObject('desc'),
+      shortDescription: unitFieldTranslationsObject('short_desc'),
+      displayedServiceOwner: unitFieldTranslationsObject(
         'displayed_service_owner'
       ),
       displayedServiceOwnerType: data?.displayed_service_owner_type ?? null,
-      name: formTranslationObject(data, 'name'),
-      streetAddress: formTranslationObject(data, 'street_address'),
-      addressLocality: formTranslationObject(data, 'address_city'),
-      addressPostalFull: formTranslationObject(data, 'address_postal_full'),
-      infoUrl: formTranslationObject(data, 'www'),
+      name: unitFieldTranslationsObject('name'),
+      streetAddress: unitFieldTranslationsObject('street_address'),
+      addressLocality: unitFieldTranslationsObject('address_city'),
+      addressPostalFull: unitFieldTranslationsObject('address_postal_full'),
+      infoUrl: unitFieldTranslationsObject('www'),
       accessibilitySentences: formAccessibilitySentences(data),
-      telephone: {
-        fi: data?.phone ?? undefined,
-        sv: data?.phone ?? undefined,
-        en: data?.phone ?? undefined,
-      },
+      telephone: data?.phone ?? null,
       connections:
         data?.connections?.map((connection) => ({
           sectionType: connection.section_type,
-          name: formTranslationObject(connection, 'name') ?? {},
+          name: formTranslationObject(connection, 'name'),
           phone: connection.phone,
           url: formTranslationObject(connection, 'www'),
-        })) ?? undefined,
+        })) ?? [],
     };
   }
 }

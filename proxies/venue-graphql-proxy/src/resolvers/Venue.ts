@@ -1,7 +1,4 @@
-import type {
-  IsOpenType,
-  OpeningHoursType,
-} from '../datasources/HaukiDataSource';
+import AppConfig from '../config/AppConfig';
 import type { TranslatedVenueDetails } from '../types';
 
 // Map each property of T to function of same name whose return type is property's type
@@ -11,28 +8,12 @@ type GettersForProperties<T> = {
   }) => T[Property];
 };
 
-type HaukiPropertyGetters = {
-  openingHours(
-    { openingHours }: { openingHours: OpeningHoursType },
-    _: unknown,
-    { isHaukiEnabled }: { isHaukiEnabled: boolean }
-  ): OpeningHoursType | null;
-
-  isOpen(
-    { isOpen }: { isOpen: IsOpenType },
-    _: unknown,
-    { isHaukiEnabled }: { isHaukiEnabled: boolean }
-  ): IsOpenType | null;
-};
-
-type VenuePropertyGetters = GettersForProperties<TranslatedVenueDetails> &
-  HaukiPropertyGetters;
-
-const Venue: VenuePropertyGetters = {
+const Venue: GettersForProperties<TranslatedVenueDetails> = {
   addressLocality: ({ addressLocality }) => addressLocality,
   addressPostalFull: ({ addressPostalFull }) => addressPostalFull,
   dataSource: ({ dataSource }) => dataSource,
   departmentId: ({ departmentId }) => departmentId,
+  department: ({ department }) => department,
   description: ({ description }) => description,
   displayedServiceOwner: ({ displayedServiceOwner }) => displayedServiceOwner,
   displayedServiceOwnerType: ({ displayedServiceOwnerType }) =>
@@ -43,16 +24,16 @@ const Venue: VenuePropertyGetters = {
   infoUrl: ({ infoUrl }) => infoUrl,
   name: ({ name }) => name,
   organizationId: ({ organizationId }) => organizationId,
+  organization: ({ organization }) => organization,
   position: ({ position }) => position,
   postalCode: ({ postalCode }) => postalCode,
   providerType: ({ providerType }) => providerType,
   shortDescription: ({ shortDescription }) => shortDescription,
   streetAddress: ({ streetAddress }) => streetAddress,
   telephone: ({ telephone }) => telephone,
-  openingHours: ({ openingHours }, _: unknown, { isHaukiEnabled }) =>
-    !isHaukiEnabled ? null : openingHours,
-  isOpen: ({ isOpen }, _: unknown, { isHaukiEnabled }) =>
-    !isHaukiEnabled ? null : isOpen,
+  openingHours: ({ openingHours }) =>
+    AppConfig.isHaukiEnabled ? openingHours : null,
+  isOpen: ({ isOpen }) => (AppConfig.isHaukiEnabled ? isOpen : null),
   ontologyTree: ({ ontologyTree }) => (!ontologyTree ? [] : ontologyTree),
   ontologyWords: ({ ontologyWords }) => (!ontologyWords ? [] : ontologyWords),
   accessibilitySentences: ({ accessibilitySentences }) =>

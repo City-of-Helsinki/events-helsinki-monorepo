@@ -3,16 +3,27 @@ import get from 'lodash/get';
 import AppConfig from '../config/AppConfig';
 import { Sources } from '../contants/constants';
 import type VenueContext from '../context/VenueContext';
+import type { UnenrichedUnitFields } from '../resolvers/integrations/VenueServiceMapIntegration';
 import type {
   TprekAccessibilitySentence,
   AccessibilitySentences,
   Locale,
   TprekUnit,
   TprekUnitWithoutNull,
+  TprekDepartmentWithoutNull,
   TranslatableVenueDetails,
   TranslationsObject,
   TranslatedVenueDetails,
   TprekUnitConnection,
+  TprekOntologyTreeNode,
+  TprekOntologyWord,
+  TranslatableDepartment,
+  TranslatableOntologyIdLabel,
+  TranslatableAccessibilitySentences,
+  TranslatedAccessibilitySentences,
+  TranslatedDepartment,
+  TranslatedOntologyIdLabel,
+  TprekDepartment,
 } from '../types';
 import type { Point } from '../types/types';
 
@@ -36,27 +47,55 @@ const LOCALIZED_SENTENCE_NAME: Record<
   sv: 'sentence_sv',
 };
 
-type TranslatableObjectType = TprekUnitWithoutNull | TprekUnitConnection;
-type TranslatableFieldsFor<T extends TranslatableObjectType> =
+// Get locale from context with fallback to default locale
+const getContextLocale = (context: VenueContext): Locale =>
+  context.language ?? AppConfig.defaultLocale;
+
+type TranslatableObjectType =
+  | TprekUnitWithoutNull
+  | TprekUnitConnection
+  | TprekDepartmentWithoutNull
+  | TprekOntologyTreeNode
+  | TprekOntologyWord;
+
+/**
+ * Extract translatable field name prefixes from given type
+ * i.e. the prefixes that are suffixed with an underscore and a locale.
+ * @example ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyWord> ==
+ *          'extra_searchwords' | 'ontologyword'
+ */
+type ExtractTranslatableFieldNamePrefixes<T extends string> =
+  ExtractPrefixesFromLocaleSuffixedNames<T, Locale>;
+
+export type TranslatableFieldsFor<T extends TranslatableObjectType> =
   T extends TprekUnitWithoutNull
-    ? ExtractPrefixesFromLocaleSuffixedNames<keyof TprekUnitWithoutNull, Locale>
+    ? ExtractTranslatableFieldNamePrefixes<keyof TprekUnitWithoutNull>
     : T extends TprekUnitConnection
-    ? ExtractPrefixesFromLocaleSuffixedNames<keyof TprekUnitConnection, Locale>
+    ? ExtractTranslatableFieldNamePrefixes<keyof TprekUnitConnection>
+    : T extends TprekDepartmentWithoutNull
+    ? ExtractTranslatableFieldNamePrefixes<keyof TprekDepartmentWithoutNull>
+    : T extends TprekOntologyTreeNode
+    ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyTreeNode>
+    : T extends TprekOntologyWord
+    ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyWord>
     : never;
 
 export function formTranslationObject<
   InputObjectType extends TranslatableObjectType
 >(obj: InputObjectType, field: TranslatableFieldsFor<InputObjectType>) {
-  const [field_fi, field_en, field_sv] = AppConfig.supportedLocales.map(
-    (locale) => `${field}_${locale}` as keyof InputObjectType
-  );
-  if (!obj[field_fi] && !obj[field_en] && !obj[field_sv]) return null;
-
-  return {
-    fi: obj[field_fi] ?? null,
-    en: obj[field_en] ?? null,
-    sv: obj[field_sv] ?? null,
+  const result = {
+    fi: get(obj, `${field}_fi`) ?? undefined,
+    en: get(obj, `${field}_en`) ?? undefined,
+    sv: get(obj, `${field}_sv`) ?? undefined,
   } as TranslationsObject;
+  if (
+    result.fi === undefined &&
+    result.en === undefined &&
+    result.sv === undefined
+  ) {
+    return null;
+  }
+  return result;
 }
 
 export const formAccessibilitySentences = (
@@ -99,6 +138,33 @@ export const formAccessibilitySentences = (
   return sentencesForLanguages;
 };
 
+export function makeTranslatableDepartment(
+  department: TprekDepartment
+): TranslatableDepartment | null {
+  if (!department) {
+    return null;
+  }
+  return {
+    abbreviation: formTranslationObject(department, 'abbr'),
+    addressCity: formTranslationObject(department, 'address_city'),
+    addressPostalFull: formTranslationObject(department, 'address_postal_full'),
+    addressZip: department?.address_zip ?? null,
+    businessId: department?.business_id ?? null,
+    email: department?.email ?? null,
+    hierarchyLevel: department?.hierarchy_level ?? null,
+    id: department.id,
+    municipalityCode: department?.municipality_code ?? null,
+    name: formTranslationObject(department, 'name'),
+    oid: department?.oid ?? null,
+    organizationId: department?.org_id ?? null,
+    organizationType: department?.organization_type ?? null,
+    parentId: department?.parent_id ?? null,
+    phone: department?.phone ?? null,
+    streetAddress: formTranslationObject(department, 'street_address'),
+    www: formTranslationObject(department, 'www'),
+  };
+}
+
 export function getTprekId(
   source: string = Sources.TPREK,
   id: string
@@ -111,8 +177,8 @@ export function getTprekId(
 }
 
 export function getPointFromLongAndLat(
-  long: number,
-  lat: number
+  long?: number | null,
+  lat?: number | null
 ): Point | null {
   if (!long || !lat) {
     return null;
@@ -129,71 +195,130 @@ export function getPointFromLongAndLat(
  * from the prioritized list of the fallback locales with it.
  * */
 export function pickLocaleWithFallback(
-  obj: TranslationsObject,
-  locale: Locale
+  locale: Locale,
+  obj?: TranslationsObject | null
 ) {
-  let translation = pickLocale(obj, locale);
+  let translation = pickLocale(locale, obj);
   if (!translation) {
     for (const fallbackLng of AppConfig.fallbackLocales) {
-      translation = pickLocale(obj, fallbackLng as Locale);
+      translation = pickLocale(fallbackLng, obj);
       if (translation) return translation;
     }
   }
   return translation || null;
 }
 
-function pickLocale(obj: TranslationsObject, locale: Locale) {
-  return get(obj, locale, null);
+function pickLocale(locale: Locale, obj?: TranslationsObject | null) {
+  return get(obj, locale, null) ?? null;
 }
 
-export function translateVenue(
-  data: Partial<TranslatableVenueDetails>,
+export function translateOntologyIdLabel(
+  ontologyIdLabel: TranslatableOntologyIdLabel,
   context: VenueContext,
-  isUseFallbackLocalesEnabled = true
-): TranslatableVenueDetails | TranslatedVenueDetails {
-  if (!context.language) {
-    return data as TranslatableVenueDetails;
+  isUseFallbackLocalesEnabled = AppConfig.isUseFallbackLocalesEnabled
+): TranslatedOntologyIdLabel {
+  const locale = getContextLocale(context);
+  const pickLocaleFn = isUseFallbackLocalesEnabled
+    ? pickLocaleWithFallback
+    : pickLocale;
+  return {
+    id: ontologyIdLabel.id,
+    label: pickLocaleFn(locale, ontologyIdLabel.label),
+  };
+}
+
+export function translateOntologyIdLabels(
+  ontologyIdLabels: TranslatableOntologyIdLabel[],
+  context: VenueContext,
+  isUseFallbackLocalesEnabled = AppConfig.isUseFallbackLocalesEnabled
+): TranslatedOntologyIdLabel[] {
+  return ontologyIdLabels.map((ontologyIdLabel) =>
+    translateOntologyIdLabel(
+      ontologyIdLabel,
+      context,
+      isUseFallbackLocalesEnabled
+    )
+  );
+}
+
+export function translateAccessibilitySentences(
+  accessibilitySentences: TranslatableAccessibilitySentences | null,
+  context: VenueContext,
+  isUseFallbackLocalesEnabled = AppConfig.isUseFallbackLocalesEnabled
+): TranslatedAccessibilitySentences {
+  if (!accessibilitySentences) {
+    return [];
   }
 
-  const locale = context.language as Locale;
+  const locale = getContextLocale(context);
+  const tryLocalesInOrder = [locale].concat(
+    isUseFallbackLocalesEnabled ? AppConfig.fallbackLocales : []
+  );
+
+  for (const locale of tryLocalesInOrder) {
+    const sentences = get(accessibilitySentences, locale, null);
+    if (sentences) {
+      return sentences;
+    }
+  }
+
+  return [];
+}
+
+export function translateDepartment(
+  department: TranslatableDepartment | null,
+  context: VenueContext,
+  isUseFallbackLocalesEnabled = AppConfig.isUseFallbackLocalesEnabled
+): TranslatedDepartment | null {
+  if (!department) {
+    return null;
+  }
+
+  const locale = getContextLocale(context);
+  const pickLocaleFn = isUseFallbackLocalesEnabled
+    ? pickLocaleWithFallback
+    : pickLocale;
+
+  return {
+    ...department,
+    abbreviation: pickLocaleFn(locale, department.abbreviation),
+    addressCity: pickLocaleFn(locale, department.addressCity),
+    addressPostalFull: pickLocaleFn(locale, department.addressPostalFull),
+    name: pickLocaleFn(locale, department.name),
+    streetAddress: pickLocaleFn(locale, department.streetAddress),
+    www: pickLocaleFn(locale, department.www),
+  };
+}
+
+export function translateUnenrichedVenue(
+  data: Pick<TranslatableVenueDetails, UnenrichedUnitFields>,
+  context: VenueContext,
+  isUseFallbackLocalesEnabled = AppConfig.isUseFallbackLocalesEnabled
+): Pick<TranslatedVenueDetails, UnenrichedUnitFields> {
+  const locale = getContextLocale(context);
   const pickLocaleFn = isUseFallbackLocalesEnabled
     ? pickLocaleWithFallback
     : pickLocale;
 
   return {
     ...data,
-    addressLocality: data.addressLocality
-      ? pickLocaleFn(data.addressLocality, locale)
-      : undefined,
-    addressPostalFull: data.addressPostalFull
-      ? pickLocaleFn(data.addressPostalFull, locale)
-      : undefined,
-    description: data.description
-      ? pickLocaleFn(data.description, locale)
-      : undefined,
-    displayedServiceOwner: data.displayedServiceOwner
-      ? pickLocaleFn(data.displayedServiceOwner, locale)
-      : undefined,
-    name: data.name ? pickLocaleFn(data.name, locale) : undefined,
-    shortDescription: data.shortDescription
-      ? pickLocaleFn(data.shortDescription, locale)
-      : undefined,
-    streetAddress: data.streetAddress
-      ? pickLocaleFn(data.streetAddress, locale)
-      : undefined,
-    infoUrl: data.infoUrl ? pickLocaleFn(data.infoUrl, locale) : undefined,
-    telephone: data.telephone
-      ? pickLocaleFn(data.telephone, locale)
-      : undefined,
-    accessibilitySentences:
-      // If grouped by translations, find the correct one by language
-      data.accessibilitySentences && 'fi' in data.accessibilitySentences
-        ? get(data.accessibilitySentences, locale, null)
-        : data?.accessibilitySentences,
-    connections: data.connections?.map((connection) => ({
+    addressLocality: pickLocaleFn(locale, data.addressLocality),
+    addressPostalFull: pickLocaleFn(locale, data.addressPostalFull),
+    description: pickLocaleFn(locale, data.description),
+    displayedServiceOwner: pickLocaleFn(locale, data.displayedServiceOwner),
+    name: pickLocaleFn(locale, data.name),
+    shortDescription: pickLocaleFn(locale, data.shortDescription),
+    streetAddress: pickLocaleFn(locale, data.streetAddress),
+    infoUrl: pickLocaleFn(locale, data.infoUrl),
+    accessibilitySentences: translateAccessibilitySentences(
+      data.accessibilitySentences,
+      context,
+      isUseFallbackLocalesEnabled
+    ),
+    connections: data.connections.map((connection) => ({
       ...connection,
-      name: pickLocaleFn(connection.name, locale),
-      url: connection.url ? pickLocaleFn(connection.url, locale) : undefined,
+      name: pickLocaleFn(locale, connection.name) ?? '',
+      url: pickLocaleFn(locale, connection.url),
     })),
-  } as TranslatedVenueDetails;
+  };
 }

@@ -8,6 +8,7 @@ import cors from 'cors';
 import express from 'express';
 import type { GraphQLSchema } from 'graphql';
 import depthLimit from 'graphql-depth-limit';
+import { X_IGNORED_ERROR_CODE } from './constants';
 import type ContextValue from './context/ContextValue';
 import type { ContextConstructorArgs } from './context/ContextValue';
 import apolloLoggingPlugin from './plugins/apolloLoggingPlugin';
@@ -64,6 +65,7 @@ export const startServer = async <
     ],
     validationRules: [depthLimit(10)],
     introspection: serverConfig.introspection,
+    formatError: serverConfig.formatError,
   });
 
   await server.start();
@@ -81,6 +83,7 @@ export const startServer = async <
           // The translation object will be returned as a string
           // and the language from the context is used to select the right translation.
           language: acceptsLanguage(req, config?.languages ?? []),
+          ignoredErrorCodes: req.headers[X_IGNORED_ERROR_CODE],
         }),
     })
   );

@@ -1,3 +1,4 @@
+import type { ApolloServerOptions } from '@apollo/server';
 import type { AppLanguage } from '@events-helsinki/components/src/types/types';
 type SentryConfig = {
   sentryDsn?: string; // process.env.GRAPHQL_PROXY_SENTRY_DSN
@@ -19,6 +20,7 @@ export type ServerConfig = SentryConfig &
     serverPort: number; // process.env.GRAPHQL_PROXY_PORT
     disableWinstonLogging?: boolean; // process.env.GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING
     introspection?: boolean; // process.env.GRAPHQL_PROXY_INTROSPECTION
+    formatError?: ApolloServerOptions<object>['formatError'];
   };
 
 // singleton pattern

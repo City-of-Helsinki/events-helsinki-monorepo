@@ -1,8 +1,12 @@
 import {
   composeQuery,
   queryBuilder,
+  CustomIgnorableGraphQLErrorEnum,
+  IgnorableGraphQLError,
 } from '@events-helsinki/graphql-proxy-server/src';
-import type { QueryEventListArgs } from '../../types/types';
+import type EventContext from '../../context/EventContext';
+import type { EventDetails, QueryEventListArgs } from '../../types/types';
+import { MANDATORY_EVENT_FIELDS } from './constants';
 
 export const buildEventListQuery = (params: QueryEventListArgs) => {
   return queryBuilder([
@@ -66,3 +70,48 @@ export const buildEventDetailsQuery = (
 
   return query;
 };
+
+/**
+ * Check if the event details objects has all the mandatory fields populated
+ */
+export function hasEventAllMandatoryFieldsPopulated(event: EventDetails) {
+  return MANDATORY_EVENT_FIELDS.every(
+    (field) => event[field] !== null && event[field] !== undefined
+  );
+}
+
+/**
+ * Reduce a list of EventDetails to such
+ * where all the events have
+ * all the mandatory fields populated.
+ */
+export function reducePopulatedEvents(
+  events: EventDetails[],
+  { ignoredErrorCodes }: EventContext
+) {
+  return events.reduce((result: EventDetails[], event) => {
+    if (hasEventAllMandatoryFieldsPopulated(event)) {
+      result.push(event);
+    } else {
+      const message = `An event has a mandatory property with a null or undefined value!`;
+      // eslint-disable-next-line no-console
+      console.error(message, {
+        id: event.id,
+        internalId: event.internalId,
+      });
+
+      new IgnorableGraphQLError(
+        message,
+        {
+          extensions: {
+            code: CustomIgnorableGraphQLErrorEnum.UnpopulatedMandatoryData,
+            mandatoryEventFields: MANDATORY_EVENT_FIELDS,
+            data: event,
+          },
+        },
+        ignoredErrorCodes ?? []
+      ).throwConditionally();
+    }
+    return result;
+  }, []);
+}

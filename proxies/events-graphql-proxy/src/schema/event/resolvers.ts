@@ -5,15 +5,25 @@ import * as Sentry from '@sentry/node';
 import type EventContext from '../../context/EventContext';
 import type { EventDataSources, QueryResolvers } from '../../types';
 import type { EventDetails, EventListResponse } from '../../types/types';
-import { buildEventDetailsQuery, buildEventListQuery } from './utils';
+import {
+  buildEventDetailsQuery,
+  buildEventListQuery,
+  reducePopulatedEvents,
+} from './utils';
 
-const getEventList = async (dataSources: EventDataSources, query: string) => {
+const getEventList = async (
+  dataSources: EventDataSources,
+  query: string,
+  context: EventContext
+) => {
   try {
     const data = await dataSources.event.getEventList(query);
+    const events = data.data.map((event) => {
+      return normalizeKeys(event) as EventDetails;
+    });
+    const reducedEvents = reducePopulatedEvents(events, context);
     return {
-      data: data.data.map((event) => {
-        return normalizeKeys(event);
-      }),
+      data: reducedEvents,
       meta: data.meta,
     } as EventListResponse;
   } catch (e) {
@@ -33,11 +43,11 @@ const Query: QueryResolvers = {
   },
   eventList: async (_: any, params: any, context: EventContext) => {
     const query = buildEventListQuery(params);
-    return getEventList(context.dataSources, query);
+    return getEventList(context.dataSources, query, context);
   },
   eventsByIds: async (_: any, params: any, context: EventContext) => {
     const query = buildEventListQuery(params);
-    return getEventList(context.dataSources, query);
+    return getEventList(context.dataSources, query, context);
   },
 };
 

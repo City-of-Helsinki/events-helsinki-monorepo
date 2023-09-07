@@ -4,6 +4,7 @@ import {
   useIsSmallScreen,
   useEventListQuery,
   getLargeEventCardId,
+  ignoredErrorCodesHeader,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -28,6 +29,9 @@ function useEventSearchPageQuery(eventType: EventTypeId) {
       eventType === EventTypeId.Course
         ? searchVariables.course
         : searchVariables.event,
+    context: {
+      headers: ignoredErrorCodesHeader,
+    },
   });
 
   const handleLoadMore = async () => {

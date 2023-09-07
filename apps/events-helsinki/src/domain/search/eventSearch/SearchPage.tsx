@@ -13,6 +13,7 @@ import {
   DEFAULT_EVENT_SORT_OPTION,
   isEventSortOption,
   EventList,
+  ignoredErrorCodesHeader,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
@@ -70,6 +71,9 @@ const SearchPage: React.FC<{
   } = useEventListQuery({
     ssr: false,
     variables: eventFilters,
+    context: {
+      headers: ignoredErrorCodesHeader,
+    },
   });
   const eventsList = eventsData?.eventList;
 

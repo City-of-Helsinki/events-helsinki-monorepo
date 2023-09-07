@@ -1,3 +1,4 @@
+import type { DefaultContext } from '@apollo/client/core/types';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { toast } from 'react-toastify';
@@ -16,6 +17,10 @@ import type {
 } from '../../../types/generated/graphql';
 import { useEventListQuery } from '../../../types/generated/graphql';
 import { getEventIdFromUrl } from '../../../utils/eventUtils';
+
+export const ignoredErrorCodesHeader: DefaultContext['headers'] = {
+  'X-Ignored-Error-Code': 'UNPOPULATED_MANDATORY_DATA',
+};
 
 /**
  * Get next page number from linkedevents response meta field
@@ -82,6 +87,9 @@ export const useSimilarEventsQuery = (
   const { data: eventsData, loading } = useEventListQuery({
     ssr: false,
     variables,
+    context: {
+      headers: ignoredErrorCodesHeader,
+    },
   });
   const data = _filterSimilarEvents(event, eventsData?.eventList?.data || []);
   return { data, loading };
@@ -143,6 +151,9 @@ export const useSubEvents = (
     skip: !superEventId,
     ssr: false,
     variables,
+    context: {
+      headers: ignoredErrorCodesHeader,
+    },
   });
   const handleLoadMore = React.useCallback(
     async (page: number) => {
@@ -222,5 +233,11 @@ export const useLocationUpcomingEventsQuery = ({
     superEventType: 'none',
     pageSize,
   };
-  return useEventListQuery({ variables, ssr: false });
+  return useEventListQuery({
+    variables,
+    ssr: false,
+    context: {
+      headers: ignoredErrorCodesHeader,
+    },
+  });
 };

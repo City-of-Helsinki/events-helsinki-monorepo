@@ -165,6 +165,27 @@ export type Time = {
   startTime: Scalars['String'];
 };
 
+export type VenueDepartment = {
+  __typename?: 'VenueDepartment';
+  abbreviation?: Maybe<Scalars['String']>;
+  addressCity?: Maybe<Scalars['String']>;
+  addressPostalFull?: Maybe<Scalars['String']>;
+  addressZip?: Maybe<Scalars['String']>;
+  businessId?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  hierarchyLevel?: Maybe<Scalars['Int']>;
+  id: Scalars['ID'];
+  municipalityCode?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  oid?: Maybe<Scalars['ID']>;
+  organizationId?: Maybe<Scalars['ID']>;
+  organizationType?: Maybe<Scalars['String']>;
+  parentId?: Maybe<Scalars['ID']>;
+  phone?: Maybe<Scalars['String']>;
+  streetAddress?: Maybe<Scalars['String']>;
+  www?: Maybe<Scalars['String']>;
+};
+
 export type Venue = {
   __typename?: 'Venue';
   accessibilitySentences: Array<Maybe<AccessibilitySentences>>;
@@ -173,6 +194,7 @@ export type Venue = {
   connections: Array<Maybe<VenueConnection>>;
   dataSource?: Maybe<Scalars['String']>;
   departmentId?: Maybe<Scalars['ID']>;
+  department?: Maybe<VenueDepartment>;
   description?: Maybe<Scalars['String']>;
   displayedServiceOwner?: Maybe<Scalars['String']>;
   displayedServiceOwnerType?: Maybe<Scalars['String']>;
@@ -189,6 +211,7 @@ export type Venue = {
   ontologyTree: Array<Maybe<Ontology>>;
   ontologyWords: Array<Maybe<Ontology>>;
   organizationId?: Maybe<Scalars['ID']>;
+  organization?: Maybe<VenueDepartment>;
   /**
    *  This field is currently disabled because the Hauki integration is not enabled
    * @deprecated Hauki integration is currently disabled so this field can not be accessed

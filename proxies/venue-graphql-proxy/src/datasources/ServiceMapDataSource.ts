@@ -1,8 +1,12 @@
 import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server/src';
 import type VenueContext from '../context/VenueContext';
+import type {
+  TprekDepartment,
+  TprekOntologyForest,
+  TprekOntologyVocabulary,
+  TprekUnit,
+} from '../types';
 import type { VenueDataSources } from '../types/VenueDataSources';
-
-type AnyObject = Record<string, unknown>;
 
 /**
  * Docs: https://www.hel.fi/palvelukarttaws/restpages/ver4.html
@@ -21,41 +25,60 @@ export default class ServiceMapDataSource extends DataSourceWithContext<
     this.baseURL = process.env.GRAPHQL_PROXY_SERVICE_MAP_DATASOURCE;
   }
 
-  async getOntologyTree(ids: number[]): Promise<AnyObject[] | null> {
-    const trees = await this.getOntologyTrees();
-
-    if (!trees) {
-      return null;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return ids.map((id) => trees.find((tree: any) => id === tree.id));
+  async getOntologyTreeSubset(ids: number[]): Promise<TprekOntologyForest> {
+    const forest = await this.getOntologyForest();
+    const idSet = new Set<number>(ids);
+    return forest.filter((treeNode) => idSet.has(treeNode.id));
   }
 
-  async getOntologyWords(ids: number[]): Promise<AnyObject[] | null> {
-    const words = await this.getAllOntologyWords();
-
-    if (!words) {
-      return null;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return ids.map((id) => words.find((word: any) => id === word.id));
+  async getOntologyWordsSubset(
+    ids: number[]
+  ): Promise<TprekOntologyVocabulary> {
+    const vocabulary = await this.getOntologyVocabulary();
+    const idSet = new Set<number>(ids);
+    return vocabulary.filter((word) => idSet.has(word.id));
   }
 
   /**
    * Get unit from service map.
    * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_unit
    * */
-  async getUnit(id: string) {
+  async getUnit(id: string): Promise<TprekUnit> {
     return this.get(`unit/${id}?newfeatures=yes`);
   }
 
-  private async getAllOntologyWords() {
+  /**
+   * Get department from service map.
+   * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_department
+   * @param departmentId
+   */
+  async getDepartment(departmentId: string): Promise<TprekDepartment> {
+    return this.get(`department/${departmentId}`);
+  }
+
+  /**
+   * Get organization from service map
+   * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_department
+   * @param organizationId
+   */
+  async getOrganization(organizationId: string): Promise<TprekDepartment> {
+    return this.get(`department/${organizationId}`); // Uses department endpoint
+  }
+
+  /**
+   * Get ontology vocabulary (i.e. a collection of ontology words) from service map.
+   * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_ontology_word
+   */
+  private async getOntologyVocabulary(): Promise<TprekOntologyVocabulary> {
     return this.get(`ontologyword/`);
   }
 
-  private async getOntologyTrees() {
+  /**
+   * Get ontology forest (i.e. a collection of ontology trees) from service map.
+   * @note Result can have multiple root nodes i.e. nodes without parent_id
+   * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_ontology_tree
+   */
+  private async getOntologyForest(): Promise<TprekOntologyForest> {
     return this.get(`ontologytree/`);
   }
 }

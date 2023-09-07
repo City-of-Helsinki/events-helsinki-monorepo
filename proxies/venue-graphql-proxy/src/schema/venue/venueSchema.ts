@@ -73,11 +73,32 @@ const createVenueSchema = (isHaukiEnabled = true) => gql`
     url: String
   }
 
+  type VenueDepartment {
+    abbreviation: String
+    addressCity: String
+    addressPostalFull: String
+    addressZip: String
+    businessId: String
+    email: String
+    hierarchyLevel: Int
+    id: ID!
+    municipalityCode: Int
+    name: String
+    oid: ID
+    organizationId: ID
+    organizationType: String
+    parentId: ID
+    phone: String
+    streetAddress: String
+    www: String
+  }
+
   type Venue {
     addressLocality: String
     addressPostalFull: String
     dataSource: String
     departmentId: ID
+    department: VenueDepartment
     description: String
     displayedServiceOwner: String
     displayedServiceOwnerType: String
@@ -87,6 +108,7 @@ const createVenueSchema = (isHaukiEnabled = true) => gql`
     infoUrl: String
     name: String
     organizationId: ID
+    organization: VenueDepartment
     position: Point
     postalCode: String
     providerType: String

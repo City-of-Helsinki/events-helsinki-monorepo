@@ -24,7 +24,7 @@ function useVenueCards({ venues, returnPath }: useVenueCardsProps) {
   } = useConfig();
   return (
     venues
-      ?.filter((venue) => !!venue.id)
+      ?.filter((venue) => !!venue?.id)
       ?.map((venue, i) => {
         const cardProps = getLocationCardProps(venue);
         // NOTE: The venue-graphql-proxy seems to always need a TPREK-id,

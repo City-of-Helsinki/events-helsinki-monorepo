@@ -14,7 +14,7 @@ import venueQueryResolver from './venueQueryResolver';
 // I chose this compromise because it's technically simple.
 //
 // Note the lack of pagination support.
-const venusByIdsResolver = async (
+const venuesByIdsResolver = async (
   source: Source,
   params: unknown,
   context: VenueContext,
@@ -31,4 +31,4 @@ const venusByIdsResolver = async (
   return venues.filter((venue) => venue?.id);
 };
 
-export default venusByIdsResolver;
+export default venuesByIdsResolver;

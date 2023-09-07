@@ -1,10 +1,19 @@
 import type VenueContext from '../context/VenueContext';
-import type { AnyObject, Source, TranslatableVenueDetails } from '../types';
-import type VenueResolverIntegration from './integrations/VenueResolverIntegration';
+import type { Source, TranslatedVenueDetails } from '../types';
+import type IsOpenHaukiIntegration from './integrations/IsOpenHaukiIntegration';
+import type OpeningHoursHaukiIntegration from './integrations/OpeningHoursHaukiIntegration';
+import type VenueServiceMapIntegration from './integrations/VenueServiceMapIntegration';
+
+type PossibleIntegrations =
+  | VenueServiceMapIntegration
+  | IsOpenHaukiIntegration
+  | OpeningHoursHaukiIntegration;
 
 type Config = {
-  integrations: VenueResolverIntegration[];
-  merge?: (data: AnyObject[]) => AnyObject;
+  integrations: PossibleIntegrations[];
+  merge?: (
+    data: Partial<TranslatedVenueDetails>[]
+  ) => Partial<TranslatedVenueDetails>;
 };
 
 export default class VenueResolver {
@@ -17,48 +26,30 @@ export default class VenueResolver {
     id: string,
     source: Source,
     context: VenueContext
-  ): Promise<TranslatableVenueDetails> {
-    const data = await this.execute(this.config.integrations, [
-      id,
-      source,
-      context,
-    ]);
+  ): Promise<Partial<TranslatedVenueDetails>> {
+    const data = (
+      await this.execute(this.config.integrations, id, source, context)
+    ).flat();
 
-    return this.merge(data) as TranslatableVenueDetails;
+    return this.merge(data);
   }
 
   private async execute(
-    integrations: VenueResolverIntegration[],
-    [id, source, context]: [string, Source, VenueContext]
-  ) {
-    const dataPromisesWithFormatting = integrations.flatMap((integration) => {
-      const dataLocations = integration.getDataSources(id, source, context);
-
-      return dataLocations.map((dataLocation) => {
-        return dataLocation.then((data) =>
-          this.processData(data as AnyObject, integration, context)
-        );
-      });
-    });
-
-    return Promise.all(dataPromisesWithFormatting);
-  }
-
-  private async processData(
-    data: AnyObject,
-    integration: VenueResolverIntegration,
+    integrations: PossibleIntegrations[],
+    id: string,
+    source: Source,
     context: VenueContext
   ) {
-    const formattedData = integration.format(data, context);
-    const enrichments = await integration.enrich(data, context);
-
-    return {
-      ...formattedData,
-      ...enrichments,
-    };
+    return Promise.all(
+      integrations.map((integration) =>
+        integration.execute(id, source, context)
+      )
+    );
   }
 
-  private merge(data: AnyObject[]): AnyObject {
+  private merge(
+    data: Partial<TranslatedVenueDetails>[]
+  ): Partial<TranslatedVenueDetails> {
     if (this.config.merge) {
       return this.config.merge(data);
     }

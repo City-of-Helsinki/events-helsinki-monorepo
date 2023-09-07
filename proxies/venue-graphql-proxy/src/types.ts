@@ -1,24 +1,39 @@
+import type { AppLanguage } from '@events-helsinki/components/src/types/types';
 import type { Sources } from './contants/constants';
-import type { Ontology, Point } from './types/types';
+import type { Point, OpeningHour, ResourceState } from './types/types';
 
 export type Source = (typeof Sources)[keyof typeof Sources];
-
-export type AnyObject = Record<string, unknown>;
-
-export type Locale = 'fi' | 'sv' | 'en';
+export type Locale = AppLanguage;
 
 type VenueDetailsTextType = string | TranslationsObject; // 1 locale | 3 locales
+
+export type TranslatableAccessibilitySentences = Record<
+  Locale,
+  Array<AccessibilitySentences>
+>;
+export type TranslatedAccessibilitySentences = Array<AccessibilitySentences>;
+
 type AccessibilitySentencesTypeFor<T extends VenueDetailsTextType> =
   T extends TranslationsObject
-    ? Record<Locale, Array<AccessibilitySentences>> // 3 locales
+    ? TranslatableAccessibilitySentences // 3 locales
     : T extends string
-    ? Array<AccessibilitySentences> // 1 locale
+    ? TranslatedAccessibilitySentences // 1 locale
     : never;
+
+export type OntologyIdLabel<T extends VenueDetailsTextType> = {
+  id: number;
+  label: T | null;
+};
+
+export type TranslatableOntologyIdLabel = OntologyIdLabel<TranslationsObject>;
+export type TranslatedOntologyIdLabel = OntologyIdLabel<string>;
 
 type VenueDetails<T extends VenueDetailsTextType> = {
   id: string;
   organizationId: string | null;
+  organization: Department<T> | null;
   departmentId: string | null;
+  department: Department<T> | null;
   providerType: string | null;
   dataSource: string | null;
   email: string | null;
@@ -34,13 +49,15 @@ type VenueDetails<T extends VenueDetailsTextType> = {
   name: T | null;
   infoUrl: T | null;
   streetAddress: T | null;
-  telephone: T | null;
-  ontologyTree: Ontology[];
-  ontologyWords: Ontology[];
+  telephone: string | null;
+  openingHours: OpeningHour[] | null;
+  isOpen: boolean | null;
+  ontologyTree: OntologyIdLabel<T>[];
+  ontologyWords: OntologyIdLabel<T>[];
   accessibilitySentences: AccessibilitySentencesTypeFor<T>;
   connections: Array<{
     sectionType: string;
-    name: T;
+    name: T | null;
     phone: string;
     url: T | null;
   }>;
@@ -84,6 +101,92 @@ export type TprekUnitConnection = {
   www_en: string;
   www_sv: string;
 };
+
+export type TprekOntologyWord = {
+  can_add_clarification: boolean;
+  can_add_schoolyear: boolean;
+  extra_searchwords_en?: string;
+  extra_searchwords_fi?: string;
+  extra_searchwords_sv?: string;
+  id: number;
+  ontologyword_en: string;
+  ontologyword_fi: string;
+  ontologyword_sv: string;
+};
+
+export type TprekOntologyVocabulary = TprekOntologyWord[];
+
+export type TprekOntologyTreeNode = {
+  child_ids: number[];
+  extra_searchwords_en?: string;
+  extra_searchwords_fi?: string;
+  extra_searchwords_sv?: string;
+  id: number;
+  name_en: string;
+  name_fi: string;
+  name_sv: string;
+  ontologyword_reference?: string;
+  parent_id?: number;
+};
+
+export type TprekOntologyForest = TprekOntologyTreeNode[];
+
+export type TprekDepartmentWithoutNull = {
+  abbr_en?: string;
+  abbr_fi?: string;
+  abbr_sv?: string;
+  address_city_en?: string;
+  address_city_fi?: string;
+  address_city_sv?: string;
+  address_postal_full_en?: string;
+  address_postal_full_fi?: string;
+  address_postal_full_sv?: string;
+  address_zip?: string;
+  business_id?: string;
+  email?: string;
+  hierarchy_level?: number;
+  id: string;
+  municipality_code?: number;
+  name_en?: string;
+  name_fi?: string;
+  name_sv?: string;
+  oid?: string;
+  org_id?: string;
+  organization_type?: string;
+  parent_id?: string;
+  phone?: string;
+  street_address_en?: string;
+  street_address_fi?: string;
+  street_address_sv?: string;
+  www_en?: string;
+  www_fi?: string;
+  www_sv?: string;
+};
+
+export type TprekDepartment = TprekDepartmentWithoutNull | null;
+
+export type Department<T extends VenueDetailsTextType> = {
+  abbreviation: T | null;
+  addressCity: T | null;
+  addressPostalFull: T | null;
+  addressZip: string | null;
+  businessId: string | null;
+  email: string | null;
+  hierarchyLevel: number | null;
+  id: string;
+  municipalityCode: number | null;
+  name: T | null;
+  oid: string | null;
+  organizationId: string | null;
+  organizationType: string | null;
+  parentId: string | null;
+  phone: string | null;
+  streetAddress: T | null;
+  www: T | null;
+};
+
+export type TranslatableDepartment = Department<TranslationsObject>;
+export type TranslatedDepartment = Department<string>;
 
 // No clear type information was available so all of the fields are marked as
 // optional besides the ID. Some may in fact be required.
@@ -148,14 +251,28 @@ export type AccessibilitySentences = {
   sentences: string[];
 };
 
-export type AccessibilityTranslationsObject = {
-  fi?: AccessibilitySentences[];
-  en?: AccessibilitySentences[];
-  sv?: AccessibilitySentences[];
-};
-
 export type TranslationsObject = {
   fi?: string;
   en?: string;
   sv?: string;
+};
+
+export type HaukiTimeElement = {
+  name: string;
+  description: string;
+  start_time: string;
+  end_time: string;
+  end_time_on_next_day: boolean;
+  resource_state: ResourceState;
+  full_day: boolean;
+  periods: number[];
+};
+
+export type HaukiOpeningHours = {
+  date: string;
+  times: HaukiTimeElement[];
+};
+
+export type HaukiIsOpen = {
+  is_open: boolean;
 };

@@ -26,6 +26,12 @@ export type ExtractPrefixesFromLocaleSuffixedNames<
  */
 export type Subset<Supertype, Subtype extends Supertype> = Subtype;
 
+/**
+ * Get keys of union type
+ * @example KeysOfUnionType<{a: 1} | {b: 2, c: 3}> == 'a' | 'b' | 'c'
+ */
+export type KeysOfUnionType<T> = T extends infer U ? keyof U : never;
+
 //-----------------------------------------------------------------------------
 // Typescript type level tests for this file i.e. done at compile time:
 //-----------------------------------------------------------------------------
@@ -72,6 +78,19 @@ type ExpectedPrefixes =
   | 'OnlyFi'
   | 'OnlySv';
 
+const TestSymbol = Symbol('test');
+type TestUnionType =
+  | { first: '1' }
+  | { second1: '2.1'; second2: '2.2' }
+  | { third: ''; 3: null; [TestSymbol]: 'text' };
+type ExpectedTestUnionTypeKeys =
+  | 'first'
+  | 'second1'
+  | 'second2'
+  | 'third'
+  | 3
+  | typeof TestSymbol;
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Tests = [
   // Equal sets:
@@ -114,5 +133,11 @@ type Tests = [
   Subset<ExtractPrefixesFromLocaleSuffixedNames<TestCombos>, ExpectedPrefixes>,
   Subset<ExpectedPrefixes, ExtractPrefixesFromLocaleSuffixedNames<TestCombos>>,
   // @ts-expect-error 'ShouldNotShow' should not be found as a prefix from TestCombos
-  Subset<ExtractPrefixesFromLocaleSuffixedNames<TestCombos>, 'ShouldNotShow'>
+  Subset<ExtractPrefixesFromLocaleSuffixedNames<TestCombos>, 'ShouldNotShow'>,
+  // KeysOfUnionType<TestUnionType> should be ExpectedTestUnionTypeKeys
+  Subset<KeysOfUnionType<TestUnionType>, ExpectedTestUnionTypeKeys>,
+  Subset<ExpectedTestUnionTypeKeys, KeysOfUnionType<TestUnionType>>,
+  // KeysOfUnionType<{ a: 1 } | { b: 2; c: 3 }> should be 'a' | 'b' | 'c'
+  Subset<KeysOfUnionType<{ a: 1 } | { b: 2; c: 3 }>, 'a' | 'b' | 'c'>,
+  Subset<'a' | 'b' | 'c', KeysOfUnionType<{ a: 1 } | { b: 2; c: 3 }>>
 ];

@@ -139,6 +139,48 @@ To compose a new supergraph, use:
 rover supergraph compose --config ./supergraph-config.yaml
 ```
 
+## Router configuration
+
+The router configuration is done with `router.yaml` file.
+
+### Override the subgraph urls with environment variables
+
+The URLs of the subgraph can be defined with the environment variables:
+
+```
+override_subgraph_url:
+  cms: ${env.FEDERATION_CMS_ROUTING_URL}
+  events: ${env.FEDERATION_EVENTS_ROUTING_URL}
+  unified-search: ${env.FEDERATION_UNIFIED_SEARCH_ROUTING_URL}
+  venues: ${env.FEDERATION_VENUES_ROUTING_URL}
+```
+
+**Those values will override the values set in `supergraph-config.yaml`.**
+
+### Headers propagation
+
+Configure which headers the Apollo Router sends to which subgraphs: The propagate config enables you to selectively pass along headers that were included in the client's request to the router.
+
+Some of the subgraphs needs some HTTP headers in the request. Here are some examples:
+
+1. The venues-graphql-proxy needs a `Accept-Language` HTTP header in order to return some of the i18n-values properly.
+2. The events-graphql-proxy has a feature to ignore some custom graphql errors and the ignoring is done with some custom headers like `'X-Ignored-Error-Code=UNPOPULATED_MANDATORY_DATA'`.
+
+Examples configuration:
+
+```
+headers:
+  subgraphs:
+    venues: # Header rules for just the venues subgraph
+      request:
+        - propagate: # propagate all headers. Note that Accept-Language is the most important.
+            matching: .*
+    events: # Header rules for just the events subgraph
+      request:
+        - propagate: # propagate all headers. Note that there are some custom X-Headers.
+            matching: .*
+```
+
 # Documentation related to the Apollo federation
 
 ## External articles for basics:

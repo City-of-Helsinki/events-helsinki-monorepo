@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.1.0...events-graphql-proxy-v1.2.0) (2023-09-08)
+
+
+### Features
+
+* False structured events can be ignored by using http-headers ([3ad03ce](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3ad03ce97311f3975681b072a660f9c5908a19e0))
+
 ## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.0.0...events-graphql-proxy-v1.1.0) (2023-08-28)
 
 

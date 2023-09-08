@@ -16,6 +16,7 @@ export default function initializeSportsApolloClient(
     federationGraphqlEndpoint: AppConfig.federationGraphqlEndpoint,
     ignoredErrorHandlerStatusCodes:
       AppConfig.apolloErrorHandlerIgnoredStatusCodes,
+    contextHeaders: AppConfig.apolloFederationContextHeaders,
   });
 }
 

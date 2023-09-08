@@ -1,4 +1,7 @@
-import { getEnvOrError } from '@events-helsinki/components';
+import {
+  getEnvOrError,
+  ignoredErrorCodesHeader,
+} from '@events-helsinki/components';
 import type { CommonButtonProps } from 'hds-react';
 import getConfig from 'next/config';
 import { i18n } from '../../../next-i18next.config';
@@ -267,6 +270,15 @@ class AppConfig {
     // Ignore HTTP410 - Not found, which is raised e.g.
     // when an event has been deleted from the LinkedEvents
     return [410];
+  }
+
+  /**
+   * The Apollo-client context headers.
+   * NOTE: The federation router needs to propagate all the defined headers
+   * if they should be used in a request to a GraphQL subgraph.
+   */
+  static get apolloFederationContextHeaders() {
+    return { ...ignoredErrorCodesHeader };
   }
 }
 

@@ -24,6 +24,7 @@ import { graphqlClientLogger } from '../loggers/logger';
 import type { LanguageString } from '../types';
 import type { CmsRoutedAppHelper } from '../utils';
 import isClient from '../utils/isClient';
+
 import {
   excludeArgs,
   initializeApolloClient,
@@ -37,18 +38,11 @@ export type EventsFederationApolloClientConfig = {
   routerHelper: CmsRoutedAppHelper;
   handleError?: (error: Error) => void;
   ignoredErrorHandlerStatusCodes?: number[];
+  contextHeaders?: Record<string, string>;
 };
 
 type GraphQLErrorsExtensionResponse = {
   status: number;
-};
-
-/**
- * The Events-graphql-proxy offers a way to ignore some custom ignorable graphql errors.
- * The 'X-Ignored-Error-Code' header is used to list the errors wanted to be ignored.
- * */
-export const ignoredErrorCodesHeader = {
-  'X-Ignored-Error-Code': 'UNPOPULATED_MANDATORY_DATA',
 };
 
 class EventsFederationApolloClient {
@@ -180,7 +174,7 @@ class EventsFederationApolloClient {
       operation.setContext(({ headers = {} }) => ({
         headers: {
           ...headers,
-          ...ignoredErrorCodesHeader,
+          ...this.config.contextHeaders,
         },
       }));
       return forward(operation);

@@ -59,6 +59,16 @@ extends:
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1
       NEXT_PUBLIC_ASKEM_ENABLED: 1
+    buildArgsStage:
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.stage.hel.ninja/
+      CMS_ORIGIN: https://liikunta2.content.api.hel.fi
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      NEXTJS_DISABLE_SENTRY: 1
+      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
+      NEXT_PUBLIC_DEBUG: 0
+      NEXT_PUBLIC_MATOMO_ENABLED: 1
+      NEXT_PUBLIC_ASKEM_ENABLED: 1
+    # NOTE! runtime variables (configMap) do not work in the application !!!
     configMap: # pod environment variables for production
       FEDERATION_ROUTER_ENDPOINT: https://liikunta-router.api.hel.fi/
       CMS_ORIGIN: https://liikunta2.content.api.hel.fi

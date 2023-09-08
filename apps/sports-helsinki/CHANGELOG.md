@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.8.0...sports-helsinki-v1.9.0) (2023-09-08)
+
+
+### Features
+
+* Configure the apollo federation context headers in app config ([c254d01](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c254d01f29e23d92f3c639ec0688bf7e6fe2165f))
+
+
+### Bug Fixes
+
+* **sports:** Fix removing publisher filter from FilterSummary ([15f561c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/15f561c43d9951f621bc245698095bb0d11173b8))
+
 ## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.7.1...sports-helsinki-v1.8.0) (2023-08-31)
 
 

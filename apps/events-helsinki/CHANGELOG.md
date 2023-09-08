@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.5.0...events-helsinki-v1.6.0) (2023-09-08)
+
+
+### Features
+
+* **askem:** Enable Askem in staging & production, fix typos in READMEs ([10fdb92](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/10fdb92599d0be485dcb8586ae26f761a8e3b125))
+* Configure the apollo federation context headers in app config ([c254d01](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c254d01f29e23d92f3c639ec0688bf7e6fe2165f))
+
 ## [1.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.4.0...events-helsinki-v1.5.0) (2023-08-30)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.3.0...federation-router-v1.4.0) (2023-09-08)
+
+
+### Features
+
+* **router:** Propagate all headers to events-proxy ([71b37f6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/71b37f6ae255e2f098bff5f28b1cf0f03e89794c))
+
 ## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.2.1...federation-router-v1.3.0) (2023-08-28)
 
 

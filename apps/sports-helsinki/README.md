@@ -221,6 +221,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Available scripts
 
+### `yarn dev`
+
+Runs the application in development mode.
+Open [http://localhost:3000](http://localhost:3000) to view in the browser.
+
+The page will reload if you make changes.
+
 ### `yarn build`
 
 Builds the production application in the `.next` folder.

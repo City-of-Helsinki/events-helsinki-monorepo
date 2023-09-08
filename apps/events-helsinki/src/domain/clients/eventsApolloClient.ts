@@ -16,6 +16,7 @@ export default function initializeEventsApolloClient(
     federationGraphqlEndpoint: AppConfig.federationGraphqlEndpoint,
     ignoredErrorHandlerStatusCodes:
       AppConfig.apolloErrorHandlerIgnoredStatusCodes,
+    contextHeaders: AppConfig.apolloFederationContextHeaders,
   });
 }
 

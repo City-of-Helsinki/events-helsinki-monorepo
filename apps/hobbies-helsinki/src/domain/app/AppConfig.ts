@@ -253,6 +253,7 @@ class AppConfig {
    * if they should be used in a request to a GraphQL subgraph.
    */
   static get apolloFederationContextHeaders() {
+    // Ignore the unpopulated mandatory event data in LinkedEvents
     return { ...ignoredErrorCodesHeader };
   }
 }

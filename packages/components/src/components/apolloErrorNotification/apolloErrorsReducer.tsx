@@ -15,7 +15,8 @@ export function apolloErrorsReducer(
   switch (action.type) {
     case 'addError': {
       if (state.find((error) => error.message === action.error.message))
-        return [...state];
+        // NOTE: If nothing changes, don't create a new object to prevent state chagnes.
+        return state;
       return [...state, action.error];
     }
     case 'removeError': {

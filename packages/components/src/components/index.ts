@@ -56,6 +56,7 @@ export {
   apolloErrorsReducer,
   useApolloErrorsReducer,
 } from './apolloErrorNotification/apolloErrorsReducer';
+export { default as useApolloErrorHandler } from './apolloErrorNotification/useApolloErrorHandler';
 export type { ToastableErrorActions } from './apolloErrorNotification/apolloErrorsReducer';
 export { default as EventCard } from './eventCard/EventCard';
 export { default as LargeEventCard } from './eventCard/LargeEventCard';

@@ -3,14 +3,19 @@ import { gql } from '@apollo/client';
 export const VENUE_QUERY = gql`
   fragment venueFields on Venue {
     addressLocality
+    addressPostalFull
     dataSource
+    departmentId
     description
+    displayedServiceOwner
+    displayedServiceOwnerType
     email
     id
     isOpen @include(if: $includeHaukiFields)
     image
     infoUrl
     name
+    organizationId
     accessibilitySentences {
       groupName
       sentences
@@ -30,6 +35,8 @@ export const VENUE_QUERY = gql`
       coordinates
     }
     postalCode
+    providerType
+    shortDescription
     streetAddress
     telephone
     ontologyWords {

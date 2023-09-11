@@ -1,18 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useApolloErrorsReducer } from './apolloErrorsReducer';
+import { useState } from 'react';
 
 export default function useApolloErrorHandler() {
-  const [errors, errorsDispatch] = useApolloErrorsReducer();
-  const [showErrorNotification, setShowErrorNotification] = useState(
-    !!errors.length
-  );
-  const handleError = (error: Error) =>
-    errorsDispatch({ type: 'addError', error });
-  const onCloseErrorHandler = () => errorsDispatch({ type: 'clearErrors' });
-
-  useEffect(() => {
-    setShowErrorNotification(!!errors.length);
-  }, [errors.length]);
+  const [showErrorNotification, setShowErrorNotification] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleError = (error: Error) => setShowErrorNotification(true);
+  const onCloseErrorHandler = () => setShowErrorNotification(false);
 
   return { handleError, onCloseErrorHandler, showErrorNotification };
 }

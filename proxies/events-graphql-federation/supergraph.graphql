@@ -18399,15 +18399,22 @@ type Venue
   @join__type(graph: VENUES)
 {
   addressLocality: String
+  addressPostalFull: String
   dataSource: String
+  departmentId: ID
   description: String
+  displayedServiceOwner: String
+  displayedServiceOwnerType: String
   email: String
   id: String!
   image: String
   infoUrl: String
   name: String
+  organizationId: ID
   position: Point
   postalCode: String
+  providerType: String
+  shortDescription: String
   streetAddress: String
   telephone: String
 

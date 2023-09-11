@@ -169,9 +169,13 @@ export type Venue = {
   __typename?: 'Venue';
   accessibilitySentences: Array<Maybe<AccessibilitySentences>>;
   addressLocality?: Maybe<Scalars['String']>;
+  addressPostalFull?: Maybe<Scalars['String']>;
   connections: Array<Maybe<VenueConnection>>;
   dataSource?: Maybe<Scalars['String']>;
+  departmentId?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
+  displayedServiceOwner?: Maybe<Scalars['String']>;
+  displayedServiceOwnerType?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   image?: Maybe<Scalars['String']>;
@@ -184,6 +188,7 @@ export type Venue = {
   name?: Maybe<Scalars['String']>;
   ontologyTree: Array<Maybe<Ontology>>;
   ontologyWords: Array<Maybe<Ontology>>;
+  organizationId?: Maybe<Scalars['ID']>;
   /**
    *  This field is currently disabled because the Hauki integration is not enabled
    * @deprecated Hauki integration is currently disabled so this field can not be accessed
@@ -191,6 +196,8 @@ export type Venue = {
   openingHours?: Maybe<Array<OpeningHour>>;
   position?: Maybe<Point>;
   postalCode?: Maybe<Scalars['String']>;
+  providerType?: Maybe<Scalars['String']>;
+  shortDescription?: Maybe<Scalars['String']>;
   streetAddress?: Maybe<Scalars['String']>;
   telephone?: Maybe<Scalars['String']>;
 };

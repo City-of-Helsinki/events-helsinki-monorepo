@@ -52,12 +52,7 @@ export { default as PublisherFilter } from './filters/PublisherFilter';
 export { default as TextFilter } from './filters/TextFilter';
 export { default as Navigation } from './navigation/Navigation';
 export { default as ApolloErrorNotification } from './apolloErrorNotification/ApolloErrorNotification';
-export {
-  apolloErrorsReducer,
-  useApolloErrorsReducer,
-} from './apolloErrorNotification/apolloErrorsReducer';
 export { default as useApolloErrorHandler } from './apolloErrorNotification/useApolloErrorHandler';
-export type { ToastableErrorActions } from './apolloErrorNotification/apolloErrorsReducer';
 export { default as EventCard } from './eventCard/EventCard';
 export { default as LargeEventCard } from './eventCard/LargeEventCard';
 export { default as EventName } from './eventName/EventName';

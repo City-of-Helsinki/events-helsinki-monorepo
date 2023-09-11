@@ -61,7 +61,7 @@ extends:
     buildArgs:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events-pr454.dev.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.hkih.stage.geniem.io
-      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents-api-dev.agw.arodevtest.hel.fi/event
+      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.dev.hel.ninja/event
       NEXTJS_DISABLE_SENTRY: 1
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
@@ -69,4 +69,4 @@ extends:
     configMap: # pod environment variables
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events-pr454.dev.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.hkih.stage.geniem.io
-      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents-api-dev.agw.arodevtest.hel.fi/event
+      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.dev.hel.ninja/event

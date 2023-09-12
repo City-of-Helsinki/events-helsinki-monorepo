@@ -11,8 +11,11 @@ import qs from 'query-string';
 import { initialCombinedSearchFormValues } from '../constants';
 import type {
   CombinedSearchAdapterInput,
+  CombinedSearchAdapterInputFallback,
   InputFieldValueCleaner,
   SearchType,
+  CombinedSearchAdapterInputArrayFields,
+  CombinedSearchAdapterInputNonArrayFields,
 } from '../types';
 import EventSearchAdapter from './EventSearchAdapter';
 import VenueSearchAdapter from './VenueSearchAdapter';
@@ -93,35 +96,33 @@ class CombinedSearchFormAdapter
     this.language = locale;
     this.geolocation = geolocation;
 
-    this.text = input.get('text') ?? input.get('q') ?? '';
-    this.venueOrderBy =
-      input.get('venueOrderBy') ??
-      input.get('orderBy') ??
-      input.get('sort') ??
-      initialCombinedSearchFormValues.venueOrderBy;
-    this.eventOrderBy =
-      input.get('eventOrderBy') ??
-      input.get('orderBy') ??
-      input.get('sort') ??
-      initialCombinedSearchFormValues.eventOrderBy;
-    this.courseOrderBy =
-      input.get('courseOrderBy') ??
-      input.get('orderBy') ??
-      input.get('sort') ??
-      initialCombinedSearchFormValues.courseOrderBy;
-    this.sportsCategories = input.getAll('sportsCategories');
-    this.targetGroups = input.getAll('targetGroups');
+    this.text = this.getSingleValueInput<'text'>('text', 'q');
+    this.venueOrderBy = this.getSingleValueInput<'venueOrderBy'>(
+      'venueOrderBy',
+      'orderBy',
+      'sort'
+    );
+    this.eventOrderBy = this.getSingleValueInput<'eventOrderBy'>(
+      'eventOrderBy',
+      'orderBy',
+      'sort'
+    );
+    this.courseOrderBy = this.getSingleValueInput<'courseOrderBy'>(
+      'courseOrderBy',
+      'orderBy',
+      'sort'
+    );
+    this.sportsCategories =
+      this.getMultiValueInput<'sportsCategories'>('sportsCategories');
+    this.targetGroups = this.getMultiValueInput<'targetGroups'>('targetGroups');
     this.helsinkiOnly =
-      input.get('helsinkiOnly') ?? initialCombinedSearchFormValues.helsinkiOnly;
-    this.organization =
-      input.get('organization') ??
-      input.get('publisher') ??
-      initialCombinedSearchFormValues.organization;
-    this.place =
-      input.get('place') ??
-      input.get('places') ??
-      initialCombinedSearchFormValues.place;
-    this.keywords = input.getAll('keywords');
+      this.getSingleValueInput<'helsinkiOnly'>('helsinkiOnly');
+    this.organization = this.getSingleValueInput<'organization'>(
+      'organization',
+      'publisher'
+    );
+    this.place = this.getSingleValueInput<'place'>('place', 'places');
+    this.keywords = this.getMultiValueInput<'keywords'>('keywords');
 
     // Clean the field values for adapters
     this.clean();
@@ -135,8 +136,52 @@ class CombinedSearchFormAdapter
   }
 
   /**
+   * Get a single value (i.e. not an array) type URL search parameter with fallbacks
+   * @param primaryField The primary field name
+   * @param fallbackFields The fallback field names in order of priority
+   * @return Primary field's value if it's non-null, or the first non-null value of
+   * the fallback fields or initialCombinedSearchFormValues[primaryField] if all are
+   * null
+   */
+  private getSingleValueInput<
+    T extends CombinedSearchAdapterInputNonArrayFields
+  >(
+    primaryField: T,
+    ...fallbackFields: CombinedSearchAdapterInputFallback[]
+  ): string | (typeof initialCombinedSearchFormValues)[T] {
+    for (const field of [primaryField, ...fallbackFields]) {
+      const value = this.searchParams.get(field);
+      if (value !== null) {
+        return value;
+      }
+    }
+    return initialCombinedSearchFormValues[primaryField];
+  }
+
+  /**
+   * Get a multi value (i.e. an array) type URL search parameter with fallbacks
+   * @param primaryField The primary field name
+   * @param fallbackFields The fallback field names in order of priority
+   * @return Primary field's value if it's non-empty, or the first non-empty value of
+   * the fallback fields or initialCombinedSearchFormValues[primaryField] if all are
+   * empty
+   */
+  private getMultiValueInput<T extends CombinedSearchAdapterInputArrayFields>(
+    primaryField: T,
+    ...fallbackFields: CombinedSearchAdapterInputFallback[]
+  ): string[] | (typeof initialCombinedSearchFormValues)[T] {
+    for (const field of [primaryField, ...fallbackFields]) {
+      const value = this.searchParams.getAll(field);
+      if (value.length > 0) {
+        return value;
+      }
+    }
+    return initialCombinedSearchFormValues[primaryField];
+  }
+
+  /**
    * Get a map of form values.
-   * */
+   */
   public getFormValues(): CombinedSearchAdapterInput {
     const formFields = this.getFormFields();
     return formFields.reduce(

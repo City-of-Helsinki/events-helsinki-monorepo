@@ -1,12 +1,11 @@
-import { EVENT_SORT_OPTIONS } from '@events-helsinki/components/constants';
+import type { TargetGroup } from '@events-helsinki/components';
 import {
   EventTypeId,
   UnifiedSearchLanguage,
-} from '@events-helsinki/components/types';
-import {
+  EVENT_SORT_OPTIONS,
   HELSINKI_OCD_DIVISION_ID,
-  SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID,
-} from '../../app/appConstants';
+} from '@events-helsinki/components';
+import { SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID } from '../../app/appConstants';
 import { SPORT_COURSES_KEYWORDS } from '../eventSearch/constants';
 import type {
   CombinedSearchAdapterInput,
@@ -15,43 +14,45 @@ import type {
 } from './types';
 
 export const PARAM_SEARCH_TYPE = 'searchType';
-export const initialCombinedSearchFormValues: CombinedSearchAdapterInput = {
+
+export const initialCombinedSearchFormValues = {
   text: '',
   venueOrderBy: undefined,
   eventOrderBy: undefined,
   courseOrderBy: undefined,
-  sportsCategories: [],
-  targetGroups: [],
+  sportsCategories: [] as string[],
+  targetGroups: [] as string[],
   helsinkiOnly: undefined,
   organization: undefined,
   place: undefined,
-  keywords: [],
-};
-export const initialVenueSearchAdapterValues: VenueSearchParams = {
+  keywords: [] as string[],
+} as const satisfies CombinedSearchAdapterInput;
+
+export const initialVenueSearchAdapterValues = {
   includeHaukiFields: false,
   language: UnifiedSearchLanguage.Finnish,
   q: '*',
-  ontologyTreeIds: [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()],
-  ontologyWordIds: [],
-  targetGroups: [],
-  administrativeDivisionIds: [HELSINKI_OCD_DIVISION_ID],
+  ontologyTreeIds: [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()] as string[],
+  ontologyWordIds: [] as string[],
+  targetGroups: [] as TargetGroup[],
+  administrativeDivisionIds: [HELSINKI_OCD_DIVISION_ID] as string[],
   providerTypes: undefined,
   serviceOwnerTypes: undefined,
   openAt: null,
   after: '',
   first: 10,
-};
+} as const satisfies VenueSearchParams;
 
-export const initialEventSearchAdapterValues: EventSearchParams = {
-  allOngoingAnd: [],
+export const initialEventSearchAdapterValues = {
+  allOngoingAnd: [] as string[],
   start: 'now',
   end: '',
-  include: ['keywords', 'location'],
-  keywordAnd: [],
-  keywordNot: [],
+  include: ['keywords', 'location'] as string[],
+  keywordAnd: [] as string[],
+  keywordNot: [] as string[],
   keywordOrSet1: SPORT_COURSES_KEYWORDS,
-  keywordOrSet2: [],
-  location: [],
+  keywordOrSet2: [] as string[],
+  location: [] as string[],
   sort: EVENT_SORT_OPTIONS.END_TIME,
   eventType: EventTypeId.General,
   superEventType: undefined, // Don't use superEventType when experimenting LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
@@ -59,4 +60,4 @@ export const initialEventSearchAdapterValues: EventSearchParams = {
   publisher: null,
   publisherAncestor: null,
   pageSize: 10,
-};
+} as const satisfies EventSearchParams;

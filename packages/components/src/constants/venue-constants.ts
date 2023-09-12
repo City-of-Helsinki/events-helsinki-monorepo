@@ -4,4 +4,4 @@ export const Sources = {
 } as const;
 
 export const HELSINKI_OCD_DIVISION_ID =
-  'ocd-division/country:fi/kunta:helsinki';
+  'ocd-division/country:fi/kunta:helsinki' as const;

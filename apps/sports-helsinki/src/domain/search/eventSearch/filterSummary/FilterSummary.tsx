@@ -32,7 +32,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     targetGroups,
     organization,
     helsinkiOnly,
-    text: q,
+    text,
     place,
   } = formValues;
 
@@ -69,7 +69,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!helsinkiOnly ||
     !!organization ||
     !!place ||
-    !!q?.length;
+    !!text?.length;
 
   if (!hasFilters) return null;
 

@@ -32,6 +32,21 @@ export type Subset<Supertype, Subtype extends Supertype> = Subtype;
  */
 export type KeysOfUnionType<T> = T extends infer U ? keyof U : never;
 
+/**
+ * Get object type's keys whose values are array fields (e.g. readonly string[]) or
+ * union types that have an array type in them (e.g. string[] | null | undefined).
+ * @example KeysOfArrayFields<{a: string; b: string[]; c: number}> == 'b'
+ */
+export type KeysOfArrayFields<T> = keyof {
+  [K in keyof T as T[K] extends infer U // infer for supporting union type fields
+    ? U extends unknown[] // non-readonly arrays
+      ? K
+      : U extends readonly unknown[] // readonly arrays
+      ? K
+      : never
+    : never]: T[K];
+};
+
 //-----------------------------------------------------------------------------
 // Typescript type level tests for this file i.e. done at compile time:
 //-----------------------------------------------------------------------------
@@ -91,6 +106,32 @@ type ExpectedTestUnionTypeKeys =
   | 3
   | typeof TestSymbol;
 
+type ArrayFieldsTestType = {
+  '[]': [];
+  boolean: boolean;
+  number: number;
+  'number[] | null | undefined': number[] | null | undefined;
+  'readonly []': readonly [];
+  'readonly string[]': readonly string[];
+  'string | null | undefined': string | null | undefined;
+  'string | null': string | null;
+  string: string;
+  'string[] | null | undefined': string[] | null | undefined;
+  'string[] | null': string[] | null;
+  'string[]': string[];
+};
+
+type ExpectedKeysOfArrayFields =
+  | '[]'
+  | 'number[] | null | undefined'
+  | 'readonly []'
+  | 'readonly string[]'
+  | 'string[] | null | undefined'
+  | 'string[] | null'
+  | 'string[]';
+
+type TooManyKeysOfArrayFields = ExpectedKeysOfArrayFields | 'extra';
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Tests = [
   // Equal sets:
@@ -99,12 +140,18 @@ type Tests = [
   Subset<ABC, ABC>,
   Subset<keyof ABC, 'a' | 'b' | 'c'>,
   Subset<'a' | 'b' | 'c', keyof ABC>,
+  Subset<KeysOfArrayFields<{ a: string; b: string[]; c: number }>, 'b'>,
+  Subset<'b', KeysOfArrayFields<{ a: string; b: string[]; c: number }>>,
+  Subset<KeysOfArrayFields<ArrayFieldsTestType>, ExpectedKeysOfArrayFields>,
+  Subset<ExpectedKeysOfArrayFields, KeysOfArrayFields<ArrayFieldsTestType>>,
   // Proper subsets:
   Subset<'a' | 'b', 'a'>,
   Subset<'a' | 'b', 'b'>,
   Subset<keyof ABC, keyof AB>,
   Subset<keyof ABC, keyof BC>,
   Subset<`${keyof AB}_${EnFr}`, 'a_fr' | 'b_en' | 'b_fr'>,
+  Subset<'b' | 'c', KeysOfArrayFields<{ a: string; b: string[]; c: number }>>,
+  Subset<TooManyKeysOfArrayFields, KeysOfArrayFields<ArrayFieldsTestType>>,
   // Not subsets:
   // @ts-expect-error 'a' | 'b' | 'c' is not a subset of 'a' | 'b'
   Subset<'a' | 'b', 'a' | 'b' | 'c'>,
@@ -139,5 +186,9 @@ type Tests = [
   Subset<ExpectedTestUnionTypeKeys, KeysOfUnionType<TestUnionType>>,
   // KeysOfUnionType<{ a: 1 } | { b: 2; c: 3 }> should be 'a' | 'b' | 'c'
   Subset<KeysOfUnionType<{ a: 1 } | { b: 2; c: 3 }>, 'a' | 'b' | 'c'>,
-  Subset<'a' | 'b' | 'c', KeysOfUnionType<{ a: 1 } | { b: 2; c: 3 }>>
+  Subset<'a' | 'b' | 'c', KeysOfUnionType<{ a: 1 } | { b: 2; c: 3 }>>,
+  // @ts-expect-error 'a' is not a subset of KeysOfArrayFields<{ a: string; b: string[] }>
+  Subset<KeysOfArrayFields<{ a: string; b: string[] }>, 'a'>,
+  // @ts-expect-error TooManyKeysOfArrayFields is not a subset of KeysOfArrayFields<ArrayFieldsTestType>
+  Subset<KeysOfArrayFields<ArrayFieldsTestType>, TooManyKeysOfArrayFields>
 ];

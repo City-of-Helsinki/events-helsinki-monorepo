@@ -52,7 +52,8 @@ const SearchPage: React.FC<{
       params: searchParams,
       place: params.place,
       sortOrder: EVENT_SORT_OPTIONS.END_TIME,
-      superEventType: ['umbrella', 'none'],
+      // superEventType: ['umbrella', 'none'] // Don't use superEventType when experimenting LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+      superEvent: 'none', // Set the superEvent param to "none" for courses; LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
     });
     return variables;
   }, [router.query, params.place]);

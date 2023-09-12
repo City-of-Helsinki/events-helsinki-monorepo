@@ -56,7 +56,8 @@ const SearchPage: React.FC<{
       sortOrder: isEventSortOption(sortParam)
         ? sortParam
         : DEFAULT_EVENT_SORT_OPTION,
-      superEventType: ['umbrella', 'none'],
+      // superEventType: ['umbrella', 'none'] // Don't use superEventType when experimenting LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+      // superEvent: 'none', // Only the course type search should use this param; LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
     });
     return variables;
   }, [router.query, params.place]);

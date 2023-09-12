@@ -84,6 +84,7 @@ export type EventSearchParams = Pick<
   | 'sort'
   | 'eventType'
   | 'superEventType'
+  | 'superEvent'
   | 'publisher'
   | 'publisherAncestor'
   | 'page'

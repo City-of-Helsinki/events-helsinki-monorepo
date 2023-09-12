@@ -29,7 +29,8 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
         params: new URLSearchParams(searchParams),
         sortOrder: EVENT_SORT_OPTIONS.END_TIME,
-        superEventType: ['umbrella', 'none'],
+        // superEventType: ['umbrella', 'none'] // Don't use superEventType when experimenting LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+        superEvent: 'none', // Set the superEvent param to "none" for courses; LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
       }),
       [EVENT_SEARCH_FILTERS.SUITABLE]: [],
     };

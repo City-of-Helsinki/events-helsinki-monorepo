@@ -12369,9 +12369,13 @@ export type Venue = {
   __typename?: 'Venue';
   accessibilitySentences: Array<Maybe<AccessibilitySentences>>;
   addressLocality?: Maybe<Scalars['String']['output']>;
+  addressPostalFull?: Maybe<Scalars['String']['output']>;
   connections: Array<Maybe<VenueConnection>>;
   dataSource?: Maybe<Scalars['String']['output']>;
+  departmentId?: Maybe<Scalars['ID']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  displayedServiceOwner?: Maybe<Scalars['String']['output']>;
+  displayedServiceOwnerType?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   image?: Maybe<Scalars['String']['output']>;
@@ -12389,8 +12393,11 @@ export type Venue = {
    * @deprecated Hauki integration is currently disabled so this field can not be accessed
    */
   openingHours?: Maybe<Array<OpeningHour>>;
+  organizationId?: Maybe<Scalars['ID']['output']>;
   position?: Maybe<Point>;
   postalCode?: Maybe<Scalars['String']['output']>;
+  providerType?: Maybe<Scalars['String']['output']>;
+  shortDescription?: Maybe<Scalars['String']['output']>;
   streetAddress?: Maybe<Scalars['String']['output']>;
   telephone?: Maybe<Scalars['String']['output']>;
 };
@@ -13903,15 +13910,22 @@ export type SearchMapQuery = {
 export type VenueFieldsFragment = {
   __typename?: 'Venue';
   addressLocality?: string | null;
+  addressPostalFull?: string | null;
   dataSource?: string | null;
+  departmentId?: string | null;
   description?: string | null;
+  displayedServiceOwner?: string | null;
+  displayedServiceOwnerType?: string | null;
   email?: string | null;
   id: string;
   isOpen?: boolean | null;
   image?: string | null;
   infoUrl?: string | null;
   name?: string | null;
+  organizationId?: string | null;
   postalCode?: string | null;
+  providerType?: string | null;
+  shortDescription?: string | null;
   streetAddress?: string | null;
   telephone?: string | null;
   accessibilitySentences: Array<{
@@ -13960,15 +13974,22 @@ export type VenueQuery = {
   venue: {
     __typename?: 'Venue';
     addressLocality?: string | null;
+    addressPostalFull?: string | null;
     dataSource?: string | null;
+    departmentId?: string | null;
     description?: string | null;
+    displayedServiceOwner?: string | null;
+    displayedServiceOwnerType?: string | null;
     email?: string | null;
     id: string;
     isOpen?: boolean | null;
     image?: string | null;
     infoUrl?: string | null;
     name?: string | null;
+    organizationId?: string | null;
     postalCode?: string | null;
+    providerType?: string | null;
+    shortDescription?: string | null;
     streetAddress?: string | null;
     telephone?: string | null;
     accessibilitySentences: Array<{
@@ -14018,15 +14039,22 @@ export type VenuesByIdsQuery = {
   venuesByIds: Array<{
     __typename?: 'Venue';
     addressLocality?: string | null;
+    addressPostalFull?: string | null;
     dataSource?: string | null;
+    departmentId?: string | null;
     description?: string | null;
+    displayedServiceOwner?: string | null;
+    displayedServiceOwnerType?: string | null;
     email?: string | null;
     id: string;
     isOpen?: boolean | null;
     image?: string | null;
     infoUrl?: string | null;
     name?: string | null;
+    organizationId?: string | null;
     postalCode?: string | null;
+    providerType?: string | null;
+    shortDescription?: string | null;
     streetAddress?: string | null;
     telephone?: string | null;
     accessibilitySentences: Array<{
@@ -14228,14 +14256,19 @@ export const OrganizationFieldsFragmentDoc = gql`
 export const VenueFieldsFragmentDoc = gql`
   fragment venueFields on Venue {
     addressLocality
+    addressPostalFull
     dataSource
+    departmentId
     description
+    displayedServiceOwner
+    displayedServiceOwnerType
     email
     id
     isOpen @include(if: $includeHaukiFields)
     image
     infoUrl
     name
+    organizationId
     accessibilitySentences {
       groupName
       sentences
@@ -14255,6 +14288,8 @@ export const VenueFieldsFragmentDoc = gql`
       coordinates
     }
     postalCode
+    providerType
+    shortDescription
     streetAddress
     telephone
     ontologyWords {

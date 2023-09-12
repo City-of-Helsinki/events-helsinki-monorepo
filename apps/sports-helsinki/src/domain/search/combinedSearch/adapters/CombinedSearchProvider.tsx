@@ -3,6 +3,7 @@ import React from 'react';
 import { initialCombinedSearchFormValues } from '../constants';
 import { useCombinedSearchController } from '../hooks/useCombinedSearchController';
 import type { CombinedSearchAdapterInput } from '../types';
+import { combinedSearchAdapterInputFallbacks } from '../types';
 import type { CombinedSearchContextType } from './CombinedSearchContext';
 import { CombinedSearchContext } from './CombinedSearchContext';
 import type CombinedSearchFormAdapter from './CombinedSearchFormAdapter';
@@ -28,8 +29,18 @@ function useGetCombinedSearchContext(): UseGetCombinedSearchContextReturnType {
       [field]: value,
     });
 
+  /**
+   * Remove fallback (i.e. for backward compatibility only) query parameters from URL.
+   */
+  const removeFallbackQueryParams = () => {
+    for (const fallbackQueryParam of combinedSearchAdapterInputFallbacks) {
+      combinedSearchFormAdapter.searchParams.delete(fallbackQueryParam);
+    }
+  };
+
   const resetFormValues = () => {
     setFormValues(initialCombinedSearchFormValues);
+    removeFallbackQueryParams();
     updateRouteToSearchPage({ shallow: true });
   };
 

@@ -3,6 +3,7 @@ import type {
   EventListQueryVariables,
   SearchListQueryVariables,
   UnifiedSearchVenue,
+  KeysOfArrayFields,
 } from '@events-helsinki/components';
 import type { FormEvent } from 'react';
 import type { Config } from 'react-helsinki-headless-cms';
@@ -63,6 +64,30 @@ export type CombinedSearchAdapterInput = {
 } & CombinedSearchAdapterInputForVenues &
   CombinedSearchAdapterInputForEvents &
   CombinedSearchAdapterInputForCourses;
+
+export type CombinedSearchAdapterInputArrayFields =
+  KeysOfArrayFields<CombinedSearchAdapterInput>;
+
+export type CombinedSearchAdapterInputNonArrayFields = Exclude<
+  keyof CombinedSearchAdapterInput,
+  CombinedSearchAdapterInputArrayFields
+>;
+
+/**
+ * List of backward compatibility fallback fields for combined search adapter
+ * input fields.
+ */
+export const combinedSearchAdapterInputFallbacks = [
+  'orderBy',
+  'places',
+  'publisher',
+  'q',
+  'sort',
+] as const;
+
+/** Backward compatibility fallback fields for combined search adapter input fields. */
+export type CombinedSearchAdapterInputFallback =
+  (typeof combinedSearchAdapterInputFallbacks)[number];
 
 /** The fields that are used by the Event and Course search. */
 export type EventSearchParams = Pick<

@@ -36,7 +36,9 @@ exports[`matches snapshot 1`] = `
           </g>
         </svg>
       </span>
-      <span>
+      <span
+        class="LinkBase-module_content__Y4oQw"
+      >
         text
       </span>
       <span

@@ -10,6 +10,7 @@ import {
   FilterButton,
   useLocale,
   HelsinkiOnlyFilter,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -79,23 +80,31 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       type === listType ? list.filter((v) => v !== value) : list;
 
     const search = getSearchQuery({
-      categories: getFilteredList('category', categories),
-      hobbyTypes: getFilteredList('hobbyType', hobbyTypes),
-      dateTypes: getFilteredList('dateType', dateTypes),
-      divisions: getFilteredList('division', divisions),
-      end: type === 'date' ? null : end,
-      helsinkiOnly: type === 'helsinkiOnly' ? undefined : helsinkiOnly,
-      isFree,
-      keyword,
-      keywordNot,
-      onlyChildrenEvents,
-      places: getFilteredList('place', places),
-      publisher: type !== 'publisher' ? publisher : null,
-      start: type === 'date' ? null : start,
-      text: getFilteredList('text', text),
-      suitableFor: getSuitableForFilterValue(suitableFor, type) ?? [],
-      audienceMinAgeLt: type === 'minAge' ? '' : audienceMinAgeLt,
-      audienceMaxAgeGt: type === 'maxAge' ? '' : audienceMaxAgeGt,
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: getFilteredList(
+        'category',
+        categories
+      ),
+      [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: getFilteredList(
+        'hobbyType',
+        hobbyTypes
+      ),
+      [EVENT_SEARCH_FILTERS.DATE_TYPES]: getFilteredList('dateType', dateTypes),
+      [EVENT_SEARCH_FILTERS.DIVISIONS]: getFilteredList('division', divisions),
+      [EVENT_SEARCH_FILTERS.END]: type === 'date' ? null : end,
+      [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]:
+        type === 'helsinkiOnly' ? undefined : helsinkiOnly,
+      [EVENT_SEARCH_FILTERS.IS_FREE]: isFree,
+      [EVENT_SEARCH_FILTERS.KEYWORD]: keyword,
+      [EVENT_SEARCH_FILTERS.KEYWORD_NOT]: keywordNot,
+      [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: onlyChildrenEvents,
+      [EVENT_SEARCH_FILTERS.PLACES]: getFilteredList('place', places),
+      [EVENT_SEARCH_FILTERS.PUBLISHER]: type !== 'publisher' ? publisher : null,
+      [EVENT_SEARCH_FILTERS.START]: type === 'date' ? null : start,
+      [EVENT_SEARCH_FILTERS.TEXT]: getFilteredList('text', text),
+      [EVENT_SEARCH_FILTERS.SUITABLE]:
+        getSuitableForFilterValue(suitableFor, type) ?? [],
+      [EVENT_SEARCH_FILTERS.MIN_AGE]: type === 'minAge' ? '' : audienceMinAgeLt,
+      [EVENT_SEARCH_FILTERS.MAX_AGE]: type === 'maxAge' ? '' : audienceMaxAgeGt,
     });
 
     router.push({

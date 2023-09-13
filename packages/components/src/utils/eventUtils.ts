@@ -3,6 +3,7 @@ import capitalize from 'lodash/capitalize';
 import type { TFunction } from 'next-i18next';
 
 import {
+  CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
   EVENT_KEYWORD_BLACK_LIST,
   EVENT_LOCATIONS,
   EVENT_SOME_IMAGE,
@@ -49,12 +50,9 @@ export const isEventCancelled = (event: EventFields): boolean => {
  */
 export const isEventHelsinkiCityOwned = (event: EventFields): boolean => {
   const publisherPrefix = event?.publisher?.split(':')[0] ?? '';
-  // Prefixes of organization IDs under City of Helsinki root organization 'ahjo:00001',
-  // see https://api.hel.fi/linkedevents/v1/organization/ahjo:00001/
-  //
-  // Kultus subtree of the organization tree starts at 'kultus:0' and is excluded,
-  // see https://api.hel.fi/linkedevents/v1/organization/kultus:0/
-  return ['ahjo', 'helsinki'].includes(publisherPrefix);
+  return CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES.includes(
+    publisherPrefix
+  );
 };
 
 /**

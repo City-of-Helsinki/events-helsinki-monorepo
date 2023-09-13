@@ -68,6 +68,21 @@ export enum EVENT_SEARCH_FILTERS {
   SUITABLE = 'suitableFor',
 }
 
-// City of Helsinki's organization ID in Linked Events
-// See https://api.hel.fi/linkedevents/v1/organization/ahjo:00001/
-export const CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID = 'ahjo:00001';
+/**
+ * City of Helsinki's organization ID in Linked Events
+ * @see https://api.hel.fi/linkedevents/v1/organization/ahjo:00001/
+ */
+export const CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID =
+  'ahjo:00001' as const;
+
+/**
+ * Prefixes of organization IDs under City of Helsinki root organization 'ahjo:00001',
+ * @see https://api.hel.fi/linkedevents/v1/organization/ahjo:00001/
+ *
+ * Kultus subtree of the organization tree starts at 'kultus:0' and is excluded,
+ * @see https://api.hel.fi/linkedevents/v1/organization/kultus:0/
+ */
+export const CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES = [
+  'ahjo',
+  'helsinki',
+];

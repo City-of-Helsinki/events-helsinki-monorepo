@@ -79,7 +79,12 @@
       margin-left: auto;
       background-color: white;
 
+      &:focus {
+        outline: 2px solid var(--color-coat-of-arms); /* todo: use color-primary-black instead */
+      }
+
       @include breakpoints.respond-above(m) {
+        margin-right: var(--spacing-s);
         width: unset;
         border: 2px solid;
         height: 45px;

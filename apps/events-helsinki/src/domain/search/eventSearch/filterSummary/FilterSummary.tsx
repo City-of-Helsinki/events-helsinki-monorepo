@@ -19,6 +19,7 @@ import React from 'react';
 import useDivisionOptions from '../../../../common-events/hooks/useDivisionOptions';
 import { ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
+import { EVENT_SEARCH_FILTERS } from '../constants';
 import { getSearchFilters, getSearchQuery } from '../utils';
 import styles from './filterSummary.module.scss';
 
@@ -70,19 +71,23 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       type === listType ? list.filter((v) => v !== value) : list;
 
     const search = getSearchQuery({
-      categories: getFilteredList('category', categories),
-      dateTypes: getFilteredList('dateType', dateTypes),
-      divisions: getFilteredList('division', divisions),
-      end: type === 'date' ? null : end,
-      helsinkiOnly: type === 'helsinkiOnly' ? undefined : helsinkiOnly,
-      isFree,
-      keyword,
-      keywordNot,
-      onlyChildrenEvents,
-      places: getFilteredList('place', places),
-      publisher: type !== 'publisher' ? publisher : null,
-      start: type === 'date' ? null : start,
-      text: getFilteredList('text', text),
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: getFilteredList(
+        'category',
+        categories
+      ),
+      [EVENT_SEARCH_FILTERS.DATE_TYPES]: getFilteredList('dateType', dateTypes),
+      [EVENT_SEARCH_FILTERS.DIVISIONS]: getFilteredList('division', divisions),
+      [EVENT_SEARCH_FILTERS.END]: type === 'date' ? null : end,
+      [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]:
+        type === 'helsinkiOnly' ? undefined : helsinkiOnly,
+      [EVENT_SEARCH_FILTERS.IS_FREE]: isFree,
+      [EVENT_SEARCH_FILTERS.KEYWORD]: keyword,
+      [EVENT_SEARCH_FILTERS.KEYWORD_NOT]: keywordNot,
+      [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: onlyChildrenEvents,
+      [EVENT_SEARCH_FILTERS.PLACES]: getFilteredList('place', places),
+      [EVENT_SEARCH_FILTERS.PUBLISHER]: type !== 'publisher' ? publisher : null,
+      [EVENT_SEARCH_FILTERS.START]: type === 'date' ? null : start,
+      [EVENT_SEARCH_FILTERS.TEXT]: getFilteredList('text', text),
     });
 
     router.push({

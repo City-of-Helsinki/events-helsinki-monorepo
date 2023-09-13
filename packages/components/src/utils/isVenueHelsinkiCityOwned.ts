@@ -1,4 +1,9 @@
-import { ProviderType, ServiceOwnerType } from '../types';
+import {
+  isUnifiedSearchVenue,
+  isVenue,
+  ProviderType,
+  ServiceOwnerType,
+} from '../types';
 import type { UnifiedSearchVenue, Venue } from '../types';
 
 /**
@@ -9,16 +14,16 @@ import type { UnifiedSearchVenue, Venue } from '../types';
 export default function isVenueHelsinkiCityOwned(
   venue: UnifiedSearchVenue | Venue
 ): boolean {
-  if (venue.__typename == 'UnifiedSearchVenue') {
+  if (isUnifiedSearchVenue(venue)) {
     return (
       venue.serviceOwner?.providerType == ProviderType.SelfProduced &&
       venue.serviceOwner?.type == ServiceOwnerType.MunicipalService
     );
-  } else if (venue.__typename == 'Venue') {
+  } else if (isVenue(venue)) {
     return (
       venue.providerType == ProviderType.SelfProduced &&
       venue.displayedServiceOwnerType == ServiceOwnerType.MunicipalService
     );
   }
-  throw Error(`Unsupported venue type ${venue.__typename}`);
+  throw new Error('Invalid venue type for isVenueHelsinkiCityOwned');
 }

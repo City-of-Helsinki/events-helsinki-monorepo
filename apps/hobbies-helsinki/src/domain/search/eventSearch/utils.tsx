@@ -416,13 +416,21 @@ export const getSuitableForFilterValue = (
 export const getSearchQuery = (filters: Filters): string => {
   const newFilters: MappedFilters = {
     ...filters,
-    end: formatDate(filters.end, 'yyyy-MM-dd'),
-    isFree: filters.isFree ? true : undefined,
-    helsinkiOnly: filters.helsinkiOnly ? true : undefined,
-    onlyChildrenEvents: filters.onlyChildrenEvents ? true : undefined,
-    onlyEveningEvents: filters.onlyEveningEvents ? true : undefined,
-    onlyRemoteEvents: filters.onlyRemoteEvents ? true : undefined,
-    start: formatDate(filters.start, 'yyyy-MM-dd'),
+    [EVENT_SEARCH_FILTERS.END]: formatDate(filters.end, 'yyyy-MM-dd'),
+    [EVENT_SEARCH_FILTERS.IS_FREE]: filters.isFree ? true : undefined,
+    [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]: filters.helsinkiOnly
+      ? true
+      : undefined,
+    [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: filters.onlyChildrenEvents
+      ? true
+      : undefined,
+    [EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS]: filters.onlyEveningEvents
+      ? true
+      : undefined,
+    [EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS]: filters.onlyRemoteEvents
+      ? true
+      : undefined,
+    [EVENT_SEARCH_FILTERS.START]: formatDate(filters.start, 'yyyy-MM-dd'),
   };
 
   if (newFilters.end || newFilters.start) {
@@ -498,7 +506,7 @@ export const getOrganizationSearchUrl = (
 ): string => {
   return routerHelper.getLocalizedCmsItemUrl(
     ROUTES.SEARCH,
-    { publisher: event.publisher ?? '' },
+    { [EVENT_SEARCH_FILTERS.PUBLISHER]: event.publisher ?? '' },
     locale
   );
 };
@@ -510,7 +518,7 @@ export const getHelsinkiOnlySearchUrl = (
 ): string => {
   return routerHelper.getLocalizedCmsItemUrl(
     ROUTES.SEARCH,
-    { helsinkiOnly: 'true' },
+    { [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]: 'true' },
     locale
   );
 };
@@ -541,9 +549,9 @@ export const getKeywordOnClickHandler: KeywordOnClickHandlerType =
   () => {
     const search = getSearchQuery({
       ...EVENT_DEFAULT_SEARCH_FILTERS,
-      dateTypes: type === 'dateType' ? [value] : [],
-      isFree: type === 'isFree',
-      text: type === 'text' ? [value] : [],
+      [EVENT_SEARCH_FILTERS.DATE_TYPES]: type === 'dateType' ? [value] : [],
+      [EVENT_SEARCH_FILTERS.IS_FREE]: type === 'isFree',
+      [EVENT_SEARCH_FILTERS.TEXT]: type === 'text' ? [value] : [],
     });
 
     router.push(`${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`);

@@ -16,6 +16,8 @@ import {
   EventTypeId,
   formatDate,
   getUrlParamAsArray,
+  isEventFields,
+  isVenue,
   scrollToTop,
 } from '@events-helsinki/components';
 import {
@@ -436,13 +438,13 @@ export const getHelsinkiOnlySearchUrl = (
   router: NextRouter,
   locale: AppLanguage
 ): string => {
-  if (source.__typename == 'Venue') {
+  if (isVenue(source)) {
     return routerHelper.getLocalizedCmsItemUrl(
       ROUTES.SEARCH,
-      { searchType: 'venue', helsinkiOnly: 'true' },
+      { searchType: 'Venue', helsinkiOnly: 'true' },
       locale
     );
-  } else if (source.__typename == 'EventDetails') {
+  } else if (isEventFields(source)) {
     return routerHelper.getLocalizedCmsItemUrl(
       ROUTES.SEARCH,
       {
@@ -476,8 +478,8 @@ export const getKeywordOnClickHandler: KeywordOnClickHandlerType =
     if (!disableOnClick) {
       const search = getSearchQuery({
         ...EVENT_DEFAULT_SEARCH_FILTERS,
-        dateTypes: type === 'dateType' ? [value] : [],
-        isFree: type === 'isFree',
+        [EVENT_SEARCH_FILTERS.DATE_TYPES]: type === 'dateType' ? [value] : [],
+        [EVENT_SEARCH_FILTERS.IS_FREE]: type === 'isFree',
         q: type === 'text' ? [value] : [],
       });
 

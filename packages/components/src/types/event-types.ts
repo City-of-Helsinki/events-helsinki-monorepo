@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import type { EventFieldsFragment } from './generated/graphql';
 import { EventTypeId } from './generated/graphql';
 
@@ -22,3 +23,6 @@ export const eventTypeToId: Record<EventType, EventTypeId> = {
 
 export const isEventTypeId = (value: unknown): value is EventTypeId =>
   Object.values(EventTypeId).includes(value as EventTypeId);
+
+export const isEventFields = (value: unknown): value is EventFields =>
+  get(value, '__typename') == 'EventDetails';

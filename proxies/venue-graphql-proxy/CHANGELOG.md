@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.2.0...venue-graphql-proxy-v1.3.0) (2023-09-14)
+
+
+### Features
+
+* Update venue-graphql-proxy related types and supergraph ([c506ddc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c506ddcd0c8a5605950d5daa8a1e14bed6bcefa5))
+* **venue-proxy:** Add department data, enable Hauki support, refactor ([fe75b73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fe75b739747ca2ff87307a6301c3089f62b9f895))
+
 ## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.1.0...venue-graphql-proxy-v1.2.0) (2023-08-30)
 
 

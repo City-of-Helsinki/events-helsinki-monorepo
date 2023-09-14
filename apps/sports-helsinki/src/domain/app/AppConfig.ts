@@ -218,7 +218,7 @@ class AppConfig {
   /** A feature flag for the target group filter. */
   static get showTargetGroupFilter() {
     return Boolean(
-      parseEnvValue(process.env.NEXT_PUBLIC_SHOW_TARGET_GROUP_FILTER, false)
+      true // force true, just for this PR - parseEnvValue(process.env.NEXT_PUBLIC_SHOW_TARGET_GROUP_FILTER, false)
     );
   }
 

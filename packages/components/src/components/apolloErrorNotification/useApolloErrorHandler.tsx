@@ -3,7 +3,9 @@ import { useApolloErrorsReducer } from './apolloErrorsReducer';
 
 export default function useApolloErrorHandler() {
   const [errors, errorsDispatch] = useApolloErrorsReducer();
-  const [showErrorNotification, setShowErrorNotification] = useState(!!errors);
+  const [showErrorNotification, setShowErrorNotification] = useState(
+    !!errors.length
+  );
   useEffect(() => {
     setShowErrorNotification(!!errors.length);
   }, [errors.length]);

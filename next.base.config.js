@@ -35,6 +35,13 @@ const NEXTJS_SENTRY_TRACING = trueEnv.includes(
  * A way to allow CI optimization when the build done there is not used
  * to deliver an image or deploy the files.
  * @link https://nextjs.org/docs/advanced-features/source-maps
+ *
+ * If the SSG fallback is set to 'blocking' and the
+ * source maps are in use in the prod build,
+ * the getStaticProps gets called first time when the page
+ * is rendered and not during the build time.
+ * This can make some Apollo queries to fail, because the
+ * source map file name is used as an id-param.
  */
 const disableSourceMaps = trueEnv.includes(
   process.env?.NEXT_DISABLE_SOURCEMAPS ?? 'false'

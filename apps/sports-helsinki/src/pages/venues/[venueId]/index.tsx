@@ -21,7 +21,7 @@ import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 import VenuePageContainer from '../../../domain/venue/VenuePageContainer';
 
-const Event: NextPage<{
+const VenuePage: NextPage<{
   venue: Venue;
   loading: boolean;
 }> = ({ venue, loading }) => {
@@ -48,7 +48,7 @@ const Event: NextPage<{
     </MatomoWrapper>
   );
 };
-export default Event;
+export default VenuePage;
 
 export async function getStaticPaths() {
   return {

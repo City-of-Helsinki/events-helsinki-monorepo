@@ -21,7 +21,7 @@ import EventPageContainer from '../../../domain/event/EventPageContainer';
 
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 
-const Event: NextPage<{
+const EventPage: NextPage<{
   event: EventFields;
   loading: boolean;
 }> = ({ event, loading }) => {
@@ -46,7 +46,7 @@ const Event: NextPage<{
     </MatomoWrapper>
   );
 };
-export default Event;
+export default EventPage;
 
 // export default eventsWithApollo(Event);
 export async function getStaticPaths() {
@@ -56,16 +56,33 @@ export async function getStaticPaths() {
   };
 }
 
+function getIdProp(params: GetStaticPropsContext['params']) {
+  const id = (params?.eventId as string) ?? '';
+  // If the fallback is set to 'blocking' and
+  // the source maps are enabled in the prod package,
+  // the source map filename is used as an id.
+  if (id.endsWith('.map')) {
+    return undefined;
+  }
+  return id;
+}
+
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async ({ apolloClient }) => {
     const language = getLanguageOrDefault(context.locale);
+    const id = getIdProp(context.params);
+    if (!id) {
+      return {
+        notFound: true,
+      };
+    }
     const { data: eventData, loading } = await apolloClient.query<
       EventDetailsQuery,
       EventDetailsQueryVariables
     >({
       query: EventDetailsDocument,
       variables: {
-        id: (context.params?.eventId as string) || '',
+        id,
         include: ['in_language', 'keywords', 'location', 'audience'],
       },
     });

@@ -37,7 +37,7 @@ const VenueUpcomingEvents = dynamic(
 
 export interface VenuePageContainerProps {
   loading: boolean;
-  venue: Venue;
+  venue: Venue | undefined;
   showUpcomingEvents?: boolean;
   showSimilarVenues?: boolean;
 }
@@ -48,7 +48,7 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
   showUpcomingEvents = true,
   showSimilarVenues = true,
 }) => {
-  const { id: venueId } = venue;
+  const venueId = venue?.id ?? '';
   const { t } = useTranslation('event');
   const router = useRouter();
   const locale = useLocale();

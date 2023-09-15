@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.4.0...federation-router-v1.5.0) (2023-09-15)
+
+
+### Features
+
+* Update venue-graphql-proxy related types and supergraph ([c506ddc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c506ddcd0c8a5605950d5daa8a1e14bed6bcefa5))
+
 ## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.3.0...federation-router-v1.4.0) (2023-09-08)
 
 

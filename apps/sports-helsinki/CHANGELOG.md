@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.10.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.9.0...sports-helsinki-v1.10.0) (2023-09-18)
+
+
+### Features
+
+* Add Helsinki city icon to search cards & detail page ([9b3608c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9b3608c78632b030de6910dafc559b5449317ebe))
+* Cookie consent texts and button to map views when consent not given ([dad13c7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dad13c7e15d203ccfc132f0fa441b39718cd0112))
+* Hcrc content modules and show all link for layout pages ([#463](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/463)) ([c11c0e2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c11c0e275c510598d6999a8aaa6ccce13d0e8568))
+* **venue-proxy:** Add department data, enable Hauki support, refactor ([fe75b73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fe75b739747ca2ff87307a6301c3089f62b9f895))
+
+
+### Bug Fixes
+
+* Focus outline on links of the CMS content ([64202ee](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/64202ee6a822a76c8a364cb152fedaa0dbb74719))
+* Hcrc css issues ([#475](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/475)) ([6f54071](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6f54071e7cc9d6814a39a7bd7d0afb13ad9011a1))
+* Id-param handling in SSG-generation-process ([5401738](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5401738542be86baffe6f88aea42814fd35042ab))
+* Outline color of the collapse search form button in the venue map ([89059eb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/89059ebf3a210bbbb2a8469284a48c51b0d54235))
+* **sports:** Fix clearing filter summary i.e. filters under search bar ([da55e35](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/da55e35cebca2d81cd989dae7fb7b7690c9b09ef))
+* State handling of the errors reducer when no changes should occur ([12bfa6f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/12bfa6f12aa9dab2d86b4738236de1a2e2c4975a))
+
 ## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.8.0...sports-helsinki-v1.9.0) (2023-09-08)
 
 

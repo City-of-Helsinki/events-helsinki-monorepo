@@ -217,7 +217,7 @@ class AppConfig {
 
   /** A feature flag for the target group filter. */
   static get showTargetGroupFilter() {
-    return true;    
+    return true;
   }
 
   /** A feature flag for the upcoming venues module in details page. */

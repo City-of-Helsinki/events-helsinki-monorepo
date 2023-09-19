@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.6.0...events-helsinki-v1.7.0) (2023-09-19)
+
+
+### Features
+
+* Add Helsinki city icon to search cards & detail page ([9b3608c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9b3608c78632b030de6910dafc559b5449317ebe))
+* Cookie consent texts and button to map views when consent not given ([dad13c7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dad13c7e15d203ccfc132f0fa441b39718cd0112))
+* Hcrc content modules and show all link for layout pages ([#463](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/463)) ([c11c0e2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c11c0e275c510598d6999a8aaa6ccce13d0e8568))
+
+
+### Bug Fixes
+
+* Focus outline on links of the CMS content ([64202ee](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/64202ee6a822a76c8a364cb152fedaa0dbb74719))
+* Hcrc css issues ([#475](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/475)) ([6f54071](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6f54071e7cc9d6814a39a7bd7d0afb13ad9011a1))
+* State handling of the errors reducer when no changes should occur ([12bfa6f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/12bfa6f12aa9dab2d86b4738236de1a2e2c4975a))
+
 ## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.5.0...events-helsinki-v1.6.0) (2023-09-08)
 
 

@@ -189,9 +189,11 @@ const EventsCookieConsent: React.FC<Props> = ({
   return (
     <>
       {isModal && showCookieConsentModal && (
-        <CookieModal contentSource={contentSource} />
+        <CookieModal 
+          cookieDomain={window.location.origin}
+          contentSource={contentSource} />
       )}
-      {!isModal && <CookiePage contentSource={contentSource} />}
+      {!isModal && <CookiePage cookieDomain={window.location.origin} contentSource={contentSource} />}
     </>
   );
 };

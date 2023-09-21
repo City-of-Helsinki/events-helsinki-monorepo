@@ -207,6 +207,9 @@ const VenueInfo = ({ venue }: { venue: Venue }) => {
     container: venueInfoContainer,
     className: styles.focusVisible,
   });
+  const isServiceOwnerInfoVisible =
+    isVenueHelsinkiCityOwned(venue) || venue?.displayedServiceOwner;
+
   return (
     <div className={styles.venueInfo} ref={venueInfoContainer}>
       <div className={styles.contentWrapper}>
@@ -214,7 +217,7 @@ const VenueInfo = ({ venue }: { venue: Venue }) => {
         <ContactDetailsInfo venue={venue} />
         <VenueInformationLinksContainer venue={venue} />
         <VenueRouteInfo venue={venue} />
-        <ServiceOwnerInfo venue={venue} />
+        {isServiceOwnerInfoVisible && <ServiceOwnerInfo venue={venue} />}
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import type { ContentSource } from 'hds-react';
 import { CookiePage, useCookies, CookieModal } from 'hds-react';
 import React, { useCallback } from 'react';
 import { MAIN_CONTENT_ID } from '../../constants';
+import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { useConsentTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
 
@@ -23,7 +24,8 @@ const EventsCookieConsent: React.FC<Props> = ({
   const { t, i18n } = useConsentTranslation();
   const [language, setLanguage] =
     React.useState<ContentSource['currentLanguage']>(locale);
-  const { getAllConsents } = useCookies();
+  const { cookieDomain } = useCookieConfigurationContext();
+  const { getAllConsents } = useCookies({ cookieDomain });
   const { pushInstruction } = useMatomo();
   const [showCookieConsentModal, setShowCookieConsentModal] = React.useState(
     !Object.keys(getAllConsents()).length
@@ -189,9 +191,14 @@ const EventsCookieConsent: React.FC<Props> = ({
   return (
     <>
       {isModal && showCookieConsentModal && (
-        <CookieModal contentSource={contentSource} />
+        <CookieModal
+          contentSource={contentSource}
+          cookieDomain={cookieDomain}
+        />
       )}
-      {!isModal && <CookiePage contentSource={contentSource} />}
+      {!isModal && (
+        <CookiePage contentSource={contentSource} cookieDomain={cookieDomain} />
+      )}
     </>
   );
 };

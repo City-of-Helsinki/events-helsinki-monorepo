@@ -21,7 +21,7 @@ export default function CookieConsent() {
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useCommonTranslation();
   const router = useRouter();
-  /* 
+  /*
   // bug or feature: query is empty in handleRedirect
   const router = useRouter();
   const params: { returnPath?: string } = router.query; */

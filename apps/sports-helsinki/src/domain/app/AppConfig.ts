@@ -67,6 +67,13 @@ class AppConfig {
   }
 
   /**
+   * The own hostname of the app.
+   */
+  static get hostname() {
+    return new URL(this.origin).hostname;
+  }
+
+  /**
    * The app uses multiple domains from the Headless CMS API.
    * It serves posts / articles from 1 root and e.g the pages from another.
    * The CMS needs to be configured so, that the URI of an object it serves

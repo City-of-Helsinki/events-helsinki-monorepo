@@ -24,8 +24,7 @@ interface Props {
 
 const VenueContent: React.FC<Props> = ({ venue, className }) => {
   const { t } = useVenueTranslation();
-  const { description } = venue;
-  const shortDescription = null;
+  const { description, shortDescription } = venue;
   return (
     <PageSection className={classNames(styles.eventContent, className)}>
       <ContentContainer>

@@ -11,6 +11,16 @@ afterAll(() => {
 });
 
 it.each([
+  { origin: 'http://localhost:8080', expectedHostname: 'localhost' },
+  { origin: 'https://a.example.org/', expectedHostname: 'a.example.org' },
+  { origin: 'https://a.example.org', expectedHostname: 'a.example.org' },
+  { origin: 'https://a.b.c:8080/1/2/3?a=1&b=2', expectedHostname: 'a.b.c' },
+])('provides hostname from $origin', ({ origin, expectedHostname }) => {
+  process.env.NEXT_PUBLIC_APP_ORIGIN = origin;
+  expect(AppConfig.hostname).toStrictEqual(expectedHostname);
+});
+
+it.each([
   {
     field: 'origin',
     mockEnvValue: 'https://localhost',

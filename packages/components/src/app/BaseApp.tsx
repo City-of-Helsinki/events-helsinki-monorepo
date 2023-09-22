@@ -18,6 +18,7 @@ import AskemProvider from '../components/askem/AskemProvider';
 import ErrorFallback from '../components/errorPages/ErrorFallback';
 import EventsCookieConsent from '../components/eventsCookieConsent/EventsCookieConsent';
 import ResetFocus from '../components/resetFocus/ResetFocus';
+import { CookieConfigurationProvider } from '../cookieConfigurationProvider';
 import { GeolocationProvider } from '../geolocation';
 import { NavigationProvider } from '../navigationProvider';
 import type { NavigationProviderProps } from '../navigationProvider';
@@ -32,6 +33,7 @@ import type { CmsRoutedAppHelper, HeadlessCMSHelper } from '../utils';
 export type Props = {
   children: React.ReactNode;
   cmsHelper: HeadlessCMSHelper;
+  cookieDomain: string;
   routerHelper: CmsRoutedAppHelper;
   appName: string;
   matomoConfiguration: Parameters<typeof createMatomoInstance>[0];
@@ -68,6 +70,7 @@ function BaseApp({
   languages,
   appName,
   cmsHelper,
+  cookieDomain,
   routerHelper,
   matomoConfiguration,
   askemFeedbackConfiguration,
@@ -83,7 +86,7 @@ function BaseApp({
   getPlainEventUrl,
   getKeywordOnClickHandler,
 }: Props) {
-  const { getAllConsents } = useCookies();
+  const { getAllConsents } = useCookies({ cookieDomain });
 
   // Unset hidden visibility that was applied to hide the first server render
   // that does not include styles from HDS. HDS applies styling by injecting
@@ -135,45 +138,47 @@ function BaseApp({
   );
 
   return (
-    <AppThemeProvider
-      defaultButtonTheme={defaultButtonTheme}
-      defaultButtonVariant={defaultButtonVariant}
-    >
-      <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-        <AppRoutingProvider
-          getCardUrl={getCardUrl}
-          getEventUrl={getEventUrl}
-          getEventListLinkUrl={getEventListLinkUrl}
-          getOrganizationSearchUrl={getOrganizationSearchUrl}
-          getHelsinkiOnlySearchUrl={getHelsinkiOnlySearchUrl}
-          getPlainEventUrl={getPlainEventUrl}
-          getKeywordOnClickHandler={getKeywordOnClickHandler}
-        >
-          <MatomoProvider value={matomoInstance}>
-            <AskemProvider value={askemFeedbackInstance}>
-              <GeolocationProvider>
-                <NavigationProvider
-                  headerMenu={headerMenu}
-                  footerMenu={footerMenu}
-                  languages={languages}
-                >
-                  <ResetFocus />
-                  {children}
-                  {withConsent && (
-                    <EventsCookieConsent
-                      onConsentGiven={handleConsentGiven}
-                      allowLanguageSwitch={false}
-                      appName={appName}
-                    />
-                  )}
-                  <DynamicToastContainer />
-                </NavigationProvider>
-              </GeolocationProvider>
-            </AskemProvider>
-          </MatomoProvider>
-        </AppRoutingProvider>
-      </CmsHelperProvider>
-    </AppThemeProvider>
+    <CookieConfigurationProvider cookieDomain={cookieDomain}>
+      <AppThemeProvider
+        defaultButtonTheme={defaultButtonTheme}
+        defaultButtonVariant={defaultButtonVariant}
+      >
+        <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+          <AppRoutingProvider
+            getCardUrl={getCardUrl}
+            getEventUrl={getEventUrl}
+            getEventListLinkUrl={getEventListLinkUrl}
+            getOrganizationSearchUrl={getOrganizationSearchUrl}
+            getHelsinkiOnlySearchUrl={getHelsinkiOnlySearchUrl}
+            getPlainEventUrl={getPlainEventUrl}
+            getKeywordOnClickHandler={getKeywordOnClickHandler}
+          >
+            <MatomoProvider value={matomoInstance}>
+              <AskemProvider value={askemFeedbackInstance}>
+                <GeolocationProvider>
+                  <NavigationProvider
+                    headerMenu={headerMenu}
+                    footerMenu={footerMenu}
+                    languages={languages}
+                  >
+                    <ResetFocus />
+                    {children}
+                    {withConsent && (
+                      <EventsCookieConsent
+                        onConsentGiven={handleConsentGiven}
+                        allowLanguageSwitch={false}
+                        appName={appName}
+                      />
+                    )}
+                    <DynamicToastContainer />
+                  </NavigationProvider>
+                </GeolocationProvider>
+              </AskemProvider>
+            </MatomoProvider>
+          </AppRoutingProvider>
+        </CmsHelperProvider>
+      </AppThemeProvider>
+    </CookieConfigurationProvider>
   );
 }
 

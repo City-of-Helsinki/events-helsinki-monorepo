@@ -3,6 +3,7 @@ import { useCookies } from 'hds-react';
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 import React, { useEffect } from 'react';
+import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 
 interface Props {
   children?: ReactNode | undefined;
@@ -11,7 +12,8 @@ interface Props {
 const MatomoWrapper: React.FC<Props> = ({ children }) => {
   const { trackPageView, pushInstruction } = useMatomo();
   const { asPath: pathname } = useRouter();
-  const { getAllConsents } = useCookies();
+  const { cookieDomain } = useCookieConfigurationContext();
+  const { getAllConsents } = useCookies({ cookieDomain });
 
   // Track page changes when pathnname changes
   useEffect(() => {

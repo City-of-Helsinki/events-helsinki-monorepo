@@ -52,6 +52,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
         <BaseApp
           appName={appName}
           cmsHelper={cmsHelper}
+          cookieDomain={AppConfig.hostname}
           routerHelper={routerHelper}
           matomoConfiguration={AppConfig.matomoConfiguration}
           askemFeedbackConfiguration={AppConfig.askemFeedbackConfiguration(

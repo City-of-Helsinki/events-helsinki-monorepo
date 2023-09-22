@@ -12,6 +12,7 @@ import {
   Link,
   HtmlToReact,
 } from 'react-helsinki-headless-cms';
+import VenueHighlights from '../venueHighlights/VenueHighlights';
 import VenueInfo from '../venueInfo/VenueInfo';
 import VenueLocation from '../venueLocation/VenueLocation';
 import VenueOtherInfo from '../venueOtherInfo/VenueOtherInfo';
@@ -32,6 +33,7 @@ const VenueContent: React.FC<Props> = ({ venue, className }) => {
         <div className={styles.contentWrapper}>
           <div className={styles.leftEmpty} />
           <div>
+            <VenueHighlights venue={venue} />
             <h2 className={styles.descriptionTitle}>
               {t('venue:description.title')}
             </h2>

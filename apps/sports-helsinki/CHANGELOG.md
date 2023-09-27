@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.11.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.10.0...sports-helsinki-v1.11.0) (2023-09-27)
+
+
+### Features
+
+* **sports:** Hide empty service owner info section in venue detail page ([873f8c2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/873f8c2e99cc23ecc64009391e40742fbfb9c063))
+* **sports:** Show highlights in venue detail page above the description ([ac2a3de](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ac2a3dea56a915e4277424f2dfb0c3da26a79087))
+
+
+### Bug Fixes
+
+* Card delimited url redirect ([#485](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/485)) ([337473f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/337473f0220f5070136a2e79d52cb625f070461a))
+* Content modules fixes hcrc ([#481](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/481)) ([7f43ee7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7f43ee7a7f92debcf58c9a08c402750f83d44157))
+
 ## [1.10.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.9.0...sports-helsinki-v1.10.0) (2023-09-18)
 
 

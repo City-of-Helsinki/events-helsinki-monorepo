@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.7.0...events-helsinki-v1.8.0) (2023-09-28)
+
+
+### Features
+
+* **cookies:** Set cookie domain to hostname i.e. &lt;application&gt;.hel.fi ([9b33cf7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9b33cf7015b82b440d1a053c7fbd1c60c5a44bc0))
+
+
+### Bug Fixes
+
+* Card delimited url redirect ([#485](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/485)) ([337473f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/337473f0220f5070136a2e79d52cb625f070461a))
+* Content modules fixes hcrc ([#481](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/481)) ([7f43ee7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7f43ee7a7f92debcf58c9a08c402750f83d44157))
+
 ## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.6.0...events-helsinki-v1.7.0) (2023-09-19)
 
 

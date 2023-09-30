@@ -3325,7 +3325,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:v1.0.0-alpha215"
+    react-helsinki-headless-cms: "npm:v1.0.0-alpha216-canary-b6457cb"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-toastify: "npm:^9.1.3"
@@ -13656,7 +13656,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:v1.0.0-alpha215"
+    react-helsinki-headless-cms: "npm:v1.0.0-alpha216-canary-b6457cb"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -15258,10 +15258,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-design-tokens@npm:2.15.0, hds-design-tokens@npm:^2.3.0":
+"hds-core@npm:^2.17.0":
+  version: 2.17.0
+  resolution: "hds-core@npm:2.17.0"
+  checksum: 4a7c862920d8d4ae6b9e9a383e3add3c5df6b88181c5af33ba5921353c4c78d5abd7b3aa9ad3df4f8a7e9296ac7e5625e56552656681848ee1e427d01a05ca3b
+  languageName: node
+  linkType: hard
+
+"hds-design-tokens@npm:2.15.0":
   version: 2.15.0
   resolution: "hds-design-tokens@npm:2.15.0"
   checksum: ee5a3a599a8d549746a24a4de2b6a047db4ea8fd7e220562c17312aa5f3faea07f29e0852dfbb088f549febdf9c41136c83eb32c61b2be47cc65dfd62432dcf8
+  languageName: node
+  linkType: hard
+
+"hds-design-tokens@npm:^2.17.0":
+  version: 2.17.0
+  resolution: "hds-design-tokens@npm:2.17.0"
+  checksum: 7907f7913f3ebc20b5adda1e8a90407a2d9571509a711faa50a5ac03153786b9eb59108a582e1e2cec1d2f2d2d51745ba5b0203750944817cdc8067bd784eaba
   languageName: node
   linkType: hard
 
@@ -15475,7 +15489,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:v1.0.0-alpha215"
+    react-helsinki-headless-cms: "npm:v1.0.0-alpha216-canary-b6457cb"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -22525,11 +22539,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:v1.0.0-alpha215":
-  version: 1.0.0-alpha215
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha215"
+"react-helsinki-headless-cms@npm:v1.0.0-alpha216-canary-b6457cb":
+  version: 1.0.0-alpha216-canary-b6457cb
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha216-canary-b6457cb"
   dependencies:
-    hds-design-tokens: "npm:^2.3.0"
+    hds-core: "npm:^2.17.0"
+    hds-design-tokens: "npm:^2.17.0"
     html-entities: "npm:^2.4.0"
     html-react-parser: "npm:^4.2.1"
     isomorphic-dompurify: "npm:^1.8.0"
@@ -22544,7 +22559,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 2488b530a3b87e19c6c55f88bef1e67b403c722777a6b89d2bf7a9569c1fee29b62355cd1dd535a47acf79b193c10d01eeb00c0195f9db7751809b70532f7797
+  checksum: 282f69a3643399f0bf9354ad4e70bb9771a8c9c98c7aa50859d60e374348f1a5cc02006d2e384e2cfcc8fe10a573b599cc9ecfd8192b61efe2e8258dc908ec38
   languageName: node
   linkType: hard
 
@@ -24584,7 +24599,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:v1.0.0-alpha215"
+    react-helsinki-headless-cms: "npm:v1.0.0-alpha216-canary-b6457cb"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-scroll: "npm:^1.8.9"

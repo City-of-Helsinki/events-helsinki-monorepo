@@ -72,7 +72,7 @@
     "react-datepicker": "^4.14.1",
     "react-dom": "18.2.0",
     "react-error-boundary": "4.0.10",
-    "react-helsinki-headless-cms": "v1.0.0-alpha215",
+    "react-helsinki-headless-cms": "v1.0.0-alpha216-canary-b6457cb",
     "react-i18next": "13.0.1",
     "react-scroll": "^1.8.9",
     "react-toastify": "^9.1.3",

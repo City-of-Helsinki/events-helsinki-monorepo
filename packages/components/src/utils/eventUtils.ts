@@ -381,7 +381,7 @@ export const getAudienceAgeText = (
     return '';
   }
   const ageLimit = `${audienceMinAge ?? '0'}${
-    audienceMaxAge ? `-${audienceMaxAge}` : '+'
+    audienceMaxAge ? `–${audienceMaxAge}` : '+'
   }`;
-  return `${ageLimit} -${t('event:info.age')}`;
+  return `${ageLimit}-${t('event:info.age')}`;
 };

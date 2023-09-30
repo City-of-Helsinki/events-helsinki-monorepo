@@ -31,7 +31,7 @@
     "titleEventClosed": "Oh no, the event you are looking for has already ended"
   },
   "info": {
-    "age": "year olds",
+    "age": "year-olds",
     "ariaLabelBuyTickets": "Buy tickets - The link will open in a new window",
     "buttonAddToCalendar": "Add to calendar",
     "buttonBuyTickets": "Buy tickets",

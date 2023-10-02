@@ -1,4 +1,4 @@
-import { IconCheckCircleFill, IconFaceSmile, IconLayers } from 'hds-react';
+import { IconFaceSmile, IconLayers } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -15,6 +15,7 @@ import {
   isEventHelsinkiCityOwned,
 } from '../../../../utils/eventUtils';
 import { translateValue } from '../../../../utils/translateUtils';
+import HelsinkiCityOwnedIcon from '../../../helsinkiCityOwnedIcon/HelsinkiCityOwnedIcon';
 import styles from './eventInfo.module.scss';
 
 interface Props {
@@ -49,10 +50,7 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
             {isHelsinkiCityOwned && (
               <div className={styles.helsinkiCityOwnedText}>
                 {commonT('common:cityOfHelsinki')}
-                <IconCheckCircleFill
-                  className={styles.helsinkiCityOwnedIcon}
-                  aria-hidden
-                />
+                <HelsinkiCityOwnedIcon />
               </div>
             )}
             {organizationName && (

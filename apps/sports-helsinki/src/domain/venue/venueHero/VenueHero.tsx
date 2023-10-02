@@ -7,17 +7,12 @@ import {
   useVenueTranslation,
   getLocaleFromPathname,
   isVenueHelsinkiCityOwned,
+  HelsinkiCityOwnedIcon,
 } from '@events-helsinki/components';
 import type { ReturnParams } from '@events-helsinki/components/utils/eventQueryString.util';
 import { extractLatestReturnPath } from '@events-helsinki/components/utils/eventQueryString.util';
 import classNames from 'classnames';
-import {
-  IconArrowLeft,
-  IconCheckCircleFill,
-  IconClock,
-  IconLocation,
-  IconTicket,
-} from 'hds-react';
+import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -124,12 +119,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
                 </div>
                 <h1 className={styles.title}>
                   {venue.name}
-                  {isHelsinkiCityOwned && (
-                    <IconCheckCircleFill
-                      className={styles.helsinkiCityOwnedIcon}
-                      aria-hidden
-                    />
-                  )}
+                  {isHelsinkiCityOwned && <HelsinkiCityOwnedIcon />}
                 </h1>
                 <div className={styles.additionalInfo}>
                   <div className={styles.location}>

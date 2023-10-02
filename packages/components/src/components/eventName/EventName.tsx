@@ -1,4 +1,3 @@
-import { IconCheckCircleFill } from 'hds-react';
 import React from 'react';
 
 import { useEventTranslation, useLocale } from '../../hooks';
@@ -8,6 +7,7 @@ import {
   isEventCancelled,
   isEventHelsinkiCityOwned,
 } from '../../utils';
+import HelsinkiCityOwnedIcon from '../helsinkiCityOwnedIcon/HelsinkiCityOwnedIcon';
 import styles from './eventName.module.scss';
 
 interface EventNameProps {
@@ -30,12 +30,7 @@ const EventName: React.FC<EventNameProps> = ({ event }) => {
         </span>
       )}
       {name}
-      {isHelsinkiCityOwned && (
-        <IconCheckCircleFill
-          className={styles.helsinkiCityOwnedIcon}
-          aria-hidden
-        />
-      )}
+      {isHelsinkiCityOwned && <HelsinkiCityOwnedIcon />}
     </>
   );
 };

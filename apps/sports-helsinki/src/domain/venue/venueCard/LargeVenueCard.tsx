@@ -4,8 +4,9 @@ import {
   useVenueTranslation,
   ArrowRightWithLoadingIndicator,
   useClickCapture,
+  HelsinkiCityOwnedIcon,
 } from '@events-helsinki/components';
-import { IconCheckCircleFill, IconLocation } from 'hds-react';
+import { IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
@@ -71,12 +72,7 @@ const LargeVenueCard: React.FC<Props> = ({
           <div className={styles.infoWrapper}>
             <div className={styles.eventName}>
               {title}
-              {isHelsinkiCityOwned && (
-                <IconCheckCircleFill
-                  className={styles.helsinkiCityOwnedIcon}
-                  aria-hidden
-                />
-              )}
+              {isHelsinkiCityOwned && <HelsinkiCityOwnedIcon />}
             </div>
             <div className={styles.eventLocation}>
               <IconLocation aria-hidden />

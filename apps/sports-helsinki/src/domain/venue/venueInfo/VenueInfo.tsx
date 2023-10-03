@@ -8,9 +8,9 @@ import {
   isVenueHelsinkiCityOwned,
   useAppRoutingContext,
   useLocale,
+  HelsinkiCityOwnedIcon,
 } from '@events-helsinki/components';
 import {
-  IconCheckCircleFill,
   IconClock,
   IconCompany,
   IconInfoCircle,
@@ -179,10 +179,7 @@ const ServiceOwnerInfo = ({ venue }: { venue: Venue }) => {
         {isHelsinkiCityOwned && (
           <div className={styles.helsinkiCityOwnedText}>
             {commonT('common:cityOfHelsinki')}
-            <IconCheckCircleFill
-              className={styles.helsinkiCityOwnedIcon}
-              aria-hidden
-            />
+            <HelsinkiCityOwnedIcon />
           </div>
         )}
         <div>{cleanedServiceOwnerName}</div>

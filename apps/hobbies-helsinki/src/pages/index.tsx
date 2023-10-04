@@ -7,6 +7,7 @@ import {
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
+  RouteMeta,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -28,6 +29,7 @@ import {
   PageByTemplateDocument,
   LandingPageDocument,
 } from 'react-helsinki-headless-cms/apollo';
+import AppConfig from '../domain/app/AppConfig';
 import getHobbiesStaticProps from '../domain/app/getHobbiesStaticProps';
 import cmsHelper from '../domain/app/headlessCmsHelper';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
@@ -49,15 +51,18 @@ const HomePage: NextPage<{
         className="pageLayout"
         navigation={<Navigation />}
         content={
-          <HCRCPageContent
-            page={page}
-            landingPage={landingPage}
-            PageContentLayoutComponent={LandingPageContentLayout}
-            collections={(page: PageType | ArticleType) =>
-              cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
-            }
-            language={getQlLanguage(locale)}
-          />
+          <>
+            <RouteMeta origin={AppConfig.origin} />
+            <HCRCPageContent
+              page={page}
+              landingPage={landingPage}
+              PageContentLayoutComponent={LandingPageContentLayout}
+              collections={(page: PageType | ArticleType) =>
+                cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
+              }
+              language={getQlLanguage(locale)}
+            />
+          </>
         }
         footer={
           <FooterSection

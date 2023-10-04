@@ -1,32 +1,44 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
-import type { CmsLanguage } from '../../../../types';
+import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
 
 type Props = {
-  languages: CmsLanguage[];
+  origin: string;
+  page?: PageType | ArticleType;
 };
 
-function RouteMeta({ languages }: Props) {
+function RouteMeta({ origin, page }: Props) {
   const { locale, asPath } = useRouter();
-  const canonical = `${locale}${asPath}`;
-  const currentLanguageAndLocale = languages.find(
-    (language) => language.slug === locale
-  )?.locale;
+  const path = asPath.replace(/\/$/, '').split('?')[0];
+  const locales = ['fi', 'sv', 'en'];
+  const canonical = `${origin}/${locale}${path}`;
 
   return (
     <Head>
       <link rel="canonical" href={canonical} />
-      {languages.map((language) => (
-        <link
-          key={language.id}
-          rel="alternate"
-          hrefLang={language.locale}
-          href={`/${language.slug}${asPath}`}
-        />
-      ))}
-      <link rel="alternate" hrefLang="x-default" href={asPath} />
-      <meta property="og:locale" content={currentLanguageAndLocale} />
+      {!page
+        ? locales?.map((l) => (
+            <link
+              key={l}
+              rel="alternate"
+              hrefLang={l}
+              href={`${origin}/${l}${path}`}
+            />
+          ))
+        : page?.translations?.map((translation) => (
+            <link
+              key={translation?.language?.slug}
+              rel="alternate"
+              hrefLang={translation?.language?.slug || 'fi'}
+              href={`${origin}${translation?.uri?.replace(/\/$/, '')}`}
+            />
+          ))}
+      <link
+        rel="alternate"
+        hrefLang="x-default"
+        href={`${origin}/${locales[0]}${path ? path : ''}`}
+      />
+      <meta property="og:locale" content={locale} />
       <meta property="og:url" content={canonical} />
     </Head>
   );

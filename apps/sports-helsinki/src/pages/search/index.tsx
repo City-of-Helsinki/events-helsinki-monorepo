@@ -6,6 +6,7 @@ import {
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
+  RouteMeta,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
@@ -16,6 +17,7 @@ import {
   // PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
+import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import CombinedSearchPage from '../../domain/search/combinedSearch/CombinedSearchPage';
@@ -31,7 +33,12 @@ export default function Search() {
         uri={ROUTES.SEARCH}
         className="pageLayout"
         navigation={<Navigation />}
-        content={<CombinedSearchPage defaultTab="Venue" />}
+        content={
+          <>
+            <RouteMeta origin={AppConfig.origin} />
+            <CombinedSearchPage defaultTab="Venue" />
+          </>
+        }
         footer={
           <FooterSection
             menu={footerMenu}

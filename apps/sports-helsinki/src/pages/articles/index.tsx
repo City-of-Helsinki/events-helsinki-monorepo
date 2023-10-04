@@ -4,15 +4,17 @@ import {
   getQlLanguage,
   NavigationContext,
   skipFalsyType,
-  useCmsTranslation,
   useDebounce,
   Navigation,
   useCommonTranslation,
   MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
+  useLocale,
+  RouteMeta,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import {
   Page as RHHCPage,
@@ -36,6 +38,7 @@ import type {
   PageByTemplateQuery,
   PageByTemplateQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
+import AppConfig from '../../domain/app/AppConfig';
 import type { SportsGlobalPageProps } from '../../domain/app/getSportsStaticProps';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
@@ -49,7 +52,8 @@ const SEARCH_DEBOUNCE_TIME = 500;
 export default function ArticleArchive({
   page,
 }: SportsGlobalPageProps & { page: PageType }) {
-  const { t } = useCmsTranslation();
+  const { asPath } = useRouter();
+  const locale = useLocale();
   const { t: commonT } = useCommonTranslation();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);
@@ -116,82 +120,86 @@ export default function ArticleArchive({
         className="pageLayout"
         navigation={<Navigation page={page} />}
         content={
-          <SearchPageContent
-            page={page}
-            className="articlesArchive"
-            noResults={!isLoading && articles?.length === 0}
-            items={articles}
-            tags={categories}
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            onSearch={(freeSearch, tags) => {
-              // TODO: Instead of doing this through yet another state, could the query just be updated?
-              setSearchTerm(freeSearch);
-              // NOTE: For some reason the CMS needs database ids here instead of ids or slugs.
-              setSearchCategories(
-                tags
-                  .filter(skipFalsyType)
-                  .map((tag) => tag?.databaseId.toString())
-              );
-            }}
-            onLoadMore={() => {
-              fetchMoreArticles();
-            }}
-            largeFirstItem={showFirstItemLarge}
-            createLargeCard={(item) => {
-              const cardItem = item as ArticleType;
-              const itemCategories = cardItem?.categories;
-              return (
-                <LargeCard
-                  key={`lg-card-${item?.id}`}
-                  {...cmsHelper.getArticlePageCardProps(
-                    item as ArticleType,
-                    getRoutedInternalHref
-                  )}
-                  // todo: fix any type
-                  customContent={
-                    <ArticleDetails
-                      keywords={
-                        itemCategories?.edges
-                          ?.filter((category: any) => category?.node?.name)
-                          .map((category: any) => category?.node?.name || '') ||
-                        []
-                      }
-                    />
-                  }
-                />
-              );
-            }}
-            createCard={(item) => {
-              const cardItem = item as ArticleType;
-              const itemCategories = cardItem?.categories;
-              return (
-                <Card
-                  key={`sm-card-${item?.id}`}
-                  {...{
-                    ...cmsHelper.getArticlePageCardProps(
+          <>
+            <RouteMeta origin={AppConfig.origin} page={page} />
+            <SearchPageContent
+              className="articlesArchive"
+              noResults={!isLoading && articles?.length === 0}
+              items={articles}
+              tags={categories}
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              onSearch={(freeSearch, tags) => {
+                // TODO: Instead of doing this through yet another state, could the query just be updated?
+                setSearchTerm(freeSearch);
+                // NOTE: For some reason the CMS needs database ids here instead of ids or slugs.
+                setSearchCategories(
+                  tags
+                    .filter(skipFalsyType)
+                    .map((tag) => tag?.databaseId.toString())
+                );
+              }}
+              onLoadMore={() => {
+                fetchMoreArticles();
+              }}
+              largeFirstItem={showFirstItemLarge}
+              createLargeCard={(item) => {
+                const cardItem = item as ArticleType;
+                const itemCategories = cardItem?.categories;
+                return (
+                  <LargeCard
+                    key={`lg-card-${item?.id}`}
+                    {...cmsHelper.getArticlePageCardProps(
                       item as ArticleType,
                       getRoutedInternalHref
-                    ),
+                    )}
+                    // todo: fix any type
+                    customContent={
+                      <ArticleDetails
+                        keywords={
+                          itemCategories?.edges
+                            ?.filter((category: any) => category?.node?.name)
+                            .map(
+                              (category: any) => category?.node?.name || ''
+                            ) || []
+                        }
+                      />
+                    }
+                  />
+                );
+              }}
+              createCard={(item) => {
+                const cardItem = item as ArticleType;
+                const itemCategories = cardItem?.categories;
+                return (
+                  <Card
+                    key={`sm-card-${item?.id}`}
+                    {...{
+                      ...cmsHelper.getArticlePageCardProps(
+                        item as ArticleType,
+                        getRoutedInternalHref
+                      ),
 
-                    text: '', // A design decision: The text is not wanted in the small cards
-                  }}
-                  // todo: fix any type
-                  customContent={
-                    <ArticleDetails
-                      keywords={
-                        itemCategories?.edges
-                          ?.filter((category: any) => category?.node?.name)
-                          .map((category: any) => category?.node?.name || '') ||
-                        []
-                      }
-                    />
-                  }
-                />
-              );
-            }}
-            hasMore={hasMoreToLoad}
-            isLoading={isLoading || isLoadingMore}
-          />
+                      text: '', // A design decision: The text is not wanted in the small cards
+                    }}
+                    // todo: fix any type
+                    customContent={
+                      <ArticleDetails
+                        keywords={
+                          itemCategories?.edges
+                            ?.filter((category: any) => category?.node?.name)
+                            .map(
+                              (category: any) => category?.node?.name || ''
+                            ) || []
+                        }
+                      />
+                    }
+                  />
+                );
+              }}
+              hasMore={hasMoreToLoad}
+              isLoading={isLoading || isLoadingMore}
+            />
+          </>
         }
         footer={
           <FooterSection

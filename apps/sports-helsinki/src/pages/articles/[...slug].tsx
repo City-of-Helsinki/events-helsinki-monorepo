@@ -10,6 +10,8 @@ import {
   FooterSection,
   getLanguageOrDefault,
   useAppSportsTranslation,
+  useLocale,
+  RouteMeta,
 } from '@events-helsinki/components';
 import type { AppLanguage } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
@@ -18,6 +20,7 @@ import type {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import type {
   Breadcrumb,
@@ -65,24 +68,27 @@ const NextCmsArticle: NextPage<{
         className="article-page"
         navigation={<Navigation page={article} />}
         content={
-          <RHHCPageContent
-            page={article as PageContentProps['page']}
-            heroContainer={<KorosWrapper />}
-            breadcrumbs={
-              breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
-            }
-            shareLinks={
-              <ShareLinks title={commonTranslation('common:share.article')} />
-            }
-            collections={
-              collections
-                ? cmsHelper.getDefaultCollections(
-                    article,
-                    getRoutedInternalHref
-                  )
-                : []
-            }
-          />
+          <>
+            <RouteMeta origin={AppConfig.origin} page={article} />
+            <RHHCPageContent
+              page={article as PageContentProps['page']}
+              heroContainer={<KorosWrapper />}
+              breadcrumbs={
+                breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
+              }
+              shareLinks={
+                <ShareLinks title={commonTranslation('common:share.article')} />
+              }
+              collections={
+                collections
+                  ? cmsHelper.getDefaultCollections(
+                      article,
+                      getRoutedInternalHref
+                    )
+                  : []
+              }
+            />
+          </>
         }
         footer={
           <FooterSection

@@ -7,12 +7,14 @@ import {
   getLanguageOrDefault,
   usePageScrollRestoration,
   EventsCookieConsent,
+  RouteMeta,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useCallback, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
+import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import ConsentPageContent from '../../domain/cookieConsent/ConsentPageContent';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
@@ -45,13 +47,16 @@ export default function CookieConsent() {
         className="pageLayout"
         navigation={<Navigation />}
         content={
-          <ConsentPageContent>
-            <EventsCookieConsent
-              appName={t('appSports:appName')}
-              isModal={false}
-              onConsentGiven={handleRedirect}
-            />
-          </ConsentPageContent>
+          <>
+            <RouteMeta origin={AppConfig.origin} />
+            <ConsentPageContent>
+              <EventsCookieConsent
+                appName={t('appSports:appName')}
+                isModal={false}
+                onConsentGiven={handleRedirect}
+              />
+            </ConsentPageContent>
+          </>
         }
         footer={
           <FooterSection

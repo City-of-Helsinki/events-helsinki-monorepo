@@ -10,6 +10,7 @@ import {
   useAppSportsTranslation,
   FooterSection,
   getLanguageOrDefault,
+  RouteMeta,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type {
@@ -61,14 +62,17 @@ const NextCmsPage: NextPage<{
         className="page"
         navigation={<Navigation page={page} />}
         content={
-          <HCRCPageContent
-            page={page as PageContentProps['page']}
-            collections={
-              collections
-                ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
-                : []
-            }
-          />
+          <>
+            <RouteMeta origin={AppConfig.origin} page={page} />
+            <HCRCPageContent
+              page={page as PageContentProps['page']}
+              collections={
+                collections
+                  ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
+                  : []
+              }
+            />
+          </>
         }
         footer={
           <FooterSection

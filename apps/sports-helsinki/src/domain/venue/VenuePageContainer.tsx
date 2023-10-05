@@ -4,6 +4,7 @@ import {
   useLocale,
   addParamsToQueryString,
   MAIN_CONTENT_ID,
+  RouteMeta,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
@@ -12,6 +13,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../constants';
+import AppConfig from '../../domain/app/AppConfig';
 import routerHelper from '../../domain/app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import { SPORT_COURSES_KEYWORDS } from '../search/eventSearch/constants';
@@ -81,6 +83,7 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
           {venue ? (
             <>
               {/* Wait for data to be accessible before updating metadata */}
+              <RouteMeta origin={AppConfig.origin} />
               <VenuePageMeta venue={venue} />
               <VenueHero venue={venue} />
               <VenueContent

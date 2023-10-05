@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
 
-import RouteMeta from './RouteMeta';
-
 function replaceAll(str: string, find: string, replace: string) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
@@ -15,7 +13,7 @@ function unescapeDash(str?: string): string {
   return replaceAll(str, '&#x2d;', '-');
 }
 
-export type PageMetaProps = React.ComponentProps<typeof RouteMeta> & {
+export type PageMetaProps = {
   // Title of page, required for accessibility: pages should have unique titles
   // so that screen reader users are able to determine when the current page is
   // changed.
@@ -34,7 +32,6 @@ function PageMeta({
   title,
   description,
   image,
-  languages,
   openGraphType,
   twitterDescription,
   twitterTitle,
@@ -60,7 +57,6 @@ function PageMeta({
           <meta name="twitter:description" content={twitterDescription} />
         )}
       </Head>
-      <RouteMeta languages={languages} />
     </>
   );
 }

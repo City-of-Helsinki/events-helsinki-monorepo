@@ -6,12 +6,14 @@ import {
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
+  RouteMeta,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
+import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
@@ -48,10 +50,13 @@ export default function Search() {
         className="pageLayout"
         navigation={<Navigation />}
         content={
-          <SearchPage
-            SearchComponent={AdvancedSearch}
-            pageTitle={tAppHobbies('appHobbies:search.pageTitle')}
-          />
+          <>
+            <RouteMeta origin={AppConfig.origin} />
+            <SearchPage
+              SearchComponent={AdvancedSearch}
+              pageTitle={tAppHobbies('appHobbies:search.pageTitle')}
+            />
+          </>
         }
         footer={
           <FooterSection

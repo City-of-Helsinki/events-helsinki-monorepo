@@ -9,6 +9,7 @@ import {
   EventHero,
   EventPageMeta,
   EventContent,
+  RouteMeta,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import dynamic from 'next/dynamic';
@@ -18,6 +19,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../constants';
+import AppConfig from '../../domain/app/AppConfig';
 import routerHelper from '../app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 
@@ -70,6 +72,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
           {event ? (
             <>
               {/* Wait for data to be accessible before updating metadata */}
+              <RouteMeta origin={AppConfig.origin} />
               <EventPageMeta event={event} />
               {eventClosed ? (
                 <EventClosedHero onClick={moveToHomePage} />

@@ -67,12 +67,12 @@ const getDateRangeStr = ({
 
       return [weekdayStr, dateStr, timeStr].join('');
     } else if (isSameMonth(startDate, endDate)) {
-      const startDateStr = formatDate(startDate, 'd');
+      const startDateStr = formatDate(startDate, 'd') + '.';
       const endDateStr = formatDate(endDate, 'd.M.yyyy');
 
       return `${startDateStr}–${endDateStr}`;
     } else if (isSameYear(startDate, endDate)) {
-      const startDateStr = formatDate(startDate, 'd.M');
+      const startDateStr = formatDate(startDate, 'd.M') + '.';
       const endDateStr = formatDate(endDate, 'd.M.yyyy');
 
       return `${startDateStr}–${endDateStr}`;

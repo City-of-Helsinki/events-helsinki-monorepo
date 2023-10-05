@@ -119,7 +119,9 @@ export class HeadlessCMSHelper {
   ): CardProps {
     return {
       ...getArticlePageCardPropsBase(item),
-      subTitle: item?.date ? format(new Date(item.date), this.dateFormat) : '',
+      subTitle: item?.date
+        ? this.removeLeadingZeros(format(new Date(item.date), this.dateFormat))
+        : '',
       url: getRoutedInternalHref(
         item?.link ?? item?.uri,
         ModuleItemTypeEnum.Article
@@ -128,6 +130,10 @@ export class HeadlessCMSHelper {
       withShadow: false,
     };
   }
+
+  removeLeadingZeros = (dateStr: string): string => {
+    return dateStr.replace(/(^|-)0+/g, '$1');
+  };
 
   getCmsPageCardProps(
     item: PageType,

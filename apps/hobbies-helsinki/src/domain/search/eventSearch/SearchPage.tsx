@@ -131,7 +131,6 @@ const SearchPage: React.FC<{
   return (
     <div>
       <BasicMeta
-        title={pageTitle}
         appleTouchIconUrl={meta?.appleTouchIconUrl}
         favIconUrl={meta?.favIconUrl}
         favIconSvgUrl={meta?.favIconSvgUrl}

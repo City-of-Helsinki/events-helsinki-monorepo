@@ -70,7 +70,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       query: PageDocument,
       variables: {
         // does not work
-        id: `/${language}/search`,
+        id: `/${language}/search/`,
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
     });

@@ -61,7 +61,6 @@ const VenueSearchPage: React.FC<SearchPageProps> = ({
   return (
     <div>
       <BasicMeta
-        title={pageTitle}
         appleTouchIconUrl={meta?.appleTouchIconUrl}
         favIconUrl={meta?.favIconUrl}
         favIconSvgUrl={meta?.favIconSvgUrl}

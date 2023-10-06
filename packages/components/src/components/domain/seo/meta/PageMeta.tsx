@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import React from 'react';
 
 function replaceAll(str: string, find: string, replace: string) {
   return str.replace(new RegExp(find, 'g'), replace);
@@ -17,15 +16,14 @@ export type PageMetaProps = {
   // Title of page, required for accessibility: pages should have unique titles
   // so that screen reader users are able to determine when the current page is
   // changed.
-  title: string;
+  title?: string | null;
   description?: string | null;
   image?: string | null;
-  canonicalUrl?: string;
-  openGraphDescription?: string;
-  openGraphTitle?: string;
-  openGraphType?: string;
-  twitterDescription?: string;
-  twitterTitle?: string;
+  openGraphDescription?: string | null;
+  openGraphTitle?: string | null;
+  openGraphType?: string | null;
+  twitterDescription?: string | null;
+  twitterTitle?: string | null;
 };
 
 function PageMeta({
@@ -44,9 +42,9 @@ function PageMeta({
   return (
     <>
       <Head>
-        <title>{unescapeDash(title)}</title>
+        {title && <title>{unescapeDash(title)}</title>}
         {description && <meta name="description" content={description} />}
-        <meta property="og:title" content={openGraphTitle} />
+        <meta property="og:title" content={openGraphTitle || ''} />
         {description && (
           <meta property="og:description" content={openGraphDescription} />
         )}

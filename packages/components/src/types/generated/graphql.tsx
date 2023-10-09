@@ -37,9 +37,9 @@ export type Accessibility = {
   __typename?: 'Accessibility';
   email?: Maybe<Scalars['String']['output']>;
   phone?: Maybe<Scalars['String']['output']>;
-  sentences?: Maybe<Array<Maybe<AccessibilitySentence>>>;
-  shortcomings?: Maybe<Array<Maybe<AccessibilityShortcoming>>>;
-  viewpoints?: Maybe<Array<Maybe<AccessibilityViewpoint>>>;
+  sentences: Array<AccessibilitySentence>;
+  shortcomings: Array<AccessibilityShortcoming>;
+  viewpoints: Array<AccessibilityViewpoint>;
   www?: Maybe<Scalars['String']['output']>;
 };
 
@@ -68,15 +68,15 @@ export type AccessibilitySentences = {
 export type AccessibilityShortcoming = {
   __typename?: 'AccessibilityShortcoming';
   count?: Maybe<Scalars['Int']['output']>;
-  profile?: Maybe<AccessibilityProfile>;
+  profile: AccessibilityProfile;
 };
 
 export type AccessibilityViewpoint = {
   __typename?: 'AccessibilityViewpoint';
-  id?: Maybe<Scalars['ID']['output']>;
-  name?: Maybe<LanguageString>;
-  shortages?: Maybe<Array<Maybe<LanguageString>>>;
-  value?: Maybe<AccessibilityViewpointValue>;
+  id: Scalars['ID']['output'];
+  name: LanguageString;
+  shortages: Array<LanguageString>;
+  value: AccessibilityViewpointValue;
 };
 
 export enum AccessibilityViewpointValue {
@@ -8198,9 +8198,6 @@ export type QueryTranslationsArgs = {
 
 /** The root entry point into the Graph */
 export type QueryUnifiedSearchArgs = {
-  accessibilityProfilesWithoutShortcomings?: InputMaybe<
-    Array<InputMaybe<AccessibilityProfile>>
-  >;
   administrativeDivisionId?: InputMaybe<Scalars['ID']['input']>;
   administrativeDivisionIds?: InputMaybe<
     Array<InputMaybe<Scalars['ID']['input']>>
@@ -8217,6 +8214,7 @@ export type QueryUnifiedSearchArgs = {
   ontologyTreeIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   ontologyWordIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   openAt?: InputMaybe<Scalars['String']['input']>;
+  orderByAccessibilityProfile?: InputMaybe<AccessibilityProfile>;
   orderByDistance?: InputMaybe<OrderByDistance>;
   orderByName?: InputMaybe<OrderByName>;
   providerTypes?: InputMaybe<Array<InputMaybe<ProviderType>>>;
@@ -11137,11 +11135,21 @@ export type UnifiedSearchVenue = {
   name?: Maybe<LanguageString>;
   ontologyWords?: Maybe<Array<Maybe<OntologyWord>>>;
   openingHours?: Maybe<OpeningHours>;
+  orderedByAccessibilityShortcoming?: Maybe<AccessibilityShortcoming>;
   partOf?: Maybe<UnifiedSearchVenue>;
   reservationPolicy?: Maybe<VenueReservationPolicy>;
   resources: Array<Resource>;
   serviceOwner?: Maybe<ServiceOwner>;
   targetGroups?: Maybe<Array<Maybe<TargetGroup>>>;
+};
+
+/**
+ * A place that forms a unit and can be used for some specific purpose -
+ * respa unit or resource, service map unit, beta.kultus venue, linked
+ * events place, Kukkuu venue
+ */
+export type UnifiedSearchVenueOrderedByAccessibilityShortcomingArgs = {
+  profile?: InputMaybe<AccessibilityProfile>;
 };
 
 /** Any node that has a URI */

@@ -103,11 +103,32 @@ type VenueConnection {
   url: String
 }
 
+type VenueDepartment {
+  abbreviation: String
+  addressCity: String
+  addressPostalFull: String
+  addressZip: String
+  businessId: String
+  email: String
+  hierarchyLevel: Int
+  id: ID!
+  municipalityCode: Int
+  name: String
+  oid: ID
+  organizationId: ID
+  organizationType: String
+  parentId: ID
+  phone: String
+  streetAddress: String
+  www: String
+}
+
 type Venue {
   addressLocality: String
   addressPostalFull: String
   dataSource: String
   departmentId: ID
+  department: VenueDepartment
   description: String
   displayedServiceOwner: String
   displayedServiceOwnerType: String
@@ -117,28 +138,15 @@ type Venue {
   infoUrl: String
   name: String
   organizationId: ID
+  organization: VenueDepartment
   position: Point
   postalCode: String
   providerType: String
   shortDescription: String
   streetAddress: String
   telephone: String
-
-  """
-  This field is currently disabled because the Hauki integration is not enabled
-  """
   openingHours: [OpeningHour!]
-    @deprecated(
-      reason: "Hauki integration is currently disabled so this field can not be accessed"
-    )
-
-  """
-  This field is currently disabled because the Hauki integration is not enabled
-  """
   isOpen: Boolean
-    @deprecated(
-      reason: "Hauki integration is currently disabled so this field can not be accessed"
-    )
   ontologyTree: [Ontology]!
   ontologyWords: [Ontology]!
   accessibilitySentences: [AccessibilitySentences]!

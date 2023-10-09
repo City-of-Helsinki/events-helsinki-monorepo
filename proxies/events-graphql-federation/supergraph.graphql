@@ -27,9 +27,9 @@ type Accessibility
   email: String
   phone: String
   www: String
-  viewpoints: [AccessibilityViewpoint]
-  sentences: [AccessibilitySentence]
-  shortcomings: [AccessibilityShortcoming]
+  viewpoints: [AccessibilityViewpoint!]!
+  sentences: [AccessibilitySentence!]!
+  shortcomings: [AccessibilityShortcoming!]!
 }
 
 enum AccessibilityProfile
@@ -61,17 +61,17 @@ type AccessibilitySentences
 type AccessibilityShortcoming
   @join__type(graph: UNIFIED_SEARCH)
 {
-  profile: AccessibilityProfile
+  profile: AccessibilityProfile!
   count: Int
 }
 
 type AccessibilityViewpoint
   @join__type(graph: UNIFIED_SEARCH)
 {
-  id: ID
-  name: LanguageString
-  value: AccessibilityViewpointValue
-  shortages: [LanguageString]
+  id: ID!
+  name: LanguageString!
+  value: AccessibilityViewpointValue!
+  shortages: [LanguageString!]!
 }
 
 enum AccessibilityViewpointValue
@@ -12010,6 +12010,13 @@ type Query
     """Optional, filter to match only these ontology tree ids"""
     ontologyTreeIds: [ID]
 
+    """
+    Optional, filter to match only these ontology tree ids,
+    if ontologyTreeIds is also given then it must match separately i.e.
+    at least one ontology tree ID must match in both sets separately.
+    """
+    ontologyTreeIdsOrSet2: [ID]
+
     """Optional, filter to match only these ontology word ids"""
     ontologyWordIds: [ID]
 
@@ -12027,12 +12034,6 @@ type Query
     If not given or false, all venues are shown.
     """
     mustHaveReservableResource: Boolean
-
-    """
-    Optional, filter to show only venues that have no known shortcomings for any of
-    the given accessibility profiles.
-    """
-    accessibilityProfilesWithoutShortcomings: [AccessibilityProfile]
 
     """Optional search index."""
     index: String
@@ -12069,14 +12070,26 @@ type Query
     openAt: String
 
     """
-    Order results by distance to given coordinates. Cannot be used with "orderByName".
+    Order results by distance to given coordinates.
+    Mutually exclusive with other orderBy* parameters.
     """
     orderByDistance: OrderByDistance
 
     """
-    Order results by venue name in language given as the first value in "languages" argument. Cannot be used with "orderByDistance".
+    Order results by venue name in language given as the first value in "languages" argument.
+    Mutually exclusive with other orderBy* parameters.
     """
     orderByName: OrderByName
+
+    """
+    Optional, order venues by given accessibility profile's shortcomings,
+    first the results that have no accessibility shortcomings for the given profile,
+    then the ones with 1 shortcoming, 2 shortcomings, ..., N shortcomings and
+    last the ones with unknown shortcomings (i.e. no data for or against).
+    
+    Mutually exclusive with other orderBy* parameters.
+    """
+    orderByAccessibilityProfile: AccessibilityProfile
   ): SearchResultConnection @join__field(graph: UNIFIED_SEARCH)
   unifiedSearchCompletionSuggestions(
     """
@@ -16446,6 +16459,7 @@ type UnifiedSearchVenue
   contactDetails: ContactInfo
   reservationPolicy: VenueReservationPolicy
   accessibility: Accessibility
+  orderedByAccessibilityShortcoming(profile: AccessibilityProfile): AccessibilityShortcoming
   arrivalInstructions: String
   additionalInfo: String
   facilities: [VenueFacility!]
@@ -18402,6 +18416,7 @@ type Venue
   addressPostalFull: String
   dataSource: String
   departmentId: ID
+  department: VenueDepartment
   description: String
   displayedServiceOwner: String
   displayedServiceOwnerType: String
@@ -18411,22 +18426,15 @@ type Venue
   infoUrl: String
   name: String
   organizationId: ID
+  organization: VenueDepartment
   position: Point
   postalCode: String
   providerType: String
   shortDescription: String
   streetAddress: String
   telephone: String
-
-  """
-  This field is currently disabled because the Hauki integration is not enabled
-  """
-  openingHours: [OpeningHour!] @deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")
-
-  """
-  This field is currently disabled because the Hauki integration is not enabled
-  """
-  isOpen: Boolean @deprecated(reason: "Hauki integration is currently disabled so this field can not be accessed")
+  openingHours: [OpeningHour!]
+  isOpen: Boolean
   ontologyTree: [Ontology]!
   ontologyWords: [Ontology]!
   accessibilitySentences: [AccessibilitySentences]!
@@ -18440,6 +18448,28 @@ type VenueConnection
   name: String
   phone: String
   url: String
+}
+
+type VenueDepartment
+  @join__type(graph: VENUES)
+{
+  abbreviation: String
+  addressCity: String
+  addressPostalFull: String
+  addressZip: String
+  businessId: String
+  email: String
+  hierarchyLevel: Int
+  id: ID!
+  municipalityCode: Int
+  name: String
+  oid: ID
+  organizationId: ID
+  organizationType: String
+  parentId: ID
+  phone: String
+  streetAddress: String
+  www: String
 }
 
 """TODO: combine beta.kultus Venue stuff with respa equipment type"""

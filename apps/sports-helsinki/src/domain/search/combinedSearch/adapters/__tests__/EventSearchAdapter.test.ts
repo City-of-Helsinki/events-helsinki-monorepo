@@ -43,26 +43,25 @@ describe('EventSearchAdapter', () => {
           keywordOrSet2: [],
           keywordOrSet3: [
             // SENIORS_KEYWORDS
-            'helfi:5', // Vanhukset / Elderly
-            'yso:p2208', // isovanhemmat / grandparents
-            'yso:p2433', // ikääntyneet / older people
-            'yso:p5056', // ikääntyminen / ageing
-            'yso:p6448', // vanhustyö / work with the elderly
-            'yso:p12787', // vanhustenhuolto / care for older people
-            'yso:p13440', // vanhustenneuvolat / guidance centres for the elderly
-            'yso:p20755', // vanhustentalot / municipal housing for the elderly
-            'yso:p25147', // vanhuspalvelut / services for older people
+            'helmet:12023', // Senioreille
+            'kulke:354', // Seniorit
+            'yso:p23544', // senioritalot
+            'yso:p5056', // ikääntyminen
+            'yso:p2433', // ikääntyneet
+            'yso:p5590', // aikuiset
             // YOUTH_KEYWORDS
-            'yso:p1925', // nuorisotyö / youth work
-            'yso:p4806', // nuorisokulttuuri / youth culture
-            'yso:p11617', // nuoret / young people
-            'yso:p15327', // nuoruus / youth
-            'yso:p16485', // koululaiset / pupils
-            'yso:p17790', // nuorisotilat / youth recreational facilities
-            'yso:p21292', // yläkoulu / upper comprehensive school
-            'yso:p25948', // nuorisotalot / youth clubs
-            'yso:p29165', // nuorisopalvelut / youth services
-            'yso:p38262', // yläkoululaiset / upper comprehensive school pupils
+            'yso:p11617', // nuoret
+            'kulke:734', // Nuorille
+            'yso:p4806', // nuorisokulttuuri
+            'yso:p29165', // nuorisopalvelut
+            'yso:p3765', // nuorisopolitiikka
+            'yso:p25948', // nuorisotalot
+            'yso:p16162', // nuorisoteatterit
+            'yso:p17790', // nuorisotilat
+            'yso:p1925', // nuorisotyö
+            'yso:p7401', // lukio
+            'yso:p12736', // lukiolaiset
+            'yso:p15979', // nuoret aikuiset
           ],
           location: [],
           pageSize: 10,

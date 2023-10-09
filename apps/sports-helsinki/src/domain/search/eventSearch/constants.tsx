@@ -323,95 +323,71 @@ export const sportsCategoryData: Record<string, SearchCategoryOption> = {
 };
 
 export const ADAPTED_GROUPS_KEYWORDS = [
-  'helfi:4', // Vammaiset / Disabled
-  'kulke:614', // Erityisryhmät aikuisille / (Special groups for adults)
-  'tet:6', // Soveltuu näkövammaisille / Suitable for people with visual impairments
-  'tet:7', // Soveltuu kuulovammaisille / Suitable for people with hearing impairments
-  'yso:p78', // näkövammaiset / visually disabled people
-  'yso:p1943', // kuulovammat / hearing disorders
-  'yso:p3048', // kehitysvammatyö / work with developmentally disabled persons
-  'yso:p3093', // erityisliikunta / adapted physical activity
-  'yso:p7179', // vammaiset / disabled people
-  'yso:p10060', // kehitysvammaiset / people with intellectual disabilities
-  'yso:p12297', // mielenterveyskuntoutujat / patients in psychiatric rehabilitation
-  'yso:p15492', // kehitysvammaisten hoitajat / nurses for persons with developmental disabilities
-  'yso:p16418', // kehitysvammaisten ohjaajat / instructors for persons with developmental disabilities
-  'yso:p17354', // erityisryhmät / special groups
-  'yso:p25158', // vammaispalvelut / services for the disabled
-  'yso:p28565', // erityislapset / children with special needs
-  'yso:p28757', // ikäkuulo / presbycusis
+  'yso:p28565', // erityislapset
+  'yso:p3093', // erityisliikunta
+  'yso:p17354', // erityisryhmät
+  'kulke:614', // Erityisryhmät aikuisille
+  'yso:p7179', // vammaiset
+  'yso:p25158', // vammaispalvelut
+  'yso:p10060', // kehitysvammaiset
+  'tet:7', // Soveltuu kuulovammaisille
+  'yso:p1943', // kuulovammat
+  'yso:p78', // näkövammaiset
+  'tet:6', // Soveltuu näkövammaisille
+  'yso:p12297', // mielenterveyskuntoutujat
+  'yso:p23886', // päihdekuntoutujat
 ];
 
 export const ADULTS_KEYWORDS = [
-  'kulke:613', // Aikuiset / (Adults)
-  'yso:p5590', // aikuiset / adults
-  'yso:p15979', // nuoret aikuiset / young adults
+  'yso:p5590', // Aikuiset
+  'yso:p15979', // nuoret aikuiset
 ];
 
 export const CHILDREN_AND_FAMILIES_KEYWORDS = [
-  'helfi:1', // Lapset ja lapsiperheet / Children and families
-  'helmet:10595', // Lapset ja perheet / Children and families
-  'helmet:10670', // Lapset / Lapset
-  'kulke:355', // Lapset / (Children)
-  'kulke:747', // Lapsi ja aikuinen yhdessä / (Child and adult together)
-  'yso:p2183', // peruskoulun ala-aste / lower level of comprehensive school
-  'yso:p2260', // vanhempi-lapsisuhde / parent-child relationship
-  'yso:p2357', // lapset (perheenjäsenet) / children (family members)
-  'yso:p4074', // vanhemmat / parents
-  'yso:p4354', // lapset (ikäryhmät) / children (age groups)
-  'yso:p5627', // yksinhuoltajat / single parents
-  'yso:p6911', // esikouluikäiset / preschool children (age group)
-  'yso:p6914', // kouluikäiset / school-age children
-  'yso:p6915', // leikki-ikäiset / preschoolers (age group)
-  'yso:p13050', // lapsiperheet / families with children
-  'yso:p20513', // vauvaperheet / families with babies
-  'yso:p21828', // alakoulu / lower comprehensive school
-  'yso:p27540', // yhden vanhemman perheet / single parent families
-  'yso:p28565', // erityislapset / children with special needs
+  'kulke:355', // Lapset
+  'yso:p4354', // lapset (ikäryhmät)
+  'yso:p2357', // lapset (perheenjäsenet)
+  'helfi:1', // Lapset ja lapsiperheet
+  'helmet:10595', // Lapset ja perheet
+  'kulke:747', // Lapsi ja aikuinen yhdessä
+  'yso:p13050', // lapsiperheet
+  'yso:p28525', // lapsiteatterit
+  'yso:p6915', // leikki-ikäiset
+  'yso:p316', // leikkiminen
+  'yso:p8105', // leikkipuistot
+  'yso:p6914', // kouluikäiset
+  'yso:p16485', // koululaiset
+  'yso:p27455', // taaperoikäiset
 ];
 
 export const PARTNERS_KEYWORDS = [
-  'helfi:6', // Yritykset / Entrepreneurs
-  'helfi:7', // Yhdistykset / Associations
-  'helmet:10593', // Yhdistykset ja seurat / Associations
-  'helmet:10677', // Yrittäjät / Entrepreneurs
-  'yso:p1178', // yrittäjät / entrepreneurs
-  'yso:p1181', // yritystoiminta / business operations
-  'yso:p1182', // yrittäjyys / entrepreneurship
-  'yso:p1393', // järjestöt / associations
-  'yso:p3128', // yritykset / enterprises
-  'yso:p4785', // järjestötoiminta / organisational activities
-  'yso:p7642', // kerhot / clubs (recreational)
-  'yso:p20482', // yrityspalvelut / business services
-  'yso:p21131', // kasvuyritykset / growth companies
-  'yso:p28114', // startup-yritykset / startup companies
-  'yso:p39441', // jalkapalloseurat / football clubs
-  'yso:p39445', // jääkiekkoseurat / ice hockey clubs
+  'helmet:10593', // Yhdistykset ja seurat
+  'yso:p13035', // liikuntaharrastus
+  'yso:p6334', // yhteistyö
 ];
 
 export const SENIORS_KEYWORDS = [
-  'helfi:5', // Vanhukset / Elderly
-  'yso:p2208', // isovanhemmat / grandparents
-  'yso:p2433', // ikääntyneet / older people
-  'yso:p5056', // ikääntyminen / ageing
-  'yso:p6448', // vanhustyö / work with the elderly
-  'yso:p12787', // vanhustenhuolto / care for older people
-  'yso:p13440', // vanhustenneuvolat / guidance centres for the elderly
-  'yso:p20755', // vanhustentalot / municipal housing for the elderly
-  'yso:p25147', // vanhuspalvelut / services for older people
+  'helmet:12023', // Senioreille
+  'kulke:354', // Seniorit
+  'yso:p23544', // senioritalot
+  'yso:p5056', // ikääntyminen
+  'yso:p2433', // ikääntyneet
+  'yso:p5590', // aikuiset
 ];
 
 export const YOUTH_KEYWORDS = [
-  'yso:p1925', // nuorisotyö / youth work
-  'yso:p4806', // nuorisokulttuuri / youth culture
-  'yso:p11617', // nuoret / young people
-  'yso:p15327', // nuoruus / youth
-  'yso:p16485', // koululaiset / pupils
-  'yso:p17790', // nuorisotilat / youth recreational facilities
-  'yso:p21292', // yläkoulu / upper comprehensive school
-  'yso:p25948', // nuorisotalot / youth clubs
-  'yso:p29165', // nuorisopalvelut / youth services
-  'yso:p38262', // yläkoululaiset / upper comprehensive school pupils
+  'yso:p11617', // nuoret
+  'kulke:734', // Nuorille
+  'yso:p4806', // nuorisokulttuuri
+  'yso:p29165', // nuorisopalvelut
+  'yso:p3765', // nuorisopolitiikka
+  'yso:p25948', // nuorisotalot
+  'yso:p16162', // nuorisoteatterit
+  'yso:p17790', // nuorisotilat
+  'yso:p1925', // nuorisotyö
+  'yso:p7401', // lukio
+  'yso:p12736', // lukiolaiset
+  'yso:p15979', // nuoret aikuiset
 ];
 
 export const targetGroupData: Record<string, SearchCategoryOption> = {

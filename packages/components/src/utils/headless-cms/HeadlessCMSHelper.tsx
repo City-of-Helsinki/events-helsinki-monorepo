@@ -132,7 +132,10 @@ export class HeadlessCMSHelper {
   }
 
   removeLeadingZeros = (dateStr: string): string => {
-    return dateStr.replace(/(^|-)0+/g, '$1');
+    return dateStr
+      .split('.')
+      .map((n) => n.replace(/(^|-)0+/g, '$1'))
+      .join('.');
   };
 
   getCmsPageCardProps(

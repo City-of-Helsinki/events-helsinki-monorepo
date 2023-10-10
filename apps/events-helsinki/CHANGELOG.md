@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.8.0...events-helsinki-v1.8.1) (2023-10-10)
+
+
+### Bug Fixes
+
+* Articles and search page meta ([#502](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/502)) ([dc336ab](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dc336ab7ef0dfe295ed30e4b71f1d9c2342d13a4))
+* Fix HDS table paddings by using HCRC v1.0.0-alpha218 ([3075d76](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3075d761f713a16a65fc18d9f34ee80f5447be9f))
+* Fix table styles by using HCRC v1.0.0-alpha217 ([d70a885](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d70a8851f1b659082000ff315b0227ac72fad266))
+
 ## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.7.0...events-helsinki-v1.8.0) (2023-09-28)
 
 

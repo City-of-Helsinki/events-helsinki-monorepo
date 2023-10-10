@@ -123,6 +123,7 @@ export default function ArticleArchive({
           <>
             <RouteMeta origin={AppConfig.origin} page={page} />
             <SearchPageContent
+              page={page}
               className="articlesArchive"
               noResults={!isLoading && articles?.length === 0}
               items={articles}

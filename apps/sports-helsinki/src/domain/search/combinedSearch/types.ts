@@ -123,6 +123,7 @@ export type VenueSearchParams = Pick<
   | 'language'
   | 'q'
   | 'ontologyTreeIds'
+  | 'ontologyTreeIdsOrSet2'
   | 'ontologyWordIds'
   | 'providerTypes'
   | 'serviceOwnerTypes'

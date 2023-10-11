@@ -4,7 +4,6 @@ import {
   getQlLanguage,
   NavigationContext,
   skipFalsyType,
-  useCmsTranslation,
   useDebounce,
   Navigation,
   MatomoWrapper,
@@ -51,7 +50,6 @@ const SEARCH_DEBOUNCE_TIME = 500;
 export default function ArticleArchive({
   page,
 }: HobbiesGlobalPageProps & { page: PageType }) {
-  const { t } = useCmsTranslation();
   const { t: commonT } = useCommonTranslation();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);

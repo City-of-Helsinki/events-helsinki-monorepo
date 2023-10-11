@@ -47,8 +47,8 @@ const mocks = [
   createVenueListRequestAndResultMocks({
     variables: {
       ontologyTreeIds: ['551'],
+      ontologyTreeIdsOrSet2: [],
       ontologyWordIds: [],
-      targetGroups: [],
       administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
       first: 10,
     },

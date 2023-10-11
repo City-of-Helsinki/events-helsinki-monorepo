@@ -390,7 +390,7 @@ export const YOUTH_KEYWORDS = [
   'yso:p15979', // nuoret aikuiset
 ];
 
-export const targetGroupData: Record<string, SearchCategoryOption> = {
+export const TARGET_GROUP_DATA: Record<string, SearchCategoryOption> = {
   [TARGET_GROUPS.ADAPTED_GROUPS]: {
     icon: <IconPersonWheelchair />,
     labelKey: 'appSports:home.targetGroup.adaptedGroups',

@@ -259,9 +259,7 @@ it('should hide audience age info on single event page', async () => {
     routes: [`/kurssit`],
   });
 
-  await waitFor(() => {
-    expect(screen.getByText(/5-15 -vuotiaat/i)).toBeInTheDocument();
-  });
+  expect(await screen.findByText(/5–15-vuotiaat/i)).toBeInTheDocument();
 });
 
 it('should show formatted audience age info on single event page if max age is not specified', async () => {
@@ -269,9 +267,7 @@ it('should show formatted audience age info on single event page if max age is n
     routes: [`/kurssit`],
   });
 
-  await waitFor(() => {
-    expect(screen.getByText(/5\+ -vuotiaat/i)).toBeInTheDocument();
-  });
+  expect(await screen.findByText(/5\+-vuotiaat/i)).toBeInTheDocument();
 });
 
 it('should hide audience age info on single event page if min and max ages are not specified', async () => {

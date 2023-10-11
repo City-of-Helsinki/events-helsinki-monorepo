@@ -42,7 +42,7 @@ import {
   MAPPED_PLACES,
   SPORT_COURSES_KEYWORDS,
   sportsCategoryData,
-  targetGroupData,
+  TARGET_GROUP_DATA,
 } from './constants';
 import type {
   CategoryOption,
@@ -88,7 +88,7 @@ export const getTargetGroupOptions = (
   targetGroups: TARGET_GROUPS[] = CATEGORY_CATALOG.targetGroups.default
 ): CategoryOption[] =>
   targetGroups.map((targetGroup) =>
-    getCategoryOptions(targetGroup, targetGroupData[targetGroup], t)
+    getCategoryOptions(targetGroup, TARGET_GROUP_DATA[targetGroup], t)
   );
 
 /**

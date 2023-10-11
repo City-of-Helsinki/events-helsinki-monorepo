@@ -120,6 +120,9 @@ export enum TARGET_GROUPS {
   YOUTH = 'YOUTH',
 }
 
+export const isTargetGroup = (value: unknown): value is TARGET_GROUPS =>
+  Object.values(TARGET_GROUPS).includes(value as TARGET_GROUPS);
+
 export type RnsData = {
   apiKey?: string;
   title?: string;

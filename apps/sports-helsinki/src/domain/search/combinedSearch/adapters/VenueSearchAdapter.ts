@@ -1,20 +1,19 @@
 import {
   SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS,
-  TARGET_GROUPS_TO_UNIFIED_SEARCH_TARGET_GROUPS,
+  TARGET_GROUPS_TO_ONTOLOGY_TREE_IDS,
 } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type {
   AppLanguage,
   Coordinates,
   OrderByDistance,
-  SPORTS_CATEGORIES,
   UnifiedSearchLanguage,
-  TARGET_GROUPS,
-  TargetGroup as UnifiedSearchTargetGroup,
 } from '@events-helsinki/components/types';
 import {
   SortOrder,
   ProviderType,
   ServiceOwnerType,
+  isSportsCategory,
+  isTargetGroup,
 } from '@events-helsinki/components/types';
 import { appToUnifiedSearchLanguageMap } from '../../eventSearch/types';
 import { initialVenueSearchAdapterValues } from '../constants';
@@ -33,10 +32,10 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   language: VenueSearchParams['language'];
   q: VenueSearchParams['q'];
   ontologyTreeIds: VenueSearchParams['ontologyWordIds'];
+  ontologyTreeIdsOrSet2: VenueSearchParams['ontologyTreeIdsOrSet2'];
   ontologyWordIds: VenueSearchParams['ontologyWordIds'];
   providerTypes: VenueSearchParams['providerTypes'];
   serviceOwnerTypes: VenueSearchParams['serviceOwnerTypes'];
-  targetGroups: VenueSearchParams['targetGroups'];
   openAt?: VenueSearchParams['openAt'];
   administrativeDivisionIds?: VenueSearchParams['administrativeDivisionIds'];
   orderByName: VenueSearchParams['orderByName'];
@@ -62,7 +61,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     ] as UnifiedSearchLanguage;
     this.q = input.text || initialVenueSearchAdapterValues.q;
     this.ontologyTreeIds = this.getOntologyTreeIds(input);
-    this.targetGroups = this.getTargetGroups(input);
+    this.ontologyTreeIdsOrSet2 = this.getOntologyTreeIdsOrSet2(input);
     this.providerTypes = input.helsinkiOnly
       ? [ProviderType.SelfProduced]
       : initialVenueSearchAdapterValues.providerTypes;
@@ -86,47 +85,36 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
 
   private getOntologyTreeIds({
     sportsCategories,
-  }: CombinedSearchAdapterInput): VenueSearchParams['ontologyWordIds'] {
+  }: CombinedSearchAdapterInput): VenueSearchParams['ontologyTreeIds'] {
     // If there are no selected sport categories, use the default one for sports
     if (!sportsCategories?.length) {
       return initialVenueSearchAdapterValues.ontologyTreeIds;
     }
-    const filteredSportsCategories =
-      sportsCategories
-        .reduce((ids: number[], sportCategory) => {
-          const treeIds =
-            SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS[
-              sportCategory as SPORTS_CATEGORIES
-            ];
-          return [...ids, ...(treeIds ?? [])];
-        }, [])
-        .map(String) ?? [];
+    const sportsCategoriesOntologyTreeIds = sportsCategories
+      .filter(isSportsCategory)
+      .flatMap(
+        (sportsCategory) => SPORTS_CATEGORY_TO_ONTOLOGY_TREE_IDS[sportsCategory]
+      )
+      .map(String);
 
-    // Return a unique list of tree ids
-    return [...new Set([...filteredSportsCategories])];
+    // Return a unique list of sports categories' ontology tree IDs
+    return [...new Set(sportsCategoriesOntologyTreeIds)];
   }
 
-  private getTargetGroups({
+  private getOntologyTreeIdsOrSet2({
     targetGroups,
-  }: CombinedSearchAdapterInput): VenueSearchParams['targetGroups'] {
+  }: CombinedSearchAdapterInput): VenueSearchParams['ontologyTreeIdsOrSet2'] {
     // If there are no selected target groups, use the default one
     if (!targetGroups?.length) {
-      return initialVenueSearchAdapterValues.targetGroups;
+      return initialVenueSearchAdapterValues.ontologyTreeIdsOrSet2;
     }
-    const mappedTargetGroups = targetGroups.reduce(
-      (accumulator: UnifiedSearchTargetGroup[], targetGroup) => {
-        return [
-          ...accumulator,
-          ...TARGET_GROUPS_TO_UNIFIED_SEARCH_TARGET_GROUPS[
-            targetGroup as TARGET_GROUPS
-          ],
-        ];
-      },
-      []
-    );
+    const targetGroupsOntologyTreeIds = targetGroups
+      .filter(isTargetGroup)
+      .flatMap((targetGroup) => TARGET_GROUPS_TO_ONTOLOGY_TREE_IDS[targetGroup])
+      .map(String);
 
-    // Return a unique list of target groups
-    return [...new Set([...mappedTargetGroups])];
+    // Return a unique list of target groups' ontology tree IDs
+    return [...new Set(targetGroupsOntologyTreeIds)];
   }
 
   public getQueryVariables(): VenueSearchParams {

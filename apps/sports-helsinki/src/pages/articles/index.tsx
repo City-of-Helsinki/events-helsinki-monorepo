@@ -10,11 +10,9 @@ import {
   MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
-  useLocale,
   RouteMeta,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
-import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import {
   Page as RHHCPage,
@@ -52,8 +50,6 @@ const SEARCH_DEBOUNCE_TIME = 500;
 export default function ArticleArchive({
   page,
 }: SportsGlobalPageProps & { page: PageType }) {
-  const { asPath } = useRouter();
-  const locale = useLocale();
   const { t: commonT } = useCommonTranslation();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);

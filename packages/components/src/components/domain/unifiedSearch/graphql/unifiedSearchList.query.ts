@@ -8,6 +8,7 @@ export const SEARCH_LIST_QUERY = gql`
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
+    $ontologyTreeIdsOrSet2: [ID!]
     $ontologyWordIds: [ID!]
     $providerTypes: [ProviderType]
     $serviceOwnerTypes: [ServiceOwnerType]
@@ -25,6 +26,7 @@ export const SEARCH_LIST_QUERY = gql`
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
+      ontologyTreeIdsOrSet2: $ontologyTreeIdsOrSet2
       ontologyWordIds: $ontologyWordIds
       providerTypes: $providerTypes
       serviceOwnerTypes: $serviceOwnerTypes

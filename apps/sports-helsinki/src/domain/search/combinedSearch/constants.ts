@@ -1,4 +1,3 @@
-import type { TargetGroup } from '@events-helsinki/components';
 import {
   EventTypeId,
   UnifiedSearchLanguage,
@@ -33,8 +32,8 @@ export const initialVenueSearchAdapterValues = {
   language: UnifiedSearchLanguage.Finnish,
   q: '*',
   ontologyTreeIds: [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()] as string[],
+  ontologyTreeIdsOrSet2: [] as string[],
   ontologyWordIds: [] as string[],
-  targetGroups: [] as TargetGroup[],
   administrativeDivisionIds: [HELSINKI_OCD_DIVISION_ID] as string[],
   providerTypes: undefined,
   serviceOwnerTypes: undefined,

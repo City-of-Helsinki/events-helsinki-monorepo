@@ -3,7 +3,7 @@ import { EventTypeId } from '@events-helsinki/components/types';
 import {
   SPORT_COURSES_KEYWORDS,
   sportsCategoryData,
-  targetGroupData,
+  TARGET_GROUP_DATA,
 } from '../../eventSearch/constants';
 import { initialEventSearchAdapterValues } from '../constants';
 import type {
@@ -98,7 +98,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     return [
       ...new Set( // unique keywords
         targetGroups.flatMap(
-          (targetGroup) => targetGroupData?.[targetGroup].keywords ?? []
+          (targetGroup) => TARGET_GROUP_DATA?.[targetGroup].keywords ?? []
         )
       ),
     ];

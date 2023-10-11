@@ -10,7 +10,6 @@ import {
   FooterSection,
   getLanguageOrDefault,
   useAppSportsTranslation,
-  useLocale,
   RouteMeta,
 } from '@events-helsinki/components';
 import type { AppLanguage } from '@events-helsinki/components';
@@ -20,7 +19,6 @@ import type {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
-import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import type {
   Breadcrumb,

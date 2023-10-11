@@ -8212,6 +8212,7 @@ export type QueryUnifiedSearchArgs = {
   ontology?: InputMaybe<Scalars['String']['input']>;
   ontologyTreeId?: InputMaybe<Scalars['ID']['input']>;
   ontologyTreeIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  ontologyTreeIdsOrSet2?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   ontologyWordIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
   openAt?: InputMaybe<Scalars['String']['input']>;
   orderByAccessibilityProfile?: InputMaybe<AccessibilityProfile>;
@@ -12380,6 +12381,7 @@ export type Venue = {
   addressPostalFull?: Maybe<Scalars['String']['output']>;
   connections: Array<Maybe<VenueConnection>>;
   dataSource?: Maybe<Scalars['String']['output']>;
+  department?: Maybe<VenueDepartment>;
   departmentId?: Maybe<Scalars['ID']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   displayedServiceOwner?: Maybe<Scalars['String']['output']>;
@@ -12388,19 +12390,12 @@ export type Venue = {
   id: Scalars['String']['output'];
   image?: Maybe<Scalars['String']['output']>;
   infoUrl?: Maybe<Scalars['String']['output']>;
-  /**
-   * This field is currently disabled because the Hauki integration is not enabled
-   * @deprecated Hauki integration is currently disabled so this field can not be accessed
-   */
   isOpen?: Maybe<Scalars['Boolean']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   ontologyTree: Array<Maybe<Ontology>>;
   ontologyWords: Array<Maybe<Ontology>>;
-  /**
-   * This field is currently disabled because the Hauki integration is not enabled
-   * @deprecated Hauki integration is currently disabled so this field can not be accessed
-   */
   openingHours?: Maybe<Array<OpeningHour>>;
+  organization?: Maybe<VenueDepartment>;
   organizationId?: Maybe<Scalars['ID']['output']>;
   position?: Maybe<Point>;
   postalCode?: Maybe<Scalars['String']['output']>;
@@ -12416,6 +12411,27 @@ export type VenueConnection = {
   phone?: Maybe<Scalars['String']['output']>;
   sectionType?: Maybe<Scalars['String']['output']>;
   url?: Maybe<Scalars['String']['output']>;
+};
+
+export type VenueDepartment = {
+  __typename?: 'VenueDepartment';
+  abbreviation?: Maybe<Scalars['String']['output']>;
+  addressCity?: Maybe<Scalars['String']['output']>;
+  addressPostalFull?: Maybe<Scalars['String']['output']>;
+  addressZip?: Maybe<Scalars['String']['output']>;
+  businessId?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  hierarchyLevel?: Maybe<Scalars['Int']['output']>;
+  id: Scalars['ID']['output'];
+  municipalityCode?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  oid?: Maybe<Scalars['ID']['output']>;
+  organizationId?: Maybe<Scalars['ID']['output']>;
+  organizationType?: Maybe<Scalars['String']['output']>;
+  parentId?: Maybe<Scalars['ID']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  streetAddress?: Maybe<Scalars['String']['output']>;
+  www?: Maybe<Scalars['String']['output']>;
 };
 
 /** TODO: combine beta.kultus Venue stuff with respa equipment type */
@@ -13710,6 +13726,9 @@ export type SearchListQueryVariables = Exact<{
   ontologyTreeIds?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
   >;
+  ontologyTreeIdsOrSet2?: InputMaybe<
+    Array<Scalars['ID']['input']> | Scalars['ID']['input']
+  >;
   ontologyWordIds?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
   >;
@@ -13855,6 +13874,9 @@ export type SearchMapQueryVariables = Exact<{
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
   >;
   ontologyTreeIds?: InputMaybe<
+    Array<Scalars['ID']['input']> | Scalars['ID']['input']
+  >;
+  ontologyTreeIdsOrSet2?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
   >;
   providerTypes?: InputMaybe<
@@ -15311,6 +15333,7 @@ export const SearchListDocument = gql`
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
+    $ontologyTreeIdsOrSet2: [ID!]
     $ontologyWordIds: [ID!]
     $providerTypes: [ProviderType]
     $serviceOwnerTypes: [ServiceOwnerType]
@@ -15328,6 +15351,7 @@ export const SearchListDocument = gql`
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
+      ontologyTreeIdsOrSet2: $ontologyTreeIdsOrSet2
       ontologyWordIds: $ontologyWordIds
       providerTypes: $providerTypes
       serviceOwnerTypes: $serviceOwnerTypes
@@ -15440,6 +15464,7 @@ export const SearchListDocument = gql`
  *      language: // value for 'language'
  *      administrativeDivisionIds: // value for 'administrativeDivisionIds'
  *      ontologyTreeIds: // value for 'ontologyTreeIds'
+ *      ontologyTreeIdsOrSet2: // value for 'ontologyTreeIdsOrSet2'
  *      ontologyWordIds: // value for 'ontologyWordIds'
  *      providerTypes: // value for 'providerTypes'
  *      serviceOwnerTypes: // value for 'serviceOwnerTypes'
@@ -15491,6 +15516,7 @@ export const SearchMapDocument = gql`
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
     $ontologyTreeIds: [ID!]
+    $ontologyTreeIdsOrSet2: [ID!]
     $providerTypes: [ProviderType]
     $serviceOwnerTypes: [ServiceOwnerType]
     $targetGroups: [TargetGroup]
@@ -15506,6 +15532,7 @@ export const SearchMapDocument = gql`
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
       ontologyTreeIds: $ontologyTreeIds
+      ontologyTreeIdsOrSet2: $ontologyTreeIdsOrSet2
       providerTypes: $providerTypes
       serviceOwnerTypes: $serviceOwnerTypes
       targetGroups: $targetGroups
@@ -15557,6 +15584,7 @@ export const SearchMapDocument = gql`
  *      language: // value for 'language'
  *      administrativeDivisionIds: // value for 'administrativeDivisionIds'
  *      ontologyTreeIds: // value for 'ontologyTreeIds'
+ *      ontologyTreeIdsOrSet2: // value for 'ontologyTreeIdsOrSet2'
  *      providerTypes: // value for 'providerTypes'
  *      serviceOwnerTypes: // value for 'serviceOwnerTypes'
  *      targetGroups: // value for 'targetGroups'

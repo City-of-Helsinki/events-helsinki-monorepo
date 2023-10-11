@@ -1,5 +1,6 @@
 import { UnifiedSearch } from '../useUnifiedSearch';
 import queryString from 'query-string';
+import { TARGET_GROUPS_TO_ONTOLOGY_TREE_IDS } from '../unifiedSearchConstants';
 
 function getUnifiedSearch(router) {
   return new UnifiedSearch(router, true);
@@ -115,5 +116,17 @@ describe('UnifiedSearch', () => {
         undefined
       );
     });
+  });
+
+  describe('mappings of target groups to ontology tree IDs', () => {
+    for (const [targetGroup, ontologyTreeIds] of Object.entries(
+      TARGET_GROUPS_TO_ONTOLOGY_TREE_IDS
+    )) {
+      it(`${targetGroup} ontology tree ID list should not contain duplicates`, () => {
+        expect([...new Set(ontologyTreeIds)].sort()).toStrictEqual(
+          ontologyTreeIds.sort()
+        );
+      });
+    }
   });
 });

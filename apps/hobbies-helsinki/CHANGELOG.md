@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.7.0...hobbies-helsinki-v2.8.0) (2023-10-12)
+
+
+### Features
+
+* **cookies:** Set cookie domain to hostname i.e. &lt;application&gt;.hel.fi ([9b33cf7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9b33cf7015b82b440d1a053c7fbd1c60c5a44bc0))
+
+
+### Bug Fixes
+
+* Articles and search page meta ([#502](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/502)) ([dc336ab](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dc336ab7ef0dfe295ed30e4b71f1d9c2342d13a4))
+* Card delimited url redirect ([#485](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/485)) ([337473f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/337473f0220f5070136a2e79d52cb625f070461a))
+* Fix HDS table paddings by using HCRC v1.0.0-alpha218 ([3075d76](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3075d761f713a16a65fc18d9f34ee80f5447be9f))
+* Fix table styles by using HCRC v1.0.0-alpha217 ([d70a885](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d70a8851f1b659082000ff315b0227ac72fad266))
+
 ## [2.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.6.0...hobbies-helsinki-v2.7.0) (2023-09-19)
 
 

@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.12.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.11.0...sports-helsinki-v1.12.0) (2023-10-12)
+
+
+### Features
+
+* **cookies:** Set cookie domain to hostname i.e. &lt;application&gt;.hel.fi ([9b33cf7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9b33cf7015b82b440d1a053c7fbd1c60c5a44bc0))
+* **sports:** Update events/hobby search related target group keywords ([8f96def](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8f96def49d21628e03db26b812ca3726e51123f7))
+
+
+### Bug Fixes
+
+* Articles and search page meta ([#502](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/502)) ([dc336ab](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dc336ab7ef0dfe295ed30e4b71f1d9c2342d13a4))
+* Fix HDS table paddings by using HCRC v1.0.0-alpha218 ([3075d76](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3075d761f713a16a65fc18d9f34ee80f5447be9f))
+* Fix table styles by using HCRC v1.0.0-alpha217 ([d70a885](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d70a8851f1b659082000ff315b0227ac72fad266))
+* Keep Helsinki city owned icon on same row as the preceding text ([930b052](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/930b0528a998ed78262511d9f9d1d5867c63e040))
+* Page meta articles and dates fix ([#512](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/512)) ([804681f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/804681ffacd9e675726ef1a76c8810fc6359d99c))
+
 ## [1.11.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.10.0...sports-helsinki-v1.11.0) (2023-09-27)
 
 

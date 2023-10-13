@@ -13,56 +13,8 @@ import AppConfig from '../../app/AppConfig';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
 import type { SearchComponentType } from '../combinedSearch/types';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
-import {
-  getTargetGroupOptions,
-  getSportsCategoryOptions,
-  sortExtendedCategoryOptions,
-} from '../eventSearch/utils';
+import { useFormValues } from './hooks/useFormValues';
 import styles from './search.module.scss';
-
-export function useFormValues() {
-  const { t } = useSearchTranslation();
-  const { formValues } = useCombinedSearchContext();
-  const [autosuggestInput, setAutosuggestInput] = React.useState(
-    formValues.text ?? ''
-  );
-  const [selectedSportsCategories, setSelectedSportsCategories] =
-    React.useState<string[]>(formValues.sportsCategories);
-  const [sportsCategoryInput, setSportsCategoryInput] = React.useState('');
-  const sportsCategories = getSportsCategoryOptions(t).sort(
-    sortExtendedCategoryOptions
-  );
-  const [selectedTargetGroups, setSelectedTargetGroups] = React.useState<
-    string[]
-  >(formValues.targetGroups);
-  const [targetGroupInput, setTargetGroupInput] = React.useState('');
-  const targetGroups = getTargetGroupOptions(t).sort(
-    sortExtendedCategoryOptions
-  );
-
-  // On page load, initialize the form with values
-  // that are available only after the page has fully loaded
-  React.useEffect(() => {
-    setAutosuggestInput(formValues.text ?? '');
-    setSelectedSportsCategories(formValues.sportsCategories);
-    setSelectedTargetGroups(formValues.targetGroups);
-  }, [formValues.sportsCategories, formValues.targetGroups, formValues.text]);
-
-  return {
-    autosuggestInput,
-    setAutosuggestInput,
-    selectedSportsCategories,
-    setSelectedSportsCategories,
-    sportsCategoryInput,
-    setSportsCategoryInput,
-    sportsCategories,
-    selectedTargetGroups,
-    setSelectedTargetGroups,
-    targetGroupInput,
-    setTargetGroupInput,
-    targetGroups,
-  };
-}
 
 export const SimpleSearchForm: React.FC<SearchComponentType> = ({
   scrollToResultList,

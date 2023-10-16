@@ -56,7 +56,6 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
       onChange={handleUnifiedSearchOrderChange}
       options={orderByOptions}
       icon={geolocation.loading ? <SmallSpinner /> : null}
-      noOutline
       className={styles.unifiedSearchOrderBySelect}
     />
   );

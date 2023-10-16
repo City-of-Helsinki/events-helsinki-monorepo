@@ -21,7 +21,7 @@ export default function Select({
       optionLabelField={optionLabelField}
       className={classNames(
         styles.select,
-        { [styles.selectNoOutline]: !noOutline },
+        { [styles.selectNoOutline]: noOutline },
         className
       )}
     />

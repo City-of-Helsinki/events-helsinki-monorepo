@@ -3,7 +3,7 @@
 .select {
   @include utils.override-hds-input-styles();
 
-  &noOutline {
+  &NoOutline {
     & > div {
       border-color: transparent;
     }

@@ -60,9 +60,19 @@
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "{{age}}-vuotiaalle"
-    }
+    },
+    "labelAccessibilityShortcoming": "Esteettömyys"
   },
   "goToVenue": "Näytä sivu",
   "openStreetMapContributors": "osallistujat",
-  "mapAccessibilityStatement": "Kartta. Tällä hetkellä käytettävissä ovat vain visuaaliset karttatiedot."
+  "mapAccessibilityStatement": "Kartta. Tällä hetkellä käytettävissä ovat vain visuaaliset karttatiedot.",
+  "accessibilityShortcoming": {
+    "noAccessibilityProfile": "Ei esteettömyysrajoitteita",
+    "hearing_aid": "Käytän kuulolaitetta",
+    "reduced_mobility": "Olen liikkumisesteinen",
+    "rollator": "Käytän rollaattoria",
+    "stroller": "Työnnän rattaita",
+    "visually_impaired": "Olen näkövammainen",
+    "wheelchair": "Käytän pyörätuolia"
+  }
 }

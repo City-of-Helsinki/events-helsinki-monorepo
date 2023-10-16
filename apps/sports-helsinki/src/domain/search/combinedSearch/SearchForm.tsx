@@ -4,9 +4,10 @@ import {
   MultiSelectDropdown,
   useAppSportsTranslation,
   IconPersonRunning,
+  SearchSelect,
 } from '@events-helsinki/components';
-import classNames from 'classnames';
-import { Button, IconGroup, IconSearch } from 'hds-react';
+import type { SelectCustomTheme } from 'hds-react';
+import { Button, IconGroup, IconPersonWheelchair, IconSearch } from 'hds-react';
 import React from 'react';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import AppConfig from '../../app/AppConfig';
@@ -39,6 +40,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     targetGroupInput,
     setTargetGroupInput,
     targetGroups,
+    accessibilityShortcomings,
+    selectedAccessibilityShortcoming,
+    setSelectedAccessibilityShortcoming,
   } = useFormValues();
 
   const handleSubmit = (formEvent?: React.FormEvent) => {
@@ -69,56 +73,73 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
           <h1 className={styles.searchTitle}>{t('search.labelSearchField')}</h1>
         )}
         <div className={styles.rowWrapper}>
-          <div
-            className={classNames(
-              styles.row,
-              AppConfig.showTargetGroupFilter
-                ? styles.autoSuggestRowWithTargetGroupFilter
-                : styles.autoSuggestRowWithoutTargetGroupFilter
-            )}
-          >
-            <div>
-              <SearchAutosuggest
-                name="text"
-                onChangeSearchValue={setAutosuggestInput}
-                onOptionClick={handleMenuOptionClick}
-                placeholder={tAppSports('appSports:search.search.placeholder')}
-                searchValue={autosuggestInput}
-              />
-            </div>
-            <div>
-              <MultiSelectDropdown
-                checkboxName="sportsCategoryOptions"
-                icon={<IconPersonRunning aria-hidden />}
-                inputValue={sportsCategoryInput}
-                name="sportsCategory"
-                onChange={setSelectedSportsCategories}
-                options={sportsCategories}
-                setInputValue={setSportsCategoryInput}
-                showSearch={false}
-                title={t('search.titleDropdownSportsCategory')}
-                value={selectedSportsCategories}
-              />
-            </div>
-            {AppConfig.showTargetGroupFilter && (
-              <div>
-                <MultiSelectDropdown
-                  checkboxName="targetGroupOptions"
-                  icon={<IconGroup aria-hidden />}
-                  inputValue={targetGroupInput}
-                  name="targetGroup"
-                  onChange={setSelectedTargetGroups}
-                  options={targetGroups}
-                  setInputValue={setTargetGroupInput}
-                  showSearch={false}
-                  title={t('search.titleDropdownTargetGroup')}
-                  value={selectedTargetGroups}
-                />
-              </div>
-            )}
+          <div>
+            <SearchAutosuggest
+              name="text"
+              onChangeSearchValue={setAutosuggestInput}
+              onOptionClick={handleMenuOptionClick}
+              placeholder={tAppSports('appSports:search.search.placeholder')}
+              searchValue={autosuggestInput}
+            />
           </div>
           <div className={styles.rowWrapper}>
             <div className={styles.row}>
+              <div>
+                <MultiSelectDropdown
+                  checkboxName="sportsCategoryOptions"
+                  icon={<IconPersonRunning aria-hidden />}
+                  inputValue={sportsCategoryInput}
+                  name="sportsCategory"
+                  onChange={setSelectedSportsCategories}
+                  options={sportsCategories}
+                  setInputValue={setSportsCategoryInput}
+                  showSearch={false}
+                  title={t('search.titleDropdownSportsCategory')}
+                  value={selectedSportsCategories}
+                />
+              </div>
+              {AppConfig.showTargetGroupFilter && (
+                <div>
+                  <MultiSelectDropdown
+                    checkboxName="targetGroupOptions"
+                    icon={<IconGroup aria-hidden />}
+                    inputValue={targetGroupInput}
+                    name="targetGroup"
+                    onChange={setSelectedTargetGroups}
+                    options={targetGroups}
+                    setInputValue={setTargetGroupInput}
+                    showSearch={false}
+                    title={t('search.titleDropdownTargetGroup')}
+                    value={selectedTargetGroups}
+                  />
+                </div>
+              )}
+              <div>
+                <SearchSelect
+                  id="accessibilities"
+                  label={t('search:search.labelAccessibilityShortcoming')}
+                  placeholder={t('search:search.labelAccessibilityShortcoming')}
+                  options={accessibilityShortcomings}
+                  value={accessibilityShortcomings.find(
+                    (option) =>
+                      option.value === selectedAccessibilityShortcoming
+                  )}
+                  onChange={(option) =>
+                    setSelectedAccessibilityShortcoming(option?.value ?? '')
+                  }
+                  icon={<IconPersonWheelchair aria-hidden />}
+                  theme={
+                    {
+                      '--menu-item-background': 'var(--color-input-dark)',
+                      '--menu-item-background-hover': 'var(--color-input-dark)',
+                      '--menu-item-background-selected-hover':
+                        'var(--color-input-dark)',
+                    } as SelectCustomTheme
+                  }
+                  noOutline
+                  clearable
+                />
+              </div>
               <div
                 className={
                   AppConfig.showTargetGroupFilter

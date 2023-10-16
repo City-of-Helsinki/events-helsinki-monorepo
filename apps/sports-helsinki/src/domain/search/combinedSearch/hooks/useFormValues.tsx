@@ -4,6 +4,7 @@ import {
   getTargetGroupOptions,
   getSportsCategoryOptions,
   sortExtendedCategoryOptions,
+  getAccessibilityShortcomingOptions,
 } from '../../eventSearch/utils';
 import { useCombinedSearchContext } from '../adapters/CombinedSearchContext';
 
@@ -26,6 +27,12 @@ export function useFormValues() {
   const targetGroups = getTargetGroupOptions(t).sort(
     sortExtendedCategoryOptions
   );
+  const accessibilityShortcomings =
+    getAccessibilityShortcomingOptions(t).sort();
+  const [
+    selectedAccessibilityShortcoming,
+    setSelectedAccessibilityShortcoming,
+  ] = React.useState('');
 
   // On page load, initialize the form with values
   // that are available only after the page has fully loaded
@@ -33,6 +40,7 @@ export function useFormValues() {
     setAutosuggestInput(formValues.text ?? '');
     setSelectedSportsCategories(formValues.sportsCategories);
     setSelectedTargetGroups(formValues.targetGroups);
+    // TODO: setSelectedAccessibilityShortcoming(formValues.accessibilities);
   }, [formValues.sportsCategories, formValues.targetGroups, formValues.text]);
 
   return {
@@ -48,5 +56,8 @@ export function useFormValues() {
     targetGroupInput,
     setTargetGroupInput,
     targetGroups,
+    accessibilityShortcomings,
+    selectedAccessibilityShortcoming,
+    setSelectedAccessibilityShortcoming,
   };
 }

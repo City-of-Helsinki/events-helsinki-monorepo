@@ -9,8 +9,11 @@ import type {
   SPORTS_CATEGORIES,
   TARGET_GROUPS,
   Venue,
+  Option,
 } from '@events-helsinki/components';
+
 import {
+  AccessibilityProfile,
   buildQueryFromObject,
   DATE_TYPES,
   EventTypeId,
@@ -90,6 +93,19 @@ export const getTargetGroupOptions = (
   targetGroups.map((targetGroup) =>
     getCategoryOptions(targetGroup, targetGroupData[targetGroup], t)
   );
+
+export const accessibilityProfileOptionValues = [
+  ...Object.values(AccessibilityProfile),
+] as const;
+
+export const getAccessibilityShortcomingOptions = (
+  t: TFunction,
+  accessibilities: typeof accessibilityProfileOptionValues = accessibilityProfileOptionValues
+): Option[] =>
+  accessibilities.map((accessibility) => ({
+    text: t(`accessibilityShortcoming.${accessibility}`),
+    value: accessibility,
+  }));
 
 /**
  * Get start and end dates to event list filtering

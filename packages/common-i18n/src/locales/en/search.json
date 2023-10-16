@@ -47,7 +47,8 @@
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "For a {{age}}-year-old"
-    }
+    },
+    "labelAccessibilityShortcoming": "Accessibility"
   },
   "textFoundEvents": "{{count}} search results",
   "buttonLoadMore": "Show more ({{count}})",
@@ -64,5 +65,14 @@
   },
   "goToVenue": "Show page",
   "openStreetMapContributors": "contributors",
-  "mapAccessibilityStatement": "Map. Currently map information is only accessible visually."
+  "mapAccessibilityStatement": "Map. Currently map information is only accessible visually.",
+  "accessibilityShortcoming": {
+    "noAccessibilityProfile": "No accessibility shortcoming",
+    "hearing_aid": "Hearing aid",
+    "reduced_mobility": "Reduced mobility",
+    "rollator": "Rollator",
+    "stroller": "Stroller",
+    "visually_impaired": "Visually impaired",
+    "wheelchair": "Wheelchair"
+  }
 }

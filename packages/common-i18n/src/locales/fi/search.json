@@ -18,6 +18,7 @@
   },
   "orderBy": {
     "alphabetical": "Aakkosjärjestyksessä",
+    "accessibility": "Esteettömyys",
     "relevance": "Osuvuuden mukaan",
     "distance": "Lähimmät ensin",
     "endTime": "Loppumisaika",

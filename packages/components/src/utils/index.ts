@@ -26,3 +26,4 @@ export { default as stringifyUrlObject } from './stringifyUrlObject';
 export { default as getTranslation } from './getTranslation';
 export { default as getLinkArrowLabel } from './getLinkArrowLabel';
 export { default as getLocaleFromPathname } from './getLocaleFromPathname';
+export * from './accessibilityProfile/typeguards';

@@ -5,6 +5,7 @@
   "errorLoadMore": "Failed to load events",
   "orderBy": {
     "alphabetical": "Alphabetical order",
+    "accessibility": "Accessibility",
     "relevance": "Relevance",
     "distance": "Proximity",
     "endTime": "End time",

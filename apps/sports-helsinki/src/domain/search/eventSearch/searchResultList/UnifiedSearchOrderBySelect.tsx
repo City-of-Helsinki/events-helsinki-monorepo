@@ -5,8 +5,12 @@ import {
   Select,
   SmallSpinner,
   useGeolocation,
+  isAccessibilityProfile,
 } from '@events-helsinki/components';
-import type { GeolocationContextType } from '@events-helsinki/components';
+import type {
+  GeolocationContextType,
+  Option,
+} from '@events-helsinki/components';
 import type { SelectCustomTheme } from 'hds-react';
 import React from 'react';
 import useHandleUnifiedSearchOrderChange from '../../../../hooks/useHandleUnifiedSearchOrderChange';
@@ -15,15 +19,18 @@ import styles from './unifiedSearchOrderBySelect.module.scss';
 
 const UnifiedSearchOrderBySelect: React.FC = () => {
   const { t } = useSearchTranslation();
-  const { formValues } = useCombinedSearchContext();
+  const {
+    formValues: { venueOrderBy, accessibilityProfile },
+  } = useCombinedSearchContext();
   const geolocation: GeolocationContextType = useGeolocation({ skip: true });
   const handleUnifiedSearchOrderChange = useHandleUnifiedSearchOrderChange();
 
-  const defaultOption = {
+  const defaultOption: Option = {
     text: t('search:orderBy.relevance'),
     value: `${UnifiedSearchOrderBy.relevance}-${OrderDir.asc}`,
   };
-  const orderByOptions = [
+
+  const orderByOptions: Option[] = [
     {
       text: t('search:orderBy.alphabetical'),
       value: `${UnifiedSearchOrderBy.name}-${OrderDir.asc}`,
@@ -34,13 +41,41 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
       value: `${UnifiedSearchOrderBy.distance}-${OrderDir.asc}`,
     },
   ];
-  const selectedOrderByOption = orderByOptions.find((option) => {
-    const selectedOptionValue = `${formValues.venueOrderBy}-${
-      formValues.venueOrderBy?.startsWith('-') ? OrderDir.desc : OrderDir.asc
-    }`;
 
-    return option.value === selectedOptionValue;
-  });
+  // Add the accessibilityProfileOption only when an accessibilityShortcoming filter is selected.
+  if (accessibilityProfile) {
+    // The accessibility profile ordering option is "synced" to the accessibilityShortcoming-filter-selection.
+    orderByOptions.push({
+      text: t('search:orderBy.accessibility'),
+      value: accessibilityProfile,
+    });
+  }
+
+  const selectedOrderByOption = React.useMemo(
+    () =>
+      orderByOptions.find((option) => {
+        // If accessbility profile search-filter is used,
+        // the order by value is fixed to the value of the accessibilityProfile.
+        if (
+          accessibilityProfile &&
+          isAccessibilityProfile(accessibilityProfile)
+        ) {
+          return option.value === accessibilityProfile;
+        }
+        // Otherwise, use the venueOrderBy-parameter to select an order by option
+        if (venueOrderBy) {
+          if (isAccessibilityProfile(venueOrderBy)) {
+            return option.value === venueOrderBy;
+          }
+          const selectedOptionValue = `${venueOrderBy}-${
+            venueOrderBy?.startsWith('-') ? OrderDir.desc : OrderDir.asc
+          }`;
+          return option.value === selectedOptionValue;
+        }
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [accessibilityProfile, venueOrderBy]
+  );
 
   return (
     <Select

@@ -5,6 +5,7 @@
   "errorLoadMore": "Det gick inte att ladda evenemangen",
   "orderBy": {
     "alphabetical": "I alfabetisk ordning",
+    "accessibility": "Tillgänglighet",
     "relevance": "Efter relevans",
     "distance": "Närmaste först",
     "endTime": "Sluttid",

@@ -14,6 +14,7 @@ import AppConfig from '../../app/AppConfig';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
 import type { SearchComponentType } from '../combinedSearch/types';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
+import useFixHdsSelectedValueIndicator from './hooks/useFixHdsSelectedValueIndicator';
 import { useFormValues } from './hooks/useFormValues';
 import styles from './search.module.scss';
 
@@ -44,6 +45,13 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     selectedAccessibilityShortcoming,
     setSelectedAccessibilityShortcoming,
   } = useFormValues();
+
+  // Fix HDS-select value indicator refreshing with useFixHdsSelectedValueIndicator.
+  // TODO: This should not be used when the bug in HDS is fixed.
+  useFixHdsSelectedValueIndicator({
+    selectComponentId: 'accessibilityShortcoming',
+    value: selectedAccessibilityShortcoming,
+  });
 
   const handleSubmit = (formEvent?: React.FormEvent) => {
     // The default submit event must be prevented so the page does not reload

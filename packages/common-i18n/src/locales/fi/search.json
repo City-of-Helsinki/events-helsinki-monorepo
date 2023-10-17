@@ -61,7 +61,8 @@
       "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "{{age}}-vuotiaalle"
     },
-    "labelAccessibilityShortcoming": "Esteettömyys"
+    "labelAccessibilityShortcoming": "Esteettömyys",
+    "ariaLabelClearAccessibilityShortcoming": "Poista esteettömyys valinta"
   },
   "goToVenue": "Näytä sivu",
   "openStreetMapContributors": "osallistujat",

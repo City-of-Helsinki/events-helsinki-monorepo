@@ -32,7 +32,7 @@ export function useFormValues() {
   const [
     selectedAccessibilityShortcoming,
     setSelectedAccessibilityShortcoming,
-  ] = React.useState('');
+  ] = React.useState(formValues.accessibilityShortcoming);
 
   // On page load, initialize the form with values
   // that are available only after the page has fully loaded
@@ -40,8 +40,13 @@ export function useFormValues() {
     setAutosuggestInput(formValues.text ?? '');
     setSelectedSportsCategories(formValues.sportsCategories);
     setSelectedTargetGroups(formValues.targetGroups);
-    // TODO: setSelectedAccessibilityShortcoming(formValues.accessibilities);
-  }, [formValues.sportsCategories, formValues.targetGroups, formValues.text]);
+    setSelectedAccessibilityShortcoming(formValues.accessibilityShortcoming);
+  }, [
+    formValues.accessibilityShortcoming,
+    formValues.sportsCategories,
+    formValues.targetGroups,
+    formValues.text,
+  ]);
 
   return {
     autosuggestInput,

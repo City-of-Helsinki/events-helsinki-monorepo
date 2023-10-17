@@ -48,7 +48,8 @@
       "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "For a {{age}}-year-old"
     },
-    "labelAccessibilityShortcoming": "Accessibility"
+    "labelAccessibilityShortcoming": "Accessibility",
+    "ariaLabelClearAccessibilityShortcoming": "Remove the accessibility shortcoming selection"
   },
   "textFoundEvents": "{{count}} search results",
   "buttonLoadMore": "Show more ({{count}})",

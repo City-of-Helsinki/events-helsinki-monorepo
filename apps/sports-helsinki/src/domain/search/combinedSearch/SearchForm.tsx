@@ -53,6 +53,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
       text: autosuggestInput,
       sportsCategories: selectedSportsCategories,
       targetGroups: selectedTargetGroups,
+      accessibilityShortcoming: selectedAccessibilityShortcoming,
     });
     // Update the browser URL with the form values in the context.
     updateRouteToSearchPage({ shallow: true });
@@ -116,9 +117,12 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
               )}
               <div>
                 <SearchSelect
-                  id="accessibilities"
+                  id="accessibilityShortcoming"
                   label={t('search:search.labelAccessibilityShortcoming')}
                   placeholder={t('search:search.labelAccessibilityShortcoming')}
+                  clearButtonAriaLabel={t(
+                    'search:search.ariaLabelClearAccessibilityShortcoming'
+                  )}
                   options={accessibilityShortcomings}
                   value={accessibilityShortcomings.find(
                     (option) =>

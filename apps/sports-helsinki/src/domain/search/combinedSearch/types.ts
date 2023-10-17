@@ -61,6 +61,7 @@ export type CombinedSearchAdapterInput = {
   helsinkiOnly?: boolean | string | null;
   place?: string | null;
   keywords: string[];
+  accessibilityShortcoming?: string | null;
 } & CombinedSearchAdapterInputForVenues &
   CombinedSearchAdapterInputForEvents &
   CombinedSearchAdapterInputForCourses;

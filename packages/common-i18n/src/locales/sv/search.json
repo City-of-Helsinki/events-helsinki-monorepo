@@ -48,7 +48,8 @@
       "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "För en {{age}}-åring"
     },
-    "labelAccessibilityShortcoming": "Tillgänglighet"
+    "labelAccessibilityShortcoming": "Tillgänglighet",
+    "ariaLabelClearAccessibilityShortcoming": "Ta bort valet av tillgänglighet"
   },
   "textFoundEvents": "{{count}} sökresultat",
   "betaButtonArialLabel": "Vill du ge oss respons på utvecklingsversionen av hobbysöksidan?",

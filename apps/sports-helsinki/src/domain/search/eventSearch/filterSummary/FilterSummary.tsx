@@ -5,6 +5,7 @@ import {
   FilterButton,
   translateValue,
   PlaceFilter,
+  AccessibilityFilter,
 } from '@events-helsinki/components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -34,6 +35,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     helsinkiOnly,
     text,
     place,
+    accessibilityShortcoming,
   } = formValues;
 
   const handleFilterRemove = (
@@ -69,6 +71,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!helsinkiOnly ||
     !!organization ||
     !!place ||
+    !!accessibilityShortcoming ||
     !!text?.length;
 
   if (!hasFilters) return null;
@@ -120,7 +123,17 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           onRemove={() => handleFilterRemove('place', place)}
         />
       )}
-
+      {accessibilityShortcoming && (
+        <AccessibilityFilter
+          id={accessibilityShortcoming}
+          onRemove={() =>
+            handleFilterRemove(
+              'accessibilityShortcoming',
+              accessibilityShortcoming
+            )
+          }
+        />
+      )}
       <button className={styles.clearButton} onClick={onClear} type="button">
         {t('buttonClearFilters')}
         <IconCrossCircleFill aria-hidden />

@@ -1,5 +1,6 @@
 {
   "cityOfHelsinki": "Helsingin kaupunki",
+  "accessibilityShortcoming": "Esteettömyys",
   "opens_in_new_tab": "Avautuu uudessa välilehdessä.",
   "notification": {
     "labelClose": "Sulje ilmoitus"

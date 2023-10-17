@@ -45,6 +45,11 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     setSelectedAccessibilityShortcoming,
   } = useFormValues();
 
+  const accessibilityShortcomingValue =
+    accessibilityShortcomings.find(
+      (option) => option.value === selectedAccessibilityShortcoming
+    ) ?? accessibilityShortcomings[0]; // Select the first -- empty -- if no value
+
   const handleSubmit = (formEvent?: React.FormEvent) => {
     // The default submit event must be prevented so the page does not reload
     formEvent?.preventDefault();
@@ -117,6 +122,12 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
               )}
               <div>
                 <SearchSelect
+                  // To fix a visual bug in the HDS-select, the key is here to force the fresh reload on value state change
+                  key={`accessibilityShortcoming-${
+                    accessibilityShortcomingValue.value ?? 'empty'
+                  }`}
+                  // To fix a visual bug in the HDS-select, the defaultValue-field is used instead of value-field.
+                  defaultValue={accessibilityShortcomingValue}
                   id="accessibilityShortcoming"
                   label={t('search:search.labelAccessibilityShortcoming')}
                   placeholder={t('search:search.labelAccessibilityShortcoming')}
@@ -124,12 +135,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                     'search:search.ariaLabelClearAccessibilityShortcoming'
                   )}
                   options={accessibilityShortcomings}
-                  value={accessibilityShortcomings.find(
-                    (option) =>
-                      option.value === selectedAccessibilityShortcoming
-                  )}
                   onChange={(option) =>
-                    setSelectedAccessibilityShortcoming(option?.value ?? '')
+                    // If no value, select empty string, which is the first option
+                    setSelectedAccessibilityShortcoming(option?.value)
                   }
                   icon={<IconPersonWheelchair aria-hidden />}
                   theme={
@@ -141,7 +149,10 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                     } as SelectCustomTheme
                   }
                   noOutline
-                  clearable
+                  // FIXME: Using the cearable would be a better solution than offering an empty option,
+                  // but the HDS has a bug or unfinished feature in the clearable
+                  // and the controlled state of the input value
+                  // clearable
                 />
               </div>
               <div

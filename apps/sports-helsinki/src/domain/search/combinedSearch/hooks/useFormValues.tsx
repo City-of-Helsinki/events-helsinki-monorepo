@@ -1,3 +1,4 @@
+import type { Option } from '@events-helsinki/components';
 import { useSearchTranslation } from '@events-helsinki/components';
 import React from 'react';
 import {
@@ -7,6 +8,8 @@ import {
   getAccessibilityShortcomingOptions,
 } from '../../eventSearch/utils';
 import { useCombinedSearchContext } from '../adapters/CombinedSearchContext';
+
+export const EMPTY_OPTION: Option = { text: '', value: '' };
 
 export function useFormValues() {
   const { t } = useSearchTranslation();
@@ -27,8 +30,10 @@ export function useFormValues() {
   const targetGroups = getTargetGroupOptions(t).sort(
     sortExtendedCategoryOptions
   );
-  const accessibilityShortcomings =
-    getAccessibilityShortcomingOptions(t).sort();
+  const accessibilityShortcomings = [
+    EMPTY_OPTION, // Empty option is needed, because the clearable-feature of the HDS-select is not working properly.
+    ...getAccessibilityShortcomingOptions(t).sort(),
+  ];
   const [
     selectedAccessibilityShortcoming,
     setSelectedAccessibilityShortcoming,

@@ -36,9 +36,7 @@ export function useFormValues() {
     string[]
   >(formValues.targetGroups);
   const [targetGroupInput, setTargetGroupInput] = React.useState('');
-  const targetGroups = getTargetGroupOptions(t).sort(
-    sortExtendedCategoryOptions
-  );
+  const targetGroups = getTargetGroupOptions(t);
 
   // On page load, initialize the form with values
   // that are available only after the page has fully loaded

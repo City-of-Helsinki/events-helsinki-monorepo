@@ -194,12 +194,13 @@ export enum EVENT_SEARCH_FILTERS {
 export const CATEGORY_CATALOG = {
   targetGroups: {
     default: [
-      TARGET_GROUPS.ADAPTED_GROUPS,
-      TARGET_GROUPS.ADULTS,
+      // Same order as in https://liikunta.hel.fi/en/pages/target-groups
       TARGET_GROUPS.CHILDREN_AND_FAMILIES,
-      TARGET_GROUPS.PARTNERS,
-      TARGET_GROUPS.SENIORS,
       TARGET_GROUPS.YOUTH,
+      TARGET_GROUPS.ADULTS,
+      TARGET_GROUPS.SENIORS,
+      TARGET_GROUPS.ADAPTED_GROUPS,
+      TARGET_GROUPS.PARTNERS,
     ],
   },
   sportsCategories: {

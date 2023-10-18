@@ -18,6 +18,7 @@ export const SEARCH_LIST_QUERY = gql`
     $orderByName: OrderByName
     $orderByAccessibilityProfile: AccessibilityProfile
     $includeHaukiFields: Boolean = true
+    $accessibilityProfile: AccessibilityProfile
   ) {
     unifiedSearch(
       q: $q
@@ -45,6 +46,10 @@ export const SEARCH_LIST_QUERY = gql`
       edges {
         node {
           venue {
+            orderedByAccessibilityShortcoming(profile: $accessibilityProfile) {
+              profile
+              count
+            }
             meta {
               id
             }

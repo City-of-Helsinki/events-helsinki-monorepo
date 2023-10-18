@@ -18,6 +18,7 @@ import {
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import styles from './largeVenueCard.module.scss';
+import { useCombinedSearchContext } from 'domain/search/combinedSearch/adapters/CombinedSearchContext';
 
 interface Props {
   id: string;
@@ -56,7 +57,7 @@ const LargeVenueCard: React.FC<Props> = ({
   );
 
   const { clickCaptureRef, clicked } = useClickCapture(1000);
-
+  const { formValues } = useCombinedSearchContext();
   return (
     <div ref={clickCaptureRef}>
       <LinkBox
@@ -84,6 +85,9 @@ const LargeVenueCard: React.FC<Props> = ({
                   </SecondaryLink>
                 </div>
               )}
+            </div>
+            <div className={styles.keywordWrapperDesktop}>
+              <Tag>{formValues.accessibilityProfile}</Tag>
             </div>
             <div className={styles.keywordWrapperDesktop}>
               {tags && tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}

@@ -5,12 +5,16 @@ import { useCombinedSearchContext } from '../search/combinedSearch/adapters/Comb
 export default function useUnifiedSearchListQuery(
   variables?: Partial<SearchListQueryVariables>
 ) {
-  const { searchVariables } = useCombinedSearchContext();
+  const {
+    searchVariables,
+    formValues: { accessibilityProfile },
+  } = useCombinedSearchContext();
   const { fetchMore, ...delegated } = useSearchListQuery({
     ssr: false,
     variables: {
       ...searchVariables.venue,
       ...variables,
+      accessibilityProfile,
     },
   });
 

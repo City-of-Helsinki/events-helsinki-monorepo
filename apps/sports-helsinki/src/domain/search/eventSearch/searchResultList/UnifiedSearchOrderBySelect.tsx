@@ -17,13 +17,11 @@ import useHandleUnifiedSearchOrderChange from '../../../../hooks/useHandleUnifie
 import { useCombinedSearchContext } from '../../combinedSearch/adapters/CombinedSearchContext';
 import styles from './unifiedSearchOrderBySelect.module.scss';
 
-const UnifiedSearchOrderBySelect: React.FC = () => {
+const useUnifiedSearchOrderBySelectOptions = () => {
   const { t } = useSearchTranslation();
   const {
-    formValues: { venueOrderBy, accessibilityProfile },
+    formValues: { accessibilityProfile },
   } = useCombinedSearchContext();
-  const geolocation: GeolocationContextType = useGeolocation({ skip: true });
-  const handleUnifiedSearchOrderChange = useHandleUnifiedSearchOrderChange();
 
   const defaultOption: Option = {
     text: t('search:orderBy.relevance'),
@@ -50,6 +48,19 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
       value: accessibilityProfile,
     });
   }
+
+  return { orderByOptions, defaultOption };
+};
+
+const UnifiedSearchOrderBySelect: React.FC = () => {
+  const { t } = useSearchTranslation();
+  const {
+    formValues: { venueOrderBy, accessibilityProfile },
+  } = useCombinedSearchContext();
+  const geolocation: GeolocationContextType = useGeolocation({ skip: true });
+  const handleUnifiedSearchOrderChange = useHandleUnifiedSearchOrderChange();
+  const { orderByOptions, defaultOption } =
+    useUnifiedSearchOrderBySelectOptions();
 
   const selectedOrderByOption = React.useMemo(
     () =>
@@ -92,6 +103,7 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
       options={orderByOptions}
       icon={geolocation.loading ? <SmallSpinner /> : null}
       className={styles.unifiedSearchOrderBySelect}
+      disabled={!!accessibilityProfile}
     />
   );
 };

@@ -13744,6 +13744,7 @@ export type SearchListQueryVariables = Exact<{
   openAt?: InputMaybe<Scalars['String']['input']>;
   orderByDistance?: InputMaybe<OrderByDistance>;
   orderByName?: InputMaybe<OrderByName>;
+  orderByAccessibilityProfile?: InputMaybe<AccessibilityProfile>;
   includeHaukiFields?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
@@ -15341,6 +15342,7 @@ export const SearchListDocument = gql`
     $openAt: String
     $orderByDistance: OrderByDistance
     $orderByName: OrderByName
+    $orderByAccessibilityProfile: AccessibilityProfile
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
@@ -15359,6 +15361,7 @@ export const SearchListDocument = gql`
       openAt: $openAt
       orderByDistance: $orderByDistance
       orderByName: $orderByName
+      orderByAccessibilityProfile: $orderByAccessibilityProfile
     ) {
       count
       pageInfo {
@@ -15472,6 +15475,7 @@ export const SearchListDocument = gql`
  *      openAt: // value for 'openAt'
  *      orderByDistance: // value for 'orderByDistance'
  *      orderByName: // value for 'orderByName'
+ *      orderByAccessibilityProfile: // value for 'orderByAccessibilityProfile'
  *      includeHaukiFields: // value for 'includeHaukiFields'
  *   },
  * });

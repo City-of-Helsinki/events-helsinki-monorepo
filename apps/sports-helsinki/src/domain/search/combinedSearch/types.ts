@@ -133,6 +133,7 @@ export type VenueSearchParams = Pick<
   | 'openAt'
   | 'orderByName'
   | 'orderByDistance'
+  | 'orderByAccessibilityProfile'
   | 'after'
   | 'first'
 >;

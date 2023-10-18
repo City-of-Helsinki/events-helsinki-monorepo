@@ -15,6 +15,7 @@ import {
   isSportsCategory,
   isTargetGroup,
 } from '@events-helsinki/components/types';
+import { isAccessibilityProfile } from '@events-helsinki/components/utils/accessibilityProfile/typeguards';
 import { appToUnifiedSearchLanguageMap } from '../../eventSearch/types';
 import { initialVenueSearchAdapterValues } from '../constants';
 import type {
@@ -40,6 +41,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   administrativeDivisionIds?: VenueSearchParams['administrativeDivisionIds'];
   orderByName: VenueSearchParams['orderByName'];
   orderByDistance: VenueSearchParams['orderByDistance'];
+  orderByAccessibilityProfile: VenueSearchParams['orderByAccessibilityProfile'];
   after?: VenueSearchParams['after'];
   first?: VenueSearchParams['first'];
 
@@ -80,6 +82,11 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
           ? SortOrder.Descending
           : SortOrder.Ascending,
       } as OrderByDistance;
+    } else if (
+      input.venueOrderBy &&
+      isAccessibilityProfile(input.venueOrderBy)
+    ) {
+      this.orderByAccessibilityProfile = input.venueOrderBy;
     }
   }
 

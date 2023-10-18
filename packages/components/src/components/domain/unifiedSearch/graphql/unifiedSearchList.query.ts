@@ -16,6 +16,7 @@ export const SEARCH_LIST_QUERY = gql`
     $openAt: String
     $orderByDistance: OrderByDistance
     $orderByName: OrderByName
+    $orderByAccessibilityProfile: AccessibilityProfile
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
@@ -34,6 +35,7 @@ export const SEARCH_LIST_QUERY = gql`
       openAt: $openAt
       orderByDistance: $orderByDistance
       orderByName: $orderByName
+      orderByAccessibilityProfile: $orderByAccessibilityProfile
     ) {
       count
       pageInfo {

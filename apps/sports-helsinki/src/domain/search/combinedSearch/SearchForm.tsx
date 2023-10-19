@@ -4,9 +4,10 @@ import {
   MultiSelectDropdown,
   useAppSportsTranslation,
   IconPersonRunning,
+  SearchSelect,
 } from '@events-helsinki/components';
-import classNames from 'classnames';
-import { Button, IconGroup, IconSearch } from 'hds-react';
+import type { SelectCustomTheme } from 'hds-react';
+import { Button, IconGroup, IconPersonWheelchair, IconSearch } from 'hds-react';
 import React from 'react';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import AppConfig from '../../app/AppConfig';
@@ -39,7 +40,15 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     targetGroupInput,
     setTargetGroupInput,
     targetGroups,
+    accessibilityProfiles,
+    selectedAccessibilityProfile,
+    setSelectedAccessibilityProfile,
   } = useFormValues();
+
+  const accessibilityProfileValue =
+    accessibilityProfiles.find(
+      (option) => option.value === selectedAccessibilityProfile
+    ) ?? accessibilityProfiles[0]; // Select the first -- an empty option -- if no value.
 
   const handleSubmit = (formEvent?: React.FormEvent) => {
     // The default submit event must be prevented so the page does not reload
@@ -49,6 +58,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
       text: autosuggestInput,
       sportsCategories: selectedSportsCategories,
       targetGroups: selectedTargetGroups,
+      accessibilityProfile: selectedAccessibilityProfile,
     });
     // Update the browser URL with the form values in the context.
     updateRouteToSearchPage({ shallow: true });
@@ -69,56 +79,81 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
           <h1 className={styles.searchTitle}>{t('search.labelSearchField')}</h1>
         )}
         <div className={styles.rowWrapper}>
-          <div
-            className={classNames(
-              styles.row,
-              AppConfig.showTargetGroupFilter
-                ? styles.autoSuggestRowWithTargetGroupFilter
-                : styles.autoSuggestRowWithoutTargetGroupFilter
-            )}
-          >
-            <div>
-              <SearchAutosuggest
-                name="text"
-                onChangeSearchValue={setAutosuggestInput}
-                onOptionClick={handleMenuOptionClick}
-                placeholder={tAppSports('appSports:search.search.placeholder')}
-                searchValue={autosuggestInput}
-              />
-            </div>
-            <div>
-              <MultiSelectDropdown
-                checkboxName="sportsCategoryOptions"
-                icon={<IconPersonRunning aria-hidden />}
-                inputValue={sportsCategoryInput}
-                name="sportsCategory"
-                onChange={setSelectedSportsCategories}
-                options={sportsCategories}
-                setInputValue={setSportsCategoryInput}
-                showSearch={false}
-                title={t('search.titleDropdownSportsCategory')}
-                value={selectedSportsCategories}
-              />
-            </div>
-            {AppConfig.showTargetGroupFilter && (
-              <div>
-                <MultiSelectDropdown
-                  checkboxName="targetGroupOptions"
-                  icon={<IconGroup aria-hidden />}
-                  inputValue={targetGroupInput}
-                  name="targetGroup"
-                  onChange={setSelectedTargetGroups}
-                  options={targetGroups}
-                  setInputValue={setTargetGroupInput}
-                  showSearch={false}
-                  title={t('search.titleDropdownTargetGroup')}
-                  value={selectedTargetGroups}
-                />
-              </div>
-            )}
+          <div>
+            <SearchAutosuggest
+              name="text"
+              onChangeSearchValue={setAutosuggestInput}
+              onOptionClick={handleMenuOptionClick}
+              placeholder={tAppSports('appSports:search.search.placeholder')}
+              searchValue={autosuggestInput}
+            />
           </div>
           <div className={styles.rowWrapper}>
             <div className={styles.row}>
+              <div>
+                <MultiSelectDropdown
+                  checkboxName="sportsCategoryOptions"
+                  icon={<IconPersonRunning aria-hidden />}
+                  inputValue={sportsCategoryInput}
+                  name="sportsCategory"
+                  onChange={setSelectedSportsCategories}
+                  options={sportsCategories}
+                  setInputValue={setSportsCategoryInput}
+                  showSearch={false}
+                  title={t('search.titleDropdownSportsCategory')}
+                  value={selectedSportsCategories}
+                />
+              </div>
+              {AppConfig.showTargetGroupFilter && (
+                <div>
+                  <MultiSelectDropdown
+                    checkboxName="targetGroupOptions"
+                    icon={<IconGroup aria-hidden />}
+                    inputValue={targetGroupInput}
+                    name="targetGroup"
+                    onChange={setSelectedTargetGroups}
+                    options={targetGroups}
+                    setInputValue={setTargetGroupInput}
+                    showSearch={false}
+                    title={t('search.titleDropdownTargetGroup')}
+                    value={selectedTargetGroups}
+                  />
+                </div>
+              )}
+              <div>
+                <SearchSelect
+                  id="accessibilityProfile"
+                  label={t('search:search.labelAccessibilityProfile')}
+                  placeholder={t('search:search.labelAccessibilityProfile')}
+                  clearButtonAriaLabel={t(
+                    'search:search.ariaLabelClearAccessibilityProfile'
+                  )}
+                  options={accessibilityProfiles}
+                  value={accessibilityProfileValue}
+                  onChange={(option) =>
+                    setSelectedAccessibilityProfile(option?.value)
+                  }
+                  icon={<IconPersonWheelchair aria-hidden />}
+                  theme={
+                    {
+                      '--menu-item-background': 'var(--color-input-dark)',
+                      '--menu-item-background-hover': 'var(--color-input-dark)',
+                      '--menu-item-background-selected-hover':
+                        'var(--color-input-dark)',
+                    } as SelectCustomTheme
+                  }
+                  noOutline
+                  // FIXME: Using the clearable could be a better solution than offering an empty option,
+                  // but the HDS has a bug or unfinished feature in the clearable
+                  // and the controlled state of the input value, does not work when it's used.
+                  // A following error could be thrown:
+                  // "downshift: A component has changed the uncontrolled prop "selectedItem" to be controlled.
+                  // This prop should not switch from controlled to uncontrolled (or vice versa).
+                  // Decide between using a controlled or uncontrolled Downshift element for the lifetime of the component.
+                  // More info: https://github.com/downshift-js/downshift#control-props".
+                  // clearable
+                />
+              </div>
               <div
                 className={
                   AppConfig.showTargetGroupFilter

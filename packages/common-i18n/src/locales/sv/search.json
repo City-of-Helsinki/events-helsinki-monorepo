@@ -47,7 +47,9 @@
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "För en {{age}}-åring"
-    }
+    },
+    "labelAccessibilityProfile": "Tillgänglighet",
+    "ariaLabelClearAccessibilityProfile": "Ta bort valet av tillgänglighet"
   },
   "textFoundEvents": "{{count}} sökresultat",
   "betaButtonArialLabel": "Vill du ge oss respons på utvecklingsversionen av hobbysöksidan?",
@@ -67,5 +69,14 @@
   },
   "goToVenue": "Visa sidan",
   "openStreetMapContributors": "bidragsgivare",
-  "mapAccessibilityStatement": "Karta, För tillfället är kartans uppgifter tillgängliga endast visuellt."
+  "mapAccessibilityStatement": "Karta, För tillfället är kartans uppgifter tillgängliga endast visuellt.",
+  "accessibilityProfile": {
+    "noAccessibilityProfile": "Inga tillgänglighetsbegränsningar",
+    "hearing_aid": "Jag använder hörapparat",
+    "reduced_mobility": "Jag har rörelsehinder",
+    "rollator": "Jag använder rollator",
+    "stroller": "Jag går med barnvagn",
+    "visually_impaired": "Jag är synskadad",
+    "wheelchair": "Jag använder rullstol"
+  }
 }

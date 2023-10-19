@@ -9,7 +9,10 @@ import type {
   SPORTS_CATEGORIES,
   TARGET_GROUPS,
   Venue,
+  Option,
+  AccessibilityProfile,
 } from '@events-helsinki/components';
+
 import {
   buildQueryFromObject,
   DATE_TYPES,
@@ -35,6 +38,7 @@ import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';
 import { PARAM_SEARCH_TYPE } from '../combinedSearch/constants';
 import {
+  ACCESSIBILITY_PROFILES,
   CATEGORY_CATALOG,
   EVENT_DEFAULT_SEARCH_FILTERS,
   EVENT_SEARCH_FILTERS,
@@ -54,6 +58,9 @@ import type {
 
 export const MIN_AGE = 0;
 export const MAX_AGE = 99;
+
+export const sortOptionsAlphabetically = (a: Option, b: Option) =>
+  a.text > b.text ? 1 : b.text > a.text ? -1 : 0;
 
 export const sortExtendedCategoryOptions = (
   a: CategoryOption,
@@ -90,6 +97,15 @@ export const getTargetGroupOptions = (
   targetGroups.map((targetGroup) =>
     getCategoryOptions(targetGroup, TARGET_GROUP_DATA[targetGroup], t)
   );
+
+export const getAccessibilityProfileOptions = (
+  t: TFunction,
+  accessibilities: AccessibilityProfile[] = ACCESSIBILITY_PROFILES
+): Option[] =>
+  accessibilities.map((accessibility) => ({
+    text: t(`accessibilityProfile.${accessibility}`),
+    value: accessibility,
+  }));
 
 /**
  * Get start and end dates to event list filtering

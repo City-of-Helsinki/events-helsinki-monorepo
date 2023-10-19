@@ -12,7 +12,8 @@ type CombinedSearchInputSubset =
   | 'place'
   | 'sportsCategories'
   | 'targetGroups'
-  | 'text';
+  | 'text'
+  | 'accessibility';
 
 export type FilterType =
   | AgeFilterType

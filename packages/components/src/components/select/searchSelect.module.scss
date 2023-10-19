@@ -1,0 +1,60 @@
+.searchSelect {
+  --dropdown-height: var(--spacing-3-xl) !important;
+
+  & > div:hover,
+  & > div:focus-within,
+  & > div {
+    font-weight: 100;
+    border: none;
+  }
+
+  & > div > button[class*='Select-module_button'] {
+    cursor: pointer;
+    min-height: var(--dropdown-height);
+    border: none;
+    outline: none;
+    font-size: 100%;
+
+    &:focus {
+      outline: 3px solid var(--color-coat-of-arms);
+      outline-offset: 2px;
+    }
+
+    svg {
+      height: 1.25rem;
+      width: 1.25rem;
+    }
+
+    & > span[class*='Select-module_icon'] {
+      margin-right: 1rem;
+    }
+
+    & > span[class*='Select-module_buttonLabel'] {
+      width: 100%;
+      line-height: 1.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    & > svg[class*='Select-module_angleIcon'] {
+      right: 0.8rem;
+      top: var(--spacing-s);
+    }
+  }
+
+  & > div > ul[role='listbox'] {
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+
+    li {
+      font-size: 100%;
+    }
+  }
+}
+
+.isSelected {
+  margin-bottom: -4px;
+  border-bottom: 4px solid var(--color-input-dark);
+}

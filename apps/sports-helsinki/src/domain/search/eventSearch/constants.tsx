@@ -13,6 +13,7 @@ import {
   Season,
   SPORTS_CATEGORIES,
   TARGET_GROUPS,
+  AccessibilityProfile,
 } from '@events-helsinki/components';
 import {
   IconFamily,
@@ -423,5 +424,12 @@ export const TARGET_GROUP_DATA: Record<string, SearchCategoryOption> = {
     keywords: YOUTH_KEYWORDS,
   },
 };
+
+export const ACCESSIBILITY_PROFILES = [
+  AccessibilityProfile.Wheelchair,
+  AccessibilityProfile.ReducedMobility,
+  AccessibilityProfile.Stroller,
+  AccessibilityProfile.Rollator,
+];
 
 export const MAPPED_PLACES: Record<string, string> = {};

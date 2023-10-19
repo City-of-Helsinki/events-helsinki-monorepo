@@ -25,6 +25,7 @@ export const initialCombinedSearchFormValues = {
   organization: undefined,
   place: undefined,
   keywords: [] as string[],
+  accessibilityProfile: undefined,
 } as const satisfies CombinedSearchAdapterInput;
 
 export const initialVenueSearchAdapterValues = {

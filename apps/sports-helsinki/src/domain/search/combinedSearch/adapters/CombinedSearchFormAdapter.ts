@@ -73,6 +73,7 @@ class CombinedSearchFormAdapter
   sportsCategories: string[];
   targetGroups: string[];
   helsinkiOnly?: boolean | string | null;
+  accessibilityProfile?: string | null;
   organization?: string | null;
   place?: string | null;
   keywords: string[];
@@ -123,6 +124,8 @@ class CombinedSearchFormAdapter
     );
     this.place = this.getSingleValueInput<'place'>('place', 'places');
     this.keywords = this.getMultiValueInput<'keywords'>('keywords');
+    this.accessibilityProfile =
+      this.getSingleValueInput<'accessibilityProfile'>('accessibilityProfile');
 
     // Clean the field values for adapters
     this.clean();
@@ -289,6 +292,10 @@ class CombinedSearchFormAdapter
   }
 
   public cleanPlace() {
+    return;
+  }
+
+  public cleanAccessibilityProfile() {
     return;
   }
 

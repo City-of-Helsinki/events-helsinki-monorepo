@@ -28,6 +28,7 @@ export { default as ScrollIntoViewWithFocus } from './scrollIntoViewWithFocus/Sc
 export * from './search';
 export { default as Section } from './section/Section';
 export { default as Select } from './select/Select';
+export { default as SearchSelect } from './select/SearchSelect';
 export * from './shareLinks';
 export { default as SkeletonLoader } from './skeletonLoader/SkeletonLoader';
 export { default as SmallSpinner } from './spinner/SmallSpinner';
@@ -51,6 +52,7 @@ export { default as OrganizationFilter } from './filters/OrganizationFilter';
 export { default as PlaceFilter } from './filters/PlaceFilter';
 export { default as PublisherFilter } from './filters/PublisherFilter';
 export { default as TextFilter } from './filters/TextFilter';
+export { default as AccessibilityFilter } from './filters/AccessibilityFilter';
 export { default as Navigation } from './navigation/Navigation';
 export { default as ApolloErrorNotification } from './apolloErrorNotification/ApolloErrorNotification';
 export {

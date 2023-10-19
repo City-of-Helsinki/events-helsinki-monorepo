@@ -47,7 +47,9 @@
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",
       "exactAge": "For a {{age}}-year-old"
-    }
+    },
+    "labelAccessibilityProfile": "Accessibility",
+    "ariaLabelClearAccessibilityProfile": "Remove the accessibility shortcoming selection"
   },
   "textFoundEvents": "{{count}} search results",
   "buttonLoadMore": "Show more ({{count}})",
@@ -64,5 +66,14 @@
   },
   "goToVenue": "Show page",
   "openStreetMapContributors": "contributors",
-  "mapAccessibilityStatement": "Map. Currently map information is only accessible visually."
+  "mapAccessibilityStatement": "Map. Currently map information is only accessible visually.",
+  "accessibilityProfile": {
+    "noAccessibilityProfile": "No accessibility profile",
+    "hearing_aid": "I use a hearing aid",
+    "reduced_mobility": "I have reduced mobility",
+    "rollator": "I use a rollator",
+    "stroller": "I push a stroller",
+    "visually_impaired": "I am visually impaired",
+    "wheelchair": "I use a wheelchair"
+  }
 }

@@ -13745,6 +13745,7 @@ export type SearchListQueryVariables = Exact<{
   orderByDistance?: InputMaybe<OrderByDistance>;
   orderByName?: InputMaybe<OrderByName>;
   orderByAccessibilityProfile?: InputMaybe<AccessibilityProfile>;
+  showAccessibilityShortcomingsFor?: InputMaybe<AccessibilityProfile>;
   includeHaukiFields?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
@@ -13859,6 +13860,11 @@ export type SearchListQuery = {
               sv?: string | null;
               en?: string | null;
             } | null;
+          } | null;
+          orderedByAccessibilityShortcoming?: {
+            __typename?: 'AccessibilityShortcoming';
+            profile: AccessibilityProfile;
+            count?: number | null;
           } | null;
         } | null;
       };
@@ -15343,6 +15349,7 @@ export const SearchListDocument = gql`
     $orderByDistance: OrderByDistance
     $orderByName: OrderByName
     $orderByAccessibilityProfile: AccessibilityProfile
+    $showAccessibilityShortcomingsFor: AccessibilityProfile
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
@@ -15442,6 +15449,12 @@ export const SearchListDocument = gql`
               type
             }
             targetGroups
+            orderedByAccessibilityShortcoming(
+              profile: $showAccessibilityShortcomingsFor
+            ) {
+              profile
+              count
+            }
           }
         }
       }
@@ -15476,6 +15489,7 @@ export const SearchListDocument = gql`
  *      orderByDistance: // value for 'orderByDistance'
  *      orderByName: // value for 'orderByName'
  *      orderByAccessibilityProfile: // value for 'orderByAccessibilityProfile'
+ *      showAccessibilityShortcomingsFor: // value for 'showAccessibilityShortcomingsFor'
  *      includeHaukiFields: // value for 'includeHaukiFields'
  *   },
  * });

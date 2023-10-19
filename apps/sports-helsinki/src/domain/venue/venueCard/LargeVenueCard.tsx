@@ -5,6 +5,7 @@ import {
   ArrowRightWithLoadingIndicator,
   useClickCapture,
   HelsinkiCityOwnedIcon,
+  useCommonTranslation,
 } from '@events-helsinki/components';
 import { IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -25,6 +26,7 @@ interface Props {
   location?: string;
   imageUrl?: string;
   isHelsinkiCityOwned?: boolean;
+  accessibilityShortcomingCount?: number | null;
   tags?: string[];
   showMapLink?: boolean;
 }
@@ -36,9 +38,11 @@ const LargeVenueCard: React.FC<Props> = ({
   tags,
   imageUrl,
   isHelsinkiCityOwned,
+  accessibilityShortcomingCount,
   showMapLink = false,
 }) => {
   const { t } = useVenueTranslation();
+  const { t: commonTranslation } = useCommonTranslation();
   const router = useRouter();
   const locale = useLocale();
 
@@ -88,6 +92,17 @@ const LargeVenueCard: React.FC<Props> = ({
             <div className={styles.keywordWrapperDesktop}>
               {tags && tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
             </div>
+            {accessibilityShortcomingCount !== undefined && (
+              <div className={styles.keywordWrapperDesktop}>
+                <Tag selected>
+                  {accessibilityShortcomingCount === null
+                    ? commonTranslation('common:noAccessibilityInformation')
+                    : commonTranslation('common:accessibilityShortcomings', {
+                        count: accessibilityShortcomingCount,
+                      })}
+                </Tag>
+              </div>
+            )}
             <div className={styles.buttonWrapper}>
               <ArrowRightWithLoadingIndicator
                 loading={clicked}

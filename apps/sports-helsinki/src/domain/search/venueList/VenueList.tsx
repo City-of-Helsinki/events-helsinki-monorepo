@@ -52,6 +52,9 @@ const VenueList: React.FC<Props> = ({
             )}`}
             imageUrl={(venue?.images && venue?.images[0]?.url) ?? ''}
             isHelsinkiCityOwned={isVenueHelsinkiCityOwned(venue)}
+            accessibilityShortcomingCount={
+              venue?.orderedByAccessibilityShortcoming?.count
+            }
             tags={
               venue?.ontologyWords
                 ?.map((tag) => getTranslation(locale, tag?.label))

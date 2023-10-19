@@ -82,10 +82,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
           ? SortOrder.Descending
           : SortOrder.Ascending,
       } as OrderByDistance;
-    } else if (
-      input.venueOrderBy &&
-      isAccessibilityProfile(input.venueOrderBy)
-    ) {
+    } else if (isAccessibilityProfile(input.venueOrderBy)) {
       this.orderByAccessibilityProfile = input.venueOrderBy;
     }
   }

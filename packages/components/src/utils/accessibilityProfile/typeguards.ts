@@ -1,7 +1,9 @@
 import { AccessibilityProfile } from '../../types';
 
 export function isAccessibilityProfile(
-  value: string
+  value: unknown
 ): value is AccessibilityProfile {
-  return Object.values<string>(AccessibilityProfile).includes(value);
+  return Object.values<AccessibilityProfile>(AccessibilityProfile).includes(
+    value as AccessibilityProfile
+  );
 }

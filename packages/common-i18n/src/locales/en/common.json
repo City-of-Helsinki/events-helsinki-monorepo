@@ -1,6 +1,10 @@
 {
   "cityOfHelsinki": "City of Helsinki",
   "accessibilityProfile": "Accessibility",
+  "noAccessibilityInformation": "No accessibility information",
+  "accessibilityShortcomings_zero": "Accessible",
+  "accessibilityShortcomings_one": "{{count}} accessibility shortcoming",
+  "accessibilityShortcomings_other": "{{count}} accessibility shortcomings",
   "opens_in_new_tab": "Opens in a new tab.",
   "notification": {
     "labelClose": "Close notification"

@@ -1,6 +1,10 @@
 {
   "cityOfHelsinki": "Helsingfors stad",
   "accessibilityProfile": "Tillgänglighet",
+  "noAccessibilityInformation": "Inga tillgänglighetsuppgifter",
+  "accessibilityShortcomings_zero": "Tillgänglig",
+  "accessibilityShortcomings_one": "{{count}} tillgänglighetsbrist",
+  "accessibilityShortcomings_other": "{{count}} tillgänglighetsbrister",
   "opens_in_new_tab": "Öppnas i ett nytt mellanblad.",
   "notification": {
     "labelClose": "Stäng anmälan"

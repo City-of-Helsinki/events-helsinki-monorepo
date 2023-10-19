@@ -1,6 +1,10 @@
 {
   "cityOfHelsinki": "Helsingin kaupunki",
   "accessibilityProfile": "Esteettömyys",
+  "noAccessibilityInformation": "Ei esteettömyystietoja",
+  "accessibilityShortcomings_zero": "Esteetön",
+  "accessibilityShortcomings_one": "{{count}} esteettömyyspuute",
+  "accessibilityShortcomings_other": "{{count}} esteettömyyspuutetta",
   "opens_in_new_tab": "Avautuu uudessa välilehdessä.",
   "notification": {
     "labelClose": "Sulje ilmoitus"

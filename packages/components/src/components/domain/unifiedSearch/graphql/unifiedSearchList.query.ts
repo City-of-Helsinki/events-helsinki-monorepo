@@ -17,6 +17,7 @@ export const SEARCH_LIST_QUERY = gql`
     $orderByDistance: OrderByDistance
     $orderByName: OrderByName
     $orderByAccessibilityProfile: AccessibilityProfile
+    $showAccessibilityShortcomingsFor: AccessibilityProfile
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
@@ -116,6 +117,12 @@ export const SEARCH_LIST_QUERY = gql`
               type
             }
             targetGroups
+            orderedByAccessibilityShortcoming(
+              profile: $showAccessibilityShortcomingsFor
+            ) {
+              profile
+              count
+            }
           }
         }
       }

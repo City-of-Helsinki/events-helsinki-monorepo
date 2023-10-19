@@ -1,4 +1,7 @@
-import type { AutosuggestMenuOption } from '@events-helsinki/components';
+import type {
+  AutosuggestMenuOption,
+  Option,
+} from '@events-helsinki/components';
 import {
   useSearchTranslation,
   MultiSelectDropdown,
@@ -23,8 +26,12 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
   const { t } = useSearchTranslation();
   const { t: tAppSports } = useAppSportsTranslation();
 
-  const { resetFormValues, setFormValues, updateRouteToSearchPage } =
-    useCombinedSearchContext();
+  const {
+    resetFormValues,
+    setFormValues,
+    setFormValue,
+    updateRouteToSearchPage,
+  } = useCombinedSearchContext();
 
   const {
     autosuggestInput,
@@ -69,6 +76,13 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     const value = option.text;
     setAutosuggestInput(value);
     handleSubmit();
+  };
+
+  const handleAccessibilityProfileOnChange = (option: Option) => {
+    setSelectedAccessibilityProfile(option?.value);
+    if (option?.value) {
+      setFormValue('venueOrderBy', option.value);
+    }
   };
 
   return (
@@ -127,9 +141,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                   )}
                   options={accessibilityProfiles}
                   value={accessibilityProfileValue}
-                  onChange={(option) =>
-                    setSelectedAccessibilityProfile(option?.value)
-                  }
+                  onChange={handleAccessibilityProfileOnChange}
                   icon={<IconPersonWheelchair aria-hidden />}
                   theme={
                     {

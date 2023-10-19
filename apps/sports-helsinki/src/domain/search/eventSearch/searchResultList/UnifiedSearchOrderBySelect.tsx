@@ -55,7 +55,7 @@ const useUnifiedSearchOrderBySelectOptions = () => {
 const UnifiedSearchOrderBySelect: React.FC = () => {
   const { t } = useSearchTranslation();
   const {
-    formValues: { venueOrderBy, accessibilityProfile },
+    formValues: { venueOrderBy },
   } = useCombinedSearchContext();
   const geolocation: GeolocationContextType = useGeolocation({ skip: true });
   const handleUnifiedSearchOrderChange = useHandleUnifiedSearchOrderChange();
@@ -65,15 +65,6 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
   const selectedOrderByOption = React.useMemo(
     () =>
       orderByOptions.find((option) => {
-        // If accessbility profile search-filter is used,
-        // the order by value is fixed to the value of the accessibilityProfile.
-        if (
-          accessibilityProfile &&
-          isAccessibilityProfile(accessibilityProfile)
-        ) {
-          return option.value === accessibilityProfile;
-        }
-        // Otherwise, use the venueOrderBy-parameter to select an order by option
         if (venueOrderBy) {
           if (isAccessibilityProfile(venueOrderBy)) {
             return option.value === venueOrderBy;
@@ -84,8 +75,7 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
           return option.value === selectedOptionValue;
         }
       }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [accessibilityProfile, venueOrderBy]
+    [orderByOptions, venueOrderBy]
   );
 
   return (
@@ -103,7 +93,6 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
       options={orderByOptions}
       icon={geolocation.loading ? <SmallSpinner /> : null}
       className={styles.unifiedSearchOrderBySelect}
-      disabled={!!accessibilityProfile}
     />
   );
 };

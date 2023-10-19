@@ -10,7 +10,7 @@ import type {
   Coordinates,
   Option,
 } from '@events-helsinki/components';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useCombinedSearchContext } from '../domain/search/combinedSearch/adapters/CombinedSearchContext';
 
 const useHandleUnifiedSearchOrderChange = () => {
@@ -18,19 +18,8 @@ const useHandleUnifiedSearchOrderChange = () => {
   const {
     setFormValues,
     updateRouteToSearchPage,
-    formValues: { accessibilityProfile, venueOrderBy },
+    formValues: { accessibilityProfile },
   } = useCombinedSearchContext();
-
-  // Sync the accessibility profile search form value with the venue search query parameter
-  React.useEffect(() => {
-    if (accessibilityProfile !== venueOrderBy) {
-      setFormValues({
-        venueOrderBy: accessibilityProfile,
-      });
-      // Update the URL
-      updateRouteToSearchPage({ shallow: true });
-    }
-  }, [accessibilityProfile, venueOrderBy]);
 
   // Provide a callback for onChange-handler
   return useCallback(

@@ -62,7 +62,7 @@
     "date-fns-tz": "^2.0.0",
     "dotenv": "^16.3.1",
     "file-saver": "^2.0.5",
-    "graphql": "16.7.1",
+    "graphql": "16.8.1",
     "hds-react": "2.15.0",
     "i18next": "23.2.3",
     "ics": "^3.2.0",

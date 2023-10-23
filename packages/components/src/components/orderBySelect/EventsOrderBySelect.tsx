@@ -54,7 +54,6 @@ const EventsOrderBySelect: React.FC<{
       value={selectedOrderByOption ?? defaultOption}
       onChange={customOnChangeHandler ?? setSortQueryParamToOptionValue}
       options={orderByOptions}
-      noOutline
       className={styles.eventsOrderBySelect}
     />
   );

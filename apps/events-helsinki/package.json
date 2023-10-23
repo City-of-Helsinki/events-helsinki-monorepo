@@ -1,6 +1,6 @@
 {
   "name": "events-helsinki",
-  "version": "1.8.1",
+  "version": "1.8.0",
   "private": true,
   "scripts": {
     "clean": "rimraf --no-glob ./.next ./out ./coverage ./tsconfig.tsbuildinfo",
@@ -72,7 +72,7 @@
     "react-datepicker": "^4.14.1",
     "react-dom": "18.2.0",
     "react-error-boundary": "4.0.10",
-    "react-helsinki-headless-cms": "v1.0.0-alpha219",
+    "react-helsinki-headless-cms": "v1.0.0-alpha219-canary-87c1bcb",
     "react-i18next": "13.0.1",
     "react-scroll": "^1.8.9",
     "react-toastify": "^9.1.3",

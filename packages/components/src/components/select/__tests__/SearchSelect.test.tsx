@@ -77,7 +77,7 @@ describe('SearchSelect', () => {
     (field) => {
       expect(() =>
         render(<SearchSelect label="label" options={[]} {...{ [field]: [] }} />)
-      ).toThrow(/must be a singleton/);
+      ).toThrow(/must be singletons/);
     }
   );
 

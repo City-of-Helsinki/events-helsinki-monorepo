@@ -83,7 +83,7 @@ E.g. `/search?order_by=field` could be transformed to `/search?orderBy=field&sea
 
 The guideline is, that the search specific filter adapter should be something that is easy for developers to maintain and understand.
 
-The problem: The free text filter parameter is called “text“ in the LinkedEvents and “q“ in the Unified-Search. The UI has only 1 search field, which means that the parameter that it fills, needs to adapt to work in different searches.
+A fictional problem: The free text filter parameter is called “text“ in the LinkedEvents and “q“ in the Unified-Search. The UI has only 1 search field, which means that the parameter that it fills, needs to adapt to work in different searches.
 
 The adapter should:
 

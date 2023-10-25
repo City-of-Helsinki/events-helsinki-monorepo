@@ -128,7 +128,7 @@ export class UnifiedSearch {
   constructor(router: NextRouter, isHaukiEnabled = false) {
     this.router = router;
     this.filterConfig = [
-      { type: 'string', storeBehaviour: 'accumulating', key: 'q' },
+      { type: 'string', storeBehaviour: 'accumulating', key: 'text' },
       {
         type: 'string',
         storeBehaviour: 'list',

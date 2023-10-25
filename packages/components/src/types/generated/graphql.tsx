@@ -8219,7 +8219,7 @@ export type QueryUnifiedSearchArgs = {
   orderByDistance?: InputMaybe<OrderByDistance>;
   orderByName?: InputMaybe<OrderByName>;
   providerTypes?: InputMaybe<Array<InputMaybe<ProviderType>>>;
-  q?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
   serviceOwnerTypes?: InputMaybe<Array<InputMaybe<ServiceOwnerType>>>;
   targetGroups?: InputMaybe<Array<InputMaybe<TargetGroup>>>;
 };
@@ -13716,7 +13716,7 @@ export type UnifiedSearchCompletionSuggestionsQuery = {
 };
 
 export type SearchListQueryVariables = Exact<{
-  q?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   language: UnifiedSearchLanguage;
@@ -13873,7 +13873,7 @@ export type SearchListQuery = {
 };
 
 export type SearchMapQueryVariables = Exact<{
-  q?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   language: UnifiedSearchLanguage;
@@ -15334,7 +15334,7 @@ export type UnifiedSearchCompletionSuggestionsQueryResult = Apollo.QueryResult<
 >;
 export const SearchListDocument = gql`
   query SearchList(
-    $q: String
+    $text: String
     $first: Int
     $after: String
     $language: UnifiedSearchLanguage!
@@ -15353,7 +15353,7 @@ export const SearchListDocument = gql`
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
-      q: $q
+      text: $text
       index: "location"
       first: $first
       after: $after
@@ -15474,7 +15474,7 @@ export const SearchListDocument = gql`
  * @example
  * const { data, loading, error } = useSearchListQuery({
  *   variables: {
- *      q: // value for 'q'
+ *      text: // value for 'text'
  *      first: // value for 'first'
  *      after: // value for 'after'
  *      language: // value for 'language'
@@ -15528,7 +15528,7 @@ export type SearchListQueryResult = Apollo.QueryResult<
 >;
 export const SearchMapDocument = gql`
   query SearchMap(
-    $q: String
+    $text: String
     $first: Int
     $after: String
     $language: UnifiedSearchLanguage!
@@ -15543,7 +15543,7 @@ export const SearchMapDocument = gql`
     $orderByName: OrderByName
   ) {
     unifiedSearch(
-      q: $q
+      text: $text
       index: "location"
       first: $first
       after: $after
@@ -15596,7 +15596,7 @@ export const SearchMapDocument = gql`
  * @example
  * const { data, loading, error } = useSearchMapQuery({
  *   variables: {
- *      q: // value for 'q'
+ *      text: // value for 'text'
  *      first: // value for 'first'
  *      after: // value for 'after'
  *      language: // value for 'language'

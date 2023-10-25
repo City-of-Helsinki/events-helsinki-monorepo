@@ -25,7 +25,7 @@ describe('VenueSearchAdapter', () => {
       const expectedQueryVariables = {
         language: 'FINNISH',
         includeHaukiFields: false,
-        q: input.text,
+        text: input.text,
         ontologyWordIds: input.keywords,
         administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
         after: '',

@@ -22,7 +22,7 @@ const Search: React.FC = () => {
   const handleSubmit = () => {
     setFilters(
       {
-        q: [autosuggestInput],
+        text: [autosuggestInput],
       },
       routerHelper.getI18nPath(ROUTES.SEARCH, locale)
     );
@@ -31,7 +31,7 @@ const Search: React.FC = () => {
   const handleMenuOptionClick = (option: AutosuggestMenuOption) => {
     setFilters(
       {
-        q: [option.text],
+        text: [option.text],
       },
       routerHelper.getI18nPath(ROUTES.SEARCH, locale)
     );

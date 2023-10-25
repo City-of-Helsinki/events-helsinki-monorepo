@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const SEARCH_MAP_QUERY = gql`
   query SearchMap(
-    $q: String
+    $text: String
     $first: Int
     $after: String
     $language: UnifiedSearchLanguage!
@@ -17,7 +17,7 @@ export const SEARCH_MAP_QUERY = gql`
     $orderByName: OrderByName
   ) {
     unifiedSearch(
-      q: $q
+      text: $text
       index: "location"
       first: $first
       after: $after

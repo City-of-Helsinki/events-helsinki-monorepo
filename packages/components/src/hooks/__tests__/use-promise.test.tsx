@@ -150,18 +150,22 @@ describe('usePromise', () => {
 
         // Act & Assert
         const { rerender } = render(
-          <MyComp asyncFn={loadData1} params={{ query: 'q' }} />
+          <MyComp asyncFn={loadData1} params={{ query: 'test query' }} />
         );
         await act(() => promise);
         expect(handleLoading1).toHaveBeenCalledTimes(1);
         expect(handleLoading2).toHaveBeenCalledTimes(0);
 
-        rerender(<MyComp asyncFn={loadData2} params={{ query: 'q' }} />);
+        rerender(
+          <MyComp asyncFn={loadData2} params={{ query: 'test query' }} />
+        );
         await act(() => promise);
         expect(handleLoading1).toHaveBeenCalledTimes(1);
         expect(handleLoading2).toHaveBeenCalledTimes(1);
 
-        rerender(<MyComp asyncFn={loadData1} params={{ query: 'q' }} />);
+        rerender(
+          <MyComp asyncFn={loadData1} params={{ query: 'test query' }} />
+        );
         await act(() => promise);
         expect(handleLoading1).toHaveBeenCalledTimes(2);
         expect(handleLoading2).toHaveBeenCalledTimes(1);

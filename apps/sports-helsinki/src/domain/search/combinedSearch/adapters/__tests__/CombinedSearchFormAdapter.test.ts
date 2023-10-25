@@ -119,7 +119,7 @@ describe('CombinedSearchFormAdapter', () => {
         {
           includeHaukiFields: false,
           language: UnifiedSearchLanguage.Finnish,
-          q: outputQuery.text,
+          text: outputQuery.text,
           ontologyWordIds: outputQuery.keywords,
           administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
           after: '',

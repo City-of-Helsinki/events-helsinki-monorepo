@@ -53,7 +53,7 @@ const VenueList: React.FC<Props> = ({
             imageUrl={(venue?.images && venue?.images[0]?.url) ?? ''}
             isHelsinkiCityOwned={isVenueHelsinkiCityOwned(venue)}
             accessibilityShortcomingCount={
-              venue?.orderedByAccessibilityShortcoming?.count
+              venue?.accessibilityShortcomingFor?.count
             }
             tags={
               venue?.ontologyWords

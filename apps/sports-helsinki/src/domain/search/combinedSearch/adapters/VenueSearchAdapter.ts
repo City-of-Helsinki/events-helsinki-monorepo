@@ -31,7 +31,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
    */
   includeHaukiFields: VenueSearchParams['includeHaukiFields'];
   language: VenueSearchParams['language'];
-  q: VenueSearchParams['q'];
+  text: VenueSearchParams['text'];
   ontologyTreeIds: VenueSearchParams['ontologyWordIds'];
   ontologyTreeIdsOrSet2: VenueSearchParams['ontologyTreeIdsOrSet2'];
   ontologyWordIds: VenueSearchParams['ontologyWordIds'];
@@ -61,7 +61,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     this.language = appToUnifiedSearchLanguageMap[
       locale
     ] as UnifiedSearchLanguage;
-    this.q = input.text || initialVenueSearchAdapterValues.q;
+    this.text = input.text || initialVenueSearchAdapterValues.text;
     this.ontologyTreeIds = this.getOntologyTreeIds(input);
     this.ontologyTreeIdsOrSet2 = this.getOntologyTreeIdsOrSet2(input);
     this.providerTypes = input.helsinkiOnly

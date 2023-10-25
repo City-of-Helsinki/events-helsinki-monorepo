@@ -163,7 +163,7 @@ export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
   places: [],
   publisher: null,
   start: null,
-  q: [],
+  text: [],
   eventType: [],
 };
 

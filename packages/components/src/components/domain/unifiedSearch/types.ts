@@ -9,7 +9,7 @@ import type {
 } from './unifiedSearchConstants';
 
 export type UnifiedSearchParameters = {
-  q?: string[];
+  text?: string[];
   administrativeDivisionIds?: string[];
   ontologyTreeIds?: number[];
   ontologyWordIds?: number[];

@@ -61,7 +61,7 @@ const VenueKeywords: React.FC<Props> = ({
     (type: 'text' | 'isFree', value = '') =>
     () => {
       const search = buildQueryFromObject({
-        q: type === 'text' ? [value] : [],
+        text: type === 'text' ? [value] : [],
       });
 
       router.push(

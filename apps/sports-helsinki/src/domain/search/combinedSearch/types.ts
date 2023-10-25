@@ -122,7 +122,7 @@ export type VenueSearchParams = Pick<
   SearchListQueryVariables,
   | 'includeHaukiFields'
   | 'language'
-  | 'q'
+  | 'text'
   | 'ontologyTreeIds'
   | 'ontologyTreeIdsOrSet2'
   | 'ontologyWordIds'

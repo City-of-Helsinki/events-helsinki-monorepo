@@ -49,9 +49,9 @@ describe('Landing page', () => {
     expect(screen.getByText(/hakuehdotuksia/i)).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
-      asPath: `${searchPath}?q=${searchValue}`,
+      asPath: `${searchPath}?text=${searchValue}`,
       pathname: searchPath,
-      query: { q: [searchValue] },
+      query: { text: [searchValue] },
     });
   });
 

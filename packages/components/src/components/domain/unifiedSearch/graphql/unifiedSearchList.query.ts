@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const SEARCH_LIST_QUERY = gql`
   query SearchList(
-    $q: String
+    $text: String
     $first: Int
     $after: String
     $language: UnifiedSearchLanguage!
@@ -21,7 +21,7 @@ export const SEARCH_LIST_QUERY = gql`
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
-      q: $q
+      text: $text
       index: "location"
       first: $first
       after: $after

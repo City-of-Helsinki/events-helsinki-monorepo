@@ -26,7 +26,7 @@ describe('UnifiedSearch', () => {
     it('filters should return expected values', () => {
       const filters = getUnifiedSearch({
         asPath: getAsPath({
-          q: ['swimming', 'aurinkolahti'],
+          text: ['swimming', 'aurinkolahti'],
           first: 10,
           after: 'cursor',
           isOpenNow: true,
@@ -43,7 +43,7 @@ describe('UnifiedSearch', () => {
           "ontologyTreeIds": [],
           "ontologyWordIds": [],
           "openAt": 2020-12-24T10:12:00.000Z,
-          "q": [
+          "text": [
             "swimming",
             "aurinkolahti",
           ],
@@ -57,7 +57,7 @@ describe('UnifiedSearch', () => {
     it('should set filters with expected values', () => {
       const mockRouter = {
         asPath: getAsPath({
-          q: ['B'],
+          text: ['B'],
         }),
         replace: jest.fn(),
       };
@@ -65,7 +65,7 @@ describe('UnifiedSearch', () => {
 
       unifiedSearch.setFilters(
         {
-          q: ['B'],
+          text: ['B'],
         },
         '/'
       );
@@ -74,7 +74,7 @@ describe('UnifiedSearch', () => {
         {
           pathname: '/',
           query: {
-            q: ['B'],
+            text: ['B'],
           },
         },
         undefined,

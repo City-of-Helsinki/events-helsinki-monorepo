@@ -31,7 +31,7 @@ export const initialCombinedSearchFormValues = {
 export const initialVenueSearchAdapterValues = {
   includeHaukiFields: false,
   language: UnifiedSearchLanguage.Finnish,
-  q: '*',
+  text: '*',
   ontologyTreeIds: [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()] as string[],
   ontologyTreeIdsOrSet2: [] as string[],
   ontologyWordIds: [] as string[],

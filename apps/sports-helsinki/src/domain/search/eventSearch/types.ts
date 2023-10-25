@@ -44,7 +44,7 @@ export interface Filters {
   [EVENT_SEARCH_FILTERS.PUBLISHER]?: string | null;
   [EVENT_SEARCH_FILTERS.START]: Date | null;
   [EVENT_SEARCH_FILTERS.EVENT_TYPE]: string[];
-  q?: string[];
+  text?: string[];
   orderBy?: string | null;
   orderDir?: string | null;
   sort?: string | null;

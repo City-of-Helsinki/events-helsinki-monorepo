@@ -13,7 +13,7 @@ import {
 export const venueListBaseVariables: SearchListQueryVariables = {
   language: UnifiedSearchLanguage.Finnish,
   includeHaukiFields: false,
-  q: '*',
+  text: '*',
   administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
   openAt: null,
   after: '',

@@ -126,12 +126,21 @@ input OrderByName {
   order: SortOrder = ASCENDING
 }
 
+enum UnifiedSearchIndex {
+  administrative_division
+  helsinki_common_administrative_division
+  ontology_tree
+  ontology_word
+  event
+  location
+}
+
 type Query {
   unifiedSearch(
     """
     Free form query string, corresponding to user search input
     """
-    q: String
+    text: String
 
     """
     Optional, filter to match only these ontology words
@@ -139,36 +148,19 @@ type Query {
     ontology: String
 
     """
-    Optional, filter to match only this administrative division. DEPRECATED! use administrativeDivisionIds instead.
-    """
-    administrativeDivisionId: ID
-
-    """
     Optional, filter to match only these administrative divisions
     """
     administrativeDivisionIds: [ID]
 
     """
-    Optional, filter to match only this ontology tree id. DEPRECATED! use ontologyTreeIds instead.
+    Optional, filter to match at least one ontology tree ID from each list
     """
-    ontologyTreeId: ID
+    ontologyTreeIdOrSets: [[ID!]!]
 
     """
-    Optional, filter to match only these ontology tree ids
+    Optional, filter to match at least one ontology word ID from each list
     """
-    ontologyTreeIds: [ID]
-
-    """
-    Optional, filter to match only these ontology tree ids,
-    if ontologyTreeIds is also given then it must match separately i.e.
-    at least one ontology tree ID must match in both sets separately.
-    """
-    ontologyTreeIdsOrSet2: [ID]
-
-    """
-    Optional, filter to match only these ontology word ids
-    """
-    ontologyWordIds: [ID]
+    ontologyWordIdOrSets: [[ID!]!]
 
     """
     Optional, filter to match any of these provider types
@@ -194,7 +186,7 @@ type Query {
     """
     Optional search index.
     """
-    index: String
+    index: UnifiedSearchIndex
 
     """
     Optional pagination variable, match results after this cursor.
@@ -207,29 +199,16 @@ type Query {
     first: Int
 
     """
-    NOTE: Unsupported
-
-    Optional pagination variable, match results before this cursor.
-    """
-    before: String
-
-    """
-    NOTE: Unsupported
-
-    Optional pagination variable, match the N last results.
-    """
-    last: Int
-
-    """
     Targets the search to fields of specified language
     """
     languages: [UnifiedSearchLanguage!]! = [FINNISH, SWEDISH, ENGLISH]
 
     """
-    Return only venues that are open at the given moment. In addition to ISO 8601 datetimes, accepts values
-    conforming to Elastic Search date math (https://www.elastic.co/guide/en/elasticsearch/reference/7.x/common-options.html#date-math)
-    like "now+3h". When there is a datetime provided without a timezone offset, "Europe/Helsinki" will be assumed
-    as the time zone.
+    Return only venues that are open at the given moment. In addition to ISO 8601
+    datetimes, accepts values conforming to Elastic Search date math
+    https://www.elastic.co/guide/en/elasticsearch/reference/7.x/common-options.html#date-math
+    like "now+3h". When there is a datetime provided without a timezone offset,
+    "Europe/Helsinki" will be assumed as the time zone.
     """
     openAt: String
 
@@ -240,8 +219,8 @@ type Query {
     orderByDistance: OrderByDistance
 
     """
-    Order results by venue name in language given as the first value in "languages" argument.
-    Mutually exclusive with other orderBy* parameters.
+    Order results by venue name in language given as the first value in "languages"
+    argument. Mutually exclusive with other orderBy* parameters.
     """
     orderByName: OrderByName
 
@@ -269,7 +248,7 @@ type Query {
     """
     Optional search index.
     """
-    index: String
+    index: UnifiedSearchIndex
 
     """
     Optional result size.
@@ -278,7 +257,8 @@ type Query {
   ): SearchSuggestionConnection
   administrativeDivisions(
     """
-    Return only Helsinki administrative divisions that make a sensible set to be used as an option list in an UI for example.
+    Return only Helsinki administrative divisions that make a sensible set to be
+    used as an option list in an UI for example.
     """
     helsinkiCommonOnly: Boolean
   ): [AdministrativeDivision]
@@ -464,7 +444,11 @@ type UnifiedSearchVenue {
   contactDetails: ContactInfo
   reservationPolicy: VenueReservationPolicy
   accessibility: Accessibility
-  orderedByAccessibilityShortcoming(
+
+  """
+  Accessibility shortcoming for a specific accessibility profile.
+  """
+  accessibilityShortcomingFor(
     profile: AccessibilityProfile
   ): AccessibilityShortcoming
   arrivalInstructions: String

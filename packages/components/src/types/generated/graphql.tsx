@@ -8198,35 +8198,30 @@ export type QueryTranslationsArgs = {
 
 /** The root entry point into the Graph */
 export type QueryUnifiedSearchArgs = {
-  administrativeDivisionId?: InputMaybe<Scalars['ID']['input']>;
   administrativeDivisionIds?: InputMaybe<
     Array<InputMaybe<Scalars['ID']['input']>>
   >;
   after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  index?: InputMaybe<Scalars['String']['input']>;
+  index?: InputMaybe<UnifiedSearchIndex>;
   languages?: Array<UnifiedSearchLanguage>;
-  last?: InputMaybe<Scalars['Int']['input']>;
   mustHaveReservableResource?: InputMaybe<Scalars['Boolean']['input']>;
   ontology?: InputMaybe<Scalars['String']['input']>;
-  ontologyTreeId?: InputMaybe<Scalars['ID']['input']>;
-  ontologyTreeIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  ontologyTreeIdsOrSet2?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  ontologyWordIds?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
+  ontologyTreeIdOrSets?: InputMaybe<Array<Array<Scalars['ID']['input']>>>;
+  ontologyWordIdOrSets?: InputMaybe<Array<Array<Scalars['ID']['input']>>>;
   openAt?: InputMaybe<Scalars['String']['input']>;
   orderByAccessibilityProfile?: InputMaybe<AccessibilityProfile>;
   orderByDistance?: InputMaybe<OrderByDistance>;
   orderByName?: InputMaybe<OrderByName>;
   providerTypes?: InputMaybe<Array<InputMaybe<ProviderType>>>;
-  text?: InputMaybe<Scalars['String']['input']>;
   serviceOwnerTypes?: InputMaybe<Array<InputMaybe<ServiceOwnerType>>>;
   targetGroups?: InputMaybe<Array<InputMaybe<TargetGroup>>>;
+  text?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** The root entry point into the Graph */
 export type QueryUnifiedSearchCompletionSuggestionsArgs = {
-  index?: InputMaybe<Scalars['String']['input']>;
+  index?: InputMaybe<UnifiedSearchIndex>;
   languages?: Array<UnifiedSearchLanguage>;
   prefix?: InputMaybe<Scalars['String']['input']>;
   size?: InputMaybe<Scalars['Int']['input']>;
@@ -11094,6 +11089,15 @@ export type TranslationToRevisionConnectionWhereArgs = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export enum UnifiedSearchIndex {
+  AdministrativeDivision = 'administrative_division',
+  Event = 'event',
+  HelsinkiCommonAdministrativeDivision = 'helsinki_common_administrative_division',
+  Location = 'location',
+  OntologyTree = 'ontology_tree',
+  OntologyWord = 'ontology_word',
+}
+
 export enum UnifiedSearchLanguage {
   English = 'ENGLISH',
   Finnish = 'FINNISH',
@@ -11123,6 +11127,8 @@ export enum UnifiedSearchResultCategory {
 export type UnifiedSearchVenue = {
   __typename?: 'UnifiedSearchVenue';
   accessibility?: Maybe<Accessibility>;
+  /** Accessibility shortcoming for a specific accessibility profile. */
+  accessibilityShortcomingFor?: Maybe<AccessibilityShortcoming>;
   additionalInfo?: Maybe<Scalars['String']['output']>;
   arrivalInstructions?: Maybe<Scalars['String']['output']>;
   contactDetails?: Maybe<ContactInfo>;
@@ -11136,7 +11142,6 @@ export type UnifiedSearchVenue = {
   name?: Maybe<LanguageString>;
   ontologyWords?: Maybe<Array<Maybe<OntologyWord>>>;
   openingHours?: Maybe<OpeningHours>;
-  accessibilityShortcomingFor?: Maybe<AccessibilityShortcoming>;
   partOf?: Maybe<UnifiedSearchVenue>;
   reservationPolicy?: Maybe<VenueReservationPolicy>;
   resources: Array<Resource>;
@@ -11149,7 +11154,7 @@ export type UnifiedSearchVenue = {
  * respa unit or resource, service map unit, beta.kultus venue, linked
  * events place, Kukkuu venue
  */
-export type UnifiedSearchVenueOrderedByAccessibilityShortcomingArgs = {
+export type UnifiedSearchVenueAccessibilityShortcomingForArgs = {
   profile?: InputMaybe<AccessibilityProfile>;
 };
 
@@ -13723,14 +13728,15 @@ export type SearchListQueryVariables = Exact<{
   administrativeDivisionIds?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
   >;
-  ontologyTreeIds?: InputMaybe<
-    Array<Scalars['ID']['input']> | Scalars['ID']['input']
+  ontologyTreeIdOrSets?: InputMaybe<
+    | Array<Array<Scalars['ID']['input']> | Scalars['ID']['input']>
+    | Array<Scalars['ID']['input']>
+    | Scalars['ID']['input']
   >;
-  ontologyTreeIdsOrSet2?: InputMaybe<
-    Array<Scalars['ID']['input']> | Scalars['ID']['input']
-  >;
-  ontologyWordIds?: InputMaybe<
-    Array<Scalars['ID']['input']> | Scalars['ID']['input']
+  ontologyWordIdOrSets?: InputMaybe<
+    | Array<Array<Scalars['ID']['input']> | Scalars['ID']['input']>
+    | Array<Scalars['ID']['input']>
+    | Scalars['ID']['input']
   >;
   providerTypes?: InputMaybe<
     Array<InputMaybe<ProviderType>> | InputMaybe<ProviderType>
@@ -13880,11 +13886,15 @@ export type SearchMapQueryVariables = Exact<{
   administrativeDivisionIds?: InputMaybe<
     Array<Scalars['ID']['input']> | Scalars['ID']['input']
   >;
-  ontologyTreeIds?: InputMaybe<
-    Array<Scalars['ID']['input']> | Scalars['ID']['input']
+  ontologyTreeIdOrSets?: InputMaybe<
+    | Array<Array<Scalars['ID']['input']> | Scalars['ID']['input']>
+    | Array<Scalars['ID']['input']>
+    | Scalars['ID']['input']
   >;
-  ontologyTreeIdsOrSet2?: InputMaybe<
-    Array<Scalars['ID']['input']> | Scalars['ID']['input']
+  ontologyWordIdOrSets?: InputMaybe<
+    | Array<Array<Scalars['ID']['input']> | Scalars['ID']['input']>
+    | Array<Scalars['ID']['input']>
+    | Scalars['ID']['input']
   >;
   providerTypes?: InputMaybe<
     Array<InputMaybe<ProviderType>> | InputMaybe<ProviderType>
@@ -15271,7 +15281,7 @@ export const UnifiedSearchCompletionSuggestionsDocument = gql`
   ) {
     unifiedSearchCompletionSuggestions(
       prefix: $prefix
-      index: "location"
+      index: location
       languages: [$language]
     ) {
       suggestions {
@@ -15339,9 +15349,8 @@ export const SearchListDocument = gql`
     $after: String
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
-    $ontologyTreeIds: [ID!]
-    $ontologyTreeIdsOrSet2: [ID!]
-    $ontologyWordIds: [ID!]
+    $ontologyTreeIdOrSets: [[ID!]!]
+    $ontologyWordIdOrSets: [[ID!]!]
     $providerTypes: [ProviderType]
     $serviceOwnerTypes: [ServiceOwnerType]
     $targetGroups: [TargetGroup]
@@ -15354,14 +15363,13 @@ export const SearchListDocument = gql`
   ) {
     unifiedSearch(
       text: $text
-      index: "location"
+      index: location
       first: $first
       after: $after
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
-      ontologyTreeIds: $ontologyTreeIds
-      ontologyTreeIdsOrSet2: $ontologyTreeIdsOrSet2
-      ontologyWordIds: $ontologyWordIds
+      ontologyTreeIdOrSets: $ontologyTreeIdOrSets
+      ontologyWordIdOrSets: $ontologyWordIdOrSets
       providerTypes: $providerTypes
       serviceOwnerTypes: $serviceOwnerTypes
       targetGroups: $targetGroups
@@ -15479,9 +15487,8 @@ export const SearchListDocument = gql`
  *      after: // value for 'after'
  *      language: // value for 'language'
  *      administrativeDivisionIds: // value for 'administrativeDivisionIds'
- *      ontologyTreeIds: // value for 'ontologyTreeIds'
- *      ontologyTreeIdsOrSet2: // value for 'ontologyTreeIdsOrSet2'
- *      ontologyWordIds: // value for 'ontologyWordIds'
+ *      ontologyTreeIdOrSets: // value for 'ontologyTreeIdOrSets'
+ *      ontologyWordIdOrSets: // value for 'ontologyWordIdOrSets'
  *      providerTypes: // value for 'providerTypes'
  *      serviceOwnerTypes: // value for 'serviceOwnerTypes'
  *      targetGroups: // value for 'targetGroups'
@@ -15533,8 +15540,8 @@ export const SearchMapDocument = gql`
     $after: String
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
-    $ontologyTreeIds: [ID!]
-    $ontologyTreeIdsOrSet2: [ID!]
+    $ontologyTreeIdOrSets: [[ID!]!]
+    $ontologyWordIdOrSets: [[ID!]!]
     $providerTypes: [ProviderType]
     $serviceOwnerTypes: [ServiceOwnerType]
     $targetGroups: [TargetGroup]
@@ -15544,13 +15551,13 @@ export const SearchMapDocument = gql`
   ) {
     unifiedSearch(
       text: $text
-      index: "location"
+      index: location
       first: $first
       after: $after
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
-      ontologyTreeIds: $ontologyTreeIds
-      ontologyTreeIdsOrSet2: $ontologyTreeIdsOrSet2
+      ontologyTreeIdOrSets: $ontologyTreeIdOrSets
+      ontologyWordIdOrSets: $ontologyWordIdOrSets
       providerTypes: $providerTypes
       serviceOwnerTypes: $serviceOwnerTypes
       targetGroups: $targetGroups
@@ -15601,8 +15608,8 @@ export const SearchMapDocument = gql`
  *      after: // value for 'after'
  *      language: // value for 'language'
  *      administrativeDivisionIds: // value for 'administrativeDivisionIds'
- *      ontologyTreeIds: // value for 'ontologyTreeIds'
- *      ontologyTreeIdsOrSet2: // value for 'ontologyTreeIdsOrSet2'
+ *      ontologyTreeIdOrSets: // value for 'ontologyTreeIdOrSets'
+ *      ontologyWordIdOrSets: // value for 'ontologyWordIdOrSets'
  *      providerTypes: // value for 'providerTypes'
  *      serviceOwnerTypes: // value for 'serviceOwnerTypes'
  *      targetGroups: // value for 'targetGroups'

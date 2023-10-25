@@ -7,7 +7,7 @@ export const SUGGESTION_QUERY = gql`
   ) {
     unifiedSearchCompletionSuggestions(
       prefix: $prefix
-      index: "location"
+      index: location
       languages: [$language]
     ) {
       suggestions {

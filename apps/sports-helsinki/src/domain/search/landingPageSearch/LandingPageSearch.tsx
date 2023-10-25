@@ -1,13 +1,13 @@
 import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import {
   getCurrentSeason,
-  useUnifiedSearch,
   useLocale,
   useCommonTranslation,
 } from '@events-helsinki/components';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { ROUTES } from '../../../constants';
-import routerHelper from '../../../domain/app/routerHelper';
+import routerHelper from '../../app/routerHelper';
 import { CATEGORY_CATALOG } from '../eventSearch/constants';
 import { getSportsCategoryOptions } from '../eventSearch/utils';
 import styles from './landingPageSearch.module.scss';
@@ -17,24 +17,24 @@ import SearchShortcuts from './SearchShortcuts';
 const Search: React.FC = () => {
   const { t } = useCommonTranslation();
   const [autosuggestInput, setAutosuggestInput] = React.useState('');
-  const { setFilters } = useUnifiedSearch();
+  const router = useRouter();
   const locale = useLocale();
-  const handleSubmit = () => {
-    setFilters(
-      {
+  const handleSubmit = (): void => {
+    router.push({
+      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
+      query: {
         text: [autosuggestInput],
       },
-      routerHelper.getI18nPath(ROUTES.SEARCH, locale)
-    );
+    });
   };
 
-  const handleMenuOptionClick = (option: AutosuggestMenuOption) => {
-    setFilters(
-      {
+  const handleMenuOptionClick = (option: AutosuggestMenuOption): void => {
+    router.push({
+      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
+      query: {
         text: [option.text],
       },
-      routerHelper.getI18nPath(ROUTES.SEARCH, locale)
-    );
+    });
   };
 
   const categories = getSportsCategoryOptions(

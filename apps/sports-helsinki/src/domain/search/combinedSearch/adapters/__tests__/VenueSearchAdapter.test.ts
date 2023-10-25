@@ -26,17 +26,19 @@ describe('VenueSearchAdapter', () => {
         language: 'FINNISH',
         includeHaukiFields: false,
         text: input.text,
-        ontologyWordIds: input.keywords,
+        ontologyWordIdOrSets: input.keywords.length > 0 ? [input.keywords] : [],
         administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
         after: '',
         first: 10,
-        ontologyTreeIds: ['551'],
-        ontologyTreeIdsOrSet2: [
-          ...new Set(
-            [...SENIORS_ONTOLOGY_TREE_IDS, ...YOUTH_ONTOLOGY_TREE_IDS].map(
-              String
-            )
-          ),
+        ontologyTreeIdOrSets: [
+          ['551'],
+          [
+            ...new Set(
+              [...SENIORS_ONTOLOGY_TREE_IDS, ...YOUTH_ONTOLOGY_TREE_IDS].map(
+                String
+              )
+            ),
+          ],
         ],
         openAt: null,
         orderByName: {
@@ -44,21 +46,20 @@ describe('VenueSearchAdapter', () => {
         },
       };
       expect(adapter.getQueryVariables()).toStrictEqual(expectedQueryVariables);
-      // Make sure all source ontology tree IDs are found as strings in ontologyTreeIdsOrSet2
+      // Make sure all source ontology tree IDs are found as strings in the second list
+      // in ontologyTreeIdOrSets
+      const ontologyTreeIdOrSet2 =
+        expectedQueryVariables.ontologyTreeIdOrSets[1];
       SENIORS_ONTOLOGY_TREE_IDS.forEach((id) =>
-        expect(expectedQueryVariables.ontologyTreeIdsOrSet2).toContain(
-          id.toString()
-        )
+        expect(ontologyTreeIdOrSet2).toContain(id.toString())
       );
       YOUTH_ONTOLOGY_TREE_IDS.forEach((id) =>
-        expect(expectedQueryVariables.ontologyTreeIdsOrSet2).toContain(
-          id.toString()
-        )
+        expect(ontologyTreeIdOrSet2).toContain(id.toString())
       );
-      // Make sure ontologyTreeIdsOrSet2 contains only unique values
-      expect(
-        [...new Set(expectedQueryVariables.ontologyTreeIdsOrSet2)].sort()
-      ).toStrictEqual(expectedQueryVariables.ontologyTreeIdsOrSet2.sort());
+      // Make sure ontologyTreeIdOrSet2 contains only unique values
+      expect([...new Set(ontologyTreeIdOrSet2)].sort()).toStrictEqual(
+        ontologyTreeIdOrSet2.sort()
+      );
     });
   });
 });

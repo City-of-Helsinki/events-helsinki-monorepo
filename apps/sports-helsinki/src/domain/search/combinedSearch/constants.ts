@@ -32,9 +32,10 @@ export const initialVenueSearchAdapterValues = {
   includeHaukiFields: false,
   language: UnifiedSearchLanguage.Finnish,
   text: '*',
-  ontologyTreeIds: [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()] as string[],
-  ontologyTreeIdsOrSet2: [] as string[],
-  ontologyWordIds: [] as string[],
+  ontologyTreeIdOrSets: [
+    [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()],
+  ] as string[][],
+  ontologyWordIdOrSets: [] as string[][],
   administrativeDivisionIds: [HELSINKI_OCD_DIVISION_ID] as string[],
   providerTypes: undefined,
   serviceOwnerTypes: undefined,

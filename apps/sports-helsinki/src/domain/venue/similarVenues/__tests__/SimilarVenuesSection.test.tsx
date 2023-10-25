@@ -33,9 +33,12 @@ const expectedSimilarVenuesWithIds = {
 };
 
 const similarVenuesQueryVariables = {
-  ontologyWordIds: venue.ontologyWords.map((o) => o?.id?.toString() ?? ''),
-  ontologyTreeIds: venue.ontologyTree.map((t) => t?.id?.toString() ?? ''),
-  ontologyTreeIdsOrSet2: [],
+  ontologyWordIdOrSets: [
+    venue.ontologyWords.map((o) => o?.id?.toString() ?? ''),
+  ],
+  ontologyTreeIdOrSets: [
+    venue.ontologyTree.map((t) => t?.id?.toString() ?? ''),
+  ],
   first: 6,
   orderByName: undefined,
 };

@@ -16,6 +16,7 @@ import {
   isTargetGroup,
 } from '@events-helsinki/components/types';
 import { isAccessibilityProfile } from '@events-helsinki/components/utils/accessibilityProfile/typeguards';
+import { SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID } from '../../../app/appConstants';
 import { appToUnifiedSearchLanguageMap } from '../../eventSearch/types';
 import { initialVenueSearchAdapterValues } from '../constants';
 import type {
@@ -32,9 +33,8 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   includeHaukiFields: VenueSearchParams['includeHaukiFields'];
   language: VenueSearchParams['language'];
   text: VenueSearchParams['text'];
-  ontologyTreeIds: VenueSearchParams['ontologyWordIds'];
-  ontologyTreeIdsOrSet2: VenueSearchParams['ontologyTreeIdsOrSet2'];
-  ontologyWordIds: VenueSearchParams['ontologyWordIds'];
+  ontologyTreeIdOrSets: VenueSearchParams['ontologyTreeIdOrSets'];
+  ontologyWordIdOrSets: VenueSearchParams['ontologyWordIdOrSets'];
   providerTypes: VenueSearchParams['providerTypes'];
   serviceOwnerTypes: VenueSearchParams['serviceOwnerTypes'];
   openAt?: VenueSearchParams['openAt'];
@@ -62,8 +62,9 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
       locale
     ] as UnifiedSearchLanguage;
     this.text = input.text || initialVenueSearchAdapterValues.text;
-    this.ontologyTreeIds = this.getOntologyTreeIds(input);
-    this.ontologyTreeIdsOrSet2 = this.getOntologyTreeIdsOrSet2(input);
+    this.ontologyTreeIdOrSets =
+      this.getOntologyTreeIdOrSets(input) ||
+      initialVenueSearchAdapterValues.ontologyTreeIdOrSets;
     this.providerTypes = input.helsinkiOnly
       ? [ProviderType.SelfProduced]
       : initialVenueSearchAdapterValues.providerTypes;
@@ -87,12 +88,12 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     }
   }
 
-  private getOntologyTreeIds({
-    sportsCategories,
-  }: CombinedSearchAdapterInput): VenueSearchParams['ontologyTreeIds'] {
+  private getSportsCategoriesOntologyTreeIds(
+    sportsCategories: CombinedSearchAdapterInput['sportsCategories']
+  ): string[] {
     // If there are no selected sport categories, use the default one for sports
     if (!sportsCategories?.length) {
-      return initialVenueSearchAdapterValues.ontologyTreeIds;
+      return [SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID.toString()];
     }
     const sportsCategoriesOntologyTreeIds = sportsCategories
       .filter(isSportsCategory)
@@ -105,12 +106,12 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     return [...new Set(sportsCategoriesOntologyTreeIds)];
   }
 
-  private getOntologyTreeIdsOrSet2({
-    targetGroups,
-  }: CombinedSearchAdapterInput): VenueSearchParams['ontologyTreeIdsOrSet2'] {
+  private getTargetGroupsOntologyTreeIds(
+    targetGroups: CombinedSearchAdapterInput['targetGroups']
+  ): string[] {
     // If there are no selected target groups, use the default one
     if (!targetGroups?.length) {
-      return initialVenueSearchAdapterValues.ontologyTreeIdsOrSet2;
+      return []; // No default target groups
     }
     const targetGroupsOntologyTreeIds = targetGroups
       .filter(isTargetGroup)
@@ -119,6 +120,16 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
 
     // Return a unique list of target groups' ontology tree IDs
     return [...new Set(targetGroupsOntologyTreeIds)];
+  }
+
+  private getOntologyTreeIdOrSets({
+    sportsCategories,
+    targetGroups,
+  }: CombinedSearchAdapterInput): VenueSearchParams['ontologyTreeIdOrSets'] {
+    return [
+      this.getSportsCategoriesOntologyTreeIds(sportsCategories),
+      this.getTargetGroupsOntologyTreeIds(targetGroups),
+    ].filter((list) => list.length > 0);
   }
 
   public getQueryVariables(): VenueSearchParams {

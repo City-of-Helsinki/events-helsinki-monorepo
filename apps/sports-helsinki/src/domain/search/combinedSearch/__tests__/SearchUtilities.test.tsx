@@ -46,9 +46,8 @@ const expectedSimilarVenuesSearchList = fakeVenuesSearchList(
 const mocks = [
   createVenueListRequestAndResultMocks({
     variables: {
-      ontologyTreeIds: ['551'],
-      ontologyTreeIdsOrSet2: [],
-      ontologyWordIds: [],
+      ontologyTreeIdOrSets: [['551']],
+      ontologyWordIdOrSets: [],
       administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
       first: 10,
     },

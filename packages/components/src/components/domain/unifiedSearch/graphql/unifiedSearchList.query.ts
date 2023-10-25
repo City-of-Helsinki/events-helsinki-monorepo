@@ -7,9 +7,8 @@ export const SEARCH_LIST_QUERY = gql`
     $after: String
     $language: UnifiedSearchLanguage!
     $administrativeDivisionIds: [ID!]
-    $ontologyTreeIds: [ID!]
-    $ontologyTreeIdsOrSet2: [ID!]
-    $ontologyWordIds: [ID!]
+    $ontologyTreeIdOrSets: [[ID!]!]
+    $ontologyWordIdOrSets: [[ID!]!]
     $providerTypes: [ProviderType]
     $serviceOwnerTypes: [ServiceOwnerType]
     $targetGroups: [TargetGroup]
@@ -22,14 +21,13 @@ export const SEARCH_LIST_QUERY = gql`
   ) {
     unifiedSearch(
       text: $text
-      index: "location"
+      index: location
       first: $first
       after: $after
       languages: [$language]
       administrativeDivisionIds: $administrativeDivisionIds
-      ontologyTreeIds: $ontologyTreeIds
-      ontologyTreeIdsOrSet2: $ontologyTreeIdsOrSet2
-      ontologyWordIds: $ontologyWordIds
+      ontologyTreeIdOrSets: $ontologyTreeIdOrSets
+      ontologyWordIdOrSets: $ontologyWordIdOrSets
       providerTypes: $providerTypes
       serviceOwnerTypes: $serviceOwnerTypes
       targetGroups: $targetGroups

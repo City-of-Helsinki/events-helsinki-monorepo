@@ -16,19 +16,18 @@ export const useSimilarVenuesQuery = ({
   limit?: number;
 }) => {
   const locale = useLocale();
-  const ontologyWordIds = venue.ontologyWords.reduce(
-    (ontologies: string[], ontology) => {
+  const ontologyWordIdOrSets = [
+    venue.ontologyWords.reduce((ontologies: string[], ontology) => {
       if (ontology?.id) {
         ontologies.push(ontology.id.toString());
       }
       return ontologies;
-    },
-    []
-  );
+    }, []),
+  ];
   // Search for venue ids from UnifiedSearch with the ontologies.
   const { data: venuesUnifiedSearchData, loading: unifiedSearchLoading } =
     useUnifiedSearchListQuery({
-      ontologyWordIds,
+      ontologyWordIdOrSets,
       first: limit,
       orderByName: undefined,
       includeHaukiFields: AppConfig.isHaukiEnabled,

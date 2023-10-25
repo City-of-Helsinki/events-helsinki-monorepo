@@ -1,5 +1,4 @@
-/* eslint-disable */
-import { SPORTS_CATEGORIES, SortOrder, TARGET_GROUPS, TargetGroup as UnifiedSearchTargetGroup } from '../../../types';
+import { SPORTS_CATEGORIES, TARGET_GROUPS } from '../../../types';
 
 export const OrderDir = {
   asc: 'asc',
@@ -16,11 +15,6 @@ export const UnifiedSearchOrderBy = {
 
 export type UnifiedSearchOrderByType =
   (typeof UnifiedSearchOrderBy)[keyof typeof UnifiedSearchOrderBy];
-
-export const orderDirToUnifiedSearchDistanceOrder = {
-  asc: SortOrder.Ascending,
-  desc: SortOrder.Descending,
-} as const;
 
 // Ontology tree IDs for different sports categories, taken from
 // https://www.hel.fi/palvelukarttaws/rest/v4/ontologytree/
@@ -123,66 +117,66 @@ export const ADAPTED_GROUPS_ONTOLOGY_TREE_IDS = [
   689, // Uimaranta
   690, // Uima-altaat, hallit ja kylpylät
   692, // Uima-allas
-  693,  // Uimahalli
-  262,  // Liikuntatilat
-  2261,  // Liikuntapaikat
-  153,  // Liikuntatilat
-  509,  // Liikuntatilat
-  577,  // Liikunta- ja ulkoilureitit
-  608,  // Kuntoilukeskukset ja liikuntasalit
-  612,  // Liikuntasali
-  614,  // Liikuntahallit
-  616,  // Liikuntahalli
-  633,  // Ulkokentät ja liikuntapuistot
-  646,  // Lähiliikunta ja liikuntapuistot
-  647,  // Liikuntapuisto
-  2358,  // Liikuntaneuvonta
-  606,  // Keilahallit
-  607,  // Keilahalli
-  391,  // Futsal
-  470,  // Sähly
-  682,  // Soutustadion
-  572,  // Kiipeilypaikat
-  573,  // Kiipeilykallio
-  359,  // Tanssitilat
-  473,  // Tanssi
-  630,  // Tanssitila
-  548,  // Ulkoilusaaret
-  574,  // Ulkokiipeilypaikka
-  653,  // Ulkokuntoiluvälineet
-  704,  // Ulkoilumaja  /  hiihtomaja
-  714,  // Ulkoilualue
-  657,  // Koripallokenttä
-  396,  // Jalkapallo
-  615,  // Jalkapallohalli
-  656,  // Jalkapallostadion
-  660,  // Pesäpallostadion
-  602,  // Jäähallit
-  639,  // Jääurheilualueet ja luonnonjäät
-  669,  // Jääspeedway- rata
-  654,  // Pallokentät
-  659,  // Pallokenttä
-  619,  // Salibandyhalli
-  415,  // Kuntosali
-  611,  // Kuntosali
-  642,  // Luistelukenttä
-  643,  // Luistelureitti
-  648,  // Lähiliikuntapaikka
-  569,  // Hiihtotunneli
-  595,  // Hiihtomaa
-  598,  // Hiihtosuunnistusalue
-  601,  // Sisäliikuntatilat
-  624,  // Yksittäiset lajikohtaiset sisäliikuntapaikat
-  628,  // Sisäampumarata
-  629,  // Sisäkiipeilyseinä
-  681,  // Soudun ja melonnan sisäharjoittelutila
-  623,  // Tennishalli
-  662,  // Tenniskenttäalue
-  622,  // Sulkapallohalli
-  454,  // Pöytäfutis
-  455,  // Pöytäjääkiekko
-  627,  // Pöytätennistila
-  2356,  // Pöytätennisalue
+  693, // Uimahalli
+  262, // Liikuntatilat
+  2261, // Liikuntapaikat
+  153, // Liikuntatilat
+  509, // Liikuntatilat
+  577, // Liikunta- ja ulkoilureitit
+  608, // Kuntoilukeskukset ja liikuntasalit
+  612, // Liikuntasali
+  614, // Liikuntahallit
+  616, // Liikuntahalli
+  633, // Ulkokentät ja liikuntapuistot
+  646, // Lähiliikunta ja liikuntapuistot
+  647, // Liikuntapuisto
+  2358, // Liikuntaneuvonta
+  606, // Keilahallit
+  607, // Keilahalli
+  391, // Futsal
+  470, // Sähly
+  682, // Soutustadion
+  572, // Kiipeilypaikat
+  573, // Kiipeilykallio
+  359, // Tanssitilat
+  473, // Tanssi
+  630, // Tanssitila
+  548, // Ulkoilusaaret
+  574, // Ulkokiipeilypaikka
+  653, // Ulkokuntoiluvälineet
+  704, // Ulkoilumaja  /  hiihtomaja
+  714, // Ulkoilualue
+  657, // Koripallokenttä
+  396, // Jalkapallo
+  615, // Jalkapallohalli
+  656, // Jalkapallostadion
+  660, // Pesäpallostadion
+  602, // Jäähallit
+  639, // Jääurheilualueet ja luonnonjäät
+  669, // Jääspeedway- rata
+  654, // Pallokentät
+  659, // Pallokenttä
+  619, // Salibandyhalli
+  415, // Kuntosali
+  611, // Kuntosali
+  642, // Luistelukenttä
+  643, // Luistelureitti
+  648, // Lähiliikuntapaikka
+  569, // Hiihtotunneli
+  595, // Hiihtomaa
+  598, // Hiihtosuunnistusalue
+  601, // Sisäliikuntatilat
+  624, // Yksittäiset lajikohtaiset sisäliikuntapaikat
+  628, // Sisäampumarata
+  629, // Sisäkiipeilyseinä
+  681, // Soudun ja melonnan sisäharjoittelutila
+  623, // Tennishalli
+  662, // Tenniskenttäalue
+  622, // Sulkapallohalli
+  454, // Pöytäfutis
+  455, // Pöytäjääkiekko
+  627, // Pöytätennistila
+  2356, // Pöytätennisalue
 ];
 
 export const ADULTS_ONTOLOGY_TREE_IDS = [
@@ -471,11 +465,15 @@ export const YOUTH_ONTOLOGY_TREE_IDS = [
   2356, // Pöytätennisalue
 ];
 
-export const TARGET_GROUPS_TO_ONTOLOGY_TREE_IDS: Record<TARGET_GROUPS, number[]> = {
+export const TARGET_GROUPS_TO_ONTOLOGY_TREE_IDS: Record<
+  TARGET_GROUPS,
+  number[]
+> = {
   [TARGET_GROUPS.ADAPTED_GROUPS]: ADAPTED_GROUPS_ONTOLOGY_TREE_IDS,
   [TARGET_GROUPS.ADULTS]: ADULTS_ONTOLOGY_TREE_IDS,
-  [TARGET_GROUPS.CHILDREN_AND_FAMILIES]: CHILDREN_AND_FAMILIES_ONTOLOGY_TREE_IDS,
+  [TARGET_GROUPS.CHILDREN_AND_FAMILIES]:
+    CHILDREN_AND_FAMILIES_ONTOLOGY_TREE_IDS,
   [TARGET_GROUPS.PARTNERS]: PARTNERS_ONTOLOGY_TREE_IDS,
   [TARGET_GROUPS.SENIORS]: SENIORS_ONTOLOGY_TREE_IDS,
   [TARGET_GROUPS.YOUTH]: YOUTH_ONTOLOGY_TREE_IDS,
-}
+};

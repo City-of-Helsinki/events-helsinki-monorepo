@@ -117,7 +117,7 @@ export const SEARCH_LIST_QUERY = gql`
               type
             }
             targetGroups
-            orderedByAccessibilityShortcoming(
+            accessibilityShortcomingFor(
               profile: $showAccessibilityShortcomingsFor
             ) {
               profile

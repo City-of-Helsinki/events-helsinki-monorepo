@@ -11136,7 +11136,7 @@ export type UnifiedSearchVenue = {
   name?: Maybe<LanguageString>;
   ontologyWords?: Maybe<Array<Maybe<OntologyWord>>>;
   openingHours?: Maybe<OpeningHours>;
-  orderedByAccessibilityShortcoming?: Maybe<AccessibilityShortcoming>;
+  accessibilityShortcomingFor?: Maybe<AccessibilityShortcoming>;
   partOf?: Maybe<UnifiedSearchVenue>;
   reservationPolicy?: Maybe<VenueReservationPolicy>;
   resources: Array<Resource>;
@@ -13861,7 +13861,7 @@ export type SearchListQuery = {
               en?: string | null;
             } | null;
           } | null;
-          orderedByAccessibilityShortcoming?: {
+          accessibilityShortcomingFor?: {
             __typename?: 'AccessibilityShortcoming';
             profile: AccessibilityProfile;
             count?: number | null;
@@ -15449,7 +15449,7 @@ export const SearchListDocument = gql`
               type
             }
             targetGroups
-            orderedByAccessibilityShortcoming(
+            accessibilityShortcomingFor(
               profile: $showAccessibilityShortcomingsFor
             ) {
               profile

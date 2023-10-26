@@ -17,7 +17,6 @@ import queryString from 'query-string';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
-import { toast } from 'react-toastify';
 
 import { ROUTES } from '../../../constants';
 import AppConfig from '../../app/AppConfig';
@@ -83,7 +82,7 @@ const SearchPage: React.FC<{
           },
         });
       } catch (e) {
-        toast.error(t('search:errorLoadMore'));
+        // toast.error(t('search:errorLoadMore'));
       }
     }
     setIsFetchingMore(false);

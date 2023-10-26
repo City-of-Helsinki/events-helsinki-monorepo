@@ -1,7 +1,7 @@
 import {
   UnifiedSearchOrderBy,
   isAccessibilityProfile,
-  useGeolocation,
+  useGeolocationContext,
 } from '@events-helsinki/components';
 import type {
   UnifiedSearchOrderByType,
@@ -14,7 +14,7 @@ import { useCallback } from 'react';
 import { useCombinedSearchContext } from '../domain/search/combinedSearch/adapters/CombinedSearchContext';
 
 const useHandleUnifiedSearchOrderChange = () => {
-  const geolocation: GeolocationContextType = useGeolocation({ skip: true });
+  const geolocation: GeolocationContextType = useGeolocationContext();
   const {
     setFormValues,
     updateRouteToSearchPage,

@@ -5,10 +5,8 @@ import {
 import 'nprogress/nprogress.css';
 
 import { useCookies } from 'hds-react';
-import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';
 import React, { useCallback, useEffect, useState } from 'react';
-import { injectStyle } from 'react-toastify/dist/inject-style';
 
 import '../styles/globals.scss';
 import '../styles/askem.scss';
@@ -19,7 +17,10 @@ import ErrorFallback from '../components/errorPages/ErrorFallback';
 import EventsCookieConsent from '../components/eventsCookieConsent/EventsCookieConsent';
 import ResetFocus from '../components/resetFocus/ResetFocus';
 import { CookieConfigurationProvider } from '../cookieConfigurationProvider';
-import { GeolocationProvider } from '../geolocation';
+import {
+  GeolocationProvider,
+  GeolocationErrorNotification,
+} from '../geolocation';
 import { NavigationProvider } from '../navigationProvider';
 import type { NavigationProviderProps } from '../navigationProvider';
 import {
@@ -45,15 +46,6 @@ export type Props = {
   AppRoutingProviderProps &
   AppThemeProviderProps &
   SSRConfig;
-
-const DynamicToastContainer = dynamic(
-  () =>
-    import('react-toastify').then((mod) => {
-      injectStyle();
-      return mod.ToastContainer;
-    }),
-  { ssr: false }
-);
 
 export const FallbackComponent = ({
   error,
@@ -155,24 +147,24 @@ function BaseApp({
           >
             <MatomoProvider value={matomoInstance}>
               <AskemProvider value={askemFeedbackInstance}>
-                <GeolocationProvider>
-                  <NavigationProvider
-                    headerMenu={headerMenu}
-                    footerMenu={footerMenu}
-                    languages={languages}
-                  >
-                    <ResetFocus />
+                <NavigationProvider
+                  headerMenu={headerMenu}
+                  footerMenu={footerMenu}
+                  languages={languages}
+                >
+                  <ResetFocus />
+                  <GeolocationProvider>
+                    <GeolocationErrorNotification />
                     {children}
-                    {withConsent && (
-                      <EventsCookieConsent
-                        onConsentGiven={handleConsentGiven}
-                        allowLanguageSwitch={false}
-                        appName={appName}
-                      />
-                    )}
-                    <DynamicToastContainer />
-                  </NavigationProvider>
-                </GeolocationProvider>
+                  </GeolocationProvider>
+                  {withConsent && (
+                    <EventsCookieConsent
+                      onConsentGiven={handleConsentGiven}
+                      allowLanguageSwitch={false}
+                      appName={appName}
+                    />
+                  )}
+                </NavigationProvider>
               </AskemProvider>
             </MatomoProvider>
           </AppRoutingProvider>

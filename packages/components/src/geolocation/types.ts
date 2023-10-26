@@ -5,5 +5,6 @@ export type GeolocationContextType = {
   loading: boolean;
   called: boolean;
   error?: GeolocationPositionError | null;
+  clearError: () => void;
   resolve: () => Promise<Coordinates | null>;
 };

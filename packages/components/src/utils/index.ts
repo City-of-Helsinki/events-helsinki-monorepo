@@ -17,7 +17,6 @@ export { default as isClient } from './isClient';
 export { default as isVenueHelsinkiCityOwned } from './isVenueHelsinkiCityOwned';
 export { default as isTestEnv } from './isTestEnv';
 export * from './queryString';
-export { default as showToast } from './showToast';
 export { default as scrollToTop } from './scrollToTop';
 export * from './translateUtils';
 export * from './typescript.utils';

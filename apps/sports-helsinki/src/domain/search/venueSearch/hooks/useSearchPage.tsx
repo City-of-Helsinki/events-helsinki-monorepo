@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
-import { toast } from 'react-toastify';
 import { SEARCH_ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
 import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
@@ -40,7 +39,7 @@ function useSearchPage(): SearchPage {
     try {
       await fetchMore({ ...pagination });
     } catch (e) {
-      toast.error(t('search:errorLoadMore'));
+      // toast.error(t('search:errorLoadMore'));
     }
     setIsFetchingMore(false);
   };

@@ -1,8 +1,9 @@
+import { Notification } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { createContext, useContext, useState, useCallback } from 'react';
 import type { ReactNode, Context } from 'react';
+import useCommonTranslation from '../hooks/useCommonTranslation';
 import type { Coordinates } from '../types';
-import { showToast } from '../utils';
 import geolocationService from './GeolocationService';
 import type { GeolocationContextType } from './types';
 
@@ -12,6 +13,7 @@ const GeolocationContext: Context<GeolocationContextType> =
     loading: false,
     called: false,
     error: null,
+    clearError: () => null,
     resolve: () => Promise.resolve(null),
   });
 
@@ -33,57 +35,65 @@ const isGeolocationPositionError = (
   );
 
 export default function GeolocationProvider({ children }: Props) {
+  const { t: commonTranslation } = useCommonTranslation();
   const { t } = useTranslation('geolocationProvider');
   const [location, setLocation] = useState<Coordinates | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [called, setCalled] = useState<boolean>(false);
   const [error, setError] = useState<GeolocationPositionError | null>(null);
 
-  const resolve = useCallback(async () => {
-    setLoading(true);
-
-    if (!('geolocation' in navigator)) {
-      setLocation(null);
-      setLoading(false);
-      setCalled(true);
-
-      return null;
-    }
-
-    let geolocation = null;
-
-    showToast({
-      title: t('a11ymessage.title'),
-      message: t('a11ymessage.description'),
-      type: 'info',
-      options: { invisible: true },
+  // i want to generate a GeolocationPositionError
+  const resolve = async () =>
+    setError({
+      code: 1,
+      message: 'test',
+      PERMISSION_DENIED: 1,
+      POSITION_UNAVAILABLE: 2,
+      TIMEOUT: 3,
     });
 
-    try {
-      geolocation = await geolocationService.getCurrentPosition();
+  // interface GeolocationPositionError {
+  //     /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/GeolocationPositionError/code) */
+  //     readonly code: number;
+  //     /** [MDN Reference](https://developer.mozilla.org/docs/Web/API/GeolocationPositionError/message) */
+  //     readonly message: string;
+  //     readonly PERMISSION_DENIED: 1;
+  //     readonly POSITION_UNAVAILABLE: 2;
+  //     readonly TIMEOUT: 3;
+  // }
 
-      setLocation(geolocation);
-    } catch (e) {
-      if (isGeolocationPositionError(e)) {
-        setLocation(null);
-        setError(e);
-        showToast({
-          title: t('error.title'),
-          message: t(
-            e.PERMISSION_DENIED
-              ? 'error.description.permissionDenied'
-              : 'error.description.generic'
-          ),
-          type: 'alert',
-        });
-      }
-    }
+  // const resolve = async () => {
+  //   setLoading(true);
+  //
+  //   if (!('geolocation' in navigator)) {
+  //     setLocation(null);
+  //     setLoading(false);
+  //     setCalled(true);
+  //
+  //     return null;
+  //   }
+  //
+  //   let geolocation = null;
+  //
+  //   try {
+  //     geolocation = await geolocationService.getCurrentPosition();
+  //
+  //     setLocation(geolocation);
+  //   } catch (e) {
+  //     if (isGeolocationPositionError(e)) {
+  //       setLocation(null);
+  //       setError(e);
+  //       console.log('Geolocation error set:', e);
+  //     }
+  //   }
+  //
+  //   setLoading(false);
+  //   setCalled(true);
+  //
+  //   return geolocation;
+  // };
 
-    setLoading(false);
-    setCalled(true);
-
-    return geolocation;
-  }, [t]);
+  const clearError = () => setError(null);
 
   return (
     <GeolocationContext.Provider
@@ -91,6 +101,7 @@ export default function GeolocationProvider({ children }: Props) {
         coordinates: location,
         loading,
         error,
+        clearError,
         called,
         resolve,
       }}

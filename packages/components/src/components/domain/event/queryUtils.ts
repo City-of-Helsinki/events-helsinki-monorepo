@@ -1,6 +1,5 @@
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { toast } from 'react-toastify';
 import {
   EVENT_SEARCH_FILTERS,
   EVENT_SORT_OPTIONS,
@@ -155,7 +154,7 @@ export const useSubEvents = (
           },
         });
       } catch (e) {
-        toast.error(t('info.errorLoadMore'));
+        // toast.error(t('info.errorLoadMore'));
       }
       setIsFetchingMore(false);
     },

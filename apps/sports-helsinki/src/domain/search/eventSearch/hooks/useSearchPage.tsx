@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
-import { toast } from 'react-toastify';
 import { useCombinedSearchContext } from 'domain/search/combinedSearch/adapters/CombinedSearchContext';
 import { SEARCH_ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
@@ -41,7 +40,7 @@ function useEventSearchPageQuery(eventType: EventTypeId) {
           },
         });
       } catch (e) {
-        toast.error(t('search:errorLoadMore'));
+        // toast.error(t('search:errorLoadMore'));
       }
     }
     setIsFetchingMore(false);

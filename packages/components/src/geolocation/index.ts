@@ -1,6 +1,4 @@
-export { default as useGeolocation } from './useGeolocation';
-export {
-  default as GeolocationProvider,
-  useGeolocationContext,
-} from './GeolocationProvider';
+export { default as GeolocationContext } from './GeolocationContext';
+export { default as GeolocationErrorNotification } from './GeolocationErrorNotification';
+export { default as GeolocationProvider } from './GeolocationProvider';
 export * from './types';

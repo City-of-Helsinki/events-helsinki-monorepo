@@ -19,7 +19,10 @@ import ErrorFallback from '../components/errorPages/ErrorFallback';
 import EventsCookieConsent from '../components/eventsCookieConsent/EventsCookieConsent';
 import ResetFocus from '../components/resetFocus/ResetFocus';
 import { CookieConfigurationProvider } from '../cookieConfigurationProvider';
-import { GeolocationProvider } from '../geolocation';
+import {
+  GeolocationProvider,
+  GeolocationErrorNotification,
+} from '../geolocation';
 import { NavigationProvider } from '../navigationProvider';
 import type { NavigationProviderProps } from '../navigationProvider';
 import {
@@ -161,6 +164,7 @@ function BaseApp({
                     footerMenu={footerMenu}
                     languages={languages}
                   >
+                    <GeolocationErrorNotification />
                     <ResetFocus />
                     {children}
                     {withConsent && (

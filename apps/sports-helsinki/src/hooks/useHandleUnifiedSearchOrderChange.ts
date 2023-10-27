@@ -14,7 +14,7 @@ import { useCallback } from 'react';
 import { useCombinedSearchContext } from '../domain/search/combinedSearch/adapters/CombinedSearchContext';
 
 const useHandleUnifiedSearchOrderChange = () => {
-  const geolocation: GeolocationContextType = useGeolocation({ skip: true });
+  const geolocation: GeolocationContextType = useGeolocation();
   const {
     setFormValues,
     updateRouteToSearchPage,

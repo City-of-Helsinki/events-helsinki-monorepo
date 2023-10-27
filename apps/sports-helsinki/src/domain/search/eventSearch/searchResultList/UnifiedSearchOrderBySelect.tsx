@@ -57,7 +57,7 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
   const {
     formValues: { venueOrderBy },
   } = useCombinedSearchContext();
-  const geolocation: GeolocationContextType = useGeolocation({ skip: true });
+  const geolocation: GeolocationContextType = useGeolocation();
   const handleUnifiedSearchOrderChange = useHandleUnifiedSearchOrderChange();
   const { orderByOptions, defaultOption } =
     useUnifiedSearchOrderBySelectOptions();

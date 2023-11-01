@@ -3,7 +3,6 @@ import type React from 'react';
 import type { APP_LANGUAGES } from '../constants';
 import type { EventFields } from './event-types';
 import type { Venue } from './generated/graphql';
-
 export type AppLanguage = (typeof APP_LANGUAGES)[number];
 
 export type AutosuggestType = 'keyword' | 'text';
@@ -123,15 +122,110 @@ export enum TARGET_GROUPS {
 export const isTargetGroup = (value: unknown): value is TARGET_GROUPS =>
   Object.values(TARGET_GROUPS).includes(value as TARGET_GROUPS);
 
+/**
+ * RNS i.e. React and Share i.e. Askem Classic data
+ * @see https://docs.reactandshare.com/
+ */
 export type RnsData = {
+  /**
+   * API Key that was created upon the registration.
+   */
   apiKey?: string;
+
+  /**
+   * Title of the page or post.
+   *
+   * Defaults to the value of supported metadata, if it exists. If neither metadata or
+   * title property exist, the title of the page is used instead.
+   */
   title?: string;
+
+  /**
+   * Canonical url of the page or post.
+   *
+   * By default the plugin uses the value of <link ref="canonical"> element. The default
+   * value can be overdriven by this property. If no link element or property is not
+   * provided, the url of the page is used instead.
+   */
   canonicalUrl?: string;
+
+  /**
+   * Name of the author of the page or post.
+   */
   author?: string;
-  date?: string;
+
+  /**
+   * ISO 8601 datetime string or Unix timestamp type in milliseconds.
+   */
+  date?: string | number;
+
+  /**
+   * Categories of the page or post
+   */
   categories?: string[];
+
+  /**
+   * Number of comments, if there is a possibility to leave comments on the page.
+   */
   commentNumber?: number;
+
+  /**
+   * Custom ID to identify the post/page instead of URL. The use of this is recommended,
+   * if the URL is likely to be changed over time.
+   */
   postId?: string;
+
+  /**
+   * Custom call-to-action URL after a reaction button click.
+   */
+  ctaUrl?: string;
+
+  /**
+   * Flag for disabling Font Awesome
+   */
+  disableFa?: boolean;
+
+  /**
+   * Flag for disabling Google Fonts
+   */
+  disableFonts?: boolean;
+
+  /**
+   * Function to be called after plugin initiation.
+   * This function can be used to access the existing plugin element, e.g. add elements
+   * to the plugin.
+   * @param {HTMLElement} element - DOM element capsulating the plugin
+   * @param {string} url - Canonical url of the parent of the plugin or url of the page
+   */
+  initCallback?: (element?: HTMLElement, url?: string) => void;
+
+  /**
+   * Function to be called after a reaction button is clicked.
+   * This function can be used e.g. to trigger 3rd party analytics or marketing
+   * automation services.
+   * @param {string} eventType - reaction or unreaction
+   * @param {string} reactionLabel - Label of the reaction button clicked
+   * @param {string} url - Canonical url of the parent of the plugin or url of the page
+   */
+  reactionCallback?: (
+    eventType?: string,
+    reactionLabel?: string,
+    url?: string
+  ) => void;
+
+  /**
+   * Function to be called after a share button is clicked.
+   * This function can be used e.g. to trigger 3rd party analytics or marketing
+   * automation services.
+   * @param {string} eventType - reaction or unreaction
+   * @param {string} reactionLabel - Label of the reaction button clicked
+   * @param {string} url - Canonical url of the parent of the plugin or url of the page
+   */
+  shareCallback?: (
+    eventType?: string,
+    reactionLabel?: string,
+    url?: string
+  ) => void;
 };
 
 export type KeywordOnClickHandlerType = (

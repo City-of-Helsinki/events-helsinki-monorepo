@@ -1,3 +1,4 @@
+import type { RnsData } from '../../types';
 import type { AskemConfigs } from './types';
 
 class Askem {
@@ -9,10 +10,25 @@ class Askem {
   }
 
   private initialize({
-    apiKey,
-    scriptUrl = 'https://cdn.reactandshare.com/plugin/rns.js',
+    // AskemBaseConfig properties
     disabled = false,
-    consentGiven,
+    scriptUrl = 'https://cdn.reactandshare.com/plugin/rns.js',
+    consentGiven = false,
+    // RnsData properties
+    apiKey,
+    title,
+    canonicalUrl,
+    author,
+    date,
+    categories,
+    commentNumber,
+    postId,
+    ctaUrl,
+    disableFa,
+    disableFonts,
+    initCallback,
+    reactionCallback,
+    shareCallback,
   }: AskemConfigs) {
     this.disabled = disabled;
     this.consentGiven = Boolean(consentGiven);
@@ -20,16 +36,26 @@ class Askem {
     if (disabled || !apiKey || typeof window === 'undefined') {
       return;
     }
+    const rnsData: RnsData = {
+      apiKey,
+      title,
+      canonicalUrl,
+      author,
+      date,
+      categories,
+      commentNumber,
+      postId,
+      ctaUrl,
+      disableFa,
+      disableFonts,
+      initCallback,
+      reactionCallback,
+      shareCallback,
+    };
+    window.rnsData = rnsData;
 
-    window.rnsData = window.rnsData || {};
-    window.rnsData.apiKey;
-    if (!window.rnsData.apiKey) {
-      window.rnsData.apiKey = apiKey;
-    }
-
-    const doc = document;
-    const scriptElement = doc.createElement('script');
-    const scripts = doc.getElementsByTagName('script')[0];
+    const scriptElement = document.createElement('script');
+    const scripts = document.getElementsByTagName('script')[0];
 
     Object.assign(scriptElement, {
       type: 'text/javascript',

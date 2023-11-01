@@ -5,6 +5,7 @@ import {
 import 'nprogress/nprogress.css';
 
 import { useCookies } from 'hds-react';
+import isEqual from 'lodash/isEqual';
 import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -14,7 +15,7 @@ import '../styles/globals.scss';
 import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
 import { createAskemInstance } from '../components/askem';
-import AskemProvider from '../components/askem/AskemProvider';
+import type { AskemConfigs, AskemInstance } from '../components/askem/types';
 import ErrorFallback from '../components/errorPages/ErrorFallback';
 import EventsCookieConsent from '../components/eventsCookieConsent/EventsCookieConsent';
 import ResetFocus from '../components/resetFocus/ResetFocus';
@@ -49,6 +50,13 @@ export type Props = {
   AppThemeProviderProps &
   SSRConfig;
 
+const AskemProvider = dynamic(
+  () => import('../components/askem').then((mod) => mod.AskemProvider),
+  {
+    ssr: false,
+  }
+);
+
 const DynamicToastContainer = dynamic(
   () =>
     import('react-toastify').then((mod) => {
@@ -76,7 +84,7 @@ function BaseApp({
   cookieDomain,
   routerHelper,
   matomoConfiguration,
-  askemFeedbackConfiguration,
+  askemFeedbackConfiguration: askemConfigurationInput,
   asPath,
   withConsent,
   defaultButtonTheme,
@@ -109,6 +117,11 @@ function BaseApp({
   }, []);
 
   const [askemConsentGiven, setAskemConsentGiven] = useState<boolean>(false);
+  const [askemInstance, setAskemInstance] = useState<AskemInstance | null>(
+    null
+  );
+  const [askemConfiguration, setAskemConfiguration] =
+    useState<AskemConfigs | null>(null);
 
   // todo: matomo is not updated.
   const handleConsentGiven = useCallback(() => {
@@ -126,14 +139,15 @@ function BaseApp({
     }
   }, [handleConsentGiven, asPath]);
 
-  const askemFeedbackInstance = React.useMemo(
-    () =>
-      createAskemInstance({
-        ...askemFeedbackConfiguration,
-        consentGiven: askemConsentGiven,
-      }),
-    [askemFeedbackConfiguration, askemConsentGiven]
-  );
+  const newAskemConfiguration: AskemConfigs = {
+    ...askemConfigurationInput,
+    consentGiven: askemConsentGiven,
+  };
+
+  if (!askemInstance || !isEqual(askemConfiguration, newAskemConfiguration)) {
+    setAskemConfiguration(newAskemConfiguration);
+    setAskemInstance(createAskemInstance(newAskemConfiguration));
+  }
 
   const matomoInstance = React.useMemo(
     () => createMatomoInstance(matomoConfiguration),
@@ -157,7 +171,7 @@ function BaseApp({
             getKeywordOnClickHandler={getKeywordOnClickHandler}
           >
             <MatomoProvider value={matomoInstance}>
-              <AskemProvider value={askemFeedbackInstance}>
+              <AskemProvider value={askemInstance}>
                 <GeolocationProvider>
                   <NavigationProvider
                     headerMenu={headerMenu}

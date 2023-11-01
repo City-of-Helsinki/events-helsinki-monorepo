@@ -1,14 +1,22 @@
 import { Footer, Link } from 'hds-react';
+import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
-import { AskemFeedbackContainer } from '../../components/askem';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
 import useFooterTranslation from '../../hooks/useFooterTranslation';
 import useLocale from '../../hooks/useLocale';
 
 import { resetFocusId } from '../resetFocus/ResetFocus';
 import styles from './footer.module.scss';
+
+const AskemFeedbackContainer = dynamic(
+  () =>
+    import('../../components/askem').then((mod) => mod.AskemFeedbackContainer),
+  {
+    ssr: false,
+  }
+);
 
 type FooterSectionProps = {
   appName: string;

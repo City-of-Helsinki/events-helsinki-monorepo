@@ -1,11 +1,13 @@
 import type { RnsData } from '../../types';
 import type Askem from './Askem';
 
-export type AskemConfigs = {
+export type AskemBaseConfig = {
   disabled?: boolean;
   scriptUrl?: string;
   consentGiven?: boolean;
-} & RnsData;
+};
+
+export type AskemConfigs = AskemBaseConfig & RnsData;
 
 export interface AskemInstance {
   disabled: boolean;

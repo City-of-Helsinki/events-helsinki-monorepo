@@ -13,6 +13,7 @@ import type { SelectCustomTheme } from 'hds-react';
 import { Button, IconGroup, IconPersonWheelchair, IconSearch } from 'hds-react';
 import React from 'react';
 import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
+import AppConfig from '../../app/AppConfig';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
 import type { SearchComponentType } from '../combinedSearch/types';
 import FilterSummary from '../eventSearch/filterSummary/FilterSummary';
@@ -102,7 +103,13 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
             />
           </div>
           <div className={styles.rowWrapper}>
-            <div className={styles.row}>
+            <div
+              className={
+                AppConfig.showTargetGroupFilter
+                  ? styles.rowWithTargetGroupFilter
+                  : styles.rowWithoutTargetGroupFilter
+              }
+            >
               <div>
                 <MultiSelectDropdown
                   checkboxName="sportsCategoryOptions"
@@ -117,20 +124,22 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                   value={selectedSportsCategories}
                 />
               </div>
-              <div>
-                <MultiSelectDropdown
-                  checkboxName="targetGroupOptions"
-                  icon={<IconGroup aria-hidden />}
-                  inputValue={targetGroupInput}
-                  name="targetGroup"
-                  onChange={setSelectedTargetGroups}
-                  options={targetGroups}
-                  setInputValue={setTargetGroupInput}
-                  showSearch={false}
-                  title={t('search.titleDropdownTargetGroup')}
-                  value={selectedTargetGroups}
-                />
-              </div>
+              {AppConfig.showTargetGroupFilter && (
+                <div>
+                  <MultiSelectDropdown
+                    checkboxName="targetGroupOptions"
+                    icon={<IconGroup aria-hidden />}
+                    inputValue={targetGroupInput}
+                    name="targetGroup"
+                    onChange={setSelectedTargetGroups}
+                    options={targetGroups}
+                    setInputValue={setTargetGroupInput}
+                    showSearch={false}
+                    title={t('search.titleDropdownTargetGroup')}
+                    value={selectedTargetGroups}
+                  />
+                </div>
+              )}
               <div>
                 <SearchSelect
                   id="accessibilityProfile"
@@ -163,7 +172,13 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                   // clearable
                 />
               </div>
-              <div className={styles.buttonWrapperWithTargetGroupFilter}>
+              <div
+                className={
+                  AppConfig.showTargetGroupFilter
+                    ? styles.buttonWrapperWithTargetGroupFilter
+                    : styles.buttonWrapperWithoutTargetGroupFilter
+                }
+              >
                 <Button
                   variant="success"
                   fullWidth={true}

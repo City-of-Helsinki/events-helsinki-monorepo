@@ -55,38 +55,48 @@ $buttonWidth: 180px;
   }
 }
 
-.buttonWrapperBase {
-  @include respond-above(m) {
-    grid-column: span 1 / 5;
-  }
-}
-
 .buttonWrapperWithTargetGroupFilter {
-  @extend .buttonWrapperBase;
-
   @include respond-between(s, m) {
     grid-column: span 3 / 3;
+  }
+
+  @include respond-above(m) {
+    grid-column: span 1 / 4;
   }
 }
 
 .buttonWrapperWithoutTargetGroupFilter {
-  @extend .buttonWrapperBase;
-
   @include respond-between(s, m) {
     grid-column: span 2 / 3;
   }
+
+  @include respond-above(m) {
+    grid-column: span 1 / 3;
+  }
 }
 
-.row {
+.rowBase {
   display: grid;
   grid-gap: var(--spacing-xs);
 
   @include respond-above(s) {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.rowWithTargetGroupFilter {
+  @extend .rowBase;
 
   @include respond-above(m) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.rowWithoutTargetGroupFilter {
+  @extend .rowBase;
+
+  @include respond-above(m) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

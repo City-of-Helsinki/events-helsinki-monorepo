@@ -1,23 +1,21 @@
-import {
-  MatomoProvider,
-  createInstance as createMatomoInstance,
-} from '@jonkoops/matomo-tracker-react';
+import type { createInstance as createMatomoInstance } from '@jonkoops/matomo-tracker-react';
+import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
 import 'nprogress/nprogress.css';
 
-import { useCookies } from 'hds-react';
-import isEqual from 'lodash/isEqual';
 import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 
 import '../styles/globals.scss';
 import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
-import { createAskemInstance } from '../components/askem';
-import type { AskemConfigs, AskemInstance } from '../components/askem/types';
+import type { createAskemInstance } from '../components/askem';
+import useAskemContext from '../components/askem/useAskemContext';
+
 import ErrorFallback from '../components/errorPages/ErrorFallback';
 import EventsCookieConsent from '../components/eventsCookieConsent/EventsCookieConsent';
+import useMatomoInstance from '../components/matomo/useMatomo';
 import ResetFocus from '../components/resetFocus/ResetFocus';
 import { CookieConfigurationProvider } from '../cookieConfigurationProvider';
 import {
@@ -33,6 +31,7 @@ import {
 import type { AppThemeProviderProps } from '../themeProvider';
 import { AppThemeProvider } from '../themeProvider';
 import type { CmsRoutedAppHelper, HeadlessCMSHelper } from '../utils';
+import useHdsStyleFix from './useHdsStyleFix';
 
 export type Props = {
   children: React.ReactNode;
@@ -97,62 +96,15 @@ function BaseApp({
   getPlainEventUrl,
   getKeywordOnClickHandler,
 }: Props) {
-  const { getAllConsents } = useCookies({ cookieDomain });
-
-  // Unset hidden visibility that was applied to hide the first server render
-  // that does not include styles from HDS. HDS applies styling by injecting
-  // style tags into the head. This requires the existence of a document object.
-  // The document object does not exist during server side renders.
+  const matomoInstance = useMatomoInstance(matomoConfiguration);
+  const { askemInstance, handleConsentGiven } = useAskemContext({
+    cookieDomain,
+    asPath,
+    askemConfigurationInput,
+  });
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
-  //       SEO performance is not impacted.
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      const body = document?.body;
-
-      if (body) {
-        body.style.visibility = 'unset';
-      }
-    }, 10);
-  }, []);
-
-  const [askemConsentGiven, setAskemConsentGiven] = useState<boolean>(false);
-  const [askemInstance, setAskemInstance] = useState<AskemInstance | null>(
-    null
-  );
-  const [askemConfiguration, setAskemConfiguration] =
-    useState<AskemConfigs | null>(null);
-
-  // todo: matomo is not updated.
-  const handleConsentGiven = useCallback(() => {
-    const consents = getAllConsents();
-    setAskemConsentGiven(
-      consents['askemBid'] &&
-        consents['askemBidTs'] &&
-        consents['askemReaction']
-    );
-  }, [getAllConsents]);
-
-  useEffect(() => {
-    if (asPath) {
-      handleConsentGiven();
-    }
-  }, [handleConsentGiven, asPath]);
-
-  const newAskemConfiguration: AskemConfigs = {
-    ...askemConfigurationInput,
-    consentGiven: askemConsentGiven,
-  };
-
-  if (!askemInstance || !isEqual(askemConfiguration, newAskemConfiguration)) {
-    setAskemConfiguration(newAskemConfiguration);
-    setAskemInstance(createAskemInstance(newAskemConfiguration));
-  }
-
-  const matomoInstance = React.useMemo(
-    () => createMatomoInstance(matomoConfiguration),
-    [matomoConfiguration]
-  );
+  //      SEO performance is not impacted.
+  useHdsStyleFix();
 
   return (
     <CookieConfigurationProvider cookieDomain={cookieDomain}>

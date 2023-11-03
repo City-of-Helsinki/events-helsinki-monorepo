@@ -173,16 +173,15 @@ class AppConfig {
   }
 
   static askemFeedbackConfiguration(locale: 'en' | 'fi' | 'sv') {
+    const askemApiKeyByLocale: Record<typeof locale, string | undefined> = {
+      fi: process.env.NEXT_PUBLIC_ASKEM_API_KEY_FI,
+      sv: process.env.NEXT_PUBLIC_ASKEM_API_KEY_SV,
+      en: process.env.NEXT_PUBLIC_ASKEM_API_KEY_EN,
+    };
     const askemEnabled = process.env.NEXT_PUBLIC_ASKEM_ENABLED;
-    let askemApiKey = process.env.NEXT_PUBLIC_ASKEM_API_KEY_FI;
-    if (locale === 'en') {
-      askemApiKey = process.env.NEXT_PUBLIC_ASKEM_API_KEY_EN;
-    } else if (locale === 'sv') {
-      askemApiKey = process.env.NEXT_PUBLIC_ASKEM_API_KEY_SV;
-    }
     return {
       disabled: !parseEnvValue(askemEnabled),
-      apiKey: askemApiKey as string,
+      apiKey: askemApiKeyByLocale[locale] ?? '',
     };
   }
 

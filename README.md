@@ -192,7 +192,8 @@ While `deps:check` will give you a detailed info about about dep versions across
 
 ### Symbolic links
 
-Monorepo uses symbolic links to share assets and locales between apps and packages, e.g.:
+Monorepo uses symbolic links to share assets, locales and GraphQL schema generation
+related code between apps and packages, e.g.:
 
 Shared assets:
 
@@ -203,6 +204,13 @@ Shared assets:
 Locales:
 
 - packages/common-i18n/src/locales/default → packages/common-i18n/src/locales/fi/
+
+GraphQL schema generation related code:
+
+- apps/events-helsinki/pascalCaseWithUnderscoreBeforeLeadingDigit.js → packages/components/src/codegen/pascalCaseWithUnderscoreBeforeLeadingDigit.js
+- apps/hobbies-helsinki/pascalCaseWithUnderscoreBeforeLeadingDigit.js → packages/components/src/codegen/pascalCaseWithUnderscoreBeforeLeadingDigit.js
+- apps/sports-helsinki/pascalCaseWithUnderscoreBeforeLeadingDigit.js → packages/components/src/codegen/pascalCaseWithUnderscoreBeforeLeadingDigit.js
+- packages/components/pascalCaseWithUnderscoreBeforeLeadingDigit.js → packages/components/src/codegen/pascalCaseWithUnderscoreBeforeLeadingDigit.js
 
 You can find all used symbolic links in the monorepo by running in the monorepo's root:
 

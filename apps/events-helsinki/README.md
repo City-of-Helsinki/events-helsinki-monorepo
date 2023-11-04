@@ -86,7 +86,7 @@ Transpiles the TypeScript code and reports the errors.
 
 ### `yarn generate:graphql`
 
-Uses the codegen tool to generate Graphql Schema file out from the graphql files inside the app. Note that the [graphql.tsx](../../packages/components/src/types/generated/graphql.tsx) inside the packages/components -directory contains the common types and hooks, so it would most likely make sense to copy the generated result and override the graphql file in the common components-package.
+Uses the codegen tool to generate Graphql Schema file out from the graphql files inside the app. Note that the [graphql.tsx](../../packages/components/src/types/generated/graphql.tsx) inside the packages/components -directory contains the common types and hooks, so you should always copy the generated result and override the graphql file in the common components-package.
 
 ## Headless CMS React Component (HCRC) -library implementation
 

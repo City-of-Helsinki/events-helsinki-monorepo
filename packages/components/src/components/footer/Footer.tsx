@@ -1,9 +1,10 @@
-import { Footer, Link } from 'hds-react';
+import { Footer, Link, Logo, logoFi, logoSv } from 'hds-react';
 import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
+import { useCommonTranslation } from '../../hooks';
 import useFooterTranslation from '../../hooks/useFooterTranslation';
 import useLocale from '../../hooks/useLocale';
 
@@ -33,7 +34,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   consentUrl = '/cookie-consent',
 }: FooterSectionProps) => {
   const { t } = useFooterTranslation();
-
+  const { t: commonT } = useCommonTranslation();
   const locale = useLocale();
 
   const { data: footerMenuData } = useMenuQuery({
@@ -60,27 +61,28 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
         />
       )}
       <Footer title={appName} className={styles.footer}>
-        <Footer.Utilities
-          backToTopLabel={t('footer:backToTop')}
-          onBackToTopClick={handleBackToTop}
-        ></Footer.Utilities>
         <Footer.Base
           copyrightHolder={t('footer:copyright')}
           copyrightText={t('footer:allRightsReserved')}
+          logo={
+            <Logo
+              src={locale === 'sv' ? logoSv : logoFi}
+              size="medium"
+              alt={commonT('common:cityOfHelsinki')}
+            />
+          }
+          backToTopLabel={t('footer:backToTop')}
+          onBackToTopClick={handleBackToTop}
         >
-          {footerMenu?.menuItems?.nodes?.map(
-            // NOTE: HCRC-build sometimes fails - this type should not be needed.
-            // : Menu['menuItems']['nodes'][number]
-            (navigationItem) => (
-              <Footer.Item
-                className={styles.footerLink}
-                key={navigationItem?.id}
-                as={Link}
-                href={navigationItem?.path || ''}
-                label={navigationItem?.label}
-              />
-            )
-          )}
+          {footerMenu?.menuItems?.nodes?.map((navigationItem) => (
+            <Footer.Link
+              className={styles.footerLink}
+              key={navigationItem?.id}
+              as={Link}
+              href={navigationItem?.path || ''}
+              label={navigationItem?.label ?? undefined}
+            />
+          ))}
         </Footer.Base>
       </Footer>
     </>

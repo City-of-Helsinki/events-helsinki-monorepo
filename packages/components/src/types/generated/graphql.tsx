@@ -4803,9 +4803,9 @@ export enum MediaItemSizeEnum {
   /** MediaItem with the thumbnail size */
   Thumbnail = 'THUMBNAIL',
   /** MediaItem with the 1536x1536 size */
-  '1536X1536' = '_1536X1536',
+  _1536X1536 = '_1536X1536',
   /** MediaItem with the 2048x2048 size */
-  '2048X2048' = '_2048X2048',
+  _2048X2048 = '_2048X2048',
 }
 
 /** The status of the media item object. */

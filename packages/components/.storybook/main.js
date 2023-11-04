@@ -26,6 +26,7 @@ module.exports = {
       'next-i18next': 'react-i18next'
     };
     config.resolve.fallback = {
+      crypto: require.resolve("crypto-browserify"),
       zlib: false,
       stream: false,
       fs: false

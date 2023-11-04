@@ -1,5 +1,5 @@
 import type { TagCustomTheme } from 'hds-react';
-import { RoundedTag } from 'hds-react';
+import { Tag } from 'hds-react';
 import React from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation';
@@ -26,7 +26,7 @@ const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
   } as TagCustomTheme;
 
   return (
-    <RoundedTag
+    <Tag
       theme={theme}
       onDelete={handleRemove}
       deleteButtonAriaLabel={t('common:filter.ariaButtonRemove', {
@@ -35,7 +35,7 @@ const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
       className={styles.filter}
     >
       {text}
-    </RoundedTag>
+    </Tag>
   );
 };
 

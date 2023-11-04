@@ -102,7 +102,6 @@ function SearchTabListMobile({ data }: SearchTabListMobileProps) {
         value={options.filter((o) => o.value == activeTab)[0] || options[0]}
         onChange={handleSearchTabChange}
         options={options}
-        noOutline
       />
     </div>
   );

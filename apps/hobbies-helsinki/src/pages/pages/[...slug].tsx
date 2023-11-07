@@ -21,7 +21,6 @@ import { useContext } from 'react';
 import type {
   Breadcrumb,
   CollectionType,
-  PageContentProps,
   PageType,
 } from 'react-helsinki-headless-cms';
 import {
@@ -65,7 +64,7 @@ const NextCmsPage: NextPage<{
           <>
             <RouteMeta origin={AppConfig.origin} page={page} />
             <HCRCPageContent
-              page={page as PageContentProps['page']}
+              page={page}
               collections={
                 collections
                   ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
@@ -140,7 +139,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         }
         const language = getLanguageOrDefault(context.locale);
         logger.info(
-          'pages/pages/[..slug].tsx',
+          'pages/pages/[...slug].tsx',
           'getStaticProps',
           'getHobbiesStaticProps',
           `Revalidating ${page.uri}.`

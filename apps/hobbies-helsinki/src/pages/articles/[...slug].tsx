@@ -23,7 +23,6 @@ import { useContext } from 'react';
 import type {
   Breadcrumb,
   CollectionType,
-  PageContentProps,
   ArticleType,
 } from 'react-helsinki-headless-cms';
 import {
@@ -69,7 +68,7 @@ const NextCmsArticle: NextPage<{
           <>
             <RouteMeta origin={AppConfig.origin} page={article} />
             <RHHCPageContent
-              page={article as PageContentProps['page']}
+              page={article}
               heroContainer={<KorosWrapper />}
               breadcrumbs={
                 breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
@@ -152,7 +151,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         }
         const language = getLanguageOrDefault(context.locale);
         logger.info(
-          'pages/articles/[..slug].tsx',
+          'pages/articles/[...slug].tsx',
           'getStaticProps',
           'getHobbiesStaticProps',
           `Revalidating ${article.uri}.`

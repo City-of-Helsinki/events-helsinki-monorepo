@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.13.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.12.0...sports-helsinki-v1.13.0) (2023-11-09)
+
+
+### Features
+
+* **search:** Add accessibility dropdown ([df34a5d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/df34a5dc8d1565b8d6e0c90db875029af938a853))
+* **search:** Add accessibility profile as an option to venue search params ([ecab033](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ecab0332728347649dc67dde6dd4c1e89ce5e3ac))
+* **search:** Add order venues by accessibility -option when filtering with accessibility ([1b9f1a6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1b9f1a6990fafc3d0d0a359e46f4206402285735))
+* **search:** Sync the venue search ordering with the accessibility profile ([6cadcf5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6cadcf57c91a4a142dd8fbbd9c431269d4b1648f))
+* **search:** VenueOrderBy can be changed after accessibilityProfile selection ([4299703](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4299703230363a7c3c739497d21918db1d5b5dc2))
+* **sports:** Add target group filter feature flag, disable by default ([6de478a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6de478afdd2937fd6016e2ef5fc01d2f375abb32))
+* **sports:** Filter venues by target groups' ontology tree IDs ([2efb1ac](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2efb1acebe081ac7a26acc66f079bc16cb3be82b))
+* **sports:** Show accessibility profile's shortcoming count in results ([da8addd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/da8addd4a9a542369beecc18f25150ade69fdf4a))
+
+
+### Bug Fixes
+
+* Dropdown border mobile ([#533](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/533)) ([e36cbbc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e36cbbc542bab2b65f5d00bc1720c64e2c028faa))
+* **geolocation:** Fix geolocation error notification, refactor code ([f62b967](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f62b967b77c55c0f328c58a604290e7c6179f336))
+* Hero ui tweaks ([#527](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/527)) ([2d3d78b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2d3d78b44543626560268fc8db5872287c0be3eb))
+* Order target groups in dropdown similarly as in target groups' page ([299056a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/299056a1fbdb77057968cf72af2005765ecfbb2c))
+* Rename "q" argument to "text" argument in unified & venue search ([caa4a8d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/caa4a8d3521a095d391195134e9547f77f69cfad))
+* Rename orderedByAccessibilityShortcoming to accessibilityShortcomingFor ([c43298c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c43298c1bd19c71917b3b7a439e32bf34fec6cf5))
+* Show image with title not defined ([#522](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/522)) ([1951ce5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1951ce508589daead728f5ee533a21f605300f83))
+* **tests:** Fix SearchSelect test testing array value/defaultValue ([25e7cd4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/25e7cd44a2246691bd935f6c7342c4bc429ce3e2))
+* Update unified search query arguments ([1db6474](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1db64744317d3c4536c485b6dc301882072b9d19))
+
 ## [1.12.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.11.0...sports-helsinki-v1.12.0) (2023-10-12)
 
 

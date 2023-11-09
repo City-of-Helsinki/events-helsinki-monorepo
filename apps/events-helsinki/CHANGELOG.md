@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.8.1...events-helsinki-v1.9.0) (2023-11-09)
+
+
+### Features
+
+* **sports:** Filter venues by target groups' ontology tree IDs ([2efb1ac](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2efb1acebe081ac7a26acc66f079bc16cb3be82b))
+
+
+### Bug Fixes
+
+* Hero ui tweaks ([#527](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/527)) ([2d3d78b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2d3d78b44543626560268fc8db5872287c0be3eb))
+* Show image with title not defined ([#522](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/522)) ([1951ce5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1951ce508589daead728f5ee533a21f605300f83))
+
 ## [1.8.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.8.0...events-helsinki-v1.8.1) (2023-10-10)
 
 

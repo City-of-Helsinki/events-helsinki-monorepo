@@ -15,7 +15,7 @@ const useSearchTabsWithParams = (defaultTab: SearchTabId) => {
   // If the search type param is not given in the URL, set it there.
   React.useEffect(() => {
     if (!isSearchTabId(searchTypeParam)) {
-      router.push(
+      router.replace(
         { query: { ...router.query, [PARAM_SEARCH_TYPE]: defaultTab } },
         undefined,
         { shallow: true }

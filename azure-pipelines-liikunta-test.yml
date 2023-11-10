@@ -60,6 +60,7 @@ extends:
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0
       NEXT_PUBLIC_ASKEM_ENABLED: 1
+      SKIP_BUILD_STATIC_GENERATION: 1
     configMap:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.test.hel.ninja/
       CMS_ORIGIN: https://liikunta.hkih.stage.geniem.io

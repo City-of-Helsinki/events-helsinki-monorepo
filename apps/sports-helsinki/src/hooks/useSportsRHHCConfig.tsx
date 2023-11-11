@@ -8,6 +8,7 @@ import {
   useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
+  HelsinkiCityOwnedIcon,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -76,6 +77,8 @@ export default function useSportsRHHCConfig(args: {
         VenueCardContent: (props: any) => (
           <VenueDetails {...(props as VenueDetailsProps)} />
         ),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        CheckMarkIcon: (props: any) => <HelsinkiCityOwnedIcon {...props} />,
       },
       siteName: commonTranslation('appSports:appName'),
       currentLanguageCode: locale.toUpperCase(),

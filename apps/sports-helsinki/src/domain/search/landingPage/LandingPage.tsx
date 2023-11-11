@@ -1,23 +1,27 @@
 import { HeroComponent } from '@events-helsinki/components';
 import React from 'react';
-import type { PageContentLayoutProps } from 'react-helsinki-headless-cms';
+import type {
+  PageContentLayoutProps,
+  PageType,
+} from 'react-helsinki-headless-cms';
 import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
-import type { LandingPageQuery } from 'react-helsinki-headless-cms/apollo';
 
 import LandingPageSearch from '../landingPageSearch/LandingPageSearch';
 import styles from './landingPage.module.scss';
 
-export type LandingPageProps = {
-  landingPage?: LandingPageQuery['landingPage'];
+export type PageProps = {
+  page?: PageType;
 };
 
 export function LandingPageContentLayout({
-  landingPage,
+  page,
   collections,
-}: LandingPageProps & PageContentLayoutProps) {
-  const { title, description, heroLink } = landingPage?.translation || {};
-  const heroImage =
-    landingPage?.desktopImage?.edges?.[0]?.node?.mediaItemUrl ?? undefined;
+}: PageProps & PageContentLayoutProps) {
+  const heroImage = page?.featuredImage?.node?.mediaItemUrl ?? '';
+  const heroLinkTitle = page?.hero?.link?.title ?? '';
+  const heroLinkUrl = page?.hero?.link?.url ?? '';
+  const title = page?.hero?.title ?? '';
+  const description = page?.hero?.description ?? '';
 
   const [firstCollection, ...restCollections] =
     (collections as React.ReactNode[]) ?? [];
@@ -27,7 +31,7 @@ export function LandingPageContentLayout({
     <div className={styles.layout}>
       <div className={styles.main}>
         <div className={styles.highlight}>
-          {landingPage?.translation && (
+          {heroImage && (
             <PageSection
               className={styles.sectionHero}
               korosBottom
@@ -35,13 +39,13 @@ export function LandingPageContentLayout({
               backgroundImageUrl={heroImage}
             >
               <ContentContainer>
-                {heroLink && heroLink.length > 0 && (
+                {heroLinkTitle && heroLinkUrl && (
                   <HeroComponent
                     title={title ?? ''}
                     description={description ?? ''}
                     cta={{
-                      label: heroLink[0] ?? '',
-                      href: heroLink[1] ?? '',
+                      label: heroLinkTitle ?? '',
+                      href: heroLinkUrl ?? '',
                     }}
                   />
                 )}

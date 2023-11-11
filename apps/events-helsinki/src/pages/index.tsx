@@ -23,12 +23,8 @@ import type {
   PageByTemplateQuery,
   PageByTemplateQueryVariables,
   LandingPageQuery,
-  LandingPageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-import {
-  PageByTemplateDocument,
-  LandingPageDocument,
-} from 'react-helsinki-headless-cms/apollo';
+import { PageByTemplateDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../domain/app/AppConfig';
 import getEventsStaticProps from '../domain/app/getEventsStaticProps';
 import cmsHelper from '../domain/app/headlessCmsHelper';
@@ -39,7 +35,7 @@ const HomePage: NextPage<{
   landingPage: LandingPageQuery['landingPage'];
   page: PageType;
   locale: string;
-}> = ({ landingPage, page, locale }) => {
+}> = ({ page, locale }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
@@ -56,7 +52,6 @@ const HomePage: NextPage<{
             <RouteMeta origin={AppConfig.origin} />
             <HCRCPageContent
               page={page}
-              landingPage={landingPage}
               PageContentLayoutComponent={LandingPageContentLayout}
               collections={(page: PageType | ArticleType) =>
                 cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
@@ -81,17 +76,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async ({ apolloClient }) => {
     try {
       const language = getLanguageOrDefault(context.locale);
-      const { data: landingPageData } = await apolloClient.query<
-        LandingPageQuery,
-        LandingPageQueryVariables
-      >({
-        query: LandingPageDocument,
-        variables: {
-          id: 'root',
-          languageCode: getQlLanguage(language),
-        },
-        fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-      });
 
       const { data: pageData } = await apolloClient.query<
         PageByTemplateQuery,
@@ -104,14 +88,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         },
         fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
       });
-      if (!pageData || !landingPageData) {
+      if (!pageData) {
         return {
           notFound: true,
         };
       }
       const page = pageData.pageByTemplate;
-
-      const landingPage = landingPageData.landingPage;
 
       logger.info(
         'pages/index.tsx',
@@ -125,7 +107,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             'search',
             'event',
           ])),
-          landingPage: landingPage,
           page: page,
         },
       };
@@ -141,7 +122,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             'search',
             'event',
           ])),
-          landingPage: null,
           page: null,
         },
       };

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.13.0...sports-helsinki-v1.13.1) (2023-11-13)
+
+
+### Bug Fixes
+
+* Backward compatibility urls ([791a511](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/791a511d3ab5579b24a59bb9e7566cdad9006a6a))
+
 ## [1.13.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.12.0...sports-helsinki-v1.13.0) (2023-11-09)
 
 

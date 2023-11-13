@@ -22,7 +22,6 @@ import {
 import type {
   PageByTemplateQuery,
   PageByTemplateQueryVariables,
-  LandingPageQuery,
 } from 'react-helsinki-headless-cms/apollo';
 import { PageByTemplateDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../domain/app/AppConfig';
@@ -32,7 +31,6 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 
 const HomePage: NextPage<{
-  landingPage: LandingPageQuery['landingPage'];
   page: PageType;
   locale: string;
 }> = ({ page, locale }) => {

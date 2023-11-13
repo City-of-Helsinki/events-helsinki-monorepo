@@ -31,27 +31,25 @@ export function LandingPageContentLayout({
     <div className={styles.layout}>
       <div className={styles.main}>
         <div className={styles.highlight}>
-          {heroImage && (
-            <PageSection
-              className={styles.sectionHero}
-              korosBottom
-              korosBottomClassName={styles.korosBottomHero}
-              backgroundImageUrl={heroImage}
-            >
-              <ContentContainer>
-                {heroLinkTitle && heroLinkUrl && (
-                  <HeroComponent
-                    title={title ?? ''}
-                    description={description ?? ''}
-                    cta={{
-                      label: heroLinkTitle ?? '',
-                      href: heroLinkUrl ?? '',
-                    }}
-                  />
-                )}
-              </ContentContainer>
-            </PageSection>
-          )}
+          <PageSection
+            className={styles.sectionHero}
+            korosBottom
+            korosBottomClassName={styles.korosBottomHero}
+            backgroundImageUrl={heroImage}
+          >
+            <ContentContainer>
+              {heroLinkTitle && heroLinkUrl && (
+                <HeroComponent
+                  title={title ?? ''}
+                  description={description ?? ''}
+                  cta={{
+                    label: heroLinkTitle ?? '',
+                    href: heroLinkUrl ?? '',
+                  }}
+                />
+              )}
+            </ContentContainer>
+          </PageSection>
           <PageSection className={styles.sectionSearch}>
             <ContentContainer>
               <div className={styles.sectionSearchContent}>

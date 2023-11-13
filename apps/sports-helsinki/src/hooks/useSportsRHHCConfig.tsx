@@ -81,7 +81,9 @@ export default function useSportsRHHCConfig(args: {
           <VenueDetails {...(props as VenueDetailsProps)} />
         ),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        CheckMarkIcon: (props: any) => <HelsinkiCityOwnedIcon {...props} />,
+        HelsinkiCityOwnedIcon: (props: any) => (
+          <HelsinkiCityOwnedIcon {...props} />
+        ),
       },
       siteName: commonTranslation('appSports:appName'),
       currentLanguageCode: locale.toUpperCase(),

@@ -9,6 +9,7 @@ import {
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
   HelsinkiCityOwnedIcon,
+  CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -57,6 +58,8 @@ export default function useEventsRHHCConfig(args: {
       ...rhhcDefaultConfig,
       ...commonConfig,
       mainContentId: MAIN_CONTENT_ID,
+      organisationPrefixes:
+        CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
       components: {
         ...rhhcDefaultConfig.components,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,7 +91,11 @@ export default function useEventsRHHCConfig(args: {
         ...rhhcDefaultConfig.utils,
         getEventCardProps: AppConfig.showEnrolmentStatusInCardDetails
           ? (item: EventFieldsFragment, locale: string) => ({
-              ...rhhcDefaultConfig.utils.getEventCardProps(item, locale),
+              ...rhhcDefaultConfig.utils.getEventCardProps(
+                item,
+                CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
+                locale
+              ),
               getLinkArrowLabel: getLinkArrowLabel({
                 item,
                 locale,

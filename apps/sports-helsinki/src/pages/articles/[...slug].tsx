@@ -1,6 +1,5 @@
 import type { NormalizedCacheObject } from '@apollo/client';
 import {
-  KorosWrapper,
   NavigationContext,
   ShareLinks,
   getAllArticles,
@@ -69,7 +68,6 @@ const NextCmsArticle: NextPage<{
             <RouteMeta origin={AppConfig.origin} page={article} />
             <RHHCPageContent
               page={article}
-              heroContainer={<KorosWrapper />}
               breadcrumbs={
                 breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
               }

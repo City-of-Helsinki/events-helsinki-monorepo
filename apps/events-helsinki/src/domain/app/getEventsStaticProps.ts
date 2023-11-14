@@ -5,6 +5,7 @@ import {
   DEFAULT_HEADER_MENU_NAME,
   HARDCODED_LANGUAGES,
   getLanguageOrDefault,
+  DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import { MenuDocument } from 'react-helsinki-headless-cms/apollo';
@@ -75,6 +76,7 @@ type GetGlobalCMSDataParams = {
 
 type ReturnedGlobalCMSData = {
   headerMenu?: Menu;
+  headerUniversalBarMenu?: Menu;
   footerMenu?: Menu;
   languages?: Language[];
 };
@@ -86,6 +88,8 @@ async function getGlobalCMSData({
 }: GetGlobalCMSDataParams): Promise<ReturnedGlobalCMSData> {
   const language = getLanguageOrDefault(context.locale);
   const headerNavigationMenuName = DEFAULT_HEADER_MENU_NAME[language];
+  const headerUniversalBarMenuName =
+    DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME[language];
   const fetchPolicy = 'network-only'; // Always fetch new, but update the cache.
   const { data: headerMenuData } = await client.query({
     query: MenuDocument,
@@ -93,6 +97,11 @@ async function getGlobalCMSData({
       id: headerNavigationMenuName,
       // idType: 'URI'
     },
+    fetchPolicy,
+  });
+  const { data: headerUniversalBarMenuData } = await client.query({
+    query: MenuDocument,
+    variables: { id: headerUniversalBarMenuName },
     fetchPolicy,
   });
   const footerNavigationMenuName = DEFAULT_FOOTER_MENU_NAME[language];
@@ -107,6 +116,7 @@ async function getGlobalCMSData({
 
   return {
     headerMenu: headerMenuData?.menu,
+    headerUniversalBarMenu: headerUniversalBarMenuData?.menu,
     footerMenu: footerMenuData?.menu,
     languages: HARDCODED_LANGUAGES,
   };

@@ -13416,6 +13416,54 @@ export type KeywordListQuery = {
   };
 };
 
+export type MenuItemFieldsFragment = {
+  __typename?: 'MenuItem';
+  id: string;
+  label?: string | null;
+  parentId?: string | null;
+  path?: string | null;
+  title?: string | null;
+};
+
+export type MenuHierarchyFieldsFragment = {
+  __typename?: 'Menu';
+  name?: string | null;
+  menuItems?: {
+    __typename?: 'MenuToMenuItemConnection';
+    nodes: Array<{
+      __typename?: 'MenuItem';
+      id: string;
+      label?: string | null;
+      parentId?: string | null;
+      path?: string | null;
+      title?: string | null;
+    }>;
+  } | null;
+};
+
+export type MenuHierarchyQueryVariables = Exact<{
+  name: Scalars['ID']['input'];
+}>;
+
+export type MenuHierarchyQuery = {
+  __typename?: 'Query';
+  menu?: {
+    __typename?: 'Menu';
+    name?: string | null;
+    menuItems?: {
+      __typename?: 'MenuToMenuItemConnection';
+      nodes: Array<{
+        __typename?: 'MenuItem';
+        id: string;
+        label?: string | null;
+        parentId?: string | null;
+        path?: string | null;
+        title?: string | null;
+      }>;
+    } | null;
+  } | null;
+};
+
 export type NeighborhoodListQueryVariables = Exact<{ [key: string]: never }>;
 
 export type NeighborhoodListQuery = {
@@ -14294,6 +14342,26 @@ export const EventFieldsFragmentDoc = gql`
   ${PlaceFieldsFragmentDoc}
   ${OfferFieldsFragmentDoc}
 `;
+export const MenuItemFieldsFragmentDoc = gql`
+  fragment menuItemFields on MenuItem {
+    id
+    label
+    parentId
+    path
+    title
+  }
+`;
+export const MenuHierarchyFieldsFragmentDoc = gql`
+  fragment menuHierarchyFields on Menu {
+    name
+    menuItems(first: 100) {
+      nodes {
+        ...menuItemFields
+      }
+    }
+  }
+  ${MenuItemFieldsFragmentDoc}
+`;
 export const OrganizationFieldsFragmentDoc = gql`
   fragment organizationFields on OrganizationDetails {
     id
@@ -14811,6 +14879,65 @@ export type KeywordListLazyQueryHookResult = ReturnType<
 export type KeywordListQueryResult = Apollo.QueryResult<
   KeywordListQuery,
   KeywordListQueryVariables
+>;
+export const MenuHierarchyDocument = gql`
+  query MenuHierarchy($name: ID!) {
+    menu(id: $name, idType: NAME) {
+      ...menuHierarchyFields
+    }
+  }
+  ${MenuHierarchyFieldsFragmentDoc}
+`;
+
+/**
+ * __useMenuHierarchyQuery__
+ *
+ * To run a query within a React component, call `useMenuHierarchyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMenuHierarchyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMenuHierarchyQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useMenuHierarchyQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    MenuHierarchyQuery,
+    MenuHierarchyQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<MenuHierarchyQuery, MenuHierarchyQueryVariables>(
+    MenuHierarchyDocument,
+    options
+  );
+}
+export function useMenuHierarchyLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    MenuHierarchyQuery,
+    MenuHierarchyQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<MenuHierarchyQuery, MenuHierarchyQueryVariables>(
+    MenuHierarchyDocument,
+    options
+  );
+}
+export type MenuHierarchyQueryHookResult = ReturnType<
+  typeof useMenuHierarchyQuery
+>;
+export type MenuHierarchyLazyQueryHookResult = ReturnType<
+  typeof useMenuHierarchyLazyQuery
+>;
+export type MenuHierarchyQueryResult = Apollo.QueryResult<
+  MenuHierarchyQuery,
+  MenuHierarchyQueryVariables
 >;
 export const NeighborhoodListDocument = gql`
   query NeighborhoodList {

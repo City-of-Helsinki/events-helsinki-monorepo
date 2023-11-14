@@ -1,6 +1,7 @@
 import {
   NavigationContext,
   Navigation,
+  Header,
   MatomoWrapper,
   useCommonTranslation,
   FooterSection,
@@ -38,7 +39,7 @@ const Search: NextPage<{
       <HCRCApolloPage
         uri={ROUTES.SEARCH}
         className="pageLayout"
-        navigation={<Navigation />}
+        navigation={<Header />}
         content={
           <>
             <RouteMeta origin={AppConfig.origin} />

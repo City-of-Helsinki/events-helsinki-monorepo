@@ -3,6 +3,7 @@ import type { Language, Menu } from '../types/generated/graphql';
 
 export type NavigationContextProps = {
   headerMenu?: Menu;
+  headerUniversalBarMenu?: Menu;
   footerMenu?: Menu;
   languages?: Language[];
 };

@@ -76,6 +76,7 @@ export const FallbackComponent = ({
 function BaseApp({
   children,
   headerMenu,
+  headerUniversalBarMenu,
   footerMenu,
   languages,
   appName,
@@ -127,6 +128,7 @@ function BaseApp({
                 <GeolocationProvider>
                   <NavigationProvider
                     headerMenu={headerMenu}
+                    headerUniversalBarMenu={headerUniversalBarMenu}
                     footerMenu={footerMenu}
                     languages={languages}
                   >

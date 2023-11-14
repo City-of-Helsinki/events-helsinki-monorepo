@@ -58,6 +58,7 @@ extends:
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1
+      SKIP_BUILD_STATIC_GENERATION: 1
     buildArgsStage:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.stage.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
@@ -66,6 +67,7 @@ extends:
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1
+      SKIP_BUILD_STATIC_GENERATION: 1
     # NOTE! runtime variables (configMap) do not work in the application !!!
     configMap: # pod environment variables
       FEDERATION_ROUTER_ENDPOINT: https://tapahtumat-router.api.hel.fi/

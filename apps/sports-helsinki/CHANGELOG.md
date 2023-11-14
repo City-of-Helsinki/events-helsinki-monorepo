@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.14.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.13.1...sports-helsinki-v1.14.0) (2023-11-14)
+
+
+### Features
+
+* Helsinki owned icon to carousel cards ([#540](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/540)) ([fd35ed1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fd35ed10690f8ad12a35c2deb00abf38b7182a56))
+* Upgrade to HDS v3.1.0 and HCRC that uses HDS v3.1.0 & update tests ([062939a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/062939aff18b66f85e5a5933d31221e973ec8d00))
+
+
+### Bug Fixes
+
+* Article hero duplicate koros fix ([#549](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/549)) ([3077a1f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3077a1fcb723412b97a6921598a5ac4b19edb696))
+* Default search tab should not push-navigate but replace the route ([d351642](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d351642c41c1ad856531fca15f3ecc356233d3ce))
+* Landing page hero refactoring ([#539](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/539)) ([5065889](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/50658899cd2d7c5aa792199c8a555d97763d827d))
+
 ## [1.13.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.13.0...sports-helsinki-v1.13.1) (2023-11-13)
 
 

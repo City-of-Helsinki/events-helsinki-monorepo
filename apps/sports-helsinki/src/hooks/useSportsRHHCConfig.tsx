@@ -8,6 +8,8 @@ import {
   useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
+  HelsinkiCityOwnedIcon,
+  CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -57,6 +59,8 @@ export default function useSportsRHHCConfig(args: {
       ...rhhcDefaultConfig,
       ...commonConfig,
       mainContentId: MAIN_CONTENT_ID,
+      organisationPrefixes:
+        CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
       components: {
         ...rhhcDefaultConfig.components,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -76,6 +80,10 @@ export default function useSportsRHHCConfig(args: {
         VenueCardContent: (props: any) => (
           <VenueDetails {...(props as VenueDetailsProps)} />
         ),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        HelsinkiCityOwnedIcon: (props: any) => (
+          <HelsinkiCityOwnedIcon {...props} />
+        ),
       },
       siteName: commonTranslation('appSports:appName'),
       currentLanguageCode: locale.toUpperCase(),
@@ -86,7 +94,11 @@ export default function useSportsRHHCConfig(args: {
         ...rhhcDefaultConfig.utils,
         getEventCardProps: AppConfig.showEnrolmentStatusInCardDetails
           ? (item: EventFieldsFragment, locale: string) => ({
-              ...rhhcDefaultConfig.utils.getEventCardProps(item, locale),
+              ...rhhcDefaultConfig.utils.getEventCardProps(
+                item,
+                CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
+                locale
+              ),
               getLinkArrowLabel: getLinkArrowLabel({
                 item,
                 locale,

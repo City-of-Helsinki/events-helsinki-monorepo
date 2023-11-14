@@ -66,6 +66,7 @@ extends:
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0
+      SKIP_BUILD_STATIC_GENERATION: 1
     configMap: # pod environment variables
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.test.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.hkih.stage.geniem.io

@@ -5,6 +5,7 @@ import {
   DEFAULT_HEADER_MENU_NAME,
   HARDCODED_LANGUAGES,
   getLanguageOrDefault,
+  DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import { MenuDocument } from 'react-helsinki-headless-cms/apollo';
@@ -73,9 +74,22 @@ type GetGlobalCMSDataParams = {
 
 type ReturnedGlobalCMSData = {
   headerMenu?: Menu;
+  headerUniversalBarMenu?: Menu;
   footerMenu?: Menu;
   languages?: Language[];
 };
+
+const getMenu = async (
+  menuName: string,
+  client: GetGlobalCMSDataParams['client']
+): Promise<Menu | undefined> =>
+  (
+    await client.query({
+      query: MenuDocument,
+      variables: { id: menuName },
+      fetchPolicy: 'network-only', // Always fetch new, but update the cache.
+    })
+  )?.data?.menu;
 
 // Get CMS data that's required on every page
 async function getGlobalCMSData({
@@ -83,29 +97,15 @@ async function getGlobalCMSData({
   context,
 }: GetGlobalCMSDataParams): Promise<ReturnedGlobalCMSData> {
   const language = getLanguageOrDefault(context.locale);
-  const headerNavigationMenuName = DEFAULT_HEADER_MENU_NAME[language];
-  const fetchPolicy = 'network-only'; // Always fetch new, but update the cache.
-  const { data: headerMenuData } = await client.query({
-    query: MenuDocument,
-    variables: {
-      id: headerNavigationMenuName,
-      // idType: 'URI'
-    },
-    fetchPolicy,
-  });
-  const footerNavigationMenuName = DEFAULT_FOOTER_MENU_NAME[language];
-  const { data: footerMenuData } = await client.query({
-    query: MenuDocument,
-    variables: {
-      id: footerNavigationMenuName,
-      // idType: 'URI'
-    },
-    fetchPolicy,
-  });
+  const headerMenuName = DEFAULT_HEADER_MENU_NAME[language];
+  const headerUniversalBarMenuName =
+    DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME[language];
+  const footerMenuName = DEFAULT_FOOTER_MENU_NAME[language];
 
   return {
-    headerMenu: headerMenuData?.menu,
-    footerMenu: footerMenuData?.menu,
+    headerMenu: await getMenu(headerMenuName, client),
+    headerUniversalBarMenu: await getMenu(headerUniversalBarMenuName, client),
+    footerMenu: await getMenu(footerMenuName, client),
     languages: HARDCODED_LANGUAGES,
   };
 }

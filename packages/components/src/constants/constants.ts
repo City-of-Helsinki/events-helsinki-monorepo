@@ -81,6 +81,21 @@ export const DEFAULT_FOOTER_MENU_NAME: Record<AppLanguage, string> = {
     'Events Helsinki Footer SV',
 };
 
+export const DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME: Record<
+  AppLanguage,
+  string
+> = {
+  fi:
+    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_FI ??
+    'Events Helsinki Universal bar FI',
+  en:
+    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_EN ??
+    'Events Helsinki Universal bar EN',
+  sv:
+    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_SV ??
+    'Events Helsinki Universal bar SV',
+};
+
 /**
  * This is just a mock of list of Languages.
  * The react-helsinki-headless-cms needs typeof `Language[]` in a list of lanugages,

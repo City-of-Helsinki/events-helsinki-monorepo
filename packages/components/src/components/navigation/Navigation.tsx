@@ -15,15 +15,18 @@ import styles from './navigation.module.scss';
 type NavigationProps = {
   page?: PageType | ArticleType;
   menu?: Menu;
+  universalBarMenu?: Menu;
   languages?: Language[];
 };
 
 export default function Navigation({
   page,
   menu,
+  universalBarMenu,
   languages: forcedLanguages, // FIXME: This is here only to skip the Apollo query and so the issues in the Error page
 }: NavigationProps) {
-  const { headerMenu, languages } = useContext(NavigationContext);
+  const { headerMenu, headerUniversalBarMenu, languages } =
+    useContext(NavigationContext);
   const router = useRouter();
   const locale = useLocale();
   const cmsHelper = useCmsHelper();
@@ -41,6 +44,7 @@ export default function Navigation({
     <RHHCNavigation
       languages={languageOptions}
       menu={menu ?? headerMenu}
+      universalBarMenu={universalBarMenu ?? headerUniversalBarMenu}
       className={styles.topNavigation}
       onTitleClick={() => {
         router.push('/');

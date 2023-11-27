@@ -3328,7 +3328,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha230"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha234"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-toastify: "npm:^9.1.3"
@@ -13880,7 +13880,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha230"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha234"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -15748,7 +15748,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha230"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha234"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -15799,6 +15799,16 @@ __metadata:
     domhandler: "npm:5.0.3"
     htmlparser2: "npm:9.0.0"
   checksum: e8613321de88182d8b58f4de271d556a89f08a47908be416d2fb10fb33a9299f72e55ce539c4905bef3b742b7aace4711615f80f4257cf153f3433e12f284c81
+  languageName: node
+  linkType: hard
+
+"html-dom-parser@npm:5.0.3":
+  version: 5.0.3
+  resolution: "html-dom-parser@npm:5.0.3"
+  dependencies:
+    domhandler: "npm:5.0.3"
+    htmlparser2: "npm:9.0.0"
+  checksum: 461dc95df7d1d5351664244c31d7db473a6f897092a502b1037c06f83b71a1289d6b1d61b7fe2ab7b4681640d6225f8f2c785fee8a19b263b83973358975f12c
   languageName: node
   linkType: hard
 
@@ -15865,17 +15875,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-react-parser@npm:^4.2.1":
-  version: 4.2.2
-  resolution: "html-react-parser@npm:4.2.2"
+"html-react-parser@npm:^4.2.9":
+  version: 4.2.10
+  resolution: "html-react-parser@npm:4.2.10"
   dependencies:
     domhandler: "npm:5.0.3"
-    html-dom-parser: "npm:4.0.0"
-    react-property: "npm:2.0.0"
-    style-to-js: "npm:1.1.4"
+    html-dom-parser: "npm:5.0.3"
+    react-property: "npm:2.0.2"
+    style-to-js: "npm:1.1.8"
   peerDependencies:
     react: 0.14 || 15 || 16 || 17 || 18
-  checksum: 63eae0ecb9bb7a460fb90c26de90a602b757cd7addcdc947baf5c3595f557fc665114986673097f788d6e5570e1f7e842635f3c9a121ac8652ea6d0e59265ebd
+  checksum: 149b2fd3bccefd8694dc580eef1ea2e937103142b64e32795a31a67966af23bbdd81903e78cff9800d661344d27d15c4f22e27fc64da470b5b4480774056faf6
   languageName: node
   linkType: hard
 
@@ -16371,6 +16381,13 @@ __metadata:
   version: 0.1.1
   resolution: "inline-style-parser@npm:0.1.1"
   checksum: 492eab2465f2552dfdd5baec224e90aaf937fb28474ca908a306773a7f0d6025308e62f27124b7c120549ea3a210e938ac930da5c5217df8a23a13cee3e44b4e
+  languageName: node
+  linkType: hard
+
+"inline-style-parser@npm:0.2.2":
+  version: 0.2.2
+  resolution: "inline-style-parser@npm:0.2.2"
+  checksum: 298c32fc865a93a5ce3c8a2489ecd553d88e35770ef5dac24f403abe4fa046f61eff179e2bdc3f397544c21db2090a2ec3c4ff6d3b3f70a6ad83068d019a7aea
   languageName: node
   linkType: hard
 
@@ -22909,14 +22926,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha230":
-  version: 1.0.0-alpha230
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha230"
+"react-helsinki-headless-cms@npm:1.0.0-alpha234":
+  version: 1.0.0-alpha234
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha234"
   dependencies:
     hds-core: "npm:^3.1.0"
     hds-design-tokens: "npm:^3.1.0"
     html-entities: "npm:^2.4.0"
-    html-react-parser: "npm:^4.2.1"
+    html-react-parser: "npm:^4.2.9"
     isomorphic-dompurify: "npm:^1.8.0"
     jest-environment-jsdom: "npm:^29.6.2"
     lodash-es: "npm:^4.17.21"
@@ -22929,7 +22946,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 888b9f9d84cdcb2ed550ca85499594da9ad0cddebd936cea3c43fb19ffaf28f2a5ecf0eb1d489007ce9d510ca03e852f4609a42494fb8b3945b60c136cd918f0
+  checksum: eb4df95696bcd15b1cfcdb201ae43d6d0249518e57ff1f3784dc5a3a51570963e9f2cf764c808a73fad7bc26bdf3f78d4d63bf42d817fa2e781dfb051e5b4b7a
   languageName: node
   linkType: hard
 
@@ -23058,6 +23075,13 @@ __metadata:
   version: 2.0.0
   resolution: "react-property@npm:2.0.0"
   checksum: 486f71f45ea6345cf5e05cac9870e362cd1dded9745c01df17403e02d0cf4ae11234092f2c046b39d34f6c620911fe38cfec879097b89767815f00d1add4f510
+  languageName: node
+  linkType: hard
+
+"react-property@npm:2.0.2":
+  version: 2.0.2
+  resolution: "react-property@npm:2.0.2"
+  checksum: fb5eee593c9d1f66b4551918bfbd153eeb1a41711c4cb3c6cbfd3d92ec70c19e41fae5d0313871df772591b3e80771ed9e4615f16db1b2b14ff253e4f383132d
   languageName: node
   linkType: hard
 
@@ -24980,7 +25004,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha230"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha234"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-scroll: "npm:^1.8.9"
@@ -25448,12 +25472,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-to-js@npm:1.1.4":
-  version: 1.1.4
-  resolution: "style-to-js@npm:1.1.4"
+"style-to-js@npm:1.1.8":
+  version: 1.1.8
+  resolution: "style-to-js@npm:1.1.8"
   dependencies:
-    style-to-object: "npm:0.4.2"
-  checksum: 814e659a78a55e16ec4c2d332110082620bc01de3ac4b2ce31b8c2ab57a6425619611be543156ba92ba19285509ccfb5955d7427c865fdc60ba24778a2978072
+    style-to-object: "npm:1.0.3"
+  checksum: fdfdba3803258c6b99a33d9266320e321ef0c967c66f45f8ad9a4013bd47fc6c5b14fd90748ed276567f928f23ee586a0b875b80b692ebd6399cef3a205c60a9
   languageName: node
   linkType: hard
 
@@ -25466,12 +25490,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-to-object@npm:0.4.2":
-  version: 0.4.2
-  resolution: "style-to-object@npm:0.4.2"
+"style-to-object@npm:1.0.3":
+  version: 1.0.3
+  resolution: "style-to-object@npm:1.0.3"
   dependencies:
-    inline-style-parser: "npm:0.1.1"
-  checksum: d01afab2eb0248d772e93888f92d5699e0aa4c8a4214a30dd99cbe60a0e8adb5ae5341b6e230294acc70ee662ea1a7b174d21f1b7cd2aceddb2b5b67a99dcb84
+    inline-style-parser: "npm:0.2.2"
+  checksum: a8da4a22eea2964a6899d39360f80cd3c9949aedd1a219b6a3e12e2c9f296a2e8e6cf70b1da47c21144ad599808087e4c84d1d5be5d6c6ea3b75784024593669
   languageName: node
   linkType: hard
 

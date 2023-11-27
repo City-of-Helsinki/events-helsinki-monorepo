@@ -104,8 +104,7 @@ async function getGlobalCMSData({
 
   return {
     headerMenu: await getMenu(headerMenuName, client),
-    headerUniversalBarMenu:
-      (await getMenu(headerUniversalBarMenuName, client)) ?? null,
+    headerUniversalBarMenu: await getMenu(headerUniversalBarMenuName, client),
     footerMenu: await getMenu(footerMenuName, client),
     languages: HARDCODED_LANGUAGES,
   };

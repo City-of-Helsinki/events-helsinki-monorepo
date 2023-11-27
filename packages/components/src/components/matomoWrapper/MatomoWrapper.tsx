@@ -22,17 +22,24 @@ const MatomoWrapper: React.FC<Props> = ({ children }) => {
       return consents[cookieId];
     };
 
-    // if enabled, should be callled before each trackPage instruction
+    // if enabled, should be called before each trackPage instruction
     if (getConsentStatus('matomo')) {
-      pushInstruction('requireCookieConsent');
+      pushInstruction('rememberCookieConsentGiven');
+      pushInstruction('rememberConsentGiven');
     } else {
-      pushInstruction('setCookieConsentGiven');
+      pushInstruction('forgetCookieConsentGiven');
+      pushInstruction('forgetConsentGiven');
     }
 
     trackPageView({
       href: window.location.href,
     });
   }, [getAllConsents, pathname, pushInstruction, trackPageView]);
+
+  useEffect(() => {
+    pushInstruction('requireCookieConsent');
+    pushInstruction('requireConsent');
+  }, [pushInstruction]);
 
   return <>{children}</>;
 };

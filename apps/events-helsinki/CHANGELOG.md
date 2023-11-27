@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.10.0...events-helsinki-v1.11.0) (2023-11-27)
+
+
+### Features
+
+* Add support for hierarchical menus & universal bar menu in header ([318d409](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/318d409aacf0bbe41f516eae034f31c336202e49))
+
 ## [1.10.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.9.0...events-helsinki-v1.10.0) (2023-11-16)
 
 

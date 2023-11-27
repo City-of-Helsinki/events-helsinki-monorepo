@@ -223,9 +223,7 @@ class AppConfig {
 
   /** A feature flag for showing the target group filter. */
   static get showTargetGroupFilter() {
-    return Boolean(
-      parseEnvValue(process.env.NEXT_PUBLIC_SHOW_TARGET_GROUP_FILTER, false)
-    );
+    return true;
   }
 
   /** A feature flag for the upcoming venues module in details page. */

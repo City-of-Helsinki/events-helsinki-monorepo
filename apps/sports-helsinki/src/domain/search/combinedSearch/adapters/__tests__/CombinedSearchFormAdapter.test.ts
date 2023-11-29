@@ -119,6 +119,7 @@ describe('CombinedSearchFormAdapter', () => {
         {
           includeHaukiFields: false,
           language: UnifiedSearchLanguage.Finnish,
+          mustHaveReservableResource: false,
           text: outputQuery.text,
           ontologyWordIdOrSets:
             outputQuery.keywords.length > 0 ? [outputQuery.keywords] : [],

@@ -73,6 +73,7 @@ class CombinedSearchFormAdapter
   sportsCategories: string[];
   targetGroups: string[];
   helsinkiOnly?: boolean | string | null;
+  reservable?: boolean | string | null;
   accessibilityProfile?: string | null;
   organization?: string | null;
   place?: string | null;
@@ -118,6 +119,7 @@ class CombinedSearchFormAdapter
     this.targetGroups = this.getMultiValueInput<'targetGroups'>('targetGroups');
     this.helsinkiOnly =
       this.getSingleValueInput<'helsinkiOnly'>('helsinkiOnly');
+    this.reservable = this.getSingleValueInput<'reservable'>('reservable');
     this.organization = this.getSingleValueInput<'organization'>(
       'organization',
       'publisher'
@@ -281,6 +283,10 @@ class CombinedSearchFormAdapter
 
   public cleanHelsinkiOnly() {
     this.helsinkiOnly = toTrueOrUndefined(this.helsinkiOnly);
+  }
+
+  public cleanReservable() {
+    this.reservable = toTrueOrUndefined(this.reservable);
   }
 
   public cleanOrganization() {

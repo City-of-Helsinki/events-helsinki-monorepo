@@ -22,6 +22,7 @@ export const initialCombinedSearchFormValues = {
   sportsCategories: [] as string[],
   targetGroups: [] as string[],
   helsinkiOnly: undefined,
+  reservable: undefined,
   organization: undefined,
   place: undefined,
   keywords: [] as string[],

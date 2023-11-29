@@ -12559,6 +12559,13 @@ input ReleaseToRevisionConnectionWhereArgs
   title: String
 }
 
+type Reservation
+  @join__type(graph: UNIFIED_SEARCH)
+{
+  reservable: Boolean
+  externalReservationUrl: LanguageString
+}
+
 """Input for the resetUserPassword mutation."""
 input ResetUserPasswordInput
   @join__type(graph: CMS)
@@ -12591,31 +12598,6 @@ type ResetUserPasswordPayload
   user: User
 }
 
-type Resource
-  @join__type(graph: UNIFIED_SEARCH)
-{
-  id: ID
-  name: LanguageString
-  description: LanguageString
-  type: ResourceType
-  userPermissions: ResourceUserPermissions
-  reservable: Boolean
-  reservationInfo: LanguageString
-  genericTerms: LanguageString
-  paymentTerms: LanguageString
-  specificTerms: LanguageString
-  responsibleContactInfo: LanguageString
-  externalReservationUrl: String
-}
-
-enum ResourceMainType
-  @join__type(graph: UNIFIED_SEARCH)
-{
-  item @join__enumValue(graph: UNIFIED_SEARCH)
-  person @join__enumValue(graph: UNIFIED_SEARCH)
-  space @join__enumValue(graph: UNIFIED_SEARCH)
-}
-
 enum ResourceState
   @join__type(graph: VENUES)
 {
@@ -12630,20 +12612,6 @@ enum ResourceState
   enter_only @join__enumValue(graph: VENUES)
   exit_only @join__enumValue(graph: VENUES)
   weather_permitting @join__enumValue(graph: VENUES)
-}
-
-type ResourceType
-  @join__type(graph: UNIFIED_SEARCH)
-{
-  id: ID
-  mainType: ResourceMainType
-  name: LanguageString
-}
-
-type ResourceUserPermissions
-  @join__type(graph: UNIFIED_SEARCH)
-{
-  canMakeReservations: Boolean
 }
 
 """Input for the restoreComment mutation."""
@@ -16432,14 +16400,13 @@ type UnifiedSearchVenue
   location: LocationDescription
   description: LanguageString
   serviceOwner: ServiceOwner
-  resources: [Resource!]!
   targetGroups: [TargetGroup]
   descriptionResources: DescriptionResources
   partOf: UnifiedSearchVenue
   openingHours: OpeningHours
   manager: LegalEntity
   contactDetails: ContactInfo
-  reservationPolicy: VenueReservationPolicy
+  reservation: Reservation
   accessibility: Accessibility
 
   """Accessibility shortcoming for a specific accessibility profile."""
@@ -18463,13 +18430,6 @@ type VenueFacility
   meta: NodeMeta
   name: String!
   categories: [KeywordString!]
-}
-
-"""TODO: this comes from respa resource/unit types"""
-type VenueReservationPolicy
-  @join__type(graph: UNIFIED_SEARCH)
-{
-  todo: String
 }
 
 """Information about pagination in a connection."""

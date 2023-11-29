@@ -435,14 +435,13 @@ type UnifiedSearchVenue {
   location: LocationDescription @cacheControl(inheritMaxAge: true)
   description: LanguageString
   serviceOwner: ServiceOwner
-  resources: [Resource!]!
   targetGroups: [TargetGroup]
   descriptionResources: DescriptionResources
   partOf: UnifiedSearchVenue
   openingHours: OpeningHours
   manager: LegalEntity
   contactDetails: ContactInfo
-  reservationPolicy: VenueReservationPolicy
+  reservation: Reservation
   accessibility: Accessibility
 
   """
@@ -562,35 +561,9 @@ type Accessibility {
   shortcomings: [AccessibilityShortcoming!]!
 }
 
-enum ResourceMainType {
-  item
-  person
-  space
-}
-
-type ResourceType {
-  id: ID
-  mainType: ResourceMainType
-  name: LanguageString
-}
-
-type ResourceUserPermissions {
-  canMakeReservations: Boolean
-}
-
-type Resource {
-  id: ID
-  name: LanguageString
-  description: LanguageString
-  type: ResourceType
-  userPermissions: ResourceUserPermissions
+type Reservation {
   reservable: Boolean
-  reservationInfo: LanguageString
-  genericTerms: LanguageString
-  paymentTerms: LanguageString
-  specificTerms: LanguageString
-  responsibleContactInfo: LanguageString
-  externalReservationUrl: String
+  externalReservationUrl: LanguageString
 }
 
 """
@@ -705,13 +678,6 @@ type MediaResource {
 enum CacheControlScope {
   PUBLIC
   PRIVATE
-}
-
-"""
-TODO: this comes from respa resource/unit types
-"""
-type VenueReservationPolicy {
-  todo: String
 }
 
 """

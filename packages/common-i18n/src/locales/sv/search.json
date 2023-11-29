@@ -50,7 +50,8 @@
       "exactAge": "För en {{age}}-åring"
     },
     "labelAccessibilityProfile": "Tillgänglighet",
-    "ariaLabelClearAccessibilityProfile": "Ta bort valet av tillgänglighet"
+    "ariaLabelClearAccessibilityProfile": "Ta bort valet av tillgänglighet",
+    "reservable": "Kan reserveras"
   },
   "textFoundEvents": "{{count}} sökresultat",
   "betaButtonArialLabel": "Vill du ge oss respons på utvecklingsversionen av hobbysöksidan?",

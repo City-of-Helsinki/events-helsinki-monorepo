@@ -59,6 +59,7 @@ export type CombinedSearchAdapterInput = {
   targetGroups: string[];
   organization?: string | null;
   helsinkiOnly?: boolean | string | null;
+  reservable?: boolean | string | null;
   place?: string | null;
   keywords: string[];
   accessibilityProfile?: string | null;
@@ -127,6 +128,7 @@ export type VenueSearchParams = Pick<
   | 'ontologyWordIdOrSets'
   | 'providerTypes'
   | 'serviceOwnerTypes'
+  | 'mustHaveReservableResource'
   | 'targetGroups'
   | 'administrativeDivisionIds'
   | 'openAt'

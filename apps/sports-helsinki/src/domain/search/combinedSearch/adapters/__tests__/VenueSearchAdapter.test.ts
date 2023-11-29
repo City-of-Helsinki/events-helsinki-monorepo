@@ -24,6 +24,7 @@ describe('VenueSearchAdapter', () => {
       const adapter = new VenueSearchAdapter(input, locale);
       const expectedQueryVariables = {
         language: 'FINNISH',
+        mustHaveReservableResource: false,
         includeHaukiFields: false,
         text: input.text,
         ontologyWordIdOrSets: input.keywords.length > 0 ? [input.keywords] : [],

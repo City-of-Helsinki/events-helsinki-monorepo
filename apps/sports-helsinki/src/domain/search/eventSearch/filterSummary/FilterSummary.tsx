@@ -1,6 +1,7 @@
 import {
   useLocale,
   HelsinkiOnlyFilter,
+  ReservableFilter,
   OrganizationFilter,
   FilterButton,
   translateValue,
@@ -33,6 +34,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     targetGroups,
     organization,
     helsinkiOnly,
+    reservable,
     text,
     place,
     accessibilityProfile,
@@ -69,6 +71,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!sportsCategories.length ||
     !!targetGroups.length ||
     !!helsinkiOnly ||
+    !!reservable ||
     !!organization ||
     !!place ||
     !!accessibilityProfile ||
@@ -114,6 +117,11 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       {helsinkiOnly && (
         <HelsinkiOnlyFilter
           onRemove={() => handleFilterRemove('helsinkiOnly', 'true')}
+        />
+      )}
+      {reservable && (
+        <ReservableFilter
+          onRemove={() => handleFilterRemove('reservable', 'true')}
         />
       )}
       {place && (

@@ -63,7 +63,8 @@
       "exactAge": "{{age}}-vuotiaalle"
     },
     "labelAccessibilityProfile": "Esteettömyys",
-    "ariaLabelClearAccessibilityProfile": "Poista esteettömyysvalinta"
+    "ariaLabelClearAccessibilityProfile": "Poista esteettömyysvalinta",
+    "reservable": "Tilattavissa"
   },
   "goToVenue": "Näytä sivu",
   "openStreetMapContributors": "osallistujat",

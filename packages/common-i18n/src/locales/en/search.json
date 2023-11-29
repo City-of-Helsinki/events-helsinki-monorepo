@@ -50,7 +50,8 @@
       "exactAge": "For a {{age}}-year-old"
     },
     "labelAccessibilityProfile": "Accessibility",
-    "ariaLabelClearAccessibilityProfile": "Remove the accessibility shortcoming selection"
+    "ariaLabelClearAccessibilityProfile": "Remove the accessibility shortcoming selection",
+    "reservable": "Reservable"
   },
   "textFoundEvents": "{{count}} search results",
   "buttonLoadMore": "Show more ({{count}})",

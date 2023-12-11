@@ -135,7 +135,9 @@ export const getEventHeroButtonText = (
 ): string => {
   return t(
     `hero.${prefix}${
-      event.typeId === EventTypeId.Course ? 'Enrol' : 'BuyTickets'
+      event.typeId === EventTypeId.General && !isEventFree(event)
+        ? 'BuyTickets'
+        : 'Enrol'
     }`
   );
 };
@@ -352,7 +354,6 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
     freeEvent: isEventFree(event),
     today: startTime ? isToday(new Date(startTime)) : false,
     thisWeek: startTime ? isThisWeek(new Date(startTime)) : false,
-    showBuyButton: !!offerInfoUrl && !isEventFree(event),
     audience: getKeywordList(event.audience, locale),
     audienceMinAge: event.audienceMinAge,
     audienceMaxAge: event.audienceMaxAge,

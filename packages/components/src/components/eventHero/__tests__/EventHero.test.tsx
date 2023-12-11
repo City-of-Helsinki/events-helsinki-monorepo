@@ -125,11 +125,17 @@ it('should render this week tag', () => {
   ).toBeInTheDocument();
 });
 
-// buy and enrol buttons are combined together, the difference is in the redirect url
-
-it('should hide buy/enrol button for free events', () => {
+it('should hide buy/enrol button if no offer url', () => {
   const mockEvent = getFakeEvent({
-    offers: [fakeOffer({ isFree: true }) as OfferFieldsFragment],
+    offers: [
+      fakeOffer({
+        infoUrl: {
+          fi: '',
+          en: '',
+          sv: '',
+        },
+      }) as OfferFieldsFragment,
+    ],
   });
   render(<EventHero event={mockEvent} />);
 
@@ -138,72 +144,45 @@ it('should hide buy/enrol button for free events', () => {
       name: new RegExp(translations.event.hero.buttonEnrol, 'i'),
     })
   ).not.toBeInTheDocument();
-});
-
-it.each([
-  [EventTypeId.Course, translations.event.hero.ariaLabelEnrol],
-  [EventTypeId.General, translations.event.hero.ariaLabelBuyTickets],
-])('should show buy/enrol button', async (eventType, buttonAriaLabel) => {
-  global.open = jest.fn();
-  const infoUrl = 'https://test.url';
-  const mockEvent = getFakeEvent({
-    typeId: eventType,
-    offers: [
-      fakeOffer({
-        isFree: false,
-        infoUrl: fakeLocalizedObject(infoUrl),
-      }) as OfferFieldsFragment,
-    ],
-    externalLinks: [],
-  });
-
-  render(<EventHero event={mockEvent} />);
-
-  await userEvent.click(
-    screen.getByRole('button', {
-      name: new RegExp(buttonAriaLabel, 'i'),
+  expect(
+    screen.queryByRole('button', {
+      name: new RegExp(translations.event.hero.ariaLabelBuyTickets, 'i'),
     })
-  );
-  expect(global.open).toHaveBeenCalledWith(infoUrl);
+  ).not.toBeInTheDocument();
 });
 
+// should show Buy for EventTypeId.General AND isFree = false
+// should show Enrol in all other cases
+
 it.each([
-  [
-    EventTypeId.Course,
-    translations.event.hero.buttonEnrol,
-    translations.event.hero.ariaLabelEnrol,
-  ],
-  [
-    EventTypeId.General,
-    translations.event.hero.buttonBuyTickets,
-    translations.event.hero.ariaLabelBuyTickets,
-  ],
+  [EventTypeId.Course, false, translations.event.hero.ariaLabelEnrol],
+  [EventTypeId.Course, true, translations.event.hero.ariaLabelEnrol],
+  [EventTypeId.General, true, translations.event.hero.ariaLabelEnrol],
+  [EventTypeId.General, false, translations.event.hero.ariaLabelBuyTickets],
 ])(
-  'Register button should be visible and clickable',
-  async (eventType, buttonLabel, buttonAriaLabel) => {
+  'should show buy/enrol button',
+  async (eventType, isFree, buttonAriaLabel) => {
     global.open = jest.fn();
-    const registrationUrl = 'https://harrastushaku.fi/register/13290';
+    const infoUrl = 'https://test.url';
     const mockEvent = getFakeEvent({
       typeId: eventType,
-      externalLinks: [
-        fakeExternalLink({
-          link: registrationUrl,
-          name: 'registration',
-        }),
+      offers: [
+        fakeOffer({
+          isFree,
+          infoUrl: fakeLocalizedObject(infoUrl),
+        }) as OfferFieldsFragment,
       ],
+      externalLinks: [],
     });
 
     render(<EventHero event={mockEvent} />);
 
-    expect(screen.getByText(buttonLabel)).toBeInTheDocument();
-
     await userEvent.click(
       screen.getByRole('button', {
-        name: buttonAriaLabel,
+        name: new RegExp(buttonAriaLabel, 'i'),
       })
     );
-
-    expect(global.open).toHaveBeenCalledWith(registrationUrl);
+    expect(global.open).toHaveBeenCalledWith(infoUrl);
   }
 );
 

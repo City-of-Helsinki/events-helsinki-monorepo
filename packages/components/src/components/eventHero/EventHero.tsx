@@ -67,8 +67,6 @@ const EventHero: React.FC<EventHeroProps> = ({
     startTime: eventStartTime,
     today,
     thisWeek,
-    showBuyButton,
-    registrationUrl,
   } = getEventFields(event, locale);
   const eventPriceText = getEventPrice(event, locale, t('hero.offers.isFree'));
   const buttonText = getEventHeroButtonText(event, 'button', t);
@@ -169,16 +167,14 @@ const EventHero: React.FC<EventHeroProps> = ({
                       </InfoWithIcon>
                     </div>
                   )}
-                  {(showBuyButton || registrationUrl) && (
+                  {offerInfoUrl && (
                     <div className={styles.registrationButtonWrapper}>
                       <Button
                         theme={theme}
                         variant={variant}
                         className={buttonStyles.buttonCoatBlue}
                         aria-label={buttonAriaLabelText}
-                        onClick={() =>
-                          window.open(registrationUrl || offerInfoUrl)
-                        }
+                        onClick={() => window.open(offerInfoUrl)}
                         iconRight={<IconLinkExternal aria-hidden />}
                       >
                         {buttonText}

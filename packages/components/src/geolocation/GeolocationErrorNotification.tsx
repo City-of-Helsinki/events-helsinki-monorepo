@@ -1,9 +1,9 @@
 import type { NotificationProps } from 'hds-react';
 import { Notification } from 'hds-react';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
 import { useGeolocation } from '../hooks';
 import useCommonTranslation from '../hooks/useCommonTranslation';
+import styles from './geolocation.module.scss';
 import type { GeolocationContextType } from './types';
 
 /**
@@ -31,6 +31,7 @@ export default function GeolocationErrorNotification(
       {geolocation.error && (
         <Notification
           {...notificationProps}
+          className={styles.geoNotification}
           onClose={geolocation.clearError}
           label={t('error.title')}
           type="alert"

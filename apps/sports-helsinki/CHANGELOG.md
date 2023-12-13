@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.16.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.15.0...sports-helsinki-v1.16.0) (2023-12-13)
+
+
+### Features
+
+* **sports:** Add reservable filter to the search ([c147066](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c1470668b90cd0697ae348704a68fc006b6df4ba))
+* **sports:** Add reservable-field to the combined search ([decfe22](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/decfe22b844e7ba6431f3d4690a2a9f0742b0718))
+
+
+### Bug Fixes
+
+* Artciles search hide load more ([#570](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/570)) ([ff7dc02](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ff7dc024d31f41d4490b1bb17d9074c0a9da6f0d))
+* Blue icon colors to black ios ([#573](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/573)) ([497a95b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/497a95bdf104b4b424e8c05f097889639ec01b6f))
+* Card height improvement and koros 1px  ([#568](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/568)) ([00f0d57](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/00f0d575a683595988510c6ebfbb094480ff550c))
+* Card module delimited alignment ([#566](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/566)) ([cecb260](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cecb2605c3746e360379d16d01600bc6a0d54ac3))
+* Card module image size ([#562](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/562)) ([0ed29b8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0ed29b8e7c3eaf32c51d6ea289aa63cfdae031dc))
+
 ## [1.15.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.14.0...sports-helsinki-v1.15.0) (2023-11-24)
 
 

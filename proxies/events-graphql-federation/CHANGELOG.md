@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.1...federation-router-v1.5.2) (2023-12-14)
+
+
+### Bug Fixes
+
+* Backward compatibility urls ([791a511](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/791a511d3ab5579b24a59bb9e7566cdad9006a6a))
+
 ## [1.5.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.0...federation-router-v1.5.1) (2023-11-08)
 
 The `ontologyTreeIdOrSets` and `ontologyWordIdOrSets` are replacing the implementation of `ontologyTreeIdsOrSet[NUM]` and `ontologyWordIds`.

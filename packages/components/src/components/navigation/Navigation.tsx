@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import {
   Navigation as RHHCNavigation,
@@ -43,6 +43,17 @@ export default function Navigation({
     languages ??
     languagesQuery.data?.languages?.filter(isLanguage);
 
+  // router.query has no query parameters, even if the current URL does when serving
+  // server-side generated pages. Using window.location.search when available and not
+  // always relying on router.query makes the query parameters more available.
+  const getCurrentParsedUrlQuery = useCallback(
+    () =>
+      window
+        ? Object.fromEntries(new URLSearchParams(window.location.search))
+        : router.query,
+    [router?.query]
+  );
+
   return (
     <>
       <RHHCNavigation
@@ -73,7 +84,7 @@ export default function Navigation({
                       cmsHelper.removeContextPathFromUri(translatedPage.uri)
                     ) ?? '',
                 }
-              : router.query,
+              : getCurrentParsedUrlQuery(),
             slug as AppLanguage
           );
         }}

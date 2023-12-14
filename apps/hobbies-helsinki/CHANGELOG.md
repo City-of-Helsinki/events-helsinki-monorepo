@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.11.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.11.0...hobbies-helsinki-v2.11.1) (2023-12-14)
+
+
+### Bug Fixes
+
+* Artciles search hide load more ([#570](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/570)) ([ff7dc02](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ff7dc024d31f41d4490b1bb17d9074c0a9da6f0d))
+* Card height improvement and koros 1px  ([#568](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/568)) ([00f0d57](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/00f0d575a683595988510c6ebfbb094480ff550c))
+* Card module delimited alignment ([#566](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/566)) ([cecb260](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cecb2605c3746e360379d16d01600bc6a0d54ac3))
+* Card module image size ([#562](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/562)) ([0ed29b8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0ed29b8e7c3eaf32c51d6ea289aa63cfdae031dc))
+
 ## [2.11.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.10.0...hobbies-helsinki-v2.11.0) (2023-11-27)
 
 

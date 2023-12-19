@@ -44,14 +44,17 @@ export default function Navigation({
     languagesQuery.data?.languages?.filter(isLanguage);
 
   // router.query has no query parameters, even if the current URL does when serving
-  // server-side generated pages. Using window.location.search when available and not
-  // always relying on router.query makes the query parameters more available.
+  // server-side generated pages. Simply using window.location.search always when
+  // available broke e.g. /courses/[eventId] URL part so that the [eventId] part didn't
+  // get replaced with the actual event ID. Merging both query sources worked better.
   const getCurrentParsedUrlQuery = useCallback(
-    () =>
-      window
+    () => ({
+      ...router.query,
+      ...(window
         ? Object.fromEntries(new URLSearchParams(window.location.search))
-        : router.query,
-    [router?.query]
+        : {}),
+    }),
+    [router.query]
   );
 
   return (

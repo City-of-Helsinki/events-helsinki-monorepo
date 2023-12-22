@@ -14,6 +14,8 @@ const trueEnv = ['true', '1', 'yes'];
 const config: ServerConfig = {
   sentryDsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
   sentryEnvironment: process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT,
+  sentryTraceSampleRate:
+    Number(process.env.GRAPHQL_PROXY_SENTRY_SAMPLE_RATE) ?? 0.0,
   debug: trueEnv.includes(process.env.GRAPHQL_PROXY_DEBUG ?? 'false'),
   serverPort: Number(process.env.GRAPHQL_PROXY_PORT) || 4100,
   disableWinstonLogging: trueEnv.includes(

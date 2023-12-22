@@ -54,7 +54,7 @@ extends:
       FEDERATION_ROUTER_ENDPOINT: https://tapahtumat-router.api.hel.fi/
       CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-      NEXTJS_DISABLE_SENTRY: 1
+      NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1
@@ -63,7 +63,7 @@ extends:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.stage.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-      NEXTJS_DISABLE_SENTRY: 1
+      NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1

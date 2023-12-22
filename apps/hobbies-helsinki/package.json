@@ -43,7 +43,7 @@
     "@events-helsinki/common-i18n": "workspace:^",
     "@events-helsinki/components": "workspace:^",
     "@sentry/browser": "^7.56.0",
-    "@sentry/nextjs": "7.56.0",
+    "@sentry/nextjs": "7.90.0",
     "@sentry/react": "7.56.0",
     "@svgr/webpack": "8.0.1",
     "@types/jsdom": "21.1.1",

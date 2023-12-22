@@ -89,7 +89,6 @@ services:
       args:
         - APP_PORT=3000
         - PROJECT=sports-helsinki
-        - DOCKER_NEXTJS_DISABLE_SENTRY=true
         - NEXTJS_DISABLE_SENTRY=true
         - SENTRY_AUTH_TOKEN
         - FEDERATION_ROUTER_ENDPOINT

@@ -55,7 +55,7 @@ extends:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
       CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-      NEXTJS_DISABLE_SENTRY: 1
+      NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0

@@ -2,19 +2,28 @@
 // The config you add here will be used whenever a page is visited.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import { init as sentryInit } from '@sentry/nextjs';
+import * as Sentry from '@sentry/nextjs';
 
-sentryInit({
+Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-
+  environment: process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT,
   // Adjust this value in production, or use tracesSampler for greater control
   // @see https://develop.sentry.dev/sdk/performance/
-  tracesSampleRate: ['false', '0'].includes(
-    process.env.NEXTJS_SENTRY_TRACING ?? ''
-  )
-    ? undefined
-    : 1.0,
-
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  tracesSampleRate: parseFloat(
+    process.env.NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE ?? '0.1'
+  ),
+  // Replay may only be enabled for the client-side
+  integrations: [new Sentry.Replay()],
+  // Capture Replay for 10% of all sessions,
+  // plus for 100% of sessions with an error
+  replaysSessionSampleRate: parseFloat(
+    process.env.NEXT_PUBLIC_SENTRY_REPLAY_SESSION_SAMPLE_RATE ?? '0'
+  ),
+  replaysOnErrorSampleRate: parseFloat(
+    process.env.NEXT_PUBLIC_SENTRY_REPLAY_ON_ERROR_SAMPLE_RATE ?? '0'
+  ),
   // ...
   // Note: if you want to override the automatic release value, do not set a
   // `release` value here - use the environment variable `SENTRY_RELEASE`, so

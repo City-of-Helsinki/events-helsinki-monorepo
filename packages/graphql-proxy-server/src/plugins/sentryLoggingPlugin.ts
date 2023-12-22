@@ -9,6 +9,7 @@ const sentryLoggingPlugin = <T>(): ApolloServerPlugin<ContextValue<T>> => {
   Sentry.init({
     dsn: config.sentryDsn,
     environment: config.sentryEnvironment,
+    tracesSampleRate: config.sentryTraceSampleRate,
     integrations: [
       // used for rewriting SourceMaps from js to ts
       // check that sourcemaps are enabled in tsconfig.js

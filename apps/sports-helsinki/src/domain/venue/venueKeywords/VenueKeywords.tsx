@@ -31,7 +31,6 @@ const VenueKeywords: React.FC<Props> = ({
   showIsFree = true,
   showKeywords = true,
   showKeywordsCount,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   withActions = true,
 }) => {
   const { t } = useTranslation('event');
@@ -56,7 +55,6 @@ const VenueKeywords: React.FC<Props> = ({
       []
     ) ?? [];
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleClick =
     (type: 'text' | 'isFree', value = '') =>
     () => {
@@ -94,8 +92,7 @@ const VenueKeywords: React.FC<Props> = ({
           featured={!whiteOnly}
           isFreeEvent
           keyword={t('categories.labelFree')}
-          /* Disable onClick as per LIIKUNTA-411 comment */
-          /* onClick={handleClick('isFree')} */
+          onClick={handleClick('isFree')}
         />
       )}
       {showKeywords &&
@@ -107,8 +104,7 @@ const VenueKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={first.id}
             keyword={first.label}
-            /* Disable onClick as per LIIKUNTA-411 comment */
-            /* onClick={withActions ? handleClick('text', first.label) : undefined} */
+            onClick={withActions ? handleClick('text', first.label) : undefined}
           />
         )}
       {showKeywords &&
@@ -122,10 +118,9 @@ const VenueKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={second.id}
             keyword={second.label}
-            /* Disable onClick as per LIIKUNTA-411 comment */
-            /* onClick={
+            onClick={
               withActions ? handleClick('text', second.label) : undefined
-            } */
+            }
           />
         )}
       {!!restKeywords.length &&
@@ -138,8 +133,7 @@ const VenueKeywords: React.FC<Props> = ({
             hideOnMobile={hideKeywordsOnMobile}
             key={tag.id}
             keyword={tag.label}
-            /* Disable onClick as per LIIKUNTA-411 comment */
-            /* onClick={withActions ? handleClick('text', tag.label) : undefined} */
+            onClick={withActions ? handleClick('text', tag.label) : undefined}
           />
         ))}
       {!!restKeywords.length && showKeywords && showKeywordsCount && (

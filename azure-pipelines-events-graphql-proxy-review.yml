@@ -60,7 +60,6 @@ extends:
     # The values here will override the values defined in the graphql-proxy-pipelines repository
     buildArgs:
       GRAPHQL_PROXY_DEBUG: 1
-      # dummmy update to trigger build
       GRAPHQL_PROXY_API_BASE_URL: https://linkedevents.api.test.hel.ninja/v1/
     configMap: # pod environment variables
       GRAPHQL_PROXY_DEBUG: 1

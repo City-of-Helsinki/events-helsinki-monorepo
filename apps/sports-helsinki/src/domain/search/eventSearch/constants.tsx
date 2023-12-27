@@ -190,6 +190,7 @@ export enum EVENT_SEARCH_FILTERS {
   MAX_AGE = 'audienceMaxAgeGt',
   SUITABLE = 'suitableFor',
   EVENT_TYPE = 'eventType',
+  TEXT = 'text',
 }
 
 export const CATEGORY_CATALOG = {

@@ -119,7 +119,16 @@ $buttonWidth: 180px;
     justify-content: space-between;
 
     @include respond-below(l) {
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr;
+      & > div:nth-child(2) {
+        order: 2;
+      }
+
+      & > button {
+        order: 1;
+        margin: 0 0 var(--spacing-xs) 0;
+      }
     }
 
     @include respond-below(l) {

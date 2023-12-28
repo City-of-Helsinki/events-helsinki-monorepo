@@ -89,6 +89,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, eventUrl }) => {
                   event={event}
                   showIsFree={true}
                   showKeywords={false}
+                  withActions={false}
                 />
               </div>
             </div>

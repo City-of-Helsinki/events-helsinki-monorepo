@@ -119,6 +119,7 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
                 event={event}
                 hideKeywordsOnMobile={true}
                 showIsFree={true}
+                withActions={false}
               />
             </div>
             <div className={styles.buttonWrapper}>

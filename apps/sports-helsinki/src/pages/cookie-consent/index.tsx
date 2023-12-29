@@ -2,12 +2,12 @@ import {
   NavigationContext,
   Navigation,
   MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
   EventsCookieConsent,
   RouteMeta,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -21,7 +21,7 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 export default function CookieConsent() {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   const router = useRouter();
   /*
   // bug or feature: query is empty in handleRedirect

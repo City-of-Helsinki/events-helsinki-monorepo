@@ -54,6 +54,7 @@ extends:
   # Django example: azure-pipelines-PROJECTNAME-api-release.yml
   # Drupal example: azure-pipelines-drupal-release.yml
   template: azure-pipelines-harrastukset-review.yml@harrastukset-pipelines
+  # no-op change to trigger env
   parameters:
     # Application build arguments and config map values as key value pairs.
     # Does not contain all buildArguments, the rest located in harrastukset-pipelines/harrastukset-variables-development.yml and harrastukset-variables-common.yml

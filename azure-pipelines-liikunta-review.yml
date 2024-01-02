@@ -59,6 +59,7 @@ extends:
     # Does not contain all buildArguments, the rest located in liikunta-pipelines/liikunta-variables-development.yml and liikunta-variables-common.yml
     # The values here will override the values defined in the liikunta-pipelines repository
     buildArgs:
+            # no-op change to trigger env
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr554.dev.hel.ninja/
       CMS_ORIGIN: https://liikunta.hkih.stage.geniem.io
       LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.test.hel.ninja/v1/event

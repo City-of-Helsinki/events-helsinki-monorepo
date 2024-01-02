@@ -5,7 +5,6 @@ import {
   getAllArticles,
   Navigation,
   useCommonTranslation,
-  MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   useAppHobbiesTranslation,
@@ -59,40 +58,38 @@ const NextCmsArticle: NextPage<{
   if (!article) return null;
 
   return (
-    <MatomoWrapper>
-      <RHHCPage
-        className="article-page"
-        navigation={<Navigation page={article} />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} page={article} />
-            <RHHCPageContent
-              page={article}
-              breadcrumbs={
-                breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
-              }
-              shareLinks={
-                <ShareLinks title={commonTranslation('common:share.article')} />
-              }
-              collections={
-                collections
-                  ? cmsHelper.getDefaultCollections(
-                      article,
-                      getRoutedInternalHref
-                    )
-                  : []
-              }
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={appTranslation('appHobbies:appName')}
+    <RHHCPage
+      className="article-page"
+      navigation={<Navigation page={article} />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} page={article} />
+          <RHHCPageContent
+            page={article}
+            breadcrumbs={
+              breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
+            }
+            shareLinks={
+              <ShareLinks title={commonTranslation('common:share.article')} />
+            }
+            collections={
+              collections
+                ? cmsHelper.getDefaultCollections(
+                    article,
+                    getRoutedInternalHref
+                  )
+                : []
+            }
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={appTranslation('appHobbies:appName')}
+        />
+      }
+    />
   );
 };
 

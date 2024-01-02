@@ -1,7 +1,6 @@
 import {
   NavigationContext,
   Navigation,
-  MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
@@ -32,26 +31,24 @@ const Search: NextPage<{
   const { t } = useAppSportsTranslation();
   usePageScrollRestoration();
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <PageMeta {...page?.seo} />
-            <CombinedSearchPage defaultTab="Venue" />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={t('appSports:appName')}
-            feedbackWithPadding
-          />
-        }
-      />
-    </MatomoWrapper>
+    <HCRCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <PageMeta {...page?.seo} />
+          <CombinedSearchPage defaultTab="Venue" />
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={t('appSports:appName')}
+          feedbackWithPadding
+        />
+      }
+    />
   );
 };
 

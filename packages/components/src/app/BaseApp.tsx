@@ -10,6 +10,7 @@ import { injectStyle } from 'react-toastify/dist/inject-style';
 import '../styles/globals.scss';
 import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
+import { MatomoWrapper } from '../components';
 import type { createAskemInstance } from '../components/askem';
 import useAskemContext from '../components/askem/useAskemContext';
 
@@ -132,17 +133,19 @@ function BaseApp({
                     footerMenu={footerMenu}
                     languages={languages}
                   >
-                    <GeolocationErrorNotification />
-                    <ResetFocus />
-                    {children}
-                    {withConsent && (
-                      <EventsCookieConsent
-                        onConsentGiven={handleConsentGiven}
-                        allowLanguageSwitch={false}
-                        appName={appName}
-                      />
-                    )}
-                    <DynamicToastContainer />
+                    <MatomoWrapper>
+                      <GeolocationErrorNotification />
+                      <ResetFocus />
+                      {children}
+                      {withConsent && (
+                        <EventsCookieConsent
+                          onConsentGiven={handleConsentGiven}
+                          allowLanguageSwitch={false}
+                          appName={appName}
+                        />
+                      )}
+                      <DynamicToastContainer />
+                    </MatomoWrapper>
                   </NavigationProvider>
                 </GeolocationProvider>
               </AskemProvider>

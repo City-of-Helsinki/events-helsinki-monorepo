@@ -2,7 +2,6 @@ import {
   EventDetailsDocument,
   NavigationContext,
   Navigation,
-  MatomoWrapper,
   getLanguageOrDefault,
   FooterSection,
   useAppEventsTranslation,
@@ -27,22 +26,20 @@ const Event: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useAppEventsTranslation();
   return (
-    <MatomoWrapper>
-      <RHHCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <EventPageContainer
-            event={event}
-            loading={loading}
-            showSimilarEvents={AppConfig.showSimilarEvents}
-          />
-        }
-        footer={
-          <FooterSection menu={footerMenu} appName={t('appEvents:appName')} />
-        }
-      />
-    </MatomoWrapper>
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <EventPageContainer
+          event={event}
+          loading={loading}
+          showSimilarEvents={AppConfig.showSimilarEvents}
+        />
+      }
+      footer={
+        <FooterSection menu={footerMenu} appName={t('appEvents:appName')} />
+      }
+    />
   );
 };
 export default Event;

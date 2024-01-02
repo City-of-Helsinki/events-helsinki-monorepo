@@ -3,7 +3,6 @@ import {
   getQlLanguage,
   NavigationContext,
   Navigation,
-  MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
@@ -40,32 +39,30 @@ const HomePage: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useAppHobbiesTranslation();
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <HCRCPageContent
-              page={page}
-              PageContentLayoutComponent={LandingPageContentLayout}
-              collections={(page: PageType | ArticleType) =>
-                cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
-              }
-              language={getQlLanguage(locale)}
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={t('appHobbies:appName')}
-            hasFeedBack={false}
+    <HCRCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <HCRCPageContent
+            page={page}
+            PageContentLayoutComponent={LandingPageContentLayout}
+            collections={(page: PageType | ArticleType) =>
+              cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
+            }
+            language={getQlLanguage(locale)}
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={t('appHobbies:appName')}
+          hasFeedBack={false}
+        />
+      }
+    />
   );
 };
 

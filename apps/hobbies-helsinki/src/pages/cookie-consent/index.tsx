@@ -1,7 +1,6 @@
 import {
   NavigationContext,
   Navigation,
-  MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
@@ -40,31 +39,29 @@ export default function CookieConsent() {
   usePageScrollRestoration();
 
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <ConsentPageContent>
-              <EventsCookieConsent
-                appName={t('appHobbies:appName')}
-                isModal={false}
-                onConsentGiven={handleRedirect}
-              />
-            </ConsentPageContent>
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={t('appHobbies:appName')}
-            hasFeedBack={false}
-          />
-        }
-      />
-    </MatomoWrapper>
+    <HCRCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <ConsentPageContent>
+            <EventsCookieConsent
+              appName={t('appHobbies:appName')}
+              isModal={false}
+              onConsentGiven={handleRedirect}
+            />
+          </ConsentPageContent>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={t('appHobbies:appName')}
+          hasFeedBack={false}
+        />
+      }
+    />
   );
 }
 

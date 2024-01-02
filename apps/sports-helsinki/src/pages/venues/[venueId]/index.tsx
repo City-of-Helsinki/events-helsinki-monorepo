@@ -2,7 +2,6 @@ import {
   NavigationContext,
   VenueDocument,
   Navigation,
-  MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
@@ -29,23 +28,21 @@ const VenuePage: NextPage<{
   const { t } = useAppSportsTranslation();
   usePageScrollRestoration();
   return (
-    <MatomoWrapper>
-      <RHHCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <VenuePageContainer
-            venue={venue}
-            loading={loading}
-            showSimilarVenues={AppConfig.showSimilarVenues}
-            showUpcomingEvents={AppConfig.showVenuesUpcomingEvents}
-          />
-        }
-        footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
-        }
-      />
-    </MatomoWrapper>
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <VenuePageContainer
+          venue={venue}
+          loading={loading}
+          showSimilarVenues={AppConfig.showSimilarVenues}
+          showUpcomingEvents={AppConfig.showVenuesUpcomingEvents}
+        />
+      }
+      footer={
+        <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+      }
+    />
   );
 };
 export default VenuePage;

@@ -7,10 +7,10 @@ import {
   useDebounce,
   Navigation,
   MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
+  useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
@@ -50,7 +50,7 @@ const SEARCH_DEBOUNCE_TIME = 500;
 export default function ArticleArchive({
   page,
 }: HobbiesGlobalPageProps & { page: PageType }) {
-  const { t: commonT } = useCommonTranslation();
+  const { t } = useAppHobbiesTranslation();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, SEARCH_DEBOUNCE_TIME);
@@ -200,7 +200,7 @@ export default function ArticleArchive({
         footer={
           <FooterSection
             menu={footerMenu}
-            appName={commonT('appHobbies:appName')}
+            appName={t('appHobbies:appName')}
             feedbackWithPadding
           />
         }

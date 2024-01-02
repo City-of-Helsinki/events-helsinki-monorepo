@@ -3,9 +3,9 @@ import {
   NavigationContext,
   Navigation,
   MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type {
   EventFields,
@@ -26,7 +26,7 @@ const EventPage: NextPage<{
   loading: boolean;
 }> = ({ event, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   return (
     <MatomoWrapper>
       <RHHCPage

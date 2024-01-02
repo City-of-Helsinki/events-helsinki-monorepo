@@ -4,10 +4,10 @@ import {
   NavigationContext,
   Navigation,
   MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
+  useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -38,7 +38,7 @@ const HomePage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppHobbiesTranslation();
   return (
     <MatomoWrapper>
       <HCRCPage

@@ -2,12 +2,12 @@ import {
   NavigationContext,
   Navigation,
   MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
   RouteMeta,
   PageMeta,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
@@ -31,7 +31,7 @@ const Search: NextPage<{
   page: PageType;
 }> = ({ page }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   usePageScrollRestoration();
   return (
     <MatomoWrapper>

@@ -3,10 +3,10 @@ import {
   VenueDocument,
   Navigation,
   MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type {
   Venue,
@@ -26,7 +26,7 @@ const VenuePage: NextPage<{
   loading: boolean;
 }> = ({ venue, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   usePageScrollRestoration();
   return (
     <MatomoWrapper>

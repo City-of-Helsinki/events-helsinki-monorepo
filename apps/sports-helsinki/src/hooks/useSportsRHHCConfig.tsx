@@ -10,6 +10,7 @@ import {
   useCommonCmsConfig,
   HelsinkiCityOwnedIcon,
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -41,6 +42,7 @@ export default function useSportsRHHCConfig(args: {
 }) {
   const { apolloClient } = args;
   const { t: commonTranslation } = useCommonTranslation();
+  const { t: appTranslation } = useAppSportsTranslation();
   const { t: eventTranslation } = useEventTranslation();
   const locale = useLocale();
   const commonConfig = useCommonCmsConfig();
@@ -85,7 +87,7 @@ export default function useSportsRHHCConfig(args: {
           <HelsinkiCityOwnedIcon {...props} />
         ),
       },
-      siteName: commonTranslation('appSports:appName'),
+      siteName: appTranslation('appSports:appName'),
       currentLanguageCode: locale.toUpperCase(),
       apolloClient,
       eventsApolloClient: apolloClient,
@@ -127,5 +129,12 @@ export default function useSportsRHHCConfig(args: {
       },
       internalHrefOrigins,
     } as unknown as Config;
-  }, [commonConfig, commonTranslation, eventTranslation, locale, apolloClient]);
+  }, [
+    commonConfig,
+    appTranslation,
+    commonTranslation,
+    eventTranslation,
+    locale,
+    apolloClient,
+  ]);
 }

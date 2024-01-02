@@ -6,11 +6,11 @@ import {
   skipFalsyType,
   useDebounce,
   Navigation,
-  useCommonTranslation,
   MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import React, { useContext } from 'react';
@@ -50,7 +50,7 @@ const SEARCH_DEBOUNCE_TIME = 500;
 export default function ArticleArchive({
   page,
 }: SportsGlobalPageProps & { page: PageType }) {
-  const { t: commonT } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchCategories, setSearchCategories] = React.useState<string[]>([]);
   const debouncedSearchTerm = useDebounce(searchTerm, SEARCH_DEBOUNCE_TIME);
@@ -201,7 +201,7 @@ export default function ArticleArchive({
         footer={
           <FooterSection
             menu={footerMenu}
-            appName={commonT('appSports:appName')}
+            appName={t('appSports:appName')}
             feedbackWithPadding
           />
         }

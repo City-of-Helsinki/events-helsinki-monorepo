@@ -2,7 +2,6 @@ import {
   EventDetailsDocument,
   NavigationContext,
   Navigation,
-  MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   useAppSportsTranslation,
@@ -28,22 +27,20 @@ const EventPage: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useAppSportsTranslation();
   return (
-    <MatomoWrapper>
-      <RHHCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <EventPageContainer
-            event={event}
-            loading={loading}
-            showSimilarEvents={AppConfig.showSimilarEvents}
-          />
-        }
-        footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
-        }
-      />
-    </MatomoWrapper>
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <EventPageContainer
+          event={event}
+          loading={loading}
+          showSimilarEvents={AppConfig.showSimilarEvents}
+        />
+      }
+      footer={
+        <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+      }
+    />
   );
 };
 export default EventPage;

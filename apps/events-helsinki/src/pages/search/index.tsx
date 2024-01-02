@@ -2,7 +2,6 @@ import {
   NavigationContext,
   useAppEventsTranslation,
   Navigation,
-  MatomoWrapper,
   getLanguageOrDefault,
   FooterSection,
   RouteMeta,
@@ -55,29 +54,27 @@ const Search: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
 
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <PageMeta {...page?.seo} />
-            <SearchPage
-              SearchComponent={AdvancedSearch}
-              pageTitle={tAppEvents('appEvents:search.pageTitle')}
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={tAppEvents('appEvents:appName')}
-            feedbackWithPadding
+    <HCRCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <PageMeta {...page?.seo} />
+          <SearchPage
+            SearchComponent={AdvancedSearch}
+            pageTitle={tAppEvents('appEvents:search.pageTitle')}
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={tAppEvents('appEvents:appName')}
+          feedbackWithPadding
+        />
+      }
+    />
   );
 };
 

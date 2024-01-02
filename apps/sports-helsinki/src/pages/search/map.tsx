@@ -3,7 +3,6 @@ import {
   useLocale,
   getURLSearchParamsFromAsPath,
   Navigation,
-  MatomoWrapper,
   getLanguageOrDefault,
   RouteMeta,
   PageMeta,
@@ -134,22 +133,20 @@ export function MapSearchPageContent() {
 
 export default function MapSearch({ page }: { page: PageType }) {
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <PageMeta {...page?.seo} />
-            <CombinedSearchProvider>
-              <MapSearchPageContent />
-            </CombinedSearchProvider>
-          </>
-        }
-        footer={null}
-      />
-    </MatomoWrapper>
+    <HCRCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <PageMeta {...page?.seo} />
+          <CombinedSearchProvider>
+            <MapSearchPageContent />
+          </CombinedSearchProvider>
+        </>
+      }
+      footer={null}
+    />
   );
 }
 

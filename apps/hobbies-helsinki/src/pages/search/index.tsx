@@ -2,7 +2,6 @@ import {
   NavigationContext,
   useAppHobbiesTranslation,
   Navigation,
-  MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
@@ -54,29 +53,27 @@ const Search: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
 
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <PageMeta {...page?.seo} />
-            <SearchPage
-              SearchComponent={AdvancedSearch}
-              pageTitle={tAppHobbies('appHobbies:search.pageTitle')}
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={tAppHobbies('appHobbies:appName')}
-            feedbackWithPadding
+    <HCRCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <PageMeta {...page?.seo} />
+          <SearchPage
+            SearchComponent={AdvancedSearch}
+            pageTitle={tAppHobbies('appHobbies:search.pageTitle')}
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={tAppHobbies('appHobbies:appName')}
+          feedbackWithPadding
+        />
+      }
+    />
   );
 };
 

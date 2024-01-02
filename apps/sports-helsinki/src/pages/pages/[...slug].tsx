@@ -6,7 +6,6 @@ import {
   NavigationContext,
   getAllPages,
   Navigation,
-  MatomoWrapper,
   useAppSportsTranslation,
   FooterSection,
   getLanguageOrDefault,
@@ -56,31 +55,29 @@ const NextCmsPage: NextPage<{
   if (!page) return null;
 
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="page"
-        navigation={<Navigation page={page} />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} page={page} />
-            <HCRCPageContent
-              page={page}
-              collections={
-                collections
-                  ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
-                  : []
-              }
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={appTranslation('appSports:appName')}
+    <HCRCPage
+      className="page"
+      navigation={<Navigation page={page} />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} page={page} />
+          <HCRCPageContent
+            page={page}
+            collections={
+              collections
+                ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
+                : []
+            }
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={appTranslation('appSports:appName')}
+        />
+      }
+    />
   );
 };
 

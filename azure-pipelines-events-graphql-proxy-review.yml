@@ -59,6 +59,7 @@ extends:
     # Does not contain all buildArguments, the rest located in graphql-proxy-pipelines/events-graphql-proxy-variables-development.yml and variables-common.yml
     # The values here will override the values defined in the graphql-proxy-pipelines repository
     buildArgs:
+      # no-op change to trigger env
       GRAPHQL_PROXY_DEBUG: 1
       GRAPHQL_PROXY_API_BASE_URL: https://linkedevents.api.test.hel.ninja/v1/
     configMap: # pod environment variables

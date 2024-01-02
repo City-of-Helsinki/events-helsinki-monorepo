@@ -12,8 +12,7 @@ import {
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useCallback, useContext } from 'react';
-import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
-import { ROUTES } from '../../constants';
+import { Page as HCRCPage } from 'react-helsinki-headless-cms';
 import AppConfig from '../../domain/app/AppConfig';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import ConsentPageContent from '../../domain/cookieConsent/ConsentPageContent';
@@ -42,8 +41,7 @@ export default function CookieConsent() {
 
   return (
     <MatomoWrapper>
-      <HCRCApolloPage
-        uri={ROUTES.COOKIE_CONSENT}
+      <HCRCPage
         className="pageLayout"
         navigation={<Navigation />}
         content={

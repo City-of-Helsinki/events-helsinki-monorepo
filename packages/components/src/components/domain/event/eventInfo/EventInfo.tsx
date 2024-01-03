@@ -38,6 +38,8 @@ import getDateArray from '../../../../utils/getDateArray';
 import getDateRangeStr from '../../../../utils/getDateRangeStr';
 import getDomain from '../../../../utils/getDomain';
 import { translateValue } from '../../../../utils/translateUtils';
+import EmailLink from '../../../emailLink/EmailLink';
+import PhoneLink from '../../../phoneLink/PhoneLink';
 import styles from './eventInfo.module.scss';
 import { SubEvents, SuperEvent } from './EventsHierarchy';
 import OrganizationInfo from './OrganizationInfo';
@@ -257,11 +259,16 @@ const OtherInfo: React.FC<{
       icon={<IconInfoCircle aria-hidden />}
       title={t('info.labelOtherInfo')}
     >
-      {[email, telephone]
-        .filter((e) => e)
-        .map((item) => (
-          <div key={item}>{item}</div>
-        ))}
+      {email && (
+        <div key={email}>
+          <EmailLink email={email} />
+        </div>
+      )}
+      {telephone && (
+        <div key={telephone}>
+          <PhoneLink phone={telephone} />
+        </div>
+      )}
 
       {infoUrl && (
         <SecondaryLink

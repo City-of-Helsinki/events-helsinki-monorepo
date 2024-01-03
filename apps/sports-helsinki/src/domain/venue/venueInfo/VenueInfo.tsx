@@ -9,6 +9,8 @@ import {
   useAppRoutingContext,
   useLocale,
   HelsinkiCityOwnedIcon,
+  PhoneLink,
+  EmailLink,
 } from '@events-helsinki/components';
 import {
   IconClock,
@@ -73,13 +75,25 @@ const ContactDetailsInfo = ({
         title={t('venue:info.labelContactDetails')}
       >
         <ul key="contact-details-main" className={styles.list}>
-          {telephone && <li>{telephone}</li>}
-          {email && <li>{email}</li>}
+          {telephone && (
+            <li>
+              <PhoneLink phone={telephone} />
+            </li>
+          )}
+          {email && (
+            <li>
+              <EmailLink email={email} />
+            </li>
+          )}
         </ul>
         {contactDetailsSectionsContents?.map((contact, i) => (
           <ul key={`contact-details-other-${i}`} className={styles.list}>
             {contact?.name && <li>{contact.name}</li>}
-            {contact?.phone && <li>{contact.phone}</li>}
+            {contact?.phone && (
+              <li>
+                <PhoneLink phone={contact.phone} />
+              </li>
+            )}
           </ul>
         ))}
       </InfoWithIcon>

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.2...federation-router-v1.6.0) (2024-01-04)
+
+
+### Features
+
+* **router:** Upgrade the Apollo router docker image ([7a0bb67](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7a0bb6708193ab27606c56f3e1d061a4fff1262e))
+
 ## [1.5.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.1...federation-router-v1.5.2) (2023-12-14)
 
 

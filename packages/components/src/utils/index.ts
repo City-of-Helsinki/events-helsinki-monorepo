@@ -2,6 +2,7 @@ export * from './season';
 export * from './time';
 export { default as buildQueryFromObject } from './buildQueryFromObject';
 export * from './dateUtils';
+export * from './arrayUtils';
 export * from './eventUtils';
 export { default as getDateArray } from './getDateArray';
 export { default as getDateRangeStr } from './getDateRangeStr';

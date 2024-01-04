@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.17.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.16.0...sports-helsinki-v1.17.0) (2024-01-04)
+
+
+### Features
+
+* **apps:** Configure sentry in use ([d909ae9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d909ae96344378039e657da324bc65f2adbece0b))
+* **router:** Upgrade the Apollo router docker image ([7a0bb67](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7a0bb6708193ab27606c56f3e1d061a4fff1262e))
+* **sports:** Clickable tags in event or course details page triggers search on click ([48753e0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48753e0d1f774bafa3b4194880041a0e377391dd))
+* **sports:** Clickable tags in venue details page triggers search on click ([ef2a682](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ef2a682de59ab0a3c7626cbfe799c06a504760a3))
+
+
+### Bug Fixes
+
+* Application name on cookie-consent page ([1b92820](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1b92820f68f0e40d1434bf5096394d8e8ebcee58))
+* Archive search page search button styles ([#582](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/582)) ([ea41860](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ea418604ba029cb33d1a9a4541da1376bea4cc18))
+* Hcrc apollo tests improvements ([#578](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/578)) ([ee3804a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ee3804aa9a6c1a8970392f48b4ec109723854899))
+* Keep search type param when removing filter ([#583](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/583)) ([c7b7b1c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c7b7b1cdf97268b608f530626933a74f35dc5988))
+* Order of the show on map on mobile ([#584](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/584)) ([b09a525](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b09a5251eb9a8252ad6fed8aa85792c81a7475e9))
+* Upgrade the HCRC-lib to fix unique tag ids ([506537b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/506537b54019ba64fafdabca47b64a59c22231b3))
+
 ## [1.16.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.15.0...sports-helsinki-v1.16.0) (2023-12-13)
 
 

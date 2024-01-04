@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.2.0...events-graphql-proxy-v1.2.1) (2024-01-04)
+
+
+### Bug Fixes
+
+* Backward compatibility urls ([791a511](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/791a511d3ab5579b24a59bb9e7566cdad9006a6a))
+
 ## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.1.0...events-graphql-proxy-v1.2.0) (2023-09-08)
 
 

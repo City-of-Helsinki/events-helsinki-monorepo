@@ -14,7 +14,7 @@ import type { EventAttributes } from 'ics';
 import { createEvent } from 'ics';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { SecondaryLink } from 'react-helsinki-headless-cms';
+import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
 
 import IconDirections from '../../../../assets/icons/IconDirections';
 import InfoWithIcon from '../../../../components/infoWithIcon/InfoWithIcon';
@@ -257,11 +257,20 @@ const OtherInfo: React.FC<{
       icon={<IconInfoCircle aria-hidden />}
       title={t('info.labelOtherInfo')}
     >
-      {[email, telephone]
-        .filter((e) => e)
-        .map((item) => (
-          <div key={item}>{item}</div>
-        ))}
+      {email && (
+        <div key={email}>
+          <Link className={styles.link} size="L" href={`mailto:${email}`}>
+            {email}
+          </Link>
+        </div>
+      )}
+      {telephone && (
+        <div key={telephone}>
+          <Link className={styles.link} size="L" href={`tel:${telephone}`}>
+            {telephone}
+          </Link>
+        </div>
+      )}
 
       {infoUrl && (
         <SecondaryLink

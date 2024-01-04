@@ -19,7 +19,7 @@ import {
 } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { SecondaryLink } from 'react-helsinki-headless-cms';
+import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
 import {
   getGoogleDirectionsUrl,
   getHSLDirectionsUrl,
@@ -73,13 +73,43 @@ const ContactDetailsInfo = ({
         title={t('venue:info.labelContactDetails')}
       >
         <ul key="contact-details-main" className={styles.list}>
-          {telephone && <li>{telephone}</li>}
-          {email && <li>{email}</li>}
+          {telephone && (
+            <li>
+              <Link
+                className={styles.marginlessLink}
+                size="L"
+                href={`tel:${telephone}`}
+              >
+                {telephone}
+              </Link>
+            </li>
+          )}
+          {email && (
+            <li>
+              <Link
+                className={styles.marginlessLink}
+                size="L"
+                href={`mailto:${email}`}
+              >
+                {email}
+              </Link>
+            </li>
+          )}
         </ul>
         {contactDetailsSectionsContents?.map((contact, i) => (
           <ul key={`contact-details-other-${i}`} className={styles.list}>
             {contact?.name && <li>{contact.name}</li>}
-            {contact?.phone && <li>{contact.phone}</li>}
+            {contact?.phone && (
+              <li>
+                <Link
+                  className={styles.marginlessLink}
+                  size="L"
+                  href={`tel:${contact.phone}`}
+                >
+                  {contact.phone}
+                </Link>
+              </li>
+            )}
           </ul>
         ))}
       </InfoWithIcon>

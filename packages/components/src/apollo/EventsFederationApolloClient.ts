@@ -23,6 +23,7 @@ import capitalize from 'lodash/capitalize';
 import { graphqlClientLogger } from '../loggers/logger';
 import type { LanguageString } from '../types';
 import type { CmsRoutedAppHelper } from '../utils';
+import { appendUnique } from '../utils/arrayUtils';
 import isClient from '../utils/isClient';
 
 import {
@@ -225,7 +226,9 @@ class EventsFederationApolloClient {
               (existing, incoming) => {
                 if (!incoming) return existing;
                 return {
-                  data: [...(existing?.data ?? []), ...incoming.data],
+                  data: appendUnique<{
+                    __ref: string;
+                  }>(existing?.data ?? [], incoming.data, '__ref'),
                   meta: incoming.meta,
                 };
               }

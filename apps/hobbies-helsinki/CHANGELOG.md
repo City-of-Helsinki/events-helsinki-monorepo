@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.13.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.12.0...hobbies-helsinki-v2.13.0) (2024-01-05)
+
+
+### Features
+
+* **router:** Upgrade the Apollo router docker image ([7a0bb67](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7a0bb6708193ab27606c56f3e1d061a4fff1262e))
+
 ## [2.12.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.11.1...hobbies-helsinki-v2.12.0) (2024-01-04)
 
 

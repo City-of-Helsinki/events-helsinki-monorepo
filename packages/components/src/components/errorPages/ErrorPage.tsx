@@ -41,7 +41,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({
               <IconCrossCircle size="xl" />
               <h1>{headerText}</h1>
               <p>{descriptionText}</p>
-              <Button onClick={moveToHomePage} variant="success">
+              <Button onClick={moveToHomePage} className={styles.backButton}>
                 {t(`errors:moveToHomePageButton`)}
               </Button>
             </div>

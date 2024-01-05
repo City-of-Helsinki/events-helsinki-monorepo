@@ -86,7 +86,7 @@ const getMenu = async (
   (
     await client.query({
       query: MenuDocument,
-      variables: { id: menuName },
+      variables: { id: menuName, menuIdentifiersOnly: true },
       fetchPolicy: 'network-only', // Always fetch new, but update the cache.
     })
   )?.data?.menu;

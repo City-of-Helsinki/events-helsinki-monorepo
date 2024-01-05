@@ -165,8 +165,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     });
     return {
       props: {
-        page: pageData.page,
-        ...(await serverSideTranslationsWithCommon(language, ['search'])),
+        ...(await serverSideTranslationsWithCommon(language, [
+          'search',
+          'home',
+        ])),
       },
     };
   });

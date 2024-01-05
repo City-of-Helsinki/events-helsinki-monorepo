@@ -11,7 +11,7 @@ import {
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useCallback, useContext } from 'react';
-import { Page as HCRCPage } from 'react-helsinki-headless-cms';
+import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import ConsentPageContent from '../../domain/cookieConsent/ConsentPageContent';
@@ -39,7 +39,7 @@ export default function CookieConsent() {
   usePageScrollRestoration();
 
   return (
-    <HCRCPage
+    <RHHCPage
       className="pageLayout"
       navigation={<Navigation />}
       content={

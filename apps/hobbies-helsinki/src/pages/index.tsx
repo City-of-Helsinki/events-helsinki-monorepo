@@ -14,8 +14,8 @@ import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
 import {
   useConfig,
-  PageContent as HCRCPageContent,
-  Page as HCRCPage,
+  PageContent as RHHCPageContent,
+  Page as RHHCPage,
   TemplateEnum,
 } from 'react-helsinki-headless-cms';
 import type {
@@ -39,13 +39,13 @@ const HomePage: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
   const { t } = useAppHobbiesTranslation();
   return (
-    <HCRCPage
+    <RHHCPage
       className="pageLayout"
       navigation={<Navigation />}
       content={
         <>
           <RouteMeta origin={AppConfig.origin} />
-          <HCRCPageContent
+          <RHHCPageContent
             page={page}
             PageContentLayoutComponent={LandingPageContentLayout}
             collections={(page: PageType | ArticleType) =>

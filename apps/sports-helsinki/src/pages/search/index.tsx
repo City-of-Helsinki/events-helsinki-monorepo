@@ -11,7 +11,7 @@ import {
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
-import { Page as HCRCPage } from 'react-helsinki-headless-cms';
+import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import type {
   PageQuery,
   PageQueryVariables,
@@ -31,7 +31,7 @@ const Search: NextPage<{
   const { t } = useAppSportsTranslation();
   usePageScrollRestoration();
   return (
-    <HCRCPage
+    <RHHCPage
       className="pageLayout"
       navigation={<Navigation />}
       content={

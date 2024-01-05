@@ -152,7 +152,7 @@ export default function ArticleArchive({
                       keywords={
                         itemCategories?.edges
                           ?.filter((category: any) => category?.node?.name)
-                          .map((category: any) => category?.node?.name || '') ||
+                          .map((category: any) => category?.node?.name || '') ??
                         []
                       }
                     />
@@ -180,7 +180,7 @@ export default function ArticleArchive({
                       keywords={
                         itemCategories?.edges
                           ?.filter((category: any) => category?.node?.name)
-                          .map((category: any) => category?.node?.name || '') ||
+                          .map((category: any) => category?.node?.name || '') ??
                         []
                       }
                     />

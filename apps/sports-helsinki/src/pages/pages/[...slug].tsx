@@ -25,8 +25,8 @@ import type {
 } from 'react-helsinki-headless-cms';
 import {
   getCollections,
-  PageContent as HCRCPageContent,
-  Page as HCRCPage,
+  PageContent as RHHCPageContent,
+  Page as RHHCPage,
   useConfig,
 } from 'react-helsinki-headless-cms';
 import type {
@@ -55,13 +55,13 @@ const NextCmsPage: NextPage<{
   if (!page) return null;
 
   return (
-    <HCRCPage
+    <RHHCPage
       className="page"
       navigation={<Navigation page={page} />}
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={page} />
-          <HCRCPageContent
+          <RHHCPageContent
             page={page}
             collections={
               collections

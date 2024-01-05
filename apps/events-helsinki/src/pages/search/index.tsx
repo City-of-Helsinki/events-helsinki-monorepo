@@ -12,7 +12,7 @@ import type { GetStaticPropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
-import { Page as HCRCPage } from 'react-helsinki-headless-cms';
+import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import type {
   PageQuery,
   PageQueryVariables,
@@ -54,7 +54,7 @@ const Search: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
 
   return (
-    <HCRCPage
+    <RHHCPage
       className="pageLayout"
       navigation={<Navigation />}
       content={

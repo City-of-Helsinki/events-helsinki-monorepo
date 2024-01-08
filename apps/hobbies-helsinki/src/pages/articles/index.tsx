@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { ParsedUrlQueryInput } from 'querystring';
 import { NetworkStatus } from '@apollo/client';
 import {
   getQlLanguage,
   NavigationContext,
   skipFalsyType,
-  useDebounce,
   Navigation,
   FooterSection,
   getLanguageOrDefault,
@@ -12,6 +12,8 @@ import {
   useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+import queryString from 'query-string';
 import React, { useContext } from 'react';
 import {
   Page as RHHCPage,
@@ -44,19 +46,52 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 const CATEGORIES_AMOUNT = 20;
 const BLOCK_SIZE = 10;
-const SEARCH_DEBOUNCE_TIME = 500;
+
+interface ArticleFilters {
+  text?: string | null;
+  tags?: string[];
+}
 
 export default function ArticleArchive({
   page,
 }: HobbiesGlobalPageProps & { page: PageType }) {
+  const router = useRouter();
   const { t } = useAppHobbiesTranslation();
-  const [searchTerm, setSearchTerm] = React.useState('');
-  const [searchCategories, setSearchCategories] = React.useState<string[]>([]);
-  const debouncedSearchTerm = useDebounce(searchTerm, SEARCH_DEBOUNCE_TIME);
+
+  const getArticlesSearchQuery = (
+    text: string,
+    tags: string
+  ): ParsedUrlQueryInput => {
+    const query: ParsedUrlQueryInput = {};
+    if (text) {
+      query.text = text;
+    }
+    if (tags) {
+      query.tags = tags;
+    }
+
+    return query;
+  };
+
+  const searchParams = new URLSearchParams(queryString.stringify(router.query));
+
+  const text = searchParams.get('text');
+  const tags = searchParams.get('tags')?.split(',');
+
+  const searchFilters: ArticleFilters | null = React.useMemo(() => {
+    return router.isReady
+      ? {
+          text,
+          tags,
+        }
+      : null;
+  }, [router, text, tags]);
+
   const {
     currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
+
   const {
     data: articlesData,
     fetchMore,
@@ -70,11 +105,12 @@ export default function ArticleArchive({
     nextFetchPolicy: 'cache-first',
     variables: {
       first: BLOCK_SIZE,
-      search: debouncedSearchTerm ?? '',
+      search: searchFilters?.text ?? '',
       language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
-      categories: searchCategories,
+      categories: searchFilters?.tags ?? [],
     },
   });
+
   const { data: categoriesData, loading: loadingCategories } =
     useCategoriesQuery({
       variables: {
@@ -82,7 +118,9 @@ export default function ArticleArchive({
         language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
       },
     });
+
   const isLoading =
+    !searchFilters ||
     (loadingArticles && networkStatus !== NetworkStatus.fetchMore) ||
     loadingCategories;
   const isLoadingMore = networkStatus === NetworkStatus.fetchMore;
@@ -102,9 +140,9 @@ export default function ArticleArchive({
 
   const articles = articlesData?.posts?.edges?.map((edge) => edge?.node).flat();
   const categories = categoriesData?.categories?.nodes ?? [];
-
-  // Show the first item large when the search has not yet done
-  const showFirstItemLarge = searchTerm.length === 0;
+  const currentCategories = categories.filter((category) =>
+    tags?.includes(category.databaseId.toString())
+  );
 
   const { footerMenu } = useContext(NavigationContext);
 
@@ -116,26 +154,36 @@ export default function ArticleArchive({
         <>
           <RouteMeta origin={AppConfig.origin} page={page} />
           <SearchPageContent
+            isLoading={isLoading || isLoadingMore}
             page={page}
             className="articlesArchive"
             noResults={!isLoading && articles?.length === 0}
-            items={articles}
+            items={!isLoading ? articles : []}
             tags={categories}
+            currentTags={currentCategories}
+            currentText={text ?? ''}
+            withQuery
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onSearch={(freeSearch, tags) => {
-              // TODO: Instead of doing this through yet another state, could the query just be updated?
-              setSearchTerm(freeSearch);
-              // NOTE: For some reason the CMS needs database ids here instead of ids or slugs.
-              setSearchCategories(
+              const query: ParsedUrlQueryInput = getArticlesSearchQuery(
+                freeSearch,
                 tags
                   .filter(skipFalsyType)
                   .map((tag) => tag?.databaseId.toString())
+                  .join(',')
+              );
+              router.replace(
+                {
+                  query,
+                },
+                undefined,
+                { shallow: true }
               );
             }}
             onLoadMore={() => {
               fetchMoreArticles();
             }}
-            largeFirstItem={showFirstItemLarge}
+            largeFirstItem={true}
             createLargeCard={(item) => {
               const cardItem = item as ArticleType;
               const itemCategories = cardItem?.categories;
@@ -189,7 +237,6 @@ export default function ArticleArchive({
               );
             }}
             hasMore={hasMoreToLoad}
-            isLoading={isLoading || isLoadingMore}
           />
         </>
       }

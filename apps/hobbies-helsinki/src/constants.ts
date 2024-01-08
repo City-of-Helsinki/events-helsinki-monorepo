@@ -2,7 +2,7 @@ export const ROUTES = {
   FRONT_PAGE: '/',
   SEARCH: '/search',
   COURSES: '/courses/[eventId]',
-  ARTICLE_ARCHIVE: '/article-archive',
+  ARTICLE_ARCHIVE: '/articles',
   ARTICLES: '/articles/[...slug]',
   PAGES: '/pages/[...slug]',
   VENUES: '/venues/[venueId]',

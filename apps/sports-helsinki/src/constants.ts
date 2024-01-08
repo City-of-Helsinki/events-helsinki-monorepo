@@ -9,7 +9,7 @@ export const ROUTES = {
   FRONT_PAGE: '/',
   COURSES: '/courses/[eventId]',
   VENUES: '/venues/[venueId]',
-  ARTICLE_ARCHIVE: '/article-archive',
+  ARTICLE_ARCHIVE: '/articles',
   ARTICLES: '/articles/[...slug]',
   PAGES: '/pages/[...slug]',
   COOKIE_CONSENT: '/cookie-consent',

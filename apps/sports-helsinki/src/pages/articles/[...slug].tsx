@@ -17,11 +17,13 @@ import type {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import type {
   Breadcrumb,
   CollectionType,
   ArticleType,
+  LanguageCodeFilterEnum,
 } from 'react-helsinki-headless-cms';
 import {
   getCollections,
@@ -33,19 +35,27 @@ import type {
   ArticleQuery,
   ArticleQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-import { ArticleDocument } from 'react-helsinki-headless-cms/apollo';
+import {
+  ArticleDocument,
+  useCategoriesQuery,
+} from 'react-helsinki-headless-cms/apollo';
+import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
+const CATEGORIES_AMOUNT = 20;
+
 const NextCmsArticle: NextPage<{
   article: ArticleType;
   breadcrumbs: Breadcrumb[] | null;
   collections: CollectionType[];
 }> = ({ article, breadcrumbs, collections }) => {
+  const router = useRouter();
   const {
+    currentLanguageCode,
     utils: { getRoutedInternalHref },
   } = useConfig();
 
@@ -53,9 +63,35 @@ const NextCmsArticle: NextPage<{
   const { t: appTranslation } = useAppSportsTranslation();
   const { footerMenu } = useContext(NavigationContext);
 
+  const { data: categoriesData, loading: loadingCategories } =
+    useCategoriesQuery({
+      variables: {
+        first: CATEGORIES_AMOUNT,
+        language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
+      },
+    });
+
+  const categories = categoriesData?.categories?.nodes ?? [];
+
+  const handleArticlesSearch = (tag: string) => {
+    const categoryId = categories?.find(
+      (category) => category?.id.toString() === tag
+    )?.databaseId;
+    if (categoryId) {
+      router.push(
+        `/${(currentLanguageCode as string).toLowerCase()}${
+          ROUTES.ARTICLE_ARCHIVE
+        }`,
+        {
+          query: { tags: categoryId },
+        }
+      );
+    }
+  };
+
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
-  if (!article) return null;
+  if (!article || loadingCategories) return null;
 
   return (
     <RHHCPage
@@ -66,6 +102,7 @@ const NextCmsArticle: NextPage<{
           <RouteMeta origin={AppConfig.origin} page={article} />
           <RHHCPageContent
             page={article}
+            onArticlesSearch={handleArticlesSearch}
             breadcrumbs={
               breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
             }

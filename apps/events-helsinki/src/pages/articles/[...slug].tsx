@@ -9,6 +9,7 @@ import {
   getLanguageOrDefault,
   useAppEventsTranslation,
   RouteMeta,
+  getLanguageCodeFilter,
 } from '@events-helsinki/components';
 import type { AppLanguage } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
@@ -23,7 +24,6 @@ import type {
   Breadcrumb,
   CollectionType,
   ArticleType,
-  LanguageCodeFilterEnum,
 } from 'react-helsinki-headless-cms';
 import {
   getCollections,
@@ -68,7 +68,7 @@ const NextCmsArticle: NextPage<{
     useCategoriesQuery({
       variables: {
         first: CATEGORIES_AMOUNT,
-        language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
+        language: getLanguageCodeFilter(currentLanguageCode),
       },
     });
 

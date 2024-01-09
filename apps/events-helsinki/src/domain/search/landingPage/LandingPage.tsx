@@ -1,4 +1,3 @@
-import { HeroComponent } from '@events-helsinki/components';
 import React from 'react';
 import type {
   PageContentLayoutProps,
@@ -18,11 +17,6 @@ export function LandingPageContentLayout({
   collections,
 }: LandingPageProps & PageContentLayoutProps) {
   const heroImage = page?.featuredImage?.node?.mediaItemUrl ?? '';
-  const heroLinkTitle = page?.hero?.link?.title ?? '';
-  const heroLinkUrl = page?.hero?.link?.url ?? '';
-  const title = page?.hero?.title ?? '';
-  const description = page?.hero?.description ?? '';
-
   const [firstCollection, ...restCollections] =
     (collections as React.ReactNode[]) ?? [];
   const lastCollection = restCollections.pop();
@@ -37,18 +31,7 @@ export function LandingPageContentLayout({
             korosBottomClassName={styles.korosBottomHero}
             backgroundImageUrl={heroImage}
           >
-            <ContentContainer>
-              {heroLinkTitle && heroLinkUrl && (
-                <HeroComponent
-                  title={title ?? ''}
-                  description={description ?? ''}
-                  cta={{
-                    label: heroLinkTitle ?? '',
-                    href: heroLinkUrl ?? '',
-                  }}
-                />
-              )}
-            </ContentContainer>
+            <></>
           </PageSection>
           <PageSection className={styles.sectionSearch}>
             <ContentContainer>

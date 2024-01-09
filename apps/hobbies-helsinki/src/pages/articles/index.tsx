@@ -10,6 +10,7 @@ import {
   getLanguageOrDefault,
   RouteMeta,
   useAppHobbiesTranslation,
+  getLanguageCodeFilter,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -23,11 +24,7 @@ import {
   useConfig,
   TemplateEnum,
 } from 'react-helsinki-headless-cms';
-import type {
-  ArticleType,
-  LanguageCodeFilterEnum,
-  PageType,
-} from 'react-helsinki-headless-cms';
+import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import {
   useCategoriesQuery,
   PageByTemplateDocument,
@@ -106,7 +103,7 @@ export default function ArticleArchive({
     variables: {
       first: BLOCK_SIZE,
       search: searchFilters?.text ?? '',
-      language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
+      language: getLanguageCodeFilter(currentLanguageCode),
       categories: searchFilters?.tags ?? [],
     },
   });
@@ -115,7 +112,7 @@ export default function ArticleArchive({
     useCategoriesQuery({
       variables: {
         first: CATEGORIES_AMOUNT,
-        language: currentLanguageCode as unknown as LanguageCodeFilterEnum,
+        language: getLanguageCodeFilter(currentLanguageCode),
       },
     });
 

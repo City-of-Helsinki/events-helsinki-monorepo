@@ -17,12 +17,13 @@ type useEventCardsProps = {
 function useEventCards({ events, getCardUrl }: useEventCardsProps) {
   const locale = useLocale();
   const {
+    organisationPrefixes,
     components: { EventCardContent },
   } = useConfig();
   useClickCapture(1000);
   return (
     events?.map((event, i) => {
-      const cardProps = getEventCardProps(event, locale);
+      const cardProps = getEventCardProps(event, organisationPrefixes, locale);
       return (
         <Card
           key={cardProps.id}

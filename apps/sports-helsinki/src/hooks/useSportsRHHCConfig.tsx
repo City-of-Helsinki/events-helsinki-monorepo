@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
+  getLanguageCode,
   getLinkArrowLabel,
   useLocale,
   useCommonTranslation,
@@ -15,7 +15,7 @@ import {
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
-import type { Config } from 'react-helsinki-headless-cms';
+import type { CardProps, Config } from 'react-helsinki-headless-cms';
 import {
   defaultConfig as rhhcDefaultConfig,
   ModuleItemTypeEnum,
@@ -39,7 +39,7 @@ const LINKEDEVENTS_API_EVENT_ENDPOINT = new URL(
 
 export default function useSportsRHHCConfig(args: {
   apolloClient: ApolloClient<NormalizedCacheObject>;
-}) {
+}): Config {
   const { apolloClient } = args;
   const { t: commonTranslation } = useCommonTranslation();
   const { t: appTranslation } = useAppSportsTranslation();
@@ -88,20 +88,24 @@ export default function useSportsRHHCConfig(args: {
         ),
       },
       siteName: appTranslation('appSports:appName'),
-      currentLanguageCode: locale.toUpperCase(),
+      currentLanguageCode: getLanguageCode(locale),
       apolloClient,
       eventsApolloClient: apolloClient,
       venuesApolloClient: apolloClient,
       utils: {
         ...rhhcDefaultConfig.utils,
         getEventCardProps: AppConfig.showEnrolmentStatusInCardDetails
-          ? (item: EventFieldsFragment, locale: string) => ({
+          ? (
+              item: EventFieldsFragment,
+              organisationPrefixes: string[],
+              locale: string
+            ): CardProps => ({
               ...rhhcDefaultConfig.utils.getEventCardProps(
                 item,
-                CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
+                organisationPrefixes,
                 locale
               ),
-              getLinkArrowLabel: getLinkArrowLabel({
+              linkArrowLabel: getLinkArrowLabel({
                 item,
                 locale,
                 eventTranslation,
@@ -110,15 +114,15 @@ export default function useSportsRHHCConfig(args: {
             })
           : rhhcDefaultConfig.utils.getEventCardProps,
         getRoutedInternalHref: (
-          link: string,
-          _type: ModuleItemTypeEnum
+          link?: string | null,
+          type?: ModuleItemTypeEnum
         ): string => {
-          if (_type === ModuleItemTypeEnum.Venue) {
+          if (type === ModuleItemTypeEnum.Venue) {
             // quick fix for venue url rewrites
             return routerHelper.getLocalizedCmsItemUrl(
               ROUTES.VENUES,
               {
-                venueId: getVenueSourceId(link),
+                venueId: getVenueSourceId(link ?? ''),
               },
               locale
             );
@@ -128,7 +132,7 @@ export default function useSportsRHHCConfig(args: {
         getIsHrefExternal,
       },
       internalHrefOrigins,
-    } as unknown as Config;
+    };
   }, [
     commonConfig,
     appTranslation,

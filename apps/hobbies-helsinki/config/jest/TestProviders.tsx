@@ -1,4 +1,9 @@
-import type { ApolloCache, ApolloClient, InMemoryCache } from '@apollo/client';
+import type {
+  ApolloCache,
+  ApolloClient,
+  InMemoryCache,
+  NormalizedCacheObject,
+} from '@apollo/client';
 import { useApolloClient } from '@apollo/client';
 import type { MockedResponse } from '@apollo/client/testing';
 import { MockedProvider } from '@apollo/client/testing';
@@ -6,6 +11,7 @@ import {
   AppRoutingProvider,
   CmsHelperProvider,
   DEFAULT_LANGUAGE,
+  getLanguageCode,
   NavigationContext,
 } from '@events-helsinki/components';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
@@ -81,7 +87,10 @@ function RHHCConfigProviderWithMockedApolloClient({ children, router }: Props) {
   );
 }
 
-function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
+function getRHHCConfig(
+  router: NextRouter,
+  apolloClient: ApolloClient<object>
+): RHHCConfig {
   const locale = DEFAULT_LANGUAGE;
 
   const getIsHrefExternal = (href: string) => {
@@ -127,11 +136,15 @@ function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
     return routerHelper.getLocalizedCmsItemUrl(link, {}, locale);
   };
 
+  // FIXME: Fix types of apolloClient/RHHCConfig so they are compatible without casting
+  const normalizedCacheObjectApolloClient =
+    apolloClient as ApolloClient<NormalizedCacheObject>;
+
   return {
     ...rhhcDefaultConfig,
     siteName: 'appName',
-    currentLanguageCode: locale.toUpperCase(),
-    apolloClient,
+    currentLanguageCode: getLanguageCode(locale),
+    apolloClient: normalizedCacheObjectApolloClient,
     components: {
       ...rhhcDefaultConfig.components,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -151,7 +164,12 @@ function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
       ),
       openInNewTabAriaLabel: i18n.t('common:srOnly.opensInANewTab'),
       closeButtonLabelText: i18n.t('common:button.close'),
+      loadMoreButtonLabelText: i18n.t('common:button.loadMore'),
+      showAllText: i18n.t('common:button.showAll'),
+      next: i18n.t('common:next'),
+      previous: i18n.t('common:previous'),
       archiveSearch: {
+        title: i18n.t('cms:archiveSearch.title'),
         searchTextPlaceholder: i18n.t(
           'cms:archiveSearch.searchTextPlaceholder'
         ),
@@ -161,7 +179,9 @@ function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
         loadMoreButtonLabelText: i18n.t(
           'cms:archiveSearch.loadMoreButtonLabelText'
         ),
+        noResultsTitle: i18n.t('cms:archiveSearch.noResultsTitle'),
         noResultsText: i18n.t('cms:archiveSearch.noResultsText'),
+        clearAll: i18n.t('cms:archiveSearch.buttonClearFilters'),
       },
     },
     utils: {
@@ -171,7 +191,7 @@ function getRHHCConfig(router: NextRouter, apolloClient: ApolloClient<object>) {
       getRoutedInternalHref,
     },
     internalHrefOrigins,
-  } as unknown as RHHCConfig;
+  };
 }
 
 export default TestProviders;

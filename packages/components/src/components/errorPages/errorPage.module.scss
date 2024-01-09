@@ -33,6 +33,11 @@
     line-height: 2rem;
   }
 
+  .backButton {
+    background-color: var(--color-input-dark);
+    border-color: var(--color-input-dark) !important;
+  }
+
   button {
     padding-left: 3.5rem;
     padding-right: 3.5rem;

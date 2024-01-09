@@ -3,13 +3,13 @@
 exports[`matches snapshot 1`] = `
 <div
   class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 tag-module_tag__1QCQs tag-module_withHover__3daxF keyword"
-  id="hds-tag"
+  id="tag:r0:"
   role="link"
   tabindex="0"
 >
   <span
     class="Tag-module_label__zCgFr undefined"
-    id="hds-tag-label"
+    id="tag:r0:-label"
   >
     <span>
       test keyword

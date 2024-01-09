@@ -5,7 +5,6 @@ import { render, screen, userEvent } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvent,
-  fakeExternalLink,
   fakeKeyword,
   fakeLocalizedObject,
   fakeOffer,

@@ -6,7 +6,6 @@ import {
   NavigationContext,
   getAllPages,
   Navigation,
-  MatomoWrapper,
   useAppSportsTranslation,
   FooterSection,
   getLanguageOrDefault,
@@ -22,13 +21,12 @@ import { useContext } from 'react';
 import type {
   Breadcrumb,
   CollectionType,
-  PageContentProps,
   PageType,
 } from 'react-helsinki-headless-cms';
 import {
   getCollections,
-  PageContent as HCRCPageContent,
-  Page as HCRCPage,
+  PageContent as RHHCPageContent,
+  Page as RHHCPage,
   useConfig,
 } from 'react-helsinki-headless-cms';
 import type {
@@ -57,31 +55,29 @@ const NextCmsPage: NextPage<{
   if (!page) return null;
 
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="page"
-        navigation={<Navigation page={page} />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} page={page} />
-            <HCRCPageContent
-              page={page as PageContentProps['page']}
-              collections={
-                collections
-                  ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
-                  : []
-              }
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={appTranslation('appSports:appName')}
+    <RHHCPage
+      className="page"
+      navigation={<Navigation page={page} />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} page={page} />
+          <RHHCPageContent
+            page={page}
+            collections={
+              collections
+                ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
+                : []
+            }
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={appTranslation('appSports:appName')}
+        />
+      }
+    />
   );
 };
 
@@ -140,7 +136,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         }
         const language = getLanguageOrDefault(context.locale);
         logger.info(
-          'pages/pages/[..slug].tsx',
+          'pages/pages/[...slug].tsx',
           'getStaticProps',
           'getSportsStaticProps',
           `Revalidating ${page.uri}.`

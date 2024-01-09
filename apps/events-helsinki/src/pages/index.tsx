@@ -3,7 +3,6 @@ import {
   getQlLanguage,
   NavigationContext,
   Navigation,
-  MatomoWrapper,
   useAppEventsTranslation,
   getLanguageOrDefault,
   FooterSection,
@@ -15,20 +14,15 @@ import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
 import {
   useConfig,
-  PageContent as HCRCPageContent,
-  Page as HCRCPage,
+  PageContent as RHHCPageContent,
+  Page as RHHCPage,
   TemplateEnum,
 } from 'react-helsinki-headless-cms';
 import type {
   PageByTemplateQuery,
   PageByTemplateQueryVariables,
-  LandingPageQuery,
-  LandingPageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-import {
-  PageByTemplateDocument,
-  LandingPageDocument,
-} from 'react-helsinki-headless-cms/apollo';
+import { PageByTemplateDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../domain/app/AppConfig';
 import getEventsStaticProps from '../domain/app/getEventsStaticProps';
 import cmsHelper from '../domain/app/headlessCmsHelper';
@@ -36,10 +30,9 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 
 const HomePage: NextPage<{
-  landingPage: LandingPageQuery['landingPage'];
   page: PageType;
   locale: string;
-}> = ({ landingPage, page, locale }) => {
+}> = ({ page, locale }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
@@ -47,33 +40,30 @@ const HomePage: NextPage<{
   const { t } = useAppEventsTranslation();
 
   return (
-    <MatomoWrapper>
-      <HCRCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <HCRCPageContent
-              page={page}
-              landingPage={landingPage}
-              PageContentLayoutComponent={LandingPageContentLayout}
-              collections={(page: PageType | ArticleType) =>
-                cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
-              }
-              language={getQlLanguage(locale)}
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={t('appEvents:appName')}
-            hasFeedBack={false}
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <RHHCPageContent
+            page={page}
+            PageContentLayoutComponent={LandingPageContentLayout}
+            collections={(page: PageType | ArticleType) =>
+              cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
+            }
+            language={getQlLanguage(locale)}
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={t('appEvents:appName')}
+          hasFeedBack={false}
+        />
+      }
+    />
   );
 };
 
@@ -81,17 +71,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async ({ apolloClient }) => {
     try {
       const language = getLanguageOrDefault(context.locale);
-      const { data: landingPageData } = await apolloClient.query<
-        LandingPageQuery,
-        LandingPageQueryVariables
-      >({
-        query: LandingPageDocument,
-        variables: {
-          id: 'root',
-          languageCode: getQlLanguage(language),
-        },
-        fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-      });
 
       const { data: pageData } = await apolloClient.query<
         PageByTemplateQuery,
@@ -104,14 +83,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         },
         fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
       });
-      if (!pageData || !landingPageData) {
+      if (!pageData) {
         return {
           notFound: true,
         };
       }
       const page = pageData.pageByTemplate;
-
-      const landingPage = landingPageData.landingPage;
 
       logger.info(
         'pages/index.tsx',
@@ -122,10 +99,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       return {
         props: {
           ...(await serverSideTranslationsWithCommon(language, [
+            'home',
             'search',
             'event',
           ])),
-          landingPage: landingPage,
           page: page,
         },
       };
@@ -138,10 +115,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       return {
         props: {
           ...(await serverSideTranslationsWithCommon(DEFAULT_LANGUAGE, [
+            'home',
             'search',
             'event',
           ])),
-          landingPage: null,
           page: null,
         },
       };

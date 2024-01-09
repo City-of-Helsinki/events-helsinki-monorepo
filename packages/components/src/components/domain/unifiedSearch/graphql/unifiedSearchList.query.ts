@@ -17,6 +17,7 @@ export const SEARCH_LIST_QUERY = gql`
     $orderByName: OrderByName
     $orderByAccessibilityProfile: AccessibilityProfile
     $showAccessibilityShortcomingsFor: AccessibilityProfile
+    $mustHaveReservableResource: Boolean
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
@@ -30,6 +31,7 @@ export const SEARCH_LIST_QUERY = gql`
       ontologyWordIdOrSets: $ontologyWordIdOrSets
       providerTypes: $providerTypes
       serviceOwnerTypes: $serviceOwnerTypes
+      mustHaveReservableResource: $mustHaveReservableResource
       targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance
@@ -54,9 +56,19 @@ export const SEARCH_LIST_QUERY = gql`
             }
             description {
               fi
+              sv
+              en
             }
             images {
               url
+            }
+            reservation {
+              reservable
+              externalReservationUrl {
+                fi
+                sv
+                en
+              }
             }
             openingHours @include(if: $includeHaukiFields) {
               today {

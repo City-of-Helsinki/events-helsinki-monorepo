@@ -1,11 +1,9 @@
 import type { NormalizedCacheObject } from '@apollo/client';
 import {
-  KorosWrapper,
   NavigationContext,
   ShareLinks,
   getAllArticles,
   Navigation,
-  MatomoWrapper,
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
@@ -23,7 +21,6 @@ import { useContext } from 'react';
 import type {
   Breadcrumb,
   CollectionType,
-  PageContentProps,
   ArticleType,
 } from 'react-helsinki-headless-cms';
 import {
@@ -61,41 +58,38 @@ const NextCmsArticle: NextPage<{
   if (!article) return null;
 
   return (
-    <MatomoWrapper>
-      <RHHCPage
-        className="article-page"
-        navigation={<Navigation page={article} />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} page={article} />
-            <RHHCPageContent
-              page={article as PageContentProps['page']}
-              heroContainer={<KorosWrapper />}
-              breadcrumbs={
-                breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
-              }
-              shareLinks={
-                <ShareLinks title={commonTranslation('common:share.article')} />
-              }
-              collections={
-                collections
-                  ? cmsHelper.getDefaultCollections(
-                      article,
-                      getRoutedInternalHref
-                    )
-                  : []
-              }
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={appTranslation('appSports:appName')}
+    <RHHCPage
+      className="article-page"
+      navigation={<Navigation page={article} />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} page={article} />
+          <RHHCPageContent
+            page={article}
+            breadcrumbs={
+              breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
+            }
+            shareLinks={
+              <ShareLinks title={commonTranslation('common:share.article')} />
+            }
+            collections={
+              collections
+                ? cmsHelper.getDefaultCollections(
+                    article,
+                    getRoutedInternalHref
+                  )
+                : []
+            }
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={appTranslation('appSports:appName')}
+        />
+      }
+    />
   );
 };
 
@@ -152,7 +146,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         }
         const language = getLanguageOrDefault(context.locale);
         logger.info(
-          'pages/articles/[..slug].tsx',
+          'pages/articles/[...slug].tsx',
           'getStaticProps',
           'getSportsStaticProps',
           `Revalidating ${article.uri}.`

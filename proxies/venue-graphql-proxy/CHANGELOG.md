@@ -1,39 +1,40 @@
 # Changelog
 
-## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.2.0...venue-graphql-proxy-v1.3.0) (2023-09-14)
+## [1.3.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.3.0...venue-graphql-proxy-v1.3.1) (2024-01-03)
 
+### Bug Fixes
+
+- Backward compatibility urls ([791a511](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/791a511d3ab5579b24a59bb9e7566cdad9006a6a))
+
+## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.2.0...venue-graphql-proxy-v1.3.0) (2023-09-14)
 
 ### Features
 
-* Update venue-graphql-proxy related types and supergraph ([c506ddc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c506ddcd0c8a5605950d5daa8a1e14bed6bcefa5))
-* **venue-proxy:** Add department data, enable Hauki support, refactor ([fe75b73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fe75b739747ca2ff87307a6301c3089f62b9f895))
+- Update venue-graphql-proxy related types and supergraph ([c506ddc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c506ddcd0c8a5605950d5daa8a1e14bed6bcefa5))
+- **venue-proxy:** Add department data, enable Hauki support, refactor ([fe75b73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fe75b739747ca2ff87307a6301c3089f62b9f895))
 
 ## [1.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.1.0...venue-graphql-proxy-v1.2.0) (2023-08-30)
 
-
 ### Features
 
-* **venue-graphql-proxy:** Expose more fields from TPREK unit endpoint ([8e4fcec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8e4fcec34492e3efd2d10f1afbb31d6b427ee52d))
-
+- **venue-graphql-proxy:** Expose more fields from TPREK unit endpoint ([8e4fcec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8e4fcec34492e3efd2d10f1afbb31d6b427ee52d))
 
 ### Bug Fixes
 
-* **venue-graphql-proxy:** Handle null TPREK unit gracefully ([113c7f0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/113c7f01bc9f65714f71563bd76f1d98ecb5a76f))
-* **venues-proxy:** VenuesByIds should not return empty venues ([6aaaf5b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6aaaf5bb2076cf47ea9d703f2d283a2e26fe7405))
+- **venue-graphql-proxy:** Handle null TPREK unit gracefully ([113c7f0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/113c7f01bc9f65714f71563bd76f1d98ecb5a76f))
+- **venues-proxy:** VenuesByIds should not return empty venues ([6aaaf5b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6aaaf5bb2076cf47ea9d703f2d283a2e26fe7405))
 
 ## [1.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.0.1...venue-graphql-proxy-v1.1.0) (2023-08-28)
 
-
 ### Features
 
-* **proxy:** Fetch venue details with fallback languages ([89aee5f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/89aee5f992063b4b8ecf0db2cfe8b69febcdad45))
-* Shared storage and on-demand site generation ([#320](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/320)) ([40ddbe5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/40ddbe50a18ff06d01f3664dae90266a5e6ec24d))
-
+- **proxy:** Fetch venue details with fallback languages ([89aee5f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/89aee5f992063b4b8ecf0db2cfe8b69febcdad45))
+- Shared storage and on-demand site generation ([#320](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/320)) ([40ddbe5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/40ddbe50a18ff06d01f3664dae90266a5e6ec24d))
 
 ### Bug Fixes
 
-* Error boundary usage after update ([61c2698](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/61c269895366cc0652bb9c8f97375b234fb93d42))
-* Venue info connections reading ([48e5e7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48e5e7c6f37e22ee5026898310c75cb5806eeb45))
+- Error boundary usage after update ([61c2698](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/61c269895366cc0652bb9c8f97375b234fb93d42))
+- Venue info connections reading ([48e5e7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48e5e7c6f37e22ee5026898310c75cb5806eeb45))
 
 ## [1.0.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.0.0...venue-graphql-proxy-v1.0.1) (2023-05-24)
 

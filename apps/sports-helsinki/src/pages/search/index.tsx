@@ -1,25 +1,22 @@
 import {
   NavigationContext,
   Navigation,
-  MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
   RouteMeta,
   PageMeta,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
+import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import type {
   PageQuery,
   PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-import {
-  Page as HCRCApolloPage,
-  PageDocument,
-} from 'react-helsinki-headless-cms/apollo';
+import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
@@ -31,30 +28,27 @@ const Search: NextPage<{
   page: PageType;
 }> = ({ page }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   usePageScrollRestoration();
   return (
-    <MatomoWrapper>
-      <HCRCApolloPage
-        uri={ROUTES.SEARCH}
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <PageMeta {...page?.seo} />
-            <CombinedSearchPage defaultTab="Venue" />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={t('appSports:appName')}
-            feedbackWithPadding
-          />
-        }
-      />
-    </MatomoWrapper>
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <PageMeta {...page?.seo} />
+          <CombinedSearchPage defaultTab="Venue" />
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={t('appSports:appName')}
+          feedbackWithPadding
+        />
+      }
+    />
   );
 };
 
@@ -69,8 +63,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     >({
       query: PageDocument,
       variables: {
-        // does not work
-        id: `/${language}/search/`,
+        id: `/${language}${ROUTES.SEARCH}/`,
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
     });
@@ -82,6 +75,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           'event',
           'search',
           'venue',
+          'home',
         ])),
       },
     };

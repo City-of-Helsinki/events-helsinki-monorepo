@@ -37,6 +37,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   ontologyWordIdOrSets: VenueSearchParams['ontologyWordIdOrSets'];
   providerTypes: VenueSearchParams['providerTypes'];
   serviceOwnerTypes: VenueSearchParams['serviceOwnerTypes'];
+  mustHaveReservableResource: VenueSearchParams['mustHaveReservableResource'];
   openAt?: VenueSearchParams['openAt'];
   administrativeDivisionIds?: VenueSearchParams['administrativeDivisionIds'];
   orderByName: VenueSearchParams['orderByName'];
@@ -71,6 +72,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     this.serviceOwnerTypes = input.helsinkiOnly
       ? [ServiceOwnerType.MunicipalService]
       : initialVenueSearchAdapterValues.serviceOwnerTypes;
+    this.mustHaveReservableResource = !!input.reservable;
     if (input.venueOrderBy?.includes('name')) {
       this.orderByName = input.venueOrderBy.startsWith('-')
         ? { order: SortOrder.Descending }

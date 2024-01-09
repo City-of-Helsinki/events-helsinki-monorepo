@@ -1,33 +1,51 @@
 # Changelog
 
-## [1.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.4.0...federation-router-v1.5.0) (2023-09-15)
-
-
-### Features
-
-* Update venue-graphql-proxy related types and supergraph ([c506ddc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c506ddcd0c8a5605950d5daa8a1e14bed6bcefa5))
-
-## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.3.0...federation-router-v1.4.0) (2023-09-08)
-
+## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.2...federation-router-v1.6.0) (2024-01-04)
 
 ### Features
 
-* **router:** Propagate all headers to events-proxy ([71b37f6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/71b37f6ae255e2f098bff5f28b1cf0f03e89794c))
+- **router:** Upgrade the Apollo router docker image ([7a0bb67](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7a0bb6708193ab27606c56f3e1d061a4fff1262e))
 
-## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.2.1...federation-router-v1.3.0) (2023-08-28)
-
-
-### Features
-
-* **events-graphql-federation:** Update events subgraph & supergraph ([78b6397](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/78b639774f5f0913d71c23a688007d480699a006))
-* Shared storage and on-demand site generation ([#320](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/320)) ([40ddbe5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/40ddbe50a18ff06d01f3664dae90266a5e6ec24d))
-
+## [1.5.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.1...federation-router-v1.5.2) (2023-12-14)
 
 ### Bug Fixes
 
-* Change unified-search.test.kuva.* -&gt; kuva-unified-search.api.test.* ([181b774](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/181b7747a1af3bbdbe05ea3ba34e3b8ee0c9c943))
-* **error:** 500 page translations and build issue in Hobbies app ([684d102](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/684d1024b7e3174e7c5b44709d121c804681bf19))
-* Venue info connections reading ([48e5e7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48e5e7c6f37e22ee5026898310c75cb5806eeb45))
+- Backward compatibility urls ([791a511](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/791a511d3ab5579b24a59bb9e7566cdad9006a6a))
+
+## [1.5.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.0...federation-router-v1.5.1) (2023-11-08)
+
+The `ontologyTreeIdOrSets` and `ontologyWordIdOrSets` are replacing the implementation of `ontologyTreeIdsOrSet[NUM]` and `ontologyWordIds`.
+Also, the `q`-parameter is replaced with `text`.
+
+### Features
+
+- **router:** Update unified-search subgraph and supergraph ([7aef929](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7aef929b8ad757181722330647db2b13f1721630))
+- **router:** Update unified-search & venues subgraph, supergraph and types ([b66fb3f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b66fb3f10c6334af1cf52808441ea0d991d2423c))
+
+## [1.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.4.0...federation-router-v1.5.0) (2023-09-15)
+
+### Features
+
+- Update venue-graphql-proxy related types and supergraph ([c506ddc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c506ddcd0c8a5605950d5daa8a1e14bed6bcefa5))
+
+## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.3.0...federation-router-v1.4.0) (2023-09-08)
+
+### Features
+
+- **router:** Propagate all headers to events-proxy ([71b37f6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/71b37f6ae255e2f098bff5f28b1cf0f03e89794c))
+
+## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.2.1...federation-router-v1.3.0) (2023-08-28)
+
+### Features
+
+- **events-graphql-federation:** Update events subgraph & supergraph ([78b6397](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/78b639774f5f0913d71c23a688007d480699a006))
+- Shared storage and on-demand site generation ([#320](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/320)) ([40ddbe5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/40ddbe50a18ff06d01f3664dae90266a5e6ec24d))
+
+### Bug Fixes
+
+- Change unified-search.test.kuva._ -&gt; kuva-unified-search.api.test._ ([181b774](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/181b7747a1af3bbdbe05ea3ba34e3b8ee0c9c943))
+- **error:** 500 page translations and build issue in Hobbies app ([684d102](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/684d1024b7e3174e7c5b44709d121c804681bf19))
+- Venue info connections reading ([48e5e7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48e5e7c6f37e22ee5026898310c75cb5806eeb45))
 
 ## [1.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.2.0...federation-router-v1.2.1) (2023-05-16)
 

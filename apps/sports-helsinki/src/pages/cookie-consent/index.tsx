@@ -1,19 +1,17 @@
 import {
   NavigationContext,
   Navigation,
-  MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
   EventsCookieConsent,
   RouteMeta,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useCallback, useContext } from 'react';
-import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
-import { ROUTES } from '../../constants';
+import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import ConsentPageContent from '../../domain/cookieConsent/ConsentPageContent';
@@ -21,7 +19,7 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 export default function CookieConsent() {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   const router = useRouter();
   /*
   // bug or feature: query is empty in handleRedirect
@@ -41,32 +39,29 @@ export default function CookieConsent() {
   usePageScrollRestoration();
 
   return (
-    <MatomoWrapper>
-      <HCRCApolloPage
-        uri={ROUTES.COOKIE_CONSENT}
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <ConsentPageContent>
-              <EventsCookieConsent
-                appName={t('appSports:appName')}
-                isModal={false}
-                onConsentGiven={handleRedirect}
-              />
-            </ConsentPageContent>
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={t('appSports:appName')}
-            hasFeedBack={false}
-          />
-        }
-      />
-    </MatomoWrapper>
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <ConsentPageContent>
+            <EventsCookieConsent
+              appName={t('appSports:appName')}
+              isModal={false}
+              onConsentGiven={handleRedirect}
+            />
+          </ConsentPageContent>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={t('appSports:appName')}
+          hasFeedBack={false}
+        />
+      }
+    />
   );
 }
 

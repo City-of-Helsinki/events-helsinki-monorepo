@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import {
   Navigation as RHHCNavigation,
   isLanguage,
 } from 'react-helsinki-headless-cms';
-import { useLanguagesQuery } from 'react-helsinki-headless-cms/apollo';
+import {
+  Notification,
+  useLanguagesQuery,
+} from 'react-helsinki-headless-cms/apollo';
 import { useCmsHelper, useCmsRoutedAppHelper } from '../../cmsHelperProvider';
 import { useLocale } from '../../hooks';
 import { NavigationContext } from '../../navigationProvider';
@@ -15,15 +18,18 @@ import styles from './navigation.module.scss';
 type NavigationProps = {
   page?: PageType | ArticleType;
   menu?: Menu;
+  universalBarMenu?: Menu;
   languages?: Language[];
 };
 
 export default function Navigation({
   page,
   menu,
+  universalBarMenu,
   languages: forcedLanguages, // FIXME: This is here only to skip the Apollo query and so the issues in the Error page
 }: NavigationProps) {
-  const { headerMenu, languages } = useContext(NavigationContext);
+  const { headerMenu, headerUniversalBarMenu, languages } =
+    useContext(NavigationContext);
   const router = useRouter();
   const locale = useLocale();
   const cmsHelper = useCmsHelper();
@@ -37,37 +43,57 @@ export default function Navigation({
     languages ??
     languagesQuery.data?.languages?.filter(isLanguage);
 
+  // router.query has no query parameters, even if the current URL does when serving
+  // server-side generated pages. Simply using window.location.search always when
+  // available broke e.g. /courses/[eventId] URL part so that the [eventId] part didn't
+  // get replaced with the actual event ID. Merging both query sources worked better.
+  const getCurrentParsedUrlQuery = useCallback(
+    () => ({
+      ...router.query,
+      ...(window
+        ? Object.fromEntries(new URLSearchParams(window.location.search))
+        : {}),
+    }),
+    [router.query]
+  );
+
   return (
-    <RHHCNavigation
-      languages={languageOptions}
-      menu={menu ?? headerMenu}
-      className={styles.topNavigation}
-      onTitleClick={() => {
-        router.push('/');
-      }}
-      getIsItemActive={({ path }) => {
-        return (
-          path === routerHelper.getI18nPath(currentPage, locale) ||
-          path === `/${locale}${routerHelper.getI18nPath(currentPage, locale)}`
-        );
-      }}
-      getPathnameForLanguage={({ slug }) => {
-        const translatedPage = (page?.translations as PageType[])?.find(
-          (translation) => translation?.language?.slug === slug
-        );
-        return routerHelper.getLocalizedCmsItemUrl(
-          currentPage,
-          translatedPage
-            ? {
-                slug:
-                  cmsHelper.getSlugFromUri(
-                    cmsHelper.removeContextPathFromUri(translatedPage.uri)
-                  ) ?? '',
-              }
-            : router.query,
-          slug as AppLanguage
-        );
-      }}
-    />
+    <>
+      <RHHCNavigation
+        languages={languageOptions}
+        menu={menu ?? headerMenu}
+        universalBarMenu={universalBarMenu ?? headerUniversalBarMenu}
+        className={styles.topNavigation}
+        onTitleClick={() => {
+          router.push('/');
+        }}
+        getIsItemActive={({ path }) => {
+          return (
+            path === routerHelper.getI18nPath(currentPage, locale) ||
+            path ===
+              `/${locale}${routerHelper.getI18nPath(currentPage, locale)}`
+          );
+        }}
+        getPathnameForLanguage={({ slug }) => {
+          const translatedPage = (page?.translations as PageType[])?.find(
+            (translation) => translation?.language?.slug === slug
+          );
+          return routerHelper.getLocalizedCmsItemUrl(
+            currentPage,
+            translatedPage
+              ? {
+                  slug:
+                    cmsHelper.getSlugFromUri(
+                      cmsHelper.removeContextPathFromUri(translatedPage.uri)
+                    ) ?? '',
+                }
+              : getCurrentParsedUrlQuery(),
+            slug as AppLanguage
+          );
+        }}
+      />
+      {/* CMS notification banner */}
+      <Notification />
+    </>
   );
 }

@@ -11,7 +11,6 @@ const COMMON_TRANSLATIONS = [
   'footer',
   'geolocationProvider',
   'notFound',
-  'home',
 ];
 
 export default async function serverSideTranslationsWithCommon(

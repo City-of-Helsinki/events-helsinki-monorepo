@@ -3,7 +3,7 @@ import type { NavigationProviderProps } from '@events-helsinki/components';
 import {
   useLocale,
   BaseApp,
-  useCommonTranslation,
+  useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import { FallbackComponent } from '@events-helsinki/components/app/BaseApp';
 import { useRouter } from 'next/router';
@@ -38,7 +38,7 @@ export type AppProps<P = any> = {
 export type CustomPageProps = NavigationProviderProps & SSRConfig;
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const { t } = useCommonTranslation();
+  const { t } = useAppHobbiesTranslation();
   const locale = useLocale();
   const { asPath, pathname } = useRouter();
   const appName = t('appHobbies:appName');

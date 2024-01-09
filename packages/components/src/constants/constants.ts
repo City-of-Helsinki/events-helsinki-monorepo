@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { Language, LanguageCodeEnum } from '../types/generated/graphql';
-import type { AppLanguage } from '../types/types';
+import { LanguageCodeEnum } from '../types';
+import type { Language, AppLanguage } from '../types';
 
 export const MAIN_CONTENT_ID = 'main-content';
 
@@ -29,6 +29,12 @@ export const EVENT_STATUS = {
  * Ref: https://helsinkisolutionoffice.atlassian.net/browse/HH-110
  */
 export const APP_LANGUAGES = ['en', 'fi', 'sv'] as const;
+
+export const APP_LANGUAGE_LABELS: Record<AppLanguage, string> = {
+  en: 'English',
+  fi: 'Suomi',
+  sv: 'Svenska',
+} as const;
 
 export const DEFAULT_LANGUAGE: AppLanguage = 'fi';
 
@@ -75,6 +81,21 @@ export const DEFAULT_FOOTER_MENU_NAME: Record<AppLanguage, string> = {
     'Events Helsinki Footer SV',
 };
 
+export const DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME: Record<
+  AppLanguage,
+  string
+> = {
+  fi:
+    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_FI ??
+    'Events Helsinki Universal bar FI',
+  en:
+    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_EN ??
+    'Events Helsinki Universal bar EN',
+  sv:
+    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_SV ??
+    'Events Helsinki Universal bar SV',
+};
+
 /**
  * This is just a mock of list of Languages.
  * The react-helsinki-headless-cms needs typeof `Language[]` in a list of lanugages,
@@ -83,13 +104,13 @@ export const DEFAULT_FOOTER_MENU_NAME: Record<AppLanguage, string> = {
  * because the network error in the Apollo client is
  * usually the reason to show the error page.
  */
-export const HARDCODED_LANGUAGES = [
+export const HARDCODED_LANGUAGES: Language[] = [
   {
     __typename: 'Language',
     id: 'TGFuZ3VhZ2U6Zmk=',
     locale: 'fi',
     name: 'Suomi',
-    code: 'FI' as LanguageCodeEnum,
+    code: LanguageCodeEnum.Fi,
     slug: 'fi',
   },
   {
@@ -97,7 +118,7 @@ export const HARDCODED_LANGUAGES = [
     id: 'TGFuZ3VhZ2U6ZW4=',
     locale: 'en',
     name: 'English',
-    code: 'EN' as LanguageCodeEnum,
+    code: LanguageCodeEnum.En,
     slug: 'en',
   },
   {
@@ -105,7 +126,7 @@ export const HARDCODED_LANGUAGES = [
     id: 'TGFuZ3VhZ2U6c3Y=',
     locale: 'sv',
     name: 'Svenska',
-    code: 'SV' as LanguageCodeEnum,
+    code: LanguageCodeEnum.Sv,
     slug: 'sv',
   },
-] as Language[];
+];

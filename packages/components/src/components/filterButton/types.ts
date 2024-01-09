@@ -8,6 +8,7 @@ export type DateFilterType = 'date' | 'dateType';
  */
 type CombinedSearchInputSubset =
   | 'helsinkiOnly'
+  | 'reservable'
   | 'organization'
   | 'place'
   | 'sportsCategories'

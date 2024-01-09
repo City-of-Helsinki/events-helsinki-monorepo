@@ -8,6 +8,9 @@ import {
   useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
+  HelsinkiCityOwnedIcon,
+  CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
+  useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -39,6 +42,7 @@ export default function useHobbiesRHHCConfig(args: {
 }) {
   const { apolloClient } = args;
   const { t: commonTranslation } = useCommonTranslation();
+  const { t: appTranslation } = useAppHobbiesTranslation();
   const { t: eventTranslation } = useEventTranslation();
   const locale = useLocale();
   const commonConfig = useCommonCmsConfig();
@@ -57,6 +61,8 @@ export default function useHobbiesRHHCConfig(args: {
       ...rhhcDefaultConfig,
       ...commonConfig,
       mainContentId: MAIN_CONTENT_ID,
+      organizationPrefixes:
+        CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
       components: {
         ...rhhcDefaultConfig.components,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -76,8 +82,12 @@ export default function useHobbiesRHHCConfig(args: {
         VenueCardContent: (props: any) => (
           <VenueDetails {...(props as VenueDetailsProps)} />
         ),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        HelsinkiCityOwnedIcon: (props: any) => (
+          <HelsinkiCityOwnedIcon {...props} />
+        ),
       },
-      siteName: commonTranslation('appHobbies:appName'),
+      siteName: appTranslation('appHobbies:appName'),
       currentLanguageCode: locale.toUpperCase(),
       apolloClient,
       eventsApolloClient: apolloClient,
@@ -86,7 +96,11 @@ export default function useHobbiesRHHCConfig(args: {
         ...rhhcDefaultConfig.utils,
         getEventCardProps: AppConfig.showEnrolmentStatusInCardDetails
           ? (item: EventFieldsFragment, locale: string) => ({
-              ...rhhcDefaultConfig.utils.getEventCardProps(item, locale),
+              ...rhhcDefaultConfig.utils.getEventCardProps(
+                item,
+                CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
+                locale
+              ),
               linkArrowLabel: getLinkArrowLabel({
                 item,
                 locale,
@@ -115,5 +129,12 @@ export default function useHobbiesRHHCConfig(args: {
       },
       internalHrefOrigins,
     } as unknown as Config;
-  }, [commonConfig, commonTranslation, eventTranslation, locale, apolloClient]);
+  }, [
+    commonConfig,
+    appTranslation,
+    commonTranslation,
+    eventTranslation,
+    locale,
+    apolloClient,
+  ]);
 }

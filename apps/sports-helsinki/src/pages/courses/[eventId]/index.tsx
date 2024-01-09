@@ -2,10 +2,9 @@ import {
   EventDetailsDocument,
   NavigationContext,
   Navigation,
-  MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type {
   EventFields,
@@ -26,24 +25,22 @@ const EventPage: NextPage<{
   loading: boolean;
 }> = ({ event, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   return (
-    <MatomoWrapper>
-      <RHHCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <EventPageContainer
-            event={event}
-            loading={loading}
-            showSimilarEvents={AppConfig.showSimilarEvents}
-          />
-        }
-        footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
-        }
-      />
-    </MatomoWrapper>
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <EventPageContainer
+          event={event}
+          loading={loading}
+          showSimilarEvents={AppConfig.showSimilarEvents}
+        />
+      }
+      footer={
+        <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+      }
+    />
   );
 };
 export default EventPage;

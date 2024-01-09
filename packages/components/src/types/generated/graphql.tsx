@@ -4803,9 +4803,9 @@ export enum MediaItemSizeEnum {
   /** MediaItem with the thumbnail size */
   Thumbnail = 'THUMBNAIL',
   /** MediaItem with the 1536x1536 size */
-  '1536X1536' = '_1536X1536',
+  _1536X1536 = '_1536X1536',
   /** MediaItem with the 2048x2048 size */
-  '2048X2048' = '_2048X2048',
+  _2048X2048 = '_2048X2048',
 }
 
 /** The status of the media item object. */
@@ -8569,6 +8569,12 @@ export type ReleaseToRevisionConnectionWhereArgs = {
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type Reservation = {
+  __typename?: 'Reservation';
+  externalReservationUrl?: Maybe<LanguageString>;
+  reservable?: Maybe<Scalars['Boolean']['output']>;
+};
+
 /** Input for the resetUserPassword mutation. */
 export type ResetUserPasswordInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
@@ -8590,28 +8596,6 @@ export type ResetUserPasswordPayload = {
   user?: Maybe<User>;
 };
 
-export type Resource = {
-  __typename?: 'Resource';
-  description?: Maybe<LanguageString>;
-  externalReservationUrl?: Maybe<Scalars['String']['output']>;
-  genericTerms?: Maybe<LanguageString>;
-  id?: Maybe<Scalars['ID']['output']>;
-  name?: Maybe<LanguageString>;
-  paymentTerms?: Maybe<LanguageString>;
-  reservable?: Maybe<Scalars['Boolean']['output']>;
-  reservationInfo?: Maybe<LanguageString>;
-  responsibleContactInfo?: Maybe<LanguageString>;
-  specificTerms?: Maybe<LanguageString>;
-  type?: Maybe<ResourceType>;
-  userPermissions?: Maybe<ResourceUserPermissions>;
-};
-
-export enum ResourceMainType {
-  Item = 'item',
-  Person = 'person',
-  Space = 'space',
-}
-
 export enum ResourceState {
   Closed = 'closed',
   EnterOnly = 'enter_only',
@@ -8625,18 +8609,6 @@ export enum ResourceState {
   WithKeyAndReservation = 'with_key_and_reservation',
   WithReservation = 'with_reservation',
 }
-
-export type ResourceType = {
-  __typename?: 'ResourceType';
-  id?: Maybe<Scalars['ID']['output']>;
-  mainType?: Maybe<ResourceMainType>;
-  name?: Maybe<LanguageString>;
-};
-
-export type ResourceUserPermissions = {
-  __typename?: 'ResourceUserPermissions';
-  canMakeReservations?: Maybe<Scalars['Boolean']['output']>;
-};
 
 /** Input for the restoreComment mutation. */
 export type RestoreCommentInput = {
@@ -11143,8 +11115,7 @@ export type UnifiedSearchVenue = {
   ontologyWords?: Maybe<Array<Maybe<OntologyWord>>>;
   openingHours?: Maybe<OpeningHours>;
   partOf?: Maybe<UnifiedSearchVenue>;
-  reservationPolicy?: Maybe<VenueReservationPolicy>;
-  resources: Array<Resource>;
+  reservation?: Maybe<Reservation>;
   serviceOwner?: Maybe<ServiceOwner>;
   targetGroups?: Maybe<Array<Maybe<TargetGroup>>>;
 };
@@ -12447,12 +12418,6 @@ export type VenueFacility = {
   name: Scalars['String']['output'];
 };
 
-/** TODO: this comes from respa resource/unit types */
-export type VenueReservationPolicy = {
-  __typename?: 'VenueReservationPolicy';
-  todo?: Maybe<Scalars['String']['output']>;
-};
-
 /** Information about pagination in a connection. */
 export type WpPageInfo = {
   __typename?: 'WPPageInfo';
@@ -13752,6 +13717,7 @@ export type SearchListQueryVariables = Exact<{
   orderByName?: InputMaybe<OrderByName>;
   orderByAccessibilityProfile?: InputMaybe<AccessibilityProfile>;
   showAccessibilityShortcomingsFor?: InputMaybe<AccessibilityProfile>;
+  mustHaveReservableResource?: InputMaybe<Scalars['Boolean']['input']>;
   includeHaukiFields?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
@@ -13782,11 +13748,23 @@ export type SearchListQuery = {
           description?: {
             __typename?: 'LanguageString';
             fi?: string | null;
+            sv?: string | null;
+            en?: string | null;
           } | null;
           images?: Array<{
             __typename?: 'LocationImage';
             url?: string | null;
           } | null> | null;
+          reservation?: {
+            __typename?: 'Reservation';
+            reservable?: boolean | null;
+            externalReservationUrl?: {
+              __typename?: 'LanguageString';
+              fi?: string | null;
+              sv?: string | null;
+              en?: string | null;
+            } | null;
+          } | null;
           openingHours?: {
             __typename?: 'OpeningHours';
             today?: Array<{
@@ -15359,6 +15337,7 @@ export const SearchListDocument = gql`
     $orderByName: OrderByName
     $orderByAccessibilityProfile: AccessibilityProfile
     $showAccessibilityShortcomingsFor: AccessibilityProfile
+    $mustHaveReservableResource: Boolean
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
@@ -15372,6 +15351,7 @@ export const SearchListDocument = gql`
       ontologyWordIdOrSets: $ontologyWordIdOrSets
       providerTypes: $providerTypes
       serviceOwnerTypes: $serviceOwnerTypes
+      mustHaveReservableResource: $mustHaveReservableResource
       targetGroups: $targetGroups
       openAt: $openAt
       orderByDistance: $orderByDistance
@@ -15396,9 +15376,19 @@ export const SearchListDocument = gql`
             }
             description {
               fi
+              sv
+              en
             }
             images {
               url
+            }
+            reservation {
+              reservable
+              externalReservationUrl {
+                fi
+                sv
+                en
+              }
             }
             openingHours @include(if: $includeHaukiFields) {
               today {
@@ -15497,6 +15487,7 @@ export const SearchListDocument = gql`
  *      orderByName: // value for 'orderByName'
  *      orderByAccessibilityProfile: // value for 'orderByAccessibilityProfile'
  *      showAccessibilityShortcomingsFor: // value for 'showAccessibilityShortcomingsFor'
+ *      mustHaveReservableResource: // value for 'mustHaveReservableResource'
  *      includeHaukiFields: // value for 'includeHaukiFields'
  *   },
  * });

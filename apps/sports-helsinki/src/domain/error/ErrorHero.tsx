@@ -35,7 +35,7 @@ const NotFound: React.FC<Props> = ({
           className={classNames(styles.koros, {
             [styles.smallMargin]: smallMargin,
           })}
-          flipHorizontal={true}
+          flipVertical={true}
           type="basic"
         />
       )}

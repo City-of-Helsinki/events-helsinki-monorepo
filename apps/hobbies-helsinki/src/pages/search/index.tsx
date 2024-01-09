@@ -2,7 +2,6 @@ import {
   NavigationContext,
   useAppHobbiesTranslation,
   Navigation,
-  MatomoWrapper,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
@@ -13,14 +12,12 @@ import type { GetStaticPropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
+import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import type {
   PageQuery,
   PageQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-import {
-  Page as HCRCApolloPage,
-  PageDocument,
-} from 'react-helsinki-headless-cms/apollo';
+import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
@@ -56,30 +53,27 @@ const Search: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
 
   return (
-    <MatomoWrapper>
-      <HCRCApolloPage
-        uri={ROUTES.SEARCH}
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <>
-            <RouteMeta origin={AppConfig.origin} />
-            <PageMeta {...page?.seo} />
-            <SearchPage
-              SearchComponent={AdvancedSearch}
-              pageTitle={tAppHobbies('appHobbies:search.pageTitle')}
-            />
-          </>
-        }
-        footer={
-          <FooterSection
-            menu={footerMenu}
-            appName={tAppHobbies('appHobbies:appName')}
-            feedbackWithPadding
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <PageMeta {...page?.seo} />
+          <SearchPage
+            SearchComponent={AdvancedSearch}
+            pageTitle={tAppHobbies('appHobbies:search.pageTitle')}
           />
-        }
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={
+        <FooterSection
+          menu={footerMenu}
+          appName={tAppHobbies('appHobbies:appName')}
+          feedbackWithPadding
+        />
+      }
+    />
   );
 };
 
@@ -95,7 +89,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     >({
       query: PageDocument,
       variables: {
-        id: `/${language}/search/`,
+        id: `/${language}${ROUTES.SEARCH}/`,
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
     });
@@ -106,6 +100,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         ...(await serverSideTranslationsWithCommon(language, [
           'event',
           'search',
+          'home',
         ])),
       },
     };

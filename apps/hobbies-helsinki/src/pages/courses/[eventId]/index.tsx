@@ -2,10 +2,9 @@ import {
   EventDetailsDocument,
   NavigationContext,
   Navigation,
-  MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
+  useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import type {
   EventFields,
@@ -25,24 +24,22 @@ const Event: NextPage<{
   loading: boolean;
 }> = ({ event, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppHobbiesTranslation();
   return (
-    <MatomoWrapper>
-      <RHHCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <EventPageContainer
-            event={event}
-            loading={loading}
-            showSimilarEvents={AppConfig.showSimilarEvents}
-          />
-        }
-        footer={
-          <FooterSection menu={footerMenu} appName={t('appHobbies:appName')} />
-        }
-      />
-    </MatomoWrapper>
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <EventPageContainer
+          event={event}
+          loading={loading}
+          showSimilarEvents={AppConfig.showSimilarEvents}
+        />
+      }
+      footer={
+        <FooterSection menu={footerMenu} appName={t('appHobbies:appName')} />
+      }
+    />
   );
 };
 export default Event;

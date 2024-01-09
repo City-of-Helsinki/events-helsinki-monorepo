@@ -1,6 +1,7 @@
 import {
   useLocale,
   HelsinkiOnlyFilter,
+  ReservableFilter,
   OrganizationFilter,
   FilterButton,
   translateValue,
@@ -13,6 +14,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
+import { PARAM_SEARCH_TYPE } from '../../../../domain/search/combinedSearch/constants';
 import { useCombinedSearchContext } from '../../../search/combinedSearch/adapters/CombinedSearchContext';
 import type { CombinedSearchAdapterInput } from '../../../search/combinedSearch/types';
 import styles from './filterSummary.module.scss';
@@ -33,6 +35,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     targetGroups,
     organization,
     helsinkiOnly,
+    reservable,
     text,
     place,
     accessibilityProfile,
@@ -59,9 +62,12 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       [type]: getFilteredValue(type, value),
     };
 
+    const searchParams = new URLSearchParams(router.asPath.split('?')[1]);
+    const searchTypeParam = searchParams.get(PARAM_SEARCH_TYPE);
+
     router.push({
       pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
-      query,
+      query: { ...query, searchType: searchTypeParam },
     });
   };
 
@@ -69,6 +75,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!sportsCategories.length ||
     !!targetGroups.length ||
     !!helsinkiOnly ||
+    !!reservable ||
     !!organization ||
     !!place ||
     !!accessibilityProfile ||
@@ -114,6 +121,11 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       {helsinkiOnly && (
         <HelsinkiOnlyFilter
           onRemove={() => handleFilterRemove('helsinkiOnly', 'true')}
+        />
+      )}
+      {reservable && (
+        <ReservableFilter
+          onRemove={() => handleFilterRemove('reservable', 'true')}
         />
       )}
       {place && (

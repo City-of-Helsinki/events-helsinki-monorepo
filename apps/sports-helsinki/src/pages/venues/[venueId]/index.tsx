@@ -2,11 +2,10 @@ import {
   NavigationContext,
   VenueDocument,
   Navigation,
-  MatomoWrapper,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
+  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import type {
   Venue,
@@ -26,26 +25,24 @@ const VenuePage: NextPage<{
   loading: boolean;
 }> = ({ venue, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useCommonTranslation();
+  const { t } = useAppSportsTranslation();
   usePageScrollRestoration();
   return (
-    <MatomoWrapper>
-      <RHHCPage
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
-          <VenuePageContainer
-            venue={venue}
-            loading={loading}
-            showSimilarVenues={AppConfig.showSimilarVenues}
-            showUpcomingEvents={AppConfig.showVenuesUpcomingEvents}
-          />
-        }
-        footer={
-          <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
-        }
-      />
-    </MatomoWrapper>
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <VenuePageContainer
+          venue={venue}
+          loading={loading}
+          showSimilarVenues={AppConfig.showSimilarVenues}
+          showUpcomingEvents={AppConfig.showVenuesUpcomingEvents}
+        />
+      }
+      footer={
+        <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+      }
+    />
   );
 };
 export default VenuePage;

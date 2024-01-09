@@ -2,22 +2,26 @@ import { screen } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
 import { initTestI18n as i18n } from '../../../common-i18n/src';
 
-import { DEFAULT_LANGUAGE } from '../../../components/src/constants/constants';
-import type { AppLanguage } from '../../../components/src/types/types';
+import {
+  APP_LANGUAGE_LABELS,
+  DEFAULT_LANGUAGE,
+} from '../../../components/src/constants';
+import type { AppLanguage } from '../../../components/src/types';
+
+function getLanguageSelectorButton(language: AppLanguage) {
+  return Selector('button')
+    .withAttribute('lang', language)
+    .withText(APP_LANGUAGE_LABELS[language]);
+}
 
 class Header {
-  currentLang = DEFAULT_LANGUAGE;
-
   banner = screen.getByRole('banner');
-  languageSelectorButton = Selector('#languageSelector-button');
-  languageSelectorItem = Selector('a').withAttribute('lang', this.currentLang);
+  currentLang: AppLanguage = DEFAULT_LANGUAGE;
+  languageSelectorButton = getLanguageSelectorButton(this.currentLang);
 
   private async setLanguage(lang: AppLanguage) {
     this.currentLang = lang;
-    this.languageSelectorItem = Selector('a').withAttribute(
-      'lang',
-      this.currentLang
-    );
+    this.languageSelectorButton = getLanguageSelectorButton(this.currentLang);
   }
 
   public async changeLanguage(lang: AppLanguage) {
@@ -29,14 +33,8 @@ class Header {
     const languageSelectorButtonScreen = screen.getByRole('button', {
       name: await this.languageSelectorButton.innerText,
     });
-    const languageSelectorItemScreen = screen.getByRole('link', {
-      name: await this.languageSelectorItem.innerText,
-    });
 
-    await t
-      .click(languageSelectorButtonScreen)
-      .click(languageSelectorItemScreen);
-
+    await t.click(languageSelectorButtonScreen);
     await i18n.changeLanguage(lang);
   }
 

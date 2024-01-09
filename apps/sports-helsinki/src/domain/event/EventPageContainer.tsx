@@ -80,7 +80,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                   <EventHero
                     event={event}
                     superEvent={superEvent}
-                    withActions={false}
+                    withActions={true}
                   />
                   <EventContent
                     event={event}

@@ -490,18 +490,13 @@ export const getKeywordOnClickHandler: KeywordOnClickHandlerType =
     value = ''
   ) =>
   () => {
-    const disableOnClick = true; // Disable onClick as per LIIKUNTA-411 comment
-    if (!disableOnClick) {
-      const search = getSearchQuery({
-        ...EVENT_DEFAULT_SEARCH_FILTERS,
-        [EVENT_SEARCH_FILTERS.DATE_TYPES]: type === 'dateType' ? [value] : [],
-        [EVENT_SEARCH_FILTERS.IS_FREE]: type === 'isFree',
-        text: type === 'text' ? [value] : [],
-      });
+    const search = getSearchQuery({
+      ...EVENT_DEFAULT_SEARCH_FILTERS,
+      [EVENT_SEARCH_FILTERS.DATE_TYPES]: type === 'dateType' ? [value] : [],
+      [EVENT_SEARCH_FILTERS.IS_FREE]: type === 'isFree',
+      [EVENT_SEARCH_FILTERS.TEXT]: type === 'text' ? [value] : [],
+    });
 
-      router.push(
-        `${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`
-      );
-      scrollToTop();
-    }
+    router.push(`${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`);
+    scrollToTop();
   };

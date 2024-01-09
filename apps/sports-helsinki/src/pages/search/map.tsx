@@ -3,8 +3,9 @@ import {
   useLocale,
   getURLSearchParamsFromAsPath,
   Navigation,
-  MatomoWrapper,
   getLanguageOrDefault,
+  RouteMeta,
+  PageMeta,
 } from '@events-helsinki/components';
 import { LoadingSpinner } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
@@ -12,11 +13,18 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
-import { PageSection } from 'react-helsinki-headless-cms';
-import { Page as HCRCApolloPage } from 'react-helsinki-headless-cms/apollo';
+import type { PageType } from 'react-helsinki-headless-cms';
+import { PageSection, Page as RHHCPage } from 'react-helsinki-headless-cms';
+import type {
+  PageQuery,
+  PageQueryVariables,
+} from 'react-helsinki-headless-cms/apollo';
+import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
+import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import routerHelper from '../../domain/app/routerHelper';
+import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import { CombinedSearchProvider } from '../../domain/search/combinedSearch/adapters/CombinedSearchProvider';
 import SearchHeader from '../../domain/search/searchHeader/SearchHeader';
@@ -123,30 +131,44 @@ export function MapSearchPageContent() {
   );
 }
 
-export default function MapSearch() {
+export default function MapSearch({ page }: { page: PageType }) {
   return (
-    <MatomoWrapper>
-      <HCRCApolloPage
-        uri={ROUTES.MAPSEARCH}
-        className="pageLayout"
-        navigation={<Navigation />}
-        content={
+    <RHHCPage
+      className="pageLayout"
+      navigation={<Navigation />}
+      content={
+        <>
+          <RouteMeta origin={AppConfig.origin} />
+          <PageMeta {...page?.seo} />
           <CombinedSearchProvider>
             <MapSearchPageContent />
           </CombinedSearchProvider>
-        }
-        footer={null}
-      />
-    </MatomoWrapper>
+        </>
+      }
+      footer={null}
+    />
   );
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);
+    const { data: pageData } = await sportsApolloClient.query<
+      PageQuery,
+      PageQueryVariables
+    >({
+      query: PageDocument,
+      variables: {
+        id: `/${language}${ROUTES.SEARCH}/`,
+      },
+      fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+    });
     return {
       props: {
-        ...(await serverSideTranslationsWithCommon(language, ['search'])),
+        ...(await serverSideTranslationsWithCommon(language, [
+          'search',
+          'home',
+        ])),
       },
     };
   });

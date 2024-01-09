@@ -8,11 +8,12 @@ export type NavigationProviderProps = NavigationContextProps & {
 
 export default function NavigationProvider({
   headerMenu,
+  headerUniversalBarMenu,
   footerMenu,
   languages,
   children,
 }: NavigationProviderProps) {
-  const context = { headerMenu, footerMenu, languages };
+  const context = { headerMenu, headerUniversalBarMenu, footerMenu, languages };
   return (
     <NavigationContext.Provider value={context}>
       {children}

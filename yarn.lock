@@ -3296,8 +3296,8 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     happy-dom: "npm:9.20.3"
-    hds-design-tokens: "npm:^3.2.0"
-    hds-react: "npm:^3.2.0"
+    hds-design-tokens: "npm:^3.3.0"
+    hds-react: "npm:^3.3.0"
     html-react-parser: "npm:4.0.0"
     https: "npm:1.0.0"
     i18next: "npm:23.2.3"
@@ -14015,7 +14015,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.2.0"
+    hds-react: "npm:^3.3.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"
@@ -15680,24 +15680,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-core@npm:3.2.0":
-  version: 3.2.0
-  resolution: "hds-core@npm:3.2.0"
-  checksum: 2eb4be76818e771574f28fd3c0178b95be9a0881321a6d18fefdf75218295d5aa99308173c78c85086692de7eec4958ef86ef1cf6b9fdb094d4d7abcc4c9c659
-  languageName: node
-  linkType: hard
-
-"hds-core@npm:^3.3.0":
+"hds-core@npm:3.3.0, hds-core@npm:^3.3.0":
   version: 3.3.0
   resolution: "hds-core@npm:3.3.0"
   checksum: f633c3aade98ab28c76c279028c2150f60f6cb008162b5189a2cbbfc8372e21800006ec1cf61982d54be71350ebd6a786abf496070bfc4b35ad9f98b7d1c2e55
-  languageName: node
-  linkType: hard
-
-"hds-design-tokens@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "hds-design-tokens@npm:3.2.0"
-  checksum: 06a7c55e45c7018ab25453f04880e3ab8c294b8a5587c6d1182faccc7ec33a883748b89179274283a85dcc9588c724339479fac22b73d628e2226c06b4178059
   languageName: node
   linkType: hard
 
@@ -15708,9 +15694,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-react@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "hds-react@npm:3.2.0"
+"hds-react@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "hds-react@npm:3.3.0"
   dependencies:
     "@babel/runtime": "npm:7.17.9"
     "@emotion/styled-base": "npm:^11.0.0"
@@ -15725,7 +15711,7 @@ __metadata:
     crc-32: "npm:1.2.0"
     date-fns: "npm:2.16.1"
     downshift: "npm:6.0.6"
-    hds-core: "npm:3.2.0"
+    hds-core: "npm:3.3.0"
     http-status-typed: "npm:^1.0.1"
     jwt-decode: "npm:^3.1.2"
     kashe: "npm:1.0.4"
@@ -15754,7 +15740,7 @@ __metadata:
     postcss: ^8.4.21
     react: ^16.8.0 || ^17
     react-dom: ^16.8.0 || ^17
-  checksum: 5f10dfc9fe643b90ded3a5b8c7cd5324706e5146683a452cf7758be2b08e41b3f367c1c696f10fbcb416f962d909f2486428a46302ffd277da8414663e6322c7
+  checksum: b9614dc8aa07a522fe7f12c5b330820d36c8f864de348093e393a644488c8282b7d92f9102cf6071b1a584b625234f6a70eade4f236accf183184ea6d1f21edd
   languageName: node
   linkType: hard
 
@@ -15906,7 +15892,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.2.0"
+    hds-react: "npm:^3.3.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"
@@ -25124,7 +25110,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.2.0"
+    hds-react: "npm:^3.3.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"

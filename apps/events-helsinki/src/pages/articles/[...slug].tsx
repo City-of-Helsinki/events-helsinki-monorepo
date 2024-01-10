@@ -82,10 +82,7 @@ const NextCmsArticle: NextPage<{
       router.push(
         `/${(currentLanguageCode as string).toLowerCase()}${
           ROUTES.ARTICLE_ARCHIVE
-        }`,
-        {
-          query: { tags: categoryId },
-        }
+        }?tags=${categoryId}`
       );
     }
   };

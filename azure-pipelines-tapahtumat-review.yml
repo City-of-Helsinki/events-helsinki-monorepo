@@ -59,7 +59,7 @@ extends:
     # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/tapahtumat-variables-development.yml and tapahtumat-variables-common.yml
     # The values here will override the values defined in the tapahtumat-pipelines repository
     buildArgs:
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events-pr607.dev.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events-pr609.dev.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.hkih.stage.geniem.io
       LINKEDEVENTS_EVENT_ENDPOINT: https://013e-88-115-183-194.ngrok-free.app/v1/event
       NEXTJS_DISABLE_SENTRY: 0
@@ -68,6 +68,6 @@ extends:
       NEXT_PUBLIC_MATOMO_ENABLED: 0
       SKIP_BUILD_STATIC_GENERATION: 1
     configMap: # pod environment variables
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events-pr607.dev.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events-pr609.dev.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.hkih.stage.geniem.io
       LINKEDEVENTS_EVENT_ENDPOINT: https://013e-88-115-183-194.ngrok-free.app/v1/event

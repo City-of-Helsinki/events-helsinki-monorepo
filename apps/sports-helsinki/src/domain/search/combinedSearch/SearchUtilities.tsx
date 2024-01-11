@@ -53,7 +53,7 @@ function SearchUtilities() {
         <div className={styles.flexEnd}>
           <SearchTabs.TabList>
             {tabsData.map((tab) => (
-              <SearchTabs.Tab key={tab.id} id={tab.id}>
+              <SearchTabs.Tab key={tab.id} id={tab.id} theme="black">
                 <SearchTabs.CountLabel id={tab.id} label={tab.label} />
               </SearchTabs.Tab>
             ))}

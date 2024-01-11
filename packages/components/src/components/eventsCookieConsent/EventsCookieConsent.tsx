@@ -47,9 +47,9 @@ const EventsCookieConsent: React.FC<Props> = ({
       return consents[cookieId];
     };
     if (getConsentStatus('matomo')) {
-      pushInstruction('requireCookieConsent');
-    } else {
       pushInstruction('setCookieConsentGiven');
+    } else {
+      pushInstruction('forgetCookieConsentGiven');
     }
   }, [getAllConsents, pushInstruction]);
 

@@ -14,46 +14,24 @@ const MatomoWrapper: React.FC<Props> = ({ children }) => {
   const { asPath: pathname } = useRouter();
   const { cookieDomain } = useCookieConfigurationContext();
   const { getAllConsents } = useCookies({ cookieDomain });
-  const [isRequiredOnLoad, setIsRequiredOnLoad] = useState(true);
 
   // Track page changes when pathnname changes
   useEffect(() => {
-    if (!isRequiredOnLoad) {
-      const getConsentStatus = (cookieId: string) => {
-        const consents = getAllConsents();
-        return consents[cookieId];
-      };
+    const getConsentStatus = (cookieId: string) => {
+      const consents = getAllConsents();
+      return consents[cookieId];
+    };
 
-      // if enabled, should be called before each trackPage instruction
-      if (getConsentStatus('matomo')) {
-        pushInstruction('rememberCookieConsentGiven');
-        pushInstruction('rememberConsentGiven');
-      } else {
-        pushInstruction('forgetCookieConsentGiven');
-        pushInstruction('forgetConsentGiven');
-      }
-
-      trackPageView({
-        href: window.location.href,
-      });
+    // if enabled, should be called before each trackPage instruction
+    if (getConsentStatus('matomo')) {
+      pushInstruction('setCookieConsentGiven');
     }
-  }, [
-    getAllConsents,
-    pathname,
-    pushInstruction,
-    trackPageView,
-    isRequiredOnLoad,
-  ]);
 
-  // Track page changes when pathnname changes
-  useEffect(() => {
-    // set required on load always
-    if (isRequiredOnLoad) {
-      pushInstruction('requireCookieConsent');
-      pushInstruction('requireConsent');
-      setIsRequiredOnLoad(false);
-    }
-  }, [isRequiredOnLoad, pushInstruction, setIsRequiredOnLoad]);
+    // track in cookieless mode
+    trackPageView({
+      href: window.location.href,
+    });
+  }, [getAllConsents, pathname, pushInstruction, trackPageView]);
 
   return <>{children}</>;
 };

@@ -153,7 +153,10 @@ export default function MapSearch({ page }: { page: PageType }) {
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);
-    await sportsApolloClient.query<PageQuery, PageQueryVariables>({
+    const { data: pageData } = await sportsApolloClient.query<
+      PageQuery,
+      PageQueryVariables
+    >({
       query: PageDocument,
       variables: {
         id: `/${language}${ROUTES.SEARCH}/`,
@@ -162,6 +165,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     });
     return {
       props: {
+        page: pageData.page,
         ...(await serverSideTranslationsWithCommon(language, [
           'search',
           'home',

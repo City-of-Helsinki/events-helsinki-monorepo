@@ -21,7 +21,7 @@ const redirectRoutes = {
   '/liikuntaneuvonta': '/fi/pages/tukea-liikkumiseen/liikuntaneuvonta',
   '/liikuntaluuri': '/fi/pages/tukea-liikkumiseen/liikuntaluuri',
   '/liikuntahulinat': '/fi/pages/kohderyhmat/lapset-ja-perheet/liikuntahulinat',
-  '/perhehulinat': '/fi/pages/kohderyhmat/lapset-ja-perheet/liikuntahulinat',
+  '/perhehulinat': '/fi/pages/kohderyhmat/lapset-ja-perheet/perhehulinat-omatoiminen',
   '/liikuntatilavaraukset': '/fi/pages/liikuntatilojen-varaaminen',
   '/maksut': '/fi/pages/maksut-ja-hinnasto',
   // Swedish locale versions

@@ -22,9 +22,10 @@ const MatomoWrapper: React.FC<Props> = ({ children }) => {
       return consents[cookieId];
     };
 
-    // if enabled, should be called before each trackPage instruction
     if (getConsentStatus('matomo')) {
       pushInstruction('setCookieConsentGiven');
+    } else {
+      pushInstruction('forgetCookieConsentGiven');
     }
 
     // track in cookieless mode

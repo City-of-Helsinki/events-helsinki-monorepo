@@ -1,7 +1,8 @@
 import { useMatomo } from '@jonkoops/matomo-tracker-react';
 import type { ContentSource } from 'hds-react';
 import { CookiePage, useCookies, CookieModal } from 'hds-react';
-import React, { useCallback } from 'react';
+import { useRouter } from 'next/router';
+import React, { useCallback, useEffect } from 'react';
 import { MAIN_CONTENT_ID } from '../../constants';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { useConsentTranslation } from '../../hooks';
@@ -21,6 +22,7 @@ const EventsCookieConsent: React.FC<Props> = ({
   isModal = true,
 }) => {
   const locale = useLocale();
+  const { asPath: pathname } = useRouter();
   const { t, i18n } = useConsentTranslation();
   const [language, setLanguage] =
     React.useState<ContentSource['currentLanguage']>(locale);
@@ -30,6 +32,11 @@ const EventsCookieConsent: React.FC<Props> = ({
   const [showCookieConsentModal, setShowCookieConsentModal] = React.useState(
     !Object.keys(getAllConsents()).length
   );
+
+  useEffect(() => {
+    handleMatomoUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const onLanguageChange = React.useCallback(
     (newLang: string) => {
@@ -50,6 +57,7 @@ const EventsCookieConsent: React.FC<Props> = ({
       pushInstruction('setCookieConsentGiven');
     } else {
       pushInstruction('forgetCookieConsentGiven');
+      setShowCookieConsentModal(true);
     }
   }, [getAllConsents, pushInstruction]);
 

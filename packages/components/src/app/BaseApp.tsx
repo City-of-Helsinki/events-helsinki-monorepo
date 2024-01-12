@@ -1,6 +1,5 @@
 import type { createInstance as createMatomoInstance } from '@jonkoops/matomo-tracker-react';
 import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
-import 'nprogress/nprogress.css';
 
 import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';

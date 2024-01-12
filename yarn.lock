@@ -3265,7 +3265,6 @@ __metadata:
     "@types/jest-axe": "npm:^3.5.5"
     "@types/leaflet": "npm:1.9.3"
     "@types/node": "npm:20.3.2"
-    "@types/nprogress": "npm:^0.2.0"
     "@types/react": "npm:18.2.14"
     "@types/react-datepicker": "npm:^4.11.2"
     "@types/react-dom": "npm:18.2.6"
@@ -3318,7 +3317,6 @@ __metadata:
     next-i18next: "npm:14.0.0"
     next-router-mock: "npm:^0.7.4"
     npm-run-all: "npm:4.1.5"
-    nprogress: "npm:^0.2.0"
     path: "npm:0.12.7"
     postcss: "npm:^8.4.21"
     prettier: "npm:^2.8.8"
@@ -8209,13 +8207,6 @@ __metadata:
   version: 4.1.4
   resolution: "@types/npmlog@npm:4.1.4"
   checksum: a8d3dc83d0ba6b7bb8e9e451c4f96c266137a5c27377d3c683d8fc3e2d6a80996ecced479473b3638bffbb562c90d0ea0b1be82e77c3e048195449632e1d1d58
-  languageName: node
-  linkType: hard
-
-"@types/nprogress@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "@types/nprogress@npm:0.2.0"
-  checksum: 3ebd9a2df17b3cc06fefb86fb145545580e500753ce004410b9009db6fe1c700f0305f16f09a5c7940f78e27f1a62964d3b34ce6d3a59ff649d319a00ff1ac84
   languageName: node
   linkType: hard
 
@@ -13976,7 +13967,6 @@ __metadata:
     "@types/jsdom": "npm:21.1.1"
     "@types/lodash": "npm:^4.14.195"
     "@types/node": "npm:20.3.2"
-    "@types/nprogress": "npm:^0.2.0"
     "@types/react": "npm:18.2.14"
     "@types/react-datepicker": "npm:^4.11.2"
     "@types/react-dom": "npm:18.2.6"
@@ -14032,7 +14022,6 @@ __metadata:
     next-i18next: "npm:14.0.0"
     next-router-mock: "npm:^0.7.4"
     next-with-apollo: "npm:^5.3.0"
-    nprogress: "npm:^0.2.0"
     picocolors: "npm:1.0.0"
     postcss: "npm:^8.4.21"
     postcss-flexbugs-fixes: "npm:5.0.2"
@@ -15853,7 +15842,6 @@ __metadata:
     "@types/jsdom": "npm:21.1.1"
     "@types/lodash": "npm:^4.14.195"
     "@types/node": "npm:20.3.2"
-    "@types/nprogress": "npm:^0.2.0"
     "@types/react": "npm:18.2.14"
     "@types/react-datepicker": "npm:^4.11.2"
     "@types/react-dom": "npm:18.2.6"
@@ -15909,7 +15897,6 @@ __metadata:
     next-i18next: "npm:14.0.0"
     next-router-mock: "npm:^0.7.4"
     next-with-apollo: "npm:^5.3.0"
-    nprogress: "npm:^0.2.0"
     picocolors: "npm:1.0.0"
     postcss: "npm:^8.4.21"
     postcss-flexbugs-fixes: "npm:5.0.2"
@@ -20661,13 +20648,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nprogress@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "nprogress@npm:0.2.0"
-  checksum: 8b0fdb19bf9254efeb084b89a5aa53855036c83ac434b8e96eef8b39c536a70a71900f7cb85a30305eebde9621184cd138c40ca26ef5774a1b027ac4f62c9f61
-  languageName: node
-  linkType: hard
-
 "nth-check@npm:^2.0.1":
   version: 2.1.1
   resolution: "nth-check@npm:2.1.1"
@@ -25069,7 +25049,6 @@ __metadata:
     "@types/jsdom": "npm:21.1.1"
     "@types/lodash": "npm:^4.14.195"
     "@types/node": "npm:20.3.2"
-    "@types/nprogress": "npm:^0.2.0"
     "@types/react": "npm:18.2.14"
     "@types/react-datepicker": "npm:^4.11.2"
     "@types/react-dom": "npm:18.2.6"
@@ -25128,7 +25107,6 @@ __metadata:
     next-i18next: "npm:14.0.0"
     next-router-mock: "npm:^0.7.4"
     next-with-apollo: "npm:^5.3.0"
-    nprogress: "npm:^0.2.0"
     picocolors: "npm:1.0.0"
     postcss: "npm:^8.4.21"
     postcss-flexbugs-fixes: "npm:5.0.2"

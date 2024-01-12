@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.18.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.17.0...sports-helsinki-v1.18.0) (2024-01-12)
+
+
+### Features
+
+* Add phone & email links with icons to event & venue detail page ([f6b2e0f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f6b2e0f6cdc3158ff43f0b9c37da80e0d48eeb79))
+* Article search with query params ([#605](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/605)) ([a337aa7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a337aa704b52c7265236ec16d9742d7fa3b9e449))
+* Use a new menuIdentifiersOnly only with menu query ([45ab5a9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/45ab5a9cc87ef27358f149b0c999199a04d7cccd))
+
+
+### Bug Fixes
+
+* Articles routing fix ([#608](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/608)) ([ffa772c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ffa772c1278bb5df626387545a685537913296c7))
+* Hero ui tweaks ([#531](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/531)) ([af11c1b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/af11c1bf2dacf1c9d4e2444db26f410123de021e))
+* Remove frontpage hero content box ([#553](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/553)) ([ffa0e25](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ffa0e2515cc9791d209d63bb232179f3f61f0a9d))
+* Remove home-translations from the common list for optimization ([e30db3a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e30db3ae5a9a97eae0b6117eb61a010eaf74c1f9))
+* **types:** Remove "as unknown as" type unsafe casts ([8ba50bc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8ba50bcb212ae9e84d7fc603f0e201ff4f1f8d95))
+* Update perhehulinat campaing redirect ([#612](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/612)) ([348c0db](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/348c0dbaa6163785a75805b37d63c7060d3b2b1f))
+
 ## [1.17.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.16.0...sports-helsinki-v1.17.0) (2024-01-04)
 
 ### Features

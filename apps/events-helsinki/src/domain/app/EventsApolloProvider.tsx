@@ -1,5 +1,4 @@
 import { ApolloProvider as BaseApolloProvider } from '@apollo/client';
-import 'nprogress/nprogress.css';
 import {
   ApolloErrorNotification,
   useApolloErrorHandler,

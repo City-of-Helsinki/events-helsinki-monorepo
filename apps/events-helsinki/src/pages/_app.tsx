@@ -1,4 +1,3 @@
-import 'nprogress/nprogress.css';
 import type { NavigationProviderProps } from '@events-helsinki/components';
 import {
   useLocale,

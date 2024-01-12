@@ -93,7 +93,6 @@ function buildConfig() {
       'lodash/startCase',
       'next',
       'next-i18next',
-      'nprogress',
       'react',
       'react-content-loader',
       'react-datepicker',

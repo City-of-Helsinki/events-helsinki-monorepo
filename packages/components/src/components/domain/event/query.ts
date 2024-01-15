@@ -72,6 +72,9 @@ export const QUERY_EVENT_DETAILS = gql`
     provider {
       ...localizedFields
     }
+    providerContactInfo {
+      ...localizedFields
+    }
     infoUrl {
       ...localizedFields
     }

@@ -22,7 +22,6 @@ import {
   getEventFields,
   getEventPrice,
   getLargeEventCardId,
-  isEventClosed,
 } from '../../utils';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
@@ -50,8 +49,6 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
 
   const audienceAge = getAudienceAgeText(t, audienceMinAge, audienceMaxAge);
 
-  const eventClosed = isEventClosed(event);
-
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
   const { clickCaptureRef, clicked } = useClickCapture(1000);
@@ -69,11 +66,7 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
         data-testid={event.id}
         href={eventUrl}
       >
-        <div
-          className={classNames(styles.eventCard, {
-            [styles.eventClosed]: eventClosed,
-          })}
-        >
+        <div className={classNames(styles.eventCard)}>
           {/* INFO WRAPPER. Re-order info wrapper and text wrapper on css */}
           <div className={styles.infoWrapper}>
             <div className={styles.eventName}>

@@ -15,7 +15,6 @@ import {
   getEventCardId,
   getEventFields,
   getEventPrice,
-  isEventClosed,
 } from '../../utils';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
@@ -34,7 +33,6 @@ const EventCard: React.FC<EventCardProps> = ({ event, eventUrl }) => {
     locale
   );
 
-  const eventClosed = isEventClosed(event);
   const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 
   const goToEventPage = () => {
@@ -53,11 +51,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, eventUrl }) => {
         data-testid={event.id}
         href={eventUrl}
       >
-        <div
-          className={classNames(styles.eventCard, {
-            [styles.eventClosed]: eventClosed,
-          })}
-        >
+        <div className={classNames(styles.eventCard)}>
           {/* INFO WRAPPER. Re-order info wrapper and text wrapper on css */}
           <div className={styles.infoWrapper}>
             <div className={styles.textWrapper}>

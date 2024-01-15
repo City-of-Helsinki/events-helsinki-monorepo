@@ -2907,7 +2907,7 @@ export type EventDetails = {
   name: LocalizedObject;
   offers: Array<Offer>;
   provider?: Maybe<LocalizedObject>;
-  providerContactInfo?: Maybe<Scalars['String']['output']>;
+  providerContactInfo?: Maybe<LocalizedObject>;
   publisher?: Maybe<Scalars['ID']['output']>;
   remainingAttendeeCapacity?: Maybe<Scalars['Int']['output']>;
   shortDescription?: Maybe<LocalizedObject>;
@@ -12625,6 +12625,12 @@ export type EventFieldsFragment = {
     fi?: string | null;
     sv?: string | null;
   } | null;
+  providerContactInfo?: {
+    __typename?: 'LocalizedObject';
+    en?: string | null;
+    fi?: string | null;
+    sv?: string | null;
+  } | null;
   infoUrl?: {
     __typename?: 'LocalizedObject';
     en?: string | null;
@@ -12807,6 +12813,12 @@ export type EventDetailsQuery = {
       sv?: string | null;
     } | null;
     provider?: {
+      __typename?: 'LocalizedObject';
+      en?: string | null;
+      fi?: string | null;
+      sv?: string | null;
+    } | null;
+    providerContactInfo?: {
       __typename?: 'LocalizedObject';
       en?: string | null;
       fi?: string | null;
@@ -13079,6 +13091,12 @@ export type EventListQuery = {
         fi?: string | null;
         sv?: string | null;
       } | null;
+      providerContactInfo?: {
+        __typename?: 'LocalizedObject';
+        en?: string | null;
+        fi?: string | null;
+        sv?: string | null;
+      } | null;
       infoUrl?: {
         __typename?: 'LocalizedObject';
         en?: string | null;
@@ -13273,6 +13291,12 @@ export type EventsByIdsQuery = {
         sv?: string | null;
       } | null;
       provider?: {
+        __typename?: 'LocalizedObject';
+        en?: string | null;
+        fi?: string | null;
+        sv?: string | null;
+      } | null;
+      providerContactInfo?: {
         __typename?: 'LocalizedObject';
         en?: string | null;
         fi?: string | null;
@@ -14249,6 +14273,9 @@ export const EventFieldsFragmentDoc = gql`
     startTime
     publisher
     provider {
+      ...localizedFields
+    }
+    providerContactInfo {
       ...localizedFields
     }
     infoUrl {

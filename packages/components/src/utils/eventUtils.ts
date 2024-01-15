@@ -363,6 +363,7 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
     remainingAttendeeCapacity: event.remainingAttendeeCapacity,
     enrolmentStartTime: event.enrolmentStartTime,
     enrolmentEndTime: event.enrolmentEndTime,
+    providerContactInfo: getLocalizedString(event.providerContactInfo, locale),
   };
 };
 

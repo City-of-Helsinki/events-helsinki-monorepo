@@ -276,13 +276,14 @@ const OtherInfo: React.FC<{
         ) => {
           return (
             !!externalLink.link &&
+            !!externalLink.name &&
             externalLink.link !== registrationUrl && (
               <SecondaryLink
                 className={styles.link}
-                key={index}
+                key={`externalLink-${index}`}
                 href={externalLink.link}
               >
-                {translateValue('info.', externalLink.name as string, t)}
+                {translateValue('info.', externalLink.name, t)}
               </SecondaryLink>
             )
           );

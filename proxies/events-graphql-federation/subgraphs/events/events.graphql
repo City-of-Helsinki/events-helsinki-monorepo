@@ -186,7 +186,7 @@ type EventDetails {
   shortDescription: LocalizedObject
   provider: LocalizedObject
   infoUrl: LocalizedObject
-  providerContactInfo: String
+  providerContactInfo: LocalizedObject
   description: LocalizedObject
   internalId: String
   internalContext: String

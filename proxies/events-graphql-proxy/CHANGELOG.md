@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.2.1...events-graphql-proxy-v1.3.0) (2024-01-16)
+
+
+### Features
+
+* **router:** Upgrade the Apollo router docker image ([7a0bb67](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7a0bb6708193ab27606c56f3e1d061a4fff1262e))
+
+
+### Bug Fixes
+
+* Hero ui tweaks ([#531](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/531)) ([af11c1b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/af11c1bf2dacf1c9d4e2444db26f410123de021e))
+* **proxy:** ProviderContactInfo field type should be a LocalizedObject ([080a775](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/080a7756b3cfad044828b6d62848e203312e840e))
+
 ## [1.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.2.0...events-graphql-proxy-v1.2.1) (2024-01-04)
 
 ### Bug Fixes

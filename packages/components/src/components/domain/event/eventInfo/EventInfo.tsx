@@ -56,17 +56,16 @@ const EventInfo: React.FC<EventInfoProps> = ({ event, superEvent }) => {
     className: styles.focusVisible,
   });
   const {
-    email,
     externalLinks,
     infoUrl,
     languages,
-    telephone,
+    providerContactInfo,
     audience,
     audienceMinAge,
     audienceMaxAge,
   } = getEventFields(event, locale);
   const showOtherInfo = Boolean(
-    email || externalLinks.length || infoUrl || telephone
+    providerContactInfo || externalLinks.length || infoUrl
   );
   /*
   Middle level events are all the events that have super event and subEvents

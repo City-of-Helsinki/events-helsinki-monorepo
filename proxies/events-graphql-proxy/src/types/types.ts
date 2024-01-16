@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
 import type { GraphQLResolveInfo } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -145,7 +147,7 @@ export type EventDetails = {
   shortDescription?: Maybe<LocalizedObject>;
   provider?: Maybe<LocalizedObject>;
   infoUrl?: Maybe<LocalizedObject>;
-  providerContactInfo?: Maybe<Scalars['String']>;
+  providerContactInfo?: Maybe<LocalizedObject>;
   description?: Maybe<LocalizedObject>;
   internalId?: Maybe<Scalars['String']>;
   internalContext?: Maybe<Scalars['String']>;
@@ -985,7 +987,7 @@ export type EventDetailsResolvers<
     ContextType
   >;
   providerContactInfo?: Resolver<
-    Maybe<ResolversTypes['String']>,
+    Maybe<ResolversTypes['LocalizedObject']>,
     ParentType,
     ContextType
   >;

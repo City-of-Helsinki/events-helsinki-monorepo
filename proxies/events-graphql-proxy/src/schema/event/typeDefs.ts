@@ -97,7 +97,7 @@ const typeDefs = gql`
     shortDescription: LocalizedObject
     provider: LocalizedObject
     infoUrl: LocalizedObject
-    providerContactInfo: String
+    providerContactInfo: LocalizedObject
     description: LocalizedObject
     # @id is renamed as internalId so it's usable on GraphQl
     internalId: String

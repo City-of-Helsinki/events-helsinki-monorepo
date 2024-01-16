@@ -19,7 +19,7 @@ const eventCardsMap = {
 
 type EventListProps = {
   buttonCentered?: boolean;
-  cardSize?: 'default' | 'large';
+  cardSize?: keyof typeof eventCardsMap;
   events: EventFields[];
   count: number;
   loading: boolean;
@@ -46,7 +46,7 @@ const EventList: React.FC<EventListProps> = ({
   const eventsLeft = count - events.length;
   const EventCardComponent = eventCardsMap[cardSize];
 
-  const eventCards = (events as EventFields[]).map((event) => {
+  const eventCards = events.map((event) => {
     const eventUrl = getEventUrl(event, router, locale);
     return (
       <EventCardComponent

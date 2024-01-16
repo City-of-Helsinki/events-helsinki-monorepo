@@ -107,7 +107,7 @@ function useSearchPage({ eventType }: { eventType: EventTypeId }): SearchPage {
     }
   };
 
-  const count = (eventsData?.eventList?.meta.count as number) ?? 0;
+  const count = eventsData?.eventList?.meta.count ?? 0;
   const hasNext = !!eventsData?.eventList?.meta.next;
 
   return {

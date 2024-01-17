@@ -13,6 +13,7 @@ import {
   DEFAULT_EVENT_SORT_OPTION,
   isEventSortOption,
   EventList,
+  useClearClosedEventsFromApolloCache,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
@@ -73,6 +74,9 @@ const SearchPage: React.FC<{
     variables: eventFilters,
   });
   const eventsList = eventsData?.eventList;
+
+  // Clear the cache from the events of the past
+  useClearClosedEventsFromApolloCache(eventsData);
 
   const handleLoadMore = async () => {
     const page = eventsData?.eventList.meta

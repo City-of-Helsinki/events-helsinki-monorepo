@@ -11,6 +11,7 @@ import {
   MAIN_CONTENT_ID,
   EVENT_SORT_OPTIONS,
   EventList,
+  useClearClosedEventsFromApolloCache,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
@@ -68,6 +69,9 @@ const SearchPage: React.FC<{
   });
 
   const eventsList = eventsData?.eventList;
+
+  // Clear the cache from the events of the past
+  useClearClosedEventsFromApolloCache(eventsData);
 
   const handleLoadMore = async () => {
     const page = eventsData?.eventList.meta

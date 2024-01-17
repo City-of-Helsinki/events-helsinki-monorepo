@@ -4,6 +4,7 @@ import {
   useIsSmallScreen,
   useEventListQuery,
   getLargeEventCardId,
+  useClearClosedEventsFromApolloCache,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -46,6 +47,9 @@ function useEventSearchPageQuery(eventType: EventTypeId) {
     }
     setIsFetchingMore(false);
   };
+
+  // Clear the cache from the events of the past
+  useClearClosedEventsFromApolloCache(data);
 
   return {
     data,

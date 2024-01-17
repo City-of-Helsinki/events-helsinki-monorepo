@@ -34,7 +34,7 @@
     "docker:develop:reinstall": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --progress=tty --no-cache --force-rm develop",
     "docker:build": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --progress=tty runner",
     "docker:serve": "docker-compose -f docker-compose.yml --env-file .env up runner",
-    "hds:critical-styles:create": "node ./createCriticalHdsStylesFile.js"
+    "hds:critical-styles:create": "node ../../scripts/create-critical-hds-styles-file.js src/styles/critical-hds-styles.css"
   },
   "eslintConfig": {
     "extends": "react-app"

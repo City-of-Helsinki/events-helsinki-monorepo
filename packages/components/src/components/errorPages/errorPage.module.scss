@@ -34,8 +34,12 @@
   }
 
   .backButton {
-    background-color: var(--color-input-dark);
-    border-color: var(--color-input-dark) !important;
+    background-color: var(--color-input);
+    border-color: var(--color-input) !important;
+    &:hover {
+      background-color: var(--color-input-dark);
+      border-color: var(--color-input-dark) !important;
+    }
   }
 
   button {

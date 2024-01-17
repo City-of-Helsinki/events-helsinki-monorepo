@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -51,7 +50,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, eventUrl }) => {
         data-testid={event.id}
         href={eventUrl}
       >
-        <div className={classNames(styles.eventCard)}>
+        <div className={styles.eventCard}>
           {/* INFO WRAPPER. Re-order info wrapper and text wrapper on css */}
           <div className={styles.infoWrapper}>
             <div className={styles.textWrapper}>

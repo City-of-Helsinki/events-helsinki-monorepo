@@ -23,6 +23,7 @@ export default function useClearClosedEventsFromApolloCache(
       cache.gc();
       // eslint-disable-next-line no-console
       console.info(
+        // eslint-disable-next-line no-console
         'Removed the past events from the Apollo cache by carbage collecting them',
         eventsOfPastIds
       );

@@ -66,7 +66,7 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
         data-testid={event.id}
         href={eventUrl}
       >
-        <div className={classNames(styles.eventCard)}>
+        <div className={styles.eventCard}>
           {/* INFO WRAPPER. Re-order info wrapper and text wrapper on css */}
           <div className={styles.infoWrapper}>
             <div className={styles.eventName}>

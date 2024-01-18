@@ -13915,6 +13915,7 @@ __metadata:
     npm-run-all: "npm:4.1.5"
     path: "npm:0.12.7"
     picocolors: "npm:1.0.0"
+    postcss: "npm:^8.4.21"
     prettier: "npm:^2.8.8"
     react: "npm:^18.2.0"
     react-dom: "npm:18.2.0"

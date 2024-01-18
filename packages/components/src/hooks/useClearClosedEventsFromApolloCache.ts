@@ -11,11 +11,9 @@ export default function useClearClosedEventsFromApolloCache(
 ) {
   const { cache } = useApolloClient();
   useEffect(() => {
-    const eventsOfPastIds = data?.eventList.data.reduce<string[]>(
-      (pastEventIds, event) =>
-        isEventClosed(event) ? [...pastEventIds, event.id] : pastEventIds,
-      []
-    );
+    const eventsOfPastIds = data?.eventList.data
+      .filter(isEventClosed)
+      .map((event) => event.id);
     if (eventsOfPastIds?.length) {
       eventsOfPastIds?.forEach((eventId) =>
         cache.evict({ id: `EventDetails:${eventId}` })
@@ -23,7 +21,6 @@ export default function useClearClosedEventsFromApolloCache(
       cache.gc();
       // eslint-disable-next-line no-console
       console.info(
-        // eslint-disable-next-line no-console
         'Removed the past events from the Apollo cache by carbage collecting them',
         eventsOfPastIds
       );

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.6.0...federation-router-v1.6.1) (2024-01-18)
+
+
+### Bug Fixes
+
+* Hero ui tweaks ([#531](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/531)) ([af11c1b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/af11c1bf2dacf1c9d4e2444db26f410123de021e))
+* **router:** ProviderContactInfo field type should be a LocalizedObject ([fe23839](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fe2383999246d7dbf6e309597c1b75999e098a75))
+
 ## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.2...federation-router-v1.6.0) (2024-01-04)
 
 ### Features

@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.19.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.18.0...sports-helsinki-v1.19.0) (2024-01-18)
+
+
+### Features
+
+* Import all HDS styles as a link instead of styles block collecting ([b5ed7a3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b5ed7a370b7430b68b4f5f2d8080c1322b7142cd))
+* Remove the closed events from the search list ([31d0775](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/31d0775ca0c0800e14748bd3d58c26ed92d7a5ad))
+* **script:** Create critical-hds-styles for all apps and components package ([b30dfc1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b30dfc19dc1799c4b72b92d11add4a25e1139dae))
+
+
+### Bug Fixes
+
+* Add critical-hds-styles to a new file imported in global styles ([d941826](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d9418260ffa583cfa2a46d1bfb503eef86b0e547))
+* Article page layout ui tweaks ([#622](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/622)) ([3606b74](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3606b743f67282410fec921a101c4d23762cc4d9))
+* Remove needless nprogress plugin ([5b4a817](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5b4a817b2b3c3239e299ef8c2c71e30ea10ff414))
+* **sports:** Map search page prop passing ([dc96a59](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dc96a592e50d9cb0c117a0710ced4163a01e1bec))
+* Theme property for the search tabs ([ad15653](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ad15653db2d5a29d5745f820cc6a58fc535ed0ff))
+
 ## [1.18.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.17.0...sports-helsinki-v1.18.0) (2024-01-12)
 
 

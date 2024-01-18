@@ -2,7 +2,7 @@ import { useMatomo } from '@jonkoops/matomo-tracker-react';
 import { useCookies } from 'hds-react';
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 
 interface Props {

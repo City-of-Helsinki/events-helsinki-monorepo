@@ -1,0 +1,22 @@
+import * as fs from 'fs';
+import * as path from 'path';
+import * as hdsReact from 'hds-react';
+
+const criticalHdsStylesFile = path.join(
+  __dirname,
+  '../styles/',
+  'critical-hds-styles.css'
+);
+const currentCriticalHdsStyles = fs.readFileSync(criticalHdsStylesFile, 'utf8');
+
+describe('Critical HDS rules file generation', () => {
+  // Skipped, because no way was found how the CSS could be formatted the same way.
+  // eslint-disable-next-line jest/consistent-test-it
+  test('critical-hds-styles are up to date', async () => {
+    const minimumHdsCriticalRules = await hdsReact.getCriticalHdsRules(
+      '<empty></empty>',
+      (hdsReact as any).hdsStyles
+    );
+    expect(currentCriticalHdsStyles).toBe(minimumHdsCriticalRules);
+  });
+});

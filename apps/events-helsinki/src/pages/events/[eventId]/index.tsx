@@ -4,7 +4,7 @@ import {
   Navigation,
   getLanguageOrDefault,
   FooterSection,
-  useAppEventsTranslation,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type {
   EventFields,
@@ -24,7 +24,7 @@ const Event: NextPage<{
   loading: boolean;
 }> = ({ event, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useAppEventsTranslation();
+  const { resilientT } = useResilientTranslation();
   return (
     <RHHCPage
       className="pageLayout"
@@ -37,7 +37,10 @@ const Event: NextPage<{
         />
       }
       footer={
-        <FooterSection menu={footerMenu} appName={t('appEvents:appName')} />
+        <FooterSection
+          menu={footerMenu}
+          appName={resilientT('appEvents:appName')}
+        />
       }
     />
   );

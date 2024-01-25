@@ -7,9 +7,9 @@ import {
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
-  useAppEventsTranslation,
   RouteMeta,
   getLanguageCodeFilter,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type { AppLanguage } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
@@ -60,7 +60,7 @@ const NextCmsArticle: NextPage<{
   } = useConfig();
 
   const { t: commonTranslation } = useCommonTranslation();
-  const { t: appTranslation } = useAppEventsTranslation();
+  const { resilientT } = useResilientTranslation();
 
   const { footerMenu } = useContext(NavigationContext);
 
@@ -121,7 +121,7 @@ const NextCmsArticle: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={appTranslation('appEvents:appName')}
+          appName={resilientT('appEvents:appName')}
         />
       }
     />

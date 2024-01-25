@@ -9,7 +9,7 @@ import {
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
-  useAppSportsTranslation,
+  useResilientTranslation,
   getLanguageCodeFilter,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
@@ -53,7 +53,7 @@ export default function ArticleArchive({
   page,
 }: SportsGlobalPageProps & { page: PageType }) {
   const router = useRouter();
-  const { t } = useAppSportsTranslation();
+  const { resilientT } = useResilientTranslation();
 
   const getArticlesSearchQuery = (
     text: string,
@@ -240,7 +240,7 @@ export default function ArticleArchive({
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={t('appSports:appName')}
+          appName={resilientT('appSports:appName')}
           feedbackWithPadding
         />
       }

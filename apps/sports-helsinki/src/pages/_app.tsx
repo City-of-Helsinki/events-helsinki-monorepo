@@ -1,8 +1,8 @@
 import type { NavigationProviderProps } from '@events-helsinki/components';
 import {
+  useResilientTranslation,
   useLocale,
   BaseApp,
-  useAppSportsTranslation,
 } from '@events-helsinki/components';
 import { FallbackComponent } from '@events-helsinki/components/app/BaseApp';
 import type { AppProps as NextAppProps } from 'next/app';
@@ -37,10 +37,10 @@ export type AppProps<P = any> = {
 export type CustomPageProps = NavigationProviderProps & SSRConfig;
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const { t } = useAppSportsTranslation();
+  const { resilientT } = useResilientTranslation();
   const locale = useLocale();
   const { asPath, pathname } = useRouter();
-  const appName = t('appSports:appName');
+  const appName = resilientT('appSports:appName');
   return (
     <ErrorBoundary
       FallbackComponent={({ error }) => (

@@ -3,10 +3,10 @@
 import type { NormalizedCacheObject } from '@apollo/client';
 import type { AppLanguage } from '@events-helsinki/components';
 import {
+  useResilientTranslation,
   Navigation,
   NavigationContext,
   getAllPages,
-  useAppEventsTranslation,
   getLanguageOrDefault,
   FooterSection,
   RouteMeta,
@@ -48,7 +48,7 @@ const NextCmsPage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
-  const { t: appTranslation } = useAppEventsTranslation();
+  const { resilientT } = useResilientTranslation();
 
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
@@ -74,7 +74,7 @@ const NextCmsPage: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={appTranslation('appEvents:appName')}
+          appName={resilientT('appEvents:appName')}
         />
       }
     />

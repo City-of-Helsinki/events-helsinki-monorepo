@@ -7,6 +7,7 @@ import {
   usePageScrollRestoration,
   RouteMeta,
   PageMeta,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -30,6 +31,7 @@ const Search: NextPage<{
   page: PageType;
 }> = ({ page }) => {
   const { t: tAppHobbies } = useAppHobbiesTranslation();
+  const { resilientT } = useResilientTranslation();
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
@@ -69,7 +71,7 @@ const Search: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={tAppHobbies('appHobbies:appName')}
+          appName={resilientT('appHobbies:appName')}
           feedbackWithPadding
         />
       }

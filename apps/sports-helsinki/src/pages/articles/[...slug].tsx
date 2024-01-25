@@ -7,7 +7,7 @@ import {
   useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
-  useAppSportsTranslation,
+  useResilientTranslation,
   RouteMeta,
   getLanguageCodeFilter,
 } from '@events-helsinki/components';
@@ -60,7 +60,7 @@ const NextCmsArticle: NextPage<{
   } = useConfig();
 
   const { t: commonTranslation } = useCommonTranslation();
-  const { t: appTranslation } = useAppSportsTranslation();
+  const { resilientT } = useResilientTranslation();
   const { footerMenu } = useContext(NavigationContext);
 
   const { data: categoriesData, loading: loadingCategories } =
@@ -120,7 +120,7 @@ const NextCmsArticle: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={appTranslation('appSports:appName')}
+          appName={resilientT('appSports:appName')}
         />
       }
     />

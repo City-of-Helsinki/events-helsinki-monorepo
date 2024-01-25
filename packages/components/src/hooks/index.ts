@@ -14,6 +14,7 @@ export { default as useErrorsTranslation } from './useErrorsTranslation';
 export { default as useHomeTranslation } from './useHomeTranslation';
 export { default as useFooterTranslation } from './useFooterTranslation';
 export { default as useNotFoundTranslation } from './useNotFoundTranslation';
+export { default as useResilientTranslation } from './useResilientTranslation';
 export { default as useSearchTranslation } from './useSearchTranslation';
 export { default as useSetSortQueryParamToOptionValue } from './useSetSortQueryParamToOptionValue';
 export { default as useEventTranslation } from './useEventTranslation';

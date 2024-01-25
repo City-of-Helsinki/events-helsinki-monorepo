@@ -4,7 +4,7 @@ import {
   Navigation,
   FooterSection,
   getLanguageOrDefault,
-  useAppSportsTranslation,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type {
   EventFields,
@@ -25,7 +25,7 @@ const EventPage: NextPage<{
   loading: boolean;
 }> = ({ event, loading }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useAppSportsTranslation();
+  const { resilientT } = useResilientTranslation();
   return (
     <RHHCPage
       className="pageLayout"
@@ -38,7 +38,10 @@ const EventPage: NextPage<{
         />
       }
       footer={
-        <FooterSection menu={footerMenu} appName={t('appSports:appName')} />
+        <FooterSection
+          menu={footerMenu}
+          appName={resilientT('appSports:appName')}
+        />
       }
     />
   );

@@ -6,11 +6,11 @@ import {
   NavigationContext,
   skipFalsyType,
   Navigation,
-  useCommonTranslation,
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
   getLanguageCodeFilter,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -53,7 +53,7 @@ export default function ArticleArchive({
   page,
 }: EventsGlobalPageProps & { page: PageType }) {
   const router = useRouter();
-  const { t: commonT } = useCommonTranslation();
+  const { resilientT } = useResilientTranslation();
 
   const getArticlesSearchQuery = (
     text: string,
@@ -240,7 +240,7 @@ export default function ArticleArchive({
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={commonT('appEvents:appName')}
+          appName={resilientT('appEvents:appName')}
           feedbackWithPadding
         />
       }

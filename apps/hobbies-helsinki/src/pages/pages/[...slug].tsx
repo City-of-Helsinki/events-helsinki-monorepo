@@ -5,7 +5,7 @@ import type { AppLanguage } from '@events-helsinki/components';
 import {
   NavigationContext,
   getAllPages,
-  useAppHobbiesTranslation,
+  useResilientTranslation,
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
@@ -48,7 +48,7 @@ const NextCmsPage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
-  const { t: appTranslation } = useAppHobbiesTranslation();
+  const { resilientT } = useResilientTranslation();
 
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
@@ -74,7 +74,7 @@ const NextCmsPage: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={appTranslation('appHobbies:appName')}
+          appName={resilientT('appHobbies:appName')}
         />
       }
     />

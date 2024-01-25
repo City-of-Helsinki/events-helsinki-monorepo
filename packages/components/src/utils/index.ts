@@ -4,6 +4,7 @@ export { default as buildQueryFromObject } from './buildQueryFromObject';
 export * from './dateUtils';
 export * from './arrayUtils';
 export * from './eventUtils';
+export * from './resilientTranslation';
 export { default as getDateArray } from './getDateArray';
 export { default as getDateRangeStr } from './getDateRangeStr';
 export { default as getDomain } from './getDomain';

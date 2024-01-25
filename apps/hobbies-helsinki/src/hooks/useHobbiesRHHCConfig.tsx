@@ -1,6 +1,7 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
+  useResilientTranslation,
   getLanguageCode,
   getLinkArrowLabel,
   useLocale,
@@ -10,7 +11,6 @@ import {
   useCommonCmsConfig,
   HelsinkiCityOwnedIcon,
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
-  useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -42,8 +42,8 @@ export default function useHobbiesRHHCConfig(args: {
 }): Config {
   const { apolloClient } = args;
   const { t: commonTranslation } = useCommonTranslation();
-  const { t: appTranslation } = useAppHobbiesTranslation();
   const { t: eventTranslation } = useEventTranslation();
+  const { resilientT } = useResilientTranslation();
   const locale = useLocale();
   const commonConfig = useCommonCmsConfig();
 
@@ -87,7 +87,7 @@ export default function useHobbiesRHHCConfig(args: {
           <HelsinkiCityOwnedIcon {...props} />
         ),
       },
-      siteName: appTranslation('appHobbies:appName'),
+      siteName: resilientT('appHobbies:appName'),
       currentLanguageCode: getLanguageCode(locale),
       apolloClient,
       eventsApolloClient: apolloClient,
@@ -135,9 +135,9 @@ export default function useHobbiesRHHCConfig(args: {
     };
   }, [
     commonConfig,
-    appTranslation,
     commonTranslation,
     eventTranslation,
+    resilientT,
     locale,
     apolloClient,
   ]);

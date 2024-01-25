@@ -1,7 +1,7 @@
 import {
   getLanguageOrDefault,
   NotFound,
-  useAppSportsTranslation,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
@@ -9,8 +9,8 @@ import getSportsStaticProps from '../domain/app/getSportsStaticProps';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 
 const FourOhFour: NextPage = () => {
-  const { t } = useAppSportsTranslation();
-  return <NotFound appName={t('appSports:appName')} />;
+  const { resilientT } = useResilientTranslation();
+  return <NotFound appName={resilientT('appSports:appName')} />;
 };
 export default FourOhFour;
 

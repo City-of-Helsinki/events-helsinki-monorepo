@@ -6,7 +6,7 @@ import {
   NavigationContext,
   getAllPages,
   Navigation,
-  useAppSportsTranslation,
+  useResilientTranslation,
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
@@ -48,7 +48,7 @@ const NextCmsPage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
-  const { t: appTranslation } = useAppSportsTranslation();
+  const { resilientT } = useResilientTranslation();
 
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
@@ -74,7 +74,7 @@ const NextCmsPage: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={appTranslation('appSports:appName')}
+          appName={resilientT('appSports:appName')}
         />
       }
     />

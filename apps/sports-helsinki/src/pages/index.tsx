@@ -3,7 +3,7 @@ import {
   getQlLanguage,
   NavigationContext,
   Navigation,
-  useAppSportsTranslation,
+  useResilientTranslation,
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
@@ -38,7 +38,7 @@ const HomePage: NextPage<{
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
 
-  const { t } = useAppSportsTranslation();
+  const { resilientT } = useResilientTranslation();
 
   return (
     <RHHCPage
@@ -60,7 +60,7 @@ const HomePage: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={t('appSports:appName')}
+          appName={resilientT('appSports:appName')}
           hasFeedBack={false}
         />
       }

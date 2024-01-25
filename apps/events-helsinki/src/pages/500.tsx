@@ -1,7 +1,7 @@
 import {
   getLanguageOrDefault,
   UnknownError,
-  useAppEventsTranslation,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next/types';
 import React from 'react';
@@ -9,8 +9,8 @@ import getEventsStaticProps from '../domain/app/getEventsStaticProps';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextErrorPage = () => {
-  const { t } = useAppEventsTranslation();
-  return <UnknownError appName={t('appEvents:appName')} />;
+  const { resilientT } = useResilientTranslation();
+  return <UnknownError appName={resilientT('appEvents:appName')} />;
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {

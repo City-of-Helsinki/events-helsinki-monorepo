@@ -6,7 +6,7 @@ import {
   usePageScrollRestoration,
   RouteMeta,
   PageMeta,
-  useAppSportsTranslation,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
@@ -28,7 +28,7 @@ const Search: NextPage<{
   page: PageType;
 }> = ({ page }) => {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useAppSportsTranslation();
+  const { resilientT } = useResilientTranslation();
   usePageScrollRestoration();
   return (
     <RHHCPage
@@ -44,7 +44,7 @@ const Search: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={t('appSports:appName')}
+          appName={resilientT('appSports:appName')}
           feedbackWithPadding
         />
       }

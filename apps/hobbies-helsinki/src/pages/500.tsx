@@ -1,7 +1,7 @@
 import {
   getLanguageOrDefault,
   UnknownError,
-  useAppHobbiesTranslation,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React from 'react';
@@ -9,8 +9,8 @@ import getHobbiesStaticProps from '../domain/app/getHobbiesStaticProps';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextErrorPage: NextPage = () => {
-  const { t } = useAppHobbiesTranslation();
-  return <UnknownError appName={t(`appHobbies:appName`)} />;
+  const { resilientT } = useResilientTranslation();
+  return <UnknownError appName={resilientT('appHobbies:appName')} />;
 };
 
 export async function getStaticProps(context: GetStaticPropsContext) {

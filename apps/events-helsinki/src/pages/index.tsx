@@ -3,10 +3,10 @@ import {
   getQlLanguage,
   NavigationContext,
   Navigation,
-  useAppEventsTranslation,
   getLanguageOrDefault,
   FooterSection,
   RouteMeta,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -37,7 +37,7 @@ const HomePage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useAppEventsTranslation();
+  const { resilientT } = useResilientTranslation();
 
   return (
     <RHHCPage
@@ -59,7 +59,7 @@ const HomePage: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={t('appEvents:appName')}
+          appName={resilientT('appEvents:appName')}
           hasFeedBack={false}
         />
       }

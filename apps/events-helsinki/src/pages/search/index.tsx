@@ -6,6 +6,7 @@ import {
   FooterSection,
   RouteMeta,
   PageMeta,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import { usePageScrollRestoration } from '@events-helsinki/components/src/hooks';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -33,6 +34,7 @@ const Search: NextPage<{
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
   const { t: tAppEvents } = useAppEventsTranslation();
+  const { resilientT } = useResilientTranslation();
   usePageScrollRestoration();
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const Search: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={tAppEvents('appEvents:appName')}
+          appName={resilientT('appEvents:appName')}
           feedbackWithPadding
         />
       }

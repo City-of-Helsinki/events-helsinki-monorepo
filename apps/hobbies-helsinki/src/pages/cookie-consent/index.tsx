@@ -6,7 +6,7 @@ import {
   usePageScrollRestoration,
   EventsCookieConsent,
   RouteMeta,
-  useAppHobbiesTranslation,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -19,7 +19,7 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 export default function CookieConsent() {
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useAppHobbiesTranslation();
+  const { resilientT } = useResilientTranslation();
   const router = useRouter();
   /*
   // bug or feature: query is empty in handleRedirect
@@ -47,7 +47,7 @@ export default function CookieConsent() {
           <RouteMeta origin={AppConfig.origin} />
           <ConsentPageContent>
             <EventsCookieConsent
-              appName={t('appHobbies:appName')}
+              appName={resilientT('appHobbies:appName')}
               isModal={false}
               onConsentGiven={handleRedirect}
             />
@@ -57,7 +57,7 @@ export default function CookieConsent() {
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={t('appHobbies:appName')}
+          appName={resilientT('appHobbies:appName')}
           hasFeedBack={false}
         />
       }

@@ -6,7 +6,7 @@ import {
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
-  useAppHobbiesTranslation,
+  useResilientTranslation,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -37,7 +37,7 @@ const HomePage: NextPage<{
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
-  const { t } = useAppHobbiesTranslation();
+  const { resilientT } = useResilientTranslation();
   return (
     <RHHCPage
       className="pageLayout"
@@ -58,7 +58,7 @@ const HomePage: NextPage<{
       footer={
         <FooterSection
           menu={footerMenu}
-          appName={t('appHobbies:appName')}
+          appName={resilientT('appHobbies:appName')}
           hasFeedBack={false}
         />
       }

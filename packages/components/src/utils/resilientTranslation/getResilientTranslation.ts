@@ -25,6 +25,46 @@ const RESILIENT_TRANSLATIONS = {
     fi: 'Helsinki Liikkuu',
     sv: 'Idrott och motion',
   },
+  'errors:feedbackFormLink': {
+    en: 'https://palautteet.hel.fi/en/',
+    fi: 'https://palautteet.hel.fi/fi/',
+    sv: 'https://palautteet.hel.fi/sv/',
+  },
+  'errors:moveToHomePageButton': {
+    en: 'Go to the front page',
+    fi: 'Siirry etusivulle',
+    sv: 'Gå till startsidan',
+  },
+  'errors:unknownError.descriptionPrefix': {
+    en: 'Try again later. If the situation recurs, tell us about it via our',
+    fi: 'Koita myöhemmin uudestaan. Jos tilanne toistuu, kerro siitä meille',
+    sv: 'Försök igen om en stund. Om situationen återkommer, berätta om det för oss med',
+  },
+  'errors:unknownError.descriptionSuffixLinkText': {
+    en: 'feedback form',
+    fi: 'responsblanketten',
+    sv: 'palautelomakkeella',
+  },
+  'errors:unknownError.title': {
+    en: 'An error was detected!',
+    fi: 'Sivustolla havaittiin virhe!',
+    sv: 'Ett fel upptäcktes på webbplatsen!',
+  },
+  'footer:allRightsReserved': {
+    en: 'All rights reserved',
+    fi: 'Kaikki oikeudet pidätetään',
+    sv: 'Alla rättigheter förbehållna',
+  },
+  'footer:backToTop': {
+    en: 'Back to top',
+    fi: 'Takaisin alkuun',
+    sv: 'Tillbaka upp',
+  },
+  'footer:copyright': {
+    en: 'Copyright',
+    fi: 'Copyright',
+    sv: 'Copyright',
+  },
 } as const satisfies ResilientTranslations;
 
 /**

@@ -1,6 +1,5 @@
-import { Trans } from 'next-i18next';
 import React from 'react';
-import useErrorsTranslation from '../../hooks/useErrorsTranslation';
+import { useResilientTranslation } from '../../hooks';
 import ErrorPage from './ErrorPage';
 import type { ErrorPageProps } from './ErrorPage';
 
@@ -8,21 +7,21 @@ type Props = {
   appName: ErrorPageProps['appName'];
 };
 const UnknownError: React.FC<Props> = ({ appName }) => {
-  const { t } = useErrorsTranslation();
+  const { resilientT } = useResilientTranslation();
   return (
     <ErrorPage
-      headerText={t(`errors:unknownError.title`)}
+      headerText={resilientT('errors:unknownError.title')}
       descriptionText={
-        <Trans t={t} i18nKey="errors:unknownError.description">
-          Koita myöhemmin uudestaan. Jos tilanne toistuu, kerro siitä meille{' '}
+        <p>
+          {resilientT('errors:unknownError.descriptionPrefix')}{' '}
           <a
-            href={t(`errors:unknownError.feedbackFormLink`)}
+            href={resilientT('errors:feedbackFormLink')}
             target="_blank"
             rel="noopener noreferrer"
           >
-            palautelomakkeella
+            {resilientT('errors:unknownError.descriptionSuffixLinkText')}
           </a>
-        </Trans>
+        </p>
       }
       appName={appName}
     />

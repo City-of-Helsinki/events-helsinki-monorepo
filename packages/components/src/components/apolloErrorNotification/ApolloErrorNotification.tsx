@@ -1,6 +1,7 @@
 import type { NotificationProps } from 'hds-react';
 import { Notification } from 'hds-react';
 import { Trans } from 'next-i18next';
+import { useResilientTranslation } from '../../hooks';
 import useCommonTranslation from '../../hooks/useCommonTranslation';
 import useErrorsTranslation from '../../hooks/useErrorsTranslation';
 
@@ -14,6 +15,9 @@ export default function ApolloErrorNotification({
 }: ApolloErrorNotificationProps) {
   const { t } = useErrorsTranslation();
   const { t: commonTranslation } = useCommonTranslation();
+  const { resilientT } = useResilientTranslation();
+  const feedbackUrl = resilientT('errors:feedbackFormLink');
+
   return (
     <Notification
       {...hdsProps}
@@ -28,11 +32,7 @@ export default function ApolloErrorNotification({
       <Trans t={t} i18nKey="errors:apolloError.description">
         Osa sivuston toiminnoista ei ole käytettävissä. Koita myöhemmin
         uudestaan. Jos ongelma toistuu, kerro siitä meille{' '}
-        <a
-          href={t(`errors:apolloError.feedbackFormLink`)}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={feedbackUrl} target="_blank" rel="noopener noreferrer">
           palautelomakkeella
         </a>
       </Trans>

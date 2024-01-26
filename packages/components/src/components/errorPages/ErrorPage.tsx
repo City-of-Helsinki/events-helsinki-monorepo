@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import { HARDCODED_LANGUAGES, MAIN_CONTENT_ID } from '../../constants';
-import useErrorsTranslation from '../../hooks/useErrorsTranslation';
+import { useResilientTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
 import NavigationContext from '../../navigationProvider/NavigationContext';
 import FooterSection from '../footer/Footer';
@@ -21,7 +21,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({
   descriptionText,
   appName,
 }) => {
-  const { t } = useErrorsTranslation();
+  const { resilientT } = useResilientTranslation();
   const router = useRouter();
   const locale = useLocale();
   const { footerMenu } = useContext(NavigationContext);
@@ -42,7 +42,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({
               <h1>{headerText}</h1>
               <p>{descriptionText}</p>
               <Button onClick={moveToHomePage} className={styles.backButton}>
-                {t(`errors:moveToHomePageButton`)}
+                {resilientT('errors:moveToHomePageButton')}
               </Button>
             </div>
           </main>

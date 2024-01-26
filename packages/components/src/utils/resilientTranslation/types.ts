@@ -3,7 +3,15 @@ import type { AppLanguage } from '../../types';
 export type ResilientTranslationKey =
   | 'appEvents:appName'
   | 'appHobbies:appName'
-  | 'appSports:appName';
+  | 'appSports:appName'
+  | 'errors:feedbackFormLink'
+  | 'errors:moveToHomePageButton'
+  | 'errors:unknownError.descriptionPrefix'
+  | 'errors:unknownError.descriptionSuffixLinkText'
+  | 'errors:unknownError.title'
+  | 'footer:allRightsReserved'
+  | 'footer:backToTop'
+  | 'footer:copyright';
 
 export type ResilientTranslation = Record<AppLanguage, string>;
 

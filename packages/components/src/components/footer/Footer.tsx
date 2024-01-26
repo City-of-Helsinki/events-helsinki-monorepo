@@ -4,8 +4,7 @@ import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
-import { useCommonTranslation } from '../../hooks';
-import useFooterTranslation from '../../hooks/useFooterTranslation';
+import { useCommonTranslation, useResilientTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
 
 import { resetFocusId } from '../resetFocus/ResetFocus';
@@ -33,8 +32,8 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   feedbackWithPadding = false,
   consentUrl = '/cookie-consent',
 }: FooterSectionProps) => {
-  const { t } = useFooterTranslation();
   const { t: commonT } = useCommonTranslation();
+  const { resilientT } = useResilientTranslation();
   const locale = useLocale();
 
   const { data: footerMenuData } = useMenuQuery({
@@ -62,8 +61,8 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
       )}
       <Footer title={appName} className={styles.footer}>
         <Footer.Base
-          copyrightHolder={t('footer:copyright')}
-          copyrightText={t('footer:allRightsReserved')}
+          copyrightHolder={resilientT('footer:copyright')}
+          copyrightText={resilientT('footer:allRightsReserved')}
           logo={
             <Logo
               src={locale === 'sv' ? logoSv : logoFi}
@@ -71,7 +70,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
               alt={commonT('common:cityOfHelsinki')}
             />
           }
-          backToTopLabel={t('footer:backToTop')}
+          backToTopLabel={resilientT('footer:backToTop')}
           onBackToTopClick={handleBackToTop}
         >
           {footerMenu?.menuItems?.nodes?.map((navigationItem) => (

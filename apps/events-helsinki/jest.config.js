@@ -44,6 +44,7 @@ const config = {
     '^@/test-utils$': '<rootDir>/../config/jest/test-utils',
     '^@/test-utils/(.*)$': '<rootDir>/../config/jest/$1',
     '.+\\.(css|styl|less|sass|scss)$': 'identity-obj-proxy',
+    'hds-core': 'identity-obj-proxy', // needed with HDS v3.4, otherwise tests fail
     // https://jestjs.io/docs/webpack#handling-static-assets
     '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': `<rootDir>/../.jest/__mocks__/fileMock.js`,
     ...getTsConfigBasePaths(),

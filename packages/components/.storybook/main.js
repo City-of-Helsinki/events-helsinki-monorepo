@@ -23,7 +23,8 @@ module.exports = {
     }));
     config.resolve.alias = {
       ...config.resolve.alias,
-      'next-i18next': 'react-i18next'
+      'next-i18next': 'react-i18next',
+      'hds-core': 'identity-obj-proxy', // needed with HDS v3.4, otherwise storybook fails
     };
     config.resolve.fallback = {
       crypto: require.resolve("crypto-browserify"),

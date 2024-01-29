@@ -8,7 +8,6 @@ const getDefaultIgnorePatterns = () => {
     '**/dist',
     '**/.storybook',
     '**/storybook-static',
-    '**/critical-hds-styles.css',
   ];
 };
 

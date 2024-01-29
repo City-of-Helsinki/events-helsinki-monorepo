@@ -42,8 +42,8 @@ const RESILIENT_TRANSLATIONS = {
   },
   'errors:unknownError.descriptionSuffixLinkText': {
     en: 'feedback form',
-    fi: 'responsblanketten',
-    sv: 'palautelomakkeella',
+    fi: 'palautelomakkeella',
+    sv: 'responsblanketten',
   },
   'errors:unknownError.title': {
     en: 'An error was detected!',

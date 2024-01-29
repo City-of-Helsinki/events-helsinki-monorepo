@@ -76,7 +76,7 @@
     button {
       width: 50%;
       border: none;
-      margin-left: auto;
+      margin-left: auto !important;
       background-color: white;
 
       &:focus {
@@ -98,7 +98,7 @@
 
     @include breakpoints.respond-above(m) {
       button:last-child {
-        margin-left: 0;
+        margin-left: 0 !important;
       }
     }
   }

@@ -14,6 +14,10 @@ trigger:
       - 'proxies/events-graphql-federation/**'
       - 'azure-pipelines-harrastukset-federation-router-test.yml'
       - '!**/README.md'
+      - '!**/CHANGELOG.md'
+      - '!**/LICENSE'
+      - '!**/.env*'
+      - '!**/docker-compose*'
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to

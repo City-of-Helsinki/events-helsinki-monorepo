@@ -10,8 +10,16 @@ trigger:
     include:
       - main
   paths:
-    exclude:
-      - README.md
+    include:
+      - 'proxies/events-graphql-proxy/**'
+      - 'packages/graphql-proxy-server/**'
+      - 'packages/eslint-config-bases/**'
+      - 'azure-pipelines-events-graphql-proxy-test.yml'
+      - '!**/README.md'
+      - '!**/CHANGELOG.md'
+      - '!**/LICENSE'
+      - '!**/.env*'
+      - '!**/docker-compose*'
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to

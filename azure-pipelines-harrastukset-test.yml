@@ -10,8 +10,14 @@ trigger:
     include:
       - main
   paths:
+    # Note that we want to run the checks for the apps when we merge new changes
+    # related to the proxies and federation router.
     exclude:
-      - README.md
+      - '**/README.md'
+      - '**/CHANGELOG.md'
+      - '**/LICENSE'
+      - '**/.env*'
+      - '**/docker-compose*'
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to

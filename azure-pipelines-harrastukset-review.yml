@@ -25,6 +25,7 @@ pr:
     include:
       - 'apps/hobbies-helsinki/**'
       - 'packages/**'
+      - '!packages/graphql-proxy-server/**'
       - 'package.json'
       - 'yarn.lock'
       - '.yarnrc.yml'
@@ -34,9 +35,11 @@ pr:
       - 'azure-pipelines-harrastukset-review.yml'
       - 'Dockerfile'
       - '*.Dockerfile'
-      - 'docker-compose.yml'
-      - 'docker-compose.*.yml'
       - '!**/README.md'
+      - '!**/CHANGELOG.md'
+      - '!**/LICENSE'
+      - '!**/.env*'
+      - '!**/docker-compose*'
 
 # By default, use self-hosted agents
 pool: Default

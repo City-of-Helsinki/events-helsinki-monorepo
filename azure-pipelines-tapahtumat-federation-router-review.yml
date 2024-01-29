@@ -25,6 +25,10 @@ pr:
       - 'proxies/events-graphql-federation/**'
       - 'azure-pipelines-tapahtumat-federation-router-review.yml'
       - '!**/README.md'
+      - '!**/CHANGELOG.md'
+      - '!**/LICENSE'
+      - '!**/.env*'
+      - '!**/docker-compose*'
 
 # By default, use self-hosted agents
 pool: Default

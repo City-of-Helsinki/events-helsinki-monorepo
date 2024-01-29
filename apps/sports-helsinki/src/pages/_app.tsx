@@ -1,3 +1,4 @@
+import 'hds-react/index.css'; // Import all the HDS styles instead of using the optimized getCriticalHdsRules to prevent duplicated code.
 import type { NavigationProviderProps } from '@events-helsinki/components';
 import {
   useResilientTranslation,

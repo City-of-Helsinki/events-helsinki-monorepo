@@ -1,7 +1,7 @@
 import type { Option } from '@events-helsinki/components';
 import { EventTypeId, Select } from '@events-helsinki/components';
 import classnames from 'classnames';
-import type { ButtonTheme, SelectCustomTheme } from 'hds-react';
+import type { SelectCustomTheme } from 'hds-react';
 import { Button } from 'hds-react';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
@@ -22,10 +22,9 @@ export type TabDataType = {
 type TabsPropType = {
   id: TabsContextType['activeTab'];
   children: React.ReactNode;
-  theme?: ButtonTheme;
 };
 
-function SearchTab({ id, children, theme }: TabsPropType) {
+function SearchTab({ id, children }: TabsPropType) {
   const router = useRouter();
   const { activeTab, setActiveTab } = useTabsContext();
   const isActive = activeTab === id;
@@ -42,7 +41,6 @@ function SearchTab({ id, children, theme }: TabsPropType) {
   return (
     <Button
       variant="secondary"
-      theme={theme}
       className={classnames(styles.tab, styles.secondaryButton, {
         [styles.active]: isActive,
       })}

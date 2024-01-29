@@ -7,11 +7,6 @@ type Props = {
   hdsCriticalRules: string;
 } & DocumentProps;
 
-/**
- * @deprecated because it duplicates the code on ISR / SSG pages. Use the Document from 'next/document' (with all the HDS styles imported in the _app.tsx) instead.
- * See more: https://hds.hel.fi/foundation/guidelines/server-side-rendering/#how-does-hds-support-server-side-rendering
- * and https://github.com/theKashey/used-styles.
- */
 class Document extends NextJsDocument<Props> {
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await NextJsDocument.getInitialProps(ctx);
@@ -28,7 +23,6 @@ class Document extends NextJsDocument<Props> {
     return (
       <Html>
         <Head>
-          {/* Render HDS Critical Rules as inline style for fast parsing and preventing some flickering that may occur. */}
           <style
             data-used-styles
             dangerouslySetInnerHTML={{ __html: this.props.hdsCriticalRules }}

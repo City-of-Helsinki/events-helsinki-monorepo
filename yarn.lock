@@ -13901,7 +13901,6 @@ __metadata:
     env-cmd: "npm:10.1.0"
     eslint: "npm:8.43.0"
     git-rev-sync: "npm:3.0.2"
-    hds-react: "npm:^3.3.0"
     husky: "npm:^8.0.3"
     is-ci: "npm:3.0.1"
     jest: "npm:29.5.0"

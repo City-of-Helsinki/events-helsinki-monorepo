@@ -260,7 +260,7 @@ To enable the support for symbolic links on Windows 10 you need to:
 
 Some Helsinki Design System (HDS) CSS styles are critically needed and luckily the HDS exposes a tool for extracting the used critical styles of HDS components. The HDS team [recommends](https://hds.hel.fi/foundation/guidelines/server-side-rendering/#how-does-hds-support-server-side-rendering) using their `getCriticalHdsRules` tool with the `_document.tsx` file of the Next JS, but when using NextJS with Static Site Generation (SSG) and Incremental Static Regeneration (ISR), it would mean that the inline style-block would be cloned again and again in every statically generated page and it would not be cached any how by the client (browser). Because of that, we have a [custom script in the monorepo root](./scripts/create-critical-hds-styles-file.js) that we can use to create a CSS file to all the monorepo apps (and also in common packages where it is needed).
 
-By executing `yarn g:hds-critical-styles-create`, the `critical-hds-styles.css` file will be created in every app and package where needed. The command uses the yarn workspaces and the related apps' `yarn hds:critical-styles:create` -command to do that.
+By executing `yarn g:hds-critical-styles:create`, the `critical-hds-styles.css` file will be created. The root `package.json` uses the static asssets styles path ([./static/assets/styles/critical-hds-styles.css](./static/assets/styles/critical-hds-styles.css)) to offer the same file for every application. The [critical-hds-styles.css](./static/assets/styles/critical-hds-styles.css) is then used by the app's `_document.tsx` which creates a `<link rel="stylesheet">`-tag out of it.
 
 ## 4. Incremental Static Regeneration on-demand revalidation
 

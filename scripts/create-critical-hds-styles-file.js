@@ -1,7 +1,7 @@
 const hdsReact = require('hds-react');
 const fs = require('node:fs/promises');
 
-const exampleFilePath = './src/styles/critical-hds-styles.css';
+const exampleFilePath = './static/assets/styles/critical-hds-styles.css';
 
 async function createCriticalHdsStylesFile(filepath) {
   try {

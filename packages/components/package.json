@@ -32,8 +32,7 @@
     "build-storybook": "storybook build --output-dir build/storybook",
     "serve-storybook": "sirv build/storybook --cors --port 8888",
     "publish-canary": "node ../../scripts/publish-canary.js",
-    "publish-stable": "yarn build && node ../../scripts/publish-stable.js",
-    "hds:critical-styles:create": "node ../../scripts/create-critical-hds-styles-file.js src/styles/critical-hds-styles.css"
+    "publish-stable": "yarn build && node ../../scripts/publish-stable.js"
   },
   "dependencies": {
     "@apollo/client": "3.7.16",

@@ -1,4 +1,3 @@
-@import 'critical-hds-styles.css';
 @import 'fonts';
 @import 'variables';
 @import 'breakpoints';
@@ -69,12 +68,4 @@ button {
   @include respond_below(s) {
     font-size: var(--fontsize-heading-xl-mobile) !important;
   }
-}
-
-/* LIIKUNTA-612 fix: the order of the CSS files can vary */
-button[class^='FooterBase-module_backToTopButton'] {
-  font-size: 20px !important;
-  font-weight: 700 !important;
-  line-height: 30px !important;
-  margin-left: auto !important;
 }

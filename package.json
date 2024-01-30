@@ -73,7 +73,7 @@
     "lint:dependency-versions": "check-dependency-version-consistency .",
     "lint:dependency-versions:fix": "check-dependency-version-consistency . --fix\"",
     "postinstall": "is-ci || yarn husky install",
-    "g:hds-critical-styles-create": "yarn workspaces foreach -ptv --include 'hobbies-helsinki' --include 'events-helsinki' --include 'sports-helsinki' --include '@events-helsinki/components' run hds:critical-styles:create"
+    "g:hds-critical-styles:create": "node ./scripts/create-critical-hds-styles-file.js ./static/assets/styles/critical-hds-styles.css"
   },
   "dependencies": {
     "@next/bundle-analyzer": "13.4.7",

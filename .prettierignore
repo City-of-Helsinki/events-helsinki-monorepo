@@ -5,3 +5,4 @@ graphql.tsx
 **/dist/**
 **/build/**
 **/tmp/**
+**/critical-hds-styles.css

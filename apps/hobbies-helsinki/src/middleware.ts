@@ -36,6 +36,23 @@ function isPathnameMissingLocale(pathname: string) {
       pathname !== '/'
   );
 }
+
+type DefaultMatchesType = {
+  firstLocale?: string;
+  secondLocale?: string;
+};
+
+function getLocaleMatchesFromPathname(pathname: string): DefaultMatchesType {
+  const doubleLocalePrefix =
+    /^\/(?<firstLocale>fi|en|sv)\/(?<secondLocale>fi|en|sv)\//;
+  return (
+    pathname.match(doubleLocalePrefix)?.groups || {
+      firstLocale: undefined,
+      secondLocale: undefined,
+    }
+  );
+}
+
 /**
  * Enforce prefix for default locale 'fi'
  * https://github.com/vercel/next.js/discussions/18419
@@ -72,6 +89,21 @@ const prefixDefaultLocale = async (req: NextRequest) => {
     return NextResponse.redirect(
       new URL(`/${DEFAULT_LANGUAGE}${pathname}${search}`, req.url)
     );
+  }
+
+  const { firstLocale, secondLocale } = getLocaleMatchesFromPathname(pathname);
+
+  // Remove the double locale prefix which might occur
+  // when CMS content has an internal link to another locale context.
+  // NOTE: The locale will be automatically added as a prefix to
+  // the next URL by the NextJS (under the hood).
+  // The request's locale attribute should be used for that.
+  if (firstLocale && secondLocale && firstLocale !== secondLocale) {
+    const nextPathname = pathname
+      .replace(new RegExp(`^/${firstLocale}`), '')
+      .replace(new RegExp(`^/${secondLocale}`), '');
+    const nextUrl = new URL(`${nextPathname}${search}`, req.url);
+    return NextResponse.redirect(nextUrl.href);
   }
 };
 

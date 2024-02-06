@@ -18,6 +18,7 @@ export const baseVariables = {
   location: [],
   pageSize: 10,
   publisher: null,
+  publisherAncestor: null,
   sort: 'end_time',
   start: 'now',
   // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).

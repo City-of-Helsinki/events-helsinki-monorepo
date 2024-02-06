@@ -57,13 +57,11 @@ describe('upcoming events of a venue', () => {
       }
     );
     await waitForComponentToBeLoaded();
-    await waitFor(() => {
-      expect(
-        screen.getByRole('heading', {
-          name: translations.venue.upcomingEvents.title,
-        })
-      ).toBeInTheDocument();
+
+    await screen.findByRole('heading', {
+      name: translations.venue.upcomingEvents.title,
     });
+
     await waitFor(() => {
       expect(
         screen.queryByText('Page has finished loading')

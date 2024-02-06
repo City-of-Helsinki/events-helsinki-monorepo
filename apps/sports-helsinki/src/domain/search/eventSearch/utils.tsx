@@ -257,6 +257,7 @@ export const getEventSearchVariables = ({
     location: places.sort(),
     pageSize,
     publisher,
+    publisherAncestor: null,
     sort: sortOrder,
     start,
     superEventType,

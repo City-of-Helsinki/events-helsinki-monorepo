@@ -219,6 +219,7 @@ export const useLocationUpcomingEventsQuery = ({
     include: ['keywords', 'location'],
     start: 'now',
     sort: EVENT_SORT_OPTIONS.END_TIME,
+    publisherAncestor: null,
     // superEventType: 'none', // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
     pageSize,
   };

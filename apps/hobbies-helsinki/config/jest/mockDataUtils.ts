@@ -52,6 +52,7 @@ export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
       name: fakeLocalizedObject(),
       publisher: 'provider:123',
       provider: fakeLocalizedObject(),
+      providerContactInfo: null,
       shortDescription: fakeLocalizedObject(),
       description: fakeLocalizedObject(),
       images: [fakeEventImage()],

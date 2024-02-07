@@ -3295,7 +3295,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     happy-dom: "npm:9.20.3"
-    hds-design-tokens: "npm:^3.3.0"
+    hds-design-tokens: "npm:^3.5.0"
     hds-react: "npm:^3.5.0"
     html-react-parser: "npm:4.0.0"
     https: "npm:1.0.0"
@@ -15678,7 +15678,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-design-tokens@npm:^3.3.0, hds-design-tokens@npm:^3.5.0":
+"hds-design-tokens@npm:^3.5.0":
   version: 3.5.0
   resolution: "hds-design-tokens@npm:3.5.0"
   checksum: e29b167b82858d198f138f5a4868d0278881486975bacc3c39404fccb8c3e45ae7835559044372b9031f1e2a92b95115fdb15d4f073498f69c1d62a0e516c950

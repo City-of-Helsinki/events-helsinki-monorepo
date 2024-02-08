@@ -76,7 +76,15 @@ a.marginlessLink {
   list-style-type: none;
   line-height: $lineheight-l;
   font-size: $fontsize-body-l;
-  & > li:not(:last-child) {
-    margin-bottom: $spacing-s;
+
+  &.main {
+    & > li:not(:last-child) {
+      margin-bottom: $spacing-s;
+    }
+  }
+  &.other {
+    & > li:first-child {
+      margin-top: $spacing-s;
+    }
   }
 }

@@ -10,6 +10,7 @@ import {
   useLocale,
   HelsinkiCityOwnedIcon,
 } from '@events-helsinki/components';
+import classNames from 'classnames';
 import {
   IconClock,
   IconCompany,
@@ -72,7 +73,10 @@ const ContactDetailsInfo = ({
         icon={<IconPhone aria-hidden="true" />}
         title={t('venue:info.labelContactDetails')}
       >
-        <ul key="contact-details-main" className={styles.list}>
+        <ul
+          key="contact-details-main"
+          className={classNames(styles.list, styles.main)}
+        >
           {telephone && (
             <li>
               <Link
@@ -97,7 +101,10 @@ const ContactDetailsInfo = ({
           )}
         </ul>
         {contactDetailsSectionsContents?.map((contact, i) => (
-          <ul key={`contact-details-other-${i}`} className={styles.list}>
+          <ul
+            key={`contact-details-other-${i}`}
+            className={classNames(styles.list, styles.other)}
+          >
             {contact?.name && <li>{contact.name}</li>}
             {contact?.phone && (
               <li>

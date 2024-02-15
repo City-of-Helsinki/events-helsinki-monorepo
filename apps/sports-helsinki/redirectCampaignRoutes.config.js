@@ -26,7 +26,7 @@ const redirectRoutes = {
   '/liikuntatilavaraukset': '/fi/pages/liikuntatilojen-varaaminen',
   '/maksut': '/fi/pages/maksut-ja-hinnasto',
   // Swedish locale versions
-  '/biblioteksmotion': '/sv/articles/aldre/gor-motion-till-en-rutin-i-ditt-liv-delta-i-biblioteksmotionen-for-aldre-manniskor',
+  '/biblioteks-motion': '/sv/articles/aldre/gor-motion-till-en-rutin-i-ditt-liv-delta-i-biblioteksmotionen-for-aldre-manniskor',
   '/barn-och-familjer': '/sv/sidor/malgrupper/barn-och-familjer',
   '/unga': '/sv/pages/malgrupper/unga',
   '/vuxna': '/sv/pages/malgrupper/vuxna',
@@ -50,7 +50,7 @@ const redirectRoutes = {
   '/bokning-av-idrottsutrymmen': '/sv/pages/bokning-av-idrottsutrymmen',
   '/priser': '/sv/pages/priser',
   // English locale versions
-  '/libraryexercise': '/en/articles/seniors/make-exercise-a-routine-for-yourself-join-the-library-exercise-for-seniors',
+  '/library-exercise': '/en/articles/seniors/make-exercise-a-routine-for-yourself-join-the-library-exercise-for-seniors',
   '/children-and-families': '/en/pages/target-groups/children-and-families',
   '/youth': '/en/pages/target-groups/youth',
   '/adults': '/en/pages/target-groups/adults',

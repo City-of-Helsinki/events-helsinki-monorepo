@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.14.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.13.0...events-helsinki-v1.14.0) (2024-02-15)
+
+
+### Features
+
+* Add resilient translation, use it for appName, works on error page ([1c56ccc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1c56ccc6010ca818a9042d7b764caa6a2bac9d73))
+* Use critical-hds-styles from shared assets ([06de3ca](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/06de3ca081fa3eca4d4ff209fff549cf5f380d40))
+
+
+### Bug Fixes
+
+* Internal links handling when the link changes the locale ([4c5bc1e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4c5bc1e9870bc3e0a5a4f575af0e2fc34232eea7))
+* Upgrade the hds-react and RHHC-lib to fix issue in HDS ([61ef917](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/61ef917db99c7c2edd460933b71b7777b7a94ff8))
+
 ## [1.13.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.12.0...events-helsinki-v1.13.0) (2024-01-18)
 
 

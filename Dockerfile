@@ -7,17 +7,22 @@
 #   2. depend on .dockerignore, you must at least                 #
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
-ARG BUILDER_FROM_IMAGE=helsinkitest/node:20-slim
+ARG BUILDER_FROM_IMAGE=registry.access.redhat.com/ubi9/nodejs-20
 
-FROM helsinkitest/node:20-slim AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-20 AS deps
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends rsync
+# install yarn
+USER root
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+RUN yum -y install yarn
+
+RUN yum update -y && \
+    yum install -y rsync
 
 WORKDIR /workspace-install
 
-COPY --chown=appuser:appuser yarn.lock .yarnrc.yml ./
-COPY --chown=appuser:appuser .yarn/ ./.yarn/
+COPY --chown=default:root yarn.lock .yarnrc.yml ./
+COPY --chown=default:root .yarn/ ./.yarn/
 
 # Specific to monerepo's as docker COPY command is pretty limited
 # we use buidkit to prepare all files that are necessary for install
@@ -29,25 +34,25 @@ COPY --chown=appuser:appuser .yarn/ ./.yarn/
 #
 # Copy all files
 WORKDIR /docker-context
-COPY --chown=appuser:appuser . /docker-context
+COPY --chown=default:root . /docker-context
 
 # mount type bind is not supported on current version (4.10.35) of OpenShift build
 # RUN --mount=type=bind,source=./,target=/docker-context \
 RUN rsync -amv \
-    --chown=appuser:appuser \
+    --chown=default:root \
     --exclude='node_modules' \
     --exclude='*/node_modules' \
     --include='package.json' \
     --include='*/' --exclude='*' \
     /docker-context/ /workspace-install/;
 
-RUN chown -R appuser:appuser .
+RUN chown -R default:root .
 
-# remove rsync and apt cache
-RUN apt-get remove -y rsync && \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /var/cache/apt/archives
+# remove rsync, unused dependencies, and clean yum cache
+RUN yum remove -y rsync && \
+    yum autoremove -y && \
+    yum clean all && \
+    rm -rf /var/cache/yum
 
 #
 # To speed up installations, we override the default yarn cache folder
@@ -72,7 +77,7 @@ RUN apt-get remove -y rsync && \
 ###################################################################
 # Stage 2: Build the app                                          #
 ###################################################################
-FROM ${BUILDER_FROM_IMAGE}  AS builder
+FROM ${BUILDER_FROM_IMAGE} AS builder
 # Build ARGS
 ARG PROJECT
 ARG CMS_ORIGIN
@@ -116,8 +121,8 @@ ARG NEXT_PUBLIC_COMMITHASH
 
 WORKDIR /app
 
-COPY --chown=appuser:appuser  . .
-COPY --from=deps --chown=appuser:appuser /workspace-install ./
+COPY --chown=default:root . .
+COPY --from=deps --chown=default:root /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
 
@@ -141,10 +146,10 @@ CMD ["sh", "-c", "echo ${PROJECT}"]
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM helsinkitest/node:20-slim  AS develop
+FROM registry.access.redhat.com/ubi9/nodejs-20 AS develop
 
 # Use non-root user
-USER appuser
+USER default
 
 # Build ARGS
 ARG PROJECT
@@ -154,7 +159,7 @@ ENV NODE_ENV=development
 
 WORKDIR /app
 
-COPY --from=deps --chown=appuser:appuser /workspace-install ./
+COPY --from=deps --chown=default:root /workspace-install ./
 
 ENV PORT ${APP_PORT:-3000}
 
@@ -172,10 +177,10 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM helsinkitest/node:20-slim  AS runner
+FROM registry.access.redhat.com/ubi9/nodejs-20 AS runner
 
 # Use non-root user
-USER appuser
+USER default
 
 # Build ARGS
 ARG PROJECT
@@ -187,29 +192,29 @@ ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
 # Copy the configuration files to the apps/project root
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/next.config.js \
+COPY --from=builder --chown=default:root /app/apps/${PROJECT}/next.config.js \
     /app/apps/${PROJECT}/i18nRoutes.config.js \
     /app/apps/${PROJECT}/next-i18next.config.js \
     /app/apps/${PROJECT}/package.json \
     ./apps/${PROJECT}/
 
 # Copy common-i18n to share localization files after build
-COPY --from=builder --chown=appuser:appuser /app/packages/common-i18n/src/locales \
+COPY --from=builder --chown=default:root /app/packages/common-i18n/src/locales \
     ./packages/common-i18n/src/locales
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 # copy only the necessary files for a production deployment including select files in node_modules.
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/standalone .
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
-COPY --from=builder --chown=appuser:appuser /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
-COPY --from=builder --chown=appuser:appuser /app/next.base.config.js .
+COPY --from=builder --chown=default:root /app/apps/${PROJECT}/.next/standalone .
+COPY --from=builder --chown=default:root /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
+COPY --from=builder --chown=default:root /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
+COPY --from=builder --chown=default:root /app/next.base.config.js .
 RUN cp -r /app/apps/${PROJECT}/.next/ /app/.next_orig/
 
 # OpenShift write access to Next cache folder
 USER root
 RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages
-USER appuser
+USER default
 
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV PORT ${APP_PORT:-3000}
@@ -218,9 +223,9 @@ ENV PORT ${APP_PORT:-3000}
 EXPOSE $PORT
 
 USER root
-COPY --chown=appuser:appuser run_node.sh /app/run_node.sh
+COPY --chown=default:root run_node.sh /app/run_node.sh
 RUN chgrp 0 /app/run_node.sh && chmod +x /app/run_node.sh
-USER appuser
+USER default
 
 # ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"
 # ENV PROD_START "node ./apps/${PROJECT}/server.js"

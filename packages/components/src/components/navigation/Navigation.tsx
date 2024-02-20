@@ -1,4 +1,6 @@
+import { resolveHref } from 'next/dist/shared/lib/router/utils/resolve-href'; // NOTE: in Next 14 this is located in: 'next/dist/client/resolve-href' -- https://github.com/vercel/next.js/discussions/22025
 import { useRouter } from 'next/router';
+
 import { useCallback, useContext } from 'react';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import {
@@ -31,10 +33,10 @@ export default function Navigation({
   const { headerMenu, headerUniversalBarMenu, languages } =
     useContext(NavigationContext);
   const router = useRouter();
+  const { pathname: currentPage, asPath: currentPageAsPath } = router;
   const locale = useLocale();
   const cmsHelper = useCmsHelper();
   const routerHelper = useCmsRoutedAppHelper();
-  const currentPage = router.pathname;
   const languagesQuery = useLanguagesQuery({
     skip: !!languages || !!forcedLanguages,
   });
@@ -56,7 +58,6 @@ export default function Navigation({
     }),
     [router.query]
   );
-
   return (
     <>
       <RHHCNavigation
@@ -68,10 +69,33 @@ export default function Navigation({
           router.push('/');
         }}
         getIsItemActive={({ path }) => {
-          return (
-            path === routerHelper.getI18nPath(currentPage, locale) ||
-            path ===
-              `/${locale}${routerHelper.getI18nPath(currentPage, locale)}`
+          const pathWithoutTrailingSlash = (path ?? '').replace(/\/$/, '');
+          const i18nRouterPathname = routerHelper.getI18nPath(
+            currentPage,
+            locale
+          );
+          const i18nRouterAsPath = routerHelper.getI18nPath(
+            currentPageAsPath,
+            locale
+          );
+          const [, resolvedUrl] = resolveHref(
+            router,
+            { pathname: router.pathname, query: router.query },
+            true
+          );
+          const resolvedPathname = resolvedUrl?.split('?')[0];
+          return Boolean(
+            // The router.pathname needs to be checked when dealing with "statically routed page".
+            pathWithoutTrailingSlash === i18nRouterPathname ||
+              pathWithoutTrailingSlash === `/${locale}${i18nRouterPathname}` ||
+              // The pathname may or may not contain the i18n version of the menu item path
+              pathWithoutTrailingSlash === resolvedPathname ||
+              pathWithoutTrailingSlash === `/${locale}${resolvedPathname}` ||
+              // Since the menu can contain subitems in a dropdown, the parent items needs to be checked too.
+              // NOTE: We are now assuming that all the parent items are also real parent pages.
+              (path &&
+                (i18nRouterAsPath.startsWith(path) ||
+                  resolvedPathname?.startsWith(path)))
           );
         }}
         getPathnameForLanguage={({ slug }) => {

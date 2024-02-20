@@ -78,7 +78,7 @@ RUN yum remove -y rsync && \
 # This is used to speedup OpenShift builds                        #
 ###################################################################
 # Build cache layer
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS build_cache
+FROM deps AS build_cache
 # Build ARGS
 ARG PROJECT
 ARG CMS_ORIGIN
@@ -127,7 +127,7 @@ RUN yarn workspace ${PROJECT} share-static-hardlink
 RUN yarn workspace ${PROJECT} build
 
 # Create cache image
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS cache
+FROM deps AS cache
 ARG PROJECT
 
 WORKDIR /app/.yarn/cache/

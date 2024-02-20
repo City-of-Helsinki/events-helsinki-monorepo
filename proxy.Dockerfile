@@ -77,7 +77,7 @@ RUN yum remove -y rsync && \
 # Stage 2: Build the app                                          #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS builder
+FROM deps AS builder
 
 # Use non-root user
 USER default
@@ -130,7 +130,7 @@ RUN yarn workspace ${PROXY} build
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS develop
+FROM deps AS develop
 
 # Use non-root user
 USER default
@@ -166,7 +166,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS runner
+FROM deps AS runner
 
 # Build ARGS
 ARG PROXY

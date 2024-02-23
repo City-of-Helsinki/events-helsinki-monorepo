@@ -3326,7 +3326,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha255"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha256-canary-b81812e"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-toastify: "npm:^9.1.3"
@@ -14035,7 +14035,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha255"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha256-canary-b81812e"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -15910,7 +15910,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha255"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha256-canary-b81812e"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -23042,9 +23042,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha255":
-  version: 1.0.0-alpha255
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha255"
+"react-helsinki-headless-cms@npm:1.0.0-alpha256-canary-b81812e":
+  version: 1.0.0-alpha256-canary-b81812e
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha256-canary-b81812e"
   dependencies:
     hds-design-tokens: "npm:^3.5.0"
     html-entities: "npm:^2.4.0"
@@ -23061,7 +23061,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: facc59231404aff3922212340c5bbaf837351b6e0f530e324ae3c93d9c417967f6aa7e1479a25c104b9f8cc986c620e1a7879f5945a145c1b4f94cc8dd0eccc5
+  checksum: 9e9e96d8002600db3fb66b902f6f3bd7fc2feb67cac3fe37e7b6632c36fdd429834ffe557d2e4309e455829c40d0223fb86c8e0354912cecb6452145b167d970
   languageName: node
   linkType: hard
 
@@ -25119,7 +25119,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha255"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha256-canary-b81812e"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-scroll: "npm:^1.8.9"

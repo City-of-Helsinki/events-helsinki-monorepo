@@ -1,5 +1,5 @@
 import { addDays } from 'date-fns';
-import { range } from 'lodash';
+import range from 'lodash/range';
 import {
   fakeEvent,
   fakeEvents,

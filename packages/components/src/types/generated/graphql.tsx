@@ -164,23 +164,32 @@ export type BannerPage = {
   titleAndDescriptionColor?: Maybe<LocalizedObject>;
 };
 
+/** Breadcumb field */
+export type Breadcrumb = {
+  __typename?: 'Breadcrumb';
+  /** The title of the page */
+  title?: Maybe<Scalars['String']['output']>;
+  /** The link of the page. */
+  uri?: Maybe<Scalars['String']['output']>;
+};
+
 export enum CacheControlScope {
   Private = 'PRIVATE',
   Public = 'PUBLIC',
 }
 
-/** Card field */
+/** Kortin kenttä */
 export type Card = {
   __typename?: 'Card';
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Description */
+  /** Kuvaus */
   description?: Maybe<Scalars['String']['output']>;
-  /** Icon */
+  /** Ikoni */
   icon?: Maybe<Scalars['String']['output']>;
-  /** Link */
+  /** Linkki */
   link?: Maybe<Link>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -619,7 +628,7 @@ export type Collection = ContentNode &
   Previewable &
   UniformResourceIdentifiable & {
     __typename?: 'Collection';
-    /** Background Color */
+    /** Taustaväri */
     backgroundColor?: Maybe<Scalars['String']['output']>;
     /**
      * The id field matches the WP_Post-&gt;ID field.
@@ -636,7 +645,7 @@ export type Collection = ContentNode &
     date?: Maybe<Scalars['String']['output']>;
     /** The publishing date set in GMT. */
     dateGmt?: Maybe<Scalars['String']['output']>;
-    /** Description */
+    /** Kuvaus */
     description?: Maybe<Scalars['String']['output']>;
     /** The desired slug of the post */
     desiredSlug?: Maybe<Scalars['String']['output']>;
@@ -654,7 +663,7 @@ export type Collection = ContentNode &
     guid?: Maybe<Scalars['String']['output']>;
     /** The globally unique identifier of the collection-cpt object. */
     id: Scalars['ID']['output'];
-    /** Image */
+    /** Kuva */
     image?: Maybe<Scalars['String']['output']>;
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
@@ -676,7 +685,7 @@ export type Collection = ContentNode &
     modified?: Maybe<Scalars['String']['output']>;
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Maybe<Scalars['String']['output']>;
-    /** List of modules */
+    /** Moduulilistaus */
     modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
     /** Connection between the Collection type and the collection type */
     preview?: Maybe<CollectionToPreviewConnectionEdge>;
@@ -690,7 +699,7 @@ export type Collection = ContentNode &
     revisions?: Maybe<CollectionToRevisionConnection>;
     /** The SEO Framework data of the collection */
     seo?: Maybe<Seo>;
-    /** Show on front page */
+    /** Näytä etusivulla */
     showOnFrontPage?: Maybe<Scalars['Boolean']['output']>;
     /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
     slug?: Maybe<Scalars['String']['output']>;
@@ -1258,7 +1267,7 @@ export type Contact = ContentNode &
     date?: Maybe<Scalars['String']['output']>;
     /** The publishing date set in GMT. */
     dateGmt?: Maybe<Scalars['String']['output']>;
-    /** Description */
+    /** Kuvaus */
     description?: Maybe<Scalars['String']['output']>;
     /** The desired slug of the post */
     desiredSlug?: Maybe<Scalars['String']['output']>;
@@ -1276,7 +1285,7 @@ export type Contact = ContentNode &
     featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: Maybe<Scalars['ID']['output']>;
-    /** First name */
+    /** Etunimi */
     firstName?: Maybe<Scalars['String']['output']>;
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Maybe<Scalars['String']['output']>;
@@ -1298,7 +1307,7 @@ export type Contact = ContentNode &
     language?: Maybe<Language>;
     /** The user that most recently edited the node */
     lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-    /** Last name */
+    /** Sukunimi */
     lastName?: Maybe<Scalars['String']['output']>;
     /** The permalink of the post */
     link?: Maybe<Scalars['String']['output']>;
@@ -1931,7 +1940,7 @@ export type CreateCategoryPayload = {
 export type CreateCollectionInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
@@ -1971,7 +1980,7 @@ export type CreateCommentInput = {
   commentOn?: InputMaybe<Scalars['Int']['input']>;
   /** Content of the comment. */
   content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** Parent comment ID of current comment. */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -1996,7 +2005,7 @@ export type CreateCommentPayload = {
 export type CreateContactInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
@@ -2024,7 +2033,7 @@ export type CreateContactPayload = {
 export type CreateLandingPageInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
@@ -2100,7 +2109,7 @@ export type CreatePageInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
@@ -2159,7 +2168,7 @@ export type CreatePostInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
@@ -2193,7 +2202,7 @@ export type CreateReleaseInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
@@ -2245,7 +2254,7 @@ export type CreateTagPayload = {
 export type CreateTranslationInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']['input']>;
@@ -2280,7 +2289,7 @@ export type CreateUserInput = {
   displayName?: InputMaybe<Scalars['String']['input']>;
   /** A string containing the user's email address. */
   email?: InputMaybe<Scalars['String']['input']>;
-  /** 	The user's first name. */
+  /** The user's first name. */
   firstName?: InputMaybe<Scalars['String']['input']>;
   /** User's Jabber account. */
   jabber?: InputMaybe<Scalars['String']['input']>;
@@ -2363,7 +2372,7 @@ export type DateQueryInput = {
   year?: InputMaybe<Scalars['Int']['input']>;
 };
 
-/** Default images of different post types. Returns url of image of queried post type. Values come from Sivuston Asetukset -&gt; Oletuskuvat. */
+/** Oletuskuva */
 export type DefaultImages = {
   __typename?: 'DefaultImages';
   /** Attachment URL for article image */
@@ -2978,14 +2987,14 @@ export type EventPricing = {
   todo?: Maybe<Scalars['String']['output']>;
 };
 
-/** Collection Module: EventSearch */
+/** Kokoelmamoduuli: EventSearch */
 export type EventSearch = {
   __typename?: 'EventSearch';
-  /** Amount of events listed before &quot;show more -button&quot; */
+  /** Listattujen tapahtumien määrä “Näytä lisää” -painiketta */
   initAmountOfEvents?: Maybe<Scalars['Int']['output']>;
-  /** Module type */
+  /** Moduulin tyyppi */
   module?: Maybe<Scalars['String']['output']>;
-  /** List of modules */
+  /** Moduulilistaus */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
   /**
    * Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
@@ -2993,26 +3002,26 @@ export type EventSearch = {
    *                 https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
    */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Show all -link */
+  /** Näytä kaikki -linkki */
   showAllLinkCustom?: Maybe<Scalars['String']['output']>;
-  /** Module title */
+  /** Moduulin otsikko */
   title?: Maybe<Scalars['String']['output']>;
-  /** Search query */
+  /** Hakukysely */
   url?: Maybe<Scalars['String']['output']>;
 };
 
-/** Collection Module: EventSearchCarousel */
+/** Kokoelmamoduuli: EventSearchCarousel */
 export type EventSearchCarousel = {
   __typename?: 'EventSearchCarousel';
-  /** Amount of cards in carousel */
+  /** Korttien määrä karusellissa */
   amountOfCards?: Maybe<Scalars['Int']['output']>;
-  /** Events nearby */
+  /** Tapahtumat lähellä */
   eventsNearby?: Maybe<Scalars['Boolean']['output']>;
-  /** Module type */
+  /** Moduulin tyyppi */
   module?: Maybe<Scalars['String']['output']>;
-  /** List of modules */
+  /** Moduulilistaus */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
-  /** Events order */
+  /** Tapahtumien järjestys */
   orderNewestFirst?: Maybe<Scalars['Boolean']['output']>;
   /**
    * Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
@@ -3020,49 +3029,49 @@ export type EventSearchCarousel = {
    *                                     https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
    */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Show all -link */
+  /** Näytä kaikki -linkki */
   showAllLinkCustom?: Maybe<Scalars['String']['output']>;
-  /** Module title */
+  /** Moduulin otsikko */
   title?: Maybe<Scalars['String']['output']>;
-  /** Search query */
+  /** Hakukysely */
   url?: Maybe<Scalars['String']['output']>;
 };
 
-/** Collection Module: EventSelected */
+/** Kokoelmamoduuli: EventSelected */
 export type EventSelected = {
   __typename?: 'EventSelected';
-  /** List of event IDs */
+  /** Lista tapahtumien ID-tiedoista */
   events?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Amount of events listed before &quot;show more -button&quot; */
+  /** Listattujen tapahtumien määrä “Näytä lisää” -painiketta */
   initAmountOfEvents?: Maybe<Scalars['Int']['output']>;
-  /** Module type */
+  /** Moduulin tyyppi */
   module?: Maybe<Scalars['String']['output']>;
-  /** List of modules */
+  /** Moduulilistaus */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
-  /** Show all -link */
+  /** Näytä kaikki -linkki */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Module title */
+  /** Moduulin otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
-/** Collection Module: EventSelectedCarousel */
+/** Kokoelmamoduuli: EventSelectedCarousel */
 export type EventSelectedCarousel = {
   __typename?: 'EventSelectedCarousel';
-  /** Amount of cards in carousel */
+  /** Korttien määrä karusellissa */
   amountOfCards?: Maybe<Scalars['Int']['output']>;
-  /** Amount of cards per row */
+  /** Korttien määrä riviä kohden */
   amountOfCardsPerRow?: Maybe<Scalars['Int']['output']>;
-  /** List of event IDs */
+  /** Lista tapahtumien ID-tiedoista */
   events?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Events nearby */
+  /** Tapahtumat lähellä */
   eventsNearby?: Maybe<Scalars['Boolean']['output']>;
-  /** Module type */
+  /** Moduulin tyyppi */
   module?: Maybe<Scalars['String']['output']>;
-  /** List of modules */
+  /** Moduulilistaus */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
-  /** Show all -link */
+  /** Näytä kaikki -linkki */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Module title */
+  /** Moduulin otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -3078,22 +3087,24 @@ export type ExternalLink = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
-/** Gallery Image */
+export type FooterBlocksUnion = LayoutEditor | LayoutImage | LayoutMenu;
+
+/** Galleriakuva */
 export type GalleryImage = {
   __typename?: 'GalleryImage';
-  /** Caption of the image */
+  /** Kuvan lainaus */
   caption?: Maybe<Scalars['String']['output']>;
-  /** Description of the image */
+  /** Kuvaus */
   description?: Maybe<Scalars['String']['output']>;
-  /** The url of the large image */
+  /** Kuvan (large) URL-osoite */
   large?: Maybe<Scalars['String']['output']>;
-  /** The url of the medium image */
+  /** Kuvan (medium) URL-osoite */
   medium?: Maybe<Scalars['String']['output']>;
-  /** The url of the medium large image */
+  /** Kuvan (medium large) URL-osoite */
   medium_large?: Maybe<Scalars['String']['output']>;
-  /** The url of the thumbnail image */
+  /** Kuvan URL-osoite */
   thumbnail?: Maybe<Scalars['String']['output']>;
-  /** Title of the image */
+  /** Kuvan otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -3264,20 +3275,25 @@ export enum GeoJsonType {
   Polygon = 'Polygon',
 }
 
-/** Hero field */
+export type GlobalSidebarBlocksUnion =
+  | LayoutArticleHighlights
+  | LayoutArticles
+  | LayoutEditor;
+
+/** Hero kenttä */
 export type Hero = {
   __typename?: 'Hero';
-  /** The background color of the hero */
+  /** Hero taustaväri */
   background_color?: Maybe<Scalars['String']['output']>;
-  /** The background color of the hero */
+  /** Hero taustaväri */
   background_image_url?: Maybe<Scalars['String']['output']>;
-  /** The desctiption of the hero */
+  /** Hero sisältö */
   description?: Maybe<Scalars['String']['output']>;
-  /** The title of the hero link */
+  /** Hero linkin otsikko */
   link?: Maybe<Link>;
-  /** The title of the hero */
+  /** Hero otsikko */
   title?: Maybe<Scalars['String']['output']>;
-  /** The wave motif of the hero */
+  /** Heron koro */
   wave_motif?: Maybe<Scalars['String']['output']>;
 };
 
@@ -3615,22 +3631,22 @@ export enum IdentificationStrength {
   Unidentified = 'UNIDENTIFIED',
 }
 
-/** Image */
+/** Kuva */
 export type Image = {
   __typename?: 'Image';
-  /** Caption of the image */
+  /** Kuvan lainaus */
   caption?: Maybe<Scalars['String']['output']>;
-  /** Description of the image */
+  /** Kuvaus */
   description?: Maybe<Scalars['String']['output']>;
-  /** The url of the large image */
+  /** Kuvan (large) URL-osoite */
   large?: Maybe<Scalars['String']['output']>;
-  /** The url of the medium image */
+  /** Kuvan (medium) URL-osoite */
   medium?: Maybe<Scalars['String']['output']>;
-  /** The url of the medium large image */
+  /** Kuvan (medium large) URL-osoite */
   medium_large?: Maybe<Scalars['String']['output']>;
-  /** The url of the thumbnail image */
+  /** Kuvan URL-osoite */
   thumbnail?: Maybe<Scalars['String']['output']>;
-  /** Title of the image */
+  /** Kuvan otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -3693,7 +3709,7 @@ export type LandingPage = ContentNode &
   Previewable &
   UniformResourceIdentifiable & {
     __typename?: 'LandingPage';
-    /** Background Color */
+    /** Taustaväri */
     backgroundColor?: Maybe<Scalars['String']['output']>;
     /** Box Color */
     boxColor?: Maybe<Scalars['String']['output']>;
@@ -3707,7 +3723,7 @@ export type LandingPage = ContentNode &
     date?: Maybe<Scalars['String']['output']>;
     /** The publishing date set in GMT. */
     dateGmt?: Maybe<Scalars['String']['output']>;
-    /** Description */
+    /** Kuvaus */
     description?: Maybe<Scalars['String']['output']>;
     /** The desired slug of the post */
     desiredSlug?: Maybe<Scalars['String']['output']>;
@@ -3756,7 +3772,7 @@ export type LandingPage = ContentNode &
     modified?: Maybe<Scalars['String']['output']>;
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Maybe<Scalars['String']['output']>;
-    /** List of modules */
+    /** Moduulilistaus */
     modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
     /** Connection between the LandingPage type and the landingPage type */
     preview?: Maybe<LandingPageToPreviewConnectionEdge>;
@@ -4177,89 +4193,89 @@ export type LanguageString = {
 /** Layout: LayoutArticleHighlights */
 export type LayoutArticleHighlights = {
   __typename?: 'LayoutArticleHighlights';
-  /** Anchor */
+  /** Ankkuri */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Articles */
+  /** Artikkelit */
   articles?: Maybe<Array<Maybe<Post>>>;
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Category */
+  /** Kategoria */
   category?: Maybe<Scalars['Int']['output']>;
-  /** Amount of articles to list */
+  /** Valitse montako artikkelia näytetään */
   limit?: Maybe<Scalars['Int']['output']>;
-  /** Show more link */
+  /** Näytä lisää linkki */
   showMore?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Tag */
+  /** Tagi */
   tag?: Maybe<Scalars['Int']['output']>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutArticles */
 export type LayoutArticles = {
   __typename?: 'LayoutArticles';
-  /** Anchor */
+  /** Ankkuri */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Articles */
+  /** Artikkelit */
   articles?: Maybe<Array<Maybe<Post>>>;
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Category */
+  /** Kategoria */
   category?: Maybe<Scalars['Int']['output']>;
-  /** Tag */
+  /** Tagi */
   limit?: Maybe<Scalars['Int']['output']>;
-  /** Show all -link */
+  /** Näytä lisää linkki */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Tag */
+  /** Tagi */
   tag?: Maybe<Scalars['Int']['output']>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutArticlesCarousel */
 export type LayoutArticlesCarousel = {
   __typename?: 'LayoutArticlesCarousel';
-  /** Anchor */
+  /** Ankkuri */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Articles */
+  /** Artikkelit */
   articles?: Maybe<Array<Maybe<Post>>>;
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Category */
+  /** Kategoria */
   category?: Maybe<Scalars['Int']['output']>;
-  /** Amount of articles to list */
+  /** Valitse montako artikkelia näytetään */
   limit?: Maybe<Scalars['Int']['output']>;
-  /** Show all -link */
+  /** Näytä lisää linkki */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Show more link */
+  /** Näytä lisää linkki */
   showMore?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Tag */
+  /** Tagi */
   tag?: Maybe<Scalars['Int']['output']>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutCard */
 export type LayoutCard = {
   __typename?: 'LayoutCard';
-  /** Alignment */
+  /** Tasaus */
   alignment?: Maybe<Scalars['String']['output']>;
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Description */
+  /** Kuvaus */
   description?: Maybe<Scalars['String']['output']>;
-  /** Image */
+  /** Kuva */
   image?: Maybe<Image>;
-  /** Link */
+  /** Linkki */
   link?: Maybe<Link>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutCards */
 export type LayoutCards = {
   __typename?: 'LayoutCards';
-  /** Cards */
+  /** Ikoni kortti */
   cards?: Maybe<Array<Maybe<Card>>>;
 };
 
@@ -4284,117 +4300,131 @@ export type LayoutContact = {
 /** Layout: LayoutContent */
 export type LayoutContent = {
   __typename?: 'LayoutContent';
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Title */
+  /** Sivuston otsikko */
   content?: Maybe<Scalars['String']['output']>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Layout: LayoutEditor */
+export type LayoutEditor = {
+  __typename?: 'LayoutEditor';
+  /** Editor */
+  editor?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutImage */
 export type LayoutImage = {
   __typename?: 'LayoutImage';
-  /** Border */
+  /** Reunus */
   border?: Maybe<Scalars['Boolean']['output']>;
-  /** Image */
+  /** Kuva */
   image?: Maybe<Image>;
-  /** Photographer name (overwrite) */
+  /** Valokuvaajan nimi (ylikirjoitus) */
   photographer_name?: Maybe<Scalars['String']['output']>;
-  /** Lightbox */
+  /** Näytä lighboxissa */
   show_on_lightbox?: Maybe<Scalars['Boolean']['output']>;
 };
 
 /** Layout: LayoutImageGallery */
 export type LayoutImageGallery = {
   __typename?: 'LayoutImageGallery';
-  /** Gallery */
+  /** Galleria */
   gallery?: Maybe<Array<Maybe<GalleryImage>>>;
 };
 
 /** Layout: LayoutLinkList */
 export type LayoutLinkList = {
   __typename?: 'LayoutLinkList';
-  /** Anchor */
+  /** Ankkuri */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Title */
+  /** Sivuston otsikko */
   description?: Maybe<Scalars['String']['output']>;
-  /** Links */
+  /** Linkit */
   links?: Maybe<Array<Maybe<Link>>>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
+};
+
+/** Layout: LayoutMenu */
+export type LayoutMenu = {
+  __typename?: 'LayoutMenu';
+  /** Menu */
+  menu?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutPages */
 export type LayoutPages = {
   __typename?: 'LayoutPages';
-  /** Anchor */
+  /** Ankkuri */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Description */
+  /** Kuvaus */
   description?: Maybe<Scalars['String']['output']>;
-  /** Pages */
+  /** Sivut */
   pages?: Maybe<Array<Maybe<Page>>>;
-  /** Show all -link */
+  /** Näytä lisää linkki */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutPagesCarousel */
 export type LayoutPagesCarousel = {
   __typename?: 'LayoutPagesCarousel';
-  /** Anchor */
+  /** Ankkuri */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Background Color */
+  /** Taustaväri */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Description */
+  /** Kuvaus */
   description?: Maybe<Scalars['String']['output']>;
-  /** Pages */
+  /** Sivut */
   pages?: Maybe<Array<Maybe<Page>>>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutSocialMediaFeed */
 export type LayoutSocialMediaFeed = {
   __typename?: 'LayoutSocialMediaFeed';
-  /** Anchor */
+  /** Ankkuri */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Script */
+  /** Scripti */
   script?: Maybe<Scalars['String']['output']>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutSteps */
 export type LayoutSteps = {
   __typename?: 'LayoutSteps';
-  /** Color */
+  /** Väri */
   color?: Maybe<Scalars['String']['output']>;
-  /** Description */
+  /** Kuvaus */
   description?: Maybe<Scalars['String']['output']>;
-  /** Steps */
+  /** Vaiheistus */
   steps?: Maybe<Array<Maybe<Step>>>;
-  /** Title */
+  /** Sivuston otsikko */
   title?: Maybe<Scalars['String']['output']>;
-  /** Type */
+  /** Tyyppi */
   type?: Maybe<Scalars['String']['output']>;
 };
 
 export type LegalEntity = Organisation | Person;
 
-/** Link field */
+/** Linkin kenttä */
 export type Link = {
   __typename?: 'Link';
-  /** The target of the link */
+  /** Linkin kohde */
   target?: Maybe<Scalars['String']['output']>;
-  /** The title of the link */
+  /** Linkin otsikko */
   title?: Maybe<Scalars['String']['output']>;
-  /** The url of the link */
+  /** Linkin URL osoite */
   url?: Maybe<Scalars['String']['output']>;
 };
 
@@ -4492,27 +4522,27 @@ export type LocationImage = {
   url?: Maybe<Scalars['String']['output']>;
 };
 
-/** Collection Module: LocationsSelected */
+/** Kokoelmamoduuli: LocationsSelected */
 export type LocationsSelected = {
   __typename?: 'LocationsSelected';
   /** List of location IDs */
   locations?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
   /** Module type */
   module?: Maybe<Scalars['String']['output']>;
-  /** List of modules */
+  /** Moduulilistaus */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
   /** Module title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
-/** Collection Module: LocationsSelectedCarousel */
+/** Kokoelmamoduuli: LocationsSelectedCarousel */
 export type LocationsSelectedCarousel = {
   __typename?: 'LocationsSelectedCarousel';
   /** List of location IDs */
   locations?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
   /** Module type */
   module?: Maybe<Scalars['String']['output']>;
-  /** List of modules */
+  /** Moduulilistaus */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
   /** Module title */
   title?: Maybe<Scalars['String']['output']>;
@@ -5667,22 +5697,22 @@ export type NodeWithTitleTitleArgs = {
   format?: InputMaybe<PostObjectFieldFormatEnum>;
 };
 
-/** Describe what a CustomType is */
+/** Selitä mikä CustomType on */
 export type Notification = {
   __typename?: 'Notification';
-  /** Notification content */
+  /** Ilmoituksen sisältö */
   content?: Maybe<Scalars['String']['output']>;
-  /** Notification end date */
+  /** Ilmoituksen päättymispäivä */
   endDate?: Maybe<Scalars['String']['output']>;
-  /** Notification level */
+  /** Ilmoituksen tärkeys */
   level?: Maybe<Scalars['String']['output']>;
-  /** Notification link text */
+  /** Ilmoitus linkin teksti */
   linkText?: Maybe<Scalars['String']['output']>;
-  /** Notification link url */
+  /** Ilmoitus linkin url */
   linkUrl?: Maybe<Scalars['String']['output']>;
-  /** Notification start date */
+  /** Ilmoituksen aloituspäivä */
   startDate?: Maybe<Scalars['String']['output']>;
-  /** Notification title */
+  /** Ilmoituksen otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -5835,6 +5865,8 @@ export type Page = ContentNode &
     authorDatabaseId?: Maybe<Scalars['Int']['output']>;
     /** The globally unique identifier of the author of the node */
     authorId?: Maybe<Scalars['ID']['output']>;
+    /** Breadcrumb fields */
+    breadcrumbs?: Maybe<Array<Maybe<Breadcrumb>>>;
     /** Connection between the HierarchicalContentNode type and the ContentNode type */
     children?: Maybe<HierarchicalContentNodeToContentNodeChildrenConnection>;
     /** The content of the post. */
@@ -5869,7 +5901,7 @@ export type Page = ContentNode &
     featuredImageId?: Maybe<Scalars['ID']['output']>;
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Maybe<Scalars['String']['output']>;
-    /** Hero fields */
+    /** Hero kentät */
     hero?: Maybe<Hero>;
     /** The globally unique identifier of the page object. */
     id: Scalars['ID']['output'];
@@ -5903,7 +5935,7 @@ export type Page = ContentNode &
     modified?: Maybe<Scalars['String']['output']>;
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Maybe<Scalars['String']['output']>;
-    /** List of modules */
+    /** Moduuli listaus */
     modules?: Maybe<Array<Maybe<PageModulesUnionType>>>;
     /**
      * The id field matches the WP_Post-&gt;ID field.
@@ -5930,7 +5962,7 @@ export type Page = ContentNode &
     seo?: Maybe<Seo>;
     /** Näytä alisivut */
     showChildPages?: Maybe<Scalars['Boolean']['output']>;
-    /** List of modules */
+    /** Moduuli listaus */
     sidebar?: Maybe<Array<Maybe<PageSidebarUnionType>>>;
     /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
     slug?: Maybe<Scalars['String']['output']>;
@@ -6339,6 +6371,8 @@ export type Post = ContentNode &
     authorDatabaseId?: Maybe<Scalars['Int']['output']>;
     /** The globally unique identifier of the author of the node */
     authorId?: Maybe<Scalars['ID']['output']>;
+    /** Breadcrumb fields */
+    breadcrumbs?: Maybe<Array<Maybe<Breadcrumb>>>;
     /** Connection between the Post type and the category type */
     categories?: Maybe<PostToCategoryConnection>;
     /** The content of the post. */
@@ -6373,7 +6407,7 @@ export type Post = ContentNode &
     featuredImageId?: Maybe<Scalars['ID']['output']>;
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Maybe<Scalars['String']['output']>;
-    /** Hide Published Date */
+    /** Piilota julkaisupäivämäärä */
     hidePublishedDate?: Maybe<Scalars['Boolean']['output']>;
     /** The globally unique identifier of the post object. */
     id: Scalars['ID']['output'];
@@ -6401,7 +6435,7 @@ export type Post = ContentNode &
     modified?: Maybe<Scalars['String']['output']>;
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Maybe<Scalars['String']['output']>;
-    /** List of modules */
+    /** Moduuli listaus */
     modules?: Maybe<Array<Maybe<PostModulesUnionType>>>;
     /** Connection between the Post type and the postFormat type */
     postFormats?: Maybe<PostToPostFormatConnection>;
@@ -6422,7 +6456,7 @@ export type Post = ContentNode &
     revisions?: Maybe<PostToRevisionConnection>;
     /** The SEO Framework data of the post */
     seo?: Maybe<Seo>;
-    /** List of modules */
+    /** Moduuli listaus */
     sidebar?: Maybe<Array<Maybe<PostSidebarUnionType>>>;
     /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
     slug?: Maybe<Scalars['String']['output']>;
@@ -7459,7 +7493,7 @@ export type Query = {
   categories?: Maybe<RootQueryToCategoryConnection>;
   /** A 0bject */
   category?: Maybe<Category>;
-  /** An object of the collection Type. Collections */
+  /** An object of the collection Type. Kokoelmat */
   collection?: Maybe<Collection>;
   /**
    * A collection object
@@ -7472,7 +7506,7 @@ export type Query = {
   comment?: Maybe<Comment>;
   /** Connection between the RootQuery type and the Comment type */
   comments?: Maybe<RootQueryToCommentConnection>;
-  /** An object of the contact Type. Contacts */
+  /** An object of the contact Type. Yhteystiedot */
   contact?: Maybe<Contact>;
   /**
    * A contact object
@@ -7489,7 +7523,7 @@ export type Query = {
   contentType?: Maybe<ContentType>;
   /** Connection between the RootQuery type and the ContentType type */
   contentTypes?: Maybe<RootQueryToContentTypeConnection>;
-  /** Default Images */
+  /** Oletuskuvat */
   defaultImages?: Maybe<DefaultImages>;
   /** Get language list */
   defaultLanguage?: Maybe<Language>;
@@ -7498,11 +7532,15 @@ export type Query = {
   eventDetails: EventDetails;
   eventList: EventListResponse;
   eventsByIds: EventListResponse;
+  /** Footer blocks */
+  footerBlocks?: Maybe<Array<Maybe<FooterBlocksUnion>>>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
+  /** Global Sidebar blocks */
+  globalSidebarBlocks?: Maybe<Array<Maybe<GlobalSidebarBlocksUnion>>>;
   keywordDetails: Keyword;
   keywordList: KeywordListResponse;
-  /** An object of the landingPage Type. Landing Pages */
+  /** An object of the landingPage Type. Laskeutumissivut */
   landingPage?: Maybe<LandingPage>;
   /**
    * A landingPage object
@@ -7546,7 +7584,7 @@ export type Query = {
    * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
    */
   pageBy?: Maybe<Page>;
-  /** Returns ID of page that uses the given template */
+  /** Palauttaa sivun ID:n, joka käyttää annettua sivupohjaa */
   pageByTemplate?: Maybe<Page>;
   /** Connection between the RootQuery type and the page type */
   pages?: Maybe<RootQueryToPageConnection>;
@@ -7575,7 +7613,7 @@ export type Query = {
   registeredScripts?: Maybe<RootQueryToEnqueuedScriptConnection>;
   /** Connection between the RootQuery type and the EnqueuedStylesheet type */
   registeredStylesheets?: Maybe<RootQueryToEnqueuedStylesheetConnection>;
-  /** An object of the release Type. Releases */
+  /** An object of the release Type. Tiedotteet */
   release?: Maybe<Release>;
   /**
    * A release object
@@ -7588,7 +7626,7 @@ export type Query = {
   revisions?: Maybe<RootQueryToRevisionsConnection>;
   /** The SEO Framework settings */
   seoSettings?: Maybe<SeoSettings>;
-  /** Site Settings */
+  /** Sivuston asetukset */
   siteSettings?: Maybe<SiteSettings>;
   /** A 0bject */
   tag?: Maybe<Tag>;
@@ -7608,7 +7646,7 @@ export type Query = {
   themes?: Maybe<RootQueryToThemeConnection>;
   /** Translate string using pll_translate_string() (Polylang) */
   translateString?: Maybe<Scalars['String']['output']>;
-  /** An object of the translation Type. Translations */
+  /** An object of the translation Type. Käännökset */
   translation?: Maybe<Translation>;
   /**
    * A translation object
@@ -7828,6 +7866,16 @@ export type QueryEventsByIdsArgs = {
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   start?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The root entry point into the Graph */
+export type QueryFooterBlocksArgs = {
+  language: Scalars['String']['input'];
+};
+
+/** The root entry point into the Graph */
+export type QueryGlobalSidebarBlocksArgs = {
+  language: Scalars['String']['input'];
 };
 
 /** The root entry point into the Graph */
@@ -10189,12 +10237,12 @@ export type StaticPage = {
   urlPath?: Maybe<Scalars['String']['output']>;
 };
 
-/** Step field */
+/** Vaiheen kenttä */
 export type Step = {
   __typename?: 'Step';
-  /** The content of the step */
+  /** Vaiheen sisältö */
   content?: Maybe<Scalars['String']['output']>;
-  /** The title of the step */
+  /** Vaiheen otsikko */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -10616,7 +10664,7 @@ export type TaxonomyToContentTypeConnectionEdge = ContentTypeConnectionEdge &
     node: ContentType;
   };
 
-/** Get page object by template */
+/** Hae sivuobjekti sivupohjan mukaan */
 export enum TemplateEnum {
   FrontPage = 'frontPage',
   PostsPage = 'postsPage',
@@ -10906,7 +10954,7 @@ export type Translation = ContentNode &
      * @deprecated Deprecated in favor of the databaseId field
      */
     translationId: Scalars['Int']['output'];
-    /** Translations */
+    /** Käännökset */
     translations?: Maybe<Array<Maybe<TranslationResponse>>>;
     /** The unique resource identifier path */
     uri?: Maybe<Scalars['String']['output']>;
@@ -10970,23 +11018,23 @@ export enum TranslationIdType {
   Uri = 'URI',
 }
 
-/** Translation with language/value pairs */
+/** Käännöksen kieli/arvo-parit */
 export type TranslationItems = {
   __typename?: 'TranslationItems';
-  /** Translation string */
+  /** Käännöksen merkkijono */
   en?: Maybe<Scalars['String']['output']>;
-  /** Translation string */
+  /** Käännöksen merkkijono */
   fi?: Maybe<Scalars['String']['output']>;
-  /** Translation string */
+  /** Käännöksen merkkijono */
   sv?: Maybe<Scalars['String']['output']>;
 };
 
-/** Translation response contains translation key and translations */
+/** Käännösvastaus sisältää käännösavaimen ja käännökset */
 export type TranslationResponse = {
   __typename?: 'TranslationResponse';
-  /** Translation key for frontend */
+  /** Käyttöliittymän käännösavain */
   key?: Maybe<Scalars['String']['output']>;
-  /** Translations for frontend */
+  /** Käännökset käyttöliittymälle */
   translations?: Maybe<TranslationItems>;
 };
 
@@ -11173,7 +11221,7 @@ export type UpdateCategoryPayload = {
 export type UpdateCollectionInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the collection object */
   id: Scalars['ID']['input'];
@@ -11215,7 +11263,7 @@ export type UpdateCommentInput = {
   commentOn?: InputMaybe<Scalars['Int']['input']>;
   /** Content of the comment. */
   content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the comment being updated. */
   id: Scalars['ID']['input'];
@@ -11242,7 +11290,7 @@ export type UpdateCommentPayload = {
 export type UpdateContactInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the contact object */
   id: Scalars['ID']['input'];
@@ -11272,7 +11320,7 @@ export type UpdateContactPayload = {
 export type UpdateLandingPageInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the landingPage object */
   id: Scalars['ID']['input'];
@@ -11352,7 +11400,7 @@ export type UpdatePageInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the page object */
   id: Scalars['ID']['input'];
@@ -11415,7 +11463,7 @@ export type UpdatePostInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the post object */
   id: Scalars['ID']['input'];
@@ -11451,7 +11499,7 @@ export type UpdateReleaseInput = {
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   /** The content of the object */
   content?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the release object */
   id: Scalars['ID']['input'];
@@ -11564,7 +11612,7 @@ export type UpdateTagPayload = {
 export type UpdateTranslationInput = {
   /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
-  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 */
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the translation object */
   id: Scalars['ID']['input'];
@@ -12346,7 +12394,7 @@ export enum UsersConnectionSearchColumnEnum {
   Login = 'LOGIN',
   /** A URL-friendly name for the user. The default is the user's username. */
   Nicename = 'NICENAME',
-  /** The URL of the user's website. */
+  /** The URL of the user\s website. */
   Url = 'URL',
 }
 

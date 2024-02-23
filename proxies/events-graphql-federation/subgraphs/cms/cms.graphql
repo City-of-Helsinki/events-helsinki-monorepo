@@ -34,7 +34,7 @@ type RootQuery {
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: CategoryIdType
   ): Category
-  "An object of the collection Type. Collections"
+  "An object of the collection Type. Kokoelmat"
   collection(
     "The globally unique identifier of the object."
     id: ID!,
@@ -103,7 +103,7 @@ type RootQuery {
     "Arguments for filtering the connection"
     where: RootQueryToCommentConnectionWhereArgs
   ): RootQueryToCommentConnection
-  "An object of the contact Type. Contacts"
+  "An object of the contact Type. Yhteystiedot"
   contact(
     "The globally unique identifier of the object."
     id: ID!,
@@ -204,15 +204,19 @@ type RootQuery {
     """
     before: String
   ): RootQueryToContentTypeConnection
-  "Default Images"
+  "Oletuskuvat"
   defaultImages(language: String!): DefaultImages
   "Get language list"
   defaultLanguage: Language
   "Fields of the &#039;DiscussionSettings&#039; settings group"
   discussionSettings: DiscussionSettings
+  "Footer blocks"
+  footerBlocks(language: String!): [FooterBlocksUnion]
   "Fields of the &#039;GeneralSettings&#039; settings group"
   generalSettings: GeneralSettings
-  "An object of the landingPage Type. Landing Pages"
+  "Global Sidebar blocks"
+  globalSidebarBlocks(language: String!): [GlobalSidebarBlocksUnion]
+  "An object of the landingPage Type. Laskeutumissivut"
   landingPage(
     "The globally unique identifier of the object."
     id: ID!,
@@ -384,7 +388,7 @@ type RootQuery {
     "Get the page by its uri"
     uri: String
   ): Page @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
-  "Returns ID of page that uses the given template"
+  "Palauttaa sivun ID:n, joka käyttää annettua sivupohjaa"
   pageByTemplate(language: String, template: TemplateEnum): Page
   "Connection between the RootQuery type and the page type"
   pages(
@@ -542,7 +546,7 @@ type RootQuery {
     """
     before: String
   ): RootQueryToEnqueuedStylesheetConnection
-  "An object of the release Type. Releases"
+  "An object of the release Type. Tiedotteet"
   release(
     "The globally unique identifier of the object."
     id: ID!,
@@ -606,7 +610,7 @@ type RootQuery {
   ): RootQueryToRevisionsConnection
   "The SEO Framework settings"
   seoSettings: SeoSettings
-  "Site Settings"
+  "Sivuston asetukset"
   siteSettings(language: String!): SiteSettings
   "A 0bject"
   tag(
@@ -720,7 +724,7 @@ type RootQuery {
   ): RootQueryToThemeConnection
   "Translate string using pll_translate_string() (Polylang)"
   translateString(string: String!, language: LanguageCodeEnum!): String
-  "An object of the translation Type. Translations"
+  "An object of the translation Type. Käännökset"
   translation(
     "The globally unique identifier of the object."
     id: ID!,
@@ -2272,6 +2276,8 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   authorDatabaseId: Int
   "The globally unique identifier of the author of the node"
   authorId: ID
+  "Breadcrumb fields"
+  breadcrumbs: [Breadcrumb]
   "Connection between the HierarchicalContentNode type and the ContentNode type"
   children(
     """
@@ -2362,7 +2368,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   featuredImageId: ID
   "The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table."
   guid: String
-  "Hero fields"
+  "Hero kentät"
   hero: Hero
   "The globally unique identifier of the page object."
   id: ID!
@@ -2396,7 +2402,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   modified: String
   "The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT."
   modifiedGmt: String
-  "List of modules"
+  "Moduuli listaus"
   modules: [PageModulesUnionType]
   "The id field matches the WP_Post-&gt;ID field."
   pageId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
@@ -2439,7 +2445,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   seo: SEO
   "Näytä alisivut"
   showChildPages: Boolean
-  "List of modules"
+  "Moduuli listaus"
   sidebar: [PageSidebarUnionType]
   "The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table."
   slug: String
@@ -2473,130 +2479,137 @@ type NodeWithRevisionsToContentNodeConnectionEdge implements OneToOneConnection 
   "The node of the connection, without the edges"
   node: ContentNode!
 }
-"Hero field"
-type Hero {
-  "The background color of the hero"
-  background_color: String
-  "The background color of the hero"
-  background_image_url: String
-  "The desctiption of the hero"
-  description: String
-  "The title of the hero link"
-  link: Link
-  "The title of the hero"
+"Breadcumb field"
+type Breadcrumb {
+  "The title of the page"
   title: String
-  "The wave motif of the hero"
+  "The link of the page."
+  uri: String
+}
+"Hero kenttä"
+type Hero {
+  "Hero taustaväri"
+  background_color: String
+  "Hero taustaväri"
+  background_image_url: String
+  "Hero sisältö"
+  description: String
+  "Hero linkin otsikko"
+  link: Link
+  "Hero otsikko"
+  title: String
+  "Heron koro"
   wave_motif: String
 }
-"Link field"
+"Linkin kenttä"
 type Link {
-  "The target of the link"
+  "Linkin kohde"
   target: String
-  "The title of the link"
+  "Linkin otsikko"
   title: String
-  "The url of the link"
+  "Linkin URL osoite"
   url: String
 }
-"Collection Module: EventSearch"
+"Kokoelmamoduuli: EventSearch"
 type EventSearch {
-  "Amount of events listed before &quot;show more -button&quot;"
+  "Listattujen tapahtumien määrä “Näytä lisää” -painiketta"
   initAmountOfEvents: Int
-  "Module type"
+  "Moduulin tyyppi"
   module: String
-  "List of modules"
+  "Moduulilistaus"
   modules: [CollectionModulesUnionType]
   """
   Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
                   hakutulosten osoite -link and search params of the module, for example:
                   https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
-
+                  
   """
   showAllLink: String
-  "Show all -link"
+  "Näytä kaikki -linkki"
   showAllLinkCustom: String
-  "Module title"
+  "Moduulin otsikko"
   title: String
-  "Search query"
+  "Hakukysely"
   url: String
 }
-"Collection Module: EventSelected"
+"Kokoelmamoduuli: EventSelected"
 type EventSelected {
-  "List of event IDs"
+  "Lista tapahtumien ID-tiedoista"
   events: [String]
-  "Amount of events listed before &quot;show more -button&quot;"
+  "Listattujen tapahtumien määrä “Näytä lisää” -painiketta"
   initAmountOfEvents: Int
-  "Module type"
+  "Moduulin tyyppi"
   module: String
-  "List of modules"
+  "Moduulilistaus"
   modules: [CollectionModulesUnionType]
-  "Show all -link"
+  "Näytä kaikki -linkki"
   showAllLink: String
-  "Module title"
+  "Moduulin otsikko"
   title: String
 }
-"Collection Module: EventSearchCarousel"
+"Kokoelmamoduuli: EventSearchCarousel"
 type EventSearchCarousel {
-  "Amount of cards in carousel"
+  "Korttien määrä karusellissa"
   amountOfCards: Int
-  "Events nearby"
+  "Tapahtumat lähellä"
   eventsNearby: Boolean
-  "Module type"
+  "Moduulin tyyppi"
   module: String
-  "List of modules"
+  "Moduulilistaus"
   modules: [CollectionModulesUnionType]
-  "Events order"
+  "Tapahtumien järjestys"
   orderNewestFirst: Boolean
   """
   Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
                                       hakutulosten osoite -link and search params of the module, for example:
                                       https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
-
+                                      
   """
   showAllLink: String
-  "Show all -link"
+  "Näytä kaikki -linkki"
   showAllLinkCustom: String
-  "Module title"
+  "Moduulin otsikko"
   title: String
-  "Search query"
+  "Hakukysely"
   url: String
 }
-"Collection Module: EventSelectedCarousel"
+"Kokoelmamoduuli: EventSelectedCarousel"
 type EventSelectedCarousel {
-  "Amount of cards in carousel"
+  "Korttien määrä karusellissa"
   amountOfCards: Int
-  "Amount of cards per row"
+  "Korttien määrä riviä kohden"
   amountOfCardsPerRow: Int
-  "List of event IDs"
+  "Lista tapahtumien ID-tiedoista"
   events: [String]
-  "Events nearby"
+  "Tapahtumat lähellä"
   eventsNearby: Boolean
-  "Module type"
+  "Moduulin tyyppi"
   module: String
-  "List of modules"
+  "Moduulilistaus"
   modules: [CollectionModulesUnionType]
-  "Show all -link"
+  "Näytä kaikki -linkki"
   showAllLink: String
-  "Module title"
+  "Moduulin otsikko"
   title: String
 }
-"Collection Module: LocationsSelected"
+"Kokoelmamoduuli: LocationsSelected"
 type LocationsSelected {
   "List of location IDs"
   locations: [Int]
   "Module type"
   module: String
-  "List of modules"
+  "Moduulilistaus"
   modules: [CollectionModulesUnionType]
   "Module title"
   title: String
 }
-"Collection Module: LocationsSelectedCarousel"
+"Kokoelmamoduuli: LocationsSelectedCarousel"
 type LocationsSelectedCarousel {
   "List of location IDs"
   locations: [Int]
   "Module type"
   module: String
-  "List of modules"
+  "Moduulilistaus"
   modules: [CollectionModulesUnionType]
   "Module title"
   title: String
@@ -2608,7 +2621,7 @@ type LayoutCollection {
 }
 "The collection type"
 type Collection implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithRevisions {
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
   "The id field matches the WP_Post-&gt;ID field."
   collectionId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
@@ -2622,7 +2635,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   date: String
   "The publishing date set in GMT."
   dateGmt: String
-  "Description"
+  "Kuvaus"
   description: String
   "The desired slug of the post"
   desiredSlug: String
@@ -2674,7 +2687,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   guid: String
   "The globally unique identifier of the collection-cpt object."
   id: ID!
-  "Image"
+  "Kuva"
   image: String
   "Whether the node is a Content Node"
   isContentNode: Boolean!
@@ -2696,7 +2709,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   modified: String
   "The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT."
   modifiedGmt: String
-  "List of modules"
+  "Moduulilistaus"
   modules: [CollectionModulesUnionType]
   "Connection between the Collection type and the collection type"
   preview: CollectionToPreviewConnectionEdge
@@ -2729,7 +2742,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   ): CollectionToRevisionConnection
   "The SEO Framework data of the collection"
   seo: SEO
-  "Show on front page"
+  "Näytä etusivulla"
   showOnFrontPage: Boolean
   "The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table."
   slug: String
@@ -2795,7 +2808,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   date: String
   "The publishing date set in GMT."
   dateGmt: String
-  "Description"
+  "Kuvaus"
   description: String
   "The desired slug of the post"
   desiredSlug: String
@@ -2847,7 +2860,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   featuredImageDatabaseId: Int
   "Globally unique ID of the featured image assigned to the node"
   featuredImageId: ID
-  "First name"
+  "Etunimi"
   firstName: String
   "The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table."
   guid: String
@@ -2869,7 +2882,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   language: Language
   "The user that most recently edited the node"
   lastEditedBy: ContentNodeToEditLastConnectionEdge
-  "Last name"
+  "Sukunimi"
   lastName: String
   "The permalink of the post"
   link: String
@@ -2951,21 +2964,21 @@ type ContactToRevisionConnectionEdge implements ContactConnectionEdge & Edge {
 }
 "Layout: LayoutArticles"
 type LayoutArticles {
-  "Anchor"
+  "Ankkuri"
   anchor: String
-  "Articles"
+  "Artikkelit"
   articles: [Post]
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
-  "Category"
+  "Kategoria"
   category: Int
-  "Tag"
+  "Tagi"
   limit: Int
-  "Show all -link"
+  "Näytä lisää linkki"
   showAllLink: String
-  "Tag"
+  "Tagi"
   tag: Int
-  "Title"
+  "Sivuston otsikko"
   title: String
 }
 "The post type"
@@ -2976,6 +2989,8 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   authorDatabaseId: Int
   "The globally unique identifier of the author of the node"
   authorId: ID
+  "Breadcrumb fields"
+  breadcrumbs: [Breadcrumb]
   "Connection between the Post type and the category type"
   categories(
     """
@@ -3066,7 +3081,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   featuredImageId: ID
   "The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table."
   guid: String
-  "Hide Published Date"
+  "Piilota julkaisupäivämäärä"
   hidePublishedDate: Boolean
   "The globally unique identifier of the post object."
   id: ID!
@@ -3094,7 +3109,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   modified: String
   "The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT."
   modifiedGmt: String
-  "List of modules"
+  "Moduuli listaus"
   modules: [PostModulesUnionType]
   "Connection between the Post type and the postFormat type"
   postFormats(
@@ -3150,7 +3165,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   ): PostToRevisionConnection
   "The SEO Framework data of the post"
   seo: SEO
-  "List of modules"
+  "Moduuli listaus"
   sidebar: [PostSidebarUnionType]
   "The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table."
   slug: String
@@ -3230,191 +3245,191 @@ type PostToCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
 }
 "Layout: LayoutArticlesCarousel"
 type LayoutArticlesCarousel {
-  "Anchor"
+  "Ankkuri"
   anchor: String
-  "Articles"
+  "Artikkelit"
   articles: [Post]
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
-  "Category"
+  "Kategoria"
   category: Int
-  "Amount of articles to list"
+  "Valitse montako artikkelia näytetään"
   limit: Int
-  "Show all -link"
+  "Näytä lisää linkki"
   showAllLink: String
-  "Show more link"
+  "Näytä lisää linkki"
   showMore: [String]
-  "Tag"
+  "Tagi"
   tag: Int
-  "Title"
+  "Sivuston otsikko"
   title: String
 }
 "Layout: LayoutArticleHighlights"
 type LayoutArticleHighlights {
-  "Anchor"
+  "Ankkuri"
   anchor: String
-  "Articles"
+  "Artikkelit"
   articles: [Post]
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
-  "Category"
+  "Kategoria"
   category: Int
-  "Amount of articles to list"
+  "Valitse montako artikkelia näytetään"
   limit: Int
-  "Show more link"
+  "Näytä lisää linkki"
   showMore: [String]
-  "Tag"
+  "Tagi"
   tag: Int
-  "Title"
+  "Sivuston otsikko"
   title: String
 }
 "Layout: LayoutPages"
 type LayoutPages {
-  "Anchor"
+  "Ankkuri"
   anchor: String
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
-  "Description"
+  "Kuvaus"
   description: String
-  "Pages"
+  "Sivut"
   pages: [Page]
-  "Show all -link"
+  "Näytä lisää linkki"
   showAllLink: String
-  "Title"
+  "Sivuston otsikko"
   title: String
 }
 "Layout: LayoutPagesCarousel"
 type LayoutPagesCarousel {
-  "Anchor"
+  "Ankkuri"
   anchor: String
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
-  "Description"
+  "Kuvaus"
   description: String
-  "Pages"
+  "Sivut"
   pages: [Page]
-  "Title"
+  "Sivuston otsikko"
   title: String
 }
 "Layout: LayoutContent"
 type LayoutContent {
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
-  "Title"
+  "Sivuston otsikko"
   content: String
-  "Title"
-  title: String
-}
-"Layout: LayoutCards"
-type LayoutCards {
-  "Cards"
-  cards: [Card]
-}
-"Card field"
-type Card {
-  "Background Color"
-  backgroundColor: String
-  "Description"
-  description: String
-  "Icon"
-  icon: String
-  "Link"
-  link: Link
-  "Title"
-  title: String
-}
-"Layout: LayoutImage"
-type LayoutImage {
-  "Border"
-  border: Boolean
-  "Image"
-  image: Image
-  "Photographer name (overwrite)"
-  photographer_name: String
-  "Lightbox"
-  show_on_lightbox: Boolean
-}
-"Image"
-type Image {
-  "Caption of the image"
-  caption: String
-  "Description of the image"
-  description: String
-  "The url of the large image"
-  large: String
-  "The url of the medium image"
-  medium: String
-  "The url of the medium large image"
-  medium_large: String
-  "The url of the thumbnail image"
-  thumbnail: String
-  "Title of the image"
+  "Sivuston otsikko"
   title: String
 }
 "Layout: LayoutCard"
 type LayoutCard {
-  "Alignment"
+  "Tasaus"
   alignment: String
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
-  "Description"
+  "Kuvaus"
   description: String
-  "Image"
+  "Kuva"
   image: Image
-  "Link"
+  "Linkki"
   link: Link
-  "Title"
+  "Sivuston otsikko"
   title: String
 }
-"Layout: LayoutImageGallery"
-type LayoutImageGallery {
-  "Gallery"
-  gallery: [GalleryImage]
-}
-"Gallery Image"
-type GalleryImage {
-  "Caption of the image"
+"Kuva"
+type Image {
+  "Kuvan lainaus"
   caption: String
-  "Description of the image"
+  "Kuvaus"
   description: String
-  "The url of the large image"
+  "Kuvan (large) URL-osoite"
   large: String
-  "The url of the medium image"
+  "Kuvan (medium) URL-osoite"
   medium: String
-  "The url of the medium large image"
+  "Kuvan (medium large) URL-osoite"
   medium_large: String
-  "The url of the thumbnail image"
+  "Kuvan URL-osoite"
   thumbnail: String
-  "Title of the image"
+  "Kuvan otsikko"
+  title: String
+}
+"Layout: LayoutImage"
+type LayoutImage {
+  "Reunus"
+  border: Boolean
+  "Kuva"
+  image: Image
+  "Valokuvaajan nimi (ylikirjoitus)"
+  photographer_name: String
+  "Näytä lighboxissa"
+  show_on_lightbox: Boolean
+}
+"Layout: LayoutCards"
+type LayoutCards {
+  "Ikoni kortti"
+  cards: [Card]
+}
+"Kortin kenttä"
+type Card {
+  "Taustaväri"
+  backgroundColor: String
+  "Kuvaus"
+  description: String
+  "Ikoni"
+  icon: String
+  "Linkki"
+  link: Link
+  "Sivuston otsikko"
   title: String
 }
 "Layout: LayoutSteps"
 type LayoutSteps {
-  "Color"
+  "Väri"
   color: String
-  "Description"
+  "Kuvaus"
   description: String
-  "Steps"
+  "Vaiheistus"
   steps: [Step]
-  "Title"
+  "Sivuston otsikko"
   title: String
-  "Type"
+  "Tyyppi"
   type: String
 }
-"Step field"
+"Vaiheen kenttä"
 type Step {
-  "The content of the step"
+  "Vaiheen sisältö"
   content: String
-  "The title of the step"
+  "Vaiheen otsikko"
+  title: String
+}
+"Layout: LayoutImageGallery"
+type LayoutImageGallery {
+  "Galleria"
+  gallery: [GalleryImage]
+}
+"Galleriakuva"
+type GalleryImage {
+  "Kuvan lainaus"
+  caption: String
+  "Kuvaus"
+  description: String
+  "Kuvan (large) URL-osoite"
+  large: String
+  "Kuvan (medium) URL-osoite"
+  medium: String
+  "Kuvan (medium large) URL-osoite"
+  medium_large: String
+  "Kuvan URL-osoite"
+  thumbnail: String
+  "Kuvan otsikko"
   title: String
 }
 "Layout: LayoutSocialMediaFeed"
 type LayoutSocialMediaFeed {
-  "Anchor"
+  "Ankkuri"
   anchor: String
-  "Script"
+  "Scripti"
   script: String
-  "Title"
+  "Sivuston otsikko"
   title: String
 }
 "Connection between the Post type and the postFormat type"
@@ -3612,15 +3627,15 @@ type PostToRevisionConnectionEdge implements PostConnectionEdge & Edge {
 }
 "Layout: LayoutLinkList"
 type LayoutLinkList {
-  "Anchor"
+  "Ankkuri"
   anchor: String
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
-  "Title"
+  "Sivuston otsikko"
   description: String
-  "Links"
+  "Linkit"
   links: [Link]
-  "Title"
+  "Sivuston otsikko"
   title: String
 }
 "Connection between the Post type and the tag type"
@@ -4030,7 +4045,7 @@ type RootQueryToContentTypeConnectionEdge implements ContentTypeConnectionEdge &
   "The item at the end of the edge"
   node: ContentType!
 }
-"Default images of different post types. Returns url of image of queried post type. Values come from Sivuston Asetukset -&gt; Oletuskuvat."
+"Oletuskuva"
 type DefaultImages {
   "Attachment URL for article image"
   article: String
@@ -4047,6 +4062,16 @@ type DiscussionSettings {
   defaultCommentStatus: String
   "Salli linkki-ilmoitukset muista blogeista (pingback ja trackback) uusiin artikkeleihin."
   defaultPingStatus: String
+}
+"Layout: LayoutEditor"
+type LayoutEditor {
+  "Editor"
+  editor: String
+}
+"Layout: LayoutMenu"
+type LayoutMenu {
+  "Menu"
+  menu: String
 }
 "The general setting type"
 type GeneralSettings {
@@ -4069,7 +4094,7 @@ type GeneralSettings {
 }
 "The landingPage type"
 type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithRevisions {
-  "Background Color"
+  "Taustaväri"
   backgroundColor: String
   "Box Color"
   boxColor: String
@@ -4083,7 +4108,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   date: String
   "The publishing date set in GMT."
   dateGmt: String
-  "Description"
+  "Kuvaus"
   description: String
   "The desired slug of the post"
   desiredSlug: String
@@ -4220,7 +4245,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   modified: String
   "The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT."
   modifiedGmt: String
-  "List of modules"
+  "Moduulilistaus"
   modules: [CollectionModulesUnionType]
   "Connection between the LandingPage type and the landingPage type"
   preview: LandingPageToPreviewConnectionEdge
@@ -4556,21 +4581,21 @@ type RootQueryToMenuConnectionEdge implements MenuConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Menu!
 }
-"Describe what a CustomType is"
+"Selitä mikä CustomType on"
 type Notification {
-  "Notification content"
+  "Ilmoituksen sisältö"
   content: String
-  "Notification end date"
+  "Ilmoituksen päättymispäivä"
   endDate: String
-  "Notification level"
+  "Ilmoituksen tärkeys"
   level: String
-  "Notification link text"
+  "Ilmoitus linkin teksti"
   linkText: String
-  "Notification link url"
+  "Ilmoitus linkin url"
   linkUrl: String
-  "Notification start date"
+  "Ilmoituksen aloituspäivä"
   startDate: String
-  "Notification title"
+  "Ilmoituksen otsikko"
   title: String
 }
 "Connection between the RootQuery type and the page type"
@@ -5117,7 +5142,7 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
   ): String
   "The id field matches the WP_Post-&gt;ID field."
   translationId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
-  "Translations"
+  "Käännökset"
   translations: [TranslationResponse]
   "The unique resource identifier path"
   uri: String
@@ -5145,20 +5170,20 @@ type TranslationToRevisionConnectionEdge implements TranslationConnectionEdge & 
   "The item at the end of the edge"
   node: Translation!
 }
-"Translation response contains translation key and translations"
+"Käännösvastaus sisältää käännösavaimen ja käännökset"
 type TranslationResponse {
-  "Translation key for frontend"
+  "Käyttöliittymän käännösavain"
   key: String
-  "Translations for frontend"
+  "Käännökset käyttöliittymälle"
   translations: TranslationItems
 }
-"Translation with language/value pairs"
+"Käännöksen kieli/arvo-parit"
 type TranslationItems {
-  "Translation string"
+  "Käännöksen merkkijono"
   en: String
-  "Translation string"
+  "Käännöksen merkkijono"
   fi: String
-  "Translation string"
+  "Käännöksen merkkijono"
   sv: String
 }
 "Connection between the RootQuery type and the translation type"
@@ -6722,11 +6747,13 @@ interface UserConnection implements Connection {
   "A list of connected User Nodes"
   nodes: [User!]!
 }
-union PageModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards | LayoutSocialMediaFeed | LayoutImage | LayoutCard | LayoutSteps | LayoutImageGallery
+union PageModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCard | LayoutImage | LayoutCards | LayoutSteps | LayoutImageGallery | LayoutSocialMediaFeed
 union CollectionModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel
-union PostModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards | LayoutImage | LayoutCard | LayoutImageGallery | LayoutSteps | LayoutSocialMediaFeed
+union PostModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCard | LayoutImage | LayoutCards | LayoutSteps | LayoutImageGallery | LayoutSocialMediaFeed
 union PostSidebarUnionType = LayoutLinkList | LayoutArticles | LayoutPages | LayoutCards
 union PageSidebarUnionType = LayoutLinkList | LayoutArticles | LayoutPages | LayoutCards
+union FooterBlocksUnion = LayoutImage | LayoutEditor | LayoutMenu
+union GlobalSidebarBlocksUnion = LayoutArticleHighlights | LayoutArticles | LayoutEditor
 "Deprecated in favor of MenuItemLinkeable Interface"
 union MenuItemObjectUnion = Post | Page | Category | Tag
 "Filter item by specific language, default language or list all languages"
@@ -7168,7 +7195,7 @@ enum PageIdType {
   "Identify a resource by the URI."
   URI
 }
-"Get page object by template"
+"Hae sivuobjekti sivupohjan mukaan"
 enum TemplateEnum {
   frontPage
   postsPage
@@ -7344,7 +7371,7 @@ enum UsersConnectionSearchColumnEnum {
   LOGIN
   "A URL-friendly name for the user. The default is the user's username."
   NICENAME
-  "The URL of the user's website."
+  "The URL of the user\\s website."
   URL
 }
 "The status of the media item object."
@@ -9749,7 +9776,7 @@ input CreateCollectionInput {
   "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -9781,7 +9808,7 @@ input CreateCommentInput {
   "Content of the comment."
   content: String
   """
-  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "Parent comment ID of current comment."
@@ -9796,7 +9823,7 @@ input CreateContactInput {
   "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -9816,7 +9843,7 @@ input CreateLandingPageInput {
   "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -9874,7 +9901,7 @@ input CreatePageInput {
   "The content of the object"
   content: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -9902,7 +9929,7 @@ input CreatePostInput {
   "The content of the object"
   content: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -9995,7 +10022,7 @@ input CreateReleaseInput {
   "The content of the object"
   content: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -10029,7 +10056,7 @@ input CreateTranslationInput {
   "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types."
@@ -10055,7 +10082,7 @@ input CreateUserInput {
   displayName: String
   "A string containing the user's email address."
   email: String
-  "	The user's first name."
+  "The user's first name."
   firstName: String
   "User's Jabber account."
   jabber: String
@@ -10205,7 +10232,7 @@ input RegisterUserInput {
   displayName: String
   "A string containing the user's email address."
   email: String
-  "	The user's first name."
+  "\tThe user's first name."
   firstName: String
   "User's Jabber account."
   jabber: String
@@ -10278,7 +10305,7 @@ input UpdateCollectionInput {
   "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "The ID of the collection object"
@@ -10312,7 +10339,7 @@ input UpdateCommentInput {
   "Content of the comment."
   content: String
   """
-  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "The ID of the comment being updated."
@@ -10329,7 +10356,7 @@ input UpdateContactInput {
   "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "The ID of the contact object"
@@ -10351,7 +10378,7 @@ input UpdateLandingPageInput {
   "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "The ID of the landingPage object"
@@ -10413,7 +10440,7 @@ input UpdatePageInput {
   "The content of the object"
   content: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "The ID of the page object"
@@ -10443,7 +10470,7 @@ input UpdatePostInput {
   "The content of the object"
   content: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "The ID of the post object"
@@ -10486,7 +10513,7 @@ input UpdateReleaseInput {
   "The content of the object"
   content: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "The ID of the release object"
@@ -10561,7 +10588,7 @@ input UpdateTranslationInput {
   "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   "The ID of the translation object"
@@ -10589,7 +10616,7 @@ input UpdateUserInput {
   displayName: String
   "A string containing the user's email address."
   email: String
-  "	The user's first name."
+  "\tThe user's first name."
   firstName: String
   "The ID of the user"
   id: ID!

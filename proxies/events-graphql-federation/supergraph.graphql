@@ -191,6 +191,17 @@ type BannerPage
   socialMediaImage: LocalizedCmsImage
 }
 
+"""Breadcumb field"""
+type Breadcrumb
+  @join__type(graph: CMS)
+{
+  """The title of the page"""
+  title: String
+
+  """The link of the page."""
+  uri: String
+}
+
 enum CacheControlScope
   @join__type(graph: UNIFIED_SEARCH)
 {
@@ -198,23 +209,23 @@ enum CacheControlScope
   PRIVATE @join__enumValue(graph: UNIFIED_SEARCH)
 }
 
-"""Card field"""
+"""Kortin kenttä"""
 type Card
   @join__type(graph: CMS)
 {
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Description"""
+  """Kuvaus"""
   description: String
 
-  """Icon"""
+  """Ikoni"""
   icon: String
 
-  """Link"""
+  """Linkki"""
   link: Link
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 }
 
@@ -900,7 +911,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   @join__implements(graph: CMS, interface: "NodeWithRevisions")
   @join__type(graph: CMS)
 {
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
   """The id field matches the WP_Post-&gt;ID field."""
@@ -921,7 +932,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   """The publishing date set in GMT."""
   dateGmt: String
 
-  """Description"""
+  """Kuvaus"""
   description: String
 
   """The desired slug of the post"""
@@ -986,7 +997,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   """The globally unique identifier of the collection-cpt object."""
   id: ID!
 
-  """Image"""
+  """Kuva"""
   image: String
 
   """Whether the node is a Content Node"""
@@ -1023,7 +1034,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   """
   modifiedGmt: String
 
-  """List of modules"""
+  """Moduulilistaus"""
   modules: [CollectionModulesUnionType]
 
   """Connection between the Collection type and the collection type"""
@@ -1065,7 +1076,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   """The SEO Framework data of the collection"""
   seo: SEO
 
-  """Show on front page"""
+  """Näytä etusivulla"""
   showOnFrontPage: Boolean
 
   """
@@ -1894,7 +1905,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   """The publishing date set in GMT."""
   dateGmt: String
 
-  """Description"""
+  """Kuvaus"""
   description: String
 
   """The desired slug of the post"""
@@ -1961,7 +1972,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   """Globally unique ID of the featured image assigned to the node"""
   featuredImageId: ID
 
-  """First name"""
+  """Etunimi"""
   firstName: String
 
   """
@@ -1996,7 +2007,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   """The user that most recently edited the node"""
   lastEditedBy: ContentNodeToEditLastConnectionEdge
 
-  """Last name"""
+  """Sukunimi"""
   lastName: String
 
   """The permalink of the post"""
@@ -2970,7 +2981,7 @@ input CreateCollectionInput
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -3034,7 +3045,7 @@ input CreateCommentInput
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -3076,7 +3087,7 @@ input CreateContactInput
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -3122,7 +3133,7 @@ input CreateLandingPageInput
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -3240,7 +3251,7 @@ input CreatePageInput
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -3335,7 +3346,7 @@ input CreatePostInput
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -3390,7 +3401,7 @@ input CreateReleaseInput
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
   language: LanguageCodeEnum
@@ -3474,7 +3485,7 @@ input CreateTranslationInput
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -3532,7 +3543,7 @@ input CreateUserInput
   """A string containing the user's email address."""
   email: String
 
-  """	The user's first name."""
+  """The user's first name."""
   firstName: String
 
   """User's Jabber account."""
@@ -3658,9 +3669,7 @@ input DateQueryInput
 scalar DateTime
   @join__type(graph: UNIFIED_SEARCH)
 
-"""
-Default images of different post types. Returns url of image of queried post type. Values come from Sivuston Asetukset -&gt; Oletuskuvat.
-"""
+"""Oletuskuva"""
 type DefaultImages
   @join__type(graph: CMS)
 {
@@ -4519,17 +4528,17 @@ type EventPricing
   todo: String
 }
 
-"""Collection Module: EventSearch"""
+"""Kokoelmamoduuli: EventSearch"""
 type EventSearch
   @join__type(graph: CMS)
 {
-  """Amount of events listed before &quot;show more -button&quot;"""
+  """Listattujen tapahtumien määrä “Näytä lisää” -painiketta"""
   initAmountOfEvents: Int
 
-  """Module type"""
+  """Moduulin tyyppi"""
   module: String
 
-  """List of modules"""
+  """Moduulilistaus"""
   modules: [CollectionModulesUnionType]
 
   """
@@ -4539,33 +4548,33 @@ type EventSearch
   """
   showAllLink: String
 
-  """Show all -link"""
+  """Näytä kaikki -linkki"""
   showAllLinkCustom: String
 
-  """Module title"""
+  """Moduulin otsikko"""
   title: String
 
-  """Search query"""
+  """Hakukysely"""
   url: String
 }
 
-"""Collection Module: EventSearchCarousel"""
+"""Kokoelmamoduuli: EventSearchCarousel"""
 type EventSearchCarousel
   @join__type(graph: CMS)
 {
-  """Amount of cards in carousel"""
+  """Korttien määrä karusellissa"""
   amountOfCards: Int
 
-  """Events nearby"""
+  """Tapahtumat lähellä"""
   eventsNearby: Boolean
 
-  """Module type"""
+  """Moduulin tyyppi"""
   module: String
 
-  """List of modules"""
+  """Moduulilistaus"""
   modules: [CollectionModulesUnionType]
 
-  """Events order"""
+  """Tapahtumien järjestys"""
   orderNewestFirst: Boolean
 
   """
@@ -4575,65 +4584,65 @@ type EventSearchCarousel
   """
   showAllLink: String
 
-  """Show all -link"""
+  """Näytä kaikki -linkki"""
   showAllLinkCustom: String
 
-  """Module title"""
+  """Moduulin otsikko"""
   title: String
 
-  """Search query"""
+  """Hakukysely"""
   url: String
 }
 
-"""Collection Module: EventSelected"""
+"""Kokoelmamoduuli: EventSelected"""
 type EventSelected
   @join__type(graph: CMS)
 {
-  """List of event IDs"""
+  """Lista tapahtumien ID-tiedoista"""
   events: [String]
 
-  """Amount of events listed before &quot;show more -button&quot;"""
+  """Listattujen tapahtumien määrä “Näytä lisää” -painiketta"""
   initAmountOfEvents: Int
 
-  """Module type"""
+  """Moduulin tyyppi"""
   module: String
 
-  """List of modules"""
+  """Moduulilistaus"""
   modules: [CollectionModulesUnionType]
 
-  """Show all -link"""
+  """Näytä kaikki -linkki"""
   showAllLink: String
 
-  """Module title"""
+  """Moduulin otsikko"""
   title: String
 }
 
-"""Collection Module: EventSelectedCarousel"""
+"""Kokoelmamoduuli: EventSelectedCarousel"""
 type EventSelectedCarousel
   @join__type(graph: CMS)
 {
-  """Amount of cards in carousel"""
+  """Korttien määrä karusellissa"""
   amountOfCards: Int
 
-  """Amount of cards per row"""
+  """Korttien määrä riviä kohden"""
   amountOfCardsPerRow: Int
 
-  """List of event IDs"""
+  """Lista tapahtumien ID-tiedoista"""
   events: [String]
 
-  """Events nearby"""
+  """Tapahtumat lähellä"""
   eventsNearby: Boolean
 
-  """Module type"""
+  """Moduulin tyyppi"""
   module: String
 
-  """List of modules"""
+  """Moduulilistaus"""
   modules: [CollectionModulesUnionType]
 
-  """Show all -link"""
+  """Näytä kaikki -linkki"""
   showAllLink: String
 
-  """Module title"""
+  """Moduulin otsikko"""
   title: String
 }
 
@@ -4652,29 +4661,36 @@ type ExternalLink
   language: String
 }
 
-"""Gallery Image"""
+union FooterBlocksUnion
+  @join__type(graph: CMS)
+  @join__unionMember(graph: CMS, member: "LayoutImage")
+  @join__unionMember(graph: CMS, member: "LayoutEditor")
+  @join__unionMember(graph: CMS, member: "LayoutMenu")
+ = LayoutImage | LayoutEditor | LayoutMenu
+
+"""Galleriakuva"""
 type GalleryImage
   @join__type(graph: CMS)
 {
-  """Caption of the image"""
+  """Kuvan lainaus"""
   caption: String
 
-  """Description of the image"""
+  """Kuvaus"""
   description: String
 
-  """The url of the large image"""
+  """Kuvan (large) URL-osoite"""
   large: String
 
-  """The url of the medium image"""
+  """Kuvan (medium) URL-osoite"""
   medium: String
 
-  """The url of the medium large image"""
+  """Kuvan (medium large) URL-osoite"""
   medium_large: String
 
-  """The url of the thumbnail image"""
+  """Kuvan URL-osoite"""
   thumbnail: String
 
-  """Title of the image"""
+  """Kuvan otsikko"""
   title: String
 }
 
@@ -4894,26 +4910,33 @@ enum GeoJSONType
   FeatureCollection @join__enumValue(graph: UNIFIED_SEARCH)
 }
 
-"""Hero field"""
+union GlobalSidebarBlocksUnion
+  @join__type(graph: CMS)
+  @join__unionMember(graph: CMS, member: "LayoutArticleHighlights")
+  @join__unionMember(graph: CMS, member: "LayoutArticles")
+  @join__unionMember(graph: CMS, member: "LayoutEditor")
+ = LayoutArticleHighlights | LayoutArticles | LayoutEditor
+
+"""Hero kenttä"""
 type Hero
   @join__type(graph: CMS)
 {
-  """The background color of the hero"""
+  """Hero taustaväri"""
   background_color: String
 
-  """The background color of the hero"""
+  """Hero taustaväri"""
   background_image_url: String
 
-  """The desctiption of the hero"""
+  """Hero sisältö"""
   description: String
 
-  """The title of the hero link"""
+  """Hero linkin otsikko"""
   link: Link
 
-  """The title of the hero"""
+  """Hero otsikko"""
   title: String
 
-  """The wave motif of the hero"""
+  """Heron koro"""
   wave_motif: String
 }
 
@@ -5469,29 +5492,29 @@ enum IdentificationStrength
   LEGALLY_CONNECTED @join__enumValue(graph: UNIFIED_SEARCH)
 }
 
-"""Image"""
+"""Kuva"""
 type Image
   @join__type(graph: CMS)
 {
-  """Caption of the image"""
+  """Kuvan lainaus"""
   caption: String
 
-  """Description of the image"""
+  """Kuvaus"""
   description: String
 
-  """The url of the large image"""
+  """Kuvan (large) URL-osoite"""
   large: String
 
-  """The url of the medium image"""
+  """Kuvan (medium) URL-osoite"""
   medium: String
 
-  """The url of the medium large image"""
+  """Kuvan (medium large) URL-osoite"""
   medium_large: String
 
-  """The url of the thumbnail image"""
+  """Kuvan URL-osoite"""
   thumbnail: String
 
-  """Title of the image"""
+  """Kuvan otsikko"""
   title: String
 }
 
@@ -5574,7 +5597,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   @join__implements(graph: CMS, interface: "NodeWithRevisions")
   @join__type(graph: CMS)
 {
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
   """Box Color"""
@@ -5595,7 +5618,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   """The publishing date set in GMT."""
   dateGmt: String
 
-  """Description"""
+  """Kuvaus"""
   description: String
 
   """The desired slug of the post"""
@@ -5763,7 +5786,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   """
   modifiedGmt: String
 
-  """List of modules"""
+  """Moduulilistaus"""
   modules: [CollectionModulesUnionType]
 
   """Connection between the LandingPage type and the landingPage type"""
@@ -6328,28 +6351,28 @@ type LanguageString
 type LayoutArticleHighlights
   @join__type(graph: CMS)
 {
-  """Anchor"""
+  """Ankkuri"""
   anchor: String
 
-  """Articles"""
+  """Artikkelit"""
   articles: [Post]
 
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Category"""
+  """Kategoria"""
   category: Int
 
-  """Amount of articles to list"""
+  """Valitse montako artikkelia näytetään"""
   limit: Int
 
-  """Show more link"""
+  """Näytä lisää linkki"""
   showMore: [String]
 
-  """Tag"""
+  """Tagi"""
   tag: Int
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 }
 
@@ -6357,28 +6380,28 @@ type LayoutArticleHighlights
 type LayoutArticles
   @join__type(graph: CMS)
 {
-  """Anchor"""
+  """Ankkuri"""
   anchor: String
 
-  """Articles"""
+  """Artikkelit"""
   articles: [Post]
 
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Category"""
+  """Kategoria"""
   category: Int
 
-  """Tag"""
+  """Tagi"""
   limit: Int
 
-  """Show all -link"""
+  """Näytä lisää linkki"""
   showAllLink: String
 
-  """Tag"""
+  """Tagi"""
   tag: Int
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 }
 
@@ -6386,31 +6409,31 @@ type LayoutArticles
 type LayoutArticlesCarousel
   @join__type(graph: CMS)
 {
-  """Anchor"""
+  """Ankkuri"""
   anchor: String
 
-  """Articles"""
+  """Artikkelit"""
   articles: [Post]
 
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Category"""
+  """Kategoria"""
   category: Int
 
-  """Amount of articles to list"""
+  """Valitse montako artikkelia näytetään"""
   limit: Int
 
-  """Show all -link"""
+  """Näytä lisää linkki"""
   showAllLink: String
 
-  """Show more link"""
+  """Näytä lisää linkki"""
   showMore: [String]
 
-  """Tag"""
+  """Tagi"""
   tag: Int
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 }
 
@@ -6418,22 +6441,22 @@ type LayoutArticlesCarousel
 type LayoutCard
   @join__type(graph: CMS)
 {
-  """Alignment"""
+  """Tasaus"""
   alignment: String
 
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Description"""
+  """Kuvaus"""
   description: String
 
-  """Image"""
+  """Kuva"""
   image: Image
 
-  """Link"""
+  """Linkki"""
   link: Link
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 }
 
@@ -6441,7 +6464,7 @@ type LayoutCard
 type LayoutCards
   @join__type(graph: CMS)
 {
-  """Cards"""
+  """Ikoni kortti"""
   cards: [Card]
 }
 
@@ -6471,30 +6494,38 @@ type LayoutContact
 type LayoutContent
   @join__type(graph: CMS)
 {
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Title"""
+  """Sivuston otsikko"""
   content: String
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
+}
+
+"""Layout: LayoutEditor"""
+type LayoutEditor
+  @join__type(graph: CMS)
+{
+  """Editor"""
+  editor: String
 }
 
 """Layout: LayoutImage"""
 type LayoutImage
   @join__type(graph: CMS)
 {
-  """Border"""
+  """Reunus"""
   border: Boolean
 
-  """Image"""
+  """Kuva"""
   image: Image
 
-  """Photographer name (overwrite)"""
+  """Valokuvaajan nimi (ylikirjoitus)"""
   photographer_name: String
 
-  """Lightbox"""
+  """Näytä lighboxissa"""
   show_on_lightbox: Boolean
 }
 
@@ -6502,7 +6533,7 @@ type LayoutImage
 type LayoutImageGallery
   @join__type(graph: CMS)
 {
-  """Gallery"""
+  """Galleria"""
   gallery: [GalleryImage]
 }
 
@@ -6510,42 +6541,50 @@ type LayoutImageGallery
 type LayoutLinkList
   @join__type(graph: CMS)
 {
-  """Anchor"""
+  """Ankkuri"""
   anchor: String
 
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Title"""
+  """Sivuston otsikko"""
   description: String
 
-  """Links"""
+  """Linkit"""
   links: [Link]
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
+}
+
+"""Layout: LayoutMenu"""
+type LayoutMenu
+  @join__type(graph: CMS)
+{
+  """Menu"""
+  menu: String
 }
 
 """Layout: LayoutPages"""
 type LayoutPages
   @join__type(graph: CMS)
 {
-  """Anchor"""
+  """Ankkuri"""
   anchor: String
 
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Description"""
+  """Kuvaus"""
   description: String
 
-  """Pages"""
+  """Sivut"""
   pages: [Page]
 
-  """Show all -link"""
+  """Näytä lisää linkki"""
   showAllLink: String
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 }
 
@@ -6553,19 +6592,19 @@ type LayoutPages
 type LayoutPagesCarousel
   @join__type(graph: CMS)
 {
-  """Anchor"""
+  """Ankkuri"""
   anchor: String
 
-  """Background Color"""
+  """Taustaväri"""
   backgroundColor: String
 
-  """Description"""
+  """Kuvaus"""
   description: String
 
-  """Pages"""
+  """Sivut"""
   pages: [Page]
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 }
 
@@ -6573,13 +6612,13 @@ type LayoutPagesCarousel
 type LayoutSocialMediaFeed
   @join__type(graph: CMS)
 {
-  """Anchor"""
+  """Ankkuri"""
   anchor: String
 
-  """Script"""
+  """Scripti"""
   script: String
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 }
 
@@ -6587,19 +6626,19 @@ type LayoutSocialMediaFeed
 type LayoutSteps
   @join__type(graph: CMS)
 {
-  """Color"""
+  """Väri"""
   color: String
 
-  """Description"""
+  """Kuvaus"""
   description: String
 
-  """Steps"""
+  """Vaiheistus"""
   steps: [Step]
 
-  """Title"""
+  """Sivuston otsikko"""
   title: String
 
-  """Type"""
+  """Tyyppi"""
   type: String
 }
 
@@ -6609,17 +6648,17 @@ union LegalEntity
   @join__unionMember(graph: UNIFIED_SEARCH, member: "Organisation")
  = Person | Organisation
 
-"""Link field"""
+"""Linkin kenttä"""
 type Link
   @join__type(graph: CMS)
 {
-  """The target of the link"""
+  """Linkin kohde"""
   target: String
 
-  """The title of the link"""
+  """Linkin otsikko"""
   title: String
 
-  """The url of the link"""
+  """Linkin URL osoite"""
   url: String
 }
 
@@ -6740,7 +6779,7 @@ type LocationImage
   caption: LanguageString
 }
 
-"""Collection Module: LocationsSelected"""
+"""Kokoelmamoduuli: LocationsSelected"""
 type LocationsSelected
   @join__type(graph: CMS)
 {
@@ -6750,14 +6789,14 @@ type LocationsSelected
   """Module type"""
   module: String
 
-  """List of modules"""
+  """Moduulilistaus"""
   modules: [CollectionModulesUnionType]
 
   """Module title"""
   title: String
 }
 
-"""Collection Module: LocationsSelectedCarousel"""
+"""Kokoelmamoduuli: LocationsSelectedCarousel"""
 type LocationsSelectedCarousel
   @join__type(graph: CMS)
 {
@@ -6767,7 +6806,7 @@ type LocationsSelectedCarousel
   """Module type"""
   module: String
 
-  """List of modules"""
+  """Moduulilistaus"""
   modules: [CollectionModulesUnionType]
 
   """Module title"""
@@ -8280,29 +8319,29 @@ interface NodeWithTitle implements Node
   ): String
 }
 
-"""Describe what a CustomType is"""
+"""Selitä mikä CustomType on"""
 type Notification
   @join__type(graph: CMS)
 {
-  """Notification content"""
+  """Ilmoituksen sisältö"""
   content: String
 
-  """Notification end date"""
+  """Ilmoituksen päättymispäivä"""
   endDate: String
 
-  """Notification level"""
+  """Ilmoituksen tärkeys"""
   level: String
 
-  """Notification link text"""
+  """Ilmoitus linkin teksti"""
   linkText: String
 
-  """Notification link url"""
+  """Ilmoitus linkin url"""
   linkUrl: String
 
-  """Notification start date"""
+  """Ilmoituksen aloituspäivä"""
   startDate: String
 
-  """Notification title"""
+  """Ilmoituksen otsikko"""
   title: String
 }
 
@@ -8508,6 +8547,9 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   """The globally unique identifier of the author of the node"""
   authorId: ID
 
+  """Breadcrumb fields"""
+  breadcrumbs: [Breadcrumb]
+
   """
   Connection between the HierarchicalContentNode type and the ContentNode type
   """
@@ -8625,7 +8667,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   """
   guid: String
 
-  """Hero fields"""
+  """Hero kentät"""
   hero: Hero
 
   """The globally unique identifier of the page object."""
@@ -8682,7 +8724,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   """
   modifiedGmt: String
 
-  """List of modules"""
+  """Moduuli listaus"""
   modules: [PageModulesUnionType]
 
   """The id field matches the WP_Post-&gt;ID field."""
@@ -8739,7 +8781,7 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   """Näytä alisivut"""
   showChildPages: Boolean
 
-  """List of modules"""
+  """Moduuli listaus"""
   sidebar: [PageSidebarUnionType]
 
   """
@@ -8829,13 +8871,13 @@ union PageModulesUnionType
   @join__unionMember(graph: CMS, member: "LayoutPages")
   @join__unionMember(graph: CMS, member: "LayoutPagesCarousel")
   @join__unionMember(graph: CMS, member: "LayoutContent")
-  @join__unionMember(graph: CMS, member: "LayoutCards")
-  @join__unionMember(graph: CMS, member: "LayoutSocialMediaFeed")
-  @join__unionMember(graph: CMS, member: "LayoutImage")
   @join__unionMember(graph: CMS, member: "LayoutCard")
+  @join__unionMember(graph: CMS, member: "LayoutImage")
+  @join__unionMember(graph: CMS, member: "LayoutCards")
   @join__unionMember(graph: CMS, member: "LayoutSteps")
   @join__unionMember(graph: CMS, member: "LayoutImageGallery")
- = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards | LayoutSocialMediaFeed | LayoutImage | LayoutCard | LayoutSteps | LayoutImageGallery
+  @join__unionMember(graph: CMS, member: "LayoutSocialMediaFeed")
+ = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCard | LayoutImage | LayoutCards | LayoutSteps | LayoutImageGallery | LayoutSocialMediaFeed
 
 union PageSidebarUnionType
   @join__type(graph: CMS)
@@ -9214,6 +9256,9 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   """The globally unique identifier of the author of the node"""
   authorId: ID
 
+  """Breadcrumb fields"""
+  breadcrumbs: [Breadcrumb]
+
   """Connection between the Post type and the category type"""
   categories(
     """The number of items to return after the referenced "after" cursor"""
@@ -9329,7 +9374,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   """
   guid: String
 
-  """Hide Published Date"""
+  """Piilota julkaisupäivämäärä"""
   hidePublishedDate: Boolean
 
   """The globally unique identifier of the post object."""
@@ -9375,7 +9420,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   """
   modifiedGmt: String
 
-  """List of modules"""
+  """Moduuli listaus"""
   modules: [PostModulesUnionType]
 
   """Connection between the Post type and the postFormat type"""
@@ -9442,7 +9487,7 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   """The SEO Framework data of the post"""
   seo: SEO
 
-  """List of modules"""
+  """Moduuli listaus"""
   sidebar: [PostSidebarUnionType]
 
   """
@@ -10057,13 +10102,13 @@ union PostModulesUnionType
   @join__unionMember(graph: CMS, member: "LayoutPages")
   @join__unionMember(graph: CMS, member: "LayoutPagesCarousel")
   @join__unionMember(graph: CMS, member: "LayoutContent")
-  @join__unionMember(graph: CMS, member: "LayoutCards")
-  @join__unionMember(graph: CMS, member: "LayoutImage")
   @join__unionMember(graph: CMS, member: "LayoutCard")
-  @join__unionMember(graph: CMS, member: "LayoutImageGallery")
+  @join__unionMember(graph: CMS, member: "LayoutImage")
+  @join__unionMember(graph: CMS, member: "LayoutCards")
   @join__unionMember(graph: CMS, member: "LayoutSteps")
+  @join__unionMember(graph: CMS, member: "LayoutImageGallery")
   @join__unionMember(graph: CMS, member: "LayoutSocialMediaFeed")
- = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCards | LayoutImage | LayoutCard | LayoutImageGallery | LayoutSteps | LayoutSocialMediaFeed
+ = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCard | LayoutImage | LayoutCards | LayoutSteps | LayoutImageGallery | LayoutSocialMediaFeed
 
 """The format of post field data."""
 enum PostObjectFieldFormatEnum
@@ -11061,7 +11106,7 @@ type Query
     idType: CategoryIdType
   ): Category @join__field(graph: CMS)
 
-  """An object of the collection Type. Collections"""
+  """An object of the collection Type. Kokoelmat"""
   collection(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11143,7 +11188,7 @@ type Query
     where: RootQueryToCommentConnectionWhereArgs
   ): RootQueryToCommentConnection @join__field(graph: CMS)
 
-  """An object of the contact Type. Contacts"""
+  """An object of the contact Type. Yhteystiedot"""
   contact(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11265,7 +11310,7 @@ type Query
     before: String
   ): RootQueryToContentTypeConnection @join__field(graph: CMS)
 
-  """Default Images"""
+  """Oletuskuvat"""
   defaultImages(language: String!): DefaultImages @join__field(graph: CMS)
 
   """Get language list"""
@@ -11274,10 +11319,16 @@ type Query
   """Fields of the &#039;DiscussionSettings&#039; settings group"""
   discussionSettings: DiscussionSettings @join__field(graph: CMS)
 
+  """Footer blocks"""
+  footerBlocks(language: String!): [FooterBlocksUnion] @join__field(graph: CMS)
+
   """Fields of the &#039;GeneralSettings&#039; settings group"""
   generalSettings: GeneralSettings @join__field(graph: CMS)
 
-  """An object of the landingPage Type. Landing Pages"""
+  """Global Sidebar blocks"""
+  globalSidebarBlocks(language: String!): [GlobalSidebarBlocksUnion] @join__field(graph: CMS)
+
+  """An object of the landingPage Type. Laskeutumissivut"""
   landingPage(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11487,7 +11538,7 @@ type Query
     uri: String
   ): Page @join__field(graph: CMS) @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
 
-  """Returns ID of page that uses the given template"""
+  """Palauttaa sivun ID:n, joka käyttää annettua sivupohjaa"""
   pageByTemplate(language: String, template: TemplateEnum): Page @join__field(graph: CMS)
 
   """Connection between the RootQuery type and the page type"""
@@ -11661,7 +11712,7 @@ type Query
     before: String
   ): RootQueryToEnqueuedStylesheetConnection @join__field(graph: CMS)
 
-  """An object of the release Type. Releases"""
+  """An object of the release Type. Tiedotteet"""
   release(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11737,7 +11788,7 @@ type Query
   """The SEO Framework settings"""
   seoSettings: SeoSettings @join__field(graph: CMS)
 
-  """Site Settings"""
+  """Sivuston asetukset"""
   siteSettings(language: String!): SiteSettings @join__field(graph: CMS)
 
   """A 0bject"""
@@ -11865,7 +11916,7 @@ type Query
   """Translate string using pll_translate_string() (Polylang)"""
   translateString(string: String!, language: LanguageCodeEnum!): String @join__field(graph: CMS)
 
-  """An object of the translation Type. Translations"""
+  """An object of the translation Type. Käännökset"""
   translation(
     """The globally unique identifier of the object."""
     id: ID!
@@ -14989,14 +15040,14 @@ type StaticPage
   liveRevision: Int
 }
 
-"""Step field"""
+"""Vaiheen kenttä"""
 type Step
   @join__type(graph: CMS)
 {
-  """The content of the step"""
+  """Vaiheen sisältö"""
   content: String
 
-  """The title of the step"""
+  """Vaiheen otsikko"""
   title: String
 }
 
@@ -15649,7 +15700,7 @@ type TaxonomyToContentTypeConnectionEdge implements ContentTypeConnectionEdge & 
   node: ContentType!
 }
 
-"""Get page object by template"""
+"""Hae sivuobjekti sivupohjan mukaan"""
 enum TemplateEnum
   @join__type(graph: CMS)
 {
@@ -16165,7 +16216,7 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
   """The id field matches the WP_Post-&gt;ID field."""
   translationId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
-  """Translations"""
+  """Käännökset"""
   translations: [TranslationResponse]
 
   """The unique resource identifier path"""
@@ -16219,28 +16270,28 @@ enum TranslationIdType
   URI @join__enumValue(graph: CMS)
 }
 
-"""Translation with language/value pairs"""
+"""Käännöksen kieli/arvo-parit"""
 type TranslationItems
   @join__type(graph: CMS)
 {
-  """Translation string"""
+  """Käännöksen merkkijono"""
   en: String
 
-  """Translation string"""
+  """Käännöksen merkkijono"""
   fi: String
 
-  """Translation string"""
+  """Käännöksen merkkijono"""
   sv: String
 }
 
-"""Translation response contains translation key and translations"""
+"""Käännösvastaus sisältää käännösavaimen ja käännökset"""
 type TranslationResponse
   @join__type(graph: CMS)
 {
-  """Translation key for frontend"""
+  """Käyttöliittymän käännösavain"""
   key: String
 
-  """Translations for frontend"""
+  """Käännökset käyttöliittymälle"""
   translations: TranslationItems
 }
 
@@ -16490,7 +16541,7 @@ input UpdateCollectionInput
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -16557,7 +16608,7 @@ input UpdateCommentInput
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day ( e.g. 01/31/2017 ) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -16602,7 +16653,7 @@ input UpdateContactInput
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -16651,7 +16702,7 @@ input UpdateLandingPageInput
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -16775,7 +16826,7 @@ input UpdatePageInput
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -16876,7 +16927,7 @@ input UpdatePostInput
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -16934,7 +16985,7 @@ input UpdateReleaseInput
   content: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -17109,7 +17160,7 @@ input UpdateTranslationInput
   clientMutationId: String
 
   """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
   """
   date: String
 
@@ -17699,7 +17750,7 @@ enum UsersConnectionSearchColumnEnum
   """A URL-friendly name for the user. The default is the user's username."""
   NICENAME @join__enumValue(graph: CMS)
 
-  """The URL of the user's website."""
+  """The URL of the user\s website."""
   URL @join__enumValue(graph: CMS)
 }
 

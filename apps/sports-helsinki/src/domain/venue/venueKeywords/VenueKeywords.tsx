@@ -6,7 +6,7 @@ import {
   scrollToTop,
   buildQueryFromObject,
 } from '@events-helsinki/components';
-import { capitalize } from 'lodash';
+import capitalize from 'lodash/capitalize';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';

@@ -6,7 +6,7 @@ import type {
   Coordinates,
 } from '@events-helsinki/components/types';
 import { EventTypeId } from '@events-helsinki/components/types';
-import { upperFirst } from 'lodash';
+import upperFirst from 'lodash/upperFirst';
 import qs from 'query-string';
 import { initialCombinedSearchFormValues } from '../constants';
 import type {

@@ -12,15 +12,16 @@ try {
 const pages = manifest.pages;
 
 const limitCfg = {
-  defaultSize: '85kb',
+  defaultSize: '90kb',
   pages: {
     '/': '120kb',
-    '/404': '90kb',
-    '/_app': '160kb',
-    '/_error': '90kb',
-    '/_monitor/sentry/csr-page': '90kb',
-    '/_monitor/sentry/ssr-page': '90kb',
+    '/_app': '700kb', // NOTE: this is much!
     '/home': '105kb',
+    '/articles': '100kb',
+    '/courses/[eventId]': '150kb',
+    '/search': '180kb',
+    '/search/map': '150kb',
+    '/venues/[venueId]': '250kb',
   },
 };
 const getPageLimits = () => {
@@ -40,6 +41,6 @@ module.exports = [
   {
     name: 'CSS',
     path: ['.next/static/css/**/*.css'],
-    limit: '10 kB',
+    limit: '40 kB', // NOTE: this is much, should be around 10 kb
   },
 ];

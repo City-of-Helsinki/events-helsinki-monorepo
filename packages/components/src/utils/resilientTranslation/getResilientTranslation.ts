@@ -22,7 +22,7 @@ const RESILIENT_TRANSLATIONS = {
   },
   'appSports:appName': {
     en: 'Sports and recreation',
-    fi: 'Helsinki Liikkuu',
+    fi: 'Helsinki liikkuu',
     sv: 'Idrott och motion',
   },
   'errors:feedbackFormLink': {

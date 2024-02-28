@@ -181,11 +181,12 @@ export const ARTS_AND_CULTURE_COURSES_KEYWORDS = [
 ];
 
 export const VISUAL_ARTS_COURSES_KEYWORDS = [
-  'kulke:81',
-  'yso:p1148',
-  'yso:p38773',
-  'yso:p8883',
-  'yso:p695',
+  'kulke:81', // Sarjakuva
+  'yso:p1148', // sarjakuvat / comics
+  'yso:p2739', // kuvataide / fine arts
+  'yso:p38773', // sarjakuvataide / comic art
+  'yso:p8883', // maalaustaide / painting (visual arts)
+  'yso:p695', // piirtäminen (taide) / drawing (artistic creation)
 ];
 
 export const HANDICRAFTS_COURSES_KEYWORDS = [

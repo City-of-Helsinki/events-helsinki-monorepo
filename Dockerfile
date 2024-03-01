@@ -7,7 +7,6 @@
 #   2. depend on .dockerignore, you must at least                 #
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
-ARG BUILDER_FROM_IMAGE=deps
 FROM registry.access.redhat.com/ubi9/nodejs-20 AS deps
 
 # install yarn
@@ -76,7 +75,7 @@ RUN yum remove -y rsync && \
 ###################################################################
 # Stage 2: Build the app                                          #
 ###################################################################
-FROM ${BUILDER_FROM_IMAGE} AS builder
+FROM deps AS builder
 # Build ARGS
 ARG PROJECT
 ARG CMS_ORIGIN

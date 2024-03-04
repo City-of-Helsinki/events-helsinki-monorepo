@@ -12490,6 +12490,41 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']['output']>;
 };
 
+export type PageByTemplateBreadcrumbTitleQueryVariables = Exact<{
+  template?: InputMaybe<TemplateEnum>;
+  language?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+export type PageByTemplateBreadcrumbTitleQuery = {
+  __typename?: 'Query';
+  pageByTemplate?: {
+    __typename?: 'Page';
+    title?: string | null;
+    breadcrumbs?: Array<{
+      __typename?: 'Breadcrumb';
+      title?: string | null;
+      uri?: string | null;
+    } | null> | null;
+  } | null;
+};
+
+export type PageBreadcrumbTitleQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+export type PageBreadcrumbTitleQuery = {
+  __typename?: 'Query';
+  page?: {
+    __typename?: 'Page';
+    title?: string | null;
+    breadcrumbs?: Array<{
+      __typename?: 'Breadcrumb';
+      title?: string | null;
+      uri?: string | null;
+    } | null> | null;
+  } | null;
+};
+
 export type LocalizedFieldsFragment = {
   __typename?: 'LocalizedObject';
   en?: string | null;
@@ -14404,6 +14439,134 @@ export const VenueFieldsFragmentDoc = gql`
     }
   }
 `;
+export const PageByTemplateBreadcrumbTitleDocument = gql`
+  query pageByTemplateBreadcrumbTitle(
+    $template: TemplateEnum
+    $language: String
+  ) {
+    pageByTemplate(template: $template, language: $language) {
+      title
+      breadcrumbs {
+        title
+        uri
+      }
+    }
+  }
+`;
+
+/**
+ * __usePageByTemplateBreadcrumbTitleQuery__
+ *
+ * To run a query within a React component, call `usePageByTemplateBreadcrumbTitleQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageByTemplateBreadcrumbTitleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageByTemplateBreadcrumbTitleQuery({
+ *   variables: {
+ *      template: // value for 'template'
+ *      language: // value for 'language'
+ *   },
+ * });
+ */
+export function usePageByTemplateBreadcrumbTitleQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    PageByTemplateBreadcrumbTitleQuery,
+    PageByTemplateBreadcrumbTitleQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    PageByTemplateBreadcrumbTitleQuery,
+    PageByTemplateBreadcrumbTitleQueryVariables
+  >(PageByTemplateBreadcrumbTitleDocument, options);
+}
+export function usePageByTemplateBreadcrumbTitleLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PageByTemplateBreadcrumbTitleQuery,
+    PageByTemplateBreadcrumbTitleQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    PageByTemplateBreadcrumbTitleQuery,
+    PageByTemplateBreadcrumbTitleQueryVariables
+  >(PageByTemplateBreadcrumbTitleDocument, options);
+}
+export type PageByTemplateBreadcrumbTitleQueryHookResult = ReturnType<
+  typeof usePageByTemplateBreadcrumbTitleQuery
+>;
+export type PageByTemplateBreadcrumbTitleLazyQueryHookResult = ReturnType<
+  typeof usePageByTemplateBreadcrumbTitleLazyQuery
+>;
+export type PageByTemplateBreadcrumbTitleQueryResult = Apollo.QueryResult<
+  PageByTemplateBreadcrumbTitleQuery,
+  PageByTemplateBreadcrumbTitleQueryVariables
+>;
+export const PageBreadcrumbTitleDocument = gql`
+  query pageBreadcrumbTitle($id: ID!) {
+    page(id: $id, idType: URI) {
+      title
+      breadcrumbs {
+        title
+        uri
+      }
+    }
+  }
+`;
+
+/**
+ * __usePageBreadcrumbTitleQuery__
+ *
+ * To run a query within a React component, call `usePageBreadcrumbTitleQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageBreadcrumbTitleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageBreadcrumbTitleQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePageBreadcrumbTitleQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    PageBreadcrumbTitleQuery,
+    PageBreadcrumbTitleQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    PageBreadcrumbTitleQuery,
+    PageBreadcrumbTitleQueryVariables
+  >(PageBreadcrumbTitleDocument, options);
+}
+export function usePageBreadcrumbTitleLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    PageBreadcrumbTitleQuery,
+    PageBreadcrumbTitleQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    PageBreadcrumbTitleQuery,
+    PageBreadcrumbTitleQueryVariables
+  >(PageBreadcrumbTitleDocument, options);
+}
+export type PageBreadcrumbTitleQueryHookResult = ReturnType<
+  typeof usePageBreadcrumbTitleQuery
+>;
+export type PageBreadcrumbTitleLazyQueryHookResult = ReturnType<
+  typeof usePageBreadcrumbTitleLazyQuery
+>;
+export type PageBreadcrumbTitleQueryResult = Apollo.QueryResult<
+  PageBreadcrumbTitleQuery,
+  PageBreadcrumbTitleQueryVariables
+>;
 export const EventDetailsDocument = gql`
   query EventDetails($id: ID!, $include: [String]) {
     eventDetails(id: $id, include: $include) {

@@ -5,15 +5,26 @@ import {
   FooterSection,
   getLanguageOrDefault,
   useResilientTranslation,
+  PageBreadcrumbTitleDocument,
+  getFilteredBreadcrumbs,
+  getEventFields,
 } from '@events-helsinki/components';
 import type {
   EventFields,
   EventDetailsQuery,
   EventDetailsQueryVariables,
+  PageBreadcrumbTitleQuery,
+  PageBreadcrumbTitleQueryVariables,
 } from '@events-helsinki/components';
+import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
-import { Page as RHHCPage } from 'react-helsinki-headless-cms';
+import type { PageType } from 'react-helsinki-headless-cms';
+import {
+  Page as RHHCPage,
+  getBreadcrumbsFromPage,
+} from 'react-helsinki-headless-cms';
+import { ROUTES } from '../../../constants';
 import AppConfig from '../../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../../domain/app/getHobbiesStaticProps';
 import EventPageContainer from '../../../domain/event/EventPageContainer';
@@ -22,7 +33,8 @@ import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTra
 const Event: NextPage<{
   event: EventFields;
   loading: boolean;
-}> = ({ event, loading }) => {
+  breadcrumbs?: BreadcrumbListItem[];
+}> = ({ event, loading, breadcrumbs }) => {
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
   return (
@@ -31,6 +43,7 @@ const Event: NextPage<{
       navigation={<Navigation />}
       content={
         <EventPageContainer
+          breadcrumbs={breadcrumbs}
           event={event}
           loading={loading}
           showSimilarEvents={AppConfig.showSimilarEvents}
@@ -58,27 +71,45 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getHobbiesStaticProps(context, async ({ apolloClient }) => {
     const language = getLanguageOrDefault(context.locale);
+    const id = (context.params?.eventId as string) || '';
     const { data: eventData, loading } = await apolloClient.query<
       EventDetailsQuery,
       EventDetailsQueryVariables
     >({
       query: EventDetailsDocument,
       variables: {
-        id: (context.params?.eventId as string) || '',
+        id,
         include: ['in_language', 'keywords', 'location', 'audience'],
       },
     });
-    if (!eventData) {
+    const event = eventData?.eventDetails;
+
+    if (!event) {
       return {
         notFound: true,
       };
     }
-    const event = eventData?.eventDetails;
+
+    const { data: pageBreadcrumbTitleData } = await apolloClient.query<
+      PageBreadcrumbTitleQuery,
+      PageBreadcrumbTitleQueryVariables
+    >({
+      query: PageBreadcrumbTitleDocument,
+      variables: {
+        id: `/${language}${ROUTES.SEARCH}/`,
+      },
+    });
+    const searchPage = pageBreadcrumbTitleData.page;
+    const breadcrumbs: BreadcrumbListItem[] = [
+      ...getFilteredBreadcrumbs(getBreadcrumbsFromPage(searchPage as PageType)),
+      { title: getEventFields(event, language)?.name ?? id, path: null },
+    ];
 
     return {
       props: {
         event,
         loading,
+        breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, [
           'search',
           'event',

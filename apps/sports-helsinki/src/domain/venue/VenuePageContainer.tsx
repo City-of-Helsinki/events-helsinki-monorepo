@@ -5,8 +5,10 @@ import {
   addParamsToQueryString,
   MAIN_CONTENT_ID,
   RouteMeta,
+  BreadcrumbContainer,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
+import type { BreadcrumbListItem } from 'hds-react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -42,6 +44,7 @@ export interface VenuePageContainerProps {
   venue: Venue | undefined;
   showUpcomingEvents?: boolean;
   showSimilarVenues?: boolean;
+  breadcrumbs?: BreadcrumbListItem[];
 }
 
 const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
@@ -49,6 +52,7 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
   loading,
   showUpcomingEvents = true,
   showSimilarVenues = true,
+  breadcrumbs,
 }) => {
   const venueId = venue?.id ?? '';
   const { t } = useTranslation('event');
@@ -78,6 +82,7 @@ const VenuePageContainer: React.FC<VenuePageContainerProps> = ({
 
   return (
     <div className={styles.venuePageWrapper}>
+      {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
       <main id={MAIN_CONTENT_ID}>
         <LoadingSpinner isLoading={loading}>
           {venue ? (

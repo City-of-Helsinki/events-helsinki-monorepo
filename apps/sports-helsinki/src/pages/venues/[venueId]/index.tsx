@@ -6,15 +6,25 @@ import {
   getLanguageOrDefault,
   usePageScrollRestoration,
   useResilientTranslation,
+  PageBreadcrumbTitleDocument,
+  getFilteredBreadcrumbs,
 } from '@events-helsinki/components';
 import type {
+  PageBreadcrumbTitleQuery,
+  PageBreadcrumbTitleQueryVariables,
   Venue,
   VenueQuery,
   VenueQueryVariables,
 } from '@events-helsinki/components';
+import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
-import { Page as RHHCPage } from 'react-helsinki-headless-cms';
+import type { PageType } from 'react-helsinki-headless-cms';
+import {
+  Page as RHHCPage,
+  getBreadcrumbsFromPage,
+} from 'react-helsinki-headless-cms';
+import { ROUTES } from '../../../constants';
 import AppConfig from '../../../domain/app/AppConfig';
 import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
@@ -23,7 +33,8 @@ import VenuePageContainer from '../../../domain/venue/VenuePageContainer';
 const VenuePage: NextPage<{
   venue: Venue;
   loading: boolean;
-}> = ({ venue, loading }) => {
+  breadcrumbs?: BreadcrumbListItem[];
+}> = ({ venue, loading, breadcrumbs }) => {
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
   usePageScrollRestoration();
@@ -33,6 +44,7 @@ const VenuePage: NextPage<{
       navigation={<Navigation />}
       content={
         <VenuePageContainer
+          breadcrumbs={breadcrumbs}
           venue={venue}
           loading={loading}
           showSimilarVenues={AppConfig.showSimilarVenues}
@@ -100,10 +112,26 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       };
     }
 
+    const { data: pageBreadcrumbTitleData } = await apolloClient.query<
+      PageBreadcrumbTitleQuery,
+      PageBreadcrumbTitleQueryVariables
+    >({
+      query: PageBreadcrumbTitleDocument,
+      variables: {
+        id: `/${language}${ROUTES.SEARCH}/`,
+      },
+    });
+    const searchPage = pageBreadcrumbTitleData.page;
+    const breadcrumbs: BreadcrumbListItem[] = [
+      ...getFilteredBreadcrumbs(getBreadcrumbsFromPage(searchPage as PageType)),
+      { title: venueData.venue.name ?? id, path: null },
+    ];
+
     return {
       props: {
         venue,
         loading,
+        breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, [
           'search',
           'venue',

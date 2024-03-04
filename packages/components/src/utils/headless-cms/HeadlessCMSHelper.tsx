@@ -1,4 +1,5 @@
 import format from 'date-fns/format';
+import type { BreadcrumbListItem } from 'hds-react';
 import parse from 'html-react-parser';
 import React from 'react';
 import type {
@@ -28,6 +29,17 @@ import {
   LocationsSelectionCollection,
 } from 'react-helsinki-headless-cms';
 import type { AppLanguage } from '../../types';
+
+/**
+ * A braedcrumb title of article archive in every language.
+ * @deprecated Needed only while the CMS does not offer the article archive in the breadcrumb module.
+ * */
+export const defaultArticleArchiveBreadcrumbTitle: Record<AppLanguage, string> =
+  {
+    fi: 'Artikkelit',
+    sv: 'Artiklar',
+    en: 'Articles',
+  };
 
 export interface HeadlessCMSApp {
   cmsArticlesContextPath: string;
@@ -247,5 +259,28 @@ export class HeadlessCMSHelper {
       }
       return collectionElements;
     }, []);
+  }
+
+  /**
+   * The article archive should always be the second item in the breadcrumbs list.
+   * If the article archive is missing from the breadcrumbs, but is wanted to be included,
+   * the withArticleArchiveBreadcrumb forces the article archive breadcrumb.
+   * @deprecated The breadcrumbs should be handled from the CMS-site and the HCRC-lib takes care of it.
+   * While the article archive is never included in the breadcrumbs that the CMS serves,
+   * this method fullfills the need.
+   * */
+  withArticleArchiveBreadcrumb(
+    breadcrumbs: BreadcrumbListItem[],
+    articlesTitle: string
+  ) {
+    if (breadcrumbs[1].path !== this.cmsArticlesContextPath) {
+      const [firstItem, ...rest] = breadcrumbs;
+      const articleArchive: BreadcrumbListItem = {
+        title: articlesTitle,
+        path: this.cmsArticlesContextPath,
+      };
+      return [firstItem, articleArchive, ...rest];
+    }
+    return breadcrumbs;
   }
 }

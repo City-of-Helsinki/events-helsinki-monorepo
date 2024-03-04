@@ -11,7 +11,9 @@ import {
   RouteMeta,
   useResilientTranslation,
   getLanguageCodeFilter,
+  getFilteredBreadcrumbs,
 } from '@events-helsinki/components';
+import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
@@ -23,6 +25,7 @@ import {
   SearchPageContent,
   useConfig,
   TemplateEnum,
+  getBreadcrumbsFromPage,
 } from 'react-helsinki-headless-cms';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
 import {
@@ -51,7 +54,11 @@ interface ArticleFilters {
 
 export default function ArticleArchive({
   page,
-}: SportsGlobalPageProps & { page: PageType }) {
+  breadcrumbs,
+}: SportsGlobalPageProps & {
+  page: PageType;
+  breadcrumbs?: BreadcrumbListItem[];
+}) {
   const router = useRouter();
   const { resilientT } = useResilientTranslation();
 
@@ -152,6 +159,7 @@ export default function ArticleArchive({
           <RouteMeta origin={AppConfig.origin} page={page} />
           <SearchPageContent
             page={page}
+            breadcrumbs={breadcrumbs}
             isLoading={isLoading || isLoadingMore}
             className="articlesArchive"
             noResults={!isLoading && articles?.length === 0}
@@ -160,7 +168,6 @@ export default function ArticleArchive({
             currentTags={currentCategories}
             currentText={text ?? ''}
             withQuery
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             onSearch={(freeSearch, tags) => {
               const query: ParsedUrlQueryInput = getArticlesSearchQuery(
                 freeSearch,
@@ -219,7 +226,6 @@ export default function ArticleArchive({
 
                     text: '', // A design decision: The text is not wanted in the small cards
                   }}
-                  // todo: fix any type
                   customContent={
                     <ArticleDetails
                       keywords={
@@ -267,9 +273,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       };
     }
     const page = pageData.pageByTemplate;
+    const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
     return {
       props: {
         page,
+        breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, ['event'])),
       },
     };

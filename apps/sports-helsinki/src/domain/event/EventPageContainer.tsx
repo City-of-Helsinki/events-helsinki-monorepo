@@ -10,8 +10,10 @@ import {
   EventPageMeta,
   EventContent,
   RouteMeta,
+  BreadcrumbContainer,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
+import type { BreadcrumbListItem } from 'hds-react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -36,12 +38,14 @@ export interface EventPageContainerProps {
   loading: boolean;
   event?: EventFields;
   showSimilarEvents?: boolean;
+  breadcrumbs?: BreadcrumbListItem[];
 }
 
 const EventPageContainer: React.FC<EventPageContainerProps> = ({
   event,
   loading,
   showSimilarEvents = true,
+  breadcrumbs,
 }) => {
   const { t } = useTranslation('event');
   const router = useRouter();
@@ -66,6 +70,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
   const similarEventsFilters = useSimilarEventsQueryVariables(event!);
   return (
     <div className={styles.eventPageWrapper}>
+      {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
       <main id={MAIN_CONTENT_ID}>
         <LoadingSpinner isLoading={loading}>
           {event ? (

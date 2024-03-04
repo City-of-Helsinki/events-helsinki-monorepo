@@ -10,21 +10,20 @@ import {
   getLanguageOrDefault,
   FooterSection,
   RouteMeta,
+  getFilteredBreadcrumbs,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
+import type { BreadcrumbListItem } from 'hds-react';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
   NextPage,
 } from 'next';
 import { useContext } from 'react';
-import type {
-  Breadcrumb,
-  CollectionType,
-  PageType,
-} from 'react-helsinki-headless-cms';
+import type { CollectionType, PageType } from 'react-helsinki-headless-cms';
 import {
   getCollections,
+  getBreadcrumbsFromPage,
   PageContent as RHHCPageContent,
   Page as RHHCPage,
   useConfig,
@@ -42,8 +41,9 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 const NextCmsPage: NextPage<{
   page: PageType;
+  breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ page, collections }) => {
+}> = ({ page, breadcrumbs, collections }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
@@ -63,6 +63,9 @@ const NextCmsPage: NextPage<{
           <RouteMeta origin={AppConfig.origin} page={page} />
           <RHHCPageContent
             page={page}
+            breadcrumbs={
+              breadcrumbs && breadcrumbs.length > 0 ? breadcrumbs : undefined
+            }
             collections={
               collections
                 ? cmsHelper.getDefaultCollections(page, getRoutedInternalHref)
@@ -109,7 +112,7 @@ type ResultProps =
   | {
       initialApolloState: NormalizedCacheObject;
       page: PageQuery['page'];
-      breadcrumbs: Breadcrumb[];
+      breadcrumbs?: BreadcrumbListItem[];
       collections: CollectionType[];
     }
   | {
@@ -180,13 +183,11 @@ const getProps = async (context: GetStaticPropsContext) => {
   });
 
   const currentPage = pageData.page;
-  // TODO: Breadcrumbs are unstyled, so left disabled
-  // const breadcrumbs = _getBreadcrumbs(
-  //   apolloClient,
-  //   (context.params?.slug ?? []) as string[]
-  // );
+  const breadcrumbs = getFilteredBreadcrumbs(
+    getBreadcrumbsFromPage(currentPage)
+  );
 
-  return { currentPage, breadcrumbs: [], apolloClient: eventsApolloClient };
+  return { currentPage, breadcrumbs, apolloClient: eventsApolloClient };
 };
 
 /**
@@ -209,32 +210,5 @@ function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
   // to be subpages for a page with slug 'pages'
   return `${AppConfig.cmsPagesContextPath}${uri}`;
 }
-
-// async function _getBreadcrumbs(
-//   apolloClient: ApolloClient<NormalizedCacheObject>,
-//   slugs: string[]
-// ) {
-//   // Fetch all parent pages for navigation data.
-//   // These breadcrumb uris are used to fetch all the parent pages of the current page
-//   // so that all the childrens of parent page can be figured out and sub page navigations can be formed
-//   // for rendering
-//   const uriSegments = slugsToUriSegments(slugs);
-//   const apolloPageResponses = await Promise.all(
-//     uriSegments.map((uri) => {
-//       return apolloClient.query<PageQuery, PageQueryVariables>({
-//         query: PageDocument,
-//         variables: {
-//           id: uri,
-//         },
-//       });
-//     })
-//   );
-//   const pages = apolloPageResponses.map((res) => res.data.page);
-//   const breadcrumbs = pages.map((page) => ({
-//     link: page?.link ?? '',
-//     title: page?.title ?? '',
-//   }));
-//   return breadcrumbs;
-// }
 
 export default NextCmsPage;

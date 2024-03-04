@@ -114,5 +114,6 @@
     "showSearchParameters": "Show search",
     "hideSearchParameters": "Hide search",
     "showSearchParametersA11y": "Go to the search form"
-  }
+  },
+  "cookies": "Cookies"
 }

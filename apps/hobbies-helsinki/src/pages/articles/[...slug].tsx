@@ -10,9 +10,19 @@ import {
   useResilientTranslation,
   RouteMeta,
   getLanguageCodeFilter,
+  getFilteredBreadcrumbs,
+  TemplateEnum,
+  getQlLanguage,
+  defaultArticleArchiveBreadcrumbTitle,
+  PageByTemplateBreadcrumbTitleDocument,
 } from '@events-helsinki/components';
-import type { AppLanguage } from '@events-helsinki/components';
+import type {
+  AppLanguage,
+  PageByTemplateBreadcrumbTitleQuery,
+  PageByTemplateBreadcrumbTitleQueryVariables,
+} from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
+import type { BreadcrumbListItem } from 'hds-react';
 import type {
   GetStaticPropsContext,
   GetStaticPropsResult,
@@ -20,16 +30,13 @@ import type {
 } from 'next';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
-import type {
-  Breadcrumb,
-  CollectionType,
-  ArticleType,
-} from 'react-helsinki-headless-cms';
+import type { CollectionType, ArticleType } from 'react-helsinki-headless-cms';
 import {
   getCollections,
   PageContent as RHHCPageContent,
   Page as RHHCPage,
   useConfig,
+  getBreadcrumbsFromPage,
 } from 'react-helsinki-headless-cms';
 import type {
   ArticleQuery,
@@ -50,7 +57,7 @@ const CATEGORIES_AMOUNT = 20;
 
 const NextCmsArticle: NextPage<{
   article: ArticleType;
-  breadcrumbs: Breadcrumb[] | null;
+  breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
 }> = ({ article, breadcrumbs, collections }) => {
   const router = useRouter();
@@ -152,7 +159,7 @@ type ResultProps =
   | {
       initialApolloState: NormalizedCacheObject;
       article: ArticleQuery['post'];
-      breadcrumbs: Breadcrumb[];
+      breadcrumbs?: BreadcrumbListItem[];
       collections: CollectionType[];
     }
   | {
@@ -224,10 +231,24 @@ const getProps = async (context: GetStaticPropsContext) => {
     fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
   });
 
+  const { data: articleArchiveTitleData } = await hobbiesApolloClient.query<
+    PageByTemplateBreadcrumbTitleQuery,
+    PageByTemplateBreadcrumbTitleQueryVariables
+  >({
+    query: PageByTemplateBreadcrumbTitleDocument,
+    variables: {
+      template: TemplateEnum.PostsPage,
+      language: getQlLanguage(language).toLocaleLowerCase(),
+    },
+  });
+
   const currentArticle = articleData.post;
 
-  // TODO: Breadcrumbs are unstyled, so left disabled
-  const breadcrumbs: Breadcrumb[] = []; // await _getBreadcrumbs(cmsClient, currentArticle);
+  const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
+    getFilteredBreadcrumbs(getBreadcrumbsFromPage(currentArticle)),
+    articleArchiveTitleData?.pageByTemplate?.title ??
+      defaultArticleArchiveBreadcrumbTitle[language]
+  );
 
   return { currentArticle, breadcrumbs, apolloClient: hobbiesApolloClient };
 };
@@ -249,33 +270,5 @@ function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
   // when it's included in the article URL settings
   return `${AppConfig.cmsArticlesContextPath}${uri}`;
 }
-
-// async function _getBreadcrumbs(
-//   cmsClient: ApolloClient<NormalizedCacheObject>,
-//   currentArticle: ArticleType
-// ) {
-//   // Fetch all parent pages for navigation data
-//   const uriSegments = [ROUTES.ARTICLE_ARCHIVE];
-//   const apolloPageResponses = await Promise.all(
-//     uriSegments.map((uri) => {
-//       return cmsClient.query<PageQuery, PageQueryVariables>({
-//         query: PageDocument,
-//         variables: {
-//           id: uri,
-//         },
-//       });
-//     })
-//   );
-//   const pages = apolloPageResponses.map((res) => res.data.page);
-//   const breadcrumbs = pages
-//     .map((page) => ({
-//       link: page?.link ?? '',
-//       title: page?.title ?? '',
-//     }))
-//     .concat([
-//       { link: currentArticle?.link ?? '', title: currentArticle?.title ?? '' },
-//     ]);
-//   return breadcrumbs;
-// }
 
 export default NextCmsArticle;

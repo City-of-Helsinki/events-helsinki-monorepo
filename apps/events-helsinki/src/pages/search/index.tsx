@@ -7,13 +7,19 @@ import {
   RouteMeta,
   PageMeta,
   useResilientTranslation,
+  getFilteredBreadcrumbs,
+  BreadcrumbContainer,
 } from '@events-helsinki/components';
 import { usePageScrollRestoration } from '@events-helsinki/components/src/hooks';
+import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
-import { Page as RHHCPage } from 'react-helsinki-headless-cms';
+import {
+  Page as RHHCPage,
+  getBreadcrumbsFromPage,
+} from 'react-helsinki-headless-cms';
 import type {
   PageQuery,
   PageQueryVariables,
@@ -29,7 +35,8 @@ import SearchPage from '../../domain/search/eventSearch/SearchPage';
 
 const Search: NextPage<{
   page: PageType;
-}> = ({ page }) => {
+  breadcrumbs?: BreadcrumbListItem[];
+}> = ({ page, breadcrumbs }) => {
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
@@ -63,6 +70,7 @@ const Search: NextPage<{
         <>
           <RouteMeta origin={AppConfig.origin} />
           <PageMeta {...page?.seo} />
+          {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
           <SearchPage
             SearchComponent={AdvancedSearch}
             pageTitle={tAppEvents('appEvents:search.pageTitle')}
@@ -96,10 +104,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
     });
-
+    const page = pageData.page;
+    const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
     return {
       props: {
-        page: pageData.page,
+        page,
+        breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, [
           'event',
           'search',

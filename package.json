@@ -110,6 +110,7 @@
     "dotenv-expand": "10.0.0",
     "edit-json-file": "1.7.0",
     "env-cmd": "10.1.0",
+    "esbuild": "0.20.1",
     "eslint": "8.43.0",
     "git-rev-sync": "3.0.2",
     "hds-react": "^3.5.0",

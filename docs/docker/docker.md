@@ -165,6 +165,31 @@ DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml --env-file .env.s
   
 </details>
 
+## Cached docker image
+
+The Openshift environment (that the project uses) does not support caching of the multistage builds. Because of that, we are first creating a cache image out of the deps that the apps needs. We then use the cached image as a base for the actual runner image.
+
+There are 2 different apps related docker files:
+
+1. [Dockerfile](../../Dockerfile), to define a multistage (deps, builder, runner) image for the apps
+2. [DockerfileCache](../../DockerfileCache), to define a cache image for the apps dependencies, which can be used as a base image when building the app image multiple times in the CI pipelines.
+
+### How to build locally
+
+Using the Sports-Helsinki app as an example.
+
+Build the cache-image (for the Sports-Helsinki app):
+
+```
+docker-compose -f docker-compose.sports.yml --env-file ./apps/sports-helsinki/.env.local build cache
+```
+
+Build the app runner image (for the Sports-Helsinki app) by using the cache-image as a base image:
+
+```
+BUILDER_FROM_IMAGE=events-helsinki-monorepo-cache:latest docker-compose -f docker-compose.sports.yml --env-file ./apps/sports-helsinki/.env.local build runner
+```
+
 ## Remove docker
 
 ### Cleanup

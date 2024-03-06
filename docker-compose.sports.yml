@@ -51,8 +51,10 @@ services:
       dockerfile: Dockerfile
       target: builder
       args:
+        - BUILDER_FROM_IMAGE=${BUILDER_FROM_IMAGE:-helsinkitest/node:20-slim}
         - APP_PORT=3000
         - PROJECT=sports-helsinki
+        - SKIP_BUILD_STATIC_GENERATION=${SKIP_BUILD_STATIC_GENERATION:-1}
 
   # Convenience production "cache" stage service for debugging
   # Build > docker buildx bake -f docker-compose.sports.yml --progress=tty cache
@@ -69,6 +71,42 @@ services:
       args:
         - APP_PORT=3000
         - PROJECT=sports-helsinki
+        - SKIP_BUILD_STATIC_GENERATION=1
+        - NEXTJS_DISABLE_SENTRY=true
+        - SENTRY_AUTH_TOKEN
+        - FEDERATION_ROUTER_ENDPOINT
+        - CMS_ORIGIN
+        - LINKEDEVENTS_EVENT_ENDPOINT
+        - NEXT_PUBLIC_APP_ORIGIN
+        - NEXT_PUBLIC_MATOMO_URL_BASE
+        - NEXT_PUBLIC_MATOMO_SITE_ID
+        - NEXT_PUBLIC_MATOMO_SRC_URL
+        - NEXT_PUBLIC_MATOMO_TRACKER_URL
+        - NEXT_PUBLIC_MATOMO_ENABLED
+        - NEXT_PUBLIC_ASKEM_API_KEY_FI
+        - NEXT_PUBLIC_ASKEM_API_KEY_EN
+        - NEXT_PUBLIC_ASKEM_API_KEY_SV
+        - NEXT_PUBLIC_ASKEM_ENABLED
+        - NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS
+        - NEXT_PUBLIC_SENTRY_ENVIRONMENT
+        - NEXT_PUBLIC_SENTRY_DSN
+        - NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE
+        - NEXT_PUBLIC_DEBUG
+        - NEXT_PUBLIC_IMAGE_PROXY_URL
+        - NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS
+        - NEXT_PUBLIC_CMS_HEADER_MENU_NAME_FI
+        - NEXT_PUBLIC_CMS_HEADER_MENU_NAME_EN
+        - NEXT_PUBLIC_CMS_HEADER_MENU_NAME_SV
+        - NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_FI
+        - NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_EN
+        - NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_SV
+        - NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_FI
+        - NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_EN
+        - NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_SV
+        - NEXT_PUBLIC_CMS_ARTICLES_CONTEXT_PATH
+        - NEXT_PUBLIC_CMS_PAGES_CONTEXT_PATH
+        - NEXT_PUBLIC_RELEASE
+        - NEXT_PUBLIC_COMMITHASH
 
   # Convenience production "runner" stage service for debugging
   # Build > docker buildx bake -f docker-compose.sports-helsinki.yml --progress=tty runner
@@ -87,8 +125,10 @@ services:
       dockerfile: Dockerfile
       target: runner
       args:
+        - BUILDER_FROM_IMAGE=${BUILDER_FROM_IMAGE:-helsinkitest/node:20-slim}
         - APP_PORT=3000
         - PROJECT=sports-helsinki
+        - SKIP_BUILD_STATIC_GENERATION=${SKIP_BUILD_STATIC_GENERATION:-1}
         - NEXTJS_DISABLE_SENTRY=true
         - SENTRY_AUTH_TOKEN
         - FEDERATION_ROUTER_ENDPOINT

@@ -134,8 +134,6 @@ USER default
 
 # install cache
 RUN yarn install --immutable --inline-builds
-RUN yarn workspace ${PROJECT} share-static-hardlink
-RUN yarn workspace ${PROJECT} build
 
 # Create cache image
 FROM registry.access.redhat.com/ubi9/nodejs-20 AS cache
@@ -143,6 +141,3 @@ ARG PROJECT
 
 WORKDIR /app/.yarn/cache/
 COPY --from=build_cache --chown=default:root /app/.yarn/cache/ ./
-
-WORKDIR /app
-COPY --from=build_cache --chown=default:root /app/apps/${PROJECT}/.next/cache ./apps/${PROJECT}/.next/cache

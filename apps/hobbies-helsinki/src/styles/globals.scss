@@ -44,16 +44,19 @@ button {
 }
 
 ::placeholder {
+  font-size: var(--fontsize-body-m);
   color: var(--color-black-60);
 }
 
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
+  font-size: var(--fontsize-body-m);
   color: var(--color-black-60);
 }
 
 ::-ms-input-placeholder {
   /* Microsoft Edge */
+  font-size: var(--fontsize-body-m);
   color: var(--color-black-60);
 }
 

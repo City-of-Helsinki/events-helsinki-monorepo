@@ -8,15 +8,22 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-FROM helsinkitest/node:16-slim AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-20 AS deps
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends rsync
+USER root
+
+# install yarn
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+RUN yum -y install yarn
+
+# install rsync (to fetch cached files)
+RUN yum update -y && \
+    yum install -y rsync
 
 WORKDIR /workspace-install
 
-COPY --chown=appuser:appuser yarn.lock .yarnrc.yml ./
-COPY --chown=appuser:appuser .yarn/ ./.yarn/
+COPY --chown=default:root yarn.lock .yarnrc.yml ./
+COPY --chown=default:root .yarn/ ./.yarn/
 
 # Specific to monerepo's as docker COPY command is pretty limited
 # we use buidkit to prepare all files that are necessary for install
@@ -28,25 +35,25 @@ COPY --chown=appuser:appuser .yarn/ ./.yarn/
 #
 # Copy all files
 WORKDIR /docker-context
-COPY --chown=appuser:appuser . /docker-context
+COPY --chown=default:root . /docker-context
 
 # mount type bind is not supported on current version (4.10.35) of OpenShift build
 # RUN --mount=type=bind,source=./,target=/docker-context \
-RUN rsync -amv --delete \
-    --owner=appuser --group=appuser \
+RUN rsync -amv \
+    --chown=default:root \
     --exclude='node_modules' \
     --exclude='*/node_modules' \
     --include='package.json' \
     --include='*/' --exclude='*' \
     /docker-context/ /workspace-install/;
 
-RUN chown -R appuser:appuser .
+RUN chown -R default:root .
 
-# remove rsync and apt cache
-RUN apt-get remove -y rsync && \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /var/cache/apt/archives
+# remove rsync, unused dependencies, and clean yum cache
+RUN yum remove -y rsync && \
+    yum autoremove -y && \
+    yum clean all && \
+    rm -rf /var/cache/yum
 
 
 #
@@ -72,10 +79,16 @@ RUN apt-get remove -y rsync && \
 # Stage 2: Build the app                                          #
 ###################################################################
 
-FROM helsinkitest/node:16-slim  AS builder
+FROM registry.access.redhat.com/ubi9/nodejs-20 AS builder
+
+USER root
+
+# install yarn
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+RUN yum -y install yarn
 
 # Use non-root user
-USER appuser
+USER default
 
 ARG PROXY
 
@@ -109,8 +122,8 @@ ARG GRAPHQL_PROXY_SERVICE_MAP_DATASOURCE
 
 WORKDIR /app
 
-COPY --chown=appuser:appuser  . .
-COPY --from=deps --chown=appuser:appuser /workspace-install ./
+COPY --chown=default:root  . .
+COPY --from=deps --chown=default:root /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
 
@@ -125,10 +138,10 @@ RUN yarn workspace ${PROXY} build
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM helsinkitest/node:16-slim  AS develop
+FROM registry.access.redhat.com/ubi9/nodejs-20 AS develop
 
 # Use non-root user
-USER appuser
+USER default
 
 # Build ARGS
 ARG PROXY
@@ -140,14 +153,14 @@ ENV NODE_ENV=development
 WORKDIR /app
 
 # Copy the configuration files to the proxies/${PROXY} root
-COPY --from=builder --chown=appuser:appuser /app/proxies/${PROXY}/package.json ./proxies/${PROXY}/
+COPY --from=builder --chown=default:root /app/proxies/${PROXY}/package.json ./proxies/${PROXY}/
 
 # Copy the build files to the proxies/${PROXY} root
-COPY --from=builder --chown=appuser:appuser /app/proxies/${PROXY}/build ./proxies/${PROXY}/build
+COPY --from=builder --chown=default:root /app/proxies/${PROXY}/build ./proxies/${PROXY}/build
 
 # The root level files
-COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
-COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
+COPY --from=builder --chown=default:root /app/node_modules ./node_modules
+COPY --from=builder --chown=default:root /app/package.json ./package.json
 
 # Expose port
 EXPOSE ${GRAPHQL_PROXY_PORT:-4100}
@@ -161,7 +174,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM helsinkitest/node:16-slim AS runner
+FROM registry.access.redhat.com/ubi9/nodejs-20 AS runner
 
 # Build ARGS
 ARG PROXY
@@ -171,19 +184,19 @@ ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
 # Use non-root user
-USER appuser
+USER default
 
 WORKDIR /app
 
 # Copy the configuration files to the proxies/${PROXY} root
-COPY --from=builder --chown=appuser:appuser /app/proxies/${PROXY}/package.json ./proxies/${PROXY}/
+COPY --from=builder --chown=default:root /app/proxies/${PROXY}/package.json ./proxies/${PROXY}/
 
 # Copy the build files to the proxies/${PROXY} root
-COPY --from=builder --chown=appuser:appuser /app/proxies/${PROXY}/build ./proxies/${PROXY}/build
+COPY --from=builder --chown=default:root /app/proxies/${PROXY}/build ./proxies/${PROXY}/build
 
 # The root level files
-COPY --from=builder --chown=appuser:appuser /app/node_modules ./node_modules
-COPY --from=builder --chown=appuser:appuser /app/package.json ./package.json
+COPY --from=builder --chown=default:root /app/node_modules ./node_modules
+COPY --from=builder --chown=default:root /app/package.json ./package.json
 
 # Expose port
 EXPOSE ${GRAPHQL_PROXY_PORT:-4100}

@@ -76,10 +76,15 @@ function MapBox({
         <Text variant="body-l" className={styles.location}>
           {placeAddress}
         </Text>
-        <SecondaryLink className={styles.externalLink} href={hslDirectionsLink}>
+        <SecondaryLink
+          inlineIcons
+          className={styles.externalLink}
+          href={hslDirectionsLink}
+        >
           {t('common:mapBox.location.directionsHSL')}
         </SecondaryLink>
         <SecondaryLink
+          inlineIcons
           className={styles.externalLink}
           href={googleDirectionsLink}
         >

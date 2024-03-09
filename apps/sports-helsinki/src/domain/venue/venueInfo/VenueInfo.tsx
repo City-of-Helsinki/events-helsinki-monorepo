@@ -142,7 +142,7 @@ const VenueInformationLinksContainer = ({
         title={t('venue:info.labelVenueInformationLinks')}
       >
         {infoUrl && (
-          <SecondaryLink className={styles.link} href={infoUrl}>
+          <SecondaryLink inlineIcons className={styles.link} href={infoUrl}>
             {t('venue:info.link.website')}
           </SecondaryLink>
         )}
@@ -151,6 +151,7 @@ const VenueInformationLinksContainer = ({
             key={connection?.url}
             className={styles.link}
             href={connection?.url ?? ''}
+            inlineIcons
           >
             {connection?.name}
           </SecondaryLink>
@@ -175,12 +176,14 @@ const VenueRouteInfo = ({ venue }: { venue: Venue }) => {
       <SecondaryLink
         className={styles.link}
         href={getHSLDirectionsUrl(null, directionPoint)}
+        inlineIcons
       >
         {t('venue:location.directionsHSL')}
       </SecondaryLink>
       <SecondaryLink
         className={styles.link}
         href={getGoogleDirectionsUrl(null, directionPoint)}
+        inlineIcons
       >
         {t('venue:location.directionsGoogle')}
       </SecondaryLink>
@@ -226,6 +229,7 @@ const ServiceOwnerInfo = ({ venue }: { venue: Venue }) => {
             className={styles.link}
             variant="arrowRight"
             href={getHelsinkiOnlySearchUrl(venue, router, locale)}
+            inlineIcons
           >
             {t('info.link.searchByHelsinkiOnly')}
           </SecondaryLink>

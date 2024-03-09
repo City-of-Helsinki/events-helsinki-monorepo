@@ -202,6 +202,7 @@ const LocationInfo: React.FC<{ event: EventFields }> = ({ event }) => {
           showExternalIcon={false}
           variant="arrowRight"
           href={serviceMapUrl}
+          inlineIcons
         >
           {t('info.openMap')}
         </SecondaryLink>
@@ -264,6 +265,7 @@ const OtherInfo: React.FC<{
           className={styles.link}
           href={infoUrl}
           showExternalIcon={false}
+          inlineIcons
         >
           {t('info.linkWebPage')}
         </SecondaryLink>
@@ -281,6 +283,7 @@ const OtherInfo: React.FC<{
                 className={styles.link}
                 key={`externalLink-${index}`}
                 href={externalLink.link}
+                inlineIcons
               >
                 {translateValue('info.', externalLink.name, t)}
               </SecondaryLink>
@@ -308,10 +311,18 @@ const Directions: React.FC<{
       icon={<IconDirections aria-hidden />}
       title={t('info.labelDirections')}
     >
-      <SecondaryLink className={styles.link} href={googleDirectionsLink}>
+      <SecondaryLink
+        inlineIcons
+        className={styles.link}
+        href={googleDirectionsLink}
+      >
         {t('info.directionsGoogle')}
       </SecondaryLink>
-      <SecondaryLink className={styles.link} href={hslDirectionsLink}>
+      <SecondaryLink
+        inlineIcons
+        className={styles.link}
+        href={hslDirectionsLink}
+      >
         {t('info.directionsHSL')}
       </SecondaryLink>
     </InfoWithIcon>

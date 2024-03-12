@@ -57,6 +57,7 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
               <>
                 <div>{organizationName}</div>
                 <SecondaryLink
+                  inlineIcons
                   data-testid="publisherLink"
                   className={styles.link}
                   variant="arrowRight"
@@ -72,6 +73,7 @@ const OrganizationInfo: React.FC<Props> = ({ event }) => {
             )}
             {isHelsinkiCityOwned && (
               <SecondaryLink
+                inlineIcons
                 data-testid="helsinkiOnlyLink"
                 className={styles.link}
                 variant="arrowRight"

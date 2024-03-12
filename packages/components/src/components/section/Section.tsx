@@ -55,7 +55,7 @@ const Section = React.forwardRef<HTMLElement, Props>(
         {cta && title && (
           <header className={styles.sectionHeader}>
             {titleComponent}
-            <SecondaryLink variant="arrowRight" href={cta.href}>
+            <SecondaryLink inlineIcons variant="arrowRight" href={cta.href}>
               {cta.label}
             </SecondaryLink>
           </header>

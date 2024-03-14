@@ -140,6 +140,11 @@ RUN yarn workspace ${PROXY} build
 
 FROM registry.access.redhat.com/ubi9/nodejs-20 AS develop
 
+# install yarn
+USER root
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+RUN yum -y install yarn
+
 # Use non-root user
 USER default
 
@@ -176,12 +181,18 @@ CMD ["sh", "-c", "${DEV_START}"]
 
 FROM registry.access.redhat.com/ubi9/nodejs-20 AS runner
 
+
 # Build ARGS
 ARG PROXY
 ARG GRAPHQL_PROXY_PORT
 
 ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
+
+# install yarn
+USER root
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+RUN yum -y install yarn
 
 # Use non-root user
 USER default

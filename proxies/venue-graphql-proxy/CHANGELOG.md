@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.3.1...venue-graphql-proxy-v1.4.0) (2024-03-12)
+
+
+### Features
+
+* **router:** Upgrade the Apollo router docker image ([7a0bb67](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7a0bb6708193ab27606c56f3e1d061a4fff1262e))
+
+
+### Bug Fixes
+
+* Hero ui tweaks ([#531](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/531)) ([af11c1b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/af11c1bf2dacf1c9d4e2444db26f410123de021e))
+
 ## [1.3.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.3.0...venue-graphql-proxy-v1.3.1) (2024-01-03)
 
 ### Bug Fixes

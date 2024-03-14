@@ -230,6 +230,11 @@ ENV PORT ${APP_PORT:-3000}
 EXPOSE $PORT
 
 USER root
+
+# install diffutils (to fetch cached files)
+RUN yum update -y && \
+    yum install -y diffutils
+
 COPY --chown=default:root run_node.sh /app/run_node.sh
 RUN chgrp 0 /app/run_node.sh && chmod +x /app/run_node.sh
 USER default

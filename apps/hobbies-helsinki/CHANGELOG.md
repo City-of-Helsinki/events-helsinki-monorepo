@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.16.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.15.0...hobbies-helsinki-v2.16.0) (2024-03-14)
+
+
+### Features
+
+* Cms pages (dynamic page and article) uses the breadcrumbs from cms ([c250564](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c250564a8e955ab292e26e69da3c323967f0deac))
+
+
+### Bug Fixes
+
+* Docker image diff command usage ([f064d95](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f064d95f5a9529a1454be0674cd3963da875419d))
+* Remove page margin using !important in all globals.scss files ([76e978a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/76e978ad65fe744239224ce70bad16d21d7c6f28))
+* Sports appName case, add yso:p2739 to hobbies visual arts keywords ([a0b6067](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a0b606784200382a319f7a7a1817f78fb011ce01))
+* Strong fix html pages cms ([#654](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/654)) ([4d569d6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4d569d6caf4de14d77a3ff17c43a8c79410d118f))
+
 ## [2.15.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.14.0...hobbies-helsinki-v2.15.0) (2024-02-15)
 
 

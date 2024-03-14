@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.6.1...federation-router-v1.7.0) (2024-03-14)
+
+
+### Features
+
+* **dockerfile:** Use ubi9/nodejs-20 image & upgrade router v1.35-&gt;v1.40 ([eb2fbec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/eb2fbec5abf685eef1ce81db898e23035584df9b))
+
 ## [1.6.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.6.0...federation-router-v1.6.1) (2024-01-18)
 
 

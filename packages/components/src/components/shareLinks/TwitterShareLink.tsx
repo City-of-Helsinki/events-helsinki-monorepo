@@ -1,3 +1,4 @@
+import { IconX } from 'hds-react';
 import React from 'react';
 import { useCommonTranslation } from '../../hooks';
 import ShareLinkBase from './ShareLinkBase';
@@ -16,9 +17,7 @@ const TwitterShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
       queryParameters={queryParameters}
       windowName={linkLabel}
       linkLabel={linkLabel}
-      icon={
-        <img alt={linkLabel} src="/shared-assets/images/share/twitter.svg" />
-      }
+      icon={<IconX ariaLabel={linkLabel} />}
     />
   );
 };

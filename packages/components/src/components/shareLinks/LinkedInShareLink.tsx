@@ -1,3 +1,4 @@
+import { IconLinkedin } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import ShareLinkBase from './ShareLinkBase';
@@ -16,9 +17,7 @@ const LinkedInShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
       queryParameters={queryParameters}
       windowName={linkLabel}
       linkLabel={linkLabel}
-      icon={
-        <img alt={linkLabel} src="/shared-assets/images/share/linkedin.svg" />
-      }
+      icon={<IconLinkedin ariaLabel={linkLabel} />}
     />
   );
 };

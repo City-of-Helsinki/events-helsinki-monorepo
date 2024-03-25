@@ -1,3 +1,4 @@
+import { IconFacebook } from 'hds-react';
 import React from 'react';
 import { useCommonTranslation } from '../../hooks';
 import ShareLinkBase from './ShareLinkBase';
@@ -17,9 +18,7 @@ const FacebookShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
       queryParameters={queryParameters}
       windowName={linkLabel}
       linkLabel={linkLabel}
-      icon={
-        <img alt={linkLabel} src="/shared-assets/images/share/facebook.svg" />
-      }
+      icon={<IconFacebook ariaLabel={linkLabel} />}
     />
   );
 };

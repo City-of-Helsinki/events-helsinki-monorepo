@@ -1,17 +1,8 @@
+@import 'icons.module';
+
 // RNS i.e. React and Share i.e. Askem Classic custom stylings
 // @see https://docs.reactandshare.com/#custom-styling
 .rns {
-  --hel-icon--face-smile: url(/shared-assets/images/feedback/face-smile.svg);
-  --hel-icon--face-sad: url(/shared-assets/images/feedback/face-sad.svg);
-  --hel-icon--face-neutral: url(/shared-assets/images/feedback/face-neutral.svg);
-  --hel-icon--arrow-right: url(/shared-assets/images/feedback/arrow-right.svg);
-  --hel-icon--email: url(/shared-assets/images/feedback/envelope.svg);
-
-  --hel-icon--facebook: url(/shared-assets/images/share/facebook.svg);
-  --hel-icon--twitter: url(/shared-assets/images/share/x.svg);
-  --hel-icon--whatsapp: url(/shared-assets/images/share/whatsapp.svg);
-  --hel-icon--share: url(/shared-assets/images/share/share.svg);
-
   max-width: 1296px;
   margin-left: auto;
   margin-right: auto;
@@ -127,8 +118,7 @@
   content: '';
   display: flex;
   height: 24px;
-  -webkit-mask-image: var(--hel-icon--face-neutral);
-  mask-image: var(--hel-icon--face-neutral);
+  @extend .hds-icon--face-neutral;
   -webkit-mask-position: center;
   mask-position: center;
   -webkit-mask-repeat: no-repeat;
@@ -256,8 +246,7 @@
   .reactions
   .rns-reaction:first-child
   .rns-label::after {
-  -webkit-mask-image: var(--hel-icon--face-smile);
-  mask-image: var(--hel-icon--face-smile);
+  @extend .hds-icon--face-smile;
 }
 
 .rns
@@ -266,8 +255,7 @@
   .reactions
   .rns-reaction:last-child
   .rns-label::after {
-  -webkit-mask-image: var(--hel-icon--face-sad);
-  mask-image: var(--hel-icon--face-sad);
+  @extend .hds-icon--face-sad;
 }
 
 .rns .rns-plugin .rns-shares {
@@ -381,8 +369,7 @@
   content: '';
   display: flex;
   height: 32px;
-  -webkit-mask-image: var(--hel-icon--share);
-  mask-image: var(--hel-icon--share);
+  @extend .hds-icon--share;
   -webkit-mask-position: center;
   mask-position: center;
   -webkit-mask-repeat: no-repeat;
@@ -475,8 +462,7 @@
   .rns-shares-list
   .rns-share.rns-share-facebook
   .rns-share-button::before {
-  -webkit-mask-image: var(--hel-icon--facebook);
-  mask-image: var(--hel-icon--facebook);
+  @extend .hds-icon--facebook;
 }
 
 .rns
@@ -485,8 +471,7 @@
   .rns-shares-list
   .rns-share.rns-share-whatsapp
   .rns-share-button::before {
-  -webkit-mask-image: var(--hel-icon--whatsapp);
-  mask-image: var(--hel-icon--whatsapp);
+  @extend .hds-icon--whatsapp;
 }
 
 .rns
@@ -495,8 +480,7 @@
   .rns-shares-list
   .rns-share.rns-share-twitter
   .rns-share-button::before {
-  -webkit-mask-image: var(--hel-icon--twitter);
-  mask-image: var(--hel-icon--twitter);
+  @extend .hds-icon--x;
 }
 
 .rns
@@ -505,8 +489,7 @@
   .rns-shares-list
   .rns-share.rns-share-email
   .rns-share-button::before {
-  -webkit-mask-image: var(--hel-icon--email);
-  mask-image: var(--hel-icon--email);
+  @extend .hds-icon--envelope;
 }
 
 .rns .rns-plugin .rns-inputs {
@@ -574,8 +557,7 @@
   content: '';
   display: flex;
   height: 24px;
-  -webkit-mask-image: var(--hel-icon--arrow-right);
-  mask-image: var(--hel-icon--arrow-right);
+  @extend .hds-icon--arrow-right;
   -webkit-mask-position: center;
   mask-position: center;
   -webkit-mask-repeat: no-repeat;

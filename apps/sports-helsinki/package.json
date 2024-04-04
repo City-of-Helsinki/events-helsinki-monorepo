@@ -63,7 +63,7 @@
     "dotenv": "^16.3.1",
     "file-saver": "^2.0.5",
     "graphql": "16.7.1",
-    "hds-react": "^3.5.0",
+    "hds-react": "^3.6.0",
     "i18next": "23.2.3",
     "ics": "^3.2.0",
     "leaflet": "1.9.4",

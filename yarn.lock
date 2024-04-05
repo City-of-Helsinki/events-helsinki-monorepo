@@ -3456,9 +3456,9 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     happy-dom: "npm:9.20.3"
-    hds-core: "npm:^3.5.0"
-    hds-design-tokens: "npm:^3.5.0"
-    hds-react: "npm:^3.5.0"
+    hds-core: "npm:^3.6.0"
+    hds-design-tokens: "npm:^3.6.0"
+    hds-react: "npm:^3.6.0"
     html-react-parser: "npm:4.0.0"
     https: "npm:1.0.0"
     i18next: "npm:23.2.3"
@@ -3488,7 +3488,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha264"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha268"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-toastify: "npm:^9.1.3"
@@ -5576,37 +5576,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-spring/konva@npm:~9.3.0":
-  version: 9.3.2
-  resolution: "@react-spring/konva@npm:9.3.2"
-  dependencies:
-    "@react-spring/animated": "npm:~9.3.0"
-    "@react-spring/core": "npm:~9.3.0"
-    "@react-spring/shared": "npm:~9.3.0"
-    "@react-spring/types": "npm:~9.3.0"
-  peerDependencies:
-    konva: ">=2.6"
-    react: ^16.8.0  || ^17.0.0
-    react-konva: ^16.8.0  || ^17.0.0
-  checksum: 99433e594824bf4e97cd83e3d23a744ba9af93de19b0c2ab42a9707733d722780e2787c3b8c8e80f7791dde7ddac843911282c645542d16210484f181dfa5c18
-  languageName: node
-  linkType: hard
-
-"@react-spring/native@npm:~9.3.0":
-  version: 9.3.2
-  resolution: "@react-spring/native@npm:9.3.2"
-  dependencies:
-    "@react-spring/animated": "npm:~9.3.0"
-    "@react-spring/core": "npm:~9.3.0"
-    "@react-spring/shared": "npm:~9.3.0"
-    "@react-spring/types": "npm:~9.3.0"
-  peerDependencies:
-    react: ^16.8.0  || ^17.0.0
-    react-native: ">=0.58"
-  checksum: dbad76758fb382560c762ce0dbf6585111158df1bc77fc97e236d52b4dd9ea6b611bdae6d266c556c041370430f19c26fdf4a20d5eaa33b9b2cd38559b8cc504
-  languageName: node
-  linkType: hard
-
 "@react-spring/rafz@npm:~9.3.0":
   version: 9.3.2
   resolution: "@react-spring/rafz@npm:9.3.2"
@@ -5626,22 +5595,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-spring/three@npm:~9.3.0":
-  version: 9.3.2
-  resolution: "@react-spring/three@npm:9.3.2"
-  dependencies:
-    "@react-spring/animated": "npm:~9.3.0"
-    "@react-spring/core": "npm:~9.3.0"
-    "@react-spring/shared": "npm:~9.3.0"
-    "@react-spring/types": "npm:~9.3.0"
-  peerDependencies:
-    "@react-three/fiber": ">=6.0"
-    react: ">=16.11"
-    three: ">=0.126"
-  checksum: 174157dd1ae208c7fda8e44ac70f9e837603854da4d9f1b1f4d1f545e75862a7f3bcf6f0a4ab1de668a79ec0cd946e2ba50cb19713a26cbc621df5d09eb5f809
-  languageName: node
-  linkType: hard
-
 "@react-spring/types@npm:~9.3.0":
   version: 9.3.2
   resolution: "@react-spring/types@npm:9.3.2"
@@ -5649,9 +5602,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-spring/web@npm:~9.3.0":
-  version: 9.3.2
-  resolution: "@react-spring/web@npm:9.3.2"
+"@react-spring/web@npm:9.3.0":
+  version: 9.3.0
+  resolution: "@react-spring/web@npm:9.3.0"
   dependencies:
     "@react-spring/animated": "npm:~9.3.0"
     "@react-spring/core": "npm:~9.3.0"
@@ -5660,24 +5613,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0  || ^17.0.0
     react-dom: ^16.8.0  || ^17.0.0
-  checksum: f85f258e47819e7aafef902d2dccfd9a16a6c514ec0b6ffc9de2aeeb5d11fece06ac38b86d31eaae55de21d0adcf3955ac5ece473cda438465bfba744d5e11b6
-  languageName: node
-  linkType: hard
-
-"@react-spring/zdog@npm:~9.3.0":
-  version: 9.3.2
-  resolution: "@react-spring/zdog@npm:9.3.2"
-  dependencies:
-    "@react-spring/animated": "npm:~9.3.0"
-    "@react-spring/core": "npm:~9.3.0"
-    "@react-spring/shared": "npm:~9.3.0"
-    "@react-spring/types": "npm:~9.3.0"
-  peerDependencies:
-    react: ^16.8.0  || ^17.0.0
-    react-dom: ^16.8.0  || ^17.0.0
-    react-zdog: ">=1.0"
-    zdog: ">=1.0"
-  checksum: e7a785072f2bb5c69c434d01cbeda8a07124f463e6a0c82064b9a1bda4dab66e4fcec24f1d873f0cd9dab8debfc88519b58cb29ebc0eb26917bcabd9cb969a93
+  checksum: 1566f6548c2ecb88d21c12bca7db7bd037e431bb745f2719928a008f6306f654e2ecc431cd923601329d076575a408a0bc492bf8203d90558d50f68529bfa949
   languageName: node
   linkType: hard
 
@@ -8696,7 +8632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.42.0, @typescript-eslint/parser@npm:^5.56.0":
+"@typescript-eslint/parser@npm:^5.42.0":
   version: 5.60.1
   resolution: "@typescript-eslint/parser@npm:5.60.1"
   dependencies:
@@ -8713,21 +8649,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^6.14.0":
-  version: 6.14.0
-  resolution: "@typescript-eslint/parser@npm:6.14.0"
+"@typescript-eslint/parser@npm:^6.14.0, @typescript-eslint/parser@npm:^6.19.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/parser@npm:6.21.0"
   dependencies:
-    "@typescript-eslint/scope-manager": "npm:6.14.0"
-    "@typescript-eslint/types": "npm:6.14.0"
-    "@typescript-eslint/typescript-estree": "npm:6.14.0"
-    "@typescript-eslint/visitor-keys": "npm:6.14.0"
+    "@typescript-eslint/scope-manager": "npm:6.21.0"
+    "@typescript-eslint/types": "npm:6.21.0"
+    "@typescript-eslint/typescript-estree": "npm:6.21.0"
+    "@typescript-eslint/visitor-keys": "npm:6.21.0"
     debug: "npm:^4.3.4"
   peerDependencies:
     eslint: ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 8cc4518a16fe8cef192a4c9c0a1bb3bdefe9789bc2203010963db3fc899b3dd765478db3e528b765dd7037d2e380db944530d6cb0e1947e2f5aea4b1162a0ed9
+  checksum: 0e14fa1d2c5a29c87934f6b32abea5fdddf1cf47ebbb9e25884717c77590da068ea787e229060b7667bb687b0696c1774da0616294e21a7d2134e0b8da40482f
   languageName: node
   linkType: hard
 
@@ -8758,6 +8694,16 @@ __metadata:
     "@typescript-eslint/types": "npm:6.14.0"
     "@typescript-eslint/visitor-keys": "npm:6.14.0"
   checksum: 965e5b5303256e7ac36861f783c592f3b0754c2d154147e1629295745aa97b2b3b7be526a7ce841ff4e43cdf2cf66e375244de49a9aed9db5c63ed4a254f5795
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/scope-manager@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/scope-manager@npm:6.21.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:6.21.0"
+    "@typescript-eslint/visitor-keys": "npm:6.21.0"
+  checksum: 680d91d3fc92f29d1b465fc377ca3ccd85bf128471c9b60f4c1a17845e5e66990766a6b4d762ee87e2cb821d76b1b85e4834fd8d3f6669681b4eda83bae6a938
   languageName: node
   linkType: hard
 
@@ -8796,6 +8742,13 @@ __metadata:
   version: 6.14.0
   resolution: "@typescript-eslint/types@npm:6.14.0"
   checksum: 0d4c2357527ce2009ed519a2be52f20de05ca202d1d9d2a99ceab6b22ff90281041fa9cebf9ddbfe30a6efa2585d78871339258d0b865587c1af1d49633c3cf1
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/types@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/types@npm:6.21.0"
+  checksum: 8a062986cb9ae4421a93e3671b8350acf0c64295c66d4720af2a858573dedf24a6cb85a6fee8935f9e0076db7702b2d07adec42de2af0dbb6db25725b70c9e37
   languageName: node
   linkType: hard
 
@@ -8850,6 +8803,25 @@ __metadata:
     typescript:
       optional: true
   checksum: e901d0db1f337e4c3c655455d7a8ffe4ce40295809206e89417b9cd80d7752e3ef41f143c6f55f73052d608bec0e4d24055194cee7b80e5bec27a1f2ff8c1807
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/typescript-estree@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/typescript-estree@npm:6.21.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:6.21.0"
+    "@typescript-eslint/visitor-keys": "npm:6.21.0"
+    debug: "npm:^4.3.4"
+    globby: "npm:^11.1.0"
+    is-glob: "npm:^4.0.3"
+    minimatch: "npm:9.0.3"
+    semver: "npm:^7.5.4"
+    ts-api-utils: "npm:^1.0.1"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: e3632859dae5f3d53831c0c2d30a2fcc897781d4dfae8b284b802b2e0fab793ee3094dd8ef49da08c521a3d8edb50901eb0fdd1c7e87bfa28d06abbacb418518
   languageName: node
   linkType: hard
 
@@ -8933,6 +8905,16 @@ __metadata:
     "@typescript-eslint/types": "npm:6.14.0"
     eslint-visitor-keys: "npm:^3.4.1"
   checksum: 701a624626f801b7e04c03285608245c44a0a43d30d31e20a751277db71cdf5a0bf761698b44c6bb33799c40e7c64df3bebbc88fb6d720c08bfd457a34d18ba6
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:6.21.0":
+  version: 6.21.0
+  resolution: "@typescript-eslint/visitor-keys@npm:6.21.0"
+  dependencies:
+    "@typescript-eslint/types": "npm:6.21.0"
+    eslint-visitor-keys: "npm:^3.4.1"
+  checksum: 4884381a65287b6a9782b1d1ccb27047270b70b3a797a878e7db4ea903adad1cbb2835a9a8b6f0113ad481b0e95ed8fffb96569f7a49f3af25437d98ff22b977
   languageName: node
   linkType: hard
 
@@ -14144,7 +14126,7 @@ __metadata:
     esbuild: "npm:0.20.1"
     eslint: "npm:8.43.0"
     git-rev-sync: "npm:3.0.2"
-    hds-react: "npm:^3.5.0"
+    hds-react: "npm:^3.6.0"
     husky: "npm:^8.0.3"
     is-ci: "npm:3.0.1"
     jest: "npm:29.5.0"
@@ -14251,7 +14233,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.5.0"
+    hds-react: "npm:^3.6.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"
@@ -14279,7 +14261,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha264"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha268"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -15915,30 +15897,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-core@npm:3.5.0":
-  version: 3.5.0
-  resolution: "hds-core@npm:3.5.0"
-  checksum: 843869df6bd3f78ba4627fe5369cd183053bd6d9b8b978594df3d92644236ea885348b2f6c066118ccfcf1ec853ce65c493c2204ece5306f3e9b0377f6ab4a34
-  languageName: node
-  linkType: hard
-
-"hds-core@npm:^3.5.0":
+"hds-core@npm:3.6.0, hds-core@npm:^3.6.0":
   version: 3.6.0
   resolution: "hds-core@npm:3.6.0"
   checksum: 38a3bce49cb919d79f1e61638c3943dd40ce04bf6246fc77241b096753ed32aee11f7db909f3e4557cd40cd117f6e05e02d852d3faf2277bb2946805325eb99a
   languageName: node
   linkType: hard
 
-"hds-design-tokens@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "hds-design-tokens@npm:3.5.0"
-  checksum: e29b167b82858d198f138f5a4868d0278881486975bacc3c39404fccb8c3e45ae7835559044372b9031f1e2a92b95115fdb15d4f073498f69c1d62a0e516c950
+"hds-design-tokens@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "hds-design-tokens@npm:3.6.0"
+  checksum: b5f08ab9f8ed19bb235baa6dc515eed66d05552bd8024af78759a14d8a340d7726caf4b0409e7b33c2cc05135245e458e36a22a1a8edb2839785d2d0a2f4960f
   languageName: node
   linkType: hard
 
-"hds-react@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "hds-react@npm:3.5.0"
+"hds-react@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "hds-react@npm:3.6.0"
   dependencies:
     "@babel/runtime": "npm:7.17.9"
     "@emotion/styled-base": "npm:^11.0.0"
@@ -15946,34 +15921,25 @@ __metadata:
     "@juggle/resize-observer": "npm:3.2.0"
     "@popperjs/core": "npm:2.11.5"
     "@react-aria/visually-hidden": "npm:3.8.0"
+    "@react-spring/web": "npm:9.3.0"
     "@types/cookie": "npm:^0.4.1"
-    "@typescript-eslint/parser": "npm:^5.56.0"
+    "@typescript-eslint/parser": "npm:^6.19.0"
     await-to-js: "npm:^3.0.0"
     cookie: "npm:^0.4.1"
     crc-32: "npm:1.2.0"
     date-fns: "npm:2.16.1"
     downshift: "npm:6.0.6"
-    hds-core: "npm:3.5.0"
+    hds-core: "npm:3.6.0"
     http-status-typed: "npm:^1.0.1"
     jwt-decode: "npm:^3.1.2"
     kashe: "npm:1.0.4"
-    lodash.flatten: "npm:^4.4.0"
-    lodash.get: "npm:^4.4.2"
-    lodash.isequal: "npm:4.5.0"
-    lodash.isfunction: "npm:3.0.9"
-    lodash.isobject: "npm:3.0.2"
-    lodash.isundefined: "npm:3.0.1"
-    lodash.pick: "npm:^4.4.0"
-    lodash.pickby: "npm:^4.6.0"
-    lodash.throttle: "npm:^4.1.1"
-    lodash.uniqueid: "npm:4.0.1"
-    lodash.xor: "npm:^4.5.0"
+    lodash: "npm:^4.17.21"
     memoize-one: "npm:5.2.1"
     oidc-client-ts: "npm:^2.2.2"
+    postcss: "npm:^8.4.21"
     react-hook-form: "npm:^7.43.3"
     react-merge-refs: "npm:1.1.0"
     react-popper: "npm:2.2.5"
-    react-spring: "npm:9.3.0"
     react-use-measure: "npm:2.0.1"
     react-virtual: "npm:2.10.4"
     uuid: "npm:^9.0.0"
@@ -15982,7 +15948,7 @@ __metadata:
     postcss: ^8.4.21
     react: ^16.8.0 || ^17
     react-dom: ^16.8.0 || ^17
-  checksum: b722b5cf09fe5449a8d150047ac07c0c3bb0d6a49eb4a8a24505278b4b4eeaf2272e51b27da6ac2f69f46494a8b20e94ee5bcb7feedbdcb8ccee4a9cc42bef6a
+  checksum: 0204698b742969ad59116b44d69bbd5eb55c306832fdaabe7478b3677a015be9ad40921c8bb3e16389918e5dc37446c1973fb7e34ad776329f45d613bb35eb86
   languageName: node
   linkType: hard
 
@@ -16134,7 +16100,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.5.0"
+    hds-react: "npm:^3.6.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"
@@ -16162,7 +16128,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha264"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha268"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -18915,38 +18881,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.flatten@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "lodash.flatten@npm:4.4.0"
-  checksum: 6a532a4e2b1cd736eaf4938ad0f842f1166d6cf6f56b5f9535ab52cabeaca00a5cf39acb4348ac59f35ec596113c5865c3ec4219e6901e4efa97eaadb641fa17
-  languageName: node
-  linkType: hard
-
-"lodash.get@npm:^4.4.2":
-  version: 4.4.2
-  resolution: "lodash.get@npm:4.4.2"
-  checksum: 779e6f3d2c59b82cfee2407abe0fb7f2cefb6eda9a23ffd7caa1390ebcd40697a03a46622294a10f99e9fc0197fb844f3c433400d67584d722aa46b606c43590
-  languageName: node
-  linkType: hard
-
-"lodash.isequal@npm:4.5.0":
-  version: 4.5.0
-  resolution: "lodash.isequal@npm:4.5.0"
-  checksum: d413585fd1dbcb6ebed6d9d98a7fe5e10cc6f653b6676a61a69185aa1f6ae5b4aac1367a632db0ee46197ee1ab6aa5b7428c1721f9b5459a3623e0cc930b9b77
-  languageName: node
-  linkType: hard
-
-"lodash.isfunction@npm:3.0.9, lodash.isfunction@npm:^3.0.9":
+"lodash.isfunction@npm:^3.0.9":
   version: 3.0.9
   resolution: "lodash.isfunction@npm:3.0.9"
   checksum: 2a26511aa8eb399c41a2e18140e3d7e073db55f62e9477c6938deb5fb7310a4a687cbad4a9d7298c7549c740d2a03d3966475818a49667a6b0204f747b19187f
-  languageName: node
-  linkType: hard
-
-"lodash.isobject@npm:3.0.2":
-  version: 3.0.2
-  resolution: "lodash.isobject@npm:3.0.2"
-  checksum: 78ae75fd2688c67673be550c180cfd9b6051530b1df9fcec814df1753843e3b9be829093acfb7e8153423879067473053e446e46140386948742ee73bb6b6cca
   languageName: node
   linkType: hard
 
@@ -18954,13 +18892,6 @@ __metadata:
   version: 4.0.6
   resolution: "lodash.isplainobject@npm:4.0.6"
   checksum: fd98cdf396efd994340f99a968553f6d37ca5a0e6bcf1e6cbe5953c1ef2ad04dca0503d6979f38938aad0d865940fdfddda85cbc365850d114187afac29f8d04
-  languageName: node
-  linkType: hard
-
-"lodash.isundefined@npm:3.0.1":
-  version: 3.0.1
-  resolution: "lodash.isundefined@npm:3.0.1"
-  checksum: 65318328262c88d644f4bd36392ff2253343772cef9028562d4b09e9cdf09540567f062bf8cde697e6067cacc8d14e2d39ca8aa57778ae106131127defb2c823
   languageName: node
   linkType: hard
 
@@ -18996,20 +18927,6 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.mergewith@npm:4.6.2"
   checksum: 4fe5a0a4bc0dcafea01c75e57a2eee0aaee07327a1cfd0618ff365b86a80e7e1172c2e61cb28ad0e4d96a332d65e53d75540c8701697add1b6f410afeabc0624
-  languageName: node
-  linkType: hard
-
-"lodash.pick@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "lodash.pick@npm:4.4.0"
-  checksum: b48b403749e80338291f4eb5dc669a45ea07032555dfd16f664f860b96fd5037549e1fe1d043a78b0bac54d6ca99ea4e86b8e8228a5c5b4a8dc8d1c1d7a45c6c
-  languageName: node
-  linkType: hard
-
-"lodash.pickby@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "lodash.pickby@npm:4.6.0"
-  checksum: 43395ca8e235de318ac61e9101c9b6c0ec71e247e2700c3cbe5e0fd2f484e21a84559cfe59629fba33057d9d9a2d81d49ae86668c800b7f0e9e67bd337deefb0
   languageName: node
   linkType: hard
 
@@ -19055,24 +18972,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.uniqueid@npm:4.0.1":
-  version: 4.0.1
-  resolution: "lodash.uniqueid@npm:4.0.1"
-  checksum: e8181e89077ab51baed9cf1e7459c962d0301ec86d064f7636e68ca291d57a5246a07c95ca4375f1dfede339100de387e162d2d29bb448e436ce34236ddba80e
-  languageName: node
-  linkType: hard
-
 "lodash.upperfirst@npm:^4.3.1":
   version: 4.3.1
   resolution: "lodash.upperfirst@npm:4.3.1"
   checksum: 5b588ebd49cc166f12d48f63bdf2b6cb17652dcdcf4e6ab32e5978d13749af055eb0f3835d42995093dab410f03fa56d6c5ba57c1f3e3daa54dff14dd5415539
-  languageName: node
-  linkType: hard
-
-"lodash.xor@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "lodash.xor@npm:4.5.0"
-  checksum: a2b49f93d62444dc7eaf7d42f25442eac7d894c7740ae660ea6854915b133d772dd53c84c423294e060dc1bb6f5786207af07e2903b02734bf49fc449d40b637
   languageName: node
   linkType: hard
 
@@ -20218,6 +20121,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimatch@npm:9.0.3, minimatch@npm:^9.0.1":
+  version: 9.0.3
+  resolution: "minimatch@npm:9.0.3"
+  dependencies:
+    brace-expansion: "npm:^2.0.1"
+  checksum: ddf78ca17db5eec90bd35e9ae38155785c96736cca8fa133a1494be46aa481348903790ec8a0e65b413d18cb4d1d8b97ca9c87ad3c2dab4444d7a5e738c441bb
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:^3.0.2, minimatch@npm:^3.0.4, minimatch@npm:^3.0.5, minimatch@npm:^3.1.1, minimatch@npm:^3.1.2":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
@@ -20233,15 +20145,6 @@ __metadata:
   dependencies:
     brace-expansion: "npm:^2.0.1"
   checksum: 0c0446ede579b1736bfea4efb288c2dea17ce80fd0339d00547625ed97a60ed403c7c2fb141211119937a811bc635b3f0f44debeb9d7870b3f58cf0fe78ddccc
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^9.0.1":
-  version: 9.0.2
-  resolution: "minimatch@npm:9.0.2"
-  dependencies:
-    brace-expansion: "npm:^2.0.1"
-  checksum: 104c2050e7efd8f351f0ed08ec97d230d52f39b513c2521a30598da45337eeaf71101b5777938a61cd5d412c6570b6bb9ea99baddaf58cb2963f609c81ef140b
   languageName: node
   linkType: hard
 
@@ -23294,11 +23197,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha264":
-  version: 1.0.0-alpha264
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha264"
+"react-helsinki-headless-cms@npm:1.0.0-alpha268":
+  version: 1.0.0-alpha268
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha268"
   dependencies:
-    hds-design-tokens: "npm:^3.5.0"
+    hds-design-tokens: "npm:^3.6.0"
     html-entities: "npm:^2.4.0"
     html-react-parser: "npm:^4.2.9"
     isomorphic-dompurify: "npm:^1.8.0"
@@ -23313,7 +23216,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 4059f83f4e7d1f2084ada49a901662370fb11afdd2931a4fa32bff2211a4da72a2cce81598ec78d3dad10858a8215a115203ce1fda342beed06ab1592df3ca20
+  checksum: 6c68b89c6ac7865964f52a89abd8182e1105b64c5cb5e45ce55b36db50496bedc8e8d245bf0525dc1b3d0f169883e295ed91853c2cbe2ec71db03b36c9673498
   languageName: node
   linkType: hard
 
@@ -23469,20 +23372,6 @@ __metadata:
     react: ^15.5.4 || ^16.0.0 || ^17.0.0 || ^18.0.0
     react-dom: ^15.5.4 || ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: 908205744608b41a7ba9f1d7471830a12137fa9575f263df1f7d9e20eb4a682f8a7a0b62eca2c3be3f04c1ed183c9cb83a91b947ab472e219813cfc3f9c9fb7a
-  languageName: node
-  linkType: hard
-
-"react-spring@npm:9.3.0":
-  version: 9.3.0
-  resolution: "react-spring@npm:9.3.0"
-  dependencies:
-    "@react-spring/core": "npm:~9.3.0"
-    "@react-spring/konva": "npm:~9.3.0"
-    "@react-spring/native": "npm:~9.3.0"
-    "@react-spring/three": "npm:~9.3.0"
-    "@react-spring/web": "npm:~9.3.0"
-    "@react-spring/zdog": "npm:~9.3.0"
-  checksum: 0ffbdcb8bc72f154692d5e2e0d990e5b522003556d7f95a262186a5620057f0f7e9a7100aeb777cf4b856b896247de4a4d55d3b6908762b91400ba93c096dd06
   languageName: node
   linkType: hard
 
@@ -25343,7 +25232,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.5.0"
+    hds-react: "npm:^3.6.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"
@@ -25372,7 +25261,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha264"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha268"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-scroll: "npm:^1.8.9"

@@ -3456,9 +3456,9 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     happy-dom: "npm:9.20.3"
-    hds-core: "npm:^3.6.0"
-    hds-design-tokens: "npm:^3.6.0"
-    hds-react: "npm:^3.6.0"
+    hds-core: "npm:^3.7.0"
+    hds-design-tokens: "npm:^3.7.0"
+    hds-react: "npm:^3.7.0"
     html-react-parser: "npm:4.0.0"
     https: "npm:1.0.0"
     i18next: "npm:23.2.3"
@@ -3488,7 +3488,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha271"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha272"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-toastify: "npm:^9.1.3"
@@ -14126,7 +14126,7 @@ __metadata:
     esbuild: "npm:0.20.1"
     eslint: "npm:8.43.0"
     git-rev-sync: "npm:3.0.2"
-    hds-react: "npm:^3.6.0"
+    hds-react: "npm:^3.7.0"
     husky: "npm:^8.0.3"
     is-ci: "npm:3.0.1"
     jest: "npm:29.5.0"
@@ -14233,7 +14233,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.6.0"
+    hds-react: "npm:^3.7.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"
@@ -14261,7 +14261,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha271"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha272"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -15897,23 +15897,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-core@npm:3.6.0, hds-core@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "hds-core@npm:3.6.0"
-  checksum: 38a3bce49cb919d79f1e61638c3943dd40ce04bf6246fc77241b096753ed32aee11f7db909f3e4557cd40cd117f6e05e02d852d3faf2277bb2946805325eb99a
+"hds-core@npm:3.7.0, hds-core@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "hds-core@npm:3.7.0"
+  checksum: 0789aa91cde32206d1f0fb58c02f6a2f095119b6a6892c459c2552ad8a905892353ab1ad63c27a25f6fe311341fd6c443e90c87da430afff49851e5058d66b13
   languageName: node
   linkType: hard
 
-"hds-design-tokens@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "hds-design-tokens@npm:3.6.0"
-  checksum: b5f08ab9f8ed19bb235baa6dc515eed66d05552bd8024af78759a14d8a340d7726caf4b0409e7b33c2cc05135245e458e36a22a1a8edb2839785d2d0a2f4960f
+"hds-design-tokens@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "hds-design-tokens@npm:3.7.0"
+  checksum: 1c35b48cb503a878e460f7897c38079a6a9d8e7206b5498740142bf82660f6e12a6731d984484ea51c0bb34b3e86be8253729a13613d52d1248b254971e6ea5a
   languageName: node
   linkType: hard
 
-"hds-react@npm:^3.6.0":
-  version: 3.6.0
-  resolution: "hds-react@npm:3.6.0"
+"hds-react@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "hds-react@npm:3.7.0"
   dependencies:
     "@babel/runtime": "npm:7.17.9"
     "@emotion/styled-base": "npm:^11.0.0"
@@ -15929,7 +15929,7 @@ __metadata:
     crc-32: "npm:1.2.0"
     date-fns: "npm:2.16.1"
     downshift: "npm:6.0.6"
-    hds-core: "npm:3.6.0"
+    hds-core: "npm:3.7.0"
     http-status-typed: "npm:^1.0.1"
     jwt-decode: "npm:^3.1.2"
     kashe: "npm:1.0.4"
@@ -15948,7 +15948,7 @@ __metadata:
     postcss: ^8.4.21
     react: ^16.8.0 || ^17
     react-dom: ^16.8.0 || ^17
-  checksum: 0204698b742969ad59116b44d69bbd5eb55c306832fdaabe7478b3677a015be9ad40921c8bb3e16389918e5dc37446c1973fb7e34ad776329f45d613bb35eb86
+  checksum: b67ccc79ee30411e6f24debd84ffe3d6965b68798970f21632b7463081d7c46eb5d5bcd99d76b06848c6f7d7024b7d02eebe63185281886303c8c93d3f85bf9e
   languageName: node
   linkType: hard
 
@@ -16100,7 +16100,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.6.0"
+    hds-react: "npm:^3.7.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"
@@ -16128,7 +16128,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha271"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha272"
     react-i18next: "npm:13.0.1"
     react-scroll: "npm:^1.8.9"
     react-toastify: "npm:^9.1.3"
@@ -23197,11 +23197,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.0.0-alpha271":
-  version: 1.0.0-alpha271
-  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha271"
+"react-helsinki-headless-cms@npm:1.0.0-alpha272":
+  version: 1.0.0-alpha272
+  resolution: "react-helsinki-headless-cms@npm:1.0.0-alpha272"
   dependencies:
-    hds-design-tokens: "npm:^3.6.0"
+    hds-design-tokens: "npm:^3.7.0"
     html-entities: "npm:^2.4.0"
     html-react-parser: "npm:^4.2.9"
     isomorphic-dompurify: "npm:^1.8.0"
@@ -23216,7 +23216,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: ce94c7c2275ea7fda6283d854fe2960adb765c346c0e67eb43891840203333ec3bfb2f032c8b763938ecfd830201c0e189cb8b563d10c7b2799cfc02b15f3672
+  checksum: 844e883ee2d1ea464248ce00435f51222285d3c8c61be3f25a5e406542a62be5ff981f19265df91de497a4ff530e77cfdff8c208e9df3149b0b9ed2d9ab255d2
   languageName: node
   linkType: hard
 
@@ -25232,7 +25232,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^3.6.0"
+    hds-react: "npm:^3.7.0"
     history: "npm:^5.3.0"
     husky: "npm:^8.0.3"
     i18next: "npm:23.2.3"
@@ -25261,7 +25261,7 @@ __metadata:
     react-datepicker: "npm:^4.14.1"
     react-dom: "npm:18.2.0"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.0.0-alpha271"
+    react-helsinki-headless-cms: "npm:1.0.0-alpha272"
     react-i18next: "npm:13.0.1"
     react-leaflet: "npm:4.2.1"
     react-scroll: "npm:^1.8.9"

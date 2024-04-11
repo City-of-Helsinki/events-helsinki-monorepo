@@ -3,7 +3,15 @@
   a:hover > span {
     color: var(--colors-white);
   }
-  button {
-    margin: 0 0 0 var(--spacing-s) !important;
+
+  // Match only the header navigation menu,
+  // e.g. "HeaderNavigationMenu-module_headerNavigationMenu__3G6-N"
+  // in order to exclude header action bar with language selector & header universal bar
+  nav[class*='HeaderNavigationMenu'] {
+    // Match only top level buttons in header navigation menu,
+    // e.g. "HeaderLinkDropdown-module_depth-0__Xeyks"
+    button[class*='depth-0'] {
+      margin: 0 0 0 var(--spacing-s) !important;
+    }
   }
 }

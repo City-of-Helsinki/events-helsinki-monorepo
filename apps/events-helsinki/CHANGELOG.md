@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.15.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.15.0...events-helsinki-v1.15.1) (2024-04-11)
+
+
+### Bug Fixes
+
+* Carousel image sizes ([#666](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/666)) ([e3bea21](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e3bea21c210ff1f6c6413b1151ae8a4b56ad973a))
+* Header css fixes ([#662](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/662)) ([3644ce4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3644ce4e2681736e574b42e223bbe5917a398270))
+
 ## [1.15.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.14.0...events-helsinki-v1.15.0) (2024-03-14)
 
 

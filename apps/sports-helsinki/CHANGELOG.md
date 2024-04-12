@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.21.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.21.1...sports-helsinki-v1.21.2) (2024-04-12)
+
+
+### Bug Fixes
+
+* Upgrade to HDS v3.7 & RHHC v1.0.0-alpha272, remove menu workaround ([67b2bc1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/67b2bc1fea2fef884a7e5515dc1c461eccb0b26c))
+
 ## [1.21.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.21.0...sports-helsinki-v1.21.1) (2024-04-11)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.16.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.16.1...hobbies-helsinki-v2.16.2) (2024-04-12)
+
+
+### Bug Fixes
+
+* Upgrade to HDS v3.7 & RHHC v1.0.0-alpha272, remove menu workaround ([67b2bc1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/67b2bc1fea2fef884a7e5515dc1c461eccb0b26c))
+
 ## [2.16.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.16.0...hobbies-helsinki-v2.16.1) (2024-04-11)
 
 

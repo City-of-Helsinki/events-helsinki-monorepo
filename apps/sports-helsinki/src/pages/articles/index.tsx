@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ParsedUrlQueryInput } from 'querystring';
 import { NetworkStatus } from '@apollo/client';
+import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   getQlLanguage,
   NavigationContext,
@@ -257,6 +258,8 @@ export default function ArticleArchive({
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async ({ apolloClient }) => {
     const language = getLanguageOrDefault(context.locale);
+    const isPreview = context.preview;
+    const previewData = context.previewData as PreviewDataObject;
     const { data: pageData } = await apolloClient.query<
       PageByTemplateQuery,
       PageByTemplateQueryVariables
@@ -265,6 +268,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       variables: {
         template: TemplateEnum.PostsPage,
         language: getQlLanguage(language).toLocaleLowerCase(),
+      },
+      context: {
+        headers: {
+          authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+        },
       },
     });
     if (!pageData) {

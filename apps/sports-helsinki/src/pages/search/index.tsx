@@ -1,3 +1,4 @@
+import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   NavigationContext,
   Navigation,
@@ -63,6 +64,8 @@ const Search: NextPage<{
 export default Search;
 
 export async function getStaticProps(context: GetStaticPropsContext) {
+  const isPreview = context.preview;
+  const previewData = context.previewData as PreviewDataObject;
   return getSportsStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);
     const { data: pageData } = await sportsApolloClient.query<
@@ -74,6 +77,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         id: `/${language}${ROUTES.SEARCH}/`,
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+      context: {
+        headers: {
+          authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+        },
+      },
     });
     const page = pageData.page;
     const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));

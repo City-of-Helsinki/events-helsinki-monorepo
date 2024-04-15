@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import type { NormalizedCacheObject } from '@apollo/client';
-import type { AppLanguage } from '@events-helsinki/components';
+import type {
+  AppLanguage,
+  PreviewDataObject,
+} from '@events-helsinki/components';
 import {
   useResilientTranslation,
   Navigation,
@@ -170,6 +173,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
+  const isPreview = context.preview;
+  const previewData = context.previewData as PreviewDataObject;
   const { data: pageData } = await eventsApolloClient.query<
     PageQuery,
     PageQueryVariables
@@ -180,6 +185,11 @@ const getProps = async (context: GetStaticPropsContext) => {
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
     fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+    context: {
+      headers: {
+        authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+      },
+    },
   });
 
   const currentPage = pageData.page;

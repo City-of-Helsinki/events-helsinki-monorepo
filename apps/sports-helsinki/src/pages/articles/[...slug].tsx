@@ -20,6 +20,7 @@ import type {
   AppLanguage,
   PageByTemplateBreadcrumbTitleQuery,
   PageByTemplateBreadcrumbTitleQueryVariables,
+  PreviewDataObject,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
@@ -219,6 +220,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
+  const isPreview = context.preview;
+  const previewData = context.previewData as PreviewDataObject;
   const { data: articleData } = await sportsApolloClient.query<
     ArticleQuery,
     ArticleQueryVariables
@@ -239,6 +242,11 @@ const getProps = async (context: GetStaticPropsContext) => {
     variables: {
       template: TemplateEnum.PostsPage,
       language: getQlLanguage(language).toLocaleLowerCase(),
+    },
+    context: {
+      headers: {
+        authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+      },
     },
   });
 

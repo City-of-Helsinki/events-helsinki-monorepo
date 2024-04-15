@@ -1,3 +1,4 @@
+import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   NavigationContext,
   useAppEventsTranslation,
@@ -93,7 +94,8 @@ export default Search;
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);
-
+    const isPreview = context.preview;
+    const previewData = context.previewData as PreviewDataObject;
     const { data: pageData } = await eventsApolloClient.query<
       PageQuery,
       PageQueryVariables
@@ -103,6 +105,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         id: `/${language}${ROUTES.SEARCH}/`,
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+      context: {
+        headers: {
+          authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+        },
+      },
     });
     const page = pageData.page;
     const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));

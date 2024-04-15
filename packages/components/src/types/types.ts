@@ -269,6 +269,10 @@ export type GetCardUrlType = (
   locale: AppLanguage
 ) => string;
 
+export type PreviewDataObject = {
+  token: string;
+};
+
 export {};
 
 declare global {

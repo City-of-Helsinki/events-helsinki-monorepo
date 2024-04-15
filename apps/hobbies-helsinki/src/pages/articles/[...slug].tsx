@@ -20,6 +20,7 @@ import type {
   AppLanguage,
   PageByTemplateBreadcrumbTitleQuery,
   PageByTemplateBreadcrumbTitleQueryVariables,
+  PreviewDataObject,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
@@ -219,6 +220,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
+  const isPreview = context.preview;
+  const previewData = context.previewData as PreviewDataObject;
   const { data: articleData } = await hobbiesApolloClient.query<
     ArticleQuery,
     ArticleQueryVariables
@@ -229,6 +232,11 @@ const getProps = async (context: GetStaticPropsContext) => {
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
     fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+    context: {
+      headers: {
+        authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+      },
+    },
   });
 
   const { data: articleArchiveTitleData } = await hobbiesApolloClient.query<

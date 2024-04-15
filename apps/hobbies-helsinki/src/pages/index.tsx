@@ -1,3 +1,4 @@
+import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   DEFAULT_LANGUAGE,
   getQlLanguage,
@@ -70,7 +71,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return getHobbiesStaticProps(context, async ({ apolloClient }) => {
     try {
       const language = getLanguageOrDefault(context.locale);
-
+      const isPreview = context.preview;
+      const previewData = context.previewData as PreviewDataObject;
       const { data: pageData } = await apolloClient.query<
         PageByTemplateQuery,
         PageByTemplateQueryVariables
@@ -81,6 +83,11 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           language: getQlLanguage(language).toLocaleLowerCase(),
         },
         fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+        context: {
+          headers: {
+            authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+          },
+        },
       });
       if (!pageData) {
         return {

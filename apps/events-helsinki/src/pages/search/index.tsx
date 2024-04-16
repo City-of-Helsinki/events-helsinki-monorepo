@@ -94,7 +94,7 @@ export default Search;
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getEventsStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);
-    const isPreview = context.preview;
+
     const previewData = context.previewData as PreviewDataObject;
     const { data: pageData } = await eventsApolloClient.query<
       PageQuery,

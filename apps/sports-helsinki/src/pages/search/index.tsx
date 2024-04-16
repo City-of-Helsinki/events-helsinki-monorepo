@@ -64,7 +64,6 @@ const Search: NextPage<{
 export default Search;
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const isPreview = context.preview;
   const previewData = context.previewData as PreviewDataObject;
   return getSportsStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);

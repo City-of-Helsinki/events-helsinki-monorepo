@@ -221,7 +221,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
-  const isPreview = context.preview;
+
   const previewData = context.previewData as PreviewDataObject;
   const { data: articleData } = await eventsApolloClient.query<
     ArticleQuery,

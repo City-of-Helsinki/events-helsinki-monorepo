@@ -258,7 +258,7 @@ export default function ArticleArchive({
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getHobbiesStaticProps(context, async ({ apolloClient }) => {
     const language = getLanguageOrDefault(context.locale);
-    const isPreview = context.preview;
+
     const previewData = context.previewData as PreviewDataObject;
     const { data: pageData } = await apolloClient.query<
       PageByTemplateQuery,

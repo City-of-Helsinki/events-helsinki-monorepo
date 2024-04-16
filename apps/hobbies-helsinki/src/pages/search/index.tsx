@@ -93,7 +93,7 @@ export default Search;
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getHobbiesStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);
-    const isPreview = context.preview;
+
     const previewData = context.previewData as PreviewDataObject;
     const { data: pageData } = await hobbiesApolloClient.query<
       PageQuery,

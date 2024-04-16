@@ -29,5 +29,5 @@ export { default as getLanguageCode } from './getLanguageCode';
 export { default as getLanguageCodeFilter } from './getLanguageCodeFilter';
 export { default as getLinkArrowLabel } from './getLinkArrowLabel';
 export { default as getLocaleFromPathname } from './getLocaleFromPathname';
-export { getMaxAge, getToken } from './jwtToken';
+export { getAuthorizationHeader, getPreviewDataMaxAge } from './jwtToken';
 export * from './accessibilityProfile/typeguards';

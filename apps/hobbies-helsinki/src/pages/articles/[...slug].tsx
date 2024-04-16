@@ -220,8 +220,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
 const getProps = async (context: GetStaticPropsContext) => {
   const language = getLanguageOrDefault(context.locale);
-  const isPreview = context.preview;
   const previewData = context.previewData as PreviewDataObject;
+
   const { data: articleData } = await hobbiesApolloClient.query<
     ArticleQuery,
     ArticleQueryVariables
@@ -241,6 +241,10 @@ const getProps = async (context: GetStaticPropsContext) => {
     }),
   });
 
+  // api/preview?uri=/en/articles/general/dance-all-over-the-city/&secret=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2hhcnJhc3R1cy5oa2loLnN0YWdlLmdlbmllbS5pbyIsImlhdCI6MTcxMzI2NTkwNywibmJmIjoxNzEzMjY1OTA3LCJleHAiOjE3MTMyNjY1MDcsImRhdGEiOnsidXNlciI6eyJpZCI6IjEyMzU4In19fQ.L5600LdUrhDM38x1YC69WxG-H7NBEq7rJJFmshhcF_Q
+
+  const currentArticle = articleData.post;
+
   const { data: articleArchiveTitleData } = await hobbiesApolloClient.query<
     PageByTemplateBreadcrumbTitleQuery,
     PageByTemplateBreadcrumbTitleQueryVariables
@@ -251,8 +255,6 @@ const getProps = async (context: GetStaticPropsContext) => {
       language: getQlLanguage(language).toLocaleLowerCase(),
     },
   });
-
-  const currentArticle = articleData.post;
 
   const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
     getFilteredBreadcrumbs(getBreadcrumbsFromPage(currentArticle)),

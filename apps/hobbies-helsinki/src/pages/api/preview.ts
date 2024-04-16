@@ -1,4 +1,7 @@
-import { getMaxAge, getToken } from '@events-helsinki/components';
+import {
+  getAuthorizationHeader,
+  getPreviewDataMaxAge,
+} from '@events-helsinki/components';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -7,6 +10,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const token = req.query.secret.toString();
-  res.setPreviewData({ token: getToken(token) }, { maxAge: getMaxAge(token) });
+  res.setPreviewData(
+    { token: getAuthorizationHeader(token) },
+    { maxAge: getPreviewDataMaxAge(token) }
+  );
   res.redirect(req.query.uri as string);
 };

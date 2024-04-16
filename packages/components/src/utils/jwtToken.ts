@@ -1,4 +1,4 @@
-export default function getMaxAge(token: string): number {
+export const getMaxAge = (token: string): number => {
   try {
     const content = JSON.parse(atob(token.split('.')[1]));
     // value in seconds
@@ -6,4 +6,8 @@ export default function getMaxAge(token: string): number {
   } catch (error) {
     return 0;
   }
-}
+};
+
+export const getToken = (token: string): string => {
+  return `Bearer ${token}`;
+};

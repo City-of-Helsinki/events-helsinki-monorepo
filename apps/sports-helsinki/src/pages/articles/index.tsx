@@ -269,11 +269,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         template: TemplateEnum.PostsPage,
         language: getQlLanguage(language).toLocaleLowerCase(),
       },
-      context: {
-        headers: {
-          authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+      ...(previewData?.token && {
+        context: {
+          headers: {
+            authorization: previewData.token,
+          },
         },
-      },
+      }),
     });
     if (!pageData) {
       return {

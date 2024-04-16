@@ -232,11 +232,13 @@ const getProps = async (context: GetStaticPropsContext) => {
       // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
     },
     fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-    context: {
-      headers: {
-        authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+    ...(previewData?.token && {
+      context: {
+        headers: {
+          authorization: previewData.token,
+        },
       },
-    },
+    }),
   });
 
   const { data: articleArchiveTitleData } = await hobbiesApolloClient.query<

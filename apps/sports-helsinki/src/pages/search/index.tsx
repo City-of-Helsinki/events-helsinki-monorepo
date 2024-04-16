@@ -77,11 +77,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         id: `/${language}${ROUTES.SEARCH}/`,
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-      context: {
-        headers: {
-          authorization: isPreview ? `Bearer ${previewData?.token}` : '',
+      ...(previewData?.token && {
+        context: {
+          headers: {
+            authorization: previewData.token,
+          },
         },
-      },
+      }),
     });
     const page = pageData.page;
     const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));

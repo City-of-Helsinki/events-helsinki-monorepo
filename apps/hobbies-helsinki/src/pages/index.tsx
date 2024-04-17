@@ -8,6 +8,7 @@ import {
   getLanguageOrDefault,
   RouteMeta,
   useResilientTranslation,
+  usePreview,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -31,14 +32,17 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 
 const HomePage: NextPage<{
+  preview: boolean;
   page: PageType;
   locale: string;
-}> = ({ page, locale }) => {
+}> = ({ page, locale, preview }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
+  usePreview(resilientT('page:preview'), preview);
+
   return (
     <RHHCPage
       className="pageLayout"
@@ -106,6 +110,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       );
       return {
         props: {
+          preview: Boolean(previewData?.token),
           ...(await serverSideTranslationsWithCommon(language, [
             'home',
             'search',
@@ -122,6 +127,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       );
       return {
         props: {
+          preview: false,
           ...(await serverSideTranslationsWithCommon(DEFAULT_LANGUAGE, [
             'home',
             'search',

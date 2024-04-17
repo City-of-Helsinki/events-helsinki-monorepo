@@ -65,6 +65,11 @@ const RESILIENT_TRANSLATIONS = {
     fi: 'Copyright',
     sv: 'Copyright',
   },
+  'page:preview': {
+    en: 'Preview mode',
+    fi: 'Esikatsele',
+    sv: 'Förhandsvisning',
+  },
 } as const satisfies ResilientTranslations;
 
 /**

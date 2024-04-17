@@ -11,7 +11,8 @@ export type ResilientTranslationKey =
   | 'errors:unknownError.title'
   | 'footer:allRightsReserved'
   | 'footer:backToTop'
-  | 'footer:copyright';
+  | 'footer:copyright'
+  | 'page:preview';
 
 export type ResilientTranslation = Record<AppLanguage, string>;
 

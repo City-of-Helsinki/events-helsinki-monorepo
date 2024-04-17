@@ -13,6 +13,7 @@ import {
   useResilientTranslation,
   getLanguageCodeFilter,
   getFilteredBreadcrumbs,
+  usePreview,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
@@ -54,14 +55,17 @@ interface ArticleFilters {
 }
 
 export default function ArticleArchive({
+  preview,
   page,
   breadcrumbs,
 }: SportsGlobalPageProps & {
+  preview: boolean;
   page: PageType;
   breadcrumbs?: BreadcrumbListItem[];
 }) {
   const router = useRouter();
   const { resilientT } = useResilientTranslation();
+  usePreview(resilientT('page:preview'), preview);
 
   const getArticlesSearchQuery = (
     text: string,
@@ -286,6 +290,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
     return {
       props: {
+        preview: Boolean(previewData?.token),
         page,
         breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, ['event'])),

@@ -10,6 +10,7 @@ import {
   useResilientTranslation,
   getFilteredBreadcrumbs,
   BreadcrumbContainer,
+  usePreview,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -33,11 +34,17 @@ import CombinedSearchPage from '../../domain/search/combinedSearch/CombinedSearc
 
 const Search: NextPage<{
   page: PageType;
+  preview: boolean;
   breadcrumbs?: BreadcrumbListItem[];
-}> = ({ page, breadcrumbs }) => {
+}> = ({ page, breadcrumbs, preview }) => {
   const { footerMenu } = useContext(NavigationContext);
+
   const { resilientT } = useResilientTranslation();
+
+  usePreview(resilientT('page:preview'), preview);
+
   usePageScrollRestoration();
+
   return (
     <RHHCPage
       className="pageLayout"
@@ -93,6 +100,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
     return {
       props: {
+        preview: Boolean(previewData?.token),
         page,
         breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, [

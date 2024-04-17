@@ -14,6 +14,7 @@ import {
   getLanguageOrDefault,
   RouteMeta,
   getFilteredBreadcrumbs,
+  usePreview,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
@@ -43,15 +44,17 @@ import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsPage: NextPage<{
+  preview: boolean;
   page: PageType;
   breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ page, breadcrumbs, collections }) => {
+}> = ({ page, breadcrumbs, collections, preview }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
+  usePreview(resilientT('page:preview'), preview);
 
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
@@ -117,6 +120,7 @@ type ResultProps =
       page: PageQuery['page'];
       breadcrumbs?: BreadcrumbListItem[];
       collections: CollectionType[];
+      preview: boolean;
     }
   | {
       error?: {
@@ -172,6 +176,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
+            preview: Boolean(previewData?.token),
             initialApolloState: sportsApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             page,
@@ -183,6 +188,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       } catch (e) {
         return {
           props: {
+            preview: false,
             error: {
               statusCode: 500,
             },

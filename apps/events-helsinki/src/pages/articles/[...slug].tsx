@@ -15,6 +15,7 @@ import {
   getQlLanguage,
   defaultArticleArchiveBreadcrumbTitle,
   PageByTemplateBreadcrumbTitleDocument,
+  usePreview,
 } from '@events-helsinki/components';
 import type {
   AppLanguage,
@@ -57,10 +58,11 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 const CATEGORIES_AMOUNT = 20;
 
 const NextCmsArticle: NextPage<{
+  preview: boolean;
   article: ArticleType;
   breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ article, breadcrumbs, collections }) => {
+}> = ({ article, breadcrumbs, collections, preview }) => {
   const router = useRouter();
   const {
     currentLanguageCode,
@@ -69,6 +71,7 @@ const NextCmsArticle: NextPage<{
 
   const { t: commonTranslation } = useCommonTranslation();
   const { resilientT } = useResilientTranslation();
+  usePreview(resilientT('page:preview'), preview);
 
   const { footerMenu } = useContext(NavigationContext);
 
@@ -159,6 +162,7 @@ export async function getStaticPaths() {
 
 type ResultProps =
   | {
+      preview: boolean;
       initialApolloState: NormalizedCacheObject;
       article: ArticleQuery['post'];
       breadcrumbs?: BreadcrumbListItem[];
@@ -234,6 +238,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
+            preview: Boolean(previewData?.token),
             initialApolloState: eventsApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             article,
@@ -246,6 +251,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         logger.error('Error while generating content page', e);
         return {
           props: {
+            preview: false,
             error: {
               statusCode: 500,
             },

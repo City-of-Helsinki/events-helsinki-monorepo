@@ -174,19 +174,57 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     context,
     async (): Promise<GetStaticPropsResult<ResultProps>> => {
       try {
-        const {
-          currentArticle: article,
-          breadcrumbs,
-          apolloClient,
-        } = await getProps(context);
+        const language = getLanguageOrDefault(context.locale);
+        const previewData = context.previewData as PreviewDataObject;
+
+        const { data: articleData } = await hobbiesApolloClient.query<
+          ArticleQuery,
+          ArticleQueryVariables
+        >({
+          query: ArticleDocument,
+          variables: {
+            id: _getURIQueryParameter(
+              context.params?.slug as string[],
+              language
+            ),
+            // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
+          },
+          fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+          ...(previewData?.token && {
+            context: {
+              headers: {
+                authorization: previewData.token,
+              },
+            },
+          }),
+        });
+
+        const article = articleData.post;
 
         if (!article) {
-          logger.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
-        const language = getLanguageOrDefault(context.locale);
+
+        const { data: articleArchiveTitleData } =
+          await hobbiesApolloClient.query<
+            PageByTemplateBreadcrumbTitleQuery,
+            PageByTemplateBreadcrumbTitleQueryVariables
+          >({
+            query: PageByTemplateBreadcrumbTitleDocument,
+            variables: {
+              template: TemplateEnum.PostsPage,
+              language: getQlLanguage(language).toLocaleLowerCase(),
+            },
+          });
+
+        const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
+          getFilteredBreadcrumbs(getBreadcrumbsFromPage(article)),
+          articleArchiveTitleData?.pageByTemplate?.title ??
+            defaultArticleArchiveBreadcrumbTitle[language]
+        );
+
         logger.info(
           'pages/articles/[...slug].tsx',
           'getStaticProps',
@@ -195,7 +233,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
-            initialApolloState: apolloClient.cache.extract(),
+            initialApolloState: hobbiesApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             article,
             breadcrumbs,
@@ -217,53 +255,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     }
   );
 }
-
-const getProps = async (context: GetStaticPropsContext) => {
-  const language = getLanguageOrDefault(context.locale);
-  const previewData = context.previewData as PreviewDataObject;
-
-  const { data: articleData } = await hobbiesApolloClient.query<
-    ArticleQuery,
-    ArticleQueryVariables
-  >({
-    query: ArticleDocument,
-    variables: {
-      id: _getURIQueryParameter(context.params?.slug as string[], language),
-      // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
-    },
-    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-    ...(previewData?.token && {
-      context: {
-        headers: {
-          authorization: previewData.token,
-        },
-      },
-    }),
-  });
-
-  // api/preview?uri=/en/articles/general/dance-all-over-the-city/&secret=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2hhcnJhc3R1cy5oa2loLnN0YWdlLmdlbmllbS5pbyIsImlhdCI6MTcxMzI2NTkwNywibmJmIjoxNzEzMjY1OTA3LCJleHAiOjE3MTMyNjY1MDcsImRhdGEiOnsidXNlciI6eyJpZCI6IjEyMzU4In19fQ.L5600LdUrhDM38x1YC69WxG-H7NBEq7rJJFmshhcF_Q
-
-  const currentArticle = articleData.post;
-
-  const { data: articleArchiveTitleData } = await hobbiesApolloClient.query<
-    PageByTemplateBreadcrumbTitleQuery,
-    PageByTemplateBreadcrumbTitleQueryVariables
-  >({
-    query: PageByTemplateBreadcrumbTitleDocument,
-    variables: {
-      template: TemplateEnum.PostsPage,
-      language: getQlLanguage(language).toLocaleLowerCase(),
-    },
-  });
-
-  const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
-    getFilteredBreadcrumbs(getBreadcrumbsFromPage(currentArticle)),
-    articleArchiveTitleData?.pageByTemplate?.title ??
-      defaultArticleArchiveBreadcrumbTitle[language]
-  );
-
-  return { currentArticle, breadcrumbs, apolloClient: hobbiesApolloClient };
-};
 
 /**
  * The Headless CMS needs the contextpath as a part of the URI

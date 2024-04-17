@@ -113,6 +113,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       }),
     });
     const page = pageData.page;
+
+    if (!page) {
+      return {
+        notFound: true,
+      };
+    }
+
     const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
     return {
       props: {

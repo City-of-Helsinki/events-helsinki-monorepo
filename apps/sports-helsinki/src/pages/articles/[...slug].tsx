@@ -174,11 +174,43 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     context,
     async (): Promise<GetStaticPropsResult<ResultProps>> => {
       try {
-        const {
-          currentArticle: article,
-          breadcrumbs,
-          apolloClient,
-        } = await getProps(context);
+        const language = getLanguageOrDefault(context.locale);
+        const previewData = context.previewData as PreviewDataObject;
+        const { data: articleData } = await sportsApolloClient.query<
+          ArticleQuery,
+          ArticleQueryVariables
+        >({
+          query: ArticleDocument,
+          variables: {
+            id: _getURIQueryParameter(
+              context.params?.slug as string[],
+              language
+            ),
+            // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
+          },
+          fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+        });
+
+        const { data: articleArchiveTitleData } =
+          await sportsApolloClient.query<
+            PageByTemplateBreadcrumbTitleQuery,
+            PageByTemplateBreadcrumbTitleQueryVariables
+          >({
+            query: PageByTemplateBreadcrumbTitleDocument,
+            variables: {
+              template: TemplateEnum.PostsPage,
+              language: getQlLanguage(language).toLocaleLowerCase(),
+            },
+            ...(previewData?.token && {
+              context: {
+                headers: {
+                  authorization: previewData.token,
+                },
+              },
+            }),
+          });
+
+        const article = articleData.post;
 
         if (!article) {
           logger.warn(`Not found ${context.params?.slug}`);
@@ -186,7 +218,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             notFound: true,
           };
         }
-        const language = getLanguageOrDefault(context.locale);
+
+        const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
+          getFilteredBreadcrumbs(getBreadcrumbsFromPage(article)),
+          articleArchiveTitleData?.pageByTemplate?.title ??
+            defaultArticleArchiveBreadcrumbTitle[language]
+        );
+
         logger.info(
           'pages/articles/[...slug].tsx',
           'getStaticProps',
@@ -195,7 +233,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
-            initialApolloState: apolloClient.cache.extract(),
+            initialApolloState: sportsApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             article,
             breadcrumbs,
@@ -217,51 +255,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     }
   );
 }
-
-const getProps = async (context: GetStaticPropsContext) => {
-  const language = getLanguageOrDefault(context.locale);
-
-  const previewData = context.previewData as PreviewDataObject;
-  const { data: articleData } = await sportsApolloClient.query<
-    ArticleQuery,
-    ArticleQueryVariables
-  >({
-    query: ArticleDocument,
-    variables: {
-      id: _getURIQueryParameter(context.params?.slug as string[], language),
-      // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
-    },
-    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-  });
-
-  const { data: articleArchiveTitleData } = await sportsApolloClient.query<
-    PageByTemplateBreadcrumbTitleQuery,
-    PageByTemplateBreadcrumbTitleQueryVariables
-  >({
-    query: PageByTemplateBreadcrumbTitleDocument,
-    variables: {
-      template: TemplateEnum.PostsPage,
-      language: getQlLanguage(language).toLocaleLowerCase(),
-    },
-    ...(previewData?.token && {
-      context: {
-        headers: {
-          authorization: previewData.token,
-        },
-      },
-    }),
-  });
-
-  const currentArticle = articleData.post;
-
-  const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
-    getFilteredBreadcrumbs(getBreadcrumbsFromPage(currentArticle)),
-    articleArchiveTitleData?.pageByTemplate?.title ??
-      defaultArticleArchiveBreadcrumbTitle[language]
-  );
-
-  return { currentArticle, breadcrumbs, apolloClient: sportsApolloClient };
-};
 
 /**
  * The Headless CMS needs the contextpath as a part of the URI

@@ -129,18 +129,41 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     context,
     async (): Promise<GetStaticPropsResult<ResultProps>> => {
       try {
-        const {
-          currentPage: page,
-          breadcrumbs,
-          apolloClient,
-        } = await getProps(context);
+        const previewData = context.previewData as PreviewDataObject;
+        const language = getLanguageOrDefault(context.locale);
+        const { data: pageData } = await sportsApolloClient.query<
+          PageQuery,
+          PageQueryVariables
+        >({
+          query: PageDocument,
+          variables: {
+            id: _getURIQueryParameter(
+              context.params?.slug as string[],
+              language
+            ),
+            // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
+          },
+          fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+          ...(previewData?.token && {
+            context: {
+              headers: {
+                authorization: previewData.token,
+              },
+            },
+          }),
+        });
+
+        const page = pageData.page;
         if (!page) {
           logger.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
-        const language = getLanguageOrDefault(context.locale);
+        const breadcrumbs = getFilteredBreadcrumbs(
+          getBreadcrumbsFromPage(page)
+        );
+
         logger.info(
           'pages/pages/[...slug].tsx',
           'getStaticProps',
@@ -149,7 +172,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
-            initialApolloState: apolloClient.cache.extract(),
+            initialApolloState: sportsApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             page,
             breadcrumbs,
@@ -170,37 +193,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     }
   );
 }
-
-const getProps = async (context: GetStaticPropsContext) => {
-  const language = getLanguageOrDefault(context.locale);
-
-  const previewData = context.previewData as PreviewDataObject;
-  const { data: pageData } = await sportsApolloClient.query<
-    PageQuery,
-    PageQueryVariables
-  >({
-    query: PageDocument,
-    variables: {
-      id: _getURIQueryParameter(context.params?.slug as string[], language),
-      // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
-    },
-    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-    ...(previewData?.token && {
-      context: {
-        headers: {
-          authorization: previewData.token,
-        },
-      },
-    }),
-  });
-
-  const currentPage = pageData.page;
-  const breadcrumbs = getFilteredBreadcrumbs(
-    getBreadcrumbsFromPage(currentPage)
-  );
-
-  return { currentPage, breadcrumbs, apolloClient: sportsApolloClient };
-};
 
 /**
  * The Headless CMS URIs needs to have a contextpath as a part of the URI.

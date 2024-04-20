@@ -283,4 +283,28 @@ export class HeadlessCMSHelper {
     }
     return breadcrumbs;
   }
+
+  withCurrentPageBreadcrumb(
+    breadcrumbs: BreadcrumbListItem[],
+    page: PageType | ArticleType,
+    language: AppLanguage,
+    isPreview?: boolean
+  ) {
+    const bc = [...breadcrumbs];
+    // when page/article is in draft mode, it wont exist anymore in breadcrumbs items, which will break the logic of breadcrums
+    // we need to temporaly propagate current page to breadcrumb as last element for preview mode
+    if (
+      page &&
+      isPreview &&
+      bc.filter((item) => item.path === page.uri).length === 0 &&
+      page.title &&
+      page.uri
+    ) {
+      bc.push({
+        title: page.title,
+        path: `/${language}${page.slug}`,
+      });
+    }
+    return bc;
+  }
 }

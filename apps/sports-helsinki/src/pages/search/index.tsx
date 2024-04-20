@@ -28,6 +28,7 @@ import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
+import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import CombinedSearchPage from '../../domain/search/combinedSearch/CombinedSearchPage';
@@ -97,7 +98,16 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       };
     }
     const page = pageData.page;
-    const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
+
+    const pageBreadcrumbs = getBreadcrumbsFromPage(page);
+    const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+      pageBreadcrumbs,
+      page,
+      language,
+      context.preview
+    );
+    const breadcrumbs = getFilteredBreadcrumbs(extendedBreadcrumbs);
+
     return {
       props: {
         preview: Boolean(previewData?.token),

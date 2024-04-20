@@ -271,6 +271,7 @@ export type GetCardUrlType = (
 
 export type PreviewDataObject = {
   token: string;
+  maxAge: number;
 };
 
 export {};

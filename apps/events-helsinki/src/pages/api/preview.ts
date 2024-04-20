@@ -10,9 +10,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const token = req.query.secret.toString();
+  const maxAge = getPreviewDataMaxAge(token);
+
   res.setPreviewData(
-    { token: getAuthorizationHeader(token) },
-    { maxAge: getPreviewDataMaxAge(token) }
+    { token: getAuthorizationHeader(token), maxAge },
+    { maxAge }
   );
   res.redirect(req.query.uri as string);
 };

@@ -223,8 +223,16 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           };
         }
 
+        const pageBreadcrumbs = getBreadcrumbsFromPage(article);
+        const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+          pageBreadcrumbs,
+          article,
+          language,
+          context.preview
+        );
+
         const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
-          getFilteredBreadcrumbs(getBreadcrumbsFromPage(article)),
+          getFilteredBreadcrumbs(extendedBreadcrumbs),
           articleArchiveTitleData?.pageByTemplate?.title ??
             defaultArticleArchiveBreadcrumbTitle[language]
         );

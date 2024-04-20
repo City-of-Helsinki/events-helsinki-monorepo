@@ -30,6 +30,7 @@ import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
+import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
@@ -123,7 +124,15 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       };
     }
 
-    const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
+    const pageBreadcrumbs = getBreadcrumbsFromPage(page);
+    const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+      pageBreadcrumbs,
+      page,
+      language,
+      context.preview
+    );
+    const breadcrumbs = getFilteredBreadcrumbs(extendedBreadcrumbs);
+
     return {
       props: {
         preview: Boolean(previewData?.token),

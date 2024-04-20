@@ -72,6 +72,7 @@ const NextCmsArticle: NextPage<{
   const { t: commonTranslation } = useCommonTranslation();
   const { resilientT } = useResilientTranslation();
   const { footerMenu } = useContext(NavigationContext);
+
   usePreview(resilientT('page:preview'), preview);
 
   const { data: categoriesData, loading: loadingCategories } =
@@ -180,7 +181,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       try {
         const language = getLanguageOrDefault(context.locale);
         const previewData = context.previewData as PreviewDataObject;
-
         const { data: articleData } = await hobbiesApolloClient.query<
           ArticleQuery,
           ArticleQueryVariables
@@ -223,8 +223,16 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             },
           });
 
+        const pageBreadcrumbs = getBreadcrumbsFromPage(article);
+        const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+          pageBreadcrumbs,
+          article,
+          language,
+          context.preview
+        );
+
         const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
-          getFilteredBreadcrumbs(getBreadcrumbsFromPage(article)),
+          getFilteredBreadcrumbs(extendedBreadcrumbs),
           articleArchiveTitleData?.pageByTemplate?.title ??
             defaultArticleArchiveBreadcrumbTitle[language]
         );

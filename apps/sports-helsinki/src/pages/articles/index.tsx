@@ -287,7 +287,16 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       };
     }
     const page = pageData.pageByTemplate;
-    const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
+
+    const pageBreadcrumbs = getBreadcrumbsFromPage(page);
+    const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+      pageBreadcrumbs,
+      page,
+      language,
+      context.preview
+    );
+    const breadcrumbs = getFilteredBreadcrumbs(extendedBreadcrumbs);
+
     return {
       props: {
         preview: Boolean(previewData?.token),

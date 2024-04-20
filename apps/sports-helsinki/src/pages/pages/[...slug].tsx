@@ -164,9 +164,15 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             notFound: true,
           };
         }
-        const breadcrumbs = getFilteredBreadcrumbs(
-          getBreadcrumbsFromPage(page)
+
+        const pageBreadcrumbs = getBreadcrumbsFromPage(page);
+        const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+          pageBreadcrumbs,
+          page,
+          language,
+          context.preview
         );
+        const breadcrumbs = getFilteredBreadcrumbs(extendedBreadcrumbs);
 
         logger.info(
           'pages/pages/[...slug].tsx',

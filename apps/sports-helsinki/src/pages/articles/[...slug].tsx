@@ -247,7 +247,8 @@ const getProps = async (context: GetStaticPropsContext) => {
   const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
     getFilteredBreadcrumbs(getBreadcrumbsFromPage(currentArticle)),
     articleArchiveTitleData?.pageByTemplate?.title ??
-      defaultArticleArchiveBreadcrumbTitle[language]
+      defaultArticleArchiveBreadcrumbTitle[language],
+    language
   );
 
   return { currentArticle, breadcrumbs, apolloClient: sportsApolloClient };

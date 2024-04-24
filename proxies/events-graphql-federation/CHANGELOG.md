@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.7.0...federation-router-v1.8.0) (2024-04-24)
+
+
+### Features
+
+* Pages preview mode support ([#673](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/673)) ([0829161](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0829161a2ec76742730266568b3d706cc6fab2a3))
+
 ## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.6.1...federation-router-v1.7.0) (2024-03-14)
 
 

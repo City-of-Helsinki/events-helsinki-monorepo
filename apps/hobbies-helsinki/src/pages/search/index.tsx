@@ -1,3 +1,4 @@
+import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   NavigationContext,
   useAppHobbiesTranslation,
@@ -10,6 +11,7 @@ import {
   useResilientTranslation,
   getFilteredBreadcrumbs,
   BreadcrumbContainer,
+  usePreview,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -28,21 +30,24 @@ import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
+import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
 import SearchPage from '../../domain/search/eventSearch/SearchPage';
 
 const Search: NextPage<{
+  preview: boolean;
   page: PageType;
   breadcrumbs?: BreadcrumbListItem[];
-}> = ({ page, breadcrumbs }) => {
+}> = ({ page, breadcrumbs, preview }) => {
   const { t: tAppHobbies } = useAppHobbiesTranslation();
   const { resilientT } = useResilientTranslation();
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
   usePageScrollRestoration();
+  usePreview(resilientT('page:preview'), preview);
 
   useEffect(() => {
     const listElement = listRef.current;
@@ -93,6 +98,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return getHobbiesStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);
 
+    const previewData = context.previewData as PreviewDataObject;
     const { data: pageData } = await hobbiesApolloClient.query<
       PageQuery,
       PageQueryVariables
@@ -102,11 +108,34 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         id: `/${language}${ROUTES.SEARCH}/`,
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+      ...(previewData?.token && {
+        context: {
+          headers: {
+            authorization: previewData.token,
+          },
+        },
+      }),
     });
     const page = pageData.page;
-    const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
+
+    if (!page) {
+      return {
+        notFound: true,
+      };
+    }
+
+    const pageBreadcrumbs = getBreadcrumbsFromPage(page);
+    const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+      pageBreadcrumbs,
+      page,
+      language,
+      context.preview
+    );
+    const breadcrumbs = getFilteredBreadcrumbs(extendedBreadcrumbs);
+
     return {
       props: {
+        preview: Boolean(previewData?.token),
         page,
         breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, [

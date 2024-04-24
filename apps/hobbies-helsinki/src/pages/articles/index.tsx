@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ParsedUrlQueryInput } from 'querystring';
 import { NetworkStatus } from '@apollo/client';
+import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   getQlLanguage,
   NavigationContext,
@@ -12,6 +13,7 @@ import {
   useResilientTranslation,
   getLanguageCodeFilter,
   getFilteredBreadcrumbs,
+  usePreview,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
@@ -53,14 +55,17 @@ interface ArticleFilters {
 }
 
 export default function ArticleArchive({
+  preview,
   page,
   breadcrumbs,
 }: HobbiesGlobalPageProps & {
+  preview: boolean;
   page: PageType;
   breadcrumbs?: BreadcrumbListItem[];
 }) {
   const router = useRouter();
   const { resilientT } = useResilientTranslation();
+  usePreview(resilientT('page:preview'), preview);
 
   const getArticlesSearchQuery = (
     text: string,
@@ -257,6 +262,8 @@ export default function ArticleArchive({
 export async function getStaticProps(context: GetStaticPropsContext) {
   return getHobbiesStaticProps(context, async ({ apolloClient }) => {
     const language = getLanguageOrDefault(context.locale);
+
+    const previewData = context.previewData as PreviewDataObject;
     const { data: pageData } = await apolloClient.query<
       PageByTemplateQuery,
       PageByTemplateQueryVariables
@@ -266,6 +273,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         template: TemplateEnum.PostsPage,
         language: getQlLanguage(language).toLocaleLowerCase(),
       },
+      ...(previewData?.token && {
+        context: {
+          headers: {
+            authorization: previewData.token,
+          },
+        },
+      }),
     });
     if (!pageData) {
       return {
@@ -273,9 +287,19 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       };
     }
     const page = pageData.pageByTemplate;
-    const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
+
+    const pageBreadcrumbs = getBreadcrumbsFromPage(page);
+    const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+      pageBreadcrumbs,
+      page,
+      language,
+      context.preview
+    );
+    const breadcrumbs = getFilteredBreadcrumbs(extendedBreadcrumbs);
+
     return {
       props: {
+        preview: Boolean(previewData?.token),
         page,
         breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, ['event'])),

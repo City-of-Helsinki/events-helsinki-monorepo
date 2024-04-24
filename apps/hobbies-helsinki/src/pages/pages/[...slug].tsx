@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import type { NormalizedCacheObject } from '@apollo/client';
-import type { AppLanguage } from '@events-helsinki/components';
+import type {
+  AppLanguage,
+  PreviewDataObject,
+} from '@events-helsinki/components';
 import {
   NavigationContext,
   getAllPages,
@@ -10,6 +13,7 @@ import {
   getLanguageOrDefault,
   RouteMeta,
   getFilteredBreadcrumbs,
+  usePreview,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
@@ -40,15 +44,17 @@ import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsPage: NextPage<{
+  preview: boolean;
   page: PageType;
   breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ page, breadcrumbs, collections }) => {
+}> = ({ page, breadcrumbs, collections, preview }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
+  usePreview(resilientT('page:preview'), preview);
 
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
@@ -110,6 +116,7 @@ export async function getStaticPaths() {
 
 type ResultProps =
   | {
+      preview: boolean;
       initialApolloState: NormalizedCacheObject;
       page: PageQuery['page'];
       breadcrumbs?: BreadcrumbListItem[];
@@ -126,18 +133,48 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     context,
     async (): Promise<GetStaticPropsResult<ResultProps>> => {
       try {
-        const {
-          currentPage: page,
-          breadcrumbs,
-          apolloClient,
-        } = await getProps(context);
+        const language = getLanguageOrDefault(context.locale);
+        const previewData = context.previewData as PreviewDataObject;
+        const { data: pageData } = await hobbiesApolloClient.query<
+          PageQuery,
+          PageQueryVariables
+        >({
+          query: PageDocument,
+          variables: {
+            id: _getURIQueryParameter(
+              context.params?.slug as string[],
+              language
+            ),
+            // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
+          },
+          fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+          ...(previewData?.token && {
+            context: {
+              headers: {
+                authorization: previewData.token,
+              },
+            },
+          }),
+        });
+
+        const page = pageData.page;
+
         if (!page) {
           logger.warn(`Not found ${context.params?.slug}`);
           return {
             notFound: true,
           };
         }
-        const language = getLanguageOrDefault(context.locale);
+
+        const pageBreadcrumbs = getBreadcrumbsFromPage(page);
+        const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+          pageBreadcrumbs,
+          page,
+          language,
+          context.preview
+        );
+        const breadcrumbs = getFilteredBreadcrumbs(extendedBreadcrumbs);
+
         logger.info(
           'pages/pages/[...slug].tsx',
           'getStaticProps',
@@ -146,7 +183,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
-            initialApolloState: apolloClient.cache.extract(),
+            preview: Boolean(previewData?.token),
+            initialApolloState: hobbiesApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             page,
             breadcrumbs,
@@ -157,6 +195,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       } catch (e) {
         return {
           props: {
+            preview: false,
             error: {
               statusCode: 500,
             },
@@ -167,28 +206,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     }
   );
 }
-
-const getProps = async (context: GetStaticPropsContext) => {
-  const language = getLanguageOrDefault(context.locale);
-  const { data: pageData } = await hobbiesApolloClient.query<
-    PageQuery,
-    PageQueryVariables
-  >({
-    query: PageDocument,
-    variables: {
-      id: _getURIQueryParameter(context.params?.slug as string[], language),
-      // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
-    },
-    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-  });
-
-  const currentPage = pageData.page;
-  const breadcrumbs = getFilteredBreadcrumbs(
-    getBreadcrumbsFromPage(currentPage)
-  );
-
-  return { currentPage, breadcrumbs, apolloClient: hobbiesApolloClient };
-};
 
 /**
  * The Headless CMS URIs needs to have a contextpath as a part of the URI.

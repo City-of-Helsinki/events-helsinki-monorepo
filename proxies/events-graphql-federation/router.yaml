@@ -19,6 +19,10 @@ headers:
       request:
         - propagate: # propagate all headers. Note that there are some custom X-Headers.
             matching: .*
+    cms: # Header rules for just the events subgraph
+      request:
+        - propagate: # propagate authorization header
+            named: 'Authorization'
 include_subgraph_errors:
   all: true # Propagate errors from all subgraphs
 cors:

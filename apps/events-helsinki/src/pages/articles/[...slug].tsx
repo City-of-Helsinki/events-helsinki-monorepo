@@ -15,11 +15,13 @@ import {
   getQlLanguage,
   defaultArticleArchiveBreadcrumbTitle,
   PageByTemplateBreadcrumbTitleDocument,
+  usePreview,
 } from '@events-helsinki/components';
 import type {
   AppLanguage,
   PageByTemplateBreadcrumbTitleQuery,
   PageByTemplateBreadcrumbTitleQueryVariables,
+  PreviewDataObject,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
@@ -56,10 +58,11 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 const CATEGORIES_AMOUNT = 20;
 
 const NextCmsArticle: NextPage<{
+  preview: boolean;
   article: ArticleType;
   breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ article, breadcrumbs, collections }) => {
+}> = ({ article, breadcrumbs, collections, preview }) => {
   const router = useRouter();
   const {
     currentLanguageCode,
@@ -68,6 +71,7 @@ const NextCmsArticle: NextPage<{
 
   const { t: commonTranslation } = useCommonTranslation();
   const { resilientT } = useResilientTranslation();
+  usePreview(resilientT('page:preview'), preview);
 
   const { footerMenu } = useContext(NavigationContext);
 
@@ -158,6 +162,7 @@ export async function getStaticPaths() {
 
 type ResultProps =
   | {
+      preview: boolean;
       initialApolloState: NormalizedCacheObject;
       article: ArticleQuery['post'];
       breadcrumbs?: BreadcrumbListItem[];
@@ -174,11 +179,43 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     context,
     async (): Promise<GetStaticPropsResult<ResultProps>> => {
       try {
-        const {
-          currentArticle: article,
-          breadcrumbs,
-          apolloClient,
-        } = await getProps(context);
+        const language = getLanguageOrDefault(context.locale);
+        const previewData = context.previewData as PreviewDataObject;
+        const { data: articleData } = await eventsApolloClient.query<
+          ArticleQuery,
+          ArticleQueryVariables
+        >({
+          query: ArticleDocument,
+          variables: {
+            id: _getURIQueryParameter(
+              context.params?.slug as string[],
+              getLanguageOrDefault(context.locale)
+            ),
+            // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
+          },
+          fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+          ...(previewData?.token && {
+            context: {
+              headers: {
+                authorization: previewData.token,
+              },
+            },
+          }),
+        });
+
+        const { data: articleArchiveTitleData } =
+          await eventsApolloClient.query<
+            PageByTemplateBreadcrumbTitleQuery,
+            PageByTemplateBreadcrumbTitleQueryVariables
+          >({
+            query: PageByTemplateBreadcrumbTitleDocument,
+            variables: {
+              template: TemplateEnum.PostsPage,
+              language: getQlLanguage(language).toLocaleLowerCase(),
+            },
+          });
+
+        const article = articleData.post;
 
         if (!article) {
           logger.warn(`Not found ${context.params?.slug}`);
@@ -186,7 +223,22 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             notFound: true,
           };
         }
-        const language = getLanguageOrDefault(context.locale);
+
+        const pageBreadcrumbs = getBreadcrumbsFromPage(article);
+        const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+          pageBreadcrumbs,
+          article,
+          language,
+          context.preview
+        );
+
+        const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
+          getFilteredBreadcrumbs(extendedBreadcrumbs),
+          articleArchiveTitleData?.pageByTemplate?.title ??
+            defaultArticleArchiveBreadcrumbTitle[language],
+          language
+        );
+
         logger.info(
           'pages/articles/[...slug].tsx',
           'getStaticProps',
@@ -195,7 +247,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
-            initialApolloState: apolloClient.cache.extract(),
+            preview: Boolean(previewData?.token),
+            initialApolloState: eventsApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             article,
             breadcrumbs,
@@ -207,6 +260,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         logger.error('Error while generating content page', e);
         return {
           props: {
+            preview: false,
             error: {
               statusCode: 500,
             },
@@ -217,46 +271,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     }
   );
 }
-
-const getProps = async (context: GetStaticPropsContext) => {
-  const language = getLanguageOrDefault(context.locale);
-  const { data: articleData } = await eventsApolloClient.query<
-    ArticleQuery,
-    ArticleQueryVariables
-  >({
-    query: ArticleDocument,
-    variables: {
-      id: _getURIQueryParameter(
-        context.params?.slug as string[],
-        getLanguageOrDefault(context.locale)
-      ),
-      // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
-    },
-    fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
-  });
-
-  const { data: articleArchiveTitleData } = await eventsApolloClient.query<
-    PageByTemplateBreadcrumbTitleQuery,
-    PageByTemplateBreadcrumbTitleQueryVariables
-  >({
-    query: PageByTemplateBreadcrumbTitleDocument,
-    variables: {
-      template: TemplateEnum.PostsPage,
-      language: getQlLanguage(language).toLocaleLowerCase(),
-    },
-  });
-
-  const currentArticle = articleData.post;
-
-  const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
-    getFilteredBreadcrumbs(getBreadcrumbsFromPage(currentArticle)),
-    articleArchiveTitleData?.pageByTemplate?.title ??
-      defaultArticleArchiveBreadcrumbTitle[language],
-    language
-  );
-
-  return { currentArticle, breadcrumbs, apolloClient: eventsApolloClient };
-};
 
 /**
  * The Headless CMS needs the contextpath as a part of the URI

@@ -1,3 +1,4 @@
+import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   NavigationContext,
   Navigation,
@@ -9,6 +10,7 @@ import {
   useResilientTranslation,
   getFilteredBreadcrumbs,
   BreadcrumbContainer,
+  usePreview,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -26,17 +28,24 @@ import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
+import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import CombinedSearchPage from '../../domain/search/combinedSearch/CombinedSearchPage';
 
 const Search: NextPage<{
   page: PageType;
+  preview: boolean;
   breadcrumbs?: BreadcrumbListItem[];
-}> = ({ page, breadcrumbs }) => {
+}> = ({ page, breadcrumbs, preview }) => {
   const { footerMenu } = useContext(NavigationContext);
+
   const { resilientT } = useResilientTranslation();
+
+  usePreview(resilientT('page:preview'), preview);
+
   usePageScrollRestoration();
+
   return (
     <RHHCPage
       className="pageLayout"
@@ -63,6 +72,7 @@ const Search: NextPage<{
 export default Search;
 
 export async function getStaticProps(context: GetStaticPropsContext) {
+  const previewData = context.previewData as PreviewDataObject;
   return getSportsStaticProps(context, async () => {
     const language = getLanguageOrDefault(context.locale);
     const { data: pageData } = await sportsApolloClient.query<
@@ -74,11 +84,33 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         id: `/${language}${ROUTES.SEARCH}/`,
       },
       fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+      ...(previewData?.token && {
+        context: {
+          headers: {
+            authorization: previewData.token,
+          },
+        },
+      }),
     });
+    if (!pageData) {
+      return {
+        notFound: true,
+      };
+    }
     const page = pageData.page;
-    const breadcrumbs = getFilteredBreadcrumbs(getBreadcrumbsFromPage(page));
+
+    const pageBreadcrumbs = getBreadcrumbsFromPage(page);
+    const extendedBreadcrumbs = cmsHelper.withCurrentPageBreadcrumb(
+      pageBreadcrumbs,
+      page,
+      language,
+      context.preview
+    );
+    const breadcrumbs = getFilteredBreadcrumbs(extendedBreadcrumbs);
+
     return {
       props: {
+        preview: Boolean(previewData?.token),
         page,
         breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, [

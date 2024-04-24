@@ -1,3 +1,4 @@
+import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   DEFAULT_LANGUAGE,
   getQlLanguage,
@@ -7,6 +8,7 @@ import {
   FooterSection,
   getLanguageOrDefault,
   RouteMeta,
+  usePreview,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -31,14 +33,17 @@ import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPa
 
 const HomePage: NextPage<{
   page: PageType;
+  preview: boolean;
   locale: string;
-}> = ({ page, locale }) => {
+}> = ({ page, locale, preview }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
 
   const { resilientT } = useResilientTranslation();
+
+  usePreview(resilientT('page:preview'), preview);
 
   return (
     <RHHCPage
@@ -72,7 +77,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   return getSportsStaticProps(context, async ({ apolloClient }) => {
     try {
       const language = getLanguageOrDefault(context.locale);
-
+      const previewData = context.previewData as PreviewDataObject;
       const { data: pageData } = await apolloClient.query<
         PageByTemplateQuery,
         PageByTemplateQueryVariables
@@ -83,6 +88,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           language: getQlLanguage(language).toLocaleLowerCase(),
         },
         fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+        ...(previewData?.token && {
+          context: {
+            headers: {
+              authorization: previewData.token,
+            },
+          },
+        }),
       });
       if (!pageData) {
         return {
@@ -99,6 +111,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       );
       return {
         props: {
+          preview: Boolean(previewData?.token),
           ...(await serverSideTranslationsWithCommon(language, [
             'home',
             'search',
@@ -115,6 +128,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       );
       return {
         props: {
+          preview: false,
           ...(await serverSideTranslationsWithCommon(DEFAULT_LANGUAGE, [
             'home',
             'search',

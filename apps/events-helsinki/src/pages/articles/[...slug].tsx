@@ -235,7 +235,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         const breadcrumbs = cmsHelper.withArticleArchiveBreadcrumb(
           getFilteredBreadcrumbs(extendedBreadcrumbs),
           articleArchiveTitleData?.pageByTemplate?.title ??
-            defaultArticleArchiveBreadcrumbTitle[language]
+            defaultArticleArchiveBreadcrumbTitle[language],
+          language
         );
 
         logger.info(

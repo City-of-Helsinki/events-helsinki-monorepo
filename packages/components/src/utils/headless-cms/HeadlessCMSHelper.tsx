@@ -271,13 +271,14 @@ export class HeadlessCMSHelper {
    * */
   withArticleArchiveBreadcrumb(
     breadcrumbs: BreadcrumbListItem[],
-    articlesTitle: string
+    articlesTitle: string,
+    locale: AppLanguage
   ) {
     if (breadcrumbs[1].path !== this.cmsArticlesContextPath) {
       const [firstItem, ...rest] = breadcrumbs;
       const articleArchive: BreadcrumbListItem = {
         title: articlesTitle,
-        path: this.cmsArticlesContextPath,
+        path: `/${locale}${this.cmsArticlesContextPath}`,
       };
       return [firstItem, articleArchive, ...rest];
     }

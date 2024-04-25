@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.17.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.16.2...hobbies-helsinki-v2.17.0) (2024-04-25)
+
+
+### Features
+
+* Pages preview mode support ([#673](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/673)) ([0829161](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0829161a2ec76742730266568b3d706cc6fab2a3))
+
+
+### Bug Fixes
+
+* Breadcrumbs locale ([#675](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/675)) ([9bf5b1d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9bf5b1d3c149dd2bb86b67a01f039605a09eebaf))
+
 ## [2.16.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.16.1...hobbies-helsinki-v2.16.2) (2024-04-12)
 
 

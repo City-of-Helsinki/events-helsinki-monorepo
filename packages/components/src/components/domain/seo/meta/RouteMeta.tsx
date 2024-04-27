@@ -40,6 +40,7 @@ function RouteMeta({ origin, page }: Props) {
       />
       <meta property="og:locale" content={locale} />
       <meta property="og:url" content={canonical} />
+      <meta property="twitter:url" content={canonical} />
     </Head>
   );
 }

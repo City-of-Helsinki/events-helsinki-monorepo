@@ -38,21 +38,28 @@ function PageMeta({
   const openGraphTitle = seo.openGraphTitle ?? title;
   const openGraphDescription =
     seo.openGraphDescription ?? description ?? undefined;
-
+  const xTitle = twitterTitle ?? title ?? undefined;
+  const xDescription = twitterDescription ?? description ?? undefined;
   return (
     <>
       <Head>
         {title && <title>{unescapeDash(title)}</title>}
         {description && <meta name="description" content={description} />}
         <meta property="og:title" content={openGraphTitle || ''} />
+        <meta name="twitter:card" content="summary_large_image" />
         {description && (
           <meta property="og:description" content={openGraphDescription} />
         )}
-        {image && <meta property="og:image" content={image} />}
+        {image && (
+          <>
+            <meta property="og:image" content={image} />
+            <meta property="twitter:image" content={image} />
+          </>
+        )}
         {openGraphType && <meta property="og:type" content={openGraphType} />}
-        {twitterTitle && <meta name="twitter:title" content={twitterTitle} />}
-        {twitterDescription && (
-          <meta name="twitter:description" content={twitterDescription} />
+        {xTitle && <meta name="twitter:title" content={xTitle} />}
+        {xDescription && (
+          <meta name="twitter:description" content={xDescription} />
         )}
       </Head>
     </>

@@ -1,22 +1,17 @@
 import { Footer, Link, Logo, logoFi, logoSv } from 'hds-react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
+import useAskemContext from '../../components/askem/useAskemContext';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
+import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { useCommonTranslation, useResilientTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
 
 import { resetFocusId } from '../resetFocus/ResetFocus';
 import styles from './footer.module.scss';
-
-const AskemFeedbackContainer = dynamic(
-  () =>
-    import('../../components/askem').then((mod) => mod.AskemFeedbackContainer),
-  {
-    ssr: false,
-  }
-);
 
 type FooterSectionProps = {
   appName: string;
@@ -24,6 +19,7 @@ type FooterSectionProps = {
   hasFeedBack?: boolean;
   feedbackWithPadding?: boolean;
   consentUrl?: string;
+  isModalConsent?: boolean;
 };
 const FooterSection: FunctionComponent<FooterSectionProps> = ({
   appName,
@@ -31,10 +27,20 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   hasFeedBack = true,
   feedbackWithPadding = false,
   consentUrl = '/cookie-consent',
+  isModalConsent = true,
 }: FooterSectionProps) => {
   const { t: commonT } = useCommonTranslation();
   const { resilientT } = useResilientTranslation();
   const locale = useLocale();
+  const { asPath } = useRouter();
+  const { cookieDomain, askemConfiguration: askemConfigurationInput } =
+    useCookieConfigurationContext();
+
+  const { askemInstance, handleConsentGiven } = useAskemContext({
+    cookieDomain,
+    asPath,
+    askemConfigurationInput,
+  });
 
   const { data: footerMenuData } = useMenuQuery({
     skip: !!menu,
@@ -51,12 +57,41 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
     document.querySelector<HTMLDivElement>(`#${resetFocusId}`)?.focus();
   };
 
+  const AskemProvider = dynamic(
+    () => import('../../components/askem').then((mod) => mod.AskemProvider),
+    {
+      ssr: false,
+    }
+  );
+
+  const AskemFeedbackContainer = dynamic(
+    () =>
+      import('../../components/askem').then(
+        (mod) => mod.AskemFeedbackContainer
+      ),
+    {
+      ssr: false,
+    }
+  );
+
+  const EventsCookieConsent = dynamic(
+    () => import('../../components/eventsCookieConsent/EventsCookieConsent'),
+    { ssr: false }
+  );
+
   return (
-    <>
+    <AskemProvider value={askemInstance}>
       {hasFeedBack && (
         <AskemFeedbackContainer
           withPadding={feedbackWithPadding}
           consentUrl={consentUrl}
+        />
+      )}
+      {isModalConsent && (
+        <EventsCookieConsent
+          onConsentGiven={handleConsentGiven}
+          allowLanguageSwitch={false}
+          appName={appName}
         />
       )}
       <Footer title={appName} className={styles.footer}>
@@ -84,7 +119,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
           ))}
         </Footer.Base>
       </Footer>
-    </>
+    </AskemProvider>
   );
 };
 

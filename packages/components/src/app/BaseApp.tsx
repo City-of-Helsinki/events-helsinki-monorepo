@@ -11,10 +11,8 @@ import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
 import { MatomoWrapper } from '../components';
 import type { createAskemInstance } from '../components/askem';
-import useAskemContext from '../components/askem/useAskemContext';
 
 import ErrorFallback from '../components/errorPages/ErrorFallback';
-import EventsCookieConsent from '../components/eventsCookieConsent/EventsCookieConsent';
 import useMatomoInstance from '../components/matomo/useMatomo';
 import ResetFocus from '../components/resetFocus/ResetFocus';
 import { CookieConfigurationProvider } from '../cookieConfigurationProvider';
@@ -49,13 +47,6 @@ export type Props = {
   AppThemeProviderProps &
   SSRConfig;
 
-const AskemProvider = dynamic(
-  () => import('../components/askem').then((mod) => mod.AskemProvider),
-  {
-    ssr: false,
-  }
-);
-
 const DynamicToastContainer = dynamic(
   () =>
     import('react-toastify').then((mod) => {
@@ -79,14 +70,11 @@ function BaseApp({
   headerUniversalBarMenu,
   footerMenu,
   languages,
-  appName,
   cmsHelper,
   cookieDomain,
   routerHelper,
   matomoConfiguration,
   askemFeedbackConfiguration: askemConfigurationInput,
-  asPath,
-  withConsent,
   defaultButtonTheme,
   defaultButtonVariant,
   getCardUrl,
@@ -98,17 +86,16 @@ function BaseApp({
   getKeywordOnClickHandler,
 }: Props) {
   const matomoInstance = useMatomoInstance(matomoConfiguration);
-  const { askemInstance, handleConsentGiven } = useAskemContext({
-    cookieDomain,
-    asPath,
-    askemConfigurationInput,
-  });
+
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
   //      SEO performance is not impacted.
   useHdsStyleFix();
 
   return (
-    <CookieConfigurationProvider cookieDomain={cookieDomain}>
+    <CookieConfigurationProvider
+      askemConfiguration={askemConfigurationInput}
+      cookieDomain={cookieDomain}
+    >
       <AppThemeProvider
         defaultButtonTheme={defaultButtonTheme}
         defaultButtonVariant={defaultButtonVariant}
@@ -124,30 +111,21 @@ function BaseApp({
             getKeywordOnClickHandler={getKeywordOnClickHandler}
           >
             <MatomoProvider value={matomoInstance}>
-              <AskemProvider value={askemInstance}>
-                <GeolocationProvider>
-                  <NavigationProvider
-                    headerMenu={headerMenu}
-                    headerUniversalBarMenu={headerUniversalBarMenu}
-                    footerMenu={footerMenu}
-                    languages={languages}
-                  >
-                    <MatomoWrapper>
-                      <GeolocationErrorNotification />
-                      <ResetFocus />
-                      {children}
-                      {withConsent && (
-                        <EventsCookieConsent
-                          onConsentGiven={handleConsentGiven}
-                          allowLanguageSwitch={false}
-                          appName={appName}
-                        />
-                      )}
-                      <DynamicToastContainer />
-                    </MatomoWrapper>
-                  </NavigationProvider>
-                </GeolocationProvider>
-              </AskemProvider>
+              <GeolocationProvider>
+                <NavigationProvider
+                  headerMenu={headerMenu}
+                  headerUniversalBarMenu={headerUniversalBarMenu}
+                  footerMenu={footerMenu}
+                  languages={languages}
+                >
+                  <MatomoWrapper>
+                    <GeolocationErrorNotification />
+                    <ResetFocus />
+                    {children}
+                    <DynamicToastContainer />
+                  </MatomoWrapper>
+                </NavigationProvider>
+              </GeolocationProvider>
             </MatomoProvider>
           </AppRoutingProvider>
         </CmsHelperProvider>

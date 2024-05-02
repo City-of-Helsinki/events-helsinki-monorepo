@@ -12,7 +12,6 @@ import {
   FooterSection,
   getLanguageOrDefault,
   usePageScrollRestoration,
-  EventsCookieConsent,
   RouteMeta,
   useResilientTranslation,
   getQlLanguage,
@@ -22,6 +21,7 @@ import {
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useCallback, useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
@@ -34,6 +34,14 @@ import AppConfig from '../../domain/app/AppConfig';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import ConsentPageContent from '../../domain/cookieConsent/ConsentPageContent';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
+
+const EventsCookieConsent = dynamic(
+  () =>
+    import('@events-helsinki/components').then(
+      (mod) => mod.EventsCookieConsent
+    ),
+  { ssr: false }
+);
 
 const cookieConsentBreadcrumbTitle: Record<AppLanguage, string> = {
   fi: commonTranslationsFi['cookies'] ?? 'Evästeet',
@@ -88,6 +96,7 @@ export default function CookieConsent({
           menu={footerMenu}
           appName={resilientT('appEvents:appName')}
           hasFeedBack={false}
+          isModalConsent={false}
         />
       }
     />

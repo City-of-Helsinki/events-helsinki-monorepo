@@ -12,11 +12,11 @@ import {
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
 import {
   useConfig,
-  PageContent as RHHCPageContent,
   Page as RHHCPage,
   TemplateEnum,
 } from 'react-helsinki-headless-cms';
@@ -45,6 +45,13 @@ const HomePage: NextPage<{
 
   usePreview(resilientT('page:preview'), preview);
 
+  const RHHCPageContentNoSSR = dynamic(
+    () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <RHHCPage
       className="pageLayout"
@@ -52,7 +59,7 @@ const HomePage: NextPage<{
       content={
         <>
           <RouteMeta origin={AppConfig.origin} />
-          <RHHCPageContent
+          <RHHCPageContentNoSSR
             page={page}
             PageContentLayoutComponent={LandingPageContentLayout}
             collections={(page: PageType | ArticleType) =>

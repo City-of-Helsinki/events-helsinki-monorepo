@@ -14,6 +14,7 @@ import {
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
 import {
@@ -31,7 +32,6 @@ import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
-import CombinedSearchPage from '../../domain/search/combinedSearch/CombinedSearchPage';
 
 const Search: NextPage<{
   page: PageType;
@@ -46,6 +46,13 @@ const Search: NextPage<{
 
   usePageScrollRestoration();
 
+  const CombinedSearchPageNoSSR = dynamic(
+    () => import('../../domain/search/combinedSearch/CombinedSearchPage'),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <RHHCPage
       className="pageLayout"
@@ -55,7 +62,7 @@ const Search: NextPage<{
           <RouteMeta origin={AppConfig.origin} />
           <PageMeta {...page?.seo} />
           {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
-          <CombinedSearchPage defaultTab="Venue" />
+          <CombinedSearchPageNoSSR defaultTab="Venue" />
         </>
       }
       footer={

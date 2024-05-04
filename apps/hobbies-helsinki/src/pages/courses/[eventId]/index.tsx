@@ -18,6 +18,7 @@ import type {
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
 import {
@@ -27,7 +28,6 @@ import {
 import { ROUTES } from '../../../constants';
 import AppConfig from '../../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../../domain/app/getHobbiesStaticProps';
-import EventPageContainer from '../../../domain/event/EventPageContainer';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
 
 const Event: NextPage<{
@@ -37,12 +37,20 @@ const Event: NextPage<{
 }> = ({ event, loading, breadcrumbs }) => {
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
+
+  const EventPageContainerNoSSR = dynamic(
+    () => import('../../../domain/event/EventPageContainer'),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <RHHCPage
       className="pageLayout"
       navigation={<Navigation />}
       content={
-        <EventPageContainer
+        <EventPageContainerNoSSR
           breadcrumbs={breadcrumbs}
           event={event}
           loading={loading}

@@ -18,6 +18,7 @@ import type {
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
 import {
@@ -28,7 +29,6 @@ import { ROUTES } from '../../../constants';
 import AppConfig from '../../../domain/app/AppConfig';
 import getSportsStaticProps from '../../../domain/app/getSportsStaticProps';
 import serverSideTranslationsWithCommon from '../../../domain/i18n/serverSideTranslationsWithCommon';
-import VenuePageContainer from '../../../domain/venue/VenuePageContainer';
 
 const VenuePage: NextPage<{
   venue: Venue;
@@ -38,12 +38,20 @@ const VenuePage: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
   usePageScrollRestoration();
+
+  const VenuePageContainerNoSSR = dynamic(
+    () => import('../../../domain/venue/VenuePageContainer'),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <RHHCPage
       className="pageLayout"
       navigation={<Navigation />}
       content={
-        <VenuePageContainer
+        <VenuePageContainerNoSSR
           breadcrumbs={breadcrumbs}
           venue={venue}
           loading={loading}

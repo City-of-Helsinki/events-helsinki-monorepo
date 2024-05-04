@@ -17,6 +17,7 @@ import {
 } from '@events-helsinki/components/src/hooks';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
@@ -36,7 +37,6 @@ import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
-import SearchPage from '../../domain/search/eventSearch/SearchPage';
 
 const Search: NextPage<{
   preview: boolean;
@@ -69,6 +69,13 @@ const Search: NextPage<{
 
   const { footerMenu } = useContext(NavigationContext);
 
+  const SearchPageNoSSR = dynamic(
+    () => import('../../domain/search/eventSearch/SearchPage'),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <RHHCPage
       className="pageLayout"
@@ -78,7 +85,7 @@ const Search: NextPage<{
           <RouteMeta origin={AppConfig.origin} />
           <PageMeta {...page?.seo} />
           {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
-          <SearchPage
+          <SearchPageNoSSR
             SearchComponent={AdvancedSearch}
             pageTitle={tAppEvents('appEvents:search.pageTitle')}
           />

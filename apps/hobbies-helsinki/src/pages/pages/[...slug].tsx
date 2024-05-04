@@ -22,11 +22,11 @@ import type {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
+import dynamic from 'next/dynamic';
 import { useContext } from 'react';
 import type { CollectionType, PageType } from 'react-helsinki-headless-cms';
 import {
   getCollections,
-  PageContent as RHHCPageContent,
   Page as RHHCPage,
   useConfig,
   getBreadcrumbsFromPage,
@@ -60,6 +60,13 @@ const NextCmsPage: NextPage<{
   // This is needed only with fallback: true, but should not be needed at all.
   if (!page) return null;
 
+  const RHHCPageContentNoSSR = dynamic(
+    () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <RHHCPage
       className="page"
@@ -67,7 +74,7 @@ const NextCmsPage: NextPage<{
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={page} />
-          <RHHCPageContent
+          <RHHCPageContentNoSSR
             page={page}
             collections={
               collections

@@ -14,6 +14,7 @@ import {
   RouteMeta,
   getFilteredBreadcrumbs,
   usePreview,
+  PageMeta,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
@@ -74,6 +75,7 @@ const NextCmsPage: NextPage<{
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={page} />
+          <PageMeta {...page?.seo} />
           <RHHCPageContentNoSSR
             page={page}
             collections={

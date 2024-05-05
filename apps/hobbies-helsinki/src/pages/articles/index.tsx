@@ -14,6 +14,7 @@ import {
   getLanguageCodeFilter,
   getFilteredBreadcrumbs,
   usePreview,
+  PageMeta,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
@@ -172,6 +173,7 @@ export default function ArticleArchive({
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={page} />
+          <PageMeta {...page?.seo} />
           <SearchPageContentNoSSR
             breadcrumbs={breadcrumbs}
             isLoading={isLoading || isLoadingMore}

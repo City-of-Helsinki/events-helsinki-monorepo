@@ -8,7 +8,6 @@ import {
   EventClosedHero,
   EventHero,
   EventPageMeta,
-  EventContent,
   RouteMeta,
   BreadcrumbContainer,
 } from '@events-helsinki/components';
@@ -29,6 +28,13 @@ import useSimilarEventsQueryVariables from './useSimilarEventsQueryVariables';
 
 const SimilarEvents = dynamic(
   () => import('@events-helsinki/components').then((mod) => mod.SimilarEvents),
+  {
+    ssr: false,
+  }
+);
+
+const EventContent = dynamic(
+  () => import('@events-helsinki/components').then((mod) => mod.EventContent),
   {
     ssr: false,
   }

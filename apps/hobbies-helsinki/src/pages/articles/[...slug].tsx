@@ -16,6 +16,7 @@ import {
   defaultArticleArchiveBreadcrumbTitle,
   PageByTemplateBreadcrumbTitleDocument,
   usePreview,
+  PageMeta,
 } from '@events-helsinki/components';
 import type {
   AppLanguage,
@@ -116,6 +117,7 @@ const NextCmsArticle: NextPage<{
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={article} />
+          <PageMeta {...article?.seo} />
           <RHHCPageContentNoSSR
             page={article}
             onArticlesSearch={handleArticlesSearch}

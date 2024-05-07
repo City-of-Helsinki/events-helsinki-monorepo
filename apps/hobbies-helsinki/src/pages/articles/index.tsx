@@ -14,9 +14,11 @@ import {
   getLanguageCodeFilter,
   getFilteredBreadcrumbs,
   usePreview,
+  PageMeta,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React, { useContext } from 'react';
@@ -24,7 +26,6 @@ import {
   Page as RHHCPage,
   Card,
   LargeCard,
-  SearchPageContent,
   useConfig,
   TemplateEnum,
   getBreadcrumbsFromPage,
@@ -155,6 +156,16 @@ export default function ArticleArchive({
 
   const { footerMenu } = useContext(NavigationContext);
 
+  const SearchPageContentNoSSR = dynamic(
+    () =>
+      import('react-helsinki-headless-cms').then(
+        (mod) => mod.SearchPageContent
+      ),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <RHHCPage
       className="pageLayout"
@@ -162,7 +173,8 @@ export default function ArticleArchive({
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={page} />
-          <SearchPageContent
+          <PageMeta {...page?.seo} />
+          <SearchPageContentNoSSR
             breadcrumbs={breadcrumbs}
             isLoading={isLoading || isLoadingMore}
             page={page}

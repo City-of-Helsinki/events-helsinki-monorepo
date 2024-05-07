@@ -1,11 +1,9 @@
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { useContext } from 'react';
 import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
-import {
-  Navigation as RHHCNavigation,
-  isLanguage,
-} from 'react-helsinki-headless-cms';
+import { isLanguage } from 'react-helsinki-headless-cms';
 import {
   Notification,
   useLanguagesQuery,
@@ -42,9 +40,16 @@ export default function Navigation({
     languages ??
     languagesQuery.data?.languages?.filter(isLanguage);
 
+  const RHHCNavigationNoSSR = dynamic(
+    () => import('react-helsinki-headless-cms').then((mod) => mod.Navigation),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <>
-      <RHHCNavigation
+      <RHHCNavigationNoSSR
         languages={languageOptions}
         menu={menu ?? headerMenu}
         universalBarMenu={universalBarMenu ?? headerUniversalBarMenu}

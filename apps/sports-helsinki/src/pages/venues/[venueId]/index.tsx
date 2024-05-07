@@ -38,6 +38,7 @@ const VenuePage: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
   usePageScrollRestoration();
+
   return (
     <RHHCPage
       className="pageLayout"

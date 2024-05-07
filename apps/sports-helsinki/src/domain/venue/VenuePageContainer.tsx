@@ -20,7 +20,6 @@ import routerHelper from '../../domain/app/routerHelper';
 import ErrorHero from '../error/ErrorHero';
 import { SPORT_COURSES_KEYWORDS } from '../search/eventSearch/constants';
 import getVenueSourceId from './utils/getVenueSourceId';
-import VenueContent from './venueContent/VenueContent';
 import VenueHero from './venueHero/VenueHero';
 import styles from './venuePage.module.scss';
 import VenuePageMeta from './venuePageMeta/VenuePageMeta';
@@ -38,6 +37,10 @@ const VenueUpcomingEvents = dynamic(
     ssr: false,
   }
 );
+
+const VenueContent = dynamic(() => import('./venueContent/VenueContent'), {
+  ssr: false,
+});
 
 export interface VenuePageContainerProps {
   loading: boolean;

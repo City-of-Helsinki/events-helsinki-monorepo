@@ -16,6 +16,7 @@ import {
   defaultArticleArchiveBreadcrumbTitle,
   PageByTemplateBreadcrumbTitleDocument,
   usePreview,
+  PageMeta,
 } from '@events-helsinki/components';
 import type {
   AppLanguage,
@@ -30,12 +31,12 @@ import type {
   GetStaticPropsResult,
   NextPage,
 } from 'next';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import type { CollectionType, ArticleType } from 'react-helsinki-headless-cms';
 import {
   getCollections,
-  PageContent as RHHCPageContent,
   Page as RHHCPage,
   useConfig,
   getBreadcrumbsFromPage,
@@ -101,6 +102,13 @@ const NextCmsArticle: NextPage<{
   // This is needed only with fallback: true, but should not be needed at all.
   if (!article || loadingCategories) return null;
 
+  const RHHCPageContentNoSSR = dynamic(
+    () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
+    {
+      ssr: false,
+    }
+  );
+
   return (
     <RHHCPage
       className="article-page"
@@ -108,7 +116,8 @@ const NextCmsArticle: NextPage<{
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={article} />
-          <RHHCPageContent
+          <PageMeta {...article?.seo} />
+          <RHHCPageContentNoSSR
             page={article}
             onArticlesSearch={handleArticlesSearch}
             breadcrumbs={

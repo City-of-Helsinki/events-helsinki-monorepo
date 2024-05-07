@@ -83,7 +83,10 @@ const Search: NextPage<{
       content={
         <>
           <RouteMeta origin={AppConfig.origin} />
-          <PageMeta {...page?.seo} />
+          <PageMeta
+            {...page?.seo}
+            image={page?.featuredImage?.node?.mediaItemUrl || ''}
+          />
           {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
           <SearchPageNoSSR
             SearchComponent={AdvancedSearch}

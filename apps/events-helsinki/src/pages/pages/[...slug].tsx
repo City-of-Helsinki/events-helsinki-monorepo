@@ -75,7 +75,10 @@ const NextCmsPage: NextPage<{
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={page} />
-          <PageMeta {...page?.seo} />
+          <PageMeta
+            {...page?.seo}
+            image={page?.featuredImage?.node?.mediaItemUrl || ''}
+          />
           <RHHCPageContentNoSSR
             page={page}
             breadcrumbs={

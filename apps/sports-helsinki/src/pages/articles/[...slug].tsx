@@ -116,7 +116,10 @@ const NextCmsArticle: NextPage<{
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={article} />
-          <PageMeta {...article?.seo} />
+          <PageMeta
+            {...article?.seo}
+            image={article?.featuredImage?.node?.mediaItemUrl || ''}
+          />
           <RHHCPageContentNoSSR
             page={article}
             onArticlesSearch={handleArticlesSearch}

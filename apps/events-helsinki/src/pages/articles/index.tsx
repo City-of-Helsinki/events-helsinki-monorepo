@@ -173,7 +173,10 @@ export default function ArticleArchive({
       content={
         <>
           <RouteMeta origin={AppConfig.origin} page={page} />
-          <PageMeta {...page?.seo} />
+          <PageMeta
+            {...page?.seo}
+            image={page?.featuredImage?.node?.mediaItemUrl || ''}
+          />
           <SearchPageContentNoSSR
             breadcrumbs={breadcrumbs}
             page={page}

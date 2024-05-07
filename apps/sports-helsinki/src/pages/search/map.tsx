@@ -139,7 +139,10 @@ export default function MapSearch({ page }: { page: PageType }) {
       content={
         <>
           <RouteMeta origin={AppConfig.origin} />
-          <PageMeta {...page?.seo} />
+          <PageMeta
+            {...page?.seo}
+            image={page?.featuredImage?.node?.mediaItemUrl || ''}
+          />
           <CombinedSearchProvider>
             <MapSearchPageContent />
           </CombinedSearchProvider>

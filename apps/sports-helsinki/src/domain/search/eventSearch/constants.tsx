@@ -151,6 +151,7 @@ export const GUIDED_EXERCISE_KEYWORDS = [
   'yso:p19453', // keppijumppa / broomstick exercise
   'yso:p21559', // asahi / asahi
   'yso:p27829', // tuolijumppa / chair exercise
+  'yso:p9270', // kurssit / courses
 ];
 
 // TODO: Remove these since they should not be needed when the general events are not used at all.

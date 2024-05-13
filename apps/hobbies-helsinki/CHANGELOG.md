@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.17.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.17.0...hobbies-helsinki-v2.17.1) (2024-05-13)
+
+
+### Bug Fixes
+
+* Archive search button styles ([#680](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/680)) ([7cfee1e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7cfee1e126a023454bbec1f382c7886678d6998d))
+* Image tag ([#687](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/687)) ([308b305](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/308b305f7a048265c702d1371470c44d86ff29ca))
+* Ssr  rendering and meta tags ([#683](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/683)) ([f427e1c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f427e1cca8f1fef07997e7bdca9f65195cf0625d))
+* Temporary possible fix to ssr issues ([#686](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/686)) ([bbe5c6b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bbe5c6b072ab11062c64d3866f290ffd90990c4c))
+
 ## [2.17.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.16.2...hobbies-helsinki-v2.17.0) (2024-04-25)
 
 

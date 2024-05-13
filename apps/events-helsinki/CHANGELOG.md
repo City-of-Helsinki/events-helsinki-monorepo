@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.16.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.16.0...events-helsinki-v1.16.1) (2024-05-13)
+
+
+### Bug Fixes
+
+* Image tag ([#687](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/687)) ([308b305](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/308b305f7a048265c702d1371470c44d86ff29ca))
+* Ssr  rendering and meta tags ([#683](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/683)) ([f427e1c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f427e1cca8f1fef07997e7bdca9f65195cf0625d))
+* Temporary possible fix to ssr issues ([#686](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/686)) ([bbe5c6b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bbe5c6b072ab11062c64d3866f290ffd90990c4c))
+
 ## [1.16.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.15.2...events-helsinki-v1.16.0) (2024-04-25)
 
 

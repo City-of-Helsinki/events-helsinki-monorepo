@@ -6,7 +6,7 @@
     "searchTextPlaceholder": "Hakusana",
     "searchButtonLabelText": "Hae",
     "loadMoreButtonLabelText": "Lataa lisää",
-    "noResultsTitle": "Valitsemillasi hakuehdoilla ei löytynyt ajankohtaisia aiheita",
+    "noResultsTitle": "Valitsemillasi hakuehdoilla ei löytynyt ajankohtaisia aiheita.",
     "noResultsText": "Voit koittaa muuttaa tai vähentää hakuehtoja.",
     "buttonClearFilters": "Tyhjennä hakuehdot"
   }

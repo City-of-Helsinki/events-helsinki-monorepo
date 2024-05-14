@@ -6,7 +6,8 @@
     "searchTextPlaceholder": "Söktext",
     "searchButtonLabelText": "Sök",
     "loadMoreButtonLabelText": "Ladda mer",
-    "noResultsText": "Inga resultat",
+    "noResultsTitle": "Med de sökkriterier du valde hittades inga aktuella ämnen.",
+    "noResultsText": "Du kan försöka ändra eller minska på antalet sökkriterier.",
     "buttonClearFilters": "Töm sökfilter"
   }
 }

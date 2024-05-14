@@ -256,12 +256,7 @@ export default function ArticleArchive({
                 />
               );
             }}
-            hasMore={Boolean(
-              !isLoading &&
-                articles?.length &&
-                articles?.length > 0 &&
-                hasMoreToLoad
-            )}
+            hasMore={Boolean(!isLoading && articles?.length && hasMoreToLoad)}
           />
         </>
       }

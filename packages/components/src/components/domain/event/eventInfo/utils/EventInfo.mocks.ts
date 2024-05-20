@@ -37,7 +37,7 @@ export const endTime = '2020-06-22T10:00:00.000000Z';
 export const email = 'test@email.com';
 export const telephone = '0441234567';
 export const addressLocality = 'Helsinki';
-export const district = 'Malmi';
+export const neighborhood = 'Malmi';
 export const locationName = 'Location name';
 export const streetAddress = 'Test address 1';
 export const price = '12 €';
@@ -56,7 +56,7 @@ export const event = fakeEvent({
   provider: { fi: organizerName },
   publisher: organizationId,
   location: {
-    divisions: [{ name: { fi: district }, type: 'neighborhood' }],
+    divisions: [{ name: { fi: neighborhood }, type: 'neighborhood' }],
     email,
     telephone: { fi: telephone },
     internalId: 'tprek:8740',

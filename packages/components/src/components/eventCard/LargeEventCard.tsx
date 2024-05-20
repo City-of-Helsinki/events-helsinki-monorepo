@@ -77,7 +77,7 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
               <IconLocation aria-hidden />
               <EventLocationText
                 event={event}
-                showDistrict={false}
+                showNeighborhood={false}
                 showLocationName={true}
               />
             </div>

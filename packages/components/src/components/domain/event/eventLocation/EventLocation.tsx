@@ -18,16 +18,16 @@ interface Props {
 export const getLocationStr = (
   event: EventFields,
   locale: AppLanguage,
-  showDistrict: boolean,
+  showNeighborhood: boolean,
   showLocationName: boolean
 ) => {
-  const { addressLocality, district, locationName, streetAddress } =
+  const { addressLocality, neighborhood, locationName, streetAddress } =
     getEventFields(event, locale);
 
   return [
     showLocationName ? locationName : null,
     streetAddress,
-    showDistrict ? district : null,
+    showNeighborhood ? neighborhood : null,
     addressLocality,
   ]
     .filter((e) => e)

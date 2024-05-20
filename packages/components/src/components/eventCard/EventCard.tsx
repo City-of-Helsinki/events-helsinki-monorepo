@@ -71,7 +71,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, eventUrl }) => {
               <div className={styles.eventLocation}>
                 <EventLocationText
                   event={event}
-                  showDistrict={false}
+                  showNeighborhood={false}
                   showLocationName={true}
                 />
               </div>

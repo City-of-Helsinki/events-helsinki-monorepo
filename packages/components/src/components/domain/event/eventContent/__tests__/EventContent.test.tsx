@@ -14,7 +14,7 @@ const description = 'Event description';
 const email = 'test@email.com';
 const telephone = '0441234567';
 const addressLocality = 'Helsinki';
-const district = 'Malmi';
+const neighborhood = 'Malmi';
 const locationName = 'Location name';
 const streetAddress = 'Test address 1';
 const photographerName = 'Kuvaaja Helsinki';
@@ -24,7 +24,7 @@ const event = fakeEvent({
   description: { fi: description },
   publisher: '',
   location: {
-    divisions: [{ name: { fi: district }, type: 'neighborhood' }],
+    divisions: [{ name: { fi: neighborhood }, type: 'neighborhood' }],
     email,
     telephone: { fi: telephone },
     internalId: 'tprek:8740',
@@ -74,7 +74,7 @@ it('should render event content fields', async () => {
   const itemsByText = [
     description,
     `Kuva: ${photographerName}`,
-    [streetAddress, district, addressLocality].join(', '),
+    [streetAddress, neighborhood, addressLocality].join(', '),
   ];
 
   itemsByText.forEach((item) => {

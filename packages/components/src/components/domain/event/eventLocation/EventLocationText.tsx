@@ -6,25 +6,25 @@ import { getEventFields } from '../../../../utils';
 
 interface Props {
   event: EventFields;
-  showDistrict: boolean;
+  showNeighborhood: boolean;
   showLocationName: boolean;
 }
 
 const EventLocationText: React.FC<Props> = ({
   event,
-  showDistrict,
+  showNeighborhood,
   showLocationName,
 }) => {
   const locale = useLocale();
 
   const getLocationStr = () => {
-    const { addressLocality, district, locationName, streetAddress } =
+    const { addressLocality, neighborhood, locationName, streetAddress } =
       getEventFields(event, locale);
 
     return [
       showLocationName ? locationName : null,
       streetAddress,
-      showDistrict ? district : null,
+      showNeighborhood ? neighborhood : null,
       addressLocality,
     ]
       .filter((e) => e)

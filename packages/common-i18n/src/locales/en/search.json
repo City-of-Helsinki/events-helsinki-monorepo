@@ -25,7 +25,6 @@
     "checkboxOnlyRemoteEvents": "Show only remote events",
     "labelCategory": "What kind of event you are looking for?",
     "labelDateRange": "For what period you are looking for?",
-    "labelDistrict": "From where are you looking for?",
     "labelTargetGroup": "Whom you are looking for?",
     "selectAllDivisions": "All areas",
     "selectAllPlaces": "All venues",

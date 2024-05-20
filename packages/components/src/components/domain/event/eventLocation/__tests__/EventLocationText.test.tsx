@@ -21,7 +21,7 @@ it('should render event location text', () => {
   const { container } = render(
     <EventLocationText
       event={event}
-      showDistrict={true}
+      showNeighborhood={true}
       showLocationName={true}
     />
   );

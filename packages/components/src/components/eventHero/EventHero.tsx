@@ -130,7 +130,7 @@ const EventHero: React.FC<EventHeroProps> = ({
                     >
                       <EventLocationText
                         event={event}
-                        showDistrict={false}
+                        showNeighborhood={false}
                         showLocationName={true}
                       />
                     </InfoWithIcon>

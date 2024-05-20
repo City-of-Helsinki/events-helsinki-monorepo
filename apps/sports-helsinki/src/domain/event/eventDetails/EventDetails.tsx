@@ -54,7 +54,7 @@ const EventDetails: React.FC<EventDetailsProps> = (props) => {
             <div className={styles.text}>
               <LocationText
                 event={event}
-                showDistrict={false}
+                showNeighborhood={false}
                 showLocationName
               />
             </div>

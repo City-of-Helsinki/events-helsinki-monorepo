@@ -108,7 +108,7 @@ const DateInfo: React.FC<{
   const { getPlainEventUrl } = useAppRoutingContext();
   const {
     addressLocality,
-    district,
+    neighborhood,
     endTime,
     locationName,
     name,
@@ -126,7 +126,7 @@ const DateInfo: React.FC<{
           link: `${domain}${getPlainEventUrl(event, locale)}`,
         }),
         end: endTime ? getDateArray(endTime) : getDateArray(startTime),
-        location: [locationName, streetAddress, district, addressLocality]
+        location: [locationName, streetAddress, neighborhood, addressLocality]
           .filter((e) => e)
           .join(', '),
         productId: domain,
@@ -174,7 +174,7 @@ const LocationInfo: React.FC<{ event: EventFields }> = ({ event }) => {
   const { t } = useTranslation('event');
   const locale = useLocale();
 
-  const { addressLocality, district, locationName, streetAddress } =
+  const { addressLocality, neighborhood, locationName, streetAddress } =
     getEventFields(event, locale);
 
   const serviceMapUrl = getServiceMapUrl(event, locale, false);
@@ -185,12 +185,12 @@ const LocationInfo: React.FC<{ event: EventFields }> = ({ event }) => {
       title={t('info.labelLocation')}
     >
       <Visible below="s">
-        {[locationName, streetAddress, district, addressLocality]
+        {[locationName, streetAddress, neighborhood, addressLocality]
           .filter((e) => e)
           .join(', ')}
       </Visible>
       <Visible above="s">
-        {[locationName, streetAddress, district, addressLocality]
+        {[locationName, streetAddress, neighborhood, addressLocality]
           .filter((e) => e)
           .map((item) => {
             return <div key={item}>{item}</div>;

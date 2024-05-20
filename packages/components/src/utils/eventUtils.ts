@@ -186,35 +186,32 @@ export const getEventSomeImageUrl = (event: EventFields): string => {
 };
 
 /**
- * Get event district info as string
+ * Get event neighborhood info as string
  * @param {object} event
  * @param {string} locale
  * @return {string}
  */
-export const getEventDistrict = (
+export const getEventNeighborhood = (
   event: EventFields,
   locale: AppLanguage
 ): string | null => {
-  const location = event.location;
-  const district = location?.divisions?.find((division) =>
-    ['district', 'neighborhood'].includes(division.type)
+  const neighborhood = event.location?.divisions?.find(
+    (division) => division.type === 'neighborhood'
   );
-
-  return getLocalizedString(district?.name, locale);
+  return getLocalizedString(neighborhood?.name, locale);
 };
 
 /**
  * Get event location fields
- * @param {object} event
- * @param {string} locale
- * @return {string}
+ * @param {EventFields} event
+ * @param {AppLanguage} locale
  */
 const getEventLocationFields = (event: EventFields, locale: AppLanguage) => {
   const location = event.location;
   return {
     addressLocality: getLocalizedString(location?.addressLocality, locale),
     coordinates: [...(location?.position?.coordinates || [])].reverse(),
-    district: getEventDistrict(event, locale),
+    neighborhood: getEventNeighborhood(event, locale),
     location,
     postalCode: location?.postalCode,
     streetAddress: getLocalizedString(location?.streetAddress, locale),
@@ -326,7 +323,6 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
   const startTime = event.startTime;
   return {
     description: getLocalizedString(event.description, locale),
-    // district: getEventDistrict(event, locale),
     email: eventLocation?.email,
     endTime: event.endTime,
     id: event.id,

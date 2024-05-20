@@ -1,4 +1,4 @@
-import type { Breadcrumb } from 'react-helsinki-headless-cms';
+import type { BreadcrumbListItem } from 'hds-react';
 import getFilteredBreadcrumbs, {
   defaultExcludedBreadcrumbPaths,
 } from '../getFilteredBreadcrumbs';
@@ -14,30 +14,30 @@ describe('defaultExcludedBreadcrumbPaths', () => {
 
 describe('getFilteredBreadcrumbs', () => {
   describe('uses defaultExcludedBreadcrumbPaths as default list of excluded paths', () => {
-    it.each<[Breadcrumb[], Breadcrumb[]]>([
+    it.each<[BreadcrumbListItem[], BreadcrumbListItem[]]>([
       [
         [
-          { title: 'Etusivu', link: '/fi/' },
-          { title: 'Pages', link: '/fi/pages/' },
+          { title: 'Etusivu', path: '/fi/' },
+          { title: 'Pages', path: '/fi/pages/' },
         ],
-        [{ title: 'Etusivu', link: '/fi/' }],
+        [{ title: 'Etusivu', path: '/fi/' }],
       ],
       [
         [
-          { title: 'Etusivu', link: '/' },
-          { title: 'Pages', link: '/pages/' },
+          { title: 'Etusivu', path: '/' },
+          { title: 'Pages', path: '/pages/' },
         ],
-        [{ title: 'Etusivu', link: '/' }],
+        [{ title: 'Etusivu', path: '/' }],
       ],
       [
         [
-          { title: '/pages', link: '/pages' },
-          { title: '/fi/pages', link: '/fi/pages' },
-          { title: '/fi/pages/', link: '/fi/pages/' },
-          { title: '/sv/pages', link: '/sv/pages' },
-          { title: '/sv/pages/', link: '/sv/pages/' },
-          { title: '/en/pages', link: '/en/pages' },
-          { title: '/en/pages/', link: '/en/pages/' },
+          { title: '/pages', path: '/pages' },
+          { title: '/fi/pages', path: '/fi/pages' },
+          { title: '/fi/pages/', path: '/fi/pages/' },
+          { title: '/sv/pages', path: '/sv/pages' },
+          { title: '/sv/pages/', path: '/sv/pages/' },
+          { title: '/en/pages', path: '/en/pages' },
+          { title: '/en/pages/', path: '/en/pages/' },
         ],
         [],
       ],

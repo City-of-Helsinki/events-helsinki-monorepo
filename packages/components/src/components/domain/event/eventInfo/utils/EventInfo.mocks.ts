@@ -18,7 +18,9 @@ import type {
   EventListQueryVariables,
   EventListResponse,
   Meta,
+  LocalizedObject,
 } from '../../../../../../src/types/generated/graphql';
+import type { ValidLocalizedObject } from '../../../../../types';
 
 export const organizationId = '1';
 export const organizationName = 'Organization name';
@@ -36,6 +38,12 @@ export const startTime = '2020-06-22T07:00:00.000000Z';
 export const endTime = '2020-06-22T10:00:00.000000Z';
 export const email = 'test@email.com';
 export const telephone = '0441234567';
+export const providerContactInfo: ValidLocalizedObject = {
+  __typename: 'LocalizedObject',
+  fi: 'Finnish provider contact info',
+  en: 'English provider contact info',
+  sv: 'Swedish provider contact info',
+} satisfies LocalizedObject;
 export const addressLocality = 'Helsinki';
 export const neighborhood = 'Malmi';
 export const locationName = 'Location name';
@@ -48,12 +56,13 @@ export const remainingAttendeeCapacity = 5;
 export const audienceMinAge = '5';
 export const audienceMaxAge = '15';
 export const organizerName = 'provider organisation';
-export const event = fakeEvent({
+export const event: EventFieldsFragment = fakeEvent({
   audienceMinAge,
   audienceMaxAge,
   startTime,
   endTime,
   provider: { fi: organizerName },
+  providerContactInfo,
   publisher: organizationId,
   location: {
     divisions: [{ name: { fi: neighborhood }, type: 'neighborhood' }],
@@ -72,7 +81,7 @@ export const event = fakeEvent({
     fakeTargetGroup({ name: fakeLocalizedObject(targetGroup) })
   ),
   typeId: EventTypeId.Course,
-}) as EventFieldsFragment;
+});
 
 export const meta: Meta = {
   count: 20,

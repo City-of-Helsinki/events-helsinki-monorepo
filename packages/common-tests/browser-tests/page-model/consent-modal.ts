@@ -51,4 +51,4 @@ class ConsentModal {
   }
 }
 
-export default ConsentModal;
+export { ConsentModal };

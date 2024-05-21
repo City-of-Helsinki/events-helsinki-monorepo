@@ -153,4 +153,4 @@ class EventDetailsPage {
   }
 }
 
-export default EventDetailsPage;
+export { EventDetailsPage };

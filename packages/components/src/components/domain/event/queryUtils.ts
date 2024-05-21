@@ -7,14 +7,16 @@ import {
   SIMILAR_EVENTS_AMOUNT,
 } from '../../../constants/event-constants';
 import type { EventFields } from '../../../types/event-types';
-import {
+import type {
   EventListQuery,
   EventListQueryVariables,
-  EventTypeId,
-  Meta,
   QueryEventListArgs,
+  Meta,
 } from '../../../types/generated/graphql';
-import { useEventListQuery } from '../../../types/generated/graphql';
+import {
+  EventTypeId,
+  useEventListQuery,
+} from '../../../types/generated/graphql';
 import { getEventIdFromUrl } from '../../../utils/eventUtils';
 
 /**

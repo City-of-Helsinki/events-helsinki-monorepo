@@ -45,4 +45,4 @@ class Header {
   }
 }
 
-export default Header;
+export { Header };

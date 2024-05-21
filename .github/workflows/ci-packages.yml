@@ -30,13 +30,19 @@ on:
 
 env:
   CI: true
+  GRAPHQL_PROXY_DEBUG: debug
+  GRAPHQL_PROXY_PORT: 4100
+  GRAPHQL_PROXY_API_BASE_URL: https://api.hel.fi/linkedevents/v1/
+  GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL: https://kartta.hel.fi/ws/geoserver/avoindata
+  GRAPHQL_PROXY_SENTRY_DSN:
+  GRAPHQL_PROXY_SENTRY_ENVIRONMENT: local
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -77,7 +83,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install --immutable --inline-builds
+          cd packages && yarn install --immutable --inline-builds
         env:
           HUSKY: 0
 
@@ -85,24 +91,24 @@ jobs:
       # That allows to see if we're introducing "surface" regressions (just the types)
       - name: Typecheck
         run: |
-          yarn workspaces foreach -tv --from 'events-helsinki-*' --since=origin/main --recursive run typecheck
+          yarn workspaces foreach -tv --exclude hobbies-helsinki --exclude events-helsinki --exclude sports-helsinki --since=origin/main run typecheck
 
       # Lint packages that have changed (--include & --since)
       - name: Linter
         run: |
-          yarn workspaces foreach -tv --include 'events-helsinki-*' --since=origin/main --recursive run lint
-          yarn workspaces foreach -tv --include 'events-helsinki-*' --since=origin/main --recursive run lint-styles
+          yarn workspaces foreach -tv --exclude hobbies-helsinki --exclude events-helsinki --exclude sports-helsinki --since=origin/main run lint
+          yarn workspaces foreach -tv --exclude hobbies-helsinki --exclude events-helsinki --exclude sports-helsinki --since=origin/main run lint-styles
 
       # Test packages that have changed (--include & --since)
       - name: Unit tests changed packages
         run: |
-          yarn workspaces foreach -tv --include 'events-helsinki-*' --since=origin/main --recursive run test
+          yarn workspaces foreach -tv --exclude hobbies-helsinki --exclude events-helsinki --exclude sports-helsinki --since=origin/main run test
       # to debug cache issues: ls ${{ github.workspace }}/.cache
       # Build packages that have changed (--include & --since), assuming that
       # apps build are done already. Otherwise --from & --since
       - name: Run build for changed packages
         run: |
-          yarn workspaces foreach -tv --include 'events-helsinki-*' --since=origin/main run build
+          yarn workspaces foreach -tv --exclude hobbies-helsinki --exclude events-helsinki --exclude sports-helsinki --since=origin/main run build
 
       # Test storybook build on packages that have changed (--include & --since)
       - name: Run storybook build for changed packages

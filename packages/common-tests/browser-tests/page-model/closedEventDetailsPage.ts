@@ -23,4 +23,4 @@ class ClosedEventDetailsPage {
   }
 }
 
-export default ClosedEventDetailsPage;
+export { ClosedEventDetailsPage };

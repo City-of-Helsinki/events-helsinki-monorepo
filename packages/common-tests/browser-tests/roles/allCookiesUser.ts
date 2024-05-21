@@ -1,5 +1,5 @@
 import { ClientFunction, Role } from 'testcafe';
-import ConsentModal from '../../browser-tests/page-model/consent-modal';
+import { ConsentModal } from '../../browser-tests/page-model/consent-modal';
 import { getEnvUrl } from '../utils/url.utils';
 
 export const consentCookieName = 'city-of-helsinki-cookie-consents';

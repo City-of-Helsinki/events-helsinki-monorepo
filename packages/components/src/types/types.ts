@@ -2,10 +2,17 @@ import type { NextRouter } from 'next/router';
 import type React from 'react';
 import type { APP_LANGUAGES } from '../constants';
 import type { EventFields } from './event-types';
-import type { Venue } from './generated/graphql';
+import type { LocalizedObject, Venue } from './generated/graphql';
 export type AppLanguage = (typeof APP_LANGUAGES)[number];
 
 export type AutosuggestType = 'keyword' | 'text';
+
+export type ValidLocalizedObject = {
+  __typename: LocalizedObject['__typename'];
+  en: NonNullable<LocalizedObject['en']>;
+  fi: NonNullable<LocalizedObject['fi']>;
+  sv: NonNullable<LocalizedObject['sv']>;
+};
 
 /* eslint-enable @typescript-eslint/naming-convention */
 

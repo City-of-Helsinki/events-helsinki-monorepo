@@ -5,9 +5,11 @@ import type { ShareLinkProps } from '../types';
 const renderComponent = (props: ShareLinkProps) =>
   render(<FacebookShareLink {...props} />);
 
-it('should apply aria label', () => {
+it('should apply aria label', async () => {
   const sharedLink = 'https://helsinki.fi/some/';
   renderComponent({ sharedLink });
 
-  expect(screen.getByLabelText(/Jaa Facebookissa/)).toBeInTheDocument();
+  expect(
+    await screen.findByRole('button', { name: /Jaa Facebookissa/ })
+  ).toBeInTheDocument();
 });

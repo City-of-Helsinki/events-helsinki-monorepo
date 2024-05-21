@@ -31,6 +31,7 @@ import {
   organizationName,
   organizerName,
   price,
+  providerContactInfo,
   streetAddress,
   subEventsResponse,
   superEventInternalId,
@@ -82,26 +83,33 @@ it('should render event info fields', async () => {
     { role: 'heading', name: translations.event.info.labelPrice },
   ];
 
-  itemsByRole.forEach(({ role, name }) => {
-    expect(screen.getByRole(role, { name })).toBeInTheDocument();
-  });
+  for (const { role, name } of itemsByRole) {
+    expect(await screen.findByRole(role, { name })).toBeInTheDocument();
+  }
 
   const itemsByText = [
     'Ma 22.6.2020, klo 10.00–13.00',
     addressLocality,
     locationName,
     streetAddress,
-    email,
-    telephone,
     organizationName,
     organizerName,
     price,
   ];
 
-  itemsByText.forEach(async (item) => {
-    await screen.findByText(item);
-  });
-});
+  for (const item of itemsByText) {
+    expect(await screen.findByText(item)).toBeInTheDocument();
+  }
+
+  // Email and telephone should not be found in the document anymore
+  expect(screen.queryByText(email)).not.toBeInTheDocument();
+  expect(screen.queryByText(telephone)).not.toBeInTheDocument();
+
+  // Instead the Finnish translation of provider contact info should be visible
+  expect(await screen.findByText(providerContactInfo.fi)).toBeInTheDocument();
+  expect(screen.queryByText(providerContactInfo.en)).not.toBeInTheDocument();
+  expect(screen.queryByText(providerContactInfo.sv)).not.toBeInTheDocument();
+}, 20_000);
 
 it('should hide the organizer section when the organizer name is not given', async () => {
   const mockEvent = {
@@ -124,18 +132,13 @@ it('should hide the organizer section when the organizer name is not given', asy
   ).not.toBeInTheDocument();
 });
 
-it('should hide other info section', () => {
-  const mockEvent = {
+it('should hide other info section if no provider contact info, external links or info url', () => {
+  const mockEvent: EventFields = {
     ...event,
     externalLinks: [],
     infoUrl: null,
-    location: {
-      ...event.location,
-      email: null,
-      externalLinks: [],
-      telephone: null,
-    },
-  } as EventFields;
+    providerContactInfo: null,
+  };
   render(<EventInfo event={mockEvent} />, {
     mocks,
   });
@@ -146,12 +149,13 @@ it('should hide other info section', () => {
       name: translations.event.info.labelOtherInfo,
     })
   ).not.toBeInTheDocument();
-  expect(screen.queryByText(email)).not.toBeInTheDocument();
-  expect(screen.queryByText(telephone)).not.toBeInTheDocument();
+  expect(screen.queryByText(providerContactInfo.en)).not.toBeInTheDocument();
+  expect(screen.queryByText(providerContactInfo.fi)).not.toBeInTheDocument();
+  expect(screen.queryByText(providerContactInfo.sv)).not.toBeInTheDocument();
 });
 
 it('should hide other info section registration url from external links', () => {
-  const mockEvent = {
+  const mockEvent: EventFields = {
     ...event,
     externalLinks: [
       {
@@ -160,13 +164,7 @@ it('should hide other info section registration url from external links', () => 
       },
     ],
     infoUrl: null,
-    location: {
-      ...event.location,
-      email: null,
-      externalLinks: [],
-      telephone: null,
-    },
-  } as EventFields;
+  };
   render(<EventInfo event={mockEvent} />, {
     mocks,
   });
@@ -179,18 +177,16 @@ it('should hide other info section registration url from external links', () => 
 });
 
 it('should hide the map link from location info if location is internet', () => {
-  const mockEvent = {
+  expect(event.location).not.toBeFalsy();
+  const mockEvent: EventFields = {
     ...event,
     externalLinks: [],
     infoUrl: null,
     location: {
-      ...event.location,
+      ...event.location!,
       id: 'helsinki:internet',
-      email: null,
-      externalLinks: [],
-      telephone: null,
     },
-  } as EventFields;
+  };
   render(<EventInfo event={mockEvent} />, {
     mocks,
   });
@@ -298,29 +294,23 @@ describe('OrganizationInfo', () => {
   ])(
     'should show correct provider link text on event/hobby detail page',
     async ({ eventTypeId, expectedLinkText }) => {
-      render(
-        <EventInfo event={{ ...event, typeId: eventTypeId } as EventFields} />,
-        {
-          mocks: mocksWithSubEvents,
-          routes: ['/fi/kurssit/test'],
-        }
-      );
+      render(<EventInfo event={{ ...event, typeId: eventTypeId }} />, {
+        mocks: mocksWithSubEvents,
+        routes: ['/fi/kurssit/test'],
+      });
       await waitFor(() => {
         expect(screen.getByText(expectedLinkText)).toBeInTheDocument();
       });
     }
   );
 
-  it.each(Object.keys(EventTypeId))(
+  it.each(Object.values(EventTypeId))(
     'should show correct provider link on event/hobby detail page',
     async (eventTypeId) => {
-      render(
-        <EventInfo event={{ ...event, typeId: eventTypeId } as EventFields} />,
-        {
-          mocks,
-          routes: ['/fi/kurssit/test'],
-        }
-      );
+      render(<EventInfo event={{ ...event, typeId: eventTypeId }} />, {
+        mocks,
+        routes: ['/fi/kurssit/test'],
+      });
       const getPublisherLink = () => {
         const publisherLinkElement: HTMLElement =
           screen.getByTestId('publisherLink');
@@ -369,10 +359,10 @@ describe('superEvent', () => {
       superEvent: { internalId: superEventInternalId },
       typeId: EventTypeId.General,
     });
-    const superEventResponse = {
+    const superEventResponse: SuperEventResponse = {
       data: superEvent,
       status: 'resolved',
-    } as SuperEventResponse;
+    };
     const { router } = render(
       <EventInfo event={event} superEvent={superEventResponse} />,
       {

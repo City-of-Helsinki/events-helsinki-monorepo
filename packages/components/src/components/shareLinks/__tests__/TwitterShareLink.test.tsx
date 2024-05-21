@@ -4,9 +4,11 @@ import TwitterShareLink from '../TwitterShareLink';
 const renderComponent = (props: { sharedLink: string }) =>
   render(<TwitterShareLink {...props} />);
 
-it('should apply aria label', () => {
+it('should apply aria label', async () => {
   const sharedLink = 'https://helsinki.fi/some/';
   renderComponent({ sharedLink });
 
-  expect(screen.getByLabelText(/Jaa Twitterissä/)).toBeInTheDocument();
+  expect(
+    await screen.findByRole('button', { name: /Jaa Twitterissä/ })
+  ).toBeInTheDocument();
 });

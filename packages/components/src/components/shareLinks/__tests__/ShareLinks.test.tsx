@@ -6,7 +6,7 @@ import ShareLinks from '../ShareLinks';
 const renderComponent = (props: ShareLinksProps) =>
   render(<ShareLinks {...props} />);
 
-it('should have discoverable link address copy button as well as Facebook, Twitter and LinkedIn share links', () => {
+it('should have discoverable link address copy button as well as Facebook, Twitter and LinkedIn share link buttons', async () => {
   renderComponent({ title: 'Jaa tapahtuma' });
   const shareLinkLabelsFI = [
     /Kopioi linkin osoite/,
@@ -15,7 +15,9 @@ it('should have discoverable link address copy button as well as Facebook, Twitt
     /Jaa LinkedInissä/,
   ];
 
-  shareLinkLabelsFI.forEach((label) => {
-    expect(screen.getByLabelText(label)).not.toStrictEqual(null);
-  });
+  for (const label of shareLinkLabelsFI) {
+    expect(
+      await screen.findByRole('button', { name: label })
+    ).toBeInTheDocument();
+  }
 });

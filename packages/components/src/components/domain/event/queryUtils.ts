@@ -7,7 +7,7 @@ import {
   SIMILAR_EVENTS_AMOUNT,
 } from '../../../constants/event-constants';
 import type { EventFields } from '../../../types/event-types';
-import type {
+import {
   EventListQuery,
   EventListQueryVariables,
   EventTypeId,
@@ -222,6 +222,7 @@ export const useLocationUpcomingEventsQuery = ({
     publisherAncestor: null,
     // superEventType: 'none', // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
     pageSize,
+    eventType: [EventTypeId.Course, EventTypeId.General],
   };
   return useEventListQuery({ variables, ssr: false });
 };

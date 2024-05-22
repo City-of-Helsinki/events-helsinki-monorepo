@@ -1,4 +1,5 @@
 import { EVENT_SORT_OPTIONS } from '@events-helsinki/components/constants';
+import { EventTypeId } from '@events-helsinki/components/types';
 import * as React from 'react';
 import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
@@ -29,7 +30,7 @@ const similarEventQueryVariables = {
   keywordNot: undefined,
   publisher: undefined,
   keywordOrSet2: undefined,
-  eventType: undefined,
+  eventType: [EventTypeId.Course, EventTypeId.General],
 };
 
 const mocks = [

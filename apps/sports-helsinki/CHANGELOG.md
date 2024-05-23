@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.23.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.22.1...sports-helsinki-v1.23.0) (2024-05-23)
+
+
+### Features
+
+* Show neighborhood, not district in Linked Events location info ([95add25](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/95add250ed5676950c993bca78d39c828d4302c4))
+
+
+### Bug Fixes
+
+* Archive page title improvements ([#692](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/692)) ([766b0c4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/766b0c4fe26abe0a26d279e5ab4dc185215e5d2e))
+* Missing translations and load more logic ([#689](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/689)) ([4544096](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/454409609b13ca27bd32bd27303c92f2cb9b74e6))
+* Upcoming event types ([#697](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/697)) ([9c36849](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9c3684984e4b3f0ac674d76d5d96e35ddd2331a1))
+
 ## [1.22.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.22.0...sports-helsinki-v1.22.1) (2024-05-13)
 
 

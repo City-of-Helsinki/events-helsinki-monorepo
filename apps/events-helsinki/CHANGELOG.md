@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.17.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.16.1...events-helsinki-v1.17.0) (2024-05-22)
+
+
+### Features
+
+* Show neighborhood, not district in Linked Events location info ([95add25](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/95add250ed5676950c993bca78d39c828d4302c4))
+
+
+### Bug Fixes
+
+* Archive page title improvements ([#692](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/692)) ([766b0c4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/766b0c4fe26abe0a26d279e5ab4dc185215e5d2e))
+
 ## [1.16.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.16.0...events-helsinki-v1.16.1) (2024-05-13)
 
 

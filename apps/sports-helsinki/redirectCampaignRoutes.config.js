@@ -2,6 +2,7 @@
 // prettier-ignore
 const redirectRoutes = {
   // Finnish locale versions
+  '/ulkokuntosaliohjaukset': '/fi/pages/ohjattu-liikunta/ohjattu-toiminta-ulkokuntosaleilla',
   '/yhdessaulkokuntosalille': '/fi/articles/yleinen/yhdessa-ulkokuntosalille-maksutonta-ulkokuntosaliohjausta-kolmena-perjantaina-toukokuussa',
   '/kirjastoliikunta': '/fi/articles/yleinen/kirjastoliikunta',
   '/lapset-ja-perheet': '/fi/pages/kohderyhmat/lapset-ja-perheet',

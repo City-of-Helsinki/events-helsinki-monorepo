@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.17.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.17.0...events-helsinki-v1.17.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* Carousels heading h1 to h2 ([#699](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/699)) ([f756331](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f756331d0715869d00dcc11d9937b596f613d062))
+
 ## [1.17.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.16.1...events-helsinki-v1.17.0) (2024-05-22)
 
 

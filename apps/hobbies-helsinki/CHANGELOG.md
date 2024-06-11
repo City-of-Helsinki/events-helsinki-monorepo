@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.19.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.18.0...hobbies-helsinki-v2.19.0) (2024-06-11)
+
+
+### Features
+
+* Add campaign redirect support ([#703](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/703)) ([502d161](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/502d1613077d5282aa243d7a6458b63527a62553))
+
+
+### Bug Fixes
+
+* Carousels heading h1 to h2 ([#699](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/699)) ([f756331](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f756331d0715869d00dcc11d9937b596f613d062))
+
 ## [2.18.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.17.1...hobbies-helsinki-v2.18.0) (2024-05-23)
 
 

@@ -1,6 +1,8 @@
 // import { DEFAULT_LANGUAGE } from '@events-helsinki/components';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
+import redirectCampaignRoutes from '../redirectCampaignRoutes.config';
+
 // import { i18n } from '../next-i18next.config'; The import does not work to fetch locales
 
 // TODO: For some reason middleware cannot read `'@events-helsinki/components` package without breaking the build
@@ -67,6 +69,11 @@ const prefixDefaultLocale = async (req: NextRequest) => {
   const requestUrlPathnameIsMissingLocale = isPathnameMissingLocale(
     url.pathname
   );
+
+  // Let redirect routes through without prefixing them with locale
+  if (Object.keys(redirectCampaignRoutes).includes(pathname)) {
+    return NextResponse.redirect(new URL(pathname, req.url));
+  }
 
   // The default locale needs to be redirected so that it uses the default language in URL.
   if (req.nextUrl.locale === 'default') {

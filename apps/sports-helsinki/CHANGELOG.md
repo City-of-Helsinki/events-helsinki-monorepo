@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.23.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.23.0...sports-helsinki-v1.23.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* Add new redirect for ulkokuntosaliohjaukset ([5d22ff1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5d22ff1e9402ba388c88c57aa6f247835e2db0e1))
+* Carousels heading h1 to h2 ([#699](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/699)) ([f756331](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f756331d0715869d00dcc11d9937b596f613d062))
+
 ## [1.23.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.22.1...sports-helsinki-v1.23.0) (2024-05-23)
 
 

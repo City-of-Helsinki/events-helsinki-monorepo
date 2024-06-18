@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: proxy.Dockerfile
-      target: develop
+      target: ${DOCKER_TARGET:-develop}
       args:
         - PROXY=venue-graphql-proxy
         - GRAPHQL_PROXY_PORT=${GRAPHQL_PROXY_PORT}

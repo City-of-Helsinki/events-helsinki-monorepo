@@ -14,7 +14,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: develop
+      target: ${DOCKER_TARGET:-develop}
       args:
         APP_PORT: 3000
         PROJECT: events-helsinki

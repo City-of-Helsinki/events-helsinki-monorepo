@@ -15,6 +15,7 @@ USER root
 # install yarn
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 RUN yum -y install yarn
+RUN corepack enable
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -86,6 +87,7 @@ USER root
 # install yarn
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 RUN yum -y install yarn
+RUN corepack enable
 
 # Use non-root user
 USER default
@@ -144,6 +146,7 @@ FROM registry.access.redhat.com/ubi9/nodejs-20 AS develop
 USER root
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 RUN yum -y install yarn
+RUN corepack enable
 
 # Use non-root user
 USER default
@@ -193,6 +196,7 @@ ENV NODE_ENV production
 USER root
 RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 RUN yum -y install yarn
+RUN corepack enable
 
 # Use non-root user
 USER default

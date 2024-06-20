@@ -59,7 +59,7 @@ extends:
     # The values here will override the values defined in the tapahtumat-pipelines repository
     buildArgs:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.test.hel.ninja/
-      CMS_ORIGIN: https://tapahtumat.hkih.stage.geniem.io
+      CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
       NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
@@ -68,5 +68,5 @@ extends:
       SKIP_BUILD_STATIC_GENERATION: 1
     configMap:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.test.hel.ninja/
-      CMS_ORIGIN: https://tapahtumat.hkih.stage.geniem.io
+      CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

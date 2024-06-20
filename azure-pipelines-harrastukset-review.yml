@@ -62,15 +62,15 @@ extends:
     # Does not contain all buildArguments, the rest located in harrastukset-pipelines/harrastukset-variables-development.yml and harrastukset-variables-common.yml
     # The values here will override the values defined in the harrastukset-pipelines repository
     buildArgs:
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies-pr705.dev.hel.ninja/
       CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.dev.hel.ninja/v1/event
       NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0
       SKIP_BUILD_STATIC_GENERATION: 1
     configMap: # pod environment variables
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies-pr705.dev.hel.ninja/
       CMS_ORIGIN: https://harrastus.hkih.stage.geniem.io
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.dev.hel.ninja/v1/event

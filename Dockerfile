@@ -245,4 +245,3 @@ USER default
 ENV PROJECT ${PROJECT}
 
 CMD ["sh", "-c", "/app/run_node.sh"]
-

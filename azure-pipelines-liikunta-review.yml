@@ -62,7 +62,7 @@ extends:
     # Does not contain all buildArguments, the rest located in liikunta-pipelines/liikunta-variables-development.yml and liikunta-variables-common.yml
     # The values here will override the values defined in the liikunta-pipelines repository
     buildArgs:
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr705.dev.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr713.dev.hel.ninja/
       CMS_ORIGIN: https://liikunta.hkih.stage.geniem.io
       LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.dev.hel.ninja/v1/event
       NEXTJS_DISABLE_SENTRY: 1
@@ -71,6 +71,6 @@ extends:
       NEXT_PUBLIC_MATOMO_ENABLED: 0
       SKIP_BUILD_STATIC_GENERATION: 1
     configMap: # pod environment variables
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr705.dev.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr713.dev.hel.ninja/
       CMS_ORIGIN: https://liikunta.hkih.stage.geniem.io
       LINKEDEVENTS_EVENT_ENDPOINT: https://linkedevents.api.dev.hel.ninja/v1/event	

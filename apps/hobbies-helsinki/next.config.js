@@ -12,7 +12,7 @@ const campaignRoutes = Object.entries(redirectCampaignRoutes).flatMap(
       // lets these redirect routes through without prefixing them with locale.
       source,
       destination,
-      permanent: true,
+      permanent: false,
     },
   ]
 );

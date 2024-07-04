@@ -14,7 +14,7 @@ module.exports = nextBaseConfig({
         destination,
         source: `/${locale}${source}`,
         locale: false,
-        permanent: true,
+        permanent: false,
       }))
     );
   },

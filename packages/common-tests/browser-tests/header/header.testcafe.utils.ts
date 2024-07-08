@@ -1,5 +1,5 @@
-import Header from '../page-model/header';
-import LandingPage from '../page-model/landingPage';
+import { Header } from '../page-model/header';
+import { LandingPage } from '../page-model/landingPage';
 import type { AppNamespace } from '../types/app-namespace';
 
 export const changeLanguageAndTrySearch = async (

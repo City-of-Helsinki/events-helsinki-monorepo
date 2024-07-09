@@ -9227,16 +9227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wry/equality@npm:^0.5.0":
-  version: 0.5.6
-  resolution: "@wry/equality@npm:0.5.6"
-  dependencies:
-    tslib: "npm:^2.3.0"
-  checksum: 92ebf6df2ffc97e00dde1cee624c40e3ae52385ac969f9a2f775f793615e0f8b7388a132478ac47f131aa2d7643723a8617db562966a19bd49ae0ea83fa57068
-  languageName: node
-  linkType: hard
-
-"@wry/equality@npm:^0.5.6":
+"@wry/equality@npm:^0.5.0, @wry/equality@npm:^0.5.6":
   version: 0.5.7
   resolution: "@wry/equality@npm:0.5.7"
   dependencies:
@@ -15737,7 +15728,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:16.7.1, graphql@npm:^15.0.0 || ^16.0.0":
+"graphql@npm:16.7.1":
   version: 16.7.1
   resolution: "graphql@npm:16.7.1"
   checksum: f391ef321598b62771b9a8e0c8bb7fae200648bdf1a5b1dec567a71d06a262d6da250aba814f36631fe8eae51fb24ab86dfca5acd1162527b2d9503218e7ea2d
@@ -15753,7 +15744,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.8.1":
+"graphql@npm:^15.0.0 || ^16.0.0, graphql@npm:^16.8.1":
   version: 16.9.0
   resolution: "graphql@npm:16.9.0"
   checksum: 09feee5ee3b791c396d73d2c49fb7bdcd09b8b0c42816f78d4bd2aa5ee356dd234c859d15be4df696b2404bc0dcaa25e5a9776034f33b6ecddc7b83f7213cc48

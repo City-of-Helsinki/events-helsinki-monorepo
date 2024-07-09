@@ -21,6 +21,7 @@ const useCommonCmsConfig = (): Partial<Config> => {
       breadcrumbListLabel: commonTranslation(
         'common:breadcrumb.breadcrumbListLabel'
       ),
+      menuButtonLabel: commonTranslation('common:menu.menuButtonLabel'),
       menuToggleAriaLabel: commonTranslation('common:menu.menuToggleAriaLabel'),
       skipToContentLabel: commonTranslation('common:linkSkipToContent'),
       openInExternalDomainAriaLabel: commonTranslation(

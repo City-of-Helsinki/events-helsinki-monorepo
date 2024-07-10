@@ -157,6 +157,7 @@ function getRHHCConfig(
         'common:breadcrumb.breadcrumbNavigationLabel'
       ),
       breadcrumbListLabel: i18n.t('common:breadcrumb.breadcrumbListLabel'),
+      menuButtonLabel: i18n.t('common:menu.menuButtonLabel'),
       menuToggleAriaLabel: i18n.t('common:menu.menuToggleAriaLabel'),
       skipToContentLabel: i18n.t('common:linkSkipToContent'),
       openInExternalDomainAriaLabel: i18n.t(

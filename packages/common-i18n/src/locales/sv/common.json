@@ -17,6 +17,7 @@
     }
   },
   "menu": {
+    "menuButtonLabel": "Meny",
     "menuToggleAriaLabel": "Öppna menyn"
   },
   "category": {

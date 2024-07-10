@@ -17,6 +17,7 @@
     }
   },
   "menu": {
+    "menuButtonLabel": "Menu",
     "menuToggleAriaLabel": "Open menu"
   },
   "button": {

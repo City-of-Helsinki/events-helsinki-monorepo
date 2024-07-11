@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.20.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.19.0...hobbies-helsinki-v2.20.0) (2024-07-11)
+
+
+### Features
+
+* Image and image gallery module ([#715](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/715)) ([754b427](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/754b4279b3b1c055682a9507895955cd84f88684))
+* Update to HDS 3.9 ([#717](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/717)) ([c029841](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c0298414f4d33d38f55fc453ae0b3c3a69ae5e0d))
+
+
+### Bug Fixes
+
+* Card content height ([#718](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/718)) ([2514ef4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2514ef4d96dcb5c573dd46ab988a5eaf02f470ae))
+* Card link hover and let right position switch ([#710](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/710)) ([7df5ab4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7df5ab43a2e758666066707d8540f6cb7acc6c8f))
+* Delimited card prop ([#704](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/704)) ([5c4f823](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5c4f8235019a8c930bc061b453fa6955216fb73a))
+* Link default bg color ([#712](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/712)) ([832df94](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/832df94df0cd1650695343c26e12d31fe8380176))
+
 ## [2.19.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.18.0...hobbies-helsinki-v2.19.0) (2024-06-11)
 
 

@@ -64,6 +64,8 @@
 
       svg {
         margin-right: var(--spacing-2-xs);
+        min-width: var(--spacing-layout-xs);
+        min-height: var(--spacing-layout-xs);
       }
     }
 
@@ -91,6 +93,8 @@
       color: var(color-black-80);
       svg {
         margin-right: var(--spacing-2-xs);
+        min-width: var(--spacing-layout-xs);
+        min-height: var(--spacing-layout-xs);
       }
     }
 
@@ -103,6 +107,8 @@
       color: var(color-black-80);
       svg {
         margin-right: var(--spacing-2-xs);
+        min-width: var(--spacing-layout-xs);
+        min-height: var(--spacing-layout-xs);
       }
     }
 

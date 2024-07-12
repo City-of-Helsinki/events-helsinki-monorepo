@@ -108,6 +108,7 @@ $logoWidth: 5.5rem;
       }
 
       .title {
+        hyphens: auto;
         order: 3;
         font-size: var(--fontsize-heading-l);
         line-height: var(--lineheight-m);
@@ -119,6 +120,7 @@ $logoWidth: 5.5rem;
       }
 
       .description {
+        word-break: break-word;
         order: 4;
         font-size: var(--fontsize-body-xl);
         line-height: var(--spacing-l);

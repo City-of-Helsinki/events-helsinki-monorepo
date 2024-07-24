@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.21.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.20.0...hobbies-helsinki-v2.21.0) (2024-07-24)
+
+
+### Features
+
+* Use new CMS urls, also in RHHC, update subgraphs & supergraph ([078b147](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/078b147399d7139905c638d5feb50c253f5bb5a2))
+
 ## [2.20.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.19.0...hobbies-helsinki-v2.20.0) (2024-07-11)
 
 

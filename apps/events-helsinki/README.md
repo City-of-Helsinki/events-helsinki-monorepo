@@ -20,7 +20,7 @@ This is a [Next.js](https://nextjs.org/) project originally bootstrapped with [`
 
 ### Headless CMS datasources
 
-- Test / Staging: https://tapahtumat.hkih.stage.geniem.io/graphql ([Wordpress-admin](https://tapahtumat.hkih.stage.geniem.io/wp-admin/))
+- Test / Staging: https://tapahtumat.app-staging.hkih.hion.dev/graphql ([Wordpress-admin](https://tapahtumat.app-staging.hkih.hion.dev/wp-admin/))
 - Production: https://tapahtumat.content.api.hel.fi/wp-admin/graphql ([Wordpress-admin](https://tapahtumat.content.api.hel.fi/wp-admin/wp-admin/))
 
 ### Route (pages)

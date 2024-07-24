@@ -67,9 +67,9 @@ In the `package.json` of the root in the monorepo, there is a script that can be
 
 ```javascript
   "scripts": {
-    "docker:graphql-router:hobbies:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://harrastus.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://kuva-unified-search.api.test.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
-    "docker:graphql-router:events:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://tapahtumat.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://kuva-unified-search.api.test.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
-    "docker:graphql-router:sports:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://liikunta.hkih.stage.geniem.io/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://kuva-unified-search.api.test.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:hobbies:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://harrastus.app-staging.hkih.hion.dev/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://kuva-unified-search.api.test.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:events:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://tapahtumat.app-staging.hkih.hion.dev/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://kuva-unified-search.api.test.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
+    "docker:graphql-router:sports:serve": "cross-env FEDERATION_CMS_ROUTING_URL=https://liikunta.app-staging.hkih.hion.dev/graphql FEDERATION_EVENTS_ROUTING_URL=https://events-graphql-proxy.test.hel.ninja/proxy/graphql FEDERATION_UNIFIED_SEARCH_ROUTING_URL=https://kuva-unified-search.api.test.hel.ninja/search FEDERATION_VENUES_ROUTING_URL=https://venue-graphql-proxy.test.hel.ninja/proxy/graphql docker-compose -f docker-compose.router.yml up",
   }
 ```
 
@@ -114,7 +114,7 @@ More details about this pattern can be read from the Apollo documentation: [Subg
 To introspect a subgraph, use:
 
 ```sh
-rover subgraph introspect https://tapahtumat.hkih.stage.geniem.io/graphql
+rover subgraph introspect https://tapahtumat.app-staging.hkih.hion.dev/graphql
 ```
 
 > NOTE: If the graph is not a subgraph yet, it needs to be migrated to a subgraph. See: [Apollo Federation subgraph specification](https://www.apollographql.com/docs/federation/subgraph-spec/)
@@ -122,13 +122,13 @@ rover subgraph introspect https://tapahtumat.hkih.stage.geniem.io/graphql
 To introspect an old monolith graph, use:
 
 ```sh
-rover graph introspect https://tapahtumat.hkih.stage.geniem.io/graphql
+rover graph introspect https://tapahtumat.app-staging.hkih.hion.dev/graphql
 ```
 
 or to export the result in a file:
 
 ```sh
-rover graph introspect https://tapahtumat.hkih.stage.geniem.io/graphql > my-schema.graphql
+rover graph introspect https://tapahtumat.app-staging.hkih.hion.dev/graphql > my-schema.graphql
 ```
 
 #### Work with supergraph

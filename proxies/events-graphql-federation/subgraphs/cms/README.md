@@ -12,15 +12,15 @@ All the Graphql server instances which are hosted by Geniem, should be running t
 2. The graph does not provide a mechanism for subgraph developers to resolve entity fields via the `Query._entities` -field.
 3. Neither does it follow the federation v2 directives.
 
-The GraphQL schema is fetched with (_a graph command for monolith schemas_) `rover graph introspect https://tapahtumat.hkih.stage.geniem.io/graphql > subgraphs/cms/cms.graphql`.
+The GraphQL schema is fetched with (_a graph command for monolith schemas_) `rover graph introspect https://tapahtumat.app-staging.hkih.hion.dev/graphql > subgraphs/cms/cms.graphql`.
 
 The used routing URLs:
 
-- Events staging: https://tapahtumat.hkih.stage.geniem.io/graphql
+- Events staging: https://tapahtumat.app-staging.hkih.hion.dev/graphql
 - Events production: https://tapahtumat.content.api.hel.fi/graphql
-- Hobbies staging: https://harrastus.hkih.stage.geniem.io/graphql
+- Hobbies staging: https://harrastus.app-staging.hkih.hion.dev/graphql
 - Hobbies production: https://harrastus.content.api.hel.fi/graphql
-- Sports staging: https://liikunta.hkih.stage.geniem.io/graphql
+- Sports staging: https://liikunta.app-staging.hkih.hion.dev/graphql
 - Sports production: https://liikunta.content.api.hel.fi/graphql (NOTE: This Sports production server could still be in production use in the old deprecated Liikunta-app)
 
 An example of the supergraph config:
@@ -28,11 +28,11 @@ An example of the supergraph config:
 ```
 subgraphs:
   cms:
-    routing_url: https://tapahtumat.hkih.stage.geniem.io/graphql
+    routing_url: https://tapahtumat.app-staging.hkih.hion.dev/graphql
     # routing_url: https://tapahtumat.content.api.hel.fi/graphql
-    # routing_url: https://harrastus.hkih.stage.geniem.io/graphql
+    # routing_url: https://harrastus.app-staging.hkih.hion.dev/graphql
     # routing_url: https://harrastus.content.api.hel.fi/graphql
-    # routing_url: https://liikunta.hkih.stage.geniem.io/graphql
+    # routing_url: https://liikunta.app-staging.hkih.hion.dev/graphql
     # routing_url: https://liikunta.content.api.hel.fi/graphql
     schema:
       file: ./subgraphs/cms/cms.graphql

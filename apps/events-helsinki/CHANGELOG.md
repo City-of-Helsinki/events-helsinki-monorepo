@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.19.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.18.0...events-helsinki-v1.19.0) (2024-07-24)
+
+
+### Features
+
+* Use new CMS urls, also in RHHC, update subgraphs & supergraph ([078b147](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/078b147399d7139905c638d5feb50c253f5bb5a2))
+
 ## [1.18.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.17.1...events-helsinki-v1.18.0) (2024-07-11)
 
 

@@ -20,7 +20,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Headless CMS datasources
 
-- Test / Staging: https://harrastus.hkih.stage.geniem.io/graphql ([Wordpress-admin](https://harrastus.hkih.stage.geniem.io/wp-admin/))
+- Test / Staging: https://harrastus.app-staging.hkih.hion.dev/graphql ([Wordpress-admin](https://harrastus.app-staging.hkih.hion.dev/wp-admin/))
 - Production: https://harrastus.content.api.hel.fi/wp-admin/graphql ([Wordpress-admin](https://harrastus.content.api.hel.fi/wp-admin/wp-admin/))
 
 ### Route (pages)

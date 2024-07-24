@@ -355,11 +355,20 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     before: String
   ): TermNodeToEnqueuedStylesheetConnection
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -444,6 +453,9 @@ interface CategoryConnection implements Connection
 
   """A list of connected category Nodes"""
   nodes: [Category!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: CategoryConnectionPageInfo!
 }
 
 """Edge between a Node and a connected category"""
@@ -458,6 +470,25 @@ interface CategoryConnectionEdge implements Edge
 
   """The connected category Node"""
   node: Category!
+}
+
+"""Page Info on the connected CategoryConnectionEdge"""
+interface CategoryConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -493,7 +524,7 @@ type CategoryToAncestorsCategoryConnection implements CategoryConnection & Conne
   nodes: [Category!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: CategoryToAncestorsCategoryConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -509,6 +540,26 @@ type CategoryToAncestorsCategoryConnectionEdge implements CategoryConnectionEdge
   node: Category!
 }
 
+"""Page Info on the &quot;CategoryToAncestorsCategoryConnection&quot;"""
+type CategoryToAncestorsCategoryConnectionPageInfo implements CategoryConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CategoryConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the Category type and the category type"""
 type CategoryToCategoryConnection implements CategoryConnection & Connection
   @join__implements(graph: CMS, interface: "CategoryConnection")
@@ -522,7 +573,7 @@ type CategoryToCategoryConnection implements CategoryConnection & Connection
   nodes: [Category!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: CategoryToCategoryConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -536,6 +587,26 @@ type CategoryToCategoryConnectionEdge implements CategoryConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Category!
+}
+
+"""Page Info on the &quot;CategoryToCategoryConnection&quot;"""
+type CategoryToCategoryConnectionPageInfo implements CategoryConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CategoryConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the CategoryToCategoryConnection connection"""
@@ -641,7 +712,7 @@ type CategoryToContentNodeConnection implements ContentNodeConnection & Connecti
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: CategoryToContentNodeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -655,6 +726,26 @@ type CategoryToContentNodeConnectionEdge implements ContentNodeConnectionEdge & 
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""Page Info on the &quot;CategoryToContentNodeConnection&quot;"""
+type CategoryToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the CategoryToContentNodeConnection connection"""
@@ -692,7 +783,7 @@ input CategoryToContentNodeConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -749,7 +840,7 @@ type CategoryToPostConnection implements PostConnection & Connection
   nodes: [Post!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: CategoryToPostConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -763,6 +854,26 @@ type CategoryToPostConnectionEdge implements PostConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Post!
+}
+
+"""Page Info on the &quot;CategoryToPostConnection&quot;"""
+type CategoryToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PostConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the CategoryToPostConnection connection"""
@@ -829,7 +940,7 @@ input CategoryToPostConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -911,7 +1022,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   @join__implements(graph: CMS, interface: "NodeWithRevisions")
   @join__type(graph: CMS)
 {
-  """Taustaväri"""
+  """Background Color"""
   backgroundColor: String
 
   """The id field matches the WP_Post-&gt;ID field."""
@@ -932,7 +1043,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   """The publishing date set in GMT."""
   dateGmt: String
 
-  """Kuvaus"""
+  """Description"""
   description: String
 
   """The desired slug of the post"""
@@ -997,11 +1108,20 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   """The globally unique identifier of the collection-cpt object."""
   id: ID!
 
-  """Kuva"""
+  """Image"""
   image: String
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -1034,7 +1154,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   """
   modifiedGmt: String
 
-  """Moduulilistaus"""
+  """List of modules"""
   modules: [CollectionModulesUnionType]
 
   """Connection between the Collection type and the collection type"""
@@ -1076,7 +1196,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   """The SEO Framework data of the collection"""
   seo: SEO
 
-  """Näytä etusivulla"""
+  """Show on front page"""
   showOnFrontPage: Boolean
 
   """
@@ -1120,6 +1240,9 @@ interface CollectionConnection implements Connection
 
   """A list of connected collection Nodes"""
   nodes: [Collection!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: CollectionConnectionPageInfo!
 }
 
 """Edge between a Node and a connected collection"""
@@ -1134,6 +1257,25 @@ interface CollectionConnectionEdge implements Edge
 
   """The connected collection Node"""
   node: Collection!
+}
+
+"""Page Info on the connected CollectionConnectionEdge"""
+interface CollectionConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -1194,7 +1336,7 @@ type CollectionToRevisionConnection implements CollectionConnection & Connection
   nodes: [Collection!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: CollectionToRevisionConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -1208,6 +1350,26 @@ type CollectionToRevisionConnectionEdge implements CollectionConnectionEdge & Ed
 
   """The item at the end of the edge"""
   node: Collection!
+}
+
+"""Page Info on the &quot;CollectionToRevisionConnection&quot;"""
+type CollectionToRevisionConnectionPageInfo implements CollectionConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CollectionConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the CollectionToRevisionConnection connection"""
@@ -1242,7 +1404,7 @@ input CollectionToRevisionConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -1271,9 +1433,10 @@ input CollectionToRevisionConnectionWhereArgs
 }
 
 """A Comment object"""
-type Comment implements Node & DatabaseIdentifier
+type Comment implements Node & DatabaseIdentifier & UniformResourceIdentifiable
   @join__implements(graph: CMS, interface: "Node")
   @join__implements(graph: CMS, interface: "DatabaseIdentifier")
+  @join__implements(graph: CMS, interface: "UniformResourceIdentifiable")
   @join__type(graph: CMS)
 {
   """
@@ -1324,13 +1487,31 @@ type Comment implements Node & DatabaseIdentifier
   """The globally unique identifier for the comment object"""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
+
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
 
   """
   Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL.
   """
   karma: Int
+
+  """The permalink of the comment"""
+  link: String
 
   """Connection between the Comment type and the Comment type"""
   parent(
@@ -1377,6 +1558,9 @@ type Comment implements Node & DatabaseIdentifier
   Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL.
   """
   type: String
+
+  """The unique resource identifier path"""
+  uri: String
 }
 
 """A Comment Author object"""
@@ -1435,6 +1619,9 @@ interface CommentConnection implements Connection
 
   """A list of connected Comment Nodes"""
   nodes: [Comment!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: CommentConnectionPageInfo!
 }
 
 """Edge between a Node and a connected Comment"""
@@ -1449,6 +1636,25 @@ interface CommentConnectionEdge implements Edge
 
   """The connected Comment Node"""
   node: Comment!
+}
+
+"""Page Info on the connected CommentConnectionEdge"""
+interface CommentConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The author of a comment"""
@@ -1595,7 +1801,7 @@ type CommentToCommentConnection implements CommentConnection & Connection
   nodes: [Comment!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: CommentToCommentConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -1609,6 +1815,26 @@ type CommentToCommentConnectionEdge implements CommentConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Comment!
+}
+
+"""Page Info on the &quot;CommentToCommentConnection&quot;"""
+type CommentToCommentConnectionPageInfo implements CommentConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CommentConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the CommentToCommentConnection connection"""
@@ -1872,6 +2098,9 @@ interface Connection
 
   """A list of connected nodes"""
   nodes: [Node!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: PageInfo!
 }
 
 """The contact type"""
@@ -1905,7 +2134,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   """The publishing date set in GMT."""
   dateGmt: String
 
-  """Kuvaus"""
+  """Description"""
   description: String
 
   """The desired slug of the post"""
@@ -1972,7 +2201,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   """Globally unique ID of the featured image assigned to the node"""
   featuredImageId: ID
 
-  """Etunimi"""
+  """First name"""
   firstName: String
 
   """
@@ -1983,8 +2212,17 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   """The globally unique identifier of the contact-cpt object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -2007,7 +2245,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   """The user that most recently edited the node"""
   lastEditedBy: ContentNodeToEditLastConnectionEdge
 
-  """Sukunimi"""
+  """Last name"""
   lastName: String
 
   """The permalink of the post"""
@@ -2103,6 +2341,9 @@ interface ContactConnection implements Connection
 
   """A list of connected contact Nodes"""
   nodes: [Contact!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: ContactConnectionPageInfo!
 }
 
 """Edge between a Node and a connected contact"""
@@ -2117,6 +2358,25 @@ interface ContactConnectionEdge implements Edge
 
   """The connected contact Node"""
   node: Contact!
+}
+
+"""Page Info on the connected ContactConnectionEdge"""
+interface ContactConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -2187,7 +2447,7 @@ type ContactToRevisionConnection implements ContactConnection & Connection
   nodes: [Contact!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: ContactToRevisionConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -2201,6 +2461,26 @@ type ContactToRevisionConnectionEdge implements ContactConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Contact!
+}
+
+"""Page Info on the &quot;ContactToRevisionConnection&quot;"""
+type ContactToRevisionConnectionPageInfo implements ContactConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContactConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the ContactToRevisionConnection connection"""
@@ -2235,7 +2515,7 @@ input ContactToRevisionConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -2340,11 +2620,20 @@ interface ContentNode implements Node & UniformResourceIdentifiable
   """
   guid: String
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -2404,6 +2693,9 @@ interface ContentNodeConnection implements Connection
 
   """A list of connected ContentNode Nodes"""
   nodes: [ContentNode!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: ContentNodeConnectionPageInfo!
 }
 
 """Edge between a Node and a connected ContentNode"""
@@ -2418,6 +2710,25 @@ interface ContentNodeConnectionEdge implements Edge
 
   """The connected ContentNode Node"""
   node: ContentNode!
+}
+
+"""Page Info on the connected ContentNodeConnectionEdge"""
+interface ContentNodeConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -2498,7 +2809,7 @@ type ContentNodeToEnqueuedScriptConnection implements EnqueuedScriptConnection &
   nodes: [EnqueuedScript!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: ContentNodeToEnqueuedScriptConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -2512,6 +2823,26 @@ type ContentNodeToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnecti
 
   """The item at the end of the edge"""
   node: EnqueuedScript!
+}
+
+"""Page Info on the &quot;ContentNodeToEnqueuedScriptConnection&quot;"""
+type ContentNodeToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "EnqueuedScriptConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -2529,7 +2860,7 @@ type ContentNodeToEnqueuedStylesheetConnection implements EnqueuedStylesheetConn
   nodes: [EnqueuedStylesheet!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: ContentNodeToEnqueuedStylesheetConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -2543,6 +2874,26 @@ type ContentNodeToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheet
 
   """The item at the end of the edge"""
   node: EnqueuedStylesheet!
+}
+
+"""Page Info on the &quot;ContentNodeToEnqueuedStylesheetConnection&quot;"""
+type ContentNodeToEnqueuedStylesheetConnectionPageInfo implements EnqueuedStylesheetConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "EnqueuedStylesheetConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The template assigned to a node of content"""
@@ -2632,6 +2983,9 @@ type ContentType implements Node & UniformResourceIdentifiable
 
   """The globally unique identifier of the post-type object."""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
@@ -2725,6 +3079,9 @@ interface ContentTypeConnection implements Connection
 
   """A list of connected ContentType Nodes"""
   nodes: [ContentType!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: ContentTypeConnectionPageInfo!
 }
 
 """Edge between a Node and a connected ContentType"""
@@ -2739,6 +3096,25 @@ interface ContentTypeConnectionEdge implements Edge
 
   """The connected ContentType Node"""
   node: ContentType!
+}
+
+"""Page Info on the connected ContentTypeConnectionEdge"""
+interface ContentTypeConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Allowed Content Types"""
@@ -2820,7 +3196,7 @@ type ContentTypeToContentNodeConnection implements ContentNodeConnection & Conne
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: ContentTypeToContentNodeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -2834,6 +3210,26 @@ type ContentTypeToContentNodeConnectionEdge implements ContentNodeConnectionEdge
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""Page Info on the &quot;ContentTypeToContentNodeConnection&quot;"""
+type ContentTypeToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -2873,7 +3269,7 @@ input ContentTypeToContentNodeConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -2914,7 +3310,7 @@ type ContentTypeToTaxonomyConnection implements TaxonomyConnection & Connection
   nodes: [Taxonomy!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: ContentTypeToTaxonomyConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -2928,6 +3324,26 @@ type ContentTypeToTaxonomyConnectionEdge implements TaxonomyConnectionEdge & Edg
 
   """The item at the end of the edge"""
   node: Taxonomy!
+}
+
+"""Page Info on the &quot;ContentTypeToTaxonomyConnection&quot;"""
+type ContentTypeToTaxonomyConnectionPageInfo implements TaxonomyConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TaxonomyConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Input for the createCategory mutation."""
@@ -3543,7 +3959,7 @@ input CreateUserInput
   """A string containing the user's email address."""
   email: String
 
-  """The user's first name."""
+  """	The user's first name."""
   firstName: String
 
   """User's Jabber account."""
@@ -3712,7 +4128,7 @@ input DeleteCategoryInput
 type DeleteCategoryPayload
   @join__type(graph: CMS)
 {
-  """The deteted term object"""
+  """The deleted term object"""
   category: Category
 
   """
@@ -3740,6 +4156,9 @@ input DeleteCollectionInput
 
   """The ID of the collection to delete"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
 }
 
 """The payload for the deleteCollection mutation."""
@@ -3808,6 +4227,9 @@ input DeleteContactInput
 
   """The ID of the contact to delete"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
 }
 
 """The payload for the deleteContact mutation."""
@@ -3842,6 +4264,9 @@ input DeleteLandingPageInput
 
   """The ID of the landingPage to delete"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
 }
 
 """The payload for the deleteLandingPage mutation."""
@@ -3910,6 +4335,9 @@ input DeletePageInput
 
   """The ID of the page to delete"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
 }
 
 """The payload for the deletePage mutation."""
@@ -3953,7 +4381,7 @@ type DeletePostFormatPayload
   """The ID of the deleted object"""
   deletedId: ID
 
-  """The deteted term object"""
+  """The deleted term object"""
   postFormat: PostFormat
 }
 
@@ -3973,6 +4401,9 @@ input DeletePostInput
 
   """The ID of the post to delete"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
 }
 
 """The payload for the deletePost mutation."""
@@ -4007,6 +4438,9 @@ input DeleteReleaseInput
 
   """The ID of the release to delete"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
 }
 
 """The payload for the deleteRelease mutation."""
@@ -4050,7 +4484,7 @@ type DeleteTagPayload
   """The ID of the deleted object"""
   deletedId: ID
 
-  """The deteted term object"""
+  """The deleted term object"""
   tag: Tag
 }
 
@@ -4070,6 +4504,9 @@ input DeleteTranslationInput
 
   """The ID of the translation to delete"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
 }
 
 """The payload for the deleteTranslation mutation."""
@@ -4181,14 +4618,25 @@ type ElasticSearchResult
 interface EnqueuedAsset
   @join__type(graph: CMS)
 {
-  """@todo"""
-  args: Boolean
+  """The inline code to be run after the asset is loaded."""
+  after: [String]
+
+  """Deprecated"""
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+
+  """The inline code to be run before the asset is loaded."""
+  before: [String]
+
+  """
+  The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc
+  """
+  conditional: String
 
   """Dependencies needed to use this asset"""
-  dependencies: [EnqueuedScript]
+  dependencies: [EnqueuedAsset]
 
   """Extra information needed for the script"""
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
 
   """The handle of the enqueued asset"""
   handle: String
@@ -4209,25 +4657,42 @@ type EnqueuedScript implements Node & EnqueuedAsset
   @join__implements(graph: CMS, interface: "EnqueuedAsset")
   @join__type(graph: CMS)
 {
-  """@todo"""
-  args: Boolean
+  """The inline code to be run after the asset is loaded."""
+  after: [String]
+
+  """Deprecated"""
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+
+  """The inline code to be run before the asset is loaded."""
+  before: [String]
+
+  """
+  The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc
+  """
+  conditional: String
 
   """Dependencies needed to use this asset"""
   dependencies: [EnqueuedScript]
 
   """Extra information needed for the script"""
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
+
+  """Extra data supplied to the enqueued script"""
+  extraData: String
 
   """The handle of the enqueued asset"""
   handle: String
 
-  """The ID of the enqueued asset"""
+  """The global ID of the enqueued script"""
   id: ID!
 
   """The source of the asset"""
   src: String
 
-  """The version of the enqueued asset"""
+  """The loading strategy to use on the script tag"""
+  strategy: ScriptLoadingStrategyEnum
+
+  """The version of the enqueued script"""
   version: String
 }
 
@@ -4243,6 +4708,9 @@ interface EnqueuedScriptConnection implements Connection
 
   """A list of connected EnqueuedScript Nodes"""
   nodes: [EnqueuedScript!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: EnqueuedScriptConnectionPageInfo!
 }
 
 """Edge between a Node and a connected EnqueuedScript"""
@@ -4259,31 +4727,83 @@ interface EnqueuedScriptConnectionEdge implements Edge
   node: EnqueuedScript!
 }
 
+"""Page Info on the connected EnqueuedScriptConnectionEdge"""
+interface EnqueuedScriptConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Stylesheet enqueued by the CMS"""
 type EnqueuedStylesheet implements Node & EnqueuedAsset
   @join__implements(graph: CMS, interface: "Node")
   @join__implements(graph: CMS, interface: "EnqueuedAsset")
   @join__type(graph: CMS)
 {
-  """@todo"""
-  args: Boolean
+  """The inline code to be run after the asset is loaded."""
+  after: [String]
+
+  """Deprecated"""
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+
+  """The inline code to be run before the asset is loaded."""
+  before: [String]
+
+  """
+  The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc
+  """
+  conditional: String
 
   """Dependencies needed to use this asset"""
-  dependencies: [EnqueuedScript]
+  dependencies: [EnqueuedStylesheet]
 
   """Extra information needed for the script"""
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
 
   """The handle of the enqueued asset"""
   handle: String
 
-  """The ID of the enqueued asset"""
+  """The global ID of the enqueued stylesheet"""
   id: ID!
+
+  """Whether the enqueued style is RTL or not"""
+  isRtl: Boolean
+
+  """The media attribute to use for the link"""
+  media: String
+
+  """
+  The absolute path to the enqueued style. Set when the stylesheet is meant to load inline.
+  """
+  path: String
+
+  """The `rel` attribute to use for the link"""
+  rel: String
 
   """The source of the asset"""
   src: String
 
-  """The version of the enqueued asset"""
+  """Optional suffix, used in combination with RTL"""
+  suffix: String
+
+  """
+  The title of the enqueued style. Used for preferred/alternate stylesheets.
+  """
+  title: String
+
+  """The version of the enqueued style"""
   version: String
 }
 
@@ -4299,6 +4819,9 @@ interface EnqueuedStylesheetConnection implements Connection
 
   """A list of connected EnqueuedStylesheet Nodes"""
   nodes: [EnqueuedStylesheet!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: EnqueuedStylesheetConnectionPageInfo!
 }
 
 """Edge between a Node and a connected EnqueuedStylesheet"""
@@ -4313,6 +4836,25 @@ interface EnqueuedStylesheetConnectionEdge implements Edge
 
   """The connected EnqueuedStylesheet Node"""
   node: EnqueuedStylesheet!
+}
+
+"""Page Info on the connected EnqueuedStylesheetConnectionEdge"""
+interface EnqueuedStylesheetConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Information about enrolled participant(s) in an event occurrence"""
@@ -4528,17 +5070,17 @@ type EventPricing
   todo: String
 }
 
-"""Kokoelmamoduuli: EventSearch"""
+"""Collection Module: EventSearch"""
 type EventSearch
   @join__type(graph: CMS)
 {
-  """Listattujen tapahtumien määrä “Näytä lisää” -painiketta"""
+  """Amount of events listed before &quot;show more -button&quot;"""
   initAmountOfEvents: Int
 
-  """Moduulin tyyppi"""
+  """Module type"""
   module: String
 
-  """Moduulilistaus"""
+  """List of modules"""
   modules: [CollectionModulesUnionType]
 
   """
@@ -4548,33 +5090,33 @@ type EventSearch
   """
   showAllLink: String
 
-  """Näytä kaikki -linkki"""
+  """Show all -link"""
   showAllLinkCustom: String
 
-  """Moduulin otsikko"""
+  """Module title"""
   title: String
 
-  """Hakukysely"""
+  """Search query"""
   url: String
 }
 
-"""Kokoelmamoduuli: EventSearchCarousel"""
+"""Collection Module: EventSearchCarousel"""
 type EventSearchCarousel
   @join__type(graph: CMS)
 {
-  """Korttien määrä karusellissa"""
+  """Amount of cards in carousel"""
   amountOfCards: Int
 
-  """Tapahtumat lähellä"""
+  """Events nearby"""
   eventsNearby: Boolean
 
-  """Moduulin tyyppi"""
+  """Module type"""
   module: String
 
-  """Moduulilistaus"""
+  """List of modules"""
   modules: [CollectionModulesUnionType]
 
-  """Tapahtumien järjestys"""
+  """Events order"""
   orderNewestFirst: Boolean
 
   """
@@ -4584,65 +5126,65 @@ type EventSearchCarousel
   """
   showAllLink: String
 
-  """Näytä kaikki -linkki"""
+  """Show all -link"""
   showAllLinkCustom: String
 
-  """Moduulin otsikko"""
+  """Module title"""
   title: String
 
-  """Hakukysely"""
+  """Search query"""
   url: String
 }
 
-"""Kokoelmamoduuli: EventSelected"""
+"""Collection Module: EventSelected"""
 type EventSelected
   @join__type(graph: CMS)
 {
-  """Lista tapahtumien ID-tiedoista"""
+  """List of event IDs"""
   events: [String]
 
-  """Listattujen tapahtumien määrä “Näytä lisää” -painiketta"""
+  """Amount of events listed before &quot;show more -button&quot;"""
   initAmountOfEvents: Int
 
-  """Moduulin tyyppi"""
+  """Module type"""
   module: String
 
-  """Moduulilistaus"""
+  """List of modules"""
   modules: [CollectionModulesUnionType]
 
-  """Näytä kaikki -linkki"""
+  """Show all -link"""
   showAllLink: String
 
-  """Moduulin otsikko"""
+  """Module title"""
   title: String
 }
 
-"""Kokoelmamoduuli: EventSelectedCarousel"""
+"""Collection Module: EventSelectedCarousel"""
 type EventSelectedCarousel
   @join__type(graph: CMS)
 {
-  """Korttien määrä karusellissa"""
+  """Amount of cards in carousel"""
   amountOfCards: Int
 
-  """Korttien määrä riviä kohden"""
+  """Amount of cards per row"""
   amountOfCardsPerRow: Int
 
-  """Lista tapahtumien ID-tiedoista"""
+  """List of event IDs"""
   events: [String]
 
-  """Tapahtumat lähellä"""
+  """Events nearby"""
   eventsNearby: Boolean
 
-  """Moduulin tyyppi"""
+  """Module type"""
   module: String
 
-  """Moduulilistaus"""
+  """List of modules"""
   modules: [CollectionModulesUnionType]
 
-  """Näytä kaikki -linkki"""
+  """Show all -link"""
   showAllLink: String
 
-  """Moduulin otsikko"""
+  """Module title"""
   title: String
 }
 
@@ -4660,13 +5202,6 @@ type ExternalLink
   link: String
   language: String
 }
-
-union FooterBlocksUnion
-  @join__type(graph: CMS)
-  @join__unionMember(graph: CMS, member: "LayoutImage")
-  @join__unionMember(graph: CMS, member: "LayoutEditor")
-  @join__unionMember(graph: CMS, member: "LayoutMenu")
- = LayoutImage | LayoutEditor | LayoutMenu
 
 """Galleriakuva"""
 type GalleryImage
@@ -4910,13 +5445,6 @@ enum GeoJSONType
   FeatureCollection @join__enumValue(graph: UNIFIED_SEARCH)
 }
 
-union GlobalSidebarBlocksUnion
-  @join__type(graph: CMS)
-  @join__unionMember(graph: CMS, member: "LayoutArticleHighlights")
-  @join__unionMember(graph: CMS, member: "LayoutArticles")
-  @join__unionMember(graph: CMS, member: "LayoutEditor")
- = LayoutArticleHighlights | LayoutArticles | LayoutEditor
-
 """Hero kenttä"""
 type Hero
   @join__type(graph: CMS)
@@ -5071,8 +5599,17 @@ interface HierarchicalContentNode implements Node & ContentNode & UniformResourc
   """The globally unique ID for the object"""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -5146,7 +5683,7 @@ type HierarchicalContentNodeToContentNodeAncestorsConnection implements ContentN
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -5160,6 +5697,28 @@ type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge implements Cont
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""
+Page Info on the &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot;
+"""
+type HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -5199,7 +5758,7 @@ input HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -5244,7 +5803,7 @@ type HierarchicalContentNodeToContentNodeChildrenConnection implements ContentNo
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -5258,6 +5817,28 @@ type HierarchicalContentNodeToContentNodeChildrenConnectionEdge implements Conte
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""
+Page Info on the &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot;
+"""
+type HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -5297,7 +5878,7 @@ input HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -5421,8 +6002,17 @@ interface HierarchicalTermNode implements Node & TermNode & UniformResourceIdent
   """The globally unique ID for the object"""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -5538,7 +6128,7 @@ type InternalIdObject
 scalar join__FieldSet
 
 enum join__Graph {
-  CMS @join__graph(name: "cms", url: "https://tapahtumat.hkih.stage.geniem.io/graphql")
+  CMS @join__graph(name: "cms", url: "https://tapahtumat.app-staging.hkih.hion.dev/graphql")
   EVENTS @join__graph(name: "events", url: "https://events-graphql-proxy.test.hel.ninja/proxy/graphql")
   UNIFIED_SEARCH @join__graph(name: "unified-search", url: "https://kuva-unified-search.api.test.hel.ninja/search")
   VENUES @join__graph(name: "venues", url: "https://venue-graphql-proxy.test.hel.ninja/proxy/graphql")
@@ -5597,7 +6187,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   @join__implements(graph: CMS, interface: "NodeWithRevisions")
   @join__type(graph: CMS)
 {
-  """Taustaväri"""
+  """Background Color"""
   backgroundColor: String
 
   """Box Color"""
@@ -5618,7 +6208,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   """The publishing date set in GMT."""
   dateGmt: String
 
-  """Kuvaus"""
+  """Description"""
   description: String
 
   """The desired slug of the post"""
@@ -5727,8 +6317,17 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   """The globally unique identifier of the landing-page-cpt object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -5786,7 +6385,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   """
   modifiedGmt: String
 
-  """Moduulilistaus"""
+  """List of modules"""
   modules: [CollectionModulesUnionType]
 
   """Connection between the LandingPage type and the landingPage type"""
@@ -5869,6 +6468,9 @@ interface LandingPageConnection implements Connection
 
   """A list of connected landingPage Nodes"""
   nodes: [LandingPage!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: LandingPageConnectionPageInfo!
 }
 
 """Edge between a Node and a connected landingPage"""
@@ -5883,6 +6485,25 @@ interface LandingPageConnectionEdge implements Edge
 
   """The connected landingPage Node"""
   node: LandingPage!
+}
+
+"""Page Info on the connected LandingPageConnectionEdge"""
+interface LandingPageConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -5917,7 +6538,7 @@ type LandingPageToFloatImageConnection implements MediaItemConnection & Connecti
   nodes: [MediaItem!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: LandingPageToFloatImageConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -5931,6 +6552,26 @@ type LandingPageToFloatImageConnectionEdge implements MediaItemConnectionEdge & 
 
   """The item at the end of the edge"""
   node: MediaItem!
+}
+
+"""Page Info on the &quot;LandingPageToFloatImageConnection&quot;"""
+type LandingPageToFloatImageConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MediaItemConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -5970,7 +6611,7 @@ input LandingPageToFloatImageConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -6011,7 +6652,7 @@ type LandingPageToMediaItemConnection implements MediaItemConnection & Connectio
   nodes: [MediaItem!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: LandingPageToMediaItemConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -6025,6 +6666,26 @@ type LandingPageToMediaItemConnectionEdge implements MediaItemConnectionEdge & E
 
   """The item at the end of the edge"""
   node: MediaItem!
+}
+
+"""Page Info on the &quot;LandingPageToMediaItemConnection&quot;"""
+type LandingPageToMediaItemConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MediaItemConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -6064,7 +6725,7 @@ input LandingPageToMediaItemConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -6105,7 +6766,7 @@ type LandingPageToMobileImageConnection implements MediaItemConnection & Connect
   nodes: [MediaItem!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: LandingPageToMobileImageConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -6119,6 +6780,26 @@ type LandingPageToMobileImageConnectionEdge implements MediaItemConnectionEdge &
 
   """The item at the end of the edge"""
   node: MediaItem!
+}
+
+"""Page Info on the &quot;LandingPageToMobileImageConnection&quot;"""
+type LandingPageToMobileImageConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MediaItemConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -6158,7 +6839,7 @@ input LandingPageToMobileImageConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -6215,7 +6896,7 @@ type LandingPageToRevisionConnection implements LandingPageConnection & Connecti
   nodes: [LandingPage!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: LandingPageToRevisionConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -6229,6 +6910,26 @@ type LandingPageToRevisionConnectionEdge implements LandingPageConnectionEdge & 
 
   """The item at the end of the edge"""
   node: LandingPage!
+}
+
+"""Page Info on the &quot;LandingPageToRevisionConnection&quot;"""
+type LandingPageToRevisionConnectionPageInfo implements LandingPageConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "LandingPageConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the LandingPageToRevisionConnection connection"""
@@ -6263,7 +6964,7 @@ input LandingPageToRevisionConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -6351,28 +7052,28 @@ type LanguageString
 type LayoutArticleHighlights
   @join__type(graph: CMS)
 {
-  """Ankkuri"""
+  """Anchor"""
   anchor: String
 
-  """Artikkelit"""
+  """Articles"""
   articles: [Post]
 
-  """Taustaväri"""
+  """Background Color"""
   backgroundColor: String
 
-  """Kategoria"""
+  """Category"""
   category: Int
 
-  """Valitse montako artikkelia näytetään"""
+  """Amount of articles to list"""
   limit: Int
 
-  """Näytä lisää linkki"""
+  """Show more link"""
   showMore: [String]
 
-  """Tagi"""
+  """Tag"""
   tag: Int
 
-  """Sivuston otsikko"""
+  """Title"""
   title: String
 }
 
@@ -6380,28 +7081,28 @@ type LayoutArticleHighlights
 type LayoutArticles
   @join__type(graph: CMS)
 {
-  """Ankkuri"""
+  """Anchor"""
   anchor: String
 
-  """Artikkelit"""
+  """Articles"""
   articles: [Post]
 
-  """Taustaväri"""
+  """Background Color"""
   backgroundColor: String
 
-  """Kategoria"""
+  """Category"""
   category: Int
 
-  """Tagi"""
+  """Tag"""
   limit: Int
 
-  """Näytä lisää linkki"""
+  """Show all -link"""
   showAllLink: String
 
-  """Tagi"""
+  """Tag"""
   tag: Int
 
-  """Sivuston otsikko"""
+  """Title"""
   title: String
 }
 
@@ -6409,31 +7110,31 @@ type LayoutArticles
 type LayoutArticlesCarousel
   @join__type(graph: CMS)
 {
-  """Ankkuri"""
+  """Anchor"""
   anchor: String
 
-  """Artikkelit"""
+  """Articles"""
   articles: [Post]
 
-  """Taustaväri"""
+  """Background Color"""
   backgroundColor: String
 
-  """Kategoria"""
+  """Category"""
   category: Int
 
-  """Valitse montako artikkelia näytetään"""
+  """Amount of articles to list"""
   limit: Int
 
-  """Näytä lisää linkki"""
+  """Show all -link"""
   showAllLink: String
 
-  """Näytä lisää linkki"""
+  """Show more link"""
   showMore: [String]
 
-  """Tagi"""
+  """Tag"""
   tag: Int
 
-  """Sivuston otsikko"""
+  """Title"""
   title: String
 }
 
@@ -6504,14 +7205,6 @@ type LayoutContent
   title: String
 }
 
-"""Layout: LayoutEditor"""
-type LayoutEditor
-  @join__type(graph: CMS)
-{
-  """Editor"""
-  editor: String
-}
-
 """Layout: LayoutImage"""
 type LayoutImage
   @join__type(graph: CMS)
@@ -6557,34 +7250,26 @@ type LayoutLinkList
   title: String
 }
 
-"""Layout: LayoutMenu"""
-type LayoutMenu
-  @join__type(graph: CMS)
-{
-  """Menu"""
-  menu: String
-}
-
 """Layout: LayoutPages"""
 type LayoutPages
   @join__type(graph: CMS)
 {
-  """Ankkuri"""
+  """Anchor"""
   anchor: String
 
-  """Taustaväri"""
+  """Background Color"""
   backgroundColor: String
 
-  """Kuvaus"""
+  """Description"""
   description: String
 
-  """Sivut"""
+  """Pages"""
   pages: [Page]
 
-  """Näytä lisää linkki"""
+  """Show all -link"""
   showAllLink: String
 
-  """Sivuston otsikko"""
+  """Title"""
   title: String
 }
 
@@ -6592,19 +7277,19 @@ type LayoutPages
 type LayoutPagesCarousel
   @join__type(graph: CMS)
 {
-  """Ankkuri"""
+  """Anchor"""
   anchor: String
 
-  """Taustaväri"""
+  """Background Color"""
   backgroundColor: String
 
-  """Kuvaus"""
+  """Description"""
   description: String
 
-  """Sivut"""
+  """Pages"""
   pages: [Page]
 
-  """Sivuston otsikko"""
+  """Title"""
   title: String
 }
 
@@ -6612,13 +7297,13 @@ type LayoutPagesCarousel
 type LayoutSocialMediaFeed
   @join__type(graph: CMS)
 {
-  """Ankkuri"""
+  """Anchor"""
   anchor: String
 
-  """Scripti"""
+  """Script"""
   script: String
 
-  """Sivuston otsikko"""
+  """Title"""
   title: String
 }
 
@@ -6779,7 +7464,7 @@ type LocationImage
   caption: LanguageString
 }
 
-"""Kokoelmamoduuli: LocationsSelected"""
+"""Collection Module: LocationsSelected"""
 type LocationsSelected
   @join__type(graph: CMS)
 {
@@ -6789,14 +7474,14 @@ type LocationsSelected
   """Module type"""
   module: String
 
-  """Moduulilistaus"""
+  """List of modules"""
   modules: [CollectionModulesUnionType]
 
   """Module title"""
   title: String
 }
 
-"""Kokoelmamoduuli: LocationsSelectedCarousel"""
+"""Collection Module: LocationsSelectedCarousel"""
 type LocationsSelectedCarousel
   @join__type(graph: CMS)
 {
@@ -6806,7 +7491,7 @@ type LocationsSelectedCarousel
   """Module type"""
   module: String
 
-  """Moduulilistaus"""
+  """List of modules"""
   modules: [CollectionModulesUnionType]
 
   """Module title"""
@@ -7004,8 +7689,17 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   """The globally unique identifier of the attachment object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -7132,6 +7826,9 @@ interface MediaItemConnection implements Connection
 
   """A list of connected mediaItem Nodes"""
   nodes: [MediaItem!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: MediaItemConnectionPageInfo!
 }
 
 """Edge between a Node and a connected mediaItem"""
@@ -7146,6 +7843,25 @@ interface MediaItemConnectionEdge implements Edge
 
   """The connected mediaItem Node"""
   node: MediaItem!
+}
+
+"""Page Info on the connected MediaItemConnectionEdge"""
+interface MediaItemConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -7354,6 +8070,9 @@ interface MenuConnection implements Connection
 
   """A list of connected Menu Nodes"""
   nodes: [Menu!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: MenuConnectionPageInfo!
 }
 
 """Edge between a Node and a connected Menu"""
@@ -7368,6 +8087,25 @@ interface MenuConnectionEdge implements Edge
 
   """The connected Menu Node"""
   node: Menu!
+}
+
+"""Page Info on the connected MenuConnectionEdge"""
+interface MenuConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -7475,6 +8213,9 @@ interface MenuItemConnection implements Connection
 
   """A list of connected MenuItem Nodes"""
   nodes: [MenuItem!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: MenuItemConnectionPageInfo!
 }
 
 """Edge between a Node and a connected MenuItem"""
@@ -7491,6 +8232,25 @@ interface MenuItemConnectionEdge implements Edge
   node: MenuItem!
 }
 
+"""Page Info on the connected MenuItemConnectionEdge"""
+interface MenuItemConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Nodes that can be linked to as Menu Items"""
 interface MenuItemLinkable implements Node & UniformResourceIdentifiable & DatabaseIdentifier
   @join__implements(graph: CMS, interface: "Node")
@@ -7501,11 +8261,20 @@ interface MenuItemLinkable implements Node & UniformResourceIdentifiable & Datab
   """The unique identifier stored in the database"""
   databaseId: Int!
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the node is a Term"""
   isTermNode: Boolean!
@@ -7579,7 +8348,7 @@ type MenuItemToMenuItemConnection implements MenuItemConnection & Connection
   nodes: [MenuItem!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: MenuItemToMenuItemConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -7593,6 +8362,26 @@ type MenuItemToMenuItemConnectionEdge implements MenuItemConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: MenuItem!
+}
+
+"""Page Info on the &quot;MenuItemToMenuItemConnection&quot;"""
+type MenuItemToMenuItemConnectionPageInfo implements MenuItemConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MenuItemConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the MenuItemToMenuItemConnection connection"""
@@ -7697,7 +8486,7 @@ type MenuToMenuItemConnection implements MenuItemConnection & Connection
   nodes: [MenuItem!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: MenuToMenuItemConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -7711,6 +8500,26 @@ type MenuToMenuItemConnectionEdge implements MenuItemConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: MenuItem!
+}
+
+"""Page Info on the &quot;MenuToMenuItemConnection&quot;"""
+type MenuToMenuItemConnectionPageInfo implements MenuItemConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MenuItemConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the MenuToMenuItemConnection connection"""
@@ -7742,108 +8551,111 @@ type Meta
 enum MimeTypeEnum
   @join__type(graph: CMS)
 {
-  """MimeType application/msword"""
+  """application/msword mime type."""
   APPLICATION_MSWORD @join__enumValue(graph: CMS)
 
-  """MimeType application/pdf"""
+  """application/pdf mime type."""
   APPLICATION_PDF @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.apple.keynote"""
+  """application/vnd.apple.keynote mime type."""
   APPLICATION_VND_APPLE_KEYNOTE @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.ms-excel"""
+  """application/vnd.ms-excel mime type."""
   APPLICATION_VND_MS_EXCEL @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.ms-excel.sheet.binary.macroEnabled.12"""
+  """application/vnd.ms-excel.sheet.binary.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACROENABLED_12 @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.ms-excel.sheet.macroEnabled.12"""
+  """application/vnd.ms-excel.sheet.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_EXCEL_SHEET_MACROENABLED_12 @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.ms-powerpoint"""
+  """application/vnd.ms-powerpoint mime type."""
   APPLICATION_VND_MS_POWERPOINT @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.ms-powerpoint.presentation.macroEnabled.12"""
+  """application/vnd.ms-powerpoint.presentation.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACROENABLED_12 @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.ms-powerpoint.slideshow.macroEnabled.12"""
+  """application/vnd.ms-powerpoint.slideshow.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACROENABLED_12 @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.ms-word.document.macroEnabled.12"""
+  """application/vnd.ms-word.document.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_WORD_DOCUMENT_MACROENABLED_12 @join__enumValue(graph: CMS)
 
-  """MimeType application/vnd.oasis.opendocument.text"""
+  """application/vnd.oasis.opendocument.text mime type."""
   APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT @join__enumValue(graph: CMS)
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.presentationml.presentation
+  application/vnd.openxmlformats-officedocument.presentationml.presentation mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION @join__enumValue(graph: CMS)
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.presentationml.slideshow
+  application/vnd.openxmlformats-officedocument.presentationml.slideshow mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW @join__enumValue(graph: CMS)
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET @join__enumValue(graph: CMS)
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  application/vnd.openxmlformats-officedocument.wordprocessingml.document mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT @join__enumValue(graph: CMS)
 
-  """MimeType audio/flac"""
+  """audio/flac mime type."""
   AUDIO_FLAC @join__enumValue(graph: CMS)
 
-  """MimeType audio/midi"""
+  """audio/midi mime type."""
   AUDIO_MIDI @join__enumValue(graph: CMS)
 
-  """MimeType audio/mpeg"""
+  """audio/mpeg mime type."""
   AUDIO_MPEG @join__enumValue(graph: CMS)
 
-  """MimeType audio/ogg"""
+  """audio/ogg mime type."""
   AUDIO_OGG @join__enumValue(graph: CMS)
 
-  """MimeType audio/wav"""
+  """audio/wav mime type."""
   AUDIO_WAV @join__enumValue(graph: CMS)
 
-  """MimeType image/gif"""
+  """image/avif mime type."""
+  IMAGE_AVIF @join__enumValue(graph: CMS)
+
+  """image/gif mime type."""
   IMAGE_GIF @join__enumValue(graph: CMS)
 
-  """MimeType image/jpeg"""
+  """image/jpeg mime type."""
   IMAGE_JPEG @join__enumValue(graph: CMS)
 
-  """MimeType image/png"""
+  """image/png mime type."""
   IMAGE_PNG @join__enumValue(graph: CMS)
 
-  """MimeType video/3gpp"""
+  """video/3gpp mime type."""
   VIDEO_3GPP @join__enumValue(graph: CMS)
 
-  """MimeType video/3gpp2"""
+  """video/3gpp2 mime type."""
   VIDEO_3GPP2 @join__enumValue(graph: CMS)
 
-  """MimeType video/avi"""
+  """video/avi mime type."""
   VIDEO_AVI @join__enumValue(graph: CMS)
 
-  """MimeType video/mp4"""
+  """video/mp4 mime type."""
   VIDEO_MP4 @join__enumValue(graph: CMS)
 
-  """MimeType video/mpeg"""
+  """video/mpeg mime type."""
   VIDEO_MPEG @join__enumValue(graph: CMS)
 
-  """MimeType video/ogg"""
+  """video/ogg mime type."""
   VIDEO_OGG @join__enumValue(graph: CMS)
 
-  """MimeType video/quicktime"""
+  """video/quicktime mime type."""
   VIDEO_QUICKTIME @join__enumValue(graph: CMS)
 
-  """MimeType video/webm"""
+  """video/webm mime type."""
   VIDEO_WEBM @join__enumValue(graph: CMS)
 
-  """MimeType video/x-flv"""
+  """video/x-flv mime type."""
   VIDEO_X_FLV @join__enumValue(graph: CMS)
 }
 
@@ -8673,6 +9485,9 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   """The globally unique identifier of the page object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
 
@@ -8825,6 +9640,9 @@ interface PageConnection implements Connection
 
   """A list of connected page Nodes"""
   nodes: [Page!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: PageConnectionPageInfo!
 }
 
 """Edge between a Node and a connected page"""
@@ -8841,6 +9659,25 @@ interface PageConnectionEdge implements Edge
   node: Page!
 }
 
+"""Page Info on the connected PageConnectionEdge"""
+interface PageConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """The Type of Identifier used to fetch a single resource. Default is ID."""
 enum PageIdType
   @join__type(graph: CMS)
@@ -8853,6 +9690,23 @@ enum PageIdType
 
   """Identify a resource by the URI."""
   URI @join__enumValue(graph: CMS)
+}
+
+"""Information about pagination in a connection."""
+interface PageInfo
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 union PageModulesUnionType
@@ -8916,7 +9770,7 @@ type PageToRevisionConnection implements PageConnection & Connection
   nodes: [Page!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: PageToRevisionConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -8930,6 +9784,26 @@ type PageToRevisionConnectionEdge implements PageConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Page!
+}
+
+"""Page Info on the &quot;PageToRevisionConnection&quot;"""
+type PageToRevisionConnectionPageInfo implements PageConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PageConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the PageToRevisionConnection connection"""
@@ -8980,7 +9854,7 @@ input PageToRevisionConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -9174,6 +10048,9 @@ interface PluginConnection implements Connection
 
   """A list of connected Plugin Nodes"""
   nodes: [Plugin!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: PluginConnectionPageInfo!
 }
 
 """Edge between a Node and a connected Plugin"""
@@ -9188,6 +10065,25 @@ interface PluginConnectionEdge implements Edge
 
   """The connected Plugin Node"""
   node: Plugin!
+}
+
+"""Page Info on the connected PluginConnectionEdge"""
+interface PluginConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The status of the WordPress plugin."""
@@ -9380,8 +10276,17 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   """The globally unique identifier of the post object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -9615,6 +10520,9 @@ interface PostConnection implements Connection
 
   """A list of connected post Nodes"""
   nodes: [Post!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: PostConnectionPageInfo!
 }
 
 """Edge between a Node and a connected post"""
@@ -9629,6 +10537,25 @@ interface PostConnectionEdge implements Edge
 
   """The connected post Node"""
   node: Post!
+}
+
+"""Page Info on the connected PostConnectionEdge"""
+interface PostConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The postFormat type"""
@@ -9708,11 +10635,20 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
     before: String
   ): TermNodeToEnqueuedStylesheetConnection
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -9782,6 +10718,9 @@ interface PostFormatConnection implements Connection
 
   """A list of connected postFormat Nodes"""
   nodes: [PostFormat!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: PostFormatConnectionPageInfo!
 }
 
 """Edge between a Node and a connected postFormat"""
@@ -9796,6 +10735,25 @@ interface PostFormatConnectionEdge implements Edge
 
   """The connected postFormat Node"""
   node: PostFormat!
+}
+
+"""Page Info on the connected PostFormatConnectionEdge"""
+interface PostFormatConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -9831,7 +10789,7 @@ type PostFormatToContentNodeConnection implements ContentNodeConnection & Connec
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: PostFormatToContentNodeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -9845,6 +10803,26 @@ type PostFormatToContentNodeConnectionEdge implements ContentNodeConnectionEdge 
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""Page Info on the &quot;PostFormatToContentNodeConnection&quot;"""
+type PostFormatToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -9884,7 +10862,7 @@ input PostFormatToContentNodeConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -9925,7 +10903,7 @@ type PostFormatToPostConnection implements PostConnection & Connection
   nodes: [Post!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: PostFormatToPostConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -9939,6 +10917,26 @@ type PostFormatToPostConnectionEdge implements PostConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Post!
+}
+
+"""Page Info on the &quot;PostFormatToPostConnection&quot;"""
+type PostFormatToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PostConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the PostFormatToPostConnection connection"""
@@ -10005,7 +11003,7 @@ input PostFormatToPostConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -10334,7 +11332,7 @@ type PostToCategoryConnection implements CategoryConnection & Connection
   nodes: [Category!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: PostToCategoryConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -10348,6 +11346,26 @@ type PostToCategoryConnectionEdge implements CategoryConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Category!
+}
+
+"""Page Info on the &quot;PostToCategoryConnection&quot;"""
+type PostToCategoryConnectionPageInfo implements CategoryConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CategoryConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the PostToCategoryConnection connection"""
@@ -10453,7 +11471,7 @@ type PostToPostFormatConnection implements PostFormatConnection & Connection
   nodes: [PostFormat!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: PostToPostFormatConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -10467,6 +11485,26 @@ type PostToPostFormatConnectionEdge implements PostFormatConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: PostFormat!
+}
+
+"""Page Info on the &quot;PostToPostFormatConnection&quot;"""
+type PostToPostFormatConnectionPageInfo implements PostFormatConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PostFormatConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the PostToPostFormatConnection connection"""
@@ -10588,7 +11626,7 @@ type PostToRevisionConnection implements PostConnection & Connection
   nodes: [Post!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: PostToRevisionConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -10602,6 +11640,26 @@ type PostToRevisionConnectionEdge implements PostConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Post!
+}
+
+"""Page Info on the &quot;PostToRevisionConnection&quot;"""
+type PostToRevisionConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PostConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the PostToRevisionConnection connection"""
@@ -10668,7 +11726,7 @@ input PostToRevisionConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -10727,7 +11785,7 @@ type PostToTagConnection implements TagConnection & Connection
   nodes: [Tag!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: PostToTagConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -10741,6 +11799,26 @@ type PostToTagConnectionEdge implements TagConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Tag!
+}
+
+"""Page Info on the &quot;PostToTagConnection&quot;"""
+type PostToTagConnectionPageInfo implements TagConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TagConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the PostToTagConnection connection"""
@@ -10846,7 +11924,7 @@ type PostToTermNodeConnection implements TermNodeConnection & Connection
   nodes: [TermNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: PostToTermNodeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -10860,6 +11938,26 @@ type PostToTermNodeConnectionEdge implements TermNodeConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: TermNode!
+}
+
+"""Page Info on the &quot;PostToTermNodeConnection&quot;"""
+type PostToTermNodeConnectionPageInfo implements TermNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TermNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the PostToTermNodeConnection connection"""
@@ -11106,7 +12204,7 @@ type Query
     idType: CategoryIdType
   ): Category @join__field(graph: CMS)
 
-  """An object of the collection Type. Kokoelmat"""
+  """An object of the collection Type. Collections"""
   collection(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11114,13 +12212,15 @@ type Query
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: CollectionIdType
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Collection @join__field(graph: CMS)
 
   """A collection object"""
   collectionBy(
-    """Get the object by its global ID"""
+    """Get the collection object by its global ID"""
     id: ID
 
     """Get the collection by its database ID"""
@@ -11188,7 +12288,7 @@ type Query
     where: RootQueryToCommentConnectionWhereArgs
   ): RootQueryToCommentConnection @join__field(graph: CMS)
 
-  """An object of the contact Type. Yhteystiedot"""
+  """An object of the contact Type. Contacts"""
   contact(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11196,13 +12296,15 @@ type Query
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: ContactIdType
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Contact @join__field(graph: CMS)
 
   """A contact object"""
   contactBy(
-    """Get the object by its global ID"""
+    """Get the contact object by its global ID"""
     id: ID
 
     """Get the contact by its database ID"""
@@ -11254,7 +12356,9 @@ type Query
     """
     contentType: ContentTypeEnum
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): ContentNode @join__field(graph: CMS)
 
@@ -11319,16 +12423,10 @@ type Query
   """Fields of the &#039;DiscussionSettings&#039; settings group"""
   discussionSettings: DiscussionSettings @join__field(graph: CMS)
 
-  """Footer blocks"""
-  footerBlocks(language: String!): [FooterBlocksUnion] @join__field(graph: CMS)
-
   """Fields of the &#039;GeneralSettings&#039; settings group"""
   generalSettings: GeneralSettings @join__field(graph: CMS)
 
-  """Global Sidebar blocks"""
-  globalSidebarBlocks(language: String!): [GlobalSidebarBlocksUnion] @join__field(graph: CMS)
-
-  """An object of the landingPage Type. Laskeutumissivut"""
+  """An object of the landingPage Type. Landing Pages"""
   landingPage(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11336,13 +12434,15 @@ type Query
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: LandingPageIdType
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): LandingPage @join__field(graph: CMS)
 
   """A landingPage object"""
   landingPageBy(
-    """Get the object by its global ID"""
+    """Get the landingPage object by its global ID"""
     id: ID
 
     """Get the landingPage by its database ID"""
@@ -11390,13 +12490,15 @@ type Query
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: MediaItemIdType
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): MediaItem @join__field(graph: CMS)
 
   """A mediaItem object"""
   mediaItemBy(
-    """Get the object by its global ID"""
+    """Get the mediaItem object by its global ID"""
     id: ID
 
     """Get the mediaItem by its database ID"""
@@ -11522,13 +12624,15 @@ type Query
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: PageIdType
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Page @join__field(graph: CMS)
 
   """A page object"""
   pageBy(
-    """Get the object by its global ID"""
+    """Get the page object by its global ID"""
     id: ID
 
     """Get the page by its database ID"""
@@ -11599,13 +12703,15 @@ type Query
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: PostIdType
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Post @join__field(graph: CMS)
 
   """A post object"""
   postBy(
-    """Get the object by its global ID"""
+    """Get the post object by its global ID"""
     id: ID
 
     """Get the post by its database ID"""
@@ -11712,7 +12818,7 @@ type Query
     before: String
   ): RootQueryToEnqueuedStylesheetConnection @join__field(graph: CMS)
 
-  """An object of the release Type. Tiedotteet"""
+  """An object of the release Type. Releases"""
   release(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11720,13 +12826,15 @@ type Query
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: ReleaseIdType
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Release @join__field(graph: CMS)
 
   """A release object"""
   releaseBy(
-    """Get the object by its global ID"""
+    """Get the release object by its global ID"""
     id: ID
 
     """Get the release by its database ID"""
@@ -11916,7 +13024,7 @@ type Query
   """Translate string using pll_translate_string() (Polylang)"""
   translateString(string: String!, language: LanguageCodeEnum!): String @join__field(graph: CMS)
 
-  """An object of the translation Type. Käännökset"""
+  """An object of the translation Type. Translations"""
   translation(
     """The globally unique identifier of the object."""
     id: ID!
@@ -11924,13 +13032,15 @@ type Query
     """Type of unique identifier to fetch by. Default is Global ID"""
     idType: TranslationIdType
 
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Translation @join__field(graph: CMS)
 
   """A translation object"""
   translationBy(
-    """Get the object by its global ID"""
+    """Get the translation object by its global ID"""
     id: ID
 
     """Get the translation by its database ID"""
@@ -12353,8 +13463,17 @@ type Release implements Node & ContentNode & UniformResourceIdentifiable & Datab
   """The globally unique identifier of the release-cpt object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -12470,6 +13589,9 @@ interface ReleaseConnection implements Connection
 
   """A list of connected release Nodes"""
   nodes: [Release!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: ReleaseConnectionPageInfo!
 }
 
 """Edge between a Node and a connected release"""
@@ -12484,6 +13606,25 @@ interface ReleaseConnectionEdge implements Edge
 
   """The connected release Node"""
   node: Release!
+}
+
+"""Page Info on the connected ReleaseConnectionEdge"""
+interface ReleaseConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -12534,7 +13675,7 @@ type ReleaseToRevisionConnection implements ReleaseConnection & Connection
   nodes: [Release!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: ReleaseToRevisionConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -12548,6 +13689,26 @@ type ReleaseToRevisionConnectionEdge implements ReleaseConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Release!
+}
+
+"""Page Info on the &quot;ReleaseToRevisionConnection&quot;"""
+type ReleaseToRevisionConnectionPageInfo implements ReleaseConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ReleaseConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the ReleaseToRevisionConnection connection"""
@@ -12582,7 +13743,7 @@ input ReleaseToRevisionConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -12707,7 +13868,7 @@ type RootQueryToCategoryConnection implements CategoryConnection & Connection
   nodes: [Category!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToCategoryConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -12721,6 +13882,26 @@ type RootQueryToCategoryConnectionEdge implements CategoryConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Category!
+}
+
+"""Page Info on the &quot;RootQueryToCategoryConnection&quot;"""
+type RootQueryToCategoryConnectionPageInfo implements CategoryConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CategoryConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToCategoryConnection connection"""
@@ -12832,7 +14013,7 @@ type RootQueryToCollectionConnection implements CollectionConnection & Connectio
   nodes: [Collection!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToCollectionConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -12846,6 +14027,26 @@ type RootQueryToCollectionConnectionEdge implements CollectionConnectionEdge & E
 
   """The item at the end of the edge"""
   node: Collection!
+}
+
+"""Page Info on the &quot;RootQueryToCollectionConnection&quot;"""
+type RootQueryToCollectionConnectionPageInfo implements CollectionConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CollectionConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToCollectionConnection connection"""
@@ -12886,7 +14087,7 @@ input RootQueryToCollectionConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -12927,7 +14128,7 @@ type RootQueryToCommentConnection implements CommentConnection & Connection
   nodes: [Comment!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToCommentConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -12941,6 +14142,26 @@ type RootQueryToCommentConnectionEdge implements CommentConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Comment!
+}
+
+"""Page Info on the &quot;RootQueryToCommentConnection&quot;"""
+type RootQueryToCommentConnectionPageInfo implements CommentConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CommentConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToCommentConnection connection"""
@@ -13056,7 +14277,7 @@ type RootQueryToContactConnection implements ContactConnection & Connection
   nodes: [Contact!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToContactConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13070,6 +14291,26 @@ type RootQueryToContactConnectionEdge implements ContactConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Contact!
+}
+
+"""Page Info on the &quot;RootQueryToContactConnection&quot;"""
+type RootQueryToContactConnectionPageInfo implements ContactConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContactConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToContactConnection connection"""
@@ -13110,7 +14351,7 @@ input RootQueryToContactConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -13151,7 +14392,7 @@ type RootQueryToContentNodeConnection implements ContentNodeConnection & Connect
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToContentNodeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13165,6 +14406,26 @@ type RootQueryToContentNodeConnectionEdge implements ContentNodeConnectionEdge &
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""Page Info on the &quot;RootQueryToContentNodeConnection&quot;"""
+type RootQueryToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -13210,7 +14471,7 @@ input RootQueryToContentNodeConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -13251,7 +14512,7 @@ type RootQueryToContentTypeConnection implements ContentTypeConnection & Connect
   nodes: [ContentType!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToContentTypeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13267,6 +14528,26 @@ type RootQueryToContentTypeConnectionEdge implements ContentTypeConnectionEdge &
   node: ContentType!
 }
 
+"""Page Info on the &quot;RootQueryToContentTypeConnection&quot;"""
+type RootQueryToContentTypeConnectionPageInfo implements ContentTypeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentTypeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the RootQuery type and the EnqueuedScript type"""
 type RootQueryToEnqueuedScriptConnection implements EnqueuedScriptConnection & Connection
   @join__implements(graph: CMS, interface: "EnqueuedScriptConnection")
@@ -13280,7 +14561,7 @@ type RootQueryToEnqueuedScriptConnection implements EnqueuedScriptConnection & C
   nodes: [EnqueuedScript!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToEnqueuedScriptConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13296,6 +14577,26 @@ type RootQueryToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnection
   node: EnqueuedScript!
 }
 
+"""Page Info on the &quot;RootQueryToEnqueuedScriptConnection&quot;"""
+type RootQueryToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "EnqueuedScriptConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the RootQuery type and the EnqueuedStylesheet type"""
 type RootQueryToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnection & Connection
   @join__implements(graph: CMS, interface: "EnqueuedStylesheetConnection")
@@ -13309,7 +14610,7 @@ type RootQueryToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnec
   nodes: [EnqueuedStylesheet!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToEnqueuedStylesheetConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13325,6 +14626,26 @@ type RootQueryToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetCo
   node: EnqueuedStylesheet!
 }
 
+"""Page Info on the &quot;RootQueryToEnqueuedStylesheetConnection&quot;"""
+type RootQueryToEnqueuedStylesheetConnectionPageInfo implements EnqueuedStylesheetConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "EnqueuedStylesheetConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the RootQuery type and the landingPage type"""
 type RootQueryToLandingPageConnection implements LandingPageConnection & Connection
   @join__implements(graph: CMS, interface: "LandingPageConnection")
@@ -13338,7 +14659,7 @@ type RootQueryToLandingPageConnection implements LandingPageConnection & Connect
   nodes: [LandingPage!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToLandingPageConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13352,6 +14673,26 @@ type RootQueryToLandingPageConnectionEdge implements LandingPageConnectionEdge &
 
   """The item at the end of the edge"""
   node: LandingPage!
+}
+
+"""Page Info on the &quot;RootQueryToLandingPageConnection&quot;"""
+type RootQueryToLandingPageConnectionPageInfo implements LandingPageConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "LandingPageConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -13394,7 +14735,7 @@ input RootQueryToLandingPageConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -13435,7 +14776,7 @@ type RootQueryToMediaItemConnection implements MediaItemConnection & Connection
   nodes: [MediaItem!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToMediaItemConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13449,6 +14790,26 @@ type RootQueryToMediaItemConnectionEdge implements MediaItemConnectionEdge & Edg
 
   """The item at the end of the edge"""
   node: MediaItem!
+}
+
+"""Page Info on the &quot;RootQueryToMediaItemConnection&quot;"""
+type RootQueryToMediaItemConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MediaItemConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToMediaItemConnection connection"""
@@ -13505,7 +14866,7 @@ input RootQueryToMediaItemConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -13546,7 +14907,7 @@ type RootQueryToMenuConnection implements MenuConnection & Connection
   nodes: [Menu!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToMenuConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13560,6 +14921,26 @@ type RootQueryToMenuConnectionEdge implements MenuConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Menu!
+}
+
+"""Page Info on the &quot;RootQueryToMenuConnection&quot;"""
+type RootQueryToMenuConnectionPageInfo implements MenuConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MenuConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToMenuConnection connection"""
@@ -13589,7 +14970,7 @@ type RootQueryToMenuItemConnection implements MenuItemConnection & Connection
   nodes: [MenuItem!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToMenuItemConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13603,6 +14984,26 @@ type RootQueryToMenuItemConnectionEdge implements MenuItemConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: MenuItem!
+}
+
+"""Page Info on the &quot;RootQueryToMenuItemConnection&quot;"""
+type RootQueryToMenuItemConnectionPageInfo implements MenuItemConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MenuItemConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToMenuItemConnection connection"""
@@ -13638,7 +15039,7 @@ type RootQueryToPageConnection implements PageConnection & Connection
   nodes: [Page!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToPageConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13652,6 +15053,26 @@ type RootQueryToPageConnectionEdge implements PageConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Page!
+}
+
+"""Page Info on the &quot;RootQueryToPageConnection&quot;"""
+type RootQueryToPageConnectionPageInfo implements PageConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PageConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToPageConnection connection"""
@@ -13708,7 +15129,7 @@ input RootQueryToPageConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -13749,7 +15170,7 @@ type RootQueryToPluginConnection implements PluginConnection & Connection
   nodes: [Plugin!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToPluginConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13763,6 +15184,26 @@ type RootQueryToPluginConnectionEdge implements PluginConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Plugin!
+}
+
+"""Page Info on the &quot;RootQueryToPluginConnection&quot;"""
+type RootQueryToPluginConnectionPageInfo implements PluginConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PluginConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToPluginConnection connection"""
@@ -13792,7 +15233,7 @@ type RootQueryToPostConnection implements PostConnection & Connection
   nodes: [Post!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToPostConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13806,6 +15247,26 @@ type RootQueryToPostConnectionEdge implements PostConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Post!
+}
+
+"""Page Info on the &quot;RootQueryToPostConnection&quot;"""
+type RootQueryToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PostConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToPostConnection connection"""
@@ -13878,7 +15339,7 @@ input RootQueryToPostConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -13937,7 +15398,7 @@ type RootQueryToPostFormatConnection implements PostFormatConnection & Connectio
   nodes: [PostFormat!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToPostFormatConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -13951,6 +15412,26 @@ type RootQueryToPostFormatConnectionEdge implements PostFormatConnectionEdge & E
 
   """The item at the end of the edge"""
   node: PostFormat!
+}
+
+"""Page Info on the &quot;RootQueryToPostFormatConnection&quot;"""
+type RootQueryToPostFormatConnectionPageInfo implements PostFormatConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PostFormatConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToPostFormatConnection connection"""
@@ -14056,7 +15537,7 @@ type RootQueryToReleaseConnection implements ReleaseConnection & Connection
   nodes: [Release!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToReleaseConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14070,6 +15551,26 @@ type RootQueryToReleaseConnectionEdge implements ReleaseConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Release!
+}
+
+"""Page Info on the &quot;RootQueryToReleaseConnection&quot;"""
+type RootQueryToReleaseConnectionPageInfo implements ReleaseConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ReleaseConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToReleaseConnection connection"""
@@ -14110,7 +15611,7 @@ input RootQueryToReleaseConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -14151,7 +15652,7 @@ type RootQueryToRevisionsConnection implements ContentNodeConnection & Connectio
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToRevisionsConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14165,6 +15666,26 @@ type RootQueryToRevisionsConnectionEdge implements ContentNodeConnectionEdge & E
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""Page Info on the &quot;RootQueryToRevisionsConnection&quot;"""
+type RootQueryToRevisionsConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToRevisionsConnection connection"""
@@ -14202,7 +15723,7 @@ input RootQueryToRevisionsConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -14243,7 +15764,7 @@ type RootQueryToTagConnection implements TagConnection & Connection
   nodes: [Tag!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToTagConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14257,6 +15778,26 @@ type RootQueryToTagConnectionEdge implements TagConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Tag!
+}
+
+"""Page Info on the &quot;RootQueryToTagConnection&quot;"""
+type RootQueryToTagConnectionPageInfo implements TagConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TagConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToTagConnection connection"""
@@ -14368,7 +15909,7 @@ type RootQueryToTaxonomyConnection implements TaxonomyConnection & Connection
   nodes: [Taxonomy!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToTaxonomyConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14384,6 +15925,26 @@ type RootQueryToTaxonomyConnectionEdge implements TaxonomyConnectionEdge & Edge
   node: Taxonomy!
 }
 
+"""Page Info on the &quot;RootQueryToTaxonomyConnection&quot;"""
+type RootQueryToTaxonomyConnectionPageInfo implements TaxonomyConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TaxonomyConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the RootQuery type and the TermNode type"""
 type RootQueryToTermNodeConnection implements TermNodeConnection & Connection
   @join__implements(graph: CMS, interface: "TermNodeConnection")
@@ -14397,7 +15958,7 @@ type RootQueryToTermNodeConnection implements TermNodeConnection & Connection
   nodes: [TermNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToTermNodeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14411,6 +15972,26 @@ type RootQueryToTermNodeConnectionEdge implements TermNodeConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: TermNode!
+}
+
+"""Page Info on the &quot;RootQueryToTermNodeConnection&quot;"""
+type RootQueryToTermNodeConnectionPageInfo implements TermNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TermNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToTermNodeConnection connection"""
@@ -14519,7 +16100,7 @@ type RootQueryToThemeConnection implements ThemeConnection & Connection
   nodes: [Theme!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToThemeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14535,6 +16116,26 @@ type RootQueryToThemeConnectionEdge implements ThemeConnectionEdge & Edge
   node: Theme!
 }
 
+"""Page Info on the &quot;RootQueryToThemeConnection&quot;"""
+type RootQueryToThemeConnectionPageInfo implements ThemeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ThemeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the RootQuery type and the translation type"""
 type RootQueryToTranslationConnection implements TranslationConnection & Connection
   @join__implements(graph: CMS, interface: "TranslationConnection")
@@ -14548,7 +16149,7 @@ type RootQueryToTranslationConnection implements TranslationConnection & Connect
   nodes: [Translation!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToTranslationConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14562,6 +16163,26 @@ type RootQueryToTranslationConnectionEdge implements TranslationConnectionEdge &
 
   """The item at the end of the edge"""
   node: Translation!
+}
+
+"""Page Info on the &quot;RootQueryToTranslationConnection&quot;"""
+type RootQueryToTranslationConnectionPageInfo implements TranslationConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TranslationConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -14598,7 +16219,7 @@ input RootQueryToTranslationConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -14639,7 +16260,7 @@ type RootQueryToUserConnection implements UserConnection & Connection
   nodes: [User!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToUserConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14653,6 +16274,26 @@ type RootQueryToUserConnectionEdge implements UserConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: User!
+}
+
+"""Page Info on the &quot;RootQueryToUserConnection&quot;"""
+type RootQueryToUserConnectionPageInfo implements UserConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "UserConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the RootQueryToUserConnection connection"""
@@ -14696,7 +16337,7 @@ input RootQueryToUserConnectionWhereArgs
   """
   nicenameNotIn: [String]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [UsersConnectionOrderbyInput]
 
   """
@@ -14738,7 +16379,7 @@ type RootQueryToUserRoleConnection implements UserRoleConnection & Connection
   nodes: [UserRole!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToUserRoleConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -14752,6 +16393,37 @@ type RootQueryToUserRoleConnectionEdge implements UserRoleConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: UserRole!
+}
+
+"""Page Info on the &quot;RootQueryToUserRoleConnection&quot;"""
+type RootQueryToUserRoleConnectionPageInfo implements UserRoleConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "UserRoleConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""The strategy to use when loading the script"""
+enum ScriptLoadingStrategyEnum
+  @join__type(graph: CMS)
+{
+  """Use the script `async` attribute"""
+  ASYNC @join__enumValue(graph: CMS)
+
+  """Use the script `defer` attribute"""
+  DEFER @join__enumValue(graph: CMS)
 }
 
 type SearchResultConnection
@@ -14996,6 +16668,9 @@ type SiteSettings
   """Attachment ID for logo"""
   logo: String
 
+  """Redirects"""
+  redirects: String
+
   """Identifying name"""
   siteName: String
 }
@@ -15141,11 +16816,20 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
     before: String
   ): TermNodeToEnqueuedStylesheetConnection
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -15224,6 +16908,9 @@ interface TagConnection implements Connection
 
   """A list of connected tag Nodes"""
   nodes: [Tag!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: TagConnectionPageInfo!
 }
 
 """Edge between a Node and a connected tag"""
@@ -15238,6 +16925,25 @@ interface TagConnectionEdge implements Edge
 
   """The connected tag Node"""
   node: Tag!
+}
+
+"""Page Info on the connected TagConnectionEdge"""
+interface TagConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -15273,7 +16979,7 @@ type TagToContentNodeConnection implements ContentNodeConnection & Connection
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: TagToContentNodeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -15287,6 +16993,26 @@ type TagToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""Page Info on the &quot;TagToContentNodeConnection&quot;"""
+type TagToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the TagToContentNodeConnection connection"""
@@ -15324,7 +17050,7 @@ input TagToContentNodeConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -15365,7 +17091,7 @@ type TagToPostConnection implements PostConnection & Connection
   nodes: [Post!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: TagToPostConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -15379,6 +17105,26 @@ type TagToPostConnectionEdge implements PostConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Post!
+}
+
+"""Page Info on the &quot;TagToPostConnection&quot;"""
+type TagToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PostConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the TagToPostConnection connection"""
@@ -15445,7 +17191,7 @@ input TagToPostConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -15544,6 +17290,25 @@ type Taxonomy implements Node
     before: String
   ): TaxonomyToContentTypeConnection
 
+  """List of Term Nodes associated with the Taxonomy"""
+  connectedTerms(
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+  ): TaxonomyToTermNodeConnection
+
   """
   Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description
   """
@@ -15576,7 +17341,7 @@ type Taxonomy implements Node
   public: Boolean
 
   """
-  Name of content type to diplay in REST API &quot;wp/v2&quot; namespace.
+  Name of content type to display in REST API &quot;wp/v2&quot; namespace.
   """
   restBase: String
 
@@ -15628,6 +17393,9 @@ interface TaxonomyConnection implements Connection
 
   """A list of connected Taxonomy Nodes"""
   nodes: [Taxonomy!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: TaxonomyConnectionPageInfo!
 }
 
 """Edge between a Node and a connected Taxonomy"""
@@ -15642,6 +17410,25 @@ interface TaxonomyConnectionEdge implements Edge
 
   """The connected Taxonomy Node"""
   node: Taxonomy!
+}
+
+"""Page Info on the connected TaxonomyConnectionEdge"""
+interface TaxonomyConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Allowed taxonomies"""
@@ -15684,7 +17471,7 @@ type TaxonomyToContentTypeConnection implements ContentTypeConnection & Connecti
   nodes: [ContentType!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: TaxonomyToContentTypeConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -15698,6 +17485,75 @@ type TaxonomyToContentTypeConnectionEdge implements ContentTypeConnectionEdge & 
 
   """The item at the end of the edge"""
   node: ContentType!
+}
+
+"""Page Info on the &quot;TaxonomyToContentTypeConnection&quot;"""
+type TaxonomyToContentTypeConnectionPageInfo implements ContentTypeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentTypeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Connection between the Taxonomy type and the TermNode type"""
+type TaxonomyToTermNodeConnection implements TermNodeConnection & Connection
+  @join__implements(graph: CMS, interface: "TermNodeConnection")
+  @join__implements(graph: CMS, interface: "Connection")
+  @join__type(graph: CMS)
+{
+  """Edges for the TaxonomyToTermNodeConnection connection"""
+  edges: [TaxonomyToTermNodeConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [TermNode!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: TaxonomyToTermNodeConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type TaxonomyToTermNodeConnectionEdge implements TermNodeConnectionEdge & Edge
+  @join__implements(graph: CMS, interface: "TermNodeConnectionEdge")
+  @join__implements(graph: CMS, interface: "Edge")
+  @join__type(graph: CMS)
+{
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: TermNode!
+}
+
+"""Page Info on the &quot;TaxonomyToTermNodeConnection&quot;"""
+type TaxonomyToTermNodeConnectionPageInfo implements TermNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TermNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Hae sivuobjekti sivupohjan mukaan"""
@@ -15763,11 +17619,20 @@ interface TermNode implements Node & UniformResourceIdentifiable
     before: String
   ): TermNodeToEnqueuedStylesheetConnection
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -15809,6 +17674,9 @@ interface TermNodeConnection implements Connection
 
   """A list of connected TermNode Nodes"""
   nodes: [TermNode!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: TermNodeConnectionPageInfo!
 }
 
 """Edge between a Node and a connected TermNode"""
@@ -15823,6 +17691,25 @@ interface TermNodeConnectionEdge implements Edge
 
   """The connected TermNode Node"""
   node: TermNode!
+}
+
+"""Page Info on the connected TermNodeConnectionEdge"""
+interface TermNodeConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -15860,7 +17747,7 @@ type TermNodeToEnqueuedScriptConnection implements EnqueuedScriptConnection & Co
   nodes: [EnqueuedScript!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: TermNodeToEnqueuedScriptConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -15876,6 +17763,26 @@ type TermNodeToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnectionE
   node: EnqueuedScript!
 }
 
+"""Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot;"""
+type TermNodeToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "EnqueuedScriptConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the TermNode type and the EnqueuedStylesheet type"""
 type TermNodeToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnection & Connection
   @join__implements(graph: CMS, interface: "EnqueuedStylesheetConnection")
@@ -15889,7 +17796,7 @@ type TermNodeToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnect
   nodes: [EnqueuedStylesheet!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: TermNodeToEnqueuedStylesheetConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -15903,6 +17810,26 @@ type TermNodeToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetCon
 
   """The item at the end of the edge"""
   node: EnqueuedStylesheet!
+}
+
+"""Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot;"""
+type TermNodeToEnqueuedStylesheetConnectionPageInfo implements EnqueuedStylesheetConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "EnqueuedStylesheetConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Options for ordering the connection by"""
@@ -16000,6 +17927,9 @@ interface ThemeConnection implements Connection
 
   """A list of connected Theme Nodes"""
   nodes: [Theme!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: ThemeConnectionPageInfo!
 }
 
 """Edge between a Node and a connected Theme"""
@@ -16014,6 +17944,25 @@ interface ThemeConnectionEdge implements Edge
 
   """The connected Theme Node"""
   node: Theme!
+}
+
+"""Page Info on the connected ThemeConnectionEdge"""
+interface ThemeConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 type Time
@@ -16124,8 +18073,17 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
   """The globally unique identifier of the translation-cpt object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -16216,7 +18174,7 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
   """The id field matches the WP_Post-&gt;ID field."""
   translationId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
 
-  """Käännökset"""
+  """Translations"""
   translations: [TranslationResponse]
 
   """The unique resource identifier path"""
@@ -16235,6 +18193,9 @@ interface TranslationConnection implements Connection
 
   """A list of connected translation Nodes"""
   nodes: [Translation!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: TranslationConnectionPageInfo!
 }
 
 """Edge between a Node and a connected translation"""
@@ -16249,6 +18210,25 @@ interface TranslationConnectionEdge implements Edge
 
   """The connected translation Node"""
   node: Translation!
+}
+
+"""Page Info on the connected TranslationConnectionEdge"""
+interface TranslationConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The Type of Identifier used to fetch a single resource. Default is ID."""
@@ -16270,28 +18250,28 @@ enum TranslationIdType
   URI @join__enumValue(graph: CMS)
 }
 
-"""Käännöksen kieli/arvo-parit"""
+"""Translation with language/value pairs"""
 type TranslationItems
   @join__type(graph: CMS)
 {
-  """Käännöksen merkkijono"""
+  """Translation string"""
   en: String
 
-  """Käännöksen merkkijono"""
+  """Translation string"""
   fi: String
 
-  """Käännöksen merkkijono"""
+  """Translation string"""
   sv: String
 }
 
-"""Käännösvastaus sisältää käännösavaimen ja käännökset"""
+"""Translation response contains translation key and translations"""
 type TranslationResponse
   @join__type(graph: CMS)
 {
-  """Käyttöliittymän käännösavain"""
+  """Translation key for frontend"""
   key: String
 
-  """Käännökset käyttöliittymälle"""
+  """Translations for frontend"""
   translations: TranslationItems
 }
 
@@ -16324,7 +18304,7 @@ type TranslationToRevisionConnection implements TranslationConnection & Connecti
   nodes: [Translation!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: TranslationToRevisionConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -16338,6 +18318,26 @@ type TranslationToRevisionConnectionEdge implements TranslationConnectionEdge & 
 
   """The item at the end of the edge"""
   node: Translation!
+}
+
+"""Page Info on the &quot;TranslationToRevisionConnection&quot;"""
+type TranslationToRevisionConnectionPageInfo implements TranslationConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "TranslationConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the TranslationToRevisionConnection connection"""
@@ -16372,7 +18372,7 @@ input TranslationToRevisionConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -16474,11 +18474,20 @@ interface UniformResourceIdentifiable implements Node
   @join__implements(graph: CMS, interface: "Node")
   @join__type(graph: CMS)
 {
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the node is a Term"""
   isTermNode: Boolean!
@@ -16547,6 +18556,9 @@ input UpdateCollectionInput
 
   """The ID of the collection object"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
 
   """
@@ -16659,6 +18671,9 @@ input UpdateContactInput
 
   """The ID of the contact object"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
 
   """
@@ -16708,6 +18723,9 @@ input UpdateLandingPageInput
 
   """The ID of the landingPage object"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
 
   """
@@ -16832,6 +18850,9 @@ input UpdatePageInput
 
   """The ID of the page object"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
 
   """
@@ -16933,6 +18954,9 @@ input UpdatePostInput
 
   """The ID of the post object"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
 
   """
@@ -16991,6 +19015,9 @@ input UpdateReleaseInput
 
   """The ID of the release object"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
 
   """
@@ -17166,6 +19193,9 @@ input UpdateTranslationInput
 
   """The ID of the translation object"""
   id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
 
   """
   A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
@@ -17396,8 +19426,17 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   """The globally unique identifier for the user object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -17438,7 +19477,7 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   ): UserToMediaItemConnection
 
   """
-  Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property.
+  Display name of the user. This is equivalent to the WP_User-&gt;display_name property.
   """
   name: String
 
@@ -17541,6 +19580,11 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   ): UserToUserRoleConnection
 
   """
+  Whether the Toolbar should be displayed when the user is viewing the site.
+  """
+  shouldShowAdminToolbar: Boolean
+
+  """
   The slug for the user. This field is equivalent to WP_User-&gt;user_nicename
   """
   slug: String
@@ -17572,6 +19616,9 @@ interface UserConnection implements Connection
 
   """A list of connected User Nodes"""
   nodes: [User!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: UserConnectionPageInfo!
 }
 
 """Edge between a Node and a connected User"""
@@ -17586,6 +19633,25 @@ interface UserConnectionEdge implements Edge
 
   """The connected User Node"""
   node: User!
+}
+
+"""Page Info on the connected UserConnectionEdge"""
+interface UserConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """
@@ -17646,6 +19712,9 @@ interface UserRoleConnection implements Connection
 
   """A list of connected UserRole Nodes"""
   nodes: [UserRole!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: UserRoleConnectionPageInfo!
 }
 
 """Edge between a Node and a connected UserRole"""
@@ -17660,6 +19729,25 @@ interface UserRoleConnectionEdge implements Edge
 
   """The connected UserRole Node"""
   node: UserRole!
+}
+
+"""Page Info on the connected UserRoleConnectionEdge"""
+interface UserRoleConnectionPageInfo implements WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Names of available user roles"""
@@ -17750,7 +19838,7 @@ enum UsersConnectionSearchColumnEnum
   """A URL-friendly name for the user. The default is the user's username."""
   NICENAME @join__enumValue(graph: CMS)
 
-  """The URL of the user\s website."""
+  """The URL of the user's website."""
   URL @join__enumValue(graph: CMS)
 }
 
@@ -17767,7 +19855,7 @@ type UserToCommentConnection implements CommentConnection & Connection
   nodes: [Comment!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: UserToCommentConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -17781,6 +19869,26 @@ type UserToCommentConnectionEdge implements CommentConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Comment!
+}
+
+"""Page Info on the &quot;UserToCommentConnection&quot;"""
+type UserToCommentConnectionPageInfo implements CommentConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "CommentConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the UserToCommentConnection connection"""
@@ -17896,7 +20004,7 @@ type UserToEnqueuedScriptConnection implements EnqueuedScriptConnection & Connec
   nodes: [EnqueuedScript!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: UserToEnqueuedScriptConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -17912,6 +20020,26 @@ type UserToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnectionEdge 
   node: EnqueuedScript!
 }
 
+"""Page Info on the &quot;UserToEnqueuedScriptConnection&quot;"""
+type UserToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "EnqueuedScriptConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the User type and the EnqueuedStylesheet type"""
 type UserToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnection & Connection
   @join__implements(graph: CMS, interface: "EnqueuedStylesheetConnection")
@@ -17925,7 +20053,7 @@ type UserToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnection 
   nodes: [EnqueuedStylesheet!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: UserToEnqueuedStylesheetConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -17941,6 +20069,26 @@ type UserToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetConnect
   node: EnqueuedStylesheet!
 }
 
+"""Page Info on the &quot;UserToEnqueuedStylesheetConnection&quot;"""
+type UserToEnqueuedStylesheetConnectionPageInfo implements EnqueuedStylesheetConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "EnqueuedStylesheetConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the User type and the mediaItem type"""
 type UserToMediaItemConnection implements MediaItemConnection & Connection
   @join__implements(graph: CMS, interface: "MediaItemConnection")
@@ -17954,7 +20102,7 @@ type UserToMediaItemConnection implements MediaItemConnection & Connection
   nodes: [MediaItem!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: UserToMediaItemConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -17968,6 +20116,26 @@ type UserToMediaItemConnectionEdge implements MediaItemConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: MediaItem!
+}
+
+"""Page Info on the &quot;UserToMediaItemConnection&quot;"""
+type UserToMediaItemConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "MediaItemConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the UserToMediaItemConnection connection"""
@@ -18018,7 +20186,7 @@ input UserToMediaItemConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -18059,7 +20227,7 @@ type UserToPageConnection implements PageConnection & Connection
   nodes: [Page!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: UserToPageConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -18073,6 +20241,26 @@ type UserToPageConnectionEdge implements PageConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Page!
+}
+
+"""Page Info on the &quot;UserToPageConnection&quot;"""
+type UserToPageConnectionPageInfo implements PageConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PageConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the UserToPageConnection connection"""
@@ -18123,7 +20311,7 @@ input UserToPageConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -18164,7 +20352,7 @@ type UserToPostConnection implements PostConnection & Connection
   nodes: [Post!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: UserToPostConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -18178,6 +20366,26 @@ type UserToPostConnectionEdge implements PostConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: Post!
+}
+
+"""Page Info on the &quot;UserToPostConnection&quot;"""
+type UserToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "PostConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the UserToPostConnection connection"""
@@ -18244,7 +20452,7 @@ input UserToPostConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -18303,7 +20511,7 @@ type UserToRevisionsConnection implements ContentNodeConnection & Connection
   nodes: [ContentNode!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: UserToRevisionsConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -18317,6 +20525,26 @@ type UserToRevisionsConnectionEdge implements ContentNodeConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: ContentNode!
+}
+
+"""Page Info on the &quot;UserToRevisionsConnection&quot;"""
+type UserToRevisionsConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "ContentNodeConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """Arguments for filtering the UserToRevisionsConnection connection"""
@@ -18354,7 +20582,7 @@ input UserToRevisionsConnectionWhereArgs
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -18395,7 +20623,7 @@ type UserToUserRoleConnection implements UserRoleConnection & Connection
   nodes: [UserRole!]!
 
   """Information about pagination in a connection."""
-  pageInfo: WPPageInfo
+  pageInfo: UserToUserRoleConnectionPageInfo!
 }
 
 """An edge in a connection"""
@@ -18409,6 +20637,26 @@ type UserToUserRoleConnectionEdge implements UserRoleConnectionEdge & Edge
 
   """The item at the end of the edge"""
   node: UserRole!
+}
+
+"""Page Info on the &quot;UserToUserRoleConnection&quot;"""
+type UserToUserRoleConnectionPageInfo implements UserRoleConnectionPageInfo & WPPageInfo & PageInfo
+  @join__implements(graph: CMS, interface: "UserRoleConnectionPageInfo")
+  @join__implements(graph: CMS, interface: "WPPageInfo")
+  @join__implements(graph: CMS, interface: "PageInfo")
+  @join__type(graph: CMS)
+{
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 type Venue
@@ -18484,7 +20732,8 @@ type VenueFacility
 }
 
 """Information about pagination in a connection."""
-type WPPageInfo
+interface WPPageInfo implements PageInfo
+  @join__implements(graph: CMS, interface: "PageInfo")
   @join__type(graph: CMS)
 {
   """When paginating forwards, the cursor to continue."""

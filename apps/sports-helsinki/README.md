@@ -20,7 +20,7 @@ This is a [Next.js](https://nextjs.org/) project originally bootstrapped with [`
 
 ### Headless CMS datasources
 
-- Test / Staging: https://liikunta.hkih.stage.geniem.io/graphql ([Wordpress-admin](https://liikunta.hkih.stage.geniem.io/wp-admin/))
+- Test / Staging: https://liikunta.app-staging.hkih.hion.dev/graphql ([Wordpress-admin](https://liikunta.app-staging.hkih.hion.dev/wp-admin/))
 - Production: https://liikunta.content.api.hel.fi/wp-admin/graphql ([Wordpress-admin](https://liikunta.content.api.hel.fi/wp-admin/wp-admin/))
 
 Note that the 1st production deployment from the monorepo will be done while connected toa temporary production server:

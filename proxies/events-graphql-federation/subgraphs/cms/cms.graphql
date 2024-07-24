@@ -34,18 +34,20 @@ type RootQuery {
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: CategoryIdType
   ): Category
-  "An object of the collection Type. Kokoelmat"
+  "An object of the collection Type. Collections"
   collection(
     "The globally unique identifier of the object."
     id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: CollectionIdType,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Collection
   "A collection object"
   collectionBy(
-    "Get the object by its global ID"
+    "Get the collection object by its global ID"
     id: ID,
     "Get the collection by its database ID"
     collectionId: Int,
@@ -103,18 +105,20 @@ type RootQuery {
     "Arguments for filtering the connection"
     where: RootQueryToCommentConnectionWhereArgs
   ): RootQueryToCommentConnection
-  "An object of the contact Type. Yhteystiedot"
+  "An object of the contact Type. Contacts"
   contact(
     "The globally unique identifier of the object."
     id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: ContactIdType,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Contact
   "A contact object"
   contactBy(
-    "Get the object by its global ID"
+    "Get the contact object by its global ID"
     id: ID,
     "Get the contact by its database ID"
     contactId: Int,
@@ -154,7 +158,9 @@ type RootQuery {
     The content type the node is used for. Required when idType is set to "name" or "slug"
     """
     contentType: ContentTypeEnum,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): ContentNode
   "Connection between the RootQuery type and the ContentNode type"
@@ -210,24 +216,22 @@ type RootQuery {
   defaultLanguage: Language
   "Fields of the &#039;DiscussionSettings&#039; settings group"
   discussionSettings: DiscussionSettings
-  "Footer blocks"
-  footerBlocks(language: String!): [FooterBlocksUnion]
   "Fields of the &#039;GeneralSettings&#039; settings group"
   generalSettings: GeneralSettings
-  "Global Sidebar blocks"
-  globalSidebarBlocks(language: String!): [GlobalSidebarBlocksUnion]
-  "An object of the landingPage Type. Laskeutumissivut"
+  "An object of the landingPage Type. Landing Pages"
   landingPage(
     "The globally unique identifier of the object."
     id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: LandingPageIdType,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): LandingPage
   "A landingPage object"
   landingPageBy(
-    "Get the object by its global ID"
+    "Get the landingPage object by its global ID"
     id: ID,
     "Get the landingPage by its database ID"
     landingPageId: Int,
@@ -265,12 +269,14 @@ type RootQuery {
     id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: MediaItemIdType,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): MediaItem
   "A mediaItem object"
   mediaItemBy(
-    "Get the object by its global ID"
+    "Get the mediaItem object by its global ID"
     id: ID,
     "Get the mediaItem by its database ID"
     mediaItemId: Int,
@@ -376,12 +382,14 @@ type RootQuery {
     id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: PageIdType,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Page
   "A page object"
   pageBy(
-    "Get the object by its global ID"
+    "Get the page object by its global ID"
     id: ID,
     "Get the page by its database ID"
     pageId: Int,
@@ -443,12 +451,14 @@ type RootQuery {
     id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: PostIdType,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Post
   "A post object"
   postBy(
-    "Get the object by its global ID"
+    "Get the post object by its global ID"
     id: ID,
     "Get the post by its database ID"
     postId: Int,
@@ -546,18 +556,20 @@ type RootQuery {
     """
     before: String
   ): RootQueryToEnqueuedStylesheetConnection
-  "An object of the release Type. Tiedotteet"
+  "An object of the release Type. Releases"
   release(
     "The globally unique identifier of the object."
     id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: ReleaseIdType,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Release
   "A release object"
   releaseBy(
-    "Get the object by its global ID"
+    "Get the release object by its global ID"
     id: ID,
     "Get the release by its database ID"
     releaseId: Int,
@@ -724,18 +736,20 @@ type RootQuery {
   ): RootQueryToThemeConnection
   "Translate string using pll_translate_string() (Polylang)"
   translateString(string: String!, language: LanguageCodeEnum!): String
-  "An object of the translation Type. Käännökset"
+  "An object of the translation Type. Translations"
   translation(
     "The globally unique identifier of the object."
     id: ID!,
     "Type of unique identifier to fetch by. Default is Global ID"
     idType: TranslationIdType,
-    "Whether to return the node as a preview instance"
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
   ): Translation
   "A translation object"
   translationBy(
-    "Get the object by its global ID"
+    "Get the translation object by its global ID"
     id: ID,
     "Get the translation by its database ID"
     translationId: Int,
@@ -864,7 +878,7 @@ type RootQueryToCategoryConnection implements CategoryConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Category!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToCategoryConnectionPageInfo!
 }
 "The category type"
 type Category implements Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier & HierarchicalTermNode & HierarchicalNode & MenuItemLinkable {
@@ -975,10 +989,16 @@ type Category implements Node & TermNode & UniformResourceIdentifiable & Databas
     """
     before: String
   ): TermNodeToEnqueuedStylesheetConnection
-  "The unique resource identifier path"
+  "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is restricted from the current viewer"
   isRestricted: Boolean
   "Whether the node is a Term"
@@ -1040,23 +1060,33 @@ type TermNodeToEnqueuedScriptConnection implements EnqueuedScriptConnection & Co
   "The nodes of the connection, without the edges"
   nodes: [EnqueuedScript!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: TermNodeToEnqueuedScriptConnectionPageInfo!
 }
 "Script enqueued by the CMS"
 type EnqueuedScript implements Node & EnqueuedAsset {
-  "@todo"
-  args: Boolean
+  "The inline code to be run after the asset is loaded."
+  after: [String]
+  "Deprecated"
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+  "The inline code to be run before the asset is loaded."
+  before: [String]
+  "The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc"
+  conditional: String
   "Dependencies needed to use this asset"
   dependencies: [EnqueuedScript]
   "Extra information needed for the script"
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
+  "Extra data supplied to the enqueued script"
+  extraData: String
   "The handle of the enqueued asset"
   handle: String
-  "The ID of the enqueued asset"
+  "The global ID of the enqueued script"
   id: ID!
   "The source of the asset"
   src: String
-  "The version of the enqueued asset"
+  "The loading strategy to use on the script tag"
+  strategy: ScriptLoadingStrategyEnum
+  "The version of the enqueued script"
   version: String
 }
 "An edge in a connection"
@@ -1066,8 +1096,8 @@ type TermNodeToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnectionE
   "The item at the end of the edge"
   node: EnqueuedScript!
 }
-"Information about pagination in a connection."
-type WPPageInfo {
+"Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot;"
+type TermNodeToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionPageInfo & WPPageInfo & PageInfo {
   "When paginating forwards, the cursor to continue."
   endCursor: String
   "When paginating forwards, are there more items?"
@@ -1084,23 +1114,41 @@ type TermNodeToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnect
   "The nodes of the connection, without the edges"
   nodes: [EnqueuedStylesheet!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: TermNodeToEnqueuedStylesheetConnectionPageInfo!
 }
 "Stylesheet enqueued by the CMS"
 type EnqueuedStylesheet implements Node & EnqueuedAsset {
-  "@todo"
-  args: Boolean
+  "The inline code to be run after the asset is loaded."
+  after: [String]
+  "Deprecated"
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+  "The inline code to be run before the asset is loaded."
+  before: [String]
+  "The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc"
+  conditional: String
   "Dependencies needed to use this asset"
-  dependencies: [EnqueuedScript]
+  dependencies: [EnqueuedStylesheet]
   "Extra information needed for the script"
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
   "The handle of the enqueued asset"
   handle: String
-  "The ID of the enqueued asset"
+  "The global ID of the enqueued stylesheet"
   id: ID!
+  "Whether the enqueued style is RTL or not"
+  isRtl: Boolean
+  "The media attribute to use for the link"
+  media: String
+  "The absolute path to the enqueued style. Set when the stylesheet is meant to load inline."
+  path: String
+  "The `rel` attribute to use for the link"
+  rel: String
   "The source of the asset"
   src: String
-  "The version of the enqueued asset"
+  "Optional suffix, used in combination with RTL"
+  suffix: String
+  "The title of the enqueued style. Used for preferred/alternate stylesheets."
+  title: String
+  "The version of the enqueued style"
   version: String
 }
 "An edge in a connection"
@@ -1110,6 +1158,17 @@ type TermNodeToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetCon
   "The item at the end of the edge"
   node: EnqueuedStylesheet!
 }
+"Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot;"
+type TermNodeToEnqueuedStylesheetConnectionPageInfo implements EnqueuedStylesheetConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the Category type and the category type"
 type CategoryToAncestorsCategoryConnection implements CategoryConnection & Connection {
   "Edges for the CategoryToAncestorsCategoryConnection connection"
@@ -1117,7 +1176,7 @@ type CategoryToAncestorsCategoryConnection implements CategoryConnection & Conne
   "The nodes of the connection, without the edges"
   nodes: [Category!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: CategoryToAncestorsCategoryConnectionPageInfo!
 }
 "An edge in a connection"
 type CategoryToAncestorsCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
@@ -1126,6 +1185,17 @@ type CategoryToAncestorsCategoryConnectionEdge implements CategoryConnectionEdge
   "The item at the end of the edge"
   node: Category!
 }
+"Page Info on the &quot;CategoryToAncestorsCategoryConnection&quot;"
+type CategoryToAncestorsCategoryConnectionPageInfo implements CategoryConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the Category type and the category type"
 type CategoryToCategoryConnection implements CategoryConnection & Connection {
   "Edges for the CategoryToCategoryConnection connection"
@@ -1133,7 +1203,7 @@ type CategoryToCategoryConnection implements CategoryConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Category!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: CategoryToCategoryConnectionPageInfo!
 }
 "An edge in a connection"
 type CategoryToCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
@@ -1142,6 +1212,17 @@ type CategoryToCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Category!
 }
+"Page Info on the &quot;CategoryToCategoryConnection&quot;"
+type CategoryToCategoryConnectionPageInfo implements CategoryConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the Category type and the ContentNode type"
 type CategoryToContentNodeConnection implements ContentNodeConnection & Connection {
   "Edges for the CategoryToContentNodeConnection connection"
@@ -1149,7 +1230,7 @@ type CategoryToContentNodeConnection implements ContentNodeConnection & Connecti
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: CategoryToContentNodeConnectionPageInfo!
 }
 "Connection between the ContentNode type and the ContentType type"
 type ContentNodeToContentTypeConnectionEdge implements OneToOneConnection & Edge & ContentTypeConnectionEdge {
@@ -1218,6 +1299,8 @@ type ContentType implements Node & UniformResourceIdentifiable {
   hierarchical: Boolean
   "The globally unique identifier of the post-type object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
   "Whether this page is set to the static front page."
@@ -1268,7 +1351,7 @@ type ContentTypeToTaxonomyConnection implements TaxonomyConnection & Connection 
   "The nodes of the connection, without the edges"
   nodes: [Taxonomy!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: ContentTypeToTaxonomyConnectionPageInfo!
 }
 "A taxonomy object"
 type Taxonomy implements Node {
@@ -1291,6 +1374,25 @@ type Taxonomy implements Node {
     """
     before: String
   ): TaxonomyToContentTypeConnection
+  "List of Term Nodes associated with the Taxonomy"
+  connectedTerms(
+    """
+    The number of items to return after the referenced "after" cursor
+    """
+    first: Int,
+    """
+    The number of items to return before the referenced "before" cursor
+    """
+    last: Int,
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String,
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+  ): TaxonomyToTermNodeConnection
   "Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description"
   description: String
   "The plural name of the post type within the GraphQL Schema."
@@ -1309,7 +1411,7 @@ type Taxonomy implements Node {
   name: String
   "Whether the taxonomy is publicly queryable"
   public: Boolean
-  "Name of content type to diplay in REST API &quot;wp/v2&quot; namespace."
+  "Name of content type to display in REST API &quot;wp/v2&quot; namespace."
   restBase: String
   "The REST Controller class assigned to handling this content type."
   restControllerClass: String
@@ -1337,7 +1439,7 @@ type TaxonomyToContentTypeConnection implements ContentTypeConnection & Connecti
   "The nodes of the connection, without the edges"
   nodes: [ContentType!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: TaxonomyToContentTypeConnectionPageInfo!
 }
 "An edge in a connection"
 type TaxonomyToContentTypeConnectionEdge implements ContentTypeConnectionEdge & Edge {
@@ -1346,12 +1448,61 @@ type TaxonomyToContentTypeConnectionEdge implements ContentTypeConnectionEdge & 
   "The item at the end of the edge"
   node: ContentType!
 }
+"Page Info on the &quot;TaxonomyToContentTypeConnection&quot;"
+type TaxonomyToContentTypeConnectionPageInfo implements ContentTypeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+"Connection between the Taxonomy type and the TermNode type"
+type TaxonomyToTermNodeConnection implements TermNodeConnection & Connection {
+  "Edges for the TaxonomyToTermNodeConnection connection"
+  edges: [TaxonomyToTermNodeConnectionEdge!]!
+  "The nodes of the connection, without the edges"
+  nodes: [TermNode!]!
+  "Information about pagination in a connection."
+  pageInfo: TaxonomyToTermNodeConnectionPageInfo!
+}
+"An edge in a connection"
+type TaxonomyToTermNodeConnectionEdge implements TermNodeConnectionEdge & Edge {
+  "A cursor for use in pagination"
+  cursor: String
+  "The item at the end of the edge"
+  node: TermNode!
+}
+"Page Info on the &quot;TaxonomyToTermNodeConnection&quot;"
+type TaxonomyToTermNodeConnectionPageInfo implements TermNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "An edge in a connection"
 type ContentTypeToTaxonomyConnectionEdge implements TaxonomyConnectionEdge & Edge {
   "A cursor for use in pagination"
   cursor: String
   "The item at the end of the edge"
   node: Taxonomy!
+}
+"Page Info on the &quot;ContentTypeToTaxonomyConnection&quot;"
+type ContentTypeToTaxonomyConnectionPageInfo implements TaxonomyConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the ContentType type and the ContentNode type"
 type ContentTypeToContentNodeConnection implements ContentNodeConnection & Connection {
@@ -1360,7 +1511,7 @@ type ContentTypeToContentNodeConnection implements ContentNodeConnection & Conne
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: ContentTypeToContentNodeConnectionPageInfo!
 }
 "An edge in a connection"
 type ContentTypeToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
@@ -1368,6 +1519,17 @@ type ContentTypeToContentNodeConnectionEdge implements ContentNodeConnectionEdge
   cursor: String
   "The item at the end of the edge"
   node: ContentNode!
+}
+"Page Info on the &quot;ContentTypeToContentNodeConnection&quot;"
+type ContentTypeToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Details for labels of the PostType"
 type PostTypeLabelDetails {
@@ -1517,8 +1679,14 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   firstName: String
   "The globally unique identifier for the user object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is restricted from the current viewer"
   isRestricted: Boolean
   "Whether the node is a Term"
@@ -1548,7 +1716,7 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     "Arguments for filtering the connection"
     where: UserToMediaItemConnectionWhereArgs
   ): UserToMediaItemConnection
-  "Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property."
+  "Display name of the user. This is equivalent to the WP_User-&gt;display_name property."
   name: String
   "The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename"
   nicename: String
@@ -1638,6 +1806,8 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
     """
     before: String
   ): UserToUserRoleConnection
+  "Whether the Toolbar should be displayed when the user is viewing the site."
+  shouldShowAdminToolbar: Boolean
   "The slug for the user. This field is equivalent to WP_User-&gt;user_nicename"
   slug: String
   "The unique resource identifier path"
@@ -1681,10 +1851,10 @@ type UserToCommentConnection implements CommentConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Comment!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: UserToCommentConnectionPageInfo!
 }
 "A Comment object"
-type Comment implements Node & DatabaseIdentifier {
+type Comment implements Node & DatabaseIdentifier & UniformResourceIdentifiable {
   "User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL."
   agent: String
   "The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL."
@@ -1710,10 +1880,22 @@ type Comment implements Node & DatabaseIdentifier {
   dateGmt: String
   "The globally unique identifier for the comment object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
+  "Whether the node is a Content Node"
+  isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is restricted from the current viewer"
   isRestricted: Boolean
+  "Whether the node is a Term"
+  isTermNode: Boolean!
   "Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL."
   karma: Int
+  "The permalink of the comment"
+  link: String
   "Connection between the Comment type and the Comment type"
   parent(
     "Arguments for filtering the connection"
@@ -1748,6 +1930,8 @@ type Comment implements Node & DatabaseIdentifier {
   status: CommentStatusEnum
   "Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL."
   type: String
+  "The unique resource identifier path"
+  uri: String
 }
 "Connection between the Comment type and the Commenter type"
 type CommentToCommenterConnectionEdge implements OneToOneConnection & Edge & CommenterConnectionEdge {
@@ -1777,7 +1961,7 @@ type CommentToCommentConnection implements CommentConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Comment!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: CommentToCommentConnectionPageInfo!
 }
 "An edge in a connection"
 type CommentToCommentConnectionEdge implements CommentConnectionEdge & Edge {
@@ -1786,12 +1970,34 @@ type CommentToCommentConnectionEdge implements CommentConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Comment!
 }
+"Page Info on the &quot;CommentToCommentConnection&quot;"
+type CommentToCommentConnectionPageInfo implements CommentConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "An edge in a connection"
 type UserToCommentConnectionEdge implements CommentConnectionEdge & Edge {
   "A cursor for use in pagination"
   cursor: String
   "The item at the end of the edge"
   node: Comment!
+}
+"Page Info on the &quot;UserToCommentConnection&quot;"
+type UserToCommentConnectionPageInfo implements CommentConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the User type and the EnqueuedScript type"
 type UserToEnqueuedScriptConnection implements EnqueuedScriptConnection & Connection {
@@ -1800,7 +2006,7 @@ type UserToEnqueuedScriptConnection implements EnqueuedScriptConnection & Connec
   "The nodes of the connection, without the edges"
   nodes: [EnqueuedScript!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: UserToEnqueuedScriptConnectionPageInfo!
 }
 "An edge in a connection"
 type UserToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnectionEdge & Edge {
@@ -1809,6 +2015,17 @@ type UserToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnectionEdge 
   "The item at the end of the edge"
   node: EnqueuedScript!
 }
+"Page Info on the &quot;UserToEnqueuedScriptConnection&quot;"
+type UserToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the User type and the EnqueuedStylesheet type"
 type UserToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnection & Connection {
   "Edges for the UserToEnqueuedStylesheetConnection connection"
@@ -1816,7 +2033,7 @@ type UserToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnection 
   "The nodes of the connection, without the edges"
   nodes: [EnqueuedStylesheet!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: UserToEnqueuedStylesheetConnectionPageInfo!
 }
 "An edge in a connection"
 type UserToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetConnectionEdge & Edge {
@@ -1825,6 +2042,17 @@ type UserToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetConnect
   "The item at the end of the edge"
   node: EnqueuedStylesheet!
 }
+"Page Info on the &quot;UserToEnqueuedStylesheetConnection&quot;"
+type UserToEnqueuedStylesheetConnectionPageInfo implements EnqueuedStylesheetConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the User type and the mediaItem type"
 type UserToMediaItemConnection implements MediaItemConnection & Connection {
   "Edges for the UserToMediaItemConnection connection"
@@ -1832,7 +2060,7 @@ type UserToMediaItemConnection implements MediaItemConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [MediaItem!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: UserToMediaItemConnectionPageInfo!
 }
 "The mediaItem type"
 type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & NodeWithTitle & NodeWithAuthor & HierarchicalContentNode & HierarchicalNode {
@@ -1959,8 +2187,14 @@ type MediaItem implements Node & ContentNode & UniformResourceIdentifiable & Dat
   guid: String
   "The globally unique identifier of the attachment object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -2048,7 +2282,7 @@ type HierarchicalContentNodeToContentNodeAncestorsConnection implements ContentN
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo!
 }
 "An edge in a connection"
 type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge implements ContentNodeConnectionEdge & Edge {
@@ -2057,6 +2291,17 @@ type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge implements Cont
   "The item at the end of the edge"
   node: ContentNode!
 }
+"Page Info on the &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot;"
+type HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the HierarchicalContentNode type and the ContentNode type"
 type HierarchicalContentNodeToContentNodeChildrenConnection implements ContentNodeConnection & Connection {
   "Edges for the HierarchicalContentNodeToContentNodeChildrenConnection connection"
@@ -2064,7 +2309,7 @@ type HierarchicalContentNodeToContentNodeChildrenConnection implements ContentNo
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo!
 }
 "An edge in a connection"
 type HierarchicalContentNodeToContentNodeChildrenConnectionEdge implements ContentNodeConnectionEdge & Edge {
@@ -2073,6 +2318,17 @@ type HierarchicalContentNodeToContentNodeChildrenConnectionEdge implements Conte
   "The item at the end of the edge"
   node: ContentNode!
 }
+"Page Info on the &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot;"
+type HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the ContentNode type and the EnqueuedScript type"
 type ContentNodeToEnqueuedScriptConnection implements EnqueuedScriptConnection & Connection {
   "Edges for the ContentNodeToEnqueuedScriptConnection connection"
@@ -2080,7 +2336,7 @@ type ContentNodeToEnqueuedScriptConnection implements EnqueuedScriptConnection &
   "The nodes of the connection, without the edges"
   nodes: [EnqueuedScript!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: ContentNodeToEnqueuedScriptConnectionPageInfo!
 }
 "An edge in a connection"
 type ContentNodeToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnectionEdge & Edge {
@@ -2089,6 +2345,17 @@ type ContentNodeToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnecti
   "The item at the end of the edge"
   node: EnqueuedScript!
 }
+"Page Info on the &quot;ContentNodeToEnqueuedScriptConnection&quot;"
+type ContentNodeToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the ContentNode type and the EnqueuedStylesheet type"
 type ContentNodeToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnection & Connection {
   "Edges for the ContentNodeToEnqueuedStylesheetConnection connection"
@@ -2096,7 +2363,7 @@ type ContentNodeToEnqueuedStylesheetConnection implements EnqueuedStylesheetConn
   "The nodes of the connection, without the edges"
   nodes: [EnqueuedStylesheet!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: ContentNodeToEnqueuedStylesheetConnectionPageInfo!
 }
 "An edge in a connection"
 type ContentNodeToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetConnectionEdge & Edge {
@@ -2104,6 +2371,17 @@ type ContentNodeToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheet
   cursor: String
   "The item at the end of the edge"
   node: EnqueuedStylesheet!
+}
+"Page Info on the &quot;ContentNodeToEnqueuedStylesheetConnection&quot;"
+type ContentNodeToEnqueuedStylesheetConnectionPageInfo implements EnqueuedStylesheetConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the ContentNode type and the User type"
 type ContentNodeToEditLastConnectionEdge implements OneToOneConnection & Edge & UserConnectionEdge {
@@ -2238,6 +2516,17 @@ type UserToMediaItemConnectionEdge implements MediaItemConnectionEdge & Edge {
   "The item at the end of the edge"
   node: MediaItem!
 }
+"Page Info on the &quot;UserToMediaItemConnection&quot;"
+type UserToMediaItemConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the User type and the page type"
 type UserToPageConnection implements PageConnection & Connection {
   "Edges for the UserToPageConnection connection"
@@ -2245,7 +2534,7 @@ type UserToPageConnection implements PageConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Page!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: UserToPageConnectionPageInfo!
 }
 "The page type"
 type Page implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithContentEditor & NodeWithAuthor & NodeWithFeaturedImage & NodeWithRevisions & NodeWithPageAttributes & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable {
@@ -2372,6 +2661,8 @@ type Page implements Node & ContentNode & UniformResourceIdentifiable & Database
   hero: Hero
   "The globally unique identifier of the page object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
   "Whether this page is set to the static front page."
@@ -2510,13 +2801,13 @@ type Link {
   "Linkin URL osoite"
   url: String
 }
-"Kokoelmamoduuli: EventSearch"
+"Collection Module: EventSearch"
 type EventSearch {
-  "Listattujen tapahtumien määrä “Näytä lisää” -painiketta"
+  "Amount of events listed before &quot;show more -button&quot;"
   initAmountOfEvents: Int
-  "Moduulin tyyppi"
+  "Module type"
   module: String
-  "Moduulilistaus"
+  "List of modules"
   modules: [CollectionModulesUnionType]
   """
   Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
@@ -2525,39 +2816,39 @@ type EventSearch {
                   
   """
   showAllLink: String
-  "Näytä kaikki -linkki"
+  "Show all -link"
   showAllLinkCustom: String
-  "Moduulin otsikko"
+  "Module title"
   title: String
-  "Hakukysely"
+  "Search query"
   url: String
 }
-"Kokoelmamoduuli: EventSelected"
+"Collection Module: EventSelected"
 type EventSelected {
-  "Lista tapahtumien ID-tiedoista"
+  "List of event IDs"
   events: [String]
-  "Listattujen tapahtumien määrä “Näytä lisää” -painiketta"
+  "Amount of events listed before &quot;show more -button&quot;"
   initAmountOfEvents: Int
-  "Moduulin tyyppi"
+  "Module type"
   module: String
-  "Moduulilistaus"
+  "List of modules"
   modules: [CollectionModulesUnionType]
-  "Näytä kaikki -linkki"
+  "Show all -link"
   showAllLink: String
-  "Moduulin otsikko"
+  "Module title"
   title: String
 }
-"Kokoelmamoduuli: EventSearchCarousel"
+"Collection Module: EventSearchCarousel"
 type EventSearchCarousel {
-  "Korttien määrä karusellissa"
+  "Amount of cards in carousel"
   amountOfCards: Int
-  "Tapahtumat lähellä"
+  "Events nearby"
   eventsNearby: Boolean
-  "Moduulin tyyppi"
+  "Module type"
   module: String
-  "Moduulilistaus"
+  "List of modules"
   modules: [CollectionModulesUnionType]
-  "Tapahtumien järjestys"
+  "Events order"
   orderNewestFirst: Boolean
   """
   Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
@@ -2566,50 +2857,50 @@ type EventSearchCarousel {
                                       
   """
   showAllLink: String
-  "Näytä kaikki -linkki"
+  "Show all -link"
   showAllLinkCustom: String
-  "Moduulin otsikko"
+  "Module title"
   title: String
-  "Hakukysely"
+  "Search query"
   url: String
 }
-"Kokoelmamoduuli: EventSelectedCarousel"
+"Collection Module: EventSelectedCarousel"
 type EventSelectedCarousel {
-  "Korttien määrä karusellissa"
+  "Amount of cards in carousel"
   amountOfCards: Int
-  "Korttien määrä riviä kohden"
+  "Amount of cards per row"
   amountOfCardsPerRow: Int
-  "Lista tapahtumien ID-tiedoista"
+  "List of event IDs"
   events: [String]
-  "Tapahtumat lähellä"
+  "Events nearby"
   eventsNearby: Boolean
-  "Moduulin tyyppi"
+  "Module type"
   module: String
-  "Moduulilistaus"
+  "List of modules"
   modules: [CollectionModulesUnionType]
-  "Näytä kaikki -linkki"
+  "Show all -link"
   showAllLink: String
-  "Moduulin otsikko"
+  "Module title"
   title: String
 }
-"Kokoelmamoduuli: LocationsSelected"
+"Collection Module: LocationsSelected"
 type LocationsSelected {
   "List of location IDs"
   locations: [Int]
   "Module type"
   module: String
-  "Moduulilistaus"
+  "List of modules"
   modules: [CollectionModulesUnionType]
   "Module title"
   title: String
 }
-"Kokoelmamoduuli: LocationsSelectedCarousel"
+"Collection Module: LocationsSelectedCarousel"
 type LocationsSelectedCarousel {
   "List of location IDs"
   locations: [Int]
   "Module type"
   module: String
-  "Moduulilistaus"
+  "List of modules"
   modules: [CollectionModulesUnionType]
   "Module title"
   title: String
@@ -2621,7 +2912,7 @@ type LayoutCollection {
 }
 "The collection type"
 type Collection implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithRevisions {
-  "Taustaväri"
+  "Background Color"
   backgroundColor: String
   "The id field matches the WP_Post-&gt;ID field."
   collectionId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
@@ -2635,7 +2926,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   date: String
   "The publishing date set in GMT."
   dateGmt: String
-  "Kuvaus"
+  "Description"
   description: String
   "The desired slug of the post"
   desiredSlug: String
@@ -2687,10 +2978,16 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   guid: String
   "The globally unique identifier of the collection-cpt object."
   id: ID!
-  "Kuva"
+  "Image"
   image: String
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -2709,7 +3006,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   modified: String
   "The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT."
   modifiedGmt: String
-  "Moduulilistaus"
+  "List of modules"
   modules: [CollectionModulesUnionType]
   "Connection between the Collection type and the collection type"
   preview: CollectionToPreviewConnectionEdge
@@ -2742,7 +3039,7 @@ type Collection implements Node & ContentNode & UniformResourceIdentifiable & Da
   ): CollectionToRevisionConnection
   "The SEO Framework data of the collection"
   seo: SEO
-  "Näytä etusivulla"
+  "Show on front page"
   showOnFrontPage: Boolean
   "The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table."
   slug: String
@@ -2776,7 +3073,7 @@ type CollectionToRevisionConnection implements CollectionConnection & Connection
   "The nodes of the connection, without the edges"
   nodes: [Collection!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: CollectionToRevisionConnectionPageInfo!
 }
 "An edge in a connection"
 type CollectionToRevisionConnectionEdge implements CollectionConnectionEdge & Edge {
@@ -2784,6 +3081,17 @@ type CollectionToRevisionConnectionEdge implements CollectionConnectionEdge & Ed
   cursor: String
   "The item at the end of the edge"
   node: Collection!
+}
+"Page Info on the &quot;CollectionToRevisionConnection&quot;"
+type CollectionToRevisionConnectionPageInfo implements CollectionConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Layout: LayoutContact"
 type LayoutContact {
@@ -2808,7 +3116,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   date: String
   "The publishing date set in GMT."
   dateGmt: String
-  "Kuvaus"
+  "Description"
   description: String
   "The desired slug of the post"
   desiredSlug: String
@@ -2860,14 +3168,20 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   featuredImageDatabaseId: Int
   "Globally unique ID of the featured image assigned to the node"
   featuredImageId: ID
-  "Etunimi"
+  "First name"
   firstName: String
   "The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table."
   guid: String
   "The globally unique identifier of the contact-cpt object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -2882,7 +3196,7 @@ type Contact implements Node & ContentNode & UniformResourceIdentifiable & Datab
   language: Language
   "The user that most recently edited the node"
   lastEditedBy: ContentNodeToEditLastConnectionEdge
-  "Sukunimi"
+  "Last name"
   lastName: String
   "The permalink of the post"
   link: String
@@ -2953,7 +3267,7 @@ type ContactToRevisionConnection implements ContactConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Contact!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: ContactToRevisionConnectionPageInfo!
 }
 "An edge in a connection"
 type ContactToRevisionConnectionEdge implements ContactConnectionEdge & Edge {
@@ -2962,23 +3276,34 @@ type ContactToRevisionConnectionEdge implements ContactConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Contact!
 }
+"Page Info on the &quot;ContactToRevisionConnection&quot;"
+type ContactToRevisionConnectionPageInfo implements ContactConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Layout: LayoutArticles"
 type LayoutArticles {
-  "Ankkuri"
+  "Anchor"
   anchor: String
-  "Artikkelit"
+  "Articles"
   articles: [Post]
-  "Taustaväri"
+  "Background Color"
   backgroundColor: String
-  "Kategoria"
+  "Category"
   category: Int
-  "Tagi"
+  "Tag"
   limit: Int
-  "Näytä lisää linkki"
+  "Show all -link"
   showAllLink: String
-  "Tagi"
+  "Tag"
   tag: Int
-  "Sivuston otsikko"
+  "Title"
   title: String
 }
 "The post type"
@@ -3085,8 +3410,14 @@ type Post implements Node & ContentNode & UniformResourceIdentifiable & Database
   hidePublishedDate: Boolean
   "The globally unique identifier of the post object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -3234,7 +3565,7 @@ type PostToCategoryConnection implements CategoryConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Category!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: PostToCategoryConnectionPageInfo!
 }
 "An edge in a connection"
 type PostToCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
@@ -3243,72 +3574,83 @@ type PostToCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Category!
 }
+"Page Info on the &quot;PostToCategoryConnection&quot;"
+type PostToCategoryConnectionPageInfo implements CategoryConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Layout: LayoutArticlesCarousel"
 type LayoutArticlesCarousel {
-  "Ankkuri"
+  "Anchor"
   anchor: String
-  "Artikkelit"
+  "Articles"
   articles: [Post]
-  "Taustaväri"
+  "Background Color"
   backgroundColor: String
-  "Kategoria"
+  "Category"
   category: Int
-  "Valitse montako artikkelia näytetään"
+  "Amount of articles to list"
   limit: Int
-  "Näytä lisää linkki"
+  "Show all -link"
   showAllLink: String
-  "Näytä lisää linkki"
+  "Show more link"
   showMore: [String]
-  "Tagi"
+  "Tag"
   tag: Int
-  "Sivuston otsikko"
+  "Title"
   title: String
 }
 "Layout: LayoutArticleHighlights"
 type LayoutArticleHighlights {
-  "Ankkuri"
+  "Anchor"
   anchor: String
-  "Artikkelit"
+  "Articles"
   articles: [Post]
-  "Taustaväri"
+  "Background Color"
   backgroundColor: String
-  "Kategoria"
+  "Category"
   category: Int
-  "Valitse montako artikkelia näytetään"
+  "Amount of articles to list"
   limit: Int
-  "Näytä lisää linkki"
+  "Show more link"
   showMore: [String]
-  "Tagi"
+  "Tag"
   tag: Int
-  "Sivuston otsikko"
+  "Title"
   title: String
 }
 "Layout: LayoutPages"
 type LayoutPages {
-  "Ankkuri"
+  "Anchor"
   anchor: String
-  "Taustaväri"
+  "Background Color"
   backgroundColor: String
-  "Kuvaus"
+  "Description"
   description: String
-  "Sivut"
+  "Pages"
   pages: [Page]
-  "Näytä lisää linkki"
+  "Show all -link"
   showAllLink: String
-  "Sivuston otsikko"
+  "Title"
   title: String
 }
 "Layout: LayoutPagesCarousel"
 type LayoutPagesCarousel {
-  "Ankkuri"
+  "Anchor"
   anchor: String
-  "Taustaväri"
+  "Background Color"
   backgroundColor: String
-  "Kuvaus"
+  "Description"
   description: String
-  "Sivut"
+  "Pages"
   pages: [Page]
-  "Sivuston otsikko"
+  "Title"
   title: String
 }
 "Layout: LayoutContent"
@@ -3425,11 +3767,11 @@ type GalleryImage {
 }
 "Layout: LayoutSocialMediaFeed"
 type LayoutSocialMediaFeed {
-  "Ankkuri"
+  "Anchor"
   anchor: String
-  "Scripti"
+  "Script"
   script: String
-  "Sivuston otsikko"
+  "Title"
   title: String
 }
 "Connection between the Post type and the postFormat type"
@@ -3439,7 +3781,7 @@ type PostToPostFormatConnection implements PostFormatConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [PostFormat!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: PostToPostFormatConnectionPageInfo!
 }
 "The postFormat type"
 type PostFormat implements Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier {
@@ -3508,10 +3850,16 @@ type PostFormat implements Node & TermNode & UniformResourceIdentifiable & Datab
     """
     before: String
   ): TermNodeToEnqueuedStylesheetConnection
-  "The unique resource identifier path"
+  "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is restricted from the current viewer"
   isRestricted: Boolean
   "Whether the node is a Term"
@@ -3563,7 +3911,7 @@ type PostFormatToContentNodeConnection implements ContentNodeConnection & Connec
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: PostFormatToContentNodeConnectionPageInfo!
 }
 "An edge in a connection"
 type PostFormatToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
@@ -3572,6 +3920,17 @@ type PostFormatToContentNodeConnectionEdge implements ContentNodeConnectionEdge 
   "The item at the end of the edge"
   node: ContentNode!
 }
+"Page Info on the &quot;PostFormatToContentNodeConnection&quot;"
+type PostFormatToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the PostFormat type and the post type"
 type PostFormatToPostConnection implements PostConnection & Connection {
   "Edges for the PostFormatToPostConnection connection"
@@ -3579,7 +3938,7 @@ type PostFormatToPostConnection implements PostConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Post!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: PostFormatToPostConnectionPageInfo!
 }
 "An edge in a connection"
 type PostFormatToPostConnectionEdge implements PostConnectionEdge & Edge {
@@ -3587,6 +3946,17 @@ type PostFormatToPostConnectionEdge implements PostConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: Post!
+}
+"Page Info on the &quot;PostFormatToPostConnection&quot;"
+type PostFormatToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the PostFormat type and the Taxonomy type"
 type PostFormatToTaxonomyConnectionEdge implements OneToOneConnection & Edge & TaxonomyConnectionEdge {
@@ -3602,6 +3972,17 @@ type PostToPostFormatConnectionEdge implements PostFormatConnectionEdge & Edge {
   "The item at the end of the edge"
   node: PostFormat!
 }
+"Page Info on the &quot;PostToPostFormatConnection&quot;"
+type PostToPostFormatConnectionPageInfo implements PostFormatConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the Post type and the post type"
 type PostToPreviewConnectionEdge implements OneToOneConnection & Edge & PostConnectionEdge {
   "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
@@ -3616,7 +3997,7 @@ type PostToRevisionConnection implements PostConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Post!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: PostToRevisionConnectionPageInfo!
 }
 "An edge in a connection"
 type PostToRevisionConnectionEdge implements PostConnectionEdge & Edge {
@@ -3624,6 +4005,17 @@ type PostToRevisionConnectionEdge implements PostConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: Post!
+}
+"Page Info on the &quot;PostToRevisionConnection&quot;"
+type PostToRevisionConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Layout: LayoutLinkList"
 type LayoutLinkList {
@@ -3645,7 +4037,7 @@ type PostToTagConnection implements TagConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Tag!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: PostToTagConnectionPageInfo!
 }
 "The tag type"
 type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIdentifier & MenuItemLinkable {
@@ -3714,10 +4106,16 @@ type Tag implements Node & TermNode & UniformResourceIdentifiable & DatabaseIden
     """
     before: String
   ): TermNodeToEnqueuedStylesheetConnection
-  "The unique resource identifier path"
+  "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is restricted from the current viewer"
   isRestricted: Boolean
   "Whether the node is a Term"
@@ -3775,7 +4173,7 @@ type TagToContentNodeConnection implements ContentNodeConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: TagToContentNodeConnectionPageInfo!
 }
 "An edge in a connection"
 type TagToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
@@ -3784,6 +4182,17 @@ type TagToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge 
   "The item at the end of the edge"
   node: ContentNode!
 }
+"Page Info on the &quot;TagToContentNodeConnection&quot;"
+type TagToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the Tag type and the post type"
 type TagToPostConnection implements PostConnection & Connection {
   "Edges for the TagToPostConnection connection"
@@ -3791,7 +4200,7 @@ type TagToPostConnection implements PostConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Post!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: TagToPostConnectionPageInfo!
 }
 "An edge in a connection"
 type TagToPostConnectionEdge implements PostConnectionEdge & Edge {
@@ -3799,6 +4208,17 @@ type TagToPostConnectionEdge implements PostConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: Post!
+}
+"Page Info on the &quot;TagToPostConnection&quot;"
+type TagToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the Tag type and the Taxonomy type"
 type TagToTaxonomyConnectionEdge implements OneToOneConnection & Edge & TaxonomyConnectionEdge {
@@ -3814,6 +4234,17 @@ type PostToTagConnectionEdge implements TagConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Tag!
 }
+"Page Info on the &quot;PostToTagConnection&quot;"
+type PostToTagConnectionPageInfo implements TagConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the Post type and the TermNode type"
 type PostToTermNodeConnection implements TermNodeConnection & Connection {
   "Edges for the PostToTermNodeConnection connection"
@@ -3821,7 +4252,7 @@ type PostToTermNodeConnection implements TermNodeConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [TermNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: PostToTermNodeConnectionPageInfo!
 }
 "An edge in a connection"
 type PostToTermNodeConnectionEdge implements TermNodeConnectionEdge & Edge {
@@ -3829,6 +4260,17 @@ type PostToTermNodeConnectionEdge implements TermNodeConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: TermNode!
+}
+"Page Info on the &quot;PostToTermNodeConnection&quot;"
+type PostToTermNodeConnectionPageInfo implements TermNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the Page type and the page type"
 type PageToPreviewConnectionEdge implements OneToOneConnection & Edge & PageConnectionEdge {
@@ -3844,7 +4286,7 @@ type PageToRevisionConnection implements PageConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Page!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: PageToRevisionConnectionPageInfo!
 }
 "An edge in a connection"
 type PageToRevisionConnectionEdge implements PageConnectionEdge & Edge {
@@ -3853,12 +4295,34 @@ type PageToRevisionConnectionEdge implements PageConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Page!
 }
+"Page Info on the &quot;PageToRevisionConnection&quot;"
+type PageToRevisionConnectionPageInfo implements PageConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "An edge in a connection"
 type UserToPageConnectionEdge implements PageConnectionEdge & Edge {
   "A cursor for use in pagination"
   cursor: String
   "The item at the end of the edge"
   node: Page!
+}
+"Page Info on the &quot;UserToPageConnection&quot;"
+type UserToPageConnectionPageInfo implements PageConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the User type and the post type"
 type UserToPostConnection implements PostConnection & Connection {
@@ -3867,7 +4331,7 @@ type UserToPostConnection implements PostConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Post!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: UserToPostConnectionPageInfo!
 }
 "An edge in a connection"
 type UserToPostConnectionEdge implements PostConnectionEdge & Edge {
@@ -3876,6 +4340,17 @@ type UserToPostConnectionEdge implements PostConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Post!
 }
+"Page Info on the &quot;UserToPostConnection&quot;"
+type UserToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the User type and the ContentNode type"
 type UserToRevisionsConnection implements ContentNodeConnection & Connection {
   "Edges for the UserToRevisionsConnection connection"
@@ -3883,7 +4358,7 @@ type UserToRevisionsConnection implements ContentNodeConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: UserToRevisionsConnectionPageInfo!
 }
 "An edge in a connection"
 type UserToRevisionsConnectionEdge implements ContentNodeConnectionEdge & Edge {
@@ -3892,6 +4367,17 @@ type UserToRevisionsConnectionEdge implements ContentNodeConnectionEdge & Edge {
   "The item at the end of the edge"
   node: ContentNode!
 }
+"Page Info on the &quot;UserToRevisionsConnection&quot;"
+type UserToRevisionsConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the User type and the UserRole type"
 type UserToUserRoleConnection implements UserRoleConnection & Connection {
   "Edges for the UserToUserRoleConnection connection"
@@ -3899,7 +4385,7 @@ type UserToUserRoleConnection implements UserRoleConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [UserRole!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: UserToUserRoleConnectionPageInfo!
 }
 "A user role object"
 type UserRole implements Node {
@@ -3921,12 +4407,34 @@ type UserToUserRoleConnectionEdge implements UserRoleConnectionEdge & Edge {
   "The item at the end of the edge"
   node: UserRole!
 }
+"Page Info on the &quot;UserToUserRoleConnection&quot;"
+type UserToUserRoleConnectionPageInfo implements UserRoleConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "An edge in a connection"
 type CategoryToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
   "A cursor for use in pagination"
   cursor: String
   "The item at the end of the edge"
   node: ContentNode!
+}
+"Page Info on the &quot;CategoryToContentNodeConnection&quot;"
+type CategoryToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the Category type and the category type"
 type CategoryToParentCategoryConnectionEdge implements OneToOneConnection & Edge & CategoryConnectionEdge {
@@ -3942,7 +4450,7 @@ type CategoryToPostConnection implements PostConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Post!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: CategoryToPostConnectionPageInfo!
 }
 "An edge in a connection"
 type CategoryToPostConnectionEdge implements PostConnectionEdge & Edge {
@@ -3950,6 +4458,17 @@ type CategoryToPostConnectionEdge implements PostConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: Post!
+}
+"Page Info on the &quot;CategoryToPostConnection&quot;"
+type CategoryToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the Category type and the Taxonomy type"
 type CategoryToTaxonomyConnectionEdge implements OneToOneConnection & Edge & TaxonomyConnectionEdge {
@@ -3965,6 +4484,17 @@ type RootQueryToCategoryConnectionEdge implements CategoryConnectionEdge & Edge 
   "The item at the end of the edge"
   node: Category!
 }
+"Page Info on the &quot;RootQueryToCategoryConnection&quot;"
+type RootQueryToCategoryConnectionPageInfo implements CategoryConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the collection type"
 type RootQueryToCollectionConnection implements CollectionConnection & Connection {
   "Edges for the RootQueryToCollectionConnection connection"
@@ -3972,7 +4502,7 @@ type RootQueryToCollectionConnection implements CollectionConnection & Connectio
   "The nodes of the connection, without the edges"
   nodes: [Collection!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToCollectionConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToCollectionConnectionEdge implements CollectionConnectionEdge & Edge {
@@ -3981,6 +4511,17 @@ type RootQueryToCollectionConnectionEdge implements CollectionConnectionEdge & E
   "The item at the end of the edge"
   node: Collection!
 }
+"Page Info on the &quot;RootQueryToCollectionConnection&quot;"
+type RootQueryToCollectionConnectionPageInfo implements CollectionConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the Comment type"
 type RootQueryToCommentConnection implements CommentConnection & Connection {
   "Edges for the RootQueryToCommentConnection connection"
@@ -3988,7 +4529,7 @@ type RootQueryToCommentConnection implements CommentConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Comment!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToCommentConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToCommentConnectionEdge implements CommentConnectionEdge & Edge {
@@ -3997,6 +4538,17 @@ type RootQueryToCommentConnectionEdge implements CommentConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Comment!
 }
+"Page Info on the &quot;RootQueryToCommentConnection&quot;"
+type RootQueryToCommentConnectionPageInfo implements CommentConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the contact type"
 type RootQueryToContactConnection implements ContactConnection & Connection {
   "Edges for the RootQueryToContactConnection connection"
@@ -4004,7 +4556,7 @@ type RootQueryToContactConnection implements ContactConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Contact!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToContactConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToContactConnectionEdge implements ContactConnectionEdge & Edge {
@@ -4013,6 +4565,17 @@ type RootQueryToContactConnectionEdge implements ContactConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Contact!
 }
+"Page Info on the &quot;RootQueryToContactConnection&quot;"
+type RootQueryToContactConnectionPageInfo implements ContactConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the ContentNode type"
 type RootQueryToContentNodeConnection implements ContentNodeConnection & Connection {
   "Edges for the RootQueryToContentNodeConnection connection"
@@ -4020,7 +4583,7 @@ type RootQueryToContentNodeConnection implements ContentNodeConnection & Connect
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToContentNodeConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
@@ -4029,6 +4592,17 @@ type RootQueryToContentNodeConnectionEdge implements ContentNodeConnectionEdge &
   "The item at the end of the edge"
   node: ContentNode!
 }
+"Page Info on the &quot;RootQueryToContentNodeConnection&quot;"
+type RootQueryToContentNodeConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the ContentType type"
 type RootQueryToContentTypeConnection implements ContentTypeConnection & Connection {
   "Edges for the RootQueryToContentTypeConnection connection"
@@ -4036,7 +4610,7 @@ type RootQueryToContentTypeConnection implements ContentTypeConnection & Connect
   "The nodes of the connection, without the edges"
   nodes: [ContentType!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToContentTypeConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToContentTypeConnectionEdge implements ContentTypeConnectionEdge & Edge {
@@ -4044,6 +4618,17 @@ type RootQueryToContentTypeConnectionEdge implements ContentTypeConnectionEdge &
   cursor: String
   "The item at the end of the edge"
   node: ContentType!
+}
+"Page Info on the &quot;RootQueryToContentTypeConnection&quot;"
+type RootQueryToContentTypeConnectionPageInfo implements ContentTypeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Oletuskuva"
 type DefaultImages {
@@ -4062,16 +4647,6 @@ type DiscussionSettings {
   defaultCommentStatus: String
   "Salli linkki-ilmoitukset muista blogeista (pingback ja trackback) uusiin artikkeleihin."
   defaultPingStatus: String
-}
-"Layout: LayoutEditor"
-type LayoutEditor {
-  "Editor"
-  editor: String
-}
-"Layout: LayoutMenu"
-type LayoutMenu {
-  "Menu"
-  menu: String
 }
 "The general setting type"
 type GeneralSettings {
@@ -4094,7 +4669,7 @@ type GeneralSettings {
 }
 "The landingPage type"
 type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithRevisions {
-  "Taustaväri"
+  "Background Color"
   backgroundColor: String
   "Box Color"
   boxColor: String
@@ -4108,7 +4683,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   date: String
   "The publishing date set in GMT."
   dateGmt: String
-  "Kuvaus"
+  "Description"
   description: String
   "The desired slug of the post"
   desiredSlug: String
@@ -4202,8 +4777,14 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   heroLink: [String]
   "The globally unique identifier of the landing-page-cpt object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -4245,7 +4826,7 @@ type LandingPage implements Node & ContentNode & UniformResourceIdentifiable & D
   modified: String
   "The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT."
   modifiedGmt: String
-  "Moduulilistaus"
+  "List of modules"
   modules: [CollectionModulesUnionType]
   "Connection between the LandingPage type and the landingPage type"
   preview: LandingPageToPreviewConnectionEdge
@@ -4303,7 +4884,7 @@ type LandingPageToMediaItemConnection implements MediaItemConnection & Connectio
   "The nodes of the connection, without the edges"
   nodes: [MediaItem!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: LandingPageToMediaItemConnectionPageInfo!
 }
 "An edge in a connection"
 type LandingPageToMediaItemConnectionEdge implements MediaItemConnectionEdge & Edge {
@@ -4312,6 +4893,17 @@ type LandingPageToMediaItemConnectionEdge implements MediaItemConnectionEdge & E
   "The item at the end of the edge"
   node: MediaItem!
 }
+"Page Info on the &quot;LandingPageToMediaItemConnection&quot;"
+type LandingPageToMediaItemConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the landingPage type and the MediaItem type"
 type LandingPageToFloatImageConnection implements MediaItemConnection & Connection {
   "Edges for the LandingPageToFloatImageConnection connection"
@@ -4319,7 +4911,7 @@ type LandingPageToFloatImageConnection implements MediaItemConnection & Connecti
   "The nodes of the connection, without the edges"
   nodes: [MediaItem!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: LandingPageToFloatImageConnectionPageInfo!
 }
 "An edge in a connection"
 type LandingPageToFloatImageConnectionEdge implements MediaItemConnectionEdge & Edge {
@@ -4328,6 +4920,17 @@ type LandingPageToFloatImageConnectionEdge implements MediaItemConnectionEdge & 
   "The item at the end of the edge"
   node: MediaItem!
 }
+"Page Info on the &quot;LandingPageToFloatImageConnection&quot;"
+type LandingPageToFloatImageConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the landingPage type and the MediaItem type"
 type LandingPageToMobileImageConnection implements MediaItemConnection & Connection {
   "Edges for the LandingPageToMobileImageConnection connection"
@@ -4335,7 +4938,7 @@ type LandingPageToMobileImageConnection implements MediaItemConnection & Connect
   "The nodes of the connection, without the edges"
   nodes: [MediaItem!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: LandingPageToMobileImageConnectionPageInfo!
 }
 "An edge in a connection"
 type LandingPageToMobileImageConnectionEdge implements MediaItemConnectionEdge & Edge {
@@ -4343,6 +4946,17 @@ type LandingPageToMobileImageConnectionEdge implements MediaItemConnectionEdge &
   cursor: String
   "The item at the end of the edge"
   node: MediaItem!
+}
+"Page Info on the &quot;LandingPageToMobileImageConnection&quot;"
+type LandingPageToMobileImageConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the LandingPage type and the landingPage type"
 type LandingPageToPreviewConnectionEdge implements OneToOneConnection & Edge & LandingPageConnectionEdge {
@@ -4358,7 +4972,7 @@ type LandingPageToRevisionConnection implements LandingPageConnection & Connecti
   "The nodes of the connection, without the edges"
   nodes: [LandingPage!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: LandingPageToRevisionConnectionPageInfo!
 }
 "An edge in a connection"
 type LandingPageToRevisionConnectionEdge implements LandingPageConnectionEdge & Edge {
@@ -4367,6 +4981,17 @@ type LandingPageToRevisionConnectionEdge implements LandingPageConnectionEdge & 
   "The item at the end of the edge"
   node: LandingPage!
 }
+"Page Info on the &quot;LandingPageToRevisionConnection&quot;"
+type LandingPageToRevisionConnectionPageInfo implements LandingPageConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the landingPage type"
 type RootQueryToLandingPageConnection implements LandingPageConnection & Connection {
   "Edges for the RootQueryToLandingPageConnection connection"
@@ -4374,7 +4999,7 @@ type RootQueryToLandingPageConnection implements LandingPageConnection & Connect
   "The nodes of the connection, without the edges"
   nodes: [LandingPage!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToLandingPageConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToLandingPageConnectionEdge implements LandingPageConnectionEdge & Edge {
@@ -4383,6 +5008,17 @@ type RootQueryToLandingPageConnectionEdge implements LandingPageConnectionEdge &
   "The item at the end of the edge"
   node: LandingPage!
 }
+"Page Info on the &quot;RootQueryToLandingPageConnection&quot;"
+type RootQueryToLandingPageConnectionPageInfo implements LandingPageConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the mediaItem type"
 type RootQueryToMediaItemConnection implements MediaItemConnection & Connection {
   "Edges for the RootQueryToMediaItemConnection connection"
@@ -4390,7 +5026,7 @@ type RootQueryToMediaItemConnection implements MediaItemConnection & Connection 
   "The nodes of the connection, without the edges"
   nodes: [MediaItem!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToMediaItemConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToMediaItemConnectionEdge implements MediaItemConnectionEdge & Edge {
@@ -4398,6 +5034,17 @@ type RootQueryToMediaItemConnectionEdge implements MediaItemConnectionEdge & Edg
   cursor: String
   "The item at the end of the edge"
   node: MediaItem!
+}
+"Page Info on the &quot;RootQueryToMediaItemConnection&quot;"
+type RootQueryToMediaItemConnectionPageInfo implements MediaItemConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Menus are the containers for navigation items. Menus can be assigned to menu locations, which are typically registered by the active theme."
 type Menu implements Node & DatabaseIdentifier {
@@ -4446,7 +5093,7 @@ type MenuToMenuItemConnection implements MenuItemConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [MenuItem!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: MenuToMenuItemConnectionPageInfo!
 }
 "Navigation menu items are the individual items assigned to a menu. These are rendered as the links in a navigation menu."
 type MenuItem implements Node & DatabaseIdentifier {
@@ -4519,7 +5166,7 @@ type MenuItemToMenuItemConnection implements MenuItemConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [MenuItem!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: MenuItemToMenuItemConnectionPageInfo!
 }
 "An edge in a connection"
 type MenuItemToMenuItemConnectionEdge implements MenuItemConnectionEdge & Edge {
@@ -4527,6 +5174,17 @@ type MenuItemToMenuItemConnectionEdge implements MenuItemConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: MenuItem!
+}
+"Page Info on the &quot;MenuItemToMenuItemConnection&quot;"
+type MenuItemToMenuItemConnectionPageInfo implements MenuItemConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection between the MenuItem type and the MenuItemLinkable type"
 type MenuItemToMenuItemLinkableConnectionEdge implements OneToOneConnection & Edge & MenuItemLinkableConnectionEdge {
@@ -4549,6 +5207,17 @@ type MenuToMenuItemConnectionEdge implements MenuItemConnectionEdge & Edge {
   "The item at the end of the edge"
   node: MenuItem!
 }
+"Page Info on the &quot;MenuToMenuItemConnection&quot;"
+type MenuToMenuItemConnectionPageInfo implements MenuItemConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the MenuItem type"
 type RootQueryToMenuItemConnection implements MenuItemConnection & Connection {
   "Edges for the RootQueryToMenuItemConnection connection"
@@ -4556,7 +5225,7 @@ type RootQueryToMenuItemConnection implements MenuItemConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [MenuItem!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToMenuItemConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToMenuItemConnectionEdge implements MenuItemConnectionEdge & Edge {
@@ -4565,6 +5234,17 @@ type RootQueryToMenuItemConnectionEdge implements MenuItemConnectionEdge & Edge 
   "The item at the end of the edge"
   node: MenuItem!
 }
+"Page Info on the &quot;RootQueryToMenuItemConnection&quot;"
+type RootQueryToMenuItemConnectionPageInfo implements MenuItemConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the Menu type"
 type RootQueryToMenuConnection implements MenuConnection & Connection {
   "Edges for the RootQueryToMenuConnection connection"
@@ -4572,7 +5252,7 @@ type RootQueryToMenuConnection implements MenuConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Menu!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToMenuConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToMenuConnectionEdge implements MenuConnectionEdge & Edge {
@@ -4580,6 +5260,17 @@ type RootQueryToMenuConnectionEdge implements MenuConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: Menu!
+}
+"Page Info on the &quot;RootQueryToMenuConnection&quot;"
+type RootQueryToMenuConnectionPageInfo implements MenuConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Selitä mikä CustomType on"
 type Notification {
@@ -4605,7 +5296,7 @@ type RootQueryToPageConnection implements PageConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Page!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToPageConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToPageConnectionEdge implements PageConnectionEdge & Edge {
@@ -4613,6 +5304,17 @@ type RootQueryToPageConnectionEdge implements PageConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: Page!
+}
+"Page Info on the &quot;RootQueryToPageConnection&quot;"
+type RootQueryToPageConnectionPageInfo implements PageConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "An plugin object"
 type Plugin implements Node {
@@ -4642,7 +5344,7 @@ type RootQueryToPluginConnection implements PluginConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Plugin!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToPluginConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToPluginConnectionEdge implements PluginConnectionEdge & Edge {
@@ -4651,6 +5353,17 @@ type RootQueryToPluginConnectionEdge implements PluginConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Plugin!
 }
+"Page Info on the &quot;RootQueryToPluginConnection&quot;"
+type RootQueryToPluginConnectionPageInfo implements PluginConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the postFormat type"
 type RootQueryToPostFormatConnection implements PostFormatConnection & Connection {
   "Edges for the RootQueryToPostFormatConnection connection"
@@ -4658,7 +5371,7 @@ type RootQueryToPostFormatConnection implements PostFormatConnection & Connectio
   "The nodes of the connection, without the edges"
   nodes: [PostFormat!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToPostFormatConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToPostFormatConnectionEdge implements PostFormatConnectionEdge & Edge {
@@ -4667,6 +5380,17 @@ type RootQueryToPostFormatConnectionEdge implements PostFormatConnectionEdge & E
   "The item at the end of the edge"
   node: PostFormat!
 }
+"Page Info on the &quot;RootQueryToPostFormatConnection&quot;"
+type RootQueryToPostFormatConnectionPageInfo implements PostFormatConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the post type"
 type RootQueryToPostConnection implements PostConnection & Connection {
   "Edges for the RootQueryToPostConnection connection"
@@ -4674,7 +5398,7 @@ type RootQueryToPostConnection implements PostConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Post!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToPostConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToPostConnectionEdge implements PostConnectionEdge & Edge {
@@ -4682,6 +5406,17 @@ type RootQueryToPostConnectionEdge implements PostConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: Post!
+}
+"Page Info on the &quot;RootQueryToPostConnection&quot;"
+type RootQueryToPostConnectionPageInfo implements PostConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "The reading setting type"
 type ReadingSettings {
@@ -4701,7 +5436,7 @@ type RootQueryToEnqueuedScriptConnection implements EnqueuedScriptConnection & C
   "The nodes of the connection, without the edges"
   nodes: [EnqueuedScript!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToEnqueuedScriptConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnectionEdge & Edge {
@@ -4710,6 +5445,17 @@ type RootQueryToEnqueuedScriptConnectionEdge implements EnqueuedScriptConnection
   "The item at the end of the edge"
   node: EnqueuedScript!
 }
+"Page Info on the &quot;RootQueryToEnqueuedScriptConnection&quot;"
+type RootQueryToEnqueuedScriptConnectionPageInfo implements EnqueuedScriptConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the EnqueuedStylesheet type"
 type RootQueryToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnection & Connection {
   "Edges for the RootQueryToEnqueuedStylesheetConnection connection"
@@ -4717,7 +5463,7 @@ type RootQueryToEnqueuedStylesheetConnection implements EnqueuedStylesheetConnec
   "The nodes of the connection, without the edges"
   nodes: [EnqueuedStylesheet!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToEnqueuedStylesheetConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetConnectionEdge & Edge {
@@ -4725,6 +5471,17 @@ type RootQueryToEnqueuedStylesheetConnectionEdge implements EnqueuedStylesheetCo
   cursor: String
   "The item at the end of the edge"
   node: EnqueuedStylesheet!
+}
+"Page Info on the &quot;RootQueryToEnqueuedStylesheetConnection&quot;"
+type RootQueryToEnqueuedStylesheetConnectionPageInfo implements EnqueuedStylesheetConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "The release type"
 type Release implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithContentEditor & NodeWithRevisions {
@@ -4793,8 +5550,14 @@ type Release implements Node & ContentNode & UniformResourceIdentifiable & Datab
   guid: String
   "The globally unique identifier of the release-cpt object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -4878,7 +5641,7 @@ type ReleaseToRevisionConnection implements ReleaseConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Release!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: ReleaseToRevisionConnectionPageInfo!
 }
 "An edge in a connection"
 type ReleaseToRevisionConnectionEdge implements ReleaseConnectionEdge & Edge {
@@ -4887,6 +5650,17 @@ type ReleaseToRevisionConnectionEdge implements ReleaseConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Release!
 }
+"Page Info on the &quot;ReleaseToRevisionConnection&quot;"
+type ReleaseToRevisionConnectionPageInfo implements ReleaseConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the release type"
 type RootQueryToReleaseConnection implements ReleaseConnection & Connection {
   "Edges for the RootQueryToReleaseConnection connection"
@@ -4894,7 +5668,7 @@ type RootQueryToReleaseConnection implements ReleaseConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Release!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToReleaseConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToReleaseConnectionEdge implements ReleaseConnectionEdge & Edge {
@@ -4903,6 +5677,17 @@ type RootQueryToReleaseConnectionEdge implements ReleaseConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Release!
 }
+"Page Info on the &quot;RootQueryToReleaseConnection&quot;"
+type RootQueryToReleaseConnectionPageInfo implements ReleaseConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the ContentNode type"
 type RootQueryToRevisionsConnection implements ContentNodeConnection & Connection {
   "Edges for the RootQueryToRevisionsConnection connection"
@@ -4910,7 +5695,7 @@ type RootQueryToRevisionsConnection implements ContentNodeConnection & Connectio
   "The nodes of the connection, without the edges"
   nodes: [ContentNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToRevisionsConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToRevisionsConnectionEdge implements ContentNodeConnectionEdge & Edge {
@@ -4918,6 +5703,17 @@ type RootQueryToRevisionsConnectionEdge implements ContentNodeConnectionEdge & E
   cursor: String
   "The item at the end of the edge"
   node: ContentNode!
+}
+"Page Info on the &quot;RootQueryToRevisionsConnection&quot;"
+type RootQueryToRevisionsConnectionPageInfo implements ContentNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 ""
 type SeoSettings {
@@ -4928,6 +5724,8 @@ type SeoSettings {
 type SiteSettings {
   "Attachment ID for logo"
   logo: String
+  "Redirects"
+  redirects: String
   "Identifying name"
   siteName: String
 }
@@ -4938,7 +5736,7 @@ type RootQueryToTagConnection implements TagConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Tag!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToTagConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToTagConnectionEdge implements TagConnectionEdge & Edge {
@@ -4947,6 +5745,17 @@ type RootQueryToTagConnectionEdge implements TagConnectionEdge & Edge {
   "The item at the end of the edge"
   node: Tag!
 }
+"Page Info on the &quot;RootQueryToTagConnection&quot;"
+type RootQueryToTagConnectionPageInfo implements TagConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the Taxonomy type"
 type RootQueryToTaxonomyConnection implements TaxonomyConnection & Connection {
   "Edges for the RootQueryToTaxonomyConnection connection"
@@ -4954,7 +5763,7 @@ type RootQueryToTaxonomyConnection implements TaxonomyConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Taxonomy!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToTaxonomyConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToTaxonomyConnectionEdge implements TaxonomyConnectionEdge & Edge {
@@ -4963,6 +5772,17 @@ type RootQueryToTaxonomyConnectionEdge implements TaxonomyConnectionEdge & Edge 
   "The item at the end of the edge"
   node: Taxonomy!
 }
+"Page Info on the &quot;RootQueryToTaxonomyConnection&quot;"
+type RootQueryToTaxonomyConnectionPageInfo implements TaxonomyConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the TermNode type"
 type RootQueryToTermNodeConnection implements TermNodeConnection & Connection {
   "Edges for the RootQueryToTermNodeConnection connection"
@@ -4970,7 +5790,7 @@ type RootQueryToTermNodeConnection implements TermNodeConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [TermNode!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToTermNodeConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToTermNodeConnectionEdge implements TermNodeConnectionEdge & Edge {
@@ -4978,6 +5798,17 @@ type RootQueryToTermNodeConnectionEdge implements TermNodeConnectionEdge & Edge 
   cursor: String
   "The item at the end of the edge"
   node: TermNode!
+}
+"Page Info on the &quot;RootQueryToTermNodeConnection&quot;"
+type RootQueryToTermNodeConnectionPageInfo implements TermNodeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "A theme object"
 type Theme implements Node {
@@ -5011,7 +5842,7 @@ type RootQueryToThemeConnection implements ThemeConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [Theme!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToThemeConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToThemeConnectionEdge implements ThemeConnectionEdge & Edge {
@@ -5019,6 +5850,17 @@ type RootQueryToThemeConnectionEdge implements ThemeConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: Theme!
+}
+"Page Info on the &quot;RootQueryToThemeConnection&quot;"
+type RootQueryToThemeConnectionPageInfo implements ThemeConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "The translation type"
 type Translation implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & Previewable & NodeWithTitle & NodeWithRevisions {
@@ -5080,8 +5922,14 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
   guid: String
   "The globally unique identifier of the translation-cpt object."
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -5142,7 +5990,7 @@ type Translation implements Node & ContentNode & UniformResourceIdentifiable & D
   ): String
   "The id field matches the WP_Post-&gt;ID field."
   translationId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
-  "Käännökset"
+  "Translations"
   translations: [TranslationResponse]
   "The unique resource identifier path"
   uri: String
@@ -5161,7 +6009,7 @@ type TranslationToRevisionConnection implements TranslationConnection & Connecti
   "The nodes of the connection, without the edges"
   nodes: [Translation!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: TranslationToRevisionConnectionPageInfo!
 }
 "An edge in a connection"
 type TranslationToRevisionConnectionEdge implements TranslationConnectionEdge & Edge {
@@ -5170,20 +6018,31 @@ type TranslationToRevisionConnectionEdge implements TranslationConnectionEdge & 
   "The item at the end of the edge"
   node: Translation!
 }
-"Käännösvastaus sisältää käännösavaimen ja käännökset"
+"Page Info on the &quot;TranslationToRevisionConnection&quot;"
+type TranslationToRevisionConnectionPageInfo implements TranslationConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+"Translation response contains translation key and translations"
 type TranslationResponse {
-  "Käyttöliittymän käännösavain"
+  "Translation key for frontend"
   key: String
-  "Käännökset käyttöliittymälle"
+  "Translations for frontend"
   translations: TranslationItems
 }
-"Käännöksen kieli/arvo-parit"
+"Translation with language/value pairs"
 type TranslationItems {
-  "Käännöksen merkkijono"
+  "Translation string"
   en: String
-  "Käännöksen merkkijono"
+  "Translation string"
   fi: String
-  "Käännöksen merkkijono"
+  "Translation string"
   sv: String
 }
 "Connection between the RootQuery type and the translation type"
@@ -5193,7 +6052,7 @@ type RootQueryToTranslationConnection implements TranslationConnection & Connect
   "The nodes of the connection, without the edges"
   nodes: [Translation!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToTranslationConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToTranslationConnectionEdge implements TranslationConnectionEdge & Edge {
@@ -5202,6 +6061,17 @@ type RootQueryToTranslationConnectionEdge implements TranslationConnectionEdge &
   "The item at the end of the edge"
   node: Translation!
 }
+"Page Info on the &quot;RootQueryToTranslationConnection&quot;"
+type RootQueryToTranslationConnectionPageInfo implements TranslationConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the UserRole type"
 type RootQueryToUserRoleConnection implements UserRoleConnection & Connection {
   "Edges for the RootQueryToUserRoleConnection connection"
@@ -5209,7 +6079,7 @@ type RootQueryToUserRoleConnection implements UserRoleConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [UserRole!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToUserRoleConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToUserRoleConnectionEdge implements UserRoleConnectionEdge & Edge {
@@ -5218,6 +6088,17 @@ type RootQueryToUserRoleConnectionEdge implements UserRoleConnectionEdge & Edge 
   "The item at the end of the edge"
   node: UserRole!
 }
+"Page Info on the &quot;RootQueryToUserRoleConnection&quot;"
+type RootQueryToUserRoleConnectionPageInfo implements UserRoleConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection between the RootQuery type and the User type"
 type RootQueryToUserConnection implements UserConnection & Connection {
   "Edges for the RootQueryToUserConnection connection"
@@ -5225,7 +6106,7 @@ type RootQueryToUserConnection implements UserConnection & Connection {
   "The nodes of the connection, without the edges"
   nodes: [User!]!
   "Information about pagination in a connection."
-  pageInfo: WPPageInfo
+  pageInfo: RootQueryToUserConnectionPageInfo!
 }
 "An edge in a connection"
 type RootQueryToUserConnectionEdge implements UserConnectionEdge & Edge {
@@ -5233,6 +6114,17 @@ type RootQueryToUserConnectionEdge implements UserConnectionEdge & Edge {
   cursor: String
   "The item at the end of the edge"
   node: User!
+}
+"Page Info on the &quot;RootQueryToUserConnection&quot;"
+type RootQueryToUserConnectionPageInfo implements UserConnectionPageInfo & WPPageInfo & PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "The writing setting type"
 type WritingSettings {
@@ -5566,7 +6458,7 @@ type CreateUserPayload {
 }
 "The payload for the deleteCategory mutation."
 type DeleteCategoryPayload {
-  "The deteted term object"
+  "The deleted term object"
   category: Category
   "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
   clientMutationId: String
@@ -5642,7 +6534,7 @@ type DeletePostFormatPayload {
   clientMutationId: String
   "The ID of the deleted object"
   deletedId: ID
-  "The deteted term object"
+  "The deleted term object"
   postFormat: PostFormat
 }
 "The payload for the deleteRelease mutation."
@@ -5660,7 +6552,7 @@ type DeleteTagPayload {
   clientMutationId: String
   "The ID of the deleted object"
   deletedId: ID
-  "The deteted term object"
+  "The deleted term object"
   tag: Tag
 }
 "The payload for the deleteTranslation mutation."
@@ -5856,6 +6748,8 @@ interface CategoryConnection implements Connection {
   edges: [CategoryConnectionEdge!]!
   "A list of connected category Nodes"
   nodes: [Category!]!
+  "Information about pagination in a connection."
+  pageInfo: CategoryConnectionPageInfo!
 }
 "A plural connection from one Node Type in the Graph to another Node Type, with support for relational data via &quot;edges&quot;."
 interface Connection {
@@ -5863,6 +6757,8 @@ interface Connection {
   edges: [Edge!]!
   "A list of connected nodes"
   nodes: [Node!]!
+  "Information about pagination in a connection."
+  pageInfo: PageInfo!
 }
 "Relational context between connected nodes"
 interface Edge {
@@ -5875,6 +6771,17 @@ interface Edge {
 interface Node {
   "The globally unique ID for the object"
   id: ID!
+}
+"Information about pagination in a connection."
+interface PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Edge between a Node and a connected category"
 interface CategoryConnectionEdge implements Edge {
@@ -5929,10 +6836,16 @@ interface TermNode implements Node& UniformResourceIdentifiable {
     """
     before: String
   ): TermNodeToEnqueuedStylesheetConnection
-  "The unique resource identifier path"
+  "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is restricted from the current viewer"
   isRestricted: Boolean
   "Whether the node is a Term"
@@ -5954,10 +6867,16 @@ interface TermNode implements Node& UniformResourceIdentifiable {
 }
 "Any node that has a URI"
 interface UniformResourceIdentifiable implements Node {
-  "The unique resource identifier path"
+  "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the node is a Term"
   isTermNode: Boolean!
   "The unique resource identifier path"
@@ -5969,6 +6888,8 @@ interface EnqueuedScriptConnection implements Connection {
   edges: [EnqueuedScriptConnectionEdge!]!
   "A list of connected EnqueuedScript Nodes"
   nodes: [EnqueuedScript!]!
+  "Information about pagination in a connection."
+  pageInfo: EnqueuedScriptConnectionPageInfo!
 }
 "Edge between a Node and a connected EnqueuedScript"
 interface EnqueuedScriptConnectionEdge implements Edge {
@@ -5979,12 +6900,18 @@ interface EnqueuedScriptConnectionEdge implements Edge {
 }
 "Asset enqueued by the CMS"
 interface EnqueuedAsset {
-  "@todo"
-  args: Boolean
+  "The inline code to be run after the asset is loaded."
+  after: [String]
+  "Deprecated"
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+  "The inline code to be run before the asset is loaded."
+  before: [String]
+  "The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc"
+  conditional: String
   "Dependencies needed to use this asset"
-  dependencies: [EnqueuedScript]
+  dependencies: [EnqueuedAsset]
   "Extra information needed for the script"
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
   "The handle of the enqueued asset"
   handle: String
   "The ID of the enqueued asset"
@@ -5994,12 +6921,36 @@ interface EnqueuedAsset {
   "The version of the enqueued asset"
   version: String
 }
+"Page Info on the connected EnqueuedScriptConnectionEdge"
+interface EnqueuedScriptConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+"Information about pagination in a connection."
+interface WPPageInfo implements PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection to EnqueuedStylesheet Nodes"
 interface EnqueuedStylesheetConnection implements Connection {
   "A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes"
   edges: [EnqueuedStylesheetConnectionEdge!]!
   "A list of connected EnqueuedStylesheet Nodes"
   nodes: [EnqueuedStylesheet!]!
+  "Information about pagination in a connection."
+  pageInfo: EnqueuedStylesheetConnectionPageInfo!
 }
 "Edge between a Node and a connected EnqueuedStylesheet"
 interface EnqueuedStylesheetConnectionEdge implements Edge {
@@ -6007,6 +6958,17 @@ interface EnqueuedStylesheetConnectionEdge implements Edge {
   cursor: String
   "The connected EnqueuedStylesheet Node"
   node: EnqueuedStylesheet!
+}
+"Page Info on the connected EnqueuedStylesheetConnectionEdge"
+interface EnqueuedStylesheetConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Object that can be identified with a Database ID"
 interface DatabaseIdentifier {
@@ -6061,8 +7023,14 @@ interface HierarchicalTermNode implements Node& TermNode& UniformResourceIdentif
   ): TermNodeToEnqueuedStylesheetConnection
   "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is restricted from the current viewer"
   isRestricted: Boolean
   "Whether the node is a Term"
@@ -6101,14 +7069,31 @@ interface HierarchicalNode implements Node& DatabaseIdentifier {
 interface MenuItemLinkable implements Node& UniformResourceIdentifiable& DatabaseIdentifier {
   "The unique identifier stored in the database"
   databaseId: Int!
-  "The unique resource identifier path"
+  "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the node is a Term"
   isTermNode: Boolean!
   "The unique resource identifier path"
   uri: String
+}
+"Page Info on the connected CategoryConnectionEdge"
+interface CategoryConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection to ContentNode Nodes"
 interface ContentNodeConnection implements Connection {
@@ -6116,6 +7101,8 @@ interface ContentNodeConnection implements Connection {
   edges: [ContentNodeConnectionEdge!]!
   "A list of connected ContentNode Nodes"
   nodes: [ContentNode!]!
+  "Information about pagination in a connection."
+  pageInfo: ContentNodeConnectionPageInfo!
 }
 "Edge between a Node and a connected ContentNode"
 interface ContentNodeConnectionEdge implements Edge {
@@ -6182,10 +7169,16 @@ interface ContentNode implements Node& UniformResourceIdentifiable {
   ): ContentNodeToEnqueuedStylesheetConnection
   "The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table."
   guid: String
-  "The unique resource identifier path"
+  "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -6233,6 +7226,8 @@ interface TaxonomyConnection implements Connection {
   edges: [TaxonomyConnectionEdge!]!
   "A list of connected Taxonomy Nodes"
   nodes: [Taxonomy!]!
+  "Information about pagination in a connection."
+  pageInfo: TaxonomyConnectionPageInfo!
 }
 "Edge between a Node and a connected Taxonomy"
 interface TaxonomyConnectionEdge implements Edge {
@@ -6247,6 +7242,68 @@ interface ContentTypeConnection implements Connection {
   edges: [ContentTypeConnectionEdge!]!
   "A list of connected ContentType Nodes"
   nodes: [ContentType!]!
+  "Information about pagination in a connection."
+  pageInfo: ContentTypeConnectionPageInfo!
+}
+"Page Info on the connected ContentTypeConnectionEdge"
+interface ContentTypeConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+"Connection to TermNode Nodes"
+interface TermNodeConnection implements Connection {
+  "A list of edges (relational context) between RootQuery and connected TermNode Nodes"
+  edges: [TermNodeConnectionEdge!]!
+  "A list of connected TermNode Nodes"
+  nodes: [TermNode!]!
+  "Information about pagination in a connection."
+  pageInfo: TermNodeConnectionPageInfo!
+}
+"Edge between a Node and a connected TermNode"
+interface TermNodeConnectionEdge implements Edge {
+  "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+  cursor: String
+  "The connected TermNode Node"
+  node: TermNode!
+}
+"Page Info on the connected TermNodeConnectionEdge"
+interface TermNodeConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+"Page Info on the connected TaxonomyConnectionEdge"
+interface TaxonomyConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+"Page Info on the connected ContentNodeConnectionEdge"
+interface ContentNodeConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Edge between a Node and a connected User"
 interface UserConnectionEdge implements Edge {
@@ -6278,6 +7335,8 @@ interface CommentConnection implements Connection {
   edges: [CommentConnectionEdge!]!
   "A list of connected Comment Nodes"
   nodes: [Comment!]!
+  "Information about pagination in a connection."
+  pageInfo: CommentConnectionPageInfo!
 }
 "Edge between a Node and a connected Comment"
 interface CommentConnectionEdge implements Edge {
@@ -6293,12 +7352,25 @@ interface CommenterConnectionEdge implements Edge {
   "The connected Commenter Node"
   node: Commenter!
 }
+"Page Info on the connected CommentConnectionEdge"
+interface CommentConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection to mediaItem Nodes"
 interface MediaItemConnection implements Connection {
   "A list of edges (relational context) between RootQuery and connected mediaItem Nodes"
   edges: [MediaItemConnectionEdge!]!
   "A list of connected mediaItem Nodes"
   nodes: [MediaItem!]!
+  "Information about pagination in a connection."
+  pageInfo: MediaItemConnectionPageInfo!
 }
 "Edge between a Node and a connected mediaItem"
 interface MediaItemConnectionEdge implements Edge {
@@ -6442,8 +7514,14 @@ interface HierarchicalContentNode implements Node& ContentNode& UniformResourceI
   guid: String
   "The globally unique ID for the object"
   id: ID!
+  "Whether the node is a Comment"
+  isComment: Boolean!
   "Whether the node is a Content Node"
   isContentNode: Boolean!
+  "Whether the node represents the front page."
+  isFrontPage: Boolean!
+  "Whether  the node represents the blog page."
+  isPostsPage: Boolean!
   "Whether the object is a node in the preview state"
   isPreview: Boolean
   "Whether the object is restricted from the current viewer"
@@ -6477,12 +7555,25 @@ interface HierarchicalContentNode implements Node& ContentNode& UniformResourceI
   "The unique resource identifier path"
   uri: String
 }
+"Page Info on the connected MediaItemConnectionEdge"
+interface MediaItemConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection to page Nodes"
 interface PageConnection implements Connection {
   "A list of edges (relational context) between RootQuery and connected page Nodes"
   edges: [PageConnectionEdge!]!
   "A list of connected page Nodes"
   nodes: [Page!]!
+  "Information about pagination in a connection."
+  pageInfo: PageConnectionPageInfo!
 }
 "Edge between a Node and a connected page"
 interface PageConnectionEdge implements Edge {
@@ -6550,6 +7641,19 @@ interface CollectionConnection implements Connection {
   edges: [CollectionConnectionEdge!]!
   "A list of connected collection Nodes"
   nodes: [Collection!]!
+  "Information about pagination in a connection."
+  pageInfo: CollectionConnectionPageInfo!
+}
+"Page Info on the connected CollectionConnectionEdge"
+interface CollectionConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Edge between a Node and a connected contact"
 interface ContactConnectionEdge implements Edge {
@@ -6564,6 +7668,19 @@ interface ContactConnection implements Connection {
   edges: [ContactConnectionEdge!]!
   "A list of connected contact Nodes"
   nodes: [Contact!]!
+  "Information about pagination in a connection."
+  pageInfo: ContactConnectionPageInfo!
+}
+"Page Info on the connected ContactConnectionEdge"
+interface ContactConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection to postFormat Nodes"
 interface PostFormatConnection implements Connection {
@@ -6571,6 +7688,8 @@ interface PostFormatConnection implements Connection {
   edges: [PostFormatConnectionEdge!]!
   "A list of connected postFormat Nodes"
   nodes: [PostFormat!]!
+  "Information about pagination in a connection."
+  pageInfo: PostFormatConnectionPageInfo!
 }
 "Edge between a Node and a connected postFormat"
 interface PostFormatConnectionEdge implements Edge {
@@ -6585,6 +7704,8 @@ interface PostConnection implements Connection {
   edges: [PostConnectionEdge!]!
   "A list of connected post Nodes"
   nodes: [Post!]!
+  "Information about pagination in a connection."
+  pageInfo: PostConnectionPageInfo!
 }
 "Edge between a Node and a connected post"
 interface PostConnectionEdge implements Edge {
@@ -6593,12 +7714,36 @@ interface PostConnectionEdge implements Edge {
   "The connected post Node"
   node: Post!
 }
+"Page Info on the connected PostConnectionEdge"
+interface PostConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+"Page Info on the connected PostFormatConnectionEdge"
+interface PostFormatConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
 "Connection to tag Nodes"
 interface TagConnection implements Connection {
   "A list of edges (relational context) between RootQuery and connected tag Nodes"
   edges: [TagConnectionEdge!]!
   "A list of connected tag Nodes"
   nodes: [Tag!]!
+  "Information about pagination in a connection."
+  pageInfo: TagConnectionPageInfo!
 }
 "Edge between a Node and a connected tag"
 interface TagConnectionEdge implements Edge {
@@ -6607,19 +7752,27 @@ interface TagConnectionEdge implements Edge {
   "The connected tag Node"
   node: Tag!
 }
-"Connection to TermNode Nodes"
-interface TermNodeConnection implements Connection {
-  "A list of edges (relational context) between RootQuery and connected TermNode Nodes"
-  edges: [TermNodeConnectionEdge!]!
-  "A list of connected TermNode Nodes"
-  nodes: [TermNode!]!
+"Page Info on the connected TagConnectionEdge"
+interface TagConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
-"Edge between a Node and a connected TermNode"
-interface TermNodeConnectionEdge implements Edge {
-  "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
-  cursor: String
-  "The connected TermNode Node"
-  node: TermNode!
+"Page Info on the connected PageConnectionEdge"
+interface PageConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection to UserRole Nodes"
 interface UserRoleConnection implements Connection {
@@ -6627,6 +7780,8 @@ interface UserRoleConnection implements Connection {
   edges: [UserRoleConnectionEdge!]!
   "A list of connected UserRole Nodes"
   nodes: [UserRole!]!
+  "Information about pagination in a connection."
+  pageInfo: UserRoleConnectionPageInfo!
 }
 "Edge between a Node and a connected UserRole"
 interface UserRoleConnectionEdge implements Edge {
@@ -6634,6 +7789,17 @@ interface UserRoleConnectionEdge implements Edge {
   cursor: String
   "The connected UserRole Node"
   node: UserRole!
+}
+"Page Info on the connected UserRoleConnectionEdge"
+interface UserRoleConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Edge between a Node and a connected landingPage"
 interface LandingPageConnectionEdge implements Edge {
@@ -6648,6 +7814,19 @@ interface LandingPageConnection implements Connection {
   edges: [LandingPageConnectionEdge!]!
   "A list of connected landingPage Nodes"
   nodes: [LandingPage!]!
+  "Information about pagination in a connection."
+  pageInfo: LandingPageConnectionPageInfo!
+}
+"Page Info on the connected LandingPageConnectionEdge"
+interface LandingPageConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection to MenuItem Nodes"
 interface MenuItemConnection implements Connection {
@@ -6655,6 +7834,8 @@ interface MenuItemConnection implements Connection {
   edges: [MenuItemConnectionEdge!]!
   "A list of connected MenuItem Nodes"
   nodes: [MenuItem!]!
+  "Information about pagination in a connection."
+  pageInfo: MenuItemConnectionPageInfo!
 }
 "Edge between a Node and a connected MenuItem"
 interface MenuItemConnectionEdge implements Edge {
@@ -6662,6 +7843,17 @@ interface MenuItemConnectionEdge implements Edge {
   cursor: String
   "The connected MenuItem Node"
   node: MenuItem!
+}
+"Page Info on the connected MenuItemConnectionEdge"
+interface MenuItemConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Edge between a Node and a connected MenuItemLinkable"
 interface MenuItemLinkableConnectionEdge implements Edge {
@@ -6683,6 +7875,19 @@ interface MenuConnection implements Connection {
   edges: [MenuConnectionEdge!]!
   "A list of connected Menu Nodes"
   nodes: [Menu!]!
+  "Information about pagination in a connection."
+  pageInfo: MenuConnectionPageInfo!
+}
+"Page Info on the connected MenuConnectionEdge"
+interface MenuConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection to Plugin Nodes"
 interface PluginConnection implements Connection {
@@ -6690,6 +7895,8 @@ interface PluginConnection implements Connection {
   edges: [PluginConnectionEdge!]!
   "A list of connected Plugin Nodes"
   nodes: [Plugin!]!
+  "Information about pagination in a connection."
+  pageInfo: PluginConnectionPageInfo!
 }
 "Edge between a Node and a connected Plugin"
 interface PluginConnectionEdge implements Edge {
@@ -6697,6 +7904,17 @@ interface PluginConnectionEdge implements Edge {
   cursor: String
   "The connected Plugin Node"
   node: Plugin!
+}
+"Page Info on the connected PluginConnectionEdge"
+interface PluginConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Edge between a Node and a connected release"
 interface ReleaseConnectionEdge implements Edge {
@@ -6711,6 +7929,19 @@ interface ReleaseConnection implements Connection {
   edges: [ReleaseConnectionEdge!]!
   "A list of connected release Nodes"
   nodes: [Release!]!
+  "Information about pagination in a connection."
+  pageInfo: ReleaseConnectionPageInfo!
+}
+"Page Info on the connected ReleaseConnectionEdge"
+interface ReleaseConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection to Theme Nodes"
 interface ThemeConnection implements Connection {
@@ -6718,6 +7949,8 @@ interface ThemeConnection implements Connection {
   edges: [ThemeConnectionEdge!]!
   "A list of connected Theme Nodes"
   nodes: [Theme!]!
+  "Information about pagination in a connection."
+  pageInfo: ThemeConnectionPageInfo!
 }
 "Edge between a Node and a connected Theme"
 interface ThemeConnectionEdge implements Edge {
@@ -6725,6 +7958,17 @@ interface ThemeConnectionEdge implements Edge {
   cursor: String
   "The connected Theme Node"
   node: Theme!
+}
+"Page Info on the connected ThemeConnectionEdge"
+interface ThemeConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Edge between a Node and a connected translation"
 interface TranslationConnectionEdge implements Edge {
@@ -6739,6 +7983,19 @@ interface TranslationConnection implements Connection {
   edges: [TranslationConnectionEdge!]!
   "A list of connected translation Nodes"
   nodes: [Translation!]!
+  "Information about pagination in a connection."
+  pageInfo: TranslationConnectionPageInfo!
+}
+"Page Info on the connected TranslationConnectionEdge"
+interface TranslationConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 "Connection to User Nodes"
 interface UserConnection implements Connection {
@@ -6746,14 +8003,25 @@ interface UserConnection implements Connection {
   edges: [UserConnectionEdge!]!
   "A list of connected User Nodes"
   nodes: [User!]!
+  "Information about pagination in a connection."
+  pageInfo: UserConnectionPageInfo!
+}
+"Page Info on the connected UserConnectionEdge"
+interface UserConnectionPageInfo implements WPPageInfo& PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
 }
 union PageModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCard | LayoutImage | LayoutCards | LayoutSteps | LayoutImageGallery | LayoutSocialMediaFeed
 union CollectionModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel
 union PostModulesUnionType = EventSearch | EventSelected | EventSearchCarousel | EventSelectedCarousel | LocationsSelected | LocationsSelectedCarousel | LayoutCollection | LayoutContact | LayoutArticles | LayoutArticlesCarousel | LayoutArticleHighlights | LayoutPages | LayoutPagesCarousel | LayoutContent | LayoutCard | LayoutImage | LayoutCards | LayoutSteps | LayoutImageGallery | LayoutSocialMediaFeed
 union PostSidebarUnionType = LayoutLinkList | LayoutArticles | LayoutPages | LayoutCards
 union PageSidebarUnionType = LayoutLinkList | LayoutArticles | LayoutPages | LayoutCards
-union FooterBlocksUnion = LayoutImage | LayoutEditor | LayoutMenu
-union GlobalSidebarBlocksUnion = LayoutArticleHighlights | LayoutArticles | LayoutEditor
 "Deprecated in favor of MenuItemLinkeable Interface"
 union MenuItemObjectUnion = Post | Page | Category | Tag
 "Filter item by specific language, default language or list all languages"
@@ -6794,6 +8062,13 @@ enum TermObjectsConnectionOrderbyEnum {
   "Order the connection by term order."
   TERM_ORDER
 }
+"The strategy to use when loading the script"
+enum ScriptLoadingStrategyEnum {
+  "Use the script `async` attribute"
+  ASYNC
+  "Use the script `defer` attribute"
+  DEFER
+}
 "Allowed Content Types of the Category taxonomy."
 enum ContentTypesOfCategoryEnum {
   "The Type of Content object"
@@ -6815,69 +8090,71 @@ enum RelationEnum {
 }
 "The MimeType of the object"
 enum MimeTypeEnum {
-  "MimeType application/msword"
+  "application/msword mime type."
   APPLICATION_MSWORD
-  "MimeType application/pdf"
+  "application/pdf mime type."
   APPLICATION_PDF
-  "MimeType application/vnd.apple.keynote"
+  "application/vnd.apple.keynote mime type."
   APPLICATION_VND_APPLE_KEYNOTE
-  "MimeType application/vnd.ms-excel"
+  "application/vnd.ms-excel mime type."
   APPLICATION_VND_MS_EXCEL
-  "MimeType application/vnd.ms-excel.sheet.binary.macroEnabled.12"
+  "application/vnd.ms-excel.sheet.binary.macroEnabled.12 mime type."
   APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACROENABLED_12
-  "MimeType application/vnd.ms-excel.sheet.macroEnabled.12"
+  "application/vnd.ms-excel.sheet.macroEnabled.12 mime type."
   APPLICATION_VND_MS_EXCEL_SHEET_MACROENABLED_12
-  "MimeType application/vnd.ms-powerpoint"
+  "application/vnd.ms-powerpoint mime type."
   APPLICATION_VND_MS_POWERPOINT
-  "MimeType application/vnd.ms-powerpoint.presentation.macroEnabled.12"
+  "application/vnd.ms-powerpoint.presentation.macroEnabled.12 mime type."
   APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACROENABLED_12
-  "MimeType application/vnd.ms-powerpoint.slideshow.macroEnabled.12"
+  "application/vnd.ms-powerpoint.slideshow.macroEnabled.12 mime type."
   APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACROENABLED_12
-  "MimeType application/vnd.ms-word.document.macroEnabled.12"
+  "application/vnd.ms-word.document.macroEnabled.12 mime type."
   APPLICATION_VND_MS_WORD_DOCUMENT_MACROENABLED_12
-  "MimeType application/vnd.oasis.opendocument.text"
+  "application/vnd.oasis.opendocument.text mime type."
   APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT
-  "MimeType application/vnd.openxmlformats-officedocument.presentationml.presentation"
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation mime type."
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION
-  "MimeType application/vnd.openxmlformats-officedocument.presentationml.slideshow"
+  "application/vnd.openxmlformats-officedocument.presentationml.slideshow mime type."
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW
-  "MimeType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet mime type."
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET
-  "MimeType application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document mime type."
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT
-  "MimeType audio/flac"
+  "audio/flac mime type."
   AUDIO_FLAC
-  "MimeType audio/midi"
+  "audio/midi mime type."
   AUDIO_MIDI
-  "MimeType audio/mpeg"
+  "audio/mpeg mime type."
   AUDIO_MPEG
-  "MimeType audio/ogg"
+  "audio/ogg mime type."
   AUDIO_OGG
-  "MimeType audio/wav"
+  "audio/wav mime type."
   AUDIO_WAV
-  "MimeType image/gif"
+  "image/avif mime type."
+  IMAGE_AVIF
+  "image/gif mime type."
   IMAGE_GIF
-  "MimeType image/jpeg"
+  "image/jpeg mime type."
   IMAGE_JPEG
-  "MimeType image/png"
+  "image/png mime type."
   IMAGE_PNG
-  "MimeType video/3gpp"
+  "video/3gpp mime type."
   VIDEO_3GPP
-  "MimeType video/3gpp2"
+  "video/3gpp2 mime type."
   VIDEO_3GPP2
-  "MimeType video/avi"
+  "video/avi mime type."
   VIDEO_AVI
-  "MimeType video/mp4"
+  "video/mp4 mime type."
   VIDEO_MP4
-  "MimeType video/mpeg"
+  "video/mpeg mime type."
   VIDEO_MPEG
-  "MimeType video/ogg"
+  "video/ogg mime type."
   VIDEO_OGG
-  "MimeType video/quicktime"
+  "video/quicktime mime type."
   VIDEO_QUICKTIME
-  "MimeType video/webm"
+  "video/webm mime type."
   VIDEO_WEBM
-  "MimeType video/x-flv"
+  "video/x-flv mime type."
   VIDEO_X_FLV
 }
 "Field to order the connection by"
@@ -7371,7 +8648,7 @@ enum UsersConnectionSearchColumnEnum {
   LOGIN
   "A URL-friendly name for the user. The default is the user's username."
   NICENAME
-  "The URL of the user\\s website."
+  "The URL of the user's website."
   URL
 }
 "The status of the media item object."
@@ -7505,7 +8782,7 @@ input CategoryToContentNodeConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -7591,7 +8868,7 @@ input ContentTypeToContentNodeConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -7821,7 +9098,7 @@ input UserToMediaItemConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -7862,7 +9139,7 @@ input HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -7903,7 +9180,7 @@ input HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -7950,7 +9227,7 @@ input UserToPageConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -7989,7 +9266,7 @@ input CollectionToRevisionConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8028,7 +9305,7 @@ input ContactToRevisionConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8163,7 +9440,7 @@ input PostFormatToContentNodeConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8218,7 +9495,7 @@ input PostFormatToPostConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8285,7 +9562,7 @@ input PostToRevisionConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8385,7 +9662,7 @@ input TagToContentNodeConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8440,7 +9717,7 @@ input TagToPostConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8548,7 +9825,7 @@ input PageToRevisionConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8603,7 +9880,7 @@ input UserToPostConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8656,7 +9933,7 @@ input UserToRevisionsConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8711,7 +9988,7 @@ input CategoryToPostConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8766,7 +10043,7 @@ input RootQueryToCollectionConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8870,7 +10147,7 @@ input RootQueryToContactConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8915,7 +10192,7 @@ input RootQueryToContentNodeConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8956,7 +10233,7 @@ input LandingPageToMediaItemConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -8997,7 +10274,7 @@ input LandingPageToFloatImageConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9038,7 +10315,7 @@ input LandingPageToMobileImageConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9077,7 +10354,7 @@ input LandingPageToRevisionConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9120,7 +10397,7 @@ input RootQueryToLandingPageConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9171,7 +10448,7 @@ input RootQueryToMediaItemConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9266,7 +10543,7 @@ input RootQueryToPageConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9381,7 +10658,7 @@ input RootQueryToPostConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9432,7 +10709,7 @@ input ReleaseToRevisionConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9475,7 +10752,7 @@ input RootQueryToReleaseConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9516,7 +10793,7 @@ input RootQueryToRevisionsConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9655,7 +10932,7 @@ input TranslationToRevisionConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9694,7 +10971,7 @@ input RootQueryToTranslationConnectionWhereArgs {
   Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
   """
   notIn: [ID]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [PostObjectsConnectionOrderbyInput]
   "Use ID to return only children. Use 0 to return only top-level items"
   parent: ID
@@ -9733,7 +11010,7 @@ input RootQueryToUserConnectionWhereArgs {
   nicenameIn: [String]
   "An array of nicenames to exclude. Users matching one of these nicenames will not be included in results."
   nicenameNotIn: [String]
-  "What paramater to use to order the objects by."
+  "What parameter to use to order the objects by."
   orderby: [UsersConnectionOrderbyInput]
   "An array of role names that users must match to be included in results. Note that this is an inclusive list: users must match *each* role."
   role: UserRoleEnum
@@ -10082,7 +11359,7 @@ input CreateUserInput {
   displayName: String
   "A string containing the user's email address."
   email: String
-  "The user's first name."
+  "\tThe user's first name."
   firstName: String
   "User's Jabber account."
   jabber: String
@@ -10124,6 +11401,8 @@ input DeleteCollectionInput {
   forceDelete: Boolean
   "The ID of the collection to delete"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
 }
 "Input for the deleteComment mutation."
 input DeleteCommentInput {
@@ -10142,6 +11421,8 @@ input DeleteContactInput {
   forceDelete: Boolean
   "The ID of the contact to delete"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
 }
 "Input for the deleteLandingPage mutation."
 input DeleteLandingPageInput {
@@ -10151,6 +11432,8 @@ input DeleteLandingPageInput {
   forceDelete: Boolean
   "The ID of the landingPage to delete"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
 }
 "Input for the deleteMediaItem mutation."
 input DeleteMediaItemInput {
@@ -10169,6 +11452,8 @@ input DeletePageInput {
   forceDelete: Boolean
   "The ID of the page to delete"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
 }
 "Input for the deletePost mutation."
 input DeletePostInput {
@@ -10178,6 +11463,8 @@ input DeletePostInput {
   forceDelete: Boolean
   "The ID of the post to delete"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
 }
 "Input for the deletePostFormat mutation."
 input DeletePostFormatInput {
@@ -10194,6 +11481,8 @@ input DeleteReleaseInput {
   forceDelete: Boolean
   "The ID of the release to delete"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
 }
 "Input for the deleteTag mutation."
 input DeleteTagInput {
@@ -10210,6 +11499,8 @@ input DeleteTranslationInput {
   forceDelete: Boolean
   "The ID of the translation to delete"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
 }
 "Input for the deleteUser mutation."
 input DeleteUserInput {
@@ -10310,6 +11601,8 @@ input UpdateCollectionInput {
   date: String
   "The ID of the collection object"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
   "A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types."
   menuOrder: Int
@@ -10361,6 +11654,8 @@ input UpdateContactInput {
   date: String
   "The ID of the contact object"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
   "A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types."
   menuOrder: Int
@@ -10383,6 +11678,8 @@ input UpdateLandingPageInput {
   date: String
   "The ID of the landingPage object"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
   "A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types."
   menuOrder: Int
@@ -10445,6 +11742,8 @@ input UpdatePageInput {
   date: String
   "The ID of the page object"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
   "A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types."
   menuOrder: Int
@@ -10475,6 +11774,8 @@ input UpdatePostInput {
   date: String
   "The ID of the post object"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
   "A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types."
   menuOrder: Int
@@ -10518,6 +11819,8 @@ input UpdateReleaseInput {
   date: String
   "The ID of the release object"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
   language: LanguageCodeEnum
   "A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types."
   menuOrder: Int
@@ -10593,6 +11896,8 @@ input UpdateTranslationInput {
   date: String
   "The ID of the translation object"
   id: ID!
+  "Override the edit lock when another user is editing the post"
+  ignoreEditLock: Boolean
   "A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types."
   menuOrder: Int
   "The password used to protect the content of the object"

@@ -6,6 +6,7 @@
   --link-arrow-label-color: var(--color-black-80);
   --link-arrow-label-alert-color: #b01038;
 
+  hyphens: auto;
   word-break: break-word;
   min-width: fit-content;
   text-decoration: none;
@@ -16,7 +17,6 @@
 
   @include respond_above(s) {
     grid-template-columns: 4fr 5fr;
-    word-break: unset;
   }
 
   .imageWrapper {

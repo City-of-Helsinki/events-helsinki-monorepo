@@ -4,6 +4,7 @@
 .eventCard {
   --height-image: 14.5rem;
 
+  hyphens: auto;
   word-break: break-word;
   min-width: fit-content;
   text-decoration: none;
@@ -14,7 +15,6 @@
 
   @include respond_above(s) {
     grid-template-columns: 4fr 5fr;
-    word-break: unset;
   }
 
   .imageWrapper {

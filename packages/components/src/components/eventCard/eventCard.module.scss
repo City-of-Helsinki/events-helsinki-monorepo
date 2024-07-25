@@ -5,6 +5,7 @@
   --height-image-desktop: 14.5rem;
   --width-image: 6.375rem;
 
+  hyphens: auto;
   word-break: break-word;
   min-width: fit-content;
   background-color: var(--color-white);
@@ -19,7 +20,6 @@
     grid-template-columns: none;
     grid-template-rows: auto 1fr;
     margin-bottom: 0;
-    word-break: unset;
   }
 
   .imageWrapper {

@@ -10,15 +10,15 @@ import type {
   PagesQuery,
   PagesQueryVariables,
 } from 'react-helsinki-headless-cms/apollo';
-import type { PageInfo } from '../../types';
+import type { PageUriInfo } from '../../types';
 
 export const ARTICLES_AMOUNT_LIMIT = 100;
 export const PAGES_AMOUNT_LIMIT = 100;
 
 export const getAllArticles = async (
   apolloClient: ApolloClient<NormalizedCacheObject>
-): Promise<PageInfo[]> => {
-  const pageInfos: PageInfo[] = [];
+): Promise<PageUriInfo[]> => {
+  const pageInfos: PageUriInfo[] = [];
   const { data: articlesData } = await apolloClient.query<
     PostsQuery,
     PostsQueryVariables
@@ -66,8 +66,8 @@ export const getAllArticles = async (
 
 export const getAllPages = async (
   apolloClient: ApolloClient<NormalizedCacheObject>
-): Promise<PageInfo[]> => {
-  const pageInfos: PageInfo[] = [];
+): Promise<PageUriInfo[]> => {
+  const pageInfos: PageUriInfo[] = [];
   const { data: pagesData } = await apolloClient.query<
     PagesQuery,
     PagesQueryVariables

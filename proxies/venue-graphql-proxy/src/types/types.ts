@@ -71,7 +71,7 @@ export type EventQuery = {
 export type EventsConnection = {
   __typename?: 'EventsConnection';
   edges: Array<EventEdge>;
-  pageInfo?: Maybe<PageInfo>;
+  pageInfo?: Maybe<VenueProxyPageInfo>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
@@ -102,8 +102,8 @@ export type OpeningHour = {
   times: Array<Time>;
 };
 
-export type PageInfo = {
-  __typename?: 'PageInfo';
+export type VenueProxyPageInfo = {
+  __typename?: 'VenueProxyPageInfo';
   count: Scalars['Int'];
   endCursor?: Maybe<Scalars['String']>;
   hasNextPage: Scalars['Boolean'];
@@ -266,7 +266,7 @@ export type ListVenueFragment = {
 };
 
 export type PageInfoFragment = {
-  __typename?: 'PageInfo';
+  __typename?: 'VenueProxyPageInfo';
   hasPreviousPage: boolean;
   hasNextPage: boolean;
   endCursor?: string | null | undefined;
@@ -311,7 +311,7 @@ export type SearchEventsQuery = {
     }>;
     pageInfo?:
       | {
-          __typename?: 'PageInfo';
+          __typename?: 'VenueProxyPageInfo';
           hasPreviousPage: boolean;
           hasNextPage: boolean;
           endCursor?: string | null | undefined;
@@ -360,7 +360,7 @@ export type SelectedEventsQuery = {
     }>;
     pageInfo?:
       | {
-          __typename?: 'PageInfo';
+          __typename?: 'VenueProxyPageInfo';
           hasPreviousPage: boolean;
           hasNextPage: boolean;
           endCursor?: string | null | undefined;
@@ -466,7 +466,7 @@ export const ListVenueFragmentDoc = gql`
   }
 `;
 export const PageInfoFragmentDoc = gql`
-  fragment pageInfo on PageInfo {
+  fragment pageInfo on VenueProxyPageInfo {
     hasPreviousPage
     hasNextPage
     endCursor

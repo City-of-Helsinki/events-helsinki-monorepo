@@ -1,5 +1,6 @@
 // Ignore prettier in order to preserve readability of the routes:
 // prettier-ignore
+// @deprecated since implementation of dynamic CMS configured redirects
 const redirectRoutes = {
   // Finnish locale versions
   '/ulkokuntosaliohjaukset': '/fi/pages/ohjattu-liikunta/ohjattu-toiminta-ulkokuntosaleilla',

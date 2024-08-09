@@ -223,10 +223,16 @@ export type Category = DatabaseIdentifier &
     enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the node is a Term */
@@ -325,6 +331,8 @@ export type CategoryConnection = {
   edges: Array<CategoryConnectionEdge>;
   /** A list of connected category Nodes */
   nodes: Array<Category>;
+  /** Information about pagination in a connection. */
+  pageInfo: CategoryConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected category */
@@ -333,6 +341,18 @@ export type CategoryConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected category Node */
   node: Category;
+};
+
+/** Page Info on the connected CategoryConnectionEdge */
+export type CategoryConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -358,7 +378,7 @@ export type CategoryToAncestorsCategoryConnection = CategoryConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Category>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: CategoryToAncestorsCategoryConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -371,6 +391,22 @@ export type CategoryToAncestorsCategoryConnectionEdge = CategoryConnectionEdge &
     node: Category;
   };
 
+/** Page Info on the &quot;CategoryToAncestorsCategoryConnection&quot; */
+export type CategoryToAncestorsCategoryConnectionPageInfo =
+  CategoryConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'CategoryToAncestorsCategoryConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
 /** Connection between the Category type and the category type */
 export type CategoryToCategoryConnection = CategoryConnection &
   Connection & {
@@ -380,7 +416,7 @@ export type CategoryToCategoryConnection = CategoryConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Category>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: CategoryToCategoryConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -391,6 +427,21 @@ export type CategoryToCategoryConnectionEdge = CategoryConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Category;
+  };
+
+/** Page Info on the &quot;CategoryToCategoryConnection&quot; */
+export type CategoryToCategoryConnectionPageInfo = CategoryConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'CategoryToCategoryConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the CategoryToCategoryConnection connection */
@@ -448,7 +499,7 @@ export type CategoryToContentNodeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: CategoryToContentNodeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -460,6 +511,22 @@ export type CategoryToContentNodeConnectionEdge = ContentNodeConnectionEdge &
     /** The item at the end of the edge */
     node: ContentNode;
   };
+
+/** Page Info on the &quot;CategoryToContentNodeConnection&quot; */
+export type CategoryToContentNodeConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'CategoryToContentNodeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the CategoryToContentNodeConnection connection */
 export type CategoryToContentNodeConnectionWhereArgs = {
@@ -481,7 +548,7 @@ export type CategoryToContentNodeConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -521,7 +588,7 @@ export type CategoryToPostConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Post>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: CategoryToPostConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -532,6 +599,21 @@ export type CategoryToPostConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Post;
+  };
+
+/** Page Info on the &quot;CategoryToPostConnection&quot; */
+export type CategoryToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'CategoryToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the CategoryToPostConnection connection */
@@ -568,7 +650,7 @@ export type CategoryToPostConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -628,7 +710,7 @@ export type Collection = ContentNode &
   Previewable &
   UniformResourceIdentifiable & {
     __typename?: 'Collection';
-    /** Taustaväri */
+    /** Background Color */
     backgroundColor?: Maybe<Scalars['String']['output']>;
     /**
      * The id field matches the WP_Post-&gt;ID field.
@@ -645,7 +727,7 @@ export type Collection = ContentNode &
     date?: Maybe<Scalars['String']['output']>;
     /** The publishing date set in GMT. */
     dateGmt?: Maybe<Scalars['String']['output']>;
-    /** Kuvaus */
+    /** Description */
     description?: Maybe<Scalars['String']['output']>;
     /** The desired slug of the post */
     desiredSlug?: Maybe<Scalars['String']['output']>;
@@ -663,10 +745,16 @@ export type Collection = ContentNode &
     guid?: Maybe<Scalars['String']['output']>;
     /** The globally unique identifier of the collection-cpt object. */
     id: Scalars['ID']['output'];
-    /** Kuva */
+    /** Image */
     image?: Maybe<Scalars['String']['output']>;
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the object is restricted from the current viewer */
@@ -685,7 +773,7 @@ export type Collection = ContentNode &
     modified?: Maybe<Scalars['String']['output']>;
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Maybe<Scalars['String']['output']>;
-    /** Moduulilistaus */
+    /** List of modules */
     modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
     /** Connection between the Collection type and the collection type */
     preview?: Maybe<CollectionToPreviewConnectionEdge>;
@@ -699,7 +787,7 @@ export type Collection = ContentNode &
     revisions?: Maybe<CollectionToRevisionConnection>;
     /** The SEO Framework data of the collection */
     seo?: Maybe<Seo>;
-    /** Näytä etusivulla */
+    /** Show on front page */
     showOnFrontPage?: Maybe<Scalars['Boolean']['output']>;
     /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
     slug?: Maybe<Scalars['String']['output']>;
@@ -758,6 +846,8 @@ export type CollectionConnection = {
   edges: Array<CollectionConnectionEdge>;
   /** A list of connected collection Nodes */
   nodes: Array<Collection>;
+  /** Information about pagination in a connection. */
+  pageInfo: CollectionConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected collection */
@@ -766,6 +856,18 @@ export type CollectionConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected collection Node */
   node: Collection;
+};
+
+/** Page Info on the connected CollectionConnectionEdge */
+export type CollectionConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -808,7 +910,7 @@ export type CollectionToRevisionConnection = CollectionConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Collection>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: CollectionToRevisionConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -820,6 +922,22 @@ export type CollectionToRevisionConnectionEdge = CollectionConnectionEdge &
     /** The item at the end of the edge */
     node: Collection;
   };
+
+/** Page Info on the &quot;CollectionToRevisionConnection&quot; */
+export type CollectionToRevisionConnectionPageInfo =
+  CollectionConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'CollectionToRevisionConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the CollectionToRevisionConnection connection */
 export type CollectionToRevisionConnectionWhereArgs = {
@@ -839,7 +957,7 @@ export type CollectionToRevisionConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -861,7 +979,8 @@ export type CollectionToRevisionConnectionWhereArgs = {
 
 /** A Comment object */
 export type Comment = DatabaseIdentifier &
-  Node & {
+  Node &
+  UniformResourceIdentifiable & {
     __typename?: 'Comment';
     /** User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL. */
     agent?: Maybe<Scalars['String']['output']>;
@@ -891,10 +1010,22 @@ export type Comment = DatabaseIdentifier &
     dateGmt?: Maybe<Scalars['String']['output']>;
     /** The globally unique identifier for the comment object */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
+    /** Whether the node is a Content Node */
+    isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']['output']>;
+    /** Whether the node is a Term */
+    isTermNode: Scalars['Boolean']['output'];
     /** Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL. */
     karma?: Maybe<Scalars['Int']['output']>;
+    /** The permalink of the comment */
+    link?: Maybe<Scalars['String']['output']>;
     /** Connection between the Comment type and the Comment type */
     parent?: Maybe<CommentToParentCommentConnectionEdge>;
     /** The database id of the parent comment node or null if it is the root comment */
@@ -907,6 +1038,8 @@ export type Comment = DatabaseIdentifier &
     status?: Maybe<CommentStatusEnum>;
     /** Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL. */
     type?: Maybe<Scalars['String']['output']>;
+    /** The unique resource identifier path */
+    uri?: Maybe<Scalars['String']['output']>;
   };
 
 /** A Comment object */
@@ -962,6 +1095,8 @@ export type CommentConnection = {
   edges: Array<CommentConnectionEdge>;
   /** A list of connected Comment Nodes */
   nodes: Array<Comment>;
+  /** Information about pagination in a connection. */
+  pageInfo: CommentConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected Comment */
@@ -970,6 +1105,18 @@ export type CommentConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected Comment Node */
   node: Comment;
+};
+
+/** Page Info on the connected CommentConnectionEdge */
+export type CommentConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single comment node. Default is "ID". To be used along with the "id" field. */
@@ -1001,7 +1148,7 @@ export type CommentToCommentConnection = CommentConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Comment>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: CommentToCommentConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -1012,6 +1159,21 @@ export type CommentToCommentConnectionEdge = CommentConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Comment;
+  };
+
+/** Page Info on the &quot;CommentToCommentConnection&quot; */
+export type CommentToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'CommentToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the CommentToCommentConnection connection */
@@ -1239,6 +1401,8 @@ export type Connection = {
   edges: Array<Edge>;
   /** A list of connected nodes */
   nodes: Array<Node>;
+  /** Information about pagination in a connection. */
+  pageInfo: PageInfo;
 };
 
 /** The contact type */
@@ -1267,7 +1431,7 @@ export type Contact = ContentNode &
     date?: Maybe<Scalars['String']['output']>;
     /** The publishing date set in GMT. */
     dateGmt?: Maybe<Scalars['String']['output']>;
-    /** Kuvaus */
+    /** Description */
     description?: Maybe<Scalars['String']['output']>;
     /** The desired slug of the post */
     desiredSlug?: Maybe<Scalars['String']['output']>;
@@ -1285,14 +1449,20 @@ export type Contact = ContentNode &
     featuredImageDatabaseId?: Maybe<Scalars['Int']['output']>;
     /** Globally unique ID of the featured image assigned to the node */
     featuredImageId?: Maybe<Scalars['ID']['output']>;
-    /** Etunimi */
+    /** First name */
     firstName?: Maybe<Scalars['String']['output']>;
     /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
     guid?: Maybe<Scalars['String']['output']>;
     /** The globally unique identifier of the contact-cpt object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the object is restricted from the current viewer */
@@ -1307,7 +1477,7 @@ export type Contact = ContentNode &
     language?: Maybe<Language>;
     /** The user that most recently edited the node */
     lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
-    /** Sukunimi */
+    /** Last name */
     lastName?: Maybe<Scalars['String']['output']>;
     /** The permalink of the post */
     link?: Maybe<Scalars['String']['output']>;
@@ -1384,6 +1554,8 @@ export type ContactConnection = {
   edges: Array<ContactConnectionEdge>;
   /** A list of connected contact Nodes */
   nodes: Array<Contact>;
+  /** Information about pagination in a connection. */
+  pageInfo: ContactConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected contact */
@@ -1392,6 +1564,18 @@ export type ContactConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected contact Node */
   node: Contact;
+};
+
+/** Page Info on the connected ContactConnectionEdge */
+export type ContactConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -1443,7 +1627,7 @@ export type ContactToRevisionConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Contact>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: ContactToRevisionConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -1454,6 +1638,21 @@ export type ContactToRevisionConnectionEdge = ContactConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Contact;
+  };
+
+/** Page Info on the &quot;ContactToRevisionConnection&quot; */
+export type ContactToRevisionConnectionPageInfo = ContactConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'ContactToRevisionConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the ContactToRevisionConnection connection */
@@ -1474,7 +1673,7 @@ export type ContactToRevisionConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -1518,10 +1717,16 @@ export type ContentNode = {
   enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
   /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
   guid?: Maybe<Scalars['String']['output']>;
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -1572,6 +1777,8 @@ export type ContentNodeConnection = {
   edges: Array<ContentNodeConnectionEdge>;
   /** A list of connected ContentNode Nodes */
   nodes: Array<ContentNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: ContentNodeConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected ContentNode */
@@ -1580,6 +1787,18 @@ export type ContentNodeConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected ContentNode Node */
   node: ContentNode;
+};
+
+/** Page Info on the connected ContentNodeConnectionEdge */
+export type ContentNodeConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -1636,7 +1855,7 @@ export type ContentNodeToEnqueuedScriptConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<EnqueuedScript>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: ContentNodeToEnqueuedScriptConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -1649,6 +1868,22 @@ export type ContentNodeToEnqueuedScriptConnectionEdge = Edge &
     node: EnqueuedScript;
   };
 
+/** Page Info on the &quot;ContentNodeToEnqueuedScriptConnection&quot; */
+export type ContentNodeToEnqueuedScriptConnectionPageInfo =
+  EnqueuedScriptConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'ContentNodeToEnqueuedScriptConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
 /** Connection between the ContentNode type and the EnqueuedStylesheet type */
 export type ContentNodeToEnqueuedStylesheetConnection = Connection &
   EnqueuedStylesheetConnection & {
@@ -1658,7 +1893,7 @@ export type ContentNodeToEnqueuedStylesheetConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<EnqueuedStylesheet>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: ContentNodeToEnqueuedStylesheetConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -1670,6 +1905,22 @@ export type ContentNodeToEnqueuedStylesheetConnectionEdge = Edge &
     /** The item at the end of the edge */
     node: EnqueuedStylesheet;
   };
+
+/** Page Info on the &quot;ContentNodeToEnqueuedStylesheetConnection&quot; */
+export type ContentNodeToEnqueuedStylesheetConnectionPageInfo =
+  EnqueuedStylesheetConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'ContentNodeToEnqueuedStylesheetConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** The template assigned to a node of content */
 export type ContentTemplate = {
@@ -1703,6 +1954,8 @@ export type ContentType = Node &
     hierarchical?: Maybe<Scalars['Boolean']['output']>;
     /** The globally unique identifier of the post-type object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
     /** Whether this page is set to the static front page. */
@@ -1770,6 +2023,8 @@ export type ContentTypeConnection = {
   edges: Array<ContentTypeConnectionEdge>;
   /** A list of connected ContentType Nodes */
   nodes: Array<ContentType>;
+  /** Information about pagination in a connection. */
+  pageInfo: ContentTypeConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected ContentType */
@@ -1778,6 +2033,18 @@ export type ContentTypeConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected ContentType Node */
   node: ContentType;
+};
+
+/** Page Info on the connected ContentTypeConnectionEdge */
+export type ContentTypeConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** Allowed Content Types */
@@ -1817,7 +2084,7 @@ export type ContentTypeToContentNodeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: ContentTypeToContentNodeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -1829,6 +2096,22 @@ export type ContentTypeToContentNodeConnectionEdge = ContentNodeConnectionEdge &
     /** The item at the end of the edge */
     node: ContentNode;
   };
+
+/** Page Info on the &quot;ContentTypeToContentNodeConnection&quot; */
+export type ContentTypeToContentNodeConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'ContentTypeToContentNodeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the ContentTypeToContentNodeConnection connection */
 export type ContentTypeToContentNodeConnectionWhereArgs = {
@@ -1850,7 +2133,7 @@ export type ContentTypeToContentNodeConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -1879,7 +2162,7 @@ export type ContentTypeToTaxonomyConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Taxonomy>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: ContentTypeToTaxonomyConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -1890,6 +2173,21 @@ export type ContentTypeToTaxonomyConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Taxonomy;
+  };
+
+/** Page Info on the &quot;ContentTypeToTaxonomyConnection&quot; */
+export type ContentTypeToTaxonomyConnectionPageInfo = PageInfo &
+  TaxonomyConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'ContentTypeToTaxonomyConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Allowed Content Types of the Category taxonomy. */
@@ -2289,7 +2587,7 @@ export type CreateUserInput = {
   displayName?: InputMaybe<Scalars['String']['input']>;
   /** A string containing the user's email address. */
   email?: InputMaybe<Scalars['String']['input']>;
-  /** The user's first name. */
+  /** 	The user's first name. */
   firstName?: InputMaybe<Scalars['String']['input']>;
   /** User's Jabber account. */
   jabber?: InputMaybe<Scalars['String']['input']>;
@@ -2403,7 +2701,7 @@ export type DeleteCategoryInput = {
 /** The payload for the deleteCategory mutation. */
 export type DeleteCategoryPayload = {
   __typename?: 'DeleteCategoryPayload';
-  /** The deteted term object */
+  /** The deleted term object */
   category?: Maybe<Category>;
   /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
   clientMutationId?: Maybe<Scalars['String']['output']>;
@@ -2419,6 +2717,8 @@ export type DeleteCollectionInput = {
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of the collection to delete */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The payload for the deleteCollection mutation. */
@@ -2461,6 +2761,8 @@ export type DeleteContactInput = {
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of the contact to delete */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The payload for the deleteContact mutation. */
@@ -2482,6 +2784,8 @@ export type DeleteLandingPageInput = {
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of the landingPage to delete */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The payload for the deleteLandingPage mutation. */
@@ -2524,6 +2828,8 @@ export type DeletePageInput = {
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of the page to delete */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The payload for the deletePage mutation. */
@@ -2552,7 +2858,7 @@ export type DeletePostFormatPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The ID of the deleted object */
   deletedId?: Maybe<Scalars['ID']['output']>;
-  /** The deteted term object */
+  /** The deleted term object */
   postFormat?: Maybe<PostFormat>;
 };
 
@@ -2564,6 +2870,8 @@ export type DeletePostInput = {
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of the post to delete */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The payload for the deletePost mutation. */
@@ -2585,6 +2893,8 @@ export type DeleteReleaseInput = {
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of the release to delete */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The payload for the deleteRelease mutation. */
@@ -2613,7 +2923,7 @@ export type DeleteTagPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The ID of the deleted object */
   deletedId?: Maybe<Scalars['ID']['output']>;
-  /** The deteted term object */
+  /** The deleted term object */
   tag?: Maybe<Tag>;
 };
 
@@ -2625,6 +2935,8 @@ export type DeleteTranslationInput = {
   forceDelete?: InputMaybe<Scalars['Boolean']['input']>;
   /** The ID of the translation to delete */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The payload for the deleteTranslation mutation. */
@@ -2706,11 +3018,23 @@ export type ElasticSearchResult = {
 
 /** Asset enqueued by the CMS */
 export type EnqueuedAsset = {
-  /** @todo */
+  /** The inline code to be run after the asset is loaded. */
+  after?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /**
+   * Deprecated
+   * @deprecated Use `EnqueuedAsset.media` instead.
+   */
   args?: Maybe<Scalars['Boolean']['output']>;
+  /** The inline code to be run before the asset is loaded. */
+  before?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+  conditional?: Maybe<Scalars['String']['output']>;
   /** Dependencies needed to use this asset */
-  dependencies?: Maybe<Array<Maybe<EnqueuedScript>>>;
-  /** Extra information needed for the script */
+  dependencies?: Maybe<Array<Maybe<EnqueuedAsset>>>;
+  /**
+   * Extra information needed for the script
+   * @deprecated Use `EnqueuedScript.extraData` instead.
+   */
   extra?: Maybe<Scalars['String']['output']>;
   /** The handle of the enqueued asset */
   handle?: Maybe<Scalars['String']['output']>;
@@ -2726,19 +3050,35 @@ export type EnqueuedAsset = {
 export type EnqueuedScript = EnqueuedAsset &
   Node & {
     __typename?: 'EnqueuedScript';
-    /** @todo */
+    /** The inline code to be run after the asset is loaded. */
+    after?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /**
+     * Deprecated
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     */
     args?: Maybe<Scalars['Boolean']['output']>;
+    /** The inline code to be run before the asset is loaded. */
+    before?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: Maybe<Scalars['String']['output']>;
     /** Dependencies needed to use this asset */
     dependencies?: Maybe<Array<Maybe<EnqueuedScript>>>;
-    /** Extra information needed for the script */
+    /**
+     * Extra information needed for the script
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     */
     extra?: Maybe<Scalars['String']['output']>;
+    /** Extra data supplied to the enqueued script */
+    extraData?: Maybe<Scalars['String']['output']>;
     /** The handle of the enqueued asset */
     handle?: Maybe<Scalars['String']['output']>;
-    /** The ID of the enqueued asset */
+    /** The global ID of the enqueued script */
     id: Scalars['ID']['output'];
     /** The source of the asset */
     src?: Maybe<Scalars['String']['output']>;
-    /** The version of the enqueued asset */
+    /** The loading strategy to use on the script tag */
+    strategy?: Maybe<ScriptLoadingStrategyEnum>;
+    /** The version of the enqueued script */
     version?: Maybe<Scalars['String']['output']>;
   };
 
@@ -2748,6 +3088,8 @@ export type EnqueuedScriptConnection = {
   edges: Array<EnqueuedScriptConnectionEdge>;
   /** A list of connected EnqueuedScript Nodes */
   nodes: Array<EnqueuedScript>;
+  /** Information about pagination in a connection. */
+  pageInfo: EnqueuedScriptConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected EnqueuedScript */
@@ -2758,23 +3100,59 @@ export type EnqueuedScriptConnectionEdge = {
   node: EnqueuedScript;
 };
 
+/** Page Info on the connected EnqueuedScriptConnectionEdge */
+export type EnqueuedScriptConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
 /** Stylesheet enqueued by the CMS */
 export type EnqueuedStylesheet = EnqueuedAsset &
   Node & {
     __typename?: 'EnqueuedStylesheet';
-    /** @todo */
+    /** The inline code to be run after the asset is loaded. */
+    after?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /**
+     * Deprecated
+     * @deprecated Use `EnqueuedAsset.media` instead.
+     */
     args?: Maybe<Scalars['Boolean']['output']>;
+    /** The inline code to be run before the asset is loaded. */
+    before?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+    /** The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc */
+    conditional?: Maybe<Scalars['String']['output']>;
     /** Dependencies needed to use this asset */
-    dependencies?: Maybe<Array<Maybe<EnqueuedScript>>>;
-    /** Extra information needed for the script */
+    dependencies?: Maybe<Array<Maybe<EnqueuedStylesheet>>>;
+    /**
+     * Extra information needed for the script
+     * @deprecated Use `EnqueuedScript.extraData` instead.
+     */
     extra?: Maybe<Scalars['String']['output']>;
     /** The handle of the enqueued asset */
     handle?: Maybe<Scalars['String']['output']>;
-    /** The ID of the enqueued asset */
+    /** The global ID of the enqueued stylesheet */
     id: Scalars['ID']['output'];
+    /** Whether the enqueued style is RTL or not */
+    isRtl?: Maybe<Scalars['Boolean']['output']>;
+    /** The media attribute to use for the link */
+    media?: Maybe<Scalars['String']['output']>;
+    /** The absolute path to the enqueued style. Set when the stylesheet is meant to load inline. */
+    path?: Maybe<Scalars['String']['output']>;
+    /** The `rel` attribute to use for the link */
+    rel?: Maybe<Scalars['String']['output']>;
     /** The source of the asset */
     src?: Maybe<Scalars['String']['output']>;
-    /** The version of the enqueued asset */
+    /** Optional suffix, used in combination with RTL */
+    suffix?: Maybe<Scalars['String']['output']>;
+    /** The title of the enqueued style. Used for preferred/alternate stylesheets. */
+    title?: Maybe<Scalars['String']['output']>;
+    /** The version of the enqueued style */
     version?: Maybe<Scalars['String']['output']>;
   };
 
@@ -2784,6 +3162,8 @@ export type EnqueuedStylesheetConnection = {
   edges: Array<EnqueuedStylesheetConnectionEdge>;
   /** A list of connected EnqueuedStylesheet Nodes */
   nodes: Array<EnqueuedStylesheet>;
+  /** Information about pagination in a connection. */
+  pageInfo: EnqueuedStylesheetConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected EnqueuedStylesheet */
@@ -2792,6 +3172,18 @@ export type EnqueuedStylesheetConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected EnqueuedStylesheet Node */
   node: EnqueuedStylesheet;
+};
+
+/** Page Info on the connected EnqueuedStylesheetConnectionEdge */
+export type EnqueuedStylesheetConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** Information about enrolled participant(s) in an event occurrence */
@@ -2987,14 +3379,14 @@ export type EventPricing = {
   todo?: Maybe<Scalars['String']['output']>;
 };
 
-/** Kokoelmamoduuli: EventSearch */
+/** Collection Module: EventSearch */
 export type EventSearch = {
   __typename?: 'EventSearch';
-  /** Listattujen tapahtumien määrä “Näytä lisää” -painiketta */
+  /** Amount of events listed before &quot;show more -button&quot; */
   initAmountOfEvents?: Maybe<Scalars['Int']['output']>;
-  /** Moduulin tyyppi */
+  /** Module type */
   module?: Maybe<Scalars['String']['output']>;
-  /** Moduulilistaus */
+  /** List of modules */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
   /**
    * Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
@@ -3002,26 +3394,26 @@ export type EventSearch = {
    *                 https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
    */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Näytä kaikki -linkki */
+  /** Show all -link */
   showAllLinkCustom?: Maybe<Scalars['String']['output']>;
-  /** Moduulin otsikko */
+  /** Module title */
   title?: Maybe<Scalars['String']['output']>;
-  /** Hakukysely */
+  /** Search query */
   url?: Maybe<Scalars['String']['output']>;
 };
 
-/** Kokoelmamoduuli: EventSearchCarousel */
+/** Collection Module: EventSearchCarousel */
 export type EventSearchCarousel = {
   __typename?: 'EventSearchCarousel';
-  /** Korttien määrä karusellissa */
+  /** Amount of cards in carousel */
   amountOfCards?: Maybe<Scalars['Int']['output']>;
-  /** Tapahtumat lähellä */
+  /** Events nearby */
   eventsNearby?: Maybe<Scalars['Boolean']['output']>;
-  /** Moduulin tyyppi */
+  /** Module type */
   module?: Maybe<Scalars['String']['output']>;
-  /** Moduulilistaus */
+  /** List of modules */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
-  /** Tapahtumien järjestys */
+  /** Events order */
   orderNewestFirst?: Maybe<Scalars['Boolean']['output']>;
   /**
    * Show all -link, final link is combination of Tapahtuma- ja kurssikarusellin
@@ -3029,49 +3421,49 @@ export type EventSearchCarousel = {
    *                                     https://client-url.com/search/?sort=end_time&amp;super_event_type=umbrella,none&amp;language=fi&amp;start=2022-10-29
    */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Näytä kaikki -linkki */
+  /** Show all -link */
   showAllLinkCustom?: Maybe<Scalars['String']['output']>;
-  /** Moduulin otsikko */
+  /** Module title */
   title?: Maybe<Scalars['String']['output']>;
-  /** Hakukysely */
+  /** Search query */
   url?: Maybe<Scalars['String']['output']>;
 };
 
-/** Kokoelmamoduuli: EventSelected */
+/** Collection Module: EventSelected */
 export type EventSelected = {
   __typename?: 'EventSelected';
-  /** Lista tapahtumien ID-tiedoista */
+  /** List of event IDs */
   events?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Listattujen tapahtumien määrä “Näytä lisää” -painiketta */
+  /** Amount of events listed before &quot;show more -button&quot; */
   initAmountOfEvents?: Maybe<Scalars['Int']['output']>;
-  /** Moduulin tyyppi */
+  /** Module type */
   module?: Maybe<Scalars['String']['output']>;
-  /** Moduulilistaus */
+  /** List of modules */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
-  /** Näytä kaikki -linkki */
+  /** Show all -link */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Moduulin otsikko */
+  /** Module title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
-/** Kokoelmamoduuli: EventSelectedCarousel */
+/** Collection Module: EventSelectedCarousel */
 export type EventSelectedCarousel = {
   __typename?: 'EventSelectedCarousel';
-  /** Korttien määrä karusellissa */
+  /** Amount of cards in carousel */
   amountOfCards?: Maybe<Scalars['Int']['output']>;
-  /** Korttien määrä riviä kohden */
+  /** Amount of cards per row */
   amountOfCardsPerRow?: Maybe<Scalars['Int']['output']>;
-  /** Lista tapahtumien ID-tiedoista */
+  /** List of event IDs */
   events?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Tapahtumat lähellä */
+  /** Events nearby */
   eventsNearby?: Maybe<Scalars['Boolean']['output']>;
-  /** Moduulin tyyppi */
+  /** Module type */
   module?: Maybe<Scalars['String']['output']>;
-  /** Moduulilistaus */
+  /** List of modules */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
-  /** Näytä kaikki -linkki */
+  /** Show all -link */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Moduulin otsikko */
+  /** Module title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -3086,8 +3478,6 @@ export type ExternalLink = {
   link?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
-
-export type FooterBlocksUnion = LayoutEditor | LayoutImage | LayoutMenu;
 
 /** Galleriakuva */
 export type GalleryImage = {
@@ -3275,11 +3665,6 @@ export enum GeoJsonType {
   Polygon = 'Polygon',
 }
 
-export type GlobalSidebarBlocksUnion =
-  | LayoutArticleHighlights
-  | LayoutArticles
-  | LayoutEditor;
-
 /** Hero kenttä */
 export type Hero = {
   __typename?: 'Hero';
@@ -3327,8 +3712,14 @@ export type HierarchicalContentNode = {
   guid?: Maybe<Scalars['String']['output']>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is a node in the preview state */
   isPreview?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the object is restricted from the current viewer */
@@ -3407,7 +3798,7 @@ export type HierarchicalContentNodeToContentNodeAncestorsConnection =
       /** The nodes of the connection, without the edges */
       nodes: Array<ContentNode>;
       /** Information about pagination in a connection. */
-      pageInfo?: Maybe<WpPageInfo>;
+      pageInfo: HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo;
     };
 
 /** An edge in a connection */
@@ -3419,6 +3810,22 @@ export type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge =
       cursor?: Maybe<Scalars['String']['output']>;
       /** The item at the end of the edge */
       node: ContentNode;
+    };
+
+/** Page Info on the &quot;HierarchicalContentNodeToContentNodeAncestorsConnection&quot; */
+export type HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'HierarchicalContentNodeToContentNodeAncestorsConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
     };
 
 /** Arguments for filtering the HierarchicalContentNodeToContentNodeAncestorsConnection connection */
@@ -3441,7 +3848,7 @@ export type HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -3471,7 +3878,7 @@ export type HierarchicalContentNodeToContentNodeChildrenConnection =
       /** The nodes of the connection, without the edges */
       nodes: Array<ContentNode>;
       /** Information about pagination in a connection. */
-      pageInfo?: Maybe<WpPageInfo>;
+      pageInfo: HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo;
     };
 
 /** An edge in a connection */
@@ -3483,6 +3890,22 @@ export type HierarchicalContentNodeToContentNodeChildrenConnectionEdge =
       cursor?: Maybe<Scalars['String']['output']>;
       /** The item at the end of the edge */
       node: ContentNode;
+    };
+
+/** Page Info on the &quot;HierarchicalContentNodeToContentNodeChildrenConnection&quot; */
+export type HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'HierarchicalContentNodeToContentNodeChildrenConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
     };
 
 /** Arguments for filtering the HierarchicalContentNodeToContentNodeChildrenConnection connection */
@@ -3505,7 +3928,7 @@ export type HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -3563,8 +3986,14 @@ export type HierarchicalTermNode = {
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
   /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -3709,7 +4138,7 @@ export type LandingPage = ContentNode &
   Previewable &
   UniformResourceIdentifiable & {
     __typename?: 'LandingPage';
-    /** Taustaväri */
+    /** Background Color */
     backgroundColor?: Maybe<Scalars['String']['output']>;
     /** Box Color */
     boxColor?: Maybe<Scalars['String']['output']>;
@@ -3723,7 +4152,7 @@ export type LandingPage = ContentNode &
     date?: Maybe<Scalars['String']['output']>;
     /** The publishing date set in GMT. */
     dateGmt?: Maybe<Scalars['String']['output']>;
-    /** Kuvaus */
+    /** Description */
     description?: Maybe<Scalars['String']['output']>;
     /** The desired slug of the post */
     desiredSlug?: Maybe<Scalars['String']['output']>;
@@ -3745,8 +4174,14 @@ export type LandingPage = ContentNode &
     heroLink?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
     /** The globally unique identifier of the landing-page-cpt object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the object is restricted from the current viewer */
@@ -3772,7 +4207,7 @@ export type LandingPage = ContentNode &
     modified?: Maybe<Scalars['String']['output']>;
     /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
     modifiedGmt?: Maybe<Scalars['String']['output']>;
-    /** Moduulilistaus */
+    /** List of modules */
     modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
     /** Connection between the LandingPage type and the landingPage type */
     preview?: Maybe<LandingPageToPreviewConnectionEdge>;
@@ -3870,6 +4305,8 @@ export type LandingPageConnection = {
   edges: Array<LandingPageConnectionEdge>;
   /** A list of connected landingPage Nodes */
   nodes: Array<LandingPage>;
+  /** Information about pagination in a connection. */
+  pageInfo: LandingPageConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected landingPage */
@@ -3878,6 +4315,18 @@ export type LandingPageConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected landingPage Node */
   node: LandingPage;
+};
+
+/** Page Info on the connected LandingPageConnectionEdge */
+export type LandingPageConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -3901,7 +4350,7 @@ export type LandingPageToFloatImageConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<MediaItem>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: LandingPageToFloatImageConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -3913,6 +4362,22 @@ export type LandingPageToFloatImageConnectionEdge = Edge &
     /** The item at the end of the edge */
     node: MediaItem;
   };
+
+/** Page Info on the &quot;LandingPageToFloatImageConnection&quot; */
+export type LandingPageToFloatImageConnectionPageInfo =
+  MediaItemConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'LandingPageToFloatImageConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the LandingPageToFloatImageConnection connection */
 export type LandingPageToFloatImageConnectionWhereArgs = {
@@ -3934,7 +4399,7 @@ export type LandingPageToFloatImageConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -3963,7 +4428,7 @@ export type LandingPageToMediaItemConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<MediaItem>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: LandingPageToMediaItemConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -3975,6 +4440,22 @@ export type LandingPageToMediaItemConnectionEdge = Edge &
     /** The item at the end of the edge */
     node: MediaItem;
   };
+
+/** Page Info on the &quot;LandingPageToMediaItemConnection&quot; */
+export type LandingPageToMediaItemConnectionPageInfo =
+  MediaItemConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'LandingPageToMediaItemConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the LandingPageToMediaItemConnection connection */
 export type LandingPageToMediaItemConnectionWhereArgs = {
@@ -3996,7 +4477,7 @@ export type LandingPageToMediaItemConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -4025,7 +4506,7 @@ export type LandingPageToMobileImageConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<MediaItem>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: LandingPageToMobileImageConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -4037,6 +4518,22 @@ export type LandingPageToMobileImageConnectionEdge = Edge &
     /** The item at the end of the edge */
     node: MediaItem;
   };
+
+/** Page Info on the &quot;LandingPageToMobileImageConnection&quot; */
+export type LandingPageToMobileImageConnectionPageInfo =
+  MediaItemConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'LandingPageToMobileImageConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the LandingPageToMobileImageConnection connection */
 export type LandingPageToMobileImageConnectionWhereArgs = {
@@ -4058,7 +4555,7 @@ export type LandingPageToMobileImageConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -4098,7 +4595,7 @@ export type LandingPageToRevisionConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<LandingPage>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: LandingPageToRevisionConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -4110,6 +4607,22 @@ export type LandingPageToRevisionConnectionEdge = Edge &
     /** The item at the end of the edge */
     node: LandingPage;
   };
+
+/** Page Info on the &quot;LandingPageToRevisionConnection&quot; */
+export type LandingPageToRevisionConnectionPageInfo =
+  LandingPageConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'LandingPageToRevisionConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the LandingPageToRevisionConnection connection */
 export type LandingPageToRevisionConnectionWhereArgs = {
@@ -4129,7 +4642,7 @@ export type LandingPageToRevisionConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -4193,65 +4706,65 @@ export type LanguageString = {
 /** Layout: LayoutArticleHighlights */
 export type LayoutArticleHighlights = {
   __typename?: 'LayoutArticleHighlights';
-  /** Ankkuri */
+  /** Anchor */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Artikkelit */
+  /** Articles */
   articles?: Maybe<Array<Maybe<Post>>>;
-  /** Taustaväri */
+  /** Background Color */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Kategoria */
+  /** Category */
   category?: Maybe<Scalars['Int']['output']>;
-  /** Valitse montako artikkelia näytetään */
+  /** Amount of articles to list */
   limit?: Maybe<Scalars['Int']['output']>;
-  /** Näytä lisää linkki */
+  /** Show more link */
   showMore?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Tagi */
+  /** Tag */
   tag?: Maybe<Scalars['Int']['output']>;
-  /** Sivuston otsikko */
+  /** Title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutArticles */
 export type LayoutArticles = {
   __typename?: 'LayoutArticles';
-  /** Ankkuri */
+  /** Anchor */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Artikkelit */
+  /** Articles */
   articles?: Maybe<Array<Maybe<Post>>>;
-  /** Taustaväri */
+  /** Background Color */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Kategoria */
+  /** Category */
   category?: Maybe<Scalars['Int']['output']>;
-  /** Tagi */
+  /** Tag */
   limit?: Maybe<Scalars['Int']['output']>;
-  /** Näytä lisää linkki */
+  /** Show all -link */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Tagi */
+  /** Tag */
   tag?: Maybe<Scalars['Int']['output']>;
-  /** Sivuston otsikko */
+  /** Title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutArticlesCarousel */
 export type LayoutArticlesCarousel = {
   __typename?: 'LayoutArticlesCarousel';
-  /** Ankkuri */
+  /** Anchor */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Artikkelit */
+  /** Articles */
   articles?: Maybe<Array<Maybe<Post>>>;
-  /** Taustaväri */
+  /** Background Color */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Kategoria */
+  /** Category */
   category?: Maybe<Scalars['Int']['output']>;
-  /** Valitse montako artikkelia näytetään */
+  /** Amount of articles to list */
   limit?: Maybe<Scalars['Int']['output']>;
-  /** Näytä lisää linkki */
+  /** Show all -link */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Näytä lisää linkki */
+  /** Show more link */
   showMore?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  /** Tagi */
+  /** Tag */
   tag?: Maybe<Scalars['Int']['output']>;
-  /** Sivuston otsikko */
+  /** Title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -4308,13 +4821,6 @@ export type LayoutContent = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
-/** Layout: LayoutEditor */
-export type LayoutEditor = {
-  __typename?: 'LayoutEditor';
-  /** Editor */
-  editor?: Maybe<Scalars['String']['output']>;
-};
-
 /** Layout: LayoutImage */
 export type LayoutImage = {
   __typename?: 'LayoutImage';
@@ -4350,53 +4856,46 @@ export type LayoutLinkList = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
-/** Layout: LayoutMenu */
-export type LayoutMenu = {
-  __typename?: 'LayoutMenu';
-  /** Menu */
-  menu?: Maybe<Scalars['String']['output']>;
-};
-
 /** Layout: LayoutPages */
 export type LayoutPages = {
   __typename?: 'LayoutPages';
-  /** Ankkuri */
+  /** Anchor */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Taustaväri */
+  /** Background Color */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Kuvaus */
+  /** Description */
   description?: Maybe<Scalars['String']['output']>;
-  /** Sivut */
+  /** Pages */
   pages?: Maybe<Array<Maybe<Page>>>;
-  /** Näytä lisää linkki */
+  /** Show all -link */
   showAllLink?: Maybe<Scalars['String']['output']>;
-  /** Sivuston otsikko */
+  /** Title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutPagesCarousel */
 export type LayoutPagesCarousel = {
   __typename?: 'LayoutPagesCarousel';
-  /** Ankkuri */
+  /** Anchor */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Taustaväri */
+  /** Background Color */
   backgroundColor?: Maybe<Scalars['String']['output']>;
-  /** Kuvaus */
+  /** Description */
   description?: Maybe<Scalars['String']['output']>;
-  /** Sivut */
+  /** Pages */
   pages?: Maybe<Array<Maybe<Page>>>;
-  /** Sivuston otsikko */
+  /** Title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
 /** Layout: LayoutSocialMediaFeed */
 export type LayoutSocialMediaFeed = {
   __typename?: 'LayoutSocialMediaFeed';
-  /** Ankkuri */
+  /** Anchor */
   anchor?: Maybe<Scalars['String']['output']>;
-  /** Scripti */
+  /** Script */
   script?: Maybe<Scalars['String']['output']>;
-  /** Sivuston otsikko */
+  /** Title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -4522,27 +5021,27 @@ export type LocationImage = {
   url?: Maybe<Scalars['String']['output']>;
 };
 
-/** Kokoelmamoduuli: LocationsSelected */
+/** Collection Module: LocationsSelected */
 export type LocationsSelected = {
   __typename?: 'LocationsSelected';
   /** List of location IDs */
   locations?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
   /** Module type */
   module?: Maybe<Scalars['String']['output']>;
-  /** Moduulilistaus */
+  /** List of modules */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
   /** Module title */
   title?: Maybe<Scalars['String']['output']>;
 };
 
-/** Kokoelmamoduuli: LocationsSelectedCarousel */
+/** Collection Module: LocationsSelectedCarousel */
 export type LocationsSelectedCarousel = {
   __typename?: 'LocationsSelectedCarousel';
   /** List of location IDs */
   locations?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
   /** Module type */
   module?: Maybe<Scalars['String']['output']>;
-  /** Moduulilistaus */
+  /** List of modules */
   modules?: Maybe<Array<Maybe<CollectionModulesUnionType>>>;
   /** Module title */
   title?: Maybe<Scalars['String']['output']>;
@@ -4622,8 +5121,14 @@ export type MediaItem = ContentNode &
     guid?: Maybe<Scalars['String']['output']>;
     /** The globally unique identifier of the attachment object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the object is restricted from the current viewer */
@@ -4769,6 +5274,8 @@ export type MediaItemConnection = {
   edges: Array<MediaItemConnectionEdge>;
   /** A list of connected mediaItem Nodes */
   nodes: Array<MediaItem>;
+  /** Information about pagination in a connection. */
+  pageInfo: MediaItemConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected mediaItem */
@@ -4777,6 +5284,18 @@ export type MediaItemConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected mediaItem Node */
   node: MediaItem;
+};
+
+/** Page Info on the connected MediaItemConnectionEdge */
+export type MediaItemConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -4918,6 +5437,8 @@ export type MenuConnection = {
   edges: Array<MenuConnectionEdge>;
   /** A list of connected Menu Nodes */
   nodes: Array<Menu>;
+  /** Information about pagination in a connection. */
+  pageInfo: MenuConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected Menu */
@@ -4926,6 +5447,18 @@ export type MenuConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected Menu Node */
   node: Menu;
+};
+
+/** Page Info on the connected MenuConnectionEdge */
+export type MenuConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** Navigation menu items are the individual items assigned to a menu. These are rendered as the links in a navigation menu. */
@@ -4997,6 +5530,8 @@ export type MenuItemConnection = {
   edges: Array<MenuItemConnectionEdge>;
   /** A list of connected MenuItem Nodes */
   nodes: Array<MenuItem>;
+  /** Information about pagination in a connection. */
+  pageInfo: MenuItemConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected MenuItem */
@@ -5007,14 +5542,32 @@ export type MenuItemConnectionEdge = {
   node: MenuItem;
 };
 
+/** Page Info on the connected MenuItemConnectionEdge */
+export type MenuItemConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
+
 /** Nodes that can be linked to as Menu Items */
 export type MenuItemLinkable = {
   /** The unique identifier stored in the database */
   databaseId: Scalars['Int']['output'];
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the node is a Term */
   isTermNode: Scalars['Boolean']['output'];
   /** The unique resource identifier path */
@@ -5060,7 +5613,7 @@ export type MenuItemToMenuItemConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<MenuItem>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: MenuItemToMenuItemConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -5071,6 +5624,21 @@ export type MenuItemToMenuItemConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: MenuItem;
+  };
+
+/** Page Info on the &quot;MenuItemToMenuItemConnection&quot; */
+export type MenuItemToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'MenuItemToMenuItemConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the MenuItemToMenuItemConnection connection */
@@ -5141,7 +5709,7 @@ export type MenuToMenuItemConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<MenuItem>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: MenuToMenuItemConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -5152,6 +5720,21 @@ export type MenuToMenuItemConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: MenuItem;
+  };
+
+/** Page Info on the &quot;MenuToMenuItemConnection&quot; */
+export type MenuToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'MenuToMenuItemConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the MenuToMenuItemConnection connection */
@@ -5175,69 +5758,71 @@ export type Meta = {
 
 /** The MimeType of the object */
 export enum MimeTypeEnum {
-  /** MimeType application/msword */
+  /** application/msword mime type. */
   ApplicationMsword = 'APPLICATION_MSWORD',
-  /** MimeType application/pdf */
+  /** application/pdf mime type. */
   ApplicationPdf = 'APPLICATION_PDF',
-  /** MimeType application/vnd.apple.keynote */
+  /** application/vnd.apple.keynote mime type. */
   ApplicationVndAppleKeynote = 'APPLICATION_VND_APPLE_KEYNOTE',
-  /** MimeType application/vnd.ms-excel */
+  /** application/vnd.ms-excel mime type. */
   ApplicationVndMsExcel = 'APPLICATION_VND_MS_EXCEL',
-  /** MimeType application/vnd.ms-excel.sheet.binary.macroEnabled.12 */
+  /** application/vnd.ms-excel.sheet.binary.macroEnabled.12 mime type. */
   ApplicationVndMsExcelSheetBinaryMacroenabled_12 = 'APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACROENABLED_12',
-  /** MimeType application/vnd.ms-excel.sheet.macroEnabled.12 */
+  /** application/vnd.ms-excel.sheet.macroEnabled.12 mime type. */
   ApplicationVndMsExcelSheetMacroenabled_12 = 'APPLICATION_VND_MS_EXCEL_SHEET_MACROENABLED_12',
-  /** MimeType application/vnd.ms-powerpoint */
+  /** application/vnd.ms-powerpoint mime type. */
   ApplicationVndMsPowerpoint = 'APPLICATION_VND_MS_POWERPOINT',
-  /** MimeType application/vnd.ms-powerpoint.presentation.macroEnabled.12 */
+  /** application/vnd.ms-powerpoint.presentation.macroEnabled.12 mime type. */
   ApplicationVndMsPowerpointPresentationMacroenabled_12 = 'APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACROENABLED_12',
-  /** MimeType application/vnd.ms-powerpoint.slideshow.macroEnabled.12 */
+  /** application/vnd.ms-powerpoint.slideshow.macroEnabled.12 mime type. */
   ApplicationVndMsPowerpointSlideshowMacroenabled_12 = 'APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACROENABLED_12',
-  /** MimeType application/vnd.ms-word.document.macroEnabled.12 */
+  /** application/vnd.ms-word.document.macroEnabled.12 mime type. */
   ApplicationVndMsWordDocumentMacroenabled_12 = 'APPLICATION_VND_MS_WORD_DOCUMENT_MACROENABLED_12',
-  /** MimeType application/vnd.oasis.opendocument.text */
+  /** application/vnd.oasis.opendocument.text mime type. */
   ApplicationVndOasisOpendocumentText = 'APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT',
-  /** MimeType application/vnd.openxmlformats-officedocument.presentationml.presentation */
+  /** application/vnd.openxmlformats-officedocument.presentationml.presentation mime type. */
   ApplicationVndOpenxmlformatsOfficedocumentPresentationmlPresentation = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION',
-  /** MimeType application/vnd.openxmlformats-officedocument.presentationml.slideshow */
+  /** application/vnd.openxmlformats-officedocument.presentationml.slideshow mime type. */
   ApplicationVndOpenxmlformatsOfficedocumentPresentationmlSlideshow = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW',
-  /** MimeType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet */
+  /** application/vnd.openxmlformats-officedocument.spreadsheetml.sheet mime type. */
   ApplicationVndOpenxmlformatsOfficedocumentSpreadsheetmlSheet = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET',
-  /** MimeType application/vnd.openxmlformats-officedocument.wordprocessingml.document */
+  /** application/vnd.openxmlformats-officedocument.wordprocessingml.document mime type. */
   ApplicationVndOpenxmlformatsOfficedocumentWordprocessingmlDocument = 'APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT',
-  /** MimeType audio/flac */
+  /** audio/flac mime type. */
   AudioFlac = 'AUDIO_FLAC',
-  /** MimeType audio/midi */
+  /** audio/midi mime type. */
   AudioMidi = 'AUDIO_MIDI',
-  /** MimeType audio/mpeg */
+  /** audio/mpeg mime type. */
   AudioMpeg = 'AUDIO_MPEG',
-  /** MimeType audio/ogg */
+  /** audio/ogg mime type. */
   AudioOgg = 'AUDIO_OGG',
-  /** MimeType audio/wav */
+  /** audio/wav mime type. */
   AudioWav = 'AUDIO_WAV',
-  /** MimeType image/gif */
+  /** image/avif mime type. */
+  ImageAvif = 'IMAGE_AVIF',
+  /** image/gif mime type. */
   ImageGif = 'IMAGE_GIF',
-  /** MimeType image/jpeg */
+  /** image/jpeg mime type. */
   ImageJpeg = 'IMAGE_JPEG',
-  /** MimeType image/png */
+  /** image/png mime type. */
   ImagePng = 'IMAGE_PNG',
-  /** MimeType video/3gpp */
+  /** video/3gpp mime type. */
   Video_3Gpp = 'VIDEO_3GPP',
-  /** MimeType video/3gpp2 */
+  /** video/3gpp2 mime type. */
   Video_3Gpp2 = 'VIDEO_3GPP2',
-  /** MimeType video/avi */
+  /** video/avi mime type. */
   VideoAvi = 'VIDEO_AVI',
-  /** MimeType video/mp4 */
+  /** video/mp4 mime type. */
   VideoMp4 = 'VIDEO_MP4',
-  /** MimeType video/mpeg */
+  /** video/mpeg mime type. */
   VideoMpeg = 'VIDEO_MPEG',
-  /** MimeType video/ogg */
+  /** video/ogg mime type. */
   VideoOgg = 'VIDEO_OGG',
-  /** MimeType video/quicktime */
+  /** video/quicktime mime type. */
   VideoQuicktime = 'VIDEO_QUICKTIME',
-  /** MimeType video/webm */
+  /** video/webm mime type. */
   VideoWebm = 'VIDEO_WEBM',
-  /** MimeType video/x-flv */
+  /** video/x-flv mime type. */
   VideoXFlv = 'VIDEO_X_FLV',
 }
 
@@ -5905,6 +6490,8 @@ export type Page = ContentNode &
     hero?: Maybe<Hero>;
     /** The globally unique identifier of the page object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
     /** Whether this page is set to the static front page. */
@@ -6044,6 +6631,8 @@ export type PageConnection = {
   edges: Array<PageConnectionEdge>;
   /** A list of connected page Nodes */
   nodes: Array<Page>;
+  /** Information about pagination in a connection. */
+  pageInfo: PageConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected page */
@@ -6052,6 +6641,18 @@ export type PageConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected page Node */
   node: Page;
+};
+
+/** Page Info on the connected PageConnectionEdge */
+export type PageConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -6063,6 +6664,18 @@ export enum PageIdType {
   /** Identify a resource by the URI. */
   Uri = 'URI',
 }
+
+/** Information about pagination in a connection. */
+export type PageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
+};
 
 export type PageModulesUnionType =
   | EventSearch
@@ -6112,7 +6725,7 @@ export type PageToRevisionConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Page>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: PageToRevisionConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -6123,6 +6736,21 @@ export type PageToRevisionConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Page;
+  };
+
+/** Page Info on the &quot;PageToRevisionConnection&quot; */
+export type PageToRevisionConnectionPageInfo = PageConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'PageToRevisionConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the PageToRevisionConnection connection */
@@ -6151,7 +6779,7 @@ export type PageToRevisionConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -6313,6 +6941,8 @@ export type PluginConnection = {
   edges: Array<PluginConnectionEdge>;
   /** A list of connected Plugin Nodes */
   nodes: Array<Plugin>;
+  /** Information about pagination in a connection. */
+  pageInfo: PluginConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected Plugin */
@@ -6321,6 +6951,18 @@ export type PluginConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected Plugin Node */
   node: Plugin;
+};
+
+/** Page Info on the connected PluginConnectionEdge */
+export type PluginConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The status of the WordPress plugin. */
@@ -6411,8 +7053,14 @@ export type Post = ContentNode &
     hidePublishedDate?: Maybe<Scalars['Boolean']['output']>;
     /** The globally unique identifier of the post object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the object is restricted from the current viewer */
@@ -6580,6 +7228,8 @@ export type PostConnection = {
   edges: Array<PostConnectionEdge>;
   /** A list of connected post Nodes */
   nodes: Array<Post>;
+  /** Information about pagination in a connection. */
+  pageInfo: PostConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected post */
@@ -6588,6 +7238,18 @@ export type PostConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected post Node */
   node: Post;
+};
+
+/** Page Info on the connected PostConnectionEdge */
+export type PostConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The postFormat type */
@@ -6608,10 +7270,16 @@ export type PostFormat = DatabaseIdentifier &
     enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the node is a Term */
@@ -6681,6 +7349,8 @@ export type PostFormatConnection = {
   edges: Array<PostFormatConnectionEdge>;
   /** A list of connected postFormat Nodes */
   nodes: Array<PostFormat>;
+  /** Information about pagination in a connection. */
+  pageInfo: PostFormatConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected postFormat */
@@ -6689,6 +7359,18 @@ export type PostFormatConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected postFormat Node */
   node: PostFormat;
+};
+
+/** Page Info on the connected PostFormatConnectionEdge */
+export type PostFormatConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -6714,7 +7396,7 @@ export type PostFormatToContentNodeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: PostFormatToContentNodeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -6726,6 +7408,22 @@ export type PostFormatToContentNodeConnectionEdge = ContentNodeConnectionEdge &
     /** The item at the end of the edge */
     node: ContentNode;
   };
+
+/** Page Info on the &quot;PostFormatToContentNodeConnection&quot; */
+export type PostFormatToContentNodeConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'PostFormatToContentNodeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the PostFormatToContentNodeConnection connection */
 export type PostFormatToContentNodeConnectionWhereArgs = {
@@ -6747,7 +7445,7 @@ export type PostFormatToContentNodeConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -6776,7 +7474,7 @@ export type PostFormatToPostConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Post>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: PostFormatToPostConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -6787,6 +7485,21 @@ export type PostFormatToPostConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Post;
+  };
+
+/** Page Info on the &quot;PostFormatToPostConnection&quot; */
+export type PostFormatToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostFormatToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the PostFormatToPostConnection connection */
@@ -6823,7 +7536,7 @@ export type PostFormatToPostConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -7039,7 +7752,7 @@ export type PostToCategoryConnection = CategoryConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Category>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: PostToCategoryConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -7050,6 +7763,21 @@ export type PostToCategoryConnectionEdge = CategoryConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Category;
+  };
+
+/** Page Info on the &quot;PostToCategoryConnection&quot; */
+export type PostToCategoryConnectionPageInfo = CategoryConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToCategoryConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the PostToCategoryConnection connection */
@@ -7107,7 +7835,7 @@ export type PostToPostFormatConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<PostFormat>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: PostToPostFormatConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -7118,6 +7846,21 @@ export type PostToPostFormatConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: PostFormat;
+  };
+
+/** Page Info on the &quot;PostToPostFormatConnection&quot; */
+export type PostToPostFormatConnectionPageInfo = PageInfo &
+  PostFormatConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToPostFormatConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the PostToPostFormatConnection connection */
@@ -7186,7 +7929,7 @@ export type PostToRevisionConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Post>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: PostToRevisionConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -7197,6 +7940,21 @@ export type PostToRevisionConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Post;
+  };
+
+/** Page Info on the &quot;PostToRevisionConnection&quot; */
+export type PostToRevisionConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToRevisionConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the PostToRevisionConnection connection */
@@ -7233,7 +7991,7 @@ export type PostToRevisionConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -7274,7 +8032,7 @@ export type PostToTagConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Tag>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: PostToTagConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -7285,6 +8043,21 @@ export type PostToTagConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Tag;
+  };
+
+/** Page Info on the &quot;PostToTagConnection&quot; */
+export type PostToTagConnectionPageInfo = PageInfo &
+  TagConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToTagConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the PostToTagConnection connection */
@@ -7342,7 +8115,7 @@ export type PostToTermNodeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<TermNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: PostToTermNodeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -7353,6 +8126,21 @@ export type PostToTermNodeConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: TermNode;
+  };
+
+/** Page Info on the &quot;PostToTermNodeConnection&quot; */
+export type PostToTermNodeConnectionPageInfo = PageInfo &
+  TermNodeConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'PostToTermNodeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the PostToTermNodeConnection connection */
@@ -7493,7 +8281,7 @@ export type Query = {
   categories?: Maybe<RootQueryToCategoryConnection>;
   /** A 0bject */
   category?: Maybe<Category>;
-  /** An object of the collection Type. Kokoelmat */
+  /** An object of the collection Type. Collections */
   collection?: Maybe<Collection>;
   /**
    * A collection object
@@ -7506,7 +8294,7 @@ export type Query = {
   comment?: Maybe<Comment>;
   /** Connection between the RootQuery type and the Comment type */
   comments?: Maybe<RootQueryToCommentConnection>;
-  /** An object of the contact Type. Yhteystiedot */
+  /** An object of the contact Type. Contacts */
   contact?: Maybe<Contact>;
   /**
    * A contact object
@@ -7532,15 +8320,11 @@ export type Query = {
   eventDetails: EventDetails;
   eventList: EventListResponse;
   eventsByIds: EventListResponse;
-  /** Footer blocks */
-  footerBlocks?: Maybe<Array<Maybe<FooterBlocksUnion>>>;
   /** Fields of the &#039;GeneralSettings&#039; settings group */
   generalSettings?: Maybe<GeneralSettings>;
-  /** Global Sidebar blocks */
-  globalSidebarBlocks?: Maybe<Array<Maybe<GlobalSidebarBlocksUnion>>>;
   keywordDetails: Keyword;
   keywordList: KeywordListResponse;
-  /** An object of the landingPage Type. Laskeutumissivut */
+  /** An object of the landingPage Type. Landing Pages */
   landingPage?: Maybe<LandingPage>;
   /**
    * A landingPage object
@@ -7613,7 +8397,7 @@ export type Query = {
   registeredScripts?: Maybe<RootQueryToEnqueuedScriptConnection>;
   /** Connection between the RootQuery type and the EnqueuedStylesheet type */
   registeredStylesheets?: Maybe<RootQueryToEnqueuedStylesheetConnection>;
-  /** An object of the release Type. Tiedotteet */
+  /** An object of the release Type. Releases */
   release?: Maybe<Release>;
   /**
    * A release object
@@ -7646,7 +8430,7 @@ export type Query = {
   themes?: Maybe<RootQueryToThemeConnection>;
   /** Translate string using pll_translate_string() (Polylang) */
   translateString?: Maybe<Scalars['String']['output']>;
-  /** An object of the translation Type. Käännökset */
+  /** An object of the translation Type. Translations */
   translation?: Maybe<Translation>;
   /**
    * A translation object
@@ -7866,16 +8650,6 @@ export type QueryEventsByIdsArgs = {
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   start?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** The root entry point into the Graph */
-export type QueryFooterBlocksArgs = {
-  language: Scalars['String']['input'];
-};
-
-/** The root entry point into the Graph */
-export type QueryGlobalSidebarBlocksArgs = {
-  language: Scalars['String']['input'];
 };
 
 /** The root entry point into the Graph */
@@ -8425,8 +9199,14 @@ export type Release = ContentNode &
     guid?: Maybe<Scalars['String']['output']>;
     /** The globally unique identifier of the release-cpt object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the object is restricted from the current viewer */
@@ -8524,6 +9304,8 @@ export type ReleaseConnection = {
   edges: Array<ReleaseConnectionEdge>;
   /** A list of connected release Nodes */
   nodes: Array<Release>;
+  /** Information about pagination in a connection. */
+  pageInfo: ReleaseConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected release */
@@ -8532,6 +9314,18 @@ export type ReleaseConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected release Node */
   node: Release;
+};
+
+/** Page Info on the connected ReleaseConnectionEdge */
+export type ReleaseConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -8566,7 +9360,7 @@ export type ReleaseToRevisionConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Release>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: ReleaseToRevisionConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -8577,6 +9371,21 @@ export type ReleaseToRevisionConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Release;
+  };
+
+/** Page Info on the &quot;ReleaseToRevisionConnection&quot; */
+export type ReleaseToRevisionConnectionPageInfo = PageInfo &
+  ReleaseConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'ReleaseToRevisionConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the ReleaseToRevisionConnection connection */
@@ -8597,7 +9406,7 @@ export type ReleaseToRevisionConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -8686,7 +9495,7 @@ export type RootQueryToCategoryConnection = CategoryConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Category>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToCategoryConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -8697,6 +9506,21 @@ export type RootQueryToCategoryConnectionEdge = CategoryConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Category;
+  };
+
+/** Page Info on the &quot;RootQueryToCategoryConnection&quot; */
+export type RootQueryToCategoryConnectionPageInfo = CategoryConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToCategoryConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToCategoryConnection connection */
@@ -8758,7 +9582,7 @@ export type RootQueryToCollectionConnection = CollectionConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Collection>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToCollectionConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -8770,6 +9594,22 @@ export type RootQueryToCollectionConnectionEdge = CollectionConnectionEdge &
     /** The item at the end of the edge */
     node: Collection;
   };
+
+/** Page Info on the &quot;RootQueryToCollectionConnection&quot; */
+export type RootQueryToCollectionConnectionPageInfo =
+  CollectionConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToCollectionConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the RootQueryToCollectionConnection connection */
 export type RootQueryToCollectionConnectionWhereArgs = {
@@ -8793,7 +9633,7 @@ export type RootQueryToCollectionConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -8822,7 +9662,7 @@ export type RootQueryToCommentConnection = CommentConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Comment>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToCommentConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -8833,6 +9673,21 @@ export type RootQueryToCommentConnectionEdge = CommentConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Comment;
+  };
+
+/** Page Info on the &quot;RootQueryToCommentConnection&quot; */
+export type RootQueryToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToCommentConnection connection */
@@ -8906,7 +9761,7 @@ export type RootQueryToContactConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Contact>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToContactConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -8917,6 +9772,21 @@ export type RootQueryToContactConnectionEdge = ContactConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Contact;
+  };
+
+/** Page Info on the &quot;RootQueryToContactConnection&quot; */
+export type RootQueryToContactConnectionPageInfo = ContactConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToContactConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToContactConnection connection */
@@ -8941,7 +9811,7 @@ export type RootQueryToContactConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -8970,7 +9840,7 @@ export type RootQueryToContentNodeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToContentNodeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -8982,6 +9852,22 @@ export type RootQueryToContentNodeConnectionEdge = ContentNodeConnectionEdge &
     /** The item at the end of the edge */
     node: ContentNode;
   };
+
+/** Page Info on the &quot;RootQueryToContentNodeConnection&quot; */
+export type RootQueryToContentNodeConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToContentNodeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the RootQueryToContentNodeConnection connection */
 export type RootQueryToContentNodeConnectionWhereArgs = {
@@ -9007,7 +9893,7 @@ export type RootQueryToContentNodeConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -9036,7 +9922,7 @@ export type RootQueryToContentTypeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentType>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToContentTypeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9049,6 +9935,22 @@ export type RootQueryToContentTypeConnectionEdge = ContentTypeConnectionEdge &
     node: ContentType;
   };
 
+/** Page Info on the &quot;RootQueryToContentTypeConnection&quot; */
+export type RootQueryToContentTypeConnectionPageInfo =
+  ContentTypeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToContentTypeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
 /** Connection between the RootQuery type and the EnqueuedScript type */
 export type RootQueryToEnqueuedScriptConnection = Connection &
   EnqueuedScriptConnection & {
@@ -9058,7 +9960,7 @@ export type RootQueryToEnqueuedScriptConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<EnqueuedScript>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToEnqueuedScriptConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9071,6 +9973,22 @@ export type RootQueryToEnqueuedScriptConnectionEdge = Edge &
     node: EnqueuedScript;
   };
 
+/** Page Info on the &quot;RootQueryToEnqueuedScriptConnection&quot; */
+export type RootQueryToEnqueuedScriptConnectionPageInfo =
+  EnqueuedScriptConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToEnqueuedScriptConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
 /** Connection between the RootQuery type and the EnqueuedStylesheet type */
 export type RootQueryToEnqueuedStylesheetConnection = Connection &
   EnqueuedStylesheetConnection & {
@@ -9080,7 +9998,7 @@ export type RootQueryToEnqueuedStylesheetConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<EnqueuedStylesheet>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToEnqueuedStylesheetConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9093,6 +10011,22 @@ export type RootQueryToEnqueuedStylesheetConnectionEdge = Edge &
     node: EnqueuedStylesheet;
   };
 
+/** Page Info on the &quot;RootQueryToEnqueuedStylesheetConnection&quot; */
+export type RootQueryToEnqueuedStylesheetConnectionPageInfo =
+  EnqueuedStylesheetConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToEnqueuedStylesheetConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
 /** Connection between the RootQuery type and the landingPage type */
 export type RootQueryToLandingPageConnection = Connection &
   LandingPageConnection & {
@@ -9102,7 +10036,7 @@ export type RootQueryToLandingPageConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<LandingPage>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToLandingPageConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9114,6 +10048,22 @@ export type RootQueryToLandingPageConnectionEdge = Edge &
     /** The item at the end of the edge */
     node: LandingPage;
   };
+
+/** Page Info on the &quot;RootQueryToLandingPageConnection&quot; */
+export type RootQueryToLandingPageConnectionPageInfo =
+  LandingPageConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToLandingPageConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the RootQueryToLandingPageConnection connection */
 export type RootQueryToLandingPageConnectionWhereArgs = {
@@ -9137,7 +10087,7 @@ export type RootQueryToLandingPageConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -9166,7 +10116,7 @@ export type RootQueryToMediaItemConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<MediaItem>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToMediaItemConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9178,6 +10128,22 @@ export type RootQueryToMediaItemConnectionEdge = Edge &
     /** The item at the end of the edge */
     node: MediaItem;
   };
+
+/** Page Info on the &quot;RootQueryToMediaItemConnection&quot; */
+export type RootQueryToMediaItemConnectionPageInfo =
+  MediaItemConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToMediaItemConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the RootQueryToMediaItemConnection connection */
 export type RootQueryToMediaItemConnectionWhereArgs = {
@@ -9209,7 +10175,7 @@ export type RootQueryToMediaItemConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -9238,7 +10204,7 @@ export type RootQueryToMenuConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Menu>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToMenuConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9249,6 +10215,21 @@ export type RootQueryToMenuConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Menu;
+  };
+
+/** Page Info on the &quot;RootQueryToMenuConnection&quot; */
+export type RootQueryToMenuConnectionPageInfo = MenuConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToMenuConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToMenuConnection connection */
@@ -9270,7 +10251,7 @@ export type RootQueryToMenuItemConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<MenuItem>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToMenuItemConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9281,6 +10262,21 @@ export type RootQueryToMenuItemConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: MenuItem;
+  };
+
+/** Page Info on the &quot;RootQueryToMenuItemConnection&quot; */
+export type RootQueryToMenuItemConnectionPageInfo = MenuItemConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToMenuItemConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToMenuItemConnection connection */
@@ -9305,7 +10301,7 @@ export type RootQueryToPageConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Page>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToPageConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9316,6 +10312,21 @@ export type RootQueryToPageConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Page;
+  };
+
+/** Page Info on the &quot;RootQueryToPageConnection&quot; */
+export type RootQueryToPageConnectionPageInfo = PageConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToPageConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToPageConnection connection */
@@ -9348,7 +10359,7 @@ export type RootQueryToPageConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -9377,7 +10388,7 @@ export type RootQueryToPluginConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Plugin>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToPluginConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9388,6 +10399,21 @@ export type RootQueryToPluginConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Plugin;
+  };
+
+/** Page Info on the &quot;RootQueryToPluginConnection&quot; */
+export type RootQueryToPluginConnectionPageInfo = PageInfo &
+  PluginConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToPluginConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToPluginConnection connection */
@@ -9409,7 +10435,7 @@ export type RootQueryToPostConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Post>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToPostConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9420,6 +10446,21 @@ export type RootQueryToPostConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Post;
+  };
+
+/** Page Info on the &quot;RootQueryToPostConnection&quot; */
+export type RootQueryToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToPostConnection connection */
@@ -9460,7 +10501,7 @@ export type RootQueryToPostConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -9501,7 +10542,7 @@ export type RootQueryToPostFormatConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<PostFormat>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToPostFormatConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9512,6 +10553,21 @@ export type RootQueryToPostFormatConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: PostFormat;
+  };
+
+/** Page Info on the &quot;RootQueryToPostFormatConnection&quot; */
+export type RootQueryToPostFormatConnectionPageInfo = PageInfo &
+  PostFormatConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToPostFormatConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToPostFormatConnection connection */
@@ -9569,7 +10625,7 @@ export type RootQueryToReleaseConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Release>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToReleaseConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9580,6 +10636,21 @@ export type RootQueryToReleaseConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Release;
+  };
+
+/** Page Info on the &quot;RootQueryToReleaseConnection&quot; */
+export type RootQueryToReleaseConnectionPageInfo = PageInfo &
+  ReleaseConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToReleaseConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToReleaseConnection connection */
@@ -9604,7 +10675,7 @@ export type RootQueryToReleaseConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -9633,7 +10704,7 @@ export type RootQueryToRevisionsConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToRevisionsConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9645,6 +10716,22 @@ export type RootQueryToRevisionsConnectionEdge = ContentNodeConnectionEdge &
     /** The item at the end of the edge */
     node: ContentNode;
   };
+
+/** Page Info on the &quot;RootQueryToRevisionsConnection&quot; */
+export type RootQueryToRevisionsConnectionPageInfo =
+  ContentNodeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'RootQueryToRevisionsConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Arguments for filtering the RootQueryToRevisionsConnection connection */
 export type RootQueryToRevisionsConnectionWhereArgs = {
@@ -9666,7 +10753,7 @@ export type RootQueryToRevisionsConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -9695,7 +10782,7 @@ export type RootQueryToTagConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Tag>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToTagConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9706,6 +10793,21 @@ export type RootQueryToTagConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Tag;
+  };
+
+/** Page Info on the &quot;RootQueryToTagConnection&quot; */
+export type RootQueryToTagConnectionPageInfo = PageInfo &
+  TagConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToTagConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToTagConnection connection */
@@ -9767,7 +10869,7 @@ export type RootQueryToTaxonomyConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Taxonomy>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToTaxonomyConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9780,6 +10882,21 @@ export type RootQueryToTaxonomyConnectionEdge = Edge &
     node: Taxonomy;
   };
 
+/** Page Info on the &quot;RootQueryToTaxonomyConnection&quot; */
+export type RootQueryToTaxonomyConnectionPageInfo = PageInfo &
+  TaxonomyConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToTaxonomyConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
+
 /** Connection between the RootQuery type and the TermNode type */
 export type RootQueryToTermNodeConnection = Connection &
   TermNodeConnection & {
@@ -9789,7 +10906,7 @@ export type RootQueryToTermNodeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<TermNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToTermNodeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9800,6 +10917,21 @@ export type RootQueryToTermNodeConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: TermNode;
+  };
+
+/** Page Info on the &quot;RootQueryToTermNodeConnection&quot; */
+export type RootQueryToTermNodeConnectionPageInfo = PageInfo &
+  TermNodeConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToTermNodeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToTermNodeConnection connection */
@@ -9859,7 +10991,7 @@ export type RootQueryToThemeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Theme>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToThemeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9872,6 +11004,21 @@ export type RootQueryToThemeConnectionEdge = Edge &
     node: Theme;
   };
 
+/** Page Info on the &quot;RootQueryToThemeConnection&quot; */
+export type RootQueryToThemeConnectionPageInfo = PageInfo &
+  ThemeConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToThemeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
+  };
+
 /** Connection between the RootQuery type and the translation type */
 export type RootQueryToTranslationConnection = Connection &
   TranslationConnection & {
@@ -9881,7 +11028,7 @@ export type RootQueryToTranslationConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Translation>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToTranslationConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9892,6 +11039,21 @@ export type RootQueryToTranslationConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Translation;
+  };
+
+/** Page Info on the &quot;RootQueryToTranslationConnection&quot; */
+export type RootQueryToTranslationConnectionPageInfo = PageInfo &
+  TranslationConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToTranslationConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToTranslationConnection connection */
@@ -9912,7 +11074,7 @@ export type RootQueryToTranslationConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -9941,7 +11103,7 @@ export type RootQueryToUserConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<User>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToUserConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -9952,6 +11114,21 @@ export type RootQueryToUserConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: User;
+  };
+
+/** Page Info on the &quot;RootQueryToUserConnection&quot; */
+export type RootQueryToUserConnectionPageInfo = PageInfo &
+  UserConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToUserConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the RootQueryToUserConnection connection */
@@ -9974,7 +11151,7 @@ export type RootQueryToUserConnectionWhereArgs = {
   nicenameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** An array of nicenames to exclude. Users matching one of these nicenames will not be included in results. */
   nicenameNotIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<UsersConnectionOrderbyInput>>>;
   /** An array of role names that users must match to be included in results. Note that this is an inclusive list: users must match *each* role. */
   role?: InputMaybe<UserRoleEnum>;
@@ -9999,7 +11176,7 @@ export type RootQueryToUserRoleConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<UserRole>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: RootQueryToUserRoleConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -10010,6 +11187,21 @@ export type RootQueryToUserRoleConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: UserRole;
+  };
+
+/** Page Info on the &quot;RootQueryToUserRoleConnection&quot; */
+export type RootQueryToUserRoleConnectionPageInfo = PageInfo &
+  UserRoleConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'RootQueryToUserRoleConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 export type Seo = {
@@ -10046,6 +11238,14 @@ export type Seo = {
   /** Twitter title */
   twitterTitle?: Maybe<Scalars['String']['output']>;
 };
+
+/** The strategy to use when loading the script */
+export enum ScriptLoadingStrategyEnum {
+  /** Use the script `async` attribute */
+  Async = 'ASYNC',
+  /** Use the script `defer` attribute */
+  Defer = 'DEFER',
+}
 
 export type SearchResultConnection = {
   __typename?: 'SearchResultConnection';
@@ -10196,6 +11396,8 @@ export type SiteSettings = {
   __typename?: 'SiteSettings';
   /** Attachment ID for logo */
   logo?: Maybe<Scalars['String']['output']>;
+  /** Redirects */
+  redirects?: Maybe<Scalars['String']['output']>;
   /** Identifying name */
   siteName?: Maybe<Scalars['String']['output']>;
 };
@@ -10275,10 +11477,16 @@ export type Tag = DatabaseIdentifier &
     enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
     /** Connection between the TermNode type and the EnqueuedStylesheet type */
     enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-    /** The unique resource identifier path */
+    /** The globally unique ID for the object */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the node is a Term */
@@ -10359,6 +11567,8 @@ export type TagConnection = {
   edges: Array<TagConnectionEdge>;
   /** A list of connected tag Nodes */
   nodes: Array<Tag>;
+  /** Information about pagination in a connection. */
+  pageInfo: TagConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected tag */
@@ -10367,6 +11577,18 @@ export type TagConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected tag Node */
   node: Tag;
+};
+
+/** Page Info on the connected TagConnectionEdge */
+export type TagConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -10392,7 +11614,7 @@ export type TagToContentNodeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: TagToContentNodeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -10403,6 +11625,21 @@ export type TagToContentNodeConnectionEdge = ContentNodeConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: ContentNode;
+  };
+
+/** Page Info on the &quot;TagToContentNodeConnection&quot; */
+export type TagToContentNodeConnectionPageInfo = ContentNodeConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'TagToContentNodeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the TagToContentNodeConnection connection */
@@ -10425,7 +11662,7 @@ export type TagToContentNodeConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -10454,7 +11691,7 @@ export type TagToPostConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Post>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: TagToPostConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -10465,6 +11702,21 @@ export type TagToPostConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Post;
+  };
+
+/** Page Info on the &quot;TagToPostConnection&quot; */
+export type TagToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'TagToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the TagToPostConnection connection */
@@ -10501,7 +11753,7 @@ export type TagToPostConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -10560,6 +11812,8 @@ export type Taxonomy = Node & {
   __typename?: 'Taxonomy';
   /** List of Content Types associated with the Taxonomy */
   connectedContentTypes?: Maybe<TaxonomyToContentTypeConnection>;
+  /** List of Term Nodes associated with the Taxonomy */
+  connectedTerms?: Maybe<TaxonomyToTermNodeConnection>;
   /** Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description */
   description?: Maybe<Scalars['String']['output']>;
   /** The plural name of the post type within the GraphQL Schema. */
@@ -10578,7 +11832,7 @@ export type Taxonomy = Node & {
   name?: Maybe<Scalars['String']['output']>;
   /** Whether the taxonomy is publicly queryable */
   public?: Maybe<Scalars['Boolean']['output']>;
-  /** Name of content type to diplay in REST API &quot;wp/v2&quot; namespace. */
+  /** Name of content type to display in REST API &quot;wp/v2&quot; namespace. */
   restBase?: Maybe<Scalars['String']['output']>;
   /** The REST Controller class assigned to handling this content type. */
   restControllerClass?: Maybe<Scalars['String']['output']>;
@@ -10608,12 +11862,22 @@ export type TaxonomyConnectedContentTypesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** A taxonomy object */
+export type TaxonomyConnectedTermsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** Connection to Taxonomy Nodes */
 export type TaxonomyConnection = {
   /** A list of edges (relational context) between RootQuery and connected Taxonomy Nodes */
   edges: Array<TaxonomyConnectionEdge>;
   /** A list of connected Taxonomy Nodes */
   nodes: Array<Taxonomy>;
+  /** Information about pagination in a connection. */
+  pageInfo: TaxonomyConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected Taxonomy */
@@ -10622,6 +11886,18 @@ export type TaxonomyConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected Taxonomy Node */
   node: Taxonomy;
+};
+
+/** Page Info on the connected TaxonomyConnectionEdge */
+export type TaxonomyConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** Allowed taxonomies */
@@ -10651,7 +11927,7 @@ export type TaxonomyToContentTypeConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentType>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: TaxonomyToContentTypeConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -10662,6 +11938,59 @@ export type TaxonomyToContentTypeConnectionEdge = ContentTypeConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: ContentType;
+  };
+
+/** Page Info on the &quot;TaxonomyToContentTypeConnection&quot; */
+export type TaxonomyToContentTypeConnectionPageInfo =
+  ContentTypeConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'TaxonomyToContentTypeConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
+/** Connection between the Taxonomy type and the TermNode type */
+export type TaxonomyToTermNodeConnection = Connection &
+  TermNodeConnection & {
+    __typename?: 'TaxonomyToTermNodeConnection';
+    /** Edges for the TaxonomyToTermNodeConnection connection */
+    edges: Array<TaxonomyToTermNodeConnectionEdge>;
+    /** The nodes of the connection, without the edges */
+    nodes: Array<TermNode>;
+    /** Information about pagination in a connection. */
+    pageInfo: TaxonomyToTermNodeConnectionPageInfo;
+  };
+
+/** An edge in a connection */
+export type TaxonomyToTermNodeConnectionEdge = Edge &
+  TermNodeConnectionEdge & {
+    __typename?: 'TaxonomyToTermNodeConnectionEdge';
+    /** A cursor for use in pagination */
+    cursor?: Maybe<Scalars['String']['output']>;
+    /** The item at the end of the edge */
+    node: TermNode;
+  };
+
+/** Page Info on the &quot;TaxonomyToTermNodeConnection&quot; */
+export type TaxonomyToTermNodeConnectionPageInfo = PageInfo &
+  TermNodeConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'TaxonomyToTermNodeConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Hae sivuobjekti sivupohjan mukaan */
@@ -10682,10 +12011,16 @@ export type TermNode = {
   enqueuedScripts?: Maybe<TermNodeToEnqueuedScriptConnection>;
   /** Connection between the TermNode type and the EnqueuedStylesheet type */
   enqueuedStylesheets?: Maybe<TermNodeToEnqueuedStylesheetConnection>;
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the object is restricted from the current viewer */
   isRestricted?: Maybe<Scalars['Boolean']['output']>;
   /** Whether the node is a Term */
@@ -10728,6 +12063,8 @@ export type TermNodeConnection = {
   edges: Array<TermNodeConnectionEdge>;
   /** A list of connected TermNode Nodes */
   nodes: Array<TermNode>;
+  /** Information about pagination in a connection. */
+  pageInfo: TermNodeConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected TermNode */
@@ -10736,6 +12073,18 @@ export type TermNodeConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected TermNode Node */
   node: TermNode;
+};
+
+/** Page Info on the connected TermNodeConnectionEdge */
+export type TermNodeConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is "ID". To be used along with the "id" field. */
@@ -10761,7 +12110,7 @@ export type TermNodeToEnqueuedScriptConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<EnqueuedScript>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: TermNodeToEnqueuedScriptConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -10774,6 +12123,22 @@ export type TermNodeToEnqueuedScriptConnectionEdge = Edge &
     node: EnqueuedScript;
   };
 
+/** Page Info on the &quot;TermNodeToEnqueuedScriptConnection&quot; */
+export type TermNodeToEnqueuedScriptConnectionPageInfo =
+  EnqueuedScriptConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'TermNodeToEnqueuedScriptConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
 /** Connection between the TermNode type and the EnqueuedStylesheet type */
 export type TermNodeToEnqueuedStylesheetConnection = Connection &
   EnqueuedStylesheetConnection & {
@@ -10783,7 +12148,7 @@ export type TermNodeToEnqueuedStylesheetConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<EnqueuedStylesheet>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: TermNodeToEnqueuedStylesheetConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -10795,6 +12160,22 @@ export type TermNodeToEnqueuedStylesheetConnectionEdge = Edge &
     /** The item at the end of the edge */
     node: EnqueuedStylesheet;
   };
+
+/** Page Info on the &quot;TermNodeToEnqueuedStylesheetConnection&quot; */
+export type TermNodeToEnqueuedStylesheetConnectionPageInfo =
+  EnqueuedStylesheetConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'TermNodeToEnqueuedStylesheetConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
 
 /** Options for ordering the connection by */
 export enum TermObjectsConnectionOrderbyEnum {
@@ -10847,6 +12228,8 @@ export type ThemeConnection = {
   edges: Array<ThemeConnectionEdge>;
   /** A list of connected Theme Nodes */
   nodes: Array<Theme>;
+  /** Information about pagination in a connection. */
+  pageInfo: ThemeConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected Theme */
@@ -10855,6 +12238,18 @@ export type ThemeConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected Theme Node */
   node: Theme;
+};
+
+/** Page Info on the connected ThemeConnectionEdge */
+export type ThemeConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 export type Time = {
@@ -10911,8 +12306,14 @@ export type Translation = ContentNode &
     guid?: Maybe<Scalars['String']['output']>;
     /** The globally unique identifier of the translation-cpt object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is a node in the preview state */
     isPreview?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the object is restricted from the current viewer */
@@ -10954,7 +12355,7 @@ export type Translation = ContentNode &
      * @deprecated Deprecated in favor of the databaseId field
      */
     translationId: Scalars['Int']['output'];
-    /** Käännökset */
+    /** Translations */
     translations?: Maybe<Array<Maybe<TranslationResponse>>>;
     /** The unique resource identifier path */
     uri?: Maybe<Scalars['String']['output']>;
@@ -10996,6 +12397,8 @@ export type TranslationConnection = {
   edges: Array<TranslationConnectionEdge>;
   /** A list of connected translation Nodes */
   nodes: Array<Translation>;
+  /** Information about pagination in a connection. */
+  pageInfo: TranslationConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected translation */
@@ -11004,6 +12407,18 @@ export type TranslationConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected translation Node */
   node: Translation;
+};
+
+/** Page Info on the connected TranslationConnectionEdge */
+export type TranslationConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single resource. Default is ID. */
@@ -11018,23 +12433,23 @@ export enum TranslationIdType {
   Uri = 'URI',
 }
 
-/** Käännöksen kieli/arvo-parit */
+/** Translation with language/value pairs */
 export type TranslationItems = {
   __typename?: 'TranslationItems';
-  /** Käännöksen merkkijono */
+  /** Translation string */
   en?: Maybe<Scalars['String']['output']>;
-  /** Käännöksen merkkijono */
+  /** Translation string */
   fi?: Maybe<Scalars['String']['output']>;
-  /** Käännöksen merkkijono */
+  /** Translation string */
   sv?: Maybe<Scalars['String']['output']>;
 };
 
-/** Käännösvastaus sisältää käännösavaimen ja käännökset */
+/** Translation response contains translation key and translations */
 export type TranslationResponse = {
   __typename?: 'TranslationResponse';
-  /** Käyttöliittymän käännösavain */
+  /** Translation key for frontend */
   key?: Maybe<Scalars['String']['output']>;
-  /** Käännökset käyttöliittymälle */
+  /** Translations for frontend */
   translations?: Maybe<TranslationItems>;
 };
 
@@ -11058,7 +12473,7 @@ export type TranslationToRevisionConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Translation>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: TranslationToRevisionConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -11069,6 +12484,21 @@ export type TranslationToRevisionConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Translation;
+  };
+
+/** Page Info on the &quot;TranslationToRevisionConnection&quot; */
+export type TranslationToRevisionConnectionPageInfo = PageInfo &
+  TranslationConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'TranslationToRevisionConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the TranslationToRevisionConnection connection */
@@ -11089,7 +12519,7 @@ export type TranslationToRevisionConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -11179,10 +12609,16 @@ export type UnifiedSearchVenueAccessibilityShortcomingForArgs = {
 
 /** Any node that has a URI */
 export type UniformResourceIdentifiable = {
-  /** The unique resource identifier path */
+  /** The globally unique ID for the object */
   id: Scalars['ID']['output'];
+  /** Whether the node is a Comment */
+  isComment: Scalars['Boolean']['output'];
   /** Whether the node is a Content Node */
   isContentNode: Scalars['Boolean']['output'];
+  /** Whether the node represents the front page. */
+  isFrontPage: Scalars['Boolean']['output'];
+  /** Whether  the node represents the blog page. */
+  isPostsPage: Scalars['Boolean']['output'];
   /** Whether the node is a Term */
   isTermNode: Scalars['Boolean']['output'];
   /** The unique resource identifier path */
@@ -11225,6 +12661,8 @@ export type UpdateCollectionInput = {
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the collection object */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']['input']>;
@@ -11294,6 +12732,8 @@ export type UpdateContactInput = {
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the contact object */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']['input']>;
@@ -11324,6 +12764,8 @@ export type UpdateLandingPageInput = {
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the landingPage object */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']['input']>;
@@ -11404,6 +12846,8 @@ export type UpdatePageInput = {
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the page object */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']['input']>;
@@ -11467,6 +12911,8 @@ export type UpdatePostInput = {
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the post object */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']['input']>;
@@ -11503,6 +12949,8 @@ export type UpdateReleaseInput = {
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the release object */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
   language?: InputMaybe<LanguageCodeEnum>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']['input']>;
@@ -11616,6 +13064,8 @@ export type UpdateTranslationInput = {
   date?: InputMaybe<Scalars['String']['input']>;
   /** The ID of the translation object */
   id: Scalars['ID']['input'];
+  /** Override the edit lock when another user is editing the post */
+  ignoreEditLock?: InputMaybe<Scalars['Boolean']['input']>;
   /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
   menuOrder?: InputMaybe<Scalars['Int']['input']>;
   /** The password used to protect the content of the object */
@@ -11716,8 +13166,14 @@ export type User = Commenter &
     firstName?: Maybe<Scalars['String']['output']>;
     /** The globally unique identifier for the user object. */
     id: Scalars['ID']['output'];
+    /** Whether the node is a Comment */
+    isComment: Scalars['Boolean']['output'];
     /** Whether the node is a Content Node */
     isContentNode: Scalars['Boolean']['output'];
+    /** Whether the node represents the front page. */
+    isFrontPage: Scalars['Boolean']['output'];
+    /** Whether  the node represents the blog page. */
+    isPostsPage: Scalars['Boolean']['output'];
     /** Whether the object is restricted from the current viewer */
     isRestricted?: Maybe<Scalars['Boolean']['output']>;
     /** Whether the node is a Term */
@@ -11728,7 +13184,7 @@ export type User = Commenter &
     locale?: Maybe<Scalars['String']['output']>;
     /** Connection between the User type and the mediaItem type */
     mediaItems?: Maybe<UserToMediaItemConnection>;
-    /** Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property. */
+    /** Display name of the user. This is equivalent to the WP_User-&gt;display_name property. */
     name?: Maybe<Scalars['String']['output']>;
     /** The nicename for the user. This field is equivalent to WP_User-&gt;user_nicename */
     nicename?: Maybe<Scalars['String']['output']>;
@@ -11744,6 +13200,8 @@ export type User = Commenter &
     revisions?: Maybe<UserToRevisionsConnection>;
     /** Connection between the User type and the UserRole type */
     roles?: Maybe<UserToUserRoleConnection>;
+    /** Whether the Toolbar should be displayed when the user is viewing the site. */
+    shouldShowAdminToolbar?: Maybe<Scalars['Boolean']['output']>;
     /** The slug for the user. This field is equivalent to WP_User-&gt;user_nicename */
     slug?: Maybe<Scalars['String']['output']>;
     /** The unique resource identifier path */
@@ -11841,6 +13299,8 @@ export type UserConnection = {
   edges: Array<UserConnectionEdge>;
   /** A list of connected User Nodes */
   nodes: Array<User>;
+  /** Information about pagination in a connection. */
+  pageInfo: UserConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected User */
@@ -11849,6 +13309,18 @@ export type UserConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected User Node */
   node: User;
+};
+
+/** Page Info on the connected UserConnectionEdge */
+export type UserConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** The Type of Identifier used to fetch a single User node. To be used along with the "id" field. Default is "ID". */
@@ -11888,6 +13360,8 @@ export type UserRoleConnection = {
   edges: Array<UserRoleConnectionEdge>;
   /** A list of connected UserRole Nodes */
   nodes: Array<UserRole>;
+  /** Information about pagination in a connection. */
+  pageInfo: UserRoleConnectionPageInfo;
 };
 
 /** Edge between a Node and a connected UserRole */
@@ -11896,6 +13370,18 @@ export type UserRoleConnectionEdge = {
   cursor?: Maybe<Scalars['String']['output']>;
   /** The connected UserRole Node */
   node: UserRole;
+};
+
+/** Page Info on the connected UserRoleConnectionEdge */
+export type UserRoleConnectionPageInfo = {
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
+  hasPreviousPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
 /** Names of available user roles */
@@ -11929,7 +13415,7 @@ export type UserToCommentConnection = CommentConnection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Comment>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: UserToCommentConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -11940,6 +13426,21 @@ export type UserToCommentConnectionEdge = CommentConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Comment;
+  };
+
+/** Page Info on the &quot;UserToCommentConnection&quot; */
+export type UserToCommentConnectionPageInfo = CommentConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToCommentConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the UserToCommentConnection connection */
@@ -12013,7 +13514,7 @@ export type UserToEnqueuedScriptConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<EnqueuedScript>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: UserToEnqueuedScriptConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -12026,6 +13527,22 @@ export type UserToEnqueuedScriptConnectionEdge = Edge &
     node: EnqueuedScript;
   };
 
+/** Page Info on the &quot;UserToEnqueuedScriptConnection&quot; */
+export type UserToEnqueuedScriptConnectionPageInfo =
+  EnqueuedScriptConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'UserToEnqueuedScriptConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
 /** Connection between the User type and the EnqueuedStylesheet type */
 export type UserToEnqueuedStylesheetConnection = Connection &
   EnqueuedStylesheetConnection & {
@@ -12035,7 +13552,7 @@ export type UserToEnqueuedStylesheetConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<EnqueuedStylesheet>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: UserToEnqueuedStylesheetConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -12048,6 +13565,22 @@ export type UserToEnqueuedStylesheetConnectionEdge = Edge &
     node: EnqueuedStylesheet;
   };
 
+/** Page Info on the &quot;UserToEnqueuedStylesheetConnection&quot; */
+export type UserToEnqueuedStylesheetConnectionPageInfo =
+  EnqueuedStylesheetConnectionPageInfo &
+    PageInfo &
+    WpPageInfo & {
+      __typename?: 'UserToEnqueuedStylesheetConnectionPageInfo';
+      /** When paginating forwards, the cursor to continue. */
+      endCursor?: Maybe<Scalars['String']['output']>;
+      /** When paginating forwards, are there more items? */
+      hasNextPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, are there more items? */
+      hasPreviousPage: Scalars['Boolean']['output'];
+      /** When paginating backwards, the cursor to continue. */
+      startCursor?: Maybe<Scalars['String']['output']>;
+    };
+
 /** Connection between the User type and the mediaItem type */
 export type UserToMediaItemConnection = Connection &
   MediaItemConnection & {
@@ -12057,7 +13590,7 @@ export type UserToMediaItemConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<MediaItem>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: UserToMediaItemConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -12068,6 +13601,21 @@ export type UserToMediaItemConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: MediaItem;
+  };
+
+/** Page Info on the &quot;UserToMediaItemConnection&quot; */
+export type UserToMediaItemConnectionPageInfo = MediaItemConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToMediaItemConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the UserToMediaItemConnection connection */
@@ -12096,7 +13644,7 @@ export type UserToMediaItemConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -12125,7 +13673,7 @@ export type UserToPageConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Page>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: UserToPageConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -12136,6 +13684,21 @@ export type UserToPageConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Page;
+  };
+
+/** Page Info on the &quot;UserToPageConnection&quot; */
+export type UserToPageConnectionPageInfo = PageConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToPageConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the UserToPageConnection connection */
@@ -12164,7 +13727,7 @@ export type UserToPageConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -12193,7 +13756,7 @@ export type UserToPostConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<Post>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: UserToPostConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -12204,6 +13767,21 @@ export type UserToPostConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: Post;
+  };
+
+/** Page Info on the &quot;UserToPostConnection&quot; */
+export type UserToPostConnectionPageInfo = PageInfo &
+  PostConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToPostConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the UserToPostConnection connection */
@@ -12240,7 +13818,7 @@ export type UserToPostConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -12281,7 +13859,7 @@ export type UserToRevisionsConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<ContentNode>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: UserToRevisionsConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -12292,6 +13870,21 @@ export type UserToRevisionsConnectionEdge = ContentNodeConnectionEdge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: ContentNode;
+  };
+
+/** Page Info on the &quot;UserToRevisionsConnection&quot; */
+export type UserToRevisionsConnectionPageInfo = ContentNodeConnectionPageInfo &
+  PageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToRevisionsConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Arguments for filtering the UserToRevisionsConnection connection */
@@ -12314,7 +13907,7 @@ export type UserToRevisionsConnectionWhereArgs = {
   nameIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>;
-  /** What paramater to use to order the objects by. */
+  /** What parameter to use to order the objects by. */
   orderby?: InputMaybe<Array<InputMaybe<PostObjectsConnectionOrderbyInput>>>;
   /** Use ID to return only children. Use 0 to return only top-level items */
   parent?: InputMaybe<Scalars['ID']['input']>;
@@ -12343,7 +13936,7 @@ export type UserToUserRoleConnection = Connection &
     /** The nodes of the connection, without the edges */
     nodes: Array<UserRole>;
     /** Information about pagination in a connection. */
-    pageInfo?: Maybe<WpPageInfo>;
+    pageInfo: UserToUserRoleConnectionPageInfo;
   };
 
 /** An edge in a connection */
@@ -12354,6 +13947,21 @@ export type UserToUserRoleConnectionEdge = Edge &
     cursor?: Maybe<Scalars['String']['output']>;
     /** The item at the end of the edge */
     node: UserRole;
+  };
+
+/** Page Info on the &quot;UserToUserRoleConnection&quot; */
+export type UserToUserRoleConnectionPageInfo = PageInfo &
+  UserRoleConnectionPageInfo &
+  WpPageInfo & {
+    __typename?: 'UserToUserRoleConnectionPageInfo';
+    /** When paginating forwards, the cursor to continue. */
+    endCursor?: Maybe<Scalars['String']['output']>;
+    /** When paginating forwards, are there more items? */
+    hasNextPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']['output'];
+    /** When paginating backwards, the cursor to continue. */
+    startCursor?: Maybe<Scalars['String']['output']>;
   };
 
 /** Field to order the connection by */
@@ -12394,7 +14002,7 @@ export enum UsersConnectionSearchColumnEnum {
   Login = 'LOGIN',
   /** A URL-friendly name for the user. The default is the user's username. */
   Nicename = 'NICENAME',
-  /** The URL of the user\s website. */
+  /** The URL of the user's website. */
   Url = 'URL',
 }
 
@@ -12468,7 +14076,6 @@ export type VenueFacility = {
 
 /** Information about pagination in a connection. */
 export type WpPageInfo = {
-  __typename?: 'WPPageInfo';
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['String']['output']>;
   /** When paginating forwards, are there more items? */

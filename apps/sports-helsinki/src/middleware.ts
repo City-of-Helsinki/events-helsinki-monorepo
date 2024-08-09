@@ -1,22 +1,26 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import redirectCampaignRoutes from '../redirectCampaignRoutes.config';
-
-// TODO: For some reason middleware cannot read `'@events-helsinki/components` package without breaking the build
-const DEFAULT_LANGUAGE = 'fi';
-const locales = ['fi', 'en', 'sv']; // i18n.locales.join('|');
+import { DEFAULT_LANGUAGE, LOCALES } from './edge-runtime-compatible/constants';
+import {
+  getRedirectFromCache,
+  updateRedirectsCache,
+} from './edge-runtime-compatible/redirectsCache';
 
 const requestType = {
   isStaticFile: (req: NextRequest) => req.nextUrl.pathname.startsWith('/_next'),
   isPagesFolderApi: (req: NextRequest) =>
     req.nextUrl.pathname.includes('/api/'),
-  // eslint-disable-next-line regexp/no-unused-capturing-group
-  isPublicFile: (req: NextRequest) => /\.(.*)$/.test(req.nextUrl.pathname),
+  // FIXME: This seems broken, as it will match any pathname with a dot in it
+  // Originally probably from https://github.com/vercel/next.js/discussions/18419
+  // as `PUBLIC_FILE = /\.(.*)$/` and `PUBLIC_FILE.test(pathname)` and passed
+  // through hobbies-helsinki repo to events-helsinki-monorepo.
+  isPublicFile: (req: NextRequest) => req.nextUrl.pathname.includes('.'),
 };
 
 /** Get the preferred locale, similar to above or using a library */
 function getLocaleFromPathname(pathname: string) {
-  const pattern = `^/?(?<locale>${locales.join('|')})/?`;
+  const pattern = `^/?(?<locale>${LOCALES.join('|')})/?`;
   const match = pathname.match(new RegExp(pattern, 'i'));
   return match?.groups?.locale;
 }
@@ -27,7 +31,7 @@ function getLocale(req: NextRequest) {
 }
 
 function isPathnameMissingLocale(pathname: string) {
-  return locales.every(
+  return LOCALES.every(
     (locale) =>
       !pathname.startsWith(`/${locale}/`) &&
       pathname !== `/${locale}` &&
@@ -53,6 +57,33 @@ function getLocaleMatchesFromPathname(pathname: string): DefaultMatchesType {
 }
 
 /**
+ * Handle dynamic and static redirects
+ * @param req Incoming request
+ * @returns Redirect response or null if no redirect is needed
+ */
+const handleRedirects = (req: NextRequest): NextResponse | null => {
+  const { pathname, search } = req.nextUrl;
+
+  // Handle dynamic CMS configured redirects
+  const dynamicRedirectTo = getRedirectFromCache(pathname, getLocale(req));
+  if (dynamicRedirectTo) {
+    // eslint-disable-next-line no-console
+    console.log(`Redirecting from ${pathname} to ${dynamicRedirectTo}`);
+    return NextResponse.redirect(
+      new URL(`${dynamicRedirectTo}${search}`, req.url)
+    );
+  }
+
+  // @deprecated redirectCampaignRoutes
+  // Let redirect routes through without prefixing them with locale
+  if (Object.keys(redirectCampaignRoutes).includes(pathname)) {
+    return NextResponse.redirect(new URL(pathname, req.url));
+  }
+
+  return null; // No redirect needed
+};
+
+/**
  * Enforce prefix for default locale 'fi'
  * https://github.com/vercel/next.js/discussions/18419
  * @param req
@@ -66,11 +97,6 @@ const prefixDefaultLocale = async (req: NextRequest) => {
   const requestUrlPathnameIsMissingLocale = isPathnameMissingLocale(
     url.pathname
   );
-
-  // Let redirect routes through without prefixing them with locale
-  if (Object.keys(redirectCampaignRoutes).includes(pathname)) {
-    return NextResponse.redirect(new URL(pathname, req.url));
-  }
 
   // The default locale needs to be redirected so that it uses the default language in URL.
   if (req.nextUrl.locale === 'default') {
@@ -119,5 +145,11 @@ export async function middleware(req: NextRequest) {
   ) {
     return;
   }
-  return prefixDefaultLocale(req);
+
+  return handleRedirects(req) || prefixDefaultLocale(req);
 }
+
+/**
+ * Initialize redirects cache immediately and schedule its updating.
+ */
+setTimeout(updateRedirectsCache, 0);

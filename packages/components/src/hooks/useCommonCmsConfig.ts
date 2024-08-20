@@ -56,6 +56,7 @@ const useCommonCmsConfig = (): Partial<Config> => {
     htmlSanitizer: {
       allowedUnsafeTags: ['iframe'],
       trustedOrigins: ['https://www.youtube.com', 'https://player.vimeo.com'],
+      allowUnsafeSocialMediaScript: true,
     },
   };
 };

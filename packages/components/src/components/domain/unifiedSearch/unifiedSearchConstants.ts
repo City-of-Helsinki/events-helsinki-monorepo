@@ -21,7 +21,6 @@ export type UnifiedSearchOrderByType =
 
 // Swimming / Uinti
 export const SWIMMING_ONTOLOGY_TREE_IDS = [
-  20, // Koirauimarannat / Dog beaches
   684, // Vesiliikuntapaikat / Water sports facilities
 ];
 

@@ -16,5 +16,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     { token: getAuthorizationHeader(token), maxAge },
     { maxAge }
   );
-  res.redirect(307, req.query.uri as string);
+  res.redirect(302, req.query.uri as string);
 };

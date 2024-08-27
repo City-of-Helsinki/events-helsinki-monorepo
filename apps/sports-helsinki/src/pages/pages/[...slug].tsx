@@ -46,10 +46,18 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 const NextCmsPage: NextPage<{
   preview: boolean;
+  previewData: PreviewDataObject;
   page: PageType;
   breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ page, breadcrumbs, collections, preview }) => {
+}> = ({ page, breadcrumbs, collections, preview, previewData }) => {
+  // eslint-disable-next-line no-console
+  console.warn('page', { ...page });
+  // eslint-disable-next-line no-console
+  console.warn('preview', preview);
+
+  // eslint-disable-next-line no-console
+  console.warn('previewData', previewData);
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
@@ -133,6 +141,7 @@ type ResultProps =
       breadcrumbs?: BreadcrumbListItem[];
       collections: CollectionType[];
       preview: boolean;
+      previewData: PreviewDataObject;
     }
   | {
       error?: {
@@ -195,6 +204,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         return {
           props: {
             preview: Boolean(previewData?.token),
+            previewData: previewData,
             initialApolloState: sportsApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             page,

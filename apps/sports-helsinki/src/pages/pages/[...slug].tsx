@@ -155,6 +155,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     async (): Promise<GetStaticPropsResult<ResultProps>> => {
       try {
         const previewData = context.previewData as PreviewDataObject;
+        // eslint-disable-next-line no-console
+        console.warn('previewData1111', { ...previewData });
         const language = getLanguageOrDefault(context.locale);
         const { data: pageData } = await sportsApolloClient.query<
           PageQuery,
@@ -214,6 +216,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           revalidate: AppConfig.defaultRevalidate,
         };
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.warn('previewData222222', e);
         return {
           props: {
             preview: false,

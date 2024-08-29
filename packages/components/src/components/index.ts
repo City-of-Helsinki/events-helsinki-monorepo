@@ -70,3 +70,4 @@ export { default as EventList } from './eventList/EventList';
 export { default as EventClosedHero } from './eventClosedHero/EventClosedHero';
 export { default as EventHero } from './eventHero/EventHero';
 export { default as EventPageMeta } from './eventPageMeta/EventPageMeta';
+export { default as PreviewNotification } from './previewNotification/PreviewNotification';

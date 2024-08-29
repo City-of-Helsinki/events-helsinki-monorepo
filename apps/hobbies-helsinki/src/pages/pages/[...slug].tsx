@@ -13,8 +13,8 @@ import {
   getLanguageOrDefault,
   RouteMeta,
   getFilteredBreadcrumbs,
-  usePreview,
   PageMeta,
+  PreviewNotification,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
@@ -45,17 +45,16 @@ import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsPage: NextPage<{
-  preview: boolean;
+  previewToken: string;
   page: PageType;
   breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ page, breadcrumbs, collections, preview }) => {
+}> = ({ page, breadcrumbs, collections, previewToken }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
-  usePreview(resilientT('page:preview'), preview);
 
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
@@ -74,6 +73,7 @@ const NextCmsPage: NextPage<{
       navigation={<Navigation page={page} />}
       content={
         <>
+          <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} page={page} />
           <PageMeta
             {...page?.seo}
@@ -128,7 +128,7 @@ export async function getStaticPaths() {
 
 type ResultProps =
   | {
-      preview: boolean;
+      previewToken: string;
       initialApolloState: NormalizedCacheObject;
       page: PageQuery['page'];
       breadcrumbs?: BreadcrumbListItem[];
@@ -195,7 +195,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
-            preview: Boolean(previewData?.token),
+            previewToken: previewData?.token ?? '',
             initialApolloState: hobbiesApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             page,
@@ -207,7 +207,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       } catch (e) {
         return {
           props: {
-            preview: false,
             error: {
               statusCode: 500,
             },

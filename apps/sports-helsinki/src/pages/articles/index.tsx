@@ -13,8 +13,8 @@ import {
   useResilientTranslation,
   getLanguageCodeFilter,
   getFilteredBreadcrumbs,
-  usePreview,
   PageMeta,
+  PreviewNotification,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
@@ -56,17 +56,16 @@ interface ArticleFilters {
 }
 
 export default function ArticleArchive({
-  preview,
+  previewToken,
   page,
   breadcrumbs,
 }: SportsGlobalPageProps & {
-  preview: boolean;
+  previewToken: string;
   page: PageType;
   breadcrumbs?: BreadcrumbListItem[];
 }) {
   const router = useRouter();
   const { resilientT } = useResilientTranslation();
-  usePreview(resilientT('page:preview'), preview);
 
   const getArticlesSearchQuery = (
     text: string,
@@ -172,6 +171,7 @@ export default function ArticleArchive({
       navigation={<Navigation page={page} />}
       content={
         <>
+          <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} page={page} />
           <PageMeta {...page?.seo} />
           <SearchPageContentNoSSR
@@ -311,10 +311,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
     return {
       props: {
-        preview: Boolean(previewData?.token),
         page,
         breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, ['event'])),
+        previewToken: previewData?.token ?? '',
       },
     };
   });

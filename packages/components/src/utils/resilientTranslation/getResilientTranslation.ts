@@ -66,9 +66,14 @@ const RESILIENT_TRANSLATIONS = {
     sv: 'Copyright',
   },
   'page:preview': {
-    en: 'Preview mode',
-    fi: 'Esikatsele',
-    sv: 'Förhandsvisning',
+    en: 'Preview mode (Time left: {0}min).',
+    fi: 'Esikatselutila (Aikaa jäljellä: {0}min)',
+    sv: 'Förhandsgranskningsläge (Tid kvar: {0}min)',
+  },
+  'page:minutes': {
+    en: 'minutes',
+    fi: 'minutes',
+    sv: 'minutes',
   },
 } as const satisfies ResilientTranslations;
 

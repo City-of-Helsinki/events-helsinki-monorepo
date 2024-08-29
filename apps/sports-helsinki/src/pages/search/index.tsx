@@ -10,7 +10,7 @@ import {
   useResilientTranslation,
   getFilteredBreadcrumbs,
   BreadcrumbContainer,
-  usePreview,
+  PreviewNotification,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -35,14 +35,12 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 const Search: NextPage<{
   page: PageType;
-  preview: boolean;
+  previewToken: string;
   breadcrumbs?: BreadcrumbListItem[];
-}> = ({ page, breadcrumbs, preview }) => {
+}> = ({ page, breadcrumbs, previewToken }) => {
   const { footerMenu } = useContext(NavigationContext);
 
   const { resilientT } = useResilientTranslation();
-
-  usePreview(resilientT('page:preview'), preview);
 
   usePageScrollRestoration();
 
@@ -59,6 +57,7 @@ const Search: NextPage<{
       navigation={<Navigation />}
       content={
         <>
+          <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} />
           <PageMeta
             {...page?.seo}
@@ -120,7 +119,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
     return {
       props: {
-        preview: Boolean(previewData?.token),
         page,
         breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, [
@@ -129,6 +127,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           'venue',
           'home',
         ])),
+        previewToken: previewData?.token ?? '',
       },
     };
   });

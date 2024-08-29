@@ -11,7 +11,7 @@ import {
   useResilientTranslation,
   getFilteredBreadcrumbs,
   BreadcrumbContainer,
-  usePreview,
+  PreviewNotification,
 } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -37,17 +37,16 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
 
 const Search: NextPage<{
-  preview: boolean;
+  previewToken: string;
   page: PageType;
   breadcrumbs?: BreadcrumbListItem[];
-}> = ({ page, breadcrumbs, preview }) => {
+}> = ({ page, breadcrumbs, previewToken }) => {
   const { t: tAppHobbies } = useAppHobbiesTranslation();
   const { resilientT } = useResilientTranslation();
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
   usePageScrollRestoration();
-  usePreview(resilientT('page:preview'), preview);
 
   useEffect(() => {
     const listElement = listRef.current;
@@ -79,6 +78,7 @@ const Search: NextPage<{
       navigation={<Navigation />}
       content={
         <>
+          <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} />
           <PageMeta
             {...page?.seo}
@@ -145,7 +145,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
     return {
       props: {
-        preview: Boolean(previewData?.token),
         page,
         breadcrumbs,
         ...(await serverSideTranslationsWithCommon(language, [
@@ -153,6 +152,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           'search',
           'home',
         ])),
+        previewtoken: previewData?.token ?? '',
       },
     };
   });

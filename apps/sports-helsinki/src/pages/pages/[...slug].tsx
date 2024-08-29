@@ -14,8 +14,8 @@ import {
   getLanguageOrDefault,
   RouteMeta,
   getFilteredBreadcrumbs,
-  usePreview,
   PageMeta,
+  PreviewNotification,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
@@ -45,25 +45,16 @@ import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const NextCmsPage: NextPage<{
-  preview: boolean;
-  previewData: PreviewDataObject;
+  previewToken: string;
   page: PageType;
   breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ page, breadcrumbs, collections, preview, previewData }) => {
-  // eslint-disable-next-line no-console
-  console.warn('page', { ...page });
-  // eslint-disable-next-line no-console
-  console.warn('preview', preview);
-
-  // eslint-disable-next-line no-console
-  console.warn('previewData', previewData);
+}> = ({ page, breadcrumbs, collections, previewToken }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
-  usePreview(resilientT('page:preview'), preview);
 
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
@@ -82,6 +73,7 @@ const NextCmsPage: NextPage<{
       navigation={<Navigation page={page} />}
       content={
         <>
+          <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} page={page} />
           <PageMeta
             {...page?.seo}
@@ -140,8 +132,7 @@ type ResultProps =
       page: PageQuery['page'];
       breadcrumbs?: BreadcrumbListItem[];
       collections: CollectionType[];
-      preview: boolean;
-      previewData: PreviewDataObject;
+      previewToken: string;
     }
   | {
       error?: {
@@ -155,8 +146,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     async (): Promise<GetStaticPropsResult<ResultProps>> => {
       try {
         const previewData = context.previewData as PreviewDataObject;
-        // eslint-disable-next-line no-console
-        console.warn('previewData1111', { ...previewData });
         const language = getLanguageOrDefault(context.locale);
         const { data: pageData } = await sportsApolloClient.query<
           PageQuery,
@@ -205,8 +194,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
-            preview: Boolean(previewData?.token),
-            previewData: previewData,
+            previewToken: previewData?.token ?? '',
             initialApolloState: sportsApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             page,
@@ -216,11 +204,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           revalidate: AppConfig.defaultRevalidate,
         };
       } catch (e) {
-        // eslint-disable-next-line no-console
-        console.warn('previewData222222', e);
         return {
           props: {
-            preview: false,
             error: {
               statusCode: 500,
             },

@@ -15,8 +15,8 @@ import {
   getQlLanguage,
   defaultArticleArchiveBreadcrumbTitle,
   PageByTemplateBreadcrumbTitleDocument,
-  usePreview,
   PageMeta,
+  PreviewNotification,
 } from '@events-helsinki/components';
 import type {
   AppLanguage,
@@ -59,11 +59,11 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 const CATEGORIES_AMOUNT = 20;
 
 const NextCmsArticle: NextPage<{
-  preview: boolean;
+  previewToken: string;
   article: ArticleType;
   breadcrumbs: BreadcrumbListItem[] | null;
   collections: CollectionType[];
-}> = ({ article, breadcrumbs, collections, preview }) => {
+}> = ({ article, breadcrumbs, collections, previewToken }) => {
   const router = useRouter();
   const {
     currentLanguageCode,
@@ -73,7 +73,6 @@ const NextCmsArticle: NextPage<{
   const { t: commonTranslation } = useCommonTranslation();
   const { resilientT } = useResilientTranslation();
   const { footerMenu } = useContext(NavigationContext);
-  usePreview(resilientT('page:preview'), preview);
 
   const { data: categoriesData, loading: loadingCategories } =
     useCategoriesQuery({
@@ -115,6 +114,7 @@ const NextCmsArticle: NextPage<{
       navigation={<Navigation page={article} />}
       content={
         <>
+          <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} page={article} />
           <PageMeta
             {...article?.seo}
@@ -173,7 +173,7 @@ export async function getStaticPaths() {
 
 type ResultProps =
   | {
-      preview: boolean;
+      previewToken: string;
       initialApolloState: NormalizedCacheObject;
       article: ArticleQuery['post'];
       breadcrumbs?: BreadcrumbListItem[];
@@ -258,7 +258,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         );
         return {
           props: {
-            preview: Boolean(previewData?.token),
+            previewToken: previewData?.token ?? '',
             initialApolloState: sportsApolloClient.cache.extract(),
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             article,
@@ -271,7 +271,6 @@ export async function getStaticProps(context: GetStaticPropsContext) {
         logger.error('Error while generating content page', e);
         return {
           props: {
-            preview: false,
             error: {
               statusCode: 500,
             },

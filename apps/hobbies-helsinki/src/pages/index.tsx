@@ -8,7 +8,7 @@ import {
   getLanguageOrDefault,
   RouteMeta,
   useResilientTranslation,
-  usePreview,
+  PreviewNotification,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { GetStaticPropsContext, NextPage } from 'next';
@@ -32,16 +32,15 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 
 const HomePage: NextPage<{
-  preview: boolean;
+  previewToken: string;
   page: PageType;
   locale: string;
-}> = ({ page, locale, preview }) => {
+}> = ({ page, locale, previewToken }) => {
   const {
     utils: { getRoutedInternalHref },
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
-  usePreview(resilientT('page:preview'), preview);
 
   const RHHCPageContentNoSSR = dynamic(
     () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
@@ -56,6 +55,7 @@ const HomePage: NextPage<{
       navigation={<Navigation />}
       content={
         <>
+          <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} />
           <RHHCPageContentNoSSR
             page={page}
@@ -117,7 +117,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       );
       return {
         props: {
-          preview: Boolean(previewData?.token),
+          previewToken: previewData?.token ?? '',
           ...(await serverSideTranslationsWithCommon(language, [
             'home',
             'search',
@@ -134,7 +134,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       );
       return {
         props: {
-          preview: false,
+          previewToken: '',
           ...(await serverSideTranslationsWithCommon(DEFAULT_LANGUAGE, [
             'home',
             'search',

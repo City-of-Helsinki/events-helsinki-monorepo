@@ -12,7 +12,8 @@ export type ResilientTranslationKey =
   | 'footer:allRightsReserved'
   | 'footer:backToTop'
   | 'footer:copyright'
-  | 'page:preview';
+  | 'page:preview'
+  | 'page:minutes';
 
 export type ResilientTranslation = Record<AppLanguage, string>;
 

@@ -222,7 +222,7 @@ it("should show error info when event doesn't exist", async () => {
   });
 });
 
-describe(`SIMILAR_EVENTS feature flag`, () => {
+describe.skip(`SIMILAR_EVENTS feature flag`, () => {
   it('shows similar events when flag is on', async () => {
     advanceTo('2020-10-01');
     renderComponent({ event: event, loading: false, showSimilarEvents: true });

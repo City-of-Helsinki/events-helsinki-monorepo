@@ -18,7 +18,7 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         .join(), // make a string
     };
 
-    if (searchParams[EVENT_SEARCH_FILTERS.KEYWORD]) {
+    if (!searchParams[EVENT_SEARCH_FILTERS.KEYWORD]) {
       return undefined;
     }
 

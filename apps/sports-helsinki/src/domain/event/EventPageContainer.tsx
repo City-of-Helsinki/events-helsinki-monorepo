@@ -101,7 +101,7 @@ const EventPageContainer: React.FC<EventPageContainerProps> = ({
                 </>
               )}
               {/* Hide similar event on SSR to make initial load faster */}
-              {showSimilarEvents && !eventClosed && (
+              {showSimilarEvents && !eventClosed && similarEventsFilters && (
                 <SimilarEvents
                   event={event}
                   onEventsLoaded={handleSimilarEventsLoaded}

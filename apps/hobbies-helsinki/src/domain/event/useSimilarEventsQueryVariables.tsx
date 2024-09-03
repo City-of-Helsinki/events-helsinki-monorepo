@@ -22,6 +22,10 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
       [EVENT_SEARCH_FILTERS.MAX_AGE]: event.audienceMaxAge ?? '',
     };
 
+    if (!searchParams[EVENT_SEARCH_FILTERS.KEYWORD]) {
+      return undefined;
+    }
+
     return {
       ...getEventSearchVariables({
         include: ['keywords', 'location'],

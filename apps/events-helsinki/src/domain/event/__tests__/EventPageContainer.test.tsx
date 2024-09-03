@@ -222,40 +222,91 @@ it("should show error info when event doesn't exist", async () => {
   });
 });
 
-describe(`SIMILAR_EVENTS feature flag`, () => {
-  it('shows similar events when flag is on', async () => {
-    advanceTo('2020-10-01');
-    renderComponent({ event: event, loading: false, showSimilarEvents: true });
-    await waitFor(() => {
-      expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-    });
+it('shows similar events when SIMILAR_EVENTS flag is on', async () => {
+  advanceTo('2020-10-01');
+  const eventNoKeywords = { ...event };
+  eventNoKeywords.keywords[0].id = 'yso:p916';
+  renderComponent(
+    { event: eventNoKeywords, loading: false, showSimilarEvents: true },
+    [
+      ...mocks,
+      createEventListRequestAndResultMocks({
+        variables: {
+          allOngoing: true,
+          internetBased: undefined,
+          keywordOrSet2: ['yso:p916'],
+          language: undefined,
+          pageSize: 100,
+          publisherAncestor: null,
+          eventType: [EventTypeId.General],
+        },
+        response: similarEvents,
+      }),
+    ]
+  );
+  await waitFor(() => {
+    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+  });
+  await waitForLoadingCompleted();
+
+  await waitFor(() => {
     expect(
       screen.getByRole('heading', {
         name: translations.event.similarEvents.title,
       })
     ).toBeInTheDocument();
-
-    similarEvents.data.forEach(async ({ name }) => {
-      expect(
-        await screen.findByLabelText(`Siirry tapahtumaan: ${name.fi}`, {
-          selector: 'a',
-        })
-      ).toBeInTheDocument();
-    });
   });
+});
 
-  it('doesnt show similar events when flag is off', async () => {
-    advanceTo('2020-10-01');
-    renderComponent({ event: event, loading: false, showSimilarEvents: false });
-    await waitFor(() => {
-      expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-    });
-    expect(
-      screen.queryByRole('heading', {
-        name: translations.event.similarEvents.title,
-      })
-    ).not.toBeInTheDocument();
+it('doesnt show similar events when SIMILAR_EVENTS flag is off', async () => {
+  advanceTo('2020-10-01');
+  renderComponent({ event: event, loading: false, showSimilarEvents: false });
+  await waitFor(() => {
+    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
   });
+  expect(
+    screen.queryByRole('heading', {
+      name: translations.event.similarEvents.title,
+    })
+  ).not.toBeInTheDocument();
+});
+
+it('doesnt show similar events when keywords are not mapped', async () => {
+  advanceTo('2020-10-01');
+  renderComponent({ event: event, loading: false, showSimilarEvents: true }, [
+    ...mocks,
+    createEventListRequestAndResultMocks({
+      variables: {
+        allOngoing: true,
+        internetBased: undefined,
+        keywordOrSet2: [''],
+        language: undefined,
+        pageSize: 100,
+        publisherAncestor: null,
+        eventType: [EventTypeId.General],
+      },
+      response: {
+        data: [],
+        meta: {
+          __typename: 'Meta',
+          count: 0,
+          next: '',
+          previous: '',
+        },
+        __typename: 'EventListResponse',
+      },
+    }),
+  ]);
+  await waitFor(() => {
+    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+  });
+  await waitForLoadingCompleted();
+
+  expect(
+    screen.queryByRole('heading', {
+      name: translations.event.similarEvents.title,
+    })
+  ).not.toBeInTheDocument();
 });
 
 it.skip('should link to events search when clicking tags', async () => {

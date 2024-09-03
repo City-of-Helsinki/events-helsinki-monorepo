@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.8.0...federation-router-v1.9.0) (2024-09-03)
+
+
+### Features
+
+* Use new CMS urls, also in RHHC, update subgraphs & supergraph ([078b147](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/078b147399d7139905c638d5feb50c253f5bb5a2))
+
 ## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.7.0...federation-router-v1.8.0) (2024-04-24)
 
 

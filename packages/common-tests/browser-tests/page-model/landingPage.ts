@@ -36,4 +36,4 @@ class LandingPage {
   }
 }
 
-export default LandingPage;
+export { LandingPage };

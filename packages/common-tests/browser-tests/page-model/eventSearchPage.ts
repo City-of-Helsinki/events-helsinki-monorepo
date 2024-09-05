@@ -100,4 +100,4 @@ class EventSearchPage {
   }
 }
 
-export default EventSearchPage;
+export { EventSearchPage };

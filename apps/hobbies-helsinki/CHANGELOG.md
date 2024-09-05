@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.21.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.20.0...hobbies-helsinki-v2.21.0) (2024-09-05)
+
+
+### Features
+
+* Social media feed ([#727](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/727)) ([257ebe6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/257ebe657664e217de18abac30d313af0fc732ba))
+* Use new CMS urls, also in RHHC, update subgraphs & supergraph ([078b147](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/078b147399d7139905c638d5feb50c253f5bb5a2))
+
+
+### Bug Fixes
+
+* Preview feature improvements ([#729](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/729)) ([4807af1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4807af1fadf0b24c2e6d647188b535a09d3ebf28))
+* Sanitizing social feed script ([#728](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/728)) ([9a2930c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9a2930c14d0bd1d81d9992b8685bae397ce618e6))
+* Similar events should not be shown if keywords list is empty ([#731](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/731)) ([1f02217](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1f02217cc32b9fe43970c0039a9fc4790ceb4696))
+
 ## [2.20.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.19.0...hobbies-helsinki-v2.20.0) (2024-07-11)
 
 

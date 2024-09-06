@@ -100,7 +100,7 @@ const NextCmsArticle: NextPage<{
 
   // FIXME: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
-  if (!article || loadingCategories) return null;
+  if (!article) return null;
 
   const RHHCPageContentNoSSR = dynamic(
     () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),

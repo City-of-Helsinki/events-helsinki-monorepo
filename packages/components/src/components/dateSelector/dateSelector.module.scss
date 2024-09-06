@@ -40,6 +40,7 @@
     text-align: left;
     position: relative;
     height: 1.25rem;
+    font-size: var(--fontsize-body-m);
 
     .buttonTextWrapper {
       white-space: nowrap;
@@ -51,10 +52,6 @@
       right: 0;
       text-overflow: ellipsis;
       color: var(--color-primary-black);
-
-      &.isEmpty {
-        color: var(--color-black-60);
-      }
     }
   }
 

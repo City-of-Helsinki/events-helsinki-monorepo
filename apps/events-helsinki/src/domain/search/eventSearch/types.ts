@@ -23,7 +23,6 @@ export type SearchCategoryRecord = Record<
 export interface Filters {
   [EVENT_SEARCH_FILTERS.CATEGORIES]: string[];
   [EVENT_SEARCH_FILTERS.DATE_TYPES]: string[];
-  [EVENT_SEARCH_FILTERS.DIVISIONS]: string[];
   [EVENT_SEARCH_FILTERS.END]: Date | null;
   [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]?: boolean;
   [EVENT_SEARCH_FILTERS.IS_FREE]?: boolean;

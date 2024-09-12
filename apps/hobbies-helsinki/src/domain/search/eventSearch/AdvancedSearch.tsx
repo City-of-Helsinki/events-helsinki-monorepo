@@ -67,7 +67,6 @@ const AdvancedSearch: React.FC<Props> = ({
   );
   const [minAgeInput, setMinAgeInput] = React.useState('');
   const [maxAgeInput, setMaxAgeInput] = React.useState('');
-  // const [divisionInput, setDivisionInput] = React.useState("");
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [placeInput, setPlaceInput] = React.useState('');
 
@@ -75,9 +74,6 @@ const AdvancedSearch: React.FC<Props> = ({
     []
   );
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
-    []
-  );
-  const [selectedDivisions, setSelectedDivisions] = React.useState<string[]>(
     []
   );
   const [selectedPlaces, setSelectedPlaces] = React.useState<string[]>([]);
@@ -101,7 +97,6 @@ const AdvancedSearch: React.FC<Props> = ({
     categories: selectedCategories,
     hobbyTypes: selectedHobbyTypes,
     dateTypes: selectedDateTypes,
-    divisions: selectedDivisions,
     end,
     isFree,
     keyword,
@@ -116,8 +111,6 @@ const AdvancedSearch: React.FC<Props> = ({
     audienceMinAgeLt: minAgeInput,
     audienceMaxAgeGt: maxAgeInput,
   };
-
-  // const divisionOptions = useDivisionOptions();
 
   const categories = getEventCategoryOptions(t);
   const hobbyTypes = getCourseHobbyTypeOptions(t);
@@ -153,7 +146,6 @@ const AdvancedSearch: React.FC<Props> = ({
       categories,
       hobbyTypes,
       dateTypes,
-      divisions,
       end: endTime,
       places,
       start: startTime,
@@ -170,7 +162,6 @@ const AdvancedSearch: React.FC<Props> = ({
 
     setSelectedCategories(categories);
     setSelectedHobbyTypes(hobbyTypes || []);
-    setSelectedDivisions(divisions);
     setSelectedPlaces(places);
     setSelectedTexts(text || []);
     setEnd(endTime);
@@ -216,7 +207,6 @@ const AdvancedSearch: React.FC<Props> = ({
   const clearInputValues = () => {
     setCategoryInput('');
     setHobbyTypeInput('');
-    // setDivisionInput("");
     setPlaceInput('');
     setAutosuggestInput('');
     setMaxAgeInput('');
@@ -313,22 +303,6 @@ const AdvancedSearch: React.FC<Props> = ({
                     toggleIsCustomDate={toggleIsCustomDate}
                   />
                 </div>
-                {/* <div>
-                  <MultiSelectDropdown
-                    checkboxName="divisionOptions"
-                    icon={<IconLocation aria-hidden />}
-                    inputValue={divisionInput}
-                    name="division"
-                    onChange={setSelectedDivisions}
-                    options={divisionOptions}
-                    selectAllText={t("search.selectAllDivisions")}
-                    setInputValue={setDivisionInput}
-                    showSearch={true}
-                    showSelectAll={true}
-                    title={t("search.titleDropdownDivision")}
-                    value={selectedDivisions}
-                  />
-                </div> */}
                 <div>
                   <PlaceSelector
                     checkboxName="placesCheckboxes"

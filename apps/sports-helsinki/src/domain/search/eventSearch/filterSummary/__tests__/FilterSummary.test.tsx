@@ -79,7 +79,6 @@ const mocks = [
 interface UrlParams {
   categories: string;
   dateTypes: string;
-  // divisions: string;
   end: string;
   place: string;
   organization: string;
@@ -90,7 +89,6 @@ interface UrlParams {
 const urlParams: UrlParams = {
   categories: 'music',
   dateTypes: 'today',
-  // divisions: neighborhoodId,
   end: '2020-08-23',
   place: placeId,
   organization: organizationId,
@@ -158,11 +156,6 @@ it.todo('routes to correct url after deleting filters');
 //       button: "Poista suodatin: 20.8.2020 - 23.8.2020",
 //       params: ["end", "start"],
 //     },
-//     { button: "Poista suodatin: Musiikki", params: ["categories"] },
-//     // {
-//     //   button: `Poista suodatin: ${neighborhoodName}`,
-//     //   params: ["divisions"],
-//     // },
 //     { button: `Poista suodatin: ${placeName}`, params: ["place"] },
 //     {
 //       button: `Poista suodatin: ${organizationName}`,

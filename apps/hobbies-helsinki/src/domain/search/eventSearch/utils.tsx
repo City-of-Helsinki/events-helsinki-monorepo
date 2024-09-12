@@ -196,7 +196,6 @@ export const getEventSearchVariables = ({
     categories,
     hobbyTypes,
     dateTypes,
-    divisions,
     helsinkiOnly,
     isFree,
     keyword,
@@ -258,7 +257,7 @@ export const getEventSearchVariables = ({
     MAPPED_COURSE_HOBBY_TYPES
   );
 
-  const hasLocation = !isEmpty(divisions) || !isEmpty(places);
+  const hasLocation = !isEmpty(places);
 
   const getSearchParam = () => {
     const hasText = !isEmpty(text);
@@ -273,11 +272,9 @@ export const getEventSearchVariables = ({
       return { allOngoing: true };
     }
   };
-  // const divisionParam = hasLocation && { division: divisions.sort() };
 
   return {
     ...getSearchParam(),
-    // ...divisionParam,
     end,
     include,
     publisherAncestor,
@@ -360,7 +357,6 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
       searchParams,
       EVENT_SEARCH_FILTERS.DATE_TYPES
     ),
-    divisions: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.DIVISIONS),
     end,
     helsinkiOnly:
       searchParams.get(EVENT_SEARCH_FILTERS.HELSINKI_ONLY) === 'true',

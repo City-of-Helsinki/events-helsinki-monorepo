@@ -18,7 +18,6 @@ import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
 import React from 'react';
 
-import useDivisionOptions from '../../../../common-events/hooks/useDivisionOptions';
 import { ROUTES } from '../../../../constants';
 import routerHelper from '../../../app/routerHelper';
 import {
@@ -43,7 +42,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     categories,
     hobbyTypes,
     dateTypes,
-    divisions,
     end,
     helsinkiOnly,
     isFree,
@@ -66,15 +64,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         }`.trim()
       : '';
 
-  const neighborhoods = useDivisionOptions();
-  const getNeighorhoodName = React.useCallback(
-    (id: string) => {
-      const neighborhood = neighborhoods.find((item) => item.value === id);
-      return neighborhood?.text ?? '';
-    },
-    [neighborhoods]
-  );
-
   const handleFilterRemove = (value: string | number, type: FilterType) => {
     const getFilteredList = (listType: FilterType, list: string[] = []) =>
       type === listType ? list.filter((v) => v !== value) : list;
@@ -89,7 +78,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         hobbyTypes
       ),
       [EVENT_SEARCH_FILTERS.DATE_TYPES]: getFilteredList('dateType', dateTypes),
-      [EVENT_SEARCH_FILTERS.DIVISIONS]: getFilteredList('division', divisions),
       [EVENT_SEARCH_FILTERS.END]: type === 'date' ? null : end,
       [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]:
         type === 'helsinkiOnly' ? undefined : helsinkiOnly,
@@ -120,7 +108,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!hobbyTypes.length ||
     !!dateText ||
     !!dateTypes.length ||
-    !!divisions.length ||
     !!places.length ||
     !!text?.length ||
     !!suitableFor?.length ||
@@ -156,15 +143,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       {publisher && (
         <PublisherFilter id={publisher} onRemove={handleFilterRemove} />
       )}
-      {divisions.map((division) => (
-        <FilterButton
-          key={division}
-          onRemove={handleFilterRemove}
-          text={getNeighorhoodName(division)}
-          type="division"
-          value={division}
-        />
-      ))}
+
       {places.map((place) => (
         <PlaceFilter key={place} id={place} onRemove={handleFilterRemove} />
       ))}

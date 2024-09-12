@@ -175,7 +175,6 @@ export enum EVENT_SEARCH_FILTERS {
   HOBBY_TYPES = 'hobbyTypes',
   DATE_TYPES = 'dateTypes',
   SPORTS_CATEGORIES = 'sportsCategories',
-  DIVISIONS = 'divisions',
   END = 'end',
   IS_FREE = 'isFree',
   KEYWORD = 'keyword',

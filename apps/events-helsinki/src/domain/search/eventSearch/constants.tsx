@@ -34,7 +34,6 @@ export enum EVENT_CATEGORIES {
 export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
   categories: [],
   dateTypes: [],
-  divisions: [],
   end: null,
   isFree: false,
   keyword: [],
@@ -48,7 +47,6 @@ export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
 export enum EVENT_SEARCH_FILTERS {
   CATEGORIES = 'categories',
   DATE_TYPES = 'dateTypes',
-  DIVISIONS = 'divisions',
   END = 'end',
   HELSINKI_ONLY = 'helsinkiOnly',
   IS_FREE = 'isFree',

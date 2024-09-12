@@ -2,7 +2,6 @@ import {
   KeywordListDocument,
   NeighborhoodListDocument,
   PlaceListDocument,
-  additionalDivisions,
 } from '@events-helsinki/components';
 import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -270,23 +269,5 @@ it('should change search query with remote events checkbox', async () => {
   expect(router).toMatchObject({
     pathname,
     query: { onlyRemoteEvents: 'true', text: 'jazz' },
-  });
-});
-
-// TODO: SKipped since there is no divisions input at the moment, but I've heard it should be there
-it.skip('disivions dropdown has additional divisions', async () => {
-  renderComponent();
-
-  const chooseCategoryButton = screen.getByRole('button', {
-    name: /etsi alue/i,
-  });
-  await userEvent.click(chooseCategoryButton);
-
-  additionalDivisions.forEach((divisionName) => {
-    expect(
-      screen.getByRole('checkbox', {
-        name: divisionName.name.fi,
-      })
-    ).toBeInTheDocument();
   });
 });

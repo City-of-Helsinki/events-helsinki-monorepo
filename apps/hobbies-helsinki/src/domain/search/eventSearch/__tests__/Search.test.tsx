@@ -2,7 +2,6 @@ import {
   KeywordListDocument,
   NeighborhoodListDocument,
   PlaceListDocument,
-  additionalDivisions,
 } from '@events-helsinki/components';
 import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -227,21 +226,3 @@ it('should change search query after clicking category menu item', async () => {
     query: { categories: 'movie_and_media,games,music', text: 'jazz' },
   });
 }, 50_000);
-
-// TODO: SKipped since there is no divisions input at the moment, but I've heard it should be there
-it.skip('disivions dropdown has additional divisions', async () => {
-  renderComponent();
-
-  const chooseCategoryButton = screen.getByRole('button', {
-    name: /etsi alue/i,
-  });
-  await userEvent.click(chooseCategoryButton);
-
-  additionalDivisions.forEach((divisionName) => {
-    expect(
-      screen.getByRole('checkbox', {
-        name: divisionName.name.fi,
-      })
-    ).toBeInTheDocument();
-  });
-});

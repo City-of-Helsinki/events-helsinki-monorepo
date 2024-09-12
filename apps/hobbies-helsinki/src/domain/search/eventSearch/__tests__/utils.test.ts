@@ -116,49 +116,14 @@ describe('getEventSearchVariables function', () => {
     expect(end7).toBe('2020-10-15');
   });
 
-  // it("should return divisions", () => {
-  //   advanceTo("2020-10-06");
-  //   const { division } = getEventSearchVariables({
-  //     ...defaultParams,
-  //     params: new URLSearchParams(`?divisions=kunta:espoo`),
-  //   });
-  //   expect(division).toContain("kunta:espoo");
-  // });
-
   it('should not use *Ongoing params when no text present', () => {
-    const { allOngoingAnd, localOngoingAnd, division } =
-      getEventSearchVariables({
-        ...defaultParams,
-        params: new URLSearchParams(),
-      });
-    expect(division).toBeUndefined();
+    const { allOngoingAnd, localOngoingAnd } = getEventSearchVariables({
+      ...defaultParams,
+      params: new URLSearchParams(),
+    });
     expect(allOngoingAnd).toBeUndefined();
     expect(localOngoingAnd).toBeUndefined();
   });
-
-  // it("should use allOngoing without division when only text present", () => {
-  //   const { allOngoingAnd, localOngoingAnd, division } =
-  //     getEventSearchVariables({
-  //       ...defaultParams,
-  //       params: new URLSearchParams(`?text=Rock`),
-  //     });
-  //   expect(division).toBeUndefined();
-  //   expect(allOngoingAnd).toStrictEqual(["Rock"]);
-  //   expect(localOngoingAnd).toBeUndefined();
-  // });
-
-  // it('should search localOngoing when division given', () => {
-  //   const { allOngoingAnd, localOngoingAnd, division } =
-  //     getEventSearchVariables({
-  //       ...defaultParams,
-  //       params: new URLSearchParams(
-  //         `?text=Rock&divisions=kaupunginosa:alppiharju`
-  //       ),
-  //     });
-  //   expect(division).toContain('kaupunginosa:alppiharju');
-  //   expect(allOngoingAnd).toBeUndefined();
-  //   expect(localOngoingAnd).toStrictEqual(['Rock']);
-  // });
 
   it('should search localOngoing when a place given', () => {
     const place = 'tprek:7254'; // MAPPED_PLACES["annantalo"];

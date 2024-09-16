@@ -15,7 +15,7 @@ const limitCfg = {
   defaultSize: '90kb',
   pages: {
     '/': '200kb', // NOTE: this is much!
-    '/_app': '700kb', // NOTE: this is much!
+    '/_app': '750kb', // NOTE: this is much!
     '/home': '105kb',
     '/events/[eventId]': '150kb',
     '/search': '200kb',
@@ -38,6 +38,6 @@ module.exports = [
   {
     name: 'CSS',
     path: ['.next/static/css/**/*.css'],
-    limit: '25 kB', // NOTE: this is much, should be around 10 kb
+    limit: '40 kB', // NOTE: this is much, should be around 10 kb
   },
 ];

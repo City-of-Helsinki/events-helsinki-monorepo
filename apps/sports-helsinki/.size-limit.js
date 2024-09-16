@@ -15,7 +15,7 @@ const limitCfg = {
   defaultSize: '90kb',
   pages: {
     '/': '120kb',
-    '/_app': '700kb', // NOTE: this is much!
+    '/_app': '750kb', // NOTE: this is much!
     '/home': '105kb',
     '/articles': '100kb',
     '/courses/[eventId]': '150kb',

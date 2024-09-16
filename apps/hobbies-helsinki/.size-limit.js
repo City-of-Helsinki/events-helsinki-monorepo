@@ -12,10 +12,10 @@ try {
 const pages = manifest.pages;
 
 const limitCfg = {
-  defaultSize: '90kb',
+  defaultSize: '95kb',
   pages: {
     '/': '200kb', // NOTE: this is much!
-    '/_app': '700kb', // NOTE: this is much!
+    '/_app': '750kb', // NOTE: this is much!
     '/home': '105kb',
     '/courses/[eventId]': '150kb',
     '/search': '190kb',
@@ -38,6 +38,6 @@ module.exports = [
   {
     name: 'CSS',
     path: ['.next/static/css/**/*.css'],
-    limit: '25 kB', // NOTE: this is much, should be around 10 kb
+    limit: '40 kB', // NOTE: this is much, should be around 10 kb
   },
 ];

@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.22.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.21.0...hobbies-helsinki-v2.22.0) (2024-09-16)
+
+
+### Features
+
+* **sports:** Add dynamic CMS configured redirect using middleware ([6170274](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/617027468b0ba9fa1fef08b0ae908867afbf8e8c))
+
+
+### Bug Fixes
+
+* Remove division related bad and dead code ([e99cf6b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e99cf6b4370bd16e9e0c38e0e066c44c7f217ca4))
+* Ssr for head tags in articles ([#737](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/737)) ([7559f4c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7559f4c876f9abd2a484b769c0cc2b270d5ff018))
+
 ## [2.21.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.20.0...hobbies-helsinki-v2.21.0) (2024-09-05)
 
 

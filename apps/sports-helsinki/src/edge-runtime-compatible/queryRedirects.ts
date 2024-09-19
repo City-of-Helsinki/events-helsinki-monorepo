@@ -37,4 +37,4 @@ const _REDIRECTS_QUERY = gql`
 
 // Query redirects from the CMS
 export const queryRedirects = (): Promise<unknown> =>
-  request(process.env.FEDERATION_ROUTER_ENDPOINT, _REDIRECTS_QUERY);
+  request(process.env.FEDERATION_ROUTER_ENDPOINT!, _REDIRECTS_QUERY);

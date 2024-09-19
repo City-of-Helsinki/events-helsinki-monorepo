@@ -31,6 +31,7 @@ const redirectRoutes = {
   '/perhehulinat': '/fi/pages/kohderyhmat/lapset-ja-perheet/perhehulinat-omatoiminen',
   '/liikuntatilavaraukset': '/fi/pages/liikuntatilojen-varaaminen',
   '/maksut': '/fi/pages/maksut-ja-hinnasto',
+  '/vertaisohjatut': '/fi/pages/ohjattu-liikunta/vertaisohjatut-liikuntaryhmat',
   // Swedish locale versions
   '/biblioteks-motion': '/sv/articles/aldre/gor-motion-till-en-rutin-i-ditt-liv-delta-i-biblioteksmotionen-for-aldre-manniskor',
   '/barn-och-familjer': '/sv/sidor/malgrupper/barn-och-familjer',

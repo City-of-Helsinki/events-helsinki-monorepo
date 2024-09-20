@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.27.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.26.0...sports-helsinki-v1.27.0) (2024-09-20)
+
+
+### Features
+
+* Redirect /vertaisohjatut ([558b17e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/558b17e3c763562c5bc402d55acaabf16d3138ad))
+
+
+### Bug Fixes
+
+* Type issue in queryRedirects ([5e0c30c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5e0c30cbcf92404205fd87a77244ef5b62325523))
+
 ## [1.26.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.25.0...sports-helsinki-v1.26.0) (2024-09-16)
 
 

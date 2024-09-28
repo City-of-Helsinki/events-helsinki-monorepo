@@ -71,7 +71,7 @@ const VenueList: React.FC<Props> = ({
       >
         <LoadingSpinner hasPadding={!venues.length} isLoading={loading}>
           {hasNext && (
-            <Button onClick={onLoadMore} variant="secondary" theme="black">
+            <Button onClick={onLoadMore} variant="success">
               {t('buttonLoadMore', { count: venuesLeft })}
             </Button>
           )}

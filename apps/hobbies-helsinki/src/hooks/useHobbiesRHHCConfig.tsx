@@ -87,6 +87,9 @@ export default function useHobbiesRHHCConfig(args: {
           <HelsinkiCityOwnedIcon {...props} />
         ),
       },
+      customCopy: {
+        loadMoreButtonTheme: 'coat',
+      },
       siteName: resilientT('appHobbies:appName'),
       currentLanguageCode: getLanguageCode(locale),
       apolloClient,

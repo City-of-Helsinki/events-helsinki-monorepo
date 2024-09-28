@@ -87,6 +87,9 @@ export default function useSportsRHHCConfig(args: {
           <HelsinkiCityOwnedIcon {...props} />
         ),
       },
+      customCopy: {
+        loadMoreButtonVariant: 'success',
+      },
       siteName: resilientT('appSports:appName'),
       currentLanguageCode: getLanguageCode(locale),
       apolloClient,

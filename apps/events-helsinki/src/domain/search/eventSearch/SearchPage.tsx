@@ -185,6 +185,7 @@ const SearchPage: React.FC<{
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
+                    loadMoreButtonVariant="success"
                   />
                 }
                 orderBySelectComponent={<EventsOrderBySelect />}

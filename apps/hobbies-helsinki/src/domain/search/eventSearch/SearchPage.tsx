@@ -180,6 +180,8 @@ const SearchPage: React.FC<{
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
+                    loadMoreButtonVariant="primary"
+                    loadMoreButtonTheme="coat"
                   />
                 }
               />

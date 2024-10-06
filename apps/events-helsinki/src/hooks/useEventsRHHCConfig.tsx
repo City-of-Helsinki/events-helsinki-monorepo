@@ -86,6 +86,9 @@ export default function useEventsRHHCConfig(args: {
           <HelsinkiCityOwnedIcon {...props} />
         ),
       },
+      customCopy: {
+        loadMoreButtonVariant: 'success',
+      },
       siteName: resilientT('appEvents:appName'),
       currentLanguageCode: getLanguageCode(locale),
       apolloClient,

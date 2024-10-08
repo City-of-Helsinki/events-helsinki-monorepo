@@ -1,12 +1,9 @@
 import { Footer, Link, Logo, logoFi, logoSv } from 'hds-react';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
 import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
-import useAskemContext from '../../components/askem/useAskemContext';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
-import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { useCommonTranslation, useResilientTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
 
@@ -32,15 +29,6 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   const { t: commonT } = useCommonTranslation();
   const { resilientT } = useResilientTranslation();
   const locale = useLocale();
-  const { asPath } = useRouter();
-  const { cookieDomain, askemConfiguration: askemConfigurationInput } =
-    useCookieConfigurationContext();
-
-  const { askemInstance, handleConsentGiven } = useAskemContext({
-    cookieDomain,
-    asPath,
-    askemConfigurationInput,
-  });
 
   const { data: footerMenuData } = useMenuQuery({
     skip: !!menu,
@@ -57,43 +45,23 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
     document.querySelector<HTMLDivElement>(`#${resetFocusId}`)?.focus();
   };
 
-  const AskemProvider = dynamic(
-    () => import('../../components/askem').then((mod) => mod.AskemProvider),
-    {
-      ssr: false,
-    }
-  );
-
-  const AskemFeedbackContainer = dynamic(
+  const UserTrackingFeatures = dynamic(
     () =>
-      import('../../components/askem').then(
-        (mod) => mod.AskemFeedbackContainer
-      ),
+      import('../widgets/UserTrackingFeatures').then((mod) => mod),
     {
       ssr: false,
     }
-  );
-
-  const EventsCookieConsent = dynamic(
-    () => import('../../components/eventsCookieConsent/EventsCookieConsent'),
-    { ssr: false }
   );
 
   return (
-    <AskemProvider value={askemInstance}>
-      {hasFeedBack && (
-        <AskemFeedbackContainer
-          withPadding={feedbackWithPadding}
-          consentUrl={consentUrl}
-        />
-      )}
-      {isModalConsent && (
-        <EventsCookieConsent
-          onConsentGiven={handleConsentGiven}
-          allowLanguageSwitch={false}
-          appName={appName}
-        />
-      )}
+    <>
+      <UserTrackingFeatures
+        appName={appName}
+        hasFeedBack={hasFeedBack}
+        feedbackWithPadding={feedbackWithPadding}
+        consentUrl={consentUrl}
+        isModalConsent={isModalConsent}
+      />
       <Footer title={appName} className={styles.footer}>
         <Footer.Base
           copyrightHolder={resilientT('footer:copyright')}
@@ -119,7 +87,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
           ))}
         </Footer.Base>
       </Footer>
-    </AskemProvider>
+    </>
   );
 };
 

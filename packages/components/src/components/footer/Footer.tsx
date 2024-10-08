@@ -45,9 +45,9 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
     document.querySelector<HTMLDivElement>(`#${resetFocusId}`)?.focus();
   };
 
-  const WidgetsContainer = dynamic(
+  const UserTrackingFeatures = dynamic(
     () =>
-      import('../../components/widgets/WidgetsContainer').then((mod) => mod),
+      import('../widgets/UserTrackingFeatures').then((mod) => mod),
     {
       ssr: false,
     }
@@ -55,7 +55,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
 
   return (
     <>
-      <WidgetsContainer
+      <UserTrackingFeatures
         appName={appName}
         hasFeedBack={hasFeedBack}
         feedbackWithPadding={feedbackWithPadding}

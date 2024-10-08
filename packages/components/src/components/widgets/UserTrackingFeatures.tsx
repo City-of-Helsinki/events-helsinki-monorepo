@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { AskemFeedbackContainer, AskemProvider } from '../../components/askem';
-import useAskemContext from '../../components/askem/useAskemContext';
-import EventsCookieConsent from '../../components/eventsCookieConsent/EventsCookieConsent';
+import { AskemFeedbackContainer, AskemProvider } from '../askem';
+import useAskemContext from '../askem/useAskemContext';
+import EventsCookieConsent from '../eventsCookieConsent/EventsCookieConsent';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 
-type WidgetsContainerProps = {
+type UserTrackingFeaturesProps = {
   appName: string;
   hasFeedBack: boolean;
   feedbackWithPadding: boolean;
@@ -13,13 +13,13 @@ type WidgetsContainerProps = {
   children?: React.ReactNode[];
 };
 
-export default function WidgetsContainer({
+export default function UserTrackingFeatures({
   appName,
   hasFeedBack,
   feedbackWithPadding,
   consentUrl,
   isModalConsent,
-}: WidgetsContainerProps) {
+}: UserTrackingFeaturesProps) {
   const { asPath } = useRouter();
   const { cookieDomain, askemConfiguration: askemConfigurationInput } =
     useCookieConfigurationContext();

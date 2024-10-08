@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.22.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.22.0...hobbies-helsinki-v2.22.1) (2024-10-08)
+
+
+### Bug Fixes
+
+* Card height and load more button ([#744](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/744)) ([8e3d077](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8e3d077c01813989ba1fbc6cad3d8e3ee0c6e597))
+* Cards fix ([#747](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/747)) ([71e08c0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/71e08c02d20384c1aa8fb3283cc4b326414abeec))
+
 ## [2.22.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.21.0...hobbies-helsinki-v2.22.0) (2024-09-16)
 
 

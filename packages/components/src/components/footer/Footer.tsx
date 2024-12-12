@@ -46,8 +46,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   };
 
   const UserTrackingFeatures = dynamic(
-    () =>
-      import('../widgets/UserTrackingFeatures').then((mod) => mod),
+    () => import('../widgets/UserTrackingFeatures').then((mod) => mod),
     {
       ssr: false,
     }

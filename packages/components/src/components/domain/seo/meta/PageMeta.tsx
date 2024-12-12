@@ -44,7 +44,9 @@ function PageMeta({
     <>
       <Head>
         {title && <title>{unescapeDash(title)}</title>}
-        {description && <meta name="description" content={description} />}
+        {description && (
+          <meta name="description" content={unescapeDash(description)} />
+        )}
         <meta property="og:title" content={openGraphTitle || ''} />
         <meta name="twitter:card" content="summary_large_image" />
         {description && (

@@ -10,6 +10,7 @@ import {
   RouteMeta,
   useResilientTranslation,
   PreviewNotification,
+  PageMeta,
 } from '@events-helsinki/components';
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type {
@@ -63,6 +64,10 @@ const HomePage: NextPage<{
         <>
           <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} />
+          <PageMeta
+            {...page?.seo}
+            image={page?.featuredImage?.node?.mediaItemUrl || ''}
+          />
           <RHHCPageContentNoSSR
             page={page}
             PageContentLayoutComponent={LandingPageContentLayout}

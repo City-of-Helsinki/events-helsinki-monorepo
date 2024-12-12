@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
+import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { AskemFeedbackContainer, AskemProvider } from '../askem';
 import useAskemContext from '../askem/useAskemContext';
 import EventsCookieConsent from '../eventsCookieConsent/EventsCookieConsent';
-import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 
 type UserTrackingFeaturesProps = {
   appName: string;

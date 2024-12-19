@@ -38,7 +38,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
-  const returnParam = extractLatestReturnPath(search, `/${locale}`);
+  const returnParam = extractLatestReturnPath(search, ``);
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
     const goBackUrl = `${
@@ -93,16 +93,18 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('venue:hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
-          </div>
+          {returnParam?.returnPath && (
+            <div className={styles.backButtonWrapper}>
+              <IconButton
+                role="link"
+                ariaLabel={t('venue:hero.ariaLabelBackButton')}
+                backgroundColor="white"
+                icon={<IconArrowLeft aria-hidden />}
+                onClick={() => goBack(returnParam)}
+                size="default"
+              />
+            </div>
+          )}
           <div>
             <BackgroundImage
               className={styles.image}

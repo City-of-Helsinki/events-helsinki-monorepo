@@ -1,4 +1,4 @@
-const redirectRoutes = {
+const redirectNonCampaignRoutes = {
   '/fi': [{ source: '/home', locale: 'fi' }],
   '/sv': [{ source: '/home', locale: 'sv' }],
   '/en': [{ source: '/home', locale: 'en' }],
@@ -7,4 +7,4 @@ const redirectRoutes = {
   '/en/search': [{ source: '/events', locale: 'en' }],
 };
 
-module.exports = redirectRoutes;
+module.exports = redirectNonCampaignRoutes;

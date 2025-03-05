@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.28.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.27.1...sports-helsinki-v1.28.0) (2025-03-05)
+
+
+### Features
+
+* Add new campaign redirect routes to events & sports apps ([44d6f69](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44d6f691cb8cf8713aed321a7a47cc33d9e72040))
+
+
+### Bug Fixes
+
+* Hcrc v1 major release ([4ae3659](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4ae3659c756c5bc4fc2ad2babdc64b4035ac5523))
+* Hds 3.11 upgrade ([3f9c7a1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3f9c7a1385a2ec7a3acdb0fcfb38d037da2aedfa))
+* Hero image size ([c6dde04](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6dde0438a861b5052ee866102fdd03ce099cbd5))
+* Landing page meta ([cf56952](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cf569525c57ecea4c3924971a0e203616fb9d17b))
+
 ## [1.27.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.27.0...sports-helsinki-v1.27.1) (2024-10-15)
 
 ### Bug Fixes

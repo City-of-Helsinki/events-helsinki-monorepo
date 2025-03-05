@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.4.0...venue-graphql-proxy-v1.5.0) (2025-03-05)
+
+
+### Features
+
+* **sports:** Add dynamic CMS configured redirect using middleware ([6170274](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/617027468b0ba9fa1fef08b0ae908867afbf8e8c))
+
 ## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.3.1...venue-graphql-proxy-v1.4.0) (2024-03-12)
 
 

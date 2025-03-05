@@ -32,6 +32,7 @@ const redirectRoutes = {
   '/liikuntatilavaraukset': '/fi/pages/liikuntatilojen-varaaminen',
   '/maksut': '/fi/pages/maksut-ja-hinnasto',
   '/vertaisohjatut': '/fi/pages/ohjattu-liikunta/vertaisohjatut-liikuntaryhmat',
+  '/arkipäivätuote': '/fi/articles/yleinen/uusi-arkipaivatuote-helsingin-liikuntapalveluiden-valikoimaan',
   // Swedish locale versions
   '/biblioteks-motion': '/sv/articles/aldre/gor-motion-till-en-rutin-i-ditt-liv-delta-i-biblioteksmotionen-for-aldre-manniskor',
   '/barn-och-familjer': '/sv/sidor/malgrupper/barn-och-familjer',
@@ -59,6 +60,7 @@ const redirectRoutes = {
   '/idrottslek-for-familjer': '/sv/pages/malgrupper/barn-och-familjer/perhehulinat-idrottslek-for-familjer-pa-egen-hand',
   '/bokning-av-idrottsutrymmen': '/sv/pages/bokning-av-idrottsutrymmen',
   '/priser': '/sv/pages/priser',
+  '/vardagsprodukt': '/sv/articles/vuxna/ny-vardagsprodukt-i-helsingfors-idrottstjansters-utbud',
   // English locale versions
   '/library-exercise': '/en/articles/seniors/make-exercise-a-routine-for-yourself-join-the-library-exercise-for-seniors',
   '/children-and-families': '/en/pages/target-groups/children-and-families',
@@ -86,6 +88,7 @@ const redirectRoutes = {
   '/family-sports-sessions': '/en/pages/target-groups/children-and-families/perhehulinat-family-sports-sessions-self-guided',
   '/reservation-of-sports-facilities': '/en/pages/reservation-of-sports-facilities',
   '/pricing': '/en/pages/pricing',
+  '/weekdayproduct': '/en/articles/adults/helsinki-sports-services-launching-new-weekday-product',
 };
 
 module.exports = redirectRoutes;

@@ -74,13 +74,12 @@ const NextCmsArticle: NextPage<{
   const { resilientT } = useResilientTranslation();
   const { footerMenu } = useContext(NavigationContext);
 
-  const { data: categoriesData, loading: loadingCategories } =
-    useCategoriesQuery({
-      variables: {
-        first: CATEGORIES_AMOUNT,
-        language: getLanguageCodeFilter(currentLanguageCode),
-      },
-    });
+  const { data: categoriesData } = useCategoriesQuery({
+    variables: {
+      first: CATEGORIES_AMOUNT,
+      language: getLanguageCodeFilter(currentLanguageCode),
+    },
+  });
 
   const categories = categoriesData?.categories?.nodes ?? [];
 

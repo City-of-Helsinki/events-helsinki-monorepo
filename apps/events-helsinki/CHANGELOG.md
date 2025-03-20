@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.21.0...events-helsinki-v1.22.0) (2025-03-20)
+
+
+### Features
+
+* Add "/ekoviikko" campaign URL ([bf5aa19](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bf5aa193b0c60457d1a5005c96186f8d39c6be37))
+
 ## [1.21.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.20.1...events-helsinki-v1.21.0) (2025-03-05)
 
 

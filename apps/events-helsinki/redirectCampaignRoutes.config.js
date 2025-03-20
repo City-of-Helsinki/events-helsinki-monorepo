@@ -3,6 +3,7 @@
 const redirectCampaignRoutes = {
   // Finnish locale versions
   '/maaginen': '/fi/articles/yleinen/maaginen-viikko-helsingin-kirjastoissa',
+  '/ekoviikko': '/fi/articles/yleinen/ekoviikko-kirjastoissa',
 
   // Swedish locale versions
   // None yet

@@ -12,7 +12,8 @@ const requestType = {
   isPagesFolderApi: (req: NextRequest) =>
     req.nextUrl.pathname.includes('/api/'),
   // FIXME: This seems broken, as it will match any pathname with a dot in it
-  // Originally probably from https://github.com/vercel/next.js/discussions/18419
+  // Originally probably from https://github.com/vercel/next.js/discussions/18419 or
+  // https://nextjs.org/docs/pages/building-your-application/routing/internationalization
   // as `PUBLIC_FILE = /\.(.*)$/` and `PUBLIC_FILE.test(pathname)` and passed
   // through hobbies-helsinki repo to events-helsinki-monorepo.
   isPublicFile: (req: NextRequest) => req.nextUrl.pathname.includes('.'),

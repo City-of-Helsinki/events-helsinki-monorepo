@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.23.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.22.0...events-helsinki-v1.23.0) (2025-04-16)
+
+
+### Features
+
+* **events:** Add /merellinenhelsinki campaign redirect to tapahtumat ([2f0baa9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2f0baa9b2ffab59f55689ad24a687a2aba9014c6))
+
 ## [1.22.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.21.0...events-helsinki-v1.22.0) (2025-03-20)
 
 

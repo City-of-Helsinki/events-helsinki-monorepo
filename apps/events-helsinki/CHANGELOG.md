@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.24.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.23.0...events-helsinki-v1.24.0) (2025-05-12)
+
+
+### Features
+
+* Add campaign URL for Koffarin-Kinofest ([9ba2cc6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9ba2cc6308f02691ccfcd8fe14fdf5159088e171))
+
 ## [1.23.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.22.0...events-helsinki-v1.23.0) (2025-04-16)
 
 

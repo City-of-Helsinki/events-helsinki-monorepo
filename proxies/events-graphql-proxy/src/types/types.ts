@@ -475,6 +475,9 @@ export type QueryEventListArgs = {
   audienceMaxAgeLt?: Maybe<Scalars['String']>;
   audienceMaxAgeGt?: Maybe<Scalars['String']>;
   suitableFor?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  // Experimental fields...
+  xFullText?: Maybe<Scalars['String']>;
+  xOngoing?: Maybe<Scalars['Boolean']>;
 };
 
 export type QueryKeywordDetailsArgs = {

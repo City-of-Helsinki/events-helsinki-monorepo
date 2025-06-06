@@ -1685,12 +1685,22 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   isContentNode: Boolean!
   "Whether the node represents the front page."
   isFrontPage: Boolean!
+  "Whether the JWT User secret has been revoked. If the secret has been revoked, auth tokens will not be issued until an admin, or user with proper capabilities re-issues a secret for the user."
+  isJwtAuthSecretRevoked: Boolean!
   "Whether  the node represents the blog page."
   isPostsPage: Boolean!
   "Whether the object is restricted from the current viewer"
   isRestricted: Boolean
   "Whether the node is a Term"
   isTermNode: Boolean!
+  "The expiration for the JWT Token for the user. If not set custom for the user, it will use the default sitewide expiration setting"
+  jwtAuthExpiration: String
+  "A JWT token that can be used in future requests for authentication/authorization"
+  jwtAuthToken: String
+  "A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers."
+  jwtRefreshToken: String
+  "A unique secret tied to the users JWT token that can be revoked or refreshed. Revoking the secret prevents JWT tokens from being issued to the user. Refreshing the token invalidates previously issued tokens, but allows new tokens to be issued."
+  jwtUserSecret: String
   "Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property."
   lastName: String
   "The preferred language locale set for the user. Value derived from get_user_locale()."
@@ -6272,6 +6282,16 @@ type RootMutation {
     "The count to increase"
     count: Int
   ): Int
+  "Login a user. Request for an authToken and User details in response"
+  login(
+    "Input for the login mutation"
+    input: LoginInput!
+  ): LoginPayload
+  "Use a valid JWT Refresh token to retrieve a new JWT Auth Token"
+  refreshJwtAuthToken(
+    "Input for the refreshJwtAuthToken mutation"
+    input: RefreshJwtAuthTokenInput!
+  ): RefreshJwtAuthTokenPayload
   "The registerUser mutation"
   registerUser(
     "Input for the registerUser mutation"
@@ -6572,6 +6592,24 @@ type DeleteUserPayload {
   deletedId: ID
   "The deleted user object"
   user: User
+}
+"The payload for the login mutation."
+type LoginPayload {
+  "JWT Token that can be used in future requests for Authentication"
+  authToken: String
+  "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+  clientMutationId: String
+  "A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers."
+  refreshToken: String
+  "The user that was logged in"
+  user: User
+}
+"The payload for the refreshJwtAuthToken mutation."
+type RefreshJwtAuthTokenPayload {
+  "JWT Token that can be used in future requests for Authentication"
+  authToken: String
+  "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+  clientMutationId: String
 }
 "The payload for the registerUser mutation."
 type RegisterUserPayload {
@@ -8190,12 +8228,18 @@ enum PostStatusEnum {
   DP_REWRITE_REPUBLISH
   "Objects with the draft status"
   DRAFT
+  "Objects with the draft-revision status"
+  DRAFT_REVISION
   "Objects with the future status"
   FUTURE
+  "Objects with the future-revision status"
+  FUTURE_REVISION
   "Objects with the inherit status"
   INHERIT
   "Objects with the pending status"
   PENDING
+  "Objects with the pending-revision status"
+  PENDING_REVISION
   "Objects with the private status"
   PRIVATE
   "Objects with the publish status"
@@ -8635,6 +8679,8 @@ enum UserRoleEnum {
   HEADLESS_CMS_EDITOR
   "User role with specific capabilities"
   HEADLESS_CMS_VIEWER
+  "User role with specific capabilities"
+  REVISOR
   "User role with specific capabilities"
   SUBSCRIBER
 }
@@ -11373,8 +11419,12 @@ input CreateUserInput {
   nickname: String
   "A string that contains the plain text password for the user."
   password: String
+  "If true, this will refresh the users JWT secret."
+  refreshJwtUserSecret: Boolean
   "The date the user registered. Format is Y-m-d H:i:s."
   registered: String
+  "If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets."
+  revokeJwtUserSecret: Boolean
   "A string for whether to enable the rich editor or not. False if not empty."
   richEditing: String
   "An array of roles to be assigned to the user."
@@ -11511,6 +11561,22 @@ input DeleteUserInput {
   "Reassign posts and links to new User ID."
   reassignId: ID
 }
+"Input for the login mutation."
+input LoginInput {
+  "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+  clientMutationId: String
+  "The plain-text password for the user logging in."
+  password: String!
+  "The username used for login. Typically a unique or email address depending on specific configuration"
+  username: String!
+}
+"Input for the refreshJwtAuthToken mutation."
+input RefreshJwtAuthTokenInput {
+  "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+  clientMutationId: String
+  "A valid, previously issued JWT refresh token. If valid a new Auth token will be provided. If invalid, expired, revoked or otherwise invalid, a new AuthToken will not be provided."
+  jwtRefreshToken: String!
+}
 "Input for the registerUser mutation."
 input RegisterUserInput {
   "User's AOL IM account."
@@ -11537,8 +11603,12 @@ input RegisterUserInput {
   nickname: String
   "A string that contains the plain text password for the user."
   password: String
+  "If true, this will refresh the users JWT secret."
+  refreshJwtUserSecret: Boolean
   "The date the user registered. Format is Y-m-d H:i:s."
   registered: String
+  "If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets."
+  revokeJwtUserSecret: Boolean
   "A string for whether to enable the rich editor or not. False if not empty."
   richEditing: String
   "A string that contains the user's username."
@@ -11937,8 +12007,12 @@ input UpdateUserInput {
   nickname: String
   "A string that contains the plain text password for the user."
   password: String
+  "If true, this will refresh the users JWT secret."
+  refreshJwtUserSecret: Boolean
   "The date the user registered. Format is Y-m-d H:i:s."
   registered: String
+  "If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets."
+  revokeJwtUserSecret: Boolean
   "A string for whether to enable the rich editor or not. False if not empty."
   richEditing: String
   "An array of roles to be assigned to the user."

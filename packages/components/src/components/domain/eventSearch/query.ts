@@ -37,6 +37,9 @@ export const QUERY_EVENT_LIST = gql`
     $superEventType: [String]
     $text: String
     $translation: String
+    # Experimental fields...
+    $xFullText: String
+    $xOngoing: Boolean
   ) {
     eventList(
       audienceMaxAgeGt: $audienceMaxAgeGt
@@ -74,6 +77,9 @@ export const QUERY_EVENT_LIST = gql`
       superEventType: $superEventType
       text: $text
       translation: $translation
+      # Experimental fields...
+      xFullText: $xFullText
+      xOngoing: $xOngoing
     ) {
       meta {
         count

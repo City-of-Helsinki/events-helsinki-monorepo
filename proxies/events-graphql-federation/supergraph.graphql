@@ -3982,8 +3982,16 @@ input CreateUserInput
   """A string that contains the plain text password for the user."""
   password: String
 
+  """If true, this will refresh the users JWT secret."""
+  refreshJwtUserSecret: Boolean
+
   """The date the user registered. Format is Y-m-d H:i:s."""
   registered: String
+
+  """
+  If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets.
+  """
+  revokeJwtUserSecret: Boolean
 
   """
   A string for whether to enable the rich editor or not. False if not empty.
@@ -7498,6 +7506,45 @@ type LocationsSelectedCarousel
   title: String
 }
 
+"""Input for the login mutation."""
+input LoginInput
+  @join__type(graph: CMS)
+{
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The plain-text password for the user logging in."""
+  password: String!
+
+  """
+  The username used for login. Typically a unique or email address depending on specific configuration
+  """
+  username: String!
+}
+
+"""The payload for the login mutation."""
+type LoginPayload
+  @join__type(graph: CMS)
+{
+  """JWT Token that can be used in future requests for Authentication"""
+  authToken: String
+
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers.
+  """
+  refreshToken: String
+
+  """The user that was logged in"""
+  user: User
+}
+
 """File details for a Media Item"""
 type MediaDetails
   @join__type(graph: CMS)
@@ -8825,6 +8872,18 @@ type Mutation
     """The count to increase"""
     count: Int
   ): Int @join__field(graph: CMS)
+
+  """Login a user. Request for an authToken and User details in response"""
+  login(
+    """Input for the login mutation"""
+    input: LoginInput!
+  ): LoginPayload @join__field(graph: CMS)
+
+  """Use a valid JWT Refresh token to retrieve a new JWT Auth Token"""
+  refreshJwtAuthToken(
+    """Input for the refreshJwtAuthToken mutation"""
+    input: RefreshJwtAuthTokenInput!
+  ): RefreshJwtAuthTokenPayload @join__field(graph: CMS)
 
   """The registerUser mutation"""
   registerUser(
@@ -11242,14 +11301,23 @@ enum PostStatusEnum
   """Objects with the draft status"""
   DRAFT @join__enumValue(graph: CMS)
 
+  """Objects with the draft-revision status"""
+  DRAFT_REVISION @join__enumValue(graph: CMS)
+
   """Objects with the future status"""
   FUTURE @join__enumValue(graph: CMS)
+
+  """Objects with the future-revision status"""
+  FUTURE_REVISION @join__enumValue(graph: CMS)
 
   """Objects with the inherit status"""
   INHERIT @join__enumValue(graph: CMS)
 
   """Objects with the pending status"""
   PENDING @join__enumValue(graph: CMS)
+
+  """Objects with the pending-revision status"""
+  PENDING_REVISION @join__enumValue(graph: CMS)
 
   """Objects with the private status"""
   PRIVATE @join__enumValue(graph: CMS)
@@ -13141,7 +13209,7 @@ type Query
   _empty: String @join__field(graph: EVENTS)
   eventDetails(id: ID, include: [String]): EventDetails! @join__field(graph: EVENTS)
   eventsByIds(eventType: [EventTypeId] = [General], ids: [ID!]!, include: [String], sort: String, pageSize: Int, page: Int, start: String, end: String): EventListResponse! @join__field(graph: EVENTS)
-  eventList(eventType: [EventTypeId] = [General], internetBased: Boolean, localOngoingAnd: [String], localOngoingOr: [String], localOngoingOrSet1: [String], localOngoingOrSet2: [String], localOngoingOrSet3: [String], internetOngoingAnd: [String], internetOngoingOr: [String], allOngoing: Boolean, allOngoingAnd: [String], allOngoingOr: [String], combinedText: [String], division: [String], end: String, endsAfter: String, endsBefore: String, ids: [String], inLanguage: String, include: [String], isFree: Boolean, keywordAnd: [String], keywordOrSet1: [String], keywordOrSet2: [String], keywordOrSet3: [String], keywordNot: [String], keyword: [String], language: String, location: [String], page: Int, pageSize: Int, publisher: ID, publisherAncestor: ID, sort: String, start: String, startsAfter: String, startsBefore: String, superEvent: ID, superEventType: [String], text: String, translation: String, suitableFor: [Int], audienceMinAgeGt: String, audienceMinAgeLt: String, audienceMaxAgeGt: String, audienceMaxAgeLt: String): EventListResponse! @join__field(graph: EVENTS)
+  eventList(eventType: [EventTypeId] = [General], internetBased: Boolean, localOngoingAnd: [String], localOngoingOr: [String], localOngoingOrSet1: [String], localOngoingOrSet2: [String], localOngoingOrSet3: [String], internetOngoingAnd: [String], internetOngoingOr: [String], allOngoing: Boolean, allOngoingAnd: [String], allOngoingOr: [String], combinedText: [String], division: [String], end: String, endsAfter: String, endsBefore: String, ids: [String], inLanguage: String, include: [String], isFree: Boolean, keywordAnd: [String], keywordOrSet1: [String], keywordOrSet2: [String], keywordOrSet3: [String], keywordNot: [String], keyword: [String], language: String, location: [String], page: Int, pageSize: Int, publisher: ID, publisherAncestor: ID, sort: String, start: String, startsAfter: String, startsBefore: String, superEvent: ID, superEventType: [String], text: String, translation: String, suitableFor: [Int], audienceMinAgeGt: String, audienceMinAgeLt: String, audienceMaxAgeGt: String, audienceMaxAgeLt: String, xFullText: String, xOngoing: Boolean): EventListResponse! @join__field(graph: EVENTS)
   keywordDetails(id: ID!): Keyword! @join__field(graph: EVENTS)
   keywordList(dataSource: String, hasUpcomingEvents: Boolean, page: Int, pageSize: Int, showAllKeywords: Boolean, sort: String, text: String): KeywordListResponse! @join__field(graph: EVENTS)
   neighborhoodList: NeighborhoodListResponse! @join__field(graph: EVENTS)
@@ -13273,6 +13341,34 @@ type ReadingSettings
   showOnFront: String
 }
 
+"""Input for the refreshJwtAuthToken mutation."""
+input RefreshJwtAuthTokenInput
+  @join__type(graph: CMS)
+{
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  A valid, previously issued JWT refresh token. If valid a new Auth token will be provided. If invalid, expired, revoked or otherwise invalid, a new AuthToken will not be provided.
+  """
+  jwtRefreshToken: String!
+}
+
+"""The payload for the refreshJwtAuthToken mutation."""
+type RefreshJwtAuthTokenPayload
+  @join__type(graph: CMS)
+{
+  """JWT Token that can be used in future requests for Authentication"""
+  authToken: String
+
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+}
+
 """Input for the registerUser mutation."""
 input RegisterUserInput
   @join__type(graph: CMS)
@@ -13319,8 +13415,16 @@ input RegisterUserInput
   """A string that contains the plain text password for the user."""
   password: String
 
+  """If true, this will refresh the users JWT secret."""
+  refreshJwtUserSecret: Boolean
+
   """The date the user registered. Format is Y-m-d H:i:s."""
   registered: String
+
+  """
+  If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets.
+  """
+  revokeJwtUserSecret: Boolean
 
   """
   A string for whether to enable the rich editor or not. False if not empty.
@@ -19277,8 +19381,16 @@ input UpdateUserInput
   """A string that contains the plain text password for the user."""
   password: String
 
+  """If true, this will refresh the users JWT secret."""
+  refreshJwtUserSecret: Boolean
+
   """The date the user registered. Format is Y-m-d H:i:s."""
   registered: String
+
+  """
+  If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets.
+  """
+  revokeJwtUserSecret: Boolean
 
   """
   A string for whether to enable the rich editor or not. False if not empty.
@@ -19435,6 +19547,11 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
   """Whether the node represents the front page."""
   isFrontPage: Boolean!
 
+  """
+  Whether the JWT User secret has been revoked. If the secret has been revoked, auth tokens will not be issued until an admin, or user with proper capabilities re-issues a secret for the user.
+  """
+  isJwtAuthSecretRevoked: Boolean!
+
   """Whether  the node represents the blog page."""
   isPostsPage: Boolean!
 
@@ -19443,6 +19560,26 @@ type User implements Node & UniformResourceIdentifiable & Commenter & DatabaseId
 
   """Whether the node is a Term"""
   isTermNode: Boolean!
+
+  """
+  The expiration for the JWT Token for the user. If not set custom for the user, it will use the default sitewide expiration setting
+  """
+  jwtAuthExpiration: String
+
+  """
+  A JWT token that can be used in future requests for authentication/authorization
+  """
+  jwtAuthToken: String
+
+  """
+  A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers.
+  """
+  jwtRefreshToken: String
+
+  """
+  A unique secret tied to the users JWT token that can be revoked or refreshed. Revoking the secret prevents JWT tokens from being issued to the user. Refreshing the token invalidates previously issued tokens, but allows new tokens to be issued.
+  """
+  jwtUserSecret: String
 
   """
   Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property.
@@ -19777,6 +19914,9 @@ enum UserRoleEnum
 
   """User role with specific capabilities"""
   HEADLESS_CMS_VIEWER @join__enumValue(graph: CMS)
+
+  """User role with specific capabilities"""
+  REVISOR @join__enumValue(graph: CMS)
 
   """User role with specific capabilities"""
   SUBSCRIBER @join__enumValue(graph: CMS)

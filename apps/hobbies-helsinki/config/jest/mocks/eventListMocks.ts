@@ -7,7 +7,11 @@ import type {
   EventType,
   QueryEventListArgs,
 } from '@events-helsinki/components';
-import { EventListDocument, EventTypeId } from '@events-helsinki/components';
+import {
+  EVENT_SEARCH_FILTERS,
+  EventListDocument,
+  EventTypeId,
+} from '@events-helsinki/components';
 import AppConfig from '../../../src/domain/app/AppConfig';
 
 export const baseVariables = {
@@ -27,6 +31,7 @@ export const baseVariables = {
   startsAfter: undefined,
   // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
   superEvent: 'none', // Added for courses in LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  [EVENT_SEARCH_FILTERS.ONGOING]: true,
 };
 
 export const eventListBaseVariables: QueryEventListArgs = {

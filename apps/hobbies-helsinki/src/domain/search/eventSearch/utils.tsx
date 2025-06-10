@@ -35,7 +35,7 @@ import AppConfig from '../../app/AppConfig';
 import routerHelper from '../../app/routerHelper';
 import type { COURSE_CATEGORIES, COURSE_HOBBY_TYPES } from './constants';
 import {
-  EVENT_DEFAULT_SEARCH_FILTERS,
+  COURSE_DEFAULT_SEARCH_FILTERS,
   courseCategories,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
@@ -205,7 +205,7 @@ export const getEventSearchVariables = ({
     // onlyRemoteEvents,
     places,
     publisher,
-    text,
+    [EVENT_SEARCH_FILTERS.TEXT]: text,
     audienceMinAgeLt,
     audienceMaxAgeGt,
   } = getSearchFilters(params);
@@ -257,24 +257,9 @@ export const getEventSearchVariables = ({
     MAPPED_COURSE_HOBBY_TYPES
   );
 
-  const hasLocation = !isEmpty(places);
-
-  const getSearchParam = () => {
-    const hasText = !isEmpty(text);
-    if (hasText && hasLocation) {
-      // show helsinki events matching to text
-      return { localOngoingAnd: text };
-    } else if (hasText) {
-      // show internet and helsinki events matching to text
-      return { allOngoingAnd: text };
-    } else {
-      // show all internet and helsinki events
-      return { allOngoing: true };
-    }
-  };
-
   return {
-    ...getSearchParam(),
+    [EVENT_SEARCH_FILTERS.TEXT]: !isEmpty(text) ? text?.join(',') : undefined, // NOTE: only *OngoingAnd supports Array.
+    [EVENT_SEARCH_FILTERS.ONGOING]: true,
     end,
     include,
     publisherAncestor,
@@ -375,7 +360,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     places: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.PLACES),
     publisher: searchParams.get(EVENT_SEARCH_FILTERS.PUBLISHER),
     start,
-    text: freeText,
+    [EVENT_SEARCH_FILTERS.TEXT]: freeText,
+    [EVENT_SEARCH_FILTERS.ONGOING]: true,
     suitableFor: normalizeSuitableFor(
       getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.SUITABLE, false)
     ),
@@ -409,7 +395,9 @@ export const getSuitableForFilterValue = (
   return initValue;
 };
 
-export const getSearchQuery = (filters: Filters): string => {
+export const getSearchQuery = (
+  filters: Omit<Filters, EVENT_SEARCH_FILTERS.ONGOING>
+): string => {
   const newFilters: MappedFilters = {
     ...filters,
     [EVENT_SEARCH_FILTERS.END]: formatDate(filters.end, 'yyyy-MM-dd'),
@@ -433,8 +421,16 @@ export const getSearchQuery = (filters: Filters): string => {
     delete newFilters.dateTypes;
   }
 
-  if (newFilters.text?.length && !newFilters.text[0]) {
-    delete newFilters.text;
+  if (
+    newFilters[EVENT_SEARCH_FILTERS.TEXT]?.length &&
+    !newFilters[EVENT_SEARCH_FILTERS.TEXT][0]
+  ) {
+    delete newFilters[EVENT_SEARCH_FILTERS.TEXT];
+  }
+
+  // ONGOING is hard coded to be always `true`, so it won't be needed in URL.
+  if (newFilters[EVENT_SEARCH_FILTERS.ONGOING]) {
+    delete newFilters[EVENT_SEARCH_FILTERS.ONGOING];
   }
 
   return buildQueryFromObject(newFilters);
@@ -544,7 +540,7 @@ export const getKeywordOnClickHandler: KeywordOnClickHandlerType =
   ) =>
   () => {
     const search = getSearchQuery({
-      ...EVENT_DEFAULT_SEARCH_FILTERS,
+      ...COURSE_DEFAULT_SEARCH_FILTERS,
       [EVENT_SEARCH_FILTERS.DATE_TYPES]: type === 'dateType' ? [value] : [],
       [EVENT_SEARCH_FILTERS.IS_FREE]: type === 'isFree',
       [EVENT_SEARCH_FILTERS.TEXT]: type === 'text' ? [value] : [],

@@ -3,6 +3,7 @@ import {
   useLocale,
   useCommonTranslation,
   EventTypeId,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -10,7 +11,7 @@ import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';
 import {
   CATEGORY_CATALOG,
-  EVENT_DEFAULT_SEARCH_FILTERS,
+  COURSE_DEFAULT_SEARCH_FILTERS,
 } from '../eventSearch/constants';
 import { getEventCategoryOptions, getSearchQuery } from '../eventSearch/utils';
 import styles from './landingPageSearch.module.scss';
@@ -44,11 +45,11 @@ const Search: React.FC = () => {
 
   const handleSubmit = () => {
     const search = getSearchQuery({
-      ...EVENT_DEFAULT_SEARCH_FILTERS,
+      ...COURSE_DEFAULT_SEARCH_FILTERS,
       dateTypes,
       end,
       start,
-      text: autosuggestInput ? [autosuggestInput] : [],
+      [EVENT_SEARCH_FILTERS.TEXT]: autosuggestInput ? [autosuggestInput] : [],
     });
 
     goToSearchPage(search);
@@ -56,11 +57,11 @@ const Search: React.FC = () => {
 
   const handleMenuOptionClick = (option: AutosuggestMenuOption) => {
     const search = getSearchQuery({
-      ...EVENT_DEFAULT_SEARCH_FILTERS,
+      ...COURSE_DEFAULT_SEARCH_FILTERS,
       dateTypes,
       end,
       start,
-      text: [option.text],
+      [EVENT_SEARCH_FILTERS.TEXT]: [option.text],
     });
     goToSearchPage(search);
   };
@@ -91,8 +92,7 @@ const Search: React.FC = () => {
         className={styles.categoriesWrapper}
         categories={categories}
         searchFilters={{
-          // TODO: use COURSE_DEFAULT_SEARCH_FILTERS
-          ...EVENT_DEFAULT_SEARCH_FILTERS,
+          ...COURSE_DEFAULT_SEARCH_FILTERS,
           dateTypes,
           end,
           start,

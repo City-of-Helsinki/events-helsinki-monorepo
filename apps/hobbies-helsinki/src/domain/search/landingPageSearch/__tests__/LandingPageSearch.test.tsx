@@ -1,4 +1,7 @@
-import { KeywordListDocument } from '@events-helsinki/components';
+import {
+  EVENT_SEARCH_FILTERS,
+  KeywordListDocument,
+} from '@events-helsinki/components';
 import { advanceTo } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
@@ -23,7 +26,7 @@ const mocks = [
       variables: {
         hasUpcomingEvents: true,
         pageSize: 5,
-        text: searchValue,
+        [EVENT_SEARCH_FILTERS.TEXT]: searchValue,
       },
     },
     result: keywordsResponse,
@@ -50,9 +53,9 @@ describe('Landing page', () => {
     expect(screen.getByText(/hakuehdotuksia/i)).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
-      asPath: `${searchPath}?text=${searchValue}`,
+      asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.TEXT}=${searchValue}`,
       pathname: searchPath,
-      query: { text: searchValue },
+      query: { [EVENT_SEARCH_FILTERS.TEXT]: searchValue },
     });
   });
 

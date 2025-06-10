@@ -1,11 +1,11 @@
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@/test-utils';
-
 import TextFilter from '../TextFilter';
+import { render, screen } from '@/test-utils';
 
 const props = {
   onRemove: jest.fn(),
   text: 'text',
+  type: 'text' as const,
 };
 
 it('matches snapshot', () => {

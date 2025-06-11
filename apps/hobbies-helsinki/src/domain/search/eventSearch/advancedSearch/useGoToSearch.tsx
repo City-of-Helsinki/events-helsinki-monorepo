@@ -10,9 +10,13 @@ export const useGoToSearch = () => {
   const router = useRouter();
 
   return (search: string): void => {
-    router.push({
-      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
-      query: queryString.parse(search) as ParsedUrlQueryInput,
-    });
+    router.push(
+      {
+        pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
+        query: queryString.parse(search) as ParsedUrlQueryInput,
+      },
+      undefined,
+      { shallow: true }
+    );
   };
 };

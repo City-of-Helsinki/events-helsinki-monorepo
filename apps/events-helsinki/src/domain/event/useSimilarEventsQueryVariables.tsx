@@ -1,7 +1,10 @@
-import { EVENT_SORT_OPTIONS } from '@events-helsinki/components/constants/event-constants';
+import {
+  EVENT_SEARCH_FILTERS,
+  EVENT_SORT_OPTIONS,
+} from '@events-helsinki/components/constants/event-constants';
 import type { EventFields } from '@events-helsinki/components/types/event-types';
 import React from 'react';
-import { EVENT_SEARCH_FILTERS } from '../search/eventSearch/constants';
+
 import {
   getEventCategories,
   getEventSearchVariables,

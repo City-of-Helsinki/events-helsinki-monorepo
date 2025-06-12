@@ -3,6 +3,7 @@ import {
   useLocale,
   useCommonTranslation,
   EventTypeId,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -48,7 +49,7 @@ const Search: React.FC = () => {
       dateTypes,
       end,
       start,
-      text: autosuggestInput ? [autosuggestInput] : [],
+      [EVENT_SEARCH_FILTERS.TEXT]: autosuggestInput ? [autosuggestInput] : [],
     });
 
     goToSearchPage(search);
@@ -60,7 +61,7 @@ const Search: React.FC = () => {
       dateTypes,
       end,
       start,
-      text: [option.text],
+      [EVENT_SEARCH_FILTERS.TEXT]: [option.text],
     });
     goToSearchPage(search);
   };

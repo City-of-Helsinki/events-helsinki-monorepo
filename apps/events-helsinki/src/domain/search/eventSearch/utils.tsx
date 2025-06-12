@@ -15,6 +15,7 @@ import {
   EventTypeId,
   scrollToTop,
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import {
   addDays,
@@ -33,7 +34,6 @@ import AppConfig from '../../app/AppConfig';
 import routerHelper from '../../app/routerHelper';
 import type { EVENT_CATEGORIES } from './constants';
 import {
-  EVENT_SEARCH_FILTERS,
   eventCategories,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
@@ -165,7 +165,7 @@ export const getEventSearchVariables = ({
     onlyRemoteEvents,
     places,
     publisher,
-    text,
+    [EVENT_SEARCH_FILTERS.TEXT]: text,
   } = getSearchFilters(params);
   const pathPlace = place && MAPPED_PLACES[place.toLowerCase()];
 
@@ -211,24 +211,9 @@ export const getEventSearchVariables = ({
     MAPPED_EVENT_CATEGORIES
   );
 
-  const hasLocation = !isEmpty(places);
-
-  const getSearchParam = () => {
-    const hasText = !isEmpty(text);
-    if (hasText && hasLocation) {
-      // show helsinki events matching to text
-      return { localOngoingAnd: text };
-    } else if (hasText) {
-      // show internet and helsinki events matching to text
-      return { allOngoingAnd: text };
-    } else {
-      // show all internet and helsinki events
-      return { allOngoing: true };
-    }
-  };
-
   return {
-    ...getSearchParam(),
+    [EVENT_SEARCH_FILTERS.TEXT]: !isEmpty(text) ? text?.join(',') : undefined, // NOTE: only *OngoingAnd supports Array.
+    [EVENT_SEARCH_FILTERS.ONGOING]: true,
     end,
     include,
     publisherAncestor,
@@ -319,11 +304,14 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     places: getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.PLACES),
     publisher: searchParams.get(EVENT_SEARCH_FILTERS.PUBLISHER),
     start,
-    text: freeText,
+    [EVENT_SEARCH_FILTERS.TEXT]: freeText,
+    [EVENT_SEARCH_FILTERS.ONGOING]: true,
   };
 };
 
-export const getSearchQuery = (filters: Filters): string => {
+export const getSearchQuery = (
+  filters: Omit<Filters, EVENT_SEARCH_FILTERS.ONGOING>
+): string => {
   const newFilters: MappedFilters = {
     ...filters,
     end: formatDate(filters.end, 'yyyy-MM-dd'),
@@ -339,8 +327,16 @@ export const getSearchQuery = (filters: Filters): string => {
     delete newFilters.dateTypes;
   }
 
-  if (newFilters.text?.length && !newFilters.text[0]) {
-    delete newFilters.text;
+  if (
+    newFilters[EVENT_SEARCH_FILTERS.TEXT]?.length &&
+    !newFilters[EVENT_SEARCH_FILTERS.TEXT][0]
+  ) {
+    delete newFilters[EVENT_SEARCH_FILTERS.TEXT];
+  }
+
+  // ONGOING is hard coded to be always `true`, so it won't be needed in URL.
+  if (newFilters[EVENT_SEARCH_FILTERS.ONGOING]) {
+    delete newFilters[EVENT_SEARCH_FILTERS.ONGOING];
   }
 
   return buildQueryFromObject(newFilters);

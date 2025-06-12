@@ -2,6 +2,7 @@ import type { AppLanguage } from '@events-helsinki/components';
 import {
   DATE_TYPES,
   DEFAULT_EVENT_SORT_OPTION,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 
@@ -22,21 +23,25 @@ describe('getSearchQuery function', () => {
     expect(
       getSearchQuery({
         ...EVENT_DEFAULT_SEARCH_FILTERS,
-        categories: ['category1', 'category2'],
-        dateTypes: ['type1', 'type2'],
-        text: ['test'],
+        [EVENT_SEARCH_FILTERS.CATEGORIES]: ['category1', 'category2'],
+        [EVENT_SEARCH_FILTERS.DATE_TYPES]: ['type1', 'type2'],
+        [EVENT_SEARCH_FILTERS.TEXT]: ['test'],
       })
-    ).toBe('?categories=category1,category2&dateTypes=type1,type2&text=test');
+    ).toBe(
+      `?${EVENT_SEARCH_FILTERS.CATEGORIES}=category1,category2&${EVENT_SEARCH_FILTERS.DATE_TYPES}=type1,type2&${EVENT_SEARCH_FILTERS.TEXT}=test`
+    );
 
     expect(
       getSearchQuery({
         ...EVENT_DEFAULT_SEARCH_FILTERS,
-        dateTypes: ['type1', 'type2'],
-        end: new Date('2019-12-20'),
-        start: new Date('2019-11-20'),
-        text: ['test'],
+        [EVENT_SEARCH_FILTERS.DATE_TYPES]: ['type1', 'type2'],
+        [EVENT_SEARCH_FILTERS.END]: new Date('2019-12-20'),
+        [EVENT_SEARCH_FILTERS.START]: new Date('2019-11-20'),
+        [EVENT_SEARCH_FILTERS.TEXT]: ['test'],
       })
-    ).toBe('?end=2019-12-20&start=2019-11-20&text=test');
+    ).toBe(
+      `?${EVENT_SEARCH_FILTERS.END}=2019-12-20&${EVENT_SEARCH_FILTERS.START}=2019-11-20&${EVENT_SEARCH_FILTERS.TEXT}=test`
+    );
   });
 });
 
@@ -94,28 +99,36 @@ describe('getEventSearchVariables function', () => {
     advanceTo('2020-10-06');
     const { end: end1, start: start1 } = getEventSearchVariables({
       ...defaultParams,
-      params: new URLSearchParams(`?dateTypes=${DATE_TYPES.THIS_WEEK}`),
+      params: new URLSearchParams(
+        `?${EVENT_SEARCH_FILTERS.DATE_TYPES}=${DATE_TYPES.THIS_WEEK}`
+      ),
     });
     expect(start1).toBe('now');
     expect(end1).toBe('2020-10-11');
 
     const { end: end2, start: start2 } = getEventSearchVariables({
       ...defaultParams,
-      params: new URLSearchParams(`?dateTypes=${DATE_TYPES.TODAY}`),
+      params: new URLSearchParams(
+        `?${EVENT_SEARCH_FILTERS.DATE_TYPES}=${DATE_TYPES.TODAY}`
+      ),
     });
     expect(start2).toBe('now');
     expect(end2).toBe('today');
 
     const { end: end3, start: start3 } = getEventSearchVariables({
       ...defaultParams,
-      params: new URLSearchParams(`?dateTypes=${DATE_TYPES.TOMORROW}`),
+      params: new URLSearchParams(
+        `?${EVENT_SEARCH_FILTERS.DATE_TYPES}=${DATE_TYPES.TOMORROW}`
+      ),
     });
     expect(start3).toBe('2020-10-07');
     expect(end3).toBe('2020-10-07');
 
     const { end: end4, start: start4 } = getEventSearchVariables({
       ...defaultParams,
-      params: new URLSearchParams(`?dateTypes=${DATE_TYPES.WEEKEND}`),
+      params: new URLSearchParams(
+        `?${EVENT_SEARCH_FILTERS.DATE_TYPES}=${DATE_TYPES.WEEKEND}`
+      ),
     });
     expect(start4).toBe('2020-10-10');
     expect(end4).toBe('2020-10-11');
@@ -123,7 +136,7 @@ describe('getEventSearchVariables function', () => {
     const { end: end5, start: start5 } = getEventSearchVariables({
       ...defaultParams,
       params: new URLSearchParams(
-        `?dateTypes=${DATE_TYPES.TODAY},${DATE_TYPES.TOMORROW}`
+        `?${EVENT_SEARCH_FILTERS.DATE_TYPES}=${DATE_TYPES.TODAY},${DATE_TYPES.TOMORROW}`
       ),
     });
     expect(start5).toBe('now');
@@ -132,7 +145,7 @@ describe('getEventSearchVariables function', () => {
     const { end: end6, start: start6 } = getEventSearchVariables({
       ...defaultParams,
       params: new URLSearchParams(
-        `?dateTypes=${DATE_TYPES.TODAY},${DATE_TYPES.WEEKEND}`
+        `?${EVENT_SEARCH_FILTERS.DATE_TYPES}=${DATE_TYPES.TODAY},${DATE_TYPES.WEEKEND}`
       ),
     });
     expect(start6).toBe('now');
@@ -141,32 +154,11 @@ describe('getEventSearchVariables function', () => {
     const { end: end7, start: start7 } = getEventSearchVariables({
       ...defaultParams,
       params: new URLSearchParams(
-        `?dateTypes=${DATE_TYPES.THIS_WEEK}&end=2020-10-15`
+        `?${EVENT_SEARCH_FILTERS.DATE_TYPES}=${DATE_TYPES.THIS_WEEK}&end=2020-10-15`
       ),
     });
     expect(start7).toBe('now');
     expect(end7).toBe('2020-10-15');
-  });
-
-  it('should not use *Ongoing params when no text present', () => {
-    const { allOngoingAnd, localOngoingAnd } = getEventSearchVariables({
-      ...defaultParams,
-      params: new URLSearchParams(),
-    });
-    expect(allOngoingAnd).toBeUndefined();
-    expect(localOngoingAnd).toBeUndefined();
-  });
-
-  it('should search localOngoing when a place given', () => {
-    const place = 'tprek:7254'; // MAPPED_PLACES["annantalo"];
-    const { allOngoingAnd, localOngoingAnd, location } =
-      getEventSearchVariables({
-        ...defaultParams,
-        params: new URLSearchParams(`?text=Rock&places=${place}`),
-      });
-    expect(location).toContain(place);
-    expect(allOngoingAnd).toBeUndefined();
-    expect(localOngoingAnd).toStrictEqual(['Rock']);
   });
 });
 

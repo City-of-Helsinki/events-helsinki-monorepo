@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.28.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.28.0...sports-helsinki-v1.28.1) (2025-06-12)
+
+
+### Bug Fixes
+
+* Hero image quality ([1f2bf45](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1f2bf450e15f8ac3648cbd206cd91f42057a7277))
+
 ## [1.28.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.27.1...sports-helsinki-v1.28.0) (2025-03-05)
 
 

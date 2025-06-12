@@ -1,4 +1,7 @@
-import { KeywordListDocument } from '@events-helsinki/components';
+import {
+  EVENT_SEARCH_FILTERS,
+  KeywordListDocument,
+} from '@events-helsinki/components';
 import { advanceTo } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
@@ -50,9 +53,9 @@ describe('Landing page', () => {
     expect(screen.getByText(/hakuehdotuksia/i)).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
-      asPath: `${searchPath}?text=${searchValue}`,
+      asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.TEXT}=${searchValue}`,
       pathname: searchPath,
-      query: { text: searchValue },
+      query: { [EVENT_SEARCH_FILTERS.TEXT]: searchValue },
     });
   });
 
@@ -80,9 +83,9 @@ describe('Landing page', () => {
     const links = await screen.findAllByRole('link', { name: /musiikki/i });
     await userEvent.click(links[0]);
     expect(router).toMatchObject({
-      asPath: `${searchPath}?categories=music`,
+      asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.CATEGORIES}=music`,
       pathname: searchPath,
-      query: { categories: 'music' },
+      query: { [EVENT_SEARCH_FILTERS.CATEGORIES]: 'music' },
     });
   });
 
@@ -95,9 +98,9 @@ describe('Landing page', () => {
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
 
     expect(router).toMatchObject({
-      asPath: `${searchPath}?dateTypes=today`,
+      asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.DATE_TYPES}=today`,
       pathname: searchPath,
-      query: { dateTypes: 'today' },
+      query: { [EVENT_SEARCH_FILTERS.DATE_TYPES]: 'today' },
     });
   });
 
@@ -121,9 +124,9 @@ describe('Landing page', () => {
     expect(router.pathname).toBe('/'); // TODO: remove
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
-      asPath: `${searchPath}?start=2020-10-06`,
+      asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.START}=2020-10-06`,
       pathname: searchPath,
-      query: { start: '2020-10-06' },
+      query: { [EVENT_SEARCH_FILTERS.START]: '2020-10-06' },
     });
   }, 50000);
 });

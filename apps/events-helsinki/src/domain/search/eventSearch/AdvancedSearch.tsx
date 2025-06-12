@@ -6,6 +6,7 @@ import {
   useAppEventsTranslation,
   useLocale,
   IconRead,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import classNames from 'classnames';
@@ -20,11 +21,7 @@ import SearchAutosuggest from '../../../common-events/components/search/SearchAu
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import PlaceSelector from '../../place/placeSelector/PlaceSelector';
-import {
-  EVENT_DEFAULT_SEARCH_FILTERS,
-  EVENT_SEARCH_FILTERS,
-  MAPPED_PLACES,
-} from './constants';
+import { EVENT_DEFAULT_SEARCH_FILTERS, MAPPED_PLACES } from './constants';
 import FilterSummary from './filterSummary/FilterSummary';
 import styles from './search.module.scss';
 import {
@@ -81,19 +78,19 @@ const AdvancedSearch: React.FC<Props> = ({
   } = getSearchFilters(searchParams);
 
   const searchFilters = {
-    categories: selectedCategories,
-    dateTypes: selectedDateTypes,
-    end,
-    isFree,
-    keyword,
-    keywordNot,
-    onlyChildrenEvents,
-    onlyEveningEvents,
-    onlyRemoteEvents,
-    places: selectedPlaces,
-    publisher,
-    start,
-    text: selectedTexts,
+    [EVENT_SEARCH_FILTERS.CATEGORIES]: selectedCategories,
+    [EVENT_SEARCH_FILTERS.DATE_TYPES]: selectedDateTypes,
+    [EVENT_SEARCH_FILTERS.END]: end,
+    [EVENT_SEARCH_FILTERS.IS_FREE]: isFree,
+    [EVENT_SEARCH_FILTERS.KEYWORD]: keyword,
+    [EVENT_SEARCH_FILTERS.KEYWORD_NOT]: keywordNot,
+    [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: onlyChildrenEvents,
+    [EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS]: onlyEveningEvents,
+    [EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS]: onlyRemoteEvents,
+    [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
+    [EVENT_SEARCH_FILTERS.PUBLISHER]: publisher,
+    [EVENT_SEARCH_FILTERS.START]: start,
+    [EVENT_SEARCH_FILTERS.TEXT]: selectedTexts,
   };
 
   const categories = getEventCategoryOptions(t).sort(
@@ -118,7 +115,7 @@ const AdvancedSearch: React.FC<Props> = ({
   const moveToSearchPage = () => {
     const filters = {
       ...searchFilters,
-      ...{ text: [autosuggestInput] },
+      ...{ [EVENT_SEARCH_FILTERS.TEXT]: [autosuggestInput] },
     };
     const search = getSearchQuery(filters);
 
@@ -128,12 +125,12 @@ const AdvancedSearch: React.FC<Props> = ({
   // Initialize fields when page is loaded
   React.useEffect(() => {
     const {
-      categories,
-      dateTypes,
-      end: endTime,
-      places,
-      start: startTime,
-      text,
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: categories,
+      [EVENT_SEARCH_FILTERS.DATE_TYPES]: dateTypes,
+      [EVENT_SEARCH_FILTERS.END]: endTime,
+      [EVENT_SEARCH_FILTERS.PLACES]: places,
+      [EVENT_SEARCH_FILTERS.START]: startTime,
+      [EVENT_SEARCH_FILTERS.TEXT]: text,
     } = getSearchFilters(searchParams);
 
     const pathPlace = params.place && MAPPED_PLACES[params.place.toLowerCase()];
@@ -159,7 +156,8 @@ const AdvancedSearch: React.FC<Props> = ({
   const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
     const value = option.text;
 
-    const { text } = getSearchFilters(searchParams);
+    const { [EVENT_SEARCH_FILTERS.TEXT]: text } =
+      getSearchFilters(searchParams);
 
     if (value && !text?.includes(value)) {
       text?.push(value);
@@ -167,7 +165,7 @@ const AdvancedSearch: React.FC<Props> = ({
 
     const search = getSearchQuery({
       ...searchFilters,
-      text,
+      [EVENT_SEARCH_FILTERS.TEXT]: text,
     });
 
     setSelectedTexts(text || []);
@@ -180,7 +178,7 @@ const AdvancedSearch: React.FC<Props> = ({
   ) => {
     const search = getSearchQuery({
       ...searchFilters,
-      onlyEveningEvents: e.target.checked,
+      [EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS]: e.target.checked,
     });
     goToSearch(search);
   };
@@ -190,7 +188,7 @@ const AdvancedSearch: React.FC<Props> = ({
   ) => {
     const search = getSearchQuery({
       ...searchFilters,
-      onlyRemoteEvents: e.target.checked,
+      [EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS]: e.target.checked,
     });
     goToSearch(search);
   };
@@ -198,7 +196,7 @@ const AdvancedSearch: React.FC<Props> = ({
   const handleIsFreeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = getSearchQuery({
       ...searchFilters,
-      isFree: e.target.checked,
+      [EVENT_SEARCH_FILTERS.IS_FREE]: e.target.checked,
     });
     goToSearch(search);
   };
@@ -208,7 +206,7 @@ const AdvancedSearch: React.FC<Props> = ({
   ) => {
     const search = getSearchQuery({
       ...searchFilters,
-      onlyChildrenEvents: e.target.checked,
+      [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: e.target.checked,
     });
 
     goToSearch(search);

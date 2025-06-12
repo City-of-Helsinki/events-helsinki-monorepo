@@ -8,6 +8,7 @@ import {
   OrganizationDetailsDocument,
   EventTypeId,
   otherEventTimesListTestId,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
@@ -115,8 +116,6 @@ const mocks = [
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      allOngoing: true,
-      internetBased: undefined,
       keywordOrSet2: [''],
       language: undefined,
       pageSize: 100,
@@ -232,8 +231,6 @@ it('shows similar events when SIMILAR_EVENTS flag is on', async () => {
       ...mocks,
       createEventListRequestAndResultMocks({
         variables: {
-          allOngoing: true,
-          internetBased: undefined,
           keywordOrSet2: ['yso:p916'],
           language: undefined,
           pageSize: 100,
@@ -277,8 +274,6 @@ it('doesnt show similar events when keywords are not mapped', async () => {
     ...mocks,
     createEventListRequestAndResultMocks({
       variables: {
-        allOngoing: true,
-        internetBased: undefined,
         keywordOrSet2: [''],
         language: undefined,
         pageSize: 100,
@@ -326,6 +321,6 @@ it.skip('should link to events search when clicking tags', async () => {
 
   expect(router).toMatchObject({
     pathname: '/haku',
-    asPath: '/haku?text=Avouinti',
+    asPath: `/haku?${EVENT_SEARCH_FILTERS.TEXT}=Avouinti`,
   });
 });

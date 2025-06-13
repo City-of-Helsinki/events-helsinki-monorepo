@@ -27,21 +27,9 @@ import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 import { getEventSearchVariables, getEventUrl, getNextPage } from './utils';
 
-const SearchPage: React.FC<{
-  SearchComponent: React.FC<{
-    scrollToResultList: () => void;
-    'data-testid'?: string;
-  }>;
-  pageTitle: string;
-}> = ({ SearchComponent, pageTitle }) => {
-  const { t } = useSearchTranslation();
+const useSearchQuery = () => {
   const router = useRouter();
   const params: { place?: string } = router.query;
-
-  const [isFetchingMore, setIsFetchingMore] = React.useState(false);
-  const isSmallScreen = useIsSmallScreen();
-  const routerHelper = useCmsRoutedAppHelper();
-  const { meta } = useConfig();
 
   const eventFilters = React.useMemo(() => {
     const searchParams = new URLSearchParams(
@@ -59,14 +47,32 @@ const SearchPage: React.FC<{
     return variables;
   }, [router.query, params.place]);
 
+  return useEventListQuery({
+    ssr: false,
+    variables: eventFilters,
+  });
+};
+
+const SearchPage: React.FC<{
+  SearchComponent: React.FC<{
+    scrollToResultList: () => void;
+    'data-testid'?: string;
+  }>;
+  pageTitle: string;
+}> = ({ SearchComponent, pageTitle }) => {
+  const { t } = useSearchTranslation();
+  const router = useRouter();
+
+  const [isFetchingMore, setIsFetchingMore] = React.useState(false);
+  const isSmallScreen = useIsSmallScreen();
+  const routerHelper = useCmsRoutedAppHelper();
+  const { meta } = useConfig();
+
   const {
     data: eventsData,
     fetchMore,
     loading: isLoadingEvents,
-  } = useEventListQuery({
-    ssr: false,
-    variables: eventFilters,
-  });
+  } = useSearchQuery();
 
   const eventsList = eventsData?.eventList;
 

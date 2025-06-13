@@ -34,7 +34,7 @@ import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
-import AdvancedSearch from '../../domain/search/eventSearch/AdvancedSearch';
+import AdvancedSearch from '../../domain/search/eventSearch/advancedSearch/AdvancedSearch';
 
 const Search: NextPage<{
   previewToken: string;

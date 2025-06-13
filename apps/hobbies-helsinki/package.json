@@ -1,6 +1,6 @@
 {
   "name": "hobbies-helsinki",
-  "version": "2.22.2",
+  "version": "2.22.3",
   "private": true,
   "scripts": {
     "clean": "rimraf --no-glob ./.next ./out ./coverage ./tsconfig.tsbuildinfo",

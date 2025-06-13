@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.22.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.22.2...hobbies-helsinki-v2.22.3) (2025-06-13)
+
+
+### Bug Fixes
+
+* Hero image quality ([1f2bf45](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1f2bf450e15f8ac3648cbd206cd91f42057a7277))
+
 ## [2.22.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.22.1...hobbies-helsinki-v2.22.2) (2025-03-05)
 
 

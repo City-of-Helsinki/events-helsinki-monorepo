@@ -39,22 +39,22 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const router = useRouter();
   const searchParams = new URLSearchParams(queryString.stringify(router.query));
   const {
-    categories,
-    hobbyTypes,
-    dateTypes,
-    end,
-    helsinkiOnly,
-    isFree,
-    keyword,
-    keywordNot,
-    onlyChildrenEvents,
-    places,
-    publisher,
-    start,
-    suitableFor,
-    text,
-    audienceMaxAgeGt,
-    audienceMinAgeLt,
+    [EVENT_SEARCH_FILTERS.CATEGORIES]: categories,
+    [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: hobbyTypes,
+    [EVENT_SEARCH_FILTERS.DATE_TYPES]: dateTypes,
+    [EVENT_SEARCH_FILTERS.END]: end,
+    [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]: helsinkiOnly,
+    [EVENT_SEARCH_FILTERS.IS_FREE]: isFree,
+    [EVENT_SEARCH_FILTERS.KEYWORD]: keyword,
+    [EVENT_SEARCH_FILTERS.KEYWORD_NOT]: keywordNot,
+    [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: onlyChildrenEvents,
+    [EVENT_SEARCH_FILTERS.PLACES]: places,
+    [EVENT_SEARCH_FILTERS.MAX_AGE]: publisher,
+    [EVENT_SEARCH_FILTERS.START]: start,
+    [EVENT_SEARCH_FILTERS.SUITABLE]: suitableFor,
+    [EVENT_SEARCH_FILTERS.TEXT]: text,
+    [EVENT_SEARCH_FILTERS.MAX_AGE]: audienceMaxAgeGt,
+    [EVENT_SEARCH_FILTERS.MIN_AGE]: audienceMinAgeLt,
   } = getSearchFilters(searchParams);
 
   const dateText =
@@ -88,7 +88,10 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       [EVENT_SEARCH_FILTERS.PLACES]: getFilteredList('place', places),
       [EVENT_SEARCH_FILTERS.PUBLISHER]: type !== 'publisher' ? publisher : null,
       [EVENT_SEARCH_FILTERS.START]: type === 'date' ? null : start,
-      [EVENT_SEARCH_FILTERS.TEXT]: getFilteredList('text', text),
+      [EVENT_SEARCH_FILTERS.TEXT]: getFilteredList(
+        EVENT_SEARCH_FILTERS.TEXT,
+        text
+      ),
       [EVENT_SEARCH_FILTERS.SUITABLE]:
         getSuitableForFilterValue(suitableFor, type) ?? [],
       [EVENT_SEARCH_FILTERS.MIN_AGE]: type === 'minAge' ? '' : audienceMinAgeLt,

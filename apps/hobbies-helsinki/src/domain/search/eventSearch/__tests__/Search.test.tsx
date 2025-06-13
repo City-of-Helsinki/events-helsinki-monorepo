@@ -1,4 +1,5 @@
 import {
+  EVENT_SEARCH_FILTERS,
   KeywordListDocument,
   NeighborhoodListDocument,
   PlaceListDocument,
@@ -62,7 +63,7 @@ const mocks = [
 ];
 
 const pathname = '/haku';
-const search = '?text=jazz';
+const search = `?${EVENT_SEARCH_FILTERS.TEXT}=jazz`;
 const testRoute = `${pathname}${search}`;
 const routes = [testRoute];
 
@@ -92,7 +93,10 @@ it('for accessibility violations', async () => {
 it('should clear all filters and search field', async () => {
   const { router } = renderComponent();
 
-  expect(router).toMatchObject({ pathname, query: { text: 'jazz' } });
+  expect(router).toMatchObject({
+    pathname,
+    query: { [EVENT_SEARCH_FILTERS.TEXT]: 'jazz' },
+  });
 
   const searchInput = screen.getByPlaceholderText(
     'Kirjoita hakusana, esim. ranska tai ruoanlaitto'
@@ -148,7 +152,10 @@ it('should change search query after checking is free checkbox', async () => {
 
   expect(router).toMatchObject({
     pathname,
-    query: { isFree: 'true', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.IS_FREE]: 'true',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 });
 
@@ -164,7 +171,10 @@ it('should change search query after selecting today date type and pressing subm
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
-    query: { dateTypes: 'today', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.DATE_TYPES]: 'today',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 });
 
@@ -193,7 +203,10 @@ it('should change search query after selecting start date and pressing submit bu
 
   expect(router).toMatchObject({
     pathname,
-    query: { start: '2020-10-06', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.START]: '2020-10-06',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 }, 50000); // FIXME: Why does this take so long to test?
 
@@ -211,8 +224,11 @@ it('should change search query after clicking category menu item', async () => {
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
-    asPath: `${pathname}?categories=movie_and_media&text=jazz`,
-    query: { categories: 'movie_and_media', text: 'jazz' },
+    asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=movie_and_media&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
+    query: {
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: 'movie_and_media',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 
   // multiple selection
@@ -222,7 +238,10 @@ it('should change search query after clicking category menu item', async () => {
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
-    asPath: `${pathname}?categories=movie_and_media%2Cgames%2Cmusic&text=jazz`,
-    query: { categories: 'movie_and_media,games,music', text: 'jazz' },
+    asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=movie_and_media%2Cgames%2Cmusic&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
+    query: {
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: 'movie_and_media,games,music',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 }, 50_000);

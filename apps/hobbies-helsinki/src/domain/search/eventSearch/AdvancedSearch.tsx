@@ -29,7 +29,7 @@ import SearchAutosuggest from '../../../common-events/components/search/SearchAu
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';
 import PlaceSelector from '../../place/placeSelector/PlaceSelector';
-import { EVENT_DEFAULT_SEARCH_FILTERS, MAPPED_PLACES } from './constants';
+import { COURSE_DEFAULT_SEARCH_FILTERS, MAPPED_PLACES } from './constants';
 import FilterSummary from './filterSummary/FilterSummary';
 import styles from './search.module.scss';
 import {
@@ -46,20 +46,13 @@ interface Props {
   'data-testid'?: string;
 }
 
-const AdvancedSearch: React.FC<Props> = ({
-  scrollToResultList,
-  'data-testid': dataTestId,
-}) => {
-  const { t } = useTranslation('search');
-  const { t: tAppHobbies } = useAppHobbiesTranslation();
-  const locale = useLocale();
+const useSearchFormState = () => {
   const router = useRouter();
   const params: { place?: string } = router.query;
   const searchParams = React.useMemo(
     () => new URLSearchParams(queryString.stringify(router.query)),
     [router.query]
   );
-
   const [categoryInput, setCategoryInput] = React.useState('');
   const [hobbyTypeInput, setHobbyTypeInput] = React.useState('');
   const [selectedHobbyTypes, setSelectedHobbyTypes] = React.useState<string[]>(
@@ -83,75 +76,18 @@ const AdvancedSearch: React.FC<Props> = ({
   const [selectedTexts, setSelectedTexts] = React.useState<string[]>([]);
   const [autosuggestInput, setAutosuggestInput] = React.useState('');
 
-  const {
-    isFree,
-    keyword,
-    keywordNot,
-    onlyChildrenEvents,
-    onlyEveningEvents,
-    onlyRemoteEvents,
-    publisher,
-  } = getSearchFilters(searchParams);
-
-  const searchFilters = {
-    categories: selectedCategories,
-    hobbyTypes: selectedHobbyTypes,
-    dateTypes: selectedDateTypes,
-    end,
-    isFree,
-    keyword,
-    keywordNot,
-    onlyChildrenEvents,
-    onlyEveningEvents,
-    onlyRemoteEvents,
-    places: selectedPlaces,
-    publisher,
-    start,
-    text: selectedTexts,
-    audienceMinAgeLt: minAgeInput,
-    audienceMaxAgeGt: maxAgeInput,
-  };
-
-  const categories = getEventCategoryOptions(t);
-  const hobbyTypes = getCourseHobbyTypeOptions(t);
-
-  const goToSearch = (search: string): void => {
-    router.push({
-      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
-      query: queryString.parse(search) as ParsedUrlQueryInput,
-    });
-  };
-
-  const handleChangeDateTypes = (value: string[]) => {
-    setSelectedDateTypes(value);
-  };
-
-  const toggleIsCustomDate = () => {
-    setIsCustomDate(!isCustomDate);
-  };
-
-  const moveToSearchPage = () => {
-    const filters = {
-      ...searchFilters,
-      ...{ text: [autosuggestInput] },
-    };
-    const search = getSearchQuery(filters);
-
-    goToSearch(search);
-  };
-
   // Initialize fields when page is loaded
   React.useEffect(() => {
     const {
-      categories,
-      hobbyTypes,
-      dateTypes,
-      end: endTime,
-      places,
-      start: startTime,
-      text,
-      audienceMinAgeLt,
-      audienceMaxAgeGt,
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: categories,
+      [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: hobbyTypes,
+      [EVENT_SEARCH_FILTERS.DATE_TYPES]: dateTypes,
+      [EVENT_SEARCH_FILTERS.END]: endTime,
+      [EVENT_SEARCH_FILTERS.PLACES]: places,
+      [EVENT_SEARCH_FILTERS.START]: startTime,
+      [EVENT_SEARCH_FILTERS.TEXT]: text,
+      [EVENT_SEARCH_FILTERS.MIN_AGE]: audienceMinAgeLt,
+      [EVENT_SEARCH_FILTERS.MAX_AGE]: audienceMaxAgeGt,
     } = getSearchFilters(searchParams);
 
     const pathPlace = params.place && MAPPED_PLACES[params.place.toLowerCase()];
@@ -177,21 +113,145 @@ const AdvancedSearch: React.FC<Props> = ({
     setAutosuggestInput(text?.toString() || '');
   }, [searchParams, params]);
 
+  return {
+    categoryInput,
+    setCategoryInput,
+    hobbyTypeInput,
+    setHobbyTypeInput,
+    selectedHobbyTypes,
+    setSelectedHobbyTypes,
+    minAgeInput,
+    setMinAgeInput,
+    maxAgeInput,
+    setMaxAgeInput,
+    placeInput,
+    setPlaceInput,
+    selectedDateTypes,
+    setSelectedDateTypes,
+    selectedCategories,
+    setSelectedCategories,
+    selectedPlaces,
+    setSelectedPlaces,
+    start,
+    setStart,
+    end,
+    setEnd,
+    isCustomDate,
+    setIsCustomDate,
+    selectedTexts,
+    setSelectedTexts,
+    autosuggestInput,
+    setAutosuggestInput,
+  };
+};
+
+const useGoToSearch = () => {
+  const locale = useLocale();
+  const router = useRouter();
+
+  return (search: string): void => {
+    router.push({
+      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
+      query: queryString.parse(search) as ParsedUrlQueryInput,
+    });
+  };
+};
+
+const AdvancedSearch: React.FC<Props> = ({
+  scrollToResultList,
+  'data-testid': dataTestId,
+}) => {
+  const { t } = useTranslation('search');
+  const { t: tAppHobbies } = useAppHobbiesTranslation();
+  const router = useRouter();
+  const searchParams = React.useMemo(
+    () => new URLSearchParams(queryString.stringify(router.query)),
+    [router.query]
+  );
+
+  const {
+    categoryInput,
+    setCategoryInput,
+    hobbyTypeInput,
+    setHobbyTypeInput,
+    selectedHobbyTypes,
+    setSelectedHobbyTypes,
+    minAgeInput,
+    setMinAgeInput,
+    maxAgeInput,
+    setMaxAgeInput,
+    placeInput,
+    setPlaceInput,
+    selectedDateTypes,
+    setSelectedDateTypes,
+    selectedCategories,
+    setSelectedCategories,
+    selectedPlaces,
+    setSelectedPlaces,
+    start,
+    setStart,
+    end,
+    setEnd,
+    isCustomDate,
+    setIsCustomDate,
+    selectedTexts,
+    setSelectedTexts,
+    autosuggestInput,
+    setAutosuggestInput,
+  } = useSearchFormState();
+
+  const searchFilters = {
+    ...getSearchFilters(searchParams),
+    [EVENT_SEARCH_FILTERS.CATEGORIES]: selectedCategories,
+    [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: selectedHobbyTypes,
+    [EVENT_SEARCH_FILTERS.DATE_TYPES]: selectedDateTypes,
+    [EVENT_SEARCH_FILTERS.END]: end,
+    [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
+    [EVENT_SEARCH_FILTERS.START]: start,
+    [EVENT_SEARCH_FILTERS.TEXT]: selectedTexts,
+    [EVENT_SEARCH_FILTERS.MIN_AGE]: minAgeInput,
+    [EVENT_SEARCH_FILTERS.MAX_AGE]: maxAgeInput,
+  };
+
+  const categories = getEventCategoryOptions(t);
+  const hobbyTypes = getCourseHobbyTypeOptions(t);
+
+  const goToSearch = useGoToSearch();
+
+  const handleChangeDateTypes = (value: string[]) => {
+    setSelectedDateTypes(value);
+  };
+
+  const toggleIsCustomDate = () => {
+    setIsCustomDate(!isCustomDate);
+  };
+
+  const moveToSearchPage = () => {
+    const filters = {
+      ...searchFilters,
+      ...{ [EVENT_SEARCH_FILTERS.TEXT]: [autosuggestInput] },
+    };
+    const search = getSearchQuery(filters);
+
+    goToSearch(search);
+  };
+
   const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
     const value = option.text;
 
-    const { text } = getSearchFilters(searchParams);
+    const { [EVENT_SEARCH_FILTERS.TEXT]: textSearch } =
+      getSearchFilters(searchParams);
 
-    if (value && !text?.includes(value)) {
-      text?.push(value);
+    if (value && !textSearch?.includes(value)) {
+      textSearch?.push(value);
     }
 
     const search = getSearchQuery({
       ...searchFilters,
-      text,
+      [EVENT_SEARCH_FILTERS.TEXT]: textSearch,
     });
 
-    setSelectedTexts(text || []);
+    setSelectedTexts(textSearch || []);
     goToSearch(search);
     scrollToResultList();
   };
@@ -199,7 +259,7 @@ const AdvancedSearch: React.FC<Props> = ({
   const handleIsFreeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const search = getSearchQuery({
       ...searchFilters,
-      isFree: e.target.checked,
+      [EVENT_SEARCH_FILTERS.IS_FREE]: e.target.checked,
     });
     goToSearch(search);
   };
@@ -214,7 +274,7 @@ const AdvancedSearch: React.FC<Props> = ({
   };
 
   const clearFilters = () => {
-    const search = getSearchQuery(EVENT_DEFAULT_SEARCH_FILTERS);
+    const search = getSearchQuery(COURSE_DEFAULT_SEARCH_FILTERS);
     goToSearch(search);
     clearInputValues();
   };
@@ -352,7 +412,7 @@ const AdvancedSearch: React.FC<Props> = ({
                 <div>
                   <Checkbox
                     className={styles.checkbox}
-                    checked={isFree}
+                    checked={searchFilters.isFree}
                     id={EVENT_SEARCH_FILTERS.IS_FREE}
                     label={t('search.checkboxIsFree')}
                     onChange={handleIsFreeChange}

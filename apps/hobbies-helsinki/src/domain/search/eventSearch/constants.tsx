@@ -1,4 +1,5 @@
 import {
+  EVENT_SEARCH_FILTERS,
   EventTypeId,
   IconArt,
   IconCraft,
@@ -47,33 +48,19 @@ export enum COURSE_HOBBY_TYPES {
   ONLINE_STUDIES = 'online_studies',
 }
 
-// TODO: Remove these since they should not be needed when the general events are not used at all.
-export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
-  categories: [],
-  hobbyTypes: [],
-  dateTypes: [],
-  end: null,
-  isFree: false,
-  keyword: [],
-  keywordNot: [],
-  places: [],
-  publisher: null,
-  start: null,
-  text: [],
-  suitableFor: [],
-};
-
-export const COURSE_DEFAULT_SEARCH_FILTERS = {
-  categories: [],
-  hobbyTypes: [],
-  dateTypes: [],
-  end: null,
-  isFree: false,
-  alsoOngoingCourses: false,
-  places: [],
-  start: null,
-  text: [],
-  suitableFor: [],
+export const COURSE_DEFAULT_SEARCH_FILTERS: Omit<
+  Filters,
+  EVENT_SEARCH_FILTERS.ONGOING
+> = {
+  [EVENT_SEARCH_FILTERS.CATEGORIES]: [],
+  [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: [],
+  [EVENT_SEARCH_FILTERS.DATE_TYPES]: [],
+  [EVENT_SEARCH_FILTERS.END]: null,
+  [EVENT_SEARCH_FILTERS.IS_FREE]: false,
+  [EVENT_SEARCH_FILTERS.PLACES]: [],
+  [EVENT_SEARCH_FILTERS.START]: null,
+  [EVENT_SEARCH_FILTERS.TEXT]: [],
+  [EVENT_SEARCH_FILTERS.SUITABLE]: [],
 };
 
 export const CATEGORY_CATALOG = {

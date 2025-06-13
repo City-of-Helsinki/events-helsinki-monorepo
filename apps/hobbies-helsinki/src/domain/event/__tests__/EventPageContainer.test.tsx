@@ -7,6 +7,7 @@ import {
   OrganizationDetailsDocument,
   EventTypeId,
   otherEventTimesListTestId,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -114,10 +115,8 @@ const mocks = [
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      allOngoing: true,
       audienceMinAgeLt: '5',
       audienceMaxAgeGt: '15',
-      internetBased: undefined,
       keywordOrSet2: [''],
       keywordOrSet3: [''],
       language: undefined,
@@ -234,10 +233,8 @@ it('shows similar events when SIMILAR_EVENTS flag is on', async () => {
       ...mocks,
       createEventListRequestAndResultMocks({
         variables: {
-          allOngoing: true,
           audienceMinAgeLt: '5',
           audienceMaxAgeGt: '15',
-          internetBased: undefined,
           keywordOrSet2: ['yso:p916'],
           keywordOrSet3: ['yso:p916'],
           language: undefined,
@@ -282,8 +279,6 @@ it('doesnt show similar events when keywords are not mapped', async () => {
     ...mocks,
     createEventListRequestAndResultMocks({
       variables: {
-        allOngoing: true,
-        internetBased: undefined,
         keywordOrSet2: [''],
         language: undefined,
         pageSize: 100,
@@ -331,6 +326,6 @@ it.skip('should link to events search when clicking tags', async () => {
 
   expect(router).toMatchObject({
     pathname: '/haku',
-    asPath: '/haku?text=Avouinti',
+    asPath: `/haku?${EVENT_SEARCH_FILTERS.TEXT}=Avouinti`,
   });
 });

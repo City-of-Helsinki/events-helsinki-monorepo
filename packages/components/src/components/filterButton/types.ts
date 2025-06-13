@@ -1,5 +1,6 @@
 export type AgeFilterType = 'maxAge' | 'minAge';
 export type DateFilterType = 'date' | 'dateType';
+export type TextFilterType = 'text' | 'xFullText';
 
 /**
  * @deprecated since the CombinedSearch refactoring its new types and adapters should
@@ -13,12 +14,12 @@ type CombinedSearchInputSubset =
   | 'place'
   | 'sportsCategories'
   | 'targetGroups'
-  | 'text'
   | 'accessibility';
 
 export type FilterType =
   | AgeFilterType
   | DateFilterType
+  | TextFilterType
   | CombinedSearchInputSubset
   | 'category' // Used in events-helsinki and hobbies-helsinki
   | 'division' // Used in events-helsinki and hobbies-helsinki

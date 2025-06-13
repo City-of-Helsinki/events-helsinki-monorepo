@@ -1,4 +1,5 @@
 import {
+  EVENT_SEARCH_FILTERS,
   NeighborhoodListDocument,
   OrganizationDetailsDocument,
   PlaceDetailsDocument,
@@ -76,13 +77,13 @@ const mocks = [
 ];
 
 interface UrlParams {
-  categories: string;
-  dateTypes: string;
-  end: string;
-  places: string;
-  publisher: string;
-  start: string;
-  text: string;
+  [EVENT_SEARCH_FILTERS.CATEGORIES]: string;
+  [EVENT_SEARCH_FILTERS.DATE_TYPES]: string;
+  [EVENT_SEARCH_FILTERS.END]: string;
+  [EVENT_SEARCH_FILTERS.PLACES]: string;
+  [EVENT_SEARCH_FILTERS.PUBLISHER]: string;
+  [EVENT_SEARCH_FILTERS.START]: string;
+  [EVENT_SEARCH_FILTERS.TEXT]: string;
 }
 
 const urlParams: UrlParams = {
@@ -92,14 +93,18 @@ const urlParams: UrlParams = {
   places: placeId,
   publisher: organizationId,
   start: '2020-08-20',
-  text: 'jazz',
+  [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
 };
 
 // type UrlParamKeys = keyof UrlParams;
 
 const routes = [
   // eslint-disable-next-line max-len
-  `/haku?categories=${urlParams.categories}&dateTypes=today&end=${urlParams.end}&places=${urlParams.places}&publisher=${urlParams.publisher}&start=${urlParams.start}&text=${urlParams.text}`,
+  `/haku?categories=${urlParams.categories}&dateTypes=today&end=${
+    urlParams.end
+  }&places=${urlParams.places}&publisher=${urlParams.publisher}&start=${
+    urlParams.start
+  }&${EVENT_SEARCH_FILTERS.TEXT}=${urlParams[EVENT_SEARCH_FILTERS.TEXT]}`,
 ];
 
 // TODO: when HDS fixes the tag id -> uncomment

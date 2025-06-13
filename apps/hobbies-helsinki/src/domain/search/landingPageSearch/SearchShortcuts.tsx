@@ -1,3 +1,4 @@
+import type { EVENT_SEARCH_FILTERS } from '@events-helsinki/components';
 import { useLocale } from '@events-helsinki/components';
 import classNames from 'classnames';
 import React from 'react';
@@ -11,7 +12,7 @@ import { getSearchQuery } from '../eventSearch/utils';
 type SearchShortcutsProps = {
   className: string;
   categories: CategoryOption[];
-  searchFilters: Filters;
+  searchFilters: Omit<Filters, EVENT_SEARCH_FILTERS.ONGOING>;
 };
 
 export default function SearchShortcuts({

@@ -182,6 +182,7 @@ export const fakePlace = (overrides?: Partial<Place>): Place =>
       email: faker.internet.email(),
       infoUrl: fakeLocalizedObject(faker.internet.url()),
       position: null,
+      divisions: [],
       __typename: 'Place',
     },
     overrides

@@ -11,6 +11,7 @@ import {
   EventListDocument,
   EventTypeId,
   DEFAULT_EVENT_SORT_OPTION,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import AppConfig from '../../../src/domain/app/AppConfig';
 
@@ -27,6 +28,7 @@ export const baseVariables = {
   start: 'now',
   startsAfter: undefined,
   // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  [EVENT_SEARCH_FILTERS.ONGOING]: true,
 };
 
 export const eventListBaseVariables: QueryEventListArgs = {

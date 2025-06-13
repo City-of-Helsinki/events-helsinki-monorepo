@@ -1,4 +1,5 @@
 import {
+  EVENT_SEARCH_FILTERS,
   NeighborhoodListDocument,
   OrganizationDetailsDocument,
   PlaceDetailsDocument,
@@ -99,7 +100,7 @@ const urlParams: UrlParams = {
 
 const routes = [
   // eslint-disable-next-line max-len
-  `/haku?categories=${urlParams.categories}&dateTypes=today&end=${urlParams.end}&places=${urlParams.places}&publisher=${urlParams.publisher}&start=${urlParams.start}&text=${urlParams.text}`,
+  `/haku?${EVENT_SEARCH_FILTERS.CATEGORIES}=${urlParams.categories}&${EVENT_SEARCH_FILTERS.DATE_TYPES}=today&${EVENT_SEARCH_FILTERS.END}=${urlParams.end}&${EVENT_SEARCH_FILTERS.PLACES}=${urlParams.places}&${EVENT_SEARCH_FILTERS.PUBLISHER}=${urlParams.publisher}&${EVENT_SEARCH_FILTERS.START}=${urlParams.start}&${EVENT_SEARCH_FILTERS.TEXT}=${urlParams.text}`,
 ];
 
 // TODO: when HDS fixes the tag id -> uncomment

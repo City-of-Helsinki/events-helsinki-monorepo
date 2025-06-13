@@ -1,6 +1,7 @@
+import type { EVENT_SEARCH_FILTERS } from '@events-helsinki/components';
 import type React from 'react';
 
-import type { EVENT_CATEGORIES, EVENT_SEARCH_FILTERS } from './constants';
+import type { EVENT_CATEGORIES } from './constants';
 
 export interface CategoryOption {
   icon: React.ReactElement;
@@ -35,6 +36,7 @@ export interface Filters {
   [EVENT_SEARCH_FILTERS.PUBLISHER]?: string | null;
   [EVENT_SEARCH_FILTERS.START]: Date | null;
   [EVENT_SEARCH_FILTERS.TEXT]?: string[];
+  [EVENT_SEARCH_FILTERS.ONGOING]: boolean;
 }
 
 export type MappedFilters = Partial<Omit<Filters, 'start' | 'end'>> & {

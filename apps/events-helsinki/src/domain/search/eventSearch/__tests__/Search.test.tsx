@@ -1,4 +1,5 @@
 import {
+  EVENT_SEARCH_FILTERS,
   KeywordListDocument,
   NeighborhoodListDocument,
   PlaceListDocument,
@@ -62,7 +63,7 @@ const mocks = [
 ];
 
 const pathname = '/haku';
-const search = '?text=jazz';
+const search = `?${EVENT_SEARCH_FILTERS.TEXT}=jazz`;
 const testRoute = `${pathname}${search}`;
 const routes = [testRoute];
 
@@ -92,7 +93,10 @@ it('for accessibility violations', async () => {
 it('should clear all filters and search field', async () => {
   const { router } = renderComponent();
 
-  expect(router).toMatchObject({ pathname, query: { text: 'jazz' } });
+  expect(router).toMatchObject({
+    pathname,
+    query: { [EVENT_SEARCH_FILTERS.TEXT]: 'jazz' },
+  });
 
   const searchInput = screen.getByPlaceholderText(
     'Kirjoita hakusana, esim. rock tai jooga'
@@ -148,7 +152,10 @@ it('should change search query after checking only children events checkbox', as
 
   expect(router).toMatchObject({
     pathname,
-    query: { onlyChildrenEvents: 'true', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: 'true',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 });
 
@@ -163,7 +170,10 @@ it('should change search query after checking only evening events checkbox', asy
 
   expect(router).toMatchObject({
     pathname,
-    query: { onlyEveningEvents: 'true', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS]: 'true',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 });
 
@@ -178,7 +188,10 @@ it('should change search query after checking is free checkbox', async () => {
 
   expect(router).toMatchObject({
     pathname,
-    query: { isFree: 'true', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.IS_FREE]: 'true',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 });
 
@@ -194,7 +207,10 @@ it('should change search query after selecting today date type and pressing subm
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
-    query: { dateTypes: 'today', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.DATE_TYPES]: 'today',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 });
 
@@ -223,7 +239,10 @@ it('should change search query after selecting start date and pressing submit bu
 
   expect(router).toMatchObject({
     pathname,
-    query: { start: '2020-10-06', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.START]: '2020-10-06',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 }, 50000); // FIXME: Why does this take so long to test?
 
@@ -239,8 +258,11 @@ it('should change search query after clicking category menu item', async () => {
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
-    asPath: `${pathname}?categories=movie&text=jazz`,
-    query: { categories: 'movie', text: 'jazz' },
+    asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=movie&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
+    query: {
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: 'movie',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 
   // multiple selection
@@ -252,8 +274,11 @@ it('should change search query after clicking category menu item', async () => {
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
-    asPath: `${pathname}?categories=movie%2Cnature%2Cmusic&text=jazz`,
-    query: { categories: 'movie,nature,music', text: 'jazz' },
+    asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=movie%2Cnature%2Cmusic&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
+    query: {
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: 'movie,nature,music',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 }, 50_000);
 
@@ -268,6 +293,9 @@ it('should change search query with remote events checkbox', async () => {
 
   expect(router).toMatchObject({
     pathname,
-    query: { onlyRemoteEvents: 'true', text: 'jazz' },
+    query: {
+      [EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS]: 'true',
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
   });
 });

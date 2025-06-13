@@ -1,4 +1,5 @@
 import {
+  EVENT_SEARCH_FILTERS,
   EventTypeId,
   IconCultureAndArts,
   IconDance,
@@ -30,37 +31,21 @@ export enum EVENT_CATEGORIES {
   THEATRE = 'theatre',
 }
 
-// TODO: Remove these since they should not be needed when the general events are not used at all.
-export const EVENT_DEFAULT_SEARCH_FILTERS: Filters = {
-  categories: [],
-  dateTypes: [],
-  end: null,
-  isFree: false,
-  keyword: [],
-  keywordNot: [],
-  places: [],
-  publisher: null,
-  start: null,
-  text: [],
+export const EVENT_DEFAULT_SEARCH_FILTERS: Omit<
+  Filters,
+  EVENT_SEARCH_FILTERS.ONGOING
+> = {
+  [EVENT_SEARCH_FILTERS.CATEGORIES]: [],
+  [EVENT_SEARCH_FILTERS.DATE_TYPES]: [],
+  [EVENT_SEARCH_FILTERS.END]: null,
+  [EVENT_SEARCH_FILTERS.IS_FREE]: false,
+  [EVENT_SEARCH_FILTERS.KEYWORD]: [],
+  [EVENT_SEARCH_FILTERS.KEYWORD_NOT]: [],
+  [EVENT_SEARCH_FILTERS.PLACES]: [],
+  [EVENT_SEARCH_FILTERS.PUBLISHER]: null,
+  [EVENT_SEARCH_FILTERS.START]: null,
+  [EVENT_SEARCH_FILTERS.TEXT]: [],
 };
-
-export enum EVENT_SEARCH_FILTERS {
-  CATEGORIES = 'categories',
-  DATE_TYPES = 'dateTypes',
-  END = 'end',
-  HELSINKI_ONLY = 'helsinkiOnly',
-  IS_FREE = 'isFree',
-  KEYWORD = 'keyword',
-  KEYWORD_NOT = 'keywordNot',
-  ONLY_CHILDREN_EVENTS = 'onlyChildrenEvents',
-  ONLY_EVENING_EVENTS = 'onlyEveningEvents',
-  ONLY_REMOTE_EVENTS = 'onlyRemoteEvents',
-  PAGE = 'page',
-  PLACES = 'places',
-  PUBLISHER = 'publisher',
-  START = 'start',
-  TEXT = 'text',
-}
 
 export const CATEGORY_CATALOG = {
   [EventTypeId.General]: {

@@ -9,6 +9,7 @@ import {
   FilterButton,
   useLocale,
   HelsinkiOnlyFilter,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
@@ -18,7 +19,6 @@ import React from 'react';
 
 import { ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
-import { EVENT_SEARCH_FILTERS } from '../constants';
 import { getSearchFilters, getSearchQuery } from '../utils';
 import styles from './filterSummary.module.scss';
 
@@ -34,18 +34,18 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const router = useRouter();
   const searchParams = new URLSearchParams(queryString.stringify(router.query));
   const {
-    categories,
-    dateTypes,
-    end,
-    helsinkiOnly,
-    isFree,
-    keyword,
-    keywordNot,
-    onlyChildrenEvents,
-    places,
-    publisher,
-    start,
-    text,
+    [EVENT_SEARCH_FILTERS.CATEGORIES]: categories,
+    [EVENT_SEARCH_FILTERS.DATE_TYPES]: dateTypes,
+    [EVENT_SEARCH_FILTERS.END]: end,
+    [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]: helsinkiOnly,
+    [EVENT_SEARCH_FILTERS.IS_FREE]: isFree,
+    [EVENT_SEARCH_FILTERS.KEYWORD]: keyword,
+    [EVENT_SEARCH_FILTERS.KEYWORD_NOT]: keywordNot,
+    [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: onlyChildrenEvents,
+    [EVENT_SEARCH_FILTERS.PLACES]: places,
+    [EVENT_SEARCH_FILTERS.PUBLISHER]: publisher,
+    [EVENT_SEARCH_FILTERS.START]: start,
+    [EVENT_SEARCH_FILTERS.TEXT]: text,
   } = getSearchFilters(searchParams);
 
   const dateText =

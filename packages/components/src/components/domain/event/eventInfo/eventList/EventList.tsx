@@ -24,7 +24,7 @@ const EventList: React.FC<{
   const { getEventListLinkUrl } = useAppRoutingContext();
   return (
     <ul className={styles.timeList} data-testid={id}>
-      {events.map((event) => {
+      {events.map((event, index) => {
         const { name } = getEventFields(event, locale);
         const date = event.startTime
           ? getDateRangeStr({
@@ -36,7 +36,7 @@ const EventList: React.FC<{
             })
           : '';
         return (
-          <li key={event.id}>
+          <li key={event.id ?? `generic-event-id-${index}`}>
             <Link
               className={styles.link}
               iconRight={<IconArrowRight />}

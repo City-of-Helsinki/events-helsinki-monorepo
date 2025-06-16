@@ -94,10 +94,8 @@ export type CombinedSearchAdapterInputFallback =
 /** The fields that are used by the Event and Course search. */
 export type EventSearchParams = Pick<
   EventListQueryVariables,
-  | 'text'
-  | 'allOngoingAnd'
-  | 'allOngoing'
-  | 'localOngoingAnd'
+  | 'xFullText'
+  | 'xOngoing'
   | 'start'
   | 'end'
   | 'include'

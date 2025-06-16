@@ -17,9 +17,8 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
    * List here all the event and course search parameters
    * that are wanted to be mapped with the combined search.
    */
-  text: EventSearchParams['text'];
-  allOngoingAnd: EventSearchParams['allOngoingAnd'];
-  allOngoing: EventSearchParams['allOngoing'];
+  xFullText?: EventSearchParams['xFullText'];
+  xOngoing: EventSearchParams['xOngoing'];
   start: EventSearchParams['start'];
   end: EventSearchParams['end'];
   include: EventSearchParams['include'];
@@ -51,12 +50,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     // Initialize the object with default values
     Object.assign(this, initialEventSearchAdapterValues, { eventType });
 
-    // NOTE: The text-parameter is now used instead of allOngoingAnd, which was used earlier. There should be more results this way.
-    // this.text = input.text ?? null;
-    this.allOngoingAnd = input.text
-      ? [input.text]
-      : initialEventSearchAdapterValues.allOngoingAnd;
-    if (!input.text) this.allOngoing = !input.text; // If there is not free text given, we should still search ongoing events
+    this.xFullText = input.text || initialEventSearchAdapterValues.xFullText;
     this.keywordAnd = [];
     this.keywordOrSet1 = SPORT_COURSES_KEYWORDS;
     this.keywordOrSet2 = this.getSportsKeywords(input);

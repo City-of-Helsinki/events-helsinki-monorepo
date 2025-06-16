@@ -55,7 +55,8 @@ const mocks = [
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      allOngoingAnd: [],
+      xFullText: '',
+      xOngoing: true,
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,
     },
@@ -63,7 +64,8 @@ const mocks = [
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      allOngoingAnd: [],
+      xFullText: '',
+      xOngoing: true,
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,
       eventType: EventTypeId.Course,
@@ -72,7 +74,8 @@ const mocks = [
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      allOngoingAnd: [],
+      xFullText: '',
+      xOngoing: true,
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,
       eventType: EventTypeId.General,

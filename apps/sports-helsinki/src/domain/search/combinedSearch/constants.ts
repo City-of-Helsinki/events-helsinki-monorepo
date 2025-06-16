@@ -46,7 +46,8 @@ export const initialVenueSearchAdapterValues = {
 } as const satisfies VenueSearchParams;
 
 export const initialEventSearchAdapterValues = {
-  allOngoingAnd: [] as string[],
+  xFullText: '',
+  xOngoing: true,
   start: 'now',
   end: '',
   include: ['keywords', 'location'] as string[],

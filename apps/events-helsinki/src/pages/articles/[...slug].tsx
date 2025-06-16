@@ -2,7 +2,7 @@ import type { NormalizedCacheObject } from '@apollo/client';
 import {
   NavigationContext,
   ShareLinks,
-  getAllArticles,
+  getAllCmsArticlesPageUriInfos,
   Navigation,
   useCommonTranslation,
   FooterSection,
@@ -27,6 +27,7 @@ import type {
 import { logger } from '@events-helsinki/components/loggers/logger';
 import type { BreadcrumbListItem } from 'hds-react';
 import type {
+  GetStaticPathsResult,
   GetStaticPropsContext,
   GetStaticPropsResult,
   NextPage,
@@ -150,7 +151,9 @@ const NextCmsArticle: NextPage<{
   );
 };
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<
+  GetStaticPathsResult<{ slug: string[] }>
+> {
   // Do not prerender any static pages when in preview environment
   // (faster builds, but slower initial page load)
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
@@ -160,11 +163,21 @@ export async function getStaticPaths() {
     };
   }
 
-  const articlePageInfos = await getAllArticles(eventsApolloClient);
-  const paths = articlePageInfos.map((pageInfo) => ({
-    params: { slug: cmsHelper.getSlugFromUri(pageInfo.uri) },
-    locale: pageInfo.locale,
-  }));
+  const pagePageInfos = await getAllCmsArticlesPageUriInfos(eventsApolloClient);
+  const paths = pagePageInfos.reduce(
+    (acc: { params: { slug: string[] }; locale: AppLanguage }[], pageInfo) => {
+      const slug = cmsHelper.getSlugFromUri(pageInfo.uri);
+      // Add to paths only if slug exists and is not empty
+      if (slug && slug.length > 0) {
+        acc.push({
+          params: { slug },
+          locale: pageInfo.locale as AppLanguage,
+        });
+      }
+      return acc;
+    },
+    []
+  );
   return {
     paths,
     fallback: 'blocking',

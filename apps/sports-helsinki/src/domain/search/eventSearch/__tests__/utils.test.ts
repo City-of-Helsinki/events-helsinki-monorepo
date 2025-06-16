@@ -114,27 +114,6 @@ describe('getEventSearchVariables function', () => {
     expect(start7).toBe('now');
     expect(end7).toBe('2020-10-15');
   });
-
-  it('should not use *Ongoing params when no text present', () => {
-    const { allOngoingAnd, localOngoingAnd } = getEventSearchVariables({
-      ...defaultParams,
-      params: new URLSearchParams(),
-    });
-    expect(allOngoingAnd).toBeUndefined();
-    expect(localOngoingAnd).toBeUndefined();
-  });
-
-  it('should search localOngoing when a place given', () => {
-    const place = 'tprek:7254'; // MAPPED_PLACES["annantalo"];
-    const { allOngoingAnd, localOngoingAnd, location } =
-      getEventSearchVariables({
-        ...defaultParams,
-        params: new URLSearchParams(`?text=Rock&places=${place}`),
-      });
-    expect(location).toContain(place);
-    expect(allOngoingAnd).toBeUndefined();
-    expect(localOngoingAnd).toStrictEqual(['Rock']);
-  });
 });
 
 describe('getNextPage function', () => {

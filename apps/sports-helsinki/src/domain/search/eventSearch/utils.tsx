@@ -220,22 +220,6 @@ export const getEventSearchVariables = ({
 
   const keywordAnd: string[] = [];
 
-  const hasLocation = !isEmpty(places);
-
-  const getSearchParam = () => {
-    const hasText = !isEmpty(text);
-    if (hasText && hasLocation) {
-      // show helsinki events matching to text
-      return { localOngoingAnd: text };
-    } else if (hasText) {
-      // show internet and helsinki events matching to text
-      return { allOngoingAnd: text };
-    } else {
-      // show all internet and helsinki events
-      return { allOngoing: true };
-    }
-  };
-
   const sportsKeywords = [
     ...new Set( // unique keywords
       sportsCategories.flatMap(
@@ -245,7 +229,8 @@ export const getEventSearchVariables = ({
   ];
 
   return {
-    ...getSearchParam(),
+    xFullText: text?.join(', '),
+    xOngoing: true,
     isFree: isFree || undefined,
     end,
     include,

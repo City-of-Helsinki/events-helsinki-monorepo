@@ -21,7 +21,8 @@ describe('EventSearchAdapter', () => {
         const adapter = new EventSearchAdapter(input, eventType);
         const result = {
           eventType,
-          allOngoingAnd: [input.text],
+          xFullText: input.text,
+          xOngoing: true,
           start: 'now',
           end: '',
           keywordAnd: input.keywords,

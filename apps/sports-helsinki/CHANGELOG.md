@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.29.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.28.1...sports-helsinki-v1.29.0) (2025-06-17)
+
+
+### Features
+
+* **sports:** Use experimental xFullText search parameter ([c6c0044](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6c0044b1c0ff92312c86e18504f30abb0c58d26))
+
 ## [1.28.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.28.0...sports-helsinki-v1.28.1) (2025-06-12)
 
 

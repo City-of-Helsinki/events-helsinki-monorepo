@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.23.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.22.3...hobbies-helsinki-v2.23.0) (2025-06-17)
+
+
+### Features
+
+* **hobbies:** Use experimental xFullText search parameter ([423de02](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/423de025a04fa5c2dfe639a6ed133a26f8416e09))
+
+
+### Bug Fixes
+
+* **hobbies:** Use shallow transitions on search for squared UX ([407ed99](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/407ed99f07a5aa107adeb79cbe4ca4d268b7f6d6))
+
 ## [2.22.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.22.2...hobbies-helsinki-v2.22.3) (2025-06-13)
 
 

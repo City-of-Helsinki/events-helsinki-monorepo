@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.25.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.24.1...events-helsinki-v1.25.0) (2025-06-17)
+
+
+### Features
+
+* **events:** Use experimental xFullText search parameter ([145adb5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/145adb510dfd3d8313d0d5870778f0348ad402e8))
+
 ## [1.24.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.24.0...events-helsinki-v1.24.1) (2025-06-13)
 
 

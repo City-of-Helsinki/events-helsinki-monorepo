@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
-import TextFilter from '../TextFilter';
 import { render, screen } from '@/test-utils';
+import TextFilter from '../TextFilter';
 
 const props = {
   onRemove: jest.fn(),

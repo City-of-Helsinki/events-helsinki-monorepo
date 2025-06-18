@@ -108,7 +108,7 @@ export async function getStaticPaths(): Promise<
 > {
   // Do not prerender any static pages when in preview environment
   // (faster builds, but slower initial page load)
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+  if (AppConfig.skipBuildStaticGeneration) {
     return {
       paths: [],
       fallback: 'blocking',
@@ -157,19 +157,20 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       try {
         const previewData = context.previewData as PreviewDataObject;
         const language = getLanguageOrDefault(context.locale);
+        const id = _getURIQueryParameter(
+          context.params?.slug as string[],
+          language
+        );
         const { data: pageData } = await sportsApolloClient.query<
           PageQuery,
           PageQueryVariables
         >({
           query: PageDocument,
           variables: {
-            id: _getURIQueryParameter(
-              context.params?.slug as string[],
-              language
-            ),
+            id,
             // `idType: PageIdType.Uri // idType is`fixed in query, so added automatically
           },
-          fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+          fetchPolicy: 'no-cache',
           ...(previewData?.token && {
             context: {
               headers: {
@@ -181,7 +182,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 
         const page = pageData.page;
         if (!page) {
-          logger.warn(`Not found ${context.params?.slug}`);
+          logger.warn(`Not found ${context.params?.slug}, (id: ${id})`);
           return {
             notFound: true,
           };

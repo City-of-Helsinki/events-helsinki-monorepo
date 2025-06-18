@@ -2,8 +2,10 @@
 import {
   NextPageRevalidateService,
   NextPageRevalidateApi,
+  APP_LANGUAGES,
 } from '@events-helsinki/components';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { ROUTES } from '../../constants';
 import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import { staticGenerationLogger } from '../../logger';
 
@@ -14,6 +16,11 @@ const revalidateService = new NextPageRevalidateService({
 
 const revalidateApi = new NextPageRevalidateApi({ revalidateService });
 
+const routes = [
+  `/${ROUTES.COURSES.split('/')[1]}`,
+  `/${ROUTES.VENUES.split('/')[1]}`,
+];
+
 /**
  * API route handler for revalidating static pages.
  * It can revalidate a single page or all pages.
@@ -23,5 +30,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  revalidateApi.revalidateView(req, res);
+  const pathnames = APP_LANGUAGES.flatMap((lang) =>
+    routes.map((route) => `/${lang}${route}`)
+  );
+  revalidateApi.revalidateView(req, res, { pathnames });
 }

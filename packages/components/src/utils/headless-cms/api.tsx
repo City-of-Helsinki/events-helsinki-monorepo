@@ -14,13 +14,9 @@ export class NextPageRevalidateApi {
   revalidateService: NextPageRevalidateService;
   staticGenerationLogger: Logger;
 
-  /**
-   * Constructs an instance of NextPageRevalidateApi.
-   * @param {NextPageRevalidateApiInterface} params - The parameters for the constructor.
-   */
   constructor({ revalidateService }: NextPageRevalidateApiInterface) {
     this.revalidateService = revalidateService;
-    this.staticGenerationLogger = revalidateService.staticGenerationLogger;
+    this.staticGenerationLogger = revalidateService.getLogger();
   }
 
   /**
@@ -34,7 +30,11 @@ export class NextPageRevalidateApi {
    * by using `revalidatePath`.
    * See more: https://nextjs.org/docs/13/app/api-reference/functions/revalidatePath.
    */
-  async revalidateView(req: NextApiRequest, res: NextApiResponse) {
+  async revalidateView(
+    req: NextApiRequest,
+    res: NextApiResponse,
+    { pathnames = [] }: { pathnames?: string[] }
+  ) {
     // only POST allowed
     if (req.method !== 'POST') {
       return res.status(405).send('Only POST requests allowed');
@@ -93,10 +93,23 @@ export class NextPageRevalidateApi {
         .triggerAllCmsPagesRevalidation(res)
         .catch((error) => {
           this.staticGenerationLogger.error(
-            'Failed to initiate background revalidation of all pages.',
+            'Failed to initiate background revalidation of all CMS-related pages.',
             error
           );
         });
+
+      // Start the revalidation process in the background.
+      // Do not await this promise.
+      this.revalidateService
+        .triggerAllPathnamesPagesRevalidation(res, pathnames)
+        .catch((error) => {
+          this.staticGenerationLogger.error(
+            'Failed to initiate background revalidation of all pages under given pathnames.',
+            { pathnames },
+            error
+          );
+        });
+
       // The response has already been sent.
     }
   }

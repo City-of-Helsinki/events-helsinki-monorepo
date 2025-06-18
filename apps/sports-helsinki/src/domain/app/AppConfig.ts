@@ -207,6 +207,27 @@ class AppConfig {
     return value;
   }
 
+  /**
+   * Determines whether to skip static page generation during the build process.
+   * Skipping generation leads to faster build times but results in slower initial
+   * page loads as pages are generated on-demand using `fallback: 'blocking'`.
+   *
+   * This is controlled by the `SKIP_BUILD_STATIC_GENERATION` environment variable.
+   * The value is parsed as JSON. For example:
+   * - To **skip** generation, set the variable to `'true'` or a non-zero number (e.g., `'1'`).
+   * - To **enable** generation, set the variable to `'false'` or `'0'`.
+   *
+   * @defaultValue `false` - If the environment variable is not set or is an empty string,
+   * static pages **are generated** by default. This is the recommended behavior for production builds.
+   *
+   * @see https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths#fallback-blocking
+   */
+  static get skipBuildStaticGeneration() {
+    return Boolean(
+      parseEnvValue(process.env.SKIP_BUILD_STATIC_GENERATION, false)
+    );
+  }
+
   /** A feature flag for the similar events. */
   static get showSimilarEvents() {
     return Boolean(

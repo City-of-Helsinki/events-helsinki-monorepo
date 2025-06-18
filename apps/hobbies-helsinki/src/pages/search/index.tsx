@@ -117,7 +117,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       variables: {
         id: `/${language}${ROUTES.SEARCH}/`,
       },
-      fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+      fetchPolicy: 'no-cache',
       ...(previewData?.token && {
         context: {
           headers: {

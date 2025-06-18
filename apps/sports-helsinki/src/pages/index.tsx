@@ -98,7 +98,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           template: TemplateEnum.FrontPage,
           language: getQlLanguage(language).toLocaleLowerCase(),
         },
-        fetchPolicy: 'no-cache', // FIXME: network-only should work better, but for some reason it only updates once.
+        fetchPolicy: 'no-cache',
         ...(previewData?.token && {
           context: {
             headers: {

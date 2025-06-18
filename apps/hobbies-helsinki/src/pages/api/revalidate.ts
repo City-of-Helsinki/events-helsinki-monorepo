@@ -2,6 +2,7 @@
 import {
   NextPageRevalidateApi,
   NextPageRevalidateService,
+  APP_LANGUAGES,
 } from '@events-helsinki/components';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
@@ -23,5 +24,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  revalidateApi.revalidateView(req, res);
+  const pathnames = APP_LANGUAGES.map((lang) => `/${lang}`);
+  revalidateApi.revalidateView(req, res, { pathnames });
 }

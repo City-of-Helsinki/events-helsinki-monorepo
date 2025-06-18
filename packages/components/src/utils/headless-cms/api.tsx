@@ -14,13 +14,9 @@ export class NextPageRevalidateApi {
   revalidateService: NextPageRevalidateService;
   staticGenerationLogger: Logger;
 
-  /**
-   * Constructs an instance of NextPageRevalidateApi.
-   * @param {NextPageRevalidateApiInterface} params - The parameters for the constructor.
-   */
   constructor({ revalidateService }: NextPageRevalidateApiInterface) {
     this.revalidateService = revalidateService;
-    this.staticGenerationLogger = revalidateService.staticGenerationLogger;
+    this.staticGenerationLogger = revalidateService.getLogger();
   }
 
   /**
@@ -28,7 +24,11 @@ export class NextPageRevalidateApi {
    * It can revalidate a single page or all pages.
    * Revalidating all pages is done in the background to prevent timeouts.
    */
-  async revalidateView(req: NextApiRequest, res: NextApiResponse) {
+  async revalidateView(
+    req: NextApiRequest,
+    res: NextApiResponse,
+    { pathnames = [] }: { pathnames?: string[] }
+  ) {
     // only POST allowed
     if (req.method !== 'POST') {
       return res.status(405).send('Only POST requests allowed');
@@ -81,16 +81,35 @@ export class NextPageRevalidateApi {
           'Revalidation of all pages accepted and started in background.',
       });
 
+      // NOTE: triggerAllCmsPagesRevalidation is too intensive (with all language versions,
+      // there can be over 1000 pages and articles total):
+      // - Pros: all active pages are revalidated
+      // - Cons: Not all pages are generated, so revalidation does heavy work for nothing.
+      // Instead of revalidating all, manually use `triggerAllPathnamesPagesRevalidation`.
+      //
+      // Start the revalidation process in the background.
+      // Do not await this promise.
+      // this.revalidateService
+      //   .triggerAllCmsPagesRevalidation(res)
+      //   .catch((error) => {
+      //     this.staticGenerationLogger.error(
+      //       'Failed to initiate background revalidation of all CMS-related pages.',
+      //       error
+      //     );
+      //   });
+
       // Start the revalidation process in the background.
       // Do not await this promise.
       this.revalidateService
-        .triggerAllCmsPagesRevalidation(res)
+        .triggerAllPathnamesPagesRevalidation(res, pathnames)
         .catch((error) => {
           this.staticGenerationLogger.error(
-            'Failed to initiate background revalidation of all pages.',
+            'Failed to initiate background revalidation of all pages under given pathnames.',
+            { pathnames },
             error
           );
         });
+
       // The response has already been sent.
     }
   }

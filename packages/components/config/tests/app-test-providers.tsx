@@ -8,7 +8,7 @@ import { useApolloClient } from '@apollo/client';
 import { MockedProvider } from '@apollo/client/testing';
 import type { MockedResponse } from '@apollo/client/testing';
 import i18n from '@events-helsinki/common-i18n/tests/initI18n';
-import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 import Head from 'next/head';
 import Link from 'next/link';
 import type { NextRouter } from 'next/router';

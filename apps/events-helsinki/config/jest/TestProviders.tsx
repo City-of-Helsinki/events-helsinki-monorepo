@@ -14,7 +14,7 @@ import {
   getLanguageCode,
   NavigationContext,
 } from '@events-helsinki/components';
-import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 import Head from 'next/head';
 import Link from 'next/link';
 import type { NextRouter } from 'next/router';

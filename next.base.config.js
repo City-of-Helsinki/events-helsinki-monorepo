@@ -145,6 +145,7 @@ const nextBaseConfig = ({
    */
   const nextConfig = {
     reactStrictMode: true,
+    cacheMaxMemorySize: 0,
     sassOptions: {
       includePaths: componentsStylePath,
     },
@@ -194,10 +195,6 @@ const nextBaseConfig = ({
       // @link {https://github.com/vercel/next.js/discussions/26420|Discussion}
       externalDir: true,
       scrollRestoration: true,
-      newNextLinkBehavior: false,
-      // disable in-memory caching
-      // @link https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#self-hosting-isr
-      isrMemoryCacheSize: 0,
     },
 
     typescript: {

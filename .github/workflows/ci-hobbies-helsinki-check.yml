@@ -37,7 +37,8 @@ env:
   LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
 
 jobs:
-  test:
+  build: 
+    name: Lint and build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -49,70 +50,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-      # Why not using setup-node 2.2+ cache option (yet) ?
-      # see https://github.com/belgattitude/nextjs-monorepo-example/pull/369
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - name: Restore yarn cache
-        uses: actions/cache@v4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
-          restore-keys: |
-            yarn-cache-folder-
-
-      # see https://github.com/vercel/next.js/pull/27362
-      - name: Restore nextjs build hobbies-helsinki from cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ github.workspace }}/apps/hobbies-helsinki/.next/cache
-            ${{ github.workspace }}/.cache
-            ${{ github.workspace }}/**/tsconfig.tsbuildinfo
-
-          key: ${{ runner.os }}-hobbies-helsinki-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('apps/hobbies-helsinki/src/**.[jt]sx?', 'apps/hobbies-helsinki/src/**.json') }}
-          restore-keys: |
-            ${{ runner.os }}-hobbies-helsinki-${{ hashFiles('**/yarn.lock') }}-
+          cache: 'yarn'
 
       - name: Install dependencies
         run: |
           yarn install --immutable --inline-builds
         env:
           HUSKY: 0
-
-      - name: Typecheck
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn typecheck
-
-      - name: Linter
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn lint
-
-      - name: Unit tests
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn test --coverage
-        env:
-          TZ: Europe/Helsinki
-          FEDERATION_ROUTER_ENDPOINT: ${{env.FEDERATION_ROUTER_ENDPOINT}}
-          CMS_ORIGIN: ${{env.CMS_ORIGIN}}
-          LINKEDEVENTS_EVENT_ENDPOINT: ${{env.LINKEDEVENTS_EVENT_ENDPOINT}}
-          # Mock origin
-          NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
-
-      - name: SonarQube Cloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.1.0
-        with:
-          projectBaseDir: apps/hobbies-helsinki
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build web-app
         working-directory: apps/hobbies-helsinki
@@ -151,3 +95,55 @@ jobs:
         working-directory: apps/hobbies-helsinki
         run: |
           yarn check-dist
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn install --immutable --inline-builds
+        env:
+          HUSKY: 0
+
+      - name: Typecheck
+        working-directory: apps/hobbies-helsinki
+        run: |
+          yarn typecheck
+
+      - name: Linter
+        working-directory: apps/hobbies-helsinki
+        run: |
+          yarn lint
+
+      - name: Unit tests
+        working-directory: apps/hobbies-helsinki
+        run: |
+          yarn test --coverage
+        env:
+          TZ: Europe/Helsinki
+          FEDERATION_ROUTER_ENDPOINT: ${{env.FEDERATION_ROUTER_ENDPOINT}}
+          CMS_ORIGIN: ${{env.CMS_ORIGIN}}
+          LINKEDEVENTS_EVENT_ENDPOINT: ${{env.LINKEDEVENTS_EVENT_ENDPOINT}}
+          # Mock origin
+          NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
+
+      - name: SonarQube Cloud Scan
+        uses: SonarSource/sonarqube-scan-action@v5.1.0
+        with:
+          projectBaseDir: apps/hobbies-helsinki
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+

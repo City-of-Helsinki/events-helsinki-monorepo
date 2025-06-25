@@ -1,4 +1,4 @@
-import { resolveHref } from 'next/dist/shared/lib/router/utils/resolve-href'; // NOTE: in Next 14 this is located in: 'next/dist/client/resolve-href' -- https://github.com/vercel/next.js/discussions/22025
+import { resolveHref } from 'next/dist/client/resolve-href';
 import { useRouter } from 'next/router';
 import type { NavigationProps } from 'react-helsinki-headless-cms';
 import { useCmsRoutedAppHelper } from '../../cmsHelperProvider';

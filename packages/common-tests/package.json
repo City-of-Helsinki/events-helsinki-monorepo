@@ -38,8 +38,8 @@
     "eslint-plugin-testing-library": "^5.11.0",
     "i18next": "23.2.3",
     "prettier": "^2.8.8",
-    "react": "^18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rimraf": "5.0.1",
     "testcafe": "^3.0.0",
     "typescript": "^5.3.3"

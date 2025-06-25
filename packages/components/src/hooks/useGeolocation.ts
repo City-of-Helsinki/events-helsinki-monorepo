@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import type { GeolocationContextType } from '../geolocation';
-import { GeolocationContext } from '../geolocation';
+import GeolocationContext from '../geolocation/GeolocationContext';
+import type { GeolocationContextType } from '../geolocation/types';
 
 export default function useGeolocation(): GeolocationContextType {
   return useContext(GeolocationContext);

@@ -17,8 +17,9 @@ import {
   useConfig,
 } from 'react-helsinki-headless-cms';
 
-import { EventKeywords, buttonStyles } from '../../components';
+import buttonStyles from '../../components/button/button.module.scss';
 import EventLocationText from '../../components/domain/event/eventLocation/EventLocationText';
+import EventKeywords from '../../components/eventKeywords/EventKeywords';
 import EventName from '../../components/eventName/EventName';
 import IconButton from '../../components/iconButton/IconButton';
 import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';

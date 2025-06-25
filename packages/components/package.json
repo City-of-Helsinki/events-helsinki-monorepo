@@ -175,6 +175,7 @@
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-ts": "3.2.0",
     "rooks": "7.14.1",
+    "sass": "^1.66.0",
     "sirv": "2.0.3",
     "sirv-cli": "2.0.2",
     "storybook": "7.0.24",

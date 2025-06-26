@@ -57,6 +57,7 @@
     "file-saver": "^2.0.5",
     "graphql": "16.7.1",
     "graphql-request": "7.1.0",
+    "graphql-tag": "2.12.6",
     "hds-core": "^3.11.0",
     "hds-design-tokens": "^3.11.0",
     "hds-react": "^3.11.0",

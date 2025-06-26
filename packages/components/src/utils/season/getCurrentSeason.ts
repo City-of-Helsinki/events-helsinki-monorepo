@@ -1,11 +1,11 @@
-/* eslint-disable import/no-duplicates */
-import addYears from 'date-fns/addYears';
-import endOfDay from 'date-fns/endOfDay';
-import isAfter from 'date-fns/isAfter';
-import isWithinInterval from 'date-fns/isWithinInterval';
-import startOfDay from 'date-fns/startOfDay';
-import subYears from 'date-fns/subYears';
-/* eslint-enable import/no-duplicates */
+import {
+  addYears,
+  endOfDay,
+  isAfter,
+  isWithinInterval,
+  startOfDay,
+  subYears,
+} from 'date-fns';
 
 import { summerSeason, winterSeason, Season } from './seasonConstants';
 import type { SeasonRule } from './types';

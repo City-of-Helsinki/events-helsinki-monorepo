@@ -1,4 +1,4 @@
-import format from 'date-fns/format';
+import {format} from 'date-fns';
 import type { BreadcrumbListItem } from 'hds-react';
 import parse from 'html-react-parser';
 import React from 'react';

@@ -32,12 +32,13 @@ import {
   MutableReference,
   sortMenuItems,
 } from './utils';
+import { GraphQLFormattedError } from 'graphql';
 
 export type EventsFederationApolloClientConfig = {
   federationGraphqlEndpoint: string;
   allowUnauthorizedRequests?: boolean;
   routerHelper: CmsRoutedAppHelper;
-  handleError?: (error: Error) => void;
+  handleError?: (error: Error | GraphQLFormattedError) => void;
   ignoredErrorHandlerStatusCodes?: number[];
   contextHeaders?: Record<string, string>;
 };
@@ -67,7 +68,7 @@ class EventsFederationApolloClient {
           graphQLErrors.forEach((error) => {
             const { message, locations, path, extensions } = error;
             const responseStatusCode = (
-              extensions.response as GraphQLErrorsExtensionResponse
+              extensions?.response as GraphQLErrorsExtensionResponse
             )?.status;
             const errorMessage = `[GraphQL error]: ${JSON.stringify({
               OperationName: operation.operationName,

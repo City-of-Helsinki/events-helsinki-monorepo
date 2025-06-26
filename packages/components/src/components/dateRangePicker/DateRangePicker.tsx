@@ -1,8 +1,8 @@
 /* eslint-disable import/no-duplicates */
-import isBefore from 'date-fns/isBefore';
-import isValidDate from 'date-fns/isValid';
-import fi from 'date-fns/locale/fi';
-import sv from 'date-fns/locale/sv';
+import {isBefore, isValid as isValidDate} from 'date-fns';
+
+import fi from 'date-fns/locale/fi/index';
+import sv from 'date-fns/locale/sv/index';
 /* eslint-enable import/no-duplicates */
 
 import { DateInput } from 'hds-react';

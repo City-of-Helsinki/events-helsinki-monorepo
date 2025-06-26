@@ -1,9 +1,8 @@
-/* eslint-disable import/no-duplicates */
 import type { Locale as DateLocale } from 'date-fns';
-import format from 'date-fns/format';
-import enGB from 'date-fns/locale/en-GB';
-import fi from 'date-fns/locale/fi';
-import sv from 'date-fns/locale/sv';
+import { format } from 'date-fns';
+import enGB from 'date-fns/locale/en-GB/index';
+import fi from 'date-fns/locale/fi/index';
+import sv from 'date-fns/locale/sv/index';
 import type {
   OpeningHour,
   Time,

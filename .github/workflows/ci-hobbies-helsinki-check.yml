@@ -24,11 +24,12 @@ on:
       - 'tsconfig.base.json'
       - '.prettier*'
       - '.github/workflows/**'
+  workflow_dispatch:
 
 env:
-  FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
-  CMS_ORIGIN: https://harrastus.app-staging.hkih.hion.dev
-  LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+  env_federation_router_endpoint: https://events-graphql-federation-hobbies.test.hel.ninja/
+  env_cms_origin: https://harrastus.app-staging.hkih.hion.dev
+  env_linkedevents_event_endpoint: https://api.hel.fi/linkedevents/v1/event
 
 jobs:
   common:
@@ -53,9 +54,9 @@ jobs:
         echo "NEXTJS_DISABLE_SENTRY=false" >> $GITHUB_ENV
         # Fully disable sentry upload
         echo "NEXTJS_SENTRY_UPLOAD_DRY_RUN=true" >> $GITHUB_ENV
-        echo "FEDERATION_ROUTER_ENDPOINT=${{env.FEDERATION_ROUTER_ENDPOINT}}" >> $GITHUB_ENV
-        echo "CMS_ORIGIN=${{env.CMS_ORIGIN}}" >> $GITHUB_ENV
-        echo "LINKEDEVENTS_EVENT_ENDPOINT=${{env.LINKEDEVENTS_EVENT_ENDPOINT}}" >> $GITHUB_ENV
+        echo "FEDERATION_ROUTER_ENDPOINT=$env_federation_router_endpoint" >> $GITHUB_ENV
+        echo "CMS_ORIGIN=$env_cms_origin" >> $GITHUB_ENV
+        echo "LINKEDEVENTS_EVENT_ENDPOINT=$env_linkedevents_event_endpoint" >> $GITHUB_ENV
         # Mock origin
         echo "NEXT_PUBLIC_APP_ORIGIN=https://localhost:3001" >> $GITHUB_ENV
         echo "NEXT_PUBLIC_MATOMO_URL_BASE=//webanalytics.digiaiiris.com/js/" >> $GITHUB_ENV

@@ -34,9 +34,9 @@ jobs:
         echo "NODE_ENV=production" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_DEBUG=1" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_PORT=4100" >> $GITHUB_ENV
-        echo "GRAPHQL_PROXY_SENTRY_ENVIRONMENT=local" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_API_BASE_URL=https://api.hel.fi/linkedevents/v1/" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL=https://kartta.hel.fi/ws/geoserver/avoindata" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING=1" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_INTROSPECTION=1" >> $GITHUB_ENV
-        # events proxy only
-        echo "GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL=https://kartta.hel.fi/ws/geoserver/avoindata" >> $GITHUB_ENV
-        echo "GRAPHQL_PROXY_API_BASE_URL=https://api.hel.fi/linkedevents/v1/" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_SENTRY_ENVIRONMENT=local" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_SENTRY_DSN=https://0b946822a84596cdd0453aa5d93d3b9e@sentry.test.hel.ninja/219" >> $GITHUB_ENV

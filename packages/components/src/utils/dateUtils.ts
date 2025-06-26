@@ -1,10 +1,8 @@
 /* eslint-disable import/no-duplicates */
-import { format as formatDateStr } from 'date-fns';
-import isAfter from 'date-fns/isAfter';
-import isValid from 'date-fns/isValid';
-import { enGB as en, fi } from 'date-fns/locale';
-import sv from 'date-fns/locale/sv';
-import parse from 'date-fns/parse';
+import { format as formatDateStr, isAfter, isValid, parse } from 'date-fns';
+import fi from 'date-fns/locale/fi/index';
+import en from 'date-fns/locale/en-GB/index';
+import sv from 'date-fns/locale/sv/index';
 import get from 'lodash/get';
 import type { AppLanguage } from '../types';
 /* eslint-enable import/no-duplicates */

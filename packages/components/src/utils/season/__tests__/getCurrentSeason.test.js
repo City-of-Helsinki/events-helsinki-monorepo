@@ -1,4 +1,4 @@
-import startOfDay from 'date-fns/startOfDay';
+import { startOfDay } from 'date-fns';
 import { Season } from '../seasonConstants';
 import getCurrentSeason from '../getCurrentSeason';
 

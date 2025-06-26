@@ -1,11 +1,11 @@
-name: Venue Graphql Proxy check
+name: Events Graphql Proxy check
 
 on:
   push:
     branches: [main]
     # Only consider those paths to trigger the action
     paths:
-      - 'proxies/venue-graphql-proxy/**'
+      - 'proxies/events-graphql-proxy/**'
       - '.yarnrc.yml'
       - 'tsconfig.base.json'
       - '.prettier*'
@@ -15,7 +15,7 @@ on:
     branches: [main]
     # Only consider those paths to trigger the action
     paths:
-      - 'proxies/venue-graphql-proxy/**'
+      - 'proxies/events-graphql-proxy/**'
       - '.yarnrc.yml'
       - 'tsconfig.base.json'
       - '.prettier*'
@@ -29,7 +29,7 @@ jobs:
     with:
       node-version: 20
       typecheck: true
-      app-directory: proxies/venue-graphql-proxy
+      app-directory: proxies/events-graphql-proxy
       extra-commands: |
         echo "NODE_ENV=production" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_DEBUG=debug" >> $GITHUB_ENV

@@ -2,9 +2,7 @@ name: CI-Events-Helsinki
 
 on:
   push:
-    branches:
-      - dev
-      - main
+    branches: [main]
     # Only consider those paths to trigger the action
     paths:
       - 'apps/events-helsinki/**'
@@ -16,10 +14,7 @@ on:
       - '.github/workflows/**'
 
   pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+    branches: [main]
     # Only consider those paths to trigger the action
     paths:
       - 'apps/events-helsinki/**'
@@ -37,117 +32,35 @@ env:
   LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # Why not using setup-node 2.2+ cache option (yet) ?
-      # see https://github.com/belgattitude/nextjs-monorepo-example/pull/369
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - name: Restore yarn cache
-        uses: actions/cache@v4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
-          restore-keys: |
-            yarn-cache-folder-
-
-      # see https://github.com/vercel/next.js/pull/27362
-      - name: Restore nextjs build events-helsinki from cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ github.workspace }}/apps/events-helsinki/.next/cache
-            ${{ github.workspace }}/.cache
-            ${{ github.workspace }}/**/tsconfig.tsbuildinfo
-
-          key: ${{ runner.os }}-events-helsinki-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('apps/events-helsinki/src/**.[jt]sx?', 'apps/events-helsinki/src/**.json') }}
-          restore-keys: |
-            ${{ runner.os }}-events-helsinki-${{ hashFiles('**/yarn.lock') }}-
-
-      - name: Install dependencies
-        run: |
-          yarn install --immutable --inline-builds
-        env:
-          HUSKY: 0
-
-      - name: Typecheck
-        working-directory: apps/events-helsinki
-        run: |
-          yarn typecheck
-
-      - name: Linter
-        working-directory: apps/events-helsinki
-        run: |
-          yarn lint
-
-      - name: Unit tests
-        working-directory: apps/events-helsinki
-        run: |
-          yarn test --coverage
-        env:
-          TZ: Europe/Helsinki
-          FEDERATION_ROUTER_ENDPOINT: ${{env.FEDERATION_ROUTER_ENDPOINT}}
-          CMS_ORIGIN: ${{env.CMS_ORIGIN}}
-          LINKEDEVENTS_EVENT_ENDPOINT: ${{env.LINKEDEVENTS_EVENT_ENDPOINT}}
-          # Mock origin
-          NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
-
-      - name: SonarQube Cloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.1.0
-        with:
-          projectBaseDir: apps/events-helsinki
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Build web-app
-        working-directory: apps/events-helsinki
-        run: |
-          yarn build
-        env:
-          # Speed up build: they are linted in a previous step
-          NEXTJS_IGNORE_ESLINT: true
-          # Speed up build: they are typechecked in a previous step
-          NEXTJS_IGNORE_TYPECHECK: true
-          # Speed up build: don't run if not needed, enable if it becomes needed
-          NEXT_DISABLE_SOURCEMAPS: true
-          # Don't send telemetry for ci
-          NEXT_TELEMETRY_DISABLED: true
-          # To allow checking size-limits
-          NEXTJS_DISABLE_SENTRY: false
-          # Fully disable sentry upload
-          NEXTJS_SENTRY_UPLOAD_DRY_RUN: true
-          FEDERATION_ROUTER_ENDPOINT: ${{env.FEDERATION_ROUTER_ENDPOINT}}
-          CMS_ORIGIN: ${{env.CMS_ORIGIN}}
-          LINKEDEVENTS_EVENT_ENDPOINT: ${{env.LINKEDEVENTS_EVENT_ENDPOINT}}
-          # Mock origin
-          NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
-          NEXT_PUBLIC_MATOMO_URL_BASE: '//webanalytics.digiaiiris.com/js/'
-          NEXT_PUBLIC_MATOMO_SITE_ID: 708
-          NEXT_PUBLIC_MATOMO_SRC_URL: 'piwik.min.js'
-          NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
-          NEXT_PUBLIC_MATOMO_ENABLED: 0
-
-      - name: Check browser bundle size limits
-        working-directory: apps/events-helsinki
-        run: |
-          yarn check-size
-
-      - name: Check ecmascript checks for build files
-        working-directory: apps/events-helsinki
-        run: |
-          yarn check-dist
+  common:
+    uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@ci_node_parameters
+    secrets: inherit
+    with:
+      node-version: 20
+      typecheck: true
+      app-directory: apps/events-helsinki
+      extra-commands: |
+        # Timezone for tests
+        echo "TZ=Europe/Helsinki" >> $GITHUB_ENV
+        # Speed up build: they are linted in a previous step
+        echo "NEXTJS_IGNORE_ESLINT=true" >> $GITHUB_ENV
+        # Speed up build: they are typechecked in a previous step
+        echo "NEXTJS_IGNORE_TYPECHECK=true" >> $GITHUB_ENV
+        # Speed up build: don't run if not needed, enable if it becomes needed
+        echo "NEXT_DISABLE_SOURCEMAPS=true" >> $GITHUB_ENV
+        # Don't send telemetry for ci
+        echo "NEXT_TELEMETRY_DISABLED=true" >> $GITHUB_ENV
+        # To allow checking size-limits
+        echo "NEXTJS_DISABLE_SENTRY=false" >> $GITHUB_ENV
+        # Fully disable sentry upload
+        echo "NEXTJS_SENTRY_UPLOAD_DRY_RUN=true" >> $GITHUB_ENV
+        echo "FEDERATION_ROUTER_ENDPOINT=https://events-graphql-federation-events.test.hel.ninja/" >> $GITHUB_ENV
+        echo "CMS_ORIGIN=https://tapahtumat.app-staging.hkih.hion.dev" >> $GITHUB_ENV
+        echo "LINKEDEVENTS_EVENT_ENDPOINT=https://api.hel.fi/linkedevents/v1/event" >> $GITHUB_ENV
+        # Mock origin
+        echo "NEXT_PUBLIC_APP_ORIGIN=https://localhost:3001" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_URL_BASE=//webanalytics.digiaiiris.com/js/" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_SITE_ID=708" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_SRC_URL=piwik.min.js" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_TRACKER_URL=tracker.php" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_ENABLED=0" >> $GITHUB_ENV

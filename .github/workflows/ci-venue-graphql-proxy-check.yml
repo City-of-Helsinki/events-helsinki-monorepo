@@ -1,4 +1,4 @@
-name: Venue Graphql Proxy check
+name: CI-Venue-Graphql-Proxy
 
 on:
   push:

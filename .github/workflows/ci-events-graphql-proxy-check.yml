@@ -1,4 +1,4 @@
-name: Events Graphql Proxy check
+name: CI-Events-Graphql-Proxy
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
       app-directory: proxies/events-graphql-proxy
       extra-commands: |
         echo "NODE_ENV=production" >> $GITHUB_ENV
-        echo "GRAPHQL_PROXY_DEBUG=debug" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_DEBUG=1" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_PORT=4100" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_SENTRY_ENVIRONMENT=local" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING=0" >> $GITHUB_ENV

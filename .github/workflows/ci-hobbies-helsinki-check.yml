@@ -2,9 +2,7 @@ name: CI-Hobbies-Helsinki
 
 on:
   push:
-    branches:
-      - dev
-      - main
+    branches: [main]
     # Only consider those paths to trigger the action
     paths:
       - 'apps/hobbies-helsinki/**'
@@ -16,10 +14,7 @@ on:
       - '.github/workflows/**'
 
   pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+    branches: [main]
     # Only consider those paths to trigger the action
     paths:
       - 'apps/hobbies-helsinki/**'
@@ -31,119 +26,151 @@ on:
       - '.github/workflows/**'
 
 env:
-  CI: true
   FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
   CMS_ORIGIN: https://harrastus.app-staging.hkih.hion.dev
   LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
 
 jobs:
-  build: 
-    name: Lint and build
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
-    steps:
-      - uses: actions/checkout@v4
+  common:
+    uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@ci_node_parameters
+    secrets: inherit
+    with:
+      node-version: 20
+      typecheck: true
+      app-directory: apps/hobbies-helsinki
+      extra-commands: |
+        echo "ENABLE_ADMIN_APP=true" >> $GITHUB_ENV
+        echo "ENABLE_REDIRECT_APP=true" >> $GITHUB_ENV
+        # Speed up build: they are linted in a previous step
+        echo "NEXTJS_IGNORE_ESLINT=true" >> $GITHUB_ENV
+        # Speed up build: they are typechecked in a previous step
+        echo "NEXTJS_IGNORE_TYPECHECK=true" >> $GITHUB_ENV
+        # Speed up build: don't run if not needed, enable if it becomes needed
+        echo "NEXT_DISABLE_SOURCEMAPS=true" >> $GITHUB_ENV
+        # Don't send telemetry for ci
+        echo "NEXT_TELEMETRY_DISABLED=true" >> $GITHUB_ENV
+        # To allow checking size-limits
+        echo "NEXTJS_DISABLE_SENTRY=false" >> $GITHUB_ENV
+        # Fully disable sentry upload
+        echo "NEXTJS_SENTRY_UPLOAD_DRY_RUN=true" >> $GITHUB_ENV
+        echo "FEDERATION_ROUTER_ENDPOINT=${{env.FEDERATION_ROUTER_ENDPOINT}}" >> $GITHUB_ENV
+        echo "CMS_ORIGIN=${{env.CMS_ORIGIN}}" >> $GITHUB_ENV
+        echo "LINKEDEVENTS_EVENT_ENDPOINT=${{env.LINKEDEVENTS_EVENT_ENDPOINT}}" >> $GITHUB_ENV
+        # Mock origin
+        echo "NEXT_PUBLIC_APP_ORIGIN=https://localhost:3001" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_URL_BASE=//webanalytics.digiaiiris.com/js/" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_SITE_ID=939" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_SRC_URL=piwik.min.js" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_TRACKER_URL=tracker.php" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_ENABLED=0" >> $GITHUB_ENV
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+  # build: 
+  #   name: Lint and build
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [20.x]
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          yarn install --immutable --inline-builds
-        env:
-          HUSKY: 0
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #         cache: 'yarn'
 
-      - name: Build web-app
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn build
-        env:
-          # Speed up build: they are linted in a previous step
-          NEXTJS_IGNORE_ESLINT: true
-          # Speed up build: they are typechecked in a previous step
-          NEXTJS_IGNORE_TYPECHECK: true
-          # Speed up build: don't run if not needed, enable if it becomes needed
-          NEXT_DISABLE_SOURCEMAPS: true
-          # Don't send telemetry for ci
-          NEXT_TELEMETRY_DISABLED: true
-          # To allow checking size-limits
-          NEXTJS_DISABLE_SENTRY: false
-          # Fully disable sentry upload
-          NEXTJS_SENTRY_UPLOAD_DRY_RUN: true
-          FEDERATION_ROUTER_ENDPOINT: ${{env.FEDERATION_ROUTER_ENDPOINT}}
-          CMS_ORIGIN: ${{env.CMS_ORIGIN}}
-          LINKEDEVENTS_EVENT_ENDPOINT: ${{env.LINKEDEVENTS_EVENT_ENDPOINT}}
-          # Mock origin
-          NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
-          NEXT_PUBLIC_MATOMO_URL_BASE: '//webanalytics.digiaiiris.com/js/'
-          NEXT_PUBLIC_MATOMO_SITE_ID: 939
-          NEXT_PUBLIC_MATOMO_SRC_URL: 'piwik.min.js'
-          NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
-          NEXT_PUBLIC_MATOMO_ENABLED: 0
+  #     - name: Install dependencies
+  #       run: |
+  #         yarn install --immutable --inline-builds
+  #       env:
+  #         HUSKY: 0
 
-      - name: Check browser bundle size limits
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn check-size
+  #     - name: Build web-app
+  #       working-directory: apps/hobbies-helsinki
+  #       run: |
+  #         yarn build
+  #       env:
+  #         # Speed up build: they are linted in a previous step
+  #         NEXTJS_IGNORE_ESLINT: true
+  #         # Speed up build: they are typechecked in a previous step
+  #         NEXTJS_IGNORE_TYPECHECK: true
+  #         # Speed up build: don't run if not needed, enable if it becomes needed
+  #         NEXT_DISABLE_SOURCEMAPS: true
+  #         # Don't send telemetry for ci
+  #         NEXT_TELEMETRY_DISABLED: true
+  #         # To allow checking size-limits
+  #         NEXTJS_DISABLE_SENTRY: false
+  #         # Fully disable sentry upload
+  #         NEXTJS_SENTRY_UPLOAD_DRY_RUN: true
+  #         FEDERATION_ROUTER_ENDPOINT: ${{env.FEDERATION_ROUTER_ENDPOINT}}
+  #         CMS_ORIGIN: ${{env.CMS_ORIGIN}}
+  #         LINKEDEVENTS_EVENT_ENDPOINT: ${{env.LINKEDEVENTS_EVENT_ENDPOINT}}
+  #         # Mock origin
+  #         NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
+  #         NEXT_PUBLIC_MATOMO_URL_BASE: '//webanalytics.digiaiiris.com/js/'
+  #         NEXT_PUBLIC_MATOMO_SITE_ID: 939
+  #         NEXT_PUBLIC_MATOMO_SRC_URL: 'piwik.min.js'
+  #         NEXT_PUBLIC_MATOMO_TRACKER_URL: 'tracker.php'
+  #         NEXT_PUBLIC_MATOMO_ENABLED: 0
 
-      - name: Check ecmascript checks for build files
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn check-dist
+  #     - name: Check browser bundle size limits
+  #       working-directory: apps/hobbies-helsinki
+  #       run: |
+  #         yarn check-size
 
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
-    steps:
-      - uses: actions/checkout@v4
+  #     - name: Check ecmascript checks for build files
+  #       working-directory: apps/hobbies-helsinki
+  #       run: |
+  #         yarn check-dist
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+  # test:
+  #   name: Test
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       node-version: [20.x]
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          yarn install --immutable --inline-builds
-        env:
-          HUSKY: 0
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #         cache: 'yarn'
 
-      - name: Typecheck
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn typecheck
+  #     - name: Install dependencies
+  #       run: |
+  #         yarn install --immutable --inline-builds
+  #       env:
+  #         HUSKY: 0
 
-      - name: Linter
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn lint
+  #     - name: Typecheck
+  #       working-directory: apps/hobbies-helsinki
+  #       run: |
+  #         yarn typecheck
 
-      - name: Unit tests
-        working-directory: apps/hobbies-helsinki
-        run: |
-          yarn test --coverage
-        env:
-          TZ: Europe/Helsinki
-          FEDERATION_ROUTER_ENDPOINT: ${{env.FEDERATION_ROUTER_ENDPOINT}}
-          CMS_ORIGIN: ${{env.CMS_ORIGIN}}
-          LINKEDEVENTS_EVENT_ENDPOINT: ${{env.LINKEDEVENTS_EVENT_ENDPOINT}}
-          # Mock origin
-          NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
+  #     - name: Linter
+  #       working-directory: apps/hobbies-helsinki
+  #       run: |
+  #         yarn lint
 
-      - name: SonarQube Cloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.1.0
-        with:
-          projectBaseDir: apps/hobbies-helsinki
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #     - name: Unit tests
+  #       working-directory: apps/hobbies-helsinki
+  #       run: |
+  #         yarn test:coverage
+  #       env:
+  #         TZ: Europe/Helsinki
+  #         FEDERATION_ROUTER_ENDPOINT: ${{env.FEDERATION_ROUTER_ENDPOINT}}
+  #         CMS_ORIGIN: ${{env.CMS_ORIGIN}}
+  #         LINKEDEVENTS_EVENT_ENDPOINT: ${{env.LINKEDEVENTS_EVENT_ENDPOINT}}
+  #         # Mock origin
+  #         NEXT_PUBLIC_APP_ORIGIN: https://localhost:3001
+
+  #     - name: SonarQube Cloud Scan
+  #       uses: SonarSource/sonarqube-scan-action@v5.1.0
+  #       with:
+  #         projectBaseDir: apps/hobbies-helsinki
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 

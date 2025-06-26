@@ -3494,6 +3494,7 @@ __metadata:
     file-saver: "npm:^2.0.5"
     graphql: "npm:16.7.1"
     graphql-request: "npm:7.1.0"
+    graphql-tag: "npm:2.12.6"
     happy-dom: "npm:9.20.3"
     hds-core: "npm:^3.11.0"
     hds-design-tokens: "npm:^3.11.0"
@@ -5458,20 +5459,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/watcher@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@parcel/watcher@npm:2.1.0"
-  dependencies:
-    is-glob: "npm:^4.0.3"
-    micromatch: "npm:^4.0.5"
-    node-addon-api: "npm:^3.2.1"
-    node-gyp: "npm:latest"
-    node-gyp-build: "npm:^4.3.0"
-  checksum: 95008221bf0bae33d10009a2160e6b248f89b0dd5446ef072932b1ecc027c494696eb1361fa3aa01605c26ea6de767aafeb41328760196fe8d2d6ff262b6fac4
-  languageName: node
-  linkType: hard
-
-"@parcel/watcher@npm:^2.4.1":
+"@parcel/watcher@npm:^2.1.0, @parcel/watcher@npm:^2.4.1":
   version: 2.5.1
   resolution: "@parcel/watcher@npm:2.5.1"
   dependencies:
@@ -11518,7 +11506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.3.1, chokidar@npm:^3.4.2, chokidar@npm:^3.5.2, chokidar@npm:^3.5.3":
+"chokidar@npm:^3.3.1, chokidar@npm:^3.4.2, chokidar@npm:^3.5.2, chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -17304,13 +17292,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immutable@npm:^4.0.0":
-  version: 4.3.0
-  resolution: "immutable@npm:4.3.0"
-  checksum: 4fcd15a9b7d623e99cbb992f66ea1171218c1c0b2711dbe54a07588d1236c3fc768e47d75313799e9c6b4073bca70e973d57aba8b5c890bc6b22515b0da67e45
-  languageName: node
-  linkType: hard
-
 "immutable@npm:^5.0.2":
   version: 5.1.3
   resolution: "immutable@npm:5.1.3"
@@ -21371,15 +21352,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-addon-api@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "node-addon-api@npm:3.2.1"
-  dependencies:
-    node-gyp: "npm:latest"
-  checksum: f34a7a3f6197a8e4db93f375a4275774c4a715bebe391ee58cdde3301e27f96818fb12e2211f3a80f3ec3c20976893d048266129316d07ac5dae936057a4bc98
-  languageName: node
-  linkType: hard
-
 "node-addon-api@npm:^7.0.0":
   version: 7.1.1
   resolution: "node-addon-api@npm:7.1.1"
@@ -21416,17 +21388,6 @@ __metadata:
     encoding:
       optional: true
   checksum: 3e7af7c0025f4bebd8f14efd0248344a5f0155253762810bf1be70e9e8d669e3ee74794754ca1a53e7d9ad8f4906d774e2b4e9e5209e2fd5d515e5c7299b3280
-  languageName: node
-  linkType: hard
-
-"node-gyp-build@npm:^4.3.0":
-  version: 4.6.0
-  resolution: "node-gyp-build@npm:4.6.0"
-  bin:
-    node-gyp-build: bin.js
-    node-gyp-build-optional: optional.js
-    node-gyp-build-test: build-test.js
-  checksum: 59a4823fb894eda6adff30805cad6883530b4499381252882e5dfff1f6cd7cc835aa0db3ab8c281f3092d9cec0d056bce2b85ec875c274f8068f8ed97763231f
   languageName: node
   linkType: hard
 
@@ -25372,20 +25333,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.43.4":
-  version: 1.63.6
-  resolution: "sass@npm:1.63.6"
-  dependencies:
-    chokidar: "npm:>=3.0.0 <4.0.0"
-    immutable: "npm:^4.0.0"
-    source-map-js: "npm:>=0.6.2 <2.0.0"
-  bin:
-    sass: sass.js
-  checksum: f634ca5cd895d5cd74ba62ee327d336e1f37e9e7e4dc4da25dc564ff060717f294552a9118b2bc8504cfd287afc456447d339aca0956d73c04dc3c11f0a81c00
-  languageName: node
-  linkType: hard
-
-"sass@npm:^1.66.0":
+"sass@npm:^1.43.4, sass@npm:^1.66.0":
   version: 1.89.2
   resolution: "sass@npm:1.89.2"
   dependencies:

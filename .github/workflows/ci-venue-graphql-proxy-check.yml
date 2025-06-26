@@ -9,7 +9,7 @@ on:
       - '.yarnrc.yml'
       - 'tsconfig.base.json'
       - '.prettier*'
-      - '.github/workflows/**'
+      - '.github/workflows/ci-venue-graphql-proxy-check.yml'
 
   pull_request:
     branches: [main]
@@ -19,7 +19,7 @@ on:
       - '.yarnrc.yml'
       - 'tsconfig.base.json'
       - '.prettier*'
-      - '.github/workflows/**'
+      - '.github/workflows/ci-venue-graphql-proxy-check.yml'
   workflow_dispatch:
 
 jobs:

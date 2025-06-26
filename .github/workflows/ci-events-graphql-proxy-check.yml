@@ -9,7 +9,7 @@ on:
       - '.yarnrc.yml'
       - 'tsconfig.base.json'
       - '.prettier*'
-      - '.github/workflows/**'
+      - '.github/workflows/ci-events-graphql-proxy-check.yml'
 
   pull_request:
     branches: [main]
@@ -19,7 +19,7 @@ on:
       - '.yarnrc.yml'
       - 'tsconfig.base.json'
       - '.prettier*'
-      - '.github/workflows/**'
+      - '.github/workflows/ci-events-graphql-proxy-check.yml'
   workflow_dispatch:
 
 jobs:
@@ -27,15 +27,15 @@ jobs:
     uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@ci_node_parameters
     secrets: inherit
     with:
-      node-version: 20
+      node-version: 16
       typecheck: true
       app-directory: proxies/events-graphql-proxy
       extra-commands: |
-        echo "NODE_ENV=development" >> $GITHUB_ENV
+        echo "NODE_ENV=production" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_DEBUG=1" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_PORT=4100" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_SENTRY_ENVIRONMENT=local" >> $GITHUB_ENV
-        echo "GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING=0" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING=1" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_INTROSPECTION=1" >> $GITHUB_ENV
         # events proxy only
         echo "GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL=https://kartta.hel.fi/ws/geoserver/avoindata" >> $GITHUB_ENV

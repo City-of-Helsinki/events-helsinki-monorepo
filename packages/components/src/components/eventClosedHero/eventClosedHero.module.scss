@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints' as breakpoints;
 
 .eventClosedHero {
   background: var(--color-theme-background);
@@ -7,7 +7,7 @@
   text-align: center;
   box-sizing: border-box;
 
-  @include respond_above(s) {
+  @include breakpoints.respond-above(s) {
     padding-top: 10.375rem;
     padding-bottom: 10.375rem;
   }

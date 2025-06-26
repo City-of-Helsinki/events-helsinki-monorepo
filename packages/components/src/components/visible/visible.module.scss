@@ -1,61 +1,61 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints';
 
 .aboveXs {
-  @include respond_below(xs) {
+  @include breakpoints.respond-below(xs) {
     display: none !important;
   }
 }
 
 .aboveS {
-  @include respond_below(s) {
+  @include breakpoints.respond-below(s) {
     display: none !important;
   }
 }
 
 .aboveM {
-  @include respond_below(m) {
+  @include breakpoints.respond-below(m) {
     display: none !important;
   }
 }
 
 .aboveL {
-  @include respond_below(l) {
+  @include breakpoints.respond-below(l) {
     display: none !important;
   }
 }
 
 .aboveXl {
-  @include respond_below(xl) {
+  @include breakpoints.respond-below(xl) {
     display: none !important;
   }
 }
 
 .belowXs {
-  @include respond_above(xs) {
+  @include breakpoints.respond-above(xs) {
     display: none !important;
   }
 }
 
 .belowS {
-  @include respond_above(s) {
+  @include breakpoints.respond-above(s) {
     display: none !important;
   }
 }
 
 .belowM {
-  @include respond_above(m) {
+  @include breakpoints.respond-above(m) {
     display: none !important;
   }
 }
 
 .belowL {
-  @include respond_above(l) {
+  @include breakpoints.respond-above(l) {
     display: none !important;
   }
 }
 
 .belowXl {
-  @include respond_above(xl) {
+  @include breakpoints.respond-above(xl) {
     display: none !important;
   }
 }

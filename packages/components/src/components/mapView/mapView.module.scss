@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@import 'src/styles/variables';
+@use '../../styles/breakpoints';
+@use '../../styles/variables';
 
 // Px amount is roughly adjusted by hand to make sure that the map fits the screen and don't overflow.
 // Mainly because we want to make sure that the links at right bottom corner are always visible.
@@ -28,11 +28,11 @@
     width: 15rem;
 
     p {
-      margin: 0 0 $spacing-2-xs 0;
+      margin: 0 0 variables.$spacing-2-xs 0;
     }
 
     a {
-      font-size: $fontsize-body-m;
+      font-size: variables.$fontsize-body-m;
     }
   }
 }
@@ -42,12 +42,12 @@
   background: rgba(114, 114, 161, 0.75);
 
   & > div {
-    background: $color-bus;
+    background: variables.$color-bus;
   }
 
   & > div > span {
-    color: $color-white;
-    font-size: $fontsize-body-l;
+    color: variables.$color-white;
+    font-size: variables.$fontsize-body-l;
     font-weight: 500;
   }
 }

@@ -1,5 +1,5 @@
-@import 'src/styles/breakpoints';
-@import '~@events-helsinki/components/src/styles/helsinkiCityOwned';
+@use '../../../../styles/breakpoints' as breakpoints;
+@use '~@events-helsinki/components/src/styles/helsinkiCityOwned';
 
 .eventInfo {
   padding: 0;
@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: 1fr;
 
-  @include respond_above(m) {
+  @include breakpoints.respond-above(m) {
     padding: var(--spacing-xl);
     padding-right: 0;
   }
@@ -51,6 +51,8 @@
 }
 
 a.link {
+  margin: var(--spacing-xs) 0;
+  padding: 0;
   &,
   &:visited {
     color: var(--color-secondary-link);
@@ -59,7 +61,4 @@ a.link {
   svg g * {
     color: var(--color-secondary-link);
   }
-
-  margin: var(--spacing-xs) 0;
-  padding: 0;
 }

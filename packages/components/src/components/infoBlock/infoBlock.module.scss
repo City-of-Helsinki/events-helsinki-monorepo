@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@import 'src/styles/variables';
+@use '../../styles/breakpoints' as breakpoints;
+@use '../../styles/variables' as variables;
 
 .infoBlock {
   .name {
@@ -7,7 +7,7 @@
     align-items: center;
 
     & > svg {
-      margin-right: $spacing-xs;
+      margin-right: variables.$spacing-xs;
     }
   }
 
@@ -17,10 +17,10 @@
     list-style-type: none;
     white-space: pre;
 
-    line-height: $lineheight-l;
+    line-height: variables.$lineheight-l;
 
     & > li:not(:last-child) {
-      margin-bottom: $spacing-s;
+      margin-bottom: variables.$spacing-s;
     }
   }
 
@@ -31,7 +31,7 @@
 
     .content {
       // Width of the icon + it's whitespace
-      padding-left: calc(24px + #{$spacing-xs});
+      padding-left: calc(24px + #{variables.$spacing-xs});
     }
   }
 }
@@ -56,7 +56,7 @@
     // could be generated between the text and the background.
     --info-block-link-color: #008667;
 
-    font-size: $fontsize-body-l;
+    font-size: variables.$fontsize-body-l;
     color: var(--info-block-link-color);
 
     &:visited,
@@ -67,8 +67,8 @@
 
   .card & {
     font-weight: 500;
-    font-size: $fontsize-body-m;
-    color: $color-bus;
+    font-size: variables.$fontsize-body-m;
+    color: variables.$color-bus;
   }
 }
 
@@ -84,8 +84,8 @@
   display: flex;
   flex-direction: column;
 
-  font-size: $fontsize-body-l;
-  line-height: $lineheight-l;
+  font-size: variables.$fontsize-body-l;
+  line-height: variables.$lineheight-l;
 
   list-style-type: none;
 
@@ -94,7 +94,7 @@
       flex-direction: row;
 
       & > li:not(:last-child) {
-        margin-right: $spacing-m;
+        margin-right: variables.$spacing-m;
       }
     }
   }

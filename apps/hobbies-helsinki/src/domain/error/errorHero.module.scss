@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints' as breakpoints;
 
 .errorHero {
   background-color: var(--color-theme-background);
@@ -8,7 +8,7 @@
   padding-bottom: 4rem;
   padding-top: 3rem;
 
-  @include respond_above(s) {
+  @include breakpoints.respond-above(s) {
     padding-bottom: 7rem;
     padding-top: 5rem;
   }

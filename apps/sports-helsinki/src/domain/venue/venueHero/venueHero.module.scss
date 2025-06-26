@@ -1,5 +1,6 @@
-@import 'src/styles/breakpoints';
-@import '~@events-helsinki/components/src/styles/helsinkiCityOwned';
+@use '../../../styles/breakpoints' as breakpoints;
+@use '../../../styles/variables' as variables;
+@use '~@events-helsinki/components/src/styles/helsinkiCityOwned';
 
 $heroHeight: 30.6875rem;
 $imageMobileHeight: 23.4375rem;
@@ -18,7 +19,7 @@ $logoWidth: 5.5rem;
 }
 
 .contentContainer {
-  @include respond_below(m) {
+  @include breakpoints.respond-below(m) {
     padding: 0 !important;
   }
 
@@ -29,7 +30,7 @@ $logoWidth: 5.5rem;
     min-height: $heroHeight;
     position: relative;
 
-    @include respond_above(xl) {
+    @include breakpoints.respond-above(xl) {
       min-height: $heroHeight;
       grid-template-columns: auto 2fr 1fr;
       grid-template-rows: unset;
@@ -38,7 +39,7 @@ $logoWidth: 5.5rem;
     .backButtonWrapper {
       padding: var(--spacing-m) var(--spacing-4-xl) var(--spacing-m) 0;
 
-      @include respond_below(xl) {
+      @include breakpoints.respond-below(xl) {
         position: absolute;
         padding: var(--spacing-s) 0 0 var(--spacing-s);
       }
@@ -59,7 +60,7 @@ $logoWidth: 5.5rem;
       background-size: cover;
       background-repeat: no-repeat;
 
-      @include respond_below(s) {
+      @include breakpoints.respond-below(s) {
         margin: 0 (0 - var(--spacing-m));
       }
     }
@@ -76,17 +77,17 @@ $logoWidth: 5.5rem;
     .leftPanelEmpty {
       display: flex;
       padding: var(--spacing-m) var(--spacing-4-xl) var(--spacing-m) 0;
-      @include respond_above(xl) {
+      @include breakpoints.respond-above(xl) {
         padding: 0;
       }
-      @include respond_below(m) {
+      @include breakpoints.respond-below(m) {
         padding: 0;
       }
     }
 
     .leftPanel {
       display: flex;
-      @include respond_below(m) {
+      @include breakpoints.respond-below(m) {
         padding: 0 var(--spacing-s);
       }
     }
@@ -97,7 +98,7 @@ $logoWidth: 5.5rem;
       display: flex;
       flex-direction: column;
 
-      @include respond_above(m) {
+      @include breakpoints.respond-above(m) {
         padding: var(--spacing-xl);
         padding-right: 0;
         width: unset;
@@ -120,7 +121,7 @@ $logoWidth: 5.5rem;
         font-size: var(--fontsize-heading-l);
         line-height: var(--lineheight-m);
         font-weight: 400;
-        @include respond_below(m) {
+        @include breakpoints.respond-below(m) {
           font-size: var(--fontsize-heading-m);
           line-height: var(--lineheight-m);
         }
@@ -160,7 +161,7 @@ $logoWidth: 5.5rem;
     .buttonWrapperMobile {
       margin-top: 1rem;
 
-      @include respond_above(s) {
+      @include breakpoints.respond-above(s) {
         display: none;
       }
     }
@@ -172,19 +173,19 @@ $logoWidth: 5.5rem;
       flex-direction: column;
 
       & > *:not(:last-child) {
-        margin-bottom: $spacing-xs;
+        margin-bottom: variables.$spacing-xs;
       }
 
       .headerInfoLine {
         display: flex;
         align-items: flex-start;
 
-        line-height: $lineheight-l;
+        line-height: variables.$lineheight-l;
 
         & > svg {
           width: 24px;
           flex-shrink: 0;
-          margin-right: $spacing-xs;
+          margin-right: variables.$spacing-xs;
         }
       }
     }

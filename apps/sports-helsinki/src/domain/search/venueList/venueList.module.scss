@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../../styles/breakpoints' as breakpoints;
 
 .venueListWrapper {
   .venuesWrapper {
@@ -6,7 +6,7 @@
     grid-gap: var(--spacing-xs);
     margin-bottom: 1.5rem;
 
-    @include respond_above(s) {
+    @include breakpoints.respond-above(s) {
       grid-gap: var(--spacing-s);
       margin-bottom: var(--spacing-xl);
     }

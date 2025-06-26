@@ -1,5 +1,6 @@
-@import 'src/styles/breakpoints';
-@import '~@events-helsinki/components/src/styles/helsinkiCityOwned';
+@use '../../../styles/breakpoints' as breakpoints;
+@use '../../../styles/variables' as variables;
+@use '~@events-helsinki/components/src/styles/helsinkiCityOwned';
 
 .venueInfo {
   padding: 0;
@@ -8,7 +9,7 @@
   display: grid;
   grid-template-columns: 1fr;
 
-  @include respond_above(m) {
+  @include breakpoints.respond-above(m) {
     padding: var(--spacing-xl);
     padding-right: 0;
   }
@@ -74,17 +75,17 @@ a.marginlessLink {
   margin: 0;
   padding: 0;
   list-style-type: none;
-  line-height: $lineheight-l;
-  font-size: $fontsize-body-l;
+  line-height: variables.$lineheight-l;
+  font-size: variables.$fontsize-body-l;
 
   &.main {
     & > li:not(:last-child) {
-      margin-bottom: $spacing-s;
+      margin-bottom: variables.$spacing-s;
     }
   }
   &.other {
     & > li:first-child {
-      margin-top: $spacing-s;
+      margin-top: variables.$spacing-s;
     }
   }
 }

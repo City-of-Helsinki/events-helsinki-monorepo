@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@import 'src/styles/variables';
+@use '../../../styles/breakpoints' as breakpoints;
+@use '../../../styles/variables' as variables;
 
 .searchHeader {
   grid-column: 1 / -1 !important;
@@ -9,18 +9,18 @@
 
   // Menu that contains the search form
   .searchMenu {
-    padding: $spacing-xs;
+    padding: variables.$spacing-xs;
     // Fullscreen minus the main navigation height
     height: calc(100vh - 50px);
     background-color: var(--background-color);
 
     .closeSearchWrapper {
-      padding: $spacing-xs $spacing-s;
+      padding: variables.$spacing-xs variables.$spacing-s;
     }
 
     @include breakpoints.respond-above(s) {
       .closeSearchWrapper {
-        padding: 0 $spacing-s;
+        padding: 0 variables.$spacing-s;
       }
     }
 
@@ -29,7 +29,7 @@
       display: grid;
       grid-template-rows: 1fr;
       grid-template-columns: 4fr 1fr;
-      grid-column-gap: $spacing-s;
+      grid-column-gap: variables.$spacing-s;
 
       // Remove margin from from to get it aligned correctly
       & > div > form {
@@ -56,7 +56,7 @@
     right: 0;
 
     @include breakpoints.respond-above(m) {
-      padding: 0 0 $spacing-layout-xs 0;
+      padding: 0 0 variables.$spacing-layout-xs 0;
       position: initial;
     }
 
@@ -106,7 +106,7 @@
 
 @include breakpoints.respond-above(m) {
   .paddingClosed {
-    padding: $spacing-layout-xs 0 $spacing-layout-xs 0 !important;
+    padding: variables.$spacing-layout-xs 0 variables.$spacing-layout-xs 0 !important;
   }
 }
 .horizontalDivider {
@@ -116,19 +116,18 @@
 }
 
 .searchArea {
-  padding-top: $spacing-m;
+  padding-top: variables.$spacing-m;
   grid-column: 1 / -1 !important;
 
   display: inherit;
   grid-template-columns: inherit;
   grid-template-rows: inherit;
+  background-color: variables.$color-engel;
 
   & > * {
     grid-column: 2;
     margin-bottom: 0;
   }
-
-  background-color: $color-engel;
 }
 
 .searchContainer {

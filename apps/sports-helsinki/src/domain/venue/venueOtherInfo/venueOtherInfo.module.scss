@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../../styles/variables' as variables;
 
 .venueOtherInfo {
   padding: 0;
@@ -70,10 +70,10 @@ a.link {
   padding: 0;
   list-style-type: none;
   white-space: pre;
-  line-height: $lineheight-l;
-  font-size: $fontsize-body-l;
+  line-height: variables.$lineheight-l;
+  font-size: variables.$fontsize-body-l;
   & > li:not(:last-child) {
-    margin-bottom: $spacing-s;
+    margin-bottom: variables.$spacing-s;
   }
 }
 

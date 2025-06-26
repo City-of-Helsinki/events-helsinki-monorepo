@@ -1,7 +1,8 @@
-@import 'variables';
+@use 'sass:map' as map;
+@use 'variables' as variables;
 
 $sizes: (
-  s: $breakpoint-xl,
+  s: variables.$breakpoint-xl,
   // Custom non-HDS compliant max width for content. Breaks alignment with
   // for instance Navigation.
   m: 100rem,
@@ -9,11 +10,11 @@ $sizes: (
 );
 
 @function get-content-width($size) {
-  @return calc(#{map-get($sizes, $size)} - 2 * #{$spacing-layout-xs});
+  @return calc(#{map.get($sizes, $size)} - 2 * #{variables.$spacing-layout-xs});
 }
 
 @mixin get-layout-columns($size) {
-  @if map-has-key($sizes, $size) {
+  @if map.has-key($sizes, $size) {
     $content-width: get-content-width($size);
 
     grid-template-columns:

@@ -1,7 +1,7 @@
-@import 'src/styles/breakpoints';
+@use '../../../../styles/breakpoints' as breakpoints;
 
 .tabsMobile {
-  @include respond-above(l) {
+  @include breakpoints.respond-above(l) {
     display: none;
   }
 }
@@ -11,7 +11,7 @@
   justify-content: flex-start;
   gap: var(--spacing-m);
 
-  @include respond-below(l) {
+  @include breakpoints.respond-below(l) {
     display: none;
   }
 

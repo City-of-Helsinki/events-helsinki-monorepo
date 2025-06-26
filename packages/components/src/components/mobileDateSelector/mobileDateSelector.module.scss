@@ -1,11 +1,11 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints' as breakpoints;
 
 .mobileDateSelector {
   display: inline-flex;
   flex-wrap: wrap;
   margin-bottom: -1.25rem;
 
-  @include respond_above(s) {
+  @include breakpoints.respond-above(s) {
     display: none;
   }
 

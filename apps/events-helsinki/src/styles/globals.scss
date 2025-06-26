@@ -1,6 +1,5 @@
-@import 'fonts';
-@import 'variables';
-@import 'breakpoints';
+@use 'fonts';
+@use 'breakpoints';
 
 html,
 body,
@@ -13,7 +12,7 @@ main {
 
 * {
   box-sizing: border-box;
-  font-family: $font-family-base;
+  font-family: fonts.$font-family-base;
   --menu-item-background-color-highlighted: var(--color-success);
 }
 
@@ -69,7 +68,7 @@ button {
 .page h1,
 .article-page header > h1 {
   font-size: var(--fontsize-heading-xl) !important;
-  @include respond_below(s) {
+  @include breakpoints.respond-below(s) {
     font-size: var(--fontsize-heading-xl-mobile) !important;
   }
 }

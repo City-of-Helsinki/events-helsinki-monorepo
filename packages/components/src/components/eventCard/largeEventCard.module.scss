@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints' as breakpoints;
 
 .eventCard {
   --height-image: 14.5rem;
@@ -14,7 +14,7 @@
   height: 100%;
   border: 1px solid var(--color-black-20);
 
-  @include respond_above(s) {
+  @include breakpoints.respond-above(s) {
     grid-template-columns: 4fr 5fr;
     word-break: unset;
   }
@@ -33,7 +33,7 @@
       display: flex;
       align-self: flex-end;
 
-      @include respond_above(s) {
+      @include breakpoints.respond-above(s) {
         display: none;
       }
     }
@@ -116,7 +116,7 @@
       order: 6;
       //padding: var(--spacing-xs) 0;
 
-      @include respond_below(s) {
+      @include breakpoints.respond-below(s) {
         display: none;
       }
     }
@@ -127,7 +127,7 @@
       flex-wrap: wrap;
       margin-top: var(--spacing-s);
 
-      @include respond_above(s) {
+      @include breakpoints.respond-above(s) {
         order: 6;
       }
 
@@ -137,7 +137,7 @@
 
       .arrowRight,
       .linkArrowLabel {
-        @include respond_above(s) {
+        @include breakpoints.respond-above(s) {
           margin-top: var(--spacing-s);
         }
       }
@@ -155,7 +155,7 @@
           padding-left: var(--spacing-3-xs);
         }
 
-        @include respond_above(s) {
+        @include breakpoints.respond-above(s) {
           flex: none;
         }
 

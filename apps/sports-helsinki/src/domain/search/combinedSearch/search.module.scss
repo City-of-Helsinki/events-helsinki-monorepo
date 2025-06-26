@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../../styles/breakpoints' as breakpoints;
 
 $buttonWidth: 180px;
 
@@ -45,7 +45,7 @@ $buttonWidth: 180px;
       align-items: center;
       color: var(--color-primary-black);
     }
-    @include respond-above(s) {
+    @include breakpoints.respond-above(s) {
       margin-top: 0;
     }
   }
@@ -56,21 +56,21 @@ $buttonWidth: 180px;
 }
 
 .buttonWrapperWithTargetGroupFilter {
-  @include respond-between(s, m) {
+  @include breakpoints.respond-between(s, m) {
     grid-column: span 3 / 3;
   }
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-column: span 1 / 4;
   }
 }
 
 .buttonWrapperWithoutTargetGroupFilter {
-  @include respond-between(s, m) {
+  @include breakpoints.respond-between(s, m) {
     grid-column: span 2 / 3;
   }
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-column: span 1 / 3;
   }
 }
@@ -79,7 +79,7 @@ $buttonWidth: 180px;
   display: grid;
   grid-gap: var(--spacing-xs);
 
-  @include respond-above(s) {
+  @include breakpoints.respond-above(s) {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -87,7 +87,7 @@ $buttonWidth: 180px;
 .rowWithTargetGroupFilter {
   @extend .rowBase;
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -95,7 +95,7 @@ $buttonWidth: 180px;
 .rowWithoutTargetGroupFilter {
   @extend .rowBase;
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -110,7 +110,7 @@ $buttonWidth: 180px;
 
   margin-bottom: var(--spacing-xs);
 
-  @include respond-above(s) {
+  @include breakpoints.respond-above(s) {
     grid-template-columns: 1fr;
     grid-gap: var(--spacing-xs);
 
@@ -123,7 +123,7 @@ $buttonWidth: 180px;
   font-weight: 500;
   line-height: normal;
 
-  @include respond-below(s) {
+  @include breakpoints.respond-below(s) {
     display: none;
   }
 }

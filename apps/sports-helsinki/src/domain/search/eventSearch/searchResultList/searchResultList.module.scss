@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../../../styles/breakpoints' as breakpoints;
 
 .searchResultListContainer {
   background-color: var(--color-white);
@@ -16,7 +16,7 @@
   margin-bottom: 1.5rem;
   text-align: center;
 
-  @include respond_above(s) {
+  @include breakpoints.respond-above(s) {
     text-align: left;
   }
 }
@@ -31,7 +31,7 @@
     .loadMoreWrapper {
       margin-top: 1.5rem;
 
-      @include respond_above(s) {
+      @include breakpoints.respond-above(s) {
         margin-top: 0;
       }
     }
@@ -43,7 +43,7 @@
   flex-direction: column-reverse;
   align-items: center;
 
-  @include respond-above(s) {
+  @include breakpoints.respond-above(s) {
     flex-direction: row;
     justify-content: space-between;
   }

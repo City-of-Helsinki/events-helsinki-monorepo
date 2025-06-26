@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints';
 
 .rnsContainer {
   background-color: var(--color-black-5);
@@ -6,7 +6,7 @@
     margin: 0 auto;
     max-width: var(--container-width-xl);
 
-    @include respond_below(xl) {
+    @include breakpoints.respond-below(xl) {
       padding: 0 var(--spacing-m);
     }
 

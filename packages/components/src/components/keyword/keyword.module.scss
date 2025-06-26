@@ -1,8 +1,8 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints' as breakpoints;
 
 .keyword {
   &.hideOnMobile {
-    @include respond_below(s) {
+    @include breakpoints.respond_below(s) {
       display: none;
     }
   }
@@ -15,7 +15,7 @@
   }
 
   &.blackOnMobile {
-    @include respond_below(s) {
+    @include breakpoints.respond_below(s) {
       background-color: var(--color-black-80);
       color: var(--color-white);
     }

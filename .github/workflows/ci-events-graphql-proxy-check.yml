@@ -31,7 +31,7 @@ jobs:
       typecheck: true
       app-directory: proxies/events-graphql-proxy
       extra-commands: |
-        echo "NODE_ENV=production" >> $GITHUB_ENV
+        echo "NODE_ENV=development" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_DEBUG=1" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_PORT=4100" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_SENTRY_ENVIRONMENT=local" >> $GITHUB_ENV

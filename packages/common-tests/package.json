@@ -1,7 +1,6 @@
 {
   "name": "@events-helsinki/common-tests",
   "version": "1.0.0",
-  "license": "MIT",
   "private": true,
   "homepage": "https://github.com/City-of-Helsinki/events-helsinki-monorepo",
   "repository": {
@@ -9,17 +8,22 @@
     "url": "https://github.com/City-of-Helsinki/events-helsinki-monorepo",
     "directory": "packages/common-tests"
   },
+  "license": "MIT",
   "author": {
     "name": "Jaakko Nenonen <jaakko@codelicious.fi>"
   },
   "sideEffects": false,
   "type": "module",
-  "./package.json": "./package.json",
   "scripts": {
     "clean": "rimraf --no-glob ./dist ./coverage ./tsconfig.tsbuildinfo",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --cache --cache-location ../../.cache/eslint/common-tests.eslintcache",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --fix",
     "typecheck": "tsc --project ./tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "i18next": "23.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@events-helsinki/eslint-config-bases": "workspace:^",
@@ -36,12 +40,10 @@
     "eslint-plugin-jest-formatting": "^3.1.0",
     "eslint-plugin-testcafe-community": "2.0.0",
     "eslint-plugin-testing-library": "^5.11.0",
-    "i18next": "23.2.3",
     "prettier": "^2.8.8",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "rimraf": "5.0.1",
     "testcafe": "^3.0.0",
     "typescript": "^5.3.3"
-  }
+  },
+  "./package.json": "./package.json"
 }

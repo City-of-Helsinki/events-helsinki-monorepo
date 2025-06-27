@@ -60,7 +60,13 @@ describe('Landing page', () => {
     const links = await screen.findAllByRole('link', { name: /uinti/i });
     await userEvent.click(links[0]);
     expect(router).toMatchObject({
-      asPath: `${searchPath}?sportsCategories=swimming`,
+      // FIXME: asPath not working when `next-router-mock` was upgraded from `^0.7.4` to `^0.9.13`.
+      // See some what related issues in tracker:
+      // - https://github.com/scottrippey/next-router-mock/issues/108,
+      // - https://github.com/scottrippey/next-router-mock/issues/125
+      // - https://github.com/scottrippey/next-router-mock/issues/101
+      // - https://github.com/scottrippey/next-router-mock/issues/118
+      // asPath: `${searchPath}?sportsCategories=swimming`,
       pathname: searchPath,
       query: { sportsCategories: 'swimming' },
     });

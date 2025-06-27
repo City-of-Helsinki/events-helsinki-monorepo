@@ -1,6 +1,6 @@
 {
   "name": "sports-helsinki",
-  "version": "1.28.1",
+  "version": "1.29.0",
   "private": true,
   "scripts": {
     "?share-static-hardlink": "echo 'Use this command to link assets... from shared static folder'",

@@ -1,4 +1,4 @@
-import { RouterContext } from "next/dist/shared/lib/router-context"; // next 12
+import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 import i18n from './i18next.js';
 
 // Enable hds-design-tokens in storybook
@@ -29,6 +29,6 @@ export const parameters = {
   locales: {
     en: 'English',
     fr: 'Français',
-    ja: '日本語',    
+    ja: '日本語',
   },
 };

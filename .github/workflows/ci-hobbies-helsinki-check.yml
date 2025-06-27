@@ -59,3 +59,4 @@ jobs:
         echo "NEXT_PUBLIC_MATOMO_SRC_URL=piwik.min.js" >> $GITHUB_ENV
         echo "NEXT_PUBLIC_MATOMO_TRACKER_URL=tracker.php" >> $GITHUB_ENV
         echo "NEXT_PUBLIC_MATOMO_ENABLED=0" >> $GITHUB_ENV
+        echo "SKIP_BUILD_STATIC_GENERATION=1" >> $GITHUB_ENV

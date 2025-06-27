@@ -9,6 +9,7 @@
     "dev": "nodemon --exec 'ts-node' src/index.ts",
     "start": "node build -r dotenv-expand/config",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "prepare": "husky install",
     "pre-commit": "lint-fix",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --cache --cache-location ../../.cache/eslint/events-graphql-proxy.eslintcache",

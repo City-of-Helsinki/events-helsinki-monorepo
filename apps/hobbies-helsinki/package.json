@@ -20,6 +20,7 @@
     "check-size": "size-limit --highlight-less",
     "typecheck": "tsc --project ./tsconfig.json --noEmit",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --cache --cache-location ../../.cache/eslint/hobbies-helsinki.eslintcache",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
     "get-translations": "node ./scripts/get-translations.js",

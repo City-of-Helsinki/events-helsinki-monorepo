@@ -1,9 +1,9 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { EventsFederationApolloClient } from '@events-helsinki/components';
+import type { GraphQLFormattedError } from 'graphql';
 import React from 'react';
 import routerHelper from '../../domain/app/routerHelper';
 import AppConfig from '../app/AppConfig';
-import { GraphQLFormattedError } from 'graphql';
 
 export default function initializeHobbiesApolloClient(
   config: {

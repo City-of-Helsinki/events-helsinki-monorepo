@@ -25,19 +25,21 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --cache --cache-location ../../.cache/eslint/common-i18n.eslintcache",
     "typecheck": "tsc --project ./tsconfig.json --noEmit"
   },
+  "dependencies": {
+    "i18next": "23.2.3",
+    "react": "^18.3.1",
+    "react-i18next": "13.0.1"
+  },
   "devDependencies": {
     "@events-helsinki/eslint-config-bases": "workspace:^",
-    "@types/jest": "^29.5.2",
-    "@types/node": "20.3.2",
+    "@types/jest": "^29.5.14",
+    "@types/node": "20.19.1",
     "cross-env": "7.0.3",
-    "eslint": "8.43.0",
-    "eslint-plugin-import": "^2.27.5",
-    "i18next": "23.2.3",
+    "eslint": "8.57.1",
+    "eslint-plugin-import": "^2.32.0",
     "prettier": "^2.8.8",
-    "react": "^18.3.1",
-    "react-i18next": "13.0.1",
-    "rimraf": "5.0.1",
-    "typescript": "^5.3.3"
+    "rimraf": "5.0.10",
+    "typescript": "^5.8.3"
   },
   "./package.json": "./package.json"
 }

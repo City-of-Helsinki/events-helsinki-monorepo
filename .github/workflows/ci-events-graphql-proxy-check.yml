@@ -38,6 +38,3 @@ jobs:
         echo "GRAPHQL_PROXY_INTROSPECTION=1" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_SENTRY_ENVIRONMENT=development" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_SENTRY_DSN=https://0b946822a84596cdd0453aa5d93d3b9e@sentry.test.hel.ninja/219" >> $GITHUB_ENV
-        echo "NEXT_PUBLIC_CMS_HEADER_MENU_NAME_EN=Hobbies Helsinki Header EN" >> $GITHUB_ENV
-        echo "NEXT_PUBLIC_CMS_HEADER_MENU_NAME_FI=Hobbies Helsinki Header FI" >> $GITHUB_ENV
-        echo "NEXT_PUBLIC_CMS_HEADER_MENU_NAME_SV=Hobbies Helsinki Header SV" >> $GITHUB_ENV

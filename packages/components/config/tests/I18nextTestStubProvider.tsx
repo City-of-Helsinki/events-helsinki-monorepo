@@ -1,4 +1,4 @@
-import i18n from '@events-helsinki/common-i18n/tests/initI18n';
+import { initTestI18n as i18n } from '@events-helsinki/common-i18n';
 import type { FC, ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 

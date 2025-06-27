@@ -6,7 +6,7 @@ import { gql } from 'graphql-tag';
 import EventContext from '../context/EventContext';
 import { createTestApolloServer } from '../utils/testUtils';
 
-let getMock: jest.Mock;
+let getMock;
 const executeOperationReturnMockData = (
   request: Omit<GraphQLRequest, 'query'> & {
     query?: DocumentNode;
@@ -14,7 +14,7 @@ const executeOperationReturnMockData = (
   responseMockData: Record<string, unknown> = {}
 ): Promise<GraphQLResponse> => {
   const contextValue = new EventContext({ token: 'token' });
-  getMock = (contextValue.dataSources.keyword as any).get = jest
+  getMock = (contextValue.dataSources.keyword as any).get = vi
     .fn()
     .mockResolvedValue(responseMockData);
   return createTestApolloServer().executeOperation(request, { contextValue });
@@ -77,8 +77,7 @@ it('resolves keywordList correctly', async () => {
 
   assert(res.body.kind === 'single');
   expect(res.body.singleResult.errors).toBeUndefined();
-
-  // eslint-disable-next-line jest/prefer-strict-equal
+  // eslint-disable-next-line vitest/prefer-strict-equal
   expect(res.body.singleResult.data?.keywordList).toEqual({
     data: [
       {

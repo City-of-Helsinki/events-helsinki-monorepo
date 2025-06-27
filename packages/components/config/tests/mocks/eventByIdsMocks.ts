@@ -1,4 +1,4 @@
-import type { MockedResponse } from '@apollo/client/testing';
+import type { MockedResponse } from '@apollo/client/testing/index.js';
 import type {
   EventDetails,
   EventsByIdsQueryVariables,

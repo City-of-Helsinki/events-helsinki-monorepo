@@ -106,11 +106,9 @@ it.each([
   delete process.env[envName];
   if (defaultValue) {
     // @ts-ignore
-    // eslint-disable-next-line jest/no-conditional-expect
     expect(AppConfig[field]).toStrictEqual(defaultValue);
   } else {
     // @ts-ignore
-    // eslint-disable-next-line jest/no-conditional-expect
     expect(AppConfig[field]).toBeUndefined();
   }
 

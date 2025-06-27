@@ -4,17 +4,23 @@ import {
   NeighborhoodListDocument,
   PlaceListDocument,
 } from '@events-helsinki/components';
-import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
-
-import { actWait, configure, render, screen, userEvent } from '@/test-utils';
+import { axe } from 'vitest-axe';
 import {
   fakeKeywords,
   fakeNeighborhoods,
   fakePlaces,
-} from '@/test-utils/mockDataUtils';
+} from '../../../../../../config/vitest/mockDataUtils';
+import {
+  actWait,
+  configure,
+  render,
+  screen,
+  userEvent,
+} from '../../../../../../config/vitest/test-utils';
+
 import Search from '../AdvancedSearch';
 
 configure({ defaultHidden: true });
@@ -68,7 +74,7 @@ const testRoute = `${pathname}${search}`;
 const routes = [testRoute];
 
 const renderComponent = () =>
-  render(<Search scrollToResultList={jest.fn()} />, {
+  render(<Search scrollToResultList={vi.fn()} />, {
     mocks,
     routes,
   });

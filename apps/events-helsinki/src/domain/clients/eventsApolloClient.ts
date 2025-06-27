@@ -1,4 +1,7 @@
-import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import type {
+  ApolloClient,
+  NormalizedCacheObject,
+} from '@apollo/client/core/index.js';
 import { EventsFederationApolloClient } from '@events-helsinki/components';
 import type { GraphQLFormattedError } from 'graphql';
 import React from 'react';
@@ -26,6 +29,7 @@ export function useEventsApolloClient(args: {
 }): ApolloClient<NormalizedCacheObject> {
   // NOTE: Critical: The Apollo cache should never be cleared!
   // Carefully test the cache after any changes done here.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   return React.useMemo(() => initializeEventsApolloClient(args), []);
 }
 

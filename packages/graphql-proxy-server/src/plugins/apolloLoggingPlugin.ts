@@ -1,8 +1,8 @@
 import type { ApolloServerPlugin } from '@apollo/server';
 import { v4 as uuidv4 } from 'uuid';
-import { X_REQUEST_ID } from '../constants';
-import type ContextValue from '../context/ContextValue';
-import createLogger from '../utils/create-logger';
+import { X_REQUEST_ID } from '../constants.js';
+import type ContextValue from '../context/ContextValue.js';
+import createLogger from '../utils/create-logger.js';
 
 const apolloLoggingPlugin: <T>() => ApolloServerPlugin<
   ContextValue<T>

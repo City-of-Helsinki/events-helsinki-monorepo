@@ -161,8 +161,11 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
       const current = container.current;
 
       // Close menu when clicking outside of the component
-      if (!(target instanceof Node && current?.contains(target))) {
-        isMenuOpen && setIsMenuOpen(false);
+      if (
+        !(target instanceof Node && current?.contains(target)) &&
+        isMenuOpen
+      ) {
+        setIsMenuOpen(false);
       }
     },
     [isMenuOpen]
@@ -216,7 +219,6 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
   ]);
 
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       onClick={handleComponentClick}
       className={classNames(

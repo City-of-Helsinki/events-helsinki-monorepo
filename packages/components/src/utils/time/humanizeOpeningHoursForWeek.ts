@@ -24,9 +24,7 @@ type Copy = {
   onNextDay: string;
 };
 
-type MicroCopy = {
-  [key: string]: Copy;
-};
+type MicroCopy = Record<string, Copy>;
 
 const microCopy: MicroCopy = {
   fi: {

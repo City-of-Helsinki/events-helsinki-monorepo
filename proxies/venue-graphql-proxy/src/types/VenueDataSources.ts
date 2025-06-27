@@ -1,5 +1,5 @@
-import HaukiDataSource from '../datasources/HaukiDataSource';
-import ServiceMapDataSource from '../datasources/ServiceMapDataSource';
+import HaukiDataSource from '../datasources/HaukiDataSource.js';
+import ServiceMapDataSource from '../datasources/ServiceMapDataSource.js';
 
 export type VenueDataSources = {
   hauki: HaukiDataSource;

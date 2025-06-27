@@ -20,7 +20,7 @@ import {
   fakeKeyword,
   fakeKeywords,
   fakePlace,
-} from '@/test-utils/mockDataUtils';
+} from '../../../../config/vitest/mockDataUtils';
 
 describe('getKeywordList function', () => {
   it('should sort and capitalize keywords', () => {

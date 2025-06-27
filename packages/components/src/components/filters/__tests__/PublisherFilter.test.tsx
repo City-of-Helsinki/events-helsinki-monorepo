@@ -1,4 +1,4 @@
-import { translations } from '@events-helsinki/common-i18n/tests/initI18n';
+import { translations } from '@events-helsinki/common-i18n';
 import { render, waitFor, screen, userEvent } from '@/test-utils';
 import { fakeOrganization } from '@/test-utils/mockDataUtils';
 import { OrganizationDetailsDocument } from '../../../types';
@@ -24,17 +24,16 @@ const mocks = [
 ];
 
 it('matches snapshot', async () => {
-  const { container } = render(
-    <PublisherFilter id={id} onRemove={jest.fn()} />,
-    { mocks }
-  );
+  const { container } = render(<PublisherFilter id={id} onRemove={vi.fn()} />, {
+    mocks,
+  });
 
   await screen.findByText(name);
   expect(container.firstChild).toMatchSnapshot();
 });
 
 it('calls onRemove callback when remove button is clicked', async () => {
-  const onClickMock = jest.fn();
+  const onClickMock = vi.fn();
   render(<PublisherFilter id={id} onRemove={onClickMock} />, { mocks });
 
   await screen.findByText(name);
@@ -52,7 +51,6 @@ it('calls onRemove callback when remove button is clicked', async () => {
   expect(onClickMock).toHaveBeenCalledWith(id, 'publisher');
 });
 
-// eslint-disable-next-line jest/expect-expect
 it("should return null if place doesn't exist", async () => {
   const mocks = [
     {
@@ -61,12 +59,9 @@ it("should return null if place doesn't exist", async () => {
     },
   ];
 
-  const { container } = render(
-    <PublisherFilter id={id} onRemove={jest.fn()} />,
-    {
-      mocks,
-    }
-  );
+  const { container } = render(<PublisherFilter id={id} onRemove={vi.fn()} />, {
+    mocks,
+  });
 
   await waitFor(() => {
     expect(

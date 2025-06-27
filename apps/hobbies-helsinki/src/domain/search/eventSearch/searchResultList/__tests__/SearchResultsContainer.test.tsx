@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, screen } from '@/test-utils';
+import { render, screen } from '../../../../../../config/vitest/test-utils';
 import SearchResultsContainer from '../SearchResultsContainer';
 
 it.each<[number, string]>([

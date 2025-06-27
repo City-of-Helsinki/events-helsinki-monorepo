@@ -4,16 +4,25 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/test-utils": ["../config/jest/test-utils"],
-      "@/test-utils/*": ["../config/jest/*"],
-      "@/lib/*": ["./lib/*"],
-      "@events-helsinki/common-tests/browser-tests": [
-        "../../../packages/common-tests/src/browser-tests/*"
+      "@/test-utils/*": [
+        "../config/vitest/*"
+      ],
+      "@/test-utils": [
+        "../config/vitest/test-utils.tsx"
+      ],
+      "@/lib/*": [
+        "./lib/*"
       ],
       "@events-helsinki/common-i18n": [
         "../../../packages/common-i18n/src/index"
@@ -21,17 +30,25 @@
       "@events-helsinki/common-i18n/locales/*": [
         "../../../packages/common-i18n/src/locales/*"
       ],
-      "@events-helsinki/components/*": ["../../../packages/components/src/*"],
-      "@events-helsinki/components": ["../../../packages/components/src/index"],
+      "@events-helsinki/components/*": [
+        "../../../packages/components/src/*"
+      ],
+      "@events-helsinki/components": [
+        "../../../packages/components/src/index"
+      ],
       "@events-helsinki/common-tests/*": [
         "../../../packages/common-tests/src/*"
       ],
       "@events-helsinki/common-tests": [
         "../../../packages/common-tests/src/index"
       ]
-    }
+    },
+    "resolveJsonModule": true
   },
-  "exclude": ["**/node_modules", "**/.*/"],
+  "exclude": [
+    "**/node_modules",
+    "**/.*/"
+  ],
   "include": [
     "next-env.d.ts",
     "src/types.d/react-i18next.d.ts",
@@ -42,6 +59,7 @@
     "**/*.cjs",
     "**/*.mjs",
     "**/*.jsx",
-    "**/*.json"
+    "**/*.json",
+    "./vitest-setup.ts"
   ]
 }

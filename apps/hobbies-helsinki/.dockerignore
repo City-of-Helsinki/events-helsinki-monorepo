@@ -5,10 +5,10 @@
 !src/
 !*yarn*
 !tsconfig.json
-!next.config.js
+!next.config.mjs
 !.babelrc
 !i18nRoutes.config.js
-!next-i18next.config.js
+!next-i18next.config.mjs
 !sentry.client.config.js
 !sentry.server.config.js
 !sentry.properties

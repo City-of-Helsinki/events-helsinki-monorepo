@@ -200,9 +200,9 @@ ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
 # Copy the configuration files to the apps/project root
-COPY --from=builder --chown=default:root /app/apps/${PROJECT}/next.config.js \
-    /app/apps/${PROJECT}/i18nRoutes.config.js \
-    /app/apps/${PROJECT}/next-i18next.config.js \
+COPY --from=builder --chown=default:root /app/apps/${PROJECT}/next.config.mjs \
+    /app/apps/${PROJECT}/i18nRoutes.config.mjs \
+    /app/apps/${PROJECT}/next-i18next.config.mjs \
     /app/apps/${PROJECT}/package.json \
     ./apps/${PROJECT}/
 
@@ -216,7 +216,7 @@ COPY --from=builder --chown=default:root /app/packages/common-i18n/src/locales \
 COPY --from=builder --chown=default:root /app/apps/${PROJECT}/.next/standalone .
 COPY --from=builder --chown=default:root /app/apps/${PROJECT}/.next/static ./apps/${PROJECT}/.next/static
 COPY --from=builder --chown=default:root /app/apps/${PROJECT}/public ./apps/${PROJECT}/public
-COPY --from=builder --chown=default:root /app/next.base.config.js .
+COPY --from=builder --chown=default:root /app/next.base.config.mjs .
 RUN cp -r /app/apps/${PROJECT}/.next/ /app/.next_orig/
 
 # OpenShift write access to Next cache folder

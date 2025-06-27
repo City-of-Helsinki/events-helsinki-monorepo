@@ -10,6 +10,7 @@ import { ROUTES } from '../../constants';
 // Only holds publicRuntimeConfig
 const { publicRuntimeConfig } = getConfig();
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 class AppConfig {
   /**
    * The base URL of the CMS.
@@ -105,9 +106,7 @@ class AppConfig {
    * Follow these guidelines when presenting date and time in your services.
    * https://hds.hel.fi/foundation/guidelines/data-formats/
    */
-  static get dateFormat() {
-    return 'dd.MM.yyyy';
-  }
+  static readonly dateFormat = 'dd.MM.yyyy';
 
   /**
    * The generally used short date time format.
@@ -116,9 +115,7 @@ class AppConfig {
    * Follow these guidelines when presenting date and time in your services.
    * https://hds.hel.fi/foundation/guidelines/data-formats/
    */
-  static get shortDatetimeFormat() {
-    return 'dd.MM.yyyy HH:mm';
-  }
+  static readonly shortDatetimeFormat = 'dd.MM.yyyy HH:mm';
 
   /**
    * The generally used long date time format.
@@ -127,9 +124,7 @@ class AppConfig {
    * Follow these guidelines when presenting date and time in your services.
    * https://hds.hel.fi/foundation/guidelines/data-formats/
    */
-  static get datetimeFormat() {
-    return 'dd.MM.yyyy HH:mm:ss';
-  }
+  static readonly datetimeFormat = 'dd.MM.yyyy HH:mm:ss';
 
   /** Should the application allow HTTP-connections? */
   static get allowUnauthorizedRequests() {
@@ -144,14 +139,11 @@ class AppConfig {
   }
 
   /** A default HDS theme for the buttons. https://hds.hel.fi/foundation/design-tokens/colour. */
-  static get defaultButtonTheme(): CommonButtonProps['theme'] {
-    return 'default';
-  }
+  static readonly defaultButtonTheme: CommonButtonProps['theme'] = 'default';
 
   /** A primary variant for the buttons. https://hds.hel.fi/foundation/design-tokens/colour. */
-  static get defaultButtonVariant(): CommonButtonProps['variant'] {
-    return 'success';
-  }
+  static readonly defaultButtonVariant: CommonButtonProps['variant'] =
+    'success';
 
   static get matomoConfiguration() {
     const matomoUrlBase = process.env.NEXT_PUBLIC_MATOMO_URL_BASE;
@@ -187,7 +179,8 @@ class AppConfig {
 
   /**
    * A default NextJS page revalidation time.
-   * https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#on-demand-revalidation
+   * @link https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration
+   * #on-demand-revalidation
    */
   static get defaultRevalidate() {
     const envValue = process.env.NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS;
@@ -200,6 +193,7 @@ class AppConfig {
     }
 
     // no revalidation
+    // eslint-disable-next-line @stylistic/max-len
     // https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration#on-demand-revalidation
     if (value < 1) {
       return false;
@@ -296,6 +290,8 @@ function parseEnvValue(
   try {
     return JSON.parse(value);
   } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('Could not parse env value', e);
     return null;
   }
 }

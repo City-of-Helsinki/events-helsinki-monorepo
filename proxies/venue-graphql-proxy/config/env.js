@@ -1,4 +1,5 @@
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
@@ -28,4 +29,4 @@ function getGraphqlProxyEnvironment() {
   return { raw, stringified };
 }
 
-module.exports = getGraphqlProxyEnvironment;
+export default getGraphqlProxyEnvironment;

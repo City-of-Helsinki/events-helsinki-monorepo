@@ -1,8 +1,8 @@
 import type { ApolloServerPlugin } from '@apollo/server';
 import { RewriteFrames } from '@sentry/integrations';
 import * as Sentry from '@sentry/node';
-import type ContextValue from '../context/ContextValue';
-import { getServerConfig } from '../server-config/server-config';
+import type ContextValue from '../context/ContextValue.js';
+import { getServerConfig } from '../server-config/server-config.js';
 
 const sentryLoggingPlugin = <T>(): ApolloServerPlugin<ContextValue<T>> => {
   const config = getServerConfig();

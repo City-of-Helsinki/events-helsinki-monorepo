@@ -1,2 +1,2 @@
 export { default as getResilientTranslation } from './getResilientTranslation';
-export * from './types';
+export type * from './types';

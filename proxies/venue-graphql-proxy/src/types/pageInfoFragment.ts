@@ -1,2 +1,2 @@
-export { PageInfoFragmentDoc } from './types';
-export type { PageInfoFragment } from './types';
+export { PageInfoFragmentDoc } from './types.js';
+export type { PageInfoFragment } from './types.js';

@@ -32,6 +32,7 @@ pr:
       - '*.base.json'
       - '*.base.js'
       - '.prettier*.*'
+      - '*.config.*'
       - 'azure-pipelines-harrastukset-review.yml'
       - 'Dockerfile'
       - '*.Dockerfile'

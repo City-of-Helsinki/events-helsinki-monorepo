@@ -12,6 +12,4 @@ const getDefaultIgnorePatterns = () => {
   ];
 };
 
-module.exports = {
-  getDefaultIgnorePatterns,
-};
+export default getDefaultIgnorePatterns;

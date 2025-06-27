@@ -1,5 +1,5 @@
-import type { createInstance as createMatomoInstance } from '@jonkoops/matomo-tracker-react';
-import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
+import type createMatomoInstance from '@jonkoops/matomo-tracker-react/lib/instance.js';
+import MatomoProvider from '@jonkoops/matomo-tracker-react/lib/MatomoProvider.js';
 
 import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';

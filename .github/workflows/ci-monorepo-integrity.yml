@@ -2,19 +2,14 @@ name: CI-monorepo-integrity
 
 on:
   push:
-    branches:
-      - dev
-      - main
+    branches: [main]
     paths:
       - 'yarn.lock'
       - '.yarnrc.yml'
       - '.github/workflows/ci-monorepo-integrity.yml'
 
   pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
+    branches: [main]
     paths:
       - 'yarn.lock'
       - '.yarnrc.yml'
@@ -25,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
     steps:
       - uses: actions/checkout@v4
 

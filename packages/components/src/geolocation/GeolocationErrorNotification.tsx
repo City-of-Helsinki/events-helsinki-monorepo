@@ -8,7 +8,8 @@ import type { GeolocationContextType } from './types';
 
 /**
  * Fix somehow broken HDS Notification opening animation
- * @see https://github.com/City-of-Helsinki/helsinki-design-system/blob/v2.15.0/packages/react/src/components/notification/Notification.tsx#L134-L152
+ * @see https://github.com/City-of-Helsinki/helsinki-design-system/blob/v2.15.0/packages
+ * /react/src/components/notification/Notification.tsx#L134-L152
  *
  * Without overriding opacity and transform, the notification can open up and stay in
  * a transitional state where the notification is partly translucent and slightly

@@ -26,7 +26,7 @@ const useHandleUnifiedSearchOrderChange = () => {
     async (option: Option) => {
       const [orderBy, orderDir] = option.value.split('-') as [
         UnifiedSearchOrderByType,
-        OrderDirType
+        OrderDirType,
       ];
       if (isAccessibilityProfile(option.value)) {
         // Update the combined search form context
@@ -60,6 +60,7 @@ const useHandleUnifiedSearchOrderChange = () => {
       // Update the URL
       updateRouteToSearchPage({ shallow: true });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [geolocation, accessibilityProfile]
   );
 };

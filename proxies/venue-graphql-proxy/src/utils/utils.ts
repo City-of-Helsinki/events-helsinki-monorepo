@@ -1,9 +1,9 @@
-import type { ExtractPrefixesFromLocaleSuffixedNames } from '@events-helsinki/components/src/utils/typescript.utils';
-import get from 'lodash/get';
-import AppConfig from '../config/AppConfig';
-import { Sources } from '../contants/constants';
-import type VenueContext from '../context/VenueContext';
-import type { UnenrichedUnitFields } from '../resolvers/integrations/VenueServiceMapIntegration';
+import get from 'lodash/get.js';
+import AppConfig from '../config/AppConfig.js';
+import { Sources } from '../contants/constants.js';
+import type VenueContext from '../context/VenueContext.js';
+import type { UnenrichedUnitFields } from '../resolvers/integrations/VenueServiceMapIntegration.js';
+import type { Point } from '../types/types.js';
 import type {
   TprekAccessibilitySentence,
   AccessibilitySentences,
@@ -24,8 +24,19 @@ import type {
   TranslatedDepartment,
   TranslatedOntologyIdLabel,
   TprekDepartment,
-} from '../types';
-import type { Point } from '../types/types';
+} from '../types.js';
+
+/**
+ * Extract prefixes from strings that are suffixed with underscore and any given locale.
+ * @example ExtractPrefixesFromLocaleSuffixedNames<'a_fi' | 'b_sv' | 'c'> == 'a' | 'b'
+ *
+ * NOTE: this is also available in '@events-helsinki/components/src/utils/typescript.utils.js',
+ * but the module type does not match
+ */
+export type ExtractPrefixesFromLocaleSuffixedNames<
+  T extends string,
+  Locale extends string = 'fi' | 'en' | 'sv',
+> = T extends `${infer Prefix}_${Locale}` ? Prefix : never;
 
 /** Mapping from Locale to its TprekAccessibilitySentence sentence group name */
 const LOCALIZED_SENTENCE_GROUP_NAME: Record<
@@ -71,17 +82,17 @@ export type TranslatableFieldsFor<T extends TranslatableObjectType> =
   T extends TprekUnitWithoutNull
     ? ExtractTranslatableFieldNamePrefixes<keyof TprekUnitWithoutNull>
     : T extends TprekUnitConnection
-    ? ExtractTranslatableFieldNamePrefixes<keyof TprekUnitConnection>
-    : T extends TprekDepartmentWithoutNull
-    ? ExtractTranslatableFieldNamePrefixes<keyof TprekDepartmentWithoutNull>
-    : T extends TprekOntologyTreeNode
-    ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyTreeNode>
-    : T extends TprekOntologyWord
-    ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyWord>
-    : never;
+      ? ExtractTranslatableFieldNamePrefixes<keyof TprekUnitConnection>
+      : T extends TprekDepartmentWithoutNull
+        ? ExtractTranslatableFieldNamePrefixes<keyof TprekDepartmentWithoutNull>
+        : T extends TprekOntologyTreeNode
+          ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyTreeNode>
+          : T extends TprekOntologyWord
+            ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyWord>
+            : never;
 
 export function formTranslationObject<
-  InputObjectType extends TranslatableObjectType
+  InputObjectType extends TranslatableObjectType,
 >(obj: InputObjectType, field: TranslatableFieldsFor<InputObjectType>) {
   const result = {
     fi: get(obj, `${field}_fi`) ?? undefined,
@@ -146,8 +157,18 @@ export function makeTranslatableDepartment(
   }
   return {
     abbreviation: formTranslationObject(department, 'abbr'),
-    addressCity: formTranslationObject(department, 'address_city'),
-    addressPostalFull: formTranslationObject(department, 'address_postal_full'),
+    addressCity: formTranslationObject(
+      department,
+      'address_city' as ExtractTranslatableFieldNamePrefixes<
+        keyof TprekDepartmentWithoutNull
+      >
+    ),
+    addressPostalFull: formTranslationObject(
+      department,
+      'address_postal_full' as ExtractTranslatableFieldNamePrefixes<
+        keyof TprekDepartmentWithoutNull
+      >
+    ),
     addressZip: department?.address_zip ?? null,
     businessId: department?.business_id ?? null,
     email: department?.email ?? null,
@@ -160,7 +181,12 @@ export function makeTranslatableDepartment(
     organizationType: department?.organization_type ?? null,
     parentId: department?.parent_id ?? null,
     phone: department?.phone ?? null,
-    streetAddress: formTranslationObject(department, 'street_address'),
+    streetAddress: formTranslationObject(
+      department,
+      'street_address' as ExtractTranslatableFieldNamePrefixes<
+        keyof TprekDepartmentWithoutNull
+      >
+    ),
     www: formTranslationObject(department, 'www'),
   };
 }

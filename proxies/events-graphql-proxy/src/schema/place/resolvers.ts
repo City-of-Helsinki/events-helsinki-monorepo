@@ -2,10 +2,10 @@
 import {
   composeQuery,
   normalizeKeys,
-} from '@events-helsinki/graphql-proxy-server/src';
-import type EventContext from '../../context/EventContext';
-import type { QueryResolvers } from '../../types';
-import type { Place, PlaceListResponse } from '../../types/types';
+} from '@events-helsinki/graphql-proxy-server';
+import type EventContext from '../../context/EventContext.js';
+import type { Place, PlaceListResponse } from '../../types/types.js';
+import type { QueryResolvers } from '../../types.js';
 
 const Query: QueryResolvers = {
   placeDetails: async (_: any, { id }: any, context: EventContext) => {

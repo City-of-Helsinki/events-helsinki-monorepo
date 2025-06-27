@@ -37,4 +37,5 @@ const _REDIRECTS_QUERY = gql`
 
 // Query redirects from the CMS
 export const queryRedirects = (): Promise<unknown> =>
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   request(process.env.FEDERATION_ROUTER_ENDPOINT!, _REDIRECTS_QUERY);

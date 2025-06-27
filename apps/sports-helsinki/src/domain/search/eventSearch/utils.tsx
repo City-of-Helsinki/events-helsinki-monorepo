@@ -31,7 +31,6 @@ import {
   startOfWeek,
   subDays,
 } from 'date-fns';
-import isEmpty from 'lodash/isEmpty';
 import type { NextRouter } from 'next/router';
 import type { TFunction } from 'next-i18next';
 import { ROUTES } from '../../../constants';
@@ -186,7 +185,6 @@ export const getEventSearchVariables = ({
   superEvent?: string;
   place?: string;
   eventType?: (EventTypeId.Course | EventTypeId.General)[];
-  // eslint-disable-next-line sonarjs/cognitive-complexity
 }): QueryEventListArgs => {
   const {
     keyword,
@@ -422,7 +420,7 @@ export const getCardUrl = (
 
 export const getOrganizationSearchUrl = (
   event: EventFields,
-  router: NextRouter,
+  _router: NextRouter,
   locale: AppLanguage
 ): string => {
   return routerHelper.getLocalizedCmsItemUrl(
@@ -437,7 +435,7 @@ export const getOrganizationSearchUrl = (
 
 export const getHelsinkiOnlySearchUrl = (
   source: EventFields | Venue,
-  router: NextRouter,
+  _router: NextRouter,
   locale: AppLanguage
 ): string => {
   if (isVenue(source)) {

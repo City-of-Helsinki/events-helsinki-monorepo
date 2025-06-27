@@ -1,6 +1,6 @@
-import type { HaukiIsOpen, TranslatedVenueDetails } from '../../types';
-import type { HaukiIntegrationConfig } from './HaukiIntegrationConfig';
-import VenueResolverIntegration from './VenueResolverIntegration';
+import type { HaukiIsOpen, TranslatedVenueDetails } from '../../types.js';
+import type { HaukiIntegrationConfig } from './HaukiIntegrationConfig.js';
+import VenueResolverIntegration from './VenueResolverIntegration.js';
 
 export default class IsOpenHaukiIntegration extends VenueResolverIntegration<
   HaukiIsOpen | null,

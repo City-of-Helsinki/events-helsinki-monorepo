@@ -64,9 +64,12 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
       const current = dateSelector.current;
 
       // Close menu when clicking outside of the component
-      if (!(target instanceof Node && current?.contains(target))) {
+      if (
+        !(target instanceof Node && current?.contains(target)) &&
+        target?.isConnected
+      ) {
         // target might not be part of dom anymore
-        target?.isConnected && ensureMenuIsClosed();
+        ensureMenuIsClosed();
       }
     },
     [ensureMenuIsClosed]

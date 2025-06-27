@@ -5,8 +5,14 @@ import {
 import { IconStar } from 'hds-react';
 import React from 'react';
 
-import { waitFor, actWait, render, screen, userEvent } from '@/test-utils';
-import { fakePlaces } from '@/test-utils/mockDataUtils';
+import { fakePlaces } from '../../../../../config/vitest/mockDataUtils';
+import {
+  waitFor,
+  actWait,
+  render,
+  screen,
+  userEvent,
+} from '../../../../../config/vitest/test-utils';
 import { eventsApolloClient } from '../../../clients/eventsApolloClient';
 import PlaceSelector from '../PlaceSelector';
 
@@ -93,7 +99,7 @@ const defaultProps = {
   checkboxName: 'places_checkbox',
   icon: <IconStar />,
   name: 'place',
-  onChange: jest.fn(),
+  onChange: vi.fn(),
   showSearch: true,
   title: 'Etsi tapahtumapaikka',
   value: [],
@@ -129,9 +135,9 @@ it('should filter place options', async () => {
 
 it('should render selected value correctly', async () => {
   // @ts-ignore
-  jest
-    .spyOn(eventsApolloClient, 'readQuery')
-    .mockReturnValue(placeDetailsResponse);
+  vi.spyOn(eventsApolloClient, 'readQuery').mockReturnValue(
+    placeDetailsResponse
+  );
   render(<PlaceSelector {...defaultProps} value={[placeId]} />, {
     mocks,
   });

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from 'graphql-tag';
 
 export const ADMINISTRATIVE_DIVISION_QUERY = gql`
   query AdministrativeDivisions {

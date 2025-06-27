@@ -5,7 +5,7 @@ import FilterButton from '../FilterButton';
 it('matches snapshot', () => {
   const { container } = render(
     <FilterButton
-      onRemove={jest.fn()}
+      onRemove={vi.fn()}
       text="text"
       type="publisher"
       value="value"

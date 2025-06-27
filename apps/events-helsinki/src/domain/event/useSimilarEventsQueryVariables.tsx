@@ -27,12 +27,17 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
 
     return getEventSearchVariables({
       include: ['keywords', 'location'],
-      // eslint-disable-next-line max-len
-      pageSize: 100, // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with keyword_OR_set* -param is fixed and it returns distinct results
+      // TODO: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query with
+      // keyword_OR_set* -param is fixed and it returns distinct results
+      pageSize: 100,
       params: new URLSearchParams(searchParams),
       sortOrder: EVENT_SORT_OPTIONS.END_TIME,
-      // superEventType: ['umbrella', 'none'] // Don't use superEventType when experimenting LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
-      // superEvent: 'none', // Only the course type search should use this param; LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+      // Don't use superEventType when experimenting:
+      // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+      // superEventType: ['umbrella', 'none']
+      // Only the course type search should use this param;
+      // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+      // superEvent: 'none',
     });
   }, [event]);
 };

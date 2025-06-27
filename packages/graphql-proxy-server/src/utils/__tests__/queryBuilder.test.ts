@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import queryBuilder from '../queryBuilder';
 
 describe('queryBuilder function', () => {
@@ -55,6 +54,7 @@ describe('queryBuilder function', () => {
         { key: 'division', value: ['division1', 'division2'] },
       ])
     ).toStrictEqual(
+      // eslint-disable-next-line @stylistic/max-len
       '?page=0&page_size=1&count=10&sort=name&start=12-12-12&isFree=true&otherBoolean=false&combined_text=hakusana1,hakusana2&division=division1,division2'
     );
   });

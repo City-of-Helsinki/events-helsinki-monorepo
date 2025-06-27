@@ -7,11 +7,17 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "newLine": "lf"
+    "newLine": "lf",
+    "types": [
+      "node",
+      "vitest/globals",
+      "@testing-library/jest-dom"
+    ],
   },
-  "exclude": ["**/node_modules", "**/.*/"]
+  "exclude": [
+    "**/node_modules",
+    "**/.*/"
+  ]
 }

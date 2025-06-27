@@ -1,8 +1,12 @@
-import isAppLanguage from '@events-helsinki/components/src/type-guards/is-app-language';
-import type { AppLanguage } from '@events-helsinki/components/src/types/types';
 import accepts from 'accepts';
 import type express from 'express';
-import type ContextValue from '../context/ContextValue';
+import type ContextValue from '../context/ContextValue.js';
+import { appLanguages, type AppLanguage } from '../types.js';
+
+const isAppLanguage = (value: unknown): value is AppLanguage => {
+  return appLanguages.includes(value as AppLanguage);
+};
+
 /**
  * Get an accepted language from the request header.
  * @param req express.Request

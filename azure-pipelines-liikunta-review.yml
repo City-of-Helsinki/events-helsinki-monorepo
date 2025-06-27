@@ -32,6 +32,7 @@ pr:
       - '*.base.json'
       - '*.base.js'
       - '.prettier*.*'
+      - '*.config.*'
       - 'azure-pipelines-liikunta-review.yml'
       - 'Dockerfile'
       - '*.Dockerfile'

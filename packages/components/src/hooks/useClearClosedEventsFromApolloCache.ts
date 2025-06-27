@@ -1,4 +1,4 @@
-import { useApolloClient } from '@apollo/client';
+import { useApolloClient } from '@apollo/client/react/index.js';
 import { useEffect } from 'react';
 import type { EventListQuery } from '../types/generated/graphql';
 import { isEventClosed } from '../utils/eventUtils';

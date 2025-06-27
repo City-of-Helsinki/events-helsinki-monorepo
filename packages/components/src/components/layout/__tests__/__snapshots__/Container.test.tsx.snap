@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches snapshot 1`] = `
 <div
-  class="container"
+  class="_container_4c7bc3"
 >
   Hello
 </div>

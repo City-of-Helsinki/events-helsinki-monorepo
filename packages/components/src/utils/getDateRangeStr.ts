@@ -29,7 +29,6 @@ const getDateRangeStr = ({
   includeWeekday?: boolean;
   includeTime?: boolean;
   timeAbbreviation?: string;
-  // eslint-disable-next-line sonarjs/cognitive-complexity
 }): string => {
   const language = getLanguageOrDefault(locale);
   const timeZone = 'Europe/Helsinki';

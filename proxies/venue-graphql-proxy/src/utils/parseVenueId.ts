@@ -1,5 +1,5 @@
-import { Sources } from '../contants/constants';
-import type { Source } from '../types';
+import { Sources } from '../contants/constants.js';
+import type { Source } from '../types.js';
 
 const SUPPORTED_SOURCES: string[] = [Sources.TPREK, Sources.LINKED];
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.25.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.24.1...events-helsinki-v1.25.0) (2025-06-27)
+
+
+### Features
+
+* Async common revalidate view and api ([c30fc86](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c30fc86479e400e3ca35dd7ed179f0e312ec2c69))
+* **events:** Use experimental xFullText search parameter ([145adb5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/145adb510dfd3d8313d0d5870778f0348ad402e8))
+* Revalidate API for courses, events and venues ([0594d34](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0594d343067f2f35af2c9d23cc2f0c001538a05f))
+
+
+### Bug Fixes
+
+* Type of apollo clients' error handler ([cfe4265](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cfe4265842d127248e81bef06261dcba23624479))
+
 ## [1.24.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.24.0...events-helsinki-v1.24.1) (2025-06-13)
 
 

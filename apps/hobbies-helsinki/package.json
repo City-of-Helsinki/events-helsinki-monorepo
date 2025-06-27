@@ -1,6 +1,6 @@
 {
   "name": "hobbies-helsinki",
-  "version": "2.22.3",
+  "version": "2.23.0",
   "private": true,
   "scripts": {
     "?share-static-hardlink": "echo 'Use this command to link assets... from shared static folder'",

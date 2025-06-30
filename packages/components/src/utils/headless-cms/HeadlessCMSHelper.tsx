@@ -1,4 +1,4 @@
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import type { BreadcrumbListItem } from 'hds-react';
 import parse from 'html-react-parser';
 import React from 'react';
@@ -188,7 +188,7 @@ export class HeadlessCMSHelper {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       page?.modules?.filter((m: any) => !!m) ?? [],
       true
-    )?.reduce((collectionElements: JSX.Element[], collection) => {
+    )?.reduce((collectionElements: React.JSX.Element[], collection) => {
       const commonCollectionProps = {
         key: `collection-${Math.random()}`,
         title: collection.title,

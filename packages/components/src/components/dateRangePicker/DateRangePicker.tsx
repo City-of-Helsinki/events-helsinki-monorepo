@@ -1,5 +1,5 @@
 /* eslint-disable import/no-duplicates */
-import {isBefore, isValid as isValidDate} from 'date-fns';
+import { isBefore, isValid as isValidDate } from 'date-fns';
 
 import fi from 'date-fns/locale/fi/index';
 import sv from 'date-fns/locale/sv/index';

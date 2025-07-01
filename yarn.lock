@@ -3022,6 +3022,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@eslint/compat@npm:1.3.1":
+  version: 1.3.1
+  resolution: "@eslint/compat@npm:1.3.1"
+  peerDependencies:
+    eslint: ^8.40 || 9
+  peerDependenciesMeta:
+    eslint:
+      optional: true
+  checksum: 08eb49c22b08a90593c6efbd38a1ddeba2d9ffd9491b9c07d885bb2fe809d93ab662bd083dc562cfbbab424365b56bd3bd0be869aec8b61833a647cc492227eb
+  languageName: node
+  linkType: hard
+
 "@eslint/config-array@npm:^0.21.0":
   version: 0.21.0
   resolution: "@eslint/config-array@npm:0.21.0"
@@ -3307,11 +3319,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@events-helsinki/eslint-config-bases@workspace:packages/eslint-config-bases"
   dependencies:
+    "@eslint/compat": "npm:1.3.1"
     "@graphql-eslint/eslint-plugin": "npm:^4.4.0"
     "@rushstack/eslint-patch": "npm:^1.12.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/react-hooks": "npm:^8.0.1"
+    "@types/espree": "npm:10.1.0"
     "@types/jest": "npm:^30.0.0"
     "@types/node": "npm:20.19.1"
     "@types/prettier": "npm:3.0.0"
@@ -3333,6 +3347,8 @@ __metadata:
     eslint-plugin-sonarjs: "npm:^3.0.4"
     eslint-plugin-storybook: "npm:^9.0.14"
     eslint-plugin-testing-library: "npm:^7.5.3"
+    espree: "npm:10.4.0"
+    globals: "npm:16.2.0"
     graphql: "npm:^16.11.0"
     prettier: "npm:^3.6.2"
     react: "npm:^18.3.1"
@@ -7738,6 +7754,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/espree@npm:10.1.0":
+  version: 10.1.0
+  resolution: "@types/espree@npm:10.1.0"
+  dependencies:
+    acorn: "npm:^8.12.0"
+    eslint-visitor-keys: "npm:^4.0.0"
+  checksum: 58f648708beb96862a4d10b43725af85d7d4423ee8993cddfdd144ad757ef80750cee65da89600e2b7a83bfecad0686ca14fc798518279c274eb9114ef10c5ba
+  languageName: node
+  linkType: hard
+
 "@types/estree@npm:*, @types/estree@npm:1.0.8, @types/estree@npm:^1.0.0, @types/estree@npm:^1.0.6":
   version: 1.0.8
   resolution: "@types/estree@npm:1.0.8"
@@ -9331,7 +9357,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.0.4, acorn@npm:^8.1.0, acorn@npm:^8.11.0, acorn@npm:^8.14.0, acorn@npm:^8.15.0, acorn@npm:^8.4.1, acorn@npm:^8.8.1":
+"acorn@npm:^8.0.4, acorn@npm:^8.1.0, acorn@npm:^8.11.0, acorn@npm:^8.12.0, acorn@npm:^8.14.0, acorn@npm:^8.15.0, acorn@npm:^8.4.1, acorn@npm:^8.8.1":
   version: 8.15.0
   resolution: "acorn@npm:8.15.0"
   bin:
@@ -13953,7 +13979,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-visitor-keys@npm:^4.2.1":
+"eslint-visitor-keys@npm:^4.0.0, eslint-visitor-keys@npm:^4.2.1":
   version: 4.2.1
   resolution: "eslint-visitor-keys@npm:4.2.1"
   checksum: 9ac2c1ac134bc8595b4a49d2de12846443ed43303c38c1e350230d0b13bafb76925b2e2aa4c7f1e0a4a3ba46f1cc07a027170ca5cc2ad8fc5be5faf069184bb6
@@ -14019,7 +14045,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"espree@npm:^10.0.1, espree@npm:^10.4.0":
+"espree@npm:10.4.0, espree@npm:^10.0.1, espree@npm:^10.4.0":
   version: 10.4.0
   resolution: "espree@npm:10.4.0"
   dependencies:
@@ -15490,6 +15516,13 @@ __metadata:
     kind-of: "npm:^6.0.2"
     which: "npm:^1.3.1"
   checksum: e1e76ec49d36bced3b37cdd0b744ea7b2b3bc9d7336e224a8f8fc851282a2a963b165000464a42d875ced8de2f4f41bb8f055e192cc292895cf73b62b85c2a11
+  languageName: node
+  linkType: hard
+
+"globals@npm:16.2.0":
+  version: 16.2.0
+  resolution: "globals@npm:16.2.0"
+  checksum: 3d0a70a20d3f8cf75b8b655afc327a015cbd3de33a41722da594b3167359cd7d0cf6fee38d7239af42c0d9a161d2a7da8a6135335af541cc8f9b3f8f5bc9572f
   languageName: node
   linkType: hard
 

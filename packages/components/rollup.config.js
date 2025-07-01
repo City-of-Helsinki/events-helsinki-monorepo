@@ -1,7 +1,7 @@
 import path from 'path';
 
-import babel from '@rollup/plugin-babel';
-import resolve from '@rollup/plugin-node-resolve';
+import { babel } from '@rollup/plugin-babel';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import includePaths from 'rollup-plugin-includepaths';
@@ -36,7 +36,7 @@ function buildConfig() {
       // Include polyfills for consistent behavior between server and client
       nodePolyfills(),
       includePaths({ paths: ['src'], extensions }),
-      resolve(),
+      nodeResolve(),
       ts(),
       commonjs({
         include: '../../node_modules/**',

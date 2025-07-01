@@ -119,7 +119,7 @@ export class HeadlessCMSHelper {
   }
 
   slugsToUriSegments(slugs: string[]): string[] {
-    return slugs.map((slug, index) => {
+    return slugs.map((_, index) => {
       return `/${slugs.slice(0, index + 1).join('/')}/`;
     });
   }
@@ -292,8 +292,8 @@ export class HeadlessCMSHelper {
     isPreview?: boolean
   ) {
     const bc = [...breadcrumbs];
-    // when page/article is in draft mode, it wont exist anymore in breadcrumbs items, which will break the logic of breadcrums
-    // we need to temporaly propagate current page to breadcrumb as last element for preview mode
+    // when page/article is in draft mode, it wont exist anymore in breadcrumbs items, which will break the logic
+    // of breadcrums we need to temporaly propagate current page to breadcrumb as last element for preview mode
     if (
       page &&
       isPreview &&

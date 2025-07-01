@@ -67,11 +67,10 @@ const customRender: CustomRender = (
 // eslint-disable-next-line testing-library/no-unnecessary-act
 const actWait = (amount?: number): Promise<void> => act(() => wait(amount));
 
-// eslint-disable-next-line import/export
 export { actWait, customRender as render };
 
 // re-export everything
-// eslint-disable-next-line import/export
+
 export * from '@testing-library/react';
 export { render as defaultRender } from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';

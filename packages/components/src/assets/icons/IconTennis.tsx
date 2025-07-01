@@ -1,3 +1,5 @@
+/* eslint-disable @stylistic/max-len */
+
 import type { ReactElement } from 'react';
 import React from 'react';
 

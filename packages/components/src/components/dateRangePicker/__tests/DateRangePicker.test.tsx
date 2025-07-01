@@ -148,7 +148,7 @@ describe('date range input', () => {
       translations.dateSelector.errorEndDateBeforeStartDate
     );
 
-    userEvent.clear(endDateInput);
+    await userEvent.clear(endDateInput);
     await userEvent.type(endDateInput, '24.6.2021');
 
     expect(
@@ -191,7 +191,7 @@ describe('date range input', () => {
     await screen.findByText(translations.dateSelector.errorDateFormat);
 
     // Error should disappear
-    userEvent.clear(startDateInput);
+    await userEvent.clear(startDateInput);
     await userEvent.type(startDateInput, '23.6.2021');
     // should show the possible error when focusing out of the element
     await userEvent.tab();

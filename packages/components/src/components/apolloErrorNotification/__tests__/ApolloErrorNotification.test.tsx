@@ -14,6 +14,7 @@ describe('ApolloErrorNotification', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(
+        // eslint-disable-next-line @stylistic/max-len
         /osa sivuston toiminnoista ei ole käytettävissä\. koita myöhemmin uudestaan\. jos ongelma toistuu, kerro siitä meille/i
       )
     ).toBeInTheDocument();

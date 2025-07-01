@@ -9,7 +9,7 @@ let jestOpen: typeof window.open;
 
 beforeAll(() => {
   jestOpen = window.open;
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   // @ts-ignore
   window.open = () => {};
 });

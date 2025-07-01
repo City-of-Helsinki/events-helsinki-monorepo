@@ -235,6 +235,7 @@ InfoBlock.Collapse = InfoBlockCollapse;
 InfoBlock.Expand = InfoBlockExpand;
 
 /**
- * @deprecated The module is copied from the old version of Liikunta-Helsinki and should be replaced with something more commonly used.
+ * @deprecated The module is copied from the old version of Liikunta-Helsinki and
+ * should be replaced with something more commonly used.
  */
 export default InfoBlock;

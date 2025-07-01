@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import forEach from 'lodash/forEach';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';

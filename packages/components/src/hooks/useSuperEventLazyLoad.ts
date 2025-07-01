@@ -48,6 +48,7 @@ function useSuperEventLazyLoad(event?: EventFieldsFragment) {
         status: 'resolved',
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     event,
     superEventId,

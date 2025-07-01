@@ -11,7 +11,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "newLine": "lf"
+    "newLine": "lf",
+    "types": [
+      "node",
+      "jest",
+      "@testing-library/jest-dom"
+    ],
   },
-  "exclude": ["**/node_modules", "**/.*/"]
+  "exclude": [
+    "**/node_modules",
+    "**/.*/"
+  ]
 }

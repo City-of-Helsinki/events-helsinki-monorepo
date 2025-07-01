@@ -116,7 +116,7 @@ export const getEventPrice = (
 ): string => {
   return isEventFree(event)
     ? isFreeText
-    : event?.offers
+    : (event?.offers
         ?.map((offer) =>
           // Format text to price if it happens to be number e.g. '2' -> '2 €'
           formatPrice(
@@ -125,7 +125,7 @@ export const getEventPrice = (
         )
         ?.filter((e) => e)
         ?.sort()
-        ?.join(', ') ?? '';
+        ?.join(', ') ?? '');
 };
 
 export const getEventHeroButtonText = (
@@ -315,7 +315,7 @@ const getRegistrationUrl = (event: EventFields) => {
  * @param {string} locale
  * @return {object}
  */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
 export const getEventFields = (event: EventFields, locale: AppLanguage) => {
   const eventLocation = event.location;
   const offerInfoUrl = getOfferInfoUrl(event, locale);

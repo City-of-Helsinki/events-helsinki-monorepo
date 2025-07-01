@@ -143,7 +143,7 @@ function getRHHCConfig(
     utils: {
       ...rhhcDefaultConfig.utils,
       getIsHrefExternal,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
       getRoutedInternalHref,
     },
     internalHrefOrigins,

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { pascalCase } = require('change-case-all');
 
 function startsWithDigit(inputString) {

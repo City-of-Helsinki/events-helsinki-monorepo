@@ -4,7 +4,7 @@
  */
 
 const reactPatterns = {
-  files: ['*.{jsx,tsx}'],
+  files: ['*.{jsx,tsx,ts}'],
 };
 
 module.exports = {
@@ -20,12 +20,13 @@ module.exports = {
   },
   overrides: [
     {
+      plugins: ['react', 'react-hooks'],
       files: reactPatterns.files,
       extends: [
         // @see https://github.com/yannickcr/eslint-plugin-react
         'plugin:react/recommended',
         // @see https://www.npmjs.com/package/eslint-plugin-react-hooks
-        'plugin:react-hooks/recommended',
+        'plugin:react-hooks/recommended-legacy',
         // @see https://github.com/jsx-eslint/eslint-plugin-jsx-a11y
         'plugin:jsx-a11y/recommended',
       ],

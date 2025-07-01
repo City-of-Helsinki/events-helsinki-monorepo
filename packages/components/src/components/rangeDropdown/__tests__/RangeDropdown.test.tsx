@@ -135,12 +135,12 @@ it('can be navigated with tab', async () => {
     name: /end integer/i,
   }) as HTMLInputElement;
 
-  userEvent.tab();
+  await userEvent.tab();
   await waitFor(() => {
     expect(minValueTextbox).toHaveFocus();
   });
 
-  userEvent.tab();
+  await userEvent.tab();
   await waitFor(() => {
     expect(maxValueTextbox).toHaveFocus();
   });
@@ -193,7 +193,7 @@ describe('Validation', () => {
 
     const toggleButton = screen.getByRole('button', { name: title });
     await userEvent.click(toggleButton);
-    userEvent.tab();
+    await userEvent.tab();
     const minValueTextbox = screen.queryByRole('spinbutton', {
       name: /start integer/i,
     }) as HTMLInputElement;
@@ -209,7 +209,7 @@ describe('Validation', () => {
     // min is negative
     rerender({ minInputValue: '-1', maxInputValue: '100', onChange });
 
-    userEvent.tab();
+    await userEvent.tab();
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith('0', '100');
     });
@@ -217,7 +217,7 @@ describe('Validation', () => {
     // max is negative
     rerender({ minInputValue: '0', maxInputValue: '-1', onChange });
 
-    userEvent.tab();
+    await userEvent.tab();
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith('0', '0');
     });
@@ -229,7 +229,7 @@ describe('Validation', () => {
 
     const toggleButton = screen.getByRole('button', { name: title });
     await userEvent.click(toggleButton);
-    userEvent.tab();
+    await userEvent.tab();
     const minValueTextbox = screen.queryByRole('spinbutton', {
       name: /start integer/i,
     }) as HTMLInputElement;
@@ -244,7 +244,7 @@ describe('Validation', () => {
 
     rerender({ minInputValue: '10', maxInputValue: '5', onChange });
 
-    userEvent.tab();
+    await userEvent.tab();
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith('5', '5');
     });

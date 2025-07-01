@@ -15,6 +15,7 @@ const useSetSortQueryParamToOptionValue = () => {
         { shallow: true }
       );
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [router.asPath, router.basePath, router.locale]
   );
 };

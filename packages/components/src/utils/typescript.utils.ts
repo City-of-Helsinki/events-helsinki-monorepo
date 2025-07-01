@@ -16,7 +16,7 @@ export const skipFalsyType = <ValueType>(
  */
 export type ExtractPrefixesFromLocaleSuffixedNames<
   T extends string,
-  Locale extends string = 'fi' | 'en' | 'sv'
+  Locale extends string = 'fi' | 'en' | 'sv',
 > = T extends `${infer Prefix}_${Locale}` ? Prefix : never;
 
 /**
@@ -42,8 +42,8 @@ export type KeysOfArrayFields<T> = keyof {
     ? U extends unknown[] // non-readonly arrays
       ? K
       : U extends readonly unknown[] // readonly arrays
-      ? K
-      : never
+        ? K
+        : never
     : never]: T[K];
 };
 
@@ -190,5 +190,5 @@ type Tests = [
   // @ts-expect-error 'a' is not a subset of KeysOfArrayFields<{ a: string; b: string[] }>
   Subset<KeysOfArrayFields<{ a: string; b: string[] }>, 'a'>,
   // @ts-expect-error TooManyKeysOfArrayFields is not a subset of KeysOfArrayFields<ArrayFieldsTestType>
-  Subset<KeysOfArrayFields<ArrayFieldsTestType>, TooManyKeysOfArrayFields>
+  Subset<KeysOfArrayFields<ArrayFieldsTestType>, TooManyKeysOfArrayFields>,
 ];

@@ -46,7 +46,6 @@ beforeEach(() => {
 configure({ defaultHidden: true });
 
 const getDateRangeStrProps = (event: EventDetails) => ({
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   start: event.startTime!,
   end: event.endTime,
   locale: 'fi',
@@ -58,7 +57,6 @@ it('should render event info fields', async () => {
   render(<EventInfo event={event} />, { mocks });
   await actWait();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const itemsByRole = [
     { role: 'heading', name: translations.event.info.labelDateAndTime },
     { role: 'heading', name: translations.event.info.labelLocation },
@@ -69,15 +67,18 @@ it('should render event info fields', async () => {
     { role: 'heading', name: translations.event.info.labelOrganizer },
     {
       role: 'link',
+      // eslint-disable-next-line @stylistic/max-len
       name: `${translations.event.info.extlinkFacebook}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
     { role: 'heading', name: translations.event.info.labelDirections },
     {
       role: 'link',
+      // eslint-disable-next-line @stylistic/max-len
       name: `${translations.common.mapBox.location.directionsGoogle}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
     {
       role: 'link',
+      // eslint-disable-next-line @stylistic/max-len
       name: `${translations.common.mapBox.location.directionsHSL}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
     { role: 'heading', name: translations.event.info.labelPrice },
@@ -378,7 +379,6 @@ describe('superEvent', () => {
 
     await userEvent.click(
       within(screen.getByTestId(superEventTestId)).getByText(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         superEvent.name.fi!
       )
     );
@@ -428,7 +428,7 @@ describe('subEvents', () => {
     expect(router.pathname).toBe(`/kurssit/${subEvent.id}`);
   });
 
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line @stylistic/max-len
   it('should render subEvents with other times title when the event is a middle level event in event hierarchy', async () => {
     const middleAsSuperEventMock = getSubEventsMocks({
       variables: {

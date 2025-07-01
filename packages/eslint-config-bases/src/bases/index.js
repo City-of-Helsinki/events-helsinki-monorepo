@@ -8,4 +8,5 @@ module.exports = {
   storybook: require('./storybook'),
   testcafe: require('./testcafe'),
   typescript: require('./typescript'),
+  stylistic: require('./stylistic'),
 };

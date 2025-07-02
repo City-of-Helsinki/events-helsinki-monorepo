@@ -97,7 +97,6 @@ export const formatPrice = (price?: string): string => {
     return '';
   }
 
-  // eslint-disable-next-line regexp/no-unused-capturing-group
   const priceRegex = /^\d+([/\-.,]\d+)?$/;
   return price.match(priceRegex) ? `${price} €` : price;
 };

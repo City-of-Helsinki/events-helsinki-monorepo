@@ -1,10 +1,10 @@
 // @ts-check
-const { pathsToModuleNameMapper } = require('ts-jest');
+import { pathsToModuleNameMapper } from 'ts-jest';
 
-const { getJestCachePath } = require('../../cache.config');
+import { getJestCachePath } from '../../cache.config';
 
-const packageJson = require('./package.json');
-const { compilerOptions: baseTsConfig } = require('./tsconfig.json');
+import { name } from './package.json';
+import { compilerOptions as baseTsConfig } from './tsconfig.json';
 
 // Take the paths from tsconfig automatically from base tsconfig.json
 // @link https://kulshekhar.github.io/ts-jest/docs/paths-mapping
@@ -17,8 +17,8 @@ const getTsConfigBasePaths = () => {
 };
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 const config = {
-  displayName: `${packageJson.name}:unit`,
-  cacheDirectory: getJestCachePath(packageJson.name),
+  displayName: `${name}:unit`,
+  cacheDirectory: getJestCachePath(name),
   testEnvironment: 'jsdom',
   verbose: true,
   rootDir: './src',
@@ -55,4 +55,4 @@ const config = {
   transformIgnorePatterns: ['/node_modules/', '/__mocks__/'],
 };
 
-module.exports = config;
+export default config;

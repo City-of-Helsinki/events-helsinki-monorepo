@@ -7,11 +7,11 @@
  * {@link https://github.com/City-of-Helsinki/events-helsinki-monorepo/blob/main/docs/about-lint-staged.md}
  */
 
-const {
+import {
   concatFilesForPrettier,
   getEslintFixCmd,
-} = require('../../lint-staged.common.js');
-const { concatFilesForStylelint } = require('../../lint-staged.common');
+} from '../../lint-staged.common.js';
+import { concatFilesForStylelint } from '../../lint-staged.common';
 
 /**
  * @type {Record<string, (filenames: string[]) => string | string[] | Promise<string | string[]>>}
@@ -31,6 +31,7 @@ const rules = {
   },
   '!(*styles)/*.{css,scss}': (filenames) => {
     return [
+      // eslint-disable-next-line @stylistic/max-len
       `yarn stylelint --allow-empty-input --ignore-disables --config ./stylelint.config.js --max-warnings 25 --color ${concatFilesForStylelint(
         filenames
       )}`,
@@ -42,4 +43,4 @@ const rules = {
   },
 };
 
-module.exports = rules;
+export default rules;

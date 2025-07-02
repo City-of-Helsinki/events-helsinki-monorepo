@@ -17,7 +17,6 @@ packages that lives in a [monorepo](https://github.com/City-of-Helsinki/events-h
 
 - **Monorepo friendly:** Each workspace can have its own config.
 - **Composable:** Compose your workspace eslint config from pre-defined bases.
-- **Peace of mind:** Plugins does not need to be installed per workspaces, thx to [@rushstack/eslint-patch](https://www.npmjs.com/package/@rushstack/eslint-patch).
 - **Extensible:** Easily add additional plugins per workspaces (ie: nextjs, remix...)
 - **Performance:** Plugins enabled on file conventions patterns to increase perf.
 
@@ -38,9 +37,6 @@ In your app or package, create an `./apps/my-app/.eslintrc.js` file that extends
 existing base configs. For example:
 
 ```javascript
-// Workaround for https://github.com/eslint/eslint/issues/3458 (re-export of @rushstack/eslint-patch)
-require("@events-helsinki/eslint-config-bases/patch/modern-module-resolution");
-
 module.exports = {
   // Be sure to set root to true in monorepo.
   root: true,
@@ -105,7 +101,6 @@ You can find the bases in [./src/bases](./src/bases).
 >   rules. For example the [react base](./src/bases/react.js) will tune the naming conventions
 >   for function components and increase recommended cognitive complexity. The [typescript base](./src/bases/typescript.js)
 >   will also relax conventions for javascript files.
->
 > - Based on filename conventions some rules are relaxed or disabled to avoid false positives and
 >   keep a good level of performance. For example the [sonar base](./src/bases/sonar.js) won't run on
 >   test and storybook files. If you work on different conventions the patterns must be updated.

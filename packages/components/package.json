@@ -11,6 +11,7 @@
   "author": {
     "name": "Jaakko Nenonen <jaakko@codelicious.fi>"
   },
+  "type": "module",
   "sideEffects": false,
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

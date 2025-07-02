@@ -9,16 +9,14 @@ import React from 'react';
 import wait from 'waait';
 import TestProviders from './app-test-providers';
 
-type CustomRender = {
-  (
-    ui: React.ReactElement,
-    options?: {
-      mocks?: MockedResponse[];
-      cache?: ApolloCache<Record<string, unknown>> | InMemoryCache;
-      routes?: string | string[];
-    }
-  ): CustomRenderResult;
-};
+type CustomRender = (
+  ui: React.ReactElement,
+  options?: {
+    mocks?: MockedResponse[];
+    cache?: ApolloCache<Record<string, unknown>> | InMemoryCache;
+    routes?: string | string[];
+  }
+) => CustomRenderResult;
 
 export type CustomRenderResult = RenderResult & { router: NextRouter };
 
@@ -64,7 +62,6 @@ const customRender: CustomRender = (
   };
 };
 
-// eslint-disable-next-line testing-library/no-unnecessary-act
 const actWait = (amount?: number): Promise<void> => act(() => wait(amount));
 
 export { actWait, customRender as render };

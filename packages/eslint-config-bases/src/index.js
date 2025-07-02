@@ -1,3 +1,3 @@
-const { typescript } = require('./bases');
+import * as typescript from './bases/index.js';
 
-module.exports = typescript;
+export default typescript;

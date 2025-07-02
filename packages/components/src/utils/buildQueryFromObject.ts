@@ -5,7 +5,7 @@ import isNil from 'lodash/isNil';
 import isNumber from 'lodash/isNumber';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const buildQueryFromObject = (obj: { [key: string]: any }) => {
+const buildQueryFromObject = (obj: Record<string, any>) => {
   const query: string[] = [];
 
   forEach(obj, (filter, key) => {

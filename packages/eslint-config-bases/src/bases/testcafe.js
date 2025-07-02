@@ -7,19 +7,13 @@ const reactPatterns = {
   files: ['browser-tests/**/*.ts'],
 };
 
-module.exports = {
-  env: {
-    es6: true,
-    node: true,
-  },
-  overrides: [
-    {
-      files: [...reactPatterns.files],
-      plugins: ['testcafe-community'],
-      extends: ['plugin:testcafe-community/recommended'],
-      rules: {
-        'testcafe-community/missing-expect': 'off',
-      },
+export default [
+  {
+    files: [...reactPatterns.files],
+    plugins: ['testcafe-community'],
+    extends: ['plugin:testcafe-community/recommended'],
+    rules: {
+      'testcafe-community/missing-expect': 'off',
     },
-  ],
-};
+  },
+];

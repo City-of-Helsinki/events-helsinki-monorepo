@@ -1,44 +1,39 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { defineConfig, globalIgnores } = require('eslint/config');
+import jest from '@events-helsinki/eslint-config-bases/src/bases/jest.js';
+// import storybook from '@events-helsinki/eslint-config-bases/src/bases/storybook.js';
+import prettier from '@events-helsinki/eslint-config-bases/src/bases/prettier.js';
+import react from '@events-helsinki/eslint-config-bases/src/bases/react.js';
+import regexp from '@events-helsinki/eslint-config-bases/src/bases/regexp.js';
+import rtl from '@events-helsinki/eslint-config-bases/src/bases/rtl.js';
+import sonar from '@events-helsinki/eslint-config-bases/src/bases/sonar.js';
+import stylistic from '@events-helsinki/eslint-config-bases/src/bases/stylistic.js';
+import typescript from '@events-helsinki/eslint-config-bases/src/bases/typescript.js';
+import { getDefaultIgnorePatterns } from '@events-helsinki/eslint-config-bases/src/helpers/index.js';
 
-const js = require('@eslint/js');
+import { globalIgnores } from 'eslint/config';
+import tsParser from '@typescript-eslint/parser';
+import globals from 'globals';
 
-const { FlatCompat } = require('@eslint/eslintrc');
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-require('@events-helsinki/eslint-config-bases/patch/modern-module-resolution');
-
-const {
-  getDefaultIgnorePatterns,
-} = require('@events-helsinki/eslint-config-bases/helpers');
-
-module.exports = defineConfig([
+export default [
+  ...typescript,
+  ...regexp,
+  ...jest,
+  ...rtl,
+  // ...storybook,
+  ...sonar,
+  ...react,
+  ...prettier,
+  ...stylistic,
   {
     languageOptions: {
+      parser: tsParser,
       parserOptions: {
-        tsconfigRootDir: __dirname,
-        project: 'tsconfig.json',
+        ecmaFeatures: { jsx: true },
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
       },
     },
-
-    extends: compat.extends(
-      '@events-helsinki/eslint-config-bases/typescript',
-      '@events-helsinki/eslint-config-bases/regexp',
-      // FIXME: sonar not ready for eslint v9. See: https://github.com/SonarSource/eslint-plugin-sonarjs/issues/438.
-      // "@events-helsinki/eslint-config-bases/sonar",
-      '@events-helsinki/eslint-config-bases/jest',
-      '@events-helsinki/eslint-config-bases/rtl',
-      '@events-helsinki/eslint-config-bases/storybook',
-      '@events-helsinki/eslint-config-bases/react',
-      '@events-helsinki/eslint-config-bases/prettier',
-      '@events-helsinki/eslint-config-bases/stylistic',
-      'plugin:storybook/recommended'
-    ),
-
     rules: {
       'no-console': 'error',
       '@typescript-eslint/naming-convention': 'off',
@@ -49,4 +44,4 @@ module.exports = defineConfig([
     'storybook-static',
     '**/generated/*',
   ]),
-]);
+];

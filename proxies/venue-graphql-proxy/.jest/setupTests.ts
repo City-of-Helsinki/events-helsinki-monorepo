@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 
+import * as dotenv from 'dotenv';
 import { toHaveNoViolations } from 'jest-axe';
-require('dotenv').config();
+
+dotenv.config();
 // Raise the default timeout from 5000
 jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
 

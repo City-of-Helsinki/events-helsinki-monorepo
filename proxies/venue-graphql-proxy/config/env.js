@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be

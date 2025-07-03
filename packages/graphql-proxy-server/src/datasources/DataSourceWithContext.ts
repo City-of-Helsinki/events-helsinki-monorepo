@@ -4,7 +4,7 @@ import type ContextValue from '../context/ContextValue';
 
 abstract class DataSourceWithContext<
   DataSources,
-  Context extends ContextValue<DataSources>
+  Context extends ContextValue<DataSources>,
 > extends RESTDataSource {
   private readonly contextValue: Context;
 

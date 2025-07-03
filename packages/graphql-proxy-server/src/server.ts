@@ -29,7 +29,7 @@ type StartServerArgs<Datasources, Context extends ContextValue<Datasources>> = {
 
 export const startServer = async <
   Datasources,
-  Context extends ContextValue<Datasources>
+  Context extends ContextValue<Datasources>,
 >({
   config,
   schema,
@@ -94,6 +94,7 @@ export const startServer = async <
 
   readinessRouter.get(
     '/healthz',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (request: express.Request, response: express.Response) => {
       checkIsServerReady(response);
     }
@@ -101,6 +102,7 @@ export const startServer = async <
 
   readinessRouter.get(
     '/readiness',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (request: express.Request, response: express.Response) => {
       checkIsServerReady(response);
     }

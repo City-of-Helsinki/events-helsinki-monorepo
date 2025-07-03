@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { GraphQLResolveInfo } from 'graphql';
 import type VenueContext from '../context/VenueContext';
 import type { Source } from '../types';

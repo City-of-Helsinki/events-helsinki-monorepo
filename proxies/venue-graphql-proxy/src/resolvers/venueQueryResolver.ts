@@ -60,7 +60,6 @@ export type FieldsAddedByAllIntegrationsAndEnrichers =
   | FieldsAddedByHaukiIntegrations;
 
 // Check that TranslatedVenueDetails is going to be fully populated
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type _CheckVenueDetailsIsFullyPopulated = [
   // TranslatedVenueDetails must contain all the fields added by
   // all the integrations and enrichers
@@ -70,7 +69,10 @@ type _CheckVenueDetailsIsFullyPopulated = [
   >,
   // All the fields added by all the integrations and enrichers
   // must be in TranslatedVenueDetails
-  Subset<keyof TranslatedVenueDetails, FieldsAddedByAllIntegrationsAndEnrichers>
+  Subset<
+    keyof TranslatedVenueDetails,
+    FieldsAddedByAllIntegrationsAndEnrichers
+  >,
 ];
 
 const HAUKI_CONFIGS: Record<Source, HaukiIntegrationConfig> = {
@@ -79,7 +81,7 @@ const HAUKI_CONFIGS: Record<Source, HaukiIntegrationConfig> = {
   linked: { getId: (id, _) => `tprek:${id}` },
 };
 
-const resolvers: Map<Source, (config: AppConfig) => VenueResolver> = new Map();
+const resolvers = new Map<Source, (config: AppConfig) => VenueResolver>();
 resolvers.set(
   Sources.TPREK,
   () =>
@@ -113,7 +115,7 @@ resolvers.set(
 async function resolver(_: unknown, params: unknown, context: VenueContext) {
   const paramId = (params as { id: string }).id;
   const [source, id] = parseVenueId(paramId) ?? [];
-  const dataResolverFactory = source ? resolvers.get(source) ?? null : null;
+  const dataResolverFactory = source ? (resolvers.get(source) ?? null) : null;
   const dataResolver = dataResolverFactory
     ? dataResolverFactory({ isHaukiEnabled: AppConfig.isHaukiEnabled })
     : null;

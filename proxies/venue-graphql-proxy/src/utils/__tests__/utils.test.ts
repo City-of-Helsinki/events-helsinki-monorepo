@@ -33,6 +33,7 @@ describe('pickLocaleWithFallback', () => {
     ['en', 'sv', { fi, en }],
     ['fi', 'sv', { fi }],
   ])(
+    // eslint-disable-next-line @stylistic/max-len
     'uses "%s" as first fallback locale to fetch the details when the default locale "%s" is not available in object %o',
     (resultLocale, locale, obj) => {
       const translation = pickLocaleWithFallback(locale, obj);

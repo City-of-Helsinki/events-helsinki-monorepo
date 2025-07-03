@@ -3,9 +3,7 @@ import type { TranslatedVenueDetails } from '../types';
 
 // Map each property of T to function of same name whose return type is property's type
 type GettersForProperties<T> = {
-  [Property in keyof T]: (params: {
-    [P in Property]: T[Property];
-  }) => T[Property];
+  [Property in keyof T]: (params: Record<Property, T[Property]>) => T[Property];
 };
 
 const Venue: GettersForProperties<TranslatedVenueDetails> = {

@@ -12,9 +12,8 @@ type MapKeysToCamelCase<T> = {
     : T[K];
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapKeysToCamelCase = <T extends Record<string, unknown>>(obj: T) => {
-  return mapKeys(obj, (v, k) => camelCase(k)) as MapKeysToCamelCase<T>;
+  return mapKeys(obj, (_, k) => camelCase(k)) as MapKeysToCamelCase<T>;
 };
 
 export default mapKeysToCamelCase;

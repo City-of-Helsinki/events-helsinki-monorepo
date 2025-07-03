@@ -17,8 +17,8 @@ type AccessibilitySentencesTypeFor<T extends VenueDetailsTextType> =
   T extends TranslationsObject
     ? TranslatableAccessibilitySentences // 3 locales
     : T extends string
-    ? TranslatedAccessibilitySentences // 1 locale
-    : never;
+      ? TranslatedAccessibilitySentences // 1 locale
+      : never;
 
 export type OntologyIdLabel<T extends VenueDetailsTextType> = {
   id: number;

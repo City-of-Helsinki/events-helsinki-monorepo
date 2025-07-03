@@ -5,9 +5,8 @@ import {
   endOfWeek,
   eachDayOfInterval,
   lightFormat,
-  // eslint-disable-next-line import/no-duplicates
 } from 'date-fns';
-// eslint-disable-next-line import/no-duplicates
+
 import fi from 'date-fns/locale/fi';
 
 import { GraphQLError } from 'graphql';

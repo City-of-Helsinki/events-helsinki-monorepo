@@ -71,17 +71,17 @@ export type TranslatableFieldsFor<T extends TranslatableObjectType> =
   T extends TprekUnitWithoutNull
     ? ExtractTranslatableFieldNamePrefixes<keyof TprekUnitWithoutNull>
     : T extends TprekUnitConnection
-    ? ExtractTranslatableFieldNamePrefixes<keyof TprekUnitConnection>
-    : T extends TprekDepartmentWithoutNull
-    ? ExtractTranslatableFieldNamePrefixes<keyof TprekDepartmentWithoutNull>
-    : T extends TprekOntologyTreeNode
-    ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyTreeNode>
-    : T extends TprekOntologyWord
-    ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyWord>
-    : never;
+      ? ExtractTranslatableFieldNamePrefixes<keyof TprekUnitConnection>
+      : T extends TprekDepartmentWithoutNull
+        ? ExtractTranslatableFieldNamePrefixes<keyof TprekDepartmentWithoutNull>
+        : T extends TprekOntologyTreeNode
+          ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyTreeNode>
+          : T extends TprekOntologyWord
+            ? ExtractTranslatableFieldNamePrefixes<keyof TprekOntologyWord>
+            : never;
 
 export function formTranslationObject<
-  InputObjectType extends TranslatableObjectType
+  InputObjectType extends TranslatableObjectType,
 >(obj: InputObjectType, field: TranslatableFieldsFor<InputObjectType>) {
   const result = {
     fi: get(obj, `${field}_fi`) ?? undefined,

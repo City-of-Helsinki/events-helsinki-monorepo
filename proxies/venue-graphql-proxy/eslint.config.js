@@ -26,7 +26,6 @@ export default [
   ...prettier,
   ...testcafe,
   ...stylistic,
-
   {
     rules: {
       '@typescript-eslint/naming-convention': 'off',

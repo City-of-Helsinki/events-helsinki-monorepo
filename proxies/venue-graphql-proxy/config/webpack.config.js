@@ -1,16 +1,21 @@
-const path = require('path');
-const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
+import { resolve as _resolve } from 'path';
+import webpack from 'webpack';
+import nodeExternals from 'webpack-node-externals';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const getGraphqlProxyEnvironment = require('./env');
-const paths = require('./paths');
+import getGraphqlProxyEnvironment from './env.js';
+import { appIndexJs, appBuild } from './paths.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Get environment variables to inject into our app.
 const env = getGraphqlProxyEnvironment();
 
-module.exports = function () {
+export default function () {
   return {
-    entry: paths.appIndexJs,
+    entry: appIndexJs,
     externals: [nodeExternals()],
     module: {
       rules: [
@@ -34,12 +39,12 @@ module.exports = function () {
     },
     output: {
       filename: 'index.js',
-      path: path.resolve(__dirname, paths.appBuild),
+      path: _resolve(__dirname, appBuild),
     },
     resolve: {
       extensions: ['.js', '.ts', '.tsx'],
-      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+      modules: [_resolve(__dirname, 'src'), 'node_modules'],
     },
     target: 'node',
   };
-};
+}

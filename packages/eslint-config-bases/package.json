@@ -13,6 +13,11 @@
     "name": "Jaakko Nenonen <jaakko@codelicious.fi>"
   },
   "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./helpers": "./src/helpers/index.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "clean": "rimraf --no-glob ./dist ./coverage ./tsconfig.tsbuildinfo",
     "lint": "eslint  --ext .ts,.js,.cjs,.mjs --cache --cache-location ../../.cache/eslint/eslint-config-bases.eslintcache",

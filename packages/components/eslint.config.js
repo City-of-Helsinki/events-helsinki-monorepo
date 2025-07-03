@@ -1,13 +1,15 @@
-import jest from '@events-helsinki/eslint-config-bases/src/bases/jest.js';
-// import storybook from '@events-helsinki/eslint-config-bases/src/bases/storybook.js';
-import prettier from '@events-helsinki/eslint-config-bases/src/bases/prettier.js';
-import react from '@events-helsinki/eslint-config-bases/src/bases/react.js';
-import regexp from '@events-helsinki/eslint-config-bases/src/bases/regexp.js';
-import rtl from '@events-helsinki/eslint-config-bases/src/bases/rtl.js';
-import sonar from '@events-helsinki/eslint-config-bases/src/bases/sonar.js';
-import stylistic from '@events-helsinki/eslint-config-bases/src/bases/stylistic.js';
-import typescript from '@events-helsinki/eslint-config-bases/src/bases/typescript.js';
-import { getDefaultIgnorePatterns } from '@events-helsinki/eslint-config-bases/src/helpers/index.js';
+import {
+  jest,
+  // storybook,
+  prettier,
+  react,
+  regexp,
+  reactTestingLibrary,
+  sonar,
+  stylistic,
+  typescript,
+} from '@events-helsinki/eslint-config-bases';
+import { getDefaultIgnorePatterns } from '@events-helsinki/eslint-config-bases/helpers';
 
 import { globalIgnores } from 'eslint/config';
 import tsParser from '@typescript-eslint/parser';
@@ -17,7 +19,7 @@ export default [
   ...typescript,
   ...regexp,
   ...jest,
-  ...rtl,
+  ...reactTestingLibrary,
   // ...storybook,
   ...sonar,
   ...react,

@@ -1,3 +1,2 @@
-import * as typescript from './bases/index.js';
-
-export default typescript;
+export * from './bases/index.js';
+export { default as prettierBaseConfig } from './prettier.base.config.js';

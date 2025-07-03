@@ -1,27 +1,20 @@
 // @ts-check
 
-const {
-  getPrettierConfig,
-} = require('@events-helsinki/eslint-config-bases/helpers');
-
-const { overrides = [], ...prettierConfig } = getPrettierConfig();
+const { prettierBaseConfig } = require('@events-helsinki/eslint-config-bases');
 
 /**
  * @type {import('prettier').Config}
  */
 const config = {
-  ...prettierConfig,
+  ...prettierBaseConfig,
   overrides: [
-    ...overrides,
-    ...[
-      {
-        files: '*.md',
-        options: {
-          singleQuote: false,
-          quoteProps: 'preserve',
-        },
+    {
+      files: '*.md',
+      options: {
+        singleQuote: false,
+        quoteProps: 'preserve',
       },
-    ],
+    },
   ],
 };
 

@@ -7,15 +7,19 @@
  * {@link https://github.com/City-of-Helsinki/events-helsinki-monorepo/blob/main/docs/about-lint-staged.md}
  */
 
-const {
+import {
   concatFilesForPrettier,
   getEslintFixCmd,
-} = require('../../lint-staged.common.js');
+} from '../../lint-staged.common.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * @type {Record<string, (filenames: string[]) => string | string[] | Promise<string | string[]>>}
  */
-const rules = {
+export const rules = {
   '**/*.{js,jsx,ts,tsx}': (filenames) => {
     return getEslintFixCmd({
       cwd: __dirname,
@@ -32,5 +36,3 @@ const rules = {
     return [`prettier --write ${concatFilesForPrettier(filenames)}`];
   },
 };
-
-module.exports = rules;

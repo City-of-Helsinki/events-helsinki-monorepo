@@ -28,18 +28,21 @@ class ConsentModal {
 
   public async clickAcceptAllCookies() {
     await t.click(this.acceptAllCookiesButton);
-    console.log('ConsentModal: acceptAllCookies');
+    // eslint-disable-next-line no-console
+    console.debug('ConsentModal: acceptAllCookies');
     await this.isClosed();
   }
 
   public async clickAcceptOnlyRequiredCookies() {
     await t.click(this.acceptOnlyRequiredCookiesButton);
-    console.log('ConsentModal: acceptOnlyRequiredCookies');
+    // eslint-disable-next-line no-console
+    console.debug('ConsentModal: acceptOnlyRequiredCookies');
     await this.isClosed();
   }
 
   public async isOpened() {
-    console.log('ConsentModal: isOpened');
+    // eslint-disable-next-line no-console
+    console.debug('ConsentModal: isOpened');
     await t.expect(this.title.exists).ok();
     await t.expect(this.acceptAllCookiesButton.exists).ok();
     await t.expect(this.acceptOnlyRequiredCookiesButton.exists).ok();
@@ -47,7 +50,8 @@ class ConsentModal {
 
   public async isClosed() {
     await t.expect(this.componentContainer.exists).notOk();
-    console.log('ConsentModal: isClosed');
+    // eslint-disable-next-line no-console
+    console.debug('ConsentModal: isClosed');
   }
 }
 

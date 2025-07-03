@@ -1,23 +1,38 @@
-import type {
-  Subset,
-  KeysOfUnionType,
-} from '@events-helsinki/components/src/utils/typescript.utils';
 import { GraphQLError } from 'graphql';
-import AppConfig from '../config/AppConfig';
-import { Sources } from '../contants/constants';
-import type VenueContext from '../context/VenueContext';
-import type { Source, TranslatedVenueDetails } from '../types';
-import createQueryResolver from '../utils/createQueryResolver';
-import parseVenueId, { IdParseError } from '../utils/parseVenueId';
-import VenueDepartmentEnricher from './enrichers/VenueDepartmentEnricher';
-import VenueOntologyTreeEnricher from './enrichers/VenueOntologyTreeEnricher';
-import VenueOntologyWordsEnricher from './enrichers/VenueOntologyWordsEnricher';
-import VenueOrganizationEnricher from './enrichers/VenueOrganizationEnricher';
-import type { HaukiIntegrationConfig } from './integrations/HaukiIntegrationConfig';
-import IsOpenHaukiIntegration from './integrations/IsOpenHaukiIntegration';
-import OpeningHoursHaukiIntegration from './integrations/OpeningHoursHaukiIntegration';
-import VenueServiceMapIntegration from './integrations/VenueServiceMapIntegration';
-import VenueResolver from './VenueResolver';
+import AppConfig from '../config/AppConfig.js';
+import { Sources } from '../contants/constants.js';
+import type VenueContext from '../context/VenueContext.js';
+import type { Source, TranslatedVenueDetails } from '../types.js';
+import createQueryResolver from '../utils/createQueryResolver.js';
+import parseVenueId, { IdParseError } from '../utils/parseVenueId.js';
+import VenueDepartmentEnricher from './enrichers/VenueDepartmentEnricher.js';
+import VenueOntologyTreeEnricher from './enrichers/VenueOntologyTreeEnricher.js';
+import VenueOntologyWordsEnricher from './enrichers/VenueOntologyWordsEnricher.js';
+import VenueOrganizationEnricher from './enrichers/VenueOrganizationEnricher.js';
+import type { HaukiIntegrationConfig } from './integrations/HaukiIntegrationConfig.js';
+import IsOpenHaukiIntegration from './integrations/IsOpenHaukiIntegration.js';
+import OpeningHoursHaukiIntegration from './integrations/OpeningHoursHaukiIntegration.js';
+import VenueServiceMapIntegration from './integrations/VenueServiceMapIntegration.js';
+import VenueResolver from './VenueResolver.js';
+
+/**
+ * Check at compile time that Subtype is a subset of Supertype or not.
+ * @warning This works with string literal types, but not necessarily with all types
+ * @return Subtype if Subtype is a subset of Supertype, otherwise raise an error.
+ *
+ * NOTE: this is also available in '@events-helsinki/components/src/utils/typescript.utils.js',
+ * but the module type does not match
+ */
+export type Subset<Supertype, Subtype extends Supertype> = Subtype;
+
+/**
+ * Get keys of union type
+ * @example KeysOfUnionType<{a: 1} | {b: 2, c: 3}> == 'a' | 'b' | 'c'
+ *
+ * NOTE: this is also available in '@events-helsinki/components/src/utils/typescript.utils.js',
+ * but the module type does not match
+ */
+export type KeysOfUnionType<T> = T extends infer U ? keyof U : never;
 
 // List of all the enrichers used by VenueServiceMapIntegration
 const USED_SERVICE_MAP_ENRICHERS = [

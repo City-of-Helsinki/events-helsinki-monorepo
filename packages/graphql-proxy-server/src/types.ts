@@ -1,4 +1,4 @@
-import type { CustomIgnorableGraphQLErrorEnum } from './enums';
+import type { CustomIgnorableGraphQLErrorEnum } from './enums.js';
 
 export type CustomIgnorableGraphQLErrorValues =
   `${CustomIgnorableGraphQLErrorEnum}`;

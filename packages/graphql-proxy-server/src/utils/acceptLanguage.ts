@@ -1,8 +1,8 @@
-import isAppLanguage from '@events-helsinki/components/src/type-guards/is-app-language';
-import type { AppLanguage } from '@events-helsinki/components/src/types/types';
+import isAppLanguage from '@events-helsinki/components/src/type-guards/is-app-language.js';
+import type { AppLanguage } from '@events-helsinki/components/src/types/types.js';
 import accepts from 'accepts';
 import type express from 'express';
-import type ContextValue from '../context/ContextValue';
+import type ContextValue from '../context/ContextValue.js';
 /**
  * Get an accepted language from the request header.
  * @param req express.Request

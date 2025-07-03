@@ -1,6 +1,6 @@
-import memoize from 'lodash/memoize';
+import memoize from 'lodash/memoize.js';
 
-import normalizeKey from './normalizeKey';
+import normalizeKey from './normalizeKey.js';
 
 const memoizedNormalizeKey = memoize(normalizeKey);
 

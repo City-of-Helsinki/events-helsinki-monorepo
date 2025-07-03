@@ -1,4 +1,4 @@
-import type { Locale } from '../types';
+import type { Locale } from '../types.js';
 
 class AppConfig {
   static get debug() {

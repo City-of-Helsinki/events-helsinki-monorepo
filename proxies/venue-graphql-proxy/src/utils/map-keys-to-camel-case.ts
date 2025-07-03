@@ -1,5 +1,5 @@
-import camelCase from 'lodash/camelCase';
-import mapKeys from 'lodash/mapKeys';
+import camelCase from 'lodash/camelCase.js';
+import mapKeys from 'lodash/mapKeys.js';
 
 type CamelCase<S extends string> =
   S extends `${infer P1}_${infer P2}${infer P3}`

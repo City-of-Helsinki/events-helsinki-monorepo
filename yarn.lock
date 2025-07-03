@@ -3358,7 +3358,6 @@ __metadata:
     "@babel/core": "npm:7.27.7"
     "@babel/plugin-syntax-flow": "npm:7.27.1"
     "@babel/plugin-transform-react-jsx": "npm:7.27.1"
-    "@events-helsinki/components": "workspace:^"
     "@events-helsinki/eslint-config-bases": "workspace:^"
     "@sentry/integrations": "npm:7.56.0"
     "@sentry/node": "npm:7.56.0"
@@ -26123,6 +26122,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tsconfig-paths@npm:4.2.0, tsconfig-paths@npm:^4.1.2, tsconfig-paths@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "tsconfig-paths@npm:4.2.0"
+  dependencies:
+    json5: "npm:^2.2.2"
+    minimist: "npm:^1.2.6"
+    strip-bom: "npm:^3.0.0"
+  checksum: 928381dcd0d66a99e71ca21211f585e9af371c18a5578ad83cb36a12caf84023bbb826545349e3c64f916291c9a80d177f4adb24d77d463cef91fb64cccee189
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths@npm:^3.15.0":
   version: 3.15.0
   resolution: "tsconfig-paths@npm:3.15.0"
@@ -26132,17 +26142,6 @@ __metadata:
     minimist: "npm:^1.2.6"
     strip-bom: "npm:^3.0.0"
   checksum: 2939118a3f4b46157e30f7d50f2c6e336d8b8e8fdb1c0bbddd5da5ef6554daa8062746f328c908849c6d14771ac8b113650b4caeedb59581f2e17c2e2031a17e
-  languageName: node
-  linkType: hard
-
-"tsconfig-paths@npm:^4.1.2, tsconfig-paths@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "tsconfig-paths@npm:4.2.0"
-  dependencies:
-    json5: "npm:^2.2.2"
-    minimist: "npm:^1.2.6"
-    strip-bom: "npm:^3.0.0"
-  checksum: 928381dcd0d66a99e71ca21211f585e9af371c18a5578ad83cb36a12caf84023bbb826545349e3c64f916291c9a80d177f4adb24d77d463cef91fb64cccee189
   languageName: node
   linkType: hard
 
@@ -26881,7 +26880,6 @@ __metadata:
     "@babel/core": "npm:7.27.7"
     "@babel/plugin-syntax-flow": "npm:7.27.1"
     "@babel/plugin-transform-react-jsx": "npm:7.27.1"
-    "@events-helsinki/components": "workspace:^"
     "@events-helsinki/eslint-config-bases": "workspace:^"
     "@events-helsinki/graphql-proxy-server": "workspace:^"
     "@types/jest": "npm:^30.0.0"
@@ -26907,6 +26905,7 @@ __metadata:
     ts-jest: "npm:29.4.0"
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"
+    tsconfig-paths: "npm:4.2.0"
     typescript: "npm:^5.8.3"
     webpack: "npm:5.99.9"
     webpack-cli: "npm:6.0.1"

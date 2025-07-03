@@ -1,6 +1,6 @@
 import type { AugmentedRequest } from '@apollo/datasource-rest';
 import { RESTDataSource } from '@apollo/datasource-rest';
-import type ContextValue from '../context/ContextValue';
+import type ContextValue from '../context/ContextValue.js';
 
 abstract class DataSourceWithContext<
   DataSources,

@@ -1,6 +1,7 @@
-import type { AppLanguage } from '@events-helsinki/components/src/types/types';
-import type { Sources } from './contants/constants';
-import type { Point, OpeningHour, ResourceState } from './types/types';
+export type AppLanguage = 'en' | 'fi' | 'sv';
+
+import type { Sources } from './contants/constants.js';
+import type { Point, OpeningHour, ResourceState } from './types/types.js';
 
 export type Source = (typeof Sources)[keyof typeof Sources];
 export type Locale = AppLanguage;
@@ -252,6 +253,8 @@ export type AccessibilitySentences = {
 };
 
 export type TranslationsObject = {
+  name(locale: AppLanguage, name: unknown): unknown;
+  url(locale: AppLanguage, url: unknown): unknown;
   fi?: string;
   en?: string;
   sv?: string;

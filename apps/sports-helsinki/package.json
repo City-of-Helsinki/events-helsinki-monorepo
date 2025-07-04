@@ -2,6 +2,7 @@
   "name": "sports-helsinki",
   "version": "1.28.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "?share-static-hardlink": "echo 'Use this command to link assets... from shared static folder'",
     "?share-static-symlink": "echo 'Use this command to link assets... from shared static folder'",
@@ -41,9 +42,6 @@
     "not dead",
     "not op_mini all"
   ],
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "dependencies": {
     "@apollo/client": "3.7.16",
     "@apollo/datasource-rest": "6.0.1",

@@ -11,7 +11,7 @@ const trueEnv = ['true', '1', 'yes'];
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 
 // Raise the default timeout from 5000
-jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
+jest.setTimeout(isCI ? 50_000 : 10_000);
 
 loadEnvConfig(process.cwd());
 
@@ -41,7 +41,6 @@ jest.mock('next/dist/client/router', () => require('next-router-mock'));
 
 // Mock next/head
 jest.mock('next/head', () => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const ReactDOMServer = require('react-dom/server');
   return {
     __esModule: true,
@@ -70,6 +69,7 @@ jest.mock('next/config', () => () => ({
   },
 }));
 
+// eslint-disable-next-line @stylistic/max-len
 // https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
 jest.mock('@events-helsinki/components/hooks/useLocale', () => ({
   __esModule: true,
@@ -86,6 +86,7 @@ global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder as any;
 
 // To avoid error: TypeError: Cannot redefine property
+// eslint-disable-next-line @stylistic/max-len
 // disusssed here: https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property
 // Object.defineProperty(exports, '__esModule', {
 //   value: true,

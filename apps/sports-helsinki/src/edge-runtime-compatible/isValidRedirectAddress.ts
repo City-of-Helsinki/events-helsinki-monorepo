@@ -24,7 +24,8 @@ export function isValidRedirectAddress(pathname: unknown): boolean {
    * Sc = Currency Symbol = https://www.compart.com/en/unicode/category/Sc for e.g. "$" (Dollar sign)
    *
    * See documentation:
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Unicode_character_class_escape
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/
+   * Unicode_character_class_escape
    * https://unicode.org/reports/tr18/#General_Category_Property
    */
   return (

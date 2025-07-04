@@ -111,7 +111,7 @@ describe('CombinedSearchFormAdapter', () => {
     it.each<
       [
         keyof ReturnType<CombinedSearchFormAdapter['getSearchVariables']>,
-        CombinedSearchAdapterOutput
+        CombinedSearchAdapterOutput,
       ]
     >([
       [
@@ -161,7 +161,9 @@ describe('CombinedSearchFormAdapter', () => {
           publisher: null,
           publisherAncestor: null,
           include: ['keywords', 'location'],
-          // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+          // Removed to experiment:
+          // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+          // superEventType: ['umbrella', 'none'],
         },
       ],
     ])(

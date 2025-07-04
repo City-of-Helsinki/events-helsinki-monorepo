@@ -14,7 +14,7 @@ const VenuePageMeta: React.FC<Props> = ({ venue }) => {
   const description = venue.description || '';
   const image = venue.image || '';
 
-  const openGraphProperties: { [key: string]: string } = {
+  const openGraphProperties: Record<string, string> = {
     description: description,
     image: image,
     title: title,

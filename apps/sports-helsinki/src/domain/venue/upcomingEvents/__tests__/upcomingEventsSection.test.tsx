@@ -22,7 +22,9 @@ const similarEventQueryVariables = {
   include: ['keywords', 'location'],
   start: 'now',
   sort: EVENT_SORT_OPTIONS.END_TIME,
-  // superEventType: 'none', // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // Removed to experiment:
+  // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // superEventType: 'none',
   pageSize: 6,
   end: undefined,
   isFree: undefined,

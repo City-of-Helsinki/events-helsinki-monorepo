@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/max-len */
 const i18nRootPaths = ['/fi/pages', '/fi/sivut'];
 
 const redirectRoutes = i18nRootPaths.reduce((result, langPageRoot) => {
@@ -76,4 +77,4 @@ const redirectRoutes = i18nRootPaths.reduce((result, langPageRoot) => {
   }
 }, {});
 
-module.exports = redirectRoutes;
+export default redirectRoutes;

@@ -48,8 +48,8 @@ const SimilarVenuesSection: React.FC<SimilarVenuesSectionProps> = ({
   const hasCards = !!cards.length;
 
   React.useEffect(() => {
-    if (hasCards) {
-      onVenuesLoaded && onVenuesLoaded(cards.length);
+    if (hasCards && onVenuesLoaded) {
+      onVenuesLoaded(cards.length);
     }
   }, [onVenuesLoaded, cards.length, hasCards]);
 

@@ -98,7 +98,7 @@ it('should allow navigation with down arrows', async () => {
     arrowDownKeyPressHelper();
     expect(options[index + 1]).toHaveClass('autosuggestOption--isFocused');
     const text = keyword.name?.fi;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
     expect(options[index + 1]).toHaveTextContent(text!);
   });
 });
@@ -116,7 +116,7 @@ it('should allow navigation with up arrows', async () => {
   reversedKeywords.forEach((keyword, index) => {
     arrowUpKeyPressHelper();
     const text = keyword.name?.fi;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
     expect(options[reversedKeywords.length - index]).toHaveTextContent(text!);
     expect(options[reversedKeywords.length - index]).toHaveClass(
       'autosuggestOption--isFocused'
@@ -162,7 +162,7 @@ it('last item should be focused when opening menu by up arrow', async () => {
   const lastIndex = keywords.data.length;
   const keyword = keywords.data[lastIndex - 1];
   const text = keyword?.name?.fi;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
   expect(options[lastIndex]).toHaveTextContent(text!);
   expect(options[lastIndex]).toHaveClass('autosuggestOption--isFocused');
 });

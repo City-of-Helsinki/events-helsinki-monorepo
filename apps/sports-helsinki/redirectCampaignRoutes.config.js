@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/max-len */
 // Ignore prettier in order to preserve readability of the routes:
 // prettier-ignore
 // @deprecated since implementation of dynamic CMS configured redirects
@@ -91,4 +92,4 @@ const redirectRoutes = {
   '/weekdayproduct': '/en/articles/adults/helsinki-sports-services-launching-new-weekday-product',
 };
 
-module.exports = redirectRoutes;
+export default redirectRoutes;

@@ -10,20 +10,14 @@ import schema from './schema/index.js';
 
 dotenv.config();
 
-const trueEnv = ['true', '1', 'yes'];
-
 const config: ServerConfig = {
-  sentryDsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
-  sentryEnvironment: process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT,
+  sentryDsn: AppConfig.sentryDsn,
+  sentryEnvironment: AppConfig.sentryEnvironment,
   debug: AppConfig.debug,
-  serverPort: Number(process.env.GRAPHQL_PROXY_PORT) || 4200,
-  disableWinstonLogging: trueEnv.includes(
-    process.env.GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING ?? 'false'
-  ),
-  introspection: trueEnv.includes(
-    process.env.GRAPHQL_PROXY_INTROSPECTION ?? 'false'
-  ),
-  languages: ['fi', 'en', 'sv'],
+  serverPort: AppConfig.serverPort,
+  disableWinstonLogging: AppConfig.enableWinstonLogging,
+  introspection: AppConfig.enableIntrospection,
+  languages: [...AppConfig.supportedLocales],
 };
 
 (async () => {

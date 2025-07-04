@@ -7,8 +7,6 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "moduleResolution": "NodeNext",
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
     "newLine": "lf",

@@ -33,7 +33,7 @@ $ yarn add --dev @events-helsinki/eslint-config-bases:"workspace:^"
 
 ## Usage
 
-In your app or package, create an `./apps/my-app/.eslintrc.js` file that extends any of the
+In your app or package, create an `./apps/my-app/eslint.config.js` file that extends any of the
 existing base configs. For example:
 
 ```javascript

@@ -288,7 +288,7 @@ curl -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: 
 
 ### 5.1 Linters
 
-See in [./apps/hobbies-helsinki/.eslintrc.js](./apps/nextjs-app/.eslintrc.js) and
+See in [./apps/hobbies-helsinki/eslint.config.js](./apps/nextjs-app/eslint.config.js) and
 [eslint-config-bases](./packages/eslint-config-bases/README.md).
 
 ### 5.2 Hooks / Lint-staged
@@ -353,8 +353,6 @@ To ensure decent performance, those features are present in the example actions:
   >    - "yarn.lock"
   >    - ".yarnrc.yml"
   >    - ".github/workflows/**"
-  >    - ".eslintrc.base.json"
-  >    - ".eslintignore"
   > ```
 
 #### Pipeline configuration

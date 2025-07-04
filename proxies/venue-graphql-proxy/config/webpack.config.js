@@ -16,12 +16,8 @@ const env = getGraphqlProxyEnvironment();
 export default function () {
   return {
     entry: appIndexJs,
-    // --- CRITICAL CHANGE 1: Add allowlist to nodeExternals ---
     externals: [
       nodeExternals({
-        // This is necessary to bundle your internal monorepo packages.
-        // It tells webpack-node-externals to NOT exclude packages
-        // matching the regex (i.e., all @events-helsinki scoped packages).
         allowlist: [/@events-helsinki\/.*/],
       }),
     ],
@@ -35,10 +31,7 @@ export default function () {
               loader: 'ts-loader',
               options: {
                 transpileOnly: true,
-                // --- CRITICAL CHANGE 2: Point ts-loader to your project's tsconfig.json ---
-                // This tells ts-loader where to find the tsconfig for this specific project,
-                // so it can correctly resolve 'baseUrl' and 'paths'.
-                configFile: _resolve(__dirname, '../tsconfig.json'), // Adjust path if tsconfig.json is not in parent dir
+                configFile: _resolve(__dirname, '../tsconfig.json'),
               },
             },
           ],
@@ -50,22 +43,31 @@ export default function () {
         },
       ],
     },
-    // --- TsconfigPathsPlugin is now correctly in resolve.plugins ---
     plugins: [new webpack.DefinePlugin(env.stringified)],
     output: {
       filename: 'index.js',
       path: _resolve(__dirname, appBuild),
+      library: {
+        type: 'module',
+      },
     },
     resolve: {
       extensions: ['.js', '.ts', '.tsx', '.json'],
+      extensionAlias: {
+        '.js': ['.js', '.ts'],
+        '.cjs': ['.cjs', '.cts'],
+        '.mjs': ['.mjs', '.mts'],
+      },
       modules: [_resolve(__dirname, 'src'), 'node_modules'],
       plugins: [
-        // This is correctly placed now for TsconfigPathsPlugin
         new TsconfigPathsPlugin({
-          configFile: _resolve(__dirname, '../tsconfig.json'), // Adjust path if tsconfig.json is not in parent dir
+          configFile: _resolve(__dirname, '../tsconfig.json'),
         }),
       ],
     },
     target: 'node',
+    experiments: {
+      outputModule: true,
+    },
   };
 }

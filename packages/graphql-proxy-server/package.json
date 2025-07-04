@@ -4,10 +4,7 @@
   "private": true,
   "description": "Events Helsinki GraphQL proxy.",
   "type": "module",
-  "exports": {
-    ".": "./src/index.js",
-    "./package.json": "./package.json"
-  },
+  "main": "./src/index.ts",
   "scripts": {
     "clean": "rimraf --no-glob ./tsconfig.tsbuildinfo",
     "docker:build": "cross-env DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build --progress=tty runner",
@@ -25,7 +22,7 @@
   },
   "dependencies": {
     "@apollo/datasource-rest": "6.0.1",
-    "@apollo/server": "4.7.5",
+    "@apollo/server": "^4.11.0",
     "@apollo/utils.keyvaluecache": "3.0.0",
     "@sentry/integrations": "7.56.0",
     "@sentry/node": "7.56.0",

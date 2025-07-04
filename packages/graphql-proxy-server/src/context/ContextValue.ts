@@ -1,7 +1,9 @@
 import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
-import type { AppLanguage } from '@events-helsinki/components/src/types/types.js';
 import { ignorableGraphqlErrorCodes } from '../constants.js';
-import type { CustomIgnorableGraphQLErrorValues } from '../types.js';
+import type {
+  AppLanguage,
+  CustomIgnorableGraphQLErrorValues,
+} from '../types.js';
 
 export type ContextConstructorArgs = {
   token: string;

@@ -1,5 +1,4 @@
-export type AppLanguage = 'en' | 'fi' | 'sv';
-
+import type { AppLanguage } from '@events-helsinki/graphql-proxy-server';
 import type { Sources } from './contants/constants.js';
 import type { Point, OpeningHour, ResourceState } from './types/types.js';
 

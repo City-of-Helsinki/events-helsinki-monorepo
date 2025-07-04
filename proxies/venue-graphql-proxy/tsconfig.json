@@ -10,24 +10,31 @@
       "esnext"
     ],
     "module": "NodeNext",
-    "jsx": "preserve",
     "incremental": true,
     "esModuleInterop": true,
-    "moduleResolution": "NodeNext",
     "allowImportingTsExtensions": true,
     "paths": {
       "@events-helsinki/graphql-proxy-server": [
-        "../../packages/graphql-proxy-server/src/index"
+        "../../packages/graphql-proxy-server/src/index.ts"
       ],
       "@events-helsinki/graphql-proxy-server/*": [
-        "../../packages/graphql-proxy-server/src/*"
+        "../../packages/graphql-proxy-server/src/*.ts"
       ]
     }
   },
+  "include": [
+    "src" // Explicitly include only the 'src' directory of this specific package
+  ],
   "exclude": [
-    "**/node_modules",
-    "**/.*/",
-    "dist",
-    "build"
-  ]
+    "**/node_modules", // Standard exclusion for installed packages
+    "**/.*/", // Standard exclusion for dotfiles/directories
+    "dist", // Exclude build output directories
+    "build", // Exclude build output directories
+    "**/*.spec.ts", // Exclude test files if they are in src and you don't want them compiled by ts-node
+    "**/*.test.ts", // Exclude test files
+    "../../packages/**/*" // <--- Explicitly exclude all other monorepo packages from this project's scope
+  ],
+  "ts-node": {
+    "esm": true
+  }
 }

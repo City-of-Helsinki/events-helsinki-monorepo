@@ -4,17 +4,37 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "CommonJS",
-    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "NodeNext",
     "incremental": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
+    "allowImportingTsExtensions": true,
     "paths": {
       "@events-helsinki/graphql-proxy-server": [
-        "../../packages/graphql-proxy-server/src/index"
+        "../../packages/graphql-proxy-server/src/index.ts"
+      ],
+      "@events-helsinki/graphql-proxy-server/*": [
+        "../../packages/graphql-proxy-server/src/*.ts"
       ]
     }
   },
-  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
+  "include": [
+    "src" // Explicitly include only the 'src' directory of this specific package
+  ],
+  "exclude": [
+    "**/node_modules", // Standard exclusion for installed packages
+    "**/.*/", // Standard exclusion for dotfiles/directories
+    "dist", // Exclude build output directories
+    "build", // Exclude build output directories
+    "**/*.spec.ts", // Exclude test files if they are in src and you don't want them compiled by ts-node
+    "**/*.test.ts", // Exclude test files
+    "../../packages/**/*" // <--- Explicitly exclude all other monorepo packages from this project's scope
+  ],
+  "ts-node": {
+    "esm": true
+  }
 }

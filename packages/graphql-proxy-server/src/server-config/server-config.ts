@@ -10,7 +10,8 @@ type NodeConfig = {
 };
 
 export type ServerContextConfig = {
-  languages?: AppLanguage[]; // Some datasources  uses language headers to resolve fields
+  // Some datasources  uses language headers to resolve fields
+  languages?: Array<AppLanguage>;
 };
 
 export type ServerConfig = SentryConfig &

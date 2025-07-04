@@ -13643,6 +13643,7 @@ __metadata:
     ts-jest: "npm:29.4.0"
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"
+    tsx: "npm:4.20.3"
     typescript: "npm:^5.8.3"
     webpack: "npm:5.99.9"
     webpack-cli: "npm:6.0.1"

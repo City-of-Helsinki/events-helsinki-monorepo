@@ -1,8 +1,11 @@
-import type EventDataSource from './datasources/eventDataSource';
-import type KeywordDataSource from './datasources/keywordDataSource';
-import type NeighborhoodDataSource from './datasources/neighborhoodDataSource';
-import type OrganizationDataSource from './datasources/organizationDataSource';
-import type PlaceDataSource from './datasources/placeDataSource';
+import type { AppLanguage } from '@events-helsinki/graphql-proxy-server';
+import type EventDataSource from './datasources/eventDataSource.js';
+import type KeywordDataSource from './datasources/keywordDataSource.js';
+import type NeighborhoodDataSource from './datasources/neighborhoodDataSource.js';
+import type OrganizationDataSource from './datasources/organizationDataSource.js';
+import type PlaceDataSource from './datasources/placeDataSource.js';
+
+export type Locale = AppLanguage;
 
 export type EventDataSources = {
   event: EventDataSource;

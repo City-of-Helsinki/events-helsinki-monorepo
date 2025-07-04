@@ -3,10 +3,11 @@
 
 let manifest;
 try {
-  manifest = require('./.next/build-manifest.json');
+  manifest = await import('./.next/build-manifest.json');
 } catch (e) {
   throw new Error(
-    'Cannot find a NextJs build folder, did you forget to build ?'
+    'Cannot find a NextJs build folder, did you forget to build ?',
+    e
   );
 }
 const pages = manifest.pages;
@@ -33,7 +34,7 @@ const getPageLimits = () => {
   return pageLimits;
 };
 
-module.exports = [
+export default [
   ...getPageLimits(),
   {
     name: 'CSS',

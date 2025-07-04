@@ -9,4 +9,4 @@ const redirectRoutes = {
   '/thefinnishmodel': '/en/search?text=harrastamisen+suomen+malli',
 };
 
-module.exports = redirectRoutes;
+export default redirectRoutes;

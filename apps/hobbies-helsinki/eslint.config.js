@@ -10,6 +10,9 @@ import {
   typescript,
 } from '@events-helsinki/eslint-config-bases';
 
+import nextPlugin from '@next/eslint-plugin-next';
+import a11yPlugin from 'eslint-plugin-jsx-a11y';
+
 import { globalIgnores } from 'eslint/config';
 
 import { getDefaultIgnorePatterns } from '@events-helsinki/eslint-config-bases/helpers';
@@ -25,6 +28,10 @@ export default [
   ...prettier,
   ...stylistic,
   {
+    plugins: {
+      next: nextPlugin,
+      'jsx-a11y': a11yPlugin,
+    },
     rules: {
       '@next/next/no-img-element': 'off',
       'jsx-a11y/anchor-is-valid': 'off',

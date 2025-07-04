@@ -41,9 +41,6 @@
     "not dead",
     "not op_mini all"
   ],
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "dependencies": {
     "@apollo/client": "3.7.16",
     "@events-helsinki/common-i18n": "workspace:^",

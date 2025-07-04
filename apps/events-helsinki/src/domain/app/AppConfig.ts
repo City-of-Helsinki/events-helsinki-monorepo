@@ -289,7 +289,9 @@ function parseEnvValue(
 
   try {
     return JSON.parse(value);
-  } catch (_) {
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log('Could not parse env value', e);
     return null;
   }
 }

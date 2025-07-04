@@ -396,14 +396,12 @@ export const getPlainEventUrl = (
 export const getCardUrl = (
   event: EventFields,
   locale: AppLanguage,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  returnPath?: string
+  _returnPath?: string
 ): string => getPlainEventUrl(event, locale);
 
 export const getOrganizationSearchUrl = (
   event: EventFields,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  router: NextRouter,
+  _router: NextRouter,
   locale: AppLanguage
 ): string => {
   return routerHelper.getLocalizedCmsItemUrl(
@@ -414,10 +412,8 @@ export const getOrganizationSearchUrl = (
 };
 
 export const getHelsinkiOnlySearchUrl = (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  source: EventFields | Venue,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  router: NextRouter,
+  _source: EventFields | Venue,
+  _router: NextRouter,
   locale: AppLanguage
 ): string => {
   return routerHelper.getLocalizedCmsItemUrl(

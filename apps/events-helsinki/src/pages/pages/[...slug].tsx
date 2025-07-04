@@ -212,7 +212,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           },
           revalidate: AppConfig.defaultRevalidate,
         };
-      } catch (_) {
+      } catch (e) {
+        logger.error('Error while generating content page', e);
         return {
           props: {
             error: {

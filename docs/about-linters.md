@@ -9,7 +9,7 @@ Define a package holding all your base configurations and enable them per worksp
 ### Example config
 
 If you use the provided example of `packages/eslint-config-bases`, it's easy to add or
-customize rules on per workspace basis by creating an `.eslintrc.js` file in the workspace root.
+customize rules on per workspace basis by creating an `eslint.config.js` file in the workspace root.
 
 ```javascript
 module.exports = {
@@ -50,9 +50,9 @@ module.exports = {
 .
 ├── apps
 │   ├── remix-app
-│   │   └── .eslintrc.js  (extends from [@events-helsinki/eslint-config-bases/react])
+│   │   └── eslint.config.js  (extends from [@events-helsinki/eslint-config-bases/react])
 │   └── nextjs-app
-│       └── .eslintrc.js
+│       └── eslint.config.js
 └── packages
     └── eslint-config-bases
 ```

@@ -1,6 +1,4 @@
-module.exports = {
-  plugins: {
-    'postcss-flexbugs-fixes': {},
-    'postcss-preset-env': {},
-  },
+export const plugins = {
+  'postcss-flexbugs-fixes': {},
+  'postcss-preset-env': {},
 };

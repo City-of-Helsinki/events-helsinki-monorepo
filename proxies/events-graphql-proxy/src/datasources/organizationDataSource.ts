@@ -1,5 +1,5 @@
-import type { OrganizationDetails } from '../types/types';
-import LinkedEventsDataSource from './LinkedEventsDataSource';
+import type { OrganizationDetails } from '../types/types.js';
+import LinkedEventsDataSource from './LinkedEventsDataSource.js';
 
 class OrganizationDataSource extends LinkedEventsDataSource {
   public async getOrganizationDetails(

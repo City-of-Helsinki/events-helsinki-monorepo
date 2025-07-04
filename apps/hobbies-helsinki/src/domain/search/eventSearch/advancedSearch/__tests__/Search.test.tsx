@@ -8,13 +8,13 @@ import { axe } from 'jest-axe';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
-
 import { actWait, configure, render, screen, userEvent } from '@/test-utils';
 import {
   fakeKeywords,
   fakeNeighborhoods,
   fakePlaces,
 } from '@/test-utils/mockDataUtils';
+
 import Search from '../AdvancedSearch';
 
 configure({ defaultHidden: true });
@@ -238,6 +238,7 @@ it('should change search query after clicking category menu item', async () => {
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
+    // eslint-disable-next-line @stylistic/max-len
     asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=movie_and_media%2Cgames%2Cmusic&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
     query: {
       [EVENT_SEARCH_FILTERS.CATEGORIES]: 'movie_and_media,games,music',

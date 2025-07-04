@@ -21,7 +21,7 @@ const EventPageMeta: React.FC<EventPageMetaProps> = ({ event }) => {
     shortDescription: description,
   } = getEventFields(event, locale);
 
-  const openGraphProperties: { [key: string]: string } = {
+  const openGraphProperties: Record<string, string> = {
     description: description,
     image: image,
     title: name,

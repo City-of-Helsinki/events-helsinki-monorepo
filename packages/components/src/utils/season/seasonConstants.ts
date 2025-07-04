@@ -1,6 +1,5 @@
 import type { SeasonRule } from './types';
 
-/* eslint-disable @typescript-eslint/naming-convention */
 export enum Season {
   Summer,
   Winter,

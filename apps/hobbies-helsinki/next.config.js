@@ -1,8 +1,8 @@
-const packageJson = require('./package.json');
-const i18nRoutes = require('./i18nRoutes.config');
-const { i18n } = require('./next-i18next.config');
-const redirectCampaignRoutes = require('./redirectCampaignRoutes.config');
-const nextBaseConfig = require('../../next.base.config');
+import packageJson from './package.json' with { type: 'json' };
+import i18nRoutes from './i18nRoutes.config.js';
+import redirectCampaignRoutes from './redirectCampaignRoutes.config.js';
+import nextConfig from './next-i18next.config.js';
+import nextBaseConfig from '../../next.base.config.js';
 
 const campaignRoutes = Object.entries(redirectCampaignRoutes).flatMap(
   ([source, destination]) => [
@@ -17,10 +17,10 @@ const campaignRoutes = Object.entries(redirectCampaignRoutes).flatMap(
   ]
 );
 
-module.exports = nextBaseConfig({
+export default nextBaseConfig({
   packageJson,
   i18nRoutes,
-  i18n,
+  i18n: nextConfig.i18n,
   async redirects() {
     return campaignRoutes;
   },

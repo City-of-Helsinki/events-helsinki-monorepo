@@ -21,7 +21,8 @@ export const baseVariables = {
   publisherAncestor: null,
   sort: 'end_time',
   start: 'now',
-  // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // superEventType: ['umbrella', 'none'],
 };
 
 export const eventListBaseVariables: QueryEventListArgs = {

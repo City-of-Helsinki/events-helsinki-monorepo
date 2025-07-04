@@ -1,8 +1,30 @@
-import type { Locale } from '../types';
+import type { Locale } from '../types.js';
 
 class AppConfig {
+  static get serverPort() {
+    return Number(parseEnvValue(process.env.GRAPHQL_PROXY_PORT, 4200));
+  }
+
   static get debug() {
     return Boolean(parseEnvValue(process.env.GRAPHQL_PROXY_DEBUG));
+  }
+
+  static get sentryEnvironment() {
+    return parseEnvValue(process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT);
+  }
+
+  static get sentryDsn() {
+    return parseEnvValue(process.env.GRAPHQL_PROXY_SENTRY_DSN);
+  }
+
+  static get enableWinstonLogging() {
+    return !Boolean(
+      parseEnvValue(process.env.GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING)
+    );
+  }
+
+  static get enableIntrospection() {
+    return Boolean(parseEnvValue(process.env.GRAPHQL_PROXY_INTROSPECTION));
   }
 
   static get isHaukiEnabled() {

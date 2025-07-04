@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { LanguageCodeEnum } from '../types';
 import type { Language, AppLanguage } from '../types';
 

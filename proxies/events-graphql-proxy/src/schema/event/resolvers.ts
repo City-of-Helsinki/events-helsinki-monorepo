@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { normalizeKeys } from '@events-helsinki/graphql-proxy-server/src';
+import { normalizeKeys } from '@events-helsinki/graphql-proxy-server';
 import * as Sentry from '@sentry/node';
 
-import type EventContext from '../../context/EventContext';
-import type { EventDataSources, QueryResolvers } from '../../types';
-import type { EventDetails, EventListResponse } from '../../types/types';
+import type EventContext from '../../context/EventContext.js';
+import type { EventDetails, EventListResponse } from '../../types/types.js';
+import type { EventDataSources, QueryResolvers } from '../../types.js';
 import {
   buildEventDetailsQuery,
   buildEventListQuery,
   reducePopulatedEvents,
-} from './utils';
+} from './utils.js';
 
 const getEventList = async (
   dataSources: EventDataSources,

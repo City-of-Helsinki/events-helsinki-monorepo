@@ -13,7 +13,8 @@ export default function SearchSelect(props: Parameters<typeof Select>[0]) {
   }
   if (Array.isArray(value) || Array.isArray(defaultValue)) {
     throw new Error(
-      'Values must be singletons! The SearchSelect does not support an array as a value feature. Maybe you should use the <MultiSelectDropdown/> instead.'
+      'Values must be singletons! The SearchSelect does not support an array as a value feature. ' +
+        'Maybe you should use the <MultiSelectDropdown/> instead.'
     );
   }
   // The value can be a single option, null or undefined.

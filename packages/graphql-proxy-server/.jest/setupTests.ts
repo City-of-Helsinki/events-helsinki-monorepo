@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 
 import { toHaveNoViolations } from 'jest-axe';

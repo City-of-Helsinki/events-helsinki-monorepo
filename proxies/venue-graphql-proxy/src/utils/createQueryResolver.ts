@@ -1,7 +1,7 @@
 import type { GraphQLResolveInfo } from 'graphql';
 import { GraphQLError } from 'graphql';
-import type VenueContext from '../context/VenueContext';
-import type { Source } from '../types';
+import type VenueContext from '../context/VenueContext.js';
+import type { Source } from '../types.js';
 
 type ResolverFunction<T = unknown> = (
   source: Source,

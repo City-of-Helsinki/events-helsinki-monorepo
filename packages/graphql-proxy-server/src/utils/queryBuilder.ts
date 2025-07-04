@@ -1,6 +1,6 @@
 import { isBoolean, isNumber } from 'util';
 
-import composeQuery from './composeQuery';
+import composeQuery from './composeQuery.js';
 
 interface VariableToKeyItem {
   key: string;

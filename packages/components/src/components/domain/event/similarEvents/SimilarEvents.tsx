@@ -41,8 +41,8 @@ const SimilarEvents: React.FC<SimilarEventsProps> = ({
   const hasCards = !!cards.length;
 
   React.useEffect(() => {
-    if (hasCards) {
-      onEventsLoaded && onEventsLoaded(cards.length);
+    if (hasCards && onEventsLoaded) {
+      onEventsLoaded(cards.length);
     }
   }, [onEventsLoaded, cards.length, hasCards]);
 

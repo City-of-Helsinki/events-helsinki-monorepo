@@ -27,7 +27,8 @@ export const baseVariables = {
   sort: DEFAULT_EVENT_SORT_OPTION,
   start: 'now',
   startsAfter: undefined,
-  // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // superEventType: ['umbrella', 'none'],
   [EVENT_SEARCH_FILTERS.ONGOING]: true,
 };
 

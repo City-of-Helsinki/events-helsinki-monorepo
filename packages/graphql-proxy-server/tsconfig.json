@@ -4,16 +4,21 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "commonjs",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "nodenext",
     "jsx": "preserve",
     "incremental": true,
-    "paths": {
-      "@events-helsinki/components": ["../components/src/index"],
-      "@events-helsinki/components/*": ["../components/src/*"]
-    },
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "moduleResolution": "nodenext"
   },
-  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "dist",
+    "build"
+  ]
 }

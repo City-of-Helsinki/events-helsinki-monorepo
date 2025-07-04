@@ -1,4 +1,3 @@
-/* eslint-disable import/no-duplicates */
 import type {
   AppLanguage,
   OpeningHour,

@@ -14,8 +14,6 @@ export type ValidLocalizedObject = {
   sv: NonNullable<LocalizedObject['sv']>;
 };
 
-/* eslint-enable @typescript-eslint/naming-convention */
-
 export type Option = {
   text: string;
   value: string;

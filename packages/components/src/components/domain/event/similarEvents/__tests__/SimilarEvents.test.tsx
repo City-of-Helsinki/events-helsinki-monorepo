@@ -73,7 +73,8 @@ const similarEventFilters = {
   publisher: null,
   sort: 'end_time',
   start: 'now',
-  // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // superEventType: ['umbrella', 'none'],
   keywordOrSet2: [''],
   allOngoing: true,
   keywordOrSet3: [''],

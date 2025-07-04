@@ -7,4 +7,4 @@ const redirectNonCampaignRoutes = {
   '/en/search': [{ source: '/events', locale: 'en' }],
 };
 
-module.exports = redirectNonCampaignRoutes;
+export default redirectNonCampaignRoutes;

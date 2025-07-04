@@ -1,5 +1,7 @@
 import type { ParsedUrlQuery } from 'querystring';
+// eslint-disable-next-line @stylistic/max-len
 import type { UnifiedSearchOrderByType } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
+// eslint-disable-next-line @stylistic/max-len
 import { UnifiedSearchOrderBy } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 import type {
   AppLanguage,
@@ -83,7 +85,8 @@ class CombinedSearchFormAdapter
    * Map the URL search parameters to the form fields.
    * @param router NextRouter that can be used to resolve current URL
    * @param locale A locale is the current language and is needed by some of the graphql queries
-   * @param input The URL search params that represents here the current page URL and the current state of the search form.
+   * @param input The URL search params that represents here the current page URL and the current
+   * state of the search form.
    */
   constructor(
     locale: string,
@@ -149,7 +152,7 @@ class CombinedSearchFormAdapter
    * null
    */
   private getSingleValueInput<
-    T extends CombinedSearchAdapterInputNonArrayFields
+    T extends CombinedSearchAdapterInputNonArrayFields,
   >(
     primaryField: T,
     ...fallbackFields: CombinedSearchAdapterInputFallback[]

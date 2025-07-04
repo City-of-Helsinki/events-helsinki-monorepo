@@ -437,6 +437,7 @@ export const fakeVenuesSearchList = (
             name: fakeLocalizedObject(venue.name!),
             ontologyWords: venue.ontologyWords.map((ontology) => ({
               id: ontology?.id,
+              // eslint-disable-next-line @stylistic/max-len
               // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain, @typescript-eslint/no-non-null-assertion
               label: fakeLocalizedObject(ontology?.label!),
             })),

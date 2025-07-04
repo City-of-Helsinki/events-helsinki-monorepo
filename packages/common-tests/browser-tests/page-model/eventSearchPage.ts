@@ -59,14 +59,14 @@ class EventSearchPage {
   }
 
   public async expectSearchResults() {
-    t.expect(this.notFoundResult.exists).notOk;
+    t.expect(this.notFoundResult.exists).notOk();
     const results = this.results;
     await t.expect(results.count).gte(1); // At least one result should be found
     await t.expect(results.count).lte(10); // max 10 result per page
   }
 
   public async expectNoSearchResults() {
-    t.expect(this.notFoundResult.exists).ok;
+    t.expect(this.notFoundResult.exists).ok();
     await t.expect(this.results.count).eql(0); // no cards returned
   }
 
@@ -87,7 +87,9 @@ class EventSearchPage {
       this.autoSuggestInput,
       'thisisatextthatverylikelycannotbefound'
     );
-    await t.pressKey('tab'); // The menu can be too big, so that it hides the search button, so an unfocus event must be triggered.
+    // The menu can be too big, so that it hides the search button,
+    // so an unfocus event must be triggered.
+    await t.pressKey('tab');
     await t.click(this.searchButton);
     await t.wait(2000);
     await this.expectNoSearchResults();

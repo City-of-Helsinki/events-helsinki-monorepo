@@ -1,9 +1,9 @@
-import event from './event/typeDefs';
-import globalDefs from './global/typeDefs';
-import keyword from './keyword/typeDefs';
-import neighborhood from './neighborhood/typeDefs';
-import organization from './organization/typeDefs';
-import place from './place/typeDefs';
+import event from './event/typeDefs.js';
+import globalDefs from './global/typeDefs/index.js';
+import keyword from './keyword/typeDefs.js';
+import neighborhood from './neighborhood/typeDefs.js';
+import organization from './organization/typeDefs.js';
+import place from './place/typeDefs.js';
 
 const typeDefs = [
   ...globalDefs,

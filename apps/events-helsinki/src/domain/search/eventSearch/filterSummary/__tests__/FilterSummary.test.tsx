@@ -99,7 +99,7 @@ const urlParams: UrlParams = {
 // type UrlParamKeys = keyof UrlParams;
 
 const routes = [
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line @stylistic/max-len
   `/haku?${EVENT_SEARCH_FILTERS.CATEGORIES}=${urlParams.categories}&${EVENT_SEARCH_FILTERS.DATE_TYPES}=today&${EVENT_SEARCH_FILTERS.END}=${urlParams.end}&${EVENT_SEARCH_FILTERS.PLACES}=${urlParams.places}&${EVENT_SEARCH_FILTERS.PUBLISHER}=${urlParams.publisher}&${EVENT_SEARCH_FILTERS.START}=${urlParams.start}&${EVENT_SEARCH_FILTERS.TEXT}=${urlParams.text}`,
 ];
 

@@ -1,9 +1,7 @@
-const prettierBaseConfig = require('../prettier.base.config');
+import prettierBaseConfig from '../prettier.base.config.js';
 
 const getPrettierConfig = () => {
-  return prettierBaseConfig;
+  return { ...prettierBaseConfig };
 };
 
-module.exports = {
-  getPrettierConfig,
-};
+export default getPrettierConfig;

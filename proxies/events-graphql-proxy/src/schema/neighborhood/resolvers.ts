@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import capitalize from 'lodash/capitalize';
-import type EventContext from '../../context/EventContext';
-import type { QueryResolvers } from '../../types';
-import type { NeighborhoodListResponse } from '../../types/types';
+import capitalize from 'lodash/capitalize.js';
+import type EventContext from '../../context/EventContext.js';
+import type { NeighborhoodListResponse } from '../../types/types.js';
+import type { QueryResolvers } from '../../types.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const normalizeNeighborhood = (features: any[]) => {
@@ -17,9 +16,8 @@ const normalizeNeighborhood = (features: any[]) => {
 };
 
 const Query: QueryResolvers = {
-  neighborhoodList: async (_: any, __: any, context: EventContext) => {
-    const data =
-      (await context.dataSources.neighborhood.getNeighborhoodList()) as any;
+  neighborhoodList: async (_: unknown, __: unknown, context: EventContext) => {
+    const data = await context.dataSources.neighborhood.getNeighborhoodList();
 
     return {
       data: normalizeNeighborhood(data.features),

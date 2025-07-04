@@ -1,9 +1,7 @@
-/* eslint-disable import/no-duplicates */
-import {isBefore, isValid as isValidDate} from 'date-fns';
+import { isBefore, isValid as isValidDate } from 'date-fns';
 
 import fi from 'date-fns/locale/fi/index';
 import sv from 'date-fns/locale/sv/index';
-/* eslint-enable import/no-duplicates */
 
 import { DateInput } from 'hds-react';
 import React from 'react';
@@ -93,12 +91,17 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       });
     }
 
-    startDateIsValid
-      ? onChangeStartDate(parseDate(internalStartDateString))
-      : onChangeStartDate(null);
-    endDateIsValid
-      ? onChangeEndDate(parseDate(internalEndDateString))
-      : onChangeEndDate(null);
+    if (startDateIsValid) {
+      onChangeStartDate(parseDate(internalStartDateString));
+    } else {
+      onChangeStartDate(null);
+    }
+
+    if (endDateIsValid) {
+      onChangeEndDate(parseDate(internalEndDateString));
+    } else {
+      onChangeEndDate(null);
+    }
 
     // ignore change handlers to avoid infinite loops (if func changes on every render)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -158,8 +161,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
           endDateIsBeforeStartDate
             ? t('common:dateSelector.errorEndDateBeforeStartDate')
             : errors.endDateIsInvalid
-            ? t('common:dateSelector.errorDateFormat')
-            : undefined
+              ? t('common:dateSelector.errorDateFormat')
+              : undefined
         }
       />
     </div>

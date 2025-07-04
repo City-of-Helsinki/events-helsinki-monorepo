@@ -1,1 +1,1 @@
-export * from './I18nNamespace.types';
+export type * from './I18nNamespace.types';

@@ -5,7 +5,6 @@ import {
   PlaceDetailsDocument,
 } from '@events-helsinki/components';
 import React from 'react';
-
 import { configure, render, screen, userEvent, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
@@ -99,7 +98,6 @@ const urlParams: UrlParams = {
 // type UrlParamKeys = keyof UrlParams;
 
 const routes = [
-  // eslint-disable-next-line max-len
   `/haku?categories=${urlParams.categories}&dateTypes=today&end=${
     urlParams.end
   }&places=${urlParams.places}&publisher=${urlParams.publisher}&start=${

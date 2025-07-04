@@ -28,7 +28,7 @@ function useLazyVenueSearchForTabCount() {
   React.useEffect(() => {
     const count =
       !loading && data
-        ? (data as SearchListQuery)?.unifiedSearch?.count ?? 0
+        ? ((data as SearchListQuery)?.unifiedSearch?.count ?? 0)
         : null;
     setResultCount('Venue', count);
     // eslint-disable-next-line react-hooks/exhaustive-deps

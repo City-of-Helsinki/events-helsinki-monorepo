@@ -99,7 +99,7 @@ const urlParams: UrlParams = {
 // type UrlParamKeys = keyof UrlParams;
 
 const routes = [
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line @stylistic/max-len
   `/haku?categories=${urlParams.categories}&dateTypes=today&end=${urlParams.end}&place=${urlParams.place}&organization=${urlParams.organization}&start=${urlParams.start}&text=${urlParams.text}`,
 ];
 

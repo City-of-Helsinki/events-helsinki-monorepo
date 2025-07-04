@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 import '../config/tests/initI18n';
 import { loadEnvConfig } from '@next/env';
@@ -10,7 +9,7 @@ const trueEnv = ['true', '1', 'yes'];
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 
 // Raise the default timeout from 5000
-jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
+jest.setTimeout(isCI ? 50_000 : 10_000);
 
 loadEnvConfig(process.cwd());
 
@@ -35,12 +34,14 @@ jest.mock('ics', () => {
 });
 
 // Mock the NextJS-router
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 jest.mock('next/router', () => require('next-router-mock'));
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 jest.mock('next/dist/client/router', () => require('next-router-mock'));
 
 // Mock next/head
 jest.mock('next/head', () => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const ReactDOMServer = require('react-dom/server');
   return {
     __esModule: true,
@@ -60,6 +61,7 @@ jest.mock('next/head', () => {
   };
 });
 
+// eslint-disable-next-line @stylistic/max-len
 // https://stackoverflow.com/questions/67872622/jest-spyon-not-working-on-index-file-cannot-redefine-property/69951703#69951703
 jest.mock('../src/hooks/useLocale', () => ({
   __esModule: true,

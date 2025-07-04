@@ -1,9 +1,9 @@
-import merge from 'lodash/merge';
-import event from './event/resolvers';
-import keyword from './keyword/resolvers';
-import neighborhood from './neighborhood/resolvers';
-import organization from './organization/resolvers';
-import place from './place/resolvers';
+import merge from 'lodash/merge.js';
+import event from './event/resolvers.js';
+import keyword from './keyword/resolvers.js';
+import neighborhood from './neighborhood/resolvers.js';
+import organization from './organization/resolvers.js';
+import place from './place/resolvers.js';
 
 const resolvers = merge(event, keyword, neighborhood, organization, place);
 

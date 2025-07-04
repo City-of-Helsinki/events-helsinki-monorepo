@@ -19,7 +19,6 @@ export function useAdvancedSearchFormState() {
   );
   const [minAgeInput, setMinAgeInput] = React.useState('');
   const [maxAgeInput, setMaxAgeInput] = React.useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [placeInput, setPlaceInput] = React.useState('');
 
   const [selectedDateTypes, setSelectedDateTypes] = React.useState<string[]>(

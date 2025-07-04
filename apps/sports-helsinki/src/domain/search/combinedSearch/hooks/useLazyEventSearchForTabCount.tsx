@@ -36,7 +36,7 @@ function useLazyEventSearchForTabCount({
   React.useEffect(() => {
     const count =
       !loading && data
-        ? ((data as EventListQuery)?.eventList?.meta.count as number) ?? 0
+        ? (((data as EventListQuery)?.eventList?.meta.count as number) ?? 0)
         : null;
     setResultCount(eventType, count);
     // eslint-disable-next-line react-hooks/exhaustive-deps

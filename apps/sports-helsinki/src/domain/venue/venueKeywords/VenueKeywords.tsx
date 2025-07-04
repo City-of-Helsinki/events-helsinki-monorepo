@@ -1,4 +1,3 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 import type { Venue } from '@events-helsinki/components';
 import {
   KeywordTag,

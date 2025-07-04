@@ -1,21 +1,21 @@
-import AppConfig from '../../config/AppConfig';
-import { Sources } from '../../contants/constants';
+import AppConfig from '../../config/AppConfig.js';
+import { Sources } from '../../contants/constants.js';
 import type {
   TprekUnit,
   TprekUnitWithoutNull,
   TranslatableVenueDetails,
   TranslatedVenueDetails,
-} from '../../types';
-import type { TranslatableFieldsFor } from '../../utils/utils';
+} from '../../types.js';
+import type { TranslatableFieldsFor } from '../../utils/utils.js';
 import {
   formAccessibilitySentences,
   formTranslationObject,
   getPointFromLongAndLat,
   getTprekId,
   translateUnenrichedVenue,
-} from '../../utils/utils';
-import type VenueEnricher from '../enrichers/VenueEnricher';
-import VenueResolverIntegration from './VenueResolverIntegration';
+} from '../../utils/utils.js';
+import type VenueEnricher from '../enrichers/VenueEnricher.js';
+import VenueResolverIntegration from './VenueResolverIntegration.js';
 
 type Config<I, O> = {
   enrichers: VenueEnricher<I, O>[];
@@ -81,16 +81,26 @@ export default class VenueServiceMapIntegration extends VenueResolverIntegration
       postalCode: data?.address_zip ?? null,
       image: data?.picture_url ?? null,
       position: getPointFromLongAndLat(data?.longitude, data?.latitude),
-      description: unitFieldTranslationsObject('desc'),
-      shortDescription: unitFieldTranslationsObject('short_desc'),
+      description: unitFieldTranslationsObject(
+        'desc' as TranslatableFieldsFor<TprekUnitWithoutNull>
+      ),
+      shortDescription: unitFieldTranslationsObject(
+        'short_desc' as TranslatableFieldsFor<TprekUnitWithoutNull>
+      ),
       displayedServiceOwner: unitFieldTranslationsObject(
-        'displayed_service_owner'
+        'displayed_service_owner' as TranslatableFieldsFor<TprekUnitWithoutNull>
       ),
       displayedServiceOwnerType: data?.displayed_service_owner_type ?? null,
       name: unitFieldTranslationsObject('name'),
-      streetAddress: unitFieldTranslationsObject('street_address'),
-      addressLocality: unitFieldTranslationsObject('address_city'),
-      addressPostalFull: unitFieldTranslationsObject('address_postal_full'),
+      streetAddress: unitFieldTranslationsObject(
+        'street_address' as TranslatableFieldsFor<TprekUnitWithoutNull>
+      ),
+      addressLocality: unitFieldTranslationsObject(
+        'address_city' as TranslatableFieldsFor<TprekUnitWithoutNull>
+      ),
+      addressPostalFull: unitFieldTranslationsObject(
+        'address_postal_full' as TranslatableFieldsFor<TprekUnitWithoutNull>
+      ),
       infoUrl: unitFieldTranslationsObject('www'),
       accessibilitySentences: formAccessibilitySentences(data),
       telephone: data?.phone ?? null,

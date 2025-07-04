@@ -21,4 +21,4 @@ const i18nRoutes = {
   ],
 };
 
-module.exports = i18nRoutes;
+export default i18nRoutes;

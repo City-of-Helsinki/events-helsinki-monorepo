@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { GraphQLResolveInfo } from 'graphql';
-import type VenueContext from '../context/VenueContext';
-import type { Source } from '../types';
-import venueQueryResolver from './venueQueryResolver';
+import type VenueContext from '../context/VenueContext.js';
+import type { Source } from '../types.js';
+import venueQueryResolver from './venueQueryResolver.js';
 
 // Implementation is a bit ugly here.
 //

@@ -1,5 +1,5 @@
-import AppConfig from '../config/AppConfig';
-import createVenueSchema from './venue/venueSchema';
+import AppConfig from '../config/AppConfig.js';
+import createVenueSchema from './venue/venueSchema.js';
 
 const typeDefs = [
   // paginationSchema,

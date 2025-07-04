@@ -18,6 +18,7 @@ import { RetryLink } from '@apollo/client/link/retry';
 import { relayStylePagination } from '@apollo/client/utilities';
 import * as Sentry from '@sentry/browser';
 import fetch from 'cross-fetch';
+import type { GraphQLFormattedError } from 'graphql';
 import capitalize from 'lodash/capitalize';
 
 import { graphqlClientLogger } from '../loggers/logger';
@@ -32,7 +33,6 @@ import {
   MutableReference,
   sortMenuItems,
 } from './utils';
-import { GraphQLFormattedError } from 'graphql';
 
 export type EventsFederationApolloClientConfig = {
   federationGraphqlEndpoint: string;

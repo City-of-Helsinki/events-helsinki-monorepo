@@ -48,12 +48,15 @@ function useSuperEventLazyLoad(event?: EventFieldsFragment) {
         status: 'resolved',
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     event,
     superEventId,
     superEventData,
     superEventSearch,
-    // superEventLoading, // ...should be 1 of the deps here, but e.g. when http410 errors occurs, with it, this fetcher goes in a forever loop.
+    // ...should be 1 of the deps here, but e.g. when http410 errors occurs,
+    // with it, this fetcher goes in a forever loop.
+    // superEventLoading,
   ]);
 
   return {

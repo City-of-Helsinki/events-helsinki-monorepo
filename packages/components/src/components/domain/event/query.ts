@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export const QUERY_EVENT_DETAILS = gql`
   fragment localizedFields on LocalizedObject {
     en

@@ -173,42 +173,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/server@npm:4.7.5":
-  version: 4.7.5
-  resolution: "@apollo/server@npm:4.7.5"
-  dependencies:
-    "@apollo/cache-control-types": "npm:^1.0.3"
-    "@apollo/server-gateway-interface": "npm:^1.1.1"
-    "@apollo/usage-reporting-protobuf": "npm:^4.1.1"
-    "@apollo/utils.createhash": "npm:^2.0.0"
-    "@apollo/utils.fetcher": "npm:^2.0.0"
-    "@apollo/utils.isnodelike": "npm:^2.0.0"
-    "@apollo/utils.keyvaluecache": "npm:^2.1.0"
-    "@apollo/utils.logger": "npm:^2.0.0"
-    "@apollo/utils.usagereporting": "npm:^2.1.0"
-    "@apollo/utils.withrequired": "npm:^2.0.0"
-    "@graphql-tools/schema": "npm:^9.0.0"
-    "@josephg/resolvable": "npm:^1.0.0"
-    "@types/express": "npm:^4.17.13"
-    "@types/express-serve-static-core": "npm:^4.17.30"
-    "@types/node-fetch": "npm:^2.6.1"
-    async-retry: "npm:^1.2.1"
-    body-parser: "npm:^1.20.0"
-    cors: "npm:^2.8.5"
-    express: "npm:^4.17.1"
-    loglevel: "npm:^1.6.8"
-    lru-cache: "npm:^7.10.1"
-    negotiator: "npm:^0.6.3"
-    node-abort-controller: "npm:^3.1.1"
-    node-fetch: "npm:^2.6.7"
-    uuid: "npm:^9.0.0"
-    whatwg-mimetype: "npm:^3.0.0"
-  peerDependencies:
-    graphql: ^16.6.0
-  checksum: c248245020f302afa7bbef65759a52a05ea1c121fd66791fc600d33e0309ea7d560b9e6ea2a06898c1005eafe0acd998e5c51928706e9bc476e1f721fe60ef98
-  languageName: node
-  linkType: hard
-
 "@apollo/server@npm:^4.11.0":
   version: 4.12.2
   resolution: "@apollo/server@npm:4.12.2"
@@ -261,16 +225,6 @@ __metadata:
   dependencies:
     "@apollo/protobufjs": "npm:1.2.7"
   checksum: 7b6ed9cd6aab20d239363914750090039babda6f1809df218b58f22a73c6666060f6aa25e531912e57712fbacf37cebf4696b1d3acb16c1ab3d3ce10a7f69bac
-  languageName: node
-  linkType: hard
-
-"@apollo/utils.createhash@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "@apollo/utils.createhash@npm:2.0.1"
-  dependencies:
-    "@apollo/utils.isnodelike": "npm:^2.0.1"
-    sha.js: "npm:^2.4.11"
-  checksum: 9827fb314c11196a1b1fa0695e810d09399eb813cdaa92c6af1cecf7668410acd92d28fe58fc47c8a37b24eee530a54e126a324e857bf334dafda1558e5cf0c7
   languageName: node
   linkType: hard
 
@@ -4853,13 +4807,6 @@ __metadata:
   version: 0.7.0
   resolution: "@jonkoops/matomo-tracker@npm:0.7.0"
   checksum: 9dbbd2d96be0ea5fdc2fca9504a61a85c4164f150b7a10934994d645a0d8f6cfe02255a9747c46a39ee9e2b6ac8e02f554d8bdd4b0c090f41c91168cc0269eac
-  languageName: node
-  linkType: hard
-
-"@josephg/resolvable@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "@josephg/resolvable@npm:1.0.1"
-  checksum: 353f0b60a3eddb4eca2d34798debb7c6fdf164be7f91df076d162e90cde8a684454ab5ffcc4f03f14e92e1fd4ed99c2ca7a014299db8de57b0ed56e1d47ba85a
   languageName: node
   linkType: hard
 
@@ -9968,7 +9915,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.20.2, body-parser@npm:^1.20.0":
+"body-parser@npm:1.20.2":
   version: 1.20.2
   resolution: "body-parser@npm:1.20.2"
   dependencies:
@@ -13667,7 +13614,7 @@ __metadata:
   resolution: "events-graphql-proxy@workspace:proxies/events-graphql-proxy"
   dependencies:
     "@apollo/datasource-rest": "npm:6.0.1"
-    "@apollo/server": "npm:4.7.5"
+    "@apollo/server": "npm:^4.11.0"
     "@apollo/subgraph": "npm:2.4.8"
     "@babel/core": "npm:7.27.7"
     "@babel/plugin-syntax-flow": "npm:7.27.1"
@@ -14006,7 +13953,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:4.18.2, express@npm:^4.17.1":
+"express@npm:4.18.2":
   version: 4.18.2
   resolution: "express@npm:4.18.2"
   dependencies:
@@ -24584,7 +24531,6 @@ __metadata:
   dependencies:
     "@apollo/client": "npm:3.7.16"
     "@apollo/datasource-rest": "npm:6.0.1"
-    "@apollo/server": "npm:4.7.5"
     "@apollo/subgraph": "npm:2.4.8"
     "@as-integrations/next": "npm:2.0.0"
     "@babel/core": "npm:7.27.7"
@@ -27080,6 +27026,7 @@ __metadata:
   resolution: "venue-graphql-proxy@workspace:proxies/venue-graphql-proxy"
   dependencies:
     "@apollo/datasource-rest": "npm:6.0.1"
+    "@apollo/server": "npm:^4.11.0"
     "@apollo/subgraph": "npm:2.4.8"
     "@babel/core": "npm:7.27.7"
     "@babel/plugin-syntax-flow": "npm:7.27.1"

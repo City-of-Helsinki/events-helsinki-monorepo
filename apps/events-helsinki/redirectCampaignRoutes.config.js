@@ -14,4 +14,4 @@ const redirectCampaignRoutes = {
   // None yet
 };
 
-module.exports = redirectCampaignRoutes;
+export default redirectCampaignRoutes;

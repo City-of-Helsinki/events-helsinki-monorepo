@@ -132,7 +132,6 @@ const getFilterDates = ({
  * @param {object} filterOptions
  * @return {object}
  */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getEventSearchVariables = ({
   include,
   language,
@@ -151,7 +150,6 @@ export const getEventSearchVariables = ({
   superEventType?: string[];
   superEvent?: string;
   place?: string;
-  // eslint-disable-next-line sonarjs/cognitive-complexity
 }): QueryEventListArgs => {
   const {
     categories,
@@ -404,6 +402,7 @@ export const getCardUrl = (
 
 export const getOrganizationSearchUrl = (
   event: EventFields,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   router: NextRouter,
   locale: AppLanguage
 ): string => {
@@ -415,7 +414,9 @@ export const getOrganizationSearchUrl = (
 };
 
 export const getHelsinkiOnlySearchUrl = (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   source: EventFields | Venue,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   router: NextRouter,
   locale: AppLanguage
 ): string => {

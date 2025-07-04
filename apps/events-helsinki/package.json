@@ -2,6 +2,7 @@
   "name": "events-helsinki",
   "version": "1.24.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "?share-static-hardlink": "echo 'Use this command to link assets... from shared static folder'",
     "?share-static-symlink": "echo 'Use this command to link assets... from shared static folder'",

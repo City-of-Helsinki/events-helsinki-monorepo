@@ -11,7 +11,7 @@ const trueEnv = ['true', '1', 'yes'];
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 
 // Raise the default timeout from 5000
-jest.setTimeout(process.env?.CI ? 50_000 : 10_000);
+jest.setTimeout(isCI ? 50_000 : 10_000);
 
 loadEnvConfig(process.cwd());
 
@@ -41,7 +41,6 @@ jest.mock('next/dist/client/router', () => require('next-router-mock'));
 
 // Mock next/head
 jest.mock('next/head', () => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const ReactDOMServer = require('react-dom/server');
   return {
     __esModule: true,

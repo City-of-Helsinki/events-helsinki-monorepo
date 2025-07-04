@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const { pascalCase } = require('change-case-all');
+import { pascalCase } from 'change-case-all';
 
 function startsWithDigit(inputString) {
   return /^\d/.test(inputString);
@@ -19,4 +18,4 @@ function pascalCaseWithUnderscoreBeforeLeadingDigit(inputString) {
   return `${prefix}${pascalCasedInput}` || inputString;
 }
 
-module.exports = pascalCaseWithUnderscoreBeforeLeadingDigit;
+export default pascalCaseWithUnderscoreBeforeLeadingDigit;

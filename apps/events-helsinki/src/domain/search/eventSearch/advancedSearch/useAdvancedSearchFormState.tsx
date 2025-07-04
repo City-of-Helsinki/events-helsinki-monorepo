@@ -14,7 +14,7 @@ export function useAdvancedSearchFormState() {
   );
 
   const [categoryInput, setCategoryInput] = React.useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [placeInput, setPlaceInput] = React.useState('');
 
   const [selectedDateTypes, setSelectedDateTypes] = React.useState<string[]>(

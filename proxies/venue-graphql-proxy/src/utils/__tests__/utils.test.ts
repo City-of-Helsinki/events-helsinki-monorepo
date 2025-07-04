@@ -1,5 +1,5 @@
-import type VenueContext from 'context/VenueContext.js';
 import AppConfig from '../../config/AppConfig.js';
+import type VenueContext from '../../context/VenueContext.js';
 import type { UnenrichedUnitFields } from '../../resolvers/integrations/VenueServiceMapIntegration.js';
 import VenueServiceMapIntegration from '../../resolvers/integrations/VenueServiceMapIntegration.js';
 import type {

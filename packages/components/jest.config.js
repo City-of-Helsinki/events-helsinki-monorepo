@@ -3,8 +3,8 @@ import { pathsToModuleNameMapper } from 'ts-jest';
 
 import { getJestCachePath } from '../../cache.config';
 
-import { name } from './package.json';
-import { compilerOptions as baseTsConfig } from './tsconfig.json';
+import { name } from './package.json' with { type: 'json' };
+import { compilerOptions as baseTsConfig } from './tsconfig.json' with { type: 'json' };
 
 // Take the paths from tsconfig automatically from base tsconfig.json
 // @link https://kulshekhar.github.io/ts-jest/docs/paths-mapping

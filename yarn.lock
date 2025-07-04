@@ -408,16 +408,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@as-integrations/next@npm:2.0.0":
-  version: 2.0.0
-  resolution: "@as-integrations/next@npm:2.0.0"
-  peerDependencies:
-    "@apollo/server": ^4.0.0
-    next: ^12.0.0 || ^13.0.0
-  checksum: d32dfe65f3538419636e8084c57e79b373e6b6223da9cd054cf9f4b0e2397ea76e07dd08b60710ba3846a7d1f52afb8b89554016367332c044fa1a43932eb363
-  languageName: node
-  linkType: hard
-
 "@asamuzakjp/css-color@npm:^3.2.0":
   version: 3.2.0
   resolution: "@asamuzakjp/css-color@npm:3.2.0"
@@ -3077,6 +3067,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@eslint/js@npm:9.30.1":
+  version: 9.30.1
+  resolution: "@eslint/js@npm:9.30.1"
+  checksum: b57a3335d4cc180407cd6eadfa5d03e195a8404c93fbf6ba364f777528ec12e2941c5c65bbc6408bbe6c2504ea34ccd274d4913c100fd8fafdf053538074363a
+  languageName: node
+  linkType: hard
+
 "@eslint/object-schema@npm:^2.1.6":
   version: 2.1.6
   resolution: "@eslint/object-schema@npm:2.1.6"
@@ -3118,6 +3115,7 @@ __metadata:
   resolution: "@events-helsinki/common-tests@workspace:packages/common-tests"
   dependencies:
     "@events-helsinki/eslint-config-bases": "workspace:^"
+    "@testing-library/dom": "npm:^10.0.0"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/testcafe": "npm:^5.0.1"
     "@types/jest": "npm:^30.0.0"
@@ -3294,8 +3292,10 @@ __metadata:
   resolution: "@events-helsinki/eslint-config-bases@workspace:packages/eslint-config-bases"
   dependencies:
     "@eslint/compat": "npm:1.3.1"
+    "@eslint/js": "npm:9.30.1"
     "@graphql-eslint/eslint-plugin": "npm:^4.4.0"
     "@stylistic/eslint-plugin": "npm:5.1.0"
+    "@testing-library/dom": "npm:^10.0.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/react-hooks": "npm:^8.0.1"
@@ -3320,6 +3320,7 @@ __metadata:
     eslint-plugin-regexp: "npm:^2.9.0"
     eslint-plugin-sonarjs: "npm:^3.0.4"
     eslint-plugin-storybook: "npm:^9.0.14"
+    eslint-plugin-testcafe-community: "npm:2.0.0"
     eslint-plugin-testing-library: "npm:^7.5.3"
     espree: "npm:10.4.0"
     globals: "npm:16.2.0"
@@ -3328,6 +3329,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     rimraf: "npm:6.0.1"
+    storybook: "npm:^9.0.15"
     typescript: "npm:^5.8.3"
     typescript-eslint: "npm:8.35.1"
   peerDependencies:
@@ -3335,7 +3337,7 @@ __metadata:
     graphql: ^16.0.0
     react: ^17.0.2 || ^18.0.0
     react-dom: ^17.0.2 || ^18.0.0
-    typescript: ^4.5.2
+    typescript: ^5.8.3
   peerDependenciesMeta:
     graphql:
       optional: true
@@ -5005,6 +5007,15 @@ __metadata:
   dependencies:
     fast-glob: "npm:3.3.1"
   checksum: 63697208f014d4e1fd151b99da7e9cc1d0b48c26dfb987bd970ed98c228d85c8447f724a84b2cde04cba4fc7471d3c65eea38d9d84b04d642624d9bc53320923
+  languageName: node
+  linkType: hard
+
+"@next/eslint-plugin-next@npm:15.3.5":
+  version: 15.3.5
+  resolution: "@next/eslint-plugin-next@npm:15.3.5"
+  dependencies:
+    fast-glob: "npm:3.3.1"
+  checksum: ed7df990ebbf48f498cbc80b6c58e170d78516172360a3e2d41c51b6d5abab536dc3f64edf883ac123853302a974838781ca63e2957636332ce699b4f4d18f56
   languageName: node
   linkType: hard
 
@@ -7117,7 +7128,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^10.4.0":
+"@testing-library/dom@npm:^10.0.0, @testing-library/dom@npm:^10.4.0":
   version: 10.4.0
   resolution: "@testing-library/dom@npm:10.4.0"
   dependencies:
@@ -13645,6 +13656,7 @@ __metadata:
     ts-jest: "npm:29.4.0"
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"
+    tsconfig-paths-webpack-plugin: "npm:4.2.0"
     tsx: "npm:4.20.3"
     typescript: "npm:^5.8.3"
     webpack: "npm:5.99.9"
@@ -13730,6 +13742,7 @@ __metadata:
     "@events-helsinki/common-i18n": "workspace:^"
     "@events-helsinki/common-tests": "workspace:^"
     "@events-helsinki/components": "workspace:^"
+    "@events-helsinki/eslint-config-bases": "workspace:^"
     "@faker-js/faker": "npm:^9.8.0"
     "@ffmpeg-installer/ffmpeg": "npm:^1.1.0"
     "@graphql-codegen/cli": "npm:5.0.7"
@@ -13739,13 +13752,14 @@ __metadata:
     "@graphql-codegen/typescript-react-apollo": "npm:4.3.3"
     "@graphql-codegen/typescript-resolvers": "npm:^4.5.1"
     "@next/env": "npm:15.3.4"
+    "@next/eslint-plugin-next": "npm:15.3.5"
     "@sentry/browser": "npm:^7.56.0"
     "@sentry/nextjs": "npm:7.90.0"
     "@sentry/react": "npm:7.56.0"
     "@size-limit/file": "npm:11.2.0"
     "@storybook/react": "npm:9.0.14"
     "@svgr/webpack": "npm:8.0.1"
-    "@testing-library/dom": "npm:^10.4.0"
+    "@testing-library/dom": "npm:^10.0.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/testcafe": "npm:^5.0.1"
@@ -13832,6 +13846,7 @@ __metadata:
     sanitize-html: "npm:^2.11.0"
     sass: "npm:^1.89.2"
     size-limit: "npm:11.2.0"
+    storybook: "npm:^9.0.14"
     symlink-dir: "npm:6.0.5"
     sync-directory: "npm:6.0.5"
     testcafe: "npm:^3.7.2"
@@ -15519,6 +15534,7 @@ __metadata:
     "@events-helsinki/common-i18n": "workspace:^"
     "@events-helsinki/common-tests": "workspace:^"
     "@events-helsinki/components": "workspace:^"
+    "@events-helsinki/eslint-config-bases": "workspace:^"
     "@faker-js/faker": "npm:^9.8.0"
     "@ffmpeg-installer/ffmpeg": "npm:^1.1.0"
     "@graphql-codegen/cli": "npm:5.0.7"
@@ -15528,13 +15544,14 @@ __metadata:
     "@graphql-codegen/typescript-react-apollo": "npm:4.3.3"
     "@graphql-codegen/typescript-resolvers": "npm:^4.5.1"
     "@next/env": "npm:15.3.4"
+    "@next/eslint-plugin-next": "npm:15.3.5"
     "@sentry/browser": "npm:^7.56.0"
     "@sentry/nextjs": "npm:7.90.0"
     "@sentry/react": "npm:7.56.0"
     "@size-limit/file": "npm:11.2.0"
     "@storybook/react": "npm:9.0.14"
     "@svgr/webpack": "npm:8.0.1"
-    "@testing-library/dom": "npm:^10.4.0"
+    "@testing-library/dom": "npm:^10.0.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/testcafe": "npm:^5.0.1"
@@ -15621,6 +15638,7 @@ __metadata:
     sanitize-html: "npm:^2.11.0"
     sass: "npm:^1.89.2"
     size-limit: "npm:11.2.0"
+    storybook: "npm:^9.0.14"
     symlink-dir: "npm:6.0.5"
     sync-directory: "npm:6.0.5"
     testcafe: "npm:^3.7.2"
@@ -24542,7 +24560,6 @@ __metadata:
     "@apollo/client": "npm:3.7.16"
     "@apollo/datasource-rest": "npm:6.0.1"
     "@apollo/subgraph": "npm:2.4.8"
-    "@as-integrations/next": "npm:2.0.0"
     "@babel/core": "npm:7.27.7"
     "@babel/helper-environment-visitor": "npm:^7.24.7"
     "@commitlint/cli": "npm:^19.8.1"
@@ -24550,6 +24567,7 @@ __metadata:
     "@events-helsinki/common-i18n": "workspace:^"
     "@events-helsinki/common-tests": "workspace:^"
     "@events-helsinki/components": "workspace:^"
+    "@events-helsinki/eslint-config-bases": "workspace:^"
     "@faker-js/faker": "npm:^9.8.0"
     "@ffmpeg-installer/ffmpeg": "npm:^1.1.0"
     "@graphql-codegen/cli": "npm:5.0.7"
@@ -24559,13 +24577,14 @@ __metadata:
     "@graphql-codegen/typescript-react-apollo": "npm:4.3.3"
     "@graphql-codegen/typescript-resolvers": "npm:^4.5.1"
     "@next/env": "npm:15.3.4"
+    "@next/eslint-plugin-next": "npm:15.3.5"
     "@sentry/browser": "npm:^7.56.0"
     "@sentry/nextjs": "npm:7.90.0"
     "@sentry/react": "npm:7.56.0"
     "@size-limit/file": "npm:11.2.0"
     "@storybook/react": "npm:9.0.14"
     "@svgr/webpack": "npm:8.0.1"
-    "@testing-library/dom": "npm:^10.4.0"
+    "@testing-library/dom": "npm:^10.0.0"
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.3.0"
     "@testing-library/testcafe": "npm:^5.0.1"
@@ -24657,6 +24676,7 @@ __metadata:
     sanitize-html: "npm:^2.11.0"
     sass: "npm:^1.89.2"
     size-limit: "npm:11.2.0"
+    storybook: "npm:^9.0.14"
     symlink-dir: "npm:6.0.5"
     sync-directory: "npm:6.0.5"
     testcafe: "npm:^3.7.2"
@@ -24827,6 +24847,32 @@ __metadata:
   bin:
     storybook: ./bin/index.cjs
   checksum: 092768265611baa74a93f60fdbf71819c1539c24365cbe772ee951f722930c27dffaab2ce109d38c913d9d36cdbe46f3c436800fc50a03d2e4e5f43d5cfedba0
+  languageName: node
+  linkType: hard
+
+"storybook@npm:^9.0.14, storybook@npm:^9.0.15":
+  version: 9.0.15
+  resolution: "storybook@npm:9.0.15"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+    "@testing-library/jest-dom": "npm:^6.6.3"
+    "@testing-library/user-event": "npm:^14.6.1"
+    "@vitest/expect": "npm:3.2.4"
+    "@vitest/spy": "npm:3.2.4"
+    better-opn: "npm:^3.0.2"
+    esbuild: "npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0"
+    esbuild-register: "npm:^3.5.0"
+    recast: "npm:^0.23.5"
+    semver: "npm:^7.6.2"
+    ws: "npm:^8.18.0"
+  peerDependencies:
+    prettier: ^2 || ^3
+  peerDependenciesMeta:
+    prettier:
+      optional: true
+  bin:
+    storybook: ./bin/index.cjs
+  checksum: ff19239262167c09683910e018bdb42bfbc735b50d7d9e195f694bb668b8b143cf259573aa1e5e692870e9f244b3b2500d42042fc2c74393b53a5f190732b5fd
   languageName: node
   linkType: hard
 
@@ -27066,6 +27112,7 @@ __metadata:
     ts-jest: "npm:29.4.0"
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"
+    tsconfig-paths-webpack-plugin: "npm:4.2.0"
     tsx: "npm:4.20.3"
     typescript: "npm:^5.8.3"
     webpack: "npm:5.99.9"

@@ -4,12 +4,26 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
     "jsx": "react-jsx",
     "noEmit": false,
     "incremental": true,
     "paths": {}
   },
-  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "dist",
+    "build"
+  ],
+  "include": [
+    "src"
+  ],
 }

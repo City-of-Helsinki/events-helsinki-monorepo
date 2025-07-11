@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches snapshot 1`] = `
 <div
-  class="categoryFilter"
+  class="_categoryFilter_37c9fe"
 >
   <a
     href="/test"

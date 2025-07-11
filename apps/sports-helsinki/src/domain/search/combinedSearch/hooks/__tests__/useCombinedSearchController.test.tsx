@@ -1,15 +1,9 @@
-import * as nextNavigation from 'next/navigation';
 import mockRouter from 'next-router-mock';
 import qs from 'query-string';
 import React from 'react';
 import { render } from '@/test-utils';
 import type { CombinedSearchAdapterInput } from '../../types';
 import { useCombinedSearchController } from '../useCombinedSearchController';
-jest.mock('next/navigation', () => ({
-  __esModule: true,
-  ...jest.requireActual('next/navigation'),
-}));
-const useSearchParamsSpy = jest.spyOn(nextNavigation, 'useSearchParams');
 
 const outputQuery: CombinedSearchAdapterInput = {
   text: 'test text',
@@ -78,13 +72,6 @@ describe('updateRouteToSearchPage', () => {
     ],
   ])('pushes the user to a desired url', (searchParams, outputSearchParams) => {
     mockRouter.setCurrentUrl(`/?${searchParams.toString()}`);
-    // TODO: Remove the useSearchParamsSpy when mockRouter supports next/navigation.
-    useSearchParamsSpy.mockImplementation(
-      () =>
-        new nextNavigation.ReadonlyURLSearchParams(
-          new URLSearchParams(searchParams.toString())
-        )
-    );
     render(<UpdateRouteToSearchPageComponent />);
     expect(qs.stringify(mockRouter.query)).toBe(outputSearchParams);
   });

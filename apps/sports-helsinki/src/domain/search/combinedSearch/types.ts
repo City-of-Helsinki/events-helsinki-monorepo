@@ -140,7 +140,7 @@ export type VenueSearchParams = Pick<
 export type CombinedSearchAdapterOutput = EventSearchParams | VenueSearchParams;
 
 export type CombinedSearchAdapter<
-  TCombinedSearchAdapterOutput extends CombinedSearchAdapterOutput
+  TCombinedSearchAdapterOutput extends CombinedSearchAdapterOutput,
 > = {
   getQueryVariables: () => TCombinedSearchAdapterOutput;
 } & TCombinedSearchAdapterOutput;

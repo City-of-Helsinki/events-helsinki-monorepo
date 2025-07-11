@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { render, screen } from '@/test-utils';
+import { render, screen } from '../../../../../../config/vitest/test-utils';
 import ResultsInfo from '../ResultsInfo';
 
 it('events with 0 results matches snapshot for no results', () => {

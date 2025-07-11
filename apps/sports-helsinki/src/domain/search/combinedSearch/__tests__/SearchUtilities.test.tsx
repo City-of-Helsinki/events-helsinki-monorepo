@@ -33,8 +33,8 @@ const getTabsContextValue = ({
     [EventTypeId.Course]: 999,
     ...resultCounts,
   },
-  setActiveTab: jest.fn(),
-  setResultCount: jest.fn(),
+  setActiveTab: vitest.fn(),
+  setResultCount: vitest.fn(),
 });
 
 const expectedSimilarVenues = fakeVenues(3);

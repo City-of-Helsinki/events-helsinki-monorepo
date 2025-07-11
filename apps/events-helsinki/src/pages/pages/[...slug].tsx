@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-
-import type { NormalizedCacheObject } from '@apollo/client';
+import type { NormalizedCacheObject } from '@apollo/client/core/index.js';
 import type {
   AppLanguage,
   PreviewDataObject,
@@ -215,6 +213,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
           revalidate: AppConfig.defaultRevalidate,
         };
       } catch (e) {
+        logger.error('Error while generating content page', e);
         return {
           props: {
             error: {

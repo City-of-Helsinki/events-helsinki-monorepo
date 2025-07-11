@@ -42,6 +42,8 @@ function useEventSearchPageQuery(eventType: EventTypeId) {
           },
         });
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('handleLoadMore', 'error in fetchMore', e);
         toast.error(t('search:errorLoadMore'));
       }
     }

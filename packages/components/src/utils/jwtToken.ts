@@ -3,7 +3,7 @@ export const getPreviewDataMaxAge = (token: string): number => {
     const content = JSON.parse(atob(token.split('.')[1]));
     // value in seconds
     return Number(content.exp) - Number(content.iat);
-  } catch (error) {
+  } catch (_) {
     return 0;
   }
 };
@@ -19,7 +19,7 @@ export const getExpirationTime = (token?: string, date?: Date): number => {
     const expires = Number(content.exp) - refDate.getTime() / 1000;
     // if negative => expired
     return expires > 0 ? expires : 0;
-  } catch (error) {
+  } catch (_) {
     return 0;
   }
 };

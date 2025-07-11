@@ -1,15 +1,15 @@
-const path = require('path');
-const fs = require('fs');
+import { resolve } from 'path';
+import { realpathSync, existsSync } from 'fs';
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
-const appDirectory = fs.realpathSync(process.cwd());
-const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
+const appDirectory = realpathSync(process.cwd());
+const resolveApp = (relativePath) => resolve(appDirectory, relativePath);
 
 // Resolve file paths in the same order as webpack
 const resolveModule = (resolveFn, filePath) => {
   const extension = moduleFileExtensions.find((extension) =>
-    fs.existsSync(resolveFn(`${filePath}.${extension}`))
+    existsSync(resolveFn(`${filePath}.${extension}`))
   );
 
   if (extension) {
@@ -33,7 +33,5 @@ const moduleFileExtensions = [
   'jsx',
 ];
 
-module.exports = {
-  appBuild: resolveApp('build'),
-  appIndexJs: resolveModule(resolveApp, 'src/index'),
-};
+export const appBuild = resolveApp('build');
+export const appIndexJs = resolveModule(resolveApp, 'src/index');

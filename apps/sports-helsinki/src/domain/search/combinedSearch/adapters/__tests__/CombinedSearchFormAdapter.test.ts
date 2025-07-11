@@ -68,7 +68,7 @@ describe('CombinedSearchFormAdapter', () => {
     it('clean function calls all field specific clean functions', () => {
       const adapter = new CombinedSearchFormAdapter(locale, input);
       const cleanFunctionSpies = cleanFunctionNames.map((cleanFunctionName) =>
-        jest.spyOn(adapter, cleanFunctionName)
+        vitest.spyOn(adapter, cleanFunctionName)
       );
       cleanFunctionSpies.forEach((cleanFunctionSpy) =>
         expect(cleanFunctionSpy).not.toHaveBeenCalled()
@@ -81,7 +81,7 @@ describe('CombinedSearchFormAdapter', () => {
 
     it('CombinedSearchFormAdapter constructor calls clean function', () => {
       const adapterPrototype = CombinedSearchFormAdapter.prototype;
-      const cleanFunctionSpy = jest.spyOn(adapterPrototype, 'clean');
+      const cleanFunctionSpy = vitest.spyOn(adapterPrototype, 'clean');
       expect(cleanFunctionSpy).not.toHaveBeenCalled();
       new CombinedSearchFormAdapter(locale, input);
       expect(cleanFunctionSpy).toHaveBeenCalled();
@@ -91,7 +91,7 @@ describe('CombinedSearchFormAdapter', () => {
   describe('getURLQuery', () => {
     it('collects the form values from the URL but does not exclude the extra params', () => {
       const adapter = new CombinedSearchFormAdapter(locale, input);
-      // eslint-disable-next-line jest/prefer-strict-equal
+      // eslint-disable-next-line vitest/prefer-strict-equal
       expect(adapter.getURLQuery()).toEqual({
         ...outputQuery,
         ...extraParamsInOutputQuery,
@@ -102,7 +102,7 @@ describe('CombinedSearchFormAdapter', () => {
   describe('getFormValues', () => {
     it('returns only the form values without any possible extra params given in a URL', () => {
       const adapter = new CombinedSearchFormAdapter(locale, input);
-      // eslint-disable-next-line jest/prefer-strict-equal
+      // eslint-disable-next-line vitest/prefer-strict-equal
       expect(adapter.getFormValues()).toEqual(outputQuery);
     });
   });
@@ -111,7 +111,7 @@ describe('CombinedSearchFormAdapter', () => {
     it.each<
       [
         keyof ReturnType<CombinedSearchFormAdapter['getSearchVariables']>,
-        CombinedSearchAdapterOutput
+        CombinedSearchAdapterOutput,
       ]
     >([
       [
@@ -161,7 +161,9 @@ describe('CombinedSearchFormAdapter', () => {
           publisher: null,
           publisherAncestor: null,
           include: ['keywords', 'location'],
-          // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+          // Removed to experiment:
+          // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+          // superEventType: ['umbrella', 'none'],
         },
       ],
     ])(

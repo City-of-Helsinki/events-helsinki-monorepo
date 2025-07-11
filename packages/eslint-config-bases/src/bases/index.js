@@ -1,11 +1,11 @@
-module.exports = {
-  graphqlSchema: require('./graphql-schema'),
-  jest: require('./jest'),
-  react: require('./react'),
-  regexp: require('./regexp'),
-  reactTestingLibrary: require('./rtl'),
-  sonar: require('./sonar'),
-  storybook: require('./storybook'),
-  testcafe: require('./testcafe'),
-  typescript: require('./typescript'),
-};
+export { default as graphqlSchema } from './graphql-schema.js';
+export { default as vitest } from './vitest.js';
+export { default as react } from './react.js';
+export { default as regexp } from './regexp.js';
+export { default as reactTestingLibrary } from './rtl.js';
+export { default as sonar } from './sonar.js';
+export { default as storybook } from './storybook.js';
+export { default as testcafe } from './testcafe.js';
+export { default as typescript } from './typescript.js';
+export { default as stylistic } from './stylistic.js';
+export { default as prettier } from './prettier.js';

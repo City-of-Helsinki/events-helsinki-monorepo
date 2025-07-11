@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`events with 0 results matches snapshot for no results 1`] = `
 <div>
   <div
-    class="noResultsInfo"
+    class="_noResultsInfo_d60cd5"
   >
     <div
-      class="iconWrapper"
+      class="_iconWrapper_d60cd5"
     >
       <svg
         aria-hidden="true"
@@ -25,7 +25,7 @@ exports[`events with 0 results matches snapshot for no results 1`] = `
       </svg>
     </div>
     <div
-      class="bigText"
+      class="_bigText_d60cd5"
     >
       Valitsemillasi hakuehdoilla ei löytynyt yhtään harrastusta.
     </div>

@@ -13,12 +13,14 @@ const hasGivenConsent = ClientFunction((consentCookieName: string) => {
 });
 
 export const acceptAllCookies = async (t: TestController) => {
+  // eslint-disable-next-line no-console
   console.log('allCookiesUser: acceptAllCookies!');
   await t.wait(1000).setTestSpeed(0.5);
   const cookieConsentModal = new ConsentModal();
   await cookieConsentModal.isOpened();
   await cookieConsentModal.clickAcceptAllCookies();
   const hasCookies = await hasGivenConsent(consentCookieName);
+  // eslint-disable-next-line no-console
   console.log({ hasCookies });
   await t.expect(hasCookies).ok();
 };
@@ -30,9 +32,12 @@ const userAcceptingAllCookies = Role(
     if (!hasCookies) {
       await acceptAllCookies(t);
     } else {
+      // eslint-disable-next-line no-console
       console.log('userAcceptingAllCookies: all cookies already accepted!');
+      // eslint-disable-next-line no-console
       console.log(
-        '!!!!! NOTE: There is a clientScript active in the .testcaterc.json, that presets the document.cookie to consent all cookies!'
+        '!!!!! NOTE: There is a clientScript active in the .testcaterc.json, ' +
+          'that presets the document.cookie to consent all cookies!'
       );
     }
   },

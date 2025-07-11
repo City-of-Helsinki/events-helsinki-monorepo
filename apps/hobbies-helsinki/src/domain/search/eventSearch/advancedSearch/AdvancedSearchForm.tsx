@@ -38,6 +38,7 @@ import { useAdvancedSearchContext } from './AdvancedSearchContext';
 import styles from './search.module.scss';
 import { useGoToSearch } from './useGoToSearch';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface AdvancedSearchFormProps {}
 
 /**

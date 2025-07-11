@@ -10,14 +10,9 @@ import {
 import React from 'react';
 
 import PlaceText from '../PlaceText';
+import { getPlaceDetailsFromCache } from '../utils';
 
 const DIVISIONS = ['kunta:helsinki'];
-
-const { getPlaceDetailsFromCache } = isClient
-  ? // eslint-disable-next-line @typescript-eslint/no-require-imports
-    require('../utils')
-  : /* istanbul ignore next */
-    { getPlaceDetailsFromCache: null };
 
 type Props = Omit<MultiselectDropdownProps, 'options'>;
 
@@ -41,7 +36,6 @@ const PlaceSelector: React.FC<Props> = ({
       text: searchValue.toLowerCase(),
     },
   });
-
   const placeOptions = React.useMemo(() => {
     return (placesData?.placeList.data || [])
       .map((place) => ({
@@ -53,8 +47,8 @@ const PlaceSelector: React.FC<Props> = ({
 
   const renderOptionText = (id: string) => {
     try {
-      const place = getPlaceDetailsFromCache(id);
-      return getLocalizedString(place.placeDetails.name, locale);
+      const place = isClient ? getPlaceDetailsFromCache(id) : null;
+      return getLocalizedString(place?.placeDetails.name, locale);
     } catch {
       return <PlaceText id={id} />;
     }

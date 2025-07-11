@@ -11,7 +11,7 @@ const getSecureImage = (imageUrl: string): string => {
       const url = new URL(imageUrl);
       return [imageProxyUrl, url.href].join('');
     }
-  } catch (e) {
+  } catch (_) {
     return '';
   }
 };

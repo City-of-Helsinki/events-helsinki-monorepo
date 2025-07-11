@@ -2,14 +2,14 @@
 import {
   composeQuery,
   normalizeKeys,
-} from '@events-helsinki/graphql-proxy-server/src';
-import type EventContext from '../../context/EventContext';
-import type { QueryResolvers } from '../../types';
+} from '@events-helsinki/graphql-proxy-server';
+import type EventContext from '../../context/EventContext.js';
 import type {
   KeywordListResponse,
   Keyword,
   QueryKeywordListArgs,
-} from '../../types/types';
+} from '../../types/types.js';
+import type { QueryResolvers } from '../../types.js';
 
 const keywordListQueryBuilder = ({
   dataSource,

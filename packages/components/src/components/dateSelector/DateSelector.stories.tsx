@@ -1,4 +1,4 @@
-import type { Meta, StoryFn } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/nextjs';
 
 import React from 'react';
 import DateSelector from './DateSelector';
@@ -51,6 +51,14 @@ export const DateSelectorDefault = {
     endDate: nextMonth,
     isCustomDate: false,
     name: 'date',
+    onChangeStartDate: () => {
+      // eslint-disable-next-line no-console
+      console.log('onChangeStartDate');
+    },
+    onChangeEndDate: () => {
+      // eslint-disable-next-line no-console
+      console.log('onChangeEndDate');
+    },
   },
 
   argTypes: {

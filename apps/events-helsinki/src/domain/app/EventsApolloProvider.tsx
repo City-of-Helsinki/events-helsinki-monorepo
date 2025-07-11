@@ -1,4 +1,4 @@
-import { ApolloProvider as BaseApolloProvider } from '@apollo/client';
+import { ApolloProvider as BaseApolloProvider } from '@apollo/client/react/index.js';
 import {
   ApolloErrorNotification,
   useApolloErrorHandler,

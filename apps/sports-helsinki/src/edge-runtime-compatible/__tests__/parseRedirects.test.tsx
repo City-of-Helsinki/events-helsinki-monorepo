@@ -1,14 +1,15 @@
+import { vi } from 'vitest';
 import { parseRedirects } from '../parseRedirects';
 import type { AppLanguage, Redirects } from '../types';
 
-let consoleWarningSpy: jest.SpyInstance;
+let consoleWarningSpy: any;
 
 beforeEach(() => {
-  consoleWarningSpy = jest.spyOn(console, 'warn').mockImplementation();
+  consoleWarningSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 });
 
 afterEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('parseRedirects', () => {

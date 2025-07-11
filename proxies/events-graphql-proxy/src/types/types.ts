@@ -603,7 +603,7 @@ export interface SubscriptionSubscriberObject<
   TKey extends string,
   TParent,
   TContext,
-  TArgs
+  TArgs,
 > {
   subscribe: SubscriptionSubscribeFn<
     { [key in TKey]: TResult },
@@ -629,7 +629,7 @@ export type SubscriptionObject<
   TKey extends string,
   TParent,
   TContext,
-  TArgs
+  TArgs,
 > =
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
@@ -639,7 +639,7 @@ export type SubscriptionResolver<
   TKey extends string,
   TParent = {},
   TContext = {},
-  TArgs = {}
+  TArgs = {},
 > =
   | ((
       ...args: any[]
@@ -664,7 +664,7 @@ export type DirectiveResolverFn<
   TResult = {},
   TParent = {},
   TContext = {},
-  TArgs = {}
+  TArgs = {},
 > = (
   next: NextResolverFn<TResult>,
   parent: TParent,
@@ -748,7 +748,8 @@ export type ResolversParentTypes = {
 
 export type AudienceResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Audience'] = ResolversParentTypes['Audience']
+  ParentType extends
+    ResolversParentTypes['Audience'] = ResolversParentTypes['Audience'],
 > = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   name?: Resolver<
@@ -776,7 +777,8 @@ export type AudienceResolvers<
 
 export type BannerPageResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['BannerPage'] = ResolversParentTypes['BannerPage']
+  ParentType extends
+    ResolversParentTypes['BannerPage'] = ResolversParentTypes['BannerPage'],
 > = {
   title?: Resolver<
     Maybe<ResolversTypes['LocalizedObject']>,
@@ -838,7 +840,8 @@ export type BannerPageResolvers<
 
 export type CmsImageResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['CmsImage'] = ResolversParentTypes['CmsImage']
+  ParentType extends
+    ResolversParentTypes['CmsImage'] = ResolversParentTypes['CmsImage'],
 > = {
   photographerCredit?: Resolver<
     Maybe<ResolversTypes['LocalizedObject']>,
@@ -852,7 +855,8 @@ export type CmsImageResolvers<
 
 export type DivisionResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Division'] = ResolversParentTypes['Division']
+  ParentType extends
+    ResolversParentTypes['Division'] = ResolversParentTypes['Division'],
 > = {
   type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   ocdId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -871,7 +875,8 @@ export type DivisionResolvers<
 
 export type EventDetailsResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['EventDetails'] = ResolversParentTypes['EventDetails']
+  ParentType extends
+    ResolversParentTypes['EventDetails'] = ResolversParentTypes['EventDetails'],
 > = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   typeId?: Resolver<
@@ -1044,7 +1049,8 @@ export type EventDetailsResolvers<
 
 export type EventListResponseResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['EventListResponse'] = ResolversParentTypes['EventListResponse']
+  ParentType extends
+    ResolversParentTypes['EventListResponse'] = ResolversParentTypes['EventListResponse'],
 > = {
   meta?: Resolver<ResolversTypes['Meta'], ParentType, ContextType>;
   data?: Resolver<
@@ -1057,7 +1063,8 @@ export type EventListResponseResolvers<
 
 export type ExternalLinkResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['ExternalLink'] = ResolversParentTypes['ExternalLink']
+  ParentType extends
+    ResolversParentTypes['ExternalLink'] = ResolversParentTypes['ExternalLink'],
 > = {
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1067,7 +1074,8 @@ export type ExternalLinkResolvers<
 
 export type EventImageResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['EventImage'] = ResolversParentTypes['EventImage']
+  ParentType extends
+    ResolversParentTypes['EventImage'] = ResolversParentTypes['EventImage'],
 > = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   license?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1115,7 +1123,8 @@ export type EventImageResolvers<
 
 export type InLanguageResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['InLanguage'] = ResolversParentTypes['InLanguage']
+  ParentType extends
+    ResolversParentTypes['InLanguage'] = ResolversParentTypes['InLanguage'],
 > = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   translationAvailable?: Resolver<
@@ -1148,7 +1157,8 @@ export type InLanguageResolvers<
 
 export type InternalIdObjectResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['InternalIdObject'] = ResolversParentTypes['InternalIdObject']
+  ParentType extends
+    ResolversParentTypes['InternalIdObject'] = ResolversParentTypes['InternalIdObject'],
 > = {
   internalId?: Resolver<
     Maybe<ResolversTypes['String']>,
@@ -1160,7 +1170,8 @@ export type InternalIdObjectResolvers<
 
 export type KeywordResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Keyword'] = ResolversParentTypes['Keyword']
+  ParentType extends
+    ResolversParentTypes['Keyword'] = ResolversParentTypes['Keyword'],
 > = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   altLabels?: Resolver<
@@ -1226,7 +1237,8 @@ export type KeywordResolvers<
 
 export type KeywordListResponseResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['KeywordListResponse'] = ResolversParentTypes['KeywordListResponse']
+  ParentType extends
+    ResolversParentTypes['KeywordListResponse'] = ResolversParentTypes['KeywordListResponse'],
 > = {
   meta?: Resolver<ResolversTypes['Meta'], ParentType, ContextType>;
   data?: Resolver<Array<ResolversTypes['Keyword']>, ParentType, ContextType>;
@@ -1235,7 +1247,8 @@ export type KeywordListResponseResolvers<
 
 export type LocalizedCmsImageResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['LocalizedCmsImage'] = ResolversParentTypes['LocalizedCmsImage']
+  ParentType extends
+    ResolversParentTypes['LocalizedCmsImage'] = ResolversParentTypes['LocalizedCmsImage'],
 > = {
   en?: Resolver<Maybe<ResolversTypes['CmsImage']>, ParentType, ContextType>;
   fi?: Resolver<Maybe<ResolversTypes['CmsImage']>, ParentType, ContextType>;
@@ -1245,7 +1258,8 @@ export type LocalizedCmsImageResolvers<
 
 export type LocalizedCmsKeywordsResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['LocalizedCmsKeywords'] = ResolversParentTypes['LocalizedCmsKeywords']
+  ParentType extends
+    ResolversParentTypes['LocalizedCmsKeywords'] = ResolversParentTypes['LocalizedCmsKeywords'],
 > = {
   en?: Resolver<
     Maybe<Array<Maybe<ResolversTypes['String']>>>,
@@ -1267,7 +1281,8 @@ export type LocalizedCmsKeywordsResolvers<
 
 export type LocalizedObjectResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['LocalizedObject'] = ResolversParentTypes['LocalizedObject']
+  ParentType extends
+    ResolversParentTypes['LocalizedObject'] = ResolversParentTypes['LocalizedObject'],
 > = {
   fi?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sv?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1277,7 +1292,8 @@ export type LocalizedObjectResolvers<
 
 export type MetaResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Meta'] = ResolversParentTypes['Meta']
+  ParentType extends
+    ResolversParentTypes['Meta'] = ResolversParentTypes['Meta'],
 > = {
   count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   next?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1287,14 +1303,16 @@ export type MetaResolvers<
 
 export type MutationResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
+  ParentType extends
+    ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation'],
 > = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
 export type NeighborhoodResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Neighborhood'] = ResolversParentTypes['Neighborhood']
+  ParentType extends
+    ResolversParentTypes['Neighborhood'] = ResolversParentTypes['Neighborhood'],
 > = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['LocalizedObject'], ParentType, ContextType>;
@@ -1303,7 +1321,8 @@ export type NeighborhoodResolvers<
 
 export type NeighborhoodListResponseResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['NeighborhoodListResponse'] = ResolversParentTypes['NeighborhoodListResponse']
+  ParentType extends
+    ResolversParentTypes['NeighborhoodListResponse'] = ResolversParentTypes['NeighborhoodListResponse'],
 > = {
   meta?: Resolver<ResolversTypes['Meta'], ParentType, ContextType>;
   data?: Resolver<
@@ -1316,7 +1335,8 @@ export type NeighborhoodListResponseResolvers<
 
 export type OfferResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Offer'] = ResolversParentTypes['Offer']
+  ParentType extends
+    ResolversParentTypes['Offer'] = ResolversParentTypes['Offer'],
 > = {
   isFree?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   description?: Resolver<
@@ -1339,7 +1359,8 @@ export type OfferResolvers<
 
 export type OrganizationDetailsResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['OrganizationDetails'] = ResolversParentTypes['OrganizationDetails']
+  ParentType extends
+    ResolversParentTypes['OrganizationDetails'] = ResolversParentTypes['OrganizationDetails'],
 > = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   dataSource?: Resolver<
@@ -1410,7 +1431,8 @@ export type OrganizationDetailsResolvers<
 
 export type PlaceResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Place'] = ResolversParentTypes['Place']
+  ParentType extends
+    ResolversParentTypes['Place'] = ResolversParentTypes['Place'],
 > = {
   id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   divisions?: Resolver<
@@ -1534,7 +1556,8 @@ export type PlaceResolvers<
 
 export type PlaceListResponseResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['PlaceListResponse'] = ResolversParentTypes['PlaceListResponse']
+  ParentType extends
+    ResolversParentTypes['PlaceListResponse'] = ResolversParentTypes['PlaceListResponse'],
 > = {
   meta?: Resolver<ResolversTypes['Meta'], ParentType, ContextType>;
   data?: Resolver<Array<ResolversTypes['Place']>, ParentType, ContextType>;
@@ -1543,7 +1566,8 @@ export type PlaceListResponseResolvers<
 
 export type PlacePositionResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['PlacePosition'] = ResolversParentTypes['PlacePosition']
+  ParentType extends
+    ResolversParentTypes['PlacePosition'] = ResolversParentTypes['PlacePosition'],
 > = {
   type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   coordinates?: Resolver<
@@ -1556,7 +1580,8 @@ export type PlacePositionResolvers<
 
 export type QueryResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
+  ParentType extends
+    ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
   _empty?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 
@@ -1618,7 +1643,8 @@ export type QueryResolvers<
 
 export type StaticPageResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['StaticPage'] = ResolversParentTypes['StaticPage']
+  ParentType extends
+    ResolversParentTypes['StaticPage'] = ResolversParentTypes['StaticPage'],
 > = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1697,7 +1723,8 @@ export type StaticPageResolvers<
 
 export type SubscriptionResolvers<
   ContextType = any,
-  ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']
+  ParentType extends
+    ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription'],
 > = {
   _empty?: SubscriptionResolver<
     Maybe<ResolversTypes['String']>,
@@ -1742,3 +1769,24 @@ export type Resolvers<ContextType = any> = {
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
+
+export type MapOpenDataDataSource_Feature = {
+  type: 'Feature';
+  geometry: unknown;
+  properties: unknown;
+};
+
+export type MapOpenDataDataSource_NeighborhoodListResponse = {
+  type: 'FeatureCollection';
+  features: Array<MapOpenDataDataSource_Feature>;
+  totalFeatures?: number;
+  numberMatched?: number;
+  numberReturned: number;
+  timeStamp?: string;
+  crs?: {
+    type: string;
+    properties: {
+      name: string;
+    };
+  };
+};

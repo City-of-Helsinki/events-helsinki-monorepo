@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/testcafe';
 import { t } from 'testcafe';
-import { initTestI18n as i18n } from '../../../common-i18n/src';
+import { initTestI18n as i18n } from '../../../common-i18n/src/index';
 import type { AppNamespace } from '../types/app-namespace';
 
 type SearchProps = {
@@ -58,15 +58,22 @@ class EventSearchPage {
     return screen.queryByText(notFoundText);
   }
 
-  public async expectSearchResults() {
-    t.expect(this.notFoundResult.exists).notOk;
+  public async expectSearchResults({
+    min: minResults = 1,
+    max: maxResults = 10,
+  }: {
+    min: number;
+    max: number;
+  }) {
+    await t.expect(this.notFoundResult.exists).notOk();
     const results = this.results;
-    await t.expect(results.count).gte(1); // At least one result should be found
-    await t.expect(results.count).lte(10); // max 10 result per page
+    // NOTE: the link is there twice
+    await t.expect(results.count).gte(minResults * 2); // At least one result should be found.
+    await t.expect(results.count).lte(maxResults * 2); // max 10 result per page
   }
 
   public async expectNoSearchResults() {
-    t.expect(this.notFoundResult.exists).ok;
+    await t.expect(this.notFoundResult.exists).ok();
     await t.expect(this.results.count).eql(0); // no cards returned
   }
 
@@ -77,7 +84,7 @@ class EventSearchPage {
     await t.pressKey('tab');
     await t.click(this.searchButton);
     await t.wait(2000);
-    await this.expectSearchResults();
+    await this.expectSearchResults({ min: 1, max: 10 });
   }
 
   public async doUnsuccessfulSearch() {
@@ -87,7 +94,9 @@ class EventSearchPage {
       this.autoSuggestInput,
       'thisisatextthatverylikelycannotbefound'
     );
-    await t.pressKey('tab'); // The menu can be too big, so that it hides the search button, so an unfocus event must be triggered.
+    // The menu can be too big, so that it hides the search button,
+    // so an unfocus event must be triggered.
+    await t.pressKey('tab');
     await t.click(this.searchButton);
     await t.wait(2000);
     await this.expectNoSearchResults();

@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/browser';
-import { saveAs } from 'file-saver';
+import FileSaver from 'file-saver';
 import {
   Button,
   IconAngleRight,
@@ -140,7 +140,7 @@ const DateInfo: React.FC<{
           Sentry.captureException(error);
         } else {
           const blob = new Blob([value], { type: 'text/calendar' });
-          saveAs(blob, `event_${event.id.replace(/:/g, '')}.ics`);
+          FileSaver.saveAs(blob, `event_${event.id.replace(/:/g, '')}.ics`);
         }
       });
     }

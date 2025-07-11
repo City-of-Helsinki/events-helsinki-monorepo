@@ -5,14 +5,19 @@ import {
   PlaceDetailsDocument,
 } from '@events-helsinki/components';
 import React from 'react';
-
-import { configure, render, screen, userEvent, waitFor } from '@/test-utils';
-import { translations } from '@/test-utils/initI18n';
+import { translations } from '../../../../../../config/vitest/initI18n';
 import {
   fakeNeighborhoods,
   fakeOrganization,
   fakePlace,
-} from '@/test-utils/mockDataUtils';
+} from '../../../../../../config/vitest/mockDataUtils';
+import {
+  configure,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from '../../../../../../config/vitest/test-utils';
 import FilterSummary from '../FilterSummary';
 
 configure({ defaultHidden: true });
@@ -99,13 +104,13 @@ const urlParams: UrlParams = {
 // type UrlParamKeys = keyof UrlParams;
 
 const routes = [
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line @stylistic/max-len
   `/haku?${EVENT_SEARCH_FILTERS.CATEGORIES}=${urlParams.categories}&${EVENT_SEARCH_FILTERS.DATE_TYPES}=today&${EVENT_SEARCH_FILTERS.END}=${urlParams.end}&${EVENT_SEARCH_FILTERS.PLACES}=${urlParams.places}&${EVENT_SEARCH_FILTERS.PUBLISHER}=${urlParams.publisher}&${EVENT_SEARCH_FILTERS.START}=${urlParams.start}&${EVENT_SEARCH_FILTERS.TEXT}=${urlParams.text}`,
 ];
 
 // TODO: when HDS fixes the tag id -> uncomment
 /* it('test for accessibility violations', async () => {
-  const { container } = render(<FilterSummary onClear={jest.fn()} />, {
+  const { container } = render(<FilterSummary onClear={vi.fn()} />, {
     mocks,
     routes,
   });
@@ -118,7 +123,7 @@ const routes = [
 }); */
 
 it('calls onClear callback when clear button is clicked', async () => {
-  const onClear = jest.fn();
+  const onClear = vi.fn();
   render(<FilterSummary onClear={onClear} />, {
     mocks,
     routes,
@@ -136,7 +141,7 @@ it('calls onClear callback when clear button is clicked', async () => {
 
 it.todo('routes to correct url after deleting filters');
 // it("routes to correct url after deleting filters", async () => {
-//   const { router } = render(<FilterSummary onClear={jest.fn()} />, {
+//   const { router } = render(<FilterSummary onClear={vi.fn()} />, {
 //     mocks,
 //     routes,
 //   });

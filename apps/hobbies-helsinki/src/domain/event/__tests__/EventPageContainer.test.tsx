@@ -13,8 +13,7 @@ import type { EventFields } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 
-import { render, screen, userEvent, waitFor } from '@/test-utils';
-import { translations } from '@/test-utils/initI18n';
+import { translations } from '../../../../config/vitest/initI18n';
 import {
   fakeEvent,
   fakeEvents,
@@ -22,11 +21,17 @@ import {
   fakeLocalizedObject,
   fakeOrganization,
   fakeTargetGroup,
-} from '@/test-utils/mockDataUtils';
+} from '../../../../config/vitest/mockDataUtils';
 import {
   createEventListRequestAndResultMocks,
   createOtherEventTimesRequestAndResultMocks,
-} from '@/test-utils/mocks/eventListMocks';
+} from '../../../../config/vitest/mocks/eventListMocks';
+import {
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from '../../../../config/vitest/test-utils';
 
 import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';

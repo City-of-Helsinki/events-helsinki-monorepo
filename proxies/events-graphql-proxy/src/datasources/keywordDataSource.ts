@@ -1,5 +1,5 @@
-import type { Keyword, KeywordListResponse } from '../types/types';
-import LinkedEventsDataSource from './LinkedEventsDataSource';
+import type { Keyword, KeywordListResponse } from '../types/types.js';
+import LinkedEventsDataSource from './LinkedEventsDataSource.js';
 
 class KeywordDataSource extends LinkedEventsDataSource {
   public async getKeywordDetails(id: string): Promise<Keyword> {

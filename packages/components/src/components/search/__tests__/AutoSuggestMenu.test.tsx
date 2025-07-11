@@ -8,8 +8,8 @@ it('AutosuggestMenu matches snapshot', () => {
       focusedOption={0}
       options={[{ text: 'foo', type: 'text', value: 'foo' }]}
       isOpen={true}
-      onClose={jest.fn()}
-      onOptionClick={jest.fn()}
+      onClose={vi.fn()}
+      onOptionClick={vi.fn()}
     />
   );
 

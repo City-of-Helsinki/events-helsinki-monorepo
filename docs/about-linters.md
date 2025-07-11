@@ -9,40 +9,7 @@ Define a package holding all your base configurations and enable them per worksp
 ### Example config
 
 If you use the provided example of `packages/eslint-config-bases`, it's easy to add or
-customize rules on per workspace basis by creating an `.eslintrc.js` file in the workspace root.
-
-```javascript
-module.exports = {
-  root: true, // Be sure to set root to true in monorepo.
-  ignorePatterns: ["**/node_modules", "**/.cache", "build", ".next"],
-  extends: [
-    "@events-helsinki/eslint-config-bases/typescript",
-    "@events-helsinki/eslint-config-bases/sonar",
-    "@events-helsinki/eslint-config-bases/regexp",
-    "@events-helsinki/eslint-config-bases/jest",
-    "@events-helsinki/eslint-config-bases/react",
-    "@events-helsinki/eslint-config-bases/rtl",
-    "@events-helsinki/eslint-config-bases/graphql-schema",
-    "@events-helsinki/eslint-config-bases/storybook",
-
-    // Add specific rules for your framework if needed.
-    // ie:
-    // - nextjs: 'plugin:@next/next/core-web-vitals',
-    // - remix:  '@remix-run/eslint-config',
-    // ...
-
-    // Post configure the prettier base so there won't be
-    // any conficts between eslint / prettier
-    "@events-helsinki/eslint-config-bases/prettier",
-  ],
-  rules: {
-    // Specific global rules for your app or package
-  },
-  overrides: [
-    // Specific file rules for your app or package
-  ],
-};
-```
+customize rules on per workspace basis by creating an `eslint.config.js` file in the workspace root.
 
 ### Workspace structure
 
@@ -50,9 +17,9 @@ module.exports = {
 .
 ├── apps
 │   ├── remix-app
-│   │   └── .eslintrc.js  (extends from [@events-helsinki/eslint-config-bases/react])
+│   │   └── eslint.config.js  (extends from [@events-helsinki/eslint-config-bases/react])
 │   └── nextjs-app
-│       └── .eslintrc.js
+│       └── eslint.config.js
 └── packages
     └── eslint-config-bases
 ```

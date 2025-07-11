@@ -7,14 +7,14 @@ const keyword = 'test keyword';
 
 it('matches snapshot', () => {
   const { container } = render(
-    <KeywordTag keyword={keyword} onClick={jest.fn()} />
+    <KeywordTag keyword={keyword} onClick={vi.fn()} />
   );
 
   expect(container.firstChild).toMatchSnapshot();
 });
 
 it('calls onClick callback when clicking', async () => {
-  const onClickMock = jest.fn();
+  const onClickMock = vi.fn();
   render(<KeywordTag keyword={keyword} onClick={onClickMock} />);
 
   expect(screen.getByText(keyword)).toBeInTheDocument();

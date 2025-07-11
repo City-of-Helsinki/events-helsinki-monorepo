@@ -5,7 +5,7 @@ import type { DateFilterProps } from '../DateFilter';
 import DateFilter from '../DateFilter';
 
 const props: DateFilterProps = {
-  onRemove: jest.fn(),
+  onRemove: vi.fn(),
   text: 'text',
   type: 'date',
   value: 'value',
@@ -22,7 +22,7 @@ it('matches snapshot', () => {
 });
 
 it('calls onRemove callback when remove button is clicked', async () => {
-  const onClickMock = jest.fn();
+  const onClickMock = vi.fn();
   render(<DateFilter {...props} onRemove={onClickMock} />);
 
   expect(screen.getByText(props.text as string)).toBeInTheDocument();

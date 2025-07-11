@@ -1,5 +1,5 @@
 // Amount of the similar events
-/* eslint-disable @typescript-eslint/naming-convention */
+
 export const SIMILAR_EVENTS_AMOUNT = 8;
 
 export const EVENT_KEYWORD_BLACK_LIST = [

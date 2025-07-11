@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client';
-// eslint-disable-next-line @typescript-eslint/naming-convention
+import { gql } from 'graphql-tag';
+
 export const QUERY_EVENT_LIST = gql`
   query EventList(
     $audienceMaxAgeGt: String

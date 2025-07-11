@@ -1,16 +1,16 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`AutosuggestMenu matches snapshot 1`] = `
 <div
-  class="autosuggestMenu"
+  class="_autosuggestMenu_6665ab"
 >
   <div
-    class="title"
+    class="_title_6665ab"
   >
     Hakuehdotuksia
     <button
       aria-label="Sulje valikko"
-      class="closeButton"
+      class="_closeButton_6665ab"
     >
       <svg
         aria-hidden="true"
@@ -30,24 +30,24 @@ exports[`AutosuggestMenu matches snapshot 1`] = `
     </button>
   </div>
   <ul
-    class="autosuggestOptions"
+    class="_autosuggestOptions_6665ab"
     role="listbox"
   >
     <li
       aria-selected="true"
-      class="autosuggestOption autosuggestOption--text autosuggestOption--isFocused"
+      class="_autosuggestOption_6665ab _autosuggestOption--text_6665ab _autosuggestOption--isFocused_6665ab"
       role="option"
       tabindex="-1"
     >
       <div
-        class="text"
+        class="_text_6665ab"
       >
         foo
       </div>
     </li>
   </ul>
   <div
-    class="info"
+    class="_info_6665ab"
   >
     Voit myös etsiä kirjoittamallasi hakusanalla
   </div>

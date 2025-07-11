@@ -1,5 +1,5 @@
-import type { FetchResult, GraphQLRequest } from '@apollo/client';
-import type { MockedResponse } from '@apollo/client/testing';
+import type { FetchResult, GraphQLRequest } from '@apollo/client/core/index.js';
+import type { MockedResponse } from '@apollo/client/testing/index.js';
 import { DEFAULT_EVENT_SORT_OPTION } from '../../../src/constants/event-constants';
 import type { EventType } from '../../../src/types/event-types';
 import type {
@@ -24,7 +24,8 @@ export const baseVariables = {
   sort: DEFAULT_EVENT_SORT_OPTION,
   start: 'now',
   startsAfter: undefined,
-  // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+  // superEventType: ['umbrella', 'none'],
 };
 
 export const eventListBaseVariables: QueryEventListArgs = {

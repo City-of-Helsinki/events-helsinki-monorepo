@@ -11,7 +11,7 @@ type SearchFormState = {
   setMinAgeInput: React.Dispatch<React.SetStateAction<string>>;
   maxAgeInput: string;
   setMaxAgeInput: React.Dispatch<React.SetStateAction<string>>;
-  placeInput: string; // eslint-disable-line @typescript-eslint/no-unused-vars
+  placeInput: string;
   setPlaceInput: React.Dispatch<React.SetStateAction<string>>;
   selectedDateTypes: string[];
   setSelectedDateTypes: React.Dispatch<React.SetStateAction<string[]>>;

@@ -5,7 +5,7 @@ import type { AgeFilterProps } from '../AgeFilter';
 import AgeFilter from '../AgeFilter';
 
 const props: AgeFilterProps = {
-  onRemove: jest.fn(),
+  onRemove: vi.fn(),
   value: '10',
   type: 'minAge',
 };
@@ -17,7 +17,7 @@ it('matches snapshot', () => {
 });
 
 it('calls onRemove callback when remove button is clicked', async () => {
-  const onClickMock = jest.fn();
+  const onClickMock = vi.fn();
   render(<AgeFilter {...props} onRemove={onClickMock} />);
 
   expect(screen.getByText(`${props.value} v`)).toBeInTheDocument();

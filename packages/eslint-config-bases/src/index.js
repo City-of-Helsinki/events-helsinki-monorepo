@@ -1,3 +1,2 @@
-const { typescript } = require('./bases');
-
-module.exports = typescript;
+export * from './bases/index.js';
+export { default as prettierBaseConfig } from './prettier.base.config.js';

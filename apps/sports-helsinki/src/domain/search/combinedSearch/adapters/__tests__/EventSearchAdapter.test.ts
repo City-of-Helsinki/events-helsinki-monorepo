@@ -1,4 +1,4 @@
-import { EventTypeId, TARGET_GROUPS } from '@events-helsinki/components/types';
+import { EventTypeId, TARGET_GROUPS } from '@events-helsinki/components';
 import type { CombinedSearchAdapterInput } from '../../types';
 import EventSearchAdapter from '../EventSearchAdapter';
 
@@ -69,8 +69,10 @@ describe('EventSearchAdapter', () => {
           publisher: null,
           publisherAncestor: 'ahjo:00001',
           include: ['keywords', 'location'],
-          // superEventType: ['umbrella', 'none'], // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
-          superEvent: eventType === EventTypeId.Course ? 'none' : undefined, // Added for courses in LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+          // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+          // superEventType: ['umbrella', 'none'],
+          // Added for courses in LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+          superEvent: eventType === EventTypeId.Course ? 'none' : undefined,
           sort:
             eventType === EventTypeId.General ? input.eventOrderBy : 'end_time',
         };

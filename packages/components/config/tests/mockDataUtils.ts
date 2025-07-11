@@ -366,19 +366,19 @@ const generateNodeArray = <T extends (...args: any) => any>(
 };
 
 export const appRoutingUrlMocks: AppRoutingContextProps = {
-  getEventListLinkUrl: jest
+  getEventListLinkUrl: vi
     .fn()
     .mockImplementation(
       (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
         `/kurssit/${event.id}`
     ),
-  getOrganizationSearchUrl: jest
+  getOrganizationSearchUrl: vi
     .fn()
     .mockImplementation(
       (event: EventFields, _router: NextRouter, _locale: AppLanguage) =>
         `/haku?publisher=${event.publisher}&searchType=${event.typeId}`
     ),
-  getHelsinkiOnlySearchUrl: jest
+  getHelsinkiOnlySearchUrl: vi
     .fn()
     .mockImplementation(
       (
@@ -391,24 +391,24 @@ export const appRoutingUrlMocks: AppRoutingContextProps = {
         }`;
       }
     ),
-  getPlainEventUrl: jest
+  getPlainEventUrl: vi
     .fn()
     .mockImplementation(
       (event: EventFields, _locale: AppLanguage) => `/kurssit/${event.id}`
     ),
-  getCardUrl: jest
+  getCardUrl: vi
     .fn()
     .mockImplementation(
       (event: EventFields, _locale: 'fi' | 'en' | 'sv') =>
         `/kurssit/${event.id}`
     ),
-  getEventUrl: jest
+  getEventUrl: vi
     .fn()
     .mockImplementation(
       (event: EventFields, _router: NextRouter, _locale: 'fi' | 'en' | 'sv') =>
         `/kurssit/${event.id}`
     ),
-  getKeywordOnClickHandler: jest
+  getKeywordOnClickHandler: vi
     .fn()
     .mockImplementation(
       (
@@ -416,6 +416,6 @@ export const appRoutingUrlMocks: AppRoutingContextProps = {
         _locale: 'fi' | 'en' | 'sv',
         _type: 'text' | 'isFree' | 'dateType',
         _value?: string | undefined
-      ) => jest.fn()
+      ) => vi.fn()
     ),
 };

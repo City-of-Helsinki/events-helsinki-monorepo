@@ -17,7 +17,7 @@ beforeEach(() => {
 
 describe('large event card', () => {
   // TODO: when HDS fixes the tag id -> uncomment
-  // eslint-disable-next-line jest/no-commented-out-tests
+  // eslint-disable-next-line vitest/no-commented-out-tests
   /* it('for accessibility violations', async () => {
     const event = fakeEvent() as EventFieldsFragment;
     const { container } = renderComponent(event);

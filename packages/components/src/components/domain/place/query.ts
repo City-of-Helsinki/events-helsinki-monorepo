@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client';
-// eslint-disable-next-line @typescript-eslint/naming-convention
+import { gql } from 'graphql-tag';
+
 export const QUERY_PLACE = gql`
   fragment placeFields on Place {
     id

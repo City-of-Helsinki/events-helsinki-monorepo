@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@/test-utils';
+import { render, screen } from '@/test-utils';
 
 import LoadingSpinner from '../LoadingSpinner';
 
@@ -9,10 +9,8 @@ it('matches snapshot', () => {
 });
 
 it('render spinner if isLoading is true', () => {
-  const { container } = render(<LoadingSpinner isLoading={true} />);
-  expect((container.firstChild?.firstChild as HTMLElement).classList).toContain(
-    'spinner'
-  );
+  render(<LoadingSpinner isLoading={true} />);
+  expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
 });
 
 it('render child component if isLoading is false', () => {

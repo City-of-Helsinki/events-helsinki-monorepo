@@ -1,27 +1,31 @@
-import type { ServerConfig } from '@events-helsinki/graphql-proxy-server/src';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
 import {
   ignorableGraphqlErrorCodes,
   startServer,
-} from '@events-helsinki/graphql-proxy-server/src';
+} from '@events-helsinki/graphql-proxy-server';
+import type {
+  ServerConfig,
+  ContextConstructorArgs,
+} from '@events-helsinki/graphql-proxy-server';
 import * as dotenv from 'dotenv';
-import EventContext from './context/EventContext';
-import schema from './schema';
+import AppConfig from './config/AppConfig.js';
+import EventContext from './context/EventContext.js';
+import schema from './schema/index.js';
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const dotEnvFile = path.resolve(__dirname, '../.env');
 
-const trueEnv = ['true', '1', 'yes'];
+dotenv.config({ path: dotEnvFile, debug: true, override: true });
 
 const config: ServerConfig = {
-  sentryDsn: process.env.GRAPHQL_PROXY_SENTRY_DSN,
-  sentryEnvironment: process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT,
-  debug: trueEnv.includes(process.env.GRAPHQL_PROXY_DEBUG ?? 'false'),
-  serverPort: Number(process.env.GRAPHQL_PROXY_PORT) || 4100,
-  disableWinstonLogging: trueEnv.includes(
-    process.env.GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING ?? 'false'
-  ),
-  introspection: trueEnv.includes(
-    process.env.GRAPHQL_PROXY_INTROSPECTION ?? 'false'
-  ),
+  sentryDsn: AppConfig.sentryDsn,
+  sentryEnvironment: AppConfig.sentryEnvironment,
+  debug: AppConfig.debug,
+  serverPort: AppConfig.serverPort,
+  disableWinstonLogging: AppConfig.enableWinstonLogging,
+  introspection: AppConfig.enableIntrospection,
   formatError: (formattedError, _error) => {
     const code = formattedError?.extensions?.code as string;
     if (code && ignorableGraphqlErrorCodes.includes(code)) {
@@ -29,6 +33,7 @@ const config: ServerConfig = {
         ...formattedError,
         extensions: {
           ...formattedError.extensions,
+          // eslint-disable-next-line @stylistic/max-len
           note: `This error can be ignored with a HTTP header! If you know what you are doing, you can use this error code (${code}) as value for "X-Ignored-Error-Code" request header ("X-Ignored-Error-Code: ${code}"). It should be noted that the data may be manipulated by the proxy-server when the error is ignored: E.g the false items can be skipped, which affects to the amount of results per a paginated result set.`,
         },
       };
@@ -43,6 +48,7 @@ const config: ServerConfig = {
   await startServer({
     config,
     schema,
-    contextCallback: async (args) => new EventContext(args),
+    contextCallback: async (args: ContextConstructorArgs) =>
+      new EventContext(args),
   });
 })();

@@ -22,7 +22,7 @@ const LoadingSpinnerri: FunctionComponent<Props> = ({
     <>
       {isLoading ? (
         <div
-          className={classNames(styles.spinnerWrapper, className, {
+          className={classNames(styles.spinnerWrapper, className, 'spinner', {
             [styles.hasPadding]: hasPadding,
           })}
           data-testid="loading-spinner"

@@ -17,12 +17,12 @@ it('matches snapshot', () => {
       isCustomDate={false}
       isOpen={true}
       name="date"
-      onChangeDateTypes={jest.fn()}
-      onChangeEndDate={jest.fn()}
-      onChangeStartDate={jest.fn()}
-      onCloseMenu={jest.fn()}
+      onChangeDateTypes={vi.fn()}
+      onChangeEndDate={vi.fn()}
+      onChangeStartDate={vi.fn()}
+      onCloseMenu={vi.fn()}
       startDate={new Date('2019-08-01')}
-      toggleIsCustomDate={jest.fn()}
+      toggleIsCustomDate={vi.fn()}
     />
   );
 

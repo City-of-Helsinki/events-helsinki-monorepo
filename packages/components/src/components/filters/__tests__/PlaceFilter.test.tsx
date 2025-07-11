@@ -1,4 +1,4 @@
-import { translations } from '@events-helsinki/common-i18n/tests/initI18n';
+import { translations } from '@events-helsinki/common-i18n';
 import React from 'react';
 import { render, screen, userEvent, waitFor } from '@/test-utils';
 import { fakePlace } from '@/test-utils/mockDataUtils';
@@ -31,7 +31,7 @@ const mocks = [
 
 it('matches snapshot', async () => {
   const { container } = render(
-    <PlaceFilter id={placeId} onRemove={jest.fn()} />,
+    <PlaceFilter id={placeId} onRemove={vi.fn()} />,
     { mocks }
   );
 
@@ -40,7 +40,7 @@ it('matches snapshot', async () => {
 });
 
 it('calls onRemove callback when remove button is clicked', async () => {
-  const onClickMock = jest.fn();
+  const onClickMock = vi.fn();
   render(<PlaceFilter id={placeId} onRemove={onClickMock} />, {
     mocks,
   });
@@ -62,7 +62,7 @@ it("should return null if place doesn't exist", async () => {
   ];
 
   const { container } = render(
-    <PlaceFilter id={placeId} onRemove={jest.fn()} />,
+    <PlaceFilter id={placeId} onRemove={vi.fn()} />,
     {
       mocks,
     }

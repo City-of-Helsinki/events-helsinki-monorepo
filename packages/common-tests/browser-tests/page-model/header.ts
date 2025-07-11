@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
-import { initTestI18n as i18n } from '../../../common-i18n/src';
+import { initTestI18n as i18n } from '../../../common-i18n/src/index';
 
 import {
   APP_LANGUAGE_LABELS,

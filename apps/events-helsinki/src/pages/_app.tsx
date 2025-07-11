@@ -13,7 +13,7 @@ import React from 'react';
 
 import '../styles/globals.scss';
 import { ErrorBoundary } from 'react-error-boundary';
-import nextI18nextConfig from '../../next-i18next.config';
+import nextI18nextConfig from '../../next-i18next.config.mjs';
 import { ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import EventsApolloProvider from '../domain/app/EventsApolloProvider';

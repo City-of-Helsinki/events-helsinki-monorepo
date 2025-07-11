@@ -31,7 +31,8 @@ export function useFormValues() {
   const targetGroups = getTargetGroupOptions(t);
   const accessibilityProfiles = [
     // Empty option is needed with the HDS-select because of a bug in it.
-    // Otherwise a following error is thrown and the value handling does not work properly, especially when clearing the value:
+    // Otherwise a following error is thrown and the value handling does not work properly,
+    // especially when clearing the value:
     // "downshift: A component has changed the uncontrolled prop "selectedItem" to be controlled.
     // This prop should not switch from controlled to uncontrolled (or vice versa).
     // Decide between using a controlled or uncontrolled Downshift element for the lifetime of the component.

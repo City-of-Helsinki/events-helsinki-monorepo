@@ -3,19 +3,19 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
-import { json } from 'body-parser';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import type { GraphQLSchema } from 'graphql';
 import depthLimit from 'graphql-depth-limit';
-import { X_IGNORED_ERROR_CODE } from './constants';
-import type ContextValue from './context/ContextValue';
-import type { ContextConstructorArgs } from './context/ContextValue';
-import apolloLoggingPlugin from './plugins/apolloLoggingPlugin';
-import sentryLoggingPlugin from './plugins/sentryLoggingPlugin';
-import type { ServerConfig } from './server-config/server-config';
-import { createServerConfig } from './server-config/server-config';
-import acceptsLanguage from './utils/acceptLanguage';
+import { X_IGNORED_ERROR_CODE } from './constants.js';
+import type ContextValue from './context/ContextValue.js';
+import type { ContextConstructorArgs } from './context/ContextValue.js';
+import apolloLoggingPlugin from './plugins/apolloLoggingPlugin.js';
+import sentryLoggingPlugin from './plugins/sentryLoggingPlugin.js';
+import type { ServerConfig } from './server-config/server-config.js';
+import { createServerConfig } from './server-config/server-config.js';
+import acceptsLanguage from './utils/acceptLanguage.js';
 
 const OK = 'OK';
 const SERVER_IS_NOT_READY = 'SERVER_IS_NOT_READY';
@@ -29,7 +29,7 @@ type StartServerArgs<Datasources, Context extends ContextValue<Datasources>> = {
 
 export const startServer = async <
   Datasources,
-  Context extends ContextValue<Datasources>
+  Context extends ContextValue<Datasources>,
 >({
   config,
   schema,
@@ -73,7 +73,7 @@ export const startServer = async <
   app.use(
     GRAPHQL_PATH,
     cors<cors.CorsRequest>(),
-    json(),
+    bodyParser.json(),
     expressMiddleware(server, {
       context: async ({ req }) =>
         contextCallback({
@@ -94,6 +94,7 @@ export const startServer = async <
 
   readinessRouter.get(
     '/healthz',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (request: express.Request, response: express.Response) => {
       checkIsServerReady(response);
     }
@@ -101,6 +102,7 @@ export const startServer = async <
 
   readinessRouter.get(
     '/readiness',
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (request: express.Request, response: express.Response) => {
       checkIsServerReady(response);
     }

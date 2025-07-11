@@ -106,6 +106,7 @@ const useOtherEventTimesVariables = (
       superEvent: superEventId,
       eventType: supportedEventTypes,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [superEventId]
   );
 
@@ -124,6 +125,7 @@ export const useSubEventsQueryVariables = (
       eventType: supportedEventTypes,
       include: ['in_language', 'keywords', 'location', 'audience'],
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [event.id]
   );
 
@@ -156,7 +158,7 @@ export const useSubEvents = (
             page,
           },
         });
-      } catch (e) {
+      } catch (_) {
         toast.error(t('info.errorLoadMore'));
       }
       setIsFetchingMore(false);
@@ -182,7 +184,6 @@ export const useSubEvents = (
   return { subEvents, isFetchingMore, loading };
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useOtherEventTimes = (
   event: EventFields
 ): {
@@ -222,7 +223,8 @@ export const useLocationUpcomingEventsQuery = ({
     start: 'now',
     sort: EVENT_SORT_OPTIONS.END_TIME,
     publisherAncestor: null,
-    // superEventType: 'none', // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+    // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
+    // superEventType: 'none',
     pageSize,
     eventType: [EventTypeId.Course, EventTypeId.General],
   };

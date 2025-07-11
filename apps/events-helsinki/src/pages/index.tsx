@@ -1,4 +1,4 @@
-import type { NormalizedCacheObject } from '@apollo/client';
+import type { NormalizedCacheObject } from '@apollo/client/core/index.js';
 import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   DEFAULT_LANGUAGE,

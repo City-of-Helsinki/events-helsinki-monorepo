@@ -14,7 +14,7 @@ type I18nRoute = {
 export interface CmsRoutedApp {
   i18nRoutes: Record<string, I18nRoute[]>;
   locales: readonly AppLanguage[];
-  URLRewriteMapping: { [x: string]: string };
+  URLRewriteMapping: Record<string, string>;
 }
 
 export class CmsRoutedAppHelper {

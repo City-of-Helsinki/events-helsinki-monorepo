@@ -4,17 +4,39 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "CommonJS",
-    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
     "incremental": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
+    "allowImportingTsExtensions": true,
     "paths": {
       "@events-helsinki/graphql-proxy-server": [
-        "../../packages/graphql-proxy-server/src/index"
+        "../../packages/graphql-proxy-server/src/"
+      ],
+      "@events-helsinki/graphql-proxy-server/*": [
+        "../../packages/graphql-proxy-server/src/*"
       ]
-    }
+    },
   },
-  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "dist",
+    "build",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "../../packages/**/*"
+  ],
+  "ts-node": {
+    "esm": true
+  }
 }

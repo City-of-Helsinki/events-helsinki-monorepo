@@ -1,13 +1,13 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches snapshot 1`] = `
 <button
   aria-pressed="true"
-  class="toggleButton isSelected"
+  class="_toggleButton_d9abea _isSelected_d9abea"
   type="button"
 >
   <div
-    class="innerWrapper"
+    class="_innerWrapper_d9abea"
   >
     <span>
       Test button

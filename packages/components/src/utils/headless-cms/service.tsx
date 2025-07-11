@@ -1,6 +1,9 @@
 import fs from 'fs/promises';
 import path from 'path';
-import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import type {
+  ApolloClient,
+  NormalizedCacheObject,
+} from '@apollo/client/core/index.js';
 import type { NextApiResponse } from 'next';
 
 import { APP_LANGUAGES } from '../../constants';
@@ -37,7 +40,8 @@ export function uniqBySetWithArrayFrom<T>(array: T[]): T[] {
  * This is an internal helper function.
  *
  * @private
- * @param {GetAllItemsUriInfoResponseType['items']['edges'][number]} { node } - An object containing the 'node' of a CMS item edge.
+ * @param {GetAllItemsUriInfoResponseType['items']['edges'][number]} { node } -
+ *  An object containing the 'node' of a CMS item edge.
  * @returns {PageUriInfo} An object containing the URI, slug, and locale of the page.
  */
 const _getPageUriInfo = ({
@@ -62,8 +66,7 @@ export const getAllCmsArticlesPageUriInfos = async (
   apolloClient: ApolloClient<NormalizedCacheObject>
 ): Promise<PageUriInfo[]> => {
   let allPageUriInfos: PageUriInfo[] = [];
-  let hasNextPage: GetAllItemsUriInfoResponseType['items']['pageInfo']['hasNextPage'] =
-    true;
+  let hasNextPage: GetAllItemsUriInfoResponseType['items']['pageInfo']['hasNextPage'] = true;
   let endCursor: GetAllItemsUriInfoResponseType['items']['pageInfo']['endCursor'] =
     '';
 
@@ -109,8 +112,7 @@ export const getAllCmsPagesPageUriInfos = async (
   apolloClient: ApolloClient<NormalizedCacheObject>
 ): Promise<PageUriInfo[]> => {
   let allPageUriInfos: PageUriInfo[] = [];
-  let hasNextPage: GetAllItemsUriInfoResponseType['items']['pageInfo']['hasNextPage'] =
-    true;
+  let hasNextPage: GetAllItemsUriInfoResponseType['items']['pageInfo']['hasNextPage'] = true;
   let endCursor: GetAllItemsUriInfoResponseType['items']['pageInfo']['endCursor'] =
     '';
 
@@ -186,7 +188,8 @@ class NextPageLister {
    *
    * @private
    * @param {string} currentPath - The current directory path to read.
-   * @returns {Promise<NextPageListerFileResults>} A promise that resolves to an object containing arrays of relative paths for html and json files.
+   * @returns {Promise<NextPageListerFileResults>} A promise that resolves to an object containing arrays
+   *  of relative paths for html and json files.
    */
   private async readDirRecursive(
     currentPath: string
@@ -224,7 +227,8 @@ class NextPageLister {
    * Lists all statically generated pages (HTML and JSON files) within a specified pathname.
    *
    * @param {string} pathname - The relative pathname within the `pagesServerDir` to search.
-   * @returns {Promise<string[]>} A promise that resolves to a sorted array of unique relative page paths (without file extensions).
+   * @returns {Promise<string[]>} A promise that resolves to a sorted array of unique relative page
+   *  paths (without file extensions).
    * @throws {Error} If the specified `pathname` does not exist within the `pagesServerDir`.
    */
   public async listGeneratedPages(pathname: string): Promise<string[]> {
@@ -264,7 +268,8 @@ export class NextPageRevalidateService extends NextPageLister {
    * Constructs an instance of `NextPageRevalidateService`.
    *
    * @param {NextPageRevalidateServiceInterface} params - The parameters for constructing the service.
-   * @param {ApolloClient<NormalizedCacheObject>} params.cmsApolloClient - The Apollo client instance for CMS interactions.
+   * @param {ApolloClient<NormalizedCacheObject>} params.cmsApolloClient - The Apollo client instance for
+   *  CMS interactions.
    * @param {Logger} params.staticGenerationLogger - The logger instance for static generation events.
    */
   constructor({

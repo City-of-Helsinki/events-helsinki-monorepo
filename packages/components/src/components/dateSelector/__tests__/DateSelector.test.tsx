@@ -1,4 +1,4 @@
-import translations from '@events-helsinki/common-i18n/locales/fi/common.json';
+import { translations } from '@events-helsinki/common-i18n';
 import * as React from 'react';
 import {
   arrowDownKeyPressHelper,
@@ -19,11 +19,11 @@ const defaultProps: DateSelectorProps = {
   endDate: null,
   isCustomDate: false,
   name: 'date',
-  onChangeDateTypes: jest.fn(),
-  onChangeEndDate: jest.fn(),
-  onChangeStartDate: jest.fn(),
+  onChangeDateTypes: vi.fn(),
+  onChangeEndDate: vi.fn(),
+  onChangeStartDate: vi.fn(),
   startDate: null,
-  toggleIsCustomDate: jest.fn(),
+  toggleIsCustomDate: vi.fn(),
 };
 
 const renderComponent = (props?: Partial<DateSelectorProps>) =>
@@ -33,7 +33,7 @@ it('should render selected date types when single option is selected', () => {
   renderComponent({ dateTypes: [DATE_TYPES.TODAY] });
 
   expect(
-    screen.getByText(translations.dateSelector.dateTypeToday)
+    screen.getByText(translations.common.dateSelector.dateTypeToday)
   ).toBeInTheDocument();
 });
 
@@ -41,19 +41,19 @@ it('should render selected date types when multiple options are selected', () =>
   renderComponent({ dateTypes: [DATE_TYPES.TOMORROW, DATE_TYPES.TODAY] });
 
   expect(
-    screen.getByText(`${translations.dateSelector.dateTypeToday} + 1`)
+    screen.getByText(`${translations.common.dateSelector.dateTypeToday} + 1`)
   ).toBeInTheDocument();
 });
 
 it('should add date type', async () => {
-  const onChangeDateTypes = jest.fn();
+  const onChangeDateTypes = vi.fn();
   renderComponent({
     dateTypes: [],
     onChangeDateTypes,
   });
 
   const toggleButton = screen.getByRole('button', {
-    name: translations.dateSelector.title,
+    name: translations.common.dateSelector.title,
   });
 
   await userEvent.click(toggleButton);
@@ -61,7 +61,7 @@ it('should add date type', async () => {
 
   await userEvent.click(
     screen.getByRole('checkbox', {
-      name: translations.dateSelector.dateTypeToday,
+      name: translations.common.dateSelector.dateTypeToday,
     })
   );
 
@@ -69,21 +69,21 @@ it('should add date type', async () => {
 });
 
 it('should call toggleIsCustomDate function', async () => {
-  const toggleIsCustomDate = jest.fn();
+  const toggleIsCustomDate = vi.fn();
   renderComponent({
     dateTypes: [],
     toggleIsCustomDate,
   });
 
   const toggleButton = screen.getByRole('button', {
-    name: translations.dateSelector.title,
+    name: translations.common.dateSelector.title,
   });
 
   await userEvent.click(toggleButton);
   expect(screen.getByTestId(testIds.menu)).toBeInTheDocument();
 
   const customDatesButton = screen.getByRole('button', {
-    name: translations.dateSelector.menu.buttonCustom,
+    name: translations.common.dateSelector.menu.buttonCustom,
   });
   await userEvent.click(customDatesButton);
 
@@ -91,14 +91,14 @@ it('should call toggleIsCustomDate function', async () => {
 });
 
 it('should remove date type', async () => {
-  const onChangeDateTypes = jest.fn();
+  const onChangeDateTypes = vi.fn();
   renderComponent({
     dateTypes: [DATE_TYPES.TODAY, DATE_TYPES.TOMORROW],
     onChangeDateTypes,
   });
 
   const toggleButton = screen.getByRole('button', {
-    name: translations.dateSelector.title,
+    name: translations.common.dateSelector.title,
   });
 
   await userEvent.click(toggleButton);
@@ -106,7 +106,7 @@ it('should remove date type', async () => {
 
   await userEvent.click(
     screen.getByRole('checkbox', {
-      name: translations.dateSelector.dateTypeToday,
+      name: translations.common.dateSelector.dateTypeToday,
     })
   );
 
@@ -118,7 +118,7 @@ describe('should open menu with', () => {
     renderComponent();
 
     const toggleButton = screen.getByRole('button', {
-      name: translations.dateSelector.title,
+      name: translations.common.dateSelector.title,
     });
 
     await userEvent.click(toggleButton);

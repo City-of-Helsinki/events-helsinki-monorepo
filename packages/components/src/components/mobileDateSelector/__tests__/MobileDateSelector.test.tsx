@@ -23,9 +23,9 @@ const dateTypeOptions = [
 const defaultProps = {
   dateTypes: [DATE_TYPES.TODAY, DATE_TYPES.WEEKEND],
   endDate: null,
-  onChangeDateTypes: jest.fn(),
-  onChangeEndDate: jest.fn(),
-  onChangeStartDate: jest.fn(),
+  onChangeDateTypes: vi.fn(),
+  onChangeEndDate: vi.fn(),
+  onChangeStartDate: vi.fn(),
   startDate: null,
 };
 
@@ -36,24 +36,24 @@ it('should have correct date types selected', async () => {
   renderComponent();
 
   expect(screen.getByRole('button', { name: dateTypeOptions[0] })).toHaveClass(
-    'isSelected'
+    /isSelected/
   );
   expect(
     screen.getByRole('button', { name: dateTypeOptions[1] })
   ).not.toHaveClass('isSelected');
   expect(screen.getByRole('button', { name: dateTypeOptions[2] })).toHaveClass(
-    'isSelected'
+    /isSelected/
   );
   expect(
     screen.getByRole('button', { name: dateTypeOptions[3] })
-  ).not.toHaveClass('isSelected');
+  ).not.toHaveClass(/isSelected/);
   expect(
     screen.getByRole('button', { name: dateTypeOptions[4] })
-  ).not.toHaveClass('isSelected');
+  ).not.toHaveClass(/isSelected/);
 });
 
 it('should call onChangeDateTypes and unselect option', async () => {
-  const onChangeDateTypes = jest.fn();
+  const onChangeDateTypes = vi.fn();
   renderComponent({ onChangeDateTypes });
   await userEvent.click(
     screen.getByRole('button', { name: dateTypeOptions[0] })
@@ -62,7 +62,7 @@ it('should call onChangeDateTypes and unselect option', async () => {
 });
 
 it('should call onChangeDateTypes and select option', async () => {
-  const onChangeDateTypes = jest.fn();
+  const onChangeDateTypes = vi.fn();
   renderComponent({ onChangeDateTypes, dateTypes: [] });
 
   await userEvent.click(
@@ -75,7 +75,7 @@ it('custom date type should be selected when startDate is selected', async () =>
   renderComponent({ startDate: new Date('2018-12-12') });
 
   expect(screen.getByRole('button', { name: dateTypeOptions[4] })).toHaveClass(
-    'isSelected'
+    /isSelected/
   );
 });
 
@@ -83,7 +83,7 @@ it('custom date type should be selected when endDate is selected', async () => {
   renderComponent({ startDate: new Date('2018-12-12') });
 
   expect(screen.getByRole('button', { name: dateTypeOptions[4] })).toHaveClass(
-    'isSelected'
+    /isSelected/
   );
 });
 

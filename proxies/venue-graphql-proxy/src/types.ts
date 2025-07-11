@@ -1,6 +1,6 @@
-import type { AppLanguage } from '@events-helsinki/components/src/types/types';
-import type { Sources } from './contants/constants';
-import type { Point, OpeningHour, ResourceState } from './types/types';
+import type { AppLanguage } from '@events-helsinki/graphql-proxy-server';
+import type { Sources } from './contants/constants.js';
+import type { Point, OpeningHour, ResourceState } from './types/types.js';
 
 export type Source = (typeof Sources)[keyof typeof Sources];
 export type Locale = AppLanguage;
@@ -17,8 +17,8 @@ type AccessibilitySentencesTypeFor<T extends VenueDetailsTextType> =
   T extends TranslationsObject
     ? TranslatableAccessibilitySentences // 3 locales
     : T extends string
-    ? TranslatedAccessibilitySentences // 1 locale
-    : never;
+      ? TranslatedAccessibilitySentences // 1 locale
+      : never;
 
 export type OntologyIdLabel<T extends VenueDetailsTextType> = {
   id: number;
@@ -252,6 +252,8 @@ export type AccessibilitySentences = {
 };
 
 export type TranslationsObject = {
+  name(locale: AppLanguage, name: unknown): unknown;
+  url(locale: AppLanguage, url: unknown): unknown;
   fi?: string;
   en?: string;
   sv?: string;

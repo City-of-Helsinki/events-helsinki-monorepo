@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches snapshot 1`] = `
 <div
-  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 filter"
+  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 _filter_f76730"
   id="hds-tag"
 >
   <span

@@ -69,7 +69,7 @@ it('should render keywords and handle click', async () => {
     screen.getByRole('link', { name: new RegExp(keywordNames[0], 'i') })
   );
   expect(router).toMatchObject({
-    asPath: '/fi/haku?type=text&value=Keyword%201',
+    asPath: '/fi/haku?type=text&value=Keyword+1',
     pathname: '/fi/haku',
     query: { type: 'text', value: capitalize(keywordNames[0]) },
   });

@@ -1,2 +1,2 @@
 export { default as MultiSelectDropdown } from './MultiSelectDropdown';
-export * from './types';
+export type * from './types';

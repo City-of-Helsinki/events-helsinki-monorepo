@@ -1,20 +1,16 @@
 import * as Reducer from '@events-helsinki/components/components/apolloErrorNotification/apolloErrorsReducer';
-import { render, screen, userEvent, waitFor } from '@/test-utils';
+import {
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from '../../../../config/vitest/test-utils';
 import EventsApolloProvider from '../EventsApolloProvider';
-const clearErrorsMock = jest.fn();
-const useApolloErrorsReducerMock = jest
+const clearErrorsMock = vi.fn();
+const useApolloErrorsReducerMock = vi
   .fn()
   .mockReturnValue([[new Error('1st error')], clearErrorsMock]);
 
-jest.mock(
-  '@events-helsinki/components/components/apolloErrorNotification/apolloErrorsReducer',
-  () => ({
-    __esModule: true,
-    ...jest.requireActual(
-      '@events-helsinki/components/components/apolloErrorNotification/apolloErrorsReducer'
-    ),
-  })
-);
 const renderProvider = () => {
   return render(
     <EventsApolloProvider>
@@ -37,9 +33,9 @@ describe('EventsApolloProvider', () => {
       ).not.toBeInTheDocument();
     });
     it('renders ApolloErrorNotification on Apollo-Client errors', async () => {
-      jest
-        .spyOn(Reducer, 'useApolloErrorsReducer')
-        .mockImplementationOnce(useApolloErrorsReducerMock);
+      vi.spyOn(Reducer, 'useApolloErrorsReducer').mockImplementationOnce(
+        useApolloErrorsReducerMock
+      );
       renderProvider();
       expect(screen.getByTestId('EventsApolloProvider')).toBeInTheDocument();
       await waitFor(() => {

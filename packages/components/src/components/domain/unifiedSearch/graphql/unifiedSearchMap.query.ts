@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from 'graphql-tag';
 
 export const SEARCH_MAP_QUERY = gql`
   query SearchMap(

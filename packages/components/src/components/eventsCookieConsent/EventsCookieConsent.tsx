@@ -1,4 +1,4 @@
-import { useMatomo } from '@jonkoops/matomo-tracker-react';
+import useMatomo from '@jonkoops/matomo-tracker-react/lib/useMatomo.js';
 import type { ContentSource } from 'hds-react';
 import { CookiePage, useCookies, CookieModal } from 'hds-react';
 import { useRouter } from 'next/router';

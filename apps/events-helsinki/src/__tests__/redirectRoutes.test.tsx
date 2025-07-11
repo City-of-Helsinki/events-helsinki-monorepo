@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import router from 'next/router';
-import { render, waitFor, screen, userEvent } from '@/test-utils';
+
+import {
+  render,
+  waitFor,
+  screen,
+  userEvent,
+} from '../../config/vitest/test-utils';
 
 // Skip until there is a fix for this NextJS bug https://github.com/vercel/next.js/discussions/26426
 describe.skip('NextJS redirects', () => {
@@ -29,6 +35,3 @@ describe.skip('NextJS redirects', () => {
     }
   );
 });
-
-// eslint-disable-next-line jest/no-export
-export {};

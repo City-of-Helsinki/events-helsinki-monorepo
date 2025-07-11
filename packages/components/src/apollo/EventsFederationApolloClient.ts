@@ -5,19 +5,20 @@ import type {
   NormalizedCacheObject,
   StoreObject,
   ErrorPolicy,
-} from '@apollo/client';
+} from '@apollo/client/core/index.js';
 import {
   defaultDataIdFromObject,
   ApolloClient,
   ApolloLink,
   HttpLink,
   InMemoryCache,
-} from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
-import { RetryLink } from '@apollo/client/link/retry';
-import { relayStylePagination } from '@apollo/client/utilities';
+} from '@apollo/client/core/index.js';
+import { onError } from '@apollo/client/link/error/index.js';
+import { RetryLink } from '@apollo/client/link/retry/index.js';
+import { relayStylePagination } from '@apollo/client/utilities/index.js';
 import * as Sentry from '@sentry/browser';
 import fetch from 'cross-fetch';
+import type { GraphQLFormattedError } from 'graphql';
 import capitalize from 'lodash/capitalize';
 
 import { graphqlClientLogger } from '../loggers/logger';
@@ -32,7 +33,6 @@ import {
   MutableReference,
   sortMenuItems,
 } from './utils';
-import { GraphQLFormattedError } from 'graphql';
 
 export type EventsFederationApolloClientConfig = {
   federationGraphqlEndpoint: string;

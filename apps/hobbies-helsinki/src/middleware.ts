@@ -1,7 +1,7 @@
 // import { DEFAULT_LANGUAGE } from '@events-helsinki/components';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import redirectCampaignRoutes from '../redirectCampaignRoutes.config';
+import redirectCampaignRoutes from '../redirectCampaignRoutes.config.mjs';
 
 // import { i18n } from '../next-i18next.config'; The import does not work to fetch locales
 

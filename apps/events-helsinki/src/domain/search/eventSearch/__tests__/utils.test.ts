@@ -28,6 +28,7 @@ describe('getSearchQuery function', () => {
         [EVENT_SEARCH_FILTERS.TEXT]: ['test'],
       })
     ).toBe(
+      // eslint-disable-next-line @stylistic/max-len
       `?${EVENT_SEARCH_FILTERS.CATEGORIES}=category1,category2&${EVENT_SEARCH_FILTERS.DATE_TYPES}=type1,type2&${EVENT_SEARCH_FILTERS.TEXT}=test`
     );
 
@@ -40,6 +41,7 @@ describe('getSearchQuery function', () => {
         [EVENT_SEARCH_FILTERS.TEXT]: ['test'],
       })
     ).toBe(
+      // eslint-disable-next-line @stylistic/max-len
       `?${EVENT_SEARCH_FILTERS.END}=2019-12-20&${EVENT_SEARCH_FILTERS.START}=2019-11-20&${EVENT_SEARCH_FILTERS.TEXT}=test`
     );
   });

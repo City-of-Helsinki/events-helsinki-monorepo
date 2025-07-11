@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches snapshot 1`] = `
 <div
-  class="spinnerWrapper hasPadding"
+  class="_spinnerWrapper_d3ce5a spinner _hasPadding_d3ce5a"
   data-testid="loading-spinner"
 >
   <div
-    class="spinner"
+    class="_spinner_d3ce5a"
   >
     <div
       class="LoadingSpinner-module_loadingSpinner__2xHT_ LoadingSpinner-module_multicolor__1qbEF"

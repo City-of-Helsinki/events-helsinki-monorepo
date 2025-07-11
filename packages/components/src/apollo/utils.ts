@@ -1,4 +1,7 @@
-import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import type {
+  ApolloClient,
+  NormalizedCacheObject,
+} from '@apollo/client/core/index.js';
 
 import type { AppMenuItem } from '../types';
 import { LanguageCodeEnum } from '../types';
@@ -68,7 +71,7 @@ export class MutableReference<Ref = unknown> {
 
 type InitApolloClientConfig<
   TCacheShape,
-  Client extends ApolloClient<TCacheShape>
+  Client extends ApolloClient<TCacheShape>,
 > = {
   mutableCachedClient: MutableReference<Client>;
   createClient: () => Client;
@@ -77,7 +80,7 @@ type InitApolloClientConfig<
 // https://www.apollographql.com/blog/building-a-next-js-app-with-apollo-client-slash-graphql/
 export function initializeApolloClient<
   TCacheShape = NormalizedCacheObject,
-  Client extends ApolloClient<TCacheShape> = ApolloClient<TCacheShape>
+  Client extends ApolloClient<TCacheShape> = ApolloClient<TCacheShape>,
 >({
   mutableCachedClient,
   createClient,

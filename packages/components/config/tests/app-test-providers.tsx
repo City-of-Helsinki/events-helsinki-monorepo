@@ -3,11 +3,12 @@ import type {
   ApolloClient,
   InMemoryCache,
   NormalizedCacheObject,
-} from '@apollo/client';
-import { useApolloClient } from '@apollo/client';
-import { MockedProvider } from '@apollo/client/testing';
-import type { MockedResponse } from '@apollo/client/testing';
-import i18n from '@events-helsinki/common-i18n/tests/initI18n';
+} from '@apollo/client/index.js';
+import { useApolloClient } from '@apollo/client/react/index.js';
+import { MockedProvider } from '@apollo/client/testing/index.js';
+import type { MockedResponse } from '@apollo/client/testing/index.js';
+
+import { initTestI18n as i18n } from '@events-helsinki/common-i18n';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -19,7 +20,8 @@ import {
   defaultConfig as rhhcDefaultConfig,
 } from 'react-helsinki-headless-cms';
 import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
-import { I18nextTestStubProvider } from '@/test-utils/I18nextTestStubProvider';
+import { I18nextTestStubProvider } from '@/test-utils';
+
 import {
   AppRoutingProvider,
   DEFAULT_LANGUAGE,
@@ -143,7 +145,7 @@ function getRHHCConfig(
     utils: {
       ...rhhcDefaultConfig.utils,
       getIsHrefExternal,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
       getRoutedInternalHref,
     },
     internalHrefOrigins,

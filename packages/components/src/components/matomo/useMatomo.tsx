@@ -1,4 +1,4 @@
-import { createInstance as createMatomoInstance } from '@jonkoops/matomo-tracker-react';
+import createMatomoInstance from '@jonkoops/matomo-tracker-react/lib/instance.js';
 import { useMemo } from 'react';
 
 export default function useMatomoInstance(

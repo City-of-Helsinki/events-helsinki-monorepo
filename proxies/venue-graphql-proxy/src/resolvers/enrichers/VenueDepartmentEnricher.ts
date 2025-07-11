@@ -1,14 +1,14 @@
-import type VenueContext from '../../context/VenueContext';
+import type VenueContext from '../../context/VenueContext.js';
 import type {
   TprekUnit,
   TprekUnitWithoutNull,
   TranslatedVenueDetails,
-} from '../../types';
+} from '../../types.js';
 import {
   makeTranslatableDepartment,
   translateDepartment,
-} from '../../utils/utils';
-import type VenueEnricher from './VenueEnricher';
+} from '../../utils/utils.js';
+import type VenueEnricher from './VenueEnricher.js';
 
 export default class VenueDepartmentEnricher
   implements

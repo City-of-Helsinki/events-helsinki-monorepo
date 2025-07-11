@@ -1,6 +1,6 @@
-import type VenueContext from '../../context/VenueContext';
-import type { Source, TranslatedVenueDetails } from '../../types';
-import type VenueEnricher from '../enrichers/VenueEnricher';
+import type VenueContext from '../../context/VenueContext.js';
+import type { Source, TranslatedVenueDetails } from '../../types.js';
+import type VenueEnricher from '../enrichers/VenueEnricher.js';
 
 type Config<I, O> = {
   getDataSource: (

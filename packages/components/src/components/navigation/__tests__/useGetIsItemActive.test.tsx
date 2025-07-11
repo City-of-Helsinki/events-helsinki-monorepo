@@ -36,7 +36,7 @@ const testCmsHelper = new HeadlessCMSHelper({
   cmsArticlesContextPath: '/articles',
   cmsPagesContextPath: '/pages',
   dateFormat: 'dd.MM.yyyy',
-  ArticleDetails: jest.fn(),
+  ArticleDetails: vi.fn(),
 });
 
 const testRoutedAppHelper = new CmsRoutedAppHelper({
@@ -81,7 +81,6 @@ const articlesPage: MenuItemLocationMatcherType = [
 ];
 
 // FIXME: Skipped while no way to mock the nextjs redirects and i18nroutes for router was found.
-// eslint-disable-next-line jest/no-disabled-tests
 describe.skip('useGetIsItemActive hook for Navigation-component', () => {
   describe('getIsItemActive function', () => {
     it.each([...frontPage, ...searchPage, ...articlesPage])(

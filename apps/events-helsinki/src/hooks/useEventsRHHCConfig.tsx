@@ -1,4 +1,7 @@
-import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import type {
+  ApolloClient,
+  NormalizedCacheObject,
+} from '@apollo/client/core/index.js';
 import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
   useResilientTranslation,

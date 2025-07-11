@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import redirectCampaignRoutes from '../redirectCampaignRoutes.config';
+import redirectCampaignRoutes from '../redirectCampaignRoutes.config.mjs';
 import { DEFAULT_LANGUAGE, LOCALES } from './edge-runtime-compatible/constants';
 import {
   getRedirectFromCache,

@@ -16,8 +16,7 @@ Sentry.init({
     process.env.NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE ?? '0.1'
   ),
   // Replay may only be enabled for the client-side
-  integrations: [new SentryBrowser.Replay()],
-  // Capture Replay for 10% of all sessions,
+  integrations: [SentryBrowser.replayIntegration()], // Capture Replay for 10% of all sessions,
   // plus for 100% of sessions with an error
   replaysSessionSampleRate: parseFloat(
     process.env.NEXT_PUBLIC_SENTRY_REPLAY_SESSION_SAMPLE_RATE ?? '0'

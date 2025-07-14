@@ -4,8 +4,8 @@ import nodeExternals from 'webpack-node-externals';
 import { fileURLToPath } from 'url';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
-import getGraphqlProxyEnvironment from './env.js';
-import { appIndexJs, appBuild } from './paths.js';
+import getGraphqlProxyEnvironment from './env.mjs';
+import { appIndexJs, appBuild } from './paths.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -58,7 +58,6 @@ export default function () {
         '.cjs': ['.cjs', '.cts'],
         '.mjs': ['.mjs', '.mts'],
       },
-      modules: [_resolve(__dirname, 'src'), 'node_modules'],
       plugins: [
         new TsconfigPathsPlugin({
           configFile: _resolve(__dirname, '../tsconfig.json'),

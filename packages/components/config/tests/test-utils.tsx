@@ -1,7 +1,7 @@
 import type { ApolloCache, InMemoryCache } from '@apollo/client/cache/index.js';
 import type { MockedResponse } from '@apollo/client/testing/index.js';
 import type { RenderResult } from '@testing-library/react';
-import { act, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import type { NextRouter } from 'next/router';
 import Router from 'next/router';
 import type { ReactElement } from 'react';
@@ -62,7 +62,8 @@ const customRender: CustomRender = (
   };
 };
 
-const actWait = (amount?: number): Promise<void> => act(() => wait(amount));
+const actWait = (amount?: number): Promise<void> =>
+  React.act(() => wait(amount));
 
 export { actWait, customRender as render };
 

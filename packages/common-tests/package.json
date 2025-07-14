@@ -22,9 +22,9 @@
     "typecheck": "tsc --project ./tsconfig.json --noEmit"
   },
   "dependencies": {
-    "i18next": "23.2.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "i18next": "25.3.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@events-helsinki/eslint-config-bases": "workspace:^",
@@ -33,16 +33,16 @@
     "@testing-library/testcafe": "^5.0.1",
     "@types/node": "20.19.1",
     "cross-env": "7.0.3",
-    "eslint": "9.30.0",
+    "eslint": "9.31.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-testcafe-community": "2.0.0",
-    "eslint-plugin-testing-library": "^7.5.3",
+    "eslint-plugin-testing-library": "^7.6.0",
     "prettier": "^3.6.2",
     "rimraf": "6.0.1",
     "testcafe": "^3.7.2",
-    "typescript": "^5.8.3"
+    "typescript": "5.8.3"
   },
   "./package.json": "./package.json"
 }

@@ -4,10 +4,12 @@ import {
   EventSearchPage,
   testNavigationFromSearchToDetailsAndBack,
 } from '@events-helsinki/common-tests/browser-tests';
+import { defaultSearchProps } from '@events-helsinki/common-tests/browser-tests/page-model/eventSearchPage';
 import i18n from '../../../../packages/common-i18n/src/tests/initI18n';
 import { ROUTES } from '../../src/constants';
 
 const searchPage = new EventSearchPage('appHobbies');
+const searchType = 'Course';
 
 fixture.disablePageCaching('Search page').beforeEach(async (t) => {
   await i18n.changeLanguage('default');
@@ -16,8 +18,11 @@ fixture.disablePageCaching('Search page').beforeEach(async (t) => {
 
 test('Verify searching', async () => {
   await searchPage.verify();
-  await searchPage.doSearch();
-  await searchPage.doUnsuccessfulSearch();
+  await searchPage.doSearch({
+    searchText: defaultSearchProps.searchText,
+    searchType,
+  });
+  await searchPage.doUnsuccessfulSearch({ searchType });
 });
 
 test('Verify navigation between the search page and event details page', async (t) => {

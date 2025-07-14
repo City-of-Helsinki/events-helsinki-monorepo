@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 import { loadEnv } from 'vite';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, configDefaults } from 'vitest/config';
 
 export default defineConfig(({ mode }) => ({
   plugins: [],
@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
       dir: '../../.cache/events-graphql-proxy/vitest', // Vitest specific cache
     },
     include: ['src/**/*.{spec,test}.{js,jsx,ts,tsx}'], // Match your Jest testMatch
-    exclude: ['node_modules', './.next/', '/__mocks__/'],
+    exclude: [...configDefaults.exclude, './.next/', '/__mocks__/'],
     // Optional: Configure coverage if needed (equivalent to Jest's collectCoverageFrom, coverageDirectory)
     // coverage: {
     //   provider: 'v8', // or 'istanbul'

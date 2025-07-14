@@ -31,7 +31,6 @@ const rules = {
   },
   '!(*styles)/*.{css,scss}': (filenames) => {
     return [
-      // eslint-disable-next-line @stylistic/max-len
       `yarn stylelint --allow-empty-input --ignore-disables --config ./stylelint.config.js --max-warnings 25 --color ${concatFilesForStylelint(
         filenames
       )}`,

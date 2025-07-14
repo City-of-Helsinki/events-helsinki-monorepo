@@ -7,7 +7,7 @@ import {
   lightFormat,
 } from 'date-fns';
 
-import fi from 'date-fns/locale/fi/index.js';
+import fi from 'date-fns/locale/fi/index';
 
 import { GraphQLError } from 'graphql';
 import get from 'lodash/get.js';

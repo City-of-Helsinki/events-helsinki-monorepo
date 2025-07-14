@@ -1,6 +1,6 @@
 import assert from 'assert';
 import type { GraphQLRequest, GraphQLResponse } from '@apollo/server';
-import * as Sentry from '@sentry/node';
+
 import type { DocumentNode } from 'graphql';
 import { gql } from 'graphql-tag';
 import EventContext from '../context/EventContext';
@@ -11,6 +11,15 @@ import type {
 } from '../types/types';
 import { EventTypeId } from '../types/types';
 import { createTestApolloServer } from '../utils/testUtils';
+
+vi.mock('@sentry/node', () => ({
+  // Provide the mocked implementation for captureException
+  captureException: vi.fn(),
+  // ... and so on for other Sentry exports your app uses
+}));
+// eslint-disable-next-line import/order
+import * as Sentry from '@sentry/node';
+
 let errorSpy;
 let getMock;
 const eventId = 'eventId';

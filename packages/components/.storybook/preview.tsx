@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import type { Preview } from '@storybook/nextjs'
-import i18n from './i18next'
+import type { Preview } from '@storybook/nextjs';
+import i18n from './i18next';
 
 const withI18next = (Story: any) => {
   return (
@@ -22,8 +22,8 @@ const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
   },

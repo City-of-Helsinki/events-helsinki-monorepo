@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { configure, render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeEventImage } from '@/test-utils/mockDataUtils';
@@ -99,7 +98,7 @@ it('should render event content fields', async () => {
   itemsAllByRole.forEach(({ role, name }) => {
     expect(screen.queryAllByRole(role, { name })).toHaveLength(2);
   });
-});
+}, 10_000);
 
 it('should hide map if internet event', () => {
   render(

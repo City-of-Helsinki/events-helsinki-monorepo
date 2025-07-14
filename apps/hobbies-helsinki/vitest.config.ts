@@ -2,7 +2,7 @@
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
-import { defineConfig } from 'vitest/config';
+import { defineConfig, configDefaults } from 'vitest/config';
 
 // Load your tsconfig for path aliases
 import tsConfig from './tsconfig.json';
@@ -65,7 +65,7 @@ export default defineConfig({
       dir: '../../.cache/hobbies-helsinki/vitest', // Vitest specific cache
     },
     include: ['src/**/*.{spec,test}.{js,jsx,ts,tsx}'], // Match your Jest testMatch
-    exclude: ['node_modules', './.next/', '/__mocks__/'],
+    exclude: [...configDefaults.exclude, './.next/', '/__mocks__/'],
     // Optional: Configure coverage if needed (equivalent to Jest's collectCoverageFrom, coverageDirectory)
     // coverage: {
     //   provider: 'v8', // or 'istanbul'

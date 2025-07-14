@@ -1,4 +1,5 @@
 /**
+ * @type {import('stylelint').Config}
  * @link https://stylelint.io/user-guide/rules/list/
  */
 export default {

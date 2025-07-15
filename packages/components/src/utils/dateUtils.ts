@@ -1,7 +1,5 @@
 import { format as formatDateStr, isAfter, isValid, parse } from 'date-fns';
-import en from 'date-fns/locale/en-GB/index';
-import fi from 'date-fns/locale/fi/index';
-import sv from 'date-fns/locale/sv/index';
+import { enGB as en, fi, sv } from 'date-fns/locale';
 import get from 'lodash/get';
 import type { AppLanguage } from '../types';
 

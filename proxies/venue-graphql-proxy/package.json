@@ -34,7 +34,7 @@
     "@apollo/subgraph": "2.11.2",
     "@events-helsinki/graphql-proxy-server": "workspace:^",
     "chalk": "5.4.1",
-    "date-fns": "^2.30.0",
+    "date-fns": "^4.1.0",
     "graphql": "^16.11.0",
     "graphql-tag": "2.12.6",
     "lodash": "4.17.21"

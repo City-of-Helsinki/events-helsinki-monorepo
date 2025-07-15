@@ -1,8 +1,5 @@
 import { isBefore, isValid as isValidDate } from 'date-fns';
-
-import fi from 'date-fns/locale/fi/index';
-import sv from 'date-fns/locale/sv/index';
-
+import { fi, sv } from 'date-fns/locale';
 import { DateInput } from 'hds-react';
 import React from 'react';
 import { registerLocale } from 'react-datepicker';

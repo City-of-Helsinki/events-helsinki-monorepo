@@ -1,6 +1,6 @@
 import { translations } from '@events-helsinki/common-i18n';
 import userEvent from '@testing-library/user-event';
-import { utcToZonedTime } from 'date-fns-tz';
+import { toZonedTime } from 'date-fns-tz';
 import { advanceTo } from 'jest-date-mock';
 import React from 'react';
 import { configure, render, screen } from '@/test-utils';
@@ -44,7 +44,7 @@ describe('date range input', () => {
     await userEvent.click(startDateInput);
 
     expect(onChangeEndDate).toHaveBeenCalledWith(
-      utcToZonedTime(new Date('2020-10-12'), 'UTC')
+      toZonedTime(new Date('2020-10-12'), 'UTC')
     );
   }, 25000);
 
@@ -73,7 +73,7 @@ describe('date range input', () => {
     await userEvent.click(startDateInput);
 
     expect(onChangeEndDate).toHaveBeenCalledWith(
-      utcToZonedTime(new Date('2020-10-15'), 'UTC')
+      toZonedTime(new Date('2020-10-15'), 'UTC')
     );
   }, 25000);
 
@@ -98,7 +98,7 @@ describe('date range input', () => {
     await userEvent.click(endDateInput);
 
     expect(onChangeStartDate).toHaveBeenCalledWith(
-      utcToZonedTime(new Date('2020-10-12'), 'UTC')
+      toZonedTime(new Date('2020-10-12'), 'UTC')
     );
   });
 
@@ -127,7 +127,7 @@ describe('date range input', () => {
     await userEvent.click(endDateInput);
 
     expect(onChangeStartDate).toHaveBeenCalledWith(
-      utcToZonedTime(new Date('2020-10-15'), 'UTC')
+      toZonedTime(new Date('2020-10-15'), 'UTC')
     );
   }, 20_000);
 

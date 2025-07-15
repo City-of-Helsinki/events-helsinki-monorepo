@@ -5,7 +5,7 @@ import {
   isSameMonth,
   isSameYear,
 } from 'date-fns';
-import { utcToZonedTime } from 'date-fns-tz';
+import { toZonedTime } from 'date-fns-tz';
 import capitalize from 'lodash/capitalize';
 
 import { formatDate } from './dateUtils';
@@ -32,8 +32,8 @@ const getDateRangeStr = ({
 }): string => {
   const language = getLanguageOrDefault(locale);
   const timeZone = 'Europe/Helsinki';
-  const startDate = utcToZonedTime(new Date(start), timeZone);
-  const nextDay = utcToZonedTime(addDays(startDate, 1), timeZone);
+  const startDate = toZonedTime(new Date(start), timeZone);
+  const nextDay = toZonedTime(addDays(startDate, 1), timeZone);
   nextDay.setHours(5, 0, 0, 0);
   const weekdayFormat = locale === 'en' ? 'eee' : 'eeeeee';
   const dateFormat = 'd.M.yyyy ';
@@ -51,7 +51,7 @@ const getDateRangeStr = ({
 
     return [weekdayStr, dateStr, timeStr].join('');
   } else {
-    const endDate = utcToZonedTime(new Date(end), timeZone);
+    const endDate = toZonedTime(new Date(end), timeZone);
 
     if (isSameDay(startDate, endDate) || isBefore(endDate, nextDay)) {
       const weekdayStr = includeWeekday

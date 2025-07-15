@@ -1,8 +1,6 @@
 import type { Locale as DateLocale } from 'date-fns';
 import { format } from 'date-fns';
-import enGB from 'date-fns/locale/en-GB/index';
-import fi from 'date-fns/locale/fi/index';
-import sv from 'date-fns/locale/sv/index';
+import { enGB as en, fi, sv } from 'date-fns/locale';
 import type {
   OpeningHour,
   Time,
@@ -71,7 +69,7 @@ const microCopy: MicroCopy = {
 const dateLocales = {
   fi,
   sv,
-  en: enGB,
+  en,
 };
 
 function getIfArraysMatch<T = Record<string, unknown>>(

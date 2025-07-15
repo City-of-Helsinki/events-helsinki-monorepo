@@ -21,6 +21,9 @@ const __dirname = dirname(__filename);
  */
 const rules = {
   '**/*.{js,jsx,ts,tsx}': (filenames) => {
+    if (filenames.length === 0) {
+      return [];
+    }
     return getEslintFixCmd({
       cwd: __dirname,
       fix: true,
@@ -33,6 +36,9 @@ const rules = {
     });
   },
   '**/*.{json,md,mdx,css,html,yml,yaml,scss}': (filenames) => {
+    if (filenames.length === 0) {
+      return [];
+    }
     return [`prettier --write ${concatFilesForPrettier(filenames)}`];
   },
 };

@@ -11,9 +11,9 @@ import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
-import { useCombinedSearchContext } from 'domain/search/combinedSearch/adapters/CombinedSearchContext';
 import { SEARCH_ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
+import { useCombinedSearchContext } from '../../../../domain/search/combinedSearch/adapters/CombinedSearchContext';
 import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
 import { getNextPage } from '../utils';
 

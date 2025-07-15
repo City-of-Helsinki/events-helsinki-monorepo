@@ -18,6 +18,9 @@ import { concatFilesForStylelint } from '../../lint-staged.common.mjs';
  */
 const rules = {
   '**/*.{js,jsx,ts,tsx}': (filenames) => {
+    if (filenames.length === 0) {
+      return [];
+    }
     return getEslintFixCmd({
       cwd: __dirname,
       fix: true,
@@ -30,6 +33,9 @@ const rules = {
     });
   },
   '!(*styles)/*.{css,scss}': (filenames) => {
+    if (filenames.length === 0) {
+      return [];
+    }
     return [
       `yarn stylelint --allow-empty-input --ignore-disables --config ./stylelint.config.js --max-warnings 25 --color ${concatFilesForStylelint(
         filenames
@@ -38,6 +44,9 @@ const rules = {
     ];
   },
   '!(*default)/*.{json,md,mdx,css,html,yml,yaml,scss}': (filenames) => {
+    if (filenames.length === 0) {
+      return [];
+    }
     return [`prettier --write ${concatFilesForPrettier(filenames)}`];
   },
 };

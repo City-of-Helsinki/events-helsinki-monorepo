@@ -12,6 +12,10 @@ import {
   getEslintFixCmd,
 } from '../../lint-staged.common.mjs';
 import { concatFilesForStylelint } from '../../lint-staged.common.mjs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * @type {Record<string, (filenames: string[]) => string | string[] | Promise<string | string[]>>}

@@ -4,11 +4,13 @@ import type {
   Time,
 } from '@events-helsinki/components';
 import { humanizeTimeResourceState } from '@events-helsinki/components';
-import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
-import format from 'date-fns/format';
-import isAfter from 'date-fns/isAfter';
-import isBefore from 'date-fns/isBefore';
-import isFuture from 'date-fns/isFuture';
+import {
+  differenceInMilliseconds,
+  format,
+  isAfter,
+  isBefore,
+  isFuture,
+} from 'date-fns';
 
 function createDate(baseDate: Date, time: string) {
   const [hours, minutes, seconds] = time.split(':');

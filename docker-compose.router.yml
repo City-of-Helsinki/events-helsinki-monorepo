@@ -1,4 +1,3 @@
-version: '3'
 services:
   apollo-router:
     container_name: events-graphql-federation

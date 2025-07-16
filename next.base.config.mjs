@@ -1,19 +1,19 @@
 // https://nextjs.org/docs/api-reference/next.config.mjs/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 import { withSentryConfig } from '@sentry/nextjs';
-import pc from "picocolors";
+import pc from 'picocolors';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import bundleAnalyser from '@next/bundle-analyzer'
+import bundleAnalyser from '@next/bundle-analyzer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-
-// const enableCSP = true;
+const enableCSP = true;
 const trueEnv = ['true', '1', 'yes'];
 
 // const isProd = process.env.NODE_ENV === 'production';
+const isDevelopment = process.env.NODE_ENV === 'development';
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 
 console.log('FIXME: Remove me', 'process.env', process.env);
@@ -74,61 +74,6 @@ if (NEXTJS_SENTRY_DEBUG) {
 // Tell webpack to compile those packages
 // @link https://www.npmjs.com/package/next-transpile-modules
 const tmModules = ['@events-helsinki/components'];
-
-// Example of setting up secure headers
-// @link https://github.com/jagaapple/next-secure-headers
-// const { createSecureHeaders } = require('next-secure-headers');
-// const secureHeaders = createSecureHeaders({
-//   contentSecurityPolicy: {
-//     directives: enableCSP
-//       ? {
-//           defaultSrc: "'self'",
-//           styleSrc: [
-//             "'self'",
-//             "'unsafe-inline'",
-//             'https://unpkg.com/@graphql-yoga/graphiql/dist/style.css',
-//             'https://meet.jitsi.si',
-//             // 'https://8x8.vc',
-//           ],
-//           scriptSrc: [
-//             "'self'",
-//             "'unsafe-eval'",
-//             "'unsafe-inline'",
-//             'https://unpkg.com/@graphql-yoga/graphiql',
-//             'https://meet.jit.si/external_api.js',
-//             // 'https://8x8.vc/external_api.js',
-//             // 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js',
-//           ],
-//           frameSrc: [
-//             'https://meet.jit.si',
-//             // 'https://8x8.vc',
-//             // 'https://meetings.hubspot.com',
-//           ],
-//           connectSrc: [
-//             "'self'",
-//             'https://vitals.vercel-insights.com',
-//             'https://*.sentry.io',
-//             // 'wss://ws.pusherapp.com',
-//             // 'wss://ws-eu.pusher.com',
-//             // 'https://sockjs.pusher.com',
-//             // 'https://sockjs-eu.pusher.com',
-//           ],
-//           imgSrc: ["'self'", 'https:', 'http:', 'data:'],
-//           workerSrc: ['blob:'],
-//         }
-//       : {},
-//   },
-//   ...(enableCSP && process.env.NODE_ENV === 'production'
-//     ? {
-//         forceHTTPSRedirect: [
-//           true,
-//           { maxAge: 60 * 60 * 24 * 4, includeSubDomains: true },
-//         ],
-//       }
-//     : {}),
-//   referrerPolicy: 'same-origin',
-// });
-
 
 const projectFolder = process.cwd();
 
@@ -213,14 +158,49 @@ const nextBaseConfig = ({
     },
 
     async headers() {
+      // Base CSP directives
+      const cspDirectives = [
+        "default-src 'self'",
+        `script-src 'self' ${isDevelopment ? "'unsafe-eval'" : ''} https://webanalytics.digiaiiris.com *.youtube.com *.googlesyndication.com *.google-analytics.com *.googletagmanager.com *.gstatic.com`,
+        "style-src 'self' 'unsafe-inline'",
+        "img-src * 'self' data: https:",
+        "font-src 'self' *.hel.fi *.hel.ninja fonts.gstatic.com",
+        "connect-src 'self' localhost:* 127.0.0.1:* *.hel.fi *.hel.ninja *.hkih.hion.dev *.digiaiiris.com",
+        "object-src 'none'",
+        "media-src 'self' *.hel.fi *.hel.ninja *.hkih.hion.dev",
+        "manifest-src 'self'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-src 'self' *.hel.fi *.hel.ninja www.youtube.com www.youtube-nocookie.com player.vimeo.com *.google.com",
+        "frame-ancestors 'none'",
+        "worker-src 'self'",
+        'block-all-mixed-content',
+        'upgrade-insecure-requests',
+        // "report-to default", // Add a reporting endpoint in production
+      ];
+
+      // Join directives and clean up
+      const cspHeader = cspDirectives.join('; ');
+
       return [
         {
-          // All page routes, not the api ones
+          // Apply to all page routes (not API routes)
           source: '/:path((?!api).*)*',
           headers: [
-            // ...secureHeaders,
+            { key: 'X-Content-Type-Options', value: 'nosniff' },
+            { key: 'X-XSS-Protection', value: '0' },
             { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
             { key: 'Cross-Origin-Embedder-Policy', value: 'same-origin' },
+          ],
+        },
+        {
+          // Apply CSP to all routes, including API (adjust if API needs different CSP)
+          source: '/(.*)',
+          headers: [
+            {
+              key: 'Content-Security-Policy',
+              value: cspHeader,
+            },
           ],
         },
       ];

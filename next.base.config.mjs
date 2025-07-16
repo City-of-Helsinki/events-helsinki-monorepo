@@ -16,8 +16,6 @@ const trueEnv = ['true', '1', 'yes'];
 // const isProd = process.env.NODE_ENV === 'production';
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
 
-console.log('FIXME: Remove me', 'process.env', process.env);
-
 const NEXTJS_IGNORE_ESLINT = trueEnv.includes(
   process.env?.NEXTJS_IGNORE_ESLINT ?? 'false'
 );
@@ -50,7 +48,7 @@ const NEXTJS_SENTRY_TRACING = trueEnv.includes(
  * source map file name is used as an id-param.
  */
 const disableSourceMaps = trueEnv.includes(
-  process.env?.NEXT_DISABLE_SOURCEMAPS ?? 'false'
+  process.env?.NEXT_DISABLE_SOURCEMAPS ?? 'true'
 );
 
 if (disableSourceMaps) {

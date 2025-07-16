@@ -77,6 +77,14 @@
     "g:hds-critical-styles:create": "node ./scripts/create-critical-hds-styles-file.js ./static/assets/styles/critical-hds-styles.css",
     "prepare": "husky"
   },
+  "//": [
+    "`tar` in resolutions to resolve dependabot issue of dep for a dep",
+    "`jose` in resolutions to resolve dependabot issue of dep for a dep",
+    "`tar` in resolutions to resolve dependabot issue of dep for a dep",
+    "`get-func-name` in resolutions to resolve dependabot issue of dep for a dep",
+    "`brace-expansion` in resolutions to resolve dependabot issue of dep for a dep",
+    "other packages in resolutions are there to make it sure only 1 version of it is installed in monorepo"
+  ],
   "resolutions": {
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -86,7 +94,11 @@
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.1",
     "@babel/core": "7.28.0",
-    "@testing-library/dom": "^10.4.0"
+    "@testing-library/dom": "^10.4.0",
+    "tar:": "6.2.1",
+    "jose": "4.15.9",
+    "get-func-name": "2.0.2",
+    "brace-expansion": "1.1.12"
   },
   "dependencies": {
     "@next/bundle-analyzer": "15.4.1",

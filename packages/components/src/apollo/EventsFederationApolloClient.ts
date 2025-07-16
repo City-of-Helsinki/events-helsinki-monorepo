@@ -72,6 +72,7 @@ class EventsFederationApolloClient {
             )?.status;
             const errorMessage = `[GraphQL error]: ${JSON.stringify({
               OperationName: operation.operationName,
+              OperationVariables: operation.variables,
               Message: message,
               Location: locations,
               Path: path,

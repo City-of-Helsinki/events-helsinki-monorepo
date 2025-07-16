@@ -1,0 +1,32 @@
+{
+    "name": "Events Helsinki app",
+    "short_name": "Events Helsinki",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/shared-assets/images/hds-favicon-kit/favicon-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/shared-assets/images/hds-favicon-kit/favicon-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "/shared-assets/images/hds-favicon-kit/favicon.svg",
+            "type": "image/svg+xml",
+            "purpose": "maskable any",
+            "sizes": "any"
+        },
+        {
+            "src": "/shared-assets/images/hds-favicon-kit/favicon-32x32.ico",
+            "type": "image/x-icon",
+            "sizes": "32x32"
+        }
+    ],
+    "description": "An Events-Helsinki application: Find something to do",
+    "orientation": "portrait-primary"
+}

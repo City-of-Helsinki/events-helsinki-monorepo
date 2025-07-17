@@ -1,12 +1,12 @@
+import {
+  prefixDefaultLocale,
+  RedirectHandler,
+  shouldBypassMiddlewareAsStaticRequest,
+  updateRedirectsCache,
+} from '@events-helsinki/components/edge-runtime-compatible/middlewares';
 import type { NextRequest } from 'next/server';
 
 import redirectCampaignRoutes from '../redirectCampaignRoutes.config.mjs';
-import prefixDefaultLocale from './edge-runtime-compatible/middlewares/prefixDefaultLocale';
-import {
-  RedirectHandler,
-  updateRedirectsCache,
-} from './edge-runtime-compatible/middlewares/shortUrls';
-import { shouldBypassMiddlewareAsStaticRequest } from './edge-runtime-compatible/middlewares/staticRequests';
 
 const redirectHandler = new RedirectHandler({
   redirectCampaignRoutes,

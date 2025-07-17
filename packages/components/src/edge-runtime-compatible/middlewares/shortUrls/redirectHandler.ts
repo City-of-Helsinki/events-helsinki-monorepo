@@ -4,14 +4,14 @@ import { getLocale } from '../../utils';
 import { getRedirectFromCache } from './dynamicUrls';
 
 export interface RedirectHandlerConfig {
-  redirectCampaignRoutes: Record<string, string>;
+  redirectCampaignRoutes?: Record<string, string>;
 }
 
 export class RedirectHandler {
   private redirectCampaignRoutes: Record<string, string>;
 
   constructor(config: RedirectHandlerConfig) {
-    this.redirectCampaignRoutes = config.redirectCampaignRoutes;
+    this.redirectCampaignRoutes = config.redirectCampaignRoutes ?? {};
   }
 
   /**
@@ -35,11 +35,6 @@ export class RedirectHandler {
     // @deprecated redirectCampaignRoutes
     // Let redirect routes through without prefixing them with locale
     if (Object.keys(this.redirectCampaignRoutes).includes(pathname)) {
-      // For campaign redirects, the original code returned a redirect to the pathname itself.
-      // If the intent is to redirect to a different URL based on the config, you would use:
-      // const redirectTo = this.redirectCampaignRoutes[pathname];
-      // return NextResponse.redirect(new URL(`${redirectTo}${search}`, req.url));
-      // Based on your original code's behavior:
       return NextResponse.redirect(new URL(pathname, req.url));
     }
 

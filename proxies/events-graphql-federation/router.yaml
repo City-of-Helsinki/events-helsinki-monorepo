@@ -26,7 +26,32 @@ headers:
 include_subgraph_errors:
   all: true # Propagate errors from all subgraphs
 cors:
-  allow_any_origin: true
+  origins:
+    - https://studio.apollographql.com # Keep this so GraphOS Studio can run queries against your router
+    - ${env.FEDERATION_CMS_ROUTING_URL} # CMS origin for page previewing
+  match_origins:
+    # Use regular expressions to match origins ending in the specified domains.
+    # The ^ (caret) anchors the match to the beginning of the string.
+    # The \. (backslash dot) escapes the dot, so it matches a literal dot.
+    # The (.*) matches any characters (for subdomains, or the main domain itself).
+    # The $ (dollar sign) anchors the match to the end of the string.
+    - ^https?://(.*)\.hel\.ninja$
+    - ^https?://(.*)\.hel\.fi$
+    # For localhost with any port:
+    - ^http://localhost:\d+$
+    - ^https://localhost:\d+$
+  # Set to true to add the `Access-Control-Allow-Credentials` header
+  allow_credentials: true # For CMS page previewing
+  # The headers to allow.
+  # Not setting this mirrors a client's received `access-control-request-headers`
+  # This is equivalent to allowing any headers,
+  # except it will also work if allow_credentials is set to true
+  allow_headers: []
+  # Allowed request methods
+  methods:
+    - GET
+    - POST
+    - OPTIONS
 health_check:
   listen: ${env.ROUTER_HEALTHCHECK_URL:-0.0.0.0:4000}
   enabled: true

@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
+import type { AppLanguage, Redirects } from '../../../../types';
 import { parseRedirects } from '../parseRedirects';
-import type { AppLanguage, Redirects } from '../types';
 
 let consoleWarningSpy: any;
 

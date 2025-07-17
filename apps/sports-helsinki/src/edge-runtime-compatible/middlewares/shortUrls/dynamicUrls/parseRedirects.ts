@@ -1,6 +1,7 @@
+import type { AppLanguage } from '../../../types';
 import { isValidRedirectAddress } from './isValidRedirectAddress';
 import { isObject } from './typeguards';
-import type { AppLanguage, Redirects } from './types';
+import type { Redirects } from './types';
 
 /**
  * Parses the redirect entries from the given object.

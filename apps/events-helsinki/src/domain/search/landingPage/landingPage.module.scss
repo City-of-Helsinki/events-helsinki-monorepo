@@ -54,3 +54,53 @@ $mainBackground: var(--color-theme-background);
 .korosTopCollectionsRest {
   fill: $mainBackground !important;
 }
+
+.sectionHero {
+  position: relative; /* Keep this if you position other elements absolutely */
+  display: flex; /* Keep this if you use flexbox for layout */
+  margin: 0;
+
+  .heroFigure {
+    /* Position and size the figure to cover the hero */
+    position: absolute; /* Position it behind other content */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0; /* Remove default figure margin */
+    overflow: hidden; /* Hide any part of the image that extends beyond the figure */
+    z-index: -1; /* Set behind Koros */
+
+    img {
+      display: block; /* Remove potential extra space below image */
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* This makes the image cover the area while maintaining aspect ratio */
+      object-position: 50% 50%; /* Center the image, similar to background-position */
+    }
+  }
+
+  .heroModuleLabel {
+    position: absolute; /* Position the label relative to the figure */
+    padding: 5px 10px;
+    z-index: 1; /* Ensure label is above the image but possibly below other hero content */
+    background-color: var(--color-black);
+    top: 80px;
+    color: var(--color-white);
+    font-size: var(--fontsize-body-s);
+    margin: 0;
+    max-height: 80%;
+    opacity: 0.6;
+    overflow: hidden;
+    padding: 4px;
+    right: 0;
+    text-overflow: ellipsis;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    white-space: nowrap;
+    writing-mode: vertical-lr;
+  }
+}

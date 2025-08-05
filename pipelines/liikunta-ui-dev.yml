@@ -40,11 +40,19 @@ resources:
 extends:
   # Filename in Azure DevOps Repository
   template: components/liikunta-ui/pipelines/liikunta-ui-dev.yml@liikunta-pipelines
-  # parameters:
+  parameters:
     # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments or configMap values, the rest located in liikunta-pipelines
+    # Does not contain all buildArguments, the rest located in liikunta-pipelines/liikunta-variables-development.yml and liikunta-variables-common.yml
     # The values here will override the values defined in the liikunta-pipelines repository
-    # buildArgs:
-    #   DEBUG: 1
-    # configMap: # pod environment variables
-    #   DEBUG: 1
+    buildArgs:
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
+      CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      NEXTJS_DISABLE_SENTRY: 0
+      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
+      NEXT_PUBLIC_DEBUG: 1
+      NEXT_PUBLIC_MATOMO_ENABLED: 0
+    configMap: # pod environment variables
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
+      CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

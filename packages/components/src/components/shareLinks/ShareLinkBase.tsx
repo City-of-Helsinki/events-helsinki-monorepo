@@ -7,7 +7,7 @@ export interface Props {
   linkLabel: string;
   icon: ReactNode;
   url: string;
-  queryParameters: { [key: string]: string };
+  queryParameters: Record<string, string>;
   windowName: string;
 }
 

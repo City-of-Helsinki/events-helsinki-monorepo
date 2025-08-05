@@ -1,5 +1,5 @@
-import type { Place, PlaceListResponse } from '../types/types';
-import LinkedEventsDataSource from './LinkedEventsDataSource';
+import type { Place, PlaceListResponse } from '../types/types.js';
+import LinkedEventsDataSource from './LinkedEventsDataSource.js';
 class PlaceDataSource extends LinkedEventsDataSource {
   public async getPlaceDetails(id: string): Promise<Place> {
     return this.get(`place/${id}`);

@@ -1,6 +1,6 @@
 import type { AppLanguage } from '@events-helsinki/components';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import nextI18nextConfig from '../../../next-i18next.config';
+import nextI18nextConfig from '../../../next-i18next.config.mjs';
 
 const COMMON_TRANSLATIONS = [
   'appSports',

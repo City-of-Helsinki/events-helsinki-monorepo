@@ -2,22 +2,12 @@
  * Opinionated config base for projects using storybook.
  * @see https://github.com/City-of-Helsinki/events-helsinki-monorepo/tree/main/packages/eslint-config-bases
  */
+import storybook from 'eslint-plugin-storybook';
 
-const storybookPatterns = {
-  files: ['**/*.stories.{ts,tsx,mdx}'],
-};
+// const storybookPatterns = {
+//   files: ['**/*.stories.{ts,tsx,mdx}'],
+// };
 
-module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    node: true,
-  },
-  overrides: [
-    {
-      // For performance run storybook/recommended on test files, not regular code
-      files: storybookPatterns.files,
-      extends: ['plugin:storybook/recommended'],
-    },
-  ],
-};
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+export default [...storybook.configs['flat/recommended']];

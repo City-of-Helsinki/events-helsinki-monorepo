@@ -26,6 +26,7 @@ export function useSportsApolloClient(args: {
 }): ApolloClient<NormalizedCacheObject> {
   // NOTE: Critical: The Apollo cache should never be cleared!
   // Carefully test the cache after any changes done here.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   return React.useMemo(() => initializeSportsApolloClient(args), []);
 }
 

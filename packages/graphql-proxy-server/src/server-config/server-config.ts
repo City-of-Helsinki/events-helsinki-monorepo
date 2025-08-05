@@ -1,5 +1,5 @@
 import type { ApolloServerOptions } from '@apollo/server';
-import type { AppLanguage } from '@events-helsinki/components/src/types/types';
+import type { AppLanguage } from '../types.js';
 type SentryConfig = {
   sentryDsn?: string; // process.env.GRAPHQL_PROXY_SENTRY_DSN
   sentryEnvironment?: string; // process.env.GRAPHQL_PROXY_SENTRY_ENVIRONMENT
@@ -10,7 +10,8 @@ type NodeConfig = {
 };
 
 export type ServerContextConfig = {
-  languages?: AppLanguage[]; // Some datasources  uses language headers to resolve fields
+  // Some datasources  uses language headers to resolve fields
+  languages?: Array<AppLanguage>;
 };
 
 export type ServerConfig = SentryConfig &

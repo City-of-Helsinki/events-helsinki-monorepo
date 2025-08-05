@@ -22,14 +22,14 @@ const TestComponent = () => {
 
 describe('useLocale', () => {
   const unsupportedLanguages = ['fr', 'test'];
-  const mockUseLocale = jest.spyOn(useLocale, 'default');
+  const mockUseLocale = vi.spyOn(useLocale, 'default');
 
   beforeEach(async () => {
     await initTestI18n.changeLanguage(config.lng);
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it.each(APP_LANGUAGES)('supports the "%s" as a language', async (lang) => {

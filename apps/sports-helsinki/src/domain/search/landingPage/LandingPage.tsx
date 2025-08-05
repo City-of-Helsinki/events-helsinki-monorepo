@@ -16,8 +16,11 @@ export function LandingPageContentLayout({
   page,
   collections,
 }: PageProps & PageContentLayoutProps) {
-  const heroImage = page?.featuredImage?.node?.mediaItemUrl ?? '';
-
+  const {
+    mediaItemUrl: heroImage,
+    altText: heroImageAlt,
+    photographerName,
+  } = page?.featuredImage?.node ?? {};
   const [firstCollection, ...restCollections] =
     (collections as React.ReactNode[]) ?? [];
   const lastCollection = restCollections.pop();
@@ -30,9 +33,13 @@ export function LandingPageContentLayout({
             className={styles.sectionHero}
             korosBottom
             korosBottomClassName={styles.korosBottomHero}
-            backgroundImageUrl={heroImage}
           >
-            <></>
+            <figure className={styles.heroFigure}>
+              <img src={heroImage ?? ''} alt={heroImageAlt ?? ''} />
+              {photographerName && (
+                <div className={styles.heroModuleLabel}>{photographerName}</div>
+              )}
+            </figure>
           </PageSection>
           <PageSection className={styles.sectionSearch}>
             <ContentContainer>

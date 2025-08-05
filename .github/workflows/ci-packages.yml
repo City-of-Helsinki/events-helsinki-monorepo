@@ -12,7 +12,7 @@ on:
       - '.prettier*'
       - 'tsconfig.base.json'
       - '.prettier*'
-      - '.github/workflows/**'
+      - '.github/workflows/ci-packages.yml'
 
   pull_request:
     types:
@@ -26,7 +26,7 @@ on:
       - '.prettier*'
       - 'tsconfig.base.json'
       - '.prettier*'
-      - '.github/workflows/**'
+      - '.github/workflows/ci-packages.yml'
 
 env:
   CI: true
@@ -36,16 +36,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           # Fetch all git history so that yarn workspaces --since can compare with the correct commits
           # @link https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches
           fetch-depth: 0
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -56,7 +56,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
 
       - name: Restore yarn cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -65,7 +65,7 @@ jobs:
             yarn-cache-folder-
 
       - name: Restore packages cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ${{ github.workspace }}/.cache

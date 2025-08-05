@@ -1,11 +1,7 @@
-/* eslint-disable import/no-duplicates */
 import { format as formatDateStr, isAfter, isValid, parse } from 'date-fns';
-import fi from 'date-fns/locale/fi/index';
-import en from 'date-fns/locale/en-GB/index';
-import sv from 'date-fns/locale/sv/index';
+import { enGB as en, fi, sv } from 'date-fns/locale';
 import get from 'lodash/get';
 import type { AppLanguage } from '../types';
-/* eslint-enable import/no-duplicates */
 
 const locales = { en, fi, sv };
 

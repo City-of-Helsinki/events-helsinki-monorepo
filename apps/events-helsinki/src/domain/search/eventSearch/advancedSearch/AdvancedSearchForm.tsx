@@ -32,6 +32,7 @@ import {
 import { useAdvancedSearchContext } from './AdvancedSearchContext';
 import styles from './search.module.scss';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface AdvancedSearchFormProps {}
 
 export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {

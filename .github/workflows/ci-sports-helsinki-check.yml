@@ -1,0 +1,61 @@
+name: CI-Sports-Helsinki
+
+on:
+  push:
+    branches: [main]
+    # Only consider those paths to trigger the action
+    paths:
+      - 'apps/sports-helsinki/**'
+      - 'packages/components/**'
+      - 'packages/common-i18n/**'
+      - '.yarnrc.yml'
+      - 'tsconfig.base.json'
+      - '.prettier*'
+      - '.github/workflows/ci-sports-helsinki-check.yml'
+
+  pull_request:
+    branches: [main]
+    # Only consider those paths to trigger the action
+    paths:
+      - 'apps/sports-helsinki/**'
+      - 'packages/components/**'
+      - 'packages/common-i18n/**'
+      - '.yarnrc.yml'
+      - 'tsconfig.base.json'
+      - '.prettier*'
+      - '.github/workflows/ci-sports-helsinki-check.yml'
+
+jobs:
+  common:
+    uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@main
+    secrets: inherit
+    with:
+      node-version: 20
+      typecheck: true
+      app-directory: apps/sports-helsinki
+      extra-commands: |
+        # Timezone for tests
+        echo "TZ=Europe/Helsinki" >> $GITHUB_ENV
+        # Speed up build: they are linted in a previous step
+        echo "NEXTJS_IGNORE_ESLINT=true" >> $GITHUB_ENV
+        # Speed up build: they are typechecked in a previous step
+        echo "NEXTJS_IGNORE_TYPECHECK=true" >> $GITHUB_ENV
+        # Speed up build: don't run if not needed, enable if it becomes needed
+        echo "NEXT_DISABLE_SOURCEMAPS=true" >> $GITHUB_ENV
+        # Don't send telemetry for ci
+        echo "NEXT_TELEMETRY_DISABLED=true" >> $GITHUB_ENV
+        # To allow checking size-limits
+        echo "NEXTJS_DISABLE_SENTRY=false" >> $GITHUB_ENV
+        # Fully disable sentry upload
+        echo "NEXTJS_SENTRY_UPLOAD_DRY_RUN=true" >> $GITHUB_ENV
+        echo "FEDERATION_ROUTER_ENDPOINT=https://events-graphql-federation-sports.test.hel.ninja/" >> $GITHUB_ENV
+        echo "CMS_ORIGIN=https://liikunta.app-staging.hkih.hion.dev" >> $GITHUB_ENV
+        echo "LINKEDEVENTS_EVENT_ENDPOINT=https://api.hel.fi/linkedevents/v1/event" >> $GITHUB_ENV
+        # Mock origin
+        echo "NEXT_PUBLIC_APP_ORIGIN=https://localhost:3001" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_URL_BASE=//webanalytics.digiaiiris.com/js/" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_SITE_ID=939" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_SRC_URL=piwik.min.js" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_TRACKER_URL=tracker.php" >> $GITHUB_ENV
+        echo "NEXT_PUBLIC_MATOMO_ENABLED=0" >> $GITHUB_ENV
+        echo "SKIP_BUILD_STATIC_GENERATION=1" >> $GITHUB_ENV

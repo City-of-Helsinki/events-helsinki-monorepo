@@ -1,0 +1,40 @@
+name: CI-Events-Graphql-Proxy
+
+on:
+  push:
+    branches: [main]
+    # Only consider those paths to trigger the action
+    paths:
+      - 'proxies/events-graphql-proxy/**'
+      - '.yarnrc.yml'
+      - 'tsconfig.base.json'
+      - '.prettier*'
+      - '.github/workflows/ci-events-graphql-proxy-check.yml'
+
+  pull_request:
+    branches: [main]
+    # Only consider those paths to trigger the action
+    paths:
+      - 'proxies/events-graphql-proxy/**'
+      - '.yarnrc.yml'
+      - 'tsconfig.base.json'
+      - '.prettier*'
+      - '.github/workflows/ci-events-graphql-proxy-check.yml'
+  workflow_dispatch:
+
+jobs:
+  common:
+    uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@main
+    secrets: inherit
+    with:
+      node-version: 20
+      typecheck: true
+      app-directory: proxies/events-graphql-proxy
+      extra-commands: |
+        echo "GRAPHQL_PROXY_PORT=4100" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_API_BASE_URL=https://api.hel.fi/linkedevents/v1/" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_MAP_OPEN_DATA_API_BASE_URL=https://kartta.hel.fi/ws/geoserver/avoindata" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING=0" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_INTROSPECTION=1" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_SENTRY_ENVIRONMENT=development" >> $GITHUB_ENV
+        echo "GRAPHQL_PROXY_SENTRY_DSN=https://0b946822a84596cdd0453aa5d93d3b9e@sentry.test.hel.ninja/219" >> $GITHUB_ENV

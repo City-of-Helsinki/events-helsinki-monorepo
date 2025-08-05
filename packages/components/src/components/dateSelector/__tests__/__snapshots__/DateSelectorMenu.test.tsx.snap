@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches snapshot 1`] = `
 <div
-  class="dateSelectorMenu"
+  class="_dateSelectorMenu_bbd991"
   data-testid="date-selector-menu"
 >
   <div
-    class="checkboxWrapper"
+    class="_checkboxWrapper_bbd991"
   >
     <div
       class="Checkbox-module_checkbox__3L0GR checkbox_hds-checkbox__9HMCz"
@@ -82,7 +82,7 @@ exports[`matches snapshot 1`] = `
     </div>
   </div>
   <button
-    class="button btnSelectDates"
+    class="_button_bbd991 _btnSelectDates_bbd991"
     type="button"
   >
     <svg
@@ -101,7 +101,7 @@ exports[`matches snapshot 1`] = `
       />
     </svg>
     <div
-      class="buttonText"
+      class="_buttonText_bbd991"
     >
       Valitse päivät
     </div>
@@ -122,7 +122,7 @@ exports[`matches snapshot 1`] = `
     </svg>
   </button>
   <button
-    class="button btnBack hidden"
+    class="_button_bbd991 _btnBack_bbd991 _hidden_bbd991"
     type="button"
   >
     <svg
@@ -141,17 +141,17 @@ exports[`matches snapshot 1`] = `
       />
     </svg>
     <div
-      class="buttonText"
+      class="_buttonText_bbd991"
     >
       Takaisin
     </div>
   </button>
   <button
-    class="button btnClose hidden"
+    class="_button_bbd991 _btnClose_bbd991 _hidden_bbd991"
     type="button"
   >
     <div
-      class="buttonText"
+      class="_buttonText_bbd991"
     >
       Sulje
     </div>

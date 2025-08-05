@@ -56,8 +56,8 @@ const VenueUpcomingEvents: React.FC<VenueUpcomingEventsProps> = ({
   const hasCards = !!cards.length;
 
   React.useEffect(() => {
-    if (hasCards) {
-      onEventsLoaded && onEventsLoaded(cards.length);
+    if (hasCards && onEventsLoaded) {
+      onEventsLoaded(cards.length);
     }
   }, [onEventsLoaded, cards.length, hasCards]);
 

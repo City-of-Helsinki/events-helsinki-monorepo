@@ -45,12 +45,12 @@ All the applications inside the monorepo are sharing the similar Apollo-Router i
 │   └── events-graphql-proxy   ("clone of events-helsinki-api-proxy")
 │
 ├── apps
-│   ├── hobbies-helsinki  (i18n, ssr, api, jest)
+│   ├── hobbies-helsinki  (i18n, ssr, api, vitest)
 │   ├── events-helsinki   ("clone of hobbies-helsinki")
 │   └── sports-helsinki   ("clone of hobbies-helsinki")
 └── packages
     ├── common-i18n          (locales...)
-    ├── components           (common event components, utils and hooks, storybook, jest)
+    ├── components           (common event components, utils and hooks, storybook, vitest)
     ├── graphql-proxy-server (common code for graphql api-proxy server)
     └── eslint-config-bases  (to shared eslint configs)
 ```
@@ -109,8 +109,8 @@ If needed static resources like **images**,... can be shared by using symlinks i
 │       ├── src/
 │       │   └── pages/api           (api routes)
 │       ├── CHANGELOG.md
-│       ├── next.config.js
-│       ├── next-i18next.config.js
+│       ├── next.config.mjs
+│       ├── next-i18next.config.mjs
 │       ├── package.json            (define package workspace:package deps)
 │       └── tsconfig.json           (define path to packages)
 │
@@ -167,7 +167,7 @@ Some convenience scripts can be run in any folder of this repo and will call the
 | `yarn g:clean`               | Clean builds in all workspaces                                                                                                       |
 | `yarn g:check-dist`          | Ensure build dist files passes es2017 (run `g:build` first).                                                                         |
 | `yarn g:check-size`          | Ensure browser dist files are within size limit (run `g:build` first).                                                               |
-| `yarn clean:global-cache`    | Clean tooling caches (eslint, jest...)                                                                                               |
+| `yarn clean:global-cache`    | Clean tooling caches (eslint, vitest...)                                                                                               |
 | `yarn deps:check --dep dev`  | Will print what packages can be upgraded globally (see also [.ncurc.yml](https://github.com/sortlist/packages/blob/main/.ncurc.yml)) |
 | `yarn deps:update --dep dev` | Apply possible updates (run `yarn install && yarn dedupe` after)                                                                     |
 | `yarn check:install`         | Verify if there's no peer-deps missing in packages                                                                                   |
@@ -288,7 +288,7 @@ curl -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: 
 
 ### 5.1 Linters
 
-See in [./apps/hobbies-helsinki/.eslintrc.js](./apps/nextjs-app/.eslintrc.js) and
+See in [./apps/hobbies-helsinki/eslint.config.js](./apps/nextjs-app/eslint.config.js) and
 [eslint-config-bases](./packages/eslint-config-bases/README.md).
 
 ### 5.2 Hooks / Lint-staged
@@ -298,12 +298,12 @@ that lint and prettier are applied automatically on commit and/or pushes.
 
 ### 5.3 Tests
 
-Tests relies on ts-jest or vitest depending on the app. All setups supports typescript path aliases.
+Tests relies on vitest. All setups supports typescript path aliases.
 React-testing-library is enabled whenever react is involved.
 
 Configuration lives in the root folder of each apps/packages. See
 
-- [./apps/hobbies-helsinki/jest.config.js](./apps/hobbies-helsinki/jest.config.js).
+- [./apps/hobbies-helsinki/vitest.config.js](./apps/hobbies-helsinki/vitest.config.js).
 
 There are also some K6 performance testing scripts. The K6 package is included in the applications of the [apps](./apps/)-folder. To get more familiar with the K6 library, read the docs from https://k6.io/docs/.
 
@@ -353,8 +353,6 @@ To ensure decent performance, those features are present in the example actions:
   >    - "yarn.lock"
   >    - ".yarnrc.yml"
   >    - ".github/workflows/**"
-  >    - ".eslintrc.base.json"
-  >    - ".eslintignore"
   > ```
 
 #### Pipeline configuration

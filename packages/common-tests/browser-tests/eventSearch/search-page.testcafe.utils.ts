@@ -57,7 +57,7 @@ export async function testNavigationFromSearchToDetailsAndBack(
   await useClosedPageAwareGoBackFeature();
   // Refresh the results
   const results = searchPage.results;
-  results.nth(0).id == eventCard.id;
+  await t.expect(results.nth(0).id).eql(await eventCard.id);
   const ariaLabel = await eventCard.getAttribute('aria-label');
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   await isCardInScreen(ariaLabel!);

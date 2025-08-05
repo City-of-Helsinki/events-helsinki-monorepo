@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 
+import { fakeKeywords } from '../../../../../config/vitest/mockDataUtils';
 import {
   arrowDownKeyPressHelper,
   arrowUpKeyPressHelper,
@@ -10,8 +11,7 @@ import {
   escKeyPressHelper,
   render,
   tabKeyPressHelper,
-} from '@/test-utils';
-import { fakeKeywords } from '@/test-utils/mockDataUtils';
+} from '../../../../../config/vitest/test-utils';
 import type { SearchAutosuggestProps } from '../SearchAutosuggest';
 import SearchAutosuggest from '../SearchAutosuggest';
 
@@ -48,8 +48,8 @@ const mocks = [
 
 const defaultProps = {
   name: 'search',
-  onChangeSearchValue: jest.fn(),
-  onOptionClick: jest.fn(),
+  onChangeSearchValue: vi.fn(),
+  onOptionClick: vi.fn(),
   placeholder,
   searchValue,
 };
@@ -91,14 +91,13 @@ it('should allow navigation with down arrows', async () => {
   const options = screen.getAllByRole('option');
 
   arrowDownKeyPressHelper();
-  expect(options[0]).toHaveClass('autosuggestOption--isFocused');
+  expect(options[0]).toHaveClass(/autosuggestOption--isFocused/);
   expect(options[0]).toHaveTextContent(searchValue);
 
   keywords.data.forEach((keyword, index) => {
     arrowDownKeyPressHelper();
-    expect(options[index + 1]).toHaveClass('autosuggestOption--isFocused');
+    expect(options[index + 1]).toHaveClass(/autosuggestOption--isFocused/);
     const text = keyword.name?.fi;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     expect(options[index + 1]).toHaveTextContent(text!);
   });
 });
@@ -116,15 +115,15 @@ it('should allow navigation with up arrows', async () => {
   reversedKeywords.forEach((keyword, index) => {
     arrowUpKeyPressHelper();
     const text = keyword.name?.fi;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
     expect(options[reversedKeywords.length - index]).toHaveTextContent(text!);
     expect(options[reversedKeywords.length - index]).toHaveClass(
-      'autosuggestOption--isFocused'
+      /autosuggestOption--isFocused/
     );
   });
 
   arrowUpKeyPressHelper();
-  expect(options[0]).toHaveClass('autosuggestOption--isFocused');
+  expect(options[0]).toHaveClass(/autosuggestOption--isFocused/);
   expect(options[0]).toHaveTextContent(searchValue);
 });
 
@@ -142,7 +141,7 @@ it('first item should be focused when opening menu by down arrow', async () => {
 
   const options = screen.getAllByRole('option');
 
-  expect(options[0]).toHaveClass('autosuggestOption--isFocused');
+  expect(options[0]).toHaveClass(/autosuggestOption--isFocused/);
   expect(options[0]).toHaveTextContent(searchValue);
 });
 
@@ -162,13 +161,13 @@ it('last item should be focused when opening menu by up arrow', async () => {
   const lastIndex = keywords.data.length;
   const keyword = keywords.data[lastIndex - 1];
   const text = keyword?.name?.fi;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
   expect(options[lastIndex]).toHaveTextContent(text!);
-  expect(options[lastIndex]).toHaveClass('autosuggestOption--isFocused');
+  expect(options[lastIndex]).toHaveClass(/autosuggestOption--isFocused/);
 });
 
 it('should call onOptionClick by text is no option is selected', async () => {
-  const onEnter = jest.fn();
+  const onEnter = vi.fn();
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
 
@@ -184,7 +183,7 @@ it('should call onOptionClick by text is no option is selected', async () => {
 });
 
 it('should call onOptionClick by text is first option is selected', async () => {
-  const onEnter = jest.fn();
+  const onEnter = vi.fn();
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
 
@@ -201,7 +200,7 @@ it('should call onOptionClick by text is first option is selected', async () => 
 });
 
 it('should call onOptionClick with option if keyword is selected', async () => {
-  const onEnter = jest.fn();
+  const onEnter = vi.fn();
   renderComponent({ onOptionClick: onEnter });
   const searchInput = screen.getByPlaceholderText(placeholder);
 

@@ -161,7 +161,7 @@ it.each([
 ])(
   'should show buy/enrol button',
   async (eventType, isFree, buttonAriaLabel) => {
-    global.open = jest.fn();
+    global.open = vi.fn();
     const infoUrl = 'https://test.url';
     const mockEvent = getFakeEvent({
       typeId: eventType,

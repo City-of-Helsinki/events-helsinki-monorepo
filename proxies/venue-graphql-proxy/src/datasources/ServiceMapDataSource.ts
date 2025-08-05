@@ -1,12 +1,12 @@
-import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server/src';
-import type VenueContext from '../context/VenueContext';
+import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server';
+import type VenueContext from '../context/VenueContext.js';
+import type { VenueDataSources } from '../types/VenueDataSources.js';
 import type {
   TprekDepartment,
   TprekOntologyForest,
   TprekOntologyVocabulary,
   TprekUnit,
-} from '../types';
-import type { VenueDataSources } from '../types/VenueDataSources';
+} from '../types.js';
 
 /**
  * Docs: https://www.hel.fi/palvelukarttaws/restpages/ver4.html

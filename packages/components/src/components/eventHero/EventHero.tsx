@@ -44,7 +44,6 @@ export type EventHeroProps = {
   withActions?: boolean;
 };
 
-// eslint-disable-next-line sonarjs/cognitive-complexity
 const EventHero: React.FC<EventHeroProps> = ({
   event,
   superEvent,

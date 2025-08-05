@@ -99,13 +99,13 @@ const urlParams: UrlParams = {
 // type UrlParamKeys = keyof UrlParams;
 
 const routes = [
-  // eslint-disable-next-line max-len
+  // eslint-disable-next-line @stylistic/max-len
   `/haku?categories=${urlParams.categories}&dateTypes=today&end=${urlParams.end}&place=${urlParams.place}&organization=${urlParams.organization}&start=${urlParams.start}&text=${urlParams.text}`,
 ];
 
 // TODO: when HDS fixes the tag id -> uncomment
 /* it('test for accessibility violations', async () => {
-  const { container } = render(<FilterSummary onClear={jest.fn()} />, {
+  const { container } = render(<FilterSummary onClear={vitest.fn()} />, {
     mocks,
     routes,
   });
@@ -118,7 +118,7 @@ const routes = [
 }); */
 
 it('calls onClear callback when clear button is clicked', async () => {
-  const onClear = jest.fn();
+  const onClear = vitest.fn();
   render(
     <CombinedSearchProvider>
       <FilterSummary onClear={onClear} />
@@ -141,7 +141,7 @@ it('calls onClear callback when clear button is clicked', async () => {
 
 it.todo('routes to correct url after deleting filters');
 // it("routes to correct url after deleting filters", async () => {
-//   const { router } = render(<FilterSummary onClear={jest.fn()} />, {
+//   const { router } = render(<FilterSummary onClear={vitest.fn()} />, {
 //     mocks,
 //     routes,
 //   });

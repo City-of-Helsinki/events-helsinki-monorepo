@@ -3,10 +3,10 @@ import {
   queryBuilder,
   CustomIgnorableGraphQLErrorEnum,
   IgnorableGraphQLError,
-} from '@events-helsinki/graphql-proxy-server/src';
-import type EventContext from '../../context/EventContext';
-import type { EventDetails, QueryEventListArgs } from '../../types/types';
-import { MANDATORY_EVENT_FIELDS } from './constants';
+} from '@events-helsinki/graphql-proxy-server';
+import type EventContext from '../../context/EventContext.js';
+import type { EventDetails, QueryEventListArgs } from '../../types/types.js';
+import { MANDATORY_EVENT_FIELDS } from './constants.js';
 
 export const buildEventListQuery = (params: QueryEventListArgs) => {
   return queryBuilder([

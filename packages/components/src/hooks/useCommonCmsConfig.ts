@@ -48,10 +48,11 @@ const useCommonCmsConfig = (): Partial<Config> => {
       },
     },
     meta: {
-      appleTouchIconUrl: '/shared-assets/images/apple-touch-icon.png',
-      favIconUrl: '/shared-assets/images/favicon-32x32.ico',
-      favIconSvgUrl: '/shared-assets/images/favicon.svg',
-      manifestUrl: '/shared-assets/images/manifest.webmanifest',
+      appleTouchIconUrl:
+        '/shared-assets/images/hds-favicon-kit/apple-touch-icon.png',
+      favIconUrl: '/shared-assets/images/hds-favicon-kit/favicon-32x32.ico',
+      favIconSvgUrl: '/shared-assets/images/hds-favicon-kit/favicon.svg',
+      manifestUrl: '/manifest.webmanifest',
     },
     htmlSanitizer: {
       allowedUnsafeTags: ['iframe'],

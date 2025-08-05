@@ -1,8 +1,8 @@
 import type { ApolloServerPlugin } from '@apollo/server';
-import { RewriteFrames } from '@sentry/integrations';
+import * as SentryBrowser from '@sentry/browser';
 import * as Sentry from '@sentry/node';
-import type ContextValue from '../context/ContextValue';
-import { getServerConfig } from '../server-config/server-config';
+import type ContextValue from '../context/ContextValue.js';
+import { getServerConfig } from '../server-config/server-config.js';
 
 const sentryLoggingPlugin = <T>(): ApolloServerPlugin<ContextValue<T>> => {
   const config = getServerConfig();
@@ -13,7 +13,7 @@ const sentryLoggingPlugin = <T>(): ApolloServerPlugin<ContextValue<T>> => {
       // used for rewriting SourceMaps from js to ts
       // check that sourcemaps are enabled in tsconfig.js
       // read the docs https://docs.sentry.io/platforms/node/typescript/
-      new RewriteFrames({
+      SentryBrowser.rewriteFramesIntegration({
         root: process.cwd(),
       }),
     ],

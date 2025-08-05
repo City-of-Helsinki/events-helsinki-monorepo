@@ -5,8 +5,7 @@ $sizes: (
   s: variables.$breakpoint-xl,
   // Custom non-HDS compliant max width for content. Breaks alignment with
   // for instance Navigation.
-  m: 100rem,
-  // 1600px
+  m: 100rem, // 1600px
 );
 
 @function get-content-width($size) {

@@ -58,8 +58,12 @@ export const initialEventSearchAdapterValues = {
   location: [] as string[],
   sort: EVENT_SORT_OPTIONS.END_TIME,
   eventType: EventTypeId.General,
-  superEventType: undefined, // Don't use superEventType when experimenting LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
-  superEvent: undefined, // Only the course type search should use this param; LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+  // Don't use superEventType when experimenting:
+  //  LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+  superEventType: undefined,
+  // Only the course type search should use this param;
+  // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
+  superEvent: undefined,
   publisher: null,
   publisherAncestor: null,
   pageSize: 10,

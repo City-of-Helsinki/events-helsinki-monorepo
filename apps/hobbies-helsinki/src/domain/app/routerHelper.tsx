@@ -1,6 +1,6 @@
 import { CmsRoutedAppHelper, APP_LANGUAGES } from '@events-helsinki/components';
 
-import i18nRoutes from '../../../i18nRoutes.config';
+import i18nRoutes from '../../../i18nRoutes.config.mjs';
 import AppConfig from './AppConfig';
 
 const routerHelper = new CmsRoutedAppHelper({

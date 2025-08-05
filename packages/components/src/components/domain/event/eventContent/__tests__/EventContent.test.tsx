@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { configure, render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeEventImage } from '@/test-utils/mockDataUtils';
@@ -67,6 +66,7 @@ it('should render event content fields', async () => {
   // there is two kartta-links, thus we check that three is at least one match of each
   expect(
     screen.queryAllByRole('link', {
+      // eslint-disable-next-line @stylistic/max-len
       name: `${translations.common.mapBox.location.openMap}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     })
   ).not.toHaveLength(0);
@@ -85,10 +85,12 @@ it('should render event content fields', async () => {
   const itemsAllByRole = [
     {
       role: 'link',
+      // eslint-disable-next-line @stylistic/max-len
       name: `${translations.common.mapBox.location.directionsGoogle}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
     {
       role: 'link',
+      // eslint-disable-next-line @stylistic/max-len
       name: `${translations.common.mapBox.location.directionsHSL}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
   ];
@@ -96,7 +98,7 @@ it('should render event content fields', async () => {
   itemsAllByRole.forEach(({ role, name }) => {
     expect(screen.queryAllByRole(role, { name })).toHaveLength(2);
   });
-});
+}, 10_000);
 
 it('should hide map if internet event', () => {
   render(

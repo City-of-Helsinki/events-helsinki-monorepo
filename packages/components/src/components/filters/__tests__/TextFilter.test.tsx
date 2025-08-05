@@ -3,7 +3,7 @@ import { render, screen } from '@/test-utils';
 import TextFilter from '../TextFilter';
 
 const props = {
-  onRemove: jest.fn(),
+  onRemove: vi.fn(),
   text: 'text',
   type: 'text' as const,
 };
@@ -15,7 +15,7 @@ it('matches snapshot', () => {
 });
 
 it('calls onRemove callback when remove button is clicked', async () => {
-  const onClickMock = jest.fn();
+  const onClickMock = vi.fn();
   render(<TextFilter {...props} onRemove={onClickMock} />);
 
   expect(screen.getByText(`${props.text}`)).toBeInTheDocument();

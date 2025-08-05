@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../../styles/breakpoints' as breakpoints;
 
 $buttonWidth: 180px;
 
@@ -45,7 +45,7 @@ $buttonWidth: 180px;
       align-items: center;
       color: var(--color-primary-black);
     }
-    @include respond-above(s) {
+    @include breakpoints.respond-above(s) {
       margin-top: 0;
     }
   }
@@ -56,7 +56,7 @@ $buttonWidth: 180px;
 }
 
 .buttonWrapper {
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-column: span 1 / 5;
   }
 }
@@ -65,11 +65,11 @@ $buttonWidth: 180px;
   display: grid;
   grid-gap: var(--spacing-xs);
 
-  @include respond-above(s) {
+  @include breakpoints.respond-above(s) {
     grid-template-columns: 1fr 1fr;
   }
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
@@ -77,12 +77,12 @@ $buttonWidth: 180px;
 .autoSuggestRow {
   align-items: flex-end;
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   & > :first-child {
-    @include respond-above(m) {
+    @include breakpoints.respond-above(m) {
       grid-column: 1 / 4;
     }
   }
@@ -98,7 +98,7 @@ $buttonWidth: 180px;
 
   margin-bottom: var(--spacing-xs);
 
-  @include respond-above(s) {
+  @include breakpoints.respond-above(s) {
     grid-template-columns: 1fr;
     grid-gap: var(--spacing-xs);
 
@@ -111,7 +111,7 @@ $buttonWidth: 180px;
   font-weight: 500;
   line-height: normal;
 
-  @include respond-below(s) {
+  @include breakpoints.respond-below(s) {
     display: none;
   }
 }

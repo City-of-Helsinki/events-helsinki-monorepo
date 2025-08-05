@@ -4,13 +4,12 @@ import type { Option } from '../../../types';
 import { AccessibilityProfile } from '../../../types';
 
 import SearchSelect from '../SearchSelect';
-// eslint-disable-next-line import/no-unresolved
 
 const emptyOption: Option = { text: '', value: '' };
 const accessibilityProfileOptions = [
   emptyOption,
   ...Object.values(AccessibilityProfile).map(
-    (accessibility) => ({ text: accessibility, value: accessibility } as Option)
+    (accessibility) => ({ text: accessibility, value: accessibility }) as Option
   ),
 ];
 

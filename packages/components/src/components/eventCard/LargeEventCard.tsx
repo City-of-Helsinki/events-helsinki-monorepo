@@ -9,6 +9,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 
+// eslint-disable-next-line @stylistic/max-len
 import ArrowRightWithLoadingIndicator from '../../components/arrowRightWithLoadingIndicator/ArrowRightWithLoadingIndicator';
 import EventEnrolmentStatus from '../../components/domain/event/eventEnrolmentStatus/EventEnrolmentStatus';
 import useEventEnrolmentStatus from '../../components/domain/event/eventEnrolmentStatus/useEventEnrolmentStatus';

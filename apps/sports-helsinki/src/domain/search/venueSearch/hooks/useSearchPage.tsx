@@ -40,6 +40,8 @@ function useSearchPage(): SearchPage {
     try {
       await fetchMore({ ...pagination });
     } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error('handleLoadMore', 'error in fetchMore', e);
       toast.error(t('search:errorLoadMore'));
     }
     setIsFetchingMore(false);

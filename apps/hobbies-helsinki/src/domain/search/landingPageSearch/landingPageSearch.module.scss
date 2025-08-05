@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../../styles/breakpoints' as breakpoints;
 
 .landingPageSearch {
   margin-top: -13.5rem;
@@ -8,11 +8,11 @@
   position: absolute;
   width: 100%;
 
-  @include respond-above(s) {
+  @include breakpoints.respond-above(s) {
     padding: var(--spacing-xl);
   }
 
-  @include respond-below(s) {
+  @include breakpoints.respond-below(s) {
     position: relative;
   }
 
@@ -37,7 +37,7 @@
   height: fit-content;
   align-items: center;
 
-  @include respond-below(m) {
+  @include breakpoints.respond-below(m) {
     display: flex;
     flex-direction: column;
     padding-top: 0;
@@ -45,21 +45,21 @@
     padding-bottom: 3rem;
   }
 
-  @include respond-above(s) {
+  @include breakpoints.respond-above(s) {
     padding-top: 12rem;
   }
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-template-columns: 1fr 1fr 1fr;
     padding-top: 4rem;
   }
 
-  @include respond-above(l) {
+  @include breakpoints.respond-above(l) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
   div:nth-child(10) {
-    @include respond-below(m) {
+    @include breakpoints.respond-below(m) {
       grid-column-start: 2;
     }
   }

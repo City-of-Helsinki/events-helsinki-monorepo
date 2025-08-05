@@ -1,5 +1,12 @@
 {
-  "watch": ["src", ".env"],
-  "ignore": ["src/**/*.spec.ts", "src/types/**/*.d.ts"],
-  "exec": "ts-node -r dotenv-expand/config --esm ./src/index.ts"
+  "watch": [
+    "src",
+    ".env"
+  ],
+  "ignore": [
+    "src/**/*.spec.ts",
+    "src/types/**/*.d.ts"
+  ],
+  "ext": "ts,json",
+  "exec": "tsx --tsconfig tsconfig.json --require tsconfig-paths/register src/index.ts"
 }

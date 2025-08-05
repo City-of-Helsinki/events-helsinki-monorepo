@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from 'graphql-tag';
 
 export const VENUE_QUERY = gql`
   fragment venueFields on Venue {

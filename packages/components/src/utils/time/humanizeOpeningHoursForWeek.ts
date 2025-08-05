@@ -1,9 +1,6 @@
-/* eslint-disable import/no-duplicates */
 import type { Locale as DateLocale } from 'date-fns';
-import format from 'date-fns/format';
-import enGB from 'date-fns/locale/en-GB';
-import fi from 'date-fns/locale/fi';
-import sv from 'date-fns/locale/sv';
+import { format } from 'date-fns';
+import { enGB as en, fi, sv } from 'date-fns/locale';
 import type {
   OpeningHour,
   Time,
@@ -25,9 +22,7 @@ type Copy = {
   onNextDay: string;
 };
 
-type MicroCopy = {
-  [key: string]: Copy;
-};
+type MicroCopy = Record<string, Copy>;
 
 const microCopy: MicroCopy = {
   fi: {
@@ -74,7 +69,7 @@ const microCopy: MicroCopy = {
 const dateLocales = {
   fi,
   sv,
-  en: enGB,
+  en,
 };
 
 function getIfArraysMatch<T = Record<string, unknown>>(

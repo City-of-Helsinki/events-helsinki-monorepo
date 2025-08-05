@@ -5,7 +5,7 @@ import ToggleButton from '../ToggleButton';
 
 const defaultProps = {
   isSelected: true,
-  onClick: jest.fn(),
+  onClick: vi.fn(),
   text: 'Test button',
   value: 'test',
 };
@@ -17,7 +17,7 @@ it('matches snapshot', () => {
 });
 
 it('should call onClick', async () => {
-  const onClick = jest.fn();
+  const onClick = vi.fn();
   const { container } = render(
     <ToggleButton {...defaultProps} onClick={onClick} />
   );

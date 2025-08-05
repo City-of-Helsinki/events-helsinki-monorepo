@@ -1,153 +1,28 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
-import redirectCampaignRoutes from '../redirectCampaignRoutes.config';
-import { DEFAULT_LANGUAGE, LOCALES } from './edge-runtime-compatible/constants';
 import {
-  getRedirectFromCache,
+  prefixDefaultLocale,
+  RedirectHandler,
+  shouldBypassMiddlewareAsStaticRequest,
   updateRedirectsCache,
-} from './edge-runtime-compatible/redirectsCache';
+} from '@events-helsinki/components/edge-runtime-compatible/middlewares';
+import type { NextRequest } from 'next/server';
 
-const requestType = {
-  isStaticFile: (req: NextRequest) => req.nextUrl.pathname.startsWith('/_next'),
-  isPagesFolderApi: (req: NextRequest) =>
-    req.nextUrl.pathname.includes('/api/'),
-  // FIXME: This seems broken, as it will match any pathname with a dot in it
-  // Originally probably from https://github.com/vercel/next.js/discussions/18419 or
-  // https://nextjs.org/docs/pages/building-your-application/routing/internationalization
-  // as `PUBLIC_FILE = /\.(.*)$/` and `PUBLIC_FILE.test(pathname)` and passed
-  // through hobbies-helsinki repo to events-helsinki-monorepo.
-  isPublicFile: (req: NextRequest) => req.nextUrl.pathname.includes('.'),
-};
+import redirectCampaignRoutes from '../redirectCampaignRoutes.config.mjs';
 
-/** Get the preferred locale, similar to above or using a library */
-function getLocaleFromPathname(pathname: string) {
-  const pattern = `^/?(?<locale>${LOCALES.join('|')})/?`;
-  const match = pathname.match(new RegExp(pattern, 'i'));
-  return match?.groups?.locale;
-}
-
-function getLocale(req: NextRequest) {
-  const { pathname } = new URL(req.url);
-  return getLocaleFromPathname(pathname) ?? DEFAULT_LANGUAGE;
-}
-
-function isPathnameMissingLocale(pathname: string) {
-  return LOCALES.every(
-    (locale) =>
-      !pathname.startsWith(`/${locale}/`) &&
-      pathname !== `/${locale}` &&
-      // The root in default locale does not have a locale set
-      pathname !== '/'
-  );
-}
-
-type DefaultMatchesType = {
-  firstLocale?: string;
-  secondLocale?: string;
-};
-
-function getLocaleMatchesFromPathname(pathname: string): DefaultMatchesType {
-  const doubleLocalePrefix =
-    /^\/(?<firstLocale>fi|en|sv)\/(?<secondLocale>fi|en|sv)\//;
-  return (
-    pathname.match(doubleLocalePrefix)?.groups || {
-      firstLocale: undefined,
-      secondLocale: undefined,
-    }
-  );
-}
-
-/**
- * Handle dynamic and static redirects
- * @param req Incoming request
- * @returns Redirect response or null if no redirect is needed
- */
-const handleRedirects = (req: NextRequest): NextResponse | null => {
-  const { pathname, search } = req.nextUrl;
-
-  // Handle dynamic CMS configured redirects
-  const dynamicRedirectTo = getRedirectFromCache(pathname, getLocale(req));
-  if (dynamicRedirectTo) {
-    // eslint-disable-next-line no-console
-    console.log(`Redirecting from ${pathname} to ${dynamicRedirectTo}`);
-    return NextResponse.redirect(
-      new URL(`${dynamicRedirectTo}${search}`, req.url)
-    );
-  }
-
-  // @deprecated redirectCampaignRoutes
-  // Let redirect routes through without prefixing them with locale
-  if (Object.keys(redirectCampaignRoutes).includes(pathname)) {
-    return NextResponse.redirect(new URL(pathname, req.url));
-  }
-
-  return null; // No redirect needed
-};
-
-/**
- * Enforce prefix for default locale 'fi'
- * https://github.com/vercel/next.js/discussions/18419
- * @param req
- */
-const prefixDefaultLocale = async (req: NextRequest) => {
-  const url = new URL(req.url);
-  const { pathname, search } = req.nextUrl;
-  const locale = getLocale(req);
-  // Check if there is any supported locale in the pathname
-  const nextUrlPathnameIsMissingLocale = isPathnameMissingLocale(pathname);
-  const requestUrlPathnameIsMissingLocale = isPathnameMissingLocale(
-    url.pathname
-  );
-
-  // The default locale needs to be redirected so that it uses the default language in URL.
-  if (req.nextUrl.locale === 'default') {
-    return NextResponse.redirect(
-      new URL(`/${DEFAULT_LANGUAGE}${pathname}${search}`, req.url)
-    );
-  }
-
-  // Redirect if there is no locale.
-  // Redirect is not needed for the default language
-  // If the current full request URL pathname is also missing the locale,
-  // set the default language as a locale.
-  if (
-    nextUrlPathnameIsMissingLocale &&
-    requestUrlPathnameIsMissingLocale &&
-    locale !== DEFAULT_LANGUAGE
-  ) {
-    // e.g. incoming request is /haku
-    // The new URL is now /fi/haku
-    return NextResponse.redirect(
-      new URL(`/${DEFAULT_LANGUAGE}${pathname}${search}`, req.url)
-    );
-  }
-
-  const { firstLocale, secondLocale } = getLocaleMatchesFromPathname(pathname);
-
-  // Remove the double locale prefix which might occur
-  // when CMS content has an internal link to another locale context.
-  // NOTE: The locale will be automatically added as a prefix to
-  // the next URL by the NextJS (under the hood).
-  // The request's locale attribute should be used for that.
-  if (firstLocale && secondLocale && firstLocale !== secondLocale) {
-    const nextPathname = pathname
-      .replace(new RegExp(`^/${firstLocale}`), '')
-      .replace(new RegExp(`^/${secondLocale}`), '');
-    const nextUrl = new URL(`${nextPathname}${search}`, req.url);
-    return NextResponse.redirect(nextUrl.href);
-  }
-};
+const redirectHandler = new RedirectHandler({
+  redirectCampaignRoutes,
+});
 
 export async function middleware(req: NextRequest) {
-  if (
-    requestType.isStaticFile(req) ||
-    requestType.isPagesFolderApi(req) ||
-    requestType.isPublicFile(req)
-  ) {
+  if (shouldBypassMiddlewareAsStaticRequest(req)) {
     return;
   }
 
-  return handleRedirects(req) || prefixDefaultLocale(req);
+  const redirectResponse = redirectHandler.handleRedirects(req);
+  if (redirectResponse) {
+    return redirectResponse;
+  }
+
+  return prefixDefaultLocale(req);
 }
 
 /**

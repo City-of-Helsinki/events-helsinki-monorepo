@@ -70,7 +70,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     // Update the browser URL with the form values in the context.
     updateRouteToSearchPage({ shallow: true });
     // Scroll to result list.
-    scrollToResultList && scrollToResultList();
+    if (scrollToResultList) {
+      scrollToResultList();
+    }
   };
 
   const handleMenuOptionClick = (option: AutosuggestMenuOption) => {
@@ -167,8 +169,8 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                   // A following error could be thrown:
                   // "downshift: A component has changed the uncontrolled prop "selectedItem" to be controlled.
                   // This prop should not switch from controlled to uncontrolled (or vice versa).
-                  // Decide between using a controlled or uncontrolled Downshift element for the lifetime of the component.
-                  // More info: https://github.com/downshift-js/downshift#control-props".
+                  // Decide between using a controlled or uncontrolled Downshift element for the lifetime of
+                  // the component. More info: https://github.com/downshift-js/downshift#control-props".
                   // clearable
                 />
               </div>

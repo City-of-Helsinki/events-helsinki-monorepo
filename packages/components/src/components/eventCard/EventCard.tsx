@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { BackgroundImage, LinkBox } from 'react-helsinki-headless-cms';
 
+// eslint-disable-next-line @stylistic/max-len
 import ArrowRightWithLoadingIndicator from '../../components/arrowRightWithLoadingIndicator/ArrowRightWithLoadingIndicator';
 import EventLocationText from '../../components/domain/event/eventLocation/EventLocationText';
 import IconButton from '../../components/iconButton/IconButton';

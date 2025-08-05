@@ -1,5 +1,5 @@
-import camelCase from 'lodash/camelCase';
-import mapKeys from 'lodash/mapKeys';
+import camelCase from 'lodash/camelCase.js';
+import mapKeys from 'lodash/mapKeys.js';
 
 type CamelCase<S extends string> =
   S extends `${infer P1}_${infer P2}${infer P3}`
@@ -12,9 +12,8 @@ type MapKeysToCamelCase<T> = {
     : T[K];
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapKeysToCamelCase = <T extends Record<string, unknown>>(obj: T) => {
-  return mapKeys(obj, (v, k) => camelCase(k)) as MapKeysToCamelCase<T>;
+  return mapKeys(obj, (_, k) => camelCase(k)) as MapKeysToCamelCase<T>;
 };
 
 export default mapKeysToCamelCase;

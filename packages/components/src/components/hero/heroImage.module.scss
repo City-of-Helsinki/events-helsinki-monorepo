@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@import 'src/styles/variables';
+@use '../../styles/breakpoints' as breakpoints;
+@use '../../styles/variables' as variables;
 
 .heroImage {
   --height: 30rem;
@@ -35,7 +35,7 @@
   }
 
   & > div {
-    fill: $color-white;
+    fill: variables.$color-white;
     margin-top: -1rem;
   }
 

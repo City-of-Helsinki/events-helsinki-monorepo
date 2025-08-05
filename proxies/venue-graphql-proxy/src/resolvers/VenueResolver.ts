@@ -1,8 +1,8 @@
-import type VenueContext from '../context/VenueContext';
-import type { Source, TranslatedVenueDetails } from '../types';
-import type IsOpenHaukiIntegration from './integrations/IsOpenHaukiIntegration';
-import type OpeningHoursHaukiIntegration from './integrations/OpeningHoursHaukiIntegration';
-import type VenueServiceMapIntegration from './integrations/VenueServiceMapIntegration';
+import type VenueContext from '../context/VenueContext.js';
+import type { Source, TranslatedVenueDetails } from '../types.js';
+import type IsOpenHaukiIntegration from './integrations/IsOpenHaukiIntegration.js';
+import type OpeningHoursHaukiIntegration from './integrations/OpeningHoursHaukiIntegration.js';
+import type VenueServiceMapIntegration from './integrations/VenueServiceMapIntegration.js';
 
 type PossibleIntegrations =
   | VenueServiceMapIntegration

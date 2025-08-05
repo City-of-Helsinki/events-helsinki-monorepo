@@ -1,4 +1,4 @@
-import type VenueContext from '../../context/VenueContext';
+import type VenueContext from '../../context/VenueContext.js';
 import type {
   TprekOntologyForest,
   TprekOntologyTreeNode,
@@ -6,12 +6,12 @@ import type {
   TprekUnitWithoutNull,
   TranslatableOntologyIdLabel,
   TranslatedVenueDetails,
-} from '../../types';
+} from '../../types.js';
 import {
   formTranslationObject,
   translateOntologyIdLabels,
-} from '../../utils/utils';
-import type VenueEnricher from './VenueEnricher';
+} from '../../utils/utils.js';
+import type VenueEnricher from './VenueEnricher.js';
 
 function makeTranslatableOntologyIdLabel(
   ontologyTreeNode: TprekOntologyTreeNode

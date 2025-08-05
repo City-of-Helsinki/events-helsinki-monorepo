@@ -1,11 +1,11 @@
-import { ContextValue } from '@events-helsinki/graphql-proxy-server/src';
+import { ContextValue } from '@events-helsinki/graphql-proxy-server';
 
-import EventDataSource from '../datasources/eventDataSource';
-import KeywordDataSource from '../datasources/keywordDataSource';
-import NeighborhoodDataSource from '../datasources/neighborhoodDataSource';
-import OrganizationDataSource from '../datasources/organizationDataSource';
-import PlaceDataSource from '../datasources/placeDataSource';
-import type { EventDataSources } from '../types';
+import EventDataSource from '../datasources/eventDataSource.js';
+import KeywordDataSource from '../datasources/keywordDataSource.js';
+import NeighborhoodDataSource from '../datasources/neighborhoodDataSource.js';
+import OrganizationDataSource from '../datasources/organizationDataSource.js';
+import PlaceDataSource from '../datasources/placeDataSource.js';
+import type { EventDataSources } from '../types.js';
 
 class EventContext extends ContextValue<EventDataSources> {
   protected initializeDataSources() {

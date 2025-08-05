@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches snapshot 1`] = `
 <div
-  class="srOnly test"
+  class="_srOnly_fc0762 test"
 >
   <div>
     Test
@@ -12,7 +12,7 @@ exports[`matches snapshot 1`] = `
 
 exports[`matches snapshot 2`] = `
 <span
-  class="srOnly"
+  class="_srOnly_fc0762"
 >
   <div>
     Test

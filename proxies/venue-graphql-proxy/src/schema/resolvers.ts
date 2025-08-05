@@ -1,6 +1,6 @@
-import Venue from '../resolvers/Venue';
-import venueQueryResolver from '../resolvers/venueQueryResolver';
-import venuesByIdsResolver from '../resolvers/venuesByIdsResolver';
+import Venue from '../resolvers/Venue.js';
+import venueQueryResolver from '../resolvers/venueQueryResolver.js';
+import venuesByIdsResolver from '../resolvers/venuesByIdsResolver.js';
 
 const resolvers = {
   Query: {

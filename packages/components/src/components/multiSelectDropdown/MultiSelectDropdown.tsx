@@ -100,8 +100,11 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
       const current = dropdown.current;
 
       // Close menu when clicking outside of the component
-      if (!(target instanceof Node && current?.contains(target))) {
-        isMenuOpen && setIsMenuOpen(false);
+      if (
+        !(target instanceof Node && current?.contains(target)) &&
+        isMenuOpen
+      ) {
+        setIsMenuOpen(false);
       }
     },
     [isMenuOpen]

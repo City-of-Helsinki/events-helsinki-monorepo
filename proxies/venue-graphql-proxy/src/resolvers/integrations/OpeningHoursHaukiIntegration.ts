@@ -1,11 +1,11 @@
+import type { OpeningHour, Time } from '../../types/types.js';
 import type {
   HaukiOpeningHours,
   HaukiTimeElement,
   TranslatedVenueDetails,
-} from '../../types';
-import type { OpeningHour, Time } from '../../types/types';
-import type { HaukiIntegrationConfig } from './HaukiIntegrationConfig';
-import VenueResolverIntegration from './VenueResolverIntegration';
+} from '../../types.js';
+import type { HaukiIntegrationConfig } from './HaukiIntegrationConfig.js';
+import VenueResolverIntegration from './VenueResolverIntegration.js';
 
 function formatTimeElement(data: HaukiTimeElement): Time {
   return {

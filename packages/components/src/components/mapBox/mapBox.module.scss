@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@import 'src/styles/variables';
+@use '../../styles/breakpoints';
+@use '../../styles/variables';
 
 .wrapper {
   background-color: #f4f4f4;
@@ -48,7 +48,7 @@
 }
 
 .meta {
-  margin-top: $spacing-s;
+  margin-top: variables.$spacing-s;
 
   .locationName {
     font-size: var(--fontsize-heading-m);
@@ -67,7 +67,7 @@
   }
 
   & > *:not(:last-child) {
-    margin-bottom: $spacing-s;
+    margin-bottom: variables.$spacing-s;
   }
 }
 

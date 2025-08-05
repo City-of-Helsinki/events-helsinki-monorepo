@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../../styles/breakpoints' as breakpoints;
 
 .searchRow {
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
   position: relative;
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1.25rem;
@@ -20,7 +20,7 @@
   display: flex;
   justify-content: flex-end;
 
-  @include respond-below(m) {
+  @include breakpoints.respond-below(m) {
     justify-content: start;
   }
 
@@ -56,7 +56,7 @@
   display: flex;
   flex-direction: column;
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1.25rem;
@@ -68,17 +68,17 @@
 .dateSelectorWrapper {
   width: 100%;
   margin-bottom: 1.25rem;
-  @include respond-above(s) {
+  @include breakpoints.respond-above(s) {
     grid-column-start: 2;
   }
 
-  @include respond-above(m) {
+  @include breakpoints.respond-above(m) {
     grid-column-start: 1;
   }
 }
 .desktopDateSelector {
   min-width: 230px;
-  @include respond-below(s) {
+  @include breakpoints.respond-below(s) {
     display: none;
   }
 }

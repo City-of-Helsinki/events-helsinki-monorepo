@@ -1,15 +1,16 @@
+import type { GraphQLFormattedError } from 'graphql';
 import { useReducer } from 'react';
 
-type AddError = { type: 'addError'; error: Error };
+type AddError = { type: 'addError'; error: GraphQLFormattedError };
 type RemoveError = {
   type: 'removeError';
-  error: Error;
+  error: GraphQLFormattedError;
 };
 type ClearAllErrors = { type: 'clearErrors' };
 export type ToastableErrorActions = AddError | RemoveError | ClearAllErrors;
 
 export function apolloErrorsReducer(
-  state: Error[],
+  state: GraphQLFormattedError[],
   action: ToastableErrorActions
 ) {
   switch (action.type) {
@@ -32,6 +33,8 @@ export function apolloErrorsReducer(
   }
 }
 
-export function useApolloErrorsReducer(initialState: Error[] = []) {
+export function useApolloErrorsReducer(
+  initialState: GraphQLFormattedError[] = []
+) {
   return useReducer(apolloErrorsReducer, initialState);
 }

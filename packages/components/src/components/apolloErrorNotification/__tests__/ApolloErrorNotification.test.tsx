@@ -5,7 +5,7 @@ describe('ApolloErrorNotification', () => {
   const user = userEvent.setup();
 
   it('renders properly', async () => {
-    render(<ApolloErrorNotification onClose={jest.fn()} />);
+    render(<ApolloErrorNotification onClose={vi.fn()} />);
     await screen.findByRole('alert', {
       name: /notification/i,
     });
@@ -14,6 +14,7 @@ describe('ApolloErrorNotification', () => {
     ).toBeInTheDocument();
     expect(
       screen.getByText(
+        // eslint-disable-next-line @stylistic/max-len
         /osa sivuston toiminnoista ei ole käytettävissä\. koita myöhemmin uudestaan\. jos ongelma toistuu, kerro siitä meille/i
       )
     ).toBeInTheDocument();
@@ -25,7 +26,7 @@ describe('ApolloErrorNotification', () => {
   });
 
   it('calls onClose callback when closed', async () => {
-    const onCloseSpy = jest.fn();
+    const onCloseSpy = vi.fn();
     render(<ApolloErrorNotification onClose={onCloseSpy} />);
     await user.click(
       await screen.findByRole('button', {

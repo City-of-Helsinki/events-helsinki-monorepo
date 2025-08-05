@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@import 'src/styles/variables';
+@use '../../styles/breakpoints';
+@use '../../styles/variables';
 
 .list {
   --base-list-item-width: 18rem;
@@ -10,11 +10,11 @@
   grid-template-columns:
     [column-start] repeat(auto-fit, minmax(var(--base-list-item-width), 1fr))
     [column-end];
-  grid-gap: $spacing-xs;
+  grid-gap: variables.$spacing-xs;
 
   @include breakpoints.respond-above(m) {
     --base-list-item-width: 16rem;
-    grid-gap: $spacing-layout-m;
+    grid-gap: variables.$spacing-layout-m;
   }
 
   @include breakpoints.respond-above(xxl) {
@@ -60,7 +60,7 @@
 }
 
 .grid-3 {
-  --base-list-item-width: calc(24.5rem - (#{$spacing-m} * 0.5));
+  --base-list-item-width: calc(24.5rem - (#{variables.$spacing-m} * 0.5));
 }
 
 // Grid is fixed to columns. At largest screen sizes, 4 columns are used.
@@ -81,14 +81,14 @@
 }
 
 .gap-xs {
-  grid-gap: $spacing-xs;
+  grid-gap: variables.$spacing-xs;
 }
 .gap-s {
-  grid-gap: $spacing-s;
+  grid-gap: variables.$spacing-s;
 }
 .gap-m {
-  grid-gap: $spacing-m;
+  grid-gap: variables.$spacing-m;
 }
 .gap-l {
-  grid-gap: $spacing-l;
+  grid-gap: variables.$spacing-l;
 }

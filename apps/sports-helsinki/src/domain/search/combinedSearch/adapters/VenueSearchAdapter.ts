@@ -49,7 +49,8 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   /**
    * Map the combined search form fields to the venue search query variables.
    * @param input The output of the CombinedSearchFormAdapter is here as an input.
-   * @param locale The venue search needs a locale as a mandatory variable. This is not included in the combnined search form as a field (for now).
+   * @param locale The venue search needs a locale as a mandatory variable.
+   * This is not included in the combnined search form as a field (for now).
    */
   constructor(
     input: CombinedSearchAdapterInput,

@@ -1,6 +1,7 @@
-import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server/src';
-import type EventContext from '../context/EventContext';
-import type { EventDataSources } from '../types';
+import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server';
+import AppConfig from '../config/AppConfig.js';
+import type EventContext from '../context/EventContext.js';
+import type { EventDataSources } from '../types.js';
 
 abstract class LinkedEventsDataSource extends DataSourceWithContext<
   EventDataSources,
@@ -8,12 +9,7 @@ abstract class LinkedEventsDataSource extends DataSourceWithContext<
 > {
   public constructor(contextValue: EventContext) {
     super(contextValue);
-    if (!process.env.GRAPHQL_PROXY_API_BASE_URL) {
-      throw new Error(
-        'Environment variable "GRAPHQL_PROXY_API_BASE_URL" is not set!'
-      );
-    }
-    this.baseURL = process.env.GRAPHQL_PROXY_API_BASE_URL;
+    this.baseURL = AppConfig.apiBaseUrl;
   }
 }
 export default LinkedEventsDataSource;

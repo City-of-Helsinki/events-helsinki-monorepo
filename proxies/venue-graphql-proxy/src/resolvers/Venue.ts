@@ -1,11 +1,9 @@
-import AppConfig from '../config/AppConfig';
-import type { TranslatedVenueDetails } from '../types';
+import AppConfig from '../config/AppConfig.js';
+import type { TranslatedVenueDetails } from '../types.js';
 
 // Map each property of T to function of same name whose return type is property's type
 type GettersForProperties<T> = {
-  [Property in keyof T]: (params: {
-    [P in Property]: T[Property];
-  }) => T[Property];
+  [Property in keyof T]: (params: Record<Property, T[Property]>) => T[Property];
 };
 
 const Venue: GettersForProperties<TranslatedVenueDetails> = {

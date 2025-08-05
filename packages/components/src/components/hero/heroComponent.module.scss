@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@import 'src/styles/variables';
+@use '../../styles/breakpoints' as breakpoints;
+@use '../../styles/variables' as variables;
 
 .box {
   --width: 100%;
@@ -7,11 +7,11 @@
 
   grid-row: 1;
   align-self: center;
-  background-color: rgba($color-black, 70%);
+  background-color: rgba(variables.$color-black, 70%);
   width: var(--width);
   max-width: var(--max-width);
   margin-top: 10vh;
-  padding: $spacing-m;
+  padding: variables.$spacing-m;
 
   @include breakpoints.respond-above(m) {
     --width: 30rem;
@@ -20,30 +20,30 @@
 }
 
 .boxHelper > p {
-  color: $color-white !important;
-  margin-bottom: $spacing-s !important;
+  color: variables.$color-white !important;
+  margin-bottom: variables.$spacing-s !important;
 }
 
 .boxTitle {
   margin-top: 0;
   padding-top: 0;
-  color: $color-white;
-  line-height: $lineheight-s;
-  margin-bottom: $spacing-m;
+  color: variables.$color-white;
+  line-height: variables.$lineheight-s;
+  margin-bottom: variables.$spacing-m;
 }
 
 .linkButton {
   display: block;
-  margin-top: $spacing-s;
-  padding: $spacing-xs;
+  margin-top: variables.$spacing-s;
+  padding: variables.$spacing-xs;
   width: fit-content;
-  background-color: $color-coat-of-arms;
-  border-color: $color-coat-of-arms;
-  color: $color-white !important;
+  background-color: variables.$color-coat-of-arms;
+  border-color: variables.$color-coat-of-arms;
+  color: variables.$color-white !important;
   text-decoration: none !important;
 
   &:hover {
-    background-color: $color-coat-of-arms-dark;
-    border-color: $color-coat-of-arms-dark;
+    background-color: variables.$color-coat-of-arms-dark;
+    border-color: variables.$color-coat-of-arms-dark;
   }
 }

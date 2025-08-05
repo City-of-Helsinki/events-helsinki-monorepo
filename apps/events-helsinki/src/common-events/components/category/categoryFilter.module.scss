@@ -1,9 +1,9 @@
-@import 'src/styles/breakpoints';
+@use '../../../styles/breakpoints' as breakpoints;
 .categoryFilter {
   height: 100%;
   min-height: 64px;
 
-  @include respond-below(m) {
+  @include breakpoints.respond-below(m) {
     width: 100%;
     min-height: auto;
   }

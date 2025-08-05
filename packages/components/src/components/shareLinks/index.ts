@@ -1,2 +1,2 @@
 export { default as ShareLinks } from './ShareLinks';
-export * from './types';
+export type * from './types';

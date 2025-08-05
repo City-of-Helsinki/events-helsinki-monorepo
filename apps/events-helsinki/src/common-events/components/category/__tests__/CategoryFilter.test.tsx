@@ -1,7 +1,11 @@
 import { IconHome } from 'hds-react';
 import React from 'react';
 
-import { render, screen, userEvent } from '@/test-utils';
+import {
+  render,
+  screen,
+  userEvent,
+} from '../../../../../config/vitest/test-utils';
 import CategoryFilter from '../CategoryFilter';
 
 const category = {

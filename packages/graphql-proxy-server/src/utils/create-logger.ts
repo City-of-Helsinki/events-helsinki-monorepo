@@ -1,5 +1,5 @@
 import winston from 'winston';
-import { getServerConfig } from '../server-config/server-config';
+import { getServerConfig } from '../server-config/server-config.js';
 
 const createLogger = (): winston.Logger => {
   const serverConfig = getServerConfig();

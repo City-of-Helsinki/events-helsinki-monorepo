@@ -1,7 +1,7 @@
-import type { ApolloCache, InMemoryCache } from '@apollo/client/cache';
-import type { MockedResponse } from '@apollo/client/testing';
+import type { ApolloCache, InMemoryCache } from '@apollo/client/cache/index.js';
+import type { MockedResponse } from '@apollo/client/testing/index.js';
 import type { RenderResult } from '@testing-library/react';
-import { act, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import type { NextRouter } from 'next/router';
 import Router from 'next/router';
 import type { ReactElement } from 'react';
@@ -9,16 +9,14 @@ import React from 'react';
 import wait from 'waait';
 import TestProviders from './app-test-providers';
 
-type CustomRender = {
-  (
-    ui: React.ReactElement,
-    options?: {
-      mocks?: MockedResponse[];
-      cache?: ApolloCache<Record<string, unknown>> | InMemoryCache;
-      routes?: string | string[];
-    }
-  ): CustomRenderResult;
-};
+type CustomRender = (
+  ui: React.ReactElement,
+  options?: {
+    mocks?: MockedResponse[];
+    cache?: ApolloCache<Record<string, unknown>> | InMemoryCache;
+    routes?: string | string[];
+  }
+) => CustomRenderResult;
 
 export type CustomRenderResult = RenderResult & { router: NextRouter };
 
@@ -64,14 +62,13 @@ const customRender: CustomRender = (
   };
 };
 
-// eslint-disable-next-line testing-library/no-unnecessary-act
-const actWait = (amount?: number): Promise<void> => act(() => wait(amount));
+const actWait = (amount?: number): Promise<void> =>
+  React.act(() => wait(amount));
 
-// eslint-disable-next-line import/export
 export { actWait, customRender as render };
 
 // re-export everything
-// eslint-disable-next-line import/export
+
 export * from '@testing-library/react';
 export { render as defaultRender } from '@testing-library/react';
 export { default as userEvent } from '@testing-library/user-event';

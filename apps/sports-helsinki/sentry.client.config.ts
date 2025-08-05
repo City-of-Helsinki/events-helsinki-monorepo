@@ -2,6 +2,7 @@
 // The config you add here will be used whenever a page is visited.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
+import * as SentryBrowser from '@sentry/browser';
 import * as Sentry from '@sentry/nextjs';
 
 Sentry.init({
@@ -15,8 +16,7 @@ Sentry.init({
     process.env.NEXT_PUBLIC_SENTRY_TRACE_SAMPLE_RATE ?? '0.1'
   ),
   // Replay may only be enabled for the client-side
-  integrations: [new Sentry.Replay()],
-  // Capture Replay for 10% of all sessions,
+  integrations: [SentryBrowser.replayIntegration()], // Capture Replay for 10% of all sessions,
   // plus for 100% of sessions with an error
   replaysSessionSampleRate: parseFloat(
     process.env.NEXT_PUBLIC_SENTRY_REPLAY_SESSION_SAMPLE_RATE ?? '0'

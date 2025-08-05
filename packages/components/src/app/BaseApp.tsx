@@ -1,10 +1,9 @@
-import type { createInstance as createMatomoInstance } from '@jonkoops/matomo-tracker-react';
-import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
+import type createMatomoInstance from '@jonkoops/matomo-tracker-react/lib/instance.js';
+import MatomoProvider from '@jonkoops/matomo-tracker-react/lib/MatomoProvider.js';
 
 import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';
 import React from 'react';
-import { injectStyle } from 'react-toastify/dist/inject-style';
 
 import '../styles/globals.scss';
 import '../styles/askem.scss';
@@ -29,6 +28,7 @@ import {
 import type { AppThemeProviderProps } from '../themeProvider';
 import { AppThemeProvider } from '../themeProvider';
 import type { CmsRoutedAppHelper, HeadlessCMSHelper } from '../utils';
+
 import useHdsStyleFix from './useHdsStyleFix';
 
 export type Props = {
@@ -50,7 +50,7 @@ export type Props = {
 const DynamicToastContainer = dynamic(
   () =>
     import('react-toastify').then((mod) => {
-      injectStyle();
+      // TODO: Do we need to aplpy styles here as we used to with earlier versions?
       return mod.ToastContainer;
     }),
   { ssr: false }

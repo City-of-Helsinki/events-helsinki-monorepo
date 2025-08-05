@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints' as breakpoints;
 
 .dropdown {
   position: relative;
@@ -100,7 +100,7 @@
     align-items: center;
     position: relative;
     padding: var(--spacing-m) var(--spacing-s);
-    @include respond-between(s, l) {
+    @include breakpoints.respond-between(s, l) {
       flex-direction: column;
     }
 

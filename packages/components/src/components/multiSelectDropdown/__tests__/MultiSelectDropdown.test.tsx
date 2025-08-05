@@ -1,4 +1,4 @@
-import translations from '@events-helsinki/common-i18n/locales/fi/common.json';
+import { translations } from '@events-helsinki/common-i18n';
 import React from 'react';
 import {
   arrowDownKeyPressHelper,
@@ -15,7 +15,7 @@ import {
 import MultiSelectDropdown from '../MultiSelectDropdown';
 import type { MultiselectDropdownProps } from '../types';
 
-const onChange = jest.fn();
+const onChange = vi.fn();
 const options = [
   {
     text: 'Squirrel',
@@ -92,7 +92,7 @@ it('should reset keyboard navigation position after a new search', async () => {
   expect(
     screen.getByRole('checkbox', { name: options[0].text }).parentElement
       ?.parentElement
-  ).toHaveClass('dropdownItem--isFocused');
+  ).toHaveClass(/dropdownItem--isFocused/);
 
   // Find something, then reset the search to ensure that all results are listed
   fireEvent.change(searchInput, { target: { value: 'Ele' } });
@@ -104,7 +104,7 @@ it('should reset keyboard navigation position after a new search', async () => {
   allOptions.forEach((text) => {
     expect(
       screen.getByRole('checkbox', { name: text }).parentElement?.parentElement
-    ).not.toHaveClass('dropdownItem--isFocused');
+    ).not.toHaveClass(/dropdownItem--isFocused/);
   });
 });
 
@@ -121,14 +121,14 @@ describe('ArrowUp, ArrowDown', () => {
     expect(
       screen.queryByRole('checkbox', { name: options[1].text })?.parentElement
         ?.parentElement
-    ).toHaveClass('dropdownItem--isFocused');
+    ).toHaveClass(/dropdownItem--isFocused/);
 
     arrowUpKeyPressHelper();
 
     expect(
       screen.queryByRole('checkbox', { name: options[0].text })?.parentElement
         ?.parentElement
-    ).toHaveClass('dropdownItem--isFocused');
+    ).toHaveClass(/dropdownItem--isFocused/);
   });
 
   it('should select last item if the first keyboard navigation is button up', async () => {
@@ -142,7 +142,7 @@ describe('ArrowUp, ArrowDown', () => {
     expect(
       screen.getByRole('checkbox', { name: options[options.length - 1].text })
         ?.parentElement?.parentElement
-    ).toHaveClass('dropdownItem--isFocused');
+    ).toHaveClass(/dropdownItem--isFocused/);
   });
 
   it('should reset to start position when user goes up in the first member of the list', async () => {
@@ -155,7 +155,7 @@ describe('ArrowUp, ArrowDown', () => {
     options.forEach((option) => {
       expect(
         screen.getByRole('checkbox', { name: option.text }).parentElement
-      ).not.toHaveClass('dropdownItem--isFocused');
+      ).not.toHaveClass(/dropdownItem--isFocused/);
     });
   });
 
@@ -169,7 +169,7 @@ describe('ArrowUp, ArrowDown', () => {
     options.forEach((option) => {
       expect(
         screen.getByRole('checkbox', { name: option.text }).parentElement
-      ).not.toHaveClass('dropdownItem--isFocused');
+      ).not.toHaveClass(/dropdownItem--isFocused/);
     });
   });
 });
@@ -220,7 +220,7 @@ it('should open dropdown when user clicks on toggle button', async () => {
 });
 
 it('should call onChange when clicking checkbox', async () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   renderComponent({ onChange });
 
   const toggleButton = screen.getByRole('button', { name: title });
@@ -234,7 +234,7 @@ it('should call onChange when clicking checkbox', async () => {
 });
 
 it('should uncheck option', async () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   renderComponent({ onChange, value: [options[0].value] });
 
   const toggleButton = screen.getByRole('button', { name: title });
@@ -247,7 +247,7 @@ it('should uncheck option', async () => {
 });
 
 it('should call onChange with empty array when clicking select all checkbox', async () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   renderComponent({
     onChange,
     selectAllText: '',
@@ -260,7 +260,7 @@ it('should call onChange with empty array when clicking select all checkbox', as
 
   await userEvent.click(
     screen.getByRole('checkbox', {
-      name: translations.multiSelectDropdown.selectAll,
+      name: translations.common.multiSelectDropdown.selectAll,
     })
   );
   expect(onChange).toHaveBeenCalledWith([]);

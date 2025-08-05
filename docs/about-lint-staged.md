@@ -12,16 +12,16 @@ and the [linter docs](./about-linters.md).
 .
 ├── apps
 │   ├── hobbies-helsinki
-│   │   ├── .eslintrc.js
-│   │   └── lint-staged.config.js   (overwrite global lint-staged.config.js, custom eslint)
+│   │   ├── eslint.config.mjs
+│   │   └── lint-staged.config.mjs   (overwrite global lint-staged.config.mjs, custom eslint)
 │   └── events-helsinki
-│       ├── .eslintrc.js
-│       └── lint-staged.config.js   (overwrite global lint-staged.config.js, custom eslint)
+│       ├── eslint.config.mjs
+│       └── lint-staged.config.mjs   (overwrite global lint-staged.config.mjs, custom eslint)
 ├── packages
 │   └── components
-│       ├── .eslintrc.js
-│       └── lint-staged.config.js   (overwrite global lint-staged.config.js, custom eslint)
+│       ├── eslint.config.mjs
+│       └── lint-staged.config.mjs   (overwrite global lint-staged.config.mjs, custom eslint)
 │
-├── lint-staged.common.js  (few common utils)
-└── lint-staged.config.js  (base config to overwrite per apps/packages)
+├── lint-staged.common.mjs  (few common utils)
+└── lint-staged.config.mjs  (base config to overwrite per apps/packages)
 ```

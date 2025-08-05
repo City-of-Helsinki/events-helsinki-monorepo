@@ -24,7 +24,7 @@ const defaultProps: RangeDropdownProps = {
   maxInputLabel: 'End integer',
   maxInputFixedValue: '80',
   name: 'range',
-  onChange: jest.fn(),
+  onChange: vi.fn(),
   fixedValuesText: 'Set default values',
   showFixedValuesText: true,
   title: title,
@@ -135,19 +135,19 @@ it('can be navigated with tab', async () => {
     name: /end integer/i,
   }) as HTMLInputElement;
 
-  userEvent.tab();
+  await userEvent.tab();
   await waitFor(() => {
     expect(minValueTextbox).toHaveFocus();
   });
 
-  userEvent.tab();
+  await userEvent.tab();
   await waitFor(() => {
     expect(maxValueTextbox).toHaveFocus();
   });
 });
 
 it('should call onChange correctly when setting fixed values with checkbox', async () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const { rerender } = renderComponent({ onChange });
 
   const toggleButton = screen.getByRole('button', { name: title });
@@ -188,12 +188,12 @@ it('should call onChange correctly when setting fixed values with checkbox', asy
 
 describe('Validation', () => {
   it('should fix min value and max value if initial values are negative', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { rerender } = renderComponent({ onChange });
 
     const toggleButton = screen.getByRole('button', { name: title });
     await userEvent.click(toggleButton);
-    userEvent.tab();
+    await userEvent.tab();
     const minValueTextbox = screen.queryByRole('spinbutton', {
       name: /start integer/i,
     }) as HTMLInputElement;
@@ -209,7 +209,7 @@ describe('Validation', () => {
     // min is negative
     rerender({ minInputValue: '-1', maxInputValue: '100', onChange });
 
-    userEvent.tab();
+    await userEvent.tab();
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith('0', '100');
     });
@@ -217,19 +217,19 @@ describe('Validation', () => {
     // max is negative
     rerender({ minInputValue: '0', maxInputValue: '-1', onChange });
 
-    userEvent.tab();
+    await userEvent.tab();
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith('0', '0');
     });
   });
 
   it('should fix min value and max value if min > max', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     const { rerender } = renderComponent({ onChange });
 
     const toggleButton = screen.getByRole('button', { name: title });
     await userEvent.click(toggleButton);
-    userEvent.tab();
+    await userEvent.tab();
     const minValueTextbox = screen.queryByRole('spinbutton', {
       name: /start integer/i,
     }) as HTMLInputElement;
@@ -244,7 +244,7 @@ describe('Validation', () => {
 
     rerender({ minInputValue: '10', maxInputValue: '5', onChange });
 
-    userEvent.tab();
+    await userEvent.tab();
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledWith('5', '5');
     });

@@ -1,0 +1,19 @@
+[08:55:16.865] [INFO] Checking the health of your Storybook..
+[08:55:16.866] [DEBUG] Getting Storybook info...
+[08:55:16.869] [DEBUG] Loading main config...
+[08:55:17.012] [DEBUG] Getting stories paths...
+[08:55:17.046] [DEBUG] Getting package manager...
+[08:55:17.759] [DEBUG] Getting Storybook version...
+[08:55:18.696] [WARN] .storybook: 1 issue found
+[08:55:18.696] [INFO] Attention: The following dependencies are duplicated which might cause unexpected behavior:
+storybook:
+9.0.14, 9.0.15
+
+
+Please try de-duplicating these dependencies by running yarn dedupe
+
+
+You can find more information for a given dependency by running yarn why <package-name>
+[08:55:18.704] [INFO] Storybook doctor is complete!
+[08:55:18.704] [INFO] You can always recheck the health of your project(s) by running:
+npx storybook doctor

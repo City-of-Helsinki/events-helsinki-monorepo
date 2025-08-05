@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/max-len */
 export default function IconIceSkating() {
   return (
     <svg
@@ -33,7 +34,7 @@ export default function IconIceSkating() {
         transform="translate(-30 82) rotate(-90)"
       />
       <path d="M58,48c0,3.31-2.14,6-4.77,6H50v4h3.4c4.74,0,8.6-4.49,8.6-10Z" />
-      {/* eslint-disable-next-line max-len */}
+
       <path d="M50,39.44a9.77,9.77,0,0,0-6.2-8.5L30.07,25.43A3.17,3.17,0,0,1,28,22.59V21H24v1.6h0a7.17,7.17,0,0,0,4.6,6.61l13.72,5.51A5.67,5.67,0,0,1,46,39.78V47h4Z" />
     </svg>
   );

@@ -23,7 +23,7 @@ tsconfig.tsbuildinfo
 !.yarn/releases
 
 # Used when building with nextjs (next-eslint)
-!.eslintrc.base.json
+!eslint.config.base.json
 !.prettierignore
 !.prettierrc.js
 !.eslintignore

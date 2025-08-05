@@ -15,6 +15,7 @@ const useClickCapture = (triggerTimeout = 0) => {
     return () => {
       ref?.removeEventListener('click', clickHandler, false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clickCaptureRef]);
 
   return { clickCaptureRef, clicked };

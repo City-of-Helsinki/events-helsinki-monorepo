@@ -1,7 +1,6 @@
 {
   "name": "@events-helsinki/common-tests",
   "version": "1.0.0",
-  "license": "MIT",
   "private": true,
   "homepage": "https://github.com/City-of-Helsinki/events-helsinki-monorepo",
   "repository": {
@@ -9,39 +8,41 @@
     "url": "https://github.com/City-of-Helsinki/events-helsinki-monorepo",
     "directory": "packages/common-tests"
   },
+  "license": "MIT",
   "author": {
     "name": "Jaakko Nenonen <jaakko@codelicious.fi>"
   },
   "sideEffects": false,
   "type": "module",
-  "./package.json": "./package.json",
+  "main": "./src/index.ts",
   "scripts": {
     "clean": "rimraf --no-glob ./dist ./coverage ./tsconfig.tsbuildinfo",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --cache --cache-location ../../.cache/eslint/common-tests.eslintcache",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --fix",
     "typecheck": "tsc --project ./tsconfig.json --noEmit"
   },
+  "dependencies": {
+    "i18next": "25.3.2",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
   "devDependencies": {
     "@events-helsinki/eslint-config-bases": "workspace:^",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/testcafe": "^5.0.0",
-    "@types/jest": "^29.5.2",
-    "@types/node": "20.3.2",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/testcafe": "^5.0.1",
+    "@types/node": "20.19.1",
     "cross-env": "7.0.3",
-    "eslint": "8.43.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^27.2.2",
-    "eslint-plugin-jest-formatting": "^3.1.0",
+    "eslint": "9.31.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-testcafe-community": "2.0.0",
-    "eslint-plugin-testing-library": "^5.11.0",
-    "i18next": "23.2.3",
-    "prettier": "^2.8.8",
-    "react": "^18.2.0",
-    "react-dom": "18.2.0",
-    "rimraf": "5.0.1",
-    "testcafe": "^3.0.0",
-    "typescript": "^5.3.3"
-  }
+    "eslint-plugin-testing-library": "^7.6.0",
+    "prettier": "^3.6.2",
+    "rimraf": "6.0.1",
+    "testcafe": "^3.7.2",
+    "typescript": "5.8.3"
+  },
+  "./package.json": "./package.json"
 }

@@ -1,6 +1,6 @@
-import translations from '@events-helsinki/common-i18n/locales/fi/common.json';
+import { translations } from '@events-helsinki/common-i18n';
 import userEvent from '@testing-library/user-event';
-import { utcToZonedTime } from 'date-fns-tz';
+import { toZonedTime } from 'date-fns-tz';
 import { advanceTo } from 'jest-date-mock';
 import React from 'react';
 import { configure, render, screen } from '@/test-utils';
@@ -10,13 +10,13 @@ import DateRangePicker from '../DateRangePicker';
 configure({ defaultHidden: true });
 const defaultProps: DateRangePickerProps = {
   endDate: null,
-  onChangeEndDate: jest.fn(),
-  onChangeStartDate: jest.fn(),
+  onChangeEndDate: vi.fn(),
+  onChangeStartDate: vi.fn(),
   startDate: null,
 };
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
   advanceTo('2020-10-10');
 });
 const renderComponent = (props?: Partial<DateRangePickerProps>) => {
@@ -26,11 +26,11 @@ const renderComponent = (props?: Partial<DateRangePickerProps>) => {
 describe('date range input', () => {
   it('should call onChangeEndDate', async () => {
     const endDate = new Date('2020-10-10');
-    const onChangeEndDate = jest.fn();
+    const onChangeEndDate = vi.fn();
     renderComponent({ endDate, onChangeEndDate });
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelEndDate,
+      name: translations.common.dateSelector.labelEndDate,
     });
 
     const endDateStr = '12.10.2020';
@@ -39,22 +39,22 @@ describe('date range input', () => {
     await userEvent.type(endDateInput, endDateStr);
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelStartDate,
+      name: translations.common.dateSelector.labelStartDate,
     });
     await userEvent.click(startDateInput);
 
     expect(onChangeEndDate).toHaveBeenCalledWith(
-      utcToZonedTime(new Date('2020-10-12'), 'UTC')
+      toZonedTime(new Date('2020-10-12'), 'UTC')
     );
   }, 25000);
 
   it('should call onChangeEndDate with clicking date', async () => {
     const endDate = new Date('2020-10-10');
-    const onChangeEndDate = jest.fn();
+    const onChangeEndDate = vi.fn();
     renderComponent({ endDate, onChangeEndDate });
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelEndDate,
+      name: translations.common.dateSelector.labelEndDate,
     });
 
     await userEvent.click(endDateInput);
@@ -68,22 +68,22 @@ describe('date range input', () => {
     );
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelStartDate,
+      name: translations.common.dateSelector.labelStartDate,
     });
     await userEvent.click(startDateInput);
 
     expect(onChangeEndDate).toHaveBeenCalledWith(
-      utcToZonedTime(new Date('2020-10-15'), 'UTC')
+      toZonedTime(new Date('2020-10-15'), 'UTC')
     );
   }, 25000);
 
   it('should call onChangeStartDate', async () => {
     const startDate = new Date('2020-10-10');
-    const onChangeStartDate = jest.fn();
+    const onChangeStartDate = vi.fn();
     renderComponent({ startDate, onChangeStartDate });
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelStartDate,
+      name: translations.common.dateSelector.labelStartDate,
     });
 
     const startDateStr = '12.10.2020';
@@ -93,22 +93,22 @@ describe('date range input', () => {
     await userEvent.type(startDateInput, startDateStr);
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelEndDate,
+      name: translations.common.dateSelector.labelEndDate,
     });
     await userEvent.click(endDateInput);
 
     expect(onChangeStartDate).toHaveBeenCalledWith(
-      utcToZonedTime(new Date('2020-10-12'), 'UTC')
+      toZonedTime(new Date('2020-10-12'), 'UTC')
     );
   });
 
   it('should call onChangeStartDate with clicking date', async () => {
     const startDate = new Date('2020-10-10');
-    const onChangeStartDate = jest.fn();
+    const onChangeStartDate = vi.fn();
     renderComponent({ startDate, onChangeStartDate });
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelStartDate,
+      name: translations.common.dateSelector.labelStartDate,
     });
     await userEvent.click(startDateInput);
 
@@ -122,12 +122,12 @@ describe('date range input', () => {
     );
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelEndDate,
+      name: translations.common.dateSelector.labelEndDate,
     });
     await userEvent.click(endDateInput);
 
     expect(onChangeStartDate).toHaveBeenCalledWith(
-      utcToZonedTime(new Date('2020-10-15'), 'UTC')
+      toZonedTime(new Date('2020-10-15'), 'UTC')
     );
   }, 20_000);
 
@@ -135,24 +135,26 @@ describe('date range input', () => {
     renderComponent();
 
     const startDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelStartDate,
+      name: translations.common.dateSelector.labelStartDate,
     });
     await userEvent.type(startDateInput, '23.6.2021');
 
     const endDateInput = await screen.findByRole('textbox', {
-      name: translations.dateSelector.labelEndDate,
+      name: translations.common.dateSelector.labelEndDate,
     });
     await userEvent.type(endDateInput, '22.6.2021');
 
     await screen.findByText(
-      translations.dateSelector.errorEndDateBeforeStartDate
+      translations.common.dateSelector.errorEndDateBeforeStartDate
     );
 
-    userEvent.clear(endDateInput);
+    await userEvent.clear(endDateInput);
     await userEvent.type(endDateInput, '24.6.2021');
 
     expect(
-      screen.queryByText(translations.dateSelector.errorEndDateBeforeStartDate)
+      screen.queryByText(
+        translations.common.dateSelector.errorEndDateBeforeStartDate
+      )
     ).not.toBeInTheDocument();
   });
 
@@ -175,28 +177,28 @@ describe('date range input', () => {
     renderComponent();
 
     const startDateInput = screen.getByRole('textbox', {
-      name: translations.dateSelector.labelStartDate,
+      name: translations.common.dateSelector.labelStartDate,
     });
 
     // Set invalid date as the input value
     await userEvent.type(startDateInput, '23..2021');
 
     expect(
-      screen.queryByText(translations.dateSelector.errorDateFormat)
+      screen.queryByText(translations.common.dateSelector.errorDateFormat)
     ).not.toBeInTheDocument();
 
     // should show error when focusing out of the element
     await userEvent.tab();
 
-    await screen.findByText(translations.dateSelector.errorDateFormat);
+    await screen.findByText(translations.common.dateSelector.errorDateFormat);
 
     // Error should disappear
-    userEvent.clear(startDateInput);
+    await userEvent.clear(startDateInput);
     await userEvent.type(startDateInput, '23.6.2021');
     // should show the possible error when focusing out of the element
     await userEvent.tab();
     expect(
-      screen.queryByText(translations.dateSelector.errorDateFormat)
+      screen.queryByText(translations.common.dateSelector.errorDateFormat)
     ).not.toBeInTheDocument();
   });
 });

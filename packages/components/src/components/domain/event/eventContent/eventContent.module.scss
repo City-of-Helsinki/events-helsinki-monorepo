@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../../../styles/breakpoints' as breakpoints;
 
 .eventContent {
   --description-font-size: var(--fontsize-body-l);
@@ -10,7 +10,7 @@
     grid-template-columns: unset;
     position: relative;
 
-    @include respond_above(m) {
+    @include breakpoints.respond-above(m) {
       display: grid;
       grid-template-columns: auto 2fr 1fr;
       grid-template-rows: unset;
@@ -24,7 +24,7 @@
       padding: var(--spacing-m) calc(var(--spacing-4-xl) + 40px)
         var(--spacing-m) 0;
 
-      @include respond_below(m) {
+      @include breakpoints.respond-below(m) {
         position: absolute;
         padding: 0;
       }

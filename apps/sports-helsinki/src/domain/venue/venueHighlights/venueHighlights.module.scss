@@ -1,9 +1,9 @@
-@import 'src/styles/breakpoints';
+@use '../../../styles/breakpoints' as breakpoints;
 
 .venueHighlightsContainer {
   margin-top: 2.375rem;
 
-  @include respond-below(s) {
+  @include breakpoints.respond-below(s) {
     margin-top: 1.5rem;
   }
 }
@@ -16,7 +16,7 @@
   margin: 0 0 1rem 0;
   background-color: var(--color-black-5);
 
-  @include respond-below(s) {
+  @include breakpoints.respond-below(s) {
     padding: 0.75rem 1rem 1rem 1rem;
   }
 

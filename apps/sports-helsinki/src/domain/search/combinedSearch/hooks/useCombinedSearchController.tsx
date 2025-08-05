@@ -9,7 +9,8 @@ export function useCombinedSearchController() {
   const locale = useLocale();
   const router = useRouter();
   const geolocation: GeolocationContextType = useGeolocation();
-  // FIXME: use import { useSearchParams } from 'next/navigation' if it is fixed so that it is initialized as soon as the asPath is.
+  // FIXME: use import { useSearchParams } from 'next/navigation'
+  // if it is fixed so that it is initialized as soon as the asPath is.
   const searchParams = new URLSearchParams(router.asPath.split('?')[1]);
   const combinedSearchFormAdapter = new CombinedSearchFormAdapter(
     locale,

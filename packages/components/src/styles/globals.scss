@@ -1,4 +1,4 @@
-@import 'fonts';
+@use './fonts';
 
 html,
 #__next,
@@ -11,7 +11,7 @@ main {
   //padding: 0;
   //margin: 0;
   box-sizing: border-box;
-  font-family: $font-family-base;
+  font-family: fonts.$font-family-base;
 }
 
 .pageLayout {

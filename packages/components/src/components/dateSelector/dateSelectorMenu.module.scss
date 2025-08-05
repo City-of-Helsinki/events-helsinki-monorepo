@@ -1,4 +1,4 @@
-@import 'src/styles/breakpoints';
+@use '../../styles/breakpoints' as breakpoints;
 
 .dateSelectorMenu {
   background: var(--color-white);
@@ -7,7 +7,7 @@
 
   min-width: fit-content;
 
-  @include respond_above(s) {
+  @include breakpoints.respond-above(s) {
     position: absolute;
     top: 100%;
     left: 0;

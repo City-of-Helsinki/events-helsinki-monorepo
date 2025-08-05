@@ -1,6 +1,6 @@
 import assert from 'assert';
 import type { GraphQLRequest, GraphQLResponse } from '@apollo/server';
-import * as Sentry from '@sentry/node';
+
 import type { DocumentNode } from 'graphql';
 import { gql } from 'graphql-tag';
 import EventContext from '../context/EventContext';
@@ -11,18 +11,27 @@ import type {
 } from '../types/types';
 import { EventTypeId } from '../types/types';
 import { createTestApolloServer } from '../utils/testUtils';
-let errorSpy: jest.SpyInstance;
-let getMock: jest.Mock;
+
+vi.mock('@sentry/node', () => ({
+  // Provide the mocked implementation for captureException
+  captureException: vi.fn(),
+  // ... and so on for other Sentry exports your app uses
+}));
+// eslint-disable-next-line import/order
+import * as Sentry from '@sentry/node';
+
+let errorSpy;
+let getMock;
 const eventId = 'eventId';
 const publisherId = 'publisherId';
 const eventName = 'tapahtuma';
 
 beforeEach(() => {
-  errorSpy = jest.spyOn(console, 'error');
+  errorSpy = vi.spyOn(console, 'error');
 });
 
 afterEach(() => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any,no-console
+  // eslint-disable-next-line no-console
   (console.error as any).mockRestore();
 });
 
@@ -33,7 +42,7 @@ const executeOperationReturnMockData = (
   responseMockData: Record<string, unknown> = {}
 ): Promise<GraphQLResponse> => {
   const contextValue = new EventContext({ token: 'token' });
-  getMock = (contextValue.dataSources.event as any).get = jest
+  getMock = (contextValue.dataSources.event as any).get = vi
     .fn()
     .mockResolvedValue(responseMockData);
   return createTestApolloServer().executeOperation(request, { contextValue });
@@ -47,7 +56,7 @@ const executeOperationThrowError = (
 ): Promise<GraphQLResponse> => {
   const contextValue = new EventContext({ token: 'token' });
   errorSpy.mockImplementationOnce(() => {});
-  getMock = (contextValue.dataSources.event as any).get = jest
+  getMock = (contextValue.dataSources.event as any).get = vi
     .fn()
     .mockResolvedValue(Promise.reject(errorMessage));
   return createTestApolloServer().executeOperation(request, { contextValue });
@@ -66,7 +75,7 @@ it('resolves eventList correctly', async () => {
 
   assert(res.body.kind === 'single');
   expect(res.body.singleResult.errors).toBeUndefined();
-  // eslint-disable-next-line jest/prefer-strict-equal
+  // eslint-disable-next-line vitest/prefer-strict-equal
   expect(res.body.singleResult.data?.eventList).toEqual(mockData);
 });
 
@@ -86,7 +95,7 @@ it('resolves eventDetails correctly', async () => {
 
   assert(res.body.kind === 'single');
   expect(res.body.singleResult.errors).toBeUndefined();
-  // eslint-disable-next-line jest/prefer-strict-equal
+  // eslint-disable-next-line vitest/prefer-strict-equal
   expect(res.body.singleResult.data?.eventDetails).toEqual(mockData);
 });
 
@@ -115,12 +124,12 @@ it('resolves eventsByIds correctly', async () => {
 
   assert(res.body.kind === 'single');
   expect(res.body.singleResult.errors).toBeUndefined();
-  // eslint-disable-next-line jest/prefer-strict-equal
+  // eslint-disable-next-line vitest/prefer-strict-equal
   expect(res.body.singleResult.data?.eventsByIds).toEqual(mockData);
 });
 
 it('handles error correctly in eventsByIds', async () => {
-  const spy = jest.spyOn(Sentry, 'captureException');
+  const spy = vi.spyOn(Sentry, 'captureException');
   const errorMessage = 'Error message';
 
   await executeOperationThrowError(
@@ -130,8 +139,7 @@ it('handles error correctly in eventsByIds', async () => {
     },
     errorMessage
   );
-  // eslint-disable-next-line jest/prefer-strict-equal
-  expect(spy.mock.calls).toEqual([[errorMessage]]);
+  expect(spy.mock.calls).toStrictEqual([[errorMessage]]);
 });
 
 describe('sends REST requests correctly', () => {
@@ -208,7 +216,7 @@ it('sends REST request correctly with query params (course)', async () => {
 
   expect(getMock).toHaveBeenCalledTimes(1);
   expect(getMock.mock.calls[0][0]).toMatchInlineSnapshot(
-    // eslint-disable-next-line max-len
+    // eslint-disable-next-line @stylistic/max-len
     `"event?event_type=Course&internet_based=true&all_ongoing=true&all_ongoing_AND=asd&division=division1,division2&end=end&ends_after=09.10.2020&ends_before=10.10.2020&include=include&in_language=fi&is_free=true&keyword=keyword1,keyword2&keyword_AND=keywordAnd,keywordAnd2&keyword!=keywordNot&language=fi&location=location2,location3&page=10&page_size=10&publisher=publisher&publisher_ancestor=ahjo:123&sort=asc&start=10.10.2021&starts_after=10.20.2021&starts_before=10.10.2022&super_event=123aasd&super_event_type=course,event&text=testText&translation=translation"`
   );
 });

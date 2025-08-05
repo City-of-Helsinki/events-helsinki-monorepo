@@ -1,4 +1,4 @@
-import startOfDay from 'date-fns/startOfDay';
+import { startOfDay } from 'date-fns';
 import type { OpeningHour, Time } from '../../../../../types/generated/graphql';
 import { ResourceState } from '../../../../../types/generated/graphql';
 import getVenueOpeningTimeDescription from '../getVenueOpeningTimeDescription';
@@ -33,12 +33,12 @@ function t(key: string) {
 }
 
 beforeEach(() => {
-  jest.useFakeTimers();
-  jest.setSystemTime(startOfDay(new Date('2012-05-01')));
+  vi.useFakeTimers();
+  vi.setSystemTime(startOfDay(new Date('2012-05-01')));
 });
 
 afterAll(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 it('returns null when times can not be found', () => {
@@ -85,7 +85,7 @@ it('renders correct result when venue is closed', () => {
 });
 
 it('renders correct result when venue is open', () => {
-  jest.setSystemTime(new Date(2012, 4, 1, 12, 0, 0, 0));
+  vi.setSystemTime(new Date(2012, 4, 1, 12, 0, 0, 0));
 
   expect(
     getVenueOpeningTimeDescription(

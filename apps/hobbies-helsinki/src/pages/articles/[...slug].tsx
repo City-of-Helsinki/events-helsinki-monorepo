@@ -162,9 +162,8 @@ export async function getStaticPaths(): Promise<
     };
   }
 
-  const pagePageInfos = await getAllCmsArticlesPageUriInfos(
-    hobbiesApolloClient
-  );
+  const pagePageInfos =
+    await getAllCmsArticlesPageUriInfos(hobbiesApolloClient);
   const paths = pagePageInfos.reduce(
     (acc: { params: { slug: string[] }; locale: AppLanguage }[], pageInfo) => {
       const slug = cmsHelper.getSlugFromUri(pageInfo.uri);

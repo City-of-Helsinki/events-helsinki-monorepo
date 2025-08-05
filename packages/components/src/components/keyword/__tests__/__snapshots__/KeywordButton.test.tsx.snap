@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`matches snapshot 1`] = `
 <div
-  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 tag-module_tag__1QCQs tag-module_withHover__3daxF keyword"
+  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 tag-module_tag__1QCQs tag-module_withHover__3daxF _keyword_964ed1"
   id="tag:r0:"
   role="link"
   tabindex="0"

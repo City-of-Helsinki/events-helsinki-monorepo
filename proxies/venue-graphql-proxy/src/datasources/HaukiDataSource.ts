@@ -1,21 +1,19 @@
-import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server/src';
+import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server';
 import type { Interval } from 'date-fns';
 import {
   startOfWeek,
   endOfWeek,
   eachDayOfInterval,
   lightFormat,
-  // eslint-disable-next-line import/no-duplicates
 } from 'date-fns';
-// eslint-disable-next-line import/no-duplicates
-import fi from 'date-fns/locale/fi';
+
+import { fi } from 'date-fns/locale';
 
 import { GraphQLError } from 'graphql';
-import get from 'lodash/get';
-import type VenueContext from '../context/VenueContext';
-import type { HaukiIsOpen, HaukiOpeningHours } from '../types';
-
-import type { VenueDataSources } from '../types/VenueDataSources';
+import get from 'lodash/get.js';
+import type VenueContext from '../context/VenueContext.js';
+import type { VenueDataSources } from '../types/VenueDataSources.js';
+import type { HaukiIsOpen, HaukiOpeningHours } from '../types.js';
 
 /** Get the status code from a GraphQLError. */
 function graphQLErrorStatus(error: unknown): number | null {

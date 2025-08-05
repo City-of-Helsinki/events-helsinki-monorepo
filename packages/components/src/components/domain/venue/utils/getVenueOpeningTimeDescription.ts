@@ -1,9 +1,11 @@
-/* eslint-disable import/no-duplicates */
-import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
-import format from 'date-fns/format';
-import isAfter from 'date-fns/isAfter';
-import isBefore from 'date-fns/isBefore';
-import isFuture from 'date-fns/isFuture';
+import {
+  format,
+  isAfter,
+  isBefore,
+  isFuture,
+  differenceInMilliseconds,
+} from 'date-fns';
+
 import type { OpeningHour, Time } from '../../../../types/generated/graphql';
 import type { AppLanguage } from '../../../../types/types';
 import { humanizeTimeResourceState } from '../../../../utils/time/humanizeOpeningHoursForWeek';

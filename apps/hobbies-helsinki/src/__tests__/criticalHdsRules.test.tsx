@@ -10,7 +10,7 @@ const criticalHdsStylesFile = path.join(
 const currentCriticalHdsStyles = fs.readFileSync(criticalHdsStylesFile, 'utf8');
 
 describe('Critical HDS rules file generation', () => {
-  // eslint-disable-next-line jest/consistent-test-it
+  // eslint-disable-next-line vitest/consistent-test-it
   test('critical-hds-styles are up to date', async () => {
     const minimumHdsCriticalRules = await hdsReact.getCriticalHdsRules(
       '<empty></empty>',

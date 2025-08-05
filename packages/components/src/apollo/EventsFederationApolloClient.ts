@@ -5,19 +5,20 @@ import type {
   NormalizedCacheObject,
   StoreObject,
   ErrorPolicy,
-} from '@apollo/client';
+} from '@apollo/client/core/index.js';
 import {
   defaultDataIdFromObject,
   ApolloClient,
   ApolloLink,
   HttpLink,
   InMemoryCache,
-} from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
-import { RetryLink } from '@apollo/client/link/retry';
-import { relayStylePagination } from '@apollo/client/utilities';
+} from '@apollo/client/core/index.js';
+import { onError } from '@apollo/client/link/error/index.js';
+import { RetryLink } from '@apollo/client/link/retry/index.js';
+import { relayStylePagination } from '@apollo/client/utilities/index.js';
 import * as Sentry from '@sentry/browser';
 import fetch from 'cross-fetch';
+import type { GraphQLFormattedError } from 'graphql';
 import capitalize from 'lodash/capitalize';
 
 import { graphqlClientLogger } from '../loggers/logger';
@@ -37,7 +38,7 @@ export type EventsFederationApolloClientConfig = {
   federationGraphqlEndpoint: string;
   allowUnauthorizedRequests?: boolean;
   routerHelper: CmsRoutedAppHelper;
-  handleError?: (error: Error) => void;
+  handleError?: (error: Error | GraphQLFormattedError) => void;
   ignoredErrorHandlerStatusCodes?: number[];
   contextHeaders?: Record<string, string>;
 };
@@ -67,10 +68,11 @@ class EventsFederationApolloClient {
           graphQLErrors.forEach((error) => {
             const { message, locations, path, extensions } = error;
             const responseStatusCode = (
-              extensions.response as GraphQLErrorsExtensionResponse
+              extensions?.response as GraphQLErrorsExtensionResponse
             )?.status;
             const errorMessage = `[GraphQL error]: ${JSON.stringify({
               OperationName: operation.operationName,
+              OperationVariables: operation.variables,
               Message: message,
               Location: locations,
               Path: path,

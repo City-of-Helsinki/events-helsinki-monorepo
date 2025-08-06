@@ -40,11 +40,19 @@ resources:
 extends:
   # Filename in Azure DevOps Repository
   template: components/tapahtumat-ui/pipelines/tapahtumat-ui-dev.yml@tapahtumat-pipelines
-  # parameters:
+  parameters:
     # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments or configMap values, the rest located in tapahtumat-pipelines
+    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/tapahtumat-variables-development.yml and tapahtumat-variables-common.yml
     # The values here will override the values defined in the tapahtumat-pipelines repository
-    # buildArgs:
-    #   DEBUG: 1
-    # configMap: # pod environment variables
-    #   DEBUG: 1
+    buildArgs:
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.dev.hel.ninja/
+      CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      NEXTJS_DISABLE_SENTRY: 0
+      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
+      NEXT_PUBLIC_DEBUG: 1
+      NEXT_PUBLIC_MATOMO_ENABLED: 0
+    configMap: # pod environment variables
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.dev.hel.ninja/
+      CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

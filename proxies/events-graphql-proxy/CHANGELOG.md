@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.3.0...events-graphql-proxy-v1.4.0) (2025-08-07)
+
+
+### Features
+
+* **apollo-router:** Compose a new supergraph ([2d8c6b2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2d8c6b28c9eeac9473f68e19412f424f26cc9596))
+* **events-proxy:** Add experimental event search params ([8251da4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8251da476fe5e98e285f7d45cc32fcbc41661db6))
+
 ## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.2.1...events-graphql-proxy-v1.3.0) (2024-01-16)
 
 

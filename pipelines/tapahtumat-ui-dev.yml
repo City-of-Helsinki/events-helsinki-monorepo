@@ -1,7 +1,3 @@
-#
-# Test pipeline. Run build and deploy for Platta test environments.
-# Pipeline runs different tests e.g. unittest and browser tests.
-#
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push
 # an update to the specified branches or you push specified tags.
 trigger:
@@ -10,14 +6,13 @@ trigger:
     include:
       - main
   paths:
-    # Note that we want to run the checks for the apps when we merge new changes
-    # related to the proxies and federation router.
     exclude:
-      - '**/README.md'
-      - '**/CHANGELOG.md'
-      - '**/LICENSE'
-      - '**/.env*'
-      - '**/docker-compose*'
+      - '*release-please*'
+      - '*.md'
+      - '.github/'
+      - 'pipelines/tapahtumat-ui-release.yml'
+      - 'pipelines/tapahtumat-ui-review.yml'
+      - '*compose*'
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to
@@ -33,13 +28,6 @@ pr: none
 # By default, use self-hosted agents
 pool: Default
 
-# Image tag name for Fuse projects
-#parameters:
-#- name: imagetag
-#  displayName: Image tag to be built and/or deployed
-#  type: string
-#  default: latest
-
 resources:
   repositories:
     # Azure DevOps repository
@@ -49,24 +37,21 @@ resources:
       name: tapahtumat/tapahtumat-pipelines
 
 extends:
-  # Filename in Azure DevOps Repository (note possible -ui or -api)
-  # Django example: azure-pipelines-PROJECTNAME-api-release.yml
-  # Drupal example: azure-pipelines-drupal-release.yml
-  template: azure-pipelines-tapahtumat-test.yml@tapahtumat-pipelines
+  # Filename in Azure DevOps Repository
+  template: components/tapahtumat-ui/pipelines/tapahtumat-ui-dev.yml@tapahtumat-pipelines
   parameters:
     # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/tapahtumat-variables-testing.yml and tapahtumat-variables-common.yml
+    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/tapahtumat-variables-development.yml and tapahtumat-variables-common.yml
     # The values here will override the values defined in the tapahtumat-pipelines repository
     buildArgs:
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.test.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.dev.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
       NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0
-      SKIP_BUILD_STATIC_GENERATION: 1
-    configMap:
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.test.hel.ninja/
+    configMap: # pod environment variables
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.dev.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

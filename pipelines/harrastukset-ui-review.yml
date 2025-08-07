@@ -1,23 +1,11 @@
 #
-# Test pipeline. Run build and deploy for Platta test environments.
+# Review pipeline. Run build and deploy for Platta dev environments.
 # Pipeline runs different tests e.g. unittest and browser tests.
 #
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push
 # an update to the specified branches or you push specified tags.
-trigger:
-  batch: true
-  branches:
-    include:
-      - main
-  paths:
-    # Note that we want to run the checks for the apps when we merge new changes
-    # related to the proxies and federation router.
-    exclude:
-      - '**/README.md'
-      - '**/CHANGELOG.md'
-      - '**/LICENSE'
-      - '**/.env*'
-      - '**/docker-compose*'
+# only PR trigger pipeline
+trigger: none
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to
@@ -28,17 +16,22 @@ trigger:
 # of the pull request.
 #
 # Opt out of pull request validation
-pr: none
+pr:
+  # PR target branch
+  branches:
+    include:
+      - main
+  paths:
+    exclude:
+      - '*release-please*'
+      - '*.md'
+      - '.github/'
+      - 'pipelines/harrastukset-ui-release.yml'
+      - 'pipelines/harrastukset-ui-dev.yml'
+      - '*compose*'
 
 # By default, use self-hosted agents
 pool: Default
-
-# Image tag name for Fuse projects
-#parameters:
-#- name: imagetag
-#  displayName: Image tag to be built and/or deployed
-#  type: string
-#  default: latest
 
 resources:
   repositories:
@@ -49,24 +42,21 @@ resources:
       name: harrastukset/harrastukset-pipelines
 
 extends:
-  # Filename in Azure DevOps Repository (note possible -ui or -api)
-  # Django example: azure-pipelines-PROJECTNAME-api-release.yml
-  # Drupal example: azure-pipelines-drupal-release.yml
-  template: azure-pipelines-harrastukset-test.yml@harrastukset-pipelines
+  # Filename in Azure DevOps Repository
+  template: components/harrastukset-ui/pipelines/harrastukset-ui-review.yml@harrastukset-pipelines
   parameters:
     # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments, the rest located in harrastukset-pipelines/harrastukset-variables-testing.yml and harrastukset-variables-common.yml
+    # Does not contain all buildArguments, the rest located in harrastukset-pipelines/harrastukset-variables-development.yml and harrastukset-variables-common.yml
     # The values here will override the values defined in the harrastukset-pipelines repository
     buildArgs:
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.dev.hel.ninja/
       CMS_ORIGIN: https://harrastus.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
       NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0
-      SKIP_BUILD_STATIC_GENERATION: 1
-    configMap:
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
+    configMap: # pod environment variables
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.dev.hel.ninja/
       CMS_ORIGIN: https://harrastus.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

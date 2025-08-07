@@ -1,7 +1,3 @@
-#
-# Test pipeline. Run build and deploy for Platta test environments.
-# Pipeline runs different tests e.g. unittest and browser tests.
-#
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push
 # an update to the specified branches or you push specified tags.
 trigger:
@@ -24,40 +20,37 @@ pr: none
 # By default, use self-hosted agents
 pool: Default
 
-# Image tag name for Fuse projects
-#parameters:
-#- name: imagetag
-#  displayName: Image tag to be built and/or deployed
-#  type: string
-#  default: latest
-
 resources:
   repositories:
     # Azure DevOps repository
-    - repository: liikunta-pipelines
+    - repository: tapahtumat-pipelines
       type: git
       # Azure DevOps project/repository
-      name: liikunta/liikunta-pipelines
+      name: tapahtumat/tapahtumat-pipelines
 
 extends:
-  # Filename in Azure DevOps Repository (note possible -ui or -api)
-  # Django example: azure-pipelines-PROJECTNAME-api-release.yml
-  # Drupal example: azure-pipelines-drupal-release.yml
-  template: azure-pipelines-federation-router-release.yml@liikunta-pipelines
+  # Filename in Azure DevOps Repository
+  template: components/federation-router/pipelines/federation-router-release.yml@tapahtumat-pipelines
   parameters:
     # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments, the rest located in liikunta-pipelines/federation-router-variables-staging.yml and federation-router-variables-common.yml
-    # The values here will override the values defined in the liikunta-pipelines repository
+    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/federation-router-variables-staging.yml and federation-router-variables-common.yml
+    # The values here will override the values defined in the tapahtumat-pipelines repository
     # buildArgs: no buildArgs
     configMap: # pod environment variables for production
-      FEDERATION_CMS_ROUTING_URL: https://liikunta2.content.api.hel.fi/graphql
+      FEDERATION_CMS_ROUTING_URL: https://tapahtumat.content.api.hel.fi/graphql
       FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.hel.fi/search
       FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.api.hel.fi/proxy/graphql
       FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.api.hel.fi/proxy/graphql
       NEXT_DISABLE_SOURCEMAPS: 1
     configMapStage: # pod environment variables for staging
-      FEDERATION_CMS_ROUTING_URL: https://liikunta2.content.api.hel.fi/graphql
+      FEDERATION_CMS_ROUTING_URL: https://tapahtumat.content.api.hel.fi/graphql
       FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.stage.hel.ninja/search
       FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.stage.hel.ninja/proxy/graphql
       FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.stage.hel.ninja/proxy/graphql
+      NEXT_DISABLE_SOURCEMAPS: 1
+    configMapTest: # pod environment variables for testing
+      FEDERATION_CMS_ROUTING_URL: https://tapahtumat.app-staging.hkih.hion.dev/graphql
+      FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.test.hel.ninja/search
+      FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.test.hel.ninja/proxy/graphql
+      FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.test.hel.ninja/proxy/graphql
       NEXT_DISABLE_SOURCEMAPS: 1

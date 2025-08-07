@@ -1,11 +1,18 @@
-#
-# Review pipeline. Run build and deploy for Platta test environments.
-# Pipeline runs different tests e.g. unittest and browser tests.
-#
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push
 # an update to the specified branches or you push specified tags.
-# only PR trigger pipeline
-trigger: none
+trigger:
+  batch: true
+  branches:
+    include:
+      - main
+  paths:
+    exclude:
+    - '*release-please*'
+    - '*.md'
+    - '.github/'
+    - 'pipelines/liikunta-ui-release.yml'
+    - 'pipelines/liikunta-ui-review.yml'
+    - '*compose*'
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to
@@ -16,31 +23,7 @@ trigger: none
 # of the pull request.
 #
 # Opt out of pull request validation
-pr:
-  # PR target branch
-  branches:
-    include:
-      - main
-  paths:
-    include:
-      - 'apps/sports-helsinki/**'
-      - 'packages/**'
-      - '!packages/graphql-proxy-server/**'
-      - 'package.json'
-      - 'yarn.lock'
-      - '.yarnrc.yml'
-      - '*.base.json'
-      - '*.base.js'
-      - '.prettier*.*'
-      - '*.config.*'
-      - 'azure-pipelines-liikunta-review.yml'
-      - 'Dockerfile'
-      - '*.Dockerfile'
-      - '!**/README.md'
-      - '!**/CHANGELOG.md'
-      - '!**/LICENSE'
-      - '!**/.env*'
-      - '!**/docker-compose*'
+pr: none
 
 # By default, use self-hosted agents
 pool: Default
@@ -54,24 +37,21 @@ resources:
       name: liikunta/liikunta-pipelines
 
 extends:
-  # Filename in Azure DevOps Repository (note possible -ui or -api)
-  # Django example: azure-pipelines-PROJECTNAME-api-release.yml
-  # Drupal example: azure-pipelines-drupal-release.yml
-  template: azure-pipelines-liikunta-review.yml@liikunta-pipelines
+  # Filename in Azure DevOps Repository
+  template: components/liikunta-ui/pipelines/liikunta-ui-dev.yml@liikunta-pipelines
   parameters:
     # Application build arguments and config map values as key value pairs.
     # Does not contain all buildArguments, the rest located in liikunta-pipelines/liikunta-variables-development.yml and liikunta-variables-common.yml
     # The values here will override the values defined in the liikunta-pipelines repository
     buildArgs:
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.test.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
       CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
       NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0
-      SKIP_BUILD_STATIC_GENERATION: 1
     configMap: # pod environment variables
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.test.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
       CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

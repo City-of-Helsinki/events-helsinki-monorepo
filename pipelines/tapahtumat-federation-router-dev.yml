@@ -1,7 +1,3 @@
-#
-# Test pipeline. Run build and deploy for Platta test environments.
-# Pipeline runs different tests e.g. unittest and browser tests.
-#
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push
 # an update to the specified branches or you push specified tags.
 trigger:
@@ -10,14 +6,13 @@ trigger:
     include:
       - main
   paths:
-    include:
-      - 'proxies/events-graphql-federation/**'
-      - 'azure-pipelines-tapahtumat-federation-router-test.yml'
-      - '!**/README.md'
-      - '!**/CHANGELOG.md'
-      - '!**/LICENSE'
-      - '!**/.env*'
-      - '!**/docker-compose*'
+    exclude:
+    - '*release-please*'
+    - '*.md'
+    - '.github/'
+    - 'pipelines/federation-router-release.yml'
+    - 'pipelines/federation-router-review.yml'
+    - '*compose*'
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to
@@ -33,13 +28,6 @@ pr: none
 # By default, use self-hosted agents
 pool: Default
 
-# Image tag name for Fuse projects
-#parameters:
-#- name: imagetag
-#  displayName: Image tag to be built and/or deployed
-#  type: string
-#  default: latest
-
 resources:
   repositories:
     # Azure DevOps repository
@@ -49,17 +37,15 @@ resources:
       name: tapahtumat/tapahtumat-pipelines
 
 extends:
-  # Filename in Azure DevOps Repository (note possible -ui or -api)
-  # Django example: azure-pipelines-PROJECTNAME-api-release.yml
-  # Drupal example: azure-pipelines-drupal-release.yml
-  template: azure-pipelines-federation-router-test.yml@tapahtumat-pipelines
+  # Filename in Azure DevOps Repository
+  template: components/federation-router/pipelines/federation-router-dev.yml@tapahtumat-pipelines
   parameters:
     # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/federation-router-variables-testing.yml and federation-router-variables-common.yml
+    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/federation-router-variables-development.yml and federation-router-variables-common.yml
     # The values here will override the values defined in the tapahtumat-pipelines repository
     # buildArgs: no buildArgs
     configMap: # pod environment variables
       FEDERATION_CMS_ROUTING_URL: https://tapahtumat.app-staging.hkih.hion.dev/graphql
       FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.test.hel.ninja/search
-      FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.test.hel.ninja/proxy/graphql
-      FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.test.hel.ninja/proxy/graphql
+      FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.dev.hel.ninja/proxy/graphql
+      FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.dev.hel.ninja/proxy/graphql

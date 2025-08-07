@@ -1,6 +1,3 @@
-#
-# Release pipeline. Run build and deploy for Platta staging and production environments.
-#
 # Continuous integration (CI) triggers cause a pipeline to run whenever you push
 # an update to the specified branches or you push specified tags.
 trigger:
@@ -23,13 +20,6 @@ pr: none
 # By default, use self-hosted agents
 pool: Default
 
-# Image tag name for Fuse projects
-#parameters:
-#- name: imagetag
-#  displayName: Image tag to be built and/or deployed
-#  type: string
-#  default: latest
-
 resources:
   repositories:
     # Azure DevOps repository
@@ -39,10 +29,8 @@ resources:
       name: harrastukset/harrastukset-pipelines
 
 extends:
-  # Filename in Azure DevOps Repository (note possible -ui or -api)
-  # Django example: azure-pipelines-PROJECTNAME-api-release.yml
-  # Drupal example: azure-pipelines-drupal-release.yml
-  template: azure-pipelines-harrastukset-release.yml@harrastukset-pipelines
+  # Filename in Azure DevOps Repository
+  template: components/harrastukset-ui/pipelines/harrastukset-ui-release.yml@harrastukset-pipelines
   parameters:
     # Application build arguments and config map values as key value pairs.
     # Does not contain all buildArguments, the rest located in harrastukset-pipelines/harrastukset-variables-staging.yml and harrastukset-variables-common.yml
@@ -55,7 +43,6 @@ extends:
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1
-      SKIP_BUILD_STATIC_GENERATION: 1
     buildArgsStage:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.stage.hel.ninja/
       CMS_ORIGIN: https://harrastus.content.api.hel.fi
@@ -64,7 +51,14 @@ extends:
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 1
-      SKIP_BUILD_STATIC_GENERATION: 1
+    buildArgsTest:
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
+      CMS_ORIGIN: https://harrastus.app-staging.hkih.hion.dev
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      NEXTJS_DISABLE_SENTRY: 0
+      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
+      NEXT_PUBLIC_DEBUG: 1
+      NEXT_PUBLIC_MATOMO_ENABLED: 0
     # NOTE! runtime variables (configMap) do not work in the application !!!
     configMap: # pod environment variables for production
       FEDERATION_ROUTER_ENDPOINT: https://harrastukset-router.api.hel.fi/
@@ -74,3 +68,8 @@ extends:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.stage.hel.ninja/
       CMS_ORIGIN: https://harrastus.content.api.hel.fi
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+    configMapTest: # pod environment variables for testing
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-hobbies.test.hel.ninja/
+      CMS_ORIGIN: https://harrastus.app-staging.hkih.hion.dev
+      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+

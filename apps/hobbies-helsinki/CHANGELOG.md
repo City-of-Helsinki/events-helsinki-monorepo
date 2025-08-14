@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.23.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.22.3...hobbies-helsinki-v2.23.0) (2025-08-14)
+
+
+### Features
+
+* **apps:** Serve front page hero image with img-tag and photographer ([9db49fd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9db49fd884bbee881ba5ae8848dc0d62b300e058))
+* Async common revalidate view and api ([c30fc86](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c30fc86479e400e3ca35dd7ed179f0e312ec2c69))
+* **hobbies:** Short URL redirects ([f8cb7b8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f8cb7b8d4a00f7708d7d543ef298e9bbfc033fca))
+* **hobbies:** Use experimental xFullText search parameter ([423de02](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/423de025a04fa5c2dfe639a6ed133a26f8416e09))
+* Revalidate API for courses, events and venues ([0594d34](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0594d343067f2f35af2c9d23cc2f0c001538a05f))
+
+
+### Bug Fixes
+
+* **apps:** Webmanifest and favicons ([9112cf4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9112cf48428f405f1c9a28ca71d95c0d32bb3d38))
+* **hobbies:** Use shallow transitions on search for squared UX ([407ed99](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/407ed99f07a5aa107adeb79cbe4ca4d268b7f6d6))
+* Type of apollo clients' error handler ([cfe4265](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cfe4265842d127248e81bef06261dcba23624479))
+
 ## [2.22.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.22.2...hobbies-helsinki-v2.22.3) (2025-06-13)
 
 

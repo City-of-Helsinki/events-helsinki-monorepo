@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.5.0...venue-graphql-proxy-v1.5.1) (2025-08-14)
+
+
+### Bug Fixes
+
+* Type of apollo clients' error handler ([cfe4265](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cfe4265842d127248e81bef06261dcba23624479))
+
 ## [1.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.4.0...venue-graphql-proxy-v1.5.0) (2025-03-05)
 
 

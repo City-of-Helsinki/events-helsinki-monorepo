@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.10.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.9.0...federation-router-v1.10.0) (2025-08-14)
+
+
+### Features
+
+* **apollo-router:** Compose a new supergraph ([2d8c6b2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2d8c6b28c9eeac9473f68e19412f424f26cc9596))
+* **apollo-router:** Update events schema for exp search fields ([65e0394](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/65e0394796759253b25943e180cfc7961de9e276))
+* **router:** Add cors rules to apollo federation router ([a5ea6d9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a5ea6d9b1bcc11eea12cd0eaefc5bd762775ca68))
+
 ## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.8.0...federation-router-v1.9.0) (2024-09-03)
 
 

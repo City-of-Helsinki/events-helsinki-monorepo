@@ -3,6 +3,7 @@
 const redirectCampaignRoutes = {
   // Finnish locale versions
   '/ekoviikko': '/fi/articles/yleinen/ekoviikko-kirjastoissa',
+  '/kasvunidea': '/fi/articles/yleinen/kasvunidea',
   '/maaginen': '/fi/articles/yleinen/maaginen-viikko-helsingin-kirjastoissa',
   '/merellinenhelsinki': '/fi/articles/yleinen/merellinen-helsinki-viikonloppu-2025',
   '/koffarinkinofest': '/fi/articles/elokuva/koffarin-kinofest',

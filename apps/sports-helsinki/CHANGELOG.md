@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.29.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.28.1...sports-helsinki-v1.29.0) (2025-08-14)
+
+
+### Features
+
+* **apps:** Serve front page hero image with img-tag and photographer ([9db49fd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9db49fd884bbee881ba5ae8848dc0d62b300e058))
+* Async common revalidate view and api ([c30fc86](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c30fc86479e400e3ca35dd7ed179f0e312ec2c69))
+* Revalidate API for courses, events and venues ([0594d34](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0594d343067f2f35af2c9d23cc2f0c001538a05f))
+* **sports:** Use experimental xFullText search parameter ([c6c0044](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6c0044b1c0ff92312c86e18504f30abb0c58d26))
+
+
+### Bug Fixes
+
+* **apps:** Webmanifest and favicons ([9112cf4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9112cf48428f405f1c9a28ca71d95c0d32bb3d38))
+* **sports:** Errenous import statement to useCombinedSearchContext ([0cd49c0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0cd49c0e8fcb13f520dd23d664be18743a0df8bb))
+* Type of apollo clients' error handler ([cfe4265](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cfe4265842d127248e81bef06261dcba23624479))
+
 ## [1.28.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.28.0...sports-helsinki-v1.28.1) (2025-06-12)
 
 

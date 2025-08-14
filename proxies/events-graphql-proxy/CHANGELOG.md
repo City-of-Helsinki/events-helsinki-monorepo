@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.3.0...events-graphql-proxy-v1.4.0) (2025-08-14)
+
+
+### Features
+
+* **events-proxy:** Add experimental event search params ([8251da4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8251da476fe5e98e285f7d45cc32fcbc41661db6))
+
 ## [1.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.2.1...events-graphql-proxy-v1.3.0) (2024-01-16)
 
 

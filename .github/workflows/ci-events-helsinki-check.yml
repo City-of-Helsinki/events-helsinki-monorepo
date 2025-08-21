@@ -38,7 +38,7 @@ jobs:
     with:
       node-version: 20
       typecheck: true
-      working-directory: apps/events-helsinki
+      app-directory: apps/events-helsinki
       extra-commands: |
         # Timezone for tests
         echo "TZ=Europe/Helsinki" >> $GITHUB_ENV

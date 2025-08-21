@@ -29,7 +29,7 @@ jobs:
     with:
       node-version: 20
       typecheck: true
-      working-directory: proxies/events-graphql-proxy
+      app-directory: proxies/events-graphql-proxy
       extra-commands: |
         echo "GRAPHQL_PROXY_PORT=4100" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_API_BASE_URL=https://api.hel.fi/linkedevents/v1/" >> $GITHUB_ENV

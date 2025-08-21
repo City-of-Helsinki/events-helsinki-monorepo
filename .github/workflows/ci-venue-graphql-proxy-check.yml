@@ -29,7 +29,7 @@ jobs:
     with:
       node-version: 20
       typecheck: true
-      working-directory: proxies/venue-graphql-proxy
+      app-directory: proxies/venue-graphql-proxy
       extra-commands: |
         echo "NODE_ENV=production" >> $GITHUB_ENV
         echo "GRAPHQL_PROXY_DEBUG=debug" >> $GITHUB_ENV

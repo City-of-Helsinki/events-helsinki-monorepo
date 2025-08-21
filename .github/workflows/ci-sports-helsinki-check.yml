@@ -32,7 +32,7 @@ jobs:
     with:
       node-version: 20
       typecheck: true
-      working-directory: apps/sports-helsinki
+      app-directory: apps/sports-helsinki
       extra-commands: |
         # Timezone for tests
         echo "TZ=Europe/Helsinki" >> $GITHUB_ENV

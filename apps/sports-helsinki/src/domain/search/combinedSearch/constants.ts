@@ -66,5 +66,9 @@ export const initialEventSearchAdapterValues = {
   superEvent: undefined,
   publisher: null,
   publisherAncestor: null,
+  // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+  // NOTE: This is not needed if using any `*Ongoing` -filter as
+  // they automatically limit the results to city of Helsinki events.
+  division: [HELSINKI_OCD_DIVISION_ID],
   pageSize: 10,
 } as const satisfies EventSearchParams;

@@ -12,6 +12,8 @@ import {
   EVENT_SORT_OPTIONS,
   EventList,
   useClearClosedEventsFromApolloCache,
+  HELSINKI_OCD_DIVISION_ID,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
@@ -41,6 +43,10 @@ const useSearchQuery = () => {
       params: searchParams,
       place: params.place,
       sortOrder: EVENT_SORT_OPTIONS.END_TIME,
+      // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+      // NOTE: This is not needed if using any `*Ongoing` -filter as
+      // they automatically limit the results to city of Helsinki events.
+      [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
       // Don't use superEventType when experimenting:
       // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
       // superEventType: ['umbrella', 'none']

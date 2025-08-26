@@ -114,6 +114,7 @@ export type EventSearchParams = Pick<
   | 'publisherAncestor'
   | 'page'
   | 'pageSize'
+  | 'division'
 >;
 
 /** The fields that are used by the Venue search. */

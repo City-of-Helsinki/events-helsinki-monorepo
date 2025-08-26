@@ -1,7 +1,9 @@
 import {
   EventTypeId,
   UnifiedSearchLanguage,
-} from '@events-helsinki/components/types';
+  EVENT_SEARCH_FILTERS,
+  HELSINKI_OCD_DIVISION_ID,
+} from '@events-helsinki/components';
 import mockRouter from 'next-router-mock';
 import qs from 'query-string';
 import type {
@@ -161,6 +163,10 @@ describe('CombinedSearchFormAdapter', () => {
           publisher: null,
           publisherAncestor: null,
           include: ['keywords', 'location'],
+          // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+          // NOTE: This is not needed if using any `*Ongoing` -filter as
+          // they automatically limit the results to city of Helsinki events.
+          [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
           // Removed to experiment:
           // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
           // superEventType: ['umbrella', 'none'],

@@ -175,6 +175,7 @@ export const getEventSearchVariables = ({
   superEvent,
   place,
   eventType,
+  division,
 }: {
   include: string[];
   language?: AppLanguage;
@@ -185,6 +186,7 @@ export const getEventSearchVariables = ({
   superEvent?: string;
   place?: string;
   eventType?: (EventTypeId.Course | EventTypeId.General)[];
+  division: string[];
 }): QueryEventListArgs => {
   const {
     keyword,
@@ -229,6 +231,7 @@ export const getEventSearchVariables = ({
   return {
     xFullText: text?.join(', '),
     xOngoing: true,
+    [EVENT_SEARCH_FILTERS.DIVISIONS]: division,
     isFree: isFree || undefined,
     end,
     include,

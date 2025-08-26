@@ -7,7 +7,12 @@ import type {
   EventType,
   QueryEventListArgs,
 } from '@events-helsinki/components';
-import { EventListDocument, EventTypeId } from '@events-helsinki/components';
+import {
+  EVENT_SEARCH_FILTERS,
+  EventListDocument,
+  EventTypeId,
+  HELSINKI_OCD_DIVISION_ID,
+} from '@events-helsinki/components';
 
 export const baseVariables = {
   end: '',
@@ -21,6 +26,8 @@ export const baseVariables = {
   publisherAncestor: null,
   sort: 'end_time',
   start: 'now',
+  // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+  [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
   // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
   // superEventType: ['umbrella', 'none'],
 };

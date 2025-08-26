@@ -1,5 +1,9 @@
 import type { AppLanguage } from '@events-helsinki/components';
-import { DATE_TYPES, EVENT_SORT_OPTIONS } from '@events-helsinki/components';
+import {
+  DATE_TYPES,
+  EVENT_SORT_OPTIONS,
+  HELSINKI_OCD_DIVISION_ID,
+} from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../constants';
@@ -40,6 +44,7 @@ describe('getEventSearchVariables function', () => {
     pageSize: 10,
     sortOrder: EVENT_SORT_OPTIONS.END_TIME,
     superEventType: [],
+    division: [HELSINKI_OCD_DIVISION_ID],
   };
 
   it('should return start=now if start time is in past/today', () => {

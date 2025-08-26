@@ -6,6 +6,7 @@ import {
   EVENT_SORT_OPTIONS,
   SIMILAR_EVENTS_AMOUNT,
 } from '../../../constants/event-constants';
+import { HELSINKI_OCD_DIVISION_ID } from '../../../constants/venue-constants';
 import type { EventFields } from '../../../types/event-types';
 import type {
   EventListQuery,
@@ -223,6 +224,10 @@ export const useLocationUpcomingEventsQuery = ({
     start: 'now',
     sort: EVENT_SORT_OPTIONS.END_TIME,
     publisherAncestor: null,
+    // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+    // NOTE: This is not needed if using any `*Ongoing` -filter as
+    // they automatically limit the results to city of Helsinki events.
+    [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
     // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
     // superEventType: 'none',
     pageSize,

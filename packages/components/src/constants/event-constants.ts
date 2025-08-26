@@ -49,8 +49,21 @@ export enum EVENT_SEARCH_FILTERS {
   CATEGORIES = 'categories',
   HOBBY_TYPES = 'hobbyTypes',
   DATE_TYPES = 'dateTypes',
-  DIVISIONS = 'divisions',
+  /**
+   * Filter by city division ids.
+   *
+   * NOTE: Using any `*Ongoing` -filter will automatically limit the results to
+   * city of Helsinki events.
+   *
+   * NOTE 2: another option is to use `helsinkiOnly` filter to limit the results
+   * @see EVENT_SEARCH_FILTERS.HELSINKI_ONLY.
+   */
+  DIVISIONS = 'division',
   END = 'end',
+  /**
+   * The `helsinkiOnly` filter sets a `publisherAncestor` to city of Helsinki.
+   * @see CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID
+   */
   HELSINKI_ONLY = 'helsinkiOnly',
   IS_FREE = 'isFree',
   KEYWORD = 'keyword',

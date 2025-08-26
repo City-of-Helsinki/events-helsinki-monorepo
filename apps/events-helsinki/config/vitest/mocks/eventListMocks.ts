@@ -12,6 +12,7 @@ import {
   EventTypeId,
   DEFAULT_EVENT_SORT_OPTION,
   EVENT_SEARCH_FILTERS,
+  HELSINKI_OCD_DIVISION_ID,
 } from '@events-helsinki/components';
 import AppConfig from '../../../src/domain/app/AppConfig';
 
@@ -27,6 +28,8 @@ export const baseVariables = {
   sort: DEFAULT_EVENT_SORT_OPTION,
   start: 'now',
   startsAfter: undefined,
+  // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+  [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
   // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
   // superEventType: ['umbrella', 'none'],
   [EVENT_SEARCH_FILTERS.ONGOING]: true,

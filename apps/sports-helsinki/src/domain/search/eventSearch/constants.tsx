@@ -191,6 +191,7 @@ export enum EVENT_SEARCH_FILTERS {
   SUITABLE = 'suitableFor',
   EVENT_TYPE = 'eventType',
   TEXT = 'text',
+  DIVISIONS = 'division',
 }
 
 export const CATEGORY_CATALOG = {

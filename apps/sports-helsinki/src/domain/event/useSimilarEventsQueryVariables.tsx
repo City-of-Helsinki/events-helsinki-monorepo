@@ -1,5 +1,8 @@
-import { EVENT_SORT_OPTIONS } from '@events-helsinki/components/constants/event-constants';
-import { EventTypeId } from '@events-helsinki/components/types';
+import {
+  EVENT_SORT_OPTIONS,
+  EventTypeId,
+  HELSINKI_OCD_DIVISION_ID,
+} from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components/types/event-types';
 import React from 'react';
 import { EVENT_SEARCH_FILTERS } from '../search/eventSearch/constants';
@@ -31,6 +34,8 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
         pageSize: 100,
         params: new URLSearchParams(searchParams),
         sortOrder: EVENT_SORT_OPTIONS.END_TIME,
+        // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+        [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
         // Don't use superEventType when experimenting:
         // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512)
         // superEventType: ['umbrella', 'none']

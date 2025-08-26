@@ -37,6 +37,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
   publisherAncestor: EventSearchParams['publisherAncestor'];
   page: EventSearchParams['page'];
   pageSize: EventSearchParams['pageSize'];
+  division: EventSearchParams['division'];
 
   /**
    * Map the combined search form fields to the event search query variables.

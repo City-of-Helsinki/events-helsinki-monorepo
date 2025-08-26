@@ -1,6 +1,10 @@
 import type { FetchResult, GraphQLRequest } from '@apollo/client/core/index.js';
 import type { MockedResponse } from '@apollo/client/testing/index.js';
-import { DEFAULT_EVENT_SORT_OPTION } from '../../../src/constants/event-constants';
+import {
+  DEFAULT_EVENT_SORT_OPTION,
+  EVENT_SEARCH_FILTERS,
+} from '../../../src/constants/event-constants';
+import { HELSINKI_OCD_DIVISION_ID } from '../../../src/constants/venue-constants';
 import type { EventType } from '../../../src/types/event-types';
 import type {
   EventListQueryVariables,
@@ -24,6 +28,10 @@ export const baseVariables = {
   sort: DEFAULT_EVENT_SORT_OPTION,
   start: 'now',
   startsAfter: undefined,
+  // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+  // NOTE: This is not needed if using any `*Ongoing` -filter as
+  // they automatically limit the results to city of Helsinki events.
+  [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
   // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
   // superEventType: ['umbrella', 'none'],
 };

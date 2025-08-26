@@ -141,6 +141,7 @@ export const getEventSearchVariables = ({
   superEventType,
   superEvent,
   place,
+  division,
 }: {
   include: string[];
   language?: AppLanguage;
@@ -150,6 +151,7 @@ export const getEventSearchVariables = ({
   superEventType?: string[];
   superEvent?: string;
   place?: string;
+  division?: string[];
 }): QueryEventListArgs => {
   const {
     categories,
@@ -212,6 +214,7 @@ export const getEventSearchVariables = ({
   return {
     [EVENT_SEARCH_FILTERS.TEXT]: !isEmpty(text) ? text?.join(',') : undefined, // NOTE: only *OngoingAnd supports Array.
     [EVENT_SEARCH_FILTERS.ONGOING]: true,
+    [EVENT_SEARCH_FILTERS.DIVISIONS]: division,
     end,
     include,
     publisherAncestor,

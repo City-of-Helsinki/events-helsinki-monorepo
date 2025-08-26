@@ -1,5 +1,9 @@
-import { EVENT_SORT_OPTIONS } from '@events-helsinki/components/constants';
-import { EventTypeId } from '@events-helsinki/components/types';
+import {
+  EventTypeId,
+  EVENT_SEARCH_FILTERS,
+  EVENT_SORT_OPTIONS,
+  HELSINKI_OCD_DIVISION_ID,
+} from '@events-helsinki/components';
 import * as React from 'react';
 import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
@@ -22,6 +26,10 @@ const similarEventQueryVariables = {
   include: ['keywords', 'location'],
   start: 'now',
   sort: EVENT_SORT_OPTIONS.END_TIME,
+  // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+  // NOTE: This is not needed if using any `*Ongoing` -filter as
+  // they automatically limit the results to city of Helsinki events.
+  [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
   // Removed to experiment:
   // LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
   // superEventType: 'none',

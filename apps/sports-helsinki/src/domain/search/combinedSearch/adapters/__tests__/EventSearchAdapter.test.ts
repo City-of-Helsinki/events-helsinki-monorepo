@@ -1,4 +1,9 @@
-import { EventTypeId, TARGET_GROUPS } from '@events-helsinki/components';
+import {
+  EVENT_SEARCH_FILTERS,
+  EventTypeId,
+  HELSINKI_OCD_DIVISION_ID,
+  TARGET_GROUPS,
+} from '@events-helsinki/components';
 import type { CombinedSearchAdapterInput } from '../../types';
 import EventSearchAdapter from '../EventSearchAdapter';
 
@@ -69,6 +74,10 @@ describe('EventSearchAdapter', () => {
           publisher: null,
           publisherAncestor: 'ahjo:00001',
           include: ['keywords', 'location'],
+          // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+          // NOTE: This is not needed if using any `*Ongoing` -filter as
+          // they automatically limit the results to city of Helsinki events.
+          [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
           // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
           // superEventType: ['umbrella', 'none'],
           // Added for courses in LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).

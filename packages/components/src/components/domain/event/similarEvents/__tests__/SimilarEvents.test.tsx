@@ -1,8 +1,5 @@
 import { clear } from 'console';
 
-import { advanceTo } from 'jest-date-mock';
-import * as React from 'react';
-
 import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
@@ -13,6 +10,10 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
+import { advanceTo } from 'jest-date-mock';
+import * as React from 'react';
+import { EVENT_SEARCH_FILTERS } from '../../../../../constants/event-constants';
+import { HELSINKI_OCD_DIVISION_ID } from '../../../../../constants/venue-constants';
 import { EventTypeId } from '../../../../../types/generated/graphql';
 import type { EventFieldsFragment } from '../../../../../types/generated/graphql';
 import SimilarEvents from '../SimilarEvents';
@@ -73,6 +74,10 @@ const similarEventFilters = {
   publisher: null,
   sort: 'end_time',
   start: 'now',
+  // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
+  // NOTE: This is not needed if using any `*Ongoing` -filter as
+  // they automatically limit the results to city of Helsinki events.
+  [EVENT_SEARCH_FILTERS.DIVISIONS]: [HELSINKI_OCD_DIVISION_ID],
   // Removed to experiment LIIKUNTA-512 (https://helsinkisolutionoffice.atlassian.net/browse/LIIKUNTA-512).
   // superEventType: ['umbrella', 'none'],
   keywordOrSet2: [''],

@@ -71,7 +71,7 @@ export default function useEventsRHHCConfig(args: {
         Head: (props: any) => <Head {...props} />,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         Link: ({ href, ...props }: any) => (
-          <Link href={href || ''} {...props} />
+          <Link legacyBehavior href={href || ''} {...props} />
         ),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         EventCardContent: (props: any) => (

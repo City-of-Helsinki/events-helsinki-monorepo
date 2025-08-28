@@ -61,8 +61,8 @@ const typeDefs = gql`
       audienceMaxAgeGt: String
       audienceMaxAgeLt: String
       # Experimental fields (prefixed with "x_")
-      xFullText: String
-      xOngoing: Boolean
+      fullText: String
+      ongoing: Boolean
     ): EventListResponse!
   }
 

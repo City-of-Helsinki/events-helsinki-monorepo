@@ -227,8 +227,8 @@ export const getEventSearchVariables = ({
   ];
 
   return {
-    xFullText: text?.join(', '),
-    xOngoing: true,
+    fullText: text?.join(', '),
+    ongoing: true,
     isFree: isFree || undefined,
     end,
     include,

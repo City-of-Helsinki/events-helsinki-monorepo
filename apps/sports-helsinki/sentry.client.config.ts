@@ -43,5 +43,6 @@ Sentry.init({
      * @link https://stackoverflow.com/questions/49384120/resizeobserver-loop-limit-exceeded/50387233#50387233
      */
     'ResizeObserver loop limit exceeded',
+    'ResizeObserver loop completed with undelivered notifications.',
   ],
 });

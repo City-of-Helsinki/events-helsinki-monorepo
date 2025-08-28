@@ -117,8 +117,8 @@ const mocks = [
   }),
   createEventListRequestAndResultMocks({
     variables: {
-      xFullText: '',
-      xOngoing: true,
+      fullText: '',
+      ongoing: true,
       keywordOrSet2: eventKeywordIds,
       eventType: [EventTypeId.Course],
       superEvent: 'none',
@@ -233,8 +233,8 @@ it('shows similar events when SIMILAR_EVENTS flag is on', async () => {
       ...mocks,
       createEventListRequestAndResultMocks({
         variables: {
-          xFullText: '',
-          xOngoing: true,
+          fullText: '',
+          ongoing: true,
           keywordOrSet2: ['yso:p916', 'yso:p9824', 'yso:p6409'],
           eventType: [EventTypeId.Course],
           superEvent: 'none',
@@ -277,8 +277,8 @@ it('doesnt show similar events when keywords are not mapped', async () => {
     ...mocks,
     createEventListRequestAndResultMocks({
       variables: {
-        xFullText: '',
-        xOngoing: true,
+        fullText: '',
+        ongoing: true,
         internetBased: undefined,
         keywordOrSet2: [''],
         language: undefined,

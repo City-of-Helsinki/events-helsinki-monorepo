@@ -57,8 +57,8 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'suitable_for', value: params.suitableFor },
     { key: 'ids', value: params.ids },
     // Experimental fields...
-    { key: 'x_full_text', value: params.xFullText },
-    { key: 'x_ongoing', value: params.xOngoing },
+    { key: 'full_text', value: params.fullText },
+    { key: 'ongoing', value: params.ongoing },
   ]);
 };
 

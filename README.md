@@ -17,7 +17,21 @@
   </a>
 </p>
 
+## About Helsinki Events Monorepo
+
 > Howtos for monorepo. New to monorepos ? [check this FAQ](./docs/howto/how-to.md).
+
+The Helsinki Events Monorepo is a version control system for three related applications: Events-Helsinki, Hobbies-Helsinki, and Sports-Helsinki. These are React/Next.js-based applications that allow citizens to discover events, courses, hobbies, and activities in Helsinki. The monorepo also contains the shared services, libraries, and components used across these applications.
+
+### Why a Monorepo?
+
+The primary reason for using a monorepo is to streamline the development and deployment process for our applications. It offers several key advantages:
+
+- **Shared Code and Resources**: Instead of maintaining separate repositories for each app, a monorepo allows us to centralize and easily share common code, components, and services. This reduces duplication and ensures consistency across all three applications.
+
+- **Simplified Dependencies**: With a single repository, managing dependencies between the applications and shared libraries becomes much simpler. Developers can make changes to a shared library and see the effects on all dependent applications in one place.
+
+- **Atomic Commits**: This allows for a single commit that spans multiple projects. For example, a single pull request can include a new feature in a shared library and the corresponding updates in all three applications that use it. This prevents versioning issues and ensures everything works together.
 
 ## Architecture
 
@@ -25,17 +39,47 @@ The subgraphs of multiple datasources are combined to a one supergraph with an a
 An application (Events, Hobbies, Sports) uses the app specific Apollo-Router so the app gets all the datasources in use with a single Apollo-Client.
 All the applications inside the monorepo are sharing the similar Apollo-Router in means of structure, but since there are app specific Headless CMS instances to share app specific data, each of the applications are connected to a unique environment-app-specific router instances.
 
-```
-┌─────────────┐       ┌───────────────┐       ┌── Headless CMS         (app specific datasource for the dynamic page and articles content)
-│             │       │               │       ├── Unified-Search       (Elasticsearch-service for search results scoring)
-│ Application ├───────┤ Apollo Router ├───────├── Events GraphQL Proxy (A GraphQL-proxy for the LinkedEvents)
-│             │       │               │       └── Venues GraphQL Proxy (A GraphQL-proxy for the Palvelukartta/Servicemap / "TPREK" Toimipaikkarekisteri)
-└─────────────┘       └───────────────┘
+```mermaid
+---
+title: Graph Service Diagram
+---
+flowchart LR
+    subgraph Supergraph
+      ROUTER[**Events Graphql Federation**: *Apollo Router service to provide a supergraph*]
+      subgraph Subgraphs
+        EventsProxy["**Events GraphQL Proxy**: *A GraphQL-proxy for the LinkedEvents*"]
+        VenuesProxy["**Venues GraphQL Proxy**: *A GraphQL-proxy for the Palvelukartta/Servicemap / 'TPREK' Toimipaikkarekisteri*"]
+        CMS["**Headless CMS**: *App specific datasource for the dynamic page and articles content*"]
+        US["**Unified-Search**: *Elasticsearch-service for search results scoring*"]
+      end
+    end
+
+    subgraph ExternalGraph["External services"]
+      LinkedEvents
+      Wordpress["Wordpress (Headless CMS)"]
+      Servicemap["Palvelukartta / Servicemap"]
+      Sentry
+      DigiaIiris
+      Askem
+    end
+
+    Application --> ROUTER
+    Application --> Sentry
+    Application --> DigiaIiris
+    Application --> Askem
+
+    ROUTER --> EventsProxy
+    ROUTER --> VenuesProxy
+    ROUTER --> CMS
+    ROUTER --> US
+
+    EventsProxy --> LinkedEvents
+    VenuesProxy --> Servicemap
+    CMS --> Wordpress
+    US --> Servicemap
 ```
 
 ## Structure
-
-[![Open in Gitpod](https://img.shields.io/badge/Open%20In-Gitpod.io-%231966D2?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/City-of-Helsinki/events-helsinki-monorepo)
 
 ```
 .
@@ -48,6 +92,7 @@ All the applications inside the monorepo are sharing the similar Apollo-Router i
 │   ├── hobbies-helsinki  (i18n, ssr, api, vitest)
 │   ├── events-helsinki   ("clone of hobbies-helsinki")
 │   └── sports-helsinki   ("clone of hobbies-helsinki")
+│
 └── packages
     ├── common-i18n          (locales...)
     ├── components           (common event components, utils and hooks, storybook, vitest)
@@ -167,13 +212,12 @@ Some convenience scripts can be run in any folder of this repo and will call the
 | `yarn g:clean`               | Clean builds in all workspaces                                                                                                       |
 | `yarn g:check-dist`          | Ensure build dist files passes es2017 (run `g:build` first).                                                                         |
 | `yarn g:check-size`          | Ensure browser dist files are within size limit (run `g:build` first).                                                               |
-| `yarn clean:global-cache`    | Clean tooling caches (eslint, vitest...)                                                                                               |
+| `yarn clean:global-cache`    | Clean tooling caches (eslint, vitest...)                                                                                             |
 | `yarn deps:check --dep dev`  | Will print what packages can be upgraded globally (see also [.ncurc.yml](https://github.com/sortlist/packages/blob/main/.ncurc.yml)) |
 | `yarn deps:update --dep dev` | Apply possible updates (run `yarn install && yarn dedupe` after)                                                                     |
 | `yarn check:install`         | Verify if there's no peer-deps missing in packages                                                                                   |
 | `yarn dedupe`                | Built-in yarn deduplication of the lock file                                                                                         |
 | `yarn build`                 | Builds application with rollup.                                                                                                      |
-| `yarn publish-canary`        | Publishes a canary tagged version of the application. CD is configured to run this script on additions to the main branch.           |
 
 > Why using `:` to prefix scripts names ? It's convenient in yarn 3+, we can call those scripts from any folder in the monorepo.
 > `g:` is a shortcut for `global:`. See the complete list in [root package.json](./package.json).
@@ -283,6 +327,10 @@ Optinally it is possible revalidate one selected uri. Uri have to be exactly cor
 ```bash
 curl -X POST https://tapahtumat.test.hel.ninja/api/revalidate -H "Content-Type: application/json" -d '{"secret": "secretrevalidationtoken", "uri": "/fi"}'
 ```
+
+### 4.3 Updating pages and articles in CMS
+
+INFO: The headless CMS that the apps are using (Wordpress), should trigger the revalidation process automatically, by sending a request when a save button is clicked!
 
 ## 5. Quality
 

@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   # Start sports in development
-  # docker-compose -f docker-compose.sports.yml up develop
+  # docker compose -f docker-compose.sports.yml up develop
   develop:
     container_name: sports-helsinki-develop
     # profiles:
@@ -110,7 +110,7 @@ services:
 
   # Convenience production "runner" stage service for debugging
   # Build > docker buildx bake -f docker-compose.sports-helsinki.yml --progress=tty runner
-  # Run   > docker-compose -f docker-compose.sports-helsinki.yml --env-file ./apps/sports-helsinki/.env.local up runner
+  # Run   > docker compose -f docker-compose.sports-helsinki.yml --env-file ./apps/sports-helsinki/.env.local up runner
   runner:
     container_name: sports-helsinki-multistage-runner
     # profiles:

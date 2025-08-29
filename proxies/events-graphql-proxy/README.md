@@ -7,11 +7,11 @@ To build the project, you will need [Docker](https://www.docker.com/community-ed
 Building the project
 
     cp .env.example .env
-    docker-compose build
+    docker compose build
 
 Starting the application
 
-    docker-compose up -d
+    docker compose up -d
 
 GraphQL playground will run on http://localhost:4000/proxy/graphql
 

@@ -53,10 +53,7 @@ const aliasPaths = paths
   : [];
 
 export default defineConfig({
-  plugins: [
-    react(),
-    cssInjectedByJsPlugin(), // CSS transformation: CSS/Image handling in Jest's transform.
-  ],
+  plugins: [react(), cssInjectedByJsPlugin()],
   test: {
     environment: 'jsdom',
     globals: true, // Makes test, expect, vi global
@@ -64,25 +61,41 @@ export default defineConfig({
     cache: {
       dir: '../../.cache/hobbies-helsinki/vitest', // Vitest specific cache
     },
-    include: ['src/**/*.{spec,test}.{js,jsx,ts,tsx}'], // Match your Jest testMatch
+    include: ['src/**/*.{spec,test}.{js,jsx,ts,tsx}'],
     exclude: [...configDefaults.exclude, './.next/', '/__mocks__/'],
-    // Optional: Configure coverage if needed (equivalent to Jest's collectCoverageFrom, coverageDirectory)
-    // coverage: {
-    //   provider: 'v8', // or 'istanbul'
-    //   reporter: ['json', 'html', 'text'],
-    //   include: ['src/**/*.{ts,tsx,js,jsx}'],
-    //   exclude: [
-    //     'src/**/*.test.ts',
-    //     'src/.next/**',
-    //     // Add other patterns from Jest's coveragePathIgnorePatterns if needed
-    //     // Be careful with node_modules here, Vitest handles them differently
-    //   ],
-    // },
-    // deps: {
-    //   interopDefault: true, // Helps with CommonJS default exports
-    // Force these packages to be transformed
-    //   inline: ['react-helsinki-headless-cms', '@apollo/client', '@next/env'],
-    // },
+    reporters: ['json', 'verbose', 'vitest-sonar-reporter'],
+    outputFile: {
+      json: 'sonar-report.json',
+      'vitest-sonar-reporter': 'sonar-report.xml',
+    },
+    coverage: {
+      provider: 'v8', // or 'istanbul'
+      reporter: ['lcov', 'html', 'text'],
+      include: ['src/**/*.{ts,tsx,js,jsx}'],
+      exclude: [
+        'src/**/*.test.ts',
+        'src/.next/**',
+        '**/*.d.ts',
+        '**/*.json',
+        '**/*.xml',
+        '**/*.yaml',
+        '**/*.md',
+        '**/*.html',
+        '**/*.css',
+        '**/*.properties',
+        '*.config.*js',
+        'node_modules/',
+        'browser-tests/',
+        'build/',
+        'codegen.ts',
+        'src/index.tsx',
+        '**/__tests__/**',
+        '**/__snapshots__/**',
+        '**/*.test.ts',
+        '**/*.spec.ts',
+        '**/query.ts',
+      ],
+    },
   },
   resolve: {
     alias: [

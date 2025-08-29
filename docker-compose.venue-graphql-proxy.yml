@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   venue-graphql-proxy:
     container_name: venue-graphql-proxy

@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   # Start events in development
   # docker compose -f docker-compose.events.yml up develop

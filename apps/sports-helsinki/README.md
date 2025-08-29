@@ -273,7 +273,7 @@ Run the development server:
 ```
 yarn dev
 # or
-docker-compose up
+docker compose up
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

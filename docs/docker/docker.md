@@ -25,7 +25,7 @@ and build time (taking advantage of buildx cache).
 ## Requirements
 
 - [x] [docker-engine](https://docs.docker.com/get-docker) >= 20.10.0
-- [x] docker-compose >= 1.29.0
+- [x] docker compose >= 1.29.0
 - [x] docker [buildkit](https://docs.docker.com/develop/develop-images/build_enhancements) enabled.
 - [x] optional: [lazydocker](https://github.com/jesseduffield/lazydocker), a beautiful tui.
 - [x] optional: [dive](https://github.com/wagoodman/dive) to debug layer sizes.
@@ -50,14 +50,14 @@ and build time (taking advantage of buildx cache).
 yarn docker:hobbies:develop
 
 # Or alternatively
-DOCKER_BUILDKIT=1 docker-compose -f ./docker-compose.yml -f ./docker-compose.hobbies.yml up develop
+DOCKER_BUILDKIT=1 docker compose -f ./docker-compose.yml -f ./docker-compose.hobbies.yml up develop
 ```
 
 <details>
   <summary>Want to open a shell to debug ?</summary>
     
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f ./docker-compose.hobbies.yml run --rm develop sh
+  DOCKER_BUILDKIT=1 docker compose -f ./docker-compose.hobbies.yml run --rm develop sh
   ```
   
 </details>
@@ -84,20 +84,20 @@ stages.
   To build it independently
     
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --progress=tty deps
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml build --progress=tty deps
   # docker buildx bake -f docker-compose.hobbies.yml --progress=tty deps
   ```
     
   To force a rebuild
     
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --no-cache --force-rm --progress=tty deps
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml build --no-cache --force-rm --progress=tty deps
   ```
     
   Want to open a shell into it ?
     
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml run --rm deps sh
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml run --rm deps sh
   ```
 
 </details>
@@ -114,20 +114,20 @@ Then build the thing and remove devDependencies.
   To build it independently
   
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --progress=tty builder
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml build --progress=tty builder
   # docker buildx bake -f docker-compose.hobbies.yml --progress=tty builder
   ```
   
   To force a rebuild
   
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --no-cache --force-rm --progress=tty builder
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml build --no-cache --force-rm --progress=tty builder
   ```
   
   Want to open a shell into it ?
   
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml run --rm builder sh
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml run --rm builder sh
   ```
 
 </details>
@@ -137,7 +137,7 @@ Then build the thing and remove devDependencies.
 Launch a production build and listen by default to http://localhost:3000.
 
 ```bash
-DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml --env-file .env.secret up runner
+DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml --env-file .env.secret up runner
 ```
 
 > PS: you'll have to provide your own .env with required runtime variables.
@@ -147,20 +147,20 @@ DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml --env-file .env.s
   To build it independently
   
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --progress=tty runner
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml build --progress=tty runner
   # docker buildx bake -f docker-compose.hobbies.yml --progress=tty runner
   ```
   
   To force a rebuild
   
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml build --no-cache --force-rm --progress=tty runner
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml build --no-cache --force-rm --progress=tty runner
   ```
   
   Want to open a shell into it ?
   
   ```bash
-  DOCKER_BUILDKIT=1 docker-compose -f docker-compose.hobbies.yml run --rm runner sh
+  DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml run --rm runner sh
   ```
   
 </details>
@@ -181,13 +181,13 @@ Using the Sports-Helsinki app as an example.
 Build the cache-image (for the Sports-Helsinki app):
 
 ```
-docker-compose -f docker-compose.sports.yml --env-file ./apps/sports-helsinki/.env.local build cache
+docker compose -f docker-compose.sports.yml --env-file ./apps/sports-helsinki/.env.local build cache
 ```
 
 Build the app runner image (for the Sports-Helsinki app) by using the cache-image as a base image:
 
 ```
-BUILDER_FROM_IMAGE=events-helsinki-monorepo-cache:latest docker-compose -f docker-compose.sports.yml --env-file ./apps/sports-helsinki/.env.local build runner
+BUILDER_FROM_IMAGE=events-helsinki-monorepo-cache:latest docker compose -f docker-compose.sports.yml --env-file ./apps/sports-helsinki/.env.local build runner
 ```
 
 ## Remove docker

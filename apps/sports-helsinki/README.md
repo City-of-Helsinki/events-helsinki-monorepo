@@ -8,14 +8,58 @@ Production server: https://liikunta.hel.fi (NOTE: this production server might s
 
 This is a [Next.js](https://nextjs.org/) project originally bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), but cloned from the Hobbies-Helsinki.
 
-## Architecture
+## Service architecture
 
-```
-┌─────────────┐               ┌───────────────┐             ┌── Headless CMS         (app specific datasource for the dynamic page and articles content)
-│             │  supergraph > │               │ subgraphs > ├── Unified-Search       (Elasticsearch-service for search results scoring)
-│ Application ├───────────────┤ Apollo Router ├─────────────├── Events GraphQL Proxy (A GraphQL-proxy for the LinkedEvents)
-│             │               │               │             └── Venues GraphQL Proxy (A GraphQL-proxy for the Palvelukartta/Servicemap / "TPREK" Toimipaikkarekisteri)
-└─────────────┘               └───────────────┘
+The service consists of:
+
+- **[Sports-Helsinki](https://github.com/City-of-Helsinki/events-helsinki-monorepo/apps/sports-helsinki):** The NextJS / React application. Integrates to a supergraph of Events Feration Router that provides subgraphs to get dynamic CMS content, venues and events.
+- **[Events Graphql Federation](https://github.com/City-of-Helsinki/events-helsinki-monorepo/proxies/events-graphql-federation):** [Apollo Router](https://www.apollographql.com/docs/graphos/routing) to provide a supergraph.
+- **[Headless CMS](https://github.com/City-of-Helsinki/headless-cms):** Content Management Service that provides dynamic pages and dynamic content for the teachers' UI. It also provides content for the header and the footer. A React component library can be found from https://github.com/City-of-Helsinki/react-helsinki-headless-cms.
+- **[LinkedEvents API](https://github.com/City-of-Helsinki/linkedevents):** A city of Helsinki centralized API for events.
+- **[Unified Search](https://github.com/City-of-Helsinki/unified-search):** Provide search service for venues.
+- **[Palvelukartta / Servicemap](https://servicemap.hel.fi):** Provides details for venues.
+- **[Digia Iiris](https://iirishelp.digia.com/):** Web analytics (a [Matomo](https://matomo.org/) service).
+- **[Sentry](https://sentry.io/):** A monitoring service.
+- **[Askem](https://www.askem.com/):** A website feedback collection and analysis tool.
+
+```mermaid
+---
+title: Graph Service Diagram
+---
+flowchart LR
+    subgraph Supergraph
+      ROUTER[**Events Graphql Federation**: *Apollo Router service to provide a supergraph*]
+      subgraph Subgraphs
+        EventsProxy["**Events GraphQL Proxy**: *A GraphQL-proxy for the LinkedEvents*"]
+        VenuesProxy["**Venues GraphQL Proxy**: *A GraphQL-proxy for the Palvelukartta/Servicemap / 'TPREK' Toimipaikkarekisteri*"]
+        CMS["**Headless CMS**: *App specific datasource for the dynamic page and articles content*"]
+        US["**Unified-Search**: *Elasticsearch-service for search results scoring*"]
+      end
+    end
+
+    subgraph ExternalGraph["External services"]
+      LinkedEvents
+      Wordpress["Wordpress (Headless CMS)"]
+      Servicemap["Palvelukartta / Servicemap"]
+      Sentry
+      DigiaIiris
+      Askem
+    end
+
+    Application --> ROUTER
+    Application --> Sentry
+    Application --> DigiaIiris
+    Application --> Askem
+
+    ROUTER --> EventsProxy
+    ROUTER --> VenuesProxy
+    ROUTER --> CMS
+    ROUTER --> US
+
+    EventsProxy --> LinkedEvents
+    VenuesProxy --> Servicemap
+    CMS --> Wordpress
+    US --> Servicemap
 ```
 
 ### Headless CMS datasources
@@ -136,21 +180,41 @@ if this would be the final active implementation of the type, the [CombinedSearc
 
 When an URL is given as an input, a form search adapter picks the params to initialize a search form. The form values should always be in sync with the URL. The search specific adapters are used to map the form values to the actual search inputs. _In this visualization, the URL params are just some examples and may not be synced with the actual implementation._
 
-```
-┌──────────────────────────────┐     ┌────────────────────────────┐    ┌─────────────────┐
-| Form adapter                 ├─────┤ Venue search adapter       ├────┤ Unified-Search  |
-|==============================|     |============================|    |=================|
-| Given URL as an input        |     | Converted param            |    | Responds to     |
-| e.g /search?text=football&   |     | e.g /graphql?q=football    |    | param `q`       |
-| returnPath=/                 |     └────────────────────────────┘    └─────────────────┘
-|                              |
-| Makes queries to multiple    |
-| datasources                  |     ┌────────────────────────────┐    ┌─────────────────┐
-|                              |─────┤ Event search adapter       |────┤ LinkedEvents    |
-|                              |     |============================|    |=================|
-|                              |     | Converted param            |    | Responds to     |
-|                              |     | e.g /graphql?text=football |    | param `text`    |
-└──────────────────────────────┘     └────────────────────────────┘    └─────────────────┘
+```mermaid
+---
+title: Search Component Architecture
+---
+graph LR
+    subgraph FormAdapter ["Form adapter"]
+        direction TB
+        F1["Given URL as an input e.g. '/search?text=football&returnPath=/'"]
+        F2["Makes queries to multiple datasources"]
+    end
+
+    subgraph VenueSearchAdapter ["Venue search adapter"]
+        direction TB
+        V1["Converted param e.g. '/graphql?q=football'"]
+    end
+
+    subgraph UnifiedSearch ["Unified-Search"]
+        direction TB
+        U1["Responds to param 'q'"]
+    end
+
+    subgraph EventSearchAdapter ["Event search adapter"]
+        direction TB
+        E1["Converted param e.g. '/graphql?text=football'"]
+    end
+
+    subgraph LinkedEvents ["LinkedEvents"]
+        direction TB
+        L1["Responds to param 'text'"]
+    end
+
+    FormAdapter --> VenueSearchAdapter
+    FormAdapter --> EventSearchAdapter
+    VenueSearchAdapter --> UnifiedSearch
+    EventSearchAdapter --> LinkedEvents
 ```
 
 CombinedSearchPage.tsx
@@ -300,10 +364,6 @@ class AppConfig {
 ## Application configuration
 
 The application configuration is done via the [AppConfig.ts](./src/domain/app/AppConfig.ts) as much as possible, so there would be a single point to configure it.
-
-## Contact
-
-City of Helsinki Slack channel #hobbieshelsinki
 
 ## Learn more
 

@@ -68,3 +68,5 @@ yarn-error.log*
 
 .vercel
 proxies/events-graphql-federation/router
+sonar-report.json
+sonar-report.xml

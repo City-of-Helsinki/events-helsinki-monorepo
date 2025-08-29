@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.23.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.23.0...hobbies-helsinki-v2.23.1) (2025-08-29)
+
+
+### Bug Fixes
+
+* **apps:** Use legacyBehavior for next-links used by RCHC-lib ([cbee0ae](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cbee0ae14eaf31218024f7618e9d92b0ee517933))
+* **search:** Filter event search with division ([180e755](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/180e755dd9f03a5850733366bfc51998f506770b))
+
 ## [2.23.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.22.3...hobbies-helsinki-v2.23.0) (2025-08-14)
 
 

@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   events-graphql-proxy:
     container_name: events-graphql-proxy

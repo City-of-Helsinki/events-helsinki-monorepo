@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.29.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.29.0...sports-helsinki-v1.29.1) (2025-08-29)
+
+
+### Bug Fixes
+
+* **apps:** Use legacyBehavior for next-links used by RCHC-lib ([cbee0ae](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cbee0ae14eaf31218024f7618e9d92b0ee517933))
+* **search:** Filter event search with division ([180e755](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/180e755dd9f03a5850733366bfc51998f506770b))
+
 ## [1.29.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.28.1...sports-helsinki-v1.29.0) (2025-08-14)
 
 

@@ -99,9 +99,8 @@ class EventSearchPage {
     if (searchType === 'Venue')
       await t.expect(this.notFoundResultVenues.exists).notOk();
     const results = this.results;
-    // NOTE: the link is there twice
-    await t.expect(results.count).gte(minResults * 2); // At least one result should be found.
-    await t.expect(results.count).lte(maxResults * 2); // max 10 result per page
+    await t.expect(results.count).gte(minResults); // At least one result should be found.
+    await t.expect(results.count).lte(maxResults); // max 10 result per page
   }
 
   public async expectNoSearchResults(searchType: SearchType = 'GeneralEvent') {

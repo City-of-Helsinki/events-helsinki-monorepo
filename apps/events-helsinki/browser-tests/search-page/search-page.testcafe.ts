@@ -32,7 +32,7 @@ test('Verify searching', async () => {
 test('Verify navigation between the search page and event details page', async (t) => {
   await searchPage.verify();
   const results = searchPage.results;
-  await t.expect(results.count).eql(10 * 2); // all links twice
+  await t.expect(results.count).eql(10);
   const firstCard = results.nth(0);
   const lastCard = results.nth(-1);
   testNavigationFromSearchToDetailsAndBack(firstCard);

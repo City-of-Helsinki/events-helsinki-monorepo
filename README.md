@@ -57,9 +57,9 @@ flowchart LR
     subgraph ExternalGraph["External services"]
       LinkedEvents
       Wordpress["Wordpress (Headless CMS)"]
-      Servicemap["Palvelukartta / Servicemap"]
+      Servicemap["Palvelukartta / Servicemap *(palvelukarttaws)*"]
       Sentry
-      DigiaIiris
+      DigiaIiris["DigiaIiris / Matomo"]
       Askem
     end
 

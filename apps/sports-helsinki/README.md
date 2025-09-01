@@ -17,7 +17,7 @@ The service consists of:
 - **[Headless CMS](https://github.com/City-of-Helsinki/headless-cms):** Content Management Service that provides dynamic pages and dynamic content for the teachers' UI. It also provides content for the header and the footer. A React component library can be found from https://github.com/City-of-Helsinki/react-helsinki-headless-cms.
 - **[LinkedEvents API](https://github.com/City-of-Helsinki/linkedevents):** A city of Helsinki centralized API for events.
 - **[Unified Search](https://github.com/City-of-Helsinki/unified-search):** Provide search service for venues.
-- **[Palvelukartta / Servicemap](https://servicemap.hel.fi):** Provides details for venues.
+- **[Palvelukartta / Servicemap](https://www.hel.fi/palvelukarttaws):** Provides details for venues. (NOTE: https://palvelukartta.hel.fi is used to fetch a map component. https://www.hel.fi/palvelukarttaws is used to fetch all the details)
 - **[Digia Iiris](https://iirishelp.digia.com/):** Web analytics (a [Matomo](https://matomo.org/) service).
 - **[Sentry](https://sentry.io/):** A monitoring service.
 - **[Askem](https://www.askem.com/):** A website feedback collection and analysis tool.
@@ -40,9 +40,9 @@ flowchart LR
     subgraph ExternalGraph["External services"]
       LinkedEvents
       Wordpress["Wordpress (Headless CMS)"]
-      Servicemap["Palvelukartta / Servicemap"]
+      Servicemap["Palvelukartta / Servicemap *(palvelukarttaws)*"]
       Sentry
-      DigiaIiris
+      DigiaIiris["DigiaIiris / Matomo"]
       Askem
     end
 
@@ -265,6 +265,120 @@ The `<CombinedSearchProvider/>` is there to have the formValues and the combined
 1. reads the URL and uses the `CombinedSearchFormAdapter` to store the search form values in a context
 2. provides the state mutator functions which can be used to update the form values in the context.
 3. provides the search variables that can be used to query venues, courses and general events. The values are mapped with the `VenueSearchAdapter` and the `EventSearchAdapter` which both uses the `CombinedSearchFormAdapter` (the form values) as their input.
+
+#### Used Search -parameters
+
+The event search is always queried from the LinkedEvents API, through the Events GraphQL Proxy.
+
+##### Parameters conversion when querying LinkedEvents through Events GraphQL Proxy
+
+The LinkedEvents does not provide a GraphQL API by itself, which is the reason for the Events GraphQL Proxy. The GraphQL API follows different kind of naming rules as the basic REST JSON API, so the parameters needs some conversion. The conversion is done by [the queryBuilder of the Events GraphQL Proxy](https://github.com/City-of-Helsinki/events-helsinki-monorepo/blob/7306a13312afea89a3f7757ca672851870102e69/proxies/events-graphql-proxy/src/schema/event/utils.ts#L11-L63).
+
+The conversion map looks (something) like this:
+
+```js
+[
+  { key: "event_type", value: params.eventType },
+  { key: "internet_based", value: params.internetBased },
+  { key: "combined_text", value: params.combinedText },
+  { key: "local_ongoing_AND", value: params.localOngoingAnd },
+  { key: "local_ongoing_OR", value: params.localOngoingOr },
+  { key: "local_ongoing_OR_set1", value: params.localOngoingOrSet1 },
+  { key: "local_ongoing_OR_set2", value: params.localOngoingOrSet2 },
+  { key: "local_ongoing_OR_set3", value: params.localOngoingOrSet3 },
+  { key: "internet_ongoing_AND", value: params.internetOngoingAnd },
+  { key: "internet_ongoing_OR", value: params.internetOngoingOr },
+  { key: "all_ongoing", value: params.allOngoing },
+  { key: "all_ongoing_AND", value: params.allOngoingAnd },
+  { key: "all_ongoing_OR", value: params.allOngoingOr },
+  { key: "division", value: params.division },
+  { key: "end", value: params.end },
+  { key: "ends_after", value: params.endsAfter },
+  { key: "ends_before", value: params.endsBefore },
+  { key: "include", value: params.include },
+  { key: "in_language", value: params.inLanguage },
+  { key: "is_free", value: params.isFree },
+  { key: "keyword", value: params.keyword },
+  { key: "keyword_AND", value: params.keywordAnd },
+  { key: "keyword_OR_set1", value: params.keywordOrSet1 },
+  { key: "keyword_OR_set2", value: params.keywordOrSet2 },
+  { key: "keyword_OR_set3", value: params.keywordOrSet3 },
+  { key: "keyword!", value: params.keywordNot },
+  { key: "language", value: params.language },
+  { key: "location", value: params.location },
+  { key: "page", value: params.page },
+  { key: "page_size", value: params.pageSize },
+  { key: "publisher", value: params.publisher },
+  { key: "publisher_ancestor", value: params.publisherAncestor },
+  { key: "sort", value: params.sort },
+  { key: "start", value: params.start },
+  { key: "starts_after", value: params.startsAfter },
+  { key: "starts_before", value: params.startsBefore },
+  { key: "super_event", value: params.superEvent },
+  { key: "super_event_type", value: params.superEventType },
+  { key: "text", value: params.text },
+  { key: "translation", value: params.translation },
+  { key: "audience_min_age_lt", value: params.audienceMinAgeLt },
+  { key: "audience_min_age_gt", value: params.audienceMinAgeGt },
+  { key: "audience_max_age_lt", value: params.audienceMaxAgeLt },
+  { key: "audience_max_age_gt", value: params.audienceMaxAgeGt },
+  { key: "suitable_for", value: params.suitableFor },
+  { key: "ids", value: params.ids },
+  // Experimental fields...
+  { key: "x_full_text", value: params.xFullText },
+  { key: "x_ongoing", value: params.xOngoing },
+];
+```
+
+> NOTE: This section easily runs out-of-date.
+
+##### Main event search
+
+> The possible parameters are all introduced in [EventSearchAdapter](./src/domain/search/combinedSearch/adapters/EventSearchAdapter.ts).
+
+The "main events search" component is used in the search page at `/search`.
+
+| parameter         | default value                            | controllable | required | description                                                                                   |
+| ----------------- | ---------------------------------------- | ------------ | -------- | --------------------------------------------------------------------------------------------- |
+| eventType         | ["General"] or ["Course"]                | -            | x        | Select only "general" or "course" type events (depending on used search tab)                  |
+| include           | ['keywords', 'location']                 | -            | x        | Fetch related data from datasource                                                            |
+| pageSize          | 10                                       | -            | x        | How many items are fetched per page                                                           |
+| division          | "ocd-division/country:fi/kunta:helsinki" | -            | x        | Only city of Helsinki events                                                                  |
+| xOngoing          | true                                     | -            | x        | include the ongoing events                                                                    |
+| xFullText         | ""                                       | x            | x        | A text scoring mathcher (title, place, description, ...)                                      |
+| sort              | "end_time"                               | x            | x        | Sorting order of the result set. Default is "event end time as ascending"                     |
+| start             | "now"                                    | x            | x        | Filter by event starting time                                                                 |
+| end               | null                                     | x            | -        | Filter by event ending time                                                                   |
+| location          | []                                       | x            | -        | Filter by location / venue / place (source: LinkedEvents)                                     |
+| keywordAnd        | []                                       | -            | -        | Empty                                                                                         |
+| keywordOrSet1     | []                                       | x            | x        | A list of predefined sport keywords. @see SPORT_COURSES_KEYWORDS \*.                          |
+| keywordOrSet2     | []                                       | x            | -        | A list of sport keywords depending on input.                                                  |
+| keywordOrSet3     | []                                       | x            | -        | A list of keywords (e.g target groups or premapped target groups)                             |
+| keywordNot        | []                                       | x (URL only) | -        | Exclude events with these keywords. Converted to "keyword!" when querying LinkedEvents.       |
+| publisher         | null                                     | x            | -        | Used to find events of 1 specific organisation                                                |
+| publisherAncestor | null                                     | x            | -        | Filter events by `publisherAncestor` set to "ahjo:00001" if filtering city of Helsinki events |
+| superEventType    | ""                                       | -            | -        | Filter by super event types. E.g `['umbrella', 'none']` excludes `"recurring"`                |
+| superEvent        | ""                                       | -            | -        | Filter by a specific (super) event id or set to "None" for events without superevent.         |
+
+\*) The SPORT_COURSES_KEYWORDS is always used as `keywordOrSet1`:
+
+    ```ts
+    export const SPORT_COURSES_KEYWORDS = [
+      "yso:p916", // liikunta / physical training
+      "kulke:710", // liikuntaleiri / sports camp
+      "yso:p17018", // liikuntaleikit / exercise games
+      "yso:p1963", // liikuntatapahtumat / sports events
+      "yso:p9824", // liikuntapalvelut / physical activity services
+      "yso:p965", // urheilu / sports
+      "yso:p6409", // jalkapallo / football
+      "yso:p8781", // koripallo / basketball
+      "yso:p26619", // ulkoliikunta / outdoor sports
+      "yso:p13035", // liikuntaharrastus / physical hobbies
+      "yso:p2041", // urheilu- ja liikuntaseurat / sports clubs
+    ];
+    ```
+
+> See the [parameters conversion](#parameters-conversion-when-querying-linkedevents-through-events-graphql-proxy) to understand how the LinkedEvenst queries are made.
 
 ## Developing locally
 

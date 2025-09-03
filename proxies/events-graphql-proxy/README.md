@@ -1,8 +1,8 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Event Helsinki GraphQL proxy](#event-helsinki-graphql-proxy)
+  - [Environments](#environments)
   - [Development with Docker](#development-with-docker)
   - [Available Scripts](#available-scripts)
     - [`yarn dev`](#yarn-dev)
@@ -16,6 +16,23 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 # Event Helsinki GraphQL proxy
+
+## Environments
+
+**Dev server:** https://events-graphql-proxy.dev.hel.ninja/proxy/graphql
+
+**Test server:** https://events-graphql-proxy.test.hel.ninja/proxy/graphql
+
+**Staging server:** https://events-graphql-proxy.stage.hel.ninja/proxy/graphql
+
+**Production server:** https://events-graphql-proxy.api.hel.fi/proxy/graphql
+
+The CI deployment process goes like this:
+
+1. When a pull request (PR) is created, the PR related checks are being ran and a new server instance will be created. A link to that environment should be published in the comments of the PR when the service is ready. For example the browser tests are being ran against that server.
+2. When a pull request (PR) is merged (to the "main" branch), the dev-environment will be redeployed with the latest changes.
+3. When a new release is made, the test-environment and staging-environment will be redeployed with the latest changes.
+4. When a new release is approved, a production-environment will be (re)deployed
 
 ## Development with Docker
 

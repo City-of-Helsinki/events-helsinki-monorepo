@@ -1,8 +1,8 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Sports-Helsinki](#sports-helsinki)
+  - [Environments](#environments)
   - [Service architecture](#service-architecture)
     - [Headless CMS datasources](#headless-cms-datasources)
     - [Route (pages)](#route-pages)
@@ -32,13 +32,26 @@
 
 # Sports-Helsinki
 
-Test server: https://liikunta.test.hel.ninja
-
-Staging server: https://liikunta.stage.hel.ninja
-
-Production server: https://liikunta.hel.fi (NOTE: this production server might still be deployed from the old Liikunta-repo)
-
 This is a [Next.js](https://nextjs.org/) project originally bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), but cloned from the Hobbies-Helsinki.
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Environments
+
+**Dev server:** https://liikunta.dev.hel.ninja
+
+**Test server:** https://liikunta.test.hel.ninja
+
+**Staging server:** https://liikunta.stage.hel.ninja
+
+**Production server:** https://liikunta.hel.fi
+
+The CI deployment process goes like this:
+
+1. When a pull request (PR) is created, the PR related checks are being ran and a new server instance will be created. A link to that environment should be published in the comments of the PR when the service is ready. For example the browser tests are being ran against that server.
+2. When a pull request (PR) is merged (to the "main" branch), the dev-environment will be redeployed with the latest changes.
+3. When a new release is made, the test-environment and staging-environment will be redeployed with the latest changes.
+4. When a new release is approved, a production-environment will be (re)deployed
 
 ## Service architecture
 

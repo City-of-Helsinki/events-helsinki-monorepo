@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Howto](#howto)
+  - [1. Enable workspace support](#1-enable-workspace-support)
+  - [2. Create a new package](#2-create-a-new-package)
+  - [3. Using the package in app](#3-using-the-package-in-app)
+    - [Step 3.1: package.json](#step-31-packagejson)
+    - [Step 3.2: In tsconfig.json](#step-32-in-tsconfigjson)
+    - [Step 3.3: Next config](#step-33-next-config)
+    - [Step 3.4: Using the package](#step-34-using-the-package)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Howto
 
 ### 1. Enable workspace support

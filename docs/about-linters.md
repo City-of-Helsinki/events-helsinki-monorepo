@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [About linters](#about-linters)
+  - [Recommended approach](#recommended-approach)
+    - [Example config](#example-config)
+    - [Workspace structure](#workspace-structure)
+  - [Commands](#commands)
+  - [Lint-staged](#lint-staged)
+  - [Performance](#performance)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # About linters
 
 Linters in a monorepo should offer consistency but also offer flexibility in each app and package (a.k.a. workspace).

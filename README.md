@@ -1,3 +1,54 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Helsinki Events Monorepo](#helsinki-events-monorepo)
+  - [About Helsinki Events Monorepo](#about-helsinki-events-monorepo)
+    - [Why a Monorepo?](#why-a-monorepo)
+  - [Architecture](#architecture)
+  - [Structure](#structure)
+      - [Proxies](#proxies)
+      - [Apps](#apps)
+      - [Configuration](#configuration)
+      - [Shared packages](#shared-packages)
+      - [Shared static assets](#shared-static-assets)
+      - [Folder overview](#folder-overview)
+  - [Monorepo essentials](#monorepo-essentials)
+    - [Monorepo scripts](#monorepo-scripts)
+    - [Maintaining deps updated](#maintaining-deps-updated)
+    - [Symbolic links](#symbolic-links)
+      - [Supporting symbolic links on Windows](#supporting-symbolic-links-on-windows)
+    - [Critical HDS Styles](#critical-hds-styles)
+  - [4. Incremental Static Regeneration on-demand revalidation](#4-incremental-static-regeneration-on-demand-revalidation)
+    - [4.1 Trigger revalidate all](#41-trigger-revalidate-all)
+    - [4.2 Trigger revalidate for the uri](#42-trigger-revalidate-for-the-uri)
+    - [4.3 Updating pages and articles in CMS](#43-updating-pages-and-articles-in-cms)
+  - [5. Quality](#5-quality)
+    - [5.1 Linters](#51-linters)
+    - [5.2 Hooks / Lint-staged](#52-hooks--lint-staged)
+    - [5.3 Tests](#53-tests)
+    - [5.4 CI](#54-ci)
+      - [Pipeline static testing](#pipeline-static-testing)
+      - [Pipeline triggering](#pipeline-triggering)
+      - [Pipeline configuration](#pipeline-configuration)
+  - [6. Development](#6-development)
+    - [Quick start](#quick-start)
+    - [6. Editor support](#6-editor-support)
+      - [6.1 VSCode](#61-vscode)
+  - [7. Deploy](#7-deploy)
+    - [Docker](#docker)
+  - [8. Releases, changelogs and versioning](#8-releases-changelogs-and-versioning)
+    - [Conventional Commits](#conventional-commits)
+    - [Releasable units](#releasable-units)
+    - [Configuration](#configuration-1)
+    - [Troubleshoting release-please](#troubleshoting-release-please)
+      - [Fix merge conflicts by running release-please -action manually](#fix-merge-conflicts-by-running-release-please--action-manually)
+  - [FAQ](#faq)
+    - [Monorepo](#monorepo)
+      - [Exact vs semver dependencies](#exact-vs-semver-dependencies)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 <div align="center">
   <h1 align="center"><a aria-label="Helsinki Events Monorepo" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo">Helsinki Events Monorepo</a></h1>
   <p align="center"><strong>A monorepo for event-search based nextjs applications and common event components</strong></p>

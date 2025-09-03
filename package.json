@@ -131,6 +131,7 @@
     "@typescript-eslint/parser": "^8.37.0",
     "check-dependency-version-consistency": "5.0.1",
     "cross-env": "7.0.3",
+    "doctoc": "2.2.1",
     "dotenv-expand": "12.0.2",
     "edit-json-file": "1.8.1",
     "env-cmd": "10.1.0",

@@ -1,3 +1,24 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Docker](#docker)
+  - [Introduction](#introduction)
+  - [Requirements](#requirements)
+  - [Ready made commands](#ready-made-commands)
+  - [Develop](#develop)
+  - [Multistage in details](#multistage-in-details)
+    - [Stage 1: deps](#stage-1-deps)
+    - [Stage 2: builder](#stage-2-builder)
+    - [Stage 3: runner](#stage-3-runner)
+  - [Cached docker image](#cached-docker-image)
+    - [How to build locally](#how-to-build-locally)
+  - [Remove docker](#remove-docker)
+    - [Cleanup](#cleanup)
+    - [Complete removal](#complete-removal)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Docker
 
 ## Introduction

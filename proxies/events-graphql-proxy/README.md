@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Event Helsinki GraphQL proxy](#event-helsinki-graphql-proxy)
+  - [Development with Docker](#development-with-docker)
+  - [Available Scripts](#available-scripts)
+    - [`yarn dev`](#yarn-dev)
+    - [`yarn test`](#yarn-test)
+    - [`yarn build`](#yarn-build)
+    - [`yarn start`](#yarn-start)
+    - [`yarn lint`](#yarn-lint)
+    - [`yarn format-code`](#yarn-format-code)
+  - [Custom request headers](#custom-request-headers)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Event Helsinki GraphQL proxy
 
 ## Development with Docker

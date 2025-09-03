@@ -1,12 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [About lint-staged](#about-lint-staged)
-  - [Structure](#structure)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # About lint-staged
 
 [Lint-staged](https://github.com/okonet/lint-staged) and [husky](https://github.com/typicode/husky) are used to automatically

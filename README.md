@@ -1,51 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Helsinki Events Monorepo](#helsinki-events-monorepo)
-  - [1. Architecture](#1-architecture)
-  - [2. Structure](#2-structure)
-    - [2.1 Proxies](#21-proxies)
-    - [2.2 Apps](#22-apps)
-    - [2.3 Configuration](#23-configuration)
-    - [2.4 Shared packages](#24-shared-packages)
-    - [2.5 Shared static assets](#25-shared-static-assets)
-    - [2.6 Folder overview](#26-folder-overview)
-  - [3. Monorepo essentials](#3-monorepo-essentials)
-    - [3.1 Monorepo scripts](#31-monorepo-scripts)
-    - [3.2 Maintaining deps updated](#32-maintaining-deps-updated)
-    - [3.3 Symbolic links](#33-symbolic-links)
-      - [Supporting symbolic links on Windows](#supporting-symbolic-links-on-windows)
-    - [3.4 Critical HDS Styles](#34-critical-hds-styles)
-  - [4. Incremental Static Regeneration on-demand revalidation](#4-incremental-static-regeneration-on-demand-revalidation)
-    - [4.1 Trigger revalidate all](#41-trigger-revalidate-all)
-    - [4.2 Trigger revalidate for the uri](#42-trigger-revalidate-for-the-uri)
-    - [4.3 Updating pages and articles in CMS](#43-updating-pages-and-articles-in-cms)
-  - [5. Quality](#5-quality)
-    - [5.1 Linters](#51-linters)
-    - [5.2 Hooks / Lint-staged](#52-hooks--lint-staged)
-    - [5.3 Tests](#53-tests)
-    - [5.4 CI](#54-ci)
-      - [Pipeline static testing](#pipeline-static-testing)
-      - [Pipeline triggering](#pipeline-triggering)
-      - [Pipeline configuration](#pipeline-configuration)
-      - [Public service environments](#public-service-environments)
-  - [6. Development](#6-development)
-    - [6.1 Quick start](#61-quick-start)
-    - [6.2 Editor support](#62-editor-support)
-      - [VSCode](#vscode)
-  - [7. Deploy](#7-deploy)
-  - [8. Releases, changelogs and versioning](#8-releases-changelogs-and-versioning)
-    - [8.1 Conventional Commits](#81-conventional-commits)
-    - [8.2 Releasable units](#82-releasable-units)
-    - [8.3 Configuration](#83-configuration)
-    - [8.4 Troubleshoting release-please](#84-troubleshoting-release-please)
-      - [Fix merge conflicts by running release-please -action manually](#fix-merge-conflicts-by-running-release-please--action-manually)
-  - [9. FAQ](#9-faq)
-    - [9.1 Monorepo](#91-monorepo)
-      - [Exact vs semver dependencies](#exact-vs-semver-dependencies)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 <div align="center">
   <h1 align="center"><a aria-label="Helsinki Events Monorepo" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo">Helsinki Events Monorepo</a></h1>
   <p align="center"><strong>A monorepo for event-search based nextjs applications and common event components</strong></p>
@@ -64,6 +16,53 @@
     <img alt="Licence" src="https://img.shields.io/github/license/City-of-Helsinki/events-helsinki-monorepo?style=flat-quare&labelColor=000000" />
   </a>
 </p>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [1. Architecture](#1-architecture)
+- [2. Structure](#2-structure)
+  - [2.1 Proxies](#21-proxies)
+  - [2.2 Apps](#22-apps)
+  - [2.3 Configuration](#23-configuration)
+  - [2.4 Shared packages](#24-shared-packages)
+  - [2.5 Shared static assets](#25-shared-static-assets)
+  - [2.6 Folder overview](#26-folder-overview)
+- [3. Monorepo essentials](#3-monorepo-essentials)
+  - [3.1 Monorepo scripts](#31-monorepo-scripts)
+  - [3.2 Maintaining deps updated](#32-maintaining-deps-updated)
+  - [3.3 Symbolic links](#33-symbolic-links)
+    - [Supporting symbolic links on Windows](#supporting-symbolic-links-on-windows)
+  - [3.4 Critical HDS Styles](#34-critical-hds-styles)
+- [4. Incremental Static Regeneration on-demand revalidation](#4-incremental-static-regeneration-on-demand-revalidation)
+  - [4.1 Trigger revalidate all](#41-trigger-revalidate-all)
+  - [4.2 Trigger revalidate for the uri](#42-trigger-revalidate-for-the-uri)
+  - [4.3 Updating pages and articles in CMS](#43-updating-pages-and-articles-in-cms)
+- [5. Quality](#5-quality)
+  - [5.1 Linters](#51-linters)
+  - [5.2 Hooks / Lint-staged](#52-hooks--lint-staged)
+  - [5.3 Tests](#53-tests)
+  - [5.4 CI](#54-ci)
+    - [Pipeline static testing](#pipeline-static-testing)
+    - [Pipeline triggering](#pipeline-triggering)
+    - [Pipeline configuration](#pipeline-configuration)
+    - [Public service environments](#public-service-environments)
+- [6. Development](#6-development)
+  - [6.1 Quick start](#61-quick-start)
+  - [6.2 Editor support](#62-editor-support)
+    - [VSCode](#vscode)
+- [7. Deploy](#7-deploy)
+- [8. Releases, changelogs and versioning](#8-releases-changelogs-and-versioning)
+  - [8.1 Conventional Commits](#81-conventional-commits)
+  - [8.2 Releasable units](#82-releasable-units)
+  - [8.3 Configuration](#83-configuration)
+  - [8.4 Troubleshoting release-please](#84-troubleshoting-release-please)
+    - [Fix merge conflicts by running release-please -action manually](#fix-merge-conflicts-by-running-release-please--action-manually)
+- [9. FAQ](#9-faq)
+  - [9.1 Monorepo](#91-monorepo)
+    - [Exact vs semver dependencies](#exact-vs-semver-dependencies)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 > Howtos for monorepo. New to monorepos ? [check this FAQ](./docs/howto/how-to.md).
 

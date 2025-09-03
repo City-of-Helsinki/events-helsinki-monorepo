@@ -1,11 +1,15 @@
+# The Events subgraph
+
+**Table of Contents**
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [The Events subgraph](#the-events-subgraph)
+- [Introduction](#introduction)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# The Events subgraph
+## Introduction
 
 The Events subgraph is fetched from the Events GraphQL Proxy which is between the events based applications and the [LinkedEvents](http://api.hel.fi/linkedevents/v1/). The LinkedEvents does not provide a Graphql -API, so the [proxies/events-graphql-proxy](./proxies/events-graphql-proxy) is there to provide that.
 

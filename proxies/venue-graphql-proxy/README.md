@@ -1,20 +1,21 @@
+# Event Helsinki GraphQL proxy
+
+**Table of Contents**
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Event Helsinki GraphQL proxy](#event-helsinki-graphql-proxy)
-  - [Environments](#environments)
-  - [Development with Docker](#development-with-docker)
-  - [Available Scripts](#available-scripts)
-    - [`yarn start`](#yarn-start)
-    - [`yarn test`](#yarn-test)
-    - [`yarn build`](#yarn-build)
-    - [`yarn start`](#yarn-start-1)
-    - [`yarn lint`](#yarn-lint)
-    - [`yarn format-code`](#yarn-format-code)
+- [Environments](#environments)
+- [Development with Docker](#development-with-docker)
+- [Available Scripts](#available-scripts)
+  - [`yarn start`](#yarn-start)
+  - [`yarn test`](#yarn-test)
+  - [`yarn build`](#yarn-build)
+  - [`yarn start`](#yarn-start-1)
+  - [`yarn lint`](#yarn-lint)
+  - [`yarn format-code`](#yarn-format-code)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-# Event Helsinki GraphQL proxy
 
 ## Environments
 

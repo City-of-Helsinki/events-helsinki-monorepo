@@ -1,28 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Events GraphQL Federation](#events-graphql-federation)
-  - [Subgraphs](#subgraphs)
-  - [Servers](#servers)
-    - [Dev](#dev)
-    - [Test](#test)
-    - [Staging](#staging)
-    - [Production](#production)
-  - [Local development](#local-development)
-    - [Prerequisites](#prerequisites)
-    - [Serve dockerized local router](#serve-dockerized-local-router)
-    - [Useful Rover commands](#useful-rover-commands)
-      - [Work with subgraphs](#work-with-subgraphs)
-      - [Work with supergraph](#work-with-supergraph)
-  - [Router configuration](#router-configuration)
-    - [Override the subgraph urls with environment variables](#override-the-subgraph-urls-with-environment-variables)
-    - [Headers propagation](#headers-propagation)
-- [Documentation related to the Apollo federation](#documentation-related-to-the-apollo-federation)
-  - [External articles for basics:](#external-articles-for-basics)
-  - [External documentations for graph to subgraph migration and usage:](#external-documentations-for-graph-to-subgraph-migration-and-usage)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Events GraphQL Federation
 
 The Events GraphQL Federation is a project for a Apollo federation supergraph (and subgraphs) and the Apollo Router configuration.
@@ -38,6 +13,32 @@ graph LR
     ROUTER --subgraph--> EVENTS["**Events GraphQL Proxy**: *A GraphQL-proxy for the LinkedEvents*"]
     ROUTER --subgraph--> VENUES["**Venues GraphQL Proxy**: *A GraphQL-proxy for the Palvelukartta/Servicemap / 'TPREK' Toimipaikkarekisteri*"]
 ```
+
+**Table of Contents**
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Subgraphs](#subgraphs)
+- [Servers](#servers)
+  - [Dev](#dev)
+  - [Test](#test)
+  - [Staging](#staging)
+  - [Production](#production)
+- [Local development](#local-development)
+  - [Prerequisites](#prerequisites)
+  - [Serve dockerized local router](#serve-dockerized-local-router)
+  - [Useful Rover commands](#useful-rover-commands)
+    - [Work with subgraphs](#work-with-subgraphs)
+    - [Work with supergraph](#work-with-supergraph)
+- [Router configuration](#router-configuration)
+  - [Override the subgraph urls with environment variables](#override-the-subgraph-urls-with-environment-variables)
+  - [Headers propagation](#headers-propagation)
+- [Documentation related to the Apollo federation](#documentation-related-to-the-apollo-federation)
+  - [External articles for basics:](#external-articles-for-basics)
+  - [External documentations for graph to subgraph migration and usage:](#external-documentations-for-graph-to-subgraph-migration-and-usage)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 **For more detailed documentation, please read the documentation maintained by the Apollo team!**
 

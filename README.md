@@ -1,24 +1,21 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Helsinki Events Monorepo](#helsinki-events-monorepo)
-  - [About Helsinki Events Monorepo](#about-helsinki-events-monorepo)
-    - [Why a Monorepo?](#why-a-monorepo)
-  - [Architecture](#architecture)
-  - [Structure](#structure)
-      - [Proxies](#proxies)
-      - [Apps](#apps)
-      - [Configuration](#configuration)
-      - [Shared packages](#shared-packages)
-      - [Shared static assets](#shared-static-assets)
-      - [Folder overview](#folder-overview)
-  - [Monorepo essentials](#monorepo-essentials)
-    - [Monorepo scripts](#monorepo-scripts)
-    - [Maintaining deps updated](#maintaining-deps-updated)
-    - [Symbolic links](#symbolic-links)
+  - [1. Architecture](#1-architecture)
+  - [2. Structure](#2-structure)
+    - [2.1 Proxies](#21-proxies)
+    - [2.2 Apps](#22-apps)
+    - [2.3 Configuration](#23-configuration)
+    - [2.4 Shared packages](#24-shared-packages)
+    - [2.5 Shared static assets](#25-shared-static-assets)
+    - [2.6 Folder overview](#26-folder-overview)
+  - [3. Monorepo essentials](#3-monorepo-essentials)
+    - [3.1 Monorepo scripts](#31-monorepo-scripts)
+    - [3.2 Maintaining deps updated](#32-maintaining-deps-updated)
+    - [3.3 Symbolic links](#33-symbolic-links)
       - [Supporting symbolic links on Windows](#supporting-symbolic-links-on-windows)
-    - [Critical HDS Styles](#critical-hds-styles)
+    - [3.4 Critical HDS Styles](#34-critical-hds-styles)
   - [4. Incremental Static Regeneration on-demand revalidation](#4-incremental-static-regeneration-on-demand-revalidation)
     - [4.1 Trigger revalidate all](#41-trigger-revalidate-all)
     - [4.2 Trigger revalidate for the uri](#42-trigger-revalidate-for-the-uri)
@@ -32,19 +29,18 @@
       - [Pipeline triggering](#pipeline-triggering)
       - [Pipeline configuration](#pipeline-configuration)
   - [6. Development](#6-development)
-    - [Quick start](#quick-start)
-    - [6. Editor support](#6-editor-support)
-      - [6.1 VSCode](#61-vscode)
+    - [6.1 Quick start](#61-quick-start)
+    - [6.2 Editor support](#62-editor-support)
+      - [VSCode](#vscode)
   - [7. Deploy](#7-deploy)
-    - [Docker](#docker)
   - [8. Releases, changelogs and versioning](#8-releases-changelogs-and-versioning)
-    - [Conventional Commits](#conventional-commits)
-    - [Releasable units](#releasable-units)
-    - [Configuration](#configuration-1)
-    - [Troubleshoting release-please](#troubleshoting-release-please)
+    - [8.1 Conventional Commits](#81-conventional-commits)
+    - [8.2 Releasable units](#82-releasable-units)
+    - [8.3 Configuration](#83-configuration)
+    - [8.4 Troubleshoting release-please](#84-troubleshoting-release-please)
       - [Fix merge conflicts by running release-please -action manually](#fix-merge-conflicts-by-running-release-please--action-manually)
-  - [FAQ](#faq)
-    - [Monorepo](#monorepo)
+  - [9. FAQ](#9-faq)
+    - [9.1 Monorepo](#91-monorepo)
       - [Exact vs semver dependencies](#exact-vs-semver-dependencies)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -68,13 +64,11 @@
   </a>
 </p>
 
-## About Helsinki Events Monorepo
-
 > Howtos for monorepo. New to monorepos ? [check this FAQ](./docs/howto/how-to.md).
 
 The Helsinki Events Monorepo is a version control system for three related applications: Events-Helsinki, Hobbies-Helsinki, and Sports-Helsinki. These are React/Next.js-based applications that allow citizens to discover events, courses, hobbies, and activities in Helsinki. The monorepo also contains the shared services, libraries, and components used across these applications.
 
-### Why a Monorepo?
+**Why a Monorepo?**
 
 The primary reason for using a monorepo is to streamline the development and deployment process for our applications. It offers several key advantages:
 
@@ -84,7 +78,7 @@ The primary reason for using a monorepo is to streamline the development and dep
 
 - **Atomic Commits**: This allows for a single commit that spans multiple projects. For example, a single pull request can include a new feature in a shared library and the corresponding updates in all three applications that use it. This prevents versioning issues and ensures everything works together.
 
-## Architecture
+## 1. Architecture
 
 The subgraphs of multiple datasources are combined to a one supergraph with an app specific Apollo-Router instance.
 An application (Events, Hobbies, Sports) uses the app specific Apollo-Router so the app gets all the datasources in use with a single Apollo-Client.
@@ -130,7 +124,7 @@ flowchart LR
     US --> Servicemap
 ```
 
-## Structure
+## 2. Structure
 
 ```
 .
@@ -151,13 +145,13 @@ flowchart LR
     └── eslint-config-bases  (to shared eslint configs)
 ```
 
-#### Proxies
+### 2.1 Proxies
 
 - [proxies/events-graphql-federation](./proxies/events-graphql-federation): The Apollo Router configuration to manage and run subgraphs. [README](./proxies/events-graphql-federation/README.md)
 - [proxies/events-graphql-proxy](./proxies/events-graphql-proxy): Clone of events-helsinki-api-proxy. Event Helsinki GraphQL proxy. [README](./proxies/events-graphql-proxy/README.md)
 - [proxies/venue-graphql-proxy](./venue/events-graphql-proxy): Venue Helsinki GraphQL proxy. [README](./proxies/venue-graphql-proxy/README.md)
 
-#### Apps
+### 2.2 Apps
 
 - [apps/hobbies-helsinki](./apps/hobbies-helsinki): SSR, i18n, sass, graphQL, rest... [README](./apps/hobbies-helsinki/README.md) | [DEMO](https://harrastukset.test.hel.ninja) | [CHANGELOG](./apps/hobbies-helsinki/CHANGELOG.md)
 - [apps/events-helsinki](./apps/events-helsinki): Clone of Hobbies (SSR, i18n, sass, graphQL, rest...) [README](./apps/events-helsinki/README.md) | [DEMO](https://tapahtumat.test.hel.ninja) | [CHANGELOG](./apps/events-helsinki/CHANGELOG.md)
@@ -165,11 +159,11 @@ flowchart LR
 
 > Apps should not depend on apps, they can depend on packages
 
-#### Configuration
+### 2.3 Configuration
 
 The application and proxy configuration is done via the AppConfig -file as much as possible, so there would be a single point for all the configuration.
 
-#### Shared packages
+### 2.4 Shared packages
 
 - [packages/eslint-config-bases](./packages/eslint-config-bases): [README](./packages/eslint-config-bases/README.md) | [CHANGELOG](./packages/eslint-config-bases/CHANGELOG.md)
 - [packages/graphql-proxy-server](./packages/graphql-proxy-server): [README](./packages/graphql-proxy-server/README.md) | [CHANGELOG](./packages/graphql-proxy-server/CHANGELOG.md)
@@ -179,13 +173,13 @@ The application and proxy configuration is done via the AppConfig -file as much 
 
 > Apps can depend on packages, packages can depend on each others...
 
-#### Shared static assets
+### 2.5 Shared static assets
 
 If needed static resources like **images**,... can be shared by using symlinks in the repo.
 
 - See the global [static](./static) folder.
 
-#### Folder overview
+### 2.6 Folder overview
 
 <details>
 <summary>Detailed folder structure</summary>
@@ -243,9 +237,9 @@ If needed static resources like **images**,... can be shared by using symlinks i
 
 </details>
 
-## Monorepo essentials
+## 3. Monorepo essentials
 
-### Monorepo scripts
+### 3.1 Monorepo scripts
 
 Some convenience scripts can be run in any folder of this repo and will call their counterparts defined in packages and apps.
 
@@ -273,7 +267,7 @@ Some convenience scripts can be run in any folder of this repo and will call the
 > Why using `:` to prefix scripts names ? It's convenient in yarn 3+, we can call those scripts from any folder in the monorepo.
 > `g:` is a shortcut for `global:`. See the complete list in [root package.json](./package.json).
 
-### Maintaining deps updated
+### 3.2 Maintaining deps updated
 
 The global commands `yarn deps:check` and `yarn deps:update` will help to maintain the same versions across the entire monorepo.
 They are based on the [npm-check-updates](https://github.com/raineorshine/npm-check-updates)
@@ -285,7 +279,7 @@ They are based on the [npm-check-updates](https://github.com/raineorshine/npm-ch
 
 While `deps:check` will give you a detailed info about about dep versions across the project, it doesn't automatically pinpoint mismatching versions between apps in the repo. To automatically find and fix mismatches, run `yarn lint:dependency-versions` in the root to make sure all deps in the monorepo are updated to the same version. Check the output, and fix issues by running `lint:dependency-versions --fix`.
 
-### Symbolic links
+### 3.3 Symbolic links
 
 Monorepo uses symbolic links to share assets, locales and GraphQL schema generation
 related code between apps and packages, e.g.:
@@ -349,9 +343,9 @@ To enable the support for symbolic links on Windows 10 you need to:
      are created e.g. by `git pull` containing new symbolic links.
 4. (Re)clone the repository in question either with Developer Mode enabled or with
    administrative privileges to make sure the symbolic links are created correctly.
-5. Check that the symbolic links were created correctly (See [Symbolic links](#symbolic-links) above)
+5. Check that the symbolic links were created correctly (See [Symbolic links](#33-symbolic-links) above)
 
-### Critical HDS Styles
+### 3.4 Critical HDS Styles
 
 Some Helsinki Design System (HDS) CSS styles are critically needed and luckily the HDS exposes a tool for extracting the used critical styles of HDS components. The HDS team [recommends](https://hds.hel.fi/foundation/guidelines/server-side-rendering/#how-does-hds-support-server-side-rendering) using their `getCriticalHdsRules` tool with the `_document.tsx` file of the Next JS, but when using NextJS with Static Site Generation (SSG) and Incremental Static Regeneration (ISR), it would mean that the inline style-block would be cloned again and again in every statically generated page and it would not be cached any how by the client (browser). Because of that, we have a [custom script in the monorepo root](./scripts/create-critical-hds-styles-file.js) that we can use to create a CSS file to all the monorepo apps (and also in common packages where it is needed).
 
@@ -492,12 +486,12 @@ How to set build arguments and/or config map variables (pod runtime environment 
 
 ## 6. Development
 
-### Quick start
+### 6.1 Quick start
 
 Each of the apps have a file called `.env.local.example` which stores example environment values for the most simplest local development start.
 The simplest setup means that you are developing 1 app at time with the published and public Events federation router.
 
-> What is Events federation router? See the [architecture](#architecture) and the [structure](#structure).
+> What is Events federation router? See the [architecture](#1-architecture) and the [structure](#2-structure).
 
 Copy that example environment file to the app-root (meaning next to the `.env.local.example` file) with name `.env.local`.
 
@@ -544,9 +538,9 @@ yarn start
 
 > See the app specific README for further instructions.
 
-### 6. Editor support
+### 6.2 Editor support
 
-#### 6.1 VSCode
+#### VSCode
 
 The ESLint plugin requires that the `eslint.workingDirectories` setting is set:
 
@@ -564,8 +558,6 @@ The ESLint plugin requires that the `eslint.workingDirectories` setting is set:
 More info [here](https://github.com/microsoft/vscode-eslint#mono-repository-setup)
 
 ## 7. Deploy
-
-### Docker
 
 Building a docker image, read the [docker doc](./docs/docker/docker.md).
 
@@ -585,15 +577,15 @@ See [Release Please Implementation Design](https://github.com/googleapis/release
 
 And all docs are available here: [release-please docs](https://github.com/googleapis/release-please/tree/main/docs).
 
-### Conventional Commits
+### 8.1 Conventional Commits
 
 Use [Conventional Commits](https://www.conventionalcommits.org/) to ensure that the changelogs are generated correctly.
 
-### Releasable units
+### 8.2 Releasable units
 
 Release please goes through commits and tries to find "releasable units" using commit messages as guidance - it will then add these units to their respective release PR's and figures out the version number from the types: `fix` for patch, `feat` for minor, `feat!` for major. None of the other types will be included in the changelog. So, you can use for example `chore` or `refactor` to do work that does not need to be included in the changelog and won't bump the version.
 
-### Configuration
+### 8.3 Configuration
 
 The release-please workflow is located in the [release-please.yml](./.github/workflows/release-please.yml) file.
 
@@ -604,7 +596,7 @@ The manifest file is located in the [release-please-manifest.json](./.release-pl
 
 When adding a new app, add it to both the [release-please-config.json](./release-please-config.json) and [release-please-manifest.json](./.release-please-manifest.json) file with the current version of the app. After this, release-please will keep track of versions with [release-please-manifest.json](./.release-please-manifest.json).
 
-### Troubleshoting release-please
+### 8.4 Troubleshoting release-please
 
 If you were expecting a new release PR to be created or old one to be updated, but nothing happened, there's probably one of the older release PR's in pending state or action didn't run.
 
@@ -629,9 +621,9 @@ Sometimes there might be a merge conflict in release PR - this should resolve it
 
 There's also a CLI for debugging and manually running releases available for release-please: [release-please-cli](https://github.com/googleapis/release-please/blob/main/docs/cli.md)
 
-## FAQ
+## 9. FAQ
 
-### Monorepo
+### 9.1 Monorepo
 
 This monorepo structure is based on the Nextjs Monorepo Example: https://github.com/belgattitude/nextjs-monorepo-example.
 

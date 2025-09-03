@@ -1,17 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [@events-helsinki/eslint-config-bases](#events-helsinkieslint-config-bases)
-- [About](#about)
-  - [Features](#features)
-  - [Features](#features-1)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [Bases](#bases)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # @events-helsinki/eslint-config-bases
 
 <p align="left">
@@ -20,21 +6,32 @@
   </a>
 </p>
 
-# About
+**Table of Contents**
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [About](#about)
+  - [Features](#features)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [Bases](#bases)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## About
 
 Composable eslint config bases that can be easily shared and fine-tuned by apps and
 packages that lives in a [monorepo](https://github.com/City-of-Helsinki/events-helsinki-monorepo).
 
-## Features
-
-## Features
+### Features
 
 - **Monorepo friendly:** Each workspace can have its own config.
 - **Composable:** Compose your workspace eslint config from pre-defined bases.
 - **Extensible:** Easily add additional plugins per workspaces (ie: nextjs, remix...)
 - **Performance:** Plugins enabled on file conventions patterns to increase perf.
 
-## Install
+### Install
 
 Add the following devDependencies to workspace (apps/packages in monorepo) or main project package.json.
 
@@ -45,7 +42,7 @@ $ yarn add --dev @events-helsinki/eslint-config-bases:"workspace:^"
 
 > **Tip** the [workspace:^](https://yarnpkg.com/features/workspaces#workspace-ranges-workspace) is supported by yarn and pnpm.
 
-## Usage
+### Usage
 
 In your app or package, create an `./apps/my-app/eslint.config.js` file that extends any of the
 existing base configs. For example:
@@ -53,7 +50,7 @@ existing base configs. For example:
 > **Tip:** "@events-helsinki/eslint-config-bases/prettier" must be set at the end to disable any
 > conflicting rules.
 
-## Bases
+### Bases
 
 You can find the bases in [./src/bases](./src/bases).
 

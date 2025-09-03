@@ -1,12 +1,16 @@
+# The Venues subgraph
+
+**Table of Contents**
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [The Venues subgraph](#the-venues-subgraph)
-  - [Environments](#environments)
+- [Introduction](#introduction)
+- [Environments](#environments)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# The Venues subgraph
+## Introduction
 
 The Venues subgraph offers the Venue data from the Tprek and Hauki datasources.
 

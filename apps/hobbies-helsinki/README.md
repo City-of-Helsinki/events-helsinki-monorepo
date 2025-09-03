@@ -1,37 +1,37 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Hobbies-helsinki](#hobbies-helsinki)
-  - [Environments](#environments)
-  - [Service architecture](#service-architecture)
-    - [Headless CMS datasources](#headless-cms-datasources)
-    - [Route (pages)](#route-pages)
-  - [Developing locally](#developing-locally)
-  - [Setting up Husky pre-commit hooks:](#setting-up-husky-pre-commit-hooks)
-  - [Available scripts](#available-scripts)
-    - [`yarn dev`](#yarn-dev)
-    - [`yarn build`](#yarn-build)
-    - [`yarn test`](#yarn-test)
-    - [`yarn test:browser`](#yarn-testbrowser)
-    - [`yarn lint`](#yarn-lint)
-    - [`yarn typecheck`](#yarn-typecheck)
-    - [`yarn generate:graphql`](#yarn-generategraphql)
-  - [Headless CMS React Component (HCRC) -library implementation](#headless-cms-react-component-hcrc--library-implementation)
-    - [Apollo Link (Middleware)](#apollo-link-middleware)
-  - [Application configuration](#application-configuration)
-  - [Course Search -parameters](#course-search--parameters)
-    - [Parameters conversion when querying LinkedEvents through Events GraphQL Proxy](#parameters-conversion-when-querying-linkedevents-through-events-graphql-proxy)
-    - [Main event search](#main-event-search)
-    - [Main event search](#main-event-search-1)
-    - [Similar events](#similar-events)
-    - [Sub events](#sub-events)
-  - [Learn more](#learn-more)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Hobbies-helsinki
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+**Table of Contents**
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Environments](#environments)
+- [Service architecture](#service-architecture)
+  - [Headless CMS datasources](#headless-cms-datasources)
+  - [Route (pages)](#route-pages)
+- [Developing locally](#developing-locally)
+- [Setting up Husky pre-commit hooks:](#setting-up-husky-pre-commit-hooks)
+- [Available scripts](#available-scripts)
+  - [`yarn dev`](#yarn-dev)
+  - [`yarn build`](#yarn-build)
+  - [`yarn test`](#yarn-test)
+  - [`yarn test:browser`](#yarn-testbrowser)
+  - [`yarn lint`](#yarn-lint)
+  - [`yarn typecheck`](#yarn-typecheck)
+  - [`yarn generate:graphql`](#yarn-generategraphql)
+- [Headless CMS React Component (HCRC) -library implementation](#headless-cms-react-component-hcrc--library-implementation)
+  - [Apollo Link (Middleware)](#apollo-link-middleware)
+- [Application configuration](#application-configuration)
+- [Course Search -parameters](#course-search--parameters)
+  - [Parameters conversion when querying LinkedEvents through Events GraphQL Proxy](#parameters-conversion-when-querying-linkedevents-through-events-graphql-proxy)
+  - [Main event search](#main-event-search)
+  - [Similar events](#similar-events)
+  - [Sub events](#sub-events)
+- [Learn more](#learn-more)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Environments
 

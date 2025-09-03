@@ -1,12 +1,15 @@
+# The CMS graph
+
+**Table of Contents**
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
-- [The CMS graph](#the-cms-graph)
+- [Introduction](#introduction)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-### The CMS graph
+## Introduction
 
 The CMS graph is provided externally by Geniem.
 

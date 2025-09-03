@@ -28,6 +28,7 @@
       - [Pipeline static testing](#pipeline-static-testing)
       - [Pipeline triggering](#pipeline-triggering)
       - [Pipeline configuration](#pipeline-configuration)
+      - [Public service environments](#public-service-environments)
   - [6. Development](#6-development)
     - [6.1 Quick start](#61-quick-start)
     - [6.2 Editor support](#62-editor-support)
@@ -483,6 +484,17 @@ How to set build arguments and/or config map variables (pod runtime environment 
       MATOMO_ENABLED: 0
       CMS_ORIGIN: https://harrastus.app-staging.hkih.hion.dev
 ```
+
+#### Public service environments
+
+There are 4 different static environments (dev, test, staging and prod) available plus the dynamic pull request servers.
+
+The process goes like this:
+
+1. When a pull request (PR) is created, the PR related checks are being ran and a new server instance will be created. A link to that environment should be published in the comments of the PR when the service is ready. For example the browser tests are being ran against that server.
+2. When a pull request (PR) is merged (to the "main" branch), the dev-environment will be redeployed with the latest changes.
+3. When a new release is made, the test-environment and staging-environment will be redeployed with the latest changes.
+4. When a new release is approved, a production-environment will be (re)deployed
 
 ## 6. Development
 

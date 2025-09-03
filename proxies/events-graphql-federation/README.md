@@ -1,11 +1,13 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Events GraphQL Federation](#events-graphql-federation)
   - [Subgraphs](#subgraphs)
   - [Servers](#servers)
+    - [Dev](#dev)
+    - [Test](#test)
     - [Staging](#staging)
+    - [Production](#production)
   - [Local development](#local-development)
     - [Prerequisites](#prerequisites)
     - [Serve dockerized local router](#serve-dockerized-local-router)
@@ -50,11 +52,36 @@ Apollo's Supergraph-demo repository: https://github.com/apollographql/supergraph
 
 ## Servers
 
-### Staging
+The CI deployment process goes like this:
+
+1. When a pull request (PR) is created, the PR related checks are being ran and a new server instance will be created. A link to that environment should be published in the comments of the PR when the service is ready. For example the browser tests are being ran against that server.
+2. When a pull request (PR) is merged (to the "main" branch), the dev-environment will be redeployed with the latest changes.
+3. When a new release is made, the test-environment and staging-environment will be redeployed with the latest changes.
+4. When a new release is approved, a production-environment will be (re)deployed
+
+### Dev
+
+- Hobbies-Helsinki: https://events-graphql-federation-hobbies.dev.hel.ninja/
+- Events-Helsinki: https://events-graphql-federation-events.dev.hel.ninja/
+- Sports-Helsinki: https://events-graphql-federation-sports.dev.hel.ninja/
+
+### Test
 
 - Hobbies-Helsinki: https://events-graphql-federation-hobbies.test.hel.ninja/
 - Events-Helsinki: https://events-graphql-federation-events.test.hel.ninja/
 - Sports-Helsinki: https://events-graphql-federation-sports.test.hel.ninja/
+
+### Staging
+
+- Hobbies-Helsinki: https://events-graphql-federation-hobbies.stage.hel.ninja/
+- Events-Helsinki: https://events-graphql-federation-events.stage.hel.ninja/
+- Sports-Helsinki: https://events-graphql-federation-sports.stage.hel.ninja/
+
+### Production
+
+- Hobbies-Helsinki: https://harrastukset-router.api.hel.fi/
+- Events-Helsinki: https://tapahtumat-router.api.hel.fi/
+- Sports-Helsinki: https://liikunta-router.api.hel.fi/
 
 ## Local development
 

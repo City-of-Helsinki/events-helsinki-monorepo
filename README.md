@@ -439,9 +439,63 @@ How to set build arguments and/or config map variables (pod runtime environment 
       CMS_ORIGIN: https://harrastus.app-staging.hkih.hion.dev
 ```
 
-## 6. Editor support
+## 6. Development
 
-### 6.1 VSCode
+### Quick start
+
+Each of the apps have a file called `.env.local.example` which stores example environment values for the most simplest local development start.
+The simplest setup means that you are developing 1 app at time with the published and public Events federation router.
+
+> What is Events federation router? See the [architecture](#architecture) and the [structure](#structure).
+
+Copy that example environment file to the app-root (meaning next to the `.env.local.example` file) with name `.env.local`.
+
+So, for example, go to the `events-monorepo` app with
+
+```bash
+cd apps/events-helsinki
+```
+
+and then run the following command to create the `.env.local` file from the example file:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Then, you should install the `node_modules` with
+
+```bash
+yarn install
+```
+
+This will install the whole "yarn workspace" for the monorepo.
+
+With a valid `.env.local` file and installed `node_modules`, you should then be ready to run an app (in development mode).
+
+First go to the app folder (e.g from the root of the monorepo to `apps/events-helsinki`) with
+
+```bash
+cd apps/events-helsinki`
+```
+
+and then start the development server with
+
+```bash
+yarn dev
+```
+
+or to build & run production package of it with
+
+```bash
+yarn build
+yarn start
+```
+
+> See the app specific README for further instructions.
+
+### 6. Editor support
+
+#### 6.1 VSCode
 
 The ESLint plugin requires that the `eslint.workingDirectories` setting is set:
 

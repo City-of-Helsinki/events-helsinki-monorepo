@@ -1,1 +1,2 @@
+yarn doctoc . -u
 yarn g:lint-staged-files

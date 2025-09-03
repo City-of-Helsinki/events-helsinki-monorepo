@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [@events-helsinki/eslint-config-bases](#events-helsinkieslint-config-bases)
+- [About](#about)
+  - [Features](#features)
+  - [Features](#features-1)
+  - [Install](#install)
+  - [Usage](#usage)
+  - [Bases](#bases)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # @events-helsinki/eslint-config-bases
 
 <p align="left">

@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Unit tests bench](#unit-tests-bench)
+    - [Vitest](#vitest)
+    - [Jest](#jest)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Unit tests bench
 
 Vitest: 4 secs

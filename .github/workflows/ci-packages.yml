@@ -96,7 +96,7 @@ jobs:
       # Test packages that have changed (--include & --since)
       - name: Unit tests changed packages
         run: |
-          yarn workspaces foreach -tv --include 'events-helsinki-*' --since=origin/main --recursive run test
+          yarn workspaces foreach -tv --include 'events-helsinki-*' --since=origin/main --recursive run test --coverage
       # to debug cache issues: ls ${{ github.workspace }}/.cache
       # Build packages that have changed (--include & --since), assuming that
       # apps build are done already. Otherwise --from & --since

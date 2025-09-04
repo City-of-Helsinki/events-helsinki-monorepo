@@ -8,9 +8,9 @@ import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cm
 import useEventsRHHCConfig from '../../hooks/useEventsRHHCConfig';
 import { useEventsApolloClient } from '../clients/eventsApolloClient';
 
-export type Props = {
+export type Props = Readonly<{
   children: React.ReactNode;
-};
+}>;
 
 function EventsApolloProvider({ children }: Props) {
   const { showErrorNotification, handleError, onCloseErrorHandler } =

@@ -82,7 +82,6 @@ $mainBackground: var(--color-theme-background);
 
   .heroModuleLabel {
     position: absolute; /* Position the label relative to the figure */
-    padding: 5px 10px;
     z-index: 1; /* Ensure label is above the image but possibly below other hero content */
     background-color: var(--color-black);
     top: 80px;

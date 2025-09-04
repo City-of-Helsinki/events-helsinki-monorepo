@@ -14,9 +14,7 @@ const PlaceText: React.FC<Props> = ({ id }) => {
   const { data } = usePlaceDetailsQuery({
     variables: { id },
   });
-  return (
-    <>{getLocalizedString((data && data.placeDetails.name) || {}, locale)}</>
-  );
+  return <>{getLocalizedString(data?.placeDetails.name || {}, locale)}</>;
 };
 
 export default PlaceText;

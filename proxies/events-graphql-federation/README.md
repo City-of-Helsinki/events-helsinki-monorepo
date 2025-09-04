@@ -236,15 +236,15 @@ headers:
             matching: .*
 ```
 
-# Documentation related to the Apollo federation
+## Documentation related to the Apollo federation
 
-## External articles for basics:
+### External articles for basics:
 
 - Apollo docs introduction [Introduction to Apollo Federation](https://www.apollographql.com/docs/federation/)
 - The what, when, why, and how of federated GraphQL: [The what, when, why, and how of federated GraphQL - LogRocket Blog](https://blog.logrocket.com/the-what-when-why-and-how-of-federated-graphql/)
 - API Gateway Pattern using Apollo Graphql: [An API Gateway is a microservice pattern where a separate service is built to sit in front of your…](https://medium.com/tkssharma/an-api-gateway-is-a-microservice-pattern-where-a-separate-service-is-built-to-sit-in-front-of-your-be4b16861d40)
 
-## External documentations for graph to subgraph migration and usage:
+### External documentations for graph to subgraph migration and usage:
 
 - The supergraph: a new way to think about GraphQL: [The supergraph: a new way to think about GraphQL](https://www.apollographql.com/blog/announcement/backend/the-supergraph-a-new-way-to-think-about-graphql/)
 - Federation quick start: [Federation quickstart](https://www.apollographql.com/docs/federation/quickstart/local-composition)

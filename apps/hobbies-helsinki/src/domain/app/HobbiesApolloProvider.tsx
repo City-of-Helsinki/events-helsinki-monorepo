@@ -8,9 +8,9 @@ import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cm
 import useHobbiesRHHCConfig from '../../hooks/useHobbiesRHHCConfig';
 import { useHobbiesApolloClient } from '../clients/hobbiesApolloClient';
 
-export type Props = {
+export type Props = Readonly<{
   children: React.ReactNode;
-};
+}>;
 
 function HobbiesApolloProvider({ children }: Props) {
   const { showErrorNotification, handleError, onCloseErrorHandler } =

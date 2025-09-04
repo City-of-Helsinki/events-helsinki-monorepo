@@ -8,9 +8,9 @@ import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cm
 import useSportsRHHCConfig from '../../hooks/useSportsRHHCConfig';
 import { useSportsApolloClient } from '../clients/sportsApolloClient';
 
-export type Props = {
+export type Props = Readonly<{
   children: React.ReactNode;
-};
+}>;
 
 function SportsApolloProvider({ children }: Props) {
   const { showErrorNotification, handleError, onCloseErrorHandler } =

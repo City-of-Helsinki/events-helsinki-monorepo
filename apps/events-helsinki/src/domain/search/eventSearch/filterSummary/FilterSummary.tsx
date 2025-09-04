@@ -48,12 +48,12 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     [EVENT_SEARCH_FILTERS.TEXT]: text,
   } = getSearchFilters(searchParams);
 
-  const dateText =
-    start || end
-      ? `${start ? formatDate(start) : ''} - ${
-          end ? formatDate(end) : ''
-        }`.trim()
-      : '';
+  let dateText = '';
+  if (start || end) {
+    const startDate = start ? formatDate(start) : '';
+    const endDate = end ? formatDate(end) : '';
+    dateText = `${startDate} - ${endDate}`.trim();
+  }
 
   const handleFilterRemove = (value: string | number, type: FilterType) => {
     const getFilteredList = (listType: FilterType, list: string[] = []) =>

@@ -76,14 +76,19 @@ export default defineConfig({
         'public/',
         'node_modules/',
         'src/styles/**',
-        'src/pages/**',
+        'src/pages/**', // Excludes pages directory
+        'src/lib/**', // Excludes lib directory
+        'src/i18n.ts', // Excludes i18n file
+        'src/logger.ts', // Excludes logger file
+        'src/middleware.ts', // Excludes middleware file
+        'src/index.tsx', // Excludes root index file
+        'src/**/*.d.ts', // Excludes all declaration files
+        'src/**/*.test.ts', // Excludes all .test.ts files
+        'src/**/*.test.tsx', // Excludes all .test.tsx files
+        'src/**/*.spec.ts', // Excludes all .spec.ts files
+        'src/**/*.spec.tsx', // Excludes all .spec.tsx files
+        'src/__tests__/**', // Excludes any __tests__ folder within src
         '.next/',
-        'src/i18n.ts',
-        'src/logger.ts',
-        'src/middleware.ts',
-        'src/lib/**',
-        'src/**/*.test.ts',
-        '**/*.d.ts',
         '**/*.json',
         '**/*.xml',
         '**/*.yaml',
@@ -96,11 +101,7 @@ export default defineConfig({
         'browser-tests/',
         'build/',
         'codegen.ts',
-        'src/index.tsx',
-        '**/__tests__/**',
         '**/__snapshots__/**',
-        '**/*.test.ts',
-        '**/*.spec.ts',
         '**/query.ts',
       ],
     },
@@ -108,7 +109,6 @@ export default defineConfig({
   resolve: {
     alias: [
       ...aliasPaths,
-
       // Other specific aliases (CSS, images)
       {
         find: '.+\\.(css|styl|less|sass|scss)$',

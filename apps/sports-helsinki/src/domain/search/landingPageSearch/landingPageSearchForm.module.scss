@@ -58,7 +58,6 @@
 
   @include breakpoints.respond-above(m) {
     display: grid;
-    grid-template-columns: 1fr;
     grid-gap: 1.25rem;
     height: fit-content;
     grid-template-columns: 2fr 1fr;

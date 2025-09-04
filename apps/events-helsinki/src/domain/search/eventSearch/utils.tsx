@@ -51,7 +51,7 @@ import type {
 export const sortExtendedCategoryOptions = (
   a: CategoryOption,
   b: CategoryOption
-) => (a.text > b.text ? 1 : b.text > a.text ? -1 : 0);
+) => a.text.localeCompare(b.text);
 
 export const getCategoryOptions = (
   category: SearchCategoryType,

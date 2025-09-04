@@ -14,7 +14,7 @@ import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import styles from './landingPageSearchForm.module.scss';
 
-export type LandingPageSearchFormProps = {
+export type LandingPageSearchFormProps = Readonly<{
   className?: string;
   dateTypes: string[];
   start: Date | null;
@@ -28,7 +28,7 @@ export type LandingPageSearchFormProps = {
   toggleIsCustomDate: () => void;
   handleSubmit: () => void;
   handleMenuOptionClick: (option: AutosuggestMenuOption) => void;
-};
+}>;
 
 export default function LandingPageSearchForm({
   className,

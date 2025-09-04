@@ -7,12 +7,12 @@ import routerHelper from '../../../domain/app/routerHelper';
 import type { CategoryOption } from '../eventSearch/types';
 import { getSearchQuery } from '../eventSearch/utils';
 
-type SearchShortcutsProps = {
+type SearchShortcutsProps = Readonly<{
   className: string;
   categories: CategoryOption[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   searchFilters: any;
-};
+}>;
 
 export default function SearchShortcuts({
   className,

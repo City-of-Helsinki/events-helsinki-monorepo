@@ -73,8 +73,12 @@ export default defineConfig({
       reporter: ['lcov', 'html', 'text'],
       include: ['src/**/*.{ts,tsx,js,jsx}'],
       exclude: [
+        'public/',
+        'node_modules/',
+        'src/styles/**',
+        'src/pages/**',
+        '.next/',
         'src/**/*.test.ts',
-        'src/.next/**',
         '**/*.d.ts',
         '**/*.json',
         '**/*.xml',

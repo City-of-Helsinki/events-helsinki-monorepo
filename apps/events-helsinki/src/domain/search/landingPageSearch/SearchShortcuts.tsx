@@ -8,11 +8,11 @@ import routerHelper from '../../../domain/app/routerHelper';
 import type { CategoryOption, Filters } from '../eventSearch/types';
 import { getSearchQuery } from '../eventSearch/utils';
 
-type SearchShortcutsProps = {
+type SearchShortcutsProps = Readonly<{
   className: string;
   categories: CategoryOption[];
   searchFilters: Omit<Filters, EVENT_SEARCH_FILTERS.ONGOING>;
-};
+}>;
 
 export default function SearchShortcuts({
   className,

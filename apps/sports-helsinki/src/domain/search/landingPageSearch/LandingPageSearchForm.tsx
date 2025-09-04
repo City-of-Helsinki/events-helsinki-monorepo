@@ -12,13 +12,13 @@ import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import styles from './landingPageSearchForm.module.scss';
 
-export type LandingPageSearchFormProps = {
+export type LandingPageSearchFormProps = Readonly<{
   className?: string;
   autosuggestInput: string;
   setAutosuggestInput: (value: string) => void;
   handleSubmit: () => void;
   handleMenuOptionClick: (option: AutosuggestMenuOption) => void;
-};
+}>;
 
 export default function LandingPageSearchForm({
   className,

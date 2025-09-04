@@ -111,7 +111,7 @@ const getFilterDates = ({
 
   if (dateTypes.includes(DATE_TYPES.TOMORROW)) {
     end = formatDate(addDays(today, 1), dateFormat);
-    start = start ? start : formatDate(addDays(today, 1), dateFormat);
+    start = start || formatDate(addDays(today, 1), dateFormat);
   }
 
   if (dateTypes.includes(DATE_TYPES.WEEKEND)) {

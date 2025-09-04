@@ -240,7 +240,7 @@ export const getEventSearchVariables = ({
     keywordAnd,
     keywordNot,
     language,
-    location: places.sort(),
+    location: places.sort((a, b) => a.localeCompare(b)),
     pageSize,
     publisher,
     publisherAncestor: null,

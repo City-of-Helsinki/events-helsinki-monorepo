@@ -23,7 +23,7 @@ const PlaceSelector: React.FC<Props> = ({
 }) => {
   const locale = useLocale();
   const [internalInputValue, setInternalInputValue] = React.useState('');
-  const input = inputValue !== undefined ? inputValue : internalInputValue;
+  const input = inputValue ?? internalInputValue;
   const searchValue = useDebounce(input, 300);
 
   const { data: placesData } = usePlaceListQuery({

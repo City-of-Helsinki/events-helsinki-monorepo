@@ -35,7 +35,7 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
     (inputPlaceholder || t('common:multiSelectDropdown.inputPlaceholder')) ??
     '';
   const [internalInput, setInternalInput] = React.useState('');
-  const input = inputValue !== undefined ? inputValue : internalInput;
+  const input = inputValue ?? internalInput;
 
   const dropdown = React.useRef<HTMLDivElement | null>(null);
   const toggleButton = React.useRef<HTMLButtonElement | null>(null);

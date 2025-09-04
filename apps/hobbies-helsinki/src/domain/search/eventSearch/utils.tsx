@@ -303,20 +303,6 @@ export const getNextPage = (meta: Meta): number | null => {
   return page ? Number(page) : null;
 };
 
-// /**
-//  * Get next page number from linkedevents response meta field
-//  * @param meta
-//  * @return {number}
-//  */
-// export const getNextPage = (meta: Meta): number | null => {
-//   if (!meta.next) return null;
-
-//   const urlParts = meta.next.split("?");
-//   const searchParams = new URLSearchParams(decodeURIComponent(urlParts[1]));
-//   const page = searchParams.get(EVENT_SEARCH_FILTERS.PAGE);
-//   return page ? Number(page) : null;
-// };
-
 export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
   const endTime = searchParams.get(EVENT_SEARCH_FILTERS.END);
   const end = endTime ? new Date(endTime) : null;

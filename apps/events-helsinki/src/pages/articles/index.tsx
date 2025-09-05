@@ -30,7 +30,11 @@ import {
   TemplateEnum,
   getBreadcrumbsFromPage,
 } from 'react-helsinki-headless-cms';
-import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
+import type {
+  ArticleType,
+  CollectionItemType,
+  PageType,
+} from 'react-helsinki-headless-cms';
 import {
   useCategoriesQuery,
   PageByTemplateDocument,
@@ -54,6 +58,61 @@ interface ArticleFilters {
   text?: string | null;
   tags?: string[];
 }
+
+const LargeCardContainer = (item: CollectionItemType) => {
+  const cardItem = item as ArticleType;
+  const itemCategories = cardItem?.categories;
+  const {
+    utils: { getRoutedInternalHref },
+  } = useConfig();
+  return (
+    <LargeCard
+      key={`lg-card-${item?.id}`}
+      {...cmsHelper.getArticlePageCardProps(
+        item as ArticleType,
+        getRoutedInternalHref
+      )}
+      customContent={
+        <ArticleDetails
+          keywords={
+            itemCategories?.edges
+              ?.filter((category) => category?.node?.name)
+              .map((category) => category?.node?.name || '') ?? []
+          }
+        />
+      }
+    />
+  );
+};
+
+const CardContainer = (item: CollectionItemType) => {
+  const cardItem = item as ArticleType;
+  const itemCategories = cardItem?.categories;
+  const {
+    utils: { getRoutedInternalHref },
+  } = useConfig();
+  return (
+    <Card
+      key={`sm-card-${item?.id}`}
+      {...{
+        ...cmsHelper.getArticlePageCardProps(
+          item as ArticleType,
+          getRoutedInternalHref
+        ),
+        text: '', // A design decision: The text is not wanted in the small cards
+      }}
+      customContent={
+        <ArticleDetails
+          keywords={
+            itemCategories?.edges
+              ?.filter((category) => category?.node?.name)
+              .map((category) => category?.node?.name || '') ?? []
+          }
+        />
+      }
+    />
+  );
+};
 
 export default function ArticleArchive({
   previewToken,
@@ -208,57 +267,8 @@ export default function ArticleArchive({
               fetchMoreArticles();
             }}
             largeFirstItem={true}
-            createLargeCard={(item) => {
-              const cardItem = item as ArticleType;
-              const itemCategories = cardItem?.categories;
-              return (
-                <LargeCard
-                  key={`lg-card-${item?.id}`}
-                  {...cmsHelper.getArticlePageCardProps(
-                    item as ArticleType,
-                    getRoutedInternalHref
-                  )}
-                  // todo: fix any type
-                  customContent={
-                    <ArticleDetails
-                      keywords={
-                        itemCategories?.edges
-                          ?.filter((category: any) => category?.node?.name)
-                          .map((category: any) => category?.node?.name || '') ??
-                        []
-                      }
-                    />
-                  }
-                />
-              );
-            }}
-            createCard={(item) => {
-              const cardItem = item as ArticleType;
-              const itemCategories = cardItem?.categories;
-              return (
-                <Card
-                  key={`sm-card-${item?.id}`}
-                  {...{
-                    ...cmsHelper.getArticlePageCardProps(
-                      item as ArticleType,
-                      getRoutedInternalHref
-                    ),
-
-                    text: '', // A design decision: The text is not wanted in the small cards
-                  }}
-                  customContent={
-                    <ArticleDetails
-                      keywords={
-                        itemCategories?.edges
-                          ?.filter((category: any) => category?.node?.name)
-                          .map((category: any) => category?.node?.name || '') ??
-                        []
-                      }
-                    />
-                  }
-                />
-              );
-            }}
+            createLargeCard={LargeCardContainer}
+            createCard={CardContainer}
             hasMore={hasMoreToLoad}
           />
         </>

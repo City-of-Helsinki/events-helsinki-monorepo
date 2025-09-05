@@ -51,16 +51,12 @@ const cookieConsentBreadcrumbTitle: Record<AppLanguage, string> = {
 
 export default function CookieConsent({
   breadcrumbs,
-}: {
+}: Readonly<{
   breadcrumbs?: BreadcrumbListItem[];
-}) {
+}>) {
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
   const router = useRouter();
-  /*
-  // bug or feature: query is empty in handleRedirect
-  const router = useRouter();
-  const params: { returnPath?: string } = router.query; */
 
   const handleRedirect = useCallback(() => {
     if (window) {

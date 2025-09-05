@@ -55,7 +55,7 @@ const NextCmsPage: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
 
-  // FIXME: Return null to fix SSR rendering for notFound-page.
+  // NOTE: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
   if (!page) return null;
 

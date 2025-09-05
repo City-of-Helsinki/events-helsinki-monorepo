@@ -36,17 +36,19 @@ export type AppProps<P = any> = {
 
 export type CustomPageProps = NavigationProviderProps & SSRConfig;
 
+const ErrorBoundaryFallbackComponent = ({ error }: { error: Error }) => {
+  const { resilientT } = useResilientTranslation();
+  const appName = resilientT('appHobbies:appName');
+  return <FallbackComponent error={error} appName={appName} />;
+};
+
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const { resilientT } = useResilientTranslation();
   const locale = useLocale();
   const { asPath, pathname } = useRouter();
   const appName = resilientT('appEvents:appName');
   return (
-    <ErrorBoundary
-      FallbackComponent={({ error }) => (
-        <FallbackComponent error={error} appName={appName} />
-      )}
-    >
+    <ErrorBoundary FallbackComponent={ErrorBoundaryFallbackComponent}>
       <EventsApolloProvider>
         <BaseApp
           appName={appName}

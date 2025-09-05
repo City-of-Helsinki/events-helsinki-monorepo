@@ -155,10 +155,7 @@ export default function ArticleArchive({
       : null;
   }, [router, text, tags]);
 
-  const {
-    currentLanguageCode,
-    utils: { getRoutedInternalHref },
-  } = useConfig();
+  const { currentLanguageCode } = useConfig();
 
   const {
     data: articlesData,

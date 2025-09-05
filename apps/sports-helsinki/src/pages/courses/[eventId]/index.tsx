@@ -61,7 +61,6 @@ const EventPage: NextPage<{
 };
 export default EventPage;
 
-// export default eventsWithApollo(Event);
 export async function getStaticPaths() {
   return {
     paths: [],

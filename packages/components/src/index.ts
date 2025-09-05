@@ -1,6 +1,5 @@
 export * from './app';
 export * from './apollo';
-export { AsyncMessage } from './async-message';
 export * from './components';
 export * from './constants';
 export * from './geolocation';

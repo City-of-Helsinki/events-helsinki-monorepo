@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import useCanonicalUrl from './useCanonicalUrl';
 
 function replaceAll(str: string, find: string, replace: string) {
   return str.replace(new RegExp(find, 'g'), replace);
@@ -30,11 +31,12 @@ function PageMeta({
   title,
   description,
   image,
-  openGraphType,
+  openGraphType = 'website',
   twitterDescription,
   twitterTitle,
   ...seo
 }: PageMetaProps) {
+  const canonical = useCanonicalUrl();
   const openGraphTitle = seo.openGraphTitle ?? title;
   const openGraphDescription =
     seo.openGraphDescription ?? description ?? undefined;
@@ -48,6 +50,7 @@ function PageMeta({
           <meta name="description" content={unescapeDash(description)} />
         )}
         <meta property="og:title" content={openGraphTitle || ''} />
+        <meta property="og:url" content={canonical} />
         <meta name="twitter:card" content="summary_large_image" />
         {description && (
           <meta property="og:description" content={openGraphDescription} />
@@ -55,7 +58,7 @@ function PageMeta({
         {image && (
           <>
             <meta property="og:image" content={image} />
-            <meta property="twitter:image" content={image} />
+            <meta name="twitter:image" content={image} />
           </>
         )}
         {openGraphType && <meta property="og:type" content={openGraphType} />}

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
+import useCanonicalUrl from './useCanonicalUrl';
 
 type Props = {
   origin: string;
@@ -9,9 +10,13 @@ type Props = {
 
 function RouteMeta({ origin, page }: Props) {
   const { locale, asPath } = useRouter();
-  const path = asPath.replace(/\/$/, '').split('?')[0];
+  let path = asPath.replace(/\/$/, '').split('?')[0];
+  // remove locale from start
+  if (path.startsWith(`/${locale}`)) {
+    path = path.replace(`/${locale}`, '');
+  }
   const locales = ['fi', 'sv', 'en'];
-  const canonical = `${origin}/${locale}${path}`;
+  const canonical = useCanonicalUrl(origin);
 
   return (
     <Head>
@@ -40,7 +45,7 @@ function RouteMeta({ origin, page }: Props) {
       />
       <meta property="og:locale" content={locale} />
       <meta property="og:url" content={canonical} />
-      <meta property="twitter:url" content={canonical} />
+      <meta name="twitter:url" content={canonical} />
     </Head>
   );
 }

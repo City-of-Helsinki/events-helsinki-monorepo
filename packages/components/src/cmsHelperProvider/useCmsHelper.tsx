@@ -3,7 +3,8 @@ import CmsHelperContext from './CmsHelperContext';
 
 export default function useCmsHelper() {
   const context = React.useContext(CmsHelperContext);
-  if (!context) {
+
+  if (!context || Object.keys(context).length === 0) {
     throw new Error(
       `CmsHelper-utility cannot be used outside the CmsHelperprovider`
     );

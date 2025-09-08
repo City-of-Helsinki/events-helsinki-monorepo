@@ -21,7 +21,7 @@ const AskemFeedbackContainer: React.FC<AskemFeedbackContainerProps> = ({
 
   const handleConsentPageRedirect = () => {
     if (consentUrl) {
-      router.push(`${consentUrl}?returnPath=${router.asPath}`);
+      router.push(consentUrl);
     }
   };
 

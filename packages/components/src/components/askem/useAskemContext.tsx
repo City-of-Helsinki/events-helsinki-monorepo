@@ -1,5 +1,4 @@
 import { useCookies } from 'hds-react';
-import isEqual from 'lodash/isEqual';
 import { useCallback, useEffect, useState } from 'react';
 
 import createAskemInstance from './instance';
@@ -15,37 +14,32 @@ export default function useAskemContext({
   askemConfigurationInput: AskemConfigs;
 }) {
   const { getAllConsents } = useCookies({ cookieDomain });
-  const [askemConsentGiven, setAskemConsentGiven] = useState<boolean>(false);
   const [askemInstance, setAskemInstance] = useState<AskemInstance | null>(
     null
   );
-  const [askemConfiguration, setAskemConfiguration] =
-    useState<AskemConfigs | null>(null);
+  const [consentGiven, setConsentGiven] = useState(false);
 
   const handleConsentGiven = useCallback(() => {
     const consents = getAllConsents();
-    setAskemConsentGiven(
+    const hasConsent = !!(
       consents['askemBid'] &&
-        consents['askemBidTs'] &&
-        consents['askemReaction']
+      consents['askemBidTs'] &&
+      consents['askemReaction']
     );
+    setConsentGiven(hasConsent);
   }, [getAllConsents]);
 
   useEffect(() => {
     if (asPath) {
       handleConsentGiven();
     }
-  }, [handleConsentGiven, asPath]);
+  }, [asPath, handleConsentGiven]);
 
-  const newAskemConfiguration: AskemConfigs = {
-    ...askemConfigurationInput,
-    consentGiven: askemConsentGiven,
-  };
-
-  if (!askemInstance || !isEqual(askemConfiguration, newAskemConfiguration)) {
-    setAskemConfiguration(newAskemConfiguration);
-    setAskemInstance(createAskemInstance(newAskemConfiguration));
-  }
+  useEffect(() => {
+    setAskemInstance(
+      createAskemInstance({ ...askemConfigurationInput, consentGiven })
+    );
+  }, [askemConfigurationInput, consentGiven]);
 
   return { askemInstance, handleConsentGiven };
 }

@@ -32,7 +32,6 @@ export default defineConfig(({ mode }) => ({
       include: ['src/**/*.{ts,tsx,js,jsx}'],
       exclude: [
         'src/**/*.test.ts',
-        'src/.next/**',
         '**/*.d.ts',
         '**/*.json',
         '**/*.xml',
@@ -52,6 +51,9 @@ export default defineConfig(({ mode }) => ({
         '**/*.test.ts',
         '**/*.spec.ts',
         '**/query.ts',
+        'src/assets/**',
+        'src/styles/**',
+        'src/types/**',
       ],
     },
   },

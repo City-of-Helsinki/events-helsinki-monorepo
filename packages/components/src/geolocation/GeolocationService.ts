@@ -1,7 +1,7 @@
 import { logger } from '../loggers/logger';
 import type { Coordinates } from '../types';
 
-class GeolocationService {
+export class GeolocationService {
   getCurrentPosition(): Promise<Coordinates> {
     return new Promise((resolve, reject) =>
       navigator.geolocation.getCurrentPosition(

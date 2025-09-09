@@ -129,3 +129,9 @@ export const HARDCODED_LANGUAGES: Language[] = [
     slug: 'sv',
   },
 ];
+
+/**
+ * The images can be stored and fetch from an external image cache.
+ * @Example `"https://images.weserv.nl/?w=1024&url="`
+ */
+export const IMAGE_PROXY_SERVER = process.env.NEXT_PUBLIC_IMAGE_PROXY_URL;

@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './list.module.scss';
 
-type ListItemProps = {
+export type ListItemProps = {
   className?: string;
   index: number;
 };

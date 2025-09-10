@@ -436,7 +436,7 @@ describe('headless-cms/service', () => {
       });
 
       it('should continue even if one pathname fails to list', async () => {
-        const listGeneratedPagesSpy = vi
+        const _listGeneratedPagesSpy = vi
           .spyOn(service, 'listGeneratedPages')
           .mockRejectedValueOnce(new Error('Listing failed'))
           .mockResolvedValueOnce(['/sv/events/a']);

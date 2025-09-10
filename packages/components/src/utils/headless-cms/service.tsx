@@ -228,7 +228,7 @@ class NextPageLister {
    *
    * @param {string} pathname - The relative pathname within the `pagesServerDir` to search.
    * @returns {Promise<string[]>} A promise that resolves to a sorted array of unique relative page
-   *  paths (without file extensions).
+   *  paths (without file extensions) that use '/' (i.e. forward slash) as a path separator.
    * @throws {Error} If the specified `pathname` does not exist within the `pagesServerDir`.
    */
   public async listGeneratedPages(pathname: string): Promise<string[]> {
@@ -236,9 +236,12 @@ class NextPageLister {
     await fs.access(workingDir); // Check if the directory exists
     const { htmlFiles, jsonFiles } = await this.readDirRecursive(workingDir);
     // Combine and deduplicate the lists of files, then sort them.
-    return uniqBySetWithArrayFrom([...htmlFiles, ...jsonFiles])
-      .map((path) => `/${path}`)
-      .sort();
+    return (
+      uniqBySetWithArrayFrom([...htmlFiles, ...jsonFiles])
+        // Make sure paths use '/' as separator on Windows too
+        .map((path) => `/${path}`.replaceAll('\\', '/'))
+        .sort()
+    );
   }
 }
 

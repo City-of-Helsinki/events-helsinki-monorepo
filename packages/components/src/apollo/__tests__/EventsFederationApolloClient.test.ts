@@ -44,7 +44,7 @@ describe('EventsFederationApolloClient', () => {
     };
     const client = new EventsFederationApolloClient(config);
     const httpLink = client.getHttpLink(config.federationGraphqlEndpoint);
-    expect(httpLink).toBeDefined();
+    expect(httpLink.options.fetchOptions.agent.rejectUnauthorized).toBeFalsy();
   });
 
   it('should call handleError on GraphQL error', () => {

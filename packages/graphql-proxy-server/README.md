@@ -1,65 +1,49 @@
-# Event Helsinki GraphQL proxy
+# @events-helsinki/graphql-proxy-server
+
+This package provides a generic, reusable GraphQL proxy server. It is the core foundation for creating specific GraphQL proxy instances within the Events Helsinki monorepo.
 
 **Table of Contents**
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Development with Docker](#development-with-docker)
+- [Vision and Purpose](#vision-and-purpose)
+- [Role within the Monorepo](#role-within-the-monorepo)
+- [Core Features](#core-features)
+- [Development](#development)
 - [Available Scripts](#available-scripts)
-  - [`yarn start`](#yarn-start)
-  - [`yarn test`](#yarn-test)
-  - [`yarn build`](#yarn-build)
-  - [`yarn start`](#yarn-start-1)
-  - [`yarn lint`](#yarn-lint)
-  - [`yarn format-code`](#yarn-format-code)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Development with Docker
+## Vision and Purpose
 
-To build the project, you will need [Docker](https://www.docker.com/community-edition).
+## Role within the Monorepo
 
-Building the project
+This package is not intended to be run directly. Instead, it acts as a shared library for the proxy servers located in the `/proxies` directory, such as:
 
-    cp .env.example .env
-    docker compose build
+- `proxies/events-graphql-proxy`
+- `proxies/venue-graphql-proxy`
 
-Starting the application
+These specific proxy implementations use this package for the core server setup and then provide their own GraphQL schemas, resolvers, and data sources.
 
-    docker compose up -d
+## Core Features
 
-GraphQL playground will run on http://localhost:4000/proxy/graphql
+- **Apollo Server:** Built on top of Apollo Server for a robust and feature-rich GraphQL experience.
+- **Express.js:** Uses Express.js as the underlying HTTP server.
+- **Data Sources:** Includes a data source management system for connecting to various APIs and services.
+- **Error Handling:** Provides a centralized error handling mechanism.
+- **Plugins:** Supports Apollo Server plugins for extending server functionality.
+
+## Development
+
+To develop and test this package, you should work within one of the proxy implementations that use it (e.g., `proxies/events-graphql-proxy`).
+
+However, you can run the tests for this package directly.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:4000/proxy/graphql](http://localhost:4000/proxy/graphql) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.
-
-### `yarn start`
-
-Runs the graphql proxy in the production mode.
-Open [http://localhost:4000/proxy/graphql](http://localhost:4000/proxy/graphql) to view it in the browser.
-
-### `yarn lint`
-
-Run eslint to all files on
-
-### `yarn format-code`
-
-Fix all the eslint errors
+- `yarn test`: Runs the test suite.
+- `yarn lint`: Lints the code using ESLint.
+- `yarn typecheck`: Runs the TypeScript compiler to check for type errors.

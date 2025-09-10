@@ -4,6 +4,7 @@ import { loadEnv } from 'vite';
 import { defineConfig, configDefaults } from 'vitest/config';
 
 export default defineConfig(({ mode }) => ({
+  cacheDir: '../../.cache/venue-graphql-proxy',
   plugins: [],
   test: {
     environment: 'jsdom',
@@ -14,9 +15,6 @@ export default defineConfig(({ mode }) => ({
       './vitest-setup.ts',
       // 'dotenv/config'
     ],
-    cache: {
-      dir: '../../.cache/venue-graphql-proxy/vitest', // Vitest specific cache
-    },
     include: ['src/**/*.{spec,test}.{js,jsx,ts,tsx}'],
     exclude: [...configDefaults.exclude, './.next/', '/__mocks__/'],
     reporters: ['json', 'verbose', 'vitest-sonar-reporter'],

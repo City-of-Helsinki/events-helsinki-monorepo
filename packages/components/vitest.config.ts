@@ -6,6 +6,7 @@ import { defineConfig, configDefaults } from 'vitest/config';
 const projectRoot = path.resolve(__dirname);
 
 export default defineConfig(({ mode }) => ({
+  cacheDir: '../../.cache/events-helsinki-components',
   plugins: [],
   test: {
     environment: 'jsdom',
@@ -16,9 +17,6 @@ export default defineConfig(({ mode }) => ({
       './vitest-setup.ts',
       // 'dotenv/config'
     ],
-    cache: {
-      dir: '../../.cache/events-helsinki-components/vitest', // Vitest specific cache
-    },
     include: ['src/**/*.{spec,test}.{js,jsx,ts,tsx}'],
     exclude: [...configDefaults.exclude, './.next/', '/__mocks__/'],
     reporters: ['json', 'verbose', 'vitest-sonar-reporter'],

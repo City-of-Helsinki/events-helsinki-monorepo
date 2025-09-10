@@ -16,33 +16,23 @@ describe('BaseApp', () => {
             siteId: '1',
           } as any
         }
-        askemFeedbackConfiguration={{} as any}
+        askemFeedbackConfiguration={{}}
         asPath="/"
         withConsent={false}
-        // @ts-expect-error ts(2322)
-        headerMenu={[]}
-        // @ts-expect-error ts(2322)
-        headerUniversalBarMenu={[]}
-        // @ts-expect-error ts(2322)
-        footerMenu={[]}
+        headerMenu={undefined}
+        headerUniversalBarMenu={undefined}
+        footerMenu={undefined}
         languages={[]}
-        // @ts-expect-error ts(2322)
-        defaultButtonTheme="primary"
-        // @ts-expect-error ts(2322)
-        defaultButtonVariant="contained"
+        defaultButtonTheme="default"
+        defaultButtonVariant="primary"
         getCardUrl={() => ''}
         getEventUrl={() => ''}
         getEventListLinkUrl={() => ''}
         getOrganizationSearchUrl={() => ''}
         getHelsinkiOnlySearchUrl={() => ''}
         getPlainEventUrl={() => ''}
-        // @ts-expect-error ts(2322)
-        getKeywordOnClickHandler={() => {}}
-        // @ts-expect-error ts(2322)
-        _nextI18Next={{}}
-        locale="en"
-        locales={['en']}
-        defaultLocale="en"
+        getKeywordOnClickHandler={(_router, _locale, _type, _value) => () => {}}
+        _nextI18Next={undefined}
       >
         <div data-testid="child">Hello</div>
       </BaseApp>

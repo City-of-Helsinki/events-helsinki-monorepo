@@ -67,12 +67,9 @@ describe('useAskemContext', () => {
   it('should initialize with consent if cookies are set', () => {
     mockedUseCookies.mockReturnValue({
       getAllConsents: () => ({
-        // @ts-ignore ts(2322) - JSON string boolean
-        askemBid: 'true',
-        // @ts-ignore ts(2322) - JSON string boolean
-        askemBidTs: 'true',
-        // @ts-ignore ts(2322) - JSON string boolean
-        askemReaction: 'true',
+        askemBid: true,
+        askemBidTs: true,
+        askemReaction: true,
       }),
       getCookie: vi.fn(),
     });

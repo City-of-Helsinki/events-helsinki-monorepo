@@ -15,7 +15,7 @@ const mockCmsRoutedAppHelper: CmsRoutedAppHelper = {
   locales: [] as unknown as readonly ('en' | 'fi' | 'sv')[],
   URLRewriteMapping: {},
   transformDynamicPathIntoSegmentedDynamicPath: function (
-    path: string
+    _path: string
   ): string {
     throw new Error('Function not implemented.');
   },

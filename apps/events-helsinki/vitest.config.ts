@@ -53,14 +53,12 @@ const aliasPaths = paths
   : [];
 
 export default defineConfig({
+  cacheDir: '../../.cache/events-helsinki',
   plugins: [react(), cssInjectedByJsPlugin()],
   test: {
     environment: 'jsdom',
     globals: true, // Makes test, expect, vi global
     setupFiles: ['./vitest-setup.ts'],
-    cache: {
-      dir: '../../.cache/events-helsinki/vitest', // Vitest specific cache
-    },
     include: ['src/**/*.{spec,test}.{js,jsx,ts,tsx}'],
     exclude: [...configDefaults.exclude, './.next/', '/__mocks__/'],
     reporters: ['json', 'verbose', 'vitest-sonar-reporter'],

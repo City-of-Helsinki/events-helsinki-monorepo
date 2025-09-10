@@ -1,5 +1,7 @@
 import { clear } from 'console';
 
+import { advanceTo } from 'jest-date-mock';
+import * as React from 'react';
 import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {
@@ -10,8 +12,6 @@ import {
   fakeTargetGroup,
 } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
-import { advanceTo } from 'jest-date-mock';
-import * as React from 'react';
 import { EVENT_SEARCH_FILTERS } from '../../../../../constants/event-constants';
 import { HELSINKI_OCD_DIVISION_ID } from '../../../../../constants/venue-constants';
 import { EventTypeId } from '../../../../../types/generated/graphql';

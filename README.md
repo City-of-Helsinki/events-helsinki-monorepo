@@ -124,6 +124,8 @@ flowchart LR
     US --> Servicemap
 ```
 
+> NOTE: There is also an [optional feature to cache images](./packages/components/README.md#noteworthy-features)
+
 ## 2. Structure
 
 ```

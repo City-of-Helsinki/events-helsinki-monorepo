@@ -101,7 +101,7 @@ describe('<List />', () => {
     const CustomLi = ({
       children,
       className,
-    }: ListItemProps & { children: React.ReactNode }) => (
+    }: ListItemProps & { children?: React.ReactNode }) => (
       <li className={className}>{children}</li>
     );
     const { container } = render(<List items={items} li={CustomLi} />);

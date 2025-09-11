@@ -14,6 +14,7 @@ describe('GeolocationService', () => {
 
   afterEach(() => {
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it('should resolve with position on successful geolocation fetch', async () => {

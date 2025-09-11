@@ -53,7 +53,6 @@ export default defineConfig(({ mode }) => ({
         'src/styles/**',
         'src/types/**',
         '**/*.query.ts',
-        'src/edge-runtime-compatible/**',
         '**/*Icon.tsx',
         '**/*Icon.ts',
         'src/loggers/**',

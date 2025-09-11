@@ -29,7 +29,13 @@ import isEmpty from 'lodash/isEmpty';
 import type { NextRouter } from 'next/router';
 import type { TFunction } from 'next-i18next';
 
-import { ROUTES } from '../../../constants';
+import type { AgeGroup } from '../../../constants';
+import {
+  AGE_GROUP_KEYWORDS,
+  EVENT_SEARCH_ADULT_KEYWORD_EXCLUSIONS,
+  ROUTES,
+  TARGET_GROUP_AGE_GROUPS_IN_ORDER,
+} from '../../../constants';
 import AppConfig from '../../app/AppConfig';
 import routerHelper from '../../app/routerHelper';
 import type { EVENT_CATEGORIES } from './constants';
@@ -128,6 +134,39 @@ const getFilterDates = ({
 };
 
 /**
+ * Generates keyword filters for a given target age group.
+ *
+ * @returns An object containing the updated `keywordOrSet3` and `keywordNot` arrays.
+ */
+const _getTargetAgeGroupSearchVariables = ({
+  targetAgeGroup,
+  keywordOrSet3 = [],
+  keywordNot = [],
+}: {
+  targetAgeGroup: AgeGroup | string | undefined;
+  keywordOrSet3?: string[];
+  keywordNot?: string[];
+}) => {
+  // If targetAgeGroup is not a valid option, there is nothing to convert or handle.
+  if (!isTargetAgeGroup(targetAgeGroup)) {
+    return { keywordOrSet3, keywordNot };
+  }
+
+  if (targetAgeGroup === 'adults') {
+    // For adults, add all exclusion keywords to the 'keywordNot' list.
+    return {
+      keywordOrSet3,
+      keywordNot: [...keywordNot, ...EVENT_SEARCH_ADULT_KEYWORD_EXCLUSIONS],
+    };
+  }
+  // For all other age groups, add the specific keywords to the 'keywordOrSet3' list.
+  return {
+    keywordOrSet3: [...keywordOrSet3, ...AGE_GROUP_KEYWORDS[targetAgeGroup]],
+    keywordNot,
+  };
+};
+
+/**
  * Get event list request filters from url parameters
  * @param {object} filterOptions
  * @return {object}
@@ -159,13 +198,14 @@ export const getEventSearchVariables = ({
     helsinkiOnly,
     isFree,
     keyword,
-    keywordNot,
+    keywordNot: keywordNotParams,
     onlyChildrenEvents,
     onlyEveningEvents,
     onlyRemoteEvents,
     places,
     publisher,
     [EVENT_SEARCH_FILTERS.TEXT]: text,
+    [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]: targetAgeGroup,
   } = getSearchFilters(params);
   const pathPlace = place && MAPPED_PLACES[place.toLowerCase()];
 
@@ -211,6 +251,12 @@ export const getEventSearchVariables = ({
     MAPPED_EVENT_CATEGORIES
   );
 
+  const { keywordOrSet3, keywordNot } = _getTargetAgeGroupSearchVariables({
+    targetAgeGroup,
+    keywordOrSet3: [],
+    keywordNot: keywordNotParams,
+  });
+
   return {
     [EVENT_SEARCH_FILTERS.TEXT]: !isEmpty(text) ? text?.join(',') : undefined, // NOTE: only *OngoingAnd supports Array.
     [EVENT_SEARCH_FILTERS.ONGOING]: true,
@@ -221,6 +267,7 @@ export const getEventSearchVariables = ({
     isFree: isFree || undefined,
     internetBased: onlyRemoteEvents || undefined,
     keywordOrSet2: [...(keyword ?? []), ...mappedCategories],
+    keywordOrSet3,
     keywordAnd,
     keywordNot,
     language,
@@ -282,6 +329,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
       searchParams,
       EVENT_SEARCH_FILTERS.KEYWORD_NOT
     ),
+    [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]:
+      searchParams.get(EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP) ?? '',
     onlyChildrenEvents:
       searchParams.get(EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS) === 'true',
     onlyEveningEvents:
@@ -439,3 +488,12 @@ export const getKeywordOnClickHandler: KeywordOnClickHandlerType =
     router.push(`${routerHelper.getI18nPath(ROUTES.SEARCH, locale)}${search}`);
     scrollToTop();
   };
+
+export function isTargetAgeGroup(value?: string | null): value is AgeGroup {
+  if (!value) {
+    return false;
+  }
+  return (TARGET_GROUP_AGE_GROUPS_IN_ORDER as readonly string[]).includes(
+    value
+  );
+}

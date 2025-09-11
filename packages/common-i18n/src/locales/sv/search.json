@@ -50,7 +50,17 @@
     },
     "labelAccessibilityProfile": "Tillgänglighet",
     "ariaLabelClearAccessibilityProfile": "Ta bort valet av tillgänglighet",
-    "reservable": "Kan reserveras"
+    "reservable": "Kan reserveras",
+    "targetAgeGroup": {
+      "clear": "Töm",
+      "placeholder": "Välj åldersgrupp",
+      "removeSelected": "Ta bort markerade",
+      "babies": "Bebisar",
+      "children": "Barn",
+      "youth": "Unga",
+      "adults": "Vuxna",
+      "seniors": "Äldre"
+    }
   },
   "textFoundEvents": "{{count}} sökresultat",
   "betaButtonArialLabel": "Vill du ge oss respons på utvecklingsversionen av hobbysöksidan?",

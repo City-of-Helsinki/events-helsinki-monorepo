@@ -288,6 +288,40 @@ it('should change search query after clicking category menu item', async () => {
   });
 }, 50_000);
 
+it.each([
+  { param: 'babies', option: /vauvat/i },
+  { param: 'children', option: /lapset/i },
+  { param: 'youth', option: /nuoret/i },
+  { param: 'seniors', option: /ikääntyneet/i },
+  { param: 'adults', option: /aikuiset/i },
+])(
+  'should change search query $param after clicking target age group menu item $option',
+  async ({ param, option }) => {
+    const { router } = renderComponent();
+
+    const chooseTargetAgeGroupButton = screen.getByRole('button', {
+      name: /valitse ikäryhmä/i,
+    });
+
+    await userEvent.click(chooseTargetAgeGroupButton);
+    await userEvent.click(screen.getByRole('option', { name: option }));
+    expect(router).toMatchObject({
+      pathname,
+      query: {
+        [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+      },
+    });
+    await userEvent.click(screen.getByRole('button', { name: /hae/i }));
+    expect(router).toMatchObject({
+      pathname,
+      query: {
+        [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]: param,
+        [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+      },
+    });
+  }
+);
+
 it('should change search query with remote events checkbox', async () => {
   const { router } = renderComponent();
 

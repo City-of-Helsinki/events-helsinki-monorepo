@@ -307,6 +307,7 @@ The "main events search" component is used in the search page at `/search`.
 | location          | []                                       | x            | -        | Filter by location / venue / place (source: LinkedEvents)                                     |
 | keywordAnd        | []                                       | x            | -        | Used for "Only children events" when it will be set to "yso:p4354"                            |
 | keywordOrSet2     | []                                       | x            | -        | A list of keywords (e.g categories or premapped categories)                                   |
+| keywordOrSet3     | []                                       | x            | -        | A list of target age group keywords \*                                                        |
 | keywordNot        | []                                       | x (URL only) | -        | Exclude events with these keywords. Converted to "keyword!" when querying LinkedEvents.       |
 | publisher         | ""                                       | x            | -        | Used to find events of 1 specific organisation                                                |
 | publisherAncestor | null                                     | x            | -        | Filter events by `publisherAncestor` set to "ahjo:00001" if filtering city of Helsinki events |
@@ -314,6 +315,8 @@ The "main events search" component is used in the search page at `/search`.
 | internetBased     | ""                                       | x            | -        | Used for "Show only remote events" (when it will be set to "true")                            |
 | superEventType    | ""                                       | -            | -        | Filter by super event types. E.g `['umbrella', 'none']` excludes `"recurring"`                |
 | superEvent        | ""                                       | -            | -        | Filter by a specific (super) event id or set to "none" for events without superevent.         |
+
+> \*) See target age group keywords from [.src/constants.ts](./src/constants.ts).
 
 > See the [parameters conversion](#parameters-conversion-when-querying-linkedevents-through-events-graphql-proxy) to understand how the LinkedEvenst queries are made.
 

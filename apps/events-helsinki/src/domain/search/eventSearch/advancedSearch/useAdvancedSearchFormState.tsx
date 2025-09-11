@@ -23,6 +23,8 @@ export function useAdvancedSearchFormState() {
   const [selectedCategories, setSelectedCategories] = React.useState<string[]>(
     []
   );
+  const [selectedTargetAgeGroup, setSelectedTargetAgeGroup] =
+    React.useState('');
   const [selectedPlaces, setSelectedPlaces] = React.useState<string[]>([]);
   const [start, setStart] = React.useState<Date | null>(null);
   const [end, setEnd] = React.useState<Date | null>(null);
@@ -34,6 +36,7 @@ export function useAdvancedSearchFormState() {
   React.useEffect(() => {
     const {
       [EVENT_SEARCH_FILTERS.CATEGORIES]: categories,
+      [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]: targetAgeGroup,
       [EVENT_SEARCH_FILTERS.DATE_TYPES]: dateTypes,
       [EVENT_SEARCH_FILTERS.END]: endTime,
       [EVENT_SEARCH_FILTERS.PLACES]: places,
@@ -48,6 +51,7 @@ export function useAdvancedSearchFormState() {
     }
 
     setSelectedCategories(categories);
+    setSelectedTargetAgeGroup(targetAgeGroup ?? '');
     setSelectedPlaces(places);
     setSelectedTexts(text || []);
     setEnd(endTime);
@@ -70,6 +74,8 @@ export function useAdvancedSearchFormState() {
     setSelectedDateTypes,
     selectedCategories,
     setSelectedCategories,
+    selectedTargetAgeGroup,
+    setSelectedTargetAgeGroup,
     selectedPlaces,
     setSelectedPlaces,
     start,

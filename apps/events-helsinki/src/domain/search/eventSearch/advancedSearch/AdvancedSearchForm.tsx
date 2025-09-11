@@ -31,6 +31,8 @@ import {
 } from '../utils';
 import { useAdvancedSearchContext } from './AdvancedSearchContext';
 import styles from './search.module.scss';
+import type { TargetAgeGroupOptionType } from './TargetAgeGroupSelector';
+import TargetAgeGroupSelector from './TargetAgeGroupSelector';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface AdvancedSearchFormProps {}
@@ -55,6 +57,8 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     setSelectedDateTypes,
     selectedCategories,
     setSelectedCategories,
+    selectedTargetAgeGroup,
+    setSelectedTargetAgeGroup,
     selectedPlaces,
     setSelectedPlaces,
     start,
@@ -73,6 +77,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const searchFilters = {
     ...getSearchFilters(searchParams),
     [EVENT_SEARCH_FILTERS.CATEGORIES]: selectedCategories,
+    [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]: selectedTargetAgeGroup,
     [EVENT_SEARCH_FILTERS.DATE_TYPES]: selectedDateTypes,
     [EVENT_SEARCH_FILTERS.END]: end,
     [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
@@ -157,6 +162,12 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     goToSearch(search);
   };
 
+  const handleTargetAgeGroupChange = (
+    option: TargetAgeGroupOptionType | null
+  ) => {
+    setSelectedTargetAgeGroup(option?.value ?? '');
+  };
+
   const handleOnlyChildrenEventChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -223,6 +234,13 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 value={selectedCategories}
               />
             </div>
+            <div>
+              <TargetAgeGroupSelector
+                id="targetAgeGroup"
+                onChange={handleTargetAgeGroupChange}
+                value={selectedTargetAgeGroup}
+              />
+            </div>
             <div className={styles.dateSelectorWrapper}>
               <DateSelector
                 dateTypes={selectedDateTypes}
@@ -273,11 +291,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 onChange={handleOnlyEveningEventChange}
               />
             </div>
-          </div>
-        </div>
-        <div className={styles.rowWrapper}>
-          <div className={styles.row}>
-            <div>
+            <div className={styles.fillGridRow}>
               <Checkbox
                 className={styles.checkbox}
                 checked={searchFilters.onlyChildrenEvents}

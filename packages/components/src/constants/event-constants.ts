@@ -68,6 +68,7 @@ export enum EVENT_SEARCH_FILTERS {
   IS_FREE = 'isFree',
   KEYWORD = 'keyword',
   KEYWORD_NOT = 'keywordNot',
+  TARGET_AGE_GROUP = 'targetAgeGroup',
   ONLY_CHILDREN_EVENTS = 'onlyChildrenEvents',
   ONLY_EVENING_EVENTS = 'onlyEveningEvents',
   ONLY_REMOTE_EVENTS = 'onlyRemoteEvents',

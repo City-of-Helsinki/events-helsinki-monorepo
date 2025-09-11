@@ -63,7 +63,17 @@
     },
     "labelAccessibilityProfile": "Esteettömyys",
     "ariaLabelClearAccessibilityProfile": "Poista esteettömyysvalinta",
-    "reservable": "Tilattavissa"
+    "reservable": "Tilattavissa",
+    "targetAgeGroup": {
+      "clear": "Tyhjennä",
+      "placeholder": "Valitse ikäryhmä",
+      "removeSelected": "Poista valinta",
+      "babies": "Vauvat",
+      "children": "Lapset",
+      "youth": "Nuoret",
+      "adults": "Aikuiset",
+      "seniors": "Ikääntyneet"
+    }
   },
   "goToVenue": "Näytä sivu",
   "openStreetMapContributors": "osallistujat",

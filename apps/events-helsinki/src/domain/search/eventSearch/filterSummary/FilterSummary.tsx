@@ -46,6 +46,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     [EVENT_SEARCH_FILTERS.PUBLISHER]: publisher,
     [EVENT_SEARCH_FILTERS.START]: start,
     [EVENT_SEARCH_FILTERS.TEXT]: text,
+    [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]: targetAgeGroup,
   } = getSearchFilters(searchParams);
 
   let dateText = '';
@@ -76,6 +77,8 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       [EVENT_SEARCH_FILTERS.PUBLISHER]: type !== 'publisher' ? publisher : null,
       [EVENT_SEARCH_FILTERS.START]: type === 'date' ? null : start,
       [EVENT_SEARCH_FILTERS.TEXT]: getFilteredList('text', text),
+      [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]:
+        type !== 'targetAgeGroup' ? targetAgeGroup : undefined,
     });
 
     router.push({
@@ -91,7 +94,8 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!dateText ||
     !!dateTypes.length ||
     !!places.length ||
-    !!text?.length;
+    !!text?.length ||
+    !!targetAgeGroup;
 
   if (!hasFilters) return null;
 
@@ -110,6 +114,15 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           value={category}
         />
       ))}
+      {targetAgeGroup && (
+        <FilterButton
+          key={targetAgeGroup}
+          onRemove={handleFilterRemove}
+          text={translateValue('search.targetAgeGroup.', targetAgeGroup, t)}
+          type="targetAgeGroup"
+          value={targetAgeGroup ?? ''}
+        />
+      )}
       {publisher && (
         <PublisherFilter id={publisher} onRemove={handleFilterRemove} />
       )}

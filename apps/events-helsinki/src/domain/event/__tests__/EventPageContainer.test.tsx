@@ -121,6 +121,7 @@ const mocks = [
   createEventListRequestAndResultMocks({
     variables: {
       keywordOrSet2: [''],
+      keywordOrSet3: [],
       language: undefined,
       pageSize: 100,
       publisherAncestor: null,

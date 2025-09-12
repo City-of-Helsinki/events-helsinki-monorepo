@@ -1,4 +1,5 @@
 import {
+  HELSINKI_OCD_DIVISION_ID,
   PlaceDetailsDocument,
   PlaceListDocument,
 } from '@events-helsinki/components';
@@ -13,11 +14,10 @@ import {
   screen,
   userEvent,
 } from '../../../../../config/vitest/test-utils';
-import { eventsApolloClient } from '../../../clients/eventsApolloClient';
 import PlaceSelector from '../PlaceSelector';
 
 const variables = {
-  divisions: ['kunta:helsinki'],
+  divisions: [HELSINKI_OCD_DIVISION_ID],
   hasUpcomingEvents: true,
   pageSize: 10,
   text: '',
@@ -37,14 +37,16 @@ const placeNames = [
 const places = fakePlaces(
   placeNames.length,
   placeNames.map((place) => ({
-    id: place,
+    id: `id-${place}`.replace(' ', '-'),
     name: {
       fi: place,
+      en: place,
+      sv: place,
     },
   }))
 );
 
-const placesResponse = { data: { placeList: places } };
+const placesResponse = { data: { placeList: { ...places } } };
 
 const searchWord = 'malmi';
 
@@ -58,18 +60,30 @@ const filteredPlaceNames = [
 const filteredPlaces = fakePlaces(
   filteredPlaceNames.length,
   filteredPlaceNames.map((place) => ({
-    id: place,
+    id: `id-${place}.replace(' ', '-')`,
     name: {
       fi: place,
+      en: place,
+      sv: place,
     },
   }))
 );
 
-const filteredPlacesResponse = { data: { placeList: filteredPlaces } };
+const filteredPlacesResponse = { data: { placeList: { ...filteredPlaces } } };
 
 const placeId = places.data[0].id as string;
 const placeName = places.data[0].name?.fi as string;
-const placeDetailsResponse = { data: { placeDetails: places.data[0] } };
+
+const placeDetailsResponse = {
+  data: {
+    placeDetails: {
+      ...places.data[0],
+      name: {
+        fi: placeName,
+      },
+    },
+  },
+};
 
 const mocks = [
   {
@@ -77,21 +91,21 @@ const mocks = [
       query: PlaceListDocument,
       variables,
     },
-    result: placesResponse,
+    result: { ...placesResponse },
   },
   {
     request: {
       query: PlaceListDocument,
       variables: { ...variables, text: searchWord },
     },
-    result: filteredPlacesResponse,
+    result: { ...filteredPlacesResponse },
   },
   {
     request: {
       query: PlaceDetailsDocument,
       variables: { id: placeId },
     },
-    result: placeDetailsResponse,
+    result: { ...placeDetailsResponse },
   },
 ];
 
@@ -134,24 +148,9 @@ it('should filter place options', async () => {
 });
 
 it('should render selected value correctly', async () => {
-  // @ts-ignore
-  vi.spyOn(eventsApolloClient, 'readQuery').mockReturnValue(
-    placeDetailsResponse
-  );
   render(<PlaceSelector {...defaultProps} value={[placeId]} />, {
     mocks,
   });
-
-  await waitFor(() => {
-    expect(screen.getByText(placeName)).toBeInTheDocument();
-  });
-});
-
-it('should render selected value correctly when getPlaceDetailsFromCache fails', async () => {
-  render(<PlaceSelector {...defaultProps} value={[placeId]} />, {
-    mocks,
-  });
-
   await waitFor(() => {
     expect(screen.getByText(placeName)).toBeInTheDocument();
   });

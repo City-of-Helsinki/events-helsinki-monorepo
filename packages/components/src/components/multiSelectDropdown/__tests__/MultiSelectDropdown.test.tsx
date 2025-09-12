@@ -77,6 +77,25 @@ it('should filter results based on user search and options[].text field', async 
   ).not.toBeInTheDocument();
 });
 
+it('should show always show fixed options also before search', async () => {
+  renderComponent({ options: [], fixedOptions: [options[1], options[2]] });
+  const toggleButton = screen.getByRole('button', { name: title });
+  await userEvent.click(toggleButton);
+  const searchInput = screen.getByPlaceholderText(inputPlaceholder);
+  expect(searchInput).toHaveValue('');
+  // Fixed options
+  expect(
+    screen.getByRole('checkbox', { name: options[1].text })
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByRole('checkbox', { name: options[2].text })
+  ).toBeInTheDocument();
+  // Not a fixed option
+  expect(
+    screen.queryByRole('checkbox', { name: options[0].text })
+  ).not.toBeInTheDocument();
+});
+
 it('should reset keyboard navigation position after a new search', async () => {
   renderComponent();
 

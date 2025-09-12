@@ -2,7 +2,6 @@ import { EVENT_SEARCH_FILTERS } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
-import { MAPPED_PLACES } from '../constants';
 import { getSearchFilters } from '../utils';
 
 export function useAdvancedSearchFormState() {
@@ -43,12 +42,6 @@ export function useAdvancedSearchFormState() {
       [EVENT_SEARCH_FILTERS.START]: startTime,
       [EVENT_SEARCH_FILTERS.TEXT]: text,
     } = getSearchFilters(searchParams);
-
-    const pathPlace = params.place && MAPPED_PLACES[params.place.toLowerCase()];
-
-    if (pathPlace) {
-      places.push(pathPlace);
-    }
 
     setSelectedCategories(categories);
     setSelectedTargetAgeGroup(targetAgeGroup ?? '');

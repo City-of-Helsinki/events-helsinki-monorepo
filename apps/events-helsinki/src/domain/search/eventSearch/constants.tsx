@@ -190,5 +190,3 @@ export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
     labelKey: 'home:category.food',
   },
 } as const;
-
-export const MAPPED_PLACES: Record<string, string> = {} as const;

@@ -41,7 +41,6 @@ import routerHelper from '../../app/routerHelper';
 import type { EVENT_CATEGORIES } from './constants';
 import {
   eventCategories,
-  MAPPED_PLACES,
   CATEGORY_CATALOG,
   MAPPED_EVENT_CATEGORIES,
   EVENT_DEFAULT_SEARCH_FILTERS,
@@ -179,7 +178,6 @@ export const getEventSearchVariables = ({
   sortOrder,
   superEventType,
   superEvent,
-  place,
   division,
 }: {
   include: string[];
@@ -189,7 +187,6 @@ export const getEventSearchVariables = ({
   sortOrder: EVENT_SORT_OPTIONS;
   superEventType?: string[];
   superEvent?: string;
-  place?: string;
   division?: string[];
 }): QueryEventListArgs => {
   const {
@@ -207,11 +204,7 @@ export const getEventSearchVariables = ({
     [EVENT_SEARCH_FILTERS.TEXT]: text,
     [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]: targetAgeGroup,
   } = getSearchFilters(params);
-  const pathPlace = place && MAPPED_PLACES[place.toLowerCase()];
 
-  if (pathPlace) {
-    places.push(pathPlace);
-  }
   const startsAfter = onlyEveningEvents ? '16' : undefined;
   let { start, end } = getFilterDates({
     dateTypes,

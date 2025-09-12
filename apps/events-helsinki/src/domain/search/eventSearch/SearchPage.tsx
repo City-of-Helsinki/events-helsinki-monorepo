@@ -33,7 +33,6 @@ import { getEventSearchVariables, getEventUrl, getNextPage } from './utils';
 
 const useSearchQuery = () => {
   const router = useRouter();
-  const params: { place?: string } = router.query;
   const eventFilters = React.useMemo(() => {
     const searchParams = new URLSearchParams(
       queryString.stringify(router.query)
@@ -43,7 +42,6 @@ const useSearchQuery = () => {
       include: ['keywords', 'location'],
       pageSize: PAGE_SIZE,
       params: searchParams,
-      place: params.place,
       sortOrder: isEventSortOption(sortParam)
         ? sortParam
         : DEFAULT_EVENT_SORT_OPTION,
@@ -59,7 +57,7 @@ const useSearchQuery = () => {
       // superEvent: 'none',
     });
     return variables;
-  }, [router.query, params.place]);
+  }, [router.query]);
 
   return useEventListQuery({
     ssr: false,

@@ -1,10 +1,8 @@
-import type { ParsedUrlQueryInput } from 'querystring';
 import {
   Checkbox,
   DateSelector,
   MultiSelectDropdown,
   useAppEventsTranslation,
-  useLocale,
   IconRead,
   EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
@@ -18,8 +16,6 @@ import type { FormEvent } from 'react';
 import React from 'react';
 
 import SearchAutosuggest from '../../../../common-events/components/search/SearchAutosuggest';
-import { ROUTES } from '../../../../constants';
-import routerHelper from '../../../app/routerHelper';
 import PlaceSelector from '../../../place/placeSelector/PlaceSelector';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../constants';
 import FilterSummary from '../filterSummary/FilterSummary';
@@ -33,6 +29,7 @@ import { useAdvancedSearchContext } from './AdvancedSearchContext';
 import styles from './search.module.scss';
 import type { TargetAgeGroupOptionType } from './TargetAgeGroupSelector';
 import TargetAgeGroupSelector from './TargetAgeGroupSelector';
+import { useGoToSearch } from './useGoToSearch';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface AdvancedSearchFormProps {}
@@ -42,7 +39,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const { t: tAppEvents } = useAppEventsTranslation();
   const router = useRouter();
 
-  const locale = useLocale();
   const searchParams = React.useMemo(
     () => new URLSearchParams(queryString.stringify(router.query)),
     [router.query]
@@ -89,12 +85,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     sortExtendedCategoryOptions
   );
 
-  const goToSearch = (search: string): void => {
-    router.push({
-      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
-      query: queryString.parse(search) as ParsedUrlQueryInput,
-    });
-  };
+  const goToSearch = useGoToSearch();
 
   const handleChangeDateTypes = (value: string[]) => {
     setSelectedDateTypes(value);

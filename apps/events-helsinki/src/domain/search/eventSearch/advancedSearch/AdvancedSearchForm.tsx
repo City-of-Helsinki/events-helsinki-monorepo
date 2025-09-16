@@ -8,7 +8,7 @@ import {
 } from '@events-helsinki/components';
 import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { Button, IconSearch, IconLocation } from 'hds-react';
+import { Button, IconSearch, IconLocation, SelectCustomTheme } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
@@ -223,13 +223,23 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 showSearch={false}
                 title={t('search.titleDropdownCategory')}
                 value={selectedCategories}
+                buttonStyles={{ fontSize: 'var(--fontsize-body-m)' }}
               />
             </div>
             <div>
               <TargetAgeGroupSelector
+                className={styles.targetAgeGroupSelector}
                 id="targetAgeGroup"
                 onChange={handleTargetAgeGroupChange}
                 value={selectedTargetAgeGroup}
+                theme={
+                  {
+                    '--menu-item-background': 'var(--color-input-dark)',
+                    '--menu-item-background-hover': 'var(--color-input-dark)',
+                    '--menu-item-background-selected-hover':
+                      'var(--color-input-dark)',
+                  } as SelectCustomTheme
+                }
               />
             </div>
             <div className={styles.dateSelectorWrapper}>
@@ -258,6 +268,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 showSelectAll={true}
                 title={t('search.titleDropdownPlace')}
                 value={selectedPlaces}
+                buttonStyles={{ fontSize: 'var(--fontsize-body-m)' }}
               />
             </div>
           </div>

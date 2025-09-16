@@ -17,6 +17,7 @@ export interface MultiselectDropdownProps {
   title: string;
   value: string[];
   className?: string;
+  buttonStyles?: React.CSSProperties;
   helpText?: string;
   filterByInput?: boolean;
 }

@@ -51,6 +51,7 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
   className,
   helpText,
   filterByInput = true,
+  buttonStyles,
 }) => {
   const { t } = useCommonTranslation();
   const inputPlaceholderText =
@@ -334,6 +335,7 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
         ref={toggleButton}
         onFocus={handleToggleFocusStyles}
         onBlur={handleToggleFocusStyles}
+        style={buttonStyles}
       >
         <div className={styles.iconWrapper}>{icon}</div>
         <div className={styles.title}>

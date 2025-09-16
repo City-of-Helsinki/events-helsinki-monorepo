@@ -196,7 +196,6 @@ export const getEventSearchVariables = ({
     isFree,
     keyword,
     keywordNot: keywordNotParams,
-    onlyChildrenEvents,
     onlyEveningEvents,
     onlyRemoteEvents,
     places,
@@ -225,10 +224,6 @@ export const getEventSearchVariables = ({
   const publisherAncestor = helsinkiOnly
     ? CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID
     : null;
-
-  if (onlyChildrenEvents) {
-    keywordAnd.push('yso:p4354');
-  }
 
   const getMappedPropertyValues = (
     list: string[],
@@ -324,8 +319,6 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     ),
     [EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP]:
       searchParams.get(EVENT_SEARCH_FILTERS.TARGET_AGE_GROUP) ?? '',
-    onlyChildrenEvents:
-      searchParams.get(EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS) === 'true',
     onlyEveningEvents:
       searchParams.get(EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS) === 'true',
     onlyRemoteEvents:
@@ -346,7 +339,6 @@ export const getSearchQuery = (
     end: formatDate(filters.end, 'yyyy-MM-dd'),
     isFree: filters.isFree ? true : undefined,
     helsinkiOnly: filters.helsinkiOnly ? true : undefined,
-    onlyChildrenEvents: filters.onlyChildrenEvents ? true : undefined,
     onlyEveningEvents: filters.onlyEveningEvents ? true : undefined,
     onlyRemoteEvents: filters.onlyRemoteEvents ? true : undefined,
     start: formatDate(filters.start, 'yyyy-MM-dd'),

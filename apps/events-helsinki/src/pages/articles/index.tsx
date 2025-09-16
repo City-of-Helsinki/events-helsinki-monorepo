@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ParsedUrlQueryInput } from 'querystring';
 import { NetworkStatus } from '@apollo/client/core/index.js';
 import type { PreviewDataObject } from '@events-helsinki/components';

@@ -160,17 +160,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     setSelectedTargetAgeGroup(option?.value ?? '');
   };
 
-  const handleOnlyChildrenEventChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const search = getSearchQuery({
-      ...searchFilters,
-      [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: e.target.checked,
-    });
-
-    goToSearch(search);
-  };
-
   const clearInputValues = () => {
     setCategoryInput('');
     setPlaceInput('');
@@ -292,15 +281,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 id={EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS}
                 label={t('search.checkboxOnlyEveningEvents')}
                 onChange={handleOnlyEveningEventChange}
-              />
-            </div>
-            <div className={styles.fillGridRow}>
-              <Checkbox
-                className={styles.checkbox}
-                checked={searchFilters.onlyChildrenEvents}
-                id={EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS}
-                label={t('search.checkboxOnlyChildrenEvents')}
-                onChange={handleOnlyChildrenEventChange}
               />
             </div>
             <div>

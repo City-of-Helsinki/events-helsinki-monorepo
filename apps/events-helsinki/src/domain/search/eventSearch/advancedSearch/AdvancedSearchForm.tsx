@@ -8,7 +8,8 @@ import {
 } from '@events-helsinki/components';
 import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { Button, IconSearch, IconLocation, SelectCustomTheme } from 'hds-react';
+import type { SelectCustomTheme } from 'hds-react';
+import { Button, IconSearch, IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';

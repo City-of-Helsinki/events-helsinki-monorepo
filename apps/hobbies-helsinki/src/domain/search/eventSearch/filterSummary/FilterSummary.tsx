@@ -40,7 +40,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   const searchParams = new URLSearchParams(queryString.stringify(router.query));
   const {
     [EVENT_SEARCH_FILTERS.CATEGORIES]: categories,
-    [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: hobbyTypes,
     [EVENT_SEARCH_FILTERS.DATE_TYPES]: dateTypes,
     [EVENT_SEARCH_FILTERS.END]: end,
     [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]: helsinkiOnly,
@@ -73,10 +72,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         'category',
         categories
       ),
-      [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: getFilteredList(
-        'hobbyType',
-        hobbyTypes
-      ),
       [EVENT_SEARCH_FILTERS.DATE_TYPES]: getFilteredList('dateType', dateTypes),
       [EVENT_SEARCH_FILTERS.END]: type === 'date' ? null : end,
       [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]:
@@ -108,7 +103,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!helsinkiOnly ||
     !!publisher ||
     !!categories.length ||
-    !!hobbyTypes.length ||
     !!dateText ||
     !!dateTypes.length ||
     !!places.length ||
@@ -132,15 +126,6 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           text={translateValue('home:category.courses.', category, t)}
           type="category"
           value={category}
-        />
-      ))}
-      {hobbyTypes.map((hobbyType) => (
-        <FilterButton
-          key={hobbyType}
-          onRemove={handleFilterRemove}
-          text={translateValue('home:hobby.', hobbyType, t)}
-          type="hobbyType"
-          value={hobbyType}
         />
       ))}
       {publisher && (

@@ -23,6 +23,5 @@ export type FilterType =
   | CombinedSearchInputSubset
   | 'category' // Used in events-helsinki and hobbies-helsinki
   | 'division' // Used in events-helsinki and hobbies-helsinki
-  | 'hobbyType' // Used in hobbies-helsinki
   | 'publisher' // Used in events-helsinki and hobbies-helsinki
   | 'targetAgeGroup'; // Used in events-helsinki

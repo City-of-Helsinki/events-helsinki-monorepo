@@ -364,14 +364,14 @@ export const getSearchQuery = (
 };
 
 /** Get a list of all the keywords that can be mapped as a category */
-export const getAllHobbyCategories = () =>
+export const getAllEventCategories = () =>
   Object.values(MAPPED_EVENT_CATEGORIES).flat();
 
 /** Filter the kewords from the event that can be mapped as categories */
 export const getEventCategories = (event: EventFields) => {
-  const allHobbyTypes = getAllHobbyCategories();
+  const allEventCategories = getAllEventCategories();
   return event.keywords.filter(
-    (keyword) => keyword.id && allHobbyTypes.includes(keyword.id)
+    (keyword) => keyword.id && allEventCategories.includes(keyword.id)
   );
 };
 

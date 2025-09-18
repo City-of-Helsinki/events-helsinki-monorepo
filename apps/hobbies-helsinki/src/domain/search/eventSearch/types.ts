@@ -1,7 +1,7 @@
 import type { EVENT_SEARCH_FILTERS } from '@events-helsinki/components/constants';
 import type React from 'react';
 
-import type { COURSE_CATEGORIES, COURSE_HOBBY_TYPES } from './constants';
+import type { COURSE_CATEGORIES } from './constants';
 
 export interface CategoryOption {
   icon: React.ReactElement;
@@ -21,27 +21,8 @@ export type SearchCategoryRecord = Record<
   SearchCategoryOption
 >;
 
-export interface HobbyTypeOption {
-  icon: React.ReactElement;
-  text: string;
-  value: COURSE_HOBBY_TYPES;
-}
-
-export type SearchHobbyType = COURSE_HOBBY_TYPES;
-
-export interface SearchHobbyTypeOption {
-  icon: React.ReactElement;
-  labelKey: string;
-}
-
-export type SearchHobbyTypeRecord = Record<
-  SearchHobbyType,
-  SearchHobbyTypeOption
->;
-
 export interface Filters {
   [EVENT_SEARCH_FILTERS.CATEGORIES]: string[];
-  [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: string[];
   [EVENT_SEARCH_FILTERS.DATE_TYPES]: string[];
   [EVENT_SEARCH_FILTERS.END]: Date | null;
   [EVENT_SEARCH_FILTERS.HELSINKI_ONLY]?: boolean;

@@ -47,7 +47,6 @@ export enum EnrolmentStatusLabel {
 
 export enum EVENT_SEARCH_FILTERS {
   CATEGORIES = 'categories',
-  HOBBY_TYPES = 'hobbyTypes',
   DATE_TYPES = 'dateTypes',
   /**
    * Filter by city division ids.

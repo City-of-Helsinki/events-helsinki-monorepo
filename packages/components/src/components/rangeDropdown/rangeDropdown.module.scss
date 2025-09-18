@@ -18,6 +18,7 @@
     align-items: center;
     border: 2px solid var(--color-white);
     outline: none;
+    font-size: var(--fontsize-body-m);
 
     &:focus {
       outline: 3px solid var(--color-coat-of-arms);
@@ -71,9 +72,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       color: var(--color-primary-black);
-    }
-    .isEmpty {
-      color: var(--color-black-60);
     }
   }
 

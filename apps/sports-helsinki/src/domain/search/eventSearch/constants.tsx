@@ -172,7 +172,6 @@ export const COURSE_DEFAULT_SEARCH_FILTERS = EVENT_DEFAULT_SEARCH_FILTERS;
 
 export enum EVENT_SEARCH_FILTERS {
   CATEGORIES = 'categories',
-  HOBBY_TYPES = 'hobbyTypes',
   DATE_TYPES = 'dateTypes',
   SPORTS_CATEGORIES = 'sportsCategories',
   END = 'end',

@@ -42,7 +42,10 @@ $buttonWidth: 180px;
   }
 
   .buttonWrapper {
-    @include breakpoints.respond-above(m) {
+    @include breakpoints.respond-above(s) {
+      grid-column: span 1 / 3;
+    }
+    @include breakpoints.respond-above(l) {
       grid-column: span 1 / 5;
     }
   }
@@ -52,10 +55,10 @@ $buttonWidth: 180px;
     grid-gap: var(--spacing-xs);
 
     @include breakpoints.respond-above(s) {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    @include breakpoints.respond-above(m) {
+    @include breakpoints.respond-above(l) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
@@ -68,9 +71,7 @@ $buttonWidth: 180px;
     }
 
     & > :first-child {
-      @include breakpoints.respond-above(m) {
-        grid-column: 1 / 4;
-      }
+      grid-column: 1 / 5;
     }
   }
 

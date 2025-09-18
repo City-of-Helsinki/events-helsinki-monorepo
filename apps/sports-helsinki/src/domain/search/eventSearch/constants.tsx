@@ -26,9 +26,6 @@ import {
 import React from 'react';
 import type { Filters, SearchCategoryOption } from './types';
 
-// Page size of the event list
-export const PAGE_SIZE = 10;
-
 export enum COURSE_CATEGORIES {
   SPORT = 'sport',
 }

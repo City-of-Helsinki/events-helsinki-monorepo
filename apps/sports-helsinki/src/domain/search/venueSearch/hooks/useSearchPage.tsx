@@ -14,7 +14,7 @@ import routerHelper from '../../../../domain/app/routerHelper';
 import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
 import useUnifiedSearchListQuery from '../../../../domain/unifiedSearch/useUnifiedSearchListQuery';
 
-const BLOCK_SIZE = 10;
+const BLOCK_SIZE = 25;
 
 function useSearchPage(): SearchPage {
   const { t } = useSearchTranslation();

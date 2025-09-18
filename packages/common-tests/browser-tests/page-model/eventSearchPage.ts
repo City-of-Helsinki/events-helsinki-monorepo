@@ -85,7 +85,7 @@ class EventSearchPage {
 
   public async expectSearchResults({
     min: minResults = 1,
-    max: maxResults = 10,
+    max: maxResults = 25,
     searchType = 'GeneralEvent',
   }: {
     min: number;
@@ -99,8 +99,9 @@ class EventSearchPage {
     if (searchType === 'Venue')
       await t.expect(this.notFoundResultVenues.exists).notOk();
     const results = this.results;
-    await t.expect(results.count).gte(minResults); // At least one result should be found.
-    await t.expect(results.count).lte(maxResults); // max 10 result per page
+    // Check that results per page are in the expected range:
+    await t.expect(results.count).gte(minResults);
+    await t.expect(results.count).lte(maxResults);
   }
 
   public async expectNoSearchResults(searchType: SearchType = 'GeneralEvent') {
@@ -123,7 +124,7 @@ class EventSearchPage {
     await t.pressKey('tab');
     await t.click(this.searchButton);
     await t.wait(2000);
-    await this.expectSearchResults({ min: 1, max: 10, searchType });
+    await this.expectSearchResults({ min: 1, max: 25, searchType });
   }
 
   public async doUnsuccessfulSearch({

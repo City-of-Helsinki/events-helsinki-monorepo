@@ -27,7 +27,9 @@ describe('<TargetAgeGroupSelector />', () => {
 
   it('renders with correct placeholder without label', () => {
     render(<TargetAgeGroupSelector />);
-    expect(screen.getByText('Valitse ikäryhmä')).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: 'Valitse ikäryhmä' })
+    ).toBeInTheDocument();
   });
 
   it('shows all age group options when opened', async () => {

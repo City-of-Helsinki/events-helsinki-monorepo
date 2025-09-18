@@ -1,14 +1,14 @@
-import { useSearchTranslation } from '@events-helsinki/components';
+import { SrOnly, useSearchTranslation } from '@events-helsinki/components';
 import type { SingleSelectProps } from 'hds-react';
 import { IconGroup, Select } from 'hds-react';
 import { TARGET_GROUP_AGE_GROUPS_IN_ORDER } from '../../../../constants';
 
 /**
  * Get select component options for target group age selection.
- * @param addEmptyOption should an empty selection be included. Defaults to `true`.
+ * @param addEmptyOption Should empty be included in options? String shown as label.
  * @returns a list of select options
  */
-function useTargetAgeGroupSelectorOptions(addEmptyOption = true) {
+function useTargetAgeGroupSelectorOptions(emptyOption: string | undefined) {
   const { t: tSearch } = useSearchTranslation();
 
   const targetGroups = TARGET_GROUP_AGE_GROUPS_IN_ORDER.map((ageGroup) => ({
@@ -16,8 +16,8 @@ function useTargetAgeGroupSelectorOptions(addEmptyOption = true) {
     value: ageGroup,
   }));
 
-  if (addEmptyOption) {
-    return [{ label: '', value: '' }, ...targetGroups];
+  if (emptyOption !== undefined) {
+    return [{ label: emptyOption, value: '' }, ...targetGroups];
   }
   return targetGroups;
 }
@@ -63,12 +63,12 @@ type TargetAgeGroupSelectorProps = Omit<
 function TargetAgeGroupSelector({
   label,
   value,
-  defaultValue,
+  defaultValue = '',
   ...rest
 }: TargetAgeGroupSelectorProps) {
   const { t: tSearch } = useSearchTranslation();
-
-  const options = useTargetAgeGroupSelectorOptions();
+  const placeholder = tSearch('search.targetAgeGroup.placeholder');
+  const options = useTargetAgeGroupSelectorOptions('');
   const valueOption = options.find((option) => option.value === value);
   const defaultValueOption = options.find(
     (option) => option.value === defaultValue
@@ -76,18 +76,23 @@ function TargetAgeGroupSelector({
 
   return (
     <Select
+      // Labels aren't visible in search form, but screen reader should read the label.
+      // NOTE: the placeholder value is read when value is empty,
+      // which easily leads to situation where placeholder is read twice by screen reader.
+      //
+      label={<SrOnly as="span">{label ?? placeholder}</SrOnly>}
+      // Prevent reading the label / placeholder twice by screen reader
+      placeholder={!value ? placeholder : undefined}
       {...rest}
+      multiselect={false}
       options={options}
+      optionLabelField="label"
+      optionKeyField="value"
       visibleOptions={options.length + 1} // Show all options without scroll
       value={valueOption}
       defaultValue={defaultValueOption}
       icon={<IconGroup />}
       clearButtonAriaLabel={tSearch('search.targetAgeGroup.clear')}
-      selectedItemRemoveButtonAriaLabel={tSearch(
-        'search.targetAgeGroup.removeSelected'
-      )}
-      placeholder={tSearch('search.targetAgeGroup.placeholder')}
-      label={label ?? ''} // ts(2322)
       aria-labelledby={undefined} // Type 'string' is not assignable to type 'undefined'.ts(2322)
     />
   );

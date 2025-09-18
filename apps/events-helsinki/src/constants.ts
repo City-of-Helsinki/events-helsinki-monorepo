@@ -88,10 +88,10 @@ export const AGE_GROUP_KEYWORDS: Record<AgeGroup, readonly string[]> = {
  * @see https://api.hel.fi/linkedevents/v1/keyword/ to check keyword-related data.
  */
 const additionalAdultKeywordExclusion = [
+  'yso:p8105', // Leikkipuistot
   'yso:p16485', // Koululaiset (schoolchildren)
   'yso:p38259', // Alakoululaiset (primary school students)
   'helsinki:aflfbat76e', // Palvelukeskuskortti (service center card)
-  'kulke:355', // Lapset
 ] as const;
 
 /**

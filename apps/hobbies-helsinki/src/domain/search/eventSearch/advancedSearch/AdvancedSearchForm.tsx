@@ -195,17 +195,17 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
         <h1>{t('search.labelSearchField')}</h1>
         <div className={styles.rowWrapper}>
           <div className={classNames(styles.row, styles.autoSuggestRow)}>
-            <div>
-              <SearchAutosuggest
-                name="search"
-                onChangeSearchValue={setAutosuggestInput}
-                onOptionClick={handleMenuOptionClick}
-                placeholder={tAppHobbies(
-                  'appHobbies:search.search.placeholder'
-                )}
-                searchValue={autosuggestInput}
-              />
-            </div>
+            <SearchAutosuggest
+              name="search"
+              onChangeSearchValue={setAutosuggestInput}
+              onOptionClick={handleMenuOptionClick}
+              placeholder={tAppHobbies('appHobbies:search.search.placeholder')}
+              searchValue={autosuggestInput}
+            />
+          </div>
+        </div>
+        <div className={styles.rowWrapper}>
+          <div className={styles.row}>
             <div>
               <MultiSelectDropdown
                 checkboxName="categoryOptions"
@@ -220,10 +220,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 value={selectedCategories}
               />
             </div>
-          </div>
-        </div>
-        <div className={styles.rowWrapper}>
-          <div className={styles.row}>
             <div className={styles.dateSelectorWrapper}>
               <DateSelector
                 dateTypes={selectedDateTypes}
@@ -235,21 +231,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 onChangeStartDate={setStart}
                 startDate={start}
                 toggleIsCustomDate={toggleIsCustomDate}
-              />
-            </div>
-            <div>
-              <PlaceSelector
-                checkboxName="placesCheckboxes"
-                icon={<IconLocation aria-hidden />}
-                inputValue={placeInput}
-                name="places"
-                onChange={setSelectedPlaces}
-                selectAllText={t('search.selectAllPlaces')}
-                setInputValue={setPlaceInput}
-                showSearch={true}
-                showSelectAll={true}
-                title={t('search.titleDropdownPlace')}
-                value={selectedPlaces}
               />
             </div>
             <div>
@@ -270,19 +251,25 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 withPlaceholders={false}
               />
             </div>
+            <div>
+              <PlaceSelector
+                checkboxName="placesCheckboxes"
+                icon={<IconLocation aria-hidden />}
+                inputValue={placeInput}
+                name="places"
+                onChange={setSelectedPlaces}
+                selectAllText={t('search.selectAllPlaces')}
+                setInputValue={setPlaceInput}
+                showSearch={true}
+                showSelectAll={true}
+                title={t('search.titleDropdownPlace')}
+                value={selectedPlaces}
+              />
+            </div>
           </div>
         </div>
         <div className={styles.rowWrapper}>
           <div className={styles.row}>
-            {/* <div>
-                <Checkbox
-                  className={styles.checkbox}
-                  checked={onlyChildrenEvents}
-                  id={EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS}
-                  label={t("search.checkboxOnlyChildrenEvents")}
-                  onChange={handleOnlyChildrenEventChange}
-                />
-              </div> */}
             <div>
               <Checkbox
                 className={styles.checkbox}

@@ -51,7 +51,7 @@ import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const CATEGORIES_AMOUNT = 20;
-const BLOCK_SIZE = 10;
+const BLOCK_SIZE = 25;
 
 interface ArticleFilters {
   text?: string | null;

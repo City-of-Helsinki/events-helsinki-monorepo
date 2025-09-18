@@ -30,7 +30,7 @@ describe('VenueSearchAdapter', () => {
         ontologyWordIdOrSets: input.keywords.length > 0 ? [input.keywords] : [],
         administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
         after: '',
-        first: 10,
+        first: 25,
         ontologyTreeIdOrSets: [
           ['551'],
           [

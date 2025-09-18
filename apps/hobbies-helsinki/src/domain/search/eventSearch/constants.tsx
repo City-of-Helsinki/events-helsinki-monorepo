@@ -22,7 +22,7 @@ import type {
 } from './types';
 
 // Page size of the event list
-export const PAGE_SIZE = 10;
+export const PAGE_SIZE = 25;
 
 export enum COURSE_CATEGORIES {
   MOVIE = 'movie_and_media',

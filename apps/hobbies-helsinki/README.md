@@ -307,7 +307,6 @@ The "main events search" component is used in the search page at `/search`.
 | location          | []                                       | x            | -        | Filter by location / venue / place (source: LinkedEvents)                                     |
 | keywordAnd        | []                                       | x            | -        | Used for "Only children events" when it will be set to "yso:p4354"                            |
 | keywordOrSet2     | []                                       | x            | -        | A list of keywords (e.g categories or premapped categories)                                   |
-| keywordOrSet3     | []                                       | x            | -        | A list of keywords (e.g hobby types or premapped hobby types)                                 |
 | keywordNot        | []                                       | x (URL only) | -        | Exclude events with these keywords. Converted to "keyword!" when querying LinkedEvents.       |
 | publisher         | ""                                       | x            | -        | Used to find events of 1 specific organisation                                                |
 | publisherAncestor | null                                     | x            | -        | Filter events by `publisherAncestor` set to "ahjo:00001" if filtering city of Helsinki events |

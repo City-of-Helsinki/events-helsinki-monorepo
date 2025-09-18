@@ -13,10 +13,6 @@ export function useAdvancedSearchFormState() {
     [router.query]
   );
   const [categoryInput, setCategoryInput] = React.useState('');
-  const [hobbyTypeInput, setHobbyTypeInput] = React.useState('');
-  const [selectedHobbyTypes, setSelectedHobbyTypes] = React.useState<string[]>(
-    []
-  );
   const [minAgeInput, setMinAgeInput] = React.useState('');
   const [maxAgeInput, setMaxAgeInput] = React.useState('');
   const [placeInput, setPlaceInput] = React.useState('');
@@ -38,7 +34,6 @@ export function useAdvancedSearchFormState() {
   React.useEffect(() => {
     const {
       [EVENT_SEARCH_FILTERS.CATEGORIES]: categories,
-      [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: hobbyTypes,
       [EVENT_SEARCH_FILTERS.DATE_TYPES]: dateTypes,
       [EVENT_SEARCH_FILTERS.END]: endTime,
       [EVENT_SEARCH_FILTERS.PLACES]: places,
@@ -55,7 +50,6 @@ export function useAdvancedSearchFormState() {
     }
 
     setSelectedCategories(categories);
-    setSelectedHobbyTypes(hobbyTypes || []);
     setSelectedPlaces(places);
     setSelectedTexts(text || []);
     setEnd(endTime);
@@ -74,10 +68,6 @@ export function useAdvancedSearchFormState() {
   return {
     categoryInput,
     setCategoryInput,
-    hobbyTypeInput,
-    setHobbyTypeInput,
-    selectedHobbyTypes,
-    setSelectedHobbyTypes,
     minAgeInput,
     setMinAgeInput,
     maxAgeInput,

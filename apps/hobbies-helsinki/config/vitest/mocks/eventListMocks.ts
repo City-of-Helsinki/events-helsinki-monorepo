@@ -43,7 +43,6 @@ export const baseVariables = {
 export const eventListBaseVariables: QueryEventListArgs = {
   ...baseVariables,
   keywordOrSet2: [],
-  keywordOrSet3: [],
 };
 
 export const getOtherEventsVariables = (

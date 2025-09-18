@@ -3,10 +3,6 @@ import React from 'react';
 type SearchFormState = {
   categoryInput: string;
   setCategoryInput: React.Dispatch<React.SetStateAction<string>>;
-  hobbyTypeInput: string;
-  setHobbyTypeInput: React.Dispatch<React.SetStateAction<string>>;
-  selectedHobbyTypes: string[];
-  setSelectedHobbyTypes: React.Dispatch<React.SetStateAction<string[]>>;
   minAgeInput: string;
   setMinAgeInput: React.Dispatch<React.SetStateAction<string>>;
   maxAgeInput: string;

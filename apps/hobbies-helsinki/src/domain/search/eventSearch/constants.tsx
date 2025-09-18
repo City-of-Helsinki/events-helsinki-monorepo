@@ -15,11 +15,7 @@ import {
 } from '@events-helsinki/components';
 import React from 'react';
 
-import type {
-  Filters,
-  SearchCategoryOption,
-  SearchHobbyTypeOption,
-} from './types';
+import type { Filters, SearchCategoryOption } from './types';
 
 // Page size of the event list
 export const PAGE_SIZE = 10;
@@ -39,21 +35,11 @@ export enum COURSE_CATEGORIES {
   THEATRE = 'theatre',
 }
 
-export enum COURSE_HOBBY_TYPES {
-  CLUBS = 'clubs',
-  COURSES = 'courses',
-  CAMPS = 'camps',
-  TRIPS = 'trips',
-  WORKSHOPS = 'workshops',
-  ONLINE_STUDIES = 'online_studies',
-}
-
 export const COURSE_DEFAULT_SEARCH_FILTERS: Omit<
   Filters,
   EVENT_SEARCH_FILTERS.ONGOING
 > = {
   [EVENT_SEARCH_FILTERS.CATEGORIES]: [],
-  [EVENT_SEARCH_FILTERS.HOBBY_TYPES]: [],
   [EVENT_SEARCH_FILTERS.DATE_TYPES]: [],
   [EVENT_SEARCH_FILTERS.END]: null,
   [EVENT_SEARCH_FILTERS.IS_FREE]: false,
@@ -89,16 +75,6 @@ export const CATEGORY_CATALOG = {
       COURSE_CATEGORIES.DANCE,
       COURSE_CATEGORIES.THEATRE,
     ],
-  },
-  hobbyTypes: {
-    default: [
-      COURSE_HOBBY_TYPES.CLUBS,
-      COURSE_HOBBY_TYPES.COURSES,
-      COURSE_HOBBY_TYPES.CAMPS,
-      COURSE_HOBBY_TYPES.TRIPS,
-      COURSE_HOBBY_TYPES.WORKSHOPS,
-    ],
-    landingPage: [COURSE_HOBBY_TYPES.CLUBS, COURSE_HOBBY_TYPES.CAMPS],
   },
 };
 
@@ -258,45 +234,6 @@ export const MAPPED_COURSE_CATEGORIES: Record<string, string[]> = {
   [COURSE_CATEGORIES.THEATRE]: THEATRE_COURSES_KEYWORDS,
 };
 
-// course hobby types
-export const CLUBS_KEYWORDS = [
-  'yso:p7642', // kerhot
-  'yso:p7641', // kerhotoiminta
-];
-
-export const COURSES_KEYWORDS = [
-  // kurssit, vapaa-ajan kurssit
-  'yso:p9270',
-  'kulke:301',
-  'kulke:60',
-  'kulke:625',
-];
-
-export const CAMPS_KEYWORDS = [
-  'yso:p143', // leirit
-  'yso:p21435', // kesäleirit
-  'yso:p22818', // tiedeleirit
-];
-
-export const TRIPS_KEYWORDS = [
-  'yso:p25261', // retket
-  'yso:p1103', // retkeily
-];
-
-export const WORKSHOPS_KEYWORDS = [
-  // työpajat
-  'yso:p19245',
-  'kulke:732',
-];
-
-export const MAPPED_COURSE_HOBBY_TYPES: Record<string, string[]> = {
-  [COURSE_HOBBY_TYPES.CLUBS]: CLUBS_KEYWORDS,
-  [COURSE_HOBBY_TYPES.COURSES]: COURSES_KEYWORDS,
-  [COURSE_HOBBY_TYPES.CAMPS]: CAMPS_KEYWORDS,
-  [COURSE_HOBBY_TYPES.TRIPS]: TRIPS_KEYWORDS,
-  [COURSE_HOBBY_TYPES.WORKSHOPS]: WORKSHOPS_KEYWORDS,
-};
-
 export const courseCategories: Record<COURSE_CATEGORIES, SearchCategoryOption> =
   {
     [COURSE_CATEGORIES.MOVIE]: {
@@ -348,36 +285,5 @@ export const courseCategories: Record<COURSE_CATEGORIES, SearchCategoryOption> =
       labelKey: 'home:category.courses.theatre',
     },
   };
-
-// todo: fix icons if/when we need them as category labels and when the icons are defined (not defined in events)
-export const courseHobbyTypes: Record<
-  COURSE_HOBBY_TYPES,
-  SearchHobbyTypeOption
-> = {
-  [COURSE_HOBBY_TYPES.CLUBS]: {
-    icon: <IconMovies />,
-    labelKey: 'home:hobby.clubs',
-  },
-  [COURSE_HOBBY_TYPES.COURSES]: {
-    icon: <IconMovies />,
-    labelKey: 'home:hobby.courses',
-  },
-  [COURSE_HOBBY_TYPES.CAMPS]: {
-    icon: <IconMovies />,
-    labelKey: 'home:hobby.camps',
-  },
-  [COURSE_HOBBY_TYPES.TRIPS]: {
-    icon: <IconMovies />,
-    labelKey: 'home:hobby.trips',
-  },
-  [COURSE_HOBBY_TYPES.WORKSHOPS]: {
-    icon: <IconMovies />,
-    labelKey: 'home:hobby.workshops',
-  },
-  [COURSE_HOBBY_TYPES.ONLINE_STUDIES]: {
-    icon: <IconMovies />,
-    labelKey: 'home:hobby.onlineStudies',
-  },
-};
 
 export const MAPPED_PLACES: Record<string, string> = {};

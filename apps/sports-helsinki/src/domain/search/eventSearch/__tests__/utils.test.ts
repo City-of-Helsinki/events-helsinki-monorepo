@@ -41,7 +41,7 @@ describe('getEventSearchVariables function', () => {
   const defaultParams = {
     include: [],
     language: 'fi' as AppLanguage,
-    pageSize: 10,
+    pageSize: 25,
     sortOrder: EVENT_SORT_OPTIONS.END_TIME,
     superEventType: [],
     division: [HELSINKI_OCD_DIVISION_ID],

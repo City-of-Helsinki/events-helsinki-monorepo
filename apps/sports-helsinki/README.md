@@ -386,7 +386,7 @@ The "main events search" component is used in the search page at `/search`.
 | ----------------- | ---------------------------------------- | ------------ | -------- | --------------------------------------------------------------------------------------------- |
 | eventType         | ["General"] or ["Course"]                | -            | x        | Select only "general" or "course" type events (depending on used search tab)                  |
 | include           | ['keywords', 'location']                 | -            | x        | Fetch related data from datasource                                                            |
-| pageSize          | 10                                       | -            | x        | How many items are fetched per page                                                           |
+| pageSize          | 25                                       | -            | x        | How many items are fetched per page                                                           |
 | division          | "ocd-division/country:fi/kunta:helsinki" | -            | x        | Only city of Helsinki events                                                                  |
 | xOngoing          | true                                     | -            | x        | include the ongoing events                                                                    |
 | xFullText         | ""                                       | x            | x        | A text scoring mathcher (title, place, description, ...)                                      |

@@ -16,7 +16,7 @@ import React from 'react';
 import type { Filters, SearchCategoryOption } from './types';
 
 // Page size of the event list
-export const PAGE_SIZE = 10;
+export const PAGE_SIZE = 25;
 
 export enum EVENT_CATEGORIES {
   CULTURE = 'culture',

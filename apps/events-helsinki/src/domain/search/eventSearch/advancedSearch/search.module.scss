@@ -96,12 +96,16 @@ $buttonWidth: 180px;
   }
 
   .dateSelectorWrapper {
-    align-self: flex-end;
+    & > div {
+      height: -webkit-fill-available; // Fill 2px of available space under dropdown
+    }
   }
 
   .targetAgeGroupSelector {
     --fontsize-body-l: 'var(--fontsize-body-m)';
     --border-width: '0px';
+    --menu-item-height: 50px; // Fix the empty option's height
+
     span {
       margin-right: 0;
       svg {
@@ -112,16 +116,20 @@ $buttonWidth: 180px;
       }
     }
 
+    label {
+      display: inline;
+    }
+
     button {
       cursor: pointer;
       border: 0.125rem solid var(--color-white);
       background: transparent;
       min-height: var(--dropdown-height);
+
       padding: 0 0.875rem;
       width: 100%;
       height: 100%;
       display: flex;
-      border: 2px solid var(--color-white);
       outline: none;
       text-align: left;
       svg {

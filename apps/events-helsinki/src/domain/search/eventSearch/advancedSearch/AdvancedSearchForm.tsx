@@ -216,6 +216,19 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 buttonStyles={{ fontSize: 'var(--fontsize-body-m)' }}
               />
             </div>
+            <div className={styles.dateSelectorWrapper}>
+              <DateSelector
+                dateTypes={selectedDateTypes}
+                endDate={end}
+                isCustomDate={isCustomDate}
+                name="date"
+                onChangeDateTypes={handleChangeDateTypes}
+                onChangeEndDate={setEnd}
+                onChangeStartDate={setStart}
+                startDate={start}
+                toggleIsCustomDate={toggleIsCustomDate}
+              />
+            </div>
             <div>
               <TargetAgeGroupSelector
                 className={styles.targetAgeGroupSelector}
@@ -230,19 +243,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                       'var(--color-input-dark)',
                   } as SelectCustomTheme
                 }
-              />
-            </div>
-            <div className={styles.dateSelectorWrapper}>
-              <DateSelector
-                dateTypes={selectedDateTypes}
-                endDate={end}
-                isCustomDate={isCustomDate}
-                name="date"
-                onChangeDateTypes={handleChangeDateTypes}
-                onChangeEndDate={setEnd}
-                onChangeStartDate={setStart}
-                startDate={start}
-                toggleIsCustomDate={toggleIsCustomDate}
               />
             </div>
             <div>

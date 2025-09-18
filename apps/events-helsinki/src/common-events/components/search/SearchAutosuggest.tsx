@@ -241,6 +241,7 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
           placeholder={placeholder}
           type="text"
           value={searchValue}
+          autoComplete="off"
         />
       </div>
       <AutoSuggestMenu

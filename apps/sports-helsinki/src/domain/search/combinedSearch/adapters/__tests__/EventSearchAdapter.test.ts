@@ -70,7 +70,7 @@ describe('EventSearchAdapter', () => {
             'yso:p15979', // nuoret aikuiset
           ],
           location: [],
-          pageSize: 10,
+          pageSize: 25,
           publisher: null,
           publisherAncestor: 'ahjo:00001',
           include: ['keywords', 'location'],

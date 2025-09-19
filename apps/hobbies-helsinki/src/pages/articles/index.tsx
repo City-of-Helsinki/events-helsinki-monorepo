@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ParsedUrlQueryInput } from 'querystring';
 import { NetworkStatus } from '@apollo/client';
 import type { PreviewDataObject } from '@events-helsinki/components';
@@ -52,7 +51,7 @@ import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const CATEGORIES_AMOUNT = 20;
-const BLOCK_SIZE = 10;
+const BLOCK_SIZE = 25;
 
 interface ArticleFilters {
   text?: string | null;

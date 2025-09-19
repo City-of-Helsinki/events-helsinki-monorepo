@@ -51,7 +51,7 @@ describe('getEventSearchVariables function', () => {
   const defaultParams = {
     include: [],
     language: 'fi' as AppLanguage,
-    pageSize: 10,
+    pageSize: 25,
     sortOrder: DEFAULT_EVENT_SORT_OPTION,
     superEventType: [],
   };

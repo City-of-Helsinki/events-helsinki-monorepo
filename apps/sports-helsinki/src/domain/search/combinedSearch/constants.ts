@@ -42,7 +42,7 @@ export const initialVenueSearchAdapterValues = {
   serviceOwnerTypes: undefined,
   openAt: null,
   after: '',
-  first: 10,
+  first: 25,
 } as const satisfies VenueSearchParams;
 
 export const initialEventSearchAdapterValues = {
@@ -70,5 +70,5 @@ export const initialEventSearchAdapterValues = {
   // NOTE: This is not needed if using any `*Ongoing` -filter as
   // they automatically limit the results to city of Helsinki events.
   division: [HELSINKI_OCD_DIVISION_ID],
-  pageSize: 10,
+  pageSize: 25,
 } as const satisfies EventSearchParams;

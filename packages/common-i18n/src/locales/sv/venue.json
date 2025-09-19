@@ -27,7 +27,6 @@
     }
   },
   "hero": {
-    "ariaLabelBackButton": "Tillbaka till motionsplatssidan",
     "ariaLabelKeywords": "Ämnesord"
   },
   "venueCard": {

@@ -73,17 +73,6 @@ it('should render event name, description and location', () => {
   ).toBeInTheDocument();
 });
 
-it('should go to event list', async () => {
-  const { router } = renderComponent();
-
-  await userEvent.click(
-    screen.getByRole('link', {
-      name: translations.event.hero.ariaLabelBackButton,
-    })
-  );
-  expect(router.pathname).toBe('/haku');
-});
-
 it('should render keywords', () => {
   renderComponent();
 

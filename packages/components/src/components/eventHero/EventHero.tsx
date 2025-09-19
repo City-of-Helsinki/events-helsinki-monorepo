@@ -1,13 +1,11 @@
 import classNames from 'classnames';
 import {
   Button,
-  IconArrowLeft,
   IconCalendarClock,
   IconLinkExternal,
   IconLocation,
   IconTicket,
 } from 'hds-react';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import {
@@ -21,21 +19,17 @@ import buttonStyles from '../../components/button/button.module.scss';
 import EventLocationText from '../../components/domain/event/eventLocation/EventLocationText';
 import EventKeywords from '../../components/eventKeywords/EventKeywords';
 import EventName from '../../components/eventName/EventName';
-import IconButton from '../../components/iconButton/IconButton';
 import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';
 import SkeletonLoader from '../../components/skeletonLoader/SkeletonLoader';
 import useLocale from '../../hooks/useLocale';
 import { useAppThemeContext } from '../../themeProvider';
 import type { EventFields, SuperEventResponse } from '../../types/event-types';
-import { extractLatestReturnPath } from '../../utils/eventQueryString.util';
-import type { ReturnParams } from '../../utils/eventQueryString.util';
 import {
   getEventFields,
   getEventHeroButtonText,
   getEventPrice,
 } from '../../utils/eventUtils';
 import getDateRangeStr from '../../utils/getDateRangeStr';
-import getLocaleFromPathname from '../../utils/getLocaleFromPathname';
 import styles from './eventHero.module.scss';
 
 export type EventHeroProps = {
@@ -53,8 +47,6 @@ const EventHero: React.FC<EventHeroProps> = ({
   const { t: commonTranslation } = useTranslation('common');
   const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
-  const router = useRouter();
-  const search = router.asPath.split('?')[1];
   const { defaultButtonTheme: theme, defaultButtonVariant: variant } =
     useAppThemeContext();
 
@@ -72,15 +64,6 @@ const EventHero: React.FC<EventHeroProps> = ({
   const buttonText = getEventHeroButtonText(event, 'button', t);
   const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
   const showKeywords = Boolean(today || thisWeek || keywords.length);
-  const returnParam = extractLatestReturnPath(search, `/${locale}`);
-
-  const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
-    const goBackUrl = `${
-      returnPath.startsWith('/') ? '' : '/'
-    }${returnPath}${remainingQueryString}`;
-    const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
-    router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
-  };
 
   const startTime =
     superEvent?.status === 'pending'
@@ -95,16 +78,7 @@ const EventHero: React.FC<EventHeroProps> = ({
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
-          </div>
+          <div className={styles.leftEmpty} />
           <div>
             <BackgroundImage
               className={styles.image}

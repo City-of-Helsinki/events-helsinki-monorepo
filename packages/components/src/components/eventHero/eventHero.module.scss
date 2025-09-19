@@ -27,20 +27,13 @@ $logoWidth: 5.5rem;
       grid-template-rows: unset;
     }
 
-    .backButtonWrapper {
-      padding: var(--spacing-m) var(--spacing-4-xl) var(--spacing-m) 0;
+    .leftEmpty {
+      padding: var(--spacing-m) calc(var(--spacing-4-xl) + 40px)
+        var(--spacing-m) 0;
 
       @include breakpoints.respond-below(xl) {
         position: absolute;
-        padding: var(--spacing-s) 0 0 var(--spacing-s);
-      }
-
-      button:hover {
-        outline: 2px solid var(--color-coat-of-arms);
-      }
-
-      svg {
-        color: var(--color-primary-black);
+        padding: 0;
       }
     }
 

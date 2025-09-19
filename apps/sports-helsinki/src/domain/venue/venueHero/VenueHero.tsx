@@ -1,19 +1,13 @@
 import type { Venue } from '@events-helsinki/components';
 import {
   useLocale,
-  IconButton,
   EllipsedTextWithToggle,
   getSecureImage,
-  useVenueTranslation,
-  getLocaleFromPathname,
   isVenueHelsinkiCityOwned,
   HelsinkiCityOwnedIcon,
 } from '@events-helsinki/components';
-import type { ReturnParams } from '@events-helsinki/components/utils/eventQueryString.util';
-import { extractLatestReturnPath } from '@events-helsinki/components/utils/eventQueryString.util';
 import classNames from 'classnames';
-import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
-import { useRouter } from 'next/router';
+import { IconClock, IconLocation, IconTicket } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import {
@@ -32,21 +26,9 @@ export interface Props {
 }
 
 const VenueHero: React.FC<Props> = ({ venue }) => {
-  const { t } = useVenueTranslation();
   const { t: commonTranslation } = useTranslation('common');
   const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
-  const router = useRouter();
-  const search = router.asPath.split('?')[1];
-  const returnParam = extractLatestReturnPath(search, `/${locale}`);
-
-  const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
-    const goBackUrl = `${
-      returnPath.startsWith('/') ? '' : '/'
-    }${returnPath}${remainingQueryString}`;
-    const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
-    router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
-  };
 
   const isHelsinkiCityOwned = isVenueHelsinkiCityOwned(venue);
   const imageUrl = venue.image ? getSecureImage(venue.image) : '';
@@ -93,16 +75,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('venue:hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
-          </div>
+          <div className={styles.leftEmpty} />
           <div>
             <BackgroundImage
               className={styles.image}

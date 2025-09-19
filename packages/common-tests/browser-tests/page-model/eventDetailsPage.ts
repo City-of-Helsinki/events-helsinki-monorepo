@@ -7,13 +7,6 @@ class EventDetailsPage {
     return screen.getByTestId('event-name');
   }
 
-  private get returnButton() {
-    const returnButtonText = i18n.t('event:hero.ariaLabelBackButton');
-    return screen.findByRole('link', {
-      name: returnButtonText,
-    });
-  }
-
   private get description() {
     const descriptionHeading = i18n.t('event:description.title');
     return screen.findByRole('heading', {
@@ -105,14 +98,9 @@ class EventDetailsPage {
     });
   }
 
-  public async clickReturnButton() {
-    await t.click(this.returnButton);
-  }
-
   public async verifyBasicContent() {
     // eslint-disable-next-line no-console
     console.info('EventDetailsPage: verify');
-    await t.expect(this.returnButton.exists).ok();
     await t.expect(this.title.exists).ok();
     await t.expect(this.description.exists).ok();
     await t.expect(this.dateInfo.exists).ok();

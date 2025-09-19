@@ -18,7 +18,6 @@
     "isFree": "Free"
   },
   "hero": {
-    "ariaLabelBackButton": "Go back to previous page",
     "ariaLabelBuyTickets": "Buy tickets - The link will open in a new window",
     "ariaLabelEnrol": "Enrol - The link will open in a new window",
     "buttonBuyTickets": "Buy tickets",

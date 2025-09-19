@@ -98,9 +98,13 @@ export const CULTURE_KEYWORDS: readonly string[] = [
   'yso:p16327', // cinema (art forms)
 ] as const;
 
-export const DANCE_KEYWORDS: readonly string[] = ['yso:p1278'] as const;
+export const DANCE_KEYWORDS: readonly string[] = [
+  'yso:p1278', // Tanssi
+] as const;
 
-export const FOOD_KEYWORDS: readonly string[] = ['yso:p3670'] as const;
+export const FOOD_KEYWORDS: readonly string[] = [
+  'yso:p3670', // Ruoka
+] as const;
 
 export const INFLUENCE_KEYWORDS: readonly string[] = [
   'yso:p1657', // Vaikuttaminen
@@ -111,23 +115,31 @@ export const INFLUENCE_KEYWORDS: readonly string[] = [
   'yso:p15292', // Kaupunkipolitiikka
 ] as const;
 
-export const MOVIE_KEYWORDS: readonly string[] = ['yso:p1235'] as const;
+export const MOVIE_KEYWORDS: readonly string[] = [
+  'yso:p1235', // Elokuvat
+] as const;
 
 export const MUSEUM_KEYWORDS: readonly string[] = [
   'matko:museo', // Museo
   'yso:p4934', // Museot
 ] as const;
 
-export const MUSIC_KEYWORDS: readonly string[] = ['yso:p1808'] as const;
+export const MUSIC_KEYWORDS: readonly string[] = [
+  'yso:p1808', // Musiikki
+] as const;
 
-export const NATURE_KEYWORDS: readonly string[] = ['yso:p2771'] as const;
+export const NATURE_KEYWORDS: readonly string[] = [
+  'yso:p2771', // Ulkoilu
+] as const;
 
 export const SPORT_KEYWORDS: readonly string[] = [
   'yso:p916', // Liikunta
   'yso:p965', // Urheilu
 ] as const;
 
-export const THEATRE_KEYWORDS: readonly string[] = ['yso:p2625'] as const;
+export const THEATRE_KEYWORDS: readonly string[] = [
+  'yso:p2625', // Teatteritaide
+] as const;
 
 export const MAPPED_EVENT_CATEGORIES: Record<
   EVENT_CATEGORIES,

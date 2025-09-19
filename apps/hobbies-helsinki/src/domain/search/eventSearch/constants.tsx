@@ -172,19 +172,19 @@ export const SPORT_COURSES_KEYWORDS = [
 ];
 
 export const MUSIC_COURSES_KEYWORDS = [
-  'yso:p1808',
-  'yso:p10871',
-  'yso:p20421',
-  'yso:p2969',
-  'yso:p23171',
-  'yso:p27962',
-  'yso:p18718',
-  'yso:p18434',
-  'yso:p15521',
-  'yso:p13408',
-  'yso:p29932',
-  'yso:p768',
-  'yso:p2841',
+  'yso:p1808', // Musiikki
+  'yso:p10871', // Rap
+  'yso:p20421', // Musiikkiklubit
+  'yso:p2969', // Popmusiikki
+  'yso:p23171', // Vanha musiikki
+  'yso:p27962', // Elävä musiikki
+  'yso:p18718', // Lastenmusiikki
+  'yso:p18434', // Taidemusiikki
+  'yso:p15521', // Heavy metal
+  'yso:p13408', // Musiikkileirit
+  'yso:p29932', // Elektroninen tanssimusiikki
+  'yso:p768', // Kuoromusiikki
+  'yso:p2841', // Kansanmusiikki
 ];
 
 export const GAMES_COURSES_KEYWORDS = [

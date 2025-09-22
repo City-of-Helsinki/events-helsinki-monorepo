@@ -1,10 +1,4 @@
-import {
-  addDays,
-  isBefore,
-  isSameDay,
-  isSameMonth,
-  isSameYear,
-} from 'date-fns';
+import { addDays, isBefore, isSameDay, isSameYear } from 'date-fns';
 import { toZonedTime } from 'date-fns-tz';
 import capitalize from 'lodash/capitalize';
 
@@ -38,7 +32,7 @@ const getDateRangeStr = ({
   const weekdayFormat = locale === 'en' ? 'eee' : 'eeeeee';
   const dateFormat = 'd.M.yyyy ';
   const timeFormat = getTimeFormat(language);
-  const weekdayStr = includeWeekday
+  const startWeekdayStr = includeWeekday
     ? `${capitalize(formatDate(startDate, weekdayFormat, language))} `
     : '';
   const timeAbbreviationStr = timeAbbreviation ? `${timeAbbreviation} ` : '';
@@ -49,14 +43,21 @@ const getDateRangeStr = ({
       ? `, ${timeAbbreviationStr}${formatDate(startDate, timeFormat, language)}`
       : '';
 
-    return [weekdayStr, dateStr, timeStr].join('');
+    return [startWeekdayStr, dateStr, timeStr].join('');
   } else {
     const endDate = toZonedTime(new Date(end), timeZone);
+    const endWeekdayStr = includeWeekday
+      ? `${capitalize(formatDate(endDate, weekdayFormat, language))} `
+      : '';
+
+    const formatDateRangeWithStartDateFormat = (startDateFormat: string) => {
+      const startDateStr = formatDate(startDate, startDateFormat);
+      const endDateStr = formatDate(endDate, 'd.M.yyyy');
+      const delimiter = startWeekdayStr || endWeekdayStr ? ' – ' : '–';
+      return `${startWeekdayStr}${startDateStr}${delimiter}${endWeekdayStr}${endDateStr}`;
+    };
 
     if (isSameDay(startDate, endDate) || isBefore(endDate, nextDay)) {
-      const weekdayStr = includeWeekday
-        ? `${capitalize(formatDate(startDate, weekdayFormat, language))} `
-        : '';
       const dateStr = formatDate(startDate, dateFormat, language);
       const startTimeStr = formatDate(startDate, timeFormat, language);
       const endTimeStr = formatDate(endDate, timeFormat, language);
@@ -64,22 +65,11 @@ const getDateRangeStr = ({
         ? `, ${timeAbbreviationStr}${startTimeStr}–${endTimeStr}`
         : '';
 
-      return [weekdayStr, dateStr, timeStr].join('');
-    } else if (isSameMonth(startDate, endDate)) {
-      const startDateStr = formatDate(startDate, 'd') + '.';
-      const endDateStr = formatDate(endDate, 'd.M.yyyy');
-
-      return `${startDateStr}–${endDateStr}`;
+      return [startWeekdayStr, dateStr, timeStr].join('');
     } else if (isSameYear(startDate, endDate)) {
-      const startDateStr = formatDate(startDate, 'd.M') + '.';
-      const endDateStr = formatDate(endDate, 'd.M.yyyy');
-
-      return `${startDateStr}–${endDateStr}`;
+      return formatDateRangeWithStartDateFormat('d.M.');
     } else {
-      const startDateStr = formatDate(startDate, 'd.M.yyyy');
-      const endDateStr = formatDate(endDate, 'd.M.yyyy');
-
-      return `${startDateStr}–${endDateStr}`;
+      return formatDateRangeWithStartDateFormat('d.M.yyyy');
     }
   }
 };

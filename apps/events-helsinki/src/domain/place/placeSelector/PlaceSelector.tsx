@@ -13,7 +13,7 @@ import React from 'react';
 import PlaceText from '../PlaceText';
 import useFetchPlacesByIds from '../useFetchPlacesByIds';
 
-const DEFAULT_PAGE_SIZE = 10;
+const PLACES_PAGE_SIZE = 10;
 const DIVISIONS = [HELSINKI_OCD_DIVISION_ID];
 
 export type Option = {
@@ -33,7 +33,7 @@ const usePlacesSearchQueryOptions = (searchValue: string): Option[] => {
     variables: {
       divisions: DIVISIONS,
       hasUpcomingEvents: true,
-      pageSize: DEFAULT_PAGE_SIZE,
+      pageSize: PLACES_PAGE_SIZE,
       // Seems like apollo can get stuck in loading when searched with different casings
       text: searchValue.toLowerCase(),
     },

@@ -10,13 +10,11 @@ type SearchType = 'GeneralEvent' | 'Course' | 'Venue';
 
 type SearchProps = {
   searchText: string;
-  searchType: SearchType;
 };
 
-export const defaultSearchProps: SearchProps = {
+export const defaultSearchProps = {
   searchText: 'helsinki',
-  searchType: 'GeneralEvent',
-};
+} as const satisfies SearchProps;
 
 class EventSearchPage {
   private appNamespace: 'appHobbies' | 'appEvents' | 'appSports';
@@ -84,8 +82,8 @@ class EventSearchPage {
   }
 
   public async expectSearchResults({
-    min: minResults = 1,
-    max: maxResults = 25,
+    min: minResults,
+    max: maxResults,
     searchType = 'GeneralEvent',
   }: {
     min: number;
@@ -114,22 +112,16 @@ class EventSearchPage {
     await t.expect(this.results.count).eql(0); // no cards returned
   }
 
-  public async doSearch({
-    searchText,
-    searchType,
-  }: SearchProps = defaultSearchProps) {
+  public async doSearch({ searchText }: SearchProps = defaultSearchProps) {
     // eslint-disable-next-line no-console
     console.info('EventSearchPage: doSearch');
     await t.typeText(this.autoSuggestInput, searchText);
     await t.pressKey('tab');
     await t.click(this.searchButton);
     await t.wait(2000);
-    await this.expectSearchResults({ min: 1, max: 25, searchType });
   }
 
-  public async doUnsuccessfulSearch({
-    searchType = 'GeneralEvent',
-  }: Pick<SearchProps, 'searchType'>) {
+  public async doUnsuccessfulSearch() {
     // eslint-disable-next-line no-console
     console.info('EventSearchPage: doUnsuccessfulSearch');
     await t.typeText(
@@ -141,7 +133,6 @@ class EventSearchPage {
     await t.pressKey('tab');
     await t.click(this.searchButton);
     await t.wait(2000);
-    await this.expectNoSearchResults(searchType);
   }
 
   public async verify() {

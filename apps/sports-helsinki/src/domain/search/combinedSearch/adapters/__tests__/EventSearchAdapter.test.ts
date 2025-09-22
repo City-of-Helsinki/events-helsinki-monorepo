@@ -4,6 +4,7 @@ import {
   HELSINKI_OCD_DIVISION_ID,
   TARGET_GROUPS,
 } from '@events-helsinki/components';
+import AppConfig from '../../../../app/AppConfig';
 import type { CombinedSearchAdapterInput } from '../../types';
 import EventSearchAdapter from '../EventSearchAdapter';
 
@@ -70,7 +71,7 @@ describe('EventSearchAdapter', () => {
             'yso:p15979', // nuoret aikuiset
           ],
           location: [],
-          pageSize: 25,
+          pageSize: AppConfig.pageSize,
           publisher: null,
           publisherAncestor: 'ahjo:00001',
           include: ['keywords', 'location'],

@@ -6,6 +6,7 @@ import {
 } from '@events-helsinki/components';
 import mockRouter from 'next-router-mock';
 import qs from 'query-string';
+import AppConfig from '../../../../app/AppConfig';
 import type {
   CombinedSearchAdapterInput,
   CombinedSearchAdapterOutput,
@@ -127,7 +128,7 @@ describe('CombinedSearchFormAdapter', () => {
             outputQuery.keywords.length > 0 ? [outputQuery.keywords] : [],
           administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
           after: '',
-          first: 25,
+          first: AppConfig.pageSize,
           ontologyTreeIdOrSets: [['551']],
           openAt: null,
         },
@@ -159,7 +160,7 @@ describe('CombinedSearchFormAdapter', () => {
           keywordOrSet2: [],
           keywordOrSet3: [],
           location: [],
-          pageSize: 25,
+          pageSize: AppConfig.pageSize,
           publisher: null,
           publisherAncestor: null,
           include: ['keywords', 'location'],

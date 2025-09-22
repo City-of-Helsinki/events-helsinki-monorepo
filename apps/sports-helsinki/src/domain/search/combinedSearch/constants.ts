@@ -4,6 +4,7 @@ import {
   EVENT_SORT_OPTIONS,
   HELSINKI_OCD_DIVISION_ID,
 } from '@events-helsinki/components';
+import AppConfig from '../../app/AppConfig';
 import { SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID } from '../../app/appConstants';
 import { SPORT_COURSES_KEYWORDS } from '../eventSearch/constants';
 import type {
@@ -42,7 +43,7 @@ export const initialVenueSearchAdapterValues = {
   serviceOwnerTypes: undefined,
   openAt: null,
   after: '',
-  first: 25,
+  first: AppConfig.pageSize,
 } as const satisfies VenueSearchParams;
 
 export const initialEventSearchAdapterValues = {
@@ -70,5 +71,5 @@ export const initialEventSearchAdapterValues = {
   // NOTE: This is not needed if using any `*Ongoing` -filter as
   // they automatically limit the results to city of Helsinki events.
   division: [HELSINKI_OCD_DIVISION_ID],
-  pageSize: 25,
+  pageSize: AppConfig.pageSize,
 } as const satisfies EventSearchParams;

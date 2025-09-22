@@ -125,14 +125,18 @@ export const MOVIE_KEYWORDS: readonly string[] = [
 export const MUSEUM_KEYWORDS: readonly string[] = [
   'matko:museo', // Museo
   'yso:p4934', // Museot
+  'yso:p8144', // Taidemuseot
 ] as const;
 
 export const MUSIC_KEYWORDS: readonly string[] = [
   'yso:p1808', // Musiikki
+  'kulke:31', // Musiikki
+  'kulke:348', // Musiikki
 ] as const;
 
 export const NATURE_KEYWORDS: readonly string[] = [
   'yso:p2771', // Ulkoilu
+  'yso:p13084', // Luonto
 ] as const;
 
 export const SPORT_KEYWORDS: readonly string[] = [
@@ -141,6 +145,7 @@ export const SPORT_KEYWORDS: readonly string[] = [
 ] as const;
 
 export const THEATRE_KEYWORDS: readonly string[] = [
+  'kulke:33', // Teatteri
   'yso:p2625', // Teatteritaide
 ] as const;
 

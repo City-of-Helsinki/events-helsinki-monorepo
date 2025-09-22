@@ -13,8 +13,7 @@ import { SEARCH_ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
 import type { SearchPage } from '../../../../domain/search/combinedSearch/types';
 import useUnifiedSearchListQuery from '../../../../domain/unifiedSearch/useUnifiedSearchListQuery';
-
-const BLOCK_SIZE = 25;
+import AppConfig from '../../../app/AppConfig';
 
 function useSearchPage(): SearchPage {
   const { t } = useSearchTranslation();
@@ -33,7 +32,7 @@ function useSearchPage(): SearchPage {
   const handleLoadMore = async () => {
     const afterCursor = pageInfo?.endCursor;
     const pagination = {
-      first: BLOCK_SIZE,
+      first: AppConfig.pageSize,
       after: afterCursor,
     };
     setIsFetchingMore(true);

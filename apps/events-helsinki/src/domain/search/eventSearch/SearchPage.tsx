@@ -26,7 +26,6 @@ import { toast } from 'react-toastify';
 
 import { ROUTES } from '../../../constants';
 import AppConfig from '../../app/AppConfig';
-import { PAGE_SIZE } from './constants';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
 import { getEventSearchVariables, getEventUrl, getNextPage } from './utils';
@@ -40,7 +39,7 @@ const useSearchQuery = () => {
     const sortParam = searchParams.get('sort');
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: ['keywords', 'location'],
-      pageSize: PAGE_SIZE,
+      pageSize: AppConfig.pageSize,
       params: searchParams,
       sortOrder: isEventSortOption(sortParam)
         ? sortParam

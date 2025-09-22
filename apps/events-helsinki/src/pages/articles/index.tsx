@@ -51,7 +51,6 @@ import ArticleDetails from '../../domain/article/articleDetails/ArticleDetails';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const CATEGORIES_AMOUNT = 20;
-const BLOCK_SIZE = 25;
 
 interface ArticleFilters {
   text?: string | null;
@@ -168,7 +167,7 @@ export default function ArticleArchive({
     // not sure if nextFetchPolicy is needed
     nextFetchPolicy: 'cache-first',
     variables: {
-      first: BLOCK_SIZE,
+      first: AppConfig.pageSize,
       search: searchFilters?.text ?? '',
       language: getLanguageCodeFilter(currentLanguageCode),
       categories: searchFilters?.tags ?? [],
@@ -195,7 +194,7 @@ export default function ArticleArchive({
     if (hasMoreToLoad) {
       await fetchMore({
         variables: {
-          first: BLOCK_SIZE,
+          first: AppConfig.pageSize,
           after: pageInfo?.endCursor,
         },
       });

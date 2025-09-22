@@ -277,6 +277,13 @@ class AppConfig {
     // Ignore the unpopulated mandatory event data in LinkedEvents
     return { ...ignoredErrorCodesHeader };
   }
+
+  /**
+   * Number of results per page (i.e. pagination / page size).
+   *
+   * Affects hobby and CMS article searches.
+   */
+  static readonly pageSize = 25;
 }
 
 function parseEnvValue(

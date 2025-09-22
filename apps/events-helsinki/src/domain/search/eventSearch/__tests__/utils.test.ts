@@ -6,6 +6,7 @@ import {
 } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 
+import AppConfig from '../../../app/AppConfig';
 import {
   EVENT_DEFAULT_SEARCH_FILTERS,
   MAPPED_EVENT_CATEGORIES,
@@ -51,7 +52,7 @@ describe('getEventSearchVariables function', () => {
   const defaultParams = {
     include: [],
     language: 'fi' as AppLanguage,
-    pageSize: 25,
+    pageSize: AppConfig.pageSize,
     sortOrder: DEFAULT_EVENT_SORT_OPTION,
     superEventType: [],
   };

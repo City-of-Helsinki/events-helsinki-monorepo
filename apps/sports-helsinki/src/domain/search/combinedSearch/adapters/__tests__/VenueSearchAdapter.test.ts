@@ -3,6 +3,7 @@ import {
   YOUTH_ONTOLOGY_TREE_IDS,
 } from '@events-helsinki/components';
 import { SortOrder, TARGET_GROUPS } from '@events-helsinki/components/types';
+import AppConfig from '../../../../app/AppConfig';
 import type { CombinedSearchAdapterInput } from '../../types';
 import VenueSearchAdapter from '../VenueSearchAdapter';
 
@@ -30,7 +31,7 @@ describe('VenueSearchAdapter', () => {
         ontologyWordIdOrSets: input.keywords.length > 0 ? [input.keywords] : [],
         administrativeDivisionIds: ['ocd-division/country:fi/kunta:helsinki'],
         after: '',
-        first: 25,
+        first: AppConfig.pageSize,
         ontologyTreeIdOrSets: [
           ['551'],
           [

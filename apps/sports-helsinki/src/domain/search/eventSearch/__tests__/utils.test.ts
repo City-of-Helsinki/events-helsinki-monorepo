@@ -6,6 +6,7 @@ import {
 } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 
+import AppConfig from '../../../app/AppConfig';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../constants';
 import { getEventSearchVariables, getNextPage, getSearchQuery } from '../utils';
 
@@ -41,7 +42,7 @@ describe('getEventSearchVariables function', () => {
   const defaultParams = {
     include: [],
     language: 'fi' as AppLanguage,
-    pageSize: 25,
+    pageSize: AppConfig.pageSize,
     sortOrder: EVENT_SORT_OPTIONS.END_TIME,
     superEventType: [],
     division: [HELSINKI_OCD_DIVISION_ID],

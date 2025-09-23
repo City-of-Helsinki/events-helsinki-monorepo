@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.26.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.25.1...events-helsinki-v1.26.0) (2025-09-23)
+
+
+### Features
+
+* Change page size from 10→25 for all normal searches & CMS listings ([44a0816](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44a08167a57ed8e55fb47b53bdf80db220206baa))
+* **events:** Add more keywords to music, museum, nature and theatre ([05c51ab](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/05c51abb7285fc03da257bf485d5f669b3d04db6))
+* **events:** Add target group filter to search form ([1c1eada](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1c1eada78fb6aee58c629dd311b40a58708e7f50))
+* **events:** Remove only children events filter ([562b136](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/562b136a1ff6d877d4a3189a0d1d46b2acb6e660))
+* **events:** Remove unused "place" -filter handler ([69d049e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/69d049e11896853bbef3ff49f83a519fdb782b90))
+* **events:** Use shallow rendering when searching events ([cf32ecd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cf32ecd13646cc0c6695a73626f1c88c3e5f087e))
+* Remove hobby type completely from codebase & clarify similar use ([9108175](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9108175e791380db4e2b2ee44c80a8df5a122a35))
+
+
+### Bug Fixes
+
+* **events:** Accessibility issues in target age group selector ([d4ff63e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d4ff63e41c9dc339412199e00e05cf6e6c389fe2))
+* **events:** Apply theme to target age group selector ([a26eb03](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a26eb03c13b0210aadb1f56e4c1a77982f54dfea))
+* **events:** Consistent styles for filter elements ([dc83040](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dc83040082827d16eaa82c181dc2d9d2fe522bc7))
+* **events:** Disable autocomplete of search input ([63e6a28](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/63e6a2871731d5aef73af74c752b89138c87359a))
+* **events:** Place selector and multi select dropdown ([58648b6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/58648b6c943bd4fd8fd52b5aa1922490bd2c925f))
+* **events:** Style of empty option in target age group selector ([d38799e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d38799e32557f563710b11f59c758497ef1ffd41))
+
 ## [1.25.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.25.0...events-helsinki-v1.25.1) (2025-09-11)
 
 

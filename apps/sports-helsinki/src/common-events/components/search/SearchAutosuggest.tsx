@@ -112,9 +112,8 @@ const SearchAutosuggest: React.FC<SearchAutosuggestProps> = ({
       value: internalInputValue,
     };
 
-    items.push(textItem);
-
     items.push(
+      textItem,
       ...(keywordsData?.keywordList?.data
         .filter((keyword) => {
           const name = getLocalizedString(keyword.name, locale).toLowerCase();

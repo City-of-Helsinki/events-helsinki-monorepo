@@ -5,8 +5,8 @@ import {
   useAppEventsTranslation,
   IconRead,
   EVENT_SEARCH_FILTERS,
+  AdvancedSearchTextInput,
 } from '@events-helsinki/components';
-import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import classNames from 'classnames';
 import type { SelectCustomTheme } from 'hds-react';
 import { Button, IconSearch, IconLocation } from 'hds-react';
@@ -16,7 +16,6 @@ import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 
-import SearchAutosuggest from '../../../../common-events/components/search/SearchAutosuggest';
 import PlaceSelector from '../../../place/placeSelector/PlaceSelector';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../constants';
 import FilterSummary from '../filterSummary/FilterSummary';
@@ -64,10 +63,8 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     setEnd,
     isCustomDate,
     setIsCustomDate,
-    selectedTexts,
-    setSelectedTexts,
-    autosuggestInput,
-    setAutosuggestInput,
+    textSearchInput,
+    setTextSearchInput,
     scrollToResultList,
   } = useAdvancedSearchContext();
 
@@ -79,7 +76,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     [EVENT_SEARCH_FILTERS.END]: end,
     [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
     [EVENT_SEARCH_FILTERS.START]: start,
-    [EVENT_SEARCH_FILTERS.TEXT]: selectedTexts,
+    [EVENT_SEARCH_FILTERS.TEXT]: textSearchInput ? [textSearchInput] : [],
   };
 
   const categories = getEventCategoryOptions(t).sort(
@@ -99,31 +96,11 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const moveToSearchPage = () => {
     const filters = {
       ...searchFilters,
-      ...{ [EVENT_SEARCH_FILTERS.TEXT]: [autosuggestInput] },
+      ...{ [EVENT_SEARCH_FILTERS.TEXT]: [textSearchInput] },
     };
     const search = getSearchQuery(filters);
 
     goToSearch(search);
-  };
-
-  const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
-    const value = option.text;
-
-    const { [EVENT_SEARCH_FILTERS.TEXT]: text } =
-      getSearchFilters(searchParams);
-
-    if (value && !text?.includes(value)) {
-      text?.push(value);
-    }
-
-    const search = getSearchQuery({
-      ...searchFilters,
-      [EVENT_SEARCH_FILTERS.TEXT]: text,
-    });
-
-    setSelectedTexts(text || []);
-    goToSearch(search);
-    scrollToResultList();
   };
 
   const handleOnlyEveningEventChange = (
@@ -163,7 +140,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const clearInputValues = () => {
     setCategoryInput('');
     setPlaceInput('');
-    setAutosuggestInput('');
+    setTextSearchInput('');
   };
 
   const clearFilters = () => {
@@ -178,7 +155,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     }
 
     moveToSearchPage();
-    setAutosuggestInput('');
+    setTextSearchInput('');
     scrollToResultList();
   };
 
@@ -187,16 +164,18 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
       <div className={styles.searchWrapper}>
         <h1>{t('search.labelSearchField')}</h1>
         <div className={styles.rowWrapper}>
-          <div className={classNames(styles.row, styles.autoSuggestRow)}>
-            <div>
-              <SearchAutosuggest
-                name="search"
-                onChangeSearchValue={setAutosuggestInput}
-                onOptionClick={handleMenuOptionClick}
-                placeholder={tAppEvents('appEvents:search.search.placeholder')}
-                searchValue={autosuggestInput}
-              />
-            </div>
+          <div className={classNames(styles.row, styles.textSearchRow)}>
+            <AdvancedSearchTextInput
+              id="search"
+              name="search"
+              placeholder={tAppEvents('appEvents:search.search.placeholder')}
+              value={textSearchInput}
+              onChange={(event) => setTextSearchInput(event.target.value)}
+              clearButton
+              clearButtonAriaLabel={tAppEvents(
+                'appEvents:search.search.clearButtonAriaLabel'
+              )}
+            />
           </div>
         </div>
         <div className={styles.rowWrapper}>

@@ -69,7 +69,7 @@ $buttonWidth: 180px;
     }
   }
 
-  .autoSuggestRow {
+  .textSearchRow {
     align-items: flex-end;
 
     @include breakpoints.respond-above(m) {

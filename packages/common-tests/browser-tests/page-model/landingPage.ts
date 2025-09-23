@@ -24,6 +24,8 @@ class LandingPage {
       )
       .ok();
 
+    const searchInput = screen.findByPlaceholderText(searchPlaceholderText);
+
     // NOTE: There is some debounce wait time set to the search
     // and it also makes an API call.
     await t
@@ -31,8 +33,8 @@ class LandingPage {
         screen.findByPlaceholderText(searchPlaceholderText),
         this.searchText
       )
-      .expect(screen.findByText(this.searchText).exists)
-      .ok({ timeout: 10000 });
+      .expect(searchInput.value)
+      .eql(this.searchText);
   }
 }
 

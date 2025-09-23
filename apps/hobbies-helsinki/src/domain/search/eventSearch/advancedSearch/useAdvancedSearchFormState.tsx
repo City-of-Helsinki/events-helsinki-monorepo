@@ -28,7 +28,7 @@ export function useAdvancedSearchFormState() {
   const [end, setEnd] = React.useState<Date | null>(null);
   const [isCustomDate, setIsCustomDate] = React.useState<boolean>(false);
   const [selectedTexts, setSelectedTexts] = React.useState<string[]>([]);
-  const [autosuggestInput, setAutosuggestInput] = React.useState('');
+  const [textSearchInput, setTextSearchInput] = React.useState('');
 
   // Initialize fields when page is loaded
   React.useEffect(() => {
@@ -62,7 +62,7 @@ export function useAdvancedSearchFormState() {
     } else {
       setSelectedDateTypes(dateTypes);
     }
-    setAutosuggestInput(text?.toString() || '');
+    setTextSearchInput(text?.toString() || '');
   }, [searchParams, params]);
 
   return {
@@ -88,7 +88,7 @@ export function useAdvancedSearchFormState() {
     setIsCustomDate,
     selectedTexts,
     setSelectedTexts,
-    autosuggestInput,
-    setAutosuggestInput,
+    textSearchInput,
+    setTextSearchInput,
   };
 }

@@ -54,8 +54,6 @@ describe('Landing page', () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     const searchInput = screen.getByRole('textbox');
     await userEvent.type(searchInput, searchValue);
-    // Check that auto-suggest menu is open
-    expect(screen.getByText(/hakuehdotuksia/i)).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
       asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.TEXT}=${searchValue}`,
@@ -63,25 +61,6 @@ describe('Landing page', () => {
       query: { [EVENT_SEARCH_FILTERS.TEXT]: searchValue },
     });
   });
-
-  // Search options does not appear in the auto suggest menu
-  it.todo(
-    'should route to event search page after clicking autosuggest menu item'
-  );
-  // test("should route to event search page after clicking autosuggest menu item", async () => {
-  //   const { router } = render(<LandingPageSearch />, { mocks });
-  //   const searchInput = screen.getByRole("textbox", { name: /mitä etsit\?/i });
-  //   await act(() => userEvent.type(searchInput, searchValue));
-  //   const option = await screen.findByRole("option", {
-  //     name: /musiikkiklubit/i,
-  //   });
-  //   await act(() => userEvent.click(option));
-  //   expect(router).toMatchObject({
-  //     asPath: `${searchPath}?text=musiikkiklubit`,
-  //     pathname: searchPath,
-  //     query: { text: "musiikkiklubit" },
-  //   });
-  // });
 
   it('should route to event search page after clicking category', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });

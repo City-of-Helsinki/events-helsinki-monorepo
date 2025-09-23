@@ -5,8 +5,6 @@ import type { EventFields } from './event-types';
 import type { LocalizedObject, Venue } from './generated/graphql';
 export type AppLanguage = (typeof APP_LANGUAGES)[number];
 
-export type AutosuggestType = 'keyword' | 'text';
-
 export type ValidLocalizedObject = {
   __typename: LocalizedObject['__typename'];
   en: NonNullable<LocalizedObject['en']>;
@@ -44,12 +42,6 @@ export type AppMenuItem = {
 export type AppNode<T> = {
   cursor: string;
   node: T;
-};
-
-export type AutosuggestMenuOption = {
-  text: string;
-  type: AutosuggestType;
-  value: string;
 };
 
 export type AppCategory = {

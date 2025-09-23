@@ -1,15 +1,14 @@
-import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import {
   DateSelector,
   MobileDateSelector,
   useLocale,
   useHomeTranslation,
   useAppHobbiesTranslation,
+  AdvancedSearchTextInput,
 } from '@events-helsinki/components';
 import classnames from 'classnames';
 import { Button, IconSearch } from 'hds-react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
-import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import styles from './landingPageSearchForm.module.scss';
@@ -20,14 +19,13 @@ export type LandingPageSearchFormProps = Readonly<{
   start: Date | null;
   end: Date | null;
   isCustomDate: boolean;
-  autosuggestInput: string;
+  textSearchInput: string;
   setStart: (value: Date | null) => void;
   setEnd: (value: Date | null) => void;
-  setAutosuggestInput: (value: string) => void;
+  setTextSearchInput: (value: string) => void;
   handleChangeDateTypes: (value: string[]) => void;
   toggleIsCustomDate: () => void;
   handleSubmit: () => void;
-  handleMenuOptionClick: (option: AutosuggestMenuOption) => void;
 }>;
 
 export default function LandingPageSearchForm({
@@ -38,12 +36,11 @@ export default function LandingPageSearchForm({
   end,
   setEnd,
   isCustomDate,
-  autosuggestInput,
-  setAutosuggestInput,
+  textSearchInput,
+  setTextSearchInput,
   handleChangeDateTypes,
   toggleIsCustomDate,
   handleSubmit,
-  handleMenuOptionClick,
 }: LandingPageSearchFormProps) {
   const { t } = useHomeTranslation();
   const { t: tAppHobbies } = useAppHobbiesTranslation();
@@ -53,13 +50,17 @@ export default function LandingPageSearchForm({
     <div className={classnames(className, styles.landingPageSearch)}>
       <h1>{tAppHobbies('appHobbies:home.search.title')}</h1>
       <div className={styles.searchRow}>
-        <div className={styles.autosuggestWrapper}>
-          <SearchAutosuggest
+        <div className={styles.textSearchWrapper}>
+          <AdvancedSearchTextInput
+            id="search"
             name="search"
-            onChangeSearchValue={setAutosuggestInput}
-            onOptionClick={handleMenuOptionClick}
             placeholder={t('home:search.placeholder')}
-            searchValue={autosuggestInput}
+            value={textSearchInput}
+            onChange={(event) => setTextSearchInput(event.target.value)}
+            clearButton
+            clearButtonAriaLabel={tAppHobbies(
+              'appHobbies:search.search.clearButtonAriaLabel'
+            )}
           />
         </div>
         <div className={styles.dateAndButtonWrapper}>

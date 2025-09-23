@@ -9,13 +9,6 @@
   "notification": {
     "labelClose": "Sulje ilmoitus"
   },
-  "autosuggest": {
-    "menu": {
-      "ariaButtonClose": "Sulje valikko",
-      "info": "Voit myös etsiä kirjoittamallasi hakusanalla",
-      "title": "Hakuehdotuksia"
-    }
-  },
   "button": {
     "close": "Sulje",
     "loadMore": "Lataa lisää",

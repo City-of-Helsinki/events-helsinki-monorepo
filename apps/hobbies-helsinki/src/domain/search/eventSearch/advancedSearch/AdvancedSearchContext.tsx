@@ -23,8 +23,8 @@ type SearchFormState = {
   setIsCustomDate: React.Dispatch<React.SetStateAction<boolean>>;
   selectedTexts: string[];
   setSelectedTexts: React.Dispatch<React.SetStateAction<string[]>>;
-  autosuggestInput: string;
-  setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
+  textSearchInput: string;
+  setTextSearchInput: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type AdvancedSearchContextType = SearchFormState & {

@@ -74,20 +74,6 @@ $buttonWidth: 180px;
   }
 }
 
-.autoSuggestRow {
-  align-items: flex-end;
-
-  @include breakpoints.respond-above(m) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  & > :first-child {
-    @include breakpoints.respond-above(m) {
-      grid-column: 1 / 4;
-    }
-  }
-}
-
 .rowWrapper {
   display: grid;
   height: fit-content;

@@ -10,10 +10,6 @@ export const ROUTES = {
   COOKIE_CONSENT: '/cookie-consent',
 };
 
-export const AUTOSUGGEST_KEYWORD_BLACK_LIST = [
-  'kulke:354', // Seniorit
-];
-
 export const EXTLINK = {
   EXTLINK_FACEBOOK: 'extlink_facebook',
   EXTLINK_INSTAGRAM: 'extlink_instagram',

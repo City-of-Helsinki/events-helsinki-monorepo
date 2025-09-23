@@ -9,9 +9,7 @@
 
   @include breakpoints.respond-above(m) {
     display: grid;
-    grid-template-columns: 1fr;
     grid-gap: 1.25rem;
-
     grid-template-columns: 9fr 3fr;
   }
 }

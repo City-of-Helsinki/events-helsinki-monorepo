@@ -1,18 +1,15 @@
-import type {
-  AutosuggestMenuOption,
-  Option,
-} from '@events-helsinki/components';
+import type { Option } from '@events-helsinki/components';
 import {
   useSearchTranslation,
   MultiSelectDropdown,
   useAppSportsTranslation,
   IconPersonRunning,
   SearchSelect,
+  AdvancedSearchTextInput,
 } from '@events-helsinki/components';
 import type { SelectCustomTheme } from 'hds-react';
 import { Button, IconGroup, IconPersonWheelchair, IconSearch } from 'hds-react';
 import React from 'react';
-import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import AppConfig from '../../app/AppConfig';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
 import type { SearchComponentType } from '../combinedSearch/types';
@@ -35,8 +32,8 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
   } = useCombinedSearchContext();
 
   const {
-    autosuggestInput,
-    setAutosuggestInput,
+    textSearchInput,
+    setTextSearchInput,
     selectedSportsCategories,
     setSelectedSportsCategories,
     sportsCategoryInput,
@@ -62,7 +59,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     formEvent?.preventDefault();
     // Set the new form values to the context
     setFormValues({
-      text: autosuggestInput,
+      text: textSearchInput,
       sportsCategories: selectedSportsCategories,
       targetGroups: selectedTargetGroups,
       accessibilityProfile: selectedAccessibilityProfile,
@@ -73,12 +70,6 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     if (scrollToResultList) {
       scrollToResultList();
     }
-  };
-
-  const handleMenuOptionClick = (option: AutosuggestMenuOption) => {
-    const value = option.text;
-    setAutosuggestInput(value);
-    handleSubmit();
   };
 
   const handleAccessibilityProfileOnChange = (option: Option) => {
@@ -96,12 +87,16 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
         )}
         <div className={styles.rowWrapper}>
           <div>
-            <SearchAutosuggest
-              name="text"
-              onChangeSearchValue={setAutosuggestInput}
-              onOptionClick={handleMenuOptionClick}
+            <AdvancedSearchTextInput
+              id="search"
+              name="search"
               placeholder={tAppSports('appSports:search.search.placeholder')}
-              searchValue={autosuggestInput}
+              value={textSearchInput}
+              onChange={(event) => setTextSearchInput(event.target.value)}
+              clearButton
+              clearButtonAriaLabel={tAppSports(
+                'appSports:search.search.clearButtonAriaLabel'
+              )}
             />
           </div>
           <div className={styles.rowWrapper}>

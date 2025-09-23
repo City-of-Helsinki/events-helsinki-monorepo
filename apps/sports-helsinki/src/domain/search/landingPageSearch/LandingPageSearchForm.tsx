@@ -1,31 +1,28 @@
-import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import {
   useAppSportsTranslation,
   useLocale,
   useHomeTranslation,
+  AdvancedSearchTextInput,
 } from '@events-helsinki/components';
 import classnames from 'classnames';
 import { Button, IconSearch } from 'hds-react';
 import { SecondaryLink } from 'react-helsinki-headless-cms';
-import SearchAutosuggest from '../../../common-events/components/search/SearchAutosuggest';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import styles from './landingPageSearchForm.module.scss';
 
 export type LandingPageSearchFormProps = Readonly<{
   className?: string;
-  autosuggestInput: string;
-  setAutosuggestInput: (value: string) => void;
+  textSearchInput: string;
+  setTextSearchInput: (value: string) => void;
   handleSubmit: () => void;
-  handleMenuOptionClick: (option: AutosuggestMenuOption) => void;
 }>;
 
 export default function LandingPageSearchForm({
   className,
-  autosuggestInput,
-  setAutosuggestInput,
+  textSearchInput,
+  setTextSearchInput,
   handleSubmit,
-  handleMenuOptionClick,
 }: LandingPageSearchFormProps) {
   const { t } = useHomeTranslation();
   const { t: tAppSports } = useAppSportsTranslation();
@@ -35,13 +32,17 @@ export default function LandingPageSearchForm({
     <div className={classnames(className, styles.landingPageSearch)}>
       <h1>{tAppSports('appSports:home.search.title')}</h1>
       <div className={styles.searchRow}>
-        <div className={styles.autosuggestWrapper}>
-          <SearchAutosuggest
+        <div className={styles.textSearchWrapper}>
+          <AdvancedSearchTextInput
+            id="search"
             name="search"
-            onChangeSearchValue={setAutosuggestInput}
-            onOptionClick={handleMenuOptionClick}
             placeholder={t('home:search.placeholder')}
-            searchValue={autosuggestInput}
+            value={textSearchInput}
+            onChange={(event) => setTextSearchInput(event.target.value)}
+            clearButton
+            clearButtonAriaLabel={tAppSports(
+              'appSports:search.search.clearButtonAriaLabel'
+            )}
           />
         </div>
         <div className={styles.buttonWrapper}>

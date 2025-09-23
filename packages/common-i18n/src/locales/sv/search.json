@@ -20,6 +20,7 @@
       "General": "Evenemangen"
     },
     "buttonSearch": "Sök",
+    "clearButtonAriaLabel": "Tömma",
     "checkboxOnlyChildrenEvents": "Visa endast evenemang för barn",
     "checkboxOnlyEveningEvents": "Visa endast kvällsprogram",
     "checkboxOnlyRemoteEvents": "Visa enbart distansevenemang",

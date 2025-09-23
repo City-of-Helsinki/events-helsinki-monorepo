@@ -9,13 +9,6 @@
   "notification": {
     "labelClose": "Stäng anmälan"
   },
-  "autosuggest": {
-    "menu": {
-      "ariaButtonClose": "Stäng menyn",
-      "info": "Du kan också leta med sökordet du angav",
-      "title": "Sökförslag"
-    }
-  },
   "menu": {
     "menuButtonLabel": "Meny",
     "menuToggleAriaLabel": "Öppna menyn"

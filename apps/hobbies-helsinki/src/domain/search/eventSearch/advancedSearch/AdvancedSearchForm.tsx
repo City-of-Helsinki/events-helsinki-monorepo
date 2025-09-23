@@ -1,4 +1,5 @@
 import {
+  AdvancedSearchTextInput,
   Checkbox,
   DateSelector,
   EVENT_SEARCH_FILTERS,
@@ -7,7 +8,6 @@ import {
   RangeDropdown,
   useAppHobbiesTranslation,
 } from '@events-helsinki/components';
-import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import classNames from 'classnames';
 import {
   Button,
@@ -21,7 +21,6 @@ import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
-import SearchAutosuggest from '../../../../common-events/components/search/SearchAutosuggest';
 import PlaceSelector from '../../../place/placeSelector/PlaceSelector';
 import { COURSE_DEFAULT_SEARCH_FILTERS } from '../constants';
 import FilterSummary from '../filterSummary/FilterSummary';
@@ -74,9 +73,8 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     isCustomDate,
     setIsCustomDate,
     selectedTexts,
-    setSelectedTexts,
-    autosuggestInput,
-    setAutosuggestInput,
+    textSearchInput,
+    setTextSearchInput,
     scrollToResultList,
   } = useAdvancedSearchContext();
 
@@ -120,36 +118,11 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const moveToSearchPage = () => {
     const filters = {
       ...searchFilters,
-      ...{ [EVENT_SEARCH_FILTERS.TEXT]: [autosuggestInput] },
+      ...{ [EVENT_SEARCH_FILTERS.TEXT]: [textSearchInput] },
     };
     const search = getSearchQuery(filters);
 
     goToSearch(search);
-  };
-
-  const handleMenuOptionClick = async (option: AutosuggestMenuOption) => {
-    const value = option.text;
-
-    const { [EVENT_SEARCH_FILTERS.TEXT]: textSearchFromUrl } =
-      getSearchFilters(searchParams);
-
-    // Ensure textSearch is always an array to push into
-    const currentTextSearch = Array.isArray(textSearchFromUrl)
-      ? [...textSearchFromUrl]
-      : [];
-
-    if (value && !currentTextSearch.includes(value)) {
-      currentTextSearch.push(value);
-    }
-
-    const search = getSearchQuery({
-      ...searchFilters,
-      [EVENT_SEARCH_FILTERS.TEXT]: currentTextSearch,
-    });
-
-    setSelectedTexts(currentTextSearch);
-    goToSearch(search);
-    scrollToResultList();
   };
 
   const handleIsFreeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -163,7 +136,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const clearInputValues = () => {
     setCategoryInput('');
     setPlaceInput('');
-    setAutosuggestInput('');
+    setTextSearchInput('');
     setMaxAgeInput('');
     setMinAgeInput('');
   };
@@ -180,7 +153,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     }
 
     moveToSearchPage();
-    setAutosuggestInput('');
+    setTextSearchInput('');
     scrollToResultList();
   };
 
@@ -194,13 +167,17 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
       <div className={styles.searchWrapper}>
         <h1>{t('search.labelSearchField')}</h1>
         <div className={styles.rowWrapper}>
-          <div className={classNames(styles.row, styles.autoSuggestRow)}>
-            <SearchAutosuggest
+          <div className={classNames(styles.row, styles.textSearchRow)}>
+            <AdvancedSearchTextInput
+              id="search"
               name="search"
-              onChangeSearchValue={setAutosuggestInput}
-              onOptionClick={handleMenuOptionClick}
               placeholder={tAppHobbies('appHobbies:search.search.placeholder')}
-              searchValue={autosuggestInput}
+              value={textSearchInput}
+              onChange={(event) => setTextSearchInput(event.target.value)}
+              clearButton
+              clearButtonAriaLabel={tAppHobbies(
+                'appHobbies:search.search.clearButtonAriaLabel'
+              )}
             />
           </div>
         </div>

@@ -1,4 +1,3 @@
-import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import {
   getCurrentSeason,
   useLocale,
@@ -16,23 +15,14 @@ import SearchShortcuts from './SearchShortcuts';
 
 const Search: React.FC = () => {
   const { t } = useCommonTranslation();
-  const [autosuggestInput, setAutosuggestInput] = React.useState('');
+  const [textSearchInput, setTextSearchInput] = React.useState('');
   const router = useRouter();
   const locale = useLocale();
   const handleSubmit = (): void => {
     router.push({
       pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
       query: {
-        text: [autosuggestInput],
-      },
-    });
-  };
-
-  const handleMenuOptionClick = (option: AutosuggestMenuOption): void => {
-    router.push({
-      pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
-      query: {
-        text: [option.text],
+        text: [textSearchInput],
       },
     });
   };
@@ -48,10 +38,9 @@ const Search: React.FC = () => {
     <div>
       <LandingPageSearchForm
         className={styles.landingPageSearch}
-        autosuggestInput={autosuggestInput}
-        setAutosuggestInput={setAutosuggestInput}
+        textSearchInput={textSearchInput}
+        setTextSearchInput={setTextSearchInput}
         handleSubmit={handleSubmit}
-        handleMenuOptionClick={handleMenuOptionClick}
       />
       <SearchShortcuts
         className={styles.categoriesWrapper}

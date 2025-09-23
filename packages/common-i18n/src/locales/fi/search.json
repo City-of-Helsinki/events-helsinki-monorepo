@@ -33,6 +33,7 @@
       "General": "Tapahtumat"
     },
     "buttonSearch": "Hae",
+    "clearButtonAriaLabel": "Tyhjennä",
     "checkboxOnlyChildrenEvents": "Näytä vain lastentapahtumat",
     "checkboxOnlyEveningEvents": "Näytä vain iltatapahtumat",
     "checkboxOnlyRemoteEvents": "Näytä vain etätapahtumat",

@@ -9,13 +9,6 @@
   "notification": {
     "labelClose": "Close notification"
   },
-  "autosuggest": {
-    "menu": {
-      "ariaButtonClose": "Close menu",
-      "info": "You can also search by the keyword you entered",
-      "title": "Search suggestions"
-    }
-  },
   "menu": {
     "menuButtonLabel": "Menu",
     "menuToggleAriaLabel": "Open menu"

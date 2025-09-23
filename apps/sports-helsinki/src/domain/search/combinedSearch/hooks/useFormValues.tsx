@@ -15,7 +15,7 @@ export const EMPTY_OPTION: Option = { text: '', value: '' };
 export function useFormValues() {
   const { t } = useSearchTranslation();
   const { formValues } = useCombinedSearchContext();
-  const [autosuggestInput, setAutosuggestInput] = React.useState(
+  const [textSearchInput, setTextSearchInput] = React.useState(
     formValues.text ?? ''
   );
   const [selectedSportsCategories, setSelectedSportsCategories] =
@@ -46,7 +46,7 @@ export function useFormValues() {
   // On page load, initialize the form with values
   // that are available only after the page has fully loaded
   React.useEffect(() => {
-    setAutosuggestInput(formValues.text ?? '');
+    setTextSearchInput(formValues.text ?? '');
     setSelectedSportsCategories(formValues.sportsCategories);
     setSelectedTargetGroups(formValues.targetGroups);
     setSelectedAccessibilityProfile(formValues.accessibilityProfile);
@@ -58,8 +58,8 @@ export function useFormValues() {
   ]);
 
   return {
-    autosuggestInput,
-    setAutosuggestInput,
+    textSearchInput,
+    setTextSearchInput,
     selectedSportsCategories,
     setSelectedSportsCategories,
     sportsCategoryInput,

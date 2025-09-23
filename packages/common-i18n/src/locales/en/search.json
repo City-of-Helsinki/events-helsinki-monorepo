@@ -20,6 +20,7 @@
       "General": "Events"
     },
     "buttonSearch": "Search",
+    "clearButtonAriaLabel": "Clear",
     "checkboxOnlyChildrenEvents": "Show only events for children",
     "checkboxOnlyEveningEvents": "Show only evening events",
     "checkboxOnlyRemoteEvents": "Show only remote events",

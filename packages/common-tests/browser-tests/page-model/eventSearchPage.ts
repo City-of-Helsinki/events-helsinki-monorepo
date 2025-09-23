@@ -37,11 +37,11 @@ class EventSearchPage {
     });
   }
 
-  protected get autoSuggestInput() {
+  protected get textSearchInput() {
     const searchPlaceholderText = i18n.t(
       `${this.appNamespace}:search.search.placeholder`
     );
-    return screen.findByPlaceholderText(searchPlaceholderText);
+    return screen.findAllByPlaceholderText(searchPlaceholderText);
   }
 
   protected get buttonLoadMore() {
@@ -115,7 +115,7 @@ class EventSearchPage {
   public async doSearch({ searchText }: SearchProps = defaultSearchProps) {
     // eslint-disable-next-line no-console
     console.info('EventSearchPage: doSearch');
-    await t.typeText(this.autoSuggestInput, searchText);
+    await t.typeText(this.textSearchInput, searchText);
     await t.pressKey('tab');
     await t.click(this.searchButton);
     await t.wait(2000);
@@ -125,7 +125,7 @@ class EventSearchPage {
     // eslint-disable-next-line no-console
     console.info('EventSearchPage: doUnsuccessfulSearch');
     await t.typeText(
-      this.autoSuggestInput,
+      this.textSearchInput,
       'thisisatextthatverylikelycannotbefound'
     );
     // The menu can be too big, so that it hides the search button,

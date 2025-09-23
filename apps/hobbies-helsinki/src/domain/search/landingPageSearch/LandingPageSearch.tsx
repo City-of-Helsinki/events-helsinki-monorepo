@@ -1,4 +1,3 @@
-import type { AutosuggestMenuOption } from '@events-helsinki/components';
 import {
   useLocale,
   useCommonTranslation,
@@ -25,7 +24,7 @@ const Search: React.FC = () => {
   const [start, setStart] = React.useState<Date | null>(null);
   const [end, setEnd] = React.useState<Date | null>(null);
   const [isCustomDate, setIsCustomDate] = React.useState<boolean>(false);
-  const [autosuggestInput, setAutosuggestInput] = React.useState('');
+  const [textSearchInput, setTextSearchInput] = React.useState('');
   const router = useRouter();
 
   const handleChangeDateTypes = (value: string[]) => {
@@ -49,20 +48,9 @@ const Search: React.FC = () => {
       dateTypes,
       end,
       start,
-      [EVENT_SEARCH_FILTERS.TEXT]: autosuggestInput ? [autosuggestInput] : [],
+      [EVENT_SEARCH_FILTERS.TEXT]: textSearchInput ? [textSearchInput] : [],
     });
 
-    goToSearchPage(search);
-  };
-
-  const handleMenuOptionClick = (option: AutosuggestMenuOption) => {
-    const search = getSearchQuery({
-      ...COURSE_DEFAULT_SEARCH_FILTERS,
-      dateTypes,
-      end,
-      start,
-      [EVENT_SEARCH_FILTERS.TEXT]: [option.text],
-    });
     goToSearchPage(search);
   };
 
@@ -81,12 +69,11 @@ const Search: React.FC = () => {
         end={end}
         setEnd={setEnd}
         isCustomDate={isCustomDate}
-        autosuggestInput={autosuggestInput}
-        setAutosuggestInput={setAutosuggestInput}
+        textSearchInput={textSearchInput}
+        setTextSearchInput={setTextSearchInput}
         handleChangeDateTypes={handleChangeDateTypes}
         toggleIsCustomDate={toggleIsCustomDate}
         handleSubmit={handleSubmit}
-        handleMenuOptionClick={handleMenuOptionClick}
       />
       <SearchShortcuts
         className={styles.categoriesWrapper}

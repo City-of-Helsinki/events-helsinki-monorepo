@@ -45,8 +45,6 @@ describe('Landing page', () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     const searchInput = screen.getByRole('textbox');
     await userEvent.type(searchInput, searchValue);
-    // Check that auto-suggest menu is open
-    expect(screen.getByText(/hakuehdotuksia/i)).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
       asPath: `${searchPath}?text=${searchValue}`,

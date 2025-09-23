@@ -116,37 +116,6 @@ it('should clear all filters and search field', async () => {
   expect(router).toMatchObject({ pathname, query: {} });
 });
 
-// TODO: There is a problem with the auto suggest menu options
-it.todo('should change search query after clicking autosuggest menu item');
-// test("should change search query after clicking autosuggest menu item", async () => {
-//   const { router } = renderComponent();
-
-//   const searchInput = screen.getByRole("textbox", { name: /mitä etsit\?/i });
-//   await act(async () => userEvent.type(searchInput, searchValue));
-
-//   const option = await screen.findByRole("option", {
-//     name: /musiikkiklubit/i,
-//   });
-
-//   await act(async () => userEvent.click(option));
-
-//   expect(router).toMatchObject({
-//     pathname,
-//     query: { text: "jazz,musiikkiklubit" },
-//   });
-
-//   //  Should add menu item only once
-//   await act(async () => userEvent.type(searchInput, searchValue));
-//   act(async () =>
-//     userEvent.click(screen.getByRole("option", { name: /musiikkiklubit/i }))
-//   );
-
-//   expect(router).toMatchObject({
-//     pathname,
-//     query: { text: "jazz,musiikkiklubit" },
-//   });
-// });
-
 it('should change search query after checking is free checkbox', async () => {
   const { router } = renderComponent();
 

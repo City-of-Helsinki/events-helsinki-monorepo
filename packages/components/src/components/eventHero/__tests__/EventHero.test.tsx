@@ -1,7 +1,11 @@
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
+
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
-import { render, screen, userEvent } from '@/test-utils';
+import { render } from '@/test-utils';
+
 import { translations } from '@/test-utils/initI18n';
 import {
   fakeEvent,
@@ -76,12 +80,12 @@ it('should render event name, description and location', () => {
 it('should go to event list', async () => {
   const { router } = renderComponent();
 
-  await userEvent.click(
-    screen.getByRole('link', {
-      name: translations.event.hero.ariaLabelBackButton,
-    })
-  );
-  expect(router.pathname).toBe('/haku');
+  // Simulating browser back button event:
+  // See https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event
+  fireEvent(window, new PopStateEvent('popstate'));
+  await waitFor(() => {
+    expect(router.pathname).toBe('/haku');
+  });
 });
 
 it('should render keywords', () => {

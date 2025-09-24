@@ -1,9 +1,10 @@
 import type { Venue } from '@events-helsinki/components';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+
 import { clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
-import { render, screen, userEvent } from '@/test-utils';
-import { translations } from '@/test-utils/initI18n';
+import { render } from '@/test-utils';
 import { fakeOntology, fakeVenue } from '@/test-utils/mockDataUtils';
 import VenueHero from '../VenueHero';
 import type { Props as VenueHeroProps } from '../VenueHero';
@@ -49,12 +50,12 @@ it('should go to venue list', async () => {
   const { router } = render(<VenueHero venue={venue} />, {
     routes: [`/paikat/${venue.id}?returnPath=/haku`],
   });
-  await userEvent.click(
-    screen.getByRole('link', {
-      name: translations.venue.hero.ariaLabelBackButton,
-    })
-  );
-  expect(router.pathname).toBe('/haku');
+  // Simulating browser back button event:
+  // See https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event
+  fireEvent(window, new PopStateEvent('popstate'));
+  await waitFor(() => {
+    expect(router.pathname).toBe('/haku');
+  });
 });
 
 it('should render ontologywords', () => {

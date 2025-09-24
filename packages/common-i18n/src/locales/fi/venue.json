@@ -27,7 +27,6 @@
     }
   },
   "hero": {
-    "ariaLabelBackButton": "Takaisin liikuntapaikkasivulle",
     "ariaLabelKeywords": "Asiasanat"
   },
   "venueCard": {

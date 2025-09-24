@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import {
   Button,
-  IconArrowLeft,
   IconCalendarClock,
   IconLinkExternal,
   IconLocation,
@@ -9,7 +8,7 @@ import {
 } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   BackgroundImage,
   ContentContainer,
@@ -21,7 +20,6 @@ import buttonStyles from '../../components/button/button.module.scss';
 import EventLocationText from '../../components/domain/event/eventLocation/EventLocationText';
 import EventKeywords from '../../components/eventKeywords/EventKeywords';
 import EventName from '../../components/eventName/EventName';
-import IconButton from '../../components/iconButton/IconButton';
 import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';
 import SkeletonLoader from '../../components/skeletonLoader/SkeletonLoader';
 import useLocale from '../../hooks/useLocale';
@@ -74,13 +72,30 @@ const EventHero: React.FC<EventHeroProps> = ({
   const showKeywords = Boolean(today || thisWeek || keywords.length);
   const returnParam = extractLatestReturnPath(search, `/${locale}`);
 
-  const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
-    const goBackUrl = `${
-      returnPath.startsWith('/') ? '' : '/'
-    }${returnPath}${remainingQueryString}`;
-    const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
-    router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
-  };
+  const goBack = useCallback(
+    ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
+      const goBackUrl = `${
+        returnPath.startsWith('/') ? '' : '/'
+      }${returnPath}${remainingQueryString}`;
+      const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
+      router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
+    },
+    [router]
+  );
+
+  // Use returnPath to scroll to correct position when navigating with back button.
+  // See https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event
+  useEffect(() => {
+    const handlePopState = () => {
+      goBack(returnParam);
+    };
+
+    globalThis.addEventListener('popstate', handlePopState);
+
+    return () => {
+      globalThis.removeEventListener('popstate', handlePopState);
+    };
+  }, [goBack, returnParam]);
 
   const startTime =
     superEvent?.status === 'pending'
@@ -95,16 +110,7 @@ const EventHero: React.FC<EventHeroProps> = ({
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
-          </div>
+          <div className={styles.leftEmpty} />
           <div>
             <BackgroundImage
               className={styles.image}

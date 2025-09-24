@@ -1,43 +1,21 @@
-import classNames from 'classnames';
 import type { TextInputProps } from 'hds-react';
 import { IconSearch, TextInput } from 'hds-react';
 import React from 'react';
+import AdvancedSearchInput from './AdvancedSearchInput';
 
-import styles from './advancedSearchTextInput.module.scss';
-import useMoveFocusFromInputToContainer from './useMoveFocusFromInputToContainer';
-
-function AdvancedSearchTextInput(props: TextInputProps) {
-  const {
-    containerRef,
-    inputRef,
-    isFocused,
-    setFocusToInput,
-    onInputFocus,
-    onInputBlur,
-  } = useMoveFocusFromInputToContainer();
-
+/**
+ * AdvancedSearchTextInput is a component that provides a search input field
+ * with a search icon. It is a pre-configured version of the AdvancedSearchInput
+ * component, using HDS TextInput and IconSearch.
+ * @param props The props for the HDS TextInput component.
+ * @returns The rendered component.
+ */
+function AdvancedSearchTextInput(props: TextInputProps): React.ReactElement {
   return (
-    <div
-      ref={containerRef}
-      className={classNames(
-        styles.advancedSearchTextInputContainer,
-        isFocused && styles.focused
-      )}
-      onClick={setFocusToInput}
-    >
-      <div className={styles.iconWrapper}>
-        <IconSearch size="s" aria-hidden />
-      </div>
-      <div className={styles.inputWrapper}>
-        <TextInput
-          {...props}
-          ref={inputRef}
-          onFocus={onInputFocus}
-          onBlur={onInputBlur}
-          autoComplete="off"
-        />
-      </div>
-    </div>
+    <AdvancedSearchInput
+      IconComponent={<IconSearch />}
+      InputComponent={<TextInput {...props} type="text" autoComplete="off" />}
+    />
   );
 }
 

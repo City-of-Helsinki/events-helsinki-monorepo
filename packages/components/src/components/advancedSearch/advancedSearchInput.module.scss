@@ -1,0 +1,43 @@
+.advancedSearchInputContainer {
+  position: relative;
+  min-height: 3.375rem;
+  background: var(--color-white);
+  display: flex;
+  padding: 0 1rem;
+  align-items: center;
+  box-sizing: border-box;
+  border: 2px solid var(--color-white);
+  &.focused {
+    outline: 3px solid var(--color-coat-of-arms);
+    outline-offset: 2px;
+  }
+
+  .iconWrapper {
+    display: flex;
+    align-self: center;
+  }
+
+  svg {
+    margin-right: var(--spacing-xs);
+    fill: var(--color-primary-black);
+  }
+
+  .inputWrapper {
+    flex: 1 1 0%;
+    min-width: 50%;
+    input {
+      height: 100%;
+      line-height: 1.25rem;
+      width: 100%;
+      padding-left: 0;
+      border: none;
+      outline: none;
+      font-size: var(--fontsize-body-m);
+      &:focus,
+      &:focus-within {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}

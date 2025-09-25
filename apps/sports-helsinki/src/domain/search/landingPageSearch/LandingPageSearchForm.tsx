@@ -15,7 +15,7 @@ export type LandingPageSearchFormProps = Readonly<{
   className?: string;
   textSearchInput: string;
   setTextSearchInput: (value: string) => void;
-  handleSubmit: () => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }>;
 
 export default function LandingPageSearchForm({
@@ -29,7 +29,10 @@ export default function LandingPageSearchForm({
   const locale = useLocale();
 
   return (
-    <div className={classnames(className, styles.landingPageSearch)}>
+    <form
+      className={classnames(className, styles.landingPageSearch)}
+      onSubmit={handleSubmit}
+    >
       <h1>{tAppSports('appSports:home.search.title')}</h1>
       <div className={styles.searchRow}>
         <div className={styles.textSearchWrapper}>
@@ -50,7 +53,7 @@ export default function LandingPageSearchForm({
             variant="success"
             fullWidth={true}
             iconLeft={<IconSearch />}
-            onClick={handleSubmit}
+            type="submit"
           >
             {t('home:search.buttonSearch')}
           </Button>
@@ -65,6 +68,6 @@ export default function LandingPageSearchForm({
           {t('home:search.linkAdvancedSearch')}
         </SecondaryLink>
       </div>
-    </div>
+    </form>
   );
 }

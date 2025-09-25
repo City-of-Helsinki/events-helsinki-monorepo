@@ -42,7 +42,8 @@ const Search: React.FC = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const search = getSearchQuery({
       ...EVENT_DEFAULT_SEARCH_FILTERS,
       dateTypes,

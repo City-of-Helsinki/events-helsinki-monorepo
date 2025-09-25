@@ -18,7 +18,9 @@ const Search: React.FC = () => {
   const [textSearchInput, setTextSearchInput] = React.useState('');
   const router = useRouter();
   const locale = useLocale();
-  const handleSubmit = (): void => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+
     router.push({
       pathname: routerHelper.getI18nPath(ROUTES.SEARCH, locale),
       query: {

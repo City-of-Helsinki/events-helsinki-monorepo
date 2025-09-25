@@ -1,4 +1,4 @@
-export type AgeFilterType = 'maxAge' | 'minAge';
+export type AgeFilterType = 'maxAge' | 'minAge' | 'exactAge';
 export type DateFilterType = 'date' | 'dateType';
 export type TextFilterType = 'text' | 'xFullText';
 

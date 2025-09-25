@@ -39,7 +39,7 @@
     "titleDropdownTargetGroup": "Target group",
     "titleDropdownSportsCategory": "Type of sport",
     "showOnlyAdultCourses": "Show only adult courses",
-    "ageLimitValues": "Age",
+    "titleAge": "Age",
     "ageLimitHeader": "Age of participants in years, for example 8, 12-14 or 60-65",
     "ageLimitMin": "From",
     "ageLimitMax": "To",

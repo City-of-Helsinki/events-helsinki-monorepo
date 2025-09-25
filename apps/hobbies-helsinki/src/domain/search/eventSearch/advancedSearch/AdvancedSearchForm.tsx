@@ -1,21 +1,15 @@
 import {
+  AdvancedSearchNumberInput,
   AdvancedSearchTextInput,
   Checkbox,
   DateSelector,
   EVENT_SEARCH_FILTERS,
   IconRead,
   MultiSelectDropdown,
-  RangeDropdown,
   useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import {
-  Button,
-  IconCake,
-  IconSearch,
-  IconLocation,
-  IconMinus,
-} from 'hds-react';
+import { Button, IconCake, IconSearch, IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
@@ -54,10 +48,8 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const {
     categoryInput,
     setCategoryInput,
-    minAgeInput,
-    setMinAgeInput,
-    maxAgeInput,
-    setMaxAgeInput,
+    ageInput,
+    setAgeInput,
     placeInput,
     setPlaceInput,
     selectedDateTypes,
@@ -87,8 +79,10 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
       [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
       [EVENT_SEARCH_FILTERS.START]: start,
       [EVENT_SEARCH_FILTERS.TEXT]: selectedTexts,
-      [EVENT_SEARCH_FILTERS.MIN_AGE]: minAgeInput,
-      [EVENT_SEARCH_FILTERS.MAX_AGE]: maxAgeInput,
+      [EVENT_SEARCH_FILTERS.SUITABLE]:
+        typeof ageInput === 'number' && Number.isInteger(ageInput)
+          ? ageInput
+          : undefined,
     }),
     [
       selectedCategories,
@@ -97,8 +91,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
       selectedPlaces,
       start,
       selectedTexts,
-      minAgeInput,
-      maxAgeInput,
+      ageInput,
       searchParams,
     ]
   );
@@ -137,8 +130,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     setCategoryInput('');
     setPlaceInput('');
     setTextSearchInput('');
-    setMaxAgeInput('');
-    setMinAgeInput('');
+    setAgeInput(undefined);
   };
 
   const clearFilters = () => {
@@ -155,11 +147,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     moveToSearchPage();
     setTextSearchInput('');
     scrollToResultList();
-  };
-
-  const handleSetAgeValues = (minAge: string, maxAge: string) => {
-    setMinAgeInput(minAge);
-    setMaxAgeInput(maxAge);
   };
 
   return (
@@ -211,21 +198,17 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
               />
             </div>
             <div>
-              <RangeDropdown
+              <AdvancedSearchNumberInput
+                id="age"
                 icon={<IconCake aria-hidden />}
-                rangeIcon={<IconMinus aria-hidden />}
-                minInputValue={minAgeInput}
-                minInputStartValue={MIN_AGE.toString()}
-                minInputFixedValue={'18'}
-                maxInputValue={maxAgeInput}
-                maxInputEndValue={MAX_AGE.toString()}
-                name="ageLimitValues"
-                onChange={handleSetAgeValues}
-                fixedValuesText={t('search.showOnlyAdultCourses')}
-                title={t('search.ageLimitValues')}
-                header={t('search.ageLimitHeader')}
-                value={[minAgeInput, maxAgeInput]}
-                withPlaceholders={false}
+                min={MIN_AGE}
+                max={MAX_AGE}
+                name="age"
+                onChange={(event) => setAgeInput(parseInt(event.target.value))}
+                aria-label={t('search.titleAge')}
+                label={t('search.titleAge')}
+                placeholder={t('search.titleAge')}
+                value={ageInput}
               />
             </div>
             <div>

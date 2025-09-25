@@ -7,7 +7,12 @@ import {
 import { advanceTo, clear } from 'jest-date-mock';
 
 import { COURSE_DEFAULT_SEARCH_FILTERS } from '../constants';
-import { getEventSearchVariables, getNextPage, getSearchQuery } from '../utils';
+import {
+  getEventSearchVariables,
+  getNextPage,
+  getSearchQuery,
+  toIntegerArray,
+} from '../utils';
 
 afterAll(() => {
   clear();
@@ -166,4 +171,40 @@ describe('getNextPage function', () => {
       })
     ).toBeNull();
   });
+});
+
+describe('toIntegerArray function', () => {
+  it.each([
+    // Empty values
+    { input: '', expectedOutput: [] },
+    { input: null, expectedOutput: [] },
+    { input: undefined, expectedOutput: [] },
+    { input: [], expectedOutput: [] },
+    // Single values
+    { input: 12, expectedOutput: [12] },
+    { input: '12', expectedOutput: [12] },
+    { input: '-12', expectedOutput: [-12] },
+    { input: [12], expectedOutput: [12] },
+    // Multiple values
+    { input: [20, 1, 99], expectedOutput: [20, 1, 99] },
+    // Filters away non-canonical form string numbers
+    { input: '+12', expectedOutput: [] }, // No unneeded plus sign
+    { input: '012', expectedOutput: [] },
+    { input: '00012', expectedOutput: [] },
+    { input: '123test', expectedOutput: [] },
+    // Filters away non-integers
+    { input: '12.5', expectedOutput: [] },
+    { input: ['12.5'], expectedOutput: [] },
+    { input: 12.5, expectedOutput: [] },
+    { input: [12.5], expectedOutput: [] },
+    { input: [1.1, 2.3, 4.5], expectedOutput: [] },
+    { input: ['a', 'test', '123test', undefined, null], expectedOutput: [] },
+    { input: [-15, 'test', 3.123, '9.3', 7, '3'], expectedOutput: [-15, 7, 3] },
+    //
+  ])(
+    'toIntegerArray($input) == $expectedOutput',
+    ({ input, expectedOutput }) => {
+      expect(toIntegerArray(input)).toStrictEqual(expectedOutput);
+    }
+  );
 });

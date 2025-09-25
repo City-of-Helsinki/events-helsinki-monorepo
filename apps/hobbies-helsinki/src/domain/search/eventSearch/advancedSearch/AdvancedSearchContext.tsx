@@ -3,10 +3,8 @@ import React from 'react';
 type SearchFormState = {
   categoryInput: string;
   setCategoryInput: React.Dispatch<React.SetStateAction<string>>;
-  minAgeInput: string;
-  setMinAgeInput: React.Dispatch<React.SetStateAction<string>>;
-  maxAgeInput: string;
-  setMaxAgeInput: React.Dispatch<React.SetStateAction<string>>;
+  ageInput: number | undefined;
+  setAgeInput: React.Dispatch<React.SetStateAction<number | undefined>>;
   placeInput: string;
   setPlaceInput: React.Dispatch<React.SetStateAction<string>>;
   selectedDateTypes: string[];

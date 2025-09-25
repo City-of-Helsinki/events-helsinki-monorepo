@@ -9,7 +9,6 @@ import {
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID,
 } from '@events-helsinki/components';
 import type {
-  FilterType,
   AppLanguage,
   Meta,
   QueryEventListArgs,
@@ -173,8 +172,7 @@ export const getEventSearchVariables = ({
     places,
     publisher,
     [EVENT_SEARCH_FILTERS.TEXT]: text,
-    audienceMinAgeLt,
-    audienceMaxAgeGt,
+    [EVENT_SEARCH_FILTERS.SUITABLE]: suitableFor,
   } = getSearchFilters(params);
   const pathPlace = place && MAPPED_PLACES[place.toLowerCase()];
 
@@ -241,11 +239,10 @@ export const getEventSearchVariables = ({
     startsAfter,
     superEventType,
     superEvent,
-    suitableFor: [Number(audienceMinAgeLt), Number(audienceMaxAgeGt)].filter(
-      (v) => v
-    ),
-    audienceMinAgeLt,
-    audienceMaxAgeGt,
+    suitableFor:
+      typeof suitableFor === 'number' && Number.isInteger(suitableFor)
+        ? [suitableFor]
+        : undefined,
     eventType: AppConfig.supportedEventTypes,
   };
 };
@@ -307,37 +304,39 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     start,
     [EVENT_SEARCH_FILTERS.TEXT]: freeText,
     [EVENT_SEARCH_FILTERS.ONGOING]: true,
-    suitableFor: normalizeSuitableFor(
-      getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.SUITABLE, false)
+    [EVENT_SEARCH_FILTERS.SUITABLE]: parseInt(
+      searchParams.get(EVENT_SEARCH_FILTERS.SUITABLE) ?? ''
     ),
-    audienceMinAgeLt: searchParams.get(EVENT_SEARCH_FILTERS.MIN_AGE) || '',
-    audienceMaxAgeGt: searchParams.get(EVENT_SEARCH_FILTERS.MAX_AGE) || '',
   };
 };
 
-export const normalizeSuitableFor = (values: (number | string)[]): number[] => {
-  if (!values?.length) return [];
-
-  const [minAge, maxAge] = values.map((value) => {
-    const parsed = parseInt(value.toString());
-    return isNaN(parsed) ? null : parsed;
-  });
-
-  // If no range is given, return an empty list.
-  if (minAge == null && maxAge == null) {
-    return [];
+/**
+ * Convert input value(s) to an an array of integers discarding non-convertible values.
+ * @param value A string, number, array of string/number/null/undefined values,
+ * null or undefined.
+ * @return An array of integers.
+ */
+export const toIntegerArray = (
+  value:
+    | string
+    | number
+    | null
+    | undefined
+    | (string | number | null | undefined)[]
+): number[] => {
+  if (typeof value === 'string') {
+    const parsed = parseFloat(value);
+    return parsed.toString() == value ? toIntegerArray(parsed) : [];
+  } else if (typeof value === 'number' && Number.isInteger(value)) {
+    return [value];
+  } else if (Array.isArray(value)) {
+    const result: number[] = [];
+    for (const element of value) {
+      result.push(...toIntegerArray(element));
+    }
+    return result;
   }
-
-  // Sort should be done last, so the right number is full filled with a default.
-  return [minAge ?? MIN_AGE, maxAge ?? MAX_AGE].sort((a, b) => a - b);
-};
-
-export const getSuitableForFilterValue = (
-  initValue: number[] | undefined,
-  type: FilterType
-) => {
-  if (['minAge', 'maxAge', 'exactAge'].includes(type)) return undefined;
-  return initValue;
+  return [];
 };
 
 export const getSearchQuery = (

@@ -13,8 +13,7 @@ export function useAdvancedSearchFormState() {
     [router.query]
   );
   const [categoryInput, setCategoryInput] = React.useState('');
-  const [minAgeInput, setMinAgeInput] = React.useState('');
-  const [maxAgeInput, setMaxAgeInput] = React.useState('');
+  const [ageInput, setAgeInput] = React.useState<number | undefined>(undefined);
   const [placeInput, setPlaceInput] = React.useState('');
 
   const [selectedDateTypes, setSelectedDateTypes] = React.useState<string[]>(
@@ -39,8 +38,7 @@ export function useAdvancedSearchFormState() {
       [EVENT_SEARCH_FILTERS.PLACES]: places,
       [EVENT_SEARCH_FILTERS.START]: startTime,
       [EVENT_SEARCH_FILTERS.TEXT]: text,
-      [EVENT_SEARCH_FILTERS.MIN_AGE]: audienceMinAgeLt,
-      [EVENT_SEARCH_FILTERS.MAX_AGE]: audienceMaxAgeGt,
+      [EVENT_SEARCH_FILTERS.SUITABLE]: ageInput,
     } = getSearchFilters(searchParams);
 
     const pathPlace = params.place && MAPPED_PLACES[params.place.toLowerCase()];
@@ -54,8 +52,7 @@ export function useAdvancedSearchFormState() {
     setSelectedTexts(text || []);
     setEnd(endTime);
     setStart(startTime);
-    setMinAgeInput(audienceMinAgeLt || '');
-    setMaxAgeInput(audienceMaxAgeGt || '');
+    setAgeInput(ageInput);
 
     if (endTime || startTime) {
       setIsCustomDate(true);
@@ -68,10 +65,8 @@ export function useAdvancedSearchFormState() {
   return {
     categoryInput,
     setCategoryInput,
-    minAgeInput,
-    setMinAgeInput,
-    maxAgeInput,
-    setMaxAgeInput,
+    ageInput,
+    setAgeInput,
     placeInput,
     setPlaceInput,
     selectedDateTypes,

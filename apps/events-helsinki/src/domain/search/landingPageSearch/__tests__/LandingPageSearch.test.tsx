@@ -62,6 +62,18 @@ describe('Landing page', () => {
     });
   });
 
+  it('should route to event search page with correct search query after pressing enter to submit form', async () => {
+    const { router } = render(<LandingPageSearch />, { mocks });
+    const searchInput = screen.getByRole('textbox');
+    await userEvent.type(searchInput, searchValue);
+    await userEvent.keyboard('{enter}');
+    expect(router).toMatchObject({
+      asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.TEXT}=${searchValue}`,
+      pathname: searchPath,
+      query: { [EVENT_SEARCH_FILTERS.TEXT]: searchValue },
+    });
+  });
+
   it('should route to event search page after clicking category', async () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     const links = await screen.findAllByRole('link', { name: /musiikki/i });

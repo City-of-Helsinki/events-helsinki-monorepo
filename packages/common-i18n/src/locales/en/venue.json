@@ -27,7 +27,6 @@
     }
   },
   "hero": {
-    "ariaLabelBackButton": "Back to the sports location page",
     "ariaLabelKeywords": "Keywords"
   },
   "venueCard": {

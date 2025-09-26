@@ -23,18 +23,17 @@ export async function isOnEventClosedPage() {
 /**
  * Sometimes the event card comes from the cache but the event is already "closed".
  * Check whether the user is on closed event page or event details page
- * and return back to search page, by clicking the return back -button.
+ * and return back to search page, by using window.history.back().
  * */
 export async function useClosedPageAwareGoBackFeature() {
   const detailsPage = new EventDetailsPage();
   if (await isOnEventClosedPage()) {
     // eslint-disable-next-line no-console
     console.info('The event was already closed!');
-    await goBack();
   } else {
     await detailsPage.verifyBasicContent();
-    await detailsPage.clickReturnButton();
   }
+  await goBack();
 }
 
 async function isCardInScreen(name: string) {

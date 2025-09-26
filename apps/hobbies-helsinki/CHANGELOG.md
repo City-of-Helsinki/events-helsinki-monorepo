@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.25.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.24.0...hobbies-helsinki-v2.25.0) (2025-09-26)
+
+
+### Features
+
+* **search:** Replace autosuggest field with simpler text search field ([b5cb2a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b5cb2a8268b97adf0d5c96144a26b6d82389074a))
+
+
+### Bug Fixes
+
+* **search:** Add form element to landing page search ([4aa7279](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4aa727934a3ae377676c8361dcffb9dceba2b467))
+
 ## [2.24.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.23.1...hobbies-helsinki-v2.24.0) (2025-09-26)
 
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.24.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.23.1...hobbies-helsinki-v2.24.0) (2025-09-26)
+
+
+### Features
+
+* Change page size from 10→25 for all normal searches & CMS listings ([44a0816](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44a08167a57ed8e55fb47b53bdf80db220206baa))
+* **hobbies:** Reorganize search menu elements after hobby type removal ([bb9c978](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bb9c9786099011d8dc468c544481f945c9d6cfd1))
+* Remove hobby type completely from codebase & clarify similar use ([9108175](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9108175e791380db4e2b2ee44c80a8df5a122a35))
+
 ## [2.23.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.23.0...hobbies-helsinki-v2.23.1) (2025-09-18)
 
 

@@ -5,7 +5,7 @@ import styles from './dropdownMenu.module.scss';
 interface Props {
   children?: React.ReactNode;
   isOpen: boolean;
-  onClear: () => void;
+  onClear?: () => void;
 }
 
 const DropdownMenu: React.FC<Props> = ({ children, isOpen, onClear }) => {
@@ -15,9 +15,11 @@ const DropdownMenu: React.FC<Props> = ({ children, isOpen, onClear }) => {
   return (
     <div className={styles.dropdownMenu}>
       <div className={styles.dropdownMenuWrapper}>{children}</div>
-      <button className={styles.btnClear} onClick={onClear} type="button">
-        {t('common:dropdown.menu.buttonClear')}
-      </button>
+      {onClear && (
+        <button className={styles.btnClear} onClick={onClear} type="button">
+          {t('common:dropdown.menu.buttonClear')}
+        </button>
+      )}
     </div>
   );
 };

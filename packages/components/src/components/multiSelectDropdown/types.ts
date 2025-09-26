@@ -20,4 +20,5 @@ export interface MultiselectDropdownProps {
   buttonStyles?: React.CSSProperties;
   helpText?: string;
   filterByInput?: boolean;
+  showClearButton?: boolean;
 }

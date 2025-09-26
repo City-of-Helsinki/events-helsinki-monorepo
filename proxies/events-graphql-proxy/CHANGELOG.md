@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.4.0...events-graphql-proxy-v1.4.1) (2025-09-26)
+
+
+### Bug Fixes
+
+* **vitest:** Replace use of deprecated cache.dir with cacheDir ([46ca437](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/46ca43709feefdf16334c32952dc62123598e95c))
+
 ## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.3.0...events-graphql-proxy-v1.4.0) (2025-08-14)
 
 

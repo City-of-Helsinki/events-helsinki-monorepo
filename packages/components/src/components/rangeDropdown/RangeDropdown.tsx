@@ -33,6 +33,7 @@ export interface RangeDropdownProps {
   header?: string;
   value: string[];
   withPlaceholders?: boolean;
+  showClearButton?: boolean;
 }
 
 const RangeDropdown: React.FC<RangeDropdownProps> = ({
@@ -54,6 +55,7 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
   header = '',
   value,
   withPlaceholders = true,
+  showClearButton = false,
 }) => {
   const [internalIsFixedValues, setInternalIsFixedValues] =
     React.useState(false);
@@ -239,7 +241,10 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
           )}
         </div>
       </button>
-      <DropdownMenu isOpen={isMenuOpen} onClear={handleClear}>
+      <DropdownMenu
+        isOpen={isMenuOpen}
+        onClear={showClearButton ? handleClear : undefined}
+      >
         {header && <div className={styles.header}>{header}</div>}
         <div className={styles.rangeInputsWrapper}>
           <TextInput

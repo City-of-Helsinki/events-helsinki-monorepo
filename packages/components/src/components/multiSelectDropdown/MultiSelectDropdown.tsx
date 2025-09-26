@@ -52,6 +52,7 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
   helpText,
   filterByInput = true,
   buttonStyles,
+  showClearButton = false,
 }) => {
   const { t } = useCommonTranslation();
   const inputPlaceholderText =
@@ -357,7 +358,11 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
           {isMenuOpen ? <IconAngleUp /> : <IconAngleDown />}
         </div>
       </button>
-      <DropdownMenu isOpen={isMenuOpen} onClear={handleClear}>
+      <DropdownMenu
+        isOpen={isMenuOpen}
+        // FIXME: accessibility issues are reported in clear-button. Now not rendered by default. See ticket HH-376.
+        onClear={showClearButton ? handleClear : undefined}
+      >
         {showSearch && (
           <div className={styles.inputWrapper}>
             <IconSearch size="s" aria-hidden />

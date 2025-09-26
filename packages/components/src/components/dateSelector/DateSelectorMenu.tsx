@@ -25,9 +25,10 @@ interface Props {
   onChangeDateTypes: (value: string[]) => void;
   onChangeEndDate: (date: Date | null) => void;
   onChangeStartDate: (date: Date | null) => void;
-  onCloseMenu: () => void;
+  onCloseMenu?: () => void;
   startDate: Date | null;
   toggleIsCustomDate: () => void;
+  showCloseButton?: boolean;
 }
 
 const DateSelectorMenu: FunctionComponent<Props> = ({
@@ -45,6 +46,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
   onCloseMenu,
   startDate,
   toggleIsCustomDate,
+  showCloseButton = false,
 }) => {
   const { t } = useCommonTranslation();
 
@@ -149,17 +151,20 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
           />
         </div>
       )}
-      <button
-        className={classNames(styles.button, styles.btnClose, {
-          [styles.hidden]: !isCustomDate,
-        })}
-        onClick={onCloseMenu}
-        type="button"
-      >
-        <div className={styles.buttonText}>
-          {t('common:dateSelector.menu.buttonClose')}
-        </div>
-      </button>
+      {showCloseButton && (
+        // FIXME: accessibility issues are reported in close-button. Now not rendered by default. See ticket HH-376.
+        <button
+          className={classNames(styles.button, styles.btnClose, {
+            [styles.hidden]: !isCustomDate,
+          })}
+          onClick={onCloseMenu}
+          type="button"
+        >
+          <div className={styles.buttonText}>
+            {t('common:dateSelector.menu.buttonClose')}
+          </div>
+        </button>
+      )}
     </div>
   );
 };

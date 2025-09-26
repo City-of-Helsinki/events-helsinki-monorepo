@@ -146,15 +146,5 @@ exports[`matches snapshot 1`] = `
       Takaisin
     </div>
   </button>
-  <button
-    class="_button_bbd991 _btnClose_bbd991 _hidden_bbd991"
-    type="button"
-  >
-    <div
-      class="_buttonText_bbd991"
-    >
-      Sulje
-    </div>
-  </button>
 </div>
 `;

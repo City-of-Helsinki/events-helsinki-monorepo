@@ -5,7 +5,6 @@ import {
   Navigation,
   FooterSection,
   getLanguageOrDefault,
-  usePageScrollRestoration,
   RouteMeta,
   PageMeta,
   useResilientTranslation,
@@ -16,8 +15,7 @@ import {
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
 import {
   Page as RHHCPage,
@@ -43,26 +41,7 @@ const Search: NextPage<{
 }> = ({ page, breadcrumbs, previewToken }) => {
   const { t: tAppHobbies } = useAppHobbiesTranslation();
   const { resilientT } = useResilientTranslation();
-  const router = useRouter();
-  const scrollTo = router.query?.scrollTo;
-  const listRef = useRef<HTMLUListElement | null>(null);
-  usePageScrollRestoration();
 
-  useEffect(() => {
-    const listElement = listRef.current;
-
-    if (scrollTo) {
-      const listItemElement = listElement?.querySelector(
-        decodeURIComponent(scrollTo.toString())
-      );
-
-      if (listItemElement) {
-        listItemElement.scrollIntoView({
-          block: 'center',
-        });
-      }
-    }
-  }, [scrollTo]);
   const { footerMenu } = useContext(NavigationContext);
 
   const SearchPageNoSSR = dynamic(

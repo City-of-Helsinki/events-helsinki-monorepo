@@ -68,7 +68,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     setSelectedTexts,
     autosuggestInput,
     setAutosuggestInput,
-    scrollToResultList,
   } = useAdvancedSearchContext();
 
   const searchFilters = {
@@ -123,7 +122,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
 
     setSelectedTexts(text || []);
     goToSearch(search);
-    scrollToResultList();
   };
 
   const handleOnlyEveningEventChange = (
@@ -179,7 +177,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
 
     moveToSearchPage();
     setAutosuggestInput('');
-    scrollToResultList();
   };
 
   return (

@@ -24,7 +24,6 @@ export { default as useAppHobbiesTranslation } from './useAppHobbiesTranslation'
 export { default as useAppSportsTranslation } from './useAppSportsTranslation';
 export { default as useCommonCmsConfig } from './useCommonCmsConfig';
 export { default as useClickCapture } from './useClickCapture';
-export { default as usePageScrollRestoration } from './usePageScrollRestoration';
 export { default as useSuperEventLazyLoad } from './useSuperEventLazyLoad';
 export { default as useGeolocation } from './useGeolocation';
 export { default as useClearClosedEventsFromApolloCache } from './useClearClosedEventsFromApolloCache';

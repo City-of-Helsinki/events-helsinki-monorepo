@@ -25,9 +25,7 @@ type SearchFormState = {
   setAutosuggestInput: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export type AdvancedSearchContextType = SearchFormState & {
-  scrollToResultList: () => void;
-};
+export type AdvancedSearchContextType = SearchFormState;
 
 const AdvancedSearchContext = React.createContext<
   AdvancedSearchContextType | undefined

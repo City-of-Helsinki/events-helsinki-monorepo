@@ -167,7 +167,6 @@ export interface SearchForm {
   clearFilters: () => void;
   handleSubmit: (event?: FormEvent) => void;
   updateFilters: () => void;
-  scrollToResultList?: () => void;
 }
 
 export interface SearchPage {
@@ -179,13 +178,11 @@ export interface SearchPage {
   count: number;
   hasNext: boolean;
   handleLoadMore: () => Promise<void>;
-  scrollToResultList: () => void;
   scrollToResultCard: (id: string) => void;
   initialPageOnLoad: () => void;
 }
 
 export type SearchComponentType = {
-  scrollToResultList: () => void;
   'data-testid'?: string;
   showTitle?: boolean;
   searchRoute?: SearchRoute; // TODO: Allow only SEARCH_ROUTE values

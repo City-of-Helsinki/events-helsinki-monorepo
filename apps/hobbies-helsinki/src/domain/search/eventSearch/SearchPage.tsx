@@ -109,6 +109,12 @@ const SearchPage: React.FC<{
     }
     setIsFetchingMore(false);
   };
+
+  /**
+   * @deprecated
+   * scroller is used only for this and it should be achievable with NextJS's own restoration too.
+   * E.g. anchors could be used instead.
+   */
   const scrollToResultList = () => {
     if (isSmallScreen) {
       scroller.scrollTo('resultList', {
@@ -120,6 +126,11 @@ const SearchPage: React.FC<{
     }
   };
 
+  /**
+   * @deprecated
+   * scroller is used only for this and it should be achievable with NextJS's own restoration too.
+   * E.g. anchors could be used instead.
+   */
   const scrollToEventCard = (id: string) => {
     scroller.scrollTo(id, {
       delay: 0,

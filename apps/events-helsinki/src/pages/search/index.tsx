@@ -12,12 +12,10 @@ import {
   BreadcrumbContainer,
   PreviewNotification,
 } from '@events-helsinki/components';
-import { usePageScrollRestoration } from '@events-helsinki/components/src/hooks';
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
 import {
   Page as RHHCPage,
@@ -41,28 +39,8 @@ const Search: NextPage<{
   page: PageType;
   breadcrumbs?: BreadcrumbListItem[];
 }> = ({ page, breadcrumbs, previewToken }) => {
-  const router = useRouter();
-  const scrollTo = router.query?.scrollTo;
-  const listRef = useRef<HTMLUListElement | null>(null);
   const { t: tAppEvents } = useAppEventsTranslation();
   const { resilientT } = useResilientTranslation();
-  usePageScrollRestoration();
-
-  useEffect(() => {
-    const listElement = listRef.current;
-
-    if (scrollTo) {
-      const listItemElement = listElement?.querySelector(
-        decodeURIComponent(scrollTo.toString())
-      );
-
-      if (listItemElement) {
-        listItemElement.scrollIntoView({
-          block: 'center',
-        });
-      }
-    }
-  }, [scrollTo]);
 
   const { footerMenu } = useContext(NavigationContext);
 

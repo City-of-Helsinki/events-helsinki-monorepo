@@ -2,13 +2,10 @@ import type { QueryEventListArgs } from '@events-helsinki/components';
 import {
   LoadingSpinner,
   SrOnly,
-  useIsSmallScreen,
   useSearchTranslation,
-  getLargeEventCardId,
   useEventListQuery,
   BasicMeta,
   MAIN_CONTENT_ID,
-  useCmsRoutedAppHelper,
   EventsOrderBySelect,
   DEFAULT_EVENT_SORT_OPTION,
   isEventSortOption,
@@ -21,10 +18,8 @@ import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
 import { useConfig } from 'react-helsinki-headless-cms';
-import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 
-import { ROUTES } from '../../../constants';
 import AppConfig from '../../app/AppConfig';
 import styles from './eventSearchPage.module.scss';
 import SearchResultsContainer from './searchResultList/SearchResultsContainer';
@@ -66,16 +61,12 @@ const useSearchQuery = () => {
 
 const SearchPage: React.FC<{
   SearchComponent: React.FC<{
-    scrollToResultList: () => void;
     'data-testid'?: string;
   }>;
   pageTitle: string;
 }> = ({ SearchComponent, pageTitle }) => {
   const { t } = useSearchTranslation();
-  const router = useRouter();
-  const routerHelper = useCmsRoutedAppHelper();
   const [isFetchingMore, setIsFetchingMore] = React.useState(false);
-  const isSmallScreen = useIsSmallScreen();
 
   const { meta } = useConfig();
 
@@ -110,45 +101,6 @@ const SearchPage: React.FC<{
     }
     setIsFetchingMore(false);
   };
-  const scrollToResultList = () => {
-    if (isSmallScreen) {
-      scroller.scrollTo('resultList', {
-        delay: 0,
-        duration: 1000,
-        offset: -50,
-        smooth: true,
-      });
-    }
-  };
-
-  const scrollToEventCard = (id: string) => {
-    scroller.scrollTo(id, {
-      delay: 0,
-      duration: 300,
-      offset: -50,
-      smooth: true,
-    });
-  };
-
-  React.useEffect(() => {
-    if (router.asPath && router.query?.scrollToResults) {
-      scrollToResultList();
-    } else if (router.query?.eventId) {
-      scrollToEventCard(
-        getLargeEventCardId(
-          Array.isArray(router.query.eventId)
-            ? router.query.eventId[0]
-            : router.query.eventId
-        )
-      );
-      routerHelper.removeQueryParamsFromRouter(
-        router,
-        ['eventId'],
-        ROUTES.SEARCH
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div>
@@ -159,10 +111,7 @@ const SearchPage: React.FC<{
         manifestUrl={meta?.manifestUrl}
       />
       <SrOnly as="h1">{pageTitle}</SrOnly>
-      <SearchComponent
-        scrollToResultList={scrollToResultList}
-        data-testid="searchContainer"
-      />
+      <SearchComponent data-testid="searchContainer" />
       <main id={MAIN_CONTENT_ID}>
         <div
           className={styles.resultList}

@@ -141,7 +141,9 @@ const nextBaseConfig = ({
       // @link {https://github.com/vercel/next.js/pull/22867|Original PR}
       // @link {https://github.com/vercel/next.js/discussions/26420|Discussion}
       externalDir: true,
-      scrollRestoration: true,
+      // NOTE: For some reason the `scrollRestoration` as set to `true`, configures `history.scrollRestoration` to "manual".
+      // As undefined, the `history.scrollRestoration` is configured as "auto".
+      // scrollRestoration: true,
     },
 
     typescript: {

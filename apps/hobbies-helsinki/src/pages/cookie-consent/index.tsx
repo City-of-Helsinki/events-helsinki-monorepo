@@ -11,7 +11,6 @@ import {
   Navigation,
   FooterSection,
   getLanguageOrDefault,
-  usePageScrollRestoration,
   RouteMeta,
   useResilientTranslation,
   getQlLanguage,
@@ -67,8 +66,6 @@ export default function CookieConsent({
       }
     }
   }, [router]);
-
-  usePageScrollRestoration();
 
   return (
     <RHHCPage

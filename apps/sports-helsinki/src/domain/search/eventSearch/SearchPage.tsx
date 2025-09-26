@@ -72,12 +72,7 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
         manifestUrl={meta?.manifestUrl}
       />
       <SrOnly as="h1">{pageTitle}</SrOnly>
-      {SearchComponent && (
-        <SearchComponent
-          scrollToResultList={scrollToResultList}
-          data-testid="searchContainer"
-        />
-      )}
+      {SearchComponent && <SearchComponent data-testid="searchContainer" />}
       <main id={MAIN_CONTENT_ID}>
         <div
           className={styles.resultList}

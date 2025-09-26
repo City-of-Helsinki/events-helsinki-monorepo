@@ -21,7 +21,6 @@ import { useFormValues } from './hooks/useFormValues';
 import styles from './search.module.scss';
 
 export const SimpleSearchForm: React.FC<SearchComponentType> = ({
-  scrollToResultList,
   showTitle = false,
 }) => {
   const { t } = useSearchTranslation();
@@ -69,10 +68,6 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     });
     // Update the browser URL with the form values in the context.
     updateRouteToSearchPage({ shallow: true });
-    // Scroll to result list.
-    if (scrollToResultList) {
-      scrollToResultList();
-    }
   };
 
   const handleMenuOptionClick = (option: AutosuggestMenuOption) => {

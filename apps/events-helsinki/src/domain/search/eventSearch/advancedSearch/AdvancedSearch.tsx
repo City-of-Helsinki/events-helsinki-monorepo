@@ -6,22 +6,17 @@ import styles from './search.module.scss';
 import { useAdvancedSearchFormState } from './useAdvancedSearchFormState';
 
 interface Props {
-  scrollToResultList: () => void;
   'data-testid'?: string;
 }
 
-const AdvancedSearch: React.FC<Props> = ({
-  scrollToResultList,
-  'data-testid': dataTestId,
-}) => {
+const AdvancedSearch: React.FC<Props> = ({ 'data-testid': dataTestId }) => {
   const searchFormState = useAdvancedSearchFormState();
 
   const contextValue = React.useMemo(
     () => ({
       ...searchFormState,
-      scrollToResultList,
     }),
-    [searchFormState, scrollToResultList]
+    [searchFormState]
   );
   return (
     <AdvancedSearchContext.Provider value={contextValue}>

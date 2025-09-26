@@ -273,7 +273,6 @@ CombinedSearchPage.tsx
       searchUtilities={null}
       korosBottom
       showTitle
-      scrollToResultList={() => true}
     />
 
     {/* The search tabs, query sorters, search type switchers, etc. */}

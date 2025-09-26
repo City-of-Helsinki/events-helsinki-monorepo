@@ -4,7 +4,6 @@ import {
   Navigation,
   FooterSection,
   getLanguageOrDefault,
-  usePageScrollRestoration,
   RouteMeta,
   PageMeta,
   useResilientTranslation,
@@ -41,8 +40,6 @@ const Search: NextPage<{
   const { footerMenu } = useContext(NavigationContext);
 
   const { resilientT } = useResilientTranslation();
-
-  usePageScrollRestoration();
 
   const CombinedSearchPageNoSSR = dynamic(
     () => import('../../domain/search/combinedSearch/CombinedSearchPage'),

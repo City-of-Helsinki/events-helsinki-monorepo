@@ -4,7 +4,6 @@ import {
   Navigation,
   FooterSection,
   getLanguageOrDefault,
-  usePageScrollRestoration,
   useResilientTranslation,
   PageBreadcrumbTitleDocument,
   getFilteredBreadcrumbs,
@@ -37,7 +36,6 @@ const VenuePage: NextPage<{
 }> = ({ venue, loading, breadcrumbs }) => {
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
-  usePageScrollRestoration();
 
   return (
     <RHHCPage

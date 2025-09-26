@@ -96,7 +96,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const moveToSearchPage = () => {
     const filters = {
       ...searchFilters,
-      ...{ [EVENT_SEARCH_FILTERS.TEXT]: [textSearchInput] },
+      [EVENT_SEARCH_FILTERS.TEXT]: [textSearchInput],
     };
     const search = getSearchQuery(filters);
 

@@ -1,14 +1,12 @@
 import * as Sentry from '@sentry/browser';
 import FileSaver from 'file-saver';
 import {
-  Button,
   IconAngleRight,
   IconCalendarClock,
   IconGlobe,
   IconGroup,
   IconInfoCircle,
   IconLocation,
-  IconTicket,
 } from 'hds-react';
 import type { EventAttributes } from 'ics';
 import { createEvent } from 'ics';
@@ -22,7 +20,6 @@ import Visible from '../../../../components/visible/Visible';
 import useLocale from '../../../../hooks/useLocale';
 import useTabFocusStyle from '../../../../hooks/useTabFocusStyle';
 import { useAppRoutingContext } from '../../../../routingUrlProvider';
-import { useAppThemeContext } from '../../../../themeProvider';
 import type {
   EventFields,
   KeywordOption,
@@ -31,7 +28,6 @@ import type {
 import {
   getAudienceAgeText,
   getEventFields,
-  getEventPrice,
   getServiceMapUrl,
 } from '../../../../utils/eventUtils';
 import getDateArray from '../../../../utils/getDateArray';
@@ -93,7 +89,6 @@ const EventInfo: React.FC<EventInfoProps> = ({ event, superEvent }) => {
         {showOtherInfo && <OtherInfo event={event} />}
         <Directions event={event} />
         <OrganizationInfo event={event} />
-        <PriceInfo event={event} />
       </div>
     </div>
   );
@@ -326,47 +321,6 @@ const Directions: React.FC<{
         {t('info.directionsHSL')}
       </SecondaryLink>
     </InfoWithIcon>
-  );
-};
-
-const PriceInfo: React.FC<{
-  event: EventFields;
-}> = ({ event }) => {
-  const { t } = useTranslation('event');
-  const { defaultButtonTheme: theme, defaultButtonVariant: variant } =
-    useAppThemeContext();
-  const locale = useLocale();
-  const eventPriceText = getEventPrice(event, locale, t('info.offers.isFree'));
-  const { offerInfoUrl } = getEventFields(event, locale);
-  const moveToBuyTicketsPage = () => {
-    window.open(offerInfoUrl);
-  };
-  return (
-    <>
-      {/* Price info */}
-      <Visible below="s">
-        <InfoWithIcon
-          icon={<IconTicket aria-hidden />}
-          title={t('info.labelPrice')}
-        >
-          {eventPriceText || '-'}
-        </InfoWithIcon>
-      </Visible>
-
-      {offerInfoUrl && (
-        <Visible below="s" className={styles.buyButtonWrapper}>
-          <Button
-            theme={theme}
-            variant={variant}
-            aria-label={t('info.ariaLabelBuyTickets')}
-            fullWidth={true}
-            onClick={moveToBuyTicketsPage}
-          >
-            {t('info.buttonBuyTickets')}
-          </Button>
-        </Visible>
-      )}
-    </>
   );
 };
 

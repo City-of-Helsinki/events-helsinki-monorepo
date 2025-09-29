@@ -217,22 +217,6 @@ it('should hide the map link from location info if location is internet', () => 
   ).not.toBeInTheDocument();
 });
 
-it('should open ticket buy page', async () => {
-  global.open = vi.fn();
-  render(<EventInfo event={event} />, { mocks });
-
-  // Event info fields
-  await userEvent.click(
-    screen.getByRole('button', {
-      name: translations.event.info.ariaLabelBuyTickets,
-    })
-  );
-
-  await waitFor(() => {
-    expect(global.open).toHaveBeenCalled();
-  });
-});
-
 it.skip('should create ics file succesfully', async () => {
   const saveAsSpy = vi.spyOn(FileSaver, 'saveAs');
   render(<EventInfo event={event} />, { mocks });

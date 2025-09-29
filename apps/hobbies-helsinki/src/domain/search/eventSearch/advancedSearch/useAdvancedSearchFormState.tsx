@@ -29,6 +29,7 @@ export function useAdvancedSearchFormState() {
   const [isCustomDate, setIsCustomDate] = React.useState<boolean>(false);
   const [selectedTexts, setSelectedTexts] = React.useState<string[]>([]);
   const [textSearchInput, setTextSearchInput] = React.useState('');
+  const [isFree, setIsFree] = React.useState<boolean>(false);
 
   // Initialize fields when page is loaded
   React.useEffect(() => {
@@ -41,6 +42,7 @@ export function useAdvancedSearchFormState() {
       [EVENT_SEARCH_FILTERS.TEXT]: text,
       [EVENT_SEARCH_FILTERS.MIN_AGE]: audienceMinAgeLt,
       [EVENT_SEARCH_FILTERS.MAX_AGE]: audienceMaxAgeGt,
+      [EVENT_SEARCH_FILTERS.IS_FREE]: isFreeEvent,
     } = getSearchFilters(searchParams);
 
     const pathPlace = params.place && MAPPED_PLACES[params.place.toLowerCase()];
@@ -56,6 +58,7 @@ export function useAdvancedSearchFormState() {
     setStart(startTime);
     setMinAgeInput(audienceMinAgeLt || '');
     setMaxAgeInput(audienceMaxAgeGt || '');
+    setIsFree(isFreeEvent ?? false);
 
     if (endTime || startTime) {
       setIsCustomDate(true);
@@ -90,5 +93,7 @@ export function useAdvancedSearchFormState() {
     setSelectedTexts,
     textSearchInput,
     setTextSearchInput,
+    isFree,
+    setIsFree,
   };
 }

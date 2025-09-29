@@ -25,6 +25,8 @@ type SearchFormState = {
   setSelectedTexts: React.Dispatch<React.SetStateAction<string[]>>;
   textSearchInput: string;
   setTextSearchInput: React.Dispatch<React.SetStateAction<string>>;
+  isFree: boolean;
+  setIsFree: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type AdvancedSearchContextType = SearchFormState & {

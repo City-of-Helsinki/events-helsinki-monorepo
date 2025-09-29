@@ -16,6 +16,7 @@ interface Props {
   onChangeEndDate: (date: Date | null) => void;
   onChangeStartDate: (date: Date | null) => void;
   startDate: Date | null;
+  showCloseButton?: boolean;
 }
 
 const MobileDateSelector: React.FC<Props> = ({
@@ -27,6 +28,7 @@ const MobileDateSelector: React.FC<Props> = ({
   onChangeEndDate,
   onChangeStartDate,
   startDate,
+  showCloseButton = false,
 }) => {
   const { t } = useCommonTranslation();
   const closeBtnRef = React.useRef<HTMLButtonElement | null>(null);
@@ -158,6 +160,7 @@ const MobileDateSelector: React.FC<Props> = ({
           onChangeStartDate={onChangeStartDate}
           onCloseMenu={closeMenu}
           startDate={startDate}
+          showCloseButton={showCloseButton}
         />
       </div>
     </div>

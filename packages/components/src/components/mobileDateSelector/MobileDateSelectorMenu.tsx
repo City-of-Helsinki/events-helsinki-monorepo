@@ -17,6 +17,7 @@ interface Props {
   onChangeStartDate: (date: Date | null) => void;
   onCloseMenu: () => void;
   startDate: Date | null;
+  showCloseButton?: boolean;
 }
 
 const MobileDateSelectorMenu: FunctionComponent<Props> = ({
@@ -27,6 +28,7 @@ const MobileDateSelectorMenu: FunctionComponent<Props> = ({
   onChangeStartDate,
   onCloseMenu,
   startDate,
+  showCloseButton = false,
 }) => {
   const { t } = useCommonTranslation();
   if (!isOpen) return null;
@@ -40,15 +42,18 @@ const MobileDateSelectorMenu: FunctionComponent<Props> = ({
           startDate={startDate}
         />
       </div>
-      <button
-        ref={closeBtnRef}
-        className={classNames(styles.button, styles.btnClose)}
-        onClick={onCloseMenu}
-      >
-        <div className={styles.buttonText}>
-          {t('common:dateSelector.menu.buttonClose') as string}
-        </div>
-      </button>
+      {showCloseButton && (
+        // FIXME: accessibility issues are reported in close-button. Now not rendered by default. See ticket HH-376.
+        <button
+          ref={closeBtnRef}
+          className={classNames(styles.button, styles.btnClose)}
+          onClick={onCloseMenu}
+        >
+          <div className={styles.buttonText}>
+            {t('common:dateSelector.menu.buttonClose') as string}
+          </div>
+        </button>
+      )}
     </div>
   );
 };

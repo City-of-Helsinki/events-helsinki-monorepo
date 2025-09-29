@@ -9,7 +9,6 @@ import {
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID,
 } from '@events-helsinki/components';
 import type {
-  FilterType,
   AppLanguage,
   Meta,
   QueryEventListArgs,
@@ -50,7 +49,16 @@ import type {
 } from './types';
 
 export const MIN_AGE = 0;
-export const MAX_AGE = 99;
+export const MAX_AGE = 130; // Realistic upper limit in year 2025
+
+export const clampAgeInput = (age: unknown): number | undefined => {
+  if (typeof age === 'number' && Number.isInteger(age)) {
+    return Math.max(MIN_AGE, Math.min(MAX_AGE, age));
+  } else if (typeof age === 'string') {
+    return clampAgeInput(Number.parseInt(age));
+  }
+  return undefined;
+};
 
 export const sortExtendedCategoryOptions = (
   a: CategoryOption,
@@ -175,6 +183,7 @@ export const getEventSearchVariables = ({
     [EVENT_SEARCH_FILTERS.TEXT]: text,
     audienceMinAgeLt,
     audienceMaxAgeGt,
+    [EVENT_SEARCH_FILTERS.SUITABLE]: suitableFor,
   } = getSearchFilters(params);
   const pathPlace = place && MAPPED_PLACES[place.toLowerCase()];
 
@@ -220,6 +229,8 @@ export const getEventSearchVariables = ({
     MAPPED_COURSE_CATEGORIES
   );
 
+  const clampedSuitableFor = clampAgeInput(suitableFor);
+
   return {
     [EVENT_SEARCH_FILTERS.TEXT]: !isEmpty(text) ? text?.join(',') : undefined, // NOTE: only *OngoingAnd supports Array.
     [EVENT_SEARCH_FILTERS.ONGOING]: true,
@@ -241,11 +252,10 @@ export const getEventSearchVariables = ({
     startsAfter,
     superEventType,
     superEvent,
-    suitableFor: [Number(audienceMinAgeLt), Number(audienceMaxAgeGt)].filter(
-      (v) => v
-    ),
     audienceMinAgeLt,
     audienceMaxAgeGt,
+    suitableFor:
+      typeof clampedSuitableFor === 'number' ? [clampedSuitableFor] : undefined,
     eventType: AppConfig.supportedEventTypes,
   };
 };
@@ -307,37 +317,12 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     start,
     [EVENT_SEARCH_FILTERS.TEXT]: freeText,
     [EVENT_SEARCH_FILTERS.ONGOING]: true,
-    suitableFor: normalizeSuitableFor(
-      getUrlParamAsArray(searchParams, EVENT_SEARCH_FILTERS.SUITABLE, false)
+    [EVENT_SEARCH_FILTERS.SUITABLE]: clampAgeInput(
+      searchParams.get(EVENT_SEARCH_FILTERS.SUITABLE)
     ),
     audienceMinAgeLt: searchParams.get(EVENT_SEARCH_FILTERS.MIN_AGE) || '',
     audienceMaxAgeGt: searchParams.get(EVENT_SEARCH_FILTERS.MAX_AGE) || '',
   };
-};
-
-export const normalizeSuitableFor = (values: (number | string)[]): number[] => {
-  if (!values?.length) return [];
-
-  const [minAge, maxAge] = values.map((value) => {
-    const parsed = parseInt(value.toString());
-    return isNaN(parsed) ? null : parsed;
-  });
-
-  // If no range is given, return an empty list.
-  if (minAge == null && maxAge == null) {
-    return [];
-  }
-
-  // Sort should be done last, so the right number is full filled with a default.
-  return [minAge ?? MIN_AGE, maxAge ?? MAX_AGE].sort((a, b) => a - b);
-};
-
-export const getSuitableForFilterValue = (
-  initValue: number[] | undefined,
-  type: FilterType
-) => {
-  if (['minAge', 'maxAge', 'exactAge'].includes(type)) return undefined;
-  return initValue;
 };
 
 export const getSearchQuery = (

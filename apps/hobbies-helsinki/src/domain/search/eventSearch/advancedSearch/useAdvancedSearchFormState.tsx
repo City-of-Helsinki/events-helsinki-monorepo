@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
 import { MAPPED_PLACES } from '../constants';
-import { getSearchFilters } from '../utils';
+import { clampAgeInput, getSearchFilters } from '../utils';
 
 export function useAdvancedSearchFormState() {
   const router = useRouter();
@@ -13,8 +13,7 @@ export function useAdvancedSearchFormState() {
     [router.query]
   );
   const [categoryInput, setCategoryInput] = React.useState('');
-  const [minAgeInput, setMinAgeInput] = React.useState('');
-  const [maxAgeInput, setMaxAgeInput] = React.useState('');
+  const [ageInput, setAgeInput] = React.useState<number | undefined>(undefined);
   const [placeInput, setPlaceInput] = React.useState('');
 
   const [selectedDateTypes, setSelectedDateTypes] = React.useState<string[]>(
@@ -40,8 +39,7 @@ export function useAdvancedSearchFormState() {
       [EVENT_SEARCH_FILTERS.PLACES]: places,
       [EVENT_SEARCH_FILTERS.START]: startTime,
       [EVENT_SEARCH_FILTERS.TEXT]: text,
-      [EVENT_SEARCH_FILTERS.MIN_AGE]: audienceMinAgeLt,
-      [EVENT_SEARCH_FILTERS.MAX_AGE]: audienceMaxAgeGt,
+      [EVENT_SEARCH_FILTERS.SUITABLE]: ageInput,
       [EVENT_SEARCH_FILTERS.IS_FREE]: isFreeEvent,
     } = getSearchFilters(searchParams);
 
@@ -56,8 +54,7 @@ export function useAdvancedSearchFormState() {
     setSelectedTexts(text || []);
     setEnd(endTime);
     setStart(startTime);
-    setMinAgeInput(audienceMinAgeLt || '');
-    setMaxAgeInput(audienceMaxAgeGt || '');
+    setAgeInput(clampAgeInput(ageInput));
     setIsFree(isFreeEvent ?? false);
 
     if (endTime || startTime) {
@@ -71,10 +68,8 @@ export function useAdvancedSearchFormState() {
   return {
     categoryInput,
     setCategoryInput,
-    minAgeInput,
-    setMinAgeInput,
-    maxAgeInput,
-    setMaxAgeInput,
+    ageInput,
+    setAgeInput,
     placeInput,
     setPlaceInput,
     selectedDateTypes,

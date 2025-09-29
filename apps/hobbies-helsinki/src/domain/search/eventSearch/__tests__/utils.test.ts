@@ -7,7 +7,12 @@ import {
 import { advanceTo, clear } from 'jest-date-mock';
 
 import { COURSE_DEFAULT_SEARCH_FILTERS } from '../constants';
-import { getEventSearchVariables, getNextPage, getSearchQuery } from '../utils';
+import {
+  clampAgeInput,
+  getEventSearchVariables,
+  getNextPage,
+  getSearchQuery,
+} from '../utils';
 
 afterAll(() => {
   clear();
@@ -166,4 +171,45 @@ describe('getNextPage function', () => {
       })
     ).toBeNull();
   });
+});
+
+describe('clampAgeInput function', () => {
+  it.each([
+    // Empty values
+    { input: '', expectedOutput: undefined },
+    { input: null, expectedOutput: undefined },
+    { input: undefined, expectedOutput: undefined },
+    { input: [], expectedOutput: undefined },
+    { input: {}, expectedOutput: undefined },
+    // Single values in min/max age range
+    { input: 1, expectedOutput: 1 },
+    { input: 9, expectedOutput: 9 },
+    { input: 12, expectedOutput: 12 },
+    { input: 99, expectedOutput: 99 },
+    { input: 115, expectedOutput: 115 },
+    { input: '1', expectedOutput: 1 },
+    { input: '9', expectedOutput: 9 },
+    { input: '12', expectedOutput: 12 },
+    { input: '99', expectedOutput: 99 },
+    { input: '115', expectedOutput: 115 },
+    { input: '00012', expectedOutput: 12 },
+    { input: '+12', expectedOutput: 12 },
+    // Single values out of min/max age range
+    { input: -1, expectedOutput: 0 },
+    { input: '-1', expectedOutput: 0 },
+    { input: '-0001', expectedOutput: 0 },
+    { input: 131, expectedOutput: 130 },
+    { input: '131', expectedOutput: 130 },
+    { input: '000131', expectedOutput: 130 },
+    { input: '+131', expectedOutput: 130 },
+    // Incompatible values
+    { input: 12.5, expectedOutput: undefined }, // No non-integer numbers
+    { input: [1, 9, 12, 99, 115], expectedOutput: undefined }, // No arrays
+    { input: { age: 12 }, expectedOutput: undefined }, // No objects
+  ])(
+    'clampAgeInput($input) == $expectedOutput',
+    ({ input, expectedOutput }) => {
+      expect(clampAgeInput(input)).toStrictEqual(expectedOutput);
+    }
+  );
 });

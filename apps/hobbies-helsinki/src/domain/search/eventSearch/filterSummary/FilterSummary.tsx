@@ -20,11 +20,7 @@ import React from 'react';
 
 import { ROUTES } from '../../../../constants';
 import routerHelper from '../../../app/routerHelper';
-import {
-  getSearchFilters,
-  getSearchQuery,
-  getSuitableForFilterValue,
-} from '../utils';
+import { getSearchFilters, getSearchQuery } from '../utils';
 import styles from './filterSummary.module.scss';
 
 export const filterSummaryContainerTestId = 'filter-summary';
@@ -48,7 +44,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     [EVENT_SEARCH_FILTERS.KEYWORD_NOT]: keywordNot,
     [EVENT_SEARCH_FILTERS.ONLY_CHILDREN_EVENTS]: onlyChildrenEvents,
     [EVENT_SEARCH_FILTERS.PLACES]: places,
-    [EVENT_SEARCH_FILTERS.MAX_AGE]: publisher,
+    [EVENT_SEARCH_FILTERS.PUBLISHER]: publisher,
     [EVENT_SEARCH_FILTERS.START]: start,
     [EVENT_SEARCH_FILTERS.SUITABLE]: suitableFor,
     [EVENT_SEARCH_FILTERS.TEXT]: text,
@@ -88,7 +84,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         text
       ),
       [EVENT_SEARCH_FILTERS.SUITABLE]:
-        getSuitableForFilterValue(suitableFor, type) ?? [],
+        type === 'exactAge' ? undefined : suitableFor,
       [EVENT_SEARCH_FILTERS.MIN_AGE]: type === 'minAge' ? '' : audienceMinAgeLt,
       [EVENT_SEARCH_FILTERS.MAX_AGE]: type === 'maxAge' ? '' : audienceMaxAgeGt,
     });
@@ -107,7 +103,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     !!dateTypes.length ||
     !!places.length ||
     !!text?.length ||
-    !!suitableFor?.length ||
+    Number.isInteger(suitableFor) ||
     !!(audienceMinAgeLt || '').length ||
     !!(audienceMaxAgeGt || '').length;
 
@@ -163,6 +159,13 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         <AgeFilter
           type="maxAge"
           value={audienceMaxAgeGt}
+          onRemove={handleFilterRemove}
+        />
+      )}
+      {typeof suitableFor === 'number' && Number.isInteger(suitableFor) && (
+        <AgeFilter
+          type="exactAge"
+          value={suitableFor.toString()}
           onRemove={handleFilterRemove}
         />
       )}

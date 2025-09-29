@@ -39,10 +39,8 @@
     "titleDropdownTargetGroup": "Target group",
     "titleDropdownSportsCategory": "Type of sport",
     "showOnlyAdultCourses": "Show only adult courses",
-    "ageLimitValues": "Age",
-    "ageLimitHeader": "Age of participants in years, for example 8, 12-14 or 60-65",
-    "ageLimitMin": "From",
-    "ageLimitMax": "To",
+    "ariaLabelAge": "Age of participant in years",
+    "placeholderAge": "Enter age, e.g. 12",
     "ageFilter": {
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",

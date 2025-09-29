@@ -1,21 +1,15 @@
 import {
+  AdvancedSearchNumberInput,
   AdvancedSearchTextInput,
   Checkbox,
   DateSelector,
   EVENT_SEARCH_FILTERS,
   IconRead,
   MultiSelectDropdown,
-  RangeDropdown,
   useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import {
-  Button,
-  IconCake,
-  IconSearch,
-  IconLocation,
-  IconMinus,
-} from 'hds-react';
+import { Button, IconCake, IconSearch, IconLocation } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
@@ -25,6 +19,7 @@ import PlaceSelector from '../../../place/placeSelector/PlaceSelector';
 import { COURSE_DEFAULT_SEARCH_FILTERS } from '../constants';
 import FilterSummary from '../filterSummary/FilterSummary';
 import {
+  clampAgeInput,
   getEventCategoryOptions,
   getSearchFilters,
   getSearchQuery,
@@ -54,10 +49,8 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   const {
     categoryInput,
     setCategoryInput,
-    minAgeInput,
-    setMinAgeInput,
-    maxAgeInput,
-    setMaxAgeInput,
+    ageInput,
+    setAgeInput,
     placeInput,
     setPlaceInput,
     selectedDateTypes,
@@ -88,8 +81,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
     [EVENT_SEARCH_FILTERS.START]: start,
     [EVENT_SEARCH_FILTERS.TEXT]: selectedTexts,
-    [EVENT_SEARCH_FILTERS.MIN_AGE]: minAgeInput,
-    [EVENT_SEARCH_FILTERS.MAX_AGE]: maxAgeInput,
+    [EVENT_SEARCH_FILTERS.SUITABLE]: ageInput,
     [EVENT_SEARCH_FILTERS.IS_FREE]: isFree,
   };
 
@@ -119,8 +111,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     setCategoryInput('');
     setPlaceInput('');
     setTextSearchInput('');
-    setMaxAgeInput('');
-    setMinAgeInput('');
+    setAgeInput(undefined);
   };
 
   const clearFilters = () => {
@@ -137,11 +128,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     moveToSearchPage();
     setTextSearchInput('');
     scrollToResultList();
-  };
-
-  const handleSetAgeValues = (minAge: string, maxAge: string) => {
-    setMinAgeInput(minAge);
-    setMaxAgeInput(maxAge);
   };
 
   return (
@@ -193,24 +179,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
               />
             </div>
             <div>
-              <RangeDropdown
-                icon={<IconCake aria-hidden />}
-                rangeIcon={<IconMinus aria-hidden />}
-                minInputValue={minAgeInput}
-                minInputStartValue={MIN_AGE.toString()}
-                minInputFixedValue={'18'}
-                maxInputValue={maxAgeInput}
-                maxInputEndValue={MAX_AGE.toString()}
-                name="ageLimitValues"
-                onChange={handleSetAgeValues}
-                fixedValuesText={t('search.showOnlyAdultCourses')}
-                title={t('search.ageLimitValues')}
-                header={t('search.ageLimitHeader')}
-                value={[minAgeInput, maxAgeInput]}
-                withPlaceholders={false}
-              />
-            </div>
-            <div>
               <PlaceSelector
                 checkboxName="placesCheckboxes"
                 icon={<IconLocation aria-hidden />}
@@ -223,6 +191,24 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 showSelectAll={true}
                 title={t('search.titleDropdownPlace')}
                 value={selectedPlaces}
+              />
+            </div>
+            <div>
+              <AdvancedSearchNumberInput
+                id="age"
+                icon={<IconCake aria-hidden />}
+                min={MIN_AGE}
+                max={MAX_AGE}
+                name="age"
+                onChange={(event) =>
+                  setAgeInput(clampAgeInput(event.target.value))
+                }
+                aria-label={t('search.ariaLabelAge')}
+                label={
+                  '' /* Required by HDS NumberInput but current UI design uses icons. */
+                }
+                placeholder={t('search.placeholderAge')}
+                value={ageInput}
               />
             </div>
           </div>

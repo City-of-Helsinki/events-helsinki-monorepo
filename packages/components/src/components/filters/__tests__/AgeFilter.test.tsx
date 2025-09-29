@@ -7,7 +7,7 @@ import AgeFilter from '../AgeFilter';
 const props: AgeFilterProps = {
   onRemove: vi.fn(),
   value: '10',
-  type: 'minAge',
+  type: 'exactAge',
 };
 
 it('matches snapshot', () => {
@@ -20,10 +20,10 @@ it('calls onRemove callback when remove button is clicked', async () => {
   const onClickMock = vi.fn();
   render(<AgeFilter {...props} onRemove={onClickMock} />);
 
-  expect(screen.getByText(`${props.value} v`)).toBeInTheDocument();
+  expect(screen.getByText(`${props.value}-vuotiaalle`)).toBeInTheDocument();
 
   await userEvent.click(screen.getByRole('button'));
 
   expect(onClickMock).toHaveBeenCalled();
-  expect(onClickMock).toHaveBeenCalledWith(props.value, 'minAge');
+  expect(onClickMock).toHaveBeenCalledWith(props.value.toString(), 'exactAge');
 });

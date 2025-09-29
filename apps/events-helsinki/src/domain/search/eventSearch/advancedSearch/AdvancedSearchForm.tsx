@@ -65,6 +65,12 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     setIsCustomDate,
     textSearchInput,
     setTextSearchInput,
+    isOnlyEveningEvents,
+    setIsOnlyEveningEvents,
+    isOnlyRemoteEvents,
+    setIsOnlyRemoteEvents,
+    isFree,
+    setIsFree,
     scrollToResultList,
   } = useAdvancedSearchContext();
 
@@ -77,6 +83,9 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
     [EVENT_SEARCH_FILTERS.START]: start,
     [EVENT_SEARCH_FILTERS.TEXT]: textSearchInput ? [textSearchInput] : [],
+    [EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS]: isOnlyEveningEvents,
+    [EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS]: isOnlyRemoteEvents,
+    [EVENT_SEARCH_FILTERS.IS_FREE]: isFree,
   };
 
   const categories = getEventCategoryOptions(t).sort(
@@ -100,34 +109,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     };
     const search = getSearchQuery(filters);
 
-    goToSearch(search);
-  };
-
-  const handleOnlyEveningEventChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const search = getSearchQuery({
-      ...searchFilters,
-      [EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS]: e.target.checked,
-    });
-    goToSearch(search);
-  };
-
-  const handleOnlyRemoteEventChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const search = getSearchQuery({
-      ...searchFilters,
-      [EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS]: e.target.checked,
-    });
-    goToSearch(search);
-  };
-
-  const handleIsFreeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const search = getSearchQuery({
-      ...searchFilters,
-      [EVENT_SEARCH_FILTERS.IS_FREE]: e.target.checked,
-    });
     goToSearch(search);
   };
 
@@ -247,28 +228,28 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
             <div>
               <Checkbox
                 className={styles.checkbox}
-                checked={searchFilters.isFree}
+                checked={isFree}
                 id={EVENT_SEARCH_FILTERS.IS_FREE}
                 label={t('search.checkboxIsFree')}
-                onChange={handleIsFreeChange}
+                onChange={(e) => setIsFree(e.target.checked)}
               />
             </div>
             <div>
               <Checkbox
                 className={styles.checkbox}
-                checked={searchFilters.onlyEveningEvents}
+                checked={isOnlyEveningEvents}
                 id={EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS}
                 label={t('search.checkboxOnlyEveningEvents')}
-                onChange={handleOnlyEveningEventChange}
+                onChange={(e) => setIsOnlyEveningEvents(e.target.checked)}
               />
             </div>
             <div>
               <Checkbox
                 className={styles.checkbox}
-                checked={searchFilters.onlyRemoteEvents}
+                checked={isOnlyRemoteEvents}
                 id={EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS}
                 label={t('search.checkboxOnlyRemoteEvents')}
-                onChange={handleOnlyRemoteEventChange}
+                onChange={(e) => setIsOnlyRemoteEvents(e.target.checked)}
               />
             </div>
             <div className={styles.buttonWrapper}>

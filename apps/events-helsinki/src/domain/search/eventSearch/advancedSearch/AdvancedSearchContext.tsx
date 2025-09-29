@@ -23,6 +23,12 @@ type SearchFormState = {
   setSelectedTexts: React.Dispatch<React.SetStateAction<string[]>>;
   textSearchInput: string;
   setTextSearchInput: React.Dispatch<React.SetStateAction<string>>;
+  isOnlyEveningEvents: boolean;
+  setIsOnlyEveningEvents: React.Dispatch<React.SetStateAction<boolean>>;
+  isOnlyRemoteEvents: boolean;
+  setIsOnlyRemoteEvents: React.Dispatch<React.SetStateAction<boolean>>;
+  isFree: boolean;
+  setIsFree: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type AdvancedSearchContextType = SearchFormState & {

@@ -30,6 +30,11 @@ export function useAdvancedSearchFormState() {
   const [isCustomDate, setIsCustomDate] = React.useState<boolean>(false);
   const [selectedTexts, setSelectedTexts] = React.useState<string[]>([]);
   const [textSearchInput, setTextSearchInput] = React.useState('');
+  const [isOnlyEveningEvents, setIsOnlyEveningEvents] =
+    React.useState<boolean>(false);
+  const [isOnlyRemoteEvents, setIsOnlyRemoteEvents] =
+    React.useState<boolean>(false);
+  const [isFree, setIsFree] = React.useState<boolean>(false);
 
   // Initialize fields when page is loaded
   React.useEffect(() => {
@@ -41,6 +46,9 @@ export function useAdvancedSearchFormState() {
       [EVENT_SEARCH_FILTERS.PLACES]: places,
       [EVENT_SEARCH_FILTERS.START]: startTime,
       [EVENT_SEARCH_FILTERS.TEXT]: text,
+      [EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS]: onlyEveningEvents,
+      [EVENT_SEARCH_FILTERS.ONLY_REMOTE_EVENTS]: onlyRemoteEvents,
+      [EVENT_SEARCH_FILTERS.IS_FREE]: isFreeEvent,
     } = getSearchFilters(searchParams);
 
     setSelectedCategories(categories);
@@ -49,6 +57,9 @@ export function useAdvancedSearchFormState() {
     setSelectedTexts(text || []);
     setEnd(endTime);
     setStart(startTime);
+    setIsOnlyEveningEvents(onlyEveningEvents ?? false);
+    setIsOnlyRemoteEvents(onlyRemoteEvents ?? false);
+    setIsFree(isFreeEvent ?? false);
 
     if (endTime || startTime) {
       setIsCustomDate(true);
@@ -81,5 +92,11 @@ export function useAdvancedSearchFormState() {
     setSelectedTexts,
     textSearchInput,
     setTextSearchInput,
+    isOnlyEveningEvents,
+    setIsOnlyEveningEvents,
+    isOnlyRemoteEvents,
+    setIsOnlyRemoteEvents,
+    isFree,
+    setIsFree,
   };
 }

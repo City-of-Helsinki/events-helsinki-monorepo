@@ -116,7 +116,7 @@ it('should clear all filters and search field', async () => {
   expect(router).toMatchObject({ pathname, query: {} });
 });
 
-it('should change search query after checking only evening events checkbox', async () => {
+it('should change search query after checking only evening events checkbox and submitting form', async () => {
   const { router } = renderComponent();
 
   const onlyEveningEventsCheckbox = screen.getByRole('checkbox', {
@@ -128,13 +128,22 @@ it('should change search query after checking only evening events checkbox', asy
   expect(router).toMatchObject({
     pathname,
     query: {
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
+
+  expect(router).toMatchObject({
+    pathname,
+    query: {
       [EVENT_SEARCH_FILTERS.ONLY_EVENING_EVENTS]: 'true',
       [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
     },
   });
 });
 
-it('should change search query after checking is free checkbox', async () => {
+it('should change search query after checking is free checkbox and submitting form', async () => {
   const { router } = renderComponent();
 
   const isFreeCheckbox = screen.getByRole('checkbox', {
@@ -142,6 +151,15 @@ it('should change search query after checking is free checkbox', async () => {
   });
 
   await userEvent.click(isFreeCheckbox);
+
+  expect(router).toMatchObject({
+    pathname,
+    query: {
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
 
   expect(router).toMatchObject({
     pathname,
@@ -273,7 +291,7 @@ it.each([
   }
 );
 
-it('should change search query with remote events checkbox', async () => {
+it('should change search query with remote events checkbox and submitting form', async () => {
   const { router } = renderComponent();
 
   const remoteEventsCheckbox = screen.getByRole('checkbox', {
@@ -281,6 +299,15 @@ it('should change search query with remote events checkbox', async () => {
   });
 
   await userEvent.click(remoteEventsCheckbox);
+
+  expect(router).toMatchObject({
+    pathname,
+    query: {
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
 
   expect(router).toMatchObject({
     pathname,

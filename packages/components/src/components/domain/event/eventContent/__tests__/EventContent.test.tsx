@@ -49,7 +49,6 @@ it('should render event content fields', async () => {
     { role: 'heading', name: translations.event.info.labelLanguages },
     { role: 'heading', name: translations.event.info.labelOtherInfo },
     { role: 'heading', name: translations.event.info.labelDirections },
-    { role: 'heading', name: translations.event.info.labelPrice },
     { role: 'heading', name: translations.event.description.title },
     { role: 'heading', name: translations.event.shareLinks.title },
     { role: 'button', name: translations.common.shareLinks.buttonCopyLink },

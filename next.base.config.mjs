@@ -182,19 +182,12 @@ const nextBaseConfig = ({
 
       return [
         {
-          // Apply to all page routes (not API routes)
-          source: '/:path((?!api).*)*',
+          source: '/:path*',
           headers: [
             { key: 'X-Content-Type-Options', value: 'nosniff' },
             { key: 'X-XSS-Protection', value: '0' },
             { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
             { key: 'Cross-Origin-Embedder-Policy', value: 'same-origin' },
-          ],
-        },
-        {
-          // Apply CSP to all routes, including API (adjust if API needs different CSP)
-          source: '/(.*)',
-          headers: [
             {
               key: 'Content-Security-Policy',
               value: cspHeader,

@@ -39,10 +39,8 @@
     "titleDropdownTargetGroup": "Målgrupp",
     "titleDropdownSportsCategory": "Typ av sport",
     "showOnlyAdultCourses": "Visa endast vuxenkurser",
-    "ageLimitValues": "Ålder",
-    "ageLimitHeader": "Ange deltagarnas ålder i år, till exempel 8, 12-14 eller 60-65",
-    "ageLimitMin": "Från",
-    "ageLimitMax": "Till",
+    "ariaLabelAge": "Deltagarens ålder i år",
+    "placeholderAge": "Ange ålder, t.ex. 12",
     "ageFilter": {
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",

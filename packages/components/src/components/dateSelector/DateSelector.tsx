@@ -26,6 +26,7 @@ export interface DateSelectorProps {
   onChangeStartDate: (date: Date | null) => void;
   startDate: Date | null;
   toggleIsCustomDate: () => void;
+  showCloseButton?: boolean;
 }
 
 const DateSelector: FunctionComponent<DateSelectorProps> = ({
@@ -38,6 +39,7 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
   onChangeStartDate,
   startDate,
   toggleIsCustomDate,
+  showCloseButton = false,
 }) => {
   const { t } = useCommonTranslation();
   const locale = useLocale();
@@ -204,6 +206,7 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
         startDate={startDate}
         toggleIsCustomDate={handleToggleIsCustomDate}
         onCloseMenu={ensureMenuIsClosed}
+        showCloseButton={showCloseButton}
       />
     </div>
   );

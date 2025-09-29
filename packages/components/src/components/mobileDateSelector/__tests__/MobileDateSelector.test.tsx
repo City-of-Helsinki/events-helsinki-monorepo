@@ -103,7 +103,7 @@ it('should close date selector menu with escape', async () => {
 });
 
 it('should close date selector menu with close button', async () => {
-  renderComponent();
+  renderComponent({ showCloseButton: true });
   await userEvent.click(
     screen.getByRole('button', { name: /valitse päivät/i })
   );

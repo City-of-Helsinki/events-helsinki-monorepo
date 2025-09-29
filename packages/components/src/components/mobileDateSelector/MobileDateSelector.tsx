@@ -147,10 +147,12 @@ const MobileDateSelector: React.FC<Props> = ({
             />
           }
           isSelected={!!endDate || !!startDate}
+          isExpanded={isMenuOpen}
           onClick={toggleMenu}
           testId={'open-date-selector-button'}
           text={t('common:dateSelector.menu.buttonCustom')}
           value={'customDate'}
+          aria-haspopup="menu"
         />
         <MobileDateSelectorMenu
           closeBtnRef={closeBtnRef}

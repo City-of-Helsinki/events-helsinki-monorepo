@@ -116,7 +116,7 @@ it('should clear all filters and search field', async () => {
   expect(router).toMatchObject({ pathname, query: {} });
 });
 
-it('should change search query after checking is free checkbox', async () => {
+it('should change search query after checking is free checkbox and submitting form', async () => {
   const { router } = renderComponent();
 
   const isFreeCheckbox = screen.getByRole('checkbox', {
@@ -124,6 +124,15 @@ it('should change search query after checking is free checkbox', async () => {
   });
 
   await userEvent.click(isFreeCheckbox);
+
+  expect(router).toMatchObject({
+    pathname,
+    query: {
+      [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
+    },
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: /hae/i }));
 
   expect(router).toMatchObject({
     pathname,

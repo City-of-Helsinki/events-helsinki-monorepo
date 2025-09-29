@@ -75,33 +75,23 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     selectedTexts,
     textSearchInput,
     setTextSearchInput,
+    isFree,
+    setIsFree,
     scrollToResultList,
   } = useAdvancedSearchContext();
 
-  const searchFilters = React.useMemo(
-    () => ({
-      ...getSearchFilters(searchParams),
-      [EVENT_SEARCH_FILTERS.CATEGORIES]: selectedCategories,
-      [EVENT_SEARCH_FILTERS.DATE_TYPES]: selectedDateTypes,
-      [EVENT_SEARCH_FILTERS.END]: end,
-      [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
-      [EVENT_SEARCH_FILTERS.START]: start,
-      [EVENT_SEARCH_FILTERS.TEXT]: selectedTexts,
-      [EVENT_SEARCH_FILTERS.MIN_AGE]: minAgeInput,
-      [EVENT_SEARCH_FILTERS.MAX_AGE]: maxAgeInput,
-    }),
-    [
-      selectedCategories,
-      selectedDateTypes,
-      end,
-      selectedPlaces,
-      start,
-      selectedTexts,
-      minAgeInput,
-      maxAgeInput,
-      searchParams,
-    ]
-  );
+  const searchFilters = {
+    ...getSearchFilters(searchParams),
+    [EVENT_SEARCH_FILTERS.CATEGORIES]: selectedCategories,
+    [EVENT_SEARCH_FILTERS.DATE_TYPES]: selectedDateTypes,
+    [EVENT_SEARCH_FILTERS.END]: end,
+    [EVENT_SEARCH_FILTERS.PLACES]: selectedPlaces,
+    [EVENT_SEARCH_FILTERS.START]: start,
+    [EVENT_SEARCH_FILTERS.TEXT]: selectedTexts,
+    [EVENT_SEARCH_FILTERS.MIN_AGE]: minAgeInput,
+    [EVENT_SEARCH_FILTERS.MAX_AGE]: maxAgeInput,
+    [EVENT_SEARCH_FILTERS.IS_FREE]: isFree,
+  };
 
   const categories = React.useMemo(() => getEventCategoryOptions(t), [t]);
 
@@ -122,14 +112,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     };
     const search = getSearchQuery(filters);
 
-    goToSearch(search);
-  };
-
-  const handleIsFreeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const search = getSearchQuery({
-      ...searchFilters,
-      [EVENT_SEARCH_FILTERS.IS_FREE]: e.target.checked,
-    });
     goToSearch(search);
   };
 
@@ -253,7 +235,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 checked={searchFilters.isFree}
                 id={EVENT_SEARCH_FILTERS.IS_FREE}
                 label={t('search.checkboxIsFree')}
-                onChange={handleIsFreeChange}
+                onChange={(e) => setIsFree(e.target.checked)}
               />
             </div>
             <div className={styles.buttonWrapper}>

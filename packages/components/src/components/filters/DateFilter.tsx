@@ -9,6 +9,7 @@ export interface DateFilterProps {
   text?: string;
   type: DateFilterType;
   value: string;
+  'aria-labelledby'?: string;
 }
 
 const DateFilter: React.FC<DateFilterProps> = ({
@@ -16,6 +17,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
   text,
   type,
   value,
+  'aria-labelledby': ariaLabelledBy,
 }) => {
   const { t } = useCommonTranslation();
 
@@ -25,6 +27,7 @@ const DateFilter: React.FC<DateFilterProps> = ({
       text={text || translateValue('common:dateSelector.dateType', value, t)}
       type={type}
       value={value}
+      aria-labelledby={ariaLabelledBy}
     />
   );
 };

@@ -11,9 +11,16 @@ interface Props {
   text: string;
   type: FilterType;
   value: string;
+  'aria-labelledby'?: string;
 }
 
-const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
+const FilterButton: React.FC<Props> = ({
+  onRemove,
+  text,
+  type,
+  value,
+  'aria-labelledby': ariaLabelledBy,
+}) => {
   const { t } = useCommonTranslation();
   const handleRemove = () => {
     onRemove(value, type);
@@ -33,6 +40,7 @@ const FilterButton: React.FC<Props> = ({ onRemove, text, type, value }) => {
         filter: text,
       })}
       className={styles.filter}
+      aria-labelledby={ariaLabelledBy}
     >
       {text}
     </Tag>

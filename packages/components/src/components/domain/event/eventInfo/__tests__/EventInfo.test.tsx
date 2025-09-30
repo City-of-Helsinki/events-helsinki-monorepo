@@ -532,7 +532,7 @@ describe('subEvents', () => {
 
     await userEvent.click(toggleButton);
 
-    await actWait();
+    await waitForLoadingCompleted();
 
     subEventsResponse.data.forEach((event) => {
       const dateStr = getDateRangeStr(getDateRangeStrProps(event));

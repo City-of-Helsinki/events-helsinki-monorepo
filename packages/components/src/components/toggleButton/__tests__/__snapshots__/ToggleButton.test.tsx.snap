@@ -2,6 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <button
+  aria-label="Test button"
   aria-pressed="true"
   class="_toggleButton_d9abea _isSelected_d9abea"
   type="button"

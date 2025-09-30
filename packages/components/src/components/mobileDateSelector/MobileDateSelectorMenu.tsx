@@ -11,6 +11,7 @@ export const testIds = {
 
 interface Props {
   closeBtnRef?: MutableRefObject<HTMLButtonElement | null>;
+  startDateInputRef?: MutableRefObject<HTMLInputElement | null>;
   endDate: Date | null;
   isOpen: boolean;
   onChangeEndDate: (date: Date | null) => void;
@@ -22,6 +23,7 @@ interface Props {
 
 const MobileDateSelectorMenu: FunctionComponent<Props> = ({
   closeBtnRef,
+  startDateInputRef,
   endDate,
   isOpen,
   onChangeEndDate,
@@ -37,9 +39,11 @@ const MobileDateSelectorMenu: FunctionComponent<Props> = ({
       data-testid={testIds.menu}
       className={styles.mobileDateSelectorMenu}
       aria-live="polite"
+      role="menu"
     >
       <div className={styles.wrapper}>
         <DateRangePicker
+          startDateInputRef={startDateInputRef}
           endDate={endDate}
           onChangeEndDate={onChangeEndDate}
           onChangeStartDate={onChangeStartDate}

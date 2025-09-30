@@ -34,8 +34,15 @@ const MobileDateSelector: React.FC<Props> = ({
   const closeBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const toggleBtnRef = React.useRef<HTMLButtonElement | null>(null);
   const dateSelector = React.useRef<HTMLDivElement | null>(null);
+  const startDateInputRef = React.useRef<HTMLInputElement | null>(null);
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isMenuOpen) {
+      startDateInputRef.current?.focus();
+    }
+  }, [isMenuOpen]);
 
   const handleClickButton = (value: string) => {
     if (dateTypes.indexOf(value) !== -1) {
@@ -156,6 +163,7 @@ const MobileDateSelector: React.FC<Props> = ({
         />
         <MobileDateSelectorMenu
           closeBtnRef={closeBtnRef}
+          startDateInputRef={startDateInputRef}
           endDate={endDate}
           isOpen={isMenuOpen}
           onChangeEndDate={onChangeEndDate}

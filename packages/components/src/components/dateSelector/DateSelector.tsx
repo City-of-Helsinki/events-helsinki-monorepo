@@ -58,7 +58,12 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
     if (isMenuOpen) {
       setIsMenuOpen(false);
     }
-  }, [isMenuOpen]);
+
+    // Reset the state: if custom date picker is open, close it.
+    if (isCustomDate) {
+      toggleIsCustomDate();
+    }
+  }, [isCustomDate, isMenuOpen, toggleIsCustomDate]);
 
   const handleDocumentClick = React.useCallback(
     (event: MouseEvent) => {

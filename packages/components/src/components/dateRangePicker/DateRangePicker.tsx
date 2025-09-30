@@ -125,6 +125,9 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   return (
     <div className={styles.dateInputsContainer}>
       <DateInput
+        // FIXME: The date picker button should have
+        // `aria-expanded="true" aria-haspopup="menu" and focus should be set to opened calendar.
+        // These should be fixed in HDS component.`
         ref={startDateInputRef}
         autoComplete="off"
         id="start-date"
@@ -144,6 +147,9 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         }
       />
       <DateInput
+        // FIXME: The date picker button should have
+        // `aria-expanded="true" aria-haspopup="menu" and focus should be set to opened calendar.
+        // These should be fixed in HDS component.`
         ref={endDateInputRef}
         autoComplete="off"
         id="end-date"

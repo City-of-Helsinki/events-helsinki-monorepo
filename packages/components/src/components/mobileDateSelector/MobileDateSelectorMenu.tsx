@@ -33,7 +33,11 @@ const MobileDateSelectorMenu: FunctionComponent<Props> = ({
   const { t } = useCommonTranslation();
   if (!isOpen) return null;
   return (
-    <div data-testid={testIds.menu} className={styles.mobileDateSelectorMenu}>
+    <div
+      data-testid={testIds.menu}
+      className={styles.mobileDateSelectorMenu}
+      aria-live="polite"
+    >
       <div className={styles.wrapper}>
         <DateRangePicker
           endDate={endDate}

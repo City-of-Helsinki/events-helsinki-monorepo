@@ -89,6 +89,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
       className={classNames(styles.dateSelectorMenu, {
         [styles.isCustomDate]: isCustomDate,
       })}
+      aria-live="polite"
     >
       {!isCustomDate && (
         <div className={styles.checkboxWrapper}>

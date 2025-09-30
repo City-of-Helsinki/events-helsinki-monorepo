@@ -1,3 +1,4 @@
+import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 import { loadEnvConfig } from '@next/env';
 
 import { expect } from 'vitest';
@@ -5,6 +6,10 @@ import * as matchers from 'vitest-axe/matchers';
 import { initializeI18nWithConfig } from './config/tests/initI18n';
 
 import '@testing-library/jest-dom/vitest';
+
+// Load error messages for Apollo client so it's easier to debug errors
+loadDevMessages();
+loadErrorMessages();
 
 expect.extend(matchers);
 

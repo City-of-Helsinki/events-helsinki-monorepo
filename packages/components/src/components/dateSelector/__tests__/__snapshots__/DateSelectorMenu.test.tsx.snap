@@ -2,8 +2,10 @@
 
 exports[`matches snapshot 1`] = `
 <div
+  aria-live="polite"
   class="_dateSelectorMenu_bbd991"
   data-testid="date-selector-menu"
+  role="menu"
 >
   <div
     class="_checkboxWrapper_bbd991"

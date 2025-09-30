@@ -101,6 +101,9 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     <div
       className={styles.filterSummary}
       data-testid={filterSummaryContainerTestId}
+      aria-live="polite"
+      aria-atomic="true"
+      role="status"
     >
       {helsinkiOnly && <HelsinkiOnlyFilter onRemove={handleFilterRemove} />}
       {categories.map((category) => (
@@ -110,6 +113,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           text={translateValue('home:category.', category, t)}
           type="category"
           value={category}
+          aria-labelledby="category"
         />
       ))}
       {targetAgeGroup && (
@@ -119,13 +123,19 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           text={translateValue('search.targetAgeGroup.', targetAgeGroup, t)}
           type="targetAgeGroup"
           value={targetAgeGroup ?? ''}
+          aria-labelledby="targetAgeGroup"
         />
       )}
       {publisher && (
         <PublisherFilter id={publisher} onRemove={handleFilterRemove} />
       )}
       {places.map((place) => (
-        <PlaceFilter key={place} id={place} onRemove={handleFilterRemove} />
+        <PlaceFilter
+          key={place}
+          id={place}
+          onRemove={handleFilterRemove}
+          aria-labelledby="places"
+        />
       ))}
 
       {dateText && (
@@ -134,6 +144,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           text={dateText}
           type="date"
           value="date"
+          aria-labelledby="date"
         />
       )}
       {dateTypes.map((dateType) => (
@@ -142,6 +153,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           onRemove={handleFilterRemove}
           type="dateType"
           value={dateType}
+          aria-labelledby="date"
         />
       ))}
       <button className={styles.clearButton} onClick={onClear} type="button">

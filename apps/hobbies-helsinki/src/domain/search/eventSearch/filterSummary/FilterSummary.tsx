@@ -113,6 +113,9 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     <div
       className={styles.filterSummary}
       data-testid={filterSummaryContainerTestId}
+      aria-live="polite"
+      aria-atomic="true"
+      role="status"
     >
       {helsinkiOnly && <HelsinkiOnlyFilter onRemove={handleFilterRemove} />}
       {categories.map((category) => (
@@ -122,6 +125,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           text={translateValue('home:category.courses.', category, t)}
           type="category"
           value={category}
+          aria-labelledby="category"
         />
       ))}
       {publisher && (
@@ -129,7 +133,12 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
       )}
 
       {places.map((place) => (
-        <PlaceFilter key={place} id={place} onRemove={handleFilterRemove} />
+        <PlaceFilter
+          key={place}
+          id={place}
+          onRemove={handleFilterRemove}
+          aria-labelledby="places"
+        />
       ))}
 
       {dateText && (
@@ -138,6 +147,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           text={dateText}
           type="date"
           value="date"
+          aria-labelledby="date"
         />
       )}
       {dateTypes.map((dateType) => (
@@ -146,6 +156,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           onRemove={handleFilterRemove}
           type="dateType"
           value={dateType}
+          aria-labelledby="date"
         />
       ))}
       {audienceMinAgeLt && (
@@ -160,6 +171,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           type="maxAge"
           value={audienceMaxAgeGt}
           onRemove={handleFilterRemove}
+          aria-labelledby="ageLimitValues"
         />
       )}
       {typeof suitableFor === 'number' && Number.isInteger(suitableFor) && (

@@ -87,6 +87,9 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
     <div
       className={styles.filterSummary}
       data-testid={filterSummaryContainerTestId}
+      aria-live="polite"
+      aria-atomic="true"
+      role="status"
     >
       {sportsCategories.map((sportsCategory) => (
         <FilterButton
@@ -101,6 +104,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           )}
           type="sportsCategories"
           value={sportsCategory}
+          aria-labelledby="sportsCategory"
         />
       ))}
       {targetGroups.map((targetGroup) => (
@@ -110,6 +114,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           text={translateValue('appSports:home.targetGroup.', targetGroup, t)}
           type="targetGroups"
           value={targetGroup}
+          aria-labelledby="targetGroup"
         />
       ))}
       {organization && (
@@ -141,6 +146,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           onRemove={() =>
             handleFilterRemove('accessibilityProfile', accessibilityProfile)
           }
+          aria-labelledby="accessibilityProfile"
         />
       )}
       <button className={styles.clearButton} onClick={onClear} type="button">

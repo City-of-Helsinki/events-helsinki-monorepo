@@ -21,6 +21,8 @@ export interface DateRangePickerProps {
   startDate: Date | null;
   onChangeEndDate: (date: Date | null) => void;
   onChangeStartDate: (date: Date | null) => void;
+  startDateInputRef?: React.MutableRefObject<HTMLInputElement | null>;
+  endDateInputRef?: React.MutableRefObject<HTMLInputElement | null>;
 }
 
 const DateRangePicker: React.FC<DateRangePickerProps> = ({
@@ -28,6 +30,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   startDate,
   onChangeEndDate,
   onChangeStartDate,
+  startDateInputRef,
+  endDateInputRef,
 }) => {
   const [internalStartDateString, setInternalStartDateString] =
     React.useState<string>(() => initDate(startDate));
@@ -121,6 +125,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   return (
     <div className={styles.dateInputsContainer}>
       <DateInput
+        ref={startDateInputRef}
         autoComplete="off"
         id="start-date"
         value={internalStartDateString}
@@ -139,6 +144,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         }
       />
       <DateInput
+        ref={endDateInputRef}
         autoComplete="off"
         id="end-date"
         value={internalEndDateString}

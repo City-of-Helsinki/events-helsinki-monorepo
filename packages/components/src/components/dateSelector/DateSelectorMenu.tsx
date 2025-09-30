@@ -50,6 +50,13 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
 }) => {
   const { t } = useCommonTranslation();
 
+  // Focus on back button, when custom date menu opens.
+  useEffect(() => {
+    if (isCustomDate) {
+      backBtnRef?.current?.focus();
+    }
+  }, [isCustomDate, backBtnRef]);
+
   useEffect(() => {
     const clearDatesRange = () => {
       onChangeStartDate(null);
@@ -90,6 +97,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
         [styles.isCustomDate]: isCustomDate,
       })}
       aria-live="polite"
+      role="menu"
     >
       {!isCustomDate && (
         <div className={styles.checkboxWrapper}>

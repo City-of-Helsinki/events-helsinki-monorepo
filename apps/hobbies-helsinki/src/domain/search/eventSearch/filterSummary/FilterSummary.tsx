@@ -27,9 +27,21 @@ export const filterSummaryContainerTestId = 'filter-summary';
 
 interface Props {
   onClear: () => void;
+  outputForm?: React.DetailedHTMLProps<
+    React.OutputHTMLAttributes<HTMLOutputElement>,
+    HTMLOutputElement
+  >['form'];
+  outputHtmlFor?: React.DetailedHTMLProps<
+    React.OutputHTMLAttributes<HTMLOutputElement>,
+    HTMLOutputElement
+  >['htmlFor'];
 }
 
-const FilterSummary: React.FC<Props> = ({ onClear }) => {
+const FilterSummary: React.FC<Props> = ({
+  onClear,
+  outputForm,
+  outputHtmlFor = Object.values(EVENT_SEARCH_FILTERS).join(' '),
+}) => {
   const { t } = useTranslation('search');
   const locale = useLocale();
   const router = useRouter();
@@ -110,12 +122,14 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   if (!hasFilters) return null;
 
   return (
-    <div
+    <output
       className={styles.filterSummary}
       data-testid={filterSummaryContainerTestId}
       aria-live="polite"
       aria-atomic="true"
-      role="status"
+      name="advancedSearchFormFilters"
+      form={outputForm}
+      htmlFor={outputHtmlFor}
     >
       {helsinkiOnly && <HelsinkiOnlyFilter onRemove={handleFilterRemove} />}
       {categories.map((category) => (
@@ -187,7 +201,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         {t('buttonClearFilters')}
         <IconCrossCircleFill aria-hidden />
       </button>
-    </div>
+    </output>
   );
 };
 

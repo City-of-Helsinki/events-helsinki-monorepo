@@ -12,6 +12,7 @@ interface Props {
   type: FilterType;
   value: string;
   'aria-labelledby'?: string;
+  'aria-describedby'?: string;
 }
 
 const FilterButton: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const FilterButton: React.FC<Props> = ({
   type,
   value,
   'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
 }) => {
   const { t } = useCommonTranslation();
   const handleRemove = () => {
@@ -41,6 +43,7 @@ const FilterButton: React.FC<Props> = ({
       })}
       className={styles.filter}
       aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
     >
       {text}
     </Tag>

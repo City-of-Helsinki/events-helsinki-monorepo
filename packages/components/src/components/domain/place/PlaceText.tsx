@@ -1,9 +1,7 @@
-import {
-  getLocalizedString,
-  useLocale,
-  usePlaceDetailsQuery,
-} from '@events-helsinki/components';
 import React from 'react';
+import useLocale from '../../../hooks/useLocale';
+import { usePlaceDetailsQuery } from '../../../types/generated/graphql';
+import getLocalizedString from '../../../utils/getLocalizedString';
 
 interface Props {
   id: string;

@@ -1,8 +1,8 @@
-import { PlaceDetailsDocument } from '@events-helsinki/components';
 import * as React from 'react';
+import { render, screen, waitFor } from '@/test-utils';
+import { fakePlace } from '@/test-utils/mockDataUtils';
 
-import { fakePlace } from '../../../../config/vitest/mockDataUtils';
-import { render, screen, waitFor } from '../../../../config/vitest/test-utils';
+import { PlaceDetailsDocument } from '../../../../types/generated/graphql';
 import PlaceText from '../PlaceText';
 
 const placeId = 'helsinki:123';

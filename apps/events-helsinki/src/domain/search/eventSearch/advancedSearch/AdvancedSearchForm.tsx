@@ -6,6 +6,7 @@ import {
   IconRead,
   EVENT_SEARCH_FILTERS,
   AdvancedSearchTextInput,
+  PlaceSelector,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import type { SelectCustomTheme } from 'hds-react';
@@ -16,7 +17,6 @@ import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
 
-import PlaceSelector from '../../../place/placeSelector/PlaceSelector';
 import { EVENT_DEFAULT_SEARCH_FILTERS } from '../constants';
 import FilterSummary from '../filterSummary/FilterSummary';
 import {

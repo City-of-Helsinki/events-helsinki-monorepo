@@ -14,7 +14,10 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { ROUTES } from '../../../../constants';
 import routerHelper from '../../../../domain/app/routerHelper';
-import { PARAM_SEARCH_TYPE } from '../../../../domain/search/combinedSearch/constants';
+import {
+  initialCombinedSearchFormValues,
+  PARAM_SEARCH_TYPE,
+} from '../../../../domain/search/combinedSearch/constants';
 import { useCombinedSearchContext } from '../../../search/combinedSearch/adapters/CombinedSearchContext';
 import type { CombinedSearchAdapterInput } from '../../../search/combinedSearch/types';
 import styles from './filterSummary.module.scss';
@@ -23,9 +26,21 @@ export const filterSummaryContainerTestId = 'filter-summary';
 
 interface Props {
   onClear: () => void;
+  outputForm?: React.DetailedHTMLProps<
+    React.OutputHTMLAttributes<HTMLOutputElement>,
+    HTMLOutputElement
+  >['form'];
+  outputHtmlFor?: React.DetailedHTMLProps<
+    React.OutputHTMLAttributes<HTMLOutputElement>,
+    HTMLOutputElement
+  >['htmlFor'];
 }
 
-const FilterSummary: React.FC<Props> = ({ onClear }) => {
+const FilterSummary: React.FC<Props> = ({
+  onClear,
+  outputForm,
+  outputHtmlFor = Object.keys(initialCombinedSearchFormValues).join(' '),
+}) => {
   const { t } = useTranslation('search');
   const locale = useLocale();
   const router = useRouter();
@@ -84,12 +99,14 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
   if (!hasFilters) return null;
 
   return (
-    <div
+    <output
       className={styles.filterSummary}
       data-testid={filterSummaryContainerTestId}
       aria-live="polite"
       aria-atomic="true"
-      role="status"
+      name="advancedSearchFormFilters"
+      form={outputForm}
+      htmlFor={outputHtmlFor}
     >
       {sportsCategories.map((sportsCategory) => (
         <FilterButton
@@ -153,7 +170,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
         {t('buttonClearFilters')}
         <IconCrossCircleFill aria-hidden />
       </button>
-    </div>
+    </output>
   );
 };
 

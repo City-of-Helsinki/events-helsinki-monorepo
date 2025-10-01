@@ -146,6 +146,11 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
               clearButtonAriaLabel={tAppHobbies(
                 'appHobbies:search.search.clearButtonAriaLabel'
               )}
+              style={
+                {
+                  '--placeholder-color': 'var(--color-black)',
+                } as React.CSSProperties
+              }
             />
           </div>
         </div>
@@ -163,6 +168,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 showSearch={false}
                 title={t('search.titleDropdownCategory')}
                 value={selectedCategories}
+                buttonStyles={{ fontSize: 'var(--fontsize-body-m)' }}
               />
             </div>
             <div className={styles.dateSelectorWrapper}>
@@ -191,6 +197,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 showSelectAll={true}
                 title={t('search.titleDropdownPlace')}
                 value={selectedPlaces}
+                buttonStyles={{ fontSize: 'var(--fontsize-body-m)' }}
               />
             </div>
             <div>
@@ -209,6 +216,11 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
                 }
                 placeholder={t('search.placeholderAge')}
                 value={ageInput}
+                style={
+                  {
+                    '--placeholder-color': 'var(--color-black)',
+                  } as React.CSSProperties
+                }
               />
             </div>
           </div>

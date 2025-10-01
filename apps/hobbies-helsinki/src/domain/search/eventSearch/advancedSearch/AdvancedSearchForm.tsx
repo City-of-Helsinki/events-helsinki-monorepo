@@ -6,6 +6,7 @@ import {
   EVENT_SEARCH_FILTERS,
   IconRead,
   MultiSelectDropdown,
+  PlaceSelector,
   useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
@@ -15,7 +16,6 @@ import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
-import PlaceSelector from '../../../place/placeSelector/PlaceSelector';
 import { COURSE_DEFAULT_SEARCH_FILTERS } from '../constants';
 import FilterSummary from '../filterSummary/FilterSummary';
 import {

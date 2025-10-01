@@ -1,15 +1,13 @@
-import type { MultiselectDropdownProps } from '@events-helsinki/components';
-import {
-  MultiSelectDropdown,
-  useDebounce,
-  useLocale,
-  getLocalizedString,
-  usePlaceListQuery,
-  HELSINKI_OCD_DIVISION_ID,
-} from '@events-helsinki/components';
 import uniqBy from 'lodash/uniqBy';
 import React from 'react';
 
+import { MultiSelectDropdown } from '../../../../components/multiSelectDropdown';
+import { HELSINKI_OCD_DIVISION_ID } from '../../../../constants';
+import useDebounce from '../../../../hooks/useDebounce';
+import useLocale from '../../../../hooks/useLocale';
+import { usePlaceListQuery } from '../../../../types/generated/graphql';
+import getLocalizedString from '../../../../utils/getLocalizedString';
+import type { MultiselectDropdownProps } from '../../../multiSelectDropdown/types';
 import PlaceText from '../PlaceText';
 import useFetchPlacesByIds from '../useFetchPlacesByIds';
 

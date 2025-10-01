@@ -1,10 +1,11 @@
 import { useApolloClient, ApolloError } from '@apollo/client';
-import {
-  PlaceDetailsDocument,
-  type PlaceDetailsQuery,
-  type PlaceFieldsFragment,
-} from '@events-helsinki/components';
+
 import { useState, useEffect, useCallback, useRef } from 'react';
+import type {
+  PlaceDetailsQuery,
+  PlaceFieldsFragment,
+} from '../../../types/generated/graphql';
+import { PlaceDetailsDocument } from '../../../types/generated/graphql';
 
 /**
  * Custom React hook to fetch multiple places by their IDs using Apollo Client.

@@ -1,19 +1,13 @@
-import {
-  HELSINKI_OCD_DIVISION_ID,
-  PlaceDetailsDocument,
-  PlaceListDocument,
-} from '@events-helsinki/components';
 import { IconStar } from 'hds-react';
 import React from 'react';
+import { actWait, render, userEvent, waitFor, screen } from '@/test-utils';
+import { fakePlaces } from '@/test-utils/mockDataUtils';
 
-import { fakePlaces } from '../../../../../config/vitest/mockDataUtils';
+import { HELSINKI_OCD_DIVISION_ID } from '../../../../../constants';
 import {
-  waitFor,
-  actWait,
-  render,
-  screen,
-  userEvent,
-} from '../../../../../config/vitest/test-utils';
+  PlaceDetailsDocument,
+  PlaceListDocument,
+} from '../../../../../types/generated/graphql';
 import PlaceSelector from '../PlaceSelector';
 
 const variables = {

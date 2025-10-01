@@ -3,3 +3,4 @@ export * from './event';
 export * from './neighborhood';
 export * from './seo';
 export * from './unifiedSearch';
+export * from './place';

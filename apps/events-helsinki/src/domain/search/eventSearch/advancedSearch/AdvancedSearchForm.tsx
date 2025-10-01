@@ -156,6 +156,11 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
               clearButtonAriaLabel={tAppEvents(
                 'appEvents:search.search.clearButtonAriaLabel'
               )}
+              style={
+                {
+                  '--placeholder-color': 'var(--color-black)',
+                } as React.CSSProperties
+              }
             />
           </div>
         </div>

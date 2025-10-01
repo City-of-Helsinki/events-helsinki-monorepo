@@ -8,6 +8,7 @@ export interface AgeFilterProps {
   type: AgeFilterType;
   onRemove: (value: string, type: FilterType) => void;
   'aria-labelledby'?: string;
+  'aria-describedby'?: string;
 }
 
 const AgeFilter: React.FC<AgeFilterProps> = ({
@@ -15,6 +16,7 @@ const AgeFilter: React.FC<AgeFilterProps> = ({
   type,
   onRemove,
   'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
 }) => {
   const { t } = useCommonTranslation();
   const { t: s } = useSearchTranslation();
@@ -29,6 +31,7 @@ const AgeFilter: React.FC<AgeFilterProps> = ({
       type={type}
       value={value}
       aria-labelledby={ariaLabelledBy}
+      aria-describedby={ariaDescribedBy}
     />
   );
 };

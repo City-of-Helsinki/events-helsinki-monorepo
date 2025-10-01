@@ -164,6 +164,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           type="minAge"
           value={audienceMinAgeLt}
           onRemove={handleFilterRemove}
+          aria-describedby="ageLimitValues age"
         />
       )}
       {audienceMaxAgeGt && (
@@ -171,7 +172,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           type="maxAge"
           value={audienceMaxAgeGt}
           onRemove={handleFilterRemove}
-          aria-labelledby="ageLimitValues"
+          aria-describedby="ageLimitValues age"
         />
       )}
       {typeof suitableFor === 'number' && Number.isInteger(suitableFor) && (
@@ -179,6 +180,7 @@ const FilterSummary: React.FC<Props> = ({ onClear }) => {
           type="exactAge"
           value={suitableFor.toString()}
           onRemove={handleFilterRemove}
+          aria-describedby="age"
         />
       )}
       <button className={styles.clearButton} onClick={onClear} type="button">

@@ -1,10 +1,8 @@
 import type { Venue } from '@events-helsinki/components';
 import {
   useLocale,
-  IconButton,
   EllipsedTextWithToggle,
   getSecureImage,
-  useVenueTranslation,
   getLocaleFromPathname,
   isVenueHelsinkiCityOwned,
   HelsinkiCityOwnedIcon,
@@ -12,10 +10,10 @@ import {
 import type { ReturnParams } from '@events-helsinki/components/utils/eventQueryString.util';
 import { extractLatestReturnPath } from '@events-helsinki/components/utils/eventQueryString.util';
 import classNames from 'classnames';
-import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
+import { IconClock, IconLocation, IconTicket } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   BackgroundImage,
   ContentContainer,
@@ -32,7 +30,6 @@ export interface Props {
 }
 
 const VenueHero: React.FC<Props> = ({ venue }) => {
-  const { t } = useVenueTranslation();
   const { t: commonTranslation } = useTranslation('common');
   const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
@@ -40,13 +37,30 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
   const search = router.asPath.split('?')[1];
   const returnParam = extractLatestReturnPath(search, `/${locale}`);
 
-  const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
-    const goBackUrl = `${
-      returnPath.startsWith('/') ? '' : '/'
-    }${returnPath}${remainingQueryString}`;
-    const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
-    router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
-  };
+  const goBack = useCallback(
+    ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
+      const goBackUrl = `${
+        returnPath.startsWith('/') ? '' : '/'
+      }${returnPath}${remainingQueryString}`;
+      const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
+      router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
+    },
+    [router]
+  );
+
+  // Use returnPath to scroll to correct position when navigating with back button.
+  // See https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event
+  useEffect(() => {
+    const handlePopState = () => {
+      goBack(returnParam);
+    };
+
+    globalThis.addEventListener('popstate', handlePopState);
+
+    return () => {
+      globalThis.removeEventListener('popstate', handlePopState);
+    };
+  }, [goBack, returnParam]);
 
   const isHelsinkiCityOwned = isVenueHelsinkiCityOwned(venue);
   const imageUrl = venue.image ? getSecureImage(venue.image) : '';
@@ -93,16 +107,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('venue:hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
-          </div>
+          <div className={styles.leftEmpty} />
           <div>
             <BackgroundImage
               className={styles.image}

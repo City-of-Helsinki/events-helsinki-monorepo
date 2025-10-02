@@ -11,10 +11,12 @@ import React from 'react';
 export default function useHdsStyleFix() {
   React.useEffect(() => {
     setTimeout(() => {
-      const body = document?.body;
+      if (typeof document !== 'undefined') {
+        const body = document?.body;
 
-      if (body) {
-        body.style.visibility = 'unset';
+        if (document?.body) {
+          body.style.visibility = 'unset';
+        }
       }
     }, 10);
   }, []);

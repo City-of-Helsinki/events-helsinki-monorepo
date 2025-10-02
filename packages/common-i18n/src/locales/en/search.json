@@ -44,7 +44,7 @@
     "ageFilter": {
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",
-      "exactAge": "For a {{age}}-year-old"
+      "exactAge": "{{age}}-year-olds"
     },
     "labelAccessibilityProfile": "Accessibility",
     "ariaLabelClearAccessibilityProfile": "Remove the accessibility shortcoming selection",

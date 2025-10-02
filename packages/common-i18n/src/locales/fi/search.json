@@ -57,7 +57,7 @@
     "ageFilter": {
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",
-      "exactAge": "{{age}}-vuotiaalle"
+      "exactAge": "{{age}}-vuotiaille"
     },
     "labelAccessibilityProfile": "Esteettömyys",
     "ariaLabelClearAccessibilityProfile": "Poista esteettömyysvalinta",

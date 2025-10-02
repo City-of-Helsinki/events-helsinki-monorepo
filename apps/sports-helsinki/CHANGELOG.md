@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.31.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.30.0...sports-helsinki-v1.31.0) (2025-10-02)
+
+
+### Features
+
+* **apps,search:** Add accessibility proeprties to filter summary ([d987375](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d9873752e77452988a4ef80d37dc82e61d7ec9f2))
+* **search:** Replace autosuggest field with simpler text search field ([b5cb2a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b5cb2a8268b97adf0d5c96144a26b6d82389074a))
+
+
+### Bug Fixes
+
+* **search:** Add form element to landing page search ([4aa7279](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4aa727934a3ae377676c8361dcffb9dceba2b467))
+
 ## [1.30.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.29.1...sports-helsinki-v1.30.0) (2025-09-26)
 
 

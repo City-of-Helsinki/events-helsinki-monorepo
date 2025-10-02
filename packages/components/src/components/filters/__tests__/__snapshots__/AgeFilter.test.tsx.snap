@@ -12,11 +12,11 @@ exports[`matches snapshot 1`] = `
     <span
       aria-hidden="true"
     >
-      10-vuotiaalle
+      10-vuotiaille
     </span>
   </span>
   <button
-    aria-label="Poista suodatin: 10-vuotiaalle"
+    aria-label="Poista suodatin: 10-vuotiaille"
     class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz"
     id="hds-tag-delete-button"
     type="button"

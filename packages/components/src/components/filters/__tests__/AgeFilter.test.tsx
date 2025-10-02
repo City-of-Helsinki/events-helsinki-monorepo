@@ -20,7 +20,7 @@ it('calls onRemove callback when remove button is clicked', async () => {
   const onClickMock = vi.fn();
   render(<AgeFilter {...props} onRemove={onClickMock} />);
 
-  expect(screen.getByText(`${props.value}-vuotiaalle`)).toBeInTheDocument();
+  expect(screen.getByText(`${props.value}-vuotiaille`)).toBeInTheDocument();
 
   await userEvent.click(screen.getByRole('button'));
 

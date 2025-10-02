@@ -44,7 +44,7 @@
     "ageFilter": {
       "minAge": "{{age}} {{yearAbbr}}",
       "maxAge": "{{age}} {{yearAbbr}}",
-      "exactAge": "För en {{age}}-åring"
+      "exactAge": "{{age}}-åringar"
     },
     "labelAccessibilityProfile": "Tillgänglighet",
     "ariaLabelClearAccessibilityProfile": "Ta bort valet av tillgänglighet",

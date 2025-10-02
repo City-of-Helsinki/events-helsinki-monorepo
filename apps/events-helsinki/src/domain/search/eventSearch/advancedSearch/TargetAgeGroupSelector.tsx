@@ -1,7 +1,9 @@
 import { SrOnly, useSearchTranslation } from '@events-helsinki/components';
+import classNames from 'classnames';
 import type { SingleSelectProps } from 'hds-react';
 import { IconGroup, Select } from 'hds-react';
 import { TARGET_GROUP_AGE_GROUPS_IN_ORDER } from '../../../../constants';
+import styles from './targetAgeGroup.module.scss';
 
 /**
  * Get select component options for target group age selection.
@@ -64,6 +66,7 @@ function TargetAgeGroupSelector({
   label,
   value,
   defaultValue = '',
+  className,
   ...rest
 }: TargetAgeGroupSelectorProps) {
   const { t: tSearch } = useSearchTranslation();
@@ -84,6 +87,9 @@ function TargetAgeGroupSelector({
       // Prevent reading the label / placeholder twice by screen reader
       placeholder={!value ? placeholder : undefined}
       {...rest}
+      className={classNames(styles.targetAgeGroupSelector, {
+        [String(className)]: !!className,
+      })}
       multiselect={false}
       options={options}
       optionLabelField="label"

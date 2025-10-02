@@ -1,0 +1,31 @@
+export const consoleLevels = ['debug', 'info', 'log', 'warn', 'error'] as const;
+export type ConsoleLevel = (typeof consoleLevels)[number];
+
+/**
+ * Set up console method overrides to hide the given console messages.
+ * @param consoleMessagesToHide - An object mapping console levels to arrays of RegExp patterns.
+ * Each pattern represents a message to be hidden for that console level.
+ * If no patterns are provided for a level, no messages will be hidden for that level.
+ */
+export const hideConsoleMessages = (
+  consoleMessagesToHide: Partial<Record<ConsoleLevel, RegExp[]>>
+) => {
+  for (const consoleLevel of consoleLevels) {
+    const hidablePatterns = consoleMessagesToHide[consoleLevel];
+    if (hidablePatterns && hidablePatterns.length > 0) {
+      // eslint-disable-next-line no-console
+      const originalConsoleMethod = console[consoleLevel];
+      // eslint-disable-next-line no-console
+      console[consoleLevel] = function (msg, ...optionalParams) {
+        const msgString = msg.toString();
+        const shouldHide = hidablePatterns.some((pattern) =>
+          pattern.test(msgString)
+        );
+        if (shouldHide) {
+          return;
+        }
+        return originalConsoleMethod(msg, ...optionalParams);
+      };
+    }
+  }
+};

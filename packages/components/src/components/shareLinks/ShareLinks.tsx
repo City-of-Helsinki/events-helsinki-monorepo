@@ -37,7 +37,11 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ title }) => {
             className={styles.copyButton}
             successClass={styles.linkCopyButtonSuccess}
             successMessage={
-              <span className={styles.successTooltip}>
+              <span
+                className={styles.successTooltip}
+                aria-live="assertive"
+                role="alert"
+              >
                 {t('common:shareLinks.messageLinkCopySuccess')}
               </span>
             }

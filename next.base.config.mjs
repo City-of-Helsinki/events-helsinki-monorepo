@@ -259,6 +259,7 @@ const nextBaseConfig = ({
       cmsOrigin: process.env.CMS_ORIGIN,
       linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT,
     },
+    skipTrailingSlashRedirect: true,
   };
 
   let config = { ...nextConfig, ...overrideConfig };

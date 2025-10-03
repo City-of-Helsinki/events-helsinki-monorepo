@@ -72,9 +72,6 @@ const placeDetailsResponse = {
   data: {
     placeDetails: {
       ...places.data[0],
-      name: {
-        fi: placeName,
-      },
     },
   },
 };

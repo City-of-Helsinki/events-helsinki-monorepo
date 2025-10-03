@@ -105,6 +105,7 @@ it('should reset keyboard navigation position after a new search', async () => {
 
   const searchInput = screen.getByPlaceholderText(inputPlaceholder);
   await act(async () => searchInput.focus());
+  await waitFor(() => expect(searchInput).toHaveFocus());
 
   arrowDownKeyPressHelper();
 
@@ -220,7 +221,8 @@ it('should not open dropdown when user focuses toggle button', async () => {
   renderComponent();
 
   const toggleButton = screen.getByRole('button', { name: title });
-  toggleButton.focus();
+  await act(async () => toggleButton.focus());
+  await waitFor(() => expect(toggleButton).toHaveFocus());
 
   expect(
     screen.queryByRole('checkbox', { name: options[0].text })

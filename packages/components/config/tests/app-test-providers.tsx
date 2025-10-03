@@ -51,7 +51,7 @@ function TestProviders({ mocks, children, router }: Props) {
   return (
     <AppRoutingProvider {...appRoutingUrlMocks}>
       <I18nextTestStubProvider>
-        <MockedProvider mocks={mocks} addTypename={false}>
+        <MockedProvider mocks={mocks} addTypename={true}>
           <RHHCConfigProviderWithMockedApolloClient router={router}>
             <RouterContext.Provider value={{ ...router, ...mockRouter }}>
               <ErrorBoundary FallbackComponent={ErrorFallback}>

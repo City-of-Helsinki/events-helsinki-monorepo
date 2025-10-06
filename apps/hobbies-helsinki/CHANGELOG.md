@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.25.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.24.0...hobbies-helsinki-v2.25.0) (2025-10-06)
+
+
+### Features
+
+* Add AdvancedSearchNumberInput, use it for selecting age in hobbies ([68264d8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/68264d8616b19dff33270f691925e7e3691e18cd))
+* **apps,search:** Add accessibility proeprties to filter summary ([d987375](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d9873752e77452988a4ef80d37dc82e61d7ec9f2))
+* **hobbies:** Checkbox filter applies only after search form submitted ([95db667](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/95db667a5fdd0bdb16c8e166f12931d755474b1e))
+* **search:** Replace autosuggest field with simpler text search field ([b5cb2a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b5cb2a8268b97adf0d5c96144a26b6d82389074a))
+
+
+### Bug Fixes
+
+* **hobbies,search:** Place selector ([9d1ab91](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9d1ab91be46d1656706e6f0c8144bc2edd109bfa))
+* **hobbies:** Consistent styles for filter elements ([1117093](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1117093b6442db5b2e21bb4f8122957db002d0b1))
+* **search:** Add form element to landing page search ([4aa7279](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4aa727934a3ae377676c8361dcffb9dceba2b467))
+
 ## [2.24.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.23.1...hobbies-helsinki-v2.24.0) (2025-09-26)
 
 

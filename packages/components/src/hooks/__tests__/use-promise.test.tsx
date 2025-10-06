@@ -1,6 +1,6 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook, screen, waitFor } from '@testing-library/react';
 import type { FC } from 'react';
-import { render, screen } from '@/test-utils';
+import { render } from '@/test-utils';
 import { usePromise } from '../use-promise';
 describe('usePromise', () => {
   describe('hook', () => {
@@ -14,7 +14,7 @@ describe('usePromise', () => {
         return expected;
       };
 
-      const { result, waitForNextUpdate, rerender } = renderHook(() =>
+      const { result, rerender } = renderHook(() =>
         usePromise(promiseFn, deps)
       );
       // initial data
@@ -23,9 +23,9 @@ describe('usePromise', () => {
       expect(result.current.error).toBeNull();
 
       // resolved data
-      await waitForNextUpdate();
-
-      expect(callback).toHaveBeenCalledTimes(1);
+      await waitFor(() => {
+        expect(callback).toHaveBeenCalledTimes(1);
+      });
 
       expect(result.current.data).toStrictEqual(expected);
       expect(result.current.isLoading).toStrictEqual(false);
@@ -45,18 +45,16 @@ describe('usePromise', () => {
         throw new Error('cool');
       };
 
-      const { result, waitForNextUpdate } = renderHook(() =>
-        usePromise(promiseFn, {})
-      );
+      const { result } = renderHook(() => usePromise(promiseFn, {}));
       // initial data
       expect(result.current.data).toBeNull();
       expect(result.current.isLoading).toStrictEqual(true);
       expect(result.current.error).toBeNull();
 
       // resolved data
-      await waitForNextUpdate();
-
-      expect(callback).toHaveBeenCalledTimes(1);
+      await waitFor(() => {
+        expect(callback).toHaveBeenCalledTimes(1);
+      });
       expect(result.current.error).toBeInstanceOf(Error);
       expect(result.current.isLoading).toStrictEqual(false);
       expect(result.current.error?.message).toStrictEqual('cool');
@@ -68,24 +66,24 @@ describe('usePromise', () => {
         callback();
       };
 
-      const { result, waitForNextUpdate } = renderHook(() =>
-        usePromise(promiseFn, {})
-      );
+      const { result } = renderHook(() => usePromise(promiseFn, {}));
       // initial data
       expect(result.current.data).toBeNull();
       expect(result.current.isLoading).toStrictEqual(true);
       expect(result.current.error).toBeNull();
 
       // resolved data
-      await waitForNextUpdate();
-      expect(callback).toHaveBeenCalledTimes(1);
+      await waitFor(() => {
+        expect(callback).toHaveBeenCalledTimes(1);
+      });
 
       act(() => {
         result.current.reload();
       });
 
-      await waitForNextUpdate();
-      expect(callback).toHaveBeenCalledTimes(2);
+      await waitFor(() => {
+        expect(callback).toHaveBeenCalledTimes(2);
+      });
     });
   });
 

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`SearchSelect > renders properly 1`] = `
+exports[`SearchSelect > successful cases > renders properly 1`] = `
 <div>
   <div
     class="Select-module_root__Ka5uO _select_12d8cc _searchSelect_481aa4"

@@ -14,76 +14,92 @@ const accessibilityProfileOptions = [
 ];
 
 describe('SearchSelect', () => {
-  it('renders properly', () => {
-    const { container } = render(
-      <SearchSelect
-        id="accessibilityProfile"
-        label="label"
-        placeholder="placeholder"
-        options={accessibilityProfileOptions}
-      />
-    );
-    expect(
-      screen.getByRole('button', {
-        name: /label/i,
-      })
-    ).toBeInTheDocument();
-    expect(screen.getByText(/placeholder/i)).toBeInTheDocument();
-    expect(container).toMatchSnapshot();
+  describe('successful cases', () => {
+    it('renders properly', () => {
+      const { container } = render(
+        <SearchSelect
+          id="accessibilityProfile"
+          label="label"
+          placeholder="placeholder"
+          options={accessibilityProfileOptions}
+        />
+      );
+      expect(
+        screen.getByRole('button', {
+          name: /label/i,
+        })
+      ).toBeInTheDocument();
+      expect(screen.getByText(/placeholder/i)).toBeInTheDocument();
+      expect(container).toMatchSnapshot();
+    });
+
+    it("lists the values when it's clicked", async () => {
+      render(
+        <SearchSelect
+          id="accessibilityProfile"
+          label="label"
+          placeholder="placeholder"
+          options={accessibilityProfileOptions}
+        />
+      );
+      expect(await screen.findByText(/placeholder/i)).toBeInTheDocument();
+      // No list items are shown
+      accessibilityProfileOptions
+        .slice(1)
+        .forEach((option) =>
+          expect(screen.queryByText(option.text)).not.toBeInTheDocument()
+        );
+      await userEvent.click(
+        screen.getByRole('button', {
+          name: /label/i,
+        })
+      );
+      // All list items are shown
+      accessibilityProfileOptions
+        .slice(1)
+        .forEach(async (option) =>
+          expect(await screen.findByText(option.text)).toBeInTheDocument()
+        );
+      // Select one
+      await userEvent.click(
+        //   screen.getByRole('option', {
+        //     name: /rollator/i,
+        //   })
+        screen.getByText(/rollator/i)
+      );
+      // The placeholder text is replaced with the selected option
+      expect(screen.queryByText(/placeholder/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/rollator/i)).toBeInTheDocument();
+    });
   });
 
-  it("lists the values when it's clicked", async () => {
-    render(
-      <SearchSelect
-        id="accessibilityProfile"
-        label="label"
-        placeholder="placeholder"
-        options={accessibilityProfileOptions}
-      />
-    );
-    expect(await screen.findByText(/placeholder/i)).toBeInTheDocument();
-    // No list items are shown
-    accessibilityProfileOptions
-      .slice(1)
-      .forEach((option) =>
-        expect(screen.queryByText(option.text)).not.toBeInTheDocument()
-      );
-    await userEvent.click(
-      screen.getByRole('button', {
-        name: /label/i,
-      })
-    );
-    // All list items are shown
-    accessibilityProfileOptions
-      .slice(1)
-      .forEach(async (option) =>
-        expect(await screen.findByText(option.text)).toBeInTheDocument()
-      );
-    // Select one
-    await userEvent.click(
-      //   screen.getByRole('option', {
-      //     name: /rollator/i,
-      //   })
-      screen.getByText(/rollator/i)
-    );
-    // The placeholder text is replaced with the selected option
-    expect(screen.queryByText(/placeholder/i)).not.toBeInTheDocument();
-    expect(screen.getByText(/rollator/i)).toBeInTheDocument();
-  });
+  describe('error cases', () => {
+    // Suppress console.error output for expected errors
+    // that can not be hidden with try/catch nor with React error boundary.
+    beforeAll(() => {
+      vi.spyOn(console, 'error').mockImplementation(() => {});
+    });
 
-  it.each(['value', 'defaultValue'])(
-    'does not allow array as a %s',
-    (field) => {
+    afterAll(() => {
+      vi.restoreAllMocks();
+    });
+
+    it.each(['value', 'defaultValue'])(
+      'does not allow array as a %s',
+      (field) => {
+        expect(() =>
+          render(
+            <SearchSelect label="label" options={[]} {...{ [field]: [] }} />
+          )
+        ).toThrow(/must be singletons/);
+      }
+    );
+
+    it('does not allow multiselect', () => {
       expect(() =>
-        render(<SearchSelect label="label" options={[]} {...{ [field]: [] }} />)
-      ).toThrow(/must be singletons/);
-    }
-  );
-
-  it('does not allow multiselect', () => {
-    expect(() =>
-      // @ts-ignore
-      render(<SearchSelect label="label" options={[]} multiselect />)
-    ).toThrow(/does not support multiselect feature/);
+        // @ts-ignore
+        render(<SearchSelect label="label" options={[]} multiselect />)
+      ).toThrow(/does not support multiselect feature/);
+    });
   });
 });

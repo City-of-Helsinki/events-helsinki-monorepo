@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.27.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.26.0...events-helsinki-v1.27.0) (2025-10-06)
+
+
+### Features
+
+* **apps,search:** Add accessibility proeprties to filter summary ([d987375](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d9873752e77452988a4ef80d37dc82e61d7ec9f2))
+* **events:** Checkbox filter applies only after search form submitted ([dd36289](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dd3628996d797b2fad96281aa0f8444769b0010d))
+* **search:** Replace autosuggest field with simpler text search field ([b5cb2a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b5cb2a8268b97adf0d5c96144a26b6d82389074a))
+
+
+### Bug Fixes
+
+* **search:** Add form element to landing page search ([4aa7279](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4aa727934a3ae377676c8361dcffb9dceba2b467))
+* **search:** Target age group menu should always open downwards ([cee9b53](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cee9b531380b1ff945b44bca601da247f62bda06))
+
 ## [1.26.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.25.1...events-helsinki-v1.26.0) (2025-09-23)
 
 

@@ -8,6 +8,8 @@ import {
   PageBreadcrumbTitleDocument,
   getFilteredBreadcrumbs,
   getEventFields,
+  isEventClosed,
+  isEventCancelled,
 } from '@events-helsinki/components';
 import type {
   EventFields,
@@ -84,6 +86,37 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     const event = eventData?.eventDetails;
 
     if (!event) {
+      // eslint-disable-next-line no-console
+      console.debug('Event could not be found.', 'Responding with not found!', {
+        id,
+      });
+      return {
+        notFound: true,
+      };
+    }
+
+    /**
+     * If the event is already closed (ended or cancelled), respond with `notFound`.
+     *
+     * NOTE: HTTP 410 Gone would be a better response, but it's not available when SSG / ISR is used
+     * and implementing that feature with a middleware would require fetching the event multiple times.
+     *
+     * INFO: Since SSG / ISR is in use _without revalidate-feature_, a closed event can also be rendered,
+     * (in shape of a "warning page", not as event detail page). The `getStaticProps` will rerun only after
+     * the statically generated page has been deleted or revalidated on demand.
+     * For auto clean, there is a cleaner cronjob. Ondemand revalidation can be triggered by calling `/api/revalidate`.
+     */
+    if (isEventClosed(event) || isEventCancelled(event)) {
+      // eslint-disable-next-line no-console
+      console.info(
+        'Event closed (or cancelled).',
+        'Responding with not found!',
+        {
+          id,
+          eventEndTime: event.endTime,
+          eventStatus: event.eventStatus,
+        }
+      );
       return {
         notFound: true,
       };

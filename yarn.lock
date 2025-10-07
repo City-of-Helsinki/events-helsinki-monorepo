@@ -3164,7 +3164,6 @@ __metadata:
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     npm-run-all: "npm:4.1.5"
-    path: "npm:0.12.7"
     postcss: "npm:^8.5.6"
     prettier: "npm:^3.6.2"
     query-string: "npm:^9.2.2"
@@ -3307,7 +3306,6 @@ __metadata:
     husky: "npm:^9.1.7"
     lodash: "npm:4.17.21"
     nodemon: "npm:3.1.10"
-    path: "npm:0.12.7"
     prettier: "npm:^3.6.2"
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"
@@ -13271,7 +13269,6 @@ __metadata:
     husky: "npm:^9.1.7"
     lodash: "npm:4.17.21"
     nodemon: "npm:3.1.10"
-    path: "npm:0.12.7"
     prettier: "npm:^3.6.2"
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"
@@ -13329,7 +13326,6 @@ __metadata:
     next-transpile-modules: "npm:10.0.1"
     nodemon: "npm:3.1.10"
     npm-run-all: "npm:4.1.5"
-    path: "npm:0.12.7"
     picocolors: "npm:1.1.1"
     postcss: "npm:^8.5.6"
     prettier: "npm:^3.6.2"
@@ -15861,13 +15857,6 @@ __metadata:
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
   checksum: ca76c7e45ec715bfe6c1dd67b780b9a15068f37b37ab56cf8b773537b2654238469a42950f5f4d301212755e7512be888f627752e778e1863d95cfedefc8b8bd
-  languageName: node
-  linkType: hard
-
-"inherits@npm:2.0.3":
-  version: 2.0.3
-  resolution: "inherits@npm:2.0.3"
-  checksum: e29e5e9b9fd21e3fdf5e138c99b7328965c14e59abb31dcaec6eb81744597c52ad3b2ac3bf0fc73e1c397883f077bb52fbd98724ad5a49b4750f3de594f74c2f
   languageName: node
   linkType: hard
 
@@ -19847,16 +19836,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path@npm:0.12.7":
-  version: 0.12.7
-  resolution: "path@npm:0.12.7"
-  dependencies:
-    process: "npm:^0.11.1"
-    util: "npm:^0.10.3"
-  checksum: 17e60158ee1bfe7948e72f68aafe45687656044c357b94536fe73c0f7f0ab24a1ab69f5d765dc41622cd747e872b4e90b019d2ea73efdbbb4dbd105e21b2141a
-  languageName: node
-  linkType: hard
-
 "pathe@npm:^2.0.3":
   version: 2.0.3
   resolution: "pathe@npm:2.0.3"
@@ -21028,7 +21007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"process@npm:^0.11.1, process@npm:^0.11.10":
+"process@npm:^0.11.10":
   version: 0.11.10
   resolution: "process@npm:0.11.10"
   checksum: e21687b0b8fe1c6812ea43858aa5c1234e05dc6b2c366b280c850fd09d644100cbcf2f3784feec4bc6f57002a465e7eea2901acf1462ffc94ba9ac98f105ede5
@@ -25742,15 +25721,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"util@npm:^0.10.3":
-  version: 0.10.4
-  resolution: "util@npm:0.10.4"
-  dependencies:
-    inherits: "npm:2.0.3"
-  checksum: 9eb0fd78344eaefbf067784e47b022c6e464bc35191a885fc0c38852dd5a002bed90cdf1f6b171d9ca52d585a118d8e8b77f8f48060e82f7419f936a68d4a4d5
-  languageName: node
-  linkType: hard
-
 "util@npm:^0.12.4, util@npm:^0.12.5":
   version: 0.12.5
   resolution: "util@npm:0.12.5"
@@ -25855,7 +25825,6 @@ __metadata:
     husky: "npm:^9.1.7"
     lodash: "npm:4.17.21"
     nodemon: "npm:3.1.10"
-    path: "npm:0.12.7"
     prettier: "npm:^3.6.2"
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"

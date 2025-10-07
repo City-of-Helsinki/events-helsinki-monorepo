@@ -57,24 +57,40 @@ describe('getSecureImage', () => {
       {
         description: 'an http URL',
         url: 'http://images.hel.fi/af-123.jpg',
-        expected: '',
+        expectedResult: '',
+        expectedConsoleWarnings: [
+          'Image proxy is not configured. Unable to secure URL: http://images.hel.fi/af-123.jpg',
+        ],
       },
       {
         description: 'an https URL',
         url: 'https://images.hel.fi/af-456.jpg',
-        expected: 'https://images.hel.fi/af-456.jpg',
+        expectedResult: 'https://images.hel.fi/af-456.jpg',
+        expectedConsoleWarnings: [],
       },
       {
         description: 'a protocol-relative URL',
         url: '//images.hel.fi/af-789.jpg',
-        expected: 'https://images.hel.fi/af-789.jpg',
+        expectedResult: 'https://images.hel.fi/af-789.jpg',
+        expectedConsoleWarnings: [],
       },
     ];
 
     it.each(testCasesWithoutProxy)(
       'should handle URLs gracefully for $description',
-      async ({ url, expected }) => {
-        expect(getSecureImage(url, undefined)).toStrictEqual(expected);
+      async ({ url, expectedResult, expectedConsoleWarnings }) => {
+        const consoleWarnSpy = vi
+          .spyOn(console, 'warn')
+          .mockImplementation(() => {});
+
+        expect(getSecureImage(url, undefined)).toStrictEqual(expectedResult);
+
+        for (const [i, consoleWarning] of expectedConsoleWarnings.entries()) {
+          expect(consoleWarnSpy).toHaveBeenNthCalledWith(i + 1, consoleWarning);
+        }
+        expect(consoleWarnSpy).toHaveBeenCalledTimes(
+          expectedConsoleWarnings.length
+        );
       }
     );
   });

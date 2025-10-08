@@ -3,9 +3,9 @@ import {
   OrderDir,
   useSearchTranslation,
   Select,
-  SmallSpinner,
   useGeolocation,
   isAccessibilityProfile,
+  LoadingSpinner,
 } from '@events-helsinki/components';
 import type {
   GeolocationContextType,
@@ -91,7 +91,17 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
       value={selectedOrderByOption ?? defaultOption}
       onChange={handleUnifiedSearchOrderChange}
       options={orderByOptions}
-      icon={geolocation.loading ? <SmallSpinner /> : null}
+      icon={
+        geolocation.loading ? (
+          <LoadingSpinner
+            isLoading
+            small
+            multicolor={false}
+            hasPadding={false}
+            theme={{ '--spinner-color': 'var(--color-black)' }}
+          />
+        ) : null
+      }
       className={styles.unifiedSearchOrderBySelect}
     />
   );

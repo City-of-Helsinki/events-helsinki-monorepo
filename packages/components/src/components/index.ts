@@ -32,7 +32,6 @@ export { default as Select } from './select/Select';
 export { default as SearchSelect } from './select/SearchSelect';
 export * from './shareLinks';
 export { default as SkeletonLoader } from './skeletonLoader/SkeletonLoader';
-export { default as SmallSpinner } from './spinner/SmallSpinner';
 export { default as LoadingSpinner } from './spinner/LoadingSpinner';
 export { default as SrOnly } from './srOnly/SrOnly';
 export { default as Text } from './text/Text';

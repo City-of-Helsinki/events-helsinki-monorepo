@@ -85,10 +85,11 @@ const VenueSearchPage: React.FC<SearchPageProps> = ({
           data-testid="resultList"
         >
           <SrOnly aria-live="polite" aria-atomic={true}>
-            {isLoadingVenues
+            {isLoadingVenues || isFetchingMore
               ? t('search:ariaLiveLoading')
               : t('search:ariaLiveSearchReady', {
-                  count,
+                  totalCount: count,
+                  shownCount: venuesList?.length,
                 })}
           </SrOnly>
           <LoadingSpinner

@@ -1,6 +1,6 @@
 {
   "ariaLiveLoading": "Haetaan tapahtumia",
-  "ariaLiveSearchReady": "{{count}} hakutulosta",
+  "ariaLiveSearchReady": "Näytetään {{shownCount}} hakutulosta {{totalCount}} hakutuloksesta",
   "textFoundEvents": "{{count}} hakutulosta",
   "buttonClearFilters": "Tyhjennä hakuehdot",
   "errorLoadMore": "Tapahtumien lataaminen epäonnistui",

@@ -169,10 +169,11 @@ const SearchPage: React.FC<{
           data-testid="resultList"
         >
           <SrOnly aria-live="polite" aria-atomic={true}>
-            {isLoadingEvents
+            {isLoadingEvents || isFetchingMore
               ? t('search:ariaLiveLoading')
               : t('search:ariaLiveSearchReady', {
-                  count: eventsList?.meta.count,
+                  totalCount: eventsList?.meta.count,
+                  shownCount: eventsList?.data.length,
                 })}
           </SrOnly>
           <LoadingSpinner

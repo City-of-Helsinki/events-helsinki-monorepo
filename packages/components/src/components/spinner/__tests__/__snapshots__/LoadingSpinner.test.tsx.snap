@@ -6,15 +6,11 @@ exports[`matches snapshot 1`] = `
   data-testid="loading-spinner"
 >
   <div
-    class="_spinner_d3ce5a"
+    class="LoadingSpinner-module_loadingSpinner__2xHT_ LoadingSpinner-module_multicolor__1qbEF custom-theme-1"
   >
-    <div
-      class="LoadingSpinner-module_loadingSpinner__2xHT_ LoadingSpinner-module_multicolor__1qbEF"
-    >
-      <div />
-      <div />
-      <div />
-    </div>
+    <div />
+    <div />
+    <div />
   </div>
 </div>
 `;

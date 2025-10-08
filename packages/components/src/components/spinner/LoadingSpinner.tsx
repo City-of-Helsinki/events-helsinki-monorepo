@@ -1,33 +1,32 @@
 import classNames from 'classnames';
-import type { LoadingSpinnerProps } from 'hds-react';
-import { LoadingSpinner } from 'hds-react';
+import type { LoadingSpinnerCustomTheme, LoadingSpinnerProps } from 'hds-react';
+import { LoadingSpinner as HDSLoadingSpinner } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation';
 import styles from './loadingSpinner.module.scss';
 
-interface Props {
+type Props = {
   hasPadding?: boolean;
   isLoading: boolean;
   children?: React.ReactNode;
-  className?: string;
-  /**
-   * Value for aria-valuenow attribute. Required unless the loading status is indeterminate.
-   */
-  valuenow?: LoadingSpinnerProps['valuenow'];
-  small?: LoadingSpinnerProps['small'];
-  multicolor?: LoadingSpinnerProps['multicolor'];
-}
+} & Omit<LoadingSpinnerProps, 'loadingFinishedText' | 'loadingText'>;
 
-const LoadingSpinnerri: FunctionComponent<Props> = ({
+const defaultTheme: LoadingSpinnerCustomTheme = {
+  '--spinner-color-stage1': 'var(--color-coat-of-arms)',
+  '--spinner-color-stage2': 'var(--color-copper)',
+  '--spinner-color-stage3': 'var(--color-suomenlinna)',
+};
+
+const LoadingSpinner: FunctionComponent<Props> = ({
   hasPadding = true,
   isLoading,
   children,
   className,
-  valuenow,
   multicolor = true,
-  small = false,
+  theme = defaultTheme,
+  ...rest
 }) => {
   const { t } = useCommonTranslation();
   const loadingFinishedText = t('common:loadingSpinner.loadingFinishedText');
@@ -42,15 +41,13 @@ const LoadingSpinnerri: FunctionComponent<Props> = ({
           })}
           data-testid="loading-spinner"
         >
-          <div className={styles.spinner}>
-            <LoadingSpinner
-              multicolor={multicolor}
-              loadingFinishedText={loadingFinishedText}
-              loadingText={loadingText}
-              valuenow={valuenow}
-              small={small}
-            />
-          </div>
+          <HDSLoadingSpinner
+            {...rest}
+            multicolor={multicolor}
+            loadingFinishedText={loadingFinishedText}
+            loadingText={loadingText}
+            theme={theme}
+          />
         </div>
       ) : (
         children
@@ -59,4 +56,4 @@ const LoadingSpinnerri: FunctionComponent<Props> = ({
   );
 };
 
-export default LoadingSpinnerri;
+export default LoadingSpinner;

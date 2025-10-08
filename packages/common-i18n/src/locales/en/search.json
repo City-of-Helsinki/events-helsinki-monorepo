@@ -1,6 +1,6 @@
 {
   "ariaLiveLoading": "Searching for events",
-  "ariaLiveSearchReady": "{{count}} search results",
+  "ariaLiveSearchReady": "Showing {{shownCount}} search results out of {{totalCount}} search results",
   "buttonClearFilters": "Clear filters",
   "errorLoadMore": "Failed to load events",
   "orderBy": {

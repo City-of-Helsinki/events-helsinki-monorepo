@@ -1,6 +1,6 @@
 {
   "ariaLiveLoading": "Söker efter evenemang",
-  "ariaLiveSearchReady": "{{count}} sökresultat",
+  "ariaLiveSearchReady": "Visar {{shownCount}} sökresultat av {{totalCount}} sökresultat",
   "buttonClearFilters": "Töm sökfilter",
   "errorLoadMore": "Det gick inte att ladda evenemangen",
   "orderBy": {

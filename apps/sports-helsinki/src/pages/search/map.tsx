@@ -6,8 +6,9 @@ import {
   getLanguageOrDefault,
   RouteMeta,
   PageMeta,
+  LoadingSpinner,
 } from '@events-helsinki/components';
-import { LoadingSpinner } from 'hds-react';
+
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -37,7 +38,7 @@ import type { Connection, SearchResult } from '../../types';
 const MapView = dynamic(
   () => import('@events-helsinki/components/components/mapView/MapView'),
   {
-    loading: () => <LoadingSpinner multicolor />,
+    loading: () => <LoadingSpinner hasPadding={false} isLoading />,
     ssr: false,
   }
 );

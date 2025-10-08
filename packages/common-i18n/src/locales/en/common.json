@@ -54,6 +54,10 @@
   },
   "linkSkipToContent": "Skip to content",
   "loading": "Loading...",
+  "loadingSpinner": {
+    "loadingFinishedText": "Page has finished loading",
+    "loadingText": "Page is loading"
+  },
   "multiSelectDropdown": {
     "inputPlaceholder": "Write search word",
     "selectAll": "Select all"

@@ -54,6 +54,10 @@
   },
   "linkSkipToContent": "Gå till innehållet",
   "loading": "Laddning...",
+  "loadingSpinner": {
+    "loadingFinishedText": "Sidan har laddats klart",
+    "loadingText": "Sidan laddas"
+  },
   "multiSelectDropdown": {
     "inputPlaceholder": "Skriv sökord",
     "selectAll": "Välj alla"

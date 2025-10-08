@@ -54,6 +54,10 @@
   },
   "linkSkipToContent": "Siirry sisältöön",
   "loading": "Ladataan...",
+  "loadingSpinner": {
+    "loadingFinishedText": "Sivu on latautunut",
+    "loadingText": "Sivu latautuu"
+  },
   "multiSelectDropdown": {
     "inputPlaceholder": "Kirjoita hakusana",
     "selectAll": "Valitse kaikki"

@@ -1,12 +1,27 @@
 import React from 'react';
-import { configure, render, screen, waitFor } from '@/test-utils';
-import { translations } from '@/test-utils/initI18n';
-import { fakeEvent, fakeEventImage } from '@/test-utils/mockDataUtils';
-import type { EventFieldsFragment } from '../../../../../types';
+import {
+  configure,
+  createOtherEventTimesRequestAndResultMocks,
+  fakeOrganization,
+  fakeEvent,
+  fakeEventImage,
+  fakeEvents,
+  render,
+  screen,
+  translations,
+  waitFor,
+} from '@/test-utils';
+import {
+  type EventFieldsFragment,
+  EventTypeId,
+  OrganizationDetailsDocument,
+} from '../../../../../types';
 import EventContent from '../EventContent';
 
 configure({ defaultHidden: true });
 
+const testEventId = 'event-content-test-event-id-1';
+const testOrganizationId = 'event-content-test-organization-id-1';
 const startTime = '2020-06-22T07:00:00.000000Z';
 const endTime = '2020-06-22T10:00:00.000000Z';
 const description = 'Event description';
@@ -17,11 +32,12 @@ const neighborhood = 'Malmi';
 const locationName = 'Location name';
 const streetAddress = 'Test address 1';
 const photographerName = 'Kuvaaja Helsinki';
-const event = fakeEvent({
+const event: EventFieldsFragment = fakeEvent({
+  id: testEventId,
   startTime,
   endTime,
   description: { fi: description },
-  publisher: '',
+  publisher: testOrganizationId,
   location: {
     divisions: [{ name: { fi: neighborhood }, type: 'neighborhood' }],
     email,
@@ -32,10 +48,40 @@ const event = fakeEvent({
     streetAddress: { fi: streetAddress },
   },
   images: [fakeEventImage({ photographerName })],
-}) as EventFieldsFragment;
+});
+
+const testOrganization = fakeOrganization({
+  id: testOrganizationId,
+});
+const organizationResponse = {
+  data: {
+    organizationDetails: testOrganization,
+  },
+};
+
+const otherEventTimesCount = 3;
+
+const mocks = [
+  {
+    request: {
+      query: OrganizationDetailsDocument,
+      variables: {
+        id: testOrganizationId,
+      },
+    },
+    result: organizationResponse,
+  },
+  createOtherEventTimesRequestAndResultMocks({
+    superEventId: testEventId,
+    variables: {
+      eventType: [EventTypeId.General],
+    },
+    response: fakeEvents(otherEventTimesCount),
+  }),
+];
 
 it('should render event content fields', async () => {
-  render(<EventContent event={event} />);
+  render(<EventContent event={event} />, { mocks });
 
   await waitFor(() => {
     expect(
@@ -108,7 +154,8 @@ it('should hide map if internet event', () => {
           location: { ...event.location, id: 'helsinki:internet' },
         } as EventFieldsFragment
       }
-    />
+    />,
+    { mocks }
   );
   expect(screen.queryByText(/sijainti/i)).not.toBeInTheDocument();
 });
@@ -122,13 +169,14 @@ it('should show location extra info when available', () => {
           locationExtraInfo: { fi: 'Sisään takaovesta' },
         } as EventFieldsFragment
       }
-    />
+    />,
+    { mocks }
   );
   expect(screen.getByText(/Paikan lisätiedot/i)).toBeInTheDocument();
   expect(screen.getByText(/Sisään takaovesta/i)).toBeInTheDocument();
 });
 
 it('should not show location extra info title when location extra info not available', () => {
-  render(<EventContent event={event} />);
+  render(<EventContent event={event} />, { mocks });
   expect(screen.queryByText(/Paikan lisätiedot/i)).not.toBeInTheDocument();
 });

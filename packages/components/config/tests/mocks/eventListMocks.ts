@@ -75,6 +75,7 @@ export type EventListMockArguments = {
   superEventId?: EventListQueryVariables['superEvent'];
   variables?: EventListQueryVariables;
   response?: EventListResponse;
+  maxUsageCount?: number;
 };
 
 export const createEventListRequestAndResultMocks = ({
@@ -99,6 +100,7 @@ export const createOtherEventTimesRequestAndResultMocks = ({
   superEventId,
   variables,
   response,
+  maxUsageCount,
 }: EventListMockArguments): MockedResponse => ({
   request: {
     query: EventListDocument,
@@ -107,12 +109,14 @@ export const createOtherEventTimesRequestAndResultMocks = ({
       ...variables,
     },
   },
+  maxUsageCount,
   result: createResult(response),
 });
 
 export const createOtherEventTimesRequestThrowsErrorMocks = ({
   superEventId,
   variables,
+  maxUsageCount,
 }: EventListMockArguments): MockedResponse => ({
   request: {
     query: EventListDocument,
@@ -122,4 +126,5 @@ export const createOtherEventTimesRequestThrowsErrorMocks = ({
     },
   },
   error: new Error('not found'),
+  maxUsageCount,
 });

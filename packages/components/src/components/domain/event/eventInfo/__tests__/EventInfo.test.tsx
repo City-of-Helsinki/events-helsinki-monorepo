@@ -1,7 +1,8 @@
 import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
-import FileSaver from 'file-saver';
+import * as ics from 'ics';
 import mockRouter from 'next-router-mock';
 
+import type { MockInstance } from 'vitest';
 import {
   actWait,
   configure,
@@ -29,7 +30,6 @@ import {
   mocks,
   organizationName,
   organizerName,
-  price,
   providerContactInfo,
   streetAddress,
   subEventsResponse,
@@ -52,8 +52,7 @@ const getDateRangeStrProps = (event: EventDetails) => ({
   timeAbbreviation: translations.common.timeAbbreviation,
 });
 
-// TODO: Skipped because missing mocks makes it hang
-it.skip('should render event info fields', async () => {
+it('should render event info fields', async () => {
   const superEventMock = getSubEventsMocks({
     variables: {
       superEvent: 'super:123',
@@ -97,7 +96,6 @@ it.skip('should render event info fields', async () => {
       // eslint-disable-next-line @stylistic/max-len
       name: `${translations.common.mapBox.location.directionsHSL}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
-    { role: 'heading', name: translations.event.info.labelPrice },
   ];
 
   for (const { role, name } of itemsByRole) {
@@ -111,7 +109,6 @@ it.skip('should render event info fields', async () => {
     streetAddress,
     organizationName,
     organizerName,
-    price,
   ];
 
   for (const item of itemsByText) {
@@ -128,8 +125,7 @@ it.skip('should render event info fields', async () => {
   expect(screen.queryByText(providerContactInfo.sv)).not.toBeInTheDocument();
 }, 20_000);
 
-// TODO: Skipped because missing mocks makes it hang
-it.skip('should hide the organizer section when the organizer name is not given', async () => {
+it('should hide the organizer section when the organizer name is not given', async () => {
   const mockEvent = {
     ...event,
     provider: null,
@@ -216,37 +212,54 @@ it('should hide the map link from location info if location is internet', () => 
   ).not.toBeInTheDocument();
 });
 
-it.skip('should create ics file succesfully', async () => {
-  const saveAsSpy = vi.spyOn(FileSaver, 'saveAs');
-  render(<EventInfo event={event} />, { mocks });
+describe('add to calendar', () => {
+  let icsCreateEventSpy: MockInstance<typeof ics.createEvent> | null = null;
 
-  // Event info fields
-  await userEvent.click(
-    screen.getByRole('button', {
-      name: translations.event.info.buttonAddToCalendar,
-    })
-  );
-
-  await waitFor(() => {
-    expect(saveAsSpy).toHaveBeenCalled();
-  });
-});
-
-it.skip('should create ics file succesfully when end time is not defined', async () => {
-  const saveAsSpy = vi.spyOn(FileSaver, 'saveAs');
-  render(<EventInfo event={{ ...event, endTime: null }} />, {
-    mocks,
+  beforeEach(() => {
+    const emptyIcsReturnObject: ics.ReturnObject = {};
+    icsCreateEventSpy = vi
+      .spyOn(ics, 'createEvent')
+      .mockImplementation(
+        (..._args: unknown[]): ics.ReturnObject => emptyIcsReturnObject
+      );
   });
 
-  // Event info fields
-  await userEvent.click(
-    screen.getByRole('button', {
-      name: translations.event.info.buttonAddToCalendar,
-    })
-  );
+  afterEach(() => {
+    if (icsCreateEventSpy) {
+      icsCreateEventSpy.mockRestore();
+    }
+  });
 
-  await waitFor(() => {
-    expect(saveAsSpy).toHaveBeenCalled();
+  it('should call ics.createEvent', async () => {
+    render(<EventInfo event={event} />, { mocks });
+
+    // Event info fields
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: translations.event.info.buttonAddToCalendar,
+      })
+    );
+
+    await waitFor(() => {
+      expect(icsCreateEventSpy).toHaveBeenCalledOnce();
+    });
+  });
+
+  it('should call ics.createEvent when end time is not defined', async () => {
+    render(<EventInfo event={{ ...event, endTime: null }} />, {
+      mocks,
+    });
+
+    // Event info fields
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: translations.event.info.buttonAddToCalendar,
+      })
+    );
+
+    await waitFor(() => {
+      expect(icsCreateEventSpy).toHaveBeenCalledOnce();
+    });
   });
 });
 
@@ -361,8 +374,7 @@ describe('OrganizationInfo', () => {
   );
 });
 
-// TODO: Skipped because missing mocks makes it hang
-describe.skip('superEvent', () => {
+describe('superEvent', () => {
   it('should render super event title and link when super event is given', async () => {
     const superEvent = fakeEvent({
       superEvent: { internalId: superEventInternalId },

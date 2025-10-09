@@ -151,13 +151,13 @@ export const firstSubEventsGeneralLoadMock = getSubEventsMocks({
 export const secondSubEventsCourseLoadMock = getSubEventsMocks({
   variables: { page: 2, eventType: [EventTypeId.Course] },
   response: subEventsLoadMoreResponse,
-  maxUsageCount: 10, // Needed this many times or mocks don't match
+  maxUsageCount: 17, // Needed this many times or mocks don't match
 });
 
 export const secondSubEventsGeneralLoadMock = getSubEventsMocks({
   variables: { page: 2, eventType: [EventTypeId.General] },
   response: subEventsLoadMoreResponse,
-  maxUsageCount: 6, // Needed this many times or mocks don't match
+  maxUsageCount: 7, // Needed this many times or mocks don't match
 });
 
 export const mocks = [

@@ -4,6 +4,10 @@ import type { EventsFederationApolloClientConfig } from '../EventsFederationApol
 import EventsFederationApolloClient from '../EventsFederationApolloClient';
 
 describe('EventsFederationApolloClient', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   const mockRouterHelper = {
     rewriteInternalURLs: vi.fn((data) => data),
     i18nRoutes: {},
@@ -37,6 +41,9 @@ describe('EventsFederationApolloClient', () => {
   });
 
   it('should allow unauthorized requests if configured', () => {
+    const consoleInfoSpy = vi
+      .spyOn(console, 'info')
+      .mockImplementation(() => {});
     const config = {
       ...baseConfig,
       allowUnauthorizedRequests: true,
@@ -45,6 +52,9 @@ describe('EventsFederationApolloClient', () => {
     const client = new EventsFederationApolloClient(config);
     const httpLink = client.getHttpLink(config.federationGraphqlEndpoint);
     expect(httpLink.options.fetchOptions.agent.rejectUnauthorized).toBeFalsy();
+    expect(consoleInfoSpy).toHaveBeenCalledWith(
+      expect.stringContaining('Allowing unauthorized requests')
+    );
   });
 
   it('should call handleError on GraphQL error', () => {

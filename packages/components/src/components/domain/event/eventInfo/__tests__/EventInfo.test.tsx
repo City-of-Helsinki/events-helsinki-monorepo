@@ -36,7 +36,7 @@ import {
   subEventsResponse,
   superEventInternalId,
   telephone,
-} from '../../eventInfo/utils/EventInfo.mocks';
+} from '../../eventInfo/mocks/EventInfo.mocks';
 import EventInfo from '../EventInfo';
 import { subEventsListTestId, superEventTestId } from '../EventsHierarchy';
 

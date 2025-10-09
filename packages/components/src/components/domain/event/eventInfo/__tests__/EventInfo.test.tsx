@@ -251,12 +251,18 @@ it.skip('should create ics file succesfully when end time is not defined', async
   });
 });
 
-it('should hide audience age info on single event page', async () => {
-  render(<EventInfo event={event} />, {
-    routes: [`/kurssit`],
-  });
+it('should show formatted audience age info on single event page if min and max ages are specified', async () => {
+  render(
+    <EventInfo
+      event={{ ...event, audienceMinAge: '7', audienceMaxAge: '16' }}
+    />,
+    {
+      mocks,
+      routes: [`/kurssit`],
+    }
+  );
 
-  expect(await screen.findByText(/5–15-vuotiaat/i)).toBeInTheDocument();
+  expect(await screen.findByText(/7–16-vuotiaat/i)).toBeInTheDocument();
 });
 
 it('should show formatted audience age info on single event page if max age is not specified', async () => {

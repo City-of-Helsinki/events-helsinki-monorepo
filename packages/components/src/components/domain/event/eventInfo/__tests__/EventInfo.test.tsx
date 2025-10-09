@@ -27,7 +27,6 @@ import {
   getSubEventsMocks,
   locationName,
   mocks,
-  mocksWithSubEvents,
   organizationName,
   organizerName,
   price,
@@ -267,6 +266,7 @@ it('should show formatted audience age info on single event page if min and max 
 
 it('should show formatted audience age info on single event page if max age is not specified', async () => {
   render(<EventInfo event={{ ...event, audienceMaxAge: null }} />, {
+    mocks,
     routes: [`/kurssit`],
   });
 
@@ -279,6 +279,7 @@ it('should hide audience age info on single event page if min and max ages are n
       event={{ ...event, audienceMinAge: null, audienceMaxAge: null }}
     />,
     {
+      mocks,
       routes: [`/kurssit`],
     }
   );
@@ -302,7 +303,7 @@ describe('OrganizationInfo', () => {
     'should show correct provider link text on event/hobby detail page',
     async ({ eventTypeId, expectedLinkText }) => {
       render(<EventInfo event={{ ...event, typeId: eventTypeId }} />, {
-        mocks: mocksWithSubEvents,
+        mocks,
         routes: ['/fi/kurssit/test'],
       });
       await waitFor(() => {
@@ -374,19 +375,7 @@ describe.skip('superEvent', () => {
     const { router } = render(
       <EventInfo event={event} superEvent={superEventResponse} />,
       {
-        mocks: [
-          ...mocksWithSubEvents,
-          // ...mocksWithSubEvents.map((entry) => ({
-          //   ...entry,
-          //   request: {
-          //     ...entry.request,
-          //     variables: {
-          //       ...entry.request.variables,
-          //       superEvent: superEvent.id
-          //     }
-          //   }
-          // }))
-        ],
+        mocks,
       }
     );
     await actWait();
@@ -420,9 +409,7 @@ describe.skip('superEvent', () => {
 
 describe('subEvents', () => {
   it('should render sub events title and content when sub events are given', async () => {
-    render(<EventInfo event={event} />, {
-      mocks: mocksWithSubEvents,
-    });
+    render(<EventInfo event={event} />, { mocks });
     await waitFor(() => {
       expect(
         screen.getByRole('heading', {
@@ -434,9 +421,7 @@ describe('subEvents', () => {
   });
 
   it('should navigate to sub events page when it is clicked', async () => {
-    const { router } = render(<EventInfo event={event} />, {
-      mocks: mocksWithSubEvents,
-    });
+    const { router } = render(<EventInfo event={event} />, { mocks });
     const eventsList = await screen.findByTestId(subEventsListTestId);
     const subEvent = subEventsResponse.data[0];
     const dateStr = getDateRangeStr(getDateRangeStrProps(subEvent));

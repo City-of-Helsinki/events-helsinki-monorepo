@@ -120,27 +120,44 @@ export const getSubEventsMocks = ({
   response,
   variables,
   superEventId,
+  maxUsageCount,
 }: {
   response: EventListResponse;
   variables?: EventListQueryVariables;
   superEventId?: string;
+  maxUsageCount?: number;
 }) =>
   createOtherEventTimesRequestAndResultMocks({
     superEventId: superEventId ?? event.id,
     response,
     variables,
+    maxUsageCount,
   });
 
-export const firstSubEventsLoadMock = getSubEventsMocks({
+export const firstSubEventsCourseLoadMock = getSubEventsMocks({
   response: subEventsResponse,
   variables: {
     eventType: [EventTypeId.Course],
   },
 });
 
-export const secondSubEventsLoadMock = getSubEventsMocks({
+export const firstSubEventsGeneralLoadMock = getSubEventsMocks({
+  response: subEventsResponse,
+  variables: {
+    eventType: [EventTypeId.General],
+  },
+});
+
+export const secondSubEventsCourseLoadMock = getSubEventsMocks({
   variables: { page: 2, eventType: [EventTypeId.Course] },
   response: subEventsLoadMoreResponse,
+  maxUsageCount: 10, // Needed this many times or mocks don't match
+});
+
+export const secondSubEventsGeneralLoadMock = getSubEventsMocks({
+  variables: { page: 2, eventType: [EventTypeId.General] },
+  response: subEventsLoadMoreResponse,
+  maxUsageCount: 6, // Needed this many times or mocks don't match
 });
 
 export const mocks = [
@@ -153,21 +170,8 @@ export const mocks = [
     },
     result: organizationResponse,
   },
-  firstSubEventsLoadMock,
-  secondSubEventsLoadMock,
-];
-
-export const mocksWithSubEvents = [
-  ...mocks,
-  {
-    request: {
-      query: OrganizationDetailsDocument,
-      variables: {
-        id: organizationId,
-      },
-    },
-    result: organizationResponse,
-  },
-  firstSubEventsLoadMock,
-  secondSubEventsLoadMock,
+  firstSubEventsCourseLoadMock,
+  firstSubEventsGeneralLoadMock,
+  secondSubEventsCourseLoadMock,
+  secondSubEventsGeneralLoadMock,
 ];

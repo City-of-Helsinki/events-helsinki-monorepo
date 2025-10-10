@@ -8,7 +8,7 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
 
 USER root
 
@@ -79,7 +79,7 @@ RUN yum remove -y rsync && \
 # Stage 2: Build the app                                          #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS builder
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS builder
 
 USER root
 
@@ -138,7 +138,7 @@ RUN yarn workspace ${PROXY} build
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS develop
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS develop
 
 # install yarn
 USER root
@@ -179,7 +179,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS runner
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS runner
 
 
 # Build ARGS

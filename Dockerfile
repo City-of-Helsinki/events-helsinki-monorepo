@@ -7,9 +7,9 @@
 #   2. depend on .dockerignore, you must at least                 #
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
-ARG BUILDER_FROM_IMAGE=registry.access.redhat.com/ubi9/nodejs-20
+ARG BUILDER_FROM_IMAGE=registry.access.redhat.com/ubi9/nodejs-22
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
 
 USER root
 
@@ -154,7 +154,7 @@ CMD ["sh", "-c", "echo ${PROJECT}"]
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20  AS develop
+FROM registry.access.redhat.com/ubi9/nodejs-22  AS develop
 
 # Use non-root user
 USER default
@@ -185,7 +185,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS runner
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS runner
 
 # Use non-root user
 USER default

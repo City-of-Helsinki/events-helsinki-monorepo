@@ -8,7 +8,7 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
 
 # install yarn
 USER root
@@ -79,7 +79,7 @@ RUN yum remove -y rsync && \
 # This is used to speedup OpenShift builds                        #
 ###################################################################
 # Build cache layer
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS build_cache
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS build_cache
 # Build ARGS
 ARG PROJECT
 ARG CMS_ORIGIN
@@ -136,7 +136,7 @@ USER default
 RUN yarn install --immutable --inline-builds
 
 # Create cache image
-FROM registry.access.redhat.com/ubi9/nodejs-20 AS cache
+FROM registry.access.redhat.com/ubi9/nodejs-22 AS cache
 ARG PROJECT
 
 WORKDIR /app/.yarn/cache/

@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.32.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.31.0...sports-helsinki-v1.32.0) (2025-10-10)
+
+
+### Features
+
+* **apps:** Respond with not found when event is closed or cancelled ([db5df39](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/db5df39aaec70e3496401e0ea908da343a93575d))
+
+
+### Bug Fixes
+
+* **search:** Improve polite message for screen readers on search ([c5a1c31](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c5a1c3174553f8857f6cce61525877051d90529d))
+
 ## [1.31.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.30.0...sports-helsinki-v1.31.0) (2025-10-02)
 
 

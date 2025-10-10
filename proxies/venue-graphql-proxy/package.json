@@ -42,7 +42,7 @@
   "devDependencies": {
     "@events-helsinki/eslint-config-bases": "workspace:^",
     "@types/lodash": "^4.17.20",
-    "@types/node": "20.19.1",
+    "@types/node": "22.18.9",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
     "@typescript-eslint/parser": "^8.37.0",
     "@vitejs/plugin-react": "4.6.0",

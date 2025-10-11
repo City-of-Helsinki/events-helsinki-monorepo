@@ -85,6 +85,7 @@ export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
       typeId: EventTypeId.General,
       __typename: 'EventDetails',
       locationExtraInfo: null,
+      providerContactInfo: null,
     },
     overrides
   );

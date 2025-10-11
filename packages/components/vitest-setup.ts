@@ -1,3 +1,5 @@
+import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
+import { hideConsoleMessages } from '@events-helsinki/common-tests';
 import { loadEnvConfig } from '@next/env';
 
 import { expect } from 'vitest';
@@ -5,6 +7,10 @@ import * as matchers from 'vitest-axe/matchers';
 import { initializeI18nWithConfig } from './config/tests/initI18n';
 
 import '@testing-library/jest-dom/vitest';
+
+// Load error messages for Apollo client so it's easier to debug errors
+loadDevMessages();
+loadErrorMessages();
 
 expect.extend(matchers);
 
@@ -83,3 +89,19 @@ vi.mock('next-i18next', async () => {
 });
 
 loadEnvConfig(process.cwd());
+
+hideConsoleMessages({
+  error: [
+    // Hide error message caused by hds-react v3:
+    // eslint-disable-next-line @stylistic/max-len
+    // https://github.com/City-of-Helsinki/helsinki-design-system/blob/v3.11.0/packages/react/src/components/dropdown/select/Select.tsx#L669
+    //
+    // Example use case:
+    // SearchSelect (packages/components) → Select (packages/components) → Select (hds-react)
+    // Removing this hiding and running SearchSelect tests should show this error if HDS v3.11.0 is still used.
+    //
+    // Related issue:
+    // https://github.com/facebook/react/issues/29233
+    /Support for defaultProps will be removed.*Use JavaScript default parameters instead.*hds-react/s,
+  ],
+});

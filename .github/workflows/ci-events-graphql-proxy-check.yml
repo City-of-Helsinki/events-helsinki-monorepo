@@ -27,7 +27,7 @@ jobs:
     uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@main
     secrets: inherit
     with:
-      node-version: 20
+      node-version: 22
       typecheck: true
       app-directory: proxies/events-graphql-proxy
       extra-commands: |

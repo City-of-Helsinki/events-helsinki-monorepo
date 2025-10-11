@@ -50,7 +50,7 @@ services:
       dockerfile: Dockerfile
       target: builder
       args:
-        - BUILDER_FROM_IMAGE=${BUILDER_FROM_IMAGE:-registry.access.redhat.com/ubi9/nodejs-20}
+        - BUILDER_FROM_IMAGE=${BUILDER_FROM_IMAGE:-registry.access.redhat.com/ubi9/nodejs-22}
         - APP_PORT=3000
         - PROJECT=hobbies-helsinki
         - SKIP_BUILD_STATIC_GENERATION=${SKIP_BUILD_STATIC_GENERATION:-1}
@@ -124,7 +124,7 @@ services:
       dockerfile: Dockerfile
       target: runner
       args:
-        - BUILDER_FROM_IMAGE=${BUILDER_FROM_IMAGE:-registry.access.redhat.com/ubi9/nodejs-20}
+        - BUILDER_FROM_IMAGE=${BUILDER_FROM_IMAGE:-registry.access.redhat.com/ubi9/nodejs-22}
         - APP_PORT=3000
         - PROJECT=hobbies-helsinki
         - SKIP_BUILD_STATIC_GENERATION=${SKIP_BUILD_STATIC_GENERATION:-1}

@@ -1,7 +1,8 @@
 import { waitForLoadingCompleted } from '@events-helsinki/common-tests';
-import FileSaver from 'file-saver';
+import * as ics from 'ics';
 import mockRouter from 'next-router-mock';
 
+import type { MockInstance } from 'vitest';
 import {
   actWait,
   configure,
@@ -27,16 +28,14 @@ import {
   getSubEventsMocks,
   locationName,
   mocks,
-  mocksWithSubEvents,
   organizationName,
   organizerName,
-  price,
   providerContactInfo,
   streetAddress,
   subEventsResponse,
   superEventInternalId,
   telephone,
-} from '../../eventInfo/utils/EventInfo.mocks';
+} from '../../eventInfo/mocks/EventInfo.mocks';
 import EventInfo from '../EventInfo';
 import { subEventsListTestId, superEventTestId } from '../EventsHierarchy';
 
@@ -53,8 +52,7 @@ const getDateRangeStrProps = (event: EventDetails) => ({
   timeAbbreviation: translations.common.timeAbbreviation,
 });
 
-// TODO: Skipped because missing mocks makes it hang
-it.skip('should render event info fields', async () => {
+it('should render event info fields', async () => {
   const superEventMock = getSubEventsMocks({
     variables: {
       superEvent: 'super:123',
@@ -98,7 +96,6 @@ it.skip('should render event info fields', async () => {
       // eslint-disable-next-line @stylistic/max-len
       name: `${translations.common.mapBox.location.directionsHSL}. ${translations.common.srOnly.opensInANewTab} ${translations.common.srOnly.opensInAnExternalSite}`,
     },
-    { role: 'heading', name: translations.event.info.labelPrice },
   ];
 
   for (const { role, name } of itemsByRole) {
@@ -112,7 +109,6 @@ it.skip('should render event info fields', async () => {
     streetAddress,
     organizationName,
     organizerName,
-    price,
   ];
 
   for (const item of itemsByText) {
@@ -129,8 +125,7 @@ it.skip('should render event info fields', async () => {
   expect(screen.queryByText(providerContactInfo.sv)).not.toBeInTheDocument();
 }, 20_000);
 
-// TODO: Skipped because missing mocks makes it hang
-it.skip('should hide the organizer section when the organizer name is not given', async () => {
+it('should hide the organizer section when the organizer name is not given', async () => {
   const mockEvent = {
     ...event,
     provider: null,
@@ -217,50 +212,74 @@ it('should hide the map link from location info if location is internet', () => 
   ).not.toBeInTheDocument();
 });
 
-it.skip('should create ics file succesfully', async () => {
-  const saveAsSpy = vi.spyOn(FileSaver, 'saveAs');
-  render(<EventInfo event={event} />, { mocks });
+describe('add to calendar', () => {
+  let icsCreateEventSpy: MockInstance<typeof ics.createEvent> | null = null;
 
-  // Event info fields
-  await userEvent.click(
-    screen.getByRole('button', {
-      name: translations.event.info.buttonAddToCalendar,
-    })
-  );
+  beforeEach(() => {
+    const emptyIcsReturnObject: ics.ReturnObject = {};
+    icsCreateEventSpy = vi
+      .spyOn(ics, 'createEvent')
+      .mockImplementation(
+        (..._args: unknown[]): ics.ReturnObject => emptyIcsReturnObject
+      );
+  });
 
-  await waitFor(() => {
-    expect(saveAsSpy).toHaveBeenCalled();
+  afterEach(() => {
+    if (icsCreateEventSpy) {
+      icsCreateEventSpy.mockRestore();
+    }
+  });
+
+  it('should call ics.createEvent', async () => {
+    render(<EventInfo event={event} />, { mocks });
+
+    // Event info fields
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: translations.event.info.buttonAddToCalendar,
+      })
+    );
+
+    await waitFor(() => {
+      expect(icsCreateEventSpy).toHaveBeenCalledOnce();
+    });
+  });
+
+  it('should call ics.createEvent when end time is not defined', async () => {
+    render(<EventInfo event={{ ...event, endTime: null }} />, {
+      mocks,
+    });
+
+    // Event info fields
+    await userEvent.click(
+      screen.getByRole('button', {
+        name: translations.event.info.buttonAddToCalendar,
+      })
+    );
+
+    await waitFor(() => {
+      expect(icsCreateEventSpy).toHaveBeenCalledOnce();
+    });
   });
 });
 
-it.skip('should create ics file succesfully when end time is not defined', async () => {
-  const saveAsSpy = vi.spyOn(FileSaver, 'saveAs');
-  render(<EventInfo event={{ ...event, endTime: null }} />, {
-    mocks,
-  });
-
-  // Event info fields
-  await userEvent.click(
-    screen.getByRole('button', {
-      name: translations.event.info.buttonAddToCalendar,
-    })
+it('should show formatted audience age info on single event page if min and max ages are specified', async () => {
+  render(
+    <EventInfo
+      event={{ ...event, audienceMinAge: '7', audienceMaxAge: '16' }}
+    />,
+    {
+      mocks,
+      routes: [`/kurssit`],
+    }
   );
 
-  await waitFor(() => {
-    expect(saveAsSpy).toHaveBeenCalled();
-  });
-});
-
-it('should hide audience age info on single event page', async () => {
-  render(<EventInfo event={event} />, {
-    routes: [`/kurssit`],
-  });
-
-  expect(await screen.findByText(/5–15-vuotiaat/i)).toBeInTheDocument();
+  expect(await screen.findByText(/7–16-vuotiaat/i)).toBeInTheDocument();
 });
 
 it('should show formatted audience age info on single event page if max age is not specified', async () => {
   render(<EventInfo event={{ ...event, audienceMaxAge: null }} />, {
+    mocks,
     routes: [`/kurssit`],
   });
 
@@ -273,6 +292,7 @@ it('should hide audience age info on single event page if min and max ages are n
       event={{ ...event, audienceMinAge: null, audienceMaxAge: null }}
     />,
     {
+      mocks,
       routes: [`/kurssit`],
     }
   );
@@ -296,7 +316,7 @@ describe('OrganizationInfo', () => {
     'should show correct provider link text on event/hobby detail page',
     async ({ eventTypeId, expectedLinkText }) => {
       render(<EventInfo event={{ ...event, typeId: eventTypeId }} />, {
-        mocks: mocksWithSubEvents,
+        mocks,
         routes: ['/fi/kurssit/test'],
       });
       await waitFor(() => {
@@ -354,8 +374,7 @@ describe('OrganizationInfo', () => {
   );
 });
 
-// TODO: Skipped because missing mocks makes it hang
-describe.skip('superEvent', () => {
+describe('superEvent', () => {
   it('should render super event title and link when super event is given', async () => {
     const superEvent = fakeEvent({
       superEvent: { internalId: superEventInternalId },
@@ -368,19 +387,7 @@ describe.skip('superEvent', () => {
     const { router } = render(
       <EventInfo event={event} superEvent={superEventResponse} />,
       {
-        mocks: [
-          ...mocksWithSubEvents,
-          // ...mocksWithSubEvents.map((entry) => ({
-          //   ...entry,
-          //   request: {
-          //     ...entry.request,
-          //     variables: {
-          //       ...entry.request.variables,
-          //       superEvent: superEvent.id
-          //     }
-          //   }
-          // }))
-        ],
+        mocks,
       }
     );
     await actWait();
@@ -414,9 +421,7 @@ describe.skip('superEvent', () => {
 
 describe('subEvents', () => {
   it('should render sub events title and content when sub events are given', async () => {
-    render(<EventInfo event={event} />, {
-      mocks: mocksWithSubEvents,
-    });
+    render(<EventInfo event={event} />, { mocks });
     await waitFor(() => {
       expect(
         screen.getByRole('heading', {
@@ -428,9 +433,7 @@ describe('subEvents', () => {
   });
 
   it('should navigate to sub events page when it is clicked', async () => {
-    const { router } = render(<EventInfo event={event} />, {
-      mocks: mocksWithSubEvents,
-    });
+    const { router } = render(<EventInfo event={event} />, { mocks });
     const eventsList = await screen.findByTestId(subEventsListTestId);
     const subEvent = subEventsResponse.data[0];
     const dateStr = getDateRangeStr(getDateRangeStrProps(subEvent));

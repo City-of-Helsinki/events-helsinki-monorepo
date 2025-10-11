@@ -50,6 +50,9 @@ describe('GeolocationService', () => {
   });
 
   it('should reject with an error on failed geolocation fetch', async () => {
+    const consoleErrorSpy = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
     const mockPositionError: GeolocationPositionError = {
       code: 1, // PERMISSION_DENIED
       message: 'User denied Geolocation',
@@ -67,6 +70,12 @@ describe('GeolocationService', () => {
       mockPositionError
     );
     expect(mockGeolocation.getCurrentPosition).toHaveBeenCalledTimes(1);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'Failed to use geolocation: User denied Geolocation'
+      )
+    );
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should reject if geolocation is not available on navigator', async () => {

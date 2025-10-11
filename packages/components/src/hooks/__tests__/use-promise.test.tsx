@@ -27,7 +27,9 @@ describe('usePromise', () => {
         expect(callback).toHaveBeenCalledTimes(1);
       });
 
-      expect(result.current.data).toStrictEqual(expected);
+      await waitFor(() => {
+        expect(result.current.data).toStrictEqual(expected);
+      });
       expect(result.current.isLoading).toStrictEqual(false);
       expect(result.current.error).toBeNull();
 
@@ -55,7 +57,9 @@ describe('usePromise', () => {
       await waitFor(() => {
         expect(callback).toHaveBeenCalledTimes(1);
       });
-      expect(result.current.error).toBeInstanceOf(Error);
+      await waitFor(() => {
+        expect(result.current.error).toBeInstanceOf(Error);
+      });
       expect(result.current.isLoading).toStrictEqual(false);
       expect(result.current.error?.message).toStrictEqual('cool');
     });

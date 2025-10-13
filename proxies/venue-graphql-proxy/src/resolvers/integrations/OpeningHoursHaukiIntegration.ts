@@ -1,4 +1,4 @@
-import type { OpeningHour, Time } from '../../types/types.js';
+import type { OpeningHour, Time } from '../../types/__generated__.js';
 import type {
   HaukiOpeningHours,
   HaukiTimeElement,

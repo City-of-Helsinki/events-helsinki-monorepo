@@ -1,0 +1,16 @@
+overwrite: true
+schema: http://localhost:4100/proxy/graphql
+
+generates:
+  ./src/types/__generated__.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      withHooks: false
+      withComponent: false
+      flattenSelectionSet: true
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+    ignoreNoDocuments: true,

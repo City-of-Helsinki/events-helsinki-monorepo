@@ -1,5 +1,13 @@
 import { resolve } from 'path';
 
+// eslint-disable-next-line no-undef, no-console
+console.log(
+  'Process should be defined in next-i18next.config.mjs',
+  'process.env',
+  // eslint-disable-next-line no-undef
+  process?.env
+);
+
 const debugI18n = ['true', 1].includes(
   // eslint-disable-next-line no-undef
   process?.env?.NEXTJS_DEBUG_I18N ?? 'false'

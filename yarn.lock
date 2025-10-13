@@ -3143,7 +3143,7 @@ __metadata:
     graphql: "npm:^16.11.0"
     graphql-request: "npm:7.2.0"
     graphql-tag: "npm:2.12.6"
-    happy-dom: "npm:18.0.1"
+    happy-dom: "npm:20.0.0"
     hds-core: "npm:^3.11.0"
     hds-design-tokens: "npm:^3.11.0"
     hds-react: "npm:^3.11.0"
@@ -14857,14 +14857,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:18.0.1":
-  version: 18.0.1
-  resolution: "happy-dom@npm:18.0.1"
+"happy-dom@npm:20.0.0":
+  version: 20.0.0
+  resolution: "happy-dom@npm:20.0.0"
   dependencies:
     "@types/node": "npm:^20.0.0"
     "@types/whatwg-mimetype": "npm:^3.0.2"
     whatwg-mimetype: "npm:^3.0.0"
-  checksum: 2bbdc91e34f661bb6ca45c4f00d24899a55d0e2b186e2d882b3586c8f15f0a621b6885d2e52bfb2efbf05efee99170c0b9b11045f07beee6124c020a76c5d896
+  checksum: f9acdc6b709c78d857ffcc985d71de68c523acc36c6d8b65b1eacd40ac7dff77adff6bb96bf9bd5a4d59142f24be78cbb28796543fbdd08236e1c397b35f2f0f
   languageName: node
   linkType: hard
 

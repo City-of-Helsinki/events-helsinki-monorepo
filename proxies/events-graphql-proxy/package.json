@@ -26,7 +26,8 @@
     "test:debug": "yarn test --inspect-brk ----no-file-parallelism",
     "test:staged": "cross-env TZ=Europe/Helsinki vitest related --run",
     "test:watch": "cross-env TZ=Europe/Helsinki vitest watch",
-    "typecheck": "tsc --project ./tsconfig.json --noEmit"
+    "typecheck": "tsc --project ./tsconfig.json --noEmit",
+    "generate:graphql": "graphql-codegen"
   },
   "dependencies": {
     "@apollo/datasource-rest": "6.4.1",
@@ -40,6 +41,9 @@
   },
   "devDependencies": {
     "@events-helsinki/eslint-config-bases": "workspace:^",
+    "@graphql-codegen/cli": "5.0.7",
+    "@graphql-codegen/typescript": "4.1.6",
+    "@graphql-codegen/typescript-operations": "4.6.1",
     "@types/lodash": "^4.17.20",
     "@types/node": "22.18.9",
     "@typescript-eslint/eslint-plugin": "^8.37.0",

@@ -1,6 +1,10 @@
 import type { AppLanguage } from '@events-helsinki/graphql-proxy-server';
 import type { Sources } from './contants/constants.js';
-import type { Point, OpeningHour, ResourceState } from './types/types.js';
+import type {
+  Point,
+  OpeningHour,
+  ResourceState,
+} from './types/__generated__.js';
 
 export type Source = (typeof Sources)[keyof typeof Sources];
 export type Locale = AppLanguage;

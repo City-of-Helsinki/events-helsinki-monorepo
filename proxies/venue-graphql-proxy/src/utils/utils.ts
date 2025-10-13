@@ -3,7 +3,7 @@ import AppConfig from '../config/AppConfig.js';
 import { Sources } from '../contants/constants.js';
 import type VenueContext from '../context/VenueContext.js';
 import type { UnenrichedUnitFields } from '../resolvers/integrations/VenueServiceMapIntegration.js';
-import type { Point } from '../types/types.js';
+import type { Point } from '../types/__generated__.js';
 import type {
   TprekAccessibilitySentence,
   AccessibilitySentences,

@@ -86,6 +86,7 @@ const typeDefs = gql`
     images: [EventImage!]!
     inLanguage: [InLanguage!]!
     audience: [Audience!]!
+    registration: Registration
     createdTime: String
     lastModifiedTime: String
     datePublished: String
@@ -116,7 +117,28 @@ const typeDefs = gql`
     enrolmentEndTime: String
     maximumAttendeeCapacity: Int
     minimumAttendeeCapacity: Int
+  }
+
+  type Registration {
+    # @id is renamed as internalId so it's usable on GraphQl
+    internalId: String
+    # @context is renamed as internalContext so it's usable on GraphQl
+    internalContext: String
+    # @type is renamed as internalType so it's usable on GraphQl
+    internalType: String
+    audienceMinAge: String
+    audienceMaxAge: String
+    enrolmentStartTime: String
+    enrolmentEndTime: String
+    maximumAttendeeCapacity: Int
+    minimumAttendeeCapacity: Int
     remainingAttendeeCapacity: Int
+    remainingWaitingListCapacity: Int
+    waitingListCapacity: Int
+    currentAttendeeCount: Int
+    currentWaitingListCount: Int
+    maximumGroupSize: Int
+    signupUrl: LocalizedObject
   }
 
   type Audience {

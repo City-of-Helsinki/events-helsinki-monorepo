@@ -14,6 +14,7 @@
   - [`yarn start`](#yarn-start)
   - [`yarn lint`](#yarn-lint)
   - [`yarn format-code`](#yarn-format-code)
+  - [`yarn generate:graphql`](#yarn-generategraphql)
 - [Custom request headers](#custom-request-headers)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -82,6 +83,11 @@ Run eslint to all files on
 ### `yarn format-code`
 
 Fix all the eslint errors
+
+### `yarn generate:graphql`
+
+Use `graphql-codegen` (with [codegen.yml](codegen.yml) as configuration file) to generate TypeScript types from `typeDefs.ts` files with `gql` syntax.
+When you modify the graphql ttype definitions (in typeDefs.ts files), you should generate the TS types with `yarn generate:graphql` as well.
 
 ## Custom request headers
 

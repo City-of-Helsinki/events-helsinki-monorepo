@@ -1,4 +1,7 @@
-import type { EventDetails, EventListResponse } from '../types/types.js';
+import type {
+  EventDetails,
+  EventListResponse,
+} from '../types/__generated__.js';
 import LinkedEventsDataSource from './LinkedEventsDataSource.js';
 
 class EventDataSource extends LinkedEventsDataSource {

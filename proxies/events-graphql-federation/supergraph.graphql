@@ -4983,6 +4983,7 @@ type EventDetails
   images: [EventImage!]!
   inLanguage: [InLanguage!]!
   audience: [Audience!]!
+  registration: Registration
   createdTime: String
   lastModifiedTime: String
   datePublished: String
@@ -5006,7 +5007,6 @@ type EventDetails
   enrolmentEndTime: String
   maximumAttendeeCapacity: Int
   minimumAttendeeCapacity: Int
-  remainingAttendeeCapacity: Int
 }
 
 type EventImage
@@ -13452,6 +13452,27 @@ type RegisterUserPayload
 
   """The User object mutation type."""
   user: User
+}
+
+type Registration
+  @join__type(graph: EVENTS)
+{
+  internalId: String
+  internalContext: String
+  internalType: String
+  audienceMinAge: String
+  audienceMaxAge: String
+  enrolmentStartTime: String
+  enrolmentEndTime: String
+  maximumAttendeeCapacity: Int
+  minimumAttendeeCapacity: Int
+  remainingAttendeeCapacity: Int
+  remainingWaitingListCapacity: Int
+  waitingListCapacity: Int
+  currentAttendeeCount: Int
+  currentWaitingListCount: Int
+  maximumGroupSize: Int
+  signupUrl: LocalizedObject
 }
 
 """

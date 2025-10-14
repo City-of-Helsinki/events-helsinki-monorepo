@@ -20,6 +20,21 @@ export const QUERY_EVENT_DETAILS = gql`
     }
   }
 
+  fragment registrationFields on Registration {
+    audienceMinAge
+    audienceMaxAge
+    enrolmentStartTime
+    enrolmentEndTime
+    maximumAttendeeCapacity
+    minimumAttendeeCapacity
+    remainingAttendeeCapacity
+    remainingWaitingListCapacity
+    waitingListCapacity
+    currentAttendeeCount
+    currentWaitingListCount
+    maximumGroupSize
+  }
+
   fragment eventFields on EventDetails {
     audienceMinAge
     audienceMaxAge
@@ -55,6 +70,9 @@ export const QUERY_EVENT_DETAILS = gql`
     }
     offers {
       ...offerFields
+    }
+    registration {
+      ...registrationFields
     }
     name {
       ...localizedFields

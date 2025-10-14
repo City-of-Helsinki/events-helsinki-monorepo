@@ -16,7 +16,8 @@ const config: CodegenConfig = {
         withComponent: false,
         flattenSelectionSet: true,
         namingConvention: {
-          enumValues: './pascalCaseWithUnderscoreBeforeLeadingDigit',
+          typeNames: 'change-case-all#pascalCase',
+          enumValues: 'change-case-all#pascalCase',
         },
       },
       hooks: {

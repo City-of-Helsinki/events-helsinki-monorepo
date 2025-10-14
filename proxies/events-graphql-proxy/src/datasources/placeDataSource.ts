@@ -1,4 +1,4 @@
-import type { Place, PlaceListResponse } from '../types/types.js';
+import type { Place, PlaceListResponse } from '../types/__generated__.js';
 import LinkedEventsDataSource from './LinkedEventsDataSource.js';
 class PlaceDataSource extends LinkedEventsDataSource {
   public async getPlaceDetails(id: string): Promise<Place> {

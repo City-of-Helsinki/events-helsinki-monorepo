@@ -1,6 +1,6 @@
 import { normalizeKeys } from '@events-helsinki/graphql-proxy-server';
 import type EventContext from '../../context/EventContext.js';
-import type { OrganizationDetails } from '../../types/types.js';
+import type { OrganizationDetails } from '../../types/__generated__.js';
 import type { QueryResolvers } from '../../types.js';
 
 const Query: QueryResolvers = {

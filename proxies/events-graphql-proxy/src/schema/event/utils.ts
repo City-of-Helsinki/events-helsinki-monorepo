@@ -5,7 +5,10 @@ import {
   IgnorableGraphQLError,
 } from '@events-helsinki/graphql-proxy-server';
 import type EventContext from '../../context/EventContext.js';
-import type { EventDetails, QueryEventListArgs } from '../../types/types.js';
+import type {
+  EventDetails,
+  QueryEventListArgs,
+} from '../../types/__generated__.js';
 import { MANDATORY_EVENT_FIELDS } from './constants.js';
 
 export const buildEventListQuery = (params: QueryEventListArgs) => {

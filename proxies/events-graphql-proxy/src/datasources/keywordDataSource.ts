@@ -1,4 +1,4 @@
-import type { Keyword, KeywordListResponse } from '../types/types.js';
+import type { Keyword, KeywordListResponse } from '../types/__generated__.js';
 import LinkedEventsDataSource from './LinkedEventsDataSource.js';
 
 class KeywordDataSource extends LinkedEventsDataSource {

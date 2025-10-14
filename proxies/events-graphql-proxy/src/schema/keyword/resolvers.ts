@@ -8,7 +8,7 @@ import type {
   KeywordListResponse,
   Keyword,
   QueryKeywordListArgs,
-} from '../../types/types.js';
+} from '../../types/__generated__.js';
 import type { QueryResolvers } from '../../types.js';
 
 const keywordListQueryBuilder = ({

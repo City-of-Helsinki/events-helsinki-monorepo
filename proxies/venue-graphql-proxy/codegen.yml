@@ -1,5 +1,5 @@
 overwrite: true
-schema: http://localhost:4100/proxy/graphql
+schema: http://localhost:${GRAPHQL_PROXY_PORT:-4200}/proxy/graphql
 
 generates:
   ./src/types/__generated__.ts:

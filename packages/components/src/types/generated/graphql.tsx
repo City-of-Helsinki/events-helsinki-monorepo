@@ -1,5 +1,5 @@
-import { gql } from 'graphql-tag';
-import * as Apollo from '@apollo/client/index.js';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -3314,6 +3314,7 @@ export type EventDetails = {
   provider?: Maybe<LocalizedObject>;
   providerContactInfo?: Maybe<LocalizedObject>;
   publisher?: Maybe<Scalars['ID']['output']>;
+  registration?: Maybe<Registration>;
   shortDescription?: Maybe<LocalizedObject>;
   startTime?: Maybe<Scalars['String']['output']>;
   subEvents: Array<InternalIdObject>;
@@ -5378,9 +5379,9 @@ export enum MediaItemSizeEnum {
   /** MediaItem with the thumbnail size */
   Thumbnail = 'THUMBNAIL',
   /** MediaItem with the 1536x1536 size */
-  _1536X1536 = '_1536X1536',
+  '1536X1536' = '_1536X1536',
   /** MediaItem with the 2048x2048 size */
-  _2048X2048 = '_2048X2048',
+  '2048X2048' = '_2048X2048',
 }
 
 /** The status of the media item object. */
@@ -9219,6 +9220,26 @@ export type RegisterUserPayload = {
   clientMutationId?: Maybe<Scalars['String']['output']>;
   /** The User object mutation type. */
   user?: Maybe<User>;
+};
+
+export type Registration = {
+  __typename?: 'Registration';
+  audienceMaxAge?: Maybe<Scalars['String']['output']>;
+  audienceMinAge?: Maybe<Scalars['String']['output']>;
+  currentAttendeeCount?: Maybe<Scalars['Int']['output']>;
+  currentWaitingListCount?: Maybe<Scalars['Int']['output']>;
+  enrolmentEndTime?: Maybe<Scalars['String']['output']>;
+  enrolmentStartTime?: Maybe<Scalars['String']['output']>;
+  internalContext?: Maybe<Scalars['String']['output']>;
+  internalId?: Maybe<Scalars['String']['output']>;
+  internalType?: Maybe<Scalars['String']['output']>;
+  maximumAttendeeCapacity?: Maybe<Scalars['Int']['output']>;
+  maximumGroupSize?: Maybe<Scalars['Int']['output']>;
+  minimumAttendeeCapacity?: Maybe<Scalars['Int']['output']>;
+  remainingAttendeeCapacity?: Maybe<Scalars['Int']['output']>;
+  remainingWaitingListCapacity?: Maybe<Scalars['Int']['output']>;
+  signupUrl?: Maybe<LocalizedObject>;
+  waitingListCapacity?: Maybe<Scalars['Int']['output']>;
 };
 
 /** The logical relation between each item in the array when there are more than one. */
@@ -14247,6 +14268,22 @@ export type OfferFieldsFragment = {
   } | null;
 };
 
+export type RegistrationFieldsFragment = {
+  __typename?: 'Registration';
+  audienceMinAge?: string | null;
+  audienceMaxAge?: string | null;
+  enrolmentStartTime?: string | null;
+  enrolmentEndTime?: string | null;
+  maximumAttendeeCapacity?: number | null;
+  minimumAttendeeCapacity?: number | null;
+  remainingAttendeeCapacity?: number | null;
+  remainingWaitingListCapacity?: number | null;
+  waitingListCapacity?: number | null;
+  currentAttendeeCount?: number | null;
+  currentWaitingListCount?: number | null;
+  maximumGroupSize?: number | null;
+};
+
 export type EventFieldsFragment = {
   __typename?: 'EventDetails';
   audienceMinAge?: string | null;
@@ -14375,6 +14412,21 @@ export type EventFieldsFragment = {
       sv?: string | null;
     } | null;
   }>;
+  registration?: {
+    __typename?: 'Registration';
+    audienceMinAge?: string | null;
+    audienceMaxAge?: string | null;
+    enrolmentStartTime?: string | null;
+    enrolmentEndTime?: string | null;
+    maximumAttendeeCapacity?: number | null;
+    minimumAttendeeCapacity?: number | null;
+    remainingAttendeeCapacity?: number | null;
+    remainingWaitingListCapacity?: number | null;
+    waitingListCapacity?: number | null;
+    currentAttendeeCount?: number | null;
+    currentWaitingListCount?: number | null;
+    maximumGroupSize?: number | null;
+  } | null;
   name: {
     __typename?: 'LocalizedObject';
     en?: string | null;
@@ -14567,6 +14619,21 @@ export type EventDetailsQuery = {
         sv?: string | null;
       } | null;
     }>;
+    registration?: {
+      __typename?: 'Registration';
+      audienceMinAge?: string | null;
+      audienceMaxAge?: string | null;
+      enrolmentStartTime?: string | null;
+      enrolmentEndTime?: string | null;
+      maximumAttendeeCapacity?: number | null;
+      minimumAttendeeCapacity?: number | null;
+      remainingAttendeeCapacity?: number | null;
+      remainingWaitingListCapacity?: number | null;
+      waitingListCapacity?: number | null;
+      currentAttendeeCount?: number | null;
+      currentWaitingListCount?: number | null;
+      maximumGroupSize?: number | null;
+    } | null;
     name: {
       __typename?: 'LocalizedObject';
       en?: string | null;
@@ -14841,6 +14908,21 @@ export type EventListQuery = {
           sv?: string | null;
         } | null;
       }>;
+      registration?: {
+        __typename?: 'Registration';
+        audienceMinAge?: string | null;
+        audienceMaxAge?: string | null;
+        enrolmentStartTime?: string | null;
+        enrolmentEndTime?: string | null;
+        maximumAttendeeCapacity?: number | null;
+        minimumAttendeeCapacity?: number | null;
+        remainingAttendeeCapacity?: number | null;
+        remainingWaitingListCapacity?: number | null;
+        waitingListCapacity?: number | null;
+        currentAttendeeCount?: number | null;
+        currentWaitingListCount?: number | null;
+        maximumGroupSize?: number | null;
+      } | null;
       name: {
         __typename?: 'LocalizedObject';
         en?: string | null;
@@ -15045,6 +15127,21 @@ export type EventsByIdsQuery = {
           sv?: string | null;
         } | null;
       }>;
+      registration?: {
+        __typename?: 'Registration';
+        audienceMinAge?: string | null;
+        audienceMaxAge?: string | null;
+        enrolmentStartTime?: string | null;
+        enrolmentEndTime?: string | null;
+        maximumAttendeeCapacity?: number | null;
+        minimumAttendeeCapacity?: number | null;
+        remainingAttendeeCapacity?: number | null;
+        remainingWaitingListCapacity?: number | null;
+        waitingListCapacity?: number | null;
+        currentAttendeeCount?: number | null;
+        currentWaitingListCount?: number | null;
+        maximumGroupSize?: number | null;
+      } | null;
       name: {
         __typename?: 'LocalizedObject';
         en?: string | null;
@@ -15996,6 +16093,22 @@ export const OfferFieldsFragmentDoc = gql`
   }
   ${LocalizedFieldsFragmentDoc}
 `;
+export const RegistrationFieldsFragmentDoc = gql`
+  fragment registrationFields on Registration {
+    audienceMinAge
+    audienceMaxAge
+    enrolmentStartTime
+    enrolmentEndTime
+    maximumAttendeeCapacity
+    minimumAttendeeCapacity
+    remainingAttendeeCapacity
+    remainingWaitingListCapacity
+    waitingListCapacity
+    currentAttendeeCount
+    currentWaitingListCount
+    maximumGroupSize
+  }
+`;
 export const EventFieldsFragmentDoc = gql`
   fragment eventFields on EventDetails {
     audienceMinAge
@@ -16032,6 +16145,9 @@ export const EventFieldsFragmentDoc = gql`
     }
     offers {
       ...offerFields
+    }
+    registration {
+      ...registrationFields
     }
     name {
       ...localizedFields
@@ -16070,6 +16186,7 @@ export const EventFieldsFragmentDoc = gql`
   ${KeywordFieldsFragmentDoc}
   ${PlaceFieldsFragmentDoc}
   ${OfferFieldsFragmentDoc}
+  ${RegistrationFieldsFragmentDoc}
 `;
 export const OrganizationFieldsFragmentDoc = gql`
   fragment organizationFields on OrganizationDetails {
@@ -16184,11 +16301,31 @@ export function usePageByTemplateBreadcrumbTitleLazyQuery(
     PageByTemplateBreadcrumbTitleQueryVariables
   >(PageByTemplateBreadcrumbTitleDocument, options);
 }
+export function usePageByTemplateBreadcrumbTitleSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        PageByTemplateBreadcrumbTitleQuery,
+        PageByTemplateBreadcrumbTitleQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    PageByTemplateBreadcrumbTitleQuery,
+    PageByTemplateBreadcrumbTitleQueryVariables
+  >(PageByTemplateBreadcrumbTitleDocument, options);
+}
 export type PageByTemplateBreadcrumbTitleQueryHookResult = ReturnType<
   typeof usePageByTemplateBreadcrumbTitleQuery
 >;
 export type PageByTemplateBreadcrumbTitleLazyQueryHookResult = ReturnType<
   typeof usePageByTemplateBreadcrumbTitleLazyQuery
+>;
+export type PageByTemplateBreadcrumbTitleSuspenseQueryHookResult = ReturnType<
+  typeof usePageByTemplateBreadcrumbTitleSuspenseQuery
 >;
 export type PageByTemplateBreadcrumbTitleQueryResult = Apollo.QueryResult<
   PageByTemplateBreadcrumbTitleQuery,
@@ -16226,7 +16363,11 @@ export function usePageBreadcrumbTitleQuery(
   baseOptions: Apollo.QueryHookOptions<
     PageBreadcrumbTitleQuery,
     PageBreadcrumbTitleQueryVariables
-  >
+  > &
+    (
+      | { variables: PageBreadcrumbTitleQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    )
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -16246,11 +16387,31 @@ export function usePageBreadcrumbTitleLazyQuery(
     PageBreadcrumbTitleQueryVariables
   >(PageBreadcrumbTitleDocument, options);
 }
+export function usePageBreadcrumbTitleSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        PageBreadcrumbTitleQuery,
+        PageBreadcrumbTitleQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    PageBreadcrumbTitleQuery,
+    PageBreadcrumbTitleQueryVariables
+  >(PageBreadcrumbTitleDocument, options);
+}
 export type PageBreadcrumbTitleQueryHookResult = ReturnType<
   typeof usePageBreadcrumbTitleQuery
 >;
 export type PageBreadcrumbTitleLazyQueryHookResult = ReturnType<
   typeof usePageBreadcrumbTitleLazyQuery
+>;
+export type PageBreadcrumbTitleSuspenseQueryHookResult = ReturnType<
+  typeof usePageBreadcrumbTitleSuspenseQuery
 >;
 export type PageBreadcrumbTitleQueryResult = Apollo.QueryResult<
   PageBreadcrumbTitleQuery,
@@ -16286,7 +16447,11 @@ export function useEventDetailsQuery(
   baseOptions: Apollo.QueryHookOptions<
     EventDetailsQuery,
     EventDetailsQueryVariables
-  >
+  > &
+    (
+      | { variables: EventDetailsQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    )
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<EventDetailsQuery, EventDetailsQueryVariables>(
@@ -16306,11 +16471,31 @@ export function useEventDetailsLazyQuery(
     options
   );
 }
+export function useEventDetailsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        EventDetailsQuery,
+        EventDetailsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<EventDetailsQuery, EventDetailsQueryVariables>(
+    EventDetailsDocument,
+    options
+  );
+}
 export type EventDetailsQueryHookResult = ReturnType<
   typeof useEventDetailsQuery
 >;
 export type EventDetailsLazyQueryHookResult = ReturnType<
   typeof useEventDetailsLazyQuery
+>;
+export type EventDetailsSuspenseQueryHookResult = ReturnType<
+  typeof useEventDetailsSuspenseQuery
 >;
 export type EventDetailsQueryResult = Apollo.QueryResult<
   EventDetailsQuery,
@@ -16481,9 +16666,26 @@ export function useEventListLazyQuery(
     options
   );
 }
+export function useEventListSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<EventListQuery, EventListQueryVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<EventListQuery, EventListQueryVariables>(
+    EventListDocument,
+    options
+  );
+}
 export type EventListQueryHookResult = ReturnType<typeof useEventListQuery>;
 export type EventListLazyQueryHookResult = ReturnType<
   typeof useEventListLazyQuery
+>;
+export type EventListSuspenseQueryHookResult = ReturnType<
+  typeof useEventListSuspenseQuery
 >;
 export type EventListQueryResult = Apollo.QueryResult<
   EventListQuery,
@@ -16550,7 +16752,11 @@ export function useEventsByIdsQuery(
   baseOptions: Apollo.QueryHookOptions<
     EventsByIdsQuery,
     EventsByIdsQueryVariables
-  >
+  > &
+    (
+      | { variables: EventsByIdsQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    )
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<EventsByIdsQuery, EventsByIdsQueryVariables>(
@@ -16570,9 +16776,29 @@ export function useEventsByIdsLazyQuery(
     options
   );
 }
+export function useEventsByIdsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        EventsByIdsQuery,
+        EventsByIdsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<EventsByIdsQuery, EventsByIdsQueryVariables>(
+    EventsByIdsDocument,
+    options
+  );
+}
 export type EventsByIdsQueryHookResult = ReturnType<typeof useEventsByIdsQuery>;
 export type EventsByIdsLazyQueryHookResult = ReturnType<
   typeof useEventsByIdsLazyQuery
+>;
+export type EventsByIdsSuspenseQueryHookResult = ReturnType<
+  typeof useEventsByIdsSuspenseQuery
 >;
 export type EventsByIdsQueryResult = Apollo.QueryResult<
   EventsByIdsQuery,
@@ -16607,7 +16833,11 @@ export function useKeywordDetailsQuery(
   baseOptions: Apollo.QueryHookOptions<
     KeywordDetailsQuery,
     KeywordDetailsQueryVariables
-  >
+  > &
+    (
+      | { variables: KeywordDetailsQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    )
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<KeywordDetailsQuery, KeywordDetailsQueryVariables>(
@@ -16627,11 +16857,31 @@ export function useKeywordDetailsLazyQuery(
     options
   );
 }
+export function useKeywordDetailsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        KeywordDetailsQuery,
+        KeywordDetailsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    KeywordDetailsQuery,
+    KeywordDetailsQueryVariables
+  >(KeywordDetailsDocument, options);
+}
 export type KeywordDetailsQueryHookResult = ReturnType<
   typeof useKeywordDetailsQuery
 >;
 export type KeywordDetailsLazyQueryHookResult = ReturnType<
   typeof useKeywordDetailsLazyQuery
+>;
+export type KeywordDetailsSuspenseQueryHookResult = ReturnType<
+  typeof useKeywordDetailsSuspenseQuery
 >;
 export type KeywordDetailsQueryResult = Apollo.QueryResult<
   KeywordDetailsQuery,
@@ -16715,9 +16965,29 @@ export function useKeywordListLazyQuery(
     options
   );
 }
+export function useKeywordListSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        KeywordListQuery,
+        KeywordListQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<KeywordListQuery, KeywordListQueryVariables>(
+    KeywordListDocument,
+    options
+  );
+}
 export type KeywordListQueryHookResult = ReturnType<typeof useKeywordListQuery>;
 export type KeywordListLazyQueryHookResult = ReturnType<
   typeof useKeywordListLazyQuery
+>;
+export type KeywordListSuspenseQueryHookResult = ReturnType<
+  typeof useKeywordListSuspenseQuery
 >;
 export type KeywordListQueryResult = Apollo.QueryResult<
   KeywordListQuery,
@@ -16782,11 +17052,31 @@ export function useNeighborhoodListLazyQuery(
     NeighborhoodListQueryVariables
   >(NeighborhoodListDocument, options);
 }
+export function useNeighborhoodListSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        NeighborhoodListQuery,
+        NeighborhoodListQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    NeighborhoodListQuery,
+    NeighborhoodListQueryVariables
+  >(NeighborhoodListDocument, options);
+}
 export type NeighborhoodListQueryHookResult = ReturnType<
   typeof useNeighborhoodListQuery
 >;
 export type NeighborhoodListLazyQueryHookResult = ReturnType<
   typeof useNeighborhoodListLazyQuery
+>;
+export type NeighborhoodListSuspenseQueryHookResult = ReturnType<
+  typeof useNeighborhoodListSuspenseQuery
 >;
 export type NeighborhoodListQueryResult = Apollo.QueryResult<
   NeighborhoodListQuery,
@@ -16821,7 +17111,11 @@ export function useOrganizationDetailsQuery(
   baseOptions: Apollo.QueryHookOptions<
     OrganizationDetailsQuery,
     OrganizationDetailsQueryVariables
-  >
+  > &
+    (
+      | { variables: OrganizationDetailsQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    )
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -16841,11 +17135,31 @@ export function useOrganizationDetailsLazyQuery(
     OrganizationDetailsQueryVariables
   >(OrganizationDetailsDocument, options);
 }
+export function useOrganizationDetailsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        OrganizationDetailsQuery,
+        OrganizationDetailsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    OrganizationDetailsQuery,
+    OrganizationDetailsQueryVariables
+  >(OrganizationDetailsDocument, options);
+}
 export type OrganizationDetailsQueryHookResult = ReturnType<
   typeof useOrganizationDetailsQuery
 >;
 export type OrganizationDetailsLazyQueryHookResult = ReturnType<
   typeof useOrganizationDetailsLazyQuery
+>;
+export type OrganizationDetailsSuspenseQueryHookResult = ReturnType<
+  typeof useOrganizationDetailsSuspenseQuery
 >;
 export type OrganizationDetailsQueryResult = Apollo.QueryResult<
   OrganizationDetailsQuery,
@@ -16880,7 +17194,11 @@ export function usePlaceDetailsQuery(
   baseOptions: Apollo.QueryHookOptions<
     PlaceDetailsQuery,
     PlaceDetailsQueryVariables
-  >
+  > &
+    (
+      | { variables: PlaceDetailsQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    )
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<PlaceDetailsQuery, PlaceDetailsQueryVariables>(
@@ -16900,11 +17218,31 @@ export function usePlaceDetailsLazyQuery(
     options
   );
 }
+export function usePlaceDetailsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        PlaceDetailsQuery,
+        PlaceDetailsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<PlaceDetailsQuery, PlaceDetailsQueryVariables>(
+    PlaceDetailsDocument,
+    options
+  );
+}
 export type PlaceDetailsQueryHookResult = ReturnType<
   typeof usePlaceDetailsQuery
 >;
 export type PlaceDetailsLazyQueryHookResult = ReturnType<
   typeof usePlaceDetailsLazyQuery
+>;
+export type PlaceDetailsSuspenseQueryHookResult = ReturnType<
+  typeof usePlaceDetailsSuspenseQuery
 >;
 export type PlaceDetailsQueryResult = Apollo.QueryResult<
   PlaceDetailsQuery,
@@ -16988,9 +17326,26 @@ export function usePlaceListLazyQuery(
     options
   );
 }
+export function usePlaceListSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<PlaceListQuery, PlaceListQueryVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<PlaceListQuery, PlaceListQueryVariables>(
+    PlaceListDocument,
+    options
+  );
+}
 export type PlaceListQueryHookResult = ReturnType<typeof usePlaceListQuery>;
 export type PlaceListLazyQueryHookResult = ReturnType<
   typeof usePlaceListLazyQuery
+>;
+export type PlaceListSuspenseQueryHookResult = ReturnType<
+  typeof usePlaceListSuspenseQuery
 >;
 export type PlaceListQueryResult = Apollo.QueryResult<
   PlaceListQuery,
@@ -17049,11 +17404,31 @@ export function useAdministrativeDivisionsLazyQuery(
     AdministrativeDivisionsQueryVariables
   >(AdministrativeDivisionsDocument, options);
 }
+export function useAdministrativeDivisionsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        AdministrativeDivisionsQuery,
+        AdministrativeDivisionsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    AdministrativeDivisionsQuery,
+    AdministrativeDivisionsQueryVariables
+  >(AdministrativeDivisionsDocument, options);
+}
 export type AdministrativeDivisionsQueryHookResult = ReturnType<
   typeof useAdministrativeDivisionsQuery
 >;
 export type AdministrativeDivisionsLazyQueryHookResult = ReturnType<
   typeof useAdministrativeDivisionsLazyQuery
+>;
+export type AdministrativeDivisionsSuspenseQueryHookResult = ReturnType<
+  typeof useAdministrativeDivisionsSuspenseQuery
 >;
 export type AdministrativeDivisionsQueryResult = Apollo.QueryResult<
   AdministrativeDivisionsQuery,
@@ -17112,11 +17487,31 @@ export function useOntologyTreeLazyQuery(
     options
   );
 }
+export function useOntologyTreeSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        OntologyTreeQuery,
+        OntologyTreeQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<OntologyTreeQuery, OntologyTreeQueryVariables>(
+    OntologyTreeDocument,
+    options
+  );
+}
 export type OntologyTreeQueryHookResult = ReturnType<
   typeof useOntologyTreeQuery
 >;
 export type OntologyTreeLazyQueryHookResult = ReturnType<
   typeof useOntologyTreeLazyQuery
+>;
+export type OntologyTreeSuspenseQueryHookResult = ReturnType<
+  typeof useOntologyTreeSuspenseQuery
 >;
 export type OntologyTreeQueryResult = Apollo.QueryResult<
   OntologyTreeQuery,
@@ -17175,11 +17570,31 @@ export function useOntologyWordsLazyQuery(
     options
   );
 }
+export function useOntologyWordsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        OntologyWordsQuery,
+        OntologyWordsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    OntologyWordsQuery,
+    OntologyWordsQueryVariables
+  >(OntologyWordsDocument, options);
+}
 export type OntologyWordsQueryHookResult = ReturnType<
   typeof useOntologyWordsQuery
 >;
 export type OntologyWordsLazyQueryHookResult = ReturnType<
   typeof useOntologyWordsLazyQuery
+>;
+export type OntologyWordsSuspenseQueryHookResult = ReturnType<
+  typeof useOntologyWordsSuspenseQuery
 >;
 export type OntologyWordsQueryResult = Apollo.QueryResult<
   OntologyWordsQuery,
@@ -17223,7 +17638,14 @@ export function useUnifiedSearchCompletionSuggestionsQuery(
   baseOptions: Apollo.QueryHookOptions<
     UnifiedSearchCompletionSuggestionsQuery,
     UnifiedSearchCompletionSuggestionsQueryVariables
-  >
+  > &
+    (
+      | {
+          variables: UnifiedSearchCompletionSuggestionsQueryVariables;
+          skip?: boolean;
+        }
+      | { skip: boolean }
+    )
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<
@@ -17243,12 +17665,31 @@ export function useUnifiedSearchCompletionSuggestionsLazyQuery(
     UnifiedSearchCompletionSuggestionsQueryVariables
   >(UnifiedSearchCompletionSuggestionsDocument, options);
 }
+export function useUnifiedSearchCompletionSuggestionsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        UnifiedSearchCompletionSuggestionsQuery,
+        UnifiedSearchCompletionSuggestionsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<
+    UnifiedSearchCompletionSuggestionsQuery,
+    UnifiedSearchCompletionSuggestionsQueryVariables
+  >(UnifiedSearchCompletionSuggestionsDocument, options);
+}
 export type UnifiedSearchCompletionSuggestionsQueryHookResult = ReturnType<
   typeof useUnifiedSearchCompletionSuggestionsQuery
 >;
 export type UnifiedSearchCompletionSuggestionsLazyQueryHookResult = ReturnType<
   typeof useUnifiedSearchCompletionSuggestionsLazyQuery
 >;
+export type UnifiedSearchCompletionSuggestionsSuspenseQueryHookResult =
+  ReturnType<typeof useUnifiedSearchCompletionSuggestionsSuspenseQuery>;
 export type UnifiedSearchCompletionSuggestionsQueryResult = Apollo.QueryResult<
   UnifiedSearchCompletionSuggestionsQuery,
   UnifiedSearchCompletionSuggestionsQueryVariables
@@ -17429,7 +17870,11 @@ export function useSearchListQuery(
   baseOptions: Apollo.QueryHookOptions<
     SearchListQuery,
     SearchListQueryVariables
-  >
+  > &
+    (
+      | { variables: SearchListQueryVariables; skip?: boolean }
+      | { skip: boolean }
+    )
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<SearchListQuery, SearchListQueryVariables>(
@@ -17449,9 +17894,26 @@ export function useSearchListLazyQuery(
     options
   );
 }
+export function useSearchListSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<SearchListQuery, SearchListQueryVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<SearchListQuery, SearchListQueryVariables>(
+    SearchListDocument,
+    options
+  );
+}
 export type SearchListQueryHookResult = ReturnType<typeof useSearchListQuery>;
 export type SearchListLazyQueryHookResult = ReturnType<
   typeof useSearchListLazyQuery
+>;
+export type SearchListSuspenseQueryHookResult = ReturnType<
+  typeof useSearchListSuspenseQuery
 >;
 export type SearchListQueryResult = Apollo.QueryResult<
   SearchListQuery,
@@ -17544,7 +18006,11 @@ export const SearchMapDocument = gql`
  * });
  */
 export function useSearchMapQuery(
-  baseOptions: Apollo.QueryHookOptions<SearchMapQuery, SearchMapQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<
+    SearchMapQuery,
+    SearchMapQueryVariables
+  > &
+    ({ variables: SearchMapQueryVariables; skip?: boolean } | { skip: boolean })
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<SearchMapQuery, SearchMapQueryVariables>(
@@ -17564,9 +18030,26 @@ export function useSearchMapLazyQuery(
     options
   );
 }
+export function useSearchMapSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<SearchMapQuery, SearchMapQueryVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<SearchMapQuery, SearchMapQueryVariables>(
+    SearchMapDocument,
+    options
+  );
+}
 export type SearchMapQueryHookResult = ReturnType<typeof useSearchMapQuery>;
 export type SearchMapLazyQueryHookResult = ReturnType<
   typeof useSearchMapLazyQuery
+>;
+export type SearchMapSuspenseQueryHookResult = ReturnType<
+  typeof useSearchMapSuspenseQuery
 >;
 export type SearchMapQueryResult = Apollo.QueryResult<
   SearchMapQuery,
@@ -17599,7 +18082,8 @@ export const VenueDocument = gql`
  * });
  */
 export function useVenueQuery(
-  baseOptions: Apollo.QueryHookOptions<VenueQuery, VenueQueryVariables>
+  baseOptions: Apollo.QueryHookOptions<VenueQuery, VenueQueryVariables> &
+    ({ variables: VenueQueryVariables; skip?: boolean } | { skip: boolean })
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<VenueQuery, VenueQueryVariables>(
@@ -17616,8 +18100,25 @@ export function useVenueLazyQuery(
     options
   );
 }
+export function useVenueSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<VenueQuery, VenueQueryVariables>
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<VenueQuery, VenueQueryVariables>(
+    VenueDocument,
+    options
+  );
+}
 export type VenueQueryHookResult = ReturnType<typeof useVenueQuery>;
 export type VenueLazyQueryHookResult = ReturnType<typeof useVenueLazyQuery>;
+export type VenueSuspenseQueryHookResult = ReturnType<
+  typeof useVenueSuspenseQuery
+>;
 export type VenueQueryResult = Apollo.QueryResult<
   VenueQuery,
   VenueQueryVariables
@@ -17672,9 +18173,29 @@ export function useVenuesByIdsLazyQuery(
     options
   );
 }
+export function useVenuesByIdsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        VenuesByIdsQuery,
+        VenuesByIdsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === Apollo.skipToken
+      ? baseOptions
+      : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<VenuesByIdsQuery, VenuesByIdsQueryVariables>(
+    VenuesByIdsDocument,
+    options
+  );
+}
 export type VenuesByIdsQueryHookResult = ReturnType<typeof useVenuesByIdsQuery>;
 export type VenuesByIdsLazyQueryHookResult = ReturnType<
   typeof useVenuesByIdsLazyQuery
+>;
+export type VenuesByIdsSuspenseQueryHookResult = ReturnType<
+  typeof useVenuesByIdsSuspenseQuery
 >;
 export type VenuesByIdsQueryResult = Apollo.QueryResult<
   VenuesByIdsQuery,

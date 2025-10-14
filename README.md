@@ -296,13 +296,6 @@ Locales:
 
 - packages/common-i18n/src/locales/default → packages/common-i18n/src/locales/fi/
 
-GraphQL schema generation related code:
-
-- apps/events-helsinki/pascalCaseWithUnderscoreBeforeLeadingDigit.js → packages/components/src/codegen/pascalCaseWithUnderscoreBeforeLeadingDigit.js
-- apps/hobbies-helsinki/pascalCaseWithUnderscoreBeforeLeadingDigit.js → packages/components/src/codegen/pascalCaseWithUnderscoreBeforeLeadingDigit.js
-- apps/sports-helsinki/pascalCaseWithUnderscoreBeforeLeadingDigit.js → packages/components/src/codegen/pascalCaseWithUnderscoreBeforeLeadingDigit.js
-- packages/components/pascalCaseWithUnderscoreBeforeLeadingDigit.js → packages/components/src/codegen/pascalCaseWithUnderscoreBeforeLeadingDigit.js
-
 You can find all used symbolic links in the monorepo by running in the monorepo's root:
 
 ```bash

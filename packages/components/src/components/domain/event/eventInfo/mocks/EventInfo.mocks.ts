@@ -52,9 +52,17 @@ export const price = '12 €';
 export const targetGroups = ['lapset', 'aikuiset'];
 export const maximumAttendeeCapacity = 20;
 export const minimumAttendeeCapacity = 10;
+export const remainingAttendeeCapacity = 5;
 export const audienceMinAge = '5';
 export const audienceMaxAge = '15';
 export const organizerName = 'provider organisation';
+const registration = {
+  maximumAttendeeCapacity,
+  minimumAttendeeCapacity,
+  remainingAttendeeCapacity,
+  audienceMinAge,
+  audienceMaxAge,
+};
 export const event: EventFieldsFragment = fakeEvent({
   audienceMinAge,
   audienceMaxAge,
@@ -72,8 +80,9 @@ export const event: EventFieldsFragment = fakeEvent({
     name: { fi: locationName },
     streetAddress: { fi: streetAddress },
   },
-  maximumAttendeeCapacity: maximumAttendeeCapacity,
-  minimumAttendeeCapacity: minimumAttendeeCapacity,
+  registration,
+  maximumAttendeeCapacity: registration.maximumAttendeeCapacity,
+  minimumAttendeeCapacity: registration.minimumAttendeeCapacity,
   offers: [fakeOffer({ isFree: false, price: { fi: price } })],
   audience: targetGroups.map((targetGroup) =>
     fakeTargetGroup({ name: fakeLocalizedObject(targetGroup) })

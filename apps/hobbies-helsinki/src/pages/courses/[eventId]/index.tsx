@@ -80,7 +80,13 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       query: EventDetailsDocument,
       variables: {
         id,
-        include: ['in_language', 'keywords', 'location', 'audience'],
+        include: [
+          'in_language',
+          'keywords',
+          'location',
+          'audience',
+          'registration',
+        ],
       },
     });
     const event = eventData?.eventDetails;

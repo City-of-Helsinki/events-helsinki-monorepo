@@ -37,7 +37,7 @@ const useSearchQuery = () => {
       queryString.stringify(router.query)
     );
     const variables: QueryEventListArgs = getEventSearchVariables({
-      include: ['keywords', 'location'],
+      include: ['keywords', 'location', 'registration'],
       pageSize: AppConfig.pageSize,
       params: searchParams,
       place: params.place,

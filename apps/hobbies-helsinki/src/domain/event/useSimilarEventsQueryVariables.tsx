@@ -29,7 +29,7 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
 
     return {
       ...getEventSearchVariables({
-        include: ['keywords', 'location'],
+        include: ['keywords', 'location', 'registration'],
         // NOTE: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query
         // with keyword_OR_set* -param is fixed and it returns distinct results
         pageSize: 100,

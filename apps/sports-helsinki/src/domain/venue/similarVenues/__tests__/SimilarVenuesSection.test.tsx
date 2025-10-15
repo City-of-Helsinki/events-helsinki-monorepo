@@ -1,4 +1,8 @@
-import type { Venue } from '@events-helsinki/components/types';
+import {
+  ProviderType,
+  ServiceOwnerType,
+  type Venue,
+} from '@events-helsinki/components';
 import * as React from 'react';
 import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
@@ -21,9 +25,30 @@ const ontologyWords = [
 const ontologyTree = [
   { label: 'liikunta', id: SPORTS_DEPARTMENT_ONTOLOGY_TREE_ID },
 ];
-const venue = fakeVenue({ ontologyWords, ontologyTree });
 
-const expectedSimilarVenues = fakeVenues(3);
+const sharedVenueProps = {
+  ontologyWords,
+  ontologyTree,
+  departmentId: null,
+  organizationId: null,
+  shortDescription: 'Test short description',
+  providerType: ProviderType.SelfProduced,
+  displayedServiceOwnerType: ServiceOwnerType.MunicipalService,
+  displayedServiceOwner: 'Test service owner',
+  addressPostalFull: 'Test address, 00100 Helsinki',
+} as const satisfies Partial<Venue>;
+
+const venue = fakeVenue({ ...sharedVenueProps });
+
+const similarVenueCount = 3;
+
+const expectedSimilarVenues = fakeVenues(
+  similarVenueCount,
+  Array.from(
+    { length: similarVenueCount },
+    (): Partial<Venue> => sharedVenueProps
+  )
+);
 const expectedSimilarVenuesSearchList = fakeVenuesSearchList(
   3,
   expectedSimilarVenues
@@ -72,7 +97,7 @@ const waitForComponentToBeLoaded = async () => {
 
 describe('similar venues', () => {
   it('should render similar venues cards', async () => {
-    render(<SimilarVenuesSection venue={venue as Venue} />, {
+    render(<SimilarVenuesSection venue={venue} />, {
       mocks,
     });
     await waitForComponentToBeLoaded();
@@ -89,7 +114,7 @@ describe('similar venues', () => {
   });
 
   it('should hide the whole page section when there are no cards', async () => {
-    render(<SimilarVenuesSection venue={venue as Venue} />, {
+    render(<SimilarVenuesSection venue={venue} />, {
       mocks: [
         createVenueListRequestAndResultMocks({
           variables: similarVenuesQueryVariables,

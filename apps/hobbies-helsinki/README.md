@@ -294,7 +294,7 @@ The "main events search" component is used in the search page at `/search`.
 | parameter         | default value                            | controllable | required | description                                                                                   |
 | ----------------- | ---------------------------------------- | ------------ | -------- | --------------------------------------------------------------------------------------------- |
 | eventType         | ["Course"]                               | -            | x        | Select only "general" type events                                                             |
-| include           | ['keywords', 'location']                 | -            | x        | Fetch related data from datasource                                                            |
+| include           | ['keywords', 'location', 'registration'] | -            | x        | Fetch related data from datasource                                                            |
 | pageSize          | 25                                       | -            | x        | How many items are fetched per page                                                           |
 | division          | "ocd-division/country:fi/kunta:helsinki" | -            | x        | Only city of Helsinki events                                                                  |
 | xOngoing          | true                                     | -            | x        | include the ongoing events                                                                    |

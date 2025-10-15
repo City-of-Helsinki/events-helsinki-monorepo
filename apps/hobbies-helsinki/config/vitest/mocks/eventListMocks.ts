@@ -20,7 +20,7 @@ export const baseVariables = {
   audienceMaxAgeGt: '',
   suitableFor: [],
   end: '',
-  include: ['keywords', 'location'],
+  include: ['keywords', 'location', 'registration'],
   isFree: undefined,
   keywordAnd: [],
   keywordNot: [],

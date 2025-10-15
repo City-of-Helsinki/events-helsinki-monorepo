@@ -40,7 +40,7 @@ const keywords = [
   { name: 'Liikuntapalvelut', id: 'yso:p9824' },
   { name: 'Jalkapallo', id: 'yso:p6409' },
 ];
-const superEventId = 'hel:123';
+const superEventId = 'hel:super-123';
 const otherEventTimesCount = 10;
 
 const event = fakeEvent({

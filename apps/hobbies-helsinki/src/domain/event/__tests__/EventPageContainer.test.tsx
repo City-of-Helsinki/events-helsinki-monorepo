@@ -33,6 +33,7 @@ import {
   waitFor,
 } from '../../../../config/vitest/test-utils';
 
+import AppConfig from '../../app/AppConfig';
 import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
 
@@ -73,13 +74,13 @@ const eventRequest = {
   query: EventDetailsDocument,
   variables: {
     id: superEventId,
-    include: ['in_language', 'keywords', 'location', 'audience'],
+    include: AppConfig.eventSecondaryQueryIncludeParamValue,
   },
 };
 const otherEventsRequest = {
   query: EventListDocument,
   variables: {
-    include: ['in_language', 'keywords', 'location', 'audience'],
+    include: AppConfig.eventSecondaryQueryIncludeParamValue,
     sort: DEFAULT_EVENT_SORT_OPTION,
     start: 'now',
     superEvent: superEventId,
@@ -89,7 +90,7 @@ const request = {
   query: EventDetailsDocument,
   variables: {
     id,
-    include: ['in_language', 'keywords', 'location'],
+    include: AppConfig.eventDetailsQueryIncludeParamValue,
   },
 };
 

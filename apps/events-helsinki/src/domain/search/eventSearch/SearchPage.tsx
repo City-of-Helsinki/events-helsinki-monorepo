@@ -38,7 +38,7 @@ const useSearchQuery = () => {
     );
     const sortParam = searchParams.get('sort');
     const variables: QueryEventListArgs = getEventSearchVariables({
-      include: ['keywords', 'location'],
+      include: AppConfig.eventSearchQueryIncludeParamValue,
       pageSize: AppConfig.pageSize,
       params: searchParams,
       sortOrder: isEventSortOption(sortParam)

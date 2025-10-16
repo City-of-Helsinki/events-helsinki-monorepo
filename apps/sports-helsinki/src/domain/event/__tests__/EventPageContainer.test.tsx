@@ -6,8 +6,8 @@ import {
   EventTypeId,
   OrganizationDetailsDocument,
   otherEventTimesListTestId,
+  skipFalsyType,
 } from '@events-helsinki/components';
-import type { EventFields } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 import * as React from 'react';
 
@@ -59,9 +59,11 @@ const event = fakeEvent({
     __typename: 'InternalIdObject',
     internalId: `https://api.hel.fi/linkedevents/v1/event/${superEventId}/`,
   },
-}) as EventFields;
+});
 
-const eventKeywordIds = event.keywords.map((keyword) => keyword.id) as string[];
+const eventKeywordIds: string[] = event.keywords
+  .map((keyword) => keyword.id)
+  .filter(skipFalsyType);
 
 const eventRequest = {
   query: EventDetailsDocument,
@@ -258,7 +260,7 @@ it('shows similar events when SIMILAR_EVENTS flag is on', async () => {
   });
 });
 
-it('doesnt show similar events when SIMILAR_EVENTS flag is off', async () => {
+it('hides similar events when SIMILAR_EVENTS flag is off', async () => {
   advanceTo('2020-10-01');
   renderComponent({ event: event, loading: false, showSimilarEvents: false });
   await waitFor(() => {
@@ -286,21 +288,4 @@ it('hides similar events when event has no keywords', async () => {
       name: translations.event.similarEvents.title,
     })
   ).not.toBeInTheDocument();
-});
-
-/* Skip test as keyword onClick is disabled */
-it.skip('should link to events search when clicking tags', async () => {
-  advanceTo('2020-10-01');
-  const { router } = renderComponent({ event: event, loading: false });
-
-  await waitForLoadingCompleted();
-  const tagLink = await screen.findByRole('link', { name: 'Jalkapallo' });
-
-  // click keyword / tag
-  await userEvent.click(tagLink);
-
-  expect(router).toMatchObject({
-    pathname: '/haku',
-    asPath: '/haku?text=Jalkapallo',
-  });
 });

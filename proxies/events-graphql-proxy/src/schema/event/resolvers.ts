@@ -2,8 +2,11 @@
 import { normalizeKeys } from '@events-helsinki/graphql-proxy-server';
 import * as Sentry from '@sentry/node';
 
-import type { EventDetails, EventListResponse } from 'types/__generated__.ts';
 import type EventContext from '../../context/EventContext.js';
+import type {
+  EventDetails,
+  EventListResponse,
+} from '../../types/__generated__.ts';
 import type { EventDataSources, QueryResolvers } from '../../types.js';
 import {
   buildEventDetailsQuery,

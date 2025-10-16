@@ -51,7 +51,7 @@ export const initialEventSearchAdapterValues = {
   xOngoing: true,
   start: 'now',
   end: '',
-  include: ['keywords', 'location'] as string[],
+  include: AppConfig.eventSearchQueryIncludeParamValue,
   keywordAnd: [] as string[],
   keywordNot: [] as string[],
   keywordOrSet1: SPORT_COURSES_KEYWORDS,

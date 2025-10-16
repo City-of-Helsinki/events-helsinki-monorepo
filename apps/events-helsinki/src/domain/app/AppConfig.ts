@@ -284,6 +284,38 @@ class AppConfig {
    * Affects event and CMS article searches.
    */
   static readonly pageSize = 25;
+
+  /**
+   * What related data is fetched from LinkedEvents when a secondary search of events is made.
+   * What is the value of `include`-param used in the search query?
+   * @see https://api.hel.fi/linkedevents/v1/event/ for API-documentation
+   */
+  static readonly eventDetailsQueryIncludeParamValue = this
+    .showEnrolmentStatusInCardDetails
+    ? ['in_language', 'keywords', 'location', 'audience', 'registration']
+    : ['in_language', 'keywords', 'location', 'audience'];
+
+  /**
+   * What related data is fetched from LinkedEvents when a main search of events is made.
+   * What is the value of `include`-param used in the search query?
+   * @see https://api.hel.fi/linkedevents/v1/event/ for API-documentation
+   */
+  static readonly eventSearchQueryIncludeParamValue = this
+    .showEnrolmentStatusInCardDetails
+    ? ['keywords', 'location', 'registration']
+    : ['keywords', 'location'];
+
+  /**
+   * What related data is fetched from LinkedEvents when a secondary search of events is made.
+   * What is the value of `include`-param used in the search query?
+   * @see https://api.hel.fi/linkedevents/v1/event/ for API-documentation
+   */
+  static readonly eventSecondaryQueryIncludeParamValue = [
+    'in_language',
+    'keywords',
+    'location',
+    'audience',
+  ];
 }
 
 function parseEnvValue(

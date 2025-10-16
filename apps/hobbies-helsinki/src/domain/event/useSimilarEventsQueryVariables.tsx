@@ -5,6 +5,7 @@ import {
 } from '@events-helsinki/components';
 import type { EventFields } from '@events-helsinki/components';
 import React from 'react';
+import AppConfig from '../app/AppConfig';
 import {
   getEventCategories,
   getEventSearchVariables,
@@ -29,7 +30,7 @@ const useSimilarEventsQueryVariables = (event: EventFields) => {
 
     return {
       ...getEventSearchVariables({
-        include: ['keywords', 'location', 'registration'],
+        include: AppConfig.eventSearchQueryIncludeParamValue,
         // NOTE: use SIMILAR_EVENTS_AMOUNT when LinkedEvents-query
         // with keyword_OR_set* -param is fixed and it returns distinct results
         pageSize: 100,

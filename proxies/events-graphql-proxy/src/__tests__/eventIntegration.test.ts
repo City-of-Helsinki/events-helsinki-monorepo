@@ -8,8 +8,8 @@ import type {
   EventDetails,
   EventListResponse,
   QueryEventListArgs,
-} from '../types/types';
-import { EventTypeId } from '../types/types';
+} from '../types/__generated__';
+import { EventTypeId } from '../types/__generated__';
 import { createTestApolloServer } from '../utils/testUtils';
 
 vi.mock('@sentry/node', () => ({

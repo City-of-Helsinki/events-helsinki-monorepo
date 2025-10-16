@@ -3314,7 +3314,6 @@ export type EventDetails = {
   provider?: Maybe<LocalizedObject>;
   providerContactInfo?: Maybe<LocalizedObject>;
   publisher?: Maybe<Scalars['ID']['output']>;
-  remainingAttendeeCapacity?: Maybe<Scalars['Int']['output']>;
   shortDescription?: Maybe<LocalizedObject>;
   startTime?: Maybe<Scalars['String']['output']>;
   subEvents: Array<InternalIdObject>;
@@ -14260,7 +14259,6 @@ export type EventFieldsFragment = {
   publisher?: string | null;
   enrolmentStartTime?: string | null;
   enrolmentEndTime?: string | null;
-  remainingAttendeeCapacity?: number | null;
   externalLinks: Array<{
     __typename?: 'ExternalLink';
     name?: string | null;
@@ -14453,7 +14451,6 @@ export type EventDetailsQuery = {
     publisher?: string | null;
     enrolmentStartTime?: string | null;
     enrolmentEndTime?: string | null;
-    remainingAttendeeCapacity?: number | null;
     externalLinks: Array<{
       __typename?: 'ExternalLink';
       name?: string | null;
@@ -14728,7 +14725,6 @@ export type EventListQuery = {
       publisher?: string | null;
       enrolmentStartTime?: string | null;
       enrolmentEndTime?: string | null;
-      remainingAttendeeCapacity?: number | null;
       externalLinks: Array<{
         __typename?: 'ExternalLink';
         name?: string | null;
@@ -14933,7 +14929,6 @@ export type EventsByIdsQuery = {
       publisher?: string | null;
       enrolmentStartTime?: string | null;
       enrolmentEndTime?: string | null;
-      remainingAttendeeCapacity?: number | null;
       externalLinks: Array<{
         __typename?: 'ExternalLink';
         name?: string | null;
@@ -16070,7 +16065,6 @@ export const EventFieldsFragmentDoc = gql`
     }
     enrolmentStartTime
     enrolmentEndTime
-    remainingAttendeeCapacity
   }
   ${LocalizedFieldsFragmentDoc}
   ${KeywordFieldsFragmentDoc}

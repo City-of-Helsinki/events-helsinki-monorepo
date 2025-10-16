@@ -82,7 +82,6 @@ export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
       enrolmentStartTime: '',
       maximumAttendeeCapacity: 10,
       minimumAttendeeCapacity: 1,
-      remainingAttendeeCapacity: 5,
       audienceMinAge: '5',
       audienceMaxAge: '15',
       typeId: EventTypeId.Course,

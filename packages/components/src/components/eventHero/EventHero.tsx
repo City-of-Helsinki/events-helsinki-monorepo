@@ -136,22 +136,37 @@ const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
   const { defaultButtonTheme: theme, defaultButtonVariant: variant } =
     useAppThemeContext();
 
-  const { offerInfoUrl } = getEventFields(event, locale);
+  const { offerInfoUrl, remainingAttendeeCapacity } = getEventFields(
+    event,
+    locale
+  );
+  const isEnrolmentOpen = !!remainingAttendeeCapacity;
+  const enrolmentClosedText = t('hero.enrolmentClosed');
+  const enrolmentClosedExplanation = t('hero.enrolmentClosedExplanation');
   const buttonText = getEventHeroButtonText(event, 'button', t);
   const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
   return (
     <>
       {offerInfoUrl && (
         <div className={styles.registrationButtonWrapper}>
+          {!isEnrolmentOpen && (
+            <p id="enrolment-closed-explanation">
+              {enrolmentClosedExplanation}
+            </p>
+          )}
           <Button
             theme={theme}
             variant={variant}
             className={buttonStyles.buttonCoatBlue}
             aria-label={buttonAriaLabelText}
+            aria-describedby={
+              !isEnrolmentOpen ? 'enrolment-closed-explanation' : undefined
+            }
             onClick={() => window.open(offerInfoUrl)}
             iconRight={<IconLinkExternal aria-hidden />}
+            disabled={!isEnrolmentOpen}
           >
-            {buttonText}
+            {isEnrolmentOpen ? buttonText : enrolmentClosedText}
           </Button>
         </div>
       )}

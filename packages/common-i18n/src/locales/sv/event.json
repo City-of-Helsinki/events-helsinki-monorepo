@@ -24,6 +24,8 @@
     "buttonBuyTickets": "Köp biljetter",
     "buttonEnrol": "Registrering",
     "buttonToHomePage": "Till framsidan",
+    "enrolmentClosed": "Registreringen stängd",
+    "enrolmentClosedExplanation": "Registreringen för detta evenemang är för närvarande stängd.",
     "offers": {
       "isFree": "Gratis"
     },

@@ -355,7 +355,6 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
     photographerName: event.images?.[0]?.photographerName,
     ...getEventLocationFields(event, locale),
     locationExtraInfo: getLocalizedString(event.locationExtraInfo, locale),
-    remainingAttendeeCapacity: event.remainingAttendeeCapacity,
     enrolmentStartTime: event.enrolmentStartTime,
     enrolmentEndTime: event.enrolmentEndTime,
     providerContactInfo: getLocalizedString(event.providerContactInfo, locale),

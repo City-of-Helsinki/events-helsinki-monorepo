@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.26.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.25.0...hobbies-helsinki-v2.26.0) (2025-10-16)
+
+
+### Features
+
+* **apps:** Respond with not found when event is closed or cancelled ([db5df39](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/db5df39aaec70e3496401e0ea908da343a93575d))
+* Upgrade HCRC-lib for latest accessibility fixes and features ([01899a7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/01899a7aeb99ef59e9fd6290d478f973af768888))
+* Upgrade to node v22 ([2727d73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2727d730e49d50ea33abfe15bb21dadbf21683f9))
+
+
+### Bug Fixes
+
+* Remove remainingAttendeeCapacity field from event details root ([fc63bb8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fc63bb8207632c4aba0c2da57172ec81c7656e9a))
+* **search:** Improve polite message for screen readers on search ([c5a1c31](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c5a1c3174553f8857f6cce61525877051d90529d))
+
 ## [2.25.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.24.0...hobbies-helsinki-v2.25.0) (2025-10-06)
 
 

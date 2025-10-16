@@ -9,6 +9,7 @@ import { render, screen, waitFor } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvents } from '@/test-utils/mockDataUtils';
 import { createEventListRequestAndResultMocks } from '@/test-utils/mocks/eventListMocks';
+import AppConfig from '../../../app/AppConfig';
 import VenueUpcomingEvents from '../UpcomingEventsSection';
 
 const placeId = 'tprek:12345';
@@ -23,7 +24,7 @@ const expectedUpcomingEvents = fakeEvents(3);
 const similarEventQueryVariables = {
   location: placeId,
   keywords: keywords.map((k) => k.id),
-  include: ['keywords', 'location'],
+  include: AppConfig.eventSearchQueryIncludeParamValue,
   start: 'now',
   sort: EVENT_SORT_OPTIONS.END_TIME,
   // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.

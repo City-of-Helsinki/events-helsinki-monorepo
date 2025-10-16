@@ -133,6 +133,12 @@ $logoWidth: 5.5rem;
       }
     }
 
+    .registrationButtonWrapper p {
+      color: var(--color-black-80);
+      font-style: italic;
+      margin: var(--spacing-s) 0 var(--spacing-2-xs) 0;
+    }
+
     .buyButtonWrapper {
       margin-top: 1rem;
     }

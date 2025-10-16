@@ -24,6 +24,8 @@
     "buttonBuyTickets": "Osta liput",
     "buttonEnrol": "Ilmoittaudu mukaan",
     "buttonToHomePage": "Siirry etusivulle",
+    "enrolmentClosed": "Ilmoittautuminen suljettu",
+    "enrolmentClosedExplanation": "Ilmoittautuminen tähän tapahtumaan on tällä hetkellä suljettu.",
     "offers": {
       "isFree": "Maksuton"
     },

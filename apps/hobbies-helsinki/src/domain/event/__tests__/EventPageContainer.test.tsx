@@ -48,7 +48,7 @@ const keywords = [
   { name: 'Eläimet', id: 'keyword2' },
   { name: 'Grillaus', id: 'keyword3' },
 ];
-const superEventId = 'hel:123';
+const superEventId = 'hel:super-123';
 const otherEventTimesCount = 10;
 
 const event = fakeEvent({

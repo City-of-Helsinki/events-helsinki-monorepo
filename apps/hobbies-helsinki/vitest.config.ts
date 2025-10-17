@@ -54,7 +54,28 @@ const aliasPaths = paths
 
 export default defineConfig({
   cacheDir: '../../.cache/hobbies-helsinki',
-  plugins: [react(), cssInjectedByJsPlugin()],
+  plugins: [
+    react(),
+    cssInjectedByJsPlugin(),
+    {
+      // Suppress sourcemap warnings that can't be suppressed at console/stdout/stderr level
+      //
+      // See:
+      // - https://github.com/vitejs/rolldown-vite/blob/v7.0.4/packages/vite/src/node/server/sourcemap.ts#L81
+      // - https://github.com/vitest-dev/vitest/issues/7976
+      name: 'suppress-sourcemap-warnings',
+      configureServer(server) {
+        const originalWarnOnce = server.config.logger.warnOnce;
+
+        server.config.logger.warnOnce = (msg, options) => {
+          if (/^Sourcemap for .* points to missing source files$/.test(msg)) {
+            return;
+          }
+          originalWarnOnce(msg, options);
+        };
+      },
+    },
+  ],
   test: {
     environment: 'jsdom',
     globals: true, // Makes test, expect, vi global

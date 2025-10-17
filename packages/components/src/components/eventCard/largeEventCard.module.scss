@@ -45,7 +45,9 @@
     flex-direction: column;
     padding: var(--spacing-s);
     grid-template-rows: auto 1fr auto;
-
+    .alert {
+      color: var(--link-arrow-label-alert-color) !important;
+    }
     .eventName {
       order: 1;
       font-size: var(--fontsize-heading-l);

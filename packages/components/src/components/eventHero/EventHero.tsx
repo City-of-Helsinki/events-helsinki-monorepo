@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import {
   Button,
   IconArrowLeft,
+  IconBell,
   IconCalendarClock,
   IconLinkExternal,
   IconLocation,
@@ -18,12 +19,17 @@ import {
 } from 'react-helsinki-headless-cms';
 
 import buttonStyles from '../../components/button/button.module.scss';
+import {
+  EventEnrolmentStatus,
+  useEventEnrolmentStatus,
+} from '../../components/domain/event/eventEnrolmentStatus';
 import EventLocationText from '../../components/domain/event/eventLocation/EventLocationText';
 import EventKeywords from '../../components/eventKeywords/EventKeywords';
 import EventName from '../../components/eventName/EventName';
 import IconButton from '../../components/iconButton/IconButton';
 import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';
 import SkeletonLoader from '../../components/skeletonLoader/SkeletonLoader';
+import { EnrolmentStatusLabel } from '../../constants';
 import useLocale from '../../hooks/useLocale';
 import { useAppThemeContext } from '../../themeProvider';
 import type { EventFields, SuperEventResponse } from '../../types/event-types';
@@ -42,6 +48,30 @@ export type EventHeroProps = {
   event: EventFields;
   superEvent?: SuperEventResponse;
   withActions?: boolean;
+};
+
+/**
+ * Determine if event enrolment is open. This hook evaluates whether a user
+ * can still sign up for an event. Enrolment is considered open if there is
+ * remaining capacity for attendees, or if a waiting list exists and it has
+ * available spots.
+ *
+ * @param {EventHeroProps['event']} event - The event object containing
+ *  details about attendee and waiting list capacities.
+ * @returns {boolean} Returns `true` if enrolment is open
+ *  (either for direct attendance or the waiting list), otherwise `false`.
+ */
+const useIsEnrolmentOpen = (event: EventHeroProps['event']) => {
+  const {
+    remainingAttendeeCapacity,
+    waitingListCapacity,
+    remainingWaitingListCapacity,
+  } = event.registration ?? {};
+
+  return (
+    !!remainingAttendeeCapacity ||
+    (waitingListCapacity && remainingWaitingListCapacity)
+  );
 };
 
 const ShortDescription: React.FC<Pick<EventHeroProps, 'event'>> = ({
@@ -101,6 +131,29 @@ const TimeInfo: React.FC<Pick<EventHeroProps, 'event' | 'superEvent'>> = ({
   );
 };
 
+const EnrolmentStatusInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({
+  event,
+}) => {
+  const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
+  const hasRegistration =
+    !!event.enrolmentStartTime && !!event.enrolmentEndTime;
+
+  if (!hasRegistration) return null;
+
+  return (
+    <div className={styles.enrolmentStatus}>
+      <InfoWithIcon icon={<IconBell aria-hidden />} title={''}>
+        <EventEnrolmentStatus
+          event={event}
+          className={classNames({
+            [styles.alert]: eventEnrolmentStatus === EnrolmentStatusLabel.full,
+          })}
+        />
+      </InfoWithIcon>
+    </div>
+  );
+};
+
 const EventPriceInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
   const locale = useLocale();
   const { t } = useTranslation('event');
@@ -126,18 +179,15 @@ const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
   const { defaultButtonTheme: theme, defaultButtonVariant: variant } =
     useAppThemeContext();
 
-  const { offerInfoUrl, remainingAttendeeCapacity } = getEventFields(
-    event,
-    locale
-  );
-  const isEnrolmentOpen = !!remainingAttendeeCapacity;
-  const enrolmentClosedText = t('hero.enrolmentClosed');
-  const enrolmentClosedExplanation = t('hero.enrolmentClosedExplanation');
+  const { offerInfoUrl } = getEventFields(event, locale);
+
+  const isEnrolmentOpen = useIsEnrolmentOpen(event);
+
   const buttonText = getEventHeroButtonText(event, 'button', t);
   const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
   return (
     <>
-      {offerInfoUrl && (
+      {offerInfoUrl && isEnrolmentOpen && (
         <div className={styles.registrationButtonWrapper}>
           <Button
             theme={theme}
@@ -146,9 +196,8 @@ const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
             aria-label={buttonAriaLabelText}
             onClick={() => window.open(offerInfoUrl)}
             iconRight={<IconLinkExternal aria-hidden />}
-            disabled={!isEnrolmentOpen}
           >
-            {isEnrolmentOpen ? buttonText : enrolmentClosedText}
+            {buttonText}
           </Button>
         </div>
       )}
@@ -214,6 +263,7 @@ const EventHero: React.FC<EventHeroProps> = ({
                   <TimeInfo event={event} superEvent={superEvent} />
                   <LocationInfo event={event} />
                   <EventPriceInfo event={event} />
+                  <EnrolmentStatusInfo event={event} />
                   <OfferButton event={event} />
                 </div>
                 {showKeywords && (

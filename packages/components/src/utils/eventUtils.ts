@@ -4,6 +4,7 @@ import type { TFunction } from 'next-i18next';
 
 import {
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
+  EnrolmentStatusLabel,
   EVENT_KEYWORD_BLACK_LIST,
   EVENT_LOCATIONS,
   EVENT_SOME_IMAGE,
@@ -17,6 +18,7 @@ import type {
   PlaceFieldsFragment,
 } from '../types';
 import { EventTypeId } from '../types';
+import { getEnrolmentStatus } from './getEventEnrolmentStatus';
 import getLocalizedString from './getLocalizedString';
 import getSecureImage from './getSecureImage';
 
@@ -132,6 +134,11 @@ export const getEventHeroButtonText = (
   prefix: string,
   t: TFunction
 ): string => {
+  const status = getEnrolmentStatus(event);
+
+  if (status === EnrolmentStatusLabel.queueable) {
+    return t(`hero.${prefix}QueueEnrol`);
+  }
   return t(
     `hero.${prefix}${
       event.typeId === EventTypeId.General && !isEventFree(event)

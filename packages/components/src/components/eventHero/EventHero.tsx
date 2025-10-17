@@ -79,13 +79,10 @@ const ShortDescription: React.FC<Pick<EventHeroProps, 'event'>> = ({
 }) => {
   const locale = useLocale();
   const { shortDescription } = getEventFields(event, locale);
-  return (
-    <>
-      {shortDescription && (
-        <div className={styles.description}>{shortDescription}</div>
-      )}
-    </>
-  );
+
+  if (!shortDescription) return null;
+
+  return <div className={styles.description}>{shortDescription}</div>;
 };
 
 const LocationInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => (
@@ -106,11 +103,10 @@ const TimeInfo: React.FC<Pick<EventHeroProps, 'event' | 'superEvent'>> = ({
 }) => {
   const { t: commonTranslation } = useTranslation('common');
   const locale = useLocale();
-  const {
-    endTime: eventEndTime,
-
-    startTime: eventStartTime,
-  } = getEventFields(event, locale);
+  const { endTime: eventEndTime, startTime: eventStartTime } = getEventFields(
+    event,
+    locale
+  );
 
   return (
     <div className={styles.start}>
@@ -159,16 +155,14 @@ const EventPriceInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
   const { t } = useTranslation('event');
   const eventPriceText = getEventPrice(event, locale, t('hero.offers.isFree'));
 
+  if (!eventPriceText) return null;
+
   return (
-    <>
-      {eventPriceText && (
-        <div className={styles.price}>
-          <InfoWithIcon icon={<IconTicket aria-hidden />} title={''}>
-            {eventPriceText}
-          </InfoWithIcon>
-        </div>
-      )}
-    </>
+    <div className={styles.price}>
+      <InfoWithIcon icon={<IconTicket aria-hidden />} title={''}>
+        {eventPriceText}
+      </InfoWithIcon>
+    </div>
   );
 };
 

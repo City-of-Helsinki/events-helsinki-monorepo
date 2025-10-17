@@ -81,32 +81,22 @@ const TimeInfo: React.FC<Pick<EventHeroProps, 'event' | 'superEvent'>> = ({
 
     startTime: eventStartTime,
   } = getEventFields(event, locale);
-  const startTime =
-    superEvent?.status === 'pending'
-      ? ''
-      : superEvent?.data?.startTime || eventStartTime;
-  const endTime =
-    superEvent?.status === 'pending'
-      ? ''
-      : superEvent?.data?.endTime || eventEndTime;
 
   return (
     <div className={styles.start}>
-      {(startTime !== eventStartTime || endTime !== eventEndTime) && (
-        <InfoWithIcon icon={<IconCalendarClock aria-hidden />} title={''}>
-          {superEvent?.status === 'pending' ? (
-            <SkeletonLoader />
-          ) : (
-            getDateRangeStr({
-              start: eventStartTime || '',
-              end: eventEndTime,
-              locale,
-              includeTime: true,
-              timeAbbreviation: commonTranslation('timeAbbreviation'),
-            })
-          )}
-        </InfoWithIcon>
-      )}
+      <InfoWithIcon icon={<IconCalendarClock aria-hidden />} title={''}>
+        {superEvent?.status === 'pending' ? (
+          <SkeletonLoader />
+        ) : (
+          getDateRangeStr({
+            start: eventStartTime || '',
+            end: eventEndTime,
+            locale,
+            includeTime: true,
+            timeAbbreviation: commonTranslation('timeAbbreviation'),
+          })
+        )}
+      </InfoWithIcon>
     </div>
   );
 };

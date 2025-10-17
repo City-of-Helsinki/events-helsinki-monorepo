@@ -4,6 +4,8 @@ import {
   NeighborhoodListDocument,
   PlaceListDocument,
 } from '@events-helsinki/components';
+import { configure, screen, act } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
@@ -13,13 +15,7 @@ import {
   fakeNeighborhoods,
   fakePlaces,
 } from '../../../../../../config/vitest/mockDataUtils';
-import {
-  actWait,
-  configure,
-  render,
-  screen,
-  userEvent,
-} from '../../../../../../config/vitest/test-utils';
+import { render } from '../../../../../../config/vitest/test-utils';
 
 import Search from '../AdvancedSearch';
 
@@ -89,12 +85,9 @@ afterAll(() => {
 
 it('for accessibility violations', async () => {
   const { container } = renderComponent();
-
-  await actWait();
-
-  const results = await axe(container);
+  const results = await act(async () => await axe(container));
   expect(results).toHaveNoViolations();
-}, 50000); // FIXME: Why does this take so long?
+});
 
 it('should clear all filters and search field', async () => {
   const { router } = renderComponent();

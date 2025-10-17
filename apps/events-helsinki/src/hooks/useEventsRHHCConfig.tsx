@@ -6,10 +6,7 @@ import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
   useResilientTranslation,
   getLanguageCode,
-  getLinkArrowLabel,
   useLocale,
-  useCommonTranslation,
-  useEventTranslation,
   MAIN_CONTENT_ID,
   useCommonCmsConfig,
   HelsinkiCityOwnedIcon,
@@ -44,8 +41,6 @@ export default function useEventsRHHCConfig(args: {
   apolloClient: ApolloClient<NormalizedCacheObject>;
 }): Config {
   const { apolloClient } = args;
-  const { t: commonTranslation } = useCommonTranslation();
-  const { t: eventTranslation } = useEventTranslation();
   const { resilientT } = useResilientTranslation();
   const locale = useLocale();
   const commonConfig = useCommonCmsConfig();
@@ -110,12 +105,6 @@ export default function useEventsRHHCConfig(args: {
                 organisationPrefixes,
                 locale
               ),
-              linkArrowLabel: getLinkArrowLabel({
-                item,
-                locale,
-                eventTranslation,
-                commonTranslation,
-              }),
             })
           : rhhcDefaultConfig.utils.getEventCardProps,
         getRoutedInternalHref: (
@@ -138,12 +127,5 @@ export default function useEventsRHHCConfig(args: {
       },
       internalHrefOrigins,
     };
-  }, [
-    commonConfig,
-    commonTranslation,
-    eventTranslation,
-    resilientT,
-    locale,
-    apolloClient,
-  ]);
+  }, [commonConfig, resilientT, locale, apolloClient]);
 }

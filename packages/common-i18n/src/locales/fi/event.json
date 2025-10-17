@@ -25,7 +25,6 @@
     "buttonEnrol": "Ilmoittaudu mukaan",
     "buttonToHomePage": "Siirry etusivulle",
     "enrolmentClosed": "Ilmoittautuminen suljettu",
-    "enrolmentClosedExplanation": "Ilmoittautuminen tähän tapahtumaan on tällä hetkellä suljettu.",
     "offers": {
       "isFree": "Maksuton"
     },
@@ -112,7 +111,7 @@
   },
   "title": "Ladataan tapahtumaa...",
   "enrolmentStatus": {
-    "enrollable": "",
+    "enrollable": "Ilmoittautuminen käynnissä",
     "noEnrolmentTimes": "",
     "full": "Täynnä",
     "enrolmentNotStartedYet": "Ilmoittautuminen alkaa {{date}}",

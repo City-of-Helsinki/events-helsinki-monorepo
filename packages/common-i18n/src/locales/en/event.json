@@ -25,7 +25,6 @@
     "buttonEnrol": "Registration",
     "buttonToHomePage": "Visit the landing page",
     "enrolmentClosed": "Registration closed",
-    "enrolmentClosedExplanation": "Registration for this event is currently closed.",
     "offers": {
       "isFree": "Free"
     },
@@ -112,7 +111,7 @@
     "title": "Similar events"
   },
   "enrolmentStatus": {
-    "enrollable": "",
+    "enrollable": "Registration",
     "noEnrolmentTimes": "",
     "full": "Full",
     "enrolmentNotStartedYet": "Enrolment starts on {{date}}",

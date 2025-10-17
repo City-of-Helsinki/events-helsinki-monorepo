@@ -3,13 +3,25 @@ import type { EventFields } from '../types/event-types';
 
 export function getEnrolmentStatus(event: EventFields): EnrolmentStatusLabel {
   const now = new Date();
-  const { remainingAttendeeCapacity, enrolmentStartTime, enrolmentEndTime } = {
+
+  // NOTE: `event.registration` needs `includes: ['registration']` as a query param.
+  const {
+    remainingAttendeeCapacity,
+    enrolmentStartTime,
+    enrolmentEndTime,
+    waitingListCapacity,
+    remainingWaitingListCapacity,
+  } = event?.registration || {
     ...event,
-    remainingAttendeeCapacity: null,
+    remainingAttendeeCapacity: undefined,
+    waitingListCapacity: undefined,
+    remainingWaitingListCapacity: undefined,
   };
 
-  // TODO: Add EnrolmentStatusLabel.queueable when we can resolve it
   if (remainingAttendeeCapacity === 0) {
+    if (waitingListCapacity && remainingWaitingListCapacity) {
+      return EnrolmentStatusLabel.queueable;
+    }
     return EnrolmentStatusLabel.full;
   } else if (enrolmentStartTime && new Date(enrolmentStartTime) > now) {
     return EnrolmentStatusLabel.enrolmentNotStartedYet;

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import {
+  IconBell,
   IconCake,
   IconCalendarClock,
   IconLocation,
@@ -108,6 +109,21 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
                 {eventPrice}
               </div>
             )}
+            {showEnrolmentStatusInCardDetails &&
+              eventEnrolmentStatus !==
+                EnrolmentStatusLabel.noEnrolmentTimes && (
+                <div className={styles.eventPrice}>
+                  <IconBell aria-hidden />
+
+                  <EventEnrolmentStatus
+                    event={event}
+                    className={classNames(styles.linkArrowLabel, {
+                      [styles.alert]:
+                        eventEnrolmentStatus === EnrolmentStatusLabel.full,
+                    })}
+                  />
+                </div>
+              )}
             <div className={styles.keywordWrapperDesktop}>
               <EventKeywords
                 event={event}
@@ -124,15 +140,6 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
                   aria-hidden="true"
                   loading={clicked}
                 />
-                {showEnrolmentStatusInCardDetails && (
-                  <EventEnrolmentStatus
-                    event={event}
-                    className={classNames(styles.linkArrowLabel, {
-                      [styles.alert]:
-                        eventEnrolmentStatus === EnrolmentStatusLabel.full,
-                    })}
-                  />
-                )}
               </div>
             </div>
           </div>

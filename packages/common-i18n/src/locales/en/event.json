@@ -21,9 +21,12 @@
     "ariaLabelBackButton": "Go back to previous page",
     "ariaLabelBuyTickets": "Buy tickets - The link will open in a new window",
     "ariaLabelEnrol": "Enrol - The link will open in a new window",
+    "ariaLabelQueueEnrol": "Enrol to queue - The link will open in a new window",
     "buttonBuyTickets": "Buy tickets",
     "buttonEnrol": "Registration",
+    "buttonQueueEnrol": "Queue registration",
     "buttonToHomePage": "Visit the landing page",
+    "enrolmentClosed": "Registration closed",
     "offers": {
       "isFree": "Free"
     },
@@ -110,7 +113,7 @@
     "title": "Similar events"
   },
   "enrolmentStatus": {
-    "enrollable": "",
+    "enrollable": "Registration",
     "noEnrolmentTimes": "",
     "full": "Full",
     "enrolmentNotStartedYet": "Enrolment starts on {{date}}",

@@ -21,9 +21,12 @@
     "ariaLabelBackButton": "Palaa takaisin edelliselle sivulle",
     "ariaLabelBuyTickets": "Osta liput - Linkki avautuu uudessa ikkunassa",
     "ariaLabelEnrol": "Ilmoittaudu - Linkki avautuu uudessa ikkunassa",
+    "ariaLabelQueueEnrol": "Ilmoittaudu jonoon - Linkki avautuu uudessa ikkunassa",
     "buttonBuyTickets": "Osta liput",
     "buttonEnrol": "Ilmoittaudu mukaan",
+    "buttonQueueEnrol": "Ilmoittaudu jonoon",
     "buttonToHomePage": "Siirry etusivulle",
+    "enrolmentClosed": "Ilmoittautuminen suljettu",
     "offers": {
       "isFree": "Maksuton"
     },
@@ -110,7 +113,7 @@
   },
   "title": "Ladataan tapahtumaa...",
   "enrolmentStatus": {
-    "enrollable": "",
+    "enrollable": "Ilmoittautuminen käynnissä",
     "noEnrolmentTimes": "",
     "full": "Täynnä",
     "enrolmentNotStartedYet": "Ilmoittautuminen alkaa {{date}}",

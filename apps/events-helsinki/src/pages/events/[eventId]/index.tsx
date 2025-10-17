@@ -80,7 +80,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       query: EventDetailsDocument,
       variables: {
         id,
-        include: ['in_language', 'keywords', 'location', 'audience'],
+        include: AppConfig.eventDetailsQueryIncludeParamValue,
       },
     });
 

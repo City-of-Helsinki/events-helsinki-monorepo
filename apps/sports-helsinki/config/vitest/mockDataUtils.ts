@@ -48,6 +48,15 @@ export const fakeEvents = (
 });
 
 export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
+  const registration: EventDetails['registration'] = {
+    enrolmentEndTime: '',
+    enrolmentStartTime: '',
+    maximumAttendeeCapacity: 10,
+    minimumAttendeeCapacity: 1,
+    remainingAttendeeCapacity: 5,
+    audienceMinAge: '5',
+    audienceMaxAge: '15',
+  };
   return merge<EventDetails, typeof overrides>(
     {
       id: `hel:${faker.string.uuid()}`,
@@ -78,12 +87,14 @@ export const fakeEvent = (overrides?: Partial<EventDetails>): EventDetails => {
       eventStatus: 'EventScheduled',
       superEvent: null,
       dataSource: 'hel',
-      enrolmentEndTime: '',
-      enrolmentStartTime: '',
-      maximumAttendeeCapacity: 10,
-      minimumAttendeeCapacity: 1,
-      audienceMinAge: '5',
-      audienceMaxAge: '15',
+      // NOTE: registration is `null` if query params does not have `include=registration`.
+      registration: null,
+      enrolmentEndTime: registration.enrolmentEndTime,
+      enrolmentStartTime: registration.enrolmentStartTime,
+      maximumAttendeeCapacity: registration.maximumAttendeeCapacity,
+      minimumAttendeeCapacity: registration.minimumAttendeeCapacity,
+      audienceMinAge: registration.audienceMinAge,
+      audienceMaxAge: registration.audienceMaxAge,
       typeId: EventTypeId.Course,
       locationExtraInfo: null,
       providerContactInfo: null,

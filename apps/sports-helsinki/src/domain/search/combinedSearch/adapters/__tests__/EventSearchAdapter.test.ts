@@ -74,7 +74,7 @@ describe('EventSearchAdapter', () => {
           pageSize: AppConfig.pageSize,
           publisher: null,
           publisherAncestor: 'ahjo:00001',
-          include: ['keywords', 'location'],
+          include: AppConfig.eventSearchQueryIncludeParamValue,
           // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
           // NOTE: This is not needed if using any `*Ongoing` -filter as
           // they automatically limit the results to city of Helsinki events.

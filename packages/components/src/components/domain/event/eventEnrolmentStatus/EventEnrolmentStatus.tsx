@@ -11,10 +11,7 @@ function EventEnrolmentStatus({
 }) {
   const { status, text } = useEnrolmentStatus(event);
   const linkArrowLabel =
-    [
-      EnrolmentStatusLabel.enrollable,
-      EnrolmentStatusLabel.noEnrolmentTimes,
-    ].includes(status) === false
+    [EnrolmentStatusLabel.noEnrolmentTimes].includes(status) === false
       ? text
       : null;
 

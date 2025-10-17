@@ -13,10 +13,11 @@ import {
   EventTypeId,
   HELSINKI_OCD_DIVISION_ID,
 } from '@events-helsinki/components';
+import AppConfig from '../../../src/domain/app/AppConfig';
 
 export const baseVariables = {
   end: '',
-  include: ['keywords', 'location'],
+  include: AppConfig.eventSearchQueryIncludeParamValue,
   isFree: undefined,
   keywordAnd: [],
   keywordNot: [],
@@ -40,7 +41,7 @@ export const eventListBaseVariables: QueryEventListArgs = {
 export const getOtherEventsVariables = (
   superEvent: EventListQueryVariables['superEvent']
 ): EventListQueryVariables => ({
-  include: ['in_language', 'keywords', 'location', 'audience'],
+  include: AppConfig.eventSecondaryQueryIncludeParamValue,
   sort: 'end_time',
   start: 'now',
   superEvent,

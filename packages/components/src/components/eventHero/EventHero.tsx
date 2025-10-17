@@ -149,19 +149,11 @@ const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
     <>
       {offerInfoUrl && (
         <div className={styles.registrationButtonWrapper}>
-          {!isEnrolmentOpen && (
-            <p id="enrolment-closed-explanation">
-              {enrolmentClosedExplanation}
-            </p>
-          )}
           <Button
             theme={theme}
             variant={variant}
             className={buttonStyles.buttonCoatBlue}
             aria-label={buttonAriaLabelText}
-            aria-describedby={
-              !isEnrolmentOpen ? 'enrolment-closed-explanation' : undefined
-            }
             onClick={() => window.open(offerInfoUrl)}
             iconRight={<IconLinkExternal aria-hidden />}
             disabled={!isEnrolmentOpen}

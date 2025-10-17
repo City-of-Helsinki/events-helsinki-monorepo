@@ -25,7 +25,6 @@
     "buttonEnrol": "Registrering",
     "buttonToHomePage": "Till framsidan",
     "enrolmentClosed": "Registreringen stängd",
-    "enrolmentClosedExplanation": "Registreringen för detta evenemang är för närvarande stängd.",
     "offers": {
       "isFree": "Gratis"
     },
@@ -112,7 +111,7 @@
   },
   "title": "Laddar evenemang...",
   "enrolmentStatus": {
-    "enrollable": "",
+    "enrollable": "Registrering",
     "noEnrolmentTimes": "",
     "full": "Full",
     "enrolmentNotStartedYet": "Registrering startar den {{date}}",

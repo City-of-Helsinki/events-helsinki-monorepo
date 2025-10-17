@@ -356,6 +356,9 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
     ...getEventLocationFields(event, locale),
     locationExtraInfo: getLocalizedString(event.locationExtraInfo, locale),
     remainingAttendeeCapacity: event.registration?.remainingAttendeeCapacity,
+    waitingListCapacity: event.registration?.waitingListCapacity,
+    remainingWaitingListCapacity:
+      event.registration?.remainingWaitingListCapacity,
     enrolmentStartTime: event.enrolmentStartTime,
     enrolmentEndTime: event.enrolmentEndTime,
     providerContactInfo: getLocalizedString(event.providerContactInfo, locale),

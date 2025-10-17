@@ -209,6 +209,13 @@ const EventHero: React.FC<EventHeroProps> = ({
                   <EventName event={event} />
                 </h1>
                 <ShortDescription event={event} />
+
+                <div className={styles.additionalInfo}>
+                  <TimeInfo event={event} superEvent={superEvent} />
+                  <LocationInfo event={event} />
+                  <EventPriceInfo event={event} />
+                  <OfferButton event={event} />
+                </div>
                 {showKeywords && (
                   <div className={styles.categoryWrapper}>
                     <EventKeywords
@@ -219,12 +226,6 @@ const EventHero: React.FC<EventHeroProps> = ({
                     />
                   </div>
                 )}
-                <div className={styles.additionalInfo}>
-                  <LocationInfo event={event} />
-                  <TimeInfo event={event} superEvent={superEvent} />
-                  <EventPriceInfo event={event} />
-                  <OfferButton event={event} />
-                </div>
               </div>
             </div>
           </div>

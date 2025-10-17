@@ -10,6 +10,8 @@ $logoWidth: 5.5rem;
 }
 
 .contentContainer {
+  --link-arrow-label-alert-color: #b01038;
+
   @include breakpoints.respond-below(m) {
     padding: 0 !important;
   }
@@ -124,12 +126,13 @@ $logoWidth: 5.5rem;
       .location,
       .start,
       .price,
-      .buyButtonWrapper,
-      .registrationButtonWrapper {
-        margin: var(--spacing-2-xs) 0;
-      }
+      .enrolmentStatus,
       .categoryWrapper {
-        margin: var(--spacing-s) 0 var(--spacing-2-xs) 0;
+        margin: var(--spacing-2-xs) 0;
+
+        .alert {
+          color: var(--link-arrow-label-alert-color) !important;
+        }
       }
     }
 
@@ -139,8 +142,8 @@ $logoWidth: 5.5rem;
       margin: var(--spacing-s) 0 var(--spacing-2-xs) 0;
     }
 
-    .buyButtonWrapper {
-      margin-top: 1rem;
+    .registrationButtonWrapper {
+      margin: var(--spacing-s) 0 var(--spacing-m);
     }
 
     .buttonWrapperMobile {

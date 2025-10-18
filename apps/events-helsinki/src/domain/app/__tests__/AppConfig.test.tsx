@@ -9,6 +9,7 @@ beforeAll(() => {
 
 afterAll(() => {
   process.env = env;
+  vi.clearAllMocks();
 });
 
 it.each([
@@ -27,20 +28,18 @@ it.each([
     mockEnvValue: 'https://localhost',
     envName: 'NEXT_PUBLIC_APP_ORIGIN',
     expectToEqual: undefined,
-  },
+  } as const,
 ])(
   'provides required config $field',
   ({ field, mockEnvValue, envName, expectToEqual }) => {
     // When exists, provides it
     process.env[envName] = mockEnvValue;
-    // @ts-ignore
     expect(AppConfig[field]).toStrictEqual(
       expectToEqual ?? process.env[envName]
     );
 
     // When it doesn't exists, errors
     delete process.env[envName];
-    // @ts-ignore
     expect(() => AppConfig[field]).toThrow(
       `Environment variable with name ${envName} was not found`
     );
@@ -52,41 +51,36 @@ it.each([
     field: 'debug',
     envName: 'NEXT_PUBLIC_DEBUG',
     defaultValue: false,
-  },
+  } as const,
   {
     field: 'allowUnauthorizedRequests',
     envName: 'NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS',
     defaultValue: false,
-  },
+  } as const,
   {
     field: 'showSimilarEvents',
     envName: 'NEXT_PUBLIC_SHOW_SIMILAR_EVENTS',
     defaultValue: true,
-  },
+  } as const,
 ])('provides flag config $field', ({ field, envName, defaultValue }) => {
   // When undefined, returns false
   delete process.env[envName];
-  // @ts-ignore
   expect(AppConfig[field]).toStrictEqual(defaultValue);
 
   // When 0, returns false
   process.env[envName] = '0';
-  // @ts-ignore
   expect(AppConfig[field]).toStrictEqual(false);
 
   // When false, returns false
   process.env[envName] = 'false';
-  // @ts-ignore
   expect(AppConfig[field]).toStrictEqual(false);
 
   // When 1, returns true
   process.env[envName] = '1';
-  // @ts-ignore
   expect(AppConfig[field]).toStrictEqual(true);
 
   // When true, returns true
   process.env[envName] = 'true';
-  // @ts-ignore
   expect(AppConfig[field]).toStrictEqual(true);
 });
 
@@ -95,28 +89,32 @@ it.each([
     field: 'defaultRevalidate',
     envName: 'NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS',
     defaultValue: 60,
-  },
+  } as const,
 ])('provides number config $field', ({ field, envName, defaultValue }) => {
+  const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
   // When exists, provides it
   process.env[envName] = '10';
-  // @ts-ignore
   expect(AppConfig[field]).toStrictEqual(10);
 
   // When it doesn't exist
   delete process.env[envName];
   if (defaultValue) {
-    // @ts-ignore
     expect(AppConfig[field]).toStrictEqual(defaultValue);
   } else {
-    // @ts-ignore
     expect(AppConfig[field]).toBeUndefined();
   }
 
   // When it's of wrong type, it errors
   process.env[envName] = 'Some string';
-  // @ts-ignore
   expect(() => AppConfig[field]).toThrow(
     `${envName} must be a value that can be parsed into a number`
+  );
+  expect(consoleLogSpy).toHaveBeenCalledExactlyOnceWith(
+    'Could not parse env value',
+    expect.objectContaining({
+      name: 'SyntaxError',
+      message: 'Unexpected token \'S\', "Some string" is not valid JSON',
+    })
   );
 });
 

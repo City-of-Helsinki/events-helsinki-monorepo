@@ -24,8 +24,8 @@ import type {
   PlaceListResponse,
   SearchListQuery,
   StaticPage,
-  UnifiedSearchVenue,
   Venue,
+  LanguageString,
 } from '@events-helsinki/components';
 import { EXTLINK, EventTypeId } from '@events-helsinki/components';
 import type { AppRoutingContextProps } from '@events-helsinki/components/routingUrlProvider/AppRoutingContext';
@@ -354,11 +354,16 @@ const uniqueSentences = (): string => {
   return sentence;
 };
 
-export const fakeLocalizedObject = (text?: string): LocalizedObject => ({
+export const fakeLocalizedObject = (text?: string | null): LocalizedObject => ({
   __typename: 'LocalizedObject',
   en: text || uniqueSentences(),
   sv: text || uniqueSentences(),
   fi: text || uniqueSentences(),
+});
+
+export const fakeLanguageString = (text?: string | null): LanguageString => ({
+  ...fakeLocalizedObject(text),
+  __typename: 'LanguageString',
 });
 
 const generateNodeArray = <T extends (...args: any) => any>(
@@ -386,72 +391,65 @@ export const fakeOntology = (overrides?: Partial<Ontology>): Ontology =>
 export const fakeVenuesSearchList = (
   count = 1,
   venues?: Partial<Venue>[]
-): SearchListQuery => ({
-  unifiedSearch: {
-    __typename: 'SearchResultConnection',
-    count,
-    pageInfo: {
-      __typename: 'SearchResultPageInfo',
-      endCursor: null,
-      hasNextPage: false,
-    },
-    edges: generateNodeArray((i) => {
-      const venue = fakeVenue(venues?.[i]);
-      return {
-        __typename: 'SearchResultEdge',
-        node: {
-          __typename: 'SearchResultNode',
-          venue: {
-            description: { fi: venue.description },
-            images: [{ url: venue.image }],
-            location: {
-              address: {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                city: fakeLocalizedObject(venue.addressLocality!),
-                postalCode: '00100',
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                streetAddress: fakeLocalizedObject(venue.streetAddress!),
-              },
-              geoLocation: {
-                crs: {
-                  type: 'name',
-                  properties: {
-                    name: 'urn:ogc:def:crs:OGC:1.3:CRS84',
+): SearchListQuery => {
+  type SearchListQueryEdge = NonNullable<
+    NonNullable<SearchListQuery['unifiedSearch']>['edges']
+  >[number];
+
+  return {
+    unifiedSearch: {
+      __typename: 'SearchResultConnection',
+      count,
+      pageInfo: {
+        __typename: 'SearchResultPageInfo',
+        endCursor: null,
+        hasNextPage: false,
+      },
+      edges: generateNodeArray((i): SearchListQueryEdge => {
+        const venue = fakeVenue(venues?.[i]);
+        return {
+          __typename: 'SearchResultEdge',
+          node: {
+            __typename: 'SearchResultNode',
+            venue: {
+              accessibilityShortcomingFor: null,
+              description: fakeLanguageString(venue.description),
+              images: [{ url: venue.image }],
+              location: {
+                address: {
+                  city: fakeLanguageString(venue.addressLocality),
+                  postalCode: '00100',
+                  streetAddress: fakeLanguageString(venue.streetAddress),
+                },
+                geoLocation: {
+                  __typename: 'GeoJSONFeature',
+                  geometry: {
+                    __typename: 'GeoJSONPoint',
+                    coordinates: [0.123, 0.123],
                   },
                 },
-                type: 'Point',
-                geometry: {
-                  coordinates: [0.123, 0.123],
-                  crs: {
-                    type: 'name',
-                    properties: {
-                      name: 'urn:ogc:def:crs:OGC:1.3:CRS84',
-                    },
-                  },
-                  type: 'Point',
-                },
               },
+              meta: { id: venue.id },
+              name: fakeLanguageString(venue.name ?? 'test venue name'),
+              ontologyWords: venue.ontologyWords.map((ontology, index) => ({
+                id: (
+                  ontology?.id ?? `venue-${venue.id}-ontology-${index}`
+                ).toString(),
+                label: fakeLanguageString(
+                  ontology?.label ?? 'test ontology label'
+                ),
+              })),
+              reservation: null,
+              serviceOwner: null,
+              targetGroups: [],
             },
-            meta: { id: venue.id },
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            name: fakeLocalizedObject(venue.name!),
-            ontologyWords: venue.ontologyWords.map((ontology) => ({
-              id: ontology?.id,
-              // eslint-disable-next-line @stylistic/max-len
-              // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain, @typescript-eslint/no-non-null-assertion
-              label: fakeLocalizedObject(ontology?.label!),
-            })),
-            targetGroups: [],
-            resources: [],
-          } as UnifiedSearchVenue,
-        },
-      } as NonNullable<
-        NonNullable<SearchListQuery['unifiedSearch']>['edges']
-      >[number];
-    }, count),
-  },
-  __typename: 'Query',
-});
+          },
+        };
+      }, count),
+    },
+    __typename: 'Query',
+  };
+};
 
 export const fakeVenues = (count = 1, venues?: Partial<Venue>[]): Venue[] => {
   return generateNodeArray((i) => fakeVenue(venues?.[i]), count);

@@ -17,9 +17,9 @@ function isHighlightConnection(
 
 // Use hash to avoid SonarCloud code smell "Do not use Array index in keys", see
 // https://rules.sonarsource.com/typescript/RSPEC-6479/
-function venueHighlightKey(connection: HighlightConnection) {
-  const hash = createHash('sha256').update(connection.name).toString();
-  return `venue-highlight${hash}`;
+export function venueHighlightKey(connection: HighlightConnection) {
+  const hash = createHash('sha256').update(connection.name).digest('hex');
+  return `venue-highlight-${hash}`;
 }
 
 const VenueHighlights = ({ venue: { connections } }: { venue: Venue }) => {

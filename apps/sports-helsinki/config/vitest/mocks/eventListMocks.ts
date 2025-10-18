@@ -21,7 +21,7 @@ export const baseVariables = {
   keywordAnd: [],
   keywordNot: [],
   location: [],
-  pageSize: 10,
+  pageSize: 25,
   publisher: null,
   publisherAncestor: null,
   sort: 'end_time',

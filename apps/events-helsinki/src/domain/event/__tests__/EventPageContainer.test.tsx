@@ -273,32 +273,13 @@ it('doesnt show similar events when SIMILAR_EVENTS flag is off', async () => {
   ).not.toBeInTheDocument();
 });
 
-it('doesnt show similar events when keywords are not mapped', async () => {
+it('hides similar events when event has no keywords', async () => {
   advanceTo('2020-10-01');
-  renderComponent({ event: event, loading: false, showSimilarEvents: true }, [
-    ...mocks,
-    createEventListRequestAndResultMocks({
-      variables: {
-        keywordOrSet2: [''],
-        language: undefined,
-        pageSize: 100,
-        publisherAncestor: null,
-        eventType: [EventTypeId.General],
-      },
-      response: {
-        data: [],
-        meta: {
-          __typename: 'Meta',
-          count: 0,
-          next: '',
-          previous: '',
-        },
-        __typename: 'EventListResponse',
-      },
-    }),
-  ]);
-  await waitFor(() => {
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
+  const eventNoKeywords = { ...event, keywords: [] };
+  renderComponent({
+    event: eventNoKeywords,
+    loading: false,
+    showSimilarEvents: true,
   });
   await waitForLoadingCompleted();
 

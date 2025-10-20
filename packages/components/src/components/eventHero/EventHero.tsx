@@ -41,7 +41,9 @@ import {
   getEventPrice,
 } from '../../utils/eventUtils';
 import getDateRangeStr from '../../utils/getDateRangeStr';
+import { getEnrolmentStatus } from '../../utils/getEventEnrolmentStatus';
 import getLocaleFromPathname from '../../utils/getLocaleFromPathname';
+import { OPEN_ENROLMENT_STATUSES } from '../domain/event/eventEnrolmentStatus/constants';
 import styles from './eventHero.module.scss';
 
 export type EventHeroProps = {
@@ -61,17 +63,12 @@ export type EventHeroProps = {
  * @returns {boolean} Returns `true` if enrolment is open
  *  (either for direct attendance or the waiting list), otherwise `false`.
  */
-const useIsEnrolmentOpen = (event: EventHeroProps['event']) => {
-  const {
-    remainingAttendeeCapacity,
-    waitingListCapacity,
-    remainingWaitingListCapacity,
-  } = event.registration ?? {};
-
-  return (
-    !!remainingAttendeeCapacity ||
-    (waitingListCapacity && remainingWaitingListCapacity)
-  );
+export const useIsEnrolmentOpen = (
+  event?: EventHeroProps['event']
+): boolean => {
+  if (!event) return false;
+  const status = getEnrolmentStatus(event);
+  return OPEN_ENROLMENT_STATUSES.includes(status);
 };
 
 const ShortDescription: React.FC<Pick<EventHeroProps, 'event'>> = ({
@@ -127,14 +124,24 @@ const TimeInfo: React.FC<Pick<EventHeroProps, 'event' | 'superEvent'>> = ({
   );
 };
 
-const EnrolmentStatusInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({
+export const EnrolmentStatusInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({
   event,
 }) => {
   const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
   const hasRegistration =
     !!event.enrolmentStartTime && !!event.enrolmentEndTime;
 
-  if (!hasRegistration) return null;
+  const hiddenForStatuses = [
+    EnrolmentStatusLabel.noEnrolmentTimes,
+    EnrolmentStatusLabel.enrollable,
+    EnrolmentStatusLabel.queueable,
+  ];
+
+  // Don't show if there is no registation required or status is "enrollable" or "queueable",
+  // because then an enrolment button is shown instead.
+  if (!hasRegistration || hiddenForStatuses.includes(eventEnrolmentStatus)) {
+    return null;
+  }
 
   return (
     <div className={styles.enrolmentStatus}>
@@ -166,36 +173,43 @@ const EventPriceInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
   );
 };
 
-const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
+export const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({
+  event,
+}) => {
   const locale = useLocale();
   const { t } = useTranslation('event');
 
   const { defaultButtonTheme: theme, defaultButtonVariant: variant } =
     useAppThemeContext();
 
-  const { offerInfoUrl } = getEventFields(event, locale);
+  // NOTE: Should something else than offerInfoURl be used here?
+  // E.g. event?.registration?.signupUrl? or registration link from from event?.externalLinks?.
+  const { offerInfoUrl: externalRegistrationUrl } = getEventFields(
+    event,
+    locale
+  );
 
   const isEnrolmentOpen = useIsEnrolmentOpen(event);
 
   const buttonText = getEventHeroButtonText(event, 'button', t);
   const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
+
+  // If there is no offer URL (where registration is made) or
+  if (!externalRegistrationUrl || !isEnrolmentOpen) return null;
+
   return (
-    <>
-      {offerInfoUrl && isEnrolmentOpen && (
-        <div className={styles.registrationButtonWrapper}>
-          <Button
-            theme={theme}
-            variant={variant}
-            className={buttonStyles.buttonCoatBlue}
-            aria-label={buttonAriaLabelText}
-            onClick={() => window.open(offerInfoUrl)}
-            iconRight={<IconLinkExternal aria-hidden />}
-          >
-            {buttonText}
-          </Button>
-        </div>
-      )}
-    </>
+    <div className={styles.registrationButtonWrapper}>
+      <Button
+        theme={theme}
+        variant={variant}
+        className={buttonStyles.buttonCoatBlue}
+        aria-label={buttonAriaLabelText}
+        onClick={() => window.open(externalRegistrationUrl)}
+        iconRight={<IconLinkExternal aria-hidden />}
+      >
+        {buttonText}
+      </Button>
+    </div>
   );
 };
 

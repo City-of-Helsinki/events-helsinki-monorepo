@@ -3,7 +3,6 @@ import type { EventFields } from '../types/event-types';
 
 export function getEnrolmentStatus(event: EventFields): EnrolmentStatusLabel {
   const now = new Date();
-
   // NOTE: `event.registration` needs `includes: ['registration']` as a query param.
   const {
     remainingAttendeeCapacity,

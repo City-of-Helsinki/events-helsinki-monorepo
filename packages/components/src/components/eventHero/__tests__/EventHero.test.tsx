@@ -1,3 +1,4 @@
+import { endOfTomorrow, startOfYesterday } from 'date-fns';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
@@ -172,6 +173,11 @@ it.each([
         }) as OfferFieldsFragment,
       ],
       externalLinks: [],
+      registration: {
+        enrolmentStartTime: startOfYesterday().toISOString(),
+        enrolmentEndTime: endOfTomorrow().toISOString(),
+        remainingAttendeeCapacity: 10,
+      },
     });
 
     render(<EventHero event={mockEvent} />);

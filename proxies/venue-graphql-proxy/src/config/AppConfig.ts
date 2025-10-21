@@ -2,7 +2,7 @@ import type { Locale } from '../types.js';
 
 class AppConfig {
   static get serverPort() {
-    return (Number(process.env.GRAPHQL_PROXY_PORT), 4200);
+    return Number(process.env.GRAPHQL_PROXY_PORT) || 4200;
   }
 
   static get debug() {

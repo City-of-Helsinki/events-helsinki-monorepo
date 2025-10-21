@@ -159,10 +159,10 @@ const nextBaseConfig = ({
       // Base CSP directives
       const cspDirectives = [
         "default-src 'self'",
-        `script-src 'self' ${isDevelopment ? "'unsafe-eval'" : ''} https://webanalytics.digiaiiris.com *.youtube.com *.googlesyndication.com *.google-analytics.com *.googletagmanager.com *.gstatic.com`,
-        "style-src 'self' 'unsafe-inline'",
+        `script-src 'self' ${isDevelopment ? "'unsafe-eval'" : ''} https://webanalytics.digiaiiris.com https://cdn.reactandshare.com *.youtube.com *.googlesyndication.com *.google-analytics.com *.googletagmanager.com *.gstatic.com`,
+        "style-src 'self' 'unsafe-inline' https://cdn.reactandshare.com",
         "img-src * 'self' data: https:",
-        "font-src 'self' *.hel.fi *.hel.ninja fonts.gstatic.com",
+        "font-src 'self' *.hel.fi *.hel.ninja fonts.gstatic.com https://cdn.reactandshare.com",
         "connect-src 'self' localhost:* 127.0.0.1:* *.hel.fi *.hel.ninja *.hkih.hion.dev *.digiaiiris.com",
         "object-src 'none'",
         "media-src 'self' *.hel.fi *.hel.ninja *.hkih.hion.dev",

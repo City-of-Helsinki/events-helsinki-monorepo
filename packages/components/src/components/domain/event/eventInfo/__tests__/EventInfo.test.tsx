@@ -469,27 +469,27 @@ describe('subEvents', () => {
       response: subEventsResponse,
     });
     const superEventResponseMock: SuperEventResponse = {
-      data: Object.assign({}, event, {
+      data: {
+        ...event,
         subEvents: [
           {
             internalId: `https://api.hel.fi/linkedevents/v1/event/${event.id}`,
           },
         ],
-      }),
+      },
       status: 'resolved',
     };
+    const testEvent = {
+      ...event,
+      superEvent: {
+        internalId: 'https://api.hel.fi/linkedevents/v1/event/super:123',
+      },
+      subEvents: [
+        { internalId: 'https://api.hel.fi/linkedevents/v1/event/sub:123' },
+      ],
+    };
     render(
-      <EventInfo
-        event={Object.assign({}, event, {
-          superEvent: {
-            internalId: 'https://api.hel.fi/linkedevents/v1/event/super:123',
-          },
-          subEvents: [
-            { internalId: 'https://api.hel.fi/linkedevents/v1/event/sub:123' },
-          ],
-        })}
-        superEvent={superEventResponseMock}
-      />,
+      <EventInfo event={testEvent} superEvent={superEventResponseMock} />,
       {
         mocks: [...mocks, middleAsSuperEventMock, superEventMock],
       }

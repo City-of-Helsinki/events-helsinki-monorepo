@@ -65,7 +65,7 @@ class EventsFederationApolloClient {
     const errorLink = onError(
       ({ graphQLErrors, networkError, operation, response }) => {
         if (graphQLErrors) {
-          graphQLErrors.forEach((error) => {
+          for (const error of graphQLErrors) {
             const { message, locations, path, extensions } = error;
             const responseStatusCode = (
               extensions?.response as GraphQLErrorsExtensionResponse
@@ -90,7 +90,7 @@ class EventsFederationApolloClient {
             ) {
               this.config.handleError(error);
             }
-          });
+          }
         }
 
         if (networkError) {
@@ -264,7 +264,7 @@ class EventsFederationApolloClient {
             // Hacky way to not store keywords without id to cache (then name is missing also)
             // This happends when queries are done without include: ['keywords']
             if (selectionSet) {
-              return object.id ? `Keyword:${object.internalId}` : false;
+              return object.id ? `Keyword:${String(object.internalId)}` : false;
             }
 
             // if selectionSet is not defined, it means that toReference function calls keyfields

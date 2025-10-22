@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.28.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.27.0...events-helsinki-v1.28.0) (2025-10-22)
+
+
+### Features
+
+* **apps:** Respond with not found when event is closed or cancelled ([db5df39](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/db5df39aaec70e3496401e0ea908da343a93575d))
+* **tests:** Enable readable apollo client errors in events-helsinki ([303c682](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/303c682002e9e9631287c6b50229e542c39b09fa))
+* Upgrade HCRC-lib for latest accessibility fixes and features ([01899a7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/01899a7aeb99ef59e9fd6290d478f973af768888))
+* Upgrade to node v22 ([2727d73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2727d730e49d50ea33abfe15bb21dadbf21683f9))
+
+
+### Bug Fixes
+
+* Remove remainingAttendeeCapacity field from event details root ([fc63bb8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fc63bb8207632c4aba0c2da57172ec81c7656e9a))
+* **search:** Improve polite message for screen readers on search ([c5a1c31](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c5a1c3174553f8857f6cce61525877051d90529d))
+* **tests:** Cleanup events AppConfig tests & their output ([b85c09d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b85c09dc5024ccee21c891bb2f8ab75c8b92f065))
+* **tests:** Hide sourcemap missing warnings in events-helsinki tests ([8e569e7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8e569e744bf6fc42a89fa4a1d3fcbc1455ff9b6d))
+* **tests:** Hide warning caused by HDS 3's Select component ([13a937e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/13a937e7a0c9134d4cab5d99c6fd085505b87c46))
+* **tests:** Simplify events EventPageContainer's keywordless event test ([7d98bb0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7d98bb0321bd830524f91ea94e0989e8687b3b25))
+* **tests:** Use unique IDs in events EventPageContainer tests ([9845929](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9845929abb063d398297e49465420d3c5504c453))
+
 ## [1.27.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.26.0...events-helsinki-v1.27.0) (2025-10-06)
 
 

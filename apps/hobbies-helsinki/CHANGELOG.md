@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.26.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.25.0...hobbies-helsinki-v2.26.0) (2025-10-22)
+
+
+### Features
+
+* **apps:** Respond with not found when event is closed or cancelled ([db5df39](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/db5df39aaec70e3496401e0ea908da343a93575d))
+* **tests:** Enable readable apollo client errors in hobbies-helsinki ([a0895bb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a0895bb6dfbafd448f7676299375887e4af70085))
+* Upgrade HCRC-lib for latest accessibility fixes and features ([01899a7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/01899a7aeb99ef59e9fd6290d478f973af768888))
+* Upgrade to node v22 ([2727d73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2727d730e49d50ea33abfe15bb21dadbf21683f9))
+
+
+### Bug Fixes
+
+* Remove remainingAttendeeCapacity field from event details root ([fc63bb8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fc63bb8207632c4aba0c2da57172ec81c7656e9a))
+* **search:** Improve polite message for screen readers on search ([c5a1c31](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c5a1c3174553f8857f6cce61525877051d90529d))
+* **tests:** Cleanup hobbies AppConfig tests & their output ([db3f97c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/db3f97cce71602b5f7854b7da2c6bcd84189b00d))
+* **tests:** Hide sourcemap missing warnings in hobbies-helsinki tests ([bb771fc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bb771fc4b69dd3e6e97f78fe16024aa47b21338f))
+* **tests:** Simplify EventPageContainer test about event w/o keywords ([e59da56](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e59da5673c9691ad4b185851ff3b040630e1bf53))
+* **tests:** Use unique IDs in hobbies EventPageContainer tests ([a44de99](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a44de99207e0f2a04f332231d57e6a0161ea0825))
+
 ## [2.25.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.24.0...hobbies-helsinki-v2.25.0) (2025-10-06)
 
 

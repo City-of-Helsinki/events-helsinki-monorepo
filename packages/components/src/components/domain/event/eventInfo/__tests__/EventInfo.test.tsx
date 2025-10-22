@@ -367,7 +367,9 @@ describe('OrganizationInfo', () => {
       });
       await waitFor(() => {
         expect(
-          [...(getPublisherLink()?.searchParams.keys() ?? [])].sort()
+          [...(getPublisherLink()?.searchParams.keys() ?? [])].sort((a, b) =>
+            a.localeCompare(b)
+          )
         ).toStrictEqual(['publisher', 'searchType']);
       });
     }

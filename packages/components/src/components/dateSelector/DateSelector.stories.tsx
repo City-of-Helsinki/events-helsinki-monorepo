@@ -11,7 +11,6 @@ export default {
 const today = new Date();
 const nextMonth = new Date(today);
 nextMonth.setDate(today.getDate() + 31);
-nextMonth.toLocaleDateString();
 
 const styles = {
   dateAndButtonWrapper: {
@@ -48,7 +47,7 @@ export const DateSelectorDefault = {
   args: {
     dateTypes: ['today', 'tomorrow'],
     startDate: today,
-    endDate: nextMonth,
+    endDate: nextMonth.toLocaleDateString(),
     isCustomDate: false,
     name: 'date',
     onChangeStartDate: () => {

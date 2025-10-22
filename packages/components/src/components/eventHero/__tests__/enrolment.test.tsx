@@ -177,7 +177,7 @@ describe('OfferButton', () => {
     const eventWithOpenEnrolment: EventFields = {
       ...baseEvent,
       offers: [
-        { isFree: false, price: null, infoUrl: { fi: 'http://test.fi' } },
+        { isFree: false, price: null, infoUrl: { fi: 'https://hel.fi' } },
       ],
       registration: {
         enrolmentStartTime: startOfYesterday().toISOString(),
@@ -196,7 +196,7 @@ describe('OfferButton', () => {
     const eventWithClosedEnrolment: EventFields = {
       ...baseEvent,
       offers: [
-        { isFree: false, price: null, infoUrl: { fi: 'http://test.fi' } },
+        { isFree: false, price: null, infoUrl: { fi: 'https://hel.fi' } },
       ],
       registration: {
         ...baseEvent.registration,
@@ -385,7 +385,7 @@ describe("EventHero's enrolment features", () => {
           ...baseEvent,
           enrolmentStartTime: startOfYesterday().toISOString(),
           enrolmentEndTime: endOfTomorrow().toISOString(),
-          offers: [{ infoUrl: { fi: 'http://test.fi' } }],
+          offers: [{ infoUrl: { fi: 'https://hel.fi' } }],
           registration:
             status === EnrolmentStatusLabel.noEnrolmentTimes
               ? null

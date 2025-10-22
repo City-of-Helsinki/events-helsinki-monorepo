@@ -1,42 +1,47 @@
 # Changelog
 
-## [1.10.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.9.0...federation-router-v1.10.0) (2025-08-14)
-
-
-### Features
-
-* **apollo-router:** Compose a new supergraph ([2d8c6b2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2d8c6b28c9eeac9473f68e19412f424f26cc9596))
-* **apollo-router:** Update events schema for exp search fields ([65e0394](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/65e0394796759253b25943e180cfc7961de9e276))
-* **router:** Add cors rules to apollo federation router ([a5ea6d9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a5ea6d9b1bcc11eea12cd0eaefc5bd762775ca68))
-
-## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.8.0...federation-router-v1.9.0) (2024-09-03)
-
+## [1.11.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.10.0...federation-router-v1.11.0) (2025-10-22)
 
 ### Features
 
-* Use new CMS urls, also in RHHC, update subgraphs & supergraph ([078b147](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/078b147399d7139905c638d5feb50c253f5bb5a2))
-
-## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.7.0...federation-router-v1.8.0) (2024-04-24)
-
-
-### Features
-
-* Pages preview mode support ([#673](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/673)) ([0829161](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0829161a2ec76742730266568b3d706cc6fab2a3))
-
-## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.6.1...federation-router-v1.7.0) (2024-03-14)
-
-
-### Features
-
-* **dockerfile:** Use ubi9/nodejs-20 image & upgrade router v1.35-&gt;v1.40 ([eb2fbec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/eb2fbec5abf685eef1ce81db898e23035584df9b))
-
-## [1.6.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.6.0...federation-router-v1.6.1) (2024-01-18)
-
+- Subgraphs and sueprgraph updated with event registration fields and new codegen results
 
 ### Bug Fixes
 
-* Hero ui tweaks ([#531](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/531)) ([af11c1b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/af11c1bf2dacf1c9d4e2444db26f410123de021e))
-* **router:** ProviderContactInfo field type should be a LocalizedObject ([fe23839](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fe2383999246d7dbf6e309597c1b75999e098a75))
+- **codegen:** Remove comma from yml config ([1b5ca2a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1b5ca2a76aaf6909b75faf150076654a39179663))
+
+## [1.10.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.9.0...federation-router-v1.10.0) (2025-08-14)
+
+### Features
+
+- **apollo-router:** Compose a new supergraph ([2d8c6b2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2d8c6b28c9eeac9473f68e19412f424f26cc9596))
+- **apollo-router:** Update events schema for exp search fields ([65e0394](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/65e0394796759253b25943e180cfc7961de9e276))
+- **router:** Add cors rules to apollo federation router ([a5ea6d9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/a5ea6d9b1bcc11eea12cd0eaefc5bd762775ca68))
+
+## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.8.0...federation-router-v1.9.0) (2024-09-03)
+
+### Features
+
+- Use new CMS urls, also in RHHC, update subgraphs & supergraph ([078b147](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/078b147399d7139905c638d5feb50c253f5bb5a2))
+
+## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.7.0...federation-router-v1.8.0) (2024-04-24)
+
+### Features
+
+- Pages preview mode support ([#673](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/673)) ([0829161](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0829161a2ec76742730266568b3d706cc6fab2a3))
+
+## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.6.1...federation-router-v1.7.0) (2024-03-14)
+
+### Features
+
+- **dockerfile:** Use ubi9/nodejs-20 image & upgrade router v1.35-&gt;v1.40 ([eb2fbec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/eb2fbec5abf685eef1ce81db898e23035584df9b))
+
+## [1.6.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.6.0...federation-router-v1.6.1) (2024-01-18)
+
+### Bug Fixes
+
+- Hero ui tweaks ([#531](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/531)) ([af11c1b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/af11c1bf2dacf1c9d4e2444db26f410123de021e))
+- **router:** ProviderContactInfo field type should be a LocalizedObject ([fe23839](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fe2383999246d7dbf6e309597c1b75999e098a75))
 
 ## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.5.2...federation-router-v1.6.0) (2024-01-04)
 

@@ -61,7 +61,7 @@ describe('getKeywordList function', () => {
       { ...fakeKeyword(), name: null },
     ];
     const event = fakeEvent({ keywords }) as EventFieldsFragment;
-    const eventKeywords = getKeywordList(event.keywords, 'fi');
+    const eventKeywords = getKeywordList('fi', event.keywords);
 
     expect(eventKeywords).toHaveLength(0);
   });

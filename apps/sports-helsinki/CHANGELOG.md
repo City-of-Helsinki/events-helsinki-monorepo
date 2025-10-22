@@ -1,97 +1,92 @@
 # Changelog
 
-## [1.32.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.31.0...sports-helsinki-v1.32.0) (2025-10-22)
-
-
-### Features
-
-* **apps:** Respond with not found when event is closed or cancelled ([db5df39](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/db5df39aaec70e3496401e0ea908da343a93575d))
-* **tests:** Enable readable apollo client errors in sports-helsinki ([cd64cca](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cd64cca6142408bb536c3fae4e69b7cbb72377c4))
-* Upgrade HCRC-lib for latest accessibility fixes and features ([01899a7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/01899a7aeb99ef59e9fd6290d478f973af768888))
-* Upgrade to node v22 ([2727d73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2727d730e49d50ea33abfe15bb21dadbf21683f9))
-
+## [1.32.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.32.0...sports-helsinki-v1.32.1) (2025-10-22)
 
 ### Bug Fixes
 
-* Fix VenueHighlights keys → reduce warnings from VenueContent tests ([ded0575](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ded0575a2036bc23089660eb01403e3b89faafb0))
-* Remove remainingAttendeeCapacity field from event details root ([fc63bb8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fc63bb8207632c4aba0c2da57172ec81c7656e9a))
-* **search:** Improve polite message for screen readers on search ([c5a1c31](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c5a1c3174553f8857f6cce61525877051d90529d))
-* **tests:** Cleanup sports AppConfig tests & their output ([c690955](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6909554e75632abf48e71a29384f6fe1cb24a99))
-* **tests:** Fix last of the mocks matching in sports, hide HDS 3 warning ([966960a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/966960a7f3656127a254c4223579d4d9ef7a3e44))
-* **tests:** Fix mocks in SimilarVenuesSection.test.tsx ([8d15d2e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8d15d2e3c2a6f94095339aab2042ee7d3057ec75))
-* **tests:** Hide sourcemap missing warnings in sports-helsinki tests ([5726135](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/57261353f52925c1e14c05d49a486366546cd7cd))
-* **tests:** Remove long unnecessary process.env logging from sports ([4a76496](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4a76496119412a5d6d474deac11603b83fc5ba95))
-* **tests:** Simplify & fix EventPageContainer test to work also alone ([15e9b9a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/15e9b9ad808d09a44fe566f17a2ae4e7555e1721))
-* **tests:** Use unique IDs in EventPageContainer tests → less output ([2c1a02d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2c1a02d64fac4c6e4580e3573ee45e0051da9bf3))
+- **csp:** askem uses multiple src-endpoints ([5cb365a74](https://github.com/City-of-Helsinki/events-helsinki-monorepo/pull/883/commits/5cb365a74cc87077aefb0525f37cac30904cb644))
+
+## [1.32.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.31.0...sports-helsinki-v1.32.0) (2025-10-22)
+
+### Features
+
+- **apps:** Respond with not found when event is closed or cancelled ([db5df39](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/db5df39aaec70e3496401e0ea908da343a93575d))
+- **tests:** Enable readable apollo client errors in sports-helsinki ([cd64cca](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cd64cca6142408bb536c3fae4e69b7cbb72377c4))
+- Upgrade HCRC-lib for latest accessibility fixes and features ([01899a7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/01899a7aeb99ef59e9fd6290d478f973af768888))
+- Upgrade to node v22 ([2727d73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2727d730e49d50ea33abfe15bb21dadbf21683f9))
+
+### Bug Fixes
+
+- Fix VenueHighlights keys → reduce warnings from VenueContent tests ([ded0575](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ded0575a2036bc23089660eb01403e3b89faafb0))
+- Remove remainingAttendeeCapacity field from event details root ([fc63bb8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fc63bb8207632c4aba0c2da57172ec81c7656e9a))
+- **search:** Improve polite message for screen readers on search ([c5a1c31](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c5a1c3174553f8857f6cce61525877051d90529d))
+- **tests:** Cleanup sports AppConfig tests & their output ([c690955](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6909554e75632abf48e71a29384f6fe1cb24a99))
+- **tests:** Fix last of the mocks matching in sports, hide HDS 3 warning ([966960a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/966960a7f3656127a254c4223579d4d9ef7a3e44))
+- **tests:** Fix mocks in SimilarVenuesSection.test.tsx ([8d15d2e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8d15d2e3c2a6f94095339aab2042ee7d3057ec75))
+- **tests:** Hide sourcemap missing warnings in sports-helsinki tests ([5726135](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/57261353f52925c1e14c05d49a486366546cd7cd))
+- **tests:** Remove long unnecessary process.env logging from sports ([4a76496](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4a76496119412a5d6d474deac11603b83fc5ba95))
+- **tests:** Simplify & fix EventPageContainer test to work also alone ([15e9b9a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/15e9b9ad808d09a44fe566f17a2ae4e7555e1721))
+- **tests:** Use unique IDs in EventPageContainer tests → less output ([2c1a02d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2c1a02d64fac4c6e4580e3573ee45e0051da9bf3))
 
 ## [1.31.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.30.0...sports-helsinki-v1.31.0) (2025-10-02)
 
-
 ### Features
 
-* **apps,search:** Add accessibility proeprties to filter summary ([d987375](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d9873752e77452988a4ef80d37dc82e61d7ec9f2))
-* **search:** Replace autosuggest field with simpler text search field ([b5cb2a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b5cb2a8268b97adf0d5c96144a26b6d82389074a))
-
+- **apps,search:** Add accessibility proeprties to filter summary ([d987375](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d9873752e77452988a4ef80d37dc82e61d7ec9f2))
+- **search:** Replace autosuggest field with simpler text search field ([b5cb2a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b5cb2a8268b97adf0d5c96144a26b6d82389074a))
 
 ### Bug Fixes
 
-* **search:** Add form element to landing page search ([4aa7279](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4aa727934a3ae377676c8361dcffb9dceba2b467))
+- **search:** Add form element to landing page search ([4aa7279](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4aa727934a3ae377676c8361dcffb9dceba2b467))
 
 ## [1.30.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.29.1...sports-helsinki-v1.30.0) (2025-09-26)
 
-
 ### Features
 
-* Change page size from 10→25 for all normal searches & CMS listings ([44a0816](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44a08167a57ed8e55fb47b53bdf80db220206baa))
-* Remove hobby type completely from codebase & clarify similar use ([9108175](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9108175e791380db4e2b2ee44c80a8df5a122a35))
+- Change page size from 10→25 for all normal searches & CMS listings ([44a0816](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44a08167a57ed8e55fb47b53bdf80db220206baa))
+- Remove hobby type completely from codebase & clarify similar use ([9108175](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9108175e791380db4e2b2ee44c80a8df5a122a35))
 
 ## [1.29.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.29.0...sports-helsinki-v1.29.1) (2025-09-18)
 
-
 ### Bug Fixes
 
-* **apps:** Use legacyBehavior for next-links used by RCHC-lib ([cbee0ae](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cbee0ae14eaf31218024f7618e9d92b0ee517933))
-* **search:** Filter event search with division ([180e755](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/180e755dd9f03a5850733366bfc51998f506770b))
-* **vitest:** Replace use of deprecated cache.dir with cacheDir ([46ca437](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/46ca43709feefdf16334c32952dc62123598e95c))
+- **apps:** Use legacyBehavior for next-links used by RCHC-lib ([cbee0ae](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cbee0ae14eaf31218024f7618e9d92b0ee517933))
+- **search:** Filter event search with division ([180e755](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/180e755dd9f03a5850733366bfc51998f506770b))
+- **vitest:** Replace use of deprecated cache.dir with cacheDir ([46ca437](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/46ca43709feefdf16334c32952dc62123598e95c))
 
 ## [1.29.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.28.1...sports-helsinki-v1.29.0) (2025-08-14)
 
-
 ### Features
 
-* **apps:** Serve front page hero image with img-tag and photographer ([9db49fd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9db49fd884bbee881ba5ae8848dc0d62b300e058))
-* Async common revalidate view and api ([c30fc86](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c30fc86479e400e3ca35dd7ed179f0e312ec2c69))
-* Revalidate API for courses, events and venues ([0594d34](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0594d343067f2f35af2c9d23cc2f0c001538a05f))
-* **sports:** Use experimental xFullText search parameter ([c6c0044](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6c0044b1c0ff92312c86e18504f30abb0c58d26))
-
+- **apps:** Serve front page hero image with img-tag and photographer ([9db49fd](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9db49fd884bbee881ba5ae8848dc0d62b300e058))
+- Async common revalidate view and api ([c30fc86](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c30fc86479e400e3ca35dd7ed179f0e312ec2c69))
+- Revalidate API for courses, events and venues ([0594d34](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0594d343067f2f35af2c9d23cc2f0c001538a05f))
+- **sports:** Use experimental xFullText search parameter ([c6c0044](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6c0044b1c0ff92312c86e18504f30abb0c58d26))
 
 ### Bug Fixes
 
-* **apps:** Webmanifest and favicons ([9112cf4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9112cf48428f405f1c9a28ca71d95c0d32bb3d38))
-* **sports:** Errenous import statement to useCombinedSearchContext ([0cd49c0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0cd49c0e8fcb13f520dd23d664be18743a0df8bb))
-* Type of apollo clients' error handler ([cfe4265](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cfe4265842d127248e81bef06261dcba23624479))
+- **apps:** Webmanifest and favicons ([9112cf4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9112cf48428f405f1c9a28ca71d95c0d32bb3d38))
+- **sports:** Errenous import statement to useCombinedSearchContext ([0cd49c0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0cd49c0e8fcb13f520dd23d664be18743a0df8bb))
+- Type of apollo clients' error handler ([cfe4265](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cfe4265842d127248e81bef06261dcba23624479))
 
 ## [1.28.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.28.0...sports-helsinki-v1.28.1) (2025-06-12)
 
-
 ### Bug Fixes
 
-* Hero image quality ([1f2bf45](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1f2bf450e15f8ac3648cbd206cd91f42057a7277))
+- Hero image quality ([1f2bf45](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1f2bf450e15f8ac3648cbd206cd91f42057a7277))
 
 ## [1.28.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.27.1...sports-helsinki-v1.28.0) (2025-03-05)
 
-
 ### Features
 
-* Add new campaign redirect routes to events & sports apps ([44d6f69](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44d6f691cb8cf8713aed321a7a47cc33d9e72040))
-
+- Add new campaign redirect routes to events & sports apps ([44d6f69](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44d6f691cb8cf8713aed321a7a47cc33d9e72040))
 
 ### Bug Fixes
 
-* Hcrc v1 major release ([4ae3659](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4ae3659c756c5bc4fc2ad2babdc64b4035ac5523))
-* Hds 3.11 upgrade ([3f9c7a1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3f9c7a1385a2ec7a3acdb0fcfb38d037da2aedfa))
-* Hero image size ([c6dde04](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6dde0438a861b5052ee866102fdd03ce099cbd5))
-* Landing page meta ([cf56952](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cf569525c57ecea4c3924971a0e203616fb9d17b))
+- Hcrc v1 major release ([4ae3659](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4ae3659c756c5bc4fc2ad2babdc64b4035ac5523))
+- Hds 3.11 upgrade ([3f9c7a1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3f9c7a1385a2ec7a3acdb0fcfb38d037da2aedfa))
+- Hero image size ([c6dde04](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6dde0438a861b5052ee866102fdd03ce099cbd5))
+- Landing page meta ([cf56952](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cf569525c57ecea4c3924971a0e203616fb9d17b))
 
 ## [1.27.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.27.0...sports-helsinki-v1.27.1) (2024-10-15)
 

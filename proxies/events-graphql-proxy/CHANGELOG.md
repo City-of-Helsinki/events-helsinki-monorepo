@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.4.0...events-graphql-proxy-v1.5.0) (2025-10-22)
+
+
+### Features
+
+* **events-proxy:** Add registration field to event details ([3e44f57](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3e44f570bad65ed708f0f3f1d406e43b42a64467))
+* Upgrade to node v22 ([2727d73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2727d730e49d50ea33abfe15bb21dadbf21683f9))
+
+
+### Bug Fixes
+
+* **codegen:** Remove comma from yml config ([1b5ca2a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1b5ca2a76aaf6909b75faf150076654a39179663))
+* **events-proxy:** Broken imports ([7ad4520](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7ad4520f092344da2b45d19483bb4a83e240c1be))
+* **proxies:** Syntax error in serverPort getter ([919b848](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/919b848789906329b6eb468006d06a8113c3d505))
+* Remove use of 10 year old path package, use node.js's path instead ([44d5bdb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44d5bdb5b6ca4eaf60166f30a22fdcac192aa1d0))
+* **vitest:** Replace use of deprecated cache.dir with cacheDir ([46ca437](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/46ca43709feefdf16334c32952dc62123598e95c))
+
 ## [1.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.3.0...events-graphql-proxy-v1.4.0) (2025-08-14)
 
 

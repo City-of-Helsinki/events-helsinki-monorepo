@@ -64,9 +64,7 @@ class Askem {
       src: scriptUrl,
     });
 
-    if (scripts && scripts.parentNode) {
-      scripts.parentNode.insertBefore(scriptElement, scripts);
-    }
+    scripts?.parentNode?.insertBefore(scriptElement, scripts);
   }
 
   setRnsConfigValue(

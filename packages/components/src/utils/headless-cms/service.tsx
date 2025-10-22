@@ -240,7 +240,7 @@ class NextPageLister {
       uniqBySetWithArrayFrom([...htmlFiles, ...jsonFiles])
         // Make sure paths use '/' as separator on Windows too
         .map((path) => `/${path}`.replaceAll('\\', '/'))
-        .sort()
+        .sort((a, b) => a.localeCompare(b))
     );
   }
 }

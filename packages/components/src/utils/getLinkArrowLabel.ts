@@ -1,4 +1,5 @@
 import type { TFunction } from 'next-i18next';
+import type { AppLanguage } from '../types';
 import type { EventFields } from '../types/event-types';
 import getDateRangeStr from './getDateRangeStr';
 import { getEnrolmentStatus } from './getEventEnrolmentStatus';
@@ -10,7 +11,7 @@ export default function getLinkArrowLabel({
   commonTranslation,
 }: {
   item: EventFields;
-  locale: string;
+  locale: AppLanguage;
   eventTranslation: TFunction;
   commonTranslation: TFunction;
 }) {

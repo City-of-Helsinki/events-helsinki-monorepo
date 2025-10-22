@@ -14,13 +14,14 @@ import {
   createOtherEventTimesRequestAndResultMocks,
   createOtherEventTimesRequestThrowsErrorMocks,
 } from '@/test-utils/mocks/eventListMocks';
-import {
-  type EventDetails,
-  type EventFieldsFragment,
-  type EventListQueryVariables,
-  type EventListResponse,
-  EventTypeId,
-  type Meta,
+import { EventTypeId } from '../../../../../types';
+import type {
+  AppLanguage,
+  EventDetails,
+  EventFieldsFragment,
+  EventListQueryVariables,
+  EventListResponse,
+  Meta,
 } from '../../../../../types';
 import getDateRangeStr from '../../../../../utils/getDateRangeStr';
 import OtherEventTimes from '../OtherEventTimes';
@@ -122,7 +123,7 @@ const renderComponent = ({
 const getDateRangeStrProps = (event: EventDetails) => ({
   start: event.startTime!,
   end: event.endTime,
-  locale: 'fi',
+  locale: 'fi' as AppLanguage,
   includeTime: true,
   timeAbbreviation: translations.common.timeAbbreviation,
 });

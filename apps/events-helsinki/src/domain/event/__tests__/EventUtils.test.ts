@@ -29,7 +29,7 @@ describe('getKeywordList function', () => {
       { name: { fi: 'keyword 1' } },
     ]).data;
     const event = fakeEvent({ keywords }) as EventFieldsFragment;
-    const sortedKeywords = getKeywordList(event.keywords, 'fi');
+    const sortedKeywords = getKeywordList('fi', event.keywords);
 
     expect(map(sortedKeywords, 'name')).toStrictEqual([
       'Keyword 1',
@@ -46,7 +46,7 @@ describe('getKeywordList function', () => {
       { name: { fi: 'keyWord 3' } },
     ]).data;
     const event = fakeEvent({ keywords }) as EventFieldsFragment;
-    const sortedKeywords = getKeywordList(event.keywords, 'fi');
+    const sortedKeywords = getKeywordList('fi', event.keywords);
 
     expect(map(sortedKeywords, 'name')).toStrictEqual([
       'Keyword 1',

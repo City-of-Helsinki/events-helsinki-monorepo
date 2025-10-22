@@ -74,7 +74,7 @@ export const getEventIdFromUrl = (
   url: string,
   type: 'event' = 'event'
 ): string | undefined => {
-  return url.match(new RegExp(`/(?:${type}s?)/([^/?]*)`, 'i'))?.[1];
+  return new RegExp(`/(?:${type}s?)/([^/?]*)`, 'i').exec(url)?.[1];
 };
 
 export const getEventIdsFromUrls = (urls: string[]): { eventIds: string[] } => {
@@ -99,8 +99,8 @@ export const formatPrice = (price?: string): string => {
     return '';
   }
 
-  const priceRegex = /^\d+([/\-.,]\d+)?$/;
-  return price.match(priceRegex) ? `${price} €` : price;
+  const priceRegex = /^\d+(?:[/\-.,]\d+)?$/;
+  return priceRegex.exec(price) ? `${price} €` : price;
 };
 
 /**
@@ -125,7 +125,7 @@ export const getEventPrice = (
           )
         )
         ?.filter((e) => e)
-        ?.sort()
+        ?.sort((a, b) => a.localeCompare(b))
         ?.join(', ') ?? '');
 };
 
@@ -149,11 +149,11 @@ export const getEventHeroButtonText = (
 };
 
 export const getKeywordList = (
+  locale: AppLanguage,
   list: {
     id?: string | null;
     name?: LocalizedObject | null;
-  }[] = [],
-  locale: AppLanguage
+  }[] = []
 ): KeywordOption[] => {
   return list
     .map((listItem) => ({
@@ -272,7 +272,7 @@ export const getGoogleDirectionsLink = (
 
   return `https://www.google.com/maps/dir//${streetAddress},+${postalCode}+${addressLocality}/@${coordinates.join(
     ','
-  )}`.replace(/\s/g, '+');
+  )}`.replaceAll(/\s/g, '+');
 };
 
 /**
@@ -338,7 +338,7 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
     hslDirectionsLink: getHslDirectionsLink(event, locale),
     imageUrl: getEventImageUrl(event),
     infoUrl: getLocalizedString(event.infoUrl, locale),
-    keywords: getKeywordList(event.keywords, locale),
+    keywords: getKeywordList(locale, event.keywords),
     languages: event.inLanguage
       ?.map((item: EventFields['inLanguage'][number]) =>
         capitalize(getLocalizedString(item.name, locale))
@@ -356,7 +356,7 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
     freeEvent: isEventFree(event),
     today: startTime ? isToday(new Date(startTime)) : false,
     thisWeek: startTime ? isThisWeek(new Date(startTime)) : false,
-    audience: getKeywordList(event.audience, locale),
+    audience: getKeywordList(locale, event.audience),
     audienceMinAge: event.audienceMinAge,
     audienceMaxAge: event.audienceMaxAge,
     photographerName: event.images?.[0]?.photographerName,

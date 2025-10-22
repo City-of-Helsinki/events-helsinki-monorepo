@@ -11,7 +11,10 @@ export default function CmsHelperProvider({
   routerHelper,
   children,
 }: CmsHelperProviderProps) {
-  const context = { cmsHelper, routerHelper };
+  const context = React.useMemo(
+    () => ({ cmsHelper, routerHelper }),
+    [cmsHelper, routerHelper]
+  );
   return (
     <CmsHelperContext.Provider value={context}>
       {children}

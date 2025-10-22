@@ -60,14 +60,22 @@ export type EventHeroProps = {
  *
  * @param {EventHeroProps['event']} event - The event object containing
  *  details about attendee and waiting list capacities.
+ * @param {boolean} enrolmentFormAvailableBeforeHand - handle enrolment as open when it has not started yet.
  * @returns {boolean} Returns `true` if enrolment is open
  *  (either for direct attendance or the waiting list), otherwise `false`.
  */
 export const useIsEnrolmentOpen = (
-  event?: EventHeroProps['event']
+  event?: EventHeroProps['event'],
+  enrolmentFormAvailableBeforeHand = false
 ): boolean => {
   if (!event) return false;
   const status = getEnrolmentStatus(event);
+  if (enrolmentFormAvailableBeforeHand) {
+    return [
+      ...OPEN_ENROLMENT_STATUSES,
+      EnrolmentStatusLabel.enrolmentNotStartedYet,
+    ].includes(status);
+  }
   return OPEN_ENROLMENT_STATUSES.includes(status);
 };
 
@@ -189,13 +197,13 @@ export const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({
     locale
   );
 
-  const isEnrolmentOpen = useIsEnrolmentOpen(event);
+  const shouldShowEnrolmentButton = useIsEnrolmentOpen(event, true);
 
   const buttonText = getEventHeroButtonText(event, 'button', t);
   const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
 
   // If there is no offer URL (where registration is made) or
-  if (!externalRegistrationUrl || !isEnrolmentOpen) return null;
+  if (!externalRegistrationUrl || !shouldShowEnrolmentButton) return null;
 
   return (
     <div className={styles.registrationButtonWrapper}>

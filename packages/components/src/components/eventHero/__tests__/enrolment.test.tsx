@@ -1,6 +1,6 @@
 import { render, screen, renderHook } from '@testing-library/react';
 
-import { endOfTomorrow, startOfYesterday } from 'date-fns';
+import { endOfTomorrow, startOfTomorrow, startOfYesterday } from 'date-fns';
 import { defaultConfig } from 'react-helsinki-headless-cms';
 import { EnrolmentStatusLabel } from '../../../constants';
 import { useAppThemeContext } from '../../../themeProvider';
@@ -149,6 +149,27 @@ describe('useIsEnrolmentOpen', () => {
     const { result } = renderHook(() => useIsEnrolmentOpen(event));
     expect(result.current).toBe(false);
   });
+
+  it.each([
+    [true, true],
+    [false, false],
+  ])(
+    'should return %s if enrolment has not started yet and enrolmentFormAvailableBeforeHand is %s',
+    (enrolmentFormAvailableBeforeHand, expectedResult) => {
+      const event: EventFields = {
+        ...baseEvent,
+        registration: {
+          enrolmentStartTime: startOfTomorrow().toISOString(),
+          enrolmentEndTime: endOfTomorrow().toISOString(),
+          remainingAttendeeCapacity: 10,
+        },
+      };
+      const { result } = renderHook(() =>
+        useIsEnrolmentOpen(event, enrolmentFormAvailableBeforeHand)
+      );
+      expect(result.current).toBe(expectedResult);
+    }
+  );
 });
 
 describe('OfferButton', () => {
@@ -340,7 +361,7 @@ describe("EventHero's enrolment features", () => {
     ],
     [
       EnrolmentStatusLabel.enrolmentNotStartedYet,
-      { showOfferButton: false, showEnrolmentStatus: true },
+      { showOfferButton: true, showEnrolmentStatus: true },
     ],
     [
       EnrolmentStatusLabel.full,

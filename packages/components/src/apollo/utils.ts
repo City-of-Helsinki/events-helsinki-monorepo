@@ -82,17 +82,13 @@ export function initializeApolloClient<
   mutableCachedClient,
   createClient,
 }: InitApolloClientConfig<TCacheShape, Client>) {
-  const _apolloClient = mutableCachedClient.reference ?? createClient();
-
   // For SSG and SSR always create a new Apollo Client
-  if (typeof window === 'undefined') {
-    return _apolloClient;
+  if (typeof globalThis.window === 'undefined') {
+    return createClient();
   }
 
-  // Create the Apollo Client once in the client
-  if (!mutableCachedClient.reference) {
-    mutableCachedClient.reference = _apolloClient;
-  }
+  // Create the Apollo Client once in the client.
+  mutableCachedClient.reference ??= createClient();
 
-  return _apolloClient;
+  return mutableCachedClient.reference;
 }

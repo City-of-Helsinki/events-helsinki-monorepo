@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.5.1...venue-graphql-proxy-v1.6.0) (2025-10-22)
+
+
+### Features
+
+* Upgrade to node v22 ([2727d73](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2727d730e49d50ea33abfe15bb21dadbf21683f9))
+
+
+### Bug Fixes
+
+* **codegen:** Remove comma from yml config ([1b5ca2a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1b5ca2a76aaf6909b75faf150076654a39179663))
+* **proxies:** Syntax error in serverPort getter ([919b848](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/919b848789906329b6eb468006d06a8113c3d505))
+* Remove use of 10 year old path package, use node.js's path instead ([44d5bdb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/44d5bdb5b6ca4eaf60166f30a22fdcac192aa1d0))
+* **vitest:** Replace use of deprecated cache.dir with cacheDir ([46ca437](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/46ca43709feefdf16334c32952dc62123598e95c))
+
 ## [1.5.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.5.0...venue-graphql-proxy-v1.5.1) (2025-08-14)
 
 

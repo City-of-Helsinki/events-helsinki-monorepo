@@ -122,6 +122,14 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     });
   };
 
+  const endDateIsInvalidText = errors.endDateIsInvalid
+    ? t('common:dateSelector.errorDateFormat')
+    : undefined;
+
+  const errorText = endDateIsBeforeStartDate
+    ? t('common:dateSelector.errorEndDateBeforeStartDate')
+    : endDateIsInvalidText;
+
   return (
     <div className={styles.dateInputsContainer}>
       <DateInput
@@ -166,13 +174,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         label={t('common:dateSelector.labelEndDate')}
         language={locale}
         onChange={(date) => setInternalEndDateString(date)}
-        errorText={
-          endDateIsBeforeStartDate
-            ? t('common:dateSelector.errorEndDateBeforeStartDate')
-            : errors.endDateIsInvalid
-              ? t('common:dateSelector.errorDateFormat')
-              : undefined
-        }
+        errorText={errorText}
       />
     </div>
   );

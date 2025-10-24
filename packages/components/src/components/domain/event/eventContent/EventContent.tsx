@@ -50,7 +50,7 @@ const EventContent: React.FC<Props> = ({
           )}
         >
           <div className={styles.leftEmpty} />
-          <div>
+          <div className={styles.mainContent}>
             {description && (
               <>
                 <h2 className={styles.descriptionTitle}>
@@ -84,11 +84,13 @@ const EventContent: React.FC<Props> = ({
                 )}
               </>
             )}
+          </div>
+          <aside className={styles.sidebar}>
+            <EventInfo event={event} superEvent={superEvent} />
+          </aside>
+          <div className={styles.secondaryContent}>
             <ShareLinks title={t('event:shareLinks.title')} />
             {!isInternetEvent && <EventLocation event={event} />}
-          </div>
-          <div>
-            <EventInfo event={event} superEvent={superEvent} />
           </div>
         </div>
       </ContentContainer>

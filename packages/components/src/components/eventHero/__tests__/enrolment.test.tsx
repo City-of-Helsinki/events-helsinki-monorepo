@@ -24,6 +24,10 @@ vi.mock('react-helsinki-headless-cms', async (importOriginal) => ({
   BackgroundImage: () => <div>Mock BackgroundImage</div>,
 }));
 
+vi.mock('../../../hooks/useSuperEventLazyLoad', () => ({
+  default: () => ({ superEvent: null }),
+}));
+
 // Mock dependencies
 vi.mock('next/router', () => ({
   useRouter: () => ({

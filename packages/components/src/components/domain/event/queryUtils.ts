@@ -95,7 +95,7 @@ const useOtherEventTimesVariables = (
   supportedEventTypes: EventTypeId[] | null
 ) => {
   const superEventId = React.useMemo(
-    () => getEventIdFromUrl(event.superEvent?.internalId || '', 'event'),
+    () => getEventIdFromUrl(event.superEvent?.internalId || ''),
     [event.superEvent]
   );
 

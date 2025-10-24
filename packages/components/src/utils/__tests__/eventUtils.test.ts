@@ -1,3 +1,16 @@
+import map from 'lodash/map';
+
+import {
+  fakeEvent,
+  fakeEventImage,
+  fakeKeyword,
+  fakeKeywords,
+  fakePlace,
+} from '@/test-utils/mockDataUtils';
+import type {
+  EventFieldsFragment,
+  PlaceFieldsFragment,
+} from '../../types/generated/graphql';
 import {
   formatPrice,
   getEventFields,
@@ -7,20 +20,7 @@ import {
   getKeywordList,
   getLocationId,
   getServiceMapUrl,
-} from '@events-helsinki/components';
-import type {
-  EventFieldsFragment,
-  PlaceFieldsFragment,
-} from '@events-helsinki/components';
-import map from 'lodash/map';
-
-import {
-  fakeEvent,
-  fakeEventImage,
-  fakeKeyword,
-  fakeKeywords,
-  fakePlace,
-} from '../../../../config/vitest/mockDataUtils';
+} from '../../utils/eventUtils';
 
 describe('getKeywordList function', () => {
   it('should sort and capitalize keywords', () => {
@@ -141,6 +141,8 @@ describe('getEventIdsFromUrls function', () => {
         'http://localhost:3000/fi/event/helsinki:sdgbdfngfr65',
         'http://localhost:3000/fi/event/helsinki:sdfhgjrfd2',
         'http://localhost:3000/fi/events/helsinki:zxcvsdfdhg',
+        'http://localhost:3000/fi/course/helsinki:sdfghgfds',
+        'http://localhost:3000/fi/courses/helsinki:hsdhgsfgh',
       ])
     ).toStrictEqual({
       eventIds: [
@@ -149,6 +151,8 @@ describe('getEventIdsFromUrls function', () => {
         'helsinki:sdgbdfngfr65',
         'helsinki:sdfhgjrfd2',
         'helsinki:zxcvsdfdhg',
+        'helsinki:sdfghgfds',
+        'helsinki:hsdhgsfgh',
       ],
     });
   });

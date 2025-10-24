@@ -28,7 +28,7 @@ const VenueContent: React.FC<Props> = ({ venue, className }) => {
   const { description } = venue;
   const shortDescription = null;
   return (
-    <PageSection className={classNames(styles.eventContent, className)}>
+    <PageSection className={classNames(styles.venueContent, className)}>
       <ContentContainer>
         <div className={styles.contentWrapper}>
           <div className={styles.leftEmpty} />
@@ -54,12 +54,14 @@ const VenueContent: React.FC<Props> = ({ venue, className }) => {
               </div>
             )}
             <VenueOtherInfo venue={venue} />
+          </div>
+          <aside className={styles.sidebar}>
+            <VenueInfo venue={venue} />
+          </aside>
+          <div className={styles.secondaryContent}>
             <ShareLinks title={t('venue:shareLinks.title')} />
             <VenueLocation venue={venue} />
           </div>
-          <aside>
-            <VenueInfo venue={venue} />
-          </aside>
         </div>
       </ContentContainer>
     </PageSection>

@@ -181,9 +181,9 @@ const EventPriceInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
   );
 };
 
-export const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({
-  event,
-}) => {
+export const OfferButton: React.FC<
+  Pick<EventHeroProps, 'event' | 'superEvent'>
+> = ({ event, superEvent }) => {
   const locale = useLocale();
   const { t } = useTranslation('event');
 
@@ -199,8 +199,18 @@ export const OfferButton: React.FC<Pick<EventHeroProps, 'event'>> = ({
 
   const shouldShowEnrolmentButton = useIsEnrolmentOpen(event, true);
 
-  const buttonText = getEventHeroButtonText(event, 'button', t);
-  const buttonAriaLabelText = getEventHeroButtonText(event, 'ariaLabel', t);
+  const buttonText = getEventHeroButtonText(
+    event,
+    'button',
+    t,
+    superEvent?.data ?? undefined
+  );
+  const buttonAriaLabelText = getEventHeroButtonText(
+    event,
+    'ariaLabel',
+    t,
+    superEvent?.data ?? undefined
+  );
 
   // If there is no offer URL (where registration is made) or
   if (!externalRegistrationUrl || !shouldShowEnrolmentButton) return null;
@@ -280,7 +290,7 @@ const EventHero: React.FC<EventHeroProps> = ({
                   <LocationInfo event={event} />
                   <EventPriceInfo event={event} />
                   <EnrolmentStatusInfo event={event} />
-                  <OfferButton event={event} />
+                  <OfferButton event={event} superEvent={superEvent} />
                 </div>
                 {showKeywords && (
                   <div className={styles.categoryWrapper}>

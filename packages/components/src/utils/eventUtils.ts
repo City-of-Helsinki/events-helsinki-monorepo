@@ -132,9 +132,10 @@ export const getEventPrice = (
 export const getEventHeroButtonText = (
   event: EventFields,
   prefix: string,
-  t: TFunction
+  t: TFunction,
+  superEvent?: EventFields
 ): string => {
-  const status = getEnrolmentStatus(event);
+  const status = getEnrolmentStatus(event, superEvent);
 
   if (status === EnrolmentStatusLabel.queueable) {
     return t(`hero.${prefix}QueueEnrol`);

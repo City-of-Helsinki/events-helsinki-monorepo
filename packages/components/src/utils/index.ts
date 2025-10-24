@@ -27,7 +27,6 @@ export { default as stringifyUrlObject } from './stringifyUrlObject';
 export { default as getTranslation } from './getTranslation';
 export { default as getLanguageCode } from './getLanguageCode';
 export { default as getLanguageCodeFilter } from './getLanguageCodeFilter';
-export { default as getLinkArrowLabel } from './getLinkArrowLabel';
 export { default as getLocaleFromPathname } from './getLocaleFromPathname';
 export { getAuthorizationHeader, getPreviewDataMaxAge } from './jwtToken';
 export * from './accessibilityProfile/typeguards';

@@ -70,11 +70,9 @@ export const isEventFree = (event: EventFields): boolean => {
 /**
  * Get event id from url
  */
-export const getEventIdFromUrl = (
-  url: string,
-  type: 'event' = 'event'
-): string | undefined => {
-  return new RegExp(`/(?:${type}s?)/([^/?]*)`, 'i').exec(url)?.[1];
+export const getEventIdFromUrl = (url: string): string | undefined => {
+  const type = '(?:event|course)';
+  return url.match(new RegExp(`/${type}s?/([^/?]*)`, 'i'))?.[1];
 };
 
 export const getEventIdsFromUrls = (urls: string[]): { eventIds: string[] } => {

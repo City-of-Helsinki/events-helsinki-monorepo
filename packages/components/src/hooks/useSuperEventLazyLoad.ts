@@ -9,10 +9,7 @@ function useSuperEventLazyLoad(event?: EventFieldsFragment) {
     data: null,
     status: 'pending',
   });
-  const superEventId = getEventIdFromUrl(
-    event?.superEvent?.internalId ?? '',
-    'event'
-  );
+  const superEventId = getEventIdFromUrl(event?.superEvent?.internalId ?? '');
   const [
     superEventSearch,
     { data: superEventData, loading: superEventLoading },

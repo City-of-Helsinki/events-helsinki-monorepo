@@ -1,6 +1,11 @@
 import { render, screen, renderHook } from '@testing-library/react';
 
-import { endOfTomorrow, startOfTomorrow, startOfYesterday } from 'date-fns';
+import {
+  endOfTomorrow,
+  startOfTomorrow,
+  startOfYesterday,
+  subDays,
+} from 'date-fns';
 import { defaultConfig } from 'react-helsinki-headless-cms';
 import { EnrolmentStatusLabel } from '../../../constants';
 import { useAppThemeContext } from '../../../themeProvider';
@@ -124,6 +129,22 @@ describe('useIsEnrolmentOpen', () => {
     expect(result.current).toBe(true);
   });
 
+  it('should return true if event is queueable', () => {
+    const event: EventFields = {
+      ...baseEvent,
+      registration: {
+        enrolmentStartTime: startOfYesterday().toISOString(),
+        enrolmentEndTime: endOfTomorrow().toISOString(),
+        remainingAttendeeCapacity: 0,
+        waitingListCapacity: 10,
+        remainingWaitingListCapacity: 5,
+      },
+    };
+
+    const { result } = renderHook(() => useIsEnrolmentOpen(event));
+    expect(result.current).toBe(true);
+  });
+
   it('should return false if both remaining capacities are 0', () => {
     const event: EventFields = {
       ...baseEvent,
@@ -131,19 +152,6 @@ describe('useIsEnrolmentOpen', () => {
         ...baseEvent.registration,
         remainingAttendeeCapacity: 0,
         remainingWaitingListCapacity: 0,
-      },
-    };
-    const { result } = renderHook(() => useIsEnrolmentOpen(event));
-    expect(result.current).toBe(false);
-  });
-
-  it('should return false if both remaining capacities are null', () => {
-    const event: EventFields = {
-      ...baseEvent,
-      registration: {
-        ...baseEvent.registration,
-        remainingAttendeeCapacity: null,
-        remainingWaitingListCapacity: null,
       },
     };
     const { result } = renderHook(() => useIsEnrolmentOpen(event));
@@ -170,6 +178,47 @@ describe('useIsEnrolmentOpen', () => {
       expect(result.current).toBe(expectedResult);
     }
   );
+
+  it('should use superEvent registration data if event registration is missing', () => {
+    const event: EventFields = {
+      ...baseEvent,
+      enrolmentStartTime: subDays(new Date(), 1).toISOString(),
+      enrolmentEndTime: endOfTomorrow().toISOString(),
+      registration: null, // No registration on sub-event
+    };
+    const superEvent: EventFields = {
+      ...baseEvent,
+      id: 'super-event-1',
+      registration: {
+        remainingAttendeeCapacity: 10,
+      },
+    };
+
+    const status = GetEventEnrolmentStatus.getEnrolmentStatus(
+      event,
+      superEvent
+    );
+    expect(status).toBe(EnrolmentStatusLabel.enrollable);
+  });
+
+  it('should return full if superEvent registration data shows no capacity', () => {
+    const event: EventFields = {
+      ...baseEvent,
+      enrolmentStartTime: subDays(new Date(), 1).toISOString(),
+      enrolmentEndTime: endOfTomorrow().toISOString(),
+      registration: null,
+    };
+    const superEvent: EventFields = {
+      ...baseEvent,
+      id: 'super-event-1',
+      registration: { remainingAttendeeCapacity: 0 },
+    };
+    const status = GetEventEnrolmentStatus.getEnrolmentStatus(
+      event,
+      superEvent
+    );
+    expect(status).toBe(EnrolmentStatusLabel.full);
+  });
 });
 
 describe('OfferButton', () => {

@@ -66,10 +66,11 @@ export type EventHeroProps = {
  */
 export const useIsEnrolmentOpen = (
   event?: EventHeroProps['event'],
+  superEvent?: EventHeroProps['event'],
   enrolmentFormAvailableBeforeHand = false
 ): boolean => {
   if (!event) return false;
-  const status = getEnrolmentStatus(event);
+  const status = getEnrolmentStatus(event, superEvent);
   if (enrolmentFormAvailableBeforeHand) {
     return [
       ...OPEN_ENROLMENT_STATUSES,
@@ -197,7 +198,11 @@ export const OfferButton: React.FC<
     locale
   );
 
-  const shouldShowEnrolmentButton = useIsEnrolmentOpen(event, true);
+  const shouldShowEnrolmentButton = useIsEnrolmentOpen(
+    event,
+    superEvent?.data ?? undefined,
+    true
+  );
 
   const buttonText = getEventHeroButtonText(
     event,

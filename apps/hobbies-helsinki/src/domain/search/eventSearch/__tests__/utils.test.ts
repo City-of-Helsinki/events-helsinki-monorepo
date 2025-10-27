@@ -1,4 +1,3 @@
-import type { AppLanguage } from '@events-helsinki/components';
 import {
   DATE_TYPES,
   EVENT_SEARCH_FILTERS,
@@ -50,7 +49,7 @@ describe('getSearchQuery function', () => {
 describe('getEventSearchVariables function', () => {
   const defaultParams = {
     include: [],
-    language: 'fi' as AppLanguage,
+    language: 'fi' as const,
     pageSize: 10,
     sortOrder: EVENT_SORT_OPTIONS.END_TIME,
     superEventType: [],

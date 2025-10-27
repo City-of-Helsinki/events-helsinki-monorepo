@@ -177,7 +177,7 @@ describe('useIsEnrolmentOpen', () => {
         },
       };
       const { result } = renderHook(() =>
-        useIsEnrolmentOpen(event, enrolmentFormAvailableBeforeHand)
+        useIsEnrolmentOpen(event, undefined, enrolmentFormAvailableBeforeHand)
       );
       expect(result.current).toBe(expectedResult);
     }

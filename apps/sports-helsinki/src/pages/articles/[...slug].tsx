@@ -170,7 +170,7 @@ export async function getStaticPaths(): Promise<
       if (slug && slug.length > 0) {
         acc.push({
           params: { slug },
-          locale: pageInfo.locale as AppLanguage,
+          locale: pageInfo.locale,
         });
       }
       return acc;

@@ -6,6 +6,8 @@ import type {
   PageType,
 } from 'react-helsinki-headless-cms';
 import { useCmsHelper, useCmsRoutedAppHelper } from '../../cmsHelperProvider';
+import { DEFAULT_LANGUAGE } from '../../constants';
+import isAppLanguage from '../../type-guards/is-app-language';
 import type { AppLanguage } from '../../types';
 
 export default function useGetPathnameForLanguage(
@@ -31,6 +33,9 @@ export default function useGetPathnameForLanguage(
   );
 
   return ({ slug }) => {
+    const appLanguage: AppLanguage = isAppLanguage(slug)
+      ? slug
+      : DEFAULT_LANGUAGE;
     const translatedPage = (page?.translations as PageType[])?.find(
       (translation) => translation?.language?.slug === slug
     );
@@ -44,7 +49,7 @@ export default function useGetPathnameForLanguage(
               ) ?? '',
           }
         : getCurrentParsedUrlQuery(),
-      slug as AppLanguage
+      appLanguage
     );
   };
 }

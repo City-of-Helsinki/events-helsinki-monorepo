@@ -50,7 +50,7 @@ export type AppCategory = {
   value: string;
 };
 
-export type PageUriInfo = { uri: string; slug: string; locale: string };
+export type PageUriInfo = { uri: string; slug: string; locale: AppLanguage };
 
 export type TimeResourceState =
   | 'open'

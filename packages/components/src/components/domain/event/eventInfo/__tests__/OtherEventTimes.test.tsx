@@ -16,7 +16,6 @@ import {
 } from '@/test-utils/mocks/eventListMocks';
 import { EventTypeId } from '../../../../../types';
 import type {
-  AppLanguage,
   EventDetails,
   EventFieldsFragment,
   EventListQueryVariables,
@@ -123,7 +122,7 @@ const renderComponent = ({
 const getDateRangeStrProps = (event: EventDetails) => ({
   start: event.startTime!,
   end: event.endTime,
-  locale: 'fi' as AppLanguage,
+  locale: 'fi' as const,
   includeTime: true,
   timeAbbreviation: translations.common.timeAbbreviation,
 });

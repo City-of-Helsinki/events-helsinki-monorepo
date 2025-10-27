@@ -315,7 +315,9 @@ describe('NextPageRevalidateService', () => {
       expect(fs.access).toHaveBeenCalledWith(
         path.join(mockProjectRoot, '.next', 'server', 'pages', 'fi')
       );
-      expect(pages).toStrictEqual(['/fi/about', '/fi/courses/course1'].sort());
+      expect(pages).toStrictEqual(
+        ['/fi/about', '/fi/courses/course1'].sort((a, b) => a.localeCompare(b))
+      );
     });
 
     it('listGeneratedPages should throw if directory does not exist', async () => {

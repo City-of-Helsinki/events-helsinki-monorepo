@@ -3171,7 +3171,7 @@ __metadata:
     react-datepicker: "npm:^8.4.0"
     react-dom: "npm:18.3.1"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.2.0"
+    react-helsinki-headless-cms: "npm:1.2.1"
     react-i18next: "npm:15.6.0"
     react-leaflet: "npm:4.2.1"
     react-toastify: "npm:^11.0.5"
@@ -13434,7 +13434,7 @@ __metadata:
     react-datepicker: "npm:^8.4.0"
     react-dom: "npm:18.3.1"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.2.0"
+    react-helsinki-headless-cms: "npm:1.2.1"
     react-i18next: "npm:15.6.0"
     react-scroll: "npm:^1.9.3"
     react-toastify: "npm:^11.0.5"
@@ -15176,7 +15176,7 @@ __metadata:
     react-datepicker: "npm:^8.4.0"
     react-dom: "npm:18.3.1"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.2.0"
+    react-helsinki-headless-cms: "npm:1.2.1"
     react-i18next: "npm:15.6.0"
     react-scroll: "npm:^1.9.3"
     react-toastify: "npm:^11.0.5"
@@ -21367,9 +21367,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helsinki-headless-cms@npm:1.2.0":
-  version: 1.2.0
-  resolution: "react-helsinki-headless-cms@npm:1.2.0"
+"react-helsinki-headless-cms@npm:1.2.1":
+  version: 1.2.1
+  resolution: "react-helsinki-headless-cms@npm:1.2.1"
   dependencies:
     classnames: "npm:^2.5.1"
     hds-design-tokens: "npm:^3.11.0"
@@ -21387,7 +21387,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: 74218b20fd08be6a435600798fa1adb63785eadca28d7e68e483ddbea00b31678700b1481afaa574066393c1d3a29c923d84e25bfe14e0d9e3e29e7ce48f5d41
+  checksum: bb3f3eed472a10fcbcebfa4f8f695041061124319402374a236f0e60e63685357a5d305f120f73d75cb9faa0db59f10ddc66fdd4d386bf26f9f208e00fd4dce6
   languageName: node
   linkType: hard
 
@@ -23512,7 +23512,7 @@ __metadata:
     react-datepicker: "npm:^8.4.0"
     react-dom: "npm:18.3.1"
     react-error-boundary: "npm:4.0.10"
-    react-helsinki-headless-cms: "npm:1.2.0"
+    react-helsinki-headless-cms: "npm:1.2.1"
     react-i18next: "npm:15.6.0"
     react-leaflet: "npm:4.2.1"
     react-scroll: "npm:^1.9.3"

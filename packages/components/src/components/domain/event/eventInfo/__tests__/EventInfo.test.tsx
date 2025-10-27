@@ -14,7 +14,6 @@ import {
 } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
-import type { AppLanguage } from '../../../../../types';
 import type {
   EventFields,
   SuperEventResponse,
@@ -48,7 +47,7 @@ configure({ defaultHidden: true });
 const getDateRangeStrProps = (event: EventDetails) => ({
   start: event.startTime!,
   end: event.endTime,
-  locale: 'fi' as AppLanguage,
+  locale: 'fi' as const,
   includeTime: true,
   timeAbbreviation: translations.common.timeAbbreviation,
 });

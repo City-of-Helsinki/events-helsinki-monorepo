@@ -6,7 +6,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import { render, screen } from '../../../config/tests/test-utils';
 import { APP_LANGUAGES } from '../../constants';
-import type { AppLanguage } from '../../types';
 import * as useLocale from '../useLocale';
 
 const TestComponent = () => {
@@ -39,7 +38,7 @@ describe('useLocale', () => {
 
     render(<TestComponent />);
     expect(initTestI18n.language).toBe(lang);
-    expect(mockUseLocale).toHaveReturnedWith(lang as AppLanguage);
+    expect(mockUseLocale).toHaveReturnedWith(lang);
   });
 
   it.each(unsupportedLanguages)(
@@ -49,7 +48,7 @@ describe('useLocale', () => {
       await initTestI18n.changeLanguage(lang);
       render(<TestComponent />);
       expect(initTestI18n.language).toBe(lang);
-      expect(mockUseLocale).toHaveReturnedWith('fi' as AppLanguage);
+      expect(mockUseLocale).toHaveReturnedWith('fi');
       expect(await screen.findByTestId('translation')).toHaveTextContent(
         translations.common.supriseMe
       );

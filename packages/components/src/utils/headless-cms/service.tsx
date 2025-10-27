@@ -6,9 +6,10 @@ import type {
 } from '@apollo/client/core/index.js';
 import type { NextApiResponse } from 'next';
 
-import { APP_LANGUAGES } from '../../constants';
+import { APP_LANGUAGES, DEFAULT_LANGUAGE } from '../../constants';
 import type { Logger } from '../../loggers/logger';
-import type { PageUriInfo } from '../../types';
+import isAppLanguage from '../../type-guards/is-app-language';
+import type { AppLanguage, PageUriInfo } from '../../types';
 import type { GetAllItemsUriInfoResponseType } from './queries';
 import {
   GET_ALL_PAGES_URI_INFO_QUERY,
@@ -46,11 +47,18 @@ export function uniqBySetWithArrayFrom<T>(array: T[]): T[] {
  */
 const _getPageUriInfo = ({
   node,
-}: GetAllItemsUriInfoResponseType['items']['edges'][number]): PageUriInfo => ({
-  uri: node.uri,
-  slug: node.slug,
-  locale: node.language.code.toLowerCase(),
-});
+}: GetAllItemsUriInfoResponseType['items']['edges'][number]): PageUriInfo => {
+  const locale = node.language.code.toLowerCase();
+  const appLanguage: AppLanguage = isAppLanguage(locale)
+    ? locale
+    : DEFAULT_LANGUAGE;
+
+  return {
+    uri: node.uri,
+    slug: node.slug,
+    locale: appLanguage,
+  };
+};
 
 /**
  * Fetches all article (post) URI information from the CMS.

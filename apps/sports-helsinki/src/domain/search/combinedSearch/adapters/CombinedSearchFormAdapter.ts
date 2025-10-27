@@ -1,12 +1,10 @@
 import type { ParsedUrlQuery } from 'querystring';
+import type { AppLanguage } from '@events-helsinki/components';
 // eslint-disable-next-line @stylistic/max-len
 import type { UnifiedSearchOrderByType } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
 // eslint-disable-next-line @stylistic/max-len
 import { UnifiedSearchOrderBy } from '@events-helsinki/components/components/domain/unifiedSearch/unifiedSearchConstants';
-import type {
-  AppLanguage,
-  Coordinates,
-} from '@events-helsinki/components/types';
+import type { Coordinates } from '@events-helsinki/components/types';
 import { EventTypeId } from '@events-helsinki/components/types';
 import upperFirst from 'lodash/upperFirst';
 import qs from 'query-string';
@@ -66,7 +64,7 @@ class CombinedSearchFormAdapter
    * Note that these properties should have some general level name.
    * These values can be mapped to event, course and venue queries.
    */
-  language: string;
+  language: AppLanguage;
   geolocation?: Coordinates | null;
   text: string;
   venueOrderBy?: string | null;
@@ -89,7 +87,7 @@ class CombinedSearchFormAdapter
    * state of the search form.
    */
   constructor(
-    locale: string,
+    locale: AppLanguage,
     input: URLSearchParams,
     geolocation?: Coordinates | null
   ) {
@@ -231,7 +229,7 @@ class CombinedSearchFormAdapter
   public getSearchVariables(): SearchVariablesType {
     const venueSearchQueryVariables = new VenueSearchAdapter(
       this.getFormValues(),
-      this.language as AppLanguage,
+      this.language,
       this.geolocation
     ).getQueryVariables();
     const eventSearchQueryVariables = new EventSearchAdapter(

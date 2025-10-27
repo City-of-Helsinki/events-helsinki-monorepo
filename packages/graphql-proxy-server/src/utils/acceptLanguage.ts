@@ -4,7 +4,10 @@ import type ContextValue from '../context/ContextValue.js';
 import { appLanguages, type AppLanguage } from '../types.js';
 
 const isAppLanguage = (value: unknown): value is AppLanguage => {
-  return appLanguages.includes(value as AppLanguage);
+  return (
+    typeof value === 'string' &&
+    (appLanguages as readonly string[]).includes(value)
+  );
 };
 
 /**

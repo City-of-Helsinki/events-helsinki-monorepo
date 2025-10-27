@@ -95,10 +95,15 @@ export class CmsRoutedAppHelper {
       // Remove all
       Object.keys(queryObject).forEach((param) => delete queryObject[param]);
     }
+    const locale = router.locale || router.defaultLocale;
+    const appLanguage: AppLanguage = isAppLanguage(locale)
+      ? locale
+      : DEFAULT_LANGUAGE;
+
     const cleanedUrl = this.getLocalizedCmsItemUrl(
       forwardPath, // FIXME: Could this be taken from the router.asPath?
       queryObject,
-      (router.locale || router.defaultLocale) as AppLanguage
+      appLanguage
     );
     router.replace(
       cleanedUrl,

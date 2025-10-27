@@ -286,7 +286,6 @@
 
 @media only screen and (min-width: 681px) {
   .rns .rns-plugin .rns-shares .rns-shares-list {
-    margin-bottom: 0;
     margin-left: -8px;
     margin-right: -8px;
     margin-top: 32px;
@@ -296,9 +295,6 @@
 
 .rns .rns-plugin .rns-shares .rns-shares-list .rns-share {
   padding: 0 !important;
-}
-
-.rns .rns-plugin .rns-shares .rns-shares-list .rns-share {
   margin: 0 8px;
   width: auto;
 }
@@ -306,9 +302,6 @@
 @media only screen and (max-width: 680px) {
   .rns .rns-plugin .rns-shares .rns-shares-list .rns-share {
     padding: 0 !important;
-  }
-
-  .rns .rns-plugin .rns-shares .rns-shares-list .rns-share {
     margin: 16px 0 0;
     width: calc(50% - 16px);
   }

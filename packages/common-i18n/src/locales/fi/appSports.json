@@ -32,6 +32,7 @@
     "pageTitle": "Löydä liikuntaa",
     "search": {
       "placeholder": "Kirjoita hakusana, esim. uimahalli tai jooga"
-    }
+    },
+    "descriptionSearchTabs": "Valitse paikat, tapahtumat tai harrastukset:"
   }
 }

@@ -32,6 +32,7 @@
     "pageTitle": "Find sport",
     "search": {
       "placeholder": "Enter a keyword, eg. swimming hall or yoga"
-    }
+    },
+    "descriptionSearchTabs": "Select venues, events or hobbies:"
   }
 }

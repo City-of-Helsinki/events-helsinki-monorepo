@@ -32,6 +32,7 @@
     "pageTitle": "Hitta motion",
     "search": {
       "placeholder": "Ange ett sökord, t. ex. simhall eller yoga"
-    }
+    },
+    "descriptionSearchTabs": "Välj platser, evenemang eller hobbyer:"
   }
 }

@@ -187,6 +187,7 @@ export interface SearchPage {
 export type SearchComponentType = {
   scrollToResultList: () => void;
   'data-testid'?: string;
-  showTitle?: boolean;
+  title?: string;
+  description?: string;
   searchRoute?: SearchRoute; // TODO: Allow only SEARCH_ROUTE values
 };

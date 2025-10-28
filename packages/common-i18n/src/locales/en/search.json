@@ -34,6 +34,8 @@
     "titleDropdownPlace": "Search venue",
     "placeholder": "Enter a keyword, eg. French or cooking",
     "labelSearchField": "What are you looking for?",
+    "titlePage": "What are you looking for?",
+    "descriptionPage": "",
     "checkboxAlsoOngoingCourses": "Show also ongoing courses",
     "checkboxIsFree": "Show only courses that are free",
     "titleDropdownTargetGroup": "Target group",

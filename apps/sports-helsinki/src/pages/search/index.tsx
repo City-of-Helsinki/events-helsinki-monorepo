@@ -20,6 +20,7 @@ import type { PageType } from 'react-helsinki-headless-cms';
 import {
   Page as RHHCPage,
   getBreadcrumbsFromPage,
+  getTextFromHtml,
 } from 'react-helsinki-headless-cms';
 import type {
   PageQuery,
@@ -64,7 +65,15 @@ const Search: NextPage<{
             image={page?.featuredImage?.node?.mediaItemUrl || ''}
           />
           {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
-          <CombinedSearchPageNoSSR defaultTab="Venue" />
+          <CombinedSearchPageNoSSR
+            defaultTab="Venue"
+            pageTitle={page?.title?.trim() ?? undefined}
+            pageDescription={
+              page?.content?.trim()
+                ? getTextFromHtml(page?.content)?.trim()
+                : undefined
+            }
+          />
         </>
       }
       footer={

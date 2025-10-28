@@ -26,7 +26,7 @@ function VenueSearchPanel() {
   return (
     <VenueSearchPage
       SearchComponent={undefined}
-      pageTitle={t('appSports:search.pageTitle')}
+      pageTitle={t(`search:search.searchType.Venue`)}
     />
   );
 }
@@ -37,7 +37,7 @@ function EventSearchPanel({ eventType }: { eventType: EventTypeId }) {
   return (
     <EventSearchPage
       SearchComponent={undefined}
-      pageTitle={t('search:search.labelSearchField')}
+      pageTitle={t(`search:search.searchType.${eventType}`)}
       eventType={eventType}
     />
   );
@@ -74,11 +74,20 @@ export function SearchForm({
   );
 }
 
+type CombinedSearchPageProps = {
+  defaultTab?: SearchTabId;
+  pageTitle?: string;
+  pageDescription?: string;
+  searchTabsDescription?: string;
+};
+
 function CombinedSearchPage({
   defaultTab = 'Venue',
-}: {
-  defaultTab: SearchTabId;
-}) {
+  pageTitle = 'search:search.titlePage',
+  pageDescription = 'search:search.descriptionPage',
+  searchTabsDescription = 'appSports:search.descriptionSearchTabs',
+}: CombinedSearchPageProps) {
+  const { t } = useSearchTranslation();
   const { initTab } = useSearchTabsWithParams(defaultTab);
   return (
     <div>
@@ -90,9 +99,16 @@ function CombinedSearchPage({
             searchRoute={SEARCH_ROUTES.SEARCH}
             searchUtilities={null}
             korosBottom
-            showTitle
+            title={t(pageTitle)}
+            description={t(pageDescription)}
             scrollToResultList={() => true}
           />
+
+          {searchTabsDescription && (
+            <div className={styles.searchTabsDescription}>
+              <p id="searchTabsDescription">{t(searchTabsDescription)}</p>
+            </div>
+          )}
 
           {/* The search tabs, query sorters, search type switchers, etc. */}
           <SearchUtilities />

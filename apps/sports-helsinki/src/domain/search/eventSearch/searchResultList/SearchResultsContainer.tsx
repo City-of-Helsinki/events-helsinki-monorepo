@@ -28,11 +28,11 @@ const SearchResultsContainer: React.FC<Props> = ({
         {!loading && (
           <div className={styles.row}>
             <div className={styles.rowGroup}>
-              <h2 className={styles.count}>
+              <h3 className={styles.count}>
                 {t('search:textFoundEvents', {
                   count: eventsCount,
                 })}
-              </h2>
+              </h3>
               {orderBySelectComponent !== undefined && orderBySelectComponent}
             </div>
           </div>

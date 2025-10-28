@@ -7,6 +7,7 @@ import {
   SearchSelect,
   AdvancedSearchTextInput,
 } from '@events-helsinki/components';
+import classNames from 'classnames';
 import type { SelectCustomTheme } from 'hds-react';
 import { Button, IconGroup, IconPersonWheelchair, IconSearch } from 'hds-react';
 import React from 'react';
@@ -19,7 +20,8 @@ import styles from './search.module.scss';
 
 export const SimpleSearchForm: React.FC<SearchComponentType> = ({
   scrollToResultList,
-  showTitle = false,
+  title = undefined,
+  description = undefined,
 }) => {
   const { t } = useSearchTranslation();
   const { t: tAppSports } = useAppSportsTranslation();
@@ -82,8 +84,17 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.searchWrapper}>
-        {showTitle && (
-          <h1 className={styles.searchTitle}>{t('search.labelSearchField')}</h1>
+        {title && (
+          <h1
+            className={classNames(styles.searchTitle, {
+              [styles.withDescription]: !!description,
+            })}
+          >
+            {title}
+          </h1>
+        )}
+        {description && (
+          <p className={styles.searchDescription}>{description}</p>
         )}
         <div className={styles.rowWrapper}>
           <div>

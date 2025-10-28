@@ -50,7 +50,11 @@ function SearchUtilities() {
   return (
     <PageSection className={styles.searchUtilities}>
       <ContentContainer className={styles.contentContainer}>
-        <div className={styles.flexEnd}>
+        <div
+          className={styles.flexEnd}
+          role="navigation"
+          aria-describedby="searchTabsDescription"
+        >
           <SearchTabs.TabList>
             {tabsData.map((tab) => (
               <SearchTabs.Tab key={tab.id} id={tab.id} theme="black">

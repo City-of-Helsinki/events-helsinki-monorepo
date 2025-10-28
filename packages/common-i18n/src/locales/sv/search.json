@@ -35,6 +35,8 @@
     "checkboxIsFree": "Visa endast avgiftsfria",
     "placeholder": "Ange ett sökord, t. ex. Franska eller matlagning",
     "labelSearchField": "Vad letar du efter?",
+    "titlePage": "Vad letar du efter?",
+    "descriptionPage": "",
     "checkboxAlsoOngoingCourses": "Visa även pågående kurser",
     "titleDropdownTargetGroup": "Målgrupp",
     "titleDropdownSportsCategory": "Typ av sport",

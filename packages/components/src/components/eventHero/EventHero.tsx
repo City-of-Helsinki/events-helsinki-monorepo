@@ -66,11 +66,11 @@ export type EventHeroProps = {
  */
 export const useIsEnrolmentOpen = (
   event?: EventHeroProps['event'],
-  superEvent?: EventHeroProps['event'],
+  superEvent?: EventHeroProps['superEvent'],
   enrolmentFormAvailableBeforeHand = false
 ): boolean => {
-  if (!event) return false;
-  const status = getEnrolmentStatus(event, superEvent);
+  if (!event || superEvent?.status === 'pending') return false;
+  const status = getEnrolmentStatus(event, superEvent?.data ?? undefined);
   if (enrolmentFormAvailableBeforeHand) {
     return [
       ...OPEN_ENROLMENT_STATUSES,
@@ -133,10 +133,11 @@ const TimeInfo: React.FC<Pick<EventHeroProps, 'event' | 'superEvent'>> = ({
   );
 };
 
-export const EnrolmentStatusInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({
-  event,
-}) => {
-  const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
+export const EnrolmentStatusInfo: React.FC<
+  Pick<EventHeroProps, 'event' | 'superEvent'>
+> = ({ event, superEvent }) => {
+  const { status: eventEnrolmentStatus, loading: superEventLoading } =
+    useEventEnrolmentStatus(event);
   const hasRegistration =
     !!event.enrolmentStartTime && !!event.enrolmentEndTime;
 
@@ -146,9 +147,13 @@ export const EnrolmentStatusInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({
     EnrolmentStatusLabel.queueable,
   ];
 
-  // Don't show if there is no registation required or status is "enrollable" or "queueable",
-  // because then an enrolment button is shown instead.
+  if (superEvent?.status === 'pending' || superEventLoading) {
+    return <SkeletonLoader />;
+  }
+
   if (!hasRegistration || hiddenForStatuses.includes(eventEnrolmentStatus)) {
+    // Don't show if there is no registation required or status is "enrollable" or "queueable",
+    // because then an enrolment button is shown instead.
     return null;
   }
 
@@ -198,11 +203,7 @@ export const OfferButton: React.FC<
     locale
   );
 
-  const shouldShowEnrolmentButton = useIsEnrolmentOpen(
-    event,
-    superEvent?.data ?? undefined,
-    true
-  );
+  const shouldShowEnrolmentButton = useIsEnrolmentOpen(event, superEvent, true);
 
   const buttonText = getEventHeroButtonText(
     event,
@@ -217,8 +218,13 @@ export const OfferButton: React.FC<
     superEvent?.data ?? undefined
   );
 
-  // If there is no offer URL (where registration is made) or
-  if (!externalRegistrationUrl || !shouldShowEnrolmentButton) return null;
+  if (superEvent?.status === 'pending') {
+    return <SkeletonLoader />;
+  }
+
+  if (!externalRegistrationUrl || !shouldShowEnrolmentButton) {
+    return null;
+  }
 
   return (
     <div className={styles.registrationButtonWrapper}>
@@ -294,7 +300,7 @@ const EventHero: React.FC<EventHeroProps> = ({
                   <TimeInfo event={event} superEvent={superEvent} />
                   <LocationInfo event={event} />
                   <EventPriceInfo event={event} />
-                  <EnrolmentStatusInfo event={event} />
+                  <EnrolmentStatusInfo event={event} superEvent={superEvent} />
                   <OfferButton event={event} superEvent={superEvent} />
                 </div>
                 {showKeywords && (

@@ -10,10 +10,12 @@ import getDateRangeStr from '../../../../utils/getDateRangeStr';
 import { getEnrolmentStatus } from '../../../../utils/getEventEnrolmentStatus';
 
 function useEventEnrolmentStatus(event: EventFields) {
-  const { superEvent } = useSuperEventLazyLoad(event);
+  const { superEvent, superEventLoading } = useSuperEventLazyLoad(event);
+
   const locale = useLocale();
   const { t: eventTranslation } = useEventTranslation();
   const { t: commonTranslation } = useCommonTranslation();
+
   const result = useMemo(() => {
     const status = getEnrolmentStatus(event, superEvent?.data ?? undefined);
 
@@ -29,8 +31,15 @@ function useEventEnrolmentStatus(event: EventFields) {
         : '',
     });
 
-    return { status, text };
-  }, [event, superEvent?.data, locale, eventTranslation, commonTranslation]);
+    return { status, text, loading: superEventLoading };
+  }, [
+    event,
+    superEvent?.data,
+    eventTranslation,
+    locale,
+    commonTranslation,
+    superEventLoading,
+  ]);
 
   return result;
 }

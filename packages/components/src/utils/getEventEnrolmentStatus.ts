@@ -8,7 +8,7 @@ import type { EventFields } from '../types/event-types';
  * @param {EventFields} event - The event object to check.
  * @returns {boolean} True if enrolment data is present, false otherwise.
  */
-function hasEventEnrolmentData(event: EventFields) {
+function hasEventEnrolmentData(event: EventFields): boolean {
   return (
     !!event.registration ||
     !!event.enrolmentStartTime ||
@@ -43,7 +43,12 @@ function getEventRegistrationData(
   // it should also have registration field populated.
   // This is a strange behaviour in LinkedEvents,
   // that it might use registration data from super event in this case.
-  if (hasEventEnrolmentData(event) && superEvent?.registration) {
+  if (
+    hasEventEnrolmentData(event) &&
+    superEvent &&
+    hasEventEnrolmentData(superEvent) &&
+    superEvent?.registration
+  ) {
     return superEvent.registration;
   }
 

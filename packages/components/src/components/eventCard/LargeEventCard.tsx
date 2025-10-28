@@ -27,8 +27,37 @@ import {
 } from '../../utils';
 import EventKeywords from '../eventKeywords/EventKeywords';
 import EventName from '../eventName/EventName';
+import SkeletonLoader from '../skeletonLoader/SkeletonLoader';
 import styles from './largeEventCard.module.scss';
 import type { LargeEventCardProps } from './types';
+
+const EventEnrolmentStatusIndicator: React.FC<{
+  event: LargeEventCardProps['event'];
+}> = ({ event }) => {
+  const { status: eventEnrolmentStatus, loading } =
+    useEventEnrolmentStatus(event);
+
+  if (loading) {
+    return <SkeletonLoader />;
+  }
+
+  if (eventEnrolmentStatus === EnrolmentStatusLabel.noEnrolmentTimes) {
+    return null;
+  }
+
+  return (
+    <div className={styles.eventPrice}>
+      <IconBell aria-hidden />
+
+      <EventEnrolmentStatus
+        event={event}
+        className={classNames(styles.linkArrowLabel, {
+          [styles.alert]: eventEnrolmentStatus === EnrolmentStatusLabel.full,
+        })}
+      />
+    </div>
+  );
+};
 
 const LargeEventCard: React.FC<LargeEventCardProps> = ({
   event,
@@ -50,8 +79,6 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
   } = getEventFields(event, locale);
 
   const audienceAge = getAudienceAgeText(t, audienceMinAge, audienceMaxAge);
-
-  const { status: eventEnrolmentStatus } = useEventEnrolmentStatus(event);
 
   const { clickCaptureRef, clicked } = useClickCapture(1000);
 
@@ -109,21 +136,9 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
                 {eventPrice}
               </div>
             )}
-            {showEnrolmentStatusInCardDetails &&
-              eventEnrolmentStatus !==
-                EnrolmentStatusLabel.noEnrolmentTimes && (
-                <div className={styles.eventPrice}>
-                  <IconBell aria-hidden />
-
-                  <EventEnrolmentStatus
-                    event={event}
-                    className={classNames(styles.linkArrowLabel, {
-                      [styles.alert]:
-                        eventEnrolmentStatus === EnrolmentStatusLabel.full,
-                    })}
-                  />
-                </div>
-              )}
+            {showEnrolmentStatusInCardDetails && (
+              <EventEnrolmentStatusIndicator event={event} />
+            )}
             <div className={styles.keywordWrapperDesktop}>
               <EventKeywords
                 event={event}

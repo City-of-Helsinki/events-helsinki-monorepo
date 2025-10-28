@@ -10,57 +10,51 @@ function useSuperEventLazyLoad(event?: EventFieldsFragment) {
     status: 'pending',
   });
   const superEventId = getEventIdFromUrl(event?.superEvent?.internalId ?? '');
-  const [
-    superEventSearch,
-    { data: superEventData, loading: superEventLoading },
-  ] = useLazyQuery(EventDetailsDocument, {});
+
+  const [superEventSearch, { loading: superEventLoading }] = useLazyQuery(
+    EventDetailsDocument,
+    {
+      onCompleted: (data) => {
+        setSuperEvent({
+          data: data.eventDetails,
+          status: 'resolved',
+        });
+      },
+      onError: () => {
+        setSuperEvent({ data: null, status: 'resolved' });
+      },
+      notifyOnNetworkStatusChange: true,
+    }
+  );
+
+  // This effect is now ONLY responsible for triggering the fetch
   React.useEffect(() => {
     if (superEventId) {
+      // Set state to pending *before* fetching
+      setSuperEvent({ data: null, status: 'pending' });
       superEventSearch({
         variables: {
           id: superEventId,
-          include: ['in_language', 'keywords', 'location', 'audience'],
+          include: [
+            'in_language',
+            'keywords',
+            'location',
+            'audience',
+            'registration',
+          ],
         },
       });
-      // Still loading the super event,
-      if (superEventLoading) {
-        setSuperEvent({ data: null, status: 'pending' });
-      }
-      // Loaded, so there should be data if there ever was a super event
-      else if (superEventData) {
-        setSuperEvent({
-          data: superEventData.eventDetails,
-          status: 'resolved',
-        });
-      }
-      // No super event
-      else if (event) {
-        setSuperEvent({ data: null, status: 'resolved' });
-      }
+    } else {
+      // No ID, so we are resolved with null data
+      setSuperEvent({ data: null, status: 'resolved' });
     }
-    // No super event id to fetch with
-    else {
-      setSuperEvent({
-        data: null,
-        status: 'resolved',
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    event,
-    superEventId,
-    superEventData,
-    superEventSearch,
-    // ...should be 1 of the deps here, but e.g. when http410 errors occurs,
-    // with it, this fetcher goes in a forever loop.
-    // superEventLoading,
-  ]);
+  }, [superEventId, superEventSearch]);
 
   return {
     superEvent,
     setSuperEvent,
     superEventSearch,
-    superEventLoading,
+    superEventLoading, // Pass Apollo's loading state through
   };
 }
 

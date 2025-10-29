@@ -2,6 +2,7 @@ import {
   getCurrentSeason,
   useLocale,
   useCommonTranslation,
+  Visible,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -64,16 +65,18 @@ const Search: React.FC = () => {
         setTextSearchInput={setTextSearchInput}
         handleSubmit={handleSubmit}
       />
-      <CmsPageContent />
-      <SearchShortcuts
-        className={styles.categoriesWrapper}
-        categories={categories.filter(
-          (category) =>
-            !category.seasons ||
-            category.seasons.some((season) => season === currentSeason)
-        )}
-        searchFilters={{}}
-      />
+      <Visible above="s">
+        <CmsPageContent />
+        <SearchShortcuts
+          className={styles.categoriesWrapper}
+          categories={categories.filter(
+            (category) =>
+              !category.seasons ||
+              category.seasons.some((season) => season === currentSeason)
+          )}
+          searchFilters={{}}
+        />
+      </Visible>
     </div>
   );
 };

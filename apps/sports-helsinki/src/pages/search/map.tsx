@@ -15,7 +15,11 @@ import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
-import { PageSection, Page as RHHCPage } from 'react-helsinki-headless-cms';
+import {
+  PageContextProvider,
+  PageSection,
+  Page as RHHCPage,
+} from 'react-helsinki-headless-cms';
 import type {
   PageQuery,
   PageQueryVariables,
@@ -138,7 +142,7 @@ export default function MapSearch({ page }: { page: PageType }) {
       className="pageLayout"
       navigation={<Navigation />}
       content={
-        <>
+        <PageContextProvider page={page}>
           <RouteMeta origin={AppConfig.origin} />
           <PageMeta
             {...page?.seo}
@@ -147,7 +151,7 @@ export default function MapSearch({ page }: { page: PageType }) {
           <CombinedSearchProvider>
             <MapSearchPageContent />
           </CombinedSearchProvider>
-        </>
+        </PageContextProvider>
       }
       footer={null}
     />

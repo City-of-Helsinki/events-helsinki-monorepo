@@ -109,6 +109,12 @@ jobs:
         run: |
           yarn workspaces foreach -tv --exclude hobbies-helsinki --exclude events-helsinki --exclude sports-helsinki --since=origin/main run build-storybook
 
+      - name: Run tests
+        working-directory: packages/components
+        run: yarn test:coverage
+        env:
+          CI: true
+
       - name: SonarQube Cloud Scan
         uses: SonarSource/sonarqube-scan-action@v6
         with:

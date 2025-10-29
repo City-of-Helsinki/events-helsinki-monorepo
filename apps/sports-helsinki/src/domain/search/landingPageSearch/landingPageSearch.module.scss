@@ -1,11 +1,14 @@
 @use '../../../styles/breakpoints' as breakpoints;
 
 .landingPageSearch {
+  --color-heroTitle: var(--color-white);
+  --color-heroDescription: var(--color-brick-light);
+
   margin-top: -13.5rem;
   background-color: rgba(0, 0, 0, 0.8);
   padding: var(--spacing-l) var(--spacing-m);
   z-index: 1;
-  position: absolute;
+  position: relative;
   width: 100%;
 
   @include breakpoints.respond-above(s) {
@@ -21,16 +24,20 @@
     font-weight: 500;
     margin-top: 0;
     margin-bottom: var(--spacing-l);
-    color: var(--color-white);
+    color: var(--color-heroTitle);
+  }
+
+  p {
+    color: var(--color-heroDescription);
+    margin-bottom: var(--spacing-l);
   }
 }
 
 .categoriesWrapper {
   position: relative;
-  top: 2.8rem;
   z-index: 0;
-  padding-top: 4rem;
-  padding-bottom: 3rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
@@ -40,18 +47,18 @@
   @include breakpoints.respond-below(m) {
     display: flex;
     flex-direction: column;
-    padding-top: 0;
+    padding-top: 2.8rem;
     grid-gap: 2px;
     padding-bottom: 3rem;
   }
 
   @include breakpoints.respond-above(s) {
-    padding-top: 12rem;
+    padding-top: 2rem;
   }
 
   @include breakpoints.respond-above(m) {
     grid-template-columns: 1fr 1fr 1fr;
-    padding-top: 4rem;
+    padding-top: 2rem;
   }
 
   @include breakpoints.respond-above(l) {
@@ -62,5 +69,17 @@
     @include breakpoints.respond-below(m) {
       grid-column-start: 2;
     }
+  }
+}
+.pageContent {
+  margin: var(--spacing-5-xl) var(--spacing-m) 0;
+  color: var(--color-black);
+
+  p {
+    font-size: var(--fontsize-body-l);
+  }
+
+  p:only-of-type {
+    margin-bottom: 0;
   }
 }

@@ -6,7 +6,11 @@ import {
 } from '@events-helsinki/components';
 import classnames from 'classnames';
 import { Button, IconSearch } from 'hds-react';
-import { SecondaryLink } from 'react-helsinki-headless-cms';
+import {
+  isPageType,
+  SecondaryLink,
+  usePageContext,
+} from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import styles from './landingPageSearchForm.module.scss';
@@ -27,13 +31,28 @@ export default function LandingPageSearchForm({
   const { t } = useHomeTranslation();
   const { t: tAppSports } = useAppSportsTranslation();
   const locale = useLocale();
+  const { page } = usePageContext();
+  const heroTitle =
+    isPageType(page) && page?.hero?.title?.trim() !== ''
+      ? page?.hero?.title?.trim()
+      : tAppSports('appSports:home.search.title');
+  const heroDescription =
+    isPageType(page) && page?.hero?.description?.trim()
+      ? page?.hero?.description?.trim()
+      : undefined;
 
   return (
     <form
       className={classnames(className, styles.landingPageSearch)}
       onSubmit={handleSubmit}
     >
-      <h1>{tAppSports('appSports:home.search.title')}</h1>
+      <h1
+        id="heroTitle"
+        className={classnames({ [styles.withDescription]: !!heroDescription })}
+      >
+        {heroTitle}
+      </h1>
+      {!!heroDescription && <p id="heroDescription">{heroDescription}</p>}
       <div className={styles.searchRow}>
         <div className={styles.textSearchWrapper}>
           <AdvancedSearchTextInput

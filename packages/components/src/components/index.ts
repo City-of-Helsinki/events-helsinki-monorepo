@@ -73,3 +73,4 @@ export { default as EventPageMeta } from './eventPageMeta/EventPageMeta';
 export { default as PreviewNotification } from './previewNotification/PreviewNotification';
 export { default as UserTrackingFeatures } from './widgets/UserTrackingFeatures';
 export * from './advancedSearch';
+export { default as CmsPageContent } from './landingPage/CmsPageContent';

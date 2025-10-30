@@ -69,8 +69,7 @@ const SearchPage: React.FC<{
     scrollToResultList: () => void;
     'data-testid'?: string;
   }>;
-  pageTitle: string;
-}> = ({ SearchComponent, pageTitle }) => {
+}> = ({ SearchComponent }) => {
   const { t } = useSearchTranslation();
   const router = useRouter();
   const routerHelper = useCmsRoutedAppHelper();
@@ -158,7 +157,6 @@ const SearchPage: React.FC<{
         favIconSvgUrl={meta?.favIconSvgUrl}
         manifestUrl={meta?.manifestUrl}
       />
-      <SrOnly as="h1">{pageTitle}</SrOnly>
       <SearchComponent
         scrollToResultList={scrollToResultList}
         data-testid="searchContainer"

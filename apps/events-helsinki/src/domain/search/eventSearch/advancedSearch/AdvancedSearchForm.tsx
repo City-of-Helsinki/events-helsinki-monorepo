@@ -31,10 +31,15 @@ import type { TargetAgeGroupOptionType } from './TargetAgeGroupSelector';
 import TargetAgeGroupSelector from './TargetAgeGroupSelector';
 import { useGoToSearch } from './useGoToSearch';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface AdvancedSearchFormProps {}
+type AdvancedSearchFormProps = {
+  title?: string;
+  description?: string;
+};
 
-export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
+export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
+  title = 'search:search.titlePage',
+  description = 'search:search.descriptionPage',
+}) => {
   const { t } = useTranslation('search');
   const { t: tAppEvents } = useAppEventsTranslation();
   const router = useRouter();
@@ -145,7 +150,18 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.searchWrapper}>
-        <h1>{t('search.labelSearchField')}</h1>
+        {title && (
+          <h1
+            className={classNames(styles.searchTitle, {
+              [styles.withDescription]: !!description,
+            })}
+          >
+            {tAppEvents(title)}
+          </h1>
+        )}
+        {description && (
+          <p className={styles.searchDescription}>{tAppEvents(description)}</p>
+        )}
         <div className={styles.rowWrapper}>
           <div className={classNames(styles.row, styles.textSearchRow)}>
             <AdvancedSearchTextInput

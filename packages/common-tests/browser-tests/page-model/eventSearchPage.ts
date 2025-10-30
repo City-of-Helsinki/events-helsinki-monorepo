@@ -138,7 +138,7 @@ class EventSearchPage {
   public async verify() {
     // eslint-disable-next-line no-console
     console.info('EventSearchPage: verify');
-    await t.expect(this.searchFormHeading.exists).ok();
+    await t.expect(this.textSearchInput.exists).ok();
   }
 }
 

@@ -1,7 +1,6 @@
 import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   NavigationContext,
-  useAppEventsTranslation,
   Navigation,
   getLanguageOrDefault,
   FooterSection,
@@ -20,6 +19,7 @@ import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
 import {
+  PageContextProvider,
   Page as RHHCPage,
   getBreadcrumbsFromPage,
 } from 'react-helsinki-headless-cms';
@@ -44,7 +44,6 @@ const Search: NextPage<{
   const router = useRouter();
   const scrollTo = router.query?.scrollTo;
   const listRef = useRef<HTMLUListElement | null>(null);
-  const { t: tAppEvents } = useAppEventsTranslation();
   const { resilientT } = useResilientTranslation();
   usePageScrollRestoration();
 
@@ -78,7 +77,7 @@ const Search: NextPage<{
       className="pageLayout"
       navigation={<Navigation />}
       content={
-        <>
+        <PageContextProvider page={page}>
           <PreviewNotification token={previewToken} />
           <RouteMeta origin={AppConfig.origin} />
           <PageMeta
@@ -86,11 +85,8 @@ const Search: NextPage<{
             image={page?.featuredImage?.node?.mediaItemUrl || ''}
           />
           {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
-          <SearchPageNoSSR
-            SearchComponent={AdvancedSearch}
-            pageTitle={tAppEvents('appEvents:search.pageTitle')}
-          />
-        </>
+          <SearchPageNoSSR SearchComponent={AdvancedSearch} />
+        </PageContextProvider>
       }
       footer={
         <FooterSection

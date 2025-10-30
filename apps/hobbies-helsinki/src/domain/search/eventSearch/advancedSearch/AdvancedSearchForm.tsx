@@ -30,14 +30,19 @@ import { useAdvancedSearchContext } from './AdvancedSearchContext';
 import styles from './search.module.scss';
 import { useGoToSearch } from './useGoToSearch';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface AdvancedSearchFormProps {}
+type AdvancedSearchFormProps = {
+  title?: string;
+  description?: string;
+};
 
 /**
  * AdvancedSearchForm is a child component that consumes the AdvancedSearchContext
  * to access and display the search form elements.
  */
-export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
+export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
+  title = 'search:search.titlePage',
+  description = 'search:search.descriptionPage',
+}) => {
   const { t } = useTranslation('search');
   const { t: tAppHobbies } = useAppHobbiesTranslation();
   const router = useRouter();
@@ -135,7 +140,18 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.searchWrapper}>
-        <h1>{t('search.labelSearchField')}</h1>
+        {title && (
+          <h1
+            className={classNames(styles.searchTitle, {
+              [styles.withDescription]: !!description,
+            })}
+          >
+            {tAppHobbies(title)}
+          </h1>
+        )}
+        {description && (
+          <p className={styles.searchDescription}>{tAppHobbies(description)}</p>
+        )}
         <div className={styles.rowWrapper}>
           <div className={classNames(styles.row, styles.textSearchRow)}>
             <AdvancedSearchTextInput

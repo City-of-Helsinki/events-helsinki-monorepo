@@ -4,6 +4,7 @@ import {
   EventTypeId,
   EVENT_SEARCH_FILTERS,
   CmsPageContent,
+  Visible,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -77,17 +78,19 @@ const Search: React.FC = () => {
         toggleIsCustomDate={toggleIsCustomDate}
         handleSubmit={handleSubmit}
       />
-      <CmsPageContent className={styles.pageContent} />
-      <SearchShortcuts
-        className={styles.categoriesWrapper}
-        categories={categories}
-        searchFilters={{
-          ...EVENT_DEFAULT_SEARCH_FILTERS,
-          dateTypes,
-          end,
-          start,
-        }}
-      />
+      <Visible above="s">
+        <CmsPageContent className={styles.pageContent} />
+        <SearchShortcuts
+          className={styles.categoriesWrapper}
+          categories={categories}
+          searchFilters={{
+            ...EVENT_DEFAULT_SEARCH_FILTERS,
+            dateTypes,
+            end,
+            start,
+          }}
+        />
+      </Visible>
     </div>
   );
 };

@@ -113,11 +113,11 @@
   },
   "title": "Laddar evenemang...",
   "enrolmentStatus": {
-    "enrollable": "Registrering",
+    "enrollable": "Anmälan är öppen",
     "noEnrolmentTimes": "",
-    "full": "Full",
-    "enrolmentNotStartedYet": "Registrering startar den {{date}}",
-    "enrolmentEnded": "Registreringen har avslutats",
-    "queueable": "Full, köbar"
+    "full": "Inga platser kvar",
+    "enrolmentNotStartedYet": "Anmälan öppnar {{date}}",
+    "enrolmentEnded": "Anmälan har stängt",
+    "queueable": "Anmälan till köplats"
   }
 }

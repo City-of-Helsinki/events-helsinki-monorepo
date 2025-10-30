@@ -113,11 +113,11 @@
     "title": "Similar events"
   },
   "enrolmentStatus": {
-    "enrollable": "Registration",
+    "enrollable": "Registration is open",
     "noEnrolmentTimes": "",
-    "full": "Full",
-    "enrolmentNotStartedYet": "Enrolment starts on {{date}}",
-    "enrolmentEnded": "Enrolment has ended",
-    "queueable": "Full, queueable"
+    "full": "No space available",
+    "enrolmentNotStartedYet": "Registration opens on {{date}}",
+    "enrolmentEnded": "Registration has closed",
+    "queueable": "Registration to queue"
   }
 }

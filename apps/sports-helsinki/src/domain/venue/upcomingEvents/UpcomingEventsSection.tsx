@@ -7,6 +7,8 @@ import {
   useVenueTranslation,
   useEventCards,
   useLocationUpcomingEventsQuery,
+  EventTypeId,
+  EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -18,6 +20,8 @@ import {
   ContentContainer,
 } from 'react-helsinki-headless-cms';
 
+import { ROUTES } from '../../../constants';
+import { PARAM_SEARCH_TYPE } from '../../search/combinedSearch/constants';
 import { getCardUrl } from '../../search/eventSearch/utils';
 import styles from './upcomingEvents.module.scss';
 
@@ -61,6 +65,10 @@ const VenueUpcomingEvents: React.FC<VenueUpcomingEventsProps> = ({
     }
   }, [onEventsLoaded, cards.length, hasCards]);
 
+  // Show all URL should search for events that are happening in place
+  // eslint-disable-next-line @stylistic/max-len
+  const showAllUrl = `${ROUTES.SEARCH}?${PARAM_SEARCH_TYPE}=${EventTypeId.General}&${EVENT_SEARCH_FILTERS.PLACES}=${placeId}`;
+
   // Show the section when it's still loading or there are some events to be shown.
   if (loading || hasCards) {
     return (
@@ -80,6 +88,7 @@ const VenueUpcomingEvents: React.FC<VenueUpcomingEventsProps> = ({
               title={t('venue:upcomingEvents.title')}
               cards={cards}
               loading={loading}
+              showAllUrl={showAllUrl}
             />
           </LoadingSpinner>
         </ContentContainer>

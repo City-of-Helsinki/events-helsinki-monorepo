@@ -3,10 +3,10 @@ import {
   useLocale,
   useCommonTranslation,
   Visible,
+  CmsPageContent,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { HtmlToReact, usePageContext } from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';
 import { CATEGORY_CATALOG } from '../eventSearch/constants';
@@ -14,25 +14,6 @@ import { getSportsCategoryOptions } from '../eventSearch/utils';
 import styles from './landingPageSearch.module.scss';
 import LandingPageSearchForm from './LandingPageSearchForm';
 import SearchShortcuts from './SearchShortcuts';
-
-/**
- * Load CMS Page document from Page Context and render it as HTML
- * with <HtmlToReact/> -component.
- */
-const CmsPageContent: React.FC = () => {
-  const { page } = usePageContext();
-  const pageContent = page?.content?.trim() ? page?.content?.trim() : undefined;
-
-  return (
-    <>
-      {!!pageContent && (
-        <div className={styles.pageContent}>
-          <HtmlToReact>{pageContent}</HtmlToReact>
-        </div>
-      )}
-    </>
-  );
-};
 
 const Search: React.FC = () => {
   const { t } = useCommonTranslation();
@@ -55,6 +36,10 @@ const Search: React.FC = () => {
   const categories = getSportsCategoryOptions(
     t,
     CATEGORY_CATALOG.sportsCategories.landingPage
+  ).filter(
+    (category) =>
+      !category.seasons ||
+      category.seasons.some((season) => season === currentSeason)
   );
 
   return (
@@ -66,14 +51,10 @@ const Search: React.FC = () => {
         handleSubmit={handleSubmit}
       />
       <Visible above="s">
-        <CmsPageContent />
+        <CmsPageContent className={styles.pageContent} />
         <SearchShortcuts
           className={styles.categoriesWrapper}
-          categories={categories.filter(
-            (category) =>
-              !category.seasons ||
-              category.seasons.some((season) => season === currentSeason)
-          )}
+          categories={categories}
           searchFilters={{}}
         />
       </Visible>

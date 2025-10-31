@@ -8,6 +8,7 @@ import {
   getLocaleFromPathname,
   isVenueHelsinkiCityOwned,
   HelsinkiCityOwnedIcon,
+  useShouldShowAppBackArrow,
 } from '@events-helsinki/components';
 import type { ReturnParams } from '@events-helsinki/components/utils/eventQueryString.util';
 import { extractLatestReturnPath } from '@events-helsinki/components/utils/eventQueryString.util';
@@ -47,16 +48,14 @@ const ReturnPathNavBackArrow: React.FC = () => {
   };
 
   return (
-    <div className={styles.backButtonWrapper}>
-      <IconButton
-        role="link"
-        ariaLabel={t('venue:hero.ariaLabelBackButton')}
-        backgroundColor="white"
-        icon={<IconArrowLeft aria-hidden />}
-        onClick={() => goBack(returnParam)}
-        size="default"
-      />
-    </div>
+    <IconButton
+      role="link"
+      ariaLabel={t('venue:hero.ariaLabelBackButton')}
+      backgroundColor="white"
+      icon={<IconArrowLeft aria-hidden />}
+      onClick={() => goBack(returnParam)}
+      size="default"
+    />
   );
 };
 
@@ -64,7 +63,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
   const { t: commonTranslation } = useTranslation('common');
   const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
-
+  const shouldShowAppBackArrow = useShouldShowAppBackArrow();
   const isHelsinkiCityOwned = isVenueHelsinkiCityOwned(venue);
   const imageUrl = venue.image ? getSecureImage(venue.image) : '';
   const { streetAddress, addressLocality, connections, openingHours } = venue;
@@ -110,7 +109,9 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <ReturnPathNavBackArrow />
+          <div className={styles.backButtonWrapper}>
+            {shouldShowAppBackArrow && <ReturnPathNavBackArrow />}
+          </div>
           <div>
             <BackgroundImage
               className={styles.image}

@@ -1,4 +1,7 @@
-import { CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID } from '@events-helsinki/components';
+import {
+  CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID,
+  EVENT_SORT_OPTIONS,
+} from '@events-helsinki/components';
 import { EventTypeId } from '@events-helsinki/components/types';
 import {
   SPORT_COURSES_KEYWORDS,
@@ -56,16 +59,49 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     this.keywordOrSet1 = SPORT_COURSES_KEYWORDS;
     this.keywordOrSet2 = this.getSportsKeywords(input);
     this.keywordOrSet3 = this.getTargetGroupKeywords(input);
-    this.sort =
-      (eventType === EventTypeId.General
-        ? input.eventOrderBy
-        : input.courseOrderBy) ?? initialEventSearchAdapterValues.sort;
+    this.sort = this.getSortingValue(
+      eventType,
+      input.eventOrderBy,
+      input.courseOrderBy
+    );
     this.publisher =
       input.organization ?? initialEventSearchAdapterValues.publisher;
     this.publisherAncestor = input.helsinkiOnly
       ? CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID
       : initialEventSearchAdapterValues.publisherAncestor;
     this.superEvent = this.getSuperEvent(eventType);
+  }
+
+  /**
+   * Determines the correct sort parameter value for an API request.
+   *
+   * This function selects the appropriate sort order (`eventOrderBy` or `courseOrderBy`)
+   * based on the `eventType`. It also implements special handling for
+   * `EVENT_SORT_OPTIONS.RANK_DESC`.
+   *
+   * As per LinkedEvents API requirements (see LINK-2422), relevance sorting (rank)
+   * is activated by providing an *empty string* as the sort parameter when
+   * `x_full_text` is used, not the literal '-rank' value. This function
+   * performs that conversion.
+   *
+   * @param {EventTypeId} eventType The type of event, used to decide whether to use `eventOrderBy` or `courseOrderBy`.
+   * @param {EventSearchParams['sort']} [eventOrderBy] The sort value to use if `eventType` is `EventTypeId.General`.
+   * @param {EventSearchParams['sort']} [courseOrderBy] The sort value to use if `eventType` is `EventTypeId.Course`.
+   * @returns {string} The finalized sort parameter string. Returns an empty string (`''`)
+   * if the determined sort value is `EVENT_SORT_OPTIONS.RANK_DESC`,
+   * otherwise returns the selected or default sort value.
+   */
+  public getSortingValue(
+    eventType: EventTypeId,
+    eventOrderBy?: EventSearchParams['sort'],
+    courseOrderBy?: EventSearchParams['sort']
+  ): string {
+    const sortValue =
+      (eventType === EventTypeId.General ? eventOrderBy : courseOrderBy) ??
+      initialEventSearchAdapterValues.sort;
+
+    // RANK_DESC needs to be handled as an empty string.
+    return sortValue === EVENT_SORT_OPTIONS.RANK_DESC ? '' : sortValue;
   }
 
   /**

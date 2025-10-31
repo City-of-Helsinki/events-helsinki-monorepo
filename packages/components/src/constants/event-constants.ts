@@ -27,6 +27,18 @@ export enum EVENT_SORT_OPTIONS {
   LAST_MODIFIED_TIME_DESC = '-last_modified_time',
   START_TIME = 'start_time',
   START_TIME_DESC = '-start_time',
+  /**
+   * NOTE: Rank is effective only when using `x_full_text` -parameter.
+   *
+   * NOTE: Rank should not be explicitly set, but left empty instead, when wanted.
+   * The rank sorting needs a mandatory secondary order field and scoring annotation to queryset,
+   * which are only activated when `x_full_text` -parameter is used and sort-parameter is left empty.
+   *
+   * However, in our own apps' URL we want sort-param to be set and visible, so it needs to be converted on search.
+   *
+   * Ref. [LINK-2422](https://helsinkisolutionoffice.atlassian.net/browse/LINK-2422)
+   * */
+  RANK_DESC = '-rank',
 }
 
 export const isEventSortOption = (

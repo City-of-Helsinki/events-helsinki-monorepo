@@ -242,20 +242,11 @@ export const OfferButton: React.FC<
   );
 };
 
-const EventHero: React.FC<EventHeroProps> = ({
-  event,
-  superEvent,
-  withActions = true,
-}) => {
+const ReturnPathNavBackArrow: React.FC = () => {
   const { t } = useTranslation('event');
-  const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
-
-  const { imageUrl, keywords, today, thisWeek } = getEventFields(event, locale);
-
-  const showKeywords = Boolean(today || thisWeek || keywords.length);
   const returnParam = extractLatestReturnPath(search, `/${locale}`);
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
@@ -267,19 +258,36 @@ const EventHero: React.FC<EventHeroProps> = ({
   };
 
   return (
+    <div className={styles.backButtonWrapper}>
+      <IconButton
+        role="link"
+        ariaLabel={t('hero.ariaLabelBackButton')}
+        backgroundColor="white"
+        icon={<IconArrowLeft aria-hidden />}
+        onClick={() => goBack(returnParam)}
+        size="default"
+      />
+    </div>
+  );
+};
+
+const EventHero: React.FC<EventHeroProps> = ({
+  event,
+  superEvent,
+  withActions = true,
+}) => {
+  const { fallbackImageUrls } = useConfig();
+  const locale = useLocale();
+
+  const { imageUrl, keywords, today, thisWeek } = getEventFields(event, locale);
+
+  const showKeywords = Boolean(today || thisWeek || keywords.length);
+
+  return (
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
-          </div>
+          <ReturnPathNavBackArrow />
           <div>
             <BackgroundImage
               className={styles.image}

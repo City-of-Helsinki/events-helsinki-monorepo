@@ -29,3 +29,4 @@ export { default as useSuperEventLazyLoad } from './useSuperEventLazyLoad';
 export { default as useGeolocation } from './useGeolocation';
 export { default as useClearClosedEventsFromApolloCache } from './useClearClosedEventsFromApolloCache';
 export { default as usePreview } from './usePreview';
+export { default as useShouldShowAppBackArrow } from './useShouldShowAppBackArrow';

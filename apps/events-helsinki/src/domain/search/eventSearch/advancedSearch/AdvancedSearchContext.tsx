@@ -29,6 +29,8 @@ type SearchFormState = {
   setIsOnlyRemoteEvents: React.Dispatch<React.SetStateAction<boolean>>;
   isFree: boolean;
   setIsFree: React.Dispatch<React.SetStateAction<boolean>>;
+  sortOrder: string;
+  setSortOrder: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type AdvancedSearchContextType = SearchFormState & {

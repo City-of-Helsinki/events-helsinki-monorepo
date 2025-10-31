@@ -256,8 +256,7 @@ const EventHero: React.FC<EventHeroProps> = ({
   const { imageUrl, keywords, today, thisWeek } = getEventFields(event, locale);
 
   const showKeywords = Boolean(today || thisWeek || keywords.length);
-  const returnParam = extractLatestReturnPath(search, `/${locale}`);
-
+  const returnParam = extractLatestReturnPath(search, ``);
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
     const goBackUrl = `${
       returnPath.startsWith('/') ? '' : '/'
@@ -270,16 +269,19 @@ const EventHero: React.FC<EventHeroProps> = ({
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
-          </div>
+          {returnParam?.returnPath && (
+            <div className={styles.backButtonWrapper}>
+              <IconButton
+                role="link"
+                ariaLabel={t('hero.ariaLabelBackButton')}
+                backgroundColor="white"
+                icon={<IconArrowLeft aria-hidden />}
+                onClick={() => goBack(returnParam)}
+                size="default"
+              />
+            </div>
+          )}
+
           <div>
             <BackgroundImage
               className={styles.image}

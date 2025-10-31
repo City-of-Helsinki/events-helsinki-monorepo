@@ -27,6 +27,9 @@ export enum EVENT_SORT_OPTIONS {
   LAST_MODIFIED_TIME_DESC = '-last_modified_time',
   START_TIME = 'start_time',
   START_TIME_DESC = '-start_time',
+  // NOTE: Rank is effective only when using `x_full_text` -parameter.
+  RANK = 'rank',
+  RANK_DESC = '-rank',
 }
 
 export const isEventSortOption = (

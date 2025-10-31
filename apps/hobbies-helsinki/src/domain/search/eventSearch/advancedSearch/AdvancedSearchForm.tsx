@@ -71,6 +71,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     isFree,
     setIsFree,
     scrollToResultList,
+    sortOrder,
   } = useAdvancedSearchContext();
 
   const searchFilters = {
@@ -101,6 +102,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = () => {
     const filters = {
       ...searchFilters,
       [EVENT_SEARCH_FILTERS.TEXT]: [textSearchInput],
+      sort: sortOrder ?? undefined,
     };
     const search = getSearchQuery(filters);
 

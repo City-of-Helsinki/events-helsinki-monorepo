@@ -25,6 +25,8 @@ type SearchFormState = {
   setTextSearchInput: React.Dispatch<React.SetStateAction<string>>;
   isFree: boolean;
   setIsFree: React.Dispatch<React.SetStateAction<boolean>>;
+  sortOrder: string;
+  setSortOrder: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type AdvancedSearchContextType = SearchFormState & {

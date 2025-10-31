@@ -1,4 +1,8 @@
-import { EVENT_SEARCH_FILTERS } from '@events-helsinki/components';
+import {
+  DEFAULT_EVENT_SORT_OPTION,
+  EVENT_SEARCH_FILTERS,
+  isEventSortOption,
+} from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
@@ -7,7 +11,7 @@ import { clampAgeInput, getSearchFilters } from '../utils';
 
 export function useAdvancedSearchFormState() {
   const router = useRouter();
-  const params: { place?: string } = router.query;
+  const params: { place?: string; sort?: string } = router.query;
   const searchParams = React.useMemo(
     () => new URLSearchParams(queryString.stringify(router.query)),
     [router.query]
@@ -30,6 +34,10 @@ export function useAdvancedSearchFormState() {
   const [textSearchInput, setTextSearchInput] = React.useState('');
   const [isFree, setIsFree] = React.useState<boolean>(false);
 
+  const [sortOrder, setSortOrder] = React.useState<string>(
+    DEFAULT_EVENT_SORT_OPTION
+  );
+
   // Initialize fields when page is loaded
   React.useEffect(() => {
     const {
@@ -49,6 +57,11 @@ export function useAdvancedSearchFormState() {
       places.push(pathPlace);
     }
 
+    if (isEventSortOption(params.sort)) {
+      setSortOrder(params.sort);
+    } else {
+      setSortOrder('');
+    }
     setSelectedCategories(categories);
     setSelectedPlaces(places);
     setSelectedTexts(text || []);
@@ -66,6 +79,8 @@ export function useAdvancedSearchFormState() {
   }, [searchParams, params]);
 
   return {
+    sortOrder,
+    setSortOrder,
     categoryInput,
     setCategoryInput,
     ageInput,

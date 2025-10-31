@@ -16,11 +16,11 @@
   margin-bottom: 1.5rem;
   text-align: center;
 
-  @include breakpoints.respond_above(s) {
+  @include breakpoints.respond-above(s) {
     text-align: left;
   }
 
-  @include breakpoints.respond_above(m) {
+  @include breakpoints.respond-above(m) {
     margin-top: 0;
     margin-bottom: 2rem;
   }
@@ -36,7 +36,7 @@
     .loadMoreWrapper {
       margin-top: 1.5rem;
 
-      @include breakpoints.respond_above(s) {
+      @include breakpoints.respond-above(s) {
         margin-top: 0;
       }
     }

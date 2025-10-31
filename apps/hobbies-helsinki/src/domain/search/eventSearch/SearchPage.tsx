@@ -9,11 +9,13 @@ import {
   getLargeEventCardId,
   useEventListQuery,
   MAIN_CONTENT_ID,
-  EVENT_SORT_OPTIONS,
   EventList,
   useClearClosedEventsFromApolloCache,
   HELSINKI_OCD_DIVISION_ID,
   EVENT_SEARCH_FILTERS,
+  EventsOrderBySelect,
+  DEFAULT_EVENT_SORT_OPTION,
+  isEventSortOption,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
@@ -36,12 +38,15 @@ const useSearchQuery = () => {
     const searchParams = new URLSearchParams(
       queryString.stringify(router.query)
     );
+    const sortParam = searchParams.get('sort');
     const variables: QueryEventListArgs = getEventSearchVariables({
       include: AppConfig.eventSearchQueryIncludeParamValue,
       pageSize: AppConfig.pageSize,
       params: searchParams,
       place: params.place,
-      sortOrder: EVENT_SORT_OPTIONS.END_TIME,
+      sortOrder: isEventSortOption(sortParam)
+        ? sortParam
+        : DEFAULT_EVENT_SORT_OPTION,
       // Always filter with HELSINKI_OCD_DIVISION_ID to limit the results to city of Helsinki events.
       // NOTE: This is not needed if using any `*Ongoing` -filter as
       // they automatically limit the results to city of Helsinki events.
@@ -202,6 +207,7 @@ const SearchPage: React.FC<{
                     loadMoreButtonTheme="coat"
                   />
                 }
+                orderBySelectComponent={<EventsOrderBySelect />}
               />
             )}
           </LoadingSpinner>

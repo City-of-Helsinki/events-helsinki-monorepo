@@ -31,10 +31,8 @@ export interface Props {
   venue: Venue;
 }
 
-const VenueHero: React.FC<Props> = ({ venue }) => {
+const ReturnPathNavBackArrow: React.FC = () => {
   const { t } = useVenueTranslation();
-  const { t: commonTranslation } = useTranslation('common');
-  const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
@@ -47,6 +45,25 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
     router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
   };
+
+  return (
+    <div className={styles.backButtonWrapper}>
+      <IconButton
+        role="link"
+        ariaLabel={t('venue:hero.ariaLabelBackButton')}
+        backgroundColor="white"
+        icon={<IconArrowLeft aria-hidden />}
+        onClick={() => goBack(returnParam)}
+        size="default"
+      />
+    </div>
+  );
+};
+
+const VenueHero: React.FC<Props> = ({ venue }) => {
+  const { t: commonTranslation } = useTranslation('common');
+  const { fallbackImageUrls } = useConfig();
+  const locale = useLocale();
 
   const isHelsinkiCityOwned = isVenueHelsinkiCityOwned(venue);
   const imageUrl = venue.image ? getSecureImage(venue.image) : '';
@@ -93,16 +110,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('venue:hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
-          </div>
+          <ReturnPathNavBackArrow />
           <div>
             <BackgroundImage
               className={styles.image}

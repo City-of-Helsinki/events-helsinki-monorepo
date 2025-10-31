@@ -31,6 +31,7 @@ import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';
 import SkeletonLoader from '../../components/skeletonLoader/SkeletonLoader';
 import { EnrolmentStatusLabel } from '../../constants';
 import useLocale from '../../hooks/useLocale';
+import useShouldShowAppBackArrow from '../../hooks/useShouldShowAppBackArrow';
 import { useAppThemeContext } from '../../themeProvider';
 import type { EventFields, SuperEventResponse } from '../../types/event-types';
 import { extractLatestReturnPath } from '../../utils/eventQueryString.util';
@@ -242,20 +243,11 @@ export const OfferButton: React.FC<
   );
 };
 
-const EventHero: React.FC<EventHeroProps> = ({
-  event,
-  superEvent,
-  withActions = true,
-}) => {
+const ReturnPathNavBackArrow: React.FC = () => {
   const { t } = useTranslation('event');
-  const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
-
-  const { imageUrl, keywords, today, thisWeek } = getEventFields(event, locale);
-
-  const showKeywords = Boolean(today || thisWeek || keywords.length);
   const returnParam = extractLatestReturnPath(search, `/${locale}`);
 
   const goBack = ({ returnPath, remainingQueryString = '' }: ReturnParams) => {
@@ -267,18 +259,35 @@ const EventHero: React.FC<EventHeroProps> = ({
   };
 
   return (
+    <IconButton
+      role="link"
+      ariaLabel={t('hero.ariaLabelBackButton')}
+      backgroundColor="white"
+      icon={<IconArrowLeft aria-hidden />}
+      onClick={() => goBack(returnParam)}
+      size="default"
+    />
+  );
+};
+
+const EventHero: React.FC<EventHeroProps> = ({
+  event,
+  superEvent,
+  withActions = true,
+}) => {
+  const { fallbackImageUrls } = useConfig();
+  const locale = useLocale();
+  const shouldShowAppBackArrow = useShouldShowAppBackArrow();
+  const { imageUrl, keywords, today, thisWeek } = getEventFields(event, locale);
+
+  const showKeywords = Boolean(today || thisWeek || keywords.length);
+
+  return (
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
           <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
+            {shouldShowAppBackArrow && <ReturnPathNavBackArrow />}
           </div>
           <div>
             <BackgroundImage

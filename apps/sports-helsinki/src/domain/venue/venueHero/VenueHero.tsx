@@ -8,6 +8,7 @@ import {
   getLocaleFromPathname,
   isVenueHelsinkiCityOwned,
   HelsinkiCityOwnedIcon,
+  useShouldShowAppBackArrow,
 } from '@events-helsinki/components';
 import type { ReturnParams } from '@events-helsinki/components/utils/eventQueryString.util';
 import { extractLatestReturnPath } from '@events-helsinki/components/utils/eventQueryString.util';
@@ -31,10 +32,8 @@ export interface Props {
   venue: Venue;
 }
 
-const VenueHero: React.FC<Props> = ({ venue }) => {
+const ReturnPathNavBackArrow: React.FC = () => {
   const { t } = useVenueTranslation();
-  const { t: commonTranslation } = useTranslation('common');
-  const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
   const router = useRouter();
   const search = router.asPath.split('?')[1];
@@ -48,6 +47,23 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
     router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
   };
 
+  return (
+    <IconButton
+      role="link"
+      ariaLabel={t('venue:hero.ariaLabelBackButton')}
+      backgroundColor="white"
+      icon={<IconArrowLeft aria-hidden />}
+      onClick={() => goBack(returnParam)}
+      size="default"
+    />
+  );
+};
+
+const VenueHero: React.FC<Props> = ({ venue }) => {
+  const { t: commonTranslation } = useTranslation('common');
+  const { fallbackImageUrls } = useConfig();
+  const locale = useLocale();
+  const shouldShowAppBackArrow = useShouldShowAppBackArrow();
   const isHelsinkiCityOwned = isVenueHelsinkiCityOwned(venue);
   const imageUrl = venue.image ? getSecureImage(venue.image) : '';
   const { streetAddress, addressLocality, connections, openingHours } = venue;
@@ -94,14 +110,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
           <div className={styles.backButtonWrapper}>
-            <IconButton
-              role="link"
-              ariaLabel={t('venue:hero.ariaLabelBackButton')}
-              backgroundColor="white"
-              icon={<IconArrowLeft aria-hidden />}
-              onClick={() => goBack(returnParam)}
-              size="default"
-            />
+            {shouldShowAppBackArrow && <ReturnPathNavBackArrow />}
           </div>
           <div>
             <BackgroundImage

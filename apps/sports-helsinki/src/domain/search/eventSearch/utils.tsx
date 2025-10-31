@@ -1,6 +1,5 @@
 import type {
   AppLanguage,
-  EVENT_SORT_OPTIONS,
   EventFields,
   FilterType,
   KeywordOnClickHandlerType,
@@ -22,6 +21,7 @@ import {
   isEventFields,
   isVenue,
   scrollToTop,
+  EVENT_SORT_OPTIONS,
 } from '@events-helsinki/components';
 import {
   addDays,
@@ -244,7 +244,12 @@ export const getEventSearchVariables = ({
     pageSize,
     publisher,
     publisherAncestor: null,
-    sort: sortOrder,
+    /**
+     * As per LinkedEvents requirements (see LINK-2422; https://helsinkisolutionoffice.atlassian.net/browse/LINK-2422),
+     * relevance sorting (rank) is activated by providing an *empty string* as the sort parameter when
+     * `x_full_text` is used, not the literal '-rank' value.
+     */
+    sort: sortOrder === EVENT_SORT_OPTIONS.RANK_DESC ? '' : sortOrder,
     start,
     superEventType,
     superEvent,

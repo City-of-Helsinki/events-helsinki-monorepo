@@ -7,13 +7,13 @@ import {
   scrollToTop,
   EVENT_SEARCH_FILTERS,
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID,
+  EVENT_SORT_OPTIONS,
 } from '@events-helsinki/components';
 import type {
   AppLanguage,
   Meta,
   QueryEventListArgs,
   EventFields,
-  EVENT_SORT_OPTIONS,
   KeywordOnClickHandlerType,
   Venue,
 } from '@events-helsinki/components';
@@ -247,7 +247,12 @@ export const getEventSearchVariables = ({
     location: places.sort((a, b) => a.localeCompare(b)),
     pageSize,
     publisher,
-    sort: sortOrder,
+    /**
+     * As per LinkedEvents requirements (see LINK-2422; https://helsinkisolutionoffice.atlassian.net/browse/LINK-2422),
+     * relevance sorting (rank) is activated by providing an *empty string* as the sort parameter when
+     * `x_full_text` is used, not the literal '-rank' value.
+     */
+    sort: sortOrder === EVENT_SORT_OPTIONS.RANK_DESC ? '' : sortOrder,
     start,
     startsAfter,
     superEventType,

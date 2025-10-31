@@ -1,5 +1,10 @@
 import React from 'react';
-import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
+import {
+  PageSection,
+  ContentContainer,
+  usePageContext,
+  getTextFromHtml,
+} from 'react-helsinki-headless-cms';
 
 import AdvancedSearchContext from './AdvancedSearchContext';
 import { AdvancedSearchForm } from './AdvancedSearchForm';
@@ -17,6 +22,11 @@ export const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
   'data-testid': dataTestId,
 }) => {
   const searchFormState = useAdvancedSearchFormState();
+  const { page } = usePageContext();
+  const pageTitle = page?.title?.trim() ?? undefined;
+  const pageDescription = page?.content?.trim()
+    ? getTextFromHtml(page?.content)?.trim()
+    : undefined;
 
   const contextValue = React.useMemo(
     () => ({
@@ -35,7 +45,7 @@ export const AdvancedSearch: React.FC<AdvancedSearchProps> = ({
         data-testid={dataTestId}
       >
         <ContentContainer className={styles.contentContainer}>
-          <AdvancedSearchForm />
+          <AdvancedSearchForm title={pageTitle} description={pageDescription} />
         </ContentContainer>
       </PageSection>
     </AdvancedSearchContext.Provider>

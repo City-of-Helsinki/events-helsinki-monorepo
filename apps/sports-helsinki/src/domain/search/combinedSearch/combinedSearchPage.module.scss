@@ -23,7 +23,8 @@ $buttonWidth: 180px;
   .contentContainer {
     margin-bottom: 2.375rem;
 
-    h2 {
+    h2,
+    h3 {
       font-size: var(--fontsize-heading-xl);
       font-weight: 500;
       margin-top: 2px;
@@ -122,5 +123,17 @@ $buttonWidth: 180px;
         margin-top: var(--spacing-xs);
       }
     }
+  }
+}
+
+.searchTabsDescription {
+  margin: 0 auto;
+  max-width: var(--breakpoint-xl);
+  padding: 0 var(--spacing-m);
+
+  & p {
+    font-size: var(--fontsize-heading-s);
+    margin: 0 auto;
+    padding: 0 0 var(--spacing-m) 0;
   }
 }

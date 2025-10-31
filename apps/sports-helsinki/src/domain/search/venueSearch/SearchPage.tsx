@@ -66,7 +66,7 @@ const VenueSearchPage: React.FC<SearchPageProps> = ({
         favIconSvgUrl={meta?.favIconSvgUrl}
         manifestUrl={meta?.manifestUrl}
       />
-      <SrOnly as="h1">{pageTitle}</SrOnly>
+      <SrOnly as="h2">{pageTitle}</SrOnly>
       {SearchComponent && (
         <SearchComponent
           scrollToResultList={scrollToResultList}
@@ -74,7 +74,7 @@ const VenueSearchPage: React.FC<SearchPageProps> = ({
           searchUtilities={
             <VenueSearchUtilities switchShowMode={switchShowMode} />
           }
-          showTitle
+          title={pageTitle}
           korosBottom
         />
       )}

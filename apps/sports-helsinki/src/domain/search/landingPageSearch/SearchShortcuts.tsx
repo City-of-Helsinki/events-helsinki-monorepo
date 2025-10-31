@@ -33,7 +33,10 @@ export default function SearchShortcuts({
   };
 
   return (
-    <div className={classNames(className, 'searchShortcuts')}>
+    <div
+      id="searchShortcuts"
+      className={classNames(className, 'searchShortcuts')}
+    >
       {categories.map((category) => {
         return (
           <CategoryFilter

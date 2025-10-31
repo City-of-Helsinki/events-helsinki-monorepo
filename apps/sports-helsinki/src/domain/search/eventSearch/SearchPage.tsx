@@ -71,7 +71,7 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
         favIconSvgUrl={meta?.favIconSvgUrl}
         manifestUrl={meta?.manifestUrl}
       />
-      <SrOnly as="h1">{pageTitle}</SrOnly>
+      <SrOnly as="h2">{pageTitle}</SrOnly>
       {SearchComponent && (
         <SearchComponent
           scrollToResultList={scrollToResultList}

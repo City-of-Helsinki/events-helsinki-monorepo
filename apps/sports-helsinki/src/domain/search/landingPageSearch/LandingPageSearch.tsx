@@ -2,6 +2,8 @@ import {
   getCurrentSeason,
   useLocale,
   useCommonTranslation,
+  Visible,
+  CmsPageContent,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -18,6 +20,7 @@ const Search: React.FC = () => {
   const [textSearchInput, setTextSearchInput] = React.useState('');
   const router = useRouter();
   const locale = useLocale();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
@@ -28,13 +31,16 @@ const Search: React.FC = () => {
       },
     });
   };
+  const currentSeason = getCurrentSeason();
 
   const categories = getSportsCategoryOptions(
     t,
     CATEGORY_CATALOG.sportsCategories.landingPage
+  ).filter(
+    (category) =>
+      !category.seasons ||
+      category.seasons.some((season) => season === currentSeason)
   );
-
-  const currentSeason = getCurrentSeason();
 
   return (
     <div>
@@ -44,15 +50,14 @@ const Search: React.FC = () => {
         setTextSearchInput={setTextSearchInput}
         handleSubmit={handleSubmit}
       />
-      <SearchShortcuts
-        className={styles.categoriesWrapper}
-        categories={categories.filter(
-          (category) =>
-            !category.seasons ||
-            category.seasons.some((season) => season === currentSeason)
-        )}
-        searchFilters={{}}
-      />
+      <Visible above="s">
+        <CmsPageContent className={styles.pageContent} />
+        <SearchShortcuts
+          className={styles.categoriesWrapper}
+          categories={categories}
+          searchFilters={{}}
+        />
+      </Visible>
     </div>
   );
 };

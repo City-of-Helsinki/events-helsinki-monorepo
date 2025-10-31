@@ -47,6 +47,8 @@
     "titleDropdownPlace": "Etsi tapahtumapaikka",
     "placeholder": "Kirjoita hakusana, esim. ranska tai ruoanlaitto",
     "labelSearchField": "Mitä etsit?",
+    "titlePage": "Mitä etsit?",
+    "descriptionPage": "",
     "checkboxAlsoOngoingCourses": "Näytä myös meneillään olevat",
     "checkboxIsFree": "Näytä vain maksuttomat",
     "titleDropdownTargetGroup": "Kohderyhmä",

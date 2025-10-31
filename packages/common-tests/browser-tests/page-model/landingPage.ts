@@ -16,14 +16,6 @@ class LandingPage {
     console.log('LandingPage: verify');
     const searchPlaceholderText = i18n.t(`home:search.placeholder`);
 
-    await t
-      .expect(
-        screen.getByRole('heading', {
-          name: i18n.t(`${this.appNamespace}:home.search.title`) ?? '',
-        }).exists
-      )
-      .ok();
-
     const searchInput = screen.findByPlaceholderText(searchPlaceholderText);
 
     // NOTE: There is some debounce wait time set to the search

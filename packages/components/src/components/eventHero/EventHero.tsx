@@ -31,6 +31,7 @@ import InfoWithIcon from '../../components/infoWithIcon/InfoWithIcon';
 import SkeletonLoader from '../../components/skeletonLoader/SkeletonLoader';
 import { EnrolmentStatusLabel } from '../../constants';
 import useLocale from '../../hooks/useLocale';
+import useShouldShowAppBackArrow from '../../hooks/useShouldShowAppBackArrow';
 import { useAppThemeContext } from '../../themeProvider';
 import type { EventFields, SuperEventResponse } from '../../types/event-types';
 import { extractLatestReturnPath } from '../../utils/eventQueryString.util';
@@ -258,16 +259,14 @@ const ReturnPathNavBackArrow: React.FC = () => {
   };
 
   return (
-    <div className={styles.backButtonWrapper}>
-      <IconButton
-        role="link"
-        ariaLabel={t('hero.ariaLabelBackButton')}
-        backgroundColor="white"
-        icon={<IconArrowLeft aria-hidden />}
-        onClick={() => goBack(returnParam)}
-        size="default"
-      />
-    </div>
+    <IconButton
+      role="link"
+      ariaLabel={t('hero.ariaLabelBackButton')}
+      backgroundColor="white"
+      icon={<IconArrowLeft aria-hidden />}
+      onClick={() => goBack(returnParam)}
+      size="default"
+    />
   );
 };
 
@@ -278,7 +277,7 @@ const EventHero: React.FC<EventHeroProps> = ({
 }) => {
   const { fallbackImageUrls } = useConfig();
   const locale = useLocale();
-
+  const shouldShowAppBackArrow = useShouldShowAppBackArrow();
   const { imageUrl, keywords, today, thisWeek } = getEventFields(event, locale);
 
   const showKeywords = Boolean(today || thisWeek || keywords.length);
@@ -287,7 +286,9 @@ const EventHero: React.FC<EventHeroProps> = ({
     <PageSection className={classNames(styles.heroSection)}>
       <ContentContainer className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
-          <ReturnPathNavBackArrow />
+          <div className={styles.backButtonWrapper}>
+            {shouldShowAppBackArrow && <ReturnPathNavBackArrow />}
+          </div>
           <div>
             <BackgroundImage
               className={styles.image}

@@ -67,7 +67,7 @@ const VenueUpcomingEvents: React.FC<VenueUpcomingEventsProps> = ({
 
   // Show all URL should search for events that are happening in place
   // eslint-disable-next-line @stylistic/max-len
-  const showAllUrl = `${ROUTES.SEARCH}?${PARAM_SEARCH_TYPE}=${EventTypeId.General}&${EVENT_SEARCH_FILTERS.PLACES}=${placeId}`;
+  const showAllUrl = `${ROUTES.SEARCH}?${PARAM_SEARCH_TYPE}=${EventTypeId.Course}&${EVENT_SEARCH_FILTERS.PLACES}=${placeId}`;
 
   // Show the section when it's still loading or there are some events to be shown.
   if (loading || hasCards) {

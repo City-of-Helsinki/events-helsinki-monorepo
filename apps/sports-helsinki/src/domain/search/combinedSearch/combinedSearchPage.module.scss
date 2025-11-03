@@ -108,12 +108,8 @@ $buttonWidth: 180px;
     @include breakpoints.respond-below(l) {
       display: grid;
       grid-template-columns: 1fr;
-      & > div:nth-child(2) {
-        order: 2;
-      }
 
       & > button {
-        order: 1;
         margin: 0 0 var(--spacing-xs) 0;
       }
     }

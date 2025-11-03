@@ -30,10 +30,6 @@ const EventsOrderBySelect: React.FC<{
       value: EVENT_SORT_OPTIONS.RANK_DESC,
     },
     {
-      text: t('search:orderBy.lastModifiedTime'),
-      value: EVENT_SORT_OPTIONS.LAST_MODIFIED_TIME_DESC,
-    },
-    {
       text: t('search:orderBy.startTime'),
       value: EVENT_SORT_OPTIONS.START_TIME,
     },

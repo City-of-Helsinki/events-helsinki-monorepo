@@ -2,7 +2,7 @@
 
 .keyword {
   &.hideOnMobile {
-    @include breakpoints.respond_below(s) {
+    @include breakpoints.respond-below(s) {
       display: none;
     }
   }
@@ -15,7 +15,7 @@
   }
 
   &.blackOnMobile {
-    @include breakpoints.respond_below(s) {
+    @include breakpoints.respond-below(s) {
       background-color: var(--color-black-80);
       color: var(--color-white);
     }

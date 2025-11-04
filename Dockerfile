@@ -156,6 +156,12 @@ CMD ["sh", "-c", "echo ${PROJECT}"]
 
 FROM registry.access.redhat.com/ubi9/nodejs-22  AS develop
 
+USER root
+
+# install yarn
+RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
+RUN yum -y install yarn
+
 # Use non-root user
 USER default
 
@@ -165,9 +171,18 @@ ARG APP_PORT
 
 ENV NODE_ENV=development
 
+# Enable hot reload by default by polling for file changes.
+#
+# NOTE: Can be disabled by setting WATCHPACK_POLLING=false in used env file,
+#       if hot reload works on your system without polling to save CPU time.
+ARG WATCHPACK_POLLING=true
+ENV WATCHPACK_POLLING=${WATCHPACK_POLLING}
+
 WORKDIR /app
 
 COPY --from=deps --chown=default:root /workspace-install ./
+
+RUN yarn install --immutable --inline-builds
 
 ENV PORT ${APP_PORT:-3000}
 

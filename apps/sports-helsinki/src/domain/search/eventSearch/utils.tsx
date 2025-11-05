@@ -8,7 +8,6 @@ import type {
   SPORTS_CATEGORIES,
   TARGET_GROUPS,
   Venue,
-  Option,
   AccessibilityProfile,
 } from '@events-helsinki/components';
 
@@ -31,6 +30,7 @@ import {
   startOfWeek,
   subDays,
 } from 'date-fns';
+import type { Option } from 'hds-react';
 import type { NextRouter } from 'next/router';
 import type { TFunction } from 'next-i18next';
 import { ROUTES } from '../../../constants';
@@ -59,7 +59,7 @@ export const MIN_AGE = 0;
 export const MAX_AGE = 99;
 
 export const sortOptionsAlphabetically = (a: Option, b: Option) =>
-  a.text > b.text ? 1 : b.text > a.text ? -1 : 0;
+  a.label > b.label ? 1 : b.label > a.label ? -1 : 0;
 
 export const sortExtendedCategoryOptions = (
   a: CategoryOption,
@@ -102,8 +102,12 @@ export const getAccessibilityProfileOptions = (
   accessibilities: AccessibilityProfile[] = ACCESSIBILITY_PROFILES
 ): Option[] =>
   accessibilities.map((accessibility) => ({
-    text: t(`accessibilityProfile.${accessibility}`),
+    label: t(`accessibilityProfile.${accessibility}`),
     value: accessibility,
+    isGroupLabel: false,
+    visible: true,
+    disabled: false,
+    selected: false,
   }));
 
 /**

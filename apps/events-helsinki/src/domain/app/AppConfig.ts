@@ -3,7 +3,9 @@ import {
   EventTypeId,
   ignoredErrorCodesHeader,
 } from '@events-helsinki/components';
-import type { CommonButtonProps } from 'hds-react';
+
+import { ButtonPresetTheme, ButtonVariant } from 'hds-react';
+import type { ButtonProps } from 'hds-react';
 import getConfig from 'next/config';
 import { ROUTES } from '../../constants';
 
@@ -139,11 +141,14 @@ class AppConfig {
   }
 
   /** A default HDS theme for the buttons. https://hds.hel.fi/foundation/design-tokens/colour. */
-  static readonly defaultButtonTheme: CommonButtonProps['theme'] = 'default';
+  static readonly defaultButtonTheme: ButtonProps['theme'] =
+    ButtonPresetTheme.Bus;
 
   /** A primary variant for the buttons. https://hds.hel.fi/foundation/design-tokens/colour. */
-  static readonly defaultButtonVariant: CommonButtonProps['variant'] =
-    'success';
+  static readonly defaultButtonVariant: Exclude<
+    ButtonVariant,
+    ButtonVariant.Supplementary
+  > = ButtonVariant.Success;
 
   static get matomoConfiguration() {
     const matomoUrlBase = process.env.NEXT_PUBLIC_MATOMO_URL_BASE;

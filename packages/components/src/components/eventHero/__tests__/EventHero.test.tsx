@@ -98,12 +98,12 @@ it('should render today tag', () => {
   renderComponent();
 
   expect(
-    screen.getByRole('link', {
+    screen.getByRole('button', {
       name: translations.event.categories.labelToday,
     })
   ).toBeInTheDocument();
   expect(
-    screen.queryByRole('link', {
+    screen.queryByRole('button', {
       name: translations.event.categories.labelThisWeek,
     })
   ).not.toBeInTheDocument();
@@ -114,12 +114,12 @@ it('should render this week tag', () => {
   renderComponent();
 
   expect(
-    screen.queryByRole('link', {
+    screen.queryByRole('button', {
       name: translations.event.categories.labelToday,
     })
   ).not.toBeInTheDocument();
   expect(
-    screen.getByRole('link', {
+    screen.getByRole('button', {
       name: translations.event.categories.labelThisWeek,
     })
   ).toBeInTheDocument();

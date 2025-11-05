@@ -9,6 +9,7 @@ import {
   HelsinkiCityOwnedIcon,
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
 } from '@events-helsinki/components';
+import { ButtonPresetTheme } from 'hds-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
@@ -83,7 +84,7 @@ export default function useHobbiesRHHCConfig(args: {
         ),
       },
       customCopy: {
-        loadMoreButtonTheme: 'coat',
+        loadMoreButtonTheme: ButtonPresetTheme.Coat,
       },
       siteName: resilientT('appHobbies:appName'),
       currentLanguageCode: getLanguageCode(locale),

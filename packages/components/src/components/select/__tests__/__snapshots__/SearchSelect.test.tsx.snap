@@ -3,57 +3,90 @@
 exports[`SearchSelect > successful cases > renders properly 1`] = `
 <div>
   <div
-    class="Select-module_root__Ka5uO _select_12d8cc _searchSelect_481aa4"
+    class="_select_12d8cc _searchSelect_481aa4 Select-module_root__-GjU5"
+    id="accessibilityProfile"
+    tabindex="-1"
   >
     <label
       class="FieldLabel-module_label__1zrXK "
-      for="accessibilityProfile-toggle-button"
+      for="accessibilityProfile-main-button"
       id="accessibilityProfile-label"
     >
       label
     </label>
     <div
-      class="Select-module_wrapper__1WQXs"
+      class="Select-module_selectAndListContainer__vSJEv"
     >
-      <button
-        aria-expanded="false"
-        aria-haspopup="listbox"
-        aria-labelledby="accessibilityProfile-label accessibilityProfile-toggle-button"
-        aria-owns="accessibilityProfile-menu"
-        class="Select-module_button__1aIsm Select-module_placeholder__21c0j"
-        id="accessibilityProfile-toggle-button"
-        type="button"
+      <div
+        class="Select-module_selectedOptionsContainer__16tlC"
       >
-        <span
-          class="Select-module_buttonLabel__1fqu5"
+        <button
+          aria-controls="accessibilityProfile-list"
+          aria-disabled="false"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-label="label. placeholder. 0 valittua vaihtoehtoa."
+          class="Select-module_dropdownButton__2-_Ec Select-module_selectedOptions__VmvqD Select-module_placeholder__nKgDE Select-module_singleSelect__3hwAT"
+          id="accessibilityProfile-main-button"
+          role="combobox"
+          type="button"
         >
-          placeholder
-        </span>
-        <svg
-          aria-hidden="true"
-          aria-label="angle-down"
-          class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_s__2WGWe icon_hds-icon--size-s__2Lkik Select-module_angleIcon__2-9AD"
-          role="img"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+          <div
+            aria-hidden="true"
+            class="Select-module_labels__2FlKK"
+          >
+            <span
+              class="Select-module_dropdownButtonOption__3Tfsz"
+              data-testid="placeholder"
+            >
+              placeholder
+            </span>
+          </div>
+          <div
+            class="Select-module_arrowAndSpaceForClearButton__3Fufw Select-module_icon__3AwlD"
+          >
+            <svg
+              aria-hidden="true"
+              aria-label="angle-down"
+              class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_small__gTGkU icon_hds-icon--size-s__2Lkik Select-module_angleIcon__3A9li"
+              role="img"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12 13.5L17 8.5L18.5 10L12 16.5L5.5 10L7 8.5L12 13.5Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </button>
+      </div>
+      <div
+        aria-hidden="true"
+        class="Select-module_listAndInputContainer__2gZ6q"
+        id="accessibilityProfile-sl-container"
+      >
+        <div
+          class="Select-module_listContainer__2PfQA"
+          style="max-height: 286px;"
         >
-          <path
-            clip-rule="evenodd"
-            d="M12 13.5L17 8.5L18.5 10L12 16.5L5.5 10L7 8.5L12 13.5Z"
-            fill="currentColor"
-            fill-rule="evenodd"
+          <ul
+            aria-multiselectable="false"
+            class="Select-module_list__2iKlZ"
+            id="accessibilityProfile-list"
+            role="listbox"
+            tabindex="-1"
           />
-        </svg>
-      </button>
-      <ul
-        aria-labelledby="accessibilityProfile-label"
-        class="Select-module_menu__1H2aU"
-        id="accessibilityProfile-menu"
-        role="listbox"
-        style="max-height: 260px;"
-        tabindex="-1"
-      />
+        </div>
+      </div>
     </div>
+    <div
+      aria-live="polite"
+      class="Select-module_screenReaderNotifications__2wzzH"
+      data-testid="hds-select-screen-reader-notifications"
+    />
   </div>
 </div>
 `;

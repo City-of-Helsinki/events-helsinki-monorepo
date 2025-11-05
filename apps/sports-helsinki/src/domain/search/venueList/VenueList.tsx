@@ -6,7 +6,7 @@ import {
   useLocale,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { Button } from 'hds-react';
+import { Button, ButtonVariant } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import getVenueSourceId from '../../../domain/venue/utils/getVenueSourceId';
@@ -71,7 +71,7 @@ const VenueList: React.FC<Props> = ({
       >
         <LoadingSpinner hasPadding={!venues.length} isLoading={loading}>
           {hasNext && (
-            <Button onClick={onLoadMore} variant="success">
+            <Button onClick={onLoadMore} variant={ButtonVariant.Success}>
               {t('buttonLoadMore', { count: venuesLeft })}
             </Button>
           )}

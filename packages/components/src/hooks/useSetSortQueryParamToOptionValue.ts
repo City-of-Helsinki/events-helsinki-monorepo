@@ -1,11 +1,11 @@
+import type { Option as HDSOption } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import type { Option } from '../types/types';
 
 const useSetSortQueryParamToOptionValue = () => {
   const router = useRouter();
   return useCallback(
-    async (option: Option) => {
+    async (_selectedOptions: HDSOption[], option: HDSOption) => {
       return router.push(
         {
           pathname: router.pathname,

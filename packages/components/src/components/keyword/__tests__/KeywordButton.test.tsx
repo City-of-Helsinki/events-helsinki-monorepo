@@ -19,7 +19,7 @@ it('calls onClick callback when clicking', async () => {
 
   expect(screen.getByText(keyword)).toBeInTheDocument();
 
-  await userEvent.click(screen.getByRole('link'));
+  await userEvent.click(screen.getByRole('button'));
 
   expect(onClickMock).toHaveBeenCalled();
 });

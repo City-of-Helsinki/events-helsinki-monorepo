@@ -47,7 +47,7 @@ const ShareLinks: React.FC<ShareLinksProps> = ({ title }) => {
             }
             aria-label={t('common:shareLinks.buttonCopyLink')}
           >
-            <IconLink ariaLabel={t('common:shareLinks.buttonCopyLink')} />
+            <IconLink aria-label={t('common:shareLinks.buttonCopyLink')} />
           </CopyButton>
         </li>
         <li className={styles.shareLinkItem}>

@@ -61,12 +61,12 @@ it('should render keywords and handle click', async () => {
 
   keywordNames.forEach((keyword) => {
     expect(
-      screen.getByRole('link', { name: new RegExp(keyword, 'i') })
+      screen.getByRole('button', { name: new RegExp(keyword, 'i') })
     ).toBeInTheDocument();
   });
 
   await userEvent.click(
-    screen.getByRole('link', { name: new RegExp(keywordNames[0], 'i') })
+    screen.getByRole('button', { name: new RegExp(keywordNames[0], 'i') })
   );
   expect(router).toMatchObject({
     asPath: '/fi/haku?type=text&value=Keyword+1',
@@ -103,7 +103,7 @@ it('should render today tag and handle click', async () => {
     </AppRoutingProvider>
   );
   await userEvent.click(
-    screen.getByRole('link', {
+    screen.getByRole('button', {
       name: translations.event.categories.labelToday,
     })
   );
@@ -125,7 +125,7 @@ it('should render this week tag and handle click', async () => {
     </AppRoutingProvider>
   );
   await userEvent.click(
-    screen.getByRole('link', {
+    screen.getByRole('button', {
       name: translations.event.categories.labelThisWeek,
     })
   );
@@ -151,7 +151,7 @@ it('should hide buy button for free events', () => {
   );
 
   expect(
-    screen.getByRole('link', {
+    screen.getByRole('button', {
       name: translations.event.categories.labelFree,
     })
   ).toBeInTheDocument();

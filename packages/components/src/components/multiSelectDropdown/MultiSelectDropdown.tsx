@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { IconAngleDown, IconAngleUp, IconSearch } from 'hds-react';
+import { IconAngleDown, IconAngleUp, IconSearch, IconSize } from 'hds-react';
 import React from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation';
@@ -365,7 +365,7 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
       >
         {showSearch && (
           <div className={styles.inputWrapper}>
-            <IconSearch size="s" aria-hidden />
+            <IconSearch size={IconSize.Small} aria-hidden />
             <SearchLabel htmlFor={name} srOnly={true}>
               {inputPlaceholderText}
             </SearchLabel>

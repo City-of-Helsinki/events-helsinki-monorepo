@@ -1,5 +1,9 @@
 {
   "groups": {
+    "essentials": {
+      "title": "Essential cookies",
+      "description": "Essential cookies help to make the website usable by allowing basic functions, navigating the page and using the protected areas of the site. The website will not work properly without these cookies and their consent is not required."
+    },
     "optionalServiceMap": {
       "title": "Service Map",
       "text": "The Service Map of the Helsinki Metropolitan Area helps users in finding an event on the map",
@@ -20,6 +24,7 @@
     }
   },
   "cookies": {
+    "app": "Used by {{ appName }} to store information about whether visitors have given or declined the use of cookie categories used on the site.",
     "matomo": "A cookie of the Matomo statistics system.",
     "askem": "A record related to the operation of the Askem react buttons.",
     "linkedevents": "A cookie to authorise the retrieval of events.",
@@ -44,5 +49,34 @@
   "askem": {
     "cookiesRequiredDescription": "To use this feature, you must accept cookies from the site. You can provide feedback on this page by enabling statistics-related cookies.",
     "cookiesRequiredTitle": "Feedback buttons cannot be displayed"
+  },
+  "hdsCookieConsent": {
+    "bannerAriaLabel": "Cookie settings",
+    "heading": "{{siteName}} uses cookies",
+    "description": "This website uses required cookies to ensure the basic functionality and performance. In addition, we use targeting cookies to improve the user experience, perform analytics and display personalised content.",
+    "showDetails": "Show details",
+    "hideDetails": "Hide details",
+    "formHeading": "About the cookies used on the website",
+    "formText": "The cookies used on the website have been classified according to their intended use. Below, you can read about the various categories and accept or reject the use of cookies.",
+    "highlightedGroup": "You need to accept this category to display the content you have selected.",
+    "highlightedGroupAria": "Good to know for category: {{title}}",
+    "showCookieSettings": "Show cookie settings",
+    "hideCookieSettings": "Hide cookie settings",
+    "acceptedAt": "You have accepted this category: {{date}} at {{time}}.",
+    "tableHeadingsName": "Name",
+    "tableHeadingsHostName": "Cookie set by",
+    "tableHeadingsDescription": "Purpose of use",
+    "tableHeadingsExpiration": "Period of validity",
+    "tableHeadingsType": "Type",
+    "approveAllConsents": "Accept all cookies",
+    "approveRequiredAndSelectedConsents": "Accept selected cookies",
+    "approveOnlyRequiredConsents": "Accept required cookies only",
+    "settingsSaved": "Settings saved!",
+    "notificationAriaLabel": "Annoucement",
+    "storageType1": "Cookie",
+    "storageType2": "localStorage",
+    "storageType3": "sessionStorage",
+    "storageType4": "IndexedDB",
+    "storageType5": "Cache Storage"
   }
 }

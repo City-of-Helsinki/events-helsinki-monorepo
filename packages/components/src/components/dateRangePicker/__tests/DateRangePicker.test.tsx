@@ -144,12 +144,15 @@ describe('date range input', () => {
     });
     await userEvent.type(endDateInput, '22.6.2021');
 
+    await userEvent.tab();
+
     await screen.findByText(
       translations.common.dateSelector.errorEndDateBeforeStartDate
     );
 
     await userEvent.clear(endDateInput);
     await userEvent.type(endDateInput, '24.6.2021');
+    await userEvent.tab();
 
     expect(
       screen.queryByText(

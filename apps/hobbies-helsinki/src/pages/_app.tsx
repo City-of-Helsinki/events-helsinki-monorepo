@@ -61,6 +61,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
             locale
           )}
           withConsent={pathname !== ROUTES.COOKIE_CONSENT}
+          consentUrl={ROUTES.COOKIE_CONSENT}
           asPath={asPath}
           defaultButtonTheme={AppConfig.defaultButtonTheme}
           defaultButtonVariant={AppConfig.defaultButtonVariant}

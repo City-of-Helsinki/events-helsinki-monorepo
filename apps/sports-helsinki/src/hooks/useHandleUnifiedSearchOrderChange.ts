@@ -8,8 +8,8 @@ import type {
   OrderDirType,
   GeolocationContextType,
   Coordinates,
-  Option,
 } from '@events-helsinki/components';
+import type { Option } from 'hds-react';
 import { useCallback } from 'react';
 import { useCombinedSearchContext } from '../domain/search/combinedSearch/adapters/CombinedSearchContext';
 
@@ -21,44 +21,56 @@ const useHandleUnifiedSearchOrderChange = () => {
     formValues: { accessibilityProfile },
   } = useCombinedSearchContext();
 
-  // Provide a callback for onChange-handler
+  // Return a synchronous callback
   return useCallback(
-    async (option: Option) => {
+    (_selectedOptions: Option[], option: Option) => {
       const [orderBy, orderDir] = option.value.split('-') as [
         UnifiedSearchOrderByType,
         OrderDirType,
       ];
-      if (isAccessibilityProfile(option.value)) {
-        // Update the combined search form context
-        setFormValues({
-          venueOrderBy: option.value,
-        });
-      } else {
-        // If the user wants to order by distance, try and resolve geolocation
-        if (orderBy === UnifiedSearchOrderBy.distance) {
-          let location: Coordinates | null = geolocation.coordinates;
 
-          if (!geolocation.called || !geolocation.coordinates) {
-            // Wait until position is resolved. This defers querying search
-            // results until location is resolved, which will result in less UI
-            // states and a slightly better UX.
-            location = await geolocation.resolve();
+      const handleSelectionLogic = async () => {
+        if (isAccessibilityProfile(option.value)) {
+          setFormValues({
+            venueOrderBy: option.value,
+          });
+        } else {
+          // If sorting by distance, handle geolocation resolution
+          if (orderBy === UnifiedSearchOrderBy.distance) {
+            let location: Coordinates | null = geolocation.coordinates;
+
+            if (!geolocation.called || !geolocation.coordinates) {
+              try {
+                // This is the blocking part
+                location = await geolocation.resolve();
+              } catch (e) {
+                // Handle permission denial or timeout here
+                // eslint-disable-next-line no-console
+                console.error('Failed to resolve location', e);
+                return;
+              }
+            }
+
+            if (!location) {
+              return;
+            }
           }
 
-          // If location could not be found, return early and do not change
-          // ordering.
-          if (!location) {
-            return null;
-          }
+          setFormValues({
+            venueOrderBy: orderDir === 'desc' ? `-${orderBy}` : orderBy,
+          });
         }
 
-        // Update the combined search form context
-        setFormValues({
-          venueOrderBy: orderDir === 'desc' ? `-${orderBy}` : orderBy,
-        });
-      }
-      // Update the URL
-      updateRouteToSearchPage({ shallow: true });
+        // Update URL after logic is complete
+        updateRouteToSearchPage({ shallow: true });
+      };
+
+      // Execute the logic immediately.
+      // The outer callback returns 'void' immediately, satisfying the UI component.
+      handleSelectionLogic().catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error('Error in search order change handler:', error);
+      });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [geolocation, accessibilityProfile]

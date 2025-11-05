@@ -1,5 +1,9 @@
 {
   "groups": {
+    "essentials": {
+      "title": "Välttämättömät toiminnalliset evästeet",
+      "description": "Välttämättömät evästeet auttavat tekemään verkkosivustosta käyttökelpoisen sallimalla perustoimintoja, kuten sivulla siirtymisen ja sivuston suojattujen alueiden käytön. Verkkosivusto ei toimi kunnolla ilman näitä evästeitä eikä niihin tarvita suostumusta."
+    },
     "optionalServiceMap": {
       "title": "Palvelukartta",
       "text": "Pääkaupunkiseudun palvelukartta auttaa käyttäjää etsimään tapahtuman kartalta",
@@ -20,6 +24,7 @@
     }
   },
   "cookies": {
+    "app": "{{ appName }} -sivusto käyttää tätä evästettä tietojen tallentamiseen siitä, ovatko kävijät antaneet hyväksyntänsä tai kieltäytyneet evästeiden käytöstä.",
     "matomo": "Matomo-tilastointijärjestelmän eväste.",
     "askem": "Askem-reaktionappien toimintaan liittyvä tietue.",
     "linkedevents": "Eväste tapahtumien hakemisen valtuuttamiseen.",
@@ -44,5 +49,34 @@
   "askem": {
     "cookiesRequiredDescription": "Toiminnon käyttämiseksi vaaditaan, että hyväksyt sivuston evästeet. Pääset antamaan palautetta tästä sivusta sallimalla evästeasetuksista tilastointiin liittyvät evästeet.",
     "cookiesRequiredTitle": "Sivun palautenappeja ei voida näyttää"
+  },
+  "hdsCookieConsent": {
+    "bannerAriaLabel": "Evästeasetukset",
+    "heading": "{{siteName}} käyttää evästeitä",
+    "description": "Tämä sivusto käyttää välttämättömiä evästeitä sivun perustoimintojen ja suorituskyvyn varmistamiseksi. Lisäksi käytämme kohdennusevästeitä käyttäjäkokemuksen parantamiseksi, analytiikkaan ja yksilöidyn sisällön näyttämiseen.",
+    "showDetails": "Näytä yksityiskohdat",
+    "hideDetails": "Piilota yksityiskohdat",
+    "formHeading": "Tietoa sivustolla käytetyistä evästeistä",
+    "formText": "Sivustolla käytetyt evästeet on luokiteltu käyttötarkoituksen mukaan. Alla voit lukea eri luokista ja sallia tai kieltää evästeiden käytön.",
+    "highlightedGroup": "Sinun on hyväksyttävä tämä kategoria, jotta voit näyttää valitsemasi sisällön.",
+    "highlightedGroupAria": "Hyvä tietää kategorialle: {{title}}",
+    "showCookieSettings": "Näytä evästeasetukset",
+    "hideCookieSettings": "Piilota evästeasetukset",
+    "acceptedAt": "Olet hyväksynyt tämän kategorian: {{date}} klo {{time}}.",
+    "tableHeadingsName": "Nimi",
+    "tableHeadingsHostName": "Evästeen asettaja",
+    "tableHeadingsDescription": "Käyttötarkoitus",
+    "tableHeadingsExpiration": "Voimassaoloaika",
+    "tableHeadingsType": "Tyyppi",
+    "approveAllConsents": "Hyväksy kaikki evästeet",
+    "approveRequiredAndSelectedConsents": "Hyväksy valitut evästeet",
+    "approveOnlyRequiredConsents": "Hyväksy vain välttämättömät evästeet",
+    "settingsSaved": "Asetukset tallennettu!",
+    "notificationAriaLabel": "Ilmoitus",
+    "storageType1": "Eväste",
+    "storageType2": "localStorage",
+    "storageType3": "sessionStorage",
+    "storageType4": "IndexedDB",
+    "storageType5": "Cache Storage"
   }
 }

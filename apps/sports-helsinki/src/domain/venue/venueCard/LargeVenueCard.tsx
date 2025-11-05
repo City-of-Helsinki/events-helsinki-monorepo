@@ -7,7 +7,7 @@ import {
   HelsinkiCityOwnedIcon,
   useCommonTranslation,
 } from '@events-helsinki/components';
-import { IconLocation } from 'hds-react';
+import { IconLocation, IconSize } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
@@ -107,7 +107,7 @@ const LargeVenueCard: React.FC<Props> = ({
               <ArrowRightWithLoadingIndicator
                 loading={clicked}
                 className={styles.arrowRight}
-                size="l"
+                size={IconSize.Large}
                 aria-hidden="true"
               />
             </div>

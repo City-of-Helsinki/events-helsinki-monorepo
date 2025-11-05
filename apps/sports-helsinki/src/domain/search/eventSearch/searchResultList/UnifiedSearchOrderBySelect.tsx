@@ -7,11 +7,8 @@ import {
   isAccessibilityProfile,
   LoadingSpinner,
 } from '@events-helsinki/components';
-import type {
-  GeolocationContextType,
-  Option,
-} from '@events-helsinki/components';
-import type { SelectCustomTheme } from 'hds-react';
+import type { GeolocationContextType } from '@events-helsinki/components';
+import type { Option } from 'hds-react';
 import React from 'react';
 import useHandleUnifiedSearchOrderChange from '../../../../hooks/useHandleUnifiedSearchOrderChange';
 import { useCombinedSearchContext } from '../../combinedSearch/adapters/CombinedSearchContext';
@@ -24,19 +21,31 @@ const useUnifiedSearchOrderBySelectOptions = () => {
   } = useCombinedSearchContext();
 
   const defaultOption: Option = {
-    text: t('search:orderBy.relevance'),
+    label: t('search:orderBy.relevance'),
     value: `${UnifiedSearchOrderBy.relevance}-${OrderDir.asc}`,
+    selected: false,
+    isGroupLabel: false,
+    visible: true,
+    disabled: false,
   };
 
   const orderByOptions: Option[] = [
     {
-      text: t('search:orderBy.alphabetical'),
+      label: t('search:orderBy.alphabetical'),
       value: `${UnifiedSearchOrderBy.name}-${OrderDir.asc}`,
+      selected: false,
+      isGroupLabel: false,
+      visible: true,
+      disabled: false,
     },
     defaultOption,
     {
-      text: t('search:orderBy.distance'),
+      label: t('search:orderBy.distance'),
       value: `${UnifiedSearchOrderBy.distance}-${OrderDir.asc}`,
+      selected: false,
+      isGroupLabel: false,
+      visible: true,
+      disabled: false,
     },
   ];
 
@@ -44,8 +53,12 @@ const useUnifiedSearchOrderBySelectOptions = () => {
   if (accessibilityProfile) {
     // The accessibility profile ordering option is "synced" to the accessibilityShortcoming-filter-selection.
     orderByOptions.push({
-      text: t('search:orderBy.accessibility'),
+      label: t('search:orderBy.accessibility'),
       value: accessibilityProfile,
+      selected: false,
+      isGroupLabel: false,
+      visible: false,
+      disabled: false,
     });
   }
 
@@ -80,15 +93,15 @@ const UnifiedSearchOrderBySelect: React.FC = () => {
 
   return (
     <Select
-      theme={
-        {
-          '--menu-item-background': 'var(--color-input-dark)',
-          '--menu-item-background-hover': 'var(--color-input-dark)',
-          '--menu-item-background-selected-hover': 'var(--color-input-dark)',
-        } as SelectCustomTheme
-      }
-      label={t('search:orderBy.label')}
-      value={selectedOrderByOption ?? defaultOption}
+      theme={{
+        '--checkbox-background-selected': 'var(--color-input-dark)',
+        '--checkbox-background-hover': 'var(--color-input-dark)',
+        '--menu-item-background-color-hover': 'var(--color-input-light)',
+        '--menu-item-background-color-selected-hover':
+          'var(--color-input-light)',
+      }}
+      texts={{ label: t('search:orderBy.label') }}
+      value={selectedOrderByOption?.value ?? defaultOption.value}
       onChange={handleUnifiedSearchOrderChange}
       options={orderByOptions}
       icon={

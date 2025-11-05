@@ -4,6 +4,7 @@ import { loadEnvConfig } from '@next/env';
 
 import { expect } from 'vitest';
 import * as matchers from 'vitest-axe/matchers';
+import { setup as setupFakedIndexedDB } from 'vitest-indexeddb';
 import { initializeI18nWithConfig } from './config/tests/initI18n';
 
 import '@testing-library/jest-dom/vitest';
@@ -88,6 +89,16 @@ vi.mock('next-i18next', async () => {
   };
 });
 
+// Mock the ResizeObserver
+const ResizeObserverMock = vi.fn(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
+// Stub the global ResizeObserver
+vi.stubGlobal('ResizeObserver', ResizeObserverMock);
+
 loadEnvConfig(process.cwd());
 
 hideConsoleMessages({
@@ -97,11 +108,20 @@ hideConsoleMessages({
     // https://github.com/City-of-Helsinki/helsinki-design-system/blob/v3.11.0/packages/react/src/components/dropdown/select/Select.tsx#L669
     //
     // Example use case:
-    // SearchSelect (packages/components) → Select (packages/components) → Select (hds-react)
-    // Removing this hiding and running SearchSelect tests should show this error if HDS v3.11.0 is still used.
+    // TargetAgeGroupSelector (apps/events-helsinki) → Select (hds-react)
+    // Removing this hiding & running TargetAgeGroupSelector tests should show this error if HDS v3.11.0 is still used.
     //
     // Related issue:
     // https://github.com/facebook/react/issues/29233
     /Support for defaultProps will be removed.*Use JavaScript default parameters instead.*hds-react/s,
+    /Could not parse CSS stylesheet/,
+  ],
+  warn: [
+    /`canonizeResults` is deprecated and will be removed in Apollo Client 4.0. Please remove this option./,
   ],
 });
+
+/**
+ * Fake IndexedDB for vitest.
+ */
+setupFakedIndexedDB();

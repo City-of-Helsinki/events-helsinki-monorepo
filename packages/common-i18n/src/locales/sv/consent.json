@@ -1,5 +1,9 @@
 {
   "groups": {
+    "essentials": {
+      "title": "Nödvändiga funktionella cookies",
+      "description": "Nödvändiga cookies hjälper till att göra webbplatsen användbar genom att tillåta grundläggande funktioner som att navigera på sidan och använda de skyddade områdena på webbplatsen. Webbplatsen fungerar inte korrekt utan dessa cookies och kräver inte samtycke."
+    },
     "optionalServiceMap": {
       "title": "Servicekarta",
       "text": "Huvudstadsregionens servicekarta hjälper användaren att hitta evenemang på kartan.",
@@ -20,6 +24,7 @@
     }
   },
   "cookies": {
+    "app": "{{ appName }} - Cookie möjliggör hantering av cookies på webbplatsen.",
     "matomo": "Kaka för statistiksystemet Matomo.",
     "askem": "En post relaterad till driften av reaktionsknappen Askem.",
     "linkedevents": "Kaka för att söka evenemang.",
@@ -44,5 +49,34 @@
   "askem": {
     "cookiesRequiredDescription": "För att använda denna funktion måste du acceptera cookies från webbplatsen. Du kan ge feedback på den här sidan genom att aktivera statistikrelaterade cookies.",
     "cookiesRequiredTitle": "Feedbackknappar kan inte visas"
+  },
+  "hdsCookieConsent": {
+    "bannerAriaLabel": "Inställningar för kakor",
+    "heading": "{{siteName}} använder kakor",
+    "description": "Denna webbplats använder obligatoriska kakor för att säkerställa de grundläggande funktionerna och prestandan. Dessutom använder vi inriktningskakor för bättre användarupplevelse, analytik och individualiserat innehåll.",
+    "showDetails": "Visa detaljer",
+    "hideDetails": "Stänga detaljer",
+    "formHeading": "Information om kakor som används på webbplatsen",
+    "formText": "Kakorna som används på webbplatsen har klassificerats enligt användningsändamål. Du kan läsa om de olika klasserna och acceptera eller förbjuda användningen av kakor.",
+    "highlightedGroup": "Du måste acceptera den här kategorin för att visa innehållet du har valt.",
+    "highlightedGroupAria": "Bra att veta för kategorin: {{title}}",
+    "showCookieSettings": "Visa kakinställningarna",
+    "hideCookieSettings": "Stänga kakinställningarna",
+    "acceptedAt": "Du har accepterat denna kategori: {{date}} kl. {{time}}.",
+    "tableHeadingsName": "Namn",
+    "tableHeadingsHostName": "Den som lagrat kakan",
+    "tableHeadingsDescription": "Användning",
+    "tableHeadingsExpiration": "Giltighetstid",
+    "tableHeadingsType": "Typ",
+    "approveAllConsents": "Acceptera alla kakor",
+    "approveRequiredAndSelectedConsents": "Acceptera valda kakor",
+    "approveOnlyRequiredConsents": "Acceptera endast nödvändiga",
+    "settingsSaved": "Inställningar sparade!",
+    "notificationAriaLabel": "Meddelande",
+    "storageType1": "Kakan",
+    "storageType2": "localStorage",
+    "storageType3": "sessionStorage",
+    "storageType4": "IndexedDB",
+    "storageType5": "Cache Storage"
   }
 }

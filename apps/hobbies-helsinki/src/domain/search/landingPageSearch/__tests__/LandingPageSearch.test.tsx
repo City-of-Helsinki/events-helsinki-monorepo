@@ -54,6 +54,7 @@ describe('Landing page', () => {
     const { router } = render(<LandingPageSearch />, { mocks });
     const searchInput = screen.getByRole('textbox');
     await userEvent.type(searchInput, searchValue);
+    await userEvent.tab();
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({
       asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.TEXT}=${searchValue}`,
@@ -123,6 +124,7 @@ describe('Landing page', () => {
       }),
       '06.10.2020'
     );
+    await userEvent.tab();
     expect(router.pathname).toBe('/'); // TODO: remove
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
     expect(router).toMatchObject({

@@ -17,7 +17,7 @@ const TwitterShareLink: React.FC<ShareLinkProps> = ({ sharedLink }) => {
       queryParameters={queryParameters}
       windowName={linkLabel}
       linkLabel={linkLabel}
-      icon={<IconX ariaLabel={linkLabel} />}
+      icon={<IconX aria-label={linkLabel} />}
     />
   );
 };

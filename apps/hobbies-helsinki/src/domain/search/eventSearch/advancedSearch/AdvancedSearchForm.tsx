@@ -5,12 +5,19 @@ import {
   DateSelector,
   EVENT_SEARCH_FILTERS,
   IconRead,
-  MultiSelectDropdown,
   PlaceSelector,
   useAppHobbiesTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import { Button, IconCake, IconSearch, IconLocation } from 'hds-react';
+import {
+  Button,
+  IconCake,
+  IconSearch,
+  IconLocation,
+  Select,
+  ButtonPresetTheme,
+} from 'hds-react';
+import type { Option } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
@@ -52,8 +59,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   );
 
   const {
-    categoryInput,
-    setCategoryInput,
     ageInput,
     setAgeInput,
     placeInput,
@@ -114,8 +119,12 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
     goToSearch(search);
   };
 
+  const handleCategoryChange = (selectedOptions: Option[]) => {
+    const optionValues = selectedOptions.map((option) => option.value);
+    setSelectedCategories(optionValues);
+  };
+
   const clearInputValues = () => {
-    setCategoryInput('');
     setPlaceInput('');
     setTextSearchInput('');
     setAgeInput(undefined);
@@ -155,6 +164,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
         <div className={styles.rowWrapper}>
           <div className={classNames(styles.row, styles.textSearchRow)}>
             <AdvancedSearchTextInput
+              className={styles.searchInputWrapper}
               id="search"
               name="search"
               placeholder={tAppHobbies('appHobbies:search.search.placeholder')}
@@ -164,29 +174,34 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
               clearButtonAriaLabel={tAppHobbies(
                 'appHobbies:search.search.clearButtonAriaLabel'
               )}
-              style={
-                {
-                  '--placeholder-color': 'var(--color-black)',
-                } as React.CSSProperties
-              }
             />
           </div>
         </div>
         <div className={styles.rowWrapper}>
           <div className={styles.row}>
             <div>
-              <MultiSelectDropdown
-                checkboxName="categoryOptions"
-                icon={<IconRead aria-hidden />}
-                inputValue={categoryInput}
-                name="category"
-                onChange={setSelectedCategories}
-                options={categories}
-                setInputValue={setCategoryInput}
-                showSearch={false}
-                title={t('search.titleDropdownCategory')}
+              <Select
+                id="categories"
+                className={styles.categoriesSelector}
+                multiSelect
+                texts={{ placeholder: t('search.titleDropdownCategory') }}
+                options={categories.map((option) => ({
+                  ...option,
+                  label: option.text,
+                }))}
+                onChange={handleCategoryChange}
                 value={selectedCategories}
-                buttonStyles={{ fontSize: 'var(--fontsize-body-m)' }}
+                icon={<IconRead aria-hidden />}
+                noTags
+                visibleOptions={5.97} // use decimal to make scrollable content visible
+                theme={{
+                  '--checkbox-background-selected': 'var(--color-input-dark)',
+                  '--checkbox-background-hover': 'var(--color-input-dark)',
+                  '--menu-item-background-color-hover':
+                    'var(--color-input-light)',
+                  '--menu-item-background-color-selected-hover':
+                    'var(--color-input-light)',
+                }}
               />
             </div>
             <div className={styles.dateSelectorWrapper}>
@@ -204,6 +219,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
             </div>
             <div>
               <PlaceSelector
+                className={styles.placeSelector}
                 checkboxName="placesCheckboxes"
                 icon={<IconLocation aria-hidden />}
                 inputValue={placeInput}
@@ -220,6 +236,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
             </div>
             <div>
               <AdvancedSearchNumberInput
+                className={styles.ageSelector}
                 id="age"
                 icon={<IconCake aria-hidden />}
                 min={MIN_AGE}
@@ -234,11 +251,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
                 }
                 placeholder={t('search.placeholderAge')}
                 value={ageInput}
-                style={
-                  {
-                    '--placeholder-color': 'var(--color-black)',
-                  } as React.CSSProperties
-                }
               />
             </div>
           </div>
@@ -256,9 +268,9 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
             </div>
             <div className={styles.buttonWrapper}>
               <Button
-                theme="coat"
+                theme={ButtonPresetTheme.Coat}
                 fullWidth={true}
-                iconLeft={<IconSearch aria-hidden />}
+                iconStart={<IconSearch aria-hidden />}
                 type="submit"
               >
                 {t('search.buttonSearch')}

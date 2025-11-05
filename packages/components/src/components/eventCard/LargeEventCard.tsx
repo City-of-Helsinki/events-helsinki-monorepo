@@ -4,6 +4,7 @@ import {
   IconCake,
   IconCalendarClock,
   IconLocation,
+  IconSize,
   IconTicket,
 } from 'hds-react';
 import { useTranslation } from 'next-i18next';
@@ -151,7 +152,7 @@ const LargeEventCard: React.FC<LargeEventCardProps> = ({
               <div>
                 <ArrowRightWithLoadingIndicator
                   className={styles.arrowRight}
-                  size="l"
+                  size={IconSize.Large}
                   aria-hidden="true"
                   loading={clicked}
                 />

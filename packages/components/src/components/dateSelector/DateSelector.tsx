@@ -134,10 +134,6 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
     toggleIsCustomDate();
   };
 
-  const isSelected = isCustomDate
-    ? !!startDate || !!endDate
-    : !!dateTypes.length;
-
   const selectedText = React.useMemo(() => {
     if (!!startDate || !!endDate) {
       return `${formatDate(startDate, undefined, locale)} -
@@ -195,7 +191,7 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
           )}
         </div>
       </button>
-      {isSelected && <div className={styles.isSelectedIndicator} />}
+
       <DateSelectorMenu
         backBtnRef={backBtnRef}
         customDatesBtnRef={customDatesBtnRef}

@@ -1,5 +1,5 @@
 import type { NotificationProps } from 'hds-react';
-import { Notification } from 'hds-react';
+import { Notification, NotificationSize } from 'hds-react';
 import { useTranslation } from 'next-i18next';
 import { useGeolocation } from '../hooks';
 import useCommonTranslation from '../hooks/useCommonTranslation';
@@ -38,7 +38,7 @@ export default function GeolocationErrorNotification(
           type="alert"
           dismissible
           boxShadow
-          size="default"
+          size={NotificationSize.Medium}
           position="top-right"
           style={FIX_BROKEN_OPENING_ANIMATION_STYLE}
           closeButtonLabelText={commonTranslation('button.close')}

@@ -1,7 +1,6 @@
 import {
   Checkbox,
   DateSelector,
-  MultiSelectDropdown,
   useAppEventsTranslation,
   IconRead,
   EVENT_SEARCH_FILTERS,
@@ -9,8 +8,14 @@ import {
   PlaceSelector,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import type { SelectCustomTheme } from 'hds-react';
-import { Button, IconSearch, IconLocation } from 'hds-react';
+import type { Option } from 'hds-react';
+import {
+  Button,
+  IconSearch,
+  IconLocation,
+  ButtonVariant,
+  Select,
+} from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
@@ -50,8 +55,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   );
 
   const {
-    categoryInput,
-    setCategoryInput,
     placeInput,
     setPlaceInput,
     selectedDateTypes,
@@ -119,14 +122,19 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
     goToSearch(search);
   };
 
+  const handleCategoryChange = (selectedOptions: Option[]) => {
+    const optionValues = selectedOptions.map((option) => option.value);
+    setSelectedCategories(optionValues);
+  };
+
   const handleTargetAgeGroupChange = (
+    _options: TargetAgeGroupOptionType[],
     option: TargetAgeGroupOptionType | null
   ) => {
     setSelectedTargetAgeGroup(option?.value ?? '');
   };
 
   const clearInputValues = () => {
-    setCategoryInput('');
     setPlaceInput('');
     setTextSearchInput('');
   };
@@ -165,6 +173,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
         <div className={styles.rowWrapper}>
           <div className={classNames(styles.row, styles.textSearchRow)}>
             <AdvancedSearchTextInput
+              className={styles.searchInputWrapper}
               id="search"
               name="search"
               placeholder={tAppEvents('appEvents:search.search.placeholder')}
@@ -174,29 +183,34 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
               clearButtonAriaLabel={tAppEvents(
                 'appEvents:search.search.clearButtonAriaLabel'
               )}
-              style={
-                {
-                  '--placeholder-color': 'var(--color-black)',
-                } as React.CSSProperties
-              }
             />
           </div>
         </div>
         <div className={styles.rowWrapper}>
           <div className={styles.row}>
             <div>
-              <MultiSelectDropdown
-                checkboxName="categoryOptions"
-                icon={<IconRead aria-hidden />}
-                inputValue={categoryInput}
-                name="category"
-                onChange={setSelectedCategories}
-                options={categories}
-                setInputValue={setCategoryInput}
-                showSearch={false}
-                title={t('search.titleDropdownCategory')}
+              <Select
+                id="categories"
+                className={styles.categoriesSelector}
+                multiSelect
+                texts={{ placeholder: t('search.titleDropdownCategory') }}
+                options={categories.map((option) => ({
+                  ...option,
+                  label: option.text,
+                }))}
+                onChange={handleCategoryChange}
                 value={selectedCategories}
-                buttonStyles={{ fontSize: 'var(--fontsize-body-m)' }}
+                icon={<IconRead aria-hidden />}
+                noTags
+                visibleOptions={5.97} // use decimal to make scrollable content visible
+                theme={{
+                  '--checkbox-background-selected': 'var(--color-input-dark)',
+                  '--checkbox-background-hover': 'var(--color-input-dark)',
+                  '--menu-item-background-color-hover':
+                    'var(--color-input-light)',
+                  '--menu-item-background-color-selected-hover':
+                    'var(--color-input-light)',
+                }}
               />
             </div>
             <div className={styles.dateSelectorWrapper}>
@@ -218,18 +232,20 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
                 id="targetAgeGroup"
                 onChange={handleTargetAgeGroupChange}
                 value={selectedTargetAgeGroup}
-                theme={
-                  {
-                    '--menu-item-background': 'var(--color-input-dark)',
-                    '--menu-item-background-hover': 'var(--color-input-dark)',
-                    '--menu-item-background-selected-hover':
-                      'var(--color-input-dark)',
-                  } as SelectCustomTheme
-                }
+                theme={{
+                  '--menu-item-background-color-hover':
+                    'var(--color-input-light)',
+                  '--menu-item-background-color-selected':
+                    'var(--color-input-dark)',
+                  '--menu-item-background-color-selected-hover':
+                    'var(--color-input-dark)',
+                  '--menu-item-color-selected-hover': 'var(--color-white)',
+                }}
               />
             </div>
             <div>
               <PlaceSelector
+                className={styles.placeSelector}
                 checkboxName="placesCheckboxes"
                 icon={<IconLocation aria-hidden />}
                 inputValue={placeInput}
@@ -278,9 +294,9 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
             <div className={styles.buttonWrapper}>
               <Button
                 fullWidth={true}
-                iconLeft={<IconSearch aria-hidden />}
+                iconStart={<IconSearch aria-hidden />}
                 type="submit"
-                variant="success"
+                variant={ButtonVariant.Success}
               >
                 {t('search.buttonSearch')}
               </Button>

@@ -1,5 +1,5 @@
 import type { NotificationProps } from 'hds-react';
-import { Notification } from 'hds-react';
+import { Notification, NotificationSize } from 'hds-react';
 import { Trans } from 'next-i18next';
 import { useResilientTranslation } from '../../hooks';
 import useCommonTranslation from '../../hooks/useCommonTranslation';
@@ -25,7 +25,7 @@ export default function ApolloErrorNotification({
       label={t('apolloError.title')}
       type="error"
       dismissible
-      size="default"
+      size={NotificationSize.Medium}
       position="bottom-right"
       closeButtonLabelText={commonTranslation('button.close')}
     >

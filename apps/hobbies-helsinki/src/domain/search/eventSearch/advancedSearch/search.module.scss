@@ -35,18 +35,24 @@ $buttonWidth: 180px;
 
     @include breakpoints.respond-above(s) {
       grid-template-columns: 1fr;
-      grid-gap: var(--spacing-xs);
+      grid-gap: var(--spacing-s);
 
       margin-bottom: var(--spacing-xs);
     }
   }
 
-  .buttonWrapper {
-    @include breakpoints.respond-above(s) {
-      grid-column: span 1 / 3;
+  .fillGridRow {
+    @include breakpoints.respond-above(m) {
+      grid-column: 1 / 1;
     }
-    @include breakpoints.respond-above(l) {
+  }
+
+  .buttonWrapper {
+    @include breakpoints.respond-above(m) {
       grid-column: span 1 / 5;
+    }
+    @include breakpoints.respond-below(m) {
+      grid-column: 1 / 3;
     }
   }
 
@@ -55,23 +61,35 @@ $buttonWidth: 180px;
     grid-gap: var(--spacing-xs);
 
     @include breakpoints.respond-above(s) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
     }
 
-    @include breakpoints.respond-above(l) {
+    @include breakpoints.respond-above(m) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
   .textSearchRow {
     align-items: flex-end;
+    margin-bottom: var(--spacing-2-xs);
 
     @include breakpoints.respond-above(m) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     & > :first-child {
-      grid-column: 1 / 5;
+      @include breakpoints.respond-above(s) {
+        grid-column: 1 / 5;
+      }
+      padding: var(--spacing-xs);
+
+      svg {
+        margin-right: var(--spacing-xs);
+      }
+    }
+
+    .searchInputWrapper {
+      padding-left: var(--spacing-2-xs);
     }
   }
 
@@ -87,12 +105,80 @@ $buttonWidth: 180px;
     }
   }
 
-  .dateSelectorWrapper {
-    & > div {
-      min-height: (
-        var(--spacing-3-xl)
-      ); // Fill 2px of available space under dropdown
+  .categoriesSelector {
+    --icon-size: var(--spacing-layout-xs);
+
+    button {
+      font-size: var(--fontsize-body-m);
+      line-height: 1.25rem;
+
+      /* Icon on start of button */
+      span {
+        // margin-right: 0;
+        font-size: var(--fontsize-body-m);
+
+        svg {
+          width: var(--icon-size);
+          margin-right: var(--spacing-xs);
+          span {
+            margin: 0;
+          }
+        }
+      }
+
+      /* Icon on end of button */
+      svg {
+        width: var(--icon-size);
+      }
+
+      /* Text area */
+      & > div {
+        height: calc(
+          var(--fontsize-body-m) * var(--lineheight-m) + 1px
+        ) !important; // Since the font-size in button is M-sized, this calculation should be aswell.
+      }
     }
+  }
+
+  .categoriesSelector,
+  .dateSelectorWrapper,
+  .placeSelector {
+    --icon-size: var(--spacing-layout-xs);
+    --border-width: 0;
+    ---dropdown-height: var(--spacing-3-xl);
+    --menu-item-height: var(---dropdown-height);
+
+    max-width: unset;
+    height: var(--dropdown-height);
+  }
+
+  .placeSelector {
+    /* 1 liner text with ellipsis overflow */
+    & > button > div > label + div {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+      padding-left: var(--spacing-3-xs);
+    }
+  }
+
+  [id='categories-sl-container'] {
+    /* Fix the menu should always open downwards. */
+    bottom: unset !important;
+
+    /* To make scrollbar always visible */
+    // ::-webkit-scrollbar {
+    //   -webkit-appearance: none;
+    //   width: 7px;
+    // }
+
+    /* To make scrollbar always visible */
+    // ::-webkit-scrollbar-thumb {
+    //   border-radius: 4px;
+    //   background-color: rgba(0, 0, 0, 0.5);
+    //   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    // }
   }
 }
 

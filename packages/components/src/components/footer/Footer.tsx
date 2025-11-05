@@ -1,4 +1,4 @@
-import { Footer, Link, Logo, logoFi, logoSv } from 'hds-react';
+import { Footer, Link, Logo, logoFi, LogoSize, logoSv } from 'hds-react';
 import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
@@ -17,21 +17,25 @@ const UserTrackingFeatures = dynamic(
   }
 );
 
+const CookieBanner = dynamic(
+  () => import('hds-react').then((mod) => mod.CookieBanner),
+  {
+    ssr: false,
+  }
+);
+
 type FooterSectionProps = {
   appName: string;
   menu?: Menu;
   hasFeedBack?: boolean;
   feedbackWithPadding?: boolean;
   consentUrl?: string;
-  isModalConsent?: boolean;
 };
 const FooterSection: FunctionComponent<FooterSectionProps> = ({
   appName,
   menu,
   hasFeedBack = true,
   feedbackWithPadding = false,
-  consentUrl = '/cookie-consent',
-  isModalConsent = true,
 }: FooterSectionProps) => {
   const { t: commonT } = useCommonTranslation();
   const { resilientT } = useResilientTranslation();
@@ -55,11 +59,9 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   return (
     <>
       <UserTrackingFeatures
-        appName={appName}
         hasFeedBack={hasFeedBack}
         feedbackWithPadding={feedbackWithPadding}
-        consentUrl={consentUrl}
-        isModalConsent={isModalConsent}
+        cookieBanner={<CookieBanner />}
       />
       <Footer title={appName} className={styles.footer}>
         <Footer.Base
@@ -68,7 +70,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
           logo={
             <Logo
               src={locale === 'sv' ? logoSv : logoFi}
-              size="medium"
+              size={LogoSize.Medium}
               alt={commonT('common:cityOfHelsinki')}
             />
           }

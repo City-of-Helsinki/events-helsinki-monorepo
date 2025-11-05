@@ -108,7 +108,9 @@ describe('Landing page', () => {
 
   it('should route to event search page after selecting start date and pressing submit button', async () => {
     advanceTo('2020-10-04');
-    const { router } = render(<LandingPageSearch />, { mocks });
+    const { router } = render(<LandingPageSearch />, {
+      mocks,
+    });
     await userEvent.click(
       screen.getByRole('button', { name: /valitse ajankohta/i })
     );
@@ -117,14 +119,25 @@ describe('Landing page', () => {
       // which is hidden using css
       screen.getAllByRole('button', { name: /valitse päivät/i })[0]
     );
-    await userEvent.type(
-      screen.getByRole('textbox', {
-        name: /alkamispäivä/i,
-      }),
-      '06.10.2020'
-    );
-    expect(router.pathname).toBe('/'); // TODO: remove
+
+    const startTime = screen.getByRole('textbox', {
+      name: /alkamispäivä/i,
+    });
+
+    await userEvent.type(startTime, '06.10.2020');
+
+    expect(startTime).toHaveValue('06.10.2020');
+
+    await userEvent.tab();
+
+    expect(router).toMatchObject({
+      asPath: `/`,
+      pathname: '/',
+      query: {},
+    });
+
     await userEvent.click(screen.getByRole('button', { name: /hae/i }));
+
     expect(router).toMatchObject({
       asPath: `${searchPath}?${EVENT_SEARCH_FILTERS.START}=2020-10-06`,
       pathname: searchPath,

@@ -1,4 +1,4 @@
-import { Button, IconCrossCircle } from 'hds-react';
+import { Button, IconCrossCircle, IconSize } from 'hds-react';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { Page as RHHCPage } from 'react-helsinki-headless-cms';
@@ -38,7 +38,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({
         <div className={styles.errorPageWrapper}>
           <main id={MAIN_CONTENT_ID}>
             <div className={styles.errorPageHero}>
-              <IconCrossCircle size="xl" />
+              <IconCrossCircle size={IconSize.ExtraLarge} />
               <h1>{headerText}</h1>
               <p>{descriptionText}</p>
               <Button onClick={moveToHomePage} className={styles.backButton}>

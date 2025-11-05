@@ -7,7 +7,7 @@ import {
   AdvancedSearchTextInput,
 } from '@events-helsinki/components';
 import classnames from 'classnames';
-import { Button, IconSearch } from 'hds-react';
+import { Button, ButtonVariant, IconSearch } from 'hds-react';
 import {
   isPageType,
   SecondaryLink,
@@ -113,8 +113,8 @@ export default function LandingPageSearchForm({
           <div className={styles.buttonWrapper}>
             <Button
               fullWidth={true}
-              iconLeft={<IconSearch />}
-              variant="success"
+              iconStart={<IconSearch aria-hidden />}
+              variant={ButtonVariant.Success}
               type="submit"
             >
               {t('home:search.buttonSearch')}

@@ -166,31 +166,31 @@ export const MAPPED_EVENT_CATEGORIES: Record<
 
 export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
   [EVENT_CATEGORIES.MOVIE]: {
-    icon: <IconMovies />,
+    icon: <IconMovies aria-hidden />,
     labelKey: 'home:category.movie',
   },
   [EVENT_CATEGORIES.MUSIC]: {
-    icon: <IconMusic />,
+    icon: <IconMusic aria-hidden />,
     labelKey: 'home:category.music',
   },
   [EVENT_CATEGORIES.SPORT]: {
-    icon: <IconSports />,
+    icon: <IconSports aria-hidden />,
     labelKey: 'home:category.sport',
   },
   [EVENT_CATEGORIES.MUSEUM]: {
-    icon: <IconMuseum />,
+    icon: <IconMuseum aria-hidden />,
     labelKey: 'home:category.museum',
   },
   [EVENT_CATEGORIES.DANCE]: {
-    icon: <IconDance />,
+    icon: <IconDance aria-hidden />,
     labelKey: 'home:category.dance',
   },
   [EVENT_CATEGORIES.CULTURE]: {
-    icon: <IconCultureAndArts />,
+    icon: <IconCultureAndArts aria-hidden />,
     labelKey: 'home:category.culture',
   },
   [EVENT_CATEGORIES.NATURE]: {
-    icon: <IconTree />,
+    icon: <IconTree aria-hidden />,
     labelKey: 'home:category.nature',
   },
   [EVENT_CATEGORIES.INFLUENCE]: {
@@ -198,11 +198,11 @@ export const eventCategories: Record<EVENT_CATEGORIES, SearchCategoryOption> = {
     labelKey: 'home:category.influence',
   },
   [EVENT_CATEGORIES.THEATRE]: {
-    icon: <IconTheatre />,
+    icon: <IconTheatre aria-hidden />,
     labelKey: 'home:category.theatre',
   },
   [EVENT_CATEGORIES.FOOD]: {
-    icon: <IconFood />,
+    icon: <IconFood aria-hidden />,
     labelKey: 'home:category.food',
   },
 } as const;

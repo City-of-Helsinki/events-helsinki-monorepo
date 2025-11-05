@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Button } from 'hds-react';
+import { Button, ButtonPresetTheme, ButtonVariant } from 'hds-react';
 import useConsentTranslation from '../../hooks/useConsentTranslation';
 import styles from './cookiesRequired.module.scss';
 
@@ -31,7 +31,11 @@ function CookiesRequired({
       <h2>{title}</h2>
       <p>{description}</p>
       {handleConsent && (
-        <Button theme="black" variant="secondary" onClick={handleConsent}>
+        <Button
+          theme={ButtonPresetTheme.Black}
+          variant={ButtonVariant.Secondary}
+          onClick={handleConsent}
+        >
           {t('consent:cookiesRequired.cookieSettingsButtonText')}
         </Button>
       )}

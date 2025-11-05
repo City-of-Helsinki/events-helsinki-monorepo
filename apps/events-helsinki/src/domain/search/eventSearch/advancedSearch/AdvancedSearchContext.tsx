@@ -1,8 +1,6 @@
 import React from 'react';
 
 type SearchFormState = {
-  categoryInput: string;
-  setCategoryInput: React.Dispatch<React.SetStateAction<string>>;
   selectedTargetAgeGroup: string;
   setSelectedTargetAgeGroup: React.Dispatch<React.SetStateAction<string>>;
   placeInput: string;

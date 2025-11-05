@@ -1,4 +1,4 @@
-import { Notification } from 'hds-react';
+import { Notification, NotificationSize } from 'hds-react';
 import React, { useEffect, useState } from 'react';
 
 import { usePreview, useResilientTranslation } from '../../hooks';
@@ -27,7 +27,7 @@ const PreviewNotification: React.FC<Props> = ({ token }) => {
       label={text}
       position="top-right"
       displayAutoCloseProgress={false}
-      size="small"
+      size={NotificationSize.Small}
     >
       {text}
     </Notification>

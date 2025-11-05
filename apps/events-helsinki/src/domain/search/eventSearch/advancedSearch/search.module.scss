@@ -35,7 +35,7 @@ $buttonWidth: 180px;
 
     @include breakpoints.respond-above(s) {
       grid-template-columns: 1fr;
-      grid-gap: var(--spacing-xs);
+      grid-gap: var(--spacing-s);
 
       margin-bottom: var(--spacing-xs);
     }
@@ -71,6 +71,7 @@ $buttonWidth: 180px;
 
   .textSearchRow {
     align-items: flex-end;
+    margin-bottom: var(--spacing-2-xs);
 
     @include breakpoints.respond-above(m) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -80,6 +81,15 @@ $buttonWidth: 180px;
       @include breakpoints.respond-above(s) {
         grid-column: 1 / 5;
       }
+      padding: var(--spacing-xs);
+
+      svg {
+        margin-right: var(--spacing-xs);
+      }
+    }
+
+    .searchInputWrapper {
+      padding-left: var(--spacing-2-xs);
     }
   }
 
@@ -95,22 +105,76 @@ $buttonWidth: 180px;
     }
   }
 
-  .dateSelectorWrapper {
-    & > div {
-      min-height: (
-        var(--spacing-3-xl)
-      ); // Fill 2px of available space under dropdown
+  .categoriesSelector {
+    --icon-size: var(--spacing-layout-xs);
+
+    button {
+      font-size: var(--fontsize-body-m);
+      line-height: 1.25rem;
+
+      /* Icon on start of button */
+      span {
+        // margin-right: 0;
+        font-size: var(--fontsize-body-m);
+
+        svg {
+          width: var(--icon-size);
+          margin-right: var(--spacing-xs);
+          span {
+            margin: 0;
+          }
+        }
+      }
+
+      /* Icon on end of button */
+      svg {
+        width: var(--icon-size);
+      }
+
+      /* Text area */
+      & > div {
+        height: calc(
+          var(--fontsize-body-m) * var(--lineheight-m) + 1px
+        ) !important; // Since the font-size in button is M-sized, this calculation should be aswell.
+      }
+    }
+  }
+
+  .categoriesSelector,
+  .dateSelectorWrapper,
+  .placeSelector,
+  .targetAgeGroupSelector {
+    --icon-size: var(--spacing-layout-xs);
+    --border-width: 0;
+    ---dropdown-height: var(--spacing-3-xl);
+    --menu-item-height: var(---dropdown-height);
+
+    max-width: unset;
+    height: var(--dropdown-height);
+  }
+
+  .placeSelector {
+    /* 1 liner text with ellipsis overflow */
+    & > button > div > label + div {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+      padding-left: var(--spacing-3-xs);
     }
   }
 
   .targetAgeGroupSelector {
     --fontsize-body-l: 'var(--fontsize-body-m)';
-    --border-width: '0px';
-    --menu-item-height: 50px; // Fix the empty option's height
+
     span {
       margin-right: 0;
+      font-size: var(--fontsize-body-m);
+      line-height: 2rem;
+
       svg {
-        margin-right: 1rem;
+        width: var(--icon-size);
+        margin-right: var(--spacing-xs);
         span {
           margin: 0;
         }
@@ -120,24 +184,25 @@ $buttonWidth: 180px;
     label {
       display: inline;
     }
+  }
 
-    button {
-      cursor: pointer;
-      border: 0.125rem solid var(--color-white);
-      background: transparent;
-      min-height: var(--dropdown-height);
+  [id='categories-sl-container'],
+  [id='targetAgeGroup-sl-container'] {
+    /* Fix the menu should always open downwards. */
+    bottom: unset !important;
 
-      padding: 0 0.875rem;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      outline: none;
-      text-align: left;
-      svg {
-        top: inherit;
-        --icon-size: 1.25rem;
-      }
-    }
+    /* To make scrollbar always visible */
+    // ::-webkit-scrollbar {
+    //   -webkit-appearance: none;
+    //   width: 7px;
+    // }
+
+    /* To make scrollbar always visible */
+    // ::-webkit-scrollbar-thumb {
+    //   border-radius: 4px;
+    //   background-color: rgba(0, 0, 0, 0.5);
+    //   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    // }
   }
 }
 

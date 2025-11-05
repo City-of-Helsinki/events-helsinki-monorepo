@@ -4,7 +4,7 @@ import {
   getURLSearchParamsFromAsPath,
   useCommonTranslation,
 } from '@events-helsinki/components';
-import { Button } from 'hds-react';
+import { Button, ButtonPresetTheme, ButtonVariant } from 'hds-react';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
 import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
@@ -57,7 +57,11 @@ function SearchUtilities() {
         >
           <SearchTabs.TabList>
             {tabsData.map((tab) => (
-              <SearchTabs.Tab key={tab.id} id={tab.id} theme="black">
+              <SearchTabs.Tab
+                key={tab.id}
+                id={tab.id}
+                theme={ButtonPresetTheme.Black}
+              >
                 <SearchTabs.CountLabel id={tab.id} label={tab.label} />
               </SearchTabs.Tab>
             ))}
@@ -66,8 +70,8 @@ function SearchUtilities() {
 
           {activeTab === 'Venue' ? (
             <Button
-              variant="secondary"
-              theme="black"
+              variant={ButtonVariant.Secondary}
+              theme={ButtonPresetTheme.Black}
               onClick={switchShowMode}
               className={styles.buttonWrapper}
             >

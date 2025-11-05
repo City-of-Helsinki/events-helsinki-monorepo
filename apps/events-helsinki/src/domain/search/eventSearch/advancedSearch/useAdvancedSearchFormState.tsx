@@ -16,8 +16,6 @@ export function useAdvancedSearchFormState() {
     [router.query]
   );
 
-  const [categoryInput, setCategoryInput] = React.useState('');
-
   const [placeInput, setPlaceInput] = React.useState('');
 
   const [selectedDateTypes, setSelectedDateTypes] = React.useState<string[]>(
@@ -85,8 +83,6 @@ export function useAdvancedSearchFormState() {
   return {
     sortOrder,
     setSortOrder,
-    categoryInput,
-    setCategoryInput,
     placeInput,
     setPlaceInput,
     selectedDateTypes,

@@ -16,25 +16,35 @@ describe('<TargetAgeGroupSelector />', () => {
   it('renders without crashing', () => {
     render(<TargetAgeGroupSelector label="Target group" />);
     expect(
-      screen.getByRole('button', { name: 'Target group' })
+      screen.getByRole('combobox', {
+        name: 'Target group. 0 valittua vaihtoehtoa.',
+      })
     ).toBeInTheDocument();
   });
 
   it('renders with correct placeholder', () => {
     render(<TargetAgeGroupSelector label="Target group" />);
-    expect(screen.getByText('Valitse ikäryhmä')).toBeInTheDocument();
+    expect(
+      screen.getByRole('combobox', {
+        name: 'Target group. 0 valittua vaihtoehtoa.',
+      })
+    ).toBeInTheDocument();
   });
 
   it('renders with correct placeholder without label', () => {
     render(<TargetAgeGroupSelector />);
     expect(
-      screen.getByRole('button', { name: 'Valitse ikäryhmä' })
+      screen.getByRole('combobox', {
+        name: 'Valitse ikäryhmä. 0 valittua vaihtoehtoa.',
+      })
     ).toBeInTheDocument();
   });
 
   it('shows all age group options when opened', async () => {
     render(<TargetAgeGroupSelector label="Target group" />);
-    const selectButton = screen.getByRole('button', { name: 'Target group' });
+    const selectButton = screen.getByRole('combobox', {
+      name: 'Target group. 0 valittua vaihtoehtoa.',
+    });
     await userEvent.click(selectButton);
 
     // +1 for the empty option
@@ -49,14 +59,16 @@ describe('<TargetAgeGroupSelector />', () => {
   it('calls onChange with the correct value when an option is selected', async () => {
     const onChange = vi.fn();
     render(<TargetAgeGroupSelector label="Target group" onChange={onChange} />);
-    const selectButton = screen.getByRole('button', { name: 'Target group' });
+    const selectButton = screen.getByRole('combobox', {
+      name: 'Target group. 0 valittua vaihtoehtoa.',
+    });
     await userEvent.click(selectButton);
 
     const childrenOption = screen.getByText('Lapset');
     await userEvent.click(childrenOption);
 
     expect(onChange).toHaveBeenCalledTimes(1);
-    const selectedOption = onChange.mock.calls[0][0];
+    const selectedOption = onChange.mock.calls[0][1];
     expect(selectedOption.value).toBe('children');
   });
 
@@ -77,11 +89,13 @@ describe('<TargetAgeGroupSelector />', () => {
     );
     expect(screen.getByText('Ikääntyneet')).toBeInTheDocument();
 
-    const clearButton = screen.getByRole('button', { name: 'Tyhjennä' });
+    const clearButton = screen.getByRole('button', {
+      name: 'Poista nykyinen valinta "Ikääntyneet".',
+    });
     await userEvent.click(clearButton);
 
     expect(onChange).toHaveBeenCalledTimes(1);
     const selectedOption = onChange.mock.calls[0][0];
-    expect(selectedOption).toBeNull();
+    expect(selectedOption).toStrictEqual([]);
   });
 });

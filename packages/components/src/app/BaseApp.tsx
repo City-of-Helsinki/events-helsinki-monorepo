@@ -1,16 +1,14 @@
 import type createMatomoInstance from '@jonkoops/matomo-tracker-react/lib/instance.js';
-import MatomoProvider from '@jonkoops/matomo-tracker-react/lib/MatomoProvider.js';
 
 import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';
 import React from 'react';
 
 import { CmsHelperProvider } from '../cmsHelperProvider';
-import { MatomoWrapper } from '../components';
+import { EventsCookieConsent } from '../components';
 import type { createAskemInstance } from '../components/askem';
 
 import ErrorFallback from '../components/errorPages/ErrorFallback';
-import useMatomoInstance from '../components/matomo/useMatomo';
 import ResetFocus from '../components/resetFocus/ResetFocus';
 import { CookieConfigurationProvider } from '../cookieConfigurationProvider';
 import {
@@ -40,6 +38,7 @@ export type Props = {
   onConsentGiven?: (askemConsentGiven: boolean) => void;
   asPath: string;
   withConsent: boolean;
+  consentUrl: string;
 } & NavigationProviderProps &
   AppRoutingProviderProps &
   AppThemeProviderProps &
@@ -72,7 +71,7 @@ function BaseApp({
   cookieDomain,
   routerHelper,
   matomoConfiguration,
-  askemFeedbackConfiguration: askemConfigurationInput,
+  askemFeedbackConfiguration,
   defaultButtonTheme,
   defaultButtonVariant,
   getCardUrl,
@@ -82,33 +81,36 @@ function BaseApp({
   getHelsinkiOnlySearchUrl,
   getPlainEventUrl,
   getKeywordOnClickHandler,
+  appName,
+  consentUrl,
 }: Props) {
-  const matomoInstance = useMatomoInstance(matomoConfiguration);
-
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
   //      SEO performance is not impacted.
   useHdsStyleFix();
 
   return (
-    <CookieConfigurationProvider
-      askemConfiguration={askemConfigurationInput}
-      cookieDomain={cookieDomain}
+    <AppThemeProvider
+      defaultButtonTheme={defaultButtonTheme}
+      defaultButtonVariant={defaultButtonVariant}
     >
-      <AppThemeProvider
-        defaultButtonTheme={defaultButtonTheme}
-        defaultButtonVariant={defaultButtonVariant}
-      >
-        <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-          <AppRoutingProvider
-            getCardUrl={getCardUrl}
-            getEventUrl={getEventUrl}
-            getEventListLinkUrl={getEventListLinkUrl}
-            getOrganizationSearchUrl={getOrganizationSearchUrl}
-            getHelsinkiOnlySearchUrl={getHelsinkiOnlySearchUrl}
-            getPlainEventUrl={getPlainEventUrl}
-            getKeywordOnClickHandler={getKeywordOnClickHandler}
+      <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+        <AppRoutingProvider
+          getCardUrl={getCardUrl}
+          getEventUrl={getEventUrl}
+          getEventListLinkUrl={getEventListLinkUrl}
+          getOrganizationSearchUrl={getOrganizationSearchUrl}
+          getHelsinkiOnlySearchUrl={getHelsinkiOnlySearchUrl}
+          getPlainEventUrl={getPlainEventUrl}
+          getKeywordOnClickHandler={getKeywordOnClickHandler}
+        >
+          <CookieConfigurationProvider
+            askemConfiguration={askemFeedbackConfiguration}
+            matomoConfiguration={matomoConfiguration}
+            cookieDomain={cookieDomain}
+            appName={appName}
+            consentUrl={consentUrl}
           >
-            <MatomoProvider value={matomoInstance}>
+            <EventsCookieConsent>
               <GeolocationProvider>
                 <NavigationProvider
                   headerMenu={headerMenu}
@@ -116,19 +118,17 @@ function BaseApp({
                   footerMenu={footerMenu}
                   languages={languages}
                 >
-                  <MatomoWrapper>
-                    <GeolocationErrorNotification />
-                    <ResetFocus />
-                    {children}
-                    <DynamicToastContainer />
-                  </MatomoWrapper>
+                  <GeolocationErrorNotification />
+                  <ResetFocus />
+                  {children}
+                  <DynamicToastContainer />
                 </NavigationProvider>
               </GeolocationProvider>
-            </MatomoProvider>
-          </AppRoutingProvider>
-        </CmsHelperProvider>
-      </AppThemeProvider>
-    </CookieConfigurationProvider>
+            </EventsCookieConsent>
+          </CookieConfigurationProvider>
+        </AppRoutingProvider>
+      </CmsHelperProvider>
+    </AppThemeProvider>
   );
 }
 

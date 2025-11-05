@@ -1,50 +1,36 @@
-import { useRouter } from 'next/router';
-import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
+import MatomoProvider from '@jonkoops/matomo-tracker-react/lib/MatomoProvider.js';
 import { AskemFeedbackContainer, AskemProvider } from '../askem';
 import useAskemContext from '../askem/useAskemContext';
-import EventsCookieConsent from '../eventsCookieConsent/EventsCookieConsent';
+import useMatomoInstance from '../matomo/useMatomo';
+import MatomoWrapper from '../matomoWrapper/MatomoWrapper';
 
 type UserTrackingFeaturesProps = {
-  appName: string;
   hasFeedBack: boolean;
   feedbackWithPadding: boolean;
-  consentUrl: string;
-  isModalConsent: boolean;
+  cookieBanner?: React.ReactNode;
   children?: React.ReactNode[];
 };
 
 export default function UserTrackingFeatures({
-  appName,
   hasFeedBack,
   feedbackWithPadding,
-  consentUrl,
-  isModalConsent,
+  cookieBanner,
 }: UserTrackingFeaturesProps) {
-  const { asPath } = useRouter();
-  const { cookieDomain, askemConfiguration: askemConfigurationInput } =
-    useCookieConfigurationContext();
-
-  const { askemInstance, handleConsentGiven } = useAskemContext({
-    cookieDomain,
-    asPath,
-    askemConfigurationInput,
-  });
+  const { askemInstance } = useAskemContext();
+  const matomoInstance = useMatomoInstance();
 
   return (
-    <AskemProvider value={askemInstance}>
-      {hasFeedBack && (
-        <AskemFeedbackContainer
-          withPadding={feedbackWithPadding}
-          consentUrl={consentUrl}
-        />
-      )}
-      {isModalConsent && (
-        <EventsCookieConsent
-          onConsentGiven={handleConsentGiven}
-          allowLanguageSwitch={false}
-          appName={appName}
-        />
-      )}
-    </AskemProvider>
+    <>
+      <MatomoProvider value={matomoInstance}>
+        <MatomoWrapper>
+          <AskemProvider value={askemInstance}>
+            {hasFeedBack && (
+              <AskemFeedbackContainer withPadding={feedbackWithPadding} />
+            )}
+          </AskemProvider>
+        </MatomoWrapper>
+      </MatomoProvider>
+      {cookieBanner}
+    </>
   );
 }

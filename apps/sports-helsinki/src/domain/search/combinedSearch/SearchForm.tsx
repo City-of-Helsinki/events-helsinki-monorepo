@@ -1,4 +1,3 @@
-import type { Option } from '@events-helsinki/components';
 import {
   useSearchTranslation,
   MultiSelectDropdown,
@@ -8,8 +7,14 @@ import {
   AdvancedSearchTextInput,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import type { SelectCustomTheme } from 'hds-react';
-import { Button, IconGroup, IconPersonWheelchair, IconSearch } from 'hds-react';
+import type { SelectCustomTheme, Option } from 'hds-react';
+import {
+  Button,
+  ButtonVariant,
+  IconGroup,
+  IconPersonWheelchair,
+  IconSearch,
+} from 'hds-react';
 import React from 'react';
 import AppConfig from '../../app/AppConfig';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
@@ -51,11 +56,6 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     setSelectedAccessibilityProfile,
   } = useFormValues();
 
-  const accessibilityProfileValue =
-    accessibilityProfiles.find(
-      (option) => option.value === selectedAccessibilityProfile
-    ) ?? accessibilityProfiles[0]; // Select the first -- an empty option -- if no value.
-
   const handleSubmit = (formEvent?: React.FormEvent) => {
     // The default submit event must be prevented so the page does not reload
     formEvent?.preventDefault();
@@ -74,7 +74,10 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     }
   };
 
-  const handleAccessibilityProfileOnChange = (option: Option) => {
+  const handleAccessibilityProfileOnChange = (
+    _selectedOptions: Option[],
+    option: Option
+  ) => {
     setSelectedAccessibilityProfile(option?.value);
     if (option?.value) {
       setFormValue('venueOrderBy', option.value);
@@ -151,24 +154,28 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
               <div>
                 <SearchSelect
                   id="accessibilityProfile"
-                  label={t('search:search.labelAccessibilityProfile')}
-                  placeholder={t('search:search.labelAccessibilityProfile')}
-                  clearButtonAriaLabel={t(
-                    'search:search.ariaLabelClearAccessibilityProfile'
-                  )}
+                  texts={{
+                    label: t('search:search.labelAccessibilityProfile'),
+                    placeholder: t('search:search.labelAccessibilityProfile'),
+                    clearButtonAriaLabel_one: t(
+                      'search:search.ariaLabelClearAccessibilityProfile'
+                    ),
+                  }}
                   options={accessibilityProfiles}
-                  value={accessibilityProfileValue}
+                  value={selectedAccessibilityProfile ?? undefined}
                   onChange={handleAccessibilityProfileOnChange}
                   icon={<IconPersonWheelchair aria-hidden />}
-                  theme={
-                    {
-                      '--menu-item-background': 'var(--color-input-dark)',
-                      '--menu-item-background-hover': 'var(--color-input-dark)',
-                      '--menu-item-background-selected-hover':
-                        'var(--color-input-dark)',
-                    } as SelectCustomTheme
-                  }
-                  noOutline
+                  theme={{
+                    '--menu-item-background-color-hover':
+                      'var(--color-input-light)',
+                    '--menu-item-background-color-selected':
+                      'var(--color-input-dark)',
+                    '--menu-item-background-color-selected-hover':
+                      'var(--color-input-dark)',
+                    '--menu-item-color-selected-hover': 'var(--color-white)',
+                  }}
+                  // FIXME: how to handle no outline?
+                  // noOutline
                   // FIXME: Using the clearable could be a better solution than offering an empty option,
                   // but the HDS has a bug or unfinished feature in the clearable
                   // and the controlled state of the input value, does not work when it's used.
@@ -188,9 +195,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                 }
               >
                 <Button
-                  variant="success"
+                  variant={ButtonVariant.Success}
                   fullWidth={true}
-                  iconLeft={<IconSearch aria-hidden />}
+                  iconStart={<IconSearch aria-hidden />}
                   type="submit"
                 >
                   {t('search.buttonSearch')}

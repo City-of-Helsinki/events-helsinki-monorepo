@@ -1,5 +1,5 @@
-import type { Option } from '@events-helsinki/components';
 import { useSearchTranslation } from '@events-helsinki/components';
+import type { Option } from 'hds-react';
 import React from 'react';
 import {
   getTargetGroupOptions,
@@ -10,7 +10,14 @@ import {
 } from '../../eventSearch/utils';
 import { useCombinedSearchContext } from '../adapters/CombinedSearchContext';
 
-export const EMPTY_OPTION: Option = { text: '', value: '' };
+export const EMPTY_OPTION: Option = {
+  label: '',
+  value: '',
+  selected: false,
+  isGroupLabel: false,
+  visible: true,
+  disabled: false,
+};
 
 export function useFormValues() {
   const { t } = useSearchTranslation();

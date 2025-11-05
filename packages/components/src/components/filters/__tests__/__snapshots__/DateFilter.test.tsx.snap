@@ -2,80 +2,56 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 _filter_f76730"
-  id="hds-tag"
+  aria-label="Poista suodatin: text"
+  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 _filter_f76730 Tag-module_action__4ky2K tag_hds-tag--action__Az-Fm"
+  role="button"
+  tabindex="0"
 >
-  <span
-    class="Tag-module_label__zCgFr undefined"
-    id="hds-tag-label"
-  >
-    <span
-      aria-hidden="true"
-    >
-      text
-    </span>
+  <span>
+    text
   </span>
-  <button
-    aria-label="Poista suodatin: text"
-    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz"
-    id="hds-tag-delete-button"
-    type="button"
+  <svg
+    aria-hidden="true"
+    aria-label="cross"
+    class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_small__gTGkU icon_hds-icon--size-s__2Lkik Tag-module_icon__or2kN tag_hds-tag__icon__2_xWY"
+    role="img"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <svg
-      aria-hidden="true"
-      aria-label="cross"
-      class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_s__2WGWe icon_hds-icon--size-s__2Lkik"
-      role="img"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clip-rule="evenodd"
-        d="M18 7.5L13.5 12L18 16.5L16.5 18L12 13.5L7.5 18L6 16.5L10.5 12L6 7.5L7.5 6L12 10.5L16.5 6L18 7.5Z"
-        fill="currentColor"
-        fill-rule="evenodd"
-      />
-    </svg>
-  </button>
+    <path
+      clip-rule="evenodd"
+      d="M18 7.5L13.5 12L18 16.5L16.5 18L12 13.5L7.5 18L6 16.5L10.5 12L6 7.5L7.5 6L12 10.5L16.5 6L18 7.5Z"
+      fill="currentColor"
+      fill-rule="evenodd"
+    />
+  </svg>
 </div>
 `;
 
 exports[`matches snapshot 2`] = `
 <div
-  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 _filter_f76730"
-  id="hds-tag"
+  aria-label="Poista suodatin: Some filter text"
+  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 _filter_f76730 Tag-module_action__4ky2K tag_hds-tag--action__Az-Fm"
+  role="button"
+  tabindex="0"
 >
-  <span
-    class="Tag-module_label__zCgFr undefined"
-    id="hds-tag-label"
-  >
-    <span
-      aria-hidden="true"
-    >
-      Some filter text
-    </span>
+  <span>
+    Some filter text
   </span>
-  <button
-    aria-label="Poista suodatin: Some filter text"
-    class="Tag-module_deleteButton__1diMR tag_hds-tag__delete-button__33Tgz"
-    id="hds-tag-delete-button"
-    type="button"
+  <svg
+    aria-hidden="true"
+    aria-label="cross"
+    class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_small__gTGkU icon_hds-icon--size-s__2Lkik Tag-module_icon__or2kN tag_hds-tag__icon__2_xWY"
+    role="img"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <svg
-      aria-hidden="true"
-      aria-label="cross"
-      class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_s__2WGWe icon_hds-icon--size-s__2Lkik"
-      role="img"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clip-rule="evenodd"
-        d="M18 7.5L13.5 12L18 16.5L16.5 18L12 13.5L7.5 18L6 16.5L10.5 12L6 7.5L7.5 6L12 10.5L16.5 6L18 7.5Z"
-        fill="currentColor"
-        fill-rule="evenodd"
-      />
-    </svg>
-  </button>
+    <path
+      clip-rule="evenodd"
+      d="M18 7.5L13.5 12L18 16.5L16.5 18L12 13.5L7.5 18L6 16.5L10.5 12L6 7.5L7.5 6L12 10.5L16.5 6L18 7.5Z"
+      fill="currentColor"
+      fill-rule="evenodd"
+    />
+  </svg>
 </div>
 `;

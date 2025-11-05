@@ -9,6 +9,7 @@ import {
   HelsinkiCityOwnedIcon,
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
 } from '@events-helsinki/components';
+import { ButtonVariant } from 'hds-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
@@ -83,7 +84,7 @@ export default function useSportsRHHCConfig(args: {
         ),
       },
       customCopy: {
-        loadMoreButtonVariant: 'success',
+        loadMoreButtonVariant: ButtonVariant.Success,
       },
       siteName: resilientT('appSports:appName'),
       currentLanguageCode: getLanguageCode(locale),

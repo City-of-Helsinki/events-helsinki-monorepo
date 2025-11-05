@@ -17,6 +17,8 @@ import {
   HELSINKI_OCD_DIVISION_ID,
   EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
+import type { SelectCustomTheme } from 'hds-react';
+import { ButtonVariant } from 'hds-react';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
@@ -197,10 +199,27 @@ const SearchPage: React.FC<{
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
-                    loadMoreButtonVariant="success"
+                    loadMoreButtonVariant={ButtonVariant.Success}
                   />
                 }
-                orderBySelectComponent={<EventsOrderBySelect />}
+                orderBySelectComponent={
+                  <EventsOrderBySelect
+                    theme={
+                      {
+                        '--menu-item-background-color':
+                          'var(--color-input-dark)',
+                        '--menu-item-background-color-hover':
+                          'var(--color-input-light)',
+                        '--menu-item-background-color-selected':
+                          'var(--color-input-dark)',
+                        '--menu-item-background-color-selected-hover':
+                          'var(--color-input-dark)',
+                        '--menu-item-color-selected-hover':
+                          'var(--color-white)',
+                      } as SelectCustomTheme
+                    }
+                  />
+                }
               />
             )}
           </LoadingSpinner>

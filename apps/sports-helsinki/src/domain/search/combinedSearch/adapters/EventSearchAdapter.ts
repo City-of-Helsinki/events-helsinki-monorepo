@@ -120,7 +120,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     return [
       ...new Set( // unique keywords
         sportsCategories.flatMap(
-          (category) => sportsCategoryData?.[category].keywords ?? []
+          (category) => sportsCategoryData?.[category]?.keywords ?? []
         )
       ),
     ];
@@ -130,7 +130,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     return [
       ...new Set( // unique keywords
         targetGroups.flatMap(
-          (targetGroup) => TARGET_GROUP_DATA?.[targetGroup].keywords ?? []
+          (targetGroup) => TARGET_GROUP_DATA?.[targetGroup]?.keywords ?? []
         )
       ),
     ];

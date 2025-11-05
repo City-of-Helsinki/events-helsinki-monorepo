@@ -12,7 +12,6 @@ const MapBox = dynamic(() => import('../../../../components/mapBox/MapBox'), {
 
 interface Props {
   event: EventFields;
-  consentUrl?: string;
 }
 
 export const getLocationStr = (
@@ -34,10 +33,7 @@ export const getLocationStr = (
     .join(', ');
 };
 
-const EventLocation: React.FC<Props> = ({
-  event,
-  consentUrl = '/cookie-consent',
-}) => {
+const EventLocation: React.FC<Props> = ({ event }) => {
   const { t } = useCommonTranslation();
   const locale = useLocale();
   const { googleDirectionsLink, hslDirectionsLink, name } = getEventFields(
@@ -54,7 +50,6 @@ const EventLocation: React.FC<Props> = ({
       placeAddress={getLocationStr(event, locale, true, false)}
       googleDirectionsLink={googleDirectionsLink}
       hslDirectionsLink={hslDirectionsLink}
-      consentUrl={consentUrl}
     />
   );
 };

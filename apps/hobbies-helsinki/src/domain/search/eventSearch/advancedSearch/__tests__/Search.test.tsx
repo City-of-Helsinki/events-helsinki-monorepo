@@ -197,13 +197,13 @@ it('should change search query after selecting start date and pressing submit bu
 it('should change search query after clicking category menu item', async () => {
   const { router } = renderComponent();
 
-  const chooseCategoryButton = screen.getByRole('button', {
-    name: /valitse kategoria/i,
+  const chooseCategoryButton = screen.getByRole('combobox', {
+    name: /Valitse kategoria. 0 valittua vaihtoehtoa./i,
   });
 
   await userEvent.click(chooseCategoryButton);
   await userEvent.click(
-    screen.getByRole('checkbox', { name: /elokuva ja media/i })
+    screen.getByRole('option', { name: /elokuva ja media/i })
   );
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
@@ -217,15 +217,15 @@ it('should change search query after clicking category menu item', async () => {
 
   // multiple selection
   await userEvent.click(chooseCategoryButton);
-  await userEvent.click(screen.getByRole('checkbox', { name: /pelit/i }));
-  await userEvent.click(screen.getByRole('checkbox', { name: /musiikki/i }));
+  await userEvent.click(screen.getByRole('option', { name: /pelit/i }));
+  await userEvent.click(screen.getByRole('option', { name: /musiikki/i }));
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
     // eslint-disable-next-line @stylistic/max-len
-    asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=movie_and_media%2Cgames%2Cmusic&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
+    asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=movie_and_media%2Cmusic%2Cgames&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
     query: {
-      [EVENT_SEARCH_FILTERS.CATEGORIES]: 'movie_and_media,games,music',
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: 'movie_and_media,music,games',
       [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
     },
   });

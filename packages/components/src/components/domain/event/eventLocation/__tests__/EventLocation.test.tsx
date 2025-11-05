@@ -1,11 +1,9 @@
 import { translations } from '@events-helsinki/common-i18n';
+import { useGroupConsent } from 'hds-react';
 import { render, screen } from '@/test-utils';
 import { fakeEvent, fakePlace } from '@/test-utils/mockDataUtils';
-import {
-  acceptRequiredCookieConsentsOnly,
-  acceptServiceMapCookieConsents,
-} from '@/test-utils/mocks/cookieMocks';
 import type { EventFields } from '../../../../../types';
+import { consentGroupIds } from '../../../../eventsCookieConsent/constants';
 import EventLocation from '../EventLocation';
 
 const eventName = 'Event name';
@@ -18,6 +16,14 @@ const event = fakeEvent({
   }),
   name: { fi: eventName },
 }) as EventFields;
+
+// Mock dependencies
+vi.mock('hds-react', async () => ({
+  ...(await vi.importActual('hds-react')),
+  useGroupConsent: vi.fn(),
+}));
+
+const mockedUseGroupConsent = vi.mocked(useGroupConsent);
 
 it('should render 1 mapLink and 2 directionsLink', async () => {
   render(<EventLocation event={event} />);
@@ -58,7 +64,9 @@ describe('cookie consents', () => {
   });
   describe('when only required consents accepted', () => {
     it('should not render service map', () => {
-      acceptRequiredCookieConsentsOnly();
+      mockedUseGroupConsent.mockImplementation((groupName: string) =>
+        groupName === consentGroupIds.essentials ? true : false
+      );
       render(<EventLocation event={event} />);
       expect(
         screen.queryByTitle(translations.common.mapBox.location.mapTitle)
@@ -67,7 +75,9 @@ describe('cookie consents', () => {
   });
   describe('when service map consents accepted', () => {
     it('renders service map', async () => {
-      acceptServiceMapCookieConsents();
+      mockedUseGroupConsent.mockImplementation((groupName: string) =>
+        groupName === consentGroupIds.serviceMap ? true : false
+      );
       render(<EventLocation event={event} />);
       expect(
         screen.getByTitle(translations.common.mapBox.location.mapTitle)

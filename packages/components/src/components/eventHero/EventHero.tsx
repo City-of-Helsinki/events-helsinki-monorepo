@@ -273,7 +273,7 @@ export const OfferButton: React.FC<
         className={buttonStyles.buttonCoatBlue}
         aria-label={buttonAriaLabelText}
         onClick={() => window.open(externalRegistrationUrl)}
-        iconRight={<IconLinkExternal aria-hidden />}
+        iconEnd={<IconLinkExternal aria-hidden />}
       >
         {buttonText}
       </Button>

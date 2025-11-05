@@ -252,7 +252,14 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
             id={`${name}_0`}
             placeholder={withPlaceholders ? minInputStartValue : ''}
             onChange={(e) => handleInputChange(RANGE_INPUT.MIN, e.target.value)}
-            onBlur={(e) => handleInputBlur(RANGE_INPUT.MIN, e.target.value)}
+            // TODO: Should the onBlur be handled totally differently?
+            // In HDS v4 there might be a div-element here, so the target must be checked.
+            onBlur={(e) =>
+              handleInputBlur(
+                RANGE_INPUT.MIN,
+                'value' in e.target ? e.target.value : ''
+              )
+            }
             value={minInputValue}
             label={minInputLabel}
             disabled={internalIsFixedValues}
@@ -265,7 +272,12 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
             id={`${name}_1`}
             placeholder={withPlaceholders ? maxInputEndValue : ''}
             onChange={(e) => handleInputChange(RANGE_INPUT.MAX, e.target.value)}
-            onBlur={(e) => handleInputBlur(RANGE_INPUT.MAX, e.target.value)}
+            onBlur={(e) =>
+              handleInputBlur(
+                RANGE_INPUT.MAX,
+                'value' in e.target ? e.target.value : ''
+              )
+            }
             value={maxInputValue}
             label={maxInputLabel}
             disabled={internalIsFixedValues}

@@ -113,7 +113,7 @@ curl -sSL https://router.apollo.dev/download/nix/latest | sh
 To run the router locally with your configuration and supergraph, run:
 
 ```sh
-./router --config=router.yaml --supergraph=schemas/supergraph.graphql
+./router --config=router.yaml --supergraph=supergraph.graphql
 ```
 
 ### Serve dockerized local router
@@ -188,10 +188,10 @@ rover graph introspect https://tapahtumat.app-staging.hkih.hion.dev/graphql > my
 
 #### Work with supergraph
 
-To compose a new supergraph, use:
+To compose a new supergraph and save it, use:
 
 ```sh
-rover supergraph compose --config ./supergraph-config.yaml
+rover supergraph compose --config ./supergraph-config.yaml > supergraph.graphql
 ```
 
 ## Router configuration

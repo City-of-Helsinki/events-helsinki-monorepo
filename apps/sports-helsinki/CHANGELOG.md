@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.33.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.32.1...sports-helsinki-v1.33.0) (2025-11-06)
+
+### Features
+
+- Add "relevance" to event and course search ordering options ([2bdf47a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2bdf47a03f40341b6ae20077489d9a1ed8c1b108))
+- Show all -link in "upcoming" carousel of venue's upcoming events ([cfa24a1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cfa24a1cd3417b6d8fcd78580bfaa36d611acf58))
+- Show in-app back arrow when referrer is not external origin ([b4e067b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b4e067b2c04c905febc18f2ab02ba99d4c9837f3))
+- **sports:** Hide landing page shortcuts on small screen ([855c41a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/855c41a1ff2a7e3e25f11aaa20169bf35c4dd72b))
+- **sports:** Landing page fetches title and description from CMS ([c6882a6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c6882a6df3ab1462734d5536f10abf3175504402))
+- **sports:** Search page fetches page heading and descriptions from CMS ([2b40cb7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2b40cb7999973f0749b55aca25a319cfa33a736d))
+- Switch page content order when using small screen ([dba08f8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dba08f8f5a51dce78df64ecf3a422214300890fa))
+- Switch venue details content order when using small screen ([da9658b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/da9658bdce94f8aecd3b1aec410bc7eb25ba12de))
+
+### Bug Fixes
+
+- **apps,components:** Registration field changes ([1fe885c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1fe885c9f90c14975364e2fdc22582df2e022f66))
+- Remove link arrow label / enrolment status from carousel cards ([6674b24](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6674b24768eb21d94a32e25b8cc2179201260291))
+- Remove remainingAttendeeCapacity field from event details root ([fc63bb8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fc63bb8207632c4aba0c2da57172ec81c7656e9a))
+
 ## [1.32.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.32.0...sports-helsinki-v1.32.1) (2025-10-22)
 
 ### Bug Fixes

@@ -145,8 +145,10 @@ class AppConfig {
     ButtonPresetTheme.Bus;
 
   /** A primary variant for the buttons. https://hds.hel.fi/foundation/design-tokens/colour. */
-  static readonly defaultButtonVariant: ButtonProps['variant'] =
-    ButtonVariant.Success;
+  static readonly defaultButtonVariant: Exclude<
+    ButtonVariant,
+    ButtonVariant.Supplementary
+  > = ButtonVariant.Success;
 
   static get matomoConfiguration() {
     const matomoUrlBase = process.env.NEXT_PUBLIC_MATOMO_URL_BASE;

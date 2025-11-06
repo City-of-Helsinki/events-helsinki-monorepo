@@ -1,4 +1,4 @@
-import { Footer, Link, Logo, logoFi, logoSv } from 'hds-react';
+import { Footer, Link, Logo, logoFi, LogoSize, logoSv } from 'hds-react';
 import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
@@ -68,7 +68,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
           logo={
             <Logo
               src={locale === 'sv' ? logoSv : logoFi}
-              size="medium"
+              size={LogoSize.Medium}
               alt={commonT('common:cityOfHelsinki')}
             />
           }

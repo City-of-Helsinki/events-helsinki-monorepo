@@ -1,10 +1,11 @@
-import { useCookies } from 'hds-react';
+import { useCookieConsents } from 'hds-react';
 import { useCallback, useEffect, useState } from 'react';
 
 import createAskemInstance from './instance';
 import type { AskemConfigs, AskemInstance } from './types';
 
 export default function useAskemContext({
+  // TODO: handle cookieDomain
   cookieDomain,
   asPath,
   askemConfigurationInput,
@@ -13,21 +14,21 @@ export default function useAskemContext({
   asPath: string;
   askemConfigurationInput: AskemConfigs;
 }) {
-  const { getAllConsents } = useCookies({ cookieDomain });
+  const consents = useCookieConsents();
   const [askemInstance, setAskemInstance] = useState<AskemInstance | null>(
     null
   );
   const [consentGiven, setConsentGiven] = useState(false);
 
   const handleConsentGiven = useCallback(() => {
-    const consents = getAllConsents();
-    const hasConsent = !!(
-      consents['askemBid'] &&
-      consents['askemBidTs'] &&
-      consents['askemReaction']
+    const hasConsent = !!['askemBid', 'askemBidTs', 'askemReaction'].every(
+      (groupName) =>
+        Boolean(
+          consents.find((consent) => consent.group === groupName)?.consented
+        )
     );
     setConsentGiven(hasConsent);
-  }, [getAllConsents]);
+  }, [consents]);
 
   useEffect(() => {
     if (asPath) {

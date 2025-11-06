@@ -1,9 +1,9 @@
-import type { CommonButtonProps } from 'hds-react';
+import type { ButtonProps, ButtonVariant } from 'hds-react';
 import React from 'react';
 
 export type AppThemeContextProps = {
-  defaultButtonTheme?: CommonButtonProps['theme'];
-  defaultButtonVariant?: CommonButtonProps['variant'];
+  defaultButtonTheme?: ButtonProps['theme'];
+  defaultButtonVariant?: Exclude<ButtonVariant, ButtonVariant.Supplementary>;
 };
 
 const AppThemeContext = React.createContext<AppThemeContextProps>({});

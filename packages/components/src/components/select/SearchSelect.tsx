@@ -23,7 +23,7 @@ export default function SearchSelect(props: Parameters<typeof Select>[0]) {
   return (
     <Select
       {...props}
-      multiselect={false}
+      multiSelect={false}
       className={classNames([
         styles.searchSelect,
         {

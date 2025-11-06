@@ -1,5 +1,10 @@
 import classNames from 'classnames';
-import type { IconProps, NumberInputProps, TextInputProps } from 'hds-react';
+import {
+  IconSize,
+  type IconProps,
+  type NumberInputProps,
+  type TextInputProps,
+} from 'hds-react';
 import React from 'react';
 
 import styles from './advancedSearchInput.module.scss';
@@ -72,8 +77,8 @@ function AdvancedSearchInput<
       <div className={styles.iconWrapper}>
         {React.cloneElement(IconComponent, {
           ...IconComponent.props,
-          size: 's',
-          ariaHidden: true,
+          size: IconSize.Small,
+          'aria-hidden': true,
         })}
       </div>
       <div className={styles.inputWrapper}>

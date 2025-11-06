@@ -81,6 +81,7 @@
     "`tar` in resolutions to resolve dependabot issue of dep for a dep",
     "`jose` in resolutions to resolve dependabot issue of dep for a dep",
     "`tar` in resolutions to resolve dependabot issue of dep for a dep",
+    "`form-data` in resolutions to resolve dependabot issues #213 & #214 of dep for a dep",
     "`get-func-name` in resolutions to resolve dependabot issue of dep for a dep",
     "`brace-expansion` in resolutions to resolve dependabot issue of dep for a dep",
     "other packages in resolutions are there to make it sure only 1 version of it is installed in monorepo"
@@ -97,6 +98,7 @@
     "@testing-library/dom": "^10.4.0",
     "tar:": "6.2.1",
     "jose": "4.15.9",
+    "form-data": "^4.0.4",
     "get-func-name": "2.0.2",
     "brace-expansion": "1.1.12"
   },

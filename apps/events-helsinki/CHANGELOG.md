@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.29.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.28.0...events-helsinki-v1.29.0) (2025-11-06)
+
+
+### Features
+
+* Add "relevance" to event and course search ordering options ([2bdf47a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2bdf47a03f40341b6ae20077489d9a1ed8c1b108))
+* **events:** Landing page fetches title and description from CMS ([4ec3b72](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4ec3b720fe5617764b794cfa0dbce34cbf7d7844))
+* **events:** Search page fetches page heading and descriptions from CMS ([460bb84](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/460bb8469a205d0415640f307b2baa35a670f113))
+* Switch page content order when using small screen ([dba08f8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dba08f8f5a51dce78df64ecf3a422214300890fa))
+
+
+### Bug Fixes
+
+* **apps,components:** Registration field changes ([1fe885c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1fe885c9f90c14975364e2fdc22582df2e022f66))
+* **codegen:** Graphql schema type generation using custom script ([bc2e913](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bc2e91303577d2d084932c34b6a62b82df7019aa))
+* Remember event search sort ordering value on new search ([28a127a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/28a127ad5f9b5b5b2b3775c62446060600a0d323))
+* Remove link arrow label / enrolment status from carousel cards ([6674b24](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6674b24768eb21d94a32e25b8cc2179201260291))
+* Scss breakpoints were used wrongly ([71ddb6e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/71ddb6e3cbcec7051fc2629eba8dfe2f18133bf6))
+* **types:** Make use of AppLanguage more in a typesafe way ([9a6bc77](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9a6bc7760183be4ed7e8b8a39c8494a127be0343))
+* Upgrade HCRC-lib to fix duplicate fragment ([c0b2f35](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c0b2f35160547fd1baba39f0cbd2552fdea4d856))
+
 ## [1.28.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.27.0...events-helsinki-v1.28.0) (2025-10-22)
 
 

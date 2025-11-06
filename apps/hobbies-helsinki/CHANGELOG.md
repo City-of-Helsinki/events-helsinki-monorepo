@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.27.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.26.0...hobbies-helsinki-v2.27.0) (2025-11-06)
+
+
+### Features
+
+* Add "relevance" to event and course search ordering options ([2bdf47a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2bdf47a03f40341b6ae20077489d9a1ed8c1b108))
+* **hobbies:** Add end/last modified/start time sorting to search ([e4f78a6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e4f78a6f8d92a1987da8b7020088aeaa20865c87))
+* **hobbies:** Add registration to event search "include" -query param ([3af0699](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3af06997a91d656fa3ab174316d260edcd95c00b))
+* **hobbies:** Landing page fetches title and description from CMS ([5b66dcf](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5b66dcff3a19f27ac9edace3606988f603f59ea3))
+* **hobbies:** Search page fetches page heading and descriptions from CMS ([3a4e3e3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3a4e3e3c96266ef9b41ccf16da4bb6853cf0478c))
+* Switch page content order when using small screen ([dba08f8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dba08f8f5a51dce78df64ecf3a422214300890fa))
+
+
+### Bug Fixes
+
+* **apps,components:** Registration field changes ([1fe885c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1fe885c9f90c14975364e2fdc22582df2e022f66))
+* **codegen:** Graphql schema type generation using custom script ([bc2e913](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bc2e91303577d2d084932c34b6a62b82df7019aa))
+* Remember event search sort ordering value on new search ([28a127a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/28a127ad5f9b5b5b2b3775c62446060600a0d323))
+* Remove link arrow label / enrolment status from carousel cards ([6674b24](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6674b24768eb21d94a32e25b8cc2179201260291))
+* Remove needless and dangerous console logging ([db6c327](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/db6c3273f160277cd3afe80175eb06b10546fd22))
+* **types:** Make use of AppLanguage more in a typesafe way ([9a6bc77](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9a6bc7760183be4ed7e8b8a39c8494a127be0343))
+* Upgrade HCRC-lib to fix duplicate fragment ([c0b2f35](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c0b2f35160547fd1baba39f0cbd2552fdea4d856))
+
 ## [2.26.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.25.0...hobbies-helsinki-v2.26.0) (2025-10-22)
 
 

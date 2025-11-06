@@ -80,6 +80,7 @@
   "//": [
     "`tar` in resolutions to resolve dependabot issue of dep for a dep",
     "`jose` in resolutions to resolve dependabot issue of dep for a dep",
+    "`@babel/runtime` in resolutions to resolve dependabot issue #184 of dep for a dep",
     "`socks` in resolutions to resolve dependabot issue #83 of dep for a dep",
     "`tar` in resolutions to resolve dependabot issue #71 of dep for a dep",
     "`ws` in resolutions to resolve dependabot issue #85 of dep for a dep",
@@ -97,6 +98,7 @@
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.1",
     "@babel/core": "^7.28.5",
+    "@babel/runtime": "^7.28.4",
     "@testing-library/dom": "^10.4.0",
     "socks": "^2.8.6",
     "tar": "^6.2.1",

@@ -19465,13 +19465,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"os-tmpdir@npm:~1.0.1, os-tmpdir@npm:~1.0.2":
-  version: 1.0.2
-  resolution: "os-tmpdir@npm:1.0.2"
-  checksum: c69d1cc11e9da80f1e2b21a08566fec9a690e4b5bc47b3ac996cfe8d24f4e9e6857779a39a326bf322f2e8bc936ada1a92d48aa10c6dda99c13c551c23bdadfb
-  languageName: node
-  linkType: hard
-
 "outvariant@npm:^1.4.0, outvariant@npm:^1.4.3":
   version: 1.4.3
   resolution: "outvariant@npm:1.4.3"
@@ -24840,21 +24833,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tmp@npm:0.0.28":
-  version: 0.0.28
-  resolution: "tmp@npm:0.0.28"
-  dependencies:
-    os-tmpdir: "npm:~1.0.1"
-  checksum: a52b11936def5823697fa9b94b35f20b76c5cc57a38b2d9ad8135a36281631e297ddcce0098802b81ef6828ef66301c14aa4b23d2ad1b202ff61147b99577d83
-  languageName: node
-  linkType: hard
-
-"tmp@npm:^0.0.33":
-  version: 0.0.33
-  resolution: "tmp@npm:0.0.33"
-  dependencies:
-    os-tmpdir: "npm:~1.0.2"
-  checksum: 0800f6e40216bf17e4ecd68f507e4325829723e3db7a1b9ebcfdd28e49d6061a222942265d97251f72c03ced281cf53b42e55f9f9f5135a811fc2294b05a184c
+"tmp@npm:0.2.5":
+  version: 0.2.5
+  resolution: "tmp@npm:0.2.5"
+  checksum: f03d4de0575be660d6c89877234ee82a8f546797158ea98bdc3623bad9f2fe0b8483eb2f1697f3bbb4b0595c5f41c01f0f6599305f43920bf6d25181848f424e
   languageName: node
   linkType: hard
 

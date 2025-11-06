@@ -3159,7 +3159,7 @@ __metadata:
     leaflet.markercluster: "npm:1.5.3"
     lodash: "npm:4.17.21"
     microbundle: "npm:0.15.1"
-    next: "npm:14.2.30"
+    next: "npm:14.2.33"
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     npm-run-all: "npm:4.1.5"
@@ -4603,10 +4603,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/env@npm:14.2.30"
-  checksum: 3778be7d6a3d7935e21043db81a488a5e32816a87af512ca174e492570fa038857eb1235d12c01d5d69d0c6251d1e99d219ef06661699abf5ef6df1ef21bf818
+"@next/env@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/env@npm:14.2.33"
+  checksum: 17bec91d2f674e4ec621f7feaf9b74075c504ad55ce71049f957aade87cb122afde70c3a67bf08f7ce0bdbbaefca1b8c624a41e58bcf7a2fd8acb25264fe9b90
   languageName: node
   linkType: hard
 
@@ -4626,65 +4626,65 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-arm64@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-darwin-arm64@npm:14.2.30"
+"@next/swc-darwin-arm64@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-darwin-arm64@npm:14.2.33"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-x64@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-darwin-x64@npm:14.2.30"
+"@next/swc-darwin-x64@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-darwin-x64@npm:14.2.33"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-gnu@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-linux-arm64-gnu@npm:14.2.30"
+"@next/swc-linux-arm64-gnu@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-linux-arm64-gnu@npm:14.2.33"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-musl@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-linux-arm64-musl@npm:14.2.30"
+"@next/swc-linux-arm64-musl@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-linux-arm64-musl@npm:14.2.33"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-linux-x64-gnu@npm:14.2.30"
+"@next/swc-linux-x64-gnu@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-linux-x64-gnu@npm:14.2.33"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-musl@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-linux-x64-musl@npm:14.2.30"
+"@next/swc-linux-x64-musl@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-linux-x64-musl@npm:14.2.33"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-win32-arm64-msvc@npm:14.2.30"
+"@next/swc-win32-arm64-msvc@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-win32-arm64-msvc@npm:14.2.33"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-win32-ia32-msvc@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-win32-ia32-msvc@npm:14.2.30"
+"@next/swc-win32-ia32-msvc@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-win32-ia32-msvc@npm:14.2.33"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"@next/swc-win32-x64-msvc@npm:14.2.30":
-  version: 14.2.30
-  resolution: "@next/swc-win32-x64-msvc@npm:14.2.30"
+"@next/swc-win32-x64-msvc@npm:14.2.33":
+  version: 14.2.33
+  resolution: "@next/swc-win32-x64-msvc@npm:14.2.33"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -13318,7 +13318,7 @@ __metadata:
     is-ci: "npm:4.1.0"
     jest-date-mock: "npm:^1.0.10"
     lint-staged: "npm:16.1.2"
-    next: "npm:14.2.30"
+    next: "npm:14.2.33"
     next-transpile-modules: "npm:10.0.1"
     nodemon: "npm:3.1.10"
     npm-run-all: "npm:4.1.5"
@@ -13421,7 +13421,7 @@ __metadata:
     k6: "npm:0.0.0"
     lodash: "npm:4.17.21"
     msw: "npm:^2.10.4"
-    next: "npm:14.2.30"
+    next: "npm:14.2.33"
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     picocolors: "npm:1.1.1"
@@ -15154,7 +15154,7 @@ __metadata:
     k6: "npm:0.0.0"
     lodash: "npm:4.17.21"
     msw: "npm:^2.10.4"
-    next: "npm:14.2.30"
+    next: "npm:14.2.33"
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     picocolors: "npm:1.1.1"
@@ -18795,20 +18795,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:14.2.30":
-  version: 14.2.30
-  resolution: "next@npm:14.2.30"
+"next@npm:14.2.33":
+  version: 14.2.33
+  resolution: "next@npm:14.2.33"
   dependencies:
-    "@next/env": "npm:14.2.30"
-    "@next/swc-darwin-arm64": "npm:14.2.30"
-    "@next/swc-darwin-x64": "npm:14.2.30"
-    "@next/swc-linux-arm64-gnu": "npm:14.2.30"
-    "@next/swc-linux-arm64-musl": "npm:14.2.30"
-    "@next/swc-linux-x64-gnu": "npm:14.2.30"
-    "@next/swc-linux-x64-musl": "npm:14.2.30"
-    "@next/swc-win32-arm64-msvc": "npm:14.2.30"
-    "@next/swc-win32-ia32-msvc": "npm:14.2.30"
-    "@next/swc-win32-x64-msvc": "npm:14.2.30"
+    "@next/env": "npm:14.2.33"
+    "@next/swc-darwin-arm64": "npm:14.2.33"
+    "@next/swc-darwin-x64": "npm:14.2.33"
+    "@next/swc-linux-arm64-gnu": "npm:14.2.33"
+    "@next/swc-linux-arm64-musl": "npm:14.2.33"
+    "@next/swc-linux-x64-gnu": "npm:14.2.33"
+    "@next/swc-linux-x64-musl": "npm:14.2.33"
+    "@next/swc-win32-arm64-msvc": "npm:14.2.33"
+    "@next/swc-win32-ia32-msvc": "npm:14.2.33"
+    "@next/swc-win32-x64-msvc": "npm:14.2.33"
     "@swc/helpers": "npm:0.5.5"
     busboy: "npm:1.6.0"
     caniuse-lite: "npm:^1.0.30001579"
@@ -18849,7 +18849,7 @@ __metadata:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: 8237a625476c974f84340fc56c8c7fdce3fa0cadd81fa94f54e5eb5c92b4379be60cf025f818563e216bed14195a4f89aaa5fe29ac094cb9cd594d128fc47ae8
+  checksum: e93ad2e97ac9e400f5660ef6042d1234db0abf586e6650a2cbb50bec5083f2d62721d9a9d420e10bad54416c2223eabe702a8bcb6d09d6521cc6164a322f3429
   languageName: node
   linkType: hard
 
@@ -23491,7 +23491,7 @@ __metadata:
     leaflet: "npm:1.9.4"
     lodash: "npm:4.17.21"
     msw: "npm:^2.10.4"
-    next: "npm:14.2.30"
+    next: "npm:14.2.33"
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     picocolors: "npm:1.1.1"

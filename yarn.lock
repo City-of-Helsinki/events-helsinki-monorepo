@@ -10996,21 +10996,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.7.1":
-  version: 0.7.1
-  resolution: "cookie@npm:0.7.1"
-  checksum: 124f3470f9423192f10a4ef13628ca45d5cb74377e8b478f9294f9db608e33840d0b5201d3c4579948a75be5ea4557f1cf71608861e99ba2878688d170399bd2
-  languageName: node
-  linkType: hard
-
-"cookie@npm:^0.4.1":
-  version: 0.4.2
-  resolution: "cookie@npm:0.4.2"
-  checksum: e2b0be16f59835785be50f5dfe076c26e81ab49c988a6290144444d0dfdf8192e82b0aa1857734b292567795e7af3f2c951d82e5036a2aacb15cd4a6681b5d49
-  languageName: node
-  linkType: hard
-
-"cookie@npm:^0.7.1, cookie@npm:^0.7.2":
+"cookie@npm:0.7.2":
   version: 0.7.2
   resolution: "cookie@npm:0.7.2"
   checksum: fceebde67412fe1206a4062573115d81246be7054539b2a7409d07c1766f1a0ce4def2934578f4bb1d49278b09117dcd772ec193437ae994c61e492deb6b7422

@@ -10,7 +10,7 @@ import {
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import type { SelectCustomTheme } from 'hds-react';
-import { Button, IconSearch, IconLocation } from 'hds-react';
+import { Button, IconSearch, IconLocation, ButtonVariant } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
@@ -120,6 +120,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   };
 
   const handleTargetAgeGroupChange = (
+    _options: TargetAgeGroupOptionType[],
     option: TargetAgeGroupOptionType | null
   ) => {
     setSelectedTargetAgeGroup(option?.value ?? '');
@@ -278,9 +279,9 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
             <div className={styles.buttonWrapper}>
               <Button
                 fullWidth={true}
-                iconLeft={<IconSearch aria-hidden />}
+                iconStart={<IconSearch aria-hidden />}
                 type="submit"
-                variant="success"
+                variant={ButtonVariant.Success}
               >
                 {t('search.buttonSearch')}
               </Button>

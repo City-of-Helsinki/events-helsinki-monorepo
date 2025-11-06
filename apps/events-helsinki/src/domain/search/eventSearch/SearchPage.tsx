@@ -17,6 +17,7 @@ import {
   HELSINKI_OCD_DIVISION_ID,
   EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
+import { ButtonVariant } from 'hds-react';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
@@ -197,7 +198,7 @@ const SearchPage: React.FC<{
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
-                    loadMoreButtonVariant="success"
+                    loadMoreButtonVariant={ButtonVariant.Success}
                   />
                 }
                 orderBySelectComponent={<EventsOrderBySelect />}

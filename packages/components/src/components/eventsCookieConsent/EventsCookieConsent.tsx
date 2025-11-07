@@ -1,6 +1,10 @@
 import useMatomo from '@jonkoops/matomo-tracker-react/lib/useMatomo.js';
-import type { ContentSource } from 'hds-react';
-import { CookiePage, useCookies, CookieModal } from 'hds-react';
+import {
+  CookieConsentContextProvider,
+  CookieSettingsPage,
+  CookieBanner,
+  CookieConsentContextProps,
+} from 'hds-react';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect } from 'react';
 import { MAIN_CONTENT_ID } from '../../constants';
@@ -14,6 +18,10 @@ type Props = {
   allowLanguageSwitch?: boolean;
   isModal?: boolean;
 };
+
+function useConsentSiteSettings(): CookieConsentContextProps['siteSettings']  {
+  return {}
+}
 
 const EventsCookieConsent: React.FC<Props> = ({
   appName,
@@ -196,18 +204,22 @@ const EventsCookieConsent: React.FC<Props> = ({
     [appName, language, t, onLanguageChange, onConsentGiven, handleMatomoUpdate]
   );
 
+  const onChange = () => {
+    console.log('TODO: implement onChange handler to cookie consent');
+  };
+
+  const siteSettings = 
+
   return (
-    <>
-      {isModal && showCookieConsentModal && (
-        <CookieModal
-          contentSource={contentSource}
-          cookieDomain={cookieDomain}
-        />
-      )}
-      {!isModal && (
-        <CookiePage contentSource={contentSource} cookieDomain={cookieDomain} />
-      )}
-    </>
+    <CookieConsentContextProvider
+      onChange={onChange}
+      // focusing the logo link, because the tab component loses focus on re-render.
+      options={{ language, focusTargetSelector: '#actionbar > a' }}
+      siteSettings={{ ...siteSettings, remove: false, monitorInterval: 0 }}
+    >
+      {isModal && showCookieConsentModal && <CookieBanner />}
+      {!isModal && <CookieSettingsPage />}
+    </CookieConsentContextProvider>
   );
 };
 

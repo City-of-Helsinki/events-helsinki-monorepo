@@ -84,6 +84,7 @@ function BaseApp({
   getHelsinkiOnlySearchUrl,
   getPlainEventUrl,
   getKeywordOnClickHandler,
+  appName,
 }: Props) {
   const matomoInstance = useMatomoInstance(matomoConfiguration);
 
@@ -95,6 +96,7 @@ function BaseApp({
     <CookieConfigurationProvider
       askemConfiguration={askemConfigurationInput}
       cookieDomain={cookieDomain}
+      appName={appName}
     >
       <AppThemeProvider
         defaultButtonTheme={defaultButtonTheme}

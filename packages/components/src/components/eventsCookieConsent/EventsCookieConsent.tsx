@@ -11,6 +11,7 @@ import { MAIN_CONTENT_ID } from '../../constants';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { useConsentTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
+import useConsentSiteSettings from './useConsentSiteSettings';
 
 type Props = {
   appName: string;
@@ -19,12 +20,7 @@ type Props = {
   isModal?: boolean;
 };
 
-function useConsentSiteSettings(): CookieConsentContextProps['siteSettings']  {
-  return {}
-}
-
 const EventsCookieConsent: React.FC<Props> = ({
-  appName,
   onConsentGiven,
   allowLanguageSwitch = true,
   isModal = true,
@@ -71,7 +67,6 @@ const EventsCookieConsent: React.FC<Props> = ({
 
   const contentSource: ContentSource = React.useMemo(
     () => ({
-      siteName: appName,
       onAllConsentsGiven: () => {
         setShowCookieConsentModal(false);
         if (onConsentGiven) {
@@ -201,14 +196,14 @@ const EventsCookieConsent: React.FC<Props> = ({
       },
       focusTargetSelector: MAIN_CONTENT_ID,
     }),
-    [appName, language, t, onLanguageChange, onConsentGiven, handleMatomoUpdate]
+    [language, t, onLanguageChange, onConsentGiven, handleMatomoUpdate]
   );
 
   const onChange = () => {
     console.log('TODO: implement onChange handler to cookie consent');
   };
 
-  const siteSettings = 
+  const siteSettings = useConsentSiteSettings();
 
   return (
     <CookieConsentContextProvider

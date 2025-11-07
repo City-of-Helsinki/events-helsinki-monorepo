@@ -184,17 +184,12 @@ function useConsentTranslations() {
   } as const;
 }
 
-export type useConsentSiteSettingsProps = {
-  appName: string;
-};
-
-function useConsentSiteSettings({
-  appName: siteName,
-}: useConsentSiteSettingsProps) {
+function useConsentSiteSettings() {
   const languages = useLanguages();
   const cookieName = useCookieName();
   const { requiredGroups, optionalGroups } = useConsentContentSource();
   const { translations } = useConsentTranslations();
+  const { appName: siteName } = useCookieConfigurationContext();
 
   const siteSettings = React.useMemo(
     () => ({

@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { AskemFeedbackContainer, AskemProvider } from '../askem';
 import useAskemContext from '../askem/useAskemContext';
-import EventsCookieConsent from '../eventsCookieConsent/EventsCookieConsent';
 
 type UserTrackingFeaturesProps = {
   hasFeedBack: boolean;
@@ -18,7 +17,7 @@ export default function UserTrackingFeatures({
   const { cookieDomain, askemConfiguration: askemConfigurationInput } =
     useCookieConfigurationContext();
 
-  const { askemInstance, handleConsentGiven } = useAskemContext({
+  const { askemInstance } = useAskemContext({
     cookieDomain,
     asPath,
     askemConfigurationInput,
@@ -27,10 +26,7 @@ export default function UserTrackingFeatures({
   return (
     <AskemProvider value={askemInstance}>
       {hasFeedBack && (
-        <AskemFeedbackContainer
-          withPadding={feedbackWithPadding}
-          consentUrl={consentUrl}
-        />
+        <AskemFeedbackContainer withPadding={feedbackWithPadding} />
       )}
     </AskemProvider>
   );

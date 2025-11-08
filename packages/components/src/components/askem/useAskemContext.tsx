@@ -1,19 +1,18 @@
 // import { useCookieConfigurationContext } from 'cookieConfigurationProvider';
 import { useCookieConsents } from 'hds-react';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
+import useCookieConfigurationContext from '../../cookieConfigurationProvider/useCookieConfigurationContext';
 import createAskemInstance from './instance';
-import type { AskemConfigs, AskemInstance } from './types';
+import type { AskemInstance } from './types';
 
-export default function useAskemContext({
-  asPath,
-  askemConfigurationInput,
-}: {
-  asPath: string;
-  askemConfigurationInput: AskemConfigs;
-}) {
+export default function useAskemContext() {
+  const { asPath } = useRouter();
   // TODO: handle cookieDomain?
-  // const { cookieDomain } = useCookieConfigurationContext();
+  const { cookieDomain, askemConfiguration: askemConfigurationInput } =
+    useCookieConfigurationContext();
+
   const consents = useCookieConsents();
   const [askemInstance, setAskemInstance] = useState<AskemInstance | null>(
     null

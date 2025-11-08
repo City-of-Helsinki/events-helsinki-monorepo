@@ -1,3 +1,4 @@
+// import { useCookieConfigurationContext } from 'cookieConfigurationProvider';
 import { useCookieConsents } from 'hds-react';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -5,15 +6,14 @@ import createAskemInstance from './instance';
 import type { AskemConfigs, AskemInstance } from './types';
 
 export default function useAskemContext({
-  // TODO: handle cookieDomain
-  cookieDomain,
   asPath,
   askemConfigurationInput,
 }: {
-  cookieDomain: string;
   asPath: string;
   askemConfigurationInput: AskemConfigs;
 }) {
+  // TODO: handle cookieDomain?
+  // const { cookieDomain } = useCookieConfigurationContext();
   const consents = useCookieConsents();
   const [askemInstance, setAskemInstance] = useState<AskemInstance | null>(
     null

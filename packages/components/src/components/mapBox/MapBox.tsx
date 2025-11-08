@@ -1,8 +1,7 @@
-import { IconLocation, useCookies } from 'hds-react';
+import { IconLocation, useGroupConsent } from 'hds-react';
 import router from 'next/router';
 import React from 'react';
 import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
-import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { useCommonTranslation } from '../../hooks';
 import CookiesRequired from '../cookieConsent/CookiesRequired';
 import Text from '../text/Text';
@@ -32,13 +31,8 @@ function MapBox({
   consentUrl,
 }: Props) {
   const { t } = useCommonTranslation();
-  const { cookieDomain } = useCookieConfigurationContext();
-  const { getAllConsents } = useCookies({ cookieDomain });
-  const getConsentStatus = (cookieId: string) => {
-    const consents = getAllConsents();
-    return consents[cookieId];
-  };
-  const isConsentGiven = getConsentStatus('servicemap_session');
+
+  const isConsentGiven = useGroupConsent('servicemap_session');
   const handleConsentPageRedirect = () => {
     if (consentUrl) {
       router.push(`${consentUrl}?returnPath=${router.asPath}`);

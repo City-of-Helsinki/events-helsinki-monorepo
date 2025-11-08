@@ -30,7 +30,6 @@ import { AppThemeProvider } from '../themeProvider';
 import type { CmsRoutedAppHelper, HeadlessCMSHelper } from '../utils';
 
 import useHdsStyleFix from './useHdsStyleFix';
-import { CookieBanner } from 'hds-react';
 
 export type Props = {
   children: React.ReactNode;
@@ -134,7 +133,6 @@ function BaseApp({
                   </NavigationProvider>
                 </GeolocationProvider>
               </MatomoProvider>
-              <CookieBanner />
             </EventsCookieConsent>
           </AppRoutingProvider>
         </CmsHelperProvider>

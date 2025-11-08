@@ -92,7 +92,6 @@ export default function CookieConsent({
           menu={footerMenu}
           appName={resilientT('appEvents:appName')}
           hasFeedBack={false}
-          isModalConsent={false}
         />
       }
     />

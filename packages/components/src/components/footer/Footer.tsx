@@ -1,4 +1,12 @@
-import { Footer, Link, Logo, logoFi, LogoSize, logoSv } from 'hds-react';
+import {
+  CookieBanner,
+  Footer,
+  Link,
+  Logo,
+  logoFi,
+  LogoSize,
+  logoSv,
+} from 'hds-react';
 import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
 import type { Menu } from 'react-helsinki-headless-cms';
@@ -55,6 +63,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
         hasFeedBack={hasFeedBack}
         feedbackWithPadding={feedbackWithPadding}
       />
+      <CookieBanner />
       <Footer title={appName} className={styles.footer}>
         <Footer.Base
           copyrightHolder={resilientT('footer:copyright')}

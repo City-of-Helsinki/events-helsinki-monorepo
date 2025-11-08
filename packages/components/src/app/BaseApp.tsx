@@ -99,7 +99,7 @@ function BaseApp({
       askemConfiguration={askemConfigurationInput}
       cookieDomain={cookieDomain}
       appName={appName}
-      consertUrl={consentUrl}
+      consentUrl={consentUrl}
     >
       <AppThemeProvider
         defaultButtonTheme={defaultButtonTheme}

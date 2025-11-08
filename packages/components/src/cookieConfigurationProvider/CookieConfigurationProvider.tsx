@@ -8,15 +8,11 @@ export type CookieConfigurationProviderProps =
   };
 
 export default function CookieConfigurationProvider({
-  askemConfiguration,
-  cookieDomain,
-  appName,
-  consentUrl,
   children,
+  ...contextValue
 }: CookieConfigurationProviderProps) {
-  const context = { askemConfiguration, cookieDomain, appName, consentUrl };
   return (
-    <CookieConfigurationContext.Provider value={context}>
+    <CookieConfigurationContext.Provider value={contextValue}>
       {children}
     </CookieConfigurationContext.Provider>
   );

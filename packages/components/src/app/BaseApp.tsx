@@ -8,7 +8,7 @@ import React from 'react';
 import '../styles/globals.scss';
 import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
-import { MatomoWrapper } from '../components';
+import { EventsCookieConsent, MatomoWrapper } from '../components';
 import type { createAskemInstance } from '../components/askem';
 
 import ErrorFallback from '../components/errorPages/ErrorFallback';
@@ -112,23 +112,25 @@ function BaseApp({
             getPlainEventUrl={getPlainEventUrl}
             getKeywordOnClickHandler={getKeywordOnClickHandler}
           >
-            <MatomoProvider value={matomoInstance}>
-              <GeolocationProvider>
-                <NavigationProvider
-                  headerMenu={headerMenu}
-                  headerUniversalBarMenu={headerUniversalBarMenu}
-                  footerMenu={footerMenu}
-                  languages={languages}
-                >
-                  <MatomoWrapper>
-                    <GeolocationErrorNotification />
-                    <ResetFocus />
-                    {children}
-                    <DynamicToastContainer />
-                  </MatomoWrapper>
-                </NavigationProvider>
-              </GeolocationProvider>
-            </MatomoProvider>
+            <EventsCookieConsent>
+              <MatomoProvider value={matomoInstance}>
+                <GeolocationProvider>
+                  <NavigationProvider
+                    headerMenu={headerMenu}
+                    headerUniversalBarMenu={headerUniversalBarMenu}
+                    footerMenu={footerMenu}
+                    languages={languages}
+                  >
+                    <MatomoWrapper>
+                      <GeolocationErrorNotification />
+                      <ResetFocus />
+                      {children}
+                      <DynamicToastContainer />
+                    </MatomoWrapper>
+                  </NavigationProvider>
+                </GeolocationProvider>
+              </MatomoProvider>
+            </EventsCookieConsent>
           </AppRoutingProvider>
         </CmsHelperProvider>
       </AppThemeProvider>

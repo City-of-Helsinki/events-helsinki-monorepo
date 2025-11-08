@@ -29,8 +29,6 @@ import type { AppThemeProviderProps } from '../themeProvider';
 import { AppThemeProvider } from '../themeProvider';
 import type { CmsRoutedAppHelper, HeadlessCMSHelper } from '../utils';
 
-import useHdsStyleFix from './useHdsStyleFix';
-
 export type Props = {
   children: React.ReactNode;
   cmsHelper: HeadlessCMSHelper;
@@ -86,10 +84,6 @@ function BaseApp({
   getKeywordOnClickHandler,
 }: Props) {
   const matomoInstance = useMatomoInstance(matomoConfiguration);
-
-  // TODO: Remove this hackfix to ensure that pre-rendered pages'
-  //      SEO performance is not impacted.
-  useHdsStyleFix();
 
   return (
     <CookieConfigurationProvider

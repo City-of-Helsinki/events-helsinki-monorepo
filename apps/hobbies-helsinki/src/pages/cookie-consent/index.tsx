@@ -19,11 +19,10 @@ import {
   getFilteredBreadcrumbs,
   BreadcrumbContainer,
 } from '@events-helsinki/components';
-import { CookieSettingsPage, type BreadcrumbListItem } from 'hds-react';
+import { type BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import type { PageType } from 'react-helsinki-headless-cms';
 import {
   Page as RHHCPage,
@@ -35,11 +34,8 @@ import getHobbiesStaticProps from '../../domain/app/getHobbiesStaticProps';
 import ConsentPageContent from '../../domain/cookieConsent/ConsentPageContent';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
-const EventsCookieConsent = dynamic(
-  () =>
-    import('@events-helsinki/components').then(
-      (mod) => mod.EventsCookieConsent
-    ),
+const CookieSettingsPage = dynamic(
+  () => import('hds-react').then((mod) => mod.CookieSettingsPage),
   { ssr: false }
 );
 
@@ -56,17 +52,6 @@ export default function CookieConsent({
 }>) {
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
-  const router = useRouter();
-
-  const handleRedirect = useCallback(() => {
-    if (window) {
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      const returnPath: string | null = urlSearchParams.get('returnPath');
-      if (returnPath) {
-        router.push(returnPath);
-      }
-    }
-  }, [router]);
 
   usePageScrollRestoration();
 

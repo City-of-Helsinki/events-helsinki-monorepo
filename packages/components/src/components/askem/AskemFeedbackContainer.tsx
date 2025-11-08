@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import useConsentTranslation from '../../hooks/useConsentTranslation';
 import CookiesRequired from '../cookieConsent/CookiesRequired';
 import styles from './askem.module.scss';
@@ -16,6 +17,8 @@ const AskemFeedbackContainer: React.FC<AskemFeedbackContainerProps> = ({
   const { consentGiven, disabled } = useAskem();
   const { t } = useConsentTranslation();
   const router = useRouter();
+
+  const { consentUrl } = useCookieConfigurationContext();
 
   const handleConsentPageRedirect = () => {
     if (consentUrl) {

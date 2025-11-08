@@ -1,21 +1,16 @@
 // import useMatomo from '@jonkoops/matomo-tracker-react/lib/useMatomo.js';
 import type { CookieConsentChangeEvent } from 'hds-react';
-import {
-  CookieConsentContextProvider,
-  CookieSettingsPage,
-  CookieBanner,
-} from 'hds-react';
+import { CookieConsentContextProvider } from 'hds-react';
 import React from 'react';
 
 import useLocale from '../../hooks/useLocale';
 import useConsentSiteSettings from './useConsentSiteSettings';
 
 type Props = {
-  isModal?: boolean;
   children?: React.ReactNode;
 };
 
-const EventsCookieConsent: React.FC<Props> = ({ children, isModal = true }) => {
+const EventsCookieConsent: React.FC<Props> = ({ children }) => {
   const language = useLocale();
   // const { asPath: pathname } = useRouter();
   // const { pushInstruction } = useMatomo();
@@ -59,8 +54,6 @@ const EventsCookieConsent: React.FC<Props> = ({ children, isModal = true }) => {
       siteSettings={siteSettings}
     >
       {children}
-      {isModal && <CookieBanner />}
-      {!isModal && <CookieSettingsPage />}
     </CookieConsentContextProvider>
   );
 };

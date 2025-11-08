@@ -7,12 +7,10 @@ import styles from './askem.module.scss';
 import useAskem from './useAskem';
 
 interface AskemFeedbackContainerProps {
-  consentUrl?: string;
   withPadding?: boolean;
 }
 
 const AskemFeedbackContainer: React.FC<AskemFeedbackContainerProps> = ({
-  consentUrl,
   withPadding = false,
 }) => {
   const { consentGiven, disabled } = useAskem();

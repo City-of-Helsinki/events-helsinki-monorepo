@@ -19,7 +19,7 @@ import {
   getFilteredBreadcrumbs,
   BreadcrumbContainer,
 } from '@events-helsinki/components';
-import type { BreadcrumbListItem } from 'hds-react';
+import { CookieSettingsPage, type BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -79,11 +79,7 @@ export default function CookieConsent({
           <RouteMeta origin={AppConfig.origin} />
           {breadcrumbs && <BreadcrumbContainer breadcrumbs={breadcrumbs} />}
           <ConsentPageContent>
-            <EventsCookieConsent
-              appName={resilientT('appHobbies:appName')}
-              isModal={false}
-              onConsentGiven={handleRedirect}
-            />
+            <CookieSettingsPage />
           </ConsentPageContent>
         </>
       }
@@ -92,7 +88,6 @@ export default function CookieConsent({
           menu={footerMenu}
           appName={resilientT('appHobbies:appName')}
           hasFeedBack={false}
-          isModalConsent={false}
         />
       }
     />

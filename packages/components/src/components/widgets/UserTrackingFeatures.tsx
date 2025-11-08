@@ -5,20 +5,14 @@ import useAskemContext from '../askem/useAskemContext';
 import EventsCookieConsent from '../eventsCookieConsent/EventsCookieConsent';
 
 type UserTrackingFeaturesProps = {
-  appName: string;
   hasFeedBack: boolean;
   feedbackWithPadding: boolean;
-  consentUrl: string;
-  isModalConsent: boolean;
   children?: React.ReactNode[];
 };
 
 export default function UserTrackingFeatures({
-  appName,
   hasFeedBack,
   feedbackWithPadding,
-  consentUrl,
-  isModalConsent,
 }: UserTrackingFeaturesProps) {
   const { asPath } = useRouter();
   const { cookieDomain, askemConfiguration: askemConfigurationInput } =
@@ -36,13 +30,6 @@ export default function UserTrackingFeatures({
         <AskemFeedbackContainer
           withPadding={feedbackWithPadding}
           consentUrl={consentUrl}
-        />
-      )}
-      {isModalConsent && (
-        <EventsCookieConsent
-          onConsentGiven={handleConsentGiven}
-          allowLanguageSwitch={false}
-          appName={appName}
         />
       )}
     </AskemProvider>

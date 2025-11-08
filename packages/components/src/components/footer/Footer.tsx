@@ -23,15 +23,12 @@ type FooterSectionProps = {
   hasFeedBack?: boolean;
   feedbackWithPadding?: boolean;
   consentUrl?: string;
-  isModalConsent?: boolean;
 };
 const FooterSection: FunctionComponent<FooterSectionProps> = ({
   appName,
   menu,
   hasFeedBack = true,
   feedbackWithPadding = false,
-  consentUrl = '/cookie-consent',
-  isModalConsent = true,
 }: FooterSectionProps) => {
   const { t: commonT } = useCommonTranslation();
   const { resilientT } = useResilientTranslation();
@@ -55,11 +52,8 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   return (
     <>
       <UserTrackingFeatures
-        appName={appName}
         hasFeedBack={hasFeedBack}
         feedbackWithPadding={feedbackWithPadding}
-        consentUrl={consentUrl}
-        isModalConsent={isModalConsent}
       />
       <Footer title={appName} className={styles.footer}>
         <Footer.Base

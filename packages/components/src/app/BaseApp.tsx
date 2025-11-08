@@ -42,6 +42,7 @@ export type Props = {
   onConsentGiven?: (askemConsentGiven: boolean) => void;
   asPath: string;
   withConsent: boolean;
+  consentUrl: string;
 } & NavigationProviderProps &
   AppRoutingProviderProps &
   AppThemeProviderProps &
@@ -85,6 +86,7 @@ function BaseApp({
   getPlainEventUrl,
   getKeywordOnClickHandler,
   appName,
+  consentUrl,
 }: Props) {
   const matomoInstance = useMatomoInstance(matomoConfiguration);
 
@@ -97,6 +99,7 @@ function BaseApp({
       askemConfiguration={askemConfigurationInput}
       cookieDomain={cookieDomain}
       appName={appName}
+      consertUrl={consentUrl}
     >
       <AppThemeProvider
         defaultButtonTheme={defaultButtonTheme}

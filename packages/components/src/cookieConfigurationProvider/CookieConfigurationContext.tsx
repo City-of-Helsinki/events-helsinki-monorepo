@@ -5,6 +5,7 @@ export type CookieConfigurationContextProps = {
   cookieDomain: string;
   askemConfiguration: Parameters<typeof createAskemInstance>[0];
   appName: string;
+  consentUrl: string;
 };
 
 const CookieConfigurationContext =
@@ -12,6 +13,7 @@ const CookieConfigurationContext =
     cookieDomain: '',
     askemConfiguration: {},
     appName: '',
+    consentUrl: '/cookie-consent',
   });
 
 export default CookieConfigurationContext;

@@ -61,8 +61,8 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
       <UserTrackingFeatures
         hasFeedBack={hasFeedBack}
         feedbackWithPadding={feedbackWithPadding}
+        cookieBanner={<CookieBanner />}
       />
-      <CookieBanner />
       <Footer title={appName} className={styles.footer}>
         <Footer.Base
           copyrightHolder={resilientT('footer:copyright')}

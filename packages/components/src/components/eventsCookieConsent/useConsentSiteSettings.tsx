@@ -1,6 +1,4 @@
 import React from 'react';
-import { isLanguage } from 'react-helsinki-headless-cms';
-import { useLanguagesQuery } from 'react-helsinki-headless-cms/apollo';
 import { DEFAULT_LANGUAGE } from '../../constants';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import useConsentTranslation from '../../hooks/useConsentTranslation';
@@ -8,15 +6,11 @@ import type { SiteSettingsLanguage } from './types';
 import { createLocaleDictBuilder } from './utils';
 
 function useLanguages(): SiteSettingsLanguage[] {
-  const languagesQuery = useLanguagesQuery();
-  const languageOptions = languagesQuery.data?.languages?.filter(isLanguage);
-  return (
-    languageOptions?.map((langOption) => ({
-      code: langOption.code ?? '',
-      name: langOption.name ?? '',
-      direction: 'ltr',
-    })) ?? []
-  );
+  return [
+    { code: 'en', title: 'English', direction: 'ltr' },
+    { code: 'fi', title: 'Suomi', direction: 'ltr' },
+    { code: 'sv', title: 'Svenska', direction: 'ltr' },
+  ];
 }
 
 function useCookieName() {
@@ -31,6 +25,8 @@ function useConsentContentSource() {
   const languageCodes = languages.map((lang) => lang.code);
 
   const buildDict = createLocaleDictBuilder(languageCodes, t);
+  const cookieName = useCookieName();
+  const { cookieDomain, appName } = useCookieConfigurationContext();
 
   const requiredGroups = [
     {
@@ -38,6 +34,13 @@ function useConsentContentSource() {
       title: buildDict('consent:groups.essentials.title'),
       description: buildDict('consent:groups.essentials.description'),
       cookies: [
+        {
+          name: cookieName,
+          host: cookieDomain,
+          storageType: 1,
+          description: buildDict('consent:cookies.app', { appName }),
+          expiration: buildDict('consent:expiration.session'),
+        },
         {
           name: 'wordpress_*, wp-settings-*',
           host: 'api.hel.fi',
@@ -151,35 +154,57 @@ function useConsentTranslations() {
 
   return {
     translations: {
-      bannerAriaLabel: buildDict('bannerAriaLabel'),
-      heading: buildDict('heading'),
-      description: buildDict('description'),
-      showDetails: buildDict('showDetails'),
-      hideDetails: buildDict('hideDetails'),
-      formHeading: buildDict('formHeading'),
-      formText: buildDict('formText'),
-      highlightedGroup: buildDict('highlightedGroup'),
-      highlightedGroupAria: buildDict('highlightedGroupAria'),
-      showCookieSettings: buildDict('showCookieSettings'),
-      hideCookieSettings: buildDict('hideCookieSettings'),
-      acceptedAt: buildDict('acceptedAt'),
-      tableHeadingsName: buildDict('tableHeadingsName'),
-      tableHeadingsHostName: buildDict('tableHeadingsHostName'),
-      tableHeadingsDescription: buildDict('tableHeadingsDescription'),
-      tableHeadingsExpiration: buildDict('tableHeadingsExpiration'),
-      tableHeadingsType: buildDict('tableHeadingsType'),
-      approveAllConsents: buildDict('approveAllConsents'),
-      approveRequiredAndSelectedConsents: buildDict(
-        'approveRequiredAndSelectedConsents'
+      bannerAriaLabel: buildDict('consent:hdsCookieConsent.bannerAriaLabel'),
+      heading: buildDict('consent:hdsCookieConsent.heading'),
+      description: buildDict('consent:hdsCookieConsent.description'),
+      showDetails: buildDict('consent:hdsCookieConsent.showDetails'),
+      hideDetails: buildDict('consent:hdsCookieConsent.hideDetails'),
+      formHeading: buildDict('consent:hdsCookieConsent.formHeading'),
+      formText: buildDict('consent:hdsCookieConsent.formText'),
+      highlightedGroup: buildDict('consent:hdsCookieConsent.highlightedGroup'),
+      highlightedGroupAria: buildDict(
+        'consent:hdsCookieConsent.highlightedGroupAria'
       ),
-      approveOnlyRequiredConsents: buildDict('approveOnlyRequiredConsents'),
-      settingsSaved: buildDict('settingsSaved'),
-      notificationAriaLabel: buildDict('notificationAriaLabel'),
-      storageType1: buildDict('storageType1'),
-      storageType2: buildDict('storageType2'),
-      storageType3: buildDict('storageType3'),
-      storageType4: buildDict('storageType4'),
-      storageType5: buildDict('storageType5'),
+      showCookieSettings: buildDict(
+        'consent:hdsCookieConsent.showCookieSettings'
+      ),
+      hideCookieSettings: buildDict(
+        'consent:hdsCookieConsent.hideCookieSettings'
+      ),
+      acceptedAt: buildDict('consent:hdsCookieConsent.acceptedAt'),
+      tableHeadingsName: buildDict(
+        'consent:hdsCookieConsent.tableHeadingsName'
+      ),
+      tableHeadingsHostName: buildDict(
+        'consent:hdsCookieConsent.tableHeadingsHostName'
+      ),
+      tableHeadingsDescription: buildDict(
+        'consent:hdsCookieConsent.tableHeadingsDescription'
+      ),
+      tableHeadingsExpiration: buildDict(
+        'consent:hdsCookieConsent.tableHeadingsExpiration'
+      ),
+      tableHeadingsType: buildDict(
+        'consent:hdsCookieConsent.tableHeadingsType'
+      ),
+      approveAllConsents: buildDict(
+        'consent:hdsCookieConsent.approveAllConsents'
+      ),
+      approveRequiredAndSelectedConsents: buildDict(
+        'consent:hdsCookieConsentapproveRequiredAndSelectedConsents'
+      ),
+      approveOnlyRequiredConsents: buildDict(
+        'consent:hdsCookieConsent.approveOnlyRequiredConsents'
+      ),
+      settingsSaved: buildDict('consent:hdsCookieConsent.settingsSaved'),
+      notificationAriaLabel: buildDict(
+        'consent:hdsCookieConsent.notificationAriaLabel'
+      ),
+      storageType1: buildDict('consent:hdsCookieConsent.storageType1'),
+      storageType2: buildDict('consent:hdsCookieConsent.storageType2'),
+      storageType3: buildDict('consent:hdsCookieConsent.storageType3'),
+      storageType4: buildDict('consent:hdsCookieConsent.storageType4'),
+      storageType5: buildDict('consent:hdsCookieConsent.storageType5'),
     },
   } as const;
 }
@@ -197,14 +222,14 @@ function useConsentSiteSettings() {
       siteName,
       cookieName,
       monitorInterval: 500,
-      fallbackLanguage: DEFAULT_LANGUAGE as string,
+      fallbackLanguage: DEFAULT_LANGUAGE,
       requiredGroups,
       optionalGroups,
       robotCookies: [
-        {
-          name: 'helfi_accordions_open',
-          storageType: 1,
-        },
+        // {
+        //   name: 'helfi_accordions_open',
+        //   storageType: 1,
+        // },
       ] as const,
       translations,
     }),

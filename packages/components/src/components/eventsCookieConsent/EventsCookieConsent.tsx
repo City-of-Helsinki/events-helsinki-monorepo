@@ -35,6 +35,7 @@ const EventsCookieConsent: React.FC<Props> = ({ children }) => {
   // }, [getAllConsents, pushInstruction]);
 
   const siteSettings = useConsentSiteSettings();
+  const options = { language };
 
   const onChange = (_e: CookieConsentChangeEvent) => {
     console.log('TODO: implement onChange handler to cookie consent');
@@ -47,10 +48,12 @@ const EventsCookieConsent: React.FC<Props> = ({ children }) => {
   //     onConsentGiven();
   //   }
   // };
+
+  console.log({ options, siteSettings });
   return (
     <CookieConsentContextProvider
       onChange={onChange}
-      options={{ language }}
+      options={options}
       siteSettings={siteSettings}
     >
       {children}

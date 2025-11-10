@@ -1,5 +1,5 @@
 export type SiteSettingsLanguage = {
   code: string;
-  name: string;
+  title: string;
   direction: 'ltr';
 };

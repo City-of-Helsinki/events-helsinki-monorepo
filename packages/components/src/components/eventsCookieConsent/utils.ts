@@ -56,8 +56,8 @@ export const createLocaleDictBuilder = (
       // The `lng` property is essential to tell `t` which language to use for this iteration.
       const options =
         typeof translationOptions === 'string'
-          ? { lng, defaultValue: translationOptions }
-          : { ...translationOptions, lng };
+          ? { defaultValue: translationOptions }
+          : { ...translationOptions };
 
       acc[lng] = t(translationKey, options);
       return acc;

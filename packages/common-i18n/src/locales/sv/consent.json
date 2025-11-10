@@ -24,6 +24,7 @@
     }
   },
   "cookies": {
+    "app": "TODO: {{ appName }} - This cookie was required by the HDS",
     "matomo": "Kaka för statistiksystemet Matomo.",
     "askem": "En post relaterad till driften av reaktionsknappen Askem.",
     "linkedevents": "Kaka för att söka evenemang.",

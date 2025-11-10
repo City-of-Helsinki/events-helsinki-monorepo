@@ -9,11 +9,11 @@ class EventDataSource extends LinkedEventsDataSource {
     id: string,
     query: string
   ): Promise<EventDetails> {
-    return this.get(`event/${id}${query}`);
+    return this.get(`event/${id}/${query}`);
   }
 
   public async getEventList(query: string): Promise<EventListResponse> {
-    return this.get(`event${query}`);
+    return this.get(`event/${query}`);
   }
 }
 

@@ -149,7 +149,7 @@ describe('sends REST requests correctly', () => {
       variables: {},
     });
 
-    expect(getMock).toHaveBeenCalledWith('event?event_type=General');
+    expect(getMock).toHaveBeenCalledWith('event/?event_type=General');
   });
 
   it('sends Course event type with event type param', async () => {
@@ -160,7 +160,7 @@ describe('sends REST requests correctly', () => {
       } as QueryEventListArgs,
     });
 
-    expect(getMock).toHaveBeenCalledWith('event?event_type=Course');
+    expect(getMock).toHaveBeenCalledWith('event/?event_type=Course');
   });
 
   it('sends all params in query string correctly', async () => {
@@ -169,7 +169,7 @@ describe('sends REST requests correctly', () => {
       variables: { eventType: [EventTypeId.Course] } as QueryEventListArgs,
     });
 
-    expect(getMock).toHaveBeenCalledWith('event?event_type=Course');
+    expect(getMock).toHaveBeenCalledWith('event/?event_type=Course');
   });
 });
 
@@ -217,7 +217,7 @@ it('sends REST request correctly with query params (course)', async () => {
   expect(getMock).toHaveBeenCalledTimes(1);
   expect(getMock.mock.calls[0][0]).toMatchInlineSnapshot(
     // eslint-disable-next-line @stylistic/max-len
-    `"event?event_type=Course&internet_based=true&all_ongoing=true&all_ongoing_AND=asd&division=division1,division2&end=end&ends_after=09.10.2020&ends_before=10.10.2020&include=include&in_language=fi&is_free=true&keyword=keyword1,keyword2&keyword_AND=keywordAnd,keywordAnd2&keyword!=keywordNot&language=fi&location=location2,location3&page=10&page_size=10&publisher=publisher&publisher_ancestor=ahjo:123&sort=asc&start=10.10.2021&starts_after=10.20.2021&starts_before=10.10.2022&super_event=123aasd&super_event_type=course,event&text=testText&translation=translation"`
+    `"event/?event_type=Course&internet_based=true&all_ongoing=true&all_ongoing_AND=asd&division=division1,division2&end=end&ends_after=09.10.2020&ends_before=10.10.2020&include=include&in_language=fi&is_free=true&keyword=keyword1,keyword2&keyword_AND=keywordAnd,keywordAnd2&keyword!=keywordNot&language=fi&location=location2,location3&page=10&page_size=10&publisher=publisher&publisher_ancestor=ahjo:123&sort=asc&start=10.10.2021&starts_after=10.20.2021&starts_before=10.10.2022&super_event=123aasd&super_event_type=course,event&text=testText&translation=translation"`
   );
 });
 

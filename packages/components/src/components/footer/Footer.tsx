@@ -17,6 +17,13 @@ const UserTrackingFeatures = dynamic(
   }
 );
 
+const CookieBanner = dynamic(
+  () => import('hds-react').then((mod) => mod.CookieBanner),
+  {
+    ssr: false,
+  }
+);
+
 type FooterSectionProps = {
   appName: string;
   menu?: Menu;

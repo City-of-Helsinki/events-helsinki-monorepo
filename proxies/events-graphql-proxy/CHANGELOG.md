@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.5.0...events-graphql-proxy-v1.5.1) (2025-11-10)
+
+
+### Bug Fixes
+
+* **events-proxy:** Add trailing slash to LinkedEvents requests ([5383aed](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5383aed519fa798d340796522e94b7802a0da674))
+* **licenses:** Unify all LICENSE files' contents ([ed21e2c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ed21e2c3e9f1b55c5c030c864590844f494af866))
+
 ## [1.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.4.0...events-graphql-proxy-v1.5.0) (2025-10-22)
 
 

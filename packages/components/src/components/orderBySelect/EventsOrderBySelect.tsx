@@ -1,10 +1,11 @@
-import type { SelectCustomTheme } from 'hds-react';
+import type { SelectCustomTheme, Option as HDSOption } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import {
   DEFAULT_EVENT_SORT_OPTION,
   EVENT_SORT_OPTIONS,
 } from '../../constants/event-constants';
+import useLocale from '../../hooks/useLocale';
 import useSearchTranslation from '../../hooks/useSearchTranslation';
 import useSetSortQueryParamToOptionValue from '../../hooks/useSetSortQueryParamToOptionValue';
 import type { Option } from '../../types/types';
@@ -13,14 +14,18 @@ import styles from './eventsOrderBySelect.module.scss';
 
 const EventsOrderBySelect: React.FC<{
   sortParameter?: string;
-  customOnChangeHandler?: (option: Option) => void;
+  customOnChangeHandler?: (
+    _selectedOptions: HDSOption[],
+    option: HDSOption
+  ) => void;
 }> = ({ sortParameter = 'sort', customOnChangeHandler }) => {
+  const locale = useLocale();
   const { t } = useSearchTranslation();
   const router = useRouter();
   const sort = router.query?.[sortParameter] ?? DEFAULT_EVENT_SORT_OPTION;
   const setSortQueryParamToOptionValue = useSetSortQueryParamToOptionValue();
 
-  const orderByOptions = [
+  const orderByOptions: Option[] = [
     {
       text: t('search:orderBy.endTime'),
       value: EVENT_SORT_OPTIONS.END_TIME,
@@ -50,8 +55,11 @@ const EventsOrderBySelect: React.FC<{
           '--menu-item-background-selected-hover': 'var(--color-input-dark)',
         } as SelectCustomTheme
       }
-      label={t('search:orderBy.label')}
-      value={selectedOrderByOption ?? defaultOption}
+      texts={{
+        label: t('search:orderBy.label'),
+        language: locale,
+      }}
+      value={selectedOrderByOption?.value ?? defaultOption?.value}
       onChange={customOnChangeHandler ?? setSortQueryParamToOptionValue}
       options={orderByOptions}
       className={styles.eventsOrderBySelect}

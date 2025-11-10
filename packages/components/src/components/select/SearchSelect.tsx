@@ -1,12 +1,15 @@
 import classNames from 'classnames';
 
+import type { SelectProps } from 'hds-react';
 import styles from './searchSelect.module.scss';
 import Select from './Select';
 
 /** Select-component with Search form styles. */
-export default function SearchSelect(props: Parameters<typeof Select>[0]) {
-  const { value, defaultValue, multiselect } = props;
-  if (multiselect) {
+export default function SearchSelect(
+  props: SelectProps & { defaultValue?: SelectProps['value'] }
+) {
+  const { value, defaultValue, multiSelect } = props;
+  if (multiSelect) {
     throw new Error(
       'The SearchSelect does not support multiselect feature. Use the <MultiSelectDropdown/> instead.'
     );
@@ -19,7 +22,7 @@ export default function SearchSelect(props: Parameters<typeof Select>[0]) {
   }
   // The value can be a single option, null or undefined.
   // The option value can also be empty!
-  const hasValue = !!value?.value;
+  const hasValue = !!value;
   return (
     <Select
       {...props}

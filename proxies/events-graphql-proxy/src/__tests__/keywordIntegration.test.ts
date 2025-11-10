@@ -43,7 +43,7 @@ it('sends REST request correctly with params', async () => {
   );
 
   expect(getMock).toHaveBeenCalledWith(
-    'keyword?data_source=yso&has_upcoming_events=true&page=1&page_size=10&show_all_keywords=false&sort=asc&text=malmi'
+    'keyword/?data_source=yso&has_upcoming_events=true&page=1&page_size=10&show_all_keywords=false&sort=asc&text=malmi'
   );
 });
 
@@ -106,7 +106,7 @@ it('uses correct path when source is provided', async () => {
     query: GET_KEYWORDS,
   });
 
-  expect(getMock).toHaveBeenCalledWith('keyword');
+  expect(getMock).toHaveBeenCalledWith('keyword/');
 });
 
 const GET_KEYWORDS = gql`

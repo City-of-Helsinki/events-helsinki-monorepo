@@ -36,6 +36,13 @@ import { hobbiesApolloClient } from '../../domain/clients/hobbiesApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 import AdvancedSearch from '../../domain/search/eventSearch/advancedSearch/AdvancedSearch';
 
+const SearchPageNoSSR = dynamic(
+  () => import('../../domain/search/eventSearch/SearchPage'),
+  {
+    ssr: false,
+  }
+);
+
 const Search: NextPage<{
   previewToken: string;
   page: PageType;
@@ -63,13 +70,6 @@ const Search: NextPage<{
     }
   }, [scrollTo]);
   const { footerMenu } = useContext(NavigationContext);
-
-  const SearchPageNoSSR = dynamic(
-    () => import('../../domain/search/eventSearch/SearchPage'),
-    {
-      ssr: false,
-    }
-  );
 
   return (
     <RHHCPage

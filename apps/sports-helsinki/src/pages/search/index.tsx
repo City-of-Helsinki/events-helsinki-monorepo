@@ -34,6 +34,13 @@ import cmsHelper from '../../domain/app/headlessCmsHelper';
 import { sportsApolloClient } from '../../domain/clients/sportsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
+const CombinedSearchPageNoSSR = dynamic(
+  () => import('../../domain/search/combinedSearch/CombinedSearchPage'),
+  {
+    ssr: false,
+  }
+);
+
 const Search: NextPage<{
   page: PageType;
   previewToken: string;
@@ -44,13 +51,6 @@ const Search: NextPage<{
   const { resilientT } = useResilientTranslation();
 
   usePageScrollRestoration();
-
-  const CombinedSearchPageNoSSR = dynamic(
-    () => import('../../domain/search/combinedSearch/CombinedSearchPage'),
-    {
-      ssr: false,
-    }
-  );
 
   const pageTitle = page?.title?.trim() || undefined;
   const pageDescription =

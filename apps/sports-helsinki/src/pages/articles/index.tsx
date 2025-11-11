@@ -52,6 +52,13 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 const CATEGORIES_AMOUNT = 20;
 
+const SearchPageContentNoSSR = dynamic(
+  () =>
+    import('react-helsinki-headless-cms').then((mod) => mod.SearchPageContent),
+  {
+    ssr: false,
+  }
+);
 interface ArticleFilters {
   text?: string | null;
   tags?: string[];
@@ -208,16 +215,6 @@ export default function ArticleArchive({
   );
 
   const { footerMenu } = useContext(NavigationContext);
-
-  const SearchPageContentNoSSR = dynamic(
-    () =>
-      import('react-helsinki-headless-cms').then(
-        (mod) => mod.SearchPageContent
-      ),
-    {
-      ssr: false,
-    }
-  );
 
   return (
     <RHHCPage

@@ -10,6 +10,13 @@ import useLocale from '../../hooks/useLocale';
 import { resetFocusId } from '../resetFocus/ResetFocus';
 import styles from './footer.module.scss';
 
+const UserTrackingFeatures = dynamic(
+  () => import('../widgets/UserTrackingFeatures').then((mod) => mod),
+  {
+    ssr: false,
+  }
+);
+
 type FooterSectionProps = {
   appName: string;
   menu?: Menu;
@@ -44,13 +51,6 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
     window?.scrollTo({ top: 0 });
     document.querySelector<HTMLDivElement>(`#${resetFocusId}`)?.focus();
   };
-
-  const UserTrackingFeatures = dynamic(
-    () => import('../widgets/UserTrackingFeatures').then((mod) => mod),
-    {
-      ssr: false,
-    }
-  );
 
   return (
     <>

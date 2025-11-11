@@ -59,6 +59,13 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 
 const CATEGORIES_AMOUNT = 20;
 
+const RHHCPageContentNoSSR = dynamic(
+  () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
+  {
+    ssr: false,
+  }
+);
+
 const NextCmsArticle: NextPage<{
   previewToken: string;
   article: ArticleType;
@@ -100,13 +107,6 @@ const NextCmsArticle: NextPage<{
   // NOTE: Return null to fix SSR rendering for notFound-page.
   // This is needed only with fallback: true, but should not be needed at all.
   if (!article) return null;
-
-  const RHHCPageContentNoSSR = dynamic(
-    () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
-    {
-      ssr: false,
-    }
-  );
 
   return (
     <RHHCPage

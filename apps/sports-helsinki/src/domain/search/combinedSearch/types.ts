@@ -134,6 +134,7 @@ export type VenueSearchParams = Pick<
   | 'orderByName'
   | 'orderByDistance'
   | 'orderByAccessibilityProfile'
+  | 'showCultureAndLeisureDivisionFirst'
   | 'after'
   | 'first'
 >;

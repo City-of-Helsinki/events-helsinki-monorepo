@@ -338,6 +338,7 @@ type UnifiedSearchVenue {
   images: [LocationImage]
   ontologyWords: [OntologyWord]
   isCultureAndLeisureDivisionVenue: Boolean
+  eventCount: Int
 }
 
 type Address {

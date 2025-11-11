@@ -95,25 +95,25 @@ function BaseApp({
   useHdsStyleFix();
 
   return (
-    <CookieConfigurationProvider
-      askemConfiguration={askemConfigurationInput}
-      cookieDomain={cookieDomain}
-      appName={appName}
-      consentUrl={consentUrl}
+    <AppThemeProvider
+      defaultButtonTheme={defaultButtonTheme}
+      defaultButtonVariant={defaultButtonVariant}
     >
-      <AppThemeProvider
-        defaultButtonTheme={defaultButtonTheme}
-        defaultButtonVariant={defaultButtonVariant}
-      >
-        <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
-          <AppRoutingProvider
-            getCardUrl={getCardUrl}
-            getEventUrl={getEventUrl}
-            getEventListLinkUrl={getEventListLinkUrl}
-            getOrganizationSearchUrl={getOrganizationSearchUrl}
-            getHelsinkiOnlySearchUrl={getHelsinkiOnlySearchUrl}
-            getPlainEventUrl={getPlainEventUrl}
-            getKeywordOnClickHandler={getKeywordOnClickHandler}
+      <CmsHelperProvider cmsHelper={cmsHelper} routerHelper={routerHelper}>
+        <AppRoutingProvider
+          getCardUrl={getCardUrl}
+          getEventUrl={getEventUrl}
+          getEventListLinkUrl={getEventListLinkUrl}
+          getOrganizationSearchUrl={getOrganizationSearchUrl}
+          getHelsinkiOnlySearchUrl={getHelsinkiOnlySearchUrl}
+          getPlainEventUrl={getPlainEventUrl}
+          getKeywordOnClickHandler={getKeywordOnClickHandler}
+        >
+          <CookieConfigurationProvider
+            askemConfiguration={askemConfigurationInput}
+            cookieDomain={cookieDomain}
+            appName={appName}
+            consentUrl={consentUrl}
           >
             <EventsCookieConsent>
               <MatomoProvider value={matomoInstance}>
@@ -134,10 +134,10 @@ function BaseApp({
                 </GeolocationProvider>
               </MatomoProvider>
             </EventsCookieConsent>
-          </AppRoutingProvider>
-        </CmsHelperProvider>
-      </AppThemeProvider>
-    </CookieConfigurationProvider>
+          </CookieConfigurationProvider>
+        </AppRoutingProvider>
+      </CmsHelperProvider>
+    </AppThemeProvider>
   );
 }
 

@@ -131,6 +131,7 @@ describe('CombinedSearchFormAdapter', () => {
           first: AppConfig.pageSize,
           ontologyTreeIdOrSets: [['551']],
           openAt: null,
+          showCultureAndLeisureDivisionFirst: true,
         },
       ],
       [

@@ -453,6 +453,7 @@ export const fakeVenuesSearchList = (
               reservation: null,
               serviceOwner: null,
               targetGroups: [],
+              isCultureAndLeisureDivisionVenue: true,
             },
           },
         };

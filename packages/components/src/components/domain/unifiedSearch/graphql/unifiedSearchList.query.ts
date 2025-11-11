@@ -18,6 +18,7 @@ export const SEARCH_LIST_QUERY = gql`
     $orderByAccessibilityProfile: AccessibilityProfile
     $showAccessibilityShortcomingsFor: AccessibilityProfile
     $mustHaveReservableResource: Boolean
+    $showCultureAndLeisureDivisionFirst: Boolean
     $includeHaukiFields: Boolean = true
   ) {
     unifiedSearch(
@@ -37,6 +38,7 @@ export const SEARCH_LIST_QUERY = gql`
       orderByDistance: $orderByDistance
       orderByName: $orderByName
       orderByAccessibilityProfile: $orderByAccessibilityProfile
+      showCultureAndLeisureDivisionFirst: $showCultureAndLeisureDivisionFirst
     ) {
       count
       pageInfo {
@@ -49,6 +51,7 @@ export const SEARCH_LIST_QUERY = gql`
             meta {
               id
             }
+            isCultureAndLeisureDivisionVenue
             name {
               fi
               sv

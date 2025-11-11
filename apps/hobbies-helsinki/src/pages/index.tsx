@@ -32,6 +32,13 @@ import cmsHelper from '../domain/app/headlessCmsHelper';
 import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslationsWithCommon';
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 
+const RHHCPageContentNoSSR = dynamic(
+  () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
+  {
+    ssr: false,
+  }
+);
+
 const HomePage: NextPage<{
   previewToken: string;
   page: PageType;
@@ -42,13 +49,6 @@ const HomePage: NextPage<{
   } = useConfig();
   const { footerMenu } = useContext(NavigationContext);
   const { resilientT } = useResilientTranslation();
-
-  const RHHCPageContentNoSSR = dynamic(
-    () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
-    {
-      ssr: false,
-    }
-  );
 
   return (
     <RHHCPage

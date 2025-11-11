@@ -21,6 +21,13 @@ type NavigationProps = {
   languages?: Language[];
 };
 
+const RHHCNavigationNoSSR = dynamic(
+  () => import('react-helsinki-headless-cms').then((mod) => mod.Navigation),
+  {
+    ssr: false,
+  }
+);
+
 export default function Navigation({
   page,
   menu,
@@ -39,13 +46,6 @@ export default function Navigation({
     forcedLanguages ??
     languages ??
     languagesQuery.data?.languages?.filter(isLanguage);
-
-  const RHHCNavigationNoSSR = dynamic(
-    () => import('react-helsinki-headless-cms').then((mod) => mod.Navigation),
-    {
-      ssr: false,
-    }
-  );
 
   return (
     <>

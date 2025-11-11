@@ -52,8 +52,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   );
 
   const {
-    categoryInput,
-    setCategoryInput,
     ageInput,
     setAgeInput,
     placeInput,
@@ -115,7 +113,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   };
 
   const clearInputValues = () => {
-    setCategoryInput('');
     setPlaceInput('');
     setTextSearchInput('');
     setAgeInput(undefined);

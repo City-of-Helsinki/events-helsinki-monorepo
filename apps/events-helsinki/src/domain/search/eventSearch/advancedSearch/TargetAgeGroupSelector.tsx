@@ -76,9 +76,9 @@ function TargetAgeGroupSelector({
     // NOTE: the placeholder value is read when value is empty,
     // which easily leads to situation where placeholder is read twice by screen reader.
     // TODO: label: <SrOnly as="span">{label ?? placeholder}</SrOnly>,
-    label: label ?? placeholder,
+    // label: label ?? placeholder,
     // Prevent reading the label / placeholder twice by screen reader
-    placeholder: !value ? placeholder : undefined,
+    placeholder: !value ? label || placeholder : undefined,
     // TODO: do we need translations for every text copies?
     // clearButtonAriaLabel_one: tSearch('search.targetAgeGroup.clear'),
     language: locale,
@@ -94,7 +94,7 @@ function TargetAgeGroupSelector({
       options={options}
       multiSelect={false}
       visibleOptions={options.length + 1} // Show all options without scroll
-      value={value}
+      value={value || undefined}
       icon={<IconGroup aria-hidden />}
     />
   );

@@ -1,7 +1,6 @@
 import {
   Checkbox,
   DateSelector,
-  MultiSelectDropdown,
   useAppEventsTranslation,
   IconRead,
   EVENT_SEARCH_FILTERS,
@@ -9,8 +8,14 @@ import {
   PlaceSelector,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import type { SelectCustomTheme } from 'hds-react';
-import { Button, IconSearch, IconLocation, ButtonVariant } from 'hds-react';
+import type { Option, SelectCustomTheme } from 'hds-react';
+import {
+  Button,
+  IconSearch,
+  IconLocation,
+  ButtonVariant,
+  Select,
+} from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
@@ -50,8 +55,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   );
 
   const {
-    categoryInput,
-    setCategoryInput,
     placeInput,
     setPlaceInput,
     selectedDateTypes,
@@ -119,6 +122,11 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
     goToSearch(search);
   };
 
+  const handleCategoryChange = (selectedOptions: Option[]) => {
+    const optionValues = selectedOptions.map((option) => option.value);
+    setSelectedCategories(optionValues);
+  };
+
   const handleTargetAgeGroupChange = (
     _options: TargetAgeGroupOptionType[],
     option: TargetAgeGroupOptionType | null
@@ -127,7 +135,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   };
 
   const clearInputValues = () => {
-    setCategoryInput('');
     setPlaceInput('');
     setTextSearchInput('');
   };
@@ -186,18 +193,18 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
         <div className={styles.rowWrapper}>
           <div className={styles.row}>
             <div>
-              <MultiSelectDropdown
-                checkboxName="categoryOptions"
-                icon={<IconRead aria-hidden />}
-                inputValue={categoryInput}
-                name="category"
-                onChange={setSelectedCategories}
-                options={categories}
-                setInputValue={setCategoryInput}
-                showSearch={false}
-                title={t('search.titleDropdownCategory')}
+              <Select
+                className={styles.categoriesSelector}
+                multiSelect
+                texts={{ placeholder: t('search.titleDropdownCategory') }}
+                options={categories.map((option) => ({
+                  ...option,
+                  label: option.text,
+                }))}
+                onChange={handleCategoryChange}
                 value={selectedCategories}
-                buttonStyles={{ fontSize: 'var(--fontsize-body-m)' }}
+                icon={<IconRead aria-hidden />}
+                noTags
               />
             </div>
             <div className={styles.dateSelectorWrapper}>

@@ -95,6 +95,15 @@ $buttonWidth: 180px;
     }
   }
 
+  .categoriesSelector {
+    button {
+      svg {
+        width: 19px;
+        width: 19px;
+      }
+    }
+  }
+
   .dateSelectorWrapper {
     & > div {
       border: 1px solid var(--color-white); // Fill 2px of available space under dropdown
@@ -105,6 +114,8 @@ $buttonWidth: 180px;
     --fontsize-body-l: 'var(--fontsize-body-m)';
     --border-width: '0px';
     --menu-item-height: 50px; // Fix the empty option's height
+    --computed-placeholder-color: var(--color-primary-black);
+
     span {
       margin-right: 0;
       svg {
@@ -117,24 +128,6 @@ $buttonWidth: 180px;
 
     label {
       display: inline;
-    }
-
-    button {
-      cursor: pointer;
-      border: 0.125rem solid var(--color-white);
-      background: transparent;
-      min-height: var(--dropdown-height);
-
-      padding: 0 0.875rem;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      outline: none;
-      text-align: left;
-      svg {
-        top: inherit;
-        --icon-size: 1.25rem;
-      }
     }
   }
 }

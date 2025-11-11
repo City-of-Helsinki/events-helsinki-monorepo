@@ -173,6 +173,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
         <div className={styles.rowWrapper}>
           <div className={classNames(styles.row, styles.textSearchRow)}>
             <AdvancedSearchTextInput
+              className={styles.searchInputWrapper}
               id="search"
               name="search"
               placeholder={tAppEvents('appEvents:search.search.placeholder')}
@@ -182,11 +183,6 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
               clearButtonAriaLabel={tAppEvents(
                 'appEvents:search.search.clearButtonAriaLabel'
               )}
-              style={
-                {
-                  '--placeholder-color': 'var(--color-black)',
-                } as React.CSSProperties
-              }
             />
           </div>
         </div>
@@ -194,6 +190,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
           <div className={styles.row}>
             <div>
               <Select
+                id="categories"
                 className={styles.categoriesSelector}
                 multiSelect
                 texts={{ placeholder: t('search.titleDropdownCategory') }}
@@ -205,6 +202,15 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
                 value={selectedCategories}
                 icon={<IconRead aria-hidden />}
                 noTags
+                visibleOptions={5.97} // use decimal to make scrollable content visible
+                theme={{
+                  '--checkbox-background-selected': 'var(--color-input-dark)',
+                  '--checkbox-background-hover': 'var(--color-input-dark)',
+                  '--menu-item-background-color-hover':
+                    'var(--color-input-light)',
+                  '--menu-item-background-color-selected-hover':
+                    'var(--color-input-light)',
+                }}
               />
             </div>
             <div className={styles.dateSelectorWrapper}>
@@ -228,16 +234,21 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
                 value={selectedTargetAgeGroup}
                 theme={
                   {
-                    '--menu-item-background': 'var(--color-input-dark)',
-                    '--menu-item-background-hover': 'var(--color-input-dark)',
-                    '--menu-item-background-selected-hover':
+                    '--menu-item-background-color': 'var(--color-input-dark)',
+                    '--menu-item-background-color-hover':
+                      'var(--color-input-light)',
+                    '--menu-item-background-color-selected':
                       'var(--color-input-dark)',
+                    '--menu-item-background-color-selected-hover':
+                      'var(--color-input-dark)',
+                    '--menu-item-color-selected-hover': 'var(--color-white)',
                   } as SelectCustomTheme
                 }
               />
             </div>
             <div>
               <PlaceSelector
+                className={styles.placeSelector}
                 checkboxName="placesCheckboxes"
                 icon={<IconLocation aria-hidden />}
                 inputValue={placeInput}

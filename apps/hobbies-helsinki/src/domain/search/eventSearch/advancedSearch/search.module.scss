@@ -89,7 +89,7 @@ $buttonWidth: 180px;
 
   .dateSelectorWrapper {
     & > div {
-      height: -webkit-fill-available; // Fill 2px of available space under dropdown
+      border: 1px solid var(--color-white); // Fill 2px of available space under dropdown
     }
   }
 }

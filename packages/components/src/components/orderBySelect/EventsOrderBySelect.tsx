@@ -8,9 +8,38 @@ import {
 import useLocale from '../../hooks/useLocale';
 import useSearchTranslation from '../../hooks/useSearchTranslation';
 import useSetSortQueryParamToOptionValue from '../../hooks/useSetSortQueryParamToOptionValue';
-import type { Option } from '../../types/types';
 import Select from '../select/Select';
 import styles from './eventsOrderBySelect.module.scss';
+
+function useEventsOrderBySelectOptions(): HDSOption[] {
+  const { t } = useSearchTranslation();
+  return [
+    {
+      label: t('search:orderBy.endTime'),
+      value: EVENT_SORT_OPTIONS.END_TIME,
+      selected: false,
+      isGroupLabel: false,
+      visible: true,
+      disabled: false,
+    },
+    {
+      label: t('search:orderBy.relevance'),
+      value: EVENT_SORT_OPTIONS.RANK_DESC,
+      selected: false,
+      isGroupLabel: false,
+      visible: true,
+      disabled: false,
+    },
+    {
+      label: t('search:orderBy.startTime'),
+      value: EVENT_SORT_OPTIONS.START_TIME,
+      selected: false,
+      isGroupLabel: false,
+      visible: true,
+      disabled: false,
+    },
+  ];
+}
 
 const EventsOrderBySelect: React.FC<{
   sortParameter?: string;
@@ -18,27 +47,14 @@ const EventsOrderBySelect: React.FC<{
     _selectedOptions: HDSOption[],
     option: HDSOption
   ) => void;
-}> = ({ sortParameter = 'sort', customOnChangeHandler }) => {
+  theme?: SelectCustomTheme;
+}> = ({ sortParameter = 'sort', customOnChangeHandler, theme }) => {
   const locale = useLocale();
   const { t } = useSearchTranslation();
   const router = useRouter();
   const sort = router.query?.[sortParameter] ?? DEFAULT_EVENT_SORT_OPTION;
   const setSortQueryParamToOptionValue = useSetSortQueryParamToOptionValue();
-
-  const orderByOptions: Option[] = [
-    {
-      text: t('search:orderBy.endTime'),
-      value: EVENT_SORT_OPTIONS.END_TIME,
-    },
-    {
-      text: t('search:orderBy.relevance'),
-      value: EVENT_SORT_OPTIONS.RANK_DESC,
-    },
-    {
-      text: t('search:orderBy.startTime'),
-      value: EVENT_SORT_OPTIONS.START_TIME,
-    },
-  ];
+  const orderByOptions = useEventsOrderBySelectOptions();
   const defaultOption = orderByOptions.find((option) => {
     return option.value === DEFAULT_EVENT_SORT_OPTION;
   });
@@ -48,13 +64,7 @@ const EventsOrderBySelect: React.FC<{
 
   return (
     <Select
-      theme={
-        {
-          '--menu-item-background': 'var(--color-input-dark)',
-          '--menu-item-background-hover': 'var(--color-input-dark)',
-          '--menu-item-background-selected-hover': 'var(--color-input-dark)',
-        } as SelectCustomTheme
-      }
+      theme={theme}
       texts={{
         label: t('search:orderBy.label'),
         language: locale,

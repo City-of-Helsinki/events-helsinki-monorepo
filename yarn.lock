@@ -3203,7 +3203,7 @@ __metadata:
     graphql-tag: "npm:2.12.6"
     hds-core: "npm:^3.11.0"
     hds-design-tokens: "npm:^3.11.0"
-    hds-react: "npm:^4.8.0"
+    hds-react: "npm:4.8.0"
     html-react-parser: "npm:5.2.5"
     https: "npm:1.0.0"
     i18next: "npm:25.3.2"
@@ -13465,7 +13465,7 @@ __metadata:
     esbuild: "npm:0.25.6"
     eslint: "npm:9.31.0"
     git-rev-sync: "npm:3.0.2"
-    hds-react: "npm:^4.8.0"
+    hds-react: "npm:4.8.0"
     husky: "npm:^9.1.7"
     is-ci: "npm:4.1.0"
     jest-date-mock: "npm:^1.0.10"
@@ -15126,13 +15126,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hds-core@npm:4.8.1":
-  version: 4.8.1
-  resolution: "hds-core@npm:4.8.1"
-  checksum: d9b70b7ade7c474db5e108898dda516a182c6e323abf871e56a20df857c54313de3bf570c057ec5cc4c6b24a29078cd80f31326985b285ec0e829ed93cf60e7a
-  languageName: node
-  linkType: hard
-
 "hds-core@npm:^3.11.0":
   version: 3.11.0
   resolution: "hds-core@npm:3.11.0"
@@ -15186,48 +15179,6 @@ __metadata:
     react: ^16.8.0 || ^17
     react-dom: ^16.8.0 || ^17
   checksum: 04e59e39f6714c4faae016b12123656d00cd3ada4544b455a73e1d017b90a5002d76fa304bfd1860a5e46bba139a5a52cef4af3df5dcafb493b9a8320cce8264
-  languageName: node
-  linkType: hard
-
-"hds-react@npm:^4.8.0":
-  version: 4.8.1
-  resolution: "hds-react@npm:4.8.1"
-  dependencies:
-    "@apollo/client": "npm:^3.10.1"
-    "@babel/runtime": "npm:^7.26.10"
-    "@emotion/styled-base": "npm:^11.0.0"
-    "@hookform/resolvers": "npm:^2.9.11"
-    "@juggle/resize-observer": "npm:3.2.0"
-    "@popperjs/core": "npm:2.11.5"
-    "@react-aria/visually-hidden": "npm:3.8.16"
-    "@react-spring/web": "npm:9.3.0"
-    "@types/cookie": "npm:^0.4.1"
-    "@typescript-eslint/parser": "npm:^6.19.0"
-    await-to-js: "npm:^3.0.0"
-    cookie: "npm:^0.4.1"
-    crc-32: "npm:1.2.0"
-    date-fns: "npm:2.16.1"
-    downshift: "npm:6.0.6"
-    graphql: "npm:^16.8.1"
-    hds-core: "npm:4.8.1"
-    jwt-decode: "npm:^3.1.2"
-    kashe: "npm:1.0.4"
-    lodash: "npm:^4.17.21"
-    memoize-one: "npm:5.2.1"
-    oidc-client-ts: "npm:^2.4.1"
-    postcss: "npm:^8.4.21"
-    react-hook-form: "npm:^7.43.3"
-    react-merge-refs: "npm:1.1.0"
-    react-popper: "npm:2.2.5"
-    react-use-measure: "npm:2.0.1"
-    react-virtual: "npm:2.10.4"
-    uuid: "npm:^9.0.0"
-    yup: "npm:^1.0.2"
-  peerDependencies:
-    postcss: ^8.4.21
-    react: ^16.8.0 || ^17
-    react-dom: ^16.8.0 || ^17
-  checksum: a62b5c20583f08e813f19b4fe6f9948a8cc68b01ddb1142ad3c1c1472a49972acc25065c4c9957f7975de20ced522cb8f9dff166df424e73b16d910bdc75e8cc
   languageName: node
   linkType: hard
 
@@ -15353,7 +15304,7 @@ __metadata:
     graphql: "npm:^16.11.0"
     graphql-request: "npm:7.2.0"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^4.8.0"
+    hds-react: "npm:4.8.0"
     husky: "npm:^9.1.7"
     i18next: "npm:25.3.2"
     ics: "npm:^3.8.1"
@@ -23696,7 +23647,7 @@ __metadata:
     graphql: "npm:^16.11.0"
     graphql-request: "npm:7.2.0"
     graphql-tag: "npm:2.12.6"
-    hds-react: "npm:^4.8.0"
+    hds-react: "npm:4.8.0"
     husky: "npm:^9.1.7"
     i18next: "npm:25.3.2"
     ics: "npm:^3.8.1"

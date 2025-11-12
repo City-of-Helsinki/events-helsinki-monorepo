@@ -148,3 +148,20 @@ $buttonWidth: 180px;
     display: none;
   }
 }
+
+.searchTitle {
+  font-size: var(--fontsize-heading-xl);
+  font-weight: 500;
+  margin-top: 2px;
+  margin-bottom: var(--spacing-xl);
+
+  &.withDescription {
+    margin-bottom: var(--spacing-s) !important;
+  }
+}
+
+.searchDescription {
+  font-size: var(--fontsize-heading-m);
+  margin-top: var(--spacing-s);
+  margin-bottom: var(--spacing-xl);
+}

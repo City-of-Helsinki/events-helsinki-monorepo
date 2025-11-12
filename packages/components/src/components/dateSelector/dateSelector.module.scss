@@ -8,7 +8,7 @@
   .button {
     background: transparent;
     border: none;
-    min-height: 3.375rem;
+    min-height: var(--spacing-3-xl);
 
     padding: var(--spacing-xs);
     width: 100%;

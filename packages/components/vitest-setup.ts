@@ -97,11 +97,15 @@ hideConsoleMessages({
     // https://github.com/City-of-Helsinki/helsinki-design-system/blob/v3.11.0/packages/react/src/components/dropdown/select/Select.tsx#L669
     //
     // Example use case:
-    // SearchSelect (packages/components) → Select (packages/components) → Select (hds-react)
-    // Removing this hiding and running SearchSelect tests should show this error if HDS v3.11.0 is still used.
+    // TargetAgeGroupSelector (apps/events-helsinki) → Select (hds-react)
+    // Removing this hiding & running TargetAgeGroupSelector tests should show this error if HDS v3.11.0 is still used.
     //
     // Related issue:
     // https://github.com/facebook/react/issues/29233
     /Support for defaultProps will be removed.*Use JavaScript default parameters instead.*hds-react/s,
+    /Could not parse CSS stylesheet/,
+  ],
+  warn: [
+    /`canonizeResults` is deprecated and will be removed in Apollo Client 4.0. Please remove this option./,
   ],
 });

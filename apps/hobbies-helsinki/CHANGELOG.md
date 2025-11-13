@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.27.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.27.0...hobbies-helsinki-v2.27.1) (2025-11-13)
+
+
+### Bug Fixes
+
+* Date selector on Safari ([92103a3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/92103a3d9e5e1b44328c1401f5aad4e296eb701c))
+* **deps:** Update next to latest minor → fix many dependabot issues ([8a0784a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8a0784ae49ffc0d1f8268d4c185e3418c033104a))
+* **deps:** Upgrade *vite* to latest minor→fix depbot issues 273–280 ([2f990ec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2f990ecf5609251c0189cde5e60e24b8c2385257))
+* Dynamic imports should not be done inside components ([1c7e72b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1c7e72bd3eb1a38658548fb8a3232861e5aeddab))
+* **styles:** Fix remaining cases of incorrect use of respond-* mixins ([f359f4d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f359f4dab3589bdbd35848d369fb9c0d9342b6c6))
+
 ## [2.27.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.26.0...hobbies-helsinki-v2.27.0) (2025-11-06)
 
 

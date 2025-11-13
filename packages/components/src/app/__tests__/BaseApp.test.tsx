@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import { ButtonPresetTheme, ButtonVariant } from 'hds-react';
 import BaseApp from '../BaseApp';
 
 describe('BaseApp', () => {
-  it('renders children', () => {
+  it('renders children', async () => {
     render(
       <BaseApp
         // Provide minimal required props, can use empty objects or dummy functions
@@ -23,8 +24,8 @@ describe('BaseApp', () => {
         headerUniversalBarMenu={undefined}
         footerMenu={undefined}
         languages={[]}
-        defaultButtonTheme="default"
-        defaultButtonVariant="primary"
+        defaultButtonTheme={ButtonPresetTheme.Coat}
+        defaultButtonVariant={ButtonVariant.Primary}
         getCardUrl={() => ''}
         getEventUrl={() => ''}
         getEventListLinkUrl={() => ''}
@@ -32,11 +33,13 @@ describe('BaseApp', () => {
         getHelsinkiOnlySearchUrl={() => ''}
         getPlainEventUrl={() => ''}
         getKeywordOnClickHandler={(_router, _locale, _type, _value) => () => {}}
-        _nextI18Next={undefined}
+        consentUrl={'/cookie-consent'}
       >
         <div data-testid="child">Hello</div>
       </BaseApp>
     );
-    expect(screen.getByTestId('child')).toHaveTextContent('Hello');
+    await waitFor(() => {
+      expect(screen.getByTestId('child')).toHaveTextContent('Hello');
+    });
   });
 });

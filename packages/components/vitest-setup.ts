@@ -4,6 +4,7 @@ import { loadEnvConfig } from '@next/env';
 
 import { expect } from 'vitest';
 import * as matchers from 'vitest-axe/matchers';
+import { setup as setupFakedIndexedDB } from 'vitest-indexeddb';
 import { initializeI18nWithConfig } from './config/tests/initI18n';
 
 import '@testing-library/jest-dom/vitest';
@@ -109,3 +110,8 @@ hideConsoleMessages({
     /`canonizeResults` is deprecated and will be removed in Apollo Client 4.0. Please remove this option./,
   ],
 });
+
+/**
+ * Fake IndexedDB for vitest.
+ */
+setupFakedIndexedDB();

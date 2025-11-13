@@ -49,7 +49,6 @@ const EventsCookieConsent: React.FC<Props> = ({ children }) => {
   //   }
   // };
 
-  console.log({ options, siteSettings });
   return (
     <CookieConsentContextProvider
       onChange={onChange}

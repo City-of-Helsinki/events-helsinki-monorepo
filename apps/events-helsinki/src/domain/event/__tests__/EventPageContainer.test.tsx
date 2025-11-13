@@ -73,7 +73,10 @@ const eventRequest = {
   query: EventDetailsDocument,
   variables: {
     id: superEventId,
-    include: AppConfig.eventSecondaryQueryIncludeParamValue,
+    include: [
+      ...AppConfig.eventSecondaryQueryIncludeParamValue,
+      'registration',
+    ],
   },
 };
 const otherEventsRequest = {
@@ -170,7 +173,7 @@ it('should render info and load other events + similar events', async () => {
 
   keywords.slice(0, 2).forEach((keyword) => {
     expect(
-      screen.getByRole('link', { name: keyword.name })
+      screen.getByRole('button', { name: keyword.name })
     ).toBeInTheDocument();
   }, 10000);
 

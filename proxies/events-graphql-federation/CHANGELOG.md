@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.12.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.11.0...federation-router-v1.12.0) (2025-11-13)
+
+
+### Features
+
+* **router:** Update unified-search subgraph & supergraph ([2be1123](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2be11234e71636f95f19fe7bac952c89eefb783b))
+* **router:** Update unified-search subgraph & supergraph ([e65fb5a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e65fb5af70a8208529907f7bd04aa9ca5f4d212a))
+
 ## [1.11.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.10.0...federation-router-v1.11.0) (2025-10-22)
 
 ### Features

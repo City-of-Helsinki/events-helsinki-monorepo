@@ -1,5 +1,4 @@
 import type createMatomoInstance from '@jonkoops/matomo-tracker-react/lib/instance.js';
-import MatomoProvider from '@jonkoops/matomo-tracker-react/lib/MatomoProvider.js';
 
 import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';
@@ -8,11 +7,10 @@ import React from 'react';
 import '../styles/globals.scss';
 import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
-import { EventsCookieConsent, MatomoWrapper } from '../components';
+import { EventsCookieConsent } from '../components';
 import type { createAskemInstance } from '../components/askem';
 
 import ErrorFallback from '../components/errorPages/ErrorFallback';
-import useMatomoInstance from '../components/matomo/useMatomo';
 import ResetFocus from '../components/resetFocus/ResetFocus';
 import { CookieConfigurationProvider } from '../cookieConfigurationProvider';
 import {
@@ -75,7 +73,7 @@ function BaseApp({
   cookieDomain,
   routerHelper,
   matomoConfiguration,
-  askemFeedbackConfiguration: askemConfigurationInput,
+  askemFeedbackConfiguration,
   defaultButtonTheme,
   defaultButtonVariant,
   getCardUrl,
@@ -88,8 +86,6 @@ function BaseApp({
   appName,
   consentUrl,
 }: Props) {
-  const matomoInstance = useMatomoInstance(matomoConfiguration);
-
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
   //      SEO performance is not impacted.
   useHdsStyleFix();
@@ -110,29 +106,26 @@ function BaseApp({
           getKeywordOnClickHandler={getKeywordOnClickHandler}
         >
           <CookieConfigurationProvider
-            askemConfiguration={askemConfigurationInput}
+            askemConfiguration={askemFeedbackConfiguration}
+            matomoConfiguration={matomoConfiguration}
             cookieDomain={cookieDomain}
             appName={appName}
             consentUrl={consentUrl}
           >
             <EventsCookieConsent>
-              <MatomoProvider value={matomoInstance}>
-                <GeolocationProvider>
-                  <NavigationProvider
-                    headerMenu={headerMenu}
-                    headerUniversalBarMenu={headerUniversalBarMenu}
-                    footerMenu={footerMenu}
-                    languages={languages}
-                  >
-                    <MatomoWrapper>
-                      <GeolocationErrorNotification />
-                      <ResetFocus />
-                      {children}
-                      <DynamicToastContainer />
-                    </MatomoWrapper>
-                  </NavigationProvider>
-                </GeolocationProvider>
-              </MatomoProvider>
+              <GeolocationProvider>
+                <NavigationProvider
+                  headerMenu={headerMenu}
+                  headerUniversalBarMenu={headerUniversalBarMenu}
+                  footerMenu={footerMenu}
+                  languages={languages}
+                >
+                  <GeolocationErrorNotification />
+                  <ResetFocus />
+                  {children}
+                  <DynamicToastContainer />
+                </NavigationProvider>
+              </GeolocationProvider>
             </EventsCookieConsent>
           </CookieConfigurationProvider>
         </AppRoutingProvider>

@@ -12,42 +12,17 @@ type Props = {
 
 const EventsCookieConsent: React.FC<Props> = ({ children }) => {
   const language = useLocale();
-  // const { asPath: pathname } = useRouter();
-  // const { pushInstruction } = useMatomo();
-
-  // useEffect(() => {
-  //   handleMatomoUpdate();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [pathname]);
-
-  // TODO: Matomo update?
-  // const handleMatomoUpdate = useCallback(() => {
-  //   const getConsentStatus = (cookieId: string) => {
-  //     const consents = getAllConsents();
-  //     return consents[cookieId];
-  //   };
-  //   if (getConsentStatus('matomo')) {
-  //     pushInstruction('setCookieConsentGiven');
-  //   } else {
-  //     pushInstruction('forgetCookieConsentGiven');
-  //     setShowCookieConsentModal(true);
-  //   }
-  // }, [getAllConsents, pushInstruction]);
 
   const siteSettings = useConsentSiteSettings();
   const options = { language };
 
-  const onChange = (_e: CookieConsentChangeEvent) => {
-    console.log('TODO: implement onChange handler to cookie consent');
+  // FIXME: We have no need for onChange -handler, so we can remove it.
+  // The onChange property will be made optional in HDS v.4.8.1.
+  // See: https://github.com/City-of-Helsinki/helsinki-design-system/releases/tag/v4.8.1.
+  const onChange = (event: CookieConsentChangeEvent) => {
+    // eslint-disable-next-line no-console
+    console.debug('Cookie consent changed: ', { event });
   };
-
-  // const onAllConsentsGiven = () => {
-  //   setShowCookieConsentModal(false);
-  //   if (onConsentGiven) {
-  //     handleMatomoUpdate();
-  //     onConsentGiven();
-  //   }
-  // };
 
   return (
     <CookieConsentContextProvider

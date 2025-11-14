@@ -3,6 +3,7 @@ import { useGroupConsent } from 'hds-react';
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 import React, { useEffect } from 'react';
+import { consentGroupIds } from '../eventsCookieConsent/constants';
 
 interface Props {
   children?: ReactNode | undefined;
@@ -11,7 +12,7 @@ interface Props {
 const MatomoWrapper: React.FC<Props> = ({ children }) => {
   const { trackPageView, pushInstruction } = useMatomo();
   const { asPath: pathname } = useRouter();
-  const isConsentGiven = useGroupConsent('matomo');
+  const isConsentGiven = useGroupConsent(consentGroupIds.matomo);
 
   // Track page changes when pathnname changes
   useEffect(() => {

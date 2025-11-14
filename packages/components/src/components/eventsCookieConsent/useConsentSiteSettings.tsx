@@ -2,6 +2,7 @@ import React from 'react';
 import { DEFAULT_LANGUAGE } from '../../constants';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import useConsentTranslation from '../../hooks/useConsentTranslation';
+import { consentGroupIds } from './constants';
 import type { SiteSettingsLanguage } from './types';
 import { createLocaleDictBuilder } from './utils';
 
@@ -30,7 +31,7 @@ function useConsentContentSource() {
 
   const requiredGroups = [
     {
-      groupId: 'essential',
+      groupId: consentGroupIds.essentials,
       title: buildDict('consent:groups.essentials.title'),
       description: buildDict('consent:groups.essentials.description'),
       cookies: [
@@ -68,7 +69,7 @@ function useConsentContentSource() {
 
   const optionalGroups = [
     {
-      groupId: 'optionalServiceMap',
+      groupId: consentGroupIds.serviceMap,
       title: buildDict('consent:groups.optionalServiceMap.title'),
       description: buildDict('consent:groups.optionalServiceMap.text'),
       cookies: [
@@ -96,7 +97,7 @@ function useConsentContentSource() {
       ],
     },
     {
-      groupId: 'optionalMatomo',
+      groupId: consentGroupIds.matomo,
       title: buildDict('consent:groups.optionalMatomo.title'),
       description: buildDict('consent:groups.optionalMatomo.text'),
       cookies: [
@@ -110,7 +111,7 @@ function useConsentContentSource() {
       ],
     },
     {
-      groupId: 'optionalAskem',
+      groupId: consentGroupIds.askem,
       title: buildDict('consent:groups.optionalAskem.title'),
       description: buildDict('consent:groups.optionalAskem.text'),
       cookies: [

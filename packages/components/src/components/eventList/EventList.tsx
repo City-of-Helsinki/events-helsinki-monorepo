@@ -29,7 +29,7 @@ type EventListProps = {
   onLoadMore: () => void;
   getEventUrl: GetEventUrlType;
   loadMoreButtonVariant?: Exclude<ButtonVariant, 'supplementary'>;
-  loadMoreButtonTheme?: ButtonTheme;
+  loadMoreButtonTheme?: ButtonTheme | ButtonPresetTheme;
 };
 
 const EventList: React.FC<EventListProps> = ({

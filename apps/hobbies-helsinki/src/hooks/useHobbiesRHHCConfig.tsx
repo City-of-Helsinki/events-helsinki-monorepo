@@ -9,6 +9,7 @@ import {
   HelsinkiCityOwnedIcon,
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,
 } from '@events-helsinki/components';
+import { ButtonPresetTheme } from 'hds-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
@@ -83,7 +84,9 @@ export default function useHobbiesRHHCConfig(args: {
         ),
       },
       customCopy: {
-        loadMoreButtonTheme: 'coat',
+        // FIXME: any-type can be removed when a newer version of HCRC-lib is installed.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        loadMoreButtonTheme: ButtonPresetTheme.Coat as any,
       },
       siteName: resilientT('appHobbies:appName'),
       currentLanguageCode: getLanguageCode(locale),

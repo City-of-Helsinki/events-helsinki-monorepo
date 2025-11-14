@@ -17,6 +17,7 @@ import {
   DEFAULT_EVENT_SORT_OPTION,
   isEventSortOption,
 } from '@events-helsinki/components';
+import { ButtonPresetTheme, ButtonVariant } from 'hds-react';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
@@ -201,8 +202,8 @@ const SearchPage: React.FC<{
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
-                    loadMoreButtonVariant="primary"
-                    loadMoreButtonTheme="coat"
+                    loadMoreButtonVariant={ButtonVariant.Primary}
+                    loadMoreButtonTheme={ButtonPresetTheme.Coat}
                   />
                 }
                 orderBySelectComponent={<EventsOrderBySelect />}

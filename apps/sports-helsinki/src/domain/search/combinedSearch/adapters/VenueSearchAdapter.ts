@@ -6,7 +6,6 @@ import type {
   AppLanguage,
   Coordinates,
   OrderByDistance,
-  UnifiedSearchLanguage,
 } from '@events-helsinki/components/types';
 import {
   SortOrder,
@@ -43,6 +42,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   orderByName: VenueSearchParams['orderByName'];
   orderByDistance: VenueSearchParams['orderByDistance'];
   orderByAccessibilityProfile: VenueSearchParams['orderByAccessibilityProfile'];
+  showCultureAndLeisureDivisionFirst: VenueSearchParams['showCultureAndLeisureDivisionFirst'];
   after?: VenueSearchParams['after'];
   first?: VenueSearchParams['first'];
 
@@ -60,9 +60,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
     // Initialize the object with default values
     Object.assign(this, initialVenueSearchAdapterValues);
 
-    this.language = appToUnifiedSearchLanguageMap[
-      locale
-    ] as UnifiedSearchLanguage;
+    this.language = appToUnifiedSearchLanguageMap[locale];
     this.text = input.text || initialVenueSearchAdapterValues.text;
     this.ontologyTreeIdOrSets =
       this.getOntologyTreeIdOrSets(input) ||
@@ -74,6 +72,7 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
       ? [ServiceOwnerType.MunicipalService]
       : initialVenueSearchAdapterValues.serviceOwnerTypes;
     this.mustHaveReservableResource = !!input.reservable;
+
     if (input.venueOrderBy?.includes('name')) {
       this.orderByName = input.venueOrderBy.startsWith('-')
         ? { order: SortOrder.Descending }
@@ -88,6 +87,10 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
       } as OrderByDistance;
     } else if (isAccessibilityProfile(input.venueOrderBy)) {
       this.orderByAccessibilityProfile = input.venueOrderBy;
+    } else {
+      // Only show Culture and Leisure Division's venues first
+      // if no other specific ordering is defined → means "Sort by relevance",
+      this.showCultureAndLeisureDivisionFirst = true;
     }
   }
 

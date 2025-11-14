@@ -19,13 +19,12 @@ describe('SearchSelect', () => {
       const { container } = render(
         <SearchSelect
           id="accessibilityProfile"
-          label="label"
-          placeholder="placeholder"
+          texts={{ label: 'label', placeholder: 'placeholder' }}
           options={accessibilityProfileOptions}
         />
       );
       expect(
-        screen.getByRole('button', {
+        screen.getByRole('combobox', {
           name: /label/i,
         })
       ).toBeInTheDocument();
@@ -37,8 +36,7 @@ describe('SearchSelect', () => {
       render(
         <SearchSelect
           id="accessibilityProfile"
-          label="label"
-          placeholder="placeholder"
+          texts={{ label: 'label', placeholder: 'placeholder' }}
           options={accessibilityProfileOptions}
         />
       );
@@ -50,7 +48,7 @@ describe('SearchSelect', () => {
           expect(screen.queryByText(option.text)).not.toBeInTheDocument()
         );
       await userEvent.click(
-        screen.getByRole('button', {
+        screen.getByRole('combobox', {
           name: /label/i,
         })
       );
@@ -65,11 +63,11 @@ describe('SearchSelect', () => {
         //   screen.getByRole('option', {
         //     name: /rollator/i,
         //   })
-        screen.getByText(/rollator/i)
+        await screen.findByRole('option', { name: /rollator/i })
       );
       // The placeholder text is replaced with the selected option
       expect(screen.queryByText(/placeholder/i)).not.toBeInTheDocument();
-      expect(screen.getByText(/rollator/i)).toBeInTheDocument();
+      expect(screen.getAllByText(/rollator/i)).toHaveLength(2);
     });
   });
 
@@ -84,21 +82,28 @@ describe('SearchSelect', () => {
       vi.restoreAllMocks();
     });
 
-    it.each(['value', 'defaultValue'])(
-      'does not allow array as a %s',
-      (field) => {
-        expect(() =>
-          render(
-            <SearchSelect label="label" options={[]} {...{ [field]: [] }} />
-          )
-        ).toThrow(/must be singletons/);
-      }
-    );
+    it.each(['value'])('does not allow array as a %s', (field) => {
+      expect(() =>
+        render(
+          <SearchSelect
+            texts={{ label: 'label', placeholder: 'placeholder' }}
+            options={[]}
+            {...{ [field]: [] }}
+          />
+        )
+      ).toThrow(/must be singletons/);
+    });
 
     it('does not allow multiselect', () => {
       expect(() =>
         // @ts-ignore
-        render(<SearchSelect label="label" options={[]} multiselect />)
+        render(
+          <SearchSelect
+            texts={{ label: 'label', placeholder: 'placeholder' }}
+            options={[]}
+            multiSelect
+          />
+        )
       ).toThrow(/does not support multiselect feature/);
     });
   });

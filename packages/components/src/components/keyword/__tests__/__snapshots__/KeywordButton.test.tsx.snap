@@ -2,18 +2,13 @@
 
 exports[`matches snapshot 1`] = `
 <div
-  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 tag-module_tag__1QCQs tag-module_withHover__3daxF _keyword_964ed1"
+  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 tag-module_tag__1QCQs tag-module_withHover__3daxF _keyword_964ed1 Tag-module_action__4ky2K tag_hds-tag--action__Az-Fm"
   id="tag:r0:"
-  role="link"
+  role="button"
   tabindex="0"
 >
-  <span
-    class="Tag-module_label__zCgFr undefined"
-    id="tag:r0:-label"
-  >
-    <span>
-      test keyword
-    </span>
+  <span>
+    test keyword
   </span>
 </div>
 `;

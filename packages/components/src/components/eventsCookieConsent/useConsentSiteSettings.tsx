@@ -192,7 +192,7 @@ function useConsentTranslations() {
         'consent:hdsCookieConsent.approveAllConsents'
       ),
       approveRequiredAndSelectedConsents: buildDict(
-        'consent:hdsCookieConsentapproveRequiredAndSelectedConsents'
+        'consent:hdsCookieConsent.approveRequiredAndSelectedConsents'
       ),
       approveOnlyRequiredConsents: buildDict(
         'consent:hdsCookieConsent.approveOnlyRequiredConsents'

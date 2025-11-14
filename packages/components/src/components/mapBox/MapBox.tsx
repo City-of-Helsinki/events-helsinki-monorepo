@@ -2,8 +2,10 @@ import { IconLocation, useGroupConsent } from 'hds-react';
 import router from 'next/router';
 import React from 'react';
 import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
+import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { useCommonTranslation } from '../../hooks';
 import CookiesRequired from '../cookieConsent/CookiesRequired';
+import { consentGroupIds } from '../eventsCookieConsent/constants';
 import Text from '../text/Text';
 import styles from './mapBox.module.scss';
 
@@ -16,7 +18,6 @@ type Props = {
   googleDirectionsLink: string;
   hslDirectionsLink: string;
   accessibilitySentences?: JSX.Element;
-  consentUrl?: string;
 };
 
 function MapBox({
@@ -28,11 +29,12 @@ function MapBox({
   googleDirectionsLink,
   hslDirectionsLink,
   accessibilitySentences,
-  consentUrl,
 }: Props) {
   const { t } = useCommonTranslation();
 
-  const isConsentGiven = useGroupConsent('servicemap_session');
+  const { consentUrl } = useCookieConfigurationContext();
+  const isConsentGiven = useGroupConsent(consentGroupIds.serviceMap);
+
   const handleConsentPageRedirect = () => {
     if (consentUrl) {
       router.push(`${consentUrl}?returnPath=${router.asPath}`);

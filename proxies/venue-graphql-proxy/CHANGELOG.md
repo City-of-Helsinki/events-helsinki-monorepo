@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.0...venue-graphql-proxy-v1.6.1) (2025-11-19)
+
+
+### Bug Fixes
+
+* **deps:** Upgrade *vite* to latest minor→fix depbot issues 273–280 ([2f990ec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2f990ecf5609251c0189cde5e60e24b8c2385257))
+* **licenses:** Unify all LICENSE files' contents ([ed21e2c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ed21e2c3e9f1b55c5c030c864590844f494af866))
+
 ## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.5.1...venue-graphql-proxy-v1.6.0) (2025-10-22)
 
 

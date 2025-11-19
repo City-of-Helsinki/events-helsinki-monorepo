@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.5.1...events-graphql-proxy-v1.5.2) (2025-11-19)
+
+
+### Bug Fixes
+
+* **deps:** Upgrade *vite* to latest minor→fix depbot issues 273–280 ([2f990ec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2f990ecf5609251c0189cde5e60e24b8c2385257))
+
 ## [1.5.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.5.0...events-graphql-proxy-v1.5.1) (2025-11-10)
 
 

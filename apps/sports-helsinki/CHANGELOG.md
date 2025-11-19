@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.33.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.33.0...sports-helsinki-v1.33.1) (2025-11-19)
+
+
+### Bug Fixes
+
+* **deps:** Update next to latest minor → fix many dependabot issues ([8a0784a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8a0784ae49ffc0d1f8268d4c185e3418c033104a))
+* **deps:** Upgrade *vite* to latest minor→fix depbot issues 273–280 ([2f990ec](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2f990ecf5609251c0189cde5e60e24b8c2385257))
+* Dynamic imports should not be done inside components ([1c7e72b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1c7e72bd3eb1a38658548fb8a3232861e5aeddab))
+
 ## [1.33.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.32.1...sports-helsinki-v1.33.0) (2025-11-06)
 
 ### Features

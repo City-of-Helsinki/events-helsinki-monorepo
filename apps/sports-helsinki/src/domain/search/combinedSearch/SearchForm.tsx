@@ -1,19 +1,18 @@
 import {
   useSearchTranslation,
-  MultiSelectDropdown,
   useAppSportsTranslation,
   IconPersonRunning,
-  SearchSelect,
   AdvancedSearchTextInput,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import type { SelectCustomTheme, Option } from 'hds-react';
+import type { Option } from 'hds-react';
 import {
   Button,
   ButtonVariant,
   IconGroup,
   IconPersonWheelchair,
   IconSearch,
+  Select,
 } from 'hds-react';
 import React from 'react';
 import AppConfig from '../../app/AppConfig';
@@ -43,13 +42,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     setTextSearchInput,
     selectedSportsCategories,
     setSelectedSportsCategories,
-    sportsCategoryInput,
-    setSportsCategoryInput,
     sportsCategories,
     selectedTargetGroups,
     setSelectedTargetGroups,
-    targetGroupInput,
-    setTargetGroupInput,
     targetGroups,
     accessibilityProfiles,
     selectedAccessibilityProfile,
@@ -100,7 +95,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
           <p className={styles.searchDescription}>{description}</p>
         )}
         <div className={styles.rowWrapper}>
-          <div>
+          <div className={classNames(styles.textSearchRow)}>
             <AdvancedSearchTextInput
               id="search"
               name="search"
@@ -115,53 +110,83 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
           </div>
           <div className={styles.rowWrapper}>
             <div
-              className={
+              className={classNames(
                 AppConfig.showTargetGroupFilter
                   ? styles.rowWithTargetGroupFilter
                   : styles.rowWithoutTargetGroupFilter
-              }
+              )}
             >
               <div>
-                <MultiSelectDropdown
-                  checkboxName="sportsCategoryOptions"
+                <Select
+                  className={styles.categoriesSelector}
+                  id="sportsCategory"
                   icon={<IconPersonRunning aria-hidden />}
-                  inputValue={sportsCategoryInput}
-                  name="sportsCategory"
-                  onChange={setSelectedSportsCategories}
+                  onChange={(selectedOptions: Option[]) =>
+                    setSelectedSportsCategories(
+                      selectedOptions.map((option) => option.value)
+                    )
+                  }
                   options={sportsCategories}
-                  setInputValue={setSportsCategoryInput}
-                  showSearch={false}
-                  title={t('search.titleDropdownSportsCategory')}
+                  visibleOptions={5.97} // use decimal to make scrollable content visible
+                  texts={{
+                    placeholder: t('search.titleDropdownSportsCategory'),
+                  }}
                   value={selectedSportsCategories}
+                  theme={{
+                    '--checkbox-background-selected': 'var(--color-input-dark)',
+                    '--checkbox-background-hover': 'var(--color-input-dark)',
+                    '--menu-item-background-color-hover':
+                      'var(--color-input-light)',
+                    '--menu-item-background-color-selected-hover':
+                      'var(--color-input-light)',
+                  }}
+                  multiSelect
+                  noTags
                 />
               </div>
               {AppConfig.showTargetGroupFilter && (
                 <div>
-                  <MultiSelectDropdown
-                    checkboxName="targetGroupOptions"
+                  <Select
+                    className={styles.targetGroupSelector}
                     icon={<IconGroup aria-hidden />}
-                    inputValue={targetGroupInput}
-                    name="targetGroup"
-                    onChange={setSelectedTargetGroups}
+                    id="targetGroup"
                     options={targetGroups}
-                    setInputValue={setTargetGroupInput}
-                    showSearch={false}
-                    title={t('search.titleDropdownTargetGroup')}
+                    visibleOptions={5.97} // use decimal to make scrollable content visible
+                    texts={{
+                      placeholder: t('search.titleDropdownTargetGroup'),
+                    }}
                     value={selectedTargetGroups}
+                    onChange={(selectedOptions: Option[]) =>
+                      setSelectedTargetGroups(
+                        selectedOptions.map((option) => option.value)
+                      )
+                    }
+                    theme={{
+                      '--checkbox-background-selected':
+                        'var(--color-input-dark)',
+                      '--checkbox-background-hover': 'var(--color-input-dark)',
+                      '--menu-item-background-color-hover':
+                        'var(--color-input-light)',
+                      '--menu-item-background-color-selected-hover':
+                        'var(--color-input-light)',
+                    }}
+                    multiSelect
+                    noTags
                   />
                 </div>
               )}
               <div>
-                <SearchSelect
+                <Select
                   id="accessibilityProfile"
+                  className={styles.accessibilityProfileSelector}
                   texts={{
-                    label: t('search:search.labelAccessibilityProfile'),
                     placeholder: t('search:search.labelAccessibilityProfile'),
                     clearButtonAriaLabel_one: t(
                       'search:search.ariaLabelClearAccessibilityProfile'
                     ),
                   }}
                   options={accessibilityProfiles}
+                  visibleOptions={5.97} // use decimal to make scrollable content visible
                   value={selectedAccessibilityProfile ?? undefined}
                   onChange={handleAccessibilityProfileOnChange}
                   icon={<IconPersonWheelchair aria-hidden />}
@@ -174,17 +199,8 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                       'var(--color-input-dark)',
                     '--menu-item-color-selected-hover': 'var(--color-white)',
                   }}
-                  // FIXME: how to handle no outline?
-                  // noOutline
-                  // FIXME: Using the clearable could be a better solution than offering an empty option,
-                  // but the HDS has a bug or unfinished feature in the clearable
-                  // and the controlled state of the input value, does not work when it's used.
-                  // A following error could be thrown:
-                  // "downshift: A component has changed the uncontrolled prop "selectedItem" to be controlled.
-                  // This prop should not switch from controlled to uncontrolled (or vice versa).
-                  // Decide between using a controlled or uncontrolled Downshift element for the lifetime of
-                  // the component. More info: https://github.com/downshift-js/downshift#control-props".
-                  // clearable
+                  multiSelect={false}
+                  noTags
                 />
               </div>
               <div

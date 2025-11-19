@@ -1,10 +1,13 @@
-import { EventTypeId, Select } from '@events-helsinki/components';
+import {
+  EventTypeId,
+  Select,
+  useSearchTranslation,
+} from '@events-helsinki/components';
 import classnames from 'classnames';
 import type {
   ButtonPresetTheme,
   ButtonProps,
   ButtonTheme,
-  SelectCustomTheme,
   Option,
 } from 'hds-react';
 import { Button, ButtonVariant } from 'hds-react';
@@ -73,6 +76,7 @@ type SearchTabListMobileProps = {
 function SearchTabListMobile({ data }: SearchTabListMobileProps) {
   const router = useRouter();
   const { resultCounts, activeTab, setActiveTab } = useTabsContext();
+  const { t } = useSearchTranslation();
 
   const options = useMemo(
     (): Option[] =>
@@ -105,17 +109,19 @@ function SearchTabListMobile({ data }: SearchTabListMobileProps) {
   return (
     <div className={styles.tabsMobile}>
       <Select
-        theme={
-          {
-            '--menu-item-background': 'var(--color-input-dark)',
-            '--menu-item-background-hover': 'var(--color-input-dark)',
-            '--menu-item-background-selected-hover': 'var(--color-input-dark)',
-          } as SelectCustomTheme
-        }
-        texts={{ label: 'venues-search-tabs-mobile' }}
+        className={styles.tabsMobileSelect}
+        theme={{
+          '--menu-item-background-color-hover': 'var(--color-input-light)',
+          '--menu-item-background-color-selected': 'var(--color-input-dark)',
+          '--menu-item-background-color-selected-hover':
+            'var(--color-input-dark)',
+          '--menu-item-color-selected-hover': 'var(--color-white)',
+        }}
+        texts={{ label: t('appSports:search.descriptionSearchTabs') }}
         value={activeTab}
         onChange={handleSearchTabChange}
         options={options}
+        visibleOptions={5.97} // use decimal to make scrollable content visible
       />
     </div>
   );

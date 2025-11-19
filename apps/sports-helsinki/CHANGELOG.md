@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.34.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.33.1...sports-helsinki-v1.34.0) (2025-11-19)
+
+
+### Features
+
+* Show Culture and Leisure Division's venues first in relevance sort ([5978116](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5978116393bbcdc7bf66feb72b3411dfd7ae6c5d))
+
 ## [1.33.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.33.0...sports-helsinki-v1.33.1) (2025-11-19)
 
 

@@ -47,22 +47,6 @@ $buttonWidth: 180px;
       margin-bottom: var(--spacing-xl);
     }
   }
-
-  .checkbox {
-    margin-top: var(--spacing-xs);
-    label {
-      display: flex;
-      align-items: center;
-      color: var(--color-primary-black);
-    }
-    @include breakpoints.respond-above(s) {
-      margin-top: 0;
-    }
-  }
-
-  .dateSelectorWrapper {
-    align-self: flex-end;
-  }
 }
 
 .buttonWrapperWithTargetGroupFilter {
@@ -116,13 +100,13 @@ $buttonWidth: 180px;
   align-items: center;
 
   grid-template-columns: 1fr;
-  grid-gap: var(--spacing-m);
+  grid-gap: var(--spacing-s);
 
   margin-bottom: var(--spacing-xs);
 
   @include breakpoints.respond-above(s) {
     grid-template-columns: 1fr;
-    grid-gap: var(--spacing-xs);
+    grid-gap: var(--spacing-s);
 
     margin-bottom: var(--spacing-xs);
   }
@@ -141,4 +125,51 @@ $buttonWidth: 180px;
 .searchUtilities {
   padding: 0 0 var(--spacing-xs) 0;
   position: relative;
+}
+
+.textSearchRow {
+  align-items: flex-end;
+  margin-bottom: var(--spacing-2-xs);
+
+  @include breakpoints.respond-above(m) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  & > :first-child {
+    @include breakpoints.respond-above(s) {
+      grid-column: 1 / 5;
+    }
+    padding: var(--spacing-xs);
+
+    svg {
+      margin-right: var(--spacing-xs);
+    }
+  }
+
+  .searchInputWrapper {
+    padding-left: var(--spacing-2-xs);
+  }
+}
+.categoriesSelector,
+.targetGroupSelector,
+.accessibilityProfileSelector {
+  --icon-size: var(--spacing-layout-xs);
+  --border-width: 0;
+  ---dropdown-height: var(--spacing-3-xl);
+  --menu-item-height: var(---dropdown-height);
+
+  max-width: unset !important;
+  height: var(--dropdown-height);
+
+  span {
+    margin-right: 0;
+    margin-left: var(--spacing-4-xs);
+    font-size: var(--fontsize-body-m);
+    line-height: 1.5rem;
+  }
+
+  /* Icon on start of button */
+  svg {
+    width: var(--icon-size);
+  }
 }

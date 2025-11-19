@@ -28,14 +28,19 @@ export function useFormValues() {
   const [selectedSportsCategories, setSelectedSportsCategories] =
     React.useState<string[]>(formValues.sportsCategories);
   const [sportsCategoryInput, setSportsCategoryInput] = React.useState('');
-  const sportsCategories = getSportsCategoryOptions(t).sort(
-    sortExtendedCategoryOptions
-  );
+  const sportsCategories = getSportsCategoryOptions(t)
+    .sort(sortExtendedCategoryOptions)
+    .map((option) => ({
+      ...option,
+      label: option.text,
+    }));
   const [selectedTargetGroups, setSelectedTargetGroups] = React.useState<
     string[]
   >(formValues.targetGroups);
-  const [targetGroupInput, setTargetGroupInput] = React.useState('');
-  const targetGroups = getTargetGroupOptions(t);
+  const targetGroups = getTargetGroupOptions(t).map((option) => ({
+    ...option,
+    label: option.text,
+  }));
   const accessibilityProfiles = [
     // Empty option is needed with the HDS-select because of a bug in it.
     // Otherwise a following error is thrown and the value handling does not work properly,
@@ -74,8 +79,6 @@ export function useFormValues() {
     sportsCategories,
     selectedTargetGroups,
     setSelectedTargetGroups,
-    targetGroupInput,
-    setTargetGroupInput,
     targetGroups,
     accessibilityProfiles,
     selectedAccessibilityProfile,

@@ -6,5 +6,6 @@
   @include breakpoints.respond-below(s) {
     margin: 0;
     width: 100%;
+    max-width: unset !important;
   }
 }

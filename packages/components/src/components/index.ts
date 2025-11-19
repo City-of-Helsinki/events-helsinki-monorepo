@@ -74,3 +74,4 @@ export { default as PreviewNotification } from './previewNotification/PreviewNot
 export { default as UserTrackingFeatures } from './widgets/UserTrackingFeatures';
 export * from './advancedSearch';
 export { default as CmsPageContent } from './landingPage/CmsPageContent';
+export { default as CategoryFilter } from './category/CategoryFilter';

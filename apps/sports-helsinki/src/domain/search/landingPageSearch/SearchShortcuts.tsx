@@ -1,7 +1,6 @@
-import { useLocale } from '@events-helsinki/components';
+import { CategoryFilter, useLocale } from '@events-helsinki/components';
 import classNames from 'classnames';
 import React from 'react';
-import CategoryFilter from '../../../common-events/components/category/CategoryFilter';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import type { CategoryOption } from '../eventSearch/types';

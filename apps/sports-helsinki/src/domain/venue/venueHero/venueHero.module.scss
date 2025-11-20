@@ -66,7 +66,6 @@ $logoWidth: 5.5rem;
     }
 
     .additionalInfo {
-      order: 6;
       margin-top: var(--spacing-s);
     }
 
@@ -104,12 +103,7 @@ $logoWidth: 5.5rem;
         width: unset;
       }
 
-      .categoryWrapper {
-        order: 1;
-      }
-
       .date {
-        order: 2;
         margin-top: 0.5rem;
         font-size: var(--fontsize-body-l);
         line-height: 1.625rem;
@@ -117,7 +111,6 @@ $logoWidth: 5.5rem;
       }
 
       .title {
-        order: 3;
         font-size: var(--fontsize-heading-l);
         line-height: var(--lineheight-m);
         font-weight: 400;
@@ -128,30 +121,13 @@ $logoWidth: 5.5rem;
       }
 
       .description {
-        order: 4;
         font-size: var(--fontsize-body-xl);
         line-height: var(--spacing-l);
       }
+    }
 
-      .location {
-        order: 5;
-      }
-
-      .start {
-        order: 6;
-      }
-
-      .price {
-        order: 7;
-      }
-
-      .buyButtonWrapper {
-        order: 8;
-      }
-
-      .registrationButtonWrapper {
-        order: 9;
-      }
+    .keywordsWrapper {
+      margin: var(--spacing-2-xs) 0;
     }
 
     .buyButtonWrapper {

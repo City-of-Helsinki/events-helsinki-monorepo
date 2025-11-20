@@ -123,9 +123,6 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
             <div className={styles.leftPanelWrapper}>
               <div className={styles.leftPanelEmpty} />
               <div className={styles.textWrapper}>
-                <div>
-                  <VenueKeywords whiteOnly venue={venue} />
-                </div>
                 <h1 className={styles.title}>
                   {venue.name}
                   {isHelsinkiCityOwned && <HelsinkiCityOwnedIcon />}
@@ -143,6 +140,9 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
                       ))}
                     </ul>
                   </div>
+                </div>
+                <div className={styles.keywordsWrapper}>
+                  <VenueKeywords whiteOnly venue={venue} />
                 </div>
               </div>
             </div>

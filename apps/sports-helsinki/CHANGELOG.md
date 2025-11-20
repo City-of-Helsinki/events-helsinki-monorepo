@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.34.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.34.0...sports-helsinki-v1.34.1) (2025-11-20)
+
+
+### Bug Fixes
+
+* **sports:** Move ontology words last in venue hero ([879b21a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/879b21ae2d3ef532482c56cdc92dda26dae3ddd1))
+
 ## [1.34.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.33.1...sports-helsinki-v1.34.0) (2025-11-19)
 
 

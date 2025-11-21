@@ -11,6 +11,7 @@ import { appWithTranslation } from 'next-i18next';
 import React from 'react';
 
 import '../styles/globals.scss';
+import '../styles/askem.scss';
 import { ErrorBoundary } from 'react-error-boundary';
 import nextI18nextConfig from '../../next-i18next.config.mjs';
 import { ROUTES } from '../constants';

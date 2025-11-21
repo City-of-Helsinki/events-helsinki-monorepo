@@ -3,8 +3,8 @@ import {
   useResilientTranslation,
   useLocale,
   BaseApp,
+  BaseAppFallbackComponent as FallbackComponent,
 } from '@events-helsinki/components';
-import { FallbackComponent } from '@events-helsinki/components/app/BaseApp';
 import type { AppProps as NextAppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';
@@ -12,6 +12,7 @@ import { appWithTranslation } from 'next-i18next';
 import React from 'react';
 
 import '../styles/globals.scss';
+import '../styles/askem.scss';
 import { ErrorBoundary } from 'react-error-boundary';
 import nextI18nextConfig from '../../next-i18next.config.mjs';
 import { ROUTES } from '../constants';

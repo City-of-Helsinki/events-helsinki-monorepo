@@ -101,17 +101,6 @@ loadEnvConfig(process.cwd());
 
 hideConsoleMessages({
   error: [
-    // Hide error message caused by hds-react v3:
-    // eslint-disable-next-line @stylistic/max-len
-    // https://github.com/City-of-Helsinki/helsinki-design-system/blob/v3.11.0/packages/react/src/components/dropdown/select/Select.tsx#L669
-    //
-    // Example use case:
-    // TargetAgeGroupSelector (apps/events-helsinki) → Select (hds-react)
-    // Removing this hiding & running TargetAgeGroupSelector tests should show this error if HDS v3.11.0 is still used.
-    //
-    // Related issue:
-    // https://github.com/facebook/react/issues/29233
-    /Support for defaultProps will be removed.*Use JavaScript default parameters instead.*hds-react/s,
     // CSS stylesheets are not ever parsed by JSDOM, so the message is useless.
     /Could not parse CSS stylesheet/,
   ],

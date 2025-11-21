@@ -3,8 +3,8 @@ import {
   useResilientTranslation,
   useLocale,
   BaseApp,
+  BaseAppFallbackComponent as FallbackComponent,
 } from '@events-helsinki/components';
-import { FallbackComponent } from '@events-helsinki/components/app/BaseApp';
 import type { AppProps as NextAppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';

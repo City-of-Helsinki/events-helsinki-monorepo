@@ -36,6 +36,7 @@ export default [
       '@next/next/no-img-element': 'off',
       'jsx-a11y/anchor-is-valid': 'off',
       '@typescript-eslint/naming-convention': 'off',
+      '@typescript-eslint/triple-slash-reference': 'off',
       'vitest/no-commented-out-tests': 'off',
       'vitest/no-disabled-tests': 'off',
       'no-console': 'error',

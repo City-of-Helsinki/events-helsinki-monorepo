@@ -45,5 +45,8 @@ export default [
     ...getDefaultIgnorePatterns(),
     'storybook-static',
     '**/generated/*',
+    '**/.next',
+    '**/.out',
+    'next-env.d.ts',
   ]),
 ];

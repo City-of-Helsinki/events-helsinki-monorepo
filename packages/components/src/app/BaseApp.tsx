@@ -4,8 +4,6 @@ import dynamic from 'next/dynamic';
 import type { SSRConfig } from 'next-i18next';
 import React from 'react';
 
-import '../styles/globals.scss';
-import '../styles/askem.scss';
 import { CmsHelperProvider } from '../cmsHelperProvider';
 import { EventsCookieConsent } from '../components';
 import type { createAskemInstance } from '../components/askem';

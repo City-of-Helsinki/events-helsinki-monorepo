@@ -1,5 +1,5 @@
-import type { Option } from '@events-helsinki/components';
 import { useSearchTranslation } from '@events-helsinki/components';
+import type { Option } from 'hds-react';
 import React from 'react';
 import {
   getTargetGroupOptions,
@@ -10,7 +10,14 @@ import {
 } from '../../eventSearch/utils';
 import { useCombinedSearchContext } from '../adapters/CombinedSearchContext';
 
-export const EMPTY_OPTION: Option = { text: '', value: '' };
+export const EMPTY_OPTION: Option = {
+  label: '',
+  value: '',
+  selected: false,
+  isGroupLabel: false,
+  visible: true,
+  disabled: false,
+};
 
 export function useFormValues() {
   const { t } = useSearchTranslation();
@@ -21,14 +28,19 @@ export function useFormValues() {
   const [selectedSportsCategories, setSelectedSportsCategories] =
     React.useState<string[]>(formValues.sportsCategories);
   const [sportsCategoryInput, setSportsCategoryInput] = React.useState('');
-  const sportsCategories = getSportsCategoryOptions(t).sort(
-    sortExtendedCategoryOptions
-  );
+  const sportsCategories = getSportsCategoryOptions(t)
+    .sort(sortExtendedCategoryOptions)
+    .map((option) => ({
+      ...option,
+      label: option.text,
+    }));
   const [selectedTargetGroups, setSelectedTargetGroups] = React.useState<
     string[]
   >(formValues.targetGroups);
-  const [targetGroupInput, setTargetGroupInput] = React.useState('');
-  const targetGroups = getTargetGroupOptions(t);
+  const targetGroups = getTargetGroupOptions(t).map((option) => ({
+    ...option,
+    label: option.text,
+  }));
   const accessibilityProfiles = [
     // Empty option is needed with the HDS-select because of a bug in it.
     // Otherwise a following error is thrown and the value handling does not work properly,
@@ -67,8 +79,6 @@ export function useFormValues() {
     sportsCategories,
     selectedTargetGroups,
     setSelectedTargetGroups,
-    targetGroupInput,
-    setTargetGroupInput,
     targetGroups,
     accessibilityProfiles,
     selectedAccessibilityProfile,

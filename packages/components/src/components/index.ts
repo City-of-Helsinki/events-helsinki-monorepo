@@ -29,7 +29,6 @@ export { default as ScrollIntoViewWithFocus } from './scrollIntoViewWithFocus/Sc
 export * from './search';
 export { default as Section } from './section/Section';
 export { default as Select } from './select/Select';
-export { default as SearchSelect } from './select/SearchSelect';
 export * from './shareLinks';
 export { default as SkeletonLoader } from './skeletonLoader/SkeletonLoader';
 export { default as LoadingSpinner } from './spinner/LoadingSpinner';
@@ -74,3 +73,4 @@ export { default as PreviewNotification } from './previewNotification/PreviewNot
 export { default as UserTrackingFeatures } from './widgets/UserTrackingFeatures';
 export * from './advancedSearch';
 export { default as CmsPageContent } from './landingPage/CmsPageContent';
+export { default as CategoryFilter } from './category/CategoryFilter';

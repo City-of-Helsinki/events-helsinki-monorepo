@@ -1,8 +1,16 @@
-import type { Option } from '@events-helsinki/components';
-import { EventTypeId, Select } from '@events-helsinki/components';
+import {
+  EventTypeId,
+  Select,
+  useSearchTranslation,
+} from '@events-helsinki/components';
 import classnames from 'classnames';
-import type { ButtonTheme, SelectCustomTheme } from 'hds-react';
-import { Button } from 'hds-react';
+import type {
+  ButtonPresetTheme,
+  ButtonProps,
+  ButtonTheme,
+  Option,
+} from 'hds-react';
+import { Button, ButtonVariant } from 'hds-react';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
 import { PARAM_SEARCH_TYPE } from '../constants';
@@ -21,8 +29,8 @@ export type TabDataType = {
 
 type TabsPropType = {
   id: TabsContextType['activeTab'];
-  children: React.ReactNode;
-  theme?: ButtonTheme;
+  children: ButtonProps['children'] | JSX.Element;
+  theme?: ButtonTheme | ButtonPresetTheme;
 };
 
 function SearchTab({ id, children, theme }: TabsPropType) {
@@ -41,14 +49,14 @@ function SearchTab({ id, children, theme }: TabsPropType) {
   };
   return (
     <Button
-      variant="secondary"
+      variant={ButtonVariant.Secondary}
       theme={theme}
       className={classnames(styles.tab, styles.secondaryButton, {
         [styles.active]: isActive,
       })}
       onClick={onClick}
     >
-      {children}
+      {children as ButtonProps['children']}
     </Button>
   );
 }
@@ -68,18 +76,26 @@ type SearchTabListMobileProps = {
 function SearchTabListMobile({ data }: SearchTabListMobileProps) {
   const router = useRouter();
   const { resultCounts, activeTab, setActiveTab } = useTabsContext();
+  const { t } = useSearchTranslation();
 
   const options = useMemo(
     (): Option[] =>
-      data.map((option: TabDataType) => {
+      data.map((option: TabDataType): Option => {
         return {
-          text: `${option.label}: ${resultCounts[option.id] ?? '...'}`,
+          label: `${option.label}: ${resultCounts[option.id] ?? '...'}`,
           value: option.id,
+          selected: false,
+          isGroupLabel: false,
+          visible: true,
+          disabled: false,
         };
       }),
     [data, resultCounts]
   );
-  const handleSearchTabChange = (option: Option) => {
+  const handleSearchTabChange = (
+    _selectedOptions: Option[],
+    option: Option
+  ) => {
     setActiveTab(option.value as SearchTabId);
     router.push(
       { query: { ...router.query, [PARAM_SEARCH_TYPE]: option.value } },
@@ -93,17 +109,21 @@ function SearchTabListMobile({ data }: SearchTabListMobileProps) {
   return (
     <div className={styles.tabsMobile}>
       <Select
-        theme={
-          {
-            '--menu-item-background': 'var(--color-input-dark)',
-            '--menu-item-background-hover': 'var(--color-input-dark)',
-            '--menu-item-background-selected-hover': 'var(--color-input-dark)',
-          } as SelectCustomTheme
-        }
-        label="venues-search-tabs-mobile"
-        value={options.filter((o) => o.value == activeTab)[0] || options[0]}
+        className={styles.tabsMobileSelect}
+        theme={{
+          '--menu-item-background-color-hover': 'var(--color-input-light)',
+          '--menu-item-background-color-selected': 'var(--color-input-dark)',
+          '--menu-item-background-color-selected-hover':
+            'var(--color-input-dark)',
+          '--menu-item-color-selected-hover': 'var(--color-white)',
+        }}
+        texts={{ label: t('appSports:search.descriptionSearchTabs') }}
+        value={activeTab}
         onChange={handleSearchTabChange}
         options={options}
+        // Use decimal to make scrollable content visible.
+        // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+        visibleOptions={5.97}
       />
     </div>
   );

@@ -1,16 +1,20 @@
-import { SrOnly, useSearchTranslation } from '@events-helsinki/components';
+import { useLocale, useSearchTranslation } from '@events-helsinki/components';
 import classNames from 'classnames';
-import type { SingleSelectProps } from 'hds-react';
+import type { OptionInProps, SelectProps } from 'hds-react';
 import { IconGroup, Select } from 'hds-react';
 import { TARGET_GROUP_AGE_GROUPS_IN_ORDER } from '../../../../constants';
 import styles from './targetAgeGroup.module.scss';
+
+export type TargetAgeGroupOptionType = OptionInProps;
 
 /**
  * Get select component options for target group age selection.
  * @param addEmptyOption Should empty be included in options? String shown as label.
  * @returns a list of select options
  */
-function useTargetAgeGroupSelectorOptions(emptyOption: string | undefined) {
+function useTargetAgeGroupSelectorOptions(
+  emptyOption: string | undefined
+): TargetAgeGroupOptionType[] {
   const { t: tSearch } = useSearchTranslation();
 
   const targetGroups = TARGET_GROUP_AGE_GROUPS_IN_ORDER.map((ageGroup) => ({
@@ -24,21 +28,16 @@ function useTargetAgeGroupSelectorOptions(emptyOption: string | undefined) {
   return targetGroups;
 }
 
-export type TargetAgeGroupOptionType = ReturnType<
-  typeof useTargetAgeGroupSelectorOptions
->[number];
-
 type TargetAgeGroupSelectorProps = Omit<
-  SingleSelectProps<TargetAgeGroupOptionType>,
+  SelectProps<TargetAgeGroupOptionType>,
+  | 'children'
   | 'options'
   | 'clearButtonAriaLabel'
   | 'selectedItemRemoveButtonAriaLabel'
-  | 'placeholder'
-  | 'value'
-  | 'defaultValue'
+  | ' texts'
 > & {
-  value?: TargetAgeGroupOptionType | TargetAgeGroupOptionType['value'];
-  defaultValue?: TargetAgeGroupOptionType | TargetAgeGroupOptionType['value'];
+  label?: string;
+  className?: string;
 };
 
 /**
@@ -65,41 +64,38 @@ type TargetAgeGroupSelectorProps = Omit<
 function TargetAgeGroupSelector({
   label,
   value,
-  defaultValue = '',
   className,
   ...rest
 }: TargetAgeGroupSelectorProps) {
   const { t: tSearch } = useSearchTranslation();
   const placeholder = tSearch('search.targetAgeGroup.placeholder');
   const options = useTargetAgeGroupSelectorOptions('');
-  const valueOption = options.find((option) => option.value === value);
-  const defaultValueOption = options.find(
-    (option) => option.value === defaultValue
-  );
+  const locale = useLocale();
+  const texts: SelectProps<TargetAgeGroupOptionType>['texts'] = {
+    // Labels aren't visible in search form, but screen reader should read the label.
+    // NOTE: the placeholder value is read when value is empty,
+    // which easily leads to situation where placeholder is read twice by screen reader.
+    // TODO: label: <SrOnly as="span">{label ?? placeholder}</SrOnly>,
+    // label: label ?? placeholder,
+    // Prevent reading the label / placeholder twice by screen reader
+    placeholder: !value ? label || placeholder : undefined,
+    // TODO: do we need translations for every text copies?
+    // clearButtonAriaLabel_one: tSearch('search.targetAgeGroup.clear'),
+    language: locale,
+  };
 
   return (
     <Select
-      // Labels aren't visible in search form, but screen reader should read the label.
-      // NOTE: the placeholder value is read when value is empty,
-      // which easily leads to situation where placeholder is read twice by screen reader.
-      //
-      label={<SrOnly as="span">{label ?? placeholder}</SrOnly>}
-      // Prevent reading the label / placeholder twice by screen reader
-      placeholder={!value ? placeholder : undefined}
       {...rest}
       className={classNames(styles.targetAgeGroupSelector, {
         [String(className)]: !!className,
       })}
-      multiselect={false}
+      texts={texts}
       options={options}
-      optionLabelField="label"
-      optionKeyField="value"
+      multiSelect={false}
       visibleOptions={options.length + 1} // Show all options without scroll
-      value={valueOption}
-      defaultValue={defaultValueOption}
-      icon={<IconGroup />}
-      clearButtonAriaLabel={tSearch('search.targetAgeGroup.clear')}
-      aria-labelledby={undefined} // Type 'string' is not assignable to type 'undefined'.ts(2322)
+      value={value || undefined}
+      icon={<IconGroup aria-hidden />}
     />
   );
 }

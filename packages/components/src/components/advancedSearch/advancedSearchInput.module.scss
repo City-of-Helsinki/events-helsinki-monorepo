@@ -1,6 +1,6 @@
 .advancedSearchInputContainer {
   position: relative;
-  min-height: 3.375rem;
+  min-height: var(--spacing-3-xl);
   background: var(--color-white);
   display: flex;
   padding: 0 1rem;

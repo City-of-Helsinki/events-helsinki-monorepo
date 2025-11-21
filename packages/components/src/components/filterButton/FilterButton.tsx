@@ -1,4 +1,4 @@
-import type { TagCustomTheme } from 'hds-react';
+import type { TagTheme } from 'hds-react';
 import { Tag } from 'hds-react';
 import React from 'react';
 
@@ -11,7 +11,6 @@ interface Props {
   text: string;
   type: FilterType;
   value: string;
-  'aria-labelledby'?: string;
   'aria-describedby'?: string;
 }
 
@@ -20,7 +19,6 @@ const FilterButton: React.FC<Props> = ({
   text,
   type,
   value,
-  'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
 }) => {
   const { t } = useCommonTranslation();
@@ -28,21 +26,20 @@ const FilterButton: React.FC<Props> = ({
     onRemove(value, type);
   };
 
-  const theme = {
-    '--tag-background': 'var(--color-black-70)',
-    '--tag-color': 'var(--color-white)',
-    '--tag-focus-outline-color': 'var(--color-black-90)',
-  } as TagCustomTheme;
+  const theme: TagTheme = {
+    '--background-color': 'var(--color-black-70)',
+    '--color': 'var(--color-white)',
+    '--outline-color': 'var(--color-black-90)',
+  };
 
   return (
     <Tag
       theme={theme}
       onDelete={handleRemove}
-      deleteButtonAriaLabel={t('common:filter.ariaButtonRemove', {
+      aria-label={t('common:filter.ariaButtonRemove', {
         filter: text,
       })}
       className={styles.filter}
-      aria-labelledby={ariaLabelledBy}
       aria-describedby={ariaDescribedBy}
     >
       {text}

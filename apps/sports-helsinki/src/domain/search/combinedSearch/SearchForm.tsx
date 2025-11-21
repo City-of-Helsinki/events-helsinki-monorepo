@@ -1,15 +1,19 @@
-import type { Option } from '@events-helsinki/components';
 import {
   useSearchTranslation,
-  MultiSelectDropdown,
   useAppSportsTranslation,
   IconPersonRunning,
-  SearchSelect,
   AdvancedSearchTextInput,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
-import type { SelectCustomTheme } from 'hds-react';
-import { Button, IconGroup, IconPersonWheelchair, IconSearch } from 'hds-react';
+import type { Option } from 'hds-react';
+import {
+  Button,
+  ButtonVariant,
+  IconGroup,
+  IconPersonWheelchair,
+  IconSearch,
+  Select,
+} from 'hds-react';
 import React from 'react';
 import AppConfig from '../../app/AppConfig';
 import { useCombinedSearchContext } from '../combinedSearch/adapters/CombinedSearchContext';
@@ -38,23 +42,14 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     setTextSearchInput,
     selectedSportsCategories,
     setSelectedSportsCategories,
-    sportsCategoryInput,
-    setSportsCategoryInput,
     sportsCategories,
     selectedTargetGroups,
     setSelectedTargetGroups,
-    targetGroupInput,
-    setTargetGroupInput,
     targetGroups,
     accessibilityProfiles,
     selectedAccessibilityProfile,
     setSelectedAccessibilityProfile,
   } = useFormValues();
-
-  const accessibilityProfileValue =
-    accessibilityProfiles.find(
-      (option) => option.value === selectedAccessibilityProfile
-    ) ?? accessibilityProfiles[0]; // Select the first -- an empty option -- if no value.
 
   const handleSubmit = (formEvent?: React.FormEvent) => {
     // The default submit event must be prevented so the page does not reload
@@ -74,7 +69,10 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
     }
   };
 
-  const handleAccessibilityProfileOnChange = (option: Option) => {
+  const handleAccessibilityProfileOnChange = (
+    _selectedOptions: Option[],
+    option: Option
+  ) => {
     setSelectedAccessibilityProfile(option?.value);
     if (option?.value) {
       setFormValue('venueOrderBy', option.value);
@@ -97,7 +95,7 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
           <p className={styles.searchDescription}>{description}</p>
         )}
         <div className={styles.rowWrapper}>
-          <div>
+          <div className={classNames(styles.textSearchRow)}>
             <AdvancedSearchTextInput
               id="search"
               name="search"
@@ -112,72 +110,103 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
           </div>
           <div className={styles.rowWrapper}>
             <div
-              className={
+              className={classNames(
                 AppConfig.showTargetGroupFilter
                   ? styles.rowWithTargetGroupFilter
                   : styles.rowWithoutTargetGroupFilter
-              }
+              )}
             >
               <div>
-                <MultiSelectDropdown
-                  checkboxName="sportsCategoryOptions"
+                <Select
+                  className={styles.categoriesSelector}
+                  id="sportsCategory"
                   icon={<IconPersonRunning aria-hidden />}
-                  inputValue={sportsCategoryInput}
-                  name="sportsCategory"
-                  onChange={setSelectedSportsCategories}
+                  onChange={(selectedOptions: Option[]) =>
+                    setSelectedSportsCategories(
+                      selectedOptions.map((option) => option.value)
+                    )
+                  }
                   options={sportsCategories}
-                  setInputValue={setSportsCategoryInput}
-                  showSearch={false}
-                  title={t('search.titleDropdownSportsCategory')}
+                  // Use decimal to make scrollable content visible.
+                  // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+                  visibleOptions={5.97}
+                  texts={{
+                    placeholder: t('search.titleDropdownSportsCategory'),
+                  }}
                   value={selectedSportsCategories}
+                  theme={{
+                    '--checkbox-background-selected': 'var(--color-input-dark)',
+                    '--checkbox-background-hover': 'var(--color-input-dark)',
+                    '--menu-item-background-color-hover':
+                      'var(--color-input-light)',
+                    '--menu-item-background-color-selected-hover':
+                      'var(--color-input-light)',
+                  }}
+                  multiSelect
+                  noTags
                 />
               </div>
               {AppConfig.showTargetGroupFilter && (
                 <div>
-                  <MultiSelectDropdown
-                    checkboxName="targetGroupOptions"
+                  <Select
+                    className={styles.targetGroupSelector}
                     icon={<IconGroup aria-hidden />}
-                    inputValue={targetGroupInput}
-                    name="targetGroup"
-                    onChange={setSelectedTargetGroups}
+                    id="targetGroup"
                     options={targetGroups}
-                    setInputValue={setTargetGroupInput}
-                    showSearch={false}
-                    title={t('search.titleDropdownTargetGroup')}
+                    // Use decimal to make scrollable content visible.
+                    // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+                    visibleOptions={5.97}
+                    texts={{
+                      placeholder: t('search.titleDropdownTargetGroup'),
+                    }}
                     value={selectedTargetGroups}
+                    onChange={(selectedOptions: Option[]) =>
+                      setSelectedTargetGroups(
+                        selectedOptions.map((option) => option.value)
+                      )
+                    }
+                    theme={{
+                      '--checkbox-background-selected':
+                        'var(--color-input-dark)',
+                      '--checkbox-background-hover': 'var(--color-input-dark)',
+                      '--menu-item-background-color-hover':
+                        'var(--color-input-light)',
+                      '--menu-item-background-color-selected-hover':
+                        'var(--color-input-light)',
+                    }}
+                    multiSelect
+                    noTags
                   />
                 </div>
               )}
               <div>
-                <SearchSelect
+                <Select
                   id="accessibilityProfile"
-                  label={t('search:search.labelAccessibilityProfile')}
-                  placeholder={t('search:search.labelAccessibilityProfile')}
-                  clearButtonAriaLabel={t(
-                    'search:search.ariaLabelClearAccessibilityProfile'
-                  )}
+                  className={styles.accessibilityProfileSelector}
+                  texts={{
+                    placeholder: t('search:search.labelAccessibilityProfile'),
+                    clearButtonAriaLabel_one: t(
+                      'search:search.ariaLabelClearAccessibilityProfile'
+                    ),
+                  }}
                   options={accessibilityProfiles}
-                  value={accessibilityProfileValue}
+                  // Use decimal to make scrollable content visible.
+                  // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+                  visibleOptions={5.97}
+                  value={selectedAccessibilityProfile ?? undefined}
                   onChange={handleAccessibilityProfileOnChange}
                   icon={<IconPersonWheelchair aria-hidden />}
-                  theme={
-                    {
-                      '--menu-item-background': 'var(--color-input-dark)',
-                      '--menu-item-background-hover': 'var(--color-input-dark)',
-                      '--menu-item-background-selected-hover':
-                        'var(--color-input-dark)',
-                    } as SelectCustomTheme
-                  }
-                  noOutline
-                  // FIXME: Using the clearable could be a better solution than offering an empty option,
-                  // but the HDS has a bug or unfinished feature in the clearable
-                  // and the controlled state of the input value, does not work when it's used.
-                  // A following error could be thrown:
-                  // "downshift: A component has changed the uncontrolled prop "selectedItem" to be controlled.
-                  // This prop should not switch from controlled to uncontrolled (or vice versa).
-                  // Decide between using a controlled or uncontrolled Downshift element for the lifetime of
-                  // the component. More info: https://github.com/downshift-js/downshift#control-props".
-                  // clearable
+                  theme={{
+                    '--menu-item-background-color-hover':
+                      'var(--color-input-light)',
+                    '--menu-item-background-color-selected':
+                      'var(--color-input-dark)',
+                    '--menu-item-background-color-selected-hover':
+                      'var(--color-input-dark)',
+                    '--menu-item-color-selected-hover': 'var(--color-white)',
+                  }}
+                  multiSelect={false}
+                  noTags
                 />
               </div>
               <div
@@ -188,9 +217,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                 }
               >
                 <Button
-                  variant="success"
+                  variant={ButtonVariant.Success}
                   fullWidth={true}
-                  iconLeft={<IconSearch aria-hidden />}
+                  iconStart={<IconSearch aria-hidden />}
                   type="submit"
                 >
                   {t('search.buttonSearch')}

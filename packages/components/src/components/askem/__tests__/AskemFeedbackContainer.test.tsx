@@ -3,6 +3,7 @@ import router from 'next-router-mock';
 import React from 'react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
+import { CookieConfigurationProvider } from '../../../cookieConfigurationProvider';
 import useConsentTranslation from '../../../hooks/useConsentTranslation';
 import AskemFeedbackContainer from '../AskemFeedbackContainer';
 import useAskem from '../useAskem';
@@ -14,6 +15,21 @@ vi.mock('next/router', async () => await vi.importActual('next-router-mock'));
 
 const mockedUseAskem = vi.mocked(useAskem);
 const mockedUseConsentTranslation = vi.mocked(useConsentTranslation);
+const consentUrl = '/cookie-consent';
+const providerWrapper = ({ children }: { children: React.ReactNode }) => (
+  <CookieConfigurationProvider
+    cookieDomain={'events-test.hel.fi'}
+    askemConfiguration={{ apiKey: 'apiKey-123' }}
+    appName={'events-helsinki-test'}
+    consentUrl={consentUrl}
+    matomoConfiguration={{
+      urlBase: '',
+      siteId: 0,
+    }}
+  >
+    {children}
+  </CookieConfigurationProvider>
+);
 
 describe('AskemFeedbackContainer', () => {
   beforeEach(() => {
@@ -30,7 +46,9 @@ describe('AskemFeedbackContainer', () => {
       disabled: true,
       setRnsConfigValue: vi.fn(), // Mock with a function
     });
-    const { container } = render(<AskemFeedbackContainer />);
+    const { container } = render(<AskemFeedbackContainer />, {
+      wrapper: providerWrapper,
+    });
     expect(container.firstChild).toBeNull();
   });
 
@@ -55,7 +73,9 @@ describe('AskemFeedbackContainer', () => {
       disabled: false,
       setRnsConfigValue: vi.fn(), // Mock with a function
     });
-    const { container } = render(<AskemFeedbackContainer />);
+    const { container } = render(<AskemFeedbackContainer />, {
+      wrapper: providerWrapper,
+    });
     expect(container.querySelector('.rns')).toBeInTheDocument();
   });
 
@@ -66,9 +86,10 @@ describe('AskemFeedbackContainer', () => {
       disabled: false,
       setRnsConfigValue: vi.fn(), // Mock with a function
     });
-    const consentUrl = '/cookie-consent';
 
-    render(<AskemFeedbackContainer consentUrl={consentUrl} />);
+    render(<AskemFeedbackContainer />, {
+      wrapper: providerWrapper,
+    });
 
     const consentButton = screen.getByRole('button');
     fireEvent.click(consentButton);
@@ -84,7 +105,22 @@ describe('AskemFeedbackContainer', () => {
       setRnsConfigValue: vi.fn(), // Mock with a function
     });
 
-    render(<AskemFeedbackContainer />);
+    render(<AskemFeedbackContainer />, {
+      wrapper: ({ children }) => (
+        <CookieConfigurationProvider
+          cookieDomain={'events-test.hel.fi'}
+          askemConfiguration={{ apiKey: 'apiKey-123' }}
+          appName={'events-helsinki-test'}
+          consentUrl={''}
+          matomoConfiguration={{
+            urlBase: '',
+            siteId: 0,
+          }}
+        >
+          {children}
+        </CookieConfigurationProvider>
+      ),
+    });
 
     const consentButton = screen.getByRole('button');
     fireEvent.click(consentButton);
@@ -98,7 +134,9 @@ describe('AskemFeedbackContainer', () => {
       disabled: false,
       setRnsConfigValue: vi.fn(), // Mock with a function
     });
-    const { container } = render(<AskemFeedbackContainer withPadding />);
+    const { container } = render(<AskemFeedbackContainer withPadding />, {
+      wrapper: providerWrapper,
+    });
     const containerElement = container.firstElementChild;
     expect(containerElement).toHaveClass(/rnsContainer/);
     expect(containerElement?.firstElementChild).toHaveClass(/withPadding/);

@@ -1,4 +1,4 @@
-import type { EventListQuery, Option } from '@events-helsinki/components';
+import type { EventListQuery } from '@events-helsinki/components';
 import {
   EventTypeId,
   EventsOrderBySelect,
@@ -9,6 +9,8 @@ import {
   MAIN_CONTENT_ID,
   EventList,
 } from '@events-helsinki/components';
+import type { Option } from 'hds-react';
+import { ButtonVariant } from 'hds-react';
 import React from 'react';
 
 import AppConfig from '../../app/AppConfig';
@@ -52,7 +54,7 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const orderByHandler = (option: Option) => {
+  const orderByHandler = (_selectedOptions: Option[], option: Option) => {
     // Update the combined search form context
     // NOTE: this could also be set independently for both the event search types by checking the eventType
     setFormValues({
@@ -117,7 +119,7 @@ const EventSearchPage: React.FC<SearchPageProps> = ({
                     showEnrolmentStatusInCardDetails={
                       AppConfig.showEnrolmentStatusInCardDetails
                     }
-                    loadMoreButtonVariant="success"
+                    loadMoreButtonVariant={ButtonVariant.Success}
                   />
                 }
                 orderBySelectComponent={

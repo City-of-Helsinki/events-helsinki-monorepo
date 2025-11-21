@@ -6,6 +6,30 @@
   }
 }
 
+.tabsMobileSelect {
+  --icon-size: var(--spacing-layout-xs);
+  --border-width: 2px;
+  --dropdown-border-color-default: var(--color-black);
+
+  ---dropdown-height: var(--spacing-3-xl);
+  --menu-item-height: var(---dropdown-height);
+
+  max-width: unset !important;
+  height: var(--dropdown-height);
+
+  span {
+    margin-right: 0;
+    margin-left: var(--spacing-4-xs);
+    font-size: var(--fontsize-body-m);
+    line-height: 1.5rem;
+  }
+
+  /* Icon on start of button */
+  svg {
+    width: var(--icon-size);
+  }
+}
+
 .tabs {
   display: flex;
   justify-content: flex-start;

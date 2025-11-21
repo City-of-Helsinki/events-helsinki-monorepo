@@ -224,12 +224,14 @@ it('should change search query after selecting start date and pressing submit bu
 it('should change search query after clicking category menu item', async () => {
   const { router } = renderComponent();
 
-  const chooseCategoryButton = screen.getByRole('button', {
-    name: /valitse kategoria/i,
+  const chooseCategoryButton = screen.getByRole('combobox', {
+    name: /Valitse kategoria. 0 valittua vaihtoehtoa./i,
   });
 
   await userEvent.click(chooseCategoryButton);
-  await userEvent.click(screen.getByRole('checkbox', { name: /elokuva/i }));
+  await userEvent.click(
+    await screen.findByRole('option', { name: /elokuva/i })
+  );
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
@@ -243,9 +245,9 @@ it('should change search query after clicking category menu item', async () => {
   // multiple selection
   await userEvent.click(chooseCategoryButton);
   await userEvent.click(
-    screen.getByRole('checkbox', { name: /luonto ja ulkoilu/i })
+    await screen.findByRole('option', { name: /luonto ja ulkoilu/i })
   );
-  await userEvent.click(screen.getByRole('checkbox', { name: /musiikki/i }));
+  await userEvent.click(screen.getByRole('option', { name: /musiikki/i }));
   await userEvent.click(screen.getByRole('button', { name: /hae/i }));
   expect(router).toMatchObject({
     pathname,
@@ -268,8 +270,8 @@ it.each([
   async ({ param, option }) => {
     const { router } = renderComponent();
 
-    const chooseTargetAgeGroupButton = screen.getByRole('button', {
-      name: /valitse ikäryhmä/i,
+    const chooseTargetAgeGroupButton = screen.getByRole('combobox', {
+      name: /Valitse ikäryhmä. 0 valittua vaihtoehtoa./i,
     });
 
     await userEvent.click(chooseTargetAgeGroupButton);

@@ -1,5 +1,5 @@
 import { useCommonTranslation } from '@events-helsinki/components';
-import { Button } from 'hds-react';
+import { Button, ButtonPresetTheme, ButtonVariant } from 'hds-react';
 import React from 'react';
 import { SimpleSearchForm } from '../combinedSearch/SearchForm';
 import type { SearchComponentType } from '../combinedSearch/types';
@@ -21,7 +21,11 @@ export const VenueSearchUtilities: React.FC<SearchUtilitiesProps> = ({
   const { t } = useCommonTranslation();
   return (
     <>
-      <Button variant="secondary" theme="black" onClick={switchShowMode}>
+      <Button
+        variant={ButtonVariant.Secondary}
+        theme={ButtonPresetTheme.Black}
+        onClick={switchShowMode}
+      >
         {t('common:mapSearch.showOnMap')}
       </Button>
     </>

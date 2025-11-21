@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { Button } from 'hds-react';
-import type { ButtonTheme, ButtonVariant } from 'hds-react';
+import type { ButtonTheme } from 'hds-react';
+import { Button, ButtonVariant, ButtonPresetTheme } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
@@ -29,7 +29,7 @@ type EventListProps = {
   onLoadMore: () => void;
   getEventUrl: GetEventUrlType;
   loadMoreButtonVariant?: Exclude<ButtonVariant, 'supplementary'>;
-  loadMoreButtonTheme?: ButtonTheme;
+  loadMoreButtonTheme?: ButtonTheme | ButtonPresetTheme;
 };
 
 const EventList: React.FC<EventListProps> = ({
@@ -42,7 +42,7 @@ const EventList: React.FC<EventListProps> = ({
   onLoadMore,
   getEventUrl,
   showEnrolmentStatusInCardDetails = false,
-  loadMoreButtonVariant = 'secondary',
+  loadMoreButtonVariant = ButtonVariant.Secondary,
   loadMoreButtonTheme,
 }) => {
   const { t } = useTranslation('search');
@@ -77,7 +77,9 @@ const EventList: React.FC<EventListProps> = ({
               variant={loadMoreButtonVariant}
               theme={
                 loadMoreButtonTheme ||
-                (loadMoreButtonVariant === 'secondary' ? 'black' : undefined)
+                (loadMoreButtonVariant === ButtonVariant.Secondary
+                  ? ButtonPresetTheme.Black
+                  : undefined)
               }
             >
               {t('buttonLoadMore', { count: eventsLeft })}

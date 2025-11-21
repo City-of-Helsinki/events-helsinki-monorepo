@@ -87,20 +87,25 @@ vi.mock('next-i18next', async () => {
   };
 });
 
+// Mock the ResizeObserver
+const ResizeObserverMock = vi.fn(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
+}));
+
+// Stub the global ResizeObserver
+vi.stubGlobal('ResizeObserver', ResizeObserverMock);
+
 loadEnvConfig(process.cwd());
 
 hideConsoleMessages({
   error: [
-    // Hide error message caused by hds-react v3:
-    // eslint-disable-next-line @stylistic/max-len
-    // https://github.com/City-of-Helsinki/helsinki-design-system/blob/v3.11.0/packages/react/src/components/dropdown/select/Select.tsx#L669
-    //
-    // Example use case:
-    // SearchTabs (sports-helsinki) → Select (hds-react)
-    // Removing this hiding and running SearchUtilities tests should show this error if HDS v3.11.0 is still used.
-    //
-    // Related issue:
-    // https://github.com/facebook/react/issues/29233
-    /Support for defaultProps will be removed.*Use JavaScript default parameters instead.*hds-react/s,
+    // CSS stylesheets are not ever parsed by JSDOM, so the message is useless.
+    /Could not parse CSS stylesheet/,
+  ],
+  warn: [
+    // Apollo deprecation message is spammed in tests, just for future info. It's not useful in unit tests.
+    /`canonizeResults` is deprecated and will be removed in Apollo Client 4.0. Please remove this option./,
   ],
 });

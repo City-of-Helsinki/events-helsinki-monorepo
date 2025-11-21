@@ -1,5 +1,5 @@
-const hdsReact = require('hds-react');
-const fs = require('node:fs/promises');
+import { getCriticalHdsRules, hdsStyles } from 'hds-react';
+import fs from 'node:fs/promises';
 
 const exampleFilePath = './static/assets/styles/critical-hds-styles.css';
 
@@ -10,9 +10,9 @@ async function createCriticalHdsStylesFile(filepath) {
         `The CSS filepath (for example: ${exampleFilePath}) must be given as an argument!`
       );
     }
-    const hdsCriticalRules = await hdsReact.getCriticalHdsRules(
+    const hdsCriticalRules = await getCriticalHdsRules(
       '<empty></empty>',
-      hdsReact.hdsStyles
+      hdsStyles
     );
     await fs.writeFile(filepath, hdsCriticalRules, { flag: 'w+' });
     // eslint-disable-next-line no-console

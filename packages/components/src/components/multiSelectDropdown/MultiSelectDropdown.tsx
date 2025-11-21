@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { IconAngleDown, IconAngleUp, IconSearch } from 'hds-react';
+import { IconAngleDown, IconAngleUp, IconSearch, IconSize } from 'hds-react';
 import React from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation';
@@ -32,6 +32,21 @@ const reactElementOrStringCompare = (
 
 const selectAll = 'SELECT_ALL';
 
+/**
+ * @deprecated MultiSelectDropdown is deprecated and should be replaces with a Select component from HDS-React package.
+ *
+ * MultiSelectDropdown is still in use, while the Select from HDS has accessibility issue on showing selected values,
+ * when the options are filtered with a search input.
+ *
+ * Steps to reproduce:
+ * 1. Type a search term
+ * 2. Select options
+ * 3. Type another search term
+ * 4. Select some more options
+ * 5. Close the component menu and then reopen it again.
+ * Result: All the selected values should be shown, so they can be deactivated.
+ * Also, when searching again at this point, should not hide the already selected options!
+ */
 const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
   checkboxName,
   icon,
@@ -365,7 +380,7 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
       >
         {showSearch && (
           <div className={styles.inputWrapper}>
-            <IconSearch size="s" aria-hidden />
+            <IconSearch size={IconSize.Small} aria-hidden />
             <SearchLabel htmlFor={name} srOnly={true}>
               {inputPlaceholderText}
             </SearchLabel>

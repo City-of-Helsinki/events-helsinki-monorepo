@@ -7,6 +7,8 @@ import {
 import classNames from 'classnames';
 import {
   Button,
+  ButtonPresetTheme,
+  ButtonVariant,
   IconAngleDown,
   IconAngleUp,
   IconMenuHamburger,
@@ -60,9 +62,9 @@ function SearchHeader({ count, switchShowMode, searchForm }: Props) {
                 </Text>
               </div>
               <Button
-                variant="supplementary"
-                theme="black"
-                iconLeft={
+                variant={ButtonVariant.Supplementary}
+                theme={ButtonPresetTheme.Black}
+                iconStart={
                   (collapsed && <IconAngleUp aria-hidden="true" />) ||
                   (!collapsed && <IconAngleDown aria-hidden="true" />)
                 }
@@ -90,13 +92,14 @@ function SearchHeader({ count, switchShowMode, searchForm }: Props) {
                   }, 0);
                 }}
               >
-                {collapsed && t('common:mapSearch.hideSearchParameters')}
-                {!collapsed && t('common:mapSearch.showSearchParameters')}
+                {collapsed
+                  ? t('common:mapSearch.hideSearchParameters')
+                  : t('common:mapSearch.showSearchParameters')}
               </Button>
               <Button
-                variant="secondary"
-                theme="black"
-                iconLeft={<IconMenuHamburger aria-hidden="true" />}
+                variant={ButtonVariant.Secondary}
+                theme={ButtonPresetTheme.Black}
+                iconStart={<IconMenuHamburger aria-hidden="true" />}
                 onClick={switchShowMode}
               >
                 {t('common:mapSearch.showAsList')}

@@ -166,19 +166,6 @@ $buttonWidth: 180px;
   [id='categories-sl-container'] {
     /* Fix the menu should always open downwards. */
     bottom: unset !important;
-
-    /* To make scrollbar always visible */
-    // ::-webkit-scrollbar {
-    //   -webkit-appearance: none;
-    //   width: 7px;
-    // }
-
-    /* To make scrollbar always visible */
-    // ::-webkit-scrollbar-thumb {
-    //   border-radius: 4px;
-    //   background-color: rgba(0, 0, 0, 0.5);
-    //   box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-    // }
   }
 }
 

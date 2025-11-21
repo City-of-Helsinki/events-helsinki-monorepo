@@ -1,6 +1,3 @@
-import next from "eslint-config-next";
-import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
-import nextTypescript from "eslint-config-next/typescript";
 import {
   vitest,
   // storybook,
@@ -19,9 +16,6 @@ import tsParser from '@typescript-eslint/parser';
 import globals from 'globals';
 
 export default [
-  ...next,
-  ...nextCoreWebVitals,
-  ...nextTypescript,
   ...typescript,
   ...regexp,
   ...vitest,
@@ -51,8 +45,8 @@ export default [
     ...getDefaultIgnorePatterns(),
     'storybook-static',
     '**/generated/*',
+    '**/.next',
+    '**/.out',
+    'next-env.d.ts',
   ]),
-  {
-    ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]
-  }
 ];

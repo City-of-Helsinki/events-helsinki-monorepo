@@ -88,9 +88,14 @@ const nextBaseConfig = ({
   ...overrideConfig
 }) => {
   /**
+   * Determine if Turbopack is active (i.e., next dev --turbo)
+   */
+  const isTurbopackDev = process.env.TURBOPACK === '1' && isDevelopment;
+
+  /**
    * @type {import('next').NextConfig}
    */
-  const nextConfig = {
+  let nextConfig = {
     reactStrictMode: true,
     cacheMaxMemorySize: 0,
     sassOptions: {
@@ -107,7 +112,6 @@ const nextBaseConfig = ({
         }))
       );
     },
-    optimizeFonts: true,
     httpAgentOptions: {
       // @link https://nextjs.org/blog/next-11-1#builds--data-fetching
       keepAlive: true,
@@ -118,9 +122,6 @@ const nextBaseConfig = ({
       maxInactiveAge: (isCI ? 3600 : 25) * 1000,
     },
 
-    // @link https://nextjs.org/docs/advanced-features/compiler#minification
-    swcMinify: true,
-
     images: {
       domains: [new URL(process.env.CMS_ORIGIN).origin],
     },
@@ -129,19 +130,18 @@ const nextBaseConfig = ({
     output: 'standalone',
 
     experimental: {
-      /*    turbotrace: {
-        contextDirectory: path.resolve(__dirname, '../..'),
-        logDetail: true,
-      }, */
       // Prefer loading of ES Modules over CommonJS
-      // @link {https://nextjs.org/blog/next-11-1#es-modules-support|Blog 11.1.0}
-      // @link {https://github.com/vercel/next.js/discussions/27876|Discussion}
       esmExternals: true,
       // Experimental monorepo support
-      // @link {https://github.com/vercel/next.js/pull/22867|Original PR}
-      // @link {https://github.com/vercel/next.js/discussions/26420|Discussion}
       externalDir: true,
       scrollRestoration: true,
+      outputFileTracingRoot: __dirname,
+    },
+
+    // 🚨 TURBOPACK CONFIGURATION
+    // Explicitly set the root directory for monorepo support.
+    turbopack: {
+      root: __dirname,
     },
 
     typescript: {
@@ -197,53 +197,6 @@ const nextBaseConfig = ({
       ];
     },
 
-    webpack: (config, { webpack, isServer }) => {
-      if (!isServer) {
-        // Fixes npm packages that depend on `fs` module
-        // @link https://github.com/vercel/next.js/issues/36514#issuecomment-1112074589
-        // @link https://stackoverflow.com/a/63074348/784642
-        config.resolve.fallback = {
-          ...config.resolve.fallback,
-          fs: false,
-          net: false,
-          tls: false,
-          child_process: false,
-          perf_hooks: false,
-        };
-      }
-
-      // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/tree-shaking/
-      config.plugins.push(
-        new webpack.DefinePlugin({
-          __SENTRY_DEBUG__: NEXTJS_SENTRY_DEBUG,
-          __SENTRY_TRACING__: NEXTJS_SENTRY_TRACING,
-        })
-      );
-
-      config.module.rules.push({
-        test: /\.svg$/,
-        issuer: /\.(js|ts)x?$/,
-        use: [
-          {
-            loader: '@svgr/webpack',
-            // https://react-svgr.com/docs/webpack/#passing-options
-            options: {
-              svgo: true,
-              // @link https://github.com/svg/svgo#configuration
-              svgoConfig: {
-                multipass: false,
-                datauri: 'base64',
-                js2svg: {
-                  indent: 2,
-                  pretty: false,
-                },
-              },
-            },
-          },
-        ],
-      });
-      return config;
-    },
     env: {
       APP_NAME: packageJson.name,
       APP_VERSION: packageJson.version,
@@ -261,7 +214,41 @@ const nextBaseConfig = ({
     },
   };
 
-  let config = { ...nextConfig, ...overrideConfig };
+  // 🚨 CONDITIONAL WEBPACK ASSIGNMENT
+  // Define the webpack property object *only* when not using Turbopack.
+  const webpackConfig = isTurbopackDev
+    ? {}
+    : {
+        webpack: (config, { webpack, isServer }) => {
+          if (!isServer) {
+            // Fixes npm packages that depend on `fs` module
+            // @link https://github.com/vercel/next.js/issues/36514#issuecomment-1112074589
+            // @link https://stackoverflow.com/a/63074348/784642
+            config.resolve.fallback = {
+              ...config.resolve.fallback,
+              fs: false,
+              net: false,
+              tls: false,
+              child_process: false,
+              perf_hooks: false,
+            };
+          }
+
+          // https://docs.sentry.io/platforms/javascript/guides/nextjs/configuration/tree-shaking/
+          config.plugins.push(
+            new webpack.DefinePlugin({
+              __SENTRY_DEBUG__: NEXTJS_SENTRY_DEBUG,
+              __SENTRY_TRACING__: NEXTJS_SENTRY_TRACING,
+            })
+          );
+
+          // Removed custom SVG loader rule, relying on Next.js native SVGR support.
+          return config;
+        },
+      };
+
+  // Merge nextConfig with the conditional webpackConfig and user overrides.
+  let config = { ...nextConfig, ...webpackConfig, ...overrideConfig };
 
   if (!NEXTJS_DISABLE_SENTRY) {
     // @ts-ignore because sentry does not match nextjs current definitions

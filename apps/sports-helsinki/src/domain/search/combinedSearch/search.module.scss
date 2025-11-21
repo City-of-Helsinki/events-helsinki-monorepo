@@ -136,10 +136,11 @@ $buttonWidth: 180px;
   }
 
   & > :first-child {
+    padding: var(--spacing-xs);
+
     @include breakpoints.respond-above(s) {
       grid-column: 1 / 5;
     }
-    padding: var(--spacing-xs);
 
     svg {
       margin-right: var(--spacing-xs);

@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import type * as CSS from 'csstype';
 import { IconAngleRight } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
@@ -10,7 +9,7 @@ import styles from './categoryFilter.module.scss';
 interface Props extends AppCategory {
   className?: string;
   hasHorizontalPadding?: boolean;
-  style?: CSS.Properties;
+  style?: React.CSSProperties;
   href: string;
 }
 

@@ -114,9 +114,11 @@ hideConsoleMessages({
     // Related issue:
     // https://github.com/facebook/react/issues/29233
     /Support for defaultProps will be removed.*Use JavaScript default parameters instead.*hds-react/s,
+    // CSS stylesheets are not ever parsed by JSDOM, so the message is useless.
     /Could not parse CSS stylesheet/,
   ],
   warn: [
+    // Apollo deprecation message is spammed in tests, just for future info. It's not useful in unit tests.
     /`canonizeResults` is deprecated and will be removed in Apollo Client 4.0. Please remove this option./,
   ],
 });

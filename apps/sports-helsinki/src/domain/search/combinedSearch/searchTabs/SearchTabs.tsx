@@ -121,7 +121,9 @@ function SearchTabListMobile({ data }: SearchTabListMobileProps) {
         value={activeTab}
         onChange={handleSearchTabChange}
         options={options}
-        visibleOptions={5.97} // use decimal to make scrollable content visible
+        // Use decimal to make scrollable content visible.
+        // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+        visibleOptions={5.97}
       />
     </div>
   );

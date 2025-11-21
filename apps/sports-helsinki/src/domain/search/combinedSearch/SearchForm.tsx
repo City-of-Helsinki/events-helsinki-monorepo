@@ -127,7 +127,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                     )
                   }
                   options={sportsCategories}
-                  visibleOptions={5.97} // use decimal to make scrollable content visible
+                  // Show next option partially to indicate more is available.
+                  // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+                  visibleOptions={5.97}
                   texts={{
                     placeholder: t('search.titleDropdownSportsCategory'),
                   }}
@@ -151,7 +153,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                     icon={<IconGroup aria-hidden />}
                     id="targetGroup"
                     options={targetGroups}
-                    visibleOptions={5.97} // use decimal to make scrollable content visible
+                    // Show next option partially to indicate more is available.
+                    // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+                    visibleOptions={5.97}
                     texts={{
                       placeholder: t('search.titleDropdownTargetGroup'),
                     }}
@@ -186,7 +190,9 @@ export const SimpleSearchForm: React.FC<SearchComponentType> = ({
                     ),
                   }}
                   options={accessibilityProfiles}
-                  visibleOptions={5.97} // use decimal to make scrollable content visible
+                  // Show next option partially to indicate more is available.
+                  // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+                  visibleOptions={5.97}
                   value={selectedAccessibilityProfile ?? undefined}
                   onChange={handleAccessibilityProfileOnChange}
                   icon={<IconPersonWheelchair aria-hidden />}

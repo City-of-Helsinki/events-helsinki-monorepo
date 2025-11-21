@@ -193,7 +193,9 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
                 value={selectedCategories}
                 icon={<IconRead aria-hidden />}
                 noTags
-                visibleOptions={5.97} // use decimal to make scrollable content visible
+                // Show next option partially to indicate more is available.
+                // See more: (https://hds.hel.fi/components/select/code/#component-properties)
+                visibleOptions={5.97}
                 theme={{
                   '--checkbox-background-selected': 'var(--color-input-dark)',
                   '--checkbox-background-hover': 'var(--color-input-dark)',

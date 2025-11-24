@@ -1,4 +1,3 @@
-// import useMatomo from '@jonkoops/matomo-tracker-react/lib/useMatomo.js';
 import type { CookieConsentChangeEvent } from 'hds-react';
 import { CookieConsentContextProvider } from 'hds-react';
 import React from 'react';

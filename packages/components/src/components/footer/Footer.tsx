@@ -29,7 +29,6 @@ type FooterSectionProps = {
   menu?: Menu;
   hasFeedBack?: boolean;
   feedbackWithPadding?: boolean;
-  consentUrl?: string;
 };
 const FooterSection: FunctionComponent<FooterSectionProps> = ({
   appName,

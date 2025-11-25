@@ -82,7 +82,14 @@ export const MOVIES_AND_MEDIA_COURSES_KEYWORDS = [
   'kulke:205', // mediataide
   'yso:p9731', // valokuva
   'kulke:87', // valokuvaus
-  'yso:p1979', // ?
+  'yso:p1979', // valokuvaus
+  'kulke:205', // elokuva ja media
+  'yso:p10649', // valokuvataide
+  'yso:p2699', // valokuvat
+  'kultus:23', // elokuva, valokuva ja media
+  'matko:elokuva',
+  'yso:p16866', //  valokuvanäyttelyt
+  'kulke:87', // valokuva
 ];
 
 export const LANGUAGES_COURSES_KEYWORDS = [
@@ -91,11 +98,15 @@ export const LANGUAGES_COURSES_KEYWORDS = [
 ];
 
 export const LITERATURE_COURSES_KEYWORDS = [
-  // sanataide, kirjallisuus, sarjakuva
-  'yso:p8113',
-  'yso:p7969',
-  'kulke:81',
-  'yso:p38773',
+  'yso:p8113', // kirjallisuus
+  'yso:p7969', // sanataide
+  'kulke:81', // sarjakuva
+  'yso:p38773', // sarjakuvataide
+  'kulke:104', // kirjallisuus ja sanataide
+  'kulke:206', // kirjallisuus
+  'yso:p1148', // sarjakuvat
+  'helmet:11193', // kirjallisuus
+  'kultus:18', // sanataide ja kirjallisuus
 ];
 
 export const ARTS_AND_CULTURE_COURSES_KEYWORDS = [
@@ -145,27 +156,42 @@ export const VISUAL_ARTS_COURSES_KEYWORDS = [
   'yso:p38773', // sarjakuvataide / comic art
   'yso:p8883', // maalaustaide / painting (visual arts)
   'yso:p695', // piirtäminen (taide) / drawing (artistic creation)
+  'kulke:30', // kuvataide
+  'kulke:218', // kuvataide
+  'kulke:630', // kuvataide (lyhyt kurssit)
+  'kulke:73', // kuvataide
+  'yso:p8144', // taidemuseot
+  'yso:p6889', // taidenäyttelyt
+  'yso:p8884', // maalaus (kuvataide)
 ];
 
 export const HANDICRAFTS_COURSES_KEYWORDS = [
-  'yso:p4923',
-  'yso:p485',
-  'kulke:668',
-  'yso:p8630',
+  'yso:p4923', // käsityö
+  'yso:p485', // käsityö (toiminta)
+  'kulke:668', // design ja käsityö
+  'yso:p8630', // kädentaidot
+  'yso:p8631', // askartelu
+  'yso:p1420', // keramiikka
+  'kulke:72', // keramiikka
 ];
 
 export const SPORT_COURSES_KEYWORDS = [
-  'yso:p916',
-  'kulke:710',
-  'yso:p17018',
-  'yso:p1963',
-  'yso:p9824',
-  'yso:p965',
-  'yso:p6409',
-  'yso:p8781',
-  'yso:p26619',
-  'yso:p13035',
-  'yso:p2041',
+  'yso:p916', // liikunta
+  'kulke:710', // liikuntaleiri
+  'yso:p17018', // liikuntaleikit
+  'yso:p1963', // liikuntatapahtumat
+  'yso:p9824', // liikuntapalvelut
+  'yso:p965', // urheilu
+  'yso:p6409', // jalkapallo
+  'yso:p8781', // koripallo
+  'yso:p26619', // ulkoliikunta
+  'yso:p13035', // liikuntaharrastus
+  'yso:p2041', // urheilu- ja liikuntaseurat
+  'kultus:26', // liikunta ja urheilu
+  'matko:liikunta',
+  'yso:p3093', // soveltava liikunta
+  'kulke:634', // sovellettu liikunta
+  'yso:p2771', // ulkoilu
 ];
 
 export const MUSIC_COURSES_KEYWORDS = [
@@ -182,37 +208,74 @@ export const MUSIC_COURSES_KEYWORDS = [
   'yso:p29932', // Elektroninen tanssimusiikki
   'yso:p768', // Kuoromusiikki
   'yso:p2841', // Kansanmusiikki
+  'kulke:31', // musiikki
+  'kulke:348', // musiikki
+  'kulke:77', // musiikki
+  'matko:musiikki',
+  'kultus:17', // musiikki
+  'helmet:11835', // musiikki
+  'yso:p30071', // musiikin harrastaminen
 ];
 
 export const GAMES_COURSES_KEYWORDS = [
-  'yso:p6062',
-  'yso:p2758',
-  'yso:p21628',
-  'yso:p17281',
-  'yso:p22610',
-  'yso:p4295',
-  'yso:p7990',
+  'yso:p6062', // pelit
+  'yso:p2758', // lautapelit
+  'yso:p21628', // konsolipelit
+  'yso:p17281', // videopelit?
+  'yso:p22610', // verkkopelit
+  'yso:p4295', // roolipelit
+  'yso:p7990', // virtuaalitodellisuus
+  'yso:p14483', // pelaaminen
+  'helmet:11687', // Pelitapahtumat
+  'yso:p10256', // biljardi
+  'yso:p39492', // lähiverkkotapahtumat
 ];
 
-export const FOOD_COURSES_KEYWORDS = ['yso:p367', 'yso:p5529', 'yso:p28276'];
+export const FOOD_COURSES_KEYWORDS = [
+  'yso:p367', // pizzat
+  'yso:p5529', // ruokakulttuuri
+  'yso:p28276', // katuruoka
+  'yso:p3670', // ruoka
+  'yso:p2846', // ruoanvalmistus
+  'yso:p4865', // leipominen
+  'matko:ruoka',
+];
 
 export const DANCE_COURSES_KEYWORDS = [
-  'yso:p6283',
-  'yso:p1278',
-  'yso:p10105',
-  'yso:p3984',
-  'yso:p25118',
+  'yso:p6283', // jazztanssi
+  'yso:p1278', // tanssi
+  'yso:p10105', // nykytanssi
+  'yso:p3984', // tanssitapahtumat
+  'yso:p25118', // street dance
   'yso:p10218',
-  'yso:p21524',
-  'yso:p37874',
+  'yso:p21524', // showtanssi
+  'yso:p37874', // salsa (tanssit)
+  'yso:p14614', // dance
+  'kulke:32', // Tanssi
+  'kulke:350', // Tanssi
+  'kulke:723', // Tanssi
+  'kulke:83', // Tanssi
+  'matko:tanssi',
+  'matko:tanssi ja teatteri', // https://api.hel.fi/linkedevents/v1/keyword/matko:tanssi%20ja%20teatteri/
 ];
 
 export const THEATRE_COURSES_KEYWORDS = [
-  'yso:p2625',
-  'yso:p27886',
-  'yso:p2315',
-  'yso:p16164',
-  'yso:p9058',
+  'yso:p2625', // teatteritaide
+  'yso:p27886', // teatterlehdet
+  'yso:p2315', // teatteritapahtumat
+  'yso:p16164', // lastenteatterit
+  'yso:p9058', // musiikkiteatteri (taiteet)
+  'kulke:33', // Teatteri
+  'kulke:84', // teatteri
+  'matko:teatteri', //
+  'kulke:351', // Teatteri ja sirkus
+  'kulke:51', // Sirkus
+  'yso:p11693', // musikaalit
+  'yso:p27769', // teatteri-ilmaisu
+  'yso:p5007', // sirkustaide
+  'yso:p9380', // sirkukset
+  'kultus:16', // Teatteri, tanssi ja sirkus
+  'matko:tanssi ja teatteri', // https://api.hel.fi/linkedevents/v1/keyword/matko:tanssi%20ja%20teatteri/
 ];
 
 // todo: replace with valid keyword ids

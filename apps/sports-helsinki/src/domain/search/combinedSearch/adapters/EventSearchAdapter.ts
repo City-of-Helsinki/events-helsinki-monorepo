@@ -70,6 +70,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
       ? CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID
       : initialEventSearchAdapterValues.publisherAncestor;
     this.superEvent = this.getSuperEvent(eventType);
+    this.location = input.place ?? initialEventSearchAdapterValues.location;
   }
 
   /**

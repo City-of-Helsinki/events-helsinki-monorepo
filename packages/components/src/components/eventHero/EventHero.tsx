@@ -59,13 +59,10 @@ export type EventHeroProps = {
  * remaining capacity for attendees, or if a waiting list exists and it has
  * available spots.
  *
- * @param {EventHeroProps['event']} event - The event object containing
- *  details about attendee and waiting list capacities.
- * @param {boolean} enrolmentFormAvailableBeforeHand - handle enrolment as open when it has not started yet.
  * @returns {boolean} Returns `true` if enrolment is open
  *  (either for direct attendance or the waiting list), otherwise `false`.
  */
-export const useIsEnrolmentOpen = (
+export const getIsEnrolmentOpen = (
   event?: EventHeroProps['event'],
   superEvent?: EventHeroProps['superEvent'],
   enrolmentFormAvailableBeforeHand = false
@@ -188,6 +185,40 @@ const EventPriceInfo: React.FC<Pick<EventHeroProps, 'event'>> = ({ event }) => {
   );
 };
 
+/**
+ * Determines whether the enrolment or registration button should be displayed.
+ *
+ * The button is shown if:
+ * 1. An **external registration URL** is provided, AND there is **no enrolment start time** specified
+ * (e.g., direct ticket link).
+ * OR
+ * 2. An **external registration URL** is provided, AND **enrolment is currently open**.
+ *
+ * @param {object} params - The event enrolment and registration details.
+ * @returns {boolean} True if the enrolment/registration button should be visible, otherwise false.
+ */
+function getShouldShowEnrolmentButton({
+  externalRegistrationUrl,
+  isEnrolmentOpen,
+  enrolmentStartTime,
+}: {
+  externalRegistrationUrl?: string | null;
+  isEnrolmentOpen: boolean;
+  enrolmentStartTime?: string | null;
+}): boolean {
+  // NOTE: Shows the button for direct registration links without an explicit enrolment period.
+  const hasRegistrationUrlWithoutEnrolmentTime =
+    externalRegistrationUrl && !enrolmentStartTime;
+  // NOTE: Shows the button when registration is open and a URL is provided.
+  const hasRegistrationUrlAndEnrolmentIsOpen =
+    externalRegistrationUrl && isEnrolmentOpen;
+
+  return Boolean(
+    hasRegistrationUrlWithoutEnrolmentTime ||
+      hasRegistrationUrlAndEnrolmentIsOpen
+  );
+}
+
 export const OfferButton: React.FC<
   Pick<EventHeroProps, 'event' | 'superEvent'>
 > = ({ event, superEvent }) => {
@@ -199,12 +230,27 @@ export const OfferButton: React.FC<
 
   // NOTE: Should something else than offerInfoURl be used here?
   // E.g. event?.registration?.signupUrl? or registration link from from event?.externalLinks?.
-  const { offerInfoUrl: externalRegistrationUrl } = getEventFields(
+  const { offerInfoUrl, registrationUrl, enrolmentStartTime } = getEventFields(
     event,
     locale
   );
+  const externalRegistrationUrl = offerInfoUrl || registrationUrl;
 
-  const shouldShowEnrolmentButton = useIsEnrolmentOpen(event, superEvent, true);
+  const isEnrolmentOpen = getIsEnrolmentOpen(event, superEvent, true);
+
+  if (superEvent?.status === 'pending') {
+    return <SkeletonLoader />;
+  }
+
+  const shouldShowEnrolmentButton = getShouldShowEnrolmentButton({
+    externalRegistrationUrl,
+    isEnrolmentOpen,
+    enrolmentStartTime,
+  });
+
+  if (!externalRegistrationUrl || !shouldShowEnrolmentButton) {
+    return null;
+  }
 
   const buttonText = getEventHeroButtonText(
     event,
@@ -218,14 +264,6 @@ export const OfferButton: React.FC<
     t,
     superEvent?.data ?? undefined
   );
-
-  if (superEvent?.status === 'pending') {
-    return <SkeletonLoader />;
-  }
-
-  if (!externalRegistrationUrl || !shouldShowEnrolmentButton) {
-    return null;
-  }
 
   return (
     <div className={styles.registrationButtonWrapper}>

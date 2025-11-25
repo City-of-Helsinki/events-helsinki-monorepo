@@ -1,4 +1,4 @@
-import { render, screen, renderHook } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import {
   endOfTomorrow,
@@ -15,7 +15,7 @@ import * as GetEventEnrolmentStatus from '../../../utils/getEventEnrolmentStatus
 import EventHero, {
   EnrolmentStatusInfo,
   OfferButton,
-  useIsEnrolmentOpen,
+  getIsEnrolmentOpen,
 } from '../EventHero';
 
 vi.mock('react-helsinki-headless-cms', async (importOriginal) => ({
@@ -89,22 +89,20 @@ afterAll(() => {
   vi.restoreAllMocks();
 });
 
-describe('useIsEnrolmentOpen', () => {
+describe('getIsEnrolmentOpen', () => {
   it('should return false if event is not defined', () => {
-    const { result } = renderHook(() => useIsEnrolmentOpen(undefined));
-    expect(result.current).toBe(false);
+    const result = getIsEnrolmentOpen(undefined);
+    expect(result).toBe(false);
   });
 
   it('should return false if registration is not defined', () => {
-    const { result } = renderHook(() =>
-      useIsEnrolmentOpen({
-        ...baseEvent,
-        registration: undefined,
-        enrolmentEndTime: undefined,
-        enrolmentStartTime: undefined,
-      })
-    );
-    expect(result.current).toBe(false);
+    const result = getIsEnrolmentOpen({
+      ...baseEvent,
+      registration: undefined,
+      enrolmentEndTime: undefined,
+      enrolmentStartTime: undefined,
+    });
+    expect(result).toBe(false);
   });
 
   it('should return true if remainingAttendeeCapacity is greater than 0', () => {
@@ -116,8 +114,8 @@ describe('useIsEnrolmentOpen', () => {
         remainingAttendeeCapacity: 10,
       },
     };
-    const { result } = renderHook(() => useIsEnrolmentOpen(event));
-    expect(result.current).toBe(true);
+    const result = getIsEnrolmentOpen(event);
+    expect(result).toBe(true);
   });
 
   it('should return true event with waiting list capacity and remainingWaitingListCapacity is greater than 0', () => {
@@ -129,8 +127,8 @@ describe('useIsEnrolmentOpen', () => {
         remainingWaitingListCapacity: 5,
       },
     };
-    const { result } = renderHook(() => useIsEnrolmentOpen(event));
-    expect(result.current).toBe(true);
+    const result = getIsEnrolmentOpen(event);
+    expect(result).toBe(true);
   });
 
   it('should return true if event is queueable', () => {
@@ -145,8 +143,8 @@ describe('useIsEnrolmentOpen', () => {
       },
     };
 
-    const { result } = renderHook(() => useIsEnrolmentOpen(event));
-    expect(result.current).toBe(true);
+    const result = getIsEnrolmentOpen(event);
+    expect(result).toBe(true);
   });
 
   it('should return false if both remaining capacities are 0', () => {
@@ -158,8 +156,8 @@ describe('useIsEnrolmentOpen', () => {
         remainingWaitingListCapacity: 0,
       },
     };
-    const { result } = renderHook(() => useIsEnrolmentOpen(event));
-    expect(result.current).toBe(false);
+    const result = getIsEnrolmentOpen(event);
+    expect(result).toBe(false);
   });
 
   it.each([
@@ -176,10 +174,13 @@ describe('useIsEnrolmentOpen', () => {
           remainingAttendeeCapacity: 10,
         },
       };
-      const { result } = renderHook(() =>
-        useIsEnrolmentOpen(event, undefined, enrolmentFormAvailableBeforeHand)
+      const result = getIsEnrolmentOpen(
+        event,
+        undefined,
+        enrolmentFormAvailableBeforeHand
       );
-      expect(result.current).toBe(expectedResult);
+
+      expect(result).toBe(expectedResult);
     }
   );
 
@@ -245,7 +246,7 @@ describe('OfferButton', () => {
     ).toBeInTheDocument();
   });
 
-  it('should not render if offerInfoUrl exists but enrolment is not open', () => {
+  it('should render when offerInfoUrl exists and enrolment time is not given', () => {
     const eventWithClosedEnrolment: EventFields = {
       ...baseEvent,
       offers: [
@@ -257,6 +258,31 @@ describe('OfferButton', () => {
         waitingListCapacity: 0,
         remainingWaitingListCapacity: 0,
       },
+      enrolmentStartTime: undefined,
+    };
+
+    const { container } = render(
+      <OfferButton event={eventWithClosedEnrolment} />
+    );
+    expect(container).not.toBeEmptyDOMElement();
+    expect(
+      screen.getByRole('button', { name: 'hero.ariaLabelEnrol' })
+    ).toBeInTheDocument();
+  });
+
+  it('should not render if offerInfoUrl exists, enrolment time is given, but enrolment is not open', () => {
+    const eventWithClosedEnrolment: EventFields = {
+      ...baseEvent,
+      offers: [
+        { isFree: false, price: null, infoUrl: { fi: 'https://hel.fi' } },
+      ],
+      registration: {
+        ...baseEvent.registration,
+        remainingAttendeeCapacity: 0,
+        waitingListCapacity: 0,
+        remainingWaitingListCapacity: 0,
+      },
+      enrolmentStartTime: startOfYesterday().toISOString(),
     };
 
     const { container } = render(

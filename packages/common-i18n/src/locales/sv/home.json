@@ -10,6 +10,8 @@
     "nature": "Natur och friluftsliv",
     "sport": "Motion och sport",
     "theatre": "Teater",
+    "animals": "Djur",
+    "camps": "Läger",
     "courses": {
       "movieAndMedia": "Film och media",
       "languages": "Språk",
@@ -22,7 +24,9 @@
       "games": "Spel",
       "food": "Mat",
       "dance": "Dans",
-      "theatre": "Teater"
+      "theatre": "Teater",
+      "animals": "Djur",
+      "camps": "Läger"
     }
   },
   "collections": {

@@ -10,6 +10,8 @@
     "nature": "Luonto ja ulkoilu",
     "sport": "Liikunta ja urheilu",
     "theatre": "Teatteri",
+    "animals": "Eläimet",
+    "camps": "Leirit",
     "courses": {
       "movieAndMedia": "Elokuva ja media",
       "languages": "Kielet",
@@ -22,7 +24,9 @@
       "games": "Pelit",
       "food": "Ruoka",
       "dance": "Tanssi",
-      "theatre": "Teatteri"
+      "theatre": "Teatteri",
+      "animals": "Eläimet",
+      "camps": "Leirit"
     }
   },
   "collections": {

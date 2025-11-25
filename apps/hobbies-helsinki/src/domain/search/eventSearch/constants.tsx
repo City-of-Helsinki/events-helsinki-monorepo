@@ -6,7 +6,6 @@ import {
   IconDance,
   IconFood,
   IconGames,
-  IconLanguages,
   IconLiterature,
   IconMovies,
   IconMusic,
@@ -19,9 +18,7 @@ import type { Filters, SearchCategoryOption } from './types';
 
 export enum COURSE_CATEGORIES {
   MOVIE = 'movie_and_media',
-  LANGUAGES = 'languages',
   LITERATURE = 'literature',
-  ARTS_AND_CULTURE = 'arts_and_culture',
   VISUAL_ARTS = 'visual_arts',
   HANDICRAFTS = 'handicrafts',
   SPORT = 'sport',
@@ -50,9 +47,7 @@ export const CATEGORY_CATALOG = {
   [EventTypeId.Course]: {
     default: [
       COURSE_CATEGORIES.MOVIE,
-      COURSE_CATEGORIES.LANGUAGES,
       COURSE_CATEGORIES.LITERATURE,
-      COURSE_CATEGORIES.ARTS_AND_CULTURE,
       COURSE_CATEGORIES.VISUAL_ARTS,
       COURSE_CATEGORIES.HANDICRAFTS,
       COURSE_CATEGORIES.SPORT,
@@ -92,11 +87,6 @@ export const MOVIES_AND_MEDIA_COURSES_KEYWORDS = [
   'kulke:87', // valokuva
 ];
 
-export const LANGUAGES_COURSES_KEYWORDS = [
-  'yso:p556', // kielet
-  'yso:p38117', // kieltenopetus
-];
-
 export const LITERATURE_COURSES_KEYWORDS = [
   'yso:p8113', // kirjallisuus
   'yso:p7969', // sanataide
@@ -107,46 +97,6 @@ export const LITERATURE_COURSES_KEYWORDS = [
   'yso:p1148', // sarjakuvat
   'helmet:11193', // kirjallisuus
   'kultus:18', // sanataide ja kirjallisuus
-];
-
-export const ARTS_AND_CULTURE_COURSES_KEYWORDS = [
-  'yso:p2625',
-  'yso:p27886',
-  'yso:p2315',
-  'yso:p16164',
-  'yso:p9058',
-  'kulke:51',
-  'yso:p1235',
-  'kulke:29',
-  'yso:p16327',
-  'kulke:205',
-  'yso:p973',
-  'yso:p2851',
-  'yso:p1148',
-  'yso:p38773',
-  'yso:p695',
-  'yso:p1808',
-  'yso:p10871',
-  'yso:p20421',
-  'yso:p2969',
-  'yso:p23171',
-  'yso:p27962',
-  'yso:p18718',
-  'yso:p18434',
-  'yso:p15521',
-  'yso:p13408',
-  'yso:p29932',
-  'yso:p768',
-  'yso:p2841',
-  'yso:p6283',
-  'yso:p1278',
-  'yso:p10105',
-  'yso:p3984',
-  'yso:p25118',
-  'yso:p10218',
-  'yso:p21524',
-  'yso:p37874',
-  'yso:p1780',
 ];
 
 export const VISUAL_ARTS_COURSES_KEYWORDS = [
@@ -281,9 +231,7 @@ export const THEATRE_COURSES_KEYWORDS = [
 // todo: replace with valid keyword ids
 export const MAPPED_COURSE_CATEGORIES: Record<string, string[]> = {
   [COURSE_CATEGORIES.MOVIE]: MOVIES_AND_MEDIA_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.LANGUAGES]: LANGUAGES_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.LITERATURE]: LITERATURE_COURSES_KEYWORDS,
-  [COURSE_CATEGORIES.ARTS_AND_CULTURE]: ARTS_AND_CULTURE_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.VISUAL_ARTS]: VISUAL_ARTS_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.HANDICRAFTS]: HANDICRAFTS_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.SPORT]: SPORT_COURSES_KEYWORDS,
@@ -300,17 +248,9 @@ export const courseCategories: Record<COURSE_CATEGORIES, SearchCategoryOption> =
       icon: <IconMovies />,
       labelKey: 'home:category.courses.movieAndMedia',
     },
-    [COURSE_CATEGORIES.LANGUAGES]: {
-      icon: <IconLanguages />,
-      labelKey: 'home:category.courses.languages',
-    },
     [COURSE_CATEGORIES.LITERATURE]: {
       icon: <IconLiterature />,
       labelKey: 'home:category.courses.literature',
-    },
-    [COURSE_CATEGORIES.ARTS_AND_CULTURE]: {
-      icon: <IconArt />,
-      labelKey: 'home:category.courses.artsAndCulture',
     },
     [COURSE_CATEGORIES.VISUAL_ARTS]: {
       icon: <IconArt />,

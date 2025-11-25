@@ -10,6 +10,8 @@
     "nature": "Nature and outdoor activities",
     "sport": "Exercise and sports",
     "theatre": "Theatre",
+    "animals": "Animals",
+    "camps": "Camps",
     "courses": {
       "movieAndMedia": "Film and media",
       "languages": "Languages",
@@ -22,7 +24,9 @@
       "games": "Games",
       "food": "Food",
       "dance": "Dance",
-      "theatre": "Theatre"
+      "theatre": "Theatre",
+      "animals": "Animals",
+      "camps": "Camps"
     }
   },
   "collections": {

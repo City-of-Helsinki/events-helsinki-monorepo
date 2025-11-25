@@ -2,6 +2,7 @@ import {
   EVENT_SEARCH_FILTERS,
   EventTypeId,
   IconArt,
+  IconCamp,
   IconCraft,
   IconDance,
   IconFood,
@@ -9,6 +10,7 @@ import {
   IconLiterature,
   IconMovies,
   IconMusic,
+  IconOutdoorRecreation,
   IconSports,
   IconTheatre,
 } from '@events-helsinki/components';
@@ -27,6 +29,8 @@ export enum COURSE_CATEGORIES {
   FOOD = 'food',
   DANCE = 'dance',
   THEATRE = 'theatre',
+  ANIMALS = 'animals',
+  CAMPS = 'camps',
 }
 
 export const COURSE_DEFAULT_SEARCH_FILTERS: Omit<
@@ -56,6 +60,8 @@ export const CATEGORY_CATALOG = {
       COURSE_CATEGORIES.FOOD,
       COURSE_CATEGORIES.DANCE,
       COURSE_CATEGORIES.THEATRE,
+      COURSE_CATEGORIES.ANIMALS,
+      COURSE_CATEGORIES.CAMPS,
     ],
     landingPage: [
       COURSE_CATEGORIES.LITERATURE,
@@ -228,8 +234,19 @@ export const THEATRE_COURSES_KEYWORDS = [
   'matko:tanssi ja teatteri', // https://api.hel.fi/linkedevents/v1/keyword/matko:tanssi%20ja%20teatteri/
 ];
 
+export const ANIMAL_KEYWORDS = [
+  'yso:p2023', // eläimet
+  'yso:p39417', // eläintenhoito
+];
+
+export const CAMP_KEYWORDS = [
+  'yso:p143', // leirit
+  'yso:p21435', // kesäleirit
+  'yso:p25261', // retket
+];
+
 // todo: replace with valid keyword ids
-export const MAPPED_COURSE_CATEGORIES: Record<string, string[]> = {
+export const MAPPED_COURSE_CATEGORIES: Record<COURSE_CATEGORIES, string[]> = {
   [COURSE_CATEGORIES.MOVIE]: MOVIES_AND_MEDIA_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.LITERATURE]: LITERATURE_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.VISUAL_ARTS]: VISUAL_ARTS_COURSES_KEYWORDS,
@@ -240,6 +257,8 @@ export const MAPPED_COURSE_CATEGORIES: Record<string, string[]> = {
   [COURSE_CATEGORIES.FOOD]: FOOD_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.DANCE]: DANCE_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.THEATRE]: THEATRE_COURSES_KEYWORDS,
+  [COURSE_CATEGORIES.ANIMALS]: ANIMAL_KEYWORDS,
+  [COURSE_CATEGORIES.CAMPS]: CAMP_KEYWORDS,
 };
 
 export const courseCategories: Record<COURSE_CATEGORIES, SearchCategoryOption> =
@@ -283,6 +302,14 @@ export const courseCategories: Record<COURSE_CATEGORIES, SearchCategoryOption> =
     [COURSE_CATEGORIES.THEATRE]: {
       icon: <IconTheatre />,
       labelKey: 'home:category.courses.theatre',
+    },
+    [COURSE_CATEGORIES.ANIMALS]: {
+      icon: <IconOutdoorRecreation />,
+      labelKey: 'home:category.courses.animals',
+    },
+    [COURSE_CATEGORIES.CAMPS]: {
+      icon: <IconCamp />,
+      labelKey: 'home:category.courses.camps',
     },
   };
 

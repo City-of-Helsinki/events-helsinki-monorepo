@@ -39,6 +39,7 @@ import {
   MAPPED_PLACES,
   CATEGORY_CATALOG,
   MAPPED_COURSE_CATEGORIES,
+  sortedHobbyCategories,
 } from './constants';
 import type {
   CategoryOption,
@@ -65,6 +66,38 @@ export const sortExtendedCategoryOptions = (
   b: CategoryOption
 ) => a.text.localeCompare(b.text);
 
+// Map for O(1) lookups
+const categoryIndexMap = new Map<COURSE_CATEGORIES, number>(
+  sortedHobbyCategories.map((category, index) => [category, index])
+);
+
+/**
+ * Sorts CategoryOption objects based on the order defined in sortedHobbyCategories
+ * using an optimized Map lookup.
+ * @param a The first CategoryOption to compare.
+ * @param b The second CategoryOption to compare.
+ * @returns A number indicating the sort order.
+ */
+export const sortExtendedCategoryOptionsByList = (
+  a: CategoryOption,
+  b: CategoryOption
+) => {
+  // 1. Get the index from the Map (O(1) lookup)
+  // Use categoryIndexMap.get(value) which returns 'undefined' if not found.
+  const indexA = categoryIndexMap.get(a.value);
+  const indexB = categoryIndexMap.get(b.value);
+
+  // 2. Determine effective indices, placing unfound items at the end
+  const effectiveIndexA =
+    indexA === undefined ? sortedHobbyCategories.length : indexA;
+
+  const effectiveIndexB =
+    indexB === undefined ? sortedHobbyCategories.length : indexB;
+
+  // 3. Return the difference
+  return effectiveIndexA - effectiveIndexB;
+};
+
 export const getCategoryOptions = (
   category: SearchCategoryType,
   categoryOption: SearchCategoryOption,
@@ -86,7 +119,7 @@ export const getEventCategoryOptions = (
     .map((category) =>
       getCategoryOptions(category, courseCategories[category], t)
     )
-    .sort(sortExtendedCategoryOptions);
+    .sort(sortExtendedCategoryOptionsByList);
 
 /**
  * Get start and end dates to event list filtering

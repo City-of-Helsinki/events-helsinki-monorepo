@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.29.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.29.1...events-helsinki-v1.29.2) (2025-11-26)
+
+
+### Bug Fixes
+
+* Export BaseApp Fallback component properly ([3ad40cc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3ad40cc5f63edd170695b94f9530f993b60e3eff))
+* Import global CSS only in App component ([054d3ac](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/054d3ac14586dbd74d5eb8ae1cb91be1e5a04420))
+
 ## [1.29.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.29.0...events-helsinki-v1.29.1) (2025-11-13)
 
 

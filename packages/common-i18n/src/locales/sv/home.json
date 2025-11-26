@@ -9,7 +9,7 @@
     "music": "Musik",
     "nature": "Natur och friluftsliv",
     "sport": "Motion och sport",
-    "theatre": "Teater",
+    "theatre": "Teater och cirkus",
     "animals": "Djur",
     "camps": "Läger",
     "courses": {
@@ -24,7 +24,7 @@
       "games": "Spel",
       "food": "Mat",
       "dance": "Dans",
-      "theatre": "Teater",
+      "theatre": "Teater och cirkus",
       "animals": "Djur",
       "camps": "Läger"
     }

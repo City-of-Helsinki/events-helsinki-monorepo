@@ -9,7 +9,7 @@
     "music": "Musiikki",
     "nature": "Luonto ja ulkoilu",
     "sport": "Liikunta ja urheilu",
-    "theatre": "Teatteri",
+    "theatre": "Teatteri ja sirkus",
     "animals": "Eläimet",
     "camps": "Leirit",
     "courses": {
@@ -24,7 +24,7 @@
       "games": "Pelit",
       "food": "Ruoka",
       "dance": "Tanssi",
-      "theatre": "Teatteri",
+      "theatre": "Teatteri ja sirkus",
       "animals": "Eläimet",
       "camps": "Leirit"
     }

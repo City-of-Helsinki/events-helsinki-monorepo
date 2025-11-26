@@ -9,7 +9,7 @@
     "music": "Music",
     "nature": "Nature and outdoor activities",
     "sport": "Exercise and sports",
-    "theatre": "Theatre",
+    "theatre": "Theatre and circus",
     "animals": "Animals",
     "camps": "Camps",
     "courses": {
@@ -24,7 +24,7 @@
       "games": "Games",
       "food": "Food",
       "dance": "Dance",
-      "theatre": "Theatre",
+      "theatre": "Theatre and circus",
       "animals": "Animals",
       "camps": "Camps"
     }

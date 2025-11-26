@@ -223,9 +223,9 @@ it('should change search query after clicking category menu item', async () => {
   expect(router).toMatchObject({
     pathname,
     // eslint-disable-next-line @stylistic/max-len
-    asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=movie_and_media%2Cmusic%2Cgames&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
+    asPath: `${pathname}?${EVENT_SEARCH_FILTERS.CATEGORIES}=music%2Cgames%2Cmovie_and_media&${EVENT_SEARCH_FILTERS.TEXT}=jazz`,
     query: {
-      [EVENT_SEARCH_FILTERS.CATEGORIES]: 'movie_and_media,music,games',
+      [EVENT_SEARCH_FILTERS.CATEGORIES]: 'music,games,movie_and_media',
       [EVENT_SEARCH_FILTERS.TEXT]: 'jazz',
     },
   });

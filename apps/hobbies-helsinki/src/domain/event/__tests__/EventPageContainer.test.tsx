@@ -74,7 +74,10 @@ const eventRequest = {
   query: EventDetailsDocument,
   variables: {
     id: superEventId,
-    include: AppConfig.eventSecondaryQueryIncludeParamValue,
+    include: [
+      ...AppConfig.eventSecondaryQueryIncludeParamValue,
+      'registration',
+    ],
   },
 };
 const otherEventsRequest = {

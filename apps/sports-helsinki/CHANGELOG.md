@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.34.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.34.0...sports-helsinki-v1.34.1) (2025-11-26)
+
+
+### Bug Fixes
+
+* Export BaseApp Fallback component properly ([3ad40cc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3ad40cc5f63edd170695b94f9530f993b60e3eff))
+* Import global CSS only in App component ([054d3ac](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/054d3ac14586dbd74d5eb8ae1cb91be1e5a04420))
+* **sports:** Move ontology words last in venue hero ([879b21a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/879b21ae2d3ef532482c56cdc92dda26dae3ddd1))
+* **sports:** Show all events of place / location ([ea4e25b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ea4e25b19fb5f625c31a196a64c5f4959299b694))
+* Venue content line breaks (by using pre-line for white-space) ([e1dd2a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e1dd2a8e6167f1d133e01b054a8902558e3b006d))
+
 ## [1.34.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.33.1...sports-helsinki-v1.34.0) (2025-11-19)
 
 

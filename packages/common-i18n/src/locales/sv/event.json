@@ -89,8 +89,8 @@
     },
     "buttonReadMore": "Läs mer: {{date}}",
     "buttonShow": {
-      "label": "Visa alt",
-      "ariaLabel": "Visa alt andra evenemangstider"
+      "label": "Visa allt",
+      "ariaLabel": "Visa allt andra evenemangstider"
     },
     "title": "Andra evenemangstider"
   },
@@ -103,7 +103,7 @@
   "relatedEvents": {
     "buttonHide": "Dölj",
     "buttonReadMore": "Läs mer",
-    "buttonShow": "Visa alt"
+    "buttonShow": "Visa allt"
   },
   "shareLinks": {
     "title": "Dela detta"

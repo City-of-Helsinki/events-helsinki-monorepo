@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.28.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.27.1...hobbies-helsinki-v2.28.0) (2025-11-26)
+
+
+### Features
+
+* **hobbies:** Add animals and camps categories ([c56a747](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c56a74794e499b7d42b0647b921c4a1e6f5246cf))
+* **hobbies:** Add more category keywords ([fd14af3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fd14af35b60823a2d1c21b1b401c5269682b7273))
+* **hobbies:** Remove languages, culture and art from categories ([b4f3af3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b4f3af3795061b9df36f4f42de556112461b46ef))
+* **hobbies:** Sort category options by a predefined list ([047d789](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/047d7894b9a5b768a21f78055a3ec7d67ae169f8))
+
+
+### Bug Fixes
+
+* Export BaseApp Fallback component properly ([3ad40cc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3ad40cc5f63edd170695b94f9530f993b60e3eff))
+* Import global CSS only in App component ([054d3ac](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/054d3ac14586dbd74d5eb8ae1cb91be1e5a04420))
+
 ## [2.27.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.27.0...hobbies-helsinki-v2.27.1) (2025-11-13)
 
 

@@ -67,20 +67,22 @@ function useConsentContentSource() {
         //   ),
         //   expiration: buildDict('consent:expiration.session'),
         // },
-        {
-          name: 'wordpress_*, wp-settings-*',
-          host: '.hel.fi',
-          storageType: 1,
-          description: buildDict('consent:cookies.wordpress'),
-          expiration: buildDict('consent:expiration.session'),
-        },
-        {
-          name: 'linkedevents-api-prod-csrftoken',
-          host: 'api.hel.fi',
-          storageType: 1,
-          description: buildDict('consent:cookies.linkedevents'),
-          expiration: buildDict('consent:expiration.year'),
-        },
+        // TODO: Is wordpress cookie needed at all?
+        // {
+        //   name: 'wordpress_*, wp-settings-*',
+        //   host: '.hel.fi',
+        //   storageType: 1,
+        //   description: buildDict('consent:cookies.wordpress'),
+        //   expiration: buildDict('consent:expiration.session'),
+        // },
+        // TODO: Why would linkedevents-api-prod-csrftoken be needed?
+        // {
+        //   name: 'linkedevents-api-prod-csrftoken',
+        //   host: 'api.hel.fi',
+        //   storageType: 1,
+        //   description: buildDict('consent:cookies.linkedevents'),
+        //   expiration: buildDict('consent:expiration.year'),
+        // },
       ],
     },
   ] as const;

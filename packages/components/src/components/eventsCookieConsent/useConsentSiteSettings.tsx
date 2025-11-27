@@ -14,10 +14,9 @@ function useLanguages(): SiteSettingsLanguage[] {
   ];
 }
 
-function useCookieName() {
-  const { cookieDomain } = useCookieConfigurationContext();
-  const prefix = cookieDomain.replaceAll('.', '-');
-  return `${prefix}-cookie-consents`;
+function useAppCookieName() {
+  const { appName } = useCookieConfigurationContext();
+  return `${appName.toLowerCase()}-cookie-consents`;
 }
 
 function useConsentContentSource() {
@@ -26,7 +25,7 @@ function useConsentContentSource() {
   const languageCodes = languages.map((lang) => lang.code);
 
   const buildDict = createLocaleDictBuilder(languageCodes, t);
-  const cookieName = useCookieName();
+  const cookieName = useAppCookieName();
   const { cookieDomain, appName } = useCookieConfigurationContext();
 
   const requiredGroups = [
@@ -40,11 +39,37 @@ function useConsentContentSource() {
           host: cookieDomain,
           storageType: 1,
           description: buildDict('consent:cookies.app', { appName }),
-          expiration: buildDict('consent:expiration.session'),
+          expiration: buildDict('consent:expiration.days', { days: 100 }),
         },
         {
+          name: '__next_scroll_*',
+          host: cookieDomain,
+          storageType: 3,
+          description: buildDict('consent:cookies.nextjs_scroll'),
+          expiration: buildDict('consent:expiration.session'),
+        },
+        // TODO: Can be reoved, if these are for old cookie consent.
+        // {
+        //   name: 'city-of-helsinki-consent-version',
+        //   host: cookieDomain,
+        //   storageType: 1,
+        //   description: buildDict(
+        //     'consent:cookies.city_of_helsinki_consent_version'
+        //   ),
+        //   expiration: buildDict('consent:expiration.session'),
+        // },
+        // {
+        //   name: 'city-of-helsinki-cookie-consents',
+        //   host: cookieDomain,
+        //   storageType: 1,
+        //   description: buildDict(
+        //     'consent:cookies.city_of_helsinki_cookie_consents'
+        //   ),
+        //   expiration: buildDict('consent:expiration.session'),
+        // },
+        {
           name: 'wordpress_*, wp-settings-*',
-          host: 'api.hel.fi',
+          host: '.hel.fi',
           storageType: 1,
           description: buildDict('consent:cookies.wordpress'),
           expiration: buildDict('consent:expiration.session'),
@@ -55,13 +80,6 @@ function useConsentContentSource() {
           storageType: 1,
           description: buildDict('consent:cookies.linkedevents'),
           expiration: buildDict('consent:expiration.year'),
-        },
-        {
-          name: 'i18next',
-          host: 'api.hel.fi',
-          storageType: 1,
-          description: buildDict('consent:cookies.i18next'),
-          expiration: buildDict('consent:expiration.session'),
         },
       ],
     },
@@ -212,7 +230,7 @@ function useConsentTranslations() {
 
 function useConsentSiteSettings() {
   const languages = useLanguages();
-  const cookieName = useCookieName();
+  const cookieName = useAppCookieName();
   const { requiredGroups, optionalGroups } = useConsentContentSource();
   const { translations } = useConsentTranslations();
   const { appName: siteName } = useCookieConfigurationContext();

@@ -159,7 +159,8 @@ const nextBaseConfig = ({
       // Base CSP directives
       const cspDirectives = [
         "default-src 'self'",
-        `script-src 'self' ${isDevelopment ? "'unsafe-eval'" : ''} ${isDevelopment ? "'unsafe-inline'" : ''} https://webanalytics.digiaiiris.com *.reactandshare.com *.youtube.com *.googlesyndication.com *.google-analytics.com *.googletagmanager.com *.gstatic.com`,
+        // FIXME: "'unsafe-inline'" in script-src is not good practise. It's currently required by HDS cookie consent.
+        `script-src 'self' ${isDevelopment ? "'unsafe-eval'" : ''} 'unsafe-inline' https://webanalytics.digiaiiris.com *.reactandshare.com *.youtube.com *.googlesyndication.com *.google-analytics.com *.googletagmanager.com *.gstatic.com`,
         "style-src 'self' 'unsafe-inline' https://cdn.reactandshare.com",
         "img-src * 'self' data: https:",
         "font-src 'self' *.hel.fi *.hel.ninja fonts.gstatic.com https://cdn.reactandshare.com",

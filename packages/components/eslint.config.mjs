@@ -39,6 +39,7 @@ export default [
     rules: {
       'no-console': 'error',
       '@typescript-eslint/naming-convention': 'off',
+      'vitest/no-disabled-tests': 'off',
     },
   },
   globalIgnores([

@@ -485,20 +485,24 @@ describe("EventHero's enrolment features", () => {
     );
     expect(screen.getByText(baseEvent.name.fi!)).toBeInTheDocument();
     if (showEnrolmentStatus) {
+      // eslint-disable-next-line vitest/no-conditional-expect
       expect(screen.getByText(/event:enrolmentStatus/)).toBeInTheDocument();
     } else {
+      // eslint-disable-next-line vitest/no-conditional-expect
       expect(
         screen.queryByTestId('event-enrolment-status')
       ).not.toBeInTheDocument();
     }
 
     if (showOfferButton) {
+      // eslint-disable-next-line vitest/no-conditional-expect
       expect(
         screen.getByRole('button', {
           name: /(hero\.ariaLabelEnrol|hero\.ariaLabelQueueEnrol|hero\.ariaLabelQueueBuy)/i,
         })
       ).toBeInTheDocument();
     } else {
+      // eslint-disable-next-line vitest/no-conditional-expect
       expect(
         screen.queryByRole('button', {
           name: /(hero\.ariaLabelEnrol|hero\.ariaLabelQueueEnrol|hero\.ariaLabelQueueBuy)/i,

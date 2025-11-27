@@ -3,6 +3,7 @@ import { advanceTo, clear } from 'jest-date-mock';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
+import { axe } from 'vitest-axe';
 import { render, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent, fakeKeywords } from '@/test-utils/mockDataUtils';
@@ -46,16 +47,13 @@ afterAll(() => {
 const renderComponent = () =>
   render(<EventCard event={event} eventUrl={`/tapahtumat/${event.id}`} />);
 describe('event card', () => {
-  // TODO: when HDS fixes the tag id -> uncomment
-  // eslint-disable-next-line vitest/no-commented-out-tests
-  /* it('for accessibility violations', async () => {
+  it('for accessibility violations', async () => {
     const { container } = renderComponent();
 
     const results = await axe(container);
     expect(results).toHaveNoViolations();
-  }); */
+  });
 
-  // Skipped, because this is not available after the Link-component is changed from react-router Link.
   it('should go to event page by clicking event card', async () => {
     advanceTo('2020-10-05');
     const { router } = renderComponent();

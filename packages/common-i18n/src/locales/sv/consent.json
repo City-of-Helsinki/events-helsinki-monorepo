@@ -32,7 +32,10 @@
     "servicemap_analytics": "Kaka för statistiksystemet Matomo på servicekartan.",
     "servicemap_session": "Session på servicekartan.",
     "servicemap_ga": "Kaka för analysverktyget Google Analytics på servicekartan.",
-    "wordpress": "Kaka för användning av WordPress-innehållshanteringssystemet."
+    "wordpress": "Kaka för användning av WordPress-innehållshanteringssystemet.",
+    "nextjs_scroll": "Används av webbplatser för att komma ihåg en användares scrollposition på en sida, särskilt efter att de navigerat bakåt eller framåt. Detta ger en mer sömlös användarupplevelse genom att automatiskt scrolla till rätt plats när användaren återgår till en föregående sida.",
+    "city_of_helsinki_consent_version": "TODO: city-of-helsinki-consent-version. Can be removed if this is only for HDS v3 version of cookie consent.",
+    "city_of_helsinki_cookie_consents": "TODO: city-of-helsinki-cookie-consents. Can be removed if this is only for HDS v3 version of cookie consent."
   },
   "expiration": {
     "session": "Sessionskakan raderas när användaren lämnar webbsidan",

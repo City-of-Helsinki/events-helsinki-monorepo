@@ -32,7 +32,10 @@
     "servicemap_analytics": "A cookie of the Matomo statistics system for the Service Map.",
     "servicemap_session": "Service Map session.",
     "servicemap_ga": "A Google analytics cookie for the Service Map.",
-    "wordpress": "A cookie for operation of the WordPress-content management system."
+    "wordpress": "A cookie for operation of the WordPress-content management system.",
+    "nextjs_scroll": "Used by websites to remember a user's scroll position on a page, especially after they navigate back or forward. This provides a more seamless user experience by automatically scrolling to the correct location when the user returns to a previous page.",
+    "city_of_helsinki_consent_version": "TODO: city-of-helsinki-consent-version. Can be removed if this is only for HDS v3 version of cookie consent.",
+    "city_of_helsinki_cookie_consents": "TODO: city-of-helsinki-cookie-consents. Can be removed if this is only for HDS v3 version of cookie consent."
   },
   "expiration": {
     "session": "The session cookie is deleted once the user exits the page",

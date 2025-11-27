@@ -27,15 +27,10 @@
     "app": "{{ appName }} -sivusto käyttää tätä evästettä tietojen tallentamiseen siitä, ovatko kävijät antaneet hyväksyntänsä tai kieltäytyneet evästeiden käytöstä.",
     "matomo": "Matomo-tilastointijärjestelmän eväste.",
     "askem": "Askem-reaktionappien toimintaan liittyvä tietue.",
-    "linkedevents": "Eväste tapahtumien hakemisen valtuuttamiseen.",
-    "i18next": "Eväste sivuston kielivalinnan muistamiseen.",
     "servicemap_analytics": "Matomo-tilastointijärjestelmän eväste palvelukartalle.",
     "servicemap_session": "Palvelukartan istunto.",
     "servicemap_ga": "Google-analytiikan eväste palvelukartalle.",
-    "wordpress": "Wordpress-sisällönhallintajärjestelmän toimintaan liittyvä eväste.",
-    "nextjs_scroll": "Verkkosivustot käyttävät tätä käyttäjän vierityskohdan muistamiseen sivulla, erityisesti sen jälkeen, kun he ovat siirtyneet taaksepäin tai eteenpäin. Tämä tarjoaa saumattomamman käyttökokemuksen vierittämällä automaattisesti oikeaan sijaintiin, kun käyttäjä palaa edelliselle sivulle.",
-    "city_of_helsinki_consent_version": "TODO: city-of-helsinki-consent-version. Can be removed if this is only for HDS v3 version of cookie consent.",
-    "city_of_helsinki_cookie_consents": "TODO: city-of-helsinki-cookie-consents. Can be removed if this is only for HDS v3 version of cookie consent."
+    "nextjs_scroll": "Verkkosivustot käyttävät tätä käyttäjän vierityskohdan muistamiseen sivulla, erityisesti sen jälkeen, kun he ovat siirtyneet taaksepäin tai eteenpäin. Tämä tarjoaa saumattomamman käyttökokemuksen vierittämällä automaattisesti oikeaan sijaintiin, kun käyttäjä palaa edelliselle sivulle."
   },
   "expiration": {
     "session": "Istunto-eväste tuhotaan, kun käyttäjä poistuu sivulta",

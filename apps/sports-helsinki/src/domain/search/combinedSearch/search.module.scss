@@ -173,4 +173,10 @@ $buttonWidth: 180px;
   svg {
     width: var(--icon-size);
   }
+  [id='sportsCategory-sl-container'],
+  [id='targetGroup-sl-container'],
+  [id='accessibilityProfile-sl-container'] {
+    /* Fix the menu should always open downwards. */
+    bottom: unset !important;
+  }
 }

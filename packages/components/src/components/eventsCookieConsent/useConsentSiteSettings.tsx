@@ -16,7 +16,11 @@ function useLanguages(): SiteSettingsLanguage[] {
 
 function useAppCookieName() {
   const { appName } = useCookieConfigurationContext();
-  return `${appName.toLowerCase()}-cookie-consents`;
+  const prefix = appName
+    .replaceAll('.', '-')
+    .replaceAll(' ', '-')
+    .toLowerCase();
+  return `${prefix}-cookie-consents`;
 }
 
 function useConsentContentSource() {

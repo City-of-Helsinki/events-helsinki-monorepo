@@ -374,8 +374,8 @@ export const getEventFields = (event: EventFields, locale: AppLanguage) => {
 export const isLocalized = (event: EventFields, locale: AppLanguage): boolean =>
   Boolean(
     event.name?.[locale] &&
-      event.shortDescription?.[locale] &&
-      event.description?.[locale]
+    event.shortDescription?.[locale] &&
+    event.description?.[locale]
   );
 
 export const getAudienceAgeText = (

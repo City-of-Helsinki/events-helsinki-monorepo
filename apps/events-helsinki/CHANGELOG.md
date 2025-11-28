@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.29.2...events-helsinki-v2.0.0) (2025-11-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* critical HDS/HCRC upgrade and cookie consent implementation
+
+### Features
+
+* Critical HDS/HCRC upgrade and cookie consent implementation ([560cc53](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/560cc5398e8e4d0a9bf7caac73fc9cb68281d756))
+* Upgrade nextjs to v15 ([dad7a98](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dad7a988fc590fd3d6ca73879bb8c41b6ffc9a44))
+
+
+### Bug Fixes
+
+* Add placeholder translations to appName cookie ([560cc53](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/560cc5398e8e4d0a9bf7caac73fc9cb68281d756))
+
 ## [1.29.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v1.29.1...events-helsinki-v1.29.2) (2025-11-26)
 
 

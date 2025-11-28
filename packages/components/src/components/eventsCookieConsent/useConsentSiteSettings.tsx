@@ -48,41 +48,6 @@ function useConsentContentSource() {
           description: buildDict('consent:cookies.nextjs_scroll'),
           expiration: buildDict('consent:expiration.session'),
         },
-        // TODO: Can be reoved, if these are for old cookie consent.
-        // {
-        //   name: 'city-of-helsinki-consent-version',
-        //   host: cookieDomain,
-        //   storageType: 1,
-        //   description: buildDict(
-        //     'consent:cookies.city_of_helsinki_consent_version'
-        //   ),
-        //   expiration: buildDict('consent:expiration.session'),
-        // },
-        // {
-        //   name: 'city-of-helsinki-cookie-consents',
-        //   host: cookieDomain,
-        //   storageType: 1,
-        //   description: buildDict(
-        //     'consent:cookies.city_of_helsinki_cookie_consents'
-        //   ),
-        //   expiration: buildDict('consent:expiration.session'),
-        // },
-        // TODO: Is wordpress cookie needed at all?
-        // {
-        //   name: 'wordpress_*, wp-settings-*',
-        //   host: '.hel.fi',
-        //   storageType: 1,
-        //   description: buildDict('consent:cookies.wordpress'),
-        //   expiration: buildDict('consent:expiration.session'),
-        // },
-        // TODO: Why would linkedevents-api-prod-csrftoken be needed?
-        // {
-        //   name: 'linkedevents-api-prod-csrftoken',
-        //   host: 'api.hel.fi',
-        //   storageType: 1,
-        //   description: buildDict('consent:cookies.linkedevents'),
-        //   expiration: buildDict('consent:expiration.year'),
-        // },
       ],
     },
   ] as const;

@@ -39,7 +39,7 @@ export type CustomPageProps = NavigationProviderProps & SSRConfig;
 
 const ErrorBoundaryFallbackComponent = ({ error }: { error: Error }) => {
   const { resilientT } = useResilientTranslation();
-  const appName = resilientT('appHobbies:appName');
+  const appName = resilientT('appEvents:appName');
   return <FallbackComponent error={error} appName={appName} />;
 };
 

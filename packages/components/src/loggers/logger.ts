@@ -89,5 +89,6 @@ export const dataSourceLinkedLogger = createLogger('ds:linked');
 export const staticGenerationLogger = createLogger('staticGeneration');
 export const logger = createLogger('general');
 export const networkLogger = createLogger('network');
+export const userTrackingLogger = createLogger('tracking');
 
 export default createLogger;

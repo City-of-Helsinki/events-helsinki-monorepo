@@ -54,6 +54,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
       <SportsApolloProvider>
         <BaseApp
           appName={appName}
+          globalAppName="Sports"
           cmsHelper={cmsHelper}
           cookieDomain={AppConfig.hostname}
           routerHelper={routerHelper}

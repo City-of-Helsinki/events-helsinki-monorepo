@@ -32,7 +32,14 @@ export type Props = {
   cmsHelper: HeadlessCMSHelper;
   cookieDomain: string;
   routerHelper: CmsRoutedAppHelper;
+  /**
+   * a real app name that is translated in every locale.
+   */
   appName: string;
+  /**
+   * a global app name that is unique and does not change when locale changes.
+   */
+  globalAppName: string;
   matomoConfiguration: Parameters<typeof createMatomoInstance>[0];
   askemFeedbackConfiguration: Parameters<typeof createAskemInstance>[0];
   onConsentGiven?: (askemConsentGiven: boolean) => void;
@@ -82,6 +89,7 @@ function BaseApp({
   getPlainEventUrl,
   getKeywordOnClickHandler,
   appName,
+  globalAppName,
   consentUrl,
 }: Props) {
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
@@ -108,6 +116,7 @@ function BaseApp({
             matomoConfiguration={matomoConfiguration}
             cookieDomain={cookieDomain}
             appName={appName}
+            globalAppName={globalAppName}
             consentUrl={consentUrl}
           >
             <EventsCookieConsent>

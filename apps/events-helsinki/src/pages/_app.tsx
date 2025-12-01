@@ -53,6 +53,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
       <EventsApolloProvider>
         <BaseApp
           appName={appName}
+          globalAppName="Events"
           cmsHelper={cmsHelper}
           cookieDomain={AppConfig.hostname}
           routerHelper={routerHelper}

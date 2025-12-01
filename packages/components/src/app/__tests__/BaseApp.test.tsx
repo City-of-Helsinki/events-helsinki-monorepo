@@ -11,6 +11,7 @@ describe('BaseApp', () => {
         cookieDomain=""
         routerHelper={{} as any}
         appName="TestApp"
+        globalAppName="TestApp"
         matomoConfiguration={
           {
             urlBase: 'https://matomo.example.com/',

@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.34.1...sports-helsinki-v2.0.0) (2025-12-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* critical HDS/HCRC upgrade and cookie consent implementation
+
+### Features
+
+* Critical HDS/HCRC upgrade and cookie consent implementation ([560cc53](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/560cc5398e8e4d0a9bf7caac73fc9cb68281d756))
+* **sports:** Replace multiselect filters with HDS selects ([62c2d4e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/62c2d4ed37e56be66788698ab838f1bf88bc2089))
+* Upgrade nextjs to v15 ([dad7a98](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dad7a988fc590fd3d6ca73879bb8c41b6ffc9a44))
+
+
+### Bug Fixes
+
+* Add placeholder translations to appName cookie ([560cc53](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/560cc5398e8e4d0a9bf7caac73fc9cb68281d756))
+* **consent:** Consent cookie name cannot contain ([9c3fd72](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9c3fd722aba324166bf820c59a9ed6e7a1361955))
+* Remove search text input clear button ([48c0c22](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48c0c222f339454ed253d807a134092233e3b133))
+* **sports:** Search select menu should always open downwards ([bb8ae19](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bb8ae19c86c5b6a357856c86d504337b670903c4))
+
 ## [1.34.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v1.34.0...sports-helsinki-v1.34.1) (2025-11-26)
 
 

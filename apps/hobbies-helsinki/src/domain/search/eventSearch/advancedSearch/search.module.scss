@@ -161,6 +161,25 @@ $buttonWidth: 180px;
       max-width: 100%;
       padding-left: var(--spacing-3-xs);
     }
+
+    /* 
+    Fix the place selector menu rendering issue.
+    The static positioned menu does not read z-index values and
+    the menu is placed below other elements in a small mobile sized screen.
+    See more: https://helsinkisolutionoffice.atlassian.net/browse/HH-454.
+    */
+    @include breakpoints.respond-below(s) {
+      /* Copy of the computed height of categories field. */
+      --categories-selector-dropdown-height: 310.44px;
+      /* Use computed height of categories selector menu as max height for place selector */
+      --fixed-dropdown-max-height: var(--categories-selector-dropdown-height);
+
+      & > div {
+        position: relative !important;
+        max-height: var(--fixed-dropdown-max-height);
+        overflow: scroll;
+      }
+    }
   }
 
   [id='categories-sl-container'] {

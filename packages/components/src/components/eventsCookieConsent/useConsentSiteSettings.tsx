@@ -15,10 +15,14 @@ function useLanguages(): SiteSettingsLanguage[] {
 }
 
 function useAppCookieName() {
-  const { appName } = useCookieConfigurationContext();
-  const prefix = appName
+  const { globalAppName } = useCookieConfigurationContext();
+  // NOTE Prefix == "events"/"hobbies"/"sports".
+  // It needs to be same in every language,
+  // so cookie consent does not change when locale is changed.
+  const prefix = globalAppName
     .replaceAll('.', '-')
     .replaceAll(' ', '-')
+    .replaceAll('_', '-')
     .toLowerCase();
   return `${prefix}-cookie-consents`;
 }

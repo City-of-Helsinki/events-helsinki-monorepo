@@ -61,10 +61,7 @@ export default function LandingPageSearchForm({
             placeholder={t('home:search.placeholder')}
             value={textSearchInput}
             onChange={(event) => setTextSearchInput(event.target.value)}
-            clearButton
-            clearButtonAriaLabel={tAppSports(
-              'appSports:search.search.clearButtonAriaLabel'
-            )}
+            clearButton={false} // HH-456 the clear button not working properly when value handled programmatically.
           />
         </div>
         <div className={styles.buttonWrapper}>

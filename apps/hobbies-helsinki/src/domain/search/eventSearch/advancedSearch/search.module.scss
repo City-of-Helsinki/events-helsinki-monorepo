@@ -182,6 +182,20 @@ $buttonWidth: 180px;
     }
   }
 
+  .dateSelectorWrapper {
+    /* 
+    Make the date selector menu rendering consistent with others.
+    The menu should be positioned as absolute, like the other search fields' menus,
+    when viewing them in a small mobile sized screen.
+    */
+    @include breakpoints.respond-below(s) {
+      & div[role='menu'] {
+        position: absolute !important;
+        min-width: 100% !important;
+      }
+    }
+  }
+
   [id='categories-sl-container'] {
     /* Fix the menu should always open downwards. */
     bottom: unset !important;

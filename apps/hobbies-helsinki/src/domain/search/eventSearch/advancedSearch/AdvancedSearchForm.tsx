@@ -132,8 +132,8 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
 
   const clearFilters = () => {
     const search = getSearchQuery(COURSE_DEFAULT_SEARCH_FILTERS);
-    goToSearch(search);
     clearInputValues();
+    goToSearch(search);
   };
 
   const handleSubmit = (event?: FormEvent) => {
@@ -249,7 +249,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
                   '' /* Required by HDS NumberInput but current UI design uses icons. */
                 }
                 placeholder={t('search.placeholderAge')}
-                value={ageInput}
+                value={ageInput ?? ''}
               />
             </div>
           </div>

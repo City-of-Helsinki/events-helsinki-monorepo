@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.28.0...hobbies-helsinki-v3.0.0) (2025-12-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* critical HDS/HCRC upgrade and cookie consent implementation
+
+### Features
+
+* Critical HDS/HCRC upgrade and cookie consent implementation ([560cc53](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/560cc5398e8e4d0a9bf7caac73fc9cb68281d756))
+* Upgrade nextjs to v15 ([dad7a98](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dad7a988fc590fd3d6ca73879bb8c41b6ffc9a44))
+
+
+### Bug Fixes
+
+* Add placeholder translations to appName cookie ([560cc53](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/560cc5398e8e4d0a9bf7caac73fc9cb68281d756))
+* Clear age input value when input is cleared programmatically ([b2a08e2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b2a08e25eae032fb23f4ad95f00865bda7e882e7))
+* Date selector should be rendered as absolute in mobile view ([5146448](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/514644823cd8935309b4c8d3bd8d468f824c37b0))
+* Position place selector menu over other elements in mobile view ([ddc4018](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ddc4018476de935edb512f88db882e4c46df2a16))
+* Remove search text input clear button ([48c0c22](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/48c0c222f339454ed253d807a134092233e3b133))
+
 ## [2.28.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.27.1...hobbies-helsinki-v2.28.0) (2025-11-26)
 
 

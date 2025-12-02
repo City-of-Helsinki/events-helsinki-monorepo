@@ -1,9 +1,13 @@
-import type { NavigationProviderProps } from '@events-helsinki/components';
+import type {
+  NavigationProviderProps,
+  BaseAppProps,
+} from '@events-helsinki/components';
 import {
   useResilientTranslation,
   useLocale,
   BaseApp,
   BaseAppFallbackComponent as FallbackComponent,
+  getResilientTranslation,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next';
@@ -44,10 +48,13 @@ const ErrorBoundaryFallbackComponent = ({ error }: { error: Error }) => {
 };
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const { resilientT } = useResilientTranslation();
   const locale = useLocale();
   const { asPath, pathname } = useRouter();
-  const appName = resilientT('appHobbies:appName');
+  const appName: BaseAppProps['appName'] = {
+    en: getResilientTranslation('appHobbies:appName', 'en'),
+    fi: getResilientTranslation('appHobbies:appName', 'fi'),
+    sv: getResilientTranslation('appHobbies:appName', 'sv'),
+  };
   return (
     <ErrorBoundary FallbackComponent={ErrorBoundaryFallbackComponent}>
       <HobbiesApolloProvider>

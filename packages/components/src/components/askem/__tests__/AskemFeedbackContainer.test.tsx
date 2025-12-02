@@ -20,7 +20,12 @@ const providerWrapper = ({ children }: { children: React.ReactNode }) => (
   <CookieConfigurationProvider
     cookieDomain={'events-test.hel.fi'}
     askemConfiguration={{ apiKey: 'apiKey-123' }}
-    appName={'events-helsinki-test'}
+    appName={{
+      fi: 'events-helsinki-test',
+      en: 'events-helsinki-test',
+      sv: 'events-helsinki-test',
+    }}
+    globalAppName="events-helsinki-test"
     consentUrl={consentUrl}
     matomoConfiguration={{
       urlBase: '',
@@ -110,7 +115,12 @@ describe('AskemFeedbackContainer', () => {
         <CookieConfigurationProvider
           cookieDomain={'events-test.hel.fi'}
           askemConfiguration={{ apiKey: 'apiKey-123' }}
-          appName={'events-helsinki-test'}
+          appName={{
+            fi: 'events-helsinki-test',
+            en: 'events-helsinki-test',
+            sv: 'events-helsinki-test',
+          }}
+          globalAppName="events-helsinki-test"
           consentUrl={''}
           matomoConfiguration={{
             urlBase: '',

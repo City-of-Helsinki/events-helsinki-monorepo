@@ -2,6 +2,7 @@ import React from 'react';
 import { DEFAULT_LANGUAGE } from '../../constants';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import useConsentTranslation from '../../hooks/useConsentTranslation';
+import type { AppLanguage } from '../../types';
 import { consentGroupIds } from './constants';
 import type { SiteSettingsLanguage } from './types';
 import { createLocaleDictBuilder } from './utils';
@@ -31,10 +32,22 @@ function useConsentContentSource() {
   const { t } = useConsentTranslation();
   const languages = useLanguages();
   const languageCodes = languages.map((lang) => lang.code);
-
   const buildDict = createLocaleDictBuilder(languageCodes, t);
   const cookieName = useAppCookieName();
   const { cookieDomain, appName } = useCookieConfigurationContext();
+
+  const appCookieDescription = languageCodes.reduce<
+    Record<AppLanguage, string>
+  >(
+    (acc, lng) => ({
+      ...acc,
+      [lng]: t('consent:cookies.app', {
+        appName: appName[lng],
+        lng,
+      }),
+    }),
+    { fi: '', en: '', sv: '' }
+  );
 
   const requiredGroups = [
     {
@@ -46,7 +59,7 @@ function useConsentContentSource() {
           name: cookieName,
           host: cookieDomain,
           storageType: 1,
-          description: buildDict('consent:cookies.app', { appName }),
+          description: appCookieDescription,
           expiration: buildDict('consent:expiration.days', { days: 100 }),
         },
         {

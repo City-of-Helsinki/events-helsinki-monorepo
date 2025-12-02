@@ -23,11 +23,12 @@ import {
 } from '../routingUrlProvider';
 import type { AppThemeProviderProps } from '../themeProvider';
 import { AppThemeProvider } from '../themeProvider';
+import type { AppLanguage } from '../types';
 import type { CmsRoutedAppHelper, HeadlessCMSHelper } from '../utils';
 
 import useHdsStyleFix from './useHdsStyleFix';
 
-export type Props = {
+export type BaseAppProps = {
   children: React.ReactNode;
   cmsHelper: HeadlessCMSHelper;
   cookieDomain: string;
@@ -35,7 +36,7 @@ export type Props = {
   /**
    * a real app name that is translated in every locale.
    */
-  appName: string;
+  appName: Record<AppLanguage, string>;
   /**
    * a global app name that is unique and does not change when locale changes.
    */
@@ -65,7 +66,7 @@ export const FallbackComponent = ({
   appName,
 }: {
   error: Error;
-  appName: Props['appName'];
+  appName: string;
 }) => <ErrorFallback error={error} appName={appName} />;
 
 function BaseApp({
@@ -91,7 +92,7 @@ function BaseApp({
   appName,
   globalAppName,
   consentUrl,
-}: Props) {
+}: BaseAppProps) {
   // TODO: Remove this hackfix to ensure that pre-rendered pages'
   //      SEO performance is not impacted.
   useHdsStyleFix();

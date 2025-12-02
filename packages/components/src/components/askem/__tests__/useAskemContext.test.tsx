@@ -44,7 +44,12 @@ describe('useAskemContext', () => {
     mockedUseCookieConfigurationContext.mockReturnValue({
       cookieDomain: mockCookieDomain,
       askemConfiguration: initialAskemConfig,
-      appName: 'events-helsinki-test',
+      appName: {
+        fi: 'events-helsinki-test',
+        en: 'events-helsinki-test',
+        sv: 'events-helsinki-test',
+      },
+      globalAppName: 'events-helsinki-test',
       consentUrl: '/cookie-consent',
       matomoConfiguration: {
         urlBase: '',
@@ -105,7 +110,12 @@ describe('useAskemContext', () => {
     mockedUseCookieConfigurationContext.mockReturnValueOnce({
       cookieDomain: mockCookieDomain,
       askemConfiguration: { ...initialAskemConfig },
-      appName: 'events-helsinki-test',
+      appName: {
+        fi: 'events-helsinki-test',
+        en: 'events-helsinki-test',
+        sv: 'events-helsinki-test',
+      },
+      globalAppName: 'events-helsinki-test',
       consentUrl: '/cookie-consent',
       matomoConfiguration: {
         urlBase: '',
@@ -124,7 +134,12 @@ describe('useAskemContext', () => {
     mockedUseCookieConfigurationContext.mockReturnValue({
       cookieDomain: mockCookieDomain,
       askemConfiguration: newConfig,
-      appName: 'events-helsinki-test',
+      appName: {
+        fi: 'events-helsinki-test',
+        en: 'events-helsinki-test',
+        sv: 'events-helsinki-test',
+      },
+      globalAppName: 'events-helsinki-test',
       consentUrl: '/cookie-consent',
       matomoConfiguration: {
         urlBase: '',

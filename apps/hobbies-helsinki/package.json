@@ -35,9 +35,8 @@
     "test:debug": "yarn test --inspect-brk ----no-file-parallelism",
     "test:staged": "cross-env TZ=Europe/Helsinki vitest related --run",
     "test:watch": "cross-env TZ=Europe/Helsinki vitest watch",
-    "test:browser": "testcafe \"chrome --window-size='1249,720'\" browser-tests/ --live --dev",
-    "test:browser:ci": "testcafe \"chrome:headless --disable-gpu --window-size='1249,720'\" --screenshots path=report takeOnFails=true --video report browser-tests/",
-    "test:browser:wsl2win": "testcafe 'path:`/mnt/c/Program Files/Google/Chrome/Application/chrome.exe`' browser-tests/ --live --dev",
+    "test:browser": "testcafe \"chrome --disable-features=LocalNetworkAccessChecks --window-size='1249,720'\" browser-tests/ --live --dev",
+    "test:browser:ci": "testcafe \"chrome:headless --disable-features=LocalNetworkAccessChecks --disable-gpu --window-size='1249,720'\" --screenshots path=report takeOnFails=true --video report browser-tests/",
     "typecheck": "tsc --project ./tsconfig.json --noEmit",
     "vercel-build": "yarn share-static-hardlink && next build"
   },

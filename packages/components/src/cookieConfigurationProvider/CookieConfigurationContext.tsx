@@ -1,6 +1,7 @@
 import type createMatomoInstance from '@jonkoops/matomo-tracker-react/lib/instance.js';
 import React from 'react';
 import type { createAskemInstance } from '../components/askem';
+import type { AppLanguage } from '../types';
 
 export type CookieConfigurationContextProps = {
   cookieDomain: string;
@@ -9,7 +10,7 @@ export type CookieConfigurationContextProps = {
   /**
    * AppName is a real local specific name for the app.
    */
-  appName: string;
+  appName: Record<AppLanguage, string>;
   /**
    * global app name must be a unique name for the app, that does not change when e.g. a locale is changed.
    */
@@ -25,7 +26,11 @@ const CookieConfigurationContext =
       urlBase: '',
       siteId: 0,
     },
-    appName: '',
+    appName: {
+      en: '',
+      fi: '',
+      sv: '',
+    },
     globalAppName: 'events-helsinki',
     consentUrl: '/cookie-consent',
   });

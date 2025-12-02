@@ -1,9 +1,13 @@
-import type { NavigationProviderProps } from '@events-helsinki/components';
+import type {
+  BaseAppProps,
+  NavigationProviderProps,
+} from '@events-helsinki/components';
 import {
   useResilientTranslation,
   useLocale,
   BaseApp,
   BaseAppFallbackComponent as FallbackComponent,
+  getResilientTranslation,
 } from '@events-helsinki/components';
 import type { AppProps as NextAppProps } from 'next/app';
 import { useRouter } from 'next/router';
@@ -44,10 +48,13 @@ const ErrorBoundaryFallbackComponent = ({ error }: { error: Error }) => {
 };
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
-  const { resilientT } = useResilientTranslation();
   const locale = useLocale();
   const { asPath, pathname } = useRouter();
-  const appName = resilientT('appEvents:appName');
+  const appName: BaseAppProps['appName'] = {
+    en: getResilientTranslation('appEvents:appName', 'en'),
+    fi: getResilientTranslation('appEvents:appName', 'fi'),
+    sv: getResilientTranslation('appEvents:appName', 'sv'),
+  };
   return (
     <ErrorBoundary FallbackComponent={ErrorBoundaryFallbackComponent}>
       <EventsApolloProvider>

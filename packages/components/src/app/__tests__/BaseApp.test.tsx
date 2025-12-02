@@ -10,7 +10,7 @@ describe('BaseApp', () => {
         cmsHelper={{} as any}
         cookieDomain=""
         routerHelper={{} as any}
-        appName="TestApp"
+        appName={{ fi: 'TestApp', en: 'TestApp', sv: 'TestApp' }}
         globalAppName="TestApp"
         matomoConfiguration={
           {

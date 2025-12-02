@@ -6,6 +6,7 @@ import {
   EVENT_SEARCH_FILTERS,
   AdvancedSearchTextInput,
   PlaceSelector,
+  useSearchTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import type { Option } from 'hds-react';
@@ -17,7 +18,6 @@ import {
   Select,
 } from 'hds-react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
@@ -45,7 +45,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   title = 'search:search.titlePage',
   description = 'search:search.descriptionPage',
 }) => {
-  const { t } = useTranslation('search');
+  const { t } = useSearchTranslation();
   const { t: tAppEvents } = useAppEventsTranslation();
   const router = useRouter();
 

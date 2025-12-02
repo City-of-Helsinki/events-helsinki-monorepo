@@ -7,6 +7,7 @@ import {
   IconRead,
   PlaceSelector,
   useAppHobbiesTranslation,
+  useSearchTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import {
@@ -19,7 +20,6 @@ import {
 } from 'hds-react';
 import type { Option } from 'hds-react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
 import queryString from 'query-string';
 import type { FormEvent } from 'react';
 import React from 'react';
@@ -50,7 +50,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
   title = 'search:search.titlePage',
   description = 'search:search.descriptionPage',
 }) => {
-  const { t } = useTranslation('search');
+  const { t } = useSearchTranslation();
   const { t: tAppHobbies } = useAppHobbiesTranslation();
   const router = useRouter();
   const searchParams = React.useMemo(

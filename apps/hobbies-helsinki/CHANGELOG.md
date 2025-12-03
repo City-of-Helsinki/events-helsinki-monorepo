@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.0.0...hobbies-helsinki-v3.0.1) (2025-12-03)
+
+
+### Bug Fixes
+
+* **consent:** Cookie consent name should be a static global name ([fabd4d8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fabd4d83fdf7b0d08d96c743005b58840b3f547d))
+* **consent:** Load all locales (as extra locales) ([1d6637f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1d6637ffaee2d1cef219aa44f359e4d9c2f8d033))
+* **consent:** Provide all locales of app name to cookie consent ([85e0584](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/85e0584fc8a24caab94843d6495a0a62a35c0844))
+* Rename "camps" category to "camps and trips" ([b3cd3fe](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b3cd3fe2ba943203c5495b94d9eec57ce194180f))
+* **testcafe:** Use --disable-features=LocalNetworkAccessChecks ([cb5efe9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/cb5efe9ac1e4aec4d44ac6f75d30d8bf9c0d2c0a))
+
 ## [3.0.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v2.28.0...hobbies-helsinki-v3.0.0) (2025-12-01)
 
 

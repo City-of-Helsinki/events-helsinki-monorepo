@@ -30,7 +30,7 @@ export enum COURSE_CATEGORIES {
   DANCE = 'dance',
   THEATRE = 'theatre',
   ANIMALS = 'animals',
-  CAMPS = 'camps',
+  CAMPS = 'camps_and_trips',
 }
 
 /**
@@ -327,7 +327,7 @@ export const courseCategories: Record<COURSE_CATEGORIES, SearchCategoryOption> =
     },
     [COURSE_CATEGORIES.CAMPS]: {
       icon: <IconCamp />,
-      labelKey: 'home:category.courses.camps',
+      labelKey: 'home:category.courses.campsAndTrips',
     },
   };
 

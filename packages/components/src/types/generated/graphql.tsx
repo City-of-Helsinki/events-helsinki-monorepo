@@ -8429,8 +8429,8 @@ export type QueryEventListArgs = {
   superEventType?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   text?: InputMaybe<Scalars['String']['input']>;
   translation?: InputMaybe<Scalars['String']['input']>;
-  xFullText?: InputMaybe<Scalars['String']['input']>;
-  xOngoing?: InputMaybe<Scalars['Boolean']['input']>;
+  fullText?: InputMaybe<Scalars['String']['input']>;
+  ongoing?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** The root entry point into the Graph */
@@ -14473,8 +14473,8 @@ export type EventListQueryVariables = Exact<{
   >;
   text?: InputMaybe<Scalars['String']['input']>;
   translation?: InputMaybe<Scalars['String']['input']>;
-  xFullText?: InputMaybe<Scalars['String']['input']>;
-  xOngoing?: InputMaybe<Scalars['Boolean']['input']>;
+  fullText?: InputMaybe<Scalars['String']['input']>;
+  ongoing?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 export type EventListQuery = {
@@ -16247,8 +16247,8 @@ export const EventListDocument = gql`
     $superEventType: [String]
     $text: String
     $translation: String
-    $xFullText: String
-    $xOngoing: Boolean
+    $fullText: String
+    $ongoing: Boolean
   ) {
     eventList(
       audienceMaxAgeGt: $audienceMaxAgeGt
@@ -16286,8 +16286,8 @@ export const EventListDocument = gql`
       superEventType: $superEventType
       text: $text
       translation: $translation
-      xFullText: $xFullText
-      xOngoing: $xOngoing
+      fullText: $fullText
+      ongoing: $ongoing
     ) {
       meta {
         count
@@ -16349,8 +16349,8 @@ export const EventListDocument = gql`
  *      superEventType: // value for 'superEventType'
  *      text: // value for 'text'
  *      translation: // value for 'translation'
- *      xFullText: // value for 'xFullText'
- *      xOngoing: // value for 'xOngoing'
+ *      fullText: // value for 'fullText'
+ *      ongoing: // value for 'ongoing'
  *   },
  * });
  */

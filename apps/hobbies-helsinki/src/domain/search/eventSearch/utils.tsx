@@ -283,7 +283,7 @@ export const getEventSearchVariables = ({
     /**
      * As per LinkedEvents requirements (see LINK-2422; https://helsinkisolutionoffice.atlassian.net/browse/LINK-2422),
      * relevance sorting (rank) is activated by providing an *empty string* as the sort parameter when
-     * `x_full_text` is used, not the literal '-rank' value.
+     * `full_text` is used, not the literal '-rank' value.
      */
     sort: sortOrder === EVENT_SORT_OPTIONS.RANK_DESC ? '' : sortOrder,
     start,

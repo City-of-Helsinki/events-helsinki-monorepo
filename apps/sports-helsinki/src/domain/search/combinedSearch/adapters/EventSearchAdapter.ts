@@ -20,8 +20,8 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
    * List here all the event and course search parameters
    * that are wanted to be mapped with the combined search.
    */
-  xFullText?: EventSearchParams['xFullText'];
-  xOngoing: EventSearchParams['xOngoing'];
+  fullText?: EventSearchParams['fullText'];
+  ongoing: EventSearchParams['ongoing'];
   start: EventSearchParams['start'];
   end: EventSearchParams['end'];
   include: EventSearchParams['include'];
@@ -54,7 +54,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     // Initialize the object with default values
     Object.assign(this, initialEventSearchAdapterValues, { eventType });
 
-    this.xFullText = input.text || initialEventSearchAdapterValues.xFullText;
+    this.fullText = input.text || initialEventSearchAdapterValues.fullText;
     this.keywordAnd = [];
     this.keywordOrSet1 = SPORT_COURSES_KEYWORDS;
     this.keywordOrSet2 = this.getSportsKeywords(input);
@@ -82,7 +82,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
    *
    * As per LinkedEvents API requirements (see LINK-2422), relevance sorting (rank)
    * is activated by providing an *empty string* as the sort parameter when
-   * `x_full_text` is used, not the literal '-rank' value. This function
+   * `full_text` is used, not the literal '-rank' value. This function
    * performs that conversion.
    *
    * @param {EventTypeId} eventType The type of event, used to decide whether to use `eventOrderBy` or `courseOrderBy`.

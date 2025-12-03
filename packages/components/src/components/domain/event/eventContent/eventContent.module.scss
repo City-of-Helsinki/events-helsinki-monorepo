@@ -1,7 +1,6 @@
 @use '../../../../styles/breakpoints' as breakpoints;
 
 .eventContent {
-  --description-font-size: var(--fontsize-body-l);
   background-color: var(--color-white);
 
   .contentWrapper {
@@ -76,7 +75,9 @@
 }
 
 .description {
+  --description-font-size: var(--fontsize-body-l);
   line-height: 1.5;
+  font-size: var(--description-font-size);
 
   p {
     font-size: var(--description-font-size);

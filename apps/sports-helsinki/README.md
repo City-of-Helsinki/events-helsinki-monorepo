@@ -368,9 +368,8 @@ The conversion map looks (something) like this:
   { key: "audience_max_age_gt", value: params.audienceMaxAgeGt },
   { key: "suitable_for", value: params.suitableFor },
   { key: "ids", value: params.ids },
-  // Experimental fields...
-  { key: "x_full_text", value: params.xFullText },
-  { key: "x_ongoing", value: params.xOngoing },
+  { key: "full_text", value: params.fullText },
+  { key: "ongoing", value: params.ongoing },
 ];
 ```
 
@@ -388,8 +387,8 @@ The "main events search" component is used in the search page at `/search`.
 | include           | ['keywords', 'location']                 | -            | x        | Fetch related data from datasource                                                            |
 | pageSize          | 25                                       | -            | x        | How many items are fetched per page                                                           |
 | division          | "ocd-division/country:fi/kunta:helsinki" | -            | x        | Only city of Helsinki events                                                                  |
-| xOngoing          | true                                     | -            | x        | include the ongoing events                                                                    |
-| xFullText         | ""                                       | x            | x        | A text scoring mathcher (title, place, description, ...)                                      |
+| ongoing           | true                                     | -            | x        | include the ongoing events                                                                    |
+| fullText          | ""                                       | x            | x        | A text scoring mathcher (title, place, description, ...)                                      |
 | sort              | "end_time"                               | x            | x        | Sorting order of the result set. Default is "event end time as ascending"                     |
 | start             | "now"                                    | x            | x        | Filter by event starting time                                                                 |
 | end               | null                                     | x            | -        | Filter by event ending time                                                                   |

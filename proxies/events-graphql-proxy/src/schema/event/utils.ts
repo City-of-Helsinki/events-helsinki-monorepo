@@ -59,9 +59,8 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'audience_max_age_gt', value: params.audienceMaxAgeGt },
     { key: 'suitable_for', value: params.suitableFor },
     { key: 'ids', value: params.ids },
-    // Experimental fields...
-    { key: 'x_full_text', value: params.xFullText },
-    { key: 'x_ongoing', value: params.xOngoing },
+    { key: 'full_text', value: params.fullText },
+    { key: 'ongoing', value: params.ongoing },
   ]);
 };
 

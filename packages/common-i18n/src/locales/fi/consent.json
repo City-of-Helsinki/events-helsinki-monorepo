@@ -26,6 +26,7 @@
   "cookies": {
     "app": "{{ appName }} -sivusto käyttää tätä evästettä tietojen tallentamiseen siitä, ovatko kävijät antaneet hyväksyntänsä tai kieltäytyneet evästeiden käytöstä.",
     "matomo": "Matomo-tilastointijärjestelmän eväste.",
+    "matomo_cookie_consent": "Tallentaa kävijän suostumukset Matomon seurantaan.",
     "askem": "Askem-reaktionappien toimintaan liittyvä tietue.",
     "servicemap_analytics": "Matomo-tilastointijärjestelmän eväste palvelukartalle.",
     "servicemap_session": "Palvelukartan istunto.",

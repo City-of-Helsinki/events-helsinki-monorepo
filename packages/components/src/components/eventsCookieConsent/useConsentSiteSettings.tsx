@@ -107,12 +107,21 @@ function useConsentContentSource() {
       title: buildDict('consent:groups.optionalMatomo.title'),
       description: buildDict('consent:groups.optionalMatomo.text'),
       cookies: [
+        // See more: What cookies are created by the Matomo JavaScript
+        // Tracking client? - https://matomo.org/faq/general/faq_146/.
         {
           name: '_pk*',
           host: 'digia.fi',
           storageType: 1,
           description: buildDict('consent:cookies.matomo'),
           expiration: buildDict('consent:expiration.days', { days: 393 }),
+        },
+        {
+          name: 'mtm_cookie_consent',
+          host: 'digia.fi',
+          storageType: 1,
+          description: buildDict('consent:cookies.matomo_cookie_consent'),
+          expiration: buildDict('consent:expiration.days', { days: 400 }),
         },
       ],
     },

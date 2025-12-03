@@ -11,7 +11,7 @@
     "sport": "Liikunta ja urheilu",
     "theatre": "Teatteri ja sirkus",
     "animals": "Eläimet",
-    "camps": "Leirit",
+    "campsAndTrips": "Leirit ja retket",
     "courses": {
       "movieAndMedia": "Elokuva ja media",
       "languages": "Kielet",
@@ -26,7 +26,7 @@
       "dance": "Tanssi",
       "theatre": "Teatteri ja sirkus",
       "animals": "Eläimet",
-      "camps": "Leirit"
+      "campsAndTrips": "Leirit ja retket"
     }
   },
   "collections": {

@@ -11,7 +11,7 @@
     "sport": "Motion och sport",
     "theatre": "Teater och cirkus",
     "animals": "Djur",
-    "camps": "Läger",
+    "campsAndTrips": "Läger och utfärder",
     "courses": {
       "movieAndMedia": "Film och media",
       "languages": "Språk",
@@ -26,7 +26,7 @@
       "dance": "Dans",
       "theatre": "Teater och cirkus",
       "animals": "Djur",
-      "camps": "Läger"
+      "campsAndTrips": "Läger och utfärder"
     }
   },
   "collections": {

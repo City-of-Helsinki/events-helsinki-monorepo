@@ -11,7 +11,7 @@
     "sport": "Exercise and sports",
     "theatre": "Theatre and circus",
     "animals": "Animals",
-    "camps": "Camps",
+    "campsAndTrips": "Camps and trips",
     "courses": {
       "movieAndMedia": "Film and media",
       "languages": "Languages",
@@ -26,7 +26,7 @@
       "dance": "Dance",
       "theatre": "Theatre and circus",
       "animals": "Animals",
-      "camps": "Camps"
+      "campsAndTrips": "Camps and trips"
     }
   },
   "collections": {

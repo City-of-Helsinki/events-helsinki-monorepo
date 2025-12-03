@@ -18,10 +18,8 @@ const EventsCookieConsent: React.FC<Props> = ({ children }) => {
   // FIXME: We have no need for onChange -handler, so we can remove it.
   // The onChange property will be made optional in HDS v.4.8.1.
   // See: https://github.com/City-of-Helsinki/helsinki-design-system/releases/tag/v4.8.1.
-  const onChange = (event: CookieConsentChangeEvent) => {
-    // eslint-disable-next-line no-console
-    console.debug('Cookie consent changed: ', { event });
-  };
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const onChange = (_event: CookieConsentChangeEvent) => {};
 
   return (
     <CookieConsentContextProvider

@@ -1,6 +1,6 @@
 export type AgeFilterType = 'maxAge' | 'minAge' | 'exactAge';
 export type DateFilterType = 'date' | 'dateType';
-export type TextFilterType = 'text' | 'xFullText';
+export type TextFilterType = 'text' | 'fullText';
 
 /**
  * @deprecated since the CombinedSearch refactoring its new types and adapters should

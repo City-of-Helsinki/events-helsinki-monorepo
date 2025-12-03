@@ -26,6 +26,7 @@
   "cookies": {
     "app": "{{ appName }} - Cookie möjliggör hantering av cookies på webbplatsen.",
     "matomo": "Kaka för statistiksystemet Matomo.",
+    "matomo_cookie_consent": "Registrerar besökarens samtycke till Matomo-spårning.",
     "askem": "En post relaterad till driften av reaktionsknappen Askem.",
     "servicemap_analytics": "Kaka för statistiksystemet Matomo på servicekartan.",
     "servicemap_session": "Session på servicekartan.",

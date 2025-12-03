@@ -26,6 +26,7 @@
   "cookies": {
     "app": "Used by {{ appName }} to store information about whether visitors have given or declined the use of cookie categories used on the site.",
     "matomo": "A cookie of the Matomo statistics system.",
+    "matomo_cookie_consent": "Records the visitor’s consents to Matomo tracking.",
     "askem": "A record related to the operation of the Askem react buttons.",
     "servicemap_analytics": "A cookie of the Matomo statistics system for the Service Map.",
     "servicemap_session": "Service Map session.",

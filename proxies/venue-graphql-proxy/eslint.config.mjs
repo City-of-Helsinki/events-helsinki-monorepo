@@ -29,7 +29,6 @@ export default [
   {
     rules: {
       '@typescript-eslint/naming-convention': 'off',
-      'vitest/no-commented-out-tests': 'off',
       'vitest/no-disabled-tests': 'off',
       'no-console': 'error',
     },

@@ -10,10 +10,10 @@ import {
 } from '../../utils/utils.js';
 import type VenueEnricher from './VenueEnricher.js';
 
-export default class VenueOrganizationEnricher
-  implements
-    VenueEnricher<TprekUnit, Pick<TranslatedVenueDetails, 'organization'>>
-{
+export default class VenueOrganizationEnricher implements VenueEnricher<
+  TprekUnit,
+  Pick<TranslatedVenueDetails, 'organization'>
+> {
   async getOrganization(
     organizationId: NonNullable<TprekUnitWithoutNull['org_id']>,
     context: VenueContext

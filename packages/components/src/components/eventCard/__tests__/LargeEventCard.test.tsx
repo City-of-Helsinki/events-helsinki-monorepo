@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import mockRouter from 'next-router-mock';
 import React from 'react';
 
+import { axe } from 'vitest-axe';
 import { render, screen } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import { fakeEvent } from '@/test-utils/mockDataUtils';
@@ -16,15 +17,13 @@ beforeEach(() => {
 });
 
 describe('large event card', () => {
-  // TODO: when HDS fixes the tag id -> uncomment
-  // eslint-disable-next-line vitest/no-commented-out-tests
-  /* it('for accessibility violations', async () => {
-    const event = fakeEvent() as EventFieldsFragment;
+  it('for accessibility violations', async () => {
+    const event = fakeEvent();
     const { container } = renderComponent(event);
 
     const results = await axe(container);
     expect(results).toHaveNoViolations();
-  }); */
+  });
 
   it('should go to event page by clicking event card', async () => {
     const event = fakeEvent({

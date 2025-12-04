@@ -34,11 +34,11 @@ export default function useGetItemIsActive(): NonNullable<
     // NOTE: We are now assuming that all the parent items are also real parent pages.
     const isParentItem = Boolean(
       path &&
-        (i18nRouterAsPath.startsWith(path) ||
-          parentPathnamePattern.startsWith(path) ||
-          `/${locale}${parentPathnamePattern}`.startsWith(path) ||
-          resolvedPathname?.startsWith(path) ||
-          `/${locale}${resolvedPathname}`.startsWith(path))
+      (i18nRouterAsPath.startsWith(path) ||
+        parentPathnamePattern.startsWith(path) ||
+        `/${locale}${parentPathnamePattern}`.startsWith(path) ||
+        resolvedPathname?.startsWith(path) ||
+        `/${locale}${resolvedPathname}`.startsWith(path))
     );
 
     return isStaticallyRoutedItem || isI18nVersionItem || isParentItem;

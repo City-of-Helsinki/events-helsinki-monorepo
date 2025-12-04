@@ -30,10 +30,10 @@ function makeTranslatableOntologyIdLabels(
   );
 }
 
-export default class VenueOntologyTreeEnricher
-  implements
-    VenueEnricher<TprekUnit, Pick<TranslatedVenueDetails, 'ontologyTree'>>
-{
+export default class VenueOntologyTreeEnricher implements VenueEnricher<
+  TprekUnit,
+  Pick<TranslatedVenueDetails, 'ontologyTree'>
+> {
   async getOntologyTree(
     ontologyTreeIds: NonNullable<TprekUnitWithoutNull['ontologytree_ids']>,
     context: VenueContext

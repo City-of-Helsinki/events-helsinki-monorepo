@@ -97,11 +97,7 @@ it.each([
 
   // When it doesn't exist
   delete process.env[envName];
-  if (defaultValue) {
-    expect(AppConfig[field]).toStrictEqual(defaultValue);
-  } else {
-    expect(AppConfig[field]).toBeUndefined();
-  }
+  expect(AppConfig[field]).toStrictEqual(defaultValue);
 
   // When it's of wrong type, it errors
   process.env[envName] = 'Some string';

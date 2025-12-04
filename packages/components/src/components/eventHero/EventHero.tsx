@@ -215,7 +215,7 @@ function getShouldShowEnrolmentButton({
 
   return Boolean(
     hasRegistrationUrlWithoutEnrolmentTime ||
-      hasRegistrationUrlAndEnrolmentIsOpen
+    hasRegistrationUrlAndEnrolmentIsOpen
   );
 }
 

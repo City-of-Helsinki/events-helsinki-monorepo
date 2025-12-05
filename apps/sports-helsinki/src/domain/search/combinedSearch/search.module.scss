@@ -15,6 +15,8 @@ $buttonWidth: 180px;
   font-weight: 500;
   margin-top: 2px;
   margin-bottom: var(--spacing-xl);
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &.withDescription {
     margin-bottom: var(--spacing-s);

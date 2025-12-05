@@ -379,8 +379,8 @@ export type QueryEventListArgs = {
   superEventType?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   text?: InputMaybe<Scalars['String']['input']>;
   translation?: InputMaybe<Scalars['String']['input']>;
-  xFullText?: InputMaybe<Scalars['String']['input']>;
-  xOngoing?: InputMaybe<Scalars['Boolean']['input']>;
+  fullText?: InputMaybe<Scalars['String']['input']>;
+  ongoing?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type QueryEventsByIdsArgs = {

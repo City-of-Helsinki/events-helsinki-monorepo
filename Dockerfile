@@ -180,6 +180,11 @@ ENV WATCHPACK_POLLING=${WATCHPACK_POLLING}
 
 WORKDIR /app
 
+# Make sure the app's next.js build output, cache etc are writable by the application
+RUN mkdir -p /app/apps/${PROJECT}/.next \
+    && chown -R default:root /app/apps/${PROJECT}/.next \
+    && chmod -R g+w /app/apps/${PROJECT}/.next
+
 COPY --from=deps --chown=default:root /workspace-install ./
 
 RUN yarn install --immutable --inline-builds

@@ -263,7 +263,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
         </div>
         <div className={styles.rowWrapper}>
           <div className={styles.row}>
-            <div>
+            <div className={styles.checkboxWrapper}>
               <Checkbox
                 className={styles.checkbox}
                 checked={isFree}
@@ -272,7 +272,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
                 onChange={(e) => setIsFree(e.target.checked)}
               />
             </div>
-            <div>
+            <div className={styles.checkboxWrapper}>
               <Checkbox
                 className={styles.checkbox}
                 checked={isOnlyEveningEvents}
@@ -281,7 +281,7 @@ export const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({
                 onChange={(e) => setIsOnlyEveningEvents(e.target.checked)}
               />
             </div>
-            <div>
+            <div className={styles.checkboxWrapper}>
               <Checkbox
                 className={styles.checkbox}
                 checked={isOnlyRemoteEvents}

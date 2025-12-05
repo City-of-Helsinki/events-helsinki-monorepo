@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as breakpoints;
+
 .dropdown {
   --dropdown-height: var(--spacing-3-xl) !important;
 
@@ -70,6 +72,14 @@
       color: var(--color-primary-black);
       font-size: var(--fontsize-body-m);
       padding-left: var(--spacing-3-xs);
+
+      @include breakpoints.respond-below(s) {
+        /* 
+        `white-space: nowrap` would make text a neat single liner, 
+        but then the mobile layout breaks with long values 
+        */
+        white-space: normal;
+      }
     }
 
     .placeholder {

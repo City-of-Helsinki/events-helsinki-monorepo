@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.0.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.0.1...events-helsinki-v2.0.2) (2025-12-08)
+
+
+### Bug Fixes
+
+* **events:** Align search checkboxes in single column on small screens ([fd4f7bc](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fd4f7bc6f448ab520789606e7eeb7a20833053d1))
+* Place selector should have single line text ([f38f08c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f38f08c31c6cabb8a7cd12c2d581594c1f4bff69))
+* **security:** Update next.js to 15.5.7 to fix dependabot issues 291–296 ([3bd02ff](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3bd02ff3ec96c3d471d84f17e92dcff8b941cfd4))
+
 ## [2.0.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.0.0...events-helsinki-v2.0.1) (2025-12-03)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.0.1...sports-helsinki-v2.0.2) (2025-12-08)
+
+
+### Bug Fixes
+
+* **security:** Update next.js to 15.5.7 to fix dependabot issues 291–296 ([3bd02ff](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/3bd02ff3ec96c3d471d84f17e92dcff8b941cfd4))
+
 ## [2.0.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.0.0...sports-helsinki-v2.0.1) (2025-12-03)
 
 

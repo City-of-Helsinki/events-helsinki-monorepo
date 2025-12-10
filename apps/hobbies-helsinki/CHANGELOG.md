@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.0.2...hobbies-helsinki-v3.0.3) (2025-12-10)
+
+
+### Bug Fixes
+
+* Remove experimental "x" and "x_" prefixes from fullText & ongoing ([d441832](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d4418322c1935d9c92e72e4e176a611ffaee6e46))
+
 ## [3.0.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.0.1...hobbies-helsinki-v3.0.2) (2025-12-08)
 
 

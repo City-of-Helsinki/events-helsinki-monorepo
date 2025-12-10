@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.12.0...federation-router-v1.12.1) (2025-12-10)
+
+
+### Bug Fixes
+
+* Remove experimental "x" and "x_" prefixes from fullText & ongoing ([d441832](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d4418322c1935d9c92e72e4e176a611ffaee6e46))
+
 ## [1.12.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.11.0...federation-router-v1.12.0) (2025-11-19)
 
 

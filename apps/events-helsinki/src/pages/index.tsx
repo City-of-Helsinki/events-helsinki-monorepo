@@ -1,4 +1,19 @@
 import type { NormalizedCacheObject } from '@apollo/client/core/index.js';
+import type {
+  PageType,
+  ArticleType,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  useConfig,
+  Page as RHHCPage,
+  TemplateEnum,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type {
+  PageByTemplateQuery,
+  PageByTemplateQueryVariables,
+  PageQuery,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
+import { PageByTemplateDocument } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   DEFAULT_LANGUAGE,
@@ -20,18 +35,6 @@ import type {
 } from 'next';
 import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
-import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
-import {
-  useConfig,
-  Page as RHHCPage,
-  TemplateEnum,
-} from 'react-helsinki-headless-cms';
-import type {
-  PageByTemplateQuery,
-  PageByTemplateQueryVariables,
-  PageQuery,
-} from 'react-helsinki-headless-cms/apollo';
-import { PageByTemplateDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../domain/app/AppConfig';
 import getEventsStaticProps from '../domain/app/getEventsStaticProps';
 import cmsHelper from '../domain/app/headlessCmsHelper';
@@ -39,7 +42,10 @@ import serverSideTranslationsWithCommon from '../domain/i18n/serverSideTranslati
 import { LandingPageContentLayout } from '../domain/search/landingPage/LandingPage';
 
 const RHHCPageContentNoSSR = dynamic(
-  () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
+  () =>
+    import('@city-of-helsinki/react-helsinki-headless-cms').then(
+      (mod) => mod.PageContent
+    ),
   {
     ssr: false,
   }

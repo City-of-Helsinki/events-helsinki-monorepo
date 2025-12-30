@@ -1,4 +1,4 @@
-import type { Config } from 'react-helsinki-headless-cms';
+import type { Config } from '@city-of-helsinki/react-helsinki-headless-cms';
 import useCmsTranslation from './useCmsTranslation';
 import useCommonTranslation from './useCommonTranslation';
 

@@ -1,13 +1,16 @@
+import type {
+  ArticleType,
+  PageType,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import { isLanguage } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  Notification,
+  useLanguagesQuery,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { useContext } from 'react';
-import type { ArticleType, PageType } from 'react-helsinki-headless-cms';
-import { isLanguage } from 'react-helsinki-headless-cms';
-import {
-  Notification,
-  useLanguagesQuery,
-} from 'react-helsinki-headless-cms/apollo';
 import { NavigationContext } from '../../navigationProvider';
 import type { Language, Menu } from '../../types';
 import styles from './navigation.module.scss';
@@ -22,7 +25,10 @@ type NavigationProps = {
 };
 
 const RHHCNavigationNoSSR = dynamic(
-  () => import('react-helsinki-headless-cms').then((mod) => mod.Navigation),
+  () =>
+    import('@city-of-helsinki/react-helsinki-headless-cms').then(
+      (mod) => mod.Navigation
+    ),
   {
     ssr: false,
   }

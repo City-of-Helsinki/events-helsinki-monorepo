@@ -1,5 +1,5 @@
+import { PageContentBreadcrumb } from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { BreadcrumbListItem } from 'hds-react';
-import { PageContentBreadcrumb } from 'react-helsinki-headless-cms';
 import styles from './breadcrumb.module.scss';
 
 type BreadcrumbContainerProps = {

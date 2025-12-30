@@ -1,11 +1,14 @@
 import {
+  ContentContainer,
+  PageSection,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
   useSearchTranslation,
   EventTypeId,
   useAppSportsTranslation,
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import React from 'react';
-import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
 import { SimpleSearchForm } from '../combinedSearch/SearchForm';
 import EventSearchPage from '../eventSearch/SearchPage';

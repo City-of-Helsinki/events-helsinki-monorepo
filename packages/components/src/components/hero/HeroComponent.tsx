@@ -2,7 +2,7 @@ import {
   Link,
   useHeadlessCmsLink,
   HtmlToReact,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import Text from '../text/Text';
 import styles from './heroComponent.module.scss';
 

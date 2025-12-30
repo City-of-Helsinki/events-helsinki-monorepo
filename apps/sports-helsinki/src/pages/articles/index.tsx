@@ -1,5 +1,27 @@
 import type { ParsedUrlQueryInput } from 'querystring';
 import { NetworkStatus } from '@apollo/client';
+import {
+  Page as RHHCPage,
+  Card,
+  LargeCard,
+  useConfig,
+  TemplateEnum,
+  getBreadcrumbsFromPage,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type {
+  ArticleType,
+  CollectionItemType,
+  PageType,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  useCategoriesQuery,
+  PageByTemplateDocument,
+  usePostsQuery,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
+import type {
+  PageByTemplateQuery,
+  PageByTemplateQueryVariables,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   getQlLanguage,
@@ -21,28 +43,6 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React, { useContext } from 'react';
-import {
-  Page as RHHCPage,
-  Card,
-  LargeCard,
-  useConfig,
-  TemplateEnum,
-  getBreadcrumbsFromPage,
-} from 'react-helsinki-headless-cms';
-import type {
-  ArticleType,
-  CollectionItemType,
-  PageType,
-} from 'react-helsinki-headless-cms';
-import {
-  useCategoriesQuery,
-  PageByTemplateDocument,
-  usePostsQuery,
-} from 'react-helsinki-headless-cms/apollo';
-import type {
-  PageByTemplateQuery,
-  PageByTemplateQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
 import type { SportsGlobalPageProps } from '../../domain/app/getSportsStaticProps';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
@@ -54,7 +54,9 @@ const CATEGORIES_AMOUNT = 20;
 
 const SearchPageContentNoSSR = dynamic(
   () =>
-    import('react-helsinki-headless-cms').then((mod) => mod.SearchPageContent),
+    import('@city-of-helsinki/react-helsinki-headless-cms').then(
+      (mod) => mod.SearchPageContent
+    ),
   {
     ssr: false,
   }

@@ -1,3 +1,9 @@
+import type { CollectionProps } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  Collection,
+  PageSection,
+  ContentContainer,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import type {
   GetCardUrlType,
   useLocationUpcomingEventsQueryProps,
@@ -13,12 +19,6 @@ import {
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
-import type { CollectionProps } from 'react-helsinki-headless-cms';
-import {
-  Collection,
-  PageSection,
-  ContentContainer,
-} from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../../constants';
 import { PARAM_SEARCH_TYPE } from '../../search/combinedSearch/constants';

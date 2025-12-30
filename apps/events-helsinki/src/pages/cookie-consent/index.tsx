@@ -1,3 +1,9 @@
+import type { PageType } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  Page as RHHCPage,
+  TemplateEnum,
+  getBreadcrumbsFromPage,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import commonTranslationsEn from '@events-helsinki/common-i18n/locales/en/common.json';
 import commonTranslationsFi from '@events-helsinki/common-i18n/locales/fi/common.json';
 import commonTranslationsSv from '@events-helsinki/common-i18n/locales/sv/common.json';
@@ -23,12 +29,6 @@ import { type BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
-import type { PageType } from 'react-helsinki-headless-cms';
-import {
-  Page as RHHCPage,
-  TemplateEnum,
-  getBreadcrumbsFromPage,
-} from 'react-helsinki-headless-cms';
 import AppConfig from '../../domain/app/AppConfig';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import ConsentPageContent from '../../domain/cookieConsent/ConsentPageContent';

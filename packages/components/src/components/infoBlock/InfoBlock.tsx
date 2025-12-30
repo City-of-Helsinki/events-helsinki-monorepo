@@ -1,9 +1,9 @@
 import type { UrlObject } from 'url';
+import type { SecondaryLink } from '@city-of-helsinki/react-helsinki-headless-cms';
+import { Link } from '@city-of-helsinki/react-helsinki-headless-cms';
 import classNames from 'classnames';
 import { useAccordion, IconAngleDown, IconArrowRight } from 'hds-react';
 import React from 'react';
-import type { SecondaryLink } from 'react-helsinki-headless-cms';
-import { Link } from 'react-helsinki-headless-cms';
 import EllipsedTextWithToggle from '../ellipsedTextWithToggle/EllipsedTextWithToggle';
 import Text from '../text/Text';
 import styles from './infoBlock.module.scss';

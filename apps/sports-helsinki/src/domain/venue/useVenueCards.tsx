@@ -1,11 +1,11 @@
-import type { Venue } from '@events-helsinki/components';
-import { useLocale } from '@events-helsinki/components';
-import React from 'react';
 import {
   Card,
   getLocationCardProps,
   useConfig,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type { Venue } from '@events-helsinki/components';
+import { useLocale } from '@events-helsinki/components';
+import React from 'react';
 import { ROUTES } from '../../constants';
 import { Sources } from '../../domain/app/appConstants';
 import routerHelper from '../../domain/app/routerHelper';

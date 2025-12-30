@@ -1,3 +1,9 @@
+import {
+  PageSection,
+  ContentContainer,
+  Link,
+  HtmlToReact,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { Venue } from '@events-helsinki/components';
 import {
   useVenueTranslation,
@@ -6,12 +12,6 @@ import {
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import React from 'react';
-import {
-  PageSection,
-  ContentContainer,
-  Link,
-  HtmlToReact,
-} from 'react-helsinki-headless-cms';
 import VenueHighlights from '../venueHighlights/VenueHighlights';
 import VenueInfo from '../venueInfo/VenueInfo';
 import VenueLocation from '../venueLocation/VenueLocation';

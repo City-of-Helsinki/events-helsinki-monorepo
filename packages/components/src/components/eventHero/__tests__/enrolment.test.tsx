@@ -1,3 +1,4 @@
+import { defaultConfig } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { render, screen } from '@testing-library/react';
 
 import {
@@ -6,7 +7,6 @@ import {
   startOfYesterday,
   subDays,
 } from 'date-fns';
-import { defaultConfig } from 'react-helsinki-headless-cms';
 import { EnrolmentStatusLabel } from '../../../constants';
 import { useAppThemeContext } from '../../../themeProvider';
 import type { AppThemeContextProps } from '../../../themeProvider/AppThemeContext';
@@ -18,11 +18,14 @@ import EventHero, {
   getIsEnrolmentOpen,
 } from '../EventHero';
 
-vi.mock('react-helsinki-headless-cms', async (importOriginal) => ({
-  ...(await importOriginal()),
-  useConfig: () => defaultConfig,
-  BackgroundImage: () => <div>Mock BackgroundImage</div>,
-}));
+vi.mock(
+  '@city-of-helsinki/react-helsinki-headless-cms',
+  async (importOriginal) => ({
+    ...(await importOriginal()),
+    useConfig: () => defaultConfig,
+    BackgroundImage: () => <div>Mock BackgroundImage</div>,
+  })
+);
 
 vi.mock('../../../hooks/useSuperEventLazyLoad', () => ({
   default: () => ({ superEvent: null }),

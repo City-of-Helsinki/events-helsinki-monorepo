@@ -7,6 +7,13 @@ import type {
 import { useApolloClient } from '@apollo/client';
 import type { MockedResponse } from '@apollo/client/testing';
 import { MockedProvider } from '@apollo/client/testing';
+import type { Config as RHHCConfig } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  ModuleItemTypeEnum,
+  ConfigProvider as RHHCConfigProvider,
+  getUri,
+  defaultConfig as rhhcDefaultConfig,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
   AppRoutingProvider,
   CmsHelperProvider,
@@ -20,13 +27,6 @@ import Link from 'next/link';
 import type { NextRouter } from 'next/router';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
-import {
-  ModuleItemTypeEnum,
-  ConfigProvider as RHHCConfigProvider,
-  getUri,
-  defaultConfig as rhhcDefaultConfig,
-} from 'react-helsinki-headless-cms';
 import { I18nextProvider } from 'react-i18next';
 
 import { ROUTES } from '../../src/constants';

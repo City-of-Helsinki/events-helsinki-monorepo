@@ -1,3 +1,4 @@
+import { useConfig } from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
   useSearchTranslation,
   useIsSmallScreen,
@@ -6,7 +7,6 @@ import {
 import type { UnifiedSearchVenue } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 import { SEARCH_ROUTES } from '../../../../constants';

@@ -1,4 +1,9 @@
 import {
+  isPageType,
+  SecondaryLink,
+  usePageContext,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
   DateSelector,
   MobileDateSelector,
   useLocale,
@@ -8,11 +13,6 @@ import {
 } from '@events-helsinki/components';
 import classnames from 'classnames';
 import { Button, ButtonPresetTheme, IconSearch } from 'hds-react';
-import {
-  isPageType,
-  SecondaryLink,
-  usePageContext,
-} from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import styles from './landingPageSearchForm.module.scss';

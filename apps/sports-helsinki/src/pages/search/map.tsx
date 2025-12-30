@@ -1,3 +1,14 @@
+import type { PageType } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  PageContextProvider,
+  PageSection,
+  Page as RHHCPage,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type {
+  PageQuery,
+  PageQueryVariables,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
+import { PageDocument } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import type { MapItem, AppLanguage } from '@events-helsinki/components';
 import {
   useLocale,
@@ -14,17 +25,6 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
-import type { PageType } from 'react-helsinki-headless-cms';
-import {
-  PageContextProvider,
-  PageSection,
-  Page as RHHCPage,
-} from 'react-helsinki-headless-cms';
-import type {
-  PageQuery,
-  PageQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
-import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';

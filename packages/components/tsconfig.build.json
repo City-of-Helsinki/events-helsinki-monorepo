@@ -3,13 +3,48 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDir": "./src",
+    "baseUrl": "./src",
     "target": "esnext",
     "module": "esnext",
     "jsx": "react-jsx",
     "jsxFactory": "",
-    "jsxFragmentFactory": ""
+    "jsxFragmentFactory": "",
+    "paths": {
+      "@/test-utils/*": [
+        "../config/tests/*"
+      ],
+      "@/test-utils": [
+        "../config/tests/index"
+      ],
+      "@/lib/*": [
+        "./lib/*"
+      ],
+      "@events-helsinki/common-i18n/*": [
+        "../../common-i18n/src/*"
+      ],
+      "@events-helsinki/common-i18n": [
+        "../../common-i18n/src/index"
+      ],
+      "@events-helsinki/common-tests/*": [
+        "../../common-tests/src/*"
+      ],
+      "@events-helsinki/common-tests": [
+        "../../common-tests/src/index"
+      ],
+      "@city-of-helsinki/react-helsinki-headless-cms": [
+        "../../../node_modules/@city-of-helsinki/react-helsinki-headless-cms/dist/index.d.ts"
+      ],
+      "@city-of-helsinki/react-helsinki-headless-cms/apollo": [
+        "../../../node_modules/@city-of-helsinki/react-helsinki-headless-cms/dist/apollo.d.ts"
+      ],
+      "@city-of-helsinki/react-helsinki-headless-cms/nextjs": [
+        "../../../node_modules/@city-of-helsinki/react-helsinki-headless-cms/dist/nextjs.d.ts"
+      ]
+    }
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "**/*.stories.tsx",
     "**/*.stories.mdx",

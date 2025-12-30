@@ -1,3 +1,9 @@
+import {
+  BackgroundImage,
+  ContentContainer,
+  PageSection,
+  useConfig,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { Venue } from '@events-helsinki/components';
 import {
   useLocale,
@@ -17,12 +23,6 @@ import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import {
-  BackgroundImage,
-  ContentContainer,
-  PageSection,
-  useConfig,
-} from 'react-helsinki-headless-cms';
 
 import getVenueOpeningTimeDescription from '../utils/getVenueOpeningTimeDescription';
 import VenueKeywords from '../venueKeywords/VenueKeywords';

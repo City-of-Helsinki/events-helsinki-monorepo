@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router';
-import { useCallback } from 'react';
 import type {
   ArticleType,
   NavigationProps,
   PageType,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import { useCmsHelper, useCmsRoutedAppHelper } from '../../cmsHelperProvider';
 import { DEFAULT_LANGUAGE } from '../../constants';
 import isAppLanguage from '../../type-guards/is-app-language';

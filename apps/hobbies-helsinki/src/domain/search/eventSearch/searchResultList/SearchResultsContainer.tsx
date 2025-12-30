@@ -1,6 +1,9 @@
+import {
+  ContentContainer,
+  PageSection,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import { useSearchTranslation } from '@events-helsinki/components';
 import React from 'react';
-import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 
 import ResultsInfoContainer from './ResultsInfo';
 import styles from './searchResultList.module.scss';

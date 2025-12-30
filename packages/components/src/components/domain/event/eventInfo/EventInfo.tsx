@@ -1,3 +1,4 @@
+import { SecondaryLink } from '@city-of-helsinki/react-helsinki-headless-cms';
 import * as Sentry from '@sentry/browser';
 import FileSaver from 'file-saver';
 import {
@@ -12,7 +13,6 @@ import type { EventAttributes } from 'ics';
 import { createEvent } from 'ics';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { SecondaryLink } from 'react-helsinki-headless-cms';
 
 import IconDirections from '../../../../assets/icons/IconDirections';
 import InfoWithIcon from '../../../../components/infoWithIcon/InfoWithIcon';

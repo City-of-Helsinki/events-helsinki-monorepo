@@ -1,3 +1,4 @@
+import type { Config } from '@city-of-helsinki/react-helsinki-headless-cms';
 import type {
   EventListQuery,
   EventListQueryVariables,
@@ -6,7 +7,6 @@ import type {
   KeysOfArrayFields,
 } from '@events-helsinki/components';
 import type { FormEvent } from 'react';
-import type { Config } from 'react-helsinki-headless-cms';
 import type { SearchRoute } from '../../../types';
 
 export type SearchType = 'venue' | 'event' | 'course';

@@ -1,7 +1,7 @@
 import {
   LanguageCodeEnum,
   LanguageCodeFilterEnum,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import getLanguageCodeFilter from '../getLanguageCodeFilter';
 
 describe('getLanguageCodeFilter function', () => {

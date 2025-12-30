@@ -1,5 +1,5 @@
+import { TagComponent as Tag } from '@city-of-helsinki/react-helsinki-headless-cms';
 import React from 'react';
-import { TagComponent as Tag } from 'react-helsinki-headless-cms';
 
 import styles from './articleDetails.module.scss';
 

@@ -1,12 +1,12 @@
-import classNames from 'classnames';
-import { useTranslation } from 'next-i18next';
-import React from 'react';
 import {
   PageSection,
   ContentContainer,
   Link,
   HtmlToReact,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import classNames from 'classnames';
+import { useTranslation } from 'next-i18next';
+import React from 'react';
 
 import ShareLinks from '../../../../components/shareLinks/ShareLinks';
 import { EVENT_LOCATIONS } from '../../../../constants/event-constants';

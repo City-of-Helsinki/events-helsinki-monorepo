@@ -1,5 +1,20 @@
 import type { NormalizedCacheObject } from '@apollo/client/core/index.js';
 import type {
+  CollectionType,
+  PageType,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  getCollections,
+  getBreadcrumbsFromPage,
+  Page as RHHCPage,
+  useConfig,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type {
+  PageQuery,
+  PageQueryVariables,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
+import { PageDocument } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
+import type {
   AppLanguage,
   PreviewDataObject,
 } from '@events-helsinki/components';
@@ -25,18 +40,6 @@ import type {
 } from 'next';
 import dynamic from 'next/dynamic';
 import { useContext } from 'react';
-import type { CollectionType, PageType } from 'react-helsinki-headless-cms';
-import {
-  getCollections,
-  getBreadcrumbsFromPage,
-  Page as RHHCPage,
-  useConfig,
-} from 'react-helsinki-headless-cms';
-import type {
-  PageQuery,
-  PageQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
-import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import AppConfig from '../../domain/app/AppConfig';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';
 import cmsHelper from '../../domain/app/headlessCmsHelper';
@@ -44,7 +47,10 @@ import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTranslationsWithCommon';
 
 const RHHCPageContentNoSSR = dynamic(
-  () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
+  () =>
+    import('@city-of-helsinki/react-helsinki-headless-cms').then(
+      (mod) => mod.PageContent
+    ),
   {
     ssr: false,
   }

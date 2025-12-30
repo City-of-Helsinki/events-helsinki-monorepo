@@ -1,4 +1,8 @@
 import {
+  ContentContainer,
+  PageSection,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
   useCommonTranslation,
   Text,
   MAIN_CONTENT_ID,
@@ -14,7 +18,6 @@ import {
   IconMenuHamburger,
 } from 'hds-react';
 import React, { useRef, useState } from 'react';
-import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import styles from './searchHeader.module.scss';
 
 type Props = {

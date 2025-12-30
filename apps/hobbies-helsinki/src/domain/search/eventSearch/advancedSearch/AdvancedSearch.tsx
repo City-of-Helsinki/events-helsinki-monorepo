@@ -1,10 +1,10 @@
-import React from 'react';
 import {
   PageSection,
   ContentContainer,
   usePageContext,
   getTextFromHtml,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import React from 'react';
 
 import AdvancedSearchContext from './AdvancedSearchContext';
 import { AdvancedSearchForm } from './AdvancedSearchForm';

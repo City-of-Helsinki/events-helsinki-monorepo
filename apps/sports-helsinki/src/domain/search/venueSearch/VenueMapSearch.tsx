@@ -1,5 +1,5 @@
+import { usePageContext } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { useSearchTranslation } from '@events-helsinki/components';
-import { usePageContext } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
 import styles from './search.module.scss';
 import SimpleVenueSearch from './VenueSearch';

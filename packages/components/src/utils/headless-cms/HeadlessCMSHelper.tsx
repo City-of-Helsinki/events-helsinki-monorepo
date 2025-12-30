@@ -1,7 +1,3 @@
-import { format } from 'date-fns';
-import type { BreadcrumbListItem } from 'hds-react';
-import parse from 'html-react-parser';
-import React from 'react';
 import type {
   ArticleType,
   Category,
@@ -11,7 +7,7 @@ import type {
   GeneralCollectionType,
   CardProps,
   LanguageCodeEnum,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
   Card,
   getCollections,
@@ -27,7 +23,11 @@ import {
   ModuleItemTypeEnum,
   isLocationsSelectionCollection,
   LocationsSelectionCollection,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import { format } from 'date-fns';
+import type { BreadcrumbListItem } from 'hds-react';
+import parse from 'html-react-parser';
+import React from 'react';
 import type { AppLanguage } from '../../types';
 
 /**

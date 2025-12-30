@@ -1,3 +1,7 @@
+import {
+  Link,
+  SecondaryLink,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { Venue } from '@events-helsinki/components';
 import {
   InfoWithIcon,
@@ -20,7 +24,6 @@ import {
 } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
 import {
   getGoogleDirectionsUrl,
   getHSLDirectionsUrl,

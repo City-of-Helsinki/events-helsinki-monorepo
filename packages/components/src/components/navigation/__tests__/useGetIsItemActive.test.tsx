@@ -1,8 +1,8 @@
+import type { MenuItem } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { renderHook, waitFor } from '@testing-library/react';
 import mockRouter from 'next-router-mock';
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
 
-import type { MenuItem } from 'react-helsinki-headless-cms';
 import CmsHelperProvider from '../../../cmsHelperProvider/CmsHelperProvider';
 import { APP_LANGUAGES } from '../../../constants';
 import { HeadlessCMSHelper } from '../../../utils/headless-cms/HeadlessCMSHelper';

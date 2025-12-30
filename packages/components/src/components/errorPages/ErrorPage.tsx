@@ -1,7 +1,7 @@
+import { Page as RHHCPage } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { Button, IconCrossCircle, IconSize } from 'hds-react';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
-import { Page as RHHCPage } from 'react-helsinki-headless-cms';
 import { HARDCODED_LANGUAGES, MAIN_CONTENT_ID } from '../../constants';
 import { useResilientTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';

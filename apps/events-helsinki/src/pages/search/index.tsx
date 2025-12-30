@@ -1,3 +1,14 @@
+import type { PageType } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  PageContextProvider,
+  Page as RHHCPage,
+  getBreadcrumbsFromPage,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type {
+  PageQuery,
+  PageQueryVariables,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
+import { PageDocument } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   NavigationContext,
@@ -17,17 +28,6 @@ import type { GetStaticPropsContext, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useRef, useEffect, useContext } from 'react';
-import type { PageType } from 'react-helsinki-headless-cms';
-import {
-  PageContextProvider,
-  Page as RHHCPage,
-  getBreadcrumbsFromPage,
-} from 'react-helsinki-headless-cms';
-import type {
-  PageQuery,
-  PageQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
-import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getEventsStaticProps from '../../domain/app/getEventsStaticProps';

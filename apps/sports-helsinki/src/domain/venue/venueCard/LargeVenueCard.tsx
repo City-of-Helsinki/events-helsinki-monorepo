@@ -1,4 +1,10 @@
 import {
+  BackgroundImage,
+  LinkBox,
+  SecondaryLink,
+  TagComponent as Tag,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
   useLocale,
   getLargeEventCardId,
   useVenueTranslation,
@@ -10,12 +16,6 @@ import {
 import { IconLocation, IconSize } from 'hds-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import {
-  BackgroundImage,
-  LinkBox,
-  SecondaryLink,
-  TagComponent as Tag,
-} from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';
 import styles from './largeVenueCard.module.scss';

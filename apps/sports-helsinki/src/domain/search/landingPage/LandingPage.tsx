@@ -1,9 +1,12 @@
-import React from 'react';
 import type {
   PageContentLayoutProps,
   PageType,
-} from 'react-helsinki-headless-cms';
-import { PageSection, ContentContainer } from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  PageSection,
+  ContentContainer,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import React from 'react';
 
 import LandingPageSearch from '../landingPageSearch/LandingPageSearch';
 import styles from './landingPage.module.scss';

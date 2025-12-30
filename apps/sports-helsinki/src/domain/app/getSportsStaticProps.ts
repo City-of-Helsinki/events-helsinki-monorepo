@@ -1,4 +1,5 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { MenuDocument } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import type { Menu, Language } from '@events-helsinki/components';
 import {
   DEFAULT_FOOTER_MENU_NAME,
@@ -8,7 +9,6 @@ import {
   DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
-import { MenuDocument } from 'react-helsinki-headless-cms/apollo';
 import { staticGenerationLogger } from '../../logger';
 import initializeSportsApolloClient from '../clients/sportsApolloClient';
 import AppConfig from './AppConfig';

@@ -1,3 +1,4 @@
+import { useConfig } from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { QueryEventListArgs } from '@events-helsinki/components';
 import {
   useCmsRoutedAppHelper,
@@ -21,7 +22,6 @@ import { ButtonPresetTheme, ButtonVariant } from 'hds-react';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React from 'react';
-import { useConfig } from 'react-helsinki-headless-cms';
 import { scroller } from 'react-scroll';
 import { toast } from 'react-toastify';
 

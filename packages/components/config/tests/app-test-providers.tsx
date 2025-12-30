@@ -8,6 +8,11 @@ import { useApolloClient } from '@apollo/client/react/index.js';
 import { MockedProvider } from '@apollo/client/testing/index.js';
 import type { MockedResponse } from '@apollo/client/testing/index.js';
 
+import {
+  ConfigProvider as RHHCConfigProvider,
+  defaultConfig as rhhcDefaultConfig,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type { Config as RHHCConfig } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { initTestI18n as i18n } from '@events-helsinki/common-i18n';
 import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 import Head from 'next/head';
@@ -15,11 +20,6 @@ import Link from 'next/link';
 import type { NextRouter } from 'next/router';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import {
-  ConfigProvider as RHHCConfigProvider,
-  defaultConfig as rhhcDefaultConfig,
-} from 'react-helsinki-headless-cms';
-import type { Config as RHHCConfig } from 'react-helsinki-headless-cms';
 import { I18nextTestStubProvider } from '@/test-utils';
 
 import {

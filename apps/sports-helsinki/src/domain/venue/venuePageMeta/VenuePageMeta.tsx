@@ -1,7 +1,7 @@
+import { useConfig } from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { Venue } from '@events-helsinki/components';
 import Head from 'next/head';
 import React from 'react';
-import { useConfig } from 'react-helsinki-headless-cms';
 
 interface Props {
   venue: Venue;

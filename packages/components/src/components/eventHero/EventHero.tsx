@@ -1,3 +1,9 @@
+import {
+  BackgroundImage,
+  ContentContainer,
+  PageSection,
+  useConfig,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import classNames from 'classnames';
 import {
   Button,
@@ -11,12 +17,6 @@ import {
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import {
-  BackgroundImage,
-  ContentContainer,
-  PageSection,
-  useConfig,
-} from 'react-helsinki-headless-cms';
 
 import buttonStyles from '../../components/button/button.module.scss';
 import {

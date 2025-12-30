@@ -1,8 +1,8 @@
+import type { Menu } from '@city-of-helsinki/react-helsinki-headless-cms';
+import { useMenuQuery } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import { Footer, Link, Logo, logoFi, LogoSize, logoSv } from 'hds-react';
 import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
-import type { Menu } from 'react-helsinki-headless-cms';
-import { useMenuQuery } from 'react-helsinki-headless-cms/apollo';
 import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
 import { useCommonTranslation, useResilientTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';

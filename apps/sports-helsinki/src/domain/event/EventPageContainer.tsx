@@ -1,3 +1,4 @@
+import { Link } from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
   LoadingSpinner,
   useLocale,
@@ -17,7 +18,6 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
-import { Link } from 'react-helsinki-headless-cms';
 
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';

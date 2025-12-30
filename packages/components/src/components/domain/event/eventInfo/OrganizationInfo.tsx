@@ -1,8 +1,8 @@
+import { SecondaryLink } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { IconFaceSmile, IconLayers } from 'hds-react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
-import { SecondaryLink } from 'react-helsinki-headless-cms';
 import InfoWithIcon from '../../../../components/infoWithIcon/InfoWithIcon';
 import LoadingSpinner from '../../../../components/spinner/LoadingSpinner';
 import { useCommonTranslation } from '../../../../hooks';

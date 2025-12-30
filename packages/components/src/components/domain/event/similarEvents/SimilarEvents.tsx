@@ -1,10 +1,10 @@
-import React from 'react';
-import type { CollectionProps } from 'react-helsinki-headless-cms';
+import type { CollectionProps } from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
   Collection,
   PageSection,
   ContentContainer,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import React from 'react';
 import useEventTranslation from '../../../../hooks/useEventTranslation';
 import { useAppRoutingContext } from '../../../../routingUrlProvider';
 import type { EventFields } from '../../../../types/event-types';

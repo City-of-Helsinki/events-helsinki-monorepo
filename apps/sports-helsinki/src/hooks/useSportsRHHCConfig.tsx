@@ -1,4 +1,12 @@
 import type { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import type {
+  CardProps,
+  Config,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  defaultConfig as rhhcDefaultConfig,
+  ModuleItemTypeEnum,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { EventFieldsFragment } from '@events-helsinki/components';
 import {
   useResilientTranslation,
@@ -13,11 +21,6 @@ import { ButtonVariant } from 'hds-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
-import type { CardProps, Config } from 'react-helsinki-headless-cms';
-import {
-  defaultConfig as rhhcDefaultConfig,
-  ModuleItemTypeEnum,
-} from 'react-helsinki-headless-cms';
 import { ROUTES } from '../constants';
 import AppConfig from '../domain/app/AppConfig';
 import routerHelper from '../domain/app/routerHelper';

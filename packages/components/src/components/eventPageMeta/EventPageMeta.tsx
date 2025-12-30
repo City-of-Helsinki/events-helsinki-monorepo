@@ -1,6 +1,6 @@
+import { useConfig } from '@city-of-helsinki/react-helsinki-headless-cms';
 import Head from 'next/head';
 import React from 'react';
-import { useConfig } from 'react-helsinki-headless-cms';
 import useLocale from '../../hooks/useLocale';
 import type { EventFields } from '../../types/event-types';
 import { getEventFields } from '../../utils/eventUtils';

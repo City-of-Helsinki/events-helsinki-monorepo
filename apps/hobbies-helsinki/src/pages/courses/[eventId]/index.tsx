@@ -1,3 +1,8 @@
+import type { PageType } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  Page as RHHCPage,
+  getBreadcrumbsFromPage,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
   EventDetailsDocument,
   NavigationContext,
@@ -21,11 +26,6 @@ import type {
 import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import React, { useContext } from 'react';
-import type { PageType } from 'react-helsinki-headless-cms';
-import {
-  Page as RHHCPage,
-  getBreadcrumbsFromPage,
-} from 'react-helsinki-headless-cms';
 import { ROUTES } from '../../../constants';
 import AppConfig from '../../../domain/app/AppConfig';
 import getHobbiesStaticProps from '../../../domain/app/getHobbiesStaticProps';

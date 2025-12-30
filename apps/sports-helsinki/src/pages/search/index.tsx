@@ -1,3 +1,14 @@
+import type { PageType } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  Page as RHHCPage,
+  getBreadcrumbsFromPage,
+  getTextFromHtml,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type {
+  PageQuery,
+  PageQueryVariables,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
+import { PageDocument } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import type { PreviewDataObject } from '@events-helsinki/components';
 import {
   NavigationContext,
@@ -16,17 +27,6 @@ import type { BreadcrumbListItem } from 'hds-react';
 import type { GetStaticPropsContext, NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import React, { useContext } from 'react';
-import type { PageType } from 'react-helsinki-headless-cms';
-import {
-  Page as RHHCPage,
-  getBreadcrumbsFromPage,
-  getTextFromHtml,
-} from 'react-helsinki-headless-cms';
-import type {
-  PageQuery,
-  PageQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
-import { PageDocument } from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';

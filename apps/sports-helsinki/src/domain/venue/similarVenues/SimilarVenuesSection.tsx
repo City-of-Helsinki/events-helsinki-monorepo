@@ -1,3 +1,9 @@
+import type { CollectionProps } from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  Collection,
+  ContentContainer,
+  PageSection,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { Venue } from '@events-helsinki/components';
 import {
   useVenueTranslation,
@@ -6,12 +12,6 @@ import {
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
-import type { CollectionProps } from 'react-helsinki-headless-cms';
-import {
-  Collection,
-  ContentContainer,
-  PageSection,
-} from 'react-helsinki-headless-cms';
 import { useSimilarVenuesQuery } from '../../../domain/event/queryUtils';
 import useVenueCards from '../useVenueCards';
 import styles from './similarVenues.module.scss';

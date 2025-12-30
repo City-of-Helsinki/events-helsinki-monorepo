@@ -1,7 +1,7 @@
+import type { PageType } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { render } from '@testing-library/react';
 import router from 'next-router-mock';
 import React from 'react';
-import type { PageType } from 'react-helsinki-headless-cms';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import RouteMeta from '../RouteMeta';

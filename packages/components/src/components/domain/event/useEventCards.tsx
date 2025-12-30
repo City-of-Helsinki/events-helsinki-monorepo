@@ -1,9 +1,9 @@
-import React from 'react';
 import {
   Card,
   getEventCardProps,
   useConfig,
-} from 'react-helsinki-headless-cms';
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import React from 'react';
 import useClickCapture from '../../../hooks/useClickCapture';
 import useLocale from '../../../hooks/useLocale';
 import type { EventFields } from '../../../types/event-types';

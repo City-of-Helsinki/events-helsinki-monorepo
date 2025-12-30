@@ -1,10 +1,10 @@
 import { ApolloProvider as BaseApolloProvider } from '@apollo/client';
+import { ConfigProvider as RHHCConfigProvider } from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
   ApolloErrorNotification,
   useApolloErrorHandler,
 } from '@events-helsinki/components';
 import React from 'react';
-import { ConfigProvider as RHHCConfigProvider } from 'react-helsinki-headless-cms';
 import useHobbiesRHHCConfig from '../../hooks/useHobbiesRHHCConfig';
 import { useHobbiesApolloClient } from '../clients/hobbiesApolloClient';
 

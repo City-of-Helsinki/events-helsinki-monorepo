@@ -1,6 +1,6 @@
+import type { NavigationProps } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { resolveHref } from 'next/dist/client/resolve-href';
 import { useRouter } from 'next/router';
-import type { NavigationProps } from 'react-helsinki-headless-cms';
 import { useCmsRoutedAppHelper } from '../../cmsHelperProvider';
 import { useLocale } from '../../hooks';
 

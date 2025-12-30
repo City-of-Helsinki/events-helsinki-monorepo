@@ -1,4 +1,8 @@
 import {
+  ContentContainer,
+  PageSection,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
   useSearchTranslation,
   EventTypeId,
   getURLSearchParamsFromAsPath,
@@ -7,7 +11,6 @@ import {
 import { Button, ButtonPresetTheme, ButtonVariant } from 'hds-react';
 import { useRouter } from 'next/router';
 import React, { useMemo } from 'react';
-import { ContentContainer, PageSection } from 'react-helsinki-headless-cms';
 import { SEARCH_ROUTES } from '../../../constants';
 import styles from './combinedSearchPage.module.scss';
 import { useSearchTabResultCounts } from './hooks';

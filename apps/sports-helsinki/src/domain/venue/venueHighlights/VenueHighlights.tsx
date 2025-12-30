@@ -1,7 +1,10 @@
 import { createHash } from 'crypto';
+import {
+  HtmlToReact,
+  Link,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { Venue, VenueConnection } from '@events-helsinki/components';
 import React from 'react';
-import { HtmlToReact, Link } from 'react-helsinki-headless-cms';
 import styles from './venueHighlights.module.scss';
 
 type HighlightConnection = Exclude<VenueConnection, 'sectionType' | 'name'> & {

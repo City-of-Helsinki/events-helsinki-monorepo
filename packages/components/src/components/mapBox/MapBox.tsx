@@ -1,7 +1,10 @@
+import {
+  Link,
+  SecondaryLink,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import { IconLocation, useGroupConsent } from 'hds-react';
 import router from 'next/router';
 import React from 'react';
-import { Link, SecondaryLink } from 'react-helsinki-headless-cms';
 import { useCookieConfigurationContext } from '../../cookieConfigurationProvider';
 import { useCommonTranslation } from '../../hooks';
 import CookiesRequired from '../cookieConsent/CookiesRequired';

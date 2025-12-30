@@ -1,4 +1,4 @@
-import { LanguageCodeEnum } from 'react-helsinki-headless-cms';
+import { LanguageCodeEnum } from '@city-of-helsinki/react-helsinki-headless-cms';
 import type { AppLanguage } from '../types';
 
 const appLanguageToLanguageCode: Record<AppLanguage, LanguageCodeEnum> = {

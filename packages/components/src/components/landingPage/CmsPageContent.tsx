@@ -1,4 +1,7 @@
-import { HtmlToReact, usePageContext } from 'react-helsinki-headless-cms';
+import {
+  HtmlToReact,
+  usePageContext,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 
 type CmsPageContentProps = {
   /**

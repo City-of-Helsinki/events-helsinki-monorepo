@@ -1,6 +1,9 @@
+import type {
+  PageType,
+  ArticleType,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import type { PageType, ArticleType } from 'react-helsinki-headless-cms';
 import useCanonicalUrl from './useCanonicalUrl';
 
 type Props = {

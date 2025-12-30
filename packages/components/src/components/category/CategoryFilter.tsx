@@ -1,8 +1,8 @@
+import { Link } from '@city-of-helsinki/react-helsinki-headless-cms';
 import classNames from 'classnames';
 import { IconAngleRight } from 'hds-react';
 import type { FunctionComponent } from 'react';
 import React from 'react';
-import { Link } from 'react-helsinki-headless-cms';
 import type { AppCategory } from '../../types';
 import styles from './categoryFilter.module.scss';
 

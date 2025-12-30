@@ -1,4 +1,22 @@
 import type { NormalizedCacheObject } from '@apollo/client';
+import type {
+  CollectionType,
+  ArticleType,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import {
+  getCollections,
+  Page as RHHCPage,
+  useConfig,
+  getBreadcrumbsFromPage,
+} from '@city-of-helsinki/react-helsinki-headless-cms';
+import type {
+  ArticleQuery,
+  ArticleQueryVariables,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
+import {
+  ArticleDocument,
+  useCategoriesQuery,
+} from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import {
   NavigationContext,
   ShareLinks,
@@ -35,21 +53,6 @@ import type {
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
-import type { CollectionType, ArticleType } from 'react-helsinki-headless-cms';
-import {
-  getCollections,
-  Page as RHHCPage,
-  useConfig,
-  getBreadcrumbsFromPage,
-} from 'react-helsinki-headless-cms';
-import type {
-  ArticleQuery,
-  ArticleQueryVariables,
-} from 'react-helsinki-headless-cms/apollo';
-import {
-  ArticleDocument,
-  useCategoriesQuery,
-} from 'react-helsinki-headless-cms/apollo';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';
 import getSportsStaticProps from '../../domain/app/getSportsStaticProps';
@@ -60,7 +63,10 @@ import serverSideTranslationsWithCommon from '../../domain/i18n/serverSideTransl
 const CATEGORIES_AMOUNT = 20;
 
 const RHHCPageContentNoSSR = dynamic(
-  () => import('react-helsinki-headless-cms').then((mod) => mod.PageContent),
+  () =>
+    import('@city-of-helsinki/react-helsinki-headless-cms').then(
+      (mod) => mod.PageContent
+    ),
   {
     ssr: false,
   }

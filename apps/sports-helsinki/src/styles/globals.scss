@@ -72,3 +72,8 @@ button {
     font-size: var(--fontsize-heading-xl-mobile) !important;
   }
 }
+
+article figure {
+  /* TODO: remove when fixed in HCRC */
+  display: grid !important;
+}

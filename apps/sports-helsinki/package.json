@@ -50,7 +50,7 @@
     "@apollo/client": "^3.11.10",
     "@apollo/datasource-rest": "6.4.1",
     "@apollo/subgraph": "2.11.2",
-    "@city-of-helsinki/react-helsinki-headless-cms": "3.0.0",
+    "@city-of-helsinki/react-helsinki-headless-cms": "3.0.1",
     "@events-helsinki/common-i18n": "workspace:^",
     "@events-helsinki/components": "workspace:^",
     "@sentry/browser": "9.38.0",

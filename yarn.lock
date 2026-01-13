@@ -1939,9 +1939,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@city-of-helsinki/react-helsinki-headless-cms@npm:3.0.0":
-  version: 3.0.0
-  resolution: "@city-of-helsinki/react-helsinki-headless-cms@npm:3.0.0"
+"@city-of-helsinki/react-helsinki-headless-cms@npm:3.0.1":
+  version: 3.0.1
+  resolution: "@city-of-helsinki/react-helsinki-headless-cms@npm:3.0.1"
   dependencies:
     classnames: "npm:^2.5.1"
     date-fns: "npm:^4.1.0"
@@ -1962,7 +1962,7 @@ __metadata:
   peerDependenciesMeta:
     "@apollo/client":
       optional: true
-  checksum: e5afc402fd16fd2214aefdf0f48bacf8067631f0ba8dca8bf821fd2f2b06d89f5318f926c2fbbc33def1e913faa3029387380510b693fddcac5f6a7b3142fcca
+  checksum: b4ff811c158acb7e8243eeab410164aec229d6a2fb18ea816ee6fdf777ff0490d7f590d524f79e31b34a463270642531e390a750bd4547bb55969a182c5bb727
   languageName: node
   linkType: hard
 
@@ -3122,7 +3122,7 @@ __metadata:
     "@babel/preset-react": "npm:7.27.1"
     "@babel/preset-typescript": "npm:7.27.1"
     "@changey/react-leaflet-markercluster": "npm:4.0.0-rc1"
-    "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.0"
+    "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.1"
     "@events-helsinki/common-i18n": "workspace:^"
     "@events-helsinki/common-tests": "workspace:^"
     "@events-helsinki/eslint-config-bases": "workspace:^"
@@ -13702,7 +13702,7 @@ __metadata:
   resolution: "events-helsinki@workspace:apps/events-helsinki"
   dependencies:
     "@apollo/client": "npm:^3.11.10"
-    "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.0"
+    "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.1"
     "@commitlint/cli": "npm:^19.8.1"
     "@commitlint/config-conventional": "npm:^19.8.1"
     "@events-helsinki/common-i18n": "workspace:^"
@@ -15444,7 +15444,7 @@ __metadata:
   resolution: "hobbies-helsinki@workspace:apps/hobbies-helsinki"
   dependencies:
     "@apollo/client": "npm:^3.11.10"
-    "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.0"
+    "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.1"
     "@commitlint/cli": "npm:^19.8.1"
     "@commitlint/config-conventional": "npm:^19.8.1"
     "@events-helsinki/common-i18n": "workspace:^"
@@ -23824,7 +23824,7 @@ __metadata:
     "@apollo/client": "npm:^3.11.10"
     "@apollo/datasource-rest": "npm:6.4.1"
     "@apollo/subgraph": "npm:2.11.2"
-    "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.0"
+    "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.1"
     "@commitlint/cli": "npm:^19.8.1"
     "@commitlint/config-conventional": "npm:^19.8.1"
     "@events-helsinki/common-i18n": "workspace:^"

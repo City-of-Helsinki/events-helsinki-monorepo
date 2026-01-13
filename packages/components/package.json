@@ -41,7 +41,7 @@
   "dependencies": {
     "@apollo/client": "^3.11.10",
     "@changey/react-leaflet-markercluster": "4.0.0-rc1",
-    "@city-of-helsinki/react-helsinki-headless-cms": "3.0.0",
+    "@city-of-helsinki/react-helsinki-headless-cms": "3.0.1",
     "@jonkoops/matomo-tracker-react": "0.7.0",
     "@next/env": "15.5.5",
     "@react-leaflet/core": "2.1.0",

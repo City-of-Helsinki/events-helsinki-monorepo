@@ -78,3 +78,11 @@ article figure {
   /* TODO: remove when fixed in HCRC */
   display: grid !important;
 }
+
+aside {
+  div > button > div {
+    /* TODO: remove when fixed in HCRC */
+    width: 40px !important;
+    height: 40px !important;
+  }
+}

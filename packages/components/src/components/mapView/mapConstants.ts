@@ -1,7 +1,9 @@
 import type { LatLngBoundsLiteral, LatLngExpression } from 'leaflet';
 
-export const TILE_URL =
-  'http://tiles.hel.ninja/styles/hel-osm-bright/{z}/{x}/{y}.png';
+export const TILE_URL_FI =
+  'https://maptiles.api.hel.fi/styles/hel-osm-bright-fi/{z}/{x}/{y}.png';
+export const TILE_URL_SV =
+  'https://maptiles.api.hel.fi/styles/hel-osm-bright-sv/{z}/{x}/{y}.png';
 
 export const DEFAULT_POSITION: LatLngExpression = [60.2087778, 24.9980714];
 

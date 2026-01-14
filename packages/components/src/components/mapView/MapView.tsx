@@ -8,7 +8,7 @@ import React, { useMemo, useRef, useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import '@changey/react-leaflet-markercluster/dist/styles.min.css';
-import { useSearchTranslation } from '../../hooks';
+import { useLocale, useSearchTranslation } from '../../hooks';
 import type { MapItem } from '../../types';
 import Text from '../text/Text';
 import { A11yHiddenDivIcon } from './A11yHiddenIcon';
@@ -19,7 +19,8 @@ import {
   FOCUSED_ITEM_DEFAULT_ZOOM,
   MAX_ZOOM,
   MIN_ZOOM,
-  TILE_URL,
+  TILE_URL_FI,
+  TILE_URL_SV,
 } from './mapConstants';
 import styles from './mapView.module.scss';
 import venueIcon from './VenueIcon';
@@ -52,6 +53,7 @@ type Props = {
 
 function MapView({ items = [], center, zoom, focusedItemId }: Props) {
   const { t } = useSearchTranslation();
+  const locale = useLocale();
   const focusedItem = useMemo(
     () => items.find((item) => item.id === focusedItemId),
     [items, focusedItemId]
@@ -124,6 +126,8 @@ function MapView({ items = [], center, zoom, focusedItemId }: Props) {
     [items, focusedItemId, t]
   );
 
+  const tileUrl = locale == 'sv' ? TILE_URL_SV : TILE_URL_FI;
+
   return (
     <div
       aria-hidden={false}
@@ -143,7 +147,7 @@ function MapView({ items = [], center, zoom, focusedItemId }: Props) {
           attribution={`&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> ${t(
             'search:openStreetMapContributors'
           )}`}
-          url={TILE_URL}
+          url={tileUrl}
         />
         <MarkerClusterGroup
           chunkedLoading

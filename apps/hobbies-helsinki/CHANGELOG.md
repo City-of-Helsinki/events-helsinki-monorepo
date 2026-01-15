@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.0.3...hobbies-helsinki-v3.1.0) (2026-01-15)
+
+
+### Features
+
+* Use organisation scoped HCRC-lib ([8c1affa](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8c1affa7dc99209993ebdf6acea39b1ecf520f1d))
+
+
+### Bug Fixes
+
+* Upgrade HCRC-lib to fix CMS page table figure styles ([f0a62a7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f0a62a7576e52eb892e2fefccd0f1bc5c140c64c))
+
 ## [3.0.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.0.2...hobbies-helsinki-v3.0.3) (2025-12-10)
 
 

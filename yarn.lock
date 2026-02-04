@@ -3195,7 +3195,7 @@ __metadata:
     jsdom: "npm:26.1.0"
     leaflet: "npm:1.9.4"
     leaflet.markercluster: "npm:1.5.3"
-    lodash: "npm:4.17.21"
+    lodash: "npm:4.17.23"
     microbundle: "npm:0.15.1"
     next: "npm:15.5.11"
     next-i18next: "npm:15.4.2"
@@ -3341,7 +3341,7 @@ __metadata:
     express: "npm:5.1.0"
     graphql-depth-limit: "npm:1.1.0"
     husky: "npm:^9.1.7"
-    lodash: "npm:4.17.21"
+    lodash: "npm:4.17.23"
     nodemon: "npm:3.1.10"
     prettier: "npm:^3.6.2"
     ts-loader: "npm:9.5.2"
@@ -13614,7 +13614,7 @@ __metadata:
     graphql: "npm:^16.11.0"
     graphql-tag: "npm:2.12.6"
     husky: "npm:^9.1.7"
-    lodash: "npm:4.17.21"
+    lodash: "npm:4.17.23"
     nodemon: "npm:3.1.10"
     prettier: "npm:^3.6.2"
     ts-loader: "npm:9.5.2"
@@ -13772,7 +13772,7 @@ __metadata:
     identity-obj-proxy: "npm:^3.0.0"
     jest-date-mock: "npm:^1.0.10"
     k6: "npm:0.0.0"
-    lodash: "npm:4.17.21"
+    lodash: "npm:4.17.23"
     msw: "npm:^2.10.4"
     next: "npm:15.5.11"
     next-i18next: "npm:15.4.2"
@@ -15514,7 +15514,7 @@ __metadata:
     identity-obj-proxy: "npm:^3.0.0"
     jest-date-mock: "npm:^1.0.10"
     k6: "npm:0.0.0"
-    lodash: "npm:4.17.21"
+    lodash: "npm:4.17.23"
     msw: "npm:^2.10.4"
     next: "npm:15.5.11"
     next-i18next: "npm:15.4.2"
@@ -17893,7 +17893,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:4.17.21, lodash@npm:4.6.1 || ^4.16.1, lodash@npm:^4.14.0, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0, lodash@npm:~4.17.0":
+"lodash@npm:4.17.23":
+  version: 4.17.23
+  resolution: "lodash@npm:4.17.23"
+  checksum: a36308f39d9dd3e35430ee0f4270ad3d3be27c8f27e72bc3a106e91dd1cdf414856a6b07f7198a18c52eb7af8e8093a0b6195cbd11627a084c22490c4b57245e
+  languageName: node
+  linkType: hard
+
+"lodash@npm:4.6.1 || ^4.16.1, lodash@npm:^4.14.0, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.7.0, lodash@npm:~4.17.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 3ac18e92108d68f88429fcddee609e42cf2b653583d9bac22308815a4cd6b185b89a0ad0d9b0c670c371d9d6b61571a98fee6b36e1db14e52766ca253ed9cba0
@@ -23898,7 +23905,7 @@ __metadata:
     jest-date-mock: "npm:^1.0.10"
     k6: "npm:0.0.0"
     leaflet: "npm:1.9.4"
-    lodash: "npm:4.17.21"
+    lodash: "npm:4.17.23"
     msw: "npm:^2.10.4"
     next: "npm:15.5.11"
     next-i18next: "npm:15.4.2"
@@ -26265,7 +26272,7 @@ __metadata:
     graphql: "npm:^16.11.0"
     graphql-tag: "npm:2.12.6"
     husky: "npm:^9.1.7"
-    lodash: "npm:4.17.21"
+    lodash: "npm:4.17.23"
     nodemon: "npm:3.1.10"
     prettier: "npm:^3.6.2"
     ts-loader: "npm:9.5.2"

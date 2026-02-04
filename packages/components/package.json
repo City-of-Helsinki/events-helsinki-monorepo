@@ -70,7 +70,7 @@
     "jsdom": "26.1.0",
     "leaflet": "1.9.4",
     "leaflet.markercluster": "1.5.3",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "next": "15.5.11",
     "next-i18next": "15.4.2",
     "postcss": "^8.5.6",

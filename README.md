@@ -56,8 +56,6 @@
   - [8.1 Conventional Commits](#81-conventional-commits)
   - [8.2 Releasable units](#82-releasable-units)
   - [8.3 Configuration](#83-configuration)
-  - [8.4 Troubleshoting release-please](#84-troubleshoting-release-please)
-    - [Fix merge conflicts by running release-please -action manually](#fix-merge-conflicts-by-running-release-please--action-manually)
 - [9. FAQ](#9-faq)
   - [9.1 Monorepo](#91-monorepo)
     - [Exact vs semver dependencies](#exact-vs-semver-dependencies)
@@ -601,31 +599,6 @@ See all the options here: [release-please docs](https://github.com/googleapis/re
 The manifest file is located in the [release-please-manifest.json](./.release-please-manifest.json) file.
 
 When adding a new app, add it to both the [release-please-config.json](./release-please-config.json) and [release-please-manifest.json](./.release-please-manifest.json) file with the current version of the app. After this, release-please will keep track of versions with [release-please-manifest.json](./.release-please-manifest.json).
-
-### 8.4 Troubleshoting release-please
-
-If you were expecting a new release PR to be created or old one to be updated, but nothing happened, there's probably one of the older release PR's in pending state or action didn't run.
-
-1. Check if the release action ran for the last merge to main. If it didn't, run the action manually with a label.
-2. Check if there's any open release PR. If there is, the work is now included on this one (this is the normal scenario).
-3. If you do not see any open release PR related to the work, check if any of the closed PR's are labeled with `autorelease: pending` - ie. someone might have closed a release PR manually. Change the closed PR's label to `autorelease: tagged`. Then go and re-run the last merge workflow to trigger the release action - a new release PR should now appear.
-4. Finally check the output of the release action. Sometimes the bot can't parse the commit message and there is a notification about this in the action log. If this happens, it won't include the work in the commit either. You can fix this by changing the commit message to follow the [Conventional Commits](https://www.conventionalcommits.org/) format and rerun the action.
-
-**Important!** If you have closed a release PR manually, you need to change the label of closed release PR to `autorelease: tagged`. Otherwise, the release action will not create a new release PR.
-
-**Important!** Extra label will force release-please to re-generate PR's. This is done when action is run manually with prlabel -option
-
-Sometimes there might be a merge conflict in release PR - this should resolve itself on the next push to main. It is possible run release-please action manually with label, it should recreate the PR's. You can also resolve it manually, by updating the [release-please-manifest.json](./.release-please-manifest.json) file.
-
-#### Fix merge conflicts by running release-please -action manually
-
-1. Open [release-please github action](https://github.com/City-of-Helsinki/events-helsinki-monorepo/actions/workflows/release-please.yml)
-2. Click **Run workflow**
-3. Check Branch is **main**
-4. Leave label field empty. New label is not needed to fix merge issues
-5. Click **Run workflow** -button
-
-There's also a CLI for debugging and manually running releases available for release-please: [release-please-cli](https://github.com/googleapis/release-please/blob/main/docs/cli.md)
 
 ## 9. FAQ
 

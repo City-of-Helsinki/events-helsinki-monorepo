@@ -168,7 +168,7 @@
     "webpack-node-externals": "3.0.0"
   },
   "engines": {
-    "node": ">=22.0.0",
+    "node": ">=22.2.0",
     "npm": "please-use-yarn",
     "yarn": ">=1.22.0"
   }

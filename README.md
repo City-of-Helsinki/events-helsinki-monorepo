@@ -56,8 +56,6 @@
   - [8.1 Conventional Commits](#81-conventional-commits)
   - [8.2 Releasable units](#82-releasable-units)
   - [8.3 Configuration](#83-configuration)
-  - [8.4 Troubleshoting release-please](#84-troubleshoting-release-please)
-    - [Fix merge conflicts by running release-please -action manually](#fix-merge-conflicts-by-running-release-please--action-manually)
 - [9. FAQ](#9-faq)
   - [9.1 Monorepo](#91-monorepo)
     - [Exact vs semver dependencies](#exact-vs-semver-dependencies)

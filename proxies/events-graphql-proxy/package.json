@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@apollo/datasource-rest": "6.4.1",
-    "@apollo/server": "^4.12.2",
+    "@apollo/server": "^5.4.0",
     "@apollo/subgraph": "2.11.2",
     "@events-helsinki/graphql-proxy-server": "workspace:^",
     "@sentry/node": "9.38.0",

@@ -5,7 +5,10 @@ import {
 } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
 
-import { COURSE_DEFAULT_SEARCH_FILTERS } from '../constants';
+import {
+  COURSE_DEFAULT_SEARCH_FILTERS,
+  HOBBIES_EXCLUDED_KEYWORDS,
+} from '../constants';
 import {
   clampAgeInput,
   getEventSearchVariables,
@@ -140,6 +143,27 @@ describe('getEventSearchVariables function', () => {
     });
     expect(start7).toBe('now');
     expect(end7).toBe('2020-10-15');
+  });
+
+  it('should always include HOBBIES_EXCLUDED_KEYWORDS in keywordNot', () => {
+    const { keywordNot } = getEventSearchVariables({
+      ...defaultParams,
+      params: new URLSearchParams(),
+    });
+    expect(keywordNot).toEqual(expect.arrayContaining(HOBBIES_EXCLUDED_KEYWORDS));
+  });
+
+  it('should merge user-provided keywordNot with HOBBIES_EXCLUDED_KEYWORDS', () => {
+    const userKeyword = 'yso:p1234';
+    const { keywordNot } = getEventSearchVariables({
+      ...defaultParams,
+      params: new URLSearchParams(
+        `?${EVENT_SEARCH_FILTERS.KEYWORD_NOT}=${userKeyword}`
+      ),
+    });
+    expect(keywordNot).toEqual(
+      expect.arrayContaining([userKeyword, ...HOBBIES_EXCLUDED_KEYWORDS])
+    );
   });
 });
 

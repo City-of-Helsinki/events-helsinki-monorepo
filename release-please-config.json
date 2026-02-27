@@ -2,6 +2,22 @@
   "bootstrap-sha": "1acd804496b8984c9a463fea07468d13443f72c4",
   "separate-pull-requests": true,
   "sequential-calls": true,
+  "changelog-sections": [
+    {"type": "feat", "section": "Features"},
+    {"type": "fix", "section": "Bug Fixes"},
+    {"type": "perf", "section": "Performance Improvements"},
+    {"type": "deps", "section": "Dependencies"},
+    {"type": "build", "scope": "deps", "section": "Dependencies"},
+    {"type": "chore", "scope": "deps", "section": "Dependencies"},
+    {"type": "revert", "section": "Reverts"},
+    {"type": "docs", "section": "Documentation"},
+    {"type": "style", "section": "Styles", "hidden": true},
+    {"type": "chore", "section": "Miscellaneous Chores", "hidden": true},
+    {"type": "refactor", "section": "Code Refactoring", "hidden": true},
+    {"type": "test", "section": "Tests", "hidden": true},
+    {"type": "build", "section": "Build System", "hidden": true},
+    {"type": "ci", "section": "Continuous Integration", "hidden": true}
+  ],
   "packages": {
     "apps/hobbies-helsinki": { "release-type": "node" },
     "apps/events-helsinki": { "release-type": "node" },

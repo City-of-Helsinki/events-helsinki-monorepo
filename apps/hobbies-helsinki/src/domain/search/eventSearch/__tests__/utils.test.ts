@@ -150,7 +150,9 @@ describe('getEventSearchVariables function', () => {
       ...defaultParams,
       params: new URLSearchParams(),
     });
-    expect(keywordNot).toEqual(expect.arrayContaining(HOBBIES_EXCLUDED_KEYWORDS));
+    expect(keywordNot).toStrictEqual(
+      expect.arrayContaining(HOBBIES_EXCLUDED_KEYWORDS)
+    );
   });
 
   it('should merge user-provided keywordNot with HOBBIES_EXCLUDED_KEYWORDS', () => {
@@ -161,7 +163,7 @@ describe('getEventSearchVariables function', () => {
         `?${EVENT_SEARCH_FILTERS.KEYWORD_NOT}=${userKeyword}`
       ),
     });
-    expect(keywordNot).toEqual(
+    expect(keywordNot).toStrictEqual(
       expect.arrayContaining([userKeyword, ...HOBBIES_EXCLUDED_KEYWORDS])
     );
   });

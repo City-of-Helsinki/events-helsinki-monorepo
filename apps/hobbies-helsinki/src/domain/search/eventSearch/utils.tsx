@@ -36,6 +36,7 @@ import type { COURSE_CATEGORIES } from './constants';
 import {
   COURSE_DEFAULT_SEARCH_FILTERS,
   courseCategories,
+  HOBBIES_EXCLUDED_KEYWORDS,
   MAPPED_PLACES,
   CATEGORY_CATALOG,
   MAPPED_COURSE_CATEGORIES,
@@ -275,7 +276,7 @@ export const getEventSearchVariables = ({
     // internetBased: onlyRemoteEvents || undefined,
     keywordOrSet2: [...(keyword ?? []), ...mappedCategories],
     keywordAnd,
-    keywordNot,
+    keywordNot: [...(keywordNot ?? []), ...HOBBIES_EXCLUDED_KEYWORDS],
     language,
     location: places.sort((a, b) => a.localeCompare(b)),
     pageSize,

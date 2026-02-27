@@ -94,6 +94,15 @@ export const CATEGORY_CATALOG = {
   },
 };
 
+/**
+ * Keywords that are always excluded from hobbies search results,
+ * regardless of user-provided filters.
+ */
+export const HOBBIES_EXCLUDED_KEYWORDS = [
+  // Secondary school cross-institutional studies are not hobbies
+  'helsinki:secondary_schools_cross_institutional_studies',
+];
+
 export const MOVIES_AND_MEDIA_COURSES_KEYWORDS = [
   'yso:p1235', // elokuva
   'kulke:29', // elokuvat

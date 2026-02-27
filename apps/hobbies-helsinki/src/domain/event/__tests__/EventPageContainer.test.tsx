@@ -34,6 +34,7 @@ import {
 } from '../../../../config/vitest/test-utils';
 
 import AppConfig from '../../app/AppConfig';
+import { HOBBIES_EXCLUDED_KEYWORDS } from '../../search/eventSearch/constants';
 import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
 
@@ -244,6 +245,7 @@ it('shows similar events when SIMILAR_EVENTS flag is on', async () => {
           audienceMinAgeLt: '5',
           audienceMaxAgeGt: '15',
           keywordOrSet2: ['yso:p916'],
+          keywordNot: HOBBIES_EXCLUDED_KEYWORDS,
           language: undefined,
           pageSize: 100,
           publisherAncestor: null,

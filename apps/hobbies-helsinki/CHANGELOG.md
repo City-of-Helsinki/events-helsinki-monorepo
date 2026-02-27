@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.1.0...hobbies-helsinki-v3.2.0) (2026-02-27)
+
+
+### Features
+
+* Filter secondary school courses HH-460 ([#993](https://github.com/City-of-Helsinki/events-helsinki-monorepo/issues/993)) ([8fdeb82](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8fdeb8288f16977a82f04cb9fb8a54c11445ac33))
+
+
+### Dependencies
+
+* Bump lodash from 4.17.21 to 4.17.23 ([6751a97](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6751a97fc117473c215a8dd842b125218d842ca5))
+* Update nextjs deps minor version ([97e79af](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/97e79af52b0db5cb5b448e55531d2439057c53a7))
+
 ## [3.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.0.3...hobbies-helsinki-v3.1.0) (2026-01-15)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.1.0...events-helsinki-v2.1.1) (2026-03-02)
+
+
+### Dependencies
+
+* Bump lodash from 4.17.21 to 4.17.23 ([6751a97](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6751a97fc117473c215a8dd842b125218d842ca5))
+* Update nextjs deps minor version ([97e79af](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/97e79af52b0db5cb5b448e55531d2439057c53a7))
+
 ## [2.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.0.3...events-helsinki-v2.1.0) (2026-01-15)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.5.3...events-graphql-proxy-v1.5.4) (2026-03-02)
+
+
+### Dependencies
+
+* Bump lodash from 4.17.21 to 4.17.23 ([6751a97](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6751a97fc117473c215a8dd842b125218d842ca5))
+
 ## [1.5.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.5.2...events-graphql-proxy-v1.5.3) (2025-12-10)
 
 

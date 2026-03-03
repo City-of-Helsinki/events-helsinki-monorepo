@@ -25,10 +25,9 @@ import {
   createEventListRequestAndResultMocks,
   createOtherEventTimesRequestAndResultMocks,
 } from '@/test-utils/mocks/eventListMocks';
-
 import AppConfig from '../../app/AppConfig';
-import type { EventPageContainerProps } from '../EventPageContainer';
 import EventPageContainer from '../EventPageContainer';
+import type { EventPageContainerProps } from '../EventPageContainer';
 
 const id = 'hel:123';
 const name = 'Event title';
@@ -70,7 +69,10 @@ const eventRequest = {
   query: EventDetailsDocument,
   variables: {
     id: superEventId,
-    include: AppConfig.eventSecondaryQueryIncludeParamValue,
+    include: [
+      ...AppConfig.eventSecondaryQueryIncludeParamValue,
+      'registration',
+    ],
   },
 };
 const otherEventsRequest = {
@@ -87,7 +89,10 @@ const request = {
   query: EventDetailsDocument,
   variables: {
     id,
-    include: AppConfig.eventDetailsQueryIncludeParamValue,
+    include: [
+      ...AppConfig.eventSecondaryQueryIncludeParamValue,
+      'registration',
+    ],
   },
 };
 

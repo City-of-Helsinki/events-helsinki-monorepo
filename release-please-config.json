@@ -19,15 +19,30 @@
     { "type": "ci", "section": "Continuous Integration", "hidden": true }
   ],
   "packages": {
-    "apps/hobbies-helsinki": { "release-type": "node" },
-    "apps/events-helsinki": { "release-type": "node" },
-    "apps/sports-helsinki": { "release-type": "node" },
+    "apps/hobbies-helsinki": {
+      "release-type": "node",
+      "package-name": "hobbies-helsinki"
+    },
+    "apps/events-helsinki": {
+      "release-type": "node",
+      "package-name": "events-helsinki"
+    },
+    "apps/sports-helsinki": {
+      "release-type": "node",
+      "package-name": "sports-helsinki"
+    },
     "proxies/events-graphql-federation": {
       "release-type": "simple",
       "package-name": "federation-router"
     },
-    "proxies/events-graphql-proxy": { "release-type": "node" },
-    "proxies/venue-graphql-proxy": { "release-type": "node" }
+    "proxies/events-graphql-proxy": {
+      "release-type": "node",
+      "package-name": "events-graphql-proxy"
+    },
+    "proxies/venue-graphql-proxy": {
+      "release-type": "node",
+      "package-name": "venue-graphql-proxy"
+    }
   },
   "plugins": ["sentence-case"]
 }

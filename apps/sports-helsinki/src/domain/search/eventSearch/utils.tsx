@@ -21,6 +21,7 @@ import {
   isVenue,
   scrollToTop,
   EVENT_SORT_OPTIONS,
+  EVENT_FULL_TEXT_SEARCH_LANGUAGES,
 } from '@events-helsinki/components';
 import {
   addDays,
@@ -232,8 +233,12 @@ export const getEventSearchVariables = ({
     ),
   ];
 
+  const fullTextValue = text?.join(', ');
   return {
-    fullText: text?.join(', '),
+    fullText: fullTextValue,
+    fullTextLanguage: fullTextValue
+      ? EVENT_FULL_TEXT_SEARCH_LANGUAGES
+      : undefined,
     ongoing: true,
     [EVENT_SEARCH_FILTERS.DIVISIONS]: division,
     isFree: isFree || undefined,

@@ -95,6 +95,7 @@ export type CombinedSearchAdapterInputFallback =
 export type EventSearchParams = Pick<
   EventListQueryVariables,
   | 'fullText'
+  | 'fullTextLanguage'
   | 'ongoing'
   | 'start'
   | 'end'

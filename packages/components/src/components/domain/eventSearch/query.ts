@@ -38,6 +38,7 @@ export const QUERY_EVENT_LIST = gql`
     $text: String
     $translation: String
     $fullText: String
+    $fullTextLanguage: [String]
     $ongoing: Boolean
   ) {
     eventList(
@@ -77,6 +78,7 @@ export const QUERY_EVENT_LIST = gql`
       text: $text
       translation: $translation
       fullText: $fullText
+      fullTextLanguage: $fullTextLanguage
       ongoing: $ongoing
     ) {
       meta {

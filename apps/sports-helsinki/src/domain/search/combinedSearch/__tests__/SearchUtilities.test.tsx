@@ -56,6 +56,7 @@ const mocks = [
   createEventListRequestAndResultMocks({
     variables: {
       fullText: '',
+      fullTextLanguage: undefined,
       ongoing: true,
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,
@@ -66,6 +67,7 @@ const mocks = [
   createEventListRequestAndResultMocks({
     variables: {
       fullText: '',
+      fullTextLanguage: undefined,
       ongoing: true,
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,
@@ -76,6 +78,7 @@ const mocks = [
   createEventListRequestAndResultMocks({
     variables: {
       fullText: '',
+      fullTextLanguage: undefined,
       ongoing: true,
       keywordOrSet1: SPORT_COURSES_KEYWORDS,
       language: undefined,

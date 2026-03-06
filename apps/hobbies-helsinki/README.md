@@ -282,6 +282,7 @@ The conversion map looks (something) like this:
   { key: "suitable_for", value: params.suitableFor },
   { key: "ids", value: params.ids },
   { key: "full_text", value: params.fullText },
+  { key: "full_text_language", value: params.fullTextLanguage },
   { key: "ongoing", value: params.ongoing },
 ];
 ```
@@ -298,6 +299,7 @@ The "main events search" component is used in the search page at `/search`.
 | division          | "ocd-division/country:fi/kunta:helsinki" | -            | x        | Only city of Helsinki events                                                                  |
 | ongoing           | true                                     | -            | x        | include the ongoing events                                                                    |
 | fullText          | ""                                       | x            | x        | A text scoring mathcher (title, place, description, ...)                                      |
+| fullTextLanguage  | ["fi", "en", "sv"]                       | -            | -        | Languages for full text search                                                                |
 | sort              | "end_time"                               | x            | x        | Sorting order of the result set. Default is "event end time as ascending"                     |
 | start             | "now"                                    | x            | x        | Filter by event starting time                                                                 |
 | end               | null                                     | x            | -        | Filter by event ending time                                                                   |

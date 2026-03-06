@@ -16,6 +16,7 @@ import {
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID,
   EVENT_SEARCH_FILTERS,
   EVENT_SORT_OPTIONS,
+  EVENT_FULL_TEXT_SEARCH_LANGUAGES,
 } from '@events-helsinki/components';
 import {
   addDays,
@@ -247,6 +248,9 @@ export const getEventSearchVariables = ({
 
   return {
     [EVENT_SEARCH_FILTERS.TEXT]: !isEmpty(text) ? text?.join(',') : undefined, // NOTE: only *OngoingAnd supports Array.
+    fullTextLanguage: isEmpty(text)
+      ? undefined
+      : EVENT_FULL_TEXT_SEARCH_LANGUAGES,
     [EVENT_SEARCH_FILTERS.ONGOING]: true,
     [EVENT_SEARCH_FILTERS.DIVISIONS]: division,
     end,

@@ -94,6 +94,8 @@ export enum EVENT_SEARCH_FILTERS {
   SUITABLE = 'suitableFor',
 }
 
+export const EVENT_FULL_TEXT_SEARCH_LANGUAGES = ['fi', 'sv', 'en'];
+
 /**
  * City of Helsinki's organization ID in Linked Events
  * @see https://api.hel.fi/linkedevents/v1/organization/ahjo:00001/

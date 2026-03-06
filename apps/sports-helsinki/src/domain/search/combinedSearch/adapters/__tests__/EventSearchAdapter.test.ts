@@ -1,4 +1,5 @@
 import {
+  EVENT_FULL_TEXT_SEARCH_LANGUAGES,
   EVENT_SEARCH_FILTERS,
   EventTypeId,
   HELSINKI_OCD_DIVISION_ID,
@@ -28,6 +29,9 @@ describe('EventSearchAdapter', () => {
         const result = {
           eventType,
           fullText: input.text,
+          fullTextLanguage: input.text
+            ? EVENT_FULL_TEXT_SEARCH_LANGUAGES
+            : undefined,
           ongoing: true,
           start: 'now',
           end: '',

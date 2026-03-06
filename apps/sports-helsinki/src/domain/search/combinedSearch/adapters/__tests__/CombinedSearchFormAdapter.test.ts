@@ -3,6 +3,7 @@ import {
   UnifiedSearchLanguage,
   EVENT_SEARCH_FILTERS,
   HELSINKI_OCD_DIVISION_ID,
+  EVENT_FULL_TEXT_SEARCH_LANGUAGES,
 } from '@events-helsinki/components';
 import mockRouter from 'next-router-mock';
 import qs from 'query-string';
@@ -141,6 +142,9 @@ describe('CombinedSearchFormAdapter', () => {
           sort: outputQuery.eventOrderBy ?? null,
           eventType: EventTypeId.General,
           fullText: outputQuery.text,
+          fullTextLanguage: outputQuery.text
+            ? EVENT_FULL_TEXT_SEARCH_LANGUAGES
+            : undefined,
           ongoing: true,
           start: 'now',
           end: '',

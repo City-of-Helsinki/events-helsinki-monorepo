@@ -1,5 +1,6 @@
 import {
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_ID,
+  EVENT_FULL_TEXT_SEARCH_LANGUAGES,
   EVENT_SORT_OPTIONS,
 } from '@events-helsinki/components';
 import { EventTypeId } from '@events-helsinki/components/types';
@@ -21,6 +22,7 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
    * that are wanted to be mapped with the combined search.
    */
   fullText?: EventSearchParams['fullText'];
+  fullTextLanguage?: EventSearchParams['fullTextLanguage'];
   ongoing: EventSearchParams['ongoing'];
   start: EventSearchParams['start'];
   end: EventSearchParams['end'];
@@ -54,7 +56,12 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
     // Initialize the object with default values
     Object.assign(this, initialEventSearchAdapterValues, { eventType });
 
-    this.fullText = input.text || initialEventSearchAdapterValues.fullText;
+    const fullTextValue =
+      input.text || initialEventSearchAdapterValues.fullText;
+    this.fullText = fullTextValue;
+    this.fullTextLanguage = fullTextValue
+      ? EVENT_FULL_TEXT_SEARCH_LANGUAGES
+      : undefined;
     this.keywordAnd = [];
     this.keywordOrSet1 = SPORT_COURSES_KEYWORDS;
     this.keywordOrSet2 = this.getSportsKeywords(input);

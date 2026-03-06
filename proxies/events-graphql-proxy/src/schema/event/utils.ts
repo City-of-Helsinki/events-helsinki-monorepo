@@ -60,6 +60,7 @@ export const buildEventListQuery = (params: QueryEventListArgs) => {
     { key: 'suitable_for', value: params.suitableFor },
     { key: 'ids', value: params.ids },
     { key: 'full_text', value: params.fullText },
+    { key: 'full_text_language', value: params.fullTextLanguage },
     { key: 'ongoing', value: params.ongoing },
   ]);
 };

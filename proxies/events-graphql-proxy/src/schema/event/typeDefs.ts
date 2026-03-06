@@ -61,6 +61,7 @@ const typeDefs = gql`
       audienceMaxAgeGt: String
       audienceMaxAgeLt: String
       fullText: String
+      fullTextLanguage: [String]
       ongoing: Boolean
     ): EventListResponse!
   }

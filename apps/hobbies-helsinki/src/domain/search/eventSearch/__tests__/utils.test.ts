@@ -1,5 +1,6 @@
 import {
   DATE_TYPES,
+  EVENT_FULL_TEXT_SEARCH_LANGUAGES,
   EVENT_SEARCH_FILTERS,
   EVENT_SORT_OPTIONS,
 } from '@events-helsinki/components';
@@ -166,6 +167,22 @@ describe('getEventSearchVariables function', () => {
     expect(keywordNot).toStrictEqual(
       expect.arrayContaining([userKeyword, ...HOBBIES_EXCLUDED_KEYWORDS])
     );
+  });
+
+  it('should set fullTextLanguage when text search is provided', () => {
+    const { fullTextLanguage } = getEventSearchVariables({
+      ...defaultParams,
+      params: new URLSearchParams(`?${EVENT_SEARCH_FILTERS.TEXT}=yoga`),
+    });
+    expect(fullTextLanguage).toStrictEqual(EVENT_FULL_TEXT_SEARCH_LANGUAGES);
+  });
+
+  it('should set fullTextLanguage to undefined when no text search is provided', () => {
+    const { fullTextLanguage } = getEventSearchVariables({
+      ...defaultParams,
+      params: new URLSearchParams(''),
+    });
+    expect(fullTextLanguage).toBeUndefined();
   });
 });
 

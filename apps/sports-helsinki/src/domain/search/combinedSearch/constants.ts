@@ -48,6 +48,7 @@ export const initialVenueSearchAdapterValues = {
 
 export const initialEventSearchAdapterValues = {
   fullText: '',
+  fullTextLanguage: undefined,
   ongoing: true,
   start: 'now',
   end: '',

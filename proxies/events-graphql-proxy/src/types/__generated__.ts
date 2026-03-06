@@ -338,6 +338,8 @@ export type QueryEventListArgs = {
   endsAfter?: InputMaybe<Scalars['String']['input']>;
   endsBefore?: InputMaybe<Scalars['String']['input']>;
   eventType?: InputMaybe<Array<InputMaybe<EventTypeId>>>;
+  fullText?: InputMaybe<Scalars['String']['input']>;
+  fullTextLanguage?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   ids?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   inLanguage?: InputMaybe<Scalars['String']['input']>;
   include?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
@@ -366,6 +368,7 @@ export type QueryEventListArgs = {
     Array<InputMaybe<Scalars['String']['input']>>
   >;
   location?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  ongoing?: InputMaybe<Scalars['Boolean']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   pageSize?: InputMaybe<Scalars['Int']['input']>;
   publisher?: InputMaybe<Scalars['ID']['input']>;
@@ -379,8 +382,6 @@ export type QueryEventListArgs = {
   superEventType?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   text?: InputMaybe<Scalars['String']['input']>;
   translation?: InputMaybe<Scalars['String']['input']>;
-  fullText?: InputMaybe<Scalars['String']['input']>;
-  ongoing?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type QueryEventsByIdsArgs = {

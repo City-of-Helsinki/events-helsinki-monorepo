@@ -1,6 +1,7 @@
 import {
   DATE_TYPES,
   DEFAULT_EVENT_SORT_OPTION,
+  EVENT_FULL_TEXT_SEARCH_LANGUAGES,
   EVENT_SEARCH_FILTERS,
 } from '@events-helsinki/components';
 import { advanceTo, clear } from 'jest-date-mock';
@@ -153,6 +154,22 @@ describe('getEventSearchVariables function', () => {
     });
     expect(start7).toBe('now');
     expect(end7).toBe('2020-10-15');
+  });
+
+  it('should set fullTextLanguage when text search is provided', () => {
+    const { fullTextLanguage } = getEventSearchVariables({
+      ...defaultParams,
+      params: new URLSearchParams(`?${EVENT_SEARCH_FILTERS.TEXT}=yoga`),
+    });
+    expect(fullTextLanguage).toStrictEqual(EVENT_FULL_TEXT_SEARCH_LANGUAGES);
+  });
+
+  it('should set fullTextLanguage to undefined when no text search is provided', () => {
+    const { fullTextLanguage } = getEventSearchVariables({
+      ...defaultParams,
+      params: new URLSearchParams(''),
+    });
+    expect(fullTextLanguage).toBeUndefined();
   });
 });
 

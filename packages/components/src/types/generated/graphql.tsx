@@ -8430,6 +8430,7 @@ export type QueryEventListArgs = {
   text?: InputMaybe<Scalars['String']['input']>;
   translation?: InputMaybe<Scalars['String']['input']>;
   fullText?: InputMaybe<Scalars['String']['input']>;
+  fullTextLanguage?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   ongoing?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -14474,6 +14475,7 @@ export type EventListQueryVariables = Exact<{
   text?: InputMaybe<Scalars['String']['input']>;
   translation?: InputMaybe<Scalars['String']['input']>;
   fullText?: InputMaybe<Scalars['String']['input']>;
+  fullTextLanguage?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   ongoing?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
@@ -16248,6 +16250,7 @@ export const EventListDocument = gql`
     $text: String
     $translation: String
     $fullText: String
+    $fullTextLanguage: [String]
     $ongoing: Boolean
   ) {
     eventList(
@@ -16287,6 +16290,7 @@ export const EventListDocument = gql`
       text: $text
       translation: $translation
       fullText: $fullText
+      fullTextLanguage: $fullTextLanguage
       ongoing: $ongoing
     ) {
       meta {
@@ -16350,6 +16354,7 @@ export const EventListDocument = gql`
  *      text: // value for 'text'
  *      translation: // value for 'translation'
  *      fullText: // value for 'fullText'
+ *      fullTextLanguage: // value for 'fullTextLanguage'
  *      ongoing: // value for 'ongoing'
  *   },
  * });

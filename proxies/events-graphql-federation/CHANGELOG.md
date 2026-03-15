@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.12.1...federation-router-v1.13.0) (2026-03-15)
+
+
+### Features
+
+* Add fullTextLanguage parameter to proxies ([86458e3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/86458e30a95a799aa5ba70cd285d75f21bb4d21f))
+
 ## [1.12.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/federation-router-v1.12.0...federation-router-v1.12.1) (2025-12-10)
 
 

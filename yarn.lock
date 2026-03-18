@@ -3137,7 +3137,7 @@ __metadata:
     date-fns: "npm:^4.1.0"
     date-fns-tz: "npm:^3.2.0"
     dequal: "npm:2.0.3"
-    dompurify: "npm:3.3.1"
+    dompurify: "npm:3.3.2"
     eslint: "npm:9.31.0"
     eslint-config-next: "npm:15.5.11"
     eslint-plugin-storybook: "npm:^9.1.19"
@@ -12207,15 +12207,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:3.3.1, dompurify@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "dompurify@npm:3.3.1"
+"dompurify@npm:3.3.2, dompurify@npm:^3.3.1":
+  version: 3.3.2
+  resolution: "dompurify@npm:3.3.2"
   dependencies:
     "@types/trusted-types": "npm:^2.0.7"
   dependenciesMeta:
     "@types/trusted-types":
       optional: true
-  checksum: 2f3b3d4599708bd477067540997497b96b87c628158b062620f0a43b789b10c1bc77d3fea71366e087167c6ecae1944ddc6929c364a717508391fc8b242081fd
+  checksum: 38b97912e6cd7d1d3c51891aacfcd80ccfb7bf07a4d9fc1656dd9c57d1984f2c10295624f166ead12d7b3d77496e496374fa5d6bfc90c0469a643cb4d44ee8bf
   languageName: node
   linkType: hard
 

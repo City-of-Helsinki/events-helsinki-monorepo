@@ -160,6 +160,6 @@
     "vitest-axe": "0.1.0",
     "vitest-sonar-reporter": "2.0.4",
     "waait": "^1.0.5",
-    "webpack": "5.100.1"
+    "webpack": "5.104.1"
   }
 }

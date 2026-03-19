@@ -156,7 +156,7 @@
     "vitest-indexeddb": "0.0.0",
     "vitest-sonar-reporter": "2.0.4",
     "waait": "^1.0.5",
-    "webpack": "5.100.1"
+    "webpack": "5.104.1"
   },
   "peerDependencies": {
     "@types/react": "^18.0.0",

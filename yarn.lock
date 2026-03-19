@@ -3298,7 +3298,7 @@ __metadata:
     "@vitest/eslint-plugin": "npm:1.4.1"
     "@vitest/ui": "npm:3.2.4"
     accepts: "npm:1.3.8"
-    body-parser: "npm:2.2.0"
+    body-parser: "npm:2.2.1"
     cors: "npm:2.8.5"
     cross-env: "npm:7.0.3"
     dotenv: "npm:^17.2.0"
@@ -9930,20 +9930,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:2.2.0":
-  version: 2.2.0
-  resolution: "body-parser@npm:2.2.0"
+"body-parser@npm:2.2.1":
+  version: 2.2.1
+  resolution: "body-parser@npm:2.2.1"
   dependencies:
     bytes: "npm:^3.1.2"
     content-type: "npm:^1.0.5"
-    debug: "npm:^4.4.0"
+    debug: "npm:^4.4.3"
     http-errors: "npm:^2.0.0"
-    iconv-lite: "npm:^0.6.3"
+    iconv-lite: "npm:^0.7.0"
     on-finished: "npm:^2.4.1"
     qs: "npm:^6.14.0"
-    raw-body: "npm:^3.0.0"
-    type-is: "npm:^2.0.0"
-  checksum: 29524ed4e8625971c738ba25648baa7e21de24ce3f1f937ff652b63612f9997122878e42ca9487e56592882b5fe95e5010d645ab3ce6c5b03acf7c7788357ef1
+    raw-body: "npm:^3.0.1"
+    type-is: "npm:^2.0.1"
+  checksum: 9a23da8cfe3f068c3448bb0ea4d7d49a1b3685f50566d7f150107ea74dd15da8f8d66c3e2dfd1e5b8edc7472ea0078280ede64a75bde9e5c7659fc1ad09df961
   languageName: node
   linkType: hard
 
@@ -15701,7 +15701,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"iconv-lite@npm:0.6.3, iconv-lite@npm:^0.6.2, iconv-lite@npm:^0.6.3":
+"iconv-lite@npm:0.6.3, iconv-lite@npm:^0.6.2":
   version: 0.6.3
   resolution: "iconv-lite@npm:0.6.3"
   dependencies:
@@ -21277,7 +21277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raw-body@npm:^3.0.0, raw-body@npm:^3.0.1":
+"raw-body@npm:^3.0.1":
   version: 3.0.2
   resolution: "raw-body@npm:3.0.2"
   dependencies:
@@ -25261,7 +25261,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"type-is@npm:^2.0.0, type-is@npm:^2.0.1":
+"type-is@npm:^2.0.1":
   version: 2.0.1
   resolution: "type-is@npm:2.0.1"
   dependencies:

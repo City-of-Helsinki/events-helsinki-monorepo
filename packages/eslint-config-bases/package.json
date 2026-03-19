@@ -51,7 +51,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-regexp": "^2.9.0",
     "eslint-plugin-sonarjs": "^3.0.4",
-    "eslint-plugin-storybook": "^9.0.17",
+    "eslint-plugin-storybook": "^9.1.19",
     "eslint-plugin-testcafe-community": "2.0.0",
     "eslint-plugin-testing-library": "^7.6.0",
     "espree": "10.4.0",

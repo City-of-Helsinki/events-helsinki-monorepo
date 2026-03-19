@@ -9,7 +9,7 @@ import type { NextRequest } from 'next/server';
 import redirectCampaignRoutes from '../redirectCampaignRoutes.config.mjs';
 
 const redirectHandler = new RedirectHandler({
-  redirectCampaignRoutes,
+  redirectCampaignRoutes: redirectCampaignRoutes as Record<string, string>,
 });
 
 export async function middleware(req: NextRequest) {

@@ -3163,7 +3163,7 @@ __metadata:
     leaflet.markercluster: "npm:1.5.3"
     lodash: "npm:4.17.23"
     microbundle: "npm:0.15.1"
-    next: "npm:15.5.11"
+    next: "npm:15.5.14"
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     npm-run-all: "npm:4.1.5"
@@ -4869,6 +4869,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/env@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/env@npm:15.5.14"
+  checksum: f9b74ee2f1f8fc9ffd207b09a89483cedf1b1461fc32184adfb9807ad63a4ca08d0bebfcd2ad9d25dd6f1a5ee18bda5a47ebcd93695a58d448c27f9ade87ef9b
+  languageName: node
+  linkType: hard
+
 "@next/eslint-plugin-next@npm:15.5.11":
   version: 15.5.11
   resolution: "@next/eslint-plugin-next@npm:15.5.11"
@@ -4878,58 +4885,58 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-arm64@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-darwin-arm64@npm:15.5.7"
+"@next/swc-darwin-arm64@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/swc-darwin-arm64@npm:15.5.14"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-darwin-x64@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-darwin-x64@npm:15.5.7"
+"@next/swc-darwin-x64@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/swc-darwin-x64@npm:15.5.14"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-gnu@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-linux-arm64-gnu@npm:15.5.7"
+"@next/swc-linux-arm64-gnu@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/swc-linux-arm64-gnu@npm:15.5.14"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm64-musl@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-linux-arm64-musl@npm:15.5.7"
+"@next/swc-linux-arm64-musl@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/swc-linux-arm64-musl@npm:15.5.14"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-linux-x64-gnu@npm:15.5.7"
+"@next/swc-linux-x64-gnu@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/swc-linux-x64-gnu@npm:15.5.14"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-musl@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-linux-x64-musl@npm:15.5.7"
+"@next/swc-linux-x64-musl@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/swc-linux-x64-musl@npm:15.5.14"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-win32-arm64-msvc@npm:15.5.7"
+"@next/swc-win32-arm64-msvc@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/swc-win32-arm64-msvc@npm:15.5.14"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@next/swc-win32-x64-msvc@npm:15.5.7":
-  version: 15.5.7
-  resolution: "@next/swc-win32-x64-msvc@npm:15.5.7"
+"@next/swc-win32-x64-msvc@npm:15.5.14":
+  version: 15.5.14
+  resolution: "@next/swc-win32-x64-msvc@npm:15.5.14"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -13509,7 +13516,7 @@ __metadata:
     is-ci: "npm:4.1.0"
     jest-date-mock: "npm:^1.0.10"
     lint-staged: "npm:16.1.2"
-    next: "npm:15.5.11"
+    next: "npm:15.5.14"
     next-transpile-modules: "npm:10.0.1"
     nodemon: "npm:3.1.10"
     npm-run-all: "npm:4.1.5"
@@ -13613,7 +13620,7 @@ __metadata:
     k6: "npm:0.0.0"
     lodash: "npm:4.17.23"
     msw: "npm:^2.10.4"
-    next: "npm:15.5.11"
+    next: "npm:15.5.14"
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     picocolors: "npm:1.1.1"
@@ -15281,7 +15288,7 @@ __metadata:
     k6: "npm:0.0.0"
     lodash: "npm:4.17.23"
     msw: "npm:^2.10.4"
-    next: "npm:15.5.11"
+    next: "npm:15.5.14"
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     picocolors: "npm:1.1.1"
@@ -18858,19 +18865,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next@npm:15.5.11":
-  version: 15.5.11
-  resolution: "next@npm:15.5.11"
+"next@npm:15.5.14":
+  version: 15.5.14
+  resolution: "next@npm:15.5.14"
   dependencies:
-    "@next/env": "npm:15.5.11"
-    "@next/swc-darwin-arm64": "npm:15.5.7"
-    "@next/swc-darwin-x64": "npm:15.5.7"
-    "@next/swc-linux-arm64-gnu": "npm:15.5.7"
-    "@next/swc-linux-arm64-musl": "npm:15.5.7"
-    "@next/swc-linux-x64-gnu": "npm:15.5.7"
-    "@next/swc-linux-x64-musl": "npm:15.5.7"
-    "@next/swc-win32-arm64-msvc": "npm:15.5.7"
-    "@next/swc-win32-x64-msvc": "npm:15.5.7"
+    "@next/env": "npm:15.5.14"
+    "@next/swc-darwin-arm64": "npm:15.5.14"
+    "@next/swc-darwin-x64": "npm:15.5.14"
+    "@next/swc-linux-arm64-gnu": "npm:15.5.14"
+    "@next/swc-linux-arm64-musl": "npm:15.5.14"
+    "@next/swc-linux-x64-gnu": "npm:15.5.14"
+    "@next/swc-linux-x64-musl": "npm:15.5.14"
+    "@next/swc-win32-arm64-msvc": "npm:15.5.14"
+    "@next/swc-win32-x64-msvc": "npm:15.5.14"
     "@swc/helpers": "npm:0.5.15"
     caniuse-lite: "npm:^1.0.30001579"
     postcss: "npm:8.4.31"
@@ -18913,7 +18920,7 @@ __metadata:
       optional: true
   bin:
     next: dist/bin/next
-  checksum: 53b5f5dbc0a71243ebe5d09ddd198cd22669af1774d3fc377abd62e7739194d29b9541e6b41d5b1c86fa9af3c03b3d1896d9f1806b164461b0c029ceff3ecc61
+  checksum: 8d5f90116e8e69dae801ef4a916d76b3ce2e0549a2de6ca90e89ea7cdd58dae16314629f01a7ccfddd6216bed17c0faaaf349e3b200c4a435d414069521b8432
   languageName: node
   linkType: hard
 
@@ -23574,7 +23581,7 @@ __metadata:
     leaflet: "npm:1.9.4"
     lodash: "npm:4.17.23"
     msw: "npm:^2.10.4"
-    next: "npm:15.5.11"
+    next: "npm:15.5.14"
     next-i18next: "npm:15.4.2"
     next-router-mock: "npm:^1.0.2"
     picocolors: "npm:1.1.1"

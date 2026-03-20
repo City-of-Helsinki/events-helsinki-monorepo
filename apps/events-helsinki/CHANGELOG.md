@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.1.0...events-helsinki-v2.2.0) (2026-03-20)
+
+
+### Features
+
+* Use fullTextLanguage parameter to search events in all UI language ([aa77dda](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/aa77dda68db9890e8482f0638ec9feed44a25fb6))
+
+
+### Dependencies
+
+* Bump lodash from 4.17.21 to 4.17.23 ([6751a97](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6751a97fc117473c215a8dd842b125218d842ca5))
+* Bump webpack from 5.100.1 to 5.104.1 ([0cec9a6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0cec9a6db3d54e2c04a5421a0ba6da439d0505b8))
+* Update nextjs deps minor version ([97e79af](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/97e79af52b0db5cb5b448e55531d2439057c53a7))
+
 ## [2.1.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.0.3...events-helsinki-v2.1.0) (2026-01-15)
 
 

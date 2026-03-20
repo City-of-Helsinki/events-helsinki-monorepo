@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.2.0...hobbies-helsinki-v3.3.0) (2026-03-20)
+
+
+### Features
+
+* Use fullTextLanguage parameter to search events in all UI language ([aa77dda](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/aa77dda68db9890e8482f0638ec9feed44a25fb6))
+
+
+### Bug Fixes
+
+* **hobbies-helsinki:** Remove hardcoded campaign short URL redirects ([14023f3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/14023f335f3c09431799c24e8a8d503a2f69e52e))
+
+
+### Dependencies
+
+* Bump webpack from 5.100.1 to 5.104.1 ([0cec9a6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/0cec9a6db3d54e2c04a5421a0ba6da439d0505b8))
+
 ## [3.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.1.0...hobbies-helsinki-v3.2.0) (2026-02-27)
 
 

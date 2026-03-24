@@ -9780,6 +9780,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"balanced-match@npm:^4.0.2":
+  version: 4.0.4
+  resolution: "balanced-match@npm:4.0.4"
+  checksum: 67374f75d3d1b0f4007808daa7ca0064bf7bf6c14b1593a3e36e7a3ddf7c4f87f9f1e8843d60380121428f0ac9107511cc22106407ec13dc8c0bb03297bac1fc
+  languageName: node
+  linkType: hard
+
 "base64-arraybuffer-es6@npm:^0.7.0":
   version: 0.7.0
   resolution: "base64-arraybuffer-es6@npm:0.7.0"
@@ -9924,13 +9931,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"brace-expansion@npm:1.1.12":
+"brace-expansion@npm:^1.1.7":
   version: 1.1.12
   resolution: "brace-expansion@npm:1.1.12"
   dependencies:
     balanced-match: "npm:^1.0.0"
     concat-map: "npm:0.0.1"
   checksum: e40abcf731bae42055b8d6c54470a7bbea199448e914c0054d9ae6820aeed3f5c1b4ac7ff72f624a146478c067814e76aafb893bc44f49c14cbfaf369fceeb4e
+  languageName: node
+  linkType: hard
+
+"brace-expansion@npm:^2.0.1":
+  version: 2.0.2
+  resolution: "brace-expansion@npm:2.0.2"
+  dependencies:
+    balanced-match: "npm:^1.0.0"
+  checksum: b3d12d77d213accd20910f292749e99bde9676dda0fb158a8851ff5dcb0fdd0e3a4b3c487c78d196bc21bb5c341e4539b979ea2d0eaac316f0546691c2073a6b
+  languageName: node
+  linkType: hard
+
+"brace-expansion@npm:^5.0.2":
+  version: 5.0.4
+  resolution: "brace-expansion@npm:5.0.4"
+  dependencies:
+    balanced-match: "npm:^4.0.2"
+  checksum: 550882bd4aa9c0cdd312527fab1a4a20b6ecccc1ba6f444a0316c8d743dd251f4a02230821de079f4b872b01db2b2d5a4b6027b849049fbff090735f870a80b9
   languageName: node
   linkType: hard
 

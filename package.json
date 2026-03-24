@@ -79,7 +79,6 @@
   },
   "//": [
     "`@babel/runtime` in resolutions to resolve dependabot issue #184 of dep for a dep",
-    "`brace-expansion` in resolutions to resolve dependabot issue of dep for a dep",
     "`cookie` in resolutions to resolve dependabot issue #136 of dep for a dep",
     "`form-data` in resolutions to resolve dependabot issues #213 & #214 of dep for a dep",
     "`get-func-name` in resolutions to resolve dependabot issue of dep for a dep",
@@ -97,7 +96,6 @@
     "@types/node": "22.18.9",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.1",
-    "brace-expansion": "1.1.12",
     "cookie": "0.7.2",
     "eslint": "9.39.4",
     "form-data": "^4.0.4",

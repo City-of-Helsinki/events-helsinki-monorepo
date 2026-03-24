@@ -34,7 +34,7 @@
     "@events-helsinki/eslint-config-bases": "workspace:^",
     "@types/node": "22.18.9",
     "cross-env": "7.0.3",
-    "eslint": "9.31.0",
+    "eslint": "9.39.4",
     "eslint-plugin-import": "^2.32.0",
     "prettier": "^3.6.2",
     "rimraf": "6.0.1",

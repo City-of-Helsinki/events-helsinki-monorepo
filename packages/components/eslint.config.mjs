@@ -37,6 +37,7 @@ export default [
       },
     },
     rules: {
+      'vitest/no-conditional-expect': 'off',
       'no-console': 'error',
       '@typescript-eslint/naming-convention': 'off',
     },

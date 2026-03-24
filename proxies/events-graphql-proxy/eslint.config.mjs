@@ -31,6 +31,7 @@ export default [
       '@typescript-eslint/naming-convention': 'off',
       'vitest/no-commented-out-tests': 'off',
       'vitest/no-disabled-tests': 'off',
+      'vitest/no-conditional-expect': 'off',
       'no-console': 'error',
     },
   },

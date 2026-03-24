@@ -81,6 +81,7 @@ const articlesPage: MenuItemLocationMatcherType = [
 ];
 
 // FIXME: Skipped while no way to mock the nextjs redirects and i18nroutes for router was found.
+// eslint-disable-next-line vitest/no-disabled-tests
 describe.skip('useGetIsItemActive hook for Navigation-component', () => {
   describe('getIsItemActive function', () => {
     it.each([...frontPage, ...searchPage, ...articlesPage])(

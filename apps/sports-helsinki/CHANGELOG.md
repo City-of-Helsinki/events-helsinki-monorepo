@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.2.0...sports-helsinki-v2.2.1) (2026-03-26)
+
+
+### Dependencies
+
+* Bump eslint and plugins Refs: RATY-299 ([dc05e4f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dc05e4fd8211185167ed7296f0979b48d5a5dde3))
+* Bump next from 15.5.11 to 15.5.14 ([84bffeb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/84bffebf0808765eecdbfbbf8b825819d393b2b6))
+
 ## [2.2.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.1.0...sports-helsinki-v2.2.0) (2026-03-20)
 
 

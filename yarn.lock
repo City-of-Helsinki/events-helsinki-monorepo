@@ -144,9 +144,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/server@npm:^5.4.0":
-  version: 5.4.0
-  resolution: "@apollo/server@npm:5.4.0"
+"@apollo/server@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "@apollo/server@npm:5.5.0"
   dependencies:
     "@apollo/cache-control-types": "npm:^1.0.3"
     "@apollo/server-gateway-interface": "npm:^2.0.0"
@@ -171,7 +171,7 @@ __metadata:
     whatwg-mimetype: "npm:^4.0.0"
   peerDependencies:
     graphql: ^16.11.0
-  checksum: 59003d894a81dd4435fc32458b2de02ebda10234fd6772ab138c096fda1d1fc53092792178688a144915826261604477ed593d6f5411108839a86914da6a3533
+  checksum: 673f9b2b5cb1daf1a0f0fafd51a1009767ce9740576e9be103328a29ba6b3ad45ae6dfa01e6adda22356fdd4d4dbfdcad97d9b72dbc4cdb6cec20d02f73b2e8c
   languageName: node
   linkType: hard
 
@@ -3279,7 +3279,7 @@ __metadata:
   resolution: "@events-helsinki/graphql-proxy-server@workspace:packages/graphql-proxy-server"
   dependencies:
     "@apollo/datasource-rest": "npm:6.4.1"
-    "@apollo/server": "npm:^5.4.0"
+    "@apollo/server": "npm:^5.5.0"
     "@apollo/utils.keyvaluecache": "npm:4.0.0"
     "@as-integrations/express5": "npm:1.1.1"
     "@events-helsinki/eslint-config-bases": "workspace:^"
@@ -13398,7 +13398,7 @@ __metadata:
   resolution: "events-graphql-proxy@workspace:proxies/events-graphql-proxy"
   dependencies:
     "@apollo/datasource-rest": "npm:6.4.1"
-    "@apollo/server": "npm:^5.4.0"
+    "@apollo/server": "npm:^5.5.0"
     "@apollo/subgraph": "npm:2.11.2"
     "@events-helsinki/eslint-config-bases": "workspace:^"
     "@events-helsinki/graphql-proxy-server": "workspace:^"
@@ -25859,7 +25859,7 @@ __metadata:
   resolution: "venue-graphql-proxy@workspace:proxies/venue-graphql-proxy"
   dependencies:
     "@apollo/datasource-rest": "npm:6.4.1"
-    "@apollo/server": "npm:^5.4.0"
+    "@apollo/server": "npm:^5.5.0"
     "@apollo/subgraph": "npm:2.11.2"
     "@events-helsinki/eslint-config-bases": "workspace:^"
     "@events-helsinki/graphql-proxy-server": "workspace:^"

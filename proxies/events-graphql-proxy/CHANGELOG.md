@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.6.0...events-graphql-proxy-v1.6.1) (2026-03-26)
+
+
+### Dependencies
+
+* Bump eslint and plugins Refs: RATY-299 ([dc05e4f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/dc05e4fd8211185167ed7296f0979b48d5a5dde3))
+
 ## [1.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.5.3...events-graphql-proxy-v1.6.0) (2026-03-20)
 
 

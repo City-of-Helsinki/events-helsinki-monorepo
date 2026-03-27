@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.3...venue-graphql-proxy-v1.6.4) (2026-03-27)
+
+
+### Dependencies
+
+* Bump @apollo/server from 5.4.0 to 5.5.0 ([59cfba7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/59cfba792e71e31910d9060769e1f3ab994b6623))
+
 ## [1.6.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.2...venue-graphql-proxy-v1.6.3) (2026-03-26)
 
 

@@ -22873,12 +22873,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"serialize-javascript@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "serialize-javascript@npm:4.0.0"
-  dependencies:
-    randombytes: "npm:^2.1.0"
-  checksum: f32ca5430abbbc6f72eff8abf62715d6f22abf517d3b398186d4d520e640695c70207319d7c1c758c844df11f56c2deedcf511483b22a0fc845f9f8c93a26b0b
+"serialize-javascript@npm:^7.0.5":
+  version: 7.0.5
+  resolution: "serialize-javascript@npm:7.0.5"
+  checksum: fc03aab12be7432d0f3fc54f56105e36e12821371b4af5fe335d7bcd2f4930983ba656bd8513bd76fcbe3f8f081b8b773fdb4db642f96e20aec71ae1e918f96c
   languageName: node
   linkType: hard
 

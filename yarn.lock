@@ -9082,12 +9082,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"anchor-markdown-header@npm:^0.6.0":
-  version: 0.6.0
-  resolution: "anchor-markdown-header@npm:0.6.0"
+"anchor-markdown-header@npm:^0.8.2":
+  version: 0.8.3
+  resolution: "anchor-markdown-header@npm:0.8.3"
   dependencies:
-    emoji-regex: "npm:~10.1.0"
-  checksum: 702bace809ccbcfa726e07c213b0208a267df03faa489b6db8b1693af366956eaf0b24fb7de1678c9212db5188d4cd47f5e5023226855c012366dd0c26237629
+    emoji-regex: "npm:~10.6.0"
+    remove-markdown: "npm:^0.6.2"
+  checksum: cba6c0c5ac6249843ec829d1939fbd499439c74df034a83648964fb93b1ccaa393b38f48d93772c2d159580cb0e395fcc8235e73858bae78bf873b236b7eefdc
   languageName: node
   linkType: hard
 
@@ -12056,19 +12057,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"doctoc@npm:2.2.1, doctoc@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "doctoc@npm:2.2.1"
+"doctoc@npm:2.3.0":
+  version: 2.3.0
+  resolution: "doctoc@npm:2.3.0"
   dependencies:
     "@textlint/markdown-to-ast": "npm:^12.1.1"
-    anchor-markdown-header: "npm:^0.6.0"
+    anchor-markdown-header: "npm:^0.8.2"
     htmlparser2: "npm:^7.2.0"
     minimist: "npm:^1.2.6"
     underscore: "npm:^1.13.2"
     update-section: "npm:^0.3.3"
   bin:
     doctoc: doctoc.js
-  checksum: e90d1b5fbb1c19dd7f6da3900ea90d1bb2a219437ba79778ab933255797dfa4375afb40305fe2ba331362ef8f41fc7af1f76bc0af92e5d6fa60103919fb2a63b
+  checksum: 94f531ff337a992a1e33246fecc99169806352cdc1395ac2533a6788fd4fd17f8590e84ff7f4843268685f8da58d900c1069fd8f43585f659b494e5951b35185
   languageName: node
   linkType: hard
 
@@ -12400,10 +12401,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"emoji-regex@npm:~10.1.0":
-  version: 10.1.0
-  resolution: "emoji-regex@npm:10.1.0"
-  checksum: 5fbadb7870e2ccc7214036ad4d5639f8ed5d8d523bcebfd4d6e0f4348b4b8a94e84e5718e66413c806d60b6c4faa6a5a2ff6838e31de4cc1e96cb6d5af6095ad
+"emoji-regex@npm:~10.6.0":
+  version: 10.6.0
+  resolution: "emoji-regex@npm:10.6.0"
+  checksum: 889d5d99230cfe4b31a76d9f24506f1a376d7179a8a11986e614221a1f448818e9bbadc76e38f09fb79c6bb3065b1143b75bc21f13c026d7c9139392fbaf583e
   languageName: node
   linkType: hard
 
@@ -13471,7 +13472,7 @@ __metadata:
     cross-env: "npm:7.0.3"
     date-fns: "npm:^4.1.0"
     date-fns-tz: "npm:^3.2.0"
-    doctoc: "npm:2.2.1"
+    doctoc: "npm:2.3.0"
     dotenv-expand: "npm:12.0.2"
     edit-json-file: "npm:1.8.1"
     env-cmd: "npm:10.1.0"
@@ -21884,6 +21885,13 @@ __metadata:
   version: 1.0.8
   resolution: "remedial@npm:1.0.8"
   checksum: 2157f4d561369334173649f45da596f393d67f2b9816771d413ccd73680d9af7779040725ca59c9c3a4326982a80545097ac1ad2d5cd126d20b0fdc302ba62d1
+  languageName: node
+  linkType: hard
+
+"remove-markdown@npm:^0.6.2":
+  version: 0.6.3
+  resolution: "remove-markdown@npm:0.6.3"
+  checksum: ec6e0ca225804232a0775ca3b03881c069e2d87ff181240129e6eff1f309ccc0d61d3701599deb80bb7551cbdfbe77a3c8ad2412d949821717e181ed3c68f5c4
   languageName: node
   linkType: hard
 

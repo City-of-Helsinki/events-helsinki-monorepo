@@ -87,6 +87,7 @@
     "`socks` in resolutions to resolve dependabot issue #83 of dep for a dep",
     "`tar` in resolutions to fix GHSA-r6q2-hw4h-h46w (Race Condition on macOS APFS, high severity)",
     "`tmp` in resolutions to resolve dependabot issue #216 of dep for a dep",
+    "`underscore` in resolutions to fix GHSA-qpx9-hpmf-5gmw (DoS via recursion, high severity)",
     "`ws` in resolutions to resolve dependabot issue #85 of dep for a dep",
     "other packages in resolutions are there to make it sure only 1 version of it is installed in monorepo"
   ],
@@ -109,6 +110,7 @@
     "socks": "^2.8.6",
     "tar": ">=7.5.4",
     "tmp": "0.2.5",
+    "underscore": ">=1.13.8",
     "typescript": "5.8.3",
     "ws": "^8.13.3"
   },

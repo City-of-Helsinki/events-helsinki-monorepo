@@ -25414,17 +25414,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"underscore@npm:^1.13.2":
-  version: 1.13.7
-  resolution: "underscore@npm:1.13.7"
-  checksum: 901d724ec33a6bf690e054905925e40e9af57f152e1b28acf261568a394eb67c4ebc4b07941d2ffbcd49bc0bee4f6c76e74e04dc86826e1fe3c41a7f433faf34
-  languageName: node
-  linkType: hard
-
-"underscore@npm:~1.12.1":
-  version: 1.12.1
-  resolution: "underscore@npm:1.12.1"
-  checksum: 45e77d566d19fcacbbd9e3d73b7f3e22370ecd41d37ef36e7a94cd5b3ae4f4609850935e42bbce5e998d31f788d4a31c4b15c81b7cc1af2096eab9d97cb9e574
+"underscore@npm:>=1.13.8":
+  version: 1.13.8
+  resolution: "underscore@npm:1.13.8"
+  checksum: d775c1d4f32cd06c0c8b69437391f4cee98e9499f6008381b32d628caca2f97e47980b719482ca3173aa2a1be2ed5ae96b9442023f497e2bb901cf81d319b331
   languageName: node
   linkType: hard
 

@@ -93,9 +93,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/federation-internals@npm:2.11.2":
-  version: 2.11.2
-  resolution: "@apollo/federation-internals@npm:2.11.2"
+"@apollo/federation-internals@npm:2.13.3":
+  version: 2.13.3
+  resolution: "@apollo/federation-internals@npm:2.13.3"
   dependencies:
     "@types/uuid": "npm:^9.0.0"
     chalk: "npm:^4.1.0"
@@ -103,7 +103,7 @@ __metadata:
     uuid: "npm:^9.0.0"
   peerDependencies:
     graphql: ^16.5.0
-  checksum: 2c6eba97ef68513b126eefb1f1e2afa75c225d046da9b010fb895941e25870a2cf77625bac574afdb02ff86455b0c19785f1e9ad4a13a8ec5729f650be759e6f
+  checksum: d865085238c4d7536258db162b050e0429a293dfbe3abb73f919971e37edcd1100e5282f54d3d3ad7ef79386de7fbdde32de90ca390e30415136b3aa44bd2624
   languageName: node
   linkType: hard
 
@@ -175,15 +175,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@apollo/subgraph@npm:2.11.2":
-  version: 2.11.2
-  resolution: "@apollo/subgraph@npm:2.11.2"
+"@apollo/subgraph@npm:2.13.3":
+  version: 2.13.3
+  resolution: "@apollo/subgraph@npm:2.13.3"
   dependencies:
     "@apollo/cache-control-types": "npm:^1.0.2"
-    "@apollo/federation-internals": "npm:2.11.2"
+    "@apollo/federation-internals": "npm:2.13.3"
   peerDependencies:
     graphql: ^16.5.0
-  checksum: a0c6bec7655d271270bf05005e064a6745228edaa0b8a98f9a1b3262c269e9ef1414e0c60f55c2a29ad0409e03b4d3d6d158dc19b46171e56ebf4e06c6f17ed3
+  checksum: 4a0c4c13cf21648dc72bb8d4e3ea256d8529aa3f2a0109a34a63976ae338ca952a161cb227883e4cf7dd87524667766e04eddf6de2788ef2da4be37c61389547
   languageName: node
   linkType: hard
 
@@ -13390,7 +13390,7 @@ __metadata:
   dependencies:
     "@apollo/datasource-rest": "npm:6.4.1"
     "@apollo/server": "npm:^5.5.0"
-    "@apollo/subgraph": "npm:2.11.2"
+    "@apollo/subgraph": "npm:2.13.3"
     "@events-helsinki/eslint-config-bases": "workspace:^"
     "@events-helsinki/graphql-proxy-server": "workspace:^"
     "@graphql-codegen/cli": "npm:5.0.7"
@@ -23447,7 +23447,7 @@ __metadata:
   dependencies:
     "@apollo/client": "npm:^3.11.10"
     "@apollo/datasource-rest": "npm:6.4.1"
-    "@apollo/subgraph": "npm:2.11.2"
+    "@apollo/subgraph": "npm:2.13.3"
     "@city-of-helsinki/react-helsinki-headless-cms": "npm:3.0.1"
     "@commitlint/cli": "npm:^19.8.1"
     "@commitlint/config-conventional": "npm:^19.8.1"
@@ -25848,7 +25848,7 @@ __metadata:
   dependencies:
     "@apollo/datasource-rest": "npm:6.4.1"
     "@apollo/server": "npm:^5.5.0"
-    "@apollo/subgraph": "npm:2.11.2"
+    "@apollo/subgraph": "npm:2.13.3"
     "@events-helsinki/eslint-config-bases": "workspace:^"
     "@events-helsinki/graphql-proxy-server": "workspace:^"
     "@graphql-codegen/cli": "npm:5.0.7"

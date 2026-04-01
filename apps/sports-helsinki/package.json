@@ -155,7 +155,7 @@
     "prettier": "^3.6.2",
     "require-from-string": "2.0.2",
     "rimraf": "6.0.1",
-    "sass": "^1.89.2",
+    "sass": "^1.98.0",
     "size-limit": "11.2.0",
     "symlink-dir": "6.0.5",
     "sync-directory": "6.0.5",

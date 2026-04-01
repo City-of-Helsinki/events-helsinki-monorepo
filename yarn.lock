@@ -9950,11 +9950,11 @@ __metadata:
   linkType: hard
 
 "brace-expansion@npm:^2.0.1":
-  version: 2.0.2
-  resolution: "brace-expansion@npm:2.0.2"
+  version: 2.0.3
+  resolution: "brace-expansion@npm:2.0.3"
   dependencies:
     balanced-match: "npm:^1.0.0"
-  checksum: b3d12d77d213accd20910f292749e99bde9676dda0fb158a8851ff5dcb0fdd0e3a4b3c487c78d196bc21bb5c341e4539b979ea2d0eaac316f0546691c2073a6b
+  checksum: 23cd11746ee048d24003e67f4b7cd0dcda57809500502b8f3105339642c9e2b9524d2c238b4e15bc96eb0c27626976a035947969d9c519868d55b898ef15189b
   languageName: node
   linkType: hard
 

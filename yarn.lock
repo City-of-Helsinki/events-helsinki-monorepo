@@ -18492,11 +18492,11 @@ __metadata:
   linkType: hard
 
 "minimatch@npm:^5.0.1":
-  version: 5.1.6
-  resolution: "minimatch@npm:5.1.6"
+  version: 5.1.9
+  resolution: "minimatch@npm:5.1.9"
   dependencies:
     brace-expansion: "npm:^2.0.1"
-  checksum: 0c0446ede579b1736bfea4efb288c2dea17ce80fd0339d00547625ed97a60ed403c7c2fb141211119937a811bc635b3f0f44debeb9d7870b3f58cf0fe78ddccc
+  checksum: 09b1f87d00029b0c583ddd82e0daf52ee63fedeca1b7689dc3f4e7e51dfae1ef8aabecdc4606450e47171a2bc3fcd271dbb1103c48314a53cca3f5b5fa49c8f1
   languageName: node
   linkType: hard
 

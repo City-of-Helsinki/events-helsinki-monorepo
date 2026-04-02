@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import React from 'react';
 
+import { vi } from 'vitest';
 import useShouldShowAppBackArrow from '../useShouldShowAppBackArrow';
 
 // JSDOM doesn't implement PerformanceNavigationTiming, so we need to mock it.

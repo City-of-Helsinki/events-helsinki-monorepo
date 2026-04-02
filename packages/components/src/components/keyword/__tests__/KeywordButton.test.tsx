@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { vi } from 'vitest';
 import { render, screen } from '@/test-utils';
 import KeywordTag from '../KeywordTag';
 

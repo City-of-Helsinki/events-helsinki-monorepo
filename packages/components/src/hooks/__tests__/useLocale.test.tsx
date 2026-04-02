@@ -4,6 +4,7 @@ import {
   translations,
 } from '@events-helsinki/common-i18n';
 import { useTranslation } from 'react-i18next';
+import { vi } from 'vitest';
 import { render, screen } from '../../../config/tests/test-utils';
 import { APP_LANGUAGES } from '../../constants';
 import * as useLocale from '../useLocale';

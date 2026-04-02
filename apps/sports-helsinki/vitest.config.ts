@@ -55,7 +55,8 @@ const aliasPaths = paths
 export default defineConfig({
   cacheDir: '../../.cache/sports-helsinki',
   plugins: [
-    react(),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    react() as any,
     cssInjectedByJsPlugin(),
     {
       // Suppress sourcemap warnings that can't be suppressed at console/stdout/stderr level

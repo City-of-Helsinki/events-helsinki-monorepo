@@ -1,5 +1,6 @@
 import { translations } from '@events-helsinki/common-i18n';
 import { useGroupConsent } from 'hds-react';
+import { vi } from 'vitest';
 import { render, screen } from '@/test-utils';
 import { fakeEvent, fakePlace } from '@/test-utils/mockDataUtils';
 import type { EventFields } from '../../../../../types';

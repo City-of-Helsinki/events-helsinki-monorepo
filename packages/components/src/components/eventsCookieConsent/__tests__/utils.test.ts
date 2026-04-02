@@ -1,5 +1,6 @@
 import type { TFunction } from 'next-i18next';
 
+import { vi } from 'vitest';
 import { createLocaleDictBuilder } from '../utils';
 
 describe('createLocaleDictBuilder', () => {

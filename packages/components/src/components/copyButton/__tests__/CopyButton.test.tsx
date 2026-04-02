@@ -1,4 +1,5 @@
 import React from 'react';
+import { vi } from 'vitest';
 import { act, fireEvent, render, screen } from '@/test-utils';
 import type { Props } from '../CopyButton';
 import CopyButton from '../CopyButton';

@@ -1,5 +1,6 @@
 import { translations } from '@events-helsinki/common-i18n';
 import React from 'react';
+import { vi } from 'vitest';
 import {
   arrowDownKeyPressHelper,
   arrowUpKeyPressHelper,

@@ -1,4 +1,5 @@
 import React from 'react';
+import { vi } from 'vitest';
 import { render } from '@/test-utils';
 import ScrollIntoViewWithFocus from '../ScrollIntoViewWithFocus';
 

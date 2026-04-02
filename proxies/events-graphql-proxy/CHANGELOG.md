@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.6.2...events-graphql-proxy-v1.6.3) (2026-04-02)
+
+
+### Dependencies
+
+* Bump @apollo/subgraph from 2.11.2 to 2.13.3 ([6c81133](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6c811335c3465e4023787ffec984364d85315484))
+* **deps:** Bump lodash in /proxies/events-graphql-proxy ([ae00445](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ae00445c886e58158608e0f5a78ee147c3c74fad))
+
 ## [1.6.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.6.1...events-graphql-proxy-v1.6.2) (2026-03-27)
 
 

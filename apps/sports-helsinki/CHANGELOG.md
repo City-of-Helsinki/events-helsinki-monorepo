@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.2.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.2.1...sports-helsinki-v2.2.2) (2026-04-02)
+
+
+### Dependencies
+
+* Bump @apollo/subgraph from 2.11.2 to 2.13.3 ([6c81133](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/6c811335c3465e4023787ffec984364d85315484))
+* Bump testcafe to 3.7.4 ([7164f99](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7164f992c703eb06b1b23ffe6731cf2cf864453d))
+* **deps:** Bump lodash in /proxies/events-graphql-proxy ([ae00445](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ae00445c886e58158608e0f5a78ee147c3c74fad))
+* Remove unused @types/react-helmet ([8d34fcf](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/8d34fcfecaf2e5a7544067b949f2c686ea0c74e0))
+* Upgrade sass to 1.98.0 ([58f721a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/58f721aef07013dd4931abe5dc91307b133d379d))
+
 ## [2.2.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.2.0...sports-helsinki-v2.2.1) (2026-03-26)
 
 

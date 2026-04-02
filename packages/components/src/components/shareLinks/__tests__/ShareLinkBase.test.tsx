@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { fireEvent, render, screen } from '@/test-utils';
 import ShareLinkBase from '../ShareLinkBase';
 

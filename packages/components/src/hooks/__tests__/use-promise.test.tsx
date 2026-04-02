@@ -1,5 +1,6 @@
 import { act, renderHook, screen, waitFor } from '@testing-library/react';
 import type { FC } from 'react';
+import { vi } from 'vitest';
 import { render } from '@/test-utils';
 import { usePromise } from '../use-promise';
 

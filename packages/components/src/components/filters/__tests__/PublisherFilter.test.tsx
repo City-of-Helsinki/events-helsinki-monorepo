@@ -1,4 +1,5 @@
 import { translations } from '@events-helsinki/common-i18n';
+import { vi } from 'vitest';
 import { render, waitFor, screen, userEvent } from '@/test-utils';
 import { fakeOrganization } from '@/test-utils/mockDataUtils';
 import { OrganizationDetailsDocument } from '../../../types';

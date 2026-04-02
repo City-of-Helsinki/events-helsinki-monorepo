@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import getSecureImage from '../getSecureImage';
 
 const IMAGE_PROXY_SERVER = 'https://secure.proxy.com/';

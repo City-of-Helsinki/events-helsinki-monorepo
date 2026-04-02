@@ -1,5 +1,6 @@
 import { IconStar } from 'hds-react';
 import React from 'react';
+import { vi } from 'vitest';
 import { actWait, render, userEvent, waitFor, screen } from '@/test-utils';
 import { fakePlaces } from '@/test-utils/mockDataUtils';
 

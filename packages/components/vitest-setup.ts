@@ -2,7 +2,7 @@ import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 import { hideConsoleMessages } from '@events-helsinki/common-tests';
 import { loadEnvConfig } from '@next/env';
 
-import { expect } from 'vitest';
+import { expect, vi } from 'vitest';
 import * as matchers from 'vitest-axe/matchers';
 import { setup as setupFakedIndexedDB } from 'vitest-indexeddb';
 import { initializeI18nWithConfig } from './config/tests/initI18n';

@@ -7,6 +7,7 @@ import {
   startOfYesterday,
   subDays,
 } from 'date-fns';
+import { vi } from 'vitest';
 import { EnrolmentStatusLabel } from '../../../constants';
 import { useAppThemeContext } from '../../../themeProvider';
 import type { AppThemeContextProps } from '../../../themeProvider/AppThemeContext';

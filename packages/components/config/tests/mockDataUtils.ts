@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import merge from 'lodash/merge';
 import type { NextRouter } from 'next/router';
+import { vi } from 'vitest';
 import { EXTLINK } from '../../src/constants';
 import type { AppRoutingContextProps } from '../../src/routingUrlProvider/AppRoutingContext';
 import { EventTypeId } from '../../src/types';

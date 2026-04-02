@@ -3,6 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import mockRouter from 'next-router-mock';
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
 
+import { vi } from 'vitest';
 import CmsHelperProvider from '../../../cmsHelperProvider/CmsHelperProvider';
 import { APP_LANGUAGES } from '../../../constants';
 import { HeadlessCMSHelper } from '../../../utils/headless-cms/HeadlessCMSHelper';

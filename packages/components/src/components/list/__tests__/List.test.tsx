@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
+import { vi } from 'vitest';
 import List from '../List';
 import type { ListItemProps } from '../List';
 

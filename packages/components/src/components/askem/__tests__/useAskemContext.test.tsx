@@ -1,6 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { useGroupConsent } from 'hds-react';
 
+import { vi } from 'vitest';
 import useCookieConfigurationContext from '../../../cookieConfigurationProvider/useCookieConfigurationContext';
 import createAskemInstance from '../instance';
 import type { AskemConfigs } from '../types';

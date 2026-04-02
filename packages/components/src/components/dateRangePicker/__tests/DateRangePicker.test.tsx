@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { toZonedTime } from 'date-fns-tz';
 import { advanceTo } from 'jest-date-mock';
 import React from 'react';
+import { vi } from 'vitest';
 import { configure, render, screen } from '@/test-utils';
 import type { DateRangePickerProps } from '../DateRangePicker';
 import DateRangePicker from '../DateRangePicker';

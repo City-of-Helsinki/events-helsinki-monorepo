@@ -2,6 +2,7 @@ import { endOfTomorrow, startOfYesterday } from 'date-fns';
 import { advanceTo, clear } from 'jest-date-mock';
 import capitalize from 'lodash/capitalize';
 import * as React from 'react';
+import { vi } from 'vitest';
 import { render, screen, userEvent } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import {

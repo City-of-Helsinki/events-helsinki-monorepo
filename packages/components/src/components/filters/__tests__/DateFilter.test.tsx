@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import { screen, render } from '@/test-utils';
 
 import type { DateFilterProps } from '../DateFilter';

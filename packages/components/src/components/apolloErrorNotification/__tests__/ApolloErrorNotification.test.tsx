@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { render, screen, userEvent, waitFor } from '@/test-utils';
 import ApolloErrorNotification from '../ApolloErrorNotification';
 

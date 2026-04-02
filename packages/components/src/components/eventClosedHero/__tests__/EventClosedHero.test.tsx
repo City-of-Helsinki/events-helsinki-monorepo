@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { vi } from 'vitest';
 import { render, screen, userEvent } from '@/test-utils';
 import { translations } from '@/test-utils/initI18n';
 import EventClosedHero from '../EventClosedHero';

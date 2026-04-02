@@ -1,4 +1,5 @@
 import { startOfDay } from 'date-fns';
+import { vi } from 'vitest';
 import type { OpeningHour, Time } from '../../../../../types/generated/graphql';
 import { ResourceState } from '../../../../../types/generated/graphql';
 import getVenueOpeningTimeDescription from '../getVenueOpeningTimeDescription';

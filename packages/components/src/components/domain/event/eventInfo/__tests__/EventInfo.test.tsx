@@ -3,6 +3,7 @@ import * as ics from 'ics';
 import mockRouter from 'next-router-mock';
 
 import type { MockInstance } from 'vitest';
+import { vi } from 'vitest';
 import {
   actWait,
   configure,

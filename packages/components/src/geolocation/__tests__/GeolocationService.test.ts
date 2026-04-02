@@ -13,6 +13,7 @@ describe('GeolocationService', () => {
   });
 
   afterEach(() => {
+    vi.clearAllMocks();
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
   });

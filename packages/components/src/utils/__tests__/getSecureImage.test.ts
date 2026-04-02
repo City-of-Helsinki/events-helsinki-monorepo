@@ -3,6 +3,10 @@ import getSecureImage from '../getSecureImage';
 
 const IMAGE_PROXY_SERVER = 'https://secure.proxy.com/';
 
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
 describe('getSecureImage', () => {
   // Test cases when the image proxy is active
   describe('when image proxy URL is configured', () => {

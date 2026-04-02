@@ -23,7 +23,12 @@ import {
   uniqBySetWithArrayFrom,
 } from '../service';
 
-vi.mock('fs/promises');
+vi.mock('fs/promises', () => ({
+  default: {
+    access: vi.fn(),
+    readdir: vi.fn(),
+  },
+}));
 
 const mockLogger: Logger = {
   info: vi.fn(),

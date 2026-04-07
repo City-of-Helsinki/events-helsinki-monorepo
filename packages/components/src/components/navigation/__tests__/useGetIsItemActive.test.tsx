@@ -37,7 +37,7 @@ const testCmsHelper = new HeadlessCMSHelper({
   cmsArticlesContextPath: '/articles',
   cmsPagesContextPath: '/pages',
   dateFormat: 'dd.MM.yyyy',
-  ArticleDetails: vi.fn(),
+  ArticleDetails: vi.fn() as any,
 });
 
 const testRoutedAppHelper = new CmsRoutedAppHelper({

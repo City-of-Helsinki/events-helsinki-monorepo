@@ -4925,22 +4925,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@isaacs/balanced-match@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@isaacs/balanced-match@npm:4.0.1"
-  checksum: a4a6631d364de72d26496e4732359ceecede47b58a12a50138a5c901cda0a85620cd3c5a25ac9f59907623c224bc3b76016f25b6ba1a730da114410a565bda93
-  languageName: node
-  linkType: hard
-
-"@isaacs/brace-expansion@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "@isaacs/brace-expansion@npm:5.0.1"
-  dependencies:
-    "@isaacs/balanced-match": "npm:^4.0.1"
-  checksum: 6eef47b156bd5a658527467dede2adaeff0563815ba9eadb38da3ccecfef34f47eb758ee009d3cabd68c2f4a3122570cba1cb392e67e08dfc07023988364c98e
-  languageName: node
-  linkType: hard
-
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -10201,7 +10185,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"brace-expansion@npm:^2.0.1":
+"brace-expansion@npm:^2.0.1, brace-expansion@npm:^2.0.2":
   version: 2.0.3
   resolution: "brace-expansion@npm:2.0.3"
   dependencies:
@@ -10216,6 +10200,15 @@ __metadata:
   dependencies:
     balanced-match: "npm:^4.0.2"
   checksum: 550882bd4aa9c0cdd312527fab1a4a20b6ecccc1ba6f444a0316c8d743dd251f4a02230821de079f4b872b01db2b2d5a4b6027b849049fbff090735f870a80b9
+  languageName: node
+  linkType: hard
+
+"brace-expansion@npm:^5.0.5":
+  version: 5.0.5
+  resolution: "brace-expansion@npm:5.0.5"
+  dependencies:
+    balanced-match: "npm:^4.0.2"
+  checksum: 281fa302478cfbea1c38504ca8ed971bfa43de7e8674ddaf2e0ff37b54286b204f106ad9d28d976029abe946b999bc9efa10e1241aa39f37d3cb0e309a49878e
   languageName: node
   linkType: hard
 
@@ -18661,30 +18654,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:10.1.2":
-  version: 10.1.2
-  resolution: "minimatch@npm:10.1.2"
-  dependencies:
-    "@isaacs/brace-expansion": "npm:^5.0.1"
-  checksum: f940c9ac2898d910662ed2679abdf0217ece323f688d64bb96efe7a15505e7fd56364e170755123153f97d3f5cd8c3ba02febbc0eec9840ff9c0175a77718936
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:9.0.3":
-  version: 9.0.3
-  resolution: "minimatch@npm:9.0.3"
-  dependencies:
-    brace-expansion: "npm:^2.0.1"
-  checksum: ddf78ca17db5eec90bd35e9ae38155785c96736cca8fa133a1494be46aa481348903790ec8a0e65b413d18cb4d1d8b97ca9c87ad3c2dab4444d7a5e738c441bb
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^10.0.3, minimatch@npm:^10.2.2":
+"minimatch@npm:^10.0.3":
   version: 10.2.4
   resolution: "minimatch@npm:10.2.4"
   dependencies:
     brace-expansion: "npm:^5.0.2"
   checksum: 85f1c0d9c5e2706146ea73245143ba83e0c6c51becd2df16964195340aa18c1ae7cfdc7b95ea9dea6674b33c0c007dec890f0a3a64f487ae1cbb7c00c3e22368
+  languageName: node
+  linkType: hard
+
+"minimatch@npm:^10.2.2, minimatch@npm:^10.2.3":
+  version: 10.2.5
+  resolution: "minimatch@npm:10.2.5"
+  dependencies:
+    brace-expansion: "npm:^5.0.5"
+  checksum: 40ac5db076d6fcfcccb1ab21d89c0cf14777a8024162906677f1e21ac6b8b5a2a0dab682d3e5c424bdde1ed4ebf2d8e68f51a61c6d44b821f1068d2d81d93954
   languageName: node
   linkType: hard
 
@@ -18707,20 +18691,20 @@ __metadata:
   linkType: hard
 
 "minimatch@npm:^8.0.2":
-  version: 8.0.4
-  resolution: "minimatch@npm:8.0.4"
+  version: 8.0.7
+  resolution: "minimatch@npm:8.0.7"
   dependencies:
     brace-expansion: "npm:^2.0.1"
-  checksum: eea8425c44427fa26a7a6bfc5835c29911cb3bc528817ecab3a143aa08709e26e30bb8e31fd943aac346e75123b9f28283650aca0b20a1f0b3127cfb5ad2c221
+  checksum: a97ba7f78e3118b5fd65572b8a3e197a7e9441d3b25fe4c478482d647441ce6df4b6ca21ce16d2954a3207332d3ccc2a03cbc3a46ae10b4c9a20b9415e315d8a
   languageName: node
   linkType: hard
 
-"minimatch@npm:^9.0.0, minimatch@npm:^9.0.5":
-  version: 9.0.5
-  resolution: "minimatch@npm:9.0.5"
+"minimatch@npm:^9.0.0, minimatch@npm:^9.0.5, minimatch@npm:^9.0.6":
+  version: 9.0.9
+  resolution: "minimatch@npm:9.0.9"
   dependencies:
-    brace-expansion: "npm:^2.0.1"
-  checksum: 8043809d36f9405a63153a047cff207cccd9e11b09241168dad3c9037f71229c99f427a80fc349e939c0c44de591d5715391ae9f83e39b388f5ae7937243dfe9
+    brace-expansion: "npm:^2.0.2"
+  checksum: 08d7064131f74a06ab705e5abd16f314238f889ce021566d19f0e9de485a9e3f0e48958d7ae28b23ae313f910e1b71f1ad2d9ff78109b42a232cc17f12894e27
   languageName: node
   linkType: hard
 

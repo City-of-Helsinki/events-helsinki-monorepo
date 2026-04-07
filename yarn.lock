@@ -16031,17 +16031,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immutable@npm:^3.8.3":
+  version: 3.8.3
+  resolution: "immutable@npm:3.8.3"
+  checksum: c13a493a0d3b15f5078693fee5260135e1f8dbe2cb2ea93abaf96a1a88f5c9bf8ee10bd0f67d4b1c5b9b602abe4fd2ed9779e5d14a00b3f66706261d930f9588
+  languageName: node
+  linkType: hard
+
 "immutable@npm:^5.1.5":
   version: 5.1.5
   resolution: "immutable@npm:5.1.5"
   checksum: c89c9e4baaeaedc7e170ce150351404fb42fd0f467a4ef119e6b9765ef02e8d62d20dd802c7b4d0e64b6ac3fdacc1b43ff93e96a6820a6da44e3257340aee105
-  languageName: node
-  linkType: hard
-
-"immutable@npm:~3.7.6":
-  version: 3.7.6
-  resolution: "immutable@npm:3.7.6"
-  checksum: 6b57bfa83270bd87605cbaf36417873d11a84ed7c88cb99aeae7ce861458b131914b696d6b9cf6d80a2a4b5824d9de7c8959f23458fc973aaa7a84ea77716042
   languageName: node
   linkType: hard
 

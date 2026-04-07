@@ -19963,17 +19963,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:^6.3.0":
-  version: 6.3.0
-  resolution: "path-to-regexp@npm:6.3.0"
-  checksum: 0593bda6e27d251104b8c928b65a8189e0476daa115fec771dd1941b3540a6bf2f826e14a203a78cdc80c6f7777690232d45f098825d5016bd19220db6142447
-  languageName: node
-  linkType: hard
-
-"path-to-regexp@npm:^8.0.0":
-  version: 8.2.0
-  resolution: "path-to-regexp@npm:8.2.0"
-  checksum: e9ee00ba2e578b4f64470b8bd23fde6042ed9d95cddef19cc128aa5c8a20f644878c99df08e433218fba8d7e308b0fda895f6f4121b07dcebd798b13a85ad9bd
+"path-to-regexp@npm:8.4.0":
+  version: 8.4.0
+  resolution: "path-to-regexp@npm:8.4.0"
+  checksum: 4a8f40fb9d7e46448aa74573d02a14956c3fb567dedac09309b88c29cf9222433f4030159821c8903f56f68e826c4180f5ae0be7c4ee0729c54e17acdfb9d3b5
   languageName: node
   linkType: hard
 

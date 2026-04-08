@@ -1,11 +1,30 @@
 import type { ParsedUrlQueryInput } from 'querystring';
 import { renderHook } from '@testing-library/react';
+import { VirtualConsole } from 'jsdom';
 import type { NextRouter } from 'next/router';
 import React from 'react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import type { CmsRoutedAppHelper } from '../../utils';
 import CmsHelperProvider from '../CmsHelperProvider';
 import useCmsRoutedAppHelper from '../useCmsRoutedAppHelper';
+
+// Suppress expected React context errors from reaching jsdom's VirtualConsole
+const originalEmit = VirtualConsole.prototype.emit;
+VirtualConsole.prototype.emit = function (event: string, ...args: unknown[]) {
+  if (
+    event === 'jsdomError' &&
+    args[0] instanceof Error &&
+    /CmsHelper/.test(args[0].message)
+  ) {
+    return false;
+  }
+  return originalEmit.call(this, event, ...args);
+};
+
+afterAll(() => {
+  // Restore the original emit method after all tests are done
+  VirtualConsole.prototype.emit = originalEmit;
+});
 
 // Mock the CmsRoutedAppHelper for testing purposes.
 // You can expand this with the actual methods and properties of the helper.

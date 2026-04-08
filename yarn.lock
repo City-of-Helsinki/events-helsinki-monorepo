@@ -14858,18 +14858,18 @@ __metadata:
   linkType: hard
 
 "glob@npm:^11.0.0":
-  version: 11.0.3
-  resolution: "glob@npm:11.0.3"
+  version: 11.1.0
+  resolution: "glob@npm:11.1.0"
   dependencies:
     foreground-child: "npm:^3.3.1"
     jackspeak: "npm:^4.1.1"
-    minimatch: "npm:^10.0.3"
+    minimatch: "npm:^10.1.1"
     minipass: "npm:^7.1.2"
     package-json-from-dist: "npm:^1.0.0"
     path-scurry: "npm:^2.0.0"
   bin:
     glob: dist/esm/bin.mjs
-  checksum: 64df37607006f3e7a30e4aa9089dd3597fc5ad61606b499f90d4a51321c6fc0f11003b8e1fe434cdf9da7944706cf901daf59ed40e78343b8d4aa9c0b3b67dd3
+  checksum: c2a0f3017309cb92859a4be11943ff5af2e53dae1912a57eaf781d53dda068fae457434d0ecd7afc70a56bbf353ffb2725235bbbae774f92d6e05a2621707035
   languageName: node
   linkType: hard
 
@@ -18628,7 +18628,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^10.0.3, minimatch@npm:^10.2.2, minimatch@npm:^10.2.3":
+"minimatch@npm:^10.1.1, minimatch@npm:^10.2.2, minimatch@npm:^10.2.3":
   version: 10.2.5
   resolution: "minimatch@npm:10.2.5"
   dependencies:
@@ -19963,10 +19963,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:8.4.0":
-  version: 8.4.0
-  resolution: "path-to-regexp@npm:8.4.0"
-  checksum: 4a8f40fb9d7e46448aa74573d02a14956c3fb567dedac09309b88c29cf9222433f4030159821c8903f56f68e826c4180f5ae0be7c4ee0729c54e17acdfb9d3b5
+"path-to-regexp@npm:^8.4.0":
+  version: 8.4.2
+  resolution: "path-to-regexp@npm:8.4.2"
+  checksum: 55820926f887b45e8f361a3043d590a47efeb7c7d721d3aeb7e0070a78c390ee1232506658fe37ae7c7111e49eb09aa176cdabb1812c5b957cd6f9cd61865cbe
   languageName: node
   linkType: hard
 

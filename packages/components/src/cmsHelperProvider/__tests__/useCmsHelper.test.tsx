@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react';
+import { VirtualConsole } from 'jsdom';
 import React from 'react';
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import type { HeadlessCMSHelper } from '../../utils';
@@ -28,6 +29,24 @@ const mockCmsHelper: HeadlessCMSHelper = {
     throw new Error('Function not implemented.');
   },
 };
+
+// Suppress expected React context errors from reaching jsdom's VirtualConsole
+const originalEmit = VirtualConsole.prototype.emit;
+VirtualConsole.prototype.emit = function (event: string, ...args: unknown[]) {
+  if (
+    event === 'jsdomError' &&
+    args[0] instanceof Error &&
+    /CmsHelper/.test(args[0].message)
+  ) {
+    return false;
+  }
+  return originalEmit.call(this, event, ...args);
+};
+
+afterAll(() => {
+  // Restore the original emit method after all tests are done
+  VirtualConsole.prototype.emit = originalEmit;
+});
 
 describe('useCmsHelper', () => {
   afterEach(() => {

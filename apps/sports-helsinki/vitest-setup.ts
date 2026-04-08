@@ -1,6 +1,20 @@
 import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 import { hideConsoleMessages } from '@events-helsinki/common-tests';
 import { loadEnvConfig } from '@next/env';
+import { VirtualConsole } from 'jsdom';
+
+// Suppress jsdom CSS parse errors at the VirtualConsole level
+const originalEmit = VirtualConsole.prototype.emit;
+VirtualConsole.prototype.emit = function (event: string, ...args: unknown[]) {
+  if (
+    event === 'jsdomError' &&
+    args[0] instanceof Error &&
+    args[0].message.includes('Could not parse CSS stylesheet')
+  ) {
+    return false;
+  }
+  return originalEmit.call(this, event, ...args);
+};
 
 import { expect } from 'vitest';
 import * as matchers from 'vitest-axe/matchers';

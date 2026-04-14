@@ -4,5 +4,5 @@
   "apps/hobbies-helsinki": "3.3.3",
   "proxies/events-graphql-federation": "1.13.0",
   "proxies/venue-graphql-proxy": "1.6.6",
-  "proxies/events-graphql-proxy": "1.6.3"
+  "proxies/events-graphql-proxy": "1.6.4"
 }

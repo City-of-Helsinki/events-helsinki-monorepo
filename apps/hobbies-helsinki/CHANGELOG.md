@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.3.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.3.2...hobbies-helsinki-v3.3.3) (2026-04-14)
+
+
+### Dependencies
+
+* Bump next from 15.5.14 to 15.5.15 ([9c7e93b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/9c7e93b97a432defc3dc34b637f601b56991caf6))
+* **deps:** Update vite to version 8.0.6 across multiple packages ([5948f7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5948f7c7fa0024db91cd682bfff36a12e5e03242))
+* **deps:** Update vitest and related packages to version 4.1.2 ([07c4d96](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/07c4d96b9e6755b556ead72b411be206bf24ea95))
+* Replace microbundle with tsup ([541e59f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/541e59f6e66c45cd16f44912e200ea74d87ccf58))
+
 ## [3.3.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.3.1...hobbies-helsinki-v3.3.2) (2026-04-02)
 
 

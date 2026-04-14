@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.5...venue-graphql-proxy-v1.6.6) (2026-04-14)
+
+
+### Dependencies
+
+* **deps:** Update vite to version 8.0.6 across multiple packages ([5948f7c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5948f7c7fa0024db91cd682bfff36a12e5e03242))
+* **deps:** Update vitest and related packages to version 4.1.2 ([07c4d96](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/07c4d96b9e6755b556ead72b411be206bf24ea95))
+
 ## [1.6.5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.4...venue-graphql-proxy-v1.6.5) (2026-04-02)
 
 

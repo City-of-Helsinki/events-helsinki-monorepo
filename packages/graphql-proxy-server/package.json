@@ -39,7 +39,7 @@
     "express": "5.1.0",
     "graphql-depth-limit": "1.1.0",
     "lodash": "4.18.1",
-    "uuid": "11.1.0"
+    "uuid": "14.0.0"
   },
   "devDependencies": {
     "@events-helsinki/eslint-config-bases": "workspace:^",

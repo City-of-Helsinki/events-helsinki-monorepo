@@ -3647,7 +3647,7 @@ __metadata:
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"
     typescript: "npm:5.8.3"
-    uuid: "npm:11.1.0"
+    uuid: "npm:14.0.0"
     vite: "npm:8.0.6"
     vitest: "npm:4.1.2"
     vitest-sonar-reporter: "npm:2.0.4"
@@ -25688,7 +25688,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:11.1.0, uuid@npm:^11.1.0":
+"uuid@npm:14.0.0":
+  version: 14.0.0
+  resolution: "uuid@npm:14.0.0"
+  bin:
+    uuid: dist-node/bin/uuid
+  checksum: b7e21620c8f93a82700a15d6b677ce9a3f1b468b21a9653bada7f4e05e146cd8006adb9210ddc4f9bffd37fcbdb3ae46c3761dc279265d0fda10668872ea2952
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^11.1.0":
   version: 11.1.0
   resolution: "uuid@npm:11.1.0"
   bin:

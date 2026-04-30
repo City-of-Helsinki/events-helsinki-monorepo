@@ -3487,7 +3487,7 @@ __metadata:
     https: "npm:1.0.0"
     i18next: "npm:25.3.2"
     i18next-browser-languagedetector: "npm:8.2.0"
-    i18next-http-backend: "npm:3.0.2"
+    i18next-http-backend: "npm:3.0.5"
     ics: "npm:^3.8.1"
     identity-obj-proxy: "npm:^3.0.0"
     jest-date-mock: "npm:^1.0.10"
@@ -11533,12 +11533,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-fetch@npm:4.0.0":
-  version: 4.0.0
-  resolution: "cross-fetch@npm:4.0.0"
+"cross-fetch@npm:4.1.0, cross-fetch@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "cross-fetch@npm:4.1.0"
   dependencies:
-    node-fetch: "npm:^2.6.12"
-  checksum: 30e86b703a455baca17b7f2088fdd88b71193b39e7cb61f3385511dc6064b7741c816329c0abff8a74d306969455c8797131d056518a981fd4d2424ecd4ab451
+    node-fetch: "npm:^2.7.0"
+  checksum: 4328589f3b0b4ff28a79ffddd8c31979f860aa6ea33f332288ec3badfb4985c3d0a5a49efc4df6efca7202b07280aa77e5b3ee2ab90d4ab32d75dd50ca5aceda
   languageName: node
   linkType: hard
 
@@ -11548,15 +11548,6 @@ __metadata:
   dependencies:
     node-fetch: "npm:^2.6.11"
   checksum: a8989fca821cae97520976d00f85ce7c3ab8af7e00cc06c94fd94c49ada6847f4cdeabca8e0ebd4aa6c7343f70bea7e0c64d5910b846aab218136a450585aa61
-  languageName: node
-  linkType: hard
-
-"cross-fetch@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "cross-fetch@npm:4.1.0"
-  dependencies:
-    node-fetch: "npm:^2.7.0"
-  checksum: 4328589f3b0b4ff28a79ffddd8c31979f860aa6ea33f332288ec3badfb4985c3d0a5a49efc4df6efca7202b07280aa77e5b3ee2ab90d4ab32d75dd50ca5aceda
   languageName: node
   linkType: hard
 
@@ -15875,12 +15866,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next-http-backend@npm:3.0.2":
-  version: 3.0.2
-  resolution: "i18next-http-backend@npm:3.0.2"
+"i18next-http-backend@npm:3.0.5":
+  version: 3.0.5
+  resolution: "i18next-http-backend@npm:3.0.5"
   dependencies:
-    cross-fetch: "npm:4.0.0"
-  checksum: b52a552b1473c5efb9d2cc500de01871e9b941c8ee96128e603540dce4baebaf262cde9965f53c166ed891369709a3f455c67db87ff7e7503119abc0bc971a20
+    cross-fetch: "npm:4.1.0"
+  checksum: a4ab7de9fecc65550b659cf96f1c1d4b43d7d974d6ff7f5da1746e865c4558b475de878f38cf1ad4d9d3cb65c432e04cdb476df1fec2b5a8023be40feae8df38
   languageName: node
   linkType: hard
 
@@ -19114,7 +19105,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.11, node-fetch@npm:^2.6.12, node-fetch@npm:^2.6.7, node-fetch@npm:^2.7.0":
+"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.11, node-fetch@npm:^2.6.7, node-fetch@npm:^2.7.0":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:

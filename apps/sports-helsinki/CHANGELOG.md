@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.2.3...sports-helsinki-v2.2.4) (2026-05-12)
+
+
+### Dependencies
+
+* Bump next from 15.5.15 to 15.5.18 ([5621f55](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/5621f552b672c5ca4fe6216a85ce2da968662bd1))
+* Bump postcss from 8.5.8 to 8.5.10 ([33caca3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/33caca3f911711ef75ae3894f245b625d1db5d9b))
+
 ## [2.2.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.2.2...sports-helsinki-v2.2.3) (2026-04-14)
 
 

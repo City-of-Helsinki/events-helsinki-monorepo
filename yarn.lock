@@ -6035,9 +6035,9 @@ __metadata:
   linkType: hard
 
 "@protobufjs/utf8@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@protobufjs/utf8@npm:1.1.0"
-  checksum: a9dd3eca80967bab9175c860b87e4e2fd2cc867460df5431fc47898f5b817e6a88f670e5f58655c3753bccde25bcd77ec18f0a433b6dee8e4b50711707b2f7c1
+  version: 1.1.1
+  resolution: "@protobufjs/utf8@npm:1.1.1"
+  checksum: 6fd10ef3cf3c0e3d3edf4c9bc71766a2c09520edfc45529aa6015cf0ad0d46eec180c8bfe53f28863dbd23cbefff926cfaea85336a0196a4f4f27517d0f37771
   languageName: node
   linkType: hard
 

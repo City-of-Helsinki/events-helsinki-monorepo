@@ -101,6 +101,8 @@ export default defineConfig({
         'src/i18n.ts', // Excludes i18n file
         'src/logger.ts', // Excludes logger file
         'src/middleware.ts', // Excludes middleware file
+        'src/instrumentation.ts', // Excludes instrumentation file
+        'src/instrumentation-client.ts', // Excludes instrumentation client file
         'src/index.tsx', // Excludes root index file
         'src/**/*.d.ts', // Excludes all declaration files
         'src/**/*.test.ts', // Excludes all .test.ts files

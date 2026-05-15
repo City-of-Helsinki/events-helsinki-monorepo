@@ -79,6 +79,8 @@ export default defineConfig(({ mode }) => ({
         'async-message.tsx',
         '**/*.stories.tsx',
         'src/components/document/Document.tsx',
+        'src/instrumentation.ts',
+        'src/instrumentation-client.ts',
       ],
     },
   },

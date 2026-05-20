@@ -128,6 +128,7 @@ const nextBaseConfig = ({
     // Standalone build
     // @link https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files-experimental
     output: 'standalone',
+    outputFileTracingRoot: __dirname,
 
     experimental: {
       // Prefer loading of ES Modules over CommonJS
@@ -135,7 +136,6 @@ const nextBaseConfig = ({
       // Experimental monorepo support
       externalDir: true,
       scrollRestoration: true,
-      outputFileTracingRoot: __dirname,
     },
 
     // 🚨 TURBOPACK CONFIGURATION

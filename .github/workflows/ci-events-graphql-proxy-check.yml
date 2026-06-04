@@ -30,7 +30,6 @@ jobs:
     secrets: inherit
     with:
       node-version: '24'
-      pnpm-version: '11.5.1'
       typecheck: true
       app-directory: proxies/events-graphql-proxy
       extra-commands: |

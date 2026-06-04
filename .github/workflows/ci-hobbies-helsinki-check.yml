@@ -34,7 +34,6 @@ jobs:
     secrets: inherit
     with:
       node-version: '24'
-      pnpm-version: '11.5.1'
       typecheck: true
       app-directory: apps/hobbies-helsinki
       extra-commands: |

@@ -21042,11 +21042,11 @@ __metadata:
   linkType: hard
 
 "qs@npm:^6.12.3, qs@npm:^6.14.0, qs@npm:^6.14.1":
-  version: 6.15.0
-  resolution: "qs@npm:6.15.0"
+  version: 6.15.2
+  resolution: "qs@npm:6.15.2"
   dependencies:
     side-channel: "npm:^1.1.0"
-  checksum: 1b26222222c3c6ea19c2558b51bff9ea742e56f291cf479b011b5ba921e61a043f8d4c6966d50d4ceb802951c42325731c0626725f743ae6582c9143f6036b35
+  checksum: c8747c48f4688e864f05c416fb1bdc20f67a86144e62bad4a504649feaf91bbcd0fc9a433e2959b70a8dda0caff2904e341a5e0710e4bda3a8d5af34fb25972e
   languageName: node
   linkType: hard
 

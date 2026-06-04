@@ -8,11 +8,11 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS deps
 
 USER root
 
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@11.5.1
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -76,11 +76,11 @@ RUN yum remove -y rsync && \
 # Stage 2: Build the app                                          #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS builder
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS builder
 
 USER root
 
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@11.5.1
 
 # Use non-root user
 USER default
@@ -133,10 +133,10 @@ RUN pnpm --filter ${PROXY} run build
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS develop
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS develop
 
 USER root
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@11.5.1
 
 USER default
 
@@ -171,7 +171,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS runner
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS runner
 
 
 # Build ARGS
@@ -182,7 +182,7 @@ ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
 USER root
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@11.5.1
 
 USER default
 

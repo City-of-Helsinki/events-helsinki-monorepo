@@ -74,6 +74,10 @@
       "./packages/eslint-config-bases",
       "./packages/components",
       "./proxies/events-graphql-proxy"
+    ],
+    "i18n-ally.localesPaths": [
+      "src/domain/i18n",
+      "src/lib/i18n"
     ]
   }
 }

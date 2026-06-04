@@ -1,5 +1,5 @@
-# Vendored from City-of-Helsinki/.github with Node-before-pnpm setup order
-# (pnpm 11.5+ requires Node >=22.13 at install time; CI uses Node 24).
+# Vendored from City-of-Helsinki/.github with Node-before-pnpm setup order.
+# pnpm version comes from package.json packageManager; uses pnpm/action-setup@v6.
 name: Common CI for Node (pnpm)
 
 on:
@@ -9,11 +9,6 @@ on:
         description: Node version to use
         required: true
         type: string
-      pnpm-version:
-        description: pnpm version to use
-        required: false
-        type: string
-        default: '11.5.1'
       extra-commands:
         description: Extra setup commands to run before lint/test/build
         required: false
@@ -85,9 +80,8 @@ jobs:
           node-version: ${{ inputs.node-version }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ inputs.pnpm-version }}
+        uses: pnpm/action-setup@v6
+        # Version from package.json packageManager (pnpm@11.5.1); v6 runs on node24
 
       - name: Setup Node.js with dependency path
         if: ${{ inputs.working-directory != '.' }}
@@ -162,9 +156,8 @@ jobs:
           node-version: ${{ inputs.node-version }}
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: ${{ inputs.pnpm-version }}
+        uses: pnpm/action-setup@v6
+        # Version from package.json packageManager (pnpm@11.5.1); v6 runs on node24
 
       - name: Setup Node.js with dependency path
         if: ${{ inputs.working-directory != '.' }}

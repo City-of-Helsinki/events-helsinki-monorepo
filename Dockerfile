@@ -7,13 +7,13 @@
 #   2. depend on .dockerignore, you must at least                 #
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
-ARG BUILDER_FROM_IMAGE=registry.access.redhat.com/ubi9/nodejs-22
+ARG BUILDER_FROM_IMAGE=registry.access.redhat.com/ubi9/nodejs-24
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS deps
 
 USER root
 
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@11.5.1
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -131,7 +131,7 @@ COPY --chown=default:root  . .
 COPY --from=deps --chown=default:root /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@11.5.1
 
 USER default
 
@@ -155,11 +155,11 @@ CMD ["sh", "-c", "echo ${PROJECT}"]
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22  AS develop
+FROM registry.access.redhat.com/ubi9/nodejs-24  AS develop
 
 USER root
 
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@11.5.1
 
 # Use non-root user
 USER default
@@ -204,7 +204,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS runner
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS runner
 
 # Use non-root user
 USER default

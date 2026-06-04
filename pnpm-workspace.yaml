@@ -15,7 +15,7 @@ overrides:
   '@babel/runtime': ^7.28.4
   '@testing-library/dom': ^10.4.0
   '@tootallnate/once': ^3.0.1
-  '@types/node': 22.18.9
+  '@types/node': 24.10.10
   '@types/react': 18.3.1
   '@types/react-dom': 18.3.1
   cookie: 0.7.2
@@ -44,6 +44,8 @@ overrides:
 allowBuilds:
   '@apollo/protobufjs': true
   '@ffmpeg-installer/darwin-arm64': true
+  '@ffmpeg-installer/linux-arm64': true
+  '@ffmpeg-installer/linux-x64': true
   '@parcel/watcher': true
   '@sentry/cli': true
   core-js: true

@@ -34,21 +34,27 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [24.x]
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          # pnpm 11.5+ requires Node >=22.13; setup Node before pnpm/action-setup
+          node-version: '24'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 11.5.1
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Cache pnpm store
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '24'
           cache: pnpm
 
       - name: Restore packages cache

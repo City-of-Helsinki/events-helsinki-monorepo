@@ -7,11 +7,10 @@ on:
       - main
     paths:
       - 'packages/**'
-      - '.yarnrc.yml'
-      - 'yarn.lock'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       - '.prettier*'
       - 'tsconfig.base.json'
-      - '.prettier*'
       - '.github/workflows/ci-packages.yml'
 
   pull_request:
@@ -21,11 +20,10 @@ on:
       - reopened
     paths:
       - 'packages/**'
-      - '.yarnrc.yml'
-      - 'yarn.lock'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       - '.prettier*'
       - 'tsconfig.base.json'
-      - '.prettier*'
       - '.github/workflows/ci-packages.yml'
 
 env:
@@ -40,29 +38,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Fetch all git history so that yarn workspaces --since can compare with the correct commits
-          # @link https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches
           fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.5.1
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-      # Why not using setup-node 2.2+ cache option (yet) ?
-      # see https://github.com/belgattitude/nextjs-monorepo-example/pull/369
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - name: Restore yarn cache
-        uses: actions/cache@v4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
-          restore-keys: |
-            yarn-cache-folder-
+          cache: pnpm
 
       - name: Restore packages cache
         uses: actions/cache@v4
@@ -70,48 +57,35 @@ jobs:
           path: |
             ${{ github.workspace }}/.cache
             ${{ github.workspace }}/**/tsconfig.tsbuildinfo
-
-          key: ${{ runner.os }}-packages-cache-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('packages/**.[jt]sx?', 'packages/**.json') }}
+          key: ${{ runner.os }}-packages-cache-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('packages/**.[jt]sx?', 'packages/**.json') }}
           restore-keys: |
-            ${{ runner.os }}-packages-cache-${{ hashFiles('**/yarn.lock') }}-
+            ${{ runner.os }}-packages-cache-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
       - name: Install dependencies
-        run: |
-          yarn install --immutable --inline-builds
+        run: pnpm install --frozen-lockfile
         env:
           HUSKY: 0
 
-      # Typecheck packages that have changed + packages and apps that depends on them (--from & --since)
-      # That allows to see if we're introducing "surface" regressions (just the types)
       - name: Typecheck
-        run: |
-          yarn workspaces foreach -tv --from '@events-helsinki/*' --since=origin/main --recursive run typecheck
+        run: pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run typecheck
 
-      # Lint packages that have changed (--include & --since)
       - name: Linter
         run: |
-          yarn workspaces foreach -tv --include '@events-helsinki/*' --since=origin/main --recursive run lint
-          yarn workspaces foreach -tv --include '@events-helsinki/*' --since=origin/main --recursive run lint-styles
+          pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run lint
+          pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run lint-styles
 
-      # Test packages that have changed (--include & --since)
       - name: Unit tests changed packages
-        run: |
-          yarn workspaces foreach -tv --include '@events-helsinki/*' --since=origin/main --recursive run test --coverage
-      # to debug cache issues: ls ${{ github.workspace }}/.cache
-      # Build packages that have changed (--include & --since), assuming that
-      # apps build are done already. Otherwise --from & --since
-      - name: Run build for changed packages
-        run: |
-          yarn workspaces foreach -tv --include '@events-helsinki/*' --since=origin/main run build
+        run: pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run test --coverage
 
-      # Test storybook build on packages that have changed (--include & --since)
+      - name: Run build for changed packages
+        run: pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run build
+
       - name: Run storybook build for changed packages
-        run: |
-          yarn workspaces foreach -tv --exclude hobbies-helsinki --exclude events-helsinki --exclude sports-helsinki --since=origin/main run build-storybook
+        run: pnpm --filter '...[origin/main]' --filter '!./apps/*' run build-storybook
 
       - name: Run tests
         working-directory: packages/components
-        run: yarn test:coverage
+        run: pnpm test:coverage
         env:
           CI: true
 

@@ -55,20 +55,20 @@ and build time (taking advantage of buildx cache).
 
 ## Ready made commands
 
-| Yarn script                   | Description                                   |
+| Pnpm script                   | Description                                   |
 | ----------------------------- | --------------------------------------------- |
-| `yarn docker:hobbies:develop` | Run apps/hobbies-helsinki in development mode |
-| `yarn docker:hobbies:install` | Install dependencies in cache mount           |
-| `yarn docker:hobbies:build`   | Create a production build                     |
-| `yarn docker:hobbies:serve`   | Serve production build on localhost:3000,     |
-| `yarn docker:prune-cache`     | **Run this regularly if using in local !!!**  |
+| `pnpm docker:hobbies:develop` | Run apps/hobbies-helsinki in development mode |
+| `pnpm docker:hobbies:install` | Install dependencies in cache mount           |
+| `pnpm docker:hobbies:build`   | Create a production build                     |
+| `pnpm docker:hobbies:serve`   | Serve production build on localhost:3000,     |
+| `pnpm docker:prune-cache`     | **Run this regularly if using in local !!!**  |
 
 > Build and serve commands requires to have a `./apps/hobbies-helsinki/.env.local` present.
 
 ## Develop
 
 ```bash
-yarn docker:hobbies:develop
+pnpm docker:hobbies:develop
 
 # Or alternatively
 DOCKER_BUILDKIT=1 docker compose -f ./docker-compose.yml -f ./docker-compose.hobbies.yml up develop

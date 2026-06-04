@@ -4,15 +4,15 @@ on:
   push:
     branches: [main]
     paths:
-      - 'yarn.lock'
-      - '.yarnrc.yml'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/ci-monorepo-integrity.yml'
 
   pull_request:
     branches: [main]
     paths:
-      - 'yarn.lock'
-      - '.yarnrc.yml'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/ci-monorepo-integrity.yml'
 
 jobs:
@@ -24,40 +24,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-      # Why not using setup-node 2.2+ cache option (yet) ?
-      # see https://github.com/belgattitude/nextjs-monorepo-example/pull/369
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - name: Restore yarn cache
-        uses: actions/cache@v4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
-          restore-keys: |
-            yarn-cache-folder-
+          cache: pnpm
 
       - name: Install dependencies
-        run: |
-          yarn install --immutable --inline-builds
+        run: pnpm install --frozen-lockfile
         env:
           HUSKY: 0
 
-      - name: Check for duplicate dependencies in lock file
-        run: |
-          yarn dedupe --check
-
-      - name: Check for yarn constraints.pro
-        run: |
-          yarn constraints
+      - name: Check monorepo workspace rules
+        run: pnpm exec manypkg check
 
       - name: Check monorepo dependency graph
-        run: |
-          yarn check:install
+        run: pnpm run check:install

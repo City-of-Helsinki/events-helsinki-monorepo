@@ -13,9 +13,7 @@ FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
 
 USER root
 
-# install yarn
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
+RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -23,8 +21,7 @@ RUN yum update -y && \
 
 WORKDIR /workspace-install
 
-COPY --chown=default:root yarn.lock .yarnrc.yml ./
-COPY --chown=default:root .yarn/ ./.yarn/
+COPY --chown=default:root pnpm-lock.yaml pnpm-workspace.yaml .npmrc package.json ./
 
 # Specific to monerepo's as docker COPY command is pretty limited
 # we use buidkit to prepare all files that are necessary for install
@@ -134,14 +131,13 @@ COPY --chown=default:root  . .
 COPY --from=deps --chown=default:root /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
+RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 
 USER default
 
-RUN yarn install --immutable --inline-builds
-RUN yarn workspace ${PROJECT} share-static-hardlink
-RUN yarn workspace ${PROJECT} build
+RUN pnpm install --frozen-lockfile
+RUN pnpm --filter ${PROJECT} run share-static-hardlink
+RUN pnpm --filter ${PROJECT} run build
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
@@ -163,9 +159,7 @@ FROM registry.access.redhat.com/ubi9/nodejs-22  AS develop
 
 USER root
 
-# install yarn
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
+RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 
 # Use non-root user
 USER default
@@ -192,14 +186,14 @@ RUN mkdir -p /app/apps/${PROJECT}/.next \
 
 COPY --from=deps --chown=default:root /workspace-install ./
 
-RUN yarn install --immutable --inline-builds
+RUN pnpm install --frozen-lockfile
 
 ENV PORT ${APP_PORT:-3000}
 
 # Expose port
 EXPOSE $PORT
 
-ENV DEV_START "yarn dev -p ${PORT}"
+ENV DEV_START "pnpm run dev -p ${PORT}"
 
 WORKDIR /app/apps/$PROJECT
 

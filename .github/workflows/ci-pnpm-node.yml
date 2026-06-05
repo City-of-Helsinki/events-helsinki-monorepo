@@ -1,5 +1,6 @@
 # Vendored from City-of-Helsinki/.github with Node-before-pnpm setup order.
 # pnpm version comes from package.json packageManager; uses pnpm/action-setup@v6.
+# GitHub Actions: checkout/setup-node/upload-artifact @v6, cache @v5 (Node 24 runtime).
 name: Common CI for Node (pnpm)
 
 on:
@@ -60,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Run commitlint
         uses: wagoid/commitlint-github-action@b948419dd99f3fd78a6548d48f94e3df7f6bf3ed # v6.2.1
 
@@ -72,10 +73,10 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
 
@@ -85,7 +86,7 @@ jobs:
 
       - name: Setup Node.js with dependency path
         if: ${{ inputs.working-directory != '.' }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
           cache: pnpm
@@ -93,7 +94,7 @@ jobs:
 
       - name: Setup Node.js without dependency path
         if: ${{ inputs.working-directory == '.' }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
           cache: pnpm
@@ -122,7 +123,7 @@ jobs:
 
       - name: Upload build
         if: ${{ inputs.upload-artifacts }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: build-artifacts-${{ inputs.node-version }}
           path: |
@@ -148,10 +149,10 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
 
@@ -161,7 +162,7 @@ jobs:
 
       - name: Setup Node.js with dependency path
         if: ${{ inputs.working-directory != '.' }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
           cache: pnpm
@@ -169,7 +170,7 @@ jobs:
 
       - name: Setup Node.js without dependency path
         if: ${{ inputs.working-directory == '.' }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
           cache: pnpm
@@ -190,7 +191,7 @@ jobs:
           CI: true
 
       - name: Store coverage report
-        uses: actions/cache/save@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        uses: actions/cache/save@v5
         with:
           path: ${{ (inputs.app-directory == '.' && inputs.working-directory || inputs.app-directory) && format('{0}/', inputs.app-directory == '.' && inputs.working-directory || inputs.app-directory) || ''}}coverage
           key: cache-${{ github.run_id }}-${{ github.run_attempt }}
@@ -204,12 +205,12 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - name: Restore coverage report
-        uses: actions/cache/restore@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        uses: actions/cache/restore@v5
         with:
           path: ${{ (inputs.app-directory == '.' && inputs.working-directory || inputs.app-directory) && format('{0}/', inputs.app-directory == '.' && inputs.working-directory || inputs.app-directory) || ''}}coverage
           key: cache-${{ github.run_id }}-${{ github.run_attempt }}

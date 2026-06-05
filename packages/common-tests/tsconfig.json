@@ -4,29 +4,19 @@
   "compilerOptions": {
     "baseUrl": "./",
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "noEmit": false,
     "incremental": true,
     "paths": {
-      "@events-helsinki/common-i18n": [
-        "../common-i18n/src/index"
-      ],
-      "@events-helsinki/common-i18n/*": [
-        "../common-i18n/src/*"
-      ]
+      "@events-helsinki/common-i18n": ["../common-i18n/src/index"],
+      "@events-helsinki/common-i18n/*": ["../common-i18n/src/*"],
+      "@events-helsinki/common-tests": ["./src/index"],
+      "@events-helsinki/common-tests/browser-tests": ["./browser-tests/index"],
+      "@events-helsinki/common-tests/browser-tests/*": ["./browser-tests/*"]
     }
   },
-  "exclude": [
-    "**/node_modules",
-    "**/.*/",
-    "dist",
-    "build"
-  ]
+  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
 }

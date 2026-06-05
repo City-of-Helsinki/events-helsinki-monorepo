@@ -181,9 +181,6 @@ ARG GRAPHQL_PROXY_PORT
 ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
-USER root
-RUN npm install -g pnpm@11.5.1
-
 USER default
 
 WORKDIR /app
@@ -201,7 +198,7 @@ COPY --from=builder --chown=default:root /app/package.json ./package.json
 # Expose port
 EXPOSE ${GRAPHQL_PROXY_PORT:-4100}
 
-# Start graphql proxy server
-ENV PROD_START "pnpm --filter ${PROXY} run start"
+WORKDIR /app/proxies/${PROXY}
 
-CMD ["sh", "-c", "${PROD_START}"]
+# Deps are installed at build time; avoid pnpm at runtime (OpenShift EACCES on /app)
+CMD ["node", "build", "-r", "dotenv-expand/config"]

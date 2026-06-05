@@ -70,22 +70,24 @@ jobs:
         env:
           HUSKY: 0
 
+      # pnpm unions multiple --filter flags (OR). Limit to changed packages under packages/
+      # (yarn: workspaces foreach --include '@events-helsinki/*' --since=origin/main).
       - name: Typecheck
-        run: pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run typecheck
+        run: pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' run typecheck
 
       - name: Linter
         run: |
-          pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run lint
-          pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' --if-present run lint-styles
+          pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' run lint
+          pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' --if-present run lint-styles
 
       - name: Unit tests changed packages
-        run: pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run test --coverage
+        run: pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' run test --coverage
 
       - name: Run build for changed packages
-        run: pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run build
+        run: pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' run build
 
       - name: Run storybook build for changed packages
-        run: pnpm --filter '...[origin/main]' --filter '!./apps/*' run build-storybook
+        run: pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' run build-storybook
 
       - name: Run tests
         working-directory: packages/components

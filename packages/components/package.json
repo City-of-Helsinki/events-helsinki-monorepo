@@ -24,6 +24,8 @@
     "dev": "tsup --watch",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --cache --cache-location ../../.cache/eslint/components.eslintcache",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs --fix",
+    "lint-styles": "stylelint --allow-empty-input --ignore-disables --config ./stylelint.config.mjs --max-warnings 25 \"src/**/*.scss\" \"!src/styles/**\"",
+    "lint-styles-fix": "pnpm run lint-styles -- --fix",
     "publish-canary": "node ../../scripts/publish-canary.js",
     "publish-stable": "pnpm run build && node ../../scripts/publish-stable.js",
     "serve-storybook": "sirv build/storybook --cors --port 8888",

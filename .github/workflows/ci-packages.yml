@@ -76,7 +76,7 @@ jobs:
       - name: Linter
         run: |
           pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run lint
-          pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run lint-styles
+          pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' --if-present run lint-styles
 
       - name: Unit tests changed packages
         run: pnpm --filter '@events-helsinki/*' --filter '...[origin/main]' run test --coverage

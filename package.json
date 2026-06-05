@@ -19,7 +19,7 @@
     "g:test": "pnpm -r --parallel run test",
     "g:test-e2e": "pnpm -r run test-e2e",
     "g:lint": "pnpm -r --parallel run lint --color",
-    "g:lint-styles": "pnpm -r --parallel run lint-styles --color",
+    "g:lint-styles": "pnpm -r --parallel --if-present run lint-styles --color",
     "g:typecheck": "pnpm -r --parallel run typecheck",
     "g:lint-staged-files": "lint-staged --allow-empty --debug && pnpm run lint:dependency-versions",
     "g:lint-fix": "pnpm -r --parallel run lint-fix",

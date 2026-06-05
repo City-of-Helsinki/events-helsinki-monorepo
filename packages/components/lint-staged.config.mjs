@@ -38,7 +38,7 @@ const rules = {
   },
   '**/*.{css,scss}': (filenames) => {
     const stylelintFiles = filenames.filter(
-      (f) => !/(^|\/)styles\//.test(f.replaceAll('\\', '/'))
+      (f) => !/(?:^|\/)styles\//.test(f.replaceAll('\\', '/'))
     );
     if (stylelintFiles.length === 0) {
       return [];

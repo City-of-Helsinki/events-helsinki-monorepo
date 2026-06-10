@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.3.4...hobbies-helsinki-v3.4.0) (2026-06-10)
+
+
+### Features
+
+* **sentry:** Migrate apps to Next instrumentation and v10 config ([baa1bb9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/baa1bb992ab73c179f81bf37651316c8db24c6f1))
+
 ## [3.3.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.3.3...hobbies-helsinki-v3.3.4) (2026-05-13)
 
 

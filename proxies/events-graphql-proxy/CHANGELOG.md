@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.6.4...events-graphql-proxy-v1.7.0) (2026-06-10)
+
+
+### Features
+
+* **sentry:** Migrate apps to Next instrumentation and v10 config ([baa1bb9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/baa1bb992ab73c179f81bf37651316c8db24c6f1))
+
 ## [1.6.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.6.3...events-graphql-proxy-v1.6.4) (2026-04-14)
 
 

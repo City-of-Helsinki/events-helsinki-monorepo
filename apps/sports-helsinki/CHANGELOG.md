@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.2.4...sports-helsinki-v2.3.0) (2026-06-10)
+
+
+### Features
+
+* **sentry:** Migrate apps to Next instrumentation and v10 config ([baa1bb9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/baa1bb992ab73c179f81bf37651316c8db24c6f1))
+
 ## [2.2.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.2.3...sports-helsinki-v2.2.4) (2026-05-12)
 
 

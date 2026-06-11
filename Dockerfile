@@ -140,6 +140,12 @@ USER default
 ENV HUSKY=0
 RUN pnpm install --frozen-lockfile --filter ${PROJECT}...
 RUN pnpm --filter ${PROJECT} run share-static-hardlink
+# OpenShift build pods are memory-constrained. Match GitHub CI build settings and
+# limit Next.js static-generation workers (default is 4 parallel child processes).
+ENV NEXTJS_IGNORE_ESLINT=1 \
+    NEXTJS_IGNORE_TYPECHECK=1 \
+    NEXT_BUILD_CPUS=1 \
+    NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter ${PROJECT} run build
 
 # Does not play well with buildkit on CI

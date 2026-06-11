@@ -1,3 +1,4 @@
+/** Monorepo CI smoke test. */
 import { startServer } from '@events-helsinki/graphql-proxy-server';
 import type {
   ServerConfig,

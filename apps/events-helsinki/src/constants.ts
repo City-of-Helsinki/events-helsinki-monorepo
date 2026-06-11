@@ -1,3 +1,4 @@
+/** Monorepo CI smoke test. */
 export const ROUTES = {
   FRONT_PAGE: '/',
   SEARCH: '/search',

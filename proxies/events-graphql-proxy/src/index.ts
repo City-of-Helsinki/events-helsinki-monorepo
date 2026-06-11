@@ -1,3 +1,4 @@
+/** Monorepo CI smoke test. */
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import {

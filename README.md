@@ -1,5 +1,3 @@
-TEST CHANGE
-
 <div align="center">
   <h1 align="center"><a aria-label="Helsinki Events Monorepo" href="https://github.com/City-of-Helsinki/events-helsinki-monorepo">Helsinki Events Monorepo</a></h1>
   <p align="center"><strong>A monorepo for event-search based nextjs applications and common event components</strong></p>

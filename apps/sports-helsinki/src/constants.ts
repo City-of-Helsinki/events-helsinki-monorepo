@@ -1,3 +1,4 @@
+/** Monorepo CI smoke test. */
 export const SEARCH_ROUTES = {
   SEARCH: '/search',
   MAPSEARCH: '/search/map',

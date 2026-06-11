@@ -1,3 +1,4 @@
+/** Monorepo CI smoke test. */
 export * from './app';
 export * from './apollo';
 export * from './components';

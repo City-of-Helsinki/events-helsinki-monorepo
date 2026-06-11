@@ -1,3 +1,4 @@
+/** Monorepo CI smoke test. */
 export { startServer } from './server.js';
 export * from './server-config/server-config.js';
 export * from './utils/index.js';

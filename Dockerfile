@@ -80,7 +80,8 @@ FROM ${BUILDER_FROM_IMAGE} AS builder
 # Build ARGS
 ARG PROJECT
 ARG CMS_ORIGIN
-ARG SKIP_BUILD_STATIC_GENERATION
+# Default 1 for review/dev image builds; release pipelines override with 0.
+ARG SKIP_BUILD_STATIC_GENERATION=1
 ARG NEXT_DISABLE_SOURCEMAPS
 ARG FEDERATION_ROUTER_ENDPOINT
 ARG LINKEDEVENTS_EVENT_ENDPOINT
@@ -140,7 +141,13 @@ USER default
 ENV HUSKY=0
 RUN pnpm install --frozen-lockfile --filter ${PROJECT}...
 RUN pnpm --filter ${PROJECT} run share-static-hardlink
-ENV SKIP_BUILD_STATIC_GENERATION=${SKIP_BUILD_STATIC_GENERATION}
+# OpenShift build pods are memory-constrained. Match GitHub CI build settings and
+# limit Next.js static-generation workers (default is 4 parallel child processes).
+ENV SKIP_BUILD_STATIC_GENERATION=${SKIP_BUILD_STATIC_GENERATION} \
+    NEXTJS_IGNORE_ESLINT=1 \
+    NEXTJS_IGNORE_TYPECHECK=1 \
+    NEXT_BUILD_CPUS=1 \
+    NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter ${PROJECT} run build
 
 # Does not play well with buildkit on CI

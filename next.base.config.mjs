@@ -15,6 +15,9 @@ const trueEnv = ['true', '1', 'yes'];
 // const isProd = process.env.NODE_ENV === 'production';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
+const nextBuildCpus = process.env.NEXT_BUILD_CPUS
+  ? Number(process.env.NEXT_BUILD_CPUS)
+  : undefined;
 
 const NEXTJS_IGNORE_ESLINT = trueEnv.includes(
   process.env?.NEXTJS_IGNORE_ESLINT ?? 'false'
@@ -136,6 +139,9 @@ const nextBaseConfig = ({
       // Experimental monorepo support
       externalDir: true,
       scrollRestoration: true,
+      // Limit parallel page-data workers in memory-constrained Docker/OpenShift builds.
+      ...(nextBuildCpus ? { cpus: nextBuildCpus } : {}),
+      ...(nextBuildCpus ? { webpackMemoryOptimizations: true } : {}),
     },
 
     // 🚨 TURBOPACK CONFIGURATION

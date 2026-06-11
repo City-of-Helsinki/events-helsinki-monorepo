@@ -135,8 +135,12 @@ RUN npm install -g pnpm@11.5.1
 
 USER default
 
-RUN pnpm install --frozen-lockfile
+# Install only the target app and its workspace dependency graph (pnpm equivalent of
+# yarn workspaces focus). Skips other apps/proxies to reduce memory during next build.
+ENV HUSKY=0
+RUN pnpm install --frozen-lockfile --filter ${PROJECT}...
 RUN pnpm --filter ${PROJECT} run share-static-hardlink
+ENV SKIP_BUILD_STATIC_GENERATION=${SKIP_BUILD_STATIC_GENERATION}
 RUN pnpm --filter ${PROJECT} run build
 
 # Does not play well with buildkit on CI

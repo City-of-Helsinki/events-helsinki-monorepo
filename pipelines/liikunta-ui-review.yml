@@ -8,27 +8,27 @@
 trigger: none
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
-# opened with one of the specified target branches, or when updates are made to 
+# opened with one of the specified target branches, or when updates are made to
 # such a pull request.
 #
-# GitHub creates a new ref when a pull request is created. The ref points to a 
-# merge commit, which is the merged code between the source and target branches 
+# GitHub creates a new ref when a pull request is created. The ref points to a
+# merge commit, which is the merged code between the source and target branches
 # of the pull request.
 #
-# Opt out of pull request validation 
+# Opt out of pull request validation
 pr:
   # PR target branch
   branches:
     include:
-    - main
+      - main
   paths:
     exclude:
-    - '*release-please*'
-    - '*.md'
-    - '.github/'
-    - 'pipelines/liikunta-ui-release.yml'
-    - 'pipelines/liikunta-ui-dev.yml'
-    - '*compose*'
+      - '*release-please*'
+      - '*.md'
+      - '.github/'
+      - 'pipelines/liikunta-ui-release.yml'
+      - 'pipelines/liikunta-ui-dev.yml'
+      - '*compose*'
 
 # By default, use self-hosted agents
 pool: Default
@@ -49,6 +49,7 @@ extends:
     # Does not contain all buildArguments, the rest located in liikunta-pipelines/liikunta-variables-development.yml and liikunta-variables-common.yml
     # The values here will override the values defined in the liikunta-pipelines repository
     buildArgs:
+      SKIP_BUILD_STATIC_GENERATION: 1
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
       CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

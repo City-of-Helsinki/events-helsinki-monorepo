@@ -163,7 +163,7 @@
     "dotenv-expand": "12.0.2",
     "edit-json-file": "1.8.1",
     "env-cmd": "10.1.0",
-    "esbuild": "0.28.0",
+    "esbuild": "0.28.1",
     "eslint": "9.39.4",
     "eslint-config-next": "15.5.14",
     "git-rev-sync": "3.0.2",

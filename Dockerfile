@@ -7,7 +7,7 @@
 #   2. depend on .dockerignore, you must at least                 #
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
-ARG BUILDER_FROM_IMAGE=registry.access.redhat.com/ubi9/nodejs-24
+ARG BUILDER_FROM_IMAGE=helsinki.azurecr.io/ubi10/nodejs-24-pnpm-builder-base
 
 FROM registry.access.redhat.com/ubi9/nodejs-24 AS deps
 
@@ -129,9 +129,6 @@ USER root
 
 COPY --chown=default:root  . .
 COPY --from=deps --chown=default:root /workspace-install ./
-
-# Optional: if the app depends on global /static shared assets like images, locales...
-RUN npm install -g pnpm@11.5.1
 
 USER default
 

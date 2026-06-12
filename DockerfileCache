@@ -8,12 +8,10 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS deps
 
-# install yarn
 USER root
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
+RUN npm install -g pnpm@11.5.1
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -21,8 +19,7 @@ RUN yum update -y && \
 
 WORKDIR /workspace-install
 
-COPY --chown=default:root yarn.lock .yarnrc.yml ./
-COPY --chown=default:root .yarn/ ./.yarn/
+COPY --chown=default:root pnpm-lock.yaml pnpm-workspace.yaml .npmrc package.json ./
 
 # Specific to monerepo's as docker COPY command is pretty limited
 # we use buidkit to prepare all files that are necessary for install
@@ -79,7 +76,7 @@ RUN yum remove -y rsync && \
 # This is used to speedup OpenShift builds                        #
 ###################################################################
 # Build cache layer
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS build_cache
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS build_cache
 # Build ARGS
 ARG PROJECT
 ARG CMS_ORIGIN
@@ -130,17 +127,14 @@ COPY --chown=default:root  . .
 COPY --from=deps --chown=default:root /workspace-install ./
 
 USER root
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
+RUN npm install -g pnpm@11.5.1
 
 USER default
 
-# install cache
-RUN yarn install --immutable --inline-builds
+RUN pnpm install --frozen-lockfile
 
-# Create cache image
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS cache
+FROM registry.access.redhat.com/ubi9/nodejs-24 AS cache
 ARG PROJECT
 
-WORKDIR /app/.yarn/cache/
-COPY --from=build_cache --chown=default:root /app/.yarn/cache/ ./
+WORKDIR /app/
+COPY --from=build_cache --chown=default:root /app/node_modules ./node_modules

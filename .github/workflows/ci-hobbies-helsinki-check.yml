@@ -8,7 +8,8 @@ on:
       - 'apps/hobbies-helsinki/**'
       - 'packages/components/**'
       - 'packages/common-i18n/**'
-      - '.yarnrc.yml'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       - 'tsconfig.base.json'
       - '.prettier*'
       - '.github/workflows/ci-hobbies-helsinki-check.yml'
@@ -20,7 +21,8 @@ on:
       - 'apps/hobbies-helsinki/**'
       - 'packages/components/**'
       - 'packages/common-i18n/**'
-      - '.yarnrc.yml'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       - 'tsconfig.base.json'
       - '.prettier*'
       - '.github/workflows/ci-hobbies-helsinki-check.yml'
@@ -28,10 +30,10 @@ on:
 
 jobs:
   common:
-    uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@main
+    uses: ./.github/workflows/ci-pnpm-node.yml
     secrets: inherit
     with:
-      node-version: 22
+      node-version: '24'
       typecheck: true
       app-directory: apps/hobbies-helsinki
       extra-commands: |

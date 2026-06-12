@@ -6,7 +6,8 @@ on:
     # Only consider those paths to trigger the action
     paths:
       - 'proxies/venue-graphql-proxy/**'
-      - '.yarnrc.yml'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       - 'tsconfig.base.json'
       - '.prettier*'
       - '.github/workflows/ci-venue-graphql-proxy-check.yml'
@@ -16,7 +17,8 @@ on:
     # Only consider those paths to trigger the action
     paths:
       - 'proxies/venue-graphql-proxy/**'
-      - '.yarnrc.yml'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       - 'tsconfig.base.json'
       - '.prettier*'
       - '.github/workflows/ci-venue-graphql-proxy-check.yml'
@@ -24,10 +26,10 @@ on:
 
 jobs:
   common:
-    uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@main
+    uses: ./.github/workflows/ci-pnpm-node.yml
     secrets: inherit
     with:
-      node-version: 22
+      node-version: '24'
       typecheck: true
       app-directory: proxies/venue-graphql-proxy
       extra-commands: |

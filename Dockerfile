@@ -237,9 +237,10 @@ COPY --from=builder --chown=default:root /app/apps/${PROJECT}/public ./apps/${PR
 COPY --from=builder --chown=default:root /app/next.base.config.mjs .
 RUN cp -r /app/apps/${PROJECT}/.next/ /app/.next_orig/
 
-# OpenShift write access to Next cache folder
+# OpenShift write access to Next cache folder and runtime env-config.js
 USER root
-RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages
+RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps/${PROJECT}/.next/server/pages && \
+    chgrp -R 0 /app/apps/${PROJECT}/public && chmod g+w -R /app/apps/${PROJECT}/public
 USER default
 
 ENV NEXT_TELEMETRY_DISABLED 1

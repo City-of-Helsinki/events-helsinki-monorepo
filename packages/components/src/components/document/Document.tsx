@@ -37,7 +37,8 @@ class Document extends NextJsDocument<Props> {
     return (
       <Html>
         <Head>
-          {/* Render HDS Critical Rules as linked styles: 
+          <script src="/env-config.js" />
+          {/* Render HDS Critical Rules as linked styles:
               1. to use HDS styles as base styles 
               2. and to prevent some flickering that may occur.
               Inline style blocks would be faster, but when used with NextJS SSG,

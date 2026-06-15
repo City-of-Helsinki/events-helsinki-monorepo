@@ -1,15 +1,15 @@
-import { IMAGE_PROXY_SERVER } from '../constants';
+import { getImageProxyServer } from '../constants';
 
 /**
  * Returns a secure image URL, using an image proxy if necessary.
  * @param imageUrl The original image URL.
- * @param imageProxyUrl The image proxy URL. Default `IMAGE_PROXY_SERVER = process.env.NEXT_PUBLIC_IMAGE_PROXY_URL`
+ * @param imageProxyUrl The image proxy URL. Default from `getImageProxyServer()`
  * @returns A secure image URL or an empty string if the URL is invalid.
  * @deprecated getSecureImage(imageUrl: string) uses an image proxy that we most probably would like to get rid of.
  */
 const getSecureImage = (
   imageUrl: string | null | undefined,
-  imageProxyUrl: string | undefined = IMAGE_PROXY_SERVER
+  imageProxyUrl: string | undefined = getImageProxyServer()
 ): string => {
   if (!imageUrl) {
     return '';

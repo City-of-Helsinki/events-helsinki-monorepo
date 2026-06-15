@@ -17,3 +17,4 @@ export * from './themeProvider';
 export * from './assets';
 export * from './edge-runtime-compatible/middlewares';
 export * from './sentry/utils';
+export * from './sentry/runtimeConfig';

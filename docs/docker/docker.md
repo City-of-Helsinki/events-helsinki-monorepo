@@ -155,7 +155,7 @@ Then build the thing and remove devDependencies.
 
 ### Stage 3: runner
 
-Launch a production build and listen by default to http://localhost:3000.
+Launch a production build and listen on http://localhost:3000 (mapped from container port 8080).
 
 ```bash
 DOCKER_BUILDKIT=1 docker compose -f docker-compose.hobbies.yml --env-file .env.secret up runner

@@ -2,6 +2,7 @@
 // The added config here will be used whenever a users loads a page in their browser.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
+import { getSentryRuntimeConfig } from '@events-helsinki/components/sentry/runtimeConfig';
 import {
   beforeSend,
   beforeSendTransaction,
@@ -14,7 +15,9 @@ import {
   replayIntegration,
 } from '@sentry/nextjs';
 
-if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+const sentryConfig = getSentryRuntimeConfig();
+
+if (sentryConfig.dsn) {
   Sentry.init({
     beforeSend,
     beforeSendTransaction,
@@ -23,32 +26,21 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
       replayIntegration(),
       Sentry.extraErrorDataIntegration({ depth: 3 }),
       thirdPartyErrorFilterIntegration({
-        filterKeys: process.env.NEXT_PUBLIC_SENTRY_PROJECT
-          ? [process.env.NEXT_PUBLIC_SENTRY_PROJECT]
-          : [],
+        filterKeys: sentryConfig.project ? [sentryConfig.project] : [],
         behaviour: 'drop-error-if-contains-third-party-frames',
       }) as IntegrationFn,
     ],
-    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
-    environment: process.env.NEXT_PUBLIC_SENTRY_ENVIRONMENT,
-    release: process.env.NEXT_PUBLIC_SENTRY_RELEASE,
+    dsn: sentryConfig.dsn,
+    environment: sentryConfig.environment,
+    release: sentryConfig.release,
     ignoreErrors: [
       'ResizeObserver loop completed with undelivered notifications',
       'ResizeObserver loop limit exceeded',
     ],
-    tracesSampleRate: Number.parseFloat(
-      process.env.NEXT_PUBLIC_SENTRY_TRACES_SAMPLE_RATE || '0'
-    ),
-    tracePropagationTargets: process.env
-      .NEXT_PUBLIC_SENTRY_TRACE_PROPAGATION_TARGETS
-      ? process.env.NEXT_PUBLIC_SENTRY_TRACE_PROPAGATION_TARGETS.split(',')
-      : [],
-    replaysSessionSampleRate: Number.parseFloat(
-      process.env.NEXT_PUBLIC_SENTRY_REPLAYS_SESSION_SAMPLE_RATE || '0'
-    ),
-    replaysOnErrorSampleRate: Number.parseFloat(
-      process.env.NEXT_PUBLIC_SENTRY_REPLAYS_ON_ERROR_SAMPLE_RATE || '0'
-    ),
+    tracesSampleRate: sentryConfig.tracesSampleRate,
+    tracePropagationTargets: sentryConfig.tracePropagationTargets,
+    replaysSessionSampleRate: sentryConfig.replaysSessionSampleRate,
+    replaysOnErrorSampleRate: sentryConfig.replaysOnErrorSampleRate,
     debug: false,
   });
 }

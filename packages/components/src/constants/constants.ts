@@ -1,5 +1,6 @@
 import { LanguageCodeEnum } from '../types';
 import type { Language, AppLanguage } from '../types';
+import getRuntimeEnv from '../utils/getRuntimeEnv';
 
 export const MAIN_CONTENT_ID = 'main-content';
 
@@ -56,44 +57,50 @@ export const FEEDBACK_LINKS = {
   sv: 'https://www.hel.fi/helsinki/sv/stad-och-forvaltning/delta/feedback',
 };
 
-export const DEFAULT_HEADER_MENU_NAME: Record<AppLanguage, string> = {
-  fi:
-    process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_FI ??
-    'Events Helsinki Header FI',
-  en:
-    process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_EN ??
-    'Events Helsinki Header EN',
-  sv:
-    process.env.NEXT_PUBLIC_CMS_HEADER_MENU_NAME_SV ??
-    'Events Helsinki Header SV',
-};
+export function getDefaultHeaderMenuName(): Record<AppLanguage, string> {
+  return {
+    fi:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_HEADER_MENU_NAME_FI') ??
+      'Events Helsinki Header FI',
+    en:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_HEADER_MENU_NAME_EN') ??
+      'Events Helsinki Header EN',
+    sv:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_HEADER_MENU_NAME_SV') ??
+      'Events Helsinki Header SV',
+  };
+}
 
-export const DEFAULT_FOOTER_MENU_NAME: Record<AppLanguage, string> = {
-  fi:
-    process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_FI ??
-    'Events Helsinki Footer FI',
-  en:
-    process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_EN ??
-    'Events Helsinki Footer EN',
-  sv:
-    process.env.NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_SV ??
-    'Events Helsinki Footer SV',
-};
+export function getDefaultFooterMenuName(): Record<AppLanguage, string> {
+  return {
+    fi:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_FI') ??
+      'Events Helsinki Footer FI',
+    en:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_EN') ??
+      'Events Helsinki Footer EN',
+    sv:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_FOOTER_MENU_NAME_SV') ??
+      'Events Helsinki Footer SV',
+  };
+}
 
-export const DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME: Record<
+export function getDefaultHeaderUniversalBarMenuName(): Record<
   AppLanguage,
   string
-> = {
-  fi:
-    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_FI ??
-    'Events Helsinki Universal bar FI',
-  en:
-    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_EN ??
-    'Events Helsinki Universal bar EN',
-  sv:
-    process.env.NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_SV ??
-    'Events Helsinki Universal bar SV',
-};
+> {
+  return {
+    fi:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_FI') ??
+      'Events Helsinki Universal bar FI',
+    en:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_EN') ??
+      'Events Helsinki Universal bar EN',
+    sv:
+      getRuntimeEnv('NEXT_PUBLIC_CMS_HEADER_UNIVERSAL_BAR_MENU_NAME_SV') ??
+      'Events Helsinki Universal bar SV',
+  };
+}
 
 /**
  * This is just a mock of list of Languages.
@@ -134,4 +141,6 @@ export const HARDCODED_LANGUAGES: Language[] = [
  * The images can be stored and fetch from an external image cache.
  * @Example `"https://images.weserv.nl/?w=1024&url="`
  */
-export const IMAGE_PROXY_SERVER = process.env.NEXT_PUBLIC_IMAGE_PROXY_URL;
+export function getImageProxyServer(): string | undefined {
+  return getRuntimeEnv('NEXT_PUBLIC_IMAGE_PROXY_URL');
+}

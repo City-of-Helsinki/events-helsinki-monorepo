@@ -8,10 +8,11 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS deps
+ARG BUILDER_FROM_IMAGE=helsinki.azurecr.io/ubi10/nodejs-24-pnpm-builder-base
+
+FROM ${BUILDER_FROM_IMAGE} AS deps
 
 USER root
-RUN npm install -g pnpm@11.5.1
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -76,7 +77,7 @@ RUN yum remove -y rsync && \
 # This is used to speedup OpenShift builds                        #
 ###################################################################
 # Build cache layer
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS build_cache
+FROM ${BUILDER_FROM_IMAGE} AS build_cache
 # Build ARGS
 ARG PROJECT
 ARG CMS_ORIGIN
@@ -126,14 +127,11 @@ WORKDIR /app
 COPY --chown=default:root  . .
 COPY --from=deps --chown=default:root /workspace-install ./
 
-USER root
-RUN npm install -g pnpm@11.5.1
-
 USER default
 
 RUN pnpm install --frozen-lockfile
 
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS cache
+FROM ${BUILDER_FROM_IMAGE} AS cache
 ARG PROJECT
 
 WORKDIR /app/

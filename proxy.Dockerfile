@@ -8,11 +8,11 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS deps
+ARG BUILDER_FROM_IMAGE=helsinki.azurecr.io/ubi10/nodejs-24-pnpm-builder-base
+
+FROM ${BUILDER_FROM_IMAGE} AS deps
 
 USER root
-
-RUN npm install -g pnpm@11.5.1
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -76,13 +76,8 @@ RUN yum remove -y rsync && \
 # Stage 2: Build the app                                          #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS builder
+FROM ${BUILDER_FROM_IMAGE} AS builder
 
-USER root
-
-RUN npm install -g pnpm@11.5.1
-
-# Use non-root user
 USER default
 
 ARG PROXY
@@ -133,10 +128,7 @@ RUN pnpm --filter ${PROXY} run build
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS develop
-
-USER root
-RUN npm install -g pnpm@11.5.1
+FROM ${BUILDER_FROM_IMAGE} AS develop
 
 USER default
 
@@ -171,7 +163,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS runner
+FROM ${BUILDER_FROM_IMAGE} AS runner
 
 
 # Build ARGS

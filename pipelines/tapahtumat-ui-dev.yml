@@ -45,6 +45,7 @@ extends:
     # The values here will override the values defined in the tapahtumat-pipelines repository
     buildArgs:
       BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi10/nodejs-24-pnpm-builder-base
+      APP_PORT: 8080
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.dev.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
@@ -52,7 +53,7 @@ extends:
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
       NEXT_PUBLIC_DEBUG: 1
       NEXT_PUBLIC_MATOMO_ENABLED: 0
-    configMap: # pod environment variables
+    configMap: # runtime pod environment variables (injected at container start via env.sh)
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.dev.hel.ninja/
       CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

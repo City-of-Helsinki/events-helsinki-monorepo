@@ -9,11 +9,9 @@
 ###################################################################
 ARG BUILDER_FROM_IMAGE=helsinki.azurecr.io/ubi10/nodejs-24-pnpm-builder-base
 
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS deps
+FROM ${BUILDER_FROM_IMAGE} AS deps
 
 USER root
-
-RUN npm install -g pnpm@11.5.1
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -158,11 +156,9 @@ CMD ["sh", "-c", "echo ${PROJECT}"]
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-24  AS develop
+FROM ${BUILDER_FROM_IMAGE}  AS develop
 
 USER root
-
-RUN npm install -g pnpm@11.5.1
 
 # Use non-root user
 USER default
@@ -191,7 +187,7 @@ COPY --from=deps --chown=default:root /workspace-install ./
 
 RUN pnpm install --frozen-lockfile
 
-ENV PORT ${APP_PORT:-3000}
+ENV PORT ${APP_PORT:-8080}
 
 # Expose port
 EXPOSE $PORT
@@ -207,7 +203,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-24 AS runner
+FROM ${BUILDER_FROM_IMAGE} AS runner
 
 # Use non-root user
 USER default
@@ -247,9 +243,9 @@ RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps
 USER default
 
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV PORT ${APP_PORT:-3000}
+ENV PORT ${APP_PORT:-8080}
 
-# Expose port
+# Expose port (OpenShift convention; mapped to host port 3000 in docker compose)
 EXPOSE $PORT
 
 USER root
@@ -258,8 +254,11 @@ USER root
 RUN yum update -y && \
     yum install -y diffutils
 
+COPY --chown=default:root .env /app/.env
+COPY --chown=default:root scripts/env.sh /app/scripts/env.sh
 COPY --chown=default:root run_node.sh /app/run_node.sh
-RUN chgrp 0 /app/run_node.sh && chmod +x /app/run_node.sh
+RUN chgrp 0 /app/run_node.sh /app/scripts/env.sh && \
+    chmod +x /app/run_node.sh /app/scripts/env.sh
 USER default
 
 # ENV PROD_START "./node_modules/.bin/next start apps/${PROJECT}/ -p ${PORT}"

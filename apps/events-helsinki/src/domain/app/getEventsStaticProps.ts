@@ -5,11 +5,11 @@ import type {
 import { MenuDocument } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import type { Menu, Language } from '@events-helsinki/components';
 import {
-  DEFAULT_FOOTER_MENU_NAME,
-  DEFAULT_HEADER_MENU_NAME,
+  getDefaultFooterMenuName,
+  getDefaultHeaderMenuName,
   HARDCODED_LANGUAGES,
   getLanguageOrDefault,
-  DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME,
+  getDefaultHeaderUniversalBarMenuName,
 } from '@events-helsinki/components';
 import type { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import { staticGenerationLogger } from '../../logger';
@@ -102,10 +102,10 @@ async function getGlobalCMSData({
   context,
 }: GetGlobalCMSDataParams): Promise<ReturnedGlobalCMSData> {
   const language = getLanguageOrDefault(context.locale);
-  const headerMenuName = DEFAULT_HEADER_MENU_NAME[language];
+  const headerMenuName = getDefaultHeaderMenuName()[language];
   const headerUniversalBarMenuName =
-    DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME[language];
-  const footerMenuName = DEFAULT_FOOTER_MENU_NAME[language];
+    getDefaultHeaderUniversalBarMenuName()[language];
+  const footerMenuName = getDefaultFooterMenuName()[language];
 
   return {
     headerMenu: await getMenu(headerMenuName, client),

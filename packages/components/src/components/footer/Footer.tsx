@@ -3,7 +3,7 @@ import { useMenuQuery } from '@city-of-helsinki/react-helsinki-headless-cms/apol
 import { Footer, Link, Logo, logoFi, LogoSize, logoSv } from 'hds-react';
 import dynamic from 'next/dynamic';
 import type { FunctionComponent } from 'react';
-import { DEFAULT_FOOTER_MENU_NAME } from '../../constants';
+import { getDefaultFooterMenuName } from '../../constants';
 import { useCommonTranslation, useResilientTranslation } from '../../hooks';
 import useLocale from '../../hooks/useLocale';
 
@@ -43,7 +43,7 @@ const FooterSection: FunctionComponent<FooterSectionProps> = ({
   const { data: footerMenuData } = useMenuQuery({
     skip: !!menu,
     variables: {
-      id: DEFAULT_FOOTER_MENU_NAME[locale],
+      id: getDefaultFooterMenuName()[locale],
     },
   });
 

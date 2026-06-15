@@ -9,4 +9,7 @@ if [[ -z "$(ls -A /app/apps/${PROJECT}/.next/)" || -n "$(diff -q /app/apps/${PRO
     cp -r -f /app/.next_orig/* /app/apps/${PROJECT}/.next/
 fi
 
+echo "Generating runtime env-config.js"
+/app/scripts/env.sh /app "/app/apps/${PROJECT}/public"
+
 node ./apps/${PROJECT}/server.js

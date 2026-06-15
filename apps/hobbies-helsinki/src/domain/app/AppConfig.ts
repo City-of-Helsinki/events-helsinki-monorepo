@@ -1,5 +1,6 @@
 import {
   getEnvOrError,
+  getRuntimeEnv,
   EventTypeId,
   ignoredErrorCodesHeader,
 } from '@events-helsinki/components';
@@ -22,7 +23,10 @@ class AppConfig {
    * inside the app.
    * */
   static get cmsOrigin() {
-    return getEnvOrError(publicRuntimeConfig.cmsOrigin, 'CMS_ORIGIN');
+    return getEnvOrError(
+      getRuntimeEnv('CMS_ORIGIN') ?? publicRuntimeConfig.cmsOrigin,
+      'CMS_ORIGIN'
+    );
   }
 
   /**
@@ -31,7 +35,8 @@ class AppConfig {
    * */
   static get federationGraphqlEndpoint() {
     return getEnvOrError(
-      publicRuntimeConfig.federationRouter,
+      getRuntimeEnv('FEDERATION_ROUTER_ENDPOINT') ??
+        publicRuntimeConfig.federationRouter,
       'FEDERATION_ROUTER_ENDPOINT'
     );
   }
@@ -47,7 +52,8 @@ class AppConfig {
    * */
   static get linkedEventsEventEndpoint() {
     return getEnvOrError(
-      publicRuntimeConfig.linkedEvents,
+      getRuntimeEnv('LINKEDEVENTS_EVENT_ENDPOINT') ??
+        publicRuntimeConfig.linkedEvents,
       'LINKEDEVENTS_EVENT_ENDPOINT'
     );
   }
@@ -58,7 +64,7 @@ class AppConfig {
    * */
   static get origin() {
     return getEnvOrError(
-      process.env.NEXT_PUBLIC_APP_ORIGIN,
+      getRuntimeEnv('NEXT_PUBLIC_APP_ORIGIN'),
       'NEXT_PUBLIC_APP_ORIGIN'
     );
   }
@@ -79,7 +85,9 @@ class AppConfig {
    * The application can then use a PostQuery to fetch the related information from an external service.
    */
   static get cmsArticlesContextPath() {
-    return process.env.NEXT_PUBLIC_CMS_ARTICLES_CONTEXT_PATH ?? '/articles';
+    return (
+      getRuntimeEnv('NEXT_PUBLIC_CMS_ARTICLES_CONTEXT_PATH') ?? '/articles'
+    );
   }
 
   /**
@@ -91,7 +99,7 @@ class AppConfig {
    * The application can then use a PageQuery to fetch the related information from an external service.
    */
   static get cmsPagesContextPath() {
-    return process.env.NEXT_PUBLIC_CMS_PAGES_CONTEXT_PATH ?? '/pages';
+    return getRuntimeEnv('NEXT_PUBLIC_CMS_PAGES_CONTEXT_PATH') ?? '/pages';
   }
 
   /** The supported LinkedEvent event types. */
@@ -129,13 +137,13 @@ class AppConfig {
   /** Should the application allow HTTP-connections? */
   static get allowUnauthorizedRequests() {
     return Boolean(
-      parseEnvValue(process.env.NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS)
+      parseEnvValue(getRuntimeEnv('NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS'))
     );
   }
 
   /** A global debug switch for development purposes. */
   static get debug() {
-    return Boolean(parseEnvValue(process.env.NEXT_PUBLIC_DEBUG));
+    return Boolean(parseEnvValue(getRuntimeEnv('NEXT_PUBLIC_DEBUG')));
   }
 
   /** A default HDS theme for the buttons. https://hds.hel.fi/foundation/design-tokens/colour. */
@@ -149,19 +157,19 @@ class AppConfig {
   > = ButtonVariant.Primary;
 
   static get matomoConfiguration() {
-    const matomoUrlBase = process.env.NEXT_PUBLIC_MATOMO_URL_BASE;
-    const matomoEnabled = process.env.NEXT_PUBLIC_MATOMO_ENABLED;
-    const matomoSiteId = process.env.NEXT_PUBLIC_MATOMO_SITE_ID;
+    const matomoUrlBase = getRuntimeEnv('NEXT_PUBLIC_MATOMO_URL_BASE');
+    const matomoEnabled = getRuntimeEnv('NEXT_PUBLIC_MATOMO_ENABLED');
+    const matomoSiteId = getRuntimeEnv('NEXT_PUBLIC_MATOMO_SITE_ID');
     const getMatomoUrlPath = (path: string) => `${matomoUrlBase}${path}`;
 
     return {
       disabled: !parseEnvValue(matomoEnabled),
       urlBase: matomoUrlBase as string,
       srcUrl: getMatomoUrlPath(
-        process.env.NEXT_PUBLIC_MATOMO_SRC_URL as string
+        getRuntimeEnv('NEXT_PUBLIC_MATOMO_SRC_URL') as string
       ),
       trackerUrl: getMatomoUrlPath(
-        process.env.NEXT_PUBLIC_MATOMO_TRACKER_URL as string
+        getRuntimeEnv('NEXT_PUBLIC_MATOMO_TRACKER_URL') as string
       ),
       siteId: Number(matomoSiteId),
     };
@@ -169,11 +177,11 @@ class AppConfig {
 
   static askemFeedbackConfiguration(locale: 'en' | 'fi' | 'sv') {
     const askemApiKeyByLocale: Record<typeof locale, string | undefined> = {
-      fi: process.env.NEXT_PUBLIC_ASKEM_API_KEY_FI,
-      sv: process.env.NEXT_PUBLIC_ASKEM_API_KEY_SV,
-      en: process.env.NEXT_PUBLIC_ASKEM_API_KEY_EN,
+      fi: getRuntimeEnv('NEXT_PUBLIC_ASKEM_API_KEY_FI'),
+      sv: getRuntimeEnv('NEXT_PUBLIC_ASKEM_API_KEY_SV'),
+      en: getRuntimeEnv('NEXT_PUBLIC_ASKEM_API_KEY_EN'),
     };
-    const askemEnabled = process.env.NEXT_PUBLIC_ASKEM_ENABLED;
+    const askemEnabled = getRuntimeEnv('NEXT_PUBLIC_ASKEM_ENABLED');
     return {
       disabled: !parseEnvValue(askemEnabled),
       apiKey: askemApiKeyByLocale[locale] ?? '',
@@ -186,7 +194,9 @@ class AppConfig {
    * on-demand-revalidation
    */
   static get defaultRevalidate() {
-    const envValue = process.env.NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS;
+    const envValue = getRuntimeEnv(
+      'NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS'
+    );
     const value = envValue ? parseEnvValue(envValue) : 60;
 
     if (typeof value !== 'number') {
@@ -222,14 +232,14 @@ class AppConfig {
    */
   static get skipBuildStaticGeneration() {
     return Boolean(
-      parseEnvValue(process.env.SKIP_BUILD_STATIC_GENERATION, false)
+      parseEnvValue(getRuntimeEnv('SKIP_BUILD_STATIC_GENERATION'), false)
     );
   }
 
   /** A feature flag for the similar events. */
   static get showSimilarEvents() {
     return Boolean(
-      parseEnvValue(process.env.NEXT_PUBLIC_SHOW_SIMILAR_EVENTS, true)
+      parseEnvValue(getRuntimeEnv('NEXT_PUBLIC_SHOW_SIMILAR_EVENTS'), true)
     );
   }
 
@@ -237,7 +247,7 @@ class AppConfig {
   static get showEnrolmentStatusInCardDetails() {
     return Boolean(
       parseEnvValue(
-        process.env.NEXT_PUBLIC_SHOW_ENROLMENT_STATUS_IN_CARD_DETAILS,
+        getRuntimeEnv('NEXT_PUBLIC_SHOW_ENROLMENT_STATUS_IN_CARD_DETAILS'),
         false
       )
     );

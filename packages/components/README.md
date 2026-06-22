@@ -63,7 +63,7 @@ To develop and test components in isolation, we use Storybook. It provides a vis
 To start the Storybook server, run:
 
 ```bash
-yarn storybook
+pnpm storybook
 ```
 
 This will open Storybook in your browser at `http://localhost:6006`.
@@ -73,7 +73,7 @@ This will open Storybook in your browser at `http://localhost:6006`.
 This package uses Vitest for unit and integration testing. To run the test suite, use the following command:
 
 ```bash
-yarn test
+pnpm test
 ```
 
 ## License

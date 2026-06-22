@@ -36,11 +36,11 @@ packages that lives in a [monorepo](https://github.com/City-of-Helsinki/events-h
 Add the following devDependencies to workspace (apps/packages in monorepo) or main project package.json.
 
 ```bash
-$ yarn add --dev eslint
-$ yarn add --dev @events-helsinki/eslint-config-bases:"workspace:^"
+$ pnpm add --dev eslint
+$ pnpm add --dev @events-helsinki/eslint-config-bases@workspace:^
 ```
 
-> **Tip** the [workspace:^](https://yarnpkg.com/features/workspaces#workspace-ranges-workspace) is supported by yarn and pnpm.
+> **Tip** the [workspace protocol](https://pnpm.io/workspaces#workspace-protocol-workspace) (`workspace:^`) is supported by pnpm.
 
 ### Usage
 

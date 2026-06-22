@@ -21,13 +21,13 @@ This is a [Next.js](https://nextjs.org/) project originally bootstrapped with [`
 - [Developing locally](#developing-locally)
 - [Setting up Husky pre-commit hooks:](#setting-up-husky-pre-commit-hooks)
 - [Available scripts](#available-scripts)
-  - [`yarn dev`](#yarn-dev)
-  - [`yarn build`](#yarn-build)
-  - [`yarn test`](#yarn-test)
-  - [`yarn test:browser`](#yarn-testbrowser)
-  - [`yarn lint`](#yarn-lint)
-  - [`yarn typecheck`](#yarn-typecheck)
-  - [`yarn generate:graphql`](#yarn-generategraphql)
+  - [`pnpm dev`](#pnpm-dev)
+  - [`pnpm build`](#pnpm-build)
+  - [`pnpm test`](#pnpm-test)
+  - [`pnpm test:browser`](#pnpm-testbrowser)
+  - [`pnpm lint`](#pnpm-lint)
+  - [`pnpm typecheck`](#pnpm-typecheck)
+  - [`pnpm generate:graphql`](#pnpm-generategraphql)
 - [Headless CMS React Component (HCRC) -library implementation](#headless-cms-react-component-hcrc--library-implementation)
   - [Apollo Link (Middleware)](#apollo-link-middleware)
 - [Application configuration](#application-configuration)
@@ -430,7 +430,7 @@ The "main events search" component is used in the search page at `/search`.
 Run the development server:
 
 ```
-yarn dev
+pnpm dev
 # or
 docker compose up
 ```
@@ -439,41 +439,41 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Setting up Husky pre-commit hooks:
 
-1. Run `yarn install` and `yarn postinstall` on project root.
+1. Run `pnpm install` and `pnpm postinstall` on project root.
 2. Try `git commit -m foo`. It does not commit anything for real but pre-commit hook should be triggered.
 
 ## Available scripts
 
-### `yarn dev`
+### `pnpm dev`
 
 Runs the application in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view in the browser.
 
 The page will reload if you make changes.
 
-### `yarn build`
+### `pnpm build`
 
 Builds the production application in the `.next` folder.
-Production build can be run locally with `yarn start`.
+Production build can be run locally with `pnpm start`.
 
-### `yarn test`
+### `pnpm test`
 
 Launches the test runner in the interactive watch mode.
 
-### `yarn test:browser`
+### `pnpm test:browser`
 
-Launches the Testcafe test runner for browser tests in the interactive watch mode. `yarn test:browser:ci` runs the command line tool without the graphical interface.
+Launches the Testcafe test runner for browser tests in the interactive watch mode. `pnpm test:browser:ci` runs the command line tool without the graphical interface.
 
-### `yarn lint`
+### `pnpm lint`
 
 Runs the eslinter, a static code analysis tool to flag programming errors, bugs, stylistic errors and suspicious constructs.
-Running the `yarn lint-fix` also fixes the automatically fixamble issues.
+Running the `pnpm lint-fix` also fixes the automatically fixamble issues.
 
-### `yarn typecheck`
+### `pnpm typecheck`
 
 Transpiles the TypeScript code and reports the errors.
 
-### `yarn generate:graphql`
+### `pnpm generate:graphql`
 
 Uses the codegen tool to generate Graphql Schema file out from the graphql files inside the app. Note that the [graphql.tsx](../../packages/components/src/types/generated/graphql.tsx) inside the packages/components -directory contains the common types and hooks, so it would most likely make sense to copy the generated result and override the graphql file in the common components-package.
 

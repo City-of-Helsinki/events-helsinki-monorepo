@@ -6,6 +6,7 @@
     );
     --selected-date-background: var(--color-input, --color-fog);
   }
+
   button:hover {
     --selected-date-color: var(--color-primary-black);
     --background-color: var(--color-input-light, --color-fog-light);

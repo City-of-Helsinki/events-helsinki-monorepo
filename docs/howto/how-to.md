@@ -55,7 +55,7 @@ cd packages/magnificent-poney
 
 Initialize a package.json with the name of your package.
 
-> Rather than typing `yarn init`, prefer to take the [./packages/components/package.json](./packages/components/package.json)
+> Rather than typing `pnpm init`, prefer to take the [./packages/components/package.json](./packages/components/package.json)
 > as a working example and edit its values.
 
 <details>
@@ -87,16 +87,22 @@ Initialize a package.json with the name of your package.
 
 #### Step 3.1: package.json
 
-First add the package to the app package.json. The recommended way is to
-use the [workspace protocol](https://yarnpkg.com/features/protocols#workspace) supported by
-yarn and pnpm.
+First add the package to the app `package.json`. The recommended way is to
+use the [workspace protocol](https://pnpm.io/workspaces#workspace-protocol-workspace),
+which forces the dependency to resolve only to a package in this monorepo.
 
 ```bash
 cd apps/my-app
-yarn add events-helsinki-magnificent-poney@'workspace:^'
+pnpm add @events-helsinki/components@'workspace:^'
 ```
 
-Inspiration can be found in [apps/nextjs-app/package.json](./apps/nextjs-app/package.json).
+From the repo root you can also run:
+
+```bash
+pnpm add @events-helsinki/components@workspace:^ --filter events-helsinki
+```
+
+See [apps/events-helsinki/package.json](../../apps/events-helsinki/package.json) for examples.
 
 <details>
 <summary>package.json</summary>

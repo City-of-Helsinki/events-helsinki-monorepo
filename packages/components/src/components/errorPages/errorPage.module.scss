@@ -2,6 +2,7 @@
 
 .errorPageWrapper {
   height: 100%;
+
   --link-color: var(--color-tram-dark);
   --hero-background-color: var(--color-theme-background);
 
@@ -36,6 +37,7 @@
   .backButton {
     background-color: var(--color-input);
     border-color: var(--color-input) !important;
+
     &:hover {
       background-color: var(--color-input-dark);
       border-color: var(--color-input-dark) !important;

@@ -43,6 +43,7 @@
     svg {
       margin-right: var(--spacing-xs);
       fill: var(--color-primary-black);
+
       & > g {
         color: var(--color-primary-black);
       }
@@ -87,6 +88,7 @@
       margin-left: 0.75rem;
       pointer-events: none;
       color: var(--color-primary-black);
+
       & > g {
         color: var(--color-primary-black);
       }

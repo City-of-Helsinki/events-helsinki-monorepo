@@ -17,10 +17,9 @@ node_modules
 tsconfig.tsbuildinfo
 .eslintcache
 
-# Yarn
-!.yarnrc.yml
-!.yarn/plugins
-!.yarn/releases
+# pnpm
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
 
 # Used when building with nextjs (next-eslint)
 !eslint.config.base.json

@@ -1,5 +1,3 @@
-import { isBoolean, isNumber } from 'util';
-
 import composeQuery from './composeQuery.js';
 
 interface VariableToKeyItem {
@@ -7,14 +5,25 @@ interface VariableToKeyItem {
   value?: (string | null | number)[] | string | number | boolean | null;
 }
 
+const isScalarQueryValue = (
+  value: VariableToKeyItem['value']
+): value is string | number | boolean => {
+  if (Array.isArray(value)) {
+    return false;
+  }
+  return (
+    typeof value === 'boolean' ||
+    typeof value === 'number' ||
+    (value !== null && value !== undefined && value !== '')
+  );
+};
+
 const queryBuilder = (items: VariableToKeyItem[]): string => {
   return items.reduce((query, item) => {
     if (Array.isArray(item.value) && item.value.length) {
       return composeQuery(query, item.key, item.value.join(','));
-    } else if (
-      (item.value || isBoolean(item.value) || isNumber(item.value)) &&
-      !Array.isArray(item.value)
-    ) {
+    }
+    if (isScalarQueryValue(item.value)) {
       return composeQuery(query, item.key, item.value);
     }
     return query;

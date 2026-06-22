@@ -1,10 +1,10 @@
+import { screen } from '@testing-library/testcafe';
+import { ClientFunction, t } from 'testcafe';
 import {
   EventDetailsPage,
   ClosedEventDetailsPage,
   EventSearchPage,
-} from '@events-helsinki/common-tests/browser-tests';
-import { screen } from '@testing-library/testcafe';
-import { ClientFunction, t } from 'testcafe';
+} from '../page-model';
 
 /**
  * Use the `window.history.back()` -client function.

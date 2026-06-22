@@ -1,7 +1,7 @@
 @use '../../styles/utils';
 
 .select {
-  @include utils.override-hds-input-styles();
+  @include utils.override-hds-input-styles;
 
   &NoOutline {
     & > div {

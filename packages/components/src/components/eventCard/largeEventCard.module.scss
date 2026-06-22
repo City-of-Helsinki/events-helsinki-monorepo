@@ -45,9 +45,11 @@
     flex-direction: column;
     padding: var(--spacing-s);
     grid-template-rows: auto 1fr auto;
+
     .alert {
       color: var(--link-arrow-label-alert-color) !important;
     }
+
     .eventName {
       order: 1;
       font-size: var(--fontsize-heading-l);
@@ -93,6 +95,7 @@
       line-height: var(--lineheight-m);
       margin-bottom: var(--spacing-s);
       color: var(color-black-80);
+
       svg {
         margin-right: var(--spacing-2-xs);
         min-width: var(--spacing-layout-xs);
@@ -107,6 +110,7 @@
       line-height: var(--lineheight-m);
       margin-bottom: var(--spacing-s);
       color: var(color-black-80);
+
       svg {
         margin-right: var(--spacing-2-xs);
         min-width: var(--spacing-layout-xs);
@@ -116,7 +120,8 @@
 
     .keywordWrapperDesktop {
       order: 6;
-      //padding: var(--spacing-xs) 0;
+
+      // padding: var(--spacing-xs) 0;
 
       @include breakpoints.respond-below(s) {
         display: none;

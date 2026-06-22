@@ -1,2 +1,2 @@
-yarn doctoc . -u
-yarn g:lint-staged-files
+pnpm exec doctoc . -u
+pnpm g:lint-staged-files

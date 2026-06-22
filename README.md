@@ -226,7 +226,7 @@ If needed static resources like **images**,... can be shared by using symlinks i
 ├── static                          (no code: images, json, locales,...)
 │   ├── assets
 │   └── locales
-├── .yarnrc.yml
+├── pnpm-workspace.yaml
 ├── .dockerignore
 ├── docker-compose.nextjs-app.yml   (compose specific for nextjs-app)
 ├── docker-compose.yml              (optional: general services like postgresql...)
@@ -245,39 +245,35 @@ Some convenience scripts can be run in any folder of this repo and will call the
 
 | Name                         | Description                                                                                                                          |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `yarn g:typecheck`           | Run typechecks in all workspaces                                                                                                     |
-| `yarn g:lint`                | Display linter issues in all workspaces                                                                                              |
-| `yarn g:lint --fix`          | Attempt to run linter auto-fix in all workspaces                                                                                     |
-| `yarn g:lint-styles`         | Display css stylelint issues in all workspaces                                                                                       |
-| `yarn g:lint-styles --fix`   | Attempt to run stylelint auto-fix issues in all workspaces                                                                           |
-| `yarn g:test`                | Run unit and e2e tests in all workspaces                                                                                             |
-| `yarn g:test`                | Run unit tests in all workspaces                                                                                                     |
-| `yarn g:test-e2e`            | Run e2e tests in all workspaces                                                                                                      |
-| `yarn g:build`               | Run build in all workspaces                                                                                                          |
-| `yarn g:clean`               | Clean builds in all workspaces                                                                                                       |
-| `yarn g:check-dist`          | Ensure build dist files passes es2017 (run `g:build` first).                                                                         |
-| `yarn g:check-size`          | Ensure browser dist files are within size limit (run `g:build` first).                                                               |
-| `yarn clean:global-cache`    | Clean tooling caches (eslint, vitest...)                                                                                             |
-| `yarn deps:check --dep dev`  | Will print what packages can be upgraded globally (see also [.ncurc.yml](https://github.com/sortlist/packages/blob/main/.ncurc.yml)) |
-| `yarn deps:update --dep dev` | Apply possible updates (run `yarn install && yarn dedupe` after)                                                                     |
-| `yarn check:install`         | Verify if there's no peer-deps missing in packages                                                                                   |
-| `yarn dedupe`                | Built-in yarn deduplication of the lock file                                                                                         |
-| `yarn build`                 | Builds application with rollup.                                                                                                      |
+| `pnpm g:typecheck`           | Run typechecks in all workspaces                                                                                                     |
+| `pnpm g:lint`                | Display linter issues in all workspaces                                                                                              |
+| `pnpm g:lint --fix`          | Attempt to run linter auto-fix in all workspaces                                                                                     |
+| `pnpm g:lint-styles`         | Display css stylelint issues in all workspaces                                                                                       |
+| `pnpm g:lint-styles --fix`   | Attempt to run stylelint auto-fix issues in all workspaces                                                                           |
+| `pnpm g:test`                | Run unit tests in all workspaces                                                                                                     |
+| `pnpm g:test-e2e`            | Run e2e tests in all workspaces                                                                                                      |
+| `pnpm g:build`               | Run build in all workspaces                                                                                                          |
+| `pnpm g:clean`               | Clean builds in all workspaces                                                                                                       |
+| `pnpm g:check-dist`          | Ensure build dist files passes es2017 (run `g:build` first).                                                                         |
+| `pnpm g:check-size`          | Ensure browser dist files are within size limit (run `g:build` first).                                                               |
+| `pnpm clean:global-cache`    | Clean tooling caches (eslint, vitest...)                                                                                             |
+| `pnpm deps:check --dep dev`  | Will print what packages can be upgraded globally (see also [.ncurc.yml](https://github.com/sortlist/packages/blob/main/.ncurc.yml)) |
+| `pnpm deps:update --dep dev` | Apply possible updates (run `pnpm install` after)                                                                                    |
+| `pnpm check:install`         | Run manypkg workspace checks                                                                                                         |
+| `pnpm build`                 | Builds application with rollup.                                                                                                      |
 
-> Why using `:` to prefix scripts names ? It's convenient in yarn 3+, we can call those scripts from any folder in the monorepo.
+> Why using `:` to prefix scripts names ? It's convenient with pnpm — we can call those scripts from any folder in the monorepo.
 > `g:` is a shortcut for `global:`. See the complete list in [root package.json](./package.json).
 
 ### 3.2 Maintaining deps updated
 
-The global commands `yarn deps:check` and `yarn deps:update` will help to maintain the same versions across the entire monorepo.
+The global commands `pnpm deps:check` and `pnpm deps:update` will help to maintain the same versions across the entire monorepo.
 They are based on the [npm-check-updates](https://github.com/raineorshine/npm-check-updates)
-(see [options](https://github.com/raineorshine/npm-check-updates#options), i.e: `yarn check:deps -t minor`).
+(see [options](https://github.com/raineorshine/npm-check-updates#options), i.e: `pnpm deps:check -t minor`).
 
-> After running `yarn deps:update`, a `yarn install` is required. To prevent
-> having duplicates in the yarn.lock, you can run `yarn dedupe --check` and `yarn dedupe` to
-> apply deduplication. The duplicate check is enforced in the example github actions.
+> After running `pnpm deps:update`, run `pnpm install` to refresh the lockfile.
 
-While `deps:check` will give you a detailed info about about dep versions across the project, it doesn't automatically pinpoint mismatching versions between apps in the repo. To automatically find and fix mismatches, run `yarn lint:dependency-versions` in the root to make sure all deps in the monorepo are updated to the same version. Check the output, and fix issues by running `lint:dependency-versions --fix`.
+While `deps:check` will give you detailed info about dep versions across the project, it doesn't automatically pinpoint mismatching versions between apps in the repo. To automatically find and fix mismatches, run `pnpm lint:dependency-versions` in the root to make sure all deps in the monorepo are updated to the same version. Check the output, and fix issues by running `pnpm lint:dependency-versions:fix`.
 
 ### 3.3 Symbolic links
 
@@ -342,7 +338,7 @@ To enable the support for symbolic links on Windows 10 you need to:
 
 Some Helsinki Design System (HDS) CSS styles are critically needed and luckily the HDS exposes a tool for extracting the used critical styles of HDS components. The HDS team [recommends](https://hds.hel.fi/foundation/guidelines/server-side-rendering/#how-does-hds-support-server-side-rendering) using their `getCriticalHdsRules` tool with the `_document.tsx` file of the Next JS, but when using NextJS with Static Site Generation (SSG) and Incremental Static Regeneration (ISR), it would mean that the inline style-block would be cloned again and again in every statically generated page and it would not be cached any how by the client (browser). Because of that, we have a [custom script in the monorepo root](./scripts/create-critical-hds-styles-file.js) that we can use to create a CSS file to all the monorepo apps (and also in common packages where it is needed).
 
-By executing `yarn g:hds-critical-styles:create`, the `critical-hds-styles.css` file will be created. The root `package.json` uses the static asssets styles path ([./static/assets/styles/critical-hds-styles.css](./static/assets/styles/critical-hds-styles.css)) to offer the same file for every application. The [critical-hds-styles.css](./static/assets/styles/critical-hds-styles.css) is then used by the app's `_document.tsx` which creates a `<link rel="stylesheet">`-tag out of it.
+By executing `pnpm g:hds-critical-styles:create`, the `critical-hds-styles.css` file will be created. The root `package.json` uses the static asssets styles path ([./static/assets/styles/critical-hds-styles.css](./static/assets/styles/critical-hds-styles.css)) to offer the same file for every application. The [critical-hds-styles.css](./static/assets/styles/critical-hds-styles.css) is then used by the app's `_document.tsx` which creates a `<link rel="stylesheet">`-tag out of it.
 
 ## 4. Incremental Static Regeneration on-demand revalidation
 
@@ -436,8 +432,8 @@ To ensure decent performance, those features are present in the example actions:
   >    - "packages/**"
   >    - "package.json"
   >    - "tsconfig.base.json"
-  >    - "yarn.lock"
-  >    - ".yarnrc.yml"
+  >    - "pnpm-lock.yaml"
+  >    - "pnpm-workspace.yaml"
   >    - ".github/workflows/**"
   > ```
 
@@ -514,10 +510,10 @@ cp .env.local.example .env.local
 Then, you should install the `node_modules` with
 
 ```bash
-yarn install
+pnpm install
 ```
 
-This will install the whole "yarn workspace" for the monorepo.
+This will install the whole pnpm workspace for the monorepo.
 
 With a valid `.env.local` file and installed `node_modules`, you should then be ready to run an app (in development mode).
 
@@ -530,14 +526,14 @@ cd apps/events-helsinki`
 and then start the development server with
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 or to build & run production package of it with
 
 ```bash
-yarn build
-yarn start
+pnpm build
+pnpm start
 ```
 
 > See the app specific README for further instructions.
@@ -609,15 +605,11 @@ This monorepo structure is based on the Nextjs Monorepo Example: https://github.
 #### Exact vs semver dependencies
 
 Apps dependencies and devDependencies are pinned to exact versions. Packages deps will use semver compatible ones.
-For more info about this change see [reasoning here](https://docs.renovatebot.com/dependency-pinning/) and our
-[renovabot.json5](renovate.json5) configuration file.
 
-To help keeping deps up-to-date, see the `yarn deps:check && yarn deps:update` scripts and / or use the [renovatebot](https://github.com/marketplace/renovate).
+To help keeping deps up-to-date, see the `pnpm deps:check && pnpm deps:update` scripts (configured via `.ncurc.yml`). Dependabot also opens dependency update PRs on GitHub.
 
-> When adding a dep through yarn cli (i.e.: yarn add something), it's possible to set the save-exact behaviour automatically
-> by setting `defaultSemverRangePrefix: ""` in [yarnrc.yml](./.yarnrc.yml). But this would make the default for packages/\* as well.
-> Better to handle `yarn add something --exact` on per-case basis.
+> When adding a dependency, use `pnpm add <package> --filter <workspace>` from the repo root, or `pnpm add` inside a workspace directory.
 
-While `deps:check` will give you a detailed info about about dep versions across the project, it doesn't automatically pinpoint mismatching versions between apps in the repo. To automatically find and fix mismatches, run `yarn lint:dependency-versions` in the root to make sure all deps in the monorepo are updated to the same version. Check the output, and fix issues by running `lint:dependency-versions --fix`.
+While `deps:check` will give you detailed info about dep versions across the project, it doesn't automatically pinpoint mismatching versions between apps in the repo. To automatically find and fix mismatches, run `pnpm lint:dependency-versions` in the root to make sure all deps in the monorepo are updated to the same version. Check the output, and fix issues by running `pnpm lint:dependency-versions:fix`.
 
 **Note about updating deps across the monorepo**: when updating a dep, it's important to update it in all the packages that use it, and make sure every dep is updated to the same version. Version differences can cause all kinds of hard-to-debug issues.

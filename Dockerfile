@@ -7,15 +7,11 @@
 #   2. depend on .dockerignore, you must at least                 #
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
-ARG BUILDER_FROM_IMAGE=registry.access.redhat.com/ubi9/nodejs-22
+ARG BUILDER_FROM_IMAGE=helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
+FROM ${BUILDER_FROM_IMAGE} AS deps
 
 USER root
-
-# install yarn
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -23,8 +19,7 @@ RUN yum update -y && \
 
 WORKDIR /workspace-install
 
-COPY --chown=default:root yarn.lock .yarnrc.yml ./
-COPY --chown=default:root .yarn/ ./.yarn/
+COPY --chown=default:root pnpm-lock.yaml pnpm-workspace.yaml .npmrc package.json ./
 
 # Specific to monerepo's as docker COPY command is pretty limited
 # we use buidkit to prepare all files that are necessary for install
@@ -133,15 +128,17 @@ USER root
 COPY --chown=default:root  . .
 COPY --from=deps --chown=default:root /workspace-install ./
 
-# Optional: if the app depends on global /static shared assets like images, locales...
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
-
 USER default
 
-RUN yarn install --immutable --inline-builds
-RUN yarn workspace ${PROJECT} share-static-hardlink
-RUN yarn workspace ${PROJECT} build
+# Install only the target app and its workspace dependency graph (pnpm equivalent of
+# yarn workspaces focus). Skips other apps/proxies to reduce memory during next build.
+ENV HUSKY=0
+RUN pnpm install --frozen-lockfile --filter ${PROJECT}...
+RUN pnpm --filter ${PROJECT} run share-static-hardlink
+# Limit Next.js static-generation workers (default is 4 parallel child processes).
+ENV NEXT_BUILD_CPUS=1 \
+    NEXT_TELEMETRY_DISABLED=1
+RUN pnpm --filter ${PROJECT} run build
 
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
@@ -159,13 +156,9 @@ CMD ["sh", "-c", "echo ${PROJECT}"]
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22  AS develop
+FROM ${BUILDER_FROM_IMAGE}  AS develop
 
 USER root
-
-# install yarn
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
 
 # Use non-root user
 USER default
@@ -192,14 +185,14 @@ RUN mkdir -p /app/apps/${PROJECT}/.next \
 
 COPY --from=deps --chown=default:root /workspace-install ./
 
-RUN yarn install --immutable --inline-builds
+RUN pnpm install --frozen-lockfile
 
-ENV PORT ${APP_PORT:-3000}
+ENV PORT ${APP_PORT:-8080}
 
 # Expose port
 EXPOSE $PORT
 
-ENV DEV_START "yarn dev -p ${PORT}"
+ENV DEV_START "pnpm run dev -p ${PORT}"
 
 WORKDIR /app/apps/$PROJECT
 
@@ -210,7 +203,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS runner
+FROM ${BUILDER_FROM_IMAGE} AS runner
 
 # Use non-root user
 USER default
@@ -250,7 +243,7 @@ RUN chgrp -R 0 /app/apps/${PROJECT}/.next/server/pages && chmod g+w -R /app/apps
 USER default
 
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV PORT ${APP_PORT:-3000}
+ENV PORT ${APP_PORT:-8080}
 
 # Expose port
 EXPOSE $PORT

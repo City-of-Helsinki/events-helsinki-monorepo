@@ -10,11 +10,12 @@
   grid-template-columns:
     [column-start] repeat(auto-fit, minmax(var(--base-list-item-width), 1fr))
     [column-end];
-  grid-gap: variables.$spacing-xs;
+  gap: variables.$spacing-xs;
 
   @include breakpoints.respond-above(m) {
     --base-list-item-width: 16rem;
-    grid-gap: variables.$spacing-layout-m;
+
+    gap: variables.$spacing-layout-m;
   }
 
   @include breakpoints.respond-above(xxl) {
@@ -81,14 +82,17 @@
 }
 
 .gap-xs {
-  grid-gap: variables.$spacing-xs;
+  gap: variables.$spacing-xs;
 }
+
 .gap-s {
-  grid-gap: variables.$spacing-s;
+  gap: variables.$spacing-s;
 }
+
 .gap-m {
-  grid-gap: variables.$spacing-m;
+  gap: variables.$spacing-m;
 }
+
 .gap-l {
-  grid-gap: variables.$spacing-l;
+  gap: variables.$spacing-l;
 }

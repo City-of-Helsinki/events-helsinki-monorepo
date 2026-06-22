@@ -3,6 +3,7 @@
 .eventsOrderBySelect {
   min-width: 15rem;
   margin-bottom: var(--spacing-l);
+
   @include breakpoints.respond-below(s) {
     margin: 0;
     width: 100%;

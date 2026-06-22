@@ -30,10 +30,12 @@
         position: absolute;
         padding: 0;
       }
+
       .sidebar {
         padding-top: var(--spacing-xl);
       }
     }
+
     /* 
     When using mobile sized screen, switch the sidebar with 
     secondary data (location / map, share buttons...) in main content,
@@ -68,6 +70,7 @@
     }
   }
 }
+
 .descriptionTitle {
   font-size: var(--fontsize-heading-m);
   font-weight: 500;
@@ -76,6 +79,7 @@
 
 .description {
   --description-font-size: var(--fontsize-body-l);
+
   line-height: 1.5;
   font-size: var(--description-font-size);
 
@@ -88,6 +92,7 @@
     text-decoration: underline;
     font-size: var(--description-font-size);
   }
+
   a:hover {
     color: var(--color-coat-of-arms-dark);
   }

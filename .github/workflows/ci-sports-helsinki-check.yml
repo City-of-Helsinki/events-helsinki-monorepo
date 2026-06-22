@@ -8,7 +8,8 @@ on:
       - 'apps/sports-helsinki/**'
       - 'packages/components/**'
       - 'packages/common-i18n/**'
-      - '.yarnrc.yml'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       - 'tsconfig.base.json'
       - '.prettier*'
       - '.github/workflows/ci-sports-helsinki-check.yml'
@@ -20,17 +21,18 @@ on:
       - 'apps/sports-helsinki/**'
       - 'packages/components/**'
       - 'packages/common-i18n/**'
-      - '.yarnrc.yml'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
       - 'tsconfig.base.json'
       - '.prettier*'
       - '.github/workflows/ci-sports-helsinki-check.yml'
 
 jobs:
   common:
-    uses: City-of-Helsinki/.github/.github/workflows/ci-node.yml@main
+    uses: City-of-Helsinki/.github/.github/workflows/ci-pnpm-node.yml@main
     secrets: inherit
     with:
-      node-version: 22
+      node-version: '24.16.0'
       typecheck: true
       app-directory: apps/sports-helsinki
       extra-commands: |

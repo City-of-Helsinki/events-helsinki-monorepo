@@ -3,14 +3,15 @@
 .eventListWrapper {
   .eventsWrapper {
     display: grid;
-    grid-gap: var(--spacing-xs);
+    gap: var(--spacing-xs);
     margin-bottom: 1.5rem;
 
     @include breakpoints.respond-above(s) {
-      grid-gap: var(--spacing-s);
+      gap: var(--spacing-s);
       margin-bottom: var(--spacing-xl);
     }
   }
+
   .loadMoreWrapper {
     display: flex;
     justify-content: center;
@@ -28,7 +29,7 @@
 
     @include breakpoints.respond-above(s) {
       grid-template-columns: 1fr 1fr;
-      grid-gap: 1.75rem 3rem;
+      gap: 1.75rem 3rem;
     }
 
     @include breakpoints.respond-above(m) {

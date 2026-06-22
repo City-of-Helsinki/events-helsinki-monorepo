@@ -9,9 +9,9 @@
 
 import {
   concatFilesForPrettier,
+  concatFilesForStylelint,
   getEslintFixCmd,
 } from '../../lint-staged.common.mjs';
-import { concatFilesForStylelint } from '../../lint-staged.common.mjs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
@@ -36,15 +36,18 @@ const rules = {
       files: filenames,
     });
   },
-  '!(*styles)/*.{css,scss}': (filenames) => {
-    if (filenames.length === 0) {
+  '**/*.{css,scss}': (filenames) => {
+    const stylelintFiles = filenames.filter(
+      (f) => !/(?:^|\/)styles\//.test(f.replaceAll('\\', '/'))
+    );
+    if (stylelintFiles.length === 0) {
       return [];
     }
     return [
-      `yarn stylelint --allow-empty-input --ignore-disables --config ./stylelint.config.js --max-warnings 25 --color ${concatFilesForStylelint(
-        filenames
+      `pnpm exec stylelint --allow-empty-input --ignore-disables --config ./stylelint.config.mjs --max-warnings 25 --color ${concatFilesForStylelint(
+        stylelintFiles
       )}`,
-      `prettier --write ${concatFilesForPrettier(filenames)}`,
+      `prettier --write ${concatFilesForPrettier(stylelintFiles)}`,
     ];
   },
   '!(*default)/*.{json,md,mdx,css,html,yml,yaml,scss}': (filenames) => {

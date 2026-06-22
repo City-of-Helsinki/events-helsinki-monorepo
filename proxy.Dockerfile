@@ -8,13 +8,11 @@
 #      ignore: all **/node_modules folders and .yarn/cache        #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS deps
+ARG BUILDER_FROM_IMAGE=helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
+
+FROM ${BUILDER_FROM_IMAGE} AS deps
 
 USER root
-
-# install yarn
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
 
 # install rsync (to fetch cached files)
 RUN yum update -y && \
@@ -22,8 +20,7 @@ RUN yum update -y && \
 
 WORKDIR /workspace-install
 
-COPY --chown=default:root yarn.lock .yarnrc.yml ./
-COPY --chown=default:root .yarn/ ./.yarn/
+COPY --chown=default:root pnpm-lock.yaml pnpm-workspace.yaml .npmrc package.json ./
 
 # Specific to monerepo's as docker COPY command is pretty limited
 # we use buidkit to prepare all files that are necessary for install
@@ -79,15 +76,8 @@ RUN yum remove -y rsync && \
 # Stage 2: Build the app                                          #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS builder
+FROM ${BUILDER_FROM_IMAGE} AS builder
 
-USER root
-
-# install yarn
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
-
-# Use non-root user
 USER default
 
 ARG PROXY
@@ -127,10 +117,11 @@ COPY --from=deps --chown=default:root /workspace-install ./
 
 # Optional: if the app depends on global /static shared assets like images, locales...
 
-RUN yarn install --immutable --inline-builds
+ENV HUSKY=0
+RUN pnpm install --frozen-lockfile
 
 # build
-RUN yarn workspace ${PROXY} build
+RUN pnpm --filter ${PROXY} run build
 
 ###################################################################
 # Optional: develop locally                                       #
@@ -138,14 +129,8 @@ RUN yarn workspace ${PROXY} build
 # last stage should be the production build."                     #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS develop
+FROM ${BUILDER_FROM_IMAGE} AS develop
 
-# install yarn
-USER root
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
-
-# Use non-root user
 USER default
 
 # Build ARGS
@@ -171,7 +156,7 @@ COPY --from=builder --chown=default:root /app/package.json ./package.json
 EXPOSE ${GRAPHQL_PROXY_PORT:-4100}
 
 # Start graphql proxy dev server
-ENV DEV_START "yarn workspace ${PROXY} dev"
+ENV DEV_START "pnpm --filter ${PROXY} run dev"
 
 CMD ["sh", "-c", "${DEV_START}"]
 
@@ -179,7 +164,7 @@ CMD ["sh", "-c", "${DEV_START}"]
 # Stage 3: Extract a minimal image from the build                 #
 ###################################################################
 
-FROM registry.access.redhat.com/ubi9/nodejs-22 AS runner
+FROM ${BUILDER_FROM_IMAGE} AS runner
 
 
 # Build ARGS
@@ -189,12 +174,6 @@ ARG GRAPHQL_PROXY_PORT
 ENV PATH $PATH:/app/node_modules/.bin
 ENV NODE_ENV production
 
-# install yarn
-USER root
-RUN curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
-RUN yum -y install yarn
-
-# Use non-root user
 USER default
 
 WORKDIR /app
@@ -212,7 +191,7 @@ COPY --from=builder --chown=default:root /app/package.json ./package.json
 # Expose port
 EXPOSE ${GRAPHQL_PROXY_PORT:-4100}
 
-# Start graphql proxy server
-ENV PROD_START "yarn workspace ${PROXY} start"
+WORKDIR /app/proxies/${PROXY}
 
-CMD ["sh", "-c", "${PROD_START}"]
+# Deps are installed at build time; avoid pnpm at runtime (OpenShift EACCES on /app)
+CMD ["node", "-r", "dotenv-expand/config", "build"]

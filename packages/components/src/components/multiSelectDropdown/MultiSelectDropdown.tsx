@@ -21,14 +21,21 @@ import type { MultiselectDropdownProps } from './types';
  * This function is used to create some consistent sorting for React elements.
  * Sorting by text content would be better, but sorting by props at least ensures some consistency.
  */
-const getSortingKey = (x: React.ReactElement | string) =>
-  typeof x === 'string' ? x : JSON.stringify(x.props);
+type SortableLabel = React.ReactElement | string | number;
+
+const getSortingKey = (x: SortableLabel) =>
+  typeof x === 'string' || typeof x === 'number'
+    ? String(x)
+    : JSON.stringify(x.props);
+
+const isSortableLabel = (node: React.ReactNode): node is SortableLabel =>
+  typeof node === 'string' ||
+  typeof node === 'number' ||
+  React.isValidElement(node);
 
 /** Compare two React elements or strings for sorting. */
-const reactElementOrStringCompare = (
-  a: React.ReactElement | string | number,
-  b: React.ReactElement | string | number
-) => getSortingKey(a.toString()).localeCompare(getSortingKey(b.toString()));
+const reactElementOrStringCompare = (a: SortableLabel, b: SortableLabel) =>
+  getSortingKey(a).localeCompare(getSortingKey(b));
 
 const selectAll = 'SELECT_ALL';
 
@@ -276,6 +283,7 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
         }
       })
       .filter(skipFalsyType)
+      .filter(isSortableLabel)
       .sort(reactElementOrStringCompare);
 
     if (valueLabels.length > 1) {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from 'react';
 import { getExpirationTime } from '../utils/jwtToken';
 
@@ -8,7 +7,9 @@ function usePreview(token: string): {
   const [minutesLeft, setMinutesLeft] = useState(
     Math.ceil(getExpirationTime(token) / 60)
   );
-  const intervalRef = useRef<any>();
+  const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {

@@ -7,7 +7,7 @@ import {
 } from '@events-helsinki/components';
 import capitalize from 'lodash/capitalize';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../../domain/app/routerHelper';

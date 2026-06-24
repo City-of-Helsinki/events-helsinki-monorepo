@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import type { BreadcrumbListItem } from 'hds-react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 import { ROUTES } from '../../constants';
 import AppConfig from '../../domain/app/AppConfig';

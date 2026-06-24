@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { homeConfig } from '../translations/home.config';
 
 const useHomeTranslation = () => useTranslation(homeConfig.i18nNamespaces);

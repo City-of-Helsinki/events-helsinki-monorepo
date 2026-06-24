@@ -7,7 +7,7 @@ import {
 } from '@events-helsinki/components';
 import type { EventFieldsFragment } from '@events-helsinki/components';
 import { IconCalendarClock, IconLocation } from 'hds-react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 import styles from './eventDetails.module.scss';
 

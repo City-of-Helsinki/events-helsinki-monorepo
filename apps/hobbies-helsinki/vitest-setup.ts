@@ -37,15 +37,11 @@ vi.mock('ics', async () => ({
   ),
 }));
 
-vi.mock('next/config', async () => ({
-  default: vi.fn(() => ({
-    publicRuntimeConfig: {
-      federationRouter: 'https://localhost/federationrouter/',
-      cmsOrigin: 'https://localhost/cms/graphql',
-      linkedEvents: 'https://linkedevents-url.fi',
-    },
-  })),
-}));
+process.env.NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT =
+  'https://localhost/federationrouter/';
+process.env.NEXT_PUBLIC_CMS_ORIGIN = 'https://localhost/cms/graphql';
+process.env.NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT =
+  'https://linkedevents-url.fi';
 
 vi.mock('next/router', async () => {
   // If next-router-mock is ESM, importActual will work.
@@ -78,12 +74,11 @@ vi.mock('next/head', async () => {
   };
 });
 
-vi.mock('next-i18next', async () => {
+vi.mock('next-i18next/pages', async () => {
   const i18nInstance = await initializeI18nWithConfig();
 
-  // Return the mock for next-i18next exports
   return {
-    ...vi.importActual('next-i18next'),
+    ...(await vi.importActual('next-i18next/pages')),
     useTranslation: (ns: unknown) => ({
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
@@ -91,14 +86,13 @@ vi.mock('next-i18next', async () => {
       i18n: i18nInstance,
       ready: true,
     }),
-    // Other exports that next-i18next might have (like appWithTranslation, serverSideTranslations)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    appWithTranslation: (Component) => (props) => Component(props), // Simple pass-through for HOC
+    appWithTranslation: (Component) => (props) => Component(props),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    Trans: ({ i18nKey, children }) => i18nInstance.t(i18nKey) || children, // Minimal Trans component mock
-    i18n: i18nInstance, // Export the initialized instance
+    Trans: ({ i18nKey, children }) => i18nInstance.t(i18nKey) || children,
+    i18n: i18nInstance,
   };
 });
 

@@ -16,7 +16,7 @@ import type { EventFields } from '@events-helsinki/components';
 import type { BreadcrumbListItem } from 'hds-react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React, { useState } from 'react';
 
 import { ROUTES } from '../../constants';

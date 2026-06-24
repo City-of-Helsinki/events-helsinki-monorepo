@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import type { ButtonTheme } from 'hds-react';
 import { Button, ButtonVariant, ButtonPresetTheme } from 'hds-react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 import EventCard from '../../components/eventCard/EventCard';

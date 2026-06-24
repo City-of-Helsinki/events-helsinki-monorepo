@@ -14,7 +14,7 @@ import {
 } from '@events-helsinki/components';
 import { IconCrossCircleFill } from 'hds-react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import queryString from 'query-string';
 import React from 'react';
 

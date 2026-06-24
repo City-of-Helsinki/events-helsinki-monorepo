@@ -52,11 +52,11 @@ importers:
   .:
     dependencies:
       '@next/bundle-analyzer':
-        specifier: 15.5.11
-        version: 15.5.11
+        specifier: 16.2.9
+        version: 16.2.9
       '@sentry/nextjs':
         specifier: ^10.52.0
-        version: 10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
+        version: 10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -67,11 +67,8 @@ importers:
         specifier: 4.8.1
         version: 4.8.1(@types/react@19.2.17)(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(graphql-ws@5.14.0(graphql@16.12.0))(postcss@8.5.12)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(supports-color@5.5.0)(typescript@5.8.3)
       next:
-        specifier: 15.5.18
-        version: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
-      next-transpile-modules:
-        specifier: 10.0.1
-        version: 10.0.1
+        specifier: 16.2.9
+        version: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       postcss:
         specifier: ^8.5.10
         version: 8.5.12
@@ -158,8 +155,8 @@ importers:
         specifier: 9.39.4
         version: 9.39.4(jiti@2.4.2)(supports-color@5.5.0)
       eslint-config-next:
-        specifier: 15.5.14
-        version: 15.5.14(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3)
+        specifier: 16.2.9
+        version: 16.2.9(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3)
       git-rev-sync:
         specifier: 3.0.2
         version: 3.0.2
@@ -234,7 +231,7 @@ importers:
         version: 10.54.0
       '@sentry/nextjs':
         specifier: ^10.52.0
-        version: 10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
+        version: 10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1)
       '@sentry/react':
         specifier: ^10.52.0
         version: 10.54.0(react@19.2.7)
@@ -293,11 +290,11 @@ importers:
         specifier: ^2.10.4
         version: 2.12.7(@types/node@24.13.2)(typescript@5.8.3)
       next:
-        specifier: 15.5.18
-        version: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
+        specifier: 16.2.9
+        version: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       next-i18next:
-        specifier: 15.4.2
-        version: 15.4.2(i18next@25.3.2(typescript@5.8.3))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7)
+        specifier: 16.0.7
+        version: 16.0.7(@types/react@19.2.17)(i18next@25.3.2(typescript@5.8.3))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7)
       postcss:
         specifier: ^8.5.10
         version: 8.5.12
@@ -369,11 +366,11 @@ importers:
         specifier: ^4.5.1
         version: 4.5.1(graphql@16.12.0)
       '@next/env':
-        specifier: 15.5.11
-        version: 15.5.11
+        specifier: 16.2.9
+        version: 16.2.9
       '@next/eslint-plugin-next':
-        specifier: 15.5.11
-        version: 15.5.11
+        specifier: 16.2.9
+        version: 16.2.9
       '@size-limit/file':
         specifier: 11.2.0
         version: 11.2.0(size-limit@11.2.0)
@@ -447,8 +444,8 @@ importers:
         specifier: 9.39.4
         version: 9.39.4(jiti@2.4.2)
       eslint-config-next:
-        specifier: 15.5.14
-        version: 15.5.14(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
+        specifier: 16.2.9
+        version: 16.2.9(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.39.4(jiti@2.4.2))
@@ -499,7 +496,7 @@ importers:
         version: 0.0.0
       next-router-mock:
         specifier: ^1.0.2
-        version: 1.0.2(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)
+        version: 1.0.2(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)
       picocolors:
         specifier: 1.1.1
         version: 1.1.1
@@ -580,7 +577,7 @@ importers:
         version: 10.54.0
       '@sentry/nextjs':
         specifier: ^10.52.0
-        version: 10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
+        version: 10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1)
       '@sentry/react':
         specifier: ^10.52.0
         version: 10.54.0(react@19.2.7)
@@ -639,11 +636,11 @@ importers:
         specifier: ^2.10.4
         version: 2.12.7(@types/node@24.13.2)(typescript@5.8.3)
       next:
-        specifier: 15.5.18
-        version: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
+        specifier: 16.2.9
+        version: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       next-i18next:
-        specifier: 15.4.2
-        version: 15.4.2(i18next@25.3.2(typescript@5.8.3))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7)
+        specifier: 16.0.7
+        version: 16.0.7(@types/react@19.2.17)(i18next@25.3.2(typescript@5.8.3))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7)
       postcss:
         specifier: ^8.5.10
         version: 8.5.12
@@ -715,11 +712,11 @@ importers:
         specifier: ^4.5.1
         version: 4.5.1(graphql@16.12.0)
       '@next/env':
-        specifier: 15.5.11
-        version: 15.5.11
+        specifier: 16.2.9
+        version: 16.2.9
       '@next/eslint-plugin-next':
-        specifier: 15.5.11
-        version: 15.5.11
+        specifier: 16.2.9
+        version: 16.2.9
       '@size-limit/file':
         specifier: 11.2.0
         version: 11.2.0(size-limit@11.2.0)
@@ -793,8 +790,8 @@ importers:
         specifier: 9.39.4
         version: 9.39.4(jiti@2.4.2)
       eslint-config-next:
-        specifier: 15.5.14
-        version: 15.5.14(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
+        specifier: 16.2.9
+        version: 16.2.9(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.39.4(jiti@2.4.2))
@@ -845,7 +842,7 @@ importers:
         version: 0.0.0
       next-router-mock:
         specifier: ^1.0.2
-        version: 1.0.2(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)
+        version: 1.0.2(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)
       picocolors:
         specifier: 1.1.1
         version: 1.1.1
@@ -932,7 +929,7 @@ importers:
         version: 10.54.0
       '@sentry/nextjs':
         specifier: ^10.52.0
-        version: 10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
+        version: 10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1)
       '@sentry/react':
         specifier: ^10.52.0
         version: 10.54.0(react@19.2.7)
@@ -1000,11 +997,11 @@ importers:
         specifier: ^2.10.4
         version: 2.12.7(@types/node@24.13.2)(typescript@5.8.3)
       next:
-        specifier: 15.5.18
-        version: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
+        specifier: 16.2.9
+        version: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       next-i18next:
-        specifier: 15.4.2
-        version: 15.4.2(i18next@25.3.2(typescript@5.8.3))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7)
+        specifier: 16.0.7
+        version: 16.0.7(@types/react@19.2.17)(i18next@25.3.2(typescript@5.8.3))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7)
       postcss:
         specifier: ^8.5.10
         version: 8.5.12
@@ -1079,11 +1076,11 @@ importers:
         specifier: ^4.5.1
         version: 4.5.1(graphql@16.12.0)
       '@next/env':
-        specifier: 15.5.11
-        version: 15.5.11
+        specifier: 16.2.9
+        version: 16.2.9
       '@next/eslint-plugin-next':
-        specifier: 15.5.11
-        version: 15.5.11
+        specifier: 16.2.9
+        version: 16.2.9
       '@size-limit/file':
         specifier: 11.2.0
         version: 11.2.0(size-limit@11.2.0)
@@ -1160,8 +1157,8 @@ importers:
         specifier: 9.39.4
         version: 9.39.4(jiti@2.4.2)
       eslint-config-next:
-        specifier: 15.5.14
-        version: 15.5.14(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
+        specifier: 16.2.9
+        version: 16.2.9(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
       eslint-config-prettier:
         specifier: ^10.1.8
         version: 10.1.8(eslint@9.39.4(jiti@2.4.2))
@@ -1212,7 +1209,7 @@ importers:
         version: 0.0.0
       next-router-mock:
         specifier: ^1.0.2
-        version: 1.0.2(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)
+        version: 1.0.2(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)
       picocolors:
         specifier: 1.1.1
         version: 1.1.1
@@ -1390,8 +1387,8 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(react@19.2.7)
       '@next/env':
-        specifier: 15.5.11
-        version: 15.5.11
+        specifier: 16.2.9
+        version: 16.2.9
       '@react-leaflet/core':
         specifier: 2.1.0
         version: 2.1.0(leaflet@1.9.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1477,11 +1474,11 @@ importers:
         specifier: 4.18.1
         version: 4.18.1
       next:
-        specifier: 15.5.18
-        version: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
+        specifier: 16.2.9
+        version: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       next-i18next:
-        specifier: 15.4.2
-        version: 15.4.2(i18next@25.3.2(typescript@5.8.3))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7)
+        specifier: 16.0.7
+        version: 16.0.7(@types/react@19.2.17)(i18next@25.3.2(typescript@5.8.3))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7)
       postcss:
         specifier: ^8.5.10
         version: 8.5.12
@@ -1554,7 +1551,7 @@ importers:
         version: 9.1.20(storybook@9.1.20(@testing-library/dom@10.4.0)(msw@2.12.7(@types/node@24.13.2)(typescript@5.8.3))(prettier@3.6.2)(supports-color@5.5.0)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.4.2)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.9.0)))
       '@storybook/nextjs':
         specifier: ^9.1.19
-        version: 9.1.20(babel-plugin-macros@3.1.0)(esbuild@0.28.1)(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.99.0)(sass@1.99.0)(storybook@9.1.20(@testing-library/dom@10.4.0)(msw@2.12.7(@types/node@24.13.2)(typescript@5.8.3))(prettier@3.6.2)(supports-color@5.5.0)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.4.2)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.9.0)))(supports-color@5.5.0)(type-fest@4.41.0)(typescript@5.8.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack-hot-middleware@2.26.1)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
+        version: 9.1.20(babel-plugin-macros@3.1.0)(esbuild@0.28.1)(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.99.0)(sass@1.99.0)(storybook@9.1.20(@testing-library/dom@10.4.0)(msw@2.12.7(@types/node@24.13.2)(typescript@5.8.3))(prettier@3.6.2)(supports-color@5.5.0)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.4.2)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.9.0)))(supports-color@5.5.0)(type-fest@4.41.0)(typescript@5.8.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack-hot-middleware@2.26.1)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
       '@testing-library/dom':
         specifier: ^10.4.0
         version: 10.4.0
@@ -1649,8 +1646,8 @@ importers:
         specifier: 9.39.4
         version: 9.39.4(jiti@2.4.2)
       eslint-config-next:
-        specifier: 15.5.14
-        version: 15.5.14(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
+        specifier: 16.2.9
+        version: 16.2.9(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
       eslint-plugin-storybook:
         specifier: ^9.1.20
         version: 9.1.20(eslint@9.39.4(jiti@2.4.2))(storybook@9.1.20(@testing-library/dom@10.4.0)(msw@2.12.7(@types/node@24.13.2)(typescript@5.8.3))(prettier@3.6.2)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.4.2)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.9.0)))(typescript@5.8.3)
@@ -1668,7 +1665,7 @@ importers:
         version: 1.0.10
       next-router-mock:
         specifier: ^1.0.2
-        version: 1.0.2(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)
+        version: 1.0.2(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)
       npm-run-all:
         specifier: 4.1.5
         version: 4.1.5
@@ -4877,69 +4874,63 @@ packages:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
 
-  '@next/bundle-analyzer@15.5.11':
-    resolution: {integrity: sha512-G9JIdFJGvQuIXIkDImoTFQQjas0Hx2FKDHk/8lsSxPNhv/9aye5t1z0sA4U0VmyPKbIPRh+/yxhoDUiMsTreSw==}
+  '@next/bundle-analyzer@16.2.9':
+    resolution: {integrity: sha512-yGWyLbC8MMn+hk9j6l6GammpbUz5S3yZzl3lpoWfVXhIpJfh6kAWG7JwF4WoG3f0VnYRY959yo1QQEI8mV/+jg==}
 
-  '@next/env@15.5.11':
-    resolution: {integrity: sha512-g9s5SS9gC7GJCEOR3OV3zqs7C5VddqxP9X+/6BpMbdXRkqsWfFf2CJPBZNvNEtAkKTNuRgRXAgNxSAXzfLdaTg==}
+  '@next/env@16.2.9':
+    resolution: {integrity: sha512-ki5VxxXfzD/9TDe13wyeTKIjQTAwBVpnr8KhRDUr8ltMUq1/NBpWNT5tiPoxiGl+PHM4X2ahSOiPk6iAimIzPg==}
 
-  '@next/env@15.5.18':
-    resolution: {integrity: sha512-hAV85Ckd9QR6RvH04MEKwsfLTksvFpO47j9xwtoIuvuPnlwecpSi+uZTtm8HirVbtlI2Fnz//xpcSTjFdyJk+g==}
+  '@next/eslint-plugin-next@16.2.9':
+    resolution: {integrity: sha512-UZi8+YT/MLgTC9nrrn2Xd4lBYv1B7lVmtWHfPcthAI5Tt/C1LuDe6DfmtCtJ+WQod3ksY4VrKSvk3oMVAnL7qw==}
 
-  '@next/eslint-plugin-next@15.5.11':
-    resolution: {integrity: sha512-tS/HYQOjIoX9ZNDQitba/baS8sTvo3ekY6Vgdx5lmhN4jov082bdApIChXr94qhMZHvEciz9DZglFFnhguQp/A==}
-
-  '@next/eslint-plugin-next@15.5.14':
-    resolution: {integrity: sha512-ogBjgsFrPPz19abP3VwcYSahbkUOMMvJjxCOYWYndw+PydeMuLuB4XrvNkNutFrTjC9St2KFULRdKID8Sd/CMQ==}
-
-  '@next/swc-darwin-arm64@15.5.18':
-    resolution: {integrity: sha512-w0WvQf1n+txiwns/9pwIQteCJpZTbxzO2SE0FLcwuD4v0WEh1JPOjdyxWL21XwJsdpx8cFRjyzxzCS/siP7HcQ==}
+  '@next/swc-darwin-arm64@16.2.9':
+    resolution: {integrity: sha512-HkfxNYUCmcct0Xsqib5KxqMSHV4AHJq857BNRchyBDs4YS19aHzVfn1kDuBYKqLLQBjXgnkIsjV2Kd4d2wzYhw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@15.5.18':
-    resolution: {integrity: sha512-znn71QmDuxm+BOaglihMZfvyySMnNljkVIY5Z2TCssBmm+WqL6c19VhtH5ktFkHa8EZ2bnTUpcNcmNSQsg67og==}
+  '@next/swc-darwin-x64@16.2.9':
+    resolution: {integrity: sha512-7IAtK4MeybpqRV9GRABWEhJ62mOS+rzWOzOTFie4cSEtm12xsoOMJRcECoZx3FHPzFAqN/IJtHqWAFOLfl152w==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-linux-arm64-gnu@15.5.18':
-    resolution: {integrity: sha512-yPPe5MNL+igZUa+OsqQJisqSfh6oarIuA1Q0BDxljGJhRQyZeP+WRHh7rs/jZUGMh5aY0YdIjXZG0VohkKkUdw==}
+  '@next/swc-linux-arm64-gnu@16.2.9':
+    resolution: {integrity: sha512-hBD75iWpUtkL9SmQmcRhmLomn9jgkPzCEkbOcLgHymPEKzv+6ONy13RRiIEz/iEObjkS2Jlb5gYS2XGoS3X4rw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@next/swc-linux-arm64-musl@15.5.18':
-    resolution: {integrity: sha512-glaCczEWIrHsokFZ3pP08U4BpKxwIdnT+txdOM32OBgpL9Yw4aqx8NejmgtZQZOdstQ5f0L3CasIZudzCuD+nw==}
+  '@next/swc-linux-arm64-musl@16.2.9':
+    resolution: {integrity: sha512-qZTI3pf9SGc/obr8NkQAekBxmp1QK+kVm+VAf3BALLfFAj+1kUhkTxmrWpVos9R/UYIA8AWX2p6cGI5WdwzVUA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@next/swc-linux-x64-gnu@15.5.18':
-    resolution: {integrity: sha512-oUfg2EgJmU3R0OCOWiokGFUTvZiPfXtriXiuF3YNxRoROCdgvTedHIzYoeKH34gsZxS/V7mHbfq2hpAHwhH1/A==}
+  '@next/swc-linux-x64-gnu@16.2.9':
+    resolution: {integrity: sha512-xm0HfRNX+UkH4R3c18ynswjj5o5uEj/7iI9p9omdtTSIsRCzQqkGMA+10nzJ4EHnYC3as65IMhbbl5fWRUWHYg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@next/swc-linux-x64-musl@15.5.18':
-    resolution: {integrity: sha512-JLxSP3KTd9iu/bvUMQxH7RJo9xKSHf55/6RPE4a6FTSZygGn7uvZbCej0AHXydwkggQGSD9UddSjwv6Xz5ESfA==}
+  '@next/swc-linux-x64-musl@16.2.9':
+    resolution: {integrity: sha512-QumimHkGEG6vM3PfEDWKyKen03NcqLOkeKB1EfcPe7VxzmEiCa4jNnMyBn/US5zcd/VE1CI+O8Ovb3lfjVHfGw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@next/swc-win32-arm64-msvc@15.5.18':
-    resolution: {integrity: sha512-ir1v7enP52K2HNz3tQQvwF+x7VNxBk1ciiZ18WBPvxf4C59IqdfmHPJYK3vH7rSxpuCVw/8C712wTXNAtEp+NA==}
+  '@next/swc-win32-arm64-msvc@16.2.9':
+    resolution: {integrity: sha512-hzQpKZvw8rAwI6A2uQh6SacCSvNAXaIkPNsWwzqqfRiIMiXMfH936skDhz1OO6KpvdKkJrgHHtqQOq5PIXOvdQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@15.5.18':
-    resolution: {integrity: sha512-LIu5me6QTANCd25E7I5uIEfvgQ06RK7tvHAbYo3zCb3VpxQEPvMcSpd87NwUABDT6MbGPdEGR5VRiK4PPTJhQg==}
+  '@next/swc-win32-x64-msvc@16.2.9':
+    resolution: {integrity: sha512-qr2VL3Ce5QrwgO2yh1ujSBawrimjVKX8FGF/cOynmdYKJY0BdHpGVNIRK1tqONB10Vkm25Ub1BD2bkjWs4+96w==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -5800,9 +5791,6 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@rushstack/eslint-patch@1.12.0':
-    resolution: {integrity: sha512-5EwMtOqvJMMa3HbmxLlF74e+3/HhwBTMcvt3nqVJgGCozO6hzIPOBlwm8mGVNR9SN2IJpxSnlxczyDjcn7qIyw==}
-
   '@sentry-internal/browser-utils@10.54.0':
     resolution: {integrity: sha512-Cz6NzYFmWJlHh1tvtltKsmLl+1jlseQaPXk18Z0P1g6lXAwhT3aJ99x7vDm4jwCzcJ12qAa8Oga8T3C23Ihijw==}
     engines: {node: '>=18'}
@@ -6358,8 +6346,10 @@ packages:
   '@types/graphql-depth-limit@1.1.6':
     resolution: {integrity: sha512-WU4bjoKOzJ8CQE32Pbyq+YshTMcLJf2aJuvVtSLv1BQPwDUGa38m2Vr8GGxf0GZ0luCQcfxlhZeHKu6nmTBvrw==}
 
-  '@types/hoist-non-react-statics@3.3.6':
-    resolution: {integrity: sha512-lPByRJUer/iN/xa4qpyL0qmL11DqNW81iU/IG1S3uvRUq4oKagz8VCxZjiWkumgt66YT3vOdDgZ0o32sGKtCEw==}
+  '@types/hoist-non-react-statics@3.3.7':
+    resolution: {integrity: sha512-PQTyIulDkIDro8P+IHbKCsw7U2xxBYflVzW/FgWdCAePD9xGSidgA76/GeJ6lBKoblyhf9pBY763gbrN+1dI8g==}
+    peerDependencies:
+      '@types/react': 19.2.17
 
   '@types/html-minifier-terser@6.1.0':
     resolution: {integrity: sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==}
@@ -8502,8 +8492,8 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
-  eslint-config-next@15.5.14:
-    resolution: {integrity: sha512-lmJ5F8ZgOYogq0qtH4L5SpxuASY2SPdOzqUprN2/56+P3GPsIpXaUWIJC66kYIH+yZdsM4nkHE5MIBP6s1NiBw==}
+  eslint-config-next@16.2.9:
+    resolution: {integrity: sha512-olGtBrs07bQchpaJWeqbk9GaMoU0oGmN/pYNEBXSbfgKngb5uHnPe37X6tVeh6DJfaWFQildvinGEOrolo5fmw==}
     peerDependencies:
       eslint: 9.39.4
       typescript: 5.8.3
@@ -8609,6 +8599,12 @@ packages:
   eslint-plugin-react-hooks@5.2.0:
     resolution: {integrity: sha512-+f15FfK64YQwZdJNELETdn5ibXEUQmW1DZL6KXhNnc2heoy/sg9VJJeT7n8TlMWouzWqSWavFkIhHyIbIAEapg==}
     engines: {node: '>=10'}
+    peerDependencies:
+      eslint: 9.39.4
+
+  eslint-plugin-react-hooks@7.1.1:
+    resolution: {integrity: sha512-f2I7Gw6JbvCexzIInuSbZpfdQ44D7iqdWX01FKLvrPgqxoE7oMj8clOfto8U6vYiz4yd5oKu39rRSVOe1zRu0g==}
+    engines: {node: '>=18'}
     peerDependencies:
       eslint: 9.39.4
 
@@ -9124,6 +9120,10 @@ packages:
     resolution: {integrity: sha512-bqWEnJ1Nt3neqx2q5SFfGS8r/ahumIakg3HcwtNlrVlwXIeNumWn/c7Pn/wKzGhf6SaW6H6uWXLqC30STCMchQ==}
     engines: {node: '>=18'}
 
+  globals@16.4.0:
+    resolution: {integrity: sha512-ob/2LcVVaVGCYN+r14cnwnoDPUufjiYgSqRhiFD0Q1iI4Odora5RE8Iv1D24hAz5oMophRGkGz+yuvQmmUMnMw==}
+    engines: {node: '>=18'}
+
   globalthis@1.0.4:
     resolution: {integrity: sha512-DpLKbNU4WylpxJykQujfCcwYWiV/Jhm50Goo0wrVILAv5jOr9d+H+UR3PhSCD2rCCEIg0uc+G+muBTwD54JhDQ==}
     engines: {node: '>= 0.4'}
@@ -9299,6 +9299,12 @@ packages:
   headers-polyfill@4.0.3:
     resolution: {integrity: sha512-IScLbePpkvO846sIwOtOTDjutRMWdXdJmXdMvk6gCBHxFO8d+QKOQedyZSxFTTFYRSmlgSTDtXqqq4pcenBXLQ==}
 
+  hermes-estree@0.25.1:
+    resolution: {integrity: sha512-0wUoCcLp+5Ev5pDW2OriHC2MJCbwLwuRx+gAqMTOkGKJJiBCLjtrvy4PWUGn6MIVefecRpzoOZ/UV6iGdOr+Cw==}
+
+  hermes-parser@0.25.1:
+    resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
+
   highlight-es@1.0.3:
     resolution: {integrity: sha512-s/SIX6yp/5S1p8aC/NRDC1fwEb+myGIfp8/TzZz0rtAv8fzsdX7vGl3Q1TrXCsczFq8DI3CBFBCySPClfBSdbg==}
 
@@ -9446,11 +9452,11 @@ packages:
   i18next-browser-languagedetector@8.2.0:
     resolution: {integrity: sha512-P+3zEKLnOF0qmiesW383vsLdtQVyKtCNA9cjSoKCppTKPQVfKd2W8hbVo5ZhNJKDqeM7BOcvNoKJOjpHh4Js9g==}
 
-  i18next-fs-backend@2.6.6:
-    resolution: {integrity: sha512-mYGu6Nt8RIp3X/U8Y+Gej1wo5xmYWmGKLqBGMCC2OCAou5rW5epeHgHmVcw20mJs9Z9+DAPHIxQPNCgFyPRMeg==}
-
   i18next-http-backend@3.0.5:
     resolution: {integrity: sha512-QaWHnsxieEDcqKe+vo/RFqpiIFRi/KBqlOSPcUlvinBaISCeiTRCbtrazHAjtHtsLC66oDsROAH8frWkQzfMMQ==}
+
+  i18next-resources-to-backend@1.2.1:
+    resolution: {integrity: sha512-okHbVA+HZ7n1/76MsfhPqDou0fptl2dAlhRDu2ideXloRRduzHsqDOznJBef+R3DFZnbvWoBW+KxJ7fnFjd6Yw==}
 
   i18next@25.3.2:
     resolution: {integrity: sha512-JSnbZDxRVbphc5jiptxr3o2zocy5dEqpVm9qCGdJwRNO+9saUJS0/u4LnM/13C23fUEWxAylPqKU/NpMV/IjqA==}
@@ -10738,14 +10744,14 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  next-i18next@15.4.2:
-    resolution: {integrity: sha512-zgRxWf7kdXtM686ecGIBQL+Bq0+DqAhRlasRZ3vVF0TmrNTWkVhs52n//oU3Fj5O7r/xOKkECDUwfOuXVwTK/g==}
-    engines: {node: '>=14'}
+  next-i18next@16.0.7:
+    resolution: {integrity: sha512-IyH9aDsDFqifndvHYQyJMJq0syLBm/E7MNrdCkAFl/5wlQ4bk4JUeLIIJC1wybWjEhYQLwWB6/dPeEf7LmqLTg==}
+    engines: {node: '>=20'}
     peerDependencies:
       i18next: '>= 23.7.13'
-      next: '>= 12.0.0'
+      next: '>= 14.1.0'
       react: 19.2.7
-      react-i18next: '>= 13.5.0'
+      react-i18next: '>= 14.0.0'
 
   next-router-mock@1.0.2:
     resolution: {integrity: sha512-9bEA4Sytj1N6xp7UlE4L++QmuU2ZcNTs33Fx8ypNToMlIA7zEotNc0RP0POPP+C3PHWz61U66V6qRDqUg0b3Lg==}
@@ -10753,12 +10759,9 @@ packages:
       next: '>=10.0.0'
       react: 19.2.7
 
-  next-transpile-modules@10.0.1:
-    resolution: {integrity: sha512-4VX/LCMofxIYAVV58UmD+kr8jQflpLWvas/BQ4Co0qWLWzVh06FoZkECkrX5eEZT6oJFqie6+kfbTA3EZCVtdQ==}
-
-  next@15.5.18:
-    resolution: {integrity: sha512-eKL8zUJkX9Y5lE+RX/2YJoItVdGlIscyVyboeD9wSpp0PaGqjoA4tTpT2qPqz9ax+5IzGESyLSeZ/RCwbSZ2uQ==}
-    engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
+  next@16.2.9:
+    resolution: {integrity: sha512-MEOJiq/UvuezAdqVSceHbqDgZt1kDw2tpGVOlsdIoJsQdbN2JY2hpVG4xnXGkbdJUOEWhnRfiu/O4Hpc9Juwww==}
+    engines: {node: '>=20.9.0'}
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
@@ -13809,6 +13812,15 @@ packages:
 
   zen-observable@0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
+
+  zod-validation-error@4.0.2:
+    resolution: {integrity: sha512-Q6/nZLe6jxuU80qb/4uJ4t5v2VEZ44lzQjPDhYJNztRQ4wyWc6VF3D3Kb/fAuPetZQnhS3hnajCf9CsWesghLQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      zod: ^3.25.0 || ^4.0.0
+
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
@@ -17106,47 +17118,41 @@ snapshots:
       '@tybys/wasm-util': 0.10.3
     optional: true
 
-  '@next/bundle-analyzer@15.5.11':
+  '@next/bundle-analyzer@16.2.9':
     dependencies:
       webpack-bundle-analyzer: 4.10.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@next/env@15.5.11': {}
+  '@next/env@16.2.9': {}
 
-  '@next/env@15.5.18': {}
-
-  '@next/eslint-plugin-next@15.5.11':
+  '@next/eslint-plugin-next@16.2.9':
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/eslint-plugin-next@15.5.14':
-    dependencies:
-      fast-glob: 3.3.1
-
-  '@next/swc-darwin-arm64@15.5.18':
+  '@next/swc-darwin-arm64@16.2.9':
     optional: true
 
-  '@next/swc-darwin-x64@15.5.18':
+  '@next/swc-darwin-x64@16.2.9':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@15.5.18':
+  '@next/swc-linux-arm64-gnu@16.2.9':
     optional: true
 
-  '@next/swc-linux-arm64-musl@15.5.18':
+  '@next/swc-linux-arm64-musl@16.2.9':
     optional: true
 
-  '@next/swc-linux-x64-gnu@15.5.18':
+  '@next/swc-linux-x64-gnu@16.2.9':
     optional: true
 
-  '@next/swc-linux-x64-musl@15.5.18':
+  '@next/swc-linux-x64-musl@16.2.9':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@15.5.18':
+  '@next/swc-win32-arm64-msvc@16.2.9':
     optional: true
 
-  '@next/swc-win32-x64-msvc@15.5.18':
+  '@next/swc-win32-x64-msvc@16.2.9':
     optional: true
 
   '@node-ntlm/core@0.3.2':
@@ -17843,8 +17849,6 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
-  '@rushstack/eslint-patch@1.12.0': {}
-
   '@sentry-internal/browser-utils@10.54.0':
     dependencies:
       '@sentry/core': 10.54.0
@@ -17946,7 +17950,7 @@ snapshots:
       '@sentry/utils': 7.114.0
       localforage: 1.10.0
 
-  '@sentry/nextjs@10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))':
+  '@sentry/nextjs@10.54.0(@opentelemetry/core@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7)(webpack@5.104.1)':
     dependencies:
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/semantic-conventions': 1.41.1
@@ -17959,7 +17963,7 @@ snapshots:
       '@sentry/react': 10.54.0(react@19.2.7)
       '@sentry/vercel-edge': 10.54.0
       '@sentry/webpack-plugin': 5.3.0(webpack@5.104.1)
-      next: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
+      next: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       rollup: 4.60.4
       stacktrace-parser: 0.1.11
     transitivePeerDependencies:
@@ -18168,7 +18172,7 @@ snapshots:
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
 
-  '@storybook/nextjs@9.1.20(babel-plugin-macros@3.1.0)(esbuild@0.28.1)(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.99.0)(sass@1.99.0)(storybook@9.1.20(@testing-library/dom@10.4.0)(msw@2.12.7(@types/node@24.13.2)(typescript@5.8.3))(prettier@3.6.2)(supports-color@5.5.0)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.4.2)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.9.0)))(supports-color@5.5.0)(type-fest@4.41.0)(typescript@5.8.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack-hot-middleware@2.26.1)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))':
+  '@storybook/nextjs@9.1.20(babel-plugin-macros@3.1.0)(esbuild@0.28.1)(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.99.0)(sass@1.99.0)(storybook@9.1.20(@testing-library/dom@10.4.0)(msw@2.12.7(@types/node@24.13.2)(typescript@5.8.3))(prettier@3.6.2)(supports-color@5.5.0)(vite@8.0.16(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.4.2)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.43.1)(tsx@4.20.3)(yaml@2.9.0)))(supports-color@5.5.0)(type-fest@4.41.0)(typescript@5.8.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack-hot-middleware@2.26.1)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))':
     dependencies:
       '@babel/core': 7.29.7
       '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.29.7)
@@ -18192,7 +18196,7 @@ snapshots:
       css-loader: 6.11.0(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
       image-size: 2.0.2
       loader-utils: 3.3.1
-      next: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
+      next: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
       postcss: 8.5.12
       postcss-loader: 8.1.1(postcss@8.5.12)(typescript@5.8.3)(webpack@5.104.1(esbuild@0.28.1)(webpack-cli@6.0.1))
@@ -18567,7 +18571,7 @@ snapshots:
     dependencies:
       graphql: 14.7.0
 
-  '@types/hoist-non-react-statics@3.3.6':
+  '@types/hoist-non-react-statics@3.3.7(@types/react@19.2.17)':
     dependencies:
       '@types/react': 19.2.17
       hoist-non-react-statics: 3.3.2
@@ -21050,42 +21054,42 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-next@15.5.14(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3):
+  eslint-config-next@16.2.9(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3):
     dependencies:
-      '@next/eslint-plugin-next': 15.5.14
-      '@rushstack/eslint-patch': 1.12.0
-      '@typescript-eslint/eslint-plugin': 8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3)
-      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3)
+      '@next/eslint-plugin-next': 16.2.9
       eslint: 9.39.4(jiti@2.4.2)(supports-color@5.5.0)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))
-      eslint-plugin-react-hooks: 5.2.0(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))
+      eslint-plugin-react-hooks: 7.1.1(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))
+      globals: 16.4.0
+      typescript-eslint: 8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(typescript@5.8.3)
     optionalDependencies:
       typescript: 5.8.3
     transitivePeerDependencies:
+      - '@typescript-eslint/parser'
       - eslint-import-resolver-webpack
       - eslint-plugin-import-x
       - supports-color
 
-  eslint-config-next@15.5.14(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3):
+  eslint-config-next@16.2.9(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3):
     dependencies:
-      '@next/eslint-plugin-next': 15.5.14
-      '@rushstack/eslint-patch': 1.12.0
-      '@typescript-eslint/eslint-plugin': 8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
-      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
+      '@next/eslint-plugin-next': 16.2.9
       eslint: 9.39.4(jiti@2.4.2)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@9.39.4(jiti@2.4.2))
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.4(jiti@2.4.2))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.4(jiti@2.4.2))
       eslint-plugin-react: 7.37.5(eslint@9.39.4(jiti@2.4.2))
-      eslint-plugin-react-hooks: 5.2.0(eslint@9.39.4(jiti@2.4.2))
+      eslint-plugin-react-hooks: 7.1.1(eslint@9.39.4(jiti@2.4.2))
+      globals: 16.4.0
+      typescript-eslint: 8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
     optionalDependencies:
       typescript: 5.8.3
     transitivePeerDependencies:
+      - '@typescript-eslint/parser'
       - eslint-import-resolver-webpack
       - eslint-plugin-import-x
       - supports-color
@@ -21362,13 +21366,31 @@ snapshots:
       '@types/eslint': 8.40.0
       eslint-config-prettier: 10.1.8(eslint@9.39.4(jiti@2.4.2))
 
-  eslint-plugin-react-hooks@5.2.0(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0)):
-    dependencies:
-      eslint: 9.39.4(jiti@2.4.2)(supports-color@5.5.0)
-
   eslint-plugin-react-hooks@5.2.0(eslint@9.39.4(jiti@2.4.2)):
     dependencies:
       eslint: 9.39.4(jiti@2.4.2)
+
+  eslint-plugin-react-hooks@7.1.1(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0)):
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/parser': 7.29.3
+      eslint: 9.39.4(jiti@2.4.2)(supports-color@5.5.0)
+      hermes-parser: 0.25.1
+      zod: 4.4.3
+      zod-validation-error: 4.0.2(zod@4.4.3)
+    transitivePeerDependencies:
+      - supports-color
+
+  eslint-plugin-react-hooks@7.1.1(eslint@9.39.4(jiti@2.4.2)):
+    dependencies:
+      '@babel/core': 7.29.7
+      '@babel/parser': 7.29.3
+      eslint: 9.39.4(jiti@2.4.2)
+      hermes-parser: 0.25.1
+      zod: 4.4.3
+      zod-validation-error: 4.0.2(zod@4.4.3)
+    transitivePeerDependencies:
+      - supports-color
 
   eslint-plugin-react@7.37.5(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0)):
     dependencies:
@@ -22090,6 +22112,8 @@ snapshots:
 
   globals@16.3.0: {}
 
+  globals@16.4.0: {}
+
   globalthis@1.0.4:
     dependencies:
       define-properties: 1.2.1
@@ -22361,6 +22385,12 @@ snapshots:
 
   headers-polyfill@4.0.3: {}
 
+  hermes-estree@0.25.1: {}
+
+  hermes-parser@0.25.1:
+    dependencies:
+      hermes-estree: 0.25.1
+
   highlight-es@1.0.3:
     dependencies:
       chalk: 2.4.2
@@ -22539,13 +22569,15 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.28.4
 
-  i18next-fs-backend@2.6.6: {}
-
   i18next-http-backend@3.0.5:
     dependencies:
       cross-fetch: 4.1.0
     transitivePeerDependencies:
       - encoding
+
+  i18next-resources-to-backend@1.2.1:
+    dependencies:
+      '@babel/runtime': 7.28.4
 
   i18next@25.3.2(typescript@5.8.3):
     dependencies:
@@ -23807,45 +23839,42 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  next-i18next@15.4.2(i18next@25.3.2(typescript@5.8.3))(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7):
+  next-i18next@16.0.7(@types/react@19.2.17)(i18next@25.3.2(typescript@5.8.3))(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react-i18next@15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3))(react@19.2.7):
     dependencies:
-      '@babel/runtime': 7.28.4
-      '@types/hoist-non-react-statics': 3.3.6
-      core-js: 3.44.0
+      '@types/hoist-non-react-statics': 3.3.7(@types/react@19.2.17)
       hoist-non-react-statics: 3.3.2
       i18next: 25.3.2(typescript@5.8.3)
-      i18next-fs-backend: 2.6.6
-      next: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
+      i18next-resources-to-backend: 1.2.1
+      next: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       react: 19.2.7
       react-i18next: 15.6.0(i18next@25.3.2(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3)
+    transitivePeerDependencies:
+      - '@types/react'
 
-  next-router-mock@1.0.2(next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7):
+  next-router-mock@1.0.2(next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0))(react@19.2.7):
     dependencies:
-      next: 15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
+      next: 16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0)
       react: 19.2.7
 
-  next-transpile-modules@10.0.1:
+  next@16.2.9(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0):
     dependencies:
-      enhanced-resolve: 5.20.1
-
-  next@15.5.18(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.99.0):
-    dependencies:
-      '@next/env': 15.5.18
+      '@next/env': 16.2.9
       '@swc/helpers': 0.5.15
+      baseline-browser-mapping: 2.10.8
       caniuse-lite: 1.0.30001780
       postcss: 8.5.15
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       styled-jsx: 5.1.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react@19.2.7)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.5.18
-      '@next/swc-darwin-x64': 15.5.18
-      '@next/swc-linux-arm64-gnu': 15.5.18
-      '@next/swc-linux-arm64-musl': 15.5.18
-      '@next/swc-linux-x64-gnu': 15.5.18
-      '@next/swc-linux-x64-musl': 15.5.18
-      '@next/swc-win32-arm64-msvc': 15.5.18
-      '@next/swc-win32-x64-msvc': 15.5.18
+      '@next/swc-darwin-arm64': 16.2.9
+      '@next/swc-darwin-x64': 16.2.9
+      '@next/swc-linux-arm64-gnu': 16.2.9
+      '@next/swc-linux-arm64-musl': 16.2.9
+      '@next/swc-linux-x64-gnu': 16.2.9
+      '@next/swc-linux-x64-musl': 16.2.9
+      '@next/swc-win32-arm64-msvc': 16.2.9
+      '@next/swc-win32-x64-msvc': 16.2.9
       '@opentelemetry/api': 1.9.1
       sass: 1.99.0
       sharp: 0.34.5
@@ -26762,6 +26791,17 @@ snapshots:
       typed-array-buffer: 1.0.3
       typed-array-byte-offset: 1.0.4
 
+  typescript-eslint@8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(typescript@5.8.3):
+    dependencies:
+      '@typescript-eslint/eslint-plugin': 8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3)
+      '@typescript-eslint/parser': 8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.8.3)
+      '@typescript-eslint/typescript-estree': 8.57.2(typescript@5.8.3)
+      '@typescript-eslint/utils': 8.57.2(eslint@9.39.4(jiti@2.4.2)(supports-color@5.5.0))(typescript@5.8.3)
+      eslint: 9.39.4(jiti@2.4.2)(supports-color@5.5.0)
+      typescript: 5.8.3
+    transitivePeerDependencies:
+      - supports-color
+
   typescript-eslint@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3):
     dependencies:
       '@typescript-eslint/eslint-plugin': 8.57.2(@typescript-eslint/parser@8.57.2(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3))(eslint@9.39.4(jiti@2.4.2))(typescript@5.8.3)
@@ -27427,5 +27467,11 @@ snapshots:
       zen-observable: 0.8.15
 
   zen-observable@0.8.15: {}
+
+  zod-validation-error@4.0.2(zod@4.4.3):
+    dependencies:
+      zod: 4.4.3
+
+  zod@4.4.3: {}
 
   zwitch@1.0.5: {}

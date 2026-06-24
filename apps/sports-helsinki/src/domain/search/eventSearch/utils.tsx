@@ -33,7 +33,7 @@ import {
 } from 'date-fns';
 import type { Option } from 'hds-react';
 import type { NextRouter } from 'next/router';
-import type { TFunction } from 'next-i18next';
+import type { TFunction } from 'next-i18next/pages';
 import { ROUTES } from '../../../constants';
 import routerHelper from '../../app/routerHelper';
 import { PARAM_SEARCH_TYPE } from '../combinedSearch/constants';

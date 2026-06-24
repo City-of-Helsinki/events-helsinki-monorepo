@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { consentConfig } from '../translations/consent.config';
 
 const useConsentTranslation = () =>

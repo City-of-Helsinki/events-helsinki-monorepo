@@ -38,7 +38,7 @@ jobs:
     uses: City-of-Helsinki/.github/.github/workflows/ci-pnpm-node.yml@main
     secrets: inherit
     with:
-      node-version: '24.16.0'
+      node-version: '24.18.0'
       typecheck: true
       app-directory: apps/events-helsinki
       extra-commands: |

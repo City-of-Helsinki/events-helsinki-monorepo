@@ -99,7 +99,7 @@
     "other packages in resolutions are there to make it sure only 1 version of it is installed in monorepo"
   ],
   "resolutions": {
-    "@babel/core": "^7.28.5",
+    "@babel/core": "^7.29.6",
     "@babel/runtime": "^7.28.4",
     "@testing-library/dom": "^10.4.0",
     "@tootallnate/once": "^3.0.1",
@@ -141,7 +141,7 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
+    "@babel/core": "^7.29.6",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@events-helsinki/eslint-config-bases": "workspace:^",

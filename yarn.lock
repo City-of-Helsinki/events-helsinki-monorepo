@@ -13855,7 +13855,7 @@ __metadata:
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     rimraf: "npm:6.0.1"
-    shell-quote: "npm:1.8.3"
+    shell-quote: "npm:1.8.4"
     ts-loader: "npm:9.5.2"
     ts-node: "npm:10.9.2"
     typescript: "npm:5.8.3"
@@ -22980,10 +22980,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shell-quote@npm:1.8.3, shell-quote@npm:^1.6.1, shell-quote@npm:^1.7.3":
-  version: 1.8.3
-  resolution: "shell-quote@npm:1.8.3"
-  checksum: 7c883e9ab7c7a09a0f1e9fcbefdec0fc8499a88da09d316ec0c7cf059d4ce9c803075c082d0ddb84049bc30d6e3049107c689b6f67cd55474cdacf0c27da907f
+"shell-quote@npm:1.8.4, shell-quote@npm:^1.6.1, shell-quote@npm:^1.7.3":
+  version: 1.8.4
+  resolution: "shell-quote@npm:1.8.4"
+  checksum: 9a4519f55df69e48f9dd68977a2fd7095d4cd9eae032e698a4f367c413c8e5d08d70342862742577aed7d67266ab4696a279ace88003d3b8c68b9a4480b2ac4d
   languageName: node
   linkType: hard
 

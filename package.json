@@ -176,7 +176,7 @@
     "picocolors": "1.1.1",
     "prettier": "^3.6.2",
     "rimraf": "6.0.1",
-    "shell-quote": "1.8.3",
+    "shell-quote": "1.8.4",
     "ts-loader": "9.5.2",
     "ts-node": "10.9.2",
     "typescript": "5.8.3",

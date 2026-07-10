@@ -47,7 +47,7 @@
   ],
   "dependencies": {
     "@apollo/client": "^3.11.10",
-    "@city-of-helsinki/react-helsinki-headless-cms": "3.0.1",
+    "@city-of-helsinki/react-helsinki-headless-cms": "3.0.3",
     "@events-helsinki/common-i18n": "workspace:^",
     "@events-helsinki/components": "workspace:^",
     "@sentry/browser": "^10.52.0",

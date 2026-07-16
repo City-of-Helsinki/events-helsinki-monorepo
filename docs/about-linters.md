@@ -33,7 +33,7 @@ If you are in a specific package, you can run the linter from the package direct
 | `pnpm lint`       | Display linter issues. |
 | `pnpm lint --fix` | Run automatic fixes.   |
 
-It's possible to run the linter globally from any folder of the monorepo.
+To lint all workspaces from a package folder, run `pnpm -w run g:lint` or `pnpm -r --parallel run lint --color` (from the repo root, `pnpm g:lint` is enough).
 
 | Name                | Description                                    |
 | ------------------- | ---------------------------------------------- |

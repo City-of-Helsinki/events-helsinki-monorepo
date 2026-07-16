@@ -241,7 +241,7 @@ If needed static resources like **images**,... can be shared by using symlinks i
 
 ### 3.1 Monorepo scripts
 
-Some convenience scripts can be run in any folder of this repo and will call their counterparts defined in packages and apps.
+Root-level convenience scripts (prefixed with `g:`) run commands across all workspaces. From the repo root, run `pnpm g:<script>`. From a package folder, use `pnpm -w run g:<script>` or, for simple recursive tasks, `pnpm -r` directly (e.g. `pnpm -r --parallel run lint --color`).
 
 | Name                         | Description                                                                                                                          |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
@@ -262,8 +262,7 @@ Some convenience scripts can be run in any folder of this repo and will call the
 | `pnpm check:install`         | Run manypkg workspace checks                                                                                                         |
 | `pnpm build`                 | Builds application with rollup.                                                                                                      |
 
-> Why using `:` to prefix scripts names ? It's convenient with pnpm — we can call those scripts from any folder in the monorepo.
-> `g:` is a shortcut for `global:`. See the complete list in [root package.json](./package.json).
+> Why use `:` to prefix script names? The `g:` prefix (short for `global:`) groups root scripts that target all workspaces. Unlike Yarn 3+, pnpm does not resolve these from subdirectories automatically — use `pnpm -w run g:<script>` when not at the repo root (pnpm 11 suggests this if you forget). For scripts that only run a task in every workspace (lint, typecheck, test, build), `pnpm -r` works from any folder without `-w`. Scripts with extra root logic (`g:clean`, `g:lint-staged-files`, `g:build-changed`, …) require `-w` outside the repo root. See the complete list in [root package.json](./package.json).
 
 ### 3.2 Maintaining deps updated
 

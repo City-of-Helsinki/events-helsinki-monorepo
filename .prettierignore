@@ -1,4 +1,4 @@
-.yarn
+node_modules
 graphql.ts 
 graphql.tsx
 **/.next/**

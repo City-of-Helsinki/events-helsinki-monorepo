@@ -30,15 +30,15 @@ If you are in a specific package, you can run the linter from the package direct
 
 | Name              | Description            |
 | ----------------- | ---------------------- |
-| `yarn lint`       | Display linter issues. |
-| `yarn lint --fix` | Run automatic fixes.   |
+| `pnpm lint`       | Display linter issues. |
+| `pnpm lint --fix` | Run automatic fixes.   |
 
-It's possible to run the linter globally from any folder of the monorepo.
+To lint all workspaces from a package folder, run `pnpm -w run g:lint` or `pnpm -r --parallel run lint --color` (from the repo root, `pnpm g:lint` is enough).
 
 | Name                | Description                                    |
 | ------------------- | ---------------------------------------------- |
-| `yarn g:lint`       | Display linter issues in all apps and packages |
-| `yarn g:lint --fix` | Run automatic fixes                            |
+| `pnpm g:lint`       | Display linter issues in all apps and packages |
+| `pnpm g:lint --fix` | Run automatic fixes                            |
 
 ## Lint-staged
 
@@ -62,9 +62,9 @@ On Github CI, the cache will be persisted thx to `action/cache`.
       ${{ github.workspace }}/**/tsconfig.tsbuildinfo
       ${{ github.workspace }}/**/.eslintcache
 
-    key: ${{ runner.os }}-packages-cache-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('packages/**.[jt]sx?', 'packages/**.json') }}
+    key: ${{ runner.os }}-packages-cache-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('packages/**.[jt]sx?', 'packages/**.json') }}
     restore-keys: |
-      ${{ runner.os }}-packages-cache-${{ hashFiles('**/yarn.lock') }}-
+      ${{ runner.os }}-packages-cache-${{ hashFiles('**/pnpm-lock.yaml') }}-
 ```
 
 </details>

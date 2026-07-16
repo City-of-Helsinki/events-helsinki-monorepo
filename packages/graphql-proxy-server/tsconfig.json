@@ -4,20 +4,12 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "incremental": true,
     "esModuleInterop": true,
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "types": ["node", "vitest/globals"]
   },
-  "exclude": [
-    "**/node_modules",
-    "**/.*/",
-    "dist",
-    "build"
-  ]
+  "exclude": ["**/node_modules", "**/.*/", "dist", "build"]
 }

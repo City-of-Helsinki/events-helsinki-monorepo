@@ -2,9 +2,8 @@
 
 .dateSelectorMenu {
   background: var(--color-white);
-  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%);
   z-index: 1;
-
   min-width: fit-content;
 
   @include breakpoints.respond-above(s) {

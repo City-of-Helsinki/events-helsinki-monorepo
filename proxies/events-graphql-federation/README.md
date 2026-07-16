@@ -131,7 +131,7 @@ In the `package.json` of the root in the monorepo, there is a script that can be
 To use these, run the following to launch the router:
 
 ```sh
-yarn docker:graphql-router:hobbies:serve
+pnpm docker:graphql-router:hobbies:serve
 ```
 
 In the `router.yaml` there is a `override_subgraph_url` -configuration that can be used to change the route to another GraphQL-API:

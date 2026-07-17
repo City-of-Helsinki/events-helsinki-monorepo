@@ -3,7 +3,7 @@
 exports[`matches snapshot 1`] = `
 <div
   aria-label="Poista suodatin: Gräsan taitojen talo"
-  class="Tag-module_tag__3bo5S tag_hds-tag__3MKf3 custom-theme-1 _filter_f76730 Tag-module_action__4ky2K tag_hds-tag--action__Az-Fm"
+  class="Tag-module_tag__Kh2a7 tag_hds-tag__m-39K custom-theme-1 _filter_f76730 Tag-module_action__hT5kD tag_hds-tag--action__g6DBV"
   role="button"
   tabindex="0"
 >
@@ -13,7 +13,7 @@ exports[`matches snapshot 1`] = `
   <svg
     aria-hidden="true"
     aria-label="cross"
-    class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_small__gTGkU icon_hds-icon--size-s__2Lkik Tag-module_icon__or2kN tag_hds-tag__icon__2_xWY"
+    class="Icon-module_icon__JQmVx icon_hds-icon__O6EV0 Icon-module_small__nAApk icon_hds-icon--size-s__SloSo Tag-module_icon__woa8A tag_hds-tag__icon__HFpG-"
     role="img"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"

@@ -7,7 +7,7 @@ import {
 } from '@events-helsinki/components';
 import classNames from 'classnames';
 import { Button, ButtonVariant } from 'hds-react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 import getVenueSourceId from '../../../domain/venue/utils/getVenueSourceId';
 import LargeVenueCard from '../../venue/venueCard/LargeVenueCard';

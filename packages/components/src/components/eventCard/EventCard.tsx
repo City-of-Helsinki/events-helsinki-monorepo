@@ -3,7 +3,7 @@ import {
   LinkBox,
 } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 // eslint-disable-next-line @stylistic/max-len

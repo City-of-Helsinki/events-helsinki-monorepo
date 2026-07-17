@@ -2,8 +2,8 @@
  * Retrieve translations on server-side, wraps next-i18next.serverSideTranslations
  * to allow further customizations.
  */
-import type { SSRConfig, UserConfig } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import type { SSRConfig, UserConfig } from 'next-i18next/pages';
+import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import nextI18nextConfig from '../../../next-i18next.config.mjs';
 
 export const getServerSideTranslations = async (

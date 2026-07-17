@@ -9,7 +9,7 @@ interface Props {
   above?: Breakpoint;
   below?: Breakpoint;
   className?: string;
-  children?: React.ReactNode | JSX.Element;
+  children?: React.ReactNode | React.JSX.Element;
 }
 
 const Visible: React.FC<Props> = ({

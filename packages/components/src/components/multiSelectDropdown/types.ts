@@ -9,7 +9,7 @@ export interface MultiselectDropdownProps {
   onChange: (values: string[]) => void;
   options: Option[];
   fixedOptions?: Option[];
-  renderOptionText?: (optionValue: string) => React.ReactChild;
+  renderOptionText?: (optionValue: string) => React.ReactNode;
   selectAllText?: string;
   setInputValue?: (newVal: string) => void;
   showSearch?: boolean;

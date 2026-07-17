@@ -146,6 +146,8 @@ export const firstSubEventsCourseLoadMock = getSubEventsMocks({
   variables: {
     eventType: [EventTypeId.Course],
   },
+  // React 19 remounts can consume mocks repeatedly within a single test
+  maxUsageCount: Number.POSITIVE_INFINITY,
 });
 
 export const firstSubEventsGeneralLoadMock = getSubEventsMocks({
@@ -153,18 +155,19 @@ export const firstSubEventsGeneralLoadMock = getSubEventsMocks({
   variables: {
     eventType: [EventTypeId.General],
   },
+  maxUsageCount: Number.POSITIVE_INFINITY,
 });
 
 export const secondSubEventsCourseLoadMock = getSubEventsMocks({
   variables: { page: 2, eventType: [EventTypeId.Course] },
   response: subEventsLoadMoreResponse,
-  maxUsageCount: 17, // Needed this many times or mocks don't match
+  maxUsageCount: Number.POSITIVE_INFINITY,
 });
 
 export const secondSubEventsGeneralLoadMock = getSubEventsMocks({
   variables: { page: 2, eventType: [EventTypeId.General] },
   response: subEventsLoadMoreResponse,
-  maxUsageCount: 7, // Needed this many times or mocks don't match
+  maxUsageCount: Number.POSITIVE_INFINITY,
 });
 
 export const mocks = [

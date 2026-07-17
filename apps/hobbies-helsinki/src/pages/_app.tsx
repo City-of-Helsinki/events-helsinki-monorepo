@@ -10,8 +10,8 @@ import {
   getResilientTranslation,
 } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
-import type { SSRConfig } from 'next-i18next';
-import { appWithTranslation } from 'next-i18next';
+import type { SSRConfig } from 'next-i18next/pages';
+import { appWithTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 import '../styles/globals.scss';

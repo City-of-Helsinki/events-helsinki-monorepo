@@ -1,5 +1,5 @@
 import { Button } from 'hds-react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 import { useAppThemeContext } from '../../themeProvider';

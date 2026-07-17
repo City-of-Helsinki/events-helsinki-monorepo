@@ -33,6 +33,7 @@ import {
   organizerName,
   providerContactInfo,
   streetAddress,
+  subEventsLoadMoreResponse,
   subEventsResponse,
   superEventInternalId,
   telephone,
@@ -60,6 +61,7 @@ it('should render event info fields', async () => {
       eventType: [EventTypeId.Course],
     },
     response: subEventsResponse,
+    maxUsageCount: Number.POSITIVE_INFINITY,
   });
   const subEventMock = getSubEventsMocks({
     variables: {
@@ -67,9 +69,19 @@ it('should render event info fields', async () => {
       eventType: [EventTypeId.Course],
     },
     response: subEventsResponse,
+    maxUsageCount: Number.POSITIVE_INFINITY,
+  });
+  const subEventPage2Mock = getSubEventsMocks({
+    variables: {
+      superEvent: event.id,
+      eventType: [EventTypeId.Course],
+      page: 2,
+    },
+    response: subEventsLoadMoreResponse,
+    maxUsageCount: Number.POSITIVE_INFINITY,
   });
   render(<EventInfo event={event} />, {
-    mocks: [...mocks, superEventMock, subEventMock],
+    mocks: [...mocks, superEventMock, subEventMock, subEventPage2Mock],
   });
   await actWait();
 
@@ -408,11 +420,10 @@ describe('superEvent', () => {
     expect(router.pathname).toBe(`/kurssit/${superEvent.id}`);
   }, 20_000);
 
-  it('should should not render super event title when super event is not given', async () => {
+  it('should not render super event title when super event is not given', () => {
     render(<EventInfo event={event} />, {
       mocks,
     });
-    await actWait();
 
     expect(
       screen.queryByRole('heading', {
@@ -463,6 +474,7 @@ describe('subEvents', () => {
           },
         })),
       },
+      maxUsageCount: Number.POSITIVE_INFINITY,
     });
     const superEventMock = getSubEventsMocks({
       variables: {
@@ -470,6 +482,7 @@ describe('subEvents', () => {
         eventType: [EventTypeId.Course],
       },
       response: subEventsResponse,
+      maxUsageCount: Number.POSITIVE_INFINITY,
     });
     const superEventResponseMock: SuperEventResponse = {
       data: {

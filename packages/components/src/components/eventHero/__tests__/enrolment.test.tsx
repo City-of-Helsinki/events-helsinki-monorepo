@@ -39,7 +39,7 @@ vi.mock('next/router', () => ({
   }),
 }));
 
-vi.mock('next-i18next', () => ({
+vi.mock('next-i18next/pages', () => ({
   useTranslation: () => ({
     t: (str: string) => str,
   }),

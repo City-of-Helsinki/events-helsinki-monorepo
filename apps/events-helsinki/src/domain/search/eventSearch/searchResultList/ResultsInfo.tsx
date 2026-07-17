@@ -1,6 +1,6 @@
 import { IconSearch } from 'hds-react';
 
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 import styles from './resultsInfo.module.scss';

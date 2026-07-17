@@ -420,11 +420,10 @@ describe('superEvent', () => {
     expect(router.pathname).toBe(`/kurssit/${superEvent.id}`);
   }, 20_000);
 
-  it('should should not render super event title when super event is not given', async () => {
+  it('should not render super event title when super event is not given', () => {
     render(<EventInfo event={event} />, {
       mocks,
     });
-    await actWait();
 
     expect(
       screen.queryByRole('heading', {

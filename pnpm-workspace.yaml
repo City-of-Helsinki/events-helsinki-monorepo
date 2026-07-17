@@ -11,6 +11,7 @@ minimumReleaseAgeExclude:
   - '@opentelemetry/core@2.8.0'
   - '@opentelemetry/sdk-trace-base@2.8.0'
   - '@opentelemetry/resources@2.8.0'
+  - hds-*
 
 # Moved from package.json (pnpm 11.5+ reads overrides here only)
 overrides:

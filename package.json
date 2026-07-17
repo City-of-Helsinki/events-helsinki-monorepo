@@ -83,7 +83,7 @@
     "@sentry/nextjs": "^10.52.0",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
-    "hds-react": "6.0.4",
+    "hds-react": "6.0.5",
     "next": "16.2.9",
     "postcss": "^8.5.10",
     "react": "19.2.7",

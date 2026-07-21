@@ -3633,7 +3633,7 @@ __metadata:
     "@vitest/eslint-plugin": "npm:1.6.13"
     "@vitest/ui": "npm:4.1.2"
     accepts: "npm:1.3.8"
-    body-parser: "npm:2.2.1"
+    body-parser: "npm:2.3.0"
     cors: "npm:2.8.5"
     cross-env: "npm:7.0.3"
     dotenv: "npm:^17.2.0"
@@ -10190,20 +10190,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:2.2.1":
-  version: 2.2.1
-  resolution: "body-parser@npm:2.2.1"
+"body-parser@npm:2.3.0":
+  version: 2.3.0
+  resolution: "body-parser@npm:2.3.0"
   dependencies:
     bytes: "npm:^3.1.2"
-    content-type: "npm:^1.0.5"
+    content-type: "npm:^2.0.0"
     debug: "npm:^4.4.3"
-    http-errors: "npm:^2.0.0"
-    iconv-lite: "npm:^0.7.0"
+    http-errors: "npm:^2.0.1"
+    iconv-lite: "npm:^0.7.2"
     on-finished: "npm:^2.4.1"
-    qs: "npm:^6.14.0"
-    raw-body: "npm:^3.0.1"
-    type-is: "npm:^2.0.1"
-  checksum: 9a23da8cfe3f068c3448bb0ea4d7d49a1b3685f50566d7f150107ea74dd15da8f8d66c3e2dfd1e5b8edc7472ea0078280ede64a75bde9e5c7659fc1ad09df961
+    qs: "npm:^6.15.2"
+    raw-body: "npm:^3.0.2"
+    type-is: "npm:^2.1.0"
+  checksum: a6f687ab92cd4c9d5ff208427c2f1b95df3d23b95194efb8603332ff835fa11ced69c4575a1e4ea1fa9935bff3b46f638b04a2894a568711ddb3333c934d5fbc
   languageName: node
   linkType: hard
 
@@ -11370,6 +11370,13 @@ __metadata:
   version: 1.0.5
   resolution: "content-type@npm:1.0.5"
   checksum: aa41501a6a2040fd19cdb39ac7e077f414c269cbfa0a274dd6b2ce1ef10c8211ea11b9bf3c034ba6872fde5f16d0b234062df62ab5a773b978cce40b60e01747
+  languageName: node
+  linkType: hard
+
+"content-type@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "content-type@npm:2.0.0"
+  checksum: 30ba28e98a09ac2a2e029f0a4411b8d34db2d6c687c85f0743f5c6007742f4aa8bf9fac8a926ab85003307800e34af4cb03d3b8d6dea08bf4669326fa1482408
   languageName: node
   linkType: hard
 
@@ -15802,7 +15809,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"http-errors@npm:^2.0.0, http-errors@npm:~2.0.1":
+"http-errors@npm:^2.0.0, http-errors@npm:^2.0.1, http-errors@npm:~2.0.1":
   version: 2.0.1
   resolution: "http-errors@npm:2.0.1"
   dependencies:
@@ -16007,6 +16014,15 @@ __metadata:
   dependencies:
     safer-buffer: "npm:>= 2.1.2 < 3.0.0"
   checksum: 94da080fb4b47f0bd2f384580b2e4b4fa0d73aeaea93f30f0c9119bd8ac8f3bdb7182d166ea3a4c5a983f2876093af5a17f90d4abf00e9eb85b406560704e228
+  languageName: node
+  linkType: hard
+
+"iconv-lite@npm:^0.7.2":
+  version: 0.7.3
+  resolution: "iconv-lite@npm:0.7.3"
+  dependencies:
+    safer-buffer: "npm:>= 2.1.2 < 3.0.0"
+  checksum: acc5a896af56f442cdf6f96f9fbbf64b6cbf51bdd535c27bf163996a63625aee5a19ddcbff451439d0de0a822fd254e34de6cec21139d3fcb07949f777a4a3e6
   languageName: node
   linkType: hard
 
@@ -21050,6 +21066,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qs@npm:^6.15.2":
+  version: 6.15.3
+  resolution: "qs@npm:6.15.3"
+  dependencies:
+    es-define-property: "npm:^1.0.1"
+    side-channel: "npm:^1.1.1"
+  checksum: d7290c774edf9eb9130c1f11ae33b6c44515b93df099557bee7b1188019b29d28007105c292de438f4957a9c3624d2264fd74b76b73c93c87896a7d43b40d7e5
+  languageName: node
+  linkType: hard
+
 "query-string@npm:^9.2.2":
   version: 9.2.2
   resolution: "query-string@npm:9.2.2"
@@ -21131,7 +21157,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"raw-body@npm:^3.0.1":
+"raw-body@npm:^3.0.1, raw-body@npm:^3.0.2":
   version: 3.0.2
   resolution: "raw-body@npm:3.0.2"
   dependencies:
@@ -23010,6 +23036,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"side-channel-list@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "side-channel-list@npm:1.0.1"
+  dependencies:
+    es-errors: "npm:^1.3.0"
+    object-inspect: "npm:^1.13.4"
+  checksum: 7a1464cd05fe1fcae74b35bbc5bb6d748df2210b388f7184d092642116ecd8a12eeaa9d699a148ba67855b07f08f91fb204f07146d4c55379f15512bf74f4209
+  languageName: node
+  linkType: hard
+
 "side-channel-map@npm:^1.0.1":
   version: 1.0.1
   resolution: "side-channel-map@npm:1.0.1"
@@ -23045,6 +23081,19 @@ __metadata:
     side-channel-map: "npm:^1.0.1"
     side-channel-weakmap: "npm:^1.0.2"
   checksum: a34db09f763c56769c2f23d79446a128897e5ef9ff2175119f83cc824c7dc754769b701f04a1eccd76e4d58fc36929e15f9019983bbbfd590696e03e5f770365
+  languageName: node
+  linkType: hard
+
+"side-channel@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "side-channel@npm:1.1.1"
+  dependencies:
+    es-errors: "npm:^1.3.0"
+    object-inspect: "npm:^1.13.4"
+    side-channel-list: "npm:^1.0.1"
+    side-channel-map: "npm:^1.0.1"
+    side-channel-weakmap: "npm:^1.0.2"
+  checksum: bfb0be1bdb5b1fb29abff72a60a15d7b2cb62c2951358af820679bea21ae36f45acffa5a03463d75c1192b9504bfce4be0090ac40f4ea35264565cf3a56eeb16
   languageName: node
   linkType: hard
 
@@ -25156,6 +25205,17 @@ __metadata:
     media-typer: "npm:^1.1.0"
     mime-types: "npm:^3.0.0"
   checksum: a639a1a842c6b281b216c2abeee92b549bf72b4566b0e303dafd5bc02824fd479f5a70a0025e8b1913da1f2e34b9a614a2401b4fe383c68eef5771cdf223b161
+  languageName: node
+  linkType: hard
+
+"type-is@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "type-is@npm:2.1.0"
+  dependencies:
+    content-type: "npm:^2.0.0"
+    media-typer: "npm:^1.1.0"
+    mime-types: "npm:^3.0.0"
+  checksum: a2658716061005db0fb374d5ade7ad66760961ba003db5fec3d49938ae4f9935c42f560fab70c5c21e2407920f4b778a19859fc45c715c1cdd89bf4e1221509a
   languageName: node
   linkType: hard
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.4.0...hobbies-helsinki-v3.4.1) (2026-07-24)
+
+
+### Dependencies
+
+* Bump esbuild from 0.28.0 to 0.28.1 ([23d9046](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/23d90460a7bba37a7f5a7ec5945d7a391556eb5b))
+
 ## [3.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.3.4...hobbies-helsinki-v3.4.0) (2026-06-10)
 
 

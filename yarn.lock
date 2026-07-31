@@ -3514,7 +3514,7 @@ __metadata:
     require-from-string: "npm:2.0.2"
     rimraf: "npm:6.0.1"
     rooks: "npm:8.1.0"
-    sanitize-html: "npm:^2.17.0"
+    sanitize-html: "npm:^2.17.5"
     sass: "npm:^1.98.0"
     sass-embedded: "npm:^1.99.0"
     sirv: "npm:3.0.1"
@@ -11983,6 +11983,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dayjs@npm:^1.11.7":
+  version: 1.11.21
+  resolution: "dayjs@npm:1.11.21"
+  checksum: 19eb0ab1b46aa5637f258c16f26e1f6d60cf877adc73778233fc379117db4ff6bec2c7b471a2bbcd61e85318d307015f7a68567afdacd0340d44b92b508bd9f0
+  languageName: node
+  linkType: hard
+
 "debounce@npm:^1.2.0, debounce@npm:^1.2.1":
   version: 1.2.1
   resolution: "debounce@npm:1.2.1"
@@ -12415,7 +12422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domutils@npm:^3.0.1, domutils@npm:^3.2.1":
+"domutils@npm:^3.0.1, domutils@npm:^3.2.1, domutils@npm:^3.2.2":
   version: 3.2.2
   resolution: "domutils@npm:3.2.2"
   dependencies:
@@ -12683,6 +12690,13 @@ __metadata:
   version: 6.0.1
   resolution: "entities@npm:6.0.1"
   checksum: ab6b7054060e612db6b14fc23fc53e768a943f6423b4c13029dfa0ef50e321f38adb57404c7a409eaf90157bef89e681262aab8f81d5d9ea762198298e0a9392
+  languageName: node
+  linkType: hard
+
+"entities@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "entities@npm:7.0.1"
+  checksum: 7f3c90b5124beb2d23cdf543b681d242e7584ecc29651397f2ae4100b442cca439789c0c80af834efc6631720f3a2c1576f387a5ec7203c978ddf50dcb7dcd2e
   languageName: node
   linkType: hard
 
@@ -13969,7 +13983,7 @@ __metadata:
     react-toastify: "npm:^11.0.5"
     require-from-string: "npm:2.0.2"
     rimraf: "npm:6.0.1"
-    sanitize-html: "npm:^2.17.0"
+    sanitize-html: "npm:^2.17.5"
     sass: "npm:^1.98.0"
     size-limit: "npm:11.2.0"
     symlink-dir: "npm:6.0.5"
@@ -15565,7 +15579,7 @@ __metadata:
     react-toastify: "npm:^11.0.5"
     require-from-string: "npm:2.0.2"
     rimraf: "npm:6.0.1"
-    sanitize-html: "npm:^2.17.0"
+    sanitize-html: "npm:^2.17.5"
     sass: "npm:^1.98.0"
     size-limit: "npm:11.2.0"
     symlink-dir: "npm:6.0.5"
@@ -15756,6 +15770,18 @@ __metadata:
     domutils: "npm:^3.2.1"
     entities: "npm:^6.0.0"
   checksum: e5d7a3c28847a630a07180c00a549fc04f6d6442bf96cbc5368fbeac5fa40ce7d13d776bc45e25c6200f784601b663b7b763aa25a95381bf8b327ceef178ca72
+  languageName: node
+  linkType: hard
+
+"htmlparser2@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "htmlparser2@npm:10.1.0"
+  dependencies:
+    domelementtype: "npm:^2.3.0"
+    domhandler: "npm:^5.0.3"
+    domutils: "npm:^3.2.2"
+    entities: "npm:^7.0.1"
+  checksum: dcc7ee55afbbb6b9b4d7565540596f746392ec1fa3fcf749cc479e54a0d4984e0a91855cd98080275471605f89802ccc0c97d9dc3f7c3f42302d02ffb48ebb7e
   languageName: node
   linkType: hard
 
@@ -17545,6 +17571,15 @@ __metadata:
   dependencies:
     language-subtag-registry: "npm:^0.3.20"
   checksum: e17f03b3ca63668e2870532cdcbba70b7ee7b0b99285b319495acd8a8a329b5bde1da71e7e7f0dfd0ab842164bbaf78a191da0471a0c4addf8848f54e5113a76
+  languageName: node
+  linkType: hard
+
+"launder@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "launder@npm:1.7.1"
+  dependencies:
+    dayjs: "npm:^1.11.7"
+  checksum: 561d742183ae862fdb31691eabb9b374577acbd93d15fa31cc72773525fd5e0289331128a77226f33e84fb73be2d9c68bdb0160baa4f40a0699c987aa870bcdb
   languageName: node
   linkType: hard
 
@@ -22355,17 +22390,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanitize-html@npm:^2.17.0":
-  version: 2.17.0
-  resolution: "sanitize-html@npm:2.17.0"
+"sanitize-html@npm:^2.17.5":
+  version: 2.17.5
+  resolution: "sanitize-html@npm:2.17.5"
   dependencies:
     deepmerge: "npm:^4.2.2"
     escape-string-regexp: "npm:^4.0.0"
-    htmlparser2: "npm:^8.0.0"
+    htmlparser2: "npm:^10.1.0"
     is-plain-object: "npm:^5.0.0"
+    launder: "npm:^1.7.1"
     parse-srcset: "npm:^1.0.2"
     postcss: "npm:^8.3.11"
-  checksum: a2ffc42079cd420bba6d85a0edcdea868da2402912472f84013c94fcd1430b5656a896754f6227b07b48937d1c459dc47c5ee7e126b0ebbedc955b71d395cc6b
+  checksum: 74fbb08d383c61448cb2e7dee2459b47c0c4641286e7f0f0ae3f16784ba92e09a3cf8f07491127ecaface576c47e818569194f8a1cb1bd6056e92864edd30d26
   languageName: node
   linkType: hard
 
@@ -23469,7 +23505,7 @@ __metadata:
     react-toastify: "npm:^11.0.5"
     require-from-string: "npm:2.0.2"
     rimraf: "npm:6.0.1"
-    sanitize-html: "npm:^2.17.0"
+    sanitize-html: "npm:^2.17.5"
     sass: "npm:^1.98.0"
     size-limit: "npm:11.2.0"
     symlink-dir: "npm:6.0.5"

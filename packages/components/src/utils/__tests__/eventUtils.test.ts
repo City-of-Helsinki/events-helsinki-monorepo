@@ -16,6 +16,7 @@ import {
   getEventFields,
   getEventIdFromUrl,
   getEventIdsFromUrls,
+  getEventNeighborhood,
   getEventSomeImageUrl,
   getKeywordList,
   getLocationId,
@@ -111,6 +112,24 @@ describe('getServiceMapUrl function', () => {
     expect(getServiceMapUrl(event, 'sv', true)).toBe(
       'https://palvelukartta.hel.fi/sv/embed/unit/123'
     );
+  });
+});
+
+describe('getEventNeighborhood function', () => {
+  it('does not return a neighborhood for Internet events', () => {
+    const event = fakeEvent({
+      location: fakePlace({
+        id: 'helsinki:internet',
+        divisions: [
+          {
+            name: { fi: 'Kluuvi' },
+            type: 'neighborhood',
+          },
+        ],
+      }),
+    }) as EventFieldsFragment;
+
+    expect(getEventNeighborhood(event, 'fi')).toBeNull();
   });
 });
 

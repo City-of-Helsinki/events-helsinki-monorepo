@@ -200,6 +200,10 @@ export const getEventNeighborhood = (
   event: EventFields,
   locale: AppLanguage
 ): string | null => {
+  if (event.location?.id === EVENT_LOCATIONS.INTERNET) {
+    return null;
+  }
+
   const neighborhood = event.location?.divisions?.find(
     (division) => division.type === 'neighborhood'
   );

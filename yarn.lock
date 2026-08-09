@@ -3469,7 +3469,7 @@ __metadata:
     date-fns: "npm:^4.1.0"
     date-fns-tz: "npm:^3.2.0"
     dequal: "npm:2.0.3"
-    dompurify: "npm:3.4.11"
+    dompurify: "npm:3.4.13"
     esbuild: "npm:0.28.1"
     esbuild-sass-plugin: "npm:3.7.0"
     eslint: "npm:9.39.4"
@@ -12399,7 +12399,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:3.4.11, dompurify@npm:^3.3.1":
+"dompurify@npm:3.4.13":
+  version: 3.4.13
+  resolution: "dompurify@npm:3.4.13"
+  dependencies:
+    "@types/trusted-types": "npm:^2.0.7"
+  dependenciesMeta:
+    "@types/trusted-types":
+      optional: true
+  checksum: 7bae5480c126ead08032906f4d2c21037892fbd0216992668257dfe9daecbccd4c5019a1098d8e1a4c3e329980d5ab6aa0fc365680ff9d3ffe198fa7a86f2d6c
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.3.1":
   version: 3.4.11
   resolution: "dompurify@npm:3.4.11"
   dependencies:

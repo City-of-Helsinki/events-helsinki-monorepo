@@ -19029,11 +19029,11 @@ __metadata:
   linkType: hard
 
 "nanoid@npm:^3.1.12, nanoid@npm:^3.1.23, nanoid@npm:^3.1.31, nanoid@npm:^3.3.12, nanoid@npm:^3.3.6":
-  version: 3.3.15
-  resolution: "nanoid@npm:3.3.15"
+  version: 3.3.18
+  resolution: "nanoid@npm:3.3.18"
   bin:
     nanoid: bin/nanoid.cjs
-  checksum: 48479ab1edede12b299aa246108fb2148b4e1b752f8a9c1aec15252cb26e98a6b9c6ee3ace92f3448b0d401730ae47a6334dd558dcc90454dc48811d4c87b668
+  checksum: b566496dcb58a13fda961676ef9bb35d3e5ca1195d5362fcfa9a406039e88ca6b9820e3f3feed8bf1d5bfc6a9eb1f4831bcb4598499f3d4c0b64dff180124eb6
   languageName: node
   linkType: hard
 

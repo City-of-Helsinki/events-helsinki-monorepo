@@ -28,7 +28,7 @@ overrides:
   rollup@4.35.0: ^4.59.0
   serialize-javascript: ^7.0.5
   socks: ^2.8.6
-  svgo@^3.0.2: ^4.0.1
+  svgo@^3.0.2: ^4.0.2
   tar: '>=7.5.4'
   tmp: 0.2.7
   underscore: '>=1.13.8'
@@ -19877,10 +19877,10 @@ packages:
         integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==,
       }
 
-  svgo@4.0.1:
+  svgo@4.0.2:
     resolution:
       {
-        integrity: sha512-XDpWUOPC6FEibaLzjfe0ucaV0YrOjYotGJO1WpF0Zd+n6ZGEQUsSugaoLq9QkEZtAfQIxT42UChcssDVPP3+/w==,
+        integrity: sha512-ekx94z1rRc5LDi6oSUaeRnYhd0UOJxdtQCL2rF8xpWxD3TPAsISWOrxezqGovqS38GRZOdpDfvQe3ts6F7nsng==,
       }
     engines: { node: '>=16' }
     hasBin: true
@@ -26173,7 +26173,7 @@ snapshots:
       '@svgr/core': 8.1.0
       cosmiconfig: 8.2.0
       deepmerge: 4.3.1
-      svgo: 4.0.1
+      svgo: 4.0.2
 
   '@svgr/webpack@8.1.0':
     dependencies:
@@ -34011,7 +34011,7 @@ snapshots:
 
   svg-tags@1.0.0: {}
 
-  svgo@4.0.1:
+  svgo@4.0.2:
     dependencies:
       commander: 11.1.0
       css-select: 5.1.0

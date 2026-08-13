@@ -5,14 +5,9 @@ packages:
 
 # Only install package versions published at least 7 days ago (City of Helsinki org default)
 minimumReleaseAge: 10080
-# Security/dependabot bumps that lag behind the 7-day gate (see main yarn.lock)
-minimumReleaseAgeExclude:
-  - js-yaml@4.3.0
-  - '@opentelemetry/core@2.8.0'
-  - '@opentelemetry/sdk-trace-base@2.8.0'
-  - '@opentelemetry/resources@2.8.0'
 
-# Moved from package.json (pnpm 11.5+ reads overrides here only)
+# Force secure / single versions for transitive deps that otherwise resolve
+# vulnerable or mismatched releases.
 overrides:
   '@babel/core': ^7.29.6
   '@babel/runtime': ^7.28.4

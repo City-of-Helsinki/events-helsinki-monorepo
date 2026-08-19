@@ -18,7 +18,11 @@ export default function () {
     entry: appIndexJs,
     externals: [
       nodeExternals({
-        allowlist: [/@events-helsinki\/.*/],
+        // Keep only workspace libs bundled; externalizing everything else
+        // means the runtime container must have all deps in node_modules.
+        // Azure images are missing `@apollo/server`, so we bundle @apollo/*
+        // here to avoid runtime `MODULE_NOT_FOUND`.
+        allowlist: [/@events-helsinki\/.*/, /^@apollo\/.*/],
       }),
     ],
     module: {

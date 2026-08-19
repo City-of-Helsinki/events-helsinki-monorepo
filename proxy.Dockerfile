@@ -194,4 +194,4 @@ EXPOSE ${GRAPHQL_PROXY_PORT:-4100}
 WORKDIR /app/proxies/${PROXY}
 
 # Deps are installed at build time; avoid pnpm at runtime (OpenShift EACCES on /app)
-CMD ["node", "-r", "dotenv-expand/config", "build"]
+CMD ["node", "-r", "dotenv-expand/config", "build/index.cjs"]

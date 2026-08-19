@@ -45,11 +45,10 @@ export default function () {
     },
     plugins: [new webpack.DefinePlugin(env.stringified)],
     output: {
-      filename: 'index.js',
+      // CommonJS output: webpack-node-externals emits require() for externals,
+      // which crashes at runtime when bundled as ESM ("require is not defined").
+      filename: 'index.cjs',
       path: _resolve(__dirname, appBuild),
-      library: {
-        type: 'module',
-      },
     },
     resolve: {
       extensions: ['.js', '.ts', '.tsx', '.json'],
@@ -65,8 +64,5 @@ export default function () {
       ],
     },
     target: 'node',
-    experiments: {
-      outputModule: true,
-    },
   };
 }

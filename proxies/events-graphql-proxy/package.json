@@ -18,7 +18,7 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --cache --cache-location ../../.cache/eslint/events-graphql-proxy.eslintcache",
     "lint-fix": "eslint . --ext .ts,.tsx,.js,.jsx,.cjs,.mjs,.mdx,.graphql --fix",
     "pre-commit": "lint-fix",
-    "start": "node -r dotenv-expand/config build",
+    "start": "node -r dotenv-expand/config build/index.cjs",
     "test": "cross-env TZ=Europe/Helsinki vitest run",
     "test:changed": "pnpm run test --changed",
     "test:coverage": "pnpm run test --coverage",

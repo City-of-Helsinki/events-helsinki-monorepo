@@ -48,7 +48,6 @@ $logoWidth: 5.5rem;
 
     .image {
       height: 100%;
-
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -69,9 +68,11 @@ $logoWidth: 5.5rem;
     .leftPanelEmpty {
       display: flex;
       padding: var(--spacing-m) var(--spacing-4-xl) var(--spacing-m) 0;
+
       @include breakpoints.respond-above(xl) {
         padding: 0;
       }
+
       @include breakpoints.respond-below(m) {
         padding: 0;
       }
@@ -79,6 +80,7 @@ $logoWidth: 5.5rem;
 
     .leftPanel {
       display: flex;
+
       @include breakpoints.respond-below(m) {
         padding: 0 var(--spacing-s);
       }
@@ -107,6 +109,7 @@ $logoWidth: 5.5rem;
         font-size: var(--fontsize-heading-l);
         line-height: var(--lineheight-m);
         font-weight: 400;
+
         @include breakpoints.respond-below(m) {
           font-size: var(--fontsize-heading-m);
           line-height: var(--lineheight-m);

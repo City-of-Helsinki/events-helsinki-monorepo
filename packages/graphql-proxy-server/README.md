@@ -44,6 +44,6 @@ However, you can run the tests for this package directly.
 
 In the project directory, you can run:
 
-- `yarn test`: Runs the test suite.
-- `yarn lint`: Lints the code using ESLint.
-- `yarn typecheck`: Runs the TypeScript compiler to check for type errors.
+- `pnpm test`: Runs the test suite.
+- `pnpm lint`: Lints the code using ESLint.
+- `pnpm typecheck`: Runs the TypeScript compiler to check for type errors.

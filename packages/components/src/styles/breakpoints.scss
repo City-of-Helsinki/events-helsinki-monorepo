@@ -7,7 +7,7 @@ $breakpoints: (
   m: hds.$breakpoint-m,
   l: hds.$breakpoint-l,
   xl: hds.$breakpoint-xl,
-  // xxl => 1568px
+  /* xxl => 1568px*/
   xxl: hds.$breakpoint-xl + hds.$breakpoint-xs,
 );
 
@@ -49,7 +49,7 @@ $breakpoints: (
 
 //
 //  RESPOND BETWEEN
-//––––––––––––––––––––––––––––––––––––––––––––––––––
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
 
 @mixin respond-between($lower, $upper) {
   // If both the lower and upper breakpoints exist in the map.
@@ -66,13 +66,13 @@ $breakpoints: (
     // If one or both of the breakpoints don't exist.
   } @else {
     // If lower breakpoint is invalid.
-    @if (map.has-key($breakpoints, $lower) == false) {
+    @if map.has-key($breakpoints, $lower) == false {
       // Log a warning.
       @warn 'Your lower breakpoint was invalid: #{$lower}.';
     }
 
     // If upper breakpoint is invalid.
-    @if (map.has-key($breakpoints, $upper) == false) {
+    @if map.has-key($breakpoints, $upper) == false {
       // Log a warning.
       @warn 'Your upper breakpoint was invalid: #{$upper}.';
     }

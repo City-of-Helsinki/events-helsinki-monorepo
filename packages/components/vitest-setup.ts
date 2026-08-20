@@ -1,6 +1,7 @@
 import { loadErrorMessages, loadDevMessages } from '@apollo/client/dev';
 import { hideConsoleMessages } from '@events-helsinki/common-tests';
 import { loadEnvConfig } from '@next/env';
+import * as jestDomMatchers from '@testing-library/jest-dom/matchers';
 import { VirtualConsole } from 'jsdom';
 
 // Suppress jsdom CSS parse errors at the VirtualConsole level
@@ -21,13 +22,12 @@ import * as matchers from 'vitest-axe/matchers';
 import { setup as setupFakedIndexedDB } from 'vitest-indexeddb';
 import { initializeI18nWithConfig } from './config/tests/initI18n';
 
-import '@testing-library/jest-dom/vitest';
-
 // Load error messages for Apollo client so it's easier to debug errors
 loadDevMessages();
 loadErrorMessages();
 
 expect.extend(matchers);
+expect.extend(jestDomMatchers);
 
 global.scrollTo = vi.fn();
 

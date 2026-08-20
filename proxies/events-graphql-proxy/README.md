@@ -8,13 +8,13 @@
 - [Environments](#environments)
 - [Development with Docker](#development-with-docker)
 - [Available Scripts](#available-scripts)
-  - [`yarn dev`](#yarn-dev)
-  - [`yarn test`](#yarn-test)
-  - [`yarn build`](#yarn-build)
-  - [`yarn start`](#yarn-start)
-  - [`yarn lint`](#yarn-lint)
-  - [`yarn format-code`](#yarn-format-code)
-  - [`yarn generate:graphql`](#yarn-generategraphql)
+  - [`pnpm dev`](#pnpm-dev)
+  - [`pnpm test`](#pnpm-test)
+  - [`pnpm build`](#pnpm-build)
+  - [`pnpm start`](#pnpm-start)
+  - [`pnpm lint`](#pnpm-lint)
+  - [`pnpm format-code`](#pnpm-format-code)
+  - [`pnpm generate:graphql`](#pnpm-generategraphql)
 - [What to do when interface needs model updates](#what-to-do-when-interface-needs-model-updates)
 - [Custom request headers](#custom-request-headers)
 
@@ -56,7 +56,7 @@ GraphQL playground will run on http://localhost:4000/proxy/graphql
 
 In the project directory, you can run:
 
-### `yarn dev`
+### `pnpm dev`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:4000/proxy/graphql](http://localhost:4000/proxy/graphql) to view it in the browser.
@@ -64,31 +64,31 @@ Open [http://localhost:4000/proxy/graphql](http://localhost:4000/proxy/graphql) 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
+### `pnpm test`
 
 Launches the test runner
 
-### `yarn build`
+### `pnpm build`
 
 Builds the app for production to the `build` folder.
 
-### `yarn start`
+### `pnpm start`
 
 Runs the graphql proxy in the production mode.
 Open [http://localhost:4000/proxy/graphql](http://localhost:4000/proxy/graphql) to view it in the browser.
 
-### `yarn lint`
+### `pnpm lint`
 
 Run eslint to all files on
 
-### `yarn format-code`
+### `pnpm format-code`
 
 Fix all the eslint errors
 
-### `yarn generate:graphql`
+### `pnpm generate:graphql`
 
 Use `graphql-codegen` (with [codegen.yml](codegen.yml) as configuration file) to generate TypeScript types from `typeDefs.ts` files with `gql` syntax.
-When you modify the graphql ttype definitions (in typeDefs.ts files), you should generate the TS types with `yarn generate:graphql` as well.
+When you modify the graphql ttype definitions (in typeDefs.ts files), you should generate the TS types with `pnpm generate:graphql` as well.
 
 ## What to do when interface needs model updates
 
@@ -113,7 +113,7 @@ graph LR
 ** What to do in graphql proxy **
 
 1. Update type definitions (add new fields, rename or remove old fields, change field types, etc.) in `typeDefs.ts` file under `./src/schema/**` -directory.
-2. Use codegen tools to generate TypeScript types with `yarn generate:graphql`.
+2. Use codegen tools to generate TypeScript types with `pnpm generate:graphql`.
 
 ** What to do in graphql federation router **
 
@@ -127,9 +127,9 @@ graph LR
 
 1. Connect an app to a router with a new updated supergraph.
 2. Update needed queries (and mutations).
-3. Use codegen tools to generate TypeScript types with `yarn generate:graphql`. Note, that while the schema is same for every app, the graphql.tsx -file that contains schema, should be copied to [packages/components](../../packages/components/src/types/generated/graphql.tsx).
+3. Use codegen tools to generate TypeScript types with `pnpm generate:graphql`. Note, that while the schema is same for every app, the graphql.tsx -file that contains schema, should be copied to [packages/components](../../packages/components/src/types/generated/graphql.tsx).
 
-> See more from app's [README](../../apps/events-helsinki/README.md#yarn-generategraphql).
+> See more from app's [README](../../apps/events-helsinki/README.md#pnpm-generategraphql).
 
 ## Custom request headers
 

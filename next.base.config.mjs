@@ -15,6 +15,9 @@ const trueEnv = ['true', '1', 'yes'];
 // const isProd = process.env.NODE_ENV === 'production';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isCI = trueEnv.includes(process.env?.CI ?? 'false');
+const nextBuildCpus = process.env.NEXT_BUILD_CPUS
+  ? Number(process.env.NEXT_BUILD_CPUS)
+  : undefined;
 
 const NEXTJS_IGNORE_ESLINT = trueEnv.includes(
   process.env?.NEXTJS_IGNORE_ESLINT ?? 'false'
@@ -71,7 +74,11 @@ if (NEXTJS_SENTRY_DEBUG) {
 
 // Tell webpack to compile those packages
 // @link https://www.npmjs.com/package/next-transpile-modules
-const tmModules = ['@events-helsinki/components'];
+const tmModules = [
+  '@events-helsinki/components',
+  // CJS dist requires @react-leaflet/core; transpile for Next esmExternals
+  '@changey/react-leaflet-markercluster',
+];
 
 const projectFolder = process.cwd();
 
@@ -131,11 +138,14 @@ const nextBaseConfig = ({
     outputFileTracingRoot: __dirname,
 
     experimental: {
-      // Prefer loading of ES Modules over CommonJS
-      esmExternals: true,
+      // 'loose' allows CJS deps (e.g. @changey/react-leaflet-markercluster) to require ESM packages
+      esmExternals: 'loose',
       // Experimental monorepo support
       externalDir: true,
       scrollRestoration: true,
+      // Limit parallel page-data workers in memory-constrained Docker/OpenShift builds.
+      ...(nextBuildCpus ? { cpus: nextBuildCpus } : {}),
+      ...(nextBuildCpus ? { webpackMemoryOptimizations: true } : {}),
     },
 
     // 🚨 TURBOPACK CONFIGURATION

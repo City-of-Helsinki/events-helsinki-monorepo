@@ -1,7 +1,6 @@
 .dateSelector {
   position: relative;
   background: var(--color-white);
-
   box-sizing: border-box;
   margin-bottom: var(--spacing-2-xs);
 
@@ -9,7 +8,6 @@
     background: transparent;
     border: none;
     min-height: var(--spacing-3-xl);
-
     padding: var(--spacing-xs);
     width: 100%;
     height: var(--spacing-3-xl);
@@ -24,13 +22,16 @@
 
   .iconWrapper {
     --icon-size: var(--spacing-layout-xs);
+
     display: flex;
     align-self: center;
     padding-right: var(--spacing-3-xs);
+
     svg {
       width: var(--icon-size);
       margin-right: var(--spacing-xs);
       fill: var(--color-primary-black);
+
       & > g {
         color: var(--color-primary-black);
       }
@@ -64,6 +65,7 @@
 
   .arrowWrapper {
     --icon-size: var(--spacing-layout-xs);
+
     display: flex;
     align-self: center;
 
@@ -71,6 +73,7 @@
       margin-left: 0.75rem;
       pointer-events: none;
       width: var(--icon-size);
+
       & > g {
         color: var(--color-primary-black);
       }

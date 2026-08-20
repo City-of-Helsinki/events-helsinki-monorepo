@@ -3,7 +3,6 @@
 .dropdown {
   position: relative;
   background: var(--color-white);
-
   box-sizing: border-box;
 
   .toggleButton {
@@ -97,6 +96,7 @@
     align-items: center;
     position: relative;
     padding: var(--spacing-m) var(--spacing-s);
+
     @include breakpoints.respond-between(s, l) {
       flex-direction: column;
     }
@@ -115,6 +115,7 @@
 .rangeCheckbox {
   margin: var(--spacing-s) var(--spacing-s);
   margin-top: var(--spacing-s) !important;
+
   input {
     color: var(--color-white);
   }

@@ -6,6 +6,7 @@
   padding: 0 1rem;
   align-items: center;
   box-sizing: border-box;
+
   &.focused {
     outline: 3px solid var(--color-coat-of-arms);
     outline-offset: 2px;
@@ -24,6 +25,7 @@
   .inputWrapper {
     flex: 1 1 0%;
     min-width: 50%;
+
     input {
       height: 100%;
       line-height: 1.25rem;
@@ -32,6 +34,7 @@
       border: none;
       outline: none;
       font-size: var(--fontsize-body-m);
+
       &:focus,
       &:focus-within {
         outline: none !important;

@@ -36,6 +36,7 @@ extends:
     # Does not contain all buildArguments, the rest located in liikunta-pipelines/liikunta-variables-staging.yml and liikunta-variables-common.yml
     # The values here will override the values defined in the liikunta-pipelines repository
     buildArgs: # build time arguments
+      BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
       FEDERATION_ROUTER_ENDPOINT: https://liikunta-router.api.hel.fi/
       CMS_ORIGIN: https://liikunta2.content.api.hel.fi
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
@@ -45,6 +46,7 @@ extends:
       NEXT_PUBLIC_MATOMO_ENABLED: 1
       NEXT_PUBLIC_ASKEM_ENABLED: 1
     buildArgsStage:
+      BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.stage.hel.ninja/
       CMS_ORIGIN: https://liikunta2.content.api.hel.fi
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
@@ -54,6 +56,7 @@ extends:
       NEXT_PUBLIC_MATOMO_ENABLED: 1
       NEXT_PUBLIC_ASKEM_ENABLED: 1
     buildArgsTest:
+      BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.test.hel.ninja/
       CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
@@ -62,7 +65,6 @@ extends:
       NEXT_PUBLIC_DEBUG: 0
       NEXT_PUBLIC_MATOMO_ENABLED: 0
       NEXT_PUBLIC_ASKEM_ENABLED: 1
-    # NOTE! runtime variables (configMap) do not work in the application !!!
     configMap: # pod environment variables for production
       FEDERATION_ROUTER_ENDPOINT: https://liikunta-router.api.hel.fi/
       CMS_ORIGIN: https://liikunta2.content.api.hel.fi
@@ -71,7 +73,7 @@ extends:
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.stage.hel.ninja/
       CMS_ORIGIN: https://liikunta2.content.api.hel.fi
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-    configMapTest:
+    configMapTest: # pod environment variables for testing
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.test.hel.ninja/
       CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

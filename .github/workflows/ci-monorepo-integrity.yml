@@ -4,15 +4,15 @@ on:
   push:
     branches: [main]
     paths:
-      - 'yarn.lock'
-      - '.yarnrc.yml'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/ci-monorepo-integrity.yml'
 
   pull_request:
     branches: [main]
     paths:
-      - 'yarn.lock'
-      - '.yarnrc.yml'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/ci-monorepo-integrity.yml'
 
 jobs:
@@ -20,44 +20,32 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: ['24.18.0']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
+          # pnpm 11.5+ requires Node >=22.13; setup Node before pnpm/action-setup
           node-version: ${{ matrix.node-version }}
 
-      # Why not using setup-node 2.2+ cache option (yet) ?
-      # see https://github.com/belgattitude/nextjs-monorepo-example/pull/369
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
 
-      - name: Restore yarn cache
-        uses: actions/cache@v4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: Cache pnpm store
+        uses: actions/setup-node@v6
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock', '.yarnrc.yml') }}
-          restore-keys: |
-            yarn-cache-folder-
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
 
       - name: Install dependencies
-        run: |
-          yarn install --immutable --inline-builds
+        run: pnpm install --frozen-lockfile
         env:
           HUSKY: 0
 
-      - name: Check for duplicate dependencies in lock file
-        run: |
-          yarn dedupe --check
-
-      - name: Check for yarn constraints.pro
-        run: |
-          yarn constraints
+      - name: Check monorepo workspace rules
+        run: pnpm exec manypkg check
 
       - name: Check monorepo dependency graph
-        run: |
-          yarn check:install
+        run: pnpm run check:install

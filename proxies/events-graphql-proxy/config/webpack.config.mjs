@@ -18,7 +18,11 @@ export default function () {
     entry: appIndexJs,
     externals: [
       nodeExternals({
-        allowlist: [/@events-helsinki\/.*/],
+        // Keep only workspace libs bundled; externalizing everything else
+        // means the runtime container must have all deps in node_modules.
+        // Azure images are missing `@apollo/server`, so we bundle @apollo/*
+        // here to avoid runtime `MODULE_NOT_FOUND`.
+        allowlist: [/@events-helsinki\/.*/, /^@apollo\/.*/],
       }),
     ],
     module: {
@@ -45,11 +49,10 @@ export default function () {
     },
     plugins: [new webpack.DefinePlugin(env.stringified)],
     output: {
-      filename: 'index.js',
+      // CommonJS output: webpack-node-externals emits require() for externals,
+      // which crashes at runtime when bundled as ESM ("require is not defined").
+      filename: 'index.cjs',
       path: _resolve(__dirname, appBuild),
-      library: {
-        type: 'module',
-      },
     },
     resolve: {
       extensions: ['.js', '.ts', '.tsx', '.json'],
@@ -65,8 +68,5 @@ export default function () {
       ],
     },
     target: 'node',
-    experiments: {
-      outputModule: true,
-    },
   };
 }

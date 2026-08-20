@@ -16,7 +16,6 @@
     padding: 0;
     list-style-type: none;
     white-space: pre;
-
     line-height: variables.$lineheight-l;
 
     & > li:not(:last-child) {
@@ -42,7 +41,6 @@
   align-items: center;
   justify-content: space-between;
   min-width: 8rem;
-
   font-weight: 700;
   text-decoration: none !important;
 
@@ -83,10 +81,8 @@
 .list {
   display: flex;
   flex-direction: column;
-
   font-size: variables.$fontsize-body-l;
   line-height: variables.$lineheight-l;
-
   list-style-type: none;
 
   @include breakpoints.respond-above(m) {

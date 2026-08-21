@@ -29,7 +29,7 @@ export type TabDataType = {
 
 type TabsPropType = {
   id: TabsContextType['activeTab'];
-  children: ButtonProps['children'] | JSX.Element;
+  children: ButtonProps['children'] | React.JSX.Element;
   theme?: ButtonTheme | ButtonPresetTheme;
 };
 

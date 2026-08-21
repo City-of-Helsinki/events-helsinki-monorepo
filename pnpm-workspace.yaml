@@ -12,13 +12,11 @@ overrides:
   '@babel/core': ^7.29.6
   '@babel/runtime': ^7.28.4
   '@testing-library/dom': ^10.4.0
-  '@tootallnate/once': ^3.0.1
   '@types/node': 24.13.2
-  '@types/react': 18.3.1
-  '@types/react-dom': 18.3.1
+  '@types/react': 19.2.17
+  '@types/react-dom': 19.2.3
   cookie: 0.7.2
   eslint: 9.39.4
-  form-data: ^4.0.4
   get-func-name: 2.0.2
   # immutable@3 has no 3.x security fix; force 4.3.9 for GHSA-v56q / GHSA-xvcm
   immutable@^3.0.0: 4.3.9
@@ -29,11 +27,9 @@ overrides:
   minimatch@10.1.2: ^10.2.3
   path-to-regexp: ^8.4.0
   qs: 6.15.2
-  react: 18.3.1
-  react-dom: 18.3.1
+  react: 19.2.7
+  react-dom: 19.2.7
   rollup@4.35.0: ^4.59.0
-  serialize-javascript: ^7.0.5
-  socks: ^2.8.6
   svgo@^3.0.2: ^4.0.2
   tar: '>=7.5.4'
   tmp: 0.2.7
@@ -41,7 +37,6 @@ overrides:
   typescript: 5.8.3
   ws: ^8.21.0
   js-yaml: 4.3.1
-  i18next-fs-backend: 2.6.6
   '@opentelemetry/core': ^2.8.0
   '@opentelemetry/sdk-trace-base': ^2.8.0
   '@opentelemetry/resources': ^2.8.0

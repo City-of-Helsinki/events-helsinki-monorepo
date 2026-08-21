@@ -5,7 +5,6 @@ import mockRouter from 'next-router-mock';
 import type { MockInstance } from 'vitest';
 import { vi } from 'vitest';
 import {
-  actWait,
   configure,
   render,
   screen,
@@ -33,6 +32,7 @@ import {
   organizerName,
   providerContactInfo,
   streetAddress,
+  subEventsLoadMoreResponse,
   subEventsResponse,
   superEventInternalId,
   telephone,
@@ -60,6 +60,7 @@ it('should render event info fields', async () => {
       eventType: [EventTypeId.Course],
     },
     response: subEventsResponse,
+    maxUsageCount: Number.POSITIVE_INFINITY,
   });
   const subEventMock = getSubEventsMocks({
     variables: {
@@ -67,11 +68,20 @@ it('should render event info fields', async () => {
       eventType: [EventTypeId.Course],
     },
     response: subEventsResponse,
+    maxUsageCount: Number.POSITIVE_INFINITY,
+  });
+  const subEventPage2Mock = getSubEventsMocks({
+    variables: {
+      superEvent: event.id,
+      eventType: [EventTypeId.Course],
+      page: 2,
+    },
+    response: subEventsLoadMoreResponse,
+    maxUsageCount: Number.POSITIVE_INFINITY,
   });
   render(<EventInfo event={event} />, {
-    mocks: [...mocks, superEventMock, subEventMock],
+    mocks: [...mocks, superEventMock, subEventMock, subEventPage2Mock],
   });
-  await actWait();
 
   const itemsByRole = [
     { role: 'heading', name: translations.event.info.labelDateAndTime },
@@ -126,7 +136,7 @@ it('should render event info fields', async () => {
   expect(screen.queryByText(providerContactInfo.sv)).not.toBeInTheDocument();
 }, 20_000);
 
-it('should hide the organizer section when the organizer name is not given', async () => {
+it('should hide the organizer section when the organizer name is not given', () => {
   const mockEvent = {
     ...event,
     provider: null,
@@ -134,7 +144,6 @@ it('should hide the organizer section when the organizer name is not given', asy
   render(<EventInfo event={mockEvent} />, {
     mocks,
   });
-  await actWait();
   expect(
     screen.getByRole('heading', {
       name: translations.event.info.labelPublisher,
@@ -393,9 +402,8 @@ describe('superEvent', () => {
         mocks,
       }
     );
-    await actWait();
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: translations.event.superEvent.title,
       })
     ).toBeInTheDocument();
@@ -408,11 +416,10 @@ describe('superEvent', () => {
     expect(router.pathname).toBe(`/kurssit/${superEvent.id}`);
   }, 20_000);
 
-  it('should should not render super event title when super event is not given', async () => {
+  it('should not render super event title when super event is not given', () => {
     render(<EventInfo event={event} />, {
       mocks,
     });
-    await actWait();
 
     expect(
       screen.queryByRole('heading', {
@@ -463,6 +470,7 @@ describe('subEvents', () => {
           },
         })),
       },
+      maxUsageCount: Number.POSITIVE_INFINITY,
     });
     const superEventMock = getSubEventsMocks({
       variables: {
@@ -470,6 +478,7 @@ describe('subEvents', () => {
         eventType: [EventTypeId.Course],
       },
       response: subEventsResponse,
+      maxUsageCount: Number.POSITIVE_INFINITY,
     });
     const superEventResponseMock: SuperEventResponse = {
       data: {

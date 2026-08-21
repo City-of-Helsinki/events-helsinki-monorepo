@@ -11,72 +11,72 @@ exports[`matches snapshot 1`] = `
     class="_checkboxWrapper_bbd991"
   >
     <div
-      class="Checkbox-module_checkbox__3r5uI"
+      class="Checkbox-module_checkbox__CYHqn"
       style="--background-unselected: var(--color-white); --background-selected: var(--color-input-dark, --color-coat-of-arms); --background-selected-hover: var(--color-input-dark, --color-coat-of-arms-dark); --background-hover: var(--color-input-dark, --color-coat-of-arms-dark); --border-color-selected: var(--color-input-dark,--color-coat-of-arms-dark); --border-color-selected-focus: var(--color-input-dark, --color-coat-of-arms-dark); --border-color-selected-hover: var(--color-input-dark,--color-coat-of-arms-dark); line-height: 24px;"
     >
       <input
-        class="Checkbox-module_input__2bdJk"
+        class="Checkbox-module_input__8VEto"
         id="name_today"
         name="date"
         type="checkbox"
         value="today"
       />
       <label
-        class="Checkbox-module_label__148Ac"
+        class="Checkbox-module_label__E-Trx"
         for="name_today"
       >
         Tänään
       </label>
     </div>
     <div
-      class="Checkbox-module_checkbox__3r5uI"
+      class="Checkbox-module_checkbox__CYHqn"
       style="--background-unselected: var(--color-white); --background-selected: var(--color-input-dark, --color-coat-of-arms); --background-selected-hover: var(--color-input-dark, --color-coat-of-arms-dark); --background-hover: var(--color-input-dark, --color-coat-of-arms-dark); --border-color-selected: var(--color-input-dark,--color-coat-of-arms-dark); --border-color-selected-focus: var(--color-input-dark, --color-coat-of-arms-dark); --border-color-selected-hover: var(--color-input-dark,--color-coat-of-arms-dark); line-height: 24px;"
     >
       <input
-        class="Checkbox-module_input__2bdJk"
+        class="Checkbox-module_input__8VEto"
         id="name_tomorrow"
         name="date"
         type="checkbox"
         value="tomorrow"
       />
       <label
-        class="Checkbox-module_label__148Ac"
+        class="Checkbox-module_label__E-Trx"
         for="name_tomorrow"
       >
         Huomenna
       </label>
     </div>
     <div
-      class="Checkbox-module_checkbox__3r5uI"
+      class="Checkbox-module_checkbox__CYHqn"
       style="--background-unselected: var(--color-white); --background-selected: var(--color-input-dark, --color-coat-of-arms); --background-selected-hover: var(--color-input-dark, --color-coat-of-arms-dark); --background-hover: var(--color-input-dark, --color-coat-of-arms-dark); --border-color-selected: var(--color-input-dark,--color-coat-of-arms-dark); --border-color-selected-focus: var(--color-input-dark, --color-coat-of-arms-dark); --border-color-selected-hover: var(--color-input-dark,--color-coat-of-arms-dark); line-height: 24px;"
     >
       <input
-        class="Checkbox-module_input__2bdJk"
+        class="Checkbox-module_input__8VEto"
         id="name_this_week"
         name="date"
         type="checkbox"
         value="this_week"
       />
       <label
-        class="Checkbox-module_label__148Ac"
+        class="Checkbox-module_label__E-Trx"
         for="name_this_week"
       >
         Tällä viikolla
       </label>
     </div>
     <div
-      class="Checkbox-module_checkbox__3r5uI"
+      class="Checkbox-module_checkbox__CYHqn"
       style="--background-unselected: var(--color-white); --background-selected: var(--color-input-dark, --color-coat-of-arms); --background-selected-hover: var(--color-input-dark, --color-coat-of-arms-dark); --background-hover: var(--color-input-dark, --color-coat-of-arms-dark); --border-color-selected: var(--color-input-dark,--color-coat-of-arms-dark); --border-color-selected-focus: var(--color-input-dark, --color-coat-of-arms-dark); --border-color-selected-hover: var(--color-input-dark,--color-coat-of-arms-dark); line-height: 24px;"
     >
       <input
-        class="Checkbox-module_input__2bdJk"
+        class="Checkbox-module_input__8VEto"
         id="name_weekend"
         name="date"
         type="checkbox"
         value="weekend"
       />
       <label
-        class="Checkbox-module_label__148Ac"
+        class="Checkbox-module_label__E-Trx"
         for="name_weekend"
       >
         Viikonloppuna
@@ -90,7 +90,7 @@ exports[`matches snapshot 1`] = `
     <svg
       aria-hidden="true"
       aria-label="calendar-plus"
-      class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_small__gTGkU icon_hds-icon--size-s__2Lkik"
+      class="Icon-module_icon__JQmVx icon_hds-icon__O6EV0 Icon-module_small__nAApk icon_hds-icon--size-s__SloSo"
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ exports[`matches snapshot 1`] = `
     <svg
       aria-hidden="true"
       aria-label="angle-right"
-      class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_small__gTGkU icon_hds-icon--size-s__2Lkik"
+      class="Icon-module_icon__JQmVx icon_hds-icon__O6EV0 Icon-module_small__nAApk icon_hds-icon--size-s__SloSo"
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +130,7 @@ exports[`matches snapshot 1`] = `
     <svg
       aria-hidden="true"
       aria-label="angle-left"
-      class="Icon-module_icon__1Jtzj icon_hds-icon__1YqNC Icon-module_small__gTGkU icon_hds-icon--size-s__2Lkik"
+      class="Icon-module_icon__JQmVx icon_hds-icon__O6EV0 Icon-module_small__nAApk icon_hds-icon--size-s__SloSo"
       role="img"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"

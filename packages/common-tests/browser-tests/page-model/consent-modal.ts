@@ -2,11 +2,9 @@ import { screen } from '@testing-library/testcafe';
 import { Selector, t } from 'testcafe';
 
 class ConsentModal {
-  consentAllCookieName = 'city-of-helsinki-cookie-consents';
-
   private get title() {
     return screen.findByRole('heading', {
-      name: /\w+ käyttää evästeitä/,
+      name: /käyttää evästeitä/i,
     });
   }
 
@@ -22,8 +20,10 @@ class ConsentModal {
     });
   }
 
-  private get componentContainer() {
-    return Selector('#cookie-consent-content');
+  private get acceptAllCookiesButtonSelector() {
+    return Selector('button')
+      .withText(/hyväksy kaikki evästeet/i)
+      .with({ timeout: 500 });
   }
 
   public async clickAcceptAllCookies() {
@@ -49,9 +49,15 @@ class ConsentModal {
   }
 
   public async isClosed() {
-    await t.expect(this.componentContainer.exists).notOk();
+    await t.expect(this.acceptAllCookiesButtonSelector.exists).notOk({
+      timeout: 10000,
+    });
     // eslint-disable-next-line no-console
     console.debug('ConsentModal: isClosed');
+  }
+
+  public async isAcceptAllVisible() {
+    return this.acceptAllCookiesButtonSelector.exists;
   }
 }
 

@@ -2,7 +2,7 @@
   "clientScripts": [
     { "module": "@testing-library/dom/dist/@testing-library/dom.umd.js" },
     {
-      "content": "document.cookie='city-of-helsinki-cookie-consents=%7B%22wordpress%22%3Atrue%2C%22linkedevents%22%3Atrue%2C%22matomo%22%3Atrue%2C%22i18next%22%3Atrue%2C%22city-of-helsinki-cookie-consents%22%3Atrue%2C%22servicemap_analytics%22%3Atrue%2C%22servicemap_session%22%3Atrue%2C%22servicemap_ga%22%3Atrue%7D; path=/;'"
+      "content": "document.cookie='hobbies-cookie-consents=%7B%22groups%22%3A%7B%22essentials%22%3A%7B%22checksum%22%3A%229d166ee1%22%2C%22timestamp%22%3A1893456000000%7D%2C%22optionalServiceMap%22%3A%7B%22checksum%22%3A%2295936570%22%2C%22timestamp%22%3A1893456000000%7D%2C%22optionalMatomo%22%3A%7B%22checksum%22%3A%2281a2b5d5%22%2C%22timestamp%22%3A1893456000000%7D%2C%22optionalAskem%22%3A%7B%22checksum%22%3A%220c4e4134%22%2C%22timestamp%22%3A1893456000000%7D%7D%7D; path=/;'"
     }
   ],
   "screenshots": {

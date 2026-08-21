@@ -1,9 +1,8 @@
 import {
   getEnvUrl,
-  allCookiesUser,
+  ensureConsentDismissed,
   EventSearchPage,
   testNavigationFromSearchToDetailsAndBack,
-  useRoleAndNavigateBack,
 } from '@events-helsinki/common-tests/browser-tests';
 import { defaultSearchProps } from '@events-helsinki/common-tests/browser-tests/page-model/eventSearchPage';
 import i18n from '../../../../packages/common-i18n/src/tests/initI18n';
@@ -18,7 +17,7 @@ fixture
   .page(getEnvUrl(`/fi/${ROUTES.SEARCH}`))
   .beforeEach(async (t) => {
     await i18n.changeLanguage('default');
-    await useRoleAndNavigateBack(allCookiesUser, t);
+    await ensureConsentDismissed(t);
   });
 
 test('Verify searching', async () => {

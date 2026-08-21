@@ -1,6 +1,6 @@
 import {
   getEnvUrl,
-  allCookiesUser,
+  ensureConsentDismissed,
   EventSearchPage,
   testNavigationFromSearchToDetailsAndBack,
 } from '@events-helsinki/common-tests/browser-tests';
@@ -12,10 +12,13 @@ const expectedPageSize = 25; // Should be same as AppConfig.pageSize
 const searchPage = new EventSearchPage('appHobbies');
 const searchType = 'Course';
 
-fixture.disablePageCaching('Search page').beforeEach(async (t) => {
-  await i18n.changeLanguage('default');
-  await t.useRole(allCookiesUser).navigateTo(getEnvUrl(ROUTES.SEARCH));
-});
+fixture
+  .disablePageCaching('Search page')
+  .page(getEnvUrl(`/fi/${ROUTES.SEARCH}`))
+  .beforeEach(async (t) => {
+    await i18n.changeLanguage('default');
+    await ensureConsentDismissed(t);
+  });
 
 test('Verify searching', async () => {
   await searchPage.verify();

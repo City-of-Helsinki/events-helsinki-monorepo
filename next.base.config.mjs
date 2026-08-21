@@ -72,8 +72,7 @@ if (NEXTJS_SENTRY_DEBUG) {
   );
 }
 
-// Tell webpack to compile those packages
-// @link https://www.npmjs.com/package/next-transpile-modules
+// Tell webpack to compile those packages via transpilePackages
 const tmModules = [
   '@events-helsinki/components',
   // CJS dist requires @react-leaflet/core; transpile for Next esmExternals
@@ -98,6 +97,8 @@ const nextBaseConfig = ({
    * Determine if Turbopack is active (i.e., next dev --turbo)
    */
   const isTurbopackDev = process.env.TURBOPACK === '1' && isDevelopment;
+
+  const cmsOriginUrl = new URL(process.env.CMS_ORIGIN);
 
   /**
    * @type {import('next').NextConfig}
@@ -130,7 +131,13 @@ const nextBaseConfig = ({
     },
 
     images: {
-      domains: [new URL(process.env.CMS_ORIGIN).origin],
+      remotePatterns: [
+        {
+          protocol: cmsOriginUrl.protocol.replace(':', ''),
+          hostname: cmsOriginUrl.hostname,
+          ...(cmsOriginUrl.port ? { port: cmsOriginUrl.port } : {}),
+        },
+      ],
     },
     // Standalone build
     // @link https://nextjs.org/docs/advanced-features/output-file-tracing#automatically-copying-traced-files-experimental
@@ -138,7 +145,7 @@ const nextBaseConfig = ({
     outputFileTracingRoot: __dirname,
 
     experimental: {
-      // 'loose' allows CJS deps (e.g. @changey/react-leaflet-markercluster) to require ESM packages
+      // Required for CJS @changey/react-leaflet-markercluster with webpack builds
       esmExternals: 'loose',
       // Experimental monorepo support
       externalDir: true,
@@ -212,16 +219,11 @@ const nextBaseConfig = ({
       APP_NAME: packageJson.name,
       APP_VERSION: packageJson.version,
       BUILD_TIME: new Date().toISOString(),
-    },
-    serverRuntimeConfig: {
-      // to bypass https://github.com/zeit/next.js/issues/8251
-      PROJECT_ROOT: __dirname,
-    },
-    publicRuntimeConfig: {
-      // Will be available on both server and client
-      federationRouter: process.env.FEDERATION_ROUTER_ENDPOINT,
-      cmsOrigin: process.env.CMS_ORIGIN,
-      linkedEvents: process.env.LINKEDEVENTS_EVENT_ENDPOINT,
+      NEXT_PUBLIC_CMS_ORIGIN: process.env.CMS_ORIGIN,
+      NEXT_PUBLIC_FEDERATION_ROUTER_ENDPOINT:
+        process.env.FEDERATION_ROUTER_ENDPOINT,
+      NEXT_PUBLIC_LINKEDEVENTS_EVENT_ENDPOINT:
+        process.env.LINKEDEVENTS_EVENT_ENDPOINT,
     },
   };
 

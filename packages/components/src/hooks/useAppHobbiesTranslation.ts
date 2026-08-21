@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { appHobbiesConfig } from '../translations/appHobbies.config';
 
 const useAppHobbiesTranslation = () =>

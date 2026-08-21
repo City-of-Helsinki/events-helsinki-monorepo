@@ -11,7 +11,7 @@ import {
 } from 'hds-react';
 import type { EventAttributes } from 'ics';
 import { createEvent } from 'ics';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 import IconDirections from '../../../../assets/icons/IconDirections';

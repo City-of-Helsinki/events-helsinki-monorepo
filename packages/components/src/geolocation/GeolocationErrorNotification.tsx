@@ -1,6 +1,6 @@
 import type { NotificationProps } from 'hds-react';
 import { Notification, NotificationSize } from 'hds-react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { useGeolocation } from '../hooks';
 import useCommonTranslation from '../hooks/useCommonTranslation';
 import styles from './geolocation.module.scss';

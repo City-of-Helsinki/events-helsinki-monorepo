@@ -21,7 +21,7 @@ import { extractLatestReturnPath } from '@events-helsinki/components/utils/event
 import classNames from 'classnames';
 import { IconArrowLeft, IconClock, IconLocation, IconTicket } from 'hds-react';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 import getVenueOpeningTimeDescription from '../utils/getVenueOpeningTimeDescription';

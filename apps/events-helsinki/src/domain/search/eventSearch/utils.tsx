@@ -28,7 +28,7 @@ import {
 } from 'date-fns';
 import isEmpty from 'lodash/isEmpty';
 import type { NextRouter } from 'next/router';
-import type { TFunction } from 'next-i18next';
+import type { TFunction } from 'next-i18next/pages';
 
 import type { AgeGroup } from '../../../constants';
 import {

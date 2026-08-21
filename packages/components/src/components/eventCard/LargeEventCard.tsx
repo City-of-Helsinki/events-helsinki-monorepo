@@ -11,7 +11,7 @@ import {
   IconSize,
   IconTicket,
 } from 'hds-react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 // eslint-disable-next-line @stylistic/max-len

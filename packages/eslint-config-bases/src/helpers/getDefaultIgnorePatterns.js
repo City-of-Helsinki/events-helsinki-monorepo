@@ -9,6 +9,8 @@ const getDefaultIgnorePatterns = () => {
     '**/.storybook',
     '**/storybook-static',
     '**/critical-hds-styles.css',
+    // Next regenerates this with an import of .next/types that does not exist pre-build
+    '**/next-env.d.ts',
   ];
 };
 

@@ -5,7 +5,7 @@ import {
   HtmlToReact,
 } from '@city-of-helsinki/react-helsinki-headless-cms';
 import classNames from 'classnames';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 
 import ShareLinks from '../../../../components/shareLinks/ShareLinks';

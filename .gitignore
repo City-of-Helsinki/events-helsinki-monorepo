@@ -34,6 +34,7 @@ node_modules
 
 # Debug
 npm-debug.log*
+debug-storybook.log
 
 
 # IDE

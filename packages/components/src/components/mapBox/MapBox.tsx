@@ -20,7 +20,7 @@ type Props = {
   placeAddress: string;
   googleDirectionsLink: string;
   hslDirectionsLink: string;
-  accessibilitySentences?: JSX.Element;
+  accessibilitySentences?: React.JSX.Element;
 };
 
 function MapBox({

@@ -11,7 +11,7 @@ import styles from './infoBlock.module.scss';
 type InfoBlockContentLinkProps = {
   label: string;
   href: string | UrlObject;
-  iconRight?: JSX.Element | null;
+  iconRight?: React.JSX.Element | null;
   Component?: typeof Link | typeof SecondaryLink;
 };
 

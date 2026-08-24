@@ -6,7 +6,7 @@ exports[`matches snapshot 1`] = `
   data-testid="loading-spinner"
 >
   <div
-    class="LoadingSpinner-module_loadingSpinner__2xHT_ LoadingSpinner-module_multicolor__1qbEF custom-theme-1"
+    class="LoadingSpinner-module_loadingSpinner__hwLc- LoadingSpinner-module_multicolor__sVf2m custom-theme-1"
   >
     <div />
     <div />

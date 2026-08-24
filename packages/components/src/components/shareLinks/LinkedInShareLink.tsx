@@ -1,5 +1,5 @@
 import { IconLinkedin } from 'hds-react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import React from 'react';
 import ShareLinkBase from './ShareLinkBase';
 import type { ShareLinkProps } from './types';

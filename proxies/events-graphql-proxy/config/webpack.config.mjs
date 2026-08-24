@@ -18,11 +18,10 @@ export default function () {
     entry: appIndexJs,
     externals: [
       nodeExternals({
-        // Keep only workspace libs bundled; externalizing everything else
-        // means the runtime container must have all deps in node_modules.
-        // Azure images are missing `@apollo/server`, so we bundle @apollo/*
-        // here to avoid runtime `MODULE_NOT_FOUND`.
-        allowlist: [/@events-helsinki\/.*/, /^@apollo\/.*/],
+        // proxy.Dockerfile runner only copies root node_modules, so package-
+        // level pnpm deps are missing at runtime. Bundle every npm package;
+        // leave only Node builtins external.
+        allowlist: [/.*/],
       }),
     ],
     module: {

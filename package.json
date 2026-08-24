@@ -2,7 +2,7 @@
   "name": "events-helsinki-monorepo",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1",
+  "packageManager": "pnpm@11.22.0+sha512.1ff870c4c6133dfd88fb2afc46dd13d47f09c9794b438c6fdb47ca98caf3bc16381ee0be93a091b8e3824cf01f889f46d7d9e20910fb0be1ab0fb5baa80dd621",
   "homepage": "https://github.com/City-of-Helsinki/events-helsinki-monorepo",
   "repository": {
     "type": "git",
@@ -79,16 +79,15 @@
     ]
   },
   "dependencies": {
-    "@next/bundle-analyzer": "15.5.11",
+    "@next/bundle-analyzer": "16.2.12",
     "@sentry/nextjs": "^10.52.0",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
-    "hds-react": "4.8.1",
-    "next": "15.5.21",
-    "next-transpile-modules": "10.0.1",
+    "hds-react": "6.0.5",
+    "next": "16.2.12",
     "postcss": "^8.5.23",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.29.6",
@@ -103,8 +102,8 @@
     "@types/lodash": "^4.17.20",
     "@types/node": "24.13.2",
     "@types/prettier": "3.0.0",
-    "@types/react": "18.3.1",
-    "@types/react-dom": "18.3.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
     "@types/shell-quote": "1.7.5",
     "@typescript-eslint/eslint-plugin": "^8.57.2",
     "@typescript-eslint/parser": "^8.57.2",
@@ -116,7 +115,7 @@
     "env-cmd": "10.1.0",
     "esbuild": "0.28.1",
     "eslint": "9.39.4",
-    "eslint-config-next": "15.5.14",
+    "eslint-config-next": "16.2.12",
     "git-rev-sync": "3.0.2",
     "husky": "^9.1.7",
     "is-ci": "4.1.0",

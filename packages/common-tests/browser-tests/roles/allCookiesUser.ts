@@ -1,45 +1,21 @@
-import { ClientFunction, Role } from 'testcafe';
-import ConsentModal from '../../browser-tests/page-model/consent-modal';
+import { Role } from 'testcafe';
 import { getEnvUrl } from '../utils/url.utils';
+import {
+  ensureConsentDismissed,
+  seedHdsConsentCookies,
+} from './ensureConsentDismissed';
 
-export const consentCookieName = 'city-of-helsinki-cookie-consents';
+export { ensureConsentDismissed, seedHdsConsentCookies };
+export { ensureConsentDismissed as acceptAllCookies } from './ensureConsentDismissed';
 
-const hasGivenConsent = ClientFunction((consentCookieName: string) => {
-  window.console.log('Current consents in cookie', {
-    cookie: window.document.cookie,
-    consentCookieName,
-  });
-  return window.document.cookie.includes(consentCookieName);
-});
-
-export const acceptAllCookies = async (t: TestController) => {
-  // eslint-disable-next-line no-console
-  console.log('allCookiesUser: acceptAllCookies!');
-  await t.wait(1000).setTestSpeed(0.5);
-  const cookieConsentModal = new ConsentModal();
-  await cookieConsentModal.isOpened();
-  await cookieConsentModal.clickAcceptAllCookies();
-  const hasCookies = await hasGivenConsent(consentCookieName);
-  // eslint-disable-next-line no-console
-  console.log({ hasCookies });
-  await t.expect(hasCookies).ok();
-};
-
+/**
+ * Kept for fixtures that still call useRole(...). Prefer ensureConsentDismissed
+ * in beforeEach — Role navigation is what hangs Azure browser tests.
+ */
 const userAcceptingAllCookies = Role(
   getEnvUrl('/#login'),
-  async (t) => {
-    const hasCookies = await hasGivenConsent(consentCookieName);
-    if (!hasCookies) {
-      await acceptAllCookies(t);
-    } else {
-      // eslint-disable-next-line no-console
-      console.log('userAcceptingAllCookies: all cookies already accepted!');
-      // eslint-disable-next-line no-console
-      console.log(
-        '!!!!! NOTE: There is a clientScript active in the .testcaterc.json, ' +
-          'that presets the document.cookie to consent all cookies!'
-      );
-    }
+  async (testController) => {
+    await ensureConsentDismissed(testController);
   },
   { preserveUrl: true }
 );

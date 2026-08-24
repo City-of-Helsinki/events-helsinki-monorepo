@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/nextjs';
+import type { Meta } from '@storybook/nextjs-vite';
 import React from 'react';
 
 import Container from './Container';

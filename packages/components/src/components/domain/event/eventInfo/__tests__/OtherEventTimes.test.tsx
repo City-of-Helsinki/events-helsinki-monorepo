@@ -88,19 +88,21 @@ const getEventTimesMocks = ({
 const firstLoadMock = getEventTimesMocks({
   variables: { eventType: [EventTypeId.Course] },
   response: otherEventsResponse,
+  // React 19 remounts can consume mocks repeatedly within a single test
+  maxUsageCount: Number.POSITIVE_INFINITY,
 });
 
 const secondLoadMock = getEventTimesMocks({
   variables: { page: 2, eventType: [EventTypeId.Course] },
   response: otherEventsLoadMoreResponse,
-  maxUsageCount: 20, // Needed this many times or mocks don't match
+  maxUsageCount: Number.POSITIVE_INFINITY,
 });
 
 const secondPageLoadThrowsErrorMock =
   createOtherEventTimesRequestThrowsErrorMocks({
     superEventId,
     variables: { page: 2, eventType: [EventTypeId.Course] },
-    maxUsageCount: 7, // Needed this many times or mocks don't match
+    maxUsageCount: Number.POSITIVE_INFINITY,
   });
 
 const defaultMocks = [firstLoadMock, secondLoadMock];

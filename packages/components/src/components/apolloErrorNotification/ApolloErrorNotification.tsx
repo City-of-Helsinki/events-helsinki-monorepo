@@ -1,6 +1,6 @@
 import type { NotificationProps } from 'hds-react';
 import { Notification, NotificationSize } from 'hds-react';
-import { Trans } from 'next-i18next';
+import { Trans } from 'next-i18next/pages';
 import { useResilientTranslation } from '../../hooks';
 import useCommonTranslation from '../../hooks/useCommonTranslation';
 import useErrorsTranslation from '../../hooks/useErrorsTranslation';

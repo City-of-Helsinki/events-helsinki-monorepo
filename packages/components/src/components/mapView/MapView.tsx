@@ -94,7 +94,7 @@ function MapView({ items = [], center, zoom, focusedItemId }: Props) {
 
   const markerClusterGroupItems = React.useMemo(
     () =>
-      items.reduce((result: JSX.Element[] = [], item) => {
+      items.reduce((result: React.JSX.Element[] = [], item) => {
         if (!item.location) {
           return result;
         }

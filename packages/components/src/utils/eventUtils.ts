@@ -1,6 +1,6 @@
 import { isPast, isThisWeek, isToday } from 'date-fns';
 import capitalize from 'lodash/capitalize';
-import type { TFunction } from 'next-i18next';
+import type { TFunction } from 'next-i18next/pages';
 
 import {
   CITY_OF_HELSINKI_LINKED_EVENTS_ORGANIZATION_PREFIXES,

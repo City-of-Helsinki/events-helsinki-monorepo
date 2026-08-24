@@ -1,14 +1,11 @@
-import { ClientFunction } from 'testcafe';
+import { ensureConsentDismissed } from './ensureConsentDismissed';
 
-const useRoleAndNavigateBack = async (role: Role, t: TestController) => {
-  const getCurrentLocation = ClientFunction(() => window.location.href);
-  const location = await getCurrentLocation();
-  await t
-    .useRole(role)
-    .navigateTo(location)
-    .wait(1000)
-    .expect(getCurrentLocation())
-    .eql(location);
+/**
+ * Historically applied a cookie Role then navigated back. Role navigations hang
+ * Azure TestCafe runs on this stack — just dismiss consent in place.
+ */
+const useRoleAndNavigateBack = async (_role: unknown, t: TestController) => {
+  await ensureConsentDismissed(t);
 };
 
 export default useRoleAndNavigateBack;

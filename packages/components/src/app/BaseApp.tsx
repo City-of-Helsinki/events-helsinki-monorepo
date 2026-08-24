@@ -1,7 +1,7 @@
 import type createMatomoInstance from '@jonkoops/matomo-tracker-react/lib/instance.js';
 
 import dynamic from 'next/dynamic';
-import type { SSRConfig } from 'next-i18next';
+import type { SSRConfig } from 'next-i18next/pages';
 import React from 'react';
 
 import { CmsHelperProvider } from '../cmsHelperProvider';

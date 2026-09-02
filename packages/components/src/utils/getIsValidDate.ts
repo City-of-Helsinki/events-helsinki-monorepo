@@ -1,3 +1,3 @@
 export default function getIsDateValid(date: Date): boolean {
-  return !isNaN(date.getTime());
+  return !Number.isNaN(date.getTime());
 }

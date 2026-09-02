@@ -14,7 +14,7 @@ export default function parseVenueId(
   venueId: string | string[]
 ): [Source, string] | null {
   if (Array.isArray(venueId)) {
-    throw new Error('Array IDs are not supported');
+    throw new TypeError('Array IDs are not supported');
   }
 
   const [source, id] = venueId.split(':');

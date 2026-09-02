@@ -53,6 +53,7 @@ const MobileDateSelectorMenu: FunctionComponent<Props> = ({
       {showCloseButton && (
         // FIXME: accessibility issues are reported in close-button. Now not rendered by default. See ticket HH-376.
         <button
+          type="button"
           ref={closeBtnRef}
           className={classNames(styles.button, styles.btnClose)}
           onClick={onCloseMenu}

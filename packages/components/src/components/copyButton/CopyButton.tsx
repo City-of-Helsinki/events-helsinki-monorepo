@@ -31,6 +31,7 @@ const CopyButton: React.FC<Props> = ({
   return (
     <>
       <button
+        type="button"
         onClick={handleButtonClick}
         {...rest}
         className={classNames(rest.className, {

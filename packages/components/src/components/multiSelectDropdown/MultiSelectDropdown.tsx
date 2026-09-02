@@ -404,7 +404,9 @@ const MultiSelectDropdown: React.FC<MultiselectDropdownProps> = ({
           </div>
         )}
         {helpText && <div className={styles.helpText}>{helpText}</div>}
-        {filteredOptions.map(createDropdownOptions)}
+        {filteredOptions.map((option, index) =>
+          createDropdownOptions(option, index)
+        )}
         {fixedOptions.length > 0 && filteredOptions.length > 0 && (
           <hr className={styles.separator} />
         )}

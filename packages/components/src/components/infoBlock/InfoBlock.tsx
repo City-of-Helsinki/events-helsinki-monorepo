@@ -129,6 +129,7 @@ function InfoBlockCollapse({
       )}
     >
       <button
+        type="button"
         {...buttonProps}
         aria-expanded={isOpen}
         className={titleClassName}

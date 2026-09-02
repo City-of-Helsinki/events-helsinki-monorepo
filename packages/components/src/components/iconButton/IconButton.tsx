@@ -20,6 +20,7 @@ const IconButton: React.FC<Props> = ({
 }) => {
   return (
     <button
+      type="button"
       aria-label={ariaLabel}
       className={classNames(
         styles.iconButton,

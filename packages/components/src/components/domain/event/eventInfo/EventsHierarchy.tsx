@@ -103,7 +103,7 @@ const SubEvents: React.FC<{
           />
         )}
         {events.length > EVENTS_LIST_LIMIT && (
-          <button onClick={toggleList} aria-expanded={isListOpen}>
+          <button type="button" onClick={toggleList} aria-expanded={isListOpen}>
             {isListOpen
               ? t('relatedEvents.buttonHide')
               : t('relatedEvents.buttonShow')}

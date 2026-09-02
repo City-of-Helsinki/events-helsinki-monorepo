@@ -155,7 +155,7 @@ const DateInfo: React.FC<{
             includeTime: true,
             timeAbbreviation: commonTranslation('timeAbbreviation'),
           })}
-          <button onClick={downloadIcsFile}>
+          <button type="button" onClick={downloadIcsFile}>
             {t('info.buttonAddToCalendar')}
             <IconAngleRight aria-hidden />
           </button>

@@ -55,6 +55,7 @@ const OtherEventTimes: React.FC<{
         />
         {events.length > EVENTS_LIST_LIMIT && (
           <button
+            type="button"
             onClick={toggleList}
             aria-expanded={isListOpen}
             aria-label={

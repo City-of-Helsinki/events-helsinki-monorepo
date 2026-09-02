@@ -36,9 +36,7 @@ export function getGoogleDirection(point?: DirectionPoint | null): string {
     return "''";
   }
 
-  return `${point.name},+${renderAddressToString(point.address)
-    .split(' ')
-    .join('+')}`;
+  return `${point.name},+${renderAddressToString(point.address).replaceAll(' ', '+')}`;
 }
 
 export function getGoogleDirectionsUrl(

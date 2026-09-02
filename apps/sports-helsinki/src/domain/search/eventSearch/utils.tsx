@@ -329,8 +329,8 @@ export const normalizeSuitableFor = (values: (number | string)[]): number[] => {
   if (!values?.length) return [];
 
   const [minAge, maxAge] = values.map((value) => {
-    const parsed = parseInt(value.toString());
-    return isNaN(parsed) ? null : parsed;
+    const parsed = Number.parseInt(value.toString());
+    return Number.isNaN(parsed) ? null : parsed;
   });
 
   // If no range is given, return an empty list.

@@ -186,7 +186,7 @@ class AppConfig {
     const value = envValue ? parseEnvValue(envValue) : 60;
 
     if (typeof value !== 'number') {
-      throw Error(
+      throw new Error(
         'NEXT_PUBLIC_DEFAULT_ISR_REVALIDATE_SECONDS must be a value that can be parsed into a number'
       );
     }

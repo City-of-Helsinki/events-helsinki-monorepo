@@ -63,3 +63,6 @@ debug-storybook.log
 proxies/events-graphql-federation/router
 sonar-report.json
 sonar-report.xml
+
+# Copilot
+.agents

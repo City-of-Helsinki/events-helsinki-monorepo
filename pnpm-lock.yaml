@@ -329,8 +329,8 @@ importers:
         specifier: ^11.0.5
         version: 11.0.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       sanitize-html:
-        specifier: ^2.17.5
-        version: 2.17.6
+        specifier: ^2.17.7
+        version: 2.17.7
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.8.1
@@ -675,8 +675,8 @@ importers:
         specifier: ^11.0.5
         version: 11.0.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       sanitize-html:
-        specifier: ^2.17.5
-        version: 2.17.6
+        specifier: ^2.17.7
+        version: 2.17.7
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.8.1
@@ -1039,8 +1039,8 @@ importers:
         specifier: ^11.0.5
         version: 11.0.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       sanitize-html:
-        specifier: ^2.17.5
-        version: 2.17.6
+        specifier: ^2.17.7
+        version: 2.17.7
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.8.1
@@ -1510,8 +1510,8 @@ importers:
         specifier: ^11.0.5
         version: 11.0.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       sanitize-html:
-        specifier: ^2.17.5
-        version: 2.17.6
+        specifier: ^2.17.7
+        version: 2.17.7
     devDependencies:
       '@babel/core':
         specifier: ^7.29.6
@@ -8280,8 +8280,8 @@ packages:
   date-fns@4.1.0:
     resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
 
-  dayjs@1.11.21:
-    resolution: {integrity: sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==}
+  dayjs@1.11.23:
+    resolution: {integrity: sha512-QDTCU0M0MxR3hQfnlDJfwekQiaanm1ubOD231u73WBckQ/fsamwRLiE2GBz6D3a/xF1NgfiDLJjXBa1hYOYTtQ==}
 
   debounce@1.2.1:
     resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
@@ -9947,6 +9947,10 @@ packages:
     resolution: {integrity: sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==}
     engines: {node: '>=0.10.0'}
 
+  is-plain-object@5.1.0:
+    resolution: {integrity: sha512-bUi/yjmtKYcRVUtWRGr0UA6xEFh2I6zWUwMrUXB3s7bmYCaZ8a+0ZsTRkrawh/mzlSD1Y0Ph8bp/U+TvBpWDNw==}
+    engines: {node: '>=0.10.0'}
+
   is-podman@1.0.1:
     resolution: {integrity: sha512-+5vbtF5FIg262iUa7gOIseIWTx0740RHiax7oSmJMhbfSoBIMQ/IacKKgfnGj65JGeH9lGEVQcdkDwhn1Em1mQ==}
     engines: {node: '>=8'}
@@ -11565,6 +11569,10 @@ packages:
     resolution: {integrity: sha512-g50586zr4bZmwFiTlflMu8E0bDTb5I5gertgwAKmsdUlTQIhZtunzUlD1WSzwcVWPoAVpsrA6vlfCD7oXvRwgg==}
     engines: {node: ^10 || ^12 || >=14}
 
+  postcss@8.5.26:
+    resolution: {integrity: sha512-u82N74LFzG8ca+dD8puPnplTXoGH4fTPpVGuIbt36G3qvNlkvfD0lEAZSxaly3KX8TS/L1A1gsCEmvKmBcVbkQ==}
+    engines: {node: ^10 || ^12 || >=14}
+
   postgres-array@2.0.0:
     resolution: {integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==}
     engines: {node: '>=4'}
@@ -12166,8 +12174,8 @@ packages:
   sanitize-filename@1.6.3:
     resolution: {integrity: sha512-y/52Mcy7aw3gRm7IrcGDFx/bCk4AhRh2eI9luHOQM86nZsqwiRkkq2GekHXBBD+SmPidc8i2PqtYZl+pWJ8Oeg==}
 
-  sanitize-html@2.17.6:
-    resolution: {integrity: sha512-M4bo9tfv1yfhQZZKkc6dL07ALrGJtfvNOuhX3hU9AVPR/uPQ+nKOJBqTYc7LfMQblTW04mtSWDJWEyLvygJsLA==}
+  sanitize-html@2.17.7:
+    resolution: {integrity: sha512-PGtEkc9cbnedU3s9TmzDbpsZ8w086g/0Q8k8/oIO1NLNU3i5k9yn835CrjJSajp1KMmkisbO1qPXxNKO3welAg==}
     engines: {node: '>=22.12.0'}
 
   sass-embedded-all-unknown@1.99.0:
@@ -20969,7 +20977,7 @@ snapshots:
 
   date-fns@4.1.0: {}
 
-  dayjs@1.11.21: {}
+  dayjs@1.11.23: {}
 
   debounce@1.2.1: {}
 
@@ -23252,6 +23260,8 @@ snapshots:
 
   is-plain-object@5.0.0: {}
 
+  is-plain-object@5.1.0: {}
+
   is-podman@1.0.1: {}
 
   is-potential-custom-element-name@1.0.1: {}
@@ -23639,7 +23649,7 @@ snapshots:
 
   launder@1.7.1:
     dependencies:
-      dayjs: 1.11.21
+      dayjs: 1.11.23
 
   leaflet.markercluster@1.5.3(leaflet@1.9.4):
     dependencies:
@@ -25124,6 +25134,12 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
+  postcss@8.5.26:
+    dependencies:
+      nanoid: 3.3.17
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
   postgres-array@2.0.0: {}
 
   postgres-bytea@1.0.0: {}
@@ -25870,15 +25886,15 @@ snapshots:
     dependencies:
       truncate-utf8-bytes: 1.0.2
 
-  sanitize-html@2.17.6:
+  sanitize-html@2.17.7:
     dependencies:
       deepmerge: 4.3.1
       escape-string-regexp: 4.0.0
       htmlparser2: 12.0.0
-      is-plain-object: 5.0.0
+      is-plain-object: 5.1.0
       launder: 1.7.1
       parse-srcset: 1.0.2
-      postcss: 8.5.23
+      postcss: 8.5.26
 
   sass-embedded-all-unknown@1.99.0:
     dependencies:

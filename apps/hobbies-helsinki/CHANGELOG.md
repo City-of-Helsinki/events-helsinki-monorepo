@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.4.0...hobbies-helsinki-v3.4.1) (2026-09-03)
+
+
+### Bug Fixes
+
+* Prefer new Error() Refs: LIIKUNTA-794 ([1a6fb92](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1a6fb92c47e811e3542b4377e6d563941016f6ff))
+
+
+### Dependencies
+
+* Bump @faker-js/faker from 9.9.0 to 10.5.0 ([2f8f83a](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2f8f83ae45feae0bfc8e653ee31a2ade702fe19e))
+* Bump esbuild from 0.28.0 to 0.28.1 ([23d9046](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/23d90460a7bba37a7f5a7ec5945d7a391556eb5b))
+* Bump next from 15.5.18 to 15.5.21 ([b593cee](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b593ceef752a5bfd5f5ffc34cbaa6cfe82ec199b))
+* Bump sanitize-html from 2.17.0 to 2.17.5 ([bd06414](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/bd06414dd761be32ddf680d26f4dccd186043497))
+* Bump sanitize-html from 2.17.6 to 2.17.7 ([f1afa10](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/f1afa101a870bf2cf9d2596e0dad9dac2bab6a04))
+
 ## [3.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.3.4...hobbies-helsinki-v3.4.0) (2026-06-10)
 
 

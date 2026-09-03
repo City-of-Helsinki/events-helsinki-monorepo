@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.6...venue-graphql-proxy-v1.6.7) (2026-09-03)
+
+
+### Bug Fixes
+
+* ParseVenueId use TypeError Refs: LIIKUNTA-794 ([35321a7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/35321a747d070953545f218bdfd486bfc6982f00))
+* Prefer new Error() Refs: LIIKUNTA-794 ([1a6fb92](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1a6fb92c47e811e3542b4377e6d563941016f6ff))
+
 ## [1.6.6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.5...venue-graphql-proxy-v1.6.6) (2026-04-14)
 
 

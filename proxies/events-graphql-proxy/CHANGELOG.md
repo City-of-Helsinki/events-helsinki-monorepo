@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.7.0...events-graphql-proxy-v1.7.1) (2026-09-03)
+
+
+### Bug Fixes
+
+* Prefer new Error() Refs: LIIKUNTA-794 ([1a6fb92](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/1a6fb92c47e811e3542b4377e6d563941016f6ff))
+
 ## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.6.4...events-graphql-proxy-v1.7.0) (2026-06-10)
 
 

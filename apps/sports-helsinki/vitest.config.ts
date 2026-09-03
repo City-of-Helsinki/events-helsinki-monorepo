@@ -104,6 +104,9 @@ export default defineConfig({
         'src/instrumentation.ts', // Excludes instrumentation file
         'src/instrumentation-client.ts', // Excludes instrumentation client file
         'src/index.tsx', // Excludes root index file
+        'src/domain/app/getSportsStaticProps.ts', // Next.js SSG plumbing
+        'src/domain/i18n/serverSideTranslationsWithCommon.ts', // next-i18next wrapper
+        'src/domain/unifiedSearch/useUnifiedSearchMapQuery.ts', // Apollo passthrough
         'src/**/*.d.ts', // Excludes all declaration files
         'src/**/*.test.ts', // Excludes all .test.ts files
         'src/**/*.test.tsx', // Excludes all .test.tsx files

@@ -94,7 +94,7 @@
     "@events-helsinki/common-i18n": "workspace:^",
     "@events-helsinki/common-tests": "workspace:^",
     "@events-helsinki/eslint-config-bases": "workspace:^",
-    "@faker-js/faker": "^9.9.0",
+    "@faker-js/faker": "^10.5.0",
     "@graphql-codegen/cli": "5.0.7",
     "@mdx-js/react": "1.6.22",
     "@storybook/addon-docs": "10.5.7",

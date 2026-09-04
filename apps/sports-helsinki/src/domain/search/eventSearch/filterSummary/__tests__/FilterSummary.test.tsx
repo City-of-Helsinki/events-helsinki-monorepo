@@ -13,7 +13,7 @@ import {
   fakePlace,
 } from '@/test-utils/mockDataUtils';
 import { CombinedSearchProvider } from '../../../combinedSearch/adapters/CombinedSearchProvider';
-import FilterSummary from '../FilterSummary';
+import FilterSummary, { filterSummaryContainerTestId } from '../FilterSummary';
 
 configure({ defaultHidden: true });
 
@@ -137,6 +137,160 @@ it('calls onClear callback when clear button is clicked', async () => {
     })
   );
   expect(onClear).toHaveBeenCalledTimes(1);
+});
+
+it('renders nothing when there are no active filters', () => {
+  render(
+    <CombinedSearchProvider>
+      <FilterSummary onClear={vitest.fn()} />
+    </CombinedSearchProvider>,
+    { routes: ['/haku'] }
+  );
+
+  expect(
+    screen.queryByTestId(filterSummaryContainerTestId)
+  ).not.toBeInTheDocument();
+});
+
+it('removes a value from an array filter (sportsCategories) without touching other values', async () => {
+  const { router } = render(
+    <CombinedSearchProvider>
+      <FilterSummary onClear={vitest.fn()} />
+    </CombinedSearchProvider>,
+    {
+      routes: ['/haku?sportsCategories=swimming&sportsCategories=skiing'],
+    }
+  );
+
+  const removeButtonName = translations.common.filter.ariaButtonRemove.replace(
+    '{{filter}}',
+    translations.appSports.home.sportsCategory.swimming
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.getByRole('button', { name: removeButtonName })
+    ).toBeInTheDocument();
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: removeButtonName }));
+
+  await waitFor(() => {
+    expect(router.query.sportsCategories).not.toContain('swimming');
+    expect(router.query.sportsCategories).toContain('skiing');
+  });
+});
+
+it('removes a value from an array filter (targetGroups)', async () => {
+  const { router } = render(
+    <CombinedSearchProvider>
+      <FilterSummary onClear={vitest.fn()} />
+    </CombinedSearchProvider>,
+    {
+      routes: ['/haku?targetGroups=adults'],
+    }
+  );
+
+  const removeButtonName = translations.common.filter.ariaButtonRemove.replace(
+    '{{filter}}',
+    translations.appSports.home.targetGroup.adults
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.getByRole('button', { name: removeButtonName })
+    ).toBeInTheDocument();
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: removeButtonName }));
+
+  await waitFor(() => {
+    expect(router.query.targetGroups).toStrictEqual([]);
+  });
+});
+
+it('renders and removes the helsinkiOnly filter', async () => {
+  const { router } = render(
+    <CombinedSearchProvider>
+      <FilterSummary onClear={vitest.fn()} />
+    </CombinedSearchProvider>,
+    {
+      routes: ['/haku?helsinkiOnly=true'],
+    }
+  );
+
+  const removeButtonName = translations.common.filter.ariaButtonRemove.replace(
+    '{{filter}}',
+    translations.common.cityOfHelsinki
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.getByRole('button', { name: removeButtonName })
+    ).toBeInTheDocument();
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: removeButtonName }));
+
+  await waitFor(() => {
+    expect(router.query.helsinkiOnly).toBeUndefined();
+  });
+});
+
+it('renders and removes the reservable filter', async () => {
+  const { router } = render(
+    <CombinedSearchProvider>
+      <FilterSummary onClear={vitest.fn()} />
+    </CombinedSearchProvider>,
+    {
+      routes: ['/haku?reservable=true'],
+    }
+  );
+
+  const removeButtonName = translations.common.filter.ariaButtonRemove.replace(
+    '{{filter}}',
+    translations.search.search.reservable
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.getByRole('button', { name: removeButtonName })
+    ).toBeInTheDocument();
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: removeButtonName }));
+
+  await waitFor(() => {
+    expect(router.query.reservable).toBeUndefined();
+  });
+});
+
+it('renders and removes the accessibilityProfile filter', async () => {
+  const { router } = render(
+    <CombinedSearchProvider>
+      <FilterSummary onClear={vitest.fn()} />
+    </CombinedSearchProvider>,
+    {
+      routes: ['/haku?accessibilityProfile=hearing_aid'],
+    }
+  );
+
+  const removeButtonName = translations.common.filter.ariaButtonRemove.replace(
+    '{{filter}}',
+    translations.search.accessibilityProfile.hearing_aid
+  );
+
+  await waitFor(() => {
+    expect(
+      screen.getByRole('button', { name: removeButtonName })
+    ).toBeInTheDocument();
+  });
+
+  await userEvent.click(screen.getByRole('button', { name: removeButtonName }));
+
+  await waitFor(() => {
+    expect(router.query.accessibilityProfile).toBeUndefined();
+  });
 });
 
 it.todo('routes to correct url after deleting filters');

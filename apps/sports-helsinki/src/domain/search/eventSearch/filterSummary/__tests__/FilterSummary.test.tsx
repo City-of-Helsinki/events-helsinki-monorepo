@@ -177,6 +177,7 @@ it('removes a value from an array filter (sportsCategories) without touching oth
 
   await waitFor(() => {
     expect(router.query.sportsCategories).not.toContain('swimming');
+    expect(router.query.sportsCategories).toContain('skiing');
   });
 });
 

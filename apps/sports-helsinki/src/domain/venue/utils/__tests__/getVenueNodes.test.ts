@@ -17,7 +17,7 @@ it('extracts venue nodes from search query', () => {
         },
       ],
     },
-  } as SearchListQuery;
+  } as unknown as SearchListQuery;
 
   expect(getVenueNodes(mockQuery)).toStrictEqual([
     { id: 'venue-1', name: 'Venue 1' },
@@ -28,7 +28,7 @@ it('extracts venue nodes from search query', () => {
 it('returns undefined when unifiedSearch is not present', () => {
   const mockQuery: SearchListQuery = {
     unifiedSearch: undefined,
-  } as SearchListQuery;
+  } as unknown as SearchListQuery;
 
   expect(getVenueNodes(mockQuery)).toBeUndefined();
 });
@@ -38,7 +38,7 @@ it('returns empty array when edges is empty', () => {
     unifiedSearch: {
       edges: [],
     },
-  } as SearchListQuery;
+  } as unknown as SearchListQuery;
 
   expect(getVenueNodes(mockQuery)).toStrictEqual([]);
 });

@@ -1,98 +1,106 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { renderHook } from '@/test-utils';
+import { useScrollToSearchResultItem } from '../useScrollToSearchResultItem';
 
 vi.mock('next/router', () => ({
   useRouter: vi.fn(),
 }));
 
 describe('useScrollToSearchResultItem', () => {
-  beforeEach(() => {
+  let scrollIntoViewSpy: ReturnType<typeof vi.fn>;
+  let querySelectorSpy: ReturnType<typeof vi.spyOn>;
+  let decodeURIComponentSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(async () => {
     vi.clearAllMocks();
-  });
 
-  it('should export the hook as a named export', async () => {
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
-    expect(typeof useScrollToSearchResultItem).toBe('function');
-  });
-
-  it('should export the hook as a default export', async () => {
-    const module = await import('../useScrollToSearchResultItem');
-    expect(typeof module.default).toBe('function');
-  });
-
-  it('should not crash when useRouter returns query without scrollTo', async () => {
     const { useRouter } = await import('next/router');
-    const mockedUseRouter = vi.mocked(useRouter);
-
-    mockedUseRouter.mockReturnValue({
+    vi.mocked(useRouter).mockReturnValue({
       query: {},
       asPath: '/',
     } as any);
 
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
-
-    // Should not throw
-    expect(typeof useScrollToSearchResultItem).toBe('function');
+    scrollIntoViewSpy = vi.fn();
+    Element.prototype.scrollIntoView =
+      scrollIntoViewSpy as unknown as typeof Element.prototype.scrollIntoView;
+    querySelectorSpy = vi.spyOn(Element.prototype, 'querySelector');
+    decodeURIComponentSpy = vi.spyOn(global, 'decodeURIComponent');
   });
 
-  it('should handle scrollTo parameter containing URL-encoded characters', async () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('does not attempt to scroll when there is no scrollTo query param', async () => {
     const { useRouter } = await import('next/router');
-    const mockedUseRouter = vi.mocked(useRouter);
-
-    // Test that decodeURIComponent is used
-    const encodedSelector = '%5Bdata-testid%3D%22item%22%5D'; // encoded: [data-testid="item"]
-
-    mockedUseRouter.mockReturnValue({
-      query: { scrollTo: encodedSelector },
-      asPath: `/?scrollTo=${encodedSelector}`,
+    vi.mocked(useRouter).mockReturnValue({
+      query: {},
+      asPath: '/',
     } as any);
 
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
+    renderHook(() => useScrollToSearchResultItem());
 
-    expect(typeof useScrollToSearchResultItem).toBe('function');
+    expect(decodeURIComponentSpy).not.toHaveBeenCalled();
+    expect(querySelectorSpy).not.toHaveBeenCalled();
+    expect(scrollIntoViewSpy).not.toHaveBeenCalled();
   });
 
-  it('should work with various scrollTo selectors', async () => {
+  it('does not attempt to scroll when scrollTo query param is null', async () => {
     const { useRouter } = await import('next/router');
-    const mockedUseRouter = vi.mocked(useRouter);
+    vi.mocked(useRouter).mockReturnValue({
+      query: { scrollTo: null },
+      asPath: '/',
+    } as any);
 
-    const selectors = [
-      '[data-testid="item-1"]',
-      '#result-123',
-      '.search-result',
-      '[id="unique-id"]',
-    ];
+    renderHook(() => useScrollToSearchResultItem());
 
-    for (const selector of selectors) {
-      mockedUseRouter.mockReturnValue({
-        query: { scrollTo: selector },
-        asPath: `/?scrollTo=${encodeURIComponent(selector)}`,
+    expect(querySelectorSpy).not.toHaveBeenCalled();
+    expect(scrollIntoViewSpy).not.toHaveBeenCalled();
+  });
+
+  it('does not attempt to scroll when scrollTo query param is an empty string', async () => {
+    const { useRouter } = await import('next/router');
+    vi.mocked(useRouter).mockReturnValue({
+      query: { scrollTo: '' },
+      asPath: '/?scrollTo=',
+    } as any);
+
+    renderHook(() => useScrollToSearchResultItem());
+
+    expect(querySelectorSpy).not.toHaveBeenCalled();
+    expect(scrollIntoViewSpy).not.toHaveBeenCalled();
+  });
+
+  // NOTE: the hook's `listRef` is never attached to a rendered DOM element
+  // anywhere in the app (it is a local ref that isn't returned by the hook),
+  // so `listElement?.querySelector(...)` always short-circuits on `null` and
+  // the decode/query/scroll pipeline never actually runs today. These tests
+  // pin down that real, current behaviour rather than the hook's intent, and
+  // should be revisited if/when the ref-wiring bug is fixed separately.
+  it.each([
+    '[data-testid="item-1"]',
+    '#result-123',
+    '.search-result',
+    '%5Bdata-testid%3D%22item%22%5D',
+  ])(
+    'does not throw and does not invoke decode/query/scroll for scrollTo=%s given the unattached listRef',
+    async (scrollTo) => {
+      const { useRouter } = await import('next/router');
+      vi.mocked(useRouter).mockReturnValue({
+        query: { scrollTo },
+        asPath: `/?scrollTo=${scrollTo}`,
       } as any);
 
-      const { useScrollToSearchResultItem } = await import(
-        '../useScrollToSearchResultItem'
-      );
+      expect(() =>
+        renderHook(() => useScrollToSearchResultItem())
+      ).not.toThrow();
 
-      expect(typeof useScrollToSearchResultItem).toBe('function');
+      expect(decodeURIComponentSpy).not.toHaveBeenCalled();
+      expect(querySelectorSpy).not.toHaveBeenCalled();
+      expect(scrollIntoViewSpy).not.toHaveBeenCalled();
     }
-  });
+  );
 
-  it('should expose listRef for component to attach', async () => {
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
-    const hook = useScrollToSearchResultItem;
-
-    // Verify hook accepts no arguments
-    expect(hook).toHaveLength(0);
-  });
-
-  it('should handle changes to scrollTo query parameter', async () => {
+  it('re-runs the effect without throwing when the scrollTo query param changes across rerenders', async () => {
     const { useRouter } = await import('next/router');
     const mockedUseRouter = vi.mocked(useRouter);
 
@@ -101,101 +109,14 @@ describe('useScrollToSearchResultItem', () => {
       asPath: '/?scrollTo=%5Bdata-testid%3D%22first%22%5D',
     } as any);
 
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
+    const { rerender } = renderHook(() => useScrollToSearchResultItem());
 
-    expect(typeof useScrollToSearchResultItem).toBe('function');
-
-    // Later simulation of query change
     mockedUseRouter.mockReturnValue({
       query: { scrollTo: '[data-testid="second"]' },
       asPath: '/?scrollTo=%5Bdata-testid%3D%22second%22%5D',
     } as any);
 
-    expect(typeof useScrollToSearchResultItem).toBe('function');
-  });
-
-  it('should handle null scrollTo parameter gracefully', async () => {
-    const { useRouter } = await import('next/router');
-    const mockedUseRouter = vi.mocked(useRouter);
-
-    mockedUseRouter.mockReturnValue({
-      query: { scrollTo: null },
-      asPath: '/',
-    } as any);
-
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
-
-    expect(typeof useScrollToSearchResultItem).toBe('function');
-  });
-
-  it('should work when only query param is present without decoded selector', async () => {
-    const { useRouter } = await import('next/router');
-    const mockedUseRouter = vi.mocked(useRouter);
-
-    mockedUseRouter.mockReturnValue({
-      query: { scrollTo: '[class*="result"]' },
-      asPath: '/?scrollTo=%5Bclass*%3D%22result%22%5D',
-    } as any);
-
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
-
-    expect(typeof useScrollToSearchResultItem).toBe('function');
-  });
-
-  it('should handle query object with multiple parameters', async () => {
-    const { useRouter } = await import('next/router');
-    const mockedUseRouter = vi.mocked(useRouter);
-
-    mockedUseRouter.mockReturnValue({
-      query: { scrollTo: '[data-id="item-5"]', other: 'param' },
-      asPath: '/?scrollTo=%5Bdata-id%3D%22item-5%22%5D&other=param',
-    } as any);
-
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
-
-    expect(typeof useScrollToSearchResultItem).toBe('function');
-  });
-
-  it('should support decoding of complex selectors', async () => {
-    const { useRouter } = await import('next/router');
-    const mockedUseRouter = vi.mocked(useRouter);
-
-    const complexSelector = '[data-index="123"][role="button"]';
-    const encodedSelector = encodeURIComponent(complexSelector);
-
-    mockedUseRouter.mockReturnValue({
-      query: { scrollTo: complexSelector },
-      asPath: `/?scrollTo=${encodedSelector}`,
-    } as any);
-
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
-
-    expect(typeof useScrollToSearchResultItem).toBe('function');
-  });
-
-  it('should handle empty string scrollTo parameter', async () => {
-    const { useRouter } = await import('next/router');
-    const mockedUseRouter = vi.mocked(useRouter);
-
-    mockedUseRouter.mockReturnValue({
-      query: { scrollTo: '' },
-      asPath: '/?scrollTo=',
-    } as any);
-
-    const { useScrollToSearchResultItem } = await import(
-      '../useScrollToSearchResultItem'
-    );
-
-    expect(typeof useScrollToSearchResultItem).toBe('function');
+    expect(() => rerender()).not.toThrow();
+    expect(scrollIntoViewSpy).not.toHaveBeenCalled();
   });
 });

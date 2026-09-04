@@ -14,8 +14,12 @@ describe('useSportsRHHCConfig', () => {
     process.env.NEXT_PUBLIC_SHOW_ENROLMENT_STATUS_IN_CARD_DETAILS;
 
   afterEach(() => {
-    process.env.NEXT_PUBLIC_SHOW_ENROLMENT_STATUS_IN_CARD_DETAILS =
-      originalEnrolmentFlag;
+    if (originalEnrolmentFlag === undefined) {
+      delete process.env.NEXT_PUBLIC_SHOW_ENROLMENT_STATUS_IN_CARD_DETAILS;
+    } else {
+      process.env.NEXT_PUBLIC_SHOW_ENROLMENT_STATUS_IN_CARD_DETAILS =
+        originalEnrolmentFlag;
+    }
   });
 
   it('builds a config with translated site name, language and apollo clients wired up', () => {

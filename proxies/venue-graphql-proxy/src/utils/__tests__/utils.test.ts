@@ -350,6 +350,27 @@ describe('getPointFromLongAndLat', () => {
   it('returns null when both are missing', () => {
     expect(getPointFromLongAndLat(undefined, undefined)).toBeNull();
   });
+
+  it('returns a Point when longitude is 0', () => {
+    expect(getPointFromLongAndLat(0, 60.2)).toStrictEqual({
+      __typename: 'Point',
+      coordinates: [0, 60.2],
+    });
+  });
+
+  it('returns a Point when latitude is 0', () => {
+    expect(getPointFromLongAndLat(24.9, 0)).toStrictEqual({
+      __typename: 'Point',
+      coordinates: [24.9, 0],
+    });
+  });
+
+  it('returns a Point when both longitude and latitude are 0', () => {
+    expect(getPointFromLongAndLat(0, 0)).toStrictEqual({
+      __typename: 'Point',
+      coordinates: [0, 0],
+    });
+  });
 });
 
 describe('translateOntologyIdLabel', () => {

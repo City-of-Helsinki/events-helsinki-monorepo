@@ -206,7 +206,12 @@ export function getPointFromLongAndLat(
   long?: number | null,
   lat?: number | null
 ): Point | null {
-  if (!long || !lat) {
+  if (
+    long === null ||
+    long === undefined ||
+    lat === null ||
+    lat === undefined
+  ) {
     return null;
   }
 

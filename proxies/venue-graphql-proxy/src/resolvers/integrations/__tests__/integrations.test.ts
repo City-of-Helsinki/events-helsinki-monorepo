@@ -30,6 +30,7 @@ describe('IsOpenHaukiIntegration', () => {
 
     expect(result.isOpen).toBe(true);
     expect(mockConfig.getId).toHaveBeenCalledWith('tprek:123', 'tprek');
+    expect(context.dataSources.hauki.getIsOpen).toHaveBeenCalledWith('hauki:1');
   });
 
   it('formats isOpen data when is_open is false', async () => {
@@ -46,6 +47,7 @@ describe('IsOpenHaukiIntegration', () => {
     const result = await integration.execute('tprek:123', 'tprek', context);
 
     expect(result.isOpen).toBe(false);
+    expect(context.dataSources.hauki.getIsOpen).toHaveBeenCalledWith('hauki:1');
   });
 
   it('handles null isOpen data', async () => {
@@ -60,6 +62,7 @@ describe('IsOpenHaukiIntegration', () => {
     const result = await integration.execute('tprek:123', 'tprek', context);
 
     expect(result.isOpen).toBeNull();
+    expect(context.dataSources.hauki.getIsOpen).toHaveBeenCalledWith('hauki:1');
   });
 });
 
@@ -76,6 +79,9 @@ describe('OpeningHoursHaukiIntegration', () => {
     const result = await integration.execute('tprek:123', 'tprek', context);
 
     expect(result.openingHours).toStrictEqual([]);
+    expect(context.dataSources.hauki.getOpeningHours).toHaveBeenCalledWith(
+      'hauki:1'
+    );
   });
 
   it('formats opening hours with time elements', async () => {
@@ -114,6 +120,9 @@ describe('OpeningHoursHaukiIntegration', () => {
     expect(result.openingHours[0].times).toHaveLength(1);
     expect(result.openingHours[0].times[0].startTime).toBe('09:00');
     expect(result.openingHours[0].times[0].endTime).toBe('12:00');
+    expect(context.dataSources.hauki.getOpeningHours).toHaveBeenCalledWith(
+      'hauki:1'
+    );
   });
 
   it('handles null opening hours', async () => {
@@ -128,6 +137,9 @@ describe('OpeningHoursHaukiIntegration', () => {
     const result = await integration.execute('tprek:123', 'tprek', context);
 
     expect(result.openingHours).toBeNull();
+    expect(context.dataSources.hauki.getOpeningHours).toHaveBeenCalledWith(
+      'hauki:1'
+    );
   });
 
   it('formats multiple opening hours days', async () => {
@@ -179,5 +191,8 @@ describe('OpeningHoursHaukiIntegration', () => {
     expect(result.openingHours).toHaveLength(2);
     expect(result.openingHours[0].date).toBe('2024-09-04');
     expect(result.openingHours[1].date).toBe('2024-09-05');
+    expect(context.dataSources.hauki.getOpeningHours).toHaveBeenCalledWith(
+      'hauki:1'
+    );
   });
 });

@@ -1,7 +1,9 @@
 import { EventTypeId } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { renderHook, act, waitFor } from '@/test-utils';
 import { PARAM_SEARCH_TYPE } from '../../constants';
+import useSearchTabsWithParams from '../useSearchTabsWithParams';
 
 vi.mock('next/router', () => ({
   useRouter: vi.fn(),
@@ -9,199 +11,216 @@ vi.mock('next/router', () => ({
 
 const mockedUseRouter = vi.mocked(useRouter);
 
+const createMockRouter = (overrides = {}) => ({
+  query: {},
+  asPath: '/',
+  replace: vi.fn(),
+  ...overrides,
+});
+
 describe('useSearchTabsWithParams', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('should export the hook as a default export', async () => {
-    const module = await import('../useSearchTabsWithParams');
-    expect(typeof module.default).toBe('function');
+  it('should return initTab from valid searchType URL parameter', () => {
+    mockedUseRouter.mockReturnValue(
+      createMockRouter({
+        asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.General}`,
+        query: { [PARAM_SEARCH_TYPE]: EventTypeId.General },
+      }) as any
+    );
+
+    const { result } = renderHook(() =>
+      useSearchTabsWithParams(EventTypeId.Course)
+    );
+
+    expect(result.current.initTab).toBe(EventTypeId.General);
+    expect(result.current.searchTypeParam).toBe(EventTypeId.General);
   });
 
-  it('should accept a SearchTabId as defaultTab parameter', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: {},
-      asPath: '/',
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    // Should not throw with valid tab IDs
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should handle query parameter parsing from router asPath', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: {},
-      asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.General}`,
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should work with Event type IDs', async () => {
-    const validEventTypes = [
-      EventTypeId.General,
-      EventTypeId.Course,
-      'Venue', // also valid
-    ];
-
-    for (const tabId of validEventTypes) {
-      mockedUseRouter.mockReturnValue({
-        query: { [PARAM_SEARCH_TYPE]: tabId },
-        asPath: `/?${PARAM_SEARCH_TYPE}=${tabId}`,
-        replace: vi.fn(),
-      } as any);
-
-      const module = await import('../useSearchTabsWithParams');
-      const useSearchTabsWithParams = module.default;
-
-      expect(typeof useSearchTabsWithParams).toBe('function');
-    }
-  });
-
-  it('should validate tab IDs before using them', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: { [PARAM_SEARCH_TYPE]: 'InvalidTab' },
-      asPath: `/?${PARAM_SEARCH_TYPE}=InvalidTab`,
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should handle missing searchType param by using default', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: {},
-      asPath: '/',
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should handle multiple query parameters', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: {
-        [PARAM_SEARCH_TYPE]: EventTypeId.General,
-        text: 'swimming',
-        location: 'downtown',
-      },
-      asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.General}&text=swimming&location=downtown`,
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should handle router updates via replace method', async () => {
+  it('should use defaultTab when searchType param is missing from URL', async () => {
     const mockReplace = vi.fn();
-    mockedUseRouter.mockReturnValue({
-      query: {},
+    mockedUseRouter.mockReturnValue(
+      createMockRouter({
+        asPath: '/',
+        query: {},
+        replace: mockReplace,
+      }) as any
+    );
+
+    const { result } = renderHook(() =>
+      useSearchTabsWithParams(EventTypeId.Course)
+    );
+
+    expect(result.current.initTab).toBe(EventTypeId.Course);
+    expect(result.current.searchTypeParam).toBeNull();
+
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith(
+        { query: { [PARAM_SEARCH_TYPE]: EventTypeId.Course } },
+        undefined,
+        { shallow: true }
+      );
+    });
+  });
+
+  it('should replace router when searchTypeParam is invalid', async () => {
+    const mockReplace = vi.fn();
+    mockedUseRouter.mockReturnValue(
+      createMockRouter({
+        asPath: `/?${PARAM_SEARCH_TYPE}=InvalidTab`,
+        query: { [PARAM_SEARCH_TYPE]: 'InvalidTab' },
+        replace: mockReplace,
+      }) as any
+    );
+
+    const { result } = renderHook(() =>
+      useSearchTabsWithParams(EventTypeId.General)
+    );
+
+    // initTab reflects the URL param as-is (cast to SearchTabId)
+    expect(result.current.searchTypeParam).toBe('InvalidTab');
+
+    // But the effect triggers and corrects the router
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith(
+        { query: { [PARAM_SEARCH_TYPE]: EventTypeId.General } },
+        undefined,
+        { shallow: true }
+      );
+    });
+  });
+
+  it('should handle valid Venue tab ID', () => {
+    mockedUseRouter.mockReturnValue(
+      createMockRouter({
+        asPath: `/?${PARAM_SEARCH_TYPE}=Venue`,
+        query: { [PARAM_SEARCH_TYPE]: 'Venue' },
+      }) as any
+    );
+
+    const { result } = renderHook(() =>
+      useSearchTabsWithParams(EventTypeId.General)
+    );
+
+    expect(result.current.initTab).toBe('Venue');
+    expect(result.current.searchTypeParam).toBe('Venue');
+  });
+
+  it('should handle Course tab ID', () => {
+    mockedUseRouter.mockReturnValue(
+      createMockRouter({
+        asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.Course}`,
+        query: { [PARAM_SEARCH_TYPE]: EventTypeId.Course },
+      }) as any
+    );
+
+    const { result } = renderHook(() =>
+      useSearchTabsWithParams(EventTypeId.General)
+    );
+
+    expect(result.current.initTab).toBe(EventTypeId.Course);
+    expect(result.current.searchTypeParam).toBe(EventTypeId.Course);
+  });
+
+  it('should parse URL parameters correctly from asPath with multiple query params', () => {
+    mockedUseRouter.mockReturnValue(
+      createMockRouter({
+        asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.General}&text=swimming&location=downtown`,
+        query: {
+          [PARAM_SEARCH_TYPE]: EventTypeId.General,
+          text: 'swimming',
+          location: 'downtown',
+        },
+      }) as any
+    );
+
+    const { result } = renderHook(() =>
+      useSearchTabsWithParams(EventTypeId.Course)
+    );
+
+    expect(result.current.initTab).toBe(EventTypeId.General);
+    expect(result.current.searchTypeParam).toBe(EventTypeId.General);
+  });
+
+  it('should not call replace when searchTypeParam is already valid', () => {
+    const mockReplace = vi.fn();
+    mockedUseRouter.mockReturnValue(
+      createMockRouter({
+        asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.Course}`,
+        query: { [PARAM_SEARCH_TYPE]: EventTypeId.Course },
+        replace: mockReplace,
+      }) as any
+    );
+
+    renderHook(() => useSearchTabsWithParams(EventTypeId.Course));
+
+    expect(mockReplace).not.toHaveBeenCalled();
+  });
+
+  it('should handle empty query string with default tab fallback', async () => {
+    const mockReplace = vi.fn();
+    mockedUseRouter.mockReturnValue(
+      createMockRouter({
+        asPath: '/',
+        query: {},
+        replace: mockReplace,
+      }) as any
+    );
+
+    const { result } = renderHook(() =>
+      useSearchTabsWithParams('Venue' as const)
+    );
+
+    expect(result.current.initTab).toBe('Venue');
+
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith(
+        { query: { [PARAM_SEARCH_TYPE]: 'Venue' } },
+        undefined,
+        { shallow: true }
+      );
+    });
+  });
+
+  it('should handle effect re-run when defaultTab changes', async () => {
+    const mockReplace = vi.fn();
+    const routerMock = createMockRouter({
       asPath: '/',
+      query: {},
       replace: mockReplace,
-    } as any);
+    });
 
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
+    mockedUseRouter.mockReturnValue(routerMock as any);
 
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
+    const { rerender } = renderHook(
+      ({ defaultTab }) => useSearchTabsWithParams(defaultTab),
+      {
+        initialProps: { defaultTab: EventTypeId.General },
+      }
+    );
 
-  it('should distinguish between undefined and null searchTypeParam', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: {},
-      asPath: '/',
-      replace: vi.fn(),
-    } as any);
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith(
+        { query: { [PARAM_SEARCH_TYPE]: EventTypeId.General } },
+        undefined,
+        { shallow: true }
+      );
+    });
 
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
+    vi.clearAllMocks();
 
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
+    act(() => {
+      rerender({ defaultTab: EventTypeId.Course });
+    });
 
-  it('should work with Course tab ID', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: { [PARAM_SEARCH_TYPE]: EventTypeId.Course },
-      asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.Course}`,
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should parse URL parameters correctly from asPath', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: { [PARAM_SEARCH_TYPE]: EventTypeId.General },
-      asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.General}&other=value`,
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should support empty query strings', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: {},
-      asPath: '/',
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should handle Venue as a valid search tab ID', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: { [PARAM_SEARCH_TYPE]: 'Venue' },
-      asPath: `/?${PARAM_SEARCH_TYPE}=Venue`,
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
-  });
-
-  it('should handle router.query parameter access', async () => {
-    mockedUseRouter.mockReturnValue({
-      query: {
-        [PARAM_SEARCH_TYPE]: EventTypeId.Course,
-        someOtherParam: 'value123',
-      },
-      asPath: `/?${PARAM_SEARCH_TYPE}=${EventTypeId.Course}&someOtherParam=value123`,
-      replace: vi.fn(),
-    } as any);
-
-    const module = await import('../useSearchTabsWithParams');
-    const useSearchTabsWithParams = module.default;
-
-    expect(typeof useSearchTabsWithParams).toBe('function');
+    await waitFor(() => {
+      expect(mockReplace).toHaveBeenCalledWith(
+        { query: { [PARAM_SEARCH_TYPE]: EventTypeId.Course } },
+        undefined,
+        { shallow: true }
+      );
+    });
   });
 });

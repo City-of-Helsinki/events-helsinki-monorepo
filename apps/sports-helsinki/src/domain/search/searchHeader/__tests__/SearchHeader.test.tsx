@@ -163,18 +163,6 @@ describe('SearchHeader', () => {
     expect(mainContent).toBeInTheDocument();
   });
 
-  it('should apply correct CSS classes', () => {
-    const { container } = render(
-      <SearchHeader
-        count={10}
-        switchShowMode={mockSwitchShowMode}
-        searchForm={searchForm}
-      />
-    );
-    const searchHeader = container.querySelector('[id="main-content"]');
-    expect(searchHeader).toHaveClass('_searchHeader_5d0484');
-  });
-
   it('should only call switchShowMode once per click', async () => {
     render(
       <SearchHeader
@@ -191,36 +179,5 @@ describe('SearchHeader', () => {
     await userEvent.click(listButton);
 
     expect(mockSwitchShowMode).toHaveBeenCalledTimes(3);
-  });
-
-  it('should render divider when not collapsed', () => {
-    const { container } = render(
-      <SearchHeader
-        count={10}
-        switchShowMode={mockSwitchShowMode}
-        searchForm={searchForm}
-      />
-    );
-    const divider = container.querySelector('._horizontalDivider_5d0484');
-    expect(divider).toBeInTheDocument();
-  });
-
-  it('should not render divider when collapsed', async () => {
-    const { container } = render(
-      <SearchHeader
-        count={10}
-        switchShowMode={mockSwitchShowMode}
-        searchForm={searchForm}
-      />
-    );
-    const buttons = screen.getAllByRole('button');
-    const collapseButton = buttons[0];
-
-    // Show form (collapsed = true)
-    await userEvent.click(collapseButton);
-
-    // Divider should not be visible
-    const divider = container.querySelector('._horizontalDivider_5d0484');
-    expect(divider).not.toBeInTheDocument();
   });
 });

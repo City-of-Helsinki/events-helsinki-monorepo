@@ -84,7 +84,7 @@ jobs:
         run: pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' run test --coverage
 
       - name: Run build for changed packages
-        run: pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' run build
+        run: pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' --if-present run build
 
       - name: Run storybook build for changed packages
         run: pnpm --filter '[origin/main]' --filter '!{apps/**}' --filter '!{proxies/**}' --filter '!events-helsinki-monorepo' --if-present run build-storybook

@@ -164,7 +164,7 @@
     "typescript": "5.8.3",
     "vite": "8.0.16",
     "vite-plugin-css-injected-by-js": "3.5.2",
-    "vitest": "4.1.2",
+    "vitest": "4.1.11",
     "vitest-axe": "0.1.0",
     "vitest-sonar-reporter": "2.0.4",
     "waait": "^1.0.5",

@@ -15,11 +15,9 @@ const ArticleDetails: React.FC<ArticleDetailsProps> = ({ keywords }) => {
 
   return (
     <div className={styles.tags}>
-      {[first, second]
-        .filter((t) => t)
-        .map((tag) => (
-          <Tag key={tag}>{tag}</Tag>
-        ))}
+      {[first, second].filter(Boolean).map((tag) => (
+        <Tag key={tag}>{tag}</Tag>
+      ))}
       {!!restKeywords.length && (
         <Tag className={styles.tagCount}>{`+${restKeywords.length}`}</Tag>
       )}

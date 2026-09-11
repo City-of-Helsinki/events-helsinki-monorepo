@@ -34,10 +34,10 @@ import {
 } from '../domain/search/eventSearch/utils';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type AppProps<P = any> = {
+export type AppProps<P = any> = Readonly<{
   pageProps: P;
   Component: React.ComponentType<P>;
-};
+}>;
 
 export type CustomPageProps = NavigationProviderProps & SSRConfig;
 

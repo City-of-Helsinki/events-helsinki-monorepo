@@ -265,6 +265,7 @@ export const getEventSearchVariables = ({
   );
 
   const clampedSuitableFor = clampAgeInput(suitableFor);
+  const sortedPlaces = places.sort((a, b) => a.localeCompare(b));
 
   return {
     [EVENT_SEARCH_FILTERS.TEXT]: !isEmpty(text) ? text?.join(',') : undefined, // NOTE: only *OngoingAnd supports Array.
@@ -282,7 +283,7 @@ export const getEventSearchVariables = ({
     keywordAnd,
     keywordNot: [...(keywordNot ?? []), ...HOBBIES_EXCLUDED_KEYWORDS],
     language,
-    location: places.sort((a, b) => a.localeCompare(b)),
+    location: sortedPlaces,
     pageSize,
     publisher,
     /**
@@ -363,8 +364,8 @@ export const getSearchFilters = (searchParams: URLSearchParams): Filters => {
     [EVENT_SEARCH_FILTERS.SUITABLE]: clampAgeInput(
       searchParams.get(EVENT_SEARCH_FILTERS.SUITABLE)
     ),
-    audienceMinAgeLt: searchParams.get(EVENT_SEARCH_FILTERS.MIN_AGE) || '',
-    audienceMaxAgeGt: searchParams.get(EVENT_SEARCH_FILTERS.MAX_AGE) || '',
+    audienceMinAgeLt: searchParams.get(EVENT_SEARCH_FILTERS.MIN_AGE) ?? '',
+    audienceMaxAgeGt: searchParams.get(EVENT_SEARCH_FILTERS.MAX_AGE) ?? '',
   };
 };
 

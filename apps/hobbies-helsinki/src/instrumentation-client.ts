@@ -6,10 +6,7 @@ import { beforeSend, beforeSendTransaction } from '@events-helsinki/components';
 import type { IntegrationFn } from '@sentry/core';
 import { thirdPartyErrorFilterIntegration } from '@sentry/core';
 import * as Sentry from '@sentry/nextjs';
-import {
-  captureRouterTransitionStart,
-  replayIntegration,
-} from '@sentry/nextjs';
+import { replayIntegration } from '@sentry/nextjs';
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   Sentry.init({
@@ -50,4 +47,4 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   });
 }
 
-export const onRouterTransitionStart = captureRouterTransitionStart;
+export { captureRouterTransitionStart as onRouterTransitionStart } from '@sentry/nextjs';

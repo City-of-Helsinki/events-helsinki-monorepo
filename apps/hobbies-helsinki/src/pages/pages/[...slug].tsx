@@ -249,7 +249,7 @@ function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
   if (uri.startsWith(AppConfig.cmsPagesContextPath)) {
     return uri;
   }
-  // TODO: get rid of this context path prefix if headless cms supports it
+  // NOTE: Keep the context path prefix while Headless CMS dynamic page URLs require it.
   // The workaround for Headless CMS makes all the dynamic cms pages
   // to be subpages for a page with slug 'pages'
   return `${AppConfig.cmsPagesContextPath}${uri}`;

@@ -26,11 +26,9 @@ const VenueDetails: React.FC<VenueDetailsProps> = ({ location }) => {
         </div>
       )}
       <div className={styles.tags}>
-        {[first, second]
-          .filter((t) => t)
-          .map((tag) => (
-            <Tag key={tag?.label}>{tag?.label ?? ''}</Tag>
-          ))}
+        {[first, second].filter(Boolean).map((tag) => (
+          <Tag key={tag?.label}>{tag?.label ?? ''}</Tag>
+        ))}
         {!!restKeywords.length && (
           <Tag className={styles.tagCount}>{`+${restKeywords.length}`}</Tag>
         )}

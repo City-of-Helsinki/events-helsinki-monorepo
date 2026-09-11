@@ -32,7 +32,7 @@ import type { AppLanguage } from '../../types';
 
 /**
  * A braedcrumb title of article archive in every language.
- * @deprecated Needed only while the CMS does not offer the article archive in the breadcrumb module.
+ * NOTE: Needed while the CMS does not offer the article archive in the breadcrumb module.
  * */
 export const defaultArticleArchiveBreadcrumbTitle: Record<AppLanguage, string> =
   {
@@ -265,7 +265,7 @@ export class HeadlessCMSHelper {
    * The article archive should always be the second item in the breadcrumbs list.
    * If the article archive is missing from the breadcrumbs, but is wanted to be included,
    * the withArticleArchiveBreadcrumb forces the article archive breadcrumb.
-   * @deprecated The breadcrumbs should be handled from the CMS-site and the HCRC-lib takes care of it.
+   * NOTE: The breadcrumbs should eventually be handled from the CMS-site and the HCRC-lib should take care of it.
    * While the article archive is never included in the breadcrumbs that the CMS serves,
    * this method fullfills the need.
    * */

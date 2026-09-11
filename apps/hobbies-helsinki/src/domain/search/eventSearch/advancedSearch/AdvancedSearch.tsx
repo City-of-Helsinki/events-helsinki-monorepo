@@ -14,7 +14,6 @@ import { useAdvancedSearchFormState } from './useAdvancedSearchFormState';
 interface AdvancedSearchProps {
   scrollToResultList: () => void;
   'data-testid'?: string;
-  children?: React.ReactNode;
 }
 
 export const AdvancedSearch: React.FC<AdvancedSearchProps> = ({

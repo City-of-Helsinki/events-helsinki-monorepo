@@ -1,4 +1,4 @@
-import type { ParsedUrlQueryInput } from 'querystring';
+import type { ParsedUrlQueryInput } from 'node:querystring';
 import { useLocale } from '@events-helsinki/components';
 import { useRouter } from 'next/router';
 import queryString from 'query-string';

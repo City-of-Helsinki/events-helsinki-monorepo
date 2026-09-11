@@ -1,4 +1,4 @@
-import type { ParsedUrlQueryInput } from 'querystring';
+import type { ParsedUrlQueryInput } from 'node:querystring';
 import type { FilterType } from '@events-helsinki/components';
 import {
   AgeFilter,

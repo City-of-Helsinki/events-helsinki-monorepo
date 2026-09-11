@@ -314,7 +314,7 @@ function _getURIQueryParameter(slugs: string[], locale: AppLanguage) {
   if (uri.startsWith(AppConfig.cmsArticlesContextPath)) {
     return uri;
   }
-  // TODO: get rid of this context path prefix if headless cms supports it
+  // NOTE: Keep the context path prefix while the Headless CMS article URL settings require it.
   // The Headless CMS needs the contextpath as a part of the URI
   // when it's included in the article URL settings
   return `${AppConfig.cmsArticlesContextPath}${uri}`;

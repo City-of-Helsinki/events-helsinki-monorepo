@@ -272,7 +272,7 @@ export const CAMP_KEYWORDS = [
   'yso:p25261', // retket
 ];
 
-// todo: replace with valid keyword ids
+// NOTE: Category filters use the currently valid Linked Events keyword ids.
 export const MAPPED_COURSE_CATEGORIES: Record<COURSE_CATEGORIES, string[]> = {
   [COURSE_CATEGORIES.MOVIE]: MOVIES_AND_MEDIA_COURSES_KEYWORDS,
   [COURSE_CATEGORIES.LITERATURE]: LITERATURE_COURSES_KEYWORDS,

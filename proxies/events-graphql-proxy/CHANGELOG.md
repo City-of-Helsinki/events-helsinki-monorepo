@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.7.1...events-graphql-proxy-v1.8.0) (2026-09-13)
+
+
+### Features
+
+* Events proxy placeIntegration test Refs: LIIKUNTA-793 ([ad2c1cf](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ad2c1cf4c45d6ca593544182c0ee0f9e92d9b814))
+* Events proxy tests Refs: LIIKUNTA-793 ([339b778](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/339b77861742e7f01e634e7057f5cd79ae5559dd))
+
 ## [1.7.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.7.0...events-graphql-proxy-v1.7.1) (2026-09-03)
 
 

@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.7.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.7...venue-graphql-proxy-v1.7.0) (2026-09-13)
+
+
+### Features
+
+* Venue proxy pure function tests Refs: LIIKUNTA-793 ([ebf067d](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ebf067d9f9342d65dc2bfc599cae18da0de3f39e))
+* Venue proxy test-server harness Refs: LIIKUNTA-793 ([c3f6162](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c3f616276b00957cac29613407dc6ac7a871ab28))
+
+
+### Bug Fixes
+
+* Venue proxy getPointFromLongAndLat Refs: LIIKUNTA-793 ([ec72a27](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/ec72a27b1279b05c61a2eb0537afe85d6643a90c))
+* Venue proxy test assertion Refs: LIIKUNTA-793 ([da1a96e](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/da1a96e452b8d38f3b63364ec3a6f6dca86d5c90))
+* Venue proxy testUtils types Refs: LIIKUNTA-793 ([d607eb0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/d607eb04ea912c95c42d39ea7fd45ad4b65271b2))
+
 ## [1.6.7](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.6.6...venue-graphql-proxy-v1.6.7) (2026-09-03)
 
 

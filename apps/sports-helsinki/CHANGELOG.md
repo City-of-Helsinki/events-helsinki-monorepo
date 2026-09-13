@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.3.1...sports-helsinki-v2.4.0) (2026-09-13)
+
+
+### Features
+
+* Sports-helsinki components Refs: LIIKUNTA-793 ([c7327a8](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/c7327a8abd5e71f15c60a865ff3a60e33c61ef8e))
+* Sports-helsinki hooks tests Refs: LIIKUNTA-793 ([67c0ac4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/67c0ac4afa8a33d720ab9c5bb3a20ebb612383f4))
+
+
+### Bug Fixes
+
+* FilterSummary sportsCategories contain skiing Refs: LIIKUNTA-793 ([54b3121](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/54b3121b076553368f0268e46491e49573bb1183))
+* UseScrollToSearchResultItem renderHook Refs: LIIKUNTA-793 ([e6502ba](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/e6502ba8ff6b73ab889e78f2add482e7f2c82dfa))
+* UseSearchTabsWithParams renderHook Refs: LIIKUNTA-793 ([b550155](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b550155348ac21785ee7cb3e951151417d2fbfd2))
+* UseSportsRHHCConfig test teardown Refs: LIIKUNTA-793 ([fe35cbb](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/fe35cbba8333ec9e0f23e13bc6ce8bf180444201))
+
 ## [2.3.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.3.0...sports-helsinki-v2.3.1) (2026-09-03)
 
 

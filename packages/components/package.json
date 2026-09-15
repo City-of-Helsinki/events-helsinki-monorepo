@@ -154,7 +154,7 @@
     "tsup": "^8.0.0",
     "typescript": "5.8.3",
     "vite": "8.0.16",
-    "vitest": "4.1.2",
+    "vitest": "4.1.11",
     "vitest-axe": "0.1.0",
     "vitest-indexeddb": "0.0.0",
     "vitest-sonar-reporter": "2.0.4",

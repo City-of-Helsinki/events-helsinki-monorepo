@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.4.2...hobbies-helsinki-v3.4.3) (2026-09-16)
+
+
+### Bug Fixes
+
+* Sonar maintainability fixes for hobbies-ui ([2c9a92b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2c9a92b78777340963e029ee932f22739a289956))
+
 ## [3.4.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.4.1...hobbies-helsinki-v3.4.2) (2026-09-16)
 
 

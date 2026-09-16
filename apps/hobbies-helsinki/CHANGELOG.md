@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.4.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.4.1...hobbies-helsinki-v3.4.2) (2026-09-16)
+
+
+### Dependencies
+
+* Bump next from 16.2.12 to 16.3.3 ([49c2880](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/49c28806466b6b2ac18a8a4a9932d163a249c048))
+* Bump vitest from 4.1.2 to 4.1.11 ([86c3c5c](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/86c3c5cd4b882d8830ca3c3935388e66c798b554))
+* Vitest/coverage bump Refs: RATY-357 ([727a11f](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/727a11f39a9e29a32b9d65d2c1ddb22a786c27d7))
+
 ## [3.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.4.0...hobbies-helsinki-v3.4.1) (2026-09-03)
 
 

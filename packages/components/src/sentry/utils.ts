@@ -1,5 +1,3 @@
-import { normalize } from '@sentry/core';
-import isObject from 'lodash/isObject';
 import snakeCase from 'lodash/snakeCase';
 
 // https://github.com/getsentry/sentry-python/blob/8094c9e4462c7af4d73bfe3b6382791f9949e7f0/sentry_sdk/scrubber.py#L14
@@ -51,32 +49,51 @@ const SENTRY_DENYLIST = new Set(
   // Custom denylist entries for this project can be added here
 );
 
-export const cleanSensitiveData = (data: Record<string, unknown>) => {
-  const normalized = normalize(data);
-  const cleaned: Record<string, unknown> = {};
+const MAX_CLEAN_DEPTH = 32;
 
-  for (const [key, value] of Object.entries(normalized)) {
-    if (SENTRY_DENYLIST.has(key) || SENTRY_DENYLIST.has(snakeCase(key))) {
-      // skip this key
-      continue;
-    } else if (Array.isArray(value)) {
-      cleaned[key] = value.map((item) =>
-        isObject(item)
-          ? cleanSensitiveData(item as Record<string, unknown>)
-          : item
-      );
-    } else if (isObject(value)) {
-      cleaned[key] = cleanSensitiveData(value as Record<string, unknown>);
-    } else {
-      cleaned[key] = value;
-    }
+export const cleanSensitiveData = (
+  data: unknown,
+  visited = new WeakMap<object, unknown>(),
+  depth = 0,
+  maxDepth = MAX_CLEAN_DEPTH
+): unknown => {
+  if (depth > maxDepth) {
+    return '[MaxDepthExceeded]';
   }
 
-  return cleaned;
+  if (typeof data !== 'object' || data === null) {
+    return data;
+  }
+
+  // To avoid infinite recursion for circular references
+  if (visited.has(data)) {
+    return visited.get(data);
+  }
+
+  if (Array.isArray(data)) {
+    const result: unknown[] = [];
+    visited.set(data, result);
+    for (const item of data) {
+      result.push(cleanSensitiveData(item, visited, depth + 1, maxDepth));
+    }
+    return result;
+  }
+
+  const result: Record<string, unknown> = {};
+  visited.set(data, result);
+
+  for (const [key, value] of Object.entries(data)) {
+    if (SENTRY_DENYLIST.has(key) || SENTRY_DENYLIST.has(snakeCase(key))) {
+      continue; // omit sensitive key
+    }
+    result[key] = cleanSensitiveData(value, visited, depth + 1, maxDepth);
+  }
+
+  return result;
 };
 
 const cleanSentryPayload = <T extends object>(payload: T): T =>
-  cleanSensitiveData(payload as Record<string, unknown>) as T;
+  cleanSensitiveData(payload) as T;
 
 /**
  * Sentry beforeSend hook - processes events before sending to Sentry

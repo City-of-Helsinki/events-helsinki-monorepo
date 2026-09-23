@@ -55,6 +55,34 @@ describe('sentry utils', () => {
     expect(cleaned).toStrictEqual(nestedSensitivePayloadSanitized);
   });
 
+  it('does not recurse infinitely on circular references', () => {
+    const circular: Record<string, unknown> = { topLevel: 'visible' };
+    circular.self = circular;
+
+    const cleaned = cleanSensitiveData(circular) as Record<string, unknown>;
+
+    expect(cleaned.topLevel).toBe('visible');
+    expect(cleaned.self).toBe(cleaned);
+  });
+
+  it('caps recursion at the max depth instead of exhausting the stack', () => {
+    let deeplyNested: Record<string, unknown> = { value: 'bottom' };
+    for (let i = 0; i < 40; i++) {
+      deeplyNested = { nested: deeplyNested };
+    }
+
+    const cleaned = cleanSensitiveData(deeplyNested);
+
+    let cursor: unknown = cleaned;
+    let depth = 0;
+    while (typeof cursor === 'object' && cursor !== null) {
+      cursor = (cursor as Record<string, unknown>).nested;
+      depth++;
+    }
+    expect(cursor).toBe('[MaxDepthExceeded]');
+    expect(depth).toBeLessThan(40);
+  });
+
   it.each([
     {
       name: 'beforeSend',

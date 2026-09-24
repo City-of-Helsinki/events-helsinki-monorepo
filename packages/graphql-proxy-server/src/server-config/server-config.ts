@@ -22,6 +22,8 @@ export type ServerConfig = SentryConfig &
     disableWinstonLogging?: boolean; // process.env.GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING
     introspection?: boolean; // process.env.GRAPHQL_PROXY_INTROSPECTION
     formatError?: ApolloServerOptions<object>['formatError'];
+    release?: string; // process.env.GRAPHQL_PROXY_RELEASE
+    appVersion: string; // package.json version,
   };
 
 // singleton pattern

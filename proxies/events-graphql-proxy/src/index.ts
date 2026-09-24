@@ -9,6 +9,7 @@ import type {
   ContextConstructorArgs,
 } from '@events-helsinki/graphql-proxy-server';
 import * as dotenv from 'dotenv';
+import packageJson from '../package.json' with { type: 'json' };
 import AppConfig from './config/AppConfig.js';
 import EventContext from './context/EventContext.js';
 import schema from './schema/index.js';
@@ -42,6 +43,8 @@ const config: ServerConfig = {
     // be manipulated in other ways, as long as it's returned.
     return formattedError;
   },
+  release: AppConfig.release,
+  appVersion: packageJson.version,
 };
 
 (async () => {

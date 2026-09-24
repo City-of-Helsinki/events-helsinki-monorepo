@@ -20,6 +20,10 @@ class AppConfig {
     return process.env.GRAPHQL_PROXY_SENTRY_DSN;
   }
 
+  static get release() {
+    return process.env.GRAPHQL_PROXY_RELEASE;
+  }
+
   static get enableWinstonLogging() {
     const isLoggingDisabled = Boolean(
       parseEnvValue(process.env.GRAPHQL_PROXY_DISABLE_WINSTON_LOGGING, true)

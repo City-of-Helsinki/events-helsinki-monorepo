@@ -104,7 +104,15 @@ export const startServer = async <
     '/readiness',
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (request: express.Request, response: express.Response) => {
-      checkIsServerReady(response);
+      if (serverIsReady) {
+        response.status(200).json({
+          status: 'ok',
+          release: serverConfig.release,
+          version: serverConfig.appVersion,
+        });
+      } else {
+        response.status(500).send(SERVER_IS_NOT_READY);
+      }
     }
   );
   await new Promise<void>((resolve) =>

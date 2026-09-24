@@ -4,6 +4,7 @@ import type {
   ContextConstructorArgs,
 } from '@events-helsinki/graphql-proxy-server';
 import * as dotenv from 'dotenv';
+import packageJson from '../package.json' with { type: 'json' };
 import AppConfig from './config/AppConfig.js';
 import VenueContext from './context/VenueContext.js';
 import schema from './schema/index.js';
@@ -18,6 +19,8 @@ const config: ServerConfig = {
   disableWinstonLogging: AppConfig.enableWinstonLogging,
   introspection: AppConfig.enableIntrospection,
   languages: [...AppConfig.supportedLocales],
+  release: AppConfig.release,
+  appVersion: packageJson.version,
 };
 
 (async () => {

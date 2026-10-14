@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.4.0...sports-helsinki-v2.4.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* Readiness data use version Refs: RATY-355 ([38a5e43](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/38a5e43fb45ee6ddccbefd8da64a7432bd1601ee))
+
 ## [2.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.3.1...sports-helsinki-v2.4.0) (2026-09-16)
 
 

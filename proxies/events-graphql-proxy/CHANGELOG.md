@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.8.0...events-graphql-proxy-v1.9.0) (2026-10-14)
+
+
+### Features
+
+* Proxy enhance readiness Refs: LIIKUNTA-796 ([2304e77](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/2304e77562cba124aedea8d3b19d98d8ba5e6538))
+
 ## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.7.1...events-graphql-proxy-v1.8.0) (2026-09-16)
 
 

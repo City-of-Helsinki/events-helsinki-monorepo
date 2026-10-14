@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.3.2...events-helsinki-v2.3.3) (2026-10-14)
+
+
+### Bug Fixes
+
+* Readiness data use version Refs: RATY-355 ([38a5e43](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/38a5e43fb45ee6ddccbefd8da64a7432bd1601ee))
+
 ## [2.3.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.3.1...events-helsinki-v2.3.2) (2026-09-16)
 
 

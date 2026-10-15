@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.3.3...events-helsinki-v2.3.4) (2026-10-15)
+
+
+### Dependencies
+
+* Next 16.4.1 critical patch Refs: RATY-401 ([4a48796](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4a487968a0363f3db18e7fe04195b366937f8203))
+
 ## [2.3.3](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.3.2...events-helsinki-v2.3.3) (2026-10-14)
 
 

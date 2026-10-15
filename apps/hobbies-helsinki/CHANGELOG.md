@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.5](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.4.4...hobbies-helsinki-v3.4.5) (2026-10-15)
+
+
+### Dependencies
+
+* Next 16.4.1 critical patch Refs: RATY-401 ([4a48796](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/4a487968a0363f3db18e7fe04195b366937f8203))
+
 ## [3.4.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.4.3...hobbies-helsinki-v3.4.4) (2026-10-14)
 
 

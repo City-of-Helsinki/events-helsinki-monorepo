@@ -172,12 +172,12 @@ class NextPageLister {
    * The absolute path to the Next.js server-side pages directory (`.next/server/pages`).
    * @private
    */
-  private pagesServerDir: string;
+  private readonly pagesServerDir: string;
   /**
    * The logger instance used for static generation related messages.
    * @private
    */
-  protected staticGenerationLogger: Logger;
+  protected readonly staticGenerationLogger: Logger;
 
   /**
    * Constructs an instance of `NextPageLister`.

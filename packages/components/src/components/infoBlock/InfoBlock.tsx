@@ -1,4 +1,4 @@
-import type { UrlObject } from 'url';
+import type { UrlObject } from 'node:url';
 import type { SecondaryLink } from '@city-of-helsinki/react-helsinki-headless-cms';
 import { Link } from '@city-of-helsinki/react-helsinki-headless-cms';
 import classNames from 'classnames';
@@ -9,30 +9,30 @@ import Text from '../text/Text';
 import styles from './infoBlock.module.scss';
 
 type InfoBlockContentLinkProps = {
-  label: string;
-  href: string | UrlObject;
-  iconRight?: React.JSX.Element | null;
-  Component?: typeof Link | typeof SecondaryLink;
+  readonly label: string;
+  readonly href: string | UrlObject;
+  readonly iconRight?: React.JSX.Element | null;
+  readonly Component?: typeof Link | typeof SecondaryLink;
 };
 
 type InfoBlockContentListProps = {
-  items: Array<string | React.ReactElement<InfoBlockContentLinkProps>>;
-  inline?: boolean;
-  className?: string;
+  readonly items: Array<string | React.ReactElement<InfoBlockContentLinkProps>>;
+  readonly inline?: boolean;
+  readonly className?: string;
 };
 
 type InfoBlockCollapseProps = {
-  icon: React.ReactElement;
-  items: Array<string | React.ReactElement>;
-  className?: string;
-  title: string;
-  titleClassName?: string;
+  readonly icon: React.ReactElement;
+  readonly items: Array<string | React.ReactElement>;
+  readonly className?: string;
+  readonly title: string;
+  readonly titleClassName?: string;
 };
 
 type InfoBlockExpandProps = {
-  lines: string[];
-  className?: string;
-  initialVisibleLinesCount?: number;
+  readonly lines: string[];
+  readonly className?: string;
+  readonly initialVisibleLinesCount?: number;
 };
 
 type InfoBlockContent =
@@ -83,7 +83,7 @@ function InfoBlockList({
   inline,
   className,
 }: InfoBlockContentListProps) {
-  const nonEmptyItems = items.filter((item) => item);
+  const nonEmptyItems = items.filter(Boolean);
 
   if (nonEmptyItems.length === 0) {
     return null;
@@ -116,7 +116,7 @@ function InfoBlockCollapse({
   const { isOpen, buttonProps, contentProps } = useAccordion({
     initiallyOpen: false,
   });
-  const nonEmptyItems = items.filter((item) => item);
+  const nonEmptyItems = items.filter(Boolean);
 
   if (nonEmptyItems.length === 0) {
     return null;
@@ -148,7 +148,7 @@ function InfoBlockExpandButton({
   children,
   className,
   ...delegated
-}: React.HTMLProps<HTMLButtonElement>) {
+}: Readonly<React.HTMLProps<HTMLButtonElement>>) {
   return (
     <button
       {...delegated}
@@ -176,11 +176,11 @@ function InfoBlockExpand({
 }
 
 type Props = {
-  icon: React.ReactElement;
-  name: string;
-  contents: InfoBlockContent[];
-  target?: 'body' | 'card';
-  headingLevel?: 'h2' | 'h3' | 'h4';
+  readonly icon: React.ReactElement;
+  readonly name: string;
+  readonly contents: InfoBlockContent[];
+  readonly target?: 'body' | 'card';
+  readonly headingLevel?: 'h2' | 'h3' | 'h4';
 };
 
 function InfoBlock({

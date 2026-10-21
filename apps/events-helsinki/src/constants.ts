@@ -93,9 +93,9 @@ const additionalAdultKeywordExclusion = [
 /**
  * All but adult tager age group keywords from `AGE_GROUP_KEYWORDS`.
  */
-const targetAgeGroupKeywordsWithoutAdults = [
-  ...Object.values(AGE_GROUP_KEYWORDS).flat(),
-].filter((item) => !AGE_GROUP_KEYWORDS['adults'].includes(item));
+const targetAgeGroupKeywordsWithoutAdults = Object.values(AGE_GROUP_KEYWORDS)
+  .flat()
+  .filter((item) => !AGE_GROUP_KEYWORDS['adults'].includes(item));
 
 /**
  * A comprehensive list of all keywords that should be excluded

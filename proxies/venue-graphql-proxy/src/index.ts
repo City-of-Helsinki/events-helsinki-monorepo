@@ -23,11 +23,10 @@ const config: ServerConfig = {
   appVersion: packageJson.version,
 };
 
-(async () => {
+void (async () => {
   await startServer({
     config,
     schema,
-    contextCallback: async (args: ContextConstructorArgs) =>
-      new VenueContext(args),
+    contextCallback: (args: ContextConstructorArgs) => new VenueContext(args),
   });
 })();

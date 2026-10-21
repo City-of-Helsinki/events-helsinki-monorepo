@@ -25,5 +25,5 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const pathnames = APP_LANGUAGES.map((lang) => `/${lang}`);
-  revalidateApi.revalidateView(req, res, { pathnames });
+  await revalidateApi.revalidateView(req, res, { pathnames });
 }

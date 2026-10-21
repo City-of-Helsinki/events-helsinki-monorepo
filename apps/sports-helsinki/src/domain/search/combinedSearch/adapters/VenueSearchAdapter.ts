@@ -37,14 +37,14 @@ class VenueSearchAdapter implements CombinedSearchAdapter<VenueSearchParams> {
   providerTypes: VenueSearchParams['providerTypes'];
   serviceOwnerTypes: VenueSearchParams['serviceOwnerTypes'];
   mustHaveReservableResource: VenueSearchParams['mustHaveReservableResource'];
-  openAt?: VenueSearchParams['openAt'];
+  openAt: VenueSearchParams['openAt'];
   administrativeDivisionIds?: VenueSearchParams['administrativeDivisionIds'];
   orderByName: VenueSearchParams['orderByName'];
   orderByDistance: VenueSearchParams['orderByDistance'];
   orderByAccessibilityProfile: VenueSearchParams['orderByAccessibilityProfile'];
   showCultureAndLeisureDivisionFirst: VenueSearchParams['showCultureAndLeisureDivisionFirst'];
-  after?: VenueSearchParams['after'];
-  first?: VenueSearchParams['first'];
+  after: VenueSearchParams['after'];
+  first: VenueSearchParams['first'];
 
   /**
    * Map the combined search form fields to the venue search query variables.

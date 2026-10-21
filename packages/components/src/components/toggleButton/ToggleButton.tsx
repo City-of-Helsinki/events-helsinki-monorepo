@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import type { MutableRefObject } from 'react';
+import type { RefObject } from 'react';
 import React from 'react';
 
 import styles from './toggleButton.module.scss';
 
 type Props = {
-  buttonRef?: MutableRefObject<HTMLButtonElement | null>;
+  buttonRef?: RefObject<HTMLButtonElement | null>;
   icon?: React.ReactElement;
   isSelected: boolean;
   isExpanded?: boolean;

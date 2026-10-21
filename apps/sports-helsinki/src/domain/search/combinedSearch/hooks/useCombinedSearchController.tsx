@@ -23,7 +23,7 @@ export function useCombinedSearchController() {
     >[0]
   ) => {
     const query = combinedSearchFormAdapter.getURLQuery();
-    (async () => await router.push({ query }, undefined, options))();
+    void router.push({ query }, undefined, options);
   };
   return {
     combinedSearchFormAdapter,

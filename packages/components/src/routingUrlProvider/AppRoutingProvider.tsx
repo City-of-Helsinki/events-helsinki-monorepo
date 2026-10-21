@@ -16,15 +16,26 @@ export default function NavigationProvider({
   getKeywordOnClickHandler,
   children,
 }: AppRoutingProviderProps) {
-  const context = {
-    getCardUrl,
-    getEventUrl,
-    getEventListLinkUrl,
-    getOrganizationSearchUrl,
-    getHelsinkiOnlySearchUrl,
-    getPlainEventUrl,
-    getKeywordOnClickHandler,
-  };
+  const context = React.useMemo(
+    () => ({
+      getCardUrl,
+      getEventUrl,
+      getEventListLinkUrl,
+      getOrganizationSearchUrl,
+      getHelsinkiOnlySearchUrl,
+      getPlainEventUrl,
+      getKeywordOnClickHandler,
+    }),
+    [
+      getCardUrl,
+      getEventUrl,
+      getEventListLinkUrl,
+      getOrganizationSearchUrl,
+      getHelsinkiOnlySearchUrl,
+      getPlainEventUrl,
+      getKeywordOnClickHandler,
+    ]
+  );
   return (
     <AppRoutingContext.Provider value={context}>
       {children}

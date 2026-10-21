@@ -4,6 +4,7 @@ export const getPreviewDataMaxAge = (token: string): number => {
     // value in seconds
     return Number(content.exp) - Number(content.iat);
   } catch (_) {
+    // Invalid token data is treated as unavailable.
     return 0;
   }
 };
@@ -18,8 +19,9 @@ export const getExpirationTime = (token?: string, date?: Date): number => {
     // value in minutes, rounded to next int
     const expires = Number(content.exp) - refDate.getTime() / 1000;
     // if negative => expired
-    return expires > 0 ? expires : 0;
+    return Math.max(expires, 0);
   } catch (_) {
+    // Invalid token data is treated as expired.
     return 0;
   }
 };

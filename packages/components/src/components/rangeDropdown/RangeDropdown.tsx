@@ -68,7 +68,7 @@ const RangeDropdown: React.FC<RangeDropdownProps> = ({
   const handleInputChange = (inputType: RANGE_INPUT, val: string) => {
     // extra check for negative values
     if (
-      val.match(/^-?\d\d?$/) &&
+      /^-?\d\d?$/.exec(val) &&
       (val < minInputStartValue || val > maxInputEndValue)
     ) {
       return;

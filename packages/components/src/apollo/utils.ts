@@ -83,7 +83,7 @@ export function initializeApolloClient<
   createClient,
 }: InitApolloClientConfig<TCacheShape, Client>) {
   // For SSG and SSR always create a new Apollo Client
-  if (typeof globalThis.window === 'undefined') {
+  if (globalThis.window === undefined) {
     return createClient();
   }
 

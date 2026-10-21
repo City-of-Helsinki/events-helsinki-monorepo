@@ -32,7 +32,7 @@ const VenuePageMeta: React.FC<Props> = ({ venue }) => {
         name="keywords"
         content={venue.ontologyWords
           .map((keyword) => keyword?.label?.toLowerCase())
-          .filter((k) => k)
+          .filter(Boolean)
           .join(', ')}
       />
       <link rel="icon" href={meta?.favIconUrl} sizes="any" />

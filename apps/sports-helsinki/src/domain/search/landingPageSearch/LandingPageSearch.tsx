@@ -37,9 +37,7 @@ const Search: React.FC = () => {
     t,
     CATEGORY_CATALOG.sportsCategories.landingPage
   ).filter(
-    (category) =>
-      !category.seasons ||
-      category.seasons.some((season) => season === currentSeason)
+    (category) => !category.seasons || category.seasons.includes(currentSeason)
   );
 
   return (

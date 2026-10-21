@@ -5,10 +5,9 @@ import useMatomoInstance from '../matomo/useMatomo';
 import MatomoWrapper from '../matomoWrapper/MatomoWrapper';
 
 type UserTrackingFeaturesProps = {
-  hasFeedBack: boolean;
-  feedbackWithPadding: boolean;
-  cookieBanner?: React.ReactNode;
-  children?: React.ReactNode[];
+  readonly hasFeedBack: boolean;
+  readonly feedbackWithPadding: boolean;
+  readonly cookieBanner?: React.ReactNode;
 };
 
 export default function UserTrackingFeatures({

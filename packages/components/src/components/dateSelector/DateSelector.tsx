@@ -144,6 +144,7 @@ const DateSelector: FunctionComponent<DateSelectorProps> = ({
       dateTypeOptions.indexOf(a) < dateTypeOptions.indexOf(b) ? -1 : 1;
 
     const dateTypeLabels = dateTypes
+      .slice()
       .sort(sortDateTypes)
       .map((val) => translateValue('common:dateSelector.dateType', val, t));
 

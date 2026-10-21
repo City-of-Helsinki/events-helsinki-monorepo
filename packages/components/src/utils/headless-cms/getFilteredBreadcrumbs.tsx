@@ -5,9 +5,9 @@ const defaultExcludedBreadcrumbBasePaths = ['/pages'];
 
 export const defaultExcludedBreadcrumbPaths = [
   ...defaultExcludedBreadcrumbBasePaths,
-  ...defaultExcludedBreadcrumbBasePaths
-    .map((pathname) => APP_LANGUAGES.map((lang) => `/${lang}${pathname}`))
-    .flat(),
+  ...defaultExcludedBreadcrumbBasePaths.flatMap((pathname) =>
+    APP_LANGUAGES.map((lang) => `/${lang}${pathname}`)
+  ),
 ];
 
 /**

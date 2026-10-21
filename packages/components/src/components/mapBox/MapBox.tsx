@@ -13,14 +13,14 @@ import Text from '../text/Text';
 import styles from './mapBox.module.scss';
 
 type Props = {
-  title: string;
-  serviceMapUrl: string;
-  openMapUrl: string;
-  placeName: string;
-  placeAddress: string;
-  googleDirectionsLink: string;
-  hslDirectionsLink: string;
-  accessibilitySentences?: React.JSX.Element;
+  readonly title: string;
+  readonly serviceMapUrl: string;
+  readonly openMapUrl: string;
+  readonly placeName: string;
+  readonly placeAddress: string;
+  readonly googleDirectionsLink: string;
+  readonly hslDirectionsLink: string;
+  readonly accessibilitySentences?: React.JSX.Element;
 };
 
 function MapBox({
@@ -40,7 +40,7 @@ function MapBox({
 
   const handleConsentPageRedirect = () => {
     if (consentUrl) {
-      router.push(`${consentUrl}?returnPath=${router.asPath}`);
+      void router.push(`${consentUrl}?returnPath=${router.asPath}`);
     }
   };
   return (

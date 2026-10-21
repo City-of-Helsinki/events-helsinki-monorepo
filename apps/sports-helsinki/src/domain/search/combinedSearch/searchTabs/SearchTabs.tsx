@@ -28,9 +28,9 @@ export type TabDataType = {
 };
 
 type TabsPropType = {
-  id: TabsContextType['activeTab'];
-  children: ButtonProps['children'] | React.JSX.Element;
-  theme?: ButtonTheme | ButtonPresetTheme;
+  readonly id: TabsContextType['activeTab'];
+  readonly children: ButtonProps['children'] | React.JSX.Element;
+  readonly theme?: ButtonTheme | ButtonPresetTheme;
 };
 
 function SearchTab({ id, children, theme }: TabsPropType) {
@@ -64,13 +64,13 @@ function SearchTab({ id, children, theme }: TabsPropType) {
 function SearchTabList({
   children,
 }: {
-  children: React.ReactComponentElement<typeof SearchTab>[];
+  readonly children: React.ReactComponentElement<typeof SearchTab>[];
 }) {
   return <div className={styles.tabs}>{children}</div>;
 }
 
 type SearchTabListMobileProps = {
-  data: TabDataType[];
+  readonly data: TabDataType[];
 };
 
 function SearchTabListMobile({ data }: SearchTabListMobileProps) {
@@ -132,7 +132,6 @@ function SearchTabListMobile({ data }: SearchTabListMobileProps) {
 type SearchTabContentProps = {
   id: string;
   children: React.ReactNode;
-  onClick?: () => void;
 };
 
 function SearchTabPanelContent({ id, children }: SearchTabContentProps) {
@@ -143,8 +142,8 @@ function SearchTabPanelContent({ id, children }: SearchTabContentProps) {
 }
 
 type SearchTabsProps = {
-  initTab: SearchTabId;
-  children: React.ReactNode;
+  readonly initTab: SearchTabId;
+  readonly children: React.ReactNode;
 };
 
 function SearchTabs({ initTab, children }: SearchTabsProps) {
@@ -154,8 +153,11 @@ function SearchTabs({ initTab, children }: SearchTabsProps) {
     [EventTypeId.General]: null,
     [EventTypeId.Course]: null,
   });
-  const setResultCount = (id: SearchTabId, count: number | null) =>
-    setResultCounts((prevState) => ({ ...prevState, [id]: count }));
+  const setResultCount = React.useCallback(
+    (id: SearchTabId, count: number | null) =>
+      setResultCounts((prevState) => ({ ...prevState, [id]: count })),
+    []
+  );
 
   // Set the initTab as an active tab if it changes
   React.useEffect(() => {
@@ -164,7 +166,10 @@ function SearchTabs({ initTab, children }: SearchTabsProps) {
 
   return (
     <TabsContext.Provider
-      value={{ activeTab, setActiveTab, resultCounts, setResultCount }}
+      value={React.useMemo(
+        () => ({ activeTab, setActiveTab, resultCounts, setResultCount }),
+        [activeTab, resultCounts, setResultCount]
+      )}
     >
       {children}
     </TabsContext.Provider>
@@ -172,8 +177,8 @@ function SearchTabs({ initTab, children }: SearchTabsProps) {
 }
 
 type SearchTabLabelProps = {
-  id?: TabsContextType['activeTab'];
-  label: string;
+  readonly id?: TabsContextType['activeTab'];
+  readonly label: string;
 };
 
 function SearchTabLabel({ id, label }: SearchTabLabelProps) {

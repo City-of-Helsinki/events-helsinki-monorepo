@@ -90,11 +90,9 @@ export const sortExtendedCategoryOptionsByList = (
   const indexB = categoryIndexMap.get(b.value);
 
   // 2. Determine effective indices, placing unfound items at the end
-  const effectiveIndexA =
-    indexA === undefined ? sortedHobbyCategories.length : indexA;
+  const effectiveIndexA = indexA ?? sortedHobbyCategories.length;
 
-  const effectiveIndexB =
-    indexB === undefined ? sortedHobbyCategories.length : indexB;
+  const effectiveIndexB = indexB ?? sortedHobbyCategories.length;
 
   // 3. Return the difference
   return effectiveIndexA - effectiveIndexB;
@@ -265,7 +263,7 @@ export const getEventSearchVariables = ({
   );
 
   const clampedSuitableFor = clampAgeInput(suitableFor);
-  const sortedPlaces = places.sort((a, b) => a.localeCompare(b));
+  const sortedPlaces = [...places].sort((a, b) => a.localeCompare(b));
 
   return {
     [EVENT_SEARCH_FILTERS.TEXT]: !isEmpty(text) ? text?.join(',') : undefined, // NOTE: only *OngoingAnd supports Array.

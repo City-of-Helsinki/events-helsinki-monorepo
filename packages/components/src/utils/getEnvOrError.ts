@@ -7,7 +7,7 @@
  */
 export default function getEnvOrError(variable?: string, name?: string) {
   if (!variable) {
-    throw Error(`Environment variable with name ${name} was not found`);
+    throw new Error(`Environment variable with name ${name} was not found`);
   }
 
   return variable;

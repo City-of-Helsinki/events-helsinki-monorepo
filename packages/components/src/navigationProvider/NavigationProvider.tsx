@@ -13,7 +13,10 @@ export default function NavigationProvider({
   languages,
   children,
 }: NavigationProviderProps) {
-  const context = { headerMenu, headerUniversalBarMenu, footerMenu, languages };
+  const context = React.useMemo(
+    () => ({ headerMenu, headerUniversalBarMenu, footerMenu, languages }),
+    [headerMenu, headerUniversalBarMenu, footerMenu, languages]
+  );
   return (
     <NavigationContext.Provider value={context}>
       {children}

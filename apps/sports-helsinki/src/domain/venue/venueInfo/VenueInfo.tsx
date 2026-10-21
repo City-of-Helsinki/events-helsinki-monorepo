@@ -33,10 +33,10 @@ import styles from './venueInfo.module.scss';
 
 const OpeningHoursInfo = ({ venue: { connections } }: { venue: Venue }) => {
   const { t } = useVenueTranslation();
-  const sectionTypes = ['OPENING_HOURS', 'OPENING_HOUR_OBJECT'];
+  const sectionTypes = new Set(['OPENING_HOURS', 'OPENING_HOUR_OBJECT']);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const connectionOpeningHoursSectionsContents: any[] = connections
-    ?.filter((item) => sectionTypes.includes(item?.sectionType || ''))
+    ?.filter((item) => sectionTypes.has(item?.sectionType || ''))
     ?.map((item) => item?.name);
   const connectionOpeningHoursSectionsLines =
     connectionOpeningHoursSectionsContents.join('\n\n').split('\n');
@@ -103,9 +103,13 @@ const ContactDetailsInfo = ({
             </li>
           )}
         </ul>
-        {contactDetailsSectionsContents?.map((contact, i) => (
+        {contactDetailsSectionsContents?.map((contact) => (
           <ul
-            key={`contact-details-other-${i}`}
+            key={`contact-details-other-${JSON.stringify([
+              contact?.name,
+              contact?.phone,
+              contact?.url,
+            ])}`}
             className={classNames(styles.list, styles.other)}
           >
             {contact?.name && <li>{contact.name}</li>}

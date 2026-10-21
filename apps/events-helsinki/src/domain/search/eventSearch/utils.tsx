@@ -143,7 +143,7 @@ const _getTargetAgeGroupSearchVariables = ({
   keywordOrSet3 = [],
   keywordNot = [],
 }: {
-  targetAgeGroup: AgeGroup | string | undefined;
+  targetAgeGroup: string | undefined;
   keywordOrSet3?: string[];
   keywordNot?: string[];
 }) => {
@@ -263,7 +263,7 @@ export const getEventSearchVariables = ({
     keywordAnd,
     keywordNot,
     language,
-    location: places.sort((a, b) => a.localeCompare(b)),
+    location: [...places].sort((a, b) => a.localeCompare(b)),
     pageSize,
     publisher,
     /**

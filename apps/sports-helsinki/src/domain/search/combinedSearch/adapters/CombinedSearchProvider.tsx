@@ -60,7 +60,7 @@ function useGetCombinedSearchContext(): UseGetCombinedSearchContextReturnType {
 export function CombinedSearchProvider({
   children,
 }: {
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
 }) {
   const { contextValue } = useGetCombinedSearchContext();
   return (

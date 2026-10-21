@@ -21,8 +21,8 @@ export interface DateRangePickerProps {
   startDate: Date | null;
   onChangeEndDate: (date: Date | null) => void;
   onChangeStartDate: (date: Date | null) => void;
-  startDateInputRef?: React.MutableRefObject<HTMLInputElement | null>;
-  endDateInputRef?: React.MutableRefObject<HTMLInputElement | null>;
+  startDateInputRef?: React.RefObject<HTMLInputElement | null>;
+  endDateInputRef?: React.RefObject<HTMLInputElement | null>;
 }
 
 const DateRangePicker: React.FC<DateRangePickerProps> = ({

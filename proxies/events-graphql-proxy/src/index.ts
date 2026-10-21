@@ -1,5 +1,5 @@
-import * as path from 'path';
-import { fileURLToPath } from 'url';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   ignorableGraphqlErrorCodes,
   startServer,
@@ -47,11 +47,10 @@ const config: ServerConfig = {
   appVersion: packageJson.version,
 };
 
-(async () => {
+void (async () => {
   await startServer({
     config,
     schema,
-    contextCallback: async (args: ContextConstructorArgs) =>
-      new EventContext(args),
+    contextCallback: (args: ContextConstructorArgs) => new EventContext(args),
   });
 })();

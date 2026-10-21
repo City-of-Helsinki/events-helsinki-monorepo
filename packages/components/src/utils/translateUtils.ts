@@ -2,7 +2,7 @@ import camelCase from 'lodash/camelCase';
 import startCase from 'lodash/startCase';
 
 const toPascalCase = (str: string) =>
-  startCase(camelCase(str)).replace(/ /g, '');
+  startCase(camelCase(str)).replaceAll(' ', '');
 
 /**
  * Translate a single value
@@ -12,13 +12,12 @@ export const translateValue = (
   value: string,
   t: (s: string) => string
 ): string => {
-  return t(
-    prefix
-      ? `${prefix}${
-          prefix.endsWith('.') ? camelCase(value) : toPascalCase(value)
-        }`
-      : camelCase(value)
-  );
+  const valueKey = prefix.endsWith('.')
+    ? camelCase(value)
+    : toPascalCase(value);
+  const translationKey = prefix ? `${prefix}${valueKey}` : camelCase(value);
+
+  return t(translationKey);
 };
 
 /**

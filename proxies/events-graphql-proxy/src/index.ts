@@ -51,6 +51,7 @@ void (async () => {
   await startServer({
     config,
     schema,
-    contextCallback: (args: ContextConstructorArgs) => new EventContext(args),
+    contextCallback: async (args: ContextConstructorArgs) =>
+      new EventContext(args),
   });
 })();

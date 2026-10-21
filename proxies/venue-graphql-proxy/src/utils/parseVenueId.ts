@@ -1,7 +1,7 @@
 import { Sources } from '../contants/constants.js';
 import type { Source } from '../types.js';
 
-const SUPPORTED_SOURCES = new Set([Sources.TPREK, Sources.LINKED]);
+const SUPPORTED_SOURCES = new Set<string>([Sources.TPREK, Sources.LINKED]);
 
 export class IdParseError extends Error {
   constructor(message: string) {

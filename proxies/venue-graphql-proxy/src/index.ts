@@ -27,6 +27,7 @@ void (async () => {
   await startServer({
     config,
     schema,
-    contextCallback: (args: ContextConstructorArgs) => new VenueContext(args),
+    contextCallback: async (args: ContextConstructorArgs) =>
+      new VenueContext(args),
   });
 })();

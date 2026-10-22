@@ -21,12 +21,12 @@ export type AdvancedSearchInputProps<
    * The icon component to be rendered inside the input container.
    * It should be a React element, e.g. <IconSearch />.
    */
-  IconComponent: React.ReactElement<IconProps>;
+  readonly IconComponent: React.ReactElement<IconProps>;
   /**
    * The input component to be rendered.
    * It should be a React element, e.g. <TextInput /> or <NumberInput />.
    */
-  InputComponent: React.ReactElement<ComponentType>;
+  readonly InputComponent: React.ReactElement<ComponentType>;
 };
 
 /**

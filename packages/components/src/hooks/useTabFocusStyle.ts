@@ -9,7 +9,7 @@ const useTabFocusStyle = ({
   container,
   className,
 }: {
-  container: React.MutableRefObject<HTMLElement | null>;
+  container: React.RefObject<HTMLElement | null>;
   className: string;
 }): void => {
   const tabUsed = React.useRef<boolean>(false);

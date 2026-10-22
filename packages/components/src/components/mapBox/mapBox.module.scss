@@ -5,6 +5,23 @@
   background-color: #f4f4f4;
   padding: var(--spacing-s);
   margin-bottom: var(--spacing-xl);
+
+  .mapLink {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--fontsize-body-s);
+    text-decoration: none;
+    margin-bottom: var(--spacing-s);
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    svg {
+      margin-left: var(--spacing-2-xs);
+      fill: var(--color-primary-black);
+    }
+  }
 }
 
 .title {
@@ -24,26 +41,6 @@
   h2 {
     margin: 0;
     font-size: var(--fontsize-body-l);
-  }
-}
-
-// Increase specificity to consistently override HDS styles
-.wrapper {
-  .mapLink {
-    display: inline-flex;
-    align-items: center;
-    font-size: var(--fontsize-body-s);
-    text-decoration: none;
-    margin-bottom: var(--spacing-s);
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    svg {
-      margin-left: var(--spacing-2-xs);
-      fill: var(--color-primary-black);
-    }
   }
 }
 

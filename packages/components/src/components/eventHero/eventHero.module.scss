@@ -117,7 +117,7 @@ $logoWidth: 5.5rem;
       }
 
       .description {
-        word-break: break-word;
+        overflow-wrap: anywhere;
         font-size: var(--fontsize-body-xl);
         line-height: var(--spacing-l);
       }

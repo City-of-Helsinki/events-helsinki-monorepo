@@ -20,15 +20,13 @@ export const VenueSearchUtilities: React.FC<SearchUtilitiesProps> = ({
 }) => {
   const { t } = useCommonTranslation();
   return (
-    <>
-      <Button
-        variant={ButtonVariant.Secondary}
-        theme={ButtonPresetTheme.Black}
-        onClick={switchShowMode}
-      >
-        {t('common:mapSearch.showOnMap')}
-      </Button>
-    </>
+    <Button
+      variant={ButtonVariant.Secondary}
+      theme={ButtonPresetTheme.Black}
+      onClick={switchShowMode}
+    >
+      {t('common:mapSearch.showOnMap')}
+    </Button>
   );
 };
 

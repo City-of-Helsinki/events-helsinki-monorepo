@@ -3,7 +3,7 @@ import type { BreadcrumbListItem } from 'hds-react';
 import styles from './breadcrumb.module.scss';
 
 type BreadcrumbContainerProps = {
-  breadcrumbs: BreadcrumbListItem[];
+  readonly breadcrumbs: BreadcrumbListItem[];
 };
 
 export function BreadcrumbContainer({ breadcrumbs }: BreadcrumbContainerProps) {

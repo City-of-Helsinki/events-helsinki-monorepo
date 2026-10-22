@@ -1,4 +1,4 @@
-import type { ParsedUrlQuery, ParsedUrlQueryInput } from 'querystring';
+import type { ParsedUrlQuery, ParsedUrlQueryInput } from 'node:querystring';
 import type { NextRouter } from 'next/router';
 import queryString from 'query-string';
 import { DEFAULT_LANGUAGE } from '../../constants';
@@ -8,7 +8,7 @@ import stringifyUrlObject from '../../utils/stringifyUrlObject';
 
 type I18nRoute = {
   source: string;
-  locale: AppLanguage | string;
+  locale: string;
 };
 
 export interface CmsRoutedApp {
@@ -105,7 +105,7 @@ export class CmsRoutedAppHelper {
       queryObject,
       appLanguage
     );
-    router.replace(
+    void router.replace(
       cleanedUrl,
       undefined,
       /**

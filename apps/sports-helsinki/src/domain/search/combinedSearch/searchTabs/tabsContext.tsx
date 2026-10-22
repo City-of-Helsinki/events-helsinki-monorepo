@@ -2,9 +2,7 @@ import { EventTypeId } from '@events-helsinki/components';
 import React from 'react';
 export type SearchTabId = 'Venue' | keyof typeof EventTypeId;
 export type SearchResultCounts = Record<SearchTabId, number | null>;
-export function isSearchTabId(
-  tabId: SearchTabId | string | null
-): tabId is SearchTabId {
+export function isSearchTabId(tabId: string | null): tabId is SearchTabId {
   return (
     tabId !== null && [...Object.values(EventTypeId), 'Venue'].includes(tabId)
   );

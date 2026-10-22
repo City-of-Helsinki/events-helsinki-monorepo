@@ -39,7 +39,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, eventUrl }) => {
   const eventPriceText = getEventPrice(event, locale, t('eventCard.isFree'));
 
   const goToEventPage = () => {
-    router.push(eventUrl);
+    void router.push(eventUrl);
   };
 
   const { clickCaptureRef, clicked } = useClickCapture(1000);

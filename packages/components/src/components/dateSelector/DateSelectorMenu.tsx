@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { IconAngleLeft, IconAngleRight, IconCalendarPlus } from 'hds-react';
-import type { ChangeEvent, FunctionComponent, MutableRefObject } from 'react';
+import type { ChangeEvent, FunctionComponent, RefObject } from 'react';
 import React, { useEffect } from 'react';
 
 import useCommonTranslation from '../../hooks/useCommonTranslation'; // the locale you want
@@ -14,8 +14,8 @@ export const testIds = {
 };
 
 interface Props {
-  backBtnRef?: MutableRefObject<HTMLButtonElement | null>;
-  customDatesBtnRef?: MutableRefObject<HTMLButtonElement | null>;
+  backBtnRef?: RefObject<HTMLButtonElement | null>;
+  customDatesBtnRef?: RefObject<HTMLButtonElement | null>;
   dateTypes: string[];
   dateTypeOptions: string[];
   endDate: Date | null;
@@ -69,7 +69,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
   }, [dateTypes, onChangeStartDate, onChangeEndDate]);
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (dateTypes.indexOf(event.target.value) !== -1) {
+    if (dateTypes.includes(event.target.value)) {
       onChangeDateTypes(
         dateTypes.filter((item) => item !== event.target.value)
       );
@@ -105,7 +105,7 @@ const DateSelectorMenu: FunctionComponent<Props> = ({
             return (
               <Checkbox
                 key={option}
-                checked={dateTypes.indexOf(option) !== -1}
+                checked={dateTypes.includes(option)}
                 id={`name_${option}`}
                 label={translateValue(
                   'common:dateSelector.dateType',

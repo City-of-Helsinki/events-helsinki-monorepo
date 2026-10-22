@@ -19,8 +19,6 @@ describe('BaseApp', () => {
           } as any
         }
         askemFeedbackConfiguration={{}}
-        asPath="/"
-        withConsent={false}
         headerMenu={undefined}
         headerUniversalBarMenu={undefined}
         footerMenu={undefined}

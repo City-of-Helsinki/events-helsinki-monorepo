@@ -1,6 +1,6 @@
 export default function getVenueIdParts(idWithSource: string) {
   if (!idWithSource.includes(':')) {
-    throw Error('ID is not correctly formatted');
+    throw new Error('ID is not correctly formatted');
   }
 
   const [source, id] = idWithSource.split(':');

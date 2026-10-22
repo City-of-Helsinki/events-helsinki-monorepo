@@ -1,2 +1,1 @@
-export type RedirectAddress = string;
-export type Redirects = Record<RedirectAddress, RedirectAddress>;
+export type Redirects = Record<string, string>;

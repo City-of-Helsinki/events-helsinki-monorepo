@@ -173,7 +173,7 @@ export const useSubEvents = (
       : null;
 
     if (page) {
-      handleLoadMore(page);
+      void handleLoadMore(page);
     }
   }, [handleLoadMore, subEventsData]);
 

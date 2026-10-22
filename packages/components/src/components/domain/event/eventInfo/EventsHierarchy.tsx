@@ -82,12 +82,9 @@ const SubEvents: React.FC<{
   const [title, titleIcon] = isMiddleLevelEvent
     ? [
         t('otherTimes.title'),
-        <IconCalendarPlus key={'icon-calendar´' + Math.random()} aria-hidden />,
+        <IconCalendarPlus key="icon-calendar" aria-hidden />,
       ]
-    : [
-        t('subEvents.title'),
-        <IconLayers key={'icon-layers' + Math.random()} aria-hidden />,
-      ];
+    : [t('subEvents.title'), <IconLayers key="icon-layers" aria-hidden />];
 
   return (
     <div className={styles.eventList}>

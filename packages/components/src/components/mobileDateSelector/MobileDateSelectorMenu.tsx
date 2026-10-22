@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import type { FunctionComponent, MutableRefObject } from 'react';
+import type { FunctionComponent, RefObject } from 'react';
 import React from 'react';
 import { useCommonTranslation } from '../../hooks';
 import DateRangePicker from '../dateRangePicker/DateRangePicker';
@@ -10,8 +10,8 @@ export const testIds = {
 };
 
 interface Props {
-  closeBtnRef?: MutableRefObject<HTMLButtonElement | null>;
-  startDateInputRef?: MutableRefObject<HTMLInputElement | null>;
+  closeBtnRef?: RefObject<HTMLButtonElement | null>;
+  startDateInputRef?: RefObject<HTMLInputElement | null>;
   endDate: Date | null;
   isOpen: boolean;
   onChangeEndDate: (date: Date | null) => void;

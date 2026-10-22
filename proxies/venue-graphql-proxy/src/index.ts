@@ -23,7 +23,7 @@ const config: ServerConfig = {
   appVersion: packageJson.version,
 };
 
-(async () => {
+void (async () => {
   await startServer({
     config,
     schema,

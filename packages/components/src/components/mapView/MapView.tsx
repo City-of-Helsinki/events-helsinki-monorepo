@@ -45,10 +45,10 @@ function createCustomClusterIcon(cluster: any) {
 }
 
 type Props = {
-  items: MapItem[];
-  center?: LatLngExpression;
-  zoom?: number;
-  focusedItemId?: string;
+  readonly items: MapItem[];
+  readonly center?: LatLngExpression;
+  readonly zoom?: number;
+  readonly focusedItemId?: string;
 };
 
 function MapView({ items = [], center, zoom, focusedItemId }: Props) {
@@ -94,7 +94,7 @@ function MapView({ items = [], center, zoom, focusedItemId }: Props) {
 
   const markerClusterGroupItems = React.useMemo(
     () =>
-      items.reduce((result: React.JSX.Element[] = [], item) => {
+      items.reduce((result: React.JSX.Element[], item) => {
         if (!item.location) {
           return result;
         }
@@ -155,7 +155,7 @@ function MapView({ items = [], center, zoom, focusedItemId }: Props) {
           iconCreateFunction={createCustomClusterIcon}
           maxClusterRadius={60}
           animate={false}
-          key={items.join() ?? 'default'}
+          key={items.map((item) => item.id).join() || 'default'}
           ref={markerClusterGroupRef}
         >
           {markerClusterGroupItems}

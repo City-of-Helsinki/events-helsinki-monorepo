@@ -13,6 +13,25 @@ import type { Option } from 'hds-react';
 import { useCallback } from 'react';
 import { useCombinedSearchContext } from '../domain/search/combinedSearch/adapters/CombinedSearchContext';
 
+const resolveGeolocation = async (
+  geolocation: GeolocationContextType
+): Promise<Coordinates | null> => {
+  if (geolocation.coordinates) {
+    return geolocation.coordinates;
+  }
+
+  if (!geolocation.called) {
+    try {
+      return await geolocation.resolve();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to resolve location', error);
+    }
+  }
+
+  return null;
+};
+
 const useHandleUnifiedSearchOrderChange = () => {
   const geolocation: GeolocationContextType = useGeolocation();
   const {
@@ -37,20 +56,7 @@ const useHandleUnifiedSearchOrderChange = () => {
         } else {
           // If sorting by distance, handle geolocation resolution
           if (orderBy === UnifiedSearchOrderBy.distance) {
-            let location: Coordinates | null = geolocation.coordinates;
-
-            if (!geolocation.called || !geolocation.coordinates) {
-              try {
-                // This is the blocking part
-                location = await geolocation.resolve();
-              } catch (e) {
-                // Handle permission denial or timeout here
-                // eslint-disable-next-line no-console
-                console.error('Failed to resolve location', e);
-                return;
-              }
-            }
-
+            const location = await resolveGeolocation(geolocation);
             if (!location) {
               return;
             }

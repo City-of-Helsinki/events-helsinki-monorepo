@@ -43,9 +43,6 @@ export type BaseAppProps = {
   globalAppName: string;
   matomoConfiguration: Parameters<typeof createMatomoInstance>[0];
   askemFeedbackConfiguration: Parameters<typeof createAskemInstance>[0];
-  onConsentGiven?: (askemConsentGiven: boolean) => void;
-  asPath: string;
-  withConsent: boolean;
   consentUrl: string;
 } & NavigationProviderProps &
   AppRoutingProviderProps &

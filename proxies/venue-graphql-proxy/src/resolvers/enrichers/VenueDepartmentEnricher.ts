@@ -14,7 +14,7 @@ export default class VenueDepartmentEnricher
   implements
     VenueEnricher<TprekUnit, Pick<TranslatedVenueDetails, 'department'>>
 {
-  async getDepartment(
+  getDepartment(
     departmentId: NonNullable<TprekUnitWithoutNull['dept_id']>,
     context: VenueContext
   ) {

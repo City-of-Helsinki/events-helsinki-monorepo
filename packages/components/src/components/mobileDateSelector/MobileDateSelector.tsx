@@ -45,7 +45,7 @@ const MobileDateSelector: React.FC<Props> = ({
   }, [isMenuOpen]);
 
   const handleClickButton = (value: string) => {
-    if (dateTypes.indexOf(value) !== -1) {
+    if (dateTypes.includes(value)) {
       onChangeDateTypes(dateTypes.filter((item) => item !== value));
     } else {
       onChangeDateTypes([...dateTypes, value]);
@@ -134,7 +134,7 @@ const MobileDateSelector: React.FC<Props> = ({
         return (
           <ToggleButton
             key={dateType}
-            isSelected={dateTypes.indexOf(dateType) !== -1}
+            isSelected={dateTypes.includes(dateType)}
             onClick={handleClickButton}
             text={translateValue('common:dateSelector.dateType', dateType, t)}
             value={dateType}

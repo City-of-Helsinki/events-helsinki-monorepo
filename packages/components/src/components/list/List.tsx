@@ -9,8 +9,8 @@ export type ListItemProps = {
 };
 
 type Props = {
-  items: React.ReactElement[];
-  variant?:
+  readonly items: React.ReactElement[];
+  readonly variant?:
     | 'default'
     | 'collection-grid'
     | 'searchResult'
@@ -18,9 +18,9 @@ type Props = {
     | 'grid-2'
     | 'fixed-grid-4'
     | 'column';
-  gap?: 'xs' | 's' | 'm' | 'l';
-  li?: React.ComponentType<ListItemProps>;
-  listContainerRef?: React.Ref<HTMLUListElement>;
+  readonly gap?: 'xs' | 's' | 'm' | 'l';
+  readonly li?: React.ComponentType<ListItemProps>;
+  readonly listContainerRef?: React.Ref<HTMLUListElement>;
 };
 
 function List({

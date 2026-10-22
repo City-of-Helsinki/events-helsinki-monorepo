@@ -90,7 +90,7 @@ export class HeadlessCMSHelper {
     const uriWithoutLang = this.stripLocaleFromUri(uri ?? '');
     if (uriWithoutLang) {
       return this.removeInternalDoublePrefix(
-        uriWithoutLang.split('/').filter((i) => i)
+        uriWithoutLang.split('/').filter(Boolean)
       );
     }
     return null;
@@ -114,7 +114,7 @@ export class HeadlessCMSHelper {
       this.stripLocaleFromUri(uri)
         .split('/')
         // Filter out empty strings
-        .filter((i) => i)
+        .filter(Boolean)
     );
   }
 
@@ -202,7 +202,11 @@ export class HeadlessCMSHelper {
           <EventSearchCollection
             {...commonCollectionProps}
             collection={collection}
-            showAllUrl={parse(collection.showAllUrl || '').toString()}
+            showAllUrl={parse(
+              typeof collection.showAllUrl === 'string'
+                ? collection.showAllUrl
+                : ''
+            ).toString()}
           />
         );
       } else if (isEventSelectionCollection(collection)) {
@@ -233,7 +237,7 @@ export class HeadlessCMSHelper {
 
           return (
             <Card
-              key={Math.random()}
+              key={cardProps.url}
               {...cardProps}
               direction="fixed-vertical"
               customContent={

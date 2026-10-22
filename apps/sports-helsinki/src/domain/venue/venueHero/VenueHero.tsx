@@ -103,7 +103,7 @@ const VenueHero: React.FC<Props> = ({ venue }) => {
           info: openingHoursNow,
         }
       : null,
-  ].filter((item) => Boolean(item));
+  ].filter(Boolean);
 
   return (
     <PageSection className={classNames(styles.heroSection)}>

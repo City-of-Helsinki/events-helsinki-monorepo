@@ -1,4 +1,3 @@
-import type { CookieConsentChangeEvent } from 'hds-react';
 import { CookieConsentContextProvider } from 'hds-react';
 import React from 'react';
 
@@ -15,18 +14,8 @@ const EventsCookieConsent: React.FC<Props> = ({ children }) => {
   const siteSettings = useConsentSiteSettings();
   const options = { language };
 
-  // FIXME: We have no need for onChange -handler, so we can remove it.
-  // The onChange property will be made optional in HDS v.4.8.1.
-  // See: https://github.com/City-of-Helsinki/helsinki-design-system/releases/tag/v4.8.1.
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const onChange = (_event: CookieConsentChangeEvent) => {};
-
   return (
-    <CookieConsentContextProvider
-      onChange={onChange}
-      options={options}
-      siteSettings={siteSettings}
-    >
+    <CookieConsentContextProvider options={options} siteSettings={siteSettings}>
       {children}
     </CookieConsentContextProvider>
   );

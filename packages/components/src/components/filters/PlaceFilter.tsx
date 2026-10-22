@@ -22,15 +22,23 @@ const PlaceFilter: React.FC<Props> = ({
     variables: { id },
   });
 
-  return loading ? (
-    <FilterButton
-      onRemove={onRemove}
-      text={t('common:loading')}
-      type="place"
-      value={id}
-      aria-labelledby={ariaLabelledBy}
-    />
-  ) : data && data.placeDetails.name ? (
+  if (loading) {
+    return (
+      <FilterButton
+        onRemove={onRemove}
+        text={t('common:loading')}
+        type="place"
+        value={id}
+        aria-labelledby={ariaLabelledBy}
+      />
+    );
+  }
+
+  if (!data?.placeDetails?.name) {
+    return null;
+  }
+
+  return (
     <FilterButton
       onRemove={onRemove}
       text={getLocalizedString(data.placeDetails.name, locale)}
@@ -38,7 +46,7 @@ const PlaceFilter: React.FC<Props> = ({
       value={id}
       aria-labelledby={ariaLabelledBy}
     />
-  ) : null;
+  );
 };
 
 export default PlaceFilter;

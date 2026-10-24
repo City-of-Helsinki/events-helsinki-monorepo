@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.8.0...venue-graphql-proxy-v1.9.0) (2026-10-24)
+
+
+### Features
+
+* Nvmrc set to lts, broaden node engine Refs: TH-1485 ([2704285](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/27042856c9d32227d86dca74a8fde1b4250c1c87))
+
 ## [1.8.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.7.0...venue-graphql-proxy-v1.8.0) (2026-10-14)
 
 

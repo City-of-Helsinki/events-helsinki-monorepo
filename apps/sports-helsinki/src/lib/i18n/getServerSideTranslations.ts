@@ -6,7 +6,7 @@ import type { SSRConfig, UserConfig } from 'next-i18next/pages';
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import nextI18nextConfig from '../../../next-i18next.config.mjs';
 
-export const getServerSideTranslations = async (
+export const getServerSideTranslations = (
   locale: string,
   namespacesRequired?: string[] | Readonly<string[]> | undefined,
   configOverride?: UserConfig | null

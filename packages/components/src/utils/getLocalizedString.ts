@@ -12,21 +12,22 @@ type LocalizedObject = {
 };
 
 const getLocalizedString = (
-  obj: Partial<LocalizedObject> | undefined | null = {},
+  obj: Partial<LocalizedObject> | undefined | null,
   language: AppLanguage
 ): string => {
   if (obj === null) {
     return '';
   }
 
+  const localizedObject = obj ?? {};
   const languages = [
     language,
     ...APP_LANGUAGES.filter((item) => item !== language),
   ];
   // Find first language which has value
-  const locale = languages.find((lng) => obj[lng]);
+  const locale = languages.find((lng) => localizedObject[lng]);
   // Return value in correct language
-  return (locale && obj[locale]) || '';
+  return (locale && localizedObject[locale]) || '';
 };
 
 export default getLocalizedString;

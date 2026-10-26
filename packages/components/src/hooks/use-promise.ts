@@ -71,7 +71,7 @@ export function usePromise<
   useEffect(() => {
     mounted.current = true;
     if (immediate) {
-      promiseFn();
+      void promiseFn();
     }
     return () => {
       // Loading cannot be safely determined here

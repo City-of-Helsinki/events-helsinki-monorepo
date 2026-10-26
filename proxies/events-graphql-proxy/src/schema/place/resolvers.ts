@@ -81,7 +81,7 @@ const placeListQueryBuilder = ({
     );
   }
 
-  if (divisions && divisions.length) {
+  if (divisions?.length) {
     query = composeQuery(query, 'division', divisions.join(','));
   }
 

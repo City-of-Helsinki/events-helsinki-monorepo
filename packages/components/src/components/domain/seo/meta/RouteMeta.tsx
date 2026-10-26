@@ -7,8 +7,8 @@ import { useRouter } from 'next/router';
 import useCanonicalUrl from './useCanonicalUrl';
 
 type Props = {
-  origin: string;
-  page?: PageType | ArticleType;
+  readonly origin: string;
+  readonly page?: PageType | ArticleType;
 };
 
 function RouteMeta({ origin, page }: Props) {
@@ -44,7 +44,7 @@ function RouteMeta({ origin, page }: Props) {
       <link
         rel="alternate"
         hrefLang="x-default"
-        href={`${origin}/${locales[0]}${path ? path : ''}`}
+        href={`${origin}/${locales[0]}${path}`}
       />
       <meta property="og:locale" content={locale} />
       <meta property="og:url" content={canonical} />

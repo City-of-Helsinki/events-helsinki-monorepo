@@ -1,5 +1,5 @@
-import type { ParsedUrlQueryInput } from 'querystring';
-import type { UrlObject } from 'url';
+import type { ParsedUrlQueryInput } from 'node:querystring';
+import type { UrlObject } from 'node:url';
 import queryString from 'query-string';
 
 const isDynamic = (part: string) => part.startsWith('[') && part.endsWith(']');

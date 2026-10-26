@@ -90,7 +90,9 @@ const LargeVenueCard: React.FC<Props> = ({
               )}
             </div>
             <div className={styles.keywordWrapperDesktop}>
-              {tags && tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+              {tags?.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
             </div>
             {accessibilityShortcomingCount !== undefined && (
               <div className={styles.keywordWrapperDesktop}>

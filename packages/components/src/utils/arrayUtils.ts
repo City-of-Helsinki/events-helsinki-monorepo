@@ -10,7 +10,7 @@ export function appendUnique<T>(
     ...existing,
     ...incoming.filter(
       (i) =>
-        Object.hasOwnProperty.call(i, comparedProperty) &&
+        Object.hasOwn(i as object, comparedProperty) &&
         !existingValues.has(i[comparedProperty])
     ),
   ];

@@ -90,7 +90,7 @@ export class HeadlessCMSHelper {
     const uriWithoutLang = this.stripLocaleFromUri(uri ?? '');
     if (uriWithoutLang) {
       return this.removeInternalDoublePrefix(
-        uriWithoutLang.split('/').filter((i) => i)
+        uriWithoutLang.split('/').filter(Boolean)
       );
     }
     return null;
@@ -114,7 +114,7 @@ export class HeadlessCMSHelper {
       this.stripLocaleFromUri(uri)
         .split('/')
         // Filter out empty strings
-        .filter((i) => i)
+        .filter(Boolean)
     );
   }
 
@@ -188,9 +188,12 @@ export class HeadlessCMSHelper {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       page?.modules?.filter((m: any) => !!m) ?? [],
       true
-    )?.reduce((collectionElements: React.JSX.Element[], collection) => {
+    )?.reduce((collectionElements: React.JSX.Element[], collection, index) => {
+      // id is optional on the collection type. The position keeps the key
+      // unique when a collection is built without one.
+      const collectionKey = collection.id ?? `at-${index}`;
       const commonCollectionProps = {
-        key: `collection-${Math.random()}`,
+        key: `collection-${collectionKey}`,
         title: collection.title,
         description: collection.description,
         type: getCollectionUIType(collection),
@@ -198,11 +201,14 @@ export class HeadlessCMSHelper {
       };
 
       if (isEventSearchCollection(collection)) {
+        const parsedShowAllUrl = parse(collection.showAllUrl || '');
         collectionElements.push(
           <EventSearchCollection
             {...commonCollectionProps}
             collection={collection}
-            showAllUrl={parse(collection.showAllUrl || '').toString()}
+            showAllUrl={
+              typeof parsedShowAllUrl === 'string' ? parsedShowAllUrl : ''
+            }
           />
         );
       } else if (isEventSelectionCollection(collection)) {
@@ -233,7 +239,7 @@ export class HeadlessCMSHelper {
 
           return (
             <Card
-              key={Math.random()}
+              key={cardProps.url}
               {...cardProps}
               direction="fixed-vertical"
               customContent={

@@ -293,7 +293,7 @@ const ReturnPathNavBackArrow: React.FC = () => {
       returnPath.startsWith('/') ? '' : '/'
     }${returnPath}${remainingQueryString}`;
     const goBackUrlLocale = getLocaleFromPathname(goBackUrl);
-    router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
+    void router.push(goBackUrl, undefined, { locale: goBackUrlLocale });
   };
 
   return (

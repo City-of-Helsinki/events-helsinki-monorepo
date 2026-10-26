@@ -18,7 +18,7 @@
   }
 
   .iconTextWrapper {
-    word-break: break-word;
+    overflow-wrap: anywhere;
     flex: 1 1 0%;
 
     .title {

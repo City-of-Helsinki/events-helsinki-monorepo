@@ -34,7 +34,7 @@ export default class VenueOntologyWordsEnricher
   implements
     VenueEnricher<TprekUnit, Pick<TranslatedVenueDetails, 'ontologyWords'>>
 {
-  async getOntologyTree(
+  getOntologyTree(
     ontologyWordIds: NonNullable<TprekUnitWithoutNull['ontologyword_ids']>,
     context: VenueContext
   ) {

@@ -1,4 +1,4 @@
-import type { ParsedUrlQueryInput } from 'querystring';
+import type { ParsedUrlQueryInput } from 'node:querystring';
 import { NetworkStatus } from '@apollo/client';
 import {
   Page as RHHCPage,
@@ -210,7 +210,7 @@ export default function ArticleArchive({
     }
   };
 
-  const articles = articlesData?.posts?.edges?.map((edge) => edge?.node).flat();
+  const articles = articlesData?.posts?.edges?.flatMap((edge) => edge?.node);
   const categories = categoriesData?.categories?.nodes ?? [];
   const currentCategories = categories.filter((category) =>
     tags?.includes(category.databaseId.toString())
@@ -255,7 +255,7 @@ export default function ArticleArchive({
               );
             }}
             onLoadMore={() => {
-              fetchMoreArticles();
+              void fetchMoreArticles();
             }}
             largeFirstItem={true}
             createLargeCard={LargeCardContainer}

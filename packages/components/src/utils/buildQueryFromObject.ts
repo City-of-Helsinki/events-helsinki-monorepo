@@ -1,5 +1,4 @@
 import forEach from 'lodash/forEach';
-import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 import isNil from 'lodash/isNil';
 import isNumber from 'lodash/isNumber';
@@ -10,7 +9,7 @@ const buildQueryFromObject = (obj: Record<string, any>) => {
 
   forEach(obj, (filter, key) => {
     if (!isEmpty(filter) || isNumber(filter) || typeof filter === 'boolean') {
-      if (isArray(filter)) {
+      if (Array.isArray(filter)) {
         const items: Array<string | number> = [];
 
         forEach(filter, (item: string | number) => {

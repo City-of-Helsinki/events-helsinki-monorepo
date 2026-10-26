@@ -6,7 +6,7 @@ import type {
 
 export function renderAddressToString(address: DirectionAddress): string {
   return [address.streetName, address.zip, address.city]
-    .filter((item) => item)
+    .filter(Boolean)
     .join(', ');
 }
 export function getHSLDirection(point?: DirectionPoint | null): string {

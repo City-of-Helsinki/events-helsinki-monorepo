@@ -191,5 +191,5 @@ export type SearchComponentType = {
   'data-testid'?: string;
   title?: string;
   description?: string;
-  searchRoute?: SearchRoute; // TODO: Allow only SEARCH_ROUTE values
+  searchRoute?: SearchRoute;
 };

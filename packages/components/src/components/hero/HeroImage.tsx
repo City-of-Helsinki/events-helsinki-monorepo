@@ -3,8 +3,8 @@ import { Koros } from 'hds-react';
 import styles from './heroImage.module.scss';
 
 type Props = {
-  desktopImageUri: string;
-  withDecoration?: boolean;
+  readonly desktopImageUri: string;
+  readonly withDecoration?: boolean;
 };
 
 function HeroImage({ desktopImageUri, withDecoration = true }: Props) {

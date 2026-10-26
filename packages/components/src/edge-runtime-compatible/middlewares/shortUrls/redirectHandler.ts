@@ -8,7 +8,7 @@ export interface RedirectHandlerConfig {
 }
 
 export class RedirectHandler {
-  private redirectCampaignRoutes: Record<string, string>;
+  private readonly redirectCampaignRoutes: Record<string, string>;
 
   constructor(config: RedirectHandlerConfig) {
     this.redirectCampaignRoutes = config.redirectCampaignRoutes ?? {};

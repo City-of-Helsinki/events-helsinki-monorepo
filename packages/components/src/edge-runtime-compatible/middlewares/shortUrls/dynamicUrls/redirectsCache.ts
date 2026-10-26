@@ -103,7 +103,7 @@ function setRedirectsCache(data: unknown): void {
     // 2. English (i.e. overrides Swedish but not Finnish)
     // 3. Swedish (i.e. only fallback if neither Finnish nor English has a redirect)
     // i.e. first svRedirects are assigned to target, then enRedirects, last fiRedirects.
-    _redirectsCache = Object.assign({}, svRedirects, enRedirects, fiRedirects);
+    _redirectsCache = { ...svRedirects, ...enRedirects, ...fiRedirects };
   } else {
     // eslint-disable-next-line no-console
     console.error('Failed to parse CMS redirects, using old redirects', {

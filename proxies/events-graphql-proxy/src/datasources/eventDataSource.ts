@@ -5,14 +5,11 @@ import type {
 import LinkedEventsDataSource from './LinkedEventsDataSource.js';
 
 class EventDataSource extends LinkedEventsDataSource {
-  public async getEventDetails(
-    id: string,
-    query: string
-  ): Promise<EventDetails> {
+  public getEventDetails(id: string, query: string): Promise<EventDetails> {
     return this.get(`event/${id}/${query}`);
   }
 
-  public async getEventList(query: string): Promise<EventListResponse> {
+  public getEventList(query: string): Promise<EventListResponse> {
     return this.get(`event/${query}`);
   }
 }

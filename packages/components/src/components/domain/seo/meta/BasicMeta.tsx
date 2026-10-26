@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
 type BasicMetaProps = {
-  title?: string;
-  description?: string;
-  favIconUrl?: string;
-  appleTouchIconUrl?: string;
-  manifestUrl?: string;
-  favIconSvgUrl?: string;
+  readonly title?: string;
+  readonly description?: string;
+  readonly favIconUrl?: string;
+  readonly appleTouchIconUrl?: string;
+  readonly manifestUrl?: string;
+  readonly favIconSvgUrl?: string;
 };
 
 function BasicMeta({

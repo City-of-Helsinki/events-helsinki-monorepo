@@ -6,7 +6,7 @@ import type { QueryResolvers } from '../../types.js';
 const Query: QueryResolvers = {
   organizationDetails: async (
     _: unknown,
-    { id }: unknown & { id: string },
+    { id }: { id: string },
     context: EventContext
   ) => {
     const data =

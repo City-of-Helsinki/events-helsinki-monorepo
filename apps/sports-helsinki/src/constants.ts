@@ -3,7 +3,6 @@ export const SEARCH_ROUTES = {
   MAPSEARCH: '/search/map',
 };
 
-// TODO: Set a typing that tells that it is extending SEARCH_ROUTES
 export const ROUTES = {
   ...SEARCH_ROUTES,
   FRONT_PAGE: '/',
@@ -14,7 +13,7 @@ export const ROUTES = {
   PAGES: '/pages/[...slug]',
   COOKIE_CONSENT: '/cookie-consent',
   LINK: '',
-};
+} satisfies typeof SEARCH_ROUTES & Record<string, string>;
 
 export const EXTLINK = {
   EXTLINK_FACEBOOK: 'extlink_facebook',

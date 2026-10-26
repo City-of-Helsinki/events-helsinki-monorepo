@@ -32,7 +32,7 @@ function useSuperEventLazyLoad(event?: EventFieldsFragment) {
     if (superEventId) {
       // Set state to pending *before* fetching
       setSuperEvent({ data: null, status: 'pending' });
-      superEventSearch({
+      void superEventSearch({
         variables: {
           id: superEventId,
           include: [

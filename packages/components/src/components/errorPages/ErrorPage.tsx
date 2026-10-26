@@ -27,7 +27,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({
   const { footerMenu } = useContext(NavigationContext);
 
   const moveToHomePage = () => {
-    router.push(`${locale}/`);
+    void router.push(`${locale}/`);
   };
 
   return (

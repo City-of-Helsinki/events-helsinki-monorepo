@@ -79,7 +79,7 @@ function useFetchPlacesByIds(ids?: string[]) {
 
   useEffect(() => {
     if (ids?.length) {
-      fetchPlaces(ids);
+      void fetchPlaces(ids);
     } else {
       setPlaces([]);
     }

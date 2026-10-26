@@ -14,7 +14,7 @@ export default class VenueOrganizationEnricher
   implements
     VenueEnricher<TprekUnit, Pick<TranslatedVenueDetails, 'organization'>>
 {
-  async getOrganization(
+  getOrganization(
     organizationId: NonNullable<TprekUnitWithoutNull['org_id']>,
     context: VenueContext
   ) {

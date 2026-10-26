@@ -53,9 +53,8 @@ function SearchUtilities() {
   return (
     <PageSection className={styles.searchUtilities}>
       <ContentContainer className={styles.contentContainer}>
-        <div
+        <nav
           className={styles.flexEnd}
-          role="navigation"
           aria-describedby="searchTabsDescription"
         >
           <SearchTabs.TabList>
@@ -81,7 +80,7 @@ function SearchUtilities() {
               {tCommon('common:mapSearch.showOnMap')}
             </Button>
           ) : null}
-        </div>
+        </nav>
       </ContentContainer>
     </PageSection>
   );

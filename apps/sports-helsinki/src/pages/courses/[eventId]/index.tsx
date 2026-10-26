@@ -63,7 +63,7 @@ const EventPage: NextPage<{
 };
 export default EventPage;
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   return {
     paths: [],
     fallback: 'blocking',

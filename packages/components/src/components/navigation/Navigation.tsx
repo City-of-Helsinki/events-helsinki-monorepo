@@ -18,10 +18,10 @@ import useGetItemIsActive from './useGetIsItemActive';
 import useGetPathnameForLanguage from './useGetPathnameForLanguage';
 
 type NavigationProps = {
-  page?: PageType | ArticleType;
-  menu?: Menu;
-  universalBarMenu?: Menu;
-  languages?: Language[];
+  readonly page?: PageType | ArticleType;
+  readonly menu?: Menu;
+  readonly universalBarMenu?: Menu;
+  readonly languages?: Language[];
 };
 
 const RHHCNavigationNoSSR = dynamic(
@@ -61,7 +61,7 @@ export default function Navigation({
         universalBarMenu={universalBarMenu ?? headerUniversalBarMenu}
         className={styles.topNavigation}
         onTitleClick={() => {
-          router.push('/');
+          void router.push('/');
         }}
         getIsItemActive={getIsItemActive}
         getPathnameForLanguage={getPathnameForLanguage}

@@ -59,8 +59,17 @@ import type {
 export const MIN_AGE = 0;
 export const MAX_AGE = 99;
 
-export const sortOptionsAlphabetically = (a: Option, b: Option) =>
-  a.label > b.label ? 1 : b.label > a.label ? -1 : 0;
+export const sortOptionsAlphabetically = (a: Option, b: Option) => {
+  if (a.label > b.label) {
+    return 1;
+  }
+
+  if (b.label > a.label) {
+    return -1;
+  }
+
+  return 0;
+};
 
 export const sortExtendedCategoryOptions = (
   a: CategoryOption,
@@ -249,7 +258,7 @@ export const getEventSearchVariables = ({
     keywordAnd,
     keywordNot,
     language,
-    location: places.sort((a, b) => a.localeCompare(b)),
+    location: [...places].sort((a, b) => a.localeCompare(b)),
     pageSize,
     publisher,
     publisherAncestor: null,

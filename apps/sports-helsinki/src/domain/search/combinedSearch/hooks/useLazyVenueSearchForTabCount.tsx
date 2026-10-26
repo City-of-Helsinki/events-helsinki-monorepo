@@ -12,7 +12,7 @@ function useLazyVenueSearchForTabCount() {
     SearchListDocument,
     {
       variables: searchVariables.venue,
-      // FIXME: Set the fetch policy to not trigger cache,
+      // Use a no-cache policy to avoid triggering Apollo's cache:
       // or the Apollo client fails to request
       // same query multiple times. Depending on settings,
       // the client stops the query when the first response is given,

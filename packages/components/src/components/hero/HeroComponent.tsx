@@ -7,11 +7,11 @@ import Text from '../text/Text';
 import styles from './heroComponent.module.scss';
 
 type Props = {
-  title: string;
-  description: string;
-  cta: {
-    label: string;
-    href: string;
+  readonly title: string;
+  readonly description: string;
+  readonly cta: {
+    readonly label: string;
+    readonly href: string;
   };
 };
 

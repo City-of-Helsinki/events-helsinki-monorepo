@@ -13,7 +13,7 @@ const COMMON_TRANSLATIONS = [
   'notFound',
 ];
 
-export default async function serverSideTranslationsWithCommon(
+export default function serverSideTranslationsWithCommon(
   locale: AppLanguage,
   namespaces: string[] = []
 ) {

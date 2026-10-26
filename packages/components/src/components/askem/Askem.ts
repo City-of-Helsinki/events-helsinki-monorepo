@@ -67,10 +67,7 @@ class Askem {
     scripts?.parentNode?.insertBefore(scriptElement, scripts);
   }
 
-  setRnsConfigValue(
-    propName: string,
-    value: string | string[] | number
-  ): Askem {
+  setRnsConfigValue(propName: string, value: string | string[] | number): this {
     if (typeof window !== 'undefined') {
       window.rnsData = {
         ...window.rnsData,

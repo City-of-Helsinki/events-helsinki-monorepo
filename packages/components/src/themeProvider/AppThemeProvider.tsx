@@ -11,10 +11,13 @@ export default function AppThemeProvider({
   defaultButtonVariant,
   children,
 }: AppThemeProviderProps) {
-  const context = {
-    defaultButtonTheme,
-    defaultButtonVariant,
-  };
+  const context = React.useMemo(
+    () => ({
+      defaultButtonTheme,
+      defaultButtonVariant,
+    }),
+    [defaultButtonTheme, defaultButtonVariant]
+  );
   return (
     <AppThemeContext.Provider value={context}>
       {children}

@@ -7,7 +7,7 @@ import { userTrackingLogger } from '../../loggers/logger';
 import { consentGroupIds } from '../eventsCookieConsent/constants';
 
 interface Props {
-  children?: ReactNode | undefined;
+  children?: ReactNode;
 }
 
 const MatomoWrapper: React.FC<Props> = ({ children }) => {

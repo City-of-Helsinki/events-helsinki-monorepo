@@ -1,7 +1,7 @@
 import { Sources } from '../contants/constants.js';
 import type { Source } from '../types.js';
 
-const SUPPORTED_SOURCES: string[] = [Sources.TPREK, Sources.LINKED];
+const SUPPORTED_SOURCES = new Set<string>([Sources.TPREK, Sources.LINKED]);
 
 export class IdParseError extends Error {
   constructor(message: string) {
@@ -23,7 +23,7 @@ export default function parseVenueId(
     throw new IdParseError('Could not find source from venue id');
   }
 
-  if (!SUPPORTED_SOURCES.includes(source)) {
+  if (!SUPPORTED_SOURCES.has(source)) {
     throw new IdParseError(`Found unsupported source from venue id: ${source}`);
   }
 

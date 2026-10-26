@@ -9,7 +9,6 @@ import {
   BaseAppFallbackComponent as FallbackComponent,
   getResilientTranslation,
 } from '@events-helsinki/components';
-import { useRouter } from 'next/router';
 import type { SSRConfig } from 'next-i18next/pages';
 import { appWithTranslation } from 'next-i18next/pages';
 import React from 'react';
@@ -49,7 +48,6 @@ const ErrorBoundaryFallbackComponent = ({ error }: { error: Error }) => {
 
 function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
   const locale = useLocale();
-  const { asPath, pathname } = useRouter();
   const appName: BaseAppProps['appName'] = {
     en: getResilientTranslation('appHobbies:appName', 'en'),
     fi: getResilientTranslation('appHobbies:appName', 'fi'),
@@ -68,9 +66,7 @@ function MyApp({ Component, pageProps }: AppProps<CustomPageProps>) {
           askemFeedbackConfiguration={AppConfig.askemFeedbackConfiguration(
             locale
           )}
-          withConsent={pathname !== ROUTES.COOKIE_CONSENT}
           consentUrl={ROUTES.COOKIE_CONSENT}
-          asPath={asPath}
           defaultButtonTheme={AppConfig.defaultButtonTheme}
           defaultButtonVariant={AppConfig.defaultButtonVariant}
           getCardUrl={getCardUrl}

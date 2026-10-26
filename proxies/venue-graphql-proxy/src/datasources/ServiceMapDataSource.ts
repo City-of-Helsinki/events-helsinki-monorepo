@@ -43,7 +43,7 @@ export default class ServiceMapDataSource extends DataSourceWithContext<
    * Get unit from service map.
    * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_unit
    * */
-  async getUnit(id: string): Promise<TprekUnit> {
+  getUnit(id: string): Promise<TprekUnit> {
     return this.get(`unit/${id}?newfeatures=yes`);
   }
 
@@ -52,7 +52,7 @@ export default class ServiceMapDataSource extends DataSourceWithContext<
    * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_department
    * @param departmentId
    */
-  async getDepartment(departmentId: string): Promise<TprekDepartment> {
+  getDepartment(departmentId: string): Promise<TprekDepartment> {
     return this.get(`department/${departmentId}`);
   }
 
@@ -61,7 +61,7 @@ export default class ServiceMapDataSource extends DataSourceWithContext<
    * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_department
    * @param organizationId
    */
-  async getOrganization(organizationId: string): Promise<TprekDepartment> {
+  getOrganization(organizationId: string): Promise<TprekDepartment> {
     return this.get(`department/${organizationId}`); // Uses department endpoint
   }
 
@@ -69,7 +69,7 @@ export default class ServiceMapDataSource extends DataSourceWithContext<
    * Get ontology vocabulary (i.e. a collection of ontology words) from service map.
    * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_ontology_word
    */
-  private async getOntologyVocabulary(): Promise<TprekOntologyVocabulary> {
+  private getOntologyVocabulary(): Promise<TprekOntologyVocabulary> {
     return this.get(`ontologyword/`);
   }
 
@@ -78,7 +78,7 @@ export default class ServiceMapDataSource extends DataSourceWithContext<
    * @note Result can have multiple root nodes i.e. nodes without parent_id
    * @see https://www.hel.fi/palvelukarttaws/restpages/ver4.html#_ontology_tree
    */
-  private async getOntologyForest(): Promise<TprekOntologyForest> {
+  private getOntologyForest(): Promise<TprekOntologyForest> {
     return this.get(`ontologytree/`);
   }
 }

@@ -38,8 +38,8 @@ const ShareLinkBase: React.FC<Props> = ({
 // https://github.com/nygardk/react-share/blob/29fa4b957e0ebc7e089207cbc5b07c373c6fb4e0/src/ShareButton.tsx#L11
 const getBoxPositionOnWindowCenter = (
   window: Window,
-  height: number,
-  width: number
+  width: number,
+  height: number
 ) => ({
   left:
     window.outerWidth / 2 +

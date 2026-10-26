@@ -15,10 +15,14 @@ const VenueOtherInfo = ({ venue: { connections } }: { venue: Venue }) => {
         <h2 className={styles.descriptionTitle}>
           {t('venue:otherInfo.title')}
         </h2>
-        {otherInfoConnections?.map((connection, i) => (
+        {otherInfoConnections?.map((connection) => (
           <Text
             className={styles.description}
-            key={`contact-details-other-info${i}`}
+            key={`venue-other-info-${JSON.stringify([
+              connection?.name,
+              connection?.phone,
+              connection?.url,
+            ])}`}
           >
             {connection?.name}
           </Text>

@@ -59,7 +59,7 @@ function getSearchResultsAsItems(
   const searchResults =
     searchResultConnection?.edges?.map((edge) => edge.node) ?? [];
   return (
-    searchResults?.reduce((results: MapItem[] = [], searchResult) => {
+    searchResults?.reduce((results: MapItem[], searchResult) => {
       const { venue } = searchResult;
       if (
         venue?.meta?.id &&
@@ -136,7 +136,7 @@ export function MapSearchPageContent() {
   );
 }
 
-export default function MapSearch({ page }: { page: PageType }) {
+export default function MapSearch({ page }: Readonly<{ page: PageType }>) {
   return (
     <RHHCPage
       className="pageLayout"

@@ -123,6 +123,28 @@ describe('useHandleUnifiedSearchOrderChange', () => {
     expect(updateRouteToSearchPage).toHaveBeenCalledWith({ shallow: true });
   });
 
+  it('retries geolocation when a previous attempt was called without coordinates', async () => {
+    const resolve = vi.fn().mockResolvedValue({ lat: 1, lon: 2 });
+    useGeolocationMock.mockReturnValue({
+      coordinates: null,
+      loading: false,
+      called: true,
+      resolve,
+    });
+    const { result } = renderHook(() => useHandleUnifiedSearchOrderChange());
+
+    await act(async () => {
+      result.current([], option('distance-asc'));
+    });
+
+    expect(resolve).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(setFormValues).toHaveBeenCalledWith({
+        venueOrderBy: 'distance',
+      });
+    });
+  });
+
   it('resolves geolocation when not yet called for the distance order', async () => {
     const resolve = vi.fn().mockResolvedValue({ lat: 1, lon: 2 });
     useGeolocationMock.mockReturnValue({

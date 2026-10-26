@@ -22,7 +22,7 @@ function getLocaleMatchesFromPathname(pathname: string): DefaultMatchesType {
   const doubleLocalePrefix =
     /^\/(?<firstLocale>fi|en|sv)\/(?<secondLocale>fi|en|sv)\//;
   return (
-    pathname.match(doubleLocalePrefix)?.groups || {
+    doubleLocalePrefix.exec(pathname)?.groups || {
       firstLocale: undefined,
       secondLocale: undefined,
     }
@@ -34,7 +34,7 @@ function getLocaleMatchesFromPathname(pathname: string): DefaultMatchesType {
  * https://github.com/vercel/next.js/discussions/18419
  * @param req
  */
-const prefixDefaultLocale = async (req: NextRequest) => {
+const prefixDefaultLocale = (req: NextRequest) => {
   const url = new URL(req.url);
   const { pathname, search } = req.nextUrl;
   const locale = getLocale(req);

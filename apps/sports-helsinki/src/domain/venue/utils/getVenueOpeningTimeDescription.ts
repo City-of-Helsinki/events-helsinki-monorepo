@@ -92,16 +92,13 @@ function getNextOpeningHoursFromNow(openingHours: OpeningHour[]): Time | null {
     (date) =>
       // Is in future
       isFuture(new Date(date.date)) &&
-      // Has times
-      date.times.length > 0 &&
       // Has times that don't stand in for closed
       date.times.some((time) => time.resourceState !== 'closed')
   );
-  const nextTimeOtherDays = nextOpeningHoursOtherDays?.times?.filter(
-    // Ignore closed times
+  const nextTimeOtherDays = nextOpeningHoursOtherDays?.times?.find(
+    // Ignore closed times and pick the first matching time
     (time) => time.resourceState !== 'closed'
-    // and pick first time
-  )?.[0];
+  );
 
   if (nextTimeOtherDays) {
     return nextTimeOtherDays;

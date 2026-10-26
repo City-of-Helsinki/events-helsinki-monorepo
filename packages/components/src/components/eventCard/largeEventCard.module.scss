@@ -6,7 +6,7 @@
   --link-arrow-label-color: var(--color-black-80);
   --link-arrow-label-alert-color: var(--color-error, #b01038);
 
-  word-break: break-word;
+  overflow-wrap: anywhere;
   min-width: fit-content;
   text-decoration: none;
   background-color: var(--color-white);
@@ -120,8 +120,6 @@
 
     .keywordWrapperDesktop {
       order: 6;
-
-      // padding: var(--spacing-xs) 0;
 
       @include breakpoints.respond-below(s) {
         display: none;

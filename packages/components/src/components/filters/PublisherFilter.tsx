@@ -15,21 +15,29 @@ const PublisherFilter: React.FC<Props> = ({ id, onRemove }) => {
     variables: { id },
   });
 
-  return loading ? (
-    <FilterButton
-      onRemove={onRemove}
-      text={t('common:loading')}
-      type="publisher"
-      value={id}
-    />
-  ) : data && data.organizationDetails.name ? (
+  if (loading) {
+    return (
+      <FilterButton
+        onRemove={onRemove}
+        text={t('common:loading')}
+        type="publisher"
+        value={id}
+      />
+    );
+  }
+
+  if (!data?.organizationDetails?.name) {
+    return null;
+  }
+
+  return (
     <FilterButton
       onRemove={onRemove}
       text={data.organizationDetails.name}
       type="publisher"
       value={id}
     />
-  ) : null;
+  );
 };
 
 export default PublisherFilter;

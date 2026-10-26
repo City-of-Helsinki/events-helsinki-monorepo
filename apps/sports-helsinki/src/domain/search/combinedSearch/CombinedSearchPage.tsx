@@ -34,7 +34,7 @@ function VenueSearchPanel() {
   );
 }
 
-function EventSearchPanel({ eventType }: { eventType: EventTypeId }) {
+function EventSearchPanel({ eventType }: Readonly<{ eventType: EventTypeId }>) {
   const { t } = useSearchTranslation();
   useScrollToSearchResultItem();
   return (
@@ -89,7 +89,7 @@ function CombinedSearchPage({
   pageTitle = 'search:search.titlePage',
   pageDescription = 'search:search.descriptionPage',
   searchTabsDescription = 'appSports:search.descriptionSearchTabs',
-}: CombinedSearchPageProps) {
+}: Readonly<CombinedSearchPageProps>) {
   const { t } = useSearchTranslation();
   const { initTab } = useSearchTabsWithParams(defaultTab);
   return (

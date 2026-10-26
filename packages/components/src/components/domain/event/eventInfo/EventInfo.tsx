@@ -122,20 +122,19 @@ const DateInfo: React.FC<{
         }),
         end: endTime ? getDateArray(endTime) : getDateArray(startTime),
         location: [locationName, streetAddress, neighborhood, addressLocality]
-          .filter((e) => e)
+          .filter(Boolean)
           .join(', '),
         productId: domain,
         start: getDateArray(startTime),
         startOutputType: 'local',
         title: name,
       };
-      // FIXME: When ran with Jest, this throws an error!
       createEvent(icsEvent, (error: Error | undefined, value: string) => {
         if (error) {
           Sentry.captureException(error);
         } else {
           const blob = new Blob([value], { type: 'text/calendar' });
-          FileSaver.saveAs(blob, `event_${event.id.replace(/:/g, '')}.ics`);
+          FileSaver.saveAs(blob, `event_${event.id.replaceAll(':', '')}.ics`);
         }
       });
     }
@@ -181,12 +180,12 @@ const LocationInfo: React.FC<{ event: EventFields }> = ({ event }) => {
     >
       <Visible below="s">
         {[locationName, streetAddress, neighborhood, addressLocality]
-          .filter((e) => e)
+          .filter(Boolean)
           .join(', ')}
       </Visible>
       <Visible above="s">
         {[locationName, streetAddress, neighborhood, addressLocality]
-          .filter((e) => e)
+          .filter(Boolean)
           .map((item) => {
             return <div key={item}>{item}</div>;
           })}
@@ -266,17 +265,14 @@ const OtherInfo: React.FC<{
         </SecondaryLink>
       )}
       {externalLinks.map(
-        (
-          externalLink: { link?: string | null; name?: string | null },
-          index: number
-        ) => {
+        (externalLink: { link?: string | null; name?: string | null }) => {
           return (
             !!externalLink.link &&
             !!externalLink.name &&
             externalLink.link !== registrationUrl && (
               <SecondaryLink
                 className={styles.link}
-                key={`externalLink-${index}`}
+                key={JSON.stringify([externalLink.link, externalLink.name])}
                 href={externalLink.link}
                 inlineIcons
               >

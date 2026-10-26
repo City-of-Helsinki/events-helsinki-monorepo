@@ -2,7 +2,7 @@ import type { MapOpenDataDataSource_NeighborhoodListResponse } from '../types/ty
 import MapOpenDataDataSource from './MapOpenDataDataSource.js';
 
 class NeighborhoodDataSource extends MapOpenDataDataSource {
-  public async getNeighborhoodList(): Promise<MapOpenDataDataSource_NeighborhoodListResponse> {
+  public getNeighborhoodList(): Promise<MapOpenDataDataSource_NeighborhoodListResponse> {
     return this.get(
       `wfs?request=getFeature&typeName=avoindata:Kaupunginosajako&outputFormat=json`
     );

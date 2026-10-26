@@ -4,10 +4,10 @@ import useConsentTranslation from '../../hooks/useConsentTranslation';
 import styles from './cookiesRequired.module.scss';
 
 type CookiesRequiredProps = {
-  className?: string;
-  title: string;
-  description: string;
-  handleConsent?: () => void;
+  readonly className?: string;
+  readonly title: string;
+  readonly description: string;
+  readonly handleConsent?: () => void;
 };
 
 /**

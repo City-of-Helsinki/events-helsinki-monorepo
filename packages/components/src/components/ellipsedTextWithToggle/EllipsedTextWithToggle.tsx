@@ -5,10 +5,10 @@ import { useCommonTranslation } from '../../hooks';
 import styles from './ellipsedTextWithToggle.module.scss';
 
 type Props = {
-  lines: string[];
-  className?: string;
-  button?: React.ElementType<React.HTMLProps<HTMLButtonElement>> | string;
-  initialVisibleLinesCount?: number;
+  readonly lines: string[];
+  readonly className?: string;
+  readonly button?: React.ElementType;
+  readonly initialVisibleLinesCount?: number;
 };
 
 export default function EllipsedTextWithToggle({

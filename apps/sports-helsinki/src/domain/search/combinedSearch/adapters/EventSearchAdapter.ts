@@ -21,8 +21,8 @@ class EventSearchAdapter implements CombinedSearchAdapter<EventSearchParams> {
    * List here all the event and course search parameters
    * that are wanted to be mapped with the combined search.
    */
-  fullText?: EventSearchParams['fullText'];
-  fullTextLanguage?: EventSearchParams['fullTextLanguage'];
+  fullText: EventSearchParams['fullText'];
+  fullTextLanguage: EventSearchParams['fullTextLanguage'];
   ongoing: EventSearchParams['ongoing'];
   start: EventSearchParams['start'];
   end: EventSearchParams['end'];

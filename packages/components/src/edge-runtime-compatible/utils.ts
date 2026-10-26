@@ -5,7 +5,7 @@ import { DEFAULT_LANGUAGE, LOCALES } from './constants';
 /** Get the preferred locale, similar to above or using a library */
 function getLocaleFromPathname(pathname: string) {
   const pattern = `^/?(?<locale>${LOCALES.join('|')})/?`;
-  const match = pathname.match(new RegExp(pattern, 'i'));
+  const match = new RegExp(pattern, 'i').exec(pathname);
   return match?.groups?.locale;
 }
 

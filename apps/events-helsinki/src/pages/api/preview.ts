@@ -4,7 +4,7 @@ import {
 } from '@events-helsinki/components';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.query.secret || !req.query.uri) {
     return res.status(401).json({ message: 'Invalid token' });
   }

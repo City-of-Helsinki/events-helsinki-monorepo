@@ -6,7 +6,7 @@ import type {
 
 export function renderAddressToString(address: DirectionAddress): string {
   return [address.streetName, address.zip, address.city]
-    .filter((item) => item)
+    .filter(Boolean)
     .join(', ');
 }
 export function getHSLDirection(point?: DirectionPoint | null): string {
@@ -36,9 +36,10 @@ export function getGoogleDirection(point?: DirectionPoint | null): string {
     return "''";
   }
 
-  return `${point.name},+${renderAddressToString(point.address)
-    .split(' ')
-    .join('+')}`;
+  return `${point.name},+${renderAddressToString(point.address).replaceAll(
+    ' ',
+    '+'
+  )}`;
 }
 
 export function getGoogleDirectionsUrl(

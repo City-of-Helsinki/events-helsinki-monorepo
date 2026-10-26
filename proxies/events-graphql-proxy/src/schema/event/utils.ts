@@ -70,7 +70,7 @@ export const buildEventDetailsQuery = (
 ) => {
   let query = '';
 
-  if (include && include.length) {
+  if (include?.length) {
     query = composeQuery(query, 'include', include.join(','));
   }
 

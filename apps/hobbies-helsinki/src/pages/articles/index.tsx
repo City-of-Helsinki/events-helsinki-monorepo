@@ -259,7 +259,7 @@ export default function ArticleArchive({
               );
             }}
             onLoadMore={() => {
-              fetchMoreArticles();
+              void fetchMoreArticles();
             }}
             largeFirstItem={true}
             createLargeCard={LargeCardContainer}

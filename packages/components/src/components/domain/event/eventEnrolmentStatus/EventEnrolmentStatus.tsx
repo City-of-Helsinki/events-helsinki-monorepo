@@ -6,8 +6,8 @@ function EventEnrolmentStatus({
   event,
   className,
 }: {
-  event: EventFields;
-  className?: string;
+  readonly event: EventFields;
+  readonly className?: string;
 }) {
   const { status, text } = useEnrolmentStatus(event);
   const label = ![EnrolmentStatusLabel.noEnrolmentTimes].includes(status)

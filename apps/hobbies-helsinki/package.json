@@ -51,7 +51,7 @@
     "@events-helsinki/components": "workspace:^",
     "@sentry/browser": "^10.52.0",
     "@sentry/core": "^10.52.0",
-    "@sentry/nextjs": "^10.52.0",
+    "@sentry/nextjs": "^10.75.2",
     "@sentry/react": "^10.52.0",
     "@svgr/webpack": "8.1.0",
     "@types/jsdom": "21.1.7",

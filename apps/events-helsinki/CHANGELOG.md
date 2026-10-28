@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.3.4...events-helsinki-v2.4.0) (2026-10-28)
+
+
+### Features
+
+* Nvmrc set to lts, broaden node engine Refs: TH-1485 ([2704285](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/27042856c9d32227d86dca74a8fde1b4250c1c87))
+
+
+### Dependencies
+
+* Bump deps ([7ac1b30](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7ac1b30bcbc9785b4dc376af5f27c20fe7f6f055))
+
 ## [2.3.4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.3.3...events-helsinki-v2.3.4) (2026-10-15)
 
 

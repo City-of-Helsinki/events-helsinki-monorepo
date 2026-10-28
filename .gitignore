@@ -24,6 +24,7 @@ node_modules
 /build
 
 # Cache
+/.pnpm-store/
 **/tsconfig.tsbuildinfo
 **/.eslintcache
 .cache/*

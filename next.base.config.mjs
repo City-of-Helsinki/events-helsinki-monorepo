@@ -189,7 +189,7 @@ const nextBaseConfig = ({
         "form-action 'self'",
         "frame-src 'self' *.hel.fi *.hel.ninja www.youtube.com www.youtube-nocookie.com player.vimeo.com *.google.com",
         "frame-ancestors 'none'",
-        "worker-src 'self'",
+        "worker-src 'self' blob:",
         'block-all-mixed-content',
         'upgrade-insecure-requests',
         // "report-to default", // Add a reporting endpoint in production

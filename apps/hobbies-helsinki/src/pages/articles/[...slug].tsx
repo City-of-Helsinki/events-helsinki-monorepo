@@ -4,7 +4,6 @@ import type {
   ArticleType,
 } from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
-  getCollections,
   Page as RHHCPage,
   useConfig,
   getBreadcrumbsFromPage,
@@ -19,6 +18,7 @@ import {
 } from '@city-of-helsinki/react-helsinki-headless-cms/apollo';
 import {
   NavigationContext,
+  getSerializableCollections,
   ShareLinks,
   Navigation,
   useCommonTranslation,
@@ -283,7 +283,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             article,
             breadcrumbs,
-            collections: getCollections(article.modules ?? []),
+            collections: getSerializableCollections(article.modules ?? []),
           },
           revalidate: AppConfig.defaultRevalidate,
         };

@@ -4,7 +4,6 @@ import type {
   PageType,
 } from '@city-of-helsinki/react-helsinki-headless-cms';
 import {
-  getCollections,
   Page as RHHCPage,
   useConfig,
   getBreadcrumbsFromPage,
@@ -20,6 +19,7 @@ import type {
 } from '@events-helsinki/components';
 import {
   NavigationContext,
+  getSerializableCollections,
   Navigation,
   useResilientTranslation,
   FooterSection,
@@ -214,7 +214,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
             ...(await serverSideTranslationsWithCommon(language, ['event'])),
             page,
             breadcrumbs,
-            collections: getCollections(page.modules ?? []),
+            collections: getSerializableCollections(page.modules ?? []),
           },
           revalidate: AppConfig.defaultRevalidate,
         };

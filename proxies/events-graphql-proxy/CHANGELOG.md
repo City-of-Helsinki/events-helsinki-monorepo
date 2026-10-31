@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.10.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.9.0...events-graphql-proxy-v1.10.0) (2026-10-31)
+
+
+### Features
+
+* Nvmrc set to lts, broaden node engine Refs: TH-1485 ([2704285](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/27042856c9d32227d86dca74a8fde1b4250c1c87))
+
+
+### Bug Fixes
+
+* Resolve Sonar issues without changing behavior ([3731078](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/37310780f733be6d9a9e7b48d28ecdddb9f9dac6))
+
+
+### Dependencies
+
+* Bump deps ([7ac1b30](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7ac1b30bcbc9785b4dc376af5f27c20fe7f6f055))
+
 ## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-graphql-proxy-v1.8.0...events-graphql-proxy-v1.9.0) (2026-10-14)
 
 

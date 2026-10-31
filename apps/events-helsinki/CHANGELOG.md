@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.4.0...events-helsinki-v2.4.1) (2026-10-31)
+
+
+### Bug Fixes
+
+* Ensure CMS collections are serializable across all apps ([7688bb4](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7688bb46a662cd71906692bbf04327c296e81321))
+* Resolve Sonar issues without changing behavior ([3731078](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/37310780f733be6d9a9e7b48d28ecdddb9f9dac6))
+* Scope listener limit to Sentry tunnel responses ([b8441f6](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/b8441f6eeaac0606747bba2e970335a1841eeb2e))
+
 ## [2.4.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.3.4...events-helsinki-v2.4.0) (2026-10-28)
 
 

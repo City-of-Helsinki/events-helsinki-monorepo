@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.9.0...venue-graphql-proxy-v1.9.1) (2026-10-31)
+
+
+### Bug Fixes
+
+* Resolve Sonar issues without changing behavior ([3731078](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/37310780f733be6d9a9e7b48d28ecdddb9f9dac6))
+
 ## [1.9.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.8.0...venue-graphql-proxy-v1.9.0) (2026-10-28)
 
 

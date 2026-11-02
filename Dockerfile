@@ -140,6 +140,9 @@ ENV NEXT_BUILD_CPUS=1 \
     NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter ${PROJECT} run build
 
+# Sentry CLI rewrites and injects debug IDs to source files and maps.
+RUN pnpm --filter ${PROJECT} exec sentry-cli sourcemaps inject /app/apps/${PROJECT}/.next/static /app/apps/${PROJECT}/.next/server
+
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
 # mount type cache is not supported on current version (4.10.35) of OpenShift build

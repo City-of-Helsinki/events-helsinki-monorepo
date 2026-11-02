@@ -3,7 +3,10 @@ import packageJson from './package.json' with { type: 'json' };
 import i18nRoutes from './i18nRoutes.config.mjs';
 import redirectCampaignRoutes from './redirectCampaignRoutes.config.mjs';
 import nextConfig from './next-i18next.config.mjs';
-import nextBaseConfig from '../../next.base.config.mjs';
+import nextBaseConfig, {
+  NEXTJS_DISABLE_SENTRY,
+  NEXTJS_SENTRY_UPLOAD_DRY_RUN,
+} from '../../next.base.config.mjs';
 
 const campaignRoutes = Object.entries(redirectCampaignRoutes).flatMap(
   ([source, destination]) => [
@@ -37,13 +40,24 @@ export default withSentryConfig(
     // Upload a larger set of source maps for prettier stack traces (increases build time)
     widenClientFileUpload: true,
 
+    // Skip the Sentry upload when NEXTJS_SENTRY_UPLOAD_DRY_RUN is set.
+    dryRun: NEXTJS_SENTRY_UPLOAD_DRY_RUN,
+
     // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
     // This can increase your server load as well as your hosting bill.
     // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
     // side errors will fail.
     tunnelRoute: '/monitoring',
 
+    // Disable sourcemap uploading to Sentry
+    sourcemaps: {
+      disable: true,
+    },
+
     webpack: {
+      // Skip Sentry's webpack wrapping when NEXTJS_DISABLE_SENTRY is set (faster local builds).
+      disableSentryConfig: NEXTJS_DISABLE_SENTRY,
+
       // Enables automatic instrumentation of Vercel Cron Monitors. (Does not yet work with App Router route handlers.)
       // See the following for more information:
       // https://docs.sentry.io/product/crons/

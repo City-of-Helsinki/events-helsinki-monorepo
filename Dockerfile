@@ -140,6 +140,14 @@ ENV NEXT_BUILD_CPUS=1 \
     NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter ${PROJECT} run build
 
+# Sentry CLI injects debug IDs into source files and maps. The standalone server
+# chunks are a separate copy (not a symlink) and are what runs in the runner image,
+# so they must be injected too.
+RUN pnpm --filter ${PROJECT} exec sentry-cli sourcemaps inject \
+    /app/apps/${PROJECT}/.next/static \
+    /app/apps/${PROJECT}/.next/server \
+    /app/apps/${PROJECT}/.next/standalone/apps/${PROJECT}/.next/server
+
 # Does not play well with buildkit on CI
 # https://github.com/moby/buildkit/issues/1673
 # mount type cache is not supported on current version (4.10.35) of OpenShift build

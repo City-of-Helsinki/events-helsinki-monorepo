@@ -100,6 +100,7 @@
     "@graphql-codegen/typescript-resolvers": "^4.5.1",
     "@next/env": "16.2.12",
     "@next/eslint-plugin-next": "16.2.12",
+    "@sentry/cli": "^3.8.2",
     "@size-limit/file": "11.2.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

@@ -1,6 +1,5 @@
 // https://nextjs.org/docs/api-reference/next.config.mjs/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
-import { withSentryConfig } from '@sentry/nextjs';
 import pc from 'picocolors';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -263,20 +262,9 @@ const nextBaseConfig = ({
   // Merge nextConfig with the conditional webpackConfig and user overrides.
   let config = { ...nextConfig, ...webpackConfig, ...overrideConfig };
 
-  if (!NEXTJS_DISABLE_SENTRY) {
-    // @ts-ignore because sentry does not match nextjs current definitions
-    config = withSentryConfig(config, {
-      // Additional config options for the Sentry Webpack plugin. Keep in mind that
-      // the following options are set automatically, and overriding them is not
-      // recommended:
-      //   release, url, org, project, authToken, configFile, stripPrefix,
-      //   urlPrefix, include, ignore
-      // For all available options, see:
-      // https://github.com/getsentry/sentry-webpack-plugin#options.
-      // silent: isProd, // Suppresses all logs
-      dryRun: NEXTJS_SENTRY_UPLOAD_DRY_RUN,
-    });
-  }
+  // Do not call `withSentryConfig()` here. Each app wraps its config once in its
+  // own next.config.mjs; wrapping twice creates two Sentry webpack plugins, and
+  // the inner one deletes client sourcemaps after the build.
 
   if (tmModules.length > 0) {
     // eslint-disable-next-line no-console
@@ -299,3 +287,4 @@ const nextBaseConfig = ({
 };
 
 export default nextBaseConfig;
+export { NEXTJS_DISABLE_SENTRY, NEXTJS_SENTRY_UPLOAD_DRY_RUN };

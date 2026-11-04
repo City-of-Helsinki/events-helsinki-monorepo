@@ -59,6 +59,7 @@
 - [9. FAQ](#9-faq)
   - [9.1 Monorepo](#91-monorepo)
     - [Exact vs semver dependencies](#exact-vs-semver-dependencies)
+- [10. License](#10-license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -612,3 +613,43 @@ To help keeping deps up-to-date, see the `pnpm deps:check && pnpm deps:update` s
 While `deps:check` will give you detailed info about dep versions across the project, it doesn't automatically pinpoint mismatching versions between apps in the repo. To automatically find and fix mismatches, run `pnpm lint:dependency-versions` in the root to make sure all deps in the monorepo are updated to the same version. Check the output, and fix issues by running `pnpm lint:dependency-versions:fix`.
 
 **Note about updating deps across the monorepo**: when updating a dep, it's important to update it in all the packages that use it, and make sure every dep is updated to the same version. Version differences can cause all kinds of hard-to-debug issues.
+
+## 10. License
+
+The source code in this repository is licensed under the MIT License; see
+[LICENSE](./LICENSE). The licenses of the third-party code included in the
+client build of each app are listed in `third-party-licenses.txt`, which
+`next build` generates into the app's `public` directory and the deployed app
+serves from its root. The same information is written alongside it as
+`oss-licenses.json`, for license audit tooling. The notices are read from the
+client source maps, which production builds generate by default; a build with
+`NEXT_DISABLE_SOURCEMAPS=true` writes no notices. The configuration is in
+[scripts/thirdPartyLicenses.config.mjs](./scripts/thirdPartyLicenses.config.mjs).
+
+The MIT License covers source code only. The following files are **not**
+covered by it and remain with their respective rights holders:
+
+| Files                                                                                                                                                                                                                                      | Rights holder and terms                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `static/assets/images/hds-favicon-kit/`, `static/assets/images/apple-touch-icon.png`                                                                                                                                                       | City of Helsinki. CC BY 4.0, except the City of Helsinki logo, which is a registered trademark. See [its own license notice](./static/assets/images/hds-favicon-kit/LICENCE.txt).              |
+| `packages/components/src/assets/icons/svg/helsinki-fi.svg`, `packages/components/src/assets/icons/svg/helsinki-sv.svg`                                                                                                                     | City of Helsinki. The City of Helsinki logo is a registered trademark.                                                                                                                         |
+| `packages/components/src/assets/icons/svg/facebook.svg`, `packages/components/src/assets/icons/svg/linkedin.svg`, `packages/components/src/assets/icons/svg/twitter.svg`                                                                   | Logos that are trademarks of their respective owners, included to identify their services.                                                                                                     |
+| `static/assets/images/undraw/`                                                                                                                                                                                                             | [unDraw](https://undraw.co) illustrations under the unDraw License, copied with the initial structure from [nextjs-monorepo-example](https://github.com/belgattitude/nextjs-monorepo-example). |
+| `static/assets/images/nextjs-logo.png`                                                                                                                                                                                                     | The Next.js logo, a trademark of Vercel, Inc., copied with the initial structure from nextjs-monorepo-example.                                                                                 |
+| `apps/*/storybook-static/favicon.ico`                                                                                                                                                                                                      | The Storybook logo.                                                                                                                                                                            |
+| `docs/docker/`, `docs/images/changeset/`                                                                                                                                                                                                   | Copied from nextjs-monorepo-example, MIT License, copyright Sébastien Vanvelthem. The changeset images are screenshots of Atlassian's user interface.                                          |
+| `static/assets/images/event_placeholder_*.jpg`, `static/assets/images/no_image.svg`, `static/assets/images/venue-icon.svg`, `packages/components/src/assets/icons/svg/link.svg`, `packages/components/src/assets/icons/svg/suprise-me.svg` | Images added for this service; not offered for reuse under the MIT License.                                                                                                                    |
+
+Some resources are loaded at runtime from external services instead of being
+bundled, so they do not appear in either generated file. They are not
+redistributed by this repository or by its build output:
+
+- The Helsinki Grotesk typeface used by the user interface is proprietary and
+  licensed by Camelot Typefaces. No font files are stored in this repository;
+  they are loaded from a City of Helsinki service. See
+  [fonts.scss](./packages/components/src/styles/fonts.scss).
+- The Askem feedback plugin, loaded from `cdn.reactandshare.com` by
+  [Askem.ts](./packages/components/src/components/askem/Askem.ts) once the
+  user has consented to it.
+- The Matomo tracker, loaded from the analytics service configured with the
+  `NEXT_PUBLIC_MATOMO_*` variables.

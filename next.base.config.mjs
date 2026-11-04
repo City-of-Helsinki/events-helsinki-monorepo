@@ -4,6 +4,8 @@ import pc from 'picocolors';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import bundleAnalyser from '@next/bundle-analyzer';
+import { withThirdPartyLicenses } from '@city-of-helsinki/license-notices/next';
+import { thirdPartyLicensesConfig } from './scripts/thirdPartyLicenses.config.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,9 +50,12 @@ const NEXTJS_SENTRY_TRACING = trueEnv.includes(
  * is rendered and not during the build time.
  * This can make some Apollo queries to fail, because the
  * source map file name is used as an id-param.
+ *
+ * Enabled by default, because the third-party license notices
+ * are read from the client source maps of the production build.
  */
 const disableSourceMaps = trueEnv.includes(
-  process.env?.NEXT_DISABLE_SOURCEMAPS ?? 'true'
+  process.env?.NEXT_DISABLE_SOURCEMAPS ?? 'false'
 );
 
 if (disableSourceMaps) {
@@ -265,6 +270,12 @@ const nextBaseConfig = ({
   // Do not call `withSentryConfig()` here. Each app wraps its config once in its
   // own next.config.mjs; wrapping twice creates two Sentry webpack plugins, and
   // the inner one deletes client sourcemaps after the build.
+
+  // Writes the third-party license notices into `public` after the client
+  // build, from its source maps. Applied inside the apps' Sentry wrapper.
+  if (config.productionBrowserSourceMaps) {
+    config = withThirdPartyLicenses(config, thirdPartyLicensesConfig);
+  }
 
   if (tmModules.length > 0) {
     // eslint-disable-next-line no-console

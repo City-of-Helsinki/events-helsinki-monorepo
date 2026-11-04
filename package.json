@@ -67,6 +67,7 @@
     "deps:check": "pnpm dlx npm-check-updates@latest --configFileName .ncurc.yml --deep --mergeConfig",
     "deps:update": "pnpm dlx npm-check-updates@latest --configFileName .ncurc.yml -u --deep --mergeConfig",
     "check:install": "pnpm exec manypkg check",
+    "test:scripts": "node --test 'scripts/__tests__/*.test.mjs'",
     "lint:dependency-versions": "check-dependency-version-consistency .",
     "lint:dependency-versions:fix": "check-dependency-version-consistency . --fix",
     "postinstall": "is-ci || pnpm exec husky",
@@ -91,6 +92,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.6",
+    "@city-of-helsinki/license-notices": "^0.2.0",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
     "@events-helsinki/eslint-config-bases": "workspace:^",

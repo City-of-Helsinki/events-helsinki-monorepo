@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.4.1...events-helsinki-v2.5.0) (2026-11-04)
+
+
+### Features
+
+* Dockerfile inject sentry debug ids Refs: RATY-432 ([14ae52b](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/14ae52b7848664694845e0de1c294d9beb855b8d))
+
 ## [2.4.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/events-helsinki-v2.4.0...events-helsinki-v2.4.1) (2026-11-02)
 
 

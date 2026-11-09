@@ -43,7 +43,7 @@ extends:
     buildArgs:
       BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
-      CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
+      CMS_ORIGIN: https://liikunta2.app-staging.hkih.hion.dev
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
       NEXTJS_DISABLE_SENTRY: 0
       NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
@@ -51,5 +51,5 @@ extends:
       NEXT_PUBLIC_MATOMO_ENABLED: 0
     configMap: # pod environment variables
       FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
-      CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
+      CMS_ORIGIN: https://liikunta2.app-staging.hkih.hion.dev/
       LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event

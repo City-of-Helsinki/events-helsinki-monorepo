@@ -42,7 +42,7 @@ extends:
     # The values here will override the values defined in the liikunta-pipelines repository
     # buildArgs: no buildArgs
     configMap: # pod environment variables
-      FEDERATION_CMS_ROUTING_URL: https://liikunta.app-staging.hkih.hion.dev/graphql
+      FEDERATION_CMS_ROUTING_URL: https://liikunta2-headless.dev.hel.ninja/graphql
       FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.test.hel.ninja/search
       FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.dev.hel.ninja/proxy/graphql
       FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.dev.hel.ninja/proxy/graphql

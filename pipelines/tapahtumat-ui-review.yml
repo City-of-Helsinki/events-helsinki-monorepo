@@ -34,7 +34,7 @@ resources:
   repositories:
     # Azure DevOps repository
     - repository: tapahtumat-pipelines
-      type: git
+      type: git 
       # Azure DevOps project/repository
       name: tapahtumat/tapahtumat-pipelines
 

@@ -8,11 +8,19 @@
 // Apollo Server + schema, not any DOM APIs.
 import assert from 'assert';
 import type { GraphQLResponse } from '@apollo/server';
+import * as Sentry from '@sentry/node';
+import { GraphQLError } from 'graphql';
 import { gql } from 'graphql-tag';
+import { afterAll, afterEach, beforeAll, expect, it, vi } from 'vitest';
 
 import VenueContext from '../context/VenueContext';
 import type { TprekUnit } from '../types';
 import { createTestApolloServer } from '../utils/testUtils';
+
+vi.mock('@sentry/node', async (importOriginal) => ({
+  ...(await importOriginal<typeof Sentry>()),
+  captureException: vi.fn(),
+}));
 
 /**
  * Minimal TprekUnit fixture. Deliberately omits dept_id / org_id /
@@ -72,6 +80,10 @@ beforeAll(() => {
   );
 });
 
+afterEach(() => {
+  vi.restoreAllMocks();
+});
+
 afterAll(() => {
   vi.unstubAllEnvs();
 });
@@ -118,6 +130,70 @@ it('resolves a tprek venue by merging service map and hauki data', async () => {
     isOpen: true,
     openingHours: [],
   });
+});
+
+it.each([
+  ['connection failure', new TypeError('fetch failed')],
+  ['timeout', new DOMException('Request timed out', 'TimeoutError')],
+  [
+    'upstream error',
+    new GraphQLError('Service unavailable', {
+      extensions: { response: { status: 503 } },
+    }),
+  ],
+  [
+    'missing resource',
+    new GraphQLError('Not found', {
+      extensions: { response: { status: 404 } },
+    }),
+  ],
+])('returns venue details during a Hauki %s', async (_label, error) => {
+  const contextValue = new VenueContext({ token: 'token' });
+  vi.spyOn(contextValue.dataSources.serviceMap, 'getUnit').mockResolvedValue(
+    buildTprekUnitMock(79935)
+  );
+  const haukiRequest = vi
+    .spyOn(contextValue.dataSources.hauki, 'fetch')
+    .mockRejectedValue(error);
+  const captureException = vi
+    .mocked(Sentry.captureException)
+    .mockReset()
+    .mockReturnValue('event-id');
+
+  const res = await executeOperation(
+    GET_VENUE,
+    { id: 'tprek:79935' },
+    contextValue
+  );
+
+  assert(res.body.kind === 'single');
+  expect(res.body.singleResult.errors).toBeUndefined();
+  expect(res.body.singleResult.data?.venue).toMatchObject({
+    id: 'tprek:79935',
+    name: 'Test Venue',
+    isOpen: null,
+    openingHours: null,
+  });
+  expect(haukiRequest).toHaveBeenCalledTimes(2);
+  for (const [, request] of haukiRequest.mock.calls) {
+    expect(request?.signal).toBeInstanceOf(AbortSignal);
+  }
+  if (
+    error instanceof GraphQLError &&
+    (error.extensions.response as { status: number }).status === 404
+  ) {
+    expect(captureException).not.toHaveBeenCalled();
+  } else {
+    expect(captureException).toHaveBeenCalledTimes(2);
+    expect(captureException).toHaveBeenCalledWith(error, {
+      tags: { integration: 'hauki', operation: 'opening_hours' },
+      extra: { venueId: 'tprek:79935' },
+    });
+    expect(captureException).toHaveBeenCalledWith(error, {
+      tags: { integration: 'hauki', operation: 'is_open_now' },
+      extra: { venueId: 'tprek:79935' },
+    });
+  }
 });
 
 it('resolves venuesByIds and filters out venues without an id', async () => {

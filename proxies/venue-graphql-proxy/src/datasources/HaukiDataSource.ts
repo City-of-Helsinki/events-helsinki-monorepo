@@ -1,4 +1,5 @@
 import { DataSourceWithContext } from '@events-helsinki/graphql-proxy-server';
+import * as Sentry from '@sentry/node';
 import type { Interval } from 'date-fns';
 import {
   startOfWeek,
@@ -86,8 +87,8 @@ export default class HaukiDataSource extends DataSourceWithContext<
    * @returns A list of opening hours in Hauki format for the
    * ongoing week, with the exception that dates without opening hours are
    * represented with an object that has an empty times array instead of
-   * undefined. Returns null if no opening hours are available.
-   * @throws {AxiosError}
+   * undefined. Returns null if opening hours are unavailable or Hauki fails.
+   *
    * @see https://hauki.api.hel.fi/api_docs/#tag/v1/operation/v1_resource_opening_hours_retrieve
    */
   async getOpeningHours(id: string): Promise<HaukiOpeningHours[] | null> {
@@ -99,7 +100,8 @@ export default class HaukiDataSource extends DataSourceWithContext<
 
     try {
       const data = await this.get<HaukiOpeningHours[]>(
-        `resource/${id}/opening_hours/?${params.toString()}`
+        `resource/${id}/opening_hours/?${params.toString()}`,
+        { signal: AbortSignal.timeout(5000) }
       );
 
       const transformedOpeningHours = HaukiDataSource.patchMissingDates(
@@ -109,10 +111,13 @@ export default class HaukiDataSource extends DataSourceWithContext<
 
       return transformedOpeningHours ?? null;
     } catch (error) {
-      if (graphQLErrorStatus(error) == 404) {
-        return null;
+      if (graphQLErrorStatus(error) !== 404) {
+        Sentry.captureException(error, {
+          tags: { integration: 'hauki', operation: 'opening_hours' },
+          extra: { venueId: id },
+        });
       }
-      throw error;
+      return null;
     }
   }
 
@@ -121,18 +126,23 @@ export default class HaukiDataSource extends DataSourceWithContext<
    * @param id
    * @returns HaukiIsOpen with is_open true if resource is open right now,
    * HaukiIsOpen with is_open false if resource is not open right now, or
-   * null if no information is available.
-   * @throws {AxiosError}
+   * null if no information is available or Hauki fails.
+   *
    * @see https://hauki.api.hel.fi/api_docs/#tag/v1/operation/v1_resource_is_open_now_retrieve
    */
   async getIsOpen(id: string): Promise<HaukiIsOpen | null> {
     try {
-      return await this.get<HaukiIsOpen>(`resource/${id}/is_open_now/`);
+      return await this.get<HaukiIsOpen>(`resource/${id}/is_open_now/`, {
+        signal: AbortSignal.timeout(5000),
+      });
     } catch (error) {
-      if (graphQLErrorStatus(error) == 404) {
-        return null;
+      if (graphQLErrorStatus(error) !== 404) {
+        Sentry.captureException(error, {
+          tags: { integration: 'hauki', operation: 'is_open_now' },
+          extra: { venueId: id },
+        });
       }
-      throw error;
+      return null;
     }
   }
 }

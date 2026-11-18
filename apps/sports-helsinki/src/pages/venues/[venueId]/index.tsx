@@ -95,6 +95,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       VenueQueryVariables
     >({
       query: VenueDocument,
+      errorPolicy: 'none',
       variables: {
         id,
         includeHaukiFields: AppConfig.isHaukiEnabled,

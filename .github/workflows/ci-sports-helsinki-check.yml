@@ -38,8 +38,6 @@ jobs:
       extra-commands: |
         # Timezone for tests
         echo "TZ=Europe/Helsinki" >> $GITHUB_ENV
-        # Speed up build: they are linted in a previous step
-        echo "NEXTJS_IGNORE_ESLINT=true" >> $GITHUB_ENV
         # Speed up build: they are typechecked in a previous step
         echo "NEXTJS_IGNORE_TYPECHECK=true" >> $GITHUB_ENV
         # Speed up build: don't run if not needed, enable if it becomes needed

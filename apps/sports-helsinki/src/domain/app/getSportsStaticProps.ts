@@ -86,6 +86,7 @@ const getMenu = async (
   (
     await client.query({
       query: MenuDocument,
+      errorPolicy: 'none',
       variables: { id: menuName, menuIdentifiersOnly: true },
       fetchPolicy: 'network-only', // Always fetch new, but update the cache.
     })
@@ -102,10 +103,17 @@ async function getGlobalCMSData({
     DEFAULT_HEADER_UNIVERSAL_BAR_MENU_NAME[language];
   const footerMenuName = DEFAULT_FOOTER_MENU_NAME[language];
 
+  const headerMenu = await getMenu(headerMenuName, client);
+  const headerUniversalBarMenu = await getMenu(
+    headerUniversalBarMenuName,
+    client
+  );
+  const footerMenu = await getMenu(footerMenuName, client);
+
   return {
-    headerMenu: await getMenu(headerMenuName, client),
-    headerUniversalBarMenu: await getMenu(headerUniversalBarMenuName, client),
-    footerMenu: await getMenu(footerMenuName, client),
+    ...(headerMenu ? { headerMenu } : {}),
+    ...(headerUniversalBarMenu ? { headerUniversalBarMenu } : {}),
+    ...(footerMenu ? { footerMenu } : {}),
     languages: HARDCODED_LANGUAGES,
   };
 }

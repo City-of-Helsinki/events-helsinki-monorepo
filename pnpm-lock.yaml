@@ -262,6 +262,9 @@ importers:
       graphql-request:
         specifier: 7.2.0
         version: 7.2.0(graphql@16.12.0)
+      hds-design-tokens:
+        specifier: 6.0.5
+        version: 6.0.5
       hds-react:
         specifier: 6.0.5
         version: 6.0.5(@types/react@19.2.17)(graphql-ws@5.14.0(graphql@16.12.0))(postcss@8.5.23)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -611,6 +614,9 @@ importers:
       graphql-request:
         specifier: 7.2.0
         version: 7.2.0(graphql@16.12.0)
+      hds-design-tokens:
+        specifier: 6.0.5
+        version: 6.0.5
       hds-react:
         specifier: 6.0.5
         version: 6.0.5(@types/react@19.2.17)(graphql-ws@5.14.0(graphql@16.12.0))(postcss@8.5.23)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -972,6 +978,9 @@ importers:
       graphql-request:
         specifier: 7.2.0
         version: 7.2.0(graphql@16.12.0)
+      hds-design-tokens:
+        specifier: 6.0.5
+        version: 6.0.5
       hds-react:
         specifier: 6.0.5
         version: 6.0.5(@types/react@19.2.17)(graphql-ws@5.14.0(graphql@16.12.0))(postcss@8.5.23)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)

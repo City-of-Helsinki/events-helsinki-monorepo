@@ -9,6 +9,8 @@ minimumReleaseAge: 10080
 # Force secure / single versions for transitive deps that otherwise resolve
 # vulnerable or mismatched releases.
 overrides:
+  # With the 2.x sanitizer's jsdom, Turbopack dev SSR fails with ENOENT on jsdom's default-stylesheet.css.
+  '@city-of-helsinki/react-helsinki-headless-cms>isomorphic-dompurify': 4.7.0
   '@babel/core': ^7.29.6
   '@babel/runtime': ^7.28.4
   '@graphql-tools/utils': ^12.0.3

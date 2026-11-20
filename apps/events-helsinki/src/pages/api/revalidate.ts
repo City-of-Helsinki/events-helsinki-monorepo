@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import {
-  NextPageRevalidateService,
   NextPageRevalidateApi,
   APP_LANGUAGES,
 } from '@events-helsinki/components';
+import { NextPageRevalidateService } from '@events-helsinki/components/src/utils/headless-cms/service';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { eventsApolloClient } from '../../domain/clients/eventsApolloClient';
 import { staticGenerationLogger } from '../../logger';

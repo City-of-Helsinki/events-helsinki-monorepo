@@ -10,18 +10,18 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { APP_LANGUAGES } from '../../../constants';
 import type { Logger } from '../../../loggers/logger';
 import {
+  getAllCmsArticlesPageUriInfos,
+  getAllCmsPagesPageUriInfos,
+  PAGES_AMOUNT_LIMIT,
+  POSTS_AMOUNT_LIMIT,
+  uniqBySetWithArrayFrom,
+} from '../cmsPageUriService';
+import {
   GET_ALL_PAGES_URI_INFO_QUERY,
   GET_ALL_POSTS_URI_INFO_QUERY,
 } from '../queries';
 import type { GetAllItemsUriInfoResponseType } from '../queries';
-import {
-  getAllCmsArticlesPageUriInfos,
-  getAllCmsPagesPageUriInfos,
-  NextPageRevalidateService,
-  PAGES_AMOUNT_LIMIT,
-  POSTS_AMOUNT_LIMIT,
-  uniqBySetWithArrayFrom,
-} from '../service';
+import { NextPageRevalidateService } from '../service';
 
 vi.mock('fs/promises', () => ({
   default: {

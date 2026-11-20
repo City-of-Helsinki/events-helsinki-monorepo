@@ -20,9 +20,6 @@ const nextBuildCpus = process.env.NEXT_BUILD_CPUS
   ? Number(process.env.NEXT_BUILD_CPUS)
   : undefined;
 
-const NEXTJS_IGNORE_ESLINT = trueEnv.includes(
-  process.env?.NEXTJS_IGNORE_ESLINT ?? 'false'
-);
 const NEXTJS_IGNORE_TYPECHECK = trueEnv.includes(
   process.env?.NEXTJS_IGNORE_TYPECHECK ?? 'false'
 );
@@ -98,9 +95,9 @@ const nextBaseConfig = ({
   ...overrideConfig
 }) => {
   /**
-   * Determine if Turbopack is active (i.e., next dev --turbo)
+   * Determine if Turbopack is active (the default for next dev).
    */
-  const isTurbopackDev = process.env.TURBOPACK === '1' && isDevelopment;
+  const isTurbopack = Boolean(process.env.TURBOPACK);
 
   const cmsOriginUrl = new URL(process.env.CMS_ORIGIN);
 
@@ -150,7 +147,7 @@ const nextBaseConfig = ({
 
     experimental: {
       // Required for CJS @changey/react-leaflet-markercluster with webpack builds
-      esmExternals: 'loose',
+      ...(!isTurbopack ? { esmExternals: 'loose' } : {}),
       // Experimental monorepo support
       externalDir: true,
       scrollRestoration: true,
@@ -169,11 +166,6 @@ const nextBaseConfig = ({
       /** Do not run TypeScript during production builds (`next build`). */
       ignoreBuildErrors: NEXTJS_IGNORE_TYPECHECK,
       tsconfigPath: 'tsconfig.json',
-    },
-
-    eslint: {
-      ignoreDuringBuilds: NEXTJS_IGNORE_ESLINT,
-      dirs: ['src'],
     },
 
     async headers() {
@@ -233,7 +225,7 @@ const nextBaseConfig = ({
 
   // 🚨 CONDITIONAL WEBPACK ASSIGNMENT
   // Define the webpack property object *only* when not using Turbopack.
-  const webpackConfig = isTurbopackDev
+  const webpackConfig = isTurbopack
     ? {}
     : {
         webpack: (config, { webpack, isServer }) => {

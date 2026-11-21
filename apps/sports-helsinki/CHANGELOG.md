@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.6.0...sports-helsinki-v2.6.1) (2026-11-21)
+
+
+### Bug Fixes
+
+* **sports-helsinki:** Avoid 404s on venue query failures ([af57519](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/af575199c1b65b2c9c6823d4ca2a2a5541d00a6a))
+
 ## [2.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/sports-helsinki-v2.5.1...sports-helsinki-v2.6.0) (2026-11-04)
 
 

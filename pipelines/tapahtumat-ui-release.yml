@@ -28,46 +28,18 @@ resources:
 extends:
   # Filename in Azure DevOps Repository
   template: components/tapahtumat-ui/pipelines/tapahtumat-ui-release.yml@tapahtumat-pipelines
-  parameters:
-    # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments, the rest located in tapahtumat-pipelines/tapahtumat-variables-staging.yml and tapahtumat-variables-common.yml
-    # The values here will override the values defined in the tapahtumat-pipelines repository
-    buildArgs:
-      BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
-      FEDERATION_ROUTER_ENDPOINT: https://tapahtumat-router.api.hel.fi/
-      CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-      NEXTJS_DISABLE_SENTRY: 0
-      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
-      NEXT_PUBLIC_DEBUG: 0
-      NEXT_PUBLIC_MATOMO_ENABLED: 1
-    buildArgsStage:
-      BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.stage.hel.ninja/
-      CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-      NEXTJS_DISABLE_SENTRY: 0
-      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 0
-      NEXT_PUBLIC_DEBUG: 0
-      NEXT_PUBLIC_MATOMO_ENABLED: 1
-    buildArgsTest:
-      BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.test.hel.ninja/
-      CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-      NEXTJS_DISABLE_SENTRY: 0
-      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
-      NEXT_PUBLIC_DEBUG: 1
-      NEXT_PUBLIC_MATOMO_ENABLED: 0
-    configMap: # pod environment variables for production
-      FEDERATION_ROUTER_ENDPOINT: https://tapahtumat-router.api.hel.fi/
-      CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-    configMapStage: # pod environment variables for staging
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.stage.hel.ninja/
-      CMS_ORIGIN: https://tapahtumat.content.api.hel.fi
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-    configMapTest: # pod environment variables for test
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-events.test.hel.ninja/
-      CMS_ORIGIN: https://tapahtumat.app-staging.hkih.hion.dev
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+  # UI configuration lives in tapahtumat-pipelines/components/tapahtumat-ui/vars/.
+  # parameters:
+  #   Pass build and ConfigMap overrides here only when needed.
+  #   buildArgs: # production overrides
+  #     NEXT_PUBLIC_DEBUG: 1
+  #   buildArgsStage: # staging overrides
+  #     NEXT_PUBLIC_DEBUG: 1
+  #   buildArgsTest: # testing overrides
+  #     NEXT_PUBLIC_DEBUG: 1
+  #   configMap: # production overrides
+  #     DEBUG: 1
+  #   configMapStage: # staging overrides
+  #     DEBUG: 1
+  #   configMapTest: # testing overrides
+  #     DEBUG: 1

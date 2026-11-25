@@ -7,12 +7,12 @@ trigger:
       - main
   paths:
     exclude:
-    - '*release-please*'
-    - '*.md'
-    - '.github/'
-    - 'pipelines/federation-router-release.yml'
-    - 'pipelines/federation-router-review.yml'
-    - '*compose*'
+      - '*release-please*'
+      - '*.md'
+      - '.github/'
+      - 'pipelines/federation-router-release.yml'
+      - 'pipelines/federation-router-review.yml'
+      - '*compose*'
 
 # Pull request (PR) triggers cause a pipeline to run whenever a pull request is
 # opened with one of the specified target branches, or when updates are made to
@@ -36,13 +36,10 @@ resources:
 extends:
   # Filename in Azure DevOps Repository
   template: components/federation-router/pipelines/federation-router-dev.yml@harrastukset-pipelines
-  parameters:
-    # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments, the rest located in harrastukset-pipelines/federation-router-variables-development.yml and federation-router-variables-common.yml
-    # The values here will override the values defined in the harrastukset-pipelines repository
-    # buildArgs: no buildArgs
-    configMap: # pod environment variables
-      FEDERATION_CMS_ROUTING_URL: https://harrastus.app-staging.hkih.hion.dev/graphql
-      FEDERATION_UNIFIED_SEARCH_ROUTING_URL: https://kuva-unified-search.api.test.hel.ninja/search
-      FEDERATION_EVENTS_ROUTING_URL: https://events-graphql-proxy.dev.hel.ninja/proxy/graphql
-      FEDERATION_VENUES_ROUTING_URL: https://venue-graphql-proxy.dev.hel.ninja/proxy/graphql
+  # parameters:
+  #   Application build arguments and ConfigMap overrides as key-value pairs.
+  #   Router configuration lives in harrastukset-pipelines/components/federation-router/vars/.
+  #   buildArgs:
+  #     DEBUG: 1
+  #   configMap: # pod environment variables
+  #     DEBUG: 1

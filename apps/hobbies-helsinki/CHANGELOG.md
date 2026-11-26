@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.6.0...hobbies-helsinki-v3.6.1) (2026-11-26)
+
+
+### Dependencies
+
+* Bump i18next from 25.3.2 to 26.3.4 ([7aa5a04](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/7aa5a04046a87ce0f78f061752a120e7605aa2e4))
+
 ## [3.6.0](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/hobbies-helsinki-v3.5.1...hobbies-helsinki-v3.6.0) (2026-11-04)
 
 

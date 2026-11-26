@@ -37,12 +37,11 @@ resources:
       type: git
       # Azure DevOps project/repository
       name: liikunta/liikunta-pipelines
+      ref: refs/heads/LIIKUNTA-797-migrate-sports-config-to-azure
 
 extends:
   # Filename in Azure DevOps Repository
   template: components/federation-router/pipelines/federation-router-review.yml@liikunta-pipelines
-  # parameters:
-  #   Application build arguments and ConfigMap overrides as key-value pairs.
-  #   Router configuration lives in liikunta-pipelines/components/federation-router/vars/.
-  #   configMap: # review overrides
-  #     DEBUG: 1
+  parameters:
+    configMap:
+      FEDERATION_CMS_ROUTING_URL: https://liikunta.app-staging.hkih.hion.dev/graphql

@@ -37,14 +37,16 @@ resources:
       type: git
       # Azure DevOps project/repository
       name: liikunta/liikunta-pipelines
+      ref: refs/heads/LIIKUNTA-797-migrate-sports-config-to-azure
 
 extends:
   # Filename in Azure DevOps Repository
   template: components/liikunta-ui/pipelines/liikunta-ui-review.yml@liikunta-pipelines
   # UI configuration lives in liikunta-pipelines/components/liikunta-ui/vars/.
-  # parameters:
-  #   Pass build and ConfigMap overrides here only when needed.
-  #   buildArgs:
-  #     NEXT_PUBLIC_DEBUG: 1
-  #   configMap: # pod environment variables
-  #     DEBUG: 1
+  parameters:
+    buildArgs:
+      CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr1207.dev.hel.ninja/
+    configMap:
+      CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr1207.dev.hel.ninja/

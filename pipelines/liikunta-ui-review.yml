@@ -37,24 +37,16 @@ resources:
       type: git
       # Azure DevOps project/repository
       name: liikunta/liikunta-pipelines
+      ref: refs/heads/LIIKUNTA-797-migrate-sports-config-to-azure
 
 extends:
   # Filename in Azure DevOps Repository
   template: components/liikunta-ui/pipelines/liikunta-ui-review.yml@liikunta-pipelines
+  # UI configuration lives in liikunta-pipelines/components/liikunta-ui/vars/.
   parameters:
-    # Application build arguments and config map values as key value pairs.
-    # Does not contain all buildArguments, the rest located in liikunta-pipelines/liikunta-variables-development.yml and liikunta-variables-common.yml
-    # The values here will override the values defined in the liikunta-pipelines repository
     buildArgs:
-      BUILDER_FROM_IMAGE: helsinki.azurecr.io/ubi9/nodejs-24-pnpm-builder-base
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
       CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
-      NEXTJS_DISABLE_SENTRY: 0
-      NEXT_PUBLIC_ALLOW_UNAUTHORIZED_REQUESTS: 1
-      NEXT_PUBLIC_DEBUG: 1
-      NEXT_PUBLIC_MATOMO_ENABLED: 0
-    configMap: # pod environment variables
-      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports.dev.hel.ninja/
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr1207.dev.hel.ninja/
+    configMap:
       CMS_ORIGIN: https://liikunta.app-staging.hkih.hion.dev
-      LINKEDEVENTS_EVENT_ENDPOINT: https://api.hel.fi/linkedevents/v1/event
+      FEDERATION_ROUTER_ENDPOINT: https://events-graphql-federation-sports-pr1207.dev.hel.ninja/

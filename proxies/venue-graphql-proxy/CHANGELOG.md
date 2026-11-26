@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.2](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.9.1...venue-graphql-proxy-v1.9.2) (2026-11-26)
+
+
+### Bug Fixes
+
+* **venue-graphql-proxy:** Gracefully handle Hauki failures ([62907a9](https://github.com/City-of-Helsinki/events-helsinki-monorepo/commit/62907a98e6962a26d9608886828e450b6708c66b))
+
 ## [1.9.1](https://github.com/City-of-Helsinki/events-helsinki-monorepo/compare/venue-graphql-proxy-v1.9.0...venue-graphql-proxy-v1.9.1) (2026-11-04)
 
 
